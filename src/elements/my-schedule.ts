@@ -10,7 +10,7 @@ import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
 import { selectFeaturedSchedule } from '../store/schedule/selectors';
 import { initialScheduleState } from '../store/schedule/state';
 import { initialUserState } from '../store/user/state';
-import { selectFilters } from '../utils/filters';
+import { selectFilters } from '../store/filters/selectors';
 import './schedule-day';
 import './shared-styles';
 
@@ -69,7 +69,7 @@ export class MySchedule extends ReduxMixin(PolymerElement) {
   stateChanged(state: RootState) {
     this.schedule = state.schedule;
     this.user = state.user;
-    this.selectedFilters = selectFilters();
+    this.selectedFilters = selectFilters(state);
     this.featuredSessions = state.featuredSessions;
     this.featuredSchedule = selectFeaturedSchedule(state);
 

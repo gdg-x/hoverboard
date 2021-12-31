@@ -2,7 +2,7 @@ import { Filter } from '../models/filter';
 import { FilterGroupKey } from '../models/filter-group';
 import { setQueryString } from './functions';
 
-export const selectFilters = (): Filter[] => {
+export const parseFilters = (): Filter[] => {
   const { search } = window.location;
   const searchParams = new URLSearchParams(search);
   const tags = searchParams.getAll(FilterGroupKey.tags).map((tag) => {
@@ -19,7 +19,7 @@ const matchingFilter = (filterA: Filter, filterB: Filter) => {
 };
 
 export const toggleFilter = (filter: Filter): void => {
-  let filters = selectFilters();
+  let filters = parseFilters();
   if (filters.some((item) => matchingFilter(filter, item))) {
     filters = filters.filter((item) => !matchingFilter(filter, item));
   } else {

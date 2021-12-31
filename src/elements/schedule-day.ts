@@ -8,13 +8,12 @@ import { Filter } from '../models/filter';
 import { Session } from '../models/session';
 import { Time } from '../models/time';
 import { Timeslot } from '../models/timeslot';
-import { onSearchChanged } from '../router';
 import { RootState, store } from '../store';
 import { fetchUserFeaturedSessions } from '../store/featured-sessions/actions';
 import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
+import { selectFilters } from '../store/filters/selectors';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
 import { initialUserState } from '../store/user/state';
-import { selectFilters } from '../utils/filters';
 import { generateClassName } from '../utils/functions';
 import './session-element';
 import './shared-styles';
@@ -168,11 +167,6 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   @property({ type: Array })
   private selectedFilters: Filter[] = [];
 
-  connectedCallback() {
-    super.connectedCallback();
-    onSearchChanged(() => (this.selectedFilters = selectFilters()));
-  }
-
   onAfterEnter(location: RouterLocation) {
     this.location = location;
   }
@@ -180,7 +174,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   stateChanged(state: RootState) {
     this.schedule = state.schedule;
     this.user = state.user;
-    this.selectedFilters = selectFilters();
+    this.selectedFilters = selectFilters(state);
     this.featuredSessions = state.featuredSessions;
   }
 
