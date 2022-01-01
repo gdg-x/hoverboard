@@ -4,6 +4,7 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { Session } from '../models/session';
+import { router } from '../router';
 import { store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
@@ -156,7 +157,7 @@ export class SessionElement extends PolymerElement {
 
       <a
         class="session"
-        href$="/schedule/[[dayName]]?[[toggleQueryParam(queryParams, 'sessionId', session.id)]]"
+        href$="[[sessionUrl(session.id)]]"
         featured$="[[isFeatured]]"
         layout
         vertical
@@ -330,5 +331,9 @@ export class SessionElement extends PolymerElement {
 
   slice(text: string, number: number) {
     return text && text.slice(0, number);
+  }
+
+  sessionUrl(id: string) {
+    return router.urlForName('session-page', { id });
   }
 }
