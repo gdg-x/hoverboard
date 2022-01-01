@@ -2,6 +2,7 @@ import { beforeEach, describe, it, jest } from '@jest/globals';
 import { within } from '@testing-library/dom';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
+// TODO: Switch back to standard @testing-library/dom https://github.com/testing-library/dom-testing-library/issues/413
 import { fireEvent, screen } from 'testing-library__dom';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { toggleVideoDialog } from '../store/ui/actions';
