@@ -1,3 +1,4 @@
+import { Success } from '@abraham/remotedata';
 import '@material/mwc-button';
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
@@ -16,7 +17,7 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
     return html`
       <mwc-button
         label="{$ signIn $}"
-        @click="${() => this.signIn()}"
+        @click="${() => openDialog(DIALOGS.SIGNIN)}"
         ?hidden="${this.signedIn}"
         dense
       ></mwc-button>
@@ -26,11 +27,7 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
   }
 
   override stateChanged(state: RootState) {
-    this.signedIn = state.user.signedIn;
-  }
-
-  private signIn() {
-    openDialog(DIALOGS.SIGNIN);
+    this.signedIn = state.user instanceof Success;
   }
 }
 

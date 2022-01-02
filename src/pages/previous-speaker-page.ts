@@ -310,7 +310,6 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
   onSpeakersAndSpeakerId(speakers: PreviousSpeakersState, speakerId: string) {
     if (speakerId && speakers instanceof Success) {
       this.speaker = selectPreviousSpeaker(store.getState(), speakerId);
-      console.log('onSpeakersAndSpeakerId', this.speaker);
       if (!this.speaker) {
         router.render('/404');
       }

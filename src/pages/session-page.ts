@@ -12,6 +12,7 @@ import { SessionsMixin } from '../mixins/sessions-mixin';
 import { Session } from '../models/session';
 import { router } from '../router';
 import { RootState, store } from '../store';
+import { initialAuthState } from '../store/auth/state';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import {
@@ -25,6 +26,7 @@ import { showToast } from '../store/toast/actions';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
+import { UserState } from '../store/user/types';
 import { getVariableColor } from '../utils/functions';
 
 @customElement('session-page')
@@ -325,6 +327,8 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
   featuredSessions = initialFeaturedSessionsState;
   @property({ type: Object })
   user = initialUserState;
+  @property({ type: Object })
+  auth = initialAuthState;
 
   @property({ type: Object })
   private viewport = initialUiState.viewport;
@@ -339,13 +343,14 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
     super.stateChanged(state);
     this.sessions = state.sessions;
     this.user = state.user;
+    this.auth = state.auth;
     this.featuredSessions = state.featuredSessions;
     this.viewport = state.ui.viewport;
   }
 
-  @observe('user.uid')
-  onUserId(userId?: string) {
-    if (userId && this.featuredSessions instanceof Initialized) {
+  @observe('user')
+  onUserId(user: UserState) {
+    if (user instanceof Success && this.featuredSessions instanceof Initialized) {
       store.dispatch(fetchUserFeaturedSessions());
     }
   }
@@ -401,7 +406,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
     event.preventDefault();
     event.stopPropagation();
 
-    if (!this.user.signedIn) {
+    if (!(this.auth instanceof Success)) {
       showToast({
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
@@ -412,13 +417,13 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
       return;
     }
 
-    if (this.featuredSessions instanceof Success) {
+    if (this.user instanceof Success && this.featuredSessions instanceof Success) {
       const sessions = {
         ...this.featuredSessions.data,
         [this.session.id]: !this.featuredSessions.data[this.session.id],
       };
 
-      store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
+      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions));
     }
   }
 

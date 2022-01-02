@@ -7,6 +7,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { Hero } from '../models/hero';
 import { selectRouteName } from '../router';
 import { RootState, store } from '../store';
+import { signOut } from '../store/auth/actions';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { initialDialogState } from '../store/dialogs/state';
 import { DIALOGS } from '../store/dialogs/types';
@@ -15,7 +16,6 @@ import { initialNotificationState } from '../store/notifications/state';
 import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { initialUiState } from '../store/ui/state';
-import { signOut } from '../store/user/actions';
 import { initialUserState } from '../store/user/state';
 import { isDialogOpen } from '../utils/dialogs';
 import './shared-styles';
@@ -175,7 +175,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           </paper-tab>
           {% endfor %}
 
-          <paper-tab class="signin-tab" on-click="signIn" link hidden$="[[user.signedIn]]"
+          <paper-tab class="signin-tab" on-click="signIn" link hidden$="[[signedIn]]"
             >{$ signIn $}</paper-tab
           >
 
@@ -234,7 +234,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
         <paper-menu-button
           class="auth-menu"
-          hidden$="[[!user.signedIn]]"
+          hidden$="[[!signedIn]]"
           vertical-align="top"
           horizontal-align="right"
           no-animations
@@ -245,18 +245,18 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           <div
             class="profile-image"
             slot="dropdown-trigger"
-            style$="background-image: url('[[user.photoURL]]')"
+            style$="background-image: url('[[user.data.photoURL]]')"
           ></div>
           <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>
             <div
               class="profile-image"
               slot="dropdown-trigger"
               self-center
-              style$="background-image: url('[[user.photoURL]]')"
+              style$="background-image: url('[[user.data.photoURL]]')"
             ></div>
             <div layout vertical center-justified>
-              <span class="profile-name">[[user.displayName]]</span>
-              <span class="profile-email">[[user.email]]</span>
+              <span class="profile-name">[[user.data.displayName]]</span>
+              <span class="profile-email">[[user.data.email]]</span>
               <span class="profile-action" role="button" on-click="_signOut">{$ signOut $}</span>
             </div>
           </div>
@@ -265,7 +265,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
         <paper-icon-button
           icon="hoverboard:account"
           on-click="signIn"
-          hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isLaptopPlus)]]"
+          hidden$="[[_isAccountIconHidden(signedIn, viewport.isLaptopPlus)]]"
         ></paper-icon-button>
       </app-toolbar>
     `;
@@ -284,6 +284,8 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   private dialogs = initialDialogState;
   @property({ type: Object })
   private notifications = initialNotificationState;
+  @property({ type: Boolean })
+  private signedIn = false;
   @property({ type: Object })
   private user = initialUserState;
   @property({ type: Boolean, reflectToAttribute: true })
@@ -295,6 +297,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     this.dialogs = state.dialogs;
     this.notifications = state.notifications;
     this.user = state.user;
+    this.signedIn = state.user instanceof Success;
     this.tickets = state.tickets;
     this.heroSettings = state.ui.heroSettings;
     this.viewport = state.ui.viewport;
@@ -330,7 +333,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     this.transparent = document.documentElement.scrollTop === 0;
   }
 
-  @observe('user.signedIn')
+  @observe('signedIn')
   _authStatusChanged(_signedIn?: boolean) {
     if (isDialogOpen(this.dialogs, DIALOGS.SIGNIN)) {
       closeDialog();
@@ -363,8 +366,8 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     (this.$.notificationsMenu as PaperMenuButton).close();
   }
 
-  _isAccountIconHidden(userSignedIn, isTabletPlus) {
-    return userSignedIn || isTabletPlus;
+  _isAccountIconHidden(signedIn: boolean, isTabletPlus: boolean) {
+    return signedIn || isTabletPlus;
   }
 
   @computed('tickets')

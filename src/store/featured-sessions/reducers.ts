@@ -1,10 +1,11 @@
-import { Failure, Pending, Success } from '@abraham/remotedata';
+import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { FeaturedSessionsState, initialFeaturedSessionsState } from './state';
 import {
+  FeaturedSessionsActions,
   FETCH_USER_FEATURED_SESSIONS,
   FETCH_USER_FEATURED_SESSIONS_FAILURE,
   FETCH_USER_FEATURED_SESSIONS_SUCCESS,
-  FeaturedSessionsActions,
+  REMOVE_USER_FEATURED_SESSIONS,
   SET_USER_FEATURED_SESSIONS,
   SET_USER_FEATURED_SESSIONS_FAILURE,
   SET_USER_FEATURED_SESSIONS_SUCCESS,
@@ -26,6 +27,9 @@ export const featuredSessionsReducer = (
     case FETCH_USER_FEATURED_SESSIONS_SUCCESS:
     case SET_USER_FEATURED_SESSIONS_SUCCESS:
       return new Success(action.payload);
+
+    case REMOVE_USER_FEATURED_SESSIONS:
+      return new Initialized();
 
     default:
       return state;

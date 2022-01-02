@@ -14,6 +14,7 @@ import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
 import { selectFilters } from '../store/filters/selectors';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
 import { initialUserState } from '../store/user/state';
+import { UserState } from '../store/user/types';
 import { generateClassName } from '../utils/functions';
 import './session-element';
 import './shared-styles';
@@ -140,8 +141,6 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
                   class="subsession"
                   day-name="[[name]]"
                   session="[[subSession]]"
-                  user="[[user]]"
-                  featured-sessions="[[featuredSessions]]"
                 ></session-element>
               </template>
             </div>
@@ -178,9 +177,9 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
     this.featuredSessions = state.featuredSessions;
   }
 
-  @observe('user.uid')
-  _fetchFeaturedSessions(uid?: string) {
-    if (uid && this.featuredSessions instanceof Initialized) {
+  @observe('user')
+  _fetchFeaturedSessions(user: UserState) {
+    if (user instanceof Success && this.featuredSessions instanceof Initialized) {
       store.dispatch(fetchUserFeaturedSessions());
     }
   }

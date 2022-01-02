@@ -1,5 +1,6 @@
 import { FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from 'firebase/auth';
 
+// TODO: Rename to PROVIDER
 export enum PROVIDERS {
   'https://accounts.google.com' = 'https://accounts.google.com',
   'google.com' = 'google.com',
@@ -18,6 +19,7 @@ export const getFederatedProvider = (provider: PROVIDERS) => {
       provider.addScope('email');
       return provider;
     }
+
     case 'https://www.facebook.com':
     case 'facebook.com': {
       const provider = new FacebookAuthProvider();
@@ -25,9 +27,30 @@ export const getFederatedProvider = (provider: PROVIDERS) => {
       provider.addScope('public_profile');
       return provider;
     }
+
     case 'https://twitter.com':
     case 'twitter.com':
       return new TwitterAuthProvider();
+
+    default:
+      throw new Error('Unsupported provider');
+  }
+};
+
+export const getFederatedProviderClass = (provider: PROVIDERS) => {
+  switch (provider) {
+    case 'https://accounts.google.com':
+    case 'google.com':
+      return GoogleAuthProvider;
+
+    case 'https://www.facebook.com':
+    case 'facebook.com':
+      return FacebookAuthProvider;
+
+    case 'https://twitter.com':
+    case 'twitter.com':
+      return TwitterAuthProvider;
+
     default:
       throw new Error('Unsupported provider');
   }
@@ -36,16 +59,17 @@ export const getFederatedProvider = (provider: PROVIDERS) => {
 export const getProviderCompanyName = (provider: PROVIDERS) => {
   switch (provider) {
     case 'https://accounts.google.com':
-    case 'google.com': {
+    case 'google.com':
       return 'Google';
-    }
+
     case 'https://www.facebook.com':
-    case 'facebook.com': {
+    case 'facebook.com':
       return 'Facebook';
-    }
+
     case 'https://twitter.com':
     case 'twitter.com':
       return 'Twitter';
+
     default:
       throw new Error('Unsupported provider');
   }

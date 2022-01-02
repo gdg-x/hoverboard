@@ -1,12 +1,17 @@
+import { Failure } from '@abraham/remotedata';
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { RootState } from '../../store';
+import { mergeAccounts, signIn } from '../../store/auth/actions';
+import { selectAuthMergeable } from '../../store/auth/selectors';
+import { initialAuthState } from '../../store/auth/state';
+import { ExistingAccountError } from '../../store/auth/types';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
-import { mergeAccounts, signIn } from '../../store/user/actions';
-import { getProviderCompanyName } from '../../utils/providers';
+import { initialUserState } from '../../store/user/state';
+import { getProviderCompanyName, PROVIDERS } from '../../utils/providers';
 import '../hoverboard-icons';
 import '../shared-styles';
 
@@ -103,6 +108,11 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
     return {
       user: {
         type: Object,
+        value: () => initialUserState,
+      },
+      auth: {
+        type: Object,
+        value: () => initialAuthState,
       },
       isMergeState: {
         type: Boolean,
@@ -116,6 +126,8 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
   stateChanged(state: RootState) {
     this.setProperties({
       user: state.user,
+      auth: state.auth,
+      isMergeState: selectAuthMergeable(state),
     });
   }
 
@@ -125,35 +137,38 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
   }
 
   static get observers() {
-    return ['_userChanged(user)'];
+    return ['_authChanged(isMergeState)'];
   }
 
-  _userChanged(user) {
+  _authChanged(isMergeState: boolean) {
     closeDialog();
-    if (!user.signedIn) {
-      if (user.initialProviderId && user.pendingCredential) {
-        this.isMergeState = true;
-        this.email = user.email;
-        this.providerCompanyName = getProviderCompanyName(user.initialProviderId);
-        openDialog(DIALOGS.SIGNIN);
-      }
+    if (isMergeState && this.auth instanceof Failure) {
+      const error: ExistingAccountError = this.auth.error;
+      this.email = error.email;
+      this.providerCompanyName = getProviderCompanyName(error.providerId);
+      openDialog(DIALOGS.SIGNIN);
     }
   }
 
   _mergeAccounts() {
-    mergeAccounts(this.user.initialProviderId, this.user.pendingCredential);
-    closeDialog();
-    this.isMergeState = false;
+    if (this.auth instanceof Failure) {
+      const error: ExistingAccountError = this.auth.error;
+      mergeAccounts(error.providerId, error.credential);
+      closeDialog();
+    }
   }
 
   _close() {
-    this.isMergeState = false;
     closeDialog();
   }
 
-  _signIn(event) {
-    const providerUrl = event.target.getAttribute('provider-url');
-    signIn(providerUrl);
+  _signIn(event: MouseEvent) {
+    if (event.target instanceof Element) {
+      const providerUrl = event.target.getAttribute('provider-url') as PROVIDERS;
+      signIn(providerUrl);
+    } else {
+      throw new Error('Error starting sign in');
+    }
   }
 }
 
