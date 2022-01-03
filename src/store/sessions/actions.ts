@@ -2,7 +2,7 @@ import { collection, getDocs, query } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { db } from '../../firebase';
 import { Session } from '../../models/session';
-import { mergeId } from '../../utils/merge-id';
+import { mergeDataAndId } from '../../utils/firestore';
 import {
   FETCH_SESSIONS,
   FETCH_SESSIONS_FAILURE,
@@ -12,7 +12,7 @@ import {
 
 const getSessions = async () => {
   const { docs } = await getDocs(query(collection(db, 'generatedSessions')));
-  return docs.map<Session>(mergeId);
+  return docs.map<Session>(mergeDataAndId);
 };
 
 export const fetchSessions = () => async (dispatch: Dispatch<SessionsActions>) => {

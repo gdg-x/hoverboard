@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { db } from '../../firebase';
 import { Partner } from '../../models/partner';
 import { PartnerGroup } from '../../models/partner-group';
-import { mergeId } from '../../utils/merge-id';
+import { mergeDataAndId } from '../../utils/firestore';
 import { order } from '../../utils/order';
 import {
   FETCH_PARTNERS,
@@ -14,7 +14,7 @@ import {
 
 const getGroupPartners = async (group: PartnerGroup & { id: string }): Promise<PartnerGroup> => {
   const { docs } = await getDocs(query(collection(db, 'partners', group.id, 'items')));
-  const items = docs.map<Partner>(mergeId).sort(order);
+  const items = docs.map<Partner>(mergeDataAndId).sort(order);
 
   return {
     ...group,
@@ -24,7 +24,7 @@ const getGroupPartners = async (group: PartnerGroup & { id: string }): Promise<P
 
 const getPartnerGroups = async (): Promise<PartnerGroup[]> => {
   const { docs } = await getDocs(query(collection(db, 'partners')));
-  const items = docs.map<PartnerGroup>(mergeId).sort(order);
+  const items = docs.map<PartnerGroup>(mergeDataAndId).sort(order);
 
   return Promise.all(items.map(getGroupPartners));
 };

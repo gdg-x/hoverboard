@@ -8,7 +8,7 @@ import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { router } from '../router';
 import { RootState, store } from '../store';
-import { fetchBlogList } from '../store/blog/actions';
+import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
 import { getDate } from '../utils/functions';
 import './shared-styles';
@@ -144,7 +144,7 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
   override connectedCallback() {
     super.connectedCallback();
     if (this.posts instanceof Initialized) {
-      store.dispatch(fetchBlogList());
+      store.dispatch(fetchBlogPosts());
     }
   }
 

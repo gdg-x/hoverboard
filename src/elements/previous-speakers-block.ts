@@ -7,7 +7,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
-import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
+import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { selectRandomPreviousSpeakers } from '../store/previous-speakers/selectors';
 import {
   initialPreviousSpeakersState,
@@ -131,7 +131,7 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
   override connectedCallback() {
     super.connectedCallback();
     if (this.previousSpeakers instanceof Initialized) {
-      store.dispatch(fetchPreviousSpeakersList());
+      store.dispatch(fetchPreviousSpeakers());
     }
   }
 

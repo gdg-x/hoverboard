@@ -5,7 +5,7 @@ import { Filter } from '../../models/filter';
 import { SpeakerWithTags } from '../../models/speaker';
 import { selectFilters } from '../../store/filters/selectors';
 import { generateClassName } from '../../utils/functions';
-import { fetchSpeakersList } from './actions';
+import { fetchSpeakers } from './actions';
 
 const selectSpeakerId = (_state: RootState, speakerId: string) => speakerId;
 
@@ -14,7 +14,7 @@ const selectSpeakers = (state: RootState): SpeakerWithTags[] => {
   if (speakers instanceof Success) {
     return speakers.data;
   } else if (speakers instanceof Initialized) {
-    store.dispatch(fetchSpeakersList());
+    store.dispatch(fetchSpeakers());
   }
   return [];
 };

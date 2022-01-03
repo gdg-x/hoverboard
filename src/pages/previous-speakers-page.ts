@@ -9,7 +9,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { PreviousSession } from '../models/previous-session';
 import { router } from '../router';
 import { RootState, store } from '../store';
-import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
+import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { initialPreviousSpeakersState } from '../store/previous-speakers/state';
 
 @customElement('previous-speakers-page')
@@ -195,7 +195,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   override connectedCallback() {
     super.connectedCallback();
     if (this.previousSpeakers instanceof Initialized) {
-      store.dispatch(fetchPreviousSpeakersList());
+      store.dispatch(fetchPreviousSpeakers());
     }
   }
 

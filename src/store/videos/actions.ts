@@ -2,7 +2,7 @@ import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { db } from '../../firebase';
 import { Video } from '../../models/video';
-import { mergeId } from '../../utils/merge-id';
+import { mergeDataAndId } from '../../utils/firestore';
 import {
   FetchVideosActions,
   FETCH_VIDEOS,
@@ -13,7 +13,7 @@ import {
 const getVideos = async (): Promise<Video[]> => {
   const { docs } = await getDocs(query(collection(db, 'videos'), orderBy('order', 'asc')));
 
-  return docs.map<Video>(mergeId);
+  return docs.map<Video>(mergeDataAndId);
 };
 
 export const fetchVideos = () => async (dispatch: Dispatch<FetchVideosActions>) => {

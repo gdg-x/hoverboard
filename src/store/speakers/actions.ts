@@ -2,7 +2,7 @@ import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { db } from '../../firebase';
 import { SpeakerWithTags } from '../../models/speaker';
-import { mergeId } from '../../utils/merge-id';
+import { mergeDataAndId } from '../../utils/firestore';
 import {
   FETCH_SPEAKERS,
   FETCH_SPEAKERS_FAILURE,
@@ -15,10 +15,10 @@ const getSpeakers = async (): Promise<SpeakerWithTags[]> => {
     query(collection(db, 'generatedSpeakers'), orderBy('order', 'asc'))
   );
 
-  return docs.map<SpeakerWithTags>(mergeId);
+  return docs.map<SpeakerWithTags>(mergeDataAndId);
 };
 
-export const fetchSpeakersList = () => async (dispatch: Dispatch<SpeakerActions>) => {
+export const fetchSpeakers = () => async (dispatch: Dispatch<SpeakerActions>) => {
   dispatch({
     type: FETCH_SPEAKERS,
   });
