@@ -1,8 +1,8 @@
 import { Initialized, RemoteData } from '@abraham/remotedata';
-import { DIALOGS } from './types';
+import { DIALOG } from './types';
 
 export interface Dialog {
-  name: DIALOGS;
+  name: DIALOG;
   data: unknown; // TODO: type
 }
 

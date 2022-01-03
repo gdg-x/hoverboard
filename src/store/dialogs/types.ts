@@ -10,7 +10,7 @@ export interface DialogForm {
   secondFieldValue?: string;
 }
 
-export enum DIALOGS {
+export enum DIALOG {
   SPEAKER = 'speaker',
   PREVIOUS_SPEAKER = 'previousSpeaker',
   SESSION = 'session',

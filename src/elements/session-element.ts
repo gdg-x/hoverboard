@@ -8,7 +8,7 @@ import { Session } from '../models/session';
 import { router } from '../router';
 import { RootState, store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
+import { DIALOG } from '../store/dialogs/types';
 import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
 import {
   FeaturedSessionsState,
@@ -295,7 +295,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
           title: 'Sign in',
-          callback: () => openDialog(DIALOGS.SIGNIN),
+          callback: () => openDialog(DIALOG.SIGNIN),
         },
       });
       return;
@@ -314,7 +314,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   _toggleFeedback(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    openDialog(DIALOGS.FEEDBACK, this.session);
+    openDialog(DIALOG.FEEDBACK, this.session);
   }
 
   _acceptingFeedback() {

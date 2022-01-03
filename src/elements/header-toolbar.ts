@@ -9,15 +9,14 @@ import { selectRouteName } from '../router';
 import { RootState, store } from '../store';
 import { signOut } from '../store/auth/actions';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
-import { initialDialogState } from '../store/dialogs/state';
-import { DIALOGS } from '../store/dialogs/types';
+import { selectIsDialogOpen } from '../store/dialogs/selectors';
+import { DIALOG } from '../store/dialogs/types';
 import { requestPermission, unsubscribe } from '../store/notifications/actions';
 import { initialNotificationState } from '../store/notifications/state';
 import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
-import { isDialogOpen } from '../utils/dialogs';
 import './shared-styles';
 
 @customElement('header-toolbar')
@@ -281,8 +280,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private heroSettings = initialUiState.heroSettings;
   @property({ type: Object })
-  private dialogs = initialDialogState;
-  @property({ type: Object })
   private notifications = initialNotificationState;
   @property({ type: Boolean })
   private signedIn = false;
@@ -292,9 +289,10 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   private transparent = false;
   @property({ type: String })
   private routeName = '';
+  @property({ type: Boolean })
+  private isDialogOpen = false;
 
   override stateChanged(state: RootState) {
-    this.dialogs = state.dialogs;
     this.notifications = state.notifications;
     this.user = state.user;
     this.signedIn = state.user instanceof Success;
@@ -302,6 +300,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     this.heroSettings = state.ui.heroSettings;
     this.viewport = state.ui.viewport;
     this.routeName = selectRouteName(window.location.pathname);
+    this.isDialogOpen = selectIsDialogOpen(state, DIALOG.SIGNIN);
   }
 
   override connectedCallback() {
@@ -322,7 +321,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   signIn() {
-    openDialog(DIALOGS.SIGNIN);
+    openDialog(DIALOG.SIGNIN);
   }
 
   _signOut() {
@@ -335,7 +334,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   @observe('signedIn')
   _authStatusChanged(_signedIn?: boolean) {
-    if (isDialogOpen(this.dialogs, DIALOGS.SIGNIN)) {
+    if (this.isDialogOpen) {
       closeDialog();
     }
   }

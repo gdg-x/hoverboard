@@ -6,7 +6,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
-import { DialogForm, DIALOGS } from '../store/dialogs/types';
+import { DialogForm, DIALOG } from '../store/dialogs/types';
 import { subscribe } from '../store/subscribe/actions';
 import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
 import { initialUiState } from '../store/ui/state';
@@ -122,7 +122,7 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
     if (this.user instanceof Success && this.user.data.email) {
       this._subscribeAction({ ...userData, email: this.user.data.email });
     } else {
-      openDialog(DIALOGS.SUBSCRIBE, {
+      openDialog(DIALOG.SUBSCRIBE, {
         title: '{$ subscribeBlock.formTitle $}',
         submitLabel: ' {$ subscribeBlock.subscribe $}',
         firstFieldLabel: '{$ subscribeBlock.firstName $}',

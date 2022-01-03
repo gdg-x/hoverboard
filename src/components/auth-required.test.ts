@@ -6,7 +6,7 @@ import { fixture } from '../../__tests__/helpers/fixtures';
 import { User } from '../models/user';
 import { store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
+import { DIALOG } from '../store/dialogs/types';
 import { SET_USER, UserActions } from '../store/user/types';
 import './auth-required';
 import { AuthRequired } from './auth-required';
@@ -56,7 +56,7 @@ describe('auth-required', () => {
   it('opens dialog on tap', () => {
     fireEvent.click(shadowRoot.querySelector('mwc-button')!);
     expect(mockOpenDialog).toHaveBeenCalledTimes(1);
-    expect(mockOpenDialog).toHaveBeenCalledWith(DIALOGS.SIGNIN);
+    expect(mockOpenDialog).toHaveBeenCalledWith(DIALOG.SIGNIN);
   });
 
   it('shows authenticated content', async () => {

@@ -36,8 +36,10 @@ import './elements/shared-styles';
 import './elements/toast-element';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
+import { onUser } from './store/auth/actions';
+import { selectIsDialogOpen } from './store/dialogs/selectors';
 import { DialogState, initialDialogState } from './store/dialogs/state';
-import { DIALOGS } from './store/dialogs/types';
+import { DIALOG } from './store/dialogs/types';
 import { getToken } from './store/notifications/actions';
 import { initialNotificationState } from './store/notifications/state';
 import { fetchTickets } from './store/tickets/actions';
@@ -45,8 +47,6 @@ import { initialTicketsState } from './store/tickets/state';
 import { showToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
 import { initialUiState } from './store/ui/state';
-import { onUser } from './store/auth/actions';
-import { isDialogOpen } from './utils/dialogs';
 import { isLocalhost } from './utils/environment';
 
 setFastDomIf(true);
@@ -236,7 +236,7 @@ export class HoverboardApp extends PolymerElement {
 
       <feedback-dialog
         opened="[[isFeedbackDialogOpen]]"
-        data="[[dialogs.data]]"
+        data="[[dialogs.data.data]]"
         with-backdrop
       ></feedback-dialog>
 
@@ -284,9 +284,9 @@ export class HoverboardApp extends PolymerElement {
 
   stateChanged(state: RootState) {
     this.dialogs = state.dialogs;
-    this.isSigninDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SIGNIN);
-    this.isFeedbackDialogOpen = isDialogOpen(this.dialogs, DIALOGS.FEEDBACK);
-    this.isSubscribeDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SUBSCRIBE);
+    this.isSigninDialogOpen = selectIsDialogOpen(state, DIALOG.SIGNIN);
+    this.isFeedbackDialogOpen = selectIsDialogOpen(state, DIALOG.FEEDBACK);
+    this.isSubscribeDialogOpen = selectIsDialogOpen(state, DIALOG.SUBSCRIBE);
     this.notifications = state.notifications;
     this.tickets = state.tickets;
     this.ui = state.ui;
