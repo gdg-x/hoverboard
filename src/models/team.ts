@@ -1,12 +1,11 @@
 import { Member } from './member';
-import { Id } from './types';
 
-export interface TeamData {
+export interface Team {
+  id: string;
   title: string;
+  members: Member[];
 }
 
-export type TeamWithoutMembers = Id & TeamData;
+export type TeamData = Pick<Team, 'title'>;
 
-export type Team = TeamWithoutMembers & {
-  members: Member[];
-};
+export type TeamWithoutMembers = Omit<Team, 'member'>;
