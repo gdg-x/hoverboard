@@ -1,10 +1,7 @@
-name: Deploy
-on:
-  push:
-    branches:
-      - main
+name: Deploy Preview
+on: pull_request
 jobs:
-  deploy:
+  build_and_preview:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,10 +12,9 @@ jobs:
         run: echo "{}" > serviceAccount.json
       - run: npm ci
       - run: npm run build
-      - uses: w9jds/firebase-action@v2.0.0
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          args: deploy
-        env:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
           # See docs/tutorials/04-deploy.md for configuring these
-          PROJECT_ID: hoverboard-master
-          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HOVERBOARD_MASTER }}
+          projectId: hoverboard-master
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HOVERBOARD_MASTER }}'

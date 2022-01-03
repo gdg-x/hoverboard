@@ -30,30 +30,46 @@
 
 In the [`.github/workflows`](.github/workflows) folder, you can find two workflows to help you develop and deploy Hoverboard to Firebase:
 
-- [`pre-merge.yaml`](.github/workflows/pre-merge.yaml) Builds the project, runs the linter and the tests on every Pull Request
-- [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every merge to `main`.
+- [`main.yaml`](.github/workflows/main.yaml) Builds the project, runs the linter and the tests on every push.
+- [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) Deploys a preview of the website to Firebase after every push to a pull request. Functions and Firestore rules are not deployed.
+- [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every push to the `main` branch.
 
-The `pre-merge` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
-To run the `deploy` on your instance instead, you need to do a small setup:
+The `main.yaml` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
+To run the two `deploy` actions on your instance, you need to do a couple of small setup:
 
 #### Deploying to Firebase wiht Github Actions
 
-First, make sure that you're able to deploy locally correctly with the command:
+Make sure you are acting on the correct Firebase project.
 
-```bash
-npm run deploy
+```console
+  npx firebase use <projectId>
 ```
 
-If the deploy is successful, you can then configure Github Actions to do it for you.
-You need to generate a login token for the CI with the following command:
+Add service account credentials as secrets to your GitHub repo.
 
-```bash
-npx firebase login:ci
+```console
+npx firebase init hosting:github
 ```
 
-Once you obtained the token, you need to store it as a **secret** called `FIREBASE_TOKEN` in the settings of your repository. Additionally you need to set your Firebase `project-id` as a secret called `FIREBASE_PROJECT_ID`.
-More details on this process can be found here: [Creating and storing encrypted secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets).
+This will open GitHub in the browser were you should authorize Firebase CLI access. Back in the terminal you will then get a number of questions that should be answered like the following. Watch for a constant name that starts with `FIREBASE_SERVICE_ACCOUNT_` and remember it.
 
-Push this change to `main`, and Github Actions will deploy your project to Firebase after every commit.
+> For which GitHub repository would you like to set up a GitHub workflow?
 
-Enjoy
+The username and reponame on GitHub. E.g. `gdg-x/hoverboard`.
+
+> Set up the workflow to run a build script before every deploy?
+
+Answer `no` as this has already been done.
+
+_If the script creates the `.github/workflows/firebase-hosting-pull-request.yml` you can delete it as it's already handled in the `.github/workflows/deploy-preview.yml` file._
+
+> Set up automatic deployment to your site's live channel when a PR is merged?
+
+Answer `no` as this has already been done.
+
+Update [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) and [`deploy.yaml`](.github/workflows/deploy.yaml).
+
+1. Replace `FIREBASE_SERVICE_ACCOUNT_HOVERBOARD_MASTER` with the constant that was output to your terminal.
+1. Replace `hoverboard-master` to the Firebase Project ID you'll be deploying to. This should match the value used in `npx firebase use`.
+
+You can now push to your `main` branch and it'll deploy to the production (`live`) Firebase Hosting channel and pull requests will deploy a temporary preview.
