@@ -1,10 +1,10 @@
-import { initialPotentialPartnersState } from './state';
+import { Failure, Pending, Success } from '@abraham/remotedata';
+import { initialPotentialPartnersState, PotentialPartnersState } from './state';
 import {
   ADD_POTENTIAL_PARTNER,
   ADD_POTENTIAL_PARTNER_FAILURE,
   ADD_POTENTIAL_PARTNER_SUCCESS,
   PotentialPartnerActions,
-  PotentialPartnersState,
 } from './types';
 
 export const potentialPartnersReducer = (
@@ -13,24 +13,13 @@ export const potentialPartnersReducer = (
 ): PotentialPartnersState => {
   switch (action.type) {
     case ADD_POTENTIAL_PARTNER:
-      return {
-        ...state,
-        adding: true,
-        addingError: null,
-      };
+      return new Pending();
 
     case ADD_POTENTIAL_PARTNER_FAILURE:
-      return {
-        ...state,
-        adding: false,
-        addingError: action.payload.error,
-      };
+      return new Failure(action.payload);
 
     case ADD_POTENTIAL_PARTNER_SUCCESS:
-      return {
-        ...state,
-        adding: false,
-      };
+      return new Success(true);
 
     default:
       return state;

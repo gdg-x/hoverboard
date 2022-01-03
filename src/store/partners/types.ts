@@ -1,8 +1,8 @@
 import { PartnerGroup } from '../../models/partner-group';
 
-export const FETCH_PARTNERS = 'app/Partners/FETCH_PARTNERS';
-export const FETCH_PARTNERS_FAILURE = 'app/Partners/FETCH_PARTNERS_FAILURE';
-export const FETCH_PARTNERS_SUCCESS = 'app/Partners/FETCH_PARTNERS_SUCCESS';
+export const FETCH_PARTNERS = 'FETCH_PARTNERS';
+export const FETCH_PARTNERS_FAILURE = 'FETCH_PARTNERS_FAILURE';
+export const FETCH_PARTNERS_SUCCESS = 'FETCH_PARTNERS_SUCCESS';
 
 interface FetchPartnersAction {
   type: typeof FETCH_PARTNERS;
