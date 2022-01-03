@@ -13,7 +13,7 @@ import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
 import { firebaseApp } from '../firebase';
-import { ELEMENTS, getElement } from '../global';
+import { ELEMENT, getElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { scrollToY } from '../utils/scrolling';
@@ -274,9 +274,9 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   _scrollToTickets() {
-    const toolbarHeight = getElement(ELEMENTS.HEADER_TOOLBAR).getBoundingClientRect().height - 1;
+    const toolbarHeight = getElement(ELEMENT.HEADER_TOOLBAR).getBoundingClientRect().height - 1;
     const ticketsBlockPositionY =
-      getElement(ELEMENTS.TICKETS).getBoundingClientRect().top - toolbarHeight;
+      getElement(ELEMENT.TICKETS).getBoundingClientRect().top - toolbarHeight;
     scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
   }
 
