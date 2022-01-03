@@ -14,7 +14,7 @@ const selectSchedule = (state: RootState): Day[] => {
   if (state.schedule instanceof Success) {
     return state.schedule.data;
   } else if (state.schedule instanceof Initialized) {
-    store.dispatch(fetchSchedule());
+    store.dispatch(fetchSchedule);
   }
   return [];
 };

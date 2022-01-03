@@ -15,7 +15,7 @@ const getSessions = async () => {
   return docs.map<Session>(mergeDataAndId);
 };
 
-export const fetchSessions = () => async (dispatch: Dispatch<SessionsActions>) => {
+export const fetchSessions = async (dispatch: Dispatch<SessionsActions>) => {
   dispatch({
     type: FETCH_SESSIONS,
   });

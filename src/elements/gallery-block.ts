@@ -193,7 +193,7 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
     super.connectedCallback();
 
     if (this.gallery instanceof Initialized) {
-      store.dispatch(fetchGallery());
+      store.dispatch(fetchGallery);
     }
   }
 }

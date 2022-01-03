@@ -231,7 +231,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   override connectedCallback() {
     super.connectedCallback();
     if (this.videos instanceof Initialized) {
-      store.dispatch(fetchVideos());
+      store.dispatch(fetchVideos);
     }
   }
 

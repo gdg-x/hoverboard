@@ -18,7 +18,7 @@ const getSpeakers = async (): Promise<SpeakerWithTags[]> => {
   return docs.map<SpeakerWithTags>(mergeDataAndId);
 };
 
-export const fetchSpeakers = () => async (dispatch: Dispatch<SpeakerActions>) => {
+export const fetchSpeakers = async (dispatch: Dispatch<SpeakerActions>) => {
   dispatch({
     type: FETCH_SPEAKERS,
   });

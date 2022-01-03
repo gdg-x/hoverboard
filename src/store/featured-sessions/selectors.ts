@@ -9,7 +9,7 @@ export const selectFeaturedSessions = (state: RootState): FeaturedSessions => {
   if (featuredSessions instanceof Success) {
     return featuredSessions.data;
   } else if (featuredSessions instanceof Initialized) {
-    store.dispatch(fetchUserFeaturedSessions());
+    store.dispatch(fetchUserFeaturedSessions);
   }
 
   return {};

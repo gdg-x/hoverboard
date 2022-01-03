@@ -205,7 +205,7 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
   override connectedCallback() {
     super.connectedCallback();
     if (this.teams instanceof Initialized) {
-      store.dispatch(fetchTeams());
+      store.dispatch(fetchTeams);
     }
   }
 }

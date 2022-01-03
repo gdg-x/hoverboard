@@ -30,7 +30,7 @@ onMessage(messaging, (payload) => {
   });
 });
 
-export const requestPermission = () => async (dispatch: Dispatch<NotificationActions>) => {
+export const requestPermission = async (dispatch: Dispatch<NotificationActions>) => {
   try {
     Notification.requestPermission();
     getToken(true);
@@ -131,7 +131,7 @@ export const getToken =
       });
   };
 
-export const unsubscribe = () => async (dispatch: Dispatch<NotificationActions>) => {
+export const unsubscribe = async (dispatch: Dispatch<NotificationActions>) => {
   await deleteToken(messaging);
   dispatch({
     type: UPDATE_NOTIFICATIONS_STATUS,

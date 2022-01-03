@@ -180,7 +180,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   @observe('user')
   _fetchFeaturedSessions(user: UserState) {
     if (user instanceof Success && this.featuredSessions instanceof Initialized) {
-      store.dispatch(fetchUserFeaturedSessions());
+      store.dispatch(fetchUserFeaturedSessions);
     }
   }
 

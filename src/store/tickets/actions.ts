@@ -16,7 +16,7 @@ const getTickets = async (): Promise<Ticket[]> => {
   return docs.map<Ticket>(mergeDataAndId);
 };
 
-export const fetchTickets = () => async (dispatch: Dispatch<FetchTicketsActions>) => {
+export const fetchTickets = async (dispatch: Dispatch<FetchTicketsActions>) => {
   dispatch({
     type: FETCH_TICKETS,
   });

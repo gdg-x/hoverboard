@@ -16,7 +16,7 @@ const getPosts = async (): Promise<Post[]> => {
   return docs.map<Post>(mergeDataAndId);
 };
 
-export const fetchBlogPosts = () => async (dispatch: Dispatch<BlogActions>) => {
+export const fetchBlogPosts = async (dispatch: Dispatch<BlogActions>) => {
   dispatch({
     type: FETCH_BLOG_LIST,
   });

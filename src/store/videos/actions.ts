@@ -16,7 +16,7 @@ const getVideos = async (): Promise<Video[]> => {
   return docs.map<Video>(mergeDataAndId);
 };
 
-export const fetchVideos = () => async (dispatch: Dispatch<FetchVideosActions>) => {
+export const fetchVideos = async (dispatch: Dispatch<FetchVideosActions>) => {
   dispatch({
     type: FETCH_VIDEOS,
   });

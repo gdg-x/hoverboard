@@ -351,7 +351,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
   @observe('user')
   onUserId(user: UserState) {
     if (user instanceof Success && this.featuredSessions instanceof Initialized) {
-      store.dispatch(fetchUserFeaturedSessions());
+      store.dispatch(fetchUserFeaturedSessions);
     }
   }
 

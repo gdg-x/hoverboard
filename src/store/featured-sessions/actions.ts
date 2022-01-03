@@ -20,28 +20,27 @@ const getFeaturedSessions = async (userId: string): Promise<FeaturedSessions> =>
   return snapshot.data() || {};
 };
 
-export const fetchUserFeaturedSessions =
-  () => async (dispatch: Dispatch<FeaturedSessionsActions>) => {
-    const userId = selectUserId(store.getState()) as string;
+export const fetchUserFeaturedSessions = async (dispatch: Dispatch<FeaturedSessionsActions>) => {
+  const userId = selectUserId(store.getState()) as string;
 
-    if (!userId) return;
+  if (!userId) return;
 
+  dispatch({
+    type: FETCH_USER_FEATURED_SESSIONS,
+  });
+
+  try {
     dispatch({
-      type: FETCH_USER_FEATURED_SESSIONS,
+      type: FETCH_USER_FEATURED_SESSIONS_SUCCESS,
+      payload: await getFeaturedSessions(userId),
     });
-
-    try {
-      dispatch({
-        type: FETCH_USER_FEATURED_SESSIONS_SUCCESS,
-        payload: await getFeaturedSessions(userId),
-      });
-    } catch (error) {
-      dispatch({
-        type: FETCH_USER_FEATURED_SESSIONS_FAILURE,
-        payload: error,
-      });
-    }
-  };
+  } catch (error) {
+    dispatch({
+      type: FETCH_USER_FEATURED_SESSIONS_FAILURE,
+      payload: error,
+    });
+  }
+};
 
 const setFeaturedSessions = async (
   userId: string,

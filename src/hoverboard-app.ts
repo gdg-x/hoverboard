@@ -311,7 +311,7 @@ export class HoverboardApp extends PolymerElement {
         message: '{$ offlineMessage $}',
       });
     });
-    store.dispatch(fetchTickets());
+    store.dispatch(fetchTickets);
   }
 
   override disconnectedCallback() {

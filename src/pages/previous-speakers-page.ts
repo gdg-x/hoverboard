@@ -195,7 +195,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   override connectedCallback() {
     super.connectedCallback();
     if (this.previousSpeakers instanceof Initialized) {
-      store.dispatch(fetchPreviousSpeakers());
+      store.dispatch(fetchPreviousSpeakers);
     }
   }
 

@@ -15,7 +15,7 @@ const getSchedule = async (): Promise<Day[]> => {
   return docs.map<Day>((doc) => doc.data() as Day).sort((a, b) => a.date.localeCompare(b.date));
 };
 
-export const fetchSchedule = () => async (dispatch: Dispatch<ScheduleActions>) => {
+export const fetchSchedule = async (dispatch: Dispatch<ScheduleActions>) => {
   dispatch({
     type: FETCH_SCHEDULE,
   });

@@ -25,7 +25,7 @@ export const SessionsMixin = <
       super.connectedCallback();
 
       if (this.sessions instanceof Initialized) {
-        store.dispatch(fetchSessions());
+        store.dispatch(fetchSessions);
       }
     }
   }

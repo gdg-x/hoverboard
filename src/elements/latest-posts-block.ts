@@ -144,7 +144,7 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
   override connectedCallback() {
     super.connectedCallback();
     if (this.posts instanceof Initialized) {
-      store.dispatch(fetchBlogPosts());
+      store.dispatch(fetchBlogPosts);
     }
   }
 

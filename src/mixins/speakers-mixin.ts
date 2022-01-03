@@ -25,7 +25,7 @@ export const SpeakersMixin = <
       super.connectedCallback();
 
       if (this.speakers instanceof Initialized) {
-        store.dispatch(fetchSpeakers());
+        store.dispatch(fetchSpeakers);
       }
     }
   }
