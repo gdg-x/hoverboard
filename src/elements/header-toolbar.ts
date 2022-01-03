@@ -2,7 +2,7 @@ import { Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
 import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ELEMENTS, setElement } from '../global';
+import { ELEMENT, setElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { Hero } from '../models/hero';
 import { selectRouteName } from '../router';
@@ -305,7 +305,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   override connectedCallback() {
     super.connectedCallback();
-    setElement(ELEMENTS.HEADER_TOOLBAR, this);
+    setElement(ELEMENT.HEADER_TOOLBAR, this);
     this._onScroll = this._onScroll.bind(this);
     window.addEventListener('scroll', this._onScroll);
     this._onScroll();
