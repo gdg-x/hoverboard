@@ -133,7 +133,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   override connectedCallback() {
     super.connectedCallback();
     if (this.partners instanceof Initialized) {
-      store.dispatch(fetchPartners());
+      store.dispatch(fetchPartners);
     }
   }
 

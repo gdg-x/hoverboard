@@ -29,7 +29,7 @@ const getPartnerGroups = async (): Promise<PartnerGroup[]> => {
   return Promise.all(items.map(getGroupPartners));
 };
 
-export const fetchPartners = () => async (dispatch: Dispatch<PartnerActions>) => {
+export const fetchPartners = async (dispatch: Dispatch<PartnerActions>) => {
   dispatch({
     type: FETCH_PARTNERS,
   });

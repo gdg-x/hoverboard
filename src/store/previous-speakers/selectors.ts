@@ -14,7 +14,7 @@ const selectPreviousSpeakers = (state: RootState): PreviousSpeaker[] => {
   if (previousSpeakers instanceof Success) {
     return previousSpeakers.data;
   } else if (previousSpeakers instanceof Initialized) {
-    store.dispatch(fetchPreviousSpeakers());
+    store.dispatch(fetchPreviousSpeakers);
   }
   return [];
 };

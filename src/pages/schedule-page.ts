@@ -132,7 +132,7 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
       sessions instanceof Success &&
       speakers instanceof Success
     ) {
-      store.dispatch(fetchSchedule());
+      store.dispatch(fetchSchedule);
     }
   }
 

@@ -14,7 +14,7 @@ const selectSpeakers = (state: RootState): SpeakerWithTags[] => {
   if (speakers instanceof Success) {
     return speakers.data;
   } else if (speakers instanceof Initialized) {
-    store.dispatch(fetchSpeakers());
+    store.dispatch(fetchSpeakers);
   }
   return [];
 };

@@ -27,7 +27,7 @@ const getTeams = async (): Promise<Team[]> => {
   return Promise.all(teamIds.map(getTeamMembers));
 };
 
-export const fetchTeams = () => async (dispatch: Dispatch<TeamsActions>) => {
+export const fetchTeams = async (dispatch: Dispatch<TeamsActions>) => {
   dispatch({
     type: FETCH_TEAMS,
   });

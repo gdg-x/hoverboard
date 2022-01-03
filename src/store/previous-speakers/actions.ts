@@ -20,7 +20,7 @@ const getPreviousSpeakers = async (): Promise<PreviousSpeaker[]> => {
   });
 };
 
-export const fetchPreviousSpeakers = () => async (dispatch: Dispatch<PreviousSpeakersActions>) => {
+export const fetchPreviousSpeakers = async (dispatch: Dispatch<PreviousSpeakersActions>) => {
   dispatch({
     type: FETCH_PREVIOUS_SPEAKERS,
   });

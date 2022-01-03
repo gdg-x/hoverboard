@@ -33,7 +33,7 @@ const selectSessions = (state: RootState) => {
   if (state.sessions instanceof Success) {
     return state.sessions.data;
   } else if (state.sessions instanceof Initialized) {
-    store.dispatch(fetchSessions());
+    store.dispatch(fetchSessions);
   }
   return [];
 };

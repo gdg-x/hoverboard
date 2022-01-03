@@ -16,7 +16,7 @@ const getGalleries = async (): Promise<Photo[]> => {
   return docs.map<Photo>(mergeDataAndId);
 };
 
-export const fetchGallery = () => async (dispatch: Dispatch<GalleryActions>) => {
+export const fetchGallery = async (dispatch: Dispatch<GalleryActions>) => {
   dispatch({
     type: FETCH_GALLERY,
   });
