@@ -1,7 +1,7 @@
 import { FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from 'firebase/auth';
 
 // TODO: Rename to PROVIDER
-export enum PROVIDERS {
+export enum PROVIDER {
   'https://accounts.google.com' = 'https://accounts.google.com',
   'google.com' = 'google.com',
   'https://www.facebook.com' = 'https://www.facebook.com',
@@ -10,7 +10,7 @@ export enum PROVIDERS {
   'twitter.com' = 'twitter.com',
 }
 
-export const getFederatedProvider = (provider: PROVIDERS) => {
+export const getFederatedProvider = (provider: PROVIDER) => {
   switch (provider) {
     case 'https://accounts.google.com':
     case 'google.com': {
@@ -37,7 +37,7 @@ export const getFederatedProvider = (provider: PROVIDERS) => {
   }
 };
 
-export const getFederatedProviderClass = (provider: PROVIDERS) => {
+export const getFederatedProviderClass = (provider: PROVIDER) => {
   switch (provider) {
     case 'https://accounts.google.com':
     case 'google.com':
@@ -56,7 +56,7 @@ export const getFederatedProviderClass = (provider: PROVIDERS) => {
   }
 };
 
-export const getProviderCompanyName = (provider: PROVIDERS) => {
+export const getProviderCompanyName = (provider: PROVIDER) => {
   switch (provider) {
     case 'https://accounts.google.com':
     case 'google.com':

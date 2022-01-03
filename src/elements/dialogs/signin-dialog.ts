@@ -11,7 +11,7 @@ import { ExistingAccountError } from '../../store/auth/types';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
 import { initialUserState } from '../../store/user/state';
-import { getProviderCompanyName, PROVIDERS } from '../../utils/providers';
+import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 import '../hoverboard-icons';
 import '../shared-styles';
 
@@ -164,7 +164,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
 
   _signIn(event: MouseEvent) {
     if (event.target instanceof Element) {
-      const providerUrl = event.target.getAttribute('provider-url') as PROVIDERS;
+      const providerUrl = event.target.getAttribute('provider-url') as PROVIDER;
       signIn(providerUrl);
     } else {
       throw new Error('Error starting sign in');

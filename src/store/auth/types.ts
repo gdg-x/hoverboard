@@ -1,6 +1,6 @@
 import { RemoteData } from '@abraham/remotedata';
 import { OAuthCredential } from 'firebase/auth';
-import { PROVIDERS } from '../../utils/providers';
+import { PROVIDER } from '../../utils/providers';
 
 export const AUTH = 'AUTH';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
@@ -11,7 +11,7 @@ export type ExistingAccountError = {
   code: string;
   credential: OAuthCredential | null;
   email: string | undefined;
-  providerId: PROVIDERS | undefined;
+  providerId: PROVIDER | undefined;
 };
 
 export type AuthState = RemoteData<ExistingAccountError, true>;
