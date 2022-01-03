@@ -1,4 +1,4 @@
-name: Deploy to Firebase
+name: Deploy
 on:
   push:
     branches:
@@ -15,11 +15,10 @@ jobs:
         run: echo "{}" > serviceAccount.json
       - run: npm ci
       - run: npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: w9jds/firebase-action@v2.0.0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          args: deploy
+        env:
           # See docs/tutorials/04-deploy.md for configuring these
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HOVERBOARD_MASTER }}'
-          projectId: hoverboard-master
-          # live is the default production channel of Firebase hosting
-          channelId: live
+          PROJECT_ID: hoverboard-master
+          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HOVERBOARD_MASTER }}
