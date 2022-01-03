@@ -234,6 +234,7 @@
     "lastName": "Last Name",
     "formTitle": "Get the latest updates, insights and news about GDG DevFest Ukraine sent to your inbox.",
     "emailRequired": "Please enter a valid email address.",
+    "fieldRequired": "Field required.",
     "subscribe": "Subscribe",
     "subscribed": "Subscribed",
     "close": "Close",

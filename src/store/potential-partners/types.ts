@@ -1,24 +1,14 @@
-import { DialogForm } from '../dialogs/types';
-
-export const ADD_POTENTIAL_PARTNER = 'app/Partners/ADD_POTENTIAL_PARTNER';
-export const ADD_POTENTIAL_PARTNER_FAILURE = 'app/Partners/ADD_POTENTIAL_PARTNER_FAILURE';
-export const ADD_POTENTIAL_PARTNER_SUCCESS = 'app/Partners/ADD_POTENTIAL_PARTNER_SUCCESS';
-
-export interface PotentialPartnersState {
-  adding: boolean;
-  addingError: Error;
-}
+export const ADD_POTENTIAL_PARTNER = 'ADD_POTENTIAL_PARTNER';
+export const ADD_POTENTIAL_PARTNER_FAILURE = 'ADD_POTENTIAL_PARTNER_FAILURE';
+export const ADD_POTENTIAL_PARTNER_SUCCESS = 'ADD_POTENTIAL_PARTNER_SUCCESS';
 
 interface AddPotentialPartnerAction {
   type: typeof ADD_POTENTIAL_PARTNER;
-  payload: DialogForm;
 }
 
 interface AddPotentialPartnerFailureAction {
   type: typeof ADD_POTENTIAL_PARTNER_FAILURE;
-  payload: {
-    error: Error;
-  };
+  payload: Error;
 }
 
 interface AddPotentialPartnerSuccessAction {

@@ -64,16 +64,22 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
         <paper-input
           id="firstFieldInput"
           on-touchend="_focus"
-          label="[[firstFieldLabel]]"
+          label="[[firstFieldLabel]] *"
           value="{{firstFieldValue}}"
+          required
+          auto-validate$="[[validate]]"
+          error-message="{$ subscribeBlock.fieldRequired $}"
           autocomplete="off"
         >
         </paper-input>
         <paper-input
           id="secondFieldInput"
           on-touchend="_focus"
-          label="[[secondFieldLabel]]"
+          label="[[secondFieldLabel]] *"
           value="{{secondFieldValue}}"
+          required
+          auto-validate$="[[validate]]"
+          error-message="{$ subscribeBlock.fieldRequired $}"
           autocomplete="off"
         >
         </paper-input>
@@ -195,9 +201,19 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
 
   _subscribe() {
     const emailInput = this.shadowRoot.querySelector('#emailInput');
+    const firstFieldInput = this.shadowRoot.querySelector('#firstFieldInput');
+    const secondFieldInput = this.shadowRoot.querySelector('#secondFieldInput');
 
     if (!emailInput.validate() || !this._validateEmail(emailInput.value)) {
       emailInput.invalid = true;
+      return;
+    }
+    if (!firstFieldInput.validate() || !this._validateField(firstFieldInput.value)) {
+      firstFieldInput.invalid = true;
+      return;
+    }
+    if (!secondFieldInput.validate() || !this._validateField(secondFieldInput.value)) {
+      secondFieldInput.invalid = true;
       return;
     }
 
@@ -212,6 +228,10 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
     // https://stackoverflow.com/a/742588/26406
     const emailRegularExpression = /^[^@\s]+@[^@\s.]+\.[^@.\s]+$/;
     return emailRegularExpression.test(email);
+  }
+
+  _validateField(value: string) {
+    return value.trim().length > 0;
   }
 
   _closeDialog() {
