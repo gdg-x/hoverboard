@@ -12,7 +12,7 @@ import {
 import { store } from '..';
 import { firebaseApp } from '../../firebase';
 import { FirebaseUser } from '../../models/user';
-import { getFederatedProvider, getFederatedProviderClass, PROVIDERS } from '../../utils/providers';
+import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
 import { FeaturedSessionsActions, REMOVE_USER_FEATURED_SESSIONS } from '../featured-sessions/types';
 import { FeedbackActions, WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
 import { getToken } from '../notifications/actions';
@@ -32,7 +32,7 @@ import {
 
 const auth = getAuth(firebaseApp);
 
-export const signIn = async (providerId: PROVIDERS) => {
+export const signIn = async (providerId: PROVIDER) => {
   store.dispatch<AuthActions>({ type: AUTH });
   const provider = getFederatedProvider(providerId);
 
@@ -48,19 +48,19 @@ export const signIn = async (providerId: PROVIDERS) => {
   }
 };
 
-const setAuthFailure = async (error: AuthError, credentialProviderId: PROVIDERS) => {
+const setAuthFailure = async (error: AuthError, credentialProviderId: PROVIDER) => {
   const credential = getFederatedProviderClass(credentialProviderId).credentialFromError(error);
   const [providerId] = await fetchSignInMethodsForEmail(auth, error.customData.email!);
   const payload: ExistingAccountError = {
     code: error.code,
     credential,
     email: error.customData.email,
-    providerId: providerId as PROVIDERS,
+    providerId: providerId as PROVIDER,
   };
   store.dispatch<AuthActions>({ type: AUTH_FAILURE, payload });
 };
 
-export const mergeAccounts = async (providerId: PROVIDERS, pendingCredential: OAuthCredential) => {
+export const mergeAccounts = async (providerId: PROVIDER, pendingCredential: OAuthCredential) => {
   const provider = getFederatedProvider(providerId);
 
   try {

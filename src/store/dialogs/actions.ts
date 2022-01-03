@@ -14,6 +14,7 @@ export const setDialogError = (error: Error) => {
   });
 };
 
+// TODO: type
 export const openDialog = (name: DIALOGS, data?: unknown) => {
   store.dispatch({
     type: OPEN_DIALOG,
