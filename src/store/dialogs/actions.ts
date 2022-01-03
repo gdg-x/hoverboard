@@ -1,5 +1,5 @@
 import { store } from '../';
-import { CLOSE_DIALOG, DIALOGS, OPEN_DIALOG, SET_DIALOG_ERROR } from './types';
+import { CLOSE_DIALOG, DIALOG, OPEN_DIALOG, SET_DIALOG_ERROR } from './types';
 
 export const closeDialog = () => {
   store.dispatch({
@@ -15,7 +15,7 @@ export const setDialogError = (error: Error) => {
 };
 
 // TODO: type
-export const openDialog = (name: DIALOGS, data?: unknown) => {
+export const openDialog = (name: DIALOG, data?: unknown) => {
   store.dispatch({
     type: OPEN_DIALOG,
     payload: {

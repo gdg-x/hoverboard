@@ -7,7 +7,7 @@ import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
+import { DIALOG } from '../store/dialogs/types';
 import { fetchPartners } from '../store/partners/actions';
 import { initialPartnersState } from '../store/partners/state';
 import { addPotentialPartner } from '../store/potential-partners/actions';
@@ -138,7 +138,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   }
 
   _addPotentialPartner() {
-    openDialog(DIALOGS.SUBSCRIBE, {
+    openDialog(DIALOG.SUBSCRIBE, {
       title: '{$ partnersBlock.form.title $}',
       submitLabel: '{$ partnersBlock.form.submitLabel $}',
       firstFieldLabel: '{$ partnersBlock.form.fullName $}',

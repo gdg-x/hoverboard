@@ -9,7 +9,7 @@ import { selectAuthMergeable } from '../../store/auth/selectors';
 import { initialAuthState } from '../../store/auth/state';
 import { ExistingAccountError } from '../../store/auth/types';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
-import { DIALOGS } from '../../store/dialogs/types';
+import { DIALOG } from '../../store/dialogs/types';
 import { initialUserState } from '../../store/user/state';
 import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 import '../hoverboard-icons';
@@ -146,7 +146,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
       const error: ExistingAccountError = this.auth.error;
       this.email = error.email;
       this.providerCompanyName = getProviderCompanyName(error.providerId);
-      openDialog(DIALOGS.SIGNIN);
+      openDialog(DIALOG.SIGNIN);
     }
   }
 

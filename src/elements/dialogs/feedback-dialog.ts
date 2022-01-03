@@ -6,7 +6,7 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import '@radi-cho/star-rating';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { closeDialog } from '../../store/dialogs/actions';
-import { DIALOGS } from '../../store/dialogs/types';
+import { DIALOG } from '../../store/dialogs/types';
 import '../shared-styles';
 
 class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
@@ -69,7 +69,7 @@ class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
   }
 
   _dataUpdate() {
-    if (this.data?.name === DIALOGS.FEEDBACK) {
+    if (this.data?.name === DIALOG.FEEDBACK) {
       this.session = this.data.data;
     }
   }
