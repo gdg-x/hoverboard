@@ -3,18 +3,18 @@ import { Dispatch } from 'redux';
 import { db } from '../../firebase';
 import { Member } from '../../models/member';
 import { Team, TeamWithoutMembers } from '../../models/team';
-import { mergeId } from '../../utils/merge-id';
+import { mergeDataAndId } from '../../utils/firestore';
 import { FETCH_TEAMS, FETCH_TEAMS_FAILURE, FETCH_TEAMS_SUCCESS, TeamsActions } from './types';
 
 const getTeamIds = async (): Promise<TeamWithoutMembers[]> => {
   const { docs } = await getDocs(query(collection(db, 'team')));
 
-  return docs.map<TeamWithoutMembers>(mergeId);
+  return docs.map<TeamWithoutMembers>(mergeDataAndId);
 };
 
 const getTeamMembers = async (team: TeamWithoutMembers): Promise<Team> => {
   const { docs } = await getDocs(query(collection(db, 'team', team.id, 'members')));
-  const members = docs.map<Member>(mergeId);
+  const members = docs.map<Member>(mergeDataAndId);
 
   return {
     ...team,

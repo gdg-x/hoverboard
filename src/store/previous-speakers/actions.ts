@@ -2,7 +2,7 @@ import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { db } from '../../firebase';
 import { PreviousSpeaker } from '../../models/previous-speaker';
-import { mergeId } from '../../utils/merge-id';
+import { mergeDataAndId } from '../../utils/firestore';
 import {
   FETCH_PREVIOUS_SPEAKERS,
   FETCH_PREVIOUS_SPEAKERS_FAILURE,
@@ -15,26 +15,25 @@ const getPreviousSpeakers = async (): Promise<PreviousSpeaker[]> => {
     query(collection(db, 'previousSpeakers'), orderBy('order', 'asc'))
   );
 
-  return docs.map<PreviousSpeaker>(mergeId).sort((speakerA, speakerB) => {
+  return docs.map<PreviousSpeaker>(mergeDataAndId).sort((speakerA, speakerB) => {
     return speakerA.name.localeCompare(speakerB.name);
   });
 };
 
-export const fetchPreviousSpeakersList =
-  () => async (dispatch: Dispatch<PreviousSpeakersActions>) => {
-    dispatch({
-      type: FETCH_PREVIOUS_SPEAKERS,
-    });
+export const fetchPreviousSpeakers = () => async (dispatch: Dispatch<PreviousSpeakersActions>) => {
+  dispatch({
+    type: FETCH_PREVIOUS_SPEAKERS,
+  });
 
-    try {
-      dispatch({
-        type: FETCH_PREVIOUS_SPEAKERS_SUCCESS,
-        payload: await getPreviousSpeakers(),
-      });
-    } catch (error) {
-      dispatch({
-        type: FETCH_PREVIOUS_SPEAKERS_FAILURE,
-        payload: error,
-      });
-    }
-  };
+  try {
+    dispatch({
+      type: FETCH_PREVIOUS_SPEAKERS_SUCCESS,
+      payload: await getPreviousSpeakers(),
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_PREVIOUS_SPEAKERS_FAILURE,
+      payload: error,
+    });
+  }
+};

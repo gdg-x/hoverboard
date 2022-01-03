@@ -5,7 +5,7 @@ import { PreviousSpeaker } from '../../models/previous-speaker';
 import { randomOrder } from '../../utils/functions';
 import { selectViewport } from '../ui/selectors';
 import { Viewport } from '../ui/types';
-import { fetchPreviousSpeakersList } from './actions';
+import { fetchPreviousSpeakers } from './actions';
 
 const selectSpeakerId = (_state: RootState, speakerId: string) => speakerId;
 
@@ -14,7 +14,7 @@ const selectPreviousSpeakers = (state: RootState): PreviousSpeaker[] => {
   if (previousSpeakers instanceof Success) {
     return previousSpeakers.data;
   } else if (previousSpeakers instanceof Initialized) {
-    store.dispatch(fetchPreviousSpeakersList());
+    store.dispatch(fetchPreviousSpeakers());
   }
   return [];
 };

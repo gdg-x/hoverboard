@@ -3,7 +3,7 @@ import { Constructor } from '@lit/reactive-element/decorators';
 import { property } from '@polymer/decorators';
 import { PolymerElement } from '@polymer/polymer';
 import { RootState, store } from '../store';
-import { fetchSpeakersList } from '../store/speakers/actions';
+import { fetchSpeakers } from '../store/speakers/actions';
 import { initialSpeakersState } from '../store/speakers/state';
 
 /* @polymerMixin */
@@ -25,7 +25,7 @@ export const SpeakersMixin = <
       super.connectedCallback();
 
       if (this.speakers instanceof Initialized) {
-        store.dispatch(fetchSpeakersList());
+        store.dispatch(fetchSpeakers());
       }
     }
   }
