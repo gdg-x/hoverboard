@@ -1,4 +1,4 @@
-import { Failure, Initialized, Pending } from '@abraham/remotedata';
+import { Failure, Pending } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/marked-element';
@@ -7,25 +7,12 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { RootState, store } from '../store';
-import { fetchTeams } from '../store/teams/actions';
-import { initialTeamsState } from '../store/teams/state';
+import { RootState } from '../store';
+import { selectTeamsAndMembers } from '../store/teams-members/selectors';
+import { initialTeamsMembersState } from '../store/teams-members/state';
 
 @customElement('team-page')
 export class TeamPage extends ReduxMixin(PolymerElement) {
-  @property({ type: Object })
-  teams = initialTeamsState;
-
-  @computed('teams')
-  get pending() {
-    return this.teams instanceof Pending;
-  }
-
-  @computed('teams')
-  get failure() {
-    return this.teams instanceof Failure;
-  }
-
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -158,7 +145,7 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
           <p>Error loading teams.</p>
         </template>
 
-        <template is="dom-repeat" items="[[teams.data]]" as="team">
+        <template is="dom-repeat" items="[[teamsMembers.data]]" as="team">
           <div class="team-title">[[team.title]]</div>
 
           <div class="team-block">
@@ -198,14 +185,20 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  override stateChanged(state: RootState) {
-    this.teams = state.teams;
+  @property({ type: Object })
+  teamsMembers = initialTeamsMembersState;
+
+  @computed('teamsMembers')
+  get pending() {
+    return this.teamsMembers instanceof Pending;
   }
 
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.teams instanceof Initialized) {
-      store.dispatch(fetchTeams);
-    }
+  @computed('teamsMembers')
+  get failure() {
+    return this.teamsMembers instanceof Failure;
+  }
+
+  override stateChanged(state: RootState) {
+    this.teamsMembers = selectTeamsAndMembers(state);
   }
 }

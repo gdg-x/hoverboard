@@ -1,8 +1,8 @@
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { Initialized, Success } from '@abraham/remotedata';
+import { orderBy } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db } from '../../firebase';
 import { Ticket } from '../../models/ticket';
-import { mergeDataAndId } from '../../utils/firestore';
+import { subscribeToCollection, Subscription } from '../../utils/firestore';
 import {
   FetchTicketsActions,
   FETCH_TICKETS,
@@ -10,26 +10,22 @@ import {
   FETCH_TICKETS_SUCCESS,
 } from './types';
 
-const getTickets = async (): Promise<Ticket[]> => {
-  const { docs } = await getDocs(query(collection(db, 'tickets'), orderBy('order', 'asc')));
+let subscription: Subscription = new Initialized();
 
-  return docs.map<Ticket>(mergeDataAndId);
+export const unsubscribe = () => {
+  if (subscription instanceof Success) {
+    subscription.data();
+  }
 };
 
 export const fetchTickets = async (dispatch: Dispatch<FetchTicketsActions>) => {
-  dispatch({
-    type: FETCH_TICKETS,
-  });
-
-  try {
-    dispatch({
-      type: FETCH_TICKETS_SUCCESS,
-      payload: await getTickets(),
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_TICKETS_FAILURE,
-      payload: error,
-    });
+  if (subscription instanceof Initialized) {
+    subscription = subscribeToCollection(
+      'tickets',
+      () => dispatch({ type: FETCH_TICKETS }),
+      (payload: Ticket[]) => dispatch({ type: FETCH_TICKETS_SUCCESS, payload }),
+      (payload: Error) => dispatch({ type: FETCH_TICKETS_FAILURE, payload }),
+      orderBy('order')
+    );
   }
 };

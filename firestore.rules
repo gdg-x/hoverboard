@@ -186,6 +186,7 @@ service cloud.firestore {
       // Disallow writes
       allow write: if false;
 
+      // TODO: remove
       match /members/{memberId} {
         // Applies to single document read requests
         allow get;
@@ -196,6 +197,17 @@ service cloud.firestore {
         // Disallow writes
         allow write: if false;
       }
+    }
+
+    match /{path=**}/members/{memberId} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Disallow writes
+      allow write: if false;
     }
 
     match /tickets/{ticket} {

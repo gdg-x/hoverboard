@@ -1,4 +1,4 @@
-import { Team } from '../../models/team';
+import { TeamWithoutMembers } from '../../models/team';
 
 export const FETCH_TEAMS = 'FETCH_TEAMS';
 export const FETCH_TEAMS_FAILURE = 'FETCH_TEAMS_FAILURE';
@@ -15,7 +15,7 @@ interface FetchTeamsFailureAction {
 
 interface FetchTeamsSuccessAction {
   type: typeof FETCH_TEAMS_SUCCESS;
-  payload: Team[];
+  payload: TeamWithoutMembers[];
 }
 
 export type TeamsActions = FetchTeamsAction | FetchTeamsFailureAction | FetchTeamsSuccessAction;

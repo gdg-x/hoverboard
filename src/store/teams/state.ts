@@ -1,5 +1,5 @@
 import { Initialized, RemoteData } from '@abraham/remotedata';
-import { Team } from '../../models/team';
+import { TeamWithoutMembers } from '../../models/team';
 
-export type TeamsState = RemoteData<Error, Team[]>;
+export type TeamsState = RemoteData<Error, TeamWithoutMembers[]>;
 export const initialTeamsState: TeamsState = new Initialized();
