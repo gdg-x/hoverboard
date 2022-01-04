@@ -1,7 +1,8 @@
-import { collection, getDocs, query } from 'firebase/firestore';
+import { Initialized, Success } from '@abraham/remotedata';
+import { orderBy } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db } from '../../firebase';
 import { Day } from '../../models/day';
+import { subscribeToCollection, Subscription } from '../../utils/firestore';
 import {
   FETCH_SCHEDULE,
   FETCH_SCHEDULE_FAILURE,
@@ -9,26 +10,22 @@ import {
   ScheduleActions,
 } from './types';
 
-const getSchedule = async (): Promise<Day[]> => {
-  const { docs } = await getDocs(query(collection(db, 'generatedSchedule')));
+let subscription: Subscription = new Initialized();
 
-  return docs.map<Day>((doc) => doc.data() as Day).sort((a, b) => a.date.localeCompare(b.date));
+export const unsubscribe = () => {
+  if (subscription instanceof Success) {
+    subscription.data();
+  }
 };
 
 export const fetchSchedule = async (dispatch: Dispatch<ScheduleActions>) => {
-  dispatch({
-    type: FETCH_SCHEDULE,
-  });
-
-  try {
-    dispatch({
-      type: FETCH_SCHEDULE_SUCCESS,
-      payload: await getSchedule(),
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_SCHEDULE_FAILURE,
-      payload: error,
-    });
+  if (subscription instanceof Initialized) {
+    subscription = subscribeToCollection(
+      'generatedSchedule',
+      () => dispatch({ type: FETCH_SCHEDULE }),
+      (payload: Day[]) => dispatch({ type: FETCH_SCHEDULE_SUCCESS, payload }),
+      (payload: Error) => dispatch({ type: FETCH_SCHEDULE_FAILURE, payload }),
+      orderBy('date')
+    );
   }
 };

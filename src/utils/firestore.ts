@@ -1,4 +1,15 @@
-import { DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';
+import { RemoteData, Success } from '@abraham/remotedata';
+import {
+  collection,
+  collectionGroup,
+  DocumentData,
+  onSnapshot,
+  orderBy,
+  query,
+  QueryDocumentSnapshot,
+  Unsubscribe,
+} from 'firebase/firestore';
+import { db } from '../firebase';
 import { Id, ParentId } from '../models/types';
 
 export const mergeDataAndId = <T>(snapshot: QueryDocumentSnapshot<DocumentData>): T & Id => {
@@ -16,4 +27,40 @@ export const dataWithParentId = <T>(
     parentId: (snapshot.ref.parent.parent as Id).id,
     id: snapshot.id,
   };
+};
+
+export type Subscription = RemoteData<Error, Unsubscribe>;
+
+export const subscribeToCollection = <T>(
+  path: string,
+  onStart: () => void,
+  onNext: (payload: T[]) => void,
+  onError: (error: Error) => void,
+  order = orderBy('name')
+): Subscription => {
+  const unsubscribe = onSnapshot(
+    query(collection(db, path), order),
+    (snapshot) => onNext(snapshot.docs.map<T>(mergeDataAndId)),
+    (payload) => onError(payload)
+  );
+
+  onStart();
+  return new Success(unsubscribe);
+};
+
+export const subscribeToCollectionGroup = <T>(
+  path: string,
+  onStart: () => void,
+  onNext: (payload: T[]) => void,
+  onError: (error: Error) => void,
+  order = orderBy('name')
+): Subscription => {
+  const unsubscribe = onSnapshot(
+    query(collectionGroup(db, path), order),
+    (snapshot) => onNext(snapshot.docs.map<T>(dataWithParentId)),
+    (payload) => onError(payload)
+  );
+
+  onStart();
+  return new Success(unsubscribe);
 };

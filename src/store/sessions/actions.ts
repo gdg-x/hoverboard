@@ -1,8 +1,8 @@
-import { collection, getDocs, query } from 'firebase/firestore';
+import { Initialized, Success } from '@abraham/remotedata';
+import { orderBy } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db } from '../../firebase';
 import { Session } from '../../models/session';
-import { mergeDataAndId } from '../../utils/firestore';
+import { subscribeToCollection, Subscription } from '../../utils/firestore';
 import {
   FETCH_SESSIONS,
   FETCH_SESSIONS_FAILURE,
@@ -10,25 +10,22 @@ import {
   SessionsActions,
 } from './types';
 
-const getSessions = async () => {
-  const { docs } = await getDocs(query(collection(db, 'generatedSessions')));
-  return docs.map<Session>(mergeDataAndId);
+let subscription: Subscription = new Initialized();
+
+export const unsubscribe = () => {
+  if (subscription instanceof Success) {
+    subscription.data();
+  }
 };
 
 export const fetchSessions = async (dispatch: Dispatch<SessionsActions>) => {
-  dispatch({
-    type: FETCH_SESSIONS,
-  });
-
-  try {
-    dispatch({
-      type: FETCH_SESSIONS_SUCCESS,
-      payload: await getSessions(),
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_SESSIONS_FAILURE,
-      payload: error,
-    });
+  if (subscription instanceof Initialized) {
+    subscription = subscribeToCollection(
+      'generatedSessions',
+      () => dispatch({ type: FETCH_SESSIONS }),
+      (payload: Session[]) => dispatch({ type: FETCH_SESSIONS_SUCCESS, payload }),
+      (payload: Error) => dispatch({ type: FETCH_SESSIONS_FAILURE, payload }),
+      orderBy('day')
+    );
   }
 };

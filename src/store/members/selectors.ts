@@ -5,7 +5,7 @@ import { MembersState } from './state';
 
 export const selectMembers = (state: RootState): MembersState => {
   if (state.members instanceof Initialized) {
-    store.dispatch(fetchMembers());
+    store.dispatch(fetchMembers);
     return new Pending();
   } else {
     return state.members;
