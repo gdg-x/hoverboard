@@ -8,7 +8,7 @@
     "npm": "7"
   },
   "scripts": {
-    "build": "npm run clean && NODE_ENV=production rollup --config rollup.config.js",
+    "build": "npm run clean && NODE_ENV=production rollup --config rollup.config.ts --configPlugin typescript",
     "clean": "rimraf dist",
     "deploy": "npm run build && NODE_ENV=production firebase deploy",
     "firestore:copy": "ts-node-script ./scripts/firestore-copy",
@@ -29,7 +29,7 @@
     "start": "NODE_ENV=development concurrently --kill-others npm:start:*",
     "start:emulators": "firebase emulators:start",
     "start:functions": "npm --prefix functions start",
-    "start:rollup": "rollup --config rollup.config.js --watch",
+    "start:rollup": "rollup --config rollup.config.ts --configPlugin typescript --watch",
     "test": "jest"
   },
   "dependencies": {
@@ -81,6 +81,7 @@
     "@types/jest": "^27.4.0",
     "@types/jest-dev-server": "^5.0.0",
     "@types/node": "^16.11.11",
+    "@types/nunjucks": "^3.2.1",
     "@types/polymer": "^1.2.12",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
