@@ -68,7 +68,7 @@ export default [
         exclude: 'node_modules/**',
         patterns: [
           {
-            transform: (code, path: string) => {
+            transform: (code: string, path: string) => {
               if (path.endsWith('.ts')) {
                 return compileTemplate(code);
               }

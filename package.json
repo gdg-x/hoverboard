@@ -81,6 +81,7 @@
     "@types/jest": "^27.4.0",
     "@types/jest-dev-server": "^5.0.0",
     "@types/node": "^16.11.11",
+    "@types/nunjucks": "^3.2.1",
     "@types/polymer": "^1.2.12",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",

@@ -1,7 +1,5 @@
 /* eslint-env node */
 
-// TODO: Rewrite in TypeScript
-
 import n from 'nunjucks';
 import fs from 'fs';
 
@@ -25,7 +23,7 @@ const getConfigPath = () => {
 
 const getData = () => {
   const settingsFiles = ['./data/resources.json', './data/settings.json', getConfigPath()];
-  const combineSettings = (currentData, path) => {
+  const combineSettings = (currentData: { [key: string]: unknown }, path: string) => {
     return {
       ...currentData,
       ...require(path),
@@ -44,8 +42,8 @@ const nunjucks = n.configure({
   },
 });
 
-export const compileTemplate = (template) => {
+export const compileTemplate = (template: string) => {
   return nunjucks.renderString(template, data);
 };
 
-export const compileBufferTemplate = (body) => compileTemplate(body.toString());
+export const compileBufferTemplate = (body: Buffer) => compileTemplate(body.toString());
