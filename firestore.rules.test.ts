@@ -11,8 +11,8 @@ import {
   getDocs,
   updateDoc,
 } from 'firebase/firestore';
-import { setupApp, teardownApp } from './firestore.setup';
-import { expect } from './helpers';
+import { setupApp, teardownApp } from './__tests__/firestore.setup';
+import { expect } from './__tests__/helpers';
 
 describe('firestore', () => {
   let testEnv: RulesTestContext;
