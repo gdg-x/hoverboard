@@ -23,6 +23,7 @@ fetch('/__/firebase/init.json').then(async (response) => {
   const messaging = getMessaging(app);
 
   onMessage(messaging, (payload) => {
+    console.log('firebase-messaging-sw.onMessage', { payload });
     const notification = buildNotification(payload);
     return self.registration.showNotification(notification.title, notification);
   });
