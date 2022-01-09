@@ -10,8 +10,7 @@ import replace from 'rollup-plugin-re';
 import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
 import { compileBufferTemplate, compileTemplate, production } from './build-utils';
-import { workboxConfig } from './workbox-config';
-import type { GenerateSWOptions } from 'workbox-build';
+import { workboxConfig } from './workbox.config';
 
 const { ROLLUP_WATCH } = process.env;
 
@@ -101,12 +100,9 @@ export default [
           },
         ],
       }),
-      production && generateSW(workboxConfig as GenerateSWOptions), // TODO: Remove cast
+      production && generateSW(workboxConfig),
       production && terser(),
-      ROLLUP_WATCH &&
-        livereload({
-          watch: 'dist',
-        }),
+      ROLLUP_WATCH && livereload({ watch: 'dist' }),
     ],
   },
 ];

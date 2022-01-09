@@ -1,11 +1,11 @@
 /* eslint-env node */
 
-// TODO: Rewrite in TypeScript
+import type { GenerateSWOptions } from 'workbox-build';
 
 const ONE_WEEK = 60 * 60 * 24 * 7;
 const FIREBASE_RESERVED_URLS = /^(?!\/__).*/;
 
-export const workboxConfig = {
+export const workboxConfig: GenerateSWOptions = {
   swDest: 'dist/service-worker.js',
   navigateFallback: '/index.html',
   navigateFallbackDenylist: [
