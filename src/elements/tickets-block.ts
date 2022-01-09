@@ -233,7 +233,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
       return '';
     }
     // TODO: Remove eslint exception
-    // TODO: What is `discount` supposed to be used with?
+    // ticketsBlock.save template has interpolation for `discount`.
     // eslint-disable-next-line
     const discount = Math.round(100 - (ticket.price * 100) / maxPrice);
     return `{$ ticketsBlock.save $}`;
