@@ -275,12 +275,20 @@
   "notifications": {
     "default": "Enable notifications",
     "enabled": "We will miss you but you can unsubscribe anytime",
-    "blocked": "We can't send you notifications right now. Please enable notifications in your browser",
     "subscribe": "Subscribe",
     "unsubscribe": "Unsubscribe",
-    "enable": {
+    "blocked": {
+      "text": "Please enable notifications in your browser",
       "label": "Enable",
       "link": "https://support.google.com/chrome/answer/3220216"
+    },
+    "unsupported": {
+      "text": "Notifications are not supported on this device",
+      "label": "Details",
+      "link": "https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#browser_compatibility"
+    },
+    "unknown": {
+      "text": "Unknown error occurred"
     },
     "toast": {
       "title": "Open"

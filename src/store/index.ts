@@ -7,6 +7,7 @@ import { feedbackReducer } from './feedback/reducers';
 import { filtersReducer } from './filters/reducers';
 import { galleryReducer } from './gallery/reducers';
 import { membersReducer } from './members/reducers';
+import notificationPermission from './notification-permission';
 import { notificationsReducer } from './notifications/reducers';
 import { partnersReducer } from './partners/reducers';
 import { potentialPartnersReducer } from './potential-partners/reducers';
@@ -30,6 +31,7 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     blog: blogReducer,
+    notificationPermission,
     dialogs: dialogsReducer,
     featuredSessions: featuredSessionsReducer,
     feedback: feedbackReducer,
