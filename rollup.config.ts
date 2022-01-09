@@ -1,7 +1,5 @@
 /* eslint-env node */
 
-// TODO: Rewrite in TypeScript
-
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import html from '@web/rollup-plugin-html';
@@ -9,10 +7,11 @@ import fs from 'fs';
 import copy from 'rollup-plugin-copy';
 import livereload from 'rollup-plugin-livereload';
 import replace from 'rollup-plugin-re';
+import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
 import { compileBufferTemplate, compileTemplate, production } from './build-utils';
 import { workboxConfig } from './workbox-config';
-import { terser } from 'rollup-plugin-terser';
+import type { GenerateSWOptions } from 'workbox-build';
 
 const { ROLLUP_WATCH } = process.env;
 
@@ -70,7 +69,7 @@ export default [
         exclude: 'node_modules/**',
         patterns: [
           {
-            transform: (code, path) => {
+            transform: (code, path: string) => {
               if (path.endsWith('.ts')) {
                 return compileTemplate(code);
               }
@@ -102,7 +101,7 @@ export default [
           },
         ],
       }),
-      production && generateSW(workboxConfig),
+      production && generateSW(workboxConfig as GenerateSWOptions), // TODO: Remove cast
       production && terser(),
       ROLLUP_WATCH &&
         livereload({

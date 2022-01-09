@@ -99,5 +99,5 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "compileOnSave": true,
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "*.ts"]
 }
