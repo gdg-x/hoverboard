@@ -333,7 +333,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @observe('signedIn')
-  _authStatusChanged(_signedIn?: boolean) {
+  _authStatusChanged(_signedIn: boolean) {
     if (this.isDialogOpen) {
       closeDialog();
     }
@@ -348,7 +348,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     store.dispatch(requestPermission);
   }
 
-  _getNotificationsIcon(status) {
+  _getNotificationsIcon(status: NOTIFICATIONS_STATUS) {
     return status === NOTIFICATIONS_STATUS.DEFAULT
       ? 'bell-outline'
       : status === NOTIFICATIONS_STATUS.GRANTED
@@ -356,7 +356,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
       : 'bell-off';
   }
 
-  _hideNotificationBlock(status, blockStatus) {
+  _hideNotificationBlock(status: NOTIFICATIONS_STATUS, blockStatus: NOTIFICATIONS_STATUS) {
     return status !== NOTIFICATIONS_STATUS[blockStatus];
   }
 

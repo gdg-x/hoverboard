@@ -1,7 +1,13 @@
 import { Success } from '@abraham/remotedata';
 import { Router } from '@vaadin/router';
 import { doc, DocumentReference, DocumentSnapshot, getDoc, setDoc } from 'firebase/firestore';
-import { deleteToken, getMessaging, getToken as fbGetToken, onMessage } from 'firebase/messaging';
+import {
+  deleteToken,
+  getMessaging,
+  getToken as fbGetToken,
+  MessagePayload,
+  onMessage,
+} from 'firebase/messaging';
 import { Dispatch } from 'redux';
 import { RootState } from '..';
 import { log } from '../../console';
@@ -14,12 +20,14 @@ import { NotificationActions, NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS 
 
 const messaging = getMessaging(firebaseApp);
 
-onMessage(messaging, (payload) => {
+onMessage(messaging, (payload: MessagePayload) => {
   const { notification } = payload;
   if (!notification) {
     log('Message missing payload');
     return;
   }
+
+  console.log('notifications/actions.onMessage', { payload });
 
   showToast({
     message: `${notification.title} ${notification.body}`,
