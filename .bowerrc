@@ -1,1 +1,4 @@
-{"registry": "https://registry.bower.io"}
+{
+    "registry": "https://registry.bower.io",
+    "directory":"bower_components"
+}
