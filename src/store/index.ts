@@ -8,6 +8,7 @@ import { filtersReducer } from './filters/reducers';
 import { galleryReducer } from './gallery/reducers';
 import { membersReducer } from './members/reducers';
 import notificationPermission from './notification-permission';
+import { notificationsSubscribersReducer } from './notifications-subscribers/reducers';
 import { notificationsReducer } from './notifications/reducers';
 import { partnersReducer } from './partners/reducers';
 import { potentialPartnersReducer } from './potential-partners/reducers';
@@ -31,14 +32,15 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     blog: blogReducer,
-    notificationPermission,
     dialogs: dialogsReducer,
     featuredSessions: featuredSessionsReducer,
     feedback: feedbackReducer,
     filters: filtersReducer,
     gallery: galleryReducer,
     members: membersReducer,
+    notificationPermission,
     notifications: notificationsReducer,
+    notificationsSubscribers: notificationsSubscribersReducer,
     partners: partnersReducer,
     potentialPartners: potentialPartnersReducer,
     previousSpeakers: previousSpeakersReducer,

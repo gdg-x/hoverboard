@@ -1,3 +1,4 @@
+import { Initialized } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
@@ -8,6 +9,8 @@ import {
   unsupportedNotificationPermission,
   updateNotificationPermission,
 } from '../store/notification-permission';
+import { updateNotificationsSubscribers } from '../store/notifications-subscribers/actions';
+import { initialNotificationsSubscribersState } from '../store/notifications-subscribers/state';
 import './shared-styles';
 
 @customElement('notification-toggle')
@@ -99,6 +102,8 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
 
   @property({ type: Object })
   notificationPermission = initialNotificationPermissionState;
+  @property({ type: Object })
+  notificationsSubscribers = initialNotificationsSubscribersState;
 
   @property({ type: Boolean })
   private opened = false;
@@ -118,8 +123,15 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
 
   override stateChanged(state: RootState) {
     this.notificationPermission = state.notificationPermission;
+    this.notificationsSubscribers = state.notificationsSubscribers;
     if (this.notificationPermission.kind === 'success' && this.opened) {
       this.opened = false;
+    }
+    if (
+      this.notificationPermission.kind === 'success' &&
+      this.notificationsSubscribers instanceof Initialized
+    ) {
+      store.dispatch(updateNotificationsSubscribers());
     }
   }
 
