@@ -221,6 +221,7 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // TODO: Remove along with data
     match /users/{userId} {
       allow list: if false;
 
