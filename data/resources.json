@@ -274,7 +274,8 @@
   },
   "notifications": {
     "default": "Enable notifications",
-    "enabled": "We will miss you but you can unsubscribe anytime",
+    "enabled": "Get notified of general announcements and sessions starting",
+    "enable": "Enable",
     "subscribe": "Subscribe",
     "unsubscribe": "Unsubscribe",
     "blocked": {

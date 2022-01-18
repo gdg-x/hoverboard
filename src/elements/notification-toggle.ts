@@ -1,15 +1,21 @@
-import { Initialized } from '@abraham/remotedata';
+import '@material/mwc-formfield';
+import '@material/mwc-switch';
+import { Switch } from '@material/mwc-switch';
 import { computed, customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
+import '../components/auth-required';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import {
   initialNotificationPermissionState,
+  PROMPT_USER,
   requestNotificationPermission,
   unsupportedNotificationPermission,
-  updateNotificationPermission,
 } from '../store/notification-permission';
-import { updateNotificationsSubscribers } from '../store/notifications-subscribers/actions';
+import {
+  clearNotificationsSubscribers,
+  updateNotificationsSubscribers,
+} from '../store/notifications-subscribers/actions';
 import { initialNotificationsSubscribersState } from '../store/notifications-subscribers/state';
 import './shared-styles';
 
@@ -33,6 +39,11 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
         .dropdown-panel .panel-actions {
           margin: 0 -16px -16px 0;
         }
+
+        mwc-formfield,
+        auth-required {
+          margin: 12px 0;
+        }
       </style>
 
       <paper-menu-button
@@ -42,6 +53,7 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
         horizontal-align="right"
         no-animations
         opened="{{opened}}"
+        on-click="requestPermission"
       >
         <paper-icon-button icon="hoverboard:[[icon]]" slot="dropdown-trigger"></paper-icon-button>
 
@@ -50,7 +62,7 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
             <p>{$ notifications.default $}</p>
             <div class="panel-actions" layout horizontal end-justified>
               <paper-button primary-text on-click="requestPermission">
-                {$ notifications.subscribe $}
+                {$ notifications.enable $}
               </paper-button>
             </div>
           </template>
@@ -59,11 +71,22 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
 
           <template is="dom-if" if="[[success]]">
             <p>{$ notifications.enabled $}</p>
-            <div class="panel-actions" layout horizontal end-justified>
-              <paper-button primary-text on-click="clearPermission">
-                {$ notifications.unsubscribe $}
-              </paper-button>
-            </div>
+            <mwc-formfield label="General notifications">
+              <mwc-switch
+                on-click="toggleGeneralNotifications"
+                selected$="[[notificationsSubscribers.data]]"
+              ></mwc-switch>
+            </mwc-formfield>
+
+            <auth-required>
+              <p slot="prompt">Sign in to get personalized session notifications.</p>
+              <mwc-formfield label="My Schedule notifications">
+                <mwc-switch
+                  on-click="toggleMyScheduleNotifications"
+                  selected$="[[notificationsUsers.data]]"
+                ></mwc-switch>
+              </mwc-formfield>
+            </auth-required>
           </template>
 
           <template is="dom-if" if="[[blocked]]">
@@ -113,8 +136,10 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
 
     if ('Notification' in window && 'permissions' in navigator) {
       navigator.permissions.query({ name: 'notifications' }).then((permission) => {
-        store.dispatch(updateNotificationPermission());
-        permission.onchange = () => store.dispatch(updateNotificationPermission());
+        store.dispatch(requestNotificationPermission(PROMPT_USER.NO));
+        permission.onchange = () => {
+          store.dispatch(requestNotificationPermission(PROMPT_USER.NO));
+        };
       });
     } else {
       store.dispatch(unsupportedNotificationPermission());
@@ -124,15 +149,16 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
   override stateChanged(state: RootState) {
     this.notificationPermission = state.notificationPermission;
     this.notificationsSubscribers = state.notificationsSubscribers;
-    if (this.notificationPermission.kind === 'success' && this.opened) {
-      this.opened = false;
-    }
-    if (
-      this.notificationPermission.kind === 'success' &&
-      this.notificationsSubscribers instanceof Initialized
-    ) {
-      store.dispatch(updateNotificationsSubscribers());
-    }
+    // if (this.notificationPermission.kind === 'success' && this.opened) {
+    //   this.opened = false;
+    // }
+    // if (
+    //   this.notificationPermission.kind === 'success' &&
+    //   this.notificationsSubscribers instanceof Initialized
+    // ) {
+    //   console.log('stateChanged', { notificationPermission: this.notificationPermission });
+    //   store.dispatch(updateNotificationsSubscribers(this.notificationPermission.data));
+    // }
   }
 
   @computed('notificationPermission')
@@ -174,13 +200,34 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
   }
 
   private requestPermission() {
-    store.dispatch(requestNotificationPermission());
+    if (this.notificationPermission.kind === 'initialized') {
+      store.dispatch(requestNotificationPermission(PROMPT_USER.YES));
+    }
   }
 
-  private clearPermission() {
-    console.log('clearPermission');
-    // TODO
-    // clearNotificationPermission();
+  private toggleGeneralNotifications(event: MouseEvent) {
+    const { selected, disabled } = event.target as Switch;
+    if (this.notificationPermission.kind !== 'success' || disabled) {
+      return;
+    }
+    if (selected) {
+      store.dispatch(updateNotificationsSubscribers(this.notificationPermission.data));
+    } else {
+      store.dispatch(clearNotificationsSubscribers(this.notificationPermission.data));
+    }
+  }
+
+  private toggleMyScheduleNotifications(event: MouseEvent) {
+    const { selected, disabled } = event.target as Switch;
+    if (this.notificationPermission.kind !== 'success') {
+      return;
+    }
+    console.log('toggleMyScheduleNotifications', { selected, disabled });
+    // if (selected && this.notificationPermission.kind === 'success' || disabled) {
+    //   store.dispatch(updateNotificationsUsers(this.notificationPermission.data));
+    // } else {
+    //   store.dispatch(clearNotificationsUsers());
+    // }
   }
 
   @computed('notificationPermission')

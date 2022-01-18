@@ -1,16 +1,15 @@
-import { doc, setDoc, Timestamp } from 'firebase/firestore';
-import { getMessaging, getToken } from 'firebase/messaging';
+import { deleteDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db, firebaseApp } from '../../firebase';
+import { db } from '../../firebase';
 import {
+  NotificationSubscribersActions,
+  RESET_NOTIFICATION_SUBSCRIBERS,
   SET_NOTIFICATION_SUBSCRIBERS,
   SET_NOTIFICATION_SUBSCRIBERS_FAILURE,
   SET_NOTIFICATION_SUBSCRIBERS_SUCCESS,
-  NotificationSubscribersActions,
 } from './types';
 
-const messaging = getMessaging(firebaseApp);
-
+// TODO: live update
 const setNotificationsSubscribersDoc = async (token: string): Promise<void> => {
   await setDoc(doc(db, 'notificationsSubscribers', token), {
     value: true,
@@ -18,20 +17,42 @@ const setNotificationsSubscribersDoc = async (token: string): Promise<void> => {
   });
 };
 
+const removeNotificationsSubscribersDoc = async (token: string): Promise<void> => {
+  await deleteDoc(doc(db, 'notificationsSubscribers', token));
+};
+
 export const updateNotificationsSubscribers =
-  () => async (dispatch: Dispatch<NotificationSubscribersActions>) => {
+  (token: string) => async (dispatch: Dispatch<NotificationSubscribersActions>) => {
     dispatch({
       type: SET_NOTIFICATION_SUBSCRIBERS,
     });
 
     try {
-      const token = await getToken(messaging);
-
       await setNotificationsSubscribersDoc(token);
 
       dispatch({
         type: SET_NOTIFICATION_SUBSCRIBERS_SUCCESS,
         payload: token,
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_NOTIFICATION_SUBSCRIBERS_FAILURE,
+        payload: error,
+      });
+    }
+  };
+
+export const clearNotificationsSubscribers =
+  (token: string) => async (dispatch: Dispatch<NotificationSubscribersActions>) => {
+    dispatch({
+      type: SET_NOTIFICATION_SUBSCRIBERS,
+    });
+
+    try {
+      await removeNotificationsSubscribersDoc(token);
+
+      dispatch({
+        type: RESET_NOTIFICATION_SUBSCRIBERS,
       });
     } catch (error) {
       dispatch({
