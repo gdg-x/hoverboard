@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getMessaging, getToken } from 'firebase/messaging';
 import { firebaseApp } from '../../firebase';
+import { SimpleRemoteData } from '../../utils/simple-remote-data';
 
 export enum PROMPT_USER {
   YES = 'YES',
@@ -8,31 +9,6 @@ export enum PROMPT_USER {
 }
 
 const messaging = getMessaging(firebaseApp);
-
-interface SimpleInitialized {
-  kind: 'initialized';
-}
-
-interface SimplePending {
-  kind: 'pending';
-}
-
-interface SimpleFailure {
-  kind: 'failure';
-  error: Error;
-}
-
-interface SimpleSuccess<Data> {
-  kind: 'success';
-  data: Data;
-}
-
-// TODO: Move to separate file
-export type SimpleRemoteData<Data> =
-  | SimpleInitialized
-  | SimplePending
-  | SimpleFailure
-  | SimpleSuccess<Data>;
 
 // Eslint doesn't like when using the built in type
 export type NotificationPermission = typeof Notification.permission;
