@@ -21,6 +21,7 @@ import { teamsReducer } from './teams/reducers';
 import { ticketsReducer } from './tickets/reducers';
 import { toastReducer } from './toast/reducers';
 import { uiReducer } from './ui/reducers';
+import { updateNotificationsSubscribersReducer } from './update-notifications-subscribers/reducers';
 import { userReducer } from './user/reducers';
 import { videosReducer } from './videos/reducers';
 
@@ -52,6 +53,7 @@ export const store = configureStore({
     tickets: ticketsReducer,
     toast: toastReducer,
     ui: uiReducer,
+    updateNotificationsSubscribers: updateNotificationsSubscribersReducer,
     user: userReducer,
     videos: videosReducer,
   },

@@ -1,63 +1,30 @@
-import { deleteDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
+import { Initialized, Success } from '@abraham/remotedata';
 import { Dispatch } from 'redux';
-import { db } from '../../firebase';
+import { subscribeToDocument, Subscription } from '../../utils/firestore';
 import {
-  NotificationSubscribersActions,
-  RESET_NOTIFICATION_SUBSCRIBERS,
-  SET_NOTIFICATION_SUBSCRIBERS,
-  SET_NOTIFICATION_SUBSCRIBERS_FAILURE,
-  SET_NOTIFICATION_SUBSCRIBERS_SUCCESS,
+  FETCH_NOTIFICATIONS_SUBSCRIBERS,
+  FETCH_NOTIFICATIONS_SUBSCRIBERS_FAILURE,
+  FETCH_NOTIFICATIONS_SUBSCRIBERS_SUCCESS,
+  NotificationsSubscribersActions,
 } from './types';
 
-// TODO: live update
-const setNotificationsSubscribersDoc = async (token: string): Promise<void> => {
-  await setDoc(doc(db, 'notificationsSubscribers', token), {
-    value: true,
-    updatedAt: Timestamp.now(),
-  });
+let subscription: Subscription = new Initialized();
+
+export const unsubscribe = () => {
+  if (subscription instanceof Success) {
+    subscription.data();
+  }
 };
 
-const removeNotificationsSubscribersDoc = async (token: string): Promise<void> => {
-  await deleteDoc(doc(db, 'notificationsSubscribers', token));
-};
-
-export const updateNotificationsSubscribers =
-  (token: string) => async (dispatch: Dispatch<NotificationSubscribersActions>) => {
-    dispatch({
-      type: SET_NOTIFICATION_SUBSCRIBERS,
-    });
-
-    try {
-      await setNotificationsSubscribersDoc(token);
-
-      dispatch({
-        type: SET_NOTIFICATION_SUBSCRIBERS_SUCCESS,
-        payload: token,
-      });
-    } catch (error) {
-      dispatch({
-        type: SET_NOTIFICATION_SUBSCRIBERS_FAILURE,
-        payload: error,
-      });
-    }
-  };
-
-export const clearNotificationsSubscribers =
-  (token: string) => async (dispatch: Dispatch<NotificationSubscribersActions>) => {
-    dispatch({
-      type: SET_NOTIFICATION_SUBSCRIBERS,
-    });
-
-    try {
-      await removeNotificationsSubscribersDoc(token);
-
-      dispatch({
-        type: RESET_NOTIFICATION_SUBSCRIBERS,
-      });
-    } catch (error) {
-      dispatch({
-        type: SET_NOTIFICATION_SUBSCRIBERS_FAILURE,
-        payload: error,
-      });
+export const fetchNotificationsSubscribers =
+  (token: string) => async (dispatch: Dispatch<NotificationsSubscribersActions>) => {
+    if (subscription instanceof Initialized) {
+      subscription = subscribeToDocument<{ id: string | undefined }>(
+        `notificationsSubscribers/${token}`,
+        () => dispatch({ type: FETCH_NOTIFICATIONS_SUBSCRIBERS }),
+        (payload) =>
+          dispatch({ type: FETCH_NOTIFICATIONS_SUBSCRIBERS_SUCCESS, payload: payload?.id || '' }),
+        (payload: Error) => dispatch({ type: FETCH_NOTIFICATIONS_SUBSCRIBERS_FAILURE, payload })
+      );
     }
   };

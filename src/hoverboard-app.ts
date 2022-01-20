@@ -15,7 +15,6 @@ import '@polymer/paper-menu-button';
 import '@polymer/paper-tabs';
 import { html, PolymerElement } from '@polymer/polymer';
 import {
-  setFastDomIf,
   setLegacyWarnings,
   setPassiveTouchGestures,
   setRemoveNestedTemplates,
@@ -49,7 +48,6 @@ import { setViewportSize } from './store/ui/actions';
 import { initialUiState } from './store/ui/state';
 import { isLocalhost } from './utils/environment';
 
-setFastDomIf(true);
 setPassiveTouchGestures(true);
 setRemoveNestedTemplates(true);
 setSuppressTemplateNotifications(true);

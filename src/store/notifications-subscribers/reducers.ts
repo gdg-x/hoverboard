@@ -1,28 +1,28 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { initialNotificationsSubscribersState, NotificationsSubscribersState } from './state';
 import {
-  SET_NOTIFICATION_SUBSCRIBERS,
-  SET_NOTIFICATION_SUBSCRIBERS_FAILURE,
-  SET_NOTIFICATION_SUBSCRIBERS_SUCCESS,
-  NotificationSubscribersActions,
-  RESET_NOTIFICATION_SUBSCRIBERS,
+  FETCH_NOTIFICATIONS_SUBSCRIBERS,
+  FETCH_NOTIFICATIONS_SUBSCRIBERS_FAILURE,
+  FETCH_NOTIFICATIONS_SUBSCRIBERS_SUCCESS,
+  NotificationsSubscribersActions,
+  RESET_NOTIFICATIONS_SUBSCRIBERS,
 } from './types';
 
 export const notificationsSubscribersReducer = (
   state = initialNotificationsSubscribersState,
-  action: NotificationSubscribersActions
+  action: NotificationsSubscribersActions
 ): NotificationsSubscribersState => {
   switch (action.type) {
-    case SET_NOTIFICATION_SUBSCRIBERS:
+    case FETCH_NOTIFICATIONS_SUBSCRIBERS:
       return new Pending();
 
-    case RESET_NOTIFICATION_SUBSCRIBERS:
+    case RESET_NOTIFICATIONS_SUBSCRIBERS:
       return new Initialized();
 
-    case SET_NOTIFICATION_SUBSCRIBERS_FAILURE:
+    case FETCH_NOTIFICATIONS_SUBSCRIBERS_FAILURE:
       return new Failure(action.payload);
 
-    case SET_NOTIFICATION_SUBSCRIBERS_SUCCESS:
+    case FETCH_NOTIFICATIONS_SUBSCRIBERS_SUCCESS:
       return new Success(action.payload);
 
     default:

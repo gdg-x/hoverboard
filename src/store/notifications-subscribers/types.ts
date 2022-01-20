@@ -1,28 +1,28 @@
-export const RESET_NOTIFICATION_SUBSCRIBERS = 'RESET_NOTIFICATION_SUBSCRIBERS';
-export const SET_NOTIFICATION_SUBSCRIBERS = 'SET_NOTIFICATION_SUBSCRIBERS';
-export const SET_NOTIFICATION_SUBSCRIBERS_FAILURE = 'SET_NOTIFICATION_SUBSCRIBERS_FAILURE';
-export const SET_NOTIFICATION_SUBSCRIBERS_SUCCESS = 'SET_NOTIFICATION_SUBSCRIBERS_SUCCESS';
+export const RESET_NOTIFICATIONS_SUBSCRIBERS = 'RESET_NOTIFICATIONS_SUBSCRIBERS';
+export const FETCH_NOTIFICATIONS_SUBSCRIBERS = 'FETCH_NOTIFICATIONS_SUBSCRIBERS';
+export const FETCH_NOTIFICATIONS_SUBSCRIBERS_FAILURE = 'FETCH_NOTIFICATIONS_SUBSCRIBERS_FAILURE';
+export const FETCH_NOTIFICATIONS_SUBSCRIBERS_SUCCESS = 'FETCH_NOTIFICATIONS_SUBSCRIBERS_SUCCESS';
 
-interface SetNotificationSubscribersAction {
-  type: typeof SET_NOTIFICATION_SUBSCRIBERS;
+interface FetchNotificationSubscribersAction {
+  type: typeof FETCH_NOTIFICATIONS_SUBSCRIBERS;
 }
 
 interface ResetNotificationSubscribersAction {
-  type: typeof RESET_NOTIFICATION_SUBSCRIBERS;
+  type: typeof RESET_NOTIFICATIONS_SUBSCRIBERS;
 }
 
-interface SetNotificationSubscribersFailureAction {
-  type: typeof SET_NOTIFICATION_SUBSCRIBERS_FAILURE;
+interface FetchNotificationSubscribersFailureAction {
+  type: typeof FETCH_NOTIFICATIONS_SUBSCRIBERS_FAILURE;
   payload: Error;
 }
 
-interface SetNotificationSubscribersSuccessAction {
-  type: typeof SET_NOTIFICATION_SUBSCRIBERS_SUCCESS;
-  payload: string;
+interface FetchNotificationSubscribersSuccessAction {
+  type: typeof FETCH_NOTIFICATIONS_SUBSCRIBERS_SUCCESS;
+  payload: string | undefined;
 }
 
-export type NotificationSubscribersActions =
-  | SetNotificationSubscribersAction
-  | SetNotificationSubscribersFailureAction
-  | SetNotificationSubscribersSuccessAction
+export type NotificationsSubscribersActions =
+  | FetchNotificationSubscribersAction
+  | FetchNotificationSubscribersFailureAction
+  | FetchNotificationSubscribersSuccessAction
   | ResetNotificationSubscribersAction;
