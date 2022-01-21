@@ -4,6 +4,8 @@ import { Toast } from '../../models/toast';
 
 let toastHideTimeOut: number;
 
+export const showSimpleToast = (message: string) => showToast({ message });
+
 export const showToast = (toast: Toast) => {
   const duration = toast.duration || 5000;
   store.dispatch({

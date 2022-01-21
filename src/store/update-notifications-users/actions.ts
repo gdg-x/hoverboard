@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 import { RootState } from '..';
 import { db } from '../../firebase';
 import { UserTokensData } from '../notifications-users/state';
+import { showSimpleToast } from '../toast/actions';
 import {
   UpdateNotificationsUsersActions,
   UPDATE_NOTIFICATION_USERS,
@@ -32,6 +33,8 @@ export const updateNotificationsUsers =
         type: UPDATE_NOTIFICATION_USERS_SUCCESS,
         payload: uid,
       });
+      // TODO: move to .json
+      showSimpleToast('My Schedule notifications enabled');
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_USERS_FAILURE,
@@ -58,6 +61,8 @@ export const removeNotificationsUsers =
         type: UPDATE_NOTIFICATION_USERS_SUCCESS,
         payload: uid,
       });
+      // TODO: move to .json
+      showSimpleToast('My Schedule notifications disabled');
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_USERS_FAILURE,
