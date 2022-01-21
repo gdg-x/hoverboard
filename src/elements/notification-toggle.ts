@@ -1,4 +1,4 @@
-import { Initialized } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import '@material/mwc-formfield';
 import '@material/mwc-switch';
 import { Switch } from '@material/mwc-switch';
@@ -15,11 +15,17 @@ import {
 } from '../store/notification-permission';
 import { selectNotificationsSubscribers } from '../store/notifications-subscribers/selectors';
 import { initialNotificationsSubscribersState } from '../store/notifications-subscribers/state';
+import { selectNotificationsUsersSubscribed } from '../store/notifications-users/selectors';
 import {
   clearNotificationsSubscribers,
   updateNotificationsSubscribers,
 } from '../store/update-notifications-subscribers/actions';
 import { initialUpdateNotificationsSubscribersState } from '../store/update-notifications-subscribers/state';
+import {
+  removeNotificationsUsers,
+  updateNotificationsUsers,
+} from '../store/update-notifications-users/actions';
+import { initialUserState } from '../store/user/state';
 import './shared-styles';
 
 @customElement('notification-toggle')
@@ -86,7 +92,7 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
               <mwc-formfield label="My Schedule notifications">
                 <mwc-switch
                   on-click="toggleMyScheduleNotifications"
-                  selected="[[notificationsUsers.data]]"
+                  selected="[[notificationsUsersSubscribed]]"
                 ></mwc-switch>
               </mwc-formfield>
             </auth-required>
@@ -132,8 +138,10 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
   updateNotificationsSubscribers = initialUpdateNotificationsSubscribersState;
   @property({ type: Object })
   notificationsSubscribers = initialNotificationsSubscribersState;
+  @property({ type: Boolean })
+  notificationsUsersSubscribed = false;
   @property({ type: Object })
-  notificationsUsers = new Initialized();
+  user = initialUserState;
 
   @property({ type: Boolean })
   private opened = false;
@@ -154,9 +162,10 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
   }
 
   override stateChanged(state: RootState) {
-    console.log('stateChanged', Math.random());
     this.notificationPermission = state.notificationPermission;
+    this.user = state.user;
     this.notificationsSubscribers = selectNotificationsSubscribers(state);
+    this.notificationsUsersSubscribed = selectNotificationsUsersSubscribed(state);
     this.updateNotificationsSubscribers = state.updateNotificationsSubscribers;
   }
 
@@ -209,6 +218,7 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
     if (this.notificationPermission.kind !== 'success' || disabled) {
       return;
     }
+
     if (selected) {
       store.dispatch(updateNotificationsSubscribers(this.notificationPermission.data));
     } else {
@@ -217,16 +227,20 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
   }
 
   private toggleMyScheduleNotifications(event: MouseEvent) {
-    const { selected, disabled } = event.target as Switch;
-    if (this.notificationPermission.kind !== 'success') {
+    const { selected } = event.target as Switch;
+    if (this.notificationPermission.kind !== 'success' || !(this.user instanceof Success)) {
       return;
     }
-    console.log('toggleMyScheduleNotifications', { selected, disabled });
-    // if (selected && this.notificationPermission.kind === 'success' || disabled) {
-    //   store.dispatch(updateNotificationsUsers(this.notificationPermission.data));
-    // } else {
-    //   store.dispatch(clearNotificationsUsers());
-    // }
+
+    if (selected) {
+      store.dispatch(
+        updateNotificationsUsers(this.user.data.uid, this.notificationPermission.data)
+      );
+    } else {
+      store.dispatch(
+        removeNotificationsUsers(this.user.data.uid, this.notificationPermission.data)
+      );
+    }
   }
 
   @computed('notificationPermission')

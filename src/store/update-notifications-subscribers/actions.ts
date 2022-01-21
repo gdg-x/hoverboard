@@ -9,7 +9,6 @@ import {
   UPDATE_NOTIFICATION_SUBSCRIBERS_SUCCESS,
 } from './types';
 
-// TODO: live update
 const setNotificationsSubscribersDoc = async (token: string): Promise<void> => {
   await setDoc(doc(db, 'notificationsSubscribers', token), {
     value: true,
