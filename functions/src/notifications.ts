@@ -3,7 +3,7 @@
 import { getFirestore } from 'firebase-admin/firestore';
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 // eslint-disable-next-line import/no-unresolved
-import { getMessaging } from 'firebase-admin/messaging';
+import { getMessaging, MessagingPayload } from 'firebase-admin/messaging';
 import * as functions from 'firebase-functions';
 
 const REMOVE_TOKEN_ERROR = [
@@ -43,12 +43,17 @@ export const sendGeneralNotification = functions.firestore
     }
     console.log(`There are ${tokens.length} tokens to send notifications to.`);
 
-    const payload = {
+    const payload: MessagingPayload = {
       data: {
-        ...message,
+        title: message.title,
+        body: message.body,
         icon: message.icon || notificationsConfig.icon,
       },
     };
+
+    if (message.path) {
+      payload.data = message.path;
+    }
 
     const tokensToRemove = [];
     const messagingResponse = await getMessaging().sendToDevice(tokens, payload);

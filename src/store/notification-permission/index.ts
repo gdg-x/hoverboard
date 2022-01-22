@@ -26,8 +26,11 @@ export const requestNotificationPermission = createAsyncThunk<string | undefined
         ? await Notification.requestPermission()
         : Notification.permission;
 
+    console.log('requestNotificationPermission.permission', permission);
     if (permission === 'granted') {
-      return getToken(messaging);
+      const token = await getToken(messaging);
+      console.log('requestNotificationPermission.token', token);
+      return token;
     } else if (permission === 'default') {
       return undefined;
     } else {
