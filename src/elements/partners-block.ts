@@ -69,7 +69,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
         <h1 class="container-title">{$ partnersBlock.title $}</h1>
 
         <template is="dom-if" if="[[pending]]">
-          <p>Loading...</p>
+          <p>{$ loading $}</p>
         </template>
         <template is="dom-if" if="[[failure]]">
           <p>Error loading partners.</p>

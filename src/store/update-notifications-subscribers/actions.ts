@@ -34,8 +34,7 @@ export const updateNotificationsSubscribers =
         type: UPDATE_NOTIFICATION_SUBSCRIBERS_SUCCESS,
         payload: token,
       });
-      // TODO: move to .json
-      showSimpleToast('General notifications enabled');
+      showSimpleToast('{$ notifications.generalEnabled $}');
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_SUBSCRIBERS_FAILURE,
@@ -56,8 +55,7 @@ export const clearNotificationsSubscribers =
       dispatch({
         type: RESET_UPDATE_NOTIFICATIONS_SUBSCRIBERS,
       });
-      // TODO: move to .json
-      showSimpleToast('General notifications disabled');
+      showSimpleToast('{$ notifications.generalDisabled $}');
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_SUBSCRIBERS_FAILURE,

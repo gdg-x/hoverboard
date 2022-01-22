@@ -33,8 +33,7 @@ export const updateNotificationsUsers =
         type: UPDATE_NOTIFICATION_USERS_SUCCESS,
         payload: uid,
       });
-      // TODO: move to .json
-      showSimpleToast('My Schedule notifications enabled');
+      showSimpleToast('{$ notifications.myScheduleEnabled $}');
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_USERS_FAILURE,
@@ -61,8 +60,7 @@ export const removeNotificationsUsers =
         type: UPDATE_NOTIFICATION_USERS_SUCCESS,
         payload: uid,
       });
-      // TODO: move to .json
-      showSimpleToast('My Schedule notifications disabled');
+      showSimpleToast('{$ notifications.myScheduleDisabled $}');
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_USERS_FAILURE,

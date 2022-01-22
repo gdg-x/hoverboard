@@ -76,11 +76,11 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
             </div>
           </template>
 
-          <template is="dom-if" if="[[pending]]">Loading...</template>
+          <template is="dom-if" if="[[pending]]">{$ loading $}</template>
 
           <template is="dom-if" if="[[success]]">
             <p>{$ notifications.enabled $}</p>
-            <mwc-formfield label="General notifications">
+            <mwc-formfield label="{$ notifications.generalLabel $}">
               <mwc-switch
                 on-click="toggleGeneralNotifications"
                 selected="[[notificationsSubscribers.data]]"
@@ -88,8 +88,8 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
             </mwc-formfield>
 
             <auth-required>
-              <p slot="prompt">Sign in to get personalized session notifications.</p>
-              <mwc-formfield label="My Schedule notifications">
+              <p slot="prompt">{$ notifications.signIn $}</p>
+              <mwc-formfield label="{$ notifications.myScheduleLabel $}">
                 <mwc-switch
                   on-click="toggleMyScheduleNotifications"
                   selected="[[notificationsUsersSubscribed]]"
