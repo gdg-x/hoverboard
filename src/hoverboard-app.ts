@@ -39,8 +39,6 @@ import { onUser } from './store/auth/actions';
 import { selectIsDialogOpen } from './store/dialogs/selectors';
 import { DialogState, initialDialogState } from './store/dialogs/state';
 import { DIALOG } from './store/dialogs/types';
-import { getToken } from './store/notifications/actions';
-import { initialNotificationState } from './store/notifications/state';
 import { fetchTickets } from './store/tickets/actions';
 import { initialTicketsState } from './store/tickets/state';
 import { showToast } from './store/toast/actions';
@@ -263,8 +261,6 @@ export class HoverboardApp extends PolymerElement {
   private dialogs = initialDialogState;
   @property({ type: Object })
   private viewport = initialUiState.viewport;
-  @property({ type: Object })
-  private notifications = initialNotificationState;
   @property({ type: Array })
   private providerUrls = '{$ signInProviders.allowedProvidersUrl $}'.split(',');
   @property({ type: Boolean })
@@ -285,7 +281,6 @@ export class HoverboardApp extends PolymerElement {
     this.isSigninDialogOpen = selectIsDialogOpen(state, DIALOG.SIGNIN);
     this.isFeedbackDialogOpen = selectIsDialogOpen(state, DIALOG.FEEDBACK);
     this.isSubscribeDialogOpen = selectIsDialogOpen(state, DIALOG.SUBSCRIBE);
-    this.notifications = state.notifications;
     this.tickets = state.tickets;
     this.ui = state.ui;
     this.viewport = state.ui.viewport;
@@ -324,7 +319,6 @@ export class HoverboardApp extends PolymerElement {
     this.removeAttribute('unresolved');
     startRouter(this.shadowRoot.querySelector('main'));
     onUser();
-    store.dispatch(getToken());
   }
 
   closeDrawer() {

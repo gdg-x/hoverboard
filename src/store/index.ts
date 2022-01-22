@@ -10,7 +10,6 @@ import { membersReducer } from './members/reducers';
 import notificationPermission from './notification-permission';
 import { notificationsSubscribersReducer } from './notifications-subscribers/reducers';
 import { notificationsUsersReducer } from './notifications-users/reducers';
-import { notificationsReducer } from './notifications/reducers';
 import { partnersReducer } from './partners/reducers';
 import { potentialPartnersReducer } from './potential-partners/reducers';
 import { previousSpeakersReducer } from './previous-speakers/reducers';
@@ -41,7 +40,6 @@ export const store = configureStore({
     gallery: galleryReducer,
     members: membersReducer,
     notificationPermission,
-    notifications: notificationsReducer,
     notificationsSubscribers: notificationsSubscribersReducer,
     notificationsUsers: notificationsUsersReducer,
     partners: partnersReducer,

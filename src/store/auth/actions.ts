@@ -15,7 +15,6 @@ import { FirebaseUser } from '../../models/user';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
 import { FeaturedSessionsActions, REMOVE_USER_FEATURED_SESSIONS } from '../featured-sessions/types';
 import { FeedbackActions, WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
-import { getToken } from '../notifications/actions';
 import { resetSubscribed } from '../subscribe/actions';
 import { removeUser, setUser } from '../user/actions';
 import {
@@ -80,7 +79,6 @@ export const onUser = () => {
   onAuthStateChanged(auth, (user: FirebaseUser | null) => {
     if (user) {
       setUser(user);
-      getToken(true);
     } else {
       unAuth();
       removeUser();
