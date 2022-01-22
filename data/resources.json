@@ -18,6 +18,8 @@
   "offlineMessage": "You can still work offline.",
   "cachingComplete": "Caching complete! Future visits will work offline.",
   "newVersionAvailable": "A new version of this app is available.",
+  "newVersionDownloading": "A update is being installed in the background.",
+  "serviceWorkerError": "Error caching for offline use.",
   "refresh": "Refresh",
   "position": "Position",
   "country": "Country",

@@ -3,15 +3,21 @@
 import type { GenerateSWOptions } from 'workbox-build';
 
 const ONE_WEEK = 60 * 60 * 24 * 7;
-const FIREBASE_RESERVED_URLS = /^(?!\/__).*/;
+// Firebase Reserved URLs https://firebase.google.com/docs/hosting/reserved-urls
+const FIREBASE_RESERVED_URLS = /^\/__\/.*/;
+const FIREBASE_COFIG_URL = '/__/firebase/init.json';
+const STATIC_EXPIRATION = {
+  maxAgeSeconds: ONE_WEEK,
+  maxEntries: 200,
+};
 
 export const workboxConfig: GenerateSWOptions = {
+  mode: 'debug', // TODO: Remove mode
   swDest: 'dist/service-worker.js',
   navigateFallback: '/index.html',
-  navigateFallbackDenylist: [
-    FIREBASE_RESERVED_URLS, // Private Firebase URLs
-  ],
+  navigateFallbackDenylist: [FIREBASE_RESERVED_URLS],
   skipWaiting: true,
+  clientsClaim: true,
   offlineGoogleAnalytics: true,
   globDirectory: 'dist',
   globPatterns: ['**/*.{html,js,css,json,svg,md}'],
@@ -21,10 +27,7 @@ export const workboxConfig: GenerateSWOptions = {
       handler: 'NetworkFirst',
       options: {
         cacheName: 'images-cache',
-        expiration: {
-          maxAgeSeconds: ONE_WEEK,
-          maxEntries: 200,
-        },
+        expiration: STATIC_EXPIRATION,
       },
     },
     {
@@ -32,13 +35,18 @@ export const workboxConfig: GenerateSWOptions = {
       handler: 'NetworkFirst',
       options: {
         cacheName: 'google-maps-cache',
+        expiration: STATIC_EXPIRATION,
       },
     },
     {
-      urlPattern: FIREBASE_RESERVED_URLS,
+      urlPattern: FIREBASE_COFIG_URL,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'firebase-cache',
+        expiration: {
+          maxAgeSeconds: ONE_WEEK,
+          maxEntries: 10,
+        },
       },
     },
     {
@@ -46,6 +54,7 @@ export const workboxConfig: GenerateSWOptions = {
       handler: 'NetworkFirst',
       options: {
         cacheName: 'firebase-storage-cache',
+        expiration: STATIC_EXPIRATION,
       },
     },
     {
@@ -56,6 +65,7 @@ export const workboxConfig: GenerateSWOptions = {
         cacheableResponse: {
           statuses: [0, 200],
         },
+        expiration: STATIC_EXPIRATION,
       },
     },
   ],

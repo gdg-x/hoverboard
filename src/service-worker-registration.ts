@@ -20,8 +20,18 @@ export const registerServiceWorker = () => {
         duration: 0,
       });
     },
+    updatefound() {
+      showToast({
+        message: '{$ newVersionDownloading $}',
+        duration: 0,
+      });
+    },
     error(e) {
       error('Service worker registration failed:', e);
+      showToast({
+        message: '{$ serviceWorkerError $}',
+        duration: 0,
+      });
     },
   });
 };
