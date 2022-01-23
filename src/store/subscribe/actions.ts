@@ -3,8 +3,8 @@ import { Dispatch } from 'redux';
 import { store } from '../';
 import { db } from '../../firebase';
 import { openDialog } from '../dialogs/actions';
-import { DialogForm, DIALOG } from '../dialogs/types';
-import { showToast } from '../toast/actions';
+import { DIALOG, DialogForm } from '../dialogs/types';
+import { showSimpleToast } from '../toast/actions';
 import {
   SUBSCRIBE,
   SubscribeActions,
@@ -36,7 +36,7 @@ export const subscribe = (data: DialogForm) => async (dispatch: Dispatch<Subscri
       type: SUBSCRIBE_SUCCESS,
       payload: await setSubscribe(data),
     });
-    showToast({ message: '{$ subscribeBlock.toast $}' });
+    showSimpleToast('{$ subscribeBlock.toast $}');
   } catch (error) {
     dispatch({
       type: SUBSCRIBE_FAILURE,

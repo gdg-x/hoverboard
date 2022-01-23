@@ -9,7 +9,7 @@ import { RootState, store } from '../store';
 import { addComment, checkPreviousFeedback, deleteFeedback } from '../store/feedback/actions';
 import { initialFeedbackState } from '../store/feedback/state';
 import { FeedbackData, FeedbackState } from '../store/feedback/types';
-import { showToast } from '../store/toast/actions';
+import { showSimpleToast, showToast } from '../store/toast/actions';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
 
@@ -253,7 +253,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
           },
         });
       } else {
-        showToast({ message: '{$ feedback.feedbackRecorded $}' });
+        showSimpleToast('{$ feedback.feedbackRecorded $}');
       }
     }
   }
@@ -272,7 +272,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
         });
       } else {
         this._clear();
-        showToast({ message: '{$ feedback.feedbackDeleted $}' });
+        showSimpleToast('{$ feedback.feedbackDeleted $}');
       }
     }
   }

@@ -41,7 +41,7 @@ import { DialogState, initialDialogState } from './store/dialogs/state';
 import { DIALOG } from './store/dialogs/types';
 import { fetchTickets } from './store/tickets/actions';
 import { initialTicketsState } from './store/tickets/state';
-import { showToast } from './store/toast/actions';
+import { showSimpleToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
 import { initialUiState } from './store/ui/state';
 import { isLocalhost } from './utils/environment';
@@ -300,9 +300,7 @@ export class HoverboardApp extends PolymerElement {
     window.addEventListener('element-sticked', this._toggleHeaderShadow);
     this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
     window.addEventListener('offline', () => {
-      showToast({
-        message: '{$ offlineMessage $}',
-      });
+      showSimpleToast('{$ offlineMessage $}');
     });
     store.dispatch(fetchTickets);
   }
