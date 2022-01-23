@@ -78,14 +78,7 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
           </template>
 
           <template is="dom-repeat" items="[[speakers]]" as="speaker">
-            <a
-              class="speaker"
-              href$="[[previousSpeakerUrl(speaker.id)]]"
-              ga-on="click"
-              ga-event-category="previous speaker"
-              ga-event-action="open details"
-              ga-event-label$="[[speaker.name]]"
-            >
+            <a class="speaker" href$="[[previousSpeakerUrl(speaker.id)]]">
               <plastic-image
                 class="photo"
                 srcset="[[speaker.photoUrl]]"

@@ -1,7 +1,6 @@
 {
   "basepath": "/",
   "url": "https://hoverboard-master.web.app/",
-  "analytics": "UA-43643469-9",
   "prefix": "/",
   "googleMapApiKey": "AIzaSyCJqlRVGIe6bfU43rga3cnK7tSXXwc7JD8"
 }

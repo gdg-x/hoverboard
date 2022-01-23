@@ -135,10 +135,6 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
                 href$="[[postUrl(post.id)]]"
                 class="featured-post"
                 flex$="[[viewport.isTabletPlus]]"
-                ga-on="click"
-                ga-event-category="blog"
-                ga-event-action="open post"
-                ga-event-label$="[[post.title]]"
                 relative
               >
                 <plastic-image

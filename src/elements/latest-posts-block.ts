@@ -87,17 +87,7 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
 
         <div class="posts-wrapper">
           <template is="dom-repeat" items="[[latestPosts]]" as="post">
-            <a
-              href$="[[postUrl(post.id)]]"
-              class="post card"
-              ga-on="click"
-              ga-event-category="blog"
-              ga-event-action="open post"
-              ga-event-label$="[[post.title]]"
-              flex
-              layout
-              vertical
-            >
+            <a href$="[[postUrl(post.id)]]" class="post card" flex layout vertical>
               <plastic-image
                 class="image"
                 srcset="[[post.image]]"

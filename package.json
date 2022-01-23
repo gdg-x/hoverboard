@@ -79,7 +79,6 @@
     "@stylelint/postcss-css-in-js": "^0.37.2",
     "@testing-library/dom": "^8.11.1",
     "@testing-library/jest-dom": "^5.16.1",
-    "@types/google.analytics": "0.0.42",
     "@types/jest": "^27.4.0",
     "@types/jest-dev-server": "^5.0.0",
     "@types/node": "^16.11.11",

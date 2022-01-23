@@ -103,8 +103,6 @@
     <script src="./src/hoverboard-app.ts" type="module"></script>
     <script src="./src/components/app-install.ts" type="module"></script>
     <script src="./src/service-worker-registration.ts" type="module"></script>
-    <script src="./src/performance.ts" type="module"></script>
-    <script src="./src/elements/hoverboard-analytics.ts" type="module"></script>
 
     <style>
       html,
@@ -145,12 +143,7 @@
 
   <body>
     <hoverboard-app unresolved>{$ title $}</hoverboard-app>
-    <hoverboard-analytics></hoverboard-analytics>
 
     <noscript>Please enable JavaScript to view this website.</noscript>
-
-    <script>
-      window.performance.mark('index.html');
-    </script>
   </body>
 </html>

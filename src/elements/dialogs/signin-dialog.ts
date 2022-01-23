@@ -58,10 +58,6 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
             class="sign-in-button"
             on-click="_signIn"
             provider-url="{$ provider.url $}"
-            ga-on="click"
-            ga-event-category="attendees"
-            ga-event-action="sign-in"
-            ga-event-label="signIn dialog - {$ provider.name $}"
             flex
           >
             <iron-icon
@@ -83,15 +79,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
           </div>
 
           <div class="action-button" layout horizontal end-justified>
-            <paper-button
-              class="merge-button"
-              on-click="_mergeAccounts"
-              ga-on="click"
-              ga-event-category="attendees"
-              ga-event-action="merge account"
-              ga-event-label$="signIn merge account dialog -[[providerCompanyName]]"
-              primary
-            >
+            <paper-button class="merge-button" on-click="_mergeAccounts" primary>
               <span>{$ signInDialog.signInToContinue.part1 $} [[providerCompanyName]]</span>
             </paper-button>
           </div>
