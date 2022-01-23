@@ -1,14 +1,13 @@
 import { register } from 'register-service-worker';
 import { error } from './console';
-import { showToast } from './store/toast/actions';
+import { DURATION } from './models/toast';
+import { showForeverToast, showSimpleToast, showToast } from './store/toast/actions';
 
 const registerServiceWorker = () => {
   register('service-worker.js', {
     registrationOptions: { scope: '{$ basepath $}' },
     cached() {
-      showToast({
-        message: '{$ serviceWorkerInstalled $}',
-      });
+      showSimpleToast('{$ serviceWorkerInstalled $}');
     },
     updated() {
       showToast({
@@ -17,21 +16,15 @@ const registerServiceWorker = () => {
           title: '{$ refresh $}',
           callback: () => window.location.reload(),
         },
-        duration: 0,
+        duration: DURATION.FOREVER,
       });
     },
     updatefound() {
-      showToast({
-        message: '{$ serviceWorkerInstalling $}',
-        duration: 0,
-      });
+      showForeverToast('{$ serviceWorkerInstalling $}');
     },
     error(e) {
       error('Service worker registration failed:', e);
-      showToast({
-        message: '{$ serviceWorkerError $}',
-        duration: 0,
-      });
+      showForeverToast('{$ serviceWorkerError $}');
     },
   });
 };

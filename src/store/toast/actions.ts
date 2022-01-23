@@ -1,13 +1,16 @@
 import { HIDE_TOAST, SHOW_TOAST } from './types';
 import { store } from '../';
-import { Toast } from '../../models/toast';
+import { DURATION, Toast } from '../../models/toast';
 
 let toastHideTimeOut: number;
 
-export const showSimpleToast = (message: string) => showToast({ message });
+export const showSimpleToast = (message: string) =>
+  showToast({ message, duration: DURATION.DEFAULT });
+export const showForeverToast = (message: string) =>
+  showToast({ message, duration: DURATION.FOREVER });
 
 export const showToast = (toast: Toast) => {
-  const duration = toast.duration || 5000;
+  const duration = toast.duration ?? DURATION.DEFAULT;
   store.dispatch({
     type: SHOW_TOAST,
     payload: {
@@ -17,7 +20,7 @@ export const showToast = (toast: Toast) => {
     },
   });
 
-  if (duration === 0) return;
+  if (duration === DURATION.FOREVER) return;
 
   window.clearTimeout(toastHideTimeOut);
   toastHideTimeOut = window.setTimeout(() => hideToast(), duration);
