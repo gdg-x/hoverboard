@@ -1,4 +1,5 @@
 import { PolymerElement } from '@polymer/polymer';
+import { logPageView } from '../analytics';
 import { setFilters } from '../store/filters/actions';
 import { TempAny } from '../temp-any';
 import { parseFilters } from './filters';
@@ -50,4 +51,5 @@ export const setQueryString = (search: string): void => {
 
   window.history.pushState({}, '', [url, search].filter(Boolean).join('?'));
   setFilters(parseFilters());
+  logPageView();
 };

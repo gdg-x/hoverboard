@@ -1,4 +1,5 @@
 import { Route, Router } from '@vaadin/router';
+import { logPageView } from './analytics.js';
 
 export let router: Router;
 
@@ -6,6 +7,7 @@ window.addEventListener('vaadin-router-location-changed', (event) => {
   // url ends in a slash and pathname starts with a slash
   const canonicalLink = `{$ url $}${event.detail.location.pathname.slice(1)}`;
   document.querySelector('link[rel="canonical"]').setAttribute('href', canonicalLink);
+  logPageView();
 });
 
 export const selectRouteName = (pathname: string) => {

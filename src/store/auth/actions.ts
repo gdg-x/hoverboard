@@ -10,6 +10,7 @@ import {
   signOut as firebaseSignOut,
 } from 'firebase/auth';
 import { store } from '..';
+import { logLogin } from '../../analytics';
 import { firebaseApp } from '../../firebase';
 import { FirebaseUser } from '../../models/user';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
@@ -79,6 +80,7 @@ export const onUser = () => {
   onAuthStateChanged(auth, (user: FirebaseUser | null) => {
     if (user) {
       setUser(user);
+      logLogin()
     } else {
       unAuth();
       removeUser();
