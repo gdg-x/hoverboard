@@ -28,7 +28,7 @@ messaging.setBackgroundMessageHandler((payload: MessagePayload) => {
     data,
   };
 
-  return self.registration.showNotification(`[bg2] ${data.title}`, notificationOptions);
+  return self.registration.showNotification(data.title, notificationOptions);
 });
 
 // This seems to get called when site is open
@@ -40,7 +40,7 @@ onBackgroundMessage(messaging, (payload: MessagePayload) => {
     data,
   };
 
-  self.registration.showNotification(`[bg1] ${data.title}`, notificationOptions);
+  self.registration.showNotification(data.title, notificationOptions);
 });
 
 self.addEventListener('notificationclick', (event) => {
