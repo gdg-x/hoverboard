@@ -16,7 +16,6 @@ interface SimpleSuccess<Data> {
   data: Data;
 }
 
-// TODO: Move to separate file
 export type SimpleRemoteData<Data> =
   | SimpleInitialized
   | SimplePending
