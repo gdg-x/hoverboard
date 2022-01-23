@@ -7,7 +7,9 @@ import { feedbackReducer } from './feedback/reducers';
 import { filtersReducer } from './filters/reducers';
 import { galleryReducer } from './gallery/reducers';
 import { membersReducer } from './members/reducers';
-import { notificationsReducer } from './notifications/reducers';
+import notificationPermission from './notification-permission';
+import { notificationsSubscribersReducer } from './notifications-subscribers/reducers';
+import { notificationsUsersReducer } from './notifications-users/reducers';
 import { partnersReducer } from './partners/reducers';
 import { potentialPartnersReducer } from './potential-partners/reducers';
 import { previousSpeakersReducer } from './previous-speakers/reducers';
@@ -19,6 +21,8 @@ import { teamsReducer } from './teams/reducers';
 import { ticketsReducer } from './tickets/reducers';
 import { toastReducer } from './toast/reducers';
 import { uiReducer } from './ui/reducers';
+import { updateNotificationsSubscribersReducer } from './update-notifications-subscribers/reducers';
+import { updateNotificationsUsersReducer } from './update-notifications-users/reducers';
 import { userReducer } from './user/reducers';
 import { videosReducer } from './videos/reducers';
 
@@ -36,7 +40,9 @@ export const store = configureStore({
     filters: filtersReducer,
     gallery: galleryReducer,
     members: membersReducer,
-    notifications: notificationsReducer,
+    notificationPermission,
+    notificationsSubscribers: notificationsSubscribersReducer,
+    notificationsUsers: notificationsUsersReducer,
     partners: partnersReducer,
     potentialPartners: potentialPartnersReducer,
     previousSpeakers: previousSpeakersReducer,
@@ -48,6 +54,8 @@ export const store = configureStore({
     tickets: ticketsReducer,
     toast: toastReducer,
     ui: uiReducer,
+    updateNotificationsSubscribers: updateNotificationsSubscribersReducer,
+    updateNotificationsUsers: updateNotificationsUsersReducer,
     user: userReducer,
     videos: videosReducer,
   },

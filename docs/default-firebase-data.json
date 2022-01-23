@@ -54,7 +54,7 @@
   ],
   "config": {
     "notifications": {
-      "icon": "",
+      "icon": "/images/manifest/icon-192.png",
       "timezone": "+03:00"
     },
     "rendertron": {

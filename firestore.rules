@@ -38,11 +38,12 @@ service cloud.firestore {
     }
 
     match /notificationsSubscribers/{token} {
-      allow list, delete: if false;
+      allow list: if false;
 
       // Applies to document create requests
       allow create;
       allow update;
+      allow delete;
       allow get;
     }
 

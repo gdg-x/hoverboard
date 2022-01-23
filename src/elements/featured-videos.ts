@@ -145,7 +145,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
           <div id="videoList" class="video-list" layout flex horizontal>
             <div id="videos" class="videos" layout horizontal>
               <template is="dom-if" if="[[pending]]">
-                <p>Loading...</p>
+                <p>{$ loading $}</p>
               </template>
 
               <template is="dom-if" if="[[failure]]">

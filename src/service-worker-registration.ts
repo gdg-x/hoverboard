@@ -2,17 +2,17 @@ import { register } from 'register-service-worker';
 import { error } from './console';
 import { showToast } from './store/toast/actions';
 
-export const registerServiceWorker = () => {
+const registerServiceWorker = () => {
   register('service-worker.js', {
     registrationOptions: { scope: '{$ basepath $}' },
     cached() {
       showToast({
-        message: '{$ cachingComplete $}',
+        message: '{$ serviceWorkerInstalled $}',
       });
     },
     updated() {
       showToast({
-        message: '{$ newVersionAvailable $}',
+        message: '{$ serviceWorkerAvailable $}',
         action: {
           title: '{$ refresh $}',
           callback: () => window.location.reload(),
@@ -22,7 +22,7 @@ export const registerServiceWorker = () => {
     },
     updatefound() {
       showToast({
-        message: '{$ newVersionDownloading $}',
+        message: '{$ serviceWorkerInstalling $}',
         duration: 0,
       });
     },

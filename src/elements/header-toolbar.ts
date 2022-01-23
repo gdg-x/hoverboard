@@ -1,22 +1,19 @@
 import { Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
-import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ELEMENT, setElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { Hero } from '../models/hero';
 import { selectRouteName } from '../router';
-import { RootState, store } from '../store';
+import { RootState } from '../store';
 import { signOut } from '../store/auth/actions';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { selectIsDialogOpen } from '../store/dialogs/selectors';
 import { DIALOG } from '../store/dialogs/types';
-import { requestPermission, unsubscribe } from '../store/notifications/actions';
-import { initialNotificationState } from '../store/notifications/state';
-import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
+import './notification-toggle';
 import './shared-styles';
 
 @customElement('header-toolbar')
@@ -190,46 +187,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           </a>
         </paper-tabs>
 
-        <paper-menu-button
-          id="notificationsMenu"
-          class="notifications-menu"
-          vertical-align="top"
-          horizontal-align="right"
-          no-animations
-        >
-          <paper-icon-button
-            icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
-            slot="dropdown-trigger"
-          ></paper-icon-button>
-          <div class="dropdown-panel" slot="dropdown-content">
-            <div hidden$="[[_hideNotificationBlock(notifications.status, 'DEFAULT')]]">
-              <p>{$ notifications.default $}</p>
-              <div class="panel-actions" layout horizontal end-justified>
-                <paper-button primary-text on-click="_toggleNotifications"
-                  >{$ notifications.subscribe $}</paper-button
-                >
-              </div>
-            </div>
-            <div hidden$="[[_hideNotificationBlock(notifications.status, 'GRANTED')]]">
-              <p>{$ notifications.enabled $}</p>
-              <div class="panel-actions" layout horizontal end-justified>
-                <paper-button primary-text on-click="_toggleNotifications"
-                  >{$ notifications.unsubscribe $}</paper-button
-                >
-              </div>
-            </div>
-            <div hidden$="[[_hideNotificationBlock(notifications.status, 'DENIED')]]">
-              <p>{$ notifications.blocked $}</p>
-              <div class="panel-actions" layout horizontal end-justified>
-                <a href="{$ notifications.enable.link $}" target="_blank" rel="noopener noreferrer">
-                  <paper-button primary-text on-click="_closeNotificationMenu"
-                    >{$ notifications.enable.label $}
-                  </paper-button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </paper-menu-button>
+        <notification-toggle></notification-toggle>
 
         <paper-menu-button
           class="auth-menu"
@@ -279,8 +237,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   private viewport = initialUiState.viewport;
   @property({ type: Object })
   private heroSettings = initialUiState.heroSettings;
-  @property({ type: Object })
-  private notifications = initialNotificationState;
   @property({ type: Boolean })
   private signedIn = false;
   @property({ type: Object })
@@ -293,7 +249,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   private isDialogOpen = false;
 
   override stateChanged(state: RootState) {
-    this.notifications = state.notifications;
     this.user = state.user;
     this.signedIn = state.user instanceof Success;
     this.tickets = state.tickets;
@@ -337,32 +292,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     if (this.isDialogOpen) {
       closeDialog();
     }
-  }
-
-  _toggleNotifications() {
-    this._closeNotificationMenu();
-    if (this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
-      store.dispatch(unsubscribe);
-      return;
-    }
-    store.dispatch(requestPermission);
-  }
-
-  _getNotificationsIcon(status: NOTIFICATIONS_STATUS) {
-    return status === NOTIFICATIONS_STATUS.DEFAULT
-      ? 'bell-outline'
-      : status === NOTIFICATIONS_STATUS.GRANTED
-      ? 'bell'
-      : 'bell-off';
-  }
-
-  _hideNotificationBlock(status: NOTIFICATIONS_STATUS, blockStatus: NOTIFICATIONS_STATUS) {
-    return status !== NOTIFICATIONS_STATUS[blockStatus];
-  }
-
-  _closeNotificationMenu() {
-    // TODO: Remove type cast
-    (this.$.notificationsMenu as PaperMenuButton).close();
   }
 
   _isAccountIconHidden(signedIn: boolean, isTabletPlus: boolean) {

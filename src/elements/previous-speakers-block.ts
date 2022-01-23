@@ -70,7 +70,7 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
 
         <div class="speakers-wrapper">
           <template is="dom-if" if="[[pending]]">
-            <p>Loading...</p>
+            <p>{$ loading $}</p>
           </template>
 
           <template is="dom-if" if="[[failure]]">

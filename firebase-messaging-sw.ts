@@ -1,36 +1,49 @@
-// / <reference lib="WebWorker" />
+/* eslint spaced-comment: ["error", "always", { "markers": ["/"] }] */
+/* eslint-env serviceworker */
 
-// @ts-ignore
-// eslint-disable-next-line no-undef
-declare let self: ServiceWorkerGlobalScope;
+/// <reference no-default-lib="true"/>
+/// <reference lib="ESnext" />
+/// <reference lib="webworker" />
 
-import { initializeApp } from 'firebase/app';
-import { getMessaging, MessagePayload, onMessage } from 'firebase/messaging';
+// Default type of `self` is `WorkerGlobalScope & typeof globalThis`
+// https://github.com/microsoft/TypeScript/issues/14877
+declare const self: ServiceWorkerGlobalScope;
 
-const buildNotification = (payload: MessagePayload) => {
+// TODO: Migrate to v9 with imports
+importScripts('/__/firebase/8.10.0/firebase-app.js');
+importScripts('/__/firebase/8.10.0/firebase-messaging.js');
+// This is currently the only method of loading
+importScripts('/__/firebase/init.js');
+
+import { MessagePayload, onBackgroundMessage } from 'firebase/messaging/sw';
+
+const messaging = (self as any).firebase.messaging();
+
+// This seems to get called when site is closed
+messaging.setBackgroundMessageHandler((payload: MessagePayload) => {
   const { data } = payload;
-  return {
-    title: 'Notification',
-    ...data,
-    data: {
-      click_action: data.click_action,
-    },
+  const notificationOptions = {
+    body: data.body,
+    icon: data.icon,
+    data,
   };
-};
 
-fetch('/__/firebase/init.json').then(async (response) => {
-  const app = initializeApp(await response.json());
-  const messaging = getMessaging(app);
+  return self.registration.showNotification(`[bg2] ${data.title}`, notificationOptions);
+});
 
-  onMessage(messaging, (payload) => {
-    console.log('firebase-messaging-sw.onMessage', { payload });
-    const notification = buildNotification(payload);
-    return self.registration.showNotification(notification.title, notification);
-  });
+// This seems to get called when site is open
+onBackgroundMessage(messaging, (payload: MessagePayload) => {
+  const { data } = payload;
+  const notificationOptions = {
+    body: data.body,
+    icon: data.icon,
+    data,
+  };
+
+  self.registration.showNotification(`[bg1] ${data.title}`, notificationOptions);
 });
 
 self.addEventListener('notificationclick', (event) => {
-  const isPath = event.notification?.data?.click_action?.startsWith('/');
-  const url = `${isPath ? self.origin : ''}${event.notification.data.click_action}`;
-  event.waitUntil(self.clients.openWindow(url));
+  event.notification.close();
+  event.waitUntil(self.clients.openWindow(event.notification.data.path));
 });

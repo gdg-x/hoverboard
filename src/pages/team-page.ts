@@ -138,7 +138,7 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
 
       <div class="container">
         <template is="dom-if" if="[[pending]]">
-          <p>Loading...</p>
+          <p>{$ loading $}</p>
         </template>
 
         <template is="dom-if" if="[[failure]]">

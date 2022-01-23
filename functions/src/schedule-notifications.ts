@@ -3,7 +3,7 @@
 import { DocumentData, DocumentSnapshot, getFirestore } from 'firebase-admin/firestore';
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 // eslint-disable-next-line import/no-unresolved
-import { getMessaging } from 'firebase-admin/messaging';
+import { getMessaging, MessagingPayload } from 'firebase-admin/messaging';
 import * as functions from 'firebase-functions';
 import moment from 'moment';
 
@@ -41,7 +41,7 @@ const removeUserTokens = (tokensToUsers) => {
   return Promise.all(promises);
 };
 
-const sendPushNotificationToUsers = async (userIds, payload) => {
+const sendPushNotificationToUsers = async (userIds: string[], payload: MessagingPayload) => {
   console.log('sendPushNotificationToUsers user ids', userIds, 'with notification', payload);
 
   const tokensPromise = userIds.map((id) => {
@@ -145,14 +145,16 @@ export const scheduleNotifications = functions.pubsub
         const fromNow = end.fromNow();
 
         if (userIdsFeaturedSession.length) {
-          return sendPushNotificationToUsers(userIdsFeaturedSession, {
+          const payload: MessagingPayload = {
             data: {
               title: session.title,
               body: `Starts ${fromNow}`,
-              click_action: `/schedule/${todayDay}?sessionId=${upcomingSessions[sessionIndex]}`,
               icon: notificationsConfig.icon,
+              path: `/sessions/${upcomingSessions[sessionIndex]}`,
             },
-          });
+          };
+
+          return sendPushNotificationToUsers(userIdsFeaturedSession, payload);
         }
 
         if (upcomingSessions.length) {

@@ -16,9 +16,9 @@
   "signOut": "Sign out",
   "viewHighlights": "View Highlights",
   "offlineMessage": "You can still work offline.",
-  "cachingComplete": "Caching complete! Future visits will work offline.",
-  "newVersionAvailable": "A new version of this app is available.",
-  "newVersionDownloading": "A update is being installed in the background.",
+  "serviceWorkerInstalled": "App is now installed and available offline.",
+  "serviceWorkerAvailable": "A new version of this app is available.",
+  "serviceWorkerInstalling": "App being installed for offline use.",
   "serviceWorkerError": "Error caching for offline use.",
   "refresh": "Refresh",
   "position": "Position",
@@ -27,6 +27,7 @@
   "faq": "/data/faq.md",
   "coc": "/data/coc.md",
   "timezoneOffset": "-180",
+  "loading": "Loading...",
   "footer": {
     "blog": "Blog"
   },
@@ -274,13 +275,29 @@
   },
   "notifications": {
     "default": "Enable notifications",
-    "enabled": "We will miss you but you can unsubscribe anytime",
-    "blocked": "We can't send you notifications right now. Please enable notifications in your browser",
+    "generalLabel": "General notifications",
+    "myScheduleLabel": "My Schedule notifications",
+    "enabled": "Get notified of general announcements and sessions starting",
+    "signIn": "Sign in to get personalized session notifications",
+    "enable": "Enable",
     "subscribe": "Subscribe",
     "unsubscribe": "Unsubscribe",
-    "enable": {
+    "myScheduleEnabled": "My Schedule notifications enabled",
+    "myScheduleDisabled": "My Schedule notifications disabled",
+    "generalEnabled": "General notifications enabled",
+    "generalDisabled": "General notifications disabled",
+    "blocked": {
+      "text": "Please enable notifications in your browser",
       "label": "Enable",
       "link": "https://support.google.com/chrome/answer/3220216"
+    },
+    "unsupported": {
+      "text": "Notifications are not supported on this device",
+      "label": "Details",
+      "link": "https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#browser_compatibility"
+    },
+    "unknown": {
+      "text": "Unknown error occurred"
     },
     "toast": {
       "title": "Open"
