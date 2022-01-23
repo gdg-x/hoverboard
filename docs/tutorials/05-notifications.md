@@ -23,7 +23,7 @@ To send a "General notification":
 1. Got to the [project's Firestore page](https://console.firebase.google.com/u/0/project/_/firestore/data/)
 1. "Start collection" with the ID `notifications`
 1. On the document creation page enter the following three fields
-  - `title`: `Announcing GDG DevFest Ukraine 2017`
-  - `body`: `It is official. GDG DevFest Ukraine 2017 is going to take place in Lviv, on October 13-14.`
-  - `path`: `/blog/dfua17-announced`
+   - `title`: `Announcing GDG DevFest Ukraine 2017`
+   - `body`: `It is official. GDG DevFest Ukraine 2017 is going to take place in Lviv, on October 13-14.`
+   - `path`: `/blog/dfua17-announced`
 1. Save

@@ -21,8 +21,6 @@ const messaging = (self as any).firebase.messaging();
 
 // This seems to get called when site is closed
 messaging.setBackgroundMessageHandler((payload: MessagePayload) => {
-  console.log('firebase-messaging-sw.onBackgroundMessage', { payload });
-
   const { data } = payload;
   const notificationOptions = {
     body: data.body,
@@ -35,8 +33,6 @@ messaging.setBackgroundMessageHandler((payload: MessagePayload) => {
 
 // This seems to get called when site is open
 onBackgroundMessage(messaging, (payload: MessagePayload) => {
-  console.log('firebase-messaging-sw.onBackgroundMessage', { payload });
-
   const { data } = payload;
   const notificationOptions = {
     body: data.body,
@@ -48,7 +44,6 @@ onBackgroundMessage(messaging, (payload: MessagePayload) => {
 });
 
 self.addEventListener('notificationclick', (event) => {
-  console.log('firebase-messaging-sw.notificationclick', { event });
   event.notification.close();
   event.waitUntil(self.clients.openWindow(event.notification.data.path));
 });
