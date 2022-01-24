@@ -1,7 +1,7 @@
 import { PolymerElement } from '@polymer/polymer';
-import { logPageView } from '../analytics';
 import { setFilters } from '../store/filters/actions';
 import { TempAny } from '../temp-any';
+import { logPageView } from './analytics';
 import { parseFilters } from './filters';
 
 export const getDate = (date: string | Date) => {

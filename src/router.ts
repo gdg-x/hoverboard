@@ -1,5 +1,5 @@
 import { Route, Router } from '@vaadin/router';
-import { logPageView } from './analytics.js';
+import { logPageView } from './utils/analytics.js';
 
 export let router: Router;
 
