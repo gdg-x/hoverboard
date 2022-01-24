@@ -162,10 +162,6 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
               sold-out$="[[ticket.soldOut]]"
               in-demand$="[[ticket.inDemand]]"
               on-click="_onTicketTap"
-              ga-on="click"
-              ga-event-category="ticket"
-              ga-event-action="buy_click"
-              ga-event-label$="[[ticket.name]]"
               layout
               vertical
             >

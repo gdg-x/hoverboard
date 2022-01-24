@@ -149,11 +149,7 @@ export class FooterSocial extends PolymerElement {
             class="share-facebook"
             icon="hoverboard:facebook"
             share="facebook"
-            on-click="share"
-            ga-on="click"
-            ga-event-category="social"
-            ga-event-action="share"
-            ga-event-label="facebook">
+            on-click="share">
           </paper-icon-button>
         </div>
         <div class="share">
@@ -161,11 +157,7 @@ export class FooterSocial extends PolymerElement {
             class="share-twitter"
             icon="hoverboard:twitter"
             share="twitter"
-            on-click="share"
-            ga-on="click"
-            ga-event-category="social"
-            ga-event-action="share"
-            ga-event-label="twitter">
+            on-click="share">
           </paper-icon-button>
         </div>
       </div>
@@ -190,11 +182,7 @@ export class FooterSocial extends PolymerElement {
             <a
               href="{$ socFollow.url $}"
               target="_blank"
-              rel="noopener noreferrer"
-              ga-on="click"
-              ga-event-category="social"
-              ga-event-action="follow"
-              ga-event-label="{$ socFollow.name $}">
+              rel="noopener noreferrer">
               <paper-icon-button icon="hoverboard:{$ socFollow.name $}"></paper-icon-button>
             </a>
           </li>

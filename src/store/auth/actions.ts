@@ -12,6 +12,7 @@ import {
 import { store } from '..';
 import { firebaseApp } from '../../firebase';
 import { FirebaseUser } from '../../models/user';
+import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
 import { FeaturedSessionsActions, REMOVE_USER_FEATURED_SESSIONS } from '../featured-sessions/types';
 import { FeedbackActions, WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
@@ -79,6 +80,7 @@ export const onUser = () => {
   onAuthStateChanged(auth, (user: FirebaseUser | null) => {
     if (user) {
       setUser(user);
+      logLogin();
     } else {
       unAuth();
       removeUser();

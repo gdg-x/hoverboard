@@ -6,6 +6,7 @@ import fs from 'fs';
 const { BUILD_ENV, NODE_ENV } = process.env;
 export const production = NODE_ENV === 'production';
 const buildTarget = BUILD_ENV ? BUILD_ENV : production ? 'production' : 'development';
+const webVitalsPolyfill = fs.readFileSync('./node_modules/web-vitals/dist/polyfill.js');
 
 const getConfigPath = () => {
   const path = `./config/${buildTarget}.json`;
@@ -30,7 +31,7 @@ const getData = () => {
     };
   };
 
-  return settingsFiles.reduce(combineSettings, { NODE_ENV });
+  return settingsFiles.reduce(combineSettings, { NODE_ENV, webVitalsPolyfill });
 };
 
 const data = getData();

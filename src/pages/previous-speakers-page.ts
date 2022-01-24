@@ -150,16 +150,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
       ></content-loader>
       <div class="container">
         <template is="dom-repeat" items="[[previousSpeakers.data]]" as="speaker">
-          <a
-            class="speaker"
-            href$="[[previousSpeakerUrl(speaker.id)]]"
-            ga-on="click"
-            ga-event-category="previous speaker"
-            ga-event-action="open details"
-            ga-event-label$="[[speaker.name]]"
-            layout
-            horizontal
-          >
+          <a class="speaker" href$="[[previousSpeakerUrl(speaker.id)]]" layout horizontal>
             <plastic-image
               class="photo"
               srcset="[[speaker.photoUrl]]"

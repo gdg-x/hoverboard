@@ -82,25 +82,13 @@ export class Feedback extends ReduxMixin(PolymerElement) {
           maxlength="256"
         ></paper-textarea>
         <p hidden$="[[!rating]]" class="helper">{$ feedback.helperText $}</p>
-        <paper-button
-          primary
-          hidden$="[[!rating]]"
-          on-click="_sendFeedback"
-          ga-on="click"
-          ga-event-category="feedback"
-          ga-event-action="send feedback"
-          ga-event-label$="submit the [[rating]] stars feedback"
-        >
+        <paper-button primary hidden$="[[!rating]]" on-click="_sendFeedback">
           {$ feedback.save $}
         </paper-button>
         <paper-button
           class="delete-button"
           hidden$="[[!showDeleteButton]]"
           on-click="_dispatchDeleteFeedback"
-          ga-on="click"
-          ga-event-category="feedback"
-          ga-event-action="delete feedback"
-          ga-event-label$="delete the feedback record"
         >
           {$ feedback.deleteFeedback $}
         </paper-button>

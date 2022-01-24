@@ -62,10 +62,6 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
             class="animated icon-right"
             disabled$="[[subscribed.data]]"
             on-click="_subscribe"
-            ga-on="click"
-            ga-event-category="attendees"
-            ga-event-action="subscribe"
-            ga-event-label="subscribe block"
           >
             <span class="cta-label">[[ctaLabel]]</span>
             <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>

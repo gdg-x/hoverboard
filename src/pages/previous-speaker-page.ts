@@ -231,10 +231,6 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
                     hidden$="[[!session.videoId]]"
                     target="_blank"
                     rel="noopener noreferrer"
-                    ga-on="click"
-                    ga-event-category="previous speaker"
-                    ga-event-action="open video"
-                    ga-event-label$="[[session.title]]"
                     layout
                     horizontal
                     center
@@ -248,10 +244,6 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
                     hidden$="[[!session.presentation]]"
                     target="_blank"
                     rel="noopener noreferrer"
-                    ga-on="click"
-                    ga-event-category="previous speaker"
-                    ga-event-action="open presentation"
-                    ga-event-label$="[[session.title]]"
                     layout
                     horizontal
                     center

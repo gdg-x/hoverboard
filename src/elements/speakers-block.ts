@@ -155,14 +155,7 @@ export class SpeakersBlock extends SpeakersMixin(ReduxMixin(PolymerElement)) {
 
         <div class="speakers-wrapper">
           <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
-            <a
-              class="speaker"
-              href$="[[speakerUrl(speaker.id)]]"
-              ga-on="click"
-              ga-event-category="speaker"
-              ga-event-action="open details"
-              ga-event-label$="[[speaker.name]]"
-            >
+            <a class="speaker" href$="[[speakerUrl(speaker.id)]]">
               <div relative>
                 <plastic-image
                   class="photo"

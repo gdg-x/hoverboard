@@ -51,14 +51,7 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
 
       <div class="container" layout horizontal>
         <div layout horizontal center-center flex hidden$="[[viewport.isPhone]]">
-          <a
-            href="/team"
-            class="image-link"
-            ga-on="click"
-            ga-event-category="link"
-            ga-event-action="open"
-            ga-event-label="open team page"
-          >
+          <a href="/team" class="image-link">
             <plastic-image
               class="organizers-photo"
               srcset="{$ aboutOrganizerBlock.image $}"

@@ -196,9 +196,6 @@ export class HoverboardApp extends PolymerElement {
                 target="_blank"
                 rel="noopener noreferrer"
                 on-click="closeDrawer"
-                ga-on="click"
-                ga-event-category="ticket button"
-                ga-event-action="buy_click"
                 layout
                 horizontal
                 center
@@ -289,7 +286,6 @@ export class HoverboardApp extends PolymerElement {
 
   constructor() {
     super();
-    window.performance.mark('hoverboard-app.created');
     this._toggleHeaderShadow = this._toggleHeaderShadow.bind(this);
     this._toggleDrawer = this._toggleDrawer.bind(this);
     store.subscribe(() => this.stateChanged(store.getState()));
