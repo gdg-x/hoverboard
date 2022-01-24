@@ -1,9 +1,9 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
-import '@polymer/marked-element';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
+import '../components/markdown/short-markdown';
 import '../elements/feedback-block';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
@@ -246,9 +246,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
           {$ sessionDetails.contentLevel $}: [[session.complexity]]
         </h3>
 
-        <marked-element class="description" markdown="[[session.description]]">
-          <div slot="markdown-html"></div>
-        </marked-element>
+        <short-markdown class="description" content="[[session.description]]"></short-markdown>
 
         <div class="actions" layout horizontal>
           <a

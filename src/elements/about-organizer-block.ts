@@ -1,9 +1,9 @@
 import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/markdown/short-markdown';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { initialUiState } from '../store/ui/state';
@@ -68,9 +68,8 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
           <div class="block">
             <h2>{$ block.title $}</h2>
 
-            <marked-element class="description" markdown="{$ block.description $}">
-              <div slot="markdown-html"></div>
-            </marked-element>
+            <short-markdown class="description" content="{$ block.description $}"></short-markdown>
+
             <a
               href="{$ block.callToAction.link $}"
               {%

@@ -16,6 +16,8 @@ import { initialUserState } from '../store/user/state';
 import './notification-toggle';
 import './shared-styles';
 
+export const HEADER_HEIGHT = 76;
+
 @customElement('header-toolbar')
 export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   static get template() {

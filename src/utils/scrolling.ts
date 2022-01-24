@@ -48,3 +48,13 @@ export const offsetTop = (element) => {
     (document.documentElement.clientTop || 0)
   );
 };
+
+export const scrollToTop = () => {
+  // Remove anchor from URL
+  history.pushState('', document.title, window.location.pathname + window.location.search);
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
+};

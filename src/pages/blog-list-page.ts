@@ -1,6 +1,5 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/marked-element';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
@@ -155,9 +154,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
                       <h2 class="title">[[post.title]]</h2>
                     </text-truncate>
                     <text-truncate lines="[[_addIfNotPhone(2, 1)]]">
-                      <marked-element class="description" markdown="[[post.brief]]">
-                        <div slot="markdown-html"></div>
-                      </marked-element>
+                      <short-markdown class="description" content="[[post.brief]]"></short-markdown>
                     </text-truncate>
                   </div>
                   <span class="date">[[getDate(post.published)]]</span>

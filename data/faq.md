@@ -28,25 +28,25 @@ Once you've successfully paid for the ticket you’ll reach a confirmation scree
 
 #### **Pre-Early birds tickets**
 
-General Admission: \$50
+General Admission: $50
 
 Conditions: Feb 7 - Mar 7 or first 50 tickets
 
 #### **Early birds tickets**
 
-General Admission: \$70
+General Admission: $70
 
 Conditions: Mar 7 - Jun 30 or first 200 tickets
 
 #### **Lazy birds tickets**
 
-General Admission: \$90
+General Admission: $90
 
 Conditions: Jul 1 - Sep 30 or until tickets will be sold out
 
 #### **EDU (Students/lecturers) Tickets**
 
-We offer a limited number of tickets at a discounted rate of \$30 for full-time students and lecturers. To qualify, you need to be a student or a professor, faculty or staff at a higher education institution. Be aware that Ph.D. students are not on the list. Once purchased, general admission tickets can't be converted to EDU tickets, and vice versa.
+We offer a limited number of tickets at a discounted rate of $30 for full-time students and lecturers. To qualify, you need to be a student or a professor, faculty or staff at a higher education institution. Be aware that Ph.D. students are not on the list. Once purchased, general admission tickets can't be converted to EDU tickets, and vice versa.
 
 When you check-in at the conference, you'll need to provide a current student ID (active during the conference dates), transcript, credential, or other forms of documentation which demonstrates that you’re qualified to receive this special rate. If you buy an academic ticket and can't provide academic documentation when you arrive at DevFest, you won't be admitted or offered a refund, nor will you be able to convert your ticket to general admission.
 
@@ -56,7 +56,7 @@ We’ll be offering a limited number of press passes to qualified members of the
 
 #### **I Love DFUA**
 
-General admission: \$150
+General admission: $150
 
 Special tickets for real supporters of our conference. As we’re organizing the event on a non-profit basis, additional resources will help us bring more cool speakers from all over the world and additionally invest in demo-zone, party, and other activities. Owners of “I love DFUA” tickets will get additional valuable benefits from our team.
 

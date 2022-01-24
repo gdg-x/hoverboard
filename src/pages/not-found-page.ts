@@ -1,7 +1,6 @@
 import { customElement } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../elements/footer-block';
-import '../elements/md-content';
 
 @customElement('not-found-page')
 export class NotFoundPage extends PolymerElement {

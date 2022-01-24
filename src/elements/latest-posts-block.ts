@@ -1,10 +1,10 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/markdown/short-markdown';
 import '../components/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { router } from '../router';
@@ -103,9 +103,7 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
                     <h3 class="title">[[post.title]]</h3>
                   </text-truncate>
                   <text-truncate lines="3">
-                    <marked-element class="description" markdown="[[post.brief]]">
-                      <div slot="markdown-html"></div>
-                    </marked-element>
+                    <short-markdown class="description" content="[[post.brief]]"></short-markdown>
                   </text-truncate>
                 </div>
                 <div class="date">[[getDate(post.published)]]</div>

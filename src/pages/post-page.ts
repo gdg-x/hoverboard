@@ -1,10 +1,10 @@
 import { Failure, Initialized, RemoteData, Success } from '@abraham/remotedata';
 import { customElement, observe, property } from '@polymer/decorators';
-import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import 'plastic-image';
+import '../components/markdown/long-markdown';
 import '../elements/footer-block';
 import '../elements/posts-list';
 import '../elements/shared-styles';
@@ -55,40 +55,7 @@ export class PostPage extends ReduxMixin(PolymerElement) {
           background-color: var(--primary-background-color);
         }
 
-        [slot='markdown-html'] {
-          font-size: 18px;
-          line-height: 1.8;
-          color: var(--primary-text-color);
-        }
-
-        [slot='markdown-html'] h1,
-        [slot='markdown-html'] h2,
-        [slot='markdown-html'] h3 {
-          margin: 48px 0 16px;
-        }
-
-        [slot='markdown-html'] p {
-          margin-top: 0;
-          margin-bottom: 24px;
-        }
-
-        [slot='markdown-html'] img {
-          width: 100%;
-        }
-
-        [slot='markdown-html'] plastic-image {
-          margin: 32px 0 8px -16px;
-          --iron-image-width: calc(100% + 32px);
-          width: calc(100% + 32px);
-          min-height: 200px;
-          background-color: var(--secondary-background-color);
-        }
-
         @media (min-width: 640px) {
-          [slot='markdown-html'] plastic-image {
-            min-height: 400px;
-          }
-
           .suggested-posts {
             margin-top: 48px;
             padding-bottom: 36px;
@@ -113,9 +80,7 @@ export class PostPage extends ReduxMixin(PolymerElement) {
       </hero-block>
 
       <div class="container-narrow">
-        <marked-element class="post" markdown="[[postContent]]">
-          <div slot="markdown-html"></div>
-        </marked-element>
+        <long-markdown class="post" content="[[postContent]]"></long-markdown>
         <div class="date">{$ blog.published $}: [[getDate(post.data.published)]]</div>
       </div>
 
