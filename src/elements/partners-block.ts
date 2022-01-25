@@ -15,7 +15,7 @@ import {
   initialPotentialPartnersState,
   PotentialPartnersState,
 } from '../store/potential-partners/state';
-import { showSimpleToast } from '../store/toast/actions';
+import { queueSnackbar } from '../store/snackbars';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -152,7 +152,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   _partnerAddingChanged(potentialPartners: PotentialPartnersState) {
     if (potentialPartners instanceof Success) {
       closeDialog();
-      showSimpleToast('{$ partnersBlock.toast $}');
+      store.dispatch(queueSnackbar('{$ partnersBlock.toast $}'));
     } else if (potentialPartners instanceof Failure) {
       setDialogError(potentialPartners.error);
     }

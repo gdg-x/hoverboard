@@ -9,7 +9,7 @@ import { RootState, store } from '../store';
 import { addComment, checkPreviousFeedback, deleteFeedback } from '../store/feedback/actions';
 import { initialFeedbackState } from '../store/feedback/state';
 import { FeedbackData, FeedbackState } from '../store/feedback/types';
-import { showSimpleToast, showToast } from '../store/toast/actions';
+import { queueComplexSnackbar, queueSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
 
@@ -231,17 +231,19 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   _feedbackAddingChanged(newFeedbackAdding: boolean, oldFeedbackAdding: boolean) {
     if (oldFeedbackAdding && !newFeedbackAdding) {
       if (this.feedbackAddingError) {
-        showToast({
-          message: '{$ feedback.somethingWentWrong $}',
-          action: {
-            title: 'Retry',
-            callback: () => {
-              this._dispatchSendFeedback();
+        store.dispatch(
+          queueComplexSnackbar({
+            label: '{$ feedback.somethingWentWrong $}',
+            action: {
+              title: 'Retry',
+              callback: () => {
+                this._dispatchSendFeedback();
+              },
             },
-          },
-        });
+          })
+        );
       } else {
-        showSimpleToast('{$ feedback.feedbackRecorded $}');
+        store.dispatch(queueSnackbar('{$ feedback.feedbackRecorded $}'));
       }
     }
   }
@@ -249,18 +251,20 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   _feedbackDeletingChanged(newFeedbackDeleting: boolean, oldFeedbackDeleting: boolean) {
     if (oldFeedbackDeleting && !newFeedbackDeleting) {
       if (this.feedbackDeletingError) {
-        showToast({
-          message: '{$ feedback.somethingWentWrong $}',
-          action: {
-            title: 'Retry',
-            callback: () => {
-              this._dispatchDeleteFeedback();
+        store.dispatch(
+          queueComplexSnackbar({
+            label: '{$ feedback.somethingWentWrong $}',
+            action: {
+              title: 'Retry',
+              callback: () => {
+                this._dispatchDeleteFeedback();
+              },
             },
-          },
-        });
+          })
+        );
       } else {
         this._clear();
-        showSimpleToast('{$ feedback.feedbackDeleted $}');
+        store.dispatch(queueSnackbar('{$ feedback.feedbackDeleted $}'));
       }
     }
   }

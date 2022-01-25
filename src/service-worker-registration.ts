@@ -1,30 +1,33 @@
 import { register } from 'register-service-worker';
 import { error } from './console';
-import { DURATION } from './models/toast';
-import { showForeverToast, showSimpleToast, showToast } from './store/toast/actions';
+import { TIMEOUT } from './models/snackbar';
+import { store } from './store';
+import { queueComplexSnackbar, queueForeverSnackbar, queueSnackbar } from './store/snackbars';
 
 const registerServiceWorker = () => {
   register('service-worker.js', {
     registrationOptions: { scope: '{$ basepath $}' },
     cached() {
-      showSimpleToast('{$ serviceWorkerInstalled $}');
+      store.dispatch(queueSnackbar('{$ serviceWorkerInstalled $}'));
     },
     updated() {
-      showToast({
-        message: '{$ serviceWorkerAvailable $}',
-        action: {
-          title: '{$ refresh $}',
-          callback: () => window.location.reload(),
-        },
-        duration: DURATION.FOREVER,
-      });
+      store.dispatch(
+        queueComplexSnackbar({
+          label: '{$ serviceWorkerAvailable $}',
+          action: {
+            title: '{$ refresh $}',
+            callback: () => window.location.reload(),
+          },
+          timeout: TIMEOUT.FOREVER,
+        })
+      );
     },
     updatefound() {
-      showForeverToast('{$ serviceWorkerInstalling $}');
+      store.dispatch(queueForeverSnackbar('{$ serviceWorkerInstalling $}'));
     },
     error(e) {
       error('Service worker registration failed:', e);
-      showForeverToast('{$ serviceWorkerError $}');
+      store.dispatch(queueForeverSnackbar('{$ serviceWorkerError $}'));
     },
   });
 };

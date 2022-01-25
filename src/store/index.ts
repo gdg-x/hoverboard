@@ -15,11 +15,11 @@ import { potentialPartnersReducer } from './potential-partners/reducers';
 import { previousSpeakersReducer } from './previous-speakers/reducers';
 import { scheduleReducer } from './schedule/reducers';
 import { sessionsReducer } from './sessions/reducers';
+import snackbars from './snackbars';
 import { speakersReducer } from './speakers/reducers';
 import { subscribeReducer } from './subscribe/reducers';
 import { teamsReducer } from './teams/reducers';
 import { ticketsReducer } from './tickets/reducers';
-import { toastReducer } from './toast/reducers';
 import { uiReducer } from './ui/reducers';
 import { updateNotificationsSubscribersReducer } from './update-notifications-subscribers/reducers';
 import { updateNotificationsUsersReducer } from './update-notifications-users/reducers';
@@ -40,6 +40,7 @@ export const store = configureStore({
     filters: filtersReducer,
     gallery: galleryReducer,
     members: membersReducer,
+    snackbars,
     notificationPermission,
     notificationsSubscribers: notificationsSubscribersReducer,
     notificationsUsers: notificationsUsersReducer,
@@ -52,7 +53,6 @@ export const store = configureStore({
     subscribed: subscribeReducer,
     teams: teamsReducer,
     tickets: ticketsReducer,
-    toast: toastReducer,
     ui: uiReducer,
     updateNotificationsSubscribers: updateNotificationsSubscribersReducer,
     updateNotificationsUsers: updateNotificationsUsersReducer,

@@ -4,7 +4,7 @@ import { store } from '../';
 import { db } from '../../firebase';
 import { openDialog } from '../dialogs/actions';
 import { DIALOG, DialogForm } from '../dialogs/types';
-import { showSimpleToast } from '../toast/actions';
+import { queueSnackbar } from '../snackbars';
 import {
   SUBSCRIBE,
   SubscribeActions,
@@ -36,7 +36,7 @@ export const subscribe = (data: DialogForm) => async (dispatch: Dispatch<Subscri
       type: SUBSCRIBE_SUCCESS,
       payload: await setSubscribe(data),
     });
-    showSimpleToast('{$ subscribeBlock.toast $}');
+    store.dispatch(queueSnackbar('{$ subscribeBlock.toast $}'));
   } catch (error) {
     dispatch({
       type: SUBSCRIBE_FAILURE,
