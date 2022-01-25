@@ -98,7 +98,11 @@ export default [
             dest: 'dist/data/posts',
             transform: compileBufferTemplate,
           },
-        ],
+          !production && {
+            src: 'service-worker.js',
+            dest: 'dist',
+          },
+        ].filter(Boolean),
       }),
       production && generateSW(workboxConfig),
       production && terser(),
