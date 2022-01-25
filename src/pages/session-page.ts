@@ -406,7 +406,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
     event.preventDefault();
     event.stopPropagation();
 
-    if (!(this.auth instanceof Success)) {
+    if (!(this.user instanceof Success)) {
       showToast({
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
@@ -418,12 +418,13 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
     }
 
     if (this.user instanceof Success && this.featuredSessions instanceof Success) {
+      const bookmarked = !this.featuredSessions.data[this.session.id];
       const sessions = {
         ...this.featuredSessions.data,
-        [this.session.id]: !this.featuredSessions.data[this.session.id],
+        [this.session.id]: bookmarked,
       };
 
-      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions));
+      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked));
     }
   }
 

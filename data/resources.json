@@ -31,6 +31,10 @@
   "footer": {
     "blog": "Blog"
   },
+  "bookmarked": {
+    "added": "Session saved to My Schedule",
+    "removed": "Session removed from My Schedule"
+  },
   "mySchedule": {
     "title": "My Schedule",
     "browseSession": "Browse sessions"
