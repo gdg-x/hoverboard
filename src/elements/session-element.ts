@@ -14,7 +14,7 @@ import {
   FeaturedSessionsState,
   initialFeaturedSessionsState,
 } from '../store/featured-sessions/state';
-import { showToast } from '../store/toast/actions';
+import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
@@ -291,13 +291,15 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     event.stopPropagation();
 
     if (!(this.user instanceof Success)) {
-      showToast({
-        message: '{$ schedule.saveSessionsSignedOut $}',
-        action: {
-          title: 'Sign in',
-          callback: () => openDialog(DIALOG.SIGNIN),
-        },
-      });
+      store.dispatch(
+        queueComplexSnackbar({
+          label: '{$ schedule.saveSessionsSignedOut $}',
+          action: {
+            title: 'Sign in',
+            callback: () => openDialog(DIALOG.SIGNIN),
+          },
+        })
+      );
       return;
     }
 

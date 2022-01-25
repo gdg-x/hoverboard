@@ -22,6 +22,7 @@ import {
 } from '@polymer/polymer/lib/utils/settings';
 import 'plastic-image';
 import './components/hero-block';
+import './components/snack-bar';
 import { log } from './console';
 import './elements/dialogs/feedback-dialog';
 import './elements/dialogs/signin-dialog';
@@ -32,16 +33,15 @@ import './elements/header-toolbar';
 import './elements/hoverboard-icons';
 import './elements/polymer-helmet';
 import './elements/shared-styles';
-import './elements/toast-element';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
 import { onUser } from './store/auth/actions';
 import { selectIsDialogOpen } from './store/dialogs/selectors';
 import { DialogState, initialDialogState } from './store/dialogs/state';
 import { DIALOG } from './store/dialogs/types';
+import { queueSnackbar } from './store/snackbars';
 import { fetchTickets } from './store/tickets/actions';
 import { initialTicketsState } from './store/tickets/state';
-import { showSimpleToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
 import { initialUiState } from './store/ui/state';
 import { isLocalhost } from './utils/environment';
@@ -243,7 +243,7 @@ export class HoverboardApp extends PolymerElement {
 
       <signin-dialog opened="[[isSigninDialogOpen]]" with-backdrop></signin-dialog>
 
-      <toast-element></toast-element>
+      <snack-bar></snack-bar>
     `;
   }
 
@@ -296,7 +296,7 @@ export class HoverboardApp extends PolymerElement {
     window.addEventListener('element-sticked', this._toggleHeaderShadow);
     this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
     window.addEventListener('offline', () => {
-      showSimpleToast('{$ offlineMessage $}');
+      store.dispatch(queueSnackbar('{$ offlineMessage $}'));
     });
     store.dispatch(fetchTickets);
   }

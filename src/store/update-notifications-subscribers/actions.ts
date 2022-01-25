@@ -1,7 +1,8 @@
 import { deleteDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { Dispatch } from 'redux';
+import { store } from '..';
 import { db } from '../../firebase';
-import { showSimpleToast } from '../toast/actions';
+import { queueSnackbar } from '../snackbars';
 import {
   UpdateNotificationsSubscribersActions,
   RESET_UPDATE_NOTIFICATIONS_SUBSCRIBERS,
@@ -34,7 +35,7 @@ export const updateNotificationsSubscribers =
         type: UPDATE_NOTIFICATION_SUBSCRIBERS_SUCCESS,
         payload: token,
       });
-      showSimpleToast('{$ notifications.generalEnabled $}');
+      store.dispatch(queueSnackbar('{$ notifications.generalEnabled $}'));
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_SUBSCRIBERS_FAILURE,
@@ -55,7 +56,7 @@ export const clearNotificationsSubscribers =
       dispatch({
         type: RESET_UPDATE_NOTIFICATIONS_SUBSCRIBERS,
       });
-      showSimpleToast('{$ notifications.generalDisabled $}');
+      store.dispatch(queueSnackbar('{$ notifications.generalDisabled $}'));
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_SUBSCRIBERS_FAILURE,

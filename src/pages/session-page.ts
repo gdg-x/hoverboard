@@ -22,7 +22,7 @@ import {
 import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
 import { selectSession } from '../store/sessions/selectors';
 import { SessionsState } from '../store/sessions/state';
-import { showToast } from '../store/toast/actions';
+import { queueComplexSnackbar } from '../store/snackbars';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
@@ -407,13 +407,15 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
     event.stopPropagation();
 
     if (!(this.user instanceof Success)) {
-      showToast({
-        message: '{$ schedule.saveSessionsSignedOut $}',
-        action: {
-          title: 'Sign in',
-          callback: () => openDialog(DIALOG.SIGNIN),
-        },
-      });
+      store.dispatch(
+        queueComplexSnackbar({
+          label: '{$ schedule.saveSessionsSignedOut $}',
+          action: {
+            title: 'Sign in',
+            callback: () => openDialog(DIALOG.SIGNIN),
+          },
+        })
+      );
       return;
     }
 
