@@ -2,6 +2,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { store } from '..';
 import { db } from '../../firebase';
+import { showSimpleToast } from '../toast/actions';
 import { selectUserId } from '../user/selectors';
 import { FeaturedSessions } from './state';
 import {
@@ -37,7 +38,7 @@ export const fetchUserFeaturedSessions = async (dispatch: Dispatch<FeaturedSessi
   } catch (error) {
     dispatch({
       type: FETCH_USER_FEATURED_SESSIONS_FAILURE,
-      payload: error,
+      payload: error as Error,
     });
   }
 };
@@ -55,7 +56,7 @@ const cleanFeaturedSessions = (object: FeaturedSessions): FeaturedSessions => {
 };
 
 export const setUserFeaturedSessions =
-  (userId: string, featuredSessions: FeaturedSessions) =>
+  (userId: string, featuredSessions: FeaturedSessions, bookmarked: boolean) =>
   async (dispatch: Dispatch<FeaturedSessionsActions>) => {
     dispatch({
       type: SET_USER_FEATURED_SESSIONS,
@@ -68,10 +69,11 @@ export const setUserFeaturedSessions =
         type: SET_USER_FEATURED_SESSIONS_SUCCESS,
         payload: cleanedFeaturedSessions,
       });
+      showSimpleToast(bookmarked ? '{$ bookmarked.added $}' : '{$ bookmarked.removed $}');
     } catch (error) {
       dispatch({
         type: SET_USER_FEATURED_SESSIONS_FAILURE,
-        payload: error,
+        payload: error as Error,
       });
     }
   };

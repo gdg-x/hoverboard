@@ -108,9 +108,9 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   private user = initialUserState;
   @property({ type: Object })
   private previousFeedback?: FeedbackData;
-  @property({ type: Boolean, observer: Feedback.prototype._feedbackAddingChanged })
-  private feedbackFetching = false;
   @property({ type: Boolean })
+  private feedbackFetching = false;
+  @property({ type: Boolean, observer: Feedback.prototype._feedbackAddingChanged })
   private feedbackAdding = false;
   @property({ type: Object })
   private feedbackAddingError: Error;

@@ -302,12 +302,13 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     }
 
     if (this.user instanceof Success && this.featuredSessions instanceof Success) {
+      const bookmarked = !this.featuredSessions.data[this.session.id];
       const sessions = {
         ...this.featuredSessions.data,
-        [this.session.id]: !this.featuredSessions.data[this.session.id],
+        [this.session.id]: bookmarked,
       };
 
-      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions));
+      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked));
     }
   }
 
