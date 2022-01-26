@@ -3,7 +3,6 @@ import { authReducer } from './auth/reducers';
 import { blogReducer } from './blog/reducers';
 import { dialogsReducer } from './dialogs/reducers';
 import { featuredSessionsReducer } from './featured-sessions/reducers';
-import { feedbackReducer } from './feedback/reducers';
 import { filtersReducer } from './filters/reducers';
 import { galleryReducer } from './gallery/reducers';
 import { membersReducer } from './members/reducers';
@@ -16,6 +15,7 @@ import { previousSpeakersReducer } from './previous-speakers/reducers';
 import { scheduleReducer } from './schedule/reducers';
 import { sessionsReducer } from './sessions/reducers';
 import snackbars from './snackbars';
+import feedback from './feedback';
 import { speakersReducer } from './speakers/reducers';
 import { subscribeReducer } from './subscribe/reducers';
 import { teamsReducer } from './teams/reducers';
@@ -36,7 +36,7 @@ export const store = configureStore({
     blog: blogReducer,
     dialogs: dialogsReducer,
     featuredSessions: featuredSessionsReducer,
-    feedback: feedbackReducer,
+    feedback,
     filters: filtersReducer,
     gallery: galleryReducer,
     members: membersReducer,
