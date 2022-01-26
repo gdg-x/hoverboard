@@ -25,7 +25,7 @@ export const fetchSessions = async (dispatch: Dispatch<SessionsActions>) => {
       () => dispatch({ type: FETCH_SESSIONS }),
       (payload: Session[]) => dispatch({ type: FETCH_SESSIONS_SUCCESS, payload }),
       (payload: Error) => dispatch({ type: FETCH_SESSIONS_FAILURE, payload }),
-      orderBy('day')
+      orderBy('id')
     );
   }
 };
