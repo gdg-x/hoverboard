@@ -229,7 +229,7 @@ export class HoverboardApp extends PolymerElement {
 
       <feedback-dialog
         opened="[[isFeedbackDialogOpen]]"
-        data="[[dialogs.data.data]]"
+        data="[[dialogs.data]]"
         with-backdrop
       ></feedback-dialog>
 

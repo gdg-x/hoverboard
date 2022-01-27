@@ -1,20 +1,26 @@
-import { Success } from '@abraham/remotedata';
+import { Initialized, RemoteData, Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/paper-button';
 import '@polymer/paper-input/paper-textarea';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@radi-cho/star-rating';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { Feedback } from '../models/feedback';
 import { RootState, store } from '../store';
-import { addComment, checkPreviousFeedback, deleteFeedback } from '../store/feedback/actions';
-import { initialFeedbackState } from '../store/feedback/state';
-import { FeedbackData, FeedbackState } from '../store/feedback/types';
+import {
+  initialState,
+  removeFeedback,
+  selectFeedbackById,
+  selectRemoveFeedback,
+  selectSetFeedback,
+  selectSubscription,
+  setFeedback,
+} from '../store/feedback';
 import { queueComplexSnackbar, queueSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
-import { UserState } from '../store/user/types';
 
 @customElement('feedback-block')
-export class Feedback extends ReduxMixin(PolymerElement) {
+export class FeedbackBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style>
@@ -76,20 +82,16 @@ export class Feedback extends ReduxMixin(PolymerElement) {
 
         <paper-textarea
           id="commentInput"
-          hidden$="[[!rating]]"
+          hidden$="[[!hasRated]]"
           label="Comment"
           value="{{comment}}"
           maxlength="256"
         ></paper-textarea>
-        <p hidden$="[[!rating]]" class="helper">{$ feedback.helperText $}</p>
-        <paper-button primary hidden$="[[!rating]]" on-click="_sendFeedback">
+        <p hidden$="[[!hasRated]]" class="helper">{$ feedback.helperText $}</p>
+        <paper-button primary hidden$="[[!hasRated]]" on-click="setFeedback">
           {$ feedback.save $}
         </paper-button>
-        <paper-button
-          class="delete-button"
-          hidden$="[[!showDeleteButton]]"
-          on-click="_dispatchDeleteFeedback"
-        >
+        <paper-button class="delete-button" hidden$="[[!feedback.data]]" on-click="removeFeedback">
           {$ feedback.deleteFeedback $}
         </paper-button>
       </div>
@@ -101,176 +103,108 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   @property({ type: Number })
   styleRating = 0;
   @property({ type: String })
-  private comment = '';
+  sessionId: string | undefined;
+
   @property({ type: String })
-  private sessionId: string;
+  private comment = '';
   @property({ type: Object })
   private user = initialUserState;
   @property({ type: Object })
-  private previousFeedback?: FeedbackData;
-  @property({ type: Boolean })
-  private feedbackFetching = false;
-  @property({ type: Boolean, observer: Feedback.prototype._feedbackAddingChanged })
-  private feedbackAdding = false;
+  private setFeedbackState = initialState.set;
   @property({ type: Object })
-  private feedbackAddingError: Error;
-  @property({ type: Boolean, observer: Feedback.prototype._feedbackDeletingChanged })
-  private feedbackDeleting = false;
+  private feedback: RemoteData<Error, Feedback | false> = new Initialized();
   @property({ type: Object })
-  private feedbackDeletingError: Error;
-  @property({ type: Boolean })
-  private showDeleteButton = false;
+  private subscriptionState = initialState.subscription;
   @property({ type: Object })
-  private feedback = initialFeedbackState;
+  private removeFeedbackState = initialState.remove;
 
   override stateChanged(state: RootState) {
-    this.feedback = state.feedback;
-    this.feedbackDeleting = state.feedback.deleting;
-    this.feedbackDeletingError = state.feedback.deletingError;
-    this.feedbackAdding = state.feedback.adding;
-    this.feedbackAddingError = state.feedback.addingError;
-    this.feedbackFetching = state.feedback.fetching;
+    this.setFeedbackState = selectSetFeedback(state);
+    this.removeFeedbackState = selectRemoveFeedback(state);
+    this.subscriptionState = selectSubscription(state);
     this.user = state.user;
-  }
-
-  @observe('feedback')
-  _updateFeedbackState(feedback: FeedbackState) {
-    if (feedback) {
-      if (this.sessionId) this.previousFeedback = feedback[this.sessionId];
-    } else {
-      this.previousFeedback = undefined;
+    if (this.subscriptionState.kind === 'success') {
+      this.feedback = selectFeedbackById(state, this.sessionId);
     }
   }
 
-  @observe('user')
-  _userChanged(user: UserState) {
-    if (user instanceof Success && this.sessionId && !this.feedbackFetching) {
-      this._dispatchPreviousFeedback();
-    } else {
-      this._clear();
-    }
-  }
-
-  _clear() {
+  private resetFeedback() {
     this.contentRating = 0;
     this.styleRating = 0;
     this.comment = '';
-    this.showDeleteButton = false;
   }
 
-  @observe('sessionId')
-  _sessionIdChanged(newSessionId?: string) {
-    this._clear();
-
-    if (newSessionId) {
-      // Check for previous feedback once the session/speaker id is available
-      this._updateFeedbackState(this.feedback);
-      this._previousFeedbackChanged(this.previousFeedback);
-
-      if (
-        this.user instanceof Success &&
-        !this.feedbackFetching &&
-        this.previousFeedback === undefined
-      ) {
-        this._dispatchPreviousFeedback();
-      }
+  private async setFeedback() {
+    if (!(this.user instanceof Success)) {
+      return;
     }
-  }
 
-  @observe('previousFeedback')
-  _previousFeedbackChanged(previousFeedback?: FeedbackData) {
-    if (previousFeedback) {
-      this.showDeleteButton = true;
-      this.contentRating = previousFeedback.contentRating;
-      this.styleRating = previousFeedback.styleRating;
-      this.comment = previousFeedback.comment;
-    }
-  }
+    const resultAction = await store.dispatch(
+      setFeedback({
+        id: this.user.data.uid,
+        userId: this.user.data.uid,
+        parentId: this.sessionId,
+        contentRating: this.contentRating,
+        styleRating: this.styleRating,
+        comment: this.comment || '',
+      })
+    );
 
-  _sendFeedback() {
-    if (!this.rating) return;
-    this._dispatchSendFeedback();
-  }
-
-  _dispatchSendFeedback() {
-    if (this.user instanceof Success) {
+    if (setFeedback.fulfilled.match(resultAction)) {
+      store.dispatch(queueSnackbar('{$ feedback.feedbackRecorded $}'));
+      // this.resetFeedback();
+    } else {
       store.dispatch(
-        addComment({
-          userId: this.user.data.uid,
-          sessionId: this.sessionId,
-          contentRating: this.contentRating,
-          styleRating: this.styleRating,
-          comment: this.comment,
+        queueComplexSnackbar({
+          label: '{$ feedback.somethingWentWrong $}',
+          action: {
+            title: 'Retry',
+            callback: () => this.setFeedback(),
+          },
         })
       );
     }
   }
 
-  _dispatchPreviousFeedback() {
-    if (this.user instanceof Success) {
+  private async removeFeedback() {
+    if (!(this.user instanceof Success)) {
+      return;
+    }
+
+    const resultAction = await store.dispatch(
+      removeFeedback({
+        parentId: this.sessionId,
+        userId: this.user.data.uid,
+        id: this.user.data.uid,
+      })
+    );
+
+    if (removeFeedback.fulfilled.match(resultAction)) {
+      store.dispatch(queueSnackbar('{$ feedback.feedbackDeleted $}'));
+    } else {
       store.dispatch(
-        checkPreviousFeedback({
-          sessionId: this.sessionId,
-          userId: this.user.data.uid,
+        queueComplexSnackbar({
+          label: '{$ feedback.somethingWentWrong $}',
+          action: {
+            title: 'Retry',
+            callback: () => this.removeFeedback(),
+          },
         })
       );
     }
   }
 
-  _dispatchDeleteFeedback() {
-    if (this.user instanceof Success) {
-      store.dispatch(
-        deleteFeedback({
-          sessionId: this.sessionId,
-          userId: this.user.data.uid,
-        })
-      );
-    }
-  }
-
-  _feedbackAddingChanged(newFeedbackAdding: boolean, oldFeedbackAdding: boolean) {
-    if (oldFeedbackAdding && !newFeedbackAdding) {
-      if (this.feedbackAddingError) {
-        store.dispatch(
-          queueComplexSnackbar({
-            label: '{$ feedback.somethingWentWrong $}',
-            action: {
-              title: 'Retry',
-              callback: () => {
-                this._dispatchSendFeedback();
-              },
-            },
-          })
-        );
-      } else {
-        store.dispatch(queueSnackbar('{$ feedback.feedbackRecorded $}'));
-      }
-    }
-  }
-
-  _feedbackDeletingChanged(newFeedbackDeleting: boolean, oldFeedbackDeleting: boolean) {
-    if (oldFeedbackDeleting && !newFeedbackDeleting) {
-      if (this.feedbackDeletingError) {
-        store.dispatch(
-          queueComplexSnackbar({
-            label: '{$ feedback.somethingWentWrong $}',
-            action: {
-              title: 'Retry',
-              callback: () => {
-                this._dispatchDeleteFeedback();
-              },
-            },
-          })
-        );
-      } else {
-        this._clear();
-        store.dispatch(queueSnackbar('{$ feedback.feedbackDeleted $}'));
-      }
+  @observe('feedback')
+  private onFeedback(feedback: RemoteData<Error, Feedback | undefined>) {
+    if (feedback instanceof Success) {
+      this.contentRating = feedback.data.contentRating;
+      this.styleRating = feedback.data.styleRating;
+      this.comment = feedback.data.comment;
     }
   }
 
   @computed('contentRating', 'styleRating')
-  get rating() {
+  get hasRated() {
     return (
       (this.contentRating > 0 && this.contentRating <= 5) ||
       (this.styleRating > 0 && this.styleRating <= 5)

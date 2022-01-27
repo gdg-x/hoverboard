@@ -15,7 +15,7 @@ import { FirebaseUser } from '../../models/user';
 import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
 import { FeaturedSessionsActions, REMOVE_USER_FEATURED_SESSIONS } from '../featured-sessions/types';
-import { FeedbackActions, WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
+import { unsubscribeFromFeedback } from '../feedback';
 import { resetSubscribed } from '../subscribe/actions';
 import { removeUser, setUser } from '../user/actions';
 import {
@@ -85,8 +85,8 @@ export const onUser = () => {
       unAuth();
       removeUser();
       resetSubscribed();
+      unsubscribeFromFeedback();
       store.dispatch<FeaturedSessionsActions>({ type: REMOVE_USER_FEATURED_SESSIONS });
-      store.dispatch<FeedbackActions>({ type: WIPE_PREVIOUS_FEEDBACK });
     }
   });
 };

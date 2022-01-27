@@ -1,17 +1,17 @@
-interface SimpleInitialized {
+export interface SimpleInitialized {
   kind: 'initialized';
 }
 
-interface SimplePending {
+export interface SimplePending {
   kind: 'pending';
 }
 
-interface SimpleFailure {
+export interface SimpleFailure {
   kind: 'failure';
   error: Error;
 }
 
-interface SimpleSuccess<Data> {
+export interface SimpleSuccess<Data> {
   kind: 'success';
   data: Data;
 }
