@@ -259,6 +259,7 @@
     "headline": "Review session",
     "leaveFeedback": "to leave feedback",
     "sendFeedbackSignedOut": "Sign in to leave feedback",
+    "removeFeedbackSignedOut": "Sign in to delete feedback",
     "feedbackRecorded": "Feedback saved",
     "feedbackDeleted": "Feedback deleted",
     "helperText": "Comments will be anonymously provided to speakers",
