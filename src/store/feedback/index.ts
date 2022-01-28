@@ -14,22 +14,23 @@ import { RootState, store } from '..';
 import { db } from '../../firebase';
 import { Feedback, FeedbackId } from '../../models/feedback';
 import { dataWithParentId } from '../../utils/firestore';
-import { SimpleRemoteData } from '../../utils/simple-remote-data';
 import { selectUser } from '../user/selectors';
 import { UserState } from '../user/types';
 
+export type SessionFeedback = RemoteData<Error, Feedback | false>;
+
 export type FeedbackState = {
-  set: SimpleRemoteData<FeedbackId>;
-  data: SimpleRemoteData<Feedback[]>;
-  remove: SimpleRemoteData<FeedbackId>;
-  subscription: SimpleRemoteData<Unsubscribe>;
+  set: RemoteData<Error, FeedbackId>;
+  subscription: RemoteData<Error, Unsubscribe>;
+  data: RemoteData<Error, Feedback[]>;
+  delete: RemoteData<Error, FeedbackId>;
 };
 
 export const initialState = {
-  set: { kind: 'initialized' },
-  data: { kind: 'initialized' },
-  remove: { kind: 'initialized' },
-  subscription: { kind: 'initialized' },
+  set: new Initialized(),
+  subscription: new Initialized(),
+  data: new Initialized(),
+  delete: new Initialized(),
 } as FeedbackState;
 
 export const subscribe = (userId: string) => {
@@ -58,8 +59,8 @@ export const setFeedback = createAsyncThunk<FeedbackId, Feedback>(
   }
 );
 
-export const removeFeedback = createAsyncThunk<FeedbackId, FeedbackId>(
-  'feedback/remove',
+export const deleteFeedback = createAsyncThunk<FeedbackId, FeedbackId>(
+  'feedback/delete',
   async (data: FeedbackId) => {
     await deleteDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId));
 
@@ -71,98 +72,91 @@ const feedbackSlice = createSlice({
   name: 'feedback',
   initialState,
   reducers: {
-    clear(state) {
-      state.set = { kind: 'initialized' };
-      state.data = { kind: 'initialized' };
-      state.remove = { kind: 'initialized' };
-      state.subscription = { kind: 'initialized' };
-    },
     subscribeToFeedback(state, action: PayloadAction<string>) {
-      if (state.subscription.kind === 'initialized') {
-        state.subscription = { kind: 'success', data: subscribe(action.payload) };
-        state.data = { kind: 'pending' };
+      if (state.subscription instanceof Initialized) {
+        state.subscription = new Success(subscribe(action.payload));
+        state.data = new Pending();
       }
     },
     unsubscribeFromFeedback(state) {
-      if (state.subscription.kind === 'success') {
+      if (state.subscription instanceof Success) {
         state.subscription.data();
       }
-      clear();
+      state.set = new Initialized();
+      state.subscription = new Initialized();
+      state.data = new Initialized();
+      state.delete = new Initialized();
     },
     setSuccess(state, action: PayloadAction<Feedback[]>) {
-      state.set = { kind: 'initialized' };
-      state.data = { kind: 'success', data: action.payload };
-      state.remove = { kind: 'initialized' };
+      state.data = new Success(action.payload);
     },
     setFailure(state, action: PayloadAction<Error>) {
-      state.set = { kind: 'initialized' };
-      state.data = { kind: 'failure', error: action.payload };
-      state.remove = { kind: 'initialized' };
+      state.data = new Failure(action.payload);
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(setFeedback.pending, (state) => {
-        state.set = { kind: 'pending' };
+        state.set = new Pending();
       })
       .addCase(setFeedback.fulfilled, (state, action) => {
-        state.set = { kind: 'success', data: action.payload };
+        state.set = new Success(action.payload);
       })
       .addCase(setFeedback.rejected, (state, action) => {
-        state.set = { kind: 'failure', error: new Error(action.error.message) };
+        state.set = new Failure(action.error.message);
       })
-      .addCase(removeFeedback.pending, (state) => {
-        state.remove = { kind: 'pending' };
+      .addCase(deleteFeedback.pending, (state) => {
+        state.delete = new Pending();
       })
-      .addCase(removeFeedback.fulfilled, (state, action) => {
-        state.remove = { kind: 'success', data: action.payload };
+      .addCase(deleteFeedback.fulfilled, (state, action) => {
+        state.delete = new Success(action.payload);
       })
-      .addCase(removeFeedback.rejected, (state, action) => {
-        state.remove = { kind: 'failure', error: new Error(action.error.message) };
+      .addCase(deleteFeedback.rejected, (state, action) => {
+        state.delete = new Failure(action.error.message);
       });
   },
 });
 
-const { clear, subscribeToFeedback, unsubscribeFromFeedback, setSuccess, setFailure } =
+const { subscribeToFeedback, unsubscribeFromFeedback, setSuccess, setFailure } =
   feedbackSlice.actions;
 
-export const selectSetFeedback = (state: RootState) => state.feedback.set;
+const selectParentId = (_state: RootState, parentId: string | undefined) => parentId;
+export const selectFeedbackSet = (state: RootState) => state.feedback.set;
+export const selectFeedbackSubscription = (state: RootState) => state.feedback.subscription;
 export const selectFeedback = (state: RootState) => state.feedback.data;
-export const selectSubscriptionValue = (state: RootState) => state.feedback.subscription;
-
-export const selectFeedbackById = createSelector(
-  (_state: RootState, parentId: string | undefined) => parentId,
-  selectFeedback,
-  (
-    parentId: string | undefined,
-    feedback: FeedbackState['data']
-  ): RemoteData<Error, Feedback | false> => {
-    if (feedback.kind === 'success') {
-      return new Success(feedback.data.find((review) => review.parentId === parentId) ?? false);
-    } else if (feedback.kind === 'pending') {
-      return new Pending();
-    } else if (feedback.kind === 'failure') {
-      return new Failure(feedback.error);
-    } else {
-      return new Initialized();
-    }
-  }
-);
+export const selectFeedbackDelete = (state: RootState) => state.feedback.delete;
 
 export const selectSubscription = createSelector(
   selectUser,
-  selectSubscriptionValue,
+  selectFeedbackSubscription,
   (user: UserState, subscription: FeedbackState['subscription']): FeedbackState['subscription'] => {
-    if (user instanceof Success && subscription.kind === 'initialized') {
+    if (user instanceof Success && subscription instanceof Initialized) {
       store.dispatch(subscribeToFeedback(user.data.uid));
-      return { kind: 'pending' };
+      return new Pending();
     } else {
       return subscription;
     }
   }
 );
 
-export const selectRemoveFeedback = (state: RootState) => state.feedback.remove;
+export const selectFeedbackById = createSelector(
+  selectParentId,
+  selectSubscription,
+  selectFeedback,
+  (
+    parentId: string | undefined,
+    subscription: FeedbackState['subscription'],
+    feedback: FeedbackState['data']
+  ): SessionFeedback => {
+    if (feedback instanceof Success) {
+      return new Success(feedback.data.find((review) => review.parentId === parentId) ?? false);
+    } else if (subscription instanceof Pending || subscription instanceof Success) {
+      return new Pending();
+    } else {
+      return feedback;
+    }
+  }
+);
 
-export { subscribeToFeedback, unsubscribeFromFeedback };
+export { unsubscribeFromFeedback };
 export default feedbackSlice.reducer;

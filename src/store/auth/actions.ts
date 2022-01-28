@@ -85,7 +85,7 @@ export const onUser = () => {
       unAuth();
       removeUser();
       resetSubscribed();
-      unsubscribeFromFeedback();
+      store.dispatch(unsubscribeFromFeedback());
       store.dispatch<FeaturedSessionsActions>({ type: REMOVE_USER_FEATURED_SESSIONS });
     }
   });

@@ -8,12 +8,9 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { Feedback } from '../models/feedback';
 import { RootState, store } from '../store';
 import {
-  initialState,
-  removeFeedback,
+  deleteFeedback,
   selectFeedbackById,
-  selectRemoveFeedback,
-  selectSetFeedback,
-  selectSubscription,
+  SessionFeedback,
   setFeedback,
 } from '../store/feedback';
 import { queueComplexSnackbar, queueSnackbar } from '../store/snackbars';
@@ -91,7 +88,7 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
         <paper-button primary hidden$="[[!hasRated]]" on-click="setFeedback">
           {$ feedback.save $}
         </paper-button>
-        <paper-button class="delete-button" hidden$="[[!feedback.data]]" on-click="removeFeedback">
+        <paper-button class="delete-button" hidden$="[[!feedback.data]]" on-click="deleteFeedback">
           {$ feedback.deleteFeedback $}
         </paper-button>
       </div>
@@ -110,22 +107,11 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private user = initialUserState;
   @property({ type: Object })
-  private setFeedbackState = initialState.set;
-  @property({ type: Object })
   private feedback: RemoteData<Error, Feedback | false> = new Initialized();
-  @property({ type: Object })
-  private subscriptionState = initialState.subscription;
-  @property({ type: Object })
-  private removeFeedbackState = initialState.remove;
 
   override stateChanged(state: RootState) {
-    this.setFeedbackState = selectSetFeedback(state);
-    this.removeFeedbackState = selectRemoveFeedback(state);
-    this.subscriptionState = selectSubscription(state);
     this.user = state.user;
-    if (this.subscriptionState.kind === 'success') {
-      this.feedback = selectFeedbackById(state, this.sessionId);
-    }
+    this.feedback = selectFeedbackById(state, this.sessionId);
   }
 
   private resetFeedback() {
@@ -136,6 +122,7 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
 
   private async setFeedback() {
     if (!(this.user instanceof Success)) {
+      store.dispatch(queueSnackbar('{$ feedback.sendFeedbackSignedOut $}'));
       return;
     }
 
@@ -152,7 +139,6 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
 
     if (setFeedback.fulfilled.match(resultAction)) {
       store.dispatch(queueSnackbar('{$ feedback.feedbackRecorded $}'));
-      // this.resetFeedback();
     } else {
       store.dispatch(
         queueComplexSnackbar({
@@ -166,20 +152,21 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
-  private async removeFeedback() {
+  private async deleteFeedback() {
     if (!(this.user instanceof Success)) {
+      store.dispatch(queueSnackbar('{$ feedback.removeFeedbackSignedOut $}'));
       return;
     }
 
     const resultAction = await store.dispatch(
-      removeFeedback({
+      deleteFeedback({
         parentId: this.sessionId,
         userId: this.user.data.uid,
         id: this.user.data.uid,
       })
     );
 
-    if (removeFeedback.fulfilled.match(resultAction)) {
+    if (deleteFeedback.fulfilled.match(resultAction)) {
       store.dispatch(queueSnackbar('{$ feedback.feedbackDeleted $}'));
     } else {
       store.dispatch(
@@ -187,7 +174,7 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
           label: '{$ feedback.somethingWentWrong $}',
           action: {
             title: 'Retry',
-            callback: () => this.removeFeedback(),
+            callback: () => this.deleteFeedback(),
           },
         })
       );
@@ -195,11 +182,13 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
   }
 
   @observe('feedback')
-  private onFeedback(feedback: RemoteData<Error, Feedback | undefined>) {
-    if (feedback instanceof Success) {
+  private onFeedback(feedback: SessionFeedback) {
+    if (feedback instanceof Success && feedback.data) {
       this.contentRating = feedback.data.contentRating;
       this.styleRating = feedback.data.styleRating;
       this.comment = feedback.data.comment;
+    } else {
+      this.resetFeedback();
     }
   }
 
