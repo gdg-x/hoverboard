@@ -5,6 +5,7 @@ import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -12,7 +13,6 @@ import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
 import { getDate } from '../utils/functions';
 import './shared-styles';
-import './text-truncate';
 
 @customElement('latest-posts-block')
 export class LatestPostsBlock extends ReduxMixin(PolymerElement) {

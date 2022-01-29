@@ -2,11 +2,11 @@ import { customElement, property } from '@polymer/decorators';
 import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/text-truncate';
 import { Post } from '../models/post';
 import { router } from '../router';
 import { getDate } from '../utils/functions';
 import './shared-styles';
-import './text-truncate';
 
 @customElement('posts-list')
 export class PostsList extends PolymerElement {
