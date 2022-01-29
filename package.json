@@ -43,7 +43,6 @@
     "@polymer/app-layout": "^3.1.0",
     "@polymer/decorators": "^3.0.0",
     "@polymer/google-map": "git+https://git@github.com/abraham/google-map.git#3.0",
-    "@polymer/iron-ajax": "^3.0.1",
     "@polymer/iron-dropdown": "^3.0.1",
     "@polymer/iron-icon": "^3.0.1",
     "@polymer/iron-image": "^3.0.2",
