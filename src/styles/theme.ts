@@ -65,7 +65,7 @@ export const theme = css`
 
   body {
     font-family: var(--font-family);
-    text-rendering: optimizeLegibility;
+    text-rendering: optimizelegibility;
     color: var(--primary-text-color);
   }
 
@@ -220,9 +220,9 @@ export const theme = css`
     height: 32px;
     padding: 8px 12px;
     font-size: 12px;
-    color: currentColor;
+    color: currentcolor;
     background: white;
-    border: 1px solid currentColor;
+    border: 1px solid currentcolor;
     border-radius: 32px;
     margin: 1px;
     line-height: initial;
