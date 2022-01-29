@@ -1,6 +1,5 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Failure, Initialized, RemoteData, Success } from '@abraham/remotedata';
 import { customElement, observe, property } from '@polymer/decorators';
-import '@polymer/iron-ajax/iron-ajax';
 import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -16,17 +15,19 @@ import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
 import { getDate } from '../utils/functions';
 
+// TODO: loading message
+
 @customElement('post-page')
 export class PostPage extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   posts = initialBlogState;
 
   @property({ type: Object })
-  private post: Post;
+  private post: RemoteData<Error, Post> = new Initialized();
   @property({ type: Array })
   private suggestedPosts: Post[] = [];
   @property({ type: String })
-  private postContent: string;
+  private postContent: string = '';
   @property({ type: Object })
   private postData: { id?: string } = {};
 
@@ -95,26 +96,26 @@ export class PostPage extends ReduxMixin(PolymerElement) {
       </style>
 
       <polymer-helmet
-        title="[[post.title]] | {$ title $}"
-        description="[[post.brief]]"
-        image="[[post.image]]"
+        title="[[post.data.title]] | {$ title $}"
+        description="[[post.data.brief]]"
+        image="[[post.data.image]]"
         label1="{$ blog.published $}"
         data1="[[published]]"
       ></polymer-helmet>
 
       <hero-block
-        background-image="[[post.image]]"
-        background-color="[[post.primaryColor]]"
+        background-image="[[post.data.image]]"
+        background-color="[[post.data.primaryColor]]"
         font-color="#fff"
       >
-        <div class="hero-title">[[post.title]]</div>
+        <div class="hero-title">[[post.data.title]]</div>
       </hero-block>
 
       <div class="container-narrow">
         <marked-element class="post" markdown="[[postContent]]">
           <div slot="markdown-html"></div>
         </marked-element>
-        <div class="date">{$ blog.published $}: [[getDate(post.published)]]</div>
+        <div class="date">{$ blog.published $}: [[getDate(post.data.published)]]</div>
       </div>
 
       <div class="suggested-posts">
@@ -123,13 +124,6 @@ export class PostPage extends ReduxMixin(PolymerElement) {
           <posts-list posts="[[suggestedPosts]]"></posts-list>
         </div>
       </div>
-
-      <iron-ajax
-        auto
-        url="[[post.source]]"
-        handle-as="text"
-        on-response="handleMarkdownFileFetch"
-      ></iron-ajax>
     `;
   }
 
@@ -141,6 +135,17 @@ export class PostPage extends ReduxMixin(PolymerElement) {
     super.connectedCallback();
     if (this.posts instanceof Initialized) {
       store.dispatch(fetchBlogPosts);
+    }
+  }
+
+  @observe('post')
+  private async onPost(post: RemoteData<Error, Post>) {
+    if (post instanceof Success && post.data.source) {
+      try {
+        this.postContent = await fetch(post.data.source).then((response) => response.text());
+      } catch (error) {
+        this.post = new Failure(error as Error);
+      }
     }
   }
 
@@ -160,7 +165,7 @@ export class PostPage extends ReduxMixin(PolymerElement) {
     if (postId && posts instanceof Success) {
       const post = posts.data.find(({ id }) => id === postId);
       if (post) {
-        this.post = post;
+        this.post = new Success(post);
         this.postContent = post?.content;
         this.suggestedPosts = posts.data.filter(({ id }) => id !== postId).slice(0, 3);
       } else {
