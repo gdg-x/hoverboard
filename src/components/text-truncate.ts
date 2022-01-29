@@ -9,22 +9,22 @@ export class TextTruncate extends LitElement {
         -webkit-box-orient: vertical;
         display: -webkit-box;
         overflow: hidden;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 3;
       }
 
       :host([lines='2']) {
         -webkit-line-clamp: 2;
       }
 
-      :host[lines='3'] {
+      :host([lines='3']) {
         -webkit-line-clamp: 3;
       }
 
-      :host[lines='4'] {
+      :host([lines='4']) {
         -webkit-line-clamp: 4;
       }
 
-      :host[lines='5'] {
+      :host([lines='5']) {
         -webkit-line-clamp: 5;
       }
     `;

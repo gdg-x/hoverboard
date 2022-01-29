@@ -5,6 +5,7 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import 'plastic-image';
+import '../elements/footer-block';
 import '../elements/posts-list';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
@@ -124,6 +125,8 @@ export class PostPage extends ReduxMixin(PolymerElement) {
           <posts-list posts="[[suggestedPosts]]"></posts-list>
         </div>
       </div>
+
+      <footer-block></footer-block>
     `;
   }
 

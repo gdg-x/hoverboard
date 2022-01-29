@@ -6,6 +6,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import '../components/text-truncate';
 import '../elements/content-loader';
+import '../elements/footer-block';
 import '../elements/posts-list';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
@@ -64,7 +65,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
         }
 
         .description {
-          margin-top: 8px;
+          padding-top: 8px;
           opacity: 0.8;
         }
 
@@ -170,6 +171,8 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
       <div class="container-narrow">
         <posts-list posts="[[posts.data]]"></posts-list>
       </div>
+
+      <footer-block></footer-block>
     `;
   }
 

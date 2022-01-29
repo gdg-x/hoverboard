@@ -43,7 +43,7 @@ export class PostsList extends PolymerElement {
         }
 
         .description {
-          margin-top: 8px;
+          padding-top: 8px;
           color: var(--secondary-text-color);
         }
 
