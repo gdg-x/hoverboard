@@ -6,7 +6,6 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import '../elements/feedback-block';
 import '../elements/shared-styles';
-import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SessionsMixin } from '../mixins/sessions-mixin';
 import { Session } from '../models/session';

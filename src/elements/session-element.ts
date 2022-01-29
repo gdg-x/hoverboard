@@ -3,6 +3,7 @@ import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { Session } from '../models/session';
 import { router } from '../router';
@@ -19,7 +20,6 @@ import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
-import './text-truncate';
 
 @customElement('session-element')
 export class SessionElement extends ReduxMixin(PolymerElement) {

@@ -3,13 +3,13 @@ import { computed, customElement } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
 import { randomOrder } from '../utils/functions';
 import './shared-styles';
-import './text-truncate';
 
 @customElement('speakers-block')
 export class SpeakersBlock extends SpeakersMixin(ReduxMixin(PolymerElement)) {
