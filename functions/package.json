@@ -19,21 +19,21 @@
     "start:src": "npm run build:src -- --watch"
   },
   "dependencies": {
-    "@google-cloud/storage": "^5.16.1",
+    "@google-cloud/storage": "^5.18.1",
     "child-process-promise": "^2.2.1",
     "express": "^4.17.2",
-    "firebase-admin": "^10.0.1",
+    "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.16.0",
     "md5": "^2.3.0",
     "mkdirp": "^1.0.4",
     "moment": "^2.29.1",
-    "node-fetch": "^3.1.1"
+    "node-fetch": "^3.2.0"
   },
   "devDependencies": {
     "@tsconfig/node14": "^1.0.1",
-    "concurrently": "^6.5.1",
+    "concurrently": "^7.0.0",
     "cpx2": "^4.1.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.5"
   }
 }
