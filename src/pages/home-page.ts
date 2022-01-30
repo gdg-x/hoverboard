@@ -13,11 +13,12 @@ import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
 import { firebaseApp } from '../firebase';
-import { ELEMENT, getElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { store } from '../store';
+import { queueSnackbar } from '../store/snackbars';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { updateMetadata } from '../utils/metadata';
-import { scrollToY } from '../utils/scrolling';
+import { POSITION, scrollToElement } from '../utils/scrolling';
 
 @customElement('home-page')
 export class HomePage extends ReduxMixin(PolymerElement) {
@@ -234,7 +235,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       <about-block></about-block>
       <speakers-block></speakers-block>
       <subscribe-block></subscribe-block>
-      <tickets-block></tickets-block>
+      <tickets-block id="tickets-block"></tickets-block>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
       <featured-videos></featured-videos>
@@ -258,15 +259,20 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   _scrollToTickets() {
-    const toolbarHeight = getElement(ELEMENT.HEADER_TOOLBAR).getBoundingClientRect().height - 1;
-    const ticketsBlockPositionY =
-      getElement(ELEMENT.TICKETS).getBoundingClientRect().top - toolbarHeight;
-    scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
+    const element = this.$['tickets-block'];
+    if (element) {
+      scrollToElement(element);
+    } else {
+      store.dispatch(queueSnackbar('Error scrolling to section.'));
+    }
   }
 
   _scrollNextBlock() {
-    const heroHeight = this.$.hero.getBoundingClientRect().height - 64;
-    scrollToY(heroHeight, 600, 'easeInOutSine');
+    if (this.$.hero) {
+      scrollToElement(this.$.hero, POSITION.BOTTOM);
+    } else {
+      store.dispatch(queueSnackbar('Error scrolling to section.'));
+    }
   }
 
   private shouldShowForkMeBlock() {

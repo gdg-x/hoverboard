@@ -2,7 +2,6 @@ import { Initialized, Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
-import { ELEMENT, setElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { fetchSchedule } from '../store/schedule/actions';
@@ -113,7 +112,6 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
 
   override connectedCallback() {
     super.connectedCallback();
-    setElement(ELEMENT.STICKY_HEADER_TOOLBAR, this);
     if (this.schedule instanceof Initialized) {
       store.dispatch(fetchSchedule);
     }

@@ -1,6 +1,6 @@
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { HEADER_HEIGHT } from '../../elements/header-toolbar';
+import { scrollToElement } from '../../utils/scrolling';
 import { Markdown } from './base';
 
 // TODO: Add copy URL to clipboard buttons on headers
@@ -181,8 +181,7 @@ export class TocMarkdown extends Markdown {
   private scrollToId(id: string) {
     const element = this.shadowRoot!.getElementById(id);
     if (element) {
-      const top = element.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
-      window.scrollTo({ top, behavior: 'smooth' });
+      scrollToElement(element);
     }
   }
 }
