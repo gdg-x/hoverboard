@@ -18,6 +18,7 @@ import { RootState, store } from '../store';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { SpeakersState } from '../store/speakers/state';
 import { getVariableColor, isEmpty } from '../utils/functions';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('speaker-page')
 export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
@@ -137,16 +138,6 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
           --paper-progress-secondary-color: var(--default-primary-color);
         }
       </style>
-
-      <polymer-helmet
-        title="[[speaker.name]] | {$ title $}"
-        description="[[speaker.bio]]"
-        image="[[speaker.photoUrl]]"
-        label1="{$ position $}"
-        data1="[[speaker.title]], [[speaker.company]]"
-        label2="{$ country $}"
-        data2="[[speaker.country]]"
-      ></polymer-helmet>
 
       <hero-block
         background-image="{$ heroSettings.speakers.background.image $}"
@@ -270,6 +261,11 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
       this.speaker = selectSpeaker(store.getState(), speakerId);
       if (!this.speaker) {
         router.render('/404');
+      } else {
+        updateMetadata(`${this.speaker.name} | {$ title $}`, this.speaker.bio, {
+          image: this.speaker.photoUrl,
+          imageAlt: this.speaker.name,
+        });
       }
     }
   }

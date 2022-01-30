@@ -3,7 +3,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import '../components/hero-block';
 import '../components/markdown/remote-markdown';
 import '../elements/footer-block';
-import '../elements/polymer-helmet';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('coc-page')
 export class CocPage extends PolymerElement {
@@ -14,11 +14,6 @@ export class CocPage extends PolymerElement {
           display: block;
         }
       </style>
-
-      <polymer-helmet
-        title="{$ heroSettings.coc.title $} | {$ title $}"
-        description="{$ heroSettings.coc.metaDescription $}"
-      ></polymer-helmet>
 
       <hero-block
         background-image="{$ heroSettings.coc.background.image $}"
@@ -37,4 +32,12 @@ export class CocPage extends PolymerElement {
 
   @property({ type: String })
   source = '{$ coc $}';
+
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(
+      '{$ heroSettings.coc.title $} | {$ title $}',
+      '{$ heroSettings.coc.metaDescription $}'
+    );
+  }
 }

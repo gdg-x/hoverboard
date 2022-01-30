@@ -20,6 +20,7 @@ import { initialScheduleState } from '../store/schedule/state';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { SessionsState } from '../store/sessions/state';
 import { SpeakersState } from '../store/speakers/state';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('schedule-page')
 export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(PolymerElement))) {
@@ -53,11 +54,6 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
           }
         }
       </style>
-
-      <polymer-helmet
-        title="{$ heroSettings.schedule.title $} | {$ title $}"
-        description="{$ heroSettings.schedule.metaDescription $}"
-      ></polymer-helmet>
 
       <hero-block
         background-image="{$ heroSettings.schedule.background.image $}"
@@ -113,6 +109,14 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
   private selectedFilters: Filter[] = [];
   @property({ type: Object })
   private location: RouterLocation;
+
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(
+      '{$ heroSettings.schedule.title $} | {$ title $}',
+      '{$ heroSettings.schedule.metaDescription $}'
+    );
+  }
 
   override stateChanged(state: RootState) {
     super.stateChanged(state);

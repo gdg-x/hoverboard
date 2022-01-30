@@ -11,6 +11,7 @@ import { router } from '../router';
 import { RootState, store } from '../store';
 import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { initialPreviousSpeakersState } from '../store/previous-speakers/state';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('previous-speakers-page')
 export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
@@ -123,11 +124,6 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <polymer-helmet
-        title="{$ heroSettings.previousSpeakers.title $} | {$ title $}"
-        details="{$ heroSettings.previousSpeakers.metaDescription $}"
-      ></polymer-helmet>
-
       <hero-block
         background-image="{$ heroSettings.previousSpeakers.background.image $}"
         background-color="{$ heroSettings.previousSpeakers.background.color $}"
@@ -185,6 +181,11 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
 
   override connectedCallback() {
     super.connectedCallback();
+    updateMetadata(
+      '{$ heroSettings.previousSpeakers.title $} | {$ title $}',
+      '{$ heroSettings.previousSpeakers.metaDescription $}'
+    );
+
     if (this.previousSpeakers instanceof Initialized) {
       store.dispatch(fetchPreviousSpeakers);
     }

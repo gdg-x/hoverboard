@@ -16,6 +16,7 @@ import { firebaseApp } from '../firebase';
 import { ELEMENT, getElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { toggleVideoDialog } from '../store/ui/actions';
+import { updateMetadata } from '../utils/metadata';
 import { scrollToY } from '../utils/scrolling';
 
 @customElement('home-page')
@@ -133,8 +134,6 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           }
         }
       </style>
-
-      <polymer-helmet></polymer-helmet>
 
       <hero-block
         id="hero"
@@ -281,6 +280,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
   override connectedCallback() {
     super.connectedCallback();
+    updateMetadata('{$ title $}', '{$ description $}');
     this.showForkMeBlock = this.shouldShowForkMeBlock();
   }
 }

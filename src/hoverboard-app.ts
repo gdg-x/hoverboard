@@ -31,7 +31,6 @@ import './elements/dialogs/video-dialog';
 import './elements/footer-block';
 import './elements/header-toolbar';
 import './elements/hoverboard-icons';
-import './elements/polymer-helmet';
 import './elements/shared-styles';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';

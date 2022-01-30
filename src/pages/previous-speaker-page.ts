@@ -21,6 +21,7 @@ import {
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
 import { getVariableColor, isEmpty } from '../utils/functions';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('previous-speaker-page')
 export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
@@ -136,16 +137,6 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
           --paper-progress-secondary-color: var(--default-primary-color);
         }
       </style>
-
-      <polymer-helmet
-        title="[[speaker.name]] | {$ title $}"
-        description="[[speaker.bio]]"
-        image="[[speaker.photoUrl]]"
-        label1="{$ position $}"
-        data1="[[speaker.title]], [[speaker.company]]"
-        label2="{$ country $}"
-        data2="[[speaker.country]]"
-      ></polymer-helmet>
 
       <hero-block
         background-image="{$ heroSettings.speakers.background.image $}"
@@ -302,6 +293,11 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
       this.speaker = selectPreviousSpeaker(store.getState(), speakerId);
       if (!this.speaker) {
         router.render('/404');
+      } else {
+        updateMetadata(`${this.speaker.name} | {$ title $}`, this.speaker.bio, {
+          image: this.speaker.photoUrl,
+          imageAlt: this.speaker.name,
+        });
       }
     }
   }

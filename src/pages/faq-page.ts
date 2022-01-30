@@ -3,7 +3,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import '../components/hero-block';
 import '../components/markdown/remote-markdown';
 import '../elements/footer-block';
-import '../elements/polymer-helmet';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('faq-page')
 export class FaqPage extends PolymerElement {
@@ -14,11 +14,6 @@ export class FaqPage extends PolymerElement {
           display: block;
         }
       </style>
-
-      <polymer-helmet
-        title="{$ heroSettings.faq.title $} | {$ title $}"
-        description="{$ heroSettings.faq.metaDescription $}"
-      ></polymer-helmet>
 
       <hero-block
         background-image="{$ heroSettings.faq.background.image $}"
@@ -37,4 +32,12 @@ export class FaqPage extends PolymerElement {
 
   @property({ type: String })
   source = '{$ faq $}';
+
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(
+      '{$ heroSettings.faq.title $} | {$ title $}',
+      '{$ heroSettings.faq.metaDescription $}'
+    );
+  }
 }
