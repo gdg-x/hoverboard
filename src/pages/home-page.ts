@@ -15,9 +15,11 @@ import '../elements/tickets-block';
 import { firebaseApp } from '../firebase';
 import { ELEMENT, getElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { store } from '../store';
+import { queueSnackbar } from '../store/snackbars';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { updateMetadata } from '../utils/metadata';
-import { scrollToY } from '../utils/scrolling';
+import { POSITION, scrollToElement } from '../utils/scrolling';
 
 @customElement('home-page')
 export class HomePage extends ReduxMixin(PolymerElement) {
@@ -258,15 +260,20 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   _scrollToTickets() {
-    const toolbarHeight = getElement(ELEMENT.HEADER_TOOLBAR).getBoundingClientRect().height - 1;
-    const ticketsBlockPositionY =
-      getElement(ELEMENT.TICKETS).getBoundingClientRect().top - toolbarHeight;
-    scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
+    const element = getElement(ELEMENT.TICKETS);
+    if (element) {
+      scrollToElement(element);
+    } else {
+      store.dispatch(queueSnackbar('Error scrolling to section.'));
+    }
   }
 
   _scrollNextBlock() {
-    const heroHeight = this.$.hero.getBoundingClientRect().height - 64;
-    scrollToY(heroHeight, 600, 'easeInOutSine');
+    if (this.$.hero) {
+      scrollToElement(this.$.hero, POSITION.BOTTOM);
+    } else {
+      store.dispatch(queueSnackbar('Error scrolling to section.'));
+    }
   }
 
   private shouldShowForkMeBlock() {
