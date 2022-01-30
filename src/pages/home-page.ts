@@ -13,7 +13,6 @@ import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
 import { firebaseApp } from '../firebase';
-import { ELEMENT, getElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
@@ -236,7 +235,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       <about-block></about-block>
       <speakers-block></speakers-block>
       <subscribe-block></subscribe-block>
-      <tickets-block></tickets-block>
+      <tickets-block id="tickets-block"></tickets-block>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
       <featured-videos></featured-videos>
@@ -260,7 +259,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   _scrollToTickets() {
-    const element = getElement(ELEMENT.TICKETS);
+    const element = this.$['tickets-block'];
     if (element) {
       scrollToElement(element);
     } else {

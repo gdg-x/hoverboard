@@ -3,7 +3,6 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ELEMENT, setElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { Ticket } from '../models/ticket';
 import { RootState } from '../store';
@@ -204,11 +203,6 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
 
   override stateChanged(state: RootState) {
     this.tickets = state.tickets;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    setElement(ELEMENT.TICKETS, this);
   }
 
   @computed('tickets')
