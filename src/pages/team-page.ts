@@ -10,6 +10,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { selectTeamsAndMembers } from '../store/teams-members/selectors';
 import { initialTeamsMembersState } from '../store/teams-members/state';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('team-page')
 export class TeamPage extends ReduxMixin(PolymerElement) {
@@ -114,11 +115,6 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <polymer-helmet
-        title="{$ heroSettings.team.title $} | {$ title $}"
-        description="{$ heroSettings.team.metaDescription $}"
-      ></polymer-helmet>
-
       <hero-block
         background-image="{$ heroSettings.team.background.image $}"
         background-color="{$ heroSettings.team.background.color $}"
@@ -194,6 +190,13 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
   @computed('teamsMembers')
   get failure() {
     return this.teamsMembers instanceof Failure;
+  }
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(
+      '{$ heroSettings.team.title $} | {$ title $}',
+      '{$ heroSettings.team.metaDescription $}'
+    );
   }
 
   override stateChanged(state: RootState) {

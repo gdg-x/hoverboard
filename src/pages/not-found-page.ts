@@ -1,6 +1,7 @@
 import { customElement } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../elements/footer-block';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('not-found-page')
 export class NotFoundPage extends PolymerElement {
@@ -17,11 +18,6 @@ export class NotFoundPage extends PolymerElement {
           width: calc(100% - 94px);
         }
       </style>
-
-      <polymer-helmet
-        title="{$ heroSettings.notFound.title $} | {$ title $}"
-        description="{$ heroSettings.notFound.metaDescription $}"
-      ></polymer-helmet>
 
       <hero-block
         background-image="{$ heroSettings.notFound.background.image $}"
@@ -41,5 +37,13 @@ export class NotFoundPage extends PolymerElement {
 
       <footer-block></footer-block>
     `;
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(
+      '{$ heroSettings.notFound.title $} | {$ title $}',
+      '{$ heroSettings.notFound.metaDescription $}'
+    );
   }
 }

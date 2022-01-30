@@ -9,6 +9,7 @@ import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SessionsMixin } from '../mixins/sessions-mixin';
 import { Session } from '../models/session';
+import { Speaker } from '../models/speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
 import { initialAuthState } from '../store/auth/state';
@@ -26,7 +27,9 @@ import { toggleVideoDialog } from '../store/ui/actions';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
+import { TempAny } from '../temp-any';
 import { getVariableColor } from '../utils/functions';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('session-page')
 export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
@@ -183,16 +186,6 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
           --paper-progress-secondary-color: var(--default-primary-color);
         }
       </style>
-
-      <polymer-helmet
-        title="[[session.title]] | {$ title $}"
-        description="[[session.description]]"
-        image="[[session.speakers.0.photoUrl]]"
-        label1="{$ time $}"
-        data1="[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]"
-        label2="{$ sessionDetails.contentLevel $}"
-        data2="[[session.complexity]]"
-      ></polymer-helmet>
 
       <hero-block
         background-image="{$ heroSettings.schedule.background.image $}"
@@ -395,6 +388,12 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
 
       if (!this.session) {
         router.render('/404');
+      } else {
+        const speaker: Speaker | undefined = this.session.speakers[0] as TempAny;
+        updateMetadata(`${this.session.title} | {$ title $}`, this.session.description, {
+          image: speaker?.photoUrl,
+          imageAlt: speaker?.name,
+        });
       }
     }
   }

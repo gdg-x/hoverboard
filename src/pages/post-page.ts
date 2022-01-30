@@ -15,6 +15,7 @@ import { RootState, store } from '../store';
 import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
 import { getDate } from '../utils/functions';
+import { updateMetadata } from '../utils/metadata';
 
 // TODO: loading message
 
@@ -62,14 +63,6 @@ export class PostPage extends ReduxMixin(PolymerElement) {
           }
         }
       </style>
-
-      <polymer-helmet
-        title="[[post.data.title]] | {$ title $}"
-        description="[[post.data.brief]]"
-        image="[[post.data.image]]"
-        label1="{$ blog.published $}"
-        data1="[[published]]"
-      ></polymer-helmet>
 
       <hero-block
         background-image="[[post.data.image]]"
@@ -136,6 +129,11 @@ export class PostPage extends ReduxMixin(PolymerElement) {
         this.post = new Success(post);
         this.postContent = post?.content;
         this.suggestedPosts = posts.data.filter(({ id }) => id !== postId).slice(0, 3);
+
+        updateMetadata(`${post.title} | {$ title $}`, post.brief, {
+          image: post.image,
+          imageAlt: post.title,
+        });
       } else {
         router.render('/404');
       }

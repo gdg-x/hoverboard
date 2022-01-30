@@ -16,6 +16,7 @@ import { fetchBlogPosts } from '../store/blog/actions';
 import { initialBlogState } from '../store/blog/state';
 import { initialUiState } from '../store/ui/state';
 import { getDate } from '../utils/functions';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('blog-list-page')
 export class BlogListPage extends ReduxMixin(PolymerElement) {
@@ -90,11 +91,6 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
           }
         }
       </style>
-
-      <polymer-helmet
-        title="{$ heroSettings.blog.title $} | {$ title $}"
-        description="{$ heroSettings.blog.metaDescription $}"
-      ></polymer-helmet>
 
       <hero-block
         background-image="{$ heroSettings.blog.background.image $}"
@@ -195,6 +191,11 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
 
   override connectedCallback() {
     super.connectedCallback();
+    updateMetadata(
+      '{$ heroSettings.blog.title $} | {$ title $}',
+      '{$ heroSettings.blog.metaDescription $}'
+    );
+
     if (this.posts instanceof Initialized) {
       store.dispatch(fetchBlogPosts);
     }

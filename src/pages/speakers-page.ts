@@ -19,6 +19,7 @@ import { RootState } from '../store';
 import { selectFilters } from '../store/filters/selectors';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('speakers-page')
 export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
@@ -161,11 +162,6 @@ export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
         }
       </style>
 
-      <polymer-helmet
-        title="{$ heroSettings.speakers.title $} | {$ title $}"
-        description="{$ heroSettings.speakers.metaDescription $}"
-      ></polymer-helmet>
-
       <hero-block
         background-image="{$ heroSettings.speakers.background.image $}"
         background-color="{$ heroSettings.speakers.background.color $}"
@@ -270,6 +266,14 @@ export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   private selectedFilters: Filter[] = [];
   @property({ type: Array })
   private speakersToRender = [];
+
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(
+      '{$ heroSettings.speakers.title $} | {$ title $}',
+      '{$ heroSettings.speakers.metaDescription $}'
+    );
+  }
 
   override stateChanged(state: RootState) {
     super.stateChanged(state);
