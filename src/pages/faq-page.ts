@@ -1,7 +1,9 @@
 import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
+import '../components/hero-block';
+import '../components/markdown/remote-markdown';
 import '../elements/footer-block';
-import '../elements/md-content';
+import '../elements/polymer-helmet';
 
 @customElement('faq-page')
 export class FaqPage extends PolymerElement {
@@ -27,7 +29,7 @@ export class FaqPage extends PolymerElement {
         <p class="hero-description">{$ heroSettings.faq.description $}</p>
       </hero-block>
 
-      <md-content md-source="[[source]]"></md-content>
+      <remote-markdown toc path="[[source]]"></remote-markdown>
 
       <footer-block></footer-block>
     `;

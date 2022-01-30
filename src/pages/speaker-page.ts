@@ -1,12 +1,12 @@
 import { Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/marked-element';
 import '@polymer/paper-icon-button';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import 'plastic-image';
+import '../components/markdown/short-markdown';
 import '../elements/content-loader';
 import '../elements/previous-speakers-block';
 import '../elements/shared-styles';
@@ -198,9 +198,7 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
           </template>
         </h3>
 
-        <marked-element class="description" markdown="[[speaker.bio]]">
-          <div slot="markdown-html"></div>
-        </marked-element>
+        <short-markdown class="description" content="[[speaker.bio]]"></short-markdown>
 
         <div class="actions" layout horizontal>
           <template is="dom-repeat" items="[[speaker.socials]]" as="social">

@@ -1,7 +1,7 @@
 import { customElement } from '@polymer/decorators';
 import '@polymer/paper-fab';
 import { html, PolymerElement } from '@polymer/polymer';
-import { scrollToY } from '../utils/scrolling';
+import { scrollToTop } from '../utils/scrolling';
 import './footer-nav';
 import './footer-rel';
 import './footer-social';
@@ -62,6 +62,6 @@ export class FooterBlock extends PolymerElement {
   }
 
   backToTop(_e: MouseEvent) {
-    scrollToY(0, 600, 'easeInOutSine');
+    scrollToTop();
   }
 }

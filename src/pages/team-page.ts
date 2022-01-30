@@ -1,10 +1,10 @@
 import { Failure, Pending } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/marked-element';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/markdown/short-markdown';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
@@ -130,9 +130,7 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
 
       <div class="description-wrapper">
         <div class="container" layout horizontal justified>
-          <marked-element class="description" markdown="{$ team.description $}">
-            <div slot="markdown-html"></div>
-          </marked-element>
+          <short-markdown content="{$ team.description $}"></short-markdown>
         </div>
       </div>
 

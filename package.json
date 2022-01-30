@@ -29,7 +29,7 @@
     "start": "NODE_ENV=development concurrently --kill-others npm:start:*",
     "start:emulators": "firebase emulators:start",
     "start:functions": "npm --prefix functions start",
-    "start:rollup": "rollup --config rollup.config.ts --configPlugin typescript --watch",
+    "start:rollup": "mkdir -p dist && rollup --config rollup.config.ts --configPlugin typescript --watch",
     "test": "jest"
   },
   "dependencies": {
@@ -47,7 +47,6 @@
     "@polymer/iron-icon": "^3.0.1",
     "@polymer/iron-image": "^3.0.2",
     "@polymer/iron-overlay-behavior": "^3.0.3",
-    "@polymer/marked-element": "^3.0.1",
     "@polymer/paper-button": "^3.0.1",
     "@polymer/paper-dialog-behavior": "^3.0.1",
     "@polymer/paper-fab": "^3.0.1",
@@ -63,6 +62,7 @@
     "@vaadin/router": "^1.7.4",
     "firebase": "^9.6.5",
     "lit": "^2.1.2",
+    "marked": "^4.0.12",
     "plastic-image": "^3.0.2",
     "pwa-helpers": "^0.9.1",
     "register-service-worker": "^1.7.2",
@@ -81,6 +81,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@types/jest": "^27.4.0",
     "@types/jest-dev-server": "^5.0.0",
+    "@types/marked": "^4.0.1",
     "@types/node": "^16.11.11",
     "@types/nunjucks": "^3.2.1",
     "@types/polymer": "^1.2.12",

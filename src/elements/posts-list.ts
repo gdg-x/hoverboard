@@ -1,7 +1,7 @@
 import { customElement, property } from '@polymer/decorators';
-import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/markdown/short-markdown';
 import '../components/text-truncate';
 import { Post } from '../models/post';
 import { router } from '../router';
@@ -80,9 +80,7 @@ export class PostsList extends PolymerElement {
                   <h2 class="title">[[post.title]]</h2>
                 </text-truncate>
                 <text-truncate lines="3">
-                  <marked-element class="description" markdown="[[post.brief]]">
-                    <div slot="markdown-html"></div>
-                  </marked-element>
+                  <short-markdown class="description" content="[[post.brief]]"></short-markdown>
                 </text-truncate>
               </div>
               <span class="date">[[getDate(post.published)]]</span>
