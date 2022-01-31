@@ -11,6 +11,7 @@ import { ExistingAccountError } from '../../store/auth/types';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOG } from '../../store/dialogs/types';
 import { initialUserState } from '../../store/user/state';
+import { TempAny } from '../../temp-any';
 import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 import '../hoverboard-icons';
 import '../shared-styles';
@@ -133,7 +134,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
     if (isMergeState && this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
       this.email = error.email;
-      this.providerCompanyName = getProviderCompanyName(error.providerId);
+      this.providerCompanyName = error.providerId && getProviderCompanyName(error.providerId);
       openDialog(DIALOG.SIGNIN);
     }
   }
@@ -141,7 +142,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
   _mergeAccounts() {
     if (this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
-      mergeAccounts(error.providerId, error.credential);
+      mergeAccounts(error.providerId as TempAny, error.credential as TempAny);
       closeDialog();
     }
   }

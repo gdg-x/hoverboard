@@ -41,15 +41,6 @@ export const getVariableColor = (
   return calculated || (fallback && getVariableColor(element, fallback));
 };
 
-export const toggleQueryParam = (currentQueryParams: string | null, key: string, value: string) => {
-  const keyValue = `${key}=${value}`;
-  const currentKeyValuePairs = currentQueryParams ? currentQueryParams.split('&') : [];
-  const resultArray = currentKeyValuePairs.includes(keyValue)
-    ? currentKeyValuePairs.filter((pair) => pair !== keyValue)
-    : currentKeyValuePairs.concat(keyValue);
-  return resultArray.join('&');
-};
-
 export const setQueryString = (search: string): void => {
   const [url] = location.href.split('?');
 

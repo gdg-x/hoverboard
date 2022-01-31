@@ -149,7 +149,10 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
     });
   }
 
-  _partnerAddingChanged(potentialPartners: PotentialPartnersState) {
+  _partnerAddingChanged(
+    potentialPartners: PotentialPartnersState | {},
+    _old: PotentialPartnersState | {}
+  ): void {
     if (potentialPartners instanceof Success) {
       closeDialog();
       store.dispatch(queueSnackbar('{$ partnersBlock.toast $}'));

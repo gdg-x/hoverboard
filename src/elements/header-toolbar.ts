@@ -223,7 +223,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Boolean, notify: true })
-  drawerOpened: boolean;
+  drawerOpened: boolean = false;
   @property({ type: Object })
   tickets: TicketsState = initialTicketsState;
 
@@ -295,7 +295,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   get ticketUrl() {
     if (this.tickets instanceof Success && this.tickets.data.length > 0) {
       const availableTicket = this.tickets.data.find((ticket) => ticket.available);
-      return (availableTicket || this.tickets.data[0]).url;
+      return (availableTicket || this.tickets.data[0])?.url || '';
     } else {
       return '';
     }

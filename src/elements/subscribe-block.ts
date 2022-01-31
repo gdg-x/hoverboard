@@ -104,7 +104,7 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
     } = {};
 
     if (this.user instanceof Success) {
-      const fullNameSplit = this.user.data.displayName.split(' ');
+      const fullNameSplit = this.user.data.displayName?.split(' ') || ['', ''];
       userData = {
         firstFieldValue: fullNameSplit[0],
         secondFieldValue: fullNameSplit[1],

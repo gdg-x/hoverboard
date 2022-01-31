@@ -1,3 +1,4 @@
+import { Success } from '@abraham/remotedata';
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import '@polymer/paper-button';
 import '@polymer/paper-input/paper-input';
@@ -6,6 +7,8 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { RootState } from '../../store';
 import { closeDialog } from '../../store/dialogs/actions';
+import { SubscribeState } from '../../store/subscribe/state';
+import { TempAny } from '../../temp-any';
 import '../hoverboard-icons';
 import '../shared-styles';
 
@@ -170,13 +173,13 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
     closeDialog();
   }
 
-  _handleSubscribed(subscribed) {
-    if (subscribed) {
+  _handleSubscribed(subscribed: SubscribeState) {
+    if (subscribed instanceof Success) {
       this._closeDialog();
     }
   }
 
-  _handleDialogToggled(_opened: boolean, data) {
+  _handleDialogToggled(_opened: boolean, data: TempAny) {
     if (data) {
       this.errorOccurred = data.errorOccurred;
     } else {
