@@ -1,8 +1,10 @@
-export const share = (e) => {
+export const share = (e: PointerEvent) => {
   const shareUrl = location.href;
   const title = document.title;
 
-  switch (e.currentTarget.getAttribute('share')) {
+  const target = e.currentTarget instanceof HTMLElement && e.currentTarget.getAttribute('share');
+
+  switch (target) {
     case 'facebook': {
       openFacebook({ title, shareUrl });
       break;

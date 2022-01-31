@@ -310,9 +310,9 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
   }
 
   @property({ type: Object })
-  session: Session;
+  session: Session | undefined;
   @property({ type: String })
-  sessionId: string;
+  sessionId: string | undefined;
   @property({ type: Object })
   featuredSessions = initialFeaturedSessionsState;
   @property({ type: Object })
@@ -346,7 +346,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
   }
 
   onAfterEnter(location: RouterLocation) {
-    this.sessionId = location.params.id.toString();
+    this.sessionId = location.params?.id?.toString();
   }
 
   @observe('session')
@@ -356,6 +356,10 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
 
   @observe('session')
   onAcceptingFeedback() {
+    if (!this.session) {
+      this.acceptingFeedback = false;
+      return;
+    }
     const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
     const ONE_MINUTE_MS = 60 * 1000;
     const { day, startTime } = this.session;
@@ -374,7 +378,11 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
 
   @computed('featuredSessions', 'sessionId')
   get featuredSessionIcon() {
-    if (this.featuredSessions instanceof Success && this.featuredSessions.data[this.sessionId]) {
+    if (
+      this.featuredSessions instanceof Success &&
+      this.sessionId &&
+      this.featuredSessions.data[this.sessionId]
+    ) {
       return 'bookmark-check';
     } else {
       return 'bookmark-plus';
@@ -389,7 +397,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
       if (!this.session) {
         router.render('/404');
       } else {
-        const speaker: Speaker | undefined = this.session.speakers[0] as TempAny;
+        const speaker: Speaker | undefined = this.session?.speakers?.[0] as TempAny;
         updateMetadata(`${this.session.title} | {$ title $}`, this.session.description, {
           image: speaker?.photoUrl,
           imageAlt: speaker?.name,
@@ -415,7 +423,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
       return;
     }
 
-    if (this.user instanceof Success && this.featuredSessions instanceof Success) {
+    if (this.user instanceof Success && this.featuredSessions instanceof Success && this.session) {
       const bookmarked = !this.featuredSessions.data[this.session.id];
       const sessions = {
         ...this.featuredSessions.data,
@@ -427,6 +435,10 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
   }
 
   private _openVideo() {
+    if (!this.session || !this.session.videoId) {
+      return;
+    }
+
     toggleVideoDialog({
       title: this.session.title,
       youtubeId: this.session.videoId,

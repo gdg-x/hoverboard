@@ -11,6 +11,7 @@ import '../elements/content-loader';
 import '../elements/previous-speakers-block';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { PreviousSessionWithYear } from '../models/previous-session';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -259,7 +260,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
   speakers = initialPreviousSpeakersState;
 
   @property({ type: String })
-  private speakerId: string;
+  private speakerId: string | undefined;
   @property({ type: String, computed: 'computeJoin(speaker.country, speaker.pronouns)' })
   private subtitle: string = '';
   @property({ type: String, computed: 'computeCompanyInfo(speaker.title, speaker.company)' })
@@ -279,7 +280,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
   }
 
   onAfterEnter(location: RouterLocation) {
-    this.speakerId = location.params.id.toString();
+    this.speakerId = location.params?.id?.toString();
   }
 
   @computed('speaker')
@@ -319,21 +320,18 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
   }
 
   @computed('speaker')
-  private get sessions() {
+  private get sessions(): PreviousSessionWithYear[] {
+    // TODO: Move to selector
     if (!this.speaker) {
       return [];
     }
 
-    const { sessions } = this.speaker;
+    let sessions: PreviousSessionWithYear[] = [];
 
-    return Object.keys(sessions)
-      .reduce((aggregator, year) => {
-        return aggregator.concat(
-          sessions[year].map((session) => {
-            return { ...session, year };
-          })
-        );
-      }, [])
-      .sort((a, b) => b.year - a.year);
+    for (const [year, previousSessions] of Object.entries(this.speaker.sessions)) {
+      sessions = [...sessions, ...previousSessions.map((session) => ({ ...session, year }))];
+    }
+
+    return sessions.sort((a, b) => Number(b.year) - Number(a.year));
   }
 }

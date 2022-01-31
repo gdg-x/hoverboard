@@ -43,7 +43,7 @@ export const fetchPartners = async (dispatch: Dispatch<PartnerActions>) => {
   } catch (error) {
     dispatch({
       type: FETCH_PARTNERS_FAILURE,
-      payload: error,
+      payload: error as Error,
     });
   }
 };

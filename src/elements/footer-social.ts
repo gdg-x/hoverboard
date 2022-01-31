@@ -198,7 +198,7 @@ export class FooterSocial extends PolymerElement {
 `;
   }
 
-  share(e) {
+  share(e: PointerEvent) {
     return share(e);
   }
 }
