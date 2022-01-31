@@ -247,7 +247,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Boolean })
-  private showForkMeBlock = false;
+  private showForkMeBlock: boolean = false;
 
   _playVideo() {
     toggleVideoDialog({
@@ -275,9 +275,11 @@ export class HomePage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  private shouldShowForkMeBlock() {
+  private shouldShowForkMeBlock(): boolean {
     const showForkMeBlockForProjectIds = '{$  showForkMeBlockForProjectIds $}'.split(',');
-    const showForkMeBlock = showForkMeBlockForProjectIds.includes(firebaseApp.options.appId);
+    const showForkMeBlock = firebaseApp.options.appId
+      ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
+      : false;
     if (showForkMeBlock) {
       import('../elements/fork-me-block');
     }

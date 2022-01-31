@@ -23,6 +23,7 @@ export const selectFeaturedSchedule = createSelector(
   selectSchedule,
   selectFeaturedSessions,
   (schedule: Day[], featuredSessions: FeaturedSessions): Day[] => {
+    // TODO: Cleanup
     return schedule.map((day: Day) => {
       return {
         ...day,
@@ -31,9 +32,7 @@ export const selectFeaturedSchedule = createSelector(
             ...timeslot,
             sessions: timeslot.sessions.map((sessionBlock: Time) => {
               const items = (sessionBlock.items as TempAny as Session[]).filter(
-                (session: Session): boolean => {
-                  return featuredSessions[session.id];
-                }
+                (session: Session): boolean => Boolean(featuredSessions[session.id])
               );
               return {
                 ...sessionBlock,

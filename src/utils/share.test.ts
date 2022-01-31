@@ -20,12 +20,12 @@ describe('share', () => {
   });
 
   it('shares to Twitter', () => {
-    share({ currentTarget: fixture('twitter') });
+    share({ currentTarget: fixture('twitter') } as any as PointerEvent);
     expect(window.open).toHaveBeenCalledWith(twitterUrl, 'share', features(275));
   });
 
   it('shares to Facebook', () => {
-    share({ currentTarget: fixture('facebook') });
+    share({ currentTarget: fixture('facebook') } as any as PointerEvent);
     expect(window.open).toHaveBeenCalledWith(
       'https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%2F&t=Awesome%20Schedule',
       'share',
@@ -34,7 +34,7 @@ describe('share', () => {
   });
 
   it('throws on unknown', () => {
-    const event = { currentTarget: fixture('unknown') };
+    const event = { currentTarget: fixture('unknown') } as any as PointerEvent;
     expect(() => share(event)).toThrow('Unknown share target');
   });
 });

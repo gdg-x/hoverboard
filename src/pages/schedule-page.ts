@@ -108,7 +108,7 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
   @property({ type: Array })
   private selectedFilters: Filter[] = [];
   @property({ type: Object })
-  private location: RouterLocation;
+  private location: RouterLocation | undefined;
 
   override connectedCallback() {
     super.connectedCallback();

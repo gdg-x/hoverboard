@@ -232,7 +232,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         newX = 0;
       }
 
-      this.transformVideoList(this.$.videos, newX);
+      this.transformVideoList(this.$.videos as HTMLElement, newX);
 
       if (newX == 0) {
         this._leftArrowHidden = true;
@@ -255,7 +255,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         newX = maxRightPosition;
       }
 
-      this.transformVideoList(this.$.videos, newX);
+      this.transformVideoList(this.$.videos as HTMLElement, newX);
 
       if (newX == maxRightPosition) {
         this._rightArrowHidden = true;
@@ -291,7 +291,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     return cardRect.width * videos.length;
   }
 
-  transformVideoList(el, newPosition) {
+  transformVideoList(el: HTMLElement, newPosition: number) {
     el.style.transform = 'translate3d(' + newPosition + 'px, 0, 0)';
   }
 

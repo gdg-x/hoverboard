@@ -21,7 +21,7 @@ export class AppInstall extends ThemedElement {
 
   constructor() {
     super();
-    window.addEventListener('beforeinstallprompt', (e) => {
+    window.addEventListener('beforeinstallprompt', (e: BeforeInstallPromptEvent) => {
       e.preventDefault();
       this.deferredPrompt = e;
     });

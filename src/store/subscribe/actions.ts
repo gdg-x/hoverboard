@@ -40,7 +40,7 @@ export const subscribe = (data: DialogForm) => async (dispatch: Dispatch<Subscri
   } catch (error) {
     dispatch({
       type: SUBSCRIBE_FAILURE,
-      payload: error,
+      payload: error as Error,
     });
     openDialog(DIALOG.SUBSCRIBE, { ...data, errorOccurred: true });
   }

@@ -229,7 +229,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
     return `{$ ticketsBlock.save $}`;
   }
 
-  _onTicketTap(e) {
+  _onTicketTap(e: PointerEvent & { model: { ticket: Ticket } }) {
     if (e.model.ticket.soldOut || !e.model.ticket.available) {
       e.preventDefault();
       e.stopPropagation();

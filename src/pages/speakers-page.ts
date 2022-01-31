@@ -14,6 +14,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
+import { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
 import { RootState } from '../store';
 import { selectFilters } from '../store/filters/selectors';
@@ -265,7 +266,7 @@ export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   @property({ type: Array })
   private selectedFilters: Filter[] = [];
   @property({ type: Array })
-  private speakersToRender = [];
+  private speakersToRender: SpeakerWithTags[] = [];
 
   override connectedCallback() {
     super.connectedCallback();

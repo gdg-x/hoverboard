@@ -293,24 +293,30 @@ export class HoverboardApp extends PolymerElement {
   override connectedCallback() {
     super.connectedCallback();
     window.addEventListener('element-sticked', this._toggleHeaderShadow);
-    this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
-    window.addEventListener('offline', () => {
-      store.dispatch(queueSnackbar('{$ offlineMessage $}'));
-    });
+    if (this.$.drawer) {
+      this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
+    } else {
+      console.error('Unable to find #drawer');
+    }
+    window.addEventListener('offline', () => store.dispatch(queueSnackbar('{$ offlineMessage $}')));
     store.dispatch(fetchTickets);
   }
 
   override disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('element-sticked', this._toggleHeaderShadow);
-    this.$.drawer.removeEventListener('opened-changed', this._toggleDrawer);
+    if (this.$.drawer) {
+      this.$.drawer.removeEventListener('opened-changed', this._toggleDrawer);
+    } else {
+      console.error('Unable to find #drawer');
+    }
   }
 
   override ready() {
     super.ready();
     log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
-    startRouter(this.shadowRoot.querySelector('main'));
+    startRouter(this.shadowRoot!.querySelector('main')!);
     onUser();
   }
 
@@ -333,7 +339,11 @@ export class HoverboardApp extends PolymerElement {
   }
 
   _toggleHeaderShadow(e) {
-    this.$.header.classList.toggle('remove-shadow', e.detail.sticked);
+    if (this.$.header) {
+      this.$.header.classList.toggle('remove-shadow', e.detail.sticked);
+    } else {
+      console.error('Unable to find #header');
+    }
   }
 
   _toggleDrawer(e) {
@@ -344,7 +354,8 @@ export class HoverboardApp extends PolymerElement {
   get ticketUrl(): string {
     if (this.tickets instanceof Success && this.tickets.data.length > 0) {
       const availableTicket = this.tickets.data.find((ticket) => ticket.available);
-      return (availableTicket || this.tickets.data[0]).url;
+      const ticket = availableTicket || this.tickets.data[0];
+      return ticket?.url || '';
     } else {
       return '';
     }

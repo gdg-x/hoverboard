@@ -232,10 +232,10 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   }
 
   @property({ type: Object })
-  speaker: SpeakerWithTags;
+  speaker: SpeakerWithTags | undefined;
 
   @property({ type: String })
-  private speakerId: string;
+  private speakerId: string | undefined;
   @property({ type: String, computed: 'computeJoin(speaker.country, speaker.pronouns)' })
   private subtitle: string = '';
   @property({ type: String, computed: 'computeCompanyInfo(speaker.title, speaker.company)' })
@@ -247,7 +247,7 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   }
 
   onAfterEnter(location: RouterLocation) {
-    this.speakerId = location.params.id.toString();
+    this.speakerId = location.params?.id?.toString();
   }
 
   @computed('speaker')

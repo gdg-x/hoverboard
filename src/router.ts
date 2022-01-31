@@ -6,11 +6,16 @@ export let router: Router;
 window.addEventListener('vaadin-router-location-changed', (event) => {
   // url ends in a slash and pathname starts with a slash
   const canonicalLink = `{$ url $}${event.detail.location.pathname.slice(1)}`;
-  document.querySelector('link[rel="canonical"]').setAttribute('href', canonicalLink);
+  const link = document.querySelector('link[rel="canonical"]');
+  if (link) {
+    link.setAttribute('href', canonicalLink);
+  } else {
+    console.error('Missing canonical link tag');
+  }
   logPageView();
 });
 
-export const selectRouteName = (pathname: string) => {
+export const selectRouteName = (pathname: string): string => {
   let [, part] = pathname.split('/');
   switch (part) {
     case '':
@@ -26,6 +31,7 @@ export const selectRouteName = (pathname: string) => {
       break;
 
     default:
+      part = 'home';
       break;
   }
 
