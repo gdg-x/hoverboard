@@ -266,8 +266,14 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   }
 
   getVideosDetails() {
-    const videos = this.shadowRoot.querySelectorAll('.video-item');
-    const cardRect = videos[videos.length - 1].getBoundingClientRect();
+    const videos = this.shadowRoot!.querySelectorAll('.video-item');
+    const lastVideo = videos[videos.length - 1];
+
+    if (!this.$.videos || !this.$.videoList || !lastVideo) {
+      throw new Error('Featured videos elements missing');
+    }
+
+    const cardRect = lastVideo.getBoundingClientRect();
     const cardWidth = cardRect.width;
     const videosContainerWidth = parseInt(
       getComputedStyle(this.$.videoList, null).getPropertyValue('width')
@@ -275,7 +281,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     const videosWidth = parseInt(getComputedStyle(this.$.videos, null).getPropertyValue('width'));
     const maxRightPosition = -(videosWidth - videosContainerWidth) - 16;
     const currentPosition = parseInt(
-      getComputedStyle(this.$.videos, null).getPropertyValue('transform').split(',')[4]
+      getComputedStyle(this.$.videos, null).getPropertyValue('transform').split(',')[4] || ''
     );
 
     return {
@@ -286,8 +292,14 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   }
 
   getVideoListWidth() {
-    const videos = this.shadowRoot.querySelectorAll('.video-item');
-    const cardRect = videos[videos.length - 1].getBoundingClientRect();
+    const videos = this.shadowRoot!.querySelectorAll('.video-item');
+    const lastVideo = videos[videos.length - 1];
+
+    if (!lastVideo) {
+      throw new Error('Featured videos elements missing');
+    }
+
+    const cardRect = lastVideo.getBoundingClientRect();
     return cardRect.width * videos.length;
   }
 

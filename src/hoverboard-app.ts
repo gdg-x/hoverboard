@@ -32,6 +32,7 @@ import './elements/footer-block';
 import './elements/header-toolbar';
 import './elements/hoverboard-icons';
 import './elements/shared-styles';
+import { Stickied } from './elements/sticky-element';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
 import { onUser } from './store/auth/actions';
@@ -338,7 +339,7 @@ export class HoverboardApp extends PolymerElement {
     document.body.style.overflow = dialogs instanceof Success ? 'hidden' : '';
   }
 
-  _toggleHeaderShadow(e) {
+  _toggleHeaderShadow(e: CustomEvent<Stickied>) {
     if (this.$.header) {
       this.$.header.classList.toggle('remove-shadow', e.detail.sticked);
     } else {

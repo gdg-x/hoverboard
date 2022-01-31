@@ -1,6 +1,16 @@
 import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 
+export interface Stickied {
+  sticked: boolean;
+}
+
+declare global {
+  interface WindowEventMap {
+    'element-sticked': CustomEvent<Stickied>;
+  }
+}
+
 @customElement('sticky-element')
 export class StickyElement extends PolymerElement {
   static get template() {
@@ -55,7 +65,7 @@ export class StickyElement extends PolymerElement {
   @property({ type: Boolean })
   private waiting = false;
   @property({ type: Number })
-  private endScrollHandle: number;
+  private endScrollHandle: number | undefined;
 
   constructor() {
     super();
@@ -70,7 +80,7 @@ export class StickyElement extends PolymerElement {
   override disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('scroll', this._onScroll);
-    this.$.content.classList.remove('sticked');
+    this.$.content?.classList?.remove('sticked');
   }
 
   _onScroll() {
@@ -92,9 +102,17 @@ export class StickyElement extends PolymerElement {
   }
 
   _toggleSticky() {
-    const scrollTop = this.$.trigger.getBoundingClientRect().top;
-    if (scrollTop > 64 && this.$.content.classList.contains('sticked')) {
-      this.$.content.classList.remove('sticked');
+    const trigger = this.$.trigger;
+    const content = this.$.content;
+
+    if (!trigger || !content) {
+      console.error('Missing trigger or content element.');
+      return;
+    }
+
+    const scrollTop = trigger.getBoundingClientRect().top;
+    if (scrollTop > 64 && content.classList.contains('sticked')) {
+      content.classList.remove('sticked');
       this.dispatchEvent(
         new CustomEvent('element-sticked', {
           bubbles: true,
@@ -104,10 +122,10 @@ export class StickyElement extends PolymerElement {
           },
         })
       );
-    } else if (scrollTop <= 64 && !this.$.content.classList.contains('sticked')) {
+    } else if (scrollTop <= 64 && !content.classList.contains('sticked')) {
       // TODO: Remove type cast
       this.style.height = `${(this.$.content as HTMLDivElement).offsetHeight}px`;
-      this.$.content.classList.add('sticked');
+      content.classList.add('sticked');
       this.dispatchEvent(
         new CustomEvent('element-sticked', {
           bubbles: true,

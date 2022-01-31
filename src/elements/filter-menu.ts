@@ -157,7 +157,7 @@ export class FilterMenu extends PolymerElement {
   @property({ type: Array })
   filterGroups: FilterGroup[] = [];
   @property({ type: Number })
-  resultsCount: number = undefined;
+  resultsCount: number | undefined;
   @property({ type: Array })
   selectedFilters: Filter[] = [];
   @property({ type: Boolean })
@@ -174,10 +174,19 @@ export class FilterMenu extends PolymerElement {
     );
   }
 
-  _toggleFilter(e: Event) {
-    const currentTarget = e.currentTarget as HTMLElement;
-    const group = currentTarget.getAttribute('filter-key').trim() as FilterGroupKey;
-    const tag = generateClassName(currentTarget.getAttribute('filter-value').trim());
+  _toggleFilter(e: PointerEvent) {
+    if (
+      !(e.currentTarget instanceof HTMLElement) ||
+      !e.currentTarget.getAttribute('filter-key') ||
+      !e.currentTarget.getAttribute('filter-value')
+    ) {
+      console.error('Toggle filter invalid or missing attributes.');
+      return;
+    }
+
+    const currentTarget = e.currentTarget;
+    const group = currentTarget.getAttribute('filter-key')?.trim() as FilterGroupKey;
+    const tag = generateClassName(currentTarget.getAttribute('filter-value')?.trim());
     toggleFilter({ group, tag });
   }
 
@@ -216,7 +225,7 @@ export class FilterMenu extends PolymerElement {
   }
 
   _clickOutsideListener(e) {
-    const isOutside = !e.path.find((path) => path === this);
+    const isOutside = !e.path.find((path: Element) => path === this);
     if (isOutside) {
       this._toggleBoard();
       this._clickOutsideUnlisten();

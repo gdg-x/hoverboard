@@ -101,7 +101,7 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   schedule = initialScheduleState;
   @property({ type: Object })
-  location: RouterLocation;
+  location: RouterLocation | undefined;
   @property({ type: Boolean })
   private signedIn = false;
 
@@ -132,7 +132,7 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
       if (pathname.endsWith('my-schedule')) {
         return 'my-schedule';
       } else {
-        return id || this.schedule.data[0].date;
+        return id || this.schedule.data[0]?.date;
       }
     } else {
       return undefined;

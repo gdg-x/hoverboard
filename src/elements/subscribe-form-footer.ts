@@ -93,9 +93,9 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
 
   _subscribe() {
     this.validate = true;
-    const emailInput = this.shadowRoot.querySelector<PaperInputElement>('#emailInput');
+    const emailInput = this.shadowRoot!.querySelector<PaperInputElement>('#emailInput');
 
-    if ((this.initialized || this.failure) && emailInput.validate()) {
+    if ((this.initialized || this.failure) && emailInput?.validate()) {
       store.dispatch(subscribe({ email: this.email }));
     }
   }

@@ -18,7 +18,7 @@ import {
 import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
-import { getVariableColor, toggleQueryParam } from '../utils/functions';
+import { getVariableColor } from '../utils/functions';
 import './shared-styles';
 
 @customElement('session-element')
@@ -241,21 +241,21 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private user = initialUserState;
   @property({ type: Object })
-  private session: Session;
+  private session: Session | undefined;
   @property({ type: Object })
   private featuredSessions = initialFeaturedSessionsState;
   @property({ type: String })
-  private queryParams: string;
+  private queryParams: string | undefined;
   @property({ type: String })
-  private dayName: string;
+  private dayName: string | undefined;
   @property({ type: String, computed: 'getVariableColor(session.mainTag)' })
-  private sessionCollor: string;
+  private sessionCollor: string | undefined;
   @property({ type: Boolean, computed: '_isFeatured(user, featuredSessions, session.id)' })
-  private isFeatured: boolean;
+  private isFeatured: boolean | undefined;
   @property({ type: String, computed: '_summary(session.description)' })
-  private summary: string;
+  private summary: string | undefined;
   @property({ type: String, computed: '_icon(isFeatured)' })
-  private icon: string;
+  private icon: string | undefined;
 
   override stateChanged(state: RootState) {
     this.user = state.user;
@@ -303,7 +303,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
       return;
     }
 
-    if (this.user instanceof Success && this.featuredSessions instanceof Success) {
+    if (this.user instanceof Success && this.featuredSessions instanceof Success && this.session) {
       const bookmarked = !this.featuredSessions.data[this.session.id];
       const sessions = {
         ...this.featuredSessions.data,
@@ -321,6 +321,10 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   }
 
   _acceptingFeedback() {
+    if (!this.session) {
+      return false;
+    }
+
     const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
     const ONE_MINUTE_MS = 60 * 1000;
     const now = new Date();
@@ -337,11 +341,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     return [company, country].filter(Boolean).join(' / ');
   }
 
-  toggleQueryParam(currentQueryParams, key, value) {
-    return toggleQueryParam(currentQueryParams, key, value);
-  }
-
-  getVariableColor(value) {
+  getVariableColor(value: string) {
     return getVariableColor(this, value);
   }
 

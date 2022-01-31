@@ -153,9 +153,9 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   schedule: ScheduleState = initialScheduleState;
   @property({ type: Object })
-  location: RouterLocation;
+  location: RouterLocation | undefined;
   @property({ type: Object })
-  private day: Day;
+  private day: Day | undefined;
 
   @property({ type: Object })
   private user = initialUserState;
@@ -235,7 +235,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
       if (pathname.endsWith('my-schedule')) {
         return 'my-schedule';
       } else {
-        return id || this.schedule.data[0].date;
+        return id || this.schedule.data[0]?.date;
       }
     } else {
       return undefined;
