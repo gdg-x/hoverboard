@@ -1,14 +1,14 @@
 import { store } from '../';
 import {
   Hero,
+  SetViewport,
   SET_HERO_SETTINGS,
   SET_VIEWPORT_SIZE,
   TOGGLE_VIDEO_DIALOG,
   VideoDialog,
-  Viewport,
 } from './types';
 
-export const setViewportSize = (payload: Viewport) => {
+export const setViewportSize = (payload: SetViewport) => {
   store.dispatch({
     type: SET_VIEWPORT_SIZE,
     payload,

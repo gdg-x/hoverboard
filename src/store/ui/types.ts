@@ -7,10 +7,19 @@ export const SET_VIEWPORT_SIZE = 'SET_VIEWPORT_SIZE';
 export const SET_HERO_SETTINGS = 'SET_HERO_SETTINGS';
 export const TOGGLE_VIDEO_DIALOG = 'TOGGLE_VIDEO_DIALOG';
 
-export interface Viewport {
-  isPhone: boolean;
-  isTabletPlus: boolean;
-  isLaptopPlus: boolean;
+export enum VIEWPORT {
+  isPhone = 'isPhone',
+  isTabletPlus = 'isTabletPlus',
+  isLaptopPlus = 'isLaptopPlus',
+}
+
+export type Viewport = {
+  [index in VIEWPORT]: boolean;
+};
+
+export interface SetViewport {
+  size: VIEWPORT;
+  matches: boolean;
 }
 
 export interface VideoDialog {
@@ -28,7 +37,7 @@ export interface UiState {
 
 interface SetViewPortSizeAction {
   type: typeof SET_VIEWPORT_SIZE;
-  payload: Viewport;
+  payload: SetViewport;
 }
 interface ViewPortSizeAction {
   type: typeof VIEWPORT_SIZE;
