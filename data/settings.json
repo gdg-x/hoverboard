@@ -136,22 +136,6 @@
     },
     "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
   },
-  "mediaQueries": {
-    "xs": {
-      "max": "639px"
-    },
-    "sm": {
-      "min": "640px",
-      "max": "811px"
-    },
-    "md": {
-      "min": "812px",
-      "max": "1023px"
-    },
-    "lg": {
-      "min": "1024px"
-    }
-  },
   "socialNetwork": {
     "follow": [
       {

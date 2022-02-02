@@ -7,7 +7,6 @@ import '@polymer/app-layout/app-toolbar/app-toolbar';
 import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-dropdown/iron-dropdown-scroll-manager';
 import '@polymer/iron-icon';
-import '@polymer/iron-media-query';
 import '@polymer/iron-selector/iron-selector';
 import '@polymer/paper-button';
 import '@polymer/paper-icon-button';
@@ -42,9 +41,9 @@ import { DIALOG } from './store/dialogs/types';
 import { queueSnackbar } from './store/snackbars';
 import { fetchTickets } from './store/tickets/actions';
 import { initialTicketsState } from './store/tickets/state';
-import { setViewportSize } from './store/ui/actions';
 import { initialUiState } from './store/ui/state';
 import { isLocalhost } from './utils/environment';
+import './utils/media-query';
 
 setPassiveTouchGestures(true);
 setRemoveNestedTemplates(true);
@@ -147,19 +146,6 @@ export class HoverboardApp extends PolymerElement {
         }
       </style>
 
-      <iron-media-query
-        id="mq-phone"
-        full
-        query="(max-width: {$ mediaQueries.xs.max $})"
-        query-matches="{{isPhoneSize}}"
-      ></iron-media-query>
-      <iron-media-query
-        id="mq-laptop"
-        full
-        query="(min-width: {$ mediaQueries.md.min $})"
-        query-matches="{{isLaptopSize}}"
-      ></iron-media-query>
-
       <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
         <app-drawer id="drawer" slot="drawer" opened="{{drawerOpened}}" swipe-open>
           <app-toolbar layout vertical start>
@@ -261,10 +247,6 @@ export class HoverboardApp extends PolymerElement {
   @property({ type: Array })
   private providerUrls = '{$ signInProviders.allowedProvidersUrl $}'.split(',');
   @property({ type: Boolean })
-  private isPhoneSize = false;
-  @property({ type: Boolean })
-  private isLaptopSize = false;
-  @property({ type: Boolean })
   private isSigninDialogOpen = false;
   @property({ type: Boolean })
   private isFeedbackDialogOpen = false;
@@ -323,15 +305,6 @@ export class HoverboardApp extends PolymerElement {
 
   closeDrawer() {
     this.drawerOpened = false;
-  }
-
-  @observe('isPhoneSize', 'isLaptopSize')
-  _viewportChanged(isPhoneSize: boolean, isLaptopSize: boolean) {
-    setViewportSize({
-      isPhone: isPhoneSize,
-      isTabletPlus: !isPhoneSize,
-      isLaptopPlus: isLaptopSize,
-    });
   }
 
   @observe('dialogs')

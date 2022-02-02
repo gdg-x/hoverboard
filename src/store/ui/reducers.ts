@@ -17,7 +17,10 @@ export const uiReducer = (state = initialUiState, action: UiActions): UiState =>
     case SET_VIEWPORT_SIZE:
       return {
         ...state,
-        viewport: action.payload,
+        viewport: {
+          ...state.viewport,
+          [action.payload.size]: action.payload.matches,
+        },
       };
     case SET_HERO_SETTINGS:
       return {
