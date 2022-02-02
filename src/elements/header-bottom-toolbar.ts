@@ -1,5 +1,7 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
+import '@polymer/app-layout/app-toolbar/app-toolbar';
 import { computed, customElement, property } from '@polymer/decorators';
+import '@polymer/paper-tabs';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import { ReduxMixin } from '../mixins/redux-mixin';

@@ -1,5 +1,6 @@
 import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
+import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../components/about-block';
 import '../components/hero/hero-block';

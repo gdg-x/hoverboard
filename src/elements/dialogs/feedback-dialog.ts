@@ -1,6 +1,4 @@
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
-import '@polymer/paper-button';
-import '@polymer/paper-input/paper-textarea';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import '@radi-cho/star-rating';

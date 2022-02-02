@@ -1,5 +1,6 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
+import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import { ReduxMixin } from '../mixins/redux-mixin';

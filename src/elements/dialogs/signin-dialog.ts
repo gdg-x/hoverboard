@@ -1,5 +1,7 @@
 import { Failure } from '@abraham/remotedata';
+import '@polymer/iron-icon';
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
+import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { ReduxMixin } from '../../mixins/redux-mixin';
