@@ -35,7 +35,8 @@ export default [
     treeshake: production,
     output: {
       dir: 'dist',
-      entryFileNames: '[name]-[hash].js',
+      entryFileNames: production ? '[name]-[hash].js' : '[name].js',
+      chunkFileNames: production ? '[name]-[hash].js' : '[name].js',
       sourcemap: production,
     },
     plugins: [
