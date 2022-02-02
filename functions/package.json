@@ -6,7 +6,7 @@
   "module": "dist/index.js",
   "type": "module",
   "engines": {
-    "node": "14",
+    "node": "16",
     "npm": "8"
   },
   "scripts": {
@@ -30,7 +30,7 @@
     "node-fetch": "^3.2.0"
   },
   "devDependencies": {
-    "@tsconfig/node14": "^1.0.1",
+    "@tsconfig/node16": "^1.0.2",
     "concurrently": "^7.0.0",
     "cpx2": "^4.1.2",
     "rimraf": "^3.0.2",
