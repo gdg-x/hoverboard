@@ -98,7 +98,7 @@
     "eslint-plugin-testing-library": "^5.0.5",
     "firebase-admin": "^10.0.2",
     "firebase-tools": "^10.1.4",
-    "jest": "^27.4.7",
+    "jest": "^27.5.0",
     "jest-dev-server": "^6.0.3",
     "nunjucks": "^3.2.3",
     "prettier": "2.5.1",
