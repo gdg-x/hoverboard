@@ -1,6 +1,7 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState, store } from '..';
+import { filters } from '../../../data/resources.json';
 import { Filter } from '../../models/filter';
 import { FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import { Session } from '../../models/session';

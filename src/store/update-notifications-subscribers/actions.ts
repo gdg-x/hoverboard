@@ -1,6 +1,7 @@
 import { deleteDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { store } from '..';
+import { notifications } from '../../../data/resources.json';
 import { db } from '../../firebase';
 import { notifications } from '../../utils/data';
 import { queueSnackbar } from '../snackbars';

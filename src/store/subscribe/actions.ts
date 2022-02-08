@@ -6,6 +6,7 @@ import { subscribeBlock } from '../../utils/data';
 import { openDialog } from '../dialogs/actions';
 import { DIALOG, DialogForm } from '../dialogs/types';
 import { queueSnackbar } from '../snackbars';
+import { subscribeBlock } from '../../../data/resources.json';
 import {
   SUBSCRIBE,
   SubscribeActions,
