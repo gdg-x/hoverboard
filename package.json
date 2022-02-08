@@ -58,7 +58,7 @@
     "@radi-cho/star-rating": "git+https://git@github.com/abraham/star-rating.git#polymer-3",
     "@reduxjs/toolkit": "^1.7.1",
     "@vaadin/router": "^1.7.4",
-    "firebase": "^9.6.5",
+    "firebase": "^9.6.6",
     "lit": "^2.1.2",
     "marked": "^4.0.12",
     "plastic-image": "^3.0.2",
