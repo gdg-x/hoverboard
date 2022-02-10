@@ -64,10 +64,10 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
       <div class="container">
         <h1 class="container-title">{$ partnersBlock.title $}</h1>
 
-        <paper-button class="cta-button animated icon-right" on-click="_addPotentialPartner">
-          <span>{$ partnersBlock.button $}</span>
-          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-        </paper-button>
+//         <paper-button class="cta-button animated icon-right" on-click="_addPotentialPartner">
+//           <span>{$ partnersBlock.button $}</span>
+//           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+//         </paper-button>
 
         <template is="dom-if" if="[[pending]]">
           <p>Loading...</p>
