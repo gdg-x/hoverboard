@@ -18,7 +18,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
 import { toggleVideoDialog } from '../store/ui/actions';
-import { updateMetadata } from '../utils/metadata';
+import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
 
 @customElement('home-page')
@@ -289,7 +289,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata('{$ title $}', '{$ description $}');
+    updateMetadata('{$ title $}', '{$ description $}', INCLUDE_SITE_TITLE.NO);
     this.showForkMeBlock = this.shouldShowForkMeBlock();
   }
 }

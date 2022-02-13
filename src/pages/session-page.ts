@@ -30,7 +30,7 @@ import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
 import { TempAny } from '../temp-any';
 import { getVariableColor } from '../utils/functions';
-import { updateMetadata } from '../utils/metadata';
+import { updateImageMetadata } from '../utils/metadata';
 
 @customElement('session-page')
 export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
@@ -395,7 +395,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
         router.render('/404');
       } else {
         const speaker: Speaker | undefined = this.session?.speakers?.[0] as TempAny;
-        updateMetadata(`${this.session.title} | {$ title $}`, this.session.description, {
+        updateImageMetadata(this.session.title, this.session.description, {
           image: speaker?.photoUrl,
           imageAlt: speaker?.name,
         });

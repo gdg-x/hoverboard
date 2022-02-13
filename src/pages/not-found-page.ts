@@ -36,7 +36,7 @@ export class NotFoundPage extends PolymerElement {
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(
-      '{$ heroSettings.notFound.title $} | {$ title $}',
+      '{$ heroSettings.notFound.title $}',
       '{$ heroSettings.notFound.metaDescription $}'
     );
   }

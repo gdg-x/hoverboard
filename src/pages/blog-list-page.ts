@@ -185,10 +185,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
 
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata(
-      '{$ heroSettings.blog.title $} | {$ title $}',
-      '{$ heroSettings.blog.metaDescription $}'
-    );
+    updateMetadata('{$ heroSettings.blog.title $}', '{$ heroSettings.blog.metaDescription $}');
 
     if (this.posts instanceof Initialized) {
       store.dispatch(fetchBlogPosts);
