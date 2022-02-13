@@ -3,6 +3,7 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/hero/simple-hero';
 import '../elements/content-loader';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
@@ -124,14 +125,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <hero-block
-        background-image="{$ heroSettings.previousSpeakers.background.image $}"
-        background-color="{$ heroSettings.previousSpeakers.background.color $}"
-        font-color="{$ heroSettings.previousSpeakers.fontColor $}"
-      >
-        <div class="hero-title">{$ heroSettings.previousSpeakers.title $}</div>
-        <p class="hero-details">{$ heroSettings.previousSpeakers.details $}</p>
-      </hero-block>
+      <simple-hero page="previousSpeakers"></simple-hero>
 
       <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 

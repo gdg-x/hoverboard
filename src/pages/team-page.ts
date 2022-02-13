@@ -4,6 +4,7 @@ import '@polymer/iron-icon';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
@@ -115,14 +116,7 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <hero-block
-        background-image="{$ heroSettings.team.background.image $}"
-        background-color="{$ heroSettings.team.background.color $}"
-        font-color="{$ heroSettings.team.fontColor $}"
-      >
-        <div class="hero-title">{$ heroSettings.team.title $}</div>
-        <p class="hero-description">{$ heroSettings.team.description $}</p>
-      </hero-block>
+      <simple-hero page="team"></simple-hero>
 
       <div class="description-wrapper">
         <div class="container" layout horizontal justified>

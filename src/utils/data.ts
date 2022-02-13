@@ -1,2 +1,2 @@
 export { addToHomeScreen } from '../../data/resources.json';
-export { hashtag } from '../../data/settings.json';
+export { hashtag, heroSettings } from '../../data/settings.json';

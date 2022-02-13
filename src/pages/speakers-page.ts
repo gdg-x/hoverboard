@@ -5,6 +5,7 @@ import '@polymer/paper-icon-button';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/hero/simple-hero';
 import '../components/text-truncate';
 import '../elements/content-loader';
 import '../elements/filter-menu';
@@ -163,14 +164,7 @@ export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
         }
       </style>
 
-      <hero-block
-        background-image="{$ heroSettings.speakers.background.image $}"
-        background-color="{$ heroSettings.speakers.background.color $}"
-        font-color="{$ heroSettings.speakers.fontColor $}"
-      >
-        <div class="hero-title">{$ heroSettings.speakers.title $}</div>
-        <p class="hero-description">{$ heroSettings.speakers.description $}</p>
-      </hero-block>
+      <simple-hero page="speakers"></simple-hero>
 
       <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 

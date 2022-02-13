@@ -3,6 +3,7 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import '../components/hero/simple-hero';
 import '../components/text-truncate';
 import '../elements/content-loader';
 import '../elements/footer-block';
@@ -92,14 +93,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <hero-block
-        background-image="{$ heroSettings.blog.background.image $}"
-        background-color="{$ heroSettings.blog.background.color $}"
-        font-color="{$ heroSettings.blog.fontColor $}"
-      >
-        <div class="hero-title">{$ heroSettings.blog.title $}</div>
-        <p class="hero-description">{$ heroSettings.blog.description $}</p>
-      </hero-block>
+      <simple-hero page="blog"></simple-hero>
 
       <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 

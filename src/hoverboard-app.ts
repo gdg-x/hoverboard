@@ -19,7 +19,6 @@ import {
   setSuppressTemplateNotifications,
 } from '@polymer/polymer/lib/utils/settings';
 import 'plastic-image';
-import './components/hero-block';
 import './components/snack-bar';
 import { log } from './console';
 import './elements/dialogs/feedback-dialog';
