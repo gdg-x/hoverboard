@@ -1,6 +1,7 @@
-import { customElement } from '@polymer/decorators';
+import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import { codeOfConduct, organizer } from '../utils/data';
 
 @customElement('footer-nav')
 export class FooterNav extends PolymerElement {
@@ -64,12 +65,12 @@ export class FooterNav extends PolymerElement {
       </style>
 
       <div class="nav-inline" layout flex>
-        <a href="{$ organizer.url $}" target="_blank" rel="noopener noreferrer">
+        <a href="[[organizer.url]]" target="_blank" rel="noopener noreferrer">
           <plastic-image
             class="footer-logo"
             srcset="../../images/organizer-logo.svg"
             sizing="contain"
-            alt="{$ organizer.name $}"
+            alt="[[organizer.name]]"
             lazy-load
           ></plastic-image>
         </a>
@@ -79,9 +80,14 @@ export class FooterNav extends PolymerElement {
           <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer"
             >Project Hoverboard</a
           >
-          · <a class="coc" href="/coc">{$ codeOfConduct $}</a>
+          · <a class="coc" href="/coc">[[codeOfConduct]]</a>
         </div>
       </div>
     `;
   }
+
+  @property({ type: Object })
+  private organizer = organizer;
+  @property()
+  private codeOfConduct = codeOfConduct;
 }
