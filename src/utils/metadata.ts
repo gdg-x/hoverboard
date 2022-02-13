@@ -28,7 +28,7 @@ export const updateMetadata = (
   pwaUpdateMetadata({
     title: fullTitle,
     description,
-    image: '{$ image if image.startsWith("http") else (url + image) $}',
+    image: '{$ image $}',
     imageAlt: '{$ title $}',
   });
 };

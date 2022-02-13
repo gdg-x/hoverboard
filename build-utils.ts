@@ -3,6 +3,10 @@
 import n from 'nunjucks';
 import fs from 'fs';
 
+type Data = typeof import('./data/resources.json') &
+  typeof import('./data/settings.json') &
+  typeof import('./config/production.json');
+
 const { BUILD_ENV, NODE_ENV } = process.env;
 export const production = NODE_ENV === 'production';
 const buildTarget = BUILD_ENV ? BUILD_ENV : production ? 'production' : 'development';
@@ -22,9 +26,9 @@ const getConfigPath = () => {
   return path;
 };
 
-const getData = () => {
+const getData = (): Data => {
   const settingsFiles = ['./data/resources.json', './data/settings.json', getConfigPath()];
-  const combineSettings = (currentData: { [key: string]: unknown }, path: string) => {
+  const combineSettings = (currentData: Data, path: string) => {
     return {
       ...currentData,
       ...require(path),
@@ -34,8 +38,16 @@ const getData = () => {
   return settingsFiles.reduce(combineSettings, { NODE_ENV, webVitalsPolyfill });
 };
 
-const data = getData();
+const cleanupData = (data: Data) => {
+  if (!data.image.startsWith('http')) {
+    data.image = `${data.url}${data.image})`;
+  }
+  return data;
+};
 
+const data = cleanupData(getData());
+
+// TODO: Remove custom variables
 const nunjucks = n.configure({
   tags: {
     variableStart: '{$',

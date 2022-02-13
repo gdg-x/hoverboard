@@ -57,10 +57,7 @@
     <meta content="{$ url $}" property="og:url" />
     <meta content="{$ description $}" property="og:description" />
     <meta content="Event" property="og:type" />
-    <meta
-      content="{$ image if image.startsWith('http') else (url + image) $}"
-      property="og:image"
-    />
+    <meta content="{$ image $}" property="og:image" />
     <meta content="image/jpeg" property="og:image:type" />
 
     <!-- Twitter meta data -->
@@ -68,10 +65,7 @@
     <meta content="@{$ organizer.twitter $}" name="twitter:creator" />
     <meta content="{$ title $}" name="twitter:title" />
     <meta content="{$ description $}" name="twitter:description" />
-    <meta
-      content="{$ image if image.startsWith('http') else (url + image) $}"
-      name="twitter:image"
-    />
+    <meta content="{$ image $}" name="twitter:image" />
     <meta name="twitter:label1" value="{$ location.label $}" />
     <meta name="twitter:data1" value="{$ location.name $}" />
     <meta name="twitter:label2" />
