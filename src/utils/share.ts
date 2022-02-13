@@ -1,3 +1,5 @@
+import { hashtag } from './data';
+
 export const share = (e: PointerEvent) => {
   const shareUrl = location.href;
   const title = document.title;
@@ -32,7 +34,7 @@ const features = ({ height }: { height: number }): string => {
 };
 
 const openTwitter = ({ title, shareUrl }: { title: string; shareUrl: string }) => {
-  const text = `Check out ${title} at #{$ hashtag $}: ${shareUrl}`;
+  const text = `Check out ${title} at #${hashtag}: ${shareUrl}`;
   const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
   window.open(url, 'share', features({ height: 275 }));
 };

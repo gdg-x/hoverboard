@@ -5,9 +5,9 @@ describe('share', () => {
   const features = (height: number) =>
     `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=600,height=${height}`;
   const twitterUrl = [
-    'https://twitter.com/intent/tweet?',
-    'text=Check%20out%20Awesome%20Schedule%20at%20%23%7B%24%20hashtag%20%24%7D%3A%20http%3A%2F%2Flocalhost%2F',
-  ].join('');
+    'https://twitter.com/intent/tweet',
+    'text=Check%20out%20Awesome%20Schedule%20at%20%23DevFest%3A%20http%3A%2F%2Flocalhost%2F',
+  ].join('?');
 
   beforeAll(() => {
     window.location.href = 'https://example.com/schedule';
