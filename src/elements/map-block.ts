@@ -5,6 +5,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { initialUiState } from '../store/ui/state';
+import { CONFIG, getConfig } from '../utils/config';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -67,7 +68,7 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
           id="map"
           latitude="{$ location.mapCenter.latitude $}"
           longitude="{$ location.mapCenter.longitude $}"
-          api-key="{$ googleMapApiKey $}"
+          api-key="[[googleMapApiKey]]"
           zoom="{$ location.pointer.zoom $}"
           disable-default-ui
           draggable="false"
@@ -105,6 +106,8 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
       </div>
     `;
   }
+
+  private googleMapApiKey = getConfig(CONFIG.GOOGLE_MAPS_API_KEY);
 
   @property({ type: Object })
   private viewport = initialUiState.viewport;

@@ -3,10 +3,11 @@ import { error } from './console';
 import { TIMEOUT } from './models/snackbar';
 import { store } from './store';
 import { queueComplexSnackbar, queueForeverSnackbar, queueSnackbar } from './store/snackbars';
+import { CONFIG, getConfig } from './utils/config';
 
 const registerServiceWorker = () => {
   register('service-worker.js', {
-    registrationOptions: { scope: '{$ basepath $}' },
+    registrationOptions: { scope: getConfig(CONFIG.BASEPATH) },
     cached() {
       store.dispatch(queueSnackbar('{$ serviceWorkerInstalled $}'));
     },
