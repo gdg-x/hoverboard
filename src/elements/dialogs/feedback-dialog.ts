@@ -7,6 +7,7 @@ import '@radi-cho/star-rating';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { closeDialog } from '../../store/dialogs/actions';
 import { DIALOG } from '../../store/dialogs/types';
+import { feedback } from '../../utils/data';
 import '../shared-styles';
 
 class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
@@ -40,7 +41,7 @@ class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
       </style>
 
       <div class="dialog-content" layout vertical>
-        <div class="dialog-header">{$ feedback.headline $}</div>
+        <div class="dialog-header">[[feedback.headline]]</div>
         <div class="feedback-content">
           <feedback-block session-id="[[session.id]]"></feedback-block>
         </div>
@@ -62,6 +63,8 @@ class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
       },
     };
   }
+
+  private feedback = feedback;
 
   constructor() {
     super();

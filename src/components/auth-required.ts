@@ -6,6 +6,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOG } from '../store/dialogs/types';
+import { signIn } from '../utils/data';
 import { ThemedElement } from './themed-element';
 
 @customElement('auth-required')
@@ -16,7 +17,7 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
   override render() {
     return html`
       <mwc-button
-        label="{$ signIn $}"
+        label="${signIn}"
         @click="${() => openDialog(DIALOG.SIGNIN)}"
         ?hidden="${this.signedIn}"
         dense
