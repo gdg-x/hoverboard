@@ -1,5 +1,6 @@
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
+import { addToHomeScreen } from '../utils/data';
 import { ThemedElement } from './themed-element';
 
 @customElement('app-install')
@@ -30,7 +31,7 @@ export class AppInstall extends ThemedElement {
   override render() {
     return html`
       <a class="bottom-drawer-link" @click="${this.prompt}" ?hidden=${!this.deferredPrompt}>
-        {$ addToHomeScreen.cta $}
+        ${addToHomeScreen.cta}
       </a>
     `;
   }
