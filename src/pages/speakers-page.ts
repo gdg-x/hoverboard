@@ -265,7 +265,7 @@ export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(
-      '{$ heroSettings.speakers.title $} | {$ title $}',
+      '{$ heroSettings.speakers.title $}',
       '{$ heroSettings.speakers.metaDescription $}'
     );
   }

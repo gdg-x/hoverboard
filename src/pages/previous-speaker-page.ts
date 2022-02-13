@@ -23,7 +23,7 @@ import {
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
 import { getVariableColor, isEmpty } from '../utils/functions';
-import { updateMetadata } from '../utils/metadata';
+import { updateImageMetadata } from '../utils/metadata';
 
 @customElement('previous-speaker-page')
 export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
@@ -292,7 +292,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
       if (!this.speaker) {
         router.render('/404');
       } else {
-        updateMetadata(`${this.speaker.name} | {$ title $}`, this.speaker.bio, {
+        updateImageMetadata(this.speaker.name, this.speaker.bio, {
           image: this.speaker.photoUrl,
           imageAlt: this.speaker.name,
         });

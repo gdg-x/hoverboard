@@ -19,7 +19,7 @@ import { RootState, store } from '../store';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { SpeakersState } from '../store/speakers/state';
 import { getVariableColor, isEmpty } from '../utils/functions';
-import { updateMetadata } from '../utils/metadata';
+import { updateImageMetadata } from '../utils/metadata';
 
 @customElement('speaker-page')
 export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
@@ -259,7 +259,7 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
       if (!this.speaker) {
         router.render('/404');
       } else {
-        updateMetadata(`${this.speaker.name} | {$ title $}`, this.speaker.bio, {
+        updateImageMetadata(this.speaker.name, this.speaker.bio, {
           image: this.speaker.photoUrl,
           imageAlt: this.speaker.name,
         });

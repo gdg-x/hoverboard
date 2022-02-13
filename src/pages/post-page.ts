@@ -16,7 +16,7 @@ import { RootState, store } from '../store';
 import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
 import { getDate } from '../utils/functions';
-import { updateMetadata } from '../utils/metadata';
+import { updateImageMetadata } from '../utils/metadata';
 
 // TODO: loading message
 
@@ -131,7 +131,7 @@ export class PostPage extends ReduxMixin(PolymerElement) {
         this.postContent = post?.content;
         this.suggestedPosts = posts.data.filter(({ id }) => id !== postId).slice(0, 3);
 
-        updateMetadata(`${post.title} | {$ title $}`, post.brief, {
+        updateImageMetadata(post.title, post.brief, {
           image: post.image,
           imageAlt: post.title,
         });

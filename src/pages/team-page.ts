@@ -187,10 +187,7 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
   }
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata(
-      '{$ heroSettings.team.title $} | {$ title $}',
-      '{$ heroSettings.team.metaDescription $}'
-    );
+    updateMetadata('{$ heroSettings.team.title $}', '{$ heroSettings.team.metaDescription $}');
   }
 
   override stateChanged(state: RootState) {

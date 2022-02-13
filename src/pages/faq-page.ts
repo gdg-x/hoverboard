@@ -28,9 +28,6 @@ export class FaqPage extends PolymerElement {
 
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata(
-      '{$ heroSettings.faq.title $} | {$ title $}',
-      '{$ heroSettings.faq.metaDescription $}'
-    );
+    updateMetadata('{$ heroSettings.faq.title $}', '{$ heroSettings.faq.metaDescription $}');
   }
 }

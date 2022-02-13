@@ -28,9 +28,6 @@ export class CocPage extends PolymerElement {
 
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata(
-      '{$ heroSettings.coc.title $} | {$ title $}',
-      '{$ heroSettings.coc.metaDescription $}'
-    );
+    updateMetadata('{$ heroSettings.coc.title $}', '{$ heroSettings.coc.metaDescription $}');
   }
 }

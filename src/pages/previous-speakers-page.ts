@@ -176,7 +176,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(
-      '{$ heroSettings.previousSpeakers.title $} | {$ title $}',
+      '{$ heroSettings.previousSpeakers.title $}',
       '{$ heroSettings.previousSpeakers.metaDescription $}'
     );
 

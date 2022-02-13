@@ -114,7 +114,7 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(
-      '{$ heroSettings.schedule.title $} | {$ title $}',
+      '{$ heroSettings.schedule.title $}',
       '{$ heroSettings.schedule.metaDescription $}'
     );
   }
