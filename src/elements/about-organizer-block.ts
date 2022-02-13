@@ -7,6 +7,7 @@ import '../components/markdown/short-markdown';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { initialUiState } from '../store/ui/state';
+import { aboutOrganizerBlock } from '../utils/data';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -54,7 +55,7 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
           <a href="/team" class="image-link">
             <plastic-image
               class="organizers-photo"
-              srcset="{$ aboutOrganizerBlock.image $}"
+              srcset="[[aboutOrganizerBlock.image]]"
               sizing="cover"
               lazy-load
               preload
@@ -64,35 +65,36 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
         </div>
 
         <div class="description-block" flex>
-          {% for block in aboutOrganizerBlock.blocks %}
-          <div class="block">
-            <h2>{$ block.title $}</h2>
+          <template is="dom-repeat" items="[[aboutOrganizerBlock.blocks]]" as="block">
+            <div class="block">
+              <h2>[[block.title]]</h2>
 
-            <short-markdown class="description" content="{$ block.description $}"></short-markdown>
+              <short-markdown class="description" content="[[block.description]]"></short-markdown>
 
-            <a
-              href="{$ block.callToAction.link $}"
-              {%
-              if
-              block.calltoaction.newtab
-              %}
-              target="_blank"
-              rel="noopener noreferrer"
-              {%
-              endif
-              %}
-            >
-              <paper-button class="cta-button animated icon-right">
-                <span>{$ block.callToAction.label $}</span>
-                <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-              </paper-button>
-            </a>
-          </div>
-          {% endfor %}
+              <template is="dom-if" if="[[block.callToAction.newTab]]">
+                <a href="[[block.callToAction.link]]" target="_blank" rel="noopener noreferrer">
+                  <paper-button class="cta-button animated icon-right">
+                    <span>[[block.callToAction.label]]</span>
+                    <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+                  </paper-button>
+                </a>
+              </template>
+              <template is="dom-if" if="[[!block.callToAction.newTab]]">
+                <a href="[[block.callToAction.link]]">
+                  <paper-button class="cta-button animated icon-right">
+                    <span>[[block.callToAction.label]]</span>
+                    <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+                  </paper-button>
+                </a>
+              </template>
+            </div>
+          </template>
         </div>
       </div>
     `;
   }
+
+  private aboutOrganizerBlock = aboutOrganizerBlock;
 
   @property({ type: Object })
   private viewport = initialUiState.viewport;
