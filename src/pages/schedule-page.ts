@@ -3,6 +3,7 @@ import { computed, customElement, observe, property } from '@polymer/decorators'
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
+import '../components/hero/hero-block';
 import '../elements/content-loader';
 import '../elements/filter-menu';
 import '../elements/header-bottom-toolbar';

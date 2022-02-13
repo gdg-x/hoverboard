@@ -2,12 +2,12 @@ import { beforeEach, describe, it } from '@jest/globals';
 import { screen } from '@testing-library/dom';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
-import { fixture } from '../../__tests__/helpers/fixtures';
-import { setHeroSettings } from '../store/ui/actions';
+import { fixture } from '../../../__tests__/helpers/fixtures';
+import { setHeroSettings } from '../../store/ui/actions';
 import './hero-block';
 import { HeroBlock } from './hero-block';
 
-jest.mock('../store/ui/actions');
+jest.mock('../../store/ui/actions');
 
 const mockSetHeroSettings = mocked(setHeroSettings);
 

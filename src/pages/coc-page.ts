@@ -1,6 +1,6 @@
 import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
-import '../components/hero-block';
+import '../components/hero/simple-hero';
 import '../components/markdown/remote-markdown';
 import '../elements/footer-block';
 import { updateMetadata } from '../utils/metadata';
@@ -15,14 +15,7 @@ export class CocPage extends PolymerElement {
         }
       </style>
 
-      <hero-block
-        background-image="{$ heroSettings.coc.background.image $}"
-        background-color="{$ heroSettings.coc.background.color $}"
-        font-color="{$ heroSettings.coc.fontColor $}"
-      >
-        <div class="hero-title">{$ heroSettings.coc.title $}</div>
-        <p class="hero-description">{$ heroSettings.coc.description $}</p>
-      </hero-block>
+      <simple-hero page="coc"></simple-hero>
 
       <remote-markdown toc path="[[source]]"></remote-markdown>
 

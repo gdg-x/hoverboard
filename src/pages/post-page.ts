@@ -4,6 +4,7 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import 'plastic-image';
+import '../components/hero/hero-block';
 import '../components/markdown/long-markdown';
 import '../elements/footer-block';
 import '../elements/posts-list';

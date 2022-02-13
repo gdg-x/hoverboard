@@ -3,6 +3,7 @@ import { computed, customElement, observe, property } from '@polymer/decorators'
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
+import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
 import '../elements/feedback-block';
 import '../elements/shared-styles';
@@ -187,11 +188,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
         }
       </style>
 
-      <hero-block
-        background-image="{$ heroSettings.schedule.background.image $}"
-        background-color="{$ heroSettings.schedule.background.color $}"
-        font-color="{$ heroSettings.schedule.fontColor $}"
-      >
+      <simple-hero page="schedule">
         <div class="header-content" layout vertical end-justified>
           <h2 class="name">[[session.title]]</h2>
           <div class="tags" hidden$="[[!session.tags.length]]">
@@ -208,7 +205,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
             ></paper-fab>
           </div>
         </div>
-      </hero-block>
+      </simple-hero>
 
       <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 

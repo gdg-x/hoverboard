@@ -6,6 +6,7 @@ import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import 'plastic-image';
+import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
 import '../elements/content-loader';
 import '../elements/previous-speakers-block';
@@ -139,11 +140,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <hero-block
-        background-image="{$ heroSettings.speakers.background.image $}"
-        background-color="{$ heroSettings.speakers.background.color $}"
-        font-color="{$ heroSettings.speakers.fontColor $}"
-      >
+      <simple-hero page="speakers">
         <div class="dialog-container header-content" layout horizontal center>
           <plastic-image
             class="photo"
@@ -158,7 +155,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
             <div class="subtitle">[[subtitle]]</div>
           </div>
         </div>
-      </hero-block>
+      </simple-hero>
 
       <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
