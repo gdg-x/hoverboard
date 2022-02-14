@@ -40,6 +40,15 @@ import { queueSnackbar } from './store/snackbars';
 import { fetchTickets } from './store/tickets/actions';
 import { initialTicketsState } from './store/tickets/state';
 import { initialUiState } from './store/ui/state';
+import {
+  buyTicket,
+  dates,
+  location,
+  navigation,
+  offlineMessage,
+  signInProviders,
+  title,
+} from './utils/data';
 import { isLocalhost } from './utils/environment';
 import './utils/media-query';
 
@@ -150,10 +159,10 @@ export class HoverboardApp extends PolymerElement {
             <plastic-image
               class="toolbar-logo"
               srcset="/images/logo-monochrome.svg"
-              alt="{$ title $}"
+              alt="[[alt]]"
             ></plastic-image>
-            <h2 class="dates">{$ dates $}</h2>
-            <h3 class="location">{$ location.short $}</h3>
+            <h2 class="dates">[[dates]]</h2>
+            <h3 class="location">[[shortLocation]]</h3>
           </app-toolbar>
 
           <div class="drawer-content" layout vertical justified flex>
@@ -164,11 +173,11 @@ export class HoverboardApp extends PolymerElement {
               selected-class="selected"
               role="navigation"
             >
-              {% for nav in navigation %}
-              <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-click="closeDrawer"
-                >{$ nav.label $}</a
-              >
-              {% endfor %}
+              <template is="dom-repeat" items="[[navigation]]" as="nav">
+                <a href="[[nav.permalink]]" path="[[nav.route]]" on-click="closeDrawer">
+                  [[nav.label]]
+                </a>
+              </template>
             </iron-selector>
 
             <div>
@@ -184,7 +193,7 @@ export class HoverboardApp extends PolymerElement {
                 horizontal
                 center
               >
-                <span>{$ buyTicket $}</span>
+                <span>[[buyTicket]]</span>
                 <iron-icon icon="hoverboard:open-in-new"></iron-icon>
               </a>
             </div>
@@ -231,6 +240,12 @@ export class HoverboardApp extends PolymerElement {
     `;
   }
 
+  private alt = title;
+  private dates = dates;
+  private buyTicket = buyTicket;
+  private navigation = navigation;
+  private shortLocation = location.short;
+
   @property({ type: Object })
   tickets = initialTicketsState;
 
@@ -243,7 +258,7 @@ export class HoverboardApp extends PolymerElement {
   @property({ type: Object })
   private viewport = initialUiState.viewport;
   @property({ type: Array })
-  private providerUrls = '{$ signInProviders.allowedProvidersUrl $}'.split(',');
+  private providerUrls = signInProviders.allowedProvidersUrl;
   @property({ type: Boolean })
   private isSigninDialogOpen = false;
   @property({ type: Boolean })
@@ -279,7 +294,7 @@ export class HoverboardApp extends PolymerElement {
     } else {
       console.error('Unable to find #drawer');
     }
-    window.addEventListener('offline', () => store.dispatch(queueSnackbar('{$ offlineMessage $}')));
+    window.addEventListener('offline', () => store.dispatch(queueSnackbar(offlineMessage)));
     store.dispatch(fetchTickets);
   }
 
