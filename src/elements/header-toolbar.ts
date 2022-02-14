@@ -12,6 +12,7 @@ import { DIALOG } from '../store/dialogs/types';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
+import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../utils/data';
 import './notification-toggle';
 import './shared-styles';
 
@@ -154,7 +155,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
             hidden$="[[!viewport.isLaptopPlus]]"
             layout
             horizontal
-            title="{$ title $}"
+            title="[[logoTitle]]"
           ></a>
         </div>
 
@@ -166,18 +167,18 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           role="navigation"
           noink
         >
-          {% for nav in navigation %}
-          <paper-tab name="{$ nav.route $}" class="nav-item" link>
-            <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.label $}</a>
-          </paper-tab>
-          {% endfor %}
+          <template is="dom-repeat" items="[[navigation]]" as="nav">
+            <paper-tab name="[[nav.route]]" class="nav-item" link>
+              <a href="[[nav.permalink]]" layout vertical center-center>[[nav.label]]</a>
+            </paper-tab>
+          </template>
 
-          <paper-tab class="signin-tab" on-click="signIn" link hidden$="[[signedIn]]"
-            >{$ signIn $}</paper-tab
-          >
+          <paper-tab class="signin-tab" on-click="signIn" link hidden$="[[signedIn]]">
+            [[signInText]]
+          </paper-tab>
 
           <a href$="[[ticketUrl]]" target="_blank" rel="noopener noreferrer">
-            <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
+            <paper-button class="buy-button" primary>[[buyTicket]]</paper-button>
           </a>
         </paper-tabs>
 
@@ -208,7 +209,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
             <div layout vertical center-justified>
               <span class="profile-name">[[user.data.displayName]]</span>
               <span class="profile-email">[[user.data.email]]</span>
-              <span class="profile-action" role="button" on-click="_signOut">{$ signOut $}</span>
+              <span class="profile-action" role="button" on-click="_signOut">[[signOut]]</span>
             </div>
           </div>
         </paper-menu-button>
@@ -221,6 +222,12 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
       </app-toolbar>
     `;
   }
+
+  private logoTitle = title;
+  private signInText = signIn;
+  private navigation = navigation;
+  private signOut = signOutText;
+  private buyTicket = buyTicket;
 
   @property({ type: Boolean, notify: true })
   drawerOpened: boolean = false;

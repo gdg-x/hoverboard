@@ -12,11 +12,12 @@ export {
   footer,
   footerRelBlock,
   notifications,
+  offlineMessage,
   signIn,
   signInDialog,
+  signOut,
   subscribeBlock,
   subscribeNote,
-  offlineMessage,
   title,
 } from '../../data/resources.json';
 export {
