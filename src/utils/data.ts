@@ -11,6 +11,15 @@ export {
   footerRelBlock,
   notifications,
   signIn,
+  signInDialog,
+  subscribeBlock,
   subscribeNote,
 } from '../../data/resources.json';
-export { hashtag, heroSettings, mailto, organizer, socialNetwork } from '../../data/settings.json';
+export {
+  hashtag,
+  heroSettings,
+  mailto,
+  organizer,
+  signInProviders,
+  socialNetwork,
+} from '../../data/settings.json';

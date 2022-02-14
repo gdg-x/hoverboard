@@ -12,6 +12,7 @@ import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOG } from '../../store/dialogs/types';
 import { initialUserState } from '../../store/user/state';
 import { TempAny } from '../../temp-any';
+import { signInDialog, signInProviders } from '../../utils/data';
 import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 import '../hoverboard-icons';
 import '../shared-styles';
@@ -54,34 +55,34 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
 
       <div class="dialog-content">
         <div class="initial-signin" hidden$="[[isMergeState]]">
-          {% for provider in signInProviders.providersData %}
-          <paper-button
-            class="sign-in-button"
-            on-click="_signIn"
-            provider-url="{$ provider.url $}"
-            flex
-          >
-            <iron-icon
-              class="icon-{$ provider.name $}"
-              icon="hoverboard:{$ provider.name $}"
-            ></iron-icon>
-            <span provider-url="{$ provider.url $}">{$ provider.label $}</span>
-          </paper-button>
-          {% endfor %}
+          <template is="dom-repeat" items="[[signInProviders.providersData]]" as="provider">
+            <paper-button
+              class="sign-in-button"
+              on-click="_signIn"
+              provider-url="[[provider.url]]"
+              flex
+            >
+              <iron-icon
+                class="icon-[[provider.name]]"
+                icon="hoverboard:[[provider.name]]"
+              ></iron-icon>
+              <span provider-url$="[[provider.url]]">[[provider.label]]</span>
+            </paper-button>
+          </template>
         </div>
         <div class="merge-content" hidden$="[[!isMergeState]]">
-          <h3 class="subtitle">{$ signInDialog.alreadyHaveAccount $}</h3>
+          <h3 class="subtitle">[[signInDialog.alreadyHaveAccount]]</h3>
           <div class="explanation">
-            <div class="row-1">{$ signInDialog.alreadyUsed $} <b>[[email]]</b>.</div>
+            <div class="row-1">[[signInDialog.alreadyUsed]] <b>[[email]]</b>.</div>
             <div class="row-2">
-              {$ signInDialog.signInToContinue.part1 $} [[providerCompanyName]] {$
-              signInDialog.signInToContinue.part2 $}
+              [[signInDialog.signInToContinue.part1]] [[providerCompanyName]]
+              [[signInDialog.signInToContinue.part2]]
             </div>
           </div>
 
           <div class="action-button" layout horizontal end-justified>
             <paper-button class="merge-button" on-click="_mergeAccounts" primary>
-              <span>{$ signInDialog.signInToContinue.part1 $} [[providerCompanyName]]</span>
+              <span>[[signInDialog.signInToContinue.part1]] [[providerCompanyName]]</span>
             </paper-button>
           </div>
         </div>
@@ -111,6 +112,9 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
       providerCompanyName: String,
     };
   }
+
+  private signInProviders = signInProviders;
+  private signInDialog = signInDialog;
 
   stateChanged(state: RootState) {
     this.setProperties({

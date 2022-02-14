@@ -9,6 +9,7 @@ import { RootState } from '../../store';
 import { closeDialog } from '../../store/dialogs/actions';
 import { SubscribeState } from '../../store/subscribe/state';
 import { TempAny } from '../../temp-any';
+import { subscribeBlock } from '../../utils/data';
 import '../hoverboard-icons';
 import '../shared-styles';
 
@@ -62,7 +63,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
       <div class="dialog-content" layout vertical>
         <div class="dialog-header">[[title]]</div>
         <div hidden$="[[!errorOccurred]]" class="general-error">
-          {$ subscribeBlock.generalError $}
+          [[subscribeBlock.generalError]]
         </div>
         <paper-input
           id="firstFieldInput"
@@ -71,7 +72,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
           value="{{firstFieldValue}}"
           required
           auto-validate$="[[validate]]"
-          error-message="{$ subscribeBlock.fieldRequired $}"
+          error-message="[[subscribeBlock.fieldRequired]]"
           autocomplete="off"
         >
         </paper-input>
@@ -82,27 +83,27 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
           value="{{secondFieldValue}}"
           required
           auto-validate$="[[validate]]"
-          error-message="{$ subscribeBlock.fieldRequired $}"
+          error-message="[[subscribeBlock.fieldRequired]]"
           autocomplete="off"
         >
         </paper-input>
         <paper-input
           id="emailInput"
           on-touchend="_focus"
-          label="{$ subscribeBlock.emailAddress $} *"
+          label="[[subscribeBlock.emailAddress]] *"
           value="{{email}}"
           required
           auto-validate$="[[validate]]"
-          error-message="{$ subscribeBlock.emailRequired $}"
+          error-message="[[subscribeBlock.emailRequired]]"
           autocomplete="off"
         >
         </paper-input>
         <div class="action-buttons" layout horizontal justified>
-          <paper-button class="close-button" on-click="_closeDialog"
-            >{$ subscribeBlock.close $}
+          <paper-button class="close-button" on-click="_closeDialog">
+            [[subscribeBlock.close]]
           </paper-button>
 
-          <paper-button on-click="_subscribe" primary> [[submitLabel]] </paper-button>
+          <paper-button on-click="_subscribe" primary>[[submitLabel]]</paper-button>
         </div>
       </div>
     `;
@@ -146,6 +147,8 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
     };
   }
 
+  private subscribeBlock = subscribeBlock;
+
   stateChanged(state: RootState) {
     this.setProperties({
       subscribed: state.subscribed,
@@ -186,10 +189,10 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
       data = {};
     }
 
-    this.title = data.title || '{$ subscribeBlock.formTitle $}';
-    this.submitLabel = data.submitLabel || ' {$ subscribeBlock.subscribe $}';
-    this.firstFieldLabel = data.firstFieldLabel || '{$ subscribeBlock.firstName $}';
-    this.secondFieldLabel = data.secondFieldLabel || '{$ subscribeBlock.lastName $}';
+    this.title = data.title || this.subscribeBlock.formTitle;
+    this.submitLabel = data.submitLabel || this.subscribeBlock.subscribe;
+    this.firstFieldLabel = data.firstFieldLabel || this.subscribeBlock.firstName;
+    this.secondFieldLabel = data.secondFieldLabel || this.subscribeBlock.lastName;
     this._prefillFields(data);
   }
 
