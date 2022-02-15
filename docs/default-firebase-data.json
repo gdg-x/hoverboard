@@ -84,6 +84,13 @@
         {
           "order": 1,
           "height": 120,
+          "logoUrl": "../images/logos/aquafadas.png",
+          "name": "Rakuten DX",
+          "url": "https://rakuten-dx.com/"
+        },
+        {
+          "order": 1,
+          "height": 120,
           "logoUrl": "../images/logos/kaliop.png",
           "name": "Kaliop",
           "url": "https://www.kaliop.com/"
@@ -108,6 +115,13 @@
           "logoUrl": "../images/logos/isia.png",
           "name": "Groupe ISIA",
           "url": "https://groupe-isia.com/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/ca.png",
+          "name": "CATS",
+          "url": "https://www.groupecreditagricole.jobs/Notre-groupe/Marques/Credit-Agricole-Technologies-et-Services"
         }
       ],
       "order": 1,
@@ -156,6 +170,13 @@
           "logoUrl": "../images/logos/cesi.png",
           "name": "CESI",
           "url": "https://www.cesi.fr/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/rh.png",
+          "name": "Recherche & Horizon",
+          "url": "https://www.reth.fr/"
         }
       ],
       "order": 2,
@@ -501,7 +522,7 @@
       "primary": true,
       "regular": true,
       "soldOut": false,
-      "starts": "31 janvier",
+      "starts": "dernières places disponible le 7 mars",
       "url": "https://www.billetweb.fr/sunny-tech-2022"
     },
     {
