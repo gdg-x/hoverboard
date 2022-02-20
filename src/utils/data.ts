@@ -13,7 +13,9 @@ export {
   followUs,
   footer,
   footerRelBlock,
+  galleryBlock,
   loading,
+  mySchedule,
   notifications,
   offlineMessage,
   signIn,
@@ -24,6 +26,7 @@ export {
   title,
 } from '../../data/resources.json';
 export {
+  contentLoaders,
   hashtag,
   heroSettings,
   location,

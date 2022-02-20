@@ -7,6 +7,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { fetchGallery } from '../store/gallery/actions';
 import { initialGalleryState } from '../store/gallery/state';
+import { galleryBlock } from '../utils/data';
 import './shared-styles';
 
 @customElement('gallery-block')
@@ -151,21 +152,19 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
         <template is="dom-if" if="[[success]]">
           <div class="gallery-info" layout vertical justified>
             <div>
-              <h2>{$ galleryBlock.title $}</h2>
-              <p>{$ galleryBlock.description $}</p>
+              <h2>[[galleryBlock.title]]</h2>
+              <p>[[galleryBlock.description]]</p>
             </div>
-            <a
-              href="{$ galleryBlock.callToAction.link $}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <paper-button>{$ galleryBlock.callToAction.label $}</paper-button>
+            <a href="[[galleryBlock.callToAction.link]]" target="_blank" rel="noopener noreferrer">
+              <paper-button>[[galleryBlock.callToAction.label]]</paper-button>
             </a>
           </div>
         </template>
       </div>
     `;
   }
+
+  private galleryBlock = galleryBlock;
 
   @property({ type: Object })
   gallery = initialGalleryState;
