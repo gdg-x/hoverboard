@@ -13,6 +13,7 @@ export {
   followUs,
   footer,
   footerRelBlock,
+  galleryBlock,
   loading,
   notifications,
   offlineMessage,
