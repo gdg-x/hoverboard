@@ -8,6 +8,7 @@ export {
   emailUs,
   featuredVideos,
   feedback,
+  filters,
   followOur,
   followUs,
   footer,

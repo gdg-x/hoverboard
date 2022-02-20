@@ -2,6 +2,7 @@ import { computed, customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
+import { filters } from '../utils/data';
 import { toggleFilter } from '../utils/filters';
 import { generateClassName, getVariableColor, setQueryString } from '../utils/functions';
 import './shared-styles';
@@ -85,7 +86,7 @@ export class FilterMenu extends PolymerElement {
         <div layout horizontal center>
           <div layout horizontal center flex>
             <div class="results" hidden$="[[hideResultText]]">
-              [[resultsCount]] {$ filters.results $}
+              [[resultsCount]] [[filters.results]]
             </div>
           </div>
 
@@ -96,10 +97,10 @@ export class FilterMenu extends PolymerElement {
               on-click="_resetFilters"
               hidden$="[[!selectedFilters.length]]"
             >
-              {$ filters.clear $}
+              [[filters.clear]]
             </span>
             <paper-button class="icon-right" on-click="_toggleBoard">
-              {$ filters.title $}
+              [[filters.title]]
               <iron-icon icon="hoverboard:[[icon]]"></iron-icon>
             </paper-button>
           </div>
@@ -153,6 +154,8 @@ export class FilterMenu extends PolymerElement {
       </div>
     `;
   }
+
+  private filters = filters;
 
   @property({ type: Array })
   filterGroups: FilterGroup[] = [];
