@@ -6,6 +6,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState } from '../store/schedule/state';
+import { contentLoaders, mySchedule } from '../utils/data';
 import './content-loader';
 import './shared-styles';
 
@@ -61,7 +62,7 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
           load-from="-240%"
           load-to="350%"
           blur-width="80px"
-          items-count="{$ contentLoaders.schedule.itemsCount $}"
+          items-count="[[contentLoaders.itemsCount]]"
           layout
           horizontal
           hidden$="[[!pending]]"
@@ -90,13 +91,16 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
               layout
               vertical
               center-center
-              >{$ mySchedule.title $}</a
+              >[[mySchedule.title]]</a
             >
           </paper-tab>
         </paper-tabs>
       </app-toolbar>
     `;
   }
+
+  private mySchedule = mySchedule;
+  private contentLoaders = contentLoaders.schedule;
 
   @property({ type: Object })
   schedule = initialScheduleState;
