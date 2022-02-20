@@ -15,6 +15,7 @@ import {
 } from '../store/feedback';
 import { queueComplexSnackbar, queueSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
+import { feedback } from '../utils/data';
 
 @customElement('feedback-block')
 export class FeedbackBlock extends ReduxMixin(PolymerElement) {
@@ -69,11 +70,11 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
 
       <div class="container">
         <div>
-          <div class="caption">{$ feedback.contentCaption $}:</div>
+          <div class="caption">[[feedback.contentCaption]]:</div>
           <star-rating rating="{{contentRating}}"></star-rating>
         </div>
         <div>
-          <div class="caption">{$ feedback.styleCaption $}:</div>
+          <div class="caption">[[feedback.styleCaption]]:</div>
           <star-rating rating="{{styleRating}}"></star-rating>
         </div>
 
@@ -84,12 +85,12 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
           value="{{comment}}"
           maxlength="256"
         ></paper-textarea>
-        <p hidden$="[[!hasRated]]" class="helper">{$ feedback.helperText $}</p>
+        <p hidden$="[[!hasRated]]" class="helper">[[feedback.helperText]]</p>
         <paper-button primary hidden$="[[!hasRated]]" on-click="setFeedback">
-          {$ feedback.save $}
+          [[feedback.save]]
         </paper-button>
         <paper-button class="delete-button" hidden$="[[!feedback.data]]" on-click="deleteFeedback">
-          {$ feedback.deleteFeedback $}
+          [[feedback.deleteFeedback]]
         </paper-button>
       </div>
     `;
@@ -122,7 +123,7 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
 
   private async setFeedback() {
     if (!(this.user instanceof Success)) {
-      store.dispatch(queueSnackbar('{$ feedback.sendFeedbackSignedOut $}'));
+      store.dispatch(queueSnackbar(feedback.sendFeedbackSignedOut));
       return;
     }
 
@@ -138,11 +139,11 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
     );
 
     if (setFeedback.fulfilled.match(resultAction)) {
-      store.dispatch(queueSnackbar('{$ feedback.feedbackRecorded $}'));
+      store.dispatch(queueSnackbar(feedback.feedbackRecorded));
     } else {
       store.dispatch(
         queueComplexSnackbar({
-          label: '{$ feedback.somethingWentWrong $}',
+          label: feedback.somethingWentWrong,
           action: {
             title: 'Retry',
             callback: () => this.setFeedback(),
@@ -154,7 +155,7 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
 
   private async deleteFeedback() {
     if (!(this.user instanceof Success)) {
-      store.dispatch(queueSnackbar('{$ feedback.removeFeedbackSignedOut $}'));
+      store.dispatch(queueSnackbar(feedback.removeFeedbackSignedOut));
       return;
     }
 
@@ -167,11 +168,11 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
     );
 
     if (deleteFeedback.fulfilled.match(resultAction)) {
-      store.dispatch(queueSnackbar('{$ feedback.feedbackDeleted $}'));
+      store.dispatch(queueSnackbar(feedback.feedbackDeleted));
     } else {
       store.dispatch(
         queueComplexSnackbar({
-          label: '{$ feedback.somethingWentWrong $}',
+          label: feedback.somethingWentWrong,
           action: {
             title: 'Retry',
             callback: () => this.deleteFeedback(),
