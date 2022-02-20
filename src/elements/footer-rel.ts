@@ -1,7 +1,6 @@
 import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { footerRelBlock, notifications, subscribeNote } from '../utils/data';
-import './subscribe-form-footer';
 
 @customElement('footer-rel')
 export class FooterRel extends PolymerElement {
