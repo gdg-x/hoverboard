@@ -10,6 +10,7 @@ import { RootState, store } from '../store';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { fetchVideos } from '../store/videos/actions';
 import { initialVideosState } from '../store/videos/state';
+import { featuredVideos, loading } from '../utils/data';
 import './shared-animations';
 import './shared-styles';
 
@@ -128,7 +129,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
       </style>
       <div class="container">
         <div class="header" layout horizontal justified center wrap>
-          <h1 class="container-title">{$ featuredVideos.title $}</h1>
+          <h1 class="container-title">[[featuredVideos.title]]</h1>
         </div>
 
         <div class="videos-wrapper" layout flex horizontal>
@@ -141,7 +142,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
           <div id="videoList" class="video-list" layout flex horizontal>
             <div id="videos" class="videos" layout horizontal>
               <template is="dom-if" if="[[pending]]">
-                <p>{$ loading $}</p>
+                <p>[[loading]]</p>
               </template>
 
               <template is="dom-if" if="[[failure]]">
@@ -181,15 +182,18 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
             &gt;</paper-icon-button
           >
         </div>
-        <a href="{$ featuredVideos.callToAction.link $}" target="_blank" rel="noopener noreferrer">
+        <a href="[[featuredVideos.callToAction.link]]" target="_blank" rel="noopener noreferrer">
           <paper-button class="cta-button animated icon-right">
-            <span>{$ featuredVideos.callToAction.label $}</span>
+            <span>[[featuredVideos.callToAction.label]]</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
         </a>
       </div>
     `;
   }
+
+  private featuredVideos = featuredVideos;
+  private loading = loading;
 
   @property({ type: Object })
   videos = initialVideosState;
