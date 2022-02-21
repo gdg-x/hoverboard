@@ -1,12 +1,9 @@
-<p align="center">
-<img width="800px" src="https://user-images.githubusercontent.com/2954281/42683571-55ba6be6-8696-11e8-8ff7-e9acd0db63e8.png">
-</p>
-<p align="center">
-<a href="https://hoverboard-master.web.app" align="center">:zap: Live demo</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-<a href="#getting-started">:rocket: Get Started</a>
-</p>
+# Hoverboard
 
-[![Build Status](https://github.com/gdg-x/hoverboard/workflows/Pre%20Merge%20Checks/badge.svg)](https://github.com/gdg-x/hoverboard/actions) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_shield)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7973ac656dc94e42858ce640bb02de58)](https://www.codacy.com/app/pamuditha/hoverboard?utm_source=github.com&utm_medium=referral&utm_content=pamuditha/hoverboard&utm_campaign=Badge_Grade)
+![Hoverboard logo](https://user-images.githubusercontent.com/2954281/42683571-55ba6be6-8696-11e8-8ff7-e9acd0db63e8.png)
+[⚡ Live demo](https://hoverboard-master.web.app) | [🚀 Get Started](#getting-started)
+
+[![Build status](https://github.com/gdg-x/hoverboard/actions/workflows/main.yaml/badge.svg)](https://github.com/gdg-x/hoverboard/actions/workflows/main.yaml)
 
 ## Overview
 
@@ -32,7 +29,7 @@ Our goal is to allow event organizers to set up a professional conference websit
 
 ## Getting Started
 
-:first_quarter_moon_with_face: Read the [set up guide](/docs/tutorials/00-set-up.md) or checkout the [full documentation](/docs/).
+🌛 Read the [set up guide](/docs/tutorials/00-set-up.md) or checkout the [full documentation](/docs/).
 
 ## Updating
 
@@ -49,12 +46,13 @@ git commit -m 'Updated to the latest version'
 
 ## Documentation
 
-The [Getting Started guide](#getting-started) is probably a good first point of call! <br>
-:book: [Full documentation](/docs/).
+The [Getting Started guide](#getting-started) is probably a good first point of call!
+
+📖 [Full documentation](/docs/).
 
 ## Compatibility
 
-:white_check_mark: Compatible with **latest two** major versions of of browsers that support [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+✅ Compatible with **latest two** major versions of of browsers that support [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
 
 ## Technology Stack
 
@@ -98,20 +96,14 @@ Read the full version [Code of Conduct](/.github/CODE_OF_CONDUCT.md).
 ## Contributors
 
 **Maintainer:** [Abraham Williams](https://github.com/abraham)
+
 **Authors:** [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
 This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](/.github/CONTRIBUTING.md)].
 
-<a href="https://github.com/gdg-x/hoverboard/graphs/contributors"><img src="https://opencollective.com/hoverboard/contributors.svg?width=890" /></a>
-
-## Sponsoring
-
-Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open-source work in their free time. If you like this project and it makes your life easier, please donate.
-<a href="https://opencollective.com/hoverboard#backers" target="_blank"><img src="https://opencollective.com/hoverboard/backers.svg?width=890"></a>
+[![List of contributors](https://opencollective.com/hoverboard/contributors.svg?width=890)](https://github.com/gdg-x/hoverboard/graphs/contributors)
 
 ## License
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_large)
 
 The project is published under the [MIT license](/LICENSE.md).
 Feel free to clone and modify repo as you want, but don't forget to add a reference to authors :)

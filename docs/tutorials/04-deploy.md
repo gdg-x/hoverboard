@@ -1,32 +1,32 @@
 # Deploy to Firebase
 
-1.  Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/):
+1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/):
 
-    ```console
-      npx firebase login
-    ```
+   ```console
+     npx firebase login
+   ```
 
-1.  Select the Firebase project to deploy to
+1. Select the Firebase project to deploy to
 
-    ```console
-      npx firebase use <projectId>
-    ```
+   ```console
+     npx firebase use <projectId>
+   ```
 
-1.  Build and deploy with `/config/production.json`
+1. Build and deploy with `/config/production.json`
 
-    ```console
-      npm run deploy
-    ```
+   ```console
+     npm run deploy
+   ```
 
-    or to deploy with a custom config pass the name of the config file. For example with `/config/custom.json`
+   or to deploy with a custom config pass the name of the config file. For example with `/config/custom.json`
 
-    ```console
-      BUILD_ENV=custom npm run deploy
-    ```
+   ```console
+     BUILD_ENV=custom npm run deploy
+   ```
 
-    The URL to your live site is listed in the output.
+   The URL to your live site is listed in the output.
 
-### Continuous integration with Github Actions
+## Continuous integration with Github Actions
 
 In the [`.github/workflows`](.github/workflows) folder, you can find two workflows to help you develop and deploy Hoverboard to Firebase:
 
@@ -37,7 +37,7 @@ In the [`.github/workflows`](.github/workflows) folder, you can find two workflo
 The `main.yaml` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
 To run the two `deploy` actions on your instance, you need to do a couple of small setup:
 
-#### Deploying to Firebase wiht Github Actions
+### Deploying to Firebase wiht Github Actions
 
 Make sure you are acting on the correct Firebase project.
 

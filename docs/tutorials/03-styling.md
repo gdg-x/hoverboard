@@ -2,7 +2,7 @@
 
 Styling of your app can be found in `src/elements/shared-styles.html`.
 
-### Colors
+## Colors
 
 Adjust the color scheme to your conference style.
 
@@ -33,7 +33,7 @@ Adjust the color scheme to your conference style.
 **Tip:** Choose base colors with [Material Palette][material palette]
 ![material_design_palette_generator](https://cloud.githubusercontent.com/assets/2954281/17750340/a02f8e76-64ca-11e6-80f0-53392b30f89a.png)
 
-### Hero
+## Hero
 
 Color and images for header can be configured via `data/settings.json` in `heroSettings` object:
 
@@ -59,7 +59,7 @@ Color and images for header can be configured via `data/settings.json` in `heroS
  }
 ```
 
-### Web app
+## Web app
 
 Edit Web app colors via `webapp` in `data/settings.json`
 
