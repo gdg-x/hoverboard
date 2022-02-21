@@ -2,8 +2,8 @@ import { Success } from '@abraham/remotedata';
 import { doc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { RootState, store } from '..';
-import { notifications } from '../../../data/resources.json';
 import { db } from '../../firebase';
+import { notifications } from '../../utils/data';
 import { UserTokensData } from '../notifications-users/state';
 import { queueSnackbar } from '../snackbars';
 import {

@@ -50,6 +50,7 @@ export {
 } from '../../data/resources.json';
 export {
   contentLoaders,
+  dateFormat,
   disabledSchedule,
   hashtag,
   heroSettings,
