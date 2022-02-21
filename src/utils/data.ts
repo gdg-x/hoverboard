@@ -16,6 +16,7 @@ export {
   galleryBlock,
   latestPostsBlock,
   loading,
+  mapBlock,
   mySchedule,
   notifications,
   offlineMessage,
