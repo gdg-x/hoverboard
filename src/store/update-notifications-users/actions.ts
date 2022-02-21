@@ -2,6 +2,7 @@ import { Success } from '@abraham/remotedata';
 import { doc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { RootState, store } from '..';
+import { notifications } from '../../../data/resources.json';
 import { db } from '../../firebase';
 import { UserTokensData } from '../notifications-users/state';
 import { queueSnackbar } from '../snackbars';
@@ -33,7 +34,7 @@ export const updateNotificationsUsers =
         type: UPDATE_NOTIFICATION_USERS_SUCCESS,
         payload: uid,
       });
-      store.dispatch(queueSnackbar('{$ notifications.myScheduleEnabled $}'));
+      store.dispatch(queueSnackbar(notifications.myScheduleEnabled));
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_USERS_FAILURE,
@@ -60,7 +61,7 @@ export const removeNotificationsUsers =
         type: UPDATE_NOTIFICATION_USERS_SUCCESS,
         payload: uid,
       });
-      store.dispatch(queueSnackbar('{$ notifications.myScheduleDisabled $}'));
+      store.dispatch(queueSnackbar(notifications.myScheduleDisabled));
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_USERS_FAILURE,
