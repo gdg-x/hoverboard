@@ -204,9 +204,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
             <div layout horizontal center>
               <div class="section" flex>
                 <div class="section-primary-text">[[session.title]]</div>
-                <div class="section-secondary-text">
-                  [[previousYear]]: [[session.year]]
-                </div>
+                <div class="section-secondary-text">[[previousYear]]: [[session.year]]</div>
                 <div class="tags" hidden$="[[!session.tags.length]]">
                   <template is="dom-repeat" items="[[session.tags]]" as="tag">
                     <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
@@ -252,7 +250,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  private previousYear = speakers.previousYear
+  private previousYear = speakers.previousYear;
   private sessionDetails = sessionDetails;
   private speakerDetails = speakerDetails;
 

@@ -29,7 +29,13 @@ import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
 import { TempAny } from '../temp-any';
-import { disabledSchedule, feedback, schedule, sessionDetails, timezoneOffset } from '../utils/data';
+import {
+  disabledSchedule,
+  feedback,
+  schedule,
+  sessionDetails,
+  timezoneOffset,
+} from '../utils/data';
 import { getVariableColor } from '../utils/functions';
 import { updateImageMetadata } from '../utils/metadata';
 
