@@ -26,6 +26,7 @@ import {
   updateNotificationsUsers,
 } from '../store/update-notifications-users/actions';
 import { initialUserState } from '../store/user/state';
+import { loading, notifications } from '../utils/data';
 import './shared-styles';
 
 @customElement('notification-toggle')
@@ -68,19 +69,19 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
 
         <div class="dropdown-panel" slot="dropdown-content">
           <template is="dom-if" if="[[initialized]]">
-            <p>{$ notifications.default $}</p>
+            <p>[[notifications.default]]</p>
             <div class="panel-actions" layout horizontal end-justified>
               <paper-button primary-text on-click="requestPermission">
-                {$ notifications.enable $}
+                [[notifications.enable]]
               </paper-button>
             </div>
           </template>
 
-          <template is="dom-if" if="[[pending]]">{$ loading $}</template>
+          <template is="dom-if" if="[[pending]]">[[loading]]</template>
 
           <template is="dom-if" if="[[success]]">
-            <p>{$ notifications.enabled $}</p>
-            <mwc-formfield label="{$ notifications.generalLabel $}">
+            <p>[[notifications.enabled]]</p>
+            <mwc-formfield label="[[notifications.generalLabel]]">
               <mwc-switch
                 on-click="toggleGeneralNotifications"
                 selected="[[notificationsSubscribers.data]]"
@@ -88,8 +89,8 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
             </mwc-formfield>
 
             <auth-required>
-              <p slot="prompt">{$ notifications.signIn $}</p>
-              <mwc-formfield label="{$ notifications.myScheduleLabel $}">
+              <p slot="prompt">[[notifications.signIn]]</p>
+              <mwc-formfield label="[[notifications.myScheduleLabel]]">
                 <mwc-switch
                   on-click="toggleMyScheduleNotifications"
                   selected="[[notificationsUsersSubscribed]]"
@@ -99,38 +100,41 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
           </template>
 
           <template is="dom-if" if="[[blocked]]">
-            <p>{$ notifications.blocked.text $}</p>
+            <p>[[notifications.blocked.text]]</p>
             <div class="panel-actions" layout horizontal end-justified>
-              <a href="{$ notifications.blocked.link $}" target="_blank" rel="noopener noreferrer">
+              <a href="[[notifications.blocked.link]]" target="_blank" rel="noopener noreferrer">
                 <paper-button primary-text on-click="close">
-                  {$ notifications.blocked.label $}
+                  [[notifications.blocked.label]]
                 </paper-button>
               </a>
             </div>
           </template>
 
           <template is="dom-if" if="[[unsupported]]">
-            <p>{$ notifications.unsupported.text $}</p>
+            <p>[[notifications.unsupported.text]]</p>
             <div class="panel-actions" layout horizontal end-justified>
               <a
-                href="{$ notifications.unsupported.link $}"
+                href="[[notifications.unsupported.link]]"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <paper-button primary-text on-click="close">
-                  {$ notifications.unsupported.label $}
+                  [[notifications.unsupported.label]]
                 </paper-button>
               </a>
             </div>
           </template>
 
           <template is="dom-if" if="[[failure]]">
-            <p>{$ notifications.unknown.text $}</p>
+            <p>[[notifications.unknown.text]]</p>
           </template>
         </div>
       </paper-menu-button>
     `;
   }
+
+  private notifications = notifications;
+  private loading = loading;
 
   @property({ type: Object })
   notificationPermission = initialNotificationPermissionState;
