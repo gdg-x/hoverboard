@@ -26,6 +26,7 @@ export {
   signIn,
   signInDialog,
   signOut,
+  speakersBlock,
   subscribeBlock,
   subscribeNote,
   timezoneOffset,
