@@ -2,6 +2,7 @@ export {
   aboutBlock,
   aboutOrganizerBlock,
   addToHomeScreen,
+  blog,
   buyTicket,
   codeOfConduct,
   dates,
