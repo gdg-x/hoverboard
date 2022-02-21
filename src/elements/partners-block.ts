@@ -16,6 +16,7 @@ import {
   PotentialPartnersState,
 } from '../store/potential-partners/state';
 import { queueSnackbar } from '../store/snackbars';
+import { loading, partnersBlock } from '../utils/data';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -66,10 +67,10 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container">
-        <h1 class="container-title">{$ partnersBlock.title $}</h1>
+        <h1 class="container-title">[[partnersBlock.title]]</h1>
 
         <template is="dom-if" if="[[pending]]">
-          <p>{$ loading $}</p>
+          <p>[[loading]]</p>
         </template>
         <template is="dom-if" if="[[failure]]">
           <p>Error loading partners.</p>
@@ -103,12 +104,15 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
         </template>
 
         <paper-button class="cta-button animated icon-right" on-click="_addPotentialPartner">
-          <span>{$ partnersBlock.button $}</span>
+          <span>[[partnersBlock.button]]</span>
           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
         </paper-button>
       </div>
     `;
   }
+
+  private loading = loading;
+  private partnersBlock = partnersBlock;
 
   @property({ type: Object, observer: PartnersBlock.prototype._partnerAddingChanged })
   potentialPartners = initialPotentialPartnersState;
@@ -139,10 +143,10 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
 
   _addPotentialPartner() {
     openDialog(DIALOG.SUBSCRIBE, {
-      title: '{$ partnersBlock.form.title $}',
-      submitLabel: '{$ partnersBlock.form.submitLabel $}',
-      firstFieldLabel: '{$ partnersBlock.form.fullName $}',
-      secondFieldLabel: '{$ partnersBlock.form.companyName $}',
+      title: this.partnersBlock.form.title,
+      submitLabel: this.partnersBlock.form.submitLabel,
+      firstFieldLabel: this.partnersBlock.form.fullName,
+      secondFieldLabel: this.partnersBlock.form.companyName,
       submit: (data: DialogForm) => {
         store.dispatch(addPotentialPartner(data));
       },
@@ -155,7 +159,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   ): void {
     if (potentialPartners instanceof Success) {
       closeDialog();
-      store.dispatch(queueSnackbar('{$ partnersBlock.toast $}'));
+      store.dispatch(queueSnackbar(this.partnersBlock.toast));
     } else if (potentialPartners instanceof Failure) {
       setDialogError(potentialPartners.error);
     }

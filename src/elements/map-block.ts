@@ -6,6 +6,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { initialUiState } from '../store/ui/state';
 import { CONFIG, getConfig } from '../utils/config';
+import { location, mapBlock } from '../utils/data';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -66,18 +67,18 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
       <template is="dom-if" if="[[viewport.isTabletPlus]]">
         <google-map
           id="map"
-          latitude="{$ location.mapCenter.latitude $}"
-          longitude="{$ location.mapCenter.longitude $}"
+          latitude="[[location.mapCenter.latitude]]"
+          longitude="[[location.mapCenter.longitude]]"
           api-key="[[googleMapApiKey]]"
-          zoom="{$ location.pointer.zoom $}"
+          zoom="[[location.pointer.zoom]]"
           disable-default-ui
           draggable="false"
           additional-map-options="[[options]]"
         >
           <google-map-marker
-            latitude="{$ location.pointer.latitude $}"
-            longitude="{$ location.pointer.longitude $}"
-            title="{$ location.name $}"
+            latitude="[[location.pointer.latitude]]"
+            longitude="[[location.pointer.longitude]]"
+            title="[[location.name]]"
             icon="images/map-marker.svg"
           ></google-map-marker>
         </google-map>
@@ -86,13 +87,13 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
       <div class="container" layout vertical end-justified fit$="[[viewport.isTabletPlus]]">
         <div class="description-card" layout vertical justified>
           <div>
-            <h2>{$ mapBlock.title $}</h2>
-            <p>{$ location.description $}</p>
+            <h2>[[mapBlock.title]]</h2>
+            <p>[[location.description]]</p>
           </div>
           <div class="bottom-info" layout horizontal justified center>
-            <span class="address">{$ location.address $}</span>
+            <span class="address">[[location.address]]</span>
             <a
-              href="https://www.google.com/maps/dir/?api=1&amp;destination={$ location.address $}"
+              href="https://www.google.com/maps/dir/?api=1&amp;destination=[[location.address]]"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -107,6 +108,8 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
+  private location = location;
+  private mapBlock = mapBlock;
   private googleMapApiKey = getConfig(CONFIG.GOOGLE_MAPS_API_KEY);
 
   @property({ type: Object })

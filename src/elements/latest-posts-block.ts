@@ -11,6 +11,7 @@ import { router } from '../router';
 import { RootState, store } from '../store';
 import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
+import { latestPostsBlock } from '../utils/data';
 import { getDate } from '../utils/functions';
 import './shared-styles';
 
@@ -83,7 +84,7 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container">
-        <h1 class="container-title">{$ latestPostsBlock.title $}</h1>
+        <h1 class="container-title">[[latestPostsBlock.title]]</h1>
 
         <div class="posts-wrapper">
           <template is="dom-repeat" items="[[latestPosts]]" as="post">
@@ -112,15 +113,17 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
           </template>
         </div>
 
-        <a href="{$ latestPostsBlock.callToAction.link $}">
+        <a href="[[latestPostsBlock.callToAction.link]]">
           <paper-button class="cta-button animated icon-right">
-            <span>{$ latestPostsBlock.callToAction.label $}</span>
+            <span>[[latestPostsBlock.callToAction.label]]</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
         </a>
       </div>
     `;
   }
+
+  private latestPostsBlock = latestPostsBlock;
 
   @property({ type: Object })
   posts: BlogState = initialBlogState;
