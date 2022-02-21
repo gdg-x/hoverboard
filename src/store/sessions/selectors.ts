@@ -4,6 +4,7 @@ import { RootState, store } from '..';
 import { Filter } from '../../models/filter';
 import { FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import { Session } from '../../models/session';
+import { filters } from '../../utils/data';
 import { fetchSessions } from './actions';
 
 const buildFilter = (group: FilterGroupKey, tag: string): Filter => {
@@ -57,12 +58,12 @@ export const selectFilterGroups = createSelector(
   (sessions: Session[], groups: FilterGroupKey[]): FilterGroup[] => {
     return [
       {
-        title: '{$ filters.tags $}',
+        title: filters.tags,
         key: FilterGroupKey.tags,
         filters: buildFilters(sessions, FilterGroupKey.tags),
       },
       {
-        title: '{$ filters.complexity $}',
+        title: filters.complexity,
         key: FilterGroupKey.complexity,
         filters: buildFilters(sessions, FilterGroupKey.complexity),
       },
