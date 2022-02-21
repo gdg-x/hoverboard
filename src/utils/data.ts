@@ -14,6 +14,7 @@ export {
   footer,
   footerRelBlock,
   galleryBlock,
+  latestPostsBlock,
   loading,
   mySchedule,
   notifications,
