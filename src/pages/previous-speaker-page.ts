@@ -22,6 +22,7 @@ import {
   initialPreviousSpeakersState,
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
+import { sessionDetails, speakerDetails, speakers } from '../utils/data';
 import { getVariableColor, isEmpty } from '../utils/functions';
 import { updateImageMetadata } from '../utils/metadata';
 
@@ -197,14 +198,14 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
         </div>
 
         <div class="additional-sections" hidden$="[[!sessions.length]]">
-          <h3>{$ speakerDetails.sessions $}</h3>
+          <h3>[[speakerDetails.sessions]]</h3>
 
           <template is="dom-repeat" items="[[sessions]]" as="session">
             <div layout horizontal center>
               <div class="section" flex>
                 <div class="section-primary-text">[[session.title]]</div>
                 <div class="section-secondary-text">
-                  {$ speakers.previousYear $}: [[session.year]]
+                  [[previousYear]]: [[session.year]]
                 </div>
                 <div class="tags" hidden$="[[!session.tags.length]]">
                   <template is="dom-repeat" items="[[session.tags]]" as="tag">
@@ -223,7 +224,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
                     center
                   >
                     <iron-icon icon="hoverboard:video"></iron-icon>
-                    <span>{$ sessionDetails.viewVideo $}</span>
+                    <span>[[sessionDetails.viewVideo]]</span>
                   </a>
                   <a
                     class="action"
@@ -236,7 +237,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
                     center
                   >
                     <iron-icon icon="hoverboard:presentation"></iron-icon>
-                    <span>{$ sessionDetails.viewPresentation $}</span>
+                    <span>[[sessionDetails.viewPresentation]]</span>
                   </a>
                 </div>
               </div>
@@ -250,6 +251,10 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
       <footer-block></footer-block>
     `;
   }
+
+  private previousYear = speakers.previousYear
+  private sessionDetails = sessionDetails;
+  private speakerDetails = speakerDetails;
 
   @property({ type: Object })
   speaker: PreviousSpeaker | undefined;
