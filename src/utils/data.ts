@@ -20,6 +20,7 @@ export {
   mySchedule,
   notifications,
   offlineMessage,
+  partnersBlock,
   signIn,
   signInDialog,
   signOut,
