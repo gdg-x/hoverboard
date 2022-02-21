@@ -7,10 +7,9 @@ import html from '@web/rollup-plugin-html';
 import fs from 'fs';
 import copy from 'rollup-plugin-copy';
 import livereload from 'rollup-plugin-livereload';
-import replace from 'rollup-plugin-re';
 import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
-import { compileBufferTemplate, compileTemplate, production } from './build-utils';
+import { compileBufferTemplate, production } from './build-utils';
 import { workboxConfig } from './workbox.config';
 
 const { ROLLUP_WATCH } = process.env;
@@ -53,32 +52,6 @@ export default [
         },
         extractAssets: false,
         minify: production,
-        transformHtml: [
-          (html) => {
-            return compileTemplate(html);
-          },
-        ],
-        transformAsset: [
-          (content, path) => {
-            if (path.endsWith('.json')) {
-              return compileBufferTemplate(content);
-            }
-            return content;
-          },
-        ],
-      }),
-      replace({
-        exclude: 'node_modules/**',
-        patterns: [
-          {
-            transform: (code: string, path: string) => {
-              if (path.endsWith('.ts')) {
-                return compileTemplate(code);
-              }
-              return code;
-            },
-          },
-        ],
       }),
       copy({
         targets: [
@@ -99,7 +72,6 @@ export default [
           {
             src: 'data/posts/*.md',
             dest: 'dist/data/posts',
-            transform: compileBufferTemplate,
           },
         ],
       }),
