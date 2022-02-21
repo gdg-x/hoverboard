@@ -5,6 +5,7 @@ export {
   buyTicket,
   codeOfConduct,
   dates,
+  description,
   emailUs,
   faq,
   featuredVideos,
@@ -33,6 +34,7 @@ export {
   ticketsBlock,
   timezoneOffset,
   title,
+  viewHighlights,
 } from '../../data/resources.json';
 export {
   contentLoaders,
@@ -42,6 +44,7 @@ export {
   mailto,
   navigation,
   organizer,
+  showForkMeBlockForProjectIds,
   signInProviders,
   socialNetwork,
 } from '../../data/settings.json';
