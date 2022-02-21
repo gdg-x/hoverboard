@@ -15,6 +15,7 @@ import { selectFilters } from '../store/filters/selectors';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
+import { mySchedule } from '../utils/data';
 import { generateClassName } from '../utils/functions';
 import './session-element';
 import './shared-styles';
@@ -121,7 +122,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
             center-center
           >
             <iron-icon class="add-session-icon" icon="hoverboard:add-circle-outline"></iron-icon>
-            <span>{$ mySchedule.browseSession $}</span>
+            <span>[[mySchedule.browseSession]]</span>
           </a>
 
           <template
@@ -149,6 +150,8 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
       </div>
     `;
   }
+
+  private mySchedule = mySchedule;
 
   @property({ type: Object })
   schedule: ScheduleState = initialScheduleState;
