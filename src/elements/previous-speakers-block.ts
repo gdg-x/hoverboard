@@ -13,6 +13,7 @@ import {
   initialPreviousSpeakersState,
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
+import { loading, previousSpeakersBlock } from '../utils/data';
 import './shared-styles';
 
 @customElement('previous-speakers-block')
@@ -66,11 +67,11 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container">
-        <h1 class="container-title">{$ previousSpeakersBlock.title $}</h1>
+        <h1 class="container-title">[[previousSpeakersBlock.title]]</h1>
 
         <div class="speakers-wrapper">
           <template is="dom-if" if="[[pending]]">
-            <p>{$ loading $}</p>
+            <p>[[loading]]</p>
           </template>
 
           <template is="dom-if" if="[[failure]]">
@@ -91,15 +92,18 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
           </template>
         </div>
 
-        <a href="{$ previousSpeakersBlock.callToAction.link $}">
+        <a href="[[previousSpeakersBlock.callToAction.link]]">
           <paper-button class="animated icon-right">
-            <span>{$ previousSpeakersBlock.callToAction.label $}</span>
+            <span>[[previousSpeakersBlock.callToAction.label]]</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
         </a>
       </div>
     `;
   }
+
+  private previousSpeakersBlock = previousSpeakersBlock;
+  private loading = loading;
 
   @property({ type: Object })
   previousSpeakers: PreviousSpeakersState = initialPreviousSpeakersState;

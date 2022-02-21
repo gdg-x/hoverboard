@@ -21,6 +21,7 @@ export {
   notifications,
   offlineMessage,
   partnersBlock,
+  previousSpeakersBlock,
   signIn,
   signInDialog,
   signOut,
