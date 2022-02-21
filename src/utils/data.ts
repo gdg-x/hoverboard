@@ -4,6 +4,7 @@ export {
   addToHomeScreen,
   blog,
   buyTicket,
+  coc,
   codeOfConduct,
   dates,
   description,
