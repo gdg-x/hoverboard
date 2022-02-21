@@ -21,6 +21,7 @@ import { initialScheduleState } from '../store/schedule/state';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { SessionsState } from '../store/sessions/state';
 import { SpeakersState } from '../store/speakers/state';
+import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('schedule-page')
@@ -57,12 +58,12 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
       </style>
 
       <hero-block
-        background-image="{$ heroSettings.schedule.background.image $}"
-        background-color="{$ heroSettings.schedule.background.color $}"
-        font-color="{$ heroSettings.schedule.fontColor $}"
+        background-image="[[heroSettings.background.image]]"
+        background-color="[[heroSettings.background.color]]"
+        font-color="[[heroSettings.fontColor]]"
       >
-        <div class="hero-title">{$ heroSettings.schedule.title $}</div>
-        <p class="hero-description">{$ heroSettings.schedule.description $}</p>
+        <div class="hero-title">[[heroSettings.title]]</div>
+        <p class="hero-description">[[heroSettings.description]]</p>
         <sticky-element slot="bottom">
           <header-bottom-toolbar location="[[location]]"></header-bottom-toolbar>
         </sticky-element>
@@ -88,7 +89,7 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
           load-from="-20%"
           load-to="80%"
           blur-width="300px"
-          items-count="{$ contentLoaders.schedule.itemsCount $}"
+          items-count="[[contentLoaders.itemsCount]]"
           hidden$="[[!pending]]"
           layout
         >
@@ -100,6 +101,9 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
       <footer-block></footer-block>
     `;
   }
+
+  private heroSettings = heroSettings.schedule;
+  private contentLoaders = contentLoaders.schedule;
 
   @property({ type: Object })
   schedule = initialScheduleState;
@@ -113,10 +117,7 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
 
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata(
-      '{$ heroSettings.schedule.title $}',
-      '{$ heroSettings.schedule.metaDescription $}'
-    );
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
   }
 
   override stateChanged(state: RootState) {
