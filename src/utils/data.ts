@@ -35,6 +35,7 @@ export {
   speakersBlock,
   subscribeBlock,
   subscribeNote,
+  team,
   ticketsBlock,
   timezoneOffset,
   title,
