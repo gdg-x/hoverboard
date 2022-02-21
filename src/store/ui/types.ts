@@ -1,6 +1,6 @@
 import { Hero } from '../../models/hero';
 
-export { Hero };
+export type { Hero };
 
 export const VIEWPORT_SIZE = 'VIEWPORT_SIZE';
 export const SET_VIEWPORT_SIZE = 'SET_VIEWPORT_SIZE';
