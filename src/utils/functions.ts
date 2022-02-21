@@ -2,10 +2,11 @@ import { PolymerElement } from '@polymer/polymer';
 import { setFilters } from '../store/filters/actions';
 import { TempAny } from '../temp-any';
 import { logPageView } from './analytics';
+import { dateFormat } from './data';
 import { parseFilters } from './filters';
 
 export const getDate = (date: string | Date) => {
-  return new Date(date).toLocaleString('{$ dateFormat.locale $}', {
+  return new Date(date).toLocaleString(dateFormat.locale, {
     month: 'short',
     day: 'numeric',
     year: 'numeric',

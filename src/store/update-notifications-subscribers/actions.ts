@@ -2,10 +2,11 @@ import { deleteDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { store } from '..';
 import { db } from '../../firebase';
+import { notifications } from '../../utils/data';
 import { queueSnackbar } from '../snackbars';
 import {
-  UpdateNotificationsSubscribersActions,
   RESET_UPDATE_NOTIFICATIONS_SUBSCRIBERS,
+  UpdateNotificationsSubscribersActions,
   UPDATE_NOTIFICATION_SUBSCRIBERS,
   UPDATE_NOTIFICATION_SUBSCRIBERS_FAILURE,
   UPDATE_NOTIFICATION_SUBSCRIBERS_SUCCESS,
@@ -35,7 +36,7 @@ export const updateNotificationsSubscribers =
         type: UPDATE_NOTIFICATION_SUBSCRIBERS_SUCCESS,
         payload: token,
       });
-      store.dispatch(queueSnackbar('{$ notifications.generalEnabled $}'));
+      store.dispatch(queueSnackbar(notifications.generalEnabled));
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_SUBSCRIBERS_FAILURE,
@@ -56,7 +57,7 @@ export const clearNotificationsSubscribers =
       dispatch({
         type: RESET_UPDATE_NOTIFICATIONS_SUBSCRIBERS,
       });
-      store.dispatch(queueSnackbar('{$ notifications.generalDisabled $}'));
+      store.dispatch(queueSnackbar(notifications.generalDisabled));
     } catch (error) {
       dispatch({
         type: UPDATE_NOTIFICATION_SUBSCRIBERS_FAILURE,

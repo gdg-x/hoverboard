@@ -2,6 +2,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { store } from '../';
 import { db } from '../../firebase';
+import { subscribeBlock } from '../../utils/data';
 import { openDialog } from '../dialogs/actions';
 import { DIALOG, DialogForm } from '../dialogs/types';
 import { queueSnackbar } from '../snackbars';
@@ -36,7 +37,7 @@ export const subscribe = (data: DialogForm) => async (dispatch: Dispatch<Subscri
       type: SUBSCRIBE_SUCCESS,
       payload: await setSubscribe(data),
     });
-    store.dispatch(queueSnackbar('{$ subscribeBlock.toast $}'));
+    store.dispatch(queueSnackbar(subscribeBlock.toast));
   } catch (error) {
     dispatch({
       type: SUBSCRIBE_FAILURE,

@@ -2,6 +2,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { store } from '..';
 import { db } from '../../firebase';
+import { bookmarked } from '../../utils/data';
 import { queueSnackbar } from '../snackbars';
 import { selectUserId } from '../user/selectors';
 import { FeaturedSessions } from './state';
@@ -56,7 +57,7 @@ const cleanFeaturedSessions = (object: FeaturedSessions): FeaturedSessions => {
 };
 
 export const setUserFeaturedSessions =
-  (userId: string, featuredSessions: FeaturedSessions, bookmarked: boolean) =>
+  (userId: string, featuredSessions: FeaturedSessions, isBookmarked: boolean) =>
   async (dispatch: Dispatch<FeaturedSessionsActions>) => {
     dispatch({
       type: SET_USER_FEATURED_SESSIONS,
@@ -69,9 +70,7 @@ export const setUserFeaturedSessions =
         type: SET_USER_FEATURED_SESSIONS_SUCCESS,
         payload: cleanedFeaturedSessions,
       });
-      store.dispatch(
-        queueSnackbar(bookmarked ? '{$ bookmarked.added $}' : '{$ bookmarked.removed $}')
-      );
+      store.dispatch(queueSnackbar(isBookmarked ? bookmarked.added : bookmarked.removed));
     } catch (error) {
       dispatch({
         type: SET_USER_FEATURED_SESSIONS_FAILURE,
