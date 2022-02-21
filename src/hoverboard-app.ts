@@ -7,10 +7,6 @@ import '@polymer/app-layout/app-toolbar/app-toolbar';
 import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/iron-selector/iron-selector';
-import '@polymer/paper-button';
-import '@polymer/paper-icon-button';
-import '@polymer/paper-menu-button';
-import '@polymer/paper-tabs';
 import { html, PolymerElement } from '@polymer/polymer';
 import {
   setLegacyWarnings,

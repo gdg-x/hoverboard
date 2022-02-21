@@ -1,4 +1,6 @@
 import { computed, customElement, property } from '@polymer/decorators';
+import '@polymer/iron-icon';
+import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';

@@ -1,5 +1,7 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
+import '@polymer/iron-icon';
+import '@polymer/paper-fab';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';

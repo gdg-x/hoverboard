@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 
-import '@polymer/iron-icon';
 import '@polymer/iron-iconset-svg/iron-iconset-svg';
 
 const documentContainer = document.createElement('template');

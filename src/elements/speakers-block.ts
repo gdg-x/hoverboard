@@ -1,6 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { computed, customElement } from '@polymer/decorators';
 import '@polymer/iron-icon';
+import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import '../components/text-truncate';

@@ -1,5 +1,4 @@
 import '@justinribeiro/lite-youtube';
-import '@polymer/paper-button';
 import { PaperDialogBehavior } from '@polymer/paper-dialog-behavior/paper-dialog-behavior';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';

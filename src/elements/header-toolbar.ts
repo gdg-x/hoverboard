@@ -1,5 +1,10 @@
 import { Success } from '@abraham/remotedata';
+import '@polymer/app-layout/app-toolbar/app-toolbar';
 import { computed, customElement, observe, property } from '@polymer/decorators';
+import '@polymer/paper-button';
+import '@polymer/paper-icon-button';
+import '@polymer/paper-menu-button';
+import '@polymer/paper-tabs';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { Hero } from '../models/hero';

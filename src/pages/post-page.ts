@@ -1,6 +1,5 @@
 import { Failure, Initialized, RemoteData, Success } from '@abraham/remotedata';
 import { customElement, observe, property } from '@polymer/decorators';
-import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import 'plastic-image';
