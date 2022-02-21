@@ -3,6 +3,7 @@ export {
   aboutOrganizerBlock,
   addToHomeScreen,
   blog,
+  bookmarked,
   buyTicket,
   coc,
   codeOfConduct,
