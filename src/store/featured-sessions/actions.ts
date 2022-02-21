@@ -70,9 +70,7 @@ export const setUserFeaturedSessions =
         type: SET_USER_FEATURED_SESSIONS_SUCCESS,
         payload: cleanedFeaturedSessions,
       });
-      store.dispatch(
-        queueSnackbar(isBookmarked ? bookmarked.added : bookmarked.removed)
-      );
+      store.dispatch(queueSnackbar(isBookmarked ? bookmarked.added : bookmarked.removed));
     } catch (error) {
       dispatch({
         type: SET_USER_FEATURED_SESSIONS_FAILURE,
