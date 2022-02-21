@@ -7,6 +7,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { Ticket } from '../models/ticket';
 import { RootState } from '../store';
 import { initialTicketsState } from '../store/tickets/state';
+import { buyTicket, contentLoaders, ticketsBlock } from '../utils/data';
 import './content-loader';
 import './hoverboard-icons';
 import './shared-styles';
@@ -132,7 +133,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="tickets-wrapper container">
-        <h1 class="container-title">{$ ticketsBlock.title $}</h1>
+        <h1 class="container-title">[[ticketsBlock.title]]</h1>
         <content-loader
           class="tickets-placeholder"
           card-padding="24px"
@@ -144,7 +145,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
           load-from="-70%"
           load-to="130%"
           animation-time="1s"
-          items-count="{$ contentLoaders.tickets.itemsCount $}"
+          items-count="[[contentLoaders.itemsCount]]"
           hidden$="[[!pending]]"
         >
         </content-loader>
@@ -180,7 +181,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
                 </div>
               </div>
               <div class="actions">
-                <div class="sold-out" block$="[[ticket.soldOut]]">{$ ticketsBlock.soldOut $}</div>
+                <div class="sold-out" block$="[[ticket.soldOut]]">[[ticketsBlock.soldOut]]</div>
                 <paper-button
                   primary
                   hidden$="[[ticket.soldOut]]"
@@ -193,10 +194,13 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
           </template>
         </div>
 
-        <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
+        <div class="additional-info">*[[ticketsBlock.ticketsDetails]]</div>
       </div>
     `;
   }
+
+  private ticketsBlock = ticketsBlock;
+  private contentLoaders = contentLoaders.tickets;
 
   @property({ type: Object })
   tickets = initialTicketsState;
@@ -222,11 +226,8 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
     if (!ticket.regular || ticket.primary || ticket.soldOut || !maxPrice) {
       return '';
     }
-    // TODO: Remove eslint exception
-    // ticketsBlock.save template has interpolation for `discount`.
-    // eslint-disable-next-line
-    const discount = Math.round(100 - (ticket.price * 100) / maxPrice);
-    return `{$ ticketsBlock.save $}`;
+    const discount = String(Math.round(100 - (ticket.price * 100) / maxPrice));
+    return this.ticketsBlock.save.replace('${discount}', discount);
   }
 
   _onTicketTap(e: PointerEvent & { model: { ticket: Ticket } }) {
@@ -237,6 +238,6 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
   }
 
   _getButtonText(available: boolean) {
-    return available ? '{$ buyTicket $}' : '{$ ticketsBlock.notAvailableYet $}';
+    return available ? buyTicket : this.ticketsBlock.notAvailableYet;
   }
 }

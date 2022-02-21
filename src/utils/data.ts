@@ -29,6 +29,7 @@ export {
   speakersBlock,
   subscribeBlock,
   subscribeNote,
+  ticketsBlock,
   timezoneOffset,
   title,
 } from '../../data/resources.json';
