@@ -42,6 +42,7 @@ export {
 } from '../../data/resources.json';
 export {
   contentLoaders,
+  disabledSchedule,
   hashtag,
   heroSettings,
   location,
