@@ -52,10 +52,10 @@ const cleanupData = (data: Data) => {
   return data;
 };
 
-const data = cleanupData(getData());
+export const data = cleanupData(getData());
 
 const nunjucks = n.configure({ throwOnUndefined: true });
 
-const compileTemplate = (template: string) => nunjucks.renderString(template, data);
+export const compileTemplate = (template: string) => nunjucks.renderString(template, data);
 
 export const compileBufferTemplate = (body: Buffer) => compileTemplate(body.toString());
