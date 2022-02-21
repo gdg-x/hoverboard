@@ -1,7 +1,8 @@
 import { customElement } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
-import '../elements/footer-block';
 import '../components/hero/simple-hero';
+import '../elements/footer-block';
+import { heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('not-found-page')
@@ -26,18 +27,17 @@ export class NotFoundPage extends PolymerElement {
         class="not-found-image"
         srcset="../../images/not-found.svg"
         sizing="contain"
-        alt="{$ heroSettings.notFound.title $}"
+        alt="[[heroSettings.title]]"
       ></plastic-image>
 
       <footer-block></footer-block>
     `;
   }
 
+  private heroSettings = heroSettings.notFound;
+
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata(
-      '{$ heroSettings.notFound.title $}',
-      '{$ heroSettings.notFound.metaDescription $}'
-    );
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
   }
 }
