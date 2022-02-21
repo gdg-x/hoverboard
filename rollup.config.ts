@@ -48,7 +48,7 @@ export default [
       }),
       html({
         input: {
-          html: compileBufferTemplate(fs.readFileSync('src/index.html')),
+          html: compileBufferTemplate(fs.readFileSync('index.html')),
         },
         extractAssets: false,
         minify: production,
