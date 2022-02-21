@@ -2,11 +2,11 @@
 
 ### Introduction
 
-{$ title $} is dedicated to providing a harassment-free and inclusive event experience for everyone regardless of gender identity and expression, sexual orientation, disabilities, neurodiversity, physical appearance, body size, ethnicity, nationality, race, age, religion, or other protected category. We do not tolerate harassment of event participants in any form. {$ title $} takes violations of our policy seriously and will respond appropriately.
+{{ title }} is dedicated to providing a harassment-free and inclusive event experience for everyone regardless of gender identity and expression, sexual orientation, disabilities, neurodiversity, physical appearance, body size, ethnicity, nationality, race, age, religion, or other protected category. We do not tolerate harassment of event participants in any form. {{ title }} takes violations of our policy seriously and will respond appropriately.
 
 ### Policy
 
-All participants of {$ title $} events must abide by the following policy:
+All participants of {{ title }} events must abide by the following policy:
 
 1. Be excellent to each other. We want the event to be an excellent experience for everyone regardless of gender identity and expression, sexual orientation, disabilities, neurodiversity, physical appearance, body size, ethnicity, nationality, race, age, religion, or other protected category. Treat everyone with respect. Participate while acknowledging that everyone deserves to be here -- and each of us has the right to enjoy our experience without fear of harassment, discrimination, or condescension, whether blatant or via micro-aggressions. Jokes shouldn’t demean others. Consider what you are saying and how it would feel if it were said to or about you.
 2. Speak up if you see or hear something. Harassment is not tolerated, and you are empowered to politely engage when you or others are disrespected. The person making you feel uncomfortable may not be aware of what they are doing, and politely bringing their behavior to their attention is encouraged. If a participant engages in harassing or uncomfortable behavior, the event organizers may take any action they deem appropriate, including warning or expelling the offender from the event with no refund. If you are being harassed or feel uncomfortable, notice that someone else is being harassed, or have any other concerns, please contact a member of the event staff immediately.
@@ -15,7 +15,7 @@ All participants of {$ title $} events must abide by the following policy:
 
 ### Scope
 
-This policy extends to talks, forums, workshops, codelabs, social media, parties, hallway conversations, all attendees, partners, sponsors, volunteers, event staff, etc. You catch our drift. {$ title $} reserves the right to refuse admittance to, or remove any person from, any {$ title $} hosted event (including future {$ title $} events) at any time in its sole discretion. This includes, but is not limited to, attendees behaving in a disorderly manner or failing to comply with this policy, and the terms and conditions herein. If a participant engages in harassing or uncomfortable behavior, the event organizers may take any action they deem appropriate, including warning or expelling the offender from the event with no refund.
+This policy extends to talks, forums, workshops, codelabs, social media, parties, hallway conversations, all attendees, partners, sponsors, volunteers, event staff, etc. You catch our drift. {{ title }} reserves the right to refuse admittance to, or remove any person from, any {{ title }} hosted event (including future {{ title }} events) at any time in its sole discretion. This includes, but is not limited to, attendees behaving in a disorderly manner or failing to comply with this policy, and the terms and conditions herein. If a participant engages in harassing or uncomfortable behavior, the event organizers may take any action they deem appropriate, including warning or expelling the offender from the event with no refund.
 
 Our event staff can usually be identified by special badges/attire. Our zero-tolerance policy means that we will look into and review every allegation of violation of our Event Community Guidelines and Anti-Harassment Policy and respond appropriately. Please note, while we take all concerns raised seriously, we will use our discretion as to determining when and how to follow up on reported incidents, and may decline to take any further action and/or may direct the participant to other resources for resolution.
 
@@ -38,8 +38,8 @@ This policy is based on and influenced by several other community policies inclu
 To report an incident look for a staff member by badge/attire or contact our incident response team below:
 {% for contact in codeOfConductBlock.contacts %}
 
-- {$ contact $}{% endfor %}
+- {{ contact }}{% endfor %}
 
 #### Anonymous report
 
-You can make an anonymous report [here]({$ codeOfConductBlock.form $}). We can't follow up with you directly, but we will fully investigate it and take whatever action is necessary to prevent a recurrence.
+You can make an anonymous report [here]({{ codeOfConductBlock.form }}). We can't follow up with you directly, but we will fully investigate it and take whatever action is necessary to prevent a recurrence.

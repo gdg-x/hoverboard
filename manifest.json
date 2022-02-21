@@ -1,10 +1,10 @@
 {
-  "name": "{$ title $}",
-  "short_name": "{$ webapp.shortName $}",
+  "name": "{{ title }}",
+  "short_name": "{{ webapp.shortName }}",
   "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone",
-  "background_color": "{$ webapp.backgroundColor $}",
-  "theme_color": "{$ webapp.themeColor $}",
+  "background_color": "{{ webapp.backgroundColor }}",
+  "theme_color": "{{ webapp.themeColor }}",
   "icons": [
     {
       "src": "images/manifest/icon-16.png",

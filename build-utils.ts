@@ -47,16 +47,8 @@ const cleanupData = (data: Data) => {
 
 const data = cleanupData(getData());
 
-// TODO: Remove custom variables
-const nunjucks = n.configure({
-  tags: {
-    variableStart: '{$',
-    variableEnd: '$}',
-  },
-});
+const nunjucks = n.configure({ throwOnUndefined: true });
 
-export const compileTemplate = (template: string) => {
-  return nunjucks.renderString(template, data);
-};
+const compileTemplate = (template: string) => nunjucks.renderString(template, data);
 
 export const compileBufferTemplate = (body: Buffer) => compileTemplate(body.toString());

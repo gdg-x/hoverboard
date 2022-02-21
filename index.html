@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/Event" lang="en">
   <head>
-    <base href="{$ basepath $}" />
+    <base href="{{ basepath }}" />
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta
       content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"
       name="viewport"
     />
-    <meta content="{$ description $}" name="description" />
-    <meta content="{$ keywords $}" name="keywords" />
-    <meta content="{$ organizer.name $}" name="author" />
+    <meta content="{{ description }}" name="description" />
+    <meta content="{{ keywords }}" name="keywords" />
+    <meta content="{{ organizer.name }}" name="author" />
     <meta content="Project Hoverboard" name="generator" />
 
-    <title>{$ title $}</title>
+    <title>{{ title }}</title>
 
     <!-- Config from compilation step -->
-    <meta content="{$ url $}" name="config-url" />
-    <meta content="{$ basepath $}" name="config-basepath" />
-    <meta content="{$ googleMapApiKey $}" name="config-google-maps-api-key" />
+    <meta content="{{ url }}" name="config-url" />
+    <meta content="{{ basepath }}" name="config-basepath" />
+    <meta content="{{ googleMapApiKey }}" name="config-google-maps-api-key" />
 
-    <link href="{$ url $}" rel="canonical" />
+    <link href="{{ url }}" rel="canonical" />
 
     <link href="images/favicon.ico" rel="icon" />
 
-    <meta content="{$ webapp.themeColor $}" name="theme-color" />
+    <meta content="{{ webapp.themeColor }}" name="theme-color" />
     <link href="manifest.json" rel="manifest" />
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta content="yes" name="mobile-web-app-capable" />
     <!-- fallback for manifest.json -->
-    <meta content="{$ title $}" name="application-name" />
+    <meta content="{{ title }}" name="application-name" />
     <!-- fallback for manifest.json -->
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
-    <meta content="{$ title $}" name="apple-mobile-web-app-title" />
+    <meta content="{{ title }}" name="apple-mobile-web-app-title" />
 
     <!-- Homescreen icons. -->
     <link href="images/manifest/icon-48.png" rel="apple-touch-icon" />
@@ -51,23 +51,23 @@
     <meta content="no" name="msapplication-tap-highlight" />
 
     <!-- Facebook sharing meta data -->
-    <meta content="{$ title $}" property="og:title" />
-    <meta content="{$ title $}" property="og:site_name" />
+    <meta content="{{ title }}" property="og:title" />
+    <meta content="{{ title }}" property="og:site_name" />
     <meta content="website" property="og:type" />
-    <meta content="{$ url $}" property="og:url" />
-    <meta content="{$ description $}" property="og:description" />
+    <meta content="{{ url }}" property="og:url" />
+    <meta content="{{ description }}" property="og:description" />
     <meta content="Event" property="og:type" />
-    <meta content="{$ image $}" property="og:image" />
+    <meta content="{{ image }}" property="og:image" />
     <meta content="image/jpeg" property="og:image:type" />
 
     <!-- Twitter meta data -->
     <meta content="summary_large_image" name="twitter:card" />
-    <meta content="@{$ organizer.twitter $}" name="twitter:creator" />
-    <meta content="{$ title $}" name="twitter:title" />
-    <meta content="{$ description $}" name="twitter:description" />
-    <meta content="{$ image $}" name="twitter:image" />
-    <meta name="twitter:label1" value="{$ location.label $}" />
-    <meta name="twitter:data1" value="{$ location.name $}" />
+    <meta content="@{{ organizer.twitter }}" name="twitter:creator" />
+    <meta content="{{ title }}" name="twitter:title" />
+    <meta content="{{ description }}" name="twitter:description" />
+    <meta content="{{ image }}" name="twitter:image" />
+    <meta name="twitter:label1" value="{{ location.label }}" />
+    <meta name="twitter:data1" value="{{ location.name }}" />
     <meta name="twitter:label2" />
     <meta name="twitter:data2" />
 
@@ -78,15 +78,16 @@
       // https://stackoverflow.com/a/50407571/26406
       window.process = {
         env: {
-          NODE_ENV: '{$ NODE_ENV $}',
+          NODE_ENV: '{{ NODE_ENV }}',
         },
       };
 
       window.Polymer = {
-        rootPath: '{$ basepath $}',
+        rootPath: '{{ basepath }}',
       };
 
-      {$ webVitalsPolyfill | safe $}
+      // prettier-ignore
+      {{ webVitalsPolyfill | safe }}
     </script>
 
     <script src="./src/hoverboard-app.ts" type="module"></script>
@@ -131,7 +132,7 @@
   </head>
 
   <body>
-    <hoverboard-app unresolved>{$ title $}</hoverboard-app>
+    <hoverboard-app unresolved>{{ title }}</hoverboard-app>
 
     <noscript>Please enable JavaScript to view this website.</noscript>
   </body>
