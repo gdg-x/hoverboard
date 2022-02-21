@@ -12,6 +12,7 @@ import { router } from '../router';
 import { RootState, store } from '../store';
 import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { initialPreviousSpeakersState } from '../store/previous-speakers/state';
+import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('previous-speakers-page')
@@ -135,7 +136,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
         card-height="128px"
         avatar-size="128px"
         avatar-circle="64px"
-        items-count="{$ contentLoaders.previousSpeakers.itemsCount $}"
+        items-count="[[contentLoaders.itemsCount]]"
         hidden$="[[contentLoaderVisibility]]"
       ></content-loader>
       <div class="container">
@@ -157,7 +158,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
               <img class="company-logo" src$="[[speaker.companyLogo]]" />
 
               <div class="sessions">
-                <h5>{$ speakers.previousYears $}:</h5>
+                <h5>[[resources.speakers.previousYears]]:</h5>
                 [[_getYears(speaker.sessions)]]
               </div>
             </div>
@@ -169,16 +170,16 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
+  private heroSettings = heroSettings.previousSpeakers;
+  private contentLoaders = contentLoaders.previousSpeakers;
+
   override stateChanged(state: RootState) {
     this.previousSpeakers = state.previousSpeakers;
   }
 
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata(
-      '{$ heroSettings.previousSpeakers.title $}',
-      '{$ heroSettings.previousSpeakers.metaDescription $}'
-    );
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
 
     if (this.previousSpeakers instanceof Initialized) {
       store.dispatch(fetchPreviousSpeakers);

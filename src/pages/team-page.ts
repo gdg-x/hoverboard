@@ -11,6 +11,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { selectTeamsAndMembers } from '../store/teams-members/selectors';
 import { initialTeamsMembersState } from '../store/teams-members/state';
+import { heroSettings, loading, team } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('team-page')
@@ -120,13 +121,13 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
 
       <div class="description-wrapper">
         <div class="container" layout horizontal justified>
-          <short-markdown content="{$ team.description $}"></short-markdown>
+          <short-markdown content="[[team.description]]"></short-markdown>
         </div>
       </div>
 
       <div class="container">
         <template is="dom-if" if="[[pending]]">
-          <p>{$ loading $}</p>
+          <p>[[loading]]</p>
         </template>
 
         <template is="dom-if" if="[[failure]]">
@@ -173,6 +174,10 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
+  private heroSettings = heroSettings.team;
+  private loading = loading;
+  private team = team;
+
   @property({ type: Object })
   teamsMembers = initialTeamsMembersState;
 
@@ -187,7 +192,7 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
   }
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata('{$ heroSettings.team.title $}', '{$ heroSettings.team.metaDescription $}');
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
   }
 
   override stateChanged(state: RootState) {

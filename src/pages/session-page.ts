@@ -29,6 +29,13 @@ import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
 import { TempAny } from '../temp-any';
+import {
+  disabledSchedule,
+  feedback,
+  schedule,
+  sessionDetails,
+  timezoneOffset,
+} from '../utils/data';
 import { getVariableColor } from '../utils/functions';
 import { updateImageMetadata } from '../utils/metadata';
 
@@ -233,7 +240,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
         </h3>
         <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.track.title]]</h3>
         <h3 class="meta-info" hidden$="[[!session.complexity]]">
-          {$ sessionDetails.contentLevel $}: [[session.complexity]]
+          [[sessionDetails.contentLevel]]: [[session.complexity]]
         </h3>
 
         <short-markdown class="description" content="[[session.description]]"></short-markdown>
@@ -250,7 +257,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
             center
           >
             <iron-icon icon="hoverboard:presentation"></iron-icon>
-            <span>{$ sessionDetails.viewPresentation $}</span>
+            <span>[[sessionDetails.viewPresentation]]</span>
           </a>
           <div
             class="action"
@@ -261,12 +268,12 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
             center
           >
             <iron-icon icon="hoverboard:video"></iron-icon>
-            {$ sessionDetails.viewVideo $}
+            [[sessionDetails.viewVideo]]
           </div>
         </div>
 
         <div class="additional-sections" hidden$="[[!session.speakers.length]]">
-          <h3>{$ sessionDetails.speakers $}</h3>
+          <h3>[[sessionDetails.speakers]]</h3>
           <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
             <a class="section" href$="[[speakerUrl(speaker.id)]]">
               <div layout horizontal center>
@@ -291,20 +298,23 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
         </div>
 
         <div id="feedback" class="additional-sections">
-          <h3>{$ feedback.headline $}</h3>
+          <h3>[[feedback.headline]]</h3>
 
           <auth-required hidden="[[!acceptingFeedback]]">
-            <slot slot="prompt">{$ feedback.leaveFeedback $}</slot>
+            <slot slot="prompt">[[feedback.leaveFeedback]]</slot>
             <feedback-block session-id="[[session.id]]"></feedback-block>
           </auth-required>
 
-          <p hidden="[[acceptingFeedback]]">{$ feedback.sessionClosed $}</p>
+          <p hidden="[[acceptingFeedback]]">[[feedback.sessionClosed]]</p>
         </div>
       </div>
 
       <footer-block></footer-block>
     `;
   }
+
+  private feedback = feedback;
+  private sessionDetails = sessionDetails;
 
   @property({ type: Object })
   session: Session | undefined;
@@ -320,7 +330,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
   @property({ type: Object })
   private viewport = initialUiState.viewport;
   @property({ type: Boolean })
-  private disabledSchedule: boolean = JSON.parse('{$ disabledSchedule $}');
+  private disabledSchedule: boolean = disabledSchedule;
   @property({ type: Boolean })
   private contentLoaderVisibility: boolean = false;
   @property({ type: Boolean })
@@ -364,8 +374,8 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
     if (day && startTime) {
       const now = new Date();
       const currentTime = new Date(`${day} ${startTime}`).getTime();
-      const timezoneOffset = parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset();
-      const convertedTimezoneDate = new Date(currentTime + timezoneOffset * ONE_MINUTE_MS);
+      const totalTimezoneOffset = parseInt(timezoneOffset) - now.getTimezoneOffset();
+      const convertedTimezoneDate = new Date(currentTime + totalTimezoneOffset * ONE_MINUTE_MS);
       const diff = now.getTime() - convertedTimezoneDate.getTime();
       this.acceptingFeedback = diff > 0 && diff < ONE_WEEK_MS;
     } else {
@@ -410,7 +420,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
     if (!(this.user instanceof Success)) {
       store.dispatch(
         queueComplexSnackbar({
-          label: '{$ schedule.saveSessionsSignedOut $}',
+          label: schedule.saveSessionsSignedOut,
           action: {
             title: 'Sign in',
             callback: () => openDialog(DIALOG.SIGNIN),

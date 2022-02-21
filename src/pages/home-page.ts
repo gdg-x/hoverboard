@@ -18,6 +18,17 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
 import { toggleVideoDialog } from '../store/ui/actions';
+import {
+  aboutBlock,
+  buyTicket,
+  dates,
+  description,
+  heroSettings,
+  location,
+  showForkMeBlockForProjectIds,
+  title,
+  viewHighlights,
+} from '../utils/data';
 import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
 
@@ -139,30 +150,30 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
       <hero-block
         id="hero"
-        background-image="{$ heroSettings.home.background.image $}"
-        background-color="{$ heroSettings.home.background.color $}"
-        font-color="{$ heroSettings.home.fontColor $}"
+        background-image="[[heroSettings.background.image]]"
+        background-color="[[heroSettings.background.color]]"
+        font-color="[[heroSettings.fontColor]]"
         hide-logo
       >
         <div class="home-content" layout vertical center>
           <plastic-image
             class="hero-logo"
             srcset="/images/logo.svg"
-            alt="{$ title $}"
+            alt="[[siteTitle]]"
           ></plastic-image>
           <div class="info-items">
-            <div class="info-item">{$ location.city $}. {$ dates $}</div>
-            <div class="info-item">{$ heroSettings.home.description $}</div>
+            <div class="info-item">[[city]]. [[dates]]</div>
+            <div class="info-item">[[heroSettings.description]]</div>
           </div>
 
           <div class="action-buttons" layout horizontal center-justified wrap>
             <paper-button class="watch-video" on-click="_playVideo">
               <iron-icon icon="hoverboard:movie"></iron-icon>
-              {$ viewHighlights $}
+              [[viewHighlights]]
             </paper-button>
             <paper-button on-click="_scrollToTickets" primary invert>
               <iron-icon icon="hoverboard:ticket"></iron-icon>
-              {$ buyTicket $}
+              [[buyTicket]]
             </paper-button>
           </div>
 
@@ -247,13 +258,21 @@ export class HomePage extends ReduxMixin(PolymerElement) {
     `;
   }
 
+  private city = location.city;
+  private siteTitle = title;
+  private dates = dates;
+  private viewHighlights = viewHighlights;
+  private buyTicket = buyTicket;
+  private heroSettings = heroSettings.home;
+  private aboutBlock = aboutBlock;
+
   @property({ type: Boolean })
   private showForkMeBlock: boolean = false;
 
   _playVideo() {
     toggleVideoDialog({
-      title: '{$  aboutBlock.callToAction.howItWas.label $}',
-      youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
+      title: this.aboutBlock.callToAction.howItWas.label,
+      youtubeId: this.aboutBlock.callToAction.howItWas.youtubeId,
       disableControls: true,
       opened: true,
     });
@@ -277,7 +296,6 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   private shouldShowForkMeBlock(): boolean {
-    const showForkMeBlockForProjectIds = '{$  showForkMeBlockForProjectIds $}'.split(',');
     const showForkMeBlock = firebaseApp.options.appId
       ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
       : false;
@@ -289,7 +307,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata('{$ title $}', '{$ description $}', INCLUDE_SITE_TITLE.NO);
+    updateMetadata(title, description, INCLUDE_SITE_TITLE.NO);
     this.showForkMeBlock = this.shouldShowForkMeBlock();
   }
 }

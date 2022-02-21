@@ -16,6 +16,7 @@ import { RootState, store } from '../store';
 import { fetchBlogPosts } from '../store/blog/actions';
 import { initialBlogState } from '../store/blog/state';
 import { initialUiState } from '../store/ui/state';
+import { contentLoaders, heroSettings } from '../utils/data';
 import { getDate } from '../utils/functions';
 import { updateMetadata } from '../utils/metadata';
 
@@ -110,7 +111,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
             load-from="-70%"
             load-to="130%"
             animation-time="1s"
-            items-count="{$ contentLoaders.blog.itemsCount $}"
+            items-count="[[contentLoaders.itemsCount]]"
             hidden$="[[contentLoaderVisibility]]"
           >
           </content-loader>
@@ -163,6 +164,9 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
+  private heroSettings = heroSettings.blog;
+  private contentLoaders = contentLoaders.blog;
+
   @property({ type: Object })
   posts = initialBlogState;
   @property({ type: Object })
@@ -185,7 +189,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
 
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata('{$ heroSettings.blog.title $}', '{$ heroSettings.blog.metaDescription $}');
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
 
     if (this.posts instanceof Initialized) {
       store.dispatch(fetchBlogPosts);

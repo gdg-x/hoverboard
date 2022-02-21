@@ -18,6 +18,7 @@ import { router } from '../router';
 import { RootState, store } from '../store';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { SpeakersState } from '../store/speakers/state';
+import { speakerDetails } from '../utils/data';
 import { getVariableColor, isEmpty } from '../utils/functions';
 import { updateImageMetadata } from '../utils/metadata';
 
@@ -197,7 +198,7 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
         </div>
 
         <div class="additional-sections" hidden$="[[!speaker.sessions.length]]">
-          <h3>{$ speakerDetails.sessions $}</h3>
+          <h3>[[speakerDetails.sessions]]</h3>
 
           <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
             <a href$="[[sessionUrl(session.id)]]" class="section">
@@ -227,6 +228,8 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
       <footer-block></footer-block>
     `;
   }
+
+  private speakerDetails = speakerDetails;
 
   @property({ type: Object })
   speaker: SpeakerWithTags | undefined;

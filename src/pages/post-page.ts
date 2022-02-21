@@ -15,6 +15,7 @@ import { router } from '../router';
 import { RootState, store } from '../store';
 import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
+import { blog } from '../utils/data';
 import { getDate } from '../utils/functions';
 import { updateImageMetadata } from '../utils/metadata';
 
@@ -75,12 +76,12 @@ export class PostPage extends ReduxMixin(PolymerElement) {
 
       <div class="container-narrow">
         <long-markdown class="post" content="[[postContent]]"></long-markdown>
-        <div class="date">{$ blog.published $}: [[getDate(post.data.published)]]</div>
+        <div class="date">[[blog.published]]: [[getDate(post.data.published)]]</div>
       </div>
 
       <div class="suggested-posts">
         <div class="container-narrow">
-          <h3 class="container-title">{$ blog.suggested $}</h3>
+          <h3 class="container-title">[[blog.suggested]]</h3>
           <posts-list posts="[[suggestedPosts]]"></posts-list>
         </div>
       </div>
@@ -99,6 +100,8 @@ export class PostPage extends ReduxMixin(PolymerElement) {
       store.dispatch(fetchBlogPosts);
     }
   }
+
+  private blog = blog;
 
   @observe('post')
   private async onPost(post: RemoteData<Error, Post>) {

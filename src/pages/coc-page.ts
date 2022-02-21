@@ -1,8 +1,10 @@
 import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
+import resources from '../../data/resources.json';
 import '../components/hero/simple-hero';
 import '../components/markdown/remote-markdown';
 import '../elements/footer-block';
+import { heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('coc-page')
@@ -23,11 +25,13 @@ export class CocPage extends PolymerElement {
     `;
   }
 
+  private heroSettings = heroSettings.coc;
+
   @property({ type: String })
-  source = '{$ coc $}';
+  source = resources.coc;
 
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata('{$ heroSettings.coc.title $}', '{$ heroSettings.coc.metaDescription $}');
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
   }
 }
