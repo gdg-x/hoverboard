@@ -3,6 +3,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import '../components/hero/simple-hero';
 import '../components/markdown/remote-markdown';
 import '../elements/footer-block';
+import { faq, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('faq-page')
@@ -23,11 +24,13 @@ export class FaqPage extends PolymerElement {
     `;
   }
 
+  private heroSettings = heroSettings.faq;
+
   @property({ type: String })
-  source = '{$ faq $}';
+  source = faq;
 
   override connectedCallback() {
     super.connectedCallback();
-    updateMetadata('{$ heroSettings.faq.title $}', '{$ heroSettings.faq.metaDescription $}');
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
   }
 }

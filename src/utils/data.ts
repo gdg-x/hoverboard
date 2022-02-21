@@ -6,6 +6,7 @@ export {
   codeOfConduct,
   dates,
   emailUs,
+  faq,
   featuredVideos,
   feedback,
   filters,
