@@ -7,6 +7,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { subscribe } from '../store/subscribe/actions';
 import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
+import { subscribeBlock } from '../utils/data';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -58,11 +59,11 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
         <paper-input
           id="emailInput"
           on-touchend="_focus"
-          label="{$ subscribeBlock.yourEmail $}"
+          label="[[subscribeBlock.yourEmail]]"
           value="{{email}}"
           required
           auto-validate$="[[validate]]"
-          error-message="{$ subscribeBlock.emailRequired $}"
+          error-message="[[subscribeBlock.emailRequired]]"
           autocomplete="off"
           disabled="[[subscribed.data]]"
         >
@@ -78,6 +79,8 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
       </div>
     `;
   }
+
+  private subscribeBlock = subscribeBlock;
 
   @property({ type: Object })
   subscribed: SubscribeState = initialSubscribeState;
@@ -103,8 +106,8 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
   @computed('subscribed')
   get ctaLabel() {
     return this.subscribed instanceof Success
-      ? '{$  subscribeBlock.subscribed $}'
-      : '{$  subscribeBlock.subscribe $}';
+      ? this.subscribeBlock.subscribed
+      : this.subscribeBlock.subscribe;
   }
 
   @computed('email', 'subscribed')

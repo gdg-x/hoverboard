@@ -8,6 +8,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
+import { speakersBlock } from '../utils/data';
 import { randomOrder } from '../utils/functions';
 import './shared-styles';
 
@@ -151,7 +152,7 @@ export class SpeakersBlock extends SpeakersMixin(ReduxMixin(PolymerElement)) {
       </style>
 
       <div class="container">
-        <h1 class="container-title">{$ speakersBlock.title $}</h1>
+        <h1 class="container-title">[[speakersBlock.title]]</h1>
 
         <div class="speakers-wrapper">
           <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
@@ -204,15 +205,17 @@ export class SpeakersBlock extends SpeakersMixin(ReduxMixin(PolymerElement)) {
           </template>
         </div>
 
-        <a href="{$ speakersBlock.callToAction.link $}">
+        <a href="[[speakersBlock.callToAction.link]]">
           <paper-button class="cta-button animated icon-right">
-            <span>{$ speakersBlock.callToAction.label $}</span>
+            <span>[[speakersBlock.callToAction.label]]</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
         </a>
       </div>
     `;
   }
+
+  private speakersBlock = speakersBlock;
 
   @computed('speakers')
   get featuredSpeakers(): Speaker[] {
