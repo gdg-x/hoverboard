@@ -15,6 +15,7 @@
     "firestore:init": "ts-node-script ./scripts/firestore-init",
     "fix": "concurrently npm:fix:*",
     "fix:eslint": "eslint . --ext .ts --ext .js --fix",
+    "fix:markdownlint": "markdownlint '**/*.md' --fix",
     "fix:prettier": "prettier . --write",
     "fix:stylelint": "stylelint \"src/components/**/*.ts\" \"src/styles/**/*.ts\" --fix",
     "install:functions": "npm --prefix ./functions ci",

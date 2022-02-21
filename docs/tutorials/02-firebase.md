@@ -24,4 +24,4 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 
 1. Whoa! You've set up Firebase into your app.
 
-##### Tip: Check out [firestore utils](firebase-utils.md) docs
+_Tip: Check out [firestore utils](firebase-utils.md) docs_
