@@ -48,7 +48,7 @@ export {
   title,
   image,
   viewHighlights,
-} from '../../data/resources.json';
+} from '../../public/data/resources.json';
 export {
   contentLoaders,
   dateFormat,
@@ -62,4 +62,4 @@ export {
   showForkMeBlockForProjectIds,
   signInProviders,
   socialNetwork,
-} from '../../data/settings.json';
+} from '../../public/data/settings.json';

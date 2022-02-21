@@ -16,7 +16,7 @@ const { ROLLUP_WATCH } = process.env;
 
 export default [
   {
-    input: 'firebase-messaging-sw.ts',
+    input: 'src/firebase-messaging-sw.ts',
     treeshake: production,
     output: {
       file: 'dist/firebase-messaging-sw.js',
@@ -48,7 +48,7 @@ export default [
       }),
       html({
         input: {
-          html: compileBufferTemplate(fs.readFileSync('index.html')),
+          html: compileBufferTemplate(fs.readFileSync('src/index.html')),
         },
         extractAssets: false,
         minify: production,
@@ -56,22 +56,18 @@ export default [
       copy({
         targets: [
           {
-            src: 'manifest.json',
+            src: 'public/*',
+            dest: 'dist',
+          },
+          {
+            src: 'public/manifest.json',
             dest: 'dist',
             transform: compileBufferTemplate,
           },
           {
-            src: 'images',
-            dest: 'dist',
-          },
-          {
-            src: 'data/*.md',
+            src: 'public/data/*.md',
             dest: 'dist/data',
             transform: compileBufferTemplate,
-          },
-          {
-            src: 'data/posts/*.md',
-            dest: 'dist/data/posts',
           },
         ],
       }),

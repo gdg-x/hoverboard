@@ -26,7 +26,7 @@
     "lint:types:web": "tsc --noEmit",
     "postinstall": "npm run install:functions",
     "serve": "NODE_ENV=production concurrently --kill-others npm:start:*",
-    "start": "NODE_ENV=development concurrently --kill-others npm:start:*",
+    "start": "npm run clean && NODE_ENV=development concurrently --kill-others npm:start:*",
     "start:emulators": "firebase emulators:start",
     "start:functions": "npm --prefix functions start",
     "start:rollup": "mkdir -p dist && rollup --config rollup.config.ts --configPlugin typescript --watch",
