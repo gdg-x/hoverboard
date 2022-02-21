@@ -13,6 +13,7 @@ import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
 import './hoverboard-icons';
 import './shared-styles';
+import { subscribeBlock } from '../utils/data';
 
 @customElement('subscribe-block')
 export class SubscribeBlock extends ReduxMixin(PolymerElement) {
@@ -56,7 +57,7 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
-        <div class="description">{$ subscribeBlock.callToAction.description $}</div>
+        <div class="description">[[subscribeBlock.callToAction.description]]</div>
         <div class="cta-button">
           <paper-button
             class="animated icon-right"
@@ -70,6 +71,8 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
       </div>
     `;
   }
+
+  private subscribeBlock = subscribeBlock;
 
   @property({ type: Object })
   subscribed: SubscribeState = initialSubscribeState;
@@ -93,8 +96,8 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
   @computed('subscribed')
   get ctaLabel() {
     return this.subscribed instanceof Success
-      ? '{$  subscribeBlock.subscribed $}'
-      : '{$  subscribeBlock.callToAction.label $}';
+      ? this.subscribeBlock.subscribed
+      : this.subscribeBlock.callToAction.label;
   }
 
   _subscribe() {
@@ -119,10 +122,10 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
       this._subscribeAction({ ...userData, email: this.user.data.email });
     } else {
       openDialog(DIALOG.SUBSCRIBE, {
-        title: '{$ subscribeBlock.formTitle $}',
-        submitLabel: ' {$ subscribeBlock.subscribe $}',
-        firstFieldLabel: '{$ subscribeBlock.firstName $}',
-        secondFieldLabel: '{$ subscribeBlock.lastName $}',
+        title: this.subscribeBlock.formTitle,
+        submitLabel: this.subscribeBlock.subscribe,
+        firstFieldLabel: this.subscribeBlock.firstName,
+        secondFieldLabel: this.subscribeBlock.lastName,
         firstFieldValue: userData.firstFieldValue,
         secondFieldValue: userData.secondFieldValue,
         submit: (data: DialogForm) => this._subscribeAction(data),
