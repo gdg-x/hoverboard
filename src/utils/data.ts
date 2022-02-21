@@ -22,11 +22,13 @@ export {
   offlineMessage,
   partnersBlock,
   previousSpeakersBlock,
+  schedule,
   signIn,
   signInDialog,
   signOut,
   subscribeBlock,
   subscribeNote,
+  timezoneOffset,
   title,
 } from '../../data/resources.json';
 export {

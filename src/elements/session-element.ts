@@ -18,6 +18,7 @@ import {
 import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
+import { schedule, timezoneOffset } from '../utils/data';
 import { getVariableColor } from '../utils/functions';
 import './shared-styles';
 
@@ -293,7 +294,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     if (!(this.user instanceof Success)) {
       store.dispatch(
         queueComplexSnackbar({
-          label: '{$ schedule.saveSessionsSignedOut $}',
+          label: schedule.saveSessionsSignedOut,
           action: {
             title: 'Sign in',
             callback: () => openDialog(DIALOG.SIGNIN),
@@ -330,7 +331,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     const now = new Date();
     const convertedTimezoneDate = new Date(
       new Date(`${this.session.day} ${this.session.startTime}`).getTime() +
-        (parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset()) * ONE_MINUTE_MS
+        (parseInt(timezoneOffset) - now.getTimezoneOffset()) * ONE_MINUTE_MS
     );
 
     const diff = now.getTime() - convertedTimezoneDate.getTime();
