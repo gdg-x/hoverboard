@@ -3,8 +3,8 @@
 import n from 'nunjucks';
 import fs from 'fs';
 
-type Data = typeof import('./data/resources.json') &
-  typeof import('./data/settings.json') &
+type Data = typeof import('./public/data/resources.json') &
+  typeof import('./public/data/settings.json') &
   typeof import('./config/production.json');
 
 const { BUILD_ENV, NODE_ENV } = process.env;
@@ -27,7 +27,11 @@ const getConfigPath = () => {
 };
 
 const getData = (): Data => {
-  const settingsFiles = ['./data/resources.json', './data/settings.json', getConfigPath()];
+  const settingsFiles = [
+    './public/data/resources.json',
+    './public/data/settings.json',
+    getConfigPath(),
+  ];
   const combineSettings = (currentData: Data, path: string) => {
     return {
       ...currentData,
