@@ -46,6 +46,7 @@ export {
   ticketsBlock,
   timezoneOffset,
   title,
+  image,
   viewHighlights,
 } from '../../data/resources.json';
 export {

@@ -1,4 +1,5 @@
 import { updateMetadata as pwaUpdateMetadata } from 'pwa-helpers/metadata.js';
+import { image, title as siteTitle } from './data';
 
 export enum INCLUDE_SITE_TITLE {
   YES,
@@ -12,10 +13,10 @@ interface Image {
 
 export const updateImageMetadata = (title: string, description: string, data: Image) => {
   pwaUpdateMetadata({
-    title: `${title} | {$ title $}`,
+    title: `${title} | ${siteTitle}`,
     description,
     image: data.image,
-    imageAlt: data.image,
+    imageAlt: data.imageAlt,
   });
 };
 
@@ -24,11 +25,11 @@ export const updateMetadata = (
   description: string,
   includeSiteTitle = INCLUDE_SITE_TITLE.YES
 ) => {
-  const fullTitle = includeSiteTitle === INCLUDE_SITE_TITLE.YES ? `${title} | {$ title $}` : title;
+  const fullTitle = includeSiteTitle === INCLUDE_SITE_TITLE.YES ? `${title} | ${siteTitle}` : title;
   pwaUpdateMetadata({
     title: fullTitle,
     description,
-    image: '{$ image $}',
-    imageAlt: '{$ title $}',
+    image,
+    imageAlt: siteTitle,
   });
 };
