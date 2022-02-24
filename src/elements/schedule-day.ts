@@ -17,7 +17,7 @@ import { initialScheduleState, ScheduleState } from '../store/schedule/state';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
 import { mySchedule } from '../utils/data';
-import { generateClassName } from '../utils/functions';
+import { generateClassName } from '../utils/styles';
 import './session-element';
 import './shared-styles';
 

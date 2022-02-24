@@ -18,8 +18,9 @@ import { fetchSpeakers } from '../store/speakers/actions';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { initialSpeakersState, SpeakersState } from '../store/speakers/state';
 import { speakerDetails } from '../utils/data';
-import { getVariableColor, isEmpty } from '../utils/functions';
 import { updateImageMetadata } from '../utils/metadata';
+import { isEmpty } from '../utils/arrays';
+import { getVariableColor } from '../utils/styles';
 
 @customElement('speaker-page')
 export class SpeakerPage extends ReduxMixin(PolymerElement) {

@@ -6,7 +6,7 @@ import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { filters } from '../utils/data';
 import { clearFilters, toggleFilter } from '../utils/filters';
-import { generateClassName, getVariableColor } from '../utils/functions';
+import { generateClassName, getVariableColor } from '../utils/styles';
 import './shared-styles';
 
 @customElement('filter-menu')

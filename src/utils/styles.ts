@@ -1,14 +1,6 @@
 import { PolymerElement } from '@polymer/polymer';
 import { TempAny } from '../temp-any';
 
-export const isEmpty = <T>(array: T[]): boolean => {
-  return !array || !array.length;
-};
-
-export const randomOrder = <T>(array: T[]): T[] => {
-  return [...array].sort(() => 0.5 - Math.random());
-};
-
 export const generateClassName = (value: string | undefined): string => {
   return value
     ? value
