@@ -1,20 +1,22 @@
-import { Success } from '@abraham/remotedata';
-import { computed, customElement } from '@polymer/decorators';
+import { Initialized, Success } from '@abraham/remotedata';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import '../components/text-truncate';
-import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
+import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
+import { fetchSpeakers } from '../store/speakers/actions';
+import { initialSpeakersState } from '../store/speakers/state';
 import { speakersBlock } from '../utils/data';
 import { randomOrder } from '../utils/functions';
 import './shared-styles';
 
 @customElement('speakers-block')
-export class SpeakersBlock extends SpeakersMixin(ReduxMixin(PolymerElement)) {
+export class SpeakersBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -216,7 +218,23 @@ export class SpeakersBlock extends SpeakersMixin(ReduxMixin(PolymerElement)) {
     `;
   }
 
+  @property({ type: Object })
+  speakers = initialSpeakersState;
+
   private speakersBlock = speakersBlock;
+
+  override connectedCallback() {
+    super.connectedCallback();
+
+    if (this.speakers instanceof Initialized) {
+      store.dispatch(fetchSpeakers);
+    }
+  }
+
+  override stateChanged(state: RootState) {
+    super.stateChanged(state);
+    this.speakers = state.speakers;
+  }
 
   @computed('speakers')
   get featuredSpeakers(): Speaker[] {
