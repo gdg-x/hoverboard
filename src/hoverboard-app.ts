@@ -16,7 +16,6 @@ import {
 } from '@polymer/polymer/lib/utils/settings';
 import 'plastic-image';
 import './components/snack-bar';
-import { log } from './console';
 import './elements/dialogs/feedback-dialog';
 import './elements/dialogs/signin-dialog';
 import './elements/dialogs/subscribe-dialog';
@@ -306,7 +305,7 @@ export class HoverboardApp extends PolymerElement {
 
   override ready() {
     super.ready();
-    log('Hoverboard is ready!');
+    console.log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
     startRouter(this.shadowRoot!.querySelector('main')!);
     onUser();
