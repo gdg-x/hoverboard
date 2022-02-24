@@ -3,10 +3,10 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { fetchGallery } from '../store/gallery/actions';
 import { initialGalleryState } from '../store/gallery/state';
+import { ReduxMixin } from '../store/mixin';
 import { galleryBlock } from '../utils/data';
 import './shared-styles';
 

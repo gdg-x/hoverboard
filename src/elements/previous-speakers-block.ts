@@ -4,10 +4,10 @@ import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
+import { ReduxMixin } from '../store/mixin';
 import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { selectRandomPreviousSpeakers } from '../store/previous-speakers/selectors';
 import {

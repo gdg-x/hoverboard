@@ -15,8 +15,8 @@ import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
 import { firebaseApp } from '../firebase';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { store } from '../store';
+import { ReduxMixin } from '../store/mixin';
 import { queueSnackbar } from '../store/snackbars';
 import { toggleVideoDialog } from '../store/ui/actions';
 import {

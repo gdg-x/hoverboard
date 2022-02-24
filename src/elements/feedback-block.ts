@@ -4,7 +4,6 @@ import '@polymer/paper-button';
 import '@polymer/paper-input/paper-textarea';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@radi-cho/star-rating';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { Feedback } from '../models/feedback';
 import { RootState, store } from '../store';
 import {
@@ -13,6 +12,7 @@ import {
   SessionFeedback,
   setFeedback,
 } from '../store/feedback';
+import { ReduxMixin } from '../store/mixin';
 import { queueComplexSnackbar, queueSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { feedback } from '../utils/data';

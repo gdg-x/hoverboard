@@ -9,7 +9,6 @@ import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
 import '../elements/feedback-block';
 import '../elements/shared-styles';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { Session } from '../models/session';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
@@ -22,6 +21,7 @@ import {
   setUserFeaturedSessions,
 } from '../store/featured-sessions/actions';
 import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
+import { ReduxMixin } from '../store/mixin';
 import { fetchSessions } from '../store/sessions/actions';
 import { selectSession } from '../store/sessions/selectors';
 import { initialSessionsState, SessionsState } from '../store/sessions/state';

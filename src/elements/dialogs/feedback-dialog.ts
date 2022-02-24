@@ -2,9 +2,9 @@ import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import '@radi-cho/star-rating';
-import { ReduxMixin } from '../../mixins/redux-mixin';
 import { closeDialog } from '../../store/dialogs/actions';
 import { DIALOG } from '../../store/dialogs/types';
+import { ReduxMixin } from '../../store/mixin';
 import { feedback } from '../../utils/data';
 import '../shared-styles';
 

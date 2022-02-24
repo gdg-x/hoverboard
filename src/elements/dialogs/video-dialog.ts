@@ -3,7 +3,7 @@ import { PaperDialogBehavior } from '@polymer/paper-dialog-behavior/paper-dialog
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
-import { ReduxMixin } from '../../mixins/redux-mixin';
+import { ReduxMixin } from '../../store/mixin';
 import { toggleVideoDialog } from '../../store/ui/actions';
 import '../shared-styles';
 

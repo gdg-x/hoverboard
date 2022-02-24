@@ -2,10 +2,10 @@ import { Success } from '@abraham/remotedata';
 import '@material/mwc-button';
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOG } from '../store/dialogs/types';
+import { ReduxMixin } from '../store/mixin';
 import { signIn } from '../utils/data';
 import { ThemedElement } from './themed-element';
 

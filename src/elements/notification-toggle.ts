@@ -8,8 +8,8 @@ import '@polymer/paper-icon-button';
 import '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../components/auth-required';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
+import { ReduxMixin } from '../store/mixin';
 import {
   initialNotificationPermissionState,
   PROMPT_USER,

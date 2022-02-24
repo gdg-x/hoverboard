@@ -10,11 +10,11 @@ import '../components/markdown/short-markdown';
 import '../elements/content-loader';
 import '../elements/previous-speakers-block';
 import '../elements/shared-styles';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { PreviousSessionWithYear } from '../models/previous-session';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
+import { ReduxMixin } from '../store/mixin';
 import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import {
