@@ -38,8 +38,8 @@ import {
   sessionDetails,
   timezoneOffset,
 } from '../utils/data';
-import { getVariableColor } from '../utils/functions';
 import { updateImageMetadata } from '../utils/metadata';
+import { getVariableColor } from '../utils/styles';
 
 @customElement('session-page')
 export class SessionPage extends ReduxMixin(PolymerElement) {

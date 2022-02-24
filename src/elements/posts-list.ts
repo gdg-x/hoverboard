@@ -5,7 +5,7 @@ import '../components/markdown/short-markdown';
 import '../components/text-truncate';
 import { Post } from '../models/post';
 import { router } from '../router';
-import { getDate } from '../utils/functions';
+import { getDate } from '../utils/dates';
 import './shared-styles';
 
 @customElement('posts-list')

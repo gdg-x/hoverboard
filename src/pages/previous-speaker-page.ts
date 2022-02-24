@@ -22,7 +22,8 @@ import {
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
 import { sessionDetails, speakerDetails, speakers } from '../utils/data';
-import { getVariableColor, isEmpty } from '../utils/functions';
+import { isEmpty } from '../utils/arrays';
+import { getVariableColor } from '../utils/styles';
 import { updateImageMetadata } from '../utils/metadata';
 
 @customElement('previous-speaker-page')

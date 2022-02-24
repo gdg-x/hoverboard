@@ -2,7 +2,7 @@ import { Initialized, Success } from '@abraham/remotedata';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState, store } from '..';
 import { PreviousSpeaker } from '../../models/previous-speaker';
-import { randomOrder } from '../../utils/functions';
+import { randomOrder } from '../../utils/arrays';
 import { selectViewport } from '../ui/selectors';
 import { Viewport } from '../ui/types';
 import { fetchPreviousSpeakers } from './actions';

@@ -4,7 +4,7 @@ import { RootState, store } from '..';
 import { Filter } from '../../models/filter';
 import { SpeakerWithTags } from '../../models/speaker';
 import { selectFilters } from '../../store/filters/selectors';
-import { generateClassName } from '../../utils/functions';
+import { generateClassName } from '../../utils/styles';
 import { fetchSpeakers } from './actions';
 
 const selectSpeakerId = (_state: RootState, speakerId: string) => speakerId;

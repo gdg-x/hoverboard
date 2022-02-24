@@ -11,8 +11,8 @@ import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { fetchSpeakers } from '../store/speakers/actions';
 import { initialSpeakersState } from '../store/speakers/state';
+import { randomOrder } from '../utils/arrays';
 import { speakersBlock } from '../utils/data';
-import { randomOrder } from '../utils/functions';
 import './shared-styles';
 
 @customElement('speakers-block')
