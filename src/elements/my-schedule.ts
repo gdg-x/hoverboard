@@ -1,8 +1,8 @@
 import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { Day } from '../models/day';
 import { RootState } from '../store';
+import { ReduxMixin } from '../store/mixin';
 import { selectFeaturedSchedule } from '../store/schedule/selectors';
 import './schedule-day';
 import './shared-styles';

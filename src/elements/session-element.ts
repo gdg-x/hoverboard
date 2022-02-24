@@ -4,7 +4,6 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import '../components/text-truncate';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { Session } from '../models/session';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -15,6 +14,7 @@ import {
   FeaturedSessionsState,
   initialFeaturedSessionsState,
 } from '../store/featured-sessions/state';
+import { ReduxMixin } from '../store/mixin';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';

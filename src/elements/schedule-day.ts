@@ -3,7 +3,6 @@ import { computed, customElement, observe, property } from '@polymer/decorators'
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { Day } from '../models/day';
 import { Filter } from '../models/filter';
 import { Session } from '../models/session';
@@ -13,6 +12,7 @@ import { RootState, store } from '../store';
 import { fetchUserFeaturedSessions } from '../store/featured-sessions/actions';
 import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
 import { selectFilters } from '../store/filters/selectors';
+import { ReduxMixin } from '../store/mixin';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';

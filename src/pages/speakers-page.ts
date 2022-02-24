@@ -1,4 +1,4 @@
-import { Success } from '@abraham/remotedata';
+import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-icon-button';
@@ -11,21 +11,22 @@ import '../elements/content-loader';
 import '../elements/filter-menu';
 import '../elements/previous-speakers-block';
 import '../elements/shared-styles';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
-import { RootState } from '../store';
+import { RootState, store } from '../store';
 import { selectFilters } from '../store/filters/selectors';
+import { ReduxMixin } from '../store/mixin';
 import { selectFilterGroups } from '../store/sessions/selectors';
+import { fetchSpeakers } from '../store/speakers/actions';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
+import { initialSpeakersState } from '../store/speakers/state';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('speakers-page')
-export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
+export class SpeakersPage extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -259,6 +260,9 @@ export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   private heroSettings = heroSettings.speakers;
   private contentLoaders = contentLoaders;
 
+  @property({ type: Object })
+  speakers = initialSpeakersState;
+
   @property({ type: Array })
   private filterGroups: FilterGroup[] = [];
   @property({ type: Array })
@@ -269,10 +273,15 @@ export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
+
+    if (this.speakers instanceof Initialized) {
+      store.dispatch(fetchSpeakers);
+    }
   }
 
   override stateChanged(state: RootState) {
     super.stateChanged(state);
+    this.speakers = state.speakers;
     this.filterGroups = selectFilterGroups(state, [FilterGroupKey.tags]);
     this.selectedFilters = selectFilters(state);
     this.speakersToRender = selectFilteredSpeakers(state);

@@ -3,17 +3,17 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
-import { DialogForm, DIALOG } from '../store/dialogs/types';
+import { DIALOG, DialogForm } from '../store/dialogs/types';
+import { ReduxMixin } from '../store/mixin';
 import { subscribe } from '../store/subscribe/actions';
 import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
+import { subscribeBlock } from '../utils/data';
 import './hoverboard-icons';
 import './shared-styles';
-import { subscribeBlock } from '../utils/data';
 
 @customElement('subscribe-block')
 export class SubscribeBlock extends ReduxMixin(PolymerElement) {

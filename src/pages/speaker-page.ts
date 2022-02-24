@@ -1,4 +1,4 @@
-import { Success } from '@abraham/remotedata';
+import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-progress';
@@ -10,19 +10,19 @@ import '../components/markdown/short-markdown';
 import '../elements/content-loader';
 import '../elements/previous-speakers-block';
 import '../elements/shared-styles';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
+import { ReduxMixin } from '../store/mixin';
+import { fetchSpeakers } from '../store/speakers/actions';
 import { selectSpeaker } from '../store/speakers/selectors';
-import { SpeakersState } from '../store/speakers/state';
+import { initialSpeakersState, SpeakersState } from '../store/speakers/state';
 import { speakerDetails } from '../utils/data';
 import { getVariableColor, isEmpty } from '../utils/functions';
 import { updateImageMetadata } from '../utils/metadata';
 
 @customElement('speaker-page')
-export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
+export class SpeakerPage extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -232,6 +232,8 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
 
   @property({ type: Object })
   speaker: SpeakerWithTags | undefined;
+  @property({ type: Object })
+  speakers = initialSpeakersState;
 
   @property({ type: String })
   private speakerId: string | undefined;
@@ -243,6 +245,14 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   override stateChanged(state: RootState) {
     super.stateChanged(state);
     this.speakers = state.speakers;
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+
+    if (this.speakers instanceof Initialized) {
+      store.dispatch(fetchSpeakers);
+    }
   }
 
   onAfterEnter(location: RouterLocation) {

@@ -3,9 +3,9 @@ import '@material/mwc-icon-button';
 import '@material/mwc-snackbar';
 import { html, LitElement, nothing, svg } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { Snackbar, TIMEOUT } from '../models/snackbar';
 import { RootState, store } from '../store';
+import { ReduxMixin } from '../store/mixin';
 import { removeSnackbar } from '../store/snackbars';
 
 /* eslint-disable max-len */
