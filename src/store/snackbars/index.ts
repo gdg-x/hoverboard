@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Snackbar, TIMEOUT } from '../../models/snackbar';
+import { Snackbar } from '../../models/snackbar';
 
 let id = 0;
 
@@ -11,13 +11,6 @@ const snackbarsSlice = createSlice({
       state.push({
         id: id++,
         label: action.payload,
-      });
-    },
-    queueForeverSnackbar(state, action: PayloadAction<string>) {
-      state.push({
-        id: id++,
-        label: action.payload,
-        timeout: TIMEOUT.FOREVER,
       });
     },
     queueComplexSnackbar(state, action: PayloadAction<Omit<Snackbar, 'id'>>) {
@@ -33,6 +26,5 @@ const snackbarsSlice = createSlice({
   },
 });
 
-export const { queueSnackbar, queueForeverSnackbar, queueComplexSnackbar, removeSnackbar } =
-  snackbarsSlice.actions;
+export const { queueSnackbar, queueComplexSnackbar, removeSnackbar } = snackbarsSlice.actions;
 export default snackbarsSlice.reducer;

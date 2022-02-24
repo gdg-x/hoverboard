@@ -36,14 +36,11 @@ export class SnackBar extends ReduxMixin(LitElement) {
         `
       : nothing;
 
-    const close =
-      this.state?.timeout === TIMEOUT.FOREVER
-        ? html`
-            <mwc-icon-button slot="dismiss" @click="${this.removeSnackbar}">
-              ${closeIcon}
-            </mwc-icon-button>
-          `
-        : nothing;
+    const close = html`
+      <mwc-icon-button slot="dismiss" @click="${this.removeSnackbar}">
+        ${closeIcon}
+      </mwc-icon-button>
+    `;
 
     return html`
       <mwc-snackbar

@@ -1,7 +1,6 @@
 import { register } from 'register-service-worker';
-import { TIMEOUT } from './models/snackbar';
 import { store } from './store';
-import { queueComplexSnackbar, queueForeverSnackbar, queueSnackbar } from './store/snackbars';
+import { queueComplexSnackbar, queueSnackbar } from './store/snackbars';
 import { CONFIG, getConfig } from './utils/config';
 import {
   refresh,
@@ -24,15 +23,14 @@ register('service-worker.js', {
           title: refresh,
           callback: () => window.location.reload(),
         },
-        timeout: TIMEOUT.FOREVER,
       })
     );
   },
   updatefound() {
-    store.dispatch(queueForeverSnackbar(serviceWorkerInstalling));
+    store.dispatch(queueSnackbar(serviceWorkerInstalling));
   },
   error(e) {
     console.error('Service worker registration failed:', e);
-    store.dispatch(queueForeverSnackbar(serviceWorkerError));
+    store.dispatch(queueSnackbar(serviceWorkerError));
   },
 });
