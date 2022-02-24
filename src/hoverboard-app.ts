@@ -221,14 +221,7 @@ export class HoverboardApp extends PolymerElement {
         with-backdrop
       ></feedback-dialog>
 
-      <subscribe-dialog
-        opened="[[isSubscribeDialogOpen]]"
-        data="[[dialogs.data.data]]"
-        with-backdrop
-        no-cancel-on-outside-click="[[viewport.isPhone]]"
-      >
-      </subscribe-dialog>
-
+      <subscribe-dialog></subscribe-dialog>
       <signin-dialog></signin-dialog>
 
       <snack-bar></snack-bar>

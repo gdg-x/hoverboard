@@ -1,7 +1,7 @@
 import { Failure } from '@abraham/remotedata';
 import '@material/mwc-dialog';
 import { Dialog } from '@material/mwc-dialog';
-import { observe, property } from '@polymer/decorators';
+import { observe, property, query } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -10,7 +10,7 @@ import { mergeAccounts, signIn } from '../../store/auth/actions';
 import { selectAuthMergeable } from '../../store/auth/selectors';
 import { initialAuthState } from '../../store/auth/state';
 import { ExistingAccountError } from '../../store/auth/types';
-import { closeDialog, openDialog } from '../../store/dialogs/actions';
+import { closeDialog, openSigninDialog } from '../../store/dialogs/actions';
 import { selectIsDialogOpen } from '../../store/dialogs/selectors';
 import { DIALOG } from '../../store/dialogs/types';
 import { ReduxMixin } from '../../store/mixin';
@@ -105,6 +105,9 @@ class SigninDialog extends ReduxMixin(PolymerElement) {
   @property({ type: String })
   private providerCompanyName = '';
 
+  @query('#dialog')
+  dialog: Dialog;
+
   private signInProviders = signInProviders;
   private signInDialog = signInDialog;
   private signInText = signInText;
@@ -121,19 +124,14 @@ class SigninDialog extends ReduxMixin(PolymerElement) {
     this.open = selectIsDialogOpen(state, DIALOG.SIGNIN);
   }
 
-  private get dialog(): Dialog {
-    return this.$.dialog as Dialog;
-  }
-
   @observe('isMergeState')
   private onIsMergeState(isMergeState: boolean) {
-    console.log('onIsMergeState', isMergeState);
     closeDialog();
     if (isMergeState && this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
       this.email = error.email;
       this.providerCompanyName = error.providerId && getProviderCompanyName(error.providerId);
-      openDialog(DIALOG.SIGNIN);
+      openSigninDialog();
     }
   }
 

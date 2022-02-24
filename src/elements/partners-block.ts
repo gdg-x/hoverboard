@@ -5,8 +5,7 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { RootState, store } from '../store';
-import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
-import { DIALOG, DialogForm } from '../store/dialogs/types';
+import { closeDialog, openSubscribeDialog } from '../store/dialogs/actions';
 import { ReduxMixin } from '../store/mixin';
 import { fetchPartners } from '../store/partners/actions';
 import { initialPartnersState } from '../store/partners/state';
@@ -142,14 +141,12 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   }
 
   _addPotentialPartner() {
-    openDialog(DIALOG.SUBSCRIBE, {
+    openSubscribeDialog({
       title: this.partnersBlock.form.title,
       submitLabel: this.partnersBlock.form.submitLabel,
       firstFieldLabel: this.partnersBlock.form.fullName,
       secondFieldLabel: this.partnersBlock.form.companyName,
-      submit: (data: DialogForm) => {
-        store.dispatch(addPotentialPartner(data));
-      },
+      submit: (data) => store.dispatch(addPotentialPartner(data)),
     });
   }
 
@@ -160,8 +157,6 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
     if (potentialPartners instanceof Success) {
       closeDialog();
       store.dispatch(queueSnackbar(this.partnersBlock.toast));
-    } else if (potentialPartners instanceof Failure) {
-      setDialogError(potentialPartners.error);
     }
   }
 }

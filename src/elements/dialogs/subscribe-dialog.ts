@@ -1,41 +1,39 @@
-import { Success } from '@abraham/remotedata';
-import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
+import { Failure, Success } from '@abraham/remotedata';
+import '@material/mwc-dialog';
+import { Dialog } from '@material/mwc-dialog';
+import { observe, property, query } from '@polymer/decorators';
 import '@polymer/paper-button';
 import '@polymer/paper-input/paper-input';
+import { PaperInputElement } from '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { RootState } from '../../store';
 import { closeDialog } from '../../store/dialogs/actions';
+import { selectIsDialogOpen } from '../../store/dialogs/selectors';
+import { DialogState, initialDialogState } from '../../store/dialogs/state';
+import { DIALOG } from '../../store/dialogs/types';
 import { ReduxMixin } from '../../store/mixin';
-import { SubscribeState } from '../../store/subscribe/state';
-import { TempAny } from '../../temp-any';
+import {
+  initialPotentialPartnersState,
+  PotentialPartnersState,
+} from '../../store/potential-partners/state';
+import { initialSubscribeState, SubscribeState } from '../../store/subscribe/state';
 import { subscribeBlock } from '../../utils/data';
+import { notEmpty, validEmail } from '../../utils/strings';
 import '../hoverboard-icons';
 import '../shared-styles';
 
-class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
+// Used for adding documents to both `subscribers` and `potentialPartners` collections
+
+class SubscribeDialog extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
         :host {
-          margin: 0;
           display: block;
-          width: 85%;
-          max-width: 420px;
-          background: var(--primary-background-color);
-          box-shadow: var(--box-shadow);
-
           --paper-input-container-focus-color: var(--default-primary-color);
           --paper-input-container-color: var(--secondary-text-color);
-        }
-
-        .dialog-header {
-          margin-bottom: 24px;
-          padding: 32px 32px 16px;
-          background: var(--default-primary-color);
-          color: #fff;
-          font-size: 20px;
-          line-height: 1.5;
+          --mdc-theme-primary: var(--default-primary-color);
+          --mdc-theme-secondary: var(--secondary-text-color);
         }
 
         paper-input {
@@ -46,28 +44,19 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
           margin-top: 0;
         }
 
-        .action-buttons {
-          margin: 32px 24px 24px;
-        }
-
-        .close-button {
-          color: var(--secondary-text-color);
-        }
-
         .general-error {
           margin: 0 32px;
           color: var(--error-color);
         }
       </style>
 
-      <div class="dialog-content" layout vertical>
-        <div class="dialog-header">[[title]]</div>
+      <mwc-dialog id="dialog" open="[[open]]" heading="[[title]]">
         <div hidden$="[[!errorOccurred]]" class="general-error">
           [[subscribeBlock.generalError]]
         </div>
         <paper-input
           id="firstFieldInput"
-          on-touchend="_focus"
+          on-touchend="triggerFocus"
           label="[[firstFieldLabel]] *"
           value="{{firstFieldValue}}"
           required
@@ -78,7 +67,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
         </paper-input>
         <paper-input
           id="secondFieldInput"
-          on-touchend="_focus"
+          on-touchend="triggerFocus"
           label="[[secondFieldLabel]] *"
           value="{{secondFieldValue}}"
           required
@@ -89,7 +78,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
         </paper-input>
         <paper-input
           id="emailInput"
-          on-touchend="_focus"
+          on-touchend="triggerFocus"
           label="[[subscribeBlock.emailAddress]] *"
           value="{{email}}"
           required
@@ -98,14 +87,12 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
           autocomplete="off"
         >
         </paper-input>
-        <div class="action-buttons" layout horizontal justified>
-          <paper-button class="close-button" on-click="_closeDialog">
-            [[subscribeBlock.close]]
-          </paper-button>
 
-          <paper-button on-click="_subscribe" primary>[[submitLabel]]</paper-button>
-        </div>
-      </div>
+        <mwc-button on-click="subscribe" slot="primaryAction"> [[submitLabel]] </mwc-button>
+        <mwc-button on-click="close" slot="secondaryAction" dialogAction="cancel">
+          [[subscribeBlock.close]]
+        </mwc-button>
+      </mwc-dialog>
     `;
   }
 
@@ -113,165 +100,142 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
     return 'subscribe-dialog';
   }
 
-  static get properties() {
-    return {
-      ui: {
-        type: Object,
-      },
-      subscribed: {
-        type: Boolean,
-      },
-      validate: {
-        type: Boolean,
-        value: true,
-      },
-      errorOccurred: {
-        type: Boolean,
-        value: false,
-      },
-      keyboardOpened: {
-        type: Boolean,
-        value: false,
-      },
-      data: {
-        type: Object,
-      },
-      secondFieldValue: String,
-      firstFieldValue: String,
-      initialHeight: Number,
-      title: String,
-      submitLabel: String,
-      firstFieldLabel: String,
-      secondFieldLabel: String,
-      email: String,
-    };
-  }
+  @property({ type: String })
+  override title = '';
+
+  @property({ type: Boolean })
+  private open = false;
+  @property({ type: Object })
+  private subscribed = initialSubscribeState;
+  @property({ type: Object })
+  private potentialPartners = initialPotentialPartnersState;
+  @property({ type: Boolean })
+  private validate = true;
+  @property({ type: Boolean })
+  private errorOccurred = false;
+  @property({ type: Object })
+  private dialog = initialDialogState;
+  @property({ type: String })
+  private firstFieldValue = '';
+  @property({ type: String })
+  private secondFieldValue = '';
+  @property({ type: String })
+  private submitLabel = '';
+  @property({ type: String })
+  private firstFieldLabel = '';
+  @property({ type: String })
+  private secondFieldLabel = '';
+  @property({ type: String })
+  private email = '';
+  @property({ type: Number })
+  private initialHeight = 0;
 
   private subscribeBlock = subscribeBlock;
 
-  stateChanged(state: RootState) {
-    this.setProperties({
-      subscribed: state.subscribed,
-      ui: state.ui,
-    });
+  @query('#dialog')
+  dialogElm: Dialog;
+  @query('#emailInput')
+  emailInput: PaperInputElement;
+  @query('#firstFieldInput')
+  firstFieldInput: PaperInputElement;
+  @query('#secondFieldInput')
+  secondFieldInput: PaperInputElement;
+
+  override stateChanged(state: RootState) {
+    this.subscribed = state.subscribed;
+    this.potentialPartners = state.potentialPartners;
+    this.open = selectIsDialogOpen(state, DIALOG.SUBSCRIBE);
+    this.dialog = state.dialogs;
   }
 
-  static get observers() {
-    return ['_handleDialogToggled(opened, data)', '_handleSubscribed(subscribed)'];
-  }
-
-  ready() {
+  override ready() {
     super.ready();
     this.initialHeight = window.innerHeight;
+    this.dialogElm.addEventListener('closed', () => closeDialog());
   }
 
-  constructor() {
-    super();
-    this.addEventListener('iron-overlay-canceled', this._close);
-    this.addEventListener('iron-resize', this._resize);
-    window.addEventListener('resize', this._windowResize.bind(this));
-  }
-
-  _close() {
+  private close() {
+    this.errorOccurred = false;
     closeDialog();
   }
 
-  _handleSubscribed(subscribed: SubscribeState) {
+  @observe('subscribed')
+  private onSubscribed(subscribed: SubscribeState) {
     if (subscribed instanceof Success) {
-      this._closeDialog();
+      closeDialog();
+    } else if (subscribed instanceof Failure) {
+      this.errorOccurred = true;
     }
   }
 
-  _handleDialogToggled(_opened: boolean, data: TempAny) {
-    if (data) {
-      this.errorOccurred = data.errorOccurred;
-    } else {
-      data = {};
+  @observe('potentialPartners')
+  private onPotentialPartners(potentialPartners: PotentialPartnersState) {
+    if (potentialPartners instanceof Success) {
+      closeDialog();
+    } else if (potentialPartners instanceof Failure) {
+      this.errorOccurred = true;
     }
-
-    this.title = data.title || this.subscribeBlock.formTitle;
-    this.submitLabel = data.submitLabel || this.subscribeBlock.subscribe;
-    this.firstFieldLabel = data.firstFieldLabel || this.subscribeBlock.firstName;
-    this.secondFieldLabel = data.secondFieldLabel || this.subscribeBlock.lastName;
-    this._prefillFields(data);
   }
 
-  _subscribe() {
-    const emailInput = this.shadowRoot.querySelector('#emailInput');
-    const firstFieldInput = this.shadowRoot.querySelector('#firstFieldInput');
-    const secondFieldInput = this.shadowRoot.querySelector('#secondFieldInput');
-
-    if (!emailInput.validate() || !this._validateEmail(emailInput.value)) {
-      emailInput.invalid = true;
-      return;
+  @observe('open', 'dialog')
+  private onOpenAndDialog(_open: boolean, dialog: DialogState) {
+    if (dialog instanceof Success && dialog.data.name === DIALOG.SUBSCRIBE) {
+      const data = dialog.data.data;
+      this.title = data.title || this.subscribeBlock.formTitle;
+      this.submitLabel = data.submitLabel || this.subscribeBlock.subscribe;
+      this.firstFieldLabel = data.firstFieldLabel || this.subscribeBlock.firstName;
+      this.secondFieldLabel = data.secondFieldLabel || this.subscribeBlock.lastName;
+      this.prefillFields(data);
     }
-    if (!firstFieldInput.validate() || !this._validateField(firstFieldInput.value)) {
-      firstFieldInput.invalid = true;
-      return;
+  }
+
+  private subscribe() {
+    if (this.dialog instanceof Success && this.dialog.data.name === DIALOG.SUBSCRIBE) {
+      if (!this.firstFieldInput.validate() || !this.validateField(this.firstFieldInput.value)) {
+        this.firstFieldInput.invalid = true;
+        return;
+      }
+      if (!this.secondFieldInput.validate() || !this.validateField(this.secondFieldInput.value)) {
+        this.secondFieldInput.invalid = true;
+        return;
+      }
+      if (!this.emailInput.validate() || !this.validateEmail(this.emailInput.value)) {
+        this.emailInput.invalid = true;
+        return;
+      }
+
+      this.dialog.data.data.submit({
+        email: this.email,
+        firstFieldValue: this.firstFieldValue,
+        secondFieldValue: this.secondFieldValue,
+      });
     }
-    if (!secondFieldInput.validate() || !this._validateField(secondFieldInput.value)) {
-      secondFieldInput.invalid = true;
-      return;
-    }
-
-    this.data.submit({
-      email: this.email,
-      firstFieldValue: this.firstFieldValue,
-      secondFieldValue: this.secondFieldValue,
-    });
   }
 
-  _validateEmail(email: string) {
-    // https://stackoverflow.com/a/742588/26406
-    const emailRegularExpression = /^[^@\s]+@[^@\s.]+\.[^@.\s]+$/;
-    return emailRegularExpression.test(email);
+  private validateEmail(email: string) {
+    return validEmail(email);
   }
 
-  _validateField(value: string) {
-    return value.trim().length > 0;
+  private validateField(value: string) {
+    return notEmpty(value);
   }
 
-  _closeDialog() {
-    closeDialog();
-  }
-
-  _prefillFields(userData) {
+  private prefillFields(userData) {
     this.validate = false;
-    const firstField = this.shadowRoot.querySelector('#firstFieldInput');
-    const secondField = this.shadowRoot.querySelector('#secondFieldInput');
-    const emailInput = this.shadowRoot.querySelector('#emailInput');
-    firstField.value = userData ? userData.firstFieldValue : '';
-    secondField.value = userData ? userData.secondFieldValue : '';
-    firstField.focus();
-    firstField.blur();
-    secondField.focus();
-    secondField.blur();
-    emailInput.blur();
-    emailInput.value = '';
-    emailInput.invalid = false;
+    this.firstFieldInput.value = userData ? userData.firstFieldValue : '';
+    this.secondFieldInput.value = userData ? userData.secondFieldValue : '';
+    this.firstFieldInput.focus();
+    this.firstFieldInput.blur();
+    this.secondFieldInput.focus();
+    this.secondFieldInput.blur();
+    this.emailInput.blur();
+    this.emailInput.value = '';
+    this.emailInput.invalid = false;
     this.validate = true;
   }
 
-  _focus(e: TouchEvent) {
+  private triggerFocus(e: TouchEvent) {
     (e.target as HTMLElement).focus();
-  }
-
-  _windowResize() {
-    this.keyboardOpened = this.ui.viewport.isPhone && window.innerHeight < this.initialHeight - 100;
-  }
-
-  _resize(_e: Event) {
-    if (this.keyboardOpened) {
-      const header = this.shadowRoot.querySelector('.dialog-header');
-      const headerHeight = header.offsetHeight;
-
-      window.setTimeout(() => {
-        requestAnimationFrame(() => {
-          this.style.maxHeight = `${this.initialHeight}px`;
-          this.style.top = `-${headerHeight}px`;
-        });
-      }, 10);
-    }
   }
 }
 

@@ -14,8 +14,7 @@ import { Speaker } from '../models/speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
 import { initialAuthState } from '../store/auth/state';
-import { openDialog } from '../store/dialogs/actions';
-import { DIALOG } from '../store/dialogs/types';
+import { openSigninDialog } from '../store/dialogs/actions';
 import {
   fetchUserFeaturedSessions,
   setUserFeaturedSessions,
@@ -435,7 +434,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           label: schedule.saveSessionsSignedOut,
           action: {
             title: 'Sign in',
-            callback: () => openDialog(DIALOG.SIGNIN),
+            callback: () => openSigninDialog(),
           },
         })
       );

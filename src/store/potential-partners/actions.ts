@@ -1,7 +1,7 @@
 import { doc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { db } from '../../firebase';
-import { DialogForm } from '../dialogs/types';
+import { DialogData } from '../../models/dialog-form';
 import {
   ADD_POTENTIAL_PARTNER,
   ADD_POTENTIAL_PARTNER_FAILURE,
@@ -9,7 +9,7 @@ import {
   PotentialPartnerActions,
 } from './types';
 
-const setPartner = async (data: DialogForm) => {
+const setPartner = async (data: DialogData) => {
   const id = data.email.replace(/[^\w\s]/gi, '');
   const partner = {
     email: data.email,
@@ -21,7 +21,7 @@ const setPartner = async (data: DialogForm) => {
 };
 
 export const addPotentialPartner =
-  (data: DialogForm) => async (dispatch: Dispatch<PotentialPartnerActions>) => {
+  (data: DialogData) => async (dispatch: Dispatch<PotentialPartnerActions>) => {
     dispatch({ type: ADD_POTENTIAL_PARTNER });
 
     try {

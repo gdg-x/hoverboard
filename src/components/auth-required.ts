@@ -3,8 +3,7 @@ import '@material/mwc-button';
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { RootState } from '../store';
-import { openDialog } from '../store/dialogs/actions';
-import { DIALOG } from '../store/dialogs/types';
+import { openSigninDialog } from '../store/dialogs/actions';
 import { ReduxMixin } from '../store/mixin';
 import { signIn } from '../utils/data';
 import { ThemedElement } from './themed-element';
@@ -18,7 +17,7 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
     return html`
       <mwc-button
         label="${signIn}"
-        @click="${() => openDialog(DIALOG.SIGNIN)}"
+        @click="${() => openSigninDialog()}"
         ?hidden="${this.signedIn}"
         dense
       ></mwc-button>
