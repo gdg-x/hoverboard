@@ -10,7 +10,6 @@ import '../components/markdown/short-markdown';
 import '../elements/feedback-block';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { SessionsMixin } from '../mixins/sessions-mixin';
 import { Session } from '../models/session';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
@@ -23,8 +22,9 @@ import {
   setUserFeaturedSessions,
 } from '../store/featured-sessions/actions';
 import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
+import { fetchSessions } from '../store/sessions/actions';
 import { selectSession } from '../store/sessions/selectors';
-import { SessionsState } from '../store/sessions/state';
+import { initialSessionsState, SessionsState } from '../store/sessions/state';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { initialUiState } from '../store/ui/state';
@@ -42,7 +42,7 @@ import { getVariableColor } from '../utils/functions';
 import { updateImageMetadata } from '../utils/metadata';
 
 @customElement('session-page')
-export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
+export class SessionPage extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -319,6 +319,8 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
   private sessionDetails = sessionDetails;
 
   @property({ type: Object })
+  sessions = initialSessionsState;
+  @property({ type: Object })
   session: Session | undefined;
   @property({ type: String })
   sessionId: string | undefined;
@@ -345,6 +347,14 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
     this.auth = state.auth;
     this.featuredSessions = state.featuredSessions;
     this.viewport = state.ui.viewport;
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+
+    if (this.sessions instanceof Initialized) {
+      store.dispatch(fetchSessions);
+    }
   }
 
   @observe('user')

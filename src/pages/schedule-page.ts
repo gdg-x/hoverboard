@@ -10,7 +10,6 @@ import '../elements/header-bottom-toolbar';
 import '../elements/shared-styles';
 import '../elements/sticky-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { SessionsMixin } from '../mixins/sessions-mixin';
 import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Filter } from '../models/filter';
 import { FilterGroup } from '../models/filter-group';
@@ -18,14 +17,15 @@ import { RootState, store } from '../store';
 import { selectFilters } from '../store/filters/selectors';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState } from '../store/schedule/state';
+import { fetchSessions } from '../store/sessions/actions';
 import { selectFilterGroups } from '../store/sessions/selectors';
-import { SessionsState } from '../store/sessions/state';
+import { initialSessionsState, SessionsState } from '../store/sessions/state';
 import { SpeakersState } from '../store/speakers/state';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('schedule-page')
-export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(PolymerElement))) {
+export class SchedulePage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -107,6 +107,8 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
 
   @property({ type: Object })
   schedule = initialScheduleState;
+  @property({ type: Object })
+  sessions = initialSessionsState;
 
   @property({ type: Array })
   private filterGroups: FilterGroup[] = [];
@@ -118,11 +120,16 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
+
+    if (this.sessions instanceof Initialized) {
+      store.dispatch(fetchSessions);
+    }
   }
 
   override stateChanged(state: RootState) {
     super.stateChanged(state);
     this.schedule = state.schedule;
+    this.sessions = state.sessions;
     this.filterGroups = selectFilterGroups(state);
     this.selectedFilters = selectFilters(state);
   }
