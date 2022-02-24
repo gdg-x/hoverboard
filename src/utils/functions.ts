@@ -1,9 +1,6 @@
 import { PolymerElement } from '@polymer/polymer';
-import { setFilters } from '../store/filters/actions';
 import { TempAny } from '../temp-any';
-import { logPageView } from './analytics';
 import { dateFormat } from './data';
-import { parseFilters } from './filters';
 
 export const getDate = (date: string | Date) => {
   return new Date(date).toLocaleString(dateFormat.locale, {
@@ -40,12 +37,4 @@ export const getVariableColor = (
     ? ShadyCSS.getComputedStyleValue(element, `--${generateClassName(value)}`)
     : getComputedStyle(element, `--${generateClassName(value)}`);
   return calculated || (fallback && getVariableColor(element, fallback));
-};
-
-export const setQueryString = (search: string): void => {
-  const [url] = location.href.split('?');
-
-  window.history.pushState({}, '', [url, search].filter(Boolean).join('?'));
-  setFilters(parseFilters());
-  logPageView();
 };

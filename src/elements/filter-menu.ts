@@ -5,8 +5,8 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { filters } from '../utils/data';
-import { toggleFilter } from '../utils/filters';
-import { generateClassName, getVariableColor, setQueryString } from '../utils/functions';
+import { clearFilters, toggleFilter } from '../utils/filters';
+import { generateClassName, getVariableColor } from '../utils/functions';
 import './shared-styles';
 
 @customElement('filter-menu')
@@ -206,7 +206,7 @@ export class FilterMenu extends PolymerElement {
 
   _resetFilters(e: MouseEvent) {
     e.preventDefault();
-    setQueryString('');
+    clearFilters();
   }
 
   @computed('opened')
