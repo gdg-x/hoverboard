@@ -17,7 +17,7 @@ import { initialBlogState } from '../store/blog/state';
 import { ReduxMixin } from '../store/mixin';
 import { initialUiState } from '../store/ui/state';
 import { contentLoaders, heroSettings } from '../utils/data';
-import { getDate } from '../utils/functions';
+import { getDate } from '../utils/dates';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('blog-list-page')

@@ -12,7 +12,7 @@ import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
 import { ReduxMixin } from '../store/mixin';
 import { latestPostsBlock } from '../utils/data';
-import { getDate } from '../utils/functions';
+import { getDate } from '../utils/dates';
 import './shared-styles';
 
 @customElement('latest-posts-block')

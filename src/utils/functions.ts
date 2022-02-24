@@ -1,14 +1,5 @@
 import { PolymerElement } from '@polymer/polymer';
 import { TempAny } from '../temp-any';
-import { dateFormat } from './data';
-
-export const getDate = (date: string | Date) => {
-  return new Date(date).toLocaleString(dateFormat.locale, {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  });
-};
 
 export const isEmpty = <T>(array: T[]): boolean => {
   return !array || !array.length;

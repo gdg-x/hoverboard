@@ -15,7 +15,7 @@ import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
 import { ReduxMixin } from '../store/mixin';
 import { blog } from '../utils/data';
-import { getDate } from '../utils/functions';
+import { getDate } from '../utils/dates';
 import { updateImageMetadata } from '../utils/metadata';
 
 // TODO: loading message
