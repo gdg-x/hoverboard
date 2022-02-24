@@ -1,38 +1,32 @@
 import { Failure } from '@abraham/remotedata';
+import '@material/mwc-dialog';
+import { Dialog } from '@material/mwc-dialog';
+import { observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { RootState } from '../../store';
 import { mergeAccounts, signIn } from '../../store/auth/actions';
 import { selectAuthMergeable } from '../../store/auth/selectors';
 import { initialAuthState } from '../../store/auth/state';
 import { ExistingAccountError } from '../../store/auth/types';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
+import { selectIsDialogOpen } from '../../store/dialogs/selectors';
 import { DIALOG } from '../../store/dialogs/types';
 import { ReduxMixin } from '../../store/mixin';
 import { initialUserState } from '../../store/user/state';
 import { TempAny } from '../../temp-any';
-import { signInDialog, signInProviders } from '../../utils/data';
+import { signIn as signInText, signInDialog, signInProviders } from '../../utils/data';
 import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 import '../hoverboard-icons';
-import '../shared-styles';
 
-class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
+class SigninDialog extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
-      <style include="shared-styles flex flex-alignment">
+      <style>
         :host {
-          margin: 0 auto;
           display: block;
-          padding: 24px 32px;
-          background: var(--primary-background-color);
-          box-shadow: var(--box-shadow);
-        }
-
-        .dialog-content {
-          margin: 0 auto;
+          --mdc-theme-primary: var(--primary-text-color);
         }
 
         .sign-in-button {
@@ -55,12 +49,12 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
         }
       </style>
 
-      <div class="dialog-content">
-        <div class="initial-signin" hidden$="[[isMergeState]]">
+      <mwc-dialog id="dialog" open="[[open]]" heading="[[signInText]]">
+        <div hidden$="[[isMergeState]]">
           <template is="dom-repeat" items="[[signInProviders.providersData]]" as="provider">
             <paper-button
               class="sign-in-button"
-              on-click="_signIn"
+              on-click="signIn"
               provider-url="[[provider.url]]"
               flex
             >
@@ -83,12 +77,14 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
           </div>
 
           <div class="action-button" layout horizontal end-justified>
-            <paper-button class="merge-button" on-click="_mergeAccounts" primary>
+            <paper-button class="merge-button" on-click="mergeAccounts" primary>
               <span>[[signInDialog.signInToContinue.part1]] [[providerCompanyName]]</span>
             </paper-button>
           </div>
         </div>
-      </div>
+
+        <mwc-button slot="primaryAction" dialogAction="close">Close</mwc-button>
+      </mwc-dialog>
     `;
   }
 
@@ -96,46 +92,42 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
     return 'signin-dialog';
   }
 
-  static get properties() {
-    return {
-      user: {
-        type: Object,
-        value: () => initialUserState,
-      },
-      auth: {
-        type: Object,
-        value: () => initialAuthState,
-      },
-      isMergeState: {
-        type: Boolean,
-        value: false,
-      },
-      email: String,
-      providerCompanyName: String,
-    };
-  }
+  @property({ type: Object })
+  private user = initialUserState;
+  @property({ type: Object })
+  private auth = initialAuthState;
+  @property({ type: Boolean })
+  private isMergeState = false;
+  @property({ type: Boolean })
+  private open = false;
+  @property({ type: String })
+  private email = '';
+  @property({ type: String })
+  private providerCompanyName = '';
 
   private signInProviders = signInProviders;
   private signInDialog = signInDialog;
+  private signInText = signInText;
 
-  stateChanged(state: RootState) {
-    this.setProperties({
-      user: state.user,
-      auth: state.auth,
-      isMergeState: selectAuthMergeable(state),
-    });
+  override ready() {
+    super.ready();
+    this.dialog.addEventListener('closed', () => closeDialog());
   }
 
-  constructor() {
-    super();
-    this.addEventListener('iron-overlay-canceled', this._close);
+  override stateChanged(state: RootState) {
+    this.user = state.user;
+    this.auth = state.auth;
+    this.isMergeState = selectAuthMergeable(state);
+    this.open = selectIsDialogOpen(state, DIALOG.SIGNIN);
   }
 
-  static get observers() {
-    return ['_authChanged(isMergeState)'];
+  private get dialog(): Dialog {
+    return this.$.dialog as Dialog;
   }
 
-  _authChanged(isMergeState: boolean) {
+  @observe('isMergeState')
+  private onIsMergeState(isMergeState: boolean) {
+    console.log('onIsMergeState', isMergeState);
     closeDialog();
     if (isMergeState && this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
@@ -145,7 +137,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
     }
   }
 
-  _mergeAccounts() {
+  private mergeAccounts() {
     if (this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
       mergeAccounts(error.providerId as TempAny, error.credential as TempAny);
@@ -153,11 +145,11 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
     }
   }
 
-  _close() {
+  private close() {
     closeDialog();
   }
 
-  _signIn(event: MouseEvent) {
+  private signIn(event: MouseEvent) {
     if (event.target instanceof Element) {
       const providerUrl = event.target.getAttribute('provider-url') as PROVIDER;
       signIn(providerUrl);

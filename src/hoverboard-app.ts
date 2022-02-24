@@ -229,7 +229,7 @@ export class HoverboardApp extends PolymerElement {
       >
       </subscribe-dialog>
 
-      <signin-dialog opened="[[isSigninDialogOpen]]" with-backdrop></signin-dialog>
+      <signin-dialog></signin-dialog>
 
       <snack-bar></snack-bar>
     `;
@@ -255,8 +255,6 @@ export class HoverboardApp extends PolymerElement {
   @property({ type: Array })
   private providerUrls = signInProviders.allowedProvidersUrl;
   @property({ type: Boolean })
-  private isSigninDialogOpen = false;
-  @property({ type: Boolean })
   private isFeedbackDialogOpen = false;
   @property({ type: Boolean })
   private isSubscribeDialogOpen = false;
@@ -265,7 +263,6 @@ export class HoverboardApp extends PolymerElement {
 
   stateChanged(state: RootState) {
     this.dialogs = state.dialogs;
-    this.isSigninDialogOpen = selectIsDialogOpen(state, DIALOG.SIGNIN);
     this.isFeedbackDialogOpen = selectIsDialogOpen(state, DIALOG.FEEDBACK);
     this.isSubscribeDialogOpen = selectIsDialogOpen(state, DIALOG.SUBSCRIBE);
     this.tickets = state.tickets;
