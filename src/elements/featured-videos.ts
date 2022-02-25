@@ -1,15 +1,17 @@
 import { Failure, Initialized, Pending } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
+import { computed, customElement, property, query } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import { Video } from '../models/video';
 import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { openVideoDialog } from '../store/ui/actions';
 import { fetchVideos } from '../store/videos/actions';
 import { initialVideosState } from '../store/videos/state';
+import { TempAny } from '../temp-any';
 import { featuredVideos, loading } from '../utils/data';
 import './shared-animations';
 import './shared-styles';
@@ -150,7 +152,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
               </template>
 
               <template is="dom-repeat" items="[[videos.data]]" as="block" index-as="index">
-                <div class="video-item" on-click="playVideo">
+                <div class="video-item" on-click="playVideo" video="[[block]]">
                   <div class="thumbnail" relative layout horizontal center-center>
                     <plastic-image
                       id="image[[index]]"
@@ -195,6 +197,11 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   private featuredVideos = featuredVideos;
   private loading = loading;
 
+  @query('#videos')
+  videosElm!: HTMLDivElement;
+  @query('#videoList')
+  videoList!: HTMLDivElement;
+
   @property({ type: Object })
   videos = initialVideosState;
 
@@ -236,7 +243,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         newX = 0;
       }
 
-      this.transformVideoList(this.$.videos as HTMLElement, newX);
+      this.transformVideoList(this.videosElm, newX);
 
       if (newX == 0) {
         this._leftArrowHidden = true;
@@ -259,7 +266,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         newX = maxRightPosition;
       }
 
-      this.transformVideoList(this.$.videos as HTMLElement, newX);
+      this.transformVideoList(this.videosElm, newX);
 
       if (newX == maxRightPosition) {
         this._rightArrowHidden = true;
@@ -273,19 +280,19 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     const videos = this.shadowRoot!.querySelectorAll('.video-item');
     const lastVideo = videos[videos.length - 1];
 
-    if (!this.$.videos || !this.$.videoList || !lastVideo) {
+    if (!this.videosElm || !this.videoList || !lastVideo) {
       throw new Error('Featured videos elements missing');
     }
 
     const cardRect = lastVideo.getBoundingClientRect();
     const cardWidth = cardRect.width;
     const videosContainerWidth = parseInt(
-      getComputedStyle(this.$.videoList, null).getPropertyValue('width')
+      getComputedStyle(this.videoList, null).getPropertyValue('width')
     );
-    const videosWidth = parseInt(getComputedStyle(this.$.videos, null).getPropertyValue('width'));
+    const videosWidth = parseInt(getComputedStyle(this.videosElm, null).getPropertyValue('width'));
     const maxRightPosition = -(videosWidth - videosContainerWidth) - 16;
     const currentPosition = parseInt(
-      getComputedStyle(this.$.videos, null).getPropertyValue('transform').split(',')[4] || ''
+      getComputedStyle(this.videosElm, null).getPropertyValue('transform').split(',')[4] || ''
     );
 
     return {
@@ -311,14 +318,12 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     el.style.transform = 'translate3d(' + newPosition + 'px, 0, 0)';
   }
 
-  playVideo(e) {
-    const presenters = e.model.__data.block.speakers ? ` by ${e.model.__data.block.speakers}` : '';
-    const title = e.model.__data.block.title + presenters;
-    const youtubeId = e.model.__data.block.youtubeId;
+  playVideo(e: PointerEvent) {
+    const video: Video = (e.currentTarget as TempAny).video;
+    const presenters = video.speakers ? ` by ${video.speakers}` : '';
+    const title = video.title + presenters;
+    const youtubeId = video.youtubeId;
 
-    openVideoDialog({
-      title,
-      youtubeId,
-    });
+    openVideoDialog({ title, youtubeId });
   }
 }

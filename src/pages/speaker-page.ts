@@ -257,7 +257,7 @@ export class SpeakerPage extends ReduxMixin(PolymerElement) {
   }
 
   onAfterEnter(location: RouterLocation) {
-    this.speakerId = location.params?.id?.toString();
+    this.speakerId = location.params?.['id']?.toString();
   }
 
   @computed('speaker')

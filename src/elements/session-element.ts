@@ -317,7 +317,9 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   _toggleFeedback(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    openFeedbackDialog(this.session);
+    if (this.session) {
+      openFeedbackDialog(this.session);
+    }
   }
 
   _acceptingFeedback() {

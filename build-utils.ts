@@ -5,12 +5,12 @@ import fs from 'fs';
 
 type Data = typeof import('./public/data/resources.json') &
   typeof import('./public/data/settings.json') &
-  typeof import('./config/production.json');
+  typeof import('./config/production.json') & { NODE_ENV: string; webVitalsPolyfill: string };
 
 const { BUILD_ENV, NODE_ENV } = process.env;
 export const production = NODE_ENV === 'production';
 const buildTarget = BUILD_ENV ? BUILD_ENV : production ? 'production' : 'development';
-const webVitalsPolyfill = fs.readFileSync('./node_modules/web-vitals/dist/polyfill.js');
+const webVitalsPolyfill = fs.readFileSync('./node_modules/web-vitals/dist/polyfill.js').toString();
 
 const getConfigPath = () => {
   const path = `./config/${buildTarget}.json`;
@@ -32,14 +32,17 @@ const getData = (): Data => {
     './public/data/settings.json',
     getConfigPath(),
   ];
-  const combineSettings = (currentData: Data, path: string) => {
+  const combineSettings = (currentData: Partial<Data>, path: string) => {
     return {
       ...currentData,
       ...require(path),
     };
   };
 
-  return settingsFiles.reduce(combineSettings, { NODE_ENV, webVitalsPolyfill });
+  return settingsFiles.reduce(combineSettings, {
+    NODE_ENV: NODE_ENV || 'production',
+    webVitalsPolyfill,
+  }) as Data;
 };
 
 const cleanupData = (data: Data) => {

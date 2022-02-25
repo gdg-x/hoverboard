@@ -1,10 +1,11 @@
 import { Success } from '@abraham/remotedata';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
 import '@polymer/app-layout/app-drawer/app-drawer';
+import { AppDrawerElement } from '@polymer/app-layout/app-drawer/app-drawer';
 import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
-import { computed, customElement, property } from '@polymer/decorators';
+import { computed, customElement, property, query } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/iron-selector/iron-selector';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -31,6 +32,7 @@ import { onUser } from './store/auth/actions';
 import { queueSnackbar } from './store/snackbars';
 import { fetchTickets } from './store/tickets/actions';
 import { initialTicketsState } from './store/tickets/state';
+import { OpenedChanged } from './utils/app-drawer';
 import {
   buyTicket,
   dates,
@@ -215,6 +217,13 @@ export class HoverboardApp extends PolymerElement {
   private navigation = navigation;
   private shortLocation = location.short;
 
+  @query('#drawer')
+  drawer!: AppDrawerElement;
+  @query('main')
+  main!: HTMLElement;
+  @query('#header')
+  header!: HTMLElement;
+
   @property({ type: Object })
   tickets = initialTicketsState;
 
@@ -232,38 +241,22 @@ export class HoverboardApp extends PolymerElement {
 
   constructor() {
     super();
-    this._toggleHeaderShadow = this._toggleHeaderShadow.bind(this);
-    this._toggleDrawer = this._toggleDrawer.bind(this);
     store.subscribe(() => this.stateChanged(store.getState()));
   }
 
   override connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('element-sticked', this._toggleHeaderShadow);
-    if (this.$.drawer) {
-      this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
-    } else {
-      console.error('Unable to find #drawer');
-    }
+    window.addEventListener('element-sticked', (event) => this._toggleHeaderShadow(event));
     window.addEventListener('offline', () => store.dispatch(queueSnackbar(offlineMessage)));
+    this.drawer.addEventListener('opened-changed', (event) => this._toggleDrawer(event));
     store.dispatch(fetchTickets);
-  }
-
-  override disconnectedCallback() {
-    super.disconnectedCallback();
-    window.removeEventListener('element-sticked', this._toggleHeaderShadow);
-    if (this.$.drawer) {
-      this.$.drawer.removeEventListener('opened-changed', this._toggleDrawer);
-    } else {
-      console.error('Unable to find #drawer');
-    }
   }
 
   override ready() {
     super.ready();
     console.log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
-    startRouter(this.shadowRoot!.querySelector('main')!);
+    startRouter(this.main);
     onUser();
   }
 
@@ -272,14 +265,10 @@ export class HoverboardApp extends PolymerElement {
   }
 
   _toggleHeaderShadow(e: CustomEvent<Stickied>) {
-    if (this.$.header) {
-      this.$.header.classList.toggle('remove-shadow', e.detail.sticked);
-    } else {
-      console.error('Unable to find #header');
-    }
+    this.header.classList.toggle('remove-shadow', e.detail.sticked);
   }
 
-  _toggleDrawer(e) {
+  _toggleDrawer(e: CustomEvent<OpenedChanged>) {
     this.drawerOpened = e.detail.value;
   }
 

@@ -107,13 +107,10 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
     };
 
     if (this.user instanceof Success) {
-      const [firstFieldValue, secondFieldValue] = this.user.data.displayName?.split(' ') || [
-        '',
-        '',
-      ];
+      const name = this.user.data.displayName?.split(' ') || ['', ''];
       userData = {
-        firstFieldValue,
-        secondFieldValue,
+        firstFieldValue: name[0] || '',
+        secondFieldValue: name[1] || '',
       };
 
       if (this.user.data.email) {

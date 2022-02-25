@@ -86,11 +86,7 @@ async function setCollection(data: Data, collectionId: string) {
 function getPathObject(path: string) {
   const normalizedParams = path.replace(/\/$/, '');
   const paramsExtension = normalizedParams.match(FILE_EXTENSION_PATTERN);
-  const pathObject: PathObject = {
-    file: undefined,
-    collection: undefined,
-    doc: undefined,
-  };
+  const pathObject: Partial<PathObject> = {};
 
   if (paramsExtension && paramsExtension[0]) {
     pathObject.file = normalizedParams;

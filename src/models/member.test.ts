@@ -4,7 +4,7 @@ import { allKeys } from './utils';
 
 describe('partner', () => {
   it('matches the shape of the default data', () => {
-    const members: MemberData[] = Object.values(data['team'][0]['members']);
+    const members: MemberData[] = Object.values(data['team'][0]!['members']);
     const keys: Array<keyof MemberData> = [
       'name',
       'order',

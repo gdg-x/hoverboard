@@ -1,9 +1,10 @@
-import { customElement, property } from '@polymer/decorators';
+import { customElement, property, query } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../components/about-block';
 import '../components/hero/hero-block';
+import { HeroBlock } from '../components/hero/hero-block';
 import '../elements/about-organizer-block';
 import '../elements/featured-videos';
 import '../elements/fork-me-block';
@@ -267,6 +268,9 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   private heroSettings = heroSettings.home;
   private aboutBlock = aboutBlock;
 
+  @query('#hero')
+  hero!: HeroBlock;
+
   @property({ type: Boolean })
   private showForkMeBlock: boolean = false;
 
@@ -287,11 +291,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   _scrollNextBlock() {
-    if (this.$.hero) {
-      scrollToElement(this.$.hero, POSITION.BOTTOM);
-    } else {
-      store.dispatch(queueSnackbar('Error scrolling to section.'));
-    }
+    scrollToElement(this.hero, POSITION.BOTTOM);
   }
 
   private shouldShowForkMeBlock(): boolean {

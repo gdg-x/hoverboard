@@ -16,32 +16,25 @@ importScripts('/__/firebase/8.10.0/firebase-messaging.js');
 importScripts('/__/firebase/init.js');
 
 import { MessagePayload, onBackgroundMessage } from 'firebase/messaging/sw';
+import { TempAny } from './temp-any';
 
 const messaging = (self as any).firebase.messaging();
 
-// This seems to get called when site is closed
-messaging.setBackgroundMessageHandler((payload: MessagePayload) => {
-  const { data } = payload;
-  const notificationOptions = {
-    body: data.body,
-    icon: data.icon,
-    data,
-  };
+const showNotification = (payload: MessagePayload) => {
+  const data = payload.data as TempAny;
+  const body = data.body;
+  const icon = data.icon;
+  const title = data.title;
+  const notificationOptions = { body, icon, data };
 
-  return self.registration.showNotification(data.title, notificationOptions);
-});
+  return self.registration.showNotification(title, notificationOptions);
+};
+
+// This seems to get called when site is closed
+messaging.setBackgroundMessageHandler(showNotification);
 
 // This seems to get called when site is open
-onBackgroundMessage(messaging, (payload: MessagePayload) => {
-  const { data } = payload;
-  const notificationOptions = {
-    body: data.body,
-    icon: data.icon,
-    data,
-  };
-
-  self.registration.showNotification(data.title, notificationOptions);
-});
+onBackgroundMessage(messaging, showNotification);
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
