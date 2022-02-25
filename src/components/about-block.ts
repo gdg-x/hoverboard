@@ -1,6 +1,6 @@
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { toggleVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui/actions';
 import { aboutBlock } from '../utils/data';
 import { ThemedElement } from './themed-element';
 
@@ -108,11 +108,9 @@ export class AboutBlock extends ThemedElement {
   }
 
   private playVideo() {
-    toggleVideoDialog({
+    openVideoDialog({
       title: aboutBlock.callToAction.howItWas.label,
       youtubeId: aboutBlock.callToAction.howItWas.youtubeId,
-      disableControls: true,
-      opened: true,
     });
   }
 }

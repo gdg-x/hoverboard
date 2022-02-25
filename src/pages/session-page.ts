@@ -25,7 +25,7 @@ import { fetchSessions } from '../store/sessions/actions';
 import { selectSession } from '../store/sessions/selectors';
 import { initialSessionsState, SessionsState } from '../store/sessions/state';
 import { queueComplexSnackbar } from '../store/snackbars';
-import { toggleVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui/actions';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
@@ -457,11 +457,9 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
       return;
     }
 
-    toggleVideoDialog({
+    openVideoDialog({
       title: this.session.title,
       youtubeId: this.session.videoId,
-      disableControls: true,
-      opened: true,
     });
   }
 

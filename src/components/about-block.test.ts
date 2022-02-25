@@ -5,13 +5,13 @@ import { html } from 'lit';
 // TODO: Switch back to standard @testing-library/dom https://github.com/testing-library/dom-testing-library/issues/413
 import { fireEvent, screen } from 'testing-library__dom';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { toggleVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui/actions';
 import { aboutBlock } from '../utils/data';
 import './about-block';
 
 jest.mock('../store/ui/actions');
 
-const mockToggleVideoDialogs = mocked(toggleVideoDialog);
+const mockToggleVideoDialogs = mocked(openVideoDialog);
 
 describe('about-block', () => {
   beforeEach(() => {
@@ -42,8 +42,6 @@ describe('about-block', () => {
     expect(mockToggleVideoDialogs).toHaveBeenCalledWith({
       title: aboutBlock.callToAction.howItWas.label,
       youtubeId: aboutBlock.callToAction.howItWas.youtubeId,
-      disableControls: true,
-      opened: true,
     });
   });
 });

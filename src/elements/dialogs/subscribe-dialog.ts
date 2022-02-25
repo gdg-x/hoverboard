@@ -1,4 +1,5 @@
 import { Failure, Success } from '@abraham/remotedata';
+import '@material/mwc-button';
 import '@material/mwc-dialog';
 import { Dialog } from '@material/mwc-dialog';
 import { observe, property, query } from '@polymer/decorators';

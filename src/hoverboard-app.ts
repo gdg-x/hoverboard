@@ -34,7 +34,6 @@ import { DIALOG } from './store/dialogs/types';
 import { queueSnackbar } from './store/snackbars';
 import { fetchTickets } from './store/tickets/actions';
 import { initialTicketsState } from './store/tickets/state';
-import { initialUiState } from './store/ui/state';
 import {
   buyTicket,
   dates,
@@ -204,16 +203,6 @@ export class HoverboardApp extends PolymerElement {
         </app-header-layout>
       </app-drawer-layout>
 
-      <video-dialog
-        opened="[[ui.videoDialog.opened]]"
-        title="[[ui.videoDialog.title]]"
-        youtube-id="[[ui.videoDialog.youtubeId]]"
-        entry-animation="scale-up-animation"
-        exit-animation="fade-out-animation"
-        disable-controls="[[!ui.videoDialog.disableControls]]"
-        fit
-        fixed-top
-      ></video-dialog>
 
       <feedback-dialog
         opened="[[isFeedbackDialogOpen]]"
@@ -221,8 +210,9 @@ export class HoverboardApp extends PolymerElement {
         with-backdrop
       ></feedback-dialog>
 
-      <subscribe-dialog></subscribe-dialog>
       <signin-dialog></signin-dialog>
+      <subscribe-dialog></subscribe-dialog>
+      <video-dialog></video-dialog>
 
       <snack-bar></snack-bar>
     `;
@@ -237,30 +227,21 @@ export class HoverboardApp extends PolymerElement {
   @property({ type: Object })
   tickets = initialTicketsState;
 
-  @property({ type: Object })
-  private ui = initialUiState;
   @property({ type: Boolean })
   private drawerOpened = false;
   @property({ type: Object })
   private dialogs = initialDialogState;
-  @property({ type: Object })
-  private viewport = initialUiState.viewport;
   @property({ type: Array })
   private providerUrls = signInProviders.allowedProvidersUrl;
   @property({ type: Boolean })
   private isFeedbackDialogOpen = false;
-  @property({ type: Boolean })
-  private isSubscribeDialogOpen = false;
   @property({ type: String })
   private routeName = 'home';
 
   stateChanged(state: RootState) {
     this.dialogs = state.dialogs;
     this.isFeedbackDialogOpen = selectIsDialogOpen(state, DIALOG.FEEDBACK);
-    this.isSubscribeDialogOpen = selectIsDialogOpen(state, DIALOG.SUBSCRIBE);
     this.tickets = state.tickets;
-    this.ui = state.ui;
-    this.viewport = state.ui.viewport;
     this.routeName = selectRouteName(window.location.pathname);
   }
 
