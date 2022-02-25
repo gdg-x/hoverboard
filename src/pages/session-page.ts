@@ -364,7 +364,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   }
 
   onAfterEnter(location: RouterLocation) {
-    this.sessionId = location.params?.id?.toString();
+    this.sessionId = location.params?.['id']?.toString();
   }
 
   @observe('session')
@@ -415,10 +415,10 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
       if (!this.session) {
         router.render('/404');
       } else {
-        const speaker: Speaker | undefined = this.session?.speakers?.[0] as TempAny;
+        const speaker: Speaker = this.session?.speakers?.[0] as TempAny;
         updateImageMetadata(this.session.title, this.session.description, {
-          image: speaker?.photoUrl,
-          imageAlt: speaker?.name,
+          image: speaker.photoUrl,
+          imageAlt: speaker.name,
         });
       }
     }

@@ -46,10 +46,10 @@ describe('auth-required', () => {
     expect(slots).toHaveLength(2);
     expect(slots[0]).not.toHaveAttribute('hidden');
     expect(slots[0]).toHaveAttribute('name', 'prompt');
-    expect(slots[0].assignedElements()[0]).toHaveTextContent('Please sign in');
+    expect(slots[0]!.assignedElements()[0]).toHaveTextContent('Please sign in');
     expect(slots[1]).toHaveAttribute('hidden');
     expect(slots[1]).not.toHaveAttribute('name');
-    expect(slots[1].assignedElements()[0]).toHaveTextContent('Welcome');
+    expect(slots[1]!.assignedElements()[0]).toHaveTextContent('Welcome');
   });
 
   it('opens dialog on tap', () => {

@@ -47,7 +47,7 @@ class VideoDialog extends ReduxMixin(PolymerElement) {
   }
 
   @query('#dialog')
-  dialog: Dialog;
+  dialog!: Dialog;
 
   @property({ type: Object })
   video = initialUiState.videoDialog;

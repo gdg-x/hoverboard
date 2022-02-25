@@ -11,16 +11,21 @@ export const importTeam = () => {
   const batch = firestore.batch();
 
   Object.keys(teams).forEach((teamId) => {
-    batch.set(firestore.collection('team').doc(teamId), {
-      title: teams[Number(teamId)].title,
-    });
+    const team = teams[Number(teamId)];
+    if (team) {
+      batch.set(firestore.collection('team').doc(teamId), {
+        title: team.title,
+      });
 
-    teams[Number(teamId)].members.forEach((member, id) => {
-      batch.set(
-        firestore.collection('team').doc(`${teamId}`).collection('members').doc(`${id}`),
-        member
-      );
-    });
+      team.members.forEach((member, id) => {
+        batch.set(
+          firestore.collection('team').doc(`${teamId}`).collection('members').doc(`${id}`),
+          member
+        );
+      });
+    } else {
+      console.warn(`Skipping missing team ${teamId}`);
+    }
   });
 
   return batch.commit().then((results) => {

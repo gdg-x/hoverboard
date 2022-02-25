@@ -128,6 +128,9 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
       store.dispatch(queueSnackbar(feedbackText.sendFeedbackSignedOut));
       return;
     }
+    if (!this.sessionId) {
+      return;
+    }
 
     const resultAction = await store.dispatch(
       setFeedback({
@@ -158,6 +161,9 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
   private async deleteFeedback() {
     if (!(this.user instanceof Success)) {
       store.dispatch(queueSnackbar(feedbackText.removeFeedbackSignedOut));
+      return;
+    }
+    if (!this.sessionId) {
       return;
     }
 

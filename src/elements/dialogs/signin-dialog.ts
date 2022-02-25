@@ -107,7 +107,7 @@ class SigninDialog extends ReduxMixin(PolymerElement) {
   private providerCompanyName = '';
 
   @query('#dialog')
-  dialog: Dialog;
+  dialog!: Dialog;
 
   private signInProviders = signInProviders;
   private signInDialog = signInDialog;
@@ -130,6 +130,10 @@ class SigninDialog extends ReduxMixin(PolymerElement) {
     closeDialog();
     if (isMergeState && this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
+      if (!error.email || !error.providerId) {
+        // TODO: Improve error handling
+        return;
+      }
       this.email = error.email;
       this.providerCompanyName = error.providerId && getProviderCompanyName(error.providerId);
       openSigninDialog();

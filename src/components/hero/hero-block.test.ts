@@ -62,10 +62,10 @@ describe('hero-block', () => {
     expect(slots).toHaveLength(2);
     expect(screen.getByText('default slot')).toBeVisible();
     expect(slots[0]).not.toHaveAttribute('name');
-    expect(slots[0].assignedElements()[0]).toHaveTextContent('default slot');
+    expect(slots[0]!.assignedElements()[0]).toHaveTextContent('default slot');
     expect(screen.getByText('bottom slot')).toBeVisible();
     expect(slots[1]).toHaveAttribute('name', 'bottom');
-    expect(slots[1].assignedElements()[0]).toHaveTextContent('bottom slot');
+    expect(slots[1]!.assignedElements()[0]).toHaveTextContent('bottom slot');
   });
 
   it('renders an image', async () => {

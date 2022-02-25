@@ -10,22 +10,27 @@ export const importPartners = () => {
 
   const batch = firestore.batch();
 
-  Object.keys(partners).forEach((docId) => {
-    batch.set(firestore.collection('partners').doc(docId), {
-      title: partners[Number(docId)].title,
-      order: partners[Number(docId)].order,
-    });
+  Object.keys(partners).forEach((partnerId) => {
+    const partner = partners[Number(partnerId)];
+    if (partner) {
+      batch.set(firestore.collection('partners').doc(partnerId), {
+        title: partner.title,
+        order: partner.order,
+      });
 
-    partners[Number(docId)].items.forEach((item, id) => {
-      batch.set(
-        firestore
-          .collection('partners')
-          .doc(`${docId}`)
-          .collection('items')
-          .doc(`${id}`.padStart(3, '0')),
-        item
-      );
-    });
+      partner.items.forEach((item, id) => {
+        batch.set(
+          firestore
+            .collection('partners')
+            .doc(`${partnerId}`)
+            .collection('items')
+            .doc(`${id}`.padStart(3, '0')),
+          item
+        );
+      });
+    } else {
+      console.warn(`Missing partner ${partnerId}`);
+    }
   });
 
   return batch.commit().then((results) => {

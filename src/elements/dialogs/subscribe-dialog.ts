@@ -7,6 +7,7 @@ import '@polymer/paper-button';
 import '@polymer/paper-input/paper-input';
 import { PaperInputElement } from '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
+import { DialogForm } from '../../models/dialog-form';
 import { RootState } from '../../store';
 import { closeDialog } from '../../store/dialogs/actions';
 import { selectIsDialogOpen } from '../../store/dialogs/selectors';
@@ -134,13 +135,13 @@ class SubscribeDialog extends ReduxMixin(PolymerElement) {
   private subscribeBlock = subscribeBlock;
 
   @query('#dialog')
-  dialogElm: Dialog;
+  dialogElm!: Dialog;
   @query('#emailInput')
-  emailInput: PaperInputElement;
+  emailInput!: PaperInputElement;
   @query('#firstFieldInput')
-  firstFieldInput: PaperInputElement;
+  firstFieldInput!: PaperInputElement;
   @query('#secondFieldInput')
-  secondFieldInput: PaperInputElement;
+  secondFieldInput!: PaperInputElement;
 
   override stateChanged(state: RootState) {
     this.subscribed = state.subscribed;
@@ -192,15 +193,21 @@ class SubscribeDialog extends ReduxMixin(PolymerElement) {
 
   private subscribe() {
     if (this.dialog instanceof Success && this.dialog.data.name === DIALOG.SUBSCRIBE) {
-      if (!this.firstFieldInput.validate() || !this.validateField(this.firstFieldInput.value)) {
+      if (
+        !this.firstFieldInput.validate() ||
+        !this.validateField(this.firstFieldInput.value || '')
+      ) {
         this.firstFieldInput.invalid = true;
         return;
       }
-      if (!this.secondFieldInput.validate() || !this.validateField(this.secondFieldInput.value)) {
+      if (
+        !this.secondFieldInput.validate() ||
+        !this.validateField(this.secondFieldInput.value || '')
+      ) {
         this.secondFieldInput.invalid = true;
         return;
       }
-      if (!this.emailInput.validate() || !this.validateEmail(this.emailInput.value)) {
+      if (!this.emailInput.validate() || !this.validateEmail(this.emailInput.value || '')) {
         this.emailInput.invalid = true;
         return;
       }
@@ -221,7 +228,7 @@ class SubscribeDialog extends ReduxMixin(PolymerElement) {
     return notEmpty(value);
   }
 
-  private prefillFields(userData) {
+  private prefillFields(userData: DialogForm) {
     this.validate = false;
     this.firstFieldInput.value = userData ? userData.firstFieldValue : '';
     this.secondFieldInput.value = userData ? userData.secondFieldValue : '';

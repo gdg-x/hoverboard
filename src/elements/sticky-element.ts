@@ -1,4 +1,4 @@
-import { customElement, property } from '@polymer/decorators';
+import { customElement, property, query } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 
 export interface Stickied {
@@ -62,6 +62,11 @@ export class StickyElement extends PolymerElement {
     `;
   }
 
+  @query('#content')
+  content!: HTMLDivElement;
+  @query('#trigger')
+  trigger!: HTMLDivElement;
+
   @property({ type: Boolean })
   private waiting = false;
   @property({ type: Number })
@@ -80,7 +85,7 @@ export class StickyElement extends PolymerElement {
   override disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('scroll', this._onScroll);
-    this.$.content?.classList?.remove('sticked');
+    this.content.classList.remove('sticked');
   }
 
   _onScroll() {
@@ -102,8 +107,8 @@ export class StickyElement extends PolymerElement {
   }
 
   _toggleSticky() {
-    const trigger = this.$.trigger;
-    const content = this.$.content;
+    const trigger = this.trigger;
+    const content = this.content;
 
     if (!trigger || !content) {
       console.error('Missing trigger or content element.');
@@ -123,8 +128,7 @@ export class StickyElement extends PolymerElement {
         })
       );
     } else if (scrollTop <= 64 && !content.classList.contains('sticked')) {
-      // TODO: Remove type cast
-      this.style.height = `${(this.$.content as HTMLDivElement).offsetHeight}px`;
+      this.style.height = `${this.content.offsetHeight}px`;
       content.classList.add('sticked');
       this.dispatchEvent(
         new CustomEvent('element-sticked', {

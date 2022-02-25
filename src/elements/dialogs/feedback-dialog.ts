@@ -42,14 +42,14 @@ class FeedbackDialog extends ReduxMixin(PolymerElement) {
   }
 
   @query('#dialog')
-  dialog: Dialog;
+  dialog!: Dialog;
 
   @property({ type: Boolean })
   open = false;
   @property({ type: Object })
   data = initialDialogState;
   @property({ type: Object })
-  session: Session;
+  session?: Session;
 
   private feedback = feedback;
 

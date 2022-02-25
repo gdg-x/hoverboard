@@ -229,8 +229,8 @@ export class FilterMenu extends PolymerElement {
     window.removeEventListener('click', this._clickOutsideListener, false);
   }
 
-  _clickOutsideListener(e) {
-    const isOutside = !e.path.find((path: Element) => path === this);
+  _clickOutsideListener(e: MouseEvent) {
+    const isOutside = !e.composedPath().find((path) => path === this);
     if (isOutside) {
       this._toggleBoard();
       this._clickOutsideUnlisten();
