@@ -23,8 +23,7 @@ export interface SetViewport {
 }
 
 export interface VideoDialog {
-  disableControls: boolean;
-  opened: boolean;
+  open: boolean;
   title: string;
   youtubeId: string;
 }

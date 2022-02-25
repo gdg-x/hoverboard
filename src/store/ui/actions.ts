@@ -15,10 +15,24 @@ export const setViewportSize = (payload: SetViewport) => {
   });
 };
 
-export const toggleVideoDialog = (payload: VideoDialog) => {
+export const closeVideoDialog = () => {
   store.dispatch({
     type: TOGGLE_VIDEO_DIALOG,
-    payload,
+    payload: {
+      open: false,
+      youtubeId: '',
+      title: '',
+    },
+  });
+};
+
+export const openVideoDialog = (payload: Omit<VideoDialog, 'open'>) => {
+  store.dispatch({
+    type: TOGGLE_VIDEO_DIALOG,
+    payload: {
+      ...payload,
+      open: true,
+    },
   });
 };
 

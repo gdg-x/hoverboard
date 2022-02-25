@@ -18,7 +18,7 @@ import { firebaseApp } from '../firebase';
 import { store } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { queueSnackbar } from '../store/snackbars';
-import { toggleVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui/actions';
 import {
   aboutBlock,
   buyTicket,
@@ -271,11 +271,9 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   private showForkMeBlock: boolean = false;
 
   _playVideo() {
-    toggleVideoDialog({
+    openVideoDialog({
       title: this.aboutBlock.callToAction.howItWas.label,
       youtubeId: this.aboutBlock.callToAction.howItWas.youtubeId,
-      disableControls: true,
-      opened: true,
     });
   }
 

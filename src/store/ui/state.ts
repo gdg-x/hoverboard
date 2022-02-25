@@ -1,10 +1,15 @@
+import { heroSettings } from '../../utils/data';
 import { UiState } from './types';
 
 export const initialUiState: UiState = {
-  heroSettings: undefined,
+  heroSettings: {
+    backgroundColor: heroSettings.home.background.color,
+    backgroundImage: heroSettings.home.background.image,
+    fontColor: heroSettings.home.fontColor,
+    hideLogo: false,
+  },
   videoDialog: {
-    opened: false,
-    disableControls: false,
+    open: false,
     youtubeId: '',
     title: '',
   },

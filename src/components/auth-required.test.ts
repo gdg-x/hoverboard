@@ -5,15 +5,14 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { User } from '../models/user';
 import { store } from '../store';
-import { openDialog } from '../store/dialogs/actions';
-import { DIALOG } from '../store/dialogs/types';
+import { openSigninDialog } from '../store/dialogs/actions';
 import { SET_USER, UserActions } from '../store/user/types';
 import './auth-required';
 import { AuthRequired } from './auth-required';
 
 jest.mock('../store/dialogs/actions');
 
-const mockOpenDialog = mocked(openDialog);
+const mockOpenDialog = mocked(openSigninDialog);
 
 describe('auth-required', () => {
   let element!: AuthRequired;
@@ -56,7 +55,6 @@ describe('auth-required', () => {
   it('opens dialog on tap', () => {
     fireEvent.click(shadowRoot.querySelector('mwc-button')!);
     expect(mockOpenDialog).toHaveBeenCalledTimes(1);
-    expect(mockOpenDialog).toHaveBeenCalledWith(DIALOG.SIGNIN);
   });
 
   it('shows authenticated content', async () => {

@@ -7,7 +7,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { toggleVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui/actions';
 import { fetchVideos } from '../store/videos/actions';
 import { initialVideosState } from '../store/videos/state';
 import { featuredVideos, loading } from '../utils/data';
@@ -316,11 +316,9 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     const title = e.model.__data.block.title + presenters;
     const youtubeId = e.model.__data.block.youtubeId;
 
-    toggleVideoDialog({
-      title: title,
-      youtubeId: youtubeId,
-      disableControls: true,
-      opened: true,
+    openVideoDialog({
+      title,
+      youtubeId,
     });
   }
 }

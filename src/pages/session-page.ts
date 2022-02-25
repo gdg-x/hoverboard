@@ -14,8 +14,7 @@ import { Speaker } from '../models/speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
 import { initialAuthState } from '../store/auth/state';
-import { openDialog } from '../store/dialogs/actions';
-import { DIALOG } from '../store/dialogs/types';
+import { openSigninDialog } from '../store/dialogs/actions';
 import {
   fetchUserFeaturedSessions,
   setUserFeaturedSessions,
@@ -26,7 +25,7 @@ import { fetchSessions } from '../store/sessions/actions';
 import { selectSession } from '../store/sessions/selectors';
 import { initialSessionsState, SessionsState } from '../store/sessions/state';
 import { queueComplexSnackbar } from '../store/snackbars';
-import { toggleVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui/actions';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
@@ -435,7 +434,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           label: schedule.saveSessionsSignedOut,
           action: {
             title: 'Sign in',
-            callback: () => openDialog(DIALOG.SIGNIN),
+            callback: () => openSigninDialog(),
           },
         })
       );
@@ -458,11 +457,9 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
       return;
     }
 
-    toggleVideoDialog({
+    openVideoDialog({
       title: this.session.title,
       youtubeId: this.session.videoId,
-      disableControls: true,
-      opened: true,
     });
   }
 

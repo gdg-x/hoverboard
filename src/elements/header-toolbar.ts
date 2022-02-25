@@ -10,7 +10,7 @@ import { Hero } from '../models/hero';
 import { selectRouteName } from '../router';
 import { RootState } from '../store';
 import { signOut } from '../store/auth/actions';
-import { closeDialog, openDialog } from '../store/dialogs/actions';
+import { closeDialog, openSigninDialog } from '../store/dialogs/actions';
 import { selectIsDialogOpen } from '../store/dialogs/selectors';
 import { DIALOG } from '../store/dialogs/types';
 import { ReduxMixin } from '../store/mixin';
@@ -281,7 +281,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   signIn() {
-    openDialog(DIALOG.SIGNIN);
+    openSigninDialog();
   }
 
   _signOut() {

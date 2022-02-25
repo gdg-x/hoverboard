@@ -3,9 +3,9 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
+import { DialogData } from '../models/dialog-form';
 import { RootState, store } from '../store';
-import { openDialog } from '../store/dialogs/actions';
-import { DIALOG, DialogForm } from '../store/dialogs/types';
+import { openSubscribeDialog } from '../store/dialogs/actions';
 import { ReduxMixin } from '../store/mixin';
 import { subscribe } from '../store/subscribe/actions';
 import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
@@ -101,16 +101,19 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
   }
 
   _subscribe() {
-    let userData: {
-      firstFieldValue?: string;
-      secondFieldValue?: string;
-    } = {};
+    let userData = {
+      firstFieldValue: '',
+      secondFieldValue: '',
+    };
 
     if (this.user instanceof Success) {
-      const fullNameSplit = this.user.data.displayName?.split(' ') || ['', ''];
+      const [firstFieldValue, secondFieldValue] = this.user.data.displayName?.split(' ') || [
+        '',
+        '',
+      ];
       userData = {
-        firstFieldValue: fullNameSplit[0],
-        secondFieldValue: fullNameSplit[1],
+        firstFieldValue,
+        secondFieldValue,
       };
 
       if (this.user.data.email) {
@@ -121,19 +124,19 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
     if (this.user instanceof Success && this.user.data.email) {
       this._subscribeAction({ ...userData, email: this.user.data.email });
     } else {
-      openDialog(DIALOG.SUBSCRIBE, {
+      openSubscribeDialog({
         title: this.subscribeBlock.formTitle,
         submitLabel: this.subscribeBlock.subscribe,
         firstFieldLabel: this.subscribeBlock.firstName,
         secondFieldLabel: this.subscribeBlock.lastName,
         firstFieldValue: userData.firstFieldValue,
         secondFieldValue: userData.secondFieldValue,
-        submit: (data: DialogForm) => this._subscribeAction(data),
+        submit: (data) => this._subscribeAction(data),
       });
     }
   }
 
-  _subscribeAction(data: DialogForm) {
+  _subscribeAction(data: DialogData) {
     store.dispatch(subscribe(data));
   }
 }

@@ -2,9 +2,8 @@ import { doc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { store } from '../';
 import { db } from '../../firebase';
+import { DialogData } from '../../models/dialog-form';
 import { subscribeBlock } from '../../utils/data';
-import { openDialog } from '../dialogs/actions';
-import { DIALOG, DialogForm } from '../dialogs/types';
 import { queueSnackbar } from '../snackbars';
 import {
   SUBSCRIBE,
@@ -14,7 +13,7 @@ import {
   SUBSCRIBE_SUCCESS,
 } from './types';
 
-const setSubscribe = async (data: DialogForm): Promise<true> => {
+const setSubscribe = async (data: DialogData): Promise<true> => {
   const id = data.email.replace(/[^\w\s]/gi, '');
   const subscriber = {
     email: data.email,
@@ -27,7 +26,7 @@ const setSubscribe = async (data: DialogForm): Promise<true> => {
   return true;
 };
 
-export const subscribe = (data: DialogForm) => async (dispatch: Dispatch<SubscribeActions>) => {
+export const subscribe = (data: DialogData) => async (dispatch: Dispatch<SubscribeActions>) => {
   dispatch({
     type: SUBSCRIBE,
   });
@@ -43,7 +42,6 @@ export const subscribe = (data: DialogForm) => async (dispatch: Dispatch<Subscri
       type: SUBSCRIBE_FAILURE,
       payload: error as Error,
     });
-    openDialog(DIALOG.SUBSCRIBE, { ...data, errorOccurred: true });
   }
 };
 
