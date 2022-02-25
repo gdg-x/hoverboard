@@ -65,7 +65,6 @@ class FeedbackDialog extends ReduxMixin(PolymerElement) {
 
   @observe('data')
   private onData(data: DialogState) {
-    console.log('onData', data);
     if (data instanceof Success && data.data.name === DIALOG.FEEDBACK) {
       this.session = data.data.data;
     }
