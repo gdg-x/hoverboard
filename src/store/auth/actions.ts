@@ -27,8 +27,7 @@ import {
   UN_AUTH,
 } from './types';
 
-// TODO
-// - show login prompt on my-schedule
+// TODO: show login prompt on my-schedule
 
 const auth = getAuth(firebaseApp);
 
