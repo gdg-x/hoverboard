@@ -4,7 +4,7 @@ import '@polymer/app-layout/app-drawer/app-drawer';
 import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
-import { computed, customElement, observe, property } from '@polymer/decorators';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/iron-selector/iron-selector';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -28,9 +28,6 @@ import { Stickied } from './elements/sticky-element';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
 import { onUser } from './store/auth/actions';
-import { selectIsDialogOpen } from './store/dialogs/selectors';
-import { DialogState, initialDialogState } from './store/dialogs/state';
-import { DIALOG } from './store/dialogs/types';
 import { queueSnackbar } from './store/snackbars';
 import { fetchTickets } from './store/tickets/actions';
 import { initialTicketsState } from './store/tickets/state';
@@ -203,13 +200,7 @@ export class HoverboardApp extends PolymerElement {
         </app-header-layout>
       </app-drawer-layout>
 
-
-      <feedback-dialog
-        opened="[[isFeedbackDialogOpen]]"
-        data="[[dialogs.data]]"
-        with-backdrop
-      ></feedback-dialog>
-
+      <feedback-dialog></feedback-dialog>
       <signin-dialog></signin-dialog>
       <subscribe-dialog></subscribe-dialog>
       <video-dialog></video-dialog>
@@ -229,18 +220,12 @@ export class HoverboardApp extends PolymerElement {
 
   @property({ type: Boolean })
   private drawerOpened = false;
-  @property({ type: Object })
-  private dialogs = initialDialogState;
   @property({ type: Array })
   private providerUrls = signInProviders.allowedProvidersUrl;
-  @property({ type: Boolean })
-  private isFeedbackDialogOpen = false;
   @property({ type: String })
   private routeName = 'home';
 
   stateChanged(state: RootState) {
-    this.dialogs = state.dialogs;
-    this.isFeedbackDialogOpen = selectIsDialogOpen(state, DIALOG.FEEDBACK);
     this.tickets = state.tickets;
     this.routeName = selectRouteName(window.location.pathname);
   }
@@ -284,11 +269,6 @@ export class HoverboardApp extends PolymerElement {
 
   closeDrawer() {
     this.drawerOpened = false;
-  }
-
-  @observe('dialogs')
-  _dialogToggled(dialogs: DialogState) {
-    document.body.style.overflow = dialogs instanceof Success ? 'hidden' : '';
   }
 
   _toggleHeaderShadow(e: CustomEvent<Stickied>) {

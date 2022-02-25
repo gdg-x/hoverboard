@@ -25,6 +25,6 @@ export const openSubscribeDialog = (data: SubscribeDialog['data']) => {
 export const openFeedbackDialog = (data: FeedbackDialog['data']) => {
   store.dispatch({
     type: OPEN_DIALOG,
-    payload: { name: DIALOG.SUBSCRIBE, data },
+    payload: { name: DIALOG.FEEDBACK, data },
   });
 };
