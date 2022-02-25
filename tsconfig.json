@@ -99,5 +99,6 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "compileOnSave": true,
-  "include": ["**/*.ts", "*.ts"]
+  "include": ["**/*.ts", "*.ts"],
+  "exclude": ["functions"]
 }
