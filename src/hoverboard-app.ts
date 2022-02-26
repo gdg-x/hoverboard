@@ -25,7 +25,6 @@ import './elements/footer-block';
 import './elements/header-toolbar';
 import './elements/hoverboard-icons';
 import './elements/shared-styles';
-import { Stickied } from './elements/sticky-element';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
 import { onUser } from './store/auth/actions';
@@ -44,6 +43,7 @@ import {
 } from './utils/data';
 import { isLocalhost } from './utils/environment';
 import './utils/media-query';
+import { Stickied } from './utils/stickied';
 
 setPassiveTouchGestures(true);
 setRemoveNestedTemplates(true);

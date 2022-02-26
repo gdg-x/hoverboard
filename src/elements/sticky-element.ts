@@ -1,16 +1,6 @@
 import { customElement, property, query } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 
-export interface Stickied {
-  sticked: boolean;
-}
-
-declare global {
-  interface WindowEventMap {
-    'element-sticked': CustomEvent<Stickied>;
-  }
-}
-
 @customElement('sticky-element')
 export class StickyElement extends PolymerElement {
   static get template() {

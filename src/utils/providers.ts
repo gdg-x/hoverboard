@@ -1,6 +1,5 @@
 import { FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from 'firebase/auth';
 
-// TODO: Rename to PROVIDER
 export enum PROVIDER {
   'https://accounts.google.com' = 'https://accounts.google.com',
   'google.com' = 'google.com',

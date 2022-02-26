@@ -117,12 +117,6 @@ export class PostPage extends ReduxMixin(PolymerElement) {
     this.postData = location.params;
   }
 
-  handleMarkdownFileFetch(event: CustomEvent) {
-    if (event.detail.response) {
-      this.postContent = event.detail.response;
-    }
-  }
-
   // TODO: Move to selector
   @observe('postData.id', 'posts')
   _postDataObserver(postId: string, posts: BlogState) {
