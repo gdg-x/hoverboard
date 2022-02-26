@@ -30,13 +30,8 @@ import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
 import { TempAny } from '../temp-any';
-import {
-  disabledSchedule,
-  feedback,
-  schedule,
-  sessionDetails,
-  timezoneOffset,
-} from '../utils/data';
+import { disabledSchedule, feedback, schedule, sessionDetails } from '../utils/data';
+import { acceptingFeedback } from '../utils/feedback';
 import '../utils/icons';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
@@ -375,24 +370,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
 
   @observe('session')
   onAcceptingFeedback() {
-    if (!this.session) {
-      this.acceptingFeedback = false;
-      return;
-    }
-    const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-    const ONE_MINUTE_MS = 60 * 1000;
-    const { day, startTime } = this.session;
-
-    if (day && startTime) {
-      const now = new Date();
-      const currentTime = new Date(`${day} ${startTime}`).getTime();
-      const totalTimezoneOffset = parseInt(timezoneOffset) - now.getTimezoneOffset();
-      const convertedTimezoneDate = new Date(currentTime + totalTimezoneOffset * ONE_MINUTE_MS);
-      const diff = now.getTime() - convertedTimezoneDate.getTime();
-      this.acceptingFeedback = diff > 0 && diff < ONE_WEEK_MS;
-    } else {
-      this.acceptingFeedback = false;
-    }
+    this.acceptingFeedback = this.session !== undefined && acceptingFeedback(this.session);
   }
 
   @computed('featuredSessions', 'sessionId')
