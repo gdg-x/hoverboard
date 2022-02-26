@@ -20,8 +20,8 @@ import {
 } from '../../store/potential-partners/state';
 import { initialSubscribeState, SubscribeState } from '../../store/subscribe/state';
 import { subscribeBlock } from '../../utils/data';
+import '../../utils/icons';
 import { notEmpty, validEmail } from '../../utils/strings';
-import '../hoverboard-icons';
 import '../shared-styles';
 
 // Used for adding documents to both `subscribers` and `potentialPartners` collections

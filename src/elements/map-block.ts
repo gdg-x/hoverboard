@@ -7,7 +7,7 @@ import { ReduxMixin } from '../store/mixin';
 import { initialUiState } from '../store/ui/state';
 import { CONFIG, getConfig } from '../utils/config';
 import { location, mapBlock } from '../utils/data';
-import './hoverboard-icons';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('map-block')

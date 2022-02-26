@@ -23,7 +23,6 @@ import './elements/dialogs/subscribe-dialog';
 import './elements/dialogs/video-dialog';
 import './elements/footer-block';
 import './elements/header-toolbar';
-import './elements/hoverboard-icons';
 import './elements/shared-styles';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
@@ -42,6 +41,7 @@ import {
   title,
 } from './utils/data';
 import { isLocalhost } from './utils/environment';
+import './utils/icons';
 import './utils/media-query';
 import { Stickied } from './utils/stickied';
 

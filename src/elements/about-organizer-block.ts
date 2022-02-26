@@ -8,7 +8,7 @@ import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { initialUiState } from '../store/ui/state';
 import { aboutOrganizerBlock } from '../utils/data';
-import './hoverboard-icons';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('about-organizer-block')

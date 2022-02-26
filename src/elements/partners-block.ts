@@ -16,7 +16,7 @@ import {
 } from '../store/potential-partners/state';
 import { queueSnackbar } from '../store/snackbars';
 import { loading, partnersBlock } from '../utils/data';
-import './hoverboard-icons';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('partners-block')
