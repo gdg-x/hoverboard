@@ -182,7 +182,7 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
                       horizontal
                       center-center
                     >
-                      <iron-icon class="badge-icon" icon="hoverboard:[[badge.name]]"></iron-icon>
+                      <iron-icon icon="hoverboard:[[badge.name]]" class="badge-icon"></iron-icon>
                     </a>
                   </template>
                 </div>
