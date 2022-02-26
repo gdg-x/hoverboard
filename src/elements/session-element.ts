@@ -18,6 +18,7 @@ import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
 import { schedule, timezoneOffset } from '../utils/data';
+import '../utils/icons';
 import { getVariableColor } from '../utils/styles';
 import './shared-styles';
 

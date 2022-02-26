@@ -1,7 +1,11 @@
+// TODO: enable imports
+// import '@polymer/iron-icon';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { openVideoDialog } from '../store/ui/actions';
 import { aboutBlock } from '../utils/data';
+// TODO: enable imports
+// import '../utils/icons';
 import { ThemedElement } from './themed-element';
 
 @customElement('about-block')

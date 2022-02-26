@@ -37,6 +37,7 @@ import {
   sessionDetails,
   timezoneOffset,
 } from '../utils/data';
+import '../utils/icons';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
 

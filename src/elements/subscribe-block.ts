@@ -12,7 +12,7 @@ import { initialSubscribeState, SubscribeState } from '../store/subscribe/state'
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
 import { subscribeBlock } from '../utils/data';
-import './hoverboard-icons';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('subscribe-block')

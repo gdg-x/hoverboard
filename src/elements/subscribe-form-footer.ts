@@ -10,7 +10,7 @@ import { ReduxMixin } from '../store/mixin';
 import { subscribe } from '../store/subscribe/actions';
 import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
 import { subscribeBlock } from '../utils/data';
-import './hoverboard-icons';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('subscribe-form-footer')

@@ -18,8 +18,8 @@ import { ReduxMixin } from '../../store/mixin';
 import { initialUserState } from '../../store/user/state';
 import { TempAny } from '../../temp-any';
 import { signIn as signInText, signInDialog, signInProviders } from '../../utils/data';
+import '../../utils/icons';
 import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
-import '../hoverboard-icons';
 
 class SigninDialog extends ReduxMixin(PolymerElement) {
   static get template() {

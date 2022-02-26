@@ -15,6 +15,7 @@ import {
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
 import { loading, previousSpeakersBlock } from '../utils/data';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('previous-speakers-block')

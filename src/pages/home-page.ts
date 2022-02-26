@@ -31,6 +31,7 @@ import {
   title,
   viewHighlights,
 } from '../utils/data';
+import '../utils/icons';
 import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
 

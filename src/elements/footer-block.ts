@@ -1,11 +1,11 @@
 import { customElement } from '@polymer/decorators';
 import '@polymer/paper-fab';
 import { html, PolymerElement } from '@polymer/polymer';
+import '../utils/icons';
 import { scrollToTop } from '../utils/scrolling';
 import './footer-nav';
 import './footer-rel';
 import './footer-social';
-import './hoverboard-icons';
 
 @customElement('footer-block')
 export class FooterBlock extends PolymerElement {

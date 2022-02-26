@@ -13,6 +13,7 @@ import { BlogState, initialBlogState } from '../store/blog/state';
 import { ReduxMixin } from '../store/mixin';
 import { latestPostsBlock } from '../utils/data';
 import { getDate } from '../utils/dates';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('latest-posts-block')

@@ -21,10 +21,11 @@ import {
   initialPreviousSpeakersState,
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
-import { sessionDetails, speakerDetails, speakers } from '../utils/data';
 import { isEmpty } from '../utils/arrays';
-import { getVariableColor } from '../utils/styles';
+import { sessionDetails, speakerDetails, speakers } from '../utils/data';
+import '../utils/icons';
 import { updateImageMetadata } from '../utils/metadata';
+import { getVariableColor } from '../utils/styles';
 
 @customElement('previous-speaker-page')
 export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {

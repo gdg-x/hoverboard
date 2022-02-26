@@ -17,9 +17,10 @@ import { ReduxMixin } from '../store/mixin';
 import { fetchSpeakers } from '../store/speakers/actions';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { initialSpeakersState, SpeakersState } from '../store/speakers/state';
-import { speakerDetails } from '../utils/data';
-import { updateImageMetadata } from '../utils/metadata';
 import { isEmpty } from '../utils/arrays';
+import { speakerDetails } from '../utils/data';
+import '../utils/icons';
+import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
 
 @customElement('speaker-page')

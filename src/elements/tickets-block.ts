@@ -7,8 +7,8 @@ import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { initialTicketsState } from '../store/tickets/state';
 import { buyTicket, contentLoaders, ticketsBlock } from '../utils/data';
+import '../utils/icons';
 import './content-loader';
-import './hoverboard-icons';
 import './shared-styles';
 
 @customElement('tickets-block')

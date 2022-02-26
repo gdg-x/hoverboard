@@ -13,6 +13,7 @@ import { fetchSpeakers } from '../store/speakers/actions';
 import { initialSpeakersState } from '../store/speakers/state';
 import { randomOrder } from '../utils/arrays';
 import { speakersBlock } from '../utils/data';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('speakers-block')
