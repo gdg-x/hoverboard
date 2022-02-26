@@ -97,12 +97,12 @@ export class FilterMenu extends PolymerElement {
             <span
               class="reset-filters"
               role="button"
-              on-click="_resetFilters"
+              on-click="resetFilters"
               hidden$="[[!selectedFilters.length]]"
             >
               [[filters.clear]]
             </span>
-            <paper-button class="icon-right" on-click="_toggleBoard">
+            <paper-button class="icon-right" on-click="toggleBoard">
               [[filters.title]]
               <iron-icon icon="hoverboard:[[icon]]"></iron-icon>
             </paper-button>
@@ -116,7 +116,7 @@ export class FilterMenu extends PolymerElement {
               style$="--color: [[getVariableColor(selectedFilter.tag, 'primary-text-color')]]"
               filter-key$="[[selectedFilter.group]]"
               filter-value$="[[selectedFilter.tag]]"
-              on-click="_toggleFilter"
+              on-click="toggleFilter"
               selected
               layout
               horizontal
@@ -146,7 +146,7 @@ export class FilterMenu extends PolymerElement {
                   filter-key$="[[filterGroup.key]]"
                   filter-value$="[[filter.tag]]"
                   selected$="[[isSelected(selectedFilters, filter)]]"
-                  on-click="_toggleFilter"
+                  on-click="toggleFilter"
                 >
                   [[filter.tag]]
                 </div>
@@ -171,16 +171,16 @@ export class FilterMenu extends PolymerElement {
 
   constructor() {
     super();
-    this._clickOutsideListener = this._clickOutsideListener.bind(this);
+    this.clickOutsideListener = this.clickOutsideListener.bind(this);
   }
 
-  isSelected(selectedFilters: Filter[], search: Filter) {
+  private isSelected(selectedFilters: Filter[], search: Filter) {
     return selectedFilters.some(
       (filter) => filter.tag === search.tag.toLocaleLowerCase() && filter.group === search.group
     );
   }
 
-  _toggleFilter(e: PointerEvent) {
+  private toggleFilter(e: PointerEvent) {
     if (
       !(e.currentTarget instanceof HTMLElement) ||
       !e.currentTarget.getAttribute('filter-key') ||
@@ -196,49 +196,49 @@ export class FilterMenu extends PolymerElement {
     toggleFilter({ group, tag });
   }
 
-  _toggleBoard() {
+  private toggleBoard() {
     if (this.opened) {
-      this._clickOutsideUnlisten();
+      this.clickOutsideUnlisten();
     } else {
-      this._clickOutsideListen();
+      this.clickOutsideListen();
     }
     this.opened = !this.opened;
   }
 
-  _resetFilters(e: MouseEvent) {
+  private resetFilters(e: MouseEvent) {
     e.preventDefault();
     clearFilters();
   }
 
   @computed('opened')
-  get icon() {
+  private get icon() {
     return this.opened ? 'close' : 'filter-list';
   }
 
   @computed('selectedFilters', 'resultsCount')
-  get hideResultText() {
+  private get hideResultText() {
     const { selectedFilters, resultsCount } = this;
     return selectedFilters.length === 0 || typeof resultsCount === 'undefined';
   }
 
-  _clickOutsideListen() {
-    this._clickOutsideUnlisten();
-    window.addEventListener('click', this._clickOutsideListener, false);
+  private clickOutsideListen() {
+    this.clickOutsideUnlisten();
+    window.addEventListener('click', this.clickOutsideListener, false);
   }
 
-  _clickOutsideUnlisten() {
-    window.removeEventListener('click', this._clickOutsideListener, false);
+  private clickOutsideUnlisten() {
+    window.removeEventListener('click', this.clickOutsideListener, false);
   }
 
-  _clickOutsideListener(e: MouseEvent) {
+  private clickOutsideListener(e: MouseEvent) {
     const isOutside = !e.composedPath().find((path) => path === this);
     if (isOutside) {
-      this._toggleBoard();
-      this._clickOutsideUnlisten();
+      this.toggleBoard();
+      this.clickOutsideUnlisten();
     }
   }
 
-  getVariableColor(value: string, fallback: string) {
+  private getVariableColor(value: string, fallback: string) {
     return getVariableColor(this, value, fallback);
   }
 }

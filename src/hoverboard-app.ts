@@ -246,9 +246,9 @@ export class HoverboardApp extends PolymerElement {
 
   override connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('element-sticked', (event) => this._toggleHeaderShadow(event));
+    window.addEventListener('element-sticked', (event) => this.toggleHeaderShadow(event));
     window.addEventListener('offline', () => store.dispatch(queueSnackbar(offlineMessage)));
-    this.drawer.addEventListener('opened-changed', (event) => this._toggleDrawer(event));
+    this.drawer.addEventListener('opened-changed', (event) => this.toggleDrawer(event));
     store.dispatch(fetchTickets);
   }
 
@@ -264,16 +264,16 @@ export class HoverboardApp extends PolymerElement {
     this.drawerOpened = false;
   }
 
-  _toggleHeaderShadow(e: CustomEvent<Stickied>) {
+  private toggleHeaderShadow(e: CustomEvent<Stickied>) {
     this.header.classList.toggle('remove-shadow', e.detail.sticked);
   }
 
-  _toggleDrawer(e: CustomEvent<OpenedChanged>) {
+  private toggleDrawer(e: CustomEvent<OpenedChanged>) {
     this.drawerOpened = e.detail.value;
   }
 
   @computed('tickets')
-  get ticketUrl(): string {
+  private get ticketUrl(): string {
     if (this.tickets instanceof Success && this.tickets.data.length > 0) {
       const availableTicket = this.tickets.data.find((ticket) => ticket.available);
       const ticket = availableTicket || this.tickets.data[0];

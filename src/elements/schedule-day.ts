@@ -108,16 +108,16 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
           <div
             id$="[[timeslot.startTime]]"
             class="start-time"
-            style$="grid-area: [[_getTimePosition(timeslotIndex)]]"
+            style$="grid-area: [[getTimePosition(timeslotIndex)]]"
           >
-            <span class="hours">[[_splitText(timeslot.startTime, ':', 0)]]</span>
-            <span class="minutes">[[_splitText(timeslot.startTime, ':', 1)]]</span>
+            <span class="hours">[[splitText(timeslot.startTime, ':', 0)]]</span>
+            <span class="minutes">[[splitText(timeslot.startTime, ':', 1)]]</span>
           </div>
 
           <a
             class="add-session"
             href$="/schedule/[[day.date]]#[[timeslot.startTime]]"
-            hidden$="[[!_showAddSession(timeslot, onlyFeatured)]]"
+            hidden$="[[!showAddSession(timeslot, onlyFeatured)]]"
             style$="grid-area: [[timeslot.sessions.0.gridArea]]"
             layout
             horizontal
@@ -132,7 +132,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
             items="[[timeslot.sessions]]"
             as="session"
             index-as="sessionIndex"
-            filter="_isNotEmpty"
+            filter="isNotEmpty"
           >
             <div class="session" style$="grid-area: [[session.gridArea]]" layout vertical>
               <template
@@ -183,21 +183,21 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   }
 
   @observe('user')
-  _fetchFeaturedSessions(user: UserState) {
+  private onUser(user: UserState) {
     if (user instanceof Success && this.featuredSessions instanceof Initialized) {
       store.dispatch(fetchUserFeaturedSessions);
     }
   }
 
-  _getTimePosition(timeslotIndex: number) {
+  private getTimePosition(timeslotIndex: number) {
     return `${timeslotIndex + 1} / 1`;
   }
 
-  _splitText(text: string, divider: string, index: number) {
+  private splitText(text: string, divider: string, index: number) {
     return text.split(divider)[index];
   }
 
-  _showAddSession(timeslot: Timeslot, onlyFeatured: boolean) {
+  private showAddSession(timeslot: Timeslot, onlyFeatured: boolean) {
     return (
       onlyFeatured &&
       !timeslot.sessions.reduce(
@@ -207,11 +207,11 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
     );
   }
 
-  _isNotEmpty(sessionBlock: Time) {
+  private isNotEmpty(sessionBlock: Time) {
     return !!sessionBlock.items.length;
   }
 
-  filterSessions(sessions: Session[], selectedFilters: Filter[]) {
+  private filterSessions(sessions: Session[], selectedFilters: Filter[]) {
     if (selectedFilters.length === 0) {
       return sessions;
     }
@@ -231,7 +231,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   }
 
   @computed('location', 'schedule')
-  get name() {
+  private get name() {
     if (this.location && this.schedule instanceof Success) {
       const {
         params: { id },
@@ -248,7 +248,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   }
 
   @observe('name', 'schedule')
-  onNameAndSchedule() {
+  private onNameAndSchedule() {
     if (!this.onlyFeatured && this.name && this.schedule instanceof Success) {
       this.day = this.schedule.data.find((day) => day.date === this.name);
     }

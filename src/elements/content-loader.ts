@@ -115,7 +115,7 @@ export class ContentLoader extends PolymerElement {
         }
       </style>
 
-      <template is="dom-repeat" items="[[_getArray()]]">
+      <template is="dom-repeat" items="[[getArray()]]">
         <div class="content"></div>
       </template>
     `;
@@ -179,7 +179,7 @@ export class ContentLoader extends PolymerElement {
     });
   }
 
-  _getArray() {
+  private getArray() {
     return new Array(Number(this.itemsCount));
   }
 }

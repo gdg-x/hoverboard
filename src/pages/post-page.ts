@@ -119,7 +119,7 @@ export class PostPage extends ReduxMixin(PolymerElement) {
 
   // TODO: Move to selector
   @observe('postData.id', 'posts')
-  _postDataObserver(postId: string, posts: BlogState) {
+  private onPostDataIdAndPosts(postId: string, posts: BlogState) {
     if (postId && posts instanceof Success) {
       const post = posts.data.find(({ id }) => id === postId);
       if (post) {
@@ -137,7 +137,7 @@ export class PostPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  getDate(date: string) {
+  private getDate(date: string) {
     return getDate(date);
   }
 }

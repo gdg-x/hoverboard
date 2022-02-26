@@ -1,5 +1,5 @@
 import { Success } from '@abraham/remotedata';
-import { customElement, property } from '@polymer/decorators';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
@@ -9,14 +9,10 @@ import { router } from '../router';
 import { RootState, store } from '../store';
 import { openFeedbackDialog, openSigninDialog } from '../store/dialogs/actions';
 import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
-import {
-  FeaturedSessionsState,
-  initialFeaturedSessionsState,
-} from '../store/featured-sessions/state';
+import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
 import { ReduxMixin } from '../store/mixin';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
-import { UserState } from '../store/user/types';
 import { schedule } from '../utils/data';
 import { acceptingFeedback } from '../utils/feedback';
 import '../utils/icons';
@@ -187,14 +183,14 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
             <iron-icon
               icon="hoverboard:insert-comment"
               class="feedback-action"
-              hidden="[[!_acceptingFeedback()]]"
-              on-click="_toggleFeedback"
+              hidden="[[!acceptingFeedback()]]"
+              on-click="toggleFeedback"
             ></iron-icon>
             <iron-icon
               icon="hoverboard:[[icon]]"
               class="bookmark-session"
-              hidden="[[_acceptingFeedback()]]"
-              on-click="_toggleFeaturedSession"
+              hidden="[[acceptingFeedback()]]"
+              on-click="toggleFeaturedSession"
             ></iron-icon>
           </div>
         </div>
@@ -203,10 +199,10 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           <div layout horizontal justified center-aligned>
             <div class="session-meta" flex>
               <span hidden$="[[!session.duration.hh]]">
-                [[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]
+                [[session.duration.hh]] hour[[getEnding(session.duration.hh)]]
               </span>
               <span hidden$="[[!session.duration.mm]]">
-                [[session.duration.mm]] min[[_getEnding(session.duration.mm)]]
+                [[session.duration.mm]] min[[getEnding(session.duration.mm)]]
               </span>
             </div>
             <div class="tags" hidden$="[[!session.tags.length]]">
@@ -230,7 +226,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
 
                 <div class="speaker-details" flex>
                   <div class="speaker-name">[[speaker.name]]</div>
-                  <div class="speaker-title">[[_join(speaker.company, speaker.country)]]</div>
+                  <div class="speaker-title">[[join(speaker.company, speaker.country)]]</div>
                 </div>
               </div>
             </template>
@@ -241,45 +237,42 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  private user = initialUserState;
+  user = initialUserState;
   @property({ type: Object })
-  private session: Session | undefined;
+  session: Session | undefined;
   @property({ type: Object })
-  private featuredSessions = initialFeaturedSessionsState;
+  featuredSessions = initialFeaturedSessionsState;
   @property({ type: String })
   private queryParams: string | undefined;
   @property({ type: String })
   private dayName: string | undefined;
-  @property({ type: String, computed: 'getVariableColor(session.mainTag)' })
-  private sessionCollor: string | undefined;
-  @property({ type: Boolean, computed: '_isFeatured(user, featuredSessions, session.id)' })
-  private isFeatured: boolean | undefined;
-  @property({ type: String, computed: '_summary(session.description)' })
-  private summary: string | undefined;
-  @property({ type: String, computed: '_icon(isFeatured)' })
-  private icon: string | undefined;
 
   override stateChanged(state: RootState) {
     this.user = state.user;
     this.featuredSessions = state.featuredSessions;
   }
 
-  _isFeatured(user: UserState, featuredSessions: FeaturedSessionsState, sessionId?: string) {
-    if (user instanceof Success && featuredSessions instanceof Success && sessionId) {
-      return featuredSessions.data[sessionId];
+  @computed('featuredSessions', 'session')
+  get isFeatured(): boolean {
+    if (this.featuredSessions instanceof Success && this.session?.id) {
+      return this.featuredSessions.data[this.session.id] ?? false;
     }
     return false;
   }
 
-  _icon(isFeatured: boolean) {
-    return isFeatured ? 'bookmark-check' : 'bookmark-plus';
+  @computed('isFeatured')
+  private get icon() {
+    return this.isFeatured ? 'bookmark-check' : 'bookmark-plus';
   }
 
-  _getEnding(number: number) {
+  private getEnding(number: number) {
     return number > 1 ? 's' : '';
   }
 
-  _summary(description = '') {
+  @computed('session')
+  private get summary() {
+    const description = this.session?.description ?? '';
+    // TODO: Move logic to utility function
     const indexes = [
       description.indexOf('\n'),
       description.indexOf('<br'),
@@ -288,7 +281,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     return description.slice(0, Math.min(...indexes));
   }
 
-  _toggleFeaturedSession(event: MouseEvent) {
+  private toggleFeaturedSession(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -316,7 +309,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _toggleFeedback(event: MouseEvent) {
+  private toggleFeedback(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     if (this.session) {
@@ -324,23 +317,23 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _acceptingFeedback(): boolean {
+  private acceptingFeedback(): boolean {
     return this.session !== undefined && acceptingFeedback(this.session);
   }
 
-  _join(company: string, country: string) {
+  private join(company: string, country: string) {
     return [company, country].filter(Boolean).join(' / ');
   }
 
-  getVariableColor(value: string) {
+  private getVariableColor(value: string) {
     return getVariableColor(this, value);
   }
 
-  slice(text: string, number: number) {
+  private slice(text: string, number: number) {
     return text && text.slice(0, number);
   }
 
-  sessionUrl(id: string) {
+  private sessionUrl(id: string) {
     return router.urlForName('session-page', { id });
   }
 }

@@ -75,7 +75,7 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
             hidden$="[[!subscribed.data]]"
           ></iron-icon>
         </paper-input>
-        <paper-button on-click="_subscribe" disabled="[[disabled]]" layout self-end>
+        <paper-button on-click="subscribe" disabled="[[disabled]]" layout self-end>
           [[ctaLabel]]
         </paper-button>
       </div>
@@ -96,7 +96,7 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
     this.subscribed = state.subscribed;
   }
 
-  _subscribe() {
+  private subscribe() {
     this.validate = true;
     const emailInput = this.shadowRoot!.querySelector<PaperInputElement>('#emailInput');
 
@@ -106,24 +106,24 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
   }
 
   @computed('subscribed')
-  get ctaLabel() {
+  private get ctaLabel() {
     return this.subscribed instanceof Success
       ? this.subscribeBlock.subscribed
       : this.subscribeBlock.subscribe;
   }
 
   @computed('email', 'subscribed')
-  get disabled() {
+  private get disabled() {
     return !this.email || this.subscribed instanceof Success;
   }
 
   @computed('subscribed')
-  get failure() {
+  private get failure() {
     return this.subscribed instanceof Failure;
   }
 
   @computed('subscribed')
-  get initialized() {
+  private get initialized() {
     return this.subscribed instanceof Initialized;
   }
 }

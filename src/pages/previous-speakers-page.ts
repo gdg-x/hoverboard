@@ -159,7 +159,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
 
               <div class="sessions">
                 <h5>[[resources.speakers.previousYears]]:</h5>
-                [[_getYears(speaker.sessions)]]
+                [[getYears(speaker.sessions)]]
               </div>
             </div>
           </a>
@@ -187,18 +187,18 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   }
 
   @computed('previousSpeakers')
-  get contentLoaderVisibility(): boolean {
+  private get contentLoaderVisibility(): boolean {
     return this.previousSpeakers instanceof Success || this.previousSpeakers instanceof Failure;
   }
 
-  _getYears(sessions: { [key: number]: PreviousSession[] }) {
+  private getYears(sessions: { [key: number]: PreviousSession[] }) {
     return Object.keys(sessions || {})
       .map(Number)
       .sort((a, b) => b - a)
       .join(', ');
   }
 
-  previousSpeakerUrl(id: string) {
+  private previousSpeakerUrl(id: string) {
     return router.urlForName('previous-speaker-page', { id });
   }
 }

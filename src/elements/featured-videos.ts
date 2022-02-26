@@ -140,7 +140,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
             class="last-video slide-icon"
             icon="hoverboard:chevron-left"
             on-click="shiftContentLeft"
-            hidden$="[[_leftArrowHidden]]"
+            hidden$="[[leftArrowHidden]]"
           ></paper-icon-button>
           <div id="videoList" class="video-list" layout flex horizontal>
             <div id="videos" class="videos" layout horizontal>
@@ -180,7 +180,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
             class="next-video slide-icon"
             icon="hoverboard:chevron-right"
             on-click="shiftContentRight"
-            hidden$="[[_rightArrowHidden]]"
+            hidden$="[[rightArrowHidden]]"
           >
             &gt;</paper-icon-button
           >
@@ -207,9 +207,9 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   videos = initialVideosState;
 
   @property({ type: Boolean })
-  private _leftArrowHidden = true;
+  private leftArrowHidden = true;
   @property({ type: Boolean })
-  private _rightArrowHidden = false;
+  private rightArrowHidden = false;
 
   @computed('videos')
   get pending() {
@@ -247,9 +247,9 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
       this.transformVideoList(this.videosElm, newX);
 
       if (newX == 0) {
-        this._leftArrowHidden = true;
+        this.leftArrowHidden = true;
       } else {
-        this._rightArrowHidden = false;
+        this.rightArrowHidden = false;
       }
     }
   }
@@ -270,9 +270,9 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
       this.transformVideoList(this.videosElm, newX);
 
       if (newX == maxRightPosition) {
-        this._rightArrowHidden = true;
+        this.rightArrowHidden = true;
       } else {
-        this._leftArrowHidden = false;
+        this.leftArrowHidden = false;
       }
     }
   }

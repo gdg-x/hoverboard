@@ -69,10 +69,6 @@ class FeedbackDialog extends ReduxMixin(PolymerElement) {
       this.session = data.data.data;
     }
   }
-
-  _close() {
-    closeDialog();
-  }
 }
 
 window.customElements.define(FeedbackDialog.is, FeedbackDialog);

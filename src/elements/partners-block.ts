@@ -1,5 +1,5 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
+import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -102,7 +102,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
           </div>
         </template>
 
-        <paper-button class="cta-button animated icon-right" on-click="_addPotentialPartner">
+        <paper-button class="cta-button animated icon-right" on-click="addPotentialPartner">
           <span>[[partnersBlock.button]]</span>
           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
         </paper-button>
@@ -113,7 +113,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   private loading = loading;
   private partnersBlock = partnersBlock;
 
-  @property({ type: Object, observer: PartnersBlock.prototype._partnerAddingChanged })
+  @property({ type: Object })
   potentialPartners = initialPotentialPartnersState;
   @property({ type: Object })
   partners = initialPartnersState;
@@ -140,7 +140,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _addPotentialPartner() {
+  private addPotentialPartner() {
     openSubscribeDialog({
       title: this.partnersBlock.form.title,
       submitLabel: this.partnersBlock.form.submitLabel,
@@ -150,10 +150,8 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
     });
   }
 
-  _partnerAddingChanged(
-    potentialPartners: PotentialPartnersState | {},
-    _old: PotentialPartnersState | {}
-  ): void {
+  @observe('potentialPartners')
+  private onPotentialPartners(potentialPartners: PotentialPartnersState) {
     if (potentialPartners instanceof Success) {
       closeDialog();
       store.dispatch(queueSnackbar(this.partnersBlock.toast));

@@ -160,7 +160,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
               rel="noopener noreferrer"
               sold-out$="[[ticket.soldOut]]"
               in-demand$="[[ticket.inDemand]]"
-              on-click="_onTicketTap"
+              on-click="onTicketTap"
               layout
               vertical
             >
@@ -170,7 +170,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
               <div class="content" layout vertical flex-auto>
                 <div class="ticket-price-wrapper">
                   <div class="price">[[ticket.currency]][[ticket.price]]</div>
-                  <div class="discount">[[_getDiscount(ticket)]]</div>
+                  <div class="discount">[[getDiscount(ticket)]]</div>
                 </div>
                 <div class="type-description" layout vertical flex-auto center-justified>
                   <div class="ticket-dates" hidden$="[[!ticket.starts]]">
@@ -186,7 +186,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
                   hidden$="[[ticket.soldOut]]"
                   disabled$="[[!ticket.available]]"
                 >
-                  [[_getButtonText(ticket.available)]]
+                  [[getButtonText(ticket.available)]]
                 </paper-button>
               </div>
             </a>
@@ -209,11 +209,11 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
   }
 
   @computed('tickets')
-  get pending() {
+  private get pending() {
     return this.tickets instanceof Pending;
   }
 
-  _getDiscount(ticket: Ticket) {
+  private getDiscount(ticket: Ticket) {
     if (!(this.tickets instanceof Success)) {
       return '';
     }
@@ -229,14 +229,14 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
     return this.ticketsBlock.save.replace('${discount}', discount);
   }
 
-  _onTicketTap(e: PointerEvent & { model: { ticket: Ticket } }) {
+  private onTicketTap(e: PointerEvent & { model: { ticket: Ticket } }) {
     if (e.model.ticket.soldOut || !e.model.ticket.available) {
       e.preventDefault();
       e.stopPropagation();
     }
   }
 
-  _getButtonText(available: boolean) {
+  private getButtonText(available: boolean) {
     return available ? buyTicket : this.ticketsBlock.notAvailableYet;
   }
 }
