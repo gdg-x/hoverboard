@@ -123,7 +123,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
             horizontal
             center-center
           >
-            <iron-icon class="add-session-icon" icon="hoverboard:add-circle-outline"></iron-icon>
+            <iron-icon icon="hoverboard:add-circle-outline class="add-session-icon""></iron-icon>
             <span>[[mySchedule.browseSession]]</span>
           </a>
 
