@@ -170,17 +170,17 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
 
           <div class="action-buttons" layout horizontal center-justified wrap>
-            <paper-button class="watch-video" on-click="_playVideo">
+            <paper-button class="watch-video" on-click="playVideo">
               <iron-icon icon="hoverboard:movie"></iron-icon>
               [[viewHighlights]]
             </paper-button>
-            <paper-button on-click="_scrollToTickets" primary invert>
+            <paper-button on-click="scrollToTickets" primary invert>
               <iron-icon icon="hoverboard:ticket"></iron-icon>
               [[buyTicket]]
             </paper-button>
           </div>
 
-          <div class="scroll-down" on-click="_scrollNextBlock">
+          <div class="scroll-down" on-click="scrollNextBlock">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               version="1.1"
@@ -275,14 +275,14 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean })
   private showForkMeBlock: boolean = false;
 
-  _playVideo() {
+  private playVideo() {
     openVideoDialog({
       title: this.aboutBlock.callToAction.howItWas.label,
       youtubeId: this.aboutBlock.callToAction.howItWas.youtubeId,
     });
   }
 
-  _scrollToTickets() {
+  private scrollToTickets() {
     const element = this.$['tickets-block'];
     if (element) {
       scrollToElement(element);
@@ -291,7 +291,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _scrollNextBlock() {
+  private scrollNextBlock() {
     scrollToElement(this.hero, POSITION.BOTTOM);
   }
 

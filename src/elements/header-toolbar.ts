@@ -9,7 +9,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { Hero } from '../models/hero';
 import { selectRouteName } from '../router';
 import { RootState } from '../store';
-import { signOut } from '../store/auth/actions';
+import { signOut as signOutAction } from '../store/auth/actions';
 import { closeDialog, openSigninDialog } from '../store/dialogs/actions';
 import { selectIsDialogOpen } from '../store/dialogs/selectors';
 import { DIALOG } from '../store/dialogs/types';
@@ -214,7 +214,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
             <div layout vertical center-justified>
               <span class="profile-name">[[user.data.displayName]]</span>
               <span class="profile-email">[[user.data.email]]</span>
-              <span class="profile-action" role="button" on-click="_signOut">[[signOut]]</span>
+              <span class="profile-action" role="button" on-click="signOut">[[signOutText]]</span>
             </div>
           </div>
         </paper-menu-button>
@@ -222,7 +222,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
         <paper-icon-button
           icon="hoverboard:account"
           on-click="signIn"
-          hidden$="[[_isAccountIconHidden(signedIn, viewport.isLaptopPlus)]]"
+          hidden$="[[isAccountIconHidden(signedIn, viewport.isLaptopPlus)]]"
         ></paper-icon-button>
       </app-toolbar>
     `;
@@ -231,7 +231,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   private logoTitle = title;
   private signInText = signIn;
   private navigation = navigation;
-  private signOut = signOutText;
+  private signOutText = signOutText;
   private buyTicket = buyTicket;
 
   @property({ type: Boolean, notify: true })
@@ -266,45 +266,45 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   override connectedCallback() {
     super.connectedCallback();
-    this._onScroll = this._onScroll.bind(this);
-    window.addEventListener('scroll', this._onScroll);
-    this._onScroll();
+    this.onScroll = this.onScroll.bind(this);
+    window.addEventListener('scroll', this.onScroll);
+    this.onScroll();
   }
 
   override disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('scroll', this.onScroll);
   }
 
-  openDrawer() {
+  private openDrawer() {
     this.drawerOpened = true;
   }
 
-  signIn() {
+  private signIn() {
     openSigninDialog();
   }
 
-  _signOut() {
-    signOut();
+  private signOut() {
+    signOutAction();
   }
 
-  _onScroll() {
+  private onScroll() {
     this.transparent = document.documentElement.scrollTop === 0;
   }
 
   @observe('signedIn')
-  _authStatusChanged(_signedIn: boolean) {
+  private onSignedIn(_signedIn: boolean) {
     if (this.isDialogOpen) {
       closeDialog();
     }
   }
 
-  _isAccountIconHidden(signedIn: boolean, isTabletPlus: boolean) {
+  private isAccountIconHidden(signedIn: boolean, isTabletPlus: boolean) {
     return signedIn || isTabletPlus;
   }
 
   @computed('tickets')
-  get ticketUrl() {
+  private get ticketUrl() {
     if (this.tickets instanceof Success && this.tickets.data.length > 0) {
       const availableTicket = this.tickets.data.find((ticket) => ticket.available);
       return (availableTicket || this.tickets.data[0])?.url || '';
@@ -314,7 +314,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @observe('heroSettings')
-  _setToolbarSettings(settings: Hero) {
+  private onHeroSettings(settings: Hero) {
     if (!settings) return;
     this.updateStyles({
       '--hero-font-color': settings.fontColor || '',

@@ -64,39 +64,39 @@ export class StickyElement extends PolymerElement {
 
   constructor() {
     super();
-    this._onScroll = this._onScroll.bind(this);
+    this.onScroll = this.onScroll.bind(this);
   }
 
   override connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('scroll', this._onScroll);
+    window.addEventListener('scroll', this.onScroll);
   }
 
   override disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('scroll', this.onScroll);
     this.content.classList.remove('sticked');
   }
 
-  _onScroll() {
+  private onScroll() {
     if (this.waiting) {
       return;
     }
     this.waiting = true;
     window.clearTimeout(this.endScrollHandle);
 
-    this._toggleSticky();
+    this.toggleSticky();
 
     window.setTimeout(() => {
       this.waiting = false;
     }, 100);
 
     this.endScrollHandle = window.setTimeout(() => {
-      this._toggleSticky();
+      this.toggleSticky();
     }, 200);
   }
 
-  _toggleSticky() {
+  private toggleSticky() {
     const trigger = this.trigger;
     const content = this.content;
 

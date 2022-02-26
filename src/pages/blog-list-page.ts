@@ -144,7 +144,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
                     <text-truncate lines="2">
                       <h2 class="title">[[post.title]]</h2>
                     </text-truncate>
-                    <text-truncate lines="[[_addIfNotPhone(2, 1)]]">
+                    <text-truncate lines="[[addIfNotPhone(2, 1)]]">
                       <short-markdown class="description" content="[[post.brief]]"></short-markdown>
                     </text-truncate>
                   </div>
@@ -197,7 +197,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
   }
 
   @computed('posts')
-  get featuredPosts(): Post[] {
+  private get featuredPosts(): Post[] {
     if (this.posts instanceof Success) {
       return this.posts.data.slice(0, 3);
     } else {
@@ -206,7 +206,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
   }
 
   @computed('posts')
-  get remainingPosts(): Post[] {
+  private get remainingPosts(): Post[] {
     if (this.posts instanceof Success) {
       return this.posts.data.slice(3);
     } else {
@@ -215,22 +215,22 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
   }
 
   @computed('posts')
-  get contentLoaderVisibility(): boolean {
+  private get contentLoaderVisibility(): boolean {
     return this.posts instanceof Success || this.posts instanceof Failure;
   }
 
-  _addIfNotPhone(base: number, additional: number) {
+  addIfNotPhone(base: number, additional: number) {
     if (this.viewport.isTabletPlus) {
       return base + additional;
     }
     return base;
   }
 
-  getDate(date: Date) {
+  private getDate(date: Date) {
     return getDate(date);
   }
 
-  postUrl(id: string) {
+  private postUrl(id: string) {
     return router.urlForName('post-page', { id });
   }
 }

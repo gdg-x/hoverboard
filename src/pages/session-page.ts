@@ -205,7 +205,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
             <paper-fab
               icon="hoverboard:[[featuredSessionIcon]]"
               hidden$="[[!viewport.isLaptopPlus]]"
-              on-click="_toggleFeaturedSession"
+              on-click="toggleFeaturedSession"
             ></paper-fab>
           </div>
         </div>
@@ -229,7 +229,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           <paper-fab
             icon="hoverboard:[[featuredSessionIcon]]"
             hidden$="[[viewport.isLaptopPlus]]"
-            on-click="_toggleFeaturedSession"
+            on-click="toggleFeaturedSession"
           ></paper-fab>
         </div>
         <h3 class="meta-info" hidden$="[[disabledSchedule]]">
@@ -259,7 +259,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           <div
             class="action"
             hidden$="[[!session.videoId]]"
-            on-click="_openVideo"
+            on-click="openVideo"
             layout
             horizontal
             center
@@ -353,7 +353,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   }
 
   @observe('user')
-  onUserId(user: UserState) {
+  private onUser(user: UserState) {
     if (user instanceof Success && this.featuredSessions instanceof Initialized) {
       store.dispatch(fetchUserFeaturedSessions);
     }
@@ -364,17 +364,17 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   }
 
   @observe('session')
-  onContentLoaderVisibility(session: Session | undefined) {
+  private onContentLoaderVisibility(session: Session | undefined) {
     this.contentLoaderVisibility = !!session;
   }
 
   @observe('session')
-  onAcceptingFeedback() {
+  private onSession() {
     this.acceptingFeedback = this.session !== undefined && acceptingFeedback(this.session);
   }
 
   @computed('featuredSessions', 'sessionId')
-  get featuredSessionIcon() {
+  private get featuredSessionIcon() {
     if (
       this.featuredSessions instanceof Success &&
       this.sessionId &&
@@ -387,7 +387,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   }
 
   @observe('sessions', 'sessionId')
-  onSessionsAndSessionId(sessions: SessionsState, sessionId: string) {
+  private onSessionsAndSessionId(sessions: SessionsState, sessionId: string) {
     if (sessionId && sessions instanceof Success) {
       this.session = selectSession(store.getState(), sessionId);
 
@@ -403,7 +403,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _toggleFeaturedSession(event: Event) {
+  private toggleFeaturedSession(event: Event) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -431,7 +431,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  private _openVideo() {
+  private openVideo() {
     if (!this.session || !this.session.videoId) {
       return;
     }
@@ -446,7 +446,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
     return getVariableColor(this as unknown as PolymerElement, value);
   }
 
-  speakerUrl(id: string) {
+  private speakerUrl(id: string) {
     return router.urlForName('speaker-page', { id });
   }
 }

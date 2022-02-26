@@ -62,7 +62,7 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
           <paper-button
             class="animated icon-right"
             disabled$="[[subscribed.data]]"
-            on-click="_subscribe"
+            on-click="subscribe"
           >
             <span class="cta-label">[[ctaLabel]]</span>
             <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>
@@ -89,18 +89,18 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
   }
 
   @computed('subscribed')
-  get ctaIcon() {
+  private get ctaIcon() {
     return this.subscribed instanceof Success ? 'checked' : 'arrow-right-circle';
   }
 
   @computed('subscribed')
-  get ctaLabel() {
+  private get ctaLabel() {
     return this.subscribed instanceof Success
       ? this.subscribeBlock.subscribed
       : this.subscribeBlock.callToAction.label;
   }
 
-  _subscribe() {
+  private subscribe() {
     let userData = {
       firstFieldValue: '',
       secondFieldValue: '',
@@ -114,12 +114,12 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
       };
 
       if (this.user.data.email) {
-        this._subscribeAction({ ...userData, email: this.user.data.email });
+        this.subscribeAction({ ...userData, email: this.user.data.email });
       }
     }
 
     if (this.user instanceof Success && this.user.data.email) {
-      this._subscribeAction({ ...userData, email: this.user.data.email });
+      this.subscribeAction({ ...userData, email: this.user.data.email });
     } else {
       openSubscribeDialog({
         title: this.subscribeBlock.formTitle,
@@ -128,12 +128,12 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
         secondFieldLabel: this.subscribeBlock.lastName,
         firstFieldValue: userData.firstFieldValue,
         secondFieldValue: userData.secondFieldValue,
-        submit: (data) => this._subscribeAction(data),
+        submit: (data) => this.subscribeAction(data),
       });
     }
   }
 
-  _subscribeAction(data: DialogData) {
+  private subscribeAction(data: DialogData) {
     store.dispatch(subscribe(data));
   }
 }
