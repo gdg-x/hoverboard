@@ -17,7 +17,8 @@ import { ReduxMixin } from '../store/mixin';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { UserState } from '../store/user/types';
-import { schedule, timezoneOffset } from '../utils/data';
+import { schedule } from '../utils/data';
+import { acceptingFeedback } from '../utils/feedback';
 import '../utils/icons';
 import { getVariableColor } from '../utils/styles';
 import './shared-styles';
@@ -323,21 +324,8 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _acceptingFeedback() {
-    if (!this.session) {
-      return false;
-    }
-
-    const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-    const ONE_MINUTE_MS = 60 * 1000;
-    const now = new Date();
-    const convertedTimezoneDate = new Date(
-      new Date(`${this.session.day} ${this.session.startTime}`).getTime() +
-        (parseInt(timezoneOffset) - now.getTimezoneOffset()) * ONE_MINUTE_MS
-    );
-
-    const diff = now.getTime() - convertedTimezoneDate.getTime();
-    return diff > 0 && diff < ONE_WEEK_MS;
+  _acceptingFeedback(): boolean {
+    return this.session !== undefined && acceptingFeedback(this.session);
   }
 
   _join(company: string, country: string) {
