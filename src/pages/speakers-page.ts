@@ -23,6 +23,7 @@ import { fetchSpeakers } from '../store/speakers/actions';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
 import { initialSpeakersState } from '../store/speakers/state';
 import { contentLoaders, heroSettings } from '../utils/data';
+import '../utils/icons';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('speakers-page')

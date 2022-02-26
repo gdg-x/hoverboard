@@ -6,6 +6,7 @@ import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { filters } from '../utils/data';
 import { clearFilters, toggleFilter } from '../utils/filters';
+import '../utils/icons';
 import { generateClassName, getVariableColor } from '../utils/styles';
 import './shared-styles';
 
