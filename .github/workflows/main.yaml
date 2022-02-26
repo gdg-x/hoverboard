@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        script-name: [lint, test, build]
+        script-name: [lint, build, test, 'test:a11y']
 
     steps:
       - name: Checkout the repo
