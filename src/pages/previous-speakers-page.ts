@@ -2,7 +2,7 @@ import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import '../components/hero/simple-hero';
 import '../elements/content-loader';
 import '../elements/shared-styles';
@@ -12,7 +12,7 @@ import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { initialPreviousSpeakersState } from '../store/previous-speakers/state';
-import { contentLoaders, heroSettings } from '../utils/data';
+import { contentLoaders, heroSettings, speakers } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('previous-speakers-page')
@@ -41,8 +41,11 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
         }
 
         .photo {
-          width: 96px;
-          height: 96px;
+          --lazy-image-width: 96px;
+          --lazy-image-height: 96px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--contrast-additional-background-color);
           border: 3px solid var(--contrast-additional-background-color);
           border-radius: 50%;
@@ -103,8 +106,8 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
           }
 
           .photo {
-            width: 115px;
-            height: 115px;
+            --lazy-image-width: 115px;
+            --lazy-image-height: 115px;
             border-width: 5px;
           }
 
@@ -120,8 +123,8 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
           }
 
           .photo {
-            width: 128px;
-            height: 128px;
+            --lazy-image-width: 128px;
+            --lazy-image-height: 128px;
           }
         }
       </style>
@@ -142,14 +145,11 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
       <div class="container">
         <template is="dom-repeat" items="[[previousSpeakers.data]]" as="speaker">
           <a class="speaker" href$="[[previousSpeakerUrl(speaker.id)]]" layout horizontal>
-            <plastic-image
+            <lazy-image
               class="photo"
-              srcset="[[speaker.photoUrl]]"
-              sizing="cover"
-              lazy-load
-              preload
-              fade
-            ></plastic-image>
+              src="[[speaker.photoUrl]]"
+              alt="[[speaker.name]]"
+            ></lazy-image>
 
             <div class="details" layout vertical center-justified start>
               <h2 class="name">[[speaker.name]]</h2>
@@ -158,7 +158,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
               <img class="company-logo" src$="[[speaker.companyLogo]]" />
 
               <div class="sessions">
-                <h5>[[resources.speakers.previousYears]]:</h5>
+                <h5>[[previousYears]]:</h5>
                 [[getYears(speaker.sessions)]]
               </div>
             </div>
@@ -172,6 +172,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
 
   private heroSettings = heroSettings.previousSpeakers;
   private contentLoaders = contentLoaders.previousSpeakers;
+  private previousYears = speakers.previousYears;
 
   override stateChanged(state: RootState) {
     this.previousSpeakers = state.previousSpeakers;

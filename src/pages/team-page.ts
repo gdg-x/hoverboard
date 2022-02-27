@@ -2,7 +2,7 @@ import { Failure, Pending } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
 import '../elements/shared-styles';
@@ -47,8 +47,11 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
 
         .photo {
           flex: none;
-          width: 96px;
-          height: 96px;
+          --lazy-image-width: 96px;
+          --lazy-image-height: 96px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--contrast-additional-background-color);
           border-radius: 50%;
           overflow: hidden;
@@ -99,8 +102,8 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
 
         @media (min-width: 812px) {
           .photo {
-            width: 115px;
-            height: 115px;
+            --lazy-image-width: 115px;
+            --lazy-image-height: 115px;
           }
         }
 
@@ -110,8 +113,8 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
           }
 
           .photo {
-            width: 128px;
-            height: 128px;
+            --lazy-image-width: 128px;
+            --lazy-image-height: 128px;
           }
         }
       </style>
@@ -139,15 +142,11 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
           <div class="team-block">
             <template is="dom-repeat" items="[[team.members]]" as="member">
               <div class="member" layout horizontal>
-                <plastic-image
+                <lazy-image
                   class="photo"
-                  srcset="[[member.photoUrl]]"
-                  sizing="cover"
-                  lazy-load
-                  preload
-                  fade
-                >
-                </plastic-image>
+                  src="[[member.photoUrl]]"
+                  alt="[[member.name]]"
+                ></lazy-image>
 
                 <div class="member-details" layout vertical center-justified start>
                   <h2 class="name">[[member.name]]</h2>

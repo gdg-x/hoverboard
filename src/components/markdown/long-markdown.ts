@@ -29,16 +29,15 @@ export class LongMarkdown extends Markdown {
           width: 100%;
         }
 
-        .markdown-html plastic-image {
+        .markdown-html img {
           margin: 32px 0 8px -16px;
-          --iron-image-width: calc(100% + 32px);
           width: calc(100% + 32px);
           min-height: 200px;
           background-color: var(--secondary-background-color);
         }
 
         @media (min-width: 640px) {
-          .markdown-html plastic-image {
+          .markdown-html img {
             min-height: 400px;
           }
         }

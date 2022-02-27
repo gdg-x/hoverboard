@@ -3,7 +3,7 @@ import { computed, customElement, observe, property } from '@polymer/decorators'
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import { RootState, store } from '../store';
 import { closeDialog, openSubscribeDialog } from '../store/dialogs/actions';
 import { ReduxMixin } from '../store/mixin';
@@ -43,8 +43,11 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
         }
 
         .logo-img {
-          height: 84px;
-          width: 100%;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 84px;
+          --lazy-image-fit: contain;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
         }
 
         .cta-button {
@@ -89,14 +92,11 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
                 horizontal
                 center-center
               >
-                <plastic-image
+                <lazy-image
                   class="logo-img"
-                  srcset="[[logo.logoUrl]]"
-                  sizing="contain"
-                  lazy-load
-                  preload
-                  fade
-                ></plastic-image>
+                  src="[[logo.logoUrl]]"
+                  alt="[[logo.name]]"
+                ></lazy-image>
               </a>
             </template>
           </div>

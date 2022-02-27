@@ -4,7 +4,7 @@ import '@polymer/iron-icon';
 import '@polymer/paper-icon-button';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import '../components/hero/simple-hero';
 import '../components/text-truncate';
 import '../elements/content-loader';
@@ -55,8 +55,12 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
         }
 
         .photo {
-          width: 128px;
-          height: 128px;
+          display: inline-block;
+          --lazy-image-width: 128px;
+          --lazy-image-height: 128px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--secondary-background-color);
           border-radius: 50%;
           overflow: hidden;
@@ -105,8 +109,11 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
         }
 
         .company-logo {
-          width: 100%;
-          height: 16px;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 16px;
+          --lazy-image-fit: contain;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
         }
 
         .description {
@@ -194,14 +201,11 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
         <template is="dom-repeat" items="[[speakersToRender]]" as="speaker">
           <a class="speaker card" href$="[[speakerUrl(speaker.id)]]">
             <div relative>
-              <plastic-image
+              <lazy-image
                 class="photo"
-                srcset="[[speaker.photoUrl]]"
-                sizing="cover"
-                lazy-load
-                preload
-                fade
-              ></plastic-image>
+                src="[[speaker.photoUrl]]"
+                alt="[[speaker.name]]"
+              ></lazy-image>
               <div class="badges" layout horizontal>
                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
                   <a
@@ -220,14 +224,11 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
               </div>
             </div>
 
-            <plastic-image
+            <lazy-image
               class="company-logo"
-              srcset="[[speaker.companyLogoUrl]]"
-              sizing="contain"
-              lazy-load
-              preload
-              fade
-            ></plastic-image>
+              src="[[speaker.companyLogoUrl]]"
+              alt="[[speaker.company]]"
+            ></lazy-image>
 
             <div class="description">
               <h2 class="name">[[speaker.name]]</h2>

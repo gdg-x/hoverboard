@@ -3,7 +3,7 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import '../components/markdown/short-markdown';
 import '../components/text-truncate';
 import { router } from '../router';
@@ -32,8 +32,12 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
         }
 
         .image {
-          width: 100%;
-          height: 128px;
+          overflow: hidden;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 128px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           border-top-left-radius: var(--border-radius);
           border-top-right-radius: var(--border-radius);
         }
@@ -90,15 +94,12 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
         <div class="posts-wrapper">
           <template is="dom-repeat" items="[[latestPosts]]" as="post">
             <a href$="[[postUrl(post.id)]]" class="post card" flex layout vertical>
-              <plastic-image
+              <lazy-image
                 class="image"
-                srcset="[[post.image]]"
+                src="[[post.image]]"
+                alt="[[post.title]]"
                 style$="background-color: [[post.backgroundColor]];"
-                sizing="cover"
-                lazy-load
-                preload
-                fade
-              ></plastic-image>
+              ></lazy-image>
               <div class="details" layout vertical justified flex-auto>
                 <div>
                   <text-truncate lines="2">

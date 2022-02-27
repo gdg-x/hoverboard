@@ -2,7 +2,7 @@ import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import '../components/markdown/short-markdown';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
@@ -37,8 +37,11 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
         }
 
         .organizers-photo {
-          width: 100%;
-          height: 100%;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 100%;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
         }
 
         .description {
@@ -53,14 +56,11 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
       <div class="container" layout horizontal>
         <div layout horizontal center-center flex hidden$="[[viewport.isPhone]]">
           <a href="/team" class="image-link">
-            <plastic-image
+            <lazy-image
               class="organizers-photo"
-              srcset="[[aboutOrganizerBlock.image]]"
-              sizing="cover"
-              lazy-load
-              preload
-              fade
-            ></plastic-image>
+              src="[[aboutOrganizerBlock.image]]"
+              alt="Organizer"
+            ></lazy-image>
           </a>
         </div>
 

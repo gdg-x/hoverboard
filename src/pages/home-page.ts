@@ -2,6 +2,7 @@ import { customElement, property, query } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
+import '@power-elements/lazy-image';
 import '../components/about-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
@@ -51,8 +52,12 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         }
 
         .hero-logo {
-          --iron-image-width: 100%;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 76px;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           max-width: 240px;
+          max-height: 76px;
         }
 
         .info-items {
@@ -159,11 +164,8 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         hide-logo
       >
         <div class="home-content" layout vertical center>
-          <plastic-image
-            class="hero-logo"
-            srcset="/images/logo.svg"
-            alt="[[siteTitle]]"
-          ></plastic-image>
+          <lazy-image class="hero-logo" src="/images/logo.svg" alt="[[siteTitle]]"></lazy-image>
+
           <div class="info-items">
             <div class="info-item">[[city]]. [[dates]]</div>
             <div class="info-item">[[heroSettings.description]]</div>

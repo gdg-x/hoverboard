@@ -2,7 +2,7 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import { RootState, store } from '../store';
 import { fetchGallery } from '../store/gallery/actions';
 import { initialGalleryState } from '../store/gallery/state';
@@ -32,6 +32,7 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
         }
 
         .grid-item {
+          --lazy-image-fit: cover;
           background-color: var(--secondary-background-color);
         }
 
@@ -139,14 +140,7 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
         </template>
 
         <template is="dom-repeat" items="[[gallery.data]]" as="photo">
-          <plastic-image
-            class="grid-item"
-            srcset="[[photo.url]]"
-            sizing="cover"
-            lazy-load
-            preload
-            fade
-          ></plastic-image>
+          <lazy-image class="grid-item" src="[[photo.url]]" alt="gallery photo"></lazy-image>
         </template>
 
         <template is="dom-if" if="[[success]]">

@@ -1,5 +1,6 @@
 import { customElement } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
+import '@power-elements/lazy-image';
 import '../components/hero/simple-hero';
 import '../elements/footer-block';
 import { heroSettings } from '../utils/data';
@@ -15,20 +16,21 @@ export class NotFoundPage extends PolymerElement {
         }
 
         .not-found-image {
-          height: 400px;
+          --lazy-image-width: calc(100% - 94px);
+          --lazy-image-height: 400px;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           margin: 48px;
-          width: calc(100% - 94px);
         }
       </style>
 
       <simple-hero page="notFound"></simple-hero>
 
-      <plastic-image
+      <lazy-image
         class="not-found-image"
-        srcset="../../images/not-found.svg"
-        sizing="contain"
+        src="../../images/not-found.svg"
         alt="[[heroSettings.title]]"
-      ></plastic-image>
+      ></lazy-image>
 
       <footer-block></footer-block>
     `;

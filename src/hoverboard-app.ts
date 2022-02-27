@@ -15,7 +15,7 @@ import {
   setRemoveNestedTemplates,
   setSuppressTemplateNotifications,
 } from '@polymer/polymer/lib/utils/settings';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import './components/snack-bar';
 import './elements/dialogs/feedback-dialog';
 import './elements/dialogs/signin-dialog';
@@ -110,7 +110,11 @@ export class HoverboardApp extends PolymerElement {
         }
 
         .toolbar-logo {
-          --iron-image-height: 32px;
+          --lazy-image-width: auto;
+          --lazy-image-height: 32px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
         }
 
         app-header-layout {
@@ -149,11 +153,11 @@ export class HoverboardApp extends PolymerElement {
       <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
         <app-drawer id="drawer" slot="drawer" opened="{{drawerOpened}}" swipe-open>
           <app-toolbar layout vertical start>
-            <plastic-image
+            <lazy-image
               class="toolbar-logo"
-              srcset="/images/logo-monochrome.svg"
+              src="/images/logo-monochrome.svg"
               alt="[[alt]]"
-            ></plastic-image>
+            ></lazy-image>
             <h2 class="dates">[[dates]]</h2>
             <h3 class="location">[[shortLocation]]</h3>
           </app-toolbar>

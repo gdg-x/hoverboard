@@ -1,6 +1,6 @@
 import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import { codeOfConduct, organizer } from '../utils/data';
 
 @customElement('footer-nav')
@@ -28,9 +28,12 @@ export class FooterNav extends PolymerElement {
         }
 
         .footer-logo {
+          --lazy-image-width: 120px;
+          --lazy-image-height: 24px;
+          --lazy-image-fit: contain;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           margin: 10px 30px 0 0;
-          height: 24px;
-          width: 120px;
           float: left;
         }
 
@@ -66,13 +69,11 @@ export class FooterNav extends PolymerElement {
 
       <div class="nav-inline" layout flex>
         <a href="[[organizer.url]]" target="_blank" rel="noopener noreferrer">
-          <plastic-image
+          <lazy-image
             class="footer-logo"
-            srcset="../../images/organizer-logo.svg"
-            sizing="contain"
+            src="../../images/organizer-logo.svg"
             alt="[[organizer.name]]"
-            lazy-load
-          ></plastic-image>
+          ></lazy-image>
         </a>
 
         <div class="copyright">
