@@ -4,6 +4,7 @@ import '@polymer/iron-icon';
 import '@polymer/paper-fab';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
+import '@power-elements/lazy-image';
 import { RouterLocation } from '@vaadin/router';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
@@ -127,8 +128,11 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
 
         .section-photo {
           margin-right: 16px;
-          width: 48px;
-          height: 48px;
+          --lazy-image-width: 48px;
+          --lazy-image-height: 48px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--secondary-background-color);
           border-radius: 50%;
           overflow: hidden;
@@ -274,14 +278,11 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
             <a class="section" href$="[[speakerUrl(speaker.id)]]">
               <div layout horizontal center>
-                <plastic-image
+                <lazy-image
                   class="section-photo"
-                  srcset="[[speaker.photoUrl]]"
-                  sizing="cover"
-                  lazy-load
-                  preload
-                  fade
-                ></plastic-image>
+                  src="[[speaker.photoUrl]]"
+                  alt="[[speaker.name]]"
+                ></lazy-image>
 
                 <div class="section-details" flex>
                   <div class="section-primary-text">[[speaker.name]]</div>

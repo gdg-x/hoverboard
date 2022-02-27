@@ -3,7 +3,7 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import '../components/text-truncate';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
@@ -37,8 +37,12 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
         }
 
         .photo {
-          width: 72px;
-          height: 72px;
+          display: inline-block;
+          --lazy-image-width: 72px;
+          --lazy-image-height: 72px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--accent-color);
           border-radius: 50%;
           overflow: hidden;
@@ -80,8 +84,11 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
 
         .company-logo {
           margin-top: 6px;
-          width: 100%;
-          height: 16px;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 16px;
+          --lazy-image-fit: contain;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
         }
 
         .description {
@@ -105,8 +112,8 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
 
         @media (min-width: 640px) {
           .photo {
-            width: 128px;
-            height: 128px;
+            --lazy-image-width: 128px;
+            --lazy-image-height: 128px;
           }
 
           .name {
@@ -162,14 +169,11 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
           <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
             <a class="speaker" href$="[[speakerUrl(speaker.id)]]">
               <div relative>
-                <plastic-image
+                <lazy-image
                   class="photo"
-                  srcset="[[speaker.photoUrl]]"
-                  sizing="cover"
-                  lazy-load
-                  preload
-                  fade
-                ></plastic-image>
+                  src="[[speaker.photoUrl]]"
+                  alt="[[speaker.name]]"
+                ></lazy-image>
                 <div class="badges" layout horizontal>
                   <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
                     <a
@@ -188,14 +192,11 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
                 </div>
               </div>
 
-              <plastic-image
+              <lazy-image
                 class="company-logo"
-                srcset="{{speaker.companyLogoUrl}}"
-                sizing="contain"
-                lazy-load
-                preload
-                fade
-              ></plastic-image>
+                src="[[speaker.companyLogoUrl]]"
+                alt="[[speaker.company]]"
+              ></lazy-image>
 
               <div class="description">
                 <text-truncate lines="1">

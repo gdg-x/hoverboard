@@ -3,7 +3,7 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -43,8 +43,11 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
         }
 
         .photo {
-          width: 64px;
-          height: 64px;
+          --lazy-image-width: 64px;
+          --lazy-image-height: 64px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--contrast-additional-background-color);
           border-radius: 50%;
           overflow: hidden;
@@ -62,8 +65,8 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
           }
 
           .photo {
-            width: 96px;
-            height: 96px;
+            --lazy-image-width: 96px;
+            --lazy-image-height: 96px;
           }
         }
       </style>
@@ -82,14 +85,11 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
 
           <template is="dom-repeat" items="[[speakers]]" as="speaker">
             <a class="speaker" href$="[[previousSpeakerUrl(speaker.id)]]">
-              <plastic-image
+              <lazy-image
                 class="photo"
-                srcset="[[speaker.photoUrl]]"
-                sizing="cover"
-                lazy-load
-                preload
-                fade
-              ></plastic-image>
+                src="[[speaker.photoUrl]]"
+                alt="[[speaker.name]]"
+              ></lazy-image>
             </a>
           </template>
         </div>

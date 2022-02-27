@@ -3,8 +3,8 @@ import { computed, customElement, observe, property } from '@polymer/decorators'
 import '@polymer/iron-icon';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
+import '@power-elements/lazy-image';
 import { RouterLocation } from '@vaadin/router';
-import 'plastic-image';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
 import '../elements/content-loader';
@@ -50,8 +50,12 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
 
         .photo {
           margin-right: 16px;
-          width: 96px;
-          height: 96px;
+          --lazy-image-width: 96px;
+          --lazy-image-height: 96px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
+          overflow: hidden;
           border-radius: 50%;
           background-color: var(--contrast-additional-background-color);
           transform: translateZ(0);
@@ -144,14 +148,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
 
       <simple-hero page="speakers">
         <div class="dialog-container header-content" layout horizontal center>
-          <plastic-image
-            class="photo"
-            srcset="[[speaker.photoUrl]]"
-            sizing="cover"
-            lazy-load
-            preload
-            fade
-          ></plastic-image>
+          <lazy-image class="photo" src="[[speaker.photoUrl]]" alt="[[speaker.name]]"></lazy-image>
           <div>
             <h2 class="name" flex>[[speaker.name]]</h2>
             <div class="subtitle">[[subtitle]]</div>

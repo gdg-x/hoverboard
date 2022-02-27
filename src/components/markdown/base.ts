@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { marked } from 'marked';
+import { hasUnsupportedTags, unsupportedHtmlTags } from '../../utils/markdown';
 import { ThemedElement } from '../themed-element';
 
 marked.setOptions({
@@ -18,8 +19,8 @@ export class Markdown extends ThemedElement {
   get document(): DocumentFragment {
     const template = document.createElement('template');
     template.innerHTML = marked.parse(this.content);
-    if (this.hasDiv(template.content)) {
-      console.warn('Invalid Markedown contains `div` tags.');
+    if (hasUnsupportedTags(template.content)) {
+      console.warn(`Invalid Markedown contains some of the following tags ${unsupportedHtmlTags}`);
       // TODO: Enable
       // Markdown wraps content in <p> which can not contain <div>s.
       // template.innerHTML = 'Invalid Markedown contains `div` tags.';

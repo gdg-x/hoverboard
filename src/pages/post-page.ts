@@ -2,7 +2,6 @@ import { Failure, Initialized, RemoteData, Success } from '@abraham/remotedata';
 import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
-import 'plastic-image';
 import '../components/hero/hero-block';
 import '../components/markdown/long-markdown';
 import '../elements/footer-block';

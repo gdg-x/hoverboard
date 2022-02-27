@@ -2,7 +2,7 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import '../components/hero/simple-hero';
 import '../components/text-truncate';
 import '../elements/content-loader';
@@ -46,8 +46,12 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
         }
 
         .image {
-          width: 100%;
-          height: 100%;
+          position: absolute;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 100%;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
         }
 
         .image-overlay {
@@ -128,16 +132,13 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
                 flex$="[[viewport.isTabletPlus]]"
                 relative
               >
-                <plastic-image
+                <lazy-image
                   class="image"
-                  srcset="[[post.image]]"
+                  src$="[[post.image]]"
+                  alt="[[post.title]]"
                   style$="background-color: [[post.backgroundColor]];"
-                  sizing="cover"
-                  lazy-load
-                  preload
-                  fade
-                  fit
-                ></plastic-image>
+                ></lazy-image>
+
                 <div class="image-overlay" fit></div>
                 <div class="details" layout vertical justified>
                   <div>

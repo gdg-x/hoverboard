@@ -4,7 +4,7 @@ import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import { Video } from '../models/video';
 import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
@@ -69,6 +69,12 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         }
 
         .thumbnail-image {
+          position: absolute;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 100%;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--secondary-background-color);
         }
 
@@ -155,16 +161,12 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
               <template is="dom-repeat" items="[[videos.data]]" as="block" index-as="index">
                 <div class="video-item" on-click="playVideo" video="[[block]]">
                   <div class="thumbnail" relative layout horizontal center-center>
-                    <plastic-image
+                    <lazy-image
                       id="image[[index]]"
                       class="thumbnail-image"
-                      srcset="[[block.thumbnail]]"
-                      sizing="cover"
-                      lazy-load
-                      preload
-                      fade
-                      fit
-                    ></plastic-image>
+                      src="[[block.thumbnail]]"
+                      alt="[[block.title]]"
+                    ></lazy-image>
                     <div class="image-overlay" fit></div>
                     <paper-icon-button
                       class="video-play-icon"

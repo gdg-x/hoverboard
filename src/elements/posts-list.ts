@@ -1,6 +1,6 @@
 import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import '../components/markdown/short-markdown';
 import '../components/text-truncate';
 import { Post } from '../models/post';
@@ -29,8 +29,11 @@ export class PostsList extends PolymerElement {
 
         .image {
           margin-right: 24px;
-          width: 64px;
-          height: 64px;
+          --lazy-image-width: 64px;
+          --lazy-image-height: 64px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           border-radius: var(--border-radius);
         }
 
@@ -55,24 +58,21 @@ export class PostsList extends PolymerElement {
 
         @media (min-width: 640px) {
           .image {
-            width: 128px;
-            height: 128px;
+            --lazy-image-width: 128px;
+            --lazy-image-height: 128px;
           }
         }
       </style>
 
       <template is="dom-repeat" items="[[posts]]" as="post">
         <a href$="[[postUrl(post.id)]]" class="post" layout horizontal>
-          <plastic-image
+          <lazy-image
             class="image"
-            srcset="[[post.image]]"
+            src="[[post.image]]"
+            alt="[[post.title]]"
             style$="background-color: [[post.backgroundColor]];"
-            sizing="cover"
             hidden$="[[!post.image]]"
-            lazy-load
-            preload
-            fade
-          ></plastic-image>
+          ></lazy-image>
           <div flex>
             <div class="details" layout vertical justified>
               <div>

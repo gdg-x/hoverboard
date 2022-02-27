@@ -2,7 +2,7 @@ import { Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
 import '../components/text-truncate';
 import { Session } from '../models/session';
 import { router } from '../router';
@@ -118,8 +118,11 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
 
         .speaker-photo {
           margin-right: 12px;
-          width: 32px;
-          height: 32px;
+          --lazy-image-width: 32px;
+          --lazy-image-height: 32px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--secondary-background-color);
           border-radius: 50%;
           overflow: hidden;
@@ -215,14 +218,11 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           <div class="speakers" hidden$="[[!session.speakers.length]]">
             <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
               <div class="speaker" layout horizontal center>
-                <plastic-image
+                <lazy-image
                   class="speaker-photo"
-                  srcset="[[speaker.photoUrl]]"
-                  sizing="cover"
-                  lazy-load
-                  preload
-                  fade
-                ></plastic-image>
+                  src="[[speaker.photoUrl]]"
+                  alt="[[speaker.name]]"
+                ></lazy-image>
 
                 <div class="speaker-details" flex>
                   <div class="speaker-name">[[speaker.name]]</div>
