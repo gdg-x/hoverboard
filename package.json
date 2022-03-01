@@ -117,7 +117,7 @@
     "stylelint-config-standard": "^24.0.0",
     "testing-library__dom": "^7.29.4-beta.1",
     "ts-jest": "^27.1.3",
-    "ts-node": "^10.5.0",
+    "ts-node": "^10.6.0",
     "typescript": "^4.5.5"
   },
   "contributors": [
