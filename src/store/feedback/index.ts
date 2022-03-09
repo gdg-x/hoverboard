@@ -103,7 +103,7 @@ const feedbackSlice = createSlice({
         state.set = new Success(action.payload);
       })
       .addCase(setFeedback.rejected, (state, action) => {
-        state.set = new Failure(action.error.message);
+        state.set = new Failure(new Error(action.error.message));
       })
       .addCase(deleteFeedback.pending, (state) => {
         state.delete = new Pending();
@@ -112,7 +112,7 @@ const feedbackSlice = createSlice({
         state.delete = new Success(action.payload);
       })
       .addCase(deleteFeedback.rejected, (state, action) => {
-        state.delete = new Failure(action.error.message);
+        state.delete = new Failure(new Error(action.error.message));
       });
   },
 });
