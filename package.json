@@ -70,7 +70,7 @@
     "@firebase/logger": "^0.3.2",
     "@firebase/rules-unit-testing": "^2.0.2",
     "@firebase/util": "^1.4.3",
-    "@jest/globals": "^27.5.0",
+    "@jest/globals": "^27.5.1",
     "@jest/types": "^27.5.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.1.3",
