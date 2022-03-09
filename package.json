@@ -99,7 +99,7 @@
     "eslint-plugin-testing-library": "^5.0.6",
     "firebase-admin": "^10.0.2",
     "firebase-tools": "^10.2.2",
-    "jest": "^27.5.0",
+    "jest": "^27.5.1",
     "jest-dev-server": "^6.0.3",
     "markdownlint": "^0.25.1",
     "markdownlint-cli": "^0.31.1",
