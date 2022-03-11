@@ -3,9 +3,9 @@
 import n from 'nunjucks';
 import fs from 'fs';
 
-type Data = typeof import('./public/data/resources.json') &
-  typeof import('./public/data/settings.json') &
-  typeof import('./config/production.json') & { NODE_ENV: string; webVitalsPolyfill: string };
+type Data = typeof import('../public/data/resources.json') &
+  typeof import('../public/data/settings.json') &
+  typeof import('../config/production.json') & { NODE_ENV: string; webVitalsPolyfill: string };
 
 const { BUILD_ENV, NODE_ENV } = process.env;
 export const production = NODE_ENV === 'production';

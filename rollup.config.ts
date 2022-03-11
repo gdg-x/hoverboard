@@ -9,7 +9,7 @@ import copy from 'rollup-plugin-copy';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
-import { compileBufferTemplate, production } from './build-utils';
+import { compileBufferTemplate, production } from './utils/build';
 import { workboxConfig } from './workbox.config';
 
 const { ROLLUP_WATCH } = process.env;
