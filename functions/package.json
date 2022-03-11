@@ -24,8 +24,6 @@
     "express": "^4.17.3",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.18.1",
-    "md5": "^2.3.0",
-    "mkdirp": "^1.0.4",
     "moment": "^2.29.1",
     "node-fetch": "^3.2.2"
   },

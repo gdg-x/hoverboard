@@ -1,9 +1,11 @@
+import crypto from 'crypto';
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 // eslint-disable-next-line import/no-unresolved
 import { getFirestore } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
-import md5 from 'md5';
 import fetch from 'node-fetch';
+
+const md5 = (data: string) => crypto.createHash('md5').update(data).digest('hex');
 
 const getMailchimpConfig = async () => {
   const doc = await getFirestore().collection('config').doc('mailchimp').get();

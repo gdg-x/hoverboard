@@ -5,7 +5,6 @@
     "plugin:jest/all",
     "plugin:testing-library/dom",
     "plugin:jest-dom/recommended",
-    "google",
     "plugin:import/errors",
     "plugin:import/typescript",
     "prettier"

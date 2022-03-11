@@ -2,9 +2,10 @@ import { Storage } from '@google-cloud/storage';
 import { spawn } from 'child-process-promise';
 import { storage } from 'firebase-functions';
 import fs from 'fs';
-import mkdirp from 'mkdirp';
 import os from 'os';
 import path from 'path';
+
+const mkdirp = (path: string) => fs.promises.mkdir(path, { recursive: true });
 
 const gcs = new Storage();
 

@@ -52,7 +52,7 @@ const setFeaturedSessions = async (
 };
 
 const cleanFeaturedSessions = (object: FeaturedSessions): FeaturedSessions => {
-  const hasValue = ([_key, value]: [string, unknown]) => Boolean(value);
+  const hasValue = ([, value]: [string, unknown]) => Boolean(value);
   return Object.fromEntries(Object.entries(object).filter(hasValue));
 };
 
