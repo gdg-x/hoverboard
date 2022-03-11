@@ -67,9 +67,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@firebase/logger": "^0.3.2",
     "@firebase/rules-unit-testing": "^2.0.2",
-    "@firebase/util": "^1.4.3",
     "@jest/globals": "^27.5.1",
     "@jest/types": "^27.5.1",
     "@rollup/plugin-json": "^4.1.0",
@@ -89,7 +87,6 @@
     "@web/rollup-plugin-html": "^1.10.1",
     "concurrently": "^7.0.0",
     "eslint": "^8.10.0",
-    "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-html": "^6.2.0",

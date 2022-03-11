@@ -20,7 +20,7 @@ const initialState: NotificationPermissionState = {
 
 export const requestNotificationPermission = createAsyncThunk<string | undefined, PROMPT_USER>(
   'notificationPermission/requestPermission',
-  async (promptUser = PROMPT_USER.NO, _thunkAPI) => {
+  async (promptUser = PROMPT_USER.NO) => {
     const permission =
       promptUser === PROMPT_USER.YES
         ? await Notification.requestPermission()
@@ -47,7 +47,7 @@ export const notificationPermissionSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(requestNotificationPermission.pending, (_state) => {
+      .addCase(requestNotificationPermission.pending, () => {
         return { kind: 'pending' };
       })
       .addCase(requestNotificationPermission.fulfilled, (_state, action) => {

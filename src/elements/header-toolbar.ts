@@ -293,7 +293,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @observe('signedIn')
-  private onSignedIn(_signedIn: boolean) {
+  private onSignedIn() {
     if (this.isDialogOpen) {
       closeDialog();
     }

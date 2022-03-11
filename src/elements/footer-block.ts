@@ -61,7 +61,7 @@ export class FooterBlock extends PolymerElement {
     `;
   }
 
-  backToTop(_e: MouseEvent) {
+  backToTop() {
     scrollToTop();
   }
 }
