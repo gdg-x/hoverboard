@@ -2,7 +2,7 @@
 
 ### Fechas y Ubicación
 
-IWD WTM LATAM 2020 es un evento en línea a reaizarse el Sábado 13 de Marzo de 2021. Este evento Regional es organizado por más de 20 comunidades de WomenTechmakers, GDG a lo largo y ancho de Latinoamérica con el apoyo del Programa GDG de Google y otros aliados.
+IWD WTM LATAM 2021 es un evento en línea a reaizarse el Sábado 13 de Marzo de 2021. Este evento Regional es organizado por más de 20 comunidades de WomenTechmakers, GDG a lo largo y ancho de Latinoamérica con el apoyo del Programa GDG de Google y otros aliados.
 
 ### Mantente Informado
 
