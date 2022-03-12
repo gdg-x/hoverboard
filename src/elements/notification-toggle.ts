@@ -1,4 +1,4 @@
-import { Success } from '@abraham/remotedata';
+import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/mwc-formfield';
 import '@material/mwc-switch';
 import { Switch } from '@material/mwc-switch';
@@ -140,7 +140,7 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
   private loading = loading;
 
   @property({ type: Object })
-  notificationPermission = initialNotificationPermissionState;
+  notificationPermission = initialNotificationPermissionState.value;
   @property({ type: Object })
   updateNotificationsSubscribers = initialUpdateNotificationsSubscribersState;
   @property({ type: Object })
@@ -169,7 +169,7 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
   }
 
   override stateChanged(state: RootState) {
-    this.notificationPermission = state.notificationPermission;
+    this.notificationPermission = state.notificationPermission.value;
     this.user = state.user;
     this.notificationsSubscribers = selectNotificationsSubscribers(state);
     this.notificationsUsersSubscribed = selectNotificationsUsersSubscribed(state);
@@ -179,15 +179,15 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
   @computed('notificationPermission')
   get initialized() {
     return (
-      this.notificationPermission.kind === 'initialized' ||
-      this.notificationPermission.kind === 'pending'
+      this.notificationPermission instanceof Initialized ||
+      this.notificationPermission instanceof Pending
     );
   }
 
   @computed('notificationPermission')
   get blocked() {
     return (
-      this.notificationPermission.kind === 'failure' &&
+      this.notificationPermission instanceof Failure &&
       this.notificationPermission.error.message === 'denied'
     );
   }
@@ -195,7 +195,7 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
   @computed('notificationPermission')
   get unsupported() {
     return (
-      this.notificationPermission.kind === 'failure' &&
+      this.notificationPermission instanceof Failure &&
       this.notificationPermission.error.message === 'unsupported'
     );
   }
@@ -203,7 +203,7 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
   @computed('notificationPermission')
   get failure() {
     return (
-      this.notificationPermission.kind === 'failure' &&
+      this.notificationPermission instanceof Failure &&
       this.notificationPermission.error.message !== 'denied' &&
       this.notificationPermission.error.message !== 'unsupported'
     );
@@ -211,18 +211,18 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
 
   @computed('notificationPermission')
   get success() {
-    return this.notificationPermission.kind === 'success';
+    return this.notificationPermission instanceof Success;
   }
 
   private requestPermission() {
-    if (this.notificationPermission.kind === 'initialized') {
+    if (this.notificationPermission instanceof Initialized) {
       store.dispatch(requestNotificationPermission(PROMPT_USER.YES));
     }
   }
 
   private toggleGeneralNotifications(event: MouseEvent) {
     const { selected, disabled } = event.target as Switch;
-    if (this.notificationPermission.kind !== 'success' || disabled) {
+    if (!(this.notificationPermission instanceof Success) || disabled) {
       return;
     }
 
@@ -235,7 +235,7 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
 
   private toggleMyScheduleNotifications(event: MouseEvent) {
     const { selected } = event.target as Switch;
-    if (this.notificationPermission.kind !== 'success' || !(this.user instanceof Success)) {
+    if (!(this.notificationPermission instanceof Success) || !(this.user instanceof Success)) {
       return;
     }
 
@@ -252,9 +252,9 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
 
   @computed('notificationPermission')
   get icon() {
-    if (this.notificationPermission.kind === 'success') {
+    if (this.notificationPermission instanceof Success) {
       return 'bell';
-    } else if (this.notificationPermission.kind === 'failure') {
+    } else if (this.notificationPermission instanceof Failure) {
       return 'bell-off';
     } else {
       return 'bell-outline';

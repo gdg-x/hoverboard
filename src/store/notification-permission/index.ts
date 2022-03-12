@@ -1,7 +1,7 @@
+import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getMessaging, getToken } from 'firebase/messaging';
 import { firebaseApp } from '../../firebase';
-import { SimpleRemoteData } from '../../utils/simple-remote-data';
 
 export enum PROMPT_USER {
   YES = 'YES',
@@ -13,9 +13,9 @@ const messaging = getMessaging(firebaseApp);
 // Eslint doesn't like when using the built in type
 export type NotificationPermission = typeof Notification.permission;
 
-export type NotificationPermissionState = SimpleRemoteData<string>;
+export type NotificationPermissionState = { value: RemoteData<Error, string> };
 const initialState: NotificationPermissionState = {
-  kind: 'initialized',
+  value: new Initialized(),
 } as NotificationPermissionState;
 
 export const requestNotificationPermission = createAsyncThunk<string | undefined, PROMPT_USER>(
@@ -41,24 +41,24 @@ export const notificationPermissionSlice = createSlice({
   name: 'notificationPermission',
   initialState,
   reducers: {
-    unsupported() {
-      return { kind: 'failure', error: new Error('unsupported') };
+    unsupported(state) {
+      state.value = new Failure(new Error('unsupported'));
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(requestNotificationPermission.pending, () => {
-        return { kind: 'pending' };
+      .addCase(requestNotificationPermission.pending, (state) => {
+        state.value = new Pending();
       })
-      .addCase(requestNotificationPermission.fulfilled, (_state, action) => {
+      .addCase(requestNotificationPermission.fulfilled, (state, action) => {
         if (action.payload === undefined) {
-          return { kind: 'initialized' };
+          state.value = new Initialized();
         } else {
-          return { kind: 'success', data: action.payload };
+          state.value = new Success(action.payload);
         }
       })
-      .addCase(requestNotificationPermission.rejected, (_state, action) => {
-        return { kind: 'failure', error: new Error(action.error.message) };
+      .addCase(requestNotificationPermission.rejected, (state, action) => {
+        state.value = new Failure(new Error(action.error.message));
       });
   },
 });
