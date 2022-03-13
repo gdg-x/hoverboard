@@ -875,7 +875,7 @@
   },
   "team": [
     {
-      "title": "Organizadoras",
+      "title": "Organizadores",
       "members": [
         {
           "name": "Andrea Cornejo",
@@ -1086,8 +1086,8 @@
           "order": 11
         },
         {
-          "name": "Maritza Pacheco Cuno",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/embajadoras%2FIMG-20200516-WA0038%20-%20Maritza%20Pacheco.jpg?alt=media&token=8274d110-f45f-4f58-a036-ccb5f4626c25",
+          "name": "Marian Villa",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fmarianvilla.jpg?alt=media&token=e3130842-6a8e-4e64-9710-d24a3b401033",
           "socials": [
             {
               "icon": "facebook",
@@ -1155,16 +1155,16 @@
           "order": 14
         },
         {
-          "name": "Noemi Leon",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/embajadoras/noemi_leon.jpeg?alt=media&token=acc850bb-0404-40bd-9648-89206d3ede07",
+          "name": "Noemí Leon",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/embajadoras%2Fnoemi_leon.jpeg?alt=media&token=c29c6ac3-7569-477c-a5ad-6d8afac8b697",
           "socials": [
             {
               "icon": "linkedin",
               "link": "https://www.linkedin.com/in/noemileonu/",
-              "name": "LinedIn"
+              "name": "LinkedIn"
             }
           ],
-          "title": "GDG Arequipa",
+          "title": "GDG Cancún",
           "order": 14
         },
         {
@@ -1209,6 +1209,20 @@
           "order": 16
         },
         {
+          "name": "Lourdes Cajica",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/embajadoras%2Flourdes_cajica.jpeg?alt=media&token=b9f3ac81-c0a6-46c1-8b01-e54a3da484bb",
+          "socials": [
+
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/lourdes-cajica/",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "DSC UDLAP Puebla",
+          "order": 17
+        },
+        {
           "name": "Oscar Salguero",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/embajadoras%2Foscars_bp_nyc%20-%20Oscar%20Salguero.png?alt=media&token=753d7b71-e933-40b4-add8-bbe383315e61",
           "socials": [
@@ -1216,10 +1230,15 @@
               "icon": "twitter",
               "link": "https://twitter.com/OscarSalguero",
               "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/oscarsalguero/",
+              "name": "LinkedIn"
             }
           ],
           "title": "GDG San Salvador",
-          "order": 17
+          "order": 18
         }
       ]
     },
@@ -1300,7 +1319,7 @@
               "name": "YouTube"
             }
           ],
-          "order": 3
+          "order": 2
         },
         {
           "name": "GDG Cloud La Paz",
@@ -1322,7 +1341,7 @@
               "name": "YouTube"
             }
           ],
-          "order": 4
+          "order": 3
         },
         {
           "name": "GDG Cloud Lima",
@@ -1344,7 +1363,7 @@
               "name": "Instagram"
             }
           ],
-          "order": 5
+          "order": 4
         },
         {
           "name": "GDG La Paz",
@@ -1361,7 +1380,7 @@
               "name": "Instagram"
             }
           ],
-          "order": 6
+          "order": 5
         },
         {
           "name": "GDG Managua",
@@ -1388,7 +1407,7 @@
               "name": "YouTube"
             }
           ],
-          "order": 7
+          "order": 6
         },
         {
           "name": "GDG Neuquén",
@@ -1425,7 +1444,7 @@
               "name": "LinkedIn"
             }
           ],
-          "order": 8
+          "order": 7
         },
         {
           "name": "GDG Pura Vida",
@@ -1447,7 +1466,7 @@
               "name": "Instagram"
             }
           ],
-          "order": 9
+          "order": 8
         },
         {
           "name": "GDG San Salvador",
@@ -1464,7 +1483,7 @@
               "name": "Instagram"
             }
           ],
-          "order": 10
+          "order": 9
         },
         {
           "name": "GDG Tarija",
@@ -1491,7 +1510,7 @@
               "name": "YouTube"
             }
           ],
-          "order": 11
+          "order": 10
         },
         {
           "name": "Mujeres TIC's Bolivia",
@@ -1528,7 +1547,7 @@
               "name": "LinkedIn"
             }
           ],
-          "order": 12
+          "order": 11
         },
         {
           "name": "GDG Sucre",
@@ -1545,7 +1564,40 @@
               "name": "Instagram"
             }
           ],
+          "order": 12
+        },
+        {
+          "name": "GDG Cancún",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/comunidades%2Fgdg.png?alt=media&token=8626efd1-7300-4bb7-a016-83618b0e150c",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/GDGCancun",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/GDGCancun",
+              "name": "Twitter"
+            },{
+              "icon": "instagram",
+              "link": "https://www.instagram.com/gdgcancun/",
+              "name": "Instagram"
+            }
+          ],
           "order": 13
+        },
+        {
+          "name": "DSC UDLAP Puebla",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/comunidades%2Fgdg.png?alt=media&token=8626efd1-7300-4bb7-a016-83618b0e150c",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/dscudlap/",
+              "name": "LinkedIn"
+            }
+          ],
+          "order": 14
         }
       ]
     }
