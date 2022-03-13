@@ -10,7 +10,7 @@ module.exports = {
   appIndex: 'index.html',
   fileExtensions: ['.ts'],
   nodeResolve: true,
-  port: 5000,
+  port: 9000,
   watch: true,
   responseTransformers: [
     ({ url, status: _, contentType, body }) => {

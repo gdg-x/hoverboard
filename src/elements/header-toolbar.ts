@@ -18,22 +18,10 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           display: block;
           z-index: 1;
           border-bottom: 1px solid var(--divider-color);
-          background-color: var(--primary-background-color);
+          background-color: #32E0AF;
           transition: background-color var(--animation), border-bottom-color var(--animation),
             color var(--animation);
           color: var(--primary-text-color);
-        }
-
-        :host([transparent]) {
-          --iron-icon-fill-color: var(--hero-font-color, '#fff');
-          background-color: transparent;
-          border-bottom-color: transparent;
-          color: var(--hero-font-color, '#fff');
-        }
-
-        :host([transparent]) .toolbar-logo {
-          background-color: var(--hero-logo-color);
-          opacity: var(--hero-logo-opacity, 1);
         }
 
         app-toolbar {
@@ -47,7 +35,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           display: block;
           width: 180px;
           height: 32px;
-          background-color: var(--default-primary-color);
+          background-color: #000000;
           transition: background-color var(--animation);
           -webkit-mask: url('/images/logo-monochrome.svg') no-repeat;
         }

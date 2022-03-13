@@ -1,9 +1,9 @@
 {
-  "title": "IWD WTM LATAM 2021",
-  "description": "Promoviendo el desarrollo personal y profesional de mujeres en Latinoamérica",
-  "image": "images/social-share.jpg",
+  "title": "IWD WTM LATAM 2022",
+  "description": "El International Women's Day Latam 2022 se realizará el 02 de Abril. Tiene como objetivo reunir mujeres y aliados del mundo de la tecnología, promoviendo el desarrollo de mujeres por medio de charlas inspiradoras y técnicas. El evento será organizado por las embajadoras y miembros de Women Techmakers, GDGs y otras comunidades de América Latina. Festejando el lema #ProgressNotPerfection.",
+  "image": "images/social-share-2022.jpg",
   "keywords": "event, wtm, iwd, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "13 de Marzo de 2021",
+  "dates": "2 de Abril de 2022",
   "partnershipProposition": "",
   "share": "Compartir",
   "followOur": "Sigue nuestro",
@@ -43,7 +43,7 @@
         },
         {
           "name": "IWD",
-          "url": "https://www.womentechmakers.com/events/iwd/",
+          "url": "https://www.womentechmakers.com/events/iwd",
           "newTab": true
         },
         {
@@ -60,6 +60,11 @@
           "name": "Conoce al Equipo",
           "url": "/team/",
           "newTab": true
+        },
+        {
+          "name": "IWD WTM LATAM 2021",
+          "url": "https://iwd-wtm-latam-2021.web.app",
+          "newTab": true
         }
       ]
     }
@@ -67,7 +72,7 @@
   "subscribeNote": "No te enviamos correo no deseado, solo noticias sobre el evento.",
   "codeOfConduct": "Código de Conducta",
   "codeOfConductBlock": {
-    "organization": "IWD WTM LATAM 2021",
+    "organization": "IWD WTM LATAM 2022",
     "form": "",
     "contacts": [
       "Email: info@wtmlatam.com"
@@ -77,7 +82,7 @@
     "title": "Sobre el IWD",
     "callToAction": {
       "featuredSessions": {
-        "description": "El International Women's Day Latam 2021 se realizará el 13 de marzo. Tiene como objetivo reunir mujeres y aliados del mundo de la técnología, promoviendo el desarrollo de mujeres por medio de charlas inspiradoras y técnicas. El evento será organizado por las embajadoras y miembros de Women Techmakers, GDGs y otras comunidades de América Latina.",
+        "description": "El International Women's Day Latam 2022 se realizará el 02 de Abril. Tiene como objetivo reunir mujeres y aliados del mundo de la tecnología, promoviendo el desarrollo de mujeres por medio de charlas inspiradoras y técnicas. El evento será organizado por las embajadoras y miembros de Women Techmakers, GDGs y otras comunidades de América Latina. Festejando el lema #ProgressNotPerfection.",
         "label": "Más sobre IWD",
         "link": "https://www.womentechmakers.com/events/iwd"
       }
@@ -93,7 +98,7 @@
       },
       "sessions": {
         "label": "Charlas",
-        "number": "16"
+        "number": "10+"
       },
       "tracks": {
         "label": "Escenarios (Tracks)",
@@ -163,11 +168,11 @@
     }
   },
   "galleryBlock": {
-    "title": "Contenido destacado de nuestro #IWD2020",
-    "description": "En 2020 el IWD fue organizado y llevado a cabo por varias comunidades de LATAM. Un día lleno de charlas, mucho aprendizaje, inspiración y empoderamiento.",
+    "title": "Contenido destacado de nuestro #IWD2021",
+    "description": "En 2021 el IWD fue organizado y llevado a cabo por varias comunidades de LATAM. Un día lleno de charlas, mucho aprendizaje, inspiración y empoderamiento.",
     "callToAction": {
-      "label": "Ver todas las fotos",
-      "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
+      "label": "Mira el sitio de nuestro evento de 2021",
+      "link": "https://iwd-wtm-latam-2021.web.app"
     }
   },
   "mapBlock": {
@@ -191,7 +196,7 @@
     "toast": "¡Te has inscrito con éxito!"
   },
   "team": {
-    "description": "<div class='mb-1'>Este año, las embajadoras y miembros de Women Techmakers (WTM) de muchos países de Latinoamérica nos hemos unido porque queremos sumar esfuerzos para crear un solo evento a nivel de latinoamérica y así ofrecer contenido de calidad a todas nuestras participantes.</div><div><span class='mr-1'>🇦🇷</span>Argentina</div><div><span class='mr-1'>🇧🇴</span>Bolivia</div><div><span class='mr-1'>🇨🇴</span>Colombia</div><div><span class='mr-1'>🇨🇷</span>Costa Rica</div><div><span class='mr-1'>🇸🇻</span>El Salvador</div><div><span class='mr-1'>🇲🇽</span>México</div><div><span class='mr-1'>🇳🇮</span>Nicaragua</div><div><span class='mr-1'>🇵🇪</span>Perú</div><div><span class='mr-1'>🇩🇴</span>República Dominicana</div>"
+    "description": "<div class='mb-1'>Este año, las embajadoras y miembros de Women Techmakers (WTM) y Google Developer Groups (GDG) de muchos países de Latinoamérica nos hemos unido porque queremos sumar esfuerzos para crear un solo evento a nivel de latinoamérica y así ofrecer contenido de calidad a todas nuestras participantes.</div><div><span class='mr-1'>🇦🇷</span>Argentina</div><div><span class='mr-1'>🇧🇴</span>Bolivia</div><div><span class='mr-1'>🇨🇴</span>Colombia</div><div><span class='mr-1'>🇨🇷</span>Costa Rica</div><div><span class='mr-1'>🇸🇻</span>El Salvador</div><div><span class='mr-1'>🇲🇽</span>México</div><div><span class='mr-1'>🇳🇮</span>Nicaragua</div><div><span class='mr-1'>🇵🇪</span>Perú</div>"
   },
   "schedule": {
     "saveSessionsSignedOut": "Inicia sesión para guardar tus charlas"

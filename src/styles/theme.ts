@@ -108,7 +108,7 @@ export const theme = css`
   }
 
   paper-button:hover {
-    background-color: var(--primary-color-transparent);
+    background-color: #7F8DF1;
   }
 
   paper-button[disabled] {
@@ -118,12 +118,12 @@ export const theme = css`
   }
 
   paper-button[primary] {
-    background-color: var(--default-primary-color);
+    background-color: #7F8DF1;
     color: var(--text-primary-color);
   }
 
   paper-button[primary]:hover {
-    background-color: var(--primary-color-light);
+    background-color: var(--default-primary-color);
   }
 
   paper-button[primary][invert] {

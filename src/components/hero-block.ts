@@ -34,9 +34,6 @@ export class HeroBlock extends ThemedElement {
         }
 
         .hero-overlay {
-          background-color: rgba(0, 0, 0, 0.2);
-          opacity: 0;
-          transition: opacity 0.3s;
           position: absolute;
         }
 

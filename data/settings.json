@@ -1,21 +1,21 @@
 {
   "organizer": {
-    "name": "IWD WTM LATAM 2021",
-    "twitter": "",
+    "name": "IWD WTM LATAM 2022",
+    "twitter": "https://twitter.com/LatamLeads",
     "blog": "",
-    "url": "https://gdg.community.dev/events/details/google-gdg-buenos-aires-presents-iwd-latam-2021-international-womens-day/"
+    "url": "https://gdg.community.dev/events/details/google-gdg-cloud-lima-presents-international-womens-day/"
   },
   "startDate": "2021-03-133T08:00:00+05:00",
   "endDate": "2021-03-13T19:20:00+05:00",
   "webapp": {
-    "shortName": "IWD LATAM 2020",
-    "themeColor": "#673AB7",
-    "backgroundColor": "#673AB7"
+    "shortName": "IWD LATAM 2022",
+    "themeColor": "#FFF2EC",
+    "backgroundColor": "#FFF2EC"
   },
   "dateFormat": {
     "locale": "es-US"
   },
-  "hashtag": "CourageToCreate",
+  "hashtag": "ProgressNotPerfection",
   "disabledSchedule": false,
   "navigation": [
     {
@@ -25,34 +25,10 @@
       "target": ""
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers",
-      "target": ""
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Agenda",
-      "target": ""
-    },
-    {
       "route": "team",
       "permalink": "/team/",
       "label": "Equipo",
       "target": ""
-    },
-    {
-      "route": "team",
-      "permalink": "https://youtu.be/6wiCxQgVnn4",
-      "label": "Stage Azul",
-      "target": "_blank"
-    },
-    {
-      "route": "team",
-      "permalink": "https://youtu.be/Aw8zNLy20QI",
-      "label": "Stage Verde",
-      "target": "_blank"
     },
     {
       "route": "team",
@@ -66,43 +42,10 @@
     "home": {
       "description": "¡Regístrate ya y no te pierdas este súper evento!",
       "background": {
-        "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
+        "color": "#5286E6",
+        "image": "/images/backgrounds/home2022.jpg"
       },
       "fontColor": "#FFF"
-    },
-    "blog": {
-      "title": "Noticias",
-      "metaDescription": "Lee noticias publicadas por nuestro equipo",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "speakers": {
-      "title": "Speakers",
-      "metaDescription": "Mira charlas técnicas e inspiracionales impartidas por Speakers con amplia experiencia en temas de desarrollo de software, soft skills, la nube, realidad virtual, machine learning, inteligencia artificial, voice, web, etc.",
-      "description": "Mira charlas técnicas e inspiracionales impartidas por Speakers con amplia experiencia en temas de desarrollo de software, soft skills, la nube, realidad virtual, machine learning, inteligencia artificial, voice, web, etc.",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "previousSpeakers": {
-      "title": "Speakers Anteriores",
-      "metaDescription": "Mira quienes han sido Speakers en eventos anteriores.",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "schedule": {
-      "title": "Agenda",
-      "metaDescription": "Escoge tus sesiones",
-      "background": {
-        "color": "#fff"
-      },
-      "fontColor": "#424242"
     },
     "team": {
       "title": "Equipo",
@@ -110,7 +53,7 @@
       "background": {
         "color": "#fff"
       },
-      "fontColor": "#424242"
+      "fontColor": "#000000"
     },
     "faq": {
       "title": "Preguntas Frecuentes",
@@ -118,7 +61,7 @@
       "background": {
         "color": "#fff"
       },
-      "fontColor": "#424242"
+      "fontColor": "#000000"
     },
     "coc": {
       "title": "Código de Conducta",
@@ -126,7 +69,7 @@
       "background": {
         "color": "#fff"
       },
-      "fontColor": "#424242"
+      "fontColor": "#000000"
     }
   },
   "location": {
@@ -165,15 +108,11 @@
   "socialNetwork": {
     "follow": [
       {
-        "name": "facebook",
-        "url": "https://fb.me/e/3IABNgcA3"
+        "name": "twitter",
+        "url": "https://twitter.com/LatamLeads"
       }
     ],
     "share": [
-      {
-        "name": "facebook",
-        "url": "https://www.facebook.com/sharer.php?u="
-      },
       {
         "name": "twitter",
         "url": "https://twitter.com/intent/tweet?text="

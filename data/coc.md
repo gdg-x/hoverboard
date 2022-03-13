@@ -30,6 +30,6 @@ En concreto, los patrocinadores no deben usar imágenes, actividades u otro mate
 
 Esperamos que los participantes sigan estas reglas durante la conferencia.
 
-Equipo IWD LATAM 2021
+Equipo IWD LATAM 2022
 
-#IWD2021 #WomenTechmakers #CourageToCreate #LATAM
+#IWD #IWD22 #IWD2022 #WomenTechmakers #WTM #ProgressNotPerfection

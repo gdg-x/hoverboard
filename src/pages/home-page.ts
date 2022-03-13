@@ -3,13 +3,9 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../components/about-block';
 import '../elements/about-organizer-block';
-import '../elements/featured-videos';
 import '../elements/fork-me-block';
 import '../elements/gallery-block';
-import '../elements/latest-posts-block';
 import '../elements/map-block';
-import '../elements/partners-block';
-import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
 import { ReduxMixin } from '../mixins/redux-mixin';
@@ -42,6 +38,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         .info-items {
           margin: 24px auto;
           font-size: 22px;
+          color: #000000;
         }
 
         .info-items > *:not(:first-of-type) {
@@ -75,15 +72,15 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
         .scroll-down svg {
           width: 24px;
-          opacity: 0.6;
+          opacity: 1;
         }
 
         .scroll-down .stroke {
-          stroke: currentColor;
+          stroke: #000000;
         }
 
         .scroll-down .scroller {
-          fill: currentColor;
+          fill: #000000;
           animation: updown 2s infinite;
         }
 
@@ -148,7 +145,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         <div class="home-content" layout vertical center>
           <plastic-image
             class="hero-logo"
-            srcset="/images/LogoHero.png"
+            srcset="/images/LogoHero2022.png"
             alt="{$ title $}"
           ></plastic-image>
           <div class="info-items">
@@ -163,7 +160,6 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           >
           <paper-button
               primary
-              invert
             >
               <iron-icon icon="hoverboard:ticket"></iron-icon>
               {$ buyTicket $}
@@ -185,7 +181,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
               <path
                 class="stroke"
                 fill="none"
-                stroke="#c7c4b8"
+                stroke="#000000"
                 stroke-width="2.5"
                 stroke-miterlimit="10"
                 d="M12.5833445
@@ -213,7 +209,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
               ></path>
               <path
                 class="scroller"
-                fill="#c7c4b8"
+                fill="#000000"
                 d="M13.0833359
                 19.2157116h-0.9192753c-1.0999985
                 0-1.9999971-0.8999996-1.9999971-1.9999981v-5.428606c0-1.0999994
@@ -239,12 +235,8 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       <fork-me-block></fork-me-block>
       {% endif %}
       <about-block></about-block>
-      <featured-videos></featured-videos>
-      <speakers-block></speakers-block>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
-      <latest-posts-block></latest-posts-block>
-      <partners-block></partners-block>
       <footer-block></footer-block>
     `;
   }

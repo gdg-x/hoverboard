@@ -92,6 +92,7 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
 
         app-drawer app-toolbar {
           padding: 36px 24px 24px;
+          background: var(--default-primary-color);
           border-bottom: 1px solid var(--divider-color);
         }
 
@@ -99,12 +100,13 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
           margin-top: 42px;
           font-size: 22px;
           line-height: 0.95;
+          color: #FFFFFF;
         }
 
         app-drawer .location {
           margin-top: 4px;
           font-size: 15px;
-          color: var(--secondary-text-color);
+          color: #FFFFFF;
         }
 
         .drawer-list {
