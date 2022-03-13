@@ -1322,23 +1322,18 @@
           "order": 2
         },
         {
-          "name": "GDG Cloud La Paz",
+          "name": "GDG La Paz",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/comunidades%2Fgdg.png?alt=media&token=8626efd1-7300-4bb7-a016-83618b0e150c",
           "socials": [
             {
               "icon": "facebook",
-              "link": "https://www.facebook.com/lapazcloud",
+              "link": "https://www.facebook.com/GDGLaPaz",
               "name": "Facebook"
             },
             {
               "icon": "twitter",
-              "link": "https://twitter.com/GDGCloudLaPaz",
+              "link": "https://twitter.com/gdglapaz",
               "name": "Twitter"
-            },
-            {
-              "icon": "youtube",
-              "link": "https://www.youtube.com/channel/UCORjGZw51jQeRO2hD42DfmA",
-              "name": "YouTube"
             }
           ],
           "order": 3
