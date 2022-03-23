@@ -1,5 +1,5 @@
 import { Storage } from '@google-cloud/storage';
-import { spawn } from 'child-process-promise';
+import { spawnSync } from 'child_process';
 import { storage } from 'firebase-functions';
 import fs from 'fs';
 import os from 'os';
@@ -41,7 +41,7 @@ async function optimizeImage(object) {
   console.log('The file has been downloaded to', tempLocalFile);
 
   // Generate a thumbnail using ImageMagick.
-  await spawn('convert', [
+  spawnSync('convert', [
     tempLocalFile,
     '-strip',
     '-interlace',
