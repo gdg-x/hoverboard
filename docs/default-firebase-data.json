@@ -67,6 +67,13 @@
         "logoUrl": "../images/logos/septeo.png",
         "name": "Septeo",
         "url": "https://www.septeo.fr/"
+      },
+        {
+        "order": 2,
+        "height": 150,
+        "logoUrl": "../images/logos/ovhcloud.svg",
+        "name": "OVH Cloud",
+        "url": "https://www.ovhcloud.com/fr/"
       }
       ],
       "order": 0,
@@ -177,10 +184,37 @@
           "logoUrl": "../images/logos/rh.png",
           "name": "Recherche & Horizon",
           "url": "https://www.reth.fr/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/clever-cloud.png",
+          "name": "Clever Cloud",
+          "url": "https://www.clever-cloud.com/"
         }
       ],
       "order": 2,
       "title": "Silver"
+    },
+    {
+      "items": [
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/laposte.png",
+          "name": "Laposte",
+          "url": "https://www.lapostegroupe.com/fr"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/lunatech.png",
+          "name": "Lunatech",
+          "url": "https://www.lunatech.fr/fr/"
+        }
+      ],
+      "order": 3,
+      "title": "Soirées"
     },
     {
       "items": [
@@ -512,7 +546,7 @@
       "url": "https://www.billetweb.fr/sunny-tech-2022"
     },
     {
-      "available": false,
+      "available": true,
       "currency": "€",
       "ends": "",
       "inDemand": true,
@@ -521,18 +555,18 @@
       "price": 90,
       "primary": true,
       "regular": true,
-      "soldOut": false,
-      "starts": "dernières places disponible le 7 mars",
+      "soldOut": true,
+      "starts": "Il n'y a plus de places pour l'édition 2022",
       "url": "https://www.billetweb.fr/sunny-tech-2022"
     },
     {
-      "available": false,
+      "available": true,
       "currency": "€",
       "ends": "",
       "info": "Requiert une carte étudiante",
       "name": "Étudiant",
       "price": 40,
-      "soldOut": false,
+      "soldOut": true,
       "starts": "31 janvier",
       "url": "https://www.billetweb.fr/sunny-tech-2022"
     }
