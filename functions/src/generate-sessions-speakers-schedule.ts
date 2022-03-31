@@ -76,7 +76,7 @@ async function generateAndSaveData(changedSpeaker?) {
   } = {};
   if (!Object.keys(sessions).length) {
     generatedData.speakers = { ...speakers };
-  } else if ((await isScheduleEnabled()) || !Object.keys(schedule).length) {
+  } else if (!(await isScheduleEnabled()) || !Object.keys(schedule).length) {
     generatedData = sessionsSpeakersMap(sessions, speakers);
   } else {
     generatedData = sessionsSpeakersScheduleMap(sessions, speakers, schedule);
