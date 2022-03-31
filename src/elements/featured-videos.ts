@@ -14,7 +14,6 @@ import { initialVideosState } from '../store/videos/state';
 import { TempAny } from '../temp-any';
 import { featuredVideos, loading } from '../utils/data';
 import '../utils/icons';
-import './shared-animations';
 import './shared-styles';
 
 @customElement('featured-videos')
