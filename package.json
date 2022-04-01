@@ -108,7 +108,7 @@
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-workbox": "^6.2.0",
-    "stylelint": "^14.5.3",
+    "stylelint": "^14.6.1",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",
     "testing-library__dom": "^7.29.4-beta.1",
