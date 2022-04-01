@@ -4,6 +4,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
 import { sessionsSpeakersMap } from './schedule-generator/speakers-sessions-map.js';
 import { sessionsSpeakersScheduleMap } from './schedule-generator/speakers-sessions-schedule-map.js';
+import { isEmpty, ScheduleMap, SessionMap, snapshotToObject, SpeakerMap } from './utils.js';
 
 const isScheduleEnabled = async (): Promise<boolean> => {
   const doc = await getFirestore().collection('config').doc('schedule').get();
@@ -12,7 +13,7 @@ const isScheduleEnabled = async (): Promise<boolean> => {
     return doc.data().enabled === 'true' || doc.data().enabled === true;
   } else {
     console.error(
-      'Schedule config is not set. Set `config/schedule.enabled=true` Firestore value.'
+      'Schedule config is not set. Set the `config/schedule.enabled=true` Firestore value.'
     );
     return false;
   }
@@ -20,9 +21,7 @@ const isScheduleEnabled = async (): Promise<boolean> => {
 
 export const sessionsWrite = functions.firestore
   .document('sessions/{sessionId}')
-  .onWrite(async () => {
-    return generateAndSaveData();
-  });
+  .onWrite(() => generateAndSaveData());
 
 export const scheduleWrite = functions.firestore
   .document('schedule/{scheduleId}')
@@ -42,32 +41,20 @@ export const speakersWrite = functions.firestore
     return generateAndSaveData(changedSpeaker);
   });
 
-async function generateAndSaveData(changedSpeaker?) {
+const fetchData = () => {
   const sessionsPromise = getFirestore().collection('sessions').get();
   const schedulePromise = getFirestore().collection('schedule').orderBy('date', 'desc').get();
   const speakersPromise = getFirestore().collection('speakers').get();
 
-  const [sessionsSnapshot, scheduleSnapshot, speakersSnapshot] = await Promise.all([
-    sessionsPromise,
-    schedulePromise,
-    speakersPromise,
-  ]);
+  return Promise.all([sessionsPromise, schedulePromise, speakersPromise]);
+};
 
-  const sessions = {};
-  const schedule = {};
-  const speakers = {};
+async function generateAndSaveData(changedSpeaker?) {
+  const [sessionsSnapshot, scheduleSnapshot, speakersSnapshot] = await fetchData();
 
-  sessionsSnapshot.forEach((doc) => {
-    sessions[doc.id] = doc.data();
-  });
-
-  scheduleSnapshot.forEach((doc) => {
-    schedule[doc.id] = doc.data();
-  });
-
-  speakersSnapshot.forEach((doc) => {
-    speakers[doc.id] = doc.data();
-  });
+  const sessions = snapshotToObject(sessionsSnapshot);
+  const schedule = snapshotToObject(scheduleSnapshot);
+  const speakers = snapshotToObject(speakersSnapshot);
 
   let generatedData: {
     sessions?: {};
@@ -92,8 +79,11 @@ async function generateAndSaveData(changedSpeaker?) {
   saveGeneratedData(generatedData.schedule, 'generatedSchedule');
 }
 
-function saveGeneratedData(data, collectionName) {
-  if (!data || !Object.keys(data).length) return;
+function saveGeneratedData(data: SessionMap | SpeakerMap | ScheduleMap, collectionName: string) {
+  if (isEmpty(data)) {
+    console.error(`Attempting to write empty data to Firestore collection: "${collectionName}".`);
+    return;
+  }
 
   for (let index = 0; index < Object.keys(data).length; index++) {
     const key = Object.keys(data)[index];
