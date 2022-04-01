@@ -7,8 +7,7 @@ import '@power-elements/lazy-image';
 import { RootState, store } from '../store';
 import { closeDialog, openSubscribeDialog } from '../store/dialogs/actions';
 import { ReduxMixin } from '../store/mixin';
-import { fetchPartners } from '../store/partners/actions';
-import { initialPartnersState } from '../store/partners/state';
+import { PartnerGroupsState, selectPartnerGroups } from '../store/partners';
 import { addPotentialPartner } from '../store/potential-partners/actions';
 import {
   initialPotentialPartnersState,
@@ -116,7 +115,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   potentialPartners = initialPotentialPartnersState;
   @property({ type: Object })
-  partners = initialPartnersState;
+  partners: PartnerGroupsState = new Initialized();
 
   @computed('partners')
   get pending() {
@@ -129,15 +128,8 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   }
 
   override stateChanged(state: RootState) {
-    this.partners = state.partners;
+    this.partners = selectPartnerGroups(state);
     this.potentialPartners = state.potentialPartners;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.partners instanceof Initialized) {
-      store.dispatch(fetchPartners);
-    }
   }
 
   private addPotentialPartner() {

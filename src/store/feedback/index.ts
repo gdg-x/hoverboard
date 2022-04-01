@@ -126,7 +126,7 @@ export const selectFeedbackSubscription = (state: RootState) => state.feedback.s
 export const selectFeedback = (state: RootState) => state.feedback.data;
 export const selectFeedbackDelete = (state: RootState) => state.feedback.delete;
 
-export const selectSubscription = createSelector(
+const selectSubscription = createSelector(
   selectUser,
   selectFeedbackSubscription,
   (user: UserState, subscription: FeedbackState['subscription']): FeedbackState['subscription'] => {

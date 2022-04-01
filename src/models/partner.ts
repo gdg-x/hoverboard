@@ -1,4 +1,4 @@
-import { Id } from './types';
+import { Id, ParentId } from './types';
 
 export interface PartnerData {
   logoUrl: string;
@@ -7,4 +7,4 @@ export interface PartnerData {
   url: string;
 }
 
-export type Partner = Id & PartnerData;
+export type Partner = Id & ParentId & PartnerData;
