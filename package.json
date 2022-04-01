@@ -84,7 +84,7 @@
     "@types/polymer": "^1.2.12",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "@typescript-eslint/parser": "^5.17.0",
-    "@web/rollup-plugin-html": "^1.10.1",
+    "@web/rollup-plugin-html": "^1.10.2",
     "concurrently": "^7.0.0",
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
