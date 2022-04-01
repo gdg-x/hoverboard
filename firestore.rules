@@ -61,6 +61,7 @@ service cloud.firestore {
       // Disallow writes
       allow write: if false;
 
+      // TODO: Remove
       match /items/{itemId} {
         // Applies to single document read requests
         allow get;
@@ -71,6 +72,11 @@ service cloud.firestore {
         // Disallow writes
         allow write: if false;
       }
+    }
+
+    match /{path=**}/items/{itemId} {
+      allow read;
+      allow write: if false;
     }
 
     match /potentialPartners/{partnerId} {
