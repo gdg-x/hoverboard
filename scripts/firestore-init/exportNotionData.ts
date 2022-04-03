@@ -2,7 +2,7 @@ const fs = require('fs').promises
 const { Client } = require("@notionhq/client")
 
 const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
+  auth: process.env.notionToken,
 })
 
 const outputFile = `${__dirname}/../../data/sessions-speakers-schedule.json`
@@ -150,15 +150,15 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string) => {
 }
 
 const main = async () => {
-  if(!process.env.NOTION_SPEAKERS_ID || !process.env.NOTION_TALKS_ID) {
-    console.log("Please set NOTION_SPEAKERS_ID and NOTION_TALKS_ID env variables")
+  if(!process.env.notionSpeakersId || !process.env.notionTalksId || !process.env.notionToken) {
+    console.log("Please set notionToken, notionSpeakersId and notionTalksId env variables")
     process.exit(1)
     return
   }
 
-  console.log(process.env.NOTION_SPEAKERS_ID)
+  console.log(process.env.notionSpeakersId)
 
-  await syncFromNotion(process.env.NOTION_SPEAKERS_ID, process.env.NOTION_TALKS_ID)
+  await syncFromNotion(process.env.notionSpeakersId, process.env.notionTalksId)
 }
 
 main()
