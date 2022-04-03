@@ -123,7 +123,7 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string) => {
     acc[talk.cid || talk.id] = {
       title: talk.title,
       complexity: talk.level,
-      description: talk.description + talk.description2,
+      description: talk.description + (talk.description2 ? talk.description2 : ""),
       language: "French",
       tags: talk.categories ? [talk.categories] : [],
       speakers: talk.speakers.map((speakerId: string) => nSpeakersById[speakerId].cid),
@@ -155,8 +155,6 @@ const main = async () => {
     process.exit(1)
     return
   }
-
-  console.log(process.env.notionSpeakersId)
 
   await syncFromNotion(process.env.notionSpeakersId, process.env.notionTalksId)
 }

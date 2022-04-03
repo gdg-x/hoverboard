@@ -70,7 +70,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
                 </template>
               </div>
 
-              <div class="float-button">
+              <div class="float-button multiple">
                 <paper-fab
                   icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
                   hidden$="[[!viewport.isLaptopPlus]]"
@@ -91,7 +91,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
         </app-header>
 
         <div class="dialog-container content">
-          <div class="float-button">
+          <div class="float-button multiple">
             <paper-fab
               icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
               hidden$="[[viewport.isLaptopPlus]]"
