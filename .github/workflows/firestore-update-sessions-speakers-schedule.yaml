@@ -1,0 +1,14 @@
+name: Update Firestore Session Speakers Schedule
+on: workflow_dispatch
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Create temp serviceAccount.json
+        run: echo "{}" > serviceAccount.json
+      - run: npm ci
+      - run: npm run firestore:updateSpeakerSessionsSchedule
