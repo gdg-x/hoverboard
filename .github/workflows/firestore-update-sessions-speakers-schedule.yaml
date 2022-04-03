@@ -1,7 +1,7 @@
 name: Update Firestore Session Speakers Schedule
 on: workflow_dispatch
 jobs:
-  deploy:
+  update-firestore-session-speakers-schedule:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -12,3 +12,7 @@ jobs:
         run: echo "{}" > serviceAccount.json
       - run: npm ci
       - run: npm run firestore:updateSpeakerSessionsSchedule
+        env:
+          NOTION_SPEAKERS_ID: ${{ secrets.NOTION_SPEAKERS_ID }}
+          NOTION_TALKS_ID: ${{ secrets.NOTION_TALKS_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}

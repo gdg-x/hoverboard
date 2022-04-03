@@ -152,6 +152,7 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string) => {
 const main = async () => {
   if(!process.env.NOTION_SPEAKERS_ID || !process.env.NOTION_TALKS_ID) {
     console.log("Please set NOTION_SPEAKERS_ID and NOTION_TALKS_ID env variables")
+    process.exit(1)
     return
   }
 
