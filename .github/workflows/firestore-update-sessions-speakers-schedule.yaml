@@ -13,6 +13,6 @@ jobs:
       - run: npm ci
       - run: npm run firestore:updateSpeakerSessionsSchedule
         env:
-          notionSpeakersId: '${{ secrets.NOTION_SPEAKERS_ID }}'
-          notionTalksId: '${{ secrets.NOTION_TALKS_ID }}'
+          notionSpeakersId: '${{ secrets.NOTION_SPEAKER_DB_ID }}'
+          notionTalksId: '${{ secrets.NOTION_TALKS_DB_ID }}'
           notionToken: '${{ secrets.NOTION_TOKEN }}'
