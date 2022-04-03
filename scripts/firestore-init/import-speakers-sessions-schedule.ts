@@ -1,7 +1,14 @@
 import admin, { ServiceAccount } from 'firebase-admin';
 import fs from "fs"
 
-const serviceAccount = process.env.firebaseServiceAccount
+if(!process.env.firebaseServiceAccount) {
+  throw new Error("firebaseServiceAccount is not defined")
+}
+if(!process.env.firebaseServiceAccount.startsWith("{")) {
+  throw new Error("firebaseServiceAccount should be a JSON string")
+}
+
+const serviceAccount = JSON.parse(process.env.firebaseServiceAccount)
 const credential = admin.credential.cert(serviceAccount as ServiceAccount);
 admin.initializeApp({ credential });
 const firestore = admin.firestore();
