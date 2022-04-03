@@ -43,7 +43,10 @@ const notionFormatToFlatObject = (pagesData: any) => {
           acc[key] = property.relation?.map((relation: {id: string}) => relation.id)
           break
         case "date":
-          if(property.date) acc[key] = property.date.start
+          if(property.date) {
+            acc[key] = property.date.start
+            acc["dateEnd"] = property.date.end
+          }
           break
         case "checkbox":
           acc[key] = property.checkbox
@@ -66,7 +69,7 @@ const getSocialHandle = (social: string | null) => {
 }
 
 
-const syncFromNotion = async (speakerDBId: string, proposalsDBId: string) => {
+const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracksDBId: string) => {
   console.log('Syncing from Notion')
 
   console.log('Getting data from notion, speakers')
@@ -77,6 +80,12 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string) => {
   }, {})
   console.log('Getting data from notion, talks')
   const nTalks = notionFormatToFlatObject(await getNotionPagesData(proposalsDBId))
+  const nTracks = notionFormatToFlatObject(await getNotionPagesData(tracksDBId))
+  const tracksAsSchedule = nTracks.map((track: { id: string, name: string }) => {
+    return {
+      title: track.name,
+    }
+  })
 
   console.log('Getting data from notion done!')
 
@@ -123,7 +132,7 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string) => {
     acc[talk.cid || talk.id] = {
       title: talk.title,
       complexity: talk.level,
-      description: talk.description + (talk.description2 ? talk.description2 : ""),
+      description: (talk.description || "") + (talk.description2 ? talk.description2 : ""),
       language: "French",
       tags: talk.categories ? [talk.categories] : [],
       speakers: talk.speakers.map((speakerId: string) => nSpeakersById[speakerId].cid),
@@ -138,25 +147,120 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string) => {
   }, {})
   console.log(`Found ${Object.keys(outputSessions).length} sessions`)
 
+
+  const schedule: {
+    [key: string]: {
+      date: string,
+      dateReadable: string,
+      timeslots: {
+        startTime: string,
+        endTime: string,
+        sessions: {
+          items: string[],
+        }[]
+      }[],
+      tracks: {
+        title: string,
+      }[]
+    }
+  } = {
+    "1": {
+      date: "",
+      dateReadable: "2020-06-01",
+      timeslots: [],
+      tracks: [],
+    },
+  }
+
+  // 1. Sort by date
+  console.log('Sorting sessions')
+  const sortedSessions = Object.values(nTalks).sort((a: any, b: any) => {
+    const aDate = new Date(a.date)
+    const bDate = new Date(b.date)
+    return aDate.getTime() - bDate.getTime()
+  })
+
+  // const track = session.track.length ? session.track[0] : "Other"
+  // 2. Group by weekday
+  console.log('Grouping sessions')
+  const groupedSessions = sortedSessions.reduce<Record<string, object[]>>((acc, talk: any) => {
+    if(!talk.date) {
+      acc[""] = acc[""] || []
+      acc[""].push(talk)
+      return acc
+    }
+    const day = new Date(talk.date).toISOString().split('T')[0];
+    if(!acc[day]) acc[day] = []
+    acc[day].push(talk)
+    return acc
+  }, {})
+
+  // 3. Group by hour & minutes
+  console.log('Grouping sessions by hour')
+  const groupedSessionsByHour = Object.entries(groupedSessions).reduce((acc: any, [day, talks]: any) => {
+    const groupedByHour = talks.reduce((acc: any, talk: any) => {
+      const startTime = new Date(talk.date).toISOString().split('T')[1].split(':')
+      const endTime = new Date(talk.dateEnd).toISOString().split('T')[1].split(':')
+      const startHour = parseInt(startTime[0]) +2
+      const startMinutes = startTime[1]
+      const endHour = parseInt(endTime[0]) +2
+      const endMinutes = endTime[1]
+      const startTimeString = `${startHour}:${startMinutes}`
+      const endTimeString = `${endHour}:${endMinutes}`
+      if(!acc[startTimeString]) acc[startTimeString] = {
+        startTime: startTimeString,
+        endTime: endTimeString,
+        sessions: []
+      }
+      // Important stuff happen here to add session in line or vertical, etc
+      acc[startTimeString].sessions.push({
+        items: [talk.cid || talk.id]
+      })
+      return acc
+    }, {})
+    acc[day] = Object.values(groupedByHour)
+    return acc
+  }, {})
+  console.log(groupedSessionsByHour)
+
+  // 4. Merge as schedule format
+  console.log('Merging sessions')
+  Object.keys(groupedSessionsByHour).forEach(day => {
+    schedule[day] = {
+      date: day,
+      dateReadable: day,
+      timeslots: groupedSessionsByHour[day],
+      tracks: tracksAsSchedule,
+    }
+  })
+
+  delete schedule["1"]
+
+
+
   console.log("Formatting output data done!")
 
   await fs.writeFile(outputFile, JSON.stringify({
     speakers: outputSpeakers,
     sessions: outputSessions,
-    schedule: {}
+    schedule: schedule
+  }, null, 4))
+  await fs.writeFile(outputFile + "schedule.json", JSON.stringify({
+    schedule
   }, null, 4))
 
   console.log("File saved to " + outputFile)
 }
 
 const main = async () => {
-  if(!process.env.notionSpeakersId || !process.env.notionTalksId || !process.env.notionToken) {
+  if(!process.env.notionSpeakersId || !process.env.notionTalksId || !process.env.notionToken ||
+    !process.env.notionTracksId) {
     console.log("Please set notionToken, notionSpeakersId and notionTalksId env variables")
     process.exit(1)
     return
   }
 
-  await syncFromNotion(process.env.notionSpeakersId, process.env.notionTalksId)
+  await syncFromNotion(process.env.notionSpeakersId, process.env.notionTalksId, process.env.notionTracksId)
 }
 
 main()

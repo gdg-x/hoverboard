@@ -114,9 +114,9 @@ const cleanupScheduleSessionSpeakers = async () => {
 }
 
 cleanupScheduleSessionSpeakers()
-.then(() => importSchedule())
 .then(() => importSessions())
 .then(() => importSpeakers())
+.then(() => importSchedule())
 .then(() => {
   console.log('Finished')
   process.exit()
