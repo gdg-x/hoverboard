@@ -16,3 +16,4 @@ jobs:
           notionSpeakersId: '${{ secrets.NOTION_SPEAKER_DB_ID }}'
           notionTalksId: '${{ secrets.NOTION_TALKS_DB_ID }}'
           notionToken: '${{ secrets.NOTION_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUNNYTECHWEBSITE }}'

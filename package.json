@@ -13,7 +13,7 @@
     "firestore:copy": "ts-node-script ./scripts/firestore-copy",
     "firestore:init": "ts-node-script ./scripts/firestore-init",
     "firestore:update": "firebase firestore:delete -r becomeSponsorGallery && firebase firestore:delete -r -y config && firebase firestore:delete -r -y gallery && firebase firestore:delete -r -y partners && firebase firestore:delete -r -y schedule && firebase firestore:delete -r -y sessions && firebase firestore:delete -r -y speakers && firebase firestore:delete -r -y team && firebase firestore:delete -r -y tickets && ts-node-script ./scripts/firestore-init",
-    "firestore:updateSpeakerSessionsSchedule": "ts-node-script ./scripts/firestore-init/exportNotionData",
+    "firestore:updateSpeakerSessionsSchedule": "ts-node-script ./scripts/firestore-init/exportNotionData && ts-node-script ./scripts/firestore-init/import-speakers-sessions-schedule",
     "fix": "concurrently npm:fix:*",
     "fix:eslint": "eslint . --ext .ts --ext .js --fix",
     "fix:prettier": "prettier . --write",
