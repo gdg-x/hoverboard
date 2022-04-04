@@ -121,7 +121,7 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
       photoUrl: notionSpeaker.photoURL,
       socials: socials,
       shortBio: notionSpeaker.shortBio,
-      title: notionSpeaker.title,
+      title: notionSpeaker.title2,
     }
 
     return acc
