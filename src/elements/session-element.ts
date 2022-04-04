@@ -73,6 +73,13 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           padding-bottom: 40px;
         }
 
+        .session[with-background] {
+          color: #fff;
+        }
+        .session[with-background] > .backgroundImage{
+          filter: brightness(60%);
+        }
+
         .bookmark-session,
         .feedback-action {
           color: var(--secondary-text-color);
@@ -153,11 +160,17 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         class="session"
         href$="/schedule/[[dayName]]?[[toggleQueryParam(queryParams, 'sessionId', session.id)]]"
         featured$="[[isFeatured]]"
+        with-background$="[[session.image]]"
         layout
         vertical
         relative
       >
-        <iron-icon class="session-icon" icon="hoverboard:[[session.icon]]"></iron-icon>
+        <iron-image
+          class="backgroundImage"
+          src="[[session.image]]"
+          sizing="cover"
+          fit preload
+        ></iron-image>
 
         <div class="session-header" layout horizontal justified>
           <div flex>

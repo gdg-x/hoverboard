@@ -106,7 +106,7 @@ export class ScheduleDay extends PolymerElement {
       </style>
 
       <div class="download-link" >
-        <a target="_blank" href="/data/sunnytech-2019.pdf">
+        <a target="_blank" href="/data/sunnytech-2022.pdf">
           <paper-button
             class="watch-video download"
             ga-on="click"
