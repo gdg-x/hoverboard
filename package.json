@@ -10,6 +10,7 @@
     "build": "npm run clean && tsc && NODE_ENV=production rollup --config rollup.config.js",
     "clean": "rimraf dist out-tsc",
     "deploy": "npm run build && NODE_ENV=production firebase deploy",
+    "deploy:functions": "npm run build && NODE_ENV=production firebase deploy --only functions",
     "firestore:copy": "ts-node-script ./scripts/firestore-copy",
     "firestore:init": "ts-node-script ./scripts/firestore-init",
     "firestore:update": "firebase firestore:delete -r becomeSponsorGallery && firebase firestore:delete -r -y config && firebase firestore:delete -r -y gallery && firebase firestore:delete -r -y partners && firebase firestore:delete -r -y team && firebase firestore:delete -r -y tickets && ts-node-script ./scripts/firestore-init",

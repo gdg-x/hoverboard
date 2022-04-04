@@ -51,6 +51,9 @@ const notionFormatToFlatObject = (pagesData: any) => {
         case "checkbox":
           acc[key] = property.checkbox
           break
+        case "multi_select":
+          // Not managed
+          break
         default:
           console.log("unknown", property)
           break
@@ -81,6 +84,15 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
   console.log('Getting data from notion, talks')
   const nTalks = notionFormatToFlatObject(await getNotionPagesData(proposalsDBId))
   const nTracks = notionFormatToFlatObject(await getNotionPagesData(tracksDBId))
+    .sort((a: any, b: any) => {
+      if (a.order < b.order) return -1
+      if (a.order > b.order) return 1
+      return 0
+    })
+  const nTracksById = nTracks.reduce((acc: any, track: { id: string }) => {
+    acc[track.id] = track
+    return acc
+  }, {})
   const tracksAsSchedule = nTracks.map((track: { id: string, name: string }) => {
     return {
       title: track.name,
@@ -215,23 +227,66 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
         endTime: endTimeString,
         sessions: []
       }
+
       // Important stuff happen here to add session in line or vertical, etc
-      const items: {
-        items: string[],
+      type TempSessionItems = {
+        items: {
+          id: string,
+          cid: string,
+          trackIndex: number
+        }[],
         extend ?: number
-      } = {
-        items: [talk.cid || talk.id]
       }
-      if(talk.extend) {
-        items.extend =  parseInt(talk.extend)
+      const track = talk.track.length ? talk.track[0] : null
+      const trackIndex = track ? parseInt(nTracksById[track].order) : nTracks.length
+      const items: TempSessionItems = {
+        items: [{
+          ...talk,
+          trackIndex
+        }]
+      }
+      if(talk.extendHeight) {
+        items.extend =  parseInt(talk.extendHeight)
       }
       acc[startTimeString].sessions.push(items)
+
       return acc
     }, {})
-    acc[day] = Object.values(groupedByHour)
+    acc[day] = Object.values(groupedByHour).map(
+      (timeslot: any) => {
+        // We put the items into an indexed object to have blank & the correct track order
+        const sessions = Object.values(timeslot.sessions.reduce((acc: any, session: any) => {
+          acc[session.items[0].trackIndex] = {
+            ...session,
+            items: session.items.map((item: any) => item.cid || item.id)
+          }
+
+          // If the first session item is "hideTrackTitle" = not a talk, we remove the empty array to take full width
+          if(session.items[0] && session.items[0].extendWidth) {
+            nTracks.forEach((track: any) => {
+              const extendWidth = parseInt(session.items[0].extendWidth)
+              if(track.order > 1 && track.order <= extendWidth){
+                delete acc[track.order]
+              }
+            })
+          }
+
+          return acc
+        }, nTracks.reduce((acc: any, track: any) => {
+          acc[track.order] = {
+            items: [],
+          }
+          return acc
+        }, {})))
+
+        return {
+          ...timeslot,
+          sessions: sessions
+        }
+
+    })
     return acc
   }, {})
-  console.log(groupedSessionsByHour)
 
   // 4. Merge as schedule format
   console.log('Merging sessions')
@@ -245,8 +300,6 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
   })
 
   delete schedule["1"]
-
-
 
   console.log("Formatting output data done!")
 
