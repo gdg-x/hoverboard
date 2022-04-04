@@ -1,10 +1,23 @@
 /**
- * @license
- * Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ * Default service worker unregisters itself and clears all caches. This is to
+ * help prevent installed/bad service workers from interfering with the app.
+ *
+ * Production deploys will generate a custom service worker that will overwrite
+ * this file.
  */
-console.info('Service worker disabled for development, will be generated at build time.');
+console.info('Service worker disabled for development.');
+
+async function unregisterAndClearCaches() {
+  const unregisterPromise = self.registration.unregister();
+
+  const allCaches = await caches.keys();
+  const cacheDeletionPromises = allCaches.map((cache) => caches.delete(cache));
+
+  await Promise.all([unregisterPromise, ...cacheDeletionPromises]);
+
+  console.info('Service worker unregistered and cache cleared.');
+}
+
+unregisterAndClearCaches().catch((error) =>
+  console.error(`Error unregistering service worker: ${error}`)
+);
