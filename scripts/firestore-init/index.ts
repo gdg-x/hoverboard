@@ -4,9 +4,6 @@ import {
   importNotificationsConfig,
   importPartners,
   importPreviousSpeakers,
-  importSchedule,
-  importSessions,
-  importSpeakers,
   importTeam,
   importTickets,
   importVideos,
@@ -17,9 +14,6 @@ importBlog()
   .then(() => importNotificationsConfig())
   .then(() => importPartners())
   .then(() => importPreviousSpeakers())
-  .then(() => importSchedule())
-  .then(() => importSessions())
-  .then(() => importSpeakers())
   .then(() => importTeam())
   .then(() => importTickets())
   .then(() => importVideos())
