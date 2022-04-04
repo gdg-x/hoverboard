@@ -50,47 +50,14 @@ export const theme = css`
     --gdg: #00b0ff;
 
     /* Tags */
-    --langage-framework: #f4724e;
-    --random: #5b85aa;
-    --design: #83b692;
-    --architecture-paradigme: #654f6f;
-    --data-machine-learning: #ef5e68;
-    --devops-cloud: #ffc152;
+    --architecture: #f4724e;
+    --atypique: #5b85aa;
+    --backend: #2196f3;
+    --data: #006064;
     --general: #bdbdbd;
-    --android: #78c257;
-    --web: #2196f3;
-    --cloud: #3f51b5;
-    --community: #e91e63;
-    --it: #9E9E9E;
-    --angular-js: #e0343d;
-    --angular-js2: #e0343d;
-    --protractor: #e0343d;
-    --polymer: #d81b60;
-    --dart: #00b4aa;
-    --firebase: #ff9800;
-    --appengine: #0d47a1;
-    --serviceworkers: #311b92;
-    --web-rtc: #7b1fa2;
-    --kubernetes: #326de6;
-    --data-sync: #006064;
-    --gae: #ffc107;
-    --ndk: #4caf50;
-    --ble: #1565c0;
-    --ci: #cddc39;
-    --tv: #d32f2f;
-    --grpc: #607d8b;
-    --ux: #9c27b0;
-    --material-design: #009688;
-    --entrepreneurship: #673ab7;
-    --design-patterns: #673ab7;
-    --libraries: #ffc107;
-    --realm: #ff9800;
-    --animations: #311b92;
-    --go: #009688;
-    --open-stack: #e0343d;
-    --docker: #2196f3;
-    --chrome-extensions: #ff9800;
-    --progressive-web-apps: #00b4aa;
+    --methodologies: #83b692;
+    --web-mobile-ui: #654f6f;
+    --data: #ef5e68;
   }
 
   *,
