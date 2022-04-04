@@ -33,7 +33,7 @@ export function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRa
         for (let subSessionIndex = 0; subSessionIndex < subSessionsLen; subSessionIndex++) {
           const sessionId = timeslot.sessions[sessionIndex].items[subSessionIndex];
           const subsession = sessionsRaw[sessionId];
-          const mainTag = pickMainTag(subsession.tags);
+          const mainTag = pickMainTag(subsession?.tags);
           const endTime = calculateEndTime(
             subSessionsLen,
             timeslot,
@@ -51,7 +51,7 @@ export function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRa
             timeslot
           );
 
-          dayTags = combineTags(dayTags, subsession.tags);
+          dayTags = combineTags(dayTags, subsession?.tags);
           scheduleTags = combineTags(scheduleTags, [mainTag]);
 
           const finalSubSession = {
