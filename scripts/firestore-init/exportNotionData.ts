@@ -213,9 +213,16 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
         sessions: []
       }
       // Important stuff happen here to add session in line or vertical, etc
-      acc[startTimeString].sessions.push({
+      const items: {
+        items: string[],
+        extend ?: number
+      } = {
         items: [talk.cid || talk.id]
-      })
+      }
+      if(talk.extend) {
+        items.extend =  parseInt(talk.extend)
+      }
+      acc[startTimeString].sessions.push(items)
       return acc
     }, {})
     acc[day] = Object.values(groupedByHour)
