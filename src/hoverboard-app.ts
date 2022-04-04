@@ -10,7 +10,6 @@ import '@polymer/iron-icon';
 import '@polymer/iron-selector/iron-selector';
 import { html, PolymerElement } from '@polymer/polymer';
 import {
-  setLegacyWarnings,
   setPassiveTouchGestures,
   setRemoveNestedTemplates,
   setSuppressTemplateNotifications,
@@ -40,7 +39,6 @@ import {
   signInProviders,
   title,
 } from './utils/data';
-import { isLocalhost } from './utils/environment';
 import './utils/icons';
 import './utils/media-query';
 import { Stickied } from './utils/stickied';
@@ -48,9 +46,6 @@ import { Stickied } from './utils/stickied';
 setPassiveTouchGestures(true);
 setRemoveNestedTemplates(true);
 setSuppressTemplateNotifications(true);
-if (isLocalhost()) {
-  setLegacyWarnings(true);
-}
 
 @customElement('hoverboard-app')
 export class HoverboardApp extends PolymerElement {
