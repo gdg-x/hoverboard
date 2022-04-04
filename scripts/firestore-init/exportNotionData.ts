@@ -189,7 +189,10 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
       acc[""].push(talk)
       return acc
     }
-    const day = new Date(talk.date).toISOString().split('T')[0];
+    const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    // @ts-ignore
+    const day = new Date(talk.date).toLocaleDateString('fr-FR', options)
+
     if(!acc[day]) acc[day] = []
     acc[day].push(talk)
     return acc
