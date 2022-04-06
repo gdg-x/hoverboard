@@ -201,9 +201,7 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
       acc[""].push(talk)
       return acc
     }
-    const options = { weekday: 'long', month: 'long', day: 'numeric' };
-    // @ts-ignore
-    const day = new Date(talk.date).toLocaleDateString('fr-FR', options)
+    const day = new Date(talk.date).toISOString().split('T')[0]
 
     if(!acc[day]) acc[day] = []
     acc[day].push(talk)
@@ -290,10 +288,12 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
 
   // 4. Merge as schedule format
   console.log('Merging sessions')
+  const dateFormat = { weekday: 'long', month: 'long', day: 'numeric' };
   Object.keys(groupedSessionsByHour).forEach(day => {
     schedule[day] = {
       date: day,
-      dateReadable: day,
+      // @ts-ignore
+      dateReadable:  new Date(Date.parse("2022-04-06")).toLocaleDateString('fr-FR', dateFormat),
       timeslots: groupedSessionsByHour[day],
       tracks: tracksAsSchedule,
     }
@@ -308,10 +308,6 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
     sessions: outputSessions,
     schedule: schedule
   }, null, 4))
-  await fs.writeFile(outputFile + "schedule.json", JSON.stringify({
-    schedule
-  }, null, 4))
-
   console.log("File saved to " + outputFile)
 }
 
