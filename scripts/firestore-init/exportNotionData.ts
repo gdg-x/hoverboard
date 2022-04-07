@@ -293,7 +293,7 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
     schedule[day] = {
       date: day,
       // @ts-ignore
-      dateReadable:  new Date(Date.parse("2022-04-06")).toLocaleDateString('fr-FR', dateFormat),
+      dateReadable:  new Date(Date.parse(day)).toLocaleDateString('fr-FR', dateFormat),
       timeslots: groupedSessionsByHour[day],
       tracks: tracksAsSchedule,
     }
