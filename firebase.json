@@ -71,6 +71,15 @@
     },
     "auth": {
       "port": 9099
+    },
+    "database": {
+      "port": 9000
+    },
+    "storage": {
+      "port": 9199
     }
+  },
+  "database": {
+    "rules": "database.rules.json"
   }
 }
