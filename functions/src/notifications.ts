@@ -19,7 +19,7 @@ export const sendGeneralNotification = functions.firestore
 
     if (!message) return undefined;
 
-    console.log(`New message added at ${timestamp} with payload ${message}`);
+    functions.logger.log(`New message added at ${timestamp} with payload ${message}`);
 
     const deviceTokensPromise = getFirestore().collection('notificationsSubscribers').get();
     const notificationsConfigPromise = getFirestore()
@@ -38,10 +38,10 @@ export const sendGeneralNotification = functions.firestore
     const tokens = tokensSnapshot.docs.map((doc) => doc.id);
 
     if (!tokens.length) {
-      console.log('There are no notification tokens to send to.');
+      functions.logger.log('There are no notification tokens to send to.');
       return undefined;
     }
-    console.log(`There are ${tokens.length} tokens to send notifications to.`);
+    functions.logger.log(`There are ${tokens.length} tokens to send notifications to.`);
 
     const payload: MessagingPayload = {
       data: {
@@ -60,7 +60,7 @@ export const sendGeneralNotification = functions.firestore
     messagingResponse.results.forEach((result, index) => {
       const error = result.error;
       if (error) {
-        console.error(`Failure sending notification to ${tokens[index]}`, error);
+        functions.logger.error(`Failure sending notification to ${tokens[index]}`, error);
         if (REMOVE_TOKEN_ERROR.includes(error.code)) {
           const tokenRef = getFirestore().collection('notificationsSubscribers').doc(tokens[index]);
           tokensToRemove.push(tokenRef.delete());

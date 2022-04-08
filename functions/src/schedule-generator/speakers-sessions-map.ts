@@ -1,3 +1,4 @@
+import * as functions from 'firebase-functions';
 import { combineTags, pickMainTag, SessionMap, SpeakerMap } from '../utils.js';
 
 export function sessionsSpeakersMap(sessionsRaw: SessionMap, speakersRaw: SpeakerMap) {
@@ -14,7 +15,7 @@ export function sessionsSpeakersMap(sessionsRaw: SessionMap, speakersRaw: Speake
 
     currentSpeakers.forEach((speakerId: string) => {
       if (!speakersRaw[speakerId]) {
-        console.log(`Speaker ${speakerId} not found in speakersRaw`);
+        functions.logger.log(`Speaker ${speakerId} not found in speakersRaw`);
         return;
       }
 

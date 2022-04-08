@@ -42,7 +42,12 @@ const removeUserTokens = (tokensToUsers) => {
 };
 
 const sendPushNotificationToUsers = async (userIds: string[], payload: MessagingPayload) => {
-  console.log('sendPushNotificationToUsers user ids', userIds, 'with notification', payload);
+  functions.logger.log(
+    'sendPushNotificationToUsers user ids',
+    userIds,
+    'with notification',
+    payload
+  );
 
   const tokensPromise = userIds.map((id) => {
     return getFirestore().collection('notificationsUsers').doc(id).get();
@@ -61,7 +66,7 @@ const sendPushNotificationToUsers = async (userIds: string[], payload: Messaging
   messagingResponse.results.forEach((result, index) => {
     const error = result.error;
     if (error) {
-      console.error('Failure sending notification to', tokens[index], error);
+      functions.logger.error('Failure sending notification to', tokens[index], error);
       if (
         error.code === 'messaging/invalid-registration-token' ||
         error.code === 'messaging/registration-token-not-registered'
@@ -158,14 +163,14 @@ export const scheduleNotifications = functions.pubsub
         }
 
         if (upcomingSessions.length) {
-          console.log('Upcoming sessions', upcomingSessions);
+          functions.logger.log('Upcoming sessions', upcomingSessions);
         } else {
-          console.log('There is no sessions right now');
+          functions.logger.log('There is no sessions right now');
         }
 
         return undefined;
       });
     } else {
-      console.log(todayDay, 'was not found in the schedule');
+      functions.logger.log(todayDay, 'was not found in the schedule');
     }
   });
