@@ -12,7 +12,7 @@ const isScheduleEnabled = async (): Promise<boolean> => {
   if (doc.exists) {
     return doc.data().enabled === 'true' || doc.data().enabled === true;
   } else {
-    console.error(
+    functions.logger.error(
       'Schedule config is not set. Set the `config/schedule.enabled=true` Firestore value.'
     );
     return false;
@@ -81,7 +81,9 @@ async function generateAndSaveData(changedSpeaker?) {
 
 function saveGeneratedData(data: SessionMap | SpeakerMap | ScheduleMap, collectionName: string) {
   if (isEmpty(data)) {
-    console.error(`Attempting to write empty data to Firestore collection: "${collectionName}".`);
+    functions.logger.error(
+      `Attempting to write empty data to Firestore collection: "${collectionName}".`
+    );
     return;
   }
 
