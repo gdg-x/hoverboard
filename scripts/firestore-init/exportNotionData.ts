@@ -121,14 +121,14 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
       socials.push({
         name: 'Twitter',
         icon: "twitter",
-        url: `https://twitter.com/${twitter}`
+        link: `https://twitter.com/${twitter}`
       })
     }
     if(github) {
       socials.push({
         name: 'Github',
         icon: "github",
-        url: `https://github.com/${github}`
+        link: `https://github.com/${github}`
       })
     }
 
