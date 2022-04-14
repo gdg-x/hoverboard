@@ -56,7 +56,7 @@ The [Getting Started guide](#getting-started) is probably a good first point of 
 
 ## Technology Stack
 
-- Polymer 3
+- Polymer 3 (deprecated [#796](https://github.com/gdg-x/hoverboard/issues/796))
 - LitElement
 - Redux
 - Firebase
@@ -65,7 +65,7 @@ The [Getting Started guide](#getting-started) is probably a good first point of 
 
 ## Contributing
 
-Awesome! Contributions of all kinds are greatly appreciated. To help smoothen the process we have a few non-exhaustive guidelines to follow which should get you going in no time.
+Awesome! Contributions of all kinds are greatly appreciated. To help smoothen the process we have a few non-exhaustive guidelines to follow which should get you going in no time. Checkout our [roadmap](https://github.com/gdg-x/hoverboard/blob/main/ROADMAP.md) and [open issues](https://github.com/gdg-x/hoverboard/issues).
 
 ### Good First Issue
 
