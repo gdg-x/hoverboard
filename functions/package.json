@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "npm run clean && concurrently npm:build:*",
-    "build:index": "cpx \"../dist/*.html\" dist",
+    "build:index": "cpx \"../dist/*.html\" dist --verbose",
     "build:src": "tsc",
     "clean": "rm -rf dist",
     "start": "npm run clean && concurrently --kill-others npm:start:*",
