@@ -1,6 +1,6 @@
 {
     "speakers": {
-        "undefined": {
+        "85588885588585858585": {
             "bio": "Thomas Segismont is a Principal Software Engineer at Red Hat. With more than 15 years of software development experience, he has worked on projects of all sizes in various sectors: retail banking, utilities, finance, tourism, and hosting. As a Vert.x core committer, he is focused on developing reactive SQL clients for several relational databases, making them a solid foundation for the Hibernate Reactive project. He is also a contributor to Quarkus, the supersonic subatomic Java stack, tailored for the cloud.",
             "company": "RedHat",
             "companyLogoUrl": "/images/logos/redhat.png",
@@ -1361,7 +1361,7 @@
                 "Backend"
             ],
             "speakers": [
-                null
+                "85588885588585858585"
             ],
             "presentation": null,
             "videoId": null,
@@ -1372,7 +1372,7 @@
         "O9Yb69AhNcQ96jt88xH8": {
             "title": "Le scaling intelligent avec Keda",
             "complexity": "beginner",
-            "description": "",
+            "description": "Aujourd'hui, que ce soit pour des services web ou des traitements répétitifs (cron), beaucoup d'entreprises utilisent des clusters Kubernetes pour faire tourner leurs applications.\nÉtant donner qu'on souhaite tolérer des pics de charge sans réserver inutilement des ressources coûteuses, on configure assez souvent des HPAs (Horizontal Pod Autoscalers) pour augmenter ou réduire dynamiquement la puissance de calcul de l'application.\nBasiquement, on scrute la consommation CPU et/ou RAM pour ajouter ou retirer des Pods. Parfois, on se base sur des custom-metrics pour faire la même chose sur base de métriques applicatives.\nMais peut-on faire encore mieux ?\nPeut-on utiliser d'autres indicateurs pour réussir une mise à l’échelle plus \"intelligente\" ?\nSpoiler Alert : C'est possible en utilisant Keda, outil qui ouvre le champ des possibles pour passer vos déploiements à l’échelle simplement et de manière intelligente.",
             "language": "French",
             "tags": [
                 "Cloud & Devops"
@@ -1389,7 +1389,7 @@
         "VgiowZc2JSsFkbdNc2gm": {
             "title": "La gamification : Pas vraiment un jeu d'enfant",
             "complexity": "beginner",
-            "description": "",
+            "description": "La \"Gamification\" est dans tous les briefings que l'on reçoit aujourd'hui. Afin de créer de l'engagement et une récurrence d'utilisation accrue, cette injection ludique dans nos applications est devenue un standard. \nMais est-ce qu'on en abuse pas un peu ? Est-ce que notre app ne se transforme pas trop en pseudo Candy Crush ? \nLe but de cette conférence est de comprendre ensemble ce qui constitue un jeu et les limites de la gamification pour ne pas basculer dans la saturation inutile. Avec des conseils simples et explicites nous explorerons les bonnes pratiques pour la mettre en place dans vos applications dès demain.",
             "language": "French",
             "tags": [
                 "Web & Mobile & UI"
@@ -1423,7 +1423,7 @@
         "YbPm7CA05KzlRRum9317": {
             "title": "Security today: change your habbits and make it safer and efficient",
             "complexity": "beginner",
-            "description": "",
+            "description": "Security is often a large pain for dev team, a strange set of shady \nceremonials complicated to relate to proper scientific facts, slowing \ndown software delivery and flowing the users experience. This talk will \nexplain why and discuss a new mindset on security to make it safe and \nefficient.\nDescription\n“This is for obvious security reasons”, how many time your IT project\n have been delayed because of this so called security reasons that you \nnever understand? Sometimes because of the holly network policy (that \nimplied answering to shady excel sheet) or the publisher restriction \n(that you never see, but it exists, like the lady of the lake) and all \nof this process made for mysterious security stuff that make your work \nsad and inefficient. There is an historic reason for all of this…\nBut the all computer science have evolved, and security need to fits \nto today needs. But more, the all economy around security and threat \nhave changed, and it’s important to understand how to see security as \nopportunity cost, and how to de-valuate the economic interest of the \ntarget you are representing. This way, there is a possible evaluation of\n the security management.\nSo, in this talk, we will explain the reasons of this sad situation, \nand more important move to modern software and infrastructure security \nprinciples, based on what we do at Clever Cloud since 10 years, this \npresentation is made to provide a new mindset over security principles, \nand a new framework to be efficient on modern IT with new threat, new \ncontexts and new tools.\nSo, Can security stop to be managed like voodoo by shamans and become a technical scientific approach?",
             "language": "French",
             "tags": [
                 "Architecture"
@@ -1440,7 +1440,7 @@
         "gGvBkwWLjirJLzcrbOiC": {
             "title": "De Java 11 à Java 17, par le code et rien que le code",
             "complexity": "intermediate",
-            "description": "",
+            "description": "Java évolue rapidement avec cette cadence de sortie tous les 6 mois. Chaque version apporte son lot de nouveautés.\nLes dernières versions ne dérogent pas à la règle. De plus, ces versions embarquent des fonctionnalités en standard. Je vous les présenterai sans diapo, rien que du code. En effet, rien de mieux que de coder en direct afin de bien comprendre leurs intérêts.\nVous verrez comment cela va transformer votre manière de coder et vous vous demanderez après comment vous avez fait sans.\nPour rappel, la ",
             "language": "French",
             "tags": [
                 "Backend"
@@ -1456,7 +1456,7 @@
         },
         "ebc69568-c02f-48e2-b32a-f8aafbf20487": {
             "title": "Pause",
-            "description": "",
+            "description": "Petite pause, histoire de se remuer les jambes",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1487,7 +1487,7 @@
         "S6KTi1KPDcSnLClhpoCz": {
             "title": "Highly available, distributed & resilient software... team",
             "complexity": "intermediate",
-            "description": "",
+            "description": "Les design patterns pour concevoir des applications web distribuées, robustes et qui passent à l'échelle sont bien connus aujourd'hui. L'organisation de projet permettant de les mettre en place de manière efficace reste cependant un challenge, le facteur \"humain\" étant source de problèmes difficile à prévoir.\nEt si vous vous inspiriez de l'architecture de vos applications pour améliorer la communication de vos équipes?\nMicroservices, messages queues, load balancers, caches, sharding, découplage... Ce sont autant de concepts d'architecture conçus pour améliorer les échanges numériques au sein de nos apps, et surtout anticiper et gérer les défaillances. En modélisant les échanges de vos équipes comme une architecture logicielle, nous allons voir comment ces design patterns sont aussi efficaces pour solutionner nos problèmes de communication, bien humains cette fois.",
             "language": "French",
             "tags": [
                 "Architecture"
@@ -1504,7 +1504,7 @@
         "7qcrUxZBG59DMoEVpnw7": {
             "title": "Première application mobile Flutter ? Ne faites pas les mêmes erreurs que nous !",
             "complexity": "beginner",
-            "description": "",
+            "description": "En version stable depuis 3 ans, le framework mobile Flutter a su s'imposer comme un incontournable dans le monde du développement mobile\ncross-platform. Vous en êtes sans doute conscient et vous avez peut-être décidé de coder votre première application... mais vous ne savez pas\npar où commencer.\nEntre le choix du state management, le theming de votre application, la structure des dossiers, les tests, les librairies à utiliser et le déploiement sur les stores, vous êtes perdu 🤔 Avec 1 an et demi de recul sur le développement Flutter sur deux applications maintenant en production, on essaiera de vous expliquer au mieux les bases de Flutter afin de vous orienter vers les bonnes pratiques tout en vous évitant de commettre les mêmes erreurs que nous. Bref, on vous transmettra les choses que l'on aurait aimé que l'on nous dise quand on a découvert le framework. C\ne talk sera un live coding où vous verrez la construction d'une application Flutter à travers de vrais bouts de code ⌨️",
             "language": "French",
             "tags": [
                 "Web & Mobile & UI"
@@ -1520,9 +1520,9 @@
             "hideTrackTitle": false
         },
         "seof4l3HWM3mNmbufdFA": {
-            "title": "Comment fonctionne un moteur Javascript : apprendre à écrire du Javascript optimisable en 2020",
+            "title": "Comment fonctionne un moteur Javascript : apprendre à écrire du Javascript optimisable en 2022",
             "complexity": "intermediate",
-            "description": "",
+            "description": "Javascript est un langage interprété, ce qui signifie qu'il y a une étape intermédiaire entre le code JavaScript lisible par les humains et le code assembleur lisible par le CPU.\nCette couche intermédiaire c'est V8, SpiderMonkey ou encore Chakra et la compréhension de son fonctionnement est crucial pour lui faciliter le travail.\nLes objets sont partout mais comment sont-ils représentés en interne ? Qu'est-ce que c'est que la compilation juste-à-temps (JIT) ? Quel est le coût réel d'une arrow function ?\nTout au long de cette présentation, nous verrons comment appliquer notre compréhension des moteurs Javascript pour optimiser les performances de nos applications.",
             "language": "French",
             "tags": [
                 "Backend"
@@ -1536,16 +1536,15 @@
             "hideInFeedback": false,
             "hideTrackTitle": false
         },
-        "zq4HdtYsZFbQghPedwLs": {
-            "title": "👨‍🎨 Il était une fois... les navigateurs ⛵️",
+        "PuYsiu2FRao8oBToZbo7": {
+            "title": "☠️ Faut-il perdre tout espoir en l'avenir ... du web ?",
             "complexity": "beginner",
-            "description": "",
+            "description": "Depuis une dizaine d’année, le Web n’a cessé d’évoluer, pour le meilleur … et pour le pire.\n\nDe nombreux nouveaux frameworks et Web APIs ont permis de largement accélérer son évolution, concurrençant de fait les plateformes “natives”.\nMais à quoi bon, si le Web doit perdre toute sa beauté en chemin ? Que reste-t-il vraiment de ses principes fondateurs, en particulier des standards ouverts et de la protection de nos vies privées ?\n\nVenez écouter l’inquiétante histoire de la progressive descente en enfer de notre société.\n\nTout espoir est-il vraiment perdu ?",
             "language": "French",
             "tags": [
-                "Atypique"
+                "Web & Mobile & UI"
             ],
             "speakers": [
-                "9LHSTmgvjXcyMPyfifAgXjtP6Z02",
                 "0alFaI2imGdQVSjuaMLFFfwqoL62"
             ],
             "presentation": null,
@@ -1557,7 +1556,7 @@
         "3VtJMCT7CMG3bOSbQgup": {
             "title": "Comment j'ai aidé ma fille à lire avec le machine learning",
             "complexity": "beginner",
-            "description": "",
+            "description": "Et si le machine learning pouvait aider un enfant à lire ? C'est en accompagnant ma fille pendant ses séances de lecture que m'est venu cette question et l'envie d'y répondre m'a tout de suite titiller l'esprit.\nPartant du constat que les solutions \"speech to text\" du marché ne sont pas adaptées aux voix d'enfants, me voilà parti pour une folle aventure dans le monde du machine learning.\nJe vous propose de découvrir dans ce talk toutes les étapes (dataset, modèle, technologies) qui m'ont permis d'aboutir à une application web pour enfants qui leur permet de lire à voix haute des mots/phrases découpés en syllabes avec un retour immédiat sur leur prononciation.",
             "language": "French",
             "tags": [
                 "Data"
@@ -1574,7 +1573,7 @@
         "HuaAwrDOyy6TBwRdAOvn": {
             "title": "Arrêtez les régimes agiles : ça marche pas !",
             "complexity": "beginner",
-            "description": "",
+            "description": "Une transformation agile, c’est un peu comme un régime. Que ce soit pour perdre du poids / être plus efficaces, pour plaire / recruter plus facilement, pour se sentir mieux dans sa peau / collaborer plus efficacement, pour être en meilleure santé / être plus résilient… \nEt la plupart des boîtes qui se lancent dans une transformation agile le font comme on se lance dans un nouveau régime. Et comme pour les régimes, ça marche peut-être au début, mais on est vite rattrapé par l’effet yo-yo, et on se retrouve dans une situation pire qu’avant la transformation. Mais alors, c’est perdu d’avance ? Non, heureusement ! \n\nDans cette conférence, je vous propose des clés pour développer l’agilité de votre entreprise de façon durable. J’ai appelé cette approche la duragilité.",
             "language": "French",
             "tags": [
                 "Methodologies"
@@ -1590,7 +1589,7 @@
         },
         "fabb3e4e-ae58-49a6-a384-58a227cf8b13": {
             "title": "Pause",
-            "description": "",
+            "description": "Il fait frais, c’est le moment d’aller voir le talk à l’amphi extérieur TropChaud",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1602,7 +1601,7 @@
         },
         "22fa075b-7a7c-4757-bb34-4a16821f1a46": {
             "title": "Pause",
-            "description": "",
+            "description": "Je n'ai plus d'idées pour mettre une description à cette pause, si vous en avez une, envoyez-nous un tweet !",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1614,7 +1613,7 @@
         },
         "1fe7ea48-1d92-4e66-875e-b023f4572ef4": {
             "title": "Pause",
-            "description": "",
+            "description": "La pause de la digestion ! ",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1626,7 +1625,7 @@
         },
         "eca30e9a-8038-4a48-ab86-68c9cf349627": {
             "title": "Pause",
-            "description": "",
+            "description": "La dernière pause avant la Keynote de fin, vous allez nous manquer 😞",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1662,7 +1661,7 @@
         },
         "e91bf13d-0489-403d-b7df-5e41e80f2914": {
             "title": "Pause",
-            "description": "",
+            "description": "La pause de la digestion ! ",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1674,7 +1673,7 @@
         },
         "3696e81c-5606-4439-8fd9-65116581127f": {
             "title": "Pause",
-            "description": "",
+            "description": "La chaleur arrive déjà, j’ai chaud...",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1686,7 +1685,7 @@
         },
         "e6b861a6-0544-4aef-8f3a-009c88820d1f": {
             "title": "Goûter",
-            "description": "",
+            "description": "Une petite faim ? Ou juste envie de boire un café alors qu’il fait 40 degrés dehors ? C’est le moment ! ",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1698,7 +1697,7 @@
         },
         "98d2ca61-94e6-4da7-a9d9-f7d549f7b1a9": {
             "title": "Goûter",
-            "description": "",
+            "description": "Une petite faim ? Ou juste envie de boire un café alors qu’il fait 40 degrés dehors ? C’est le moment ! ",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1710,7 +1709,7 @@
         },
         "ab9716ca-a4a0-4bfb-8c28-6c3f5171e5a5": {
             "title": "Réveil chocolatine",
-            "description": "Croissants et chocolatine, un peu d’eau et du café vous attendent déjà",
+            "description": "Croissants et chocolatines, un peu d’eau et du café vous attendent",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1746,7 +1745,7 @@
         },
         "087b9595-a40c-4fd9-82ad-a94bc433e345": {
             "title": "Soirée networking",
-            "description": "",
+            "description": "Plus de détail bientôt !",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -2146,23 +2145,6 @@
             ],
             "speakers": [
                 "857miOHzq7hqVng5TMllc7mM8763"
-            ],
-            "presentation": null,
-            "videoId": null,
-            "image": null,
-            "hideInFeedback": false,
-            "hideTrackTitle": false
-        },
-        "PuYsiu2FRao8oBToZbo7": {
-            "title": "☠️ Faut-il perdre tout espoir en l'avenir ... du web ?",
-            "complexity": "beginner",
-            "description": "Depuis une dizaine d’année, le Web n’a cessé d’évoluer, pour le meilleur … et pour le pire.\n\nDe nombreux nouveaux frameworks et Web APIs ont permis de largement accélérer son évolution, concurrençant de fait les plateformes “natives”.\nMais à quoi bon, si le Web doit perdre toute sa beauté en chemin ? Que reste-t-il vraiment de ses principes fondateurs, en particulier des standards ouverts et de la protection de nos vies privées ?\n\nVenez écouter l’inquiétante histoire de la progressive descente en enfer de notre société.\n\nTout espoir est-il vraiment perdu ?",
-            "language": "French",
-            "tags": [
-                "Web & Mobile & UI"
-            ],
-            "speakers": [
-                "0alFaI2imGdQVSjuaMLFFfwqoL62"
             ],
             "presentation": null,
             "videoId": null,
@@ -2929,7 +2911,7 @@
                     "sessions": [
                         {
                             "items": [
-                                "fAu4iWR5VwEKJQlsIAYb"
+                                "PuYsiu2FRao8oBToZbo7"
                             ]
                         },
                         {
@@ -3293,7 +3275,7 @@
                     "sessions": [
                         {
                             "items": [
-                                "zq4HdtYsZFbQghPedwLs"
+                                "fAu4iWR5VwEKJQlsIAYb"
                             ]
                         },
                         {

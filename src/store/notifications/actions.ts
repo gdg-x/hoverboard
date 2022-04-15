@@ -23,9 +23,9 @@ export const initializeMessaging = () => {
         },
       });
     });
-    messaging.onTokenRefresh(() => {
+    // messaging.onTokenRefresh(() => {
       getToken(true);
-    });
+    // });
     resolve(messaging);
   });
 };

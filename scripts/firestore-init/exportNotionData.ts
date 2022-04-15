@@ -232,54 +232,60 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
   console.log('Grouping sessions by hour')
   const groupedSessionsByHour = Object.entries(groupedSessions).reduce((acc: any, [day, talks]: any) => {
     const groupedByHour = talks.reduce((acc: any, talk: any) => {
-      const startTime = new Date(talk.date).toISOString().split('T')[1].split(':')
-      const endTime = new Date(talk.dateEnd).toISOString().split('T')[1].split(':')
-      const startHour = parseInt(startTime[0]) +2
-      const startMinutes = startTime[1]
-      const endHour = parseInt(endTime[0]) +2
-      const endMinutes = endTime[1]
-      const startTimeString = `${startHour}:${startMinutes}`
-      const endTimeString = `${endHour}:${endMinutes}`
-      if(!acc[startTimeString]) acc[startTimeString] = {
-        startTime: startTimeString,
-        endTime: endTimeString,
-        sessions: []
-      }
-
-      // Important stuff happen here to add session in line or vertical, etc
-      type TempSessionItems = {
-        items: {
-          id: string,
-          cid: string,
-          trackIndex: number
-        }[],
-        extend ?: number
-      }
-      const track = talk.track.length ? talk.track[0] : null
-
-      let trackIndex = nTracks.length
-      if(track) {
-        const trackObject = nTracksById[track]
-        if(trackObject.isAlone) {
-          trackIndex = 0
-        } else {
-          trackIndex = parseInt(trackObject.order)
+      try {
+        const startTime = new Date(talk.date).toISOString().split('T')[1].split(':')
+        const endTime = new Date(talk.dateEnd).toISOString().split('T')[1].split(':')
+        const startHour = parseInt(startTime[0]) +2
+        const startMinutes = startTime[1]
+        const endHour = parseInt(endTime[0]) +2
+        const endMinutes = endTime[1]
+        const startTimeString = `${startHour}:${startMinutes}`
+        const endTimeString = `${endHour}:${endMinutes}`
+        if(!acc[startTimeString]) acc[startTimeString] = {
+          startTime: startTimeString,
+          endTime: endTimeString,
+          sessions: []
         }
 
-      }
+        // Important stuff happen here to add session in line or vertical, etc
+        type TempSessionItems = {
+          items: {
+            id: string,
+            cid: string,
+            trackIndex: number
+          }[],
+          extend ?: number
+        }
+        const track = talk.track.length ? talk.track[0] : null
 
-      const items: TempSessionItems = {
-        items: [{
-          ...talk,
-          trackIndex
-        }]
-      }
-      if(talk.extendHeight) {
-        items.extend =  parseInt(talk.extendHeight)
-      }
-      acc[startTimeString].sessions.push(items)
+        let trackIndex = nTracks.length
+        if(track) {
+          const trackObject = nTracksById[track]
+          if(trackObject.isAlone) {
+            trackIndex = 0
+          } else {
+            trackIndex = parseInt(trackObject.order)
+          }
 
-      return acc
+        }
+
+        const items: TempSessionItems = {
+          items: [{
+            ...talk,
+            trackIndex
+          }]
+        }
+        if(talk.extendHeight) {
+          items.extend =  parseInt(talk.extendHeight)
+        }
+        acc[startTimeString].sessions.push(items)
+
+        return acc
+      } catch (error) {
+        console.log("Error on talk in groupedSessionsByHour", talk)
+        console.error(error)
+        process.exit(1)
+      }
     }, {})
     acc[day] = Object.values(groupedByHour).map(
       (timeslot: any) => {
