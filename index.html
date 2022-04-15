@@ -87,8 +87,18 @@
 
       // prettier-ignore
       {{ webVitalsPolyfill | safe }}
+
+      // Capture the config object from /__/firebase/init.js for src/firebase.ts
+      window.firebase = {
+        initializeApp: (config) => {
+          window.firebaseConfig = config;
+          // Delete fake Firebase global
+          delete window.firebase;
+        },
+      };
     </script>
 
+    <script src="/__/firebase/init.js"></script>
     <script src="./src/hoverboard-app.ts" type="module"></script>
     <script src="./src/components/app-install.ts" type="module"></script>
     <script src="./src/service-worker-registration.ts" type="module"></script>
