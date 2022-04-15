@@ -253,7 +253,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
 
   _openSpeaker(event: Event & { currentTarget: HTMLElement }) {
     const speakerId = event.currentTarget.getAttribute('speaker-id');
-    const speakerData = this.speakers.find((speaker) => speaker.id === speakerId);
+    const speakerData = this.session.speakers.find((speaker) => speaker.id === speakerId);
 
     if (!speakerData) return;
     openDialog(DIALOGS.SPEAKER, speakerData);
