@@ -5,7 +5,7 @@ import fs from 'fs';
 
 type Data = typeof import('../public/data/resources.json') &
   typeof import('../public/data/settings.json') &
-  typeof import('../config/production.json') & { NODE_ENV: string; webVitalsPolyfill: string };
+  typeof import('../config/production.json') & { webVitalsPolyfill: string };
 
 const { BUILD_ENV, NODE_ENV } = process.env;
 export const production = NODE_ENV === 'production';
@@ -40,7 +40,6 @@ const getData = (): Data => {
   };
 
   return settingsFiles.reduce(combineSettings, {
-    NODE_ENV: NODE_ENV || 'production',
     webVitalsPolyfill,
   }) as Data;
 };
@@ -52,10 +51,10 @@ const cleanupData = (data: Data) => {
   return data;
 };
 
-const data = cleanupData(getData());
+export const data = cleanupData(getData());
 
 const nunjucks = n.configure({ throwOnUndefined: true });
 
-const compileTemplate = (template: string) => nunjucks.renderString(template, data);
+export const compileTemplate = (template: string) => nunjucks.renderString(template, data);
 
 export const compileBufferTemplate = (body: Buffer) => compileTemplate(body.toString());

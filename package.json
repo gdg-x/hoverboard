@@ -8,7 +8,7 @@
     "npm": "8"
   },
   "scripts": {
-    "build": "npm run clean && NODE_ENV=production rollup --config rollup.config.ts --configPlugin typescript",
+    "build": "npm run clean && NODE_ENV=production vite build",
     "clean": "rm -rf dist",
     "deploy": "npm run build && NODE_ENV=production firebase deploy",
     "firestore:copy": "ts-node-script ./scripts/firestore-copy",
@@ -31,7 +31,7 @@
     "start": "npm run clean && NODE_ENV=development concurrently --kill-others npm:start:*",
     "start:emulators": "firebase emulators:start",
     "start:functions": "npm --prefix functions start",
-    "start:rollup": "mkdir -p dist && rollup --config rollup.config.ts --configPlugin typescript --watch",
+    "start:vite": "vite build --watch --mode development",
     "test": "jest"
   },
   "dependencies": {
@@ -70,9 +70,6 @@
     "@firebase/rules-unit-testing": "^2.0.2",
     "@jest/globals": "^27.5.1",
     "@jest/types": "^27.5.1",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.1.3",
-    "@rollup/plugin-typescript": "^8.3.1",
     "@stylelint/postcss-css-in-js": "^0.37.2",
     "@testing-library/dom": "^8.12.0",
     "@testing-library/jest-dom": "^5.16.3",
@@ -84,7 +81,6 @@
     "@types/polymer": "^1.2.12",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
-    "@web/rollup-plugin-html": "^1.10.2",
     "concurrently": "^7.0.0",
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
@@ -103,18 +99,18 @@
     "nunjucks": "^3.2.3",
     "prettier": "2.6.1",
     "prettier-plugin-package": "1.3.0",
-    "rollup": "^2.70.1",
-    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-workbox": "^6.2.0",
     "stylelint": "^14.6.1",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",
     "testing-library__dom": "^7.29.4-beta.1",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "vite": "^2.9.5",
+    "vite-plugin-live-reload": "^2.1.0",
+    "vite-plugin-nunjucks": "^0.1.10",
+    "vite-plugin-pwa": "^0.11.13"
   },
   "contributors": [
     "Oleh Zasadnyy, GDG Lviv",
