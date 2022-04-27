@@ -21,6 +21,7 @@ window.addEventListener('vaadin-router-location-changed', (event) => {
 export const selectRouteName = (pathname: string): string => {
   let [, part] = pathname.split('/');
   switch (part) {
+    case undefined:
     case '':
       part = 'home';
       break;
@@ -31,10 +32,6 @@ export const selectRouteName = (pathname: string): string => {
 
     case 'previous-speakers':
       part = 'speakers';
-      break;
-
-    default:
-      part = 'home';
       break;
   }
 
