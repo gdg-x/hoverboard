@@ -195,8 +195,8 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
   // 1. Sort by date
   console.log('Sorting sessions')
   const sortedSessions = Object.values(nTalks).sort((a: any, b: any) => {
-    const aDate = new Date(a.date)
-    const bDate = new Date(b.date)
+    const aDate = new Date(a.dateEnd)
+    const bDate = new Date(b.dateEnd)
     return aDate.getTime() - bDate.getTime()
   })
 

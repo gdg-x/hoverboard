@@ -1352,6 +1352,18 @@
         }
     },
     "sessions": {
+        "72c6b8ec-f3e9-442b-8969-cffcb5b4c973": {
+            "title": "Keynote de fin",
+            "description": "Surprise ! ",
+            "language": "French",
+            "tags": [],
+            "speakers": [],
+            "presentation": null,
+            "videoId": null,
+            "image": null,
+            "hideInFeedback": false,
+            "hideTrackTitle": false
+        },
         "WrpCnBNfM6pNpHcUhsRJ": {
             "title": "SQL réactif : pourquoi c'est important ?",
             "complexity": "beginner",
@@ -1539,10 +1551,10 @@
         "PuYsiu2FRao8oBToZbo7": {
             "title": "☠️ Faut-il perdre tout espoir en l'avenir ... du web ?",
             "complexity": "beginner",
-            "description": "Depuis une dizaine d’année, le Web n’a cessé d’évoluer, pour le meilleur … et pour le pire.\n\nDe nombreux nouveaux frameworks et Web APIs ont permis de largement accélérer son évolution, concurrençant de fait les plateformes “natives”.\nMais à quoi bon, si le Web doit perdre toute sa beauté en chemin ? Que reste-t-il vraiment de ses principes fondateurs, en particulier des standards ouverts et de la protection de nos vies privées ?\n\nVenez écouter l’inquiétante histoire de la progressive descente en enfer de notre société.\n\nTout espoir est-il vraiment perdu ?",
+            "description": "Depuis une dizaine d’année, le Web n’a cessé d’évoluer, pour le meilleur … et pour le pire.\nDe nombreux nouveaux frameworks et Web APIs ont permis de largement accélérer son évolution, concurrençant de fait les plateformes “natives”. Mais à quoi bon, si le Web doit perdre toute sa beauté en chemin ? Que reste-t-il vraiment de ses principes fondateurs, en particulier des standards ouverts et de la protection de nos vies privées ?\nVenez écouter l’inquiétante histoire de la progressive descente en enfer de notre société.\nTout espoir est-il vraiment perdu ?",
             "language": "French",
             "tags": [
-                "Web & Mobile & UI"
+                "Atypique"
             ],
             "speakers": [
                 "0alFaI2imGdQVSjuaMLFFfwqoL62"
@@ -1721,7 +1733,7 @@
         },
         "5d170253-73a5-468f-a457-aa70cdbe92fe": {
             "title": "Pause croissant",
-            "description": "Croissants et chocolatine, un peu d’eau et du café vous attendent déjà",
+            "description": "Croissants et chocolatines, un peu d’eau et du café vous attendent !",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1745,7 +1757,7 @@
         },
         "087b9595-a40c-4fd9-82ad-a94bc433e345": {
             "title": "Soirée networking",
-            "description": "Plus de détail bientôt !",
+            "description": "Plus de détails bientôt !",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1966,7 +1978,7 @@
         "3WvpUUCH1pGx237kqT2o": {
             "title": "Numérique et éthique : l'impossible équation ?",
             "complexity": "beginner",
-            "description": "La révolution numérique est en marche et comme son ancêtre, la révolution industrielle, elle nous promets un avenir toujours meilleur pour l’homme mais aussi pour la planète. Pourtant si son coût environnemental commence à être évalué et critiqué, elle est également responsable de problématiques sociétales et géo-politiques encore méconnues mais tout aussi inquiétantes.\n\nDe l’extraction des minerais à l’obsolescence programmée en passant par les obésiciels, le numérique est une révolution qui est loin de tenir toutes ses promesses d’avenir rayonnant. Mais tout n’est pas perdu pour autant, et nous verrons ensemble comment en tant que développeur·se·s, mais aussi consommateur·rice·s et citoyen·ne·s, nous avons un rôle à jouer pour promouvoir une révolution numérique plus vertueuse, éthique et responsable.",
+            "description": "",
             "language": "French",
             "tags": [
                 "Atypique"
@@ -2145,6 +2157,24 @@
             ],
             "speakers": [
                 "857miOHzq7hqVng5TMllc7mM8763"
+            ],
+            "presentation": null,
+            "videoId": null,
+            "image": null,
+            "hideInFeedback": false,
+            "hideTrackTitle": false
+        },
+        "zq4HdtYsZFbQghPedwLs": {
+            "title": "👨‍🎨 Il était une fois... les navigateurs ⛵️",
+            "complexity": "beginner",
+            "description": "De grandes batailles et de grandes innovations, racontées et dessinées en live !",
+            "language": "French",
+            "tags": [
+                "Atypique"
+            ],
+            "speakers": [
+                "0alFaI2imGdQVSjuaMLFFfwqoL62",
+                "9LHSTmgvjXcyMPyfifAgXjtP6Z02"
             ],
             "presentation": null,
             "videoId": null,
@@ -2633,6 +2663,11 @@
                                 "y4Z30G4846x1ywcjINZM"
                             ],
                             "extend": 3
+                        },
+                        {
+                            "items": [
+                                "PuYsiu2FRao8oBToZbo7"
+                            ]
                         }
                     ]
                 },
@@ -2673,6 +2708,11 @@
                         },
                         {
                             "items": []
+                        },
+                        {
+                            "items": [
+                                "HuaAwrDOyy6TBwRdAOvn"
+                            ]
                         }
                     ]
                 },
@@ -2716,6 +2756,9 @@
                                 "V3iJ3Nfzc6epXygyOP1p"
                             ],
                             "extend": 3
+                        },
+                        {
+                            "items": []
                         }
                     ]
                 },
@@ -2756,6 +2799,9 @@
                         },
                         {
                             "items": []
+                        },
+                        {
+                            "items": []
                         }
                     ]
                 },
@@ -2776,7 +2822,7 @@
                     "sessions": [
                         {
                             "items": [
-                                "VgiowZc2JSsFkbdNc2gm"
+                                "Xuk4TYmdF9q8pgiUXH29"
                             ]
                         },
                         {
@@ -2799,6 +2845,9 @@
                                 "9rwSXpTvprLjpSYPPlOP"
                             ],
                             "extend": 4
+                        },
+                        {
+                            "items": []
                         }
                     ]
                 },
@@ -2839,6 +2888,9 @@
                         },
                         {
                             "items": []
+                        },
+                        {
+                            "items": []
                         }
                     ]
                 },
@@ -2865,6 +2917,9 @@
                             "items": [
                                 "aKsiypO41ph7oZVLHOx7"
                             ]
+                        },
+                        {
+                            "items": []
                         },
                         {
                             "items": []
@@ -2898,67 +2953,7 @@
                 },
                 {
                     "title": "Salle 2"
-                }
-            ]
-        },
-        "2069-06-30": {
-            "date": "tropchaud",
-            "dateReadable": "Extérieur jeudi 30 juin",
-            "timeslots": [
-                {
-                    "startTime": "10:25",
-                    "endTime": "11:15",
-                    "sessions": [
-                        {
-                            "items": [
-                                "PuYsiu2FRao8oBToZbo7"
-                            ]
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        }
-                    ]
                 },
-                {
-                    "startTime": "11:35",
-                    "endTime": "12:25",
-                    "sessions": [
-                        {
-                            "items": [
-                                "HuaAwrDOyy6TBwRdAOvn"
-                            ]
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        }
-                    ]
-                }
-            ],
-            "tracks": [
                 {
                     "title": "TropChaud"
                 }
@@ -2990,7 +2985,7 @@
                         },
                         {
                             "items": [
-                                "PuYsiu2FRao8oBToZbo7"
+                                "zq4HdtYsZFbQghPedwLs"
                             ]
                         },
                         {
@@ -3009,6 +3004,11 @@
                                 "gQrKnWMU118RhP3xg8DB"
                             ],
                             "extend": 5
+                        },
+                        {
+                            "items": [
+                                "fAu4iWR5VwEKJQlsIAYb"
+                            ]
                         }
                     ]
                 },
@@ -3047,6 +3047,11 @@
                         },
                         {
                             "items": []
+                        },
+                        {
+                            "items": [
+                                "sCT9ynRO9gLgaHXQsWEu"
+                            ]
                         }
                     ]
                 },
@@ -3085,6 +3090,9 @@
                         },
                         {
                             "items": []
+                        },
+                        {
+                            "items": []
                         }
                     ]
                 },
@@ -3101,7 +3109,7 @@
                 },
                 {
                     "startTime": "14:00",
-                    "endTime": "17:00",
+                    "endTime": "14:20",
                     "sessions": [
                         {
                             "items": [
@@ -3129,6 +3137,9 @@
                                 "HHKqo2sUfH1KgAKYMWXk"
                             ],
                             "extend": 6
+                        },
+                        {
+                            "items": []
                         }
                     ]
                 },
@@ -3156,6 +3167,9 @@
                         },
                         {
                             "items": []
+                        },
+                        {
+                            "items": []
                         }
                     ]
                 },
@@ -3176,7 +3190,7 @@
                     "sessions": [
                         {
                             "items": [
-                                "Xuk4TYmdF9q8pgiUXH29"
+                                "VgiowZc2JSsFkbdNc2gm"
                             ]
                         },
                         {
@@ -3188,6 +3202,9 @@
                             "items": [
                                 "gGvBkwWLjirJLzcrbOiC"
                             ]
+                        },
+                        {
+                            "items": []
                         },
                         {
                             "items": []
@@ -3232,6 +3249,9 @@
                         },
                         {
                             "items": []
+                        },
+                        {
+                            "items": []
                         }
                     ]
                 },
@@ -3243,6 +3263,23 @@
                             "items": [
                                 "eca30e9a-8038-4a48-ab86-68c9cf349627"
                             ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "17:30",
+                    "endTime": "18:10",
+                    "sessions": [
+                        {
+                            "items": [
+                                "72c6b8ec-f3e9-442b-8969-cffcb5b4c973"
+                            ]
+                        },
+                        {
+                            "items": []
+                        },
+                        {
+                            "items": []
                         }
                     ]
                 }
@@ -3262,67 +3299,7 @@
                 },
                 {
                     "title": "Salle 2"
-                }
-            ]
-        },
-        "2069-07-01": {
-            "date": "tropchaud",
-            "dateReadable": "Extérieur vendredi 1 juillet",
-            "timeslots": [
-                {
-                    "startTime": "9:00",
-                    "endTime": "9:50",
-                    "sessions": [
-                        {
-                            "items": [
-                                "fAu4iWR5VwEKJQlsIAYb"
-                            ]
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        }
-                    ]
                 },
-                {
-                    "startTime": "10:10",
-                    "endTime": "11:00",
-                    "sessions": [
-                        {
-                            "items": [
-                                "sCT9ynRO9gLgaHXQsWEu"
-                            ]
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        },
-                        {
-                            "items": []
-                        }
-                    ]
-                }
-            ],
-            "tracks": [
                 {
                     "title": "TropChaud"
                 }
