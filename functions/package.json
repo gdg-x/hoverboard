@@ -24,7 +24,7 @@
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.19.0",
     "moment": "^2.29.2",
-    "node-fetch": "^3.2.2"
+    "node-fetch": "^3.2.4"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
