@@ -74,6 +74,13 @@
         "logoUrl": "../images/logos/ovhcloud.svg",
         "name": "OVH Cloud",
         "url": "https://www.ovhcloud.com/fr/"
+      },
+        {
+        "order": 2,
+        "height": 150,
+        "logoUrl": "../images/logos/microsoft.png",
+        "name": "Microsoft",
+        "url": "https://www.microsoft.com/fr-fr/"
       }
       ],
       "order": 0,
