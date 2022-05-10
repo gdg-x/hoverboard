@@ -51,6 +51,7 @@ import './pages/previous-speakers-page';
 import './pages/schedule-page';
 import './pages/speakers-page';
 import './pages/team-page';
+import './pages/jobs-page';
 import { RootState, store } from './store';
 import { DialogState, initialDialogState } from './store/dialogs/state';
 import { DIALOGS } from './store/dialogs/types';
@@ -277,6 +278,7 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
             <faq-page name="faq"></faq-page>
             <coc-page name="coc"></coc-page>
             <location-page name="location"></location-page>
+            <jobs-page name="jobs"></jobs-page>
           </iron-pages>
         </app-header-layout>
       </app-drawer-layout>

@@ -51,6 +51,11 @@
       "route": "blog",
       "permalink": "/blog/",
       "label": "Blog"
+    },
+    {
+      "route": "jobs",
+      "permalink": "/jobs/",
+      "label": "Jobs"
     }
   ],
   "heroSettings": {
@@ -68,6 +73,14 @@
     "blog": {
       "title": "Blog",
       "metaDescription": "Read stories from our team",
+      "background": {
+        "color": "#FFF"
+      },
+      "fontColor": "#424242"
+    },
+    "jobs": {
+      "title": "Jobs",
+      "metaDescription": "En partenariat avec WeLoveDevs.com",
       "background": {
         "color": "#FFF"
       },
