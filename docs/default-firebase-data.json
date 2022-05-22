@@ -206,14 +206,7 @@
     {
       "items": [
         {
-          "order": 1,
-          "height": 100,
-          "logoUrl": "../images/logos/laposte.png",
-          "name": "Laposte",
-          "url": "https://www.lapostegroupe.com/fr"
-        },
-        {
-          "order": 1,
+          "order": 0,
           "height": 100,
           "logoUrl": "../images/logos/lunatech.png",
           "name": "Lunatech",
