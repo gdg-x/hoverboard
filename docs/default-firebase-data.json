@@ -90,49 +90,49 @@
       "items": [
         {
           "order": 0,
-          "height": 100,
+          "height": 80,
           "logoUrl": "../images/logos/teads.png",
           "name": "Teads",
           "url": "https://teads.com/"
         },
         {
           "order": 1,
-          "height": 120,
+          "height": 80,
           "logoUrl": "../images/logos/aquafadas.png",
           "name": "Rakuten DX",
           "url": "https://rakuten-dx.com/"
         },
         {
           "order": 1,
-          "height": 120,
+          "height": 80,
           "logoUrl": "../images/logos/kaliop.png",
           "name": "Kaliop",
           "url": "https://www.kaliop.com/"
         },
         {
           "order": 1,
-          "height": 100,
+          "height": 80,
           "logoUrl": "../images/logos/zendesk.png",
           "name": "Zendesk",
           "url": "https://www.zendesk.com/"
         },
         {
           "order": 1,
-          "height": 100,
+          "height": 80,
           "logoUrl": "../images/logos/believeit.png",
           "name": "Believe IT",
           "url": "http://www.believeit.fr/"
         },
         {
           "order": 1,
-          "height": 100,
+          "height": 80,
           "logoUrl": "../images/logos/isia.png",
           "name": "Groupe ISIA",
           "url": "https://groupe-isia.com/"
         },
         {
           "order": 1,
-          "height": 100,
+          "height": 80,
           "logoUrl": "../images/logos/ca.png",
           "name": "CATS",
           "url": "https://www.groupecreditagricole.jobs/Notre-groupe/Marques/Credit-Agricole-Technologies-et-Services"
@@ -145,56 +145,56 @@
       "items": [
         {
           "order": 0,
-          "height": 75,
+          "height": 60,
           "logoUrl": "../images/logos/agysoft.jpeg",
           "name": "Agysoft",
           "url": "https://www.agysoft.fr/"
         },
         {
           "order": 1,
-          "height": 75,
+          "height": 60,
           "logoUrl": "../images/logos/swile.svg",
           "name": "Swile",
           "url": "https://www.swile.co/"
         },
         {
           "order": 1,
-          "height": 75,
+          "height": 60,
           "logoUrl": "../images/logos/hiway-new.png",
           "name": "HIWAY",
           "url": "https://hiway.fr/"
         },
         {
           "order": 1,
-          "height": 100,
+          "height": 60,
           "logoUrl": "../images/logos/netheos.png",
           "name": "Netheos",
           "url": "https://www.netheos.com/"
         },
         {
           "order": 1,
-          "height": 100,
+          "height": 60,
           "logoUrl": "../images/logos/apside.png",
           "name": "Apside",
           "url": "https://www.apside.com/"
         },
         {
           "order": 1,
-          "height": 100,
+          "height": 60,
           "logoUrl": "../images/logos/cesi.png",
           "name": "CESI",
           "url": "https://www.cesi.fr/"
         },
         {
           "order": 1,
-          "height": 100,
+          "height": 60,
           "logoUrl": "../images/logos/rh.png",
           "name": "Recherche & Horizon",
           "url": "https://www.reth.fr/"
         },
         {
           "order": 1,
-          "height": 100,
+          "height": 60,
           "logoUrl": "../images/logos/clever-cloud.png",
           "name": "Clever Cloud",
           "url": "https://www.clever-cloud.com/"
@@ -207,10 +207,16 @@
       "items": [
         {
           "order": 0,
-          "height": 100,
+          "height": 60,
           "logoUrl": "../images/logos/lunatech.png",
           "name": "Lunatech",
           "url": "https://www.lunatech.fr/fr/"
+        }, {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/klanik.png",
+          "name": "Klanik",
+          "url": "https://www.klanik.com/"
         }
       ],
       "order": 3,
