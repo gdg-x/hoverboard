@@ -41,6 +41,10 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
           display: inline-block;
           vertical-align: middle;
         }
+
+        .dialog-container.content {
+          min-height: auto;
+        }
       </style>
 
       <polymer-helmet
@@ -77,7 +81,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
                   on-click="_toggleFeaturedSession"
                 ></paper-fab>
 
-                <a href="https://openfeedback.io/sunnytech2022/[[session.day]]/[[session.id]]" target="_blank">
+                <a href="[[openFeedbackLink]]" target="_blank">
                   <paper-fab
                     class="alternate"
                     label="Donnez votre avis !"
@@ -98,7 +102,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
               on-click="_toggleFeaturedSession"
             ></paper-fab>
 
-            <a href="https://openfeedback.io/sunnytech2022/[[session.day]]/[[session.id]]" target="_blank">
+            <a href="[[openFeedbackLink]]" target="_blank">
               <paper-fab
                 class="alternate"
                 label="Donnez votre avis !"
@@ -173,15 +177,17 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
             </template>
           </div>
 
-          <div id="feedback" class="additional-sections">
+          <div id="feedback" class="additional-sections" hidden="[[!acceptingFeedback]]">
             <h3>{$ feedback.headline $}</h3>
-
-            <auth-required hidden="[[!acceptingFeedback]]">
-              <slot slot="prompt">{$ feedback.leaveFeedback $}</slot>
-              <feedback-block session-id="[[session.id]]"></feedback-block>
-            </auth-required>
-
-            <p hidden="[[acceptingFeedback]]">{$ feedback.sessionClosed $}</p>
+            <div hidden="[[!acceptingFeedback]]">
+              <iframe
+                src="[[openFeedbackLink]]"
+                width="100%"
+                height="1000"
+                style="border: none"
+              >
+              </iframe>
+            </div>
           </div>
         </div>
       </app-header-layout>
@@ -210,6 +216,9 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
       acceptingFeedback: {
         value: false,
         type: Boolean,
+      },
+      openFeedbackLink: {
+        type: String,
       },
       viewport: {
         type: Object,
@@ -316,6 +325,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
     } else {
       this.acceptingFeedback = false;
     }
+    this.openFeedbackLink = `https://openfeedback.io/sunnytech2022/${this.session.day}/${this.session.id}`;
   }
 
   getVariableColor(value: string) {

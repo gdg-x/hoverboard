@@ -36,7 +36,7 @@
   "time": "Time",
   "faq": "/data/faq.md",
   "coc": "/data/coc.md",
-  "timezoneOffset": "60",
+  "timezoneOffset": "-120",
   "locationText": "/data/location.md",
   "footer": {
     "blog": "Blog"
@@ -318,5 +318,20 @@
   },
   "addToHomeScreen": {
     "cta": "Add to Home Screen"
+  },
+  "feedback": {
+    "save": "Sauvegarder",
+    "headline": "Donnez votre avis !",
+    "leaveFeedback": "to leave feedback",
+    "sendFeedbackSignedOut": "Sign in to leave feedback",
+    "removeFeedbackSignedOut": "Sign in to delete feedback",
+    "feedbackRecorded": "Feedback saved",
+    "feedbackDeleted": "Feedback deleted",
+    "helperText": "Comments will be anonymously provided to speakers",
+    "somethingWentWrong": "Something went wrong",
+    "contentCaption": "Content quality",
+    "styleCaption": "Presentation style",
+    "deleteFeedback": "Delete",
+    "sessionClosed": "Les feedbacks sont fermés."
   }
 }
