@@ -77,7 +77,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
                   on-click="_toggleFeaturedSession"
                 ></paper-fab>
 
-                <a href="https://openfeedback.io/sunnytech2022/0/[[session.id]]" target="_blank">
+                <a href="https://openfeedback.io/sunnytech2022/[[session.day]]/[[session.id]]" target="_blank">
                   <paper-fab
                     class="alternate"
                     label="Donnez votre avis !"
@@ -98,7 +98,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
               on-click="_toggleFeaturedSession"
             ></paper-fab>
 
-            <a href="https://openfeedback.io/sunnytech2022/0/[[session.id]]" target="_blank">
+            <a href="https://openfeedback.io/sunnytech2022/[[session.day]]/[[session.id]]" target="_blank">
               <paper-fab
                 class="alternate"
                 label="Donnez votre avis !"
