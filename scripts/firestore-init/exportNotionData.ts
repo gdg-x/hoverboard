@@ -239,8 +239,8 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
         const startMinutes = startTime[1]
         const endHour = parseInt(endTime[0]) +2
         const endMinutes = endTime[1]
-        const startTimeString = `${startHour}:${startMinutes}`
-        const endTimeString = `${endHour}:${endMinutes}`
+        const startTimeString = `${startHour < 10 ? "0"+startHour : startHour}:${startMinutes}`
+        const endTimeString = `${endHour < 10 ? "0" + endHour : endHour}:${endMinutes}`
         if(!acc[startTimeString]) acc[startTimeString] = {
           startTime: startTimeString,
           endTime: endTimeString,

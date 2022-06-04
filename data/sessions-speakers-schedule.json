@@ -1,5 +1,44 @@
 {
     "speakers": {
+        "stevenleroux": {
+            "bio": "CTO @ Clever Cloud après avoir travailler à OVH et Crédit Mutuel Arkea. ",
+            "company": "Clever Cloud",
+            "companyLogoUrl": "/images/logos/clever-cloud.png",
+            "country": "Rennes",
+            "name": "Steven Le Roux",
+            "photoUrl": "https://media-exp1.licdn.com/dms/image/C4D03AQHIbxXI9qDL_Q/profile-displayphoto-shrink_800_800/0/1641741684005?e=1659571200&v=beta&t=xY2IU7LmLhcamKKQv8j9fPDfSkE7OGt-LV_9nB-OUhU",
+            "socials": [
+                {
+                    "name": "Twitter",
+                    "icon": "twitter",
+                    "link": "https://twitter.com/GwinizDu?ref_src=twsrc^google|twcamp^serp|twgr^author"
+                }
+            ],
+            "shortBio": "CTO @ Clever Cloud",
+            "title": "CTO @ Clever Cloud"
+        },
+        "dianemariere": {
+            "bio": "Diane est co-fondatrice & lead dev chez Spottt, une startup lyonnaise. Autodidacte et passionnée, elle aime Elm (à prononcer très vite), la programmation fonctionnelle, refactorer du code, le deep learning & ses applications concrètes, et s'ennuie vite si elle n'apprend plus rien.",
+            "company": "Spottt",
+            "companyLogoUrl": "https://media-exp1.licdn.com/dms/image/C4E0BAQGZ14URDtJxeA/company-logo_200_200/0/1539250524544?e=1662595200&v=beta&t=HBRELBZI7HNdnDCt8e5A3JWzr1dHgTCRhQVf3ba37cI",
+            "country": "Lyon",
+            "name": "Diane ",
+            "photoUrl": "https://media-exp1.licdn.com/dms/image/C4D03AQFfmOeLgge_kQ/profile-displayphoto-shrink_800_800/0/1579642406459?e=1659571200&v=beta&t=uabwAZDZrov5pkE-XPpWl1DYuAtkeC-KjYU0Eims0-8",
+            "socials": [
+                {
+                    "name": "Twitter",
+                    "icon": "twitter",
+                    "link": "https://twitter.com/dianemaniere"
+                },
+                {
+                    "name": "Github",
+                    "icon": "github",
+                    "link": "https://github.com/dway8"
+                }
+            ],
+            "shortBio": "Full-stack developer (Elm / Node.js / PHP / Elixir), functional programming enthusiast.Passionate about machine learning & deep learning (PyTorch / TensorFlow / fastai)",
+            "title": "Co-founder & Lead dev @ SPOTTT"
+        },
         "85588885588585858585": {
             "bio": "Thomas Segismont is a Principal Software Engineer at Red Hat. With more than 15 years of software development experience, he has worked on projects of all sizes in various sectors: retail banking, utilities, finance, tourism, and hosting. As a Vert.x core committer, he is focused on developing reactive SQL clients for several relational databases, making them a solid foundation for the Hibernate Reactive project. He is also a contributor to Quarkus, the supersonic subatomic Java stack, tailored for the cloud.",
             "company": "RedHat",
@@ -580,7 +619,7 @@
             "title": "Développeur full-stack"
         },
         "iQrsGKJB1BfeyA8X9qCetVbxkTh1": {
-            "bio": "Développeur chez Red Hat, je travaille depuis deux ans sur Kiali, console d’observabilité pour Istio sur Kubernetes. J’aime bien fabriquer des petits jeux / démos, articulés autour d’un ou plusieurs objectifs, comme ce que l’on souhaite vous montrer ici. Pour finir, je suis aussi maintainer Vert.x sur le module Micrometer Metrics.",
+            "bio": "Développeur chez Red Hat depuis 2016, j'ai surtout travaillé sur Kiali, la console d’observabilité d'Istio. Depuis 2021 je participe à l'éclosion d'un nouveau projet, toujours axé sur l'observabilité réseau, mais s'aventurant un peu plus loin dans les entrailles des réseaux. À part ça, il m'arrive de fabriquer des petits jeux / démos quand je trouve le temps, et des baklavas quand l'envie s'en ressent.",
             "company": "Red Hat",
             "companyLogoUrl": "/images/logos/redhat.png",
             "name": "Joel Takvorian",
@@ -597,7 +636,7 @@
                     "link": "https://github.com/jotak"
                 }
             ],
-            "shortBio": "Développeur chez Red Hat, je travaille depuis deux ans sur Kiali, console d’observabilité pour Istio sur Kubernetes. ",
+            "shortBio": "Développeur chez Red Hat depuis 2016, j'ai surtout travaillé sur Kiali, la console d’observabilité d'Istio.",
             "title": "Développeur @ Red Hat"
         },
         "i0pl2yBPWmV1BUFj1cc7QfQUdZu1": {
@@ -1488,7 +1527,7 @@
             ],
             "speakers": [
                 "xRNeGxIeNcdAegOPlnYeBKFVX2o1",
-                "Tv04ILv7SGQSR0Prkh53nCcdnS83"
+                "dianemariere"
             ],
             "presentation": null,
             "videoId": null,
@@ -1733,7 +1772,7 @@
         },
         "5d170253-73a5-468f-a457-aa70cdbe92fe": {
             "title": "Pause croissant",
-            "description": "Croissants et chocolatines, un peu d’eau et du café vous attendent !",
+            "description": "Croissants et chocolatines, un peu (deux palettes) d’eau et du café vous attendent !",
             "language": "French",
             "tags": [],
             "speakers": [],
@@ -1948,7 +1987,6 @@
                 "Backend"
             ],
             "speakers": [
-                "ihxNY5e2FCadn2yku9iPl4vonXE2",
                 "acXRt2QDzVZ46LnQvR4jtYmrfnL2"
             ],
             "presentation": null,
@@ -2503,7 +2541,7 @@
                 "Cloud & Devops"
             ],
             "speakers": [
-                "NaGWlF5aoZgOlVoQ0EYNtMD7AIh2"
+                "stevenleroux"
             ],
             "presentation": null,
             "videoId": null,
@@ -2602,8 +2640,8 @@
             "dateReadable": "jeudi 30 juin",
             "timeslots": [
                 {
-                    "startTime": "8:30",
-                    "endTime": "9:00",
+                    "startTime": "08:30",
+                    "endTime": "09:00",
                     "sessions": [
                         {
                             "items": [
@@ -2613,7 +2651,7 @@
                     ]
                 },
                 {
-                    "startTime": "9:00",
+                    "startTime": "09:00",
                     "endTime": "10:05",
                     "sessions": [
                         {
@@ -2895,8 +2933,8 @@
                     ]
                 },
                 {
-                    "startTime": "17:50",
-                    "endTime": "18:10",
+                    "startTime": "18:00",
+                    "endTime": "18:20",
                     "sessions": [
                         {
                             "items": [
@@ -2928,7 +2966,7 @@
                 },
                 {
                     "startTime": "19:00",
-                    "endTime": "23:00",
+                    "endTime": "22:00",
                     "sessions": [
                         {
                             "items": [
@@ -2964,8 +3002,8 @@
             "dateReadable": "vendredi 1 juillet",
             "timeslots": [
                 {
-                    "startTime": "8:30",
-                    "endTime": "9:00",
+                    "startTime": "08:30",
+                    "endTime": "09:00",
                     "sessions": [
                         {
                             "items": [
@@ -2975,8 +3013,8 @@
                     ]
                 },
                 {
-                    "startTime": "9:00",
-                    "endTime": "9:50",
+                    "startTime": "09:00",
+                    "endTime": "09:50",
                     "sessions": [
                         {
                             "items": [
@@ -3013,7 +3051,7 @@
                     ]
                 },
                 {
-                    "startTime": "9:50",
+                    "startTime": "09:50",
                     "endTime": "10:10",
                     "sessions": [
                         {
