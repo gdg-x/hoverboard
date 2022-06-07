@@ -9,7 +9,7 @@ jobs:
         with:
           node-version: 14
           cache: 'npm'
-      - run: npm ci --ignore-scripts
+      - run: git config --global url."git@github.com:".insteadOf git://github.com/ && npm ci --ignore-scripts
       - run: npm run firestore:updateSpeakerSessionsSchedule
         env:
           notionSpeakersId: '${{ secrets.NOTION_SPEAKER_DB_ID }}'
