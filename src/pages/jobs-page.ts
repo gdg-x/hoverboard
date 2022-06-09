@@ -18,7 +18,7 @@ export class BlogPage extends PolymerElement {
         }
 
         * {
-          --w3d-main-color: #e83002;
+          --w3d-main-color: #fb4552;
           --w3d-accent-color: #fff;
         }
 
