@@ -84,9 +84,6 @@ export class FilterMenu extends PolymerElement {
       <div class="filters-toolbar container">
         <div layout horizontal center>
           <div layout horizontal center flex>
-            <div class="results" hidden$="[[_hideResultText(resultsCount, _selectedArray)]]">
-              [[resultsCount]] {$ filters.results $}
-            </div>
           </div>
 
           <div class="actions" layout horizontal center>
@@ -224,7 +221,7 @@ export class FilterMenu extends PolymerElement {
   }
 
   _clickOutsideListener(e) {
-    const isOutside = !e.path.find((path) => path === this);
+    const isOutside = !e.composedPath().find((path) => path === this);
     if (isOutside) {
       this._toggleBoard();
       this._clickOutsideUnlisten();
