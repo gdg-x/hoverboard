@@ -53,10 +53,26 @@ export const parseQueryParamsFilters = (queryParams: string) => {
 };
 
 export const toggleQueryParam = (currentQueryParams: string | null, key: string, value: string) => {
+
+
   const keyValue = `${key}=${value}`;
   const currentKeyValuePairs = currentQueryParams ? currentQueryParams.split('&') : [];
-  const resultArray = currentKeyValuePairs.includes(keyValue)
-    ? currentKeyValuePairs.filter((pair) => pair !== keyValue)
-    : currentKeyValuePairs.concat(keyValue);
-  return resultArray.join('&');
+
+  // Edited by Hugo
+  const hasAlreadyThisKey = currentKeyValuePairs.some((pair) => pair.includes(key));
+  if(hasAlreadyThisKey) {
+    const newKeyValuePairs = currentKeyValuePairs.map((pair) => {
+      if(pair.includes(key)) {
+        return keyValue;
+      }
+      return pair;
+    })
+
+    return newKeyValuePairs.join('&');
+  } else {
+    const resultArray = currentKeyValuePairs.join().includes(key)
+      ? currentKeyValuePairs.filter((pair) => pair.includes(key))
+      : currentKeyValuePairs.concat(keyValue);
+    return resultArray.join('&');
+  }
 };

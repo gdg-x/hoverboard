@@ -20,11 +20,13 @@ import {
 } from '../../store/featured-sessions/state';
 import { showToast } from '../../store/toast/actions';
 import { toggleVideoDialog } from '../../store/ui/actions';
-import { getVariableColor } from '../../utils/functions';
+import {getVariableColor, toggleQueryParam} from '../../utils/functions'
 import '../feedback-block';
 import '../shared-styles';
 import '../text-truncate';
 import './dialog-styles';
+import {property} from '@polymer/decorators'
+import {setRoute} from '../../store/routing/actions'
 
 const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const ONE_MINUTE_MS = 60 * 1000;
@@ -257,7 +259,12 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
 
   _close() {
     closeDialog();
-    history.back();
+    const queryParams = new URLSearchParams(window.location.search);
+    queryParams.delete('sessionId');
+
+    const url = `${location.protocol}//${location.host}${location.pathname}?${queryParams.toString()}`;
+    history.pushState({}, document.title, url);
+    window.dispatchEvent(new CustomEvent('location-changed'));
   }
 
   _openSpeaker(event: Event & { currentTarget: HTMLElement }) {
