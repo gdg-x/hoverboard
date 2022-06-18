@@ -332,7 +332,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
     } else {
       this.acceptingFeedback = false;
     }
-    this.openFeedbackLink = `https://openfeedback.io/sunnytech2022/${this.session.day}/${this.session.id}`;
+    this.openFeedbackLink = `https://openfeedback.io/sunnytech2022/${this.session.day}/${this.session.id}?hideHeader=true`;
   }
 
   getVariableColor(value: string) {
