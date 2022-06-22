@@ -13,7 +13,7 @@ jobs:
           node-version: 14
       - name: Create temp serviceAccount.json
         run: echo "{}" > serviceAccount.json
-      - run: npm ci
+      - run: git config --global url."git@github.com:".insteadOf git://github.com/ && npm ci
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
