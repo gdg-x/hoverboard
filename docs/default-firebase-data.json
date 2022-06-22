@@ -46,6 +46,15 @@
       "published": "2021-01-21",
       "source": "/data/posts/2021-01-21-news-cancelled.md",
       "title": "Sunny Tech 2021 est annulé"
+    },
+    "2022-cfp-stats": {
+      "backgroundColor": "#888888",
+      "brief": "",
+      "image": "/images/backgrounds/registration.jpg",
+      "content": "md",
+      "published": "2022-06-27",
+      "source": "/data/posts/2022-06-27-cfp-stats.md",
+      "title": "Comprendre les résultats du CFP de SunnyTech"
     }
   },
   "notifications": {
