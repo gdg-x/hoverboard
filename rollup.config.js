@@ -62,12 +62,15 @@ export default merge(baseConfig, {
         {
           src: 'data/*.md',
           dest: 'dist/data',
-          transform: compileBufferTemplate,
         },
         {
           src: 'data/posts/*.md',
           dest: 'dist/data/posts',
           transform: compileBufferTemplate,
+        },
+        {
+          src: 'data/*.pdf',
+          dest: 'dist/data',
         },
       ],
     }),
