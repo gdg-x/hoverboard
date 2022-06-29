@@ -37,7 +37,7 @@ In the [`.github/workflows`](.github/workflows) folder, you can find two workflo
 The `main.yaml` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
 To run the two `deploy` actions on your instance, you need to do a couple of small setup:
 
-### Deploying to Firebase wiht Github Actions
+### Deploying to Firebase with Github Actions
 
 Make sure you are acting on the correct Firebase project.
 
