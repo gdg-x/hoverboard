@@ -184,7 +184,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
 
         <div class="session-content" flex layout horizontal justified>
           <div class="session-meta">
-            <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
+            <div hidden$="[[!session.complexity]]">[[session.track.title]] - [[session.complexity]]</div>
           </div>
           <div class="session-actions">
             <iron-icon
