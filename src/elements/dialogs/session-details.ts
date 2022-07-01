@@ -83,7 +83,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
                   on-click="_toggleFeaturedSession"
                 ></paper-fab>
 
-                <a href="[[openFeedbackLink]]" target="_blank">
+                <a href="[[openFeedbackLinkDirect]]" target="_blank">
                   <paper-fab
                     class="alternate"
                     label="Donnez votre avis !"
@@ -104,7 +104,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
               on-click="_toggleFeaturedSession"
             ></paper-fab>
 
-            <a href="[[openFeedbackLink]]" target="_blank">
+            <a href="[[openFeedbackLinkDirect]]" target="_blank">
               <paper-fab
                 class="alternate"
                 label="Donnez votre avis !"
@@ -222,6 +222,9 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
       openFeedbackLink: {
         type: String,
       },
+      openFeedbackLinkDirect: {
+        type: String,
+      },
       viewport: {
         type: Object,
       },
@@ -333,6 +336,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
       this.acceptingFeedback = false;
     }
     this.openFeedbackLink = `https://openfeedback.io/sunnytech2022/${this.session.day}/${this.session.id}?hideHeader=true&forceColorScheme=light`;
+    this.openFeedbackLinkDirect = `https://openfeedback.io/sunnytech2022/${this.session.day}/${this.session.id}`;
   }
 
   getVariableColor(value: string) {
