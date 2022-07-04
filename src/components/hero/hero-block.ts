@@ -1,6 +1,6 @@
-import { PropertyValues } from '@lit/reactive-element';
+// import { PropertyValues } from '@lit/reactive-element';
 import '@power-elements/lazy-image';
-import { css, html } from 'lit';
+import { css, html, PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { setHeroSettings } from '../../store/ui/actions';
