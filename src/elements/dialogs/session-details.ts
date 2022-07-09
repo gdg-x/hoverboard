@@ -83,14 +83,14 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
                   on-click="_toggleFeaturedSession"
                 ></paper-fab>
 
-                <a href="[[openFeedbackLinkDirect]]" target="_blank">
-                  <paper-fab
-                    class="alternate"
-                    label="Donnez votre avis !"
-                    icon="hoverboard:feedback"
-                    hidden$="[[_actionButtonVisible(viewport.isLaptopPlus, session.speakers)]]">
-                  </paper-fab>
-                </a>
+<!--                <a href="[[openFeedbackLinkDirect]]" target="_blank">-->
+<!--                  <paper-fab-->
+<!--                    class="alternate"-->
+<!--                    label="Donnez votre avis !"-->
+<!--                    icon="hoverboard:feedback"-->
+<!--                    hidden$="[[_actionButtonVisible(viewport.isLaptopPlus, session.speakers)]]">-->
+<!--                  </paper-fab>-->
+<!--                </a>-->
               </div>
             </div>
           </app-toolbar>
@@ -104,14 +104,14 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
               on-click="_toggleFeaturedSession"
             ></paper-fab>
 
-            <a href="[[openFeedbackLinkDirect]]" target="_blank">
-              <paper-fab
-                class="alternate"
-                label="Donnez votre avis !"
-                icon="hoverboard:feedback"
-                hidden$="[[_actionButtonVisible(viewport.isLaptopPlus, session.speakers, 'toto')]]">
-              </paper-fab>
-            </a>
+<!--            <a href="[[openFeedbackLinkDirect]]" target="_blank">-->
+<!--              <paper-fab-->
+<!--                class="alternate"-->
+<!--                label="Donnez votre avis !"-->
+<!--                icon="hoverboard:feedback"-->
+<!--                hidden$="[[_actionButtonVisible(viewport.isLaptopPlus, session.speakers, 'toto')]]">-->
+<!--              </paper-fab>-->
+<!--            </a>-->
 
           </div>
           <h3 class="meta-info" hidden$="[[disabledSchedule]]">
