@@ -98,7 +98,7 @@
     "firebase-tools": "^11.2.0",
     "jest": "^27.5.1",
     "jest-dev-server": "^6.0.3",
-    "markdownlint": "^0.26.0",
+    "markdownlint": "^0.26.1",
     "markdownlint-cli": "^0.31.1",
     "nunjucks": "^3.2.3",
     "prettier": "2.7.1",
