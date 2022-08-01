@@ -21,7 +21,7 @@
   "dependencies": {
     "@google-cloud/storage": "^6.2.2",
     "express": "^4.18.1",
-    "firebase-admin": "^11.0.0",
+    "firebase-admin": "^11.0.1",
     "firebase-functions": "^3.22.0",
     "moment": "^2.29.3",
     "node-fetch": "^3.2.4"
