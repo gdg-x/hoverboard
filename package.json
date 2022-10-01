@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^2.0.2",
-    "@jest/globals": "^27.5.1",
+    "@jest/globals": "^29.1.2",
     "@jest/types": "^27.5.1",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
