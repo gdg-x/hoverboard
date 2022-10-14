@@ -10,7 +10,7 @@
   "scripts": {
     "build": "npm run clean && NODE_ENV=production rollup --config rollup.config.ts --configPlugin typescript",
     "clean": "rm -rf dist",
-    "deploy": "npm run build && NODE_ENV=production firebase deploy",
+    "deploy": "npm run build && NODE_ENV=production firebase deploy --only hosting",
     "firestore:copy": "ts-node-script ./scripts/firestore-copy",
     "firestore:init": "ts-node-script ./scripts/firestore-init",
     "fix": "concurrently npm:fix:*",

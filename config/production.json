@@ -1,5 +1,14 @@
 {
   "basepath": "/",
   "url": "https://hoverboard-master.web.app/",
-  "googleMapApiKey": "AIzaSyCJqlRVGIe6bfU43rga3cnK7tSXXwc7JD8"
+  "googleMapApiKey": "AIzaSyCJqlRVGIe6bfU43rga3cnK7tSXXwc7JD8",
+  "firebase": {
+    "apiKey": "AIzaSyDULj10JuzzdQ1H2lCfQHDRBzQ36qY84po",
+    "appId": "1:328093322585:web:acb6d7dcdbeac7d8001048",
+    "authDomain": "devfest2022dev.firebaseapp.com",
+    "databaseURL": "devfest2022dev.firebaseapp.com",
+    "messagingSenderId": "328093322585",
+    "projectId": "devfest2022dev",
+    "storageBucket": "devfest2022dev.appspot.com"
+  }
 }
