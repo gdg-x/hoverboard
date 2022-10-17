@@ -32,7 +32,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           --iron-icon-fill-color: currentColor;
           display: block;
           z-index: 1;
-          border-bottom: 1px solid var(--divider-color);
+          border-bottom: 1px solid var(--nav-background-color);
           background-color: var(--nav-background-color);
           transition: background-color var(--animation), border-bottom-color var(--animation),
             color var(--animation);

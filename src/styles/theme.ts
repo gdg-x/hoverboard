@@ -12,7 +12,7 @@ export const theme = css`
     --primary-text-color: #424242;
     --secondary-text-color: #757575;
     --disabled-text-color: #bdbdbd;
-    --divider-color: #000;
+    --divider-color: #ededed;
     --footer-background-color: #f5f5f5;
     --footer-text-color: #616161;
     --twitter-color: #4099ff;
