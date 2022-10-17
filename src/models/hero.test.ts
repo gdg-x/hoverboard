@@ -5,8 +5,8 @@ describe('hero', () => {
   it('matches the shape of the default data', () => {
     const heros: Hero[] = [
       {
-        backgroundColor: '/images/backgrounds/banner.png',
-        backgroundImage: '#673ab7',
+        backgroundColor: '/images/backgrounds/home-banner.png',
+        backgroundImage: '#4285f4',
         fontColor: '#fff',
         hideLogo: true,
       },

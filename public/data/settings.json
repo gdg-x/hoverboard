@@ -49,7 +49,7 @@
       "description": "¡Únete a la comunidad, aprende nuevas cosas!",
       "background": {
         "color": "#4285f4",
-        "image": "/images/backgrounds/banner.png"
+        "image": "/images/backgrounds/home-banner.png"
       },
       "fontColor": "#FFF"
     },
