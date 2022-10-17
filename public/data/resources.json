@@ -1,9 +1,9 @@
 {
-  "title": "GDG DevFest Season 2018",
-  "description": "Join the community, learn new things!",
+  "title": "GDG DevFest 2022",
+  "description": "¡Únete a la comunidad, aprende nuevas cosas!",
   "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "Noviembre 18-19, 2022",
+  "dates": "18 y 19 de Noviembre de 2022",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
   "share": "Share",
   "followOur": "Follow our",
@@ -11,10 +11,10 @@
   "emailUs": "Email us",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
-  "buyTicket": "Buy ticket",
+  "buyTicket": "Registrarse",
   "signIn": "Sign in",
   "signOut": "Sign out",
-  "viewHighlights": "View Highlights",
+  "viewHighlights": "Trailer",
   "offlineMessage": "You can still work offline.",
   "serviceWorkerInstalled": "App is now installed and available offline.",
   "serviceWorkerAvailable": "A new version of this app is available.",
@@ -141,8 +141,8 @@
       },
       "howItWas": {
         "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "label": "DevFest 2022 Bolivia",
+        "youtubeId": "K6W9Usve6hI"
       }
     },
     "statisticsBlock": {

@@ -9,8 +9,8 @@
   "endDate": "2017-10-14T19:00:00+03:00",
   "webapp": {
     "shortName": "DevFest",
-    "themeColor": "#673AB7",
-    "backgroundColor": "#673AB7"
+    "themeColor": "##4285f4",
+    "backgroundColor": "##4285f4"
   },
   "dateFormat": {
     "locale": "en-US"
@@ -46,10 +46,10 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "Join the commuity, learn new things!",
+      "description": "¡Únete a la comunidad, aprende nuevas cosas!",
       "background": {
-        "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
+        "color": "#4285f4",
+        "image": "/images/backgrounds/banner.png"
       },
       "fontColor": "#FFF"
     },
@@ -122,7 +122,7 @@
   "location": {
     "label": "Location",
     "name": "Planeta kino",
-    "city": "Lviv",
+    "city": "Cochabamba",
     "short": "Lviv, Ukraine",
     "address": "36 Shchyretska St, Lviv, Ukraine",
     "pointer": {
