@@ -150,7 +150,7 @@ export class HoverboardApp extends PolymerElement {
           <app-toolbar layout vertical start>
             <lazy-image
               class="toolbar-logo"
-              src="/images/logo-monochrome.svg"
+              src="/images/devfest2022.svg"
               alt="[[alt]]"
             ></lazy-image>
             <h2 class="dates">[[dates]]</h2>

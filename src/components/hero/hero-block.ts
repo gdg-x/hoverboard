@@ -42,7 +42,7 @@ export class HeroBlock extends ThemedElement {
         }
 
         .hero-overlay[show] {
-          opacity: 1;
+          opacity: 0;
         }
 
         .hero-image {
