@@ -70,3 +70,4 @@ dist/
 serviceAccount.json
 *-adminsdk-*.json
 .DS_Store
+/.idea/
