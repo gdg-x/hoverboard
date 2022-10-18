@@ -120,22 +120,23 @@
     }
   },
   "location": {
-    "label": "Location",
-    "name": "Planeta kino",
+    "label": "Ubicación",
+    "name": "UCATEC",
     "city": "Cochabamba",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "short": "Cochabamba, Bolivia",
+    "address": "UCATEC, Guillermo Añez, Cochabamba",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": -17.3708176,
+      "longitude": -66.1368788,
+      "zoom": 16
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": -17.3708176,
+      "longitude": -66.1368788
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
-  },
+    "description": "Universidad Privada de Ciencias Administrativas y Tecnológicas"
+  }, 
+  
   "socialNetwork": {
     "follow": [
       {
