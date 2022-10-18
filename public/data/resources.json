@@ -132,15 +132,15 @@
     ]
   },
   "aboutBlock": {
-    "title": "About",
+    "title": "Información del evento",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
-        "label": "Explore featured session",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "description": "El DevFest es el evento más importante de la comunidad GDG (Google Developers Group) llevado a cabo en simultáneo por cerca de 720 grupos de desarrolladores alrededor del mundo. Nuestro objetivo es reunir a expertos en desarrollo de software, buscando compartir el conocimiento sobre las distintas herramientas disponibles en el mercado a la mayor cantidad posible de estudiantes, profesionales, y entusiastas de la tecnología.",
+        "label": "Sobre el devfest",
+        "link": "https://developers.google.com/community/devfest"
       },
       "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
+        "description": "Contaremos con el talento de desarrolladores locales y la presencia de Google Developer Experts, especialistas en distintas tecnologías. Además del apoyo de la Universidad UCATEC como sede del evento y de diversas empresas de desarrollo de software.",
         "label": "DevFest 2022 Bolivia",
         "youtubeId": "K6W9Usve6hI"
       }
