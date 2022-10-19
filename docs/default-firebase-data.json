@@ -164,7 +164,7 @@
       "dateReadable": "September 9",
       "timeslots": [
         {
-          "endTime": "10:00",
+          "endTime": "10:01",
           "sessions": [
             {
               "items": ["132"]
@@ -820,7 +820,7 @@
       "title": "Product Manager/Developer"
     },
     "aleksander_piotrowski": {
-      "bio": "Became a mobile developer after long run as a backend developer. Because of age, holding senior positions from the day one as an Android programmer. Serial hackathon winner, or at least contender ;-)",
+      "bio": "EDITED - Became a mobile developer after long run as a backend developer. Because of age, holding senior positions from the day one as an Android programmer. Serial hackathon winner, or at least contender ;-)",
       "company": "Applause",
       "companyLogo": "/images/logos/gdg-lviv.svg",
       "companyLogoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/logos/gdg-lviv.svg",

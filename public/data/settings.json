@@ -1,9 +1,9 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "name": "GDG Warsaw",
+    "twitter": "maybe-some-day",
+    "blog": "",
+    "url": "https://gdg.community.dev/gdg-warszawa/"
   },
   "startDate": "2017-10-013T09:00:00+03:00",
   "endDate": "2017-10-14T19:00:00+03:00",
@@ -122,9 +122,9 @@
   "location": {
     "label": "Location",
     "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "city": "Warsaw",
+    "short": "Warsaw, Poland",
+    "address": "",
     "pointer": {
       "latitude": 49.809841,
       "longitude": 23.972805,
@@ -207,5 +207,5 @@
       "itemsCount": 5
     }
   },
-  "showForkMeBlockForProjectIds": ["hoverboard-master", "hoverboard-dev"]
+  "showForkMeBlockForProjectIds": ["gdg-warsaw-devfest22-website", "gdg-warsaw-devfest22-website"]
 }
