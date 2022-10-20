@@ -31,17 +31,12 @@
     {
       "route": "schedule",
       "permalink": "/schedule",
-      "label": "Schedule"
+      "label": "Agenda"
     },
     {
       "route": "team",
       "permalink": "/team",
       "label": "Equipo"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog",
-      "label": "Blog"
     }
   ],
   "heroSettings": {
@@ -135,8 +130,8 @@
       "longitude": -66.1368788
     },
     "description": "Universidad Privada de Ciencias Administrativas y Tecnológicas"
-  }, 
-  
+  },
+
   "socialNetwork": {
     "follow": [
       {
