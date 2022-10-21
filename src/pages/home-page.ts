@@ -2,7 +2,7 @@ import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../components/about-block';
-import '../components/about-conference-block';
+// import '../components/about-conference-block';
 import '../elements/about-organizer-block';
 // import '../elements/featured-videos';
 import '../elements/fork-me-block';
@@ -158,27 +158,34 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
 
           <div class="action-buttons" layout horizontal center-justified wrap>
-<!--            <paper-button-->
-<!--              class="watch-video"-->
-<!--              on-click="_playVideo"-->
-<!--              ga-on="click"-->
-<!--              ga-event-category="video"-->
-<!--              ga-event-action="watch"-->
-<!--              ga-event-label="hero block - view highlights"-->
-<!--            >-->
-<!--              <iron-icon icon="hoverboard:movie"></iron-icon>-->
-<!--              {$ viewHighlights $}-->
-<!--            </paper-button>-->
+
+            <a
+              href="https://www.youtube.com/c/SunnyTechMtp"
+              target="_blank"
+            >
+              <paper-button
+                class="watch-video"
+                on-click="_playVideo"
+                ga-on="click"
+                ga-event-category="video"
+                ga-event-action="watch"
+                ga-event-label="hero block - view highlights"
+                primary
+              >
+                <iron-icon icon="hoverboard:movie"></iron-icon>
+                {$ viewHighlights $}
+              </paper-button>
+            </a>
 
             <a
               href="/schedule/"
             >
               <paper-button
+                class="watch-video"
                 ga-on="click"
                 ga-event-category="schedule"
                 ga-event-action="scroll"
                 ga-event-label="hero block - open schedule"
-                primary
               >
                 <iron-icon icon="hoverboard:calendar"></iron-icon>
                 {$ viewSchedule $}
@@ -254,13 +261,12 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       <fork-me-block></fork-me-block>
       {% endif %}
       <about-block></about-block>
-      <about-conference-block></about-conference-block>
+<!--      <about-conference-block></about-conference-block>-->
 <!--      <speakers-block></speakers-block>-->
 <!--      <subscribe-block></subscribe-block>-->
 <!--      <tickets-block></tickets-block>-->
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
-<!--      <featured-videos></featured-videos>-->
 <!--      <latest-posts-block></latest-posts-block>-->
       <partners-block></partners-block>
       <map-block></map-block>

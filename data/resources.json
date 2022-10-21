@@ -24,7 +24,7 @@
   "becomeSponsorMenu": "Devenir sponsor",
   "signIn": "Connexion",
   "signOut": "Déconnexion",
-  "viewHighlights": "Moments forts 2019",
+  "viewHighlights": "Vidéos 2022",
   "viewSchedule": "SCHEDULE 2022",
   "downloadSchedule": "Télécharger le programme",
   "offlineMessage": "You can still work offline.",
@@ -181,11 +181,11 @@
     "toast": "Nous revenons vers vous dans les plus brefs délais!"
   },
   "galleryBlock": {
-    "title": "Moments forts de Sunny Tech 2019",
-    "description": "Grâce à nos photographes, revivez l'édition 2019",
+    "title": "Moments forts de Sunny Tech 2022",
+    "description": "Grâce à nos photographes, revivez l'édition 2022",
     "callToAction": {
       "label": "Voir toutes les photos",
-      "link": "https://photos.app.goo.gl/ohRMS9dXRFbo21X99"
+      "link": "https://photos.app.goo.gl/axFREEaZ3kKQHE3i9"
     }
   },
   "mapBlock": {
