@@ -77,85 +77,103 @@
       "items": [
         {
           "order": 0,
-          "logoUrl": "../images/logos/gdg-lviv.svg",
-          "name": "GDG Lviv",
-          "url": "https://www.meetup.com/GDG-Lviv/"
-        }
-      ],
-      "order": 0,
-      "title": "Template Creator"
-    },
-    {
-      "items": [
-        {
-          "order": 0,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
+          "logoUrl": "../images/logos/gdg-cochabamba.png",
+          "name": "GDG Cochabamba",
+          "url": "https://www.facebook.com/GDGCochabamba"
         },
         {
           "order": 1,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
+          "logoUrl": "../images/logos/gdg-santa-cruz.png",
+          "name": "GDG Santa Cruz",
+          "url": "https://www.facebook.com/GDGSantaCruz"
         },
         {
           "order": 2,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
+          "logoUrl": "../images/logos/gdg-la-paz.png",
+          "name": "GDG La Paz",
+          "url": "https://www.facebook.com/GDGLaPaz"
         },
         {
           "order": 3,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
+          "logoUrl": "../images/logos/gdg-sucre.png",
+          "name": "GDG Sucre",
+          "url": "https://www.facebook.com/gdgsucre"
         },
         {
           "order": 4,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
+          "logoUrl": "../images/logos/gdg-tarija.png",
+          "name": "GDG Tarija",
+          "url": "https://www.facebook.com/gdgtarija"
         },
         {
           "order": 5,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
+          "logoUrl": "../images/logos/wtm-cochabamba.png",
+          "name": "Women Techmakers Cochabamba",
+          "url": "https://www.facebook.com/WomenTechmakersCochabamba/"
         },
         {
           "order": 6,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
+          "logoUrl": "../images/logos/wtm-la-paz.png",
+          "name": "Women Techmakers La Paz",
+          "url": "https://m.facebook.com/womentechmakerslapaz/"
         },
         {
           "order": 7,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
+          "logoUrl": "../images/logos/wtm-sucre.png",
+          "name": "Women Techmakers Sucre",
+          "url": "https://www.facebook.com/wtmsucre"
         },
         {
           "order": 8,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
+          "logoUrl": "../images/logos/wtm-santa-cruz.png",
+          "name": "Women Techmakers Santa Cruz",
+          "url": "https://www.instagram.com/wtmsantacruz"
         },
         {
           "order": 9,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
+          "logoUrl": "../images/logos/gdsc-ucb.png",
+          "name": "Google Developer Student Club Universidad Católica Boliviana San Pablo",
+          "url": "https://www.facebook.com/gdsc.ucb"
         },
         {
           "order": 10,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
+          "logoUrl": "../images/logos/gdsc-univalle.png",
+          "name": "Google Developer Student Club - Univalle",
+          "url": "https://www.facebook.com/gdsc.univalle/"
+        },
+        {
+          "order": 11,
+          "logoUrl": "../images/logos/gdsc-umsa.png",
+          "name": "Google Developer Student Club UMSA",
+          "url": "https://www.facebook.com/gdscumsa"
+        },
+        {
+          "order": 12,
+          "logoUrl": "../images/logos/gdsc-umss.png",
+          "name": "GDSC - Universidad Mayor de San Simón",
+          "url": "https://www.facebook.com/gdscumss/"
+        },
+        {
+          "order": 13,
+          "logoUrl": "../images/logos/angular-bolivia.png",
+          "name": "Angular Bolivia",
+          "url": "https://www.facebook.com/angular.bolivia"
+        },
+        {
+          "order": 14,
+          "logoUrl": "../images/logos/gp4-tech.png",
+          "name": "Girl Power",
+          "url": "https://www.facebook.com/GP4TechJala"
+        },
+        {
+          "order": 15,
+          "logoUrl": "../images/logos/mujeres-tics-bolivia.png",
+          "name": "Mujeres TICs Bolivia",
+          "url": "https://www.facebook.com/profile.php?id=100057954379270"
         }
       ],
-      "order": 1,
-      "title": "General Partner"
+      "order": 0,
+      "title": "Comunidades organizadoras"
     }
   ],
   "schedule": {
