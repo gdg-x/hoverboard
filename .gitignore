@@ -1,3 +1,5 @@
+.idea/
+
 # Logs
 logs
 *.log
@@ -67,11 +69,6 @@ node_modules/
 
 # Custom
 dist/
-out-tsc/
 serviceAccount.json
 *-adminsdk-*.json
 .DS_Store
-
-serviceAccountDev.json
-*.iml
-.idea

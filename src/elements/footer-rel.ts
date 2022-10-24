@@ -1,6 +1,6 @@
-import { customElement } from '@polymer/decorators';
+import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
-import './subscribe-form-footer';
+import { footerRelBlock, notifications, subscribeNote } from '../utils/data';
 
 @customElement('footer-rel')
 export class FooterRel extends PolymerElement {
@@ -63,36 +63,37 @@ export class FooterRel extends PolymerElement {
           }
         }
       </style>
-      {% for footerRel in footerRelBlock %}
-      <div class="col" layout vertical wrap flex-auto>
-        <div class="col-heading">{$ footerRel.title $}</div>
-        <ul class="nav">
-          {% for link in footerRel.links %}
-          <li>
-            <a
-              href="{$ link.url $}"
-              {%
-              if
-              link.newtab
-              %}
-              target="_blank"
-              rel="noopener noreferrer"
-              {%
-              endif
-              %}
-              >{$ link.name $}</a
-            >
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endfor %}
+
+      <template is="dom-repeat" items="[[footerRelBlock]]" as="footerRel">
+        <div class="col" layout vertical wrap flex-auto>
+          <div class="col-heading">[[footerRel.title]]</div>
+          <ul class="nav">
+            <template is="dom-repeat" items="[[footerRel.links]]" as="link">
+              <li>
+                <template is="dom-if" if="[[!link.newTab]]">
+                  <a href="[[link.url]]">[[link.name]]</a>
+                </template>
+                <template is="dom-if" if="[[link.newTab]]">
+                  <a href="[[link.url]]" target="_blank" rel="noopener noreferrer">[[link.name]]</a>
+                </template>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </template>
 
       <div class="col" layout vertical flex-auto wrap>
-        <div class="col-heading">{$ subscribe $}</div>
-        <span>{$ subscribeNote $}</span>
+        <div class="col-heading">[[notifications.subscribe]]</div>
+        <span>[[subscribeNote]]</span>
         <subscribe-form-footer></subscribe-form-footer>
       </div>
     `;
   }
+
+  @property({ type: Array })
+  private footerRelBlock = footerRelBlock;
+  @property()
+  private subscribeNote = subscribeNote;
+  @property({ type: Object })
+  private notifications = notifications;
 }

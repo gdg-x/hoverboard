@@ -1,4 +1,4 @@
-import { Speaker } from '../../models/speaker';
+import { SpeakerWithTags } from '../../models/speaker';
 
 export const FETCH_SPEAKERS = 'FETCH_SPEAKERS';
 export const FETCH_SPEAKERS_FAILURE = 'FETCH_SPEAKERS_FAILURE';
@@ -15,7 +15,7 @@ interface FetchSpeakersFailureAction {
 
 interface FetchSpeakersSuccessAction {
   type: typeof FETCH_SPEAKERS_SUCCESS;
-  payload: Speaker[];
+  payload: SpeakerWithTags[];
 }
 
 export type SpeakerActions =

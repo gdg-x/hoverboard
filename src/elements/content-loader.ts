@@ -2,6 +2,8 @@ import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import './shared-styles';
 
+// TODO: Rewrite
+
 @customElement('content-loader')
 export class ContentLoader extends PolymerElement {
   static get template() {
@@ -113,48 +115,48 @@ export class ContentLoader extends PolymerElement {
         }
       </style>
 
-      <template is="dom-repeat" items="[[_getArray()]]">
+      <template is="dom-repeat" items="[[getArray()]]">
         <div class="content"></div>
       </template>
     `;
   }
 
   @property({ type: String })
-  private cardPadding: string;
+  private cardPadding: string | undefined;
   @property({ type: String })
-  private cardMargin: string;
+  private cardMargin: string | undefined;
   @property({ type: String })
-  private cardHeight: string;
+  private cardHeight: string | undefined;
   @property({ type: String })
-  private cardWidth: string;
+  private cardWidth: string | undefined;
   @property({ type: String })
-  private borderRadius: string;
+  private borderRadius: string | undefined;
   @property({ type: String })
-  private horizontalPosition: string;
+  private horizontalPosition: string | undefined;
   @property({ type: String })
   private avatarSize = '0px';
   @property({ type: String })
   private avatarCircle = '0px';
   @property({ type: String })
-  private titleTopPosition: string;
+  private titleTopPosition: string | undefined;
   @property({ type: String })
-  private titleHeight: string;
+  private titleHeight: string | undefined;
   @property({ type: String })
-  private titleWidth: string;
+  private titleWidth: string | undefined;
   @property({ type: String })
-  private animationTime: string;
+  private animationTime: string | undefined;
   @property({ type: String })
-  private boxShadow: string;
+  private boxShadow: string | undefined;
   @property({ type: String })
-  private blurWidth: string;
+  private blurWidth: string | undefined;
   @property({ type: String })
-  private loadFrom: string;
+  private loadFrom: string | undefined;
   @property({ type: String })
-  private loadTo: string;
+  private loadTo: string | undefined;
   @property({ type: Number })
   private itemsCount = 0;
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
 
     this.updateStyles({
@@ -177,7 +179,7 @@ export class ContentLoader extends PolymerElement {
     });
   }
 
-  _getArray() {
+  private getArray() {
     return new Array(Number(this.itemsCount));
   }
 }

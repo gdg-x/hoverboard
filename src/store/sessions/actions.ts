@@ -1,8 +1,8 @@
+import { Initialized, Success } from '@abraham/remotedata';
+import { orderBy } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { Session } from '../../models/session';
-import { mergeId } from '../../utils/merge-id';
-import { db } from '../db';
-import { FiltersActions, SET_FILTERS } from '../filters/types';
+import { subscribeToCollection, Subscription } from '../../utils/firestore';
 import {
   FETCH_SESSIONS,
   FETCH_SESSIONS_FAILURE,
@@ -10,47 +10,22 @@ import {
   SessionsActions,
 } from './types';
 
-const getSessions = async () => {
-  const { docs } = await db().collection('generatedSessions').get();
-  const tagFilters = new Set<string>();
-  const complexityFilters = new Set<string>();
-  const sessions = docs.map<Session>(mergeId);
+let subscription: Subscription = new Initialized();
 
-  sessions.forEach((session) => {
-    (session.tags || []).map((tag) => tagFilters.add(tag.trim()));
-    session.complexity && complexityFilters.add(session.complexity.trim());
-  });
-
-  return {
-    complexityFilters,
-    sessions,
-    tagFilters,
-  };
+export const unsubscribe = () => {
+  if (subscription instanceof Success) {
+    subscription.data();
+  }
 };
 
-export const fetchSessions = () => async (dispatch: Dispatch<SessionsActions | FiltersActions>) => {
-  dispatch({
-    type: FETCH_SESSIONS,
-  });
-
-  try {
-    const { complexityFilters, sessions, tagFilters } = await getSessions();
-
-    dispatch({
-      type: FETCH_SESSIONS_SUCCESS,
-      payload: sessions,
-    });
-    dispatch({
-      type: SET_FILTERS,
-      payload: {
-        tags: [...tagFilters].sort(),
-        complexity: [...complexityFilters],
-      },
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_SESSIONS_FAILURE,
-      payload: error,
-    });
+export const fetchSessions = async (dispatch: Dispatch<SessionsActions>) => {
+  if (subscription instanceof Initialized) {
+    subscription = subscribeToCollection(
+      'generatedSessions',
+      () => dispatch({ type: FETCH_SESSIONS }),
+      (payload: Session[]) => dispatch({ type: FETCH_SESSIONS_SUCCESS, payload }),
+      (payload: Error) => dispatch({ type: FETCH_SESSIONS_FAILURE, payload }),
+      orderBy('id')
+    );
   }
 };

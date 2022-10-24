@@ -1,8 +1,10 @@
 import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
+import '../components/hero/simple-hero';
+import '../components/markdown/remote-markdown';
 import '../elements/footer-block';
-import '../elements/md-content';
-import '../elements/polymer-helmet';
+import { coc, heroSettings } from '../utils/data';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('coc-page')
 export class CocPage extends PolymerElement {
@@ -14,30 +16,21 @@ export class CocPage extends PolymerElement {
         }
       </style>
 
-      <polymer-helmet
-        title="{$ heroSettings.coc.title $} | {$ title $}"
-        description="{$ heroSettings.coc.metaDescription $}"
-        active="[[active]]"
-      ></polymer-helmet>
+      <simple-hero page="coc"></simple-hero>
 
-      <hero-block
-        background-image="{$ heroSettings.coc.background.image $}"
-        background-color="{$ heroSettings.coc.background.color $}"
-        font-color="{$ heroSettings.coc.fontColor $}"
-        active="[[active]]"
-      >
-        <div class="hero-title">{$ heroSettings.coc.title $}</div>
-        <p class="hero-description">{$ heroSettings.coc.description $}</p>
-      </hero-block>
-
-      <md-content md-source="[[source]]"></md-content>
+      <remote-markdown toc path="[[source]]"></remote-markdown>
 
       <footer-block></footer-block>
     `;
   }
 
-  @property({ type: Boolean })
-  active = false;
+  private heroSettings = heroSettings.coc;
+
   @property({ type: String })
-  source = '{$ coc $}';
+  source = coc;
+
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
+  }
 }

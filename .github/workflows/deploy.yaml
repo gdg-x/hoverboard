@@ -1,0 +1,24 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Create temp serviceAccount.json
+        run: echo "{}" > serviceAccount.json
+      - run: npm ci
+      - run: npm run build
+      - uses: w9jds/firebase-action@v2.2.2
+        with:
+          args: deploy
+        env:
+          # See docs/tutorials/04-deploy.md for configuring these
+          PROJECT_ID: hoverboard-master
+          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HOVERBOARD_MASTER }}

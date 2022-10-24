@@ -1,24 +1,36 @@
-import { customElement, property } from '@polymer/decorators';
+import { customElement, property, query } from '@polymer/decorators';
 import '@polymer/iron-icon';
+import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
+import '@power-elements/lazy-image';
 import '../components/about-block';
-// import '../components/about-conference-block';
+import '../components/hero/hero-block';
+import { HeroBlock } from '../components/hero/hero-block';
 import '../elements/about-organizer-block';
-// import '../elements/featured-videos';
 import '../elements/fork-me-block';
 import '../elements/gallery-block';
-// import '../elements/latest-posts-block';
 import '../elements/map-block';
 import '../elements/partners-block';
-// import '../elements/speakers-block';
-// import '../elements/subscribe-block';
-// import '../elements/tickets-block';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { RootState } from '../store';
-import { toggleVideoDialog } from '../store/ui/actions';
-import { Viewport } from '../store/ui/types';
-import { TempAny } from '../temp-any';
-import { scrollToY } from '../utils/scrolling';
+import '../elements/tickets-block';
+import { firebaseApp } from '../firebase';
+import { store } from '../store';
+import { ReduxMixin } from '../store/mixin';
+import { queueSnackbar } from '../store/snackbars';
+import { openVideoDialog } from '../store/ui/actions';
+import {
+  aboutBlock,
+  buyTicket,
+  dates,
+  description,
+  heroSettings,
+  location,
+  showForkMeBlockForProjectIds,
+  title,
+  viewHighlights,
+} from '../utils/data';
+import '../utils/icons';
+import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
+import { POSITION, scrollToElement } from '../utils/scrolling';
 
 @customElement('home-page')
 export class HomePage extends ReduxMixin(PolymerElement) {
@@ -36,8 +48,12 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         }
 
         .hero-logo {
-          --iron-image-width: 100%;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 76px;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           max-width: 240px;
+          max-height: 76px;
         }
 
         .info-items {
@@ -136,25 +152,19 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <polymer-helmet active="[[active]]"></polymer-helmet>
-
       <hero-block
         id="hero"
-        background-image="{$ heroSettings.home.background.image $}"
-        background-color="{$ heroSettings.home.background.color $}"
-        font-color="{$ heroSettings.home.fontColor $}"
-        active="[[active]]"
+        background-image="[[heroSettings.background.image]]"
+        background-color="[[heroSettings.background.color]]"
+        font-color="[[heroSettings.fontColor]]"
         hide-logo
       >
         <div class="home-content" layout vertical center>
-          <plastic-image
-            class="hero-logo"
-            srcset="/images/logo.svg"
-            alt="{$ title $}"
-          ></plastic-image>
+          <lazy-image class="hero-logo" src="/images/logo.svg" alt="[[siteTitle]]"></lazy-image>
+
           <div class="info-items">
-            <div class="info-item">{$ heroSettings.home.catchingPhrase $}</div>
-            <div class="info-item">{$ heroSettings.home.description $}</div>
+            <div class="info-item">[[heroSettings.catchingPhrase]]</div>
+            <div class="info-item">[[heroSettings.description]]</div>
           </div>
 
           <div class="action-buttons" layout horizontal center-justified wrap>
@@ -163,37 +173,18 @@ export class HomePage extends ReduxMixin(PolymerElement) {
               href="https://www.youtube.com/c/SunnyTechMtp"
               target="_blank"
             >
-              <paper-button
-                class="watch-video"
-                on-click="_playVideo"
-                ga-on="click"
-                ga-event-category="video"
-                ga-event-action="watch"
-                ga-event-label="hero block - view highlights"
-                primary
-              >
+              <paper-button class="watch-video" on-click="playVideo">
                 <iron-icon icon="hoverboard:movie"></iron-icon>
-                {$ viewHighlights $}
+                [[viewHighlights]]
               </paper-button>
             </a>
-
-            <a
-              href="/schedule/"
-            >
-              <paper-button
-                class="watch-video"
-                ga-on="click"
-                ga-event-category="schedule"
-                ga-event-action="scroll"
-                ga-event-label="hero block - open schedule"
-              >
-                <iron-icon icon="hoverboard:calendar"></iron-icon>
-                {$ viewSchedule $}
-              </paper-button>
-            </a>
+<!--            <paper-button on-click="scrollToTickets" primary invert>-->
+<!--              <iron-icon icon="hoverboard:ticket"></iron-icon>-->
+<!--              [[buyTicket]]-->
+<!--            </paper-button>-->
           </div>
 
-          <div class="scroll-down" on-click="_scrollNextBlock">
+          <div class="scroll-down" on-click="scrollNextBlock">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               version="1.1"
@@ -257,16 +248,16 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
         </div>
       </hero-block>
-      {% if showForkMeBlockForProjectIds.includes(firebase.projectId) %}
-      <fork-me-block></fork-me-block>
-      {% endif %}
+      <template is="dom-if" if="{{showForkMeBlock}}">
+        <fork-me-block></fork-me-block>
+      </template>
       <about-block></about-block>
-<!--      <about-conference-block></about-conference-block>-->
 <!--      <speakers-block></speakers-block>-->
 <!--      <subscribe-block></subscribe-block>-->
-<!--      <tickets-block></tickets-block>-->
+<!--      <tickets-block id="tickets-block"></tickets-block>-->
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
+<!--      <featured-videos></featured-videos>-->
 <!--      <latest-posts-block></latest-posts-block>-->
       <partners-block></partners-block>
       <map-block></map-block>
@@ -274,33 +265,53 @@ export class HomePage extends ReduxMixin(PolymerElement) {
     `;
   }
 
+  private city = location.city;
+  private siteTitle = title;
+  private dates = dates;
+  private viewHighlights = viewHighlights;
+  private buyTicket = buyTicket;
+  private heroSettings = heroSettings.home;
+  private aboutBlock = aboutBlock;
+
+  @query('#hero')
+  hero!: HeroBlock;
+
   @property({ type: Boolean })
-  private active = false;
-  @property({ type: Object })
-  private viewport: Viewport;
+  private showForkMeBlock: boolean = false;
 
-  stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
-  }
-
-  _playVideo() {
-    toggleVideoDialog({
-      title: '{$  aboutBlock.callToAction.howItWas.label $}',
-      youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
-      disableControls: true,
-      opened: true,
+  private playVideo() {
+    openVideoDialog({
+      title: this.aboutBlock.callToAction.howItWas.label,
+      youtubeId: this.aboutBlock.callToAction.howItWas.youtubeId,
     });
   }
 
-  _scrollToTickets() {
-    const Elements = (window as TempAny).HOVERBOARD.Elements;
-    const toolbarHeight = Elements.HeaderToolbar.getBoundingClientRect().height - 1;
-    const ticketsBlockPositionY = Elements.Tickets.getBoundingClientRect().top - toolbarHeight;
-    scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
+  private scrollToTickets() {
+    const element = this.$['tickets-block'];
+    if (element) {
+      scrollToElement(element);
+    } else {
+      store.dispatch(queueSnackbar('Error scrolling to section.'));
+    }
   }
 
-  _scrollNextBlock() {
-    const heroHeight = this.$.hero.getBoundingClientRect().height - 64;
-    scrollToY(heroHeight, 600, 'easeInOutSine');
+  private scrollNextBlock() {
+    scrollToElement(this.hero, POSITION.BOTTOM);
+  }
+
+  private shouldShowForkMeBlock(): boolean {
+    const showForkMeBlock = firebaseApp.options.appId
+      ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
+      : false;
+    if (showForkMeBlock) {
+      import('../elements/fork-me-block');
+    }
+    return showForkMeBlock;
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(title, description, INCLUDE_SITE_TITLE.NO);
+    this.showForkMeBlock = this.shouldShowForkMeBlock();
   }
 }

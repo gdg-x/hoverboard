@@ -1,9 +1,11 @@
+import { Success } from '@abraham/remotedata';
 import '@material/mwc-button';
-import { customElement, html, state } from 'lit-element';
-import { ReduxMixin } from '../mixins/redux-mixin';
+import { html } from 'lit';
+import { customElement, state } from 'lit/decorators.js';
 import { RootState } from '../store';
-import { openDialog } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
+import { openSigninDialog } from '../store/dialogs/actions';
+import { ReduxMixin } from '../store/mixin';
+import { signIn } from '../utils/data';
 import { ThemedElement } from './themed-element';
 
 @customElement('auth-required')
@@ -11,11 +13,11 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
   @state()
   private signedIn = false;
 
-  render() {
+  override render() {
     return html`
       <mwc-button
-        label="{$ signIn $}"
-        @click="${() => this.signIn()}"
+        label="${signIn}"
+        @click="${() => openSigninDialog()}"
         ?hidden="${this.signedIn}"
         dense
       ></mwc-button>
@@ -24,12 +26,8 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
     `;
   }
 
-  stateChanged(state: RootState) {
-    this.signedIn = state.user.signedIn;
-  }
-
-  private signIn() {
-    openDialog(DIALOGS.SIGNIN);
+  override stateChanged(state: RootState) {
+    this.signedIn = state.user instanceof Success;
   }
 }
 

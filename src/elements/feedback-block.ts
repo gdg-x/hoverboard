@@ -1,15 +1,24 @@
+import { Initialized, RemoteData, Success } from '@abraham/remotedata';
+import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/paper-button';
 import '@polymer/paper-input/paper-textarea';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@radi-cho/star-rating';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { addComment, checkPreviousFeedback, deleteFeedback } from '../store/feedback/actions';
+import { Feedback } from '../models/feedback';
 import { RootState, store } from '../store';
-import { showToast } from '../store/toast/actions';
-import { computed, customElement, observe, property } from '@polymer/decorators';
+import {
+  deleteFeedback,
+  selectFeedbackById,
+  SessionFeedback,
+  setFeedback,
+} from '../store/feedback';
+import { ReduxMixin } from '../store/mixin';
+import { queueComplexSnackbar, queueSnackbar } from '../store/snackbars';
+import { initialUserState } from '../store/user/state';
+import { feedback as feedbackText } from '../utils/data';
 
 @customElement('feedback-block')
-export class Feedback extends ReduxMixin(PolymerElement) {
+export class FeedbackBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style>
@@ -61,43 +70,27 @@ export class Feedback extends ReduxMixin(PolymerElement) {
 
       <div class="container">
         <div>
-          <div class="caption">{$ feedback.contentCaption $}:</div>
+          <div class="caption">[[feedbackText.contentCaption]]:</div>
           <star-rating rating="{{contentRating}}"></star-rating>
         </div>
         <div>
-          <div class="caption">{$ feedback.styleCaption $}:</div>
+          <div class="caption">[[feedbackText.styleCaption]]:</div>
           <star-rating rating="{{styleRating}}"></star-rating>
         </div>
 
         <paper-textarea
           id="commentInput"
-          hidden$="[[!rating]]"
+          hidden$="[[!hasRated]]"
           label="Comment"
           value="{{comment}}"
           maxlength="256"
         ></paper-textarea>
-        <p hidden$="[[!rating]]" class="helper">{$ feedback.helperText $}</p>
-        <paper-button
-          primary
-          hidden$="[[!rating]]"
-          on-click="_sendFeedback"
-          ga-on="click"
-          ga-event-category="feedback"
-          ga-event-action="send feedback"
-          ga-event-label$="submit the [[rating]] stars feedback"
-        >
-          {$ feedback.save $}
+        <p hidden$="[[!hasRated]]" class="helper">[[feedbackText.helperText]]</p>
+        <paper-button primary hidden$="[[!hasRated]]" on-click="setFeedback">
+          [[feedbackText.save]]
         </paper-button>
-        <paper-button
-          class="delete-button"
-          hidden$="[[!showDeleteButton]]"
-          on-click="_dispatchDeleteFeedback"
-          ga-on="click"
-          ga-event-category="feedback"
-          ga-event-action="delete feedback"
-          ga-event-label$="delete the feedback record"
-        >
-          {$ feedback.deleteFeedback $}
+        <paper-button class="delete-button" hidden$="[[!feedback.data]]" on-click="deleteFeedback">
+          [[feedbackText.deleteFeedback]]
         </paper-button>
       </div>
     `;
@@ -108,162 +101,108 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   @property({ type: Number })
   styleRating = 0;
   @property({ type: String })
-  private comment = '';
+  sessionId: string | undefined;
+
   @property({ type: String })
-  private sessionId: string;
+  private comment = '';
   @property({ type: Object })
-  private user: { uid?: string; signedIn?: boolean } = {};
+  private user = initialUserState;
   @property({ type: Object })
-  private previousFeedback: { comment?: string; styleRating?: number; contentRating?: number } = {};
-  @property({ type: Boolean, observer: Feedback.prototype._feedbackAddingChanged })
-  private feedbackFetching = false;
-  @property({ type: Boolean })
-  private feedbackAdding = false;
-  @property({ type: Object })
-  private feedbackAddingError = {};
-  @property({ type: Boolean, observer: Feedback.prototype._feedbackDeletingChanged })
-  private feedbackDeleting = false;
-  @property({ type: Object })
-  private feedbackDeletingError = {};
-  @property({ type: Boolean })
-  private showDeleteButton = false;
-  @property({ type: Boolean })
-  private feedbackState = {};
+  private feedback: RemoteData<Error, Feedback | false> = new Initialized();
 
-  stateChanged(state: RootState) {
-    this.feedbackState = state.feedback;
-    this.feedbackDeleting = state.feedback.deleting;
-    this.feedbackDeletingError = state.feedback.deletingError;
-    this.feedbackAdding = state.feedback.adding;
-    this.feedbackAddingError = state.feedback.addingError;
-    this.feedbackFetching = state.feedback.fetching;
+  private feedbackText = feedbackText;
+
+  override stateChanged(state: RootState) {
     this.user = state.user;
+    this.feedback = selectFeedbackById(state, this.sessionId);
   }
 
-  @observe('feedbackState')
-  _updateFeedbackState(feedbackState) {
-    if (feedbackState) {
-      if (this.sessionId) this.previousFeedback = feedbackState[this.sessionId];
-    } else {
-      this.previousFeedback = undefined;
-    }
-  }
-
-  @observe('user')
-  _userChanged(newUser) {
-    if (newUser.signedIn) {
-      if (this.sessionId && !this.feedbackFetching) this._dispatchPreviousFeedback();
-    } else {
-      this._clear();
-    }
-  }
-
-  _clear() {
+  private resetFeedback() {
     this.contentRating = 0;
     this.styleRating = 0;
     this.comment = '';
-    this.showDeleteButton = false;
   }
 
-  @observe('sessionId')
-  _sessionIdChanged(newSessionId) {
-    this._clear();
-
-    if (newSessionId) {
-      // Check for previous feedback once the session/speaker id is available
-      this._updateFeedbackState(this.feedbackState);
-      this._previousFeedbackChanged(this.previousFeedback);
-
-      if (this.user.signedIn && !this.feedbackFetching && this.previousFeedback === undefined) {
-        this._dispatchPreviousFeedback();
-      }
+  private async setFeedback() {
+    if (!(this.user instanceof Success)) {
+      store.dispatch(queueSnackbar(feedbackText.sendFeedbackSignedOut));
+      return;
     }
-  }
-
-  @observe('previousFeedback')
-  _previousFeedbackChanged(previousFeedback) {
-    if (previousFeedback) {
-      this.showDeleteButton = true;
-      this.contentRating = previousFeedback.contentRating;
-      this.styleRating = previousFeedback.styleRating;
-      this.comment = previousFeedback.comment;
+    if (!this.sessionId) {
+      return;
     }
-  }
 
-  _sendFeedback() {
-    if (!this.rating) return;
-    this._dispatchSendFeedback();
-  }
-
-  _dispatchSendFeedback() {
-    store.dispatch(
-      addComment({
-        userId: this.user.uid,
-        sessionId: this.sessionId,
+    const resultAction = await store.dispatch(
+      setFeedback({
+        id: this.user.data.uid,
+        userId: this.user.data.uid,
+        parentId: this.sessionId,
         contentRating: this.contentRating,
         styleRating: this.styleRating,
-        comment: this.comment,
+        comment: this.comment || '',
       })
     );
-  }
 
-  _dispatchPreviousFeedback() {
-    store.dispatch(
-      checkPreviousFeedback({
-        sessionId: this.sessionId,
-        userId: this.user.uid,
-      })
-    );
-  }
-
-  _dispatchDeleteFeedback() {
-    store.dispatch(
-      deleteFeedback({
-        sessionId: this.sessionId,
-        userId: this.user.uid,
-      })
-    );
-  }
-
-  _feedbackAddingChanged(newFeedbackAdding, oldFeedbackAdding) {
-    if (oldFeedbackAdding && !newFeedbackAdding) {
-      if (this.feedbackAddingError) {
-        showToast({
-          message: '{$ feedback.somethingWentWrong $}',
+    if (setFeedback.fulfilled.match(resultAction)) {
+      store.dispatch(queueSnackbar(feedbackText.feedbackRecorded));
+    } else {
+      store.dispatch(
+        queueComplexSnackbar({
+          label: feedbackText.somethingWentWrong,
           action: {
             title: 'Retry',
-            callback: () => {
-              this._dispatchSendFeedback();
-            },
+            callback: () => this.setFeedback(),
           },
-        });
-      } else {
-        showToast({ message: '{$ feedback.feedbackRecorded $}' });
-      }
+        })
+      );
     }
   }
 
-  _feedbackDeletingChanged(newFeedbackDeleting, oldFeedbackDeleting) {
-    if (oldFeedbackDeleting && !newFeedbackDeleting) {
-      if (this.feedbackDeletingError) {
-        showToast({
-          message: '{$ feedback.somethingWentWrong $}',
+  private async deleteFeedback() {
+    if (!(this.user instanceof Success)) {
+      store.dispatch(queueSnackbar(feedbackText.removeFeedbackSignedOut));
+      return;
+    }
+    if (!this.sessionId) {
+      return;
+    }
+
+    const resultAction = await store.dispatch(
+      deleteFeedback({
+        parentId: this.sessionId,
+        userId: this.user.data.uid,
+        id: this.user.data.uid,
+      })
+    );
+
+    if (deleteFeedback.fulfilled.match(resultAction)) {
+      store.dispatch(queueSnackbar(feedbackText.feedbackDeleted));
+    } else {
+      store.dispatch(
+        queueComplexSnackbar({
+          label: feedbackText.somethingWentWrong,
           action: {
             title: 'Retry',
-            callback: () => {
-              this._dispatchDeleteFeedback();
-            },
+            callback: () => this.deleteFeedback(),
           },
-        });
-      } else {
-        this._clear();
-        showToast({ message: '{$ feedback.feedbackDeleted $}' });
-      }
+        })
+      );
+    }
+  }
+
+  @observe('feedback')
+  private onFeedback(feedback: SessionFeedback) {
+    if (feedback instanceof Success && feedback.data) {
+      this.contentRating = feedback.data.contentRating;
+      this.styleRating = feedback.data.styleRating;
+      this.comment = feedback.data.comment;
+    } else {
+      this.resetFeedback();
     }
   }
 
   @computed('contentRating', 'styleRating')
-  get rating() {
+  get hasRated() {
     return (
       (this.contentRating > 0 && this.contentRating <= 5) ||
       (this.styleRating > 0 && this.styleRating <= 5)

@@ -1,18 +1,15 @@
+import { doc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db } from '../db';
-import { DialogForm } from '../dialogs/types';
+import { db } from '../../firebase';
+import { DialogData } from '../../models/dialog-form';
 import {
   ADD_POTENTIAL_PARTNER,
   ADD_POTENTIAL_PARTNER_FAILURE,
   ADD_POTENTIAL_PARTNER_SUCCESS,
+  PotentialPartnerActions,
 } from './types';
 
-export const addPotentialPartner = (data: DialogForm) => (dispatch: Dispatch) => {
-  dispatch({
-    type: ADD_POTENTIAL_PARTNER,
-    payload: data,
-  });
-
+const setPartner = async (data: DialogData) => {
   const id = data.email.replace(/[^\w\s]/gi, '');
   const partner = {
     email: data.email,
@@ -20,20 +17,21 @@ export const addPotentialPartner = (data: DialogForm) => (dispatch: Dispatch) =>
     companyName: data.secondFieldValue || '',
   };
 
-  db()
-    .collection('potentialPartners')
-    .doc(id)
-    .set(partner)
-    .then(() => {
-      dispatch({
-        type: ADD_POTENTIAL_PARTNER_SUCCESS,
-        payload: { partner },
-      });
-    })
-    .catch((error) => {
+  await setDoc(doc(db, 'potentialPartners', id), partner);
+};
+
+export const addPotentialPartner =
+  (data: DialogData) => async (dispatch: Dispatch<PotentialPartnerActions>) => {
+    dispatch({ type: ADD_POTENTIAL_PARTNER });
+
+    try {
+      await setPartner(data);
+
+      dispatch({ type: ADD_POTENTIAL_PARTNER_SUCCESS });
+    } catch (error) {
       dispatch({
         type: ADD_POTENTIAL_PARTNER_FAILURE,
-        payload: { error },
+        payload: error as Error,
       });
-    });
-};
+    }
+  };

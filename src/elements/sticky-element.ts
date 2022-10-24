@@ -1,6 +1,5 @@
-import { customElement, observe, property } from '@polymer/decorators';
+import { customElement, property, query } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
-import { TempAny } from '../temp-any';
 
 @customElement('sticky-element')
 export class StickyElement extends PolymerElement {
@@ -53,50 +52,62 @@ export class StickyElement extends PolymerElement {
     `;
   }
 
-  @property({ type: Boolean })
-  public active = false;
+  @query('#content')
+  content!: HTMLDivElement;
+  @query('#trigger')
+  trigger!: HTMLDivElement;
+
   @property({ type: Boolean })
   private waiting = false;
-  @property({ type: Object })
-  private endScrollHandle: TempAny;
+  @property({ type: Number })
+  private endScrollHandle: number | undefined;
 
   constructor() {
     super();
-    this._onScroll = this._onScroll.bind(this);
+    this.onScroll = this.onScroll.bind(this);
   }
 
-  @observe('active')
-  _toggleListener(active) {
-    if (active) {
-      window.addEventListener('scroll', this._onScroll);
-    } else {
-      window.removeEventListener('scroll', this._onScroll);
-      this.$.content.classList.remove('sticked');
-    }
+  override connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('scroll', this.onScroll);
   }
 
-  _onScroll() {
+  override disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('scroll', this.onScroll);
+    this.content.classList.remove('sticked');
+  }
+
+  private onScroll() {
     if (this.waiting) {
       return;
     }
     this.waiting = true;
-    clearTimeout(this.endScrollHandle);
+    window.clearTimeout(this.endScrollHandle);
 
-    this._toggleSticky();
+    this.toggleSticky();
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       this.waiting = false;
     }, 100);
 
-    this.endScrollHandle = setTimeout(() => {
-      this._toggleSticky();
+    this.endScrollHandle = window.setTimeout(() => {
+      this.toggleSticky();
     }, 200);
   }
 
-  _toggleSticky() {
-    const scrollTop = this.$.trigger.getBoundingClientRect().top;
-    if (scrollTop > 64 && this.$.content.classList.contains('sticked')) {
-      this.$.content.classList.remove('sticked');
+  private toggleSticky() {
+    const trigger = this.trigger;
+    const content = this.content;
+
+    if (!trigger || !content) {
+      console.error('Missing trigger or content element.');
+      return;
+    }
+
+    const scrollTop = trigger.getBoundingClientRect().top;
+    if (scrollTop > 64 && content.classList.contains('sticked')) {
+      content.classList.remove('sticked');
       this.dispatchEvent(
         new CustomEvent('element-sticked', {
           bubbles: true,
@@ -106,10 +117,9 @@ export class StickyElement extends PolymerElement {
           },
         })
       );
-    } else if (scrollTop <= 64 && !this.$.content.classList.contains('sticked')) {
-      // TODO: Remove type cast
-      this.style.height = `${(this.$.content as HTMLDivElement).offsetHeight}px`;
-      this.$.content.classList.add('sticked');
+    } else if (scrollTop <= 64 && !content.classList.contains('sticked')) {
+      this.style.height = `${this.content.offsetHeight}px`;
+      content.classList.add('sticked');
       this.dispatchEvent(
         new CustomEvent('element-sticked', {
           bubbles: true,

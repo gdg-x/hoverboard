@@ -1,30 +1,44 @@
 import { store } from '../';
 import {
   Hero,
+  SetViewport,
   SET_HERO_SETTINGS,
   SET_VIEWPORT_SIZE,
   TOGGLE_VIDEO_DIALOG,
   VideoDialog,
-  Viewport,
 } from './types';
 
-export const setViewportSize = (value: Viewport) => {
+export const setViewportSize = (payload: SetViewport) => {
   store.dispatch({
     type: SET_VIEWPORT_SIZE,
-    value,
+    payload,
   });
 };
 
-export const toggleVideoDialog = (value: VideoDialog) => {
+export const closeVideoDialog = () => {
   store.dispatch({
     type: TOGGLE_VIDEO_DIALOG,
-    value,
+    payload: {
+      open: false,
+      youtubeId: '',
+      title: '',
+    },
   });
 };
 
-export const setHeroSettings = (value: Hero) => {
+export const openVideoDialog = (payload: Omit<VideoDialog, 'open'>) => {
+  store.dispatch({
+    type: TOGGLE_VIDEO_DIALOG,
+    payload: {
+      ...payload,
+      open: true,
+    },
+  });
+};
+
+export const setHeroSettings = (payload: Hero) => {
   store.dispatch({
     type: SET_HERO_SETTINGS,
-    value,
+    payload,
   });
 };

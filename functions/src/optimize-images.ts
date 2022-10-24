@@ -1,10 +1,12 @@
 import { Storage } from '@google-cloud/storage';
-import { spawn } from 'child-process-promise';
+import { spawnSync } from 'child_process';
+import * as functions from 'firebase-functions';
 import { storage } from 'firebase-functions';
 import fs from 'fs';
-import mkdirp from 'mkdirp-promise';
 import os from 'os';
 import path from 'path';
+
+const mkdirp = (path: string) => fs.promises.mkdir(path, { recursive: true });
 
 const gcs = new Storage();
 
@@ -12,7 +14,7 @@ export const optimizeImages = storage.object().onFinalize((object) => {
   const { contentType } = object;
   // Exit if this is triggered on a file that is not an image.
   if (!contentType.startsWith('image/')) {
-    console.log('This is not an image.');
+    functions.logger.log('This is not an image.');
     return null;
   }
 
@@ -31,16 +33,16 @@ async function optimizeImage(object) {
 
   const [metadata] = await file.getMetadata();
   if (metadata.metadata && metadata.metadata.optimized) {
-    console.log('Image has been already optimized');
+    functions.logger.log('Image has been already optimized');
     return null;
   }
 
   await mkdirp(tempLocalDir);
   await file.download({ destination: tempLocalFile });
-  console.log('The file has been downloaded to', tempLocalFile);
+  functions.logger.log('The file has been downloaded to', tempLocalFile);
 
   // Generate a thumbnail using ImageMagick.
-  await spawn('convert', [
+  spawnSync('convert', [
     tempLocalFile,
     '-strip',
     '-interlace',
@@ -49,7 +51,7 @@ async function optimizeImage(object) {
     '82',
     tempLocalFile,
   ]);
-  console.log('Optimized image created at', tempLocalFile);
+  functions.logger.log('Optimized image created at', tempLocalFile);
 
   // Uploading the Optimized image.
   const destination = bucket.file(filePath);
@@ -62,7 +64,7 @@ async function optimizeImage(object) {
     },
   });
   await newFile.makePublic();
-  console.log('Optimized image uploaded to Storage');
+  functions.logger.log('Optimized image uploaded to Storage');
   // Once the image has been uploaded delete the local files to free up disk space.
   return Promise.all([fs.unlinkSync(tempLocalFile)]);
 }

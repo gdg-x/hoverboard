@@ -1,22 +1,23 @@
 import { Success } from '@abraham/remotedata';
-import { customElement, property } from '@polymer/decorators';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { store } from '../store';
-import { openDialog } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
+import '@power-elements/lazy-image';
+import '../components/text-truncate';
+import { Session } from '../models/session';
+import { router } from '../router';
+import { RootState, store } from '../store';
+import { openFeedbackDialog, openSigninDialog } from '../store/dialogs/actions';
 import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
-import {
-  FeaturedSessionsState,
-  initialFeaturedSessionsState,
-} from '../store/featured-sessions/state';
-import { showToast } from '../store/toast/actions';
-import { TempAny } from '../temp-any';
-import { getVariableColor, toggleQueryParam } from '../utils/functions';
+import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
+import { ReduxMixin } from '../store/mixin';
+import { queueComplexSnackbar } from '../store/snackbars';
+import { initialUserState } from '../store/user/state';
+import { schedule } from '../utils/data';
+import { acceptingFeedback } from '../utils/feedback';
+import '../utils/icons';
+import { getVariableColor } from '../utils/styles';
 import './shared-styles';
-import './text-truncate';
 
 @customElement('session-element')
 export class SessionElement extends ReduxMixin(PolymerElement) {
@@ -73,13 +74,6 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           padding-bottom: 40px;
         }
 
-        .session[with-background] {
-          color: #fff;
-        }
-        .session[with-background] > .backgroundImage{
-          filter: brightness(60%);
-        }
-
         .bookmark-session,
         .feedback-action {
           color: var(--secondary-text-color);
@@ -124,8 +118,11 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
 
         .speaker-photo {
           margin-right: 12px;
-          width: 32px;
-          height: 32px;
+          --lazy-image-width: 32px;
+          --lazy-image-height: 32px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--secondary-background-color);
           border-radius: 50%;
           overflow: hidden;
@@ -140,6 +137,11 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         .speaker-title {
           font-size: 12px;
           line-height: 1;
+        }
+
+        .tags {
+          display: flex;
+          flex-wrap: wrap;
         }
 
         @media (min-width: 640px) {
@@ -158,19 +160,13 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
 
       <a
         class="session"
-        href$="/schedule/[[dayName]]?[[toggleQueryParam(queryParams, 'sessionId', session.id)]]"
+        href$="[[sessionUrl(session.id)]]"
         featured$="[[isFeatured]]"
-        with-background$="[[session.image]]"
         layout
         vertical
         relative
       >
-        <iron-image
-          class="backgroundImage"
-          src="[[session.image]]"
-          sizing="cover"
-          fit preload
-        ></iron-image>
+        <iron-icon icon="hoverboard:[[session.icon]]" class="session-icon"></iron-icon>
 
         <div class="session-header" layout horizontal justified>
           <div flex>
@@ -184,14 +180,20 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
 
         <div class="session-content" flex layout horizontal justified>
           <div class="session-meta">
-            <div hidden$="[[!session.complexity]]">[[session.track.title]] - [[session.complexity]]</div>
+            <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
           </div>
           <div class="session-actions">
             <iron-icon
+              icon="hoverboard:insert-comment"
+              class="feedback-action"
+              hidden="[[!acceptingFeedback()]]"
+              on-click="toggleFeedback"
+            ></iron-icon>
+            <iron-icon
+              icon="hoverboard:[[icon]]"
               class="bookmark-session"
-              hidden="[[_acceptingFeedback()]]"
-              icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
-              on-click="_toggleFeaturedSession"
+              hidden="[[acceptingFeedback()]]"
+              on-click="toggleFeaturedSession"
             ></iron-icon>
           </div>
         </div>
@@ -200,13 +202,13 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           <div layout horizontal justified center-aligned>
             <div class="session-meta" flex>
               <span hidden$="[[!session.duration.hh]]">
-                [[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]
+                [[session.duration.hh]] hour[[getEnding(session.duration.hh)]]
               </span>
               <span hidden$="[[!session.duration.mm]]">
-                [[session.duration.mm]] min[[_getEnding(session.duration.mm)]]
+                [[session.duration.mm]] min[[getEnding(session.duration.mm)]]
               </span>
             </div>
-            <div hidden$="[[!session.tags.length]]">
+            <div class="tags" hidden$="[[!session.tags.length]]">
               <template is="dom-repeat" items="[[session.tags]]" as="tag">
                 <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
               </template>
@@ -216,18 +218,15 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           <div class="speakers" hidden$="[[!session.speakers.length]]">
             <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
               <div class="speaker" layout horizontal center>
-                <plastic-image
+                <lazy-image
                   class="speaker-photo"
-                  srcset="[[speaker.photoUrl]]"
-                  sizing="cover"
-                  lazy-load
-                  preload
-                  fade
-                ></plastic-image>
+                  src="[[speaker.photoUrl]]"
+                  alt="[[speaker.name]]"
+                ></lazy-image>
 
                 <div class="speaker-details" flex>
                   <div class="speaker-name">[[speaker.name]]</div>
-                  <div class="speaker-title">[[_join(speaker.company, speaker.country)]]</div>
+                  <div class="speaker-title">[[join(speaker.company, speaker.country)]]</div>
                 </div>
               </div>
             </template>
@@ -238,39 +237,42 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  private user: { uid?: string; signedIn?: boolean } = {};
+  user = initialUserState;
   @property({ type: Object })
-  private session: {
-    id: string;
-    day: TempAny;
-    startTime: TempAny;
-    mainTag: string;
-  };
+  session: Session | undefined;
   @property({ type: Object })
-  private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
+  featuredSessions = initialFeaturedSessionsState;
   @property({ type: String })
-  private queryParams: string;
+  private queryParams: string | undefined;
   @property({ type: String })
-  private dayName: string;
-  @property({ type: String, computed: 'getVariableColor(session.mainTag)' })
-  private sessionCollor: string;
-  @property({ type: String, computed: '_isFeatured(featuredSessions, session.id)' })
-  private isFeatured: string;
-  @property({ type: String, computed: '_summary(session.description)' })
-  private summary: string;
+  private dayName: string | undefined;
 
-  _isFeatured(featuredSessions: FeaturedSessionsState, sessionId?: string) {
-    if (featuredSessions instanceof Success && sessionId) {
-      return featuredSessions.data[sessionId];
+  override stateChanged(state: RootState) {
+    this.user = state.user;
+    this.featuredSessions = state.featuredSessions;
+  }
+
+  @computed('featuredSessions', 'session')
+  get isFeatured(): boolean {
+    if (this.featuredSessions instanceof Success && this.session?.id) {
+      return this.featuredSessions.data[this.session.id] ?? false;
     }
     return false;
   }
 
-  _getEnding(number) {
+  @computed('isFeatured')
+  private get icon() {
+    return this.isFeatured ? 'bookmark-check' : 'bookmark-plus';
+  }
+
+  private getEnding(number: number) {
     return number > 1 ? 's' : '';
   }
 
-  _summary(description = '') {
+  @computed('session')
+  private get summary() {
+    const description = this.session?.description ?? '';
+    // TODO: Move logic to utility function
     const indexes = [
       description.indexOf('\n'),
       description.indexOf('<br'),
@@ -279,67 +281,59 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     return description.slice(0, Math.min(...indexes));
   }
 
-  _getFeaturedSessionIcon(featuredSessions, sessionId) {
-    return this.isFeatured ? 'bookmark-check' : 'bookmark-plus';
-  }
-
-  _toggleFeaturedSession(event) {
+  private toggleFeaturedSession(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    if (!this.user.signedIn) {
-      showToast({
-        message: '{$ schedule.saveSessionsSignedOut $}',
-        action: {
-          title: 'Sign in',
-          callback: () => {
-            openDialog(DIALOGS.SIGNIN);
+
+    if (!(this.user instanceof Success)) {
+      store.dispatch(
+        queueComplexSnackbar({
+          label: schedule.saveSessionsSignedOut,
+          action: {
+            title: 'Sign in',
+            callback: () => openSigninDialog(),
           },
-        },
-      });
+        })
+      );
       return;
     }
 
-    if (this.featuredSessions instanceof Success) {
-      const sessions = Object.assign({}, this.featuredSessions.data, {
-        [this.session.id]: !this.featuredSessions.data[this.session.id] ? true : null,
-      });
+    if (this.user instanceof Success && this.featuredSessions instanceof Success && this.session) {
+      const bookmarked = !this.featuredSessions.data[this.session.id];
+      const sessions = {
+        ...this.featuredSessions.data,
+        [this.session.id]: bookmarked,
+      };
 
-      store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
+      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked));
     }
   }
 
-  _toggleFeedback(event) {
+  private toggleFeedback(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    openDialog(DIALOGS.FEEDBACK, this.session);
+    if (this.session) {
+      openFeedbackDialog(this.session);
+    }
   }
 
-  _acceptingFeedback() {
-    const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-    const ONE_MINUTE_MS = 60 * 1000;
-    const now = new Date();
-    const convertedTimezoneDate = new Date(
-      new Date(`${this.session.day} ${this.session.startTime}`).getTime() +
-        (parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset()) * ONE_MINUTE_MS
-    );
-
-    const diff = now.getTime() - convertedTimezoneDate.getTime();
-    return diff > 0 && diff < ONE_WEEK_MS;
+  private acceptingFeedback(): boolean {
+    return this.session !== undefined && acceptingFeedback(this.session);
   }
 
-  _join(company, country) {
+  private join(company: string, country: string) {
     return [company, country].filter(Boolean).join(' / ');
   }
 
-  toggleQueryParam(currentQueryParams, key, value) {
-    return toggleQueryParam(currentQueryParams, key, value);
-  }
-
-  getVariableColor(value) {
+  private getVariableColor(value: string) {
     return getVariableColor(this, value);
   }
 
-  slice(text, number) {
+  private slice(text: string, number: number) {
     return text && text.slice(0, number);
+  }
+
+  private sessionUrl(id: string) {
+    return router.urlForName('session-page', { id });
   }
 }

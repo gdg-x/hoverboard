@@ -1,16 +1,21 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { Failure, Initialized, Pending } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
+import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin';
+import '@power-elements/lazy-image';
+import { PreviousSpeaker } from '../models/previous-speaker';
+import { router } from '../router';
 import { RootState, store } from '../store';
-import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
+import { ReduxMixin } from '../store/mixin';
+import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
+import { selectRandomPreviousSpeakers } from '../store/previous-speakers/selectors';
 import {
   initialPreviousSpeakersState,
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
-import { randomOrder } from '../utils/functions';
+import { loading, previousSpeakersBlock } from '../utils/data';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('previous-speakers-block')
@@ -38,8 +43,11 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
         }
 
         .photo {
-          width: 64px;
-          height: 64px;
+          --lazy-image-width: 64px;
+          --lazy-image-height: 64px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--contrast-additional-background-color);
           border-radius: 50%;
           overflow: hidden;
@@ -57,18 +65,18 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
           }
 
           .photo {
-            width: 96px;
-            height: 96px;
+            --lazy-image-width: 96px;
+            --lazy-image-height: 96px;
           }
         }
       </style>
 
       <div class="container">
-        <h1 class="container-title">{$ previousSpeakersBlock.title $}</h1>
+        <h1 class="container-title">[[previousSpeakersBlock.title]]</h1>
 
         <div class="speakers-wrapper">
           <template is="dom-if" if="[[pending]]">
-            <p>Loading...</p>
+            <p>[[loading]]</p>
           </template>
 
           <template is="dom-if" if="[[failure]]">
@@ -76,29 +84,19 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
           </template>
 
           <template is="dom-repeat" items="[[speakers]]" as="speaker">
-            <a
-              class="speaker"
-              href$="/previous-speakers/[[speaker.id]]"
-              ga-on="click"
-              ga-event-category="previous speaker"
-              ga-event-action="open details"
-              ga-event-label$="[[speaker.name]]"
-            >
-              <plastic-image
+            <a class="speaker" href$="[[previousSpeakerUrl(speaker.id)]]">
+              <lazy-image
                 class="photo"
-                srcset="[[speaker.photoUrl]]"
-                sizing="cover"
-                lazy-load
-                preload
-                fade
-              ></plastic-image>
+                src="[[speaker.photoUrl]]"
+                alt="[[speaker.name]]"
+              ></lazy-image>
             </a>
           </template>
         </div>
 
-        <a href="{$ previousSpeakersBlock.callToAction.link $}">
+        <a href="[[previousSpeakersBlock.callToAction.link]]">
           <paper-button class="animated icon-right">
-            <span>{$ previousSpeakersBlock.callToAction.label $}</span>
+            <span>[[previousSpeakersBlock.callToAction.label]]</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
         </a>
@@ -106,10 +104,13 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
+  private previousSpeakersBlock = previousSpeakersBlock;
+  private loading = loading;
+
   @property({ type: Object })
   previousSpeakers: PreviousSpeakersState = initialPreviousSpeakersState;
-  @property({ type: Object })
-  viewport: { isPhone?: boolean } = {};
+  @property({ type: Array })
+  speakers: PreviousSpeaker[] = [];
 
   @computed('previousSpeakers')
   get pending() {
@@ -121,25 +122,19 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
     return this.previousSpeakers instanceof Failure;
   }
 
-  stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
+  override stateChanged(state: RootState) {
     this.previousSpeakers = state.previousSpeakers;
+    this.speakers = selectRandomPreviousSpeakers(state);
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.previousSpeakers instanceof Initialized) {
-      store.dispatch(fetchPreviousSpeakersList());
+      store.dispatch(fetchPreviousSpeakers);
     }
   }
 
-  @computed('previousSpeakers', 'viewport')
-  get speakers() {
-    if (this.previousSpeakers instanceof Success) {
-      const displayCount = this.viewport.isPhone ? 8 : 14;
-      return randomOrder(this.previousSpeakers.data).slice(0, displayCount);
-    } else {
-      return [];
-    }
+  previousSpeakerUrl(id: string) {
+    return router.urlForName('previous-speaker-page', { id });
   }
 }

@@ -1,12 +1,15 @@
+import { Initialized, Success } from '@abraham/remotedata';
 import { initialUserState } from './state';
-import { SIGN_IN, SIGN_OUT, UserActionTypes } from './types';
+import { REMOVE_USER, SET_USER, UserActions, UserState } from './types';
 
-export const userReducer = (state = initialUserState, action: UserActionTypes) => {
+export const userReducer = (state = initialUserState, action: UserActions): UserState => {
   switch (action.type) {
-    case SIGN_IN:
-      return action.user;
-    case SIGN_OUT:
-      return action.user;
+    case SET_USER:
+      return new Success(action.payload);
+
+    case REMOVE_USER:
+      return new Initialized();
+
     default:
       return state;
   }

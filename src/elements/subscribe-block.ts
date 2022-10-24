@@ -3,13 +3,16 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin';
+import { DialogData } from '../models/dialog-form';
 import { RootState, store } from '../store';
-import { openDialog } from '../store/dialogs/actions';
-import { DialogForm, DIALOGS } from '../store/dialogs/types';
+import { openSubscribeDialog } from '../store/dialogs/actions';
+import { ReduxMixin } from '../store/mixin';
 import { subscribe } from '../store/subscribe/actions';
 import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
-import './hoverboard-icons';
+import { initialUiState } from '../store/ui/state';
+import { initialUserState } from '../store/user/state';
+import { subscribeBlock } from '../utils/data';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('subscribe-block')
@@ -54,16 +57,12 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
-        <div class="description">{$ subscribeBlock.callToAction.description $}</div>
+        <div class="description">[[subscribeBlock.callToAction.description]]</div>
         <div class="cta-button">
           <paper-button
             class="animated icon-right"
             disabled$="[[subscribed.data]]"
-            on-click="_subscribe"
-            ga-on="click"
-            ga-event-category="attendees"
-            ga-event-action="subscribe"
-            ga-event-label="subscribe block"
+            on-click="subscribe"
           >
             <span class="cta-label">[[ctaLabel]]</span>
             <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>
@@ -73,62 +72,68 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
+  private subscribeBlock = subscribeBlock;
+
   @property({ type: Object })
   subscribed: SubscribeState = initialSubscribeState;
 
   @property({ type: Object })
-  private user: { signedIn?: boolean; email?: string; displayName?: string } = {};
+  private user = initialUserState;
   @property({ type: Object })
-  private viewport = {};
+  private viewport = initialUiState.viewport;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.subscribed = state.subscribed;
     this.user = state.user;
     this.viewport = state.ui.viewport;
   }
 
   @computed('subscribed')
-  get ctaIcon() {
+  private get ctaIcon() {
     return this.subscribed instanceof Success ? 'checked' : 'arrow-right-circle';
   }
 
   @computed('subscribed')
-  get ctaLabel() {
+  private get ctaLabel() {
     return this.subscribed instanceof Success
-      ? '{$  subscribeBlock.subscribed $}'
-      : '{$  subscribeBlock.callToAction.label $}';
+      ? this.subscribeBlock.subscribed
+      : this.subscribeBlock.callToAction.label;
   }
 
-  _subscribe() {
-    let userData: {
-      firstFieldValue?: string;
-      secondFieldValue?: string;
-    } = {};
+  private subscribe() {
+    let userData = {
+      firstFieldValue: '',
+      secondFieldValue: '',
+    };
 
-    if (this.user.signedIn) {
-      const fullNameSplit = this.user.displayName.split(' ');
+    if (this.user instanceof Success) {
+      const name = this.user.data.displayName?.split(' ') || ['', ''];
       userData = {
-        firstFieldValue: fullNameSplit[0],
-        secondFieldValue: fullNameSplit[1],
+        firstFieldValue: name[0] || '',
+        secondFieldValue: name[1] || '',
       };
+
+      if (this.user.data.email) {
+        this.subscribeAction({ ...userData, email: this.user.data.email });
+      }
     }
 
-    if (this.user.email) {
-      this._subscribeAction(Object.assign({}, { email: this.user.email }, userData));
+    if (this.user instanceof Success && this.user.data.email) {
+      this.subscribeAction({ ...userData, email: this.user.data.email });
     } else {
-      openDialog(DIALOGS.SUBSCRIBE, {
-        title: '{$ subscribeBlock.formTitle $}',
-        submitLabel: ' {$ subscribeBlock.subscribe $}',
-        firstFieldLabel: '{$ subscribeBlock.firstName $}',
-        secondFieldLabel: '{$ subscribeBlock.lastName $}',
+      openSubscribeDialog({
+        title: this.subscribeBlock.formTitle,
+        submitLabel: this.subscribeBlock.subscribe,
+        firstFieldLabel: this.subscribeBlock.firstName,
+        secondFieldLabel: this.subscribeBlock.lastName,
         firstFieldValue: userData.firstFieldValue,
         secondFieldValue: userData.secondFieldValue,
-        submit: (data: DialogForm) => this._subscribeAction(data),
+        submit: (data) => this.subscribeAction(data),
       });
     }
   }
 
-  _subscribeAction(data: DialogForm) {
+  private subscribeAction(data: DialogData) {
     store.dispatch(subscribe(data));
   }
 }

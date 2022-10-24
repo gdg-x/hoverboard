@@ -1,0 +1,38 @@
+name: Main
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: ${{ matrix.script-name }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        script-name: [lint, test, build]
+
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3.0.4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create temp serviceAccount.json
+        run: echo "{}" > serviceAccount.json
+
+      - name: Running ${{ matrix.script-name }}
+        run: npm run ${{ matrix.script-name }}

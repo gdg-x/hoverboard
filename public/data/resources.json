@@ -1,0 +1,383 @@
+{
+  "title": "Sunny Tech - Montpellier",
+  "description": "Sunny Tech est la 1ère conférence Tech organisée à Montpellier. Une conférence annuelle des technologies du numérique, créée par des passionnés, pour des passionnés avec l’ambition de rayonner nationalement, et même internationalement, à travers l’intervention de conférenciers étrangers de renom.",
+  "locationName": "",
+  "locationCity": "Montpellier",
+  "locationAddress": "",
+  "locationCode": "",
+  "locationRegion": "Occitanie",
+  "locationCountry": "France",
+  "image": "images/social-share3.jpg",
+  "keywords": "sunnytech, évènement, event, montpellier, Sunny, Tech, programming, android, chrome, developers, web, cloud, conférence, seatechandsun, docker, devops, ux, design, back, scala, fonctionnel",
+  "dates": "30 juin et 1er juillet 2022",
+  "partnershipProposition": "mailto:contact@sunny-tech.io",
+  "share": "Partager",
+  "followOur": "Suit notre",
+  "followUs": "Suivez nous",
+  "emailUs": "Envoyez-nous un email",
+  "partnershipResources": "Partnership Resources",
+  "eventResources": "Event Resources",
+  "buyTicket": "Achetez un billet",
+  "buyTicketTopRight": "Billetterie",
+  "cfpHeader": "Call For Paper",
+  "cfpLink": "https://conference-hall.io/public/event/m1kfbpSntxF3QBVUwoFY",
+  "becomeSponsorMenu": "Devenir sponsor",
+  "signIn": "Connexion",
+  "signOut": "Déconnexion",
+  "viewHighlights": "Vidéos 2022",
+  "viewSchedule": "SCHEDULE 2022",
+  "downloadSchedule": "Télécharger le programme",
+  "offlineMessage": "You can still work offline.",
+  "serviceWorkerInstalled": "App is now installed and available offline.",
+  "serviceWorkerAvailable": "A new version of this app is available.",
+  "serviceWorkerInstalling": "App being installed for offline use.",
+  "serviceWorkerError": "Error caching for offline use.",
+  "refresh": "Refresh",
+  "position": "Position",
+  "country": "Pays",
+  "time": "Time",
+  "faq": "/data/faq.md",
+  "coc": "/data/coc.md",
+  "timezoneOffset": "-120",
+  "locationText": "/data/location.md",
+  "loading": "Chargement...",
+  "footer": {
+    "blog": "Blog"
+  },
+  "bookmarked": {
+    "added": "Session saved to My Schedule",
+    "removed": "Session removed from My Schedule"
+  },
+  "mySchedule": {
+    "title": "Mon programme",
+    "browseSession": "Parcourir les sessions"
+  },
+  "footerRelBlock": [
+    {
+      "title": "A propos",
+      "links": [
+        {
+          "name": "Découvrez l'équipe organisatrice",
+          "url": "/team",
+          "newTab": false
+        },
+        {
+          "name": "Code de conduite",
+          "url": "/coc",
+          "newTab": false
+        }
+      ]
+    },
+    {
+      "title": "Voir les éditions antérieures",
+      "links": [
+        {
+          "name": "Sunny Tech 2022",
+          "url": "https://2022.sunny-tech.io",
+          "newTab": true
+        },
+        {
+          "name": "Sunny Tech 2019",
+          "url": "https://2019.sunny-tech.io",
+          "newTab": true
+        },
+        {
+          "name": "Sunny Tech 2018",
+          "url": "https://2018.sunny-tech.io",
+          "newTab": true
+        }
+      ]
+    }
+  ],
+  "subscribeNote": "Pas de spam, seulement les dernières nouvelles",
+  "codeOfConduct": "Code de conduite",
+  "codeOfConductBlock": {
+    "organization": "SunnyTech",
+    "form": "mailto:contact@sunny-tech.io",
+    "contacts": [
+      "Organizer Lauriane Anthony, [06 75 16 79 82](tel:0675167982), lauriane@sunny-tech.io",
+      "Organizer Hugo Gresse, [0609274620](tel:0609274620), hugo@sunny-tech.io"
+    ]
+  },
+  "aboutBlock": {
+    "title": "Contenu",
+    "callToAction": {
+      "featuredSessions": {
+        "description": "Plusieurs conférences et ateliers en parallèle sur 2 journées, sujets transverses allant des outils, méthodologies de conception et développement logiciel jusqu’à la gestion de produit et notamment l’expérience utilisateur.",
+        "link": "Voir le programme"
+      },
+      "howItWas": {
+        "title": "Valeurs",
+        "description": "Les valeurs que porte Sunny Tech sont définies et partagées par ses membres, vous pourrez les retrouver le jour de l'évènement.",
+        "important": "Ces valeurs sont : partage, ouverture, originalité & passion.",
+        "labelCoc": "Lire notre code de conduite",
+        "label": "Voir la vidéo de l'édition 2019",
+        "youtubeId": "7gWUjFu-kko"
+      }
+    },
+    "statisticsBlock": {
+      "attendees": {
+        "label": "Participants",
+        "number": "500"
+      },
+      "days": {
+        "label": "Jours",
+        "number": "2"
+      },
+      "sessions": {
+        "label": "Sessions",
+        "number": "50"
+      },
+      "tracks": {
+        "label": "Tracks",
+        "number": "5"
+      }
+    }
+  },
+  "ticketsBlock": {
+    "title": "Billetterie",
+    "ticketsDetails": "Votre billet vous donne accès à toutes les conférences, déjeuners ainsi que la soirée networking. L'hébergement n'est PAS inclus dans le prix du billet.",
+    "soldOut": "Vous l'avez manqué!",
+    "notAvailableYet": "Pas encore disponible",
+    "save": "Économisez ${discount}%"
+  },
+  "partnersBlock": {
+    "title": "Sponsors de l'édition 2022",
+    "button": "Devenez sponsor !",
+    "form": {
+      "title": "Devenez sponsor !",
+      "submitLabel": "Envoyer",
+      "fullName": "Nom",
+      "companyName": "Entreprise"
+    },
+    "toast": "On revient vers vous bientôt !"
+  },
+  "featuredVideos": {
+    "title": "DFUA'16 featured videos",
+    "callToAction": {
+      "label": "See all videos",
+      "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+    }
+  },
+  "blog": {
+    "published": "Publié",
+    "suggested": "Up next"
+  },
+  "latestPostsBlock": {
+    "title": "The latest news",
+    "callToAction": {
+      "label": "View all stories",
+      "link": "/blog"
+    }
+  },
+  "speakers": {
+    "skills": "Skills",
+    "callToAction": {
+      "label": "Voir tous les speakers",
+      "link": "/speakers"
+    },
+    "previousYears": "Years",
+    "previousYear": "Year"
+  },
+  "previousSpeakersBlock": {
+    "title": "Previous speakers",
+    "callToAction": {
+      "label": "View all",
+      "link": "/previous-speakers"
+    }
+  },
+  "becomeSponsorGalleryBlock": {
+    "title": "Sponsorisez l'événement !",
+    "buttonSponsoring": "Devenir un sponsor",
+    "callToAction": {
+      "label": "Dossier de sponsoring",
+      "link": "https://docs.google.com/presentation/d/1TpKT5fHgiTXH3MzTZJN1kaUM7IbQ6mFfKynu1RA-Kz8/preview#slide=id.p1"
+    },
+    "form": {
+      "title": "Devenir un sponsor!",
+      "submitLabel": "Soumettre",
+      "fullName": "Nom Prénom",
+      "companyName": "Entreprise"
+    },
+    "toast": "Nous revenons vers vous dans les plus brefs délais!"
+  },
+  "galleryBlock": {
+    "title": "Moments forts de Sunny Tech 2022",
+    "description": "Grâce à nos photographes, revivez l'édition 2022",
+    "callToAction": {
+      "label": "Voir toutes les photos",
+      "link": "https://photos.app.goo.gl/axFREEaZ3kKQHE3i9"
+    }
+  },
+  "mapBlock": {
+    "title": "Localisation",
+    "photo": "/images/backgrounds/amphi.jpg"
+  },
+  "subscribeBlock": {
+    "callToAction": {
+      "description": "Recevoir les informations importantes de la conférence",
+      "label": "Souscrire"
+    },
+    "yourEmail": "Votre email",
+    "emailAddress": "Adresse email",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "formTitle": "Recevez les dernières nouvelles à propos de Sunny Tech dans votre boite email.",
+    "emailRequired": "Entrez une adresse valide.",
+    "subscribe": "Souscrire",
+    "subscribed": "Souscrit",
+    "close": "Fermer",
+    "generalError": "Une erreur est survenue, ré-essayez plus tard.",
+    "toast": "Souscription effectuée!"
+  },
+  "team": {
+    "description": "Sunny Tech est une assocation bénévole à but non lucratif (loi 1901) créée par des membres actifs de la communauté tech de Montpellier avec l'aide des meetups locaux et du <a href='https://www.montpellier-techhub.org/' target='_blank'>Montpellier Tech Hub</a>."
+  },
+  "schedule": {
+    "saveSessionsSignedOut": "Connectez-vous pour sauvegarder des sessions"
+  },
+  "sessionDetails": {
+    "contentLevel": "Content level",
+    "viewPresentation": "View presentation",
+    "viewVideo": "View video",
+    "speakers": "Speakers"
+  },
+  "speakersBlock": {
+    "title": "Ils seront présents !",
+    "callToAction": {
+      "label": "Voir tous les speakers",
+      "link": "/speakers/"
+    }
+},
+  "speakerDetails": {
+    "sessions": "Sessions"
+  },
+  "notifications": {
+    "default": "Activer les notifications",
+    "enabled": "Vous pouvez vous désinscrire à tout moment",
+    "subscribe": "Souscrire",
+    "unsubscribe": "Se désinscrire",
+    "generalLabel": "General notifications",
+    "myScheduleLabel": "My Schedule notifications",
+    "signIn": "Sign in to get personalized session notifications",
+    "enable": "Enable",
+    "myScheduleEnabled": "My Schedule notifications enabled",
+    "myScheduleDisabled": "My Schedule notifications disabled",
+    "generalEnabled": "General notifications enabled",
+    "generalDisabled": "General notifications disabled",
+    "blocked": {
+      "text": "Veuillez activer les notifications depuis votre navigateur",
+      "label": "Activer",
+      "link": "https://support.google.com/chrome/answer/3220216"
+    },
+    "unsupported": {
+      "text": "Les notifications ne sont pas supportées sur ce périphérique",
+      "label": "Details",
+      "link": "https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#browser_compatibility"
+    },
+    "unknown": {
+      "text": "Unknown error occurred"
+    },
+    "toast": {
+      "title": "Open"
+    }
+  },
+  "aboutOrganizerBlock": {
+    "image": "/images/team.jpeg",
+    "blocks": [
+      {
+        "title": "Qu'est-ce que Sunny Tech?",
+        "description": "Sunny Tech est la 1ère conférence Tech organisée à Montpellier. Une conférence annuelle des technologies du numérique, créée par des passionnés, pour des passionnés avec l’ambition de rayonner nationalement, et même internationalement, à travers l’intervention de conférenciers étrangers de renom."
+      },
+      {
+        "title": "Équipe organisatrice",
+        "description": "Sunny Tech est une association bénévole à but non lucratif composée de développeurs, orateurs, designers et membres de meetups",
+        "callToAction": {
+          "label": "Découvrez l'équipe organisatrice",
+          "link": "/team"
+        }
+      },
+      {
+        "title": "What is DevFest?",
+        "description": "DevFests are community-led developer events hosted by Google Developer Groups around the globe.",
+        "callToAction": {
+          "label": "Read more",
+          "link": "https://devfest.withgoogle.com/",
+          "newTab": true
+        }
+      }
+    ]
+  },
+  "signInDialog": {
+    "alreadyHaveAccount": "Vous possédez déjà un compte",
+    "alreadyUsed": "Vous avez déjà utiliser",
+    "signInToContinue": {
+      "part1": "Se connecter avec",
+      "part2": "continuez."
+    }
+  },
+  "callToSchedule": {
+    "display": true,
+    "title" :"Appel à orateurs",
+    "description": "Intéressé(e) pour parler à Sunny Tech ?",
+    "description2": "Notre CFP est désormais ouvert",
+    "description3": "Nous avons hâte de recevoir vos propositions !",
+    "action": "Accéder au CFP",
+    "url": "https://conference-hall.io/public/event/m1kfbpSntxF3QBVUwoFY",
+    "categories": [
+      {
+      "title": "Cloud & Devops",
+      "icon":"/images/icons/bubble1.svg"
+      },
+      {
+      "title": "Data",
+      "icon":"/images/icons/bubble2.svg"
+      },
+      {
+      "title": "Methodologies",
+      "icon":"/images/icons/bubble3.svg"
+      },
+      {
+      "title": "Web & Mobile & UI",
+      "icon":"/images/icons/bubble4.svg"
+      },
+      {
+      "title": "Backend",
+      "icon":"/images/icons/bubble4.svg"
+      },
+      {
+      "title": "Architecture",
+      "icon":"/images/icons/bubble5.svg"
+      },
+      {
+      "title": "Atypique",
+      "icon":"/images/icons/bubble6.svg"
+      }
+    ]
+  },
+  "filters": {
+    "title": "Filtres",
+    "results": "Résultats",
+    "tags": "Tags",
+    "complexity": "Complexity",
+    "clear": "Clear all"
+  },
+  "addToHomeScreen": {
+    "cta": "Add to Home Screen"
+  },
+  "feedback": {
+    "save": "Sauvegarder",
+    "headline": "Donnez votre avis !",
+    "leaveFeedback": "to leave feedback",
+    "sendFeedbackSignedOut": "Sign in to leave feedback",
+    "removeFeedbackSignedOut": "Sign in to delete feedback",
+    "feedbackRecorded": "Feedback saved",
+    "feedbackDeleted": "Feedback deleted",
+    "helperText": "Comments will be anonymously provided to speakers",
+    "somethingWentWrong": "Something went wrong",
+    "contentCaption": "Content quality",
+    "styleCaption": "Presentation style",
+    "deleteFeedback": "Delete",
+    "sessionClosed": "Les feedbacks sont fermés."
+  }
+}

@@ -1,5 +1,5 @@
 import { Social } from './social';
-import { Id } from './types';
+import { ParentId } from './types';
 
 export interface MemberData {
   name: string;
@@ -10,4 +10,4 @@ export interface MemberData {
   title: string;
 }
 
-export type Member = Id & MemberData;
+export type Member = ParentId & MemberData;

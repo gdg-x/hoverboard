@@ -1,20 +1,24 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/marked-element';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
+import '../components/hero/simple-hero';
+import '../components/text-truncate';
 import '../elements/content-loader';
+import '../elements/footer-block';
 import '../elements/posts-list';
 import '../elements/shared-styles';
-import '../elements/text-truncate';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { Post } from '../models/post';
+import { router } from '../router';
 import { RootState, store } from '../store';
-import { fetchBlogList } from '../store/blog/actions';
-import { BlogState, initialBlogState } from '../store/blog/state';
-import { Viewport } from '../store/ui/types';
-import { getDate } from '../utils/functions';
+import { fetchBlogPosts } from '../store/blog/actions';
+import { initialBlogState } from '../store/blog/state';
+import { ReduxMixin } from '../store/mixin';
+import { initialUiState } from '../store/ui/state';
+import { contentLoaders, heroSettings } from '../utils/data';
+import { getDate } from '../utils/dates';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('blog-list-page')
 export class BlogListPage extends ReduxMixin(PolymerElement) {
@@ -42,8 +46,12 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
         }
 
         .image {
-          width: 100%;
-          height: 100%;
+          position: absolute;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 100%;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
         }
 
         .image-overlay {
@@ -63,7 +71,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
         }
 
         .description {
-          margin-top: 8px;
+          padding-top: 8px;
           opacity: 0.8;
         }
 
@@ -90,21 +98,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <polymer-helmet
-        title="{$ heroSettings.blog.title $} | {$ title $}"
-        description="{$ heroSettings.blog.metaDescription $}"
-        active="[[active]]"
-      ></polymer-helmet>
-
-      <hero-block
-        background-image="{$ heroSettings.blog.background.image $}"
-        background-color="{$ heroSettings.blog.background.color $}"
-        font-color="{$ heroSettings.blog.fontColor $}"
-        active="[[active]]"
-      >
-        <div class="hero-title">{$ heroSettings.blog.title $}</div>
-        <p class="hero-description">{$ heroSettings.blog.description $}</p>
-      </hero-block>
+      <simple-hero page="blog"></simple-hero>
 
       <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
@@ -121,7 +115,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
             load-from="-70%"
             load-to="130%"
             animation-time="1s"
-            items-count="{$ contentLoaders.blog.itemsCount $}"
+            items-count="[[contentLoaders.itemsCount]]"
             hidden$="[[contentLoaderVisibility]]"
           >
           </content-loader>
@@ -133,35 +127,26 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
 
             <template is="dom-repeat" items="[[featuredPosts]]" as="post">
               <a
-                href$="/blog/posts/[[post.id]]/"
+                href$="[[postUrl(post.id)]]"
                 class="featured-post"
                 flex$="[[viewport.isTabletPlus]]"
-                ga-on="click"
-                ga-event-category="blog"
-                ga-event-action="open post"
-                ga-event-label$="[[post.title]]"
                 relative
               >
-                <plastic-image
+                <lazy-image
                   class="image"
-                  srcset="[[post.image]]"
+                  src$="[[post.image]]"
+                  alt="[[post.title]]"
                   style$="background-color: [[post.backgroundColor]];"
-                  sizing="cover"
-                  lazy-load
-                  preload
-                  fade
-                  fit
-                ></plastic-image>
+                ></lazy-image>
+
                 <div class="image-overlay" fit></div>
                 <div class="details" layout vertical justified>
                   <div>
                     <text-truncate lines="2">
                       <h2 class="title">[[post.title]]</h2>
                     </text-truncate>
-                    <text-truncate lines="[[_addIfNotPhone(2, 1)]]">
-                      <marked-element class="description" markdown="[[post.brief]]">
-                        <div slot="markdown-html"></div>
-                      </marked-element>
+                    <text-truncate lines="[[addIfNotPhone(2, 1)]]">
+                      <short-markdown class="description" content="[[post.brief]]"></short-markdown>
                     </text-truncate>
                   </div>
                   <span class="date">[[getDate(post.published)]]</span>
@@ -175,16 +160,18 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
       <div class="container-narrow">
         <posts-list posts="[[posts.data]]"></posts-list>
       </div>
+
+      <footer-block></footer-block>
     `;
   }
 
-  @property({ type: Boolean })
-  active = false;
-  @property({ type: Object })
-  posts: BlogState = initialBlogState;
+  private heroSettings = heroSettings.blog;
+  private contentLoaders = contentLoaders.blog;
 
   @property({ type: Object })
-  private viewport: Viewport;
+  posts = initialBlogState;
+  @property({ type: Object })
+  private viewport = initialUiState.viewport;
 
   @computed('posts')
   get pending() {
@@ -196,20 +183,22 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
     return this.posts instanceof Failure;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.viewport = state.ui.viewport;
     this.posts = state.blog;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
+
     if (this.posts instanceof Initialized) {
-      store.dispatch(fetchBlogList());
+      store.dispatch(fetchBlogPosts);
     }
   }
 
   @computed('posts')
-  get featuredPosts(): Post[] {
+  private get featuredPosts(): Post[] {
     if (this.posts instanceof Success) {
       return this.posts.data.slice(0, 3);
     } else {
@@ -218,7 +207,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
   }
 
   @computed('posts')
-  get remainingPosts(): Post[] {
+  private get remainingPosts(): Post[] {
     if (this.posts instanceof Success) {
       return this.posts.data.slice(3);
     } else {
@@ -227,18 +216,22 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
   }
 
   @computed('posts')
-  get contentLoaderVisibility(): boolean {
+  private get contentLoaderVisibility(): boolean {
     return this.posts instanceof Success || this.posts instanceof Failure;
   }
 
-  _addIfNotPhone(base: number, additional: number) {
+  addIfNotPhone(base: number, additional: number) {
     if (this.viewport.isTabletPlus) {
       return base + additional;
     }
     return base;
   }
 
-  getDate(date: Date) {
+  private getDate(date: Date) {
     return getDate(date);
+  }
+
+  private postUrl(id: string) {
+    return router.urlForName('post-page', { id });
   }
 }

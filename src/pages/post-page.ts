@@ -1,36 +1,35 @@
-import { Initialized, Success } from '@abraham/remotedata';
-import '@polymer/app-route/app-route';
+import { Failure, Initialized, RemoteData, Success } from '@abraham/remotedata';
 import { customElement, observe, property } from '@polymer/decorators';
-import '@polymer/iron-ajax/iron-ajax';
-import '@polymer/marked-element';
-import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
-import { TempAny } from '../../functions/src/temp-any';
+import { RouterLocation } from '@vaadin/router';
+import '../components/hero/hero-block';
+import '../components/markdown/long-markdown';
+import '../elements/footer-block';
 import '../elements/posts-list';
 import '../elements/shared-styles';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { Post } from '../models/post';
+import { router } from '../router';
 import { RootState, store } from '../store';
-import { fetchBlogList } from '../store/blog/actions';
+import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
-import { getDate } from '../utils/functions';
+import { ReduxMixin } from '../store/mixin';
+import { blog } from '../utils/data';
+import { getDate } from '../utils/dates';
+import { updateImageMetadata } from '../utils/metadata';
+
+// TODO: loading message
 
 @customElement('post-page')
 export class PostPage extends ReduxMixin(PolymerElement) {
-  @property({ type: Boolean })
-  active = false;
   @property({ type: Object })
-  route: object;
-  @property({ type: Object })
-  posts: BlogState = initialBlogState;
+  posts = initialBlogState;
 
   @property({ type: Object })
-  private post: Post;
+  private post: RemoteData<Error, Post> = new Initialized();
   @property({ type: Array })
   private suggestedPosts: Post[] = [];
   @property({ type: String })
-  private postContent: string;
+  private postContent: string = '';
   @property({ type: Object })
   private postData: { id?: string } = {};
 
@@ -57,40 +56,7 @@ export class PostPage extends ReduxMixin(PolymerElement) {
           background-color: var(--primary-background-color);
         }
 
-        [slot='markdown-html'] {
-          font-size: 18px;
-          line-height: 1.8;
-          color: var(--primary-text-color);
-        }
-
-        [slot='markdown-html'] h1,
-        [slot='markdown-html'] h2,
-        [slot='markdown-html'] h3 {
-          margin: 48px 0 16px;
-        }
-
-        [slot='markdown-html'] p {
-          margin-top: 0;
-          margin-bottom: 24px;
-        }
-
-        [slot='markdown-html'] img {
-          width: 100%;
-        }
-
-        [slot='markdown-html'] plastic-image {
-          margin: 32px 0 8px -16px;
-          --iron-image-width: calc(100% + 32px);
-          width: calc(100% + 32px);
-          min-height: 200px;
-          background-color: var(--secondary-background-color);
-        }
-
         @media (min-width: 640px) {
-          [slot='markdown-html'] plastic-image {
-            min-height: 400px;
-          }
-
           .suggested-posts {
             margin-top: 48px;
             padding-bottom: 36px;
@@ -98,77 +64,79 @@ export class PostPage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <polymer-helmet
-        title="[[post.title]] | {$ title $}"
-        description="[[post.brief]]"
-        image="[[post.image]]"
-        active="[[active]]"
-        label1="{$ blog.published $}"
-        data1="[[published]]"
-      ></polymer-helmet>
-
-      <app-route route="[[route]]" pattern="/:id" data="{{postData}}"></app-route>
-
       <hero-block
-        background-image="[[post.image]]"
-        background-color="[[post.primaryColor]]"
+        background-image="[[post.data.image]]"
+        background-color="[[post.data.primaryColor]]"
         font-color="#fff"
-        active="[[active]]"
       >
-        <div class="hero-title">[[post.title]]</div>
+        <div class="hero-title">[[post.data.title]]</div>
       </hero-block>
 
       <div class="container-narrow">
-        <marked-element class="post" markdown="[[postContent]]">
-          <div slot="markdown-html"></div>
-        </marked-element>
-        <div class="date">{$ blog.published $}: [[getDate(post.published)]]</div>
+        <long-markdown class="post" content="[[postContent]]"></long-markdown>
+        <div class="date">[[blog.published]]: [[getDate(post.data.published)]]</div>
       </div>
 
-<!--      <div class="suggested-posts">-->
-<!--        <div class="container-narrow">-->
-<!--          <h3 class="container-title">{$ blog.suggested $}</h3>-->
-<!--          <posts-list posts="[[suggestedPosts]]"></posts-list>-->
-<!--        </div>-->
-<!--      </div>-->
+      <div class="suggested-posts">
+        <div class="container-narrow">
+          <h3 class="container-title">[[blog.suggested]]</h3>
+          <posts-list posts="[[suggestedPosts]]"></posts-list>
+        </div>
+      </div>
 
-      <iron-ajax
-        auto
-        url="[[post.source]]"
-        handle-as="text"
-        on-response="handleMarkdownFileFetch"
-      ></iron-ajax>
+      <footer-block></footer-block>
     `;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.posts = state.blog;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.posts instanceof Initialized) {
-      store.dispatch(fetchBlogList());
+      store.dispatch(fetchBlogPosts);
     }
   }
 
-  handleMarkdownFileFetch(event: TempAny) {
-    if (event.detail.response) {
-      this.postContent = event.detail.response;
+  private blog = blog;
+
+  @observe('post')
+  private async onPost(post: RemoteData<Error, Post>) {
+    if (post instanceof Success && post.data.source) {
+      try {
+        this.postContent = await fetch(post.data.source).then((response) => response.text());
+      } catch (error) {
+        this.post = new Failure(error as Error);
+      }
     }
   }
 
+  onAfterEnter(location: RouterLocation) {
+    this.postData = location.params;
+  }
+
+  // TODO: Move to selector
   @observe('postData.id', 'posts')
-  _postDataObserver(postId: string, posts: BlogState) {
-    if (posts instanceof Success) {
+  private onPostDataIdAndPosts(postId: string, posts: BlogState) {
+    if (postId && posts instanceof Success) {
       const post = posts.data.find(({ id }) => id === postId);
-      this.post = post;
-      this.postContent = post?.content;
-      this.suggestedPosts = posts.data.filter(({ id }) => id !== postId).slice(0, 3);
+      if (post) {
+        this.post = new Success(post);
+        this.postContent = post?.content;
+        this.suggestedPosts = posts.data.filter(({ id }) => id !== postId).slice(0, 3);
+
+        updateImageMetadata(post.title, post.brief, {
+          image: post.image,
+          imageAlt: post.title,
+        });
+      } else {
+        router.render('/404');
+      }
     }
   }
 
-  getDate(date: Date) {
+  private getDate(date: string) {
     return getDate(date);
   }
 }

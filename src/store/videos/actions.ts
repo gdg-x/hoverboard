@@ -1,7 +1,8 @@
+import { Initialized, Success } from '@abraham/remotedata';
+import { orderBy } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { Video } from '../../models/video';
-import { mergeId } from '../../utils/merge-id';
-import { db } from '../db';
+import { subscribeToCollection, Subscription } from '../../utils/firestore';
 import {
   FetchVideosActions,
   FETCH_VIDEOS,
@@ -9,26 +10,22 @@ import {
   FETCH_VIDEOS_SUCCESS,
 } from './types';
 
-const getVideos = async (): Promise<Video[]> => {
-  const { docs } = await db().collection('videos').orderBy('order', 'asc').get();
+let subscription: Subscription = new Initialized();
 
-  return docs.map<Video>(mergeId);
+export const unsubscribe = () => {
+  if (subscription instanceof Success) {
+    subscription.data();
+  }
 };
 
-export const fetchVideos = () => async (dispatch: Dispatch<FetchVideosActions>) => {
-  dispatch({
-    type: FETCH_VIDEOS,
-  });
-
-  try {
-    dispatch({
-      type: FETCH_VIDEOS_SUCCESS,
-      payload: await getVideos(),
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_VIDEOS_FAILURE,
-      payload: error,
-    });
+export const fetchVideos = async (dispatch: Dispatch<FetchVideosActions>) => {
+  if (subscription instanceof Initialized) {
+    subscription = subscribeToCollection(
+      'videos',
+      () => dispatch({ type: FETCH_VIDEOS }),
+      (payload: Video[]) => dispatch({ type: FETCH_VIDEOS_SUCCESS, payload }),
+      (payload: Error) => dispatch({ type: FETCH_VIDEOS_FAILURE, payload }),
+      orderBy('order')
+    );
   }
 };

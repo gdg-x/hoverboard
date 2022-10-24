@@ -17,7 +17,6 @@ The following imports are available:
  - flex
  - flex-reverse
  - flex-alignment
- - flex-factors
  - positioning
 */
 /* Most common used flex styles*/
@@ -27,6 +26,5 @@ The following imports are available:
 
 export { flex } from './flex';
 export { flexAlignment } from './flex-alignment';
-export { flexFactors } from './flex-factors';
 export { flexReverse } from './flex-reverse';
 export { positioning } from './positioning';

@@ -6,6 +6,7 @@ export const FETCH_USER_FEATURED_SESSIONS_SUCCESS = 'FETCH_USER_FEATURED_SESSION
 export const SET_USER_FEATURED_SESSIONS = 'SET_USER_FEATURED_SESSIONS';
 export const SET_USER_FEATURED_SESSIONS_FAILURE = 'SET_USER_FEATURED_SESSIONS_FAILURE';
 export const SET_USER_FEATURED_SESSIONS_SUCCESS = 'SET_USER_FEATURED_SESSIONS_SUCCESS';
+export const REMOVE_USER_FEATURED_SESSIONS = 'REMOVE_USER_FEATURED_SESSIONS';
 
 interface FetchUserFeaturedSessionsAction {
   type: typeof FETCH_USER_FEATURED_SESSIONS;
@@ -35,10 +36,15 @@ interface SetUserFeaturedSessionsSuccessAction {
   payload: FeaturedSessions;
 }
 
+interface RemoveUserFeaturedSessionsAction {
+  type: typeof REMOVE_USER_FEATURED_SESSIONS;
+}
+
 export type FeaturedSessionsActions =
   | FetchUserFeaturedSessionsAction
   | FetchUserFeaturedSessionsFailureAction
   | FetchUserFeaturedSessionsSuccessAction
   | SetUserFeaturedSessionsAction
   | SetUserFeaturedSessionsFailureAction
-  | SetUserFeaturedSessionsSuccessAction;
+  | SetUserFeaturedSessionsSuccessAction
+  | RemoveUserFeaturedSessionsAction;

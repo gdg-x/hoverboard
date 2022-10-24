@@ -1,7 +1,7 @@
+import { Initialized, Success } from '@abraham/remotedata';
 import { Dispatch } from 'redux';
-import { Speaker } from '../../models/speaker';
-import { mergeId } from '../../utils/merge-id';
-import { db } from '../db';
+import { SpeakerWithTags } from '../../models/speaker';
+import { subscribeToCollection, Subscription } from '../../utils/firestore';
 import {
   FETCH_SPEAKERS,
   FETCH_SPEAKERS_FAILURE,
@@ -9,26 +9,21 @@ import {
   SpeakerActions,
 } from './types';
 
-const getSpeakers = async (): Promise<Speaker[]> => {
-  const { docs } = await db().collection('generatedSpeakers').orderBy('order', 'asc').get();
+let subscription: Subscription = new Initialized();
 
-  return docs.map<Speaker>(mergeId);
+export const unsubscribe = () => {
+  if (subscription instanceof Success) {
+    subscription.data();
+  }
 };
 
-export const fetchSpeakersList = () => async (dispatch: Dispatch<SpeakerActions>) => {
-  dispatch({
-    type: FETCH_SPEAKERS,
-  });
-
-  try {
-    dispatch({
-      type: FETCH_SPEAKERS_SUCCESS,
-      payload: await getSpeakers(),
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_SPEAKERS_FAILURE,
-      payload: error,
-    });
+export const fetchSpeakers = async (dispatch: Dispatch<SpeakerActions>) => {
+  if (subscription instanceof Initialized) {
+    subscription = subscribeToCollection(
+      'generatedSpeakers',
+      () => dispatch({ type: FETCH_SPEAKERS }),
+      (payload: SpeakerWithTags[]) => dispatch({ type: FETCH_SPEAKERS_SUCCESS, payload }),
+      (payload: Error) => dispatch({ type: FETCH_SPEAKERS_FAILURE, payload })
+    );
   }
 };

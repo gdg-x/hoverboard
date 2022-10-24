@@ -1,16 +1,19 @@
 import { Failure, Initialized, Pending } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
+import { computed, customElement, property, query } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin';
+import '@power-elements/lazy-image';
+import { Video } from '../models/video';
 import { RootState, store } from '../store';
-import { toggleVideoDialog } from '../store/ui/actions';
+import { ReduxMixin } from '../store/mixin';
+import { openVideoDialog } from '../store/ui/actions';
 import { fetchVideos } from '../store/videos/actions';
-import { initialVideosState, VideoState } from '../store/videos/state';
-import './shared-animations';
+import { initialVideosState } from '../store/videos/state';
+import { TempAny } from '../temp-any';
+import { featuredVideos, loading } from '../utils/data';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('featured-videos')
@@ -36,7 +39,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         }
 
         .videos {
-          transition: transform var(--slideAnimation);
+          transition: transform var(--slide-animation);
           will-change: transition;
           transform: translateX(0);
         }
@@ -65,6 +68,12 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         }
 
         .thumbnail-image {
+          position: absolute;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 100%;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--secondary-background-color);
         }
 
@@ -128,7 +137,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
       </style>
       <div class="container">
         <div class="header" layout horizontal justified center wrap>
-          <h1 class="container-title">{$ featuredVideos.title $}</h1>
+          <h1 class="container-title">[[featuredVideos.title]]</h1>
         </div>
 
         <div class="videos-wrapper" layout flex horizontal>
@@ -136,16 +145,12 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
             class="last-video slide-icon"
             icon="hoverboard:chevron-left"
             on-click="shiftContentLeft"
-            ga-on="click"
-            ga-event-category="video-list-arrow"
-            ga-event-action="click"
-            ga-event-label="left"
-            hidden$="[[_leftArrowHidden]]"
+            hidden$="[[leftArrowHidden]]"
           ></paper-icon-button>
           <div id="videoList" class="video-list" layout flex horizontal>
             <div id="videos" class="videos" layout horizontal>
               <template is="dom-if" if="[[pending]]">
-                <p>Loading...</p>
+                <p>[[loading]]</p>
               </template>
 
               <template is="dom-if" if="[[failure]]">
@@ -153,25 +158,14 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
               </template>
 
               <template is="dom-repeat" items="[[videos.data]]" as="block" index-as="index">
-                <div
-                  class="video-item"
-                  on-click="playVideo"
-                  ga-on="click"
-                  ga-event-category="video"
-                  ga-event-action="watch"
-                  ga-event-label$="[[block.title]]"
-                >
+                <div class="video-item" on-click="playVideo" video="[[block]]">
                   <div class="thumbnail" relative layout horizontal center-center>
-                    <plastic-image
+                    <lazy-image
                       id="image[[index]]"
                       class="thumbnail-image"
-                      srcset="[[block.thumbnail]]"
-                      sizing="cover"
-                      lazy-load
-                      preload
-                      fade
-                      fit
-                    ></plastic-image>
+                      src="[[block.thumbnail]]"
+                      alt="[[block.title]]"
+                    ></lazy-image>
                     <div class="image-overlay" fit></div>
                     <paper-icon-button
                       class="video-play-icon"
@@ -187,18 +181,14 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
             class="next-video slide-icon"
             icon="hoverboard:chevron-right"
             on-click="shiftContentRight"
-            ga-on="click"
-            ga-event-category="video-list-arrow"
-            ga-event-action="click"
-            ga-event-label="right"
-            hidden$="[[_rightArrowHidden]]"
+            hidden$="[[rightArrowHidden]]"
           >
             &gt;</paper-icon-button
           >
         </div>
-        <a href="{$ featuredVideos.callToAction.link $}" target="_blank" rel="noopener noreferrer">
+        <a href="[[featuredVideos.callToAction.link]]" target="_blank" rel="noopener noreferrer">
           <paper-button class="cta-button animated icon-right">
-            <span>{$ featuredVideos.callToAction.label $}</span>
+            <span>[[featuredVideos.callToAction.label]]</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
         </a>
@@ -206,15 +196,21 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  @property({ type: Object })
-  videos: VideoState = initialVideosState;
+  private featuredVideos = featuredVideos;
+  private loading = loading;
+
+  @query('#videos')
+  videosElm!: HTMLDivElement;
+  @query('#videoList')
+  videoList!: HTMLDivElement;
 
   @property({ type: Object })
-  private viewport = {};
+  videos = initialVideosState;
+
   @property({ type: Boolean })
-  private _leftArrowHidden = true;
+  private leftArrowHidden = true;
   @property({ type: Boolean })
-  private _rightArrowHidden = false;
+  private rightArrowHidden = false;
 
   @computed('videos')
   get pending() {
@@ -226,15 +222,14 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     return this.videos instanceof Failure;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.videos = state.videos;
-    this.viewport = state.ui.viewport;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.videos instanceof Initialized) {
-      store.dispatch(fetchVideos());
+      store.dispatch(fetchVideos);
     }
   }
 
@@ -250,12 +245,12 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         newX = 0;
       }
 
-      this.transformVideoList(this.$.videos, newX);
+      this.transformVideoList(this.videosElm, newX);
 
       if (newX == 0) {
-        this._leftArrowHidden = true;
+        this.leftArrowHidden = true;
       } else {
-        this._rightArrowHidden = false;
+        this.rightArrowHidden = false;
       }
     }
   }
@@ -273,27 +268,33 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         newX = maxRightPosition;
       }
 
-      this.transformVideoList(this.$.videos, newX);
+      this.transformVideoList(this.videosElm, newX);
 
       if (newX == maxRightPosition) {
-        this._rightArrowHidden = true;
+        this.rightArrowHidden = true;
       } else {
-        this._leftArrowHidden = false;
+        this.leftArrowHidden = false;
       }
     }
   }
 
   getVideosDetails() {
-    const videos = this.shadowRoot.querySelectorAll('.video-item');
-    const cardRect = videos[videos.length - 1].getBoundingClientRect();
+    const videos = this.shadowRoot!.querySelectorAll('.video-item');
+    const lastVideo = videos[videos.length - 1];
+
+    if (!this.videosElm || !this.videoList || !lastVideo) {
+      throw new Error('Featured videos elements missing');
+    }
+
+    const cardRect = lastVideo.getBoundingClientRect();
     const cardWidth = cardRect.width;
     const videosContainerWidth = parseInt(
-      getComputedStyle(this.$.videoList, null).getPropertyValue('width')
+      getComputedStyle(this.videoList, null).getPropertyValue('width')
     );
-    const videosWidth = parseInt(getComputedStyle(this.$.videos, null).getPropertyValue('width'));
+    const videosWidth = parseInt(getComputedStyle(this.videosElm, null).getPropertyValue('width'));
     const maxRightPosition = -(videosWidth - videosContainerWidth) - 16;
     const currentPosition = parseInt(
-      getComputedStyle(this.$.videos, null).getPropertyValue('transform').split(',')[4]
+      getComputedStyle(this.videosElm, null).getPropertyValue('transform').split(',')[4] || ''
     );
 
     return {
@@ -304,25 +305,27 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   }
 
   getVideoListWidth() {
-    const videos = this.shadowRoot.querySelectorAll('.video-item');
-    const cardRect = videos[videos.length - 1].getBoundingClientRect();
+    const videos = this.shadowRoot!.querySelectorAll('.video-item');
+    const lastVideo = videos[videos.length - 1];
+
+    if (!lastVideo) {
+      throw new Error('Featured videos elements missing');
+    }
+
+    const cardRect = lastVideo.getBoundingClientRect();
     return cardRect.width * videos.length;
   }
 
-  transformVideoList(el, newPosition) {
+  transformVideoList(el: HTMLElement, newPosition: number) {
     el.style.transform = 'translate3d(' + newPosition + 'px, 0, 0)';
   }
 
-  playVideo(e) {
-    const presenters = e.model.__data.block.speakers ? ` by ${e.model.__data.block.speakers}` : '';
-    const title = e.model.__data.block.title + presenters;
-    const youtubeId = e.model.__data.block.youtubeId;
+  playVideo(e: PointerEvent) {
+    const video: Video = (e.currentTarget as TempAny).video;
+    const presenters = video.speakers ? ` by ${video.speakers}` : '';
+    const title = video.title + presenters;
+    const youtubeId = video.youtubeId;
 
-    toggleVideoDialog({
-      title: title,
-      youtubeId: youtubeId,
-      disableControls: true,
-      opened: true,
-    });
+    openVideoDialog({ title, youtubeId });
   }
 }

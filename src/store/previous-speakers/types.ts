@@ -1,4 +1,4 @@
-import { Speaker } from '../../models/speaker';
+import { PreviousSpeaker } from '../../models/previous-speaker';
 
 export const FETCH_PREVIOUS_SPEAKERS = 'FETCH_PREVIOUS_SPEAKERS';
 export const FETCH_PREVIOUS_SPEAKERS_FAILURE = 'FETCH_PREVIOUS_SPEAKERS_FAILURE';
@@ -15,7 +15,7 @@ interface FetchPreviousSpeakersFailureAction {
 
 interface FetchPreviousSpeakersSuccessAction {
   type: typeof FETCH_PREVIOUS_SPEAKERS_SUCCESS;
-  payload: Speaker[];
+  payload: PreviousSpeaker[];
 }
 
 export type PreviousSpeakersActions =

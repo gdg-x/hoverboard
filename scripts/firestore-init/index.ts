@@ -1,19 +1,15 @@
-import {
-  importBlog,
-  importGallery,
-  importNotificationsConfig,
-  importPartners,
-  importPreviousSpeakers,
-  importTeam,
-  importTickets,
-  importVideos,
-} from './utils';
+import { importBlog } from './blog';
+import { importConfig } from './config';
+import { importGallery } from './gallery';
+import { importPartners } from './partners';
+import { importTeam } from './team';
+import { importTickets } from './tickets';
+import { importVideos } from './videos';
 
-importBlog()
+importConfig() // Should always be first
+  .then(() => importBlog())
   .then(() => importGallery())
-  .then(() => importNotificationsConfig())
   .then(() => importPartners())
-  .then(() => importPreviousSpeakers())
   .then(() => importTeam())
   .then(() => importTickets())
   .then(() => importVideos())

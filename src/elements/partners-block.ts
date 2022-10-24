@@ -1,18 +1,21 @@
-import { Failure, Initialized, Pending } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
+import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin';
+import '@power-elements/lazy-image';
 import { RootState, store } from '../store';
-import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
-import { fetchPartners } from '../store/partners/actions';
-import { initialPartnersState, PartnersState } from '../store/partners/state';
+import { closeDialog, openSubscribeDialog } from '../store/dialogs/actions';
+import { ReduxMixin } from '../store/mixin';
+import { PartnerGroupsState, selectPartnerGroups } from '../store/partners';
 import { addPotentialPartner } from '../store/potential-partners/actions';
-import { showToast } from '../store/toast/actions';
-import './hoverboard-icons';
+import {
+  initialPotentialPartnersState,
+  PotentialPartnersState,
+} from '../store/potential-partners/state';
+import { queueSnackbar } from '../store/snackbars';
+import { loading, partnersBlock } from '../utils/data';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('partners-block')
@@ -39,8 +42,11 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
         }
 
         .logo-img {
-          height: 84px;
-          width: 100%;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 84px;
+          --lazy-image-fit: contain;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
         }
 
         .cta-button {
@@ -62,15 +68,10 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container">
-        <h1 class="container-title">{$ partnersBlock.title $}</h1>
-
-<!--         <paper-button class="cta-button animated icon-right" on-click="_addPotentialPartner">-->
-<!--           <span>{$ partnersBlock.button $}</span>-->
-<!--           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>-->
-<!--         </paper-button>-->
+        <h1 class="container-title">[[partnersBlock.title]]</h1>
 
         <template is="dom-if" if="[[pending]]">
-          <p>Loading...</p>
+          <p>[[loading]]</p>
         </template>
         <template is="dom-if" if="[[failure]]">
           <p>Error loading partners.</p>
@@ -81,7 +82,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
           <div class="logos-wrapper">
             <template is="dom-repeat" items="[[block.items]]" as="logo">
               <a
-                class="logo-item card"
+                class="logo-item"
                 href$="[[logo.url]]"
                 title$="[[logo.name]]"
                 target="_blank"
@@ -90,23 +91,25 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
                 horizontal
                 center-center
               >
-                <plastic-image
+                <lazy-image
                   class="logo-img"
-                  srcset="[[logo.logoUrl]]"
-                  sizing="contain"
-                  height="[[logo.height]]"
-                  lazy-load
-                  preload
-                  fade
-                ></plastic-image>
+                  src="[[logo.logoUrl]]"
+                  alt="[[logo.name]]"
+                ></lazy-image>
               </a>
             </template>
           </div>
         </template>
+
+        <paper-button class="cta-button animated icon-right" on-click="addPotentialPartner">
+          <span>[[partnersBlock.button]]</span>
+          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+        </paper-button>
       </div>
     `;
   }
 
+<<<<<<< HEAD
   @property({ type: Object })
   private viewport = {};
   @property({ type: Boolean, observer: PartnersBlock.prototype._partnerAddingChanged })
@@ -116,6 +119,15 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
 
   @property({ type: Object })
   partners: PartnersState = initialPartnersState;
+=======
+  private loading = loading;
+  private partnersBlock = partnersBlock;
+
+  @property({ type: Object })
+  potentialPartners = initialPotentialPartnersState;
+  @property({ type: Object })
+  partners: PartnerGroupsState = new Initialized();
+>>>>>>> upstream/main
 
   @computed('partners')
   get pending() {
@@ -127,38 +139,26 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
     return this.partners instanceof Failure;
   }
 
-  stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
-    this.partners = state.partners;
-    this.partnerAdding = state.potentialPartners.adding;
-    this.partnerAddingError = state.potentialPartners.addingError;
+  override stateChanged(state: RootState) {
+    this.partners = selectPartnerGroups(state);
+    this.potentialPartners = state.potentialPartners;
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    if (this.partners instanceof Initialized) {
-      store.dispatch(fetchPartners());
-    }
-  }
-
-  _addPotentialPartner() {
-    openDialog(DIALOGS.SUBSCRIBE, {
-      title: '{$ partnersBlock.form.title $}',
-      submitLabel: '{$ partnersBlock.form.submitLabel $}',
-      firstFieldLabel: '{$ partnersBlock.form.fullName $}',
-      secondFieldLabel: '{$ partnersBlock.form.companyName $}',
+  private addPotentialPartner() {
+    openSubscribeDialog({
+      title: this.partnersBlock.form.title,
+      submitLabel: this.partnersBlock.form.submitLabel,
+      firstFieldLabel: this.partnersBlock.form.fullName,
+      secondFieldLabel: this.partnersBlock.form.companyName,
       submit: (data) => store.dispatch(addPotentialPartner(data)),
     });
   }
 
-  _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {
-    if (oldPartnerAdding && !newPartnerAdding) {
-      if (this.partnerAddingError) {
-        setDialogError(this.partnerAddingError);
-      } else {
-        closeDialog();
-        showToast({ message: '{$ partnersBlock.toast $}' });
-      }
+  @observe('potentialPartners')
+  private onPotentialPartners(potentialPartners: PotentialPartnersState) {
+    if (potentialPartners instanceof Success) {
+      closeDialog();
+      store.dispatch(queueSnackbar(this.partnersBlock.toast));
     }
   }
 }
