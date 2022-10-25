@@ -14,9 +14,9 @@
       "enabled": false
     },
     "mailchimp": {
-      "dc": "",
-      "listid": "",
-      "apikey": ""
+      "dc": "us16",
+      "listid": "d9ed0e9aab",
+      "apikey": "29ba140f38a11e78cd8a22b333bd695c-us16"
     }
   },
   "gallery": [
