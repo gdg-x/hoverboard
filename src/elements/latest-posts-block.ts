@@ -1,17 +1,20 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin';
+import '@power-elements/lazy-image';
+import '../components/markdown/short-markdown';
+import '../components/text-truncate';
+import { router } from '../router';
 import { RootState, store } from '../store';
-import { fetchBlogList } from '../store/blog/actions';
+import { fetchBlogPosts } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
-import { getDate } from '../utils/functions';
+import { ReduxMixin } from '../store/mixin';
+import { latestPostsBlock } from '../utils/data';
+import { getDate } from '../utils/dates';
+import '../utils/icons';
 import './shared-styles';
-import './text-truncate';
 
 @customElement('latest-posts-block')
 export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
@@ -29,8 +32,12 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
         }
 
         .image {
-          width: 100%;
-          height: 128px;
+          overflow: hidden;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 128px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           border-top-left-radius: var(--border-radius);
           border-top-right-radius: var(--border-radius);
         }
@@ -82,39 +89,24 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container">
-        <h1 class="container-title">{$ latestPostsBlock.title $}</h1>
+        <h1 class="container-title">[[latestPostsBlock.title]]</h1>
 
         <div class="posts-wrapper">
           <template is="dom-repeat" items="[[latestPosts]]" as="post">
-            <a
-              href$="/blog/posts/[[post.id]]/"
-              class="post card"
-              ga-on="click"
-              ga-event-category="blog"
-              ga-event-action="open post"
-              ga-event-label$="[[post.title]]"
-              flex
-              layout
-              vertical
-            >
-              <plastic-image
+            <a href$="[[postUrl(post.id)]]" class="post card" flex layout vertical>
+              <lazy-image
                 class="image"
-                srcset="[[post.image]]"
+                src="[[post.image]]"
+                alt="[[post.title]]"
                 style$="background-color: [[post.backgroundColor]];"
-                sizing="cover"
-                lazy-load
-                preload
-                fade
-              ></plastic-image>
+              ></lazy-image>
               <div class="details" layout vertical justified flex-auto>
                 <div>
                   <text-truncate lines="2">
                     <h3 class="title">[[post.title]]</h3>
                   </text-truncate>
                   <text-truncate lines="3">
-                    <marked-element class="description" markdown="[[post.brief]]">
-                      <div slot="markdown-html"></div>
-                    </marked-element>
+                    <short-markdown class="description" content="[[post.brief]]"></short-markdown>
                   </text-truncate>
                 </div>
                 <div class="date">[[getDate(post.published)]]</div>
@@ -123,9 +115,9 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
           </template>
         </div>
 
-        <a href="{$ latestPostsBlock.callToAction.link $}">
+        <a href="[[latestPostsBlock.callToAction.link]]">
           <paper-button class="cta-button animated icon-right">
-            <span>{$ latestPostsBlock.callToAction.label $}</span>
+            <span>[[latestPostsBlock.callToAction.label]]</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
         </a>
@@ -133,17 +125,19 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
+  private latestPostsBlock = latestPostsBlock;
+
   @property({ type: Object })
   posts: BlogState = initialBlogState;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.posts = state.blog;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.posts instanceof Initialized) {
-      store.dispatch(fetchBlogList());
+      store.dispatch(fetchBlogPosts);
     }
   }
 
@@ -154,6 +148,10 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
     } else {
       return [];
     }
+  }
+
+  postUrl(id: string) {
+    return router.urlForName('post-page', { id });
   }
 
   getDate(date: Date) {

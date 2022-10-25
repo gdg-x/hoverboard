@@ -1,17 +1,29 @@
-import { customElement, observe, property } from '@polymer/decorators';
+import { Initialized, Success } from '@abraham/remotedata';
+import { computed, customElement, observe, property } from '@polymer/decorators';
+import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
-import {
-  FeaturedSessionsState,
-  initialFeaturedSessionsState,
-} from '../store/featured-sessions/state';
-import { TempAny } from '../temp-any';
-import { generateClassName } from '../utils/functions';
-import { offsetTop, scrollToY } from '../utils/scrolling';
+import { RouterLocation } from '@vaadin/router';
+import { Day } from '../models/day';
+import { Filter } from '../models/filter';
+import { Session } from '../models/session';
+import { Time } from '../models/time';
+import { Timeslot } from '../models/timeslot';
+import { RootState, store } from '../store';
+import { fetchUserFeaturedSessions } from '../store/featured-sessions/actions';
+import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
+import { selectFilters } from '../store/filters/selectors';
+import { ReduxMixin } from '../store/mixin';
+import { initialScheduleState, ScheduleState } from '../store/schedule/state';
+import { initialUserState } from '../store/user/state';
+import { UserState } from '../store/user/types';
+import { mySchedule } from '../utils/data';
+import '../utils/icons';
+import { generateClassName } from '../utils/styles';
 import './session-element';
 import './shared-styles';
 
 @customElement('schedule-day')
-export class ScheduleDay extends PolymerElement {
+export class ScheduleDay extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -55,15 +67,6 @@ export class ScheduleDay extends PolymerElement {
           margin-right: 8px;
         }
 
-        .download iron-icon {
-          transform: rotate(90deg);
-        }
-
-        .download-link {
-          text-align: right;
-          margin-top: 20px;
-        }
-
         @media (min-width: 812px) {
           :host {
             margin-left: auto;
@@ -97,51 +100,31 @@ export class ScheduleDay extends PolymerElement {
           .add-session {
             border: 1px solid var(--border-light-color);
           }
-
-          .download-link {
-            margin-top: 0;
-            margin-bottom: 20px;
-          }
         }
       </style>
-
-      <div class="download-link" >
-        <a target="_blank" href="/data/sunnytech-2022.pdf">
-          <paper-button
-            class="watch-video download"
-            ga-on="click"
-            ga-event-category="redirect"
-            ga-event-action="schedule"
-            ga-event-label="hero block - view schedule"
-          >
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-            {$ downloadSchedule $}
-          </paper-button>
-        </a>
-      </div>
 
       <div class="grid" style$="--tracks-number: [[day.tracks.length]];">
         <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot" index-as="timeslotIndex">
           <div
             id$="[[timeslot.startTime]]"
             class="start-time"
-            style$="grid-area: [[_getTimePosition(timeslotIndex)]]"
+            style$="grid-area: [[getTimePosition(timeslotIndex)]]"
           >
-            <span class="hours">[[_splitText(timeslot.startTime, ':', 0)]]</span>
-            <span class="minutes">[[_splitText(timeslot.startTime, ':', 1)]]</span>
+            <span class="hours">[[splitText(timeslot.startTime, ':', 0)]]</span>
+            <span class="minutes">[[splitText(timeslot.startTime, ':', 1)]]</span>
           </div>
 
           <a
             class="add-session"
             href$="/schedule/[[day.date]]#[[timeslot.startTime]]"
-            hidden$="[[!_showAddSession(timeslot, onlyFeatured)]]"
+            hidden$="[[!showAddSession(timeslot, onlyFeatured)]]"
             style$="grid-area: [[timeslot.sessions.0.gridArea]]"
             layout
             horizontal
             center-center
           >
-            <iron-icon class="add-session-icon" icon="hoverboard:add-circle-outline"></iron-icon>
-            <span>{$ mySchedule.browseSession $}</span>
+            <iron-icon icon="hoverboard:add-circle-outline class="add-session-icon""></iron-icon>
+            <span>[[mySchedule.browseSession]]</span>
           </a>
 
           <template
@@ -149,21 +132,18 @@ export class ScheduleDay extends PolymerElement {
             items="[[timeslot.sessions]]"
             as="session"
             index-as="sessionIndex"
-            filter="_isNotEmpty"
+            filter="isNotEmpty"
           >
             <div class="session" style$="grid-area: [[session.gridArea]]" layout vertical>
               <template
                 is="dom-repeat"
-                items="[[_filterSessions(session.items, selectedFilters)]]"
+                items="[[filterSessions(session.items, selectedFilters)]]"
                 as="subSession"
               >
                 <session-element
                   class="subsession"
                   day-name="[[name]]"
                   session="[[subSession]]"
-                  user="[[user]]"
-                  featured-sessions="[[featuredSessions]]"
-                  query-params="[[queryParams]]"
                 ></session-element>
               </template>
             </div>
@@ -173,53 +153,51 @@ export class ScheduleDay extends PolymerElement {
     `;
   }
 
-  @property({ type: Boolean })
-  private active = false;
+  private mySchedule = mySchedule;
+
   @property({ type: Object })
-  private day = {};
-  @property({ type: String })
-  private name: string;
+  schedule: ScheduleState = initialScheduleState;
   @property({ type: Object })
-  private user = {};
+  location: RouterLocation | undefined;
   @property({ type: Object })
-  private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
+  private day: Day | undefined;
+
+  @property({ type: Object })
+  private user = initialUserState;
+  @property({ type: Object })
+  private featuredSessions = initialFeaturedSessionsState;
   @property({ type: Boolean })
   private onlyFeatured = false;
-  @property({ type: Object })
-  private viewport: { isTabletPlus?: boolean } = {};
-  @property({ type: Object })
-  private selectedFilters = {};
-  @property({ type: String })
-  private queryParams: string;
+  @property({ type: Array })
+  private selectedFilters: Filter[] = [];
 
-  @observe('active')
-  _pageVisible(active) {
-    if (active && window.location.hash) {
-      const selectedTime = window.location.hash.slice(1);
-      if (selectedTime) {
-        requestAnimationFrame(() => {
-          const Elements = (window as TempAny).HOVERBOARD.Elements;
-          const targetElement = this.shadowRoot.querySelector(`[id="${selectedTime}"]`);
-          const offset = offsetTop(targetElement);
-          const toolbarHeight = Elements.HeaderToolbar.getBoundingClientRect().height - 1;
-          const stickyToolbarHeight = Elements.StickyHeaderToolbar.getBoundingClientRect().height;
-          const additionalMargin = this.viewport.isTabletPlus ? 8 : 0;
-          const scrollTargetY = offset - toolbarHeight - stickyToolbarHeight - additionalMargin;
-          scrollToY(scrollTargetY, 1500, 'easeInOutSine');
-        });
-      }
+  onAfterEnter(location: RouterLocation) {
+    this.location = location;
+  }
+
+  override stateChanged(state: RootState) {
+    this.schedule = state.schedule;
+    this.user = state.user;
+    this.selectedFilters = selectFilters(state);
+    this.featuredSessions = state.featuredSessions;
+  }
+
+  @observe('user')
+  private onUser(user: UserState) {
+    if (user instanceof Success && this.featuredSessions instanceof Initialized) {
+      store.dispatch(fetchUserFeaturedSessions);
     }
   }
 
-  _getTimePosition(timeslotIndex) {
+  private getTimePosition(timeslotIndex: number) {
     return `${timeslotIndex + 1} / 1`;
   }
 
-  _splitText(text, divider, index) {
+  private splitText(text: string, divider: string, index: number) {
     return text.split(divider)[index];
   }
 
-  _showAddSession(timeslot, onlyFeatured) {
+  private showAddSession(timeslot: Timeslot, onlyFeatured: boolean) {
     return (
       onlyFeatured &&
       !timeslot.sessions.reduce(
@@ -229,24 +207,50 @@ export class ScheduleDay extends PolymerElement {
     );
   }
 
-  _isNotEmpty(sessionBlock) {
+  private isNotEmpty(sessionBlock: Time) {
     return !!sessionBlock.items.length;
   }
 
-  _filterSessions(sessions, selectedFilters) {
-    if (!selectedFilters) return sessions;
+  private filterSessions(sessions: Session[], selectedFilters: Filter[]) {
+    if (selectedFilters.length === 0) {
+      return sessions;
+    }
+
     return sessions.filter((session) => {
-      return (
-        (!selectedFilters.tag ||
-          !selectedFilters.tag.length ||
-          (session.tags &&
-            !!session.tags.filter((tag) => selectedFilters.tag.includes(generateClassName(tag)))
-              .length)) &&
-        (!selectedFilters.complexity ||
-          !selectedFilters.complexity.length ||
-          (session.complexity &&
-            selectedFilters.complexity.includes(generateClassName(session.complexity))))
-      );
+      return selectedFilters.every((filter) => {
+        const values = session[filter.group];
+        if (values === undefined) {
+          return false;
+        } else if (typeof values === 'string') {
+          return generateClassName(values) === generateClassName(filter.tag);
+        } else {
+          return values.some((value) => generateClassName(value) === generateClassName(filter.tag));
+        }
+      });
     });
+  }
+
+  @computed('location', 'schedule')
+  private get name() {
+    if (this.location && this.schedule instanceof Success) {
+      const {
+        params: { id },
+        pathname,
+      } = this.location;
+      if (pathname.endsWith('my-schedule')) {
+        return 'my-schedule';
+      } else {
+        return id || this.schedule.data[0]?.date;
+      }
+    } else {
+      return undefined;
+    }
+  }
+
+  @observe('name', 'schedule')
+  private onNameAndSchedule() {
+    if (!this.onlyFeatured && this.name && this.schedule instanceof Success) {
+      this.day = this.schedule.data.find((day) => day.date === this.name);
+    }
   }
 }

@@ -1,5 +1,10 @@
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db } from '../db';
+import { store } from '..';
+import { db } from '../../firebase';
+import { bookmarked } from '../../utils/data';
+import { queueSnackbar } from '../snackbars';
+import { selectUserId } from '../user/selectors';
 import { FeaturedSessions } from './state';
 import {
   FeaturedSessionsActions,
@@ -12,54 +17,64 @@ import {
 } from './types';
 
 const getFeaturedSessions = async (userId: string): Promise<FeaturedSessions> => {
-  const doc = await db().collection('featuredSessions').doc(userId).get();
+  const snapshot = await getDoc(doc(db, 'featuredSessions', userId));
 
-  return doc.data() || {};
+  return snapshot.data() || {};
 };
 
-export const fetchUserFeaturedSessions =
-  (userId: string) => async (dispatch: Dispatch<FeaturedSessionsActions>) => {
-    dispatch({
-      type: FETCH_USER_FEATURED_SESSIONS,
-    });
+export const fetchUserFeaturedSessions = async (dispatch: Dispatch<FeaturedSessionsActions>) => {
+  const userId = selectUserId(store.getState()) as string;
 
-    try {
-      dispatch({
-        type: FETCH_USER_FEATURED_SESSIONS_SUCCESS,
-        payload: await getFeaturedSessions(userId),
-      });
-    } catch (error) {
-      dispatch({
-        type: FETCH_USER_FEATURED_SESSIONS_FAILURE,
-        payload: error,
-      });
-    }
-  };
+  if (!userId) return;
+
+  dispatch({
+    type: FETCH_USER_FEATURED_SESSIONS,
+  });
+
+  try {
+    dispatch({
+      type: FETCH_USER_FEATURED_SESSIONS_SUCCESS,
+      payload: await getFeaturedSessions(userId),
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_USER_FEATURED_SESSIONS_FAILURE,
+      payload: error as Error,
+    });
+  }
+};
 
 const setFeaturedSessions = async (
   userId: string,
   featuredSessions: FeaturedSessions
 ): Promise<void> => {
-  return db().collection('featuredSessions').doc(userId).set(featuredSessions);
+  await setDoc(doc(db, 'featuredSessions', userId), featuredSessions);
+};
+
+const cleanFeaturedSessions = (object: FeaturedSessions): FeaturedSessions => {
+  const hasValue = ([, value]: [string, unknown]) => Boolean(value);
+  return Object.fromEntries(Object.entries(object).filter(hasValue));
 };
 
 export const setUserFeaturedSessions =
-  (userId: string, featuredSessions: FeaturedSessions) =>
+  (userId: string, featuredSessions: FeaturedSessions, isBookmarked: boolean) =>
   async (dispatch: Dispatch<FeaturedSessionsActions>) => {
     dispatch({
       type: SET_USER_FEATURED_SESSIONS,
     });
 
     try {
-      await setFeaturedSessions(userId, featuredSessions);
+      const cleanedFeaturedSessions = cleanFeaturedSessions(featuredSessions);
+      await setFeaturedSessions(userId, cleanedFeaturedSessions);
       dispatch({
         type: SET_USER_FEATURED_SESSIONS_SUCCESS,
-        payload: featuredSessions,
+        payload: cleanedFeaturedSessions,
       });
+      store.dispatch(queueSnackbar(isBookmarked ? bookmarked.added : bookmarked.removed));
     } catch (error) {
       dispatch({
         type: SET_USER_FEATURED_SESSIONS_FAILURE,
-        payload: error,
+        payload: error as Error,
       });
     }
   };

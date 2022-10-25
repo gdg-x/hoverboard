@@ -27,21 +27,19 @@ export const theme = css`
     --additional-background-color: #f7f7f7;
     --contrast-additional-background-color: #e8e8e8;
     --animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    --slideAnimation: 0.4s cubic-bezier(0, 0, 0.2, 1);
+    --slide-animation: 0.4s cubic-bezier(0, 0, 0.2, 1);
     --border-radius: 4px;
-    --box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-      0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-    --box-shadow-primary-color: 0 3px 3px -2px rgba(103, 58, 183, 0.3),
-      0 3px 4px 0 rgba(103, 58, 183, 0.3), 0 1px 8px 0 rgba(103, 58, 183, 0.3);
-    --box-shadow-primary-color-hover: 0 1px 3px -2px rgba(103, 58, 183, 0.4),
-      0 4px 5px 0 rgba(103, 58, 183, 0.4), 0 2px 9px 0 rgba(103, 58, 183, 0.4);
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    --box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+      0 1px 3px 0 rgb(0 0 0 / 12%);
+    --box-shadow-primary-color: 0 3px 3px -2px rgb(183, 105, 58 / 30%),
+      0 3px 4px 0 rgb(183, 105, 58 / 30%), 0 1px 8px 0 rgb(183, 105, 58 / 30%);
+    --box-shadow-primary-color-hover: 0 1px 3px -2px rgb(183, 105, 58 / 40%),
+      0 4px 5px 0 rgb(183, 105, 58 / 40%), 0 2px 9px 0 rgb(183, 105, 58 / 40%);
+    --font-family: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, helvetica, arial,
       sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     --max-container-width: 1280px;
-
-    --primary-color-transparent: rgba(251, 69, 82, 0.1);
-    --primary-color-light: rgba(251, 69, 82, 0.8);
+    --primary-color-transparent: rgba(183, 105, 58, 0.1);
+    --primary-color-light: rgba(183, 105, 58, 0.8);
     --primary-color-white: #ede7f6;
 
     /* Labels */
@@ -70,7 +68,7 @@ export const theme = css`
 
   body {
     font-family: var(--font-family);
-    text-rendering: optimizeLegibility;
+    text-rendering: optimizelegibility;
     color: var(--primary-text-color);
   }
 
@@ -209,6 +207,7 @@ export const theme = css`
   .google-b .badge-icon {
     --iron-icon-width: 18px;
     --iron-icon-height: 18px;
+
     color: #fff;
   }
 
@@ -224,10 +223,12 @@ export const theme = css`
     height: 32px;
     padding: 8px 12px;
     font-size: 12px;
-    color: currentColor;
+    color: currentcolor;
     background: white;
-    border: 1px solid currentColor;
+    border: 1px solid currentcolor;
     border-radius: 32px;
+    margin: 1px;
+    line-height: initial;
   }
 
   @media (min-width: 640px) {

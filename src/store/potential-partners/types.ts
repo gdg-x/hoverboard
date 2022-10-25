@@ -1,33 +1,21 @@
-import { PartnerGroup } from '../../models/partner-group';
-
-export const ADD_POTENTIAL_PARTNER = 'app/Partners/ADD_POTENTIAL_PARTNER';
-export const ADD_POTENTIAL_PARTNER_FAILURE = 'app/Partners/ADD_POTENTIAL_PARTNER_FAILURE';
-export const ADD_POTENTIAL_PARTNER_SUCCESS = 'app/Partners/ADD_POTENTIAL_PARTNER_SUCCESS';
-
-export interface PotentialPartnersState {
-  adding: boolean;
-  addingError: Error;
-}
+export const ADD_POTENTIAL_PARTNER = 'ADD_POTENTIAL_PARTNER';
+export const ADD_POTENTIAL_PARTNER_FAILURE = 'ADD_POTENTIAL_PARTNER_FAILURE';
+export const ADD_POTENTIAL_PARTNER_SUCCESS = 'ADD_POTENTIAL_PARTNER_SUCCESS';
 
 interface AddPotentialPartnerAction {
   type: typeof ADD_POTENTIAL_PARTNER;
-  payload: {
-    partner: PartnerGroup;
-  };
 }
 
 interface AddPotentialPartnerFailureAction {
   type: typeof ADD_POTENTIAL_PARTNER_FAILURE;
-  payload: {
-    error: Error;
-  };
+  payload: Error;
 }
 
 interface AddPotentialPartnerSuccessAction {
   type: typeof ADD_POTENTIAL_PARTNER_SUCCESS;
 }
 
-export type PotentialPartnerActionTypes =
+export type PotentialPartnerActions =
   | AddPotentialPartnerAction
   | AddPotentialPartnerFailureAction
   | AddPotentialPartnerSuccessAction;

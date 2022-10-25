@@ -1,13 +1,9 @@
-import { Success } from '@abraham/remotedata';
-import { customElement, observe, property } from '@polymer/decorators';
+import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { Schedule } from '../models/schedule';
-import {
-  FeaturedSessionsState,
-  initialFeaturedSessionsState,
-} from '../store/featured-sessions/state';
-import { initialScheduleState, ScheduleState } from '../store/schedule/state';
+import { Day } from '../models/day';
+import { RootState } from '../store';
+import { ReduxMixin } from '../store/mixin';
+import { selectFeaturedSchedule } from '../store/schedule/selectors';
 import './schedule-day';
 import './shared-styles';
 
@@ -40,51 +36,15 @@ export class MySchedule extends ReduxMixin(PolymerElement) {
       <template is="dom-repeat" items="[[featuredSchedule]]" as="day">
         <div class="date">[[day.dateReadable]]</div>
 
-        <schedule-day
-          name$="[[day.date]]"
-          day="[[day]]"
-          user="[[user]]"
-          featured-sessions="[[featuredSessions]]"
-          selected-filters="[[selectedFilters]]"
-          viewport="[[viewport]]"
-          query-params="[[queryParams]]"
-          only-featured
-        ></schedule-day>
+        <schedule-day name$="[[day.date]]" day="[[day]]" only-featured></schedule-day>
       </template>
     `;
   }
 
-  @property({ type: Object })
-  private schedule: ScheduleState = initialScheduleState;
   @property({ type: Array })
-  private featuredSchedule = [];
-  @property({ type: Object })
-  private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
-  @property({ type: Object })
-  private selectedFilters = {};
-  @property({ type: String })
-  private queryParams: string;
-  @property({ type: Object })
-  private viewport = {};
-  @property({ type: Object })
-  private user = {};
+  private featuredSchedule: Day[] = [];
 
-  @observe('schedule', 'featuredSessions')
-  _filterSchedule(schedule: Schedule, featuredSessions: FeaturedSessionsState) {
-    if (schedule instanceof Success && featuredSessions instanceof Success) {
-      this.featuredSchedule = schedule.data.map((day) =>
-        Object.assign({}, day, {
-          timeslots: day.timeslots.map((timeslot) =>
-            Object.assign({}, timeslot, {
-              sessions: timeslot.sessions.map((sessionBlock) =>
-                Object.assign({}, sessionBlock, {
-                  items: sessionBlock.items.filter((session) => featuredSessions.data[session.id]),
-                })
-              ),
-            })
-          ),
-        })
-      );
-    }
+  override stateChanged(state: RootState) {
+    this.featuredSchedule = selectFeaturedSchedule(state);
   }
 }

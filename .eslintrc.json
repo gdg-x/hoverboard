@@ -5,7 +5,6 @@
     "plugin:jest/all",
     "plugin:testing-library/dom",
     "plugin:jest-dom/recommended",
-    "google",
     "plugin:import/errors",
     "plugin:import/typescript",
     "prettier"
@@ -13,14 +12,25 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 2018
+    "ecmaVersion": 2020
   },
   "env": {
     "browser": true,
     "es6": true
   },
-  "plugins": ["jest", "@typescript-eslint", "html"],
-  "ignorePatterns": ["dist/", "out-tsc"],
+  "plugins": ["jest", "@typescript-eslint", "html", "import"],
+  "ignorePatterns": ["dist/"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
+  },
   "rules": {
     "brace-style": "off",
     "new-cap": "off",
@@ -34,7 +44,8 @@
     ],
     "linebreak-style": 0,
     "jest/no-hooks": "off",
-    "jest/prefer-expect-assertions": "off"
+    "jest/prefer-expect-assertions": "off",
+    "jest/require-hook": "off"
   },
   "overrides": [
     {
@@ -45,12 +56,6 @@
     }
   ],
   "globals": {
-    "clients": true,
-    "firebase": true,
-    "ga": true,
-    "HOVERBOARD": true,
-    "importScripts": true,
-    "Polymer": true,
-    "ShadyCSS": true
+    "ServiceWorkerGlobalScope": true
   }
 }

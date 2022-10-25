@@ -1,9 +1,10 @@
+import { doc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { store } from '../';
-import { db } from '../db';
-import { openDialog } from '../dialogs/actions';
-import { DialogForm, DIALOGS } from '../dialogs/types';
-import { showToast } from '../toast/actions';
+import { db } from '../../firebase';
+import { DialogData } from '../../models/dialog-form';
+import { subscribeBlock } from '../../utils/data';
+import { queueSnackbar } from '../snackbars';
 import {
   SUBSCRIBE,
   SubscribeActions,
@@ -12,7 +13,7 @@ import {
   SUBSCRIBE_SUCCESS,
 } from './types';
 
-const setSubscribe = async (data: DialogForm): Promise<true> => {
+const setSubscribe = async (data: DialogData): Promise<true> => {
   const id = data.email.replace(/[^\w\s]/gi, '');
   const subscriber = {
     email: data.email,
@@ -20,12 +21,12 @@ const setSubscribe = async (data: DialogForm): Promise<true> => {
     lastName: data.secondFieldValue || '',
   };
 
-  await db().collection('subscribers').doc(id).set(subscriber);
+  await setDoc(doc(db, 'subscribers', id), subscriber);
 
   return true;
 };
 
-export const subscribe = (data: DialogForm) => async (dispatch: Dispatch<SubscribeActions>) => {
+export const subscribe = (data: DialogData) => async (dispatch: Dispatch<SubscribeActions>) => {
   dispatch({
     type: SUBSCRIBE,
   });
@@ -35,13 +36,12 @@ export const subscribe = (data: DialogForm) => async (dispatch: Dispatch<Subscri
       type: SUBSCRIBE_SUCCESS,
       payload: await setSubscribe(data),
     });
-    showToast({ message: '{$ subscribeBlock.toast $}' });
+    store.dispatch(queueSnackbar(subscribeBlock.toast));
   } catch (error) {
     dispatch({
       type: SUBSCRIBE_FAILURE,
-      payload: error,
+      payload: error as Error,
     });
-    openDialog(DIALOGS.SUBSCRIBE, { ...data, errorOccurred: true });
   }
 };
 

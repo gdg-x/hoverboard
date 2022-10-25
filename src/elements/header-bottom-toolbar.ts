@@ -1,12 +1,14 @@
-import { Pending } from '@abraham/remotedata';
+import { Initialized, Pending, Success } from '@abraham/remotedata';
+import '@polymer/app-layout/app-toolbar/app-toolbar';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-location/iron-location';
+import '@polymer/paper-tabs';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { RootState } from '../store';
-import { initialRoutingState, RoutingState } from '../store/routing/state';
-import { initialScheduleState, ScheduleState } from '../store/schedule/state';
-import { TempAny } from '../temp-any';
+import { RouterLocation } from '@vaadin/router';
+import { RootState, store } from '../store';
+import { ReduxMixin } from '../store/mixin';
+import { fetchSchedule } from '../store/schedule/actions';
+import { initialScheduleState } from '../store/schedule/state';
+import { contentLoaders, mySchedule } from '../utils/data';
 import './content-loader';
 import './shared-styles';
 
@@ -47,8 +49,6 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <iron-location query="{{queryParams}}"></iron-location>
-
       <app-toolbar class="bottom-toolbar">
         <content-loader
           class="nav-items"
@@ -64,7 +64,7 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
           load-from="-240%"
           load-to="350%"
           blur-width="80px"
-          items-count="{$ contentLoaders.schedule.itemsCount $}"
+          items-count="[[contentLoaders.itemsCount]]"
           layout
           horizontal
           hidden$="[[!pending]]"
@@ -73,7 +73,7 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
 
         <paper-tabs
           class="nav-items"
-          selected="[[route.subRoute]]"
+          selected="[[selectedTab]]"
           attr-for-selected="day"
           hidden$="[[pending]]"
           scrollable
@@ -82,14 +82,18 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
         >
           <template is="dom-repeat" items="[[schedule.data]]" as="day">
             <paper-tab class="nav-item" day="[[day.date]]" link>
-              <a href$="[[_addQueryParams(day.date, queryParams)]]" layout vertical center-center
+              <a href$="[[addQueryParams(day.date, location.search)]]" layout vertical center-center
                 >[[day.dateReadable]]</a
               >
             </paper-tab>
           </template>
-          <paper-tab class="nav-item" day="my-schedule" hidden$="[[!user.signedIn]]" link>
-            <a href$="[[_addQueryParams('my-schedule', queryParams)]]" layout vertical center-center
-              >{$ mySchedule.title $}</a
+          <paper-tab class="nav-item" day="my-schedule" hidden$="[[!signedIn]]" link>
+            <a
+              href$="[[addQueryParams('my-schedule', location.search)]]"
+              layout
+              vertical
+              center-center
+              >[[mySchedule.title]]</a
             >
           </paper-tab>
         </paper-tabs>
@@ -97,31 +101,51 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  @property({ type: Object })
-  schedule: ScheduleState = initialScheduleState;
+  private mySchedule = mySchedule;
+  private contentLoaders = contentLoaders.schedule;
 
   @property({ type: Object })
-  private route: RoutingState = initialRoutingState;
+  schedule = initialScheduleState;
   @property({ type: Object })
-  private user = {};
+  location: RouterLocation | undefined;
+  @property({ type: Boolean })
+  private signedIn = false;
 
-  stateChanged(state: RootState) {
-    this.route = state.routing;
+  override stateChanged(state: RootState) {
     this.schedule = state.schedule;
-    this.user = state.user;
+    this.signedIn = state.user instanceof Success;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
-    (window as TempAny).HOVERBOARD.Elements.StickyHeaderToolbar = this;
+    if (this.schedule instanceof Initialized) {
+      store.dispatch(fetchSchedule);
+    }
   }
 
   @computed('schedule')
-  get pending() {
+  private get pending() {
     return this.schedule instanceof Pending;
   }
 
-  _addQueryParams(tab, queryParams) {
-    return `/schedule/${tab}${queryParams ? `?${queryParams}` : ''}`;
+  @computed('location', 'schedule')
+  private get selectedTab() {
+    if (this.location && this.schedule instanceof Success) {
+      const {
+        params: { id },
+        pathname,
+      } = this.location;
+      if (pathname.endsWith('my-schedule')) {
+        return 'my-schedule';
+      } else {
+        return id || this.schedule.data[0]?.date;
+      }
+    } else {
+      return undefined;
+    }
+  }
+
+  private addQueryParams(id: string, queryParams: string) {
+    return `/schedule/${id}${queryParams || ''}`;
   }
 }

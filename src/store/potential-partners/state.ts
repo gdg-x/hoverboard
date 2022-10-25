@@ -1,6 +1,4 @@
-import { PotentialPartnersState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
 
-export const initialPotentialPartnersState: PotentialPartnersState = {
-  adding: false,
-  addingError: null,
-};
+export type PotentialPartnersState = RemoteData<Error, true>;
+export const initialPotentialPartnersState: PotentialPartnersState = new Initialized();

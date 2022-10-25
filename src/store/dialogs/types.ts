@@ -4,16 +4,7 @@ export const OPEN_DIALOG = 'OPEN_DIALOG';
 export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 export const SET_DIALOG_ERROR = 'SET_DIALOG_ERROR';
 
-export interface DialogForm {
-  email: string;
-  firstFieldValue?: string;
-  secondFieldValue?: string;
-}
-
-export enum DIALOGS {
-  SPEAKER = 'speaker',
-  PREVIOUS_SPEAKER = 'previousSpeaker',
-  SESSION = 'session',
+export enum DIALOG {
   FEEDBACK = 'feedback',
   SUBSCRIBE = 'subscribe',
   SIGNIN = 'signin',

@@ -1,5 +1,4 @@
-import { LitElement } from 'lit-element';
-import { render, TemplateResult } from 'lit-html';
+import { LitElement, render, TemplateResult } from 'lit';
 
 interface Fixture<T> {
   element: T;

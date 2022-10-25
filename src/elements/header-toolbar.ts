@@ -1,20 +1,27 @@
 import { Success } from '@abraham/remotedata';
+import '@polymer/app-layout/app-toolbar/app-toolbar';
 import { computed, customElement, observe, property } from '@polymer/decorators';
-import { PaperMenuButton } from '@polymer/paper-menu-button';
+import '@polymer/paper-button';
+import '@polymer/paper-icon-button';
+import '@polymer/paper-menu-button';
+import '@polymer/paper-tabs';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { RootState, store } from '../store';
-import { closeDialog, openDialog } from '../store/dialogs/actions';
-import { initialDialogState } from '../store/dialogs/state';
-import { DIALOGS } from '../store/dialogs/types';
-import { requestPermission, unsubscribe } from '../store/notifications/actions';
-import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
-import { initialRoutingState, RoutingState } from '../store/routing/state';
+import { Hero } from '../models/hero';
+import { selectRouteName } from '../router';
+import { RootState } from '../store';
+import { signOut as signOutAction } from '../store/auth/actions';
+import { closeDialog, openSigninDialog } from '../store/dialogs/actions';
+import { selectIsDialogOpen } from '../store/dialogs/selectors';
+import { DIALOG } from '../store/dialogs/types';
+import { ReduxMixin } from '../store/mixin';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
-import { signOut } from '../store/user/actions';
-import { TempAny } from '../temp-any';
-import { isDialogOpen } from '../utils/dialogs';
+import { initialUiState } from '../store/ui/state';
+import { initialUserState } from '../store/user/state';
+import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../utils/data';
+import './notification-toggle';
 import './shared-styles';
+
+export const HEADER_HEIGHT = 76;
 
 @customElement('header-toolbar')
 export class HeaderToolbar extends ReduxMixin(PolymerElement) {
@@ -153,194 +160,161 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
             hidden$="[[!viewport.isLaptopPlus]]"
             layout
             horizontal
-            title="{$ title $}"
+            title="[[logoTitle]]"
           ></a>
         </div>
 
         <paper-tabs
           class="nav-items"
-          selected="[[route.route]]"
+          selected="[[routeName]]"
           attr-for-selected="name"
           hidden$="[[!viewport.isLaptopPlus]]"
           role="navigation"
           noink
         >
-          {% for nav in navigation %}
-          <paper-tab name="{$ nav.route $}" class="nav-item" link>
-            <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.label $}</a>
-          </paper-tab>
-          {% endfor %}
+          <template is="dom-repeat" items="[[navigation]]" as="nav">
+            <paper-tab name="[[nav.route]]" class="nav-item" link>
+              <a href="[[nav.permalink]]" layout vertical center-center>[[nav.label]]</a>
+            </paper-tab>
+          </template>
 
+<!--          <paper-tab class="signin-tab" on-click="signIn" link hidden$="[[signedIn]]">-->
+<!--            [[signInText]]-->
+<!--          </paper-tab>-->
 
-
-<!--          <a href="{$ cfpLink $}" target="_blank" rel="noopener noreferrer" ga-on="click"-->
-<!--             ga-event-category="cfp button" ga-event-action="cfp_click">-->
-<!--            <paper-button class="buy-button" primary>{$ cfpHeader $}</paper-button>-->
-<!--          </a>-->
-
-<!--          <paper-tab class="signin-tab" on-click="signIn" link hidden$="[[user.signedIn]]"-->
-<!--            >{$ signIn $}</paper-tab-->
-<!--          >-->
-
-<!--          <a-->
-<!--            href$="[[ticketUrl]]"-->
-<!--            target="_blank"-->
-<!--            rel="noopener noreferrer"-->
-<!--            ga-on="click"-->
-<!--            ga-event-category="ticket button"-->
-<!--            ga-event-action="buy_click"-->
-<!--          >-->
-<!--            <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>-->
+<!--          <a href$="[[ticketUrl]]" target="_blank" rel="noopener noreferrer">-->
+<!--            <paper-button class="buy-button" primary>[[buyTicket]]</paper-button>-->
 <!--          </a>-->
         </paper-tabs>
 
-        <paper-menu-button
-          class="auth-menu"
-          hidden$="[[!user.signedIn]]"
-          vertical-align="top"
-          horizontal-align="right"
-          no-animations
-          layout
-          horizontal
-          center-center
-        >
-          <div
-            class="profile-image"
-            slot="dropdown-trigger"
-            style$="background-image: url('[[user.photoURL]]')"
-          ></div>
-          <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>
-            <div
-              class="profile-image"
-              slot="dropdown-trigger"
-              self-center
-              style$="background-image: url('[[user.photoURL]]')"
-            ></div>
-            <div layout vertical center-justified>
-              <span class="profile-name">[[user.displayName]]</span>
-              <span class="profile-email">[[user.email]]</span>
-              <span class="profile-action" role="button" on-click="_signOut">{$ signOut $}</span>
-            </div>
-          </div>
-        </paper-menu-button>
+<!--        <notification-toggle></notification-toggle>-->
 
-        <paper-icon-button
-          icon="hoverboard:account"
-          on-click="signIn"
-          hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isLaptopPlus)]]"
-        ></paper-icon-button>
+<!--        <paper-menu-button-->
+<!--          class="auth-menu"-->
+<!--          hidden$="[[!signedIn]]"-->
+<!--          vertical-align="top"-->
+<!--          horizontal-align="right"-->
+<!--          no-animations-->
+<!--          layout-->
+<!--          horizontal-->
+<!--          center-center-->
+<!--        >-->
+<!--          <div-->
+<!--            class="profile-image"-->
+<!--            slot="dropdown-trigger"-->
+<!--            style$="background-image: url('[[user.data.photoURL]]')"-->
+<!--          ></div>-->
+<!--          <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>-->
+<!--            <div-->
+<!--              class="profile-image"-->
+<!--              slot="dropdown-trigger"-->
+<!--              self-center-->
+<!--              style$="background-image: url('[[user.data.photoURL]]')"-->
+<!--            ></div>-->
+<!--            <div layout vertical center-justified>-->
+<!--              <span class="profile-name">[[user.data.displayName]]</span>-->
+<!--              <span class="profile-email">[[user.data.email]]</span>-->
+<!--              <span class="profile-action" role="button" on-click="signOut">[[signOutText]]</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </paper-menu-button>-->
+
+<!--        <paper-icon-button-->
+<!--          icon="hoverboard:account"-->
+<!--          on-click="signIn"-->
+<!--          hidden$="[[isAccountIconHidden(signedIn, viewport.isLaptopPlus)]]"-->
+<!--        ></paper-icon-button>-->
       </app-toolbar>
     `;
   }
 
-  @property({ type: Object })
-  route: RoutingState = initialRoutingState;
+  private logoTitle = title;
+  private signInText = signIn;
+  private navigation = navigation;
+  private signOutText = signOutText;
+  private buyTicket = buyTicket;
+
   @property({ type: Boolean, notify: true })
-  drawerOpened: boolean;
+  drawerOpened: boolean = false;
   @property({ type: Object })
   tickets: TicketsState = initialTicketsState;
 
   @property({ type: Object })
-  private viewport = {};
+  private viewport = initialUiState.viewport;
   @property({ type: Object })
-  private heroSettings = {};
+  private heroSettings = initialUiState.heroSettings;
+  @property({ type: Boolean })
+  private signedIn = false;
   @property({ type: Object })
-  private dialogs = initialDialogState;
-  @property({ type: Object })
-  private notifications: { token?: string; status?: string } = {};
-  @property({ type: Object })
-  private user = {};
+  private user = initialUserState;
   @property({ type: Boolean, reflectToAttribute: true })
   private transparent = false;
+  @property({ type: String })
+  private routeName = '';
+  @property({ type: Boolean })
+  private isDialogOpen = false;
 
-  stateChanged(state: RootState) {
-    this.dialogs = state.dialogs;
-    this.notifications = state.notifications;
-    this.route = state.routing;
+  override stateChanged(state: RootState) {
     this.user = state.user;
+    this.signedIn = state.user instanceof Success;
     this.tickets = state.tickets;
     this.heroSettings = state.ui.heroSettings;
     this.viewport = state.ui.viewport;
+    this.routeName = selectRouteName(window.location.pathname);
+    this.isDialogOpen = selectIsDialogOpen(state, DIALOG.SIGNIN);
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
-    (window as TempAny).HOVERBOARD.Elements.HeaderToolbar = this;
-    this._onScroll = this._onScroll.bind(this);
-    window.addEventListener('scroll', this._onScroll);
-    this._onScroll();
+    this.onScroll = this.onScroll.bind(this);
+    window.addEventListener('scroll', this.onScroll);
+    this.onScroll();
   }
 
-  disconnectedCallback() {
+  override disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('scroll', this.onScroll);
   }
 
-  openDrawer() {
+  private openDrawer() {
     this.drawerOpened = true;
   }
 
-  signIn() {
-    openDialog(DIALOGS.SIGNIN);
+  private signIn() {
+    openSigninDialog();
   }
 
-  _signOut() {
-    signOut();
+  private signOut() {
+    signOutAction();
   }
 
-  _onScroll() {
+  private onScroll() {
     this.transparent = document.documentElement.scrollTop === 0;
   }
 
-  @observe('user.signedIn')
-  _authStatusChanged(_signedIn) {
-    if (isDialogOpen(this.dialogs, DIALOGS.SIGNIN)) {
+  @observe('signedIn')
+  private onSignedIn() {
+    if (this.isDialogOpen) {
       closeDialog();
     }
   }
 
-  _toggleNotifications() {
-    this._closeNotificationMenu();
-    if (this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
-      store.dispatch(unsubscribe(this.notifications.token));
-      return;
-    }
-    store.dispatch(requestPermission());
-  }
-
-  _getNotificationsIcon(status) {
-    return status === NOTIFICATIONS_STATUS.DEFAULT
-      ? 'bell-outline'
-      : status === NOTIFICATIONS_STATUS.GRANTED
-      ? 'bell'
-      : 'bell-off';
-  }
-
-  _hideNotificationBlock(status, blockStatus) {
-    return status !== NOTIFICATIONS_STATUS[blockStatus];
-  }
-
-  _closeNotificationMenu() {
-    // TODO: Remove type cast
-    (this.$.notificationsMenu as PaperMenuButton).close();
-  }
-
-  _isAccountIconHidden(userSignedIn, isTabletPlus) {
-    return userSignedIn || isTabletPlus;
+  private isAccountIconHidden(signedIn: boolean, isTabletPlus: boolean) {
+    return signedIn || isTabletPlus;
   }
 
   @computed('tickets')
-  get ticketUrl() {
+  private get ticketUrl() {
     if (this.tickets instanceof Success && this.tickets.data.length > 0) {
       const availableTicket = this.tickets.data.find((ticket) => ticket.available);
-      return (availableTicket || this.tickets.data[0]).url;
+      return (availableTicket || this.tickets.data[0])?.url || '';
     } else {
       return '';
     }
   }
 
   @observe('heroSettings')
-  _setToolbarSettings(settings) {
+  private onHeroSettings(settings: Hero) {
     if (!settings) return;
     this.updateStyles({
       '--hero-font-color': settings.fontColor || '',

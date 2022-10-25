@@ -1,13 +1,23 @@
+import crypto from 'crypto';
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+// eslint-disable-next-line import/no-unresolved
+import { getFirestore } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
-import md5 from 'md5';
 import fetch from 'node-fetch';
+
+const md5 = (data: string) => crypto.createHash('md5').update(data).digest('hex');
+
+const getMailchimpConfig = async () => {
+  const doc = await getFirestore().collection('config').doc('mailchimp').get();
+  return doc.exists && doc.data();
+};
 
 export const mailchimpSubscribe = functions.firestore
   .document('/subscribers/{id}')
-  .onCreate((snapshot) => {
-    const mailchimpConfig = functions.config().mailchimp;
+  .onCreate(async (snapshot) => {
+    const mailchimpConfig = await getMailchimpConfig();
     if (!mailchimpConfig) {
-      console.log("Can't subscribe user, Mailchimp config is empty.");
+      functions.logger.log("Can't subscribe user, Mailchimp config is empty.");
     }
 
     const subscriber = snapshot.data();
@@ -46,10 +56,12 @@ function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash?: strin
         const hash = md5(subscriberData.email_address);
         return subscribeToMailchimp(mailchimpConfig, subscriberData, hash);
       } else if (method === 'POST') {
-        console.log(`${subscriberData.email_address} was added to subscribe list.`);
+        functions.logger.log(`${subscriberData.email_address} was added to subscribe list.`);
       } else if (method === 'PATCH') {
-        console.log(`${subscriberData.email_address} was updated in subscribe list.`);
+        functions.logger.log(`${subscriberData.email_address} was updated in subscribe list.`);
       }
     })
-    .catch((error) => console.error(`Error occured during Mailchimp subscription: ${error}`));
+    .catch((error) =>
+      functions.logger.error(`Error occured during Mailchimp subscription: ${error}`)
+    );
 }

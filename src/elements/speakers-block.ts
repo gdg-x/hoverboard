@@ -1,17 +1,23 @@
-import { Success } from '@abraham/remotedata';
-import { computed, customElement } from '@polymer/decorators';
+import { Initialized, Success } from '@abraham/remotedata';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
+import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { SpeakersHoC } from '../mixins/speakers-hoc';
+import '@power-elements/lazy-image';
+import '../components/text-truncate';
 import { Speaker } from '../models/speaker';
-import { randomOrder } from '../utils/functions';
+import { router } from '../router';
+import { RootState, store } from '../store';
+import { ReduxMixin } from '../store/mixin';
+import { fetchSpeakers } from '../store/speakers/actions';
+import { initialSpeakersState } from '../store/speakers/state';
+import { randomOrder } from '../utils/arrays';
+import { speakersBlock } from '../utils/data';
+import '../utils/icons';
 import './shared-styles';
-import './text-truncate';
 
 @customElement('speakers-block')
-export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
+export class SpeakersBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -28,12 +34,15 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
 
         .speaker {
           text-align: center;
-          cursor: pointer;
         }
 
         .photo {
-          width: 72px;
-          height: 72px;
+          display: inline-block;
+          --lazy-image-width: 72px;
+          --lazy-image-height: 72px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--accent-color);
           border-radius: 50%;
           overflow: hidden;
@@ -75,8 +84,11 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
 
         .company-logo {
           margin-top: 6px;
-          width: 100%;
-          height: 16px;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 16px;
+          --lazy-image-fit: contain;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
         }
 
         .description {
@@ -100,8 +112,8 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
 
         @media (min-width: 640px) {
           .photo {
-            width: 128px;
-            height: 128px;
+            --lazy-image-width: 128px;
+            --lazy-image-height: 128px;
           }
 
           .name {
@@ -151,27 +163,17 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
       </style>
 
       <div class="container">
-        <h1 class="container-title">{$ speakersBlock.title $}</h1>
+        <h1 class="container-title">[[speakersBlock.title]]</h1>
 
         <div class="speakers-wrapper">
           <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
-            <div
-              class="speaker"
-              on-click="_openSpeaker"
-              ga-on="click"
-              ga-event-category="speaker"
-              ga-event-action="open details"
-              ga-event-label$="[[speaker.name]]"
-            >
+            <a class="speaker" href$="[[speakerUrl(speaker.id)]]">
               <div relative>
-                <plastic-image
+                <lazy-image
                   class="photo"
-                  srcset="[[speaker.photoUrl]]"
-                  sizing="cover"
-                  lazy-load
-                  preload
-                  fade
-                ></plastic-image>
+                  src="[[speaker.photoUrl]]"
+                  alt="[[speaker.name]]"
+                ></lazy-image>
                 <div class="badges" layout horizontal>
                   <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
                     <a
@@ -184,20 +186,17 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
                       horizontal
                       center-center
                     >
-                      <iron-icon class="badge-icon" icon="hoverboard:[[badge.name]]"></iron-icon>
+                      <iron-icon icon="hoverboard:[[badge.name]]" class="badge-icon"></iron-icon>
                     </a>
                   </template>
                 </div>
               </div>
 
-              <plastic-image
+              <lazy-image
                 class="company-logo"
-                srcset="{{speaker.companyLogoUrl}}"
-                sizing="contain"
-                lazy-load
-                preload
-                fade
-              ></plastic-image>
+                src="[[speaker.companyLogoUrl]]"
+                alt="[[speaker.company]]"
+              ></lazy-image>
 
               <div class="description">
                 <text-truncate lines="1">
@@ -207,13 +206,13 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
                   <div class="origin">[[speaker.country]]</div>
                 </text-truncate>
               </div>
-            </div>
+            </a>
           </template>
         </div>
 
-        <a href="{$ speakersBlock.callToAction.link $}">
+        <a href="[[speakersBlock.callToAction.link]]">
           <paper-button class="cta-button animated icon-right">
-            <span>{$ speakersBlock.callToAction.label $}</span>
+            <span>[[speakersBlock.callToAction.label]]</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
         </a>
@@ -221,10 +220,22 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     `;
   }
 
-  _openSpeaker(e) {
-    window.history.pushState({}, null, '/speakers/');
-    window.history.pushState({}, null, `/speakers/${e.model.speaker.id}/`);
-    window.dispatchEvent(new CustomEvent('location-changed'));
+  @property({ type: Object })
+  speakers = initialSpeakersState;
+
+  private speakersBlock = speakersBlock;
+
+  override connectedCallback() {
+    super.connectedCallback();
+
+    if (this.speakers instanceof Initialized) {
+      store.dispatch(fetchSpeakers);
+    }
+  }
+
+  override stateChanged(state: RootState) {
+    super.stateChanged(state);
+    this.speakers = state.speakers;
   }
 
   @computed('speakers')
@@ -237,5 +248,9 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     } else {
       return [];
     }
+  }
+
+  speakerUrl(id: string) {
+    return router.urlForName('speaker-page', { id });
   }
 }

@@ -1,8 +1,10 @@
 import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
+import '../components/hero/simple-hero';
+import '../components/markdown/remote-markdown';
 import '../elements/footer-block';
-import '../elements/md-content';
-import '../elements/polymer-helmet';
+import { faq, heroSettings } from '../utils/data';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('faq-page')
 export class FaqPage extends PolymerElement {
@@ -14,30 +16,21 @@ export class FaqPage extends PolymerElement {
         }
       </style>
 
-      <polymer-helmet
-        title="{$ heroSettings.faq.title $} | {$ title $}"
-        description="{$ heroSettings.faq.metaDescription $}"
-        active="[[active]]"
-      ></polymer-helmet>
+      <simple-hero page="faq"></simple-hero>
 
-      <hero-block
-        background-image="{$ heroSettings.faq.background.image $}"
-        background-color="{$ heroSettings.faq.background.color $}"
-        font-color="{$ heroSettings.faq.fontColor $}"
-        active="[[active]]"
-      >
-        <div class="hero-title">{$ heroSettings.faq.title $}</div>
-        <p class="hero-description">{$ heroSettings.faq.description $}</p>
-      </hero-block>
-
-      <md-content md-source="[[source]]"></md-content>
+      <remote-markdown toc path="[[source]]"></remote-markdown>
 
       <footer-block></footer-block>
     `;
   }
 
-  @property({ type: Boolean })
-  active = false;
+  private heroSettings = heroSettings.faq;
+
   @property({ type: String })
-  source = '{$ faq $}';
+  source = faq;
+
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
+  }
 }

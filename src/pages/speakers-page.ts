@@ -1,28 +1,33 @@
-import { Success } from '@abraham/remotedata';
-import '@polymer/app-route/app-route';
-import { customElement, observe, property } from '@polymer/decorators';
+import { Initialized, Success } from '@abraham/remotedata';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/iron-location/iron-location';
 import '@polymer/paper-icon-button';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
+import '../components/hero/simple-hero';
+import '../components/text-truncate';
 import '../elements/content-loader';
 import '../elements/filter-menu';
 // import '../elements/previous-speakers-block';
 import '../elements/shared-styles';
-import '../elements/text-truncate';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { RootState } from '../store';
-import { closeDialog, openDialog } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
-import { SpeakersState } from '../store/speakers/state';
-import { isDialogOpen } from '../utils/dialogs';
-import { generateClassName, parseQueryParamsFilters } from '../utils/functions';
+import { Filter } from '../models/filter';
+import { FilterGroup, FilterGroupKey } from '../models/filter-group';
+import { SpeakerWithTags } from '../models/speaker';
+import { router } from '../router';
+import { RootState, store } from '../store';
+import { selectFilters } from '../store/filters/selectors';
+import { ReduxMixin } from '../store/mixin';
+import { selectFilterGroups } from '../store/sessions/selectors';
+import { fetchSpeakers } from '../store/speakers/actions';
+import { selectFilteredSpeakers } from '../store/speakers/selectors';
+import { initialSpeakersState } from '../store/speakers/state';
+import { contentLoaders, heroSettings } from '../utils/data';
+import '../utils/icons';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('speakers-page')
-export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
+export class SpeakersPage extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -50,8 +55,12 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
         }
 
         .photo {
-          width: 128px;
-          height: 128px;
+          display: inline-block;
+          --lazy-image-width: 128px;
+          --lazy-image-height: 128px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--secondary-background-color);
           border-radius: 50%;
           overflow: hidden;
@@ -100,8 +109,11 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
         }
 
         .company-logo {
-          width: 100%;
-          height: 16px;
+          --lazy-image-width: 100%;
+          --lazy-image-height: 16px;
+          --lazy-image-fit: contain;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
         }
 
         .description {
@@ -162,31 +174,13 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
         }
       </style>
 
-      <polymer-helmet
-        title="{$ heroSettings.speakers.title $} | {$ title $}"
-        description="{$ heroSettings.speakers.metaDescription $}"
-        active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"
-      ></polymer-helmet>
-
-      <iron-location query="{{queryParams}}"></iron-location>
-
-      <app-route route="[[route]]" pattern="/:speakerId" data="{{routeData}}"></app-route>
-
-      <hero-block
-        background-image="{$ heroSettings.speakers.background.image $}"
-        background-color="{$ heroSettings.speakers.background.color $}"
-        font-color="{$ heroSettings.speakers.fontColor $}"
-        active="[[active]]"
-      >
-        <div class="hero-title">{$ heroSettings.speakers.title $}</div>
-        <p class="hero-description">{$ heroSettings.speakers.description $}</p>
-      </hero-block>
+      <simple-hero page="speakers"></simple-hero>
 
       <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
       <filter-menu
-        filters="[[_filters]]"
-        selected="[[_selectedFilters]]"
+        filter-groups="[[filterGroups]]"
+        selected-filters="[[selectedFilters]]"
         results-count="[[speakersToRender.length]]"
       ></filter-menu>
 
@@ -199,29 +193,19 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
         horizontal-position="50%"
         border-radius="4px"
         box-shadow="var(--box-shadow)"
-        items-count="{$ contentLoaders.speakers.itemsCount $}"
+        items-count="[[contentLoaders.speakers.itemsCount]]"
         hidden$="[[contentLoaderVisibility]]"
       ></content-loader>
 
       <div class="container">
         <template is="dom-repeat" items="[[speakersToRender]]" as="speaker">
-          <a
-            class="speaker card"
-            href$="[[speaker.link]]"
-            ga-on="click"
-            ga-event-category="speaker"
-            ga-event-action="open details"
-            ga-event-label$="[[speaker.name]]"
-          >
+          <a class="speaker card" href$="[[speakerUrl(speaker.id)]]">
             <div relative>
-              <plastic-image
+              <lazy-image
                 class="photo"
-                srcset="[[speaker.photoUrl]]"
-                sizing="cover"
-                lazy-load
-                preload
-                fade
-              ></plastic-image>
+                src="[[speaker.photoUrl]]"
+                alt="[[speaker.name]]"
+              ></lazy-image>
               <div class="badges" layout horizontal>
                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
                   <a
@@ -234,20 +218,17 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
                     horizontal
                     center-center
                   >
-                    <iron-icon class="badge-icon" icon="hoverboard:[[badge.name]]"></iron-icon>
+                    <iron-icon icon="hoverboard:[[badge.name]]" class="badge-icon"></iron-icon>
                   </a>
                 </template>
               </div>
             </div>
 
-            <plastic-image
+            <lazy-image
               class="company-logo"
-              srcset="[[speaker.companyLogoUrl]]"
-              sizing="contain"
-              lazy-load
-              preload
-              fade
-            ></plastic-image>
+              src="[[speaker.companyLogoUrl]]"
+              alt="[[speaker.company]]"
+            ></lazy-image>
 
             <div class="description">
               <h2 class="name">[[speaker.name]]</h2>
@@ -278,92 +259,42 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     `;
   }
 
-  @property({ type: Object })
-  private route = {};
-  @property({ type: Object })
-  private routeData = {};
-  @property({ type: Boolean })
-  private active = false;
-  @property({ type: Object })
-  private queryParams = {};
-  @property({ type: Boolean })
-  private isSpeakerDialogOpened = false;
-  @property({ type: Boolean })
-  private isSessionDialogOpened = false;
-  @property({ type: String })
-  private contentLoaderVisibility;
-  @property({ type: Object })
-  private filters = {};
-  @property({ type: Object })
-  private _selectedFilters = {};
-  @property({ type: Array })
-  private _filters = [];
-  @property({ type: Array })
-  private speakersToRender = [];
+  private heroSettings = heroSettings.speakers;
+  private contentLoaders = contentLoaders;
 
-  stateChanged(state: RootState) {
+  @property({ type: Object })
+  speakers = initialSpeakersState;
+
+  @property({ type: Array })
+  private filterGroups: FilterGroup[] = [];
+  @property({ type: Array })
+  private selectedFilters: Filter[] = [];
+  @property({ type: Array })
+  private speakersToRender: SpeakerWithTags[] = [];
+
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
+
+    if (this.speakers instanceof Initialized) {
+      store.dispatch(fetchSpeakers);
+    }
+  }
+
+  override stateChanged(state: RootState) {
     super.stateChanged(state);
-    this.isSpeakerDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SPEAKER);
-    this.isSessionDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SESSION);
-    this.filters = state.filters;
+    this.speakers = state.speakers;
+    this.filterGroups = selectFilterGroups(state, [FilterGroupKey.tags]);
+    this.selectedFilters = selectFilters(state);
+    this.speakersToRender = selectFilteredSpeakers(state);
   }
 
-  @observe('speakers', '_selectedFilters')
-  _speakersChanged(speakers: SpeakersState, selectedFilters) {
-    if (speakers instanceof Success) {
-      this.contentLoaderVisibility = 'hidden';
-      const filters = selectedFilters && selectedFilters.tag ? selectedFilters.tag : [];
-      const updatedSpeakers = this._filterItems(speakers.data, filters).map((speaker) =>
-        Object.assign({}, speaker, {
-          link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
-        })
-      );
-      this.speakersToRender = updatedSpeakers;
-    }
+  @computed('speakers')
+  get contentLoaderVisibility() {
+    return this.speakers instanceof Success;
   }
 
-  @observe('active', 'speakers', 'routeData.speakerId')
-  _openSpeakerDetails(active, speakers: SpeakersState, id: string) {
-    if (speakers instanceof Success) {
-      requestAnimationFrame(() => {
-        if (active && id) {
-          const speakerData = speakers.data.find((speaker) => speaker.id === id);
-          speakerData && openDialog(DIALOGS.SPEAKER, speakerData);
-        } else {
-          this.isSpeakerDialogOpened && closeDialog();
-          this.isSessionDialogOpened && closeDialog();
-        }
-      });
-    }
-  }
-
-  _setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened) {
-    return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
-  }
-
-  @observe('filters')
-  _onFiltersLoad(filters) {
-    this._filters = [
-      {
-        title: '{$ filters.tags $}',
-        key: 'tag',
-        items: filters.tags,
-      },
-    ];
-  }
-
-  @observe('queryParams')
-  _paramsUpdated(queryParams) {
-    this._selectedFilters = parseQueryParamsFilters(queryParams);
-  }
-
-  _filterItems(speakers, selectedFilters) {
-    return speakers.filter((speaker) => {
-      if (!selectedFilters || !selectedFilters.length) return true;
-      return (
-        speaker.tags &&
-        !!speaker.tags.filter((tag) => selectedFilters.includes(generateClassName(tag))).length
-      );
-    });
+  speakerUrl(id: string) {
+    return router.urlForName('speaker-page', { id });
   }
 }

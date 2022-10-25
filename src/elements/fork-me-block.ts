@@ -2,7 +2,7 @@ import { customElement } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import './hoverboard-icons';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('fork-me-block')

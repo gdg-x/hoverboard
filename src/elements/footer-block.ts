@@ -1,11 +1,11 @@
 import { customElement } from '@polymer/decorators';
 import '@polymer/paper-fab';
 import { html, PolymerElement } from '@polymer/polymer';
-import { scrollToY } from '../utils/scrolling';
+import '../utils/icons';
+import { scrollToTop } from '../utils/scrolling';
 import './footer-nav';
 import './footer-rel';
 import './footer-social';
-import './hoverboard-icons';
 
 @customElement('footer-block')
 export class FooterBlock extends PolymerElement {
@@ -30,7 +30,7 @@ export class FooterBlock extends PolymerElement {
 
         .fab paper-fab {
           background: var(--primary-background-color);
-          color: inherit;
+          color: var(--footer-background-color);
           pointer-events: all;
           box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
         }
@@ -61,7 +61,7 @@ export class FooterBlock extends PolymerElement {
     `;
   }
 
-  backToTop(e) {
-    scrollToY(0, 600, 'easeInOutSine');
+  backToTop() {
+    scrollToTop();
   }
 }

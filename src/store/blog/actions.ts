@@ -1,34 +1,31 @@
+import { Initialized, Success } from '@abraham/remotedata';
+import { orderBy } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { Post } from '../../models/post';
-import { mergeId } from '../../utils/merge-id';
-import { db } from '../db';
+import { subscribeToCollection, Subscription } from '../../utils/firestore';
 import {
-  BlogAction,
+  BlogActions,
   FETCH_BLOG_LIST,
   FETCH_BLOG_LIST_FAILURE,
   FETCH_BLOG_LIST_SUCCESS,
 } from './types';
 
-const getPosts = async (): Promise<Post[]> => {
-  const { docs } = await db().collection('blog').orderBy('published', 'desc').get();
+let subscription: Subscription = new Initialized();
 
-  return docs.map<Post>(mergeId);
+export const unsubscribe = () => {
+  if (subscription instanceof Success) {
+    subscription.data();
+  }
 };
 
-export const fetchBlogList = () => async (dispatch: Dispatch<BlogAction>) => {
-  dispatch({
-    type: FETCH_BLOG_LIST,
-  });
-
-  try {
-    dispatch({
-      type: FETCH_BLOG_LIST_SUCCESS,
-      payload: await getPosts(),
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_BLOG_LIST_FAILURE,
-      payload: error,
-    });
+export const fetchBlogPosts = async (dispatch: Dispatch<BlogActions>) => {
+  if (subscription instanceof Initialized) {
+    subscription = subscribeToCollection(
+      'blog',
+      () => dispatch({ type: FETCH_BLOG_LIST }),
+      (payload: Post[]) => dispatch({ type: FETCH_BLOG_LIST_SUCCESS, payload }),
+      (payload: Error) => dispatch({ type: FETCH_BLOG_LIST_FAILURE, payload }),
+      orderBy('published', 'desc')
+    );
   }
 };

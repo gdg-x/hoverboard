@@ -1,26 +1,32 @@
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+// eslint-disable-next-line import/no-unresolved
+import { getFirestore } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
-import { firestore } from 'firebase-admin';
-import { sessionsSpeakersScheduleMap } from './schedule-generator/speakers-sessions-schedule-map';
-import { sessionsSpeakersMap } from './schedule-generator/speakers-sessions-map';
+import { sessionsSpeakersMap } from './schedule-generator/speakers-sessions-map.js';
+import { sessionsSpeakersScheduleMap } from './schedule-generator/speakers-sessions-schedule-map.js';
+import { isEmpty, ScheduleMap, SessionMap, snapshotToObject, SpeakerMap } from './utils.js';
+
+const isScheduleEnabled = async (): Promise<boolean> => {
+  const doc = await getFirestore().collection('config').doc('schedule').get();
+
+  if (doc.exists) {
+    return doc.data().enabled === 'true' || doc.data().enabled === true;
+  } else {
+    functions.logger.error(
+      'Schedule config is not set. Set the `config/schedule.enabled=true` Firestore value.'
+    );
+    return false;
+  }
+};
 
 export const sessionsWrite = functions.firestore
   .document('sessions/{sessionId}')
-  .onWrite(async () => {
-    return generateAndSaveData();
-  });
+  .onWrite(() => generateAndSaveData());
 
 export const scheduleWrite = functions.firestore
   .document('schedule/{scheduleId}')
   .onWrite(async () => {
-    const scheduleConfig = functions.config().schedule;
-    if (!scheduleConfig || typeof scheduleConfig.enabled === 'undefined') {
-      console.error(
-        // eslint-disable-next-line
-        'Schedule config is NOT set! Run `firebase functions:config:set schedule.enabled=true`, redeploy functions and try again.'
-      );
-      return null;
-    }
-    if (scheduleConfig.enabled === 'true') {
+    if (await isScheduleEnabled()) {
       return generateAndSaveData();
     }
     return null;
@@ -35,51 +41,29 @@ export const speakersWrite = functions.firestore
     return generateAndSaveData(changedSpeaker);
   });
 
+const fetchData = () => {
+  const sessionsPromise = getFirestore().collection('sessions').get();
+  const schedulePromise = getFirestore().collection('schedule').orderBy('date', 'desc').get();
+  const speakersPromise = getFirestore().collection('speakers').get();
+
+  return Promise.all([sessionsPromise, schedulePromise, speakersPromise]);
+};
+
 async function generateAndSaveData(changedSpeaker?) {
-  const sessionsPromise = firestore().collection('sessions').get();
-  const schedulePromise = firestore().collection('schedule').orderBy('date', 'desc').get();
-  const speakersPromise = firestore().collection('speakers').get();
+  const [sessionsSnapshot, scheduleSnapshot, speakersSnapshot] = await fetchData();
 
-  const [sessionsSnapshot, scheduleSnapshot, speakersSnapshot] = await Promise.all([
-    sessionsPromise,
-    schedulePromise,
-    speakersPromise,
-  ]);
-
-  const sessions = {};
-  const schedule = {};
-  const speakers = {};
-
-  sessionsSnapshot.forEach((doc) => {
-    sessions[doc.id] = doc.data();
-  });
-
-  scheduleSnapshot.forEach((doc) => {
-    schedule[doc.id] = doc.data();
-  });
-
-  speakersSnapshot.forEach((doc) => {
-    speakers[doc.id] = doc.data();
-  });
+  const sessions = snapshotToObject(sessionsSnapshot);
+  const schedule = snapshotToObject(scheduleSnapshot);
+  const speakers = snapshotToObject(speakersSnapshot);
 
   let generatedData: {
     sessions?: {};
     speakers?: {};
     schedule?: {};
   } = {};
-  const scheduleConfig = functions.config().schedule;
-  if (!scheduleConfig || typeof scheduleConfig.enabled === 'undefined') {
-    console.error(
-      // eslint-disable-next-line
-      'Schedule config is NOT set! Run `firebase functions:config:set schedule.enabled=true`, redeploy functions and try again.'
-    );
-    return null;
-  }
-  const scheduleEnabled = scheduleConfig.enabled === 'true';
-
   if (!Object.keys(sessions).length) {
     generatedData.speakers = { ...speakers };
-  } else if (!scheduleEnabled || !Object.keys(schedule).length) {
+  } else if (!(await isScheduleEnabled()) || !Object.keys(schedule).length) {
     generatedData = sessionsSpeakersMap(sessions, speakers);
   } else {
     generatedData = sessionsSpeakersScheduleMap(sessions, speakers, schedule);
@@ -95,11 +79,16 @@ async function generateAndSaveData(changedSpeaker?) {
   saveGeneratedData(generatedData.schedule, 'generatedSchedule');
 }
 
-function saveGeneratedData(data, collectionName) {
-  if (!data || !Object.keys(data).length) return;
+function saveGeneratedData(data: SessionMap | SpeakerMap | ScheduleMap, collectionName: string) {
+  if (isEmpty(data)) {
+    functions.logger.error(
+      `Attempting to write empty data to Firestore collection: "${collectionName}".`
+    );
+    return;
+  }
 
   for (let index = 0; index < Object.keys(data).length; index++) {
     const key = Object.keys(data)[index];
-    firestore().collection(collectionName).doc(key).set(data[key]);
+    getFirestore().collection(collectionName).doc(key).set(data[key]);
   }
 }

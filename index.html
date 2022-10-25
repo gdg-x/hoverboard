@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/Event" lang="en">
   <head>
-    <base href="{$ basepath $}" />
+    <base href="{{ basepath }}" />
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta
       content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"
       name="viewport"
     />
-    <meta content="{$ description $}" name="description" />
-    <meta content="{$ keywords $}" name="keywords" />
-    <meta content="{$ organizer.name $}" name="author" />
+    <meta content="{{ description }}" name="description" />
+    <meta content="{{ keywords }}" name="keywords" />
+    <meta content="{{ organizer.name }}" name="author" />
     <meta content="Project Hoverboard" name="generator" />
 
-    <title>{$ title $}</title>
+    <title>{{ title }}</title>
 
-    <link href="{$ url $}" rel="canonical" />
+    <!-- Config from compilation step -->
+    <meta content="{{ url }}" name="config-url" />
+    <meta content="{{ basepath }}" name="config-basepath" />
+    <meta content="{{ googleMapApiKey }}" name="config-google-maps-api-key" />
+
+    <link href="{{ url }}" rel="canonical" />
 
     <link href="images/favicon.ico" rel="icon" />
 
-    <meta content="{$ webapp.themeColor $}" name="theme-color" />
+    <meta content="{{ webapp.themeColor }}" name="theme-color" />
     <link href="manifest.json" rel="manifest" />
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta content="yes" name="mobile-web-app-capable" />
     <!-- fallback for manifest.json -->
-    <meta content="{$ title $}" name="application-name" />
-    <!-- fallback for manifest.json -->
+    <meta content="{{ title }}" name="application-name" />
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
-    <meta content="{$ title $}" name="apple-mobile-web-app-title" />
+    <meta content="{{ title }}" name="apple-mobile-web-app-title" />
 
     <!-- Homescreen icons. -->
     <link href="images/manifest/icon-48.png" rel="apple-touch-icon" />
@@ -45,91 +49,58 @@
     <meta content="#00aba9" name="msapplication-TileColor" />
     <meta content="no" name="msapplication-tap-highlight" />
 
-    <!-- G+ sharing meta data -->
-    <meta content="{$ title $}" itemprop="name" />
-    <meta content="{$ description $}" itemprop="description" />
-    <meta content="{$ image if image.startsWith('http') else (url + image) $}" itemprop="image" />
-    <meta content="{$ startDate $}" itemprop="startDate" />
-    <meta content="{$ endDate $}" itemprop="endDate" />
-
     <!-- Facebook sharing meta data -->
-    <meta content="{$ title $}" property="og:title" />
-    <meta content="{$ title $}" property="og:site_name" />
+    <meta content="{{ title }}" property="og:title" />
+    <meta content="{{ title }}" property="og:site_name" />
     <meta content="website" property="og:type" />
-    <meta content="{$ url $}" property="og:url" />
-    <meta content="{$ description $}" property="og:description" />
+    <meta content="{{ url }}" property="og:url" />
+    <meta content="{{ description }}" property="og:description" />
     <meta content="Event" property="og:type" />
-    <meta
-      content="{$ image if image.startsWith('http') else (url + image) $}"
-      property="og:image"
-    />
+    <meta content="{{ image }}" property="og:image" />
     <meta content="image/jpeg" property="og:image:type" />
 
     <!-- Twitter meta data -->
     <meta content="summary_large_image" name="twitter:card" />
-    <meta content="@{$ organizer.twitter $}" name="twitter:creator" />
-    <meta content="{$ title $}" name="twitter:title" />
-    <meta content="{$ description $}" name="twitter:description" />
-    <meta
-      content="{$ image if image.startsWith('http') else (url + image) $}"
-      name="twitter:image"
-    />
-    <meta name="twitter:label1" value="{$ location.label $}" />
-    <meta name="twitter:data1" value="{$ location.name $}" />
+    <meta content="@{{ organizer.twitter }}" name="twitter:creator" />
+    <meta content="{{ title }}" name="twitter:title" />
+    <meta content="{{ description }}" name="twitter:description" />
+    <meta content="{{ image }}" name="twitter:image" />
+    <meta name="twitter:label1" value="{{ location.label }}" />
+    <meta name="twitter:data1" value="{{ location.name }}" />
     <meta name="twitter:label2" />
     <meta name="twitter:data2" />
 
-    <link href="https://apis.google.com" rel="dns-prefetch" />
-    <link href="https://www.google-analytics.com" rel="preconnect" />
-    <link href="https://fcm.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://firestore.googleapis.com" rel="preconnect" />
 
     <script>
       // https://stackoverflow.com/a/50407571/26406
       window.process = {
         env: {
-          NODE_ENV: 'production',
+          NODE_ENV: '{{ NODE_ENV }}',
+        },
+      };
+
+      window.Polymer = {
+        rootPath: '{{ basepath }}',
+      };
+
+      // prettier-ignore
+      {{ webVitalsPolyfill | safe }}
+
+      // Capture the config object from /__/firebase/init.js for src/firebase.ts
+      window.firebase = {
+        initializeApp: (config) => {
+          window.firebaseConfig = config;
+          // Delete fake Firebase global
+          delete window.firebase;
         },
       };
     </script>
 
-    <script>
-      // First Input Delay polyfill https://github.com/GoogleChromeLabs/first-input-delay
-      // prettier-ignore
-      // eslint-disable-next-line
-      !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
-    </script>
-
-    <script src="./node_assets/firebase/firebase-app-compat.js"></script>
-    <script src="./node_assets/firebase/firebase-auth-compat.js"></script>
-    <script src="./node_assets/firebase/firebase-firestore-compat.js"></script>
-    <script src="./node_assets/firebase/firebase-messaging-compat.js"></script>
-    <script src="./node_assets/firebase/firebase-performance-compat.js"></script>
-
-    <script>
-      window.Polymer = { rootPath: '{$ basepath $}' };
-      window.HOVERBOARD = { Elements: {} };
-
-      firebase.initializeApp({
-        apiKey: '{$ firebase.apiKey $}',
-        appId: '{$ firebase.appId $}',
-        authDomain: '{$ firebase.authDomain $}',
-        databaseURL: '{$ firebase.databaseURL $}',
-        messagingSenderId: '{$ firebase.messagingSenderId $}',
-        projectId: '{$ firebase.projectId $}',
-        storageBucket: '{$ firebase.storageBucket $}',
-      });
-
-      firebase.performance();
-      firebase
-        .firestore()
-
-      // eslint-disable-next-line no-console
-      console.log('Firebase is ready!');
-    </script>
-
-    <script src="./node_assets/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="./out-tsc/src/hoverboard-app.js" type="module"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script src="./src/hoverboard-app.ts" type="module"></script>
+    <script src="./src/components/app-install.ts" type="module"></script>
 
     <style>
       html,
@@ -169,27 +140,15 @@
   </head>
 
   <body>
-    <hoverboard-app unresolved>{$ title $}</hoverboard-app>
-
-    <noscript>Please enable JavaScript to view this website.</noscript>
-
-    <script>
-      window.performance && performance.mark && performance.mark('index.html');
-
-      window.onload = function () {
-        const indexRenderTime = window.measureDuration && window.measureDuration('index.html');
-        if (indexRenderTime) {
-          ga('send', 'timing', 'index.html', 'render', indexRenderTime);
-        }
-      };
-    </script>
-
     <div style="display:none;" class="event-venue" itemprop="location" itemscope itemtype="http://schema.org/Place">
-      <span itemprop="name">{$ locationName $}</span>
+      <span itemprop="name">{{ locationName }}</span>
       <div class="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-        <span itemprop="streetAddress">{$ locationAddress $}</span><br>
-        <span itemprop="addressLocality">{$ locationCity $}</span>, <span itemprop="addressRegion">{$ locationRegion $}</span> <span itemprop="postalCode">{$ locationCode $}</span><span itemprop="addressCountry">{$ locationCountry $}</span>
+        <span itemprop="streetAddress">{{ locationAddress }}</span><br>
+        <span itemprop="addressLocality">{{ locationCity }}</span>, <span itemprop="addressRegion">{{ locationRegion }}</span> <span itemprop="postalCode">{{ locationCode }}</span><span itemprop="addressCountry">{{ locationCountry }}</span>
       </div>
     </div>
+    <hoverboard-app unresolved>{{ title }}</hoverboard-app>
+
+    <noscript>Please enable JavaScript to view this website.</noscript>
   </body>
 </html>

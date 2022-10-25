@@ -18,9 +18,10 @@ interface PathObject {
   doc?: string;
 }
 
+// TODO: Describe what this pattern does
 const FILE_EXTENSION_PATTERN = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gim;
 
-export function getData(path: string): Promise<Data> {
+export async function getData(path: string): Promise<Data> {
   const { file, collection, doc } = getPathObject(path);
   if (file) {
     return fetchDataFromFile(file);
@@ -46,13 +47,13 @@ export async function saveData(data: Data, path: string): Promise<void> {
   }
 }
 
-function fetchDataFromFile(file: string): Promise<Data> {
-  const contents = fs.readFileSync(path.resolve(process.cwd(), file), 'utf8');
+async function fetchDataFromFile(file: string): Promise<Data> {
+  const contents = await fs.promises.readFile(path.resolve(process.cwd(), file), 'utf8');
   return JSON.parse(contents);
 }
 
 async function saveDataToFile(data: object, file: string) {
-  fs.writeFileSync(path.resolve(process.cwd(), file), JSON.stringify(data, null, 2));
+  await fs.promises.writeFile(path.resolve(process.cwd(), file), JSON.stringify(data, null, 2));
 }
 
 async function getDocument(collectionId: string, docId: string): Promise<Document> {
@@ -86,11 +87,7 @@ async function setCollection(data: Data, collectionId: string) {
 function getPathObject(path: string) {
   const normalizedParams = path.replace(/\/$/, '');
   const paramsExtension = normalizedParams.match(FILE_EXTENSION_PATTERN);
-  const pathObject: PathObject = {
-    file: undefined,
-    collection: undefined,
-    doc: undefined,
-  };
+  const pathObject: Partial<PathObject> = {};
 
   if (paramsExtension && paramsExtension[0]) {
     pathObject.file = normalizedParams;

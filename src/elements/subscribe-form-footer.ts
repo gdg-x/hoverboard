@@ -1,13 +1,16 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
+import '@polymer/iron-icon';
+import '@polymer/paper-button';
 import '@polymer/paper-input/paper-input';
 import { PaperInputElement } from '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
+import { ReduxMixin } from '../store/mixin';
 import { subscribe } from '../store/subscribe/actions';
 import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
-import './hoverboard-icons';
+import { subscribeBlock } from '../utils/data';
+import '../utils/icons';
 import './shared-styles';
 
 @customElement('subscribe-form-footer')
@@ -41,7 +44,7 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
 
         paper-button {
           margin-top: 8px;
-          color: #FFFFFF;
+          color: var(--footer-text-color);
         }
 
         paper-button:hover {
@@ -58,11 +61,11 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
         <paper-input
           id="emailInput"
           on-touchend="_focus"
-          label="{$ subscribeBlock.yourEmail $}"
+          label="[[subscribeBlock.yourEmail]]"
           value="{{email}}"
           required
           auto-validate$="[[validate]]"
-          error-message="{$ subscribeBlock.emailRequired $}"
+          error-message="[[subscribeBlock.emailRequired]]"
           autocomplete="off"
           disabled="[[subscribed.data]]"
         >
@@ -72,21 +75,14 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
             hidden$="[[!subscribed.data]]"
           ></iron-icon>
         </paper-input>
-        <paper-button
-          on-click="_subscribe"
-          ga-on="click"
-          disabled="[[disabled]]"
-          ga-event-category="attendees"
-          ga-event-action="subscribe"
-          ga-event-label="subscribe footer"
-          layout
-          self-end
-        >
+        <paper-button class="cta-button" on-click="subscribe" disabled="[[disabled]]" layout self-end>
           [[ctaLabel]]
         </paper-button>
       </div>
     `;
   }
+
+  private subscribeBlock = subscribeBlock;
 
   @property({ type: Object })
   subscribed: SubscribeState = initialSubscribeState;
@@ -96,38 +92,38 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean })
   private validate = false;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.subscribed = state.subscribed;
   }
 
-  _subscribe() {
+  private subscribe() {
     this.validate = true;
-    const emailInput = this.shadowRoot.querySelector<PaperInputElement>('#emailInput');
+    const emailInput = this.shadowRoot!.querySelector<PaperInputElement>('#emailInput');
 
-    if ((this.initialized || this.failure) && emailInput.validate()) {
+    if ((this.initialized || this.failure) && emailInput?.validate()) {
       store.dispatch(subscribe({ email: this.email }));
     }
   }
 
   @computed('subscribed')
-  get ctaLabel() {
+  private get ctaLabel() {
     return this.subscribed instanceof Success
-      ? '{$  subscribeBlock.subscribed $}'
-      : '{$  subscribeBlock.subscribe $}';
+      ? this.subscribeBlock.subscribed
+      : this.subscribeBlock.subscribe;
   }
 
   @computed('email', 'subscribed')
-  get disabled() {
+  private get disabled() {
     return !this.email || this.subscribed instanceof Success;
   }
 
   @computed('subscribed')
-  get failure() {
+  private get failure() {
     return this.subscribed instanceof Failure;
   }
 
   @computed('subscribed')
-  get initialized() {
+  private get initialized() {
     return this.subscribed instanceof Initialized;
   }
 }

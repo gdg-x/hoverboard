@@ -1,29 +1,33 @@
-import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
+import { Failure } from '@abraham/remotedata';
+import '@material/mwc-button';
+import '@material/mwc-dialog';
+import { Dialog } from '@material/mwc-dialog';
+import { observe, property, query } from '@polymer/decorators';
+import '@polymer/iron-icon';
+import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
-import { ReduxMixin } from '../../mixins/redux-mixin';
 import { RootState } from '../../store';
-import { closeDialog, openDialog } from '../../store/dialogs/actions';
-import { DIALOGS } from '../../store/dialogs/types';
-import { mergeAccounts, signIn } from '../../store/user/actions';
-import { getProviderCompanyName } from '../../utils/providers';
-import '../hoverboard-icons';
-import '../shared-styles';
+import { mergeAccounts, signIn } from '../../store/auth/actions';
+import { selectAuthMergeable } from '../../store/auth/selectors';
+import { initialAuthState } from '../../store/auth/state';
+import { ExistingAccountError } from '../../store/auth/types';
+import { closeDialog, openSigninDialog } from '../../store/dialogs/actions';
+import { selectIsDialogOpen } from '../../store/dialogs/selectors';
+import { DIALOG } from '../../store/dialogs/types';
+import { ReduxMixin } from '../../store/mixin';
+import { initialUserState } from '../../store/user/state';
+import { TempAny } from '../../temp-any';
+import { signIn as signInText, signInDialog, signInProviders } from '../../utils/data';
+import '../../utils/icons';
+import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 
-class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
+class SigninDialog extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
-      <style include="shared-styles flex flex-alignment">
+      <style>
         :host {
-          margin: 0 auto;
           display: block;
-          padding: 24px 32px;
-          background: var(--primary-background-color);
-          box-shadow: var(--box-shadow);
-        }
-
-        .dialog-content {
-          margin: 0 auto;
+          --mdc-theme-primary: var(--primary-text-color);
         }
 
         .sign-in-button {
@@ -46,52 +50,42 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
         }
       </style>
 
-      <div class="dialog-content">
-        <div class="initial-signin" hidden$="[[isMergeState]]">
-          {% for provider in signInProviders.providersData %}
-          <paper-button
-            class="sign-in-button"
-            on-click="_signIn"
-            provider-url="{$ provider.url $}"
-            ga-on="click"
-            ga-event-category="attendees"
-            ga-event-action="sign-in"
-            ga-event-label="signIn dialog - {$ provider.name $}"
-            flex
-          >
-            <iron-icon
-              class="icon-{$ provider.name $}"
-              icon="hoverboard:{$ provider.name $}"
-            ></iron-icon>
-            <span provider-url="{$ provider.url $}">{$ provider.label $}</span>
-          </paper-button>
-          {% endfor %}
+      <mwc-dialog id="dialog" open="[[open]]" heading="[[signInText]]">
+        <div hidden$="[[isMergeState]]">
+          <template is="dom-repeat" items="[[signInProviders.providersData]]" as="provider">
+            <paper-button
+              class="sign-in-button"
+              on-click="signIn"
+              provider-url="[[provider.url]]"
+              flex
+            >
+              <iron-icon
+                icon="hoverboard:[[provider.name]]"
+                class="icon-[[provider.name]]"
+              ></iron-icon>
+              <span provider-url$="[[provider.url]]">[[provider.label]]</span>
+            </paper-button>
+          </template>
         </div>
         <div class="merge-content" hidden$="[[!isMergeState]]">
-          <h3 class="subtitle">{$ signInDialog.alreadyHaveAccount $}</h3>
+          <h3 class="subtitle">[[signInDialog.alreadyHaveAccount]]</h3>
           <div class="explanation">
-            <div class="row-1">{$ signInDialog.alreadyUsed $} <b>[[email]]</b>.</div>
+            <div class="row-1">[[signInDialog.alreadyUsed]] <b>[[email]]</b>.</div>
             <div class="row-2">
-              {$ signInDialog.signInToContinue.part1 $} [[providerCompanyName]] {$
-              signInDialog.signInToContinue.part2 $}
+              [[signInDialog.signInToContinue.part1]] [[providerCompanyName]]
+              [[signInDialog.signInToContinue.part2]]
             </div>
           </div>
 
           <div class="action-button" layout horizontal end-justified>
-            <paper-button
-              class="merge-button"
-              on-click="_mergeAccounts"
-              ga-on="click"
-              ga-event-category="attendees"
-              ga-event-action="merge account"
-              ga-event-label$="signIn merge account dialog -[[providerCompanyName]]"
-              primary
-            >
-              <span>{$ signInDialog.signInToContinue.part1 $} [[providerCompanyName]]</span>
+            <paper-button class="merge-button" on-click="mergeAccounts" primary>
+              <span>[[signInDialog.signInToContinue.part1]] [[providerCompanyName]]</span>
             </paper-button>
           </div>
         </div>
-      </div>
+
+        <mwc-button slot="primaryAction" dialogAction="close">Close</mwc-button>
+      </mwc-dialog>
     `;
   }
 
@@ -99,61 +93,72 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
     return 'signin-dialog';
   }
 
-  static get properties() {
-    return {
-      user: {
-        type: Object,
-      },
-      isMergeState: {
-        type: Boolean,
-        value: false,
-      },
-      email: String,
-      providerCompanyName: String,
-    };
+  @property({ type: Object })
+  private user = initialUserState;
+  @property({ type: Object })
+  private auth = initialAuthState;
+  @property({ type: Boolean })
+  private isMergeState = false;
+  @property({ type: Boolean })
+  private open = false;
+  @property({ type: String })
+  private email = '';
+  @property({ type: String })
+  private providerCompanyName = '';
+
+  @query('#dialog')
+  dialog!: Dialog;
+
+  private signInProviders = signInProviders;
+  private signInDialog = signInDialog;
+  private signInText = signInText;
+
+  override ready() {
+    super.ready();
+    this.dialog.addEventListener('closed', () => closeDialog());
   }
 
-  stateChanged(state: RootState) {
-    this.setProperties({
-      user: state.user,
-    });
+  override stateChanged(state: RootState) {
+    this.user = state.user;
+    this.auth = state.auth;
+    this.isMergeState = selectAuthMergeable(state);
+    this.open = selectIsDialogOpen(state, DIALOG.SIGNIN);
   }
 
-  constructor() {
-    super();
-    this.addEventListener('iron-overlay-canceled', this._close);
-  }
-
-  static get observers() {
-    return ['_userChanged(user)'];
-  }
-
-  _userChanged(user) {
+  @observe('isMergeState')
+  private onIsMergeState(isMergeState: boolean) {
     closeDialog();
-    if (!user.signedIn) {
-      if (user.initialProviderId && user.pendingCredential) {
-        this.isMergeState = true;
-        this.email = user.email;
-        this.providerCompanyName = getProviderCompanyName(user.initialProviderId);
-        openDialog(DIALOGS.SIGNIN);
+    if (isMergeState && this.auth instanceof Failure) {
+      const error: ExistingAccountError = this.auth.error;
+      if (!error.email || !error.providerId) {
+        // TODO: Improve error handling
+        return;
       }
+      this.email = error.email;
+      this.providerCompanyName = error.providerId && getProviderCompanyName(error.providerId);
+      openSigninDialog();
     }
   }
 
-  _mergeAccounts() {
-    mergeAccounts(this.user.initialProviderId, this.user.pendingCredential);
-    closeDialog();
-    this.isMergeState = false;
+  private mergeAccounts() {
+    if (this.auth instanceof Failure) {
+      const error: ExistingAccountError = this.auth.error;
+      mergeAccounts(error.providerId as TempAny, error.credential as TempAny);
+      closeDialog();
+    }
   }
 
-  _close() {
-    this.isMergeState = false;
+  private close() {
     closeDialog();
   }
 
-  _signIn(event) {
-    const providerUrl = event.target.getAttribute('provider-url');
-    signIn(providerUrl);
+  private signIn(event: MouseEvent) {
+    if (event.target instanceof Element) {
+      const providerUrl = event.target.getAttribute('provider-url') as PROVIDER;
+      signIn(providerUrl);
+    } else {
+      throw new Error('Error starting sign in');
+    }
   }
 }
 

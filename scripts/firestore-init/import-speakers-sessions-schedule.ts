@@ -1,3 +1,4 @@
+// @ts-nocheck
 import admin, { firestore as firestoreDep, ServiceAccount } from 'firebase-admin'
 import fs from "fs"
 

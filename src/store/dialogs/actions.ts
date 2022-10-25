@@ -1,5 +1,6 @@
 import { store } from '../';
-import { CLOSE_DIALOG, DIALOGS, OPEN_DIALOG, SET_DIALOG_ERROR } from './types';
+import { FeedbackDialog, SubscribeDialog } from './state';
+import { CLOSE_DIALOG, DIALOG, OPEN_DIALOG } from './types';
 
 export const closeDialog = () => {
   store.dispatch({
@@ -7,19 +8,23 @@ export const closeDialog = () => {
   });
 };
 
-export const setDialogError = (error: Error) => {
+export const openSigninDialog = () => {
   store.dispatch({
-    type: SET_DIALOG_ERROR,
-    payload: error,
+    type: OPEN_DIALOG,
+    payload: { name: DIALOG.SIGNIN },
   });
 };
 
-export const openDialog = (name: DIALOGS, data?: unknown) => {
+export const openSubscribeDialog = (data: SubscribeDialog['data']) => {
   store.dispatch({
     type: OPEN_DIALOG,
-    payload: {
-      name,
-      data,
-    },
+    payload: { name: DIALOG.SUBSCRIBE, data },
+  });
+};
+
+export const openFeedbackDialog = (data: FeedbackDialog['data']) => {
+  store.dispatch({
+    type: OPEN_DIALOG,
+    payload: { name: DIALOG.FEEDBACK, data },
   });
 };

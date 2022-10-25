@@ -1,10 +1,18 @@
-import { customElement, property } from '@polymer/decorators'
-import '@polymer/iron-icon';
-import '@polymer/marked-element';
-import '@polymer/paper-icon-button';
+import { customElement, property } from '@polymer/decorators';
+import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
+import '../components/hero/simple-hero';
+import '../components/text-truncate';
+import '../elements/content-loader';
+import '../elements/footer-block';
+import '../elements/posts-list';
+import '../components/markdown/remote-markdown';
 import '../elements/shared-styles';
+import './blog-list-page';
+import './post-page';
+import {CONFIG, getConfig} from '../utils/config'
+import { locationText } from '../utils/data';
 
 @customElement('location-page')
 export class LocationPage extends PolymerElement {
@@ -28,29 +36,30 @@ export class LocationPage extends PolymerElement {
         active="[[active]]"
       ></polymer-helmet>
 
-      <hero-block
-        background-image="{$ heroSettings.location.background.image $}"
-        background-color="{$ heroSettings.location.background.color $}"
-        font-color="{$ heroSettings.location.fontColor $}"
-        active="[[active]]"
-      >
-        <div class="hero-title highlight-font">{$ heroSettings.location.title $}</div>
-        <p class="hero-description">{$ heroSettings.location.description $}</p>
-      </hero-block>
 
-      <iron-image class="plan" src="../../images/plan.png"sizing="contain" alt="Plan"></iron-image>
+      <simple-hero page="location"></simple-hero>
+<!--      -->
+<!--      <hero-block-->
+<!--        background-image="{$ heroSettings.location.background.image $}"-->
+<!--        background-color="{$ heroSettings.location.background.color $}"-->
+<!--        font-color="{$ heroSettings.location.fontColor $}"-->
+<!--        active="[[active]]"-->
+<!--      >-->
+<!--        <div class="hero-title highlight-font">{$ heroSettings.location.title $}</div>-->
+<!--        <p class="hero-description">{$ heroSettings.location.description $}</p>-->
+<!--      </hero-block>-->
 
-      <iron-image class="plan" src="../../images/plan-inside.png"sizing="contain" alt="Plan"></iron-image>
+      <lazy-image class="plan" src="../../images/plan.png" sizing="contain" alt="Plan"></lazy-image>
+      <lazy-image class="plan" src="../../images/plan-inside.png" sizing="contain" alt="Plan"></lazy-image>
 
       <iframe
         width="100%"
         height="400"
         frameborder="0" style="border:0"
-        src="https://www.google.com/maps/embed/v1/place?key={$ googleMapApiKeyLocationPage $}
-        &q=SupagroMontpellier,France&zoom=15" allowfullscreen>
+        src="https://www.google.com/maps/embed/v1/place?key=[[ googleMapApiKey ]]&q=SupagroMontpellier,France&zoom=15" allowfullscreen>
       </iframe>
 
-      <md-content md-source="[[source]]"></md-content>
+      <remote-markdown path="[[source]]"></remote-markdown>
 
       <footer-block></footer-block>
     `;
@@ -59,5 +68,9 @@ export class LocationPage extends PolymerElement {
   @property({ type: Boolean })
   active = false;
   @property({ type: String })
-  source = '{$ locationText $}';
+  source = locationText;
+
+  private googleMapApiKey = getConfig(CONFIG.GOOGLE_MAPS_API_KEY);
+
+
 }

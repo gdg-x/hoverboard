@@ -1,9 +1,9 @@
-import { css, LitElement } from 'lit-element';
+import { css, LitElement } from 'lit';
 import { flex, flexAlignment, positioning } from '../styles/layout';
 import { theme } from '../styles/theme';
 
 export class ThemedElement extends LitElement {
-  static get styles() {
+  static override get styles() {
     return [
       theme,
       flex,

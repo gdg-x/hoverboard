@@ -1,10 +1,12 @@
 import { customElement, property } from '@polymer/decorators';
-import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
-import { getDate } from '../utils/functions';
+import '@power-elements/lazy-image';
+import '../components/markdown/short-markdown';
+import '../components/text-truncate';
+import { Post } from '../models/post';
+import { router } from '../router';
+import { getDate } from '../utils/dates';
 import './shared-styles';
-import './text-truncate';
 
 @customElement('posts-list')
 export class PostsList extends PolymerElement {
@@ -27,8 +29,11 @@ export class PostsList extends PolymerElement {
 
         .image {
           margin-right: 24px;
-          width: 64px;
-          height: 64px;
+          --lazy-image-width: 64px;
+          --lazy-image-height: 64px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           border-radius: var(--border-radius);
         }
 
@@ -41,7 +46,7 @@ export class PostsList extends PolymerElement {
         }
 
         .description {
-          margin-top: 8px;
+          padding-top: 8px;
           color: var(--secondary-text-color);
         }
 
@@ -53,24 +58,21 @@ export class PostsList extends PolymerElement {
 
         @media (min-width: 640px) {
           .image {
-            width: 128px;
-            height: 128px;
+            --lazy-image-width: 128px;
+            --lazy-image-height: 128px;
           }
         }
       </style>
 
       <template is="dom-repeat" items="[[posts]]" as="post">
-        <a href$="/blog/posts/[[post.id]]/" class="post" layout horizontal>
-          <plastic-image
+        <a href$="[[postUrl(post.id)]]" class="post" layout horizontal>
+          <lazy-image
             class="image"
-            srcset="[[post.image]]"
+            src="[[post.image]]"
+            alt="[[post.title]]"
             style$="background-color: [[post.backgroundColor]];"
-            sizing="cover"
             hidden$="[[!post.image]]"
-            lazy-load
-            preload
-            fade
-          ></plastic-image>
+          ></lazy-image>
           <div flex>
             <div class="details" layout vertical justified>
               <div>
@@ -78,9 +80,7 @@ export class PostsList extends PolymerElement {
                   <h2 class="title">[[post.title]]</h2>
                 </text-truncate>
                 <text-truncate lines="3">
-                  <marked-element class="description" markdown="[[post.brief]]">
-                    <div slot="markdown-html"></div>
-                  </marked-element>
+                  <short-markdown class="description" content="[[post.brief]]"></short-markdown>
                 </text-truncate>
               </div>
               <span class="date">[[getDate(post.published)]]</span>
@@ -92,9 +92,13 @@ export class PostsList extends PolymerElement {
   }
 
   @property({ type: Array })
-  posts = [];
+  posts: Post[] = [];
 
-  getDate(date) {
+  postUrl(id: string) {
+    return router.urlForName('post-page', { id });
+  }
+
+  getDate(date: string) {
     return getDate(date);
   }
 }

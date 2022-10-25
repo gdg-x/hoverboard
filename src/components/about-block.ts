@@ -1,10 +1,15 @@
-import { css, customElement, html } from 'lit-element';
-import { toggleVideoDialog } from '../store/ui/actions';
+// import '@polymer/iron-icon';
+import { css, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { openVideoDialog } from '../store/ui/actions';
+import { aboutBlock } from '../utils/data';
+// TODO: enable imports
+// import '../utils/icons';
 import { ThemedElement } from './themed-element';
 
 @customElement('about-block')
 export class AboutBlock extends ThemedElement {
-  static get styles() {
+  static override get styles() {
     return [
       ...super.styles,
       css`
@@ -56,71 +61,49 @@ export class AboutBlock extends ThemedElement {
     ];
   }
 
-  render() {
+  override render() {
     return html`
       <div class="container">
         <div>
-          <h1 class="container-title">{$ aboutBlock.title $}</h1>
-          <p>{$ aboutBlock.callToAction.featuredSessions.description $}</p>
-<!--          <a-->
-<!--            href="{$ aboutBlock.callToAction.featuredSessions.link $}"-->
-<!--            ga-on="click"-->
-<!--            ga-event-category="video"-->
-<!--            ga-event-action="watch"-->
-<!--            ga-event-label="about block - {$ aboutBlock.callToAction.featuredSessions.label $}"-->
-<!--            target="_blank"-->
-<!--            rel="noopener noreferrer"-->
-<!--          >-->
-<!--            <paper-button class="animated icon-right">-->
-<!--              <span class="cta-label">{$ aboutBlock.callToAction.featuredSessions.label $}</span>-->
-<!--              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>-->
-<!--            </paper-button>-->
-<!--          </a>-->
-
-          <p>{$ aboutBlock.callToAction.howItWas.description $}</p>
-
-
+          <h1 class="container-title">${aboutBlock.title}</h1>
+          <p>${aboutBlock.callToAction.featuredSessions.description}</p>
           <a
-            href="/coc/"
+            href="${aboutBlock.callToAction.featuredSessions.link}"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <paper-button class="cta-button animated icon-right">
-              <span>{$ aboutBlock.callToAction.howItWas.labelCoc $}</span>
+            <paper-button class="animated icon-right">
+              <span class="cta-label">${aboutBlock.callToAction.featuredSessions.label}</span>
               <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
             </paper-button>
           </a>
 
-          <paper-button
-            class="animated icon-right"
-            @click="${this.playVideo}"
-            ga-on="click"
-            ga-event-category="video"
-            ga-event-action="watch"
-            ga-event-label="about block - {$ aboutBlock.callToAction.howItWas.label $}"
-          >
-            <span>{$ aboutBlock.callToAction.howItWas.label $}</span>
+          <p>${aboutBlock.callToAction.howItWas.description}</p>
+          <paper-button class="animated icon-right" @click="${this.playVideo}">
+            <span>${aboutBlock.callToAction.howItWas.label}</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
         </div>
 
         <div class="statistics-block">
           <div class="item">
-            <div class="numbers">{$ aboutBlock.statisticsBlock.attendees.number $}</div>
-            <div class="label">{$ aboutBlock.statisticsBlock.attendees.label $}</div>
+            <div class="numbers">${aboutBlock.statisticsBlock.attendees.number}</div>
+            <div class="label">${aboutBlock.statisticsBlock.attendees.label}</div>
           </div>
 
           <div class="item">
-            <div class="numbers">{$ aboutBlock.statisticsBlock.days.number $}</div>
-            <div class="label">{$ aboutBlock.statisticsBlock.days.label $}</div>
+            <div class="numbers">${aboutBlock.statisticsBlock.days.number}</div>
+            <div class="label">${aboutBlock.statisticsBlock.days.label}</div>
           </div>
 
           <div class="item">
-            <div class="numbers">{$ aboutBlock.statisticsBlock.sessions.number $}</div>
-            <div class="label">{$ aboutBlock.statisticsBlock.sessions.label $}</div>
+            <div class="numbers">${aboutBlock.statisticsBlock.sessions.number}</div>
+            <div class="label">${aboutBlock.statisticsBlock.sessions.label}</div>
           </div>
 
           <div class="item">
-            <div class="numbers">{$ aboutBlock.statisticsBlock.tracks.number $}</div>
-            <div class="label">{$ aboutBlock.statisticsBlock.tracks.label $}</div>
+            <div class="numbers">${aboutBlock.statisticsBlock.tracks.number}</div>
+            <div class="label">${aboutBlock.statisticsBlock.tracks.label}</div>
           </div>
         </div>
       </div>
@@ -128,11 +111,9 @@ export class AboutBlock extends ThemedElement {
   }
 
   private playVideo() {
-    toggleVideoDialog({
-      title: '{$  aboutBlock.callToAction.howItWas.label $}',
-      youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
-      disableControls: true,
-      opened: true,
+    openVideoDialog({
+      title: aboutBlock.callToAction.howItWas.label,
+      youtubeId: aboutBlock.callToAction.howItWas.youtubeId,
     });
   }
 }

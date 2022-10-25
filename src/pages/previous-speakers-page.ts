@@ -1,36 +1,24 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
-import '@polymer/app-route/app-route';
-import { computed, customElement, observe, property } from '@polymer/decorators';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
+import '../components/hero/simple-hero';
 import '../elements/content-loader';
 import '../elements/shared-styles';
-import { ReduxMixin } from '../mixins/redux-mixin';
+import { PreviousSession } from '../models/previous-session';
+import { router } from '../router';
 import { RootState, store } from '../store';
-import { closeDialog, openDialog } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
-import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
-import {
-  initialPreviousSpeakersState,
-  PreviousSpeakersState,
-} from '../store/previous-speakers/state';
-import { TempAny } from '../temp-any';
-import { isDialogOpen } from '../utils/dialogs';
+import { ReduxMixin } from '../store/mixin';
+import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
+import { initialPreviousSpeakersState } from '../store/previous-speakers/state';
+import { contentLoaders, heroSettings, speakers } from '../utils/data';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('previous-speakers-page')
 export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
-  @property({ type: Boolean })
-  active = false;
   @property({ type: Object })
-  route = {};
-  @property({ type: Object })
-  previousSpeakers: PreviousSpeakersState = initialPreviousSpeakersState;
-
-  @property({ type: Object })
-  private routeData: { speakerId?: string } = {};
-  @property({ type: Boolean })
-  private isDialogOpened = false;
+  previousSpeakers = initialPreviousSpeakersState;
 
   static get template() {
     return html`
@@ -53,8 +41,11 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
         }
 
         .photo {
-          width: 96px;
-          height: 96px;
+          --lazy-image-width: 96px;
+          --lazy-image-height: 96px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--contrast-additional-background-color);
           border: 3px solid var(--contrast-additional-background-color);
           border-radius: 50%;
@@ -115,8 +106,8 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
           }
 
           .photo {
-            width: 115px;
-            height: 115px;
+            --lazy-image-width: 115px;
+            --lazy-image-height: 115px;
             border-width: 5px;
           }
 
@@ -132,29 +123,13 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
           }
 
           .photo {
-            width: 128px;
-            height: 128px;
+            --lazy-image-width: 128px;
+            --lazy-image-height: 128px;
           }
         }
       </style>
 
-      <polymer-helmet
-        title="{$ heroSettings.previousSpeakers.title $} | {$ title $}"
-        details="{$ heroSettings.previousSpeakers.metaDescription $}"
-        active="[[_setHelmetData(active, isDialogOpened)]]"
-      ></polymer-helmet>
-
-      <app-route route="[[route]]" pattern="/:speakerId" data="{{routeData}}"></app-route>
-
-      <hero-block
-        background-image="{$ heroSettings.previousSpeakers.background.image $}"
-        background-color="{$ heroSettings.previousSpeakers.background.color $}"
-        font-color="{$ heroSettings.previousSpeakers.fontColor $}"
-        active="[[active]]"
-      >
-        <div class="hero-title">{$ heroSettings.previousSpeakers.title $}</div>
-        <p class="hero-details">{$ heroSettings.previousSpeakers.details $}</p>
-      </hero-block>
+      <simple-hero page="previousSpeakers"></simple-hero>
 
       <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
@@ -164,29 +139,17 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
         card-height="128px"
         avatar-size="128px"
         avatar-circle="64px"
-        items-count="{$ contentLoaders.previousSpeakers.itemsCount $}"
+        items-count="[[contentLoaders.itemsCount]]"
         hidden$="[[contentLoaderVisibility]]"
       ></content-loader>
       <div class="container">
         <template is="dom-repeat" items="[[previousSpeakers.data]]" as="speaker">
-          <a
-            class="speaker"
-            href$="/previous-speakers/[[speaker.id]]/"
-            ga-on="click"
-            ga-event-category="previous speaker"
-            ga-event-action="open details"
-            ga-event-label$="[[speaker.name]]"
-            layout
-            horizontal
-          >
-            <plastic-image
+          <a class="speaker" href$="[[previousSpeakerUrl(speaker.id)]]" layout horizontal>
+            <lazy-image
               class="photo"
-              srcset="[[speaker.photoUrl]]"
-              sizing="cover"
-              lazy-load
-              preload
-              fade
-            ></plastic-image>
+              src="[[speaker.photoUrl]]"
+              alt="[[speaker.name]]"
+            ></lazy-image>
 
             <div class="details" layout vertical center-justified start>
               <h2 class="name">[[speaker.name]]</h2>
@@ -195,8 +158,8 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
               <img class="company-logo" src$="[[speaker.companyLogo]]" />
 
               <div class="sessions">
-                <h5>{$ speakers.previousYears $}:</h5>
-                [[_getYears(speaker.sessions)]]
+                <h5>[[previousYears]]:</h5>
+                [[getYears(speaker.sessions)]]
               </div>
             </div>
           </a>
@@ -207,52 +170,36 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  stateChanged(state: RootState) {
-    this.isDialogOpened = isDialogOpen(state.dialogs, DIALOGS.PREVIOUS_SPEAKER);
+  private heroSettings = heroSettings.previousSpeakers;
+  private contentLoaders = contentLoaders.previousSpeakers;
+  private previousYears = speakers.previousYears;
+
+  override stateChanged(state: RootState) {
     this.previousSpeakers = state.previousSpeakers;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
+
     if (this.previousSpeakers instanceof Initialized) {
-      store.dispatch(fetchPreviousSpeakersList());
+      store.dispatch(fetchPreviousSpeakers);
     }
   }
 
   @computed('previousSpeakers')
-  get contentLoaderVisibility() {
+  private get contentLoaderVisibility(): boolean {
     return this.previousSpeakers instanceof Success || this.previousSpeakers instanceof Failure;
   }
 
-  @observe('isDialogOpened')
-  _dialogStatusChanged(nextState: boolean, prevState: boolean) {
-    if (!nextState && prevState && this.active && this.routeData.speakerId) {
-      history.back();
-    }
-  }
-
-  @observe('active', 'previousSpeakers', 'routeData.speakerId')
-  _openSpeakerDetails(active: boolean, speakers: PreviousSpeakersState, id?: string) {
-    if (speakers instanceof Success) {
-      requestAnimationFrame(() => {
-        if (active && id) {
-          const speakerData = speakers.data.find(({ id: currentId }) => currentId === id);
-          speakerData && openDialog(DIALOGS.PREVIOUS_SPEAKER, speakerData);
-        } else if (this.isDialogOpened) {
-          closeDialog();
-        }
-      });
-    }
-  }
-
-  _setHelmetData(active: boolean, isDialogOpened: boolean) {
-    return active && !isDialogOpened;
-  }
-
-  _getYears(sessions: { [key: number]: TempAny }) {
+  private getYears(sessions: { [key: number]: PreviousSession[] }) {
     return Object.keys(sessions || {})
       .map(Number)
       .sort((a, b) => b - a)
       .join(', ');
+  }
+
+  private previousSpeakerUrl(id: string) {
+    return router.urlForName('previous-speaker-page', { id });
   }
 }

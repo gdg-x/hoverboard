@@ -1,9 +1,13 @@
-import '@polymer/app-route/app-route';
-import { customElement, observe, property } from '@polymer/decorators';
-import '@polymer/iron-pages';
+import { customElement, property } from '@polymer/decorators';
+import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import { setSubRoute } from '../store/routing/actions';
-import { scrollToY } from '../utils/scrolling';
+import '@power-elements/lazy-image';
+import '../components/hero/simple-hero';
+import '../components/text-truncate';
+import '../elements/content-loader';
+import '../elements/footer-block';
+import '../elements/posts-list';
+import '../elements/shared-styles';
 import './blog-list-page';
 import './post-page';
 

@@ -2,11 +2,12 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin';
+import '@power-elements/lazy-image';
 import { RootState, store } from '../store';
 import { fetchGallery } from '../store/gallery/actions';
-import { GalleryState, initialGalleryState } from '../store/gallery/state';
+import { initialGalleryState } from '../store/gallery/state';
+import { ReduxMixin } from '../store/mixin';
+import { galleryBlock } from '../utils/data';
 import './shared-styles';
 
 @customElement('gallery-block')
@@ -31,6 +32,7 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
         }
 
         .grid-item {
+          --lazy-image-fit: cover;
           background-color: var(--secondary-background-color);
         }
 
@@ -87,7 +89,7 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
           }
 
           .grid-item:nth-child(4) {
-            grid-area: 1 / 1 / 1 / 5;
+            grid-area: 1 / 1 / 1 / 3;
           }
 
           .grid-item:nth-child(5) {
@@ -138,28 +140,17 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
         </template>
 
         <template is="dom-repeat" items="[[gallery.data]]" as="photo">
-          <plastic-image
-            class="grid-item"
-            srcset="[[photo.url]]"
-            sizing="cover"
-            lazy-load
-            preload
-            fade
-          ></plastic-image>
+          <lazy-image class="grid-item" src="[[photo.url]]" alt="gallery photo"></lazy-image>
         </template>
 
         <template is="dom-if" if="[[success]]">
           <div class="gallery-info" layout vertical justified>
             <div>
-              <h2>{$ galleryBlock.title $}</h2>
-              <p>{$ galleryBlock.description $}</p>
+              <h2>[[galleryBlock.title]]</h2>
+              <p>[[galleryBlock.description]]</p>
             </div>
-            <a
-              href="{$ galleryBlock.callToAction.link $}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <paper-button>{$ galleryBlock.callToAction.label $}</paper-button>
+            <a href="[[galleryBlock.callToAction.link]]" target="_blank" rel="noopener noreferrer">
+              <paper-button>[[galleryBlock.callToAction.label]]</paper-button>
             </a>
           </div>
         </template>
@@ -167,8 +158,10 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
+  private galleryBlock = galleryBlock;
+
   @property({ type: Object })
-  gallery: GalleryState = initialGalleryState;
+  gallery = initialGalleryState;
 
   @computed('gallery')
   get pending() {
@@ -185,15 +178,15 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
     return this.gallery instanceof Success;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.gallery = state.gallery;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
 
     if (this.gallery instanceof Initialized) {
-      store.dispatch(fetchGallery());
+      store.dispatch(fetchGallery);
     }
   }
 }

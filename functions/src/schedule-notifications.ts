@@ -1,5 +1,10 @@
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+// eslint-disable-next-line import/no-unresolved
+import { DocumentData, DocumentSnapshot, getFirestore } from 'firebase-admin/firestore';
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+// eslint-disable-next-line import/no-unresolved
+import { getMessaging, MessagingPayload } from 'firebase-admin/messaging';
 import * as functions from 'firebase-functions';
-import { firestore, messaging } from 'firebase-admin';
 import moment from 'moment';
 
 const FORMAT = 'HH:mm';
@@ -13,9 +18,9 @@ const removeUserTokens = (tokensToUsers) => {
   }, {});
 
   const promises = Object.keys(userTokens).map((userId) => {
-    const ref = firestore().collection('notificationsUsers').doc(userId);
+    const ref = getFirestore().collection('notificationsUsers').doc(userId);
 
-    return firestore().runTransaction((transaction) =>
+    return getFirestore().runTransaction((transaction) =>
       transaction.get(ref).then((doc) => {
         if (!doc.exists) {
           return;
@@ -36,16 +41,19 @@ const removeUserTokens = (tokensToUsers) => {
   return Promise.all(promises);
 };
 
-const sendPushNotificationToUsers = async (userIds, payload) => {
-  console.log('sendPushNotificationToUsers user ids', userIds, 'with notification', payload);
+const sendPushNotificationToUsers = async (userIds: string[], payload: MessagingPayload) => {
+  functions.logger.log(
+    'sendPushNotificationToUsers user ids',
+    userIds,
+    'with notification',
+    payload
+  );
 
   const tokensPromise = userIds.map((id) => {
-    return firestore().collection('notificationsUsers').doc(id).get();
+    return getFirestore().collection('notificationsUsers').doc(id).get();
   });
 
-  const usersTokens: firestore.DocumentSnapshot<firestore.DocumentData>[] = await Promise.all(
-    tokensPromise
-  );
+  const usersTokens: DocumentSnapshot<DocumentData>[] = await Promise.all(tokensPromise);
   const tokensToUsers = usersTokens.reduce((aggregator, userTokens) => {
     if (!userTokens.exists) return aggregator;
     const { tokens } = userTokens.data();
@@ -54,11 +62,11 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
   const tokens = Object.keys(tokensToUsers);
 
   const tokensToRemove = {};
-  const messagingResponse = await messaging().sendToDevice(tokens, payload);
+  const messagingResponse = await getMessaging().sendToDevice(tokens, payload);
   messagingResponse.results.forEach((result, index) => {
     const error = result.error;
     if (error) {
-      console.error('Failure sending notification to', tokens[index], error);
+      functions.logger.error('Failure sending notification to', tokens[index], error);
       if (
         error.code === 'messaging/invalid-registration-token' ||
         error.code === 'messaging/registration-token-not-registered'
@@ -75,8 +83,11 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
 export const scheduleNotifications = functions.pubsub
   .schedule('every 5 minutes')
   .onRun(async () => {
-    const notificationsConfigPromise = firestore().collection('config').doc('notifications').get();
-    const schedulePromise = firestore().collection('schedule').get();
+    const notificationsConfigPromise = getFirestore()
+      .collection('config')
+      .doc('notifications')
+      .get();
+    const schedulePromise = getFirestore().collection('schedule').get();
 
     const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([
       notificationsConfigPromise,
@@ -104,20 +115,20 @@ export const scheduleNotifications = functions.pubsub
         return timeslotTime.isBetween(beforeTime, afterTime);
       });
 
-      const upcomingSessions = upcomingTimeslot.reduce((result, timeslot) =>
+      const upcomingSessions = upcomingTimeslot.reduce((_result, timeslot) =>
         timeslot.sessions.reduce(
           (aggregatedSessions, current) => [...aggregatedSessions, ...current.items],
           []
         )
       );
-      const usersIdsSnapshot = await firestore().collection('featuredSessions').get();
+      const usersIdsSnapshot = await getFirestore().collection('featuredSessions').get();
 
       upcomingSessions.forEach(async (upcomingSession, sessionIndex) => {
-        const sessionInfoSnapshot = await firestore()
+        const sessionInfoSnapshot = await getFirestore()
           .collection('sessions')
           .doc(upcomingSession)
           .get();
-        if (!sessionInfoSnapshot.exists) return;
+        if (!sessionInfoSnapshot.exists) return undefined;
 
         const usersIds = usersIdsSnapshot.docs.reduce(
           (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
@@ -139,23 +150,27 @@ export const scheduleNotifications = functions.pubsub
         const fromNow = end.fromNow();
 
         if (userIdsFeaturedSession.length) {
-          return sendPushNotificationToUsers(userIdsFeaturedSession, {
+          const payload: MessagingPayload = {
             data: {
               title: session.title,
               body: `Starts ${fromNow}`,
-              click_action: `/schedule/${todayDay}?sessionId=${upcomingSessions[sessionIndex]}`,
               icon: notificationsConfig.icon,
+              path: `/sessions/${upcomingSessions[sessionIndex]}`,
             },
-          });
+          };
+
+          return sendPushNotificationToUsers(userIdsFeaturedSession, payload);
         }
 
         if (upcomingSessions.length) {
-          console.log('Upcoming sessions', upcomingSessions);
+          functions.logger.log('Upcoming sessions', upcomingSessions);
         } else {
-          console.log('There is no sessions right now');
+          functions.logger.log('There is no sessions right now');
         }
+
+        return undefined;
       });
     } else {
-      console.log(todayDay, 'was not found in the schedule');
+      functions.logger.log(todayDay, 'was not found in the schedule');
     }
   });

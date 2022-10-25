@@ -1,7 +1,8 @@
+import { Initialized, Success } from '@abraham/remotedata';
+import { orderBy } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { Photo } from '../../models/photo';
-import { mergeId } from '../../utils/merge-id';
-import { db } from '../db';
+import { subscribeToCollection, Subscription } from '../../utils/firestore';
 import {
   FETCH_GALLERY,
   FETCH_GALLERY_FAILURE,
@@ -9,26 +10,22 @@ import {
   GalleryActions,
 } from './types';
 
-const getGalleries = async (): Promise<Photo[]> => {
-  const { docs } = await db().collection('gallery').get();
+let subscription: Subscription = new Initialized();
 
-  return docs.map<Photo>(mergeId);
+export const unsubscribe = () => {
+  if (subscription instanceof Success) {
+    subscription.data();
+  }
 };
 
-export const fetchGallery = () => async (dispatch: Dispatch<GalleryActions>) => {
-  dispatch({
-    type: FETCH_GALLERY,
-  });
-
-  try {
-    dispatch({
-      type: FETCH_GALLERY_SUCCESS,
-      payload: await getGalleries(),
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_GALLERY_FAILURE,
-      payload: error,
-    });
+export const fetchGallery = async (dispatch: Dispatch<GalleryActions>) => {
+  if (subscription instanceof Initialized) {
+    subscription = subscribeToCollection(
+      'gallery',
+      () => dispatch({ type: FETCH_GALLERY }),
+      (payload: Photo[]) => dispatch({ type: FETCH_GALLERY_SUCCESS, payload }),
+      (payload: Error) => dispatch({ type: FETCH_GALLERY_FAILURE, payload }),
+      orderBy('order')
+    );
   }
 };

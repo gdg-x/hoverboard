@@ -1,34 +1,20 @@
-import { Failure, Initialized, Pending } from '@abraham/remotedata';
+import { Failure, Pending } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
-import '@polymer/marked-element';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import 'plastic-image';
+import '@power-elements/lazy-image';
+import '../components/hero/simple-hero';
+import '../components/markdown/short-markdown';
 import '../elements/shared-styles';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { RootState, store } from '../store';
-import { fetchTeam } from '../store/team/actions';
-import { initialTeamState, TeamState } from '../store/team/state';
+import { RootState } from '../store';
+import { ReduxMixin } from '../store/mixin';
+import { selectTeamsAndMembers } from '../store/teams-members/selectors';
+import { initialTeamsMembersState } from '../store/teams-members/state';
+import { heroSettings, loading, team } from '../utils/data';
+import { updateMetadata } from '../utils/metadata';
 
 @customElement('team-page')
 export class TeamPage extends ReduxMixin(PolymerElement) {
-  @property({ type: Boolean })
-  active = false;
-
-  @property({ type: Object })
-  teams: TeamState = initialTeamState;
-
-  @computed('teams')
-  get pending() {
-    return this.teams instanceof Pending;
-  }
-
-  @computed('teams')
-  get failure() {
-    return this.teams instanceof Failure;
-  }
-
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -61,8 +47,11 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
 
         .photo {
           flex: none;
-          width: 96px;
-          height: 96px;
+          --lazy-image-width: 96px;
+          --lazy-image-height: 96px;
+          --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
           background-color: var(--contrast-additional-background-color);
           border-radius: 50%;
           overflow: hidden;
@@ -113,8 +102,8 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
 
         @media (min-width: 812px) {
           .photo {
-            width: 115px;
-            height: 115px;
+            --lazy-image-width: 115px;
+            --lazy-image-height: 115px;
           }
         }
 
@@ -124,60 +113,40 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
           }
 
           .photo {
-            width: 128px;
-            height: 128px;
+            --lazy-image-width: 128px;
+            --lazy-image-height: 128px;
           }
         }
       </style>
 
-      <polymer-helmet
-        title="{$ heroSettings.team.title $} | {$ title $}"
-        description="{$ heroSettings.team.metaDescription $}"
-        active="[[active]]"
-      ></polymer-helmet>
-
-      <hero-block
-        background-image="{$ heroSettings.team.background.image $}"
-        background-color="{$ heroSettings.team.background.color $}"
-        font-color="{$ heroSettings.team.fontColor $}"
-        active="[[active]]"
-      >
-        <div class="hero-title">{$ heroSettings.team.title $}</div>
-        <p class="hero-description">{$ heroSettings.team.description $}</p>
-      </hero-block>
+      <simple-hero page="team"></simple-hero>
 
       <div class="description-wrapper">
         <div class="container" layout horizontal justified>
-          <marked-element class="description" markdown="{$ team.description $}">
-            <div slot="markdown-html"></div>
-          </marked-element>
+          <short-markdown content="[[team.description]]"></short-markdown>
         </div>
       </div>
 
       <div class="container">
         <template is="dom-if" if="[[pending]]">
-          <p>Loading...</p>
+          <p>[[loading]]</p>
         </template>
 
         <template is="dom-if" if="[[failure]]">
           <p>Error loading teams.</p>
         </template>
 
-        <template is="dom-repeat" items="[[teams.data]]" as="team">
+        <template is="dom-repeat" items="[[teamsMembers.data]]" as="team">
           <div class="team-title">[[team.title]]</div>
 
           <div class="team-block">
             <template is="dom-repeat" items="[[team.members]]" as="member">
               <div class="member" layout horizontal>
-                <plastic-image
+                <lazy-image
                   class="photo"
-                  srcset="[[member.photoUrl]]"
-                  sizing="cover"
-                  lazy-load
-                  preload
-                  fade
-                >
-                </plastic-image>
+                  src="[[member.photoUrl]]"
+                  alt="[[member.name]]"
+                ></lazy-image>
 
                 <div class="member-details" layout vertical center-justified start>
                   <h2 class="name">[[member.name]]</h2>
@@ -203,14 +172,28 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  stateChanged(state: RootState) {
-    this.teams = state.team;
+  private heroSettings = heroSettings.team;
+  private loading = loading;
+  private team = team;
+
+  @property({ type: Object })
+  teamsMembers = initialTeamsMembersState;
+
+  @computed('teamsMembers')
+  get pending() {
+    return this.teamsMembers instanceof Pending;
   }
 
-  connectedCallback() {
+  @computed('teamsMembers')
+  get failure() {
+    return this.teamsMembers instanceof Failure;
+  }
+  override connectedCallback() {
     super.connectedCallback();
-    if (this.teams instanceof Initialized) {
-      store.dispatch(fetchTeam());
-    }
+    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
+  }
+
+  override stateChanged(state: RootState) {
+    this.teamsMembers = selectTeamsAndMembers(state);
   }
 }

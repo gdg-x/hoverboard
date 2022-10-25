@@ -2,16 +2,6 @@
   "basepath": "/",
   "url": "https://sunny-tech.io/",
   "analytics": "UA-110450364-2",
-  "prefix": "/",
-  "firebase": {
-    "apiKey": "AIzaSyDGTE3sUI4j-juB1HCpa91b2JI0UIxtUmk",
-    "appId": "1:728710060844:web:6fe473ba09fb5f234aea89",
-    "authDomain": "sunnytechwebsite.firebaseapp.com",
-    "databaseURL": "https://sunnytechwebsite.firebaseio.com",
-    "projectId": "sunnytechwebsite",
-    "storageBucket": "sunnytechwebsite.appspot.com",
-    "messagingSenderId": "728710060844"
-  },
   "googleMapApiKey": "AIzaSyBa8D7jHmFlW5c6vq1wH0cgIQK-PYmgL-A",
   "googleMapApiKeyLocationPage": "AIzaSyBa8D7jHmFlW5c6vq1wH0cgIQK-PYmgL-A"
 }

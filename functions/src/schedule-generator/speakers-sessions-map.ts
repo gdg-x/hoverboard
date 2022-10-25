@@ -1,50 +1,52 @@
-export function sessionsSpeakersMap(sessionsRaw, speakersRaw) {
+import * as functions from 'firebase-functions';
+import { combineTags, pickMainTag, SessionMap, SpeakerMap } from '../utils.js';
+
+export function sessionsSpeakersMap(sessionsRaw: SessionMap, speakersRaw: SpeakerMap) {
   const sessions = {};
   const speakers = {};
+  const { length } = Object.keys(sessionsRaw);
 
-  for (let index = 0; index < Object.keys(sessionsRaw).length; index++) {
+  for (let index = 0; index < length; index++) {
     const sessionId = Object.keys(sessionsRaw)[index];
     const currentSession = sessionsRaw[sessionId];
     const sessionSpeakers = [];
-    const mainTag =
-      currentSession.tags && currentSession.tags.length ? currentSession.tags[0] : 'General';
+    const mainTag = pickMainTag(currentSession.tags);
+    const currentSpeakers = currentSession.speakers ?? [];
 
-    currentSession.speakers &&
-      currentSession.speakers.forEach((speakerId) => {
-        if (!speakersRaw[speakerId]) return;
-        sessionSpeakers.push({ id: speakerId, ...speakersRaw[speakerId] });
+    currentSpeakers.forEach((speakerId: string) => {
+      if (!speakersRaw[speakerId]) {
+        functions.logger.log(`Speaker ${speakerId} not found in speakersRaw`);
+        return;
+      }
 
-        const generatedSpeaker = speakers[speakerId];
-        const sessionBySpeaker = {
-          id: sessionId,
-          mainTag: mainTag,
-          ...currentSession,
+      sessionSpeakers.push({ id: speakerId, ...speakersRaw[speakerId] });
+      const generatedSpeaker = speakers[speakerId];
+      const sessionBySpeaker = {
+        id: sessionId,
+        mainTag,
+        ...currentSession,
+      };
+
+      if (generatedSpeaker) {
+        const speakerTags = combineTags(generatedSpeaker.tags, sessionBySpeaker.tags);
+        const speakerSessions = generatedSpeaker.sessions
+          ? [...generatedSpeaker.sessions, sessionBySpeaker]
+          : [sessionBySpeaker];
+
+        speakers[speakerId] = {
+          ...generatedSpeaker,
+          tags: [...speakerTags],
+          sessions: speakerSessions,
         };
-
-        if (generatedSpeaker) {
-          const speakerTags = generatedSpeaker.tags ? [...generatedSpeaker.tags] : [];
-          sessionBySpeaker.tags &&
-            sessionBySpeaker.tags.forEach((tag) => {
-              if (!speakerTags.includes(tag)) speakerTags.push(tag);
-            });
-          const speakerSessions = generatedSpeaker.sessions
-            ? [...generatedSpeaker.sessions, sessionBySpeaker]
-            : [sessionBySpeaker];
-
-          speakers[speakerId] = {
-            ...generatedSpeaker,
-            tags: [...speakerTags],
-            sessions: speakerSessions,
-          };
-        } else {
-          speakers[speakerId] = {
-            ...speakersRaw[speakerId],
-            id: speakerId,
-            tags: sessionBySpeaker.tags,
-            sessions: [sessionBySpeaker],
-          };
-        }
-      });
+      } else {
+        speakers[speakerId] = {
+          ...speakersRaw[speakerId],
+          id: speakerId,
+          tags: sessionBySpeaker.tags,
+          sessions: [sessionBySpeaker],
+        };
+      }
+    });
 
     sessions[sessionId] = {
       ...currentSession,

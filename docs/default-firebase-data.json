@@ -1,4 +1,24 @@
 {
+  "config": {
+    "notifications": {
+      "icon": "/images/manifest/icon-192.png",
+      "timezone": "+02:00"
+    },
+    "rendertron": {
+      "server": ""
+    },
+    "site": {
+      "domain": "https://sunny-tech.io"
+    },
+    "schedule": {
+      "enabled": false
+    },
+    "mailchimp": {
+      "dc": "",
+      "listid": "",
+      "apikey": ""
+    }
+  },
   "gallery": [
     "https://firebasestorage.googleapis.com/v0/b/sunnytech-2022.appspot.com/o/1.jpg?alt=media&token=6e923b40-9b34-4800-9893-92c43209a0b2",
     "https://firebasestorage.googleapis.com/v0/b/sunnytech-2022.appspot.com/o/8.jpg?alt=media&token=3f3438a9-33c3-424a-9eb3-8ac2f74c3dbc",
@@ -20,33 +40,6 @@
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1717.jpg?alt=media&token=d42f8de2-8a7b-4f48-85f0-b38967d3571f"
   ],
   "blog": {
-    "covid19": {
-      "backgroundColor": "#888888",
-      "brief": "",
-      "content": "md",
-      "image": "/images/blog/virus-4835301_1920.jpg",
-      "published": "2020-03-14",
-      "source": "/data/posts/2020-03-12-corona.md",
-      "title": "Sunny Tech et le covid19"
-    },
-    "sunny-tech-cancelled": {
-      "backgroundColor": "#888888",
-      "brief": "",
-      "content": "md",
-      "image": "/images/blog/virus-4835301_1920.jpg",
-      "published": "2020-04-17",
-      "source": "/data/posts/2020-04-17-corona-sunny-tech-cancelled.md",
-      "title": "Sunny Tech 2020 est annulé"
-    },
-    "2021-cancelled": {
-      "backgroundColor": "#888888",
-      "brief": "",
-      "content": "md",
-      "image": "/images/blog/covid19.jpg",
-      "published": "2021-01-21",
-      "source": "/data/posts/2021-01-21-news-cancelled.md",
-      "title": "Sunny Tech 2021 est annulé"
-    },
     "2022-cfp-stats": {
       "backgroundColor": "#888888",
       "brief": "",
@@ -283,25 +276,6 @@
     {
       "members": [
         {
-          "name": "Loïc Talon",
-          "photoUrl": "/images/people/loic_talon.jpg",
-          "photo": "/images/people/loic_talon.jpg",
-          "socials": [
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/loic_talon/",
-              "name": "Twitter"
-            },
-            {
-              "icon": "linkedin",
-              "link": "https://fr.linkedin.com/in/loictalon",
-              "name": "LinkedIn"
-            }
-          ],
-          "title": "",
-          "order": 4
-        },
-        {
           "name": "Estelle Landry",
           "photoUrl": "/images/people/estelle_landry.jpg",
           "photo": "/images/people/estelle_landry.jpg",
@@ -359,20 +333,6 @@
           "order": 5
         },
         {
-          "name": "Benjamin Davy",
-          "photoUrl": "/images/people/benjamin_davy.jpeg",
-          "photo": "/images/people/benjamin_davy.jpeg",
-          "socials": [
-            {
-              "icon": "linkedin",
-              "link": "https://www.linkedin.com/in/benjamin-davy-a52a02b/",
-              "name": "LinkedIn"
-            }
-          ],
-          "title": "",
-          "order": 6
-        },
-        {
           "name": "Armandine Quinot",
           "photoUrl": "/images/people/armandine_quinot.jpg",
           "photo": "/images/people/armandine_quinot.jpg",
@@ -428,25 +388,6 @@
           ],
           "title": "",
           "order": 15
-        },
-        {
-          "name": "Sadri Gora",
-          "photoUrl": "/images/people/sadri_gora.jpg",
-          "photo": "/images/people/sadri_gora.jpg",
-          "socials": [
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/hellosadri",
-              "name": "Twitter"
-            },
-            {
-              "icon": "linkedin",
-              "link": "https://fr.linkedin.com/in/sadri-gora-360b6a83",
-              "name": "LinkedIn"
-            }
-          ],
-          "title": "",
-          "order": 11
         },
         {
           "name": "Kevin Fischer",
@@ -558,7 +499,7 @@
       "regular": false,
       "soldOut": true,
       "starts": "",
-      "url": "https://www.billetweb.fr/sunny-tech-2022"
+      "url": "https://www.billetweb.fr/sunny-tech-2023"
     },
     {
       "available": true,
@@ -571,8 +512,8 @@
       "primary": true,
       "regular": true,
       "soldOut": true,
-      "starts": "Il n'y a plus de places pour l'édition 2022",
-      "url": "https://www.billetweb.fr/sunny-tech-2022"
+      "starts": "Il n'y a plus de places pour l'édition 2023",
+      "url": "https://www.billetweb.fr/sunny-tech-2023"
     },
     {
       "available": true,
@@ -583,7 +524,7 @@
       "price": 40,
       "soldOut": true,
       "starts": "31 janvier",
-      "url": "https://www.billetweb.fr/sunny-tech-2022"
+      "url": "https://www.billetweb.fr/sunny-tech-2023"
     }
   ],
   "triggers": {

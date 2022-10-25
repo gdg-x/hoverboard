@@ -1,8 +1,10 @@
-const fs = require('fs').promises
+import fsA  from 'fs'
+const fs = fsA.promises
+
 const { Client } = require("@notionhq/client")
 
 const notion = new Client({
-  auth: process.env.notionToken,
+  auth: process.env['notionToken'],
 })
 
 const outputFile = `${__dirname}/../../data/sessions-speakers-schedule.json`
@@ -215,14 +217,19 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
     if(track && track.isAlone) {
       // Specific management is talk is track alone should have their own tab
       const realDate = new Date(talk.date).toISOString().split('T')[0]
-      const dateMonthDay = realDate.split('-')[1] + "-" + realDate.split('-')[2]
+      const dateMonthDay = realDate!.split('-')[1] + "-" + realDate!.split('-')[2]
       const separateDay = new Date(Date.parse(OUTSIDE_TRACK_DATE + dateMonthDay)).toISOString().split('T')[0]
-      acc[separateDay] = acc[separateDay] || []
-      acc[separateDay].push(talk)
+      if(separateDay){
+        acc[separateDay] = acc[separateDay] || []
+        // @ts-ignore
+        acc[separateDay].push(talk)
+      }
       return acc
     }
 
+    // @ts-ignore
     if(!acc[day]) acc[day] = []
+    // @ts-ignore
     acc[day].push(talk)
     return acc
   }, {})
@@ -233,10 +240,14 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
   const groupedSessionsByHour = Object.entries(groupedSessions).reduce((acc: any, [day, talks]: any) => {
     const groupedByHour = talks.reduce((acc: any, talk: any) => {
       try {
+        // @ts-ignore
         const startTime = new Date(talk.date).toISOString().split('T')[1].split(':')
+        // @ts-ignore
         const endTime = new Date(talk.dateEnd).toISOString().split('T')[1].split(':')
+        // @ts-ignore
         const startHour = parseInt(startTime[0]) +2
         const startMinutes = startTime[1]
+        // @ts-ignore
         const endHour = parseInt(endTime[0]) +2
         const endMinutes = endTime[1]
         const startTimeString = `${startHour < 10 ? "0"+startHour : startHour}:${startMinutes}`
@@ -333,6 +344,7 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
     if(day.startsWith(OUTSIDE_TRACK_DATE)) {
 
       const specificWeekDay = day.split('-')[day.split('-').length - 1]
+      // @ts-ignore
       const realDate = eventDays.find(eventDay => eventDay.endsWith(specificWeekDay))
 
       schedule[day] = {
@@ -371,14 +383,14 @@ const syncFromNotion = async (speakerDBId: string, proposalsDBId: string, tracks
 }
 
 const main = async () => {
-  if(!process.env.notionSpeakersId || !process.env.notionTalksId || !process.env.notionToken ||
-    !process.env.notionTracksId) {
+  if(!process.env['notionSpeakersId'] || !process.env['notionTalksId'] || !process.env['notionToken'] ||
+    !process.env['notionTracksId']) {
     console.log("Please set notionToken, notionSpeakersId and notionTalksId env variables")
     process.exit(1)
     return
   }
 
-  await syncFromNotion(process.env.notionSpeakersId, process.env.notionTalksId, process.env.notionTracksId)
+  await syncFromNotion(process.env['notionSpeakersId'], process.env['notionTalksId'], process.env['notionTracksId'])
 }
 
 main()

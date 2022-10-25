@@ -1,62 +1,44 @@
 import '@justinribeiro/lite-youtube';
-import '@polymer/paper-button';
-import { PaperDialogBehavior } from '@polymer/paper-dialog-behavior/paper-dialog-behavior';
+import '@material/mwc-button';
+import '@material/mwc-dialog';
+import { Dialog } from '@material/mwc-dialog';
+import { property, query } from '@polymer/decorators';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
-import { ReduxMixin } from '../../mixins/redux-mixin';
-import { toggleVideoDialog } from '../../store/ui/actions';
+import { RootState } from '../../store';
+import { ReduxMixin } from '../../store/mixin';
+import { closeVideoDialog } from '../../store/ui/actions';
+import { initialUiState } from '../../store/ui/state';
 import '../shared-styles';
 
-class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], PolymerElement)) {
+class VideoDialog extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="positioning">
         :host {
-          margin: 0;
-          padding: 0;
-          background: var(--primary-background-color);
+          --mdc-dialog-min-width: 80vw;
         }
 
-        .video-wrapper {
-          z-index: 6;
-          overflow: hidden;
-        }
-
-        .go-back-icon {
-          margin: 16px;
-          z-index: 7;
-          width: 40px;
-          height: 40px;
-          color: #fff;
-          opacity: 0.6;
-          background-color: #000;
-          border-radius: 50%;
-          display: block;
-          transition: opacity var(--animation);
-        }
-
-        .go-back-icon:hover {
-          opacity: 0.9;
+        @media only screen and (max-width: 600px) {
+          :host {
+            --mdc-dialog-min-width: 100vw;
+          }
         }
       </style>
 
-      <div class="toolbar">
-        <paper-icon-button
-          class="go-back-icon"
-          icon="hoverboard:close"
-          on-click="_closeSelf"
-          dialog-dismiss
-        ></paper-icon-button>
-      </div>
-      <div class="video-wrapper">
-        <lite-youtube
-          video-id="[[youtubeId]]"
-          video-title="[[title]]"
-          params="autoplay=1"
-          autoload
-        ></lite-youtube>
-      </div>
+      <mwc-dialog id="dialog" open="[[video.open]]" heading="[[video.title]]">
+        <div class="video-wrapper">
+          <lite-youtube
+            video-id="[[video.youtubeId]]"
+            video-title="[[video.title]]"
+            params="autoplay=1"
+            autoload
+          ></lite-youtube>
+        </div>
+        <mwc-button on-click="closeDialog" slot="primaryAction" dialogAction="close">
+          Close
+        </mwc-button>
+      </mwc-dialog>
     `;
   }
 
@@ -64,29 +46,23 @@ class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], Polym
     return 'video-dialog';
   }
 
-  static get properties() {
-    return {
-      title: String,
-      opened: {
-        type: Boolean,
-      },
-      youtubeId: {
-        type: String,
-      },
-      disableControls: {
-        type: Boolean,
-        value: false,
-      },
-    };
+  @query('#dialog')
+  dialog!: Dialog;
+
+  @property({ type: Object })
+  video = initialUiState.videoDialog;
+
+  override ready() {
+    super.ready();
+    this.dialog.addEventListener('closed', () => closeVideoDialog());
   }
 
-  _closeSelf() {
-    toggleVideoDialog({
-      opened: false,
-      disableControls: false,
-      youtubeId: '',
-      title: '',
-    });
+  override stateChanged(state: RootState) {
+    this.video = state.ui.videoDialog;
+  }
+
+  closeDialog() {
+    closeVideoDialog();
   }
 }
 
