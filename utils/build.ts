@@ -47,7 +47,7 @@ const getData = (): Data => {
 
 const cleanupData = (data: Data) => {
   if (!data.image.startsWith('http')) {
-    data.image = `${data.url}${data.image})`;
+    data.image = `${data.url}${data.image}`;
   }
   return data;
 };
