@@ -52,7 +52,7 @@ export const sendGeneralNotification = functions.firestore
     };
 
     if (message.path) {
-      payload.data = message.path;
+      payload.data.path = message.path;
     }
 
     const tokensToRemove = [];
