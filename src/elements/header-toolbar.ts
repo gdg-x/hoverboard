@@ -187,7 +187,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 <!--          </a>-->
         </paper-tabs>
 
-<!--        <notification-toggle></notification-toggle>-->
+        <notification-toggle></notification-toggle>
 
 <!--        <paper-menu-button-->
 <!--          class="auth-menu"-->

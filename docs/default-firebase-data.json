@@ -292,7 +292,7 @@
             }
           ],
           "title": "",
-          "order": 1
+          "order": 6
         },
         {
           "name": "Lauriane Anthony",
@@ -311,7 +311,7 @@
             }
           ],
           "title": "",
-          "order": 0
+          "order": 3
         },
         {
           "name": "François Teychene",
@@ -330,7 +330,7 @@
             }
           ],
           "title": "",
-          "order": 5
+          "order": 8
         },
         {
           "name": "Armandine Quinot",
@@ -349,7 +349,7 @@
             }
           ],
           "title": "",
-          "order": 7
+          "order": 1
         },
         {
           "name": "Clarisse Orzalesi",
@@ -387,7 +387,7 @@
             }
           ],
           "title": "",
-          "order": 15
+          "order": 5
         },
         {
           "name": "Kevin Fischer",
@@ -415,7 +415,7 @@
             }
           ],
           "title": "",
-          "order": 10
+          "order": 4
         },
         {
           "name": "Gilles Vieira",
@@ -481,7 +481,148 @@
             }
           ],
           "title": "",
-          "order": 19
+          "order": 6
+        },
+        {
+          "name": "Kalil Pelissier",
+          "photoUrl": "/images/people/kalil-pelissier.jpg",
+          "photo": "/images/people/kalil-pelissier.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/kalilp",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "github",
+              "link": "https://github.com/kalil-pelissier",
+              "name": "GitHub"
+            }
+          ],
+          "title": "",
+          "order": 20
+        },
+        {
+          "name": "Lucas Nouguier",
+          "photoUrl": "/images/people/lucas-nouguier.jpg",
+          "photo": "/images/people/lucas-nouguier.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/lucas-nouguier/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "github",
+              "link": "https://github.com/iusildra/",
+              "name": "GitHub"
+            }
+          ],
+          "title": "",
+          "order": 21
+        },
+        {
+          "name": "Malo Polese",
+          "photoUrl": "/images/people/malo-polese.jpg",
+          "photo": "/images/people/malo-polese.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/malo-polese/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "github",
+              "link": "https://github.com/MaloPolese",
+              "name": "GitHub"
+            }
+          ],
+          "title": "",
+          "order": 22
+        },
+        {
+          "name": "Alexandre Gomoez",
+          "photoUrl": "/images/people/alexandre-gomez.jpg",
+          "photo": "/images/people/alexandre-gomez.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/alexandre-gomez-29573a198/",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 23
+        },
+        {
+          "name": "Joffrey Nurit",
+          "photoUrl": "/images/people/joffrey-nurit.jpg",
+          "photo": "/images/people/joffrey-nurit.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/joffreynurit",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 2
+        },
+        {
+          "name": "Alexandra Deruy",
+          "photoUrl": "/images/people/alexandra-deruy.jpg",
+          "photo": "/images/people/alexandra-deruy.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/alexandra-deruy-22801418/",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 25
+        },
+        {
+          "name": "Karim Sayabou",
+          "photoUrl": "/images/people/karim-sayabou.jpg",
+          "photo": "/images/people/karim-sayabou.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/karim-sayabou-332227ab/",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 26
+        },
+        {
+          "name": "Mathias FLAGEY",
+          "photoUrl": "/images/people/mathias-flagey.jpg",
+          "photo": "/images/people/mathias-flagey.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/mathias-flagey/",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 27
+        },
+        {
+          "name": "Sylvain Reynaud",
+          "photoUrl": "/images/people/sylvain-reynaud.jpg",
+          "photo": "/images/people/sylvain-reynaud.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/sylvain-r/",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 28
         }
       ],
       "title": "Membres"
