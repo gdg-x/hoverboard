@@ -61,7 +61,7 @@
     "@vaadin/router": "^1.7.4",
     "firebase": "^9.13.0",
     "lit": "^2.2.7",
-    "marked": "^4.0.15",
+    "marked": "^4.1.1",
     "pwa-helpers": "^0.9.1",
     "register-service-worker": "^1.7.2",
     "web-vitals": "^2.1.4"
@@ -78,7 +78,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@types/jest": "^27.4.1",
     "@types/jest-dev-server": "^5.0.0",
-    "@types/marked": "^4.0.3",
+    "@types/marked": "^4.0.7",
     "@types/node": "^16.11.33",
     "@types/nunjucks": "^3.2.1",
     "@types/polymer": "^1.2.12",
