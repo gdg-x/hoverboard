@@ -20,7 +20,7 @@
     "fix:stylelint": "stylelint \"src/components/**/*.ts\" \"src/styles/**/*.ts\" --fix",
     "install:functions": "npm --prefix ./functions ci",
     "lint": "concurrently npm:lint:*",
-    "lint:eslint": "eslint . --ext .ts --ext .js",
+    "lint:eslint": "eslint . --ignore-pattern public --ext .ts --ext .js",
     "lint:markdownlint": "markdownlint '**/*.md'",
     "lint:prettier": "prettier --check .",
     "lint:stylelint": "stylelint \"src/components/**/*.ts\" \"src/styles/**/*.ts\"",
