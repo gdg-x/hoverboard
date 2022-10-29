@@ -37,7 +37,7 @@ expect.extend({
 export { expect };
 
 // https://github.com/facebook/jest/issues/11487
-declare module 'expect/build/types' {
+declare module 'expect' {
   interface Matchers<R> {
     toDeny: () => R;
     toAllow: () => R;
