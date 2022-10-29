@@ -59,7 +59,7 @@
     "@radi-cho/star-rating": "git+https://git@github.com/abraham/star-rating.git#polymer-3",
     "@reduxjs/toolkit": "^1.8.3",
     "@vaadin/router": "^1.7.4",
-    "firebase": "^9.7.0",
+    "firebase": "^9.13.0",
     "lit": "^2.2.7",
     "marked": "^4.0.15",
     "pwa-helpers": "^0.9.1",
@@ -67,7 +67,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@firebase/rules-unit-testing": "^2.0.2",
+    "@firebase/rules-unit-testing": "^2.0.5",
     "@jest/globals": "^27.5.1",
     "@jest/types": "^27.5.1",
     "@rollup/plugin-json": "^4.1.0",
@@ -94,8 +94,8 @@
     "eslint-plugin-jest": "^26.1.5",
     "eslint-plugin-jest-dom": "^4.0.1",
     "eslint-plugin-testing-library": "^5.3.1",
-    "firebase-admin": "^11.0.0",
-    "firebase-tools": "^11.2.0",
+    "firebase-admin": "^11.2.0",
+    "firebase-tools": "^11.15.0",
     "jest": "^27.5.1",
     "jest-dev-server": "^6.0.3",
     "markdownlint": "^0.26.0",
