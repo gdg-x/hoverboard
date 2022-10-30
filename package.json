@@ -35,7 +35,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@abraham/remotedata": "1.0.0",
+    "@abraham/remotedata": "1.2.0",
     "@justinribeiro/lite-youtube": "^1.4.0",
     "@material/mwc-button": "^0.26.1",
     "@material/mwc-dialog": "^0.26.1",
