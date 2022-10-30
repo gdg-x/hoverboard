@@ -8,8 +8,6 @@ export enum PROMPT_USER {
   NO = 'NO',
 }
 
-const messaging = getMessaging(firebaseApp);
-
 // Eslint doesn't like when using the built in type
 export type NotificationPermission = typeof Notification.permission;
 
@@ -27,8 +25,12 @@ export const requestNotificationPermission = createAsyncThunk<string | undefined
         : Notification.permission;
 
     if (permission === 'granted') {
-      const token = await getToken(messaging);
-      return token;
+      try {
+        const messaging = getMessaging(firebaseApp);
+        return await getToken(messaging);
+      } catch (error) {
+        throw new Error('unsupported');
+      }
     } else if (permission === 'default') {
       return undefined;
     } else {
