@@ -4,7 +4,7 @@
   "private": true,
   "description": "Conference website template",
   "engines": {
-    "node": "16",
+    "node": "18",
     "npm": "8"
   },
   "scripts": {
@@ -80,7 +80,7 @@
     "@types/jest": "^29.2.1",
     "@types/jest-dev-server": "^5.0.0",
     "@types/marked": "^4.0.7",
-    "@types/node": "^16.18.11",
+    "@types/node": "^18.11.18",
     "@types/nunjucks": "^3.2.1",
     "@types/polymer": "^1.2.12",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
