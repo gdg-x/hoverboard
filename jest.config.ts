@@ -12,7 +12,6 @@ const ES_MODULE_DEPENDENCIES = [
   'firebase',
   'lit',
   'pwa-helpers',
-  'testing-library__dom',
 ].join('|');
 
 const config: InitialOptionsTsJest = {
