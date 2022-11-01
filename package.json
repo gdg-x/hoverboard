@@ -41,7 +41,7 @@
     "@material/mwc-dialog": "^0.26.1",
     "@material/mwc-formfield": "^0.26.1",
     "@material/mwc-icon-button": "^0.26.1",
-    "@material/mwc-snackbar": "^0.26.1",
+    "@material/mwc-snackbar": "^0.27.0",
     "@material/mwc-switch": "^0.26.1",
     "@polymer/app-layout": "^3.1.0",
     "@polymer/decorators": "^3.0.0",
