@@ -2,12 +2,12 @@
 
 import json from '@rollup/plugin-json';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import html from '@web/rollup-plugin-html';
 import fs from 'fs';
 import copy from 'rollup-plugin-copy';
 import livereload from 'rollup-plugin-livereload';
-import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
 import { compileBufferTemplate, production } from './utils/build';
 import { workboxConfig } from './workbox.config';
