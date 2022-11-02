@@ -34,9 +34,10 @@ const getData = (): Data => {
     getConfigPath(),
   ];
   const combineSettings = (currentData: Partial<Data>, path: string) => {
+    const settingsData = JSON.parse(fs.readFileSync(path).toString());
     return {
       ...currentData,
-      ...require(path),
+      ...settingsData,
     };
   };
 
