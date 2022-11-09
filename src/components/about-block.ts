@@ -16,10 +16,13 @@ export class AboutBlock extends ThemedElement {
       css`
         .container {
           padding-top: 64px;
-          display: grid;
-          grid-gap: 32px;
-          grid-template-columns: 1fr;
         }
+
+        .content {
+            display: grid;
+            grid-gap: 32px;
+            grid-template-columns: 1fr;
+          }
 
         .statistics-block {
           width: 100%;
@@ -45,6 +48,7 @@ export class AboutBlock extends ThemedElement {
         }
 
         @media (min-width: 640px) {
+
           .content {
             grid-gap: 64px;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -65,48 +69,35 @@ export class AboutBlock extends ThemedElement {
   override render() {
     return html`
       <div class="container">
-        <div>
-          <h1 class="container-title">${aboutBlock.title}</h1>
-          <p>${aboutBlock.callToAction.featuredSessions.description}</p>
-          <a
-            href="${aboutBlock.callToAction.featuredSessions.link}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <paper-button class="animated icon-right">
-              <span class="cta-label">${aboutBlock.callToAction.featuredSessions.label}</span>
-              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-            </paper-button>
-          </a>
-
-          <p>${aboutBlock.callToAction.howItWas.description}</p>
-          <paper-button class="animated icon-right" @click="${this.playVideo}">
-            <span>${aboutBlock.callToAction.howItWas.label}</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-          </paper-button>
-        </div>
-
-        <div class="statistics-block">
-          <div class="item">
-            <div class="numbers">${aboutBlock.statisticsBlock.attendees.number}</div>
-            <div class="label">${aboutBlock.statisticsBlock.attendees.label}</div>
+        <div class="content">
+          <div>
+            <h1 class="container-title">${aboutBlock.title}</h1>
+            <p>${aboutBlock.callToAction.featuredSessions.description}</p>
+            <p>${aboutBlock.callToAction.howItWas.description}</p>
           </div>
 
-          <div class="item">
-            <div class="numbers">${aboutBlock.statisticsBlock.days.number}</div>
-            <div class="label">${aboutBlock.statisticsBlock.days.label}</div>
-          </div>
+          <div class="statistics-block">
+            <div class="item">
+              <div class="numbers">${aboutBlock.statisticsBlock.attendees.number}</div>
+              <div class="label">${aboutBlock.statisticsBlock.attendees.label}</div>
+            </div>
 
-          <div class="item">
-            <div class="numbers">${aboutBlock.statisticsBlock.sessions.number}</div>
-            <div class="label">${aboutBlock.statisticsBlock.sessions.label}</div>
-          </div>
+            <div class="item">
+              <div class="numbers">${aboutBlock.statisticsBlock.days.number}</div>
+              <div class="label">${aboutBlock.statisticsBlock.days.label}</div>
+            </div>
 
-          <div class="item">
-            <div class="numbers">${aboutBlock.statisticsBlock.tracks.number}</div>
-            <div class="label">${aboutBlock.statisticsBlock.tracks.label}</div>
+            <div class="item">
+              <div class="numbers">${aboutBlock.statisticsBlock.sessions.number}</div>
+              <div class="label">${aboutBlock.statisticsBlock.sessions.label}</div>
+            </div>
+
+            <div class="item">
+              <div class="numbers">${aboutBlock.statisticsBlock.tracks.number}</div>
+              <div class="label">${aboutBlock.statisticsBlock.tracks.label}</div>
+            </div>
           </div>
-        </div>
+        </div/>
       </div>
     `;
   }

@@ -53,11 +53,11 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
         .hero-logo {
           --lazy-image-width: 100%;
-          --lazy-image-height: 76px;
+          --lazy-image-height: 100px;
           width: var(--lazy-image-width);
           height: var(--lazy-image-height);
           max-width: 240px;
-          max-height: 76px;
+          max-height: 100px;
         }
 
         .info-items {
@@ -172,10 +172,10 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
 
           <div class="action-buttons" layout horizontal center-justified wrap>
-            <paper-button class="watch-video" on-click="playVideo">
-              <iron-icon icon="hoverboard:movie"></iron-icon>
-              [[viewHighlights]]
-            </paper-button>
+<!--            <paper-button class="watch-video" on-click="playVideo">-->
+<!--              <iron-icon icon="hoverboard:movie"></iron-icon>-->
+<!--              [[viewHighlights]]-->
+<!--            </paper-button>-->
             <paper-button on-click="scrollToTickets" primary invert>
               <iron-icon icon="hoverboard:ticket"></iron-icon>
               [[buyTicket]]
@@ -250,15 +250,13 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         <fork-me-block></fork-me-block>
       </template>
       <about-block></about-block>
-      <speakers-block></speakers-block>
-      <subscribe-block></subscribe-block>
+      <!--<speakers-block></speakers-block> -->
       <tickets-block id="tickets-block"></tickets-block>
       <gallery-block></gallery-block>
-      <about-organizer-block></about-organizer-block>
-      <featured-videos></featured-videos>
-      <latest-posts-block></latest-posts-block>
-      <map-block></map-block>
       <partners-block></partners-block>
+      <about-organizer-block></about-organizer-block>
+      <subscribe-block></subscribe-block>
+      <map-block></map-block>
       <footer-block></footer-block>
     `;
   }

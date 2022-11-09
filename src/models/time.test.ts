@@ -4,6 +4,7 @@ import { allKeys } from './utils';
 
 describe('time', () => {
   it('matches the shape of the default data', () => {
+    // @ts-ignore
     const times: Time[] = data['schedule']['2016-09-09']['timeslots'][3]!['sessions'];
     const keys: Array<keyof Time> = ['extend', 'items'];
     expect(times).toHaveLength(3);

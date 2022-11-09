@@ -4,6 +4,7 @@ import { allKeys } from './utils';
 
 describe('track', () => {
   it('matches the shape of the default data', () => {
+    // @ts-ignore
     const days: Track[] = data['schedule']['2016-09-09']['tracks'];
     const keys: Array<keyof Track> = ['title'];
     expect(days).toHaveLength(3);
