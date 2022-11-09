@@ -32,14 +32,22 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
         }
 
         .image-link {
-          width: 80%;
-          height: 80%;
+          width: 95%;
+          height: 95%;
         }
 
         .organizers-photo {
           --lazy-image-width: 100%;
           --lazy-image-height: 100%;
           --lazy-image-fit: cover;
+          width: var(--lazy-image-width);
+          height: var(--lazy-image-height);
+        }
+
+        .gdg-photo {
+          --lazy-image-width: 100%;
+          --lazy-image-height: 100%;
+          --lazy-image-fit: contain;
           width: var(--lazy-image-width);
           height: var(--lazy-image-height);
         }
@@ -54,11 +62,25 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container" layout horizontal>
-        <div layout horizontal center-center flex hidden$="[[viewport.isPhone]]">
+        <div class="evenly-distributed-children" layout vertical center-center flex hidden$="[[viewport.isPhone]]">
           <a href="/team" class="image-link">
             <lazy-image
               class="organizers-photo"
               src="[[aboutOrganizerBlock.image]]"
+              alt="Organizer"
+            ></lazy-image>
+          </a>
+          <a href="/team" class="image-link">
+            <lazy-image
+              class="gdg-photo"
+              src="/images/organizer-logo.svg"
+              alt="Organizer"
+            ></lazy-image>
+          </a>
+          <a href="https://gdsc.community.dev/polish-japanese-academy-of-information-technology/" class="image-link">
+            <lazy-image
+              class="gdg-photo"
+              src="/images/GDSC-logo.svg"
               alt="Organizer"
             ></lazy-image>
           </a>

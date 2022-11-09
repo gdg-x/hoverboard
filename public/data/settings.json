@@ -1,12 +1,16 @@
 {
   "organizer": {
     "name": "GDG Warsaw",
-    "twitter": "maybe-some-day",
-    "blog": "",
-    "url": "https://gdg.community.dev/gdg-warszawa/"
+    "fb" : "https://www.facebook.com/gdgwarszawa/",
+    "linkedin" : "https://www.linkedin.com/company/10662341/",
+    "instagram" : "https://www.instagram.com/gdgwarszawa/",
+    "yt" : "https://www.youtube.com/c/GdgWarszawaPl/featured",
+    "twitter": "https://twitter.com/dev_fest",
+    "url": "https://gdg.community.dev/gdg-warszawa/",
+    "blog" : ""
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2022-12-10T09:00:00+01:00",
+  "endDate": "2022-12-11T16:00:00+01:00",
   "webapp": {
     "shortName": "DevFest",
     "themeColor": "#673AB7",
@@ -15,8 +19,8 @@
   "dateFormat": {
     "locale": "en-US"
   },
-  "hashtag": "DevFest",
-  "disabledSchedule": false,
+  "hashtag": "DevFestWarsaw",
+  "disabledSchedule": true,
   "navigation": [
     {
       "route": "home",
@@ -37,11 +41,6 @@
       "route": "team",
       "permalink": "/team",
       "label": "Team"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog",
-      "label": "Blog"
     }
   ],
   "heroSettings": {
@@ -53,18 +52,10 @@
       },
       "fontColor": "#FFF"
     },
-    "blog": {
-      "title": "Blog",
-      "metaDescription": "Read stories from our team",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
     "speakers": {
       "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our Google Developer Experts and partners.",
+      "description": "To be announced soon",
       "background": {
         "color": "#FFF"
       },
@@ -81,6 +72,7 @@
     "schedule": {
       "title": "Schedule",
       "metaDescription": "Choose your sessions to visit",
+      "description": "To be announced soon",
       "background": {
         "color": "#fff"
       },
@@ -121,26 +113,26 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
+    "name": "Polsko-Japońska Akademia Technik Komputerowych",
     "city": "Warsaw",
     "short": "Warsaw, Poland",
-    "address": "",
+    "address": "Koszykowa 86, 02-008 Warszawa",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 52.22380,
+      "longitude": 20.99410,
       "zoom": 5
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": 52,
+      "longitude": 21
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Polsko-Japońska Akademia Technik Komputerowych"
   },
   "socialNetwork": {
     "follow": [
       {
         "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
+        "url": "https://meetup.com/GDG-Warszawa/"
       },
       {
         "name": "facebook",
@@ -148,15 +140,15 @@
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
+        "url": "https://twitter.com/dev_fest"
       },
       {
         "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": "https://www.instagram.com/gdgwarszawa/"
       },
       {
         "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://www.youtube.com/c/GdgWarszawaPl/featured"
       }
     ],
     "share": [
@@ -170,7 +162,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "contact@devfest.pl",
   "signInProviders": {
     "providersData": [
       {
@@ -194,9 +186,6 @@
     "schedule": {
       "itemsCount": 2
     },
-    "blog": {
-      "itemsCount": 3
-    },
     "speakers": {
       "itemsCount": 4
     },
@@ -204,8 +193,8 @@
       "itemsCount": 6
     },
     "tickets": {
-      "itemsCount": 5
+      "itemsCount": 3
     }
   },
-  "showForkMeBlockForProjectIds": ["gdg-warsaw-devfest22-website", "gdg-warsaw-devfest22-website"]
+  "showForkMeBlockForProjectIds": ["gdg-warsaw-devfest22-website", "gdg-warsaw-devfest22-website-development"]
 }

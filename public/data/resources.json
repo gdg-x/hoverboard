@@ -2,9 +2,9 @@
   "title": "GDG DevFest Season 2022",
   "description": "Join the community, learn new things!",
   "image": "images/social-share.jpg",
-  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "December XX, 2022",
-  "partnershipProposition": "https://bit.ly/dfua17-partners",
+  "keywords": "event, gdg, gde, devfest, google, programming, chrome, polymer, developers, web, cloud, mobile",
+  "dates": "December 10-11, 2022",
+  "partnershipProposition": "https://forms.gle/i1tWqgf1EchqoDdSA",
   "share": "Share",
   "followOur": "Follow our",
   "followUs": "Follow us",
@@ -60,7 +60,7 @@
         },
         {
           "name": "Meet the Team",
-          "url": "",
+          "url": "/team",
           "newTab": true
         }
       ]
@@ -69,23 +69,13 @@
       "title": "Explore Past DevFests",
       "links": [
         {
-          "name": "DFUA 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
+          "name": "DevFestPoland 2018",
+          "url": "https://2018.warsaw.devfest.pl",
           "newTab": true
         },
         {
-          "name": "DFUA 2014",
-          "url": "https://dfua14.web.app/",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2015",
-          "url": "https://dfua15.web.app/",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2016",
-          "url": "https://dfua16.web.app/",
+          "name": "DevFestPoland 2017",
+          "url": "https://2017.warsaw.devfest.pl",
           "newTab": true
         }
       ]
@@ -95,27 +85,27 @@
       "links": [
         {
           "name": "Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
+          "url": "",
           "newTab": true
         },
         {
           "name": "Info Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
+          "url": "",
           "newTab": true
         },
         {
           "name": "Media Kit",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
+          "url": "",
           "newTab": true
         },
         {
           "name": "Call for Papers",
-          "url": "https://drive.google.com/open?id=10tPuu_7ASM8C70SotqRqIW5Uzos9BzALilMMQPg_JvA",
+          "url": "",
           "newTab": true
         },
         {
           "name": "FAQs",
-          "url": "/faq",
+          "url": "",
           "newTab": false
         }
       ]
@@ -125,34 +115,33 @@
   "codeOfConduct": "Code of Conduct",
   "codeOfConductBlock": {
     "organization": "DevFest",
-    "form": "https://bit.ly/2RstTJ8",
+    "form": "https://forms.gle/PumADy1bgpPDocrs5",
     "contacts": [
-      "Organizer Oleh Zasadnyy, [+38 093 486 6460](tel:+380934866460), o.zasadnyy@gdg.org.ua",
-      "Organizer Sofiya Huts, [+38 093 486 1425](tel:+380934861425), s.huts@gdg.org.ua"
+      "Organizers , coc-warsaw@devfest.pl"
     ]
   },
   "aboutBlock": {
-    "title": "About",
+    "title": "What you need to know, before you ask",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Warsaw brings together world-class experts in Web and Cloud technologies to Warsaw for sessions, workshops, and showcases.",
-        "label": "Explore featured session",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "description": "GDG DevFest Warsaw brings together the world class experts in Android, Web and Cloud technologies to Warsaw for 2 days of sessions, workshops and showcases.",
+        "label": "",
+        "link": ""
       },
       "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "description": "Our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
+        "label": "",
+        "youtubeId": ""
       }
     },
     "statisticsBlock": {
       "attendees": {
         "label": "Attendees",
-        "number": "A MILION"
+        "number": "100+"
       },
       "days": {
         "label": "Days",
-        "number": "1"
+        "number": "2"
       },
       "sessions": {
         "label": "Sessions",
@@ -160,7 +149,7 @@
       },
       "tracks": {
         "label": "Tracks",
-        "number": "X"
+        "number": "3+"
       }
     }
   },
@@ -183,10 +172,10 @@
     "toast": "We will contact you soon!"
   },
   "featuredVideos": {
-    "title": "DFUA'16 featured videos",
+    "title": "GDG Warsaw featured videos",
     "callToAction": {
       "label": "See all videos",
-      "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+      "link": "https://www.youtube.com/c/GdgWarszawaPl/videos"
     }
   },
   "blog": {
@@ -206,7 +195,7 @@
     "previousYear": "Year"
   },
   "speakersBlock": {
-    "title": "Speakers",
+    "title": "Rockstar speakers",
     "callToAction": {
       "label": "View all speakers",
       "link": "/speakers"
@@ -220,11 +209,11 @@
     }
   },
   "galleryBlock": {
-    "title": "#dfua16 highlights",
-    "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
+    "title": "#DevFestWarsaw past highlights",
+    "description": "Festivals from previous years built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
     "callToAction": {
       "label": "See all photos",
-      "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
+      "link": ""
     }
   },
   "mapBlock": {
@@ -249,7 +238,7 @@
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
+    "description": "[Google Developers Group (GDG) Warsaw](https://gdg.community.dev/gdg-warszawa/) - is an open and volunteer geek community that creates exciting projects and share experience about Google technologies with a passion.<br><br>Our goal is to organize space to connect the best industry experts with an audience eager for knowledge to boost the development of IT."
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
@@ -313,7 +302,7 @@
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "description": "<a href='https://gdg.community.dev/gdg-warszawa/' target='_blank'>GDG Warsaw</a> with the support of the <a href='https://gdsc.community.dev/polish-japanese-academy-of-information-technology/' target='_blank'>PJATK GDSC</a>, an AWESOME team, sponsors, and volunteers, is proud organizer of DevFest Warsaw.",
         "callToAction": {
           "label": "Open team page",
           "link": "/team"
@@ -321,7 +310,7 @@
       },
       {
         "title": "What is a GDG?",
-        "description": "A Google Developer Group is a community of volunteers who create exciting projects and share experiences about Google technologies.",
+        "description": "GDG - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.",
         "callToAction": {
           "label": "Read more",
           "link": "https://developers.google.com/groups/",

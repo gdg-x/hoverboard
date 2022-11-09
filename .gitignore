@@ -70,3 +70,5 @@ dist/
 serviceAccount.json
 *-adminsdk-*.json
 .DS_Store
+photos_local/
+config/

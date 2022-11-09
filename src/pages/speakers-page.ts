@@ -197,6 +197,7 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
         hidden$="[[contentLoaderVisibility]]"
       ></content-loader>
 
+
       <div class="container">
         <template is="dom-repeat" items="[[speakersToRender]]" as="speaker">
           <a class="speaker card" href$="[[speakerUrl(speaker.id)]]">
@@ -252,6 +253,7 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
           </a>
         </template>
       </div>
+
 
       <previous-speakers-block></previous-speakers-block>
 

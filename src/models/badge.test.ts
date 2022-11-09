@@ -4,6 +4,7 @@ import { allKeys } from './utils';
 
 describe('badge', () => {
   it('matches the shape of the default data', () => {
+    // @ts-ignore
     const badges: Badge[] = Object.values(data['speakers']['dmytro_danylyk']['badges']);
     const keys: Array<keyof Badge> = ['description', 'link', 'name'];
     expect(badges).toHaveLength(2);
