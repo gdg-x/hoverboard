@@ -13,8 +13,8 @@
   "endDate": "2022-12-11T16:00:00+01:00",
   "webapp": {
     "shortName": "DevFest",
-    "themeColor": "#673AB7",
-    "backgroundColor": "#673AB7"
+    "themeColor": "#4285f4",
+    "backgroundColor": "#0059c1"
   },
   "dateFormat": {
     "locale": "en-US"
@@ -47,7 +47,7 @@
     "home": {
       "description": "Join the commuity, learn new things!",
       "background": {
-        "color": "#673ab7",
+        "color": "#4285f4",
         "image": "/images/backgrounds/home.jpg"
       },
       "fontColor": "#FFF"
@@ -193,7 +193,7 @@
       "itemsCount": 6
     },
     "tickets": {
-      "itemsCount": 3
+      "itemsCount": 6
     }
   },
   "showForkMeBlockForProjectIds": ["gdg-warsaw-devfest22-website", "gdg-warsaw-devfest22-website-development"]

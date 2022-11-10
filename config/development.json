@@ -1,15 +1,15 @@
 {
   "basepath": "/",
-  "url": "localhost",
+  "url": "https://gdg-warsaw-devfest22-website-development.web.app",
   "firebase": {
-	"apiKey": "AIzaSyB9bN-MUydQL2Mfhw_WdTV9fTE4Rul7daw",
-	"authDomain": "gdg-warsaw-devfest22-website.firebaseapp.com",
-	"databaseURL": "https://gdg-warsaw-devfest22-website-default-rtdb.europe-west1.firebasedatabase.app",
-	"projectId": "gdg-warsaw-devfest22-website",
-	"storageBucket": "gdg-warsaw-devfest22-website.appspot.com",
-	"messagingSenderId": "931859978342",
-	"appId": "1:931859978342:web:a9ef2b969a79784866b5a7",
-	"measurementId": "G-JVNPM05QH2"
+    "apiKey": "AIzaSyB9bN-MUydQL2Mfhw_WdTV9fTE4Rul7daw",
+    "authDomain": "gdg-warsaw-devfest22-website.firebaseapp.com",
+    "databaseURL": "https://gdg-warsaw-devfest22-website-default-rtdb.europe-west1.firebasedatabase.app",
+    "projectId": "gdg-warsaw-devfest22-website",
+    "storageBucket": "gdg-warsaw-devfest22-website.appspot.com",
+    "messagingSenderId": "931859978342",
+    "appId": "1:931859978342:web:c40172a5c27c667e66b5a7",
+    "measurementId": "G-DRHNWCC510"
   },
   "googleMapApiKey": "AIzaSyCJqlRVGIe6bfU43rga3cnK7tSXXwc7JD8"
 }
