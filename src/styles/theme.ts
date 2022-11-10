@@ -2,12 +2,12 @@ import { css } from 'lit';
 
 export const theme = css`
   :host {
-    --dark-primary-color: #512da8;
-    --default-primary-color: #673ab7;
-    --focused-color: #311b92;
-    --light-primary-color: #d1c4e9;
+    --dark-primary-color: #0059c1;
+    --default-primary-color: #4285f4;
+    --focused-color: #003a89;
+    --light-primary-color: #80b4ff;
     --text-primary-color: #fff;
-    --accent-color: #ff5252;
+    --accent-color: #ea4335;
     --primary-background-color: #fff;
     --primary-text-color: #424242;
     --secondary-text-color: #757575;
@@ -30,15 +30,15 @@ export const theme = css`
     --border-radius: 4px;
     --box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
       0 1px 3px 0 rgb(0 0 0 / 12%);
-    --box-shadow-primary-color: 0 3px 3px -2px rgb(103 58 183 / 30%),
-      0 3px 4px 0 rgb(103 58 183 / 30%), 0 1px 8px 0 rgb(103 58 183 / 30%);
-    --box-shadow-primary-color-hover: 0 1px 3px -2px rgb(103 58 183 / 40%),
-      0 4px 5px 0 rgb(103 58 183 / 40%), 0 2px 9px 0 rgb(103 58 183 / 40%);
+    --box-shadow-primary-color: 0 3px 3px -2px rgb(0 58 137 / 30%),
+      0 3px 4px 0 rgb(0 58 137 / 30%), 0 1px 8px 0 rgb(0 58 137 / 30%);
+    --box-shadow-primary-color-hover: 0 1px 3px -2px rgb(0 58 137 / 40%),
+      0 4px 5px 0 rgb(0 58 137 / 40%), 0 2px 9px 0 rgb(0 58 137 / 40%);
     --font-family: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, helvetica, arial,
       sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     --max-container-width: 1280px;
-    --primary-color-transparent: rgb(103 58 183 / 10%);
-    --primary-color-light: rgb(103 58 183 / 80%);
+    --primary-color-transparent: rgb(0 58 137 / 10%);
+    --primary-color-light: rgb(0 58 137 / 100%);
     --primary-color-white: #ede7f6;
 
     /* Labels */

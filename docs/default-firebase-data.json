@@ -175,16 +175,35 @@
         {
           "name": "Vatsal Patel",
           "photo": "",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/gdg-warsaw-devfest22-website.appspot.com/o/team-people%2FVatsal_Patel_400x400.jpg?alt=media&token=cf2f344f-e55f-4d18-8a92-c003bc8fed35",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/gdg-warsaw-devfest22-website.appspot.com/o/team-people%2FVatsal_Patel_400x400.jpg?alt=media&token=f3234c29-0742-4e22-82d1-5160845adf76",
           "socials": [
             {
               "icon": "linkedin",
               "link": "https://www.linkedin.com/in/vatsal-patel-py/",
               "name": "Linkedin"
+            },
+            {
+              "icon": "facebook",
+              "link": "https://www.instagram.com/vatsal.py/",
+              "name": "Instagram"
             }
           ],
           "order": 2,
-          "title": "keynote, sponsors&budget, support"
+          "title": "GDSC lead, keynote, event support,sponsors&budget"
+        },
+        {
+          "name": "Aleksandra Wozniak",
+          "photo": "",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/aleksandra-wozniak/",
+              "name": "Linkedin"
+            }
+          ],
+          "order": 4,
+          "title": ""
         }
       ],
       "title": "Our Team"
