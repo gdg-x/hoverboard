@@ -20,5 +20,5 @@ jobs:
           args: deploy
         env:
           # See docs/tutorials/04-deploy.md for configuring these
-          PROJECT_ID: hoverboard-master
-          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HOVERBOARD_MASTER }}
+          PROJECT_ID: gdg-warsaw-devfest22-website
+          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GDG_WARSAW_DEVFEST22_WEBSITE }}

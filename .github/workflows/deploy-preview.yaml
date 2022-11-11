@@ -16,5 +16,5 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           # See docs/tutorials/04-deploy.md for configuring these
-          projectId: hoverboard-master
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HOVERBOARD_MASTER }}'
+          projectId: gdg-warsaw-devfest22-website
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GDG_WARSAW_DEVFEST22_WEBSITE }}'
