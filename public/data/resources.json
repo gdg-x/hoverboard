@@ -62,12 +62,27 @@
           "name": "Meet the Team",
           "url": "/team",
           "newTab": true
+        },
+        {
+          "name": "PJATK GDSC",
+          "url": "https://gdsc.community.dev/polish-japanese-academy-of-information-technology/",
+          "newTab": true
+        },
+        {
+          "name": "WTM",
+          "url": "https://developers.google.com/womentechmakers",
+          "newTab": true
         }
       ]
     },
     {
       "title": "Explore Past DevFests",
       "links": [
+        {
+          "name": "DevFestPoland 2019",
+          "url": "https://2019.devfest.pl",
+          "newTab": true
+        },
         {
           "name": "DevFestPoland 2018",
           "url": "https://2018.warsaw.devfest.pl",
@@ -228,7 +243,7 @@
     "emailAddress": "Email Address",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "formTitle": "Get the latest updates, insights and news about GDG DevFest Ukraine sent to your inbox.",
+    "formTitle": "Get the latest updates, insights and news about GDG DevFest Warsaw sent to your inbox.",
     "emailRequired": "Please enter a valid email address.",
     "fieldRequired": "Field required.",
     "subscribe": "Subscribe",
@@ -238,7 +253,7 @@
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "[Google Developers Group (GDG) Warsaw](https://gdg.community.dev/gdg-warszawa/) - is an open and volunteer geek community that creates exciting projects and share experience about Google technologies with a passion.<br><br>Our goal is to organize space to connect the best industry experts with an audience eager for knowledge to boost the development of IT."
+    "description": "[Google Developers Group (GDG) Warsaw](https://gdg.community.dev/gdg-warszawa/) - is an open and volunteer geek community that creates exciting projects and share experience about Google technologies with a passion.<br><br>Our goal is to organize space to connect the best industry experts with an audience eager for knowledge to boost the development of IT.<br><br> Here is some info about GDG Warsaw in numbers to ensure that DevFest is going to be FANTASTIC:<br><ul><li>11 years organizing events</li><li>250+ events organized</li><li>3000+ community members</li><li>7 DevFests organized by Warsaw Team</li><li>5000+ events participants</li></ul>"
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
@@ -302,7 +317,7 @@
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='https://gdg.community.dev/gdg-warszawa/' target='_blank'>GDG Warsaw</a> with the support of the <a href='https://gdsc.community.dev/polish-japanese-academy-of-information-technology/' target='_blank'>PJATK GDSC</a>, an AWESOME team, sponsors, and volunteers, is proud organizer of DevFest Warsaw.",
+        "description": "<a href='https://gdg.community.dev/gdg-warszawa/' target='_blank'>GDG Warsaw</a>, with the support of the <a href='https://gdsc.community.dev/polish-japanese-academy-of-information-technology/' target='_blank'>PJATK GDSC</a>, the <a href='https://developers.google.com/womentechmakers' target='_blank'>WTM</a>, an AWESOME team, sponsors, and volunteers, is the proud organizer of DevFest Warsaw.",
         "callToAction": {
           "label": "Open team page",
           "link": "/team"

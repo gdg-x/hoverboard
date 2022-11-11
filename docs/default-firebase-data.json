@@ -170,7 +170,7 @@
             }
           ],
           "order": 1,
-          "title": "Website"
+          "title": "Website & Tickets"
         },
         {
           "name": "Vatsal Patel",
@@ -202,8 +202,22 @@
               "name": "Linkedin"
             }
           ],
-          "order": 4,
+          "order": 3,
           "title": ""
+        },
+        {
+          "name": "Stanislaw Smyl",
+          "photo": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/gdg-warsaw-devfest22-website.appspot.com/o/team-people%2Fstano.JPG?alt=media&token=2b97e360-8250-4420-a8db-53d41f803764",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/stanis%C5%82aw-smyl-a81074155/",
+              "name": "Linkedin"
+            }
+          ],
+          "order": 4,
+          "title": "Everything and nothing"
         }
       ],
       "title": "Our Team"
@@ -213,7 +227,8 @@
     {
       "available": true,
       "currency": "PLN",
-      "ends": "Nov 18",
+      "starts": " ",
+      "ends": "Dec10 & Dec11 -",
       "inDemand": true,
       "info": "First come, first serve :) 2days of workshops and lectures",
       "name": "Early Bird",
@@ -221,27 +236,14 @@
       "primary": false,
       "regular": true,
       "soldOut": false,
-      "starts": "Nov 7",
+
       "url": "https://app.evenea.pl/event/devfestwarsaw2022/"
     },
     {
       "available": true,
       "currency": "PLN",
-      "ends": "Dec 11",
-      "inDemand": false,
-      "info": "Only 1 day",
-      "name": "Regular: 1 day",
-      "price": 49,
-      "primary": false,
-      "regular": false,
-      "soldOut": false,
-      "starts": "Nov 7",
-      "url": "https://app.evenea.pl/event/devfestwarsaw2022/"
-    },
-    {
-      "available": true,
-      "currency": "PLN",
-      "ends": "Dec 11",
+      "starts": " ",
+      "ends": "Dec10 & Dec11 -",
       "inDemand": false,
       "info": "2 days with us",
       "name": "Regular: 2 days",
@@ -249,13 +251,13 @@
       "primary": true,
       "regular": true,
       "soldOut": false,
-      "starts": "Nov 7",
       "url": "https://app.evenea.pl/event/devfestwarsaw2022/"
     },
     {
       "available": true,
       "currency": "PLN",
-      "ends": "Dec 11",
+      "starts": " ",
+      "ends": "Dec10 & Dec11 -",
       "inDemand": true,
       "info": "A patron of what we create together as GDG",
       "name": "Fan+Supporter",
@@ -263,13 +265,13 @@
       "primary": false,
       "regular": false,
       "soldOut": false,
-      "starts": "Nov 7",
       "url": "https://app.evenea.pl/event/devfestwarsaw2022/"
     },
     {
       "available": true,
       "currency": "PLN",
-      "ends": "Dec 11",
+      "starts": " ",
+      "ends": "Dec10 & Dec11 -",
       "inDemand": false,
       "info": "Requires valid student ID",
       "name": "Edu",
@@ -277,13 +279,13 @@
       "primary": false,
       "regular": true,
       "soldOut": false,
-      "starts": "Nov 7",
       "url": "https://app.evenea.pl/event/devfestwarsaw2022/"
     },
     {
       "available": true,
       "currency": "PLN",
-      "ends": "Dec 11",
+      "starts": " ",
+      "ends": "Dec10 & Dec11 -",
       "inDemand": false,
       "info": "Tickets for those in need, free of charge",
       "name": "Free",
@@ -291,7 +293,6 @@
       "primary": false,
       "regular": false,
       "soldOut": false,
-      "starts": "Nov 7",
       "url": "https://app.evenea.pl/event/devfestwarsaw2022/"
     }
   ],

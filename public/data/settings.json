@@ -120,7 +120,7 @@
     "pointer": {
       "latitude": 52.22380,
       "longitude": 20.99410,
-      "zoom": 5
+      "zoom": 8
     },
     "mapCenter": {
       "latitude": 52,
@@ -136,7 +136,7 @@
       },
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.facebook.com/gdgwarszawa"
       },
       {
         "name": "twitter",
@@ -193,8 +193,8 @@
       "itemsCount": 6
     },
     "tickets": {
-      "itemsCount": 6
+      "itemsCount": 5
     }
   },
-  "showForkMeBlockForProjectIds": ["gdg-warsaw-devfest22-website", "gdg-warsaw-devfest22-website-development"]
+  "showForkMeBlockForProjectIds": ["hoverboard-master", "hoverboard-dev"]
 }
