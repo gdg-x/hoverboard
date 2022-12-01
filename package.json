@@ -61,7 +61,7 @@
     "@vaadin/router": "^1.7.4",
     "firebase": "^9.13.0",
     "lit": "^2.4.0",
-    "marked": "^4.2.0",
+    "marked": "^4.2.3",
     "pwa-helpers": "^0.9.1",
     "register-service-worker": "^1.7.2",
     "web-vitals": "^3.0.4"
