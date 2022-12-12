@@ -17,7 +17,7 @@ import { ReduxMixin } from '../store/mixin';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
-import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../utils/data';
+import { buyTicket, navigation, signIn, signOut as signOutText, title, cfpHeader, cfpLink } from '../utils/data';
 import './notification-toggle';
 import './shared-styles';
 
@@ -182,9 +182,13 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 <!--            [[signInText]]-->
 <!--          </paper-tab>-->
 
-<!--          <a href$="[[ticketUrl]]" target="_blank" rel="noopener noreferrer">-->
-<!--            <paper-button class="buy-button" primary>[[buyTicket]]</paper-button>-->
-<!--          </a>-->
+          <a href="[[ cfpLink ]]" target="_blank" rel="noopener noreferrer">
+            <paper-button class="buy-button" secondary>[[cfpHeader]]</paper-button>
+          </a>
+
+          <a href$="[[ticketUrl]]" target="_blank" rel="noopener noreferrer">
+            <paper-button class="buy-button" primary>[[buyTicket]]</paper-button>
+          </a>
         </paper-tabs>
 
         <notification-toggle></notification-toggle>
@@ -233,6 +237,8 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   private navigation = navigation;
   private signOutText = signOutText;
   private buyTicket = buyTicket;
+  private cfpHeader = cfpHeader;
+  private cfpLink = cfpLink;
 
   @property({ type: Boolean, notify: true })
   drawerOpened: boolean = false;

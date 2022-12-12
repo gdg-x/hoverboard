@@ -7,10 +7,12 @@ import '../components/about-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
 import '../elements/about-organizer-block';
+import '../elements/about-conference-block';
 import '../elements/fork-me-block';
 import '../elements/gallery-block';
 import '../elements/map-block';
 import '../elements/partners-block';
+import '../elements/subscribe-block';
 import '../elements/tickets-block';
 import { firebaseApp } from '../firebase';
 import { store } from '../store';
@@ -178,10 +180,10 @@ export class HomePage extends ReduxMixin(PolymerElement) {
                 [[viewHighlights]]
               </paper-button>
             </a>
-<!--            <paper-button on-click="scrollToTickets" primary invert>-->
-<!--              <iron-icon icon="hoverboard:ticket"></iron-icon>-->
-<!--              [[buyTicket]]-->
-<!--            </paper-button>-->
+            <paper-button on-click="scrollToTickets" primary invert>
+              <iron-icon icon="hoverboard:ticket"></iron-icon>
+              [[buyTicket]]
+            </paper-button>
           </div>
 
           <div class="scroll-down" on-click="scrollNextBlock">
@@ -252,9 +254,10 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         <fork-me-block></fork-me-block>
       </template>
       <about-block></about-block>
+      <about-conference-block></about-conference-block>
 <!--      <speakers-block></speakers-block>-->
-<!--      <subscribe-block></subscribe-block>-->
-<!--      <tickets-block id="tickets-block"></tickets-block>-->
+      <subscribe-block></subscribe-block>
+      <tickets-block id="tickets"></tickets-block>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
 <!--      <featured-videos></featured-videos>-->
@@ -287,7 +290,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   private scrollToTickets() {
-    const element = this.$['tickets-block'];
+    const element = this.$['tickets'];
     if (element) {
       scrollToElement(element);
     } else {

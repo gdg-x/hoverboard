@@ -20,7 +20,7 @@
   "buyTicket": "Achetez un billet",
   "buyTicketTopRight": "Billetterie",
   "cfpHeader": "Call For Paper",
-  "cfpLink": "https://conference-hall.io/public/event/m1kfbpSntxF3QBVUwoFY",
+  "cfpLink": "https://conference-hall.io/public/event/Jnevkv3bLyxZOyYyiWSC",
   "becomeSponsorMenu": "Devenir sponsor",
   "signIn": "Connexion",
   "signOut": "Déconnexion",
@@ -104,8 +104,8 @@
     "callToAction": {
       "featuredSessions": {
         "description": "Plusieurs conférences et ateliers en parallèle sur 2 journées, sujets transverses allant des outils, méthodologies de conception et développement logiciel jusqu’à la gestion de produit et notamment l’expérience utilisateur.",
-        "label": "Explorer",
-        "link": "Voir le programme"
+        "label": "Explorer 2022",
+        "link": "https://2022.sunny-tech.io/schedule/"
       },
       "howItWas": {
         "title": "Valeurs",
@@ -143,7 +143,7 @@
     "save": "Économisez ${discount}%"
   },
   "partnersBlock": {
-    "title": "Sponsors de l'édition 2022",
+    "title": "Sponsors de l'édition 2023",
     "button": "Devenez sponsor !",
     "form": {
       "title": "Devenez sponsor !",
@@ -315,35 +315,39 @@
     "description2": "Notre CFP est désormais ouvert",
     "description3": "Nous avons hâte de recevoir vos propositions !",
     "action": "Accéder au CFP",
-    "url": "https://conference-hall.io/public/event/m1kfbpSntxF3QBVUwoFY",
+    "url": "https://conference-hall.io/public/event/Jnevkv3bLyxZOyYyiWSC",
     "categories": [
       {
       "title": "Cloud & Devops",
       "icon":"/images/icons/bubble1.svg"
       },
       {
-      "title": "Data",
+      "title": "BigData & IA",
       "icon":"/images/icons/bubble2.svg"
       },
       {
-      "title": "Methodologies",
+      "title": "Architecture",
       "icon":"/images/icons/bubble3.svg"
       },
       {
-      "title": "Web & Mobile & UI",
+      "title": "Mobile / IoT",
       "icon":"/images/icons/bubble4.svg"
-      },
-      {
-      "title": "Backend",
-      "icon":"/images/icons/bubble4.svg"
-      },
-      {
-      "title": "Architecture",
-      "icon":"/images/icons/bubble5.svg"
       },
       {
       "title": "Atypique",
+      "icon":"/images/icons/bubble4.svg"
+      },
+      {
+      "title": "Frontend",
+      "icon":"/images/icons/bubble5.svg"
+      },
+      {
+      "title": "Conception",
       "icon":"/images/icons/bubble6.svg"
+      },
+      {
+      "title": "Sécurité",
+      "icon":"/images/icons/bubble1.svg"
       }
     ]
   },

@@ -50,24 +50,13 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
 
           .description {
             font-size: 32px;
-            margin: 0 0 24px;
             text-align: center;
           }
         }
       </style>
 
       <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
-        <div class="description">[[subscribeBlock.callToAction.description]]</div>
-        <div class="cta-button">
-          <paper-button
-            class="animated icon-right"
-            disabled$="[[subscribed.data]]"
-            on-click="subscribe"
-          >
-            <span class="cta-label">[[ctaLabel]]</span>
-            <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>
-          </paper-button>
-        </div>
+        <div class="description">Un petit séparateur pour faire jolie</div>
       </div>
     `;
   }

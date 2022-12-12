@@ -38,6 +38,8 @@ import {
   offlineMessage,
   signInProviders,
   title,
+  cfpHeader,
+  cfpLink
 } from './utils/data';
 import './utils/icons';
 import './utils/media-query';
@@ -186,13 +188,12 @@ export class HoverboardApp extends PolymerElement {
                 center
               >
                 <span>[[buyTicket]]</span>
-                <iron-icon icon="hoverboard:open-in-new"></iron-icon>
+                <iron-icon icon="hoverboard:open-in-new" primary></iron-icon>
               </a>
 
-<!--              <a href="{$ cfpLink $}" target="_blank" rel="noopener noreferrer" ga-on="click"-->
-<!--                 ga-event-category="cfp button" ga-event-action="cfp_click" on-tap="closeDrawer">-->
-<!--                <paper-button class="buy-button" primary>{$ cfpHeader $}</paper-button>-->
-<!--              </a>-->
+              <a href="[[ cfpLink ]]" target="_blank" rel="noopener noreferrer" on-tap="closeDrawer">
+                <paper-button class="buy-button" >[[ cfpHeader ]]</paper-button>
+              </a>
 
             </div>
           </div>
@@ -221,6 +222,8 @@ export class HoverboardApp extends PolymerElement {
   private buyTicket = buyTicket;
   private navigation = navigation;
   private shortLocation = location.short;
+  private cfpLink = cfpLink;
+  private cfpHeader = cfpHeader;
 
   @query('#drawer')
   drawer!: AppDrawerElement;
