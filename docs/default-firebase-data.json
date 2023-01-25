@@ -103,6 +103,13 @@
           "logoUrl": "../images/logos/kaliop.png",
           "name": "Kaliop",
           "url": "https://www.kaliop.com/fr"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/septeo.png",
+          "name": "Septeo",
+          "url": "https://www.septeo.com/"
         }
       ],
       "order": 1,
@@ -137,6 +144,13 @@
           "logoUrl": "../images/logos/agysoft.jpeg",
           "name": "Agysoft",
           "url": "https://www.agysoft.fr"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/flint.png",
+          "name": "Flint",
+          "url": "https://www.flint.sh/fr/home"
         }
       ],
       "order": 2,
