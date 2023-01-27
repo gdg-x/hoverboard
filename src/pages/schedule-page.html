@@ -97,10 +97,10 @@
       </content-loader>
 
       <iron-pages attr-for-selected="name" selected="[[subRoute]]" selected-attribute="active">
-        <template is="dom-if" if="[[_isEqualTo(subRoute, '2020-10-08')]]">
-          <h2 class="iron-selected">Be part of our 2020 schedule!</h2>
+        <template is="dom-if" if="[[_isEqualTo(subRoute, '2023-10-12')]]">
+          <h2 class="iron-selected">Be part of our 2023 schedule!</h2>
           <div class="action-buttons iron-selected" layout horizontal left-justified wrap>
-            <a href="https://www.papercall.io/libertyjs-2020" target="_blank">
+            <a href="https://www.papercall.io/libertyjs-2023" target="_blank">
               <paper-button primary>
                 Call For Speakers
               </paper-button>
@@ -110,7 +110,7 @@
         </template>
         <template is="dom-repeat" items="[[schedule]]" as="obj">
           <template is="dom-repeat" items="[[obj.schedule]]" as="day">
-            <template is="dom-if" if="[[!_isEqualTo(subRoute, '2020-10-08')]]">
+            <template is="dom-if" if="[[!_isEqualTo(subRoute, '2023-10-12')]]">
               <schedule-day name$="[[day.date]]" day="[[day]]" user="[[user]]" featured-sessions="[[featuredSessions]]"
                 selected-filters="[[_selectedFilters]]" viewport="[[viewport]]" query-params="[[queryParams]]">
               </schedule-day>
