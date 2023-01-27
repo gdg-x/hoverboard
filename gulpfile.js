@@ -160,6 +160,7 @@ function deploy() {
   for (let file of config.templateData) {
     metadata = Object.assign({}, metadata, require(path.join(process.cwd(), file)));
   }
+  // eslint-disable-next-line max-len
   return run(`firebase use ${metadata.firebase.projectId} && firebase deploy --only hosting`).exec();
 }
 
