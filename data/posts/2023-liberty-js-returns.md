@@ -4,4 +4,6 @@ We want to throw the best conference for our community and have decided to wait 
 
 We are happy to announce that we have secured dates with our venue for October 12th and 13th of 2023. Your health and safety plus the spirit of an in-person experience is of the utmost importance to us. We can't wait to hear all about your new challenges, new tech stacks, and successes over the last few years.
 
+We are now accepting Speaker candidates through papercall. [Click here to submit](https://www.papercall.io/libertyjs-2023)
+
 If you are interested in sponsoring the next LibertyJS to help us put on the best event yet, please reach out to [info@libertyjs.com](mailto:nfo@libertyjs.com). As we did in 2020, we will offer all sponsors a full refund should the event date change.
