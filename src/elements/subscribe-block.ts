@@ -56,7 +56,7 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
-        <div class="description">Un petit séparateur pour faire jolie</div>
+        <div class="description">Un petit séparateur pour faire joli</div>
       </div>
     `;
   }
