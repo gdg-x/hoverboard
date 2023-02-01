@@ -72,7 +72,7 @@
     "@jest/types": "^29.2.1",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-terser": "^0.1.0",
+    "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^11.0.0",
     "@stylelint/postcss-css-in-js": "^0.38.0",
     "@testing-library/dom": "^8.20.0",
