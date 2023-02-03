@@ -4,4 +4,4 @@ Your health and safety plus the spirit of an in-person experience is of the utmo
 
 We are now accepting Speaker candidates through papercall. [Click here to submit](https://www.papercall.io/libertyjs-2023)
 
-If you are interested in sponsoring the next LibertyJS to help us put on the best event yet, please reach out to [info@libertyjs.com](mailto:nfo@libertyjs.com). As we did in 2020, we will offer all sponsors a full refund should the event date change.
+If you are interested in sponsoring the next LibertyJS to help us put on the best event yet, please reach out to [info@libertyjs.com](mailto:info@libertyjs.com). As we did in 2020, we will offer all sponsors a full refund should the event date change.
