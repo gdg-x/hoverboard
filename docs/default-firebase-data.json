@@ -578,7 +578,7 @@
   ],
   "tickets": [
     {
-      "available": false,
+      "available": true,
       "currency": "€",
       "ends": "",
       "inDemand": false,
@@ -586,7 +586,7 @@
       "name": "Early Bird",
       "price": 60,
       "regular": false,
-      "soldOut": false,
+      "soldOut": true,
       "starts": "mardi 13 déc. 2022 à 10h",
       "url": "https://www.billetweb.fr/sunny-tech-2023"
     },
@@ -611,7 +611,7 @@
       "info": "Requiert une carte étudiante",
       "name": "Étudiant",
       "price": 40,
-      "soldOut": false,
+      "soldOut": true,
       "starts": "30 janvier 2023",
       "url": "https://www.billetweb.fr/sunny-tech-2023"
     }
