@@ -110,6 +110,20 @@
           "logoUrl": "../images/logos/septeo.png",
           "name": "Septeo",
           "url": "https://www.septeo.com/"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/slb.png",
+          "name": "SLB",
+          "url": "https://www.slb.com"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/teads.png",
+          "name": "Teads",
+          "url": "https://www.teads.com"
         }
       ],
       "order": 1,
@@ -164,6 +178,12 @@
           "logoUrl": "../images/logos/sopra-steria.png",
           "name": "Sopra Steria",
           "url": "https://www.soprasteria.com/"
+        }, {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/vitrinemedia.png",
+          "name": "Vitrine Media",
+          "url": "https://www.vitrinemedia.com/fr/fr/"
         }
       ],
       "order": 3,
