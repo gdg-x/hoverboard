@@ -69,6 +69,13 @@
           "logoUrl": "../images/logos/laposte.png",
           "name": "La Poste",
           "url": "https://www.laposte.fr"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/ovhcloud.svg",
+          "name": "OVH Cloud",
+          "url": "https://www.ovhcloud.com/fr/"
         }
       ],
       "order": 0,
@@ -165,6 +172,13 @@
           "logoUrl": "../images/logos/flint.png",
           "name": "Flint",
           "url": "https://www.flint.sh/fr/home"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/codein.png",
+          "name": "Codéin",
+          "url": "https://www.codein.fr/"
         }
       ],
       "order": 2,
@@ -178,12 +192,20 @@
           "logoUrl": "../images/logos/sopra-steria.png",
           "name": "Sopra Steria",
           "url": "https://www.soprasteria.com/"
-        }, {
+        },
+        {
           "order": 0,
           "height": 60,
           "logoUrl": "../images/logos/vitrinemedia.png",
           "name": "Vitrine Media",
           "url": "https://www.vitrinemedia.com/fr/fr/"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/rakuten-xd.png",
+          "name": "Rakuten DX",
+          "url": "https://rakuten-dx.com/"
         }
       ],
       "order": 3,
@@ -231,6 +253,13 @@
           "logoUrl": "../images/logos/montpellier3m.png",
           "name": "Montpellier Méditerranée Métropole",
           "url": "https://www.montpellier3m.fr/"
+        },
+        {
+          "order": 3,
+          "height": 100,
+          "logoUrl": "../images/logos/lyonjs.webp",
+          "name": "LyonJs",
+          "url": "https://lyonjs.org/"
         }
       ],
       "order": 5,
