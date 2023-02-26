@@ -8,7 +8,7 @@
   "startDate": "2021-03-133T08:00:00+05:00",
   "endDate": "2021-03-13T19:20:00+05:00",
   "webapp": {
-    "shortName": "IWD LATAM 2023",
+    "shortName": "IWD LATAM 2023", 
     "themeColor": "#FFF2EC",
     "backgroundColor": "#FFF2EC"
   },
