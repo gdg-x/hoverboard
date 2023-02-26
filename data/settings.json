@@ -1,6 +1,6 @@
 {
   "organizer": {
-    "name": "IWD WTM LATAM 2022",
+    "name": "IWD WTM LATAM 2023",
     "twitter": "https://twitter.com/LatamLeads",
     "blog": "",
     "url": "https://gdg.community.dev/events/details/google-gdg-cloud-lima-presents-international-womens-day/"
@@ -8,7 +8,7 @@
   "startDate": "2021-03-133T08:00:00+05:00",
   "endDate": "2021-03-13T19:20:00+05:00",
   "webapp": {
-    "shortName": "IWD LATAM 2022",
+    "shortName": "IWD LATAM 2023",
     "themeColor": "#FFF2EC",
     "backgroundColor": "#FFF2EC"
   },
