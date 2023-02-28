@@ -179,6 +179,13 @@
           "logoUrl": "../images/logos/codein.png",
           "name": "Codéin",
           "url": "https://www.codein.fr/"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/inside.png",
+          "name": "Inside",
+          "url": "https://www.insidegroup.fr/"
         }
       ],
       "order": 2,
@@ -219,6 +226,12 @@
           "logoUrl": "../images/logos/klanik.png",
           "name": "Klanik",
           "url": "https://www.klanik.com/"
+        },{
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/meritis.png",
+          "name": "Meritis",
+          "url": "https://meritis.fr/"
         }
       ],
       "order": 4,
