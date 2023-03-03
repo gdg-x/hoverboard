@@ -81,11 +81,11 @@
           "url": "/faq/",
           "newTab": false
         },
-        // {
-        //   "name": "Transfer your ticket",
-        //   "url": "https://libertyjs.ticketspice.com/libertyjs-2023/transfer",
-        //   "newTab": false
-        // },
+        {
+          "name": "Transfer your ticket",
+          "url": "https://libertyjs.ticketspice.com/libertyjs-2023/transfer",
+          "newTab": false
+        },
         {
           "name": "Refunds",
           "url": "/faq/#refunds",
