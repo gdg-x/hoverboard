@@ -83,7 +83,7 @@
         },
         {
           "name": "Transfer your ticket",
-          "url": "https://libertyjs.ticketspice.com/libertyjs-2020-attendee/transfer",
+          "url": "https://libertyjs.ticketspice.com/libertyjs-2023/transfer",
           "newTab": false
         },
         {
@@ -125,7 +125,7 @@
       },
       "tracks": {
         "label": "Tracks",
-        "number": "3"
+        "number": "2"
       }
     }
   },
