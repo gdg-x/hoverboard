@@ -76,6 +76,13 @@
           "logoUrl": "../images/logos/ovhcloud.svg",
           "name": "OVH Cloud",
           "url": "https://www.ovhcloud.com/fr/"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/digitre.png",
+          "name": "Digit RE",
+          "url": "https://www.digitregroup.com/"
         }
       ],
       "order": 0,
@@ -213,6 +220,13 @@
           "logoUrl": "../images/logos/rakuten-xd.png",
           "name": "Rakuten DX",
           "url": "https://rakuten-dx.com/"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/synanto.svg",
+          "name": "Synanto",
+          "url": "https://synanto.fr/"
         }
       ],
       "order": 3,
@@ -232,10 +246,16 @@
           "logoUrl": "../images/logos/meritis.png",
           "name": "Meritis",
           "url": "https://meritis.fr/"
+        },{
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/monkeypatch.png",
+          "name": "MonkeyPatch",
+          "url": "https://www.monkeypatch.io/"
         }
       ],
       "order": 4,
-      "title": "Soirées"
+      "title": "Soirées & détente"
     },
     {
       "items": [
