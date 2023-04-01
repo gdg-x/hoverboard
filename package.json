@@ -64,7 +64,7 @@
     "marked": "^4.2.12",
     "pwa-helpers": "^0.9.1",
     "register-service-worker": "^1.7.2",
-    "web-vitals": "^3.1.1"
+    "web-vitals": "^3.3.0"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^2.0.7",
