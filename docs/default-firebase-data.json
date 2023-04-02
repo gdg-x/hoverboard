@@ -653,6 +653,20 @@
           ],
           "title": "",
           "order": 28
+        },
+        {
+          "name": "Martin Bonin",
+          "photoUrl": "/images/people/martin_bonin.jpg",
+          "photo": "/images/people/martin_bonin.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/martinbonnin",
+              "name": "Twitter"
+            }
+          ],
+          "title": "",
+          "order": 29
         }
       ],
       "title": "Membres"
@@ -669,21 +683,21 @@
       "price": 60,
       "regular": false,
       "soldOut": true,
-      "starts": "mardi 13 déc. 2022 à 10h",
+      "starts": "",
       "url": "https://www.billetweb.fr/sunny-tech-2023"
     },
     {
-      "available": false,
+      "available": true,
       "currency": "€",
       "ends": "",
       "inDemand": true,
       "name": "Regular",
-      "info": "Prochaine vente en mars",
+      "info": "Sold out",
       "price": 90,
       "primary": true,
       "regular": true,
-      "soldOut": false,
-      "starts": "30 janvier 2023",
+      "soldOut": true,
+      "starts": "",
       "url": "https://www.billetweb.fr/sunny-tech-2023"
     },
     {
@@ -694,7 +708,7 @@
       "name": "Étudiant",
       "price": 40,
       "soldOut": true,
-      "starts": "30 janvier 2023",
+      "starts": "",
       "url": "https://www.billetweb.fr/sunny-tech-2023"
     }
   ],
