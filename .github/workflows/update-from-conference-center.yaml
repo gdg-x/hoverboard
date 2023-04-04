@@ -15,8 +15,9 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
-          node-version-file: .nvmrc
+          node-version-file: scripts/conference-center-scripts/.nvmrc
           cache: 'npm'
+          cache-dependency-path: scripts/conference-center-scripts/package-lock.json
       - run: pwd
       - run: npm ci --ignore-scripts
       - run: npm run import
