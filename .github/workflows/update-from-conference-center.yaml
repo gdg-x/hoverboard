@@ -1,0 +1,22 @@
+name: Update Firestore Session Speakers Schedule when asked gently by ConferenceCenter
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [conferencecenter]
+
+jobs:
+  update-firestore-session-speakers-schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+          cache: 'npm'
+      - run: cd scripts/conference-center-scripts && pwd
+      - run: npm ci --ignore-scripts
+      - run: npm run import
+        env:
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUNNYTECHWEBSITE_FIRESTORE }}'
+          githubWebhookPayload: '${{ github.event.client_payload.message }}'
