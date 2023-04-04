@@ -10,11 +10,12 @@ if (!process.env.firebaseServiceAccount.startsWith("{")) {
 }
 
 const serviceAccount = JSON.parse(process.env.firebaseServiceAccount)
+
 const credential = admin.credential.cert(serviceAccount as ServiceAccount)
 admin.initializeApp({ credential })
 const firestore = admin.firestore()
 
-const fileName = `${__dirname}/../../data/sessions-speakers-schedule.json`
+const fileName = `${__dirname}/../../docs/sessions-speakers-schedule.json`
 const rawFileContent = fs.readFileSync(fileName, 'utf8')
 const fileContent = JSON.parse(rawFileContent)
 
