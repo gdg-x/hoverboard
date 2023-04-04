@@ -8,6 +8,7 @@ if (!process.env.firebaseServiceAccount.startsWith("{")) {
   throw new Error("firebaseServiceAccount should be a JSON string")
 }
 
+console.log(process.env.githubWebhookPayload)
 if (!process.env.githubWebhookPayload || !process.env.githubWebhookPayload.startsWith("{")) {
   throw new Error("githubWebhookPayload env missing or not a JSON")
 }
