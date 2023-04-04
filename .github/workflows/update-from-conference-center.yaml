@@ -18,7 +18,9 @@ jobs:
           node-version-file: scripts/conference-center-scripts/.nvmrc
           cache: 'npm'
           cache-dependency-path: scripts/conference-center-scripts/package-lock.json
-      - run: pwd
+      - env:
+          MESSAGE: ${{ github.event.client_payload.message }}
+        run: echo $MESSAGE
       - run: npm ci --ignore-scripts
       - run: npm run import
         env:
