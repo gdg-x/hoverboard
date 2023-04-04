@@ -7,9 +7,11 @@ on:
 jobs:
   update-firestore-session-speakers-schedule:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./scripts/conference-center-scripts && pwd
     steps:
       - uses: actions/checkout@v3
-      - run: cd scripts/conference-center-scripts && pwd
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
