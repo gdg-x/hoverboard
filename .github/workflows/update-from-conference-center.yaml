@@ -23,4 +23,4 @@ jobs:
       - run: npm run import
         env:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUNNYTECHWEBSITE_FIRESTORE }}'
-          githubWebhookPayload: '${{ github.event.client_payload }}'
+          githubWebhookPayload: '${{ github.event.client_payload.message }}'
