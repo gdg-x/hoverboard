@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: cd scripts/conference-center-scripts && pwd
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
           cache: 'npm'
-      - run: cd scripts/conference-center-scripts && pwd
       - run: npm ci --ignore-scripts
       - run: npm run import
         env:
