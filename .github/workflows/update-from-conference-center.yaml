@@ -19,10 +19,10 @@ jobs:
           cache: 'npm'
           cache-dependency-path: scripts/conference-center-scripts/package-lock.json
       - env:
-          MESSAGE: ${{ github.event.client_payload.message }}
+          MESSAGE: ${{ toJSON(github.event.client_payload) }}
         run: echo $MESSAGE
       - run: npm ci --ignore-scripts
       - run: npm run import
         env:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUNNYTECHWEBSITE_FIRESTORE }}
-          githubWebhookPayload: ${{ github.event.client_payload.message }}
+          githubWebhookPayload: ${{ toJSON(github.event.client_payload) }}
