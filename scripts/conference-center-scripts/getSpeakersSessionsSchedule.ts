@@ -1,28 +1,22 @@
 /* eslint-disable */
-import fsA  from 'fs'
+import fsA from 'fs'
+import {Session, Speaker, Event, Track} from './types'
+
 const fs = fsA.promises
 
-const outputFile = `${__dirname}/../../docs/sessions-speakers-schedule.json`
+const outputFile = `${__dirname}/sessions-speakers-schedule.json`
 
 const getSocialHandle = (social: string | null) => {
-  if(!social) return null
-  if(social.includes("@") || !social.startsWith("http")) return social.replace('@', '')
+  if (!social) return null
+  if (social.includes("@") || !social.startsWith("http")) return social.replace('@', '')
 
   return social.split('/').pop()
 }
 
-type Track = {
-  id: string
-  name: string
-  order: number
-}
+export const getSpeakersSessionsSchedule = async (payload: { event: Event, speakers: Speaker[], sessions: Session[] }): Promise<{}> => {
+  const {event, speakers, sessions} = payload
 
-const sync = async (url: string) => {
-  console.log('Getting data')
-
-  const { event, speakers, sessions } = await fetch(url).then(r => r.json())
-
-  const tracks: Track[] = event.tracks.map((t:Track, index: boolean) => ({
+  const tracks: Track[] = event.tracks.map((t: Track, index: number) => ({
     ...t,
     order: index
   }))
@@ -45,7 +39,7 @@ const sync = async (url: string) => {
       title: track.name,
     }
   })
-  console.log('Getting data done!')
+  console.log(`Received ${speakers.length} speakers, ${sessions} sessions for event named ${event.name}`)
 
   console.log('Formatting output data')
   const outputSpeakers = speakers.reduce((acc: any, speaker: any) => {
@@ -58,15 +52,15 @@ const sync = async (url: string) => {
       photoUrl: speaker.photoUrl,
       shortBio: speaker?.bio?.slice(0, 100) + "...",
       title: speaker.jobTitle || "",
-      socials: speaker.socials.map((social: {icon: string, name: string, link: string}) => {
-        if(social.icon === "twitter") {
-          return({
+      socials: speaker.socials.map((social: { icon: string, name: string, link: string }) => {
+        if (social.icon === "twitter") {
+          return ({
             name: 'Twitter',
             icon: "twitter",
             link: `https://twitter.com/${getSocialHandle(social.link)}`
           })
         }
-        if(social.icon === "github") {
+        if (social.icon === "github") {
           return ({
             name: 'Github',
             icon: "github",
@@ -92,7 +86,7 @@ const sync = async (url: string) => {
       presentation: talk.presentationLink,
       videoId: talk.videoLink || null,
       image: talk.image || null,
-      hideInFeedback : !talk.showInFeedback,
+      hideInFeedback: !talk.showInFeedback,
       hideTrackTitle: talk.hideTrackTitle,
     }
     return acc
@@ -136,7 +130,7 @@ const sync = async (url: string) => {
   // 2. Group by weekday
   console.log('Grouping sessions')
   const groupedSessions = sortedSessions.reduce<Record<string, object[]>>((acc, talk: any) => {
-    if(!talk.dateStart) {
+    if (!talk.dateStart) {
       acc[""] = acc[""] || []
       acc[""].push(talk)
       return acc
@@ -144,7 +138,7 @@ const sync = async (url: string) => {
     const day = new Date(talk.dateStart).toISOString().split('T')[0]
 
     // @ts-ignore
-    if(!acc[day]) acc[day] = []
+    if (!acc[day]) acc[day] = []
     // @ts-ignore
     acc[day].push(talk)
     return acc
@@ -160,14 +154,14 @@ const sync = async (url: string) => {
         // @ts-ignore
         const endTime = new Date(talk.dateEnd).toISOString().split('T')[1].split(':')
         // @ts-ignore
-        const startHour = parseInt(startTime[0]) +2
+        const startHour = parseInt(startTime[0]) + 2
         const startMinutes = startTime[1]
         // @ts-ignore
-        const endHour = parseInt(endTime[0]) +2
+        const endHour = parseInt(endTime[0]) + 2
         const endMinutes = endTime[1]
-        const startTimeString = `${startHour < 10 ? "0"+startHour : startHour}:${startMinutes}`
+        const startTimeString = `${startHour < 10 ? "0" + startHour : startHour}:${startMinutes}`
         const endTimeString = `${endHour < 10 ? "0" + endHour : endHour}:${endMinutes}`
-        if(!acc[startTimeString]) acc[startTimeString] = {
+        if (!acc[startTimeString]) acc[startTimeString] = {
           startTime: startTimeString,
           endTime: endTimeString,
           sessions: []
@@ -179,11 +173,11 @@ const sync = async (url: string) => {
             id: string,
             trackIndex: number
           }[],
-          extend ?: number
+          extend?: number
         }
-        const track = talk.track ||  null
+        const track = talk.track || null
         let trackIndex = tracks.length
-        if(track) {
+        if (track) {
           const trackObject = tracksById[track]
           trackIndex = parseInt(trackObject.order)
         }
@@ -194,8 +188,8 @@ const sync = async (url: string) => {
             trackIndex
           }]
         }
-        if(talk.extendHeight) {
-          items.extend =  parseInt(talk.extendHeight)
+        if (talk.extendHeight) {
+          items.extend = parseInt(talk.extendHeight)
         }
         acc[startTimeString].sessions.push(items)
 
@@ -219,10 +213,10 @@ const sync = async (url: string) => {
           }
 
           // If the first session item is "hideTrackTitle" = not a talk, we remove the empty array to take full width
-          if(session.items[0] && session.items[0].extendWidth) {
+          if (session.items[0] && session.items[0].extendWidth) {
             tracks.forEach((track: any) => {
               const extendWidth = parseInt(session.items[0].extendWidth)
-              if(track.order > 1 && track.order <= extendWidth ){
+              if (track.order > 1 && track.order <= extendWidth) {
                 delete acc[track.order]
               }
             })
@@ -230,9 +224,9 @@ const sync = async (url: string) => {
 
           return acc
         }, tracks.reduce((acc: any, track: any) => {
-            acc[track.order] = {
-              items: [],
-            }
+          acc[track.order] = {
+            items: [],
+          }
           return acc
         }, {})))
 
@@ -241,18 +235,18 @@ const sync = async (url: string) => {
           sessions: sessions
         }
 
-    })
+      })
     return acc
   }, {})
   // console.log(JSON.stringify(groupedSessionsByHour, null, 4))
   // 4. Merge as schedule format
   console.log('Merging sessions')
-  const dateFormat = { weekday: 'long', month: 'long', day: 'numeric' };
+  const dateFormat = {weekday: 'long', month: 'long', day: 'numeric'}
   Object.keys(groupedSessionsByHour).forEach(day => {
     schedule[day] = {
       date: day,
       // @ts-ignore
-      dateReadable:  new Date(Date.parse(day)).toLocaleDateString('fr-FR', dateFormat),
+      dateReadable: new Date(Date.parse(day)).toLocaleDateString('fr-FR', dateFormat),
       timeslots: groupedSessionsByHour[day],
       tracks: tracksAsSchedule,
     }
@@ -262,16 +256,15 @@ const sync = async (url: string) => {
 
   console.log("Formatting output data done!")
 
-  await fs.writeFile(outputFile, JSON.stringify({
+  const fileContent = {
     speakers: outputSpeakers,
     sessions: outputSessions,
     schedule: schedule
-  }, null, 4))
+  }
+
+
+  await fs.writeFile(outputFile, JSON.stringify(fileContent, null, 4))
   console.log("File saved to " + outputFile)
-}
 
-const main = async () => {
-  await sync('https://storage.googleapis.com/conferencecenterr.appspot.com/events/OfUYehqt8TDNXAhKRObU/6743065c-2241-478c-9021-9e7f523359de.json?t='+Date.now())
+  return fileContent
 }
-
-main()
