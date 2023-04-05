@@ -20,6 +20,8 @@ const credential = admin.credential.cert(serviceAccount as ServiceAccount)
 admin.initializeApp({credential})
 const firestore = admin.firestore()
 
+firestore.settings({ ignoreUndefinedProperties: true })
+
 export const importSpeakers = (data: any) => {
   const speakers: { [key: string]: object } = data.speakers
   if (!Object.keys(speakers).length) {

@@ -46,7 +46,7 @@ export const getSpeakersSessionsSchedule = async (payload: { event: Event, speak
       title: track.name,
     }
   })
-  console.log(`Received ${speakers.length} speakers, ${sessions} sessions for event named ${event.name}`)
+  console.log(`Received ${speakers.length} speakers, ${sessions.length} sessions for event named ${event.name}`)
 
   console.log('Formatting output data')
   const outputSpeakers = speakers.reduce((acc: any, speaker: any) => {
@@ -268,7 +268,6 @@ export const getSpeakersSessionsSchedule = async (payload: { event: Event, speak
     sessions: outputSessions,
     schedule: schedule
   }
-
 
   await fs.writeFile(outputFile, JSON.stringify(fileContent, null, 4))
   console.log("File saved to " + outputFile)
