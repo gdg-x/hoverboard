@@ -1,6 +1,6 @@
 // @ts-nocheck
 import admin, {firestore as firestoreDep, ServiceAccount} from 'firebase-admin'
-import {getSpeakersSessionsSchedule} from './getSpeakersSessionsSchedule'
+import {getSpeakersSessionsSchedule, getSpeakersSessionsScheduleFromUrl} from './getSpeakersSessionsSchedule'
 
 if (!process.env.firebaseServiceAccount) {
   throw new Error("firebaseServiceAccount is not defined")
@@ -9,17 +9,16 @@ if (!process.env.firebaseServiceAccount.startsWith("{")) {
   throw new Error("firebaseServiceAccount should be a JSON string")
 }
 
-if (!process.env.githubWebhookPayload || !process.env.githubWebhookPayload.startsWith("{")) {
-  throw new Error("githubWebhookPayload env missing or not a JSON")
+if (!process.env.payloadUrl || !process.env.payloadUrl.startsWith("https")) {
+  throw new Error("githubWebhookPayload env missing or not a URL")
 }
 
 const serviceAccount = JSON.parse(process.env.firebaseServiceAccount)
+const url = process.env.payloadUrl
 
 const credential = admin.credential.cert(serviceAccount as ServiceAccount)
 admin.initializeApp({credential})
 const firestore = admin.firestore()
-
-const fileContent = JSON.parse(process.env.githubWebhookPayload)
 
 export const importSpeakers = (data: any) => {
   const speakers: { [key: string]: object } = data.speakers
@@ -115,7 +114,7 @@ const cleanupScheduleSessionSpeakers = async () => {
   console.log('Cleanup done')
 }
 
-getSpeakersSessionsSchedule(fileContent)
+getSpeakersSessionsScheduleFromUrl(url)
   .then(async (data) => {
     await cleanupScheduleSessionSpeakers()
     await importSessions(data)

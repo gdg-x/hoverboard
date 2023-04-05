@@ -13,6 +13,13 @@ const getSocialHandle = (social: string | null) => {
   return social.split('/').pop()
 }
 
+export const getSpeakersSessionsScheduleFromUrl = async (url: string) => {
+  const data = await fetch(url).then(r => r.json())
+
+  return await getSpeakersSessionsSchedule(data)
+}
+
+
 export const getSpeakersSessionsSchedule = async (payload: { event: Event, speakers: Speaker[], sessions: Session[] }): Promise<{}> => {
   const {event, speakers, sessions} = payload
 
