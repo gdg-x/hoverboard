@@ -1,6 +1,6 @@
 // @ts-nocheck
 import admin, {firestore as firestoreDep, ServiceAccount} from 'firebase-admin'
-import {getSpeakersSessionsSchedule, getSpeakersSessionsScheduleFromUrl} from './getSpeakersSessionsSchedule'
+import {getSpeakersSessionsScheduleFromUrl} from './getSpeakersSessionsSchedule'
 
 if (!process.env.firebaseServiceAccount) {
   throw new Error("firebaseServiceAccount is not defined")
