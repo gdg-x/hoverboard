@@ -1,4 +1,4 @@
-name: Update Firestore Session Speakers Schedule when asked gently by ConferenceCenter
+name: Update schedule
 on:
   workflow_dispatch:
   repository_dispatch:
