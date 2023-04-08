@@ -5,7 +5,7 @@ const main = async () => {
     throw new Error('missing CONFERENCE_CENTER_FILE env')
   }
 
-  await getSpeakersSessionsScheduleFromUrl(process.env["CONFERENCE_CENTER_FILE"])
+  await getSpeakersSessionsScheduleFromUrl(process.env["CONFERENCE_CENTER_FILE"]+"?t="+Date.now())
 
   console.log("done")
 }

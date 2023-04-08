@@ -222,8 +222,7 @@ export const getSpeakersSessionsSchedule = async (payload: { event: Event, speak
           // If the first session item is "hideTrackTitle" = not a talk, we remove the empty array to take full width
           if (session.items[0] && session.items[0].extendWidth) {
             tracks.forEach((track: any) => {
-              const extendWidth = parseInt(session.items[0].extendWidth)
-              if (track.order > 0 && track.order <= extendWidth) {
+              if (track.order > 0 ) {
                 delete acc[track.order]
               }
             })

@@ -29,7 +29,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
       <style include="shared-styles flex flex-alignment positioning">
         :host {
           display: block;
-          --tracks-number: 3;
+          --tracks-number: 6;
         }
 
         .start-time {

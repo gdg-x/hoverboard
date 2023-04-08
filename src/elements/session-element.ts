@@ -63,7 +63,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         }
 
         .language {
-          margin-left: 8px;
+          margin-left: 0;
           font-size: 12px;
           text-transform: uppercase;
           color: var(--secondary-text-color);
@@ -72,6 +72,17 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         .session-content {
           padding-top: 0;
           padding-bottom: 40px;
+        }
+
+        .backgroundImage {
+          --lazy-image-fit: cover;
+        }
+
+        .session[with-background] {
+          color: #fff;
+        }
+        .session[with-background] > .backgroundImage{
+          filter: brightness(60%);
         }
 
         .bookmark-session,
@@ -162,10 +173,20 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         class="session"
         href$="[[sessionUrl(session.id)]]"
         featured$="[[isFeatured]]"
+        with-background$="[[session.image]]"
         layout
         vertical
         relative
       >
+
+        <lazy-image
+          class="backgroundImage"
+          src="[[session.image]]"
+          imageFit="cover"
+          hidden="[[!session.image]]"
+          fit preload
+        ></lazy-image>
+
         <iron-icon icon="hoverboard:[[session.icon]]" class="session-icon"></iron-icon>
 
         <div class="session-header" layout horizontal justified>
@@ -175,11 +196,13 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
               <div class="session-description">[[summary]]</div>
             </text-truncate>
           </div>
-          <span class="language">[[slice(session.language, 2)]]</span>
         </div>
 
         <div class="session-content" flex layout horizontal justified>
           <div class="session-meta">
+
+            <span class="language"
+                  hidden="[[session.hideTrackTitle]]">[[session.track.title]]</span>
             <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
           </div>
           <div class="session-actions">
