@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "import": "ts-node-script import-speakers-sessions-schedule"
+    "import": "ts-node-script import-speakers-sessions-schedule",
+    "testLocally": "ts-node-script testLocally"
   },
   "author": "",
   "license": "ISC",

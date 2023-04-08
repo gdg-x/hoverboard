@@ -92,7 +92,7 @@ export const getSpeakersSessionsSchedule = async (payload: { event: Event, speak
       speakers: talk.speakerIds.map((speakerId: string) => speakersById[speakerId].id),
       presentation: talk.presentationLink,
       videoId: talk.videoLink || null,
-      image: talk.image || null,
+      image: talk.imageUrl || null,
       hideInFeedback: !talk.showInFeedback,
       hideTrackTitle: talk.hideTrackTitle,
     }
@@ -223,7 +223,7 @@ export const getSpeakersSessionsSchedule = async (payload: { event: Event, speak
           if (session.items[0] && session.items[0].extendWidth) {
             tracks.forEach((track: any) => {
               const extendWidth = parseInt(session.items[0].extendWidth)
-              if (track.order > 1 && track.order <= extendWidth) {
+              if (track.order > 0 && track.order <= extendWidth) {
                 delete acc[track.order]
               }
             })
