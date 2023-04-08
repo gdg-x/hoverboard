@@ -86,7 +86,7 @@
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
     "@web/rollup-plugin-html": "^1.11.0",
-    "concurrently": "^7.6.0",
+    "concurrently": "^8.0.1",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-import-resolver-typescript": "^3.5.3",
