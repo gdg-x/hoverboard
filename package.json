@@ -88,7 +88,7 @@
     "@web/rollup-plugin-html": "^1.11.0",
     "concurrently": "^8.0.1",
     "eslint": "^8.38.0",
-    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-html": "^7.1.0",
     "eslint-plugin-import": "^2.27.5",
