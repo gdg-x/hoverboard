@@ -171,19 +171,26 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
           <div class="action-buttons" layout horizontal center-justified wrap>
 
+<!--            <a-->
+<!--              href="https://www.youtube.com/c/SunnyTechMtp"-->
+<!--              target="_blank"-->
+<!--            >-->
+<!--              <paper-button class="watch-video" on-click="playVideo" primary>-->
+<!--                <iron-icon icon="hoverboard:movie"></iron-icon>-->
+<!--                [[viewHighlights]]-->
+<!--              </paper-button>-->
+<!--            </a>-->
             <a
-              href="https://www.youtube.com/c/SunnyTechMtp"
-              target="_blank"
+              href="/schedule"
             >
-              <paper-button class="watch-video" on-click="playVideo" primary>
-                <iron-icon icon="hoverboard:movie"></iron-icon>
-                [[viewHighlights]]
+              <paper-button  primary>
+                Programme
               </paper-button>
             </a>
-            <paper-button on-click="scrollToTickets" primary invert>
-              <iron-icon icon="hoverboard:ticket"></iron-icon>
-              [[buyTicket]]
-            </paper-button>
+<!--            <paper-button on-click="scrollToTickets" primary invert>-->
+<!--              <iron-icon icon="hoverboard:ticket"></iron-icon>-->
+<!--              [[buyTicket]]-->
+<!--            </paper-button>-->
           </div>
 
           <div class="scroll-down" on-click="scrollNextBlock">
@@ -254,7 +261,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         <fork-me-block></fork-me-block>
       </template>
       <about-block></about-block>
-      <about-conference-block></about-conference-block>
+<!--      <about-conference-block></about-conference-block>-->
 <!--      <speakers-block></speakers-block>-->
       <subscribe-block></subscribe-block>
       <tickets-block id="tickets"></tickets-block>

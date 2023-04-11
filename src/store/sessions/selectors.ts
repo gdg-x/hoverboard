@@ -16,12 +16,16 @@ const buildFilters = (sessions: Session[], filterGroupKey: FilterGroupKey): Filt
 
   sessions.forEach((session) => {
     const value = session[filterGroupKey];
-    if (value === undefined) {
+    if (value === undefined || !value) {
       return;
     } else if (typeof value === 'string') {
       tags.add(value.trim());
     } else {
-      value.map((tag) => tags.add(tag.trim()));
+      value.map((tag) => {
+        if(tag || tag.trim().length) {
+          tags.add(tag.trim())
+        }
+      });
     }
   });
 

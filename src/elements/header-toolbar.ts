@@ -182,52 +182,52 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 <!--            [[signInText]]-->
 <!--          </paper-tab>-->
 
-          <a href="[[ cfpLink ]]" target="_blank" rel="noopener noreferrer">
-            <paper-button class="buy-button" secondary>[[cfpHeader]]</paper-button>
-          </a>
+<!--          <a href="[[ cfpLink ]]" target="_blank" rel="noopener noreferrer">-->
+<!--            <paper-button class="buy-button" secondary>[[cfpHeader]]</paper-button>-->
+<!--          </a>-->
 
-          <a href$="[[ticketUrl]]" target="_blank" rel="noopener noreferrer">
-            <paper-button class="buy-button" primary>[[buyTicket]]</paper-button>
-          </a>
+<!--          <a href$="[[ticketUrl]]" target="_blank" rel="noopener noreferrer">-->
+<!--            <paper-button class="buy-button" primary>[[buyTicket]]</paper-button>-->
+<!--          </a>-->
         </paper-tabs>
 
         <notification-toggle></notification-toggle>
 
-<!--        <paper-menu-button-->
-<!--          class="auth-menu"-->
-<!--          hidden$="[[!signedIn]]"-->
-<!--          vertical-align="top"-->
-<!--          horizontal-align="right"-->
-<!--          no-animations-->
-<!--          layout-->
-<!--          horizontal-->
-<!--          center-center-->
-<!--        >-->
-<!--          <div-->
-<!--            class="profile-image"-->
-<!--            slot="dropdown-trigger"-->
-<!--            style$="background-image: url('[[user.data.photoURL]]')"-->
-<!--          ></div>-->
-<!--          <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>-->
-<!--            <div-->
-<!--              class="profile-image"-->
-<!--              slot="dropdown-trigger"-->
-<!--              self-center-->
-<!--              style$="background-image: url('[[user.data.photoURL]]')"-->
-<!--            ></div>-->
-<!--            <div layout vertical center-justified>-->
-<!--              <span class="profile-name">[[user.data.displayName]]</span>-->
-<!--              <span class="profile-email">[[user.data.email]]</span>-->
-<!--              <span class="profile-action" role="button" on-click="signOut">[[signOutText]]</span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </paper-menu-button>-->
+        <paper-menu-button
+          class="auth-menu"
+          hidden$="[[!signedIn]]"
+          vertical-align="top"
+          horizontal-align="right"
+          no-animations
+          layout
+          horizontal
+          center-center
+        >
+          <div
+            class="profile-image"
+            slot="dropdown-trigger"
+            style$="background-image: url('[[user.data.photoURL]]')"
+          ></div>
+          <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>
+            <div
+              class="profile-image"
+              slot="dropdown-trigger"
+              self-center
+              style$="background-image: url('[[user.data.photoURL]]')"
+            ></div>
+            <div layout vertical center-justified>
+              <span class="profile-name">[[user.data.displayName]]</span>
+              <span class="profile-email">[[user.data.email]]</span>
+              <span class="profile-action" role="button" on-click="signOut">[[signOutText]]</span>
+            </div>
+          </div>
+        </paper-menu-button>
 
-<!--        <paper-icon-button-->
-<!--          icon="hoverboard:account"-->
-<!--          on-click="signIn"-->
-<!--          hidden$="[[isAccountIconHidden(signedIn, viewport.isLaptopPlus)]]"-->
-<!--        ></paper-icon-button>-->
+        <paper-icon-button
+          icon="hoverboard:account"
+          on-click="signIn"
+          hidden$="[[isAccountIconHidden(signedIn, viewport.isLaptopPlus)]]"
+        ></paper-icon-button>
       </app-toolbar>
     `;
   }

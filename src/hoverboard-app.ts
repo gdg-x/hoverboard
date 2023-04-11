@@ -177,23 +177,23 @@ export class HoverboardApp extends PolymerElement {
             <div>
               <app-install></app-install>
 
-              <a
-                class="bottom-drawer-link"
-                href$="[[ticketUrl]]"
-                target="_blank"
-                rel="noopener noreferrer"
-                on-click="closeDrawer"
-                layout
-                horizontal
-                center
-              >
-                <span>[[buyTicket]]</span>
-                <iron-icon icon="hoverboard:open-in-new" primary></iron-icon>
-              </a>
+<!--              <a-->
+<!--                class="bottom-drawer-link"-->
+<!--                href$="[[ticketUrl]]"-->
+<!--                target="_blank"-->
+<!--                rel="noopener noreferrer"-->
+<!--                on-click="closeDrawer"-->
+<!--                layout-->
+<!--                horizontal-->
+<!--                center-->
+<!--              >-->
+<!--                <span>[[buyTicket]]</span>-->
+<!--                <iron-icon icon="hoverboard:open-in-new" primary></iron-icon>-->
+<!--              </a>-->
 
-              <a href="[[ cfpLink ]]" target="_blank" rel="noopener noreferrer" on-tap="closeDrawer">
-                <paper-button class="buy-button" >[[ cfpHeader ]]</paper-button>
-              </a>
+<!--              <a href="[[ cfpLink ]]" target="_blank" rel="noopener noreferrer" on-tap="closeDrawer">-->
+<!--                <paper-button class="buy-button" >[[ cfpHeader ]]</paper-button>-->
+<!--              </a>-->
 
             </div>
           </div>
