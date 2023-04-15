@@ -236,6 +236,13 @@
           "logoUrl": "../images/logos/synanto.svg",
           "name": "Synanto",
           "url": "https://synanto.fr/"
+        },
+        {
+          "order": 0,
+          "height": 60,
+          "logoUrl": "../images/logos/winzana.png",
+          "name": "Winzana",
+          "url": "https://www.winzana.com/fr/"
         }
       ],
       "order": 3,
