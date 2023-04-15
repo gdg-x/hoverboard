@@ -48,6 +48,15 @@
       "published": "2022-06-27",
       "source": "/data/posts/2022-06-27-cfp-stats.md",
       "title": "Comprendre les résultats du CFP de SunnyTech"
+    },
+    "2023-cfp-stats": {
+      "backgroundColor": "#888888",
+      "brief": "",
+      "image": "/images/backgrounds/registration.jpg",
+      "content": "md",
+      "published": "2023-04-11",
+      "source": "/data/posts/2023-04-11-cfp-stats.md",
+      "title": "Retours sur le CFP de SunnyTech 2023"
     }
   },
   "notifications": {
@@ -240,13 +249,15 @@
           "logoUrl": "../images/logos/klanik.png",
           "name": "Klanik",
           "url": "https://www.klanik.com/"
-        },{
+        },
+        {
           "order": 0,
           "height": 60,
           "logoUrl": "../images/logos/meritis.png",
           "name": "Meritis",
           "url": "https://meritis.fr/"
-        },{
+        },
+        {
           "order": 0,
           "height": 60,
           "logoUrl": "../images/logos/monkeypatch.png",
