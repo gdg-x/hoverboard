@@ -2,7 +2,7 @@ name: Update schedule
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: [conferencecenter]
+    types: [openplanner]
 
 jobs:
   update-firestore-session-speakers-schedule:
