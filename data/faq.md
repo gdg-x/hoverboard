@@ -2,14 +2,14 @@
 
 ### Fechas y Ubicación
 
-IWD WTM LATAM 2022 es un evento en línea a reaizarse el Sábado 2 de Abril de 2022. Este evento Regional es organizado por más de 20 comunidades de WomenTechmakers, GDG y otras a lo largo y ancho de Latinoamérica con el apoyo del Programa GDG de Google y otros aliados. 
+IWD WTM LATAM 2023 es un evento en línea a reaizarse el 29 de Abril de 2023. Este evento Regional es organizado por más de 20 comunidades de WomenTechmakers, GDG y otras a lo largo y ancho de Latinoamérica con el apoyo del Programa GDG y WTM de Google junto a otros aliados. 
 
 ### Mantente Informado
 
 Para estar al tanto de las últimas noticias sobre este evento, esta pendiente de los grupos en GDG Community y/o las redes sociales de las siguientes comunidades de WomenTechmakers y GDG:
 
-#### Argentina
-- WTM Neuquen / GDG Neuquen ()
+#### Honduras
+- WTM San Pedro Sula / GDG San Pedro Sula ()
 
 #### Bolivia
 - WTM Bolivia / Mujeres TIC'S Bolivia ()
@@ -23,8 +23,8 @@ Para estar al tanto de las últimas noticias sobre este evento, esta pendiente d
 - WTM Cancun / GDG WTM Cancun ()
 - WTM Puebla / DSC ITESM Puebla ()
 
-#### Nicaragua
-- WTM Managua / GDG Managua ()
+#### Panamá
+- GDG Panamá ()
 
 #### Perú
 - WTM Arequipa / GDG Arequipa ()
@@ -36,8 +36,8 @@ Para estar al tanto de las últimas noticias sobre este evento, esta pendiente d
 - WTM Bogotá / GDG Bogotá ()
 - WTM Medellín / GDG Medellín ()
 
-#### El Salvador
-- WTM San Salvador / GDG San Salvador ()
+#### Brasil
+- WTM Sao Paulo / GDG Sao Paulo ()
 
 ### Formato y Contenido
 
@@ -57,7 +57,7 @@ Presentación con beneficios para patrocinadores: https://bit.ly/IWD_LATAM_2022_
 
 ### Registro Gratuito
 
-Puedes registrarte desde ya, usando este enlace: https://gdg.community.dev/events/details/google-gdg-cloud-lima-presents-international-womens-day/. El registro es GRATUITO.
+Puedes registrarte desde ya, usando este enlace: https://gdg.community.dev/events/details/google-gdg-san-pedro-sula-presents-international-womens-day-2023-latam/. El registro es GRATUITO.
 
 ### Idioma
 
