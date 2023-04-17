@@ -22,7 +22,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           background-size: 400% 200%;
           animation: gradient 15s ease infinite;
           color: var(--primary-text-color);
-        }
+        } 
         @keyframes gradient {
           0% {
             background-position: 0% 50%;
