@@ -42,8 +42,8 @@
     "home": {
       "description": "¡Regístrate ya y no te pierdas este súper evento!",
       "background": {
-        "color": "#5286E6",
-        "image": "/images/backgrounds/home2022.jpg"
+        "color": "#4883f3",
+        "image": "/images/backgrounds/home-2023.jpg"
       },
       "fontColor": "#FFF"
     },

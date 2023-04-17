@@ -17,14 +17,25 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           --iron-icon-fill-color: currentColor;
           display: block;
           z-index: 1;
-          border-bottom: 1px solid var(--divider-color);
-          background-color: #32E0AF;
-          transition: background-color var(--animation), border-bottom-color var(--animation),
-            color var(--animation);
+          background: rgb(79,195,247);
+          background: linear-gradient(45deg, #4fc3f7, #3061bd, #32b6d2);
+          background-size: 400% 200%;
+          animation: gradient 15s ease infinite;
           color: var(--primary-text-color);
         }
-
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
         app-toolbar {
+          color: white;
           margin: 0 auto;
           padding: 0 16px;
           height: auto;
@@ -41,7 +52,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
         }
 
         .nav-items {
-          --paper-tabs-selection-bar-color: var(--default-primary-color);
+          --paper-tabs-selection-bar-color: #1ce9b6;
           --paper-tabs: {
             height: 64px;
           }
