@@ -192,6 +192,9 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
                       </a>
                     </template>
                   </div>
+                  <text-truncate lines="5">
+                    <div class="bio">[[member.bio]]</div>
+                  </text-truncate>
                 </div>
               </div>
             </template>

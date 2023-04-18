@@ -1,8 +1,8 @@
 {
   "title": "IWD WTM LATAM 2023",
-  "description": "El International Women's Day Latam 2023 se realizará el xx de Abril. Tiene como objetivo reunir mujeres y aliados del mundo de la tecnología, promoviendo el desarrollo de mujeres por medio de charlas inspiradoras y técnicas. El evento será organizado por las embajadoras y miembros de Women Techmakers, GDGs y otras comunidades de América Latina. Festejando el lema 'Dare To Be'.",
+  "description": "El International Women's Day Latam 2023 se realizará el 29 de Abril. Tiene como objetivo reunir mujeres y aliados del mundo de la tecnología, promoviendo el desarrollo de mujeres por medio de charlas inspiradoras y técnicas. El evento será organizado por las embajadoras y miembros de Women Techmakers, GDGs y otras comunidades de América Latina. Festejando el lema 'Dare To Be'.",
   "image": "images/social-share-2023.png",
-  "keywords": "event, wtm, iwd, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
+  "keywords": "event, wtm, iwd, gdg, gde, devfest, google, gcp, programming, android, chrome, polymer, developers, web, cloud, androiddev, ai, firebase",
   "dates": "29 de Abril de 2023",
   "partnershipProposition": "",
   "share": "Compartir",
@@ -82,7 +82,7 @@
     "title": "Sobre el IWD",
     "callToAction": {
       "featuredSessions": {
-        "description": "El International Women's Day Latam 2023 se realizará el xx de Abril. Tiene como objetivo reunir mujeres y aliados del mundo de la tecnología, promoviendo el desarrollo de mujeres por medio de charlas inspiradoras y técnicas. El evento será organizado por las embajadoras y miembros de Women Techmakers, GDGs y otras comunidades de América Latina. Festejando el lema 'Dare To Be'.",
+        "description": "El International Women's Day Latam 2023 se realizará el 29 de Abril. Tiene como objetivo reunir mujeres y aliados del mundo de la tecnología, promoviendo el desarrollo de mujeres por medio de charlas inspiradoras y técnicas. El evento será organizado por las embajadoras y miembros de Women Techmakers, GDGs y otras comunidades de América Latina. Festejando el lema 'Dare To Be'.",
         "label": "Más sobre IWD",
         "link": "https://www.womentechmakers.com/events/iwd"
       }
@@ -196,7 +196,7 @@
     "toast": "¡Te has inscrito con éxito!"
   },
   "team": {
-    "description": "<div class='mb-1'>Este año, las embajadoras y miembros de Women Techmakers (WTM) y Google Developer Groups (GDG) de muchos países de Latinoamérica nos hemos unido porque queremos sumar esfuerzos para crear un solo evento a nivel de latinoamérica y así ofrecer contenido de calidad a todas nuestras participantes.</div><div><span class='mr-1'>🇦🇷</span>Argentina</div><div><span class='mr-1'>🇧🇴</span>Bolivia</div><div><span class='mr-1'>🇨🇴</span>Colombia</div><div><span class='mr-1'>🇨🇷</span>Costa Rica</div><div><span class='mr-1'>🇸🇻</span>El Salvador</div><div><span class='mr-1'>🇲🇽</span>México</div><div><span class='mr-1'>🇳🇮</span>Nicaragua</div><div><span class='mr-1'>🇵🇪</span>Perú</div><div><span class='mr-1'>🇵🇦</span>Panamá</div>"
+    "description": "<div class='mb-1'>Este año, las embajadoras y miembros de Women Techmakers (WTM) y Google Developer Groups (GDG) de muchos países de Latinoamérica nos hemos unido porque queremos sumar esfuerzos para crear un solo evento a nivel de latinoamérica y así ofrecer contenido de calidad a todas nuestras participantes.</div><div><span class='mr-1'>🇦🇷</span>Argentina</div><div><span class='mr-1'>🇧🇴</span>Bolivia</div><div><span class='mr-1'>🇨🇴</span>Colombia</div><div><span class='mr-1'>🇨🇷</span>Costa Rica</div><div><span class='mr-1'>🇵🇦</span>Panamá</div><div><span class='mr-1'>🇲🇽</span>México</div><div><span class='mr-1'>🇭🇳</span>Honduras</div><div><span class='mr-1'>🇵🇪</span>Perú</div><div><span class='mr-1'>🇧🇷</span>Brasil</div>"
   },
   "schedule": {
     "saveSessionsSignedOut": "Inicia sesión para guardar tus charlas"

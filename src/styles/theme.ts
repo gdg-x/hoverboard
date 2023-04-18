@@ -117,7 +117,7 @@ export const theme = css`
     opacity: 0.8;
   }
 
-  paper-button[primary] {
+  paper-button[primary] { 
     background-color: #1ce9b6;
     color: #000;
   }
