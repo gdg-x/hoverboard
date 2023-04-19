@@ -28,7 +28,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           50% {background-position: center;}
         }
         hero-block {
-          font-size: 24px;
+          font-size: 25px;
           text-align: center;
         }
 
