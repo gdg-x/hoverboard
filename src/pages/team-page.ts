@@ -81,6 +81,10 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
           line-height: 1.2;
         }
 
+        .bio {
+          font-size: 12px;
+        }
+
         .activity {
           font-size: 16px;
           padding-left: 6px;
@@ -192,7 +196,7 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
                       </a>
                     </template>
                   </div>
-                  <text-truncate lines="5">
+                  <text-truncate lines="6">
                     <div class="bio">[[member.bio]]</div>
                   </text-truncate>
                 </div>
