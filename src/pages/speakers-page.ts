@@ -173,7 +173,7 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
       <app-route route="[[route]]" pattern="/:speakerId" data="{{routeData}}"></app-route>
 
       <hero-block
-        background-image="{$ heroSettings.speakers.background.image $}"
+        background-image="https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2Fback-cabecera-1.jpg?alt=media&token=6aa25e80-fe22-4456-9d7b-bb0af012fcda"
         background-color="{$ heroSettings.speakers.background.color $}"
         font-color="{$ heroSettings.speakers.fontColor $}"
         active="[[active]]"

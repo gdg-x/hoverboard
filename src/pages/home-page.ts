@@ -6,6 +6,7 @@ import '../elements/about-organizer-block';
 import '../elements/fork-me-block';
 import '../elements/gallery-block';
 import '../elements/map-block';
+import '../elements/partners-block';
 import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
@@ -935,6 +936,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       <speakers-block></speakers-block>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
+      <partners-block></partners-block>
       <footer-block></footer-block>
     `;
   }
