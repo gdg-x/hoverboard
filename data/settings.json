@@ -25,6 +25,12 @@
       "target": ""
     },
     {
+      "route": "speakers",
+      "permalink": "/speakers/",
+      "label": "Speakers",
+      "target": ""
+    },
+    {
       "route": "team",
       "permalink": "/team/",
       "label": "Equipo",

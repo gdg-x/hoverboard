@@ -178,7 +178,8 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
         font-color="{$ heroSettings.speakers.fontColor $}"
         active="[[active]]"
       >
-        <div class="hero-title">{$ heroSettings.speakers.title $}</div>
+        <!--<div class="hero-title">{$ heroSettings.speakers.title $}</div>-->
+        <div class="hero-title">Speakers</div>
         <p class="hero-description">{$ heroSettings.speakers.description $}</p>
       </hero-block>
 
