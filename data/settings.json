@@ -31,6 +31,12 @@
       "target": ""
     },
     {
+      "route": "schedule",
+      "permalink": "/schedule/",
+      "label": "Agenda",
+      "target": ""
+    },
+    {
       "route": "team",
       "permalink": "/team/",
       "label": "Equipo",

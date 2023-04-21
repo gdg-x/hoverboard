@@ -83,12 +83,12 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
       <app-route route="[[route]]" pattern="/:day" data="{{routeData}}"></app-route>
 
       <hero-block
-        background-image="{$ heroSettings.schedule.background.image $}"
+        background-image="https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2Fback-cabecera-2.JPG?alt=media&token=78842a3e-230f-4e44-a9ef-d90df6e39821"
         background-color="{$ heroSettings.schedule.background.color $}"
         font-color="{$ heroSettings.schedule.fontColor $}"
         active="[[active]]"
       >
-        <div class="hero-title">{$ heroSettings.schedule.title $}</div>
+        <div class="hero-title">Agenda</div>
         <p class="hero-description">{$ heroSettings.schedule.description $}</p>
         <sticky-element slot="bottom" active="[[active]]">
           <header-bottom-toolbar></header-bottom-toolbar>
