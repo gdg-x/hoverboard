@@ -314,8 +314,8 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   }
 
   playVideo(e) {
-    const youtubeId = e.model.__data.block.youtubeId;
-    const url = `https://www.youtube.com/watch?v=${youtubeId}`;
+    const link = e.model.__data.block.link;
+    const url = link;
 
     window.open(url, '_blank');
   }

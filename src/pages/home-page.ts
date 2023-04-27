@@ -3,6 +3,7 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../components/about-block';
 import '../elements/about-organizer-block';
+import '../elements/featured-videos';
 import '../elements/fork-me-block';
 import '../elements/gallery-block';
 import '../elements/map-block';
@@ -934,6 +935,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       {% endif %}
       <about-block></about-block>
       <speakers-block></speakers-block>
+      <featured-videos></featured-videos>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
       <partners-block></partners-block>
