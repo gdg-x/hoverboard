@@ -79,7 +79,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@types/jest": "^29.5.0",
     "@types/jest-dev-server": "^5.0.0",
-    "@types/marked": "^4.0.8",
+    "@types/marked": "^4.3.0",
     "@types/node": "^16.18.23",
     "@types/nunjucks": "^3.2.2",
     "@types/polymer": "^1.2.12",
