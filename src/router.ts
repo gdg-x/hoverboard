@@ -95,6 +95,10 @@ const ROUTES: Route[] = [
     ],
   },
   {
+    path: '/carapuce&screenId=null',
+    redirect: '/carapuce',
+  },
+  {
     path: '/carapuce',
     component: 'schedule-page-standalone',
     action: async () => {
