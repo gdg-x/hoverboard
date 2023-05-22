@@ -95,6 +95,27 @@ const ROUTES: Route[] = [
     ],
   },
   {
+    path: '/carapuce',
+    component: 'schedule-page-standalone',
+    action: async () => {
+      await import('./pages/schedule-page-standalone.js');
+    },
+    children: [
+      {
+        path: '/:id?',
+        component: 'schedule-day',
+        action: async (context, commands) => {
+          const searchParams = new URLSearchParams(context.search);
+          if (searchParams.get('sessionId')) {
+            commands.redirect(`/sessions/${searchParams.get('sessionId')}`);
+          } else {
+            await import('./elements/schedule-day.js');
+          }
+        },
+      },
+    ],
+  },
+  {
     path: '/sessions',
     redirect: '/schedule',
   },

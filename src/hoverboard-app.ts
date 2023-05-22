@@ -200,7 +200,7 @@ export class HoverboardApp extends PolymerElement {
         </app-drawer>
 
         <app-header-layout id="headerLayout" fullbleed>
-          <app-header id="header" slot="header" condenses fixed>
+          <app-header id="header" slot="header" condenses fixed hidden$="[[noLayoutPage]]">
             <header-toolbar drawer-opened="{{drawerOpened}}"></header-toolbar>
           </app-header>
 
@@ -242,9 +242,15 @@ export class HoverboardApp extends PolymerElement {
   @property({ type: String })
   private routeName = 'home';
 
+  @property({ type: Boolean })
+  private noLayoutPage = false;
+
   stateChanged(state: RootState) {
     this.tickets = state.tickets;
     this.routeName = selectRouteName(window.location.pathname);
+    if(window.location.pathname.includes('/carapuce')){
+      this.noLayoutPage = true;
+    }
   }
 
   constructor() {
