@@ -15,7 +15,7 @@ jobs:
         run: echo "{}" > serviceAccount.json
       - run: npm ci
       - run: npm run build
-      - uses: w9jds/firebase-action@v11.24.1
+      - uses: w9jds/firebase-action@v11.30.1
         with:
           args: deploy
         env:
