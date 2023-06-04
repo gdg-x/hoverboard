@@ -81,7 +81,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         .session[with-background] {
           color: #fff;
         }
-        .session[with-background] > .backgroundImage{
+        .session[with-background] > .backgroundImage {
           filter: brightness(60%);
         }
 
@@ -99,6 +99,10 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           color: var(--default-primary-color);
         }
 
+        .session-title-container {
+          min-width: 0px;
+          word-wrap: break-word;
+        }
         .session-title {
           font-size: 20px;
           line-height: 1.2;
@@ -138,6 +142,20 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           border-radius: 50%;
           overflow: hidden;
           transform: translateZ(0);
+
+          min-width: 32px;
+          min-height: 32px;
+        }
+
+        .speaker-details {
+          min-width: 0px;
+        }
+
+        .speaker-name,
+        .speaker-title {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .speaker-name {
@@ -153,6 +171,13 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         .tags {
           display: flex;
           flex-wrap: wrap;
+          min-width: 0px;
+        }
+
+        .tag {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         @media (min-width: 640px) {
@@ -178,19 +203,19 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         vertical
         relative
       >
-
         <lazy-image
           class="backgroundImage"
           src="[[session.image]]"
           imageFit="cover"
           hidden="[[!session.image]]"
-          fit preload
+          fit
+          preload
         ></lazy-image>
 
         <iron-icon icon="hoverboard:[[session.icon]]" class="session-icon"></iron-icon>
 
         <div class="session-header" layout horizontal justified>
-          <div flex>
+          <div flex class="session-title-container">
             <h3 class="session-title">[[session.title]]</h3>
             <text-truncate lines="3">
               <div class="session-description">[[summary]]</div>
@@ -200,9 +225,9 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
 
         <div class="session-content" flex layout horizontal justified>
           <div class="session-meta">
-
-            <span class="language"
-                  hidden="[[session.hideTrackTitle]]">[[session.track.title]]</span>
+            <span class="language" hidden="[[session.hideTrackTitle]]"
+              >[[session.track.title]]</span
+            >
             <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
           </div>
           <div class="session-actions">
@@ -222,7 +247,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         </div>
 
         <div class="session-footer">
-          <div layout horizontal justified center-aligned>
+          <div layout horizontal justified center-aligned center-center>
             <div class="session-meta" flex>
               <span hidden$="[[!session.duration.hh]]">
                 [[session.duration.hh]] hour[[getEnding(session.duration.hh)]]
@@ -233,7 +258,9 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
             </div>
             <div class="tags" hidden$="[[!session.tags.length]]">
               <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
+                <span class="tag" style$="color: [[getVariableColor(tag)]]" title="[[tag]]"
+                  >[[tag]]</span
+                >
               </template>
             </div>
           </div>
@@ -248,8 +275,10 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
                 ></lazy-image>
 
                 <div class="speaker-details" flex>
-                  <div class="speaker-name">[[speaker.name]]</div>
-                  <div class="speaker-title">[[join(speaker.company, speaker.country)]]</div>
+                  <div class="speaker-name" title="[[speaker.name]]">[[speaker.name]]</div>
+                  <div class="speaker-title" title="[[join(speaker.company, speaker.country)]]">
+                    [[join(speaker.company, speaker.country)]]
+                  </div>
                 </div>
               </div>
             </template>

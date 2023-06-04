@@ -1,7 +1,7 @@
 import { Session } from '../models/session';
 import { timezoneOffset } from './data';
 
-const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+const THREE_WEEK_MS = 20 * 24 * 60 * 60 * 1000;
 const ONE_MINUTE_MS = 60 * 1000;
 
 export const acceptingFeedback = (session: Session): boolean => {
@@ -12,5 +12,5 @@ export const acceptingFeedback = (session: Session): boolean => {
   const convertedTimezoneDate = new Date(currentTime + totalTimezoneOffset * ONE_MINUTE_MS);
   const diff = now.getTime() - convertedTimezoneDate.getTime();
 
-  return diff > 0 && diff < ONE_WEEK_MS;
+  return diff > 0 && diff < THREE_WEEK_MS;
 };

@@ -87,7 +87,18 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           right: 24px;
           bottom: 24px;
         }
+        .float-button.multiple {
+          display: flex;
+          margin-right: 20px;
+        }
 
+        /*// Fix Z-index issue for the button*/
+        .herotop {
+          position: relative;
+        }
+        .herotop, herotop > * , .float-button.multiple [role='button']{
+          z-index: 1;
+        }
         .content {
           position: relative;
           font-size: 15px;
@@ -196,7 +207,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <simple-hero page="schedule">
+      <simple-hero page="schedule" class="herotop">
         <div class="header-content" layout vertical end-justified>
           <h2 class="name">[[session.title]]</h2>
           <div class="tags" hidden$="[[!session.tags.length]]">
@@ -205,12 +216,20 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
             </template>
           </div>
 
-          <div class="float-button" hidden$="[[!contentLoaderVisibility]]">
+          <div class="float-button multiple" hidden$="[[!contentLoaderVisibility]]">
             <paper-fab
               icon="hoverboard:[[featuredSessionIcon]]"
               hidden$="[[!viewport.isLaptopPlus]]"
               on-click="toggleFeaturedSession"
             ></paper-fab>
+
+            <a href="[[openFeedbackLinkDirect]]" target="_blank">
+              <paper-fab
+                label="Donnez votre avis !"
+                icon="hoverboard:feedback"
+                hidden$="[[!viewport.isLaptopPlus]]">
+              </paper-fab>
+            </a>
           </div>
         </div>
       </simple-hero>
@@ -298,12 +317,15 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
         <div id="feedback" class="additional-sections">
           <h3>[[feedback.headline]]</h3>
 
-          <auth-required hidden="[[!acceptingFeedback]]">
-            <slot slot="prompt">[[feedback.leaveFeedback]]</slot>
-            <feedback-block session-id="[[session.id]]"></feedback-block>
-          </auth-required>
-
           <p hidden="[[acceptingFeedback]]">[[feedback.sessionClosed]]</p>
+
+          <iframe
+            src="[[openFeedbackLink]]"
+            width="100%"
+            height="1000"
+            style="border: none"
+          >
+          </iframe>
         </div>
       </div>
 
@@ -313,6 +335,9 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
 
   private feedback = feedback;
   private sessionDetails = sessionDetails;
+
+  private openFeedbackLink: string | null = null;
+  private openFeedbackLinkDirect: string| null= null;
 
   @property({ type: Object })
   sessions = initialSessionsState;
@@ -372,6 +397,8 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   @observe('session')
   private onSession() {
     this.acceptingFeedback = this.session !== undefined && acceptingFeedback(this.session);
+    this.openFeedbackLink = this.session ? `https://openfeedback.io/sunnytech2023/${this.session.day}/${this.session.id}?hideHeader=true&forceColorScheme=light` : null;
+    this.openFeedbackLinkDirect = this.session ? `https://openfeedback.io/sunnytech2023/${this.session.day}/${this.session.id}` : null;
   }
 
   @computed('featuredSessions', 'sessionId')

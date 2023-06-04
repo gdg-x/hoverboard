@@ -32,6 +32,10 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
           --tracks-number: 6;
         }
 
+        .session {
+          min-width: 0px;
+        }
+
         .start-time {
           margin-top: 16px;
           padding: 8px 16px;
@@ -67,12 +71,24 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
           margin-right: 8px;
         }
 
+        .vitrine {
+          margin: 0;
+          padding: 0;
+          width: 100vw;
+        }
+
         @media (min-width: 812px) {
           :host {
             margin-left: auto;
             display: block;
             max-width: calc(100% - 64px);
           }
+          .vitrine {
+            margin: 0;
+            padding: 0;
+            max-width: 100vw;
+          }
+
 
           .grid {
             display: grid;
@@ -103,57 +119,59 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <div class="grid" style$="--tracks-number: [[day.tracks.length]];">
-        <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot" index-as="timeslotIndex">
-          <div
-            id$="[[timeslot.startTime]]"
-            class="start-time"
-            style$="grid-area: [[getTimePosition(timeslotIndex)]]"
-          >
-            <span class="hours">[[splitText(timeslot.startTime, ':', 0)]]</span>
-            <span class="minutes">[[splitText(timeslot.startTime, ':', 1)]]</span>
-          </div>
-
-          <a
-            class="add-session"
-            href$="/schedule/[[day.date]]#[[timeslot.startTime]]"
-            hidden$="[[!showAddSession(timeslot, onlyFeatured)]]"
-            style$="grid-area: [[timeslot.sessions.0.gridArea]]"
-            layout
-            horizontal
-            center-center
-          >
-            <iron-icon icon="hoverboard:add-circle-outline class="add-session-icon""></iron-icon>
-            <span>[[mySchedule.browseSession]]</span>
-          </a>
-
-          <template
-            is="dom-repeat"
-            items="[[timeslot.sessions]]"
-            as="session"
-            index-as="sessionIndex"
-            filter="isNotEmpty"
-          >
-            <div class="session" style$="grid-area: [[session.gridArea]]" layout vertical>
-              <template
-                is="dom-repeat"
-                items="[[filterSessions(session.items, selectedFilters)]]"
-                as="subSession"
-              >
-                <session-element
-                  class="subsession"
-                  day-name="[[name]]"
-                  session="[[subSession]]"
-                ></session-element>
-              </template>
+        <div class$="grid [[additionalClass]]" style$="--tracks-number: [[day.tracks.length]];">
+          <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot" index-as="timeslotIndex">
+            <div
+              id$="[[timeslot.startTime]]"
+              class="start-time"
+              style$="grid-area: [[getTimePosition(timeslotIndex, timeslot.startTime)]]"
+            >
+              <span class="hours">[[splitText(timeslot.startTime, ':', 0)]]</span>
+              <span class="minutes">[[splitText(timeslot.startTime, ':', 1)]]</span>
             </div>
+
+            <a
+              class="add-session"
+              href$="/schedule/[[day.date]]#[[timeslot.startTime]]"
+              hidden$="[[!showAddSession(timeslot, onlyFeatured)]]"
+              style$="grid-area: [[timeslot.sessions.0.gridArea]]"
+              layout
+              horizontal
+              center-center
+            >
+              <iron-icon icon="hoverboard:add-circle-outline class="add-session-icon""></iron-icon>
+              <span>[[mySchedule.browseSession]]</span>
+            </a>
+
+            <template
+              is="dom-repeat"
+              items="[[timeslot.sessions]]"
+              as="session"
+              index-as="sessionIndex"
+              filter="isNotEmpty"
+            >
+              <div class="session" style$="grid-area: [[session.gridArea]]" layout vertical>
+                <template
+                  is="dom-repeat"
+                  items="[[filterSessions(session.items, selectedFilters)]]"
+                  as="subSession"
+                >
+                  <session-element
+                    class="subsession"
+                    day-name="[[name]]"
+                    session="[[subSession]]"
+                  ></session-element>
+                </template>
+              </div>
+            </template>
           </template>
-        </template>
-      </div>
+        </div>
     `;
   }
 
   private mySchedule = mySchedule;
+
+  private splitTimeslotTime = '15:10'
 
   @property({ type: Object })
   schedule: ScheduleState = initialScheduleState;
@@ -170,6 +188,10 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   private onlyFeatured = false;
   @property({ type: Array })
   private selectedFilters: Filter[] = [];
+
+  private isVitrine = false;
+  private additionalClass = "";
+  private firstColumnRowCount = 0;
 
   onAfterEnter(location: RouterLocation) {
     this.location = location;
@@ -189,7 +211,17 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
     }
   }
 
-  private getTimePosition(timeslotIndex: number) {
+  private getTimePosition(timeslotIndex: number, startTime: string) {
+    if(this.isVitrine) {
+      // @ts-ignore
+      if(parseInt(startTime.split(':')[0]) < parseInt(this.splitTimeslotTime.split(':')[0])) {
+        return `${timeslotIndex + 1} / 1`;
+      } else {
+        // Move the time slot to the right & top for the other column
+        return `${timeslotIndex - this.firstColumnRowCount +1} / ${(this.day?.tracks || [1]).length /2  + 2}`;
+      }
+    }
+
     return `${timeslotIndex + 1} / 1`;
   }
 
@@ -236,7 +268,22 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
       const {
         params: { id },
         pathname,
+        search,
       } = this.location;
+      let params = search
+        .slice(1)
+        .split('&')
+        .reduce((acc: { [k: string]: any }, value) => {
+          const [key, params] = value.split('=');
+          if (key) {
+            acc[key] = params;
+          }
+          return acc;
+        }, {});
+
+      this.isVitrine = params['vitrine'] == 'true' ?? false;
+      this.additionalClass = this.isVitrine ? "vitrine" : ""
+
       if (pathname.endsWith('my-schedule')) {
         return 'my-schedule';
       } else {
@@ -247,10 +294,83 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
     }
   }
 
-  @observe('name', 'schedule')
+  @observe('name', 'schedule', 'isVitrine')
   private onNameAndSchedule() {
     if (!this.onlyFeatured && this.name && this.schedule instanceof Success) {
-      this.day = this.schedule.data.find((day) => day.date === this.name);
+      const data = this.schedule.data.find((day) => day.date === this.name);
+
+      const trackLength = (data?.tracks || []).length +1 || 0;
+
+      let firstStart = -1;
+
+      const reduceSessionXPosition = (gridArea: string, step = 1, goToNextColumn = false) => {
+        const [gridRowStart, gridColumnStart, gridRowEnd, gridColumnEnd] = gridArea.split(' / ');
+
+        let diff = 0;
+        if (parseInt(gridRowStart as string) !== parseInt(gridRowEnd as string)) {
+          diff = 1;
+        }
+
+
+        const baseGridRowStart = parseInt(gridRowStart as string) ;
+        const baseGridRowEnd = parseInt(gridRowEnd as string) ;
+
+        if(firstStart === -1 && goToNextColumn) {
+          firstStart = baseGridRowStart;
+        }
+
+        const newGridRowStart = (goToNextColumn ? ((baseGridRowStart - firstStart +1 )) : baseGridRowStart)  - step;
+        const newGridRowEnd = (goToNextColumn ? (baseGridRowEnd - baseGridRowStart + (newGridRowStart + step)) : baseGridRowEnd) - (step + diff);
+
+        const baseGridColumnStart = parseInt(gridColumnStart as string) ;
+        const newGridColumnStart = goToNextColumn ? baseGridColumnStart + trackLength : baseGridColumnStart;
+        const baseGridColumnEnd = parseInt(gridColumnEnd as string) ;
+        const newGridColumnEnd = goToNextColumn ? baseGridColumnEnd + trackLength : baseGridColumnEnd;
+
+        return `${newGridRowStart} / ${newGridColumnStart} / ${newGridRowEnd} / ${newGridColumnEnd}`;
+      };
+
+      if (this.isVitrine) {
+        if (data?.timeslots) {
+          let numberOfHideElements = 0;
+          let numberOfHideElements2 = 0;
+          let goToNextColumn = false
+
+          // Remove element that are not conference and adapt the gridArea in consequence
+          data.timeslots = data.timeslots.reduce((acc, timeslot, index) => {
+            const hideSession = (timeslot.sessions[0]?.items[0] as Session).hideTrackTitle;
+
+            if (hideSession) {
+              numberOfHideElements++;
+              if(goToNextColumn) {
+                numberOfHideElements2++;
+              }
+              return acc;
+            }
+
+            if(timeslot.startTime === this.splitTimeslotTime && !goToNextColumn) {
+              goToNextColumn = true;
+              this.firstColumnRowCount = index - numberOfHideElements
+            }
+
+            (timeslot.sessions ?? []).forEach((session) => {
+              if (numberOfHideElements > 0) {
+                session.gridArea = reduceSessionXPosition(session.gridArea!!, goToNextColumn ? numberOfHideElements2 : numberOfHideElements, goToNextColumn);
+                if (session?.items.length) {
+                  (session?.items[0] as Session).description = '';
+                }
+              }
+            });
+            acc.push(timeslot);
+
+            return acc;
+          }, [] as any);
+        }
+      }
+      this.day = this.isVitrine ? {
+        ...data,
+        tracks: [...data?.tracks || [], ...data?.tracks || []]
+      } as Day : data;
     }
   }
 }
