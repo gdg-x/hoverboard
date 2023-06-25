@@ -58,6 +58,20 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           z-index: 1;
         }
 
+        .standalone .session-header,
+        .standalone .session-content,
+        .standalone .session-footer {
+          padding: 6px;
+          z-index: 1;
+        }
+
+        .standalone .session-actions {
+          display: none;
+        }
+        .standalone .session-title {
+          font-size: 14px;
+        }
+
         .session-header {
           padding-bottom: 8px;
         }
@@ -195,7 +209,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
       </style>
 
       <a
-        class="session"
+        class$="session [[additionalClass]]"
         href$="[[sessionUrl(session.id)]]"
         featured$="[[isFeatured]]"
         with-background$="[[session.image]]"
@@ -298,10 +312,17 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   private queryParams: string | undefined;
   @property({ type: String })
   private dayName: string | undefined;
+  @property({ type: Boolean })
+  private standalone: boolean = false;
+
+  private additionalClass: string = "";
 
   override stateChanged(state: RootState) {
     this.user = state.user;
     this.featuredSessions = state.featuredSessions;
+    if(this.standalone) {
+      this.additionalClass = "standalone";
+    }
   }
 
   @computed('featuredSessions', 'session')

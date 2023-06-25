@@ -97,6 +97,13 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
             grid-template-columns: repeat(var(--tracks-number), 1fr);
           }
 
+          .grid.vitrine {
+            display: grid;
+            grid-column-gap: 4px;
+            grid-row-gap: 8px;
+            grid-template-columns: repeat(var(--tracks-number), 1fr);
+          }
+
           .start-time {
             margin: 0;
             padding: 0;
@@ -160,6 +167,8 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
                     class="subsession"
                     day-name="[[name]]"
                     session="[[subSession]]"
+                    reduced="[[isVitrine]]"
+                    standalone="[[isStandalone]]"
                   ></session-element>
                 </template>
               </div>
@@ -170,7 +179,6 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   }
 
   private mySchedule = mySchedule;
-
   private splitTimeslotTime = '15:10'
 
   @property({ type: Object })
@@ -190,6 +198,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   private selectedFilters: Filter[] = [];
 
   private isVitrine = false;
+  private isStandalone = false;
   private additionalClass = "";
   private firstColumnRowCount = 0;
 
@@ -282,6 +291,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
         }, {});
 
       this.isVitrine = params['vitrine'] == 'true' ?? false;
+      this.isStandalone = params['standalone'] == 'true' ?? false;
       this.additionalClass = this.isVitrine ? "vitrine" : ""
 
       if (pathname.endsWith('my-schedule')) {

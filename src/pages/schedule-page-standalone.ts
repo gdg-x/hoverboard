@@ -47,10 +47,8 @@ export class SchedulePageStandalone extends ReduxMixin(PolymerElement) {
           --paper-progress-secondary-color: var(--default-primary-color);
         }
 
-        @media (max-width: 640px) {
-          .container {
-            padding: 0 0 32px;
-          }
+        .container {
+          padding: 8px 16px;
         }
 
         @media (min-width: 640px) {
