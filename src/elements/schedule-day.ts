@@ -222,17 +222,13 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
 
   private getTimePosition(timeslotIndex: number, startTime: string) {
     if(this.isVitrine) {
-      // @ts-ignore
-      const hours = parseInt(startTime.split(':')[0]);
-      // @ts-ignore
-      const minutes = parseInt(startTime.split(':')[1]);
-      // @ts-ignore
-      if(hours <= parseInt(this.splitTimeslotTime.split(':')[0]) && minutes < parseInt(this.splitTimeslotTime.split(':')[1])) {
-        return `${timeslotIndex + 1} / 1`;
-      } else {
+      const timeSlot = parseInt(startTime.replace(':', ''));
+      const timeSlotSplit = parseInt(this.splitTimeslotTime.replace(':', ''));
+      if(timeSlot >= timeSlotSplit) {
         // Move the time slot to the right & top for the other column
-        return `${timeslotIndex - this.firstColumnRowCount +1} / ${(this.day?.tracks || [1]).length /2  + 2}`;
+        return `${timeslotIndex - this.firstColumnRowCount + 1} / ${(this.day?.tracks || [1]).length / 2 + 2}`;
       }
+      return `${timeslotIndex + 1} / 1`;
     }
 
     return `${timeslotIndex + 1} / 1`;
