@@ -71,6 +71,14 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         .standalone .session-title {
           font-size: 14px;
         }
+        .standalone .tag {
+          padding: 4px 6px;
+          height: 26px;
+        }
+
+        .standalone .session-description-container {
+          display: none;
+        }
 
         .session-header {
           padding-bottom: 8px;
@@ -231,7 +239,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         <div class="session-header" layout horizontal justified>
           <div flex class="session-title-container">
             <h3 class="session-title">[[session.title]]</h3>
-            <text-truncate lines="3">
+            <text-truncate lines="3" class="session-description-container">
               <div class="session-description">[[summary]]</div>
             </text-truncate>
           </div>

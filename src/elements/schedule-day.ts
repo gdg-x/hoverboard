@@ -86,7 +86,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
           .vitrine {
             margin: 0;
             padding: 0;
-            max-width: 100vw;
+            max-width: 95vw;
           }
 
 
@@ -99,8 +99,8 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
 
           .grid.vitrine {
             display: grid;
-            grid-column-gap: 4px;
-            grid-row-gap: 8px;
+            grid-column-gap: 3px;
+            grid-row-gap: 3px;
             grid-template-columns: repeat(var(--tracks-number), 1fr);
           }
 
@@ -223,7 +223,11 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
   private getTimePosition(timeslotIndex: number, startTime: string) {
     if(this.isVitrine) {
       // @ts-ignore
-      if(parseInt(startTime.split(':')[0]) < parseInt(this.splitTimeslotTime.split(':')[0])) {
+      const hours = parseInt(startTime.split(':')[0]);
+      // @ts-ignore
+      const minutes = parseInt(startTime.split(':')[1]);
+      // @ts-ignore
+      if(hours <= parseInt(this.splitTimeslotTime.split(':')[0]) && minutes < parseInt(this.splitTimeslotTime.split(':')[1])) {
         return `${timeslotIndex + 1} / 1`;
       } else {
         // Move the time slot to the right & top for the other column
@@ -293,6 +297,8 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
       this.isVitrine = params['vitrine'] == 'true' ?? false;
       this.isStandalone = params['standalone'] == 'true' ?? false;
       this.additionalClass = this.isVitrine ? "vitrine" : ""
+      this.splitTimeslotTime = params['splitTime'] || this.splitTimeslotTime;
+      this.firstColumnRowCount = 0
 
       if (pathname.endsWith('my-schedule')) {
         return 'my-schedule';
