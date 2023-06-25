@@ -59,10 +59,15 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         }
 
         .standalone .session-header,
-        .standalone .session-content,
         .standalone .session-footer {
           padding: 6px;
           z-index: 1;
+        }
+        .standalone .session-content {
+          padding:  0 6px;
+        }
+        .standalone .session-footer {
+          padding:  0 6px 6px;
         }
 
         .standalone .session-actions {
@@ -250,7 +255,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
             <span class="language" hidden="[[session.hideTrackTitle]]"
               >[[session.track.title]]</span
             >
-            <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
+            <span hidden$="[[!session.complexity]]">- [[session.complexity]]</span>
           </div>
           <div class="session-actions">
             <iron-icon
@@ -270,7 +275,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
 
         <div class="session-footer">
           <div layout horizontal justified center-aligned center-center>
-            <div class="session-meta" flex>
+            <div class="session-meta" flex hidden="[[session.hideTrackTitle]]">
               <span hidden$="[[!session.duration.hh]]">
                 [[session.duration.hh]] hour[[getEnding(session.duration.hh)]]
               </span>

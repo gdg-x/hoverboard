@@ -56,6 +56,11 @@ export class SchedulePageStandalone extends ReduxMixin(PolymerElement) {
             background-color: #fff;
           }
         }
+        @media (min-width: 1070px) and (max-width: 1100px) {
+          .container {
+            padding: 4px 16px;
+          }
+        }
       </style>
 
       <paper-progress indeterminate hidden$="[[!pending]]"></paper-progress>
