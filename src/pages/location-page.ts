@@ -49,8 +49,8 @@ export class LocationPage extends PolymerElement {
 <!--        <p class="hero-description">{$ heroSettings.location.description $}</p>-->
 <!--      </hero-block>-->
 
+      <lazy-image class="plan" src="../../images/plan-inside2023.JPG" sizing="contain" alt="Plan"></lazy-image>
       <lazy-image class="plan" src="../../images/plan.png" sizing="contain" alt="Plan"></lazy-image>
-      <lazy-image class="plan" src="../../images/plan-inside.png" sizing="contain" alt="Plan"></lazy-image>
 
       <iframe
         width="100%"
