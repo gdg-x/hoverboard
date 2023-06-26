@@ -90,7 +90,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
           }
           .standalone.twocolumns {
             margin: 0;
-            padding: 0;
+            padding: 50px 0;
             max-width: 95vw;
           }
 
