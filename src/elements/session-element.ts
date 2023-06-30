@@ -253,7 +253,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         <div class="session-content" flex layout horizontal justified>
           <div class="session-meta">
             <span class="language" hidden="[[session.hideTrackTitle]]"
-              >[[session.track.title]]</span
+              >Salle [[session.track.title]]</span
             >
             <span hidden$="[[!session.complexity]]">- [[session.complexity]]</span>
           </div>
