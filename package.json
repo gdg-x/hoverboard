@@ -77,7 +77,7 @@
     "@stylelint/postcss-css-in-js": "^0.38.0",
     "@testing-library/dom": "^9.2.0",
     "@testing-library/jest-dom": "^5.16.5",
-    "@types/jest": "^29.5.0",
+    "@types/jest": "^29.5.2",
     "@types/jest-dev-server": "^5.0.0",
     "@types/marked": "^5.0.0",
     "@types/node": "^16.18.23",
