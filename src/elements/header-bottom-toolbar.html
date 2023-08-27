@@ -82,7 +82,7 @@
 
       <paper-tabs class="nav-items" selected="[[route.subRoute]]" attr-for-selected="day"
         hidden$="[[!contentLoaderVisibility]]" scrollable hide-scroll-buttons noink>
-        <template is="dom-repeat" items="[[schedule]]" as="year">
+        <template is="dom-repeat" items="[[schedule]]" as="year" role="tablist">
 
           <template is="dom-if" if="[[_stringContainsValue(route.subRoute, year.year )]]">
             <span class="year">[[year.year]]</span>
