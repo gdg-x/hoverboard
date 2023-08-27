@@ -139,7 +139,7 @@
           ga-event-action="click"
           ga-event-label="left"
           hidden$="[[_leftArrowHidden]]"
-        ></paper-icon-button>
+          aria-label="Last video"></paper-icon-button>
         <div id="videoList" class="video-list" layout flex horizontal>
           <div id="videos" class="videos" layout horizontal>
              <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
@@ -161,7 +161,7 @@
                   <paper-icon-button
                     class="video-play-icon"
                     icon="hoverboard:play"
-                  ></paper-icon-button>
+                    aria-label="Play video"></paper-icon-button>
                 </div>
                 <h4 class="video-title">[[block.title]]</h4>
               </div>
@@ -176,8 +176,8 @@
           ga-event-category="video-list-arrow"
           ga-event-action="click"
           ga-event-label="right"
-          hidden$="[[_rightArrowHidden]]">
-        ></paper-icon-button>
+          hidden$="[[_rightArrowHidden]]"
+          aria-label="Next video"></paper-icon-button>
       </div>
       <a
         href="{$ featuredVideos.callToAction.link $}"

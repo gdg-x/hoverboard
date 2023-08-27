@@ -156,7 +156,11 @@
                 <div class="contacts">
                   <template is="dom-repeat" items="[[member.socials]]" as="social">
                     <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
-                      <paper-icon-button class="social-icon" icon="hoverboard:{{social.icon}}"></paper-icon-button>
+                      <paper-icon-button 
+                        class="social-icon" 
+                        icon="hoverboard:{{social.icon}}"
+                        aria-label="[[member.name]] [[social.name]]"
+                        ></paper-icon-button>
                     </a>
                   </template>
                 </div>

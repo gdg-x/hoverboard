@@ -125,10 +125,11 @@
 
         <div class="actions" layout horizontal>
           <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-            <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
+            <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer" aria-label="[[speaker.name]] [[social.name]]">
               <paper-icon-button
                 class="social-icon"
                 icon="hoverboard:{{social.icon}}"
+                aria-label="[[speaker.name]] [[social.name]]"
               ></paper-icon-button>
             </a>
           </template>

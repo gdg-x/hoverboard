@@ -155,8 +155,8 @@
             ga-on="click"
             ga-event-category="social"
             ga-event-action="share"
-            ga-event-label="instagram">
-          </paper-icon-button>
+            ga-event-label="instagram"
+            aria-label="Instagram"></paper-icon-button>
         </div>
         <div class="share">
           <paper-icon-button
@@ -167,8 +167,8 @@
             ga-on="click"
             ga-event-category="social"
             ga-event-action="share"
-            ga-event-label="twitter">
-          </paper-icon-button>
+            ga-event-label="twitter"
+            aria-label="Twitter"></paper-icon-button>
         </div>
       </div>
     </div>
@@ -185,7 +185,7 @@
                 ga-event-category="social"
                 ga-event-action="follow"
                 ga-event-label="{$ socFollow.name $}">
-              <paper-icon-button icon="hoverboard:{$ socFollow.name $}"></paper-icon-button>
+              <paper-icon-button icon="hoverboard:{$ socFollow.name $}" aria-label="hoverboard:{$ socFollow.name $}" ></paper-icon-button>
             </a>
           </li>
         {% endfor %}
