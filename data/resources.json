@@ -37,11 +37,6 @@
       "title": "About",
       "links": [
         {
-          "name": "Call for Speakers",
-          "url": "https://www.papercall.io/libertyjs-2023",
-          "newTab": true
-        },
-        {
           "name": "Meet the Team",
           "url": "/team/",
           "newTab": false

@@ -550,60 +550,21 @@
       ]
     },
     {
-      "id": "timKadlec",
-      "featured": false,
-      "bio": "Tim is an independent web performance consultant helping organizations improve the effectiveness and reach of their sites by ensuring that they perform quickly—and stay that way.\n \n\n Tim is the author of High Performance Images (O'Reilly, 2016) and Implementing Responsive Design: Building sites for an anywhere, everywhere web (New Riders, 2012), and was also a contributing author for Smashing Book #4: New Perspectives on Web Design (Smashing Magazine, 2013) and the Web Performance Daybook Volume 2 (O'Reilly, 2012). He also hosts Chasing Waterfalls, a podcast featuring conversations with the people working to make the web faster for everyone.",
-      "name": "Tim Kadlec",
-      "company": "Tim Kadlec Consulting",
-      "country": "Wisconsin",
-      "photo": "https://secure.gravatar.com/avatar/a9a379f2e92c7ded4564190c5b286b78?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/a9a379f2e92c7ded4564190c5b286b78?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "hangingOnByAThread"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/tkadlec",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://timkadlec.com/",
-          "name": "Website"
-        }
-      ]
-    },
-    {
       "id": "mrinaSugosh",
       "featured": false,
       "bio": "#N/A",
       "name": "Mrina Sugosh",
-      "company": "#N/A",
-      "country": "#N/A",
-      "photo": "#N/A",
-      "photoUrl": "#N/A",
+      "company": "Tiny Technologies",
+      "country": "",
+      "photo": "",
+      "photoUrl": "",
       "order": 0,
       "sessions": [
         {
-          "id": "na"
+          "id": "chatgptAsAnAiAssistant"
         }
       ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/#N/A",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "#N/A",
-          "name": "Website"
-        }
-      ]
+      "socials": []
     },
     {
       "id": "rubenRestrepo",
