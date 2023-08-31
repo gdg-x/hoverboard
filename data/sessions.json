@@ -912,15 +912,16 @@
     },
     {
       "id": "keynoteLeslieChapman",
-      "complexity": "Beginner",
-      "description": "Desc",
+      "complexity": "All",
+      "description": "",
       "speakers": [
         "leslieChapman"
       ],
       "tags": [
-        "leadership"
+        "leadership",
+        "life hack"
       ],
-      "title": "Keynote - Leslie Chapman"
+      "title": "Keynote - How to be the most Productive developer on your team"
     },
     {
       "id": "stopUsingJavascriptForThatMovingFeaturesFromJsToCssAndHtml",
