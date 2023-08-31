@@ -552,12 +552,12 @@
     {
       "id": "mrinaSugosh",
       "featured": false,
-      "bio": "#N/A",
+      "bio": "Mrinalini(Mrina)has been 'hacking' away at tech projects since the age of 14! Her first project was programming her TI-84 calculator to be able quickly find the hypotenuse of a right triangle. Since then she has been in constant pursuit of employing CS to enable her curiosity; be it was building a text messaging COVID bot or a motion detector for her pup's sleep.She is a UC Berkeley Alumnus and currently works as a Developer Relations Manager at TinyMCE.",
       "name": "Mrina Sugosh",
-      "company": "Tiny Technologies",
+      "company": "TinyMCE",
       "country": "",
-      "photo": "",
-      "photoUrl": "",
+      "photo": "/images/speakers/mrinasugosh.jpg",
+      "photoUrl": "/images/speakers/mrinasugosh.jpg",
       "order": 0,
       "sessions": [
         {

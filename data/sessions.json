@@ -851,8 +851,8 @@
     },
     {
       "id": "chatgptAsAnAiAssistant",
-      "complexity": "N/A",
-      "description": "N/A",
+      "complexity": "All",
+      "description": "Calling all JavaScript developers! In this talk, we will dive deep into the world of Generative AI and unveil the remarkable capabilities of ChatGPT. Discover the crucial role of prompt writing in harnessing ChatGPT's power to create high-quality content. Prepare for an in-depth technical exploration as we share our experiences in developing Tiny MCE's AI Assistant using OpenAI. We will discuss the challenges we faced, the triumphs we achieved, and the valuable lessons learned along the way. Join us for this enlightening session where we'll demonstrate how JavaScript developers can leverage AI to elevate their personal endeavors. Don't miss this opportunity to gain insights into the fascinating intersection of JavaScript and Generative AI! See you there!",
       "speakers": [
         "mrinaSugosh"
       ],
