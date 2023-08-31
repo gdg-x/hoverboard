@@ -217,6 +217,141 @@
                   ]
                 }
               ]
+            },
+            {
+              "startTime": "9:50",
+              "endTime": "10:30",
+              "sessions": [
+                {
+                  "items": [
+                    "trustedTypesDomXssProtectionAtScale"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "howToUnlockYourCreativePotentialATechnicalGuideForGoingFromIdeaToProduction"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                },
+                {
+                  "items": [
+                    "letsBuildTheLibertyjsVscodeExtensionTogether"
+                  ],
+                  "trackNum": 3,
+                  "startCol": 3
+                }
+              ]
+            },
+            {
+              "startTime": "10:40",
+              "endTime": "11:20",
+              "sessions": [
+                {
+                  "items": [
+                    "unleashingThePowerOfCloudBuildingScalableAndResilientAppsWithAwsAndCicdPipelines"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "observabilityForTheFrontEnd"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                }
+              ]
+            },
+            {
+              "startTime": "11:30",
+              "endTime": "12:10",
+              "sessions": [
+                {
+                  "items": [
+                    "aJavascriptDevelopersGuideToIdentity"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "howToBuildDistributedSystemsInJavascript"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                }
+              ]
+            },
+            {
+              "startTime": "12:10",
+              "endTime": "13:50",
+              "sessions": [
+                {
+                  "items": [
+                    "lunch"
+                  ]
+                }
+              ]
+            },
+            {
+              "startTime": "13:50",
+              "endTime": "14:30",
+              "sessions": [
+                {
+                  "items": [
+                    "theDecisionBuyinAlgorithm"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "inPersonHybridRemoteTipsForIndividualsTeamsAndCompaniesToNavigateOurNewWorkReality"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                },
+                {
+                  "items": [
+                    "makingWebsitesSmartAndQwik"
+                  ],
+                  "trackNum": 3,
+                  "startCol": 3
+                }
+              ]
+            },
+            {
+              "startTime": "14:40",
+              "endTime": "15:20",
+              "sessions": [
+                {
+                  "items": [
+                    "progressOverPerfectionYourFirstStepsInAccessibility"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "buildingADesignSystemInflight"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                }
+              ]
+            },
+            {
+              "startTime": "15:30",
+              "endTime": "16:30",
+              "sessions": []
+            },
+            {
+              "startTime": "16:20",
+              "endTime": "17:00",
+              "sessions": []
             }
           ],
           "tracks": [
