@@ -688,7 +688,8 @@
       "complexity": "All",
       "description": "DOM XSS is the most critical threat to frontend web security and Trusted Types is the only solution that has worked at scale to prevent these attacks. We will discuss how this browser-based security mitigation protects billions of our users and makes the entire JS ecosystem safer.",
       "speakers": [
-        "jenOzmen"
+        "jenOzmen",
+        "aaronShim"
       ],
       "tags": [
         "JavaScript",

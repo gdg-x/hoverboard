@@ -729,6 +729,21 @@
           "name": "Website"
         }
       ]
+    },
+    {
+      "id": "aaronShim",
+      "featured": false,
+      "bio": "Aaron is a software engineer at Google who focuses on web security features and adoption across all Google products. Before working on security, he was on product teams for Google Cloud and Google Workspace. Before Google, he had a brief stint at Microsoft. Prior to big tech, he wrote a lot of Ruby on Rails code.",
+      "name": "Aaron Shim",
+      "company": "Google",
+      "photo": "https://secure.gravatar.com/avatar/46d9299b7ba74b3472b623e550df1504?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/46d9299b7ba74b3472b623e550df1504?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "trustedTypesDomXssProtectionAtScale"
+        }
+      ]
     }
   ]
 }
