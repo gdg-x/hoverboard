@@ -535,391 +535,405 @@
       "title": "Predicting the Future of the Web"
     },
     {
-      "sessions": [
-        {
-          "id": "ourFutureWithoutPasswords",
-          "complexity": "All",
-          "description": "Picture the future. What do you see? Flying cars? Vacations in space? How about…not having to use passwords anymore? Well, welcome to that future. The no passwords one, not flying cars. Passkeys are here to enable you to log in to a site by unlocking your phone and I'm here to tell you all about it.",
-          "speakers": [
-            "milicaMihajlija"
-          ],
-          "tags": [],
-          "title": "Our future without passwords"
-        },
-        {
-          "id": "simplifyMicroFrontendArchitectureUsingReactToWebComponent",
-          "complexity": "Beginner",
-          "description": "Do you want to see the simplest way to transform your existing React app into Micro Frontend architecture? Enter: React to Web Component. We’ll take a layout and a few React components, turn them into stand-alone Web Components, turn them into a fully functioning MFE app, and deploy it!",
-          "speakers": [
-            "christopherJBaker"
-          ],
-          "tags": [
-            "React",
-            "Web Components",
-            "Micro Frontends"
-          ],
-          "title": "Simplify Micro Frontend Architecture Using React to Web Component"
-        },
-        {
-          "id": "howToBuildDistributedSystemsInJavascript",
-          "complexity": "Intermediate",
-          "description": "Normal functions are unreliable. To build reliable backends out of them, we need databases and queues and patterns like EDA, choreography, orchestration, sagas, and circuit breakers. *Durable functions* are completely reliable: they live through power outages and can run forever.",
-          "speakers": [
-            "lorenSandsramshaw"
-          ],
-          "tags": [
-            "javascript",
-            "distributed-systems",
-            "node"
-          ],
-          "title": "How to build distributed systems in JavaScript"
-        },
-        {
-          "id": "wereSnakingItLive",
-          "complexity": "All",
-          "description": "Your 5th grade math teacher was wrong: playing Snake CAN be good for you!\n \n\n Multiplayer Snake—Battlesnake—is an accessible crucible to flex our JavaScript muscles against a welcoming community of bots written in C++, Rust and even Bash.\n \n\n And we'll have fun doing it, together, LIVE.",
-          "speakers": [
-            "michaelSchoonmaker"
-          ],
-          "tags": [
-            "JavaScript",
-            "nodejs",
-            "http",
-            "api",
-            "Node"
-          ],
-          "title": "We're Snaking it Live!"
-        },
-        {
-          "id": "inPersonHybridRemoteTipsForIndividualsTeamsAndCompaniesToNavigateOurNewWorkReality",
-          "complexity": "All",
-          "description": "The way we work has changed dramatically in the last 3 years. Individuals, teams, and companies are still trying to figure out the new normal.\n \n\n Join me to discuss patterns, pitfalls, and tips for navigating the new workplace landscape.",
-          "speakers": [
-            "danLuchi"
-          ],
-          "tags": [
-            "Teams",
-            "Remote",
-            "Hybrid"
-          ],
-          "title": "In Person, Hybrid, Remote? Tips for individuals, teams, and companies to navigate our new work reality"
-        },
-        {
-          "id": "whatRaising3KidsTaughtMeAboutWorkingWithUsers",
-          "complexity": "All",
-          "description": "No matter how awesome an application is, if it doesn't give the users or stakeholders what they want it won't get used. In this talk I explore ways to work with users, website visitors, or business stakeholders to design a truly useful product. I use parenting analogies to add humor and interest.",
-          "speakers": [
-            "derekBinkley"
-          ],
-          "tags": [
-            "software development"
-          ],
-          "title": "What raising 3 kids taught me about working with users"
-        },
-        {
-          "id": "buildingADesignSystemInflight",
-          "complexity": "All",
-          "description": "Design systems -collections of common components, colors, and other constants- are a key way to scale teams and web applications on the modern web. They save time for devs and designers. Let's walk through the process of converting an existing site to a design system to show how useful they can be!",
-          "speakers": [
-            "joshGoldberg"
-          ],
-          "tags": [
-            "design systems",
-            "components",
-            "atomic design"
-          ],
-          "title": "Building a Design System In-Flight"
-        },
-        {
-          "id": "theDecisionBuyinAlgorithm",
-          "complexity": "Intermediate",
-          "description": "While making large technical decisions such as deciding which JavaScript framework to build your web app in are difficult, getting buy-in for those decisions is even more challenging. It turns out other industries have a tried-and-true success formula for this that us in tech can leverage today!",
-          "speakers": [
-            "johnRiviello"
-          ],
-          "tags": [
-            "JavaScript",
-            "Leading development teams"
-          ],
-          "title": "The Decision Buy-In Algorithm"
-        },
-        {
-          "id": "roadToZeroLintFailuresTacklingCodeQualityChallengesAtScale",
-          "complexity": "Intermediate",
-          "description": "Lint rules improves developer productivity and minimizes errors. But what if your large scale application contains thousands of lint failures? Discover effective strategies to resolve them so that we can once again rely on lint rules to ensure consistent code quality and a more maintainable codebase",
-          "speakers": [
-            "chrisNg"
-          ],
-          "tags": [
-            "linting",
-            "javascript",
-            "code-quality",
-            "scale"
-          ],
-          "title": "Road to Zero Lint Failures: Tackling Code Quality Challenges at Scale"
-        },
-        {
-          "id": "theFutureOfWebStorageExploringAdvancedApisAndEmergingTechnologies",
-          "complexity": "All",
-          "description": "Are you tired of relying on outdated web storage techniques? In this presentation, we will dive into the world of advanced APIs such as IndexedDB, CacheStorage, FileSystem API, etc. We'll compare the benefits and limitations of each API, discussing their persistence, quota, security, and performance",
-          "speakers": [
-            "shubhamGautam"
-          ],
-          "tags": [
-            "Web Storage",
-            "Javascript"
-          ],
-          "title": "The Future of Web Storage: Exploring Advanced APIs and Emerging Technologies"
-        },
-        {
-          "id": "optimizingYourWebAppHowToScore100OnLighthouse",
-          "complexity": "All",
-          "description": "Explore the differences between field and lab data, the importance of the latter and practical ways to improve it, all backed by live examples. Learn about TBT and long tasks, JavaScript execution by v8 engine, and Webpack impact. Discover how to improve and reach a perfect Lighthouse score of 100.",
-          "speakers": [
-            "jebBarabanov"
-          ],
-          "tags": [
-            "javascript",
-            "web performance",
-            "browser"
-          ],
-          "title": "Optimizing Your Web App: How to Score 100 on Lighthouse"
-        },
-        {
-          "id": "trustedTypesDomXssProtectionAtScale",
-          "complexity": "All",
-          "description": "DOM XSS is the most critical threat to frontend web security and Trusted Types is the only solution that has worked at scale to prevent these attacks. We will discuss how this browser-based security mitigation protects billions of our users and makes the entire JS ecosystem safer.",
-          "speakers": [
-            "jenOzmen"
-          ],
-          "tags": [
-            "JavaScript",
-            "security"
-          ],
-          "title": "Trusted Types: DOM XSS Protection at Scale"
-        },
-        {
-          "id": "collabAndCommunicateHowGithubCanEmpowerOpenSourceCommunities",
-          "complexity": "All",
-          "description": "Learn how to collaborate effectively with GitHub's features like Discussions and Search. Discover best practices for building resilient communities and fostering positive relationships. Make a meaningful impact on software development - whether you're a seasoned contributor or just starting out.",
-          "speakers": [
-            "ernestPhillips"
-          ],
-          "tags": [
-            "Open source",
-            "github",
-            "discussions",
-            "collaboration",
-            "search"
-          ],
-          "title": "Collab and Communicate: How GitHub Can Empower Open Source Communities"
-        },
-        {
-          "id": "aJavascriptDevelopersGuideToIdentity",
-          "complexity": "All",
-          "description": "Identity access and security are undoubtedly important. Knowing the ins and outs of identity can be the difference between your users staying safe or your users' information being exposed to hackers. This talks aims to fulfill that need and teach you the basics identity and beyond.",
-          "speakers": [
-            "ceora"
-          ],
-          "tags": [
-            "JavaScript",
-            "Identity",
-            "Security"
-          ],
-          "title": "A JavaScript Developer's Guide to Identity"
-        },
-        {
-          "id": "accessibleWebSolutionsWithAriaAndJavascript",
-          "complexity": "Intermediate",
-          "description": "Web interfaces that people with disabilities can use aren’t easy to create. ARIA attributes and dynamic JavaScript solutions must be recognized and understood by assistive technologies. We’ll look at correct ARIA usage and how to manipulate functionality with JavaScript for the best user experience.",
-          "speakers": [
-            "adinaHalter"
-          ],
-          "tags": [
-            "ARIA",
-            "JavaScript",
-            "WCAG",
-            "Accessibility",
-            "Web",
-            "Disability",
-            "Assistive Technology"
-          ],
-          "title": "Accessible Web Solutions with ARIA and JavaScript"
-        },
-        {
-          "id": "howToUnlockYourCreativePotentialATechnicalGuideForGoingFromIdeaToProduction",
-          "complexity": "All",
-          "description": "In this talk, we'll explore the journey from idea to production and sales. Leveraging the Creative Development Framework, we explain a systemic or technical approach to creativity. We'll discuss setting clear aims, designing empathetic applications, and building with customer behaviors first.",
-          "speakers": [
-            "jaylenSanders"
-          ],
-          "tags": [
-            "Javascript",
-            "#Creative",
-            "#Framework",
-            "#TV-Sales",
-            "#Innovation"
-          ],
-          "title": "How to Unlock Your Creative Potential: A Technical Guide for Going From Idea to Production"
-        },
-        {
-          "id": "unleashingThePowerOfCloudBuildingScalableAndResilientAppsWithAwsAndCicdPipelines",
-          "complexity": "All",
-          "description": "Learn the secrets of building scalable & resilient apps on AWS! Learn how to optimize EC2 instances, utilize AWS services, and master CI/CD pipelines. Get ready to deliver applications that handle any load. Don't miss out!",
-          "speakers": [
-            "toniDarden"
-          ],
-          "tags": [
-            "aws",
-            "ci/cd",
-            "data processing",
-            "javascript",
-            "python",
-            "data Analytics",
-            "cloud",
-            "data engineering"
-          ],
-          "title": "Unleashing the Power of Cloud: Building Scalable and Resilient Apps with AWS and CI/CD Pipelines"
-        },
-        {
-          "id": "observabilityForTheFrontEnd",
-          "complexity": "Intermediate",
-          "description": "Back end developers are lucky. They benefit from recent advances in observability: tasty distributed traces with OpenTelemetry, the modern open-source standard.\n What does OpenTelemetry have for the front end?\n Some magic, and some opportunities.\n Work skillfully in complexity with great observability.",
-          "speakers": [
-            "jessicaKerr"
-          ],
-          "tags": [
-            "javascript",
-            "observability"
-          ],
-          "title": "Observability for the Front End"
-        },
-        {
-          "id": "progressOverPerfectionYourFirstStepsInAccessibility",
-          "complexity": "All",
-          "description": "Accessibility is our responsibility as front-end developers, but it can be daunting to know where to start. The talk will cover the basics of making your product more accessible: semantic HTML, when to use ARIA, and common pitfalls. This is how you start making progress towards a web for all.",
-          "speakers": [
-            "leeWhite"
-          ],
-          "tags": [
-            "HTML",
-            "accessibility",
-            "front-end"
-          ],
-          "title": "Progress over perfection: your first steps in accessibility"
-        },
-        {
-          "id": "theComponentTestingBlueprintEnsureSecureCodeEvolutionInComponentLibraries",
-          "complexity": "All",
-          "description": "Truly unleash the power & efficiency of your component library by ensuring robust scalability through automated component testing. Learn how atoms lay the foundation for complex components. Discover testing secrets to rock-solid functionality, security, and valuable documentation for your components",
-          "speakers": [
-            "gradySalzman"
-          ],
-          "tags": [
-            "JavaScript",
-            "Testing",
-            "Design System",
-            "Component Library"
-          ],
-          "title": "The Component Testing Blueprint: Ensure Secure Code Evolution in Component Libraries"
-        },
-        {
-          "id": "cssBetweenThePages",
-          "complexity": "All",
-          "description": "We've been able to animate and transition on the web for a while, but the experience has been limited to within single pages. The View Transitions API aims to change that by making it easy to transition anything from elements to entire pages across navigations with just CSS and a bit of JavaScript.",
-          "speakers": [
-            "philNash"
-          ],
-          "tags": [
-            "css",
-            "javascript",
-            "animation"
-          ],
-          "title": "CSS Between the Pages"
-        },
-        {
-          "id": "hangingOnByAThread",
-          "complexity": "Intermediate",
-          "description": "In this talk, we’ll talk about the cost of making the client do the heavy lifting, the way our current metrics hide the issues from us, how the next wave of metrics are going to cause us to finally confront the implications of the ways we build for the web, and what we can do about it.",
-          "speakers": [
-            "timKadlec"
-          ],
-          "tags": [
-            "javascript",
-            "performance"
-          ],
-          "title": "Hanging on by a thread"
-        },
-        {
-          "id": "chatgptAsAnAiAssistant",
-          "complexity": "#N/A",
-          "description": "#N/A",
-          "speakers": [
-            "na"
-          ],
-          "tags": "#N/A",
-          "title": "ChatGPT as an AI Assistant"
-        },
-        {
-          "id": "letsBuildTheLibertyjsVscodeExtensionTogether",
-          "complexity": "Intermediate",
-          "description": "Have you ever wondered how famous VSCode extensions work?\n Let's build the LibertyJS VSCode extension together!\n After the end of this workshop, you will understand the building principles of VSCode extension API, avoid common mistakes and pitfalls, and learn how to add custom components and views.",
-          "speakers": [
-            "rubenRestrepo"
-          ],
-          "tags": [
-            "typescript",
-            "node.js",
-            "vscode"
-          ],
-          "title": "Let's build the LibertyJS VSCode extension together!"
-        },
-        {
-          "id": "makingWebsitesSmartAndQwik",
-          "complexity": "Intermediate",
-          "description": "Reset the countdown: it has been 0 days since a new JS framework. In this workshop, we will build a web app that uses ChatGPT to translate components between different JS frameworks using Qwik, the first O(1) JavaScript framework. Along the way, we will learn about Qwik's unique advantages.",
-          "speakers": [
-            "jeffreySmith"
-          ],
-          "tags": [
-            "qwik",
-            "resumability",
-            "chatgpt",
-            "openai",
-            "javascript"
-          ],
-          "title": "Making websites Smart and Qwik"
-        },
-        {
-          "id": "building3dGeospatialVisualizationsWithCesiumGoogleAndArcgis",
-          "complexity": "Beginner",
-          "description": "Whether you're looking to enhance an app with high-quality 3D data or add valuable location-based insights, this workshop aims to equip JS developers with some tips and tricks to combine Cesium, Esri, and Google Photorealistic 3D Tiles to create compelling 3D geospatial visualizations.",
-          "speakers": [
-            "gabbyGetz"
-          ],
-          "tags": [
-            "JavaScript",
-            "Cesium",
-            "3D Tiles",
-            "3D",
-            "WebGL",
-            "Google Maps",
-            "Esri",
-            "Google"
-          ],
-          "title": "Building 3D Geospatial Visualizations With Cesium, Google, and ArcGIS"
-        },
-        {
-          "id": "keynoteLeslieChapman",
-          "complexity": "#N/A",
-          "description": "#N/A",
-          "speakers": [
-            "na"
-          ],
-          "tags": "#N/A",
-          "title": "Keynote - Leslie Chapman\t\t"
-        }
-      ]
+      "id": "ourFutureWithoutPasswords",
+      "complexity": "All",
+      "description": "Picture the future. What do you see? Flying cars? Vacations in space? How about…not having to use passwords anymore? Well, welcome to that future. The no passwords one, not flying cars. Passkeys are here to enable you to log in to a site by unlocking your phone and I'm here to tell you all about it.",
+      "speakers": [
+        "milicaMihajlija"
+      ],
+      "tags": [],
+      "title": "Our future without passwords"
+    },
+    {
+      "id": "simplifyMicroFrontendArchitectureUsingReactToWebComponent",
+      "complexity": "Beginner",
+      "description": "Do you want to see the simplest way to transform your existing React app into Micro Frontend architecture? Enter: React to Web Component. We’ll take a layout and a few React components, turn them into stand-alone Web Components, turn them into a fully functioning MFE app, and deploy it!",
+      "speakers": [
+        "christopherJBaker"
+      ],
+      "tags": [
+        "React",
+        "Web Components",
+        "Micro Frontends"
+      ],
+      "title": "Simplify Micro Frontend Architecture Using React to Web Component"
+    },
+    {
+      "id": "howToBuildDistributedSystemsInJavascript",
+      "complexity": "Intermediate",
+      "description": "Normal functions are unreliable. To build reliable backends out of them, we need databases and queues and patterns like EDA, choreography, orchestration, sagas, and circuit breakers. *Durable functions* are completely reliable: they live through power outages and can run forever.",
+      "speakers": [
+        "lorenSandsramshaw"
+      ],
+      "tags": [
+        "javascript",
+        "distributed-systems",
+        "node"
+      ],
+      "title": "How to build distributed systems in JavaScript"
+    },
+    {
+      "id": "wereSnakingItLive",
+      "complexity": "All",
+      "description": "Your 5th grade math teacher was wrong: playing Snake CAN be good for you!\n \n\n Multiplayer Snake—Battlesnake—is an accessible crucible to flex our JavaScript muscles against a welcoming community of bots written in C++, Rust and even Bash.\n \n\n And we'll have fun doing it, together, LIVE.",
+      "speakers": [
+        "michaelSchoonmaker"
+      ],
+      "tags": [
+        "JavaScript",
+        "nodejs",
+        "http",
+        "api",
+        "Node"
+      ],
+      "title": "We're Snaking it Live!"
+    },
+    {
+      "id": "inPersonHybridRemoteTipsForIndividualsTeamsAndCompaniesToNavigateOurNewWorkReality",
+      "complexity": "All",
+      "description": "The way we work has changed dramatically in the last 3 years. Individuals, teams, and companies are still trying to figure out the new normal.\n \n\n Join me to discuss patterns, pitfalls, and tips for navigating the new workplace landscape.",
+      "speakers": [
+        "danLuchi"
+      ],
+      "tags": [
+        "Teams",
+        "Remote",
+        "Hybrid"
+      ],
+      "title": "In Person, Hybrid, Remote? Tips for individuals, teams, and companies to navigate our new work reality"
+    },
+    {
+      "id": "whatRaising3KidsTaughtMeAboutWorkingWithUsers",
+      "complexity": "All",
+      "description": "No matter how awesome an application is, if it doesn't give the users or stakeholders what they want it won't get used. In this talk I explore ways to work with users, website visitors, or business stakeholders to design a truly useful product. I use parenting analogies to add humor and interest.",
+      "speakers": [
+        "derekBinkley"
+      ],
+      "tags": [
+        "software development"
+      ],
+      "title": "What raising 3 kids taught me about working with users"
+    },
+    {
+      "id": "buildingADesignSystemInflight",
+      "complexity": "All",
+      "description": "Design systems -collections of common components, colors, and other constants- are a key way to scale teams and web applications on the modern web. They save time for devs and designers. Let's walk through the process of converting an existing site to a design system to show how useful they can be!",
+      "speakers": [
+        "joshGoldberg"
+      ],
+      "tags": [
+        "design systems",
+        "components",
+        "atomic design"
+      ],
+      "title": "Building a Design System In-Flight"
+    },
+    {
+      "id": "theDecisionBuyinAlgorithm",
+      "complexity": "Intermediate",
+      "description": "While making large technical decisions such as deciding which JavaScript framework to build your web app in are difficult, getting buy-in for those decisions is even more challenging. It turns out other industries have a tried-and-true success formula for this that us in tech can leverage today!",
+      "speakers": [
+        "johnRiviello"
+      ],
+      "tags": [
+        "JavaScript",
+        "Leading development teams"
+      ],
+      "title": "The Decision Buy-In Algorithm"
+    },
+    {
+      "id": "roadToZeroLintFailuresTacklingCodeQualityChallengesAtScale",
+      "complexity": "Intermediate",
+      "description": "Lint rules improves developer productivity and minimizes errors. But what if your large scale application contains thousands of lint failures? Discover effective strategies to resolve them so that we can once again rely on lint rules to ensure consistent code quality and a more maintainable codebase",
+      "speakers": [
+        "chrisNg"
+      ],
+      "tags": [
+        "linting",
+        "javascript",
+        "code-quality",
+        "scale"
+      ],
+      "title": "Road to Zero Lint Failures: Tackling Code Quality Challenges at Scale"
+    },
+    {
+      "id": "theFutureOfWebStorageExploringAdvancedApisAndEmergingTechnologies",
+      "complexity": "All",
+      "description": "Are you tired of relying on outdated web storage techniques? In this presentation, we will dive into the world of advanced APIs such as IndexedDB, CacheStorage, FileSystem API, etc. We'll compare the benefits and limitations of each API, discussing their persistence, quota, security, and performance",
+      "speakers": [
+        "shubhamGautam"
+      ],
+      "tags": [
+        "Web Storage",
+        "Javascript"
+      ],
+      "title": "The Future of Web Storage: Exploring Advanced APIs and Emerging Technologies"
+    },
+    {
+      "id": "optimizingYourWebAppHowToScore100OnLighthouse",
+      "complexity": "All",
+      "description": "Explore the differences between field and lab data, the importance of the latter and practical ways to improve it, all backed by live examples. Learn about TBT and long tasks, JavaScript execution by v8 engine, and Webpack impact. Discover how to improve and reach a perfect Lighthouse score of 100.",
+      "speakers": [
+        "jebBarabanov"
+      ],
+      "tags": [
+        "javascript",
+        "web performance",
+        "browser"
+      ],
+      "title": "Optimizing Your Web App: How to Score 100 on Lighthouse"
+    },
+    {
+      "id": "trustedTypesDomXssProtectionAtScale",
+      "complexity": "All",
+      "description": "DOM XSS is the most critical threat to frontend web security and Trusted Types is the only solution that has worked at scale to prevent these attacks. We will discuss how this browser-based security mitigation protects billions of our users and makes the entire JS ecosystem safer.",
+      "speakers": [
+        "jenOzmen"
+      ],
+      "tags": [
+        "JavaScript",
+        "security"
+      ],
+      "title": "Trusted Types: DOM XSS Protection at Scale"
+    },
+    {
+      "id": "collabAndCommunicateHowGithubCanEmpowerOpenSourceCommunities",
+      "complexity": "All",
+      "description": "Learn how to collaborate effectively with GitHub's features like Discussions and Search. Discover best practices for building resilient communities and fostering positive relationships. Make a meaningful impact on software development - whether you're a seasoned contributor or just starting out.",
+      "speakers": [
+        "ernestPhillips"
+      ],
+      "tags": [
+        "Open source",
+        "github",
+        "discussions",
+        "collaboration",
+        "search"
+      ],
+      "title": "Collab and Communicate: How GitHub Can Empower Open Source Communities"
+    },
+    {
+      "id": "aJavascriptDevelopersGuideToIdentity",
+      "complexity": "All",
+      "description": "Identity access and security are undoubtedly important. Knowing the ins and outs of identity can be the difference between your users staying safe or your users' information being exposed to hackers. This talks aims to fulfill that need and teach you the basics identity and beyond.",
+      "speakers": [
+        "ceora"
+      ],
+      "tags": [
+        "JavaScript",
+        "Identity",
+        "Security"
+      ],
+      "title": "A JavaScript Developer's Guide to Identity"
+    },
+    {
+      "id": "accessibleWebSolutionsWithAriaAndJavascript",
+      "complexity": "Intermediate",
+      "description": "Web interfaces that people with disabilities can use aren’t easy to create. ARIA attributes and dynamic JavaScript solutions must be recognized and understood by assistive technologies. We’ll look at correct ARIA usage and how to manipulate functionality with JavaScript for the best user experience.",
+      "speakers": [
+        "adinaHalter"
+      ],
+      "tags": [
+        "ARIA",
+        "JavaScript",
+        "WCAG",
+        "Accessibility",
+        "Web",
+        "Disability",
+        "Assistive Technology"
+      ],
+      "title": "Accessible Web Solutions with ARIA and JavaScript"
+    },
+    {
+      "id": "howToUnlockYourCreativePotentialATechnicalGuideForGoingFromIdeaToProduction",
+      "complexity": "All",
+      "description": "In this talk, we'll explore the journey from idea to production and sales. Leveraging the Creative Development Framework, we explain a systemic or technical approach to creativity. We'll discuss setting clear aims, designing empathetic applications, and building with customer behaviors first.",
+      "speakers": [
+        "jaylenSanders"
+      ],
+      "tags": [
+        "Javascript",
+        "#Creative",
+        "#Framework",
+        "#TV-Sales",
+        "#Innovation"
+      ],
+      "title": "How to Unlock Your Creative Potential: A Technical Guide for Going From Idea to Production"
+    },
+    {
+      "id": "unleashingThePowerOfCloudBuildingScalableAndResilientAppsWithAwsAndCicdPipelines",
+      "complexity": "All",
+      "description": "Learn the secrets of building scalable & resilient apps on AWS! Learn how to optimize EC2 instances, utilize AWS services, and master CI/CD pipelines. Get ready to deliver applications that handle any load. Don't miss out!",
+      "speakers": [
+        "toniDarden"
+      ],
+      "tags": [
+        "aws",
+        "ci/cd",
+        "data processing",
+        "javascript",
+        "python",
+        "data Analytics",
+        "cloud",
+        "data engineering"
+      ],
+      "title": "Unleashing the Power of Cloud: Building Scalable and Resilient Apps with AWS and CI/CD Pipelines"
+    },
+    {
+      "id": "observabilityForTheFrontEnd",
+      "complexity": "Intermediate",
+      "description": "Back end developers are lucky. They benefit from recent advances in observability: tasty distributed traces with OpenTelemetry, the modern open-source standard.\n What does OpenTelemetry have for the front end?\n Some magic, and some opportunities.\n Work skillfully in complexity with great observability.",
+      "speakers": [
+        "jessicaKerr"
+      ],
+      "tags": [
+        "javascript",
+        "observability"
+      ],
+      "title": "Observability for the Front End"
+    },
+    {
+      "id": "progressOverPerfectionYourFirstStepsInAccessibility",
+      "complexity": "All",
+      "description": "Accessibility is our responsibility as front-end developers, but it can be daunting to know where to start. The talk will cover the basics of making your product more accessible: semantic HTML, when to use ARIA, and common pitfalls. This is how you start making progress towards a web for all.",
+      "speakers": [
+        "leeWhite"
+      ],
+      "tags": [
+        "HTML",
+        "accessibility",
+        "front-end"
+      ],
+      "title": "Progress over perfection: your first steps in accessibility"
+    },
+    {
+      "id": "theComponentTestingBlueprintEnsureSecureCodeEvolutionInComponentLibraries",
+      "complexity": "All",
+      "description": "Truly unleash the power & efficiency of your component library by ensuring robust scalability through automated component testing. Learn how atoms lay the foundation for complex components. Discover testing secrets to rock-solid functionality, security, and valuable documentation for your components",
+      "speakers": [
+        "gradySalzman"
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing",
+        "Design System",
+        "Component Library"
+      ],
+      "title": "The Component Testing Blueprint: Ensure Secure Code Evolution in Component Libraries"
+    },
+    {
+      "id": "cssBetweenThePages",
+      "complexity": "All",
+      "description": "We've been able to animate and transition on the web for a while, but the experience has been limited to within single pages. The View Transitions API aims to change that by making it easy to transition anything from elements to entire pages across navigations with just CSS and a bit of JavaScript.",
+      "speakers": [
+        "philNash"
+      ],
+      "tags": [
+        "css",
+        "javascript",
+        "animation"
+      ],
+      "title": "CSS Between the Pages"
+    },
+    {
+      "id": "hangingOnByAThread",
+      "complexity": "Intermediate",
+      "description": "In this talk, we’ll talk about the cost of making the client do the heavy lifting, the way our current metrics hide the issues from us, how the next wave of metrics are going to cause us to finally confront the implications of the ways we build for the web, and what we can do about it.",
+      "speakers": [
+        "timKadlec"
+      ],
+      "tags": [
+        "javascript",
+        "performance"
+      ],
+      "title": "Hanging on by a thread"
+    },
+    {
+      "id": "chatgptAsAnAiAssistant",
+      "complexity": "N/A",
+      "description": "N/A",
+      "speakers": [
+        "mrinaSugosh"
+      ],
+      "tags": [
+        "AI"
+      ],
+      "title": "ChatGPT as an AI Assistant"
+    },
+    {
+      "id": "letsBuildTheLibertyjsVscodeExtensionTogether",
+      "complexity": "Intermediate",
+      "description": "Have you ever wondered how famous VSCode extensions work?\n Let's build the LibertyJS VSCode extension together!\n After the end of this workshop, you will understand the building principles of VSCode extension API, avoid common mistakes and pitfalls, and learn how to add custom components and views.",
+      "speakers": [
+        "rubenRestrepo"
+      ],
+      "tags": [
+        "typescript",
+        "node.js",
+        "vscode"
+      ],
+      "title": "Let's build the LibertyJS VSCode extension together!"
+    },
+    {
+      "id": "makingWebsitesSmartAndQwik",
+      "complexity": "Intermediate",
+      "description": "Reset the countdown: it has been 0 days since a new JS framework. In this workshop, we will build a web app that uses ChatGPT to translate components between different JS frameworks using Qwik, the first O(1) JavaScript framework. Along the way, we will learn about Qwik's unique advantages.",
+      "speakers": [
+        "jeffreySmith"
+      ],
+      "tags": [
+        "qwik",
+        "resumability",
+        "chatgpt",
+        "openai",
+        "javascript"
+      ],
+      "title": "Making websites Smart and Qwik"
+    },
+    {
+      "id": "building3dGeospatialVisualizationsWithCesiumGoogleAndArcgis",
+      "complexity": "Beginner",
+      "description": "Whether you're looking to enhance an app with high-quality 3D data or add valuable location-based insights, this workshop aims to equip JS developers with some tips and tricks to combine Cesium, Esri, and Google Photorealistic 3D Tiles to create compelling 3D geospatial visualizations.",
+      "speakers": [
+        "gabbyGetz"
+      ],
+      "tags": [
+        "JavaScript",
+        "Cesium",
+        "3D Tiles",
+        "3D",
+        "WebGL",
+        "Google Maps",
+        "Esri",
+        "Google"
+      ],
+      "title": "Building 3D Geospatial Visualizations With Cesium, Google, and ArcGIS"
+    },
+    {
+      "id": "keynoteLeslieChapman",
+      "complexity": "Beginner",
+      "description": "Desc",
+      "speakers": [
+        "leslieChapman"
+      ],
+      "tags": [
+        "leadership"
+      ],
+      "title": "Keynote - Leslie Chapman"
+    },
+    {
+      "id": "stopUsingJavascriptForThatMovingFeaturesFromJsToCssAndHtml",
+      "complexity": "Intermediate",
+      "description": "We'll walk through common patterns that you might think can only be done with JS but now have native CSS and HTML equivalents that you can use, or will soon be able to use. A tour across various different features, keeping design and a11y in mind.",
+      "speakers": [
+        "kilianValkhof"
+      ],
+      "tags": [
+        "Javascript",
+        "Web Development",
+        "UX"
+      ],
+      "title": "Stop using JavaScript for that: moving features from JS to CSS and HTML"
     }
   ]
 }

@@ -28,6 +28,156 @@
                   ]
                 }
               ]
+            },
+            {
+              "startTime": "9:50",
+              "endTime": "10:30",
+              "sessions": [
+                {
+                  "items": [
+                    "theFutureOfWebStorageExploringAdvancedApisAndEmergingTechnologies"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "collabAndCommunicateHowGithubCanEmpowerOpenSourceCommunities"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                }
+              ]
+            },
+            {
+              "startTime": "10:40",
+              "endTime": "11:20",
+              "sessions": [
+                {
+                  "items": [
+                    "stopUsingJavascriptForThatMovingFeaturesFromJsToCssAndHtml"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "simplifyMicroFrontendArchitectureUsingReactToWebComponent"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                }
+              ]
+            },
+            {
+              "startTime": "11:30",
+              "endTime": "12:10",
+              "sessions": [
+                {
+                  "items": [
+                    "roadToZeroLintFailuresTacklingCodeQualityChallengesAtScale"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "accessibleWebSolutionsWithAriaAndJavascript"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                }
+              ]
+            },
+            {
+              "startTime": "12:10",
+              "endTime": "13:50",
+              "sessions": [
+                {
+                  "items": [
+                    "lunch"
+                  ]
+                }
+              ]
+            },
+            {
+              "startTime": "13:50",
+              "endTime": "14:30",
+              "sessions": [
+                {
+                  "items": [
+                    "chatgptAsAnAiAssistant"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "whatRaising3KidsTaughtMeAboutWorkingWithUsers"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                },
+                {
+                  "items": [
+                    "building3dGeospatialVisualizationsWithCesiumGoogleAndArcgis"
+                  ],
+                  "extend": 2,
+                  "startCol": 3,
+                  "trackNum": 3
+                }
+              ]
+            },
+            {
+              "startTime": "14:40",
+              "endTime": "15:20",
+              "sessions": [
+                {
+                  "items": [
+                    "cssBetweenThePages"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "theComponentTestingBlueprintEnsureSecureCodeEvolutionInComponentLibraries"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                }
+              ]
+            },
+            {
+              "startTime": "15:30",
+              "endTime": "16:30",
+              "sessions": [
+                {
+                  "items": [
+                    "optimizingYourWebAppHowToScore100OnLighthouse"
+                  ],
+                  "trackNum": 1,
+                  "startCol": 1
+                },
+                {
+                  "items": [
+                    "wereSnakingItLive"
+                  ],
+                  "trackNum": 2,
+                  "startCol": 2
+                }
+              ]
+            },
+            {
+              "startTime": "16:20",
+              "endTime": "17:00",
+              "sessions": [
+                {
+                  "items": [
+                    "keynoteLeslieChapman"
+                  ]
+                }
+              ]
             }
           ],
           "tracks": [

@@ -568,10 +568,10 @@
       ]
     },
     {
-      "id": "mrina",
+      "id": "mrinaSugosh",
       "featured": false,
       "bio": "#N/A",
-      "name": "Mrina",
+      "name": "Mrina Sugosh",
       "company": "#N/A",
       "country": "#N/A",
       "photo": "#N/A",
@@ -677,27 +677,55 @@
     {
       "id": "leslieChapman",
       "featured": true,
-      "bio": "#N/A",
+      "bio": "Leslie Chapman is an Engineering Fellow at Comcast. She was one of the technical leads for the X1 platform, which serves over 35 million customers. Currently, Leslie leads a team that is building backend systems that drive consistent user experiences across Comcast's suite of video streaming products./n      She is passionate about encouraging young women to enter the tech field and spends a lot of time volunteering with organizations that teach coding to young women.",
       "name": "Leslie Chapman",
-      "company": "#N/A",
-      "country": "#N/A",
-      "photo": "#N/A",
-      "photoUrl": "#N/A",
+      "company": "Comcast",
+      "country": "USA",
+      "photo": "https://res.cloudinary.com/leaddev/image/upload/q_100,c_fill,g_auto:classic,e_sharpen,h_332,w_332/prod/sites/default/files/contributors/2022-08/Leslie Chapman.png",
+      "photoUrl": "https://res.cloudinary.com/leaddev/image/upload/q_100,c_fill,g_auto:classic,e_sharpen,h_332,w_332/prod/sites/default/files/contributors/2022-08/Leslie Chapman.png",
       "order": 0,
       "sessions": [
         {
-          "id": "na"
+          "id": "keynoteLeslieChapman"
         }
       ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "https://twitter.com/#N/A",
+          "link": "https://twitter.com/gabbygetz",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "#N/A",
+          "link": "https://cesium.com",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "kilianValkhof",
+      "featured": false,
+      "bio": "Kilian Valkhof is a seasoned developer who has been building tools for developers for over a decade. He is the founder of Polypane, a browser for developers designed to help build websites with a focus on responsive design, user experience, and accessibility.\n \n\n  Kilian has been developing websites for two decades, with an emphasis on user experience, accessibility and web standards and has a long-standing interest in responsive design, dating back to 2008 when he wrote his first article on mobile web design and foresaw what media features would soon enable. Kilian shares his knowledge and experience through his blog, kilianvalkhof.com and elsewhere on the web, and as a member of the Electron governance team and an open source contributor.",
+      "name": "Kilian Valkhof",
+      "company": "Polypane",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/3c65089d59b418fc7582f8055fbeab0f?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/3c65089d59b418fc7582f8055fbeab0f?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "stopUsingJavascriptForThatMovingFeaturesFromJsToCssAndHtml"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/kilianvalkhof",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://kilianvalkhof.com",
           "name": "Website"
         }
       ]
