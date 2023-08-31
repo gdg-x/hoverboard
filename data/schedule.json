@@ -5,7 +5,7 @@
       "schedule": [
         {
           "date": "2023-10-12",
-          "dateReadable": "Coming Soon",
+          "dateReadable": "Thursday, October 12th",
           "timeslots": [
             {
               "startTime": "08:30",
@@ -14,6 +14,56 @@
                 {
                   "items": [
                     "1024Breakfast"
+                  ]
+                }
+              ]
+            },
+            {
+              "startTime": "09:30",
+              "endTime": "09:40",
+              "sessions": [
+                {
+                  "items": [
+                    "openingRemarks"
+                  ]
+                }
+              ]
+            }
+          ],
+          "tracks": [
+            {
+              "title": "Ballroom, 5th Floor"
+            },
+            {
+              "title": "Dell Theatre, Concourse"
+            },
+            {
+              "title": "Classroom A/B, Concourse"
+            }
+          ]
+        },
+        {
+          "date": "2023-10-13",
+          "dateReadable": "Friday, October 13th",
+          "timeslots": [
+            {
+              "startTime": "08:30",
+              "endTime": "09:30",
+              "sessions": [
+                {
+                  "items": [
+                    "1024Breakfast"
+                  ]
+                }
+              ]
+            },
+            {
+              "startTime": "09:30",
+              "endTime": "09:40",
+              "sessions": [
+                {
+                  "items": [
+                    "openingRemarks"
                   ]
                 }
               ]

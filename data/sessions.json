@@ -1,312 +1,925 @@
 {
-  "sessions" : [
+  "sessions": [
     {
-      "id":"1024Breakfast",
-      "complexity" : "All",
-      "description" : "Get your badge, breakfast and talk with the JavaScript community",
-      "shortDescription" : "Get your badge, breakfast and chat with the JavaScript community.",
-      "speakers" : [],
-      "tags" : [ "food" ],
-      "title" : "Registration and Breakfast"
+      "id": "1024Breakfast",
+      "complexity": "All",
+      "description": "Get your badge, breakfast and talk with the JavaScript community",
+      "shortDescription": "Get your badge, breakfast and chat with the JavaScript community.",
+      "speakers": [],
+      "tags": [
+        "food"
+      ],
+      "title": "Registration and Breakfast"
     },
     {
-      "id":"openingRemarks",
-      "complexity" : "All",
-      "description" : "Opening Remarks",
-      "speakers" : [],
-      "tags" : ["community"],
-      "title" : "Opening Remarks"
+      "id": "openingRemarks",
+      "complexity": "All",
+      "description": "Opening Remarks",
+      "speakers": [],
+      "tags": [
+        "community"
+      ],
+      "title": "Opening Remarks"
     },
     {
-      "id":"lunch",
-      "complexity" : "All",
-      "description" : "Time to refuel.",
-      "shortDescription" : "Time to refuel.",
-      "speakers" : [],
-      "tags" : [ "food" ],
-      "title" : "Lunch"
+      "id": "lunch",
+      "complexity": "All",
+      "description": "Time to refuel.",
+      "shortDescription": "Time to refuel.",
+      "speakers": [],
+      "tags": [
+        "food"
+      ],
+      "title": "Lunch"
     },
     {
-      "id":"afterparty",
-      "complexity" : "All",
-      "description" : "Eat, drink and be merry.",
-      "shortDescription" : "Eat, drink and be merry.",
-      "speakers" : [],
-      "tags" : ["food"],
-      "title" : "After Party"
+      "id": "afterparty",
+      "complexity": "All",
+      "description": "Eat, drink and be merry.",
+      "shortDescription": "Eat, drink and be merry.",
+      "speakers": [],
+      "tags": [
+        "food"
+      ],
+      "title": "After Party"
     },
     {
-      "id":"closingremarks",
-      "complexity" : "All",
-      "description" : "That's a wrap.",
-      "shortDescription" : "That's a wrap.",
-      "speakers" : [],
-      "tags" : [ ],
-      "title" : "Closing Remarks"
+      "id": "closingremarks",
+      "complexity": "All",
+      "description": "That's a wrap.",
+      "shortDescription": "That's a wrap.",
+      "speakers": [],
+      "tags": [],
+      "title": "Closing Remarks"
     },
     {
-      "id":"insufficientlyPersuasive",
-      "complexity" : "All",
-      "description" : "Research indicates that programmers are not entirely happy, and that much of this unhappiness arises from interactions with other people.  Research also tells us that teams are capable of producing solutions that are more creative and of higher quality than those of single individuals.  However, teams, by definition, consist of people--possibly the very ones who are causing our unhappiness.<br><br>This talk explores the science behind human persuasion, examines the roots of motivation, and reveals the single quality that all high-performing teams share.  You’ll leave armed to persuade, primed to understand, and motivated to create teams that inspire everyone to do their best work.",
-      "speakers" : [ "sandi_metz" ],
-      "tags" : [ "keynote", "motivational" ],
-      "title" : "You Are Insufficiently Persuasive"
+      "id": "insufficientlyPersuasive",
+      "complexity": "All",
+      "description": "Research indicates that programmers are not entirely happy, and that much of this unhappiness arises from interactions with other people.  Research also tells us that teams are capable of producing solutions that are more creative and of higher quality than those of single individuals.  However, teams, by definition, consist of people--possibly the very ones who are causing our unhappiness.<br><br>This talk explores the science behind human persuasion, examines the roots of motivation, and reveals the single quality that all high-performing teams share.  You’ll leave armed to persuade, primed to understand, and motivated to create teams that inspire everyone to do their best work.",
+      "speakers": [
+        "sandi_metz"
+      ],
+      "tags": [
+        "keynote",
+        "motivational"
+      ],
+      "title": "You Are Insufficiently Persuasive"
     },
     {
-      "id":"iDontKnow",
-      "complexity" : "All",
-      "description" : "It’s something we all struggle with, admitting we don’t know something. But I’m here to show you the power of saying \"I don’t know\" to people. Saying \"I don’t know\" doesn’t have to be the end of a conversation, in fact it can be the start of an entirely new, exciting conversation with learning opportunities for all parties. We will talk through scenarios where we don’t feel comfortable saying it, ways we can feel comfortable saying it, and the good things that come from it. Outline/structure of the Session Why we don’t say I don’t know Why we should say it How to say I don’t know to clients How to say I don’t know as an expert How to say I don’t know as a leader A deep (and revealing) discussion on the underlying reasons why we feel afraid to say \"I don’t know\" to people.",
-      "speakers" : [ "andrew_murphy" ],
-      "tags" : [ "soft skills", "communication", "leadership" ],
-      "title" : "The power of saying \"I don't know\""
+      "id": "iDontKnow",
+      "complexity": "All",
+      "description": "It’s something we all struggle with, admitting we don’t know something. But I’m here to show you the power of saying \"I don’t know\" to people. Saying \"I don’t know\" doesn’t have to be the end of a conversation, in fact it can be the start of an entirely new, exciting conversation with learning opportunities for all parties. We will talk through scenarios where we don’t feel comfortable saying it, ways we can feel comfortable saying it, and the good things that come from it. Outline/structure of the Session Why we don’t say I don’t know Why we should say it How to say I don’t know to clients How to say I don’t know as an expert How to say I don’t know as a leader A deep (and revealing) discussion on the underlying reasons why we feel afraid to say \"I don’t know\" to people.",
+      "speakers": [
+        "andrew_murphy"
+      ],
+      "tags": [
+        "soft skills",
+        "communication",
+        "leadership"
+      ],
+      "title": "The power of saying \"I don't know\""
     },
     {
-      "id":"refactorClassComponent",
-      "complexity" : "All",
-      "description" : "The introduction of Hooks in React has become a very \"buzz word\" topic in the community, which, ultimately, has lead to some confusion. Some common questions I hear when talking to others are: What are they? How do you use them? Do they replace life-cycle methods and/or class components completely? We will go over all of these together. I'll start with a basic React app using a few stateful, class components using life-cycle methods, custom methods and API interaction. I will then convert the components over to functional ones while integrating several different hooks, without losing any functionality. Finally, we will look into some common \"gotchas\" that may be confusing for people starting out with hooks. You will come away from this talk with a good foundation for various primitive hooks in React, and you'll understand how they're used and how you can start to write your own custom hooks.",
-      "speakers" : [ "ryan_heupler" ],
-      "tags" : [ "react", "front-end", "optimization", "functional programming"],
-      "title" : "Refactoring a Class Component: A Gentle Introduction into React Hooks"
+      "id": "refactorClassComponent",
+      "complexity": "All",
+      "description": "The introduction of Hooks in React has become a very \"buzz word\" topic in the community, which, ultimately, has lead to some confusion. Some common questions I hear when talking to others are: What are they? How do you use them? Do they replace life-cycle methods and/or class components completely? We will go over all of these together. I'll start with a basic React app using a few stateful, class components using life-cycle methods, custom methods and API interaction. I will then convert the components over to functional ones while integrating several different hooks, without losing any functionality. Finally, we will look into some common \"gotchas\" that may be confusing for people starting out with hooks. You will come away from this talk with a good foundation for various primitive hooks in React, and you'll understand how they're used and how you can start to write your own custom hooks.",
+      "speakers": [
+        "ryan_heupler"
+      ],
+      "tags": [
+        "react",
+        "front-end",
+        "optimization",
+        "functional programming"
+      ],
+      "title": "Refactoring a Class Component: A Gentle Introduction into React Hooks"
     },
     {
-      "id":"machineLearning",
-      "complexity" : "All",
-      "description" : "The world of UI/UX is changing every month. It can be hard for developers to keep up with the newest trends and frameworks because of all the responsibilities they have. What if you could use machine learning to help you keep up with all of the changes? While it’s far from taking all of the programming jobs, machine learning can help developers make more user-friendly web applications. With the use of Brain.js, you can do text prediction, make small layout changes, check for malicious users, and more. In this talk, attendees will learn some background on machine learning and algorithms and see examples of where Brain.js can be used in real applications. We’ll cover business cases in web development where machine learning can help, how neural networks work, and how JavaScript can be used to train a model and make real-time updates for users. By the end of the talk, attendees should have a good understanding of basic machine learning concepts and an idea of how they could get started with Brain.js.",
-      "speakers" : [ "milecia_mcgregor" ],
-      "tags" : ["front-end", "performance", "automation", "optimization", "machine learning"],
-      "title" : "Using Machine Learning To Improve UI/UX"
+      "id": "machineLearning",
+      "complexity": "All",
+      "description": "The world of UI/UX is changing every month. It can be hard for developers to keep up with the newest trends and frameworks because of all the responsibilities they have. What if you could use machine learning to help you keep up with all of the changes? While it’s far from taking all of the programming jobs, machine learning can help developers make more user-friendly web applications. With the use of Brain.js, you can do text prediction, make small layout changes, check for malicious users, and more. In this talk, attendees will learn some background on machine learning and algorithms and see examples of where Brain.js can be used in real applications. We’ll cover business cases in web development where machine learning can help, how neural networks work, and how JavaScript can be used to train a model and make real-time updates for users. By the end of the talk, attendees should have a good understanding of basic machine learning concepts and an idea of how they could get started with Brain.js.",
+      "speakers": [
+        "milecia_mcgregor"
+      ],
+      "tags": [
+        "front-end",
+        "performance",
+        "automation",
+        "optimization",
+        "machine learning"
+      ],
+      "title": "Using Machine Learning To Improve UI/UX"
     },
     {
-      "id":"sharingComponents",
-      "complexity" : "All",
-      "description" : "Faster, Better, Cheaper - the beating drum for software developers. Do you work in a large shop where teams are using Angular, Vue and React? With the multitude of frontend frameworks today, how do you share components between them? How do you build things once? Is it worth it? This talk will cover how Comcast front end teams are tackling these challenges. We’ll look at how we’re using Web Components to share code between sites and if they can be used to share components between frameworks. I’ll go over how we’re sharing data between codebases with Redux. Lastly we’ll talk about Shared Flows; pulling out complicated reusable logic into its own microsite. You’ll walk away learning from our experiences and being able to revisit how you build software to reuse code.<br><br>Slides: <a href='https://tinyurl.com/yaof7nnr' target='_blank'>https://tinyurl.com/yaof7nnr</a>",
-      "speakers" : [ "chris_lorenzo" ],
-      "tags" : [ "components", "front-end"],
-      "title" : "Strategies for Sharing Components ⚙"
+      "id": "sharingComponents",
+      "complexity": "All",
+      "description": "Faster, Better, Cheaper - the beating drum for software developers. Do you work in a large shop where teams are using Angular, Vue and React? With the multitude of frontend frameworks today, how do you share components between them? How do you build things once? Is it worth it? This talk will cover how Comcast front end teams are tackling these challenges. We’ll look at how we’re using Web Components to share code between sites and if they can be used to share components between frameworks. I’ll go over how we’re sharing data between codebases with Redux. Lastly we’ll talk about Shared Flows; pulling out complicated reusable logic into its own microsite. You’ll walk away learning from our experiences and being able to revisit how you build software to reuse code.<br><br>Slides: <a href='https://tinyurl.com/yaof7nnr' target='_blank'>https://tinyurl.com/yaof7nnr</a>",
+      "speakers": [
+        "chris_lorenzo"
+      ],
+      "tags": [
+        "components",
+        "front-end"
+      ],
+      "title": "Strategies for Sharing Components ⚙"
     },
     {
-      "id":"teslaBattery",
-      "complexity" : "All",
-      "description" : "Which one is your favourite: ReactJS or Vue.js? Both ReactJS & Vue.js developers will get the same requirements for an application (Building Tesla’s Battery Range Calculator). Are you a Vue.js developer who wants to learn how to use ReactJS, or the other way around? Trust us, you can learn from each other, and that’s exactly what you will do on this session. We will give you a buggy application that you’ll have to fix before adding new features to it using either Vue.js or React. How fast will you go? Will you share your findings with other developers? You’re welcome to test this during our workshop. We have built the same application with ReactJS and Vue.js. We invite you to spend the session learning how to build such an app yourself with the help of our mentors. By the end of the session, you should be able to answer these questions: • What is Functional Reactive Programming? • How to use React and Vue.js? What are the main differences between Vue.js and React?<br><br>Slides and source code: <a href='https://github.com/petereijgermans11/workshop-reactjs-vuejs' target='_blank'>https://github.com/petereijgermans11/workshop-reactjs-vuejs</a>",
-      "speakers" : [ "peter_eijgermans" ],
-      "tags" : ["workshop", "vue", "react", "front-end", "tools", "redux", "veux"],
-      "title" : "Building Tesla’s Battery Range Calculator with Vue.js or ReactJS"
+      "id": "teslaBattery",
+      "complexity": "All",
+      "description": "Which one is your favourite: ReactJS or Vue.js? Both ReactJS & Vue.js developers will get the same requirements for an application (Building Tesla’s Battery Range Calculator). Are you a Vue.js developer who wants to learn how to use ReactJS, or the other way around? Trust us, you can learn from each other, and that’s exactly what you will do on this session. We will give you a buggy application that you’ll have to fix before adding new features to it using either Vue.js or React. How fast will you go? Will you share your findings with other developers? You’re welcome to test this during our workshop. We have built the same application with ReactJS and Vue.js. We invite you to spend the session learning how to build such an app yourself with the help of our mentors. By the end of the session, you should be able to answer these questions: • What is Functional Reactive Programming? • How to use React and Vue.js? What are the main differences between Vue.js and React?<br><br>Slides and source code: <a href='https://github.com/petereijgermans11/workshop-reactjs-vuejs' target='_blank'>https://github.com/petereijgermans11/workshop-reactjs-vuejs</a>",
+      "speakers": [
+        "peter_eijgermans"
+      ],
+      "tags": [
+        "workshop",
+        "vue",
+        "react",
+        "front-end",
+        "tools",
+        "redux",
+        "veux"
+      ],
+      "title": "Building Tesla’s Battery Range Calculator with Vue.js or ReactJS"
     },
     {
-      "id":"mentorPlaybook",
-      "complexity" : "All",
-      "description" : "We often find ourselves in situations where we have to knowledge share and mentor others, but we often don’t take the time to learn how to be better mentors. How do we know if we’re doing ‘mentoring’ right, and what small things do we not know about that could be doing more harm than good? Through my work as over the past 3 years directing mentors at a monthly coding class, I’ve been able to compile effective methods through research and experience that will help all developers be better mentors, whether within an established mentor/mentee relationship or just in quick day-to-day teaching opportunities. By setting expectations, learning how to be more friendly and accessible, removing roadblocks, practicing self-care, developing empathy for mentees, and constantly iterating based on actionable feedback, we can all contribute to creating richer tech communities that thrive on constant improvement and collective growth.",
-      "speakers" : [ "gabi_dombrowski" ],
-      "tags" : ["soft skills", "mentoring", "community"],
-      "title" : "The Mentor Playbook"
+      "id": "mentorPlaybook",
+      "complexity": "All",
+      "description": "We often find ourselves in situations where we have to knowledge share and mentor others, but we often don’t take the time to learn how to be better mentors. How do we know if we’re doing ‘mentoring’ right, and what small things do we not know about that could be doing more harm than good? Through my work as over the past 3 years directing mentors at a monthly coding class, I’ve been able to compile effective methods through research and experience that will help all developers be better mentors, whether within an established mentor/mentee relationship or just in quick day-to-day teaching opportunities. By setting expectations, learning how to be more friendly and accessible, removing roadblocks, practicing self-care, developing empathy for mentees, and constantly iterating based on actionable feedback, we can all contribute to creating richer tech communities that thrive on constant improvement and collective growth.",
+      "speakers": [
+        "gabi_dombrowski"
+      ],
+      "tags": [
+        "soft skills",
+        "mentoring",
+        "community"
+      ],
+      "title": "The Mentor Playbook"
     },
     {
-      "id":"minorityRole",
-      "complexity" : "Intermediate",
-      "description" : "This presentation will discuss how to cope with conversing with those who are from diverse backgrounds with ease and accomplish your daily connections with co-workers, who come from different backgrounds, with a common goal of comprehension. Necessities that makes you distinct, skills that make you stand out. The diversities that make us rare and unique if it’s your ethnic background, race, ethnic customs, religious beliefs, sex, sexuality, or form of individuality may also be a cause of contention. Discover how to bring out that, which is already within you and communicate, work with individuals who are diverse as well as, striking-up great conversation between one another. Also, this presentation will contribute to you your attendees with fostering a positive change and cultivate a more inviting place of work. This presentation will discuss the impacts of diversity collectively using identifying what variety can be combined with how it affects a business. The presentation will assist with explaining what it signifies being an inclusive place of work, offer comprehensive measures to assess best what degree one’s place of work fosters inclusion a and diversity. The workshop, through means of role-playing scenarios, present ways you can take to impact positive philosophies at your place of work. Individuals will take with them an increased perception of the implications of a tolerant, inclusive and diverse place of work. Individuals will take with them, along with personal skills, which one will utilize to develop into promoters of social change, that will build a more diverse workplace.",
-      "speakers" : [ "stacey_jenkins" ],
-      "tags" : ["culture", "diversity", "hiring", "inclusion"],
-      "title" : "The Role of The Minority in The World of Technology"
+      "id": "minorityRole",
+      "complexity": "Intermediate",
+      "description": "This presentation will discuss how to cope with conversing with those who are from diverse backgrounds with ease and accomplish your daily connections with co-workers, who come from different backgrounds, with a common goal of comprehension. Necessities that makes you distinct, skills that make you stand out. The diversities that make us rare and unique if it’s your ethnic background, race, ethnic customs, religious beliefs, sex, sexuality, or form of individuality may also be a cause of contention. Discover how to bring out that, which is already within you and communicate, work with individuals who are diverse as well as, striking-up great conversation between one another. Also, this presentation will contribute to you your attendees with fostering a positive change and cultivate a more inviting place of work. This presentation will discuss the impacts of diversity collectively using identifying what variety can be combined with how it affects a business. The presentation will assist with explaining what it signifies being an inclusive place of work, offer comprehensive measures to assess best what degree one’s place of work fosters inclusion a and diversity. The workshop, through means of role-playing scenarios, present ways you can take to impact positive philosophies at your place of work. Individuals will take with them an increased perception of the implications of a tolerant, inclusive and diverse place of work. Individuals will take with them, along with personal skills, which one will utilize to develop into promoters of social change, that will build a more diverse workplace.",
+      "speakers": [
+        "stacey_jenkins"
+      ],
+      "tags": [
+        "culture",
+        "diversity",
+        "hiring",
+        "inclusion"
+      ],
+      "title": "The Role of The Minority in The World of Technology"
     },
     {
-      "id":"deploymentStrategy",
-      "complexity" : "Intermediate",
-      "description" : "Everyone deploys code. For websites in particular, deploying code is often done behind the scenes without a user having to install an update since each new connection can be fulfilled with the latest version of the site. Having complete control of this process allows us to be creative in how fast or slow we deploy code in order to optimize for either maintainability of the code base, getting features out fast, or even both. While deployments seemingly look like a trivial final step, how we deploy code has far flung effects on how we write code. We will examine how each deployment strategy affects how developers produce code so that we can make an informed decision on the tradeoffs.",
-      "speakers" : [ "chris_ng" ],
-      "tags" : [ "deployment"],
-      "title" : "How Your Deployment Strategy Influences How People Code"
+      "id": "deploymentStrategy",
+      "complexity": "Intermediate",
+      "description": "Everyone deploys code. For websites in particular, deploying code is often done behind the scenes without a user having to install an update since each new connection can be fulfilled with the latest version of the site. Having complete control of this process allows us to be creative in how fast or slow we deploy code in order to optimize for either maintainability of the code base, getting features out fast, or even both. While deployments seemingly look like a trivial final step, how we deploy code has far flung effects on how we write code. We will examine how each deployment strategy affects how developers produce code so that we can make an informed decision on the tradeoffs.",
+      "speakers": [
+        "chris_ng"
+      ],
+      "tags": [
+        "deployment"
+      ],
+      "title": "How Your Deployment Strategy Influences How People Code"
     },
     {
-      "id":"rocketScience",
-      "complexity" : "All",
-      "description" : "Recently after becoming Frontend Engineering Team lead at BCaster I introduced an incremental migration shift from JQuery to VueJs. It sure did seem to be straightforward at first especially with proper test coverage, however 20% -25% into this migration we encountered a certain issues which meant re-evaluation of several architectural decisions that had been made in this regard. The goal of this talk is to give an in-depth analysis of the following - Highlight what we tried - Highlight where we failed and the lessons learned - Changes made related to the architecture - How we finally achieved 100% full migration of one of our most important projects into Vue JS",
-      "speakers" : [ "senigbolo_stephen" ],
-      "tags" : [ "vue", "jquery", "web development"],
-      "title" : "From Jquery to VueJS - Not Rocket Science"
+      "id": "rocketScience",
+      "complexity": "All",
+      "description": "Recently after becoming Frontend Engineering Team lead at BCaster I introduced an incremental migration shift from JQuery to VueJs. It sure did seem to be straightforward at first especially with proper test coverage, however 20% -25% into this migration we encountered a certain issues which meant re-evaluation of several architectural decisions that had been made in this regard. The goal of this talk is to give an in-depth analysis of the following - Highlight what we tried - Highlight where we failed and the lessons learned - Changes made related to the architecture - How we finally achieved 100% full migration of one of our most important projects into Vue JS",
+      "speakers": [
+        "senigbolo_stephen"
+      ],
+      "tags": [
+        "vue",
+        "jquery",
+        "web development"
+      ],
+      "title": "From Jquery to VueJS - Not Rocket Science"
     },
     {
-      "id":"webAudio",
-      "complexity" : "All",
-      "description" : "As web and native apps continue to converge, audio plays an ever-increasing role in elevating the user experience beyond simple static documents. However, even simple audio playback can get complicated when dealing with different browsers, devices and environments. In this talk, we’ll take a deep dive into using the howler.js audio library to enhance your web, desktop and mobile applications. Through a live coding demo, we’ll start with basic playback and work our way through audio sprites, live streaming, 3D spatial audio and more. Walk away with a better understanding of various use-cases for audio on the web and the simple tools you can use to enable them in your own projects.",
-      "speakers" : [ "james_simpson" ],
-      "tags" : ["front-end", "tools", "technical", "audio"],
-      "title" : "Web Audio Made Easy with Howler.js"
+      "id": "webAudio",
+      "complexity": "All",
+      "description": "As web and native apps continue to converge, audio plays an ever-increasing role in elevating the user experience beyond simple static documents. However, even simple audio playback can get complicated when dealing with different browsers, devices and environments. In this talk, we’ll take a deep dive into using the howler.js audio library to enhance your web, desktop and mobile applications. Through a live coding demo, we’ll start with basic playback and work our way through audio sprites, live streaming, 3D spatial audio and more. Walk away with a better understanding of various use-cases for audio on the web and the simple tools you can use to enable them in your own projects.",
+      "speakers": [
+        "james_simpson"
+      ],
+      "tags": [
+        "front-end",
+        "tools",
+        "technical",
+        "audio"
+      ],
+      "title": "Web Audio Made Easy with Howler.js"
     },
     {
-      "id":"tbd",
-      "complexity" : "All",
-      "description" : "TBD",
-      "speakers" : [],
-      "tags" : [],
-      "title" : "TBD"
+      "id": "tbd",
+      "complexity": "All",
+      "description": "TBD",
+      "speakers": [],
+      "tags": [],
+      "title": "TBD"
     },
     {
-      "id":"jovo",
-      "complexity" : "Intermediate",
-      "description" : "Using Jovo Framework and Jovo CLI, developers can quickly develop voice-first applications for Alexa and Google Home within a single nodejs application. In this workshop, I show you how to quickly build, test, and deploy a voice app using Jovo, and leave with areas for further exploration.<br><br>Topics covered include: how to build a language model, how to use the Alexa and Actions on Google Simulator, how to create unit tests for voice applications, how to route through conversations, how to request user data, and how to extend the bot to other conversational platforms such as Facebook Messenger or Twilio SMS.<br><br><strong>Nice to haves, but not required for this workshop:</strong> Amazon Developer, Dialogflow, AWS.<br><br><a href='https://github.com/Jefftopia/libertyjs-2019-jovo' target='_blank'>https://github.com/Jefftopia/libertyjs-2019-jovo</a>",
-      "speakers" : [ "jeffrey_smith" ],
-      "tags" : ["jovo", "node", "alexa", "dialogflow", "typescript", "workshop"],
-      "title" : "How to Build Cross Platform Voice Apps with the Jovo Framework"
+      "id": "jovo",
+      "complexity": "Intermediate",
+      "description": "Using Jovo Framework and Jovo CLI, developers can quickly develop voice-first applications for Alexa and Google Home within a single nodejs application. In this workshop, I show you how to quickly build, test, and deploy a voice app using Jovo, and leave with areas for further exploration.<br><br>Topics covered include: how to build a language model, how to use the Alexa and Actions on Google Simulator, how to create unit tests for voice applications, how to route through conversations, how to request user data, and how to extend the bot to other conversational platforms such as Facebook Messenger or Twilio SMS.<br><br><strong>Nice to haves, but not required for this workshop:</strong> Amazon Developer, Dialogflow, AWS.<br><br><a href='https://github.com/Jefftopia/libertyjs-2019-jovo' target='_blank'>https://github.com/Jefftopia/libertyjs-2019-jovo</a>",
+      "speakers": [
+        "jeffrey_smith"
+      ],
+      "tags": [
+        "jovo",
+        "node",
+        "alexa",
+        "dialogflow",
+        "typescript",
+        "workshop"
+      ],
+      "title": "How to Build Cross Platform Voice Apps with the Jovo Framework"
     },
     {
-      "id":"thinkfast",
-      "complexity" : "Intermediate",
-      "description" : "Making room for performance optimizations is hard. It means different things to different people and is considered a goal to achieve and maintain. But a performance culture is not about being slow or fast, but the ability to make tradeoffs and tackle competing priorities, with a clear path back.<br><br>This is the story of establishing a performance culture by empowering non-technical team members to understand, own and act on their performance impact by following a path and checklist for each project.<br><br>By connecting the intention to goals and vision for a specific project, a performance path with best practices is created to guide the team through development, but more importantly, to understand the tradeoffs each decision has.<br><br>In this talk, we’ll cover the different paths to improve performance along with some JavaScript tips and tricks.",
-      "speakers" : [ "alfredo_lopez" ],
-      "tags" : [ "performance", "culture"],
-      "title" : "Think Fast, First: Empowering a Performance Culture"
+      "id": "thinkfast",
+      "complexity": "Intermediate",
+      "description": "Making room for performance optimizations is hard. It means different things to different people and is considered a goal to achieve and maintain. But a performance culture is not about being slow or fast, but the ability to make tradeoffs and tackle competing priorities, with a clear path back.<br><br>This is the story of establishing a performance culture by empowering non-technical team members to understand, own and act on their performance impact by following a path and checklist for each project.<br><br>By connecting the intention to goals and vision for a specific project, a performance path with best practices is created to guide the team through development, but more importantly, to understand the tradeoffs each decision has.<br><br>In this talk, we’ll cover the different paths to improve performance along with some JavaScript tips and tricks.",
+      "speakers": [
+        "alfredo_lopez"
+      ],
+      "tags": [
+        "performance",
+        "culture"
+      ],
+      "title": "Think Fast, First: Empowering a Performance Culture"
     },
     {
-      "id":"sacre_bleu",
-      "complexity" : "Intermediate",
-      "description" : "What is internationalization and why is it important, even if your clients are mostly English speakers? This presentation will cover common pitfalls and how to avoid them, such as date formatting, number formatting, translating, encoding for non-Latin characters, etc. We will also briefly discuss all the UX considerations that come to play when using a RTL (right-to-left) language. Finally, we’ll get React specific and talk about a library called react-i18next, which is an open source library you can use to help internationalize your project.",
-      "speakers" : [ "robin_dykema" ],
-      "tags" : ["localization", "react"],
-      "title" : "Sacré bleu! The trials and tribulaciones of internationalising your ẨṔṔŁîÇåŤḯṏÑ���"
+      "id": "sacre_bleu",
+      "complexity": "Intermediate",
+      "description": "What is internationalization and why is it important, even if your clients are mostly English speakers? This presentation will cover common pitfalls and how to avoid them, such as date formatting, number formatting, translating, encoding for non-Latin characters, etc. We will also briefly discuss all the UX considerations that come to play when using a RTL (right-to-left) language. Finally, we’ll get React specific and talk about a library called react-i18next, which is an open source library you can use to help internationalize your project.",
+      "speakers": [
+        "robin_dykema"
+      ],
+      "tags": [
+        "localization",
+        "react"
+      ],
+      "title": "Sacré bleu! The trials and tribulaciones of internationalising your ẨṔṔŁîÇåŤḯṏÑ���"
     },
     {
-      "id":"uniqueHowsWhys",
-      "complexity" : "All",
-      "description" : "Have you ever wanted to build a web application but couldn’t due to poor internet connection? Have you ever wondered how applications are built for use in situations like Disaster Relief? If yes, then come learn about the extraordinary potential of PWAs and how you can build your own!<br><br>Progressive Web Apps (PWAs) are an up-and-coming technology that has piqued the interest of tech companies big and small. The talk will inform the audience about this new field, its potential, and how one can get started developing PWAs. This talk is both educational and imaginative, and will provide a launchpad for exploring a new way to use JavaScript.<br><br>First, this talk will be an introduction to Progressive Web Apps–what they are, their benefits (such as offering offline functionality, can be run as web page or native app, and increased performance speed), and tools to create them (my go-to tools are AngularJS and Firebase). I’ll also discuss how you can turn your existing Web App into a PWA in a matter of minutes. Secondly, this talk will cover how PWAs can be applied to fields such as Tropical Medicine, Poverty Alleviation, and Disaster Relief (this will include anecdotes from my experience building PWAs for researchers in Tanzania). Learn how you can apply your JS chops to create better web and mobile experiences in both ordinary and extraordinary circumstances!<br><br>Slides: <a href='https://twitter.com/ColleenDHere/status/1187448542371049472' target='_blank'>https://twitter.com/ColleenDHere/status/1187448542371049472</a>",
-      "speakers" : [ "colleen_dunlap" ],
-      "tags" : [ "angular", "html", "typescript", "PWA"],
-      "title" : "The Unique Hows and Whys of Global Progressive Web Apps"
+      "id": "uniqueHowsWhys",
+      "complexity": "All",
+      "description": "Have you ever wanted to build a web application but couldn’t due to poor internet connection? Have you ever wondered how applications are built for use in situations like Disaster Relief? If yes, then come learn about the extraordinary potential of PWAs and how you can build your own!<br><br>Progressive Web Apps (PWAs) are an up-and-coming technology that has piqued the interest of tech companies big and small. The talk will inform the audience about this new field, its potential, and how one can get started developing PWAs. This talk is both educational and imaginative, and will provide a launchpad for exploring a new way to use JavaScript.<br><br>First, this talk will be an introduction to Progressive Web Apps–what they are, their benefits (such as offering offline functionality, can be run as web page or native app, and increased performance speed), and tools to create them (my go-to tools are AngularJS and Firebase). I’ll also discuss how you can turn your existing Web App into a PWA in a matter of minutes. Secondly, this talk will cover how PWAs can be applied to fields such as Tropical Medicine, Poverty Alleviation, and Disaster Relief (this will include anecdotes from my experience building PWAs for researchers in Tanzania). Learn how you can apply your JS chops to create better web and mobile experiences in both ordinary and extraordinary circumstances!<br><br>Slides: <a href='https://twitter.com/ColleenDHere/status/1187448542371049472' target='_blank'>https://twitter.com/ColleenDHere/status/1187448542371049472</a>",
+      "speakers": [
+        "colleen_dunlap"
+      ],
+      "tags": [
+        "angular",
+        "html",
+        "typescript",
+        "PWA"
+      ],
+      "title": "The Unique Hows and Whys of Global Progressive Web Apps"
     },
     {
-      "id":"safeSpace",
-      "complexity" : "All",
-      "description" : "The culture in tech is great: future-forward, evidence-based, data-driven. It's also not so great: it can feel exclusive and a little elitist. By the end of this talk, you will have applicable tools to make your team, your company and the whole industry healthier. How? By creating diverse and inclusive safe spaces.",
-      "speakers" : [ "guillaume_marty" ],
-      "tags" : [ "keynote", "soft skills", "communication", "career"],
-      "title" : "Watch this (safe) space"
+      "id": "safeSpace",
+      "complexity": "All",
+      "description": "The culture in tech is great: future-forward, evidence-based, data-driven. It's also not so great: it can feel exclusive and a little elitist. By the end of this talk, you will have applicable tools to make your team, your company and the whole industry healthier. How? By creating diverse and inclusive safe spaces.",
+      "speakers": [
+        "guillaume_marty"
+      ],
+      "tags": [
+        "keynote",
+        "soft skills",
+        "communication",
+        "career"
+      ],
+      "title": "Watch this (safe) space"
     },
     {
-      "id":"kickingBugs",
-      "complexity" : "All",
-      "description" : "How can we extract the most value from our front-end JavaScript errors, especially when users often don’t report them? We’ll learn about the evolution of the browser’s global error event handler, how to work around its limitations, and tools to make our JavaScript bugs a little less buggy.",
-      "speakers" : [ "liz_krane" ],
-      "tags" : [ "front-end", "browsers", "reporting", "technical", "testing"],
-      "title" : "Kicking Bugs and Logging Names: The Challenges of JavaScript Error Reporting"
+      "id": "kickingBugs",
+      "complexity": "All",
+      "description": "How can we extract the most value from our front-end JavaScript errors, especially when users often don’t report them? We’ll learn about the evolution of the browser’s global error event handler, how to work around its limitations, and tools to make our JavaScript bugs a little less buggy.",
+      "speakers": [
+        "liz_krane"
+      ],
+      "tags": [
+        "front-end",
+        "browsers",
+        "reporting",
+        "technical",
+        "testing"
+      ],
+      "title": "Kicking Bugs and Logging Names: The Challenges of JavaScript Error Reporting"
     },
     {
-      "id":"ohMyWeb",
-      "complexity" : "All",
-      "description" : "webUSB, webMIDI, webBluetooth, oh my web! In this session, we will explore what webUSB, webMIDI and webBluetooth API and how it safely expose device services to the web using JavaScript. This session is designed for web developers, makers who want to innovate and take their web apps to the next level.",
-      "speakers" : [ "ron_dagdag" ],
-      "tags" : ["webUSB", "webMIDI", "webBluetooth"],
-      "title" : "Oh my web! Connecting to devices with your browser"
+      "id": "ohMyWeb",
+      "complexity": "All",
+      "description": "webUSB, webMIDI, webBluetooth, oh my web! In this session, we will explore what webUSB, webMIDI and webBluetooth API and how it safely expose device services to the web using JavaScript. This session is designed for web developers, makers who want to innovate and take their web apps to the next level.",
+      "speakers": [
+        "ron_dagdag"
+      ],
+      "tags": [
+        "webUSB",
+        "webMIDI",
+        "webBluetooth"
+      ],
+      "title": "Oh my web! Connecting to devices with your browser"
     },
     {
-      "id":"digitalAccessibility",
-      "complexity" : "All",
-      "description" : "Roughly 10% of people have a disability that impacts their use of the web, and lawsuits against inaccessible websites are becoming more common. How can we move beyond seeing accessibility as a legal requirement, and to championing inclusion for people with disabilities?",
-      "speakers" : [ "fen_slattery" ],
-      "tags" : ["front-end", "accessibility", "motivational"],
-      "title" : "Digital Accessibility Beyond Legal Compliance"
+      "id": "digitalAccessibility",
+      "complexity": "All",
+      "description": "Roughly 10% of people have a disability that impacts their use of the web, and lawsuits against inaccessible websites are becoming more common. How can we move beyond seeing accessibility as a legal requirement, and to championing inclusion for people with disabilities?",
+      "speakers": [
+        "fen_slattery"
+      ],
+      "tags": [
+        "front-end",
+        "accessibility",
+        "motivational"
+      ],
+      "title": "Digital Accessibility Beyond Legal Compliance"
     },
     {
-      "id":"headlessArchitecture",
-      "complexity" : "Intermediate",
-      "description" : "Headless architecture is a popular solution for projects that require cutting-edge user experiences and next-level performance, but the learning curve can be discouraging. In this talk, we’ll give participants tactics, tools, strategies, and confidence to make their first headless project a success.",
-      "speakers" : [ "christina_deemer" ],
-      "tags" : ["front-end", "react", "tools", "motivational", "performance", "technical"],
-      "title" : "Going Headless without Losing Your Head: Strategies for Making Your First Decoupled Web App a Success"
+      "id": "headlessArchitecture",
+      "complexity": "Intermediate",
+      "description": "Headless architecture is a popular solution for projects that require cutting-edge user experiences and next-level performance, but the learning curve can be discouraging. In this talk, we’ll give participants tactics, tools, strategies, and confidence to make their first headless project a success.",
+      "speakers": [
+        "christina_deemer"
+      ],
+      "tags": [
+        "front-end",
+        "react",
+        "tools",
+        "motivational",
+        "performance",
+        "technical"
+      ],
+      "title": "Going Headless without Losing Your Head: Strategies for Making Your First Decoupled Web App a Success"
     },
     {
-      "id":"apolloGraphQl",
-      "complexity" : "Intermediate",
-      "description" : "ApolloClient and ApolloServer empower developers with control over the data they work with. This workshop will dig into using both along with Prisma to build a full stack application. We’ll tackle REST, Database setup, and authentication with ease using this amazing ecosystem!<br><br><a href='https://github.com/DomitriusAnthony/playlists-workshop' target='_blank'>https://github.com/DomitriusAnthony/playlists-workshop</a>",
-      "speakers" : [ "domitrius_clark" ],
-      "tags" : ["react", "apollo", "prisma", "mongoDB", "workshop"],
-      "title" : "Apollo: One Giant leap for Full Stack"
+      "id": "apolloGraphQl",
+      "complexity": "Intermediate",
+      "description": "ApolloClient and ApolloServer empower developers with control over the data they work with. This workshop will dig into using both along with Prisma to build a full stack application. We’ll tackle REST, Database setup, and authentication with ease using this amazing ecosystem!<br><br><a href='https://github.com/DomitriusAnthony/playlists-workshop' target='_blank'>https://github.com/DomitriusAnthony/playlists-workshop</a>",
+      "speakers": [
+        "domitrius_clark"
+      ],
+      "tags": [
+        "react",
+        "apollo",
+        "prisma",
+        "mongoDB",
+        "workshop"
+      ],
+      "title": "Apollo: One Giant leap for Full Stack"
     },
     {
-      "id":"webVR",
-      "complexity" : "All",
-      "description" : "By the end of the session the attendees will be able to Make a simple Demo of basic WebVR application and get into WebVR experiences, they Will also learn about WebVR concepts, A-Frame Framework, A-Frame scenes & apps in depth.",
-      "speakers" : [ "viral_parmar" ],
-      "tags" : ["a-frame", "webVR", "web development", "mobile app"],
-      "title" : "WebVR : Beyond Imagination"
+      "id": "webVR",
+      "complexity": "All",
+      "description": "By the end of the session the attendees will be able to Make a simple Demo of basic WebVR application and get into WebVR experiences, they Will also learn about WebVR concepts, A-Frame Framework, A-Frame scenes & apps in depth.",
+      "speakers": [
+        "viral_parmar"
+      ],
+      "tags": [
+        "a-frame",
+        "webVR",
+        "web development",
+        "mobile app"
+      ],
+      "title": "WebVR : Beyond Imagination"
     },
     {
-      "id":"demystifyingRegularExpressions",
-      "complexity" : "All",
-      "description" : "A Regular Expression is a sequence of characters used as a search pattern on a set of a text—but trying to read that sequence might look like something out of Stranger Things. This workshop will break down how regular expressions can be used in everyday programming to make manipulating data easier.<br><br><a href='https://github.com/erautenberg/libertyJS-regexp' target='_blank'>https://github.com/erautenberg/libertyJS-regexp</a>",
-      "speakers" : [ "emily_rautenberg" ],
-      "tags" : [ "regular expressions", "regex", "regexp", "data"],
-      "title" : "Demystifying Regular Expressions"
+      "id": "demystifyingRegularExpressions",
+      "complexity": "All",
+      "description": "A Regular Expression is a sequence of characters used as a search pattern on a set of a text—but trying to read that sequence might look like something out of Stranger Things. This workshop will break down how regular expressions can be used in everyday programming to make manipulating data easier.<br><br><a href='https://github.com/erautenberg/libertyJS-regexp' target='_blank'>https://github.com/erautenberg/libertyJS-regexp</a>",
+      "speakers": [
+        "emily_rautenberg"
+      ],
+      "tags": [
+        "regular expressions",
+        "regex",
+        "regexp",
+        "data"
+      ],
+      "title": "Demystifying Regular Expressions"
     },
     {
-      "id":"buildingAccessibility",
-      "complexity" : "Intermediate",
-      "description" : "Before you manually review your pages in an assistive technology device the International Association of Accessibility Professionals (IAAP) recommends that you use an automated testing tools to check your page. So you stop everything and review your page with a third-party website or browser extension… if you remember to. Why wait until you’re that far into development? Let’s build accessibility testing into your workflow, and prevent common errors from even being committed in the first place. I’ll give an overview of tools that exist, and share some code to help customize your own workflow. Familiarity with accessible development is not needed, but you should be familiar with HTML, JavaScript, Git, and NPM.",
-      "speakers" : [ "nathan_lilly" ],
-      "tags" : [ "accessibility", "testing", "react", "front-end", "back-end", "tools", "automation"],
-      "title" : "Building Accessibility Testing Into Your Workflow"
+      "id": "buildingAccessibility",
+      "complexity": "Intermediate",
+      "description": "Before you manually review your pages in an assistive technology device the International Association of Accessibility Professionals (IAAP) recommends that you use an automated testing tools to check your page. So you stop everything and review your page with a third-party website or browser extension… if you remember to. Why wait until you’re that far into development? Let’s build accessibility testing into your workflow, and prevent common errors from even being committed in the first place. I’ll give an overview of tools that exist, and share some code to help customize your own workflow. Familiarity with accessible development is not needed, but you should be familiar with HTML, JavaScript, Git, and NPM.",
+      "speakers": [
+        "nathan_lilly"
+      ],
+      "tags": [
+        "accessibility",
+        "testing",
+        "react",
+        "front-end",
+        "back-end",
+        "tools",
+        "automation"
+      ],
+      "title": "Building Accessibility Testing Into Your Workflow"
     },
     {
-      "id":"uiComponentTesting",
-      "complexity" : "Intermediate",
-      "description" : "As web applications continue to evolve into complex systems, developers today are building more and more UIs with component-based frameworks like React and Vue. As a result, UI testing today is easier than it has ever been before. But where do you start? If you feel like it’s a guessing game, this is the talk for you!'\n'In this talk, I will guide you with a practical approach to testing UI components with Jest and Storybook to improve your UI’s quality and solve your users’ needs.",
-      "speakers" : [ "diego_hernandez" ],
-      "tags" : [ "react", "vue", "testing", "jest", "storybook"],
-      "title" : "Strengthening your blocks: A practical guide to UI component testing"
+      "id": "uiComponentTesting",
+      "complexity": "Intermediate",
+      "description": "As web applications continue to evolve into complex systems, developers today are building more and more UIs with component-based frameworks like React and Vue. As a result, UI testing today is easier than it has ever been before. But where do you start? If you feel like it’s a guessing game, this is the talk for you!'\n'In this talk, I will guide you with a practical approach to testing UI components with Jest and Storybook to improve your UI’s quality and solve your users’ needs.",
+      "speakers": [
+        "diego_hernandez"
+      ],
+      "tags": [
+        "react",
+        "vue",
+        "testing",
+        "jest",
+        "storybook"
+      ],
+      "title": "Strengthening your blocks: A practical guide to UI component testing"
     },
     {
-      "id":"javaScriptMidi",
-      "complexity" : "Intermediate",
-      "description" : "Did you know there’s a widely-supported browser API that allows you to interface with lots of hardware, including custom controllers you can build yourself? Meet the WebMIDI API! Natively supported by Chrome (and soon Firefox!) we’ll experiment with talking to custom hardware through the browser.<br><br><a href='https://github.com/georgemandis/circuit-playground-midi-multi-tool' target='_blank'>https://github.com/georgemandis/circuit-playground-midi-multi-tool</a>",
-      "speakers" : [ "george_mandis" ],
-      "tags" : [ "node", "apis" ,"webMIDI"],
-      "title" : "JavaScript + MIDI + Microcontrollers Workshop"
+      "id": "javaScriptMidi",
+      "complexity": "Intermediate",
+      "description": "Did you know there’s a widely-supported browser API that allows you to interface with lots of hardware, including custom controllers you can build yourself? Meet the WebMIDI API! Natively supported by Chrome (and soon Firefox!) we’ll experiment with talking to custom hardware through the browser.<br><br><a href='https://github.com/georgemandis/circuit-playground-midi-multi-tool' target='_blank'>https://github.com/georgemandis/circuit-playground-midi-multi-tool</a>",
+      "speakers": [
+        "george_mandis"
+      ],
+      "tags": [
+        "node",
+        "apis",
+        "webMIDI"
+      ],
+      "title": "JavaScript + MIDI + Microcontrollers Workshop"
     },
     {
-      "id":"webAssembly",
-      "complexity" : "Intermediate",
-      "description" : "80% of users are running browsers capable of running languages other than JS in their browser. It’s a new change, but an important one; we’re looking at a future where the web will be built not just on JS, but on C, Rust, GoLang and many more. Let’s talk about WebAssembly; why it came about, what it’s good at, and why it really doesn’t spell doom for JS but instead allows you to truly enhance web experiences by augmenting JS with the ability to use modules written in other languages that can perform tasks faster or more efficiently. We’ll go over what WebAssembly is, how to build a WebAssembly module, and why this may be a force that will shape not only how we think about JS, but the entire web experience.",
-      "speakers" : [ "kassian_wren" ],
-      "tags" : ["front-end", "back-end", "performance", "tools", "technical"],
-      "title" : "Web Assembly, the Future of JS, and a multi-language web"
+      "id": "webAssembly",
+      "complexity": "Intermediate",
+      "description": "80% of users are running browsers capable of running languages other than JS in their browser. It’s a new change, but an important one; we’re looking at a future where the web will be built not just on JS, but on C, Rust, GoLang and many more. Let’s talk about WebAssembly; why it came about, what it’s good at, and why it really doesn’t spell doom for JS but instead allows you to truly enhance web experiences by augmenting JS with the ability to use modules written in other languages that can perform tasks faster or more efficiently. We’ll go over what WebAssembly is, how to build a WebAssembly module, and why this may be a force that will shape not only how we think about JS, but the entire web experience.",
+      "speakers": [
+        "kassian_wren"
+      ],
+      "tags": [
+        "front-end",
+        "back-end",
+        "performance",
+        "tools",
+        "technical"
+      ],
+      "title": "Web Assembly, the Future of JS, and a multi-language web"
     },
     {
-      "id":"shinyObjectSyndrome",
-      "complexity" : "All",
-      "description" : "Technology is fast moving, and devops tools pop up like wildfire. Teams are desperate to solve their problems & often make implementation decisions based on word of mouth, “kick the tires” syndrome or superficial evaluations. In some cases we justify our stack decisions based on project/sprint deadlines, the product’s marketing materials, occasionally, the README files. Really scary stuff!<br><br>In this talk Angel will explore how & why teams are easily lulled into believing that shiny objects will independently solve their stack deficiencies. He will discuss his experiences with “Shiny Object” frameworks/tools and the true impact they had in actually solving problems. He will also discuss some strategies that can help teams make better choices when properly vetting potential solutions based on his experience in the federal government evaluating vendor proposals and homegrown solutions.",
-      "speakers" : [ "angel_rivera" ],
-      "tags" : ["devOps", "tools", "decision making", "life choices"],
-      "title" : "Apps, Stacks, and Frameworks: Avoiding “Shiny Object” Syndrome"
+      "id": "shinyObjectSyndrome",
+      "complexity": "All",
+      "description": "Technology is fast moving, and devops tools pop up like wildfire. Teams are desperate to solve their problems & often make implementation decisions based on word of mouth, “kick the tires” syndrome or superficial evaluations. In some cases we justify our stack decisions based on project/sprint deadlines, the product’s marketing materials, occasionally, the README files. Really scary stuff!<br><br>In this talk Angel will explore how & why teams are easily lulled into believing that shiny objects will independently solve their stack deficiencies. He will discuss his experiences with “Shiny Object” frameworks/tools and the true impact they had in actually solving problems. He will also discuss some strategies that can help teams make better choices when properly vetting potential solutions based on his experience in the federal government evaluating vendor proposals and homegrown solutions.",
+      "speakers": [
+        "angel_rivera"
+      ],
+      "tags": [
+        "devOps",
+        "tools",
+        "decision making",
+        "life choices"
+      ],
+      "title": "Apps, Stacks, and Frameworks: Avoiding “Shiny Object” Syndrome"
     },
     {
-      "id":"rsjxFutureAsyncProgramming",
-      "complexity" : "Intermediate",
-      "description" : "Asynchronous programming is a headache for new developers. From callback hell to promise prison. Its easy to get discouraged.<br><br>However, all hope is not lost. RxJS is here to give us a lean and functional way to develop. From observables to pipes, this talk guides the way to async nirvana.<br><br><strong>Web Development is evolving.</strong><br><br>The demand for reactive features in applications is growing rapidly. The issue is, many are stuck in the traditional paradigms of development, and web technologies are playing catch up.<br><br>Vanilla Javascript is not equipped to provide graceful solutions to asynchronous programming. Callbacks are a potential solution, but as many know, this leads developers down the dark road to callback hell.<br><br>Promises are another component provided by Vanilla Javascript for async solutions. But promises are clunky and operating on the data requires dozens of lines of unnecessary and unreadable code.<br><br><strong>ReactiveX provides a way out.</strong><br><br>The ReactiveX is a multi-language project, that provides a functional approach to reactive programming. The JavaScript version, RxJS, is quickly becoming the defacto way to handle asynchronous events and streams in the web.<br><br>From Observables to Subjects, Multicasting to Error handling, it can be tricky to navigate. I’m aiming to introduce RxJS and reactive programming while helping the audience decide if it’s the best approach to their challenges.",
-      "speakers" : [ "ali_abiba" ],
-      "tags" : [ "rsjx", "web development", "asynchronous"],
-      "title" : "RxJS, the Future of Async Programming"
+      "id": "rsjxFutureAsyncProgramming",
+      "complexity": "Intermediate",
+      "description": "Asynchronous programming is a headache for new developers. From callback hell to promise prison. Its easy to get discouraged.<br><br>However, all hope is not lost. RxJS is here to give us a lean and functional way to develop. From observables to pipes, this talk guides the way to async nirvana.<br><br><strong>Web Development is evolving.</strong><br><br>The demand for reactive features in applications is growing rapidly. The issue is, many are stuck in the traditional paradigms of development, and web technologies are playing catch up.<br><br>Vanilla Javascript is not equipped to provide graceful solutions to asynchronous programming. Callbacks are a potential solution, but as many know, this leads developers down the dark road to callback hell.<br><br>Promises are another component provided by Vanilla Javascript for async solutions. But promises are clunky and operating on the data requires dozens of lines of unnecessary and unreadable code.<br><br><strong>ReactiveX provides a way out.</strong><br><br>The ReactiveX is a multi-language project, that provides a functional approach to reactive programming. The JavaScript version, RxJS, is quickly becoming the defacto way to handle asynchronous events and streams in the web.<br><br>From Observables to Subjects, Multicasting to Error handling, it can be tricky to navigate. I’m aiming to introduce RxJS and reactive programming while helping the audience decide if it’s the best approach to their challenges.",
+      "speakers": [
+        "ali_abiba"
+      ],
+      "tags": [
+        "rsjx",
+        "web development",
+        "asynchronous"
+      ],
+      "title": "RxJS, the Future of Async Programming"
     },
     {
-      "id":"serverlessDevelopmentPortfolioSevenDays",
-      "complexity" : "All",
-      "description" : "You know that just having a resume or putting in good work during work hours isn’t enough to get ahead these days. You also know you need to work on your own development projects to showcase your skills, but maybe you’re not sure where to start. This talk will give you bite-size steps that you can take to start and finish your own development portfolio projects within a week with completely serverless technologies. Specifically, you’ll learn:<ul><li>How to set up your development environment to use the Serverless Framework and AWS</li><li>How to find starter templates, example projects, and free tutorials for serverless projects</li><li>How to come up with an idea for a personal development project</li><li>How to actually build your project</li><li>How and where to show off your new project<li></ul>By the end of this talk, you should feel capable of creating a serverless development portfolio that showcases your abilities as a developer and allows you to continue to grow your portfolio and your skillset.",
-      "speakers" : [ "fernando_medina_corey" ],
-      "tags" : ["serverless", "AWS",  "back-end", "tools"],
-      "title" : "Making a Serverless Development Portfolio - In Seven Days or Less"
+      "id": "serverlessDevelopmentPortfolioSevenDays",
+      "complexity": "All",
+      "description": "You know that just having a resume or putting in good work during work hours isn’t enough to get ahead these days. You also know you need to work on your own development projects to showcase your skills, but maybe you’re not sure where to start. This talk will give you bite-size steps that you can take to start and finish your own development portfolio projects within a week with completely serverless technologies. Specifically, you’ll learn:<ul><li>How to set up your development environment to use the Serverless Framework and AWS</li><li>How to find starter templates, example projects, and free tutorials for serverless projects</li><li>How to come up with an idea for a personal development project</li><li>How to actually build your project</li><li>How and where to show off your new project<li></ul>By the end of this talk, you should feel capable of creating a serverless development portfolio that showcases your abilities as a developer and allows you to continue to grow your portfolio and your skillset.",
+      "speakers": [
+        "fernando_medina_corey"
+      ],
+      "tags": [
+        "serverless",
+        "AWS",
+        "back-end",
+        "tools"
+      ],
+      "title": "Making a Serverless Development Portfolio - In Seven Days or Less"
     },
     {
-      "id":"lerna",
-      "complexity" : "All",
-      "description" : "Lerna is a tool for managing JavaScript projects with multiple packages. It allows you to create any number of packages inside the same repo and publish them to public or private package managers. You can use to manage component libraries, validators for your forms, and basically everything that needs to be shared across projects, including the projects themselves in a way that is easier for everyone to contribute, and keep all your dependencies in a single spot. CI and automation can take care of publishing all the projects, deploying them to the correct buckets, and coordinate the dependencies between them. On this talk I’ll share our journey towards mono-repo with advice to get there incrementally and the opportunity to see the endgoal with a project that is fully managed with lerna, with everything the devs need in a single folder.",
-      "speakers" : [ "david_silva" ],
-      "tags" : [ "lerna", "mono-repo", "front-end", "babel"],
-      "title" : "Micro front-ends, mono-repo and component libraries with lerna"
+      "id": "lerna",
+      "complexity": "All",
+      "description": "Lerna is a tool for managing JavaScript projects with multiple packages. It allows you to create any number of packages inside the same repo and publish them to public or private package managers. You can use to manage component libraries, validators for your forms, and basically everything that needs to be shared across projects, including the projects themselves in a way that is easier for everyone to contribute, and keep all your dependencies in a single spot. CI and automation can take care of publishing all the projects, deploying them to the correct buckets, and coordinate the dependencies between them. On this talk I’ll share our journey towards mono-repo with advice to get there incrementally and the opportunity to see the endgoal with a project that is fully managed with lerna, with everything the devs need in a single folder.",
+      "speakers": [
+        "david_silva"
+      ],
+      "tags": [
+        "lerna",
+        "mono-repo",
+        "front-end",
+        "babel"
+      ],
+      "title": "Micro front-ends, mono-repo and component libraries with lerna"
     },
     {
       "id": "predictingtheFuture",
-      "complexity" : "All",
-      "description" : "The Web has changed a lot since its creation as a platform for static articles. Early Web apps used servers generating HTML on the fly. PHP was huge, then declined as JS rose. Flash came and went. React has arguably become the new jQuery. Today, the one thing we can be sure of is that more changes are yet to come. What changes can Web developers expect between the Web of 2019 and the Web of 2020? What about 2025? In this talk, an early adopter of React in 2013 and Elm in 2014 draws on 12 years of professional Web development experience to justify several concrete predictions about the Web in 2020 and 2025.",
-      "speakers" : [ "richard_feldman" ],
-      "tags" : ["web development"],
-      "title" : "Predicting the Future of the Web"
+      "complexity": "All",
+      "description": "The Web has changed a lot since its creation as a platform for static articles. Early Web apps used servers generating HTML on the fly. PHP was huge, then declined as JS rose. Flash came and went. React has arguably become the new jQuery. Today, the one thing we can be sure of is that more changes are yet to come. What changes can Web developers expect between the Web of 2019 and the Web of 2020? What about 2025? In this talk, an early adopter of React in 2013 and Elm in 2014 draws on 12 years of professional Web development experience to justify several concrete predictions about the Web in 2020 and 2025.",
+      "speakers": [
+        "richard_feldman"
+      ],
+      "tags": [
+        "web development"
+      ],
+      "title": "Predicting the Future of the Web"
+    },
+    {
+      "sessions": [
+        {
+          "id": "ourFutureWithoutPasswords",
+          "complexity": "All",
+          "description": "Picture the future. What do you see? Flying cars? Vacations in space? How about…not having to use passwords anymore? Well, welcome to that future. The no passwords one, not flying cars. Passkeys are here to enable you to log in to a site by unlocking your phone and I'm here to tell you all about it.",
+          "speakers": [
+            "milicaMihajlija"
+          ],
+          "tags": [],
+          "title": "Our future without passwords"
+        },
+        {
+          "id": "simplifyMicroFrontendArchitectureUsingReactToWebComponent",
+          "complexity": "Beginner",
+          "description": "Do you want to see the simplest way to transform your existing React app into Micro Frontend architecture? Enter: React to Web Component. We’ll take a layout and a few React components, turn them into stand-alone Web Components, turn them into a fully functioning MFE app, and deploy it!",
+          "speakers": [
+            "christopherJBaker"
+          ],
+          "tags": [
+            "React",
+            "Web Components",
+            "Micro Frontends"
+          ],
+          "title": "Simplify Micro Frontend Architecture Using React to Web Component"
+        },
+        {
+          "id": "howToBuildDistributedSystemsInJavascript",
+          "complexity": "Intermediate",
+          "description": "Normal functions are unreliable. To build reliable backends out of them, we need databases and queues and patterns like EDA, choreography, orchestration, sagas, and circuit breakers. *Durable functions* are completely reliable: they live through power outages and can run forever.",
+          "speakers": [
+            "lorenSandsramshaw"
+          ],
+          "tags": [
+            "javascript",
+            "distributed-systems",
+            "node"
+          ],
+          "title": "How to build distributed systems in JavaScript"
+        },
+        {
+          "id": "wereSnakingItLive",
+          "complexity": "All",
+          "description": "Your 5th grade math teacher was wrong: playing Snake CAN be good for you!\n \n\n Multiplayer Snake—Battlesnake—is an accessible crucible to flex our JavaScript muscles against a welcoming community of bots written in C++, Rust and even Bash.\n \n\n And we'll have fun doing it, together, LIVE.",
+          "speakers": [
+            "michaelSchoonmaker"
+          ],
+          "tags": [
+            "JavaScript",
+            "nodejs",
+            "http",
+            "api",
+            "Node"
+          ],
+          "title": "We're Snaking it Live!"
+        },
+        {
+          "id": "inPersonHybridRemoteTipsForIndividualsTeamsAndCompaniesToNavigateOurNewWorkReality",
+          "complexity": "All",
+          "description": "The way we work has changed dramatically in the last 3 years. Individuals, teams, and companies are still trying to figure out the new normal.\n \n\n Join me to discuss patterns, pitfalls, and tips for navigating the new workplace landscape.",
+          "speakers": [
+            "danLuchi"
+          ],
+          "tags": [
+            "Teams",
+            "Remote",
+            "Hybrid"
+          ],
+          "title": "In Person, Hybrid, Remote? Tips for individuals, teams, and companies to navigate our new work reality"
+        },
+        {
+          "id": "whatRaising3KidsTaughtMeAboutWorkingWithUsers",
+          "complexity": "All",
+          "description": "No matter how awesome an application is, if it doesn't give the users or stakeholders what they want it won't get used. In this talk I explore ways to work with users, website visitors, or business stakeholders to design a truly useful product. I use parenting analogies to add humor and interest.",
+          "speakers": [
+            "derekBinkley"
+          ],
+          "tags": [
+            "software development"
+          ],
+          "title": "What raising 3 kids taught me about working with users"
+        },
+        {
+          "id": "buildingADesignSystemInflight",
+          "complexity": "All",
+          "description": "Design systems -collections of common components, colors, and other constants- are a key way to scale teams and web applications on the modern web. They save time for devs and designers. Let's walk through the process of converting an existing site to a design system to show how useful they can be!",
+          "speakers": [
+            "joshGoldberg"
+          ],
+          "tags": [
+            "design systems",
+            "components",
+            "atomic design"
+          ],
+          "title": "Building a Design System In-Flight"
+        },
+        {
+          "id": "theDecisionBuyinAlgorithm",
+          "complexity": "Intermediate",
+          "description": "While making large technical decisions such as deciding which JavaScript framework to build your web app in are difficult, getting buy-in for those decisions is even more challenging. It turns out other industries have a tried-and-true success formula for this that us in tech can leverage today!",
+          "speakers": [
+            "johnRiviello"
+          ],
+          "tags": [
+            "JavaScript",
+            "Leading development teams"
+          ],
+          "title": "The Decision Buy-In Algorithm"
+        },
+        {
+          "id": "roadToZeroLintFailuresTacklingCodeQualityChallengesAtScale",
+          "complexity": "Intermediate",
+          "description": "Lint rules improves developer productivity and minimizes errors. But what if your large scale application contains thousands of lint failures? Discover effective strategies to resolve them so that we can once again rely on lint rules to ensure consistent code quality and a more maintainable codebase",
+          "speakers": [
+            "chrisNg"
+          ],
+          "tags": [
+            "linting",
+            "javascript",
+            "code-quality",
+            "scale"
+          ],
+          "title": "Road to Zero Lint Failures: Tackling Code Quality Challenges at Scale"
+        },
+        {
+          "id": "theFutureOfWebStorageExploringAdvancedApisAndEmergingTechnologies",
+          "complexity": "All",
+          "description": "Are you tired of relying on outdated web storage techniques? In this presentation, we will dive into the world of advanced APIs such as IndexedDB, CacheStorage, FileSystem API, etc. We'll compare the benefits and limitations of each API, discussing their persistence, quota, security, and performance",
+          "speakers": [
+            "shubhamGautam"
+          ],
+          "tags": [
+            "Web Storage",
+            "Javascript"
+          ],
+          "title": "The Future of Web Storage: Exploring Advanced APIs and Emerging Technologies"
+        },
+        {
+          "id": "optimizingYourWebAppHowToScore100OnLighthouse",
+          "complexity": "All",
+          "description": "Explore the differences between field and lab data, the importance of the latter and practical ways to improve it, all backed by live examples. Learn about TBT and long tasks, JavaScript execution by v8 engine, and Webpack impact. Discover how to improve and reach a perfect Lighthouse score of 100.",
+          "speakers": [
+            "jebBarabanov"
+          ],
+          "tags": [
+            "javascript",
+            "web performance",
+            "browser"
+          ],
+          "title": "Optimizing Your Web App: How to Score 100 on Lighthouse"
+        },
+        {
+          "id": "trustedTypesDomXssProtectionAtScale",
+          "complexity": "All",
+          "description": "DOM XSS is the most critical threat to frontend web security and Trusted Types is the only solution that has worked at scale to prevent these attacks. We will discuss how this browser-based security mitigation protects billions of our users and makes the entire JS ecosystem safer.",
+          "speakers": [
+            "jenOzmen"
+          ],
+          "tags": [
+            "JavaScript",
+            "security"
+          ],
+          "title": "Trusted Types: DOM XSS Protection at Scale"
+        },
+        {
+          "id": "collabAndCommunicateHowGithubCanEmpowerOpenSourceCommunities",
+          "complexity": "All",
+          "description": "Learn how to collaborate effectively with GitHub's features like Discussions and Search. Discover best practices for building resilient communities and fostering positive relationships. Make a meaningful impact on software development - whether you're a seasoned contributor or just starting out.",
+          "speakers": [
+            "ernestPhillips"
+          ],
+          "tags": [
+            "Open source",
+            "github",
+            "discussions",
+            "collaboration",
+            "search"
+          ],
+          "title": "Collab and Communicate: How GitHub Can Empower Open Source Communities"
+        },
+        {
+          "id": "aJavascriptDevelopersGuideToIdentity",
+          "complexity": "All",
+          "description": "Identity access and security are undoubtedly important. Knowing the ins and outs of identity can be the difference between your users staying safe or your users' information being exposed to hackers. This talks aims to fulfill that need and teach you the basics identity and beyond.",
+          "speakers": [
+            "ceora"
+          ],
+          "tags": [
+            "JavaScript",
+            "Identity",
+            "Security"
+          ],
+          "title": "A JavaScript Developer's Guide to Identity"
+        },
+        {
+          "id": "accessibleWebSolutionsWithAriaAndJavascript",
+          "complexity": "Intermediate",
+          "description": "Web interfaces that people with disabilities can use aren’t easy to create. ARIA attributes and dynamic JavaScript solutions must be recognized and understood by assistive technologies. We’ll look at correct ARIA usage and how to manipulate functionality with JavaScript for the best user experience.",
+          "speakers": [
+            "adinaHalter"
+          ],
+          "tags": [
+            "ARIA",
+            "JavaScript",
+            "WCAG",
+            "Accessibility",
+            "Web",
+            "Disability",
+            "Assistive Technology"
+          ],
+          "title": "Accessible Web Solutions with ARIA and JavaScript"
+        },
+        {
+          "id": "howToUnlockYourCreativePotentialATechnicalGuideForGoingFromIdeaToProduction",
+          "complexity": "All",
+          "description": "In this talk, we'll explore the journey from idea to production and sales. Leveraging the Creative Development Framework, we explain a systemic or technical approach to creativity. We'll discuss setting clear aims, designing empathetic applications, and building with customer behaviors first.",
+          "speakers": [
+            "jaylenSanders"
+          ],
+          "tags": [
+            "Javascript",
+            "#Creative",
+            "#Framework",
+            "#TV-Sales",
+            "#Innovation"
+          ],
+          "title": "How to Unlock Your Creative Potential: A Technical Guide for Going From Idea to Production"
+        },
+        {
+          "id": "unleashingThePowerOfCloudBuildingScalableAndResilientAppsWithAwsAndCicdPipelines",
+          "complexity": "All",
+          "description": "Learn the secrets of building scalable & resilient apps on AWS! Learn how to optimize EC2 instances, utilize AWS services, and master CI/CD pipelines. Get ready to deliver applications that handle any load. Don't miss out!",
+          "speakers": [
+            "toniDarden"
+          ],
+          "tags": [
+            "aws",
+            "ci/cd",
+            "data processing",
+            "javascript",
+            "python",
+            "data Analytics",
+            "cloud",
+            "data engineering"
+          ],
+          "title": "Unleashing the Power of Cloud: Building Scalable and Resilient Apps with AWS and CI/CD Pipelines"
+        },
+        {
+          "id": "observabilityForTheFrontEnd",
+          "complexity": "Intermediate",
+          "description": "Back end developers are lucky. They benefit from recent advances in observability: tasty distributed traces with OpenTelemetry, the modern open-source standard.\n What does OpenTelemetry have for the front end?\n Some magic, and some opportunities.\n Work skillfully in complexity with great observability.",
+          "speakers": [
+            "jessicaKerr"
+          ],
+          "tags": [
+            "javascript",
+            "observability"
+          ],
+          "title": "Observability for the Front End"
+        },
+        {
+          "id": "progressOverPerfectionYourFirstStepsInAccessibility",
+          "complexity": "All",
+          "description": "Accessibility is our responsibility as front-end developers, but it can be daunting to know where to start. The talk will cover the basics of making your product more accessible: semantic HTML, when to use ARIA, and common pitfalls. This is how you start making progress towards a web for all.",
+          "speakers": [
+            "leeWhite"
+          ],
+          "tags": [
+            "HTML",
+            "accessibility",
+            "front-end"
+          ],
+          "title": "Progress over perfection: your first steps in accessibility"
+        },
+        {
+          "id": "theComponentTestingBlueprintEnsureSecureCodeEvolutionInComponentLibraries",
+          "complexity": "All",
+          "description": "Truly unleash the power & efficiency of your component library by ensuring robust scalability through automated component testing. Learn how atoms lay the foundation for complex components. Discover testing secrets to rock-solid functionality, security, and valuable documentation for your components",
+          "speakers": [
+            "gradySalzman"
+          ],
+          "tags": [
+            "JavaScript",
+            "Testing",
+            "Design System",
+            "Component Library"
+          ],
+          "title": "The Component Testing Blueprint: Ensure Secure Code Evolution in Component Libraries"
+        },
+        {
+          "id": "cssBetweenThePages",
+          "complexity": "All",
+          "description": "We've been able to animate and transition on the web for a while, but the experience has been limited to within single pages. The View Transitions API aims to change that by making it easy to transition anything from elements to entire pages across navigations with just CSS and a bit of JavaScript.",
+          "speakers": [
+            "philNash"
+          ],
+          "tags": [
+            "css",
+            "javascript",
+            "animation"
+          ],
+          "title": "CSS Between the Pages"
+        },
+        {
+          "id": "hangingOnByAThread",
+          "complexity": "Intermediate",
+          "description": "In this talk, we’ll talk about the cost of making the client do the heavy lifting, the way our current metrics hide the issues from us, how the next wave of metrics are going to cause us to finally confront the implications of the ways we build for the web, and what we can do about it.",
+          "speakers": [
+            "timKadlec"
+          ],
+          "tags": [
+            "javascript",
+            "performance"
+          ],
+          "title": "Hanging on by a thread"
+        },
+        {
+          "id": "chatgptAsAnAiAssistant",
+          "complexity": "#N/A",
+          "description": "#N/A",
+          "speakers": [
+            "na"
+          ],
+          "tags": "#N/A",
+          "title": "ChatGPT as an AI Assistant"
+        },
+        {
+          "id": "letsBuildTheLibertyjsVscodeExtensionTogether",
+          "complexity": "Intermediate",
+          "description": "Have you ever wondered how famous VSCode extensions work?\n Let's build the LibertyJS VSCode extension together!\n After the end of this workshop, you will understand the building principles of VSCode extension API, avoid common mistakes and pitfalls, and learn how to add custom components and views.",
+          "speakers": [
+            "rubenRestrepo"
+          ],
+          "tags": [
+            "typescript",
+            "node.js",
+            "vscode"
+          ],
+          "title": "Let's build the LibertyJS VSCode extension together!"
+        },
+        {
+          "id": "makingWebsitesSmartAndQwik",
+          "complexity": "Intermediate",
+          "description": "Reset the countdown: it has been 0 days since a new JS framework. In this workshop, we will build a web app that uses ChatGPT to translate components between different JS frameworks using Qwik, the first O(1) JavaScript framework. Along the way, we will learn about Qwik's unique advantages.",
+          "speakers": [
+            "jeffreySmith"
+          ],
+          "tags": [
+            "qwik",
+            "resumability",
+            "chatgpt",
+            "openai",
+            "javascript"
+          ],
+          "title": "Making websites Smart and Qwik"
+        },
+        {
+          "id": "building3dGeospatialVisualizationsWithCesiumGoogleAndArcgis",
+          "complexity": "Beginner",
+          "description": "Whether you're looking to enhance an app with high-quality 3D data or add valuable location-based insights, this workshop aims to equip JS developers with some tips and tricks to combine Cesium, Esri, and Google Photorealistic 3D Tiles to create compelling 3D geospatial visualizations.",
+          "speakers": [
+            "gabbyGetz"
+          ],
+          "tags": [
+            "JavaScript",
+            "Cesium",
+            "3D Tiles",
+            "3D",
+            "WebGL",
+            "Google Maps",
+            "Esri",
+            "Google"
+          ],
+          "title": "Building 3D Geospatial Visualizations With Cesium, Google, and ArcGIS"
+        },
+        {
+          "id": "keynoteLeslieChapman",
+          "complexity": "#N/A",
+          "description": "#N/A",
+          "speakers": [
+            "na"
+          ],
+          "tags": "#N/A",
+          "title": "Keynote - Leslie Chapman\t\t"
+        }
+      ]
     }
   ]
 }

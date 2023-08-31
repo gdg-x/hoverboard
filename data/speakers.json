@@ -1,262 +1,243 @@
 {
   "speakers": [
     {
-      "id": "sandi_metz",
-      "featured": true,
-      "bio": "Sandi Metz, author of Practical Object-Oriented Design in Ruby and 99 Bottles of OOP, believes in simple code and straightforward explanations. She prefers working software, practical solutions and lengthy bicycle trips (not necessarily in that order) and writes, consults, and teaches about object-oriented design.",
-      "name": "Sandi Metz",
-      "company": "",
-      "country": "USA",
-      "photo": "/images/speakers/sandimetz_2016.jpg",
-      "photoUrl": "/images/speakers/sandimetz_2016.jpg",
+      "id": "milicaMihajlija",
+      "featured": false,
+      "bio": "Milica is technical writer at Google Chrome working on privacy and identity. She is a big believer in the open web, always exploring new technologies that are moving it forward.",
+      "name": "Milica Mihajlija",
+      "company": "Google",
+      "country": "Belgrade",
+      "photo": "https://secure.gravatar.com/avatar/73aca9df10726dfe88a926a8413ea351?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/73aca9df10726dfe88a926a8413ea351?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "ourFutureWithoutPasswords"
+        }
+      ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "https://twitter.com/sandimetz",
+          "link": "https://twitter.com/bibydigital",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "https://www.sandimetz.com/",
+          "link": "https://mihajlija.github.io/",
           "name": "Website"
         }
-      ],
-      "order": 0,
-      "title": "Programmer / Author / Teacher",
-      "sessions": [
-        {
-          "id": "insufficientlyPersuasive"
-        }
       ]
     },
     {
-      "id": "guillaume_marty",
-      "featured": true,
-      "bio": "Guillaume Marty has been working on the web for 77% of its lifespan. In the last few years he shifted his focus from code to humans. He's passionate about contributing to a healthy, inclusive industry, and the intersection between communities and technology. He was formerly working at Mozilla, and currently at Twitter.",
-      "name": "Guillaume Marty",
-      "company": "Twitter",
-      "country": "United Kingdom",
-      "photo": "/images/speakers/guillaume-marty.jpg",
-      "photoUrl": "/images/speakers/guillaume-marty.jpg",
+      "id": "christopherJBaker",
+      "featured": false,
+      "bio": "Christopher J Baker grew up in a farming community and started coding at a very young age. He worked as an engineer, to a mentor and trainer, and eventually to the Director of React Consulting at Bitovi. Though in management, his passion still lies in tech: software architecture, API design, and data processing and analysis. His approaches to technical areas also carry over into his love of cooking and tabletop role-playing games.",
+      "name": "Christopher J Baker",
+      "company": "Bitovi",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/86e2beaf7f5b0d1b81ae07b11b691999?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/86e2beaf7f5b0d1b81ae07b11b691999?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "simplifyMicroFrontendArchitectureUsingReactToWebComponent"
+        }
+      ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "https://twitter.com/g_marty",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "Web lover / JavaScript activist / HTML5 enthusiast",
-      "sessions": [
-        {
-          "id": "safeSpace"
-        }
-      ]
-    },
-    {
-      "id": "andrew_murphy",
-      "featured": false,
-      "bio": "I combine my 13 years of professional software engineering experience with a passion for leadership and communication skills. My main focus is on how we can be better technical leaders and developers by focusing on learning the skills most of us ignore - communication and leadership skills. Originally from the UK but now based in Australia, I have consulted, performed workshops and developed software for clients across the UK, Australia, New Zealand and the United States. Technology in all its forms is part of my makeup and so I code, speak, write, teach, make, game and listen to all things geek",
-      "name": "Andrew Murphy",
-      "company": "",
-      "country": "Melbourne, Australia",
-      "photo": "/images/speakers/Andrew_Murphy.jpg",
-      "photoUrl": "/images/speakers/Andrew_Murphy.jpg",
-      "socials": [],
-      "order": 0,
-      "title": "",
-      "sessions": [
-        {
-          "id": "iDontKnow"
-        }
-      ]
-    },
-    {
-      "id": "milecia_mcgregor",
-      "featured": false,
-      "bio": "Milecia McGregor is a software engineer lost somewhere in the Midwest. She has mostly worked with .NET, Angular, and Azure to build web apps, but she also has a master’s degree in mechanical and aerospace engineering and has published research in machine learning and robotics. In her free time, she spends time with her husband and dogs while learning to play the ukulele and learning Japanese.",
-      "name": "Milecia McGregor",
-      "country": "Tulsa, Oklahoma, USA",
-      "photo": "/images/speakers/Milecia_McGregor.jpg",
-      "photoUrl": "/images/speakers/Milecia_McGregor.jpg",
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/FlippedCoding",
+          "link": "https://twitter.com/christophrjbakr",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "https://flippedcoding.com/",
+          "link": "https://christopherjbaker.dev/",
           "name": "Website"
-        }
-      ],
-      "order": 0,
-      "title": "Software Engineer",
-      "sessions": [
-        {
-          "id": "machineLearning"
         }
       ]
     },
     {
-      "id": "ryan_heupler",
+      "id": "lorenSandsramshaw",
       "featured": false,
-      "bio": "I’m currently an engineer at Guru, as well as a mentor/instructor for an online code school called Thinkful. I’m also a co-organizer for the VueJS Philly and GitLab Philly meetup groups. I run my own YouTube channel focused on helping break down programming/web dev concepts into simple terms (or at least I try to). I’ll sometimes mess around making music, or exploring new coffee shops (trying to find the best coffee in Philadelphia).",
-      "name": "Ryan Heupler",
-      "company": "",
-      "country": "Philadelphia, PA USA",
-      "photo": "/images/speakers/Ryan_Heupler.jpg",
-      "photoUrl": "/images/speakers/Ryan_Heupler.jpg",
+      "bio": "Loren is a developer relations engineer at Temporal. They worked on Temporal's Node runtime, wrote a book on GraphQL, and did consulting, startups, and open source.",
+      "name": "Loren Sands-Ramshaw",
+      "company": "Temporal",
+      "country": "Unknown",
+      "photo": "https:",
+      "photoUrl": "https: //secure.gravatar.com/avatar/bdd4c681649069ac1611dfd31503417d?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "howToBuildDistributedSystemsInJavascript"
+        }
+      ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "http://twitter.com/codingcardio",
+          "link": "https://twitter.com/lorendsr",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "https://youtube.com/c/codingcardio",
+          "link": "https://lorensr.me/",
           "name": "Website"
-        }
-      ],
-      "order": 0,
-      "title": "Mentor & Instructor",
-      "sessions": [
-        {
-          "id": "refactorClassComponent"
         }
       ]
     },
     {
-      "id": "chris_lorenzo",
+      "id": "michaelSchoonmaker",
       "featured": false,
-      "bio": "Chris has worked at Comcast since 2007 – currently as a Distinguished Engineer. He enjoys building/motivating teams and ramping up new projects using the latest patterns and web primitives. Besides coding in Javascript, he loves spending time with his family and helping out in the community.",
-      "name": "Chris Lorenzo",
+      "bio": "I want to make art. I'll even use a paintbrush, if it's absolutely necessary.\n \n\n Before I got a \"real job\" _(Thanks, Dad...)_, I made video games. These days I work as what Joyce Park calls a \"Carpenter\": I make real apps for real people using the most practical, reliable tools available. I work as a CTO for a social mobile app, Squad, using React Native, Node, and Postgres to deliver real-time audio messaging and JavaScript-powered delight.",
+      "name": "Michael Schoonmaker",
+      "company": "Squad",
+      "country": "Bellingham, WA",
+      "photo": "https://secure.gravatar.com/avatar/7432b2f79811673f88912ee5cb08d3fa?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/7432b2f79811673f88912ee5cb08d3fa?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "wereSnakingItLive"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/Schoonology",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://www.schoonology.com",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "danLuchi",
+      "featured": false,
+      "bio": "Director of Engineering at DrayNow. Native Michigander now settled in Philadelphia after stints in San Francisco and Boston. Mediocre rock climber.",
+      "name": "Dan Luchi",
+      "company": "DrayNow",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/f90fbd7220f98f724c6ccc9565cdb510?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/f90fbd7220f98f724c6ccc9565cdb510?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "inPersonHybridRemoteTipsForIndividualsTeamsAndCompaniesToNavigateOurNewWorkReality"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/looukey",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "http://danluchi.com",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "derekBinkley",
+      "featured": false,
+      "bio": "Derek Binkley is Engineering Manager at Localize. While getting his start fixing the Y2K date problem in Cobol, Derek quickly moved on to spend over twenty years using JavaScript, PHP, JVM Languages, MySQL, MongoDB, and Oracle.\n \n\n He enjoys teaching others through speaking, mentoring, and writing articles. Derek encourages developers to write clean, testable code. When not in front of a computer he spends time with family, travels, and makes pizza.",
+      "name": "Derek Binkley",
+      "company": "Localize",
+      "country": "Madison, WI",
+      "photo": "https://secure.gravatar.com/avatar/384c148ae013999720eb847b1bd47aea?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/384c148ae013999720eb847b1bd47aea?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "whatRaising3KidsTaughtMeAboutWorkingWithUsers"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "website",
+          "link": "http://derekb-wi.com",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "joshGoldberg",
+      "featured": false,
+      "bio": "Hi, I'm Josh! I'm a frontend developer with a passion for open source, static analysis, and the web. I'm a full time open source maintainer and work on projects in the TypeScript ecosystem such as typescript-eslint and TypeStat. I'm also the author of the Learning TypeScript book, published by O'Reilly. My work focuses on bringing accessible education to the masses in a sustainable way.",
+      "name": "Josh Goldberg",
+      "company": "Open Source Developer",
+      "country": "Philadelphia",
+      "photo": "https://secure.gravatar.com/avatar/e02e17812dee10ed3f55bf4aeb8c7c84?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/e02e17812dee10ed3f55bf4aeb8c7c84?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "buildingADesignSystemInflight"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/JoshuaKGoldberg",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://joshuakgoldberg.com",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "johnRiviello",
+      "featured": false,
+      "bio": "John Riviello is an Engineering Fellow at Comcast where he currently leads development of the Xfinity app. He is a Google Developer Expert in Web Technologies, and the author of the LinkedIn Learning course \"CSS to Sass.\" In his free time, he prefers surfing waves over surfing the Internet.",
+      "name": "John Riviello",
       "company": "Comcast",
-      "country": "Philadelphia, PA USA",
-      "photo": "/images/speakers/Chris_Lorenzo.jpg",
-      "photoUrl": "/images/speakers/Chris_Lorenzo.jpg",
+      "country": "Greater Philadelphia Area",
+      "photo": "https://secure.gravatar.com/avatar/203c84691c03c467b5d4bbf3e3b7313f?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/203c84691c03c467b5d4bbf3e3b7313f?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "theDecisionBuyinAlgorithm"
+        }
+      ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "http://twitter.com/chiefcll",
+          "link": "https://twitter.com/JohnRiv",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "https://www.linkedin.com/in/chris-lorenzo-3323667",
+          "link": "http://www.johnriviello.com/",
           "name": "Website"
-        }
-      ],
-      "order": 0,
-      "title": "Distinguished Engineer",
-      "sessions": [
-        {
-          "id": "sharingComponents"
         }
       ]
     },
     {
-      "id": "stacey_jenkins",
+      "id": "chrisNg",
       "featured": false,
-      "bio": "Stacey resides in Fort Wayne, Indiana, and has over 20 years of Law Enforcement (LEO) and teaching experience. Law Enforcement experience: Homicide Detective • Gang Unit Specialist Detective • Hostage Negotiator • Crisis Intervention Team (CIT) Officer •S chool Resources Officer (SRO) • Five years as a Special Agent with the DEPARTMENT OF HOMELAND (DHS). Stacey is currently working as a Detective with the Fort Wayne (Indiana) Police Dept., Gang, and Violent Crimes Unit. Teaching experience: Stacey is an Adjunct Professor: • Business Psychology • Psychology •Criminal Profiling •Criminal Behavior •Computer Psychology •Social Media Psychology •Sociology (Group Dynamics). Education: • Bachelor of Science degree; Criminology (Ball State University, 1994). • Master’s degree; Forensic Psychology (Walden University, 2012). • Currently, a Ph.D. Candidate (Forensic Psychology), at Walden University Affiliations/Memberships: • American Psychology Association (APA) •CIT International member #3036 •Golden Key International Honor Society • National Alliance on Mental Illness (NAMI) • Omega Psi Phi Fraternity Inc. • Psi Chi International Honor Society (Psychology) • Society for Police and Criminal Psychology",
-      "name": "Stacey Jenkins, M. Psych",
-      "company": "",
-      "country": "Indiana, USA",
-      "photo": "/images/speakers/Stacey_Jenkins.jpg",
-      "photoUrl": "/images/speakers/Stacey_Jenkins.jpg",
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/CruxConception",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://www.speakermatch.com/profile/cruxconception/",
-          "name": "Website"
-        }
-      ],
-      "order": 0,
-      "title": "Ph.D. candidate, International KeynoteSpeaker, BehavioralProfiler, MotivationalSpeaker, TeamBuilder, GroupDynamics.",
-      "sessions": [
-        {
-          "id": "minorityRole"
-        }
-      ]
-    },
-    {
-      "id": "gabi_dombrowski",
-      "featured": false,
-      "bio": "A third-generation Brazilian raised in the US, Gabi spent her youth immersed in MS-DOS, server rooms, and Geocities Mariah Carey fan page HTML. She transitioned to a development career in 2016 after spending 7 years as a systems administrator and is active in her local tech community. Namely, she’s the Mentor Director for Coding & Cocktails, a Kansas City Women in Technology program, which teaches monthly coding sessions to help women break into the industry. Amongst her other interests are included ashtanga yoga, learning languages, and curating stellar playlists.",
-      "name": "Gabi Dombrowski",
-      "company": "",
-      "country": "Kansas City, MO, USA",
-      "photo": "/images/speakers/Gabi_Dombrowski.jpg",
-      "photoUrl": "/images/speakers/Gabi_Dombrowski.jpg",
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/gabdom",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://gabidombrowski.com",
-          "name": "Website"
-        }
-      ],
-      "order": 0,
-      "title": "freelance web developer and no-ego doer",
-      "sessions": [
-        {
-          "id": "mentorPlaybook"
-        }
-      ]
-    },
-    {
-      "id": "peter_eijgermans",
-      "featured": false,
-      "bio": "Peter is an adventurous and passionate CodeSmith at Ordina Netherlands. He likes to travel around the world with his bike. Always seeking for the unexpected and unknown. For his job he tries out the latest techniques and frameworks. He loves to share his experience by speaking at conferences over the World and writing for the Dutch Java magazine and DZone. He believes that you as the front-end developer are the spider in the web to bring the user, the team and the product together.",
-      "name": "Peter Eijgermans",
-      "company": "Ordina Netherlands",
-      "country": "Utrecht, Netherlands",
-      "photo": "/images/speakers/peter_eijgermans.jpg",
-      "photoUrl": "/images/speakers/peter_eijgermans.jpg",
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/EijgermansPeter",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://petereijgermans11.github.io/portfolio/",
-          "name": "Website"
-        }
-      ],
-      "order": 0,
-      "title": "CodeSmith",
-      "sessions": [
-        {
-          "id": "teslaBattery"
-        }
-      ]
-    },
-    {
-      "id": "chris_ng",
-      "featured": false,
-      "bio": "Chris is a Staff Software Engineer at LinkedIn, based in New York City working on native video. He is an editor and contributor for both The Ember Times and the LinkedIn Engineering Blog.",
+      "bio": "Chris Ng is a [Senior Staff Software Engineer](https://www.linkedin.com/in/chrisrng) at LinkedIn based in New York City working on the media experiences you encounter on LinkedIn.com. He is a member of the Ember Learning Core Team and writes and edits for the Ember Times and the LinkedIn Engineering Blog. Chris leads the linting strategy for LinkedIn's flagship web application and brings together different teams and personalities to achieve shared goals related to web infrastructure, product strategy, and resolving long standing issues.",
       "name": "Chris Ng",
-      "company": "Linkedin",
-      "country": "New York, NY, USA",
-      "photo": "/images/speakers/Chris_Ng.jpg",
-      "photoUrl": "/images/speakers/Chris_Ng.jpg",
+      "company": "LinkedIn",
+      "country": "New York, NY",
+      "photo": "https://secure.gravatar.com/avatar/3a17284d884badc23f1f5e2dabe9df64?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/3a17284d884badc23f1f5e2dabe9df64?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "roadToZeroLintFailuresTacklingCodeQualityChallengesAtScale"
+        }
+      ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "http://twitter.com/chrisrng",
+          "link": "https://twitter.com/chrisrng",
           "name": "Twitter"
         },
         {
@@ -264,609 +245,460 @@
           "link": "https://www.linkedin.com/in/chrisrng",
           "name": "Website"
         }
-      ],
+      ]
+    },
+    {
+      "id": "shubhamGautam",
+      "featured": false,
+      "bio": "Meet Shubham, a TypeScript-loving front-end engineer at Headout who's always up for a friendly debate on the existence of aliens. He's passionate about continuous learning and personal growth, staying up-to-date with the latest developments in his field. With a collaborative spirit and curious mindset, he brings energy and enthusiasm to every project and discussion. For Shubham, anything is possible with the right tools and an open mind.",
+      "name": "Shubham Gautam",
+      "company": "Headout",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/8e4024c52ead0802d9c7c975ed814c39?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/8e4024c52ead0802d9c7c975ed814c39?s=500",
       "order": 0,
-      "title": "Staff Software Engineer",
       "sessions": [
         {
-          "id": "deploymentStrategy"
+          "id": "theFutureOfWebStorageExploringAdvancedApisAndEmergingTechnologies"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "website",
+          "link": "https://shubhamgautam.in",
+          "name": "Website"
         }
       ]
     },
     {
-      "id": "david_silva",
+      "id": "jebBarabanov",
       "featured": false,
-      "bio": "Co-Founder of Techqueria untermensch Award-losing web developer all opinions expressed are plagiarized Too old for 30 under 30 been to UC Berkeley",
-      "name": "David Silva",
-      "company": "Techqueria",
-      "country": "Jersey City, NJ, USA",
-      "photo": "/images/speakers/David_Silva.jpg",
-      "photoUrl": "/images/speakers/David_Silva.jpg",
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/dvidsilva",
-          "name": "Twitter"
-        }
-      ],
+      "bio": "Experienced software engineer with a deep passion for software products, Jeb has been developing software since the age of 14. When not writing code, catch him kitesurfing or desperately trying to get some tolerable sound out of his drums and guitar.",
+      "name": "Jeb Barabanov",
+      "company": "Wix.com",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/1deedb608878c26080fcbc4efa7cdf2c?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/1deedb608878c26080fcbc4efa7cdf2c?s=500",
       "order": 0,
-      "title": "Co-Founder of Techqueria",
       "sessions": [
         {
-          "id": "lerna"
+          "id": "optimizingYourWebAppHowToScore100OnLighthouse"
         }
-      ]
-    },
-    {
-      "id": "senigbolo_stephen",
-      "featured": false,
-      "bio": "I’m Kenigbolo Meya Stephen, Full Stack Software Engineer working as the Frontend Engineering Team Lead at BCaster OY. Formerly Arch Conveyer/Community Manage of CodeAfrique(now Reload), a not-for-profit weekend intensive software engineering bootcamp for underrepresented groups in IT based out of Estonia.'\n'During my free time I sometimes volunteer as an open source developer for ADSBx, play golf and coach football (soccer as Americans call it). I also have a nick for writing tiny javascript modules on npm to help a few developers out there so they need not rewrite same utilities that we all might need (usually it’s the case that we’re only a handful needing those so there’s really nothing too worry much about).",
-      "name": "Kenigbolo Meya Stephen",
-      "company": "BCaster OY",
-      "country": "Helsinki, Finland",
-      "photo": "/images/speakers/MeyaStephen_Kenigbolo.jpg",
-      "photoUrl": "/images/speakers/MeyaStephen_Kenigbolo.jpg",
+      ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "http://twitter.com/expensivestevie",
+          "link": "https://twitter.com/jebbacca",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "https://fi.linkedin.com/in/kenigbolo",
+          "link": "https://www.justjeb.com/",
           "name": "Website"
-        }
-      ],
-      "order": 0,
-      "title": "Frontend Engineering Team Lead",
-      "sessions": [
-        {
-          "id": "rocketScience"
         }
       ]
     },
     {
-      "id": "james_simpson",
+      "id": "jenOzmen",
       "featured": false,
-      "bio": "James Simpson has spent the greater part of his life pushing the web forward by challenging what is possible in a browser. As founder of GoldFire Studios, he has focussed on real-time gaming, high scalability/performance and some of the largest HTML5 canvas games ever built. He is also passionate about open-source as the author of many projects, including the popular howler.js audio library.",
-      "name": "James Simpson",
-      "company": "GoldFire Studios",
-      "country": "Oklahoma, USA",
-      "photo": "/images/speakers/James_Simpson.jpg",
-      "photoUrl": "/images/speakers/James_Simpson.jpg",
+      "bio": "Jen Ozmen is a Software Engineer at Google, where she works on the Information Security Engineering team. She is passionate about building secure and reliable software, and she is always looking for new ways to improve the security of Google's products and services.",
+      "name": "Jen Ozmen",
+      "company": "Google",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/449216c5529c26f37750cdfb9b8d6675?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/449216c5529c26f37750cdfb9b8d6675?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "trustedTypesDomXssProtectionAtScale"
+        }
+      ]
+    },
+    {
+      "id": "ernestPhillips",
+      "featured": false,
+      "bio": "Ernest Phillips is a full-stack software engineer at GitHub, where he develops solutions using Ruby on Rails. Currently, he builds products that help students and educators succeed in open source.\n Before transitioning to software development, Ernest worked for many years in technical support. He is deeply passionate about his work and takes pride in helping developers become more productive and customer-centric in their approach to building software. He always keeps the needs of customers at the forefront of his work. Ernest is a developer who thrives in a collaborative environment and is always eager to share his knowledge and experience with others, especially those that are new to open source communities.",
+      "name": "Ernest Phillips",
+      "company": "GitHub",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/c7a7a45c957262526387d6431a00d6e7?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/c7a7a45c957262526387d6431a00d6e7?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "collabAndCommunicateHowGithubCanEmpowerOpenSourceCommunities"
+        }
+      ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "http://twitter.com/GoldFireStudios",
+          "link": "https://twitter.com/erngetsgood",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "https://goldfirestudios.com/",
+          "link": "https://ernestphillips.dev/",
           "name": "Website"
-        }
-      ],
-      "order": 0,
-      "title": "Founder",
-      "sessions": [
-        {
-          "id": "webAudio"
         }
       ]
     },
     {
-      "id": "alfredo_lopez",
+      "id": "ceora",
       "featured": false,
-      "bio": "Alfredo is a Director of Engineering at Hearst working with technical and non-technical teams to develop tools that abstract best practices and performance enhancements into measurable business goals.<br><br>His current interests include creating highly performant and flexible web applications that enable developers to be productive.<br><br>Prior to Hearst, Alfredo worked for an ad platform writing low-level JavaScript that catered to strict browser support requirements. Outside of the web, Alfredo is a musician, film enthusiast, and comedy fan.",
-      "name": "Alfredo Lopez",
-      "company": "Hearst",
-      "country": "New York, NY",
-      "photo": "/images/speakers/Alfredo_Lopez.jpg",
-      "photoUrl": "/images/speakers/Alfredo_Lopez.jpg",
+      "bio": "Ceora is a developer advocate at Okta based out of Philadelphia. She's focused on creating educational content that makes coding easier for everyone and loves working with JamStack, GraphQL, and cloud technologies. Outside of tech, she spends way too much time watching anime, listening to K-pop, and attempting to play the guitar.",
+      "name": "Ceora",
+      "company": "Okta",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/f7e2ca6fbea1c7d4c0bb9cd3033e5736?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/f7e2ca6fbea1c7d4c0bb9cd3033e5736?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "aJavascriptDevelopersGuideToIdentity"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/ceeoreo_",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://ceora.dev/",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "adinaHalter",
+      "featured": false,
+      "bio": "Adina Halter is Sr. Principal Software Architect for Accessibility at Comcast where she engineers aspirational solutions to ensure those with disabilities have the best possible home and entertainment experience.\n \n\n Adina started her career out of college as a 3D animator before moving into print design and web development. She then expanded into the mobile and internet-of-things technology space. She is also a cross-product tech innovator in the use of artificial intelligence for accessible solutions. Additionally, Adina has a passion for quantum computing.\n \n\n Adina is an advocate for product development that delights users with differing disabilities. She is a member of the W3C’s Web Accessibility Initiative Education and Outreach working group and tweets, instructs, and speaks on coding, accessibility, and women in tech.\n \n\n Adina also served as co-lead for the Comcast MyAbilities Employee Resource Group, which empowers employees with disabilities and equips their allies across the company.\n \n\n Personal interests include wine, cooking, greek and roman coins, and strategy games.",
+      "name": "Adina Halter",
+      "company": "Comcast NBCUniversal",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/e6a6fc6c489c3fd9b0bfa9c431730080?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/e6a6fc6c489c3fd9b0bfa9c431730080?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "accessibleWebSolutionsWithAriaAndJavascript"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/haltersweb",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://github.com/haltersweb/Accessibility",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "jaylenSanders",
+      "featured": false,
+      "bio": "### Who\n Jaylen Sanders is a Creative Engineer who loves to blend creativity and engineering. He is a Software Engineer at Comcast who leads development for an Xfinity Shop on X1 Experience.\n \n\n ### What\n Jaylen’s current learning paths explore creativity, psychology, and network/systems effects. He is building a second brain or knowledge management system to support his growth as a natural general intelligence, lol.",
+      "name": "Jaylen Sanders",
+      "company": "Comcast",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/7ee1d55a3b28d8cbe795377362135af7?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/7ee1d55a3b28d8cbe795377362135af7?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "howToUnlockYourCreativePotentialATechnicalGuideForGoingFromIdeaToProduction"
+        }
+      ]
+    },
+    {
+      "id": "toniDarden",
+      "featured": false,
+      "bio": "I'm Toni Darden, a passionate Software Development Engineer specializing in building robust and scalable cloud applications. With a diverse background in both the corporate world and entrepreneurship, I bring a unique perspective to my work.\n During my time building my former company, Gas Hoppers USA, I was dedicated to helping businesses save on fuel costs by eliminating middlemen. Through our innovative mobile app, companies could monitor usage, achieve savings, and experience unmatched reliability, quality, and communication.\n My journey continued at Lambda School's rigorous 18-month Computer Science & Software Engineering Academy, where industry giants like Y-Combinator, Google Ventures, and Stripe provided support. There, I immersed myself in full-stack web development, mastering Python, Django, JavaScript, React, Redux, Node.js, and other cutting-edge technologies. I built intricate applications and embraced modern JavaScript environments and tooling.\n Now, as a Software Development Engineer, I thrive on tackling complex challenges and empowering others in the tech industry. I'm thrilled to connect with the LibertyJS community, sharing my expertise and insights. Let's embark on an exploration of the captivating world of building scalable and resilient apps with AWS and CI/CD pipelines.",
+      "name": "Toni Darden",
+      "company": "Comcast",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/15388b4799a7377b27ced7b2fcede7ed?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/15388b4799a7377b27ced7b2fcede7ed?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "unleashingThePowerOfCloudBuildingScalableAndResilientAppsWithAwsAndCicdPipelines"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/Codeworldco",
+          "name": "Twitter"
+        }
+      ]
+    },
+    {
+      "id": "jessicaKerr",
+      "featured": false,
+      "bio": "Jessica Kerr is a developer of 20 years, a conference speaker of 10, and a symmathecist: a conscious participant in sociotechnical systems. Find her writing at jessitron.com and systemsthinking.dev. Find her keynotes at conferences like RubyConf, GOTO Copenhagen, YOW! Australia, and around. She currently works at Honeycomb.io, remotely from her home in St. Louis. One child graduated this year; one more to go.",
+      "name": "Jessica Kerr",
+      "company": "Honeycomb.io",
+      "country": "St. Louis, MO",
+      "photo": "https://secure.gravatar.com/avatar/ccdd121c5cf5ef6233ee6e7ae9a5d999?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/ccdd121c5cf5ef6233ee6e7ae9a5d999?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "observabilityForTheFrontEnd"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/jessitron",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://jessitron.com",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "leeWhite",
+      "featured": false,
+      "bio": "Lee is an Accessibility Engineer at Olark, where she helps build a live web chat experience that is accessible to both the end users and the agents. She is passionate about building user experiences and design systems. Outside of work, she spends time trail running and knitting sweaters.",
+      "name": "Lee White",
+      "company": "Olark",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/f05e643c58d009c5e2ced5fcdb89f37e?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/f05e643c58d009c5e2ced5fcdb89f37e?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "progressOverPerfectionYourFirstStepsInAccessibility"
+        }
+      ],
       "socials": [
         {
           "icon": "website",
-          "link": "https://alfre.do",
+          "link": "https://www.shleewhite.com",
           "name": "Website"
-        },
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/lfredolo",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "Director of Engineering",
-      "sessions": [
-        {
-          "id": "thinkfast"
         }
       ]
     },
     {
-      "id": "robin_dykema",
+      "id": "gradySalzman",
       "featured": false,
-      "bio": "Robin is a UI engineer at Taulia, where she focuses on front end development in React. She is passionate about building stunning user interfaces and intuitive user experiences. She successfully transitioned from teaching ESL to kindergarteners in Shanghai to wrangling code and hasn’t looked back since.",
-      "name": "Robin Dykema",
-      "company": "Taulia",
-      "country": "Austin, TX",
-      "photo": "/images/speakers/Robin_Dykema.jpg",
-      "photoUrl": "/images/speakers/Robin_Dykema.jpg",
+      "bio": "Hello! My name is Grady (or you can call me G). I am a Software Engineer based out of Chicago, IL with specific interests in front end, component libraries, design systems.",
+      "name": "Grady Salzman",
+      "company": "Contenda",
+      "country": "Chicago, IL",
+      "photo": "https://secure.gravatar.com/avatar/7203eafbc4675d6c56543a51e1dbfa20?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/7203eafbc4675d6c56543a51e1dbfa20?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "theComponentTestingBlueprintEnsureSecureCodeEvolutionInComponentLibraries"
+        }
+      ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "http://twitter.com/robindykema",
+          "link": "https://twitter.com/GradySalzman",
           "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "UI Engineer",
-      "sessions": [
-        {
-          "id": "sacre_bleu"
         }
       ]
     },
     {
-      "id": "jeffrey_smith",
+      "id": "philNash",
       "featured": false,
-      "bio": "I’m 28 years old from rural VA. I earned a BS in Economics in 2012, and after working at an education analytics startup after college, taught myself development. I started with frontend development but now happily work up and down the stack. I moved to Philadelphia three years ago to pursue a career in technology. I’ve worked at Comcast the past two years. I currently live in South Philly with my friendly cat, Rupert.",
+      "bio": "Phil is a developer evangelist for [Sonar](https://www.sonarsource.com/) and a [Google Developer Expert](https://developers.google.com/experts/people/phil-nash) living in Melbourne, Australia. He loves working with Ruby or JavaScript to build web applications and tools to help developers. He once helped build a website that captured everyone's favourite sandwich fillings. He has [too many GitHub repositories](https://github.com/philnash).\n \n\n Away from the keyboard, Phil listens to ska punk, hangs out with his miniature dachshund (also called Ruby), and is on a mission to discover the world's best beers.\n \n\n Phil tweets at [@philnash](https://twitter.com/philnash), and you can [find him elsewhere online here](http://philna.sh).",
+      "name": "Phil Nash",
+      "company": "Sonar",
+      "country": "London",
+      "photo": "https://secure.gravatar.com/avatar/8ec1383b240b5ba15ffb9743fceb3c0e?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/8ec1383b240b5ba15ffb9743fceb3c0e?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "cssBetweenThePages"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/philnash",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://philna.sh",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "timKadlec",
+      "featured": false,
+      "bio": "Tim is an independent web performance consultant helping organizations improve the effectiveness and reach of their sites by ensuring that they perform quickly—and stay that way.\n \n\n Tim is the author of High Performance Images (O'Reilly, 2016) and Implementing Responsive Design: Building sites for an anywhere, everywhere web (New Riders, 2012), and was also a contributing author for Smashing Book #4: New Perspectives on Web Design (Smashing Magazine, 2013) and the Web Performance Daybook Volume 2 (O'Reilly, 2012). He also hosts Chasing Waterfalls, a podcast featuring conversations with the people working to make the web faster for everyone.",
+      "name": "Tim Kadlec",
+      "company": "Tim Kadlec Consulting",
+      "country": "Wisconsin",
+      "photo": "https://secure.gravatar.com/avatar/a9a379f2e92c7ded4564190c5b286b78?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/a9a379f2e92c7ded4564190c5b286b78?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "hangingOnByAThread"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/tkadlec",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://timkadlec.com/",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "mrina",
+      "featured": false,
+      "bio": "#N/A",
+      "name": "Mrina",
+      "company": "#N/A",
+      "country": "#N/A",
+      "photo": "#N/A",
+      "photoUrl": "#N/A",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "na"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/#N/A",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "#N/A",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "rubenRestrepo",
+      "featured": false,
+      "bio": "More than ten years of professional experience creating software, seven years working remotely, with a product-focused mindset, obsessed with delivering value. Native Spanish speaker, community builder, and speaker. \n I worked at a successful startup, Auth0 (acquired by Okta).\n Worked at a \"failed\" startup (Fusebit)\n I have both views of being in such environments and betting on a third startup (Stateful) building an excellent VSCode extension (Runme).\n My last \"big\" talk was at Revo.js in Romania. [Watch it here](https://www.youtube.com/watch?v=S9zlOh7xGms)\n I'm good at names. I always remember them.",
+      "name": "Ruben Restrepo",
+      "company": "Stateful",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/555fbae9979c26ac0171442b75e197dd?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/555fbae9979c26ac0171442b75e197dd?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "letsBuildTheLibertyjsVscodeExtensionTogether"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/degrammer",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://bencho.dev",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "jeffreySmith",
+      "featured": false,
+      "bio": "I'm 33 years old from rural VA. I earned a BS in Economics in 2012, and am self-taught in software development. I moved to Philadelphia seven years ago to pursue a career in technology and am currently leading a team of 8 engineers at Vanguard, building full-stack, AI-enabled financial advice tools focused on retirement planning. I am also passionate about design systems, web performance, accessibility, and user-centric SLO's. I am loved and supported by my wonderful wife and delightful one year old daughter. Over the pandemic I became an avid woodworker and spend free-time creating heirloom quality furniture from Pennsylvania hardwoods.",
       "name": "Jeffrey Smith",
-      "company": "Comcast",
-      "country": "Philadelphia, PA",
-      "photo": "/images/speakers/jeffrey_smith.jpg",
-      "photoUrl": "/images/speakers/jeffrey_smith.jpg",
+      "company": "Vanguard",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/98e23dfe62d99904bcba092d429cc945?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/98e23dfe62d99904bcba092d429cc945?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "makingWebsitesSmartAndQwik"
+        }
+      ],
       "socials": [
         {
           "icon": "website",
-          "link": "http://jeffreysmith.ninha",
+          "link": "http://jeffreysmith.ninja",
           "name": "Website"
         }
-      ],
-      "order": 0,
-      "title": "Design Technologist",
-      "sessions": [
-        {
-          "id": "jovo"
-        }
       ]
     },
     {
-      "id": "liz_krane",
+      "id": "gabbyGetz",
       "featured": false,
-      "bio": "Liz Krane is a developer advocate at Sentry and founder of Learn Teach Code, an organization that empowers aspiring developers to lead their own local events to create stronger, more diverse tech communities. She loves finding new ways to combine code with other disciplines like art and music, sharing everything she learns while she tries to learn everything!",
-      "name": "Liz Krane",
-      "company": "Sentry",
-      "country": "Los Angeles, California",
-      "photo": "/images/speakers/liz_krane.jpg",
-      "photoUrl": "/images/speakers/liz_krane.jpg",
+      "bio": "Gabby works on open source development as a CesiumJS committer. She wrote the initial styling language for 3D Tiles and was a contributing editor to the spec. She works closely with Cesium users and the 3D, geospatial, and open source communities. Gabby was the 2019 recipient of the Spar3D Younger Geospatial Professional of the Year award, served on the Program Committee for FOSS4G NA 2018, gives talks about Cesium and open source, and continues to promote women in STEM through high school and middle school programs. She earned a BS in Computer Science from Drexel University with a minor in Digital Media. \n \n\n In her spare time, Gabby paints, plays overly-complicated board games, watches horror movies, and co-created an indie game studio to release a mobile game.",
+      "name": "Gabby Getz",
+      "company": "Cesium",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/eb5589fdcb41f18987c3dc5845230455?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/eb5589fdcb41f18987c3dc5845230455?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "building3dGeospatialVisualizationsWithCesiumGoogleAndArcgis"
+        }
+      ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "http://twitter.com/LearningNerd",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "Software Developer",
-      "sessions": [
-        {
-          "id": "kickingBugs"
-        }
-      ]
-    },
-    {
-      "id": "ron_dagdag",
-      "featured": false,
-      "bio": "Ron Dagdag is a Senior Software Engineer with 20 years of experience working on a number of business applications using a diverse set of frameworks and languages. He currently support developers at Crestron Electronics with their IoT, Cloud and Voice AI Assistant development. On the side, Ron Dagdag is an active participant in the community as a Microsoft MVP, speaker, maker and blogger. Ron enjoys building projects with his 2 kids and he is passionate about Augmented Intelligence, studying the convergence of Augmented Reality, Machine Learning and Internet of Things.",
-      "name": "Ron Lyle Dagdag",
-      "company": "Crestron Electronics",
-      "country": "Dallas, Fort Worth Area",
-      "photo": "/images/speakers/Ron_Dagdag.jpg",
-      "photoUrl": "/images/speakers/Ron_Dagdag.jpg",
-      "socials": [
-        {
-          "icon": "website",
-          "link": "http://ron.dagdag.net",
-          "name": "Website"
-        },
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/rondagdag",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "Senior Software Engineer",
-      "sessions": [
-        {
-          "id": "ohMyWeb"
-        }
-      ]
-    },
-    {
-      "id": "colleen_dunlap",
-      "featured": false,
-      "bio": "Colleen is a free-spirited techie with a passion for Global Engineering. She’s a life-long learner with a passion for connecting with others. She loves Hackathons, Dogs, Coffee, and the Circus. Her passion projects include an online resource platform for LGBT+ individuals living in countries where Homosexuality is illegal, and a Solar Electric Stove startup called Sol Flame. She currently works at the Ifakara Health Institute in Bagamoyo, Tanzania, building technology tools for Malaria Researchers.",
-      "name": "Colleen Dunlap",
-      "company": "Marquette Energy Analytics",
-      "country": "Milwaukee, Wisconsin",
-      "photo": "/images/speakers/Colleen_Dunlap.JPG",
-      "photoUrl": "/images/speakers/Colleen_Dunlap.JPG",
-      "socials": [
-        {
-          "icon": "github",
-          "link": "https://github.com/colleenDunlap",
-          "name": "Github"
-        }
-      ],
-      "order": 0,
-      "title": "Software Developer",
-      "sessions": [
-        {
-          "id": "uniqueHowsWhys"
-        }
-      ]
-    },
-    {
-      "id": "fen_slattery",
-      "featured": false,
-      "bio": "Fen Slattery is the Accessibility Lead at Clique Studios, where they build beautiful things and work towards a more inclusive digital world. As a web engineer, Fen seamlessly translates the needs of users into digital experiences that minimize barriers to access. As part of their advocacy work, they have spoken across the US to audiences of all skill levels, been featured on many panels about inclusion in the tech industry, and have spread their passion for accessibility in mentorship of web professionals.",
-      "name": "Fen Slattery",
-      "company": "Clique Studios",
-      "country": "Chicago, Illinois",
-      "photo": "/images/speakers/fen_slattery.jpg",
-      "photoUrl": "/images/speakers/fen_slattery.jpg",
-      "socials": [
-        {
-          "icon": "website",
-          "link": "http://www.fenslattery.com",
-          "name": "Website"
-        },
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/sublimemarch",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "Lead Accessibility Engineer",
-      "sessions": [
-        {
-          "id": "digitalAccessibility"
-        }
-      ]
-    },
-    {
-      "id": "domitrius_clark",
-      "featured": false,
-      "bio": "Front-end software engineer for MachineQ. Esports addict with an affliction for playing competitive games with 0 skills. Bootcamp graduate and organizer of Reactadelphia.",
-      "name": "Domitrius Clark",
-      "company": "MachineQ",
-      "country": "Philadelphia, Pennsylvania",
-      "photo": "/images/speakers/Domitrius_Clark.jpg",
-      "photoUrl": "/images/speakers/Domitrius_Clark.jpg",
-      "socials": [
-        {
-          "icon": "github",
-          "link": "https://github.com/domitriusanthony",
-          "name": "Github"
-        },
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/domitriusclark",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "Front-end Software Engineer",
-      "sessions": [
-        {
-          "id": "apolloGraphQl"
-        }
-      ]
-    },
-    {
-      "id": "christina_deemer",
-      "featured": false,
-      "bio": "I am a UX Developer at Alley, where I help build headless digital experiences for publishers and nonprofit institutions, including Fortune and Colorado Public Radio. I was a Code for Philly Open Source Mentorship Program fellow and co-created the Interactive Mechanics Mentorship Program for Diversity and Inclusion in Tech.'\n'I came to tech later in life, after a 12-year career as a fundraiser for some of Philadelphia’s most prestigious arts organizations. I wrote my first line of code at age 35 and built my first WordPress theme at 37. Outside of tech, I enjoy reading, cooking, and watching classic films.",
-      "name": "Christina Deemer",
-      "company": "Alley",
-      "country": "Philadelphia, Pennsylvania",
-      "photo": "/images/speakers/Christina_Deemer.jpg",
-      "photoUrl": "/images/speakers/Christina_Deemer.jpg",
-      "socials": [
-        {
-          "icon": "website",
-          "link": "https://alley.co/",
-          "name": "Website"
-        },
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/cahdeemer",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "UX Developer",
-      "sessions": [
-        {
-          "id": "headlessArchitecture"
-        }
-      ]
-    },
-    {
-      "id": "viral_parmar",
-      "featured": false,
-      "bio": "Viral Parmar is a Serial entrepreneur who runs ComExpo Cyber security company as well as Infinite Defense Foundation a non-profit organization in India. He is a Developer Advocate, Productivity Hacker, Open Source Strategist, Technical Evangelist, Community Liaison, International TechSpeaker, he is a Cyber Security researcher by profession and open source enthusiast working in a field of information security from last three years with the expertise in Cyber Crime Investigation, Public Key Infrastructure, Social Engineering, Web App Penetration Testing, Digital Forensics and Mobile Security. He found sever vulnerability in 150+ well known websites like Intel, your story and solved more than 100 cases of cyber-crime & online frauds. He is famous for his research Cyber Disorder and Who is spying on you. Trained 150,000+ people till now and aware them about privacy and security. Given Seminars and workshops in 150+ Organizations. He is Working with Mozilla foundation from last 2 years as Reps, Mentor in Mozilla Open Leadership Project, Coach(Privacy and Security) in MozSprint 2018, also working with L10N project on Pontoon, Rust and WebVR projects.",
-      "name": "Viral Parmar",
-      "company": "ComExpo",
-      "country": "Ahmedabad, Gujarat, India",
-      "photo": "/images/speakers/Viral_Parmar.jpg",
-      "photoUrl": "/images/speakers/Viral_Parmar.jpg",
-      "socials": [
-        {
-          "icon": "website",
-          "link": "http://viralparmarhacker.com/",
-          "name": "Website"
-        },
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/viralparmarhack",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "Cyber Security Researcher",
-      "sessions": [
-        {
-          "id": "webVR"
-        }
-      ]
-    },
-    {
-      "id": "emily_rautenberg",
-      "featured": false,
-      "bio": "Emily graduated from Stevens Institute of Technology in 2015 with her Bachelor’s and Master’s of Science in Computer Science, as well as a Bachelor’s of Arts in Visual Arts and Technology. After graduating, she entered the CORE Technology rotational program at Comcast NBCUniversal, where she worked on three different teams across the organization over the course of two years.'\n'After completing the program, she joined Comcast’s Experience Design department as a UX Engineer, where she has been for the last two years. The prototypes Emily and her team develop help to guide production teams on building out final products, allow senior leaders to demo new ideas to executives, and for researchers to conduct user testing sessions will real life customers.'\n'While her team specializing in build JavaScript web applications, Emily also has a passion for animation, is a Captain in the Air Force Reserve, and is an amateur aerial circus artist. One day, she might just run away and join the circus.",
-      "name": "Emily Rautenberg",
-      "company": "Comcast",
-      "country": "Philadelphia, PA",
-      "photo": "/images/speakers/Emily_Rautenberg.jpg",
-      "photoUrl": "/images/speakers/Emily_Rautenberg.jpg",
-      "socials": [
-        {
-          "icon": "email",
-          "link": "erautenb@gmail.com",
-          "name": "Email"
-        }
-      ],
-      "order": 0,
-      "title": "UX Engineer",
-      "sessions": [
-        {
-          "id": "demystifyingRegularExpressions"
-        }
-      ]
-    },
-    {
-      "id": "diego_hernandez",
-      "featured": false,
-      "bio": "Diego Hernandez is a front-end developer at IBM and Software Engineering graduate student at DePaul University in Chicago. He is a trained filmmaker, turned self-taught developer and designer. As a creative person, Diego is always looking for ways to stretch his canvas—in this case, web browsers—to create unique web experiences that tell a story. When he’s not coding, you’ll probably find him attempting to rock climb or in the kitchen trying out a new recipe.",
-      "name": "Diego Hernandez",
-      "company": "IBM",
-      "country": "Chicago, Illinois",
-      "photo": "/images/speakers/Diego_Hernandez.jpg",
-      "photoUrl": "/images/speakers/Diego_Hernandez.jpg",
-      "socials": [
-        {
-          "icon": "website",
-          "link": "https://medium.com/@diego.hernandez",
-          "name": "Website"
-        },
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/diego_codes",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "Front-end developer",
-      "sessions": [
-        {
-          "id": "uiComponentTesting"
-        }
-      ]
-    },
-    {
-      "id": "nathan_lilly",
-      "featured": false,
-      "bio": "Nathan Lilly is a UI Engineer at Comcast where he works on the Help and Support website. He has been developing websites since 1998 and recently received his Certified Web Professional in Accessibility certificate from the IAAP. He is an amateur dilettante who is constantly finding new various topics to love: in programming, creativity, the arts, history, philosophy, machine learning, cognitive science, superhero movies, and space westerns.",
-      "name": "Nathan Lilly",
-      "company": "Comcast",
-      "country": "Philadelphia, PA",
-      "photo": "/images/speakers/Nathan_Lilly.jpg",
-      "photoUrl": "/images/speakers/Nathan_Lilly.jpg",
-      "socials": [
-        {
-          "icon": "website",
-          "link": "http://nelilly.greententacles.com",
-          "name": "Website"
-        },
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/nelilly",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "UI Engineer",
-      "sessions": [
-        {
-          "id": "buildingAccessibility"
-        }
-      ]
-    },
-    {
-      "id": "george_mandis",
-      "featured": false,
-      "bio": "George Mandis has been a freelance, full-stack web developer and consultant at SnapTortoise serving startups, small businesses, professional sports teams and entrepreneurs for over a decade. Recently he spent a year living as a digital nomad, inadvertently cheated while running a marathon in North Korea and ran a coding bootcamp out of Portland, Oregon. He writes frequently on technology, travel and other things at his website.",
-      "name": "George Mandis",
-      "company": "SnapTortoise",
-      "country": "Portland, Oregon",
-      "photo": "/images/speakers/George_Mandis.JPG",
-      "photoUrl": "/images/speakers/George_Mandis.JPG",
-      "socials": [
-        {
-          "icon": "website",
-          "link": "https://george.mand.is/",
-          "name": "Website"
-        },
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/georgemandis",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "Full-stack web developer",
-      "sessions": [
-        {
-          "id": "javaScriptMidi"
-        }
-      ]
-    },
-    {
-      "id": "kassian_wren",
-      "featured": false,
-      "bio": "Kas (they/them/their) is a developer 🥑 for CloudFlare. They’re also an author of two books about JS Robotics and a Twitch Affiliate streamer for code and hardware. They like serverless and all the discussions it brings, and playing with their 2 cats.",
-      "name": "Mx. Kas Perch",
-      "company": "CloudFlare",
-      "country": "Austin, Texas",
-      "photo": "/images/speakers/kassian_wren.jpeg",
-      "photoUrl": "/images/speakers/kassian_wren.jpeg",
-      "socials": [
-        {
-          "icon": "github",
-          "link": "https://github.com/nodebotanist",
-          "name": "Github"
-        },
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/nodebotanist",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "title": "Software developer",
-      "sessions": [
-        {
-          "id": "webAssembly"
-        }
-      ]
-    },
-    {
-      "id": "angel_rivera",
-      "featured": false,
-      "bio": "Angel started his career as an US Air Force Space Systems Operations specialist in Cape Canaveral AF Station where he realized his passion for technology and software development. He has extensive experience in the private, public and military sectors and his technical experience includes military/space lift operations, technical writing, software development, SRE/DevOPs engineering. He also has a wealth of experience in defense and federal sectors such as contracting, information systems security and management.<br><br>You can usually find him speaking at or organizing local tech meetups and hackathons where he enjoys engaging with developers.<br><br>Angel’s passions are positive disruption, learning, teaching, mentoring but most of all inspiring all forms of technologists & building awesome tech communities.",
-      "name": "Angel Rivera",
-      "country": "Philadelphia, PA",
-      "photo": "/images/speakers/angel_rivera.png",
-      "photoUrl": "/images/speakers/angel_rivera.png",
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/punkdata",
-          "name": "Twitter"
-        }
-      ],
-      "order": 0,
-      "sessions": [
-        {
-          "id": "shinyObjectSyndrome"
-        }
-      ]
-    },
-    {
-      "id": "ali_abiba",
-      "featured": false,
-      "bio": "Born in Chicago, raised in Dayton, I am a midwest boy. With both parents in education, learning was something I was raised to love. Moving to Dayton, I was fortunate enough to come across opportunities I may not have had. One of these opportunities was a position at the University of Dayton Research Institute (UDRI) as a junior developer. I was working at UDRI through college, which ended with my Associates in Applied Sciences at Sinclair College. I currently work as a Web Developer at Crown Equipment.<br><br>I am a problem solver. Developing software is one of my outlets for problem-solving. Mainly developing web applications, my preferred language is JavaScript (mainly Angular and Node). I am currently developing an app to help solve the reading problem. The other outlet is entrepreneurship, in which I have launched BluPrint (discoverbluprint.com (shameless plug)), to help solve the issues that young artists are facing today.<br><br>Technology is amazing. The capabilities it can bring are immense, and I want to be a part of bringing it to everyone. There are others like myself, who come from marginalized communities, that have a locked door, preventing them from raising themselves up. Tech is the key to that lock.",
-      "name": "Ali Abiba",
-      "country": "Dayton, OH",
-      "company": "Crown Equipment",
-      "title": "Web Developer",
-      "photo": "/images/speakers/ali_abiba.jpg",
-      "photoUrl": "/images/speakers/ali_abiba.jpg",
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "http://twitter.com/coffee_n_code",
+          "link": "https://twitter.com/gabbygetz",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "http://aliabiba.me/",
+          "link": "https://cesium.com",
           "name": "Website"
-        }
-      ],
-      "order": 0,
-      "sessions": [
-        {
-          "id": "rsjxFutureAsyncProgramming"
         }
       ]
     },
     {
-      "id": "fernando_medina_corey",
-      "featured": false,
-      "bio": "Fernando Medina Corey currently spends his days making courses to help software engineers, architects, and technology professionals learn the technologies they need to succeed. He has worked with a variety of different technologies in order to develop web applications, manage data pipelines, and architect cloud infrastructure. In addition to his work, he founded and runs the Redmond Python meetup to help folks learn Python. Fernando has also taught and TAed classes on Python, the Command Line, and big data technologies for Python User Groups and Girl Develop It.",
-      "name": "Fernando Medina Corey",
-      "country": "Seattle, WA",
-      "photo": "/images/speakers/Fernando_Medina_Corey.jpg",
-      "photoUrl": "/images/speakers/Fernando_Medina_Corey.jpg",
+      "id": "leslieChapman",
+      "featured": true,
+      "bio": "#N/A",
+      "name": "Leslie Chapman",
+      "company": "#N/A",
+      "country": "#N/A",
+      "photo": "#N/A",
+      "photoUrl": "#N/A",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "na"
+        }
+      ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "http://twitter.com/fmc_sea",
+          "link": "https://twitter.com/#N/A",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "https://www.fernandomc.com/",
+          "link": "#N/A",
           "name": "Website"
-        }
-      ],
-      "order": 0,
-      "sessions": [
-        {
-          "id": "serverlessDevelopmentPortfolioSevenDays"
-        }
-      ]
-    },
-    {
-      "id": "richard_feldman",
-      "featured": false,
-      "bio": "Richard is the author of “Elm in Action” from Manning Publications, and the instructor for the Frontend Masters Introduction to Elm and Advanced Elm workshops. He is a member of the Elm Core Team and works at NoRedInk, which has over 300,000 lines of Elm code in production, and which has employed Elm creator Evan Czaplicki since 2016. In his free time Richard hosts the Philadelphia Elm Meetup, and maintains open-source Elm libraries such as elm-test and elm-css. Some have said he’s “a fan of Elm,” but he’s not sure where they got that wild idea.",
-      "name": "Richard Feldman",
-      "country": "Philadelphia, PA",
-      "photo": "/images/speakers/richard_feldman.jpg",
-      "photoUrl": "/images/speakers/richard_feldman.jpg",
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/rtfeldman",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://www.manning.com/books/elm-in-action",
-          "name": "Website"
-        }
-      ],
-      "order": 0,
-      "sessions": [
-        {
-          "id": "predictingtheFuture"
         }
       ]
     }
