@@ -1,29 +1,24 @@
 {
   "speakers": [
     {
-      "id": "milicaMihajlija",
-      "featured": false,
-      "bio": "Milica is technical writer at Google Chrome working on privacy and identity. She is a big believer in the open web, always exploring new technologies that are moving it forward.",
-      "name": "Milica Mihajlija",
-      "company": "Google",
-      "country": "Belgrade",
-      "photo": "https://secure.gravatar.com/avatar/73aca9df10726dfe88a926a8413ea351?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/73aca9df10726dfe88a926a8413ea351?s=500",
+      "id": "leslieChapman",
+      "featured": true,
+      "bio": "Leslie Chapman is an Engineering Fellow at Comcast. She was one of the technical leads for the X1 platform, which serves over 35 million customers. Currently, Leslie leads a team that is building backend systems that drive consistent user experiences across Comcast's suite of video streaming products./n      She is passionate about encouraging young women to enter the tech field and spends a lot of time volunteering with organizations that teach coding to young women.",
+      "name": "Leslie Chapman",
+      "company": "Comcast",
+      "country": "USA",
+      "photo": "https://res.cloudinary.com/leaddev/image/upload/q_100,c_fill,g_auto:classic,e_sharpen,h_332,w_332/prod/sites/default/files/contributors/2022-08/Leslie%20Chapman.png",
+      "photoUrl": "https://res.cloudinary.com/leaddev/image/upload/q_100,c_fill,g_auto:classic,e_sharpen,h_332,w_332/prod/sites/default/files/contributors/2022-08/Leslie%20Chapman.png",
       "order": 0,
       "sessions": [
         {
-          "id": "ourFutureWithoutPasswords"
+          "id": "keynoteLeslieChapman"
         }
       ],
       "socials": [
         {
-          "icon": "twitter",
-          "link": "https://twitter.com/bibydigital",
-          "name": "Twitter"
-        },
-        {
           "icon": "website",
-          "link": "https://mihajlija.github.io/",
+          "link": "https://leaddev.com/community/leslie-chapman",
           "name": "Website"
         }
       ]
@@ -141,24 +136,29 @@
       ]
     },
     {
-      "id": "derekBinkley",
+      "id": "ernestPhillips",
       "featured": false,
-      "bio": "Derek Binkley is Engineering Manager at Localize. While getting his start fixing the Y2K date problem in Cobol, Derek quickly moved on to spend over twenty years using JavaScript, PHP, JVM Languages, MySQL, MongoDB, and Oracle.\n \n\n He enjoys teaching others through speaking, mentoring, and writing articles. Derek encourages developers to write clean, testable code. When not in front of a computer he spends time with family, travels, and makes pizza.",
-      "name": "Derek Binkley",
-      "company": "Localize",
-      "country": "Madison, WI",
-      "photo": "https://secure.gravatar.com/avatar/384c148ae013999720eb847b1bd47aea?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/384c148ae013999720eb847b1bd47aea?s=500",
+      "bio": "Ernest Phillips is a full-stack software engineer at GitHub, where he develops solutions using Ruby on Rails. Currently, he builds products that help students and educators succeed in open source.\n Before transitioning to software development, Ernest worked for many years in technical support. He is deeply passionate about his work and takes pride in helping developers become more productive and customer-centric in their approach to building software. He always keeps the needs of customers at the forefront of his work. Ernest is a developer who thrives in a collaborative environment and is always eager to share his knowledge and experience with others, especially those that are new to open source communities.",
+      "name": "Ernest Phillips",
+      "company": "GitHub",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/c7a7a45c957262526387d6431a00d6e7?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/c7a7a45c957262526387d6431a00d6e7?s=500",
       "order": 0,
       "sessions": [
         {
-          "id": "whatRaising3KidsTaughtMeAboutWorkingWithUsers"
+          "id": "collabAndCommunicateHowGithubCanEmpowerOpenSourceCommunities"
         }
       ],
       "socials": [
         {
+          "icon": "twitter",
+          "link": "https://twitter.com/erngetsgood",
+          "name": "Twitter"
+        },
+        {
           "icon": "website",
-          "link": "http://derekb-wi.com",
+          "link": "https://ernestphillips.dev/",
           "name": "Website"
         }
       ]
@@ -315,30 +315,17 @@
       ]
     },
     {
-      "id": "ernestPhillips",
+      "id": "aaronShim",
       "featured": false,
-      "bio": "Ernest Phillips is a full-stack software engineer at GitHub, where he develops solutions using Ruby on Rails. Currently, he builds products that help students and educators succeed in open source.\n Before transitioning to software development, Ernest worked for many years in technical support. He is deeply passionate about his work and takes pride in helping developers become more productive and customer-centric in their approach to building software. He always keeps the needs of customers at the forefront of his work. Ernest is a developer who thrives in a collaborative environment and is always eager to share his knowledge and experience with others, especially those that are new to open source communities.",
-      "name": "Ernest Phillips",
-      "company": "GitHub",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/c7a7a45c957262526387d6431a00d6e7?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/c7a7a45c957262526387d6431a00d6e7?s=500",
+      "bio": "Aaron is a software engineer at Google who focuses on web security features and adoption across all Google products. Before working on security, he was on product teams for Google Cloud and Google Workspace. Before Google, he had a brief stint at Microsoft. Prior to big tech, he wrote a lot of Ruby on Rails code.",
+      "name": "Aaron Shim",
+      "company": "Google",
+      "photo": "https://secure.gravatar.com/avatar/46d9299b7ba74b3472b623e550df1504?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/46d9299b7ba74b3472b623e550df1504?s=500",
       "order": 0,
       "sessions": [
         {
-          "id": "collabAndCommunicateHowGithubCanEmpowerOpenSourceCommunities"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/erngetsgood",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://ernestphillips.dev/",
-          "name": "Website"
+          "id": "trustedTypesDomXssProtectionAtScale"
         }
       ]
     },
@@ -394,6 +381,29 @@
         {
           "icon": "website",
           "link": "https://github.com/haltersweb/Accessibility",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "derekBinkley",
+      "featured": false,
+      "bio": "Derek Binkley is Engineering Manager at Localize. While getting his start fixing the Y2K date problem in Cobol, Derek quickly moved on to spend over twenty years using JavaScript, PHP, JVM Languages, MySQL, MongoDB, and Oracle.\n \n\n He enjoys teaching others through speaking, mentoring, and writing articles. Derek encourages developers to write clean, testable code. When not in front of a computer he spends time with family, travels, and makes pizza.",
+      "name": "Derek Binkley",
+      "company": "Localize",
+      "country": "Madison, WI",
+      "photo": "https://secure.gravatar.com/avatar/384c148ae013999720eb847b1bd47aea?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/384c148ae013999720eb847b1bd47aea?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "whatRaising3KidsTaughtMeAboutWorkingWithUsers"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "website",
+          "link": "http://derekb-wi.com",
           "name": "Website"
         }
       ]
@@ -675,34 +685,6 @@
       ]
     },
     {
-      "id": "leslieChapman",
-      "featured": true,
-      "bio": "Leslie Chapman is an Engineering Fellow at Comcast. She was one of the technical leads for the X1 platform, which serves over 35 million customers. Currently, Leslie leads a team that is building backend systems that drive consistent user experiences across Comcast's suite of video streaming products./n      She is passionate about encouraging young women to enter the tech field and spends a lot of time volunteering with organizations that teach coding to young women.",
-      "name": "Leslie Chapman",
-      "company": "Comcast",
-      "country": "USA",
-      "photo": "https://res.cloudinary.com/leaddev/image/upload/q_100,c_fill,g_auto:classic,e_sharpen,h_332,w_332/prod/sites/default/files/contributors/2022-08/Leslie%20Chapman.png",
-      "photoUrl": "https://res.cloudinary.com/leaddev/image/upload/q_100,c_fill,g_auto:classic,e_sharpen,h_332,w_332/prod/sites/default/files/contributors/2022-08/Leslie%20Chapman.png",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "keynoteLeslieChapman"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/gabbygetz",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://cesium.com",
-          "name": "Website"
-        }
-      ]
-    },
-    {
       "id": "kilianValkhof",
       "featured": false,
       "bio": "Kilian Valkhof is a seasoned developer who has been building tools for developers for over a decade. He is the founder of Polypane, a browser for developers designed to help build websites with a focus on responsive design, user experience, and accessibility.\n \n\n  Kilian has been developing websites for two decades, with an emphasis on user experience, accessibility and web standards and has a long-standing interest in responsive design, dating back to 2008 when he wrote his first article on mobile web design and foresaw what media features would soon enable. Kilian shares his knowledge and experience through his blog, kilianvalkhof.com and elsewhere on the web, and as a member of the Electron governance team and an open source contributor.",
@@ -727,21 +709,6 @@
           "icon": "website",
           "link": "https://kilianvalkhof.com",
           "name": "Website"
-        }
-      ]
-    },
-    {
-      "id": "aaronShim",
-      "featured": false,
-      "bio": "Aaron is a software engineer at Google who focuses on web security features and adoption across all Google products. Before working on security, he was on product teams for Google Cloud and Google Workspace. Before Google, he had a brief stint at Microsoft. Prior to big tech, he wrote a lot of Ruby on Rails code.",
-      "name": "Aaron Shim",
-      "company": "Google",
-      "photo": "https://secure.gravatar.com/avatar/46d9299b7ba74b3472b623e550df1504?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/46d9299b7ba74b3472b623e550df1504?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "trustedTypesDomXssProtectionAtScale"
         }
       ]
     }
