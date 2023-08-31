@@ -681,8 +681,8 @@
       "name": "Leslie Chapman",
       "company": "Comcast",
       "country": "USA",
-      "photo": "https://res.cloudinary.com/leaddev/image/upload/q_100,c_fill,g_auto:classic,e_sharpen,h_332,w_332/prod/sites/default/files/contributors/2022-08/Leslie Chapman.png",
-      "photoUrl": "https://res.cloudinary.com/leaddev/image/upload/q_100,c_fill,g_auto:classic,e_sharpen,h_332,w_332/prod/sites/default/files/contributors/2022-08/Leslie Chapman.png",
+      "photo": "https://res.cloudinary.com/leaddev/image/upload/q_100,c_fill,g_auto:classic,e_sharpen,h_332,w_332/prod/sites/default/files/contributors/2022-08/Leslie%20Chapman.png",
+      "photoUrl": "https://res.cloudinary.com/leaddev/image/upload/q_100,c_fill,g_auto:classic,e_sharpen,h_332,w_332/prod/sites/default/files/contributors/2022-08/Leslie%20Chapman.png",
       "order": 0,
       "sessions": [
         {
