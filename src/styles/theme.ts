@@ -228,7 +228,7 @@ export const theme = css`
     line-height: initial;
   }
 
-  @media (min-width: 640px) {
+  @media (width >= 640px) {
     .container,
     .container-narrow {
       padding: 32px;
