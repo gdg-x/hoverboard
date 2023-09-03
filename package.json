@@ -109,7 +109,7 @@
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-workbox": "^8.0.1",
-    "stylelint": "^15.2.0",
+    "stylelint": "^15.10.3",
     "stylelint-config-prettier": "^9.0.4",
     "stylelint-config-standard": "^30.0.1",
     "ts-jest": "^29.1.1",
