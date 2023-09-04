@@ -4,8 +4,8 @@
   "private": true,
   "description": "Conference website template",
   "engines": {
-    "node": "16",
-    "npm": "8"
+    "node": "20",
+    "npm": "9"
   },
   "scripts": {
     "build": "npm run clean && NODE_ENV=production rollup --config rollup.config.ts --configPlugin typescript",
@@ -80,7 +80,7 @@
     "@types/jest": "^29.5.2",
     "@types/jest-dev-server": "^5.0.0",
     "@types/marked": "^5.0.0",
-    "@types/node": "^16.18.23",
+    "@types/node": "^20.5.9",
     "@types/nunjucks": "^3.2.3",
     "@types/polymer": "^1.2.12",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
