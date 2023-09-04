@@ -49,7 +49,8 @@
     "linebreak-style": 0,
     "jest/no-hooks": "off",
     "jest/prefer-expect-assertions": "off",
-    "jest/require-hook": "off"
+    "jest/require-hook": "off",
+    "testing-library/no-node-access": "warn"
   },
   "overrides": [
     {
