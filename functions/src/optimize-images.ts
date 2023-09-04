@@ -1,4 +1,4 @@
-import { Storage } from '@google-cloud/storage';
+import { Storage, UploadOptions } from '@google-cloud/storage';
 import { spawnSync } from 'child_process';
 import * as functions from 'firebase-functions';
 import { storage } from 'firebase-functions';
@@ -55,14 +55,15 @@ async function optimizeImage(object) {
 
   // Uploading the Optimized image.
   const destination = bucket.file(filePath);
-  const [newFile] = await bucket.upload(tempLocalFile, {
+  const options: UploadOptions = {
     destination,
     metadata: {
       metadata: {
-        optimized: true,
+        optimized: 'true',
       },
     },
-  });
+  };
+  const [newFile] = await bucket.upload(tempLocalFile, options);
   await newFile.makePublic();
   functions.logger.log('Optimized image uploaded to Storage');
   // Once the image has been uploaded delete the local files to free up disk space.
