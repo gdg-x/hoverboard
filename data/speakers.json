@@ -482,8 +482,8 @@
       "name": "Lee White",
       "company": "Olark",
       "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/f05e643c58d009c5e2ced5fcdb89f37e?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/f05e643c58d009c5e2ced5fcdb89f37e?s=500",
+      "photo": "/images/speakers/lee_white_headshot_cropped_1.jpg",
+      "photoUrl": "/images/speakers/lee_white_headshot_cropped_1.jpg",
       "order": 0,
       "sessions": [
         {
