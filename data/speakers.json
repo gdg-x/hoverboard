@@ -58,8 +58,8 @@
       "name": "Loren Sands-Ramshaw",
       "company": "Temporal",
       "country": "Unknown",
-      "photo": "https:",
-      "photoUrl": "https: //secure.gravatar.com/avatar/bdd4c681649069ac1611dfd31503417d?s=500",
+      "photo": "/images/speakers/loren-ivy-512-square.png",
+      "photoUrl": "/images/speakers/loren-ivy-512-square.png",
       "order": 0,
       "sessions": [
         {
