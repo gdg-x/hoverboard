@@ -392,8 +392,8 @@
       "name": "Derek Binkley",
       "company": "Localize",
       "country": "Madison, WI",
-      "photo": "https://secure.gravatar.com/avatar/384c148ae013999720eb847b1bd47aea?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/384c148ae013999720eb847b1bd47aea?s=500",
+      "photo": "/images/speakers/binkley_derek_800w.jpg",
+      "photoUrl": "/images/speakers/binkley_derek_800w.jpg",
       "order": 0,
       "sessions": [
         {
