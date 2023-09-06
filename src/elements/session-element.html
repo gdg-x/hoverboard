@@ -13,7 +13,6 @@
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
     <style>
-
       :host {
         display: block;
         background-color: var(--primary-background-color);
@@ -91,8 +90,9 @@
         color: var(--secondary-text-color);
         flex-basis: 220px;
       }
-      .tag{
-        display:inline-block;
+
+      .tag {
+        display: inline-block;
         margin: 2px;
       }
 
@@ -140,25 +140,17 @@
           border: 1px solid var(--border-light-color);
         }
       }
-
     </style>
 
-    <a
-      class="session"
-      href$="/schedule/[[dayName]]?[[toggleQueryParam(queryParams, 'sessionId', session.id)]]"
-      featured$="[[isFeatured]]"
-      layout vertical
-      relative
-    >
-      <iron-icon
-        class="session-icon"
-        icon="hoverboard:[[session.icon]]"
-      ></iron-icon>
+    <a class="session" href$="/schedule/[[dayName]]?[[toggleQueryParam(queryParams, 'sessionId', session.id)]]"
+      featured$="[[isFeatured]]" layout vertical relative>
+      <iron-icon class="session-icon" icon="hoverboard:[[session.icon]]"></iron-icon>
 
       <div class="session-header" layout horizontal justified>
         <div flex>
           <h3 class="session-title">[[session.title]]</h3>
-          <div class="session-description" hidden$="[[_hideSessionAbstract(session.shortDescription)]]">[[session.shortDescription]]</div>
+          <div class="session-description" hidden$="[[_hideSessionAbstract(session.shortDescription)]]">
+            [[session.shortDescription]]</div>
         </div>
         <span class="language">[[slice(session.language, 2)]]</span>
       </div>
@@ -168,22 +160,21 @@
           <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
           <div hidden$="[[!session.track]]">[[session.track.title]]</div>
         </div>
-        <iron-icon
-          class="bookmark-session"
-          icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
-          on-tap="_toggleFeaturedSession"
-        ></iron-icon>
+        <iron-icon class="bookmark-session" icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
+          on-tap="_toggleFeaturedSession"></iron-icon>
       </div>
 
       <div class="session-footer">
         <div layout horizontal justified center-aligned>
           <div class="session-meta" flex>
-              <span class="hours">[[_normalizeTime(session.startTime, 'hours' )]]</span><span class="minutes">[[_normalizeTime(session.startTime, 'min')]]</span> -
-              <span class="hours">[[_normalizeTime(session.endTime, 'hours' )]]</span><span class="minutes">[[_normalizeTime(session.endTime, 'min')]]</span><br>
-            <span
-              hidden$="[[!session.duration.hh]]">[[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]</span>
-            <span
-              hidden$="[[!session.duration.mm]]">[[session.duration.mm]] min[[_getEnding(session.duration.mm)]]</span>
+            <span class="hours">[[_normalizeTime(session.startTime, 'hours' )]]</span><span
+              class="minutes">[[_normalizeTime(session.startTime, 'min')]]</span> -
+            <span class="hours">[[_normalizeTime(session.endTime, 'hours' )]]</span><span
+              class="minutes">[[_normalizeTime(session.endTime, 'min')]]</span><br>
+            <span hidden$="[[!session.duration.hh]]">[[session.duration.hh]]
+              hour[[_getEnding(session.duration.hh)]]</span>
+            <span hidden$="[[!session.duration.mm]]">[[session.duration.mm]]
+              min[[_getEnding(session.duration.mm)]]</span>
 
           </div>
           <div hidden$="[[!session.tags.length]]">
@@ -196,16 +187,15 @@
         <div class="speakers" hidden$="[[!session.speakers.length]]">
           <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
             <div class="speaker" layout horizontal center>
-              <plastic-image
-                class="speaker-photo"
-                srcset="[[speaker.photoUrl]]"
-                sizing="cover"
-                lazy-load preload fade
-              ></plastic-image>
+              <plastic-image class="speaker-photo" srcset="[[speaker.photoUrl]]" sizing="cover" lazy-load preload
+                fade></plastic-image>
 
               <div class="speaker-details" flex>
                 <div class="speaker-name">[[speaker.name]]</div>
-                <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
+                <div class="speaker-title">[[speaker.company]] <span
+                    hidden$="[[!speaker.company]] || [[!speaker.country]]"> / </span>
+                  <span hidden$="[[speaker.country]] == 'Unknown'">[[speaker.country]]</span>
+                </div>
               </div>
             </div>
           </template>
@@ -269,7 +259,7 @@
         let t = this._splitText(time, ':', index);
         t = parseInt(t);
         if (dayPart === 'hours') {
-          if (t > 12 ) {
+          if (t > 12) {
             t = t - 12;
           }
           t += ':';

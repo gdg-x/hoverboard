@@ -21,7 +21,6 @@
     <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
 
     <style>
-
       .photo {
         margin-right: 16px;
         width: 96px;
@@ -51,69 +50,55 @@
           padding: 6px;
           width: 32px;
           height: 32px;
-        };
-        color: var(--dark-primary-color);
-        transition: transform var(--animation);
         }
 
-        .social-icon:hover {
+        ;
+        color: var(--dark-primary-color);
+        transition: transform var(--animation);
+      }
+
+      .social-icon:hover {
         transform: scale(1.2);
         color: var(--primary-text-color);
-        }
-      .track-title{
+      }
+
+      .track-title {
         color: var(--dark-primary-color);
         transition: color var(--animation);
       }
-      .track-title:hover{
+
+      .track-title:hover {
         color: var(--primary-text-color);
       }
-
     </style>
 
-    <polymer-helmet
-      title="[[speaker.name]] | {$ title $}"
-      description="[[speaker.bio]]"
-      image="[[speaker.photoUrl]]"
-      active="[[opened]]"
-      label1="{$ position $}"
-      data1="[[speaker.title]], [[speaker.company]]"
-      label2="{$ country $}"
-      data2="[[speaker.country]]"
-    ></polymer-helmet>
+    <polymer-helmet title="[[speaker.name]] | {$ title $}" description="[[speaker.bio]]" image="[[speaker.photoUrl]]"
+      active="[[opened]]" label1="{$ position $}" data1="[[speaker.title]], [[speaker.company]]" label2="{$ country $}"
+      data2="[[speaker.country]]"></polymer-helmet>
 
     <app-header-layout has-scrolling-region>
       <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
-        <iron-icon
-          class="close-icon"
-          icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
-          on-tap="_close"
-        ></iron-icon>
+        <iron-icon class="close-icon" icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
+          on-tap="_close"></iron-icon>
 
         <app-toolbar>
           <div class="dialog-container header-content" layout horizontal center>
-            <plastic-image
-              class="photo"
-              srcset="[[speaker.photoUrl]]"
-              sizing="cover"
-              lazy-load preload fade
-            ></plastic-image>
+            <plastic-image class="photo" srcset="[[speaker.photoUrl]]" sizing="cover" lazy-load preload
+              fade></plastic-image>
             <h2 class="name" flex>[[speaker.name]]</h2>
           </div>
         </app-toolbar>
       </app-header>
 
       <div class="dialog-container content">
-        <h3 class="meta-info">[[speaker.country]]</h3>
-        <h3 class="meta-info">[[speaker.title]]<span hidden$="[[!speaker.company]]">, [[speaker.company]]</span></h3>
+        <h3 class="meta-info" hidden$="[[!speaker.country]] || [[speaker.country]] == 'Unknown'">[[speaker.country]]
+        </h3>
+        <h3 class=" meta-info">[[speaker.title]]<span hidden$="[[!speaker.company]]"><span
+              hidden$="[[!speaker.title]]">,</span> [[speaker.company]]</span></h3>
         <h3 class="meta-info" hidden$="[[isEmpty(speaker.badges)]]">
           <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-            <a
-              class="badge"
-              href$="[[badge.link]]"
-              target="_blank"
-              rel="noopener noreferrer"
-              title$="[[badge.description]]"
-            >
+            <a class="badge" href$="[[badge.link]]" target="_blank" rel="noopener noreferrer"
+              title$="[[badge.description]]">
               [[badge.description]]
             </a>
           </template>
@@ -125,12 +110,10 @@
 
         <div class="actions" layout horizontal>
           <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-            <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer" aria-label="[[speaker.name]] [[social.name]]">
-              <paper-icon-button
-                class="social-icon"
-                icon="hoverboard:{{social.icon}}"
-                aria-label="[[speaker.name]] [[social.name]]"
-              ></paper-icon-button>
+            <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer"
+              aria-label="[[speaker.name]] [[social.name]]">
+              <paper-icon-button class="social-icon" icon="hoverboard:{{social.icon}}"
+                aria-label="[[speaker.name]] [[social.name]]"></paper-icon-button>
             </a>
           </template>
         </div>
