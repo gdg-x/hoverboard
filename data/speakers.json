@@ -24,42 +24,14 @@
       ]
     },
     {
-      "id": "christopherJBaker",
-      "featured": false,
-      "bio": "Christopher J Baker grew up in a farming community and started coding at a very young age. He worked as an engineer, to a mentor and trainer, and eventually to the Director of React Consulting at Bitovi. Though in management, his passion still lies in tech: software architecture, API design, and data processing and analysis. His approaches to technical areas also carry over into his love of cooking and tabletop role-playing games.",
-      "name": "Christopher J Baker",
-      "company": "Bitovi",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/86e2beaf7f5b0d1b81ae07b11b691999?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/86e2beaf7f5b0d1b81ae07b11b691999?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "simplifyMicroFrontendArchitectureUsingReactToWebComponent"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/christophrjbakr",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://christopherjbaker.dev/",
-          "name": "Website"
-        }
-      ]
-    },
-    {
       "id": "lorenSandsramshaw",
       "featured": false,
       "bio": "Loren is a developer relations engineer at Temporal. They worked on Temporal's Node runtime, wrote a book on GraphQL, and did consulting, startups, and open source.",
       "name": "Loren Sands-Ramshaw",
       "company": "Temporal",
       "country": "Unknown",
-      "photo": "https:",
-      "photoUrl": "https: //secure.gravatar.com/avatar/bdd4c681649069ac1611dfd31503417d?s=500",
+      "photo": "/images/speakers/loren-ivy-512-square.png",
+      "photoUrl": "/images/speakers/loren-ivy-512-square.png",
       "order": 0,
       "sessions": [
         {
@@ -80,29 +52,29 @@
       ]
     },
     {
-      "id": "michaelSchoonmaker",
+      "id": "jessicaKerr",
       "featured": false,
-      "bio": "I want to make art. I'll even use a paintbrush, if it's absolutely necessary.\n \n\n Before I got a \"real job\" _(Thanks, Dad...)_, I made video games. These days I work as what Joyce Park calls a \"Carpenter\": I make real apps for real people using the most practical, reliable tools available. I work as a CTO for a social mobile app, Squad, using React Native, Node, and Postgres to deliver real-time audio messaging and JavaScript-powered delight.",
-      "name": "Michael Schoonmaker",
-      "company": "Squad",
-      "country": "Bellingham, WA",
-      "photo": "https://secure.gravatar.com/avatar/7432b2f79811673f88912ee5cb08d3fa?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/7432b2f79811673f88912ee5cb08d3fa?s=500",
+      "bio": "Jessica Kerr is a developer of 20 years, a conference speaker of 10, and a symmathecist: a conscious participant in sociotechnical systems. Find her writing at jessitron.com and systemsthinking.dev. Find her keynotes at conferences like RubyConf, GOTO Copenhagen, YOW! Australia, and around. She currently works at Honeycomb.io, remotely from her home in St. Louis. One child graduated this year; one more to go.",
+      "name": "Jessica Kerr",
+      "company": "Honeycomb.io",
+      "country": "St. Louis, MO",
+      "photo": "https://secure.gravatar.com/avatar/ccdd121c5cf5ef6233ee6e7ae9a5d999?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/ccdd121c5cf5ef6233ee6e7ae9a5d999?s=500",
       "order": 0,
       "sessions": [
         {
-          "id": "wereSnakingItLive"
+          "id": "observabilityForTheFrontEnd"
         }
       ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "https://twitter.com/Schoonology",
+          "link": "https://twitter.com/jessitron",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "https://www.schoonology.com",
+          "link": "https://jessitron.com",
           "name": "Website"
         }
       ]
@@ -277,8 +249,8 @@
       "name": "Jeb Barabanov",
       "company": "Wix.com",
       "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/1deedb608878c26080fcbc4efa7cdf2c?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/1deedb608878c26080fcbc4efa7cdf2c?s=500",
+      "photo": "/images/speakers/jebBarabanov.jpg",
+      "photoUrl": "/images/speakers/jebBarabanov.jpg",
       "order": 0,
       "sessions": [
         {
@@ -294,6 +266,322 @@
         {
           "icon": "website",
           "link": "https://www.justjeb.com/",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "adinaHalter",
+      "featured": false,
+      "bio": "Adina Halter is Sr. Principal Software Architect for Accessibility at Comcast where she engineers aspirational solutions to ensure those with disabilities have the best possible home and entertainment experience.\n \n\n Adina started her career out of college as a 3D animator before moving into print design and web development. She then expanded into the mobile and internet-of-things technology space. She is also a cross-product tech innovator in the use of artificial intelligence for accessible solutions. Additionally, Adina has a passion for quantum computing.\n \n\n Adina is an advocate for product development that delights users with differing disabilities. She is a member of the W3C’s Web Accessibility Initiative Education and Outreach working group and tweets, instructs, and speaks on coding, accessibility, and women in tech.\n \n\n Adina also served as co-lead for the Comcast MyAbilities Employee Resource Group, which empowers employees with disabilities and equips their allies across the company.\n \n\n Personal interests include wine, cooking, greek and roman coins, and strategy games.",
+      "name": "Adina Halter",
+      "company": "Comcast NBCUniversal",
+      "country": "Unknown",
+      "photo": "/images/speakers/adinahalter.jpg",
+      "photoUrl": "/images/speakers/adinahalter.jpg",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "accessibleWebSolutionsWithAriaAndJavascript"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/haltersweb",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://github.com/haltersweb/Accessibility",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "derekBinkley",
+      "featured": false,
+      "bio": "Derek Binkley is Engineering Manager at Localize. While getting his start fixing the Y2K date problem in Cobol, Derek quickly moved on to spend over twenty years using JavaScript, PHP, JVM Languages, MySQL, MongoDB, and Oracle.\n \n\n He enjoys teaching others through speaking, mentoring, and writing articles. Derek encourages developers to write clean, testable code. When not in front of a computer he spends time with family, travels, and makes pizza.",
+      "name": "Derek Binkley",
+      "company": "Localize",
+      "country": "Madison, WI",
+      "photo": "/images/speakers/binkley_derek_800w.jpg",
+      "photoUrl": "/images/speakers/binkley_derek_800w.jpg",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "whatRaising3KidsTaughtMeAboutWorkingWithUsers"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "website",
+          "link": "http://derekb-wi.com",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "mrinaSugosh",
+      "featured": false,
+      "bio": "Mrinalini(Mrina)has been 'hacking' away at tech projects since the age of 14! Her first project was programming her TI-84 calculator to be able quickly find the hypotenuse of a right triangle. Since then she has been in constant pursuit of employing CS to enable her curiosity; be it was building a text messaging COVID bot or a motion detector for her pup's sleep.She is a UC Berkeley Alumnus and currently works as a Developer Relations Manager at TinyMCE.",
+      "name": "Mrina Sugosh",
+      "company": "TinyMCE",
+      "country": "",
+      "photo": "/images/speakers/mrinasugosh.jpg",
+      "photoUrl": "/images/speakers/mrinasugosh.jpg",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "chatgptAsAnAiAssistant"
+        }
+      ],
+      "socials": []
+    },
+    {
+      "id": "toniDarden",
+      "featured": false,
+      "bio": "I'm Toni Darden, a passionate Software Development Engineer specializing in building robust and scalable cloud applications. With a diverse background in both the corporate world and entrepreneurship, I bring a unique perspective to my work.\n During my time building my former company, Gas Hoppers USA, I was dedicated to helping businesses save on fuel costs by eliminating middlemen. Through our innovative mobile app, companies could monitor usage, achieve savings, and experience unmatched reliability, quality, and communication.\n My journey continued at Lambda School's rigorous 18-month Computer Science & Software Engineering Academy, where industry giants like Y-Combinator, Google Ventures, and Stripe provided support. There, I immersed myself in full-stack web development, mastering Python, Django, JavaScript, React, Redux, Node.js, and other cutting-edge technologies. I built intricate applications and embraced modern JavaScript environments and tooling.\n Now, as a Software Development Engineer, I thrive on tackling complex challenges and empowering others in the tech industry. I'm thrilled to connect with the LibertyJS community, sharing my expertise and insights. Let's embark on an exploration of the captivating world of building scalable and resilient apps with AWS and CI/CD pipelines.",
+      "name": "Toni Darden",
+      "company": "Comcast",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/15388b4799a7377b27ced7b2fcede7ed?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/15388b4799a7377b27ced7b2fcede7ed?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "unleashingThePowerOfCloudBuildingScalableAndResilientAppsWithAwsAndCicdPipelines"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/Codeworldco",
+          "name": "Twitter"
+        }
+      ]
+    },
+    {
+      "id": "leeWhite",
+      "featured": false,
+      "bio": "Lee is an Accessibility Engineer at Olark, where she helps build a live web chat experience that is accessible to both the end users and the agents. She is passionate about building user experiences and design systems. Outside of work, she spends time trail running and knitting sweaters.",
+      "name": "Lee White",
+      "company": "Olark",
+      "country": "Unknown",
+      "photo": "/images/speakers/lee_white_headshot_cropped_1.jpg",
+      "photoUrl": "/images/speakers/lee_white_headshot_cropped_1.jpg",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "progressOverPerfectionYourFirstStepsInAccessibility"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "website",
+          "link": "https://www.shleewhite.com",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "gradySalzman",
+      "featured": false,
+      "bio": "Hello! My name is Grady (or you can call me G). I am a Software Engineer based out of Chicago, IL with specific interests in front end, component libraries, design systems.",
+      "name": "Grady Salzman",
+      "company": "Contenda",
+      "country": "Chicago, IL",
+      "photo": "/images/speakers/GradySalzman.jpg",
+      "photoUrl": "/images/speakers/GradySalzman.jpg",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "theComponentTestingBlueprintEnsureSecureCodeEvolutionInComponentLibraries"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/GradySalzman",
+          "name": "Twitter"
+        }
+      ]
+    },
+    {
+      "id": "philNash",
+      "featured": false,
+      "bio": "Phil is a developer evangelist for [Sonar](https://www.sonarsource.com/) and a [Google Developer Expert](https://developers.google.com/experts/people/phil-nash) living in Melbourne, Australia. He loves working with Ruby or JavaScript to build web applications and tools to help developers. He once helped build a website that captured everyone's favourite sandwich fillings. He has [too many GitHub repositories](https://github.com/philnash).\n \n\n Away from the keyboard, Phil listens to ska punk, hangs out with his miniature dachshund (also called Ruby), and is on a mission to discover the world's best beers.\n \n\n Phil tweets at [@philnash](https://twitter.com/philnash), and you can [find him elsewhere online here](http://philna.sh).",
+      "name": "Phil Nash",
+      "company": "Sonar",
+      "country": "London",
+      "photo": "https://secure.gravatar.com/avatar/8ec1383b240b5ba15ffb9743fceb3c0e?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/8ec1383b240b5ba15ffb9743fceb3c0e?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "cssBetweenThePages"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/philnash",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://philna.sh",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "jaylenSanders",
+      "featured": false,
+      "bio": "### Who\n Jaylen Sanders is a Creative Engineer who loves to blend creativity and engineering. He is a Software Engineer at Comcast who leads development for an Xfinity Shop on X1 Experience.\n \n\n ### What\n Jaylen’s current learning paths explore creativity, psychology, and network/systems effects. He is building a second brain or knowledge management system to support his growth as a natural general intelligence, lol.",
+      "name": "Jaylen Sanders",
+      "company": "Comcast",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/7ee1d55a3b28d8cbe795377362135af7?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/7ee1d55a3b28d8cbe795377362135af7?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "howToUnlockYourCreativePotentialATechnicalGuideForGoingFromIdeaToProduction"
+        }
+      ]
+    },
+    {
+      "id": "rubenRestrepo",
+      "featured": false,
+      "bio": "More than ten years of professional experience creating software, seven years working remotely, with a product-focused mindset, obsessed with delivering value. Native Spanish speaker, community builder, and speaker. \n I worked at a successful startup, Auth0 (acquired by Okta).\n Worked at a \"failed\" startup (Fusebit)\n I have both views of being in such environments and betting on a third startup (Stateful) building an excellent VSCode extension (Runme).\n My last \"big\" talk was at Revo.js in Romania. [Watch it here](https://www.youtube.com/watch?v=S9zlOh7xGms)\n I'm good at names. I always remember them.",
+      "name": "Ruben Restrepo",
+      "company": "Stateful",
+      "country": "Unknown",
+      "photo": "/images/speakers/rubenrestrepo.jpg",
+      "photoUrl": "/images/speakers/rubenrestrepo.jpg",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "letsBuildTheLibertyjsVscodeExtensionTogether"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/degrammer",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://bencho.dev",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "jeffreySmith",
+      "featured": false,
+      "bio": "I'm 33 years old from rural VA. I earned a BS in Economics in 2012, and am self-taught in software development. I moved to Philadelphia seven years ago to pursue a career in technology and am currently leading a team of 8 engineers at Vanguard, building full-stack, AI-enabled financial advice tools focused on retirement planning. I am also passionate about design systems, web performance, accessibility, and user-centric SLO's. I am loved and supported by my wonderful wife and delightful one year old daughter. Over the pandemic I became an avid woodworker and spend free-time creating heirloom quality furniture from Pennsylvania hardwoods.",
+      "name": "Jeffrey Smith",
+      "company": "Vanguard",
+      "country": "Unknown",
+      "photo": "/images/speakers/jeffsmith1.jpg",
+      "photoUrl": "/images/speakers/jeffsmith1.jpg",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "makingWebsitesSmartAndQwik"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "website",
+          "link": "http://jeffreysmith.ninja",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "gabbyGetz",
+      "featured": false,
+      "bio": "Gabby works on open source development as a CesiumJS committer. She wrote the initial styling language for 3D Tiles and was a contributing editor to the spec. She works closely with Cesium users and the 3D, geospatial, and open source communities. Gabby was the 2019 recipient of the Spar3D Younger Geospatial Professional of the Year award, served on the Program Committee for FOSS4G NA 2018, gives talks about Cesium and open source, and continues to promote women in STEM through high school and middle school programs. She earned a BS in Computer Science from Drexel University with a minor in Digital Media. \n \n\n In her spare time, Gabby paints, plays overly-complicated board games, watches horror movies, and co-created an indie game studio to release a mobile game.",
+      "name": "Gabby Getz",
+      "company": "Cesium",
+      "country": "Unknown",
+      "photo": "/images/speakers/GabbyGetzPortrait.jpg",
+      "photoUrl": "/images/speakers/GabbyGetzPortrait.jpg",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "building3dGeospatialVisualizationsWithCesiumGoogleAndArcgis"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/gabbygetz",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://cesium.com",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "christopherJBaker",
+      "featured": false,
+      "bio": "Christopher J Baker grew up in a farming community and started coding at a very young age. He worked as an engineer, to a mentor and trainer, and eventually to the Director of React Consulting at Bitovi. Though in management, his passion still lies in tech: software architecture, API design, and data processing and analysis. His approaches to technical areas also carry over into his love of cooking and tabletop role-playing games.",
+      "name": "Christopher J Baker",
+      "company": "Bitovi",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/86e2beaf7f5b0d1b81ae07b11b691999?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/86e2beaf7f5b0d1b81ae07b11b691999?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "simplifyMicroFrontendArchitectureUsingReactToWebComponent"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/christophrjbakr",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://christopherjbaker.dev/",
+          "name": "Website"
+        }
+      ]
+    },
+    {
+      "id": "kilianValkhof",
+      "featured": false,
+      "bio": "Kilian Valkhof is a seasoned developer who has been building tools for developers for over a decade. He is the founder of Polypane, a browser for developers designed to help build websites with a focus on responsive design, user experience, and accessibility.\n \n\n  Kilian has been developing websites for two decades, with an emphasis on user experience, accessibility and web standards and has a long-standing interest in responsive design, dating back to 2008 when he wrote his first article on mobile web design and foresaw what media features would soon enable. Kilian shares his knowledge and experience through his blog, kilianvalkhof.com and elsewhere on the web, and as a member of the Electron governance team and an open source contributor.",
+      "name": "Kilian Valkhof",
+      "company": "Polypane",
+      "country": "Unknown",
+      "photo": "https://secure.gravatar.com/avatar/3c65089d59b418fc7582f8055fbeab0f?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/3c65089d59b418fc7582f8055fbeab0f?s=500",
+      "order": 0,
+      "sessions": [
+        {
+          "id": "stopUsingJavascriptForThatMovingFeaturesFromJsToCssAndHtml"
+        }
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/kilianvalkhof",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://kilianvalkhof.com",
           "name": "Website"
         }
       ]
@@ -358,317 +646,29 @@
       ]
     },
     {
-      "id": "adinaHalter",
+      "id": "michaelSchoonmaker",
       "featured": false,
-      "bio": "Adina Halter is Sr. Principal Software Architect for Accessibility at Comcast where she engineers aspirational solutions to ensure those with disabilities have the best possible home and entertainment experience.\n \n\n Adina started her career out of college as a 3D animator before moving into print design and web development. She then expanded into the mobile and internet-of-things technology space. She is also a cross-product tech innovator in the use of artificial intelligence for accessible solutions. Additionally, Adina has a passion for quantum computing.\n \n\n Adina is an advocate for product development that delights users with differing disabilities. She is a member of the W3C’s Web Accessibility Initiative Education and Outreach working group and tweets, instructs, and speaks on coding, accessibility, and women in tech.\n \n\n Adina also served as co-lead for the Comcast MyAbilities Employee Resource Group, which empowers employees with disabilities and equips their allies across the company.\n \n\n Personal interests include wine, cooking, greek and roman coins, and strategy games.",
-      "name": "Adina Halter",
-      "company": "Comcast NBCUniversal",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/e6a6fc6c489c3fd9b0bfa9c431730080?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/e6a6fc6c489c3fd9b0bfa9c431730080?s=500",
+      "bio": "I want to make art. I'll even use a paintbrush, if it's absolutely necessary.\n \n\n Before I got a \"real job\" _(Thanks, Dad...)_, I made video games. These days I work as what Joyce Park calls a \"Carpenter\": I make real apps for real people using the most practical, reliable tools available. I work as a CTO for a social mobile app, Squad, using React Native, Node, and Postgres to deliver real-time audio messaging and JavaScript-powered delight.",
+      "name": "Michael Schoonmaker",
+      "company": "Squad",
+      "country": "Bellingham, WA",
+      "photo": "https://secure.gravatar.com/avatar/7432b2f79811673f88912ee5cb08d3fa?s=500",
+      "photoUrl": "https://secure.gravatar.com/avatar/7432b2f79811673f88912ee5cb08d3fa?s=500",
       "order": 0,
       "sessions": [
         {
-          "id": "accessibleWebSolutionsWithAriaAndJavascript"
+          "id": "wereSnakingItLive"
         }
       ],
       "socials": [
         {
           "icon": "twitter",
-          "link": "https://twitter.com/haltersweb",
+          "link": "https://twitter.com/Schoonology",
           "name": "Twitter"
         },
         {
           "icon": "website",
-          "link": "https://github.com/haltersweb/Accessibility",
-          "name": "Website"
-        }
-      ]
-    },
-    {
-      "id": "derekBinkley",
-      "featured": false,
-      "bio": "Derek Binkley is Engineering Manager at Localize. While getting his start fixing the Y2K date problem in Cobol, Derek quickly moved on to spend over twenty years using JavaScript, PHP, JVM Languages, MySQL, MongoDB, and Oracle.\n \n\n He enjoys teaching others through speaking, mentoring, and writing articles. Derek encourages developers to write clean, testable code. When not in front of a computer he spends time with family, travels, and makes pizza.",
-      "name": "Derek Binkley",
-      "company": "Localize",
-      "country": "Madison, WI",
-      "photo": "https://secure.gravatar.com/avatar/384c148ae013999720eb847b1bd47aea?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/384c148ae013999720eb847b1bd47aea?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "whatRaising3KidsTaughtMeAboutWorkingWithUsers"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "website",
-          "link": "http://derekb-wi.com",
-          "name": "Website"
-        }
-      ]
-    },
-    {
-      "id": "jaylenSanders",
-      "featured": false,
-      "bio": "### Who\n Jaylen Sanders is a Creative Engineer who loves to blend creativity and engineering. He is a Software Engineer at Comcast who leads development for an Xfinity Shop on X1 Experience.\n \n\n ### What\n Jaylen’s current learning paths explore creativity, psychology, and network/systems effects. He is building a second brain or knowledge management system to support his growth as a natural general intelligence, lol.",
-      "name": "Jaylen Sanders",
-      "company": "Comcast",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/7ee1d55a3b28d8cbe795377362135af7?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/7ee1d55a3b28d8cbe795377362135af7?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "howToUnlockYourCreativePotentialATechnicalGuideForGoingFromIdeaToProduction"
-        }
-      ]
-    },
-    {
-      "id": "toniDarden",
-      "featured": false,
-      "bio": "I'm Toni Darden, a passionate Software Development Engineer specializing in building robust and scalable cloud applications. With a diverse background in both the corporate world and entrepreneurship, I bring a unique perspective to my work.\n During my time building my former company, Gas Hoppers USA, I was dedicated to helping businesses save on fuel costs by eliminating middlemen. Through our innovative mobile app, companies could monitor usage, achieve savings, and experience unmatched reliability, quality, and communication.\n My journey continued at Lambda School's rigorous 18-month Computer Science & Software Engineering Academy, where industry giants like Y-Combinator, Google Ventures, and Stripe provided support. There, I immersed myself in full-stack web development, mastering Python, Django, JavaScript, React, Redux, Node.js, and other cutting-edge technologies. I built intricate applications and embraced modern JavaScript environments and tooling.\n Now, as a Software Development Engineer, I thrive on tackling complex challenges and empowering others in the tech industry. I'm thrilled to connect with the LibertyJS community, sharing my expertise and insights. Let's embark on an exploration of the captivating world of building scalable and resilient apps with AWS and CI/CD pipelines.",
-      "name": "Toni Darden",
-      "company": "Comcast",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/15388b4799a7377b27ced7b2fcede7ed?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/15388b4799a7377b27ced7b2fcede7ed?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "unleashingThePowerOfCloudBuildingScalableAndResilientAppsWithAwsAndCicdPipelines"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/Codeworldco",
-          "name": "Twitter"
-        }
-      ]
-    },
-    {
-      "id": "jessicaKerr",
-      "featured": false,
-      "bio": "Jessica Kerr is a developer of 20 years, a conference speaker of 10, and a symmathecist: a conscious participant in sociotechnical systems. Find her writing at jessitron.com and systemsthinking.dev. Find her keynotes at conferences like RubyConf, GOTO Copenhagen, YOW! Australia, and around. She currently works at Honeycomb.io, remotely from her home in St. Louis. One child graduated this year; one more to go.",
-      "name": "Jessica Kerr",
-      "company": "Honeycomb.io",
-      "country": "St. Louis, MO",
-      "photo": "https://secure.gravatar.com/avatar/ccdd121c5cf5ef6233ee6e7ae9a5d999?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/ccdd121c5cf5ef6233ee6e7ae9a5d999?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "observabilityForTheFrontEnd"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/jessitron",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://jessitron.com",
-          "name": "Website"
-        }
-      ]
-    },
-    {
-      "id": "leeWhite",
-      "featured": false,
-      "bio": "Lee is an Accessibility Engineer at Olark, where she helps build a live web chat experience that is accessible to both the end users and the agents. She is passionate about building user experiences and design systems. Outside of work, she spends time trail running and knitting sweaters.",
-      "name": "Lee White",
-      "company": "Olark",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/f05e643c58d009c5e2ced5fcdb89f37e?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/f05e643c58d009c5e2ced5fcdb89f37e?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "progressOverPerfectionYourFirstStepsInAccessibility"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "website",
-          "link": "https://www.shleewhite.com",
-          "name": "Website"
-        }
-      ]
-    },
-    {
-      "id": "gradySalzman",
-      "featured": false,
-      "bio": "Hello! My name is Grady (or you can call me G). I am a Software Engineer based out of Chicago, IL with specific interests in front end, component libraries, design systems.",
-      "name": "Grady Salzman",
-      "company": "Contenda",
-      "country": "Chicago, IL",
-      "photo": "https://secure.gravatar.com/avatar/7203eafbc4675d6c56543a51e1dbfa20?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/7203eafbc4675d6c56543a51e1dbfa20?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "theComponentTestingBlueprintEnsureSecureCodeEvolutionInComponentLibraries"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/GradySalzman",
-          "name": "Twitter"
-        }
-      ]
-    },
-    {
-      "id": "philNash",
-      "featured": false,
-      "bio": "Phil is a developer evangelist for [Sonar](https://www.sonarsource.com/) and a [Google Developer Expert](https://developers.google.com/experts/people/phil-nash) living in Melbourne, Australia. He loves working with Ruby or JavaScript to build web applications and tools to help developers. He once helped build a website that captured everyone's favourite sandwich fillings. He has [too many GitHub repositories](https://github.com/philnash).\n \n\n Away from the keyboard, Phil listens to ska punk, hangs out with his miniature dachshund (also called Ruby), and is on a mission to discover the world's best beers.\n \n\n Phil tweets at [@philnash](https://twitter.com/philnash), and you can [find him elsewhere online here](http://philna.sh).",
-      "name": "Phil Nash",
-      "company": "Sonar",
-      "country": "London",
-      "photo": "https://secure.gravatar.com/avatar/8ec1383b240b5ba15ffb9743fceb3c0e?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/8ec1383b240b5ba15ffb9743fceb3c0e?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "cssBetweenThePages"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/philnash",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://philna.sh",
-          "name": "Website"
-        }
-      ]
-    },
-    {
-      "id": "mrinaSugosh",
-      "featured": false,
-      "bio": "Mrinalini(Mrina)has been 'hacking' away at tech projects since the age of 14! Her first project was programming her TI-84 calculator to be able quickly find the hypotenuse of a right triangle. Since then she has been in constant pursuit of employing CS to enable her curiosity; be it was building a text messaging COVID bot or a motion detector for her pup's sleep.She is a UC Berkeley Alumnus and currently works as a Developer Relations Manager at TinyMCE.",
-      "name": "Mrina Sugosh",
-      "company": "TinyMCE",
-      "country": "",
-      "photo": "/images/speakers/mrinasugosh.jpg",
-      "photoUrl": "/images/speakers/mrinasugosh.jpg",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "chatgptAsAnAiAssistant"
-        }
-      ],
-      "socials": []
-    },
-    {
-      "id": "rubenRestrepo",
-      "featured": false,
-      "bio": "More than ten years of professional experience creating software, seven years working remotely, with a product-focused mindset, obsessed with delivering value. Native Spanish speaker, community builder, and speaker. \n I worked at a successful startup, Auth0 (acquired by Okta).\n Worked at a \"failed\" startup (Fusebit)\n I have both views of being in such environments and betting on a third startup (Stateful) building an excellent VSCode extension (Runme).\n My last \"big\" talk was at Revo.js in Romania. [Watch it here](https://www.youtube.com/watch?v=S9zlOh7xGms)\n I'm good at names. I always remember them.",
-      "name": "Ruben Restrepo",
-      "company": "Stateful",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/555fbae9979c26ac0171442b75e197dd?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/555fbae9979c26ac0171442b75e197dd?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "letsBuildTheLibertyjsVscodeExtensionTogether"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/degrammer",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://bencho.dev",
-          "name": "Website"
-        }
-      ]
-    },
-    {
-      "id": "jeffreySmith",
-      "featured": false,
-      "bio": "I'm 33 years old from rural VA. I earned a BS in Economics in 2012, and am self-taught in software development. I moved to Philadelphia seven years ago to pursue a career in technology and am currently leading a team of 8 engineers at Vanguard, building full-stack, AI-enabled financial advice tools focused on retirement planning. I am also passionate about design systems, web performance, accessibility, and user-centric SLO's. I am loved and supported by my wonderful wife and delightful one year old daughter. Over the pandemic I became an avid woodworker and spend free-time creating heirloom quality furniture from Pennsylvania hardwoods.",
-      "name": "Jeffrey Smith",
-      "company": "Vanguard",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/98e23dfe62d99904bcba092d429cc945?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/98e23dfe62d99904bcba092d429cc945?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "makingWebsitesSmartAndQwik"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "website",
-          "link": "http://jeffreysmith.ninja",
-          "name": "Website"
-        }
-      ]
-    },
-    {
-      "id": "gabbyGetz",
-      "featured": false,
-      "bio": "Gabby works on open source development as a CesiumJS committer. She wrote the initial styling language for 3D Tiles and was a contributing editor to the spec. She works closely with Cesium users and the 3D, geospatial, and open source communities. Gabby was the 2019 recipient of the Spar3D Younger Geospatial Professional of the Year award, served on the Program Committee for FOSS4G NA 2018, gives talks about Cesium and open source, and continues to promote women in STEM through high school and middle school programs. She earned a BS in Computer Science from Drexel University with a minor in Digital Media. \n \n\n In her spare time, Gabby paints, plays overly-complicated board games, watches horror movies, and co-created an indie game studio to release a mobile game.",
-      "name": "Gabby Getz",
-      "company": "Cesium",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/eb5589fdcb41f18987c3dc5845230455?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/eb5589fdcb41f18987c3dc5845230455?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "building3dGeospatialVisualizationsWithCesiumGoogleAndArcgis"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/gabbygetz",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://cesium.com",
-          "name": "Website"
-        }
-      ]
-    },
-    {
-      "id": "kilianValkhof",
-      "featured": false,
-      "bio": "Kilian Valkhof is a seasoned developer who has been building tools for developers for over a decade. He is the founder of Polypane, a browser for developers designed to help build websites with a focus on responsive design, user experience, and accessibility.\n \n\n  Kilian has been developing websites for two decades, with an emphasis on user experience, accessibility and web standards and has a long-standing interest in responsive design, dating back to 2008 when he wrote his first article on mobile web design and foresaw what media features would soon enable. Kilian shares his knowledge and experience through his blog, kilianvalkhof.com and elsewhere on the web, and as a member of the Electron governance team and an open source contributor.",
-      "name": "Kilian Valkhof",
-      "company": "Polypane",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/3c65089d59b418fc7582f8055fbeab0f?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/3c65089d59b418fc7582f8055fbeab0f?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "stopUsingJavascriptForThatMovingFeaturesFromJsToCssAndHtml"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/kilianvalkhof",
-          "name": "Twitter"
-        },
-        {
-          "icon": "website",
-          "link": "https://kilianvalkhof.com",
+          "link": "https://www.schoonology.com",
           "name": "Website"
         }
       ]
