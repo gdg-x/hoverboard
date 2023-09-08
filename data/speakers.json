@@ -593,8 +593,8 @@
       "name": "Jen Ozmen",
       "company": "Google",
       "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/449216c5529c26f37750cdfb9b8d6675?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/449216c5529c26f37750cdfb9b8d6675?s=500",
+      "photo": "/images/speakers/JenOzmen.jpg",
+      "photoUrl": "/images/speakers/JenOzmen.jpg",
       "order": 0,
       "sessions": [
         {
@@ -608,8 +608,8 @@
       "bio": "Aaron is a software engineer at Google who focuses on web security features and adoption across all Google products. Before working on security, he was on product teams for Google Cloud and Google Workspace. Before Google, he had a brief stint at Microsoft. Prior to big tech, he wrote a lot of Ruby on Rails code.",
       "name": "Aaron Shim",
       "company": "Google",
-      "photo": "https://secure.gravatar.com/avatar/46d9299b7ba74b3472b623e550df1504?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/46d9299b7ba74b3472b623e550df1504?s=500",
+      "photo": "/images/speakers/AaronShim.jpg",
+      "photoUrl": "/images/speakers/AaronShim.jpg",
       "order": 0,
       "sessions": [
         {
@@ -652,8 +652,8 @@
       "name": "Michael Schoonmaker",
       "company": "Squad",
       "country": "Bellingham, WA",
-      "photo": "https://secure.gravatar.com/avatar/7432b2f79811673f88912ee5cb08d3fa?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/7432b2f79811673f88912ee5cb08d3fa?s=500",
+      "photo": "/images/speakers/MichaelSchoonmaker.jpg",
+      "photoUrl": "/images/speakers/MichaelSchoonmaker.jpg",
       "order": 0,
       "sessions": [
         {
