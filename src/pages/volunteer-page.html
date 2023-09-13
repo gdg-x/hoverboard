@@ -152,31 +152,33 @@
     </hero-block>
 
 	<div class="container" style="padding: 10px 25px;">
-		<div class="info-block info">
-			<div class="info">
-				<h3>Volunteer applications are closed for LibertyJS 2019</h3>
-				<p>Current applicants will be notified by the end of September</p>
-			</div>
-		</div>
 		<!-- <div class="info-block info">
+			<div class="info">
+				<h3>Volunteer applications are open for LibertyJS 2023</h3>
+				<p>Current applicants will be notified by the end of September and beginning of October</p>
+				<p><a href="https://forms.gle/1wvgsR2wdcg84NZu5" target="_blank">Click here</a> to enter your volunteer application</p>
+			</div>
+		</div> -->
+		<div class="info-block info">
 			<h2>Want to help make LibertyJS the best JavaScript conference in Philadelphia?!</h2>
 			<br/>
 			<div style="padding-left: 5%;" class="info">
 				<h3>Where:</h3>
-				<p>National Museum of American Jewish History</p>
+				<p>Weitzman National Museum of American Jewish History</p>
+				<p>101 S Independence Mall E, Philadelphia, PA 19106</p>
 				<h3>When:</h3>
-				<p>Thursday, October 24- Friday, October 25, 2019</p>
+				<p>Thursday, October 12 - Friday, October 13, 2019</p>
 				<h3>Who:</h3>
 				<p>You!</p>
 				<h3>What’s in it for you?</h3>
 				<p>We’re aiming for 3- 4 hour shifts! As a volunteer, you have access to the remaining conference</p>
 			</div>
-		</div> -->
-		<!-- <div class="info-block">
+		</div>
+		<div class="info-block">
 			<h2>What Are The Volunteer Roles?</h2>
       <ul class="no-style">
         <h3>Here are a few ideas:</h3>
-				<li>Help the caterering company set up for breakfast, lunch or party</li>
+				<li>Help the caterering company set up for breakfast and beverage service</li>
 					<ul>
 						<li>Set up tables</li>
 						<li>Help with cleanup</li>
@@ -219,12 +221,12 @@
 						<li>Can I bring my coffee in here?</li>
 					</ul>
 			</ul>
-		</div> -->
-		<!-- <div class="info-block">
+		</div>
+		<div class="info-block">
 			<h2 >Tell your friends to sign up. The more the merrier!</h2>
 
-		</div> -->
-		<!-- <div class="info-block">
+		</div>
+		<div class="info-block">
 			<h2>What’s in it for you?</h2>
 			<ul>
 				<h3>You'll get:</h3>
@@ -234,8 +236,8 @@
 				<li>LibertyJS 2019 t-shirt</li>
 				<li>Many thank-you's and (hopefully) some new friends!</li>
 			</ul>
-		</div> -->
-		<!-- <div class="info-block">
+		</div>
+		<div class="info-block">
 			<p>Fill out this form and we’ll send you an email with details on what time to show up.<br />
 			We'll invite you to the volunteer Slack channel sometime prior to event day.<br />
 			See you soon!<br />
@@ -244,8 +246,8 @@
 			</p>
 		</div>
 		<div class="info-block">
-			<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSciFaxWOlp3vOXmS0H_le3sAdnZlDEuNBPmk0LzRCTVUvvCbw/viewform?embedded=true" width="640" height="2371" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-		</div> -->
+			<iframe src="https://forms.gle/1wvgsR2wdcg84NZu5" width="640" height="2371" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+		</div>
 	</div>
 
 	<footer-block></footer-block>
@@ -256,7 +258,7 @@
     class VolunteerPage extends ReduxMixin(Polymer.Element) {
       static get is() {return 'volunteer-page';}
 
-       static get properties() {
+      static get properties() {
         return {
           active: Boolean,
           volunteer: {
