@@ -345,8 +345,8 @@
       "name": "Toni Darden",
       "company": "Comcast",
       "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/15388b4799a7377b27ced7b2fcede7ed?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/15388b4799a7377b27ced7b2fcede7ed?s=500",
+      "photo": "/images/speakers/toniDarden.jpg",
+      "photoUrl": "/images/speakers/toniDarden.jpg",
       "order": 0,
       "sessions": [
         {
@@ -438,12 +438,12 @@
     {
       "id": "jaylenSanders",
       "featured": false,
-      "bio": "### Who\n Jaylen Sanders is a Creative Engineer who loves to blend creativity and engineering. He is a Software Engineer at Comcast who leads development for an Xfinity Shop on X1 Experience.\n \n\n ### What\n Jaylen’s current learning paths explore creativity, psychology, and network/systems effects. He is building a second brain or knowledge management system to support his growth as a natural general intelligence, lol.",
+      "bio": "Who\n Jaylen Sanders is a Creative Engineer who loves to blend creativity and engineering. He is a Software Engineer at Comcast who leads development for an Xfinity Shop on X1 Experience.\n \n\n ### What\n Jaylen’s current learning paths explore creativity, psychology, and network/systems effects. He is building a second brain or knowledge management system to support his growth as a natural general intelligence, lol.",
       "name": "Jaylen Sanders",
       "company": "Comcast",
       "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/7ee1d55a3b28d8cbe795377362135af7?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/7ee1d55a3b28d8cbe795377362135af7?s=500",
+      "photo": "/images/speakers/jaylensanders.jpg",
+      "photoUrl": "/images/speakers/jaylensanders.jpg",
       "order": 0,
       "sessions": [
         {
