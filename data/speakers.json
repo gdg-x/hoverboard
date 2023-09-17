@@ -114,8 +114,8 @@
       "name": "Ernest Phillips",
       "company": "GitHub",
       "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/c7a7a45c957262526387d6431a00d6e7?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/c7a7a45c957262526387d6431a00d6e7?s=500",
+      "photo": "/images/speakers/ernestPhillips.jpg",
+      "photoUrl": "/images/speakers/ernestPhillips.jpg",
       "order": 0,
       "sessions": [
         {
@@ -215,29 +215,6 @@
         {
           "icon": "website",
           "link": "https://www.linkedin.com/in/chrisrng",
-          "name": "Website"
-        }
-      ]
-    },
-    {
-      "id": "shubhamGautam",
-      "featured": false,
-      "bio": "Meet Shubham, a TypeScript-loving front-end engineer at Headout who's always up for a friendly debate on the existence of aliens. He's passionate about continuous learning and personal growth, staying up-to-date with the latest developments in his field. With a collaborative spirit and curious mindset, he brings energy and enthusiasm to every project and discussion. For Shubham, anything is possible with the right tools and an open mind.",
-      "name": "Shubham Gautam",
-      "company": "Headout",
-      "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/8e4024c52ead0802d9c7c975ed814c39?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/8e4024c52ead0802d9c7c975ed814c39?s=500",
-      "order": 0,
-      "sessions": [
-        {
-          "id": "theFutureOfWebStorageExploringAdvancedApisAndEmergingTechnologies"
-        }
-      ],
-      "socials": [
-        {
-          "icon": "website",
-          "link": "https://shubhamgautam.in",
           "name": "Website"
         }
       ]
@@ -624,8 +601,8 @@
       "name": "Ceora",
       "company": "Okta",
       "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/f7e2ca6fbea1c7d4c0bb9cd3033e5736?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/f7e2ca6fbea1c7d4c0bb9cd3033e5736?s=500",
+      "photo": "/images/speakers/ceora.jpg",
+      "photoUrl": "/images/speakers/ceora.jpg",
       "order": 0,
       "sessions": [
         {
