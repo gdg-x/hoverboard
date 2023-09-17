@@ -33,6 +33,15 @@
       "title": "Lunch"
     },
     {
+      "id": "tbd",
+      "complexity": "All",
+      "description": "TBD",
+      "shortDescription": "TBD",
+      "speakers": [],
+      "tags": [],
+      "title": "TBD"
+    },
+    {
       "id": "afterparty",
       "complexity": "All",
       "description": "Eat, drink and be merry.",
@@ -655,19 +664,6 @@
         "scale"
       ],
       "title": "Road to Zero Lint Failures: Tackling Code Quality Challenges at Scale"
-    },
-    {
-      "id": "theFutureOfWebStorageExploringAdvancedApisAndEmergingTechnologies",
-      "complexity": "All",
-      "description": "Are you tired of relying on outdated web storage techniques? In this presentation, we will dive into the world of advanced APIs such as IndexedDB, CacheStorage, FileSystem API, etc. We'll compare the benefits and limitations of each API, discussing their persistence, quota, security, and performance",
-      "speakers": [
-        "shubhamGautam"
-      ],
-      "tags": [
-        "Web Storage",
-        "Javascript"
-      ],
-      "title": "The Future of Web Storage: Exploring Advanced APIs and Emerging Technologies"
     },
     {
       "id": "optimizingYourWebAppHowToScore100OnLighthouse",
