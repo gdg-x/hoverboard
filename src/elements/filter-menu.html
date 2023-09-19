@@ -18,23 +18,12 @@
         position: relative;
       }
 
-      .filters-button {
-        cursor: pointer;
-        text-transform: uppercase;
-        padding: 0.7em;
-        border-radius: 2px;
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--default-primary-color);
-        background-color: transparent;
-        border: none;
-        transition: background-color var(--animation);
-        font-weight: bold;
+      :host paper-button {
+        outline: 2px solid transparent;
       }
 
-      .filters-button:hover {
-        background-color: var(--primary-color-transparent);
-        color: var(--text-primary-color);
+      :host paper-button.keyboard-focus {
+        outline-color: unset;
       }
 
       .filters-board {
@@ -62,13 +51,11 @@
       }
 
       .tag {
-        background: none;
         margin-bottom: 8px;
         margin-right: 8px;
         display: inline-flex;
         font-size: 13px;
         cursor: pointer;
-        padding: 4px 7px;
         text-transform: capitalize;
       }
 
@@ -116,10 +103,10 @@
         <span class="reset-filters" role="button" on-tap="_resetFilters" hidden$="[[!_selectedArray.length]]">
           {$ filters.clear $}
         </span>
-          <button class="filters-button icon-right" on-tap="_toggleBoard">
+          <paper-button class="icon-right" on-tap="_toggleBoard">
             {$ filters.title $}
             <iron-icon icon="hoverboard:[[_getFilterIcon(_openedBoard)]]"></iron-icon>
-          </button>
+          </paper-button>
         </div>
       </div>
 
@@ -147,7 +134,7 @@
           <div class="filter-group">
             <h3 class="filter-title">[[filter.title]]</h3>
             <template is="dom-repeat" items="[[filter.items]]" as="item">
-              <button
+              <div
                 class="tag"
                 style$="--color: [[getVariableColor(item, 'primary-text-color')]]"
                 filter-key$="[[filter.key]]"
@@ -156,7 +143,7 @@
                 on-tap="_toggleFilter"
               >
                 [[item]]
-              </button>
+              </div>
             </template>
           </div>
         </template>
