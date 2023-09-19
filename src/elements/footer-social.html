@@ -1,6 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../mixins/share-mixin.html">
 
 <dom-module id="footer-social">
@@ -38,6 +37,10 @@
         display: inline-block;
       }
 
+      .social-group.share-block {
+        margin-bottom: 17px;
+      }
+
       .share {
         padding: 8px;
         width: 35px;
@@ -65,8 +68,6 @@
       }
 
       .social-group {
-        align-items: center;
-        display: flex;
         margin-right: 0;
         margin-bottom: 10px;
         padding-top: 0;
@@ -79,6 +80,7 @@
 
       .email .title {
         padding-right: 0;
+        padding-top: 17px;
       }
 
       .email a {
@@ -129,6 +131,10 @@
           margin-right: 0;
         }
 
+        .social-networks {
+          padding-top: 8px;
+        }
+
         .blog {
           padding-top: 17px;
         }
@@ -175,11 +181,12 @@
                 target="_blank"
                 aria-label="hoverboard:{$ socFollow.name $}"
                 rel="noopener noreferrer"
+                tabindex="-1"
                 ga-on="click"
                 ga-event-category="social"
                 ga-event-action="follow"
                 ga-event-label="{$ socFollow.name $}">
-              <iron-icon icon="hoverboard:{$ socFollow.name $}"  ></iron-icon>
+              <paper-icon-button icon="hoverboard:{$ socFollow.name $}"  ></paper-icon-button>
             </a>
           </li>
         {% endfor %}
