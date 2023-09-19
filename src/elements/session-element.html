@@ -148,7 +148,7 @@
 
       <div class="session-header" layout horizontal justified>
         <div flex>
-          <h3 class="session-title">[[session.title]]</h3>
+          <h2 class="session-title">[[session.title]]</h2>
           <div class="session-description" hidden$="[[_hideSessionAbstract(session.shortDescription)]]">
             [[session.shortDescription]]</div>
         </div>
@@ -187,7 +187,7 @@
         <div class="speakers" hidden$="[[!session.speakers.length]]">
           <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
             <div class="speaker" layout horizontal center>
-              <plastic-image class="speaker-photo" srcset="[[speaker.photoUrl]]" sizing="cover" lazy-load preload
+              <plastic-image alt="" class="speaker-photo" srcset="[[speaker.photoUrl]]" sizing="cover" lazy-load preload
                 fade></plastic-image>
 
               <div class="speaker-details" flex>

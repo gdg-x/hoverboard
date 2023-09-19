@@ -106,6 +106,18 @@
         text-align: center;
       }
 
+      .view-all-button {
+        border: 2px solid transparent;
+        border-radius: 4px;
+      }
+
+      .view-all-button:focus-visible,
+      .view-all-button:hover {
+        color: var(--default-primary-color) !important;
+        box-shadow: 0 2px 7px 3px rgba(0, 0, 0, 0.14);
+        border-color: unset;
+      }
+
       @media (min-width: 640px) {
         .photo {
           width: 128px;
@@ -117,24 +129,7 @@
         }
       }
 
-
-      @media (min-width: 812px) {
-        .speakers-wrapper {
-          /* grid-template-columns: repeat(3, 1fr); */
-        }
-
-        .speaker:last-of-type {
-          display: none;
-        }
-
-
-      }
-
       @media (min-width: 1024px) {
-        .speakers-wrapper {
-          /* grid-template-columns: repeat(4, 1fr); */
-        }
-
         .speaker:last-of-type {
           display: block;
         }
@@ -142,17 +137,17 @@
     </style>
 
     <div class="container">
-      <h1 class="container-title">{$ speakersBlock.title $}</h1>
+      <h2 class="container-title">{$ speakersBlock.title $}</h2>
       <div class="speakers-wrapper">
         <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
           <div class="speaker" on-tap="_openSpeaker" ga-on="click" ga-event-category="speaker"
             ga-event-action="open details" ga-event-label$="[[speaker.name]]">
             <div relative>
-              <plastic-image class="photo" srcset="[[speaker.photoUrl]]" sizing="cover" lazy-load preload
+              <plastic-image alt="" class="photo" srcset="[[speaker.photoUrl]]" sizing="cover" lazy-load preload
                 fade></plastic-image>
               <div class="contacts">
                 <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-                  <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
+                  <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer" tabindex="-1">
                     <paper-icon-button class="social-icon" icon="hoverboard:{{social.icon}}"
                       aria-label="[[speaker.name]] hoverboard:{{social.name}}"></paper-icon-button>
                   </a>
@@ -176,8 +171,8 @@
         </template>
       </div>
 
-      <a href="{$ speakersBlock.callToAction.link $}" class="center">
-        <paper-button class="cta-button animated icon-right">
+      <a href="{$ speakersBlock.callToAction.link $}" class="center" tabindex="-1">
+        <paper-button class="cta-button animated icon-right view-all-button" link>
           <span>{$ speakersBlock.callToAction.label $}</span>
           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
         </paper-button>

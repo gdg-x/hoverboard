@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../mixins/share-mixin.html">
 
 <dom-module id="footer-social">
@@ -37,12 +38,7 @@
         display: inline-block;
       }
 
-     .social-group.share-block {
-        margin-bottom: 17px;
-      }
-
       .share {
-        height: 30px;
         padding: 8px;
         width: 35px;
         display: inline-block;
@@ -69,6 +65,8 @@
       }
 
       .social-group {
+        align-items: center;
+        display: flex;
         margin-right: 0;
         margin-bottom: 10px;
         padding-top: 0;
@@ -81,7 +79,6 @@
 
       .email .title {
         padding-right: 0;
-        padding-top: 17px;
       }
 
       .email a {
@@ -132,10 +129,6 @@
           margin-right: 0;
         }
 
-        .social-networks {
-          padding-top: 8px;
-        }
-
         .blog {
           padding-top: 17px;
         }
@@ -180,12 +173,13 @@
           <li>
             <a href="{$ socFollow.url $}"
                 target="_blank"
+                aria-label="hoverboard:{$ socFollow.name $}"
                 rel="noopener noreferrer"
                 ga-on="click"
                 ga-event-category="social"
                 ga-event-action="follow"
                 ga-event-label="{$ socFollow.name $}">
-              <paper-icon-button icon="hoverboard:{$ socFollow.name $}" aria-label="hoverboard:{$ socFollow.name $}" ></paper-icon-button>
+              <iron-icon icon="hoverboard:{$ socFollow.name $}"  ></iron-icon>
             </a>
           </li>
         {% endfor %}
@@ -194,7 +188,7 @@
 
     <div class="social-group email">
       <div class="title">
-        <a aria-label="{$ emailUs $}" href="mailto:{$ mailto $}">{$ emailUs $}</a>
+        <a aria-label="{$ emailUs $}" href="mailto:{$ mailto $}" target="_blank">{$ emailUs $}</a>
       </div>
     </div>
 

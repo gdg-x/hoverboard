@@ -75,7 +75,7 @@
     <hero-block background-image="{$ heroSettings.schedule.background.image $}"
       background-color="{$ heroSettings.schedule.background.color $}" font-color="{$ heroSettings.schedule.fontColor $}"
       active="[[active]]">
-      <div class="hero-title highlight-font">{$ heroSettings.schedule.title $}</div>
+      <h1 class="hero-title highlight-font">{$ heroSettings.schedule.title $}</h1>
       <p class="hero-description">{$ heroSettings.schedule.description $}</p>
       <sticky-element slot="bottom" active="[[active]]">
         <header-bottom-toolbar></header-bottom-toolbar>
@@ -97,17 +97,6 @@
       </content-loader>
 
       <iron-pages attr-for-selected="name" selected="[[subRoute]]" selected-attribute="active">
-        <!-- <template is="dom-if" if="[[_isEqualTo(subRoute, '2023-10-12')]]">
-          <h2 class="iron-selected">Be part of our 2023 schedule!</h2>
-          <div class="action-buttons iron-selected" layout horizontal left-justified wrap>
-            <a href="https://www.papercall.io/libertyjs-2023" target="_blank">
-              <paper-button primary>
-                Call For Speakers
-              </paper-button>
-            </a>
-          </div>
-          Check out 2019's rockstar filled schedule <a class="iron-selected" href="/schedule/2019-10-24/">here</a>
-        </template> -->
         <template is="dom-repeat" items="[[schedule]]" as="obj">
           <template is="dom-repeat" items="[[obj.schedule]]" as="day">
             <template is="dom-if" if="[[!_isEqualTo(subRoute, '2023-10-14')]]">

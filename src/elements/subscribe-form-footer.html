@@ -38,6 +38,28 @@
         color: var(--secondary-text-color);
       }
 
+      .subscribe-button {
+        background: var(--text-primary-color);
+        border-radius: 3px;
+        border: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.14);
+        color: var(--secondary-text-color);
+        cursor: pointer;
+        display: inline-block !important;
+        font-weight: bold;
+        margin-right: 3px;
+        margin-top: 5px;
+        padding: 10px;
+        text-transform: uppercase;
+        transition: background 350ms, color 350ms;
+      }
+
+      .subscribe-button:focus,
+      .subscribe-button:hover {
+        background-color: var(--primary-color-transparent);
+        color: var(--text-primary-color);
+      }
+
       paper-button:hover {
         cursor: pointer;
       }
@@ -62,7 +84,8 @@
 
         <iron-icon icon="hoverboard:checked" slot="suffix" hidden$="[[!subscribed]]"></iron-icon>
       </paper-input>
-      <paper-button
+      <button
+        class="subscribe-button"
         on-tap="_subscribe"
         ga-on="click"
         disabled="[[subscribed]]"
@@ -71,7 +94,7 @@
         ga-event-label="subscribe footer"
         layout self-end>
         [[ctaLabel]]
-      </paper-button>
+      </button>
     </div>
   </template>
 

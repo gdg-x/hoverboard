@@ -35,6 +35,14 @@
         max-width: 240px;
       }
 
+      .home-buy-ticket {
+        background: var(--default-primary-color);
+        border-radius: 2px;
+        color: var(--text-primary-color);
+        padding: 7px 10px;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+      }
+
       .info-items {
         margin: 24px auto;
         font-size: 22px;
@@ -42,6 +50,10 @@
 
       .info-items>*:not(:first-of-type) {
         margin-top: 4px;
+      }
+
+      .announce {
+        color: var(--dark-primary-color);
       }
 
       .action-buttons {
@@ -135,6 +147,7 @@
 
     <polymer-helmet active="[[active]]"></polymer-helmet>
 
+    <main>
     <hero-block id="hero" background-image="{$ heroSettings.home.background.image $}"
       background-color="{$ heroSettings.home.background.color $}" font-color="{$ heroSettings.home.fontColor $}"
       active="[[active]]" hide-logo>
@@ -143,18 +156,16 @@
         <div class="info-items highlight-font">
           <!-- <div class="info-item">{$ location.city $}. {$ dates $}</div>
           <div class="info-item">{$ heroSettings.home.description $}</div> -->
-          <p><a href="/blog/posts/2023-return-announcement/">Liberty JS is returning: October 12th and 13th 2023</a></p>
+          <p><a class="announce" href="/blog/posts/2023-return-announcement/">Liberty JS is returning: October 12th and 13th 2023</a></p>
         </div>
 
 
 
         <div class="action-buttons" layout horizontal center-justified wrap>
-          <a href="https://libertyjs.ticketspice.com/libertyjs-2023" target="_blank">
-            <paper-button ga-on="click" ga-event-category="ticket button" ga-event-action="buy_click"
-              ga-event-label="hero block - scroll to tickets" primary>
+            <a class="home-buy-ticket" href="https://libertyjs.ticketspice.com/libertyjs-2023" ga-on="click" ga-event-category="ticket button" ga-event-action="buy_click"
+              ga-event-label="hero block - scroll to tickets" primary target="_blank">
               <iron-icon icon="hoverboard:ticket"></iron-icon>
               {$ buyTicket $}
-            </paper-button>
           </a>
         </div>
 
@@ -181,6 +192,7 @@
     <!-- <featured-videos></featured-videos> -->
     <!-- <latest-posts-block></latest-posts-block> -->
     <map-block></map-block>
+    </main>
     <!-- <partners-block></partners-block> -->
     <footer-block></footer-block>
   </template>
