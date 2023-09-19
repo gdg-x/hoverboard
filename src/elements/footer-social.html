@@ -179,14 +179,13 @@
           <li>
             <a href="{$ socFollow.url $}"
                 target="_blank"
-                aria-label="hoverboard:{$ socFollow.name $}"
                 rel="noopener noreferrer"
                 tabindex="-1"
                 ga-on="click"
                 ga-event-category="social"
                 ga-event-action="follow"
                 ga-event-label="{$ socFollow.name $}">
-              <paper-icon-button icon="hoverboard:{$ socFollow.name $}"  ></paper-icon-button>
+              <paper-icon-button icon="hoverboard:{$ socFollow.name $}" aria-label="hoverboard:{$ socFollow.name $}" ></paper-icon-button>
             </a>
           </li>
         {% endfor %}
