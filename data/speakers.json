@@ -213,9 +213,9 @@
           "name": "Twitter"
         },
         {
-          "icon": "website",
+          "icon": "linkedin",
           "link": "https://www.linkedin.com/in/chrisrng",
-          "name": "Website"
+          "name": "LinkedIn"
         }
       ]
     },
@@ -313,7 +313,23 @@
           "id": "chatgptAsAnAiAssistant"
         }
       ],
-      "socials": []
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/mrinasugosh",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/mrinasugosh/",
+          "name": "LinkedIn"
+        },
+        {
+          "icon": "github",
+          "link": "https://github.com/mrinasugosh/",
+          "name": "Github"
+        }
+      ]
     },
     {
       "id": "toniDarden",
@@ -514,8 +530,8 @@
       "name": "Christopher J Baker",
       "company": "Bitovi",
       "country": "Unknown",
-      "photo": "https://secure.gravatar.com/avatar/86e2beaf7f5b0d1b81ae07b11b691999?s=500",
-      "photoUrl": "https://secure.gravatar.com/avatar/86e2beaf7f5b0d1b81ae07b11b691999?s=500",
+      "photo": "/images/speakers/ChristopherBaker.jpg",
+      "photoUrl": "/images/speakers/ChristopherBaker.jpg",
       "order": 0,
       "sessions": [
         {
