@@ -932,6 +932,20 @@
         "UX"
       ],
       "title": "Stop using JavaScript for that: moving features from JS to CSS and HTML"
+    },
+    {
+      "id": "shapeup",
+      "complexity": "All",
+      "description": "37signals pioneered “Shape Up” a macro-level methodology focused on product/engineering collaboration, which was developed by their former Head of Strategy, Ryan Singer. Shape Up helped 37signals manage periods of extensive growth and a rewrite of their flagship product from scratch for its 2.0 release. <br><br> In the Foreword to Singer's book, “Shape Up: Stop Running in Circles and Ship Work that Matters,” 37signals CEO Jason Fried explains that Shape Up does not require “daily stand ups, design sprints, development sprints, or anything remotely tied to a metaphor that includes being tired and worn out at the end. No backlogs, no Kanban, no velocity tracking, none of that.”<br><br> So what does “Shape Up” involve? <br><br> In this talk, Pinnacle 21 CTO Martin Snyder will cover the basics of this novel approach and share lessons learned from years of practice. <br><br> Pinnacle 21 is an early adopter of Shape Up and has scaled its implementation from a 30-person startup to being part of a 100+ person R&D organization at Certara, the company that acquired Pinnacle in 2021.",
+      "speakers": [
+        "martinSnyder"
+      ],
+      "tags": [
+        "collaboration",
+        "methodology",
+        "focus"
+      ],
+      "title": "Shaping Up Your Development Process with Shape Up"
     }
   ]
 }
