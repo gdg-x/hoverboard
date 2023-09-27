@@ -138,6 +138,32 @@ const _getPartnerItems = (groupId) => firebase.firestore()
   );
 
 const partnersActions = {
+
+  fetchPartners: () => (dispatch) => {
+    dispatch({
+      type: FETCH_PARTNERS,
+    });
+    const partnerPromise = new Promise(function (resolve) {
+      fetch('data/partners.json')
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (res) {
+          let partnersRaw = res.partners;
+          // console.log(partnersRaw);
+          resolve(partnersRaw);
+          dispatch({
+            type: FETCH_PARTNERS_SUCCESS,
+            payload: {
+              partnersRaw,
+            },
+          });
+        });
+    });
+  },
+};
+
+const npartnersActions = {
   addPartner: (data) => (dispatch) => {
     dispatch({
       type: ADD_POTENTIAL_PARTNER,
@@ -185,6 +211,7 @@ const partnersActions = {
       ))
       .then((groups) => groups.map(([group, id, items]) => Object.assign({}, group, { id, items })))
       .then((list) => {
+        // console.log(list)
         dispatch({
           type: FETCH_PARTNERS_SUCCESS,
           payload: {

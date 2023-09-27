@@ -1,0 +1,18 @@
+{
+    "partners": [
+        {
+            "id": "0",
+            "order": 1,
+            "title": "Our Sponsors",
+            "items": [
+                {
+                    "id": "comcast",
+                    "order": 0,
+                    "logoUrl": "../images/logos/ljs-comcast-logo.png",
+                    "name": "Comcast",
+                    "url": "https://corporate.comcast.com/"
+                }
+            ]
+        }
+    ]
+}
