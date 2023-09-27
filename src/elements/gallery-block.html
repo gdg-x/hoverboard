@@ -123,6 +123,17 @@
           padding: 24px;
           grid-area: 2 / 3 / 2 / 5;
         }
+
+        .see-all-button {
+          border: 2px solid transparent;
+          border-radius: 4px;
+        }
+
+        .see-all-button:focus-visible,
+        .see-all-button:hover {
+          box-shadow: 0 2px 7px 3px rgba(0, 0, 0, 0.14);
+          border-color: unset;
+        }
       }
 
     </style>
@@ -142,8 +153,8 @@
           <h2>{$ galleryBlock.title $}</h2>
           <p>{$ galleryBlock.description $}</p>
         </div>
-        <a href="{$ galleryBlock.callToAction.link $}" target="_blank" rel="noopener noreferrer">
-          <paper-button>{$ galleryBlock.callToAction.label $}</paper-button>
+        <a href="{$ galleryBlock.callToAction.link $}" target="_blank" rel="noopener noreferrer" tabindex="-1">
+          <paper-button class="see-all-button">{$ galleryBlock.callToAction.label $}</paper-button>
         </a>
       </div>
     </div>

@@ -124,7 +124,7 @@
       font-color="{$ heroSettings.team.fontColor $}"
       active="[[active]]"
     >
-      <div class="hero-title highlight-font">{$ heroSettings.team.title $}</div>
+      <h1 class="hero-title highlight-font">{$ heroSettings.team.title $}</h1>
       <p class="hero-description">{$ heroSettings.team.description $}</p>
     </hero-block>
 
@@ -144,6 +144,7 @@
           <template is="dom-repeat" items="[[team.members]]" as="member">
             <div class="member" layout horizontal>
               <plastic-image
+                alt=""
                 class="photo"
                 srcset="[[member.photoUrl]]"
                 sizing="cover"
@@ -155,7 +156,7 @@
                 <div class="activity">[[member.title]]</div>
                 <div class="contacts">
                   <template is="dom-repeat" items="[[member.socials]]" as="social">
-                    <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
+                    <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer" tabindex="-1">
                       <paper-icon-button 
                         class="social-icon" 
                         icon="hoverboard:{{social.icon}}"

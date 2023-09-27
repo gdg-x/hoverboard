@@ -12,7 +12,7 @@
     "deploy:prod": "cross-env BUILD_ENV=production gulp deploy",
     "donotusefirestore:init": "firebase firestore:delete -r --all-collections && firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && babel-node ./internals/import-default-data",
     "firestore:copy": "babel-node ./internals/firestore-copy-data",
-    "postinstall": "bower install",
+    "postinstall": "bower install; sh accessibility.sh",
     "serve": "gulp serve",
     "serve:prod": "cross-env BUILD_ENV=production gulp serve",
     "start": "npm run serve",
@@ -62,9 +62,6 @@
     "require-uncached": "^1.0.3",
     "sw-precache": "^5.2.0",
     "uglify-es": "^3.3.4"
-  },
-  "engines": {
-    "node": "12"
   },
   "private": true,
   "pre-commit": "lint"

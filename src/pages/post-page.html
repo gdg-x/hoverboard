@@ -43,6 +43,10 @@
         color: var(--primary-text-color);
       }
 
+      [slot="markdown-html"] a {
+        text-decoration: underline;
+      }
+
       [slot="markdown-html"] h1,
       [slot="markdown-html"] h2,
       [slot="markdown-html"] h3 {
@@ -96,7 +100,7 @@
       font-color="#fff"
       active="[[active]]"
     >
-      <div class="hero-title highlight-font">[[post.title]]</div>
+      <h1 class="hero-title highlight-font">[[post.title]]</h1>
     </hero-block>
 
     <div class="container-narrow">

@@ -37,12 +37,11 @@
         display: inline-block;
       }
 
-     .social-group.share-block {
+      .social-group.share-block {
         margin-bottom: 17px;
       }
 
       .share {
-        height: 30px;
         padding: 8px;
         width: 35px;
         display: inline-block;
@@ -181,6 +180,7 @@
             <a href="{$ socFollow.url $}"
                 target="_blank"
                 rel="noopener noreferrer"
+                tabindex="-1"
                 ga-on="click"
                 ga-event-category="social"
                 ga-event-action="follow"
@@ -194,7 +194,7 @@
 
     <div class="social-group email">
       <div class="title">
-        <a aria-label="{$ emailUs $}" href="mailto:{$ mailto $}">{$ emailUs $}</a>
+        <a aria-label="{$ emailUs $}" href="mailto:{$ mailto $}" target="_blank">{$ emailUs $}</a>
       </div>
     </div>
 

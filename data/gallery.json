@@ -1,40 +1,48 @@
 [
   {
+    "description": "Conference attendees sitting at a circular table, chatting",
     "order": "0",
     "url": "/images/gallery/2019/126.jpg",
     "id": "000"
   },
   {
+    "description": "View of the venue building in daylight, showing its beautiful partially reflective modern exterior",
     "order": "1",
     "url": "/images/gallery/2019/IntJWM06.jpg",
     "id": "001"
   },
   {
+    "description": "A presenter showing jQuery code in an editor",
     "order": "2",
     "url": "/images/gallery/2019/372.jpg",
     "id": "002"
   },
   {
+    "description": "Two conference attendees having a close conversation at a table: a man is saying something to a smiling woman. Both have laptops with many stickers.",
     "order": "3",
     "url": "/images/gallery/2019/153.jpg",
     "id": "003"
   },
   {
+    "description": "Three in-focus conference attendees at a table paying attention to something out-of-frame.",
     "order": "4",
     "url": "/images/gallery/2019/272.jpg",
     "id": "004"
   },
   {
+    "description": "Many assorted conference attendees smiling and laughing at something out of frame.",
     "order": "5",
     "url": "/images/gallery/2019/384.jpg",
     "id": "005"
   },
   {
+    "description": "Close-up of three assorted conference attendees smiling and laughing at something out of frame.",
     "order": "6",
     "url": "/images/gallery/2019/274.jpg",
     "id": "006"
   },
   {
+    "description": "Many conference attendees raising their hands and paying attention to something out of frame.",
     "order": "7",
     "url": "/images/gallery/2019/373.jpg",
     "id": "007"

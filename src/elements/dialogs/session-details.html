@@ -23,7 +23,11 @@
     <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
     <style>
       .section {
+        background: transparent;
+        border: none;
         cursor: pointer;
+        padding: 0;
+        text-align: left;
       }
     </style>
 
@@ -84,7 +88,7 @@
           <h3>{$ sessionDetails.speakers $}</h3>
 
           <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
-            <div class="section" on-tap="_openSpeaker" speaker-id$="[[speaker.id]]">
+            <button class="section" on-tap="_openSpeaker" speaker-id$="[[speaker.id]]">
               <div layout horizontal center>
                 <plastic-image class="section-photo" srcset="[[speaker.photoUrl]]" sizing="cover" lazy-load preload
                   fade></plastic-image>
@@ -96,7 +100,7 @@
                       hidden$="[[speaker.country]] == 'Unknown'">[[speaker.country]]</span></div>
                 </div>
               </div>
-            </div>
+            </button>
           </template>
         </div>
       </div>
