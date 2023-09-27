@@ -57,6 +57,15 @@
       "published": "2023-04-11",
       "source": "/data/posts/2023-04-11-cfp-stats.md",
       "title": "Retours sur le CFP de SunnyTech 2023"
+    },
+    "2023-volunteering": {
+      "backgroundColor": "#888888",
+      "brief": "",
+      "image": "/images/backgrounds/registration.jpg",
+      "content": "md",
+      "published": "2023-09-29",
+      "source": "/data/posts/2023-09-29-volunteering.md",
+      "title": "Être bénévole à SunnyTech, c'est quoi ?"
     }
   },
   "notifications": {
