@@ -149,13 +149,13 @@ const partnersActions = {
           return response.json();
         })
         .then(function (res) {
-          let partnersRaw = res.partners;
+          let list = res.partners;
           // console.log(partnersRaw);
-          resolve(partnersRaw);
+          resolve(list);
           dispatch({
             type: FETCH_PARTNERS_SUCCESS,
             payload: {
-              partnersRaw,
+              list,
             },
           });
         });
