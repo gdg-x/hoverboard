@@ -13,7 +13,6 @@
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
-
       :host {
         display: block;
       }
@@ -53,44 +52,34 @@
           grid-template-columns: repeat(5, 1fr);
         }
       }
-
     </style>
 
     <div class="container">
       <h1 class="container-title">{$ partnersBlock.title $}</h1>
 
       <template is="dom-repeat" items="[[partners]]" as="block">
-          <h4 class="block-title">[[block.title]]</h4>
-          <div class="logos-wrapper">
-            <template is="dom-repeat" items="[[block.items]]" as="logo">
-              <a
-                class="logo-item card"
-                href$="[[logo.url]]"
-                title$="[[logo.name]]"
-                target="_blank"
-                rel="noopener noreferrer"
-                layout horizontal center-center
-              >
-                <plastic-image
-                  class="logo-img"
-                  srcset="[[logo.logoUrl]]"
-                  sizing="contain"
-                  lazy-load
-                  preload fade
-                ></plastic-image>
-              </a>
-            </template>
-          </div>
+        <h4 class="block-title">[[block.title]]</h4>
+        <div class="logos-wrapper">
+          <template is="dom-repeat" items="[[block.items]]" as="logo">
+            <a class="logo-item card" href$="[[logo.url]]" title$="[[logo.name]]" target="_blank"
+              rel="noopener noreferrer" layout horizontal center-center>
+              <plastic-image class="logo-img" srcset="[[logo.logoUrl]]" sizing="contain" lazy-load preload
+                fade></plastic-image>
+            </a>
+          </template>
+        </div>
       </template>
 
 
-      <a href="https://docs.google.com/presentation/d/1YQH1ij3GsxpupgS6WPzJeg0DJKAMBHUZgnJAJNgDpnc/edit#slide=id.g543f1010fb_0_153" target="_blank">
+      <a href="https://docs.google.com/presentation/d/1kE5Ld_OsoohFZ4cuduJ7kHkbirx3CHh-Z6XmAG2sjjM/edit?usp=sharing"
+        target="_blank">
         <paper-button class="cta-button animated icon-right">
           <span>{$ partnersBlock.button $}</span>
           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
         </paper-button>
       </a>
-      <div>Interested in sponsoring? Email us at <a href="mailto:libertyjsconf@gmail.com">libertyjsconf@gmail.com</a></div>
+      <div>Interested in sponsoring? Email us at <a href="mailto:libertyjsconf@gmail.com">libertyjsconf@gmail.com</a>
+      </div>
     </div>
 
   </template>
