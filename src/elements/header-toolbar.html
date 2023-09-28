@@ -26,10 +26,6 @@
         color: var(--hero-font-color, '#fff');
       }
 
-      :host([transparent]) .toolbar-logo {
-        opacity: var(--hero-logo-opacity, 1);
-      }
-
       app-toolbar {
         margin: 0 auto;
         padding: 0 16px;
@@ -47,17 +43,55 @@
       }
 
       .nav-items {
+        font-size: 14px;
+        display: flex;
+        position: relative;
+        padding-right: 1rem;
         --paper-tabs-selection-bar-color: var(--default-primary-color);
         --paper-tabs: {
-          height: 64px;
+          height: 56px;
         };
       }
 
-      .nav-item a,
-      .signin-tab {
-        padding: 0 14px;
+      .nav-items::after {
+        background: var(--primary-color-transparent);
+        content: "";
+        display: block;
+        height: 40%;
+        position: relative;
+        top: 0;
+        width: 1px;
+        left: 0.5rem;
+      }
+
+      .nav-item {
+        background: none;
+        border: 3px solid transparent;
         color: inherit;
+        cursor: pointer;
+        padding: 0 8px;
         text-transform: uppercase;
+        transition: 350ms color;
+      }
+
+      .nav-item:hover {
+        color: var(--primary-gold);
+      }
+
+      .nav-item:focus-visible {
+        border-color: unset;
+      }
+
+      .signIn {
+        margin-right: 4px;
+        padding: 4px 10px;
+      }
+
+      .buyTicket {
+        background-color: var(--default-primary-color);
+        color: var(--text-primary-color);
+        font-size: 14px;
+        padding: 4px 10px;
       }
 
       .profile-image {
@@ -134,30 +168,27 @@
         ></paper-icon-button>
       </div>
       <div layout horizontal center flex>
-        <a class="toolbar-logo" href="/" hidden$="[[!viewport.isLaptopPlus]]" layout horizontal title="{$ title $}"></a>
+        <a class="toolbar-logo" href="/" layout horizontal title="{$ title $}"></a>
       </div>
 
-      <paper-tabs
+      <div
         class="nav-items"
         selected="[[route.route]]"
         attr-for-selected="name"
-        hidden$="[[!viewport.isLaptopPlus]]"
-        role="tablist"
         noink
+        role="menubar"
       >
         {% for nav in navigation %}
-        <paper-tab name="{$ nav.route $}" class="nav-item" link>
-          <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.label $}</a>
-        </paper-tab>
+        <a name="{$ nav.route $}" role="menuitem" class="nav-item" href="{$ nav.permalink $}" layout vertical center-center>{$ nav.label $}</a>
         {% endfor %}
+      </div>
 
-        <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
+      <button class="nav-item signIn" on-tap="signIn" hidden$="[[user.signedIn]]">{$ signIn $}</button>
 
-        <a href="https://libertyjs.ticketspice.com/libertyjs-2023" target="_blank" rel="noopener noreferrer" ga-on="click" role="tab"
-           ga-event-category="ticket button" ga-event-action="buy_click">
-          <paper-button disabled class="buy-button" primary>{$ buyTicket $}</paper-button>
-        </a>
-      </paper-tabs>
+      <a class="nav-item buyTicket" href="https://libertyjs.ticketspice.com/libertyjs-2023" target="_blank" rel="noopener noreferrer" ga-on="click"
+         ga-event-category="ticket button" ga-event-action="buy_click">
+         {$ buyTicket $}
+      </a>
 
       <paper-menu-button
         id="notificationsMenu"
@@ -349,7 +380,7 @@
         if (!settings) return;
         this.updateStyles({
           '--hero-font-color': settings.fontColor || '',
-          '--hero-logo-opacity': settings.hideLogo ? '0' : '1',
+          '--hero-logo-opacity': '1',
           '--hero-logo-color': settings.backgroundImage ? '#fff' : 'var(--default-primary-color)',
         });
       }

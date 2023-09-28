@@ -27,6 +27,13 @@
         height: 100%;
       }
 
+      .hero-title {
+        color: #424242;
+        font-size: 40px;
+        padding-left: 0;
+        margin: 30px 0;
+      }
+
       .container {
         display: grid;
         grid-template-columns: 1fr;
@@ -177,7 +184,7 @@
       }
     </style>
 
-    <polymer-helmet title="{$ heroSettings.speakers.title $} | {$ title $}"
+    <polymer-helmet title="Speakers | {$ title $}"
       description="{$ heroSettings.speakers.metaDescription $}"
       active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"></polymer-helmet>
 
@@ -185,11 +192,15 @@
 
     <app-route route="[[route]]" pattern="/:speakerId" data="{{routeData}}"></app-route>
 
+    <main>
     <hero-block background-image="{$ heroSettings.speakers.background.image $}"
       background-color="{$ heroSettings.speakers.background.color $}" font-color="{$ heroSettings.speakers.fontColor $}"
       active="[[active]]">
+      <h1 class="hero-title highlight-font">LibertyJS Speakers</h1>
+    </hero-block>
 
       <div>
+
         <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
         <filter-menu filters="[[_filters]]" selected="[[_selectedFilters]]"
@@ -205,7 +216,7 @@
               ga-event-action="open details" ga-event-label$="[[speaker.name]]">
               <div relative>
                 <plastic-image class="photo" srcset="[[speaker.photoUrl]]" sizing="cover"
-                  alt="[[speaker.name]] headshot" aria-label="[[speaker.name]] headshot" lazy-load preload
+                  alt="" lazy-load preload
                   fade></plastic-image>
                 <div class="badges" layout horizontal>
                   <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
@@ -218,9 +229,6 @@
               </div>
         </div>
 
-        <plastic-image class="company-logo" srcset="[[speaker.companyLogoUrl]]" sizing="contain" lazy-load preload
-          fade></plastic-image>
-
         <div class="description">
           <h2 class="name">[[speaker.name]]</h2>
           <div class="origin" hidden$="[[!speaker.company]]">[[speaker.company]]</div>
@@ -232,7 +240,7 @@
 
         <div class="contacts">
           <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-            <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
+            <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer" tabindex="-1">
               <paper-icon-button class="social-icon" icon="hoverboard:{{social.icon}}"
                 aria-label="[[speaker.name]] [[social.name]]"></paper-icon-button>
             </a>
@@ -242,7 +250,7 @@
         </a>
   </template>
   </div>
-
+</main>
   <footer-block></footer-block>
 
   </template>

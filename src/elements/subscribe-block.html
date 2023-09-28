@@ -33,6 +33,17 @@
         color: #fff;
       }
 
+      .subscribe-button {
+        border: 2px solid transparent;
+        border-radius: 4px;
+      }
+
+      .subscribe-button:focus-visible,
+      .subscribe-button:hover {
+        box-shadow: 0 2px 7px 3px rgba(0, 0, 0, 0.14);
+        border-color: unset;
+      }
+
       @media (min-width: 640px) {
         :host {
           padding: 32px 0;
@@ -51,7 +62,7 @@
     <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
       <div class="description"> {$ subscribeBlock.callToAction.description $}</div>
       <div class="cta-button">
-        <paper-button class="animated icon-right"
+        <paper-button class="subscribe-button animated icon-right"
                       disabled$="[[subscribed]]"
                       on-tap="_subscribe"
                       ga-on="click"

@@ -65,6 +65,7 @@
     <template is="dom-repeat" items="[[posts]]" as="post">
       <a href$="/blog/posts/[[post.id]]/" class="post" layout horizontal>
         <plastic-image
+          alt=""
           class="image"
           srcset="[[post.image]]"
           style$="background-color: [[post.backgroundColor]];"

@@ -94,10 +94,13 @@
             </template>
           </template>
         </template>
-        <paper-tab class="nav-item" day="my-schedule" hidden$="[[!user.signedIn]]" link>
-          <a href$="[[_addQueryParams('my-schedule', queryParams)]]" layout vertical center-center>{$ mySchedule.title
-            $}</a>
-        </paper-tab>
+        <template is="dom-if" if="[[user.signedIn]]">
+          <a href$="[[_addQueryParams('my-schedule', queryParams)]]" layout vertical center-center tabindex="-1">
+            <paper-tab class="nav-item" day="my-schedule" link>
+              {$ mySchedule.title $}
+            </paper-tab>
+          </a>
+        </template>
       </paper-tabs>
     </app-toolbar>
 
