@@ -83,7 +83,7 @@
     "@types/node": "^20.5.9",
     "@types/nunjucks": "^3.2.4",
     "@types/polymer": "^1.2.13",
-    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
     "@web/rollup-plugin-html": "^2.0.1",
     "concurrently": "^8.2.1",
