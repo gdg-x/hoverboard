@@ -59,7 +59,7 @@
     "@radi-cho/star-rating": "git+https://git@github.com/abraham/star-rating.git#polymer-3",
     "@reduxjs/toolkit": "^1.9.5",
     "@vaadin/router": "^1.7.5",
-    "firebase": "^9.23.0",
+    "firebase": "^10.4.0",
     "lit": "^2.8.0",
     "marked": "^5.1.0",
     "pwa-helpers": "^0.9.1",
@@ -67,7 +67,7 @@
     "web-vitals": "^3.3.2"
   },
   "devDependencies": {
-    "@firebase/rules-unit-testing": "^2.0.7",
+    "@firebase/rules-unit-testing": "^3.0.1",
     "@jest/globals": "^29.6.4",
     "@jest/types": "^29.4.3",
     "@rollup/plugin-json": "^6.0.0",
