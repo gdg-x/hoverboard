@@ -28,6 +28,10 @@ updates:
       firebase:
         patterns:
           - '*firebase*'
+      markdown:
+        patterns:
+          - 'markdownlint*'
+          - 'marked'
   - package-ecosystem: npm
     directory: '/functions'
     schedule:
