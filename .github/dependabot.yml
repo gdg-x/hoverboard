@@ -9,6 +9,25 @@ updates:
     schedule:
       interval: monthly
     open-pull-requests-limit: 25
+    groups:
+      rollup:
+        patterns:
+          - '*rollup*'
+      jest:
+        patterns:
+          - '*jest*'
+      eslint:
+        patterns:
+          - 'eslint*'
+      material:
+        patterns:
+          - '@material/*'
+      stylelint:
+        patterns:
+          - '*stylelint*'
+      firebase:
+        patterns:
+          - '*firebase*'
   - package-ecosystem: npm
     directory: '/functions'
     schedule:
