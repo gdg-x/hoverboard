@@ -27,6 +27,16 @@
         grid-gap: 8px;
       }
 
+      .logos-wrapper.small {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+
+      }
+
+      .logos-wrapper.small .logo-item {
+        padding: 18px;
+
+      }
+
       .logo-item {
         padding: 24px;
       }
@@ -59,7 +69,7 @@
 
       <template is="dom-repeat" items="[[partners]]" as="block">
         <h4 class="block-title">[[block.title]]</h4>
-        <div class="logos-wrapper">
+        <div class$="{{block.className}} logos-wrapper">
           <template is="dom-repeat" items="[[block.items]]" as="logo">
             <a class="logo-item card" href$="[[logo.url]]" title$="[[logo.name]]" target="_blank"
               rel="noopener noreferrer" layout horizontal center-center>
