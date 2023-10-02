@@ -3,6 +3,7 @@
         {
             "id": "0",
             "order": 1,
+            "className": "",
             "title": " ",
             "items": [
                 {
@@ -11,6 +12,28 @@
                     "logoUrl": "../images/logos/ljs-comcast-logo.png",
                     "name": "Comcast",
                     "url": "https://corporate.comcast.com/"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "order": 2,
+            "className": "small",
+            "title": "Travel and Media Sponsors",
+            "items": [
+                {
+                    "id": "devit",
+                    "order": 0,
+                    "logoUrl": "../images/2023-partners/devit.png",
+                    "name": "DevIT",
+                    "url": "https://devitjobs.us//"
+                },
+                {
+                    "id": "runme",
+                    "order": 0,
+                    "logoUrl": "../images/2023-partners/runme-dark.png",
+                    "name": "Run Me",
+                    "url": "https://runme.dev/"
                 }
             ]
         }
