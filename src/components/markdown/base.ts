@@ -1,12 +1,11 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { marked } from 'marked';
+import { gfmHeadingId } from 'marked-gfm-heading-id';
 import { hasUnsupportedTags, unsupportedHtmlTags } from '../../utils/markdown';
 import { ThemedElement } from '../themed-element';
 
-marked.setOptions({
-  headerIds: true,
-});
+marked.use(gfmHeadingId());
 
 export class Markdown extends ThemedElement {
   static override get styles() {
