@@ -344,14 +344,18 @@
               ]
             },
             {
-              "startTime": "15:30",
-              "endTime": "16:30",
-              "sessions": []
-            },
-            {
-              "startTime": "16:20",
-              "endTime": "17:00",
-              "sessions": []
+              "startTime": "16:00",
+              "endTime": "18:00",
+              "sessions": [
+                {
+                  "items": [
+                    "afterparty"
+                  ],
+                  "track": {
+                    "title": "22 S 3rd St, Philadelphia, PA 19106"
+                  }
+                }
+              ]
             }
           ],
           "tracks": [

@@ -43,9 +43,9 @@
     },
     {
       "id": "afterparty",
-      "complexity": "All",
-      "description": "Eat, drink and be merry.",
-      "shortDescription": "Eat, drink and be merry.",
+      "complexity": "National Mechanics",
+      "description": "Eat, drink and be merry. Drink tickets provided.",
+      "shortDescription": "Eat, drink and be merry. Drink tickets provided.",
       "speakers": [],
       "tags": [
         "food"
