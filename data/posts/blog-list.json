@@ -1,9 +1,17 @@
 {
+  "2023-lunch-announcement": {
+    "backgroundColor": "#5a7785",
+    "brief": "We’re excited to be trying something new!",
+    "image": "https://firebasestorage.googleapis.com/v0/b/libertyjs-staging.appspot.com/o/gallery%2F454.jpg?alt=media&token=49a04695-f24f-4a1a-839f-1473515761ab",
+    "published": "2023-09-20",
+    "source": "/data/posts/2023-lunch-announcement.md",
+    "title": "A New Plan for Lunch This Year"
+  },
   "2023-return-announcement": {
     "backgroundColor": "#5a7785",
     "brief": "LibertyJS dates secured October 12th and 13th 2023. Welcome back.",
     "image": "https://firebasestorage.googleapis.com/v0/b/libertyjs-staging.appspot.com/o/gallery%2F454.jpg?alt=media&token=49a04695-f24f-4a1a-839f-1473515761ab",
-    "published": "2022-01-09",
+    "published": "2023-01-09",
     "source": "/data/posts/2023-liberty-js-returns.md",
     "title": "LibertyJS returns in October of 2023"
   },
