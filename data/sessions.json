@@ -43,14 +43,14 @@
     },
     {
       "id": "afterparty",
-      "complexity": "National Mechanics",
-      "description": "Eat, drink and be merry. Drink tickets provided.",
+      "complexity": "",
+      "description": "Eat, drink and be merry. Drink tickets provided. ",
       "shortDescription": "Eat, drink and be merry. Drink tickets provided.",
       "speakers": [],
       "tags": [
         "food"
       ],
-      "title": "After Party"
+      "title": "Afterparty"
     },
     {
       "id": "closingremarks",
@@ -946,6 +946,17 @@
         "focus"
       ],
       "title": "Shaping Up Your Development Process with Shape Up"
+    },
+    {
+      "id": "afterparty23",
+      "complexity": "",
+      "description": "Eat, drink, and be merry. Drink tickets provided.",
+      "shortDescription": "Eat, drink, and be merry. Drink tickets provided.",
+      "speakers": [],
+      "tags": [
+        "food"
+      ],
+      "title": "Afterparty sponsored in part by Apostrophe"
     }
   ]
 }
