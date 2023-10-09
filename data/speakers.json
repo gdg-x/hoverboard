@@ -671,7 +671,7 @@
       "featured": false,
       "bio": "Martin is a technology executive with extensive experience in the software industry that includes building and driving high-performance product development organizations. He is currently Vice President of Engineering at Pinnacle 21, which enables Life Sciences organizations to measure and improve the quality of their submission data. Pinnacle 21 was acquired by Certara in 2022, where he now serves as VP of Engineering for the Cloud Data Science team.<br><br> He is also an active member of the technology community as an organizer and frequent presenter for regional conferences and events, serving as leader of the Philadelphia Java User Group for three years and co-leader of the Philadelphia Area Scala Enthusiasts for four years. He has served on the programming committee for multi-day conferences including Philly ETE and The Northeast Scala Symposium, and his presentation credits include BoxWorks, LibertyJS, Philly JUG, Philly ETE, React Philly, and Northeast Scala Symposium. He has published and presented on a variety of topics over the years, most recently on Scala, JavaScript, and Functional Programming.",
       "name": "Martin Snyder",
-      "company": "Pinnacle 21",
+      "company": "Certara",
       "country": "",
       "photo": "/images/speakers/MartinSnyder.jpg",
       "photoUrl": "/images/speakers/MartinSnyder.jpg",
@@ -681,7 +681,18 @@
           "id": "shapeup"
         }
       ],
-      "socials": []
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://www.twitter.com/MartinSnyder",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://martinsnyder.net",
+          "name": "Website"
+        }
+      ]
     }
   ]
 }
