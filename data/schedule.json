@@ -241,7 +241,8 @@
                     "letsBuildTheLibertyjsVscodeExtensionTogether"
                   ],
                   "trackNum": 3,
-                  "startCol": 3
+                  "startCol": 3,
+                  "extend": 2
                 }
               ]
             },
@@ -319,7 +320,8 @@
                     "makingWebsitesSmartAndQwik"
                   ],
                   "trackNum": 3,
-                  "startCol": 3
+                  "startCol": 3,
+                  "extend": 2
                 }
               ]
             },
