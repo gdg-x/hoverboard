@@ -79,6 +79,7 @@
         color: currentColor;
         user-select: none;
         cursor: pointer;
+        display: none;
       }
 
       .scroll-down svg {
@@ -125,6 +126,12 @@
           left: 50%;
           transform: translateX(-50%);
           z-index: 2;
+        }
+      }
+
+      @media (min-width: 812px) {
+        .scroll-down {
+          display: block;
         }
       }
 
