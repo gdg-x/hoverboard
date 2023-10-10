@@ -8,7 +8,6 @@
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
     <style>
-
       :host {
         --iron-icon-fill-color: currentColor;
         display: block;
@@ -44,13 +43,16 @@
 
       .nav-items {
         font-size: 14px;
-        display: flex;
+        display: none;
         position: relative;
         padding-right: 1rem;
         --paper-tabs-selection-bar-color: var(--default-primary-color);
+
         --paper-tabs: {
           height: 56px;
-        };
+        }
+
+        ;
       }
 
       .nav-items::after {
@@ -154,54 +156,40 @@
           padding: 0 36px;
           height: initial;
         }
-      }
 
+        .nav-items {
+          display: flex;
+        }
+      }
     </style>
 
     <app-toolbar class="header">
       <div>
-        <paper-icon-button
-          icon="hoverboard:menu"
-          hidden$="[[viewport.isLaptopPlus]]"
-          aria-label="menu"
-          on-tap="openDrawer"
-        ></paper-icon-button>
+        <paper-icon-button icon="hoverboard:menu" hidden$="[[viewport.isLaptopPlus]]" aria-label="menu"
+          on-tap="openDrawer"></paper-icon-button>
       </div>
       <div layout horizontal center flex>
         <a class="toolbar-logo" href="/" layout horizontal title="{$ title $}"></a>
       </div>
 
-      <div
-        class="nav-items"
-        selected="[[route.route]]"
-        attr-for-selected="name"
-        noink
-        role="menubar"
-      >
+      <div class="nav-items" selected="[[route.route]]" attr-for-selected="name" noink role="menubar">
         {% for nav in navigation %}
-        <a name="{$ nav.route $}" role="menuitem" class="nav-item" href="{$ nav.permalink $}" layout vertical center-center>{$ nav.label $}</a>
+        <a name="{$ nav.route $}" role="menuitem" class="nav-item" href="{$ nav.permalink $}" layout vertical
+          center-center>{$ nav.label $}</a>
         {% endfor %}
       </div>
 
       <button class="nav-item signIn" on-tap="signIn" hidden$="[[user.signedIn]]">{$ signIn $}</button>
 
-      <a class="nav-item buyTicket" href="https://libertyjs.ticketspice.com/libertyjs-2023" target="_blank" rel="noopener noreferrer" ga-on="click"
-         ga-event-category="ticket button" ga-event-action="buy_click">
-         {$ buyTicket $}
+      <a class="nav-item buyTicket" href="https://libertyjs.ticketspice.com/libertyjs-2023" target="_blank"
+        rel="noopener noreferrer" ga-on="click" ga-event-category="ticket button" ga-event-action="buy_click">
+        {$ buyTicket $}
       </a>
 
-      <paper-menu-button
-        id="notificationsMenu"
-        class="notifications-menu"
-        vertical-align="top"
-        horizontal-align="right"
-        no-animations
-      >
-        <paper-icon-button
-          icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
-          slot="dropdown-trigger"
-          aria-label="notifications"
-        ></paper-icon-button>
+      <paper-menu-button id="notificationsMenu" class="notifications-menu" vertical-align="top" horizontal-align="right"
+        no-animations>
+        <paper-icon-button icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]" slot="dropdown-trigger"
+          aria-label="notifications"></paper-icon-button>
         <div class="dropdown-panel" slot="dropdown-content">
           <div hidden$="[[_hideNotificationBlock(notifications.status, 'DEFAULT')]]">
             <p>{$ notifications.default $}</p>
@@ -227,22 +215,12 @@
         </div>
       </paper-menu-button>
 
-      <paper-menu-button
-        class="auth-menu"
-        hidden$="[[!user.signedIn]]"
-        vertical-align="top"
-        horizontal-align="right"
-        no-animations
-        layout horizontal center-center>
-        <div
-          class="profile-image" slot="dropdown-trigger"
-          style$="background-image: url('[[user.photoURL]]')"
-        ></div>
+      <paper-menu-button class="auth-menu" hidden$="[[!user.signedIn]]" vertical-align="top" horizontal-align="right"
+        no-animations layout horizontal center-center>
+        <div class="profile-image" slot="dropdown-trigger" style$="background-image: url('[[user.photoURL]]')"></div>
         <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>
-          <div
-            class="profile-image" slot="dropdown-trigger" self-center
-            style$="background-image: url('[[user.photoURL]]')"
-          ></div>
+          <div class="profile-image" slot="dropdown-trigger" self-center
+            style$="background-image: url('[[user.photoURL]]')"></div>
           <div layout vertical center-justified>
             <span class="profile-name">[[user.displayName]]</span>
             <span class="profile-email">[[user.email]]</span>
@@ -251,12 +229,9 @@
         </div>
       </paper-menu-button>
 
-      <paper-icon-button
-        icon="hoverboard:account"
-        on-tap="signIn"
+      <paper-icon-button icon="hoverboard:account" on-tap="signIn"
         hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isLaptopPlus)]]"
-        aria-label="Account Sign-in"
-      ></paper-icon-button>
+        aria-label="Account Sign-in"></paper-icon-button>
     </app-toolbar>
 
   </template>
