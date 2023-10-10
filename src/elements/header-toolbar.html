@@ -25,6 +25,9 @@
         color: var(--hero-font-color, '#fff');
       }
 
+      :host([transparent]) .toolbar-logo {
+        opacity: var(--hero-logo-opacity, 1);
+      }
       app-toolbar {
         margin: 0 auto;
         padding: 0 16px;
@@ -172,7 +175,7 @@
           on-tap="openDrawer"></paper-icon-button>
       </div>
       <div layout horizontal center flex>
-        <a class="toolbar-logo" href="/" layout horizontal title="{$ title $}"></a>
+        <a class="toolbar-logo" href="/" hidden$="[[!viewport.isLaptopPlus]]" layout horizontal title="{$ title $}"></a>
       </div>
 
       <div class="nav-items" selected="[[route.route]]" attr-for-selected="name" noink role="menubar">
