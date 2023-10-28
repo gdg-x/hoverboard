@@ -4,12 +4,18 @@
     "indexes": "firestore.indexes.json"
   },
   "functions": {
-    "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"],
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run build"
+    ],
     "source": "functions"
   },
   "hosting": {
     "public": "dist",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "rewrites": [
       {
         "source": "**",
