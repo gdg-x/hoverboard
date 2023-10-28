@@ -297,7 +297,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   private scrollToTickets() {
-    const element = this.$['tickets'];
+    const element = this.$['tickets-block'];
     if (element) {
       scrollToElement(element);
     } else {

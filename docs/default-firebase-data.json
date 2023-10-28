@@ -29,16 +29,6 @@
     "https://firebasestorage.googleapis.com/v0/b/sunnytech-2023.appspot.com/o/miniature-site%2F7.jpg?alt=media&token=f126aaab-1082-4f8e-b253-0c16936d8804",
     "https://firebasestorage.googleapis.com/v0/b/sunnytech-2023.appspot.com/o/miniature-site%2F8.jpg?alt=media&token=f7cf3ce4-8d6e-4056-a409-a16eabe48f72"
   ],
-  "becomeSponsorGallery": [
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_6473.jpg?alt=media&token=74cf0b96-5f93-4be9-b150-389b700b1447",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_5940.jpg?alt=media&token=9956bab1-a4a1-4022-bbd9-5e479df3bd26",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_5668.jpg?alt=media&token=54d7106e-6011-4048-868c-1122116f77ec",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_6103.jpg?alt=media&token=fe4e83ee-c69f-4540-af31-6ceaf14c7cb3",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1759.jpg?alt=media&token=06df15fd-6a8e-484f-8b1f-e59ea134de3d",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1770.jpg?alt=media&token=8da5b16e-98ec-4906-83ed-14550ca2e27f",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1721.jpg?alt=media&token=52f977fa-307a-4812-b254-85d04a58f8fb",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1717.jpg?alt=media&token=d42f8de2-8a7b-4f48-85f0-b38967d3571f"
-  ],
   "blog": {
     "2022-cfp-stats": {
       "backgroundColor": "#888888",
@@ -67,16 +57,6 @@
       "source": "/data/posts/2023-09-29-volunteering.md",
       "title": "Être bénévole à SunnyTech, c'est quoi ?"
     }
-  },
-  "notifications": {
-    "config": {
-      "icon": "",
-      "timezone": "+02:00"
-    },
-    "messages": {},
-    "subscribers": {},
-    "test": {},
-    "users": {}
   },
   "partners": [
     {

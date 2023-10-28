@@ -22,6 +22,7 @@ export class FooterSocial extends PolymerElement {
           margin: 0 20px 0 20px;
           display: block;
         }
+
         .title {
           display: inline-block;
           text-transform: uppercase;
@@ -29,22 +30,28 @@ export class FooterSocial extends PolymerElement {
           margin: 0;
           color: var(--footer-text-color);
         }
+
         .nav-inline li a {
           padding: 0;
         }
+
         .nav-inline {
           display: inline;
           margin: 0 55px 0 4px;
         }
+
         ul.nav-inline {
           padding-left: 10px;
         }
+
         .nav-inline li {
           display: inline-block;
         }
+
         .social-group.share-block {
           margin-bottom: 17px;
         }
+
         .share {
           height: 30px;
           padding: 8px;
@@ -52,77 +59,97 @@ export class FooterSocial extends PolymerElement {
           display: inline-block;
           margin: 0;
         }
+
         .share-twitter {
           color: var(--twitter-color);
         }
+
         .share-facebook {
           color: var(--facebook-color);
         }
+
         a {
           display: inline-block;
           margin: 0;
           color: var(--footer-text-color);
           text-decoration: none;
         }
+
         .social-group {
           margin-right: 0;
           margin-bottom: 10px;
           padding-top: 0;
         }
+
         .email {
           margin-bottom: 20px;
           width: 85px;
         }
+
         .email .title {
           padding-right: 0;
           padding-top: 17px;
         }
+
         .email a {
           border-bottom: 1px solid var(--footer-text-color);
           padding-bottom: 1px;
         }
+
         .social-networks {
           margin-bottom: -10px;
         }
+
         .social-networks,
         .blog {
           padding-top: 0;
         }
+
         .social-networks ul {
           list-style-type: disc;
         }
+
         .blog .title {
           padding-right: 55px;
         }
+
         .blog a {
           border-bottom: 1px solid var(--footer-text-color);
           padding-bottom: 1px;
         }
+
         @media (min-width: 768px) {
           :host {
             margin: 15px 0;
           }
         }
+
         @media (min-width: 439px) {
           :host {
             display: inline-flex;
           }
+
           .social-group,
           .social-networks,
           .email {
             margin-bottom: 0;
           }
+
+
           .social-group {
             margin-right: 0;
           }
+
           .social-networks {
             padding-top: 8px;
           }
+
           .blog {
             padding-top: 17px;
           }
         }
       </style>
+
       <div class="social-group share-block">
         <div class="title">[[resources.share]]</div>
         <div class="nav-inline">
@@ -146,6 +173,7 @@ export class FooterSocial extends PolymerElement {
           </div>
         </div>
       </div>
+
       <div class="social-group blog">
         <div class="title">
           [[followOur]]
@@ -159,6 +187,7 @@ export class FooterSocial extends PolymerElement {
           </template>
         </div>
       </div>
+
       <div class="social-group social-networks">
         <div class="title">[[followUs]]</div>
         <ul class="nav-inline">
@@ -171,6 +200,7 @@ export class FooterSocial extends PolymerElement {
           </template>
         </ul>
       </div>
+
       <div class="social-group email">
         <div class="title">
           <a aria-label="[[emailUs]]" href="mailto:[[mailto]]">[[emailUs]]</a>

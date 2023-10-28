@@ -11,6 +11,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "project": ["tsconfig.json", "functions/tsconfig.json"],
     "sourceType": "module",
     "ecmaVersion": 2020
   },
@@ -32,6 +33,9 @@
     }
   },
   "rules": {
+    "@typescript-eslint/unbound-method": "warn",
+    "jest/unbound-method": "warn",
+    "jest/max-expects": ["warn", { "max": 10 }],
     "brace-style": "off",
     "new-cap": "off",
     "no-var": "error",
@@ -45,7 +49,8 @@
     "linebreak-style": 0,
     "jest/no-hooks": "off",
     "jest/prefer-expect-assertions": "off",
-    "jest/require-hook": "off"
+    "jest/require-hook": "off",
+    "testing-library/no-node-access": "warn"
   },
   "overrides": [
     {

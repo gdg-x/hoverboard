@@ -1,3 +1,4 @@
+// TODO: enable imports
 // import '@polymer/iron-icon';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';

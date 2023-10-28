@@ -2,19 +2,18 @@
 
 import json from '@rollup/plugin-json';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
-import html from '@web/rollup-plugin-html';
+import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
 import fs from 'fs';
+import { RollupOptions } from 'rollup';
 import copy from 'rollup-plugin-copy';
 import livereload from 'rollup-plugin-livereload';
-import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
-import { compileBufferTemplate, production } from './utils/build';
+import { compileBufferTemplate, production, watch } from './utils/build';
 import { workboxConfig } from './workbox.config';
 
-const { ROLLUP_WATCH } = process.env;
-
-export default [
+const config: RollupOptions[] = [
   {
     input: 'src/firebase-messaging-sw.ts',
     treeshake: production,
@@ -73,7 +72,9 @@ export default [
       }),
       production && generateSW(workboxConfig),
       production && terser(),
-      ROLLUP_WATCH && livereload({ watch: 'dist' }),
+      watch && livereload({ watch: 'dist' }),
     ],
   },
 ];
+
+export default config;

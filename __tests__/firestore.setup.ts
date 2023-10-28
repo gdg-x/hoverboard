@@ -9,11 +9,13 @@ import {
 import { afterAll, beforeAll } from '@jest/globals';
 import { doc, setDoc } from 'firebase/firestore';
 import { setup, teardown } from 'jest-dev-server';
+import { SpawndChildProcess } from 'spawnd';
 
 let testEnv: RulesTestEnvironment;
+let servers: SpawndChildProcess[] = [];
 
 beforeAll(async () => {
-  await setup({
+  servers = await setup({
     command: 'npx firebase emulators:start --only firestore',
     launchTimeout: 30000,
     port: 8080,
@@ -22,7 +24,7 @@ beforeAll(async () => {
 }, 30000);
 
 afterAll(async () => {
-  await teardown();
+  await teardown(servers);
 });
 
 interface SetupApp {

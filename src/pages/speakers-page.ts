@@ -9,7 +9,6 @@ import '../components/hero/simple-hero';
 import '../components/text-truncate';
 import '../elements/content-loader';
 import '../elements/filter-menu';
-// import '../elements/previous-speakers-block';
 import '../elements/shared-styles';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
@@ -252,8 +251,6 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
           </a>
         </template>
       </div>
-
-<!--      <previous-speakers-block></previous-speakers-block>-->
 
       <footer-block></footer-block>
     `;

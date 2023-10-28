@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { beforeEach, describe, it } from '@jest/globals';
 import { screen } from '@testing-library/dom';
 import { mocked } from 'jest-mock';
@@ -62,11 +61,11 @@ describe('hero-block', () => {
     const slots = shadowRoot.querySelectorAll('slot');
     expect(slots).toHaveLength(2);
     expect(screen.getByText('default slot')).toBeVisible();
-    // expect(slots[0]).not.toHaveAttribute('name');
-    // expect(slots[0]!.assignedElements()[0]).toHaveTextContent('default slot');
-    // expect(screen.getByText('bottom slot')).toBeVisible();
-    // expect(slots[1]).toHaveAttribute('name', 'bottom');
-    // expect(slots[1]!.assignedElements()[0]).toHaveTextContent('bottom slot');
+    expect(slots[0]).not.toHaveAttribute('name');
+    expect(slots[0]!.assignedElements()[0]).toHaveTextContent('default slot');
+    expect(screen.getByText('bottom slot')).toBeVisible();
+    expect(slots[1]).toHaveAttribute('name', 'bottom');
+    expect(slots[1]!.assignedElements()[0]).toHaveTextContent('bottom slot');
   });
 
   it('renders an image', async () => {

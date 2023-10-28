@@ -2,6 +2,7 @@ import { Session } from '../models/session';
 import { timezoneOffset } from './data';
 
 const THREE_WEEK_MS = 20 * 24 * 60 * 60 * 1000;
+const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const ONE_MINUTE_MS = 60 * 1000;
 
 export const acceptingFeedback = (session: Session): boolean => {

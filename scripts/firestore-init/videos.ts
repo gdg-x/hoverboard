@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { firestore } from '../firebase-config';
 import data from '../../docs/default-firebase-data.json';
 

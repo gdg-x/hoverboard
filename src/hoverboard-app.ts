@@ -200,7 +200,7 @@ export class HoverboardApp extends PolymerElement {
         </app-drawer>
 
         <app-header-layout id="headerLayout" fullbleed>
-          <app-header id="header" slot="header" condenses fixed hidden$="[[noLayoutPage]]">
+          <app-header id="header" slot="header" condenses fixed>
             <header-toolbar drawer-opened="{{drawerOpened}}"></header-toolbar>
           </app-header>
 

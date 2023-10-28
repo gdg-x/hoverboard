@@ -94,7 +94,6 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
             max-width: 95vw;
           }
 
-
           .grid {
             display: grid;
             grid-column-gap: 16px;

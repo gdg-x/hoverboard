@@ -75,7 +75,7 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
             hidden$="[[!subscribed.data]]"
           ></iron-icon>
         </paper-input>
-        <paper-button class="cta-button" on-click="subscribe" disabled="[[disabled]]" layout self-end>
+        <paper-button on-click="subscribe" disabled="[[disabled]]" layout self-end>
           [[ctaLabel]]
         </paper-button>
       </div>

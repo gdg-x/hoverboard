@@ -2,7 +2,6 @@
   "basepath": "/",
   "url": "https://sunny-tech.io/",
   "analytics": "UA-110450364-2",
-  "prefix": "/",
   "googleMapApiKey": "AIzaSyBa8D7jHmFlW5c6vq1wH0cgIQK-PYmgL-A",
   "googleMapApiKeyLocationPage": "AIzaSyCLm7pg_j2saGdngKloqi97VDiIGwQ1H6w"
 }

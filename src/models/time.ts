@@ -10,6 +10,4 @@ interface TimeWithSessions {
   items: Session[];
 }
 
-export type Time = (TimeData | TimeWithSessions) & {
-  gridArea: string;
-};
+export type Time = TimeData | TimeWithSessions;
