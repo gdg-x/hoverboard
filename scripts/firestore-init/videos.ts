@@ -12,7 +12,7 @@ export const importVideos = () => {
 
   Object.keys(docs).forEach((docId: string) => {
     batch.set(firestore.collection('videos').doc(docId.padStart(3, '0')), {
-      ...docs[Number(docId)],
+      ...(docs[Number(docId)] as unknown as object),
       order: docId,
     });
   });

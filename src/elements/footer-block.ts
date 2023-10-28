@@ -30,7 +30,7 @@ export class FooterBlock extends PolymerElement {
 
         .fab paper-fab {
           background: var(--primary-background-color);
-          color: inherit;
+          color: red;
           pointer-events: all;
           box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
         }
