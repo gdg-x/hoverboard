@@ -22,14 +22,6 @@
       "route": "home",
       "permalink": "/",
       "label": "Home"
-    },{
-      "route": "schedule",
-      "permalink": "/schedule",
-      "label": "Schedule"
-    },{
-      "route": "speakers",
-      "permalink": "/speakers",
-      "label": "Speakers"
     },
     {
       "route": "team",
@@ -56,13 +48,17 @@
     "home": {
       "description": "#SeaTechAndSun ☀️️️",
       "cancelledSunnyTech": "Sunny Tech 2021 est annulé",
-      "catchingPhrase": "29 & 30 juin 2023 à Montpellier",
+      "catchingPhrase": "4 & 5 juillet 2024 à Montpellier",
       "moreInfo": "Plus d'infos ",
       "background": {
         "color": "#fb4552",
         "image": "/images/backgrounds/home.jpg"
       },
-      "fontColor": "#FFF"
+      "fontColor": "#FFF",
+      "callToAction": {
+        "label": "Photos 2023",
+        "link": "https://photos.app.goo.gl/sfoA93RB1SBML6CY7"
+      }
     },
     "blog": {
       "title": "Blog",

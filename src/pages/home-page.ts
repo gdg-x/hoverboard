@@ -180,13 +180,19 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 <!--                [[viewHighlights]]-->
 <!--              </paper-button>-->
 <!--            </a>-->
-            <a
+
+            <a href$="[[heroSettings.callToAction.link]]" target="_blank" rel="noopener noreferrer">
+              <paper-button class="buy-button" primary>[[heroSettings.callToAction.label]]</paper-button>
+            </a>
+
+            <!-- <a
               href="/schedule"
             >
               <paper-button  primary>
                 Programme
               </paper-button>
             </a>
+            -->
 <!--            <paper-button on-click="scrollToTickets" primary invert>-->
 <!--              <iron-icon icon="hoverboard:ticket"></iron-icon>-->
 <!--              [[buyTicket]]-->
@@ -264,7 +270,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 <!--      <about-conference-block></about-conference-block>-->
 <!--      <speakers-block></speakers-block>-->
       <subscribe-block></subscribe-block>
-      <tickets-block id="tickets"></tickets-block>
+<!--      <tickets-block id="tickets"></tickets-block>-->
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
 <!--      <featured-videos></featured-videos>-->

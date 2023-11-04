@@ -9,7 +9,7 @@
   "locationCountry": "France",
   "image": "images/social-share3.jpg",
   "keywords": "sunnytech, évènement, event, montpellier, Sunny, Tech, programming, android, chrome, developers, web, cloud, conférence, seatechandsun, docker, devops, ux, design, back, scala, fonctionnel",
-  "dates": "29 & 30 juin 2023",
+  "dates": "4 & 5 juillet 2024",
   "partnershipProposition": "mailto:contact@sunny-tech.io",
   "share": "Partager",
   "followOur": "Suit notre",
@@ -71,6 +71,11 @@
     {
       "title": "Voir les éditions antérieures",
       "links": [
+        {
+          "name": "Sunny Tech 2023",
+          "url": "https://2023.sunny-tech.io",
+          "newTab": true
+        },
         {
           "name": "Sunny Tech 2022",
           "url": "https://2022.sunny-tech.io",

@@ -68,7 +68,7 @@ export class AboutBlock extends ThemedElement {
         <div>
           <h1 class="container-title">${aboutBlock.title}</h1>
           <p>${aboutBlock.callToAction.featuredSessions.description}</p>
-          <a
+          <!-- <a
             href="${aboutBlock.callToAction.featuredSessions.link}"
             target="_blank"
             rel="noopener noreferrer"
@@ -77,7 +77,7 @@ export class AboutBlock extends ThemedElement {
               <span class="cta-label">${aboutBlock.callToAction.featuredSessions.label}</span>
               <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
             </paper-button>
-          </a>
+          </a> -->
 
           <p>${aboutBlock.callToAction.howItWas.description}</p>
           <paper-button class="animated icon-right" @click="${this.playVideo}">
