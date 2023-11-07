@@ -13,7 +13,7 @@
     "deploy": "npm run build && NODE_ENV=production firebase deploy",
     "firestore:copy": "ts-node-script ./scripts/firestore-copy",
     "firestore:init": "ts-node-script ./scripts/firestore-init",
-    "firestore:update": "firebase firestore:delete -r becomeSponsorGallery && firebase firestore:delete -r -f gallery && firebase firestore:delete -r -f partners && firebase firestore:delete -r -f team && firebase firestore:delete -r -f tickets && ts-node-script ./scripts/firestore-init",
+    "firestore:update": "firebase firestore:delete -r becomeSponsorGallery && firebase firestore:delete -r -f gallery && firebase firestore:delete -r -f partners && && firebase firestore:delete -r -f tickets && ts-node-script ./scripts/firestore-init",
     "firestore:updateSpeakerSessionsSchedule": "ts-node-script ./scripts/firestore-init/getSpeakersSessionsSchedule && ts-node-script ./scripts/firestore-init/import-speakers-sessions-schedule",
     "fix": "concurrently npm:fix:*",
     "fix:eslint": "eslint . --ext .ts --ext .js --fix",

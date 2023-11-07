@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: scripts/conference-center-scripts
+        working-directory: scripts/openplanner
     steps:
       - uses: actions/checkout@v3
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
-          node-version-file: scripts/conference-center-scripts/.nvmrc
+          node-version-file: scripts/openplanner/.nvmrc
           cache: 'npm'
-          cache-dependency-path: scripts/conference-center-scripts/package-lock.json
+          cache-dependency-path: scripts/openplanner/package-lock.json
       - run: npm ci --ignore-scripts
       - run: npm run import
         env:

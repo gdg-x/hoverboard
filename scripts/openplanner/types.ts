@@ -87,3 +87,11 @@ export interface Event {
     createdAt: Date
     updatedAt: Date
 }
+
+export interface TeamMember {
+  id: string
+  name: string
+  role: string
+  photoUrl: string | null
+  socials?: SpeakerSocial[]
+}

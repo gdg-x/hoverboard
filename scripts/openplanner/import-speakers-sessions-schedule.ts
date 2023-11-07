@@ -1,6 +1,7 @@
 // @ts-nocheck
 import admin, {firestore as firestoreDep, ServiceAccount} from 'firebase-admin'
 import {getSpeakersSessionsScheduleFromUrl} from './getSpeakersSessionsSchedule'
+import {TeamMember} from './types'
 
 if (!process.env.firebaseServiceAccount) {
   throw new Error("firebaseServiceAccount is not defined")
@@ -17,12 +18,12 @@ const serviceAccount = JSON.parse(process.env.firebaseServiceAccount)
 const url = process.env.payloadUrl
 
 const credential = admin.credential.cert(serviceAccount as ServiceAccount)
-admin.initializeApp({credential})
+admin.initializeApp({ credential })
 const firestore = admin.firestore()
 
 firestore.settings({ ignoreUndefinedProperties: true })
 
-export const importSpeakers = (data: any) => {
+export const importSpeakers = async (data: any) => {
   const speakers: { [key: string]: object } = data.speakers
   if (!Object.keys(speakers).length) {
     return Promise.resolve()
@@ -36,11 +37,10 @@ export const importSpeakers = (data: any) => {
     })
   })
 
-  return batch.commit().then((results) => {
-    console.log('Imported data for', results.length, 'speakers')
-  })
+  const results = await batch.commit()
+  console.log('Imported data for', results.length, 'speakers')
 }
-export const importSessions = (data: any) => {
+export const importSessions = async (data: any) => {
   const docs: { [key: string]: object } = data.sessions
   if (!Object.keys(docs).length) {
     return Promise.resolve()
@@ -50,11 +50,10 @@ export const importSessions = (data: any) => {
   Object.keys(docs).forEach((docId) => {
     batch.set(firestore.collection('sessions').doc(docId), docs[docId])
   })
-  return batch.commit().then((results) => {
-    console.log('Imported data for', results.length, 'sessions')
-  })
+  const results = await batch.commit()
+  console.log('Imported data for', results.length, 'sessions')
 }
-export const importSchedule = (data: any) => {
+export const importSchedule = async (data: any) => {
   const docs: { [key: string]: object } = data.schedule
   if (!Object.keys(docs).length) {
     return Promise.resolve()
@@ -67,9 +66,27 @@ export const importSchedule = (data: any) => {
       date: docId,
     })
   })
-  return batch.commit().then(() => {
-    console.log('Imported data for', Object.keys(docs).length, 'days')
+  await batch.commit()
+  console.log('Imported data for', Object.keys(docs).length, 'days')
+}
+
+export const importTeam = async (team: TeamMember[]) => {
+  if (!Array.isArray(team)) {
+    return Promise.resolve()
+  }
+  console.log('Importing team...')
+  const batch = firestore.batch()
+  team.forEach((member, index) => {
+    batch.set(firestore.collection('team/0/members').doc(member.id), {
+      name: member.name,
+      photo: member.photoUrl,
+      photoUrl: member.photoUrl,
+      order: index,
+      socials: member.socials
+    })
   })
+  await batch.commit()
+  console.log('Imported team data for ' + team.length + ' members')
 }
 
 async function deleteCollection(collectionPath: string, batchSize: number = 100) {
@@ -122,6 +139,11 @@ getSpeakersSessionsScheduleFromUrl(url)
     await importSessions(data)
     await importSpeakers(data)
     await importSchedule(data)
+    return data
+  })
+  .then(async (data) => {
+    await deleteCollection('team')
+    await importTeam(data.team)
   })
   .then(() => {
     console.log('Finished')

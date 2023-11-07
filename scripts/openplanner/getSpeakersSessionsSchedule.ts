@@ -1,6 +1,6 @@
 /* eslint-disable */
 import fsA from 'fs'
-import {Session, Speaker, Event, Track} from './types'
+import {Session, Speaker, Event, Track, TeamMember} from './types'
 
 const fs = fsA.promises
 
@@ -19,9 +19,34 @@ export const getSpeakersSessionsScheduleFromUrl = async (url: string) => {
   return await getSpeakersSessionsSchedule(data)
 }
 
+export const mapPersonSocials = (speaker: Speaker | TeamMember) => {
+  return (speaker.socials || []).map((social: { icon: string, name: string, link: string }) => {
+    if (social.icon === "twitter") {
+      return ({
+        name: 'Twitter',
+        icon: "twitter",
+        link: `https://twitter.com/${getSocialHandle(social.link)}`
+      })
+    }
+    if (social.icon === "github") {
+      return ({
+        name: 'Github',
+        icon: "github",
+        link: `https://github.com/${getSocialHandle(social.link)}`
+      })
+    }
 
-export const getSpeakersSessionsSchedule = async (payload: { event: Event, speakers: Speaker[], sessions: Session[] }): Promise<{}> => {
-  const {event, speakers, sessions} = payload
+    return social
+  })
+}
+
+export const getSpeakersSessionsSchedule = async (payload: {
+  event: Event,
+  speakers: Speaker[],
+  sessions: Session[],
+  team: TeamMember[]
+}): Promise<{}> => {
+  const {event, speakers, sessions, team} = payload
 
   const tracks: Track[] = event.tracks.map((t: Track, index: number) => ({
     ...t,
@@ -59,24 +84,7 @@ export const getSpeakersSessionsSchedule = async (payload: { event: Event, speak
       photoUrl: speaker.photoUrl,
       shortBio: speaker?.bio?.slice(0, 100) + "...",
       title: speaker.jobTitle || "",
-      socials: speaker.socials.map((social: { icon: string, name: string, link: string }) => {
-        if (social.icon === "twitter") {
-          return ({
-            name: 'Twitter',
-            icon: "twitter",
-            link: `https://twitter.com/${getSocialHandle(social.link)}`
-          })
-        }
-        if (social.icon === "github") {
-          return ({
-            name: 'Github',
-            icon: "github",
-            link: `https://github.com/${getSocialHandle(social.link)}`
-          })
-        }
-
-        return social
-      })
+      socials: mapPersonSocials(speaker)
     }
     return acc
   }, {})
@@ -222,7 +230,7 @@ export const getSpeakersSessionsSchedule = async (payload: { event: Event, speak
           // If the first session item is "hideTrackTitle" = not a talk, we remove the empty array to take full width
           if (session.items[0] && session.items[0].extendWidth) {
             tracks.forEach((track: any) => {
-              if (track.order > 0 ) {
+              if (track.order > 0) {
                 delete acc[track.order]
               }
             })
@@ -260,12 +268,24 @@ export const getSpeakersSessionsSchedule = async (payload: { event: Event, speak
 
   delete schedule["1"]
 
+  // 5. Add team members
+  console.log('Adding team, ' + team.length + ' members')
+  const teamMembers = team.map((member: TeamMember) => {
+    return {
+      name: member.name,
+      role: member.role,
+      photoUrl: member.photoUrl,
+      socials: mapPersonSocials(member)
+    }
+  })
+
   console.log("Formatting output data done!")
 
   const fileContent = {
     speakers: outputSpeakers,
     sessions: outputSessions,
-    schedule: schedule
+    schedule: schedule,
+    team: teamMembers
   }
 
   await fs.writeFile(outputFile, JSON.stringify(fileContent, null, 4))

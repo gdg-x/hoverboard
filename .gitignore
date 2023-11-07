@@ -73,6 +73,6 @@ serviceAccount.json
 serviceAccount*.json
 *-adminsdk-*.json
 .DS_Store
-/scripts/conference-center-scripts/sessions-speakers-schedule.json
+/scripts/openplanner/sessions-speakers-schedule.json
 *-adminsdk-*.json
 .DS_Store
