@@ -76,6 +76,9 @@ export const importTeam = async (team: TeamMember[]) => {
   }
   console.log('Importing team...')
   const batch = firestore.batch()
+  batch.set(firestore.collection('team').doc("0"), {
+    title: "Membre"
+  })
   team.forEach((member, index) => {
     batch.set(firestore.collection('team/0/members').doc(member.id), {
       name: member.name,
