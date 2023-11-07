@@ -14,7 +14,7 @@ const getSocialHandle = (social: string | null) => {
 }
 
 export const getSpeakersSessionsScheduleFromUrl = async (url: string) => {
-  const data = await fetch(url).then(r => r.json())
+  const data = await fetch(url + "?tt=2").then(r => r.json())
 
   return await getSpeakersSessionsSchedule(data)
 }
@@ -272,6 +272,7 @@ export const getSpeakersSessionsSchedule = async (payload: {
   console.log('Adding team, ' + team.length + ' members')
   const teamMembers = team.map((member: TeamMember) => {
     return {
+      id: member.id,
       name: member.name,
       role: member.role,
       photoUrl: member.photoUrl,
