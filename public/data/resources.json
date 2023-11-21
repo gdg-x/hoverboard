@@ -150,6 +150,7 @@
   "partnersBlock": {
     "title": "Sponsors de l'édition 2023",
     "button": "Devenez sponsor !",
+    "formUrl": "https://sunnytech.fillout.com/sponsors2024",
     "form": {
       "title": "Devenez sponsor !",
       "submitLabel": "Envoyer",
