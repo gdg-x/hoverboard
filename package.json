@@ -81,7 +81,7 @@
     "@types/jest": "^29.5.12",
     "@types/jest-dev-server": "^5.0.1",
     "@types/marked": "^5.0.0",
-    "@types/node": "^20.8.0",
+    "@types/node": "^20.11.19",
     "@types/nunjucks": "^3.2.6",
     "@types/polymer": "^1.2.16",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
