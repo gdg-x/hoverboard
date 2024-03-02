@@ -25,7 +25,7 @@ export const fetchGallery = async (dispatch: Dispatch<GalleryActions>) => {
       () => dispatch({ type: FETCH_GALLERY }),
       (payload: Photo[]) => dispatch({ type: FETCH_GALLERY_SUCCESS, payload }),
       (payload: Error) => dispatch({ type: FETCH_GALLERY_FAILURE, payload }),
-      orderBy('order')
+      orderBy('order'),
     );
   }
 };

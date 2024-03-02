@@ -61,7 +61,7 @@ export class HoverboardApp extends PolymerElement {
           --app-drawer-content-container: {
             display: flex;
             flex-direction: column;
-          }
+          };
         }
 
         app-drawer app-toolbar {

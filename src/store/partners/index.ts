@@ -36,7 +36,7 @@ const subscribeToPartners = () => {
     (snapshot) => {
       store.dispatch(setPartnersSuccess(snapshot.docs.map<Partner>(dataWithParentId)));
     },
-    (error) => store.dispatch(setPartnersFailure(error as Error))
+    (error) => store.dispatch(setPartnersFailure(error as Error)),
   );
 };
 
@@ -46,7 +46,7 @@ const subscribeToGroups = () => {
     (snapshot) => {
       store.dispatch(setGroupsSuccess(snapshot.docs.map<PartnerGroupWithoutItems>(mergeDataAndId)));
     },
-    (error) => store.dispatch(setGroupsFailure(error as Error))
+    (error) => store.dispatch(setGroupsFailure(error as Error)),
   );
 };
 
@@ -122,7 +122,7 @@ export const selectPartnerGroups = createSelector(
     }
 
     return new Pending();
-  }
+  },
 );
 
 const {

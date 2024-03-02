@@ -41,7 +41,7 @@ const openTwitter = ({ title, shareUrl }: { title: string; shareUrl: string }) =
 
 const openFacebook = ({ title, shareUrl }: { title: string; shareUrl: string }) => {
   const url = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-    shareUrl
+    shareUrl,
   )}&t=${encodeURIComponent(title)}`;
   window.open(url, 'share', features({ height: 775 }));
 };

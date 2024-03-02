@@ -140,7 +140,7 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
         contentRating: this.contentRating,
         styleRating: this.styleRating,
         comment: this.comment || '',
-      })
+      }),
     );
 
     if (setFeedback.fulfilled.match(resultAction)) {
@@ -153,7 +153,7 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
             title: 'Retry',
             callback: () => this.setFeedback(),
           },
-        })
+        }),
       );
     }
   }
@@ -172,7 +172,7 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
         parentId: this.sessionId,
         userId: this.user.data.uid,
         id: this.user.data.uid,
-      })
+      }),
     );
 
     if (deleteFeedback.fulfilled.match(resultAction)) {
@@ -185,7 +185,7 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
             title: 'Retry',
             callback: () => this.deleteFeedback(),
           },
-        })
+        }),
       );
     }
   }

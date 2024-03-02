@@ -19,5 +19,5 @@ async function unregisterAndClearCaches() {
 }
 
 unregisterAndClearCaches().catch((error) =>
-  console.error(`Error unregistering service worker: ${error}`)
+  console.error(`Error unregistering service worker: ${error}`),
 );

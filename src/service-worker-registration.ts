@@ -23,7 +23,7 @@ register('service-worker.js', {
           title: refresh,
           callback: () => window.location.reload(),
         },
-      })
+      }),
     );
   },
   updatefound() {

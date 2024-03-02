@@ -9,7 +9,7 @@ import {
 
 export const potentialPartnersReducer = (
   state = initialPotentialPartnersState,
-  action: PotentialPartnerActions
+  action: PotentialPartnerActions,
 ): PotentialPartnersState => {
   switch (action.type) {
     case ADD_POTENTIAL_PARTNER:

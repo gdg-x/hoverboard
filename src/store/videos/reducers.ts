@@ -9,7 +9,7 @@ import {
 
 export const videosReducer = (
   state = initialVideosState,
-  action: FetchVideosActions
+  action: FetchVideosActions,
 ): VideoState => {
   switch (action.type) {
     case FETCH_VIDEOS:

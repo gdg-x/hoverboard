@@ -23,7 +23,7 @@ export const fetchPreviousSpeakers = async (dispatch: Dispatch<PreviousSpeakersA
       'previousSpeakers',
       () => dispatch({ type: FETCH_PREVIOUS_SPEAKERS }),
       (payload: PreviousSpeaker[]) => dispatch({ type: FETCH_PREVIOUS_SPEAKERS_SUCCESS, payload }),
-      (payload: Error) => dispatch({ type: FETCH_PREVIOUS_SPEAKERS_FAILURE, payload })
+      (payload: Error) => dispatch({ type: FETCH_PREVIOUS_SPEAKERS_FAILURE, payload }),
     );
   }
 };

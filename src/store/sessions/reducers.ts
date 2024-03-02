@@ -9,7 +9,7 @@ import {
 
 export const sessionsReducer = (
   state = initialSessionsState,
-  action: SessionsActions
+  action: SessionsActions,
 ): SessionsState => {
   switch (action.type) {
     case FETCH_SESSIONS:

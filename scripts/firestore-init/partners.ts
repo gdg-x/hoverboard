@@ -25,7 +25,7 @@ export const importPartners = () => {
             .doc(`${partnerId}`)
             .collection('items')
             .doc(`${id}`.padStart(3, '0')),
-          item
+          item,
         );
       });
     } else {

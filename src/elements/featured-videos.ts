@@ -289,12 +289,12 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     const cardRect = lastVideo.getBoundingClientRect();
     const cardWidth = cardRect.width;
     const videosContainerWidth = parseInt(
-      getComputedStyle(this.videoList, null).getPropertyValue('width')
+      getComputedStyle(this.videoList, null).getPropertyValue('width'),
     );
     const videosWidth = parseInt(getComputedStyle(this.videosElm, null).getPropertyValue('width'));
     const maxRightPosition = -(videosWidth - videosContainerWidth) - 16;
     const currentPosition = parseInt(
-      getComputedStyle(this.videosElm, null).getPropertyValue('transform').split(',')[4] || ''
+      getComputedStyle(this.videosElm, null).getPropertyValue('transform').split(',')[4] || '',
     );
 
     return {

@@ -24,7 +24,7 @@ export const fetchNotificationsSubscribers =
         () => dispatch({ type: FETCH_NOTIFICATIONS_SUBSCRIBERS }),
         (payload) =>
           dispatch({ type: FETCH_NOTIFICATIONS_SUBSCRIBERS_SUCCESS, payload: payload?.id || '' }),
-        (payload: Error) => dispatch({ type: FETCH_NOTIFICATIONS_SUBSCRIBERS_FAILURE, payload })
+        (payload: Error) => dispatch({ type: FETCH_NOTIFICATIONS_SUBSCRIBERS_FAILURE, payload }),
       );
     }
   };

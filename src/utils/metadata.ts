@@ -23,7 +23,7 @@ export const updateImageMetadata = (title: string, description: string, data: Im
 export const updateMetadata = (
   title: string,
   description: string,
-  includeSiteTitle = INCLUDE_SITE_TITLE.YES
+  includeSiteTitle = INCLUDE_SITE_TITLE.YES,
 ) => {
   const fullTitle = includeSiteTitle === INCLUDE_SITE_TITLE.YES ? `${title} | ${siteTitle}` : title;
   pwaUpdateMetadata({

@@ -9,7 +9,7 @@ import {
 
 export const scheduleReducer = (
   state = initialScheduleState,
-  action: ScheduleActions
+  action: ScheduleActions,
 ): ScheduleState => {
   switch (action.type) {
     case FETCH_SCHEDULE:

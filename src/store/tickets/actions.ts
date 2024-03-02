@@ -25,7 +25,7 @@ export const fetchTickets = async (dispatch: Dispatch<FetchTicketsActions>) => {
       () => dispatch({ type: FETCH_TICKETS }),
       (payload: Ticket[]) => dispatch({ type: FETCH_TICKETS_SUCCESS, payload }),
       (payload: Error) => dispatch({ type: FETCH_TICKETS_FAILURE, payload }),
-      orderBy('order')
+      orderBy('order'),
     );
   }
 };

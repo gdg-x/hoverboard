@@ -4,7 +4,7 @@ import { FiltersActions, FiltersState, SET_FILTERS } from './types';
 
 export const filtersReducer = (
   state = initialFiltersState,
-  action: FiltersActions
+  action: FiltersActions,
 ): FiltersState => {
   switch (action.type) {
     case SET_FILTERS:

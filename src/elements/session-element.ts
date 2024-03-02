@@ -293,7 +293,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
             title: 'Sign in',
             callback: () => openSigninDialog(),
           },
-        })
+        }),
       );
       return;
     }

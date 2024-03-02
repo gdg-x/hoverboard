@@ -93,14 +93,23 @@ export class ContentLoader extends PolymerElement {
             var(--title-skeleton), var(--desc-line-skeleton), var(--desc-line-skeleton),
             var(--avatar-skeleton), var(--footer-skeleton), var(--card-skeleton);
 
-          background-size: var(--blur-size), var(--title-width) var(--title-height),
+          background-size:
+            var(--blur-size),
+            var(--title-width) var(--title-height),
             var(--desc-line-1-width) var(--desc-line-height),
-            var(--desc-line-2-width) var(--desc-line-height), var(--avatar-size) var(--avatar-size),
-            100% var(--footer-height), 100% 100%;
+            var(--desc-line-2-width) var(--desc-line-height),
+            var(--avatar-size) var(--avatar-size),
+            100% var(--footer-height),
+            100% 100%;
 
-          background-position: var(--load-from) 0, var(--title-position),
-            var(--desc-line-1-position), var(--desc-line-2-position), var(--avatar-position),
-            var(--footer-position), 0 0;
+          background-position:
+            var(--load-from) 0,
+            var(--title-position),
+            var(--desc-line-1-position),
+            var(--desc-line-2-position),
+            var(--avatar-position),
+            var(--footer-position),
+            0 0;
 
           background-repeat: no-repeat;
           animation: loading var(--animation-time) infinite;
@@ -108,9 +117,14 @@ export class ContentLoader extends PolymerElement {
 
         @keyframes loading {
           to {
-            background-position: var(--load-to) 0, var(--title-position),
-              var(--desc-line-1-position), var(--desc-line-2-position), var(--avatar-position),
-              var(--footer-position), 0 0;
+            background-position:
+              var(--load-to) 0,
+              var(--title-position),
+              var(--desc-line-1-position),
+              var(--desc-line-2-position),
+              var(--avatar-position),
+              var(--footer-position),
+              0 0;
           }
         }
       </style>

@@ -13,7 +13,7 @@ import {
 
 export const updateNotificationsSubscribersReducer = (
   state = initialUpdateNotificationsSubscribersState,
-  action: UpdateNotificationsSubscribersActions
+  action: UpdateNotificationsSubscribersActions,
 ): UpdateNotificationsSubscribersState => {
   switch (action.type) {
     case UPDATE_NOTIFICATION_SUBSCRIBERS:

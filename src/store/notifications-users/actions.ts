@@ -28,7 +28,7 @@ export const fetchNotificationsUsers =
             type: FETCH_NOTIFICATIONS_USERS_SUCCESS,
             payload: payload || { id: uid, tokens: {} },
           }),
-        (payload: Error) => dispatch({ type: FETCH_NOTIFICATIONS_USERS_FAILURE, payload })
+        (payload: Error) => dispatch({ type: FETCH_NOTIFICATIONS_USERS_FAILURE, payload }),
       );
     }
   };

@@ -23,7 +23,7 @@ export class RemoteMarkDown extends ThemedElement {
       () => html``,
       () => html`Loading...`,
       () => html`Error loading content`,
-      (data) => html`<toc-markdown content="${data}"></toc-markdown>`
+      (data) => html`<toc-markdown content="${data}"></toc-markdown>`,
     );
   }
 
