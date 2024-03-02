@@ -10,7 +10,6 @@ describe('share', () => {
   ].join('?');
 
   beforeAll(() => {
-    window.location.href = 'https://example.com/schedule';
     document.title = 'Awesome Schedule';
     open = jest.spyOn(window, 'open').mockImplementation();
   });
