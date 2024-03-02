@@ -17,7 +17,8 @@ export class Markdown extends ThemedElement {
 
   get document(): DocumentFragment {
     const template = document.createElement('template');
-    template.innerHTML = marked.parse(this.content);
+    // Override type as no async extensions are in use
+    template.innerHTML = marked.parse(this.content) as string;
     if (hasUnsupportedTags(template.content)) {
       console.warn(`Invalid Markedown contains some of the following tags ${unsupportedHtmlTags}`);
       // TODO: Enable
