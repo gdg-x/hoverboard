@@ -7,7 +7,7 @@
   "type": "module",
   "engines": {
     "node": "20",
-    "npm": "9"
+    "npm": "10"
   },
   "scripts": {
     "build": "npm run clean && concurrently npm:build:*",
