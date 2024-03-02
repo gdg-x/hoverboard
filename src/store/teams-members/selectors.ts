@@ -31,5 +31,5 @@ export const selectTeamsAndMembers = createSelector(
     } else {
       return new Initialized();
     }
-  }
+  },
 );

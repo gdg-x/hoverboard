@@ -41,14 +41,14 @@ export function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRa
             day,
             timeslotsIndex,
             dayKey,
-            subSessionIndex
+            subSessionIndex,
           );
           const startTime = calculateStartTime(
             subSessionsLen,
             subSessionIndex,
             sessionIndex,
             sessions,
-            timeslot
+            timeslot,
           );
 
           dayTags = combineTags(dayTags, subsession?.tags);
@@ -76,7 +76,7 @@ export function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRa
                 speakersRaw,
                 subsession.speakers,
                 finalSubSession,
-                speakers
+                speakers,
               ),
             };
           }
@@ -87,8 +87,8 @@ export function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRa
           sessionsLen !== 1
             ? sessionIndex + 2
             : Object.keys(extensions).length
-            ? Object.keys(extensions)[0]
-            : tracksNumber + 1;
+              ? Object.keys(extensions)[0]
+              : tracksNumber + 1;
         const start = `${timeslotsIndex + 1} / ${sessionIndex + 1}`;
         const end = `${displayStart} / ${displayEnd}`;
 

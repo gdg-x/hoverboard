@@ -46,7 +46,7 @@ export const fetchUserFeaturedSessions = async (dispatch: Dispatch<FeaturedSessi
 
 const setFeaturedSessions = async (
   userId: string,
-  featuredSessions: FeaturedSessions
+  featuredSessions: FeaturedSessions,
 ): Promise<void> => {
   await setDoc(doc(db, 'featuredSessions', userId), featuredSessions);
 };

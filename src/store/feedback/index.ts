@@ -37,7 +37,7 @@ export const subscribe = (userId: string) => {
   return onSnapshot(
     query(collectionGroup(db, 'feedback'), where('userId', '==', userId)),
     (snapshot) => store.dispatch(setSuccess(snapshot.docs.map<Feedback>(dataWithParentId))),
-    (error) => store.dispatch(setFailure(error as Error))
+    (error) => store.dispatch(setFailure(error as Error)),
   );
 };
 
@@ -56,7 +56,7 @@ export const setFeedback = createAsyncThunk<FeedbackId, Feedback>(
       userId: data.userId,
       id: data.userId,
     };
-  }
+  },
 );
 
 export const deleteFeedback = createAsyncThunk<FeedbackId, FeedbackId>(
@@ -65,7 +65,7 @@ export const deleteFeedback = createAsyncThunk<FeedbackId, FeedbackId>(
     await deleteDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId));
 
     return data;
-  }
+  },
 );
 
 const feedbackSlice = createSlice({
@@ -136,7 +136,7 @@ const selectSubscription = createSelector(
     } else {
       return subscription;
     }
-  }
+  },
 );
 
 export const selectFeedbackById = createSelector(
@@ -146,7 +146,7 @@ export const selectFeedbackById = createSelector(
   (
     parentId: string | undefined,
     subscription: FeedbackState['subscription'],
-    feedback: FeedbackState['data']
+    feedback: FeedbackState['data'],
   ): SessionFeedback => {
     if (feedback instanceof Success) {
       return new Success(feedback.data.find((review) => review.parentId === parentId) ?? false);
@@ -155,7 +155,7 @@ export const selectFeedbackById = createSelector(
     } else {
       return feedback;
     }
-  }
+  },
 );
 
 export { unsubscribeFromFeedback };

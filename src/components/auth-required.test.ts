@@ -19,14 +19,12 @@ describe('auth-required', () => {
   let shadowRoot!: ShadowRoot;
 
   beforeAll(async () => {
-    const render = await fixture<AuthRequired>(
-      html`
-        <auth-required>
-          <p slot="prompt">Please sign in</p>
-          <div>Welcome</div>
-        </auth-required>
-      `
-    );
+    const render = await fixture<AuthRequired>(html`
+      <auth-required>
+        <p slot="prompt">Please sign in</p>
+        <div>Welcome</div>
+      </auth-required>
+    `);
 
     element = render.element;
     shadowRoot = render.shadowRoot;

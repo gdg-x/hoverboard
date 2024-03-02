@@ -176,7 +176,7 @@ export class FilterMenu extends PolymerElement {
 
   private isSelected(selectedFilters: Filter[], search: Filter) {
     return selectedFilters.some(
-      (filter) => filter.tag === search.tag.toLocaleLowerCase() && filter.group === search.group
+      (filter) => filter.tag === search.tag.toLocaleLowerCase() && filter.group === search.group,
     );
   }
 

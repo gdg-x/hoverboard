@@ -62,6 +62,6 @@ function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash?: strin
       }
     })
     .catch((error) =>
-      functions.logger.error(`Error occured during Mailchimp subscription: ${error}`)
+      functions.logger.error(`Error occured during Mailchimp subscription: ${error}`),
     );
 }

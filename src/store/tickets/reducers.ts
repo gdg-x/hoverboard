@@ -9,7 +9,7 @@ import {
 
 export const ticketsReducer = (
   state = initialTicketsState,
-  action: FetchTicketsActions
+  action: FetchTicketsActions,
 ): TicketsState => {
   switch (action.type) {
     case FETCH_TICKETS:

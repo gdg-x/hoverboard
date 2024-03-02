@@ -115,7 +115,7 @@ export class StickyElement extends PolymerElement {
           detail: {
             sticked: false,
           },
-        })
+        }),
       );
     } else if (scrollTop <= 64 && !content.classList.contains('sticked')) {
       this.style.height = `${this.content.offsetHeight}px`;
@@ -127,7 +127,7 @@ export class StickyElement extends PolymerElement {
           detail: {
             sticked: true,
           },
-        })
+        }),
       );
     }
   }

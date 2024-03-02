@@ -24,7 +24,7 @@ export const selectPreviousSpeaker = createSelector(
   selectSpeakerId,
   (speakers: PreviousSpeaker[], speakerId: string): PreviousSpeaker | undefined => {
     return speakers.find((speaker) => speaker.id === speakerId);
-  }
+  },
 );
 
 export const selectRandomPreviousSpeakers = createSelector(
@@ -33,5 +33,5 @@ export const selectRandomPreviousSpeakers = createSelector(
   (previousSpeakers: PreviousSpeaker[], viewport: Viewport): PreviousSpeaker[] => {
     const displayCount = viewport.isPhone ? 8 : 14;
     return randomOrder(previousSpeakers).slice(0, displayCount);
-  }
+  },
 );

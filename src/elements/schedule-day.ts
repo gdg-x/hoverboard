@@ -202,7 +202,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
       onlyFeatured &&
       !timeslot.sessions.reduce(
         (aggregator, sessionBlock) => aggregator + sessionBlock.items.length,
-        0
+        0,
       )
     );
   }

@@ -20,7 +20,7 @@ export const fetchTeams = async (dispatch: Dispatch<TeamsActions>) => {
       () => dispatch({ type: FETCH_TEAMS }),
       (payload: TeamWithoutMembers[]) => dispatch({ type: FETCH_TEAMS_SUCCESS, payload }),
       (payload: Error) => dispatch({ type: FETCH_TEAMS_FAILURE, payload }),
-      orderBy('title')
+      orderBy('title'),
     );
   }
 };

@@ -9,7 +9,7 @@ import {
 
 export const membersReducer = (
   state = initialMembersState,
-  action: MembersActions
+  action: MembersActions,
 ): MembersState => {
   switch (action.type) {
     case FETCH_MEMBERS:

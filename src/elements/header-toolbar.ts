@@ -34,7 +34,9 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           z-index: 1;
           border-bottom: 1px solid var(--divider-color);
           background-color: var(--primary-background-color);
-          transition: background-color var(--animation), border-bottom-color var(--animation),
+          transition:
+            background-color var(--animation),
+            border-bottom-color var(--animation),
             color var(--animation);
           color: var(--primary-text-color);
         }
@@ -71,7 +73,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           --paper-tabs-selection-bar-color: var(--default-primary-color);
           --paper-tabs: {
             height: 64px;
-          }
+          };
         }
 
         .nav-item a,

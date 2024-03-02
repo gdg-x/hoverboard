@@ -37,7 +37,7 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
             width: 48px;
             height: 48px;
             color: var(--text-primary-color);
-          }
+          };
         }
 
         @media (min-width: 640px) {

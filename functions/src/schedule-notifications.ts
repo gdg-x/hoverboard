@@ -34,7 +34,7 @@ const removeUserTokens = (tokensToUsers) => {
         }, {});
 
         transaction.set(ref, newVal);
-      })
+      }),
     );
   });
 
@@ -46,7 +46,7 @@ const sendPushNotificationToUsers = async (userIds: string[], payload: Messaging
     'sendPushNotificationToUsers user ids',
     userIds,
     'with notification',
-    payload
+    payload,
   );
 
   const tokensPromise = userIds.map((id) => {
@@ -99,7 +99,7 @@ export const scheduleNotifications = functions.pubsub
 
     const schedule = scheduleSnapshot.docs.reduce(
       (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
-      {}
+      {},
     );
     const todayDay = moment().utcOffset(notificationsConfig.timezone).format('YYYY-MM-DD');
 
@@ -110,7 +110,7 @@ export const scheduleNotifications = functions.pubsub
       const upcomingTimeslot = schedule[todayDay].timeslots.filter((timeslot) => {
         const timeslotTime = moment(
           `${timeslot.startTime}${notificationsConfig.timezone}`,
-          `${FORMAT}Z`
+          `${FORMAT}Z`,
         ).subtract(10, 'minutes');
         return timeslotTime.isBetween(beforeTime, afterTime);
       });
@@ -118,8 +118,8 @@ export const scheduleNotifications = functions.pubsub
       const upcomingSessions = upcomingTimeslot.reduce((_result, timeslot) =>
         timeslot.sessions.reduce(
           (aggregatedSessions, current) => [...aggregatedSessions, ...current.items],
-          []
-        )
+          [],
+        ),
       );
       const usersIdsSnapshot = await getFirestore().collection('featuredSessions').get();
 
@@ -132,20 +132,20 @@ export const scheduleNotifications = functions.pubsub
 
         const usersIds = usersIdsSnapshot.docs.reduce(
           (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
-          {}
+          {},
         );
 
         const userIdsFeaturedSession = Object.keys(usersIds).filter(
           (userId) =>
             !!Object.keys(usersIds[userId]).filter(
-              (sessionId) => sessionId.toString() === upcomingSession.toString()
-            ).length
+              (sessionId) => sessionId.toString() === upcomingSession.toString(),
+            ).length,
         );
 
         const session = sessionInfoSnapshot.data();
         const end = moment(
           `${upcomingTimeslot[0].startTime}${notificationsConfig.timezone}`,
-          `${FORMAT}Z`
+          `${FORMAT}Z`,
         );
         const fromNow = end.fromNow();
 

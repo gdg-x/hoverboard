@@ -47,7 +47,7 @@ export const calculateStartTime = (
   subSessionIndex: number,
   sessionIndex: number,
   sessions: any,
-  timeslot: any
+  timeslot: any,
 ) => {
   return subSessionsLen > 1 && subSessionIndex > 0
     ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
@@ -61,7 +61,7 @@ export const calculateEndTime = (
   day: any,
   timeslotsIndex: number,
   dayKey: string,
-  subSessionIndex: number
+  subSessionIndex: number,
 ) => {
   const endTimeRaw = timeslot.sessions[sessionIndex].extend
     ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
@@ -77,7 +77,7 @@ const getEndTime = (
   startTime: string,
   endTime: string,
   totalNumber: number,
-  number: number
+  number: number,
 ) => {
   const timezone = new Date().toString().match(/([A-Z]+[+-][0-9]+.*)/)[1];
   const timeStart = new Date(`${date} ${startTime} ${timezone}`).getTime();

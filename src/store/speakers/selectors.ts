@@ -24,7 +24,7 @@ export const selectSpeaker = createSelector(
   selectSpeakerId,
   (speakers: SpeakerWithTags[], speakerId: string): SpeakerWithTags | undefined => {
     return speakers.find((speaker) => speaker.id === speakerId);
-  }
+  },
 );
 
 export const selectFilteredSpeakers = createSelector(
@@ -39,5 +39,5 @@ export const selectFilteredSpeakers = createSelector(
         return selectedFilters.some((filter) => filter.tag === className);
       });
     });
-  }
+  },
 );

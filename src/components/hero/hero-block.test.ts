@@ -31,16 +31,14 @@ describe('hero-block', () => {
   });
 
   it('accepts values', async () => {
-    const { element, shadowRoot } = await fixture<HeroBlock>(
-      html`
-        <hero-block
-          background-image="/example.jpg"
-          background-color="#000"
-          font-color="#fff"
-          hide-logo
-        ></hero-block>
-      `
-    );
+    const { element, shadowRoot } = await fixture<HeroBlock>(html`
+      <hero-block
+        background-image="/example.jpg"
+        background-color="#000"
+        font-color="#fff"
+        hide-logo
+      ></hero-block>
+    `);
     expect(element.backgroundImage).toBe('/example.jpg');
     expect(element.backgroundColor).toBe('#000');
     expect(element.fontColor).toBe('#fff');
@@ -50,14 +48,12 @@ describe('hero-block', () => {
   });
 
   it('displays slot elements', async () => {
-    const { shadowRoot } = await fixture<HeroBlock>(
-      html`
-        <hero-block>
-          <p>default slot</p>
-          <p slot="bottom">bottom slot</p>
-        </hero-block>
-      `
-    );
+    const { shadowRoot } = await fixture<HeroBlock>(html`
+      <hero-block>
+        <p>default slot</p>
+        <p slot="bottom">bottom slot</p>
+      </hero-block>
+    `);
     const slots = shadowRoot.querySelectorAll('slot');
     expect(slots).toHaveLength(2);
     expect(screen.getByText('default slot')).toBeVisible();
@@ -70,7 +66,7 @@ describe('hero-block', () => {
 
   it('renders an image', async () => {
     const { shadowRoot } = await fixture<HeroBlock>(
-      html`<hero-block background-image="/example.jpg"></hero-block>`
+      html`<hero-block background-image="/example.jpg"></hero-block>`,
     );
     expect(shadowRoot.querySelector('.hero-image')).toHaveAttribute('src', '/example.jpg');
   });

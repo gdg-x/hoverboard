@@ -13,7 +13,7 @@ import {
 
 export const featuredSessionsReducer = (
   state = initialFeaturedSessionsState,
-  action: FeaturedSessionsActions
+  action: FeaturedSessionsActions,
 ): FeaturedSessionsState => {
   switch (action.type) {
     case FETCH_USER_FEATURED_SESSIONS:

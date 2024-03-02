@@ -25,7 +25,7 @@ export const fetchVideos = async (dispatch: Dispatch<FetchVideosActions>) => {
       () => dispatch({ type: FETCH_VIDEOS }),
       (payload: Video[]) => dispatch({ type: FETCH_VIDEOS_SUCCESS, payload }),
       (payload: Error) => dispatch({ type: FETCH_VIDEOS_FAILURE, payload }),
-      orderBy('order')
+      orderBy('order'),
     );
   }
 };

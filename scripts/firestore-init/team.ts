@@ -20,7 +20,7 @@ export const importTeam = () => {
       team.members.forEach((member, id) => {
         batch.set(
           firestore.collection('team').doc(`${teamId}`).collection('members').doc(`${id}`),
-          member
+          member,
         );
       });
     } else {

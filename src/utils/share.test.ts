@@ -29,7 +29,7 @@ describe('share', () => {
     expect(window.open).toHaveBeenCalledWith(
       'https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%2F&t=Awesome%20Schedule',
       'share',
-      features(775)
+      features(775),
     );
   });
 

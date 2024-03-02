@@ -44,12 +44,12 @@ export const selectSession = createSelector(
   selectSessionId,
   (sessions: Session[], sessionId: string): Session | undefined => {
     return sessions.find((session) => session.id === sessionId);
-  }
+  },
 );
 
 const selectGroups = (
   _state: RootState,
-  groups: FilterGroupKey[] = [FilterGroupKey.tags, FilterGroupKey.complexity]
+  groups: FilterGroupKey[] = [FilterGroupKey.tags, FilterGroupKey.complexity],
 ) => groups;
 
 export const selectFilterGroups = createSelector(
@@ -68,5 +68,5 @@ export const selectFilterGroups = createSelector(
         filters: buildFilters(sessions, FilterGroupKey.complexity),
       },
     ].filter((filterGroup) => groups.includes(filterGroup.key));
-  }
+  },
 );

@@ -36,7 +36,7 @@ export const requestNotificationPermission = createAsyncThunk<string | undefined
     } else {
       throw new Error('denied');
     }
-  }
+  },
 );
 
 export const notificationPermissionSlice = createSlice({

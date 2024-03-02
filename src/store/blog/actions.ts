@@ -25,7 +25,7 @@ export const fetchBlogPosts = async (dispatch: Dispatch<BlogActions>) => {
       () => dispatch({ type: FETCH_BLOG_LIST }),
       (payload: Post[]) => dispatch({ type: FETCH_BLOG_LIST_SUCCESS, payload }),
       (payload: Error) => dispatch({ type: FETCH_BLOG_LIST_FAILURE, payload }),
-      orderBy('published', 'desc')
+      orderBy('published', 'desc'),
     );
   }
 };

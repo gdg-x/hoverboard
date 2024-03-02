@@ -23,7 +23,7 @@ export const fetchMembers = async (dispatch: Dispatch<MembersActions>) => {
       'members',
       () => dispatch({ type: FETCH_MEMBERS }),
       (payload: Member[]) => dispatch({ type: FETCH_MEMBERS_SUCCESS, payload }),
-      (payload: Error) => dispatch({ type: FETCH_MEMBERS_FAILURE, payload })
+      (payload: Error) => dispatch({ type: FETCH_MEMBERS_FAILURE, payload }),
     );
   }
 };

@@ -10,7 +10,7 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 
 export const subscribeReducer = (
   state = initialSubscribeState,
-  action: SubscribeActions
+  action: SubscribeActions,
 ): SubscribeState => {
   switch (action.type) {
     case SUBSCRIBE:

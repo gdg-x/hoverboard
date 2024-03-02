@@ -13,7 +13,7 @@ export const generateClassName = (value: string | undefined): string => {
 export const getVariableColor = (
   element: PolymerElement,
   value: string,
-  fallback?: string
+  fallback?: string,
 ): string => {
   const ShadyCSS = (window as TempAny).ShadyCSS;
   const calculated = ShadyCSS

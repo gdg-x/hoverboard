@@ -9,7 +9,7 @@ import {
 
 export const galleryReducer = (
   state = initialGalleryState,
-  action: GalleryActions
+  action: GalleryActions,
 ): GalleryState => {
   switch (action.type) {
     case FETCH_GALLERY:

@@ -23,7 +23,7 @@ export const fetchSpeakers = async (dispatch: Dispatch<SpeakerActions>) => {
       'generatedSpeakers',
       () => dispatch({ type: FETCH_SPEAKERS }),
       (payload: SpeakerWithTags[]) => dispatch({ type: FETCH_SPEAKERS_SUCCESS, payload }),
-      (payload: Error) => dispatch({ type: FETCH_SPEAKERS_FAILURE, payload })
+      (payload: Error) => dispatch({ type: FETCH_SPEAKERS_FAILURE, payload }),
     );
   }
 };

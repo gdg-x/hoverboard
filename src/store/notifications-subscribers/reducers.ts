@@ -9,7 +9,7 @@ import {
 
 export const notificationsSubscribersReducer = (
   state = initialNotificationsSubscribersState,
-  action: NotificationsSubscribersActions
+  action: NotificationsSubscribersActions,
 ): NotificationsSubscribersState => {
   switch (action.type) {
     case FETCH_NOTIFICATIONS_SUBSCRIBERS:

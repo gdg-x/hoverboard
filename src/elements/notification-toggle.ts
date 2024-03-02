@@ -241,11 +241,11 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
 
     if (selected) {
       store.dispatch(
-        updateNotificationsUsers(this.user.data.uid, this.notificationPermission.data)
+        updateNotificationsUsers(this.user.data.uid, this.notificationPermission.data),
       );
     } else {
       store.dispatch(
-        removeNotificationsUsers(this.user.data.uid, this.notificationPermission.data)
+        removeNotificationsUsers(this.user.data.uid, this.notificationPermission.data),
       );
     }
   }

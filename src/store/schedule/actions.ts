@@ -25,7 +25,7 @@ export const fetchSchedule = async (dispatch: Dispatch<ScheduleActions>) => {
       () => dispatch({ type: FETCH_SCHEDULE }),
       (payload: Day[]) => dispatch({ type: FETCH_SCHEDULE_SUCCESS, payload }),
       (payload: Error) => dispatch({ type: FETCH_SCHEDULE_FAILURE, payload }),
-      orderBy('date')
+      orderBy('date'),
     );
   }
 };

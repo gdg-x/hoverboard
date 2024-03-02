@@ -32,7 +32,7 @@ export const selectFeaturedSchedule = createSelector(
             ...timeslot,
             sessions: timeslot.sessions.map((sessionBlock: Time) => {
               const items = (sessionBlock.items as TempAny as Session[]).filter(
-                (session: Session): boolean => Boolean(featuredSessions[session.id])
+                (session: Session): boolean => Boolean(featuredSessions[session.id]),
               );
               return {
                 ...sessionBlock,
@@ -43,5 +43,5 @@ export const selectFeaturedSchedule = createSelector(
         }),
       };
     });
-  }
+  },
 );

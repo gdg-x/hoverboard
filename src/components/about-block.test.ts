@@ -22,7 +22,7 @@ describe('about-block', () => {
 
   it('renders details', async () => {
     const { shadowRootForWithin } = await fixture(
-      html`<about-block data-testid="block"></about-block>`
+      html`<about-block data-testid="block"></about-block>`,
     );
     const { getByText } = within(shadowRootForWithin);
 

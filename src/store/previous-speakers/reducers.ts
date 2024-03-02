@@ -9,7 +9,7 @@ import {
 
 export const previousSpeakersReducer = (
   state = initialPreviousSpeakersState,
-  action: PreviousSpeakersActions
+  action: PreviousSpeakersActions,
 ): PreviousSpeakersState => {
   switch (action.type) {
     case FETCH_PREVIOUS_SPEAKERS:

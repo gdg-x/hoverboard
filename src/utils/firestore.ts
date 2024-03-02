@@ -15,7 +15,7 @@ import { db } from '../firebase';
 import { Id, ParentId } from '../models/types';
 
 export const mergeDataAndId = <T>(
-  snapshot: QueryDocumentSnapshot<DocumentData> | DocumentSnapshot<DocumentData>
+  snapshot: QueryDocumentSnapshot<DocumentData> | DocumentSnapshot<DocumentData>,
 ): T & Id => {
   return {
     ...(snapshot.data() as T),
@@ -24,7 +24,7 @@ export const mergeDataAndId = <T>(
 };
 
 export const dataWithParentId = <T>(
-  snapshot: QueryDocumentSnapshot<DocumentData>
+  snapshot: QueryDocumentSnapshot<DocumentData>,
 ): T & ParentId => {
   return {
     ...(snapshot.data() as T),
@@ -39,12 +39,12 @@ export const subscribeToDocument = <T>(
   path: string,
   onStart: () => void,
   onNext: (payload: T | undefined) => void,
-  onError: (error: Error) => void
+  onError: (error: Error) => void,
 ): Subscription => {
   const unsubscribe = onSnapshot(
     doc(db, path),
     (snapshot) => onNext(snapshot.exists() ? mergeDataAndId(snapshot) : undefined),
-    (payload) => onError(payload)
+    (payload) => onError(payload),
   );
 
   onStart();
@@ -56,12 +56,12 @@ export const subscribeToCollection = <T>(
   onStart: () => void,
   onNext: (payload: T[]) => void,
   onError: (error: Error) => void,
-  order = orderBy('name')
+  order = orderBy('name'),
 ): Subscription => {
   const unsubscribe = onSnapshot(
     query(collection(db, path), order),
     (snapshot) => onNext(snapshot.docs.map<T>(mergeDataAndId)),
-    (payload) => onError(payload)
+    (payload) => onError(payload),
   );
 
   onStart();
@@ -73,12 +73,12 @@ export const subscribeToCollectionGroup = <T>(
   onStart: () => void,
   onNext: (payload: T[]) => void,
   onError: (error: Error) => void,
-  order = orderBy('name')
+  order = orderBy('name'),
 ): Subscription => {
   const unsubscribe = onSnapshot(
     query(collectionGroup(db, path), order),
     (snapshot) => onNext(snapshot.docs.map<T>(dataWithParentId)),
-    (payload) => onError(payload)
+    (payload) => onError(payload),
   );
 
   onStart();
