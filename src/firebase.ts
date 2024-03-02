@@ -1,6 +1,6 @@
 import { getAnalytics } from 'firebase/analytics';
 import { FirebaseOptions, initializeApp } from 'firebase/app';
-import { enableMultiTabIndexedDbPersistence, getFirestore } from 'firebase/firestore';
+import { Firestore, initializeFirestore, persistentLocalCache } from 'firebase/firestore';
 import { getPerformance, initializePerformance } from 'firebase/performance';
 
 /**
@@ -26,9 +26,10 @@ if (!firebaseConfig) {
 }
 
 export const firebaseApp = initializeApp(firebaseConfig);
-export const db = getFirestore(firebaseApp);
+export const db: Firestore = initializeFirestore(firebaseApp, {
+  localCache: persistentLocalCache(),
+});
 export const performance = getPerformance(firebaseApp);
 export const analytics = getAnalytics(firebaseApp);
 
 initializePerformance(firebaseApp);
-enableMultiTabIndexedDbPersistence(db);
