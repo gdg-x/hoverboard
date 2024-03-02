@@ -25,10 +25,12 @@ if (!firebaseConfig) {
   throw new Error('window.firebaseConfig is not defined');
 }
 
+console.log('firebase.initializeApp.1');
 export const firebaseApp = initializeApp(firebaseConfig);
 export const db = getFirestore(firebaseApp);
 export const performance = getPerformance(firebaseApp);
 export const analytics = getAnalytics(firebaseApp);
+console.log('firebase.initializeApp.2');
 
 initializePerformance(firebaseApp);
 enableMultiTabIndexedDbPersistence(db);

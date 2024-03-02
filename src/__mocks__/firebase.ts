@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
+console.log('mocks.initializeApp.1');
 export const firebaseApp = initializeApp({
   apiKey: 'API_KEY',
   authDomain: 'PROJECT_ID.firebaseapp.com',
@@ -11,4 +12,5 @@ export const firebaseApp = initializeApp({
   appId: 'APP_ID',
   measurementId: 'G-MEASUREMENT_ID',
 });
+console.log('mocks.initializeApp.2');
 export const db = getFirestore(firebaseApp);
