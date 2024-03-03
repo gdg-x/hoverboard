@@ -10,8 +10,8 @@
     "npm": "10"
   },
   "scripts": {
-    "build": "npm run clean && concurrently npm:build:*",
-    "build:index": "cpx \"../dist/*.html\" dist --verbose",
+    "build": "npm run clean && mkdir dist && concurrently npm:build:*",
+    "build:index": "cp -v ../dist/index.html dist/index.html",
     "build:src": "tsc",
     "clean": "rm -rf dist",
     "start": "npm run clean && concurrently --kill-others npm:start:*",
@@ -29,7 +29,6 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.2",
     "concurrently": "^8.2.2",
-    "cpx2": "^7.0.1",
     "typescript": "^5.3.3"
   }
 }
