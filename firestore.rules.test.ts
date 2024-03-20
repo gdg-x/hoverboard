@@ -72,6 +72,7 @@ describe('firestore', () => {
       let ownDocRef: DocumentReference;
 
       beforeEach(async () => {
+        console.log('beforeEach');
         testEnv = await setupApp({ userId: '2', data: mockData });
 
         colRef = collection(testEnv.firestore(), 'sessions/1/feedback');
@@ -80,6 +81,7 @@ describe('firestore', () => {
       });
 
       it('fail on other documents', () => {
+        console.log('one');
         expect(getDocs(colRef)).toDeny();
         expect(addDoc(colRef, mockFeedback)).toDeny();
         expect(getDoc(docRef)).toDeny();
@@ -88,13 +90,19 @@ describe('firestore', () => {
       });
 
       it('can interact with own documents', () => {
+        console.log('two.1');
         expect(getDoc(ownDocRef)).toAllow();
+        console.log('two.2');
         expect(updateDoc(ownDocRef, {})).toAllow();
+        console.log('two.3');
         expect(deleteDoc(ownDocRef)).toAllow();
+        console.log('two.4');
       });
 
       it('data validation', () => {
+        console.log('three.1');
         expect(updateDoc(ownDocRef, {})).toAllow();
+        console.log('three.2');
         [
           { contentRating: -1 },
           { contentRating: 11 },
@@ -103,8 +111,10 @@ describe('firestore', () => {
           { comment: null },
           { comment: 'c'.repeat(257) },
         ].forEach((data) => {
+          console.log('three.3', data);
           expect(updateDoc(ownDocRef, data)).toDeny();
         });
+        console.log('three.4');
       });
     });
   });

@@ -15,6 +15,7 @@ let testEnv: RulesTestEnvironment;
 let servers: SpawndChildProcess[] = [];
 
 beforeAll(async () => {
+  console.log('beforeAll');
   servers = await setup({
     command: 'npx firebase emulators:start --only firestore',
     launchTimeout: 30000,
@@ -24,6 +25,7 @@ beforeAll(async () => {
 }, 30000);
 
 afterAll(async () => {
+  console.log('afterAll');
   await teardown(servers);
 });
 
@@ -33,6 +35,7 @@ interface SetupApp {
 }
 
 export const setupApp = async ({ userId, data }: SetupApp = {}) => {
+  console.log('setupApp');
   const projectId = `rules-spec-${Date.now()}`;
   const config: TestEnvironmentConfig = {
     projectId,
@@ -41,7 +44,9 @@ export const setupApp = async ({ userId, data }: SetupApp = {}) => {
       host: 'localhost',
     },
   };
+  console.log('initializeTestEnvironment.1');
   testEnv = await initializeTestEnvironment(config);
+  console.log('initializeTestEnvironment.2');
 
   if (data) {
     testEnv.withSecurityRulesDisabled(async (context: RulesTestContext) => {
@@ -61,6 +66,7 @@ export const setupApp = async ({ userId, data }: SetupApp = {}) => {
 };
 
 export const teardownApp = async () => {
+  console.log('teardownApp');
   await testEnv.clearFirestore();
   await testEnv.cleanup();
 };
