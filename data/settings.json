@@ -1,21 +1,21 @@
 {
   "organizer": {
-    "name": "IWD WTM LATAM 2023",
+    "name": "IWD WTM LATAM 2024",
     "twitter": "https://twitter.com/LatamLeads",
     "blog": "",
     "url": "https://www.eventbrite.com.mx/e/562388277477"
   },
-  "startDate": "2023-04-29T08:00:00+05:00",
-  "endDate": "2023-04-29T17:00:00+05:00",
+  "startDate": "2024-04-28T08:00:00+05:00",
+  "endDate": "2024-04-28T17:00:00+05:00",
   "webapp": {
-    "shortName": "IWD LATAM 2023", 
+    "shortName": "IWD LATAM 2024",
     "themeColor": "#FFF2EC",
     "backgroundColor": "#FFF2EC"
   },
   "dateFormat": {
     "locale": "es-US"
   },
-  "hashtag": "WTMDareToBe",
+  "hashtag": "WTMImpactTheFuture",
   "disabledSchedule": false,
   "navigation": [
     {
@@ -48,7 +48,6 @@
       "label": "Discord",
       "target": "_blank"
     }
-
   ],
   "heroSettings": {
     "home": {
@@ -61,7 +60,7 @@
     },
     "team": {
       "title": "Equipo",
-      "metaDescription": "Obten más información sobre los organizadores",
+      "metaDescription": "Obten más información sobre las organizadoras",
       "background": {
         "color": "#fff"
       },
@@ -146,5 +145,8 @@
       "itemsCount": 0
     }
   },
-  "showForkMeBlockForProjectIds": ["hoverboard-master", "hoverboard-dev"]
+  "showForkMeBlockForProjectIds": [
+    "hoverboard-master",
+    "hoverboard-dev"
+  ]
 }
