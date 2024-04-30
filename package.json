@@ -106,7 +106,7 @@
     "nunjucks": "^3.2.4",
     "prettier": "3.2.5",
     "prettier-plugin-package": "1.4.0",
-    "rollup": "^4.13.2",
+    "rollup": "^4.17.2",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-workbox": "^8.1.0",
