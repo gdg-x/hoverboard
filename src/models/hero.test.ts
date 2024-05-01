@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { Hero } from './hero';
 import { allKeys } from './utils';
 

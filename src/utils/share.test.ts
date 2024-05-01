@@ -1,7 +1,15 @@
+import { afterEach, beforeAll, describe, expect, it } from '@jest/globals';
+import { SpyInstance, spyOn } from 'jest-mock';
 import { share } from './share';
 
+type Open = (
+  url?: string | URL | undefined,
+  target?: string | undefined,
+  features?: string | undefined,
+) => Window | null;
+
 describe('share', () => {
-  let open: jest.SpyInstance<Window | null>;
+  let open: SpyInstance<Open>;
   const features = (height: number) =>
     `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=600,height=${height}`;
   const twitterUrl = [
@@ -11,7 +19,7 @@ describe('share', () => {
 
   beforeAll(() => {
     document.title = 'Awesome Schedule';
-    open = jest.spyOn(window, 'open').mockImplementation();
+    open = spyOn(window, 'open').mockImplementation(() => null);
   });
 
   afterEach(() => {
