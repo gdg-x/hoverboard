@@ -94,7 +94,7 @@
     "eslint-plugin-html": "^8.0.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^28.3.0",
-    "eslint-plugin-jest-dom": "^5.2.0",
+    "eslint-plugin-jest-dom": "^5.4.0",
     "eslint-plugin-testing-library": "^6.2.0",
     "firebase-admin": "^12.1.0",
     "firebase-tools": "^13.7.5",
