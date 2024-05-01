@@ -1,4 +1,4 @@
-import { beforeEach, describe, it } from '@jest/globals';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { screen } from '@testing-library/dom';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';

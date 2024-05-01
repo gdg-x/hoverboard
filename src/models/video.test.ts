@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import data from '../../docs/default-firebase-data.json';
 import { allKeys } from './utils';
 import { Video } from './video';
