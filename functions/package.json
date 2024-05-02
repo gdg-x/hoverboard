@@ -30,6 +30,6 @@
     "@tsconfig/node20": "^20.1.4",
     "concurrently": "^8.2.2",
     "cpx2": "^7.0.1",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.5"
   }
 }
