@@ -89,6 +89,7 @@
       {{ webVitalsPolyfill | safe }}
 
       // Capture the config object from /__/firebase/init.js for src/firebase.ts
+      console.log('index.initializeApp.1');
       window.firebase = {
         initializeApp: (config) => {
           window.firebaseConfig = config;
@@ -96,6 +97,7 @@
           delete window.firebase;
         },
       };
+      console.log('index.initializeApp.2');
     </script>
 
     <script src="/__/firebase/init.js"></script>
