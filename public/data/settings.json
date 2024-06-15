@@ -1,21 +1,21 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "name": "GDG Cloud Hanoi 2024",
+    "twitter": "GDGCloudHanoi",
+    "blog": "https://gdgcloudhanoi.dev/",
+    "url": "https://gdgcloudhanoi.dev/"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2024-07-27T13:30:00+07:00",
+  "endDate": "2024-07-27T17:30:00+07:00",
   "webapp": {
-    "shortName": "DevFest",
+    "shortName": "Google I/O Extended Cloud Hanoi 2024",
     "themeColor": "#673AB7",
     "backgroundColor": "#673AB7"
   },
   "dateFormat": {
-    "locale": "en-US"
+    "locale": "vi-VN"
   },
-  "hashtag": "DevFest",
+  "hashtag": "Google I/O Extended",
   "disabledSchedule": false,
   "navigation": [
     {
@@ -139,24 +139,12 @@
   "socialNetwork": {
     "follow": [
       {
-        "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
-      },
-      {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.facebook.com/GDGCloudHanoi"
       },
       {
-        "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
-      },
-      {
-        "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "name": "X",
+        "url": "https://x.com/GDGCloudHanoi"
       }
     ],
     "share": [
@@ -170,7 +158,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "hello@gdgcloudhanoi.dev",
   "signInProviders": {
     "providersData": [
       {
@@ -207,5 +195,8 @@
       "itemsCount": 5
     }
   },
-  "showForkMeBlockForProjectIds": ["hoverboard-master", "hoverboard-dev"]
+  "showForkMeBlockForProjectIds": [
+    "hoverboard-master",
+    "hoverboard-dev"
+  ]
 }
