@@ -1,21 +1,21 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
+    "name": "GDG Sweden",
     "twitter": "gdglviv",
     "blog": "https://medium.com/gdg-lviv",
     "url": "http://lviv.gdg.org.ua/"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2024-12-013T09:00:00+01:00",
+  "endDate": "2024-12-01T19:00:00+01:00",
   "webapp": {
-    "shortName": "DevFest",
+    "shortName": "DevFest Stockholm",
     "themeColor": "#673AB7",
     "backgroundColor": "#673AB7"
   },
   "dateFormat": {
     "locale": "en-US"
   },
-  "hashtag": "DevFest",
+  "hashtag": "DevFestStockholm",
   "disabledSchedule": false,
   "navigation": [
     {
@@ -121,10 +121,10 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "name": "TBD",
+    "city": "Stockholm",
+    "short": "Stockholm",
+    "address": "TBD, Stockholm",
     "pointer": {
       "latitude": 49.809841,
       "longitude": 23.972805,
@@ -170,7 +170,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "devfest24@gdgsweden.se",
   "signInProviders": {
     "providersData": [
       {
