@@ -102,7 +102,7 @@
     "jest-dev-server": "^10.0.0",
     "jest-environment-jsdom": "^29.7.0",
     "markdownlint": "^0.34.0",
-    "markdownlint-cli": "^0.40.0",
+    "markdownlint-cli": "^0.41.0",
     "nunjucks": "^3.2.4",
     "prettier": "3.3.0",
     "prettier-plugin-package": "1.4.0",
