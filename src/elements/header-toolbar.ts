@@ -302,7 +302,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   private isAccountIconHidden(signedIn: boolean, isTabletPlus: boolean) {
-    return signedIn || isTabletPlus;
+    return signedIn || !isTabletPlus;
   }
 
   @computed('tickets')
