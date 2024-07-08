@@ -152,6 +152,13 @@ const ROUTES: Route[] = [
       await import('./pages/faq-page.js');
     },
   },
+  {
+    path: '/neighborhood',
+    component: 'neighborhood-page',
+    action: async () => {
+      await import('./pages/neighborhood-page.js');
+    },
+  },
   // {
   //   path: '/coc',
   //   component: 'coc-page',

@@ -6,7 +6,7 @@ import { Ticket } from '../models/ticket';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { initialTicketsState } from '../store/tickets/state';
-import { buyTicket, contentLoaders, ticketsBlock } from '../utils/data';
+import { buyTicket, contentLoaders, ticketsBlock, scholarshipTicket } from '../utils/data';
 import '../utils/icons';
 import './content-loader';
 import './shared-styles';
@@ -188,7 +188,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
                   hidden$="[[ticket.soldOut]]"
                   disabled$="[[!ticket.available]]"
                 >
-                  [[getButtonText(ticket.available)]]
+                  [[getButtonText(ticket.available,ticket.scholarship)]]
                 </paper-button>
               </div>
             </a>
@@ -238,7 +238,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
-  private getButtonText(available: boolean) {
-    return available ? buyTicket : this.ticketsBlock.notAvailableYet;
+  private getButtonText(available: boolean, scholarship: boolean) {
+    return scholarship ? scholarshipTicket : (available ? buyTicket : this.ticketsBlock.notAvailableYet);
   }
 }

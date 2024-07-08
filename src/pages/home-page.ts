@@ -24,6 +24,7 @@ import { openVideoDialog } from '../store/ui/actions';
 import {
   aboutBlock,
   buyTicket,
+  scholarshipTicket,
   dates,
   description,
   heroSettings,
@@ -53,11 +54,11 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
         .hero-logo {
           --lazy-image-width: 100%;
-          --lazy-image-height: 76px;
+          --lazy-image-height: 200px;
           width: var(--lazy-image-width);
           height: var(--lazy-image-height);
-          max-width: 240px;
-          max-height: 76px;
+          max-width: 400px;
+          max-height: 400px;
         }
 
         .info-items {
@@ -164,7 +165,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         hide-logo
       >
         <div class="home-content" layout vertical center>
-          <lazy-image class="hero-logo" src="/images/logo.svg" alt="[[siteTitle]]"></lazy-image>
+          <lazy-image class="hero-logo" src="/images/devrelcon.png" alt="[[siteTitle]]"></lazy-image>
 
           <div class="info-items">
             <div class="info-item">[[city]]. [[dates]]</div>
@@ -268,6 +269,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   private dates = dates;
   private viewHighlights = viewHighlights;
   private buyTicket = buyTicket;
+  private scholarshipTicket = scholarshipTicket;
   private heroSettings = heroSettings.home;
   private aboutBlock = aboutBlock;
 

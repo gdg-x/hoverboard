@@ -19,6 +19,7 @@ describe('ticket', () => {
       'soldOut',
       'starts',
       'url',
+      'scholarship',
     ];
     expect(tickets).toHaveLength(5);
     expect(allKeys(tickets)).toStrictEqual(keys);

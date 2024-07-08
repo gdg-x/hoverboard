@@ -2,8 +2,8 @@
   "organizer": {
     "name": "Major League Hacking (MLH) + Hoopy",
     "twitter": "mlhacks",
-    "blog": "https://mlh.io",
-    "url": "https://mlh.io"
+    "blog": "https://developerrelations.com/all-content",
+    "url": "https://sponsor.mlh.io"
   },
   "startDate": "2024-07-18T09:00:00+03:00",
   "endDate": "2024-07-19T19:00:00+03:00",
@@ -34,19 +34,19 @@
       "label": "Schedule"
     },
     {
-      "route": "team",
-      "permalink": "/team",
-      "label": "Team"
+      "route": "faq",
+      "permalink": "/faq",
+      "label": "FAQ"
     },
     {
-      "route": "blog",
-      "permalink": "/blog",
-      "label": "Blog"
+      "route": "neighborhood",
+      "permalink": "/neighborhood",
+      "label": "Neighborhood Guide"
     }
   ],
   "heroSettings": {
     "home": {
-      "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, and Technical Community Management.",
+      "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions.",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -96,7 +96,7 @@
     },
     "faq": {
       "title": "FAQs",
-      "metaDescription": "Find you answer right here!",
+      "metaDescription": "Find your answers right here!",
       "background": {
         "color": "#fff"
       },
@@ -105,6 +105,14 @@
     "coc": {
       "title": "Code of Conduct",
       "metaDescription": "Learn more about our expectations for all those who participate in our community",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
+    },
+    "neighborhood": {
+      "title": "Neighborhood Guide",
+      "metaDescription": "Learn more about the neighborhood DevRelCon is happening in",
       "background": {
         "color": "#fff"
       },
@@ -122,7 +130,7 @@
   "location": {
     "label": "Location",
     "name": "Industry City",
-    "city": "Brooklyn",
+    "city": "Brooklyn, NYC",
     "short": "NYC",
     "address": "33 34th St, Brooklyn, NY 11232, USA",
     "pointer": {
@@ -131,8 +139,9 @@
       "zoom": 5
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": 40.6578353670539,
+      "longitude": -74.00697386511747,
+      "zoom": 5
     },
     "description": "Located just 20 minutes from Manhattan, Industry City is a historic shipping, warehousing, and manufacturing complex nestled on the New York waterfront. The space was reimagined in the 2010s and transformed into a space for designers, artists, and creators with studios, co-working spaces, restaurants, workshops, distilleries and breweries, and more."
   },

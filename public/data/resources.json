@@ -1,10 +1,10 @@
 {
-  "title": "GDG DevFest Season 2018",
-  "description": "Join the community, learn new things!",
+  "title": "DevRelCon NY",
+  "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions.<br><br>Whether you’re looking to advance your craft and career, are in-between roles, or simply want to reconnect with the wider DevRel community, DevRelCon is the place for you! Sessions will cover practical topics like metrics and ROI, managing up and down, community management, content creation, career paths, open source, improving and scaling using AI tools, and much more.",
   "image": "images/social-share.jpg",
-  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "October 12-13, 2018",
-  "partnershipProposition": "https://bit.ly/dfua17-partners",
+  "keywords": "event, devrel, devrelcon, developer relations",
+  "dates": "July 18-19, 2024",
+  "partnershipProposition": "https://majorleaguehacking.typeform.com/to/nkpmOqZp",
   "share": "Share",
   "followOur": "Follow our",
   "followUs": "Follow us",
@@ -12,6 +12,7 @@
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
   "buyTicket": "Buy ticket",
+  "scholarshipTicket": "Apply Now",
   "signIn": "Sign in",
   "signOut": "Sign out",
   "viewHighlights": "View Highlights",
@@ -25,6 +26,7 @@
   "country": "Country",
   "time": "Time",
   "faq": "/data/faq.md",
+  "neighborhood": "/data/neighborhood.md",
   "coc": "/data/coc.md",
   "timezoneOffset": "-180",
   "loading": "Loading...",
@@ -44,48 +46,43 @@
       "title": "About",
       "links": [
         {
-          "name": "GDG Lviv",
-          "url": "http://lviv.gdg.org.ua/",
+          "name": "Major League Hacking",
+          "url": "https://sponsor.mlh.io/",
           "newTab": true
         },
         {
-          "name": "GDG",
-          "url": "https://developers.google.com/groups/",
+          "name": "Hoopy",
+          "url": "https://hoopy.io/",
           "newTab": true
         },
         {
-          "name": "DevFest",
-          "url": "https://devfest.withgoogle.com/",
-          "newTab": true
-        },
-        {
-          "name": "Meet the Team",
-          "url": "https://devfest.gdg.org.ua/team/",
+          "name": "Developer Relations",
+          "url": "https://developerrelations.com/",
           "newTab": true
         }
       ]
     },
     {
-      "title": "Explore Past DevFests",
+      "title": "Explore Past DevRelCon Events",
       "links": [
         {
-          "name": "DFUA 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
+          "name": "London 2023",
+          "url": "https://developerrelations.com/event/devrelcon-london-2023",
           "newTab": true
         },
         {
-          "name": "DFUA 2014",
-          "url": "https://dfua14.web.app/",
+          "name": "Yokohama 2023",
+          "url": "https://developerrelations.com/event/devrelcon-yokohama-2023",
           "newTab": true
         },
         {
-          "name": "DFUA 2015",
-          "url": "https://dfua15.web.app/",
+          "name": "LATAM 2023",
+          "url": "https://developerrelations.com/event/devrelcon-latam-2023",
           "newTab": true
         },
         {
-          "name": "DFUA 2016",
-          "url": "https://dfua16.web.app/",
+          "name": "San Francisco 2019",
+          "url": "https://developerrelations.com/event/devrelcon-san-francisco-2019",
           "newTab": true
         }
       ]
@@ -94,28 +91,18 @@
       "title": "Event Resources",
       "links": [
         {
-          "name": "Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
-        {
-          "name": "Info Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
-        {
-          "name": "Media Kit",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
-        {
-          "name": "Call for Papers",
-          "url": "https://drive.google.com/open?id=10tPuu_7ASM8C70SotqRqIW5Uzos9BzALilMMQPg_JvA",
+          "name": "Sponsor DevRelCon",
+          "url": "https://majorleaguehacking.typeform.com/to/nkpmOqZp",
           "newTab": true
         },
         {
           "name": "FAQs",
           "url": "/faq",
+          "newTab": false
+        },
+        {
+          "name": "Neighborhood Guide",
+          "url": "/neighborhood",
           "newTab": false
         }
       ]
@@ -123,32 +110,25 @@
   ],
   "subscribeNote": "No spam, only the latest news and updates!",
   "codeOfConduct": "Code of Conduct",
-  "codeOfConductBlock": {
-    "organization": "DevFest",
-    "form": "https://bit.ly/2RstTJ8",
-    "contacts": [
-      "Organizer Oleh Zasadnyy, [+38 093 486 6460](tel:+380934866460), o.zasadnyy@gdg.org.ua",
-      "Organizer Sofiya Huts, [+38 093 486 1425](tel:+380934861425), s.huts@gdg.org.ua"
-    ]
-  },
+  
   "aboutBlock": {
     "title": "About",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
-        "label": "Explore featured session",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "description": "See recorded sessions from previous events for examples of what to expect at DevRelCon NY!",
+        "label": "Watch past DevRelCon talks",
+        "link": "https://www.youtube.com/playlist?list=PLwOuygPowJYYza4HEzvjlQZyy4m4t1EPB"
       },
       "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "description": "DevRelCon is a global series of conferences for developer relations, developer experience and developer marketing professionals.",
+        "label": "See why you should attend DevRelCon!",
+        "youtubeId": "VXbhT8lPEiY"
       }
     },
     "statisticsBlock": {
       "attendees": {
         "label": "Attendees",
-        "number": "900"
+        "number": "250"
       },
       "days": {
         "label": "Days",
@@ -156,17 +136,17 @@
       },
       "sessions": {
         "label": "Sessions",
-        "number": "50"
+        "number": "40"
       },
       "tracks": {
         "label": "Tracks",
-        "number": "4"
+        "number": "3"
       }
     }
   },
   "ticketsBlock": {
     "title": "Tickets",
-    "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
+    "ticketsDetails": "Tickets grant access to all conference sessions, coffee breaks, breakfast, lunch and party. Travel and accommodations are NOT included in the ticket price.",
     "soldOut": "You missed it!",
     "notAvailableYet": "Not available yet",
     "save": "Save ${discount}% today"
@@ -183,10 +163,10 @@
     "toast": "We will contact you soon!"
   },
   "featuredVideos": {
-    "title": "DFUA'16 featured videos",
+    "title": "DevRelCon featured videos",
     "callToAction": {
       "label": "See all videos",
-      "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+      "link": "https://www.youtube.com/playlist?list=PLwOuygPowJYZ3AMB2Ry5SCH4XK4gKsIXb"
     }
   },
   "blog": {
@@ -194,10 +174,10 @@
     "suggested": "Up next"
   },
   "latestPostsBlock": {
-    "title": "The latest news",
+    "title": "The latest articles",
     "callToAction": {
-      "label": "View all stories",
-      "link": "/blog"
+      "label": "View all posts",
+      "link": "https://developerrelations.com/all-content"
     }
   },
   "speakers": {
@@ -220,11 +200,11 @@
     }
   },
   "galleryBlock": {
-    "title": "#dfua16 highlights",
-    "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
+    "title": "#devrelcon highlights",
+    "description": "Learn more about past DevRelCon events - they are educational, fun, and help move the craft and strategy of DevRel forward.",
     "callToAction": {
-      "label": "See all photos",
-      "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
+      "label": "See past events",
+      "link": "https://developerrelations.com/devrelcon"
     }
   },
   "mapBlock": {
@@ -309,31 +289,22 @@
     }
   },
   "aboutOrganizerBlock": {
-    "image": "/images/team.jpg",
+    "image": "/images/team.webp",
     "blocks": [
       {
-        "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "title": "Organizers",
+        "description": "DevRelCon NY is organized by Major League Hacking (MLH) and Hoopy.",
         "callToAction": {
-          "label": "Open team page",
-          "link": "/team"
+          "label": "Learn more about Major League Hacking",
+          "link": "https://sponsor.mlh.io/"
         }
       },
       {
-        "title": "What is a GDG?",
-        "description": "A Google Developer Group is a community of volunteers who create exciting projects and share experiences about Google technologies.",
+        "title": "What is DevRelCon?",
+        "description": "DevRelCon is a global series of events, created by Hoopy, to provide a forum for developer relations and developer experience professionals share with other practitioners. Beginning in London in 2015, there are now also editions in Latin America, Prague, San Francisco, Tokyo and China.",
         "callToAction": {
           "label": "Read more",
-          "link": "https://developers.google.com/groups/",
-          "newTab": true
-        }
-      },
-      {
-        "title": "What is DevFest?",
-        "description": "DevFests are community-led developer events hosted by Google Developer Groups around the globe.",
-        "callToAction": {
-          "label": "Read more",
-          "link": "https://devfest.withgoogle.com/",
+          "link": "https://www.developerrelations.com/devrelcon/",
           "newTab": true
         }
       }

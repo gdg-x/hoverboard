@@ -11,4 +11,5 @@ export interface Ticket {
   soldOut: boolean;
   starts?: string;
   url: string;
+  scholarship?: boolean;
 }

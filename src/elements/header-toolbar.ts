@@ -17,7 +17,7 @@ import { ReduxMixin } from '../store/mixin';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
-import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../utils/data';
+import { buyTicket, scholarshipTicket, navigation, signIn, signOut as signOutText, title } from '../utils/data';
 import './notification-toggle';
 import './shared-styles';
 
@@ -235,6 +235,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   private navigation = navigation;
   private signOutText = signOutText;
   private buyTicket = buyTicket;
+  private scholarshipTicket = scholarshipTicket;
 
   @property({ type: Boolean, notify: true })
   drawerOpened: boolean = false;
@@ -308,7 +309,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   @computed('tickets')
   private get ticketUrl() {
     if (this.tickets instanceof Success && this.tickets.data.length > 0) {
-      const availableTicket = this.tickets.data.find((ticket) => ticket.available);
+      const availableTicket = this.tickets.data.find((ticket) => ticket.available && !ticket.scholarship);
       return (availableTicket || this.tickets.data[0])?.url || '';
     } else {
       return '';

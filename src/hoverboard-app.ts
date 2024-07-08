@@ -32,6 +32,7 @@ import { initialTicketsState } from './store/tickets/state';
 import { OpenedChanged } from './utils/app-drawer';
 import {
   buyTicket,
+  scholarshipTicket,
   dates,
   location,
   navigation,
@@ -213,6 +214,7 @@ export class HoverboardApp extends PolymerElement {
   private alt = title;
   private dates = dates;
   private buyTicket = buyTicket;
+  private scholarshipTicket = scholarshipTicket;
   private navigation = navigation;
   private shortLocation = location.short;
 

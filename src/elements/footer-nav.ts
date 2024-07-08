@@ -71,17 +71,17 @@ export class FooterNav extends PolymerElement {
         <a href="[[organizer.url]]" target="_blank" rel="noopener noreferrer">
           <lazy-image
             class="footer-logo"
-            src="../../images/organizer-logo.svg"
+            src="../../images/mlhhoopyblack.png"
             alt="[[organizer.name]]"
           ></lazy-image>
         </a>
 
         <div class="copyright">
-          Based on
+          Website Based on
           <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer"
             >Project Hoverboard</a
           >
-          · <a class="coc" href="/coc">[[codeOfConduct]]</a>
+          · <a class="coc" href="https://mlh.io/code-of-conduct">[[codeOfConduct]]</a>
         </div>
       </div>
     `;
