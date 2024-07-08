@@ -4,6 +4,7 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
 import '../components/about-block';
+import '../components/cfp-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
 import '../elements/about-organizer-block';
@@ -19,6 +20,7 @@ import { openVideoDialog } from '../store/ui/actions';
 import {
   aboutBlock,
   buyTicket,
+  cfpBlock,
   dates,
   description,
   heroSettings,
@@ -241,7 +243,8 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         </div>
       </hero-block>
       <about-block></about-block>
-      <cfp-block></cfp-block>
+      <cfp-block id="cfp-block"></cfp-block>
+      <!-- <speakers-block></speakers-block> -->
       <tickets-block id="tickets-block"></tickets-block>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
@@ -258,6 +261,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   private buyTicket = buyTicket;
   private heroSettings = heroSettings.home;
   private aboutBlock = aboutBlock;
+  private cfpBlock = cfpBlock;
 
   @query('#hero')
   hero!: HeroBlock;

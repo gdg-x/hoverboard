@@ -12,7 +12,7 @@ import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { initialUiState } from '../store/ui/state';
-import { buyTicket, navigation, title } from '../utils/data';
+import { buyTicket, cfpBlock, navigation, title } from '../utils/data';
 import './shared-styles';
 
 export const HEADER_HEIGHT = 76;
@@ -155,6 +155,10 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           <a href$="[[ticketUrl]]" target="_blank" rel="noopener noreferrer">
             <paper-button class="buy-button" primary>[[buyTicket]]</paper-button>
           </a>
+
+          <a href$="[[cfpBlock.open.callToAction.link]]" target="_blank" rel="noopener noreferrer">
+            <paper-button class="buy-button" primary>[[cfpBlock.open.callToAction.label]]</paper-button>
+          </a>
         </paper-tabs>
       </app-toolbar>
     `;
@@ -163,6 +167,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   private logoTitle = title;
   private navigation = navigation;
   private buyTicket = buyTicket;
+  private cfpBlock = cfpBlock;
 
   @property({ type: Boolean, notify: true })
   drawerOpened: boolean = false;

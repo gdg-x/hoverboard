@@ -5,6 +5,7 @@ export {
   buyTicket,
   coc,
   codeOfConduct,
+  cfpBlock,
   dates,
   description,
   emailUs,
