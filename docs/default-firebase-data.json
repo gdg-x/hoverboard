@@ -25,21 +25,27 @@
       "items": [
         {
           "order": 0,
-          "logoUrl": "../images/logos/gdg-lviv.svg",
+          "logoUrl": "../images/organizer-logo.svg",
+          "name": "GDG Sweden",
+          "url": "https://linkedin.com/company/gdg-sweden/"
+        },
+        {
+          "order": 0,
+          "logoUrl": "../images/logos/gdg-android-stockholm.svg",
           "name": "GDG Android Stockholm",
           "url": "https://gdg.community.dev/gdg-stockholm-android/"
         },
         {
           "order": 1,
-          "logoUrl": "../images/logos/gdg-lviv.svg",
+          "logoUrl": "../images/logos/gdg-cloud-stockholm.svg",
           "name": "GDG Cloud Stockholm",
           "url": "https://gdg.community.dev/gdg-cloud-stockholm/"
         },
         {
           "order": 3,
-          "logoUrl": "../images/logos/gdg-lviv.svg",
+          "logoUrl": "../images/logos/womentechmakers.svg",
           "name": "Women Techmakers Stockholm",
-          "url": "https://gdg.community.dev/gdg-cloud-stockholm/"
+          "url": "https://developers.google.com/womentechmakers"
         }
       ],
       "order": 0,
@@ -55,67 +61,28 @@
         },
         {
           "order": 1,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
-        },
-        {
-          "order": 2,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
-        },
-        {
-          "order": 3,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
-        },
-        {
-          "order": 4,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
-        },
-        {
-          "order": 5,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
-        },
-        {
-          "order": 6,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
-        },
-        {
-          "order": 7,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
-        },
-        {
-          "order": 8,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
-        },
-        {
-          "order": 9,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
-        },
-        {
-          "order": 10,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
+          "logoUrl": "../images/logos/firebase.svg",
+          "name": "Firebase",
+          "url": "https://firebase.google.com/"
         }
       ],
       "order": 1,
       "title": "General Partner"
+    },
+    {
+      "items": [],
+      "order": 2,
+      "title": "Gold Partners"
+    },
+    {
+      "items": [],
+      "order": 3,
+      "title": "Silver Partners"
+    },
+    {
+      "items": [],
+      "order": 4,
+      "title": "Bronze Partners"
     }
   ],
   "schedule": {
@@ -436,42 +403,213 @@
     {
       "members": [
         {
-          "name": "Oleh Zasadnyy",
-          "photo": "/images/people/oleh_zasadnyy.jpg",
-          "photoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/oleh_zasadnyy.jpg",
+          "name": "Abdel Sghiouar",
+          "photo": "/images/people/abdel.jpg",
+          "photoUrl": "",
           "socials": [
             {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/oleh.zasadnyy",
-              "name": "Facebook"
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
             },
             {
               "icon": "twitter",
-              "link": "https://twitter.com/ozasadnyy",
+              "link": "",
               "name": "Twitter"
-            },
-            {
-              "icon": "website",
-              "link": "http://o.zasadnyy.com/",
-              "name": "Blog"
             }
           ],
           "order": 0,
-          "title": "Website and sponsors"
+          "title": "Speakers"
         },
         {
-          "name": "Sofiya Huts",
-          "photo": "/images/people/sofiya_huts.jpg",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fsofiya_huts.jpg?alt=media&token=a911eafb-f709-4af7-b1cb-58a6604b70d1",
+          "name": "Annie Tsai",
+          "photo": "/images/people/annie.jpg",
+          "photoUrl": "",
           "socials": [
             {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/sophie.huts.7",
-              "name": "Facebook"
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "",
+              "name": "Twitter"
             }
           ],
           "order": 1,
-          "title": "Social and media"
+          "title": "Social and Media"
+        },
+        {
+          "name": "Daniele Favaro",
+          "photo": "/images/people/daniele.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "",
+              "name": "Twitter"
+            }
+          ],
+          "order": 2,
+          "title": "Website and sponsors"
+        },
+        {
+          "name": "Jonas Jonsson",
+          "photo": "/images/people/daniele.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "",
+              "name": "Twitter"
+            }
+          ],
+          "order": 3,
+          "title": "Social and Medi, Volunteers"
+        },
+        {
+          "name": "Marina Dushkina",
+          "photo": "/images/people/marina.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "",
+              "name": "Twitter"
+            }
+          ],
+          "order": 4,
+          "title": "Social and Medi, Volunteers"
+        },
+        {
+          "name": "Mikael Kent Svensson",
+          "photo": "/images/people/Mikael.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "",
+              "name": "Twitter"
+            }
+          ],
+          "order": 5,
+          "title": "Sponsors"
+        },
+        {
+          "name": "Mostafa Moradian",
+          "photo": "/images/people/mostafa.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "",
+              "name": "Twitter"
+            }
+          ],
+          "order": 6,
+          "title": "Sponsors, speakers"
+        },
+        {
+          "name": "Rachel Saunders",
+          "photo": "/images/people/rachel.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "",
+              "name": "Twitter"
+            }
+          ],
+          "order": 7,
+          "title": "Copy"
+        },
+        {
+          "name": "Ruben Blazquez Cob",
+          "photo": "/images/people/ruben.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "",
+              "name": "Twitter"
+            }
+          ],
+          "order": 8,
+          "title": "Sponsors"
+        },
+        {
+          "name": "Tobias Zuber",
+          "photo": "/images/people/tobias.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "",
+              "name": "Twitter"
+            }
+          ],
+          "order": 9,
+          "title": "Ticketing"
+        },
+        {
+          "name": "Zahra Mirzaei",
+          "photo": "/images/people/zahra.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "",
+              "name": "Twitter"
+            }
+          ],
+          "order": 10,
+          "title": "Social and Medi, Volunteers"
         }
       ],
       "title": "Core Team"
@@ -479,42 +617,12 @@
     {
       "members": [
         {
-          "name": "Ihor Dvoretskyi",
-          "photo": "/images/people/ihor_dvoretskyi.jpg",
-          "photoUrl": "",
-          "socials": [
-            {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/idvoretskyi",
-              "name": "Facebook"
-            },
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/idvoretskyi",
-              "name": "Twitter"
-            }
-          ],
+          "name": "We are looking for you",
+          "photo": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fwanted.jpg?alt=media&token=aea36205-8795-409e-ac68-2f5543151471",
+          "socials": [],
           "order": 0,
-          "title": "Cloud stream"
-        },
-        {
-          "name": "Dmytro Danylyk",
-          "photo": "/images/people/dmytro_danylyk.jpg",
-          "photoUrl": "",
-          "socials": [
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/dmytrodanylyk",
-              "name": "Twitter"
-            },
-            {
-              "icon": "website",
-              "link": "http://www.dmytrodanylyk.com/#/about",
-              "name": "Website"
-            }
-          ],
-          "order": 1,
-          "title": "Android Stream"
+          "title": "We are assembly a committee based on our community members. Get in touch with us if you wanna be part of it!"
         }
       ],
       "title": "Program Committee"
