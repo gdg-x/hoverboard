@@ -16,16 +16,12 @@ import {
 } from '@polymer/polymer/lib/utils/settings';
 import '@power-elements/lazy-image';
 import './components/snack-bar';
-import './elements/dialogs/feedback-dialog';
-import './elements/dialogs/signin-dialog';
-import './elements/dialogs/subscribe-dialog';
 import './elements/dialogs/video-dialog';
 import './elements/footer-block';
 import './elements/header-toolbar';
 import './elements/shared-styles';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
-import { onUser } from './store/auth/actions';
 import { queueSnackbar } from './store/snackbars';
 import { fetchTickets } from './store/tickets/actions';
 import { initialTicketsState } from './store/tickets/state';
@@ -36,7 +32,6 @@ import {
   location,
   navigation,
   offlineMessage,
-  signInProviders,
   title,
 } from './utils/data';
 import './utils/icons';
@@ -201,9 +196,6 @@ export class HoverboardApp extends PolymerElement {
         </app-header-layout>
       </app-drawer-layout>
 
-      <feedback-dialog></feedback-dialog>
-      <signin-dialog></signin-dialog>
-      <subscribe-dialog></subscribe-dialog>
       <video-dialog></video-dialog>
 
       <snack-bar></snack-bar>
@@ -228,8 +220,6 @@ export class HoverboardApp extends PolymerElement {
 
   @property({ type: Boolean })
   private drawerOpened = false;
-  @property({ type: Array })
-  private providerUrls = signInProviders.allowedProvidersUrl;
   @property({ type: String })
   private routeName = 'home';
 
@@ -256,7 +246,6 @@ export class HoverboardApp extends PolymerElement {
     console.log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
     startRouter(this.main);
-    onUser();
   }
 
   closeDrawer() {

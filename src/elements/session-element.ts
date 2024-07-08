@@ -1,4 +1,3 @@
-import { Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -6,14 +5,7 @@ import '@power-elements/lazy-image';
 import '../components/text-truncate';
 import { Session } from '../models/session';
 import { router } from '../router';
-import { RootState, store } from '../store';
-import { openFeedbackDialog, openSigninDialog } from '../store/dialogs/actions';
-import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
-import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
 import { ReduxMixin } from '../store/mixin';
-import { queueComplexSnackbar } from '../store/snackbars';
-import { initialUserState } from '../store/user/state';
-import { schedule } from '../utils/data';
 import { acceptingFeedback } from '../utils/feedback';
 import '../utils/icons';
 import { getVariableColor } from '../utils/styles';
@@ -237,33 +229,11 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  user = initialUserState;
-  @property({ type: Object })
   session: Session | undefined;
-  @property({ type: Object })
-  featuredSessions = initialFeaturedSessionsState;
   @property({ type: String })
   private queryParams: string | undefined;
   @property({ type: String })
   private dayName: string | undefined;
-
-  override stateChanged(state: RootState) {
-    this.user = state.user;
-    this.featuredSessions = state.featuredSessions;
-  }
-
-  @computed('featuredSessions', 'session')
-  get isFeatured(): boolean {
-    if (this.featuredSessions instanceof Success && this.session?.id) {
-      return this.featuredSessions.data[this.session.id] ?? false;
-    }
-    return false;
-  }
-
-  @computed('isFeatured')
-  private get icon() {
-    return this.isFeatured ? 'bookmark-check' : 'bookmark-plus';
-  }
 
   private getEnding(number: number) {
     return number > 1 ? 's' : '';
@@ -279,42 +249,6 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
       description.length,
     ].filter((index) => index > 0);
     return description.slice(0, Math.min(...indexes));
-  }
-
-  private toggleFeaturedSession(event: MouseEvent) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (!(this.user instanceof Success)) {
-      store.dispatch(
-        queueComplexSnackbar({
-          label: schedule.saveSessionsSignedOut,
-          action: {
-            title: 'Sign in',
-            callback: () => openSigninDialog(),
-          },
-        }),
-      );
-      return;
-    }
-
-    if (this.user instanceof Success && this.featuredSessions instanceof Success && this.session) {
-      const bookmarked = !this.featuredSessions.data[this.session.id];
-      const sessions = {
-        ...this.featuredSessions.data,
-        [this.session.id]: bookmarked,
-      };
-
-      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked));
-    }
-  }
-
-  private toggleFeedback(event: MouseEvent) {
-    event.preventDefault();
-    event.stopPropagation();
-    if (this.session) {
-      openFeedbackDialog(this.session);
-    }
   }
 
   private acceptingFeedback(): boolean {

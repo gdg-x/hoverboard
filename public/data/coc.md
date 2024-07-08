@@ -39,7 +39,3 @@ To report an incident look for a staff member by badge/attire or contact our inc
 {% for contact in codeOfConductBlock.contacts %}
 
 - {{ contact }}{% endfor %}
-
-#### Anonymous report
-
-You can make an anonymous report [here]({{ codeOfConductBlock.form }}). We can't follow up with you directly, but we will fully investigate it and take whatever action is necessary to prevent a recurrence.

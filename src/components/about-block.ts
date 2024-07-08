@@ -65,27 +65,6 @@ export class AboutBlock extends ThemedElement {
   override render() {
     return html`
       <div class="container">
-        <div>
-          <h1 class="container-title">${aboutBlock.title}</h1>
-          <p>${aboutBlock.callToAction.featuredSessions.description}</p>
-          <a
-            href="${aboutBlock.callToAction.featuredSessions.link}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <paper-button class="animated icon-right">
-              <span class="cta-label">${aboutBlock.callToAction.featuredSessions.label}</span>
-              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-            </paper-button>
-          </a>
-
-          <p>${aboutBlock.callToAction.howItWas.description}</p>
-          <paper-button class="animated icon-right" @click="${this.playVideo}">
-            <span>${aboutBlock.callToAction.howItWas.label}</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-          </paper-button>
-        </div>
-
         <div class="statistics-block">
           <div class="item">
             <div class="numbers">${aboutBlock.statisticsBlock.attendees.number}</div>

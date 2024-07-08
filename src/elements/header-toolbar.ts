@@ -9,16 +9,10 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { Hero } from '../models/hero';
 import { selectRouteName } from '../router';
 import { RootState } from '../store';
-import { signOut as signOutAction } from '../store/auth/actions';
-import { closeDialog, openSigninDialog } from '../store/dialogs/actions';
-import { selectIsDialogOpen } from '../store/dialogs/selectors';
-import { DIALOG } from '../store/dialogs/types';
 import { ReduxMixin } from '../store/mixin';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { initialUiState } from '../store/ui/state';
-import { initialUserState } from '../store/user/state';
-import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../utils/data';
-import './notification-toggle';
+import { buyTicket, navigation, title } from '../utils/data';
 import './shared-styles';
 
 export const HEADER_HEIGHT = 76;
@@ -107,28 +101,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           margin: 0 -16px -16px 0;
         }
 
-        .profile-details .profile-image {
-          margin-right: 16px;
-          width: 48px;
-          height: 48px;
-        }
-
-        .profile-name,
-        .profile-email {
-          font-size: 14px;
-          display: block;
-          white-space: nowrap;
-          color: var(--secondary-text-color);
-        }
-
-        .profile-action {
-          margin-top: 4px;
-          text-transform: uppercase;
-          color: var(--default-primary-color);
-          font-size: 14px;
-          cursor: pointer;
-        }
-
         paper-button iron-icon {
           margin-right: 8px;
           --iron-icon-fill-color: var(--hero-font-color);
@@ -180,60 +152,16 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
             </paper-tab>
           </template>
 
-          <paper-tab class="signin-tab" on-click="signIn" link hidden$="[[signedIn]]">
-            [[signInText]]
-          </paper-tab>
-
           <a href$="[[ticketUrl]]" target="_blank" rel="noopener noreferrer">
             <paper-button class="buy-button" primary>[[buyTicket]]</paper-button>
           </a>
         </paper-tabs>
-
-        <notification-toggle></notification-toggle>
-
-        <paper-menu-button
-          class="auth-menu"
-          hidden$="[[!signedIn]]"
-          vertical-align="top"
-          horizontal-align="right"
-          no-animations
-          layout
-          horizontal
-          center-center
-        >
-          <div
-            class="profile-image"
-            slot="dropdown-trigger"
-            style$="background-image: url('[[user.data.photoURL]]')"
-          ></div>
-          <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>
-            <div
-              class="profile-image"
-              slot="dropdown-trigger"
-              self-center
-              style$="background-image: url('[[user.data.photoURL]]')"
-            ></div>
-            <div layout vertical center-justified>
-              <span class="profile-name">[[user.data.displayName]]</span>
-              <span class="profile-email">[[user.data.email]]</span>
-              <span class="profile-action" role="button" on-click="signOut">[[signOutText]]</span>
-            </div>
-          </div>
-        </paper-menu-button>
-
-        <paper-icon-button
-          icon="hoverboard:account"
-          on-click="signIn"
-          hidden$="[[isAccountIconHidden(signedIn, viewport.isLaptopPlus)]]"
-        ></paper-icon-button>
       </app-toolbar>
     `;
   }
 
   private logoTitle = title;
-  private signInText = signIn;
   private navigation = navigation;
-  private signOutText = signOutText;
   private buyTicket = buyTicket;
 
   @property({ type: Boolean, notify: true })
@@ -245,25 +173,17 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   private viewport = initialUiState.viewport;
   @property({ type: Object })
   private heroSettings = initialUiState.heroSettings;
-  @property({ type: Boolean })
-  private signedIn = false;
-  @property({ type: Object })
-  private user = initialUserState;
   @property({ type: Boolean, reflectToAttribute: true })
   private transparent = false;
   @property({ type: String })
   private routeName = '';
-  @property({ type: Boolean })
-  private isDialogOpen = false;
+
 
   override stateChanged(state: RootState) {
-    this.user = state.user;
-    this.signedIn = state.user instanceof Success;
     this.tickets = state.tickets;
     this.heroSettings = state.ui.heroSettings;
     this.viewport = state.ui.viewport;
     this.routeName = selectRouteName(window.location.pathname);
-    this.isDialogOpen = selectIsDialogOpen(state, DIALOG.SIGNIN);
   }
 
   override connectedCallback() {
@@ -282,27 +202,8 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     this.drawerOpened = true;
   }
 
-  private signIn() {
-    openSigninDialog();
-  }
-
-  private signOut() {
-    signOutAction();
-  }
-
   private onScroll() {
     this.transparent = document.documentElement.scrollTop === 0;
-  }
-
-  @observe('signedIn')
-  private onSignedIn() {
-    if (this.isDialogOpen) {
-      closeDialog();
-    }
-  }
-
-  private isAccountIconHidden(signedIn: boolean, isTabletPlus: boolean) {
-    return signedIn || isTabletPlus;
   }
 
   @computed('tickets')

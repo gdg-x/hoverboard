@@ -1,8 +1,8 @@
 {
-  "name": "hoverboard",
-  "version": "3.0.0",
+  "name": "DevFest Stockholm",
+  "version": "1.0.0",
   "private": true,
-  "description": "Conference website template",
+  "description": "GDG DevFest Stockholm",
   "engines": {
     "node": "20",
     "npm": "10"
@@ -115,10 +115,5 @@
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
-  },
-  "contributors": [
-    "Oleh Zasadnyy, GDG Lviv",
-    "Sophie Huts, GDG Lviv",
-    "Abraham Williams, GDG Madison"
-  ]
+  }
 }

@@ -1,5 +1,5 @@
 import { updateMetadata as pwaUpdateMetadata } from 'pwa-helpers/metadata.js';
-import { image, title as siteTitle } from './data';
+import { title as siteTitle } from './data';
 
 export enum INCLUDE_SITE_TITLE {
   YES,
@@ -29,7 +29,6 @@ export const updateMetadata = (
   pwaUpdateMetadata({
     title: fullTitle,
     description,
-    image,
     imageAlt: siteTitle,
   });
 };

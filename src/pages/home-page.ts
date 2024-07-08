@@ -7,16 +7,11 @@ import '../components/about-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
 import '../elements/about-organizer-block';
-import '../elements/featured-videos';
-import '../elements/fork-me-block';
 import '../elements/gallery-block';
-import '../elements/latest-posts-block';
 import '../elements/map-block';
 import '../elements/partners-block';
 import '../elements/speakers-block';
-import '../elements/subscribe-block';
 import '../elements/tickets-block';
-import { firebaseApp } from '../firebase';
 import { store } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { queueSnackbar } from '../store/snackbars';
@@ -28,7 +23,6 @@ import {
   description,
   heroSettings,
   location,
-  showForkMeBlockForProjectIds,
   title,
   viewHighlights,
 } from '../utils/data';
@@ -53,11 +47,11 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
         .hero-logo {
           --lazy-image-width: 100%;
-          --lazy-image-height: 76px;
+          --lazy-image-height: 228px;
           width: var(--lazy-image-width);
           height: var(--lazy-image-height);
           max-width: 240px;
-          max-height: 76px;
+          max-height: 228px;
         }
 
         .info-items {
@@ -246,17 +240,11 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
         </div>
       </hero-block>
-      <template is="dom-if" if="{{showForkMeBlock}}">
-        <fork-me-block></fork-me-block>
-      </template>
       <about-block></about-block>
       <speakers-block></speakers-block>
-      <subscribe-block></subscribe-block>
       <tickets-block id="tickets-block"></tickets-block>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
-      <featured-videos></featured-videos>
-      <latest-posts-block></latest-posts-block>
       <map-block></map-block>
       <partners-block></partners-block>
       <footer-block></footer-block>
@@ -297,19 +285,8 @@ export class HomePage extends ReduxMixin(PolymerElement) {
     scrollToElement(this.hero, POSITION.BOTTOM);
   }
 
-  private shouldShowForkMeBlock(): boolean {
-    const showForkMeBlock = firebaseApp.options.appId
-      ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
-      : false;
-    if (showForkMeBlock) {
-      import('../elements/fork-me-block');
-    }
-    return showForkMeBlock;
-  }
-
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(title, description, INCLUDE_SITE_TITLE.NO);
-    this.showForkMeBlock = this.shouldShowForkMeBlock();
   }
 }

@@ -28,7 +28,6 @@ describe('about-block', () => {
 
     expect(screen.getByTestId('block')).toBeInTheDocument();
     expect(getByText(aboutBlock.title)).toBeInTheDocument();
-    expect(getByText(aboutBlock.callToAction.featuredSessions.description)).toBeInTheDocument();
     expect(getByText(aboutBlock.statisticsBlock.attendees.number)).toBeInTheDocument();
     expect(getByText(aboutBlock.statisticsBlock.attendees.label)).toBeInTheDocument();
   });

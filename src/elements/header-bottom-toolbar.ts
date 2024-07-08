@@ -1,14 +1,10 @@
-import { Initialized, Pending, Success } from '@abraham/remotedata';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
-import { computed, customElement, property } from '@polymer/decorators';
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/paper-tabs';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
-import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { fetchSchedule } from '../store/schedule/actions';
-import { initialScheduleState } from '../store/schedule/state';
-import { contentLoaders, mySchedule } from '../utils/data';
+import { contentLoaders } from '../utils/data';
 import './content-loader';
 import './shared-styles';
 
@@ -87,63 +83,15 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
               >
             </paper-tab>
           </template>
-          <paper-tab class="nav-item" day="my-schedule" hidden$="[[!signedIn]]" link>
-            <a
-              href$="[[addQueryParams('my-schedule', location.search)]]"
-              layout
-              vertical
-              center-center
-              >[[mySchedule.title]]</a
-            >
-          </paper-tab>
         </paper-tabs>
       </app-toolbar>
     `;
   }
 
-  private mySchedule = mySchedule;
   private contentLoaders = contentLoaders.schedule;
 
   @property({ type: Object })
-  schedule = initialScheduleState;
-  @property({ type: Object })
   location: RouterLocation | undefined;
-  @property({ type: Boolean })
-  private signedIn = false;
-
-  override stateChanged(state: RootState) {
-    this.schedule = state.schedule;
-    this.signedIn = state.user instanceof Success;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.schedule instanceof Initialized) {
-      store.dispatch(fetchSchedule);
-    }
-  }
-
-  @computed('schedule')
-  private get pending() {
-    return this.schedule instanceof Pending;
-  }
-
-  @computed('location', 'schedule')
-  private get selectedTab() {
-    if (this.location && this.schedule instanceof Success) {
-      const {
-        params: { id },
-        pathname,
-      } = this.location;
-      if (pathname.endsWith('my-schedule')) {
-        return 'my-schedule';
-      } else {
-        return id || this.schedule.data[0]?.date;
-      }
-    } else {
-      return undefined;
-    }
-  }
 
   private addQueryParams(id: string, queryParams: string) {
     return `/schedule/${id}${queryParams || ''}`;

@@ -4,9 +4,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { share } from '../utils/share';
 import {
   emailUs,
-  followOur,
   followUs,
-  footer,
   mailto,
   organizer,
   socialNetwork,
@@ -149,44 +147,6 @@ export class FooterSocial extends PolymerElement {
         }
       </style>
 
-      <div class="social-group share-block">
-        <div class="title">[[resources.share]]</div>
-        <div class="nav-inline">
-          <div class="share">
-            <paper-icon-button
-              class="share-facebook"
-              icon="hoverboard:facebook"
-              share="facebook"
-              on-click="share"
-            >
-            </paper-icon-button>
-          </div>
-          <div class="share">
-            <paper-icon-button
-              class="share-twitter"
-              icon="hoverboard:twitter"
-              share="twitter"
-              on-click="share"
-            >
-            </paper-icon-button>
-          </div>
-        </div>
-      </div>
-
-      <div class="social-group blog">
-        <div class="title">
-          [[followOur]]
-          <template is="dom-if" if="[[blogNewTab]]">
-            <a href="[[organizer.blog]]" target="_blank" rel="noopener noreferrer">
-              [[footer.blog]]
-            </a>
-          </template>
-          <template is="dom-if" if="[[!blogNewTab]]">
-            <a href="[[organizer.blog]]"> [[footer.blog]] </a>
-          </template>
-        </div>
-      </div>
-
       <div class="social-group social-networks">
         <div class="title">[[followUs]]</div>
         <ul class="nav-inline">
@@ -211,8 +171,6 @@ export class FooterSocial extends PolymerElement {
   @property({ type: Object })
   private socialNetwork = socialNetwork;
   @property()
-  private followOur = followOur;
-  @property()
   private followUs = followUs;
   @property()
   private emailUs = emailUs;
@@ -220,10 +178,6 @@ export class FooterSocial extends PolymerElement {
   private mailto = mailto;
   @property({ type: Object })
   private organizer = organizer;
-  @property({ type: Object })
-  private footer = footer;
-  @property({ type: Boolean })
-  private blogNewTab = organizer.blog.startsWith('http');
 
   share(e: PointerEvent) {
     return share(e);
