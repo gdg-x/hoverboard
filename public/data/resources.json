@@ -60,7 +60,7 @@
         },
         {
           "name": "Call for Papers",
-          "url": "https://sessionize.com/xxx",
+          "url": "https://sessionize.com/devfest-stockholm-2024/",
           "newTab": true
         },
         {
@@ -147,7 +147,7 @@
       "description": "We are looking for speakers who want to share their tech knowledge and experience with the community. If you have a topic that you are passionate about, we would love to hear from you.",
       "callToAction": {
         "label": "Submit your talk",
-        "link": "https://sessionize.com/xxx"
+        "link": "https://sessionize.com/devfest-stockholm-2024/"
       }
     }, 
     "close": {
