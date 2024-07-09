@@ -32,6 +32,7 @@ import { lunch } from './lunch';
 import { meetup } from './meetup';
 import { menu } from './menu';
 import { microphone } from './microphone';
+import { workshop } from './workshop';
 import { openInNew } from './open-in-new';
 import { opening } from './opening';
 import { party } from './party';
@@ -86,6 +87,7 @@ const template = html`
         ${meetup}
         ${menu}
         ${microphone}
+        ${workshop}
         ${opening}
         ${openInNew}
         ${party}

@@ -14,6 +14,7 @@ export interface SessionData {
   tags?: string[];
   title: string;
   videoId?: string;
+  trackOverride?: string;
 }
 
 export type Session = Id & SessionData;

@@ -63,8 +63,8 @@
     },
     "speakers": {
       "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "metaDescription": "Learn how to evolve your team's DevRel strategy and tactics from our exciting lineup of Developer Relations leaders, practitioners, and community members.",
+      "description": "Learn how to evolve your team's DevRel strategy and tactics from our exciting lineup of Developer Relations leaders, practitioners, and community members.",
       "background": {
         "color": "#FFF"
       },
@@ -72,7 +72,7 @@
     },
     "previousSpeakers": {
       "title": "Previous Speakers",
-      "metaDescription": "Check who was with us last years",
+      "metaDescription": "Check out some of our previous speakers",
       "background": {
         "color": "#FFF"
       },

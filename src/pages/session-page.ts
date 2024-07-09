@@ -239,7 +239,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
         <h3 class="meta-info" hidden$="[[disabledSchedule]]">
           [[session.dateReadable]], [[session.startTime]] - [[session.endTime]]
         </h3>
-        <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.track.title]]</h3>
+        <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[getTrackTitle(session.track, session.trackOverride)]]</h3>
         <h3 class="meta-info" hidden$="[[!session.complexity]]">
           [[sessionDetails.contentLevel]]: [[session.complexity]]
         </h3>
@@ -335,6 +335,10 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   private contentLoaderVisibility: boolean = false;
   @property({ type: Boolean })
   private acceptingFeedback: boolean = false;
+
+  private getTrackTitle(track: { title?: string }, trackOverride?: string ) {
+    return trackOverride ? trackOverride : track?.title || '';
+  }
 
   override stateChanged(state: RootState) {
     super.stateChanged(state);

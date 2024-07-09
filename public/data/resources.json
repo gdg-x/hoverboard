@@ -110,7 +110,13 @@
   ],
   "subscribeNote": "No spam, only the latest news and updates!",
   "codeOfConduct": "Code of Conduct",
-  
+  "codeOfConductBlock": {
+    "organization": "Major League Hacking and Hoopy",
+    "form": "https://mlh.io/code-of-conduct",
+    "contacts": [
+      "Organizer, devrelcon@mlh.io"
+    ]
+  },
   "aboutBlock": {
     "title": "About",
     "callToAction": {
