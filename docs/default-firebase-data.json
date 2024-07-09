@@ -405,17 +405,17 @@
         {
           "name": "Abdel Sghiouar",
           "photo": "/images/people/abdel.jpg",
-          "photoUrl": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fabdel.jpg?alt=media&token=cdb9f591-065d-4015-a2aa-ee6369d76a3a",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "",
+              "link": "https://www.linkedin.com/in/sabdelfettah/",
               "name": "LinkedIn"
             },
             {
               "icon": "twitter",
-              "link": "",
-              "name": "Twitter"
+              "link": "https://x.com/boredabdel",
+              "name": "X"
             }
           ],
           "order": 0,
@@ -424,17 +424,17 @@
         {
           "name": "Annie Tsai",
           "photo": "/images/people/annie.jpg",
-          "photoUrl": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fannie.jpg?alt=media&token=d9a466a5-90c6-4d96-806e-925793b2cc5e",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "",
+              "link": "https://www.linkedin.com/in/annietsai8/",
               "name": "LinkedIn"
             },
             {
               "icon": "twitter",
               "link": "",
-              "name": "Twitter"
+              "name": "X"
             }
           ],
           "order": 1,
@@ -443,17 +443,17 @@
         {
           "name": "Daniele Favaro",
           "photo": "/images/people/daniele.jpg",
-          "photoUrl": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fdaniele.jpg?alt=media&token=12f5ca15-8329-4ac8-a9c3-8c2daaa71d2f",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "",
+              "link": "https://www.linkedin.com/in/danfav/",
               "name": "LinkedIn"
             },
             {
               "icon": "twitter",
-              "link": "",
-              "name": "Twitter"
+              "link": "https://twitter.com/_danfav",
+              "name": "X"
             }
           ],
           "order": 2,
@@ -462,17 +462,17 @@
         {
           "name": "Jonas Jonsson",
           "photo": "/images/people/daniele.jpg",
-          "photoUrl": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fjonas.jpg?alt=media&token=7de9c273-4cfe-43a1-ab7c-7afe829b0e66",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "",
+              "link": "https://www.linkedin.com/in/jonsson-jonas/",
               "name": "LinkedIn"
             },
             {
               "icon": "twitter",
               "link": "",
-              "name": "Twitter"
+              "name": "X"
             }
           ],
           "order": 3,
@@ -481,17 +481,17 @@
         {
           "name": "Marina Dushkina",
           "photo": "/images/people/marina.jpg",
-          "photoUrl": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fmarina.jpg?alt=media&token=5ee693b5-06b3-4f12-b184-8a4995adfd2f",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "",
+              "link": "https://www.linkedin.com/in/marina-dushkina-80a662120/",
               "name": "LinkedIn"
             },
             {
               "icon": "twitter",
               "link": "",
-              "name": "Twitter"
+              "name": "X"
             }
           ],
           "order": 4,
@@ -500,36 +500,25 @@
         {
           "name": "Mikael Kent Svensson",
           "photo": "/images/people/Mikael.jpg",
-          "photoUrl": "",
-          "socials": [
-            {
-              "icon": "linkedin",
-              "link": "",
-              "name": "LinkedIn"
-            },
-            {
-              "icon": "twitter",
-              "link": "",
-              "name": "Twitter"
-            }
-          ],
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fmikeal.jpg?alt=media&token=ae313220-2b6a-4a1d-8d06-bead2bfe2627",
+          "socials": [],
           "order": 5,
           "title": "Sponsors"
         },
         {
           "name": "Mostafa Moradian",
           "photo": "/images/people/mostafa.jpg",
-          "photoUrl": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fmostafa.jpg?alt=media&token=6898fda8-1048-4fe5-99b2-5456a287c5cc",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "",
+              "link": "https://www.linkedin.com/in/mostafa-moradian/",
               "name": "LinkedIn"
             },
             {
               "icon": "twitter",
-              "link": "",
-              "name": "Twitter"
+              "link": "https://twitter.com/MosiMoradian",
+              "name": "X"
             }
           ],
           "order": 6,
@@ -538,36 +527,25 @@
         {
           "name": "Rachel Saunders",
           "photo": "/images/people/rachel.jpg",
-          "photoUrl": "",
-          "socials": [
-            {
-              "icon": "linkedin",
-              "link": "",
-              "name": "LinkedIn"
-            },
-            {
-              "icon": "twitter",
-              "link": "",
-              "name": "Twitter"
-            }
-          ],
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Frachel.jpg?alt=media&token=8a83f1fe-0817-4a17-b4c6-bb2009880b08",
+          "socials": [],
           "order": 7,
-          "title": "Copy"
+          "title": "Copy and content"
         },
         {
           "name": "Ruben Blazquez Cob",
           "photo": "/images/people/ruben.jpg",
-          "photoUrl": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fruben.jpg?alt=media&token=ce9a9789-e2aa-45d6-b96e-228c3761b315",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "",
+              "link": "https://www.linkedin.com/in/ruben-blazquez-cob/",
               "name": "LinkedIn"
             },
             {
               "icon": "twitter",
               "link": "",
-              "name": "Twitter"
+              "name": "X"
             }
           ],
           "order": 8,
@@ -576,17 +554,17 @@
         {
           "name": "Tobias Zuber",
           "photo": "/images/people/tobias.jpg",
-          "photoUrl": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Ftobias.jpg?alt=media&token=4c31690b-5e3f-43d5-b326-96f15c23d85a",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "",
+              "link": "https://www.linkedin.com/in/tobiaszuber/",
               "name": "LinkedIn"
             },
             {
               "icon": "twitter",
               "link": "",
-              "name": "Twitter"
+              "name": "X"
             }
           ],
           "order": 9,
@@ -595,17 +573,17 @@
         {
           "name": "Zahra Mirzaei",
           "photo": "/images/people/zahra.jpg",
-          "photoUrl": "",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fzahra.jpg?alt=media&token=469efc1b-3977-4df8-a3a4-2bfc628fb8c3",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "",
+              "link": "https://www.linkedin.com/in/zahra-mirzaei-dev/",
               "name": "LinkedIn"
             },
             {
               "icon": "twitter",
-              "link": "",
-              "name": "Twitter"
+              "link": "https://twitter.com/nafisemirzaei",
+              "name": "X"
             }
           ],
           "order": 10,
