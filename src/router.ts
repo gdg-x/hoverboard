@@ -138,13 +138,13 @@ const ROUTES: Route[] = [
       },
     ],
   },
-  // {
-  //   path: '/team',
-  //   component: 'team-page',
-  //   action: async () => {
-  //     await import('./pages/team-page.js');
-  //   },
-  // },
+  {
+    path: '/team',
+    component: 'team-page',
+    action: async () => {
+      await import('./pages/team-page.js');
+    },
+  },
   {
     path: '/faq',
     component: 'faq-page',

@@ -1,7 +1,7 @@
 {
   "title": "DevRelCon NY",
   "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions.<br><br>Whether you’re looking to advance your craft and career, are in-between roles, or simply want to reconnect with the wider DevRel community, DevRelCon is the place for you! Sessions will cover practical topics like metrics and ROI, managing up and down, community management, content creation, career paths, open source, improving and scaling using AI tools, and much more.",
-  "image": "images/social-share.jpg",
+  "image": "images/social-share.png",
   "keywords": "event, devrel, devrelcon, developer relations",
   "dates": "July 18-19, 2024",
   "partnershipProposition": "https://majorleaguehacking.typeform.com/to/nkpmOqZp",
@@ -180,7 +180,7 @@
     "suggested": "Up next"
   },
   "latestPostsBlock": {
-    "title": "The latest articles",
+    "title": "The latest DevRel articles",
     "callToAction": {
       "label": "View all posts",
       "link": "https://developerrelations.com/all-content"
@@ -192,7 +192,7 @@
     "previousYear": "Year"
   },
   "speakersBlock": {
-    "title": "Speakers",
+    "title": "Featured Speakers",
     "callToAction": {
       "label": "View all speakers",
       "link": "/speakers"
@@ -218,14 +218,14 @@
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Get notified about the important conference updates",
+      "description": "Get ongoing updates about Developer Relations events, content, and more!",
       "label": "Subscribe"
     },
     "yourEmail": "Your email",
     "emailAddress": "Email Address",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "formTitle": "Get the latest updates, insights and news about GDG DevFest Ukraine sent to your inbox.",
+    "formTitle": "Get the latest updates, insights and news about Developeer Relations sent to your inbox.",
     "emailRequired": "Please enter a valid email address.",
     "fieldRequired": "Field required.",
     "subscribe": "Subscribe",
@@ -235,7 +235,7 @@
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
+    "description": "DevRelCon is a global series of events, created by Hoopy, to provide a forum for developer relations and developer experience professionals share with other practitioners. Beginning in London in 2015, there are now also editions in Latin America, Prague, San Francisco, Tokyo and China. [https://sponsor.mlh.io/](Major League Hacking (MLH)) joined up with Hoopy as the local organizer to bring DevRelCon to NYC for the first time!"
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"

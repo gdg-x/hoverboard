@@ -177,7 +177,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
               <iron-icon icon="hoverboard:movie"></iron-icon>
               [[viewHighlights]]
             </paper-button>
-            <paper-button on-click="scrollToTickets" primary invert>
+            <paper-button on-click="scrollToTickets" primary>
               <iron-icon icon="hoverboard:ticket"></iron-icon>
               [[buyTicket]]
             </paper-button>
@@ -257,7 +257,6 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
       <featured-videos></featured-videos>
-      <latest-posts-block></latest-posts-block>
       <map-block></map-block>
       <partners-block></partners-block>
       <footer-block></footer-block>

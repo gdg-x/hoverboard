@@ -287,7 +287,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
                 <div class="section-details" flex>
                   <div class="section-primary-text">[[speaker.name]]</div>
                   <div class="section-secondary-text">
-                    [[speaker.company]] / [[speaker.country]]
+                    [[speaker.title]] / [[speaker.company]]
                   </div>
                 </div>
               </div>

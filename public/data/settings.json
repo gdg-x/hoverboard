@@ -136,12 +136,12 @@
     "pointer": {
       "latitude": 40.6578353670539,
       "longitude": -74.00697386511747,
-      "zoom": 5
+      "zoom": 10
     },
     "mapCenter": {
       "latitude": 40.6578353670539,
       "longitude": -74.00697386511747,
-      "zoom": 5
+      "zoom": 10
     },
     "description": "Located just 20 minutes from Manhattan, Industry City is a historic shipping, warehousing, and manufacturing complex nestled on the New York waterfront. The space was reimagined in the 2010s and transformed into a space for designers, artists, and creators with studios, co-working spaces, restaurants, workshops, distilleries and breweries, and more."
   },
@@ -174,17 +174,10 @@
         "name": "google",
         "label": "Sign in with Google",
         "url": "https://accounts.google.com"
-      },
-      {
-        "name": "twitter",
-        "label": "Sign in with Twitter",
-        "url": "https://twitter.com"
       }
     ],
     "allowedProvidersUrl": [
-      "https://accounts.google.com",
-      "https://www.facebook.com",
-      "https://twitter.com"
+      "https://accounts.google.com"
     ]
   },
   "contentLoaders": {
