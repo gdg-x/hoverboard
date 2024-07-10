@@ -208,7 +208,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           <div class="float-button" hidden$="[[!contentLoaderVisibility]]">
             <paper-fab
               icon="hoverboard:[[featuredSessionIcon]]"
-              hidden$="[[!viewport.isLaptopPlus]]"
+              hidden$="[[viewport.isLaptopPlus]]"
               on-click="toggleFeaturedSession"
             ></paper-fab>
           </div>
@@ -273,7 +273,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           </div>
         </div>
 
-        <div class="additional-sections" hidden$="[[!session.speakers.length]]">
+        <div class="additional-sections" hidden$="[[!hasSpeakers(session.speakers)]]">
           <h3>[[sessionDetails.speakers]]</h3>
           <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
             <a class="section" href$="[[speakerUrl(speaker.id)]]">
@@ -326,8 +326,12 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean })
   private acceptingFeedback: boolean = false;
 
-  private getTrackTitle(track: { title?: string }, trackOverride?: string ) {
-    return trackOverride ? trackOverride : track?.title || '';
+  private getTrackTitle(track: { title?: string }, trackOverride: { title?: string }) {
+    return trackOverride ? trackOverride.title : track?.title || '';
+  }
+
+  private hasSpeakers(speakers: Speaker[]): boolean {
+    return speakers && speakers.length > 0;
   }
 
   override stateChanged(state: RootState) {
@@ -389,8 +393,9 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
       if (!this.session) {
         router.render('/404');
       } else {
-        this.session.speakers = this.session.speakers || [];
-        const speaker: Speaker = this.session?.speakers?.[0] as TempAny;
+        this.session.speakers = this.session.speakers || []; // Ensure speakers is an array
+
+        const speaker: Speaker = this.session.speakers[0] as TempAny;
         updateImageMetadata(this.session.title, this.session.description, {
           image: speaker.photoUrl,
           imageAlt: speaker.name,
