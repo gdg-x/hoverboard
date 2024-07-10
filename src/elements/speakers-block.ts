@@ -85,7 +85,7 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
         .company-logo {
           margin-top: 6px;
           --lazy-image-width: 100%;
-          --lazy-image-height: 16px;
+          --lazy-image-height: 25px;
           --lazy-image-fit: contain;
           width: var(--lazy-image-width);
           height: var(--lazy-image-height);

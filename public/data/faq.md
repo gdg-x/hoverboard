@@ -23,7 +23,7 @@ We want to make sure that DevRelCon North America creates a safe and welcoming e
 
 ## Attendance
 
-### How much does DevRelCon North America cost?
+### How much does DevRelCon New York cost?
 
 Our early bird ticket sale has ended. Full priced tickets cost $699 USD. Tickets are [on sale right now](https://ti.to/mlh/devrelcon-ny)!
 

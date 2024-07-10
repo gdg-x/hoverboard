@@ -295,16 +295,6 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           </template>
         </div>
 
-        <div id="feedback" class="additional-sections">
-          <h3>[[feedback.headline]]</h3>
-
-          <auth-required hidden="[[!acceptingFeedback]]">
-            <slot slot="prompt">[[feedback.leaveFeedback]]</slot>
-            <feedback-block session-id="[[session.id]]"></feedback-block>
-          </auth-required>
-
-          <p hidden="[[acceptingFeedback]]">[[feedback.sessionClosed]]</p>
-        </div>
       </div>
 
       <footer-block></footer-block>
@@ -399,6 +389,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
       if (!this.session) {
         router.render('/404');
       } else {
+        this.session.speakers = this.session.speakers || [];
         const speaker: Speaker = this.session?.speakers?.[0] as TempAny;
         updateImageMetadata(this.session.title, this.session.description, {
           image: speaker.photoUrl,

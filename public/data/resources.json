@@ -126,7 +126,7 @@
         "link": "https://www.youtube.com/playlist?list=PLwOuygPowJYYza4HEzvjlQZyy4m4t1EPB"
       },
       "howItWas": {
-        "description": "DevRelCon is a global series of conferences for developer relations, developer experience and developer marketing professionals.",
+        "description": "DevRelCon is a global series of conferences for developer relations, developer experience and developer marketing professionals. Whether you’re looking to advance your craft and career, are in-between roles, or simply want to reconnect with the wider DevRel community, DevRelCon is the place for you! Sessions will cover practical topics like metrics and ROI, managing up and down, community management, content creation, career paths, open source, improving and scaling using AI tools, and much more.",
         "label": "See why you should attend DevRelCon!",
         "youtubeId": "VXbhT8lPEiY"
       }
@@ -299,19 +299,29 @@
     "blocks": [
       {
         "title": "Organizers",
-        "description": "DevRelCon NY is organized by Major League Hacking (MLH) and Hoopy.",
+        "description": "DevRelCon NY is organized by Major League Hacking (MLH), the largest community of early career developers in the world. For 10 years, MLH has helped the world's top brands connect with developers. DevRelCon was created globally by Hoopy, the DevRel and developer marketing agency.",
         "callToAction": {
           "label": "Learn more about Major League Hacking",
-          "link": "https://sponsor.mlh.io/"
+          "link": "https://sponsor.mlh.io/",
+          "newTab": true
+        },
+        "callToAction2": {
+          "label": "Learn more about Hoopy",
+          "link": "https://hoopy.io/",
+          "newTab": true
         }
       },
       {
         "title": "What is DevRelCon?",
         "description": "DevRelCon is a global series of events, created by Hoopy, to provide a forum for developer relations and developer experience professionals share with other practitioners. Beginning in London in 2015, there are now also editions in Latin America, Prague, San Francisco, Tokyo and China.",
         "callToAction": {
-          "label": "Read more",
+          "label": "See past events",
           "link": "https://www.developerrelations.com/devrelcon/",
           "newTab": true
+        },
+        "callToAction2": {
+          "label": "Read our FAQ",
+          "link": "/faq"
         }
       }
     ]

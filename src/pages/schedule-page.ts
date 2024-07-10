@@ -71,11 +71,6 @@ export class SchedulePage extends ReduxMixin(PolymerElement) {
 
       <paper-progress indeterminate hidden$="[[!pending]]"></paper-progress>
 
-      <filter-menu
-        filter-groups="[[filterGroups]]"
-        selected-filters="[[selectedFilters]]"
-      ></filter-menu>
-
       <div class="container">
         <content-loader
           card-padding="15px"

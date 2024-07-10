@@ -87,6 +87,22 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
                   </paper-button>
                 </a>
               </template>
+              <template is="dom-if" if="[[block.callToAction2.newTab]]">
+                <a href="[[block.callToAction2.link]]" target="_blank" rel="noopener noreferrer">
+                  <paper-button class="cta-button animated icon-right">
+                    <span>[[block.callToAction2.label]]</span>
+                    <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+                  </paper-button>
+                </a>
+              </template>
+              <template is="dom-if" if="[[!block.callToAction2.newTab]]">
+                <a href="[[block.callToAction2.link]]">
+                  <paper-button class="cta-button animated icon-right">
+                    <span>[[block.callToAction2.label]]</span>
+                    <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+                  </paper-button>
+                </a>
+              </template>
             </div>
           </template>
         </div>

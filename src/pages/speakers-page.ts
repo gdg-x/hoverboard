@@ -178,12 +178,6 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
 
       <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
-      <filter-menu
-        filter-groups="[[filterGroups]]"
-        selected-filters="[[selectedFilters]]"
-        results-count="[[speakersToRender.length]]"
-      ></filter-menu>
-
       <content-loader
         class="container"
         card-padding="32px"
@@ -235,7 +229,7 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
               <div class="origin">[[speaker.country]]</div>
 
               <text-truncate lines="5">
-                <div class="bio">[[speaker.bio]]</div>
+                <short-markdown class="bio" content="[[speaker.bio]]"></short-markdown>
               </text-truncate>
             </div>
 
@@ -252,8 +246,6 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
           </a>
         </template>
       </div>
-
-      <previous-speakers-block></previous-speakers-block>
 
       <footer-block></footer-block>
     `;
