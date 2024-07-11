@@ -389,20 +389,29 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   private onSessionsAndSessionId(sessions: SessionsState, sessionId: string) {
     if (sessionId && sessions instanceof Success) {
       this.session = selectSession(store.getState(), sessionId);
-
+  
       if (!this.session) {
         router.render('/404');
       } else {
         this.session.speakers = this.session.speakers || []; // Ensure speakers is an array
-
-        const speaker: Speaker = this.session.speakers[0] as TempAny;
-        updateImageMetadata(this.session.title, this.session.description, {
-          image: speaker.photoUrl,
-          imageAlt: speaker.name,
-        });
+  
+        if (this.session.speakers.length > 0) {
+          const speaker: Speaker = this.session.speakers[0] as TempAny;
+          updateImageMetadata(this.session.title, this.session.description, {
+            image: speaker.photoUrl,
+            imageAlt: speaker.name,
+          });
+        } else {
+          updateImageMetadata(this.session.title, this.session.description, {
+            image: '', // Provide a default or placeholder image if necessary
+            imageAlt: '',
+          });
+        }
       }
     }
   }
+  
+  
 
   private toggleFeaturedSession(event: Event) {
     event.preventDefault();

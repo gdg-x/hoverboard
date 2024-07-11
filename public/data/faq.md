@@ -42,3 +42,21 @@ You may apply for a discounted or complementary ticket scholarship to attend Dev
 ### Where should I stay for DevRelCon NY?
 
 We’d recommend reading the [Neighborhood Guide](/neighborhood), which also includes a link to our [discounted hotel block](https://www.ihg.com/evenhotels/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qIta=99801505&icdv=99801505&qSlH=BXYEV&qCiD=17&qCiMy=062024&qCoD=21&qCoMy=062024&qGrpCd=DRC&qAAR=6CBARC&qRtP=6CBARC&setPMCookies=true&qSHBrC=VN&qDest=46%20Nevins%20St,%20Brooklyn,%20NY,%20US&srb_u=1&qChAge=&qRmFltr=) at the Even Hotel which is one subway stop away from the venue.
+
+## Transit & Directions
+
+### How do I get to DevRelCon NY?
+
+We recommend taking the subway to the 36th Street station in Brooklyn. The D, N, and R lines all stop at 36th St but we would encourage you to check Google Maps for up to date schedule information. From the 36th st station, there is a short (<5 minute) walk to the venue. Alternatively, you may take a ride share or taxi directly to [33 34th Street in Brooklyn](https://maps.app.goo.gl/2Fv9MsF6tqrq4wE97) which we refer to as the Broadway Stage (52A).
+
+### Is there parking available on site?
+
+If you are driving to DevRelCon NY, you may park in the [public Industry City parking lot](https://maps.app.goo.gl/MK4go7qJ3bXQNsma6) on 37th Street and 2nd Avenue. You will need to pay for your parking via the available pay stations. It costs $15 per Weekday, $5 per Weekend Day, and $5 per Weeknight after 5pm.
+
+### How is the DevRelCon NY venue set up?
+
+The macro venue is called Industry City, which is a converted industrial development in Brooklyn that now houses retail, coworking and event spaces, and more. Within Industry City, our keynotes and registration will be taking place on our Broadway Stage, which is referred to in Industry City as 52A and is in Building 5 in the complex. Our unconference, workshops/sessions, lunch, and our after party will be taking place in our Central Park Room (upstairs) and Brooklyn Bridge Stage (downstairs) which are in a coworking space called Camp David. Camp David is in Building 3 of the complex. There is a short (<5) min walk that is partially outdoors and partially indoors between the two spaces. You can see all of our spaces on the map below.
+
+### Venue Map
+
+![Venue Map](/images/venuemap.png "Venue Map")
