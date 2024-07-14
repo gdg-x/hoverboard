@@ -21,6 +21,10 @@ All attendees will be required to be up to date with COVID-19 vaccines. Addition
 
 We want to make sure that DevRelCon North America creates a safe and welcoming environment for attendees, speakers and sponsors. For this reason all participants are expected to follow the [MLH Code of Conduct](https://mlh.io/code-of-conduct) throughout the duration of the conference.
 
+### Is the venue accessible?
+
+There are ramps, elevators, and curbside dropoff spots available in both buildings we will be using for DevRelCon. There are also handicap-accessible bathrooms in both buildings. Please contact devrelcon@mlh.io if you require specific accommodations.
+
 ## Attendance
 
 ### How much does DevRelCon New York cost?
@@ -41,7 +45,7 @@ You may apply for a discounted or complementary ticket scholarship to attend Dev
 
 ### Where should I stay for DevRelCon NY?
 
-We’d recommend reading the [Neighborhood Guide](/neighborhood), which also includes a link to our [discounted hotel block](https://www.ihg.com/evenhotels/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qIta=99801505&icdv=99801505&qSlH=BXYEV&qCiD=17&qCiMy=062024&qCoD=21&qCoMy=062024&qGrpCd=DRC&qAAR=6CBARC&qRtP=6CBARC&setPMCookies=true&qSHBrC=VN&qDest=46%20Nevins%20St,%20Brooklyn,%20NY,%20US&srb_u=1&qChAge=&qRmFltr=) at the Even Hotel which is one subway stop away from the venue.
+We’d recommend reading the [Neighborhood Guide](/neighborhood), which also includes a link to our [discounted hotel block](https://www.ihg.com/evenhotels/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qIta=99801505&icdv=99801505&qSlH=BXYEV&qCiD=17&qCiMy=062024&qCoD=21&qCoMy=062024&qGrpCd=DRC&qAAR=6CBARC&qRtP=6CBARC&setPMCookies=true&qSHBrC=VN&qDest=46%20Nevins%20St,%20Brooklyn,%20NY,%20US&srb_u=1&qChAge=&qRmFltr=) at the Even Hotel which is one subway stop away from the venue. If you would like to stay walking distance from the venue, our team is staying at the Wyndham Garden Inn Sunset Park Brooklyn, however it is a much more industrial area than where the Even Hotel is.
 
 ## Transit & Directions
 
