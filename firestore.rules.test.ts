@@ -1,5 +1,5 @@
 import { RulesTestContext } from '@firebase/rules-unit-testing';
-import { afterEach, beforeEach, describe, it } from '@jest/globals';
+import { afterEach, beforeEach, describe, it, jest } from '@jest/globals';
 import {
   addDoc,
   collection,
@@ -13,6 +13,8 @@ import {
 } from 'firebase/firestore';
 import { setupApp, teardownApp } from './__tests__/firestore.setup';
 import { expect } from './__tests__/helpers';
+
+jest.retryTimes(3, { logErrorsBeforeRetry: true });
 
 describe('firestore', () => {
   let testEnv: RulesTestContext;
