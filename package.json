@@ -114,7 +114,7 @@
     "stylelint-config-standard": "^36.0.1",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.7.2"
   },
   "contributors": [
     "Oleh Zasadnyy, GDG Lviv",
