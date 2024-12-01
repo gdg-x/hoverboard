@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@abraham/remotedata": "1.3.0",
-    "@justinribeiro/lite-youtube": "^1.5.0",
+    "@justinribeiro/lite-youtube": "^1.6.0",
     "@material/mwc-button": "^0.27.0",
     "@material/mwc-dialog": "^0.27.0",
     "@material/mwc-formfield": "^0.27.0",
