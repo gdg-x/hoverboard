@@ -104,7 +104,7 @@
     "markdownlint": "^0.35.0",
     "markdownlint-cli": "^0.41.0",
     "nunjucks": "^3.2.4",
-    "prettier": "3.3.3",
+    "prettier": "3.4.1",
     "prettier-plugin-package": "1.4.0",
     "rollup": "^4.21.2",
     "rollup-plugin-copy": "^3.5.0",
