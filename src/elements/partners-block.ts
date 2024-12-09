@@ -68,44 +68,46 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container">
-        <h1 class="container-title">[[partnersBlock.title]]</h1>
+        <template is="dom-if" if="[[showPartners]]">
+          <h1 class="container-title">[[partnersBlock.title]]</h1>
 
-        <template is="dom-if" if="[[pending]]">
-          <p>[[loading]]</p>
-        </template>
-        <template is="dom-if" if="[[failure]]">
-          <p>Error loading partners.</p>
+          <template is="dom-if" if="[[pending]]">
+            <p>[[loading]]</p>
+          </template>
+          <template is="dom-if" if="[[failure]]">
+            <p>Error loading partners.</p>
+          </template>
+
+          <template is="dom-repeat" items="[[partners.data]]" as="block">
+            <h4 class="block-title">[[block.title]]</h4>
+            <div class="logos-wrapper">
+              <template is="dom-repeat" items="[[block.items]]" as="logo">
+                <a
+                  class="logo-item"
+                  href$="[[logo.url]]"
+                  title$="[[logo.name]]"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  layout
+                  horizontal
+                  center-center
+                >
+                  <lazy-image
+                    class="logo-img"
+                    src="[[logo.logoUrl]]"
+                    alt="[[logo.name]]"
+                  ></lazy-image>
+                </a>
+              </template>
+            </div>
+          </template>
         </template>
 
-        <template is="dom-repeat" items="[[partners.data]]" as="block">
-          <h4 class="block-title">[[block.title]]</h4>
-          <div class="logos-wrapper">
-            <template is="dom-repeat" items="[[block.items]]" as="logo">
-              <a
-                class="logo-item"
-                href$="[[logo.url]]"
-                title$="[[logo.name]]"
-                target="_blank"
-                rel="noopener noreferrer"
-                layout
-                horizontal
-                center-center
-              >
-                <lazy-image
-                  class="logo-img"
-                  src="[[logo.logoUrl]]"
-                  alt="[[logo.name]]"
-                ></lazy-image>
-              </a>
-            </template>
-          </div>
-        </template>
-
-        <a href="https://majorleaguehacking.typeform.com/to/nkpmOqZp">
-        <paper-button class="cta-button animated icon-right">
-          <span>[[partnersBlock.button]]</span>
-          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-        </paper-button>
+        <a href="https://majorleaguehacking.typeform.com/to/lVvRM8eO">
+          <paper-button class="cta-button animated icon-right">
+            <span>[[partnersBlock.button]]</span>
+            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+          </paper-button>
         </a>
       </div>
     `;
@@ -118,6 +120,8 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   potentialPartners = initialPotentialPartnersState;
   @property({ type: Object })
   partners: PartnerGroupsState = new Initialized();
+  @property({ type: Boolean })
+  private showPartners = true;
 
   @computed('partners')
   get pending() {
@@ -132,6 +136,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   override stateChanged(state: RootState) {
     this.partners = selectPartnerGroups(state);
     this.potentialPartners = state.potentialPartners;
+    this.showPartners = state.config?.partners?.enabled ?? true;
   }
 
   private addPotentialPartner() {
