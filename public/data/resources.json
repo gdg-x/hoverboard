@@ -1,10 +1,10 @@
 {
   "title": "DevRelCon NY",
-  "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions.<br><br>Whether you’re looking to advance your craft and career, are in-between roles, or simply want to reconnect with the wider DevRel community, DevRelCon is the place for you! Sessions will cover practical topics like metrics and ROI, managing up and down, community management, content creation, career paths, open source, improving and scaling using AI tools, and much more.",
+  "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, Developer Marketing, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions.<br><br>Whether you’re looking to advance your craft and career, are in-between roles, or simply want to reconnect with the wider DevRel community, DevRelCon is the place for you! Sessions will cover practical topics like metrics and ROI, managing up and down, community management, content creation, career paths, open source, improving and scaling using AI tools, and much more.",
   "image": "images/social-share.png",
   "keywords": "event, devrel, devrelcon, developer relations",
-  "dates": "July 18-19, 2024",
-  "partnershipProposition": "https://majorleaguehacking.typeform.com/to/nkpmOqZp",
+  "dates": "July 16-18, 2025",
+  "partnershipProposition": "https://majorleaguehacking.typeform.com/to/lVvRM8eO",
   "share": "Share",
   "followOur": "Follow our",
   "followUs": "Follow us",
@@ -66,6 +66,11 @@
       "title": "Explore Past DevRelCon Events",
       "links": [
         {
+          "name": "New York 2024",
+          "url": "https://developerrelations.com/event/devrelcon-new-york-2024",
+          "newTab": true
+        },
+        {
           "name": "London 2023",
           "url": "https://developerrelations.com/event/devrelcon-london-2023",
           "newTab": true
@@ -92,7 +97,7 @@
       "links": [
         {
           "name": "Sponsor DevRelCon",
-          "url": "https://majorleaguehacking.typeform.com/to/nkpmOqZp",
+          "url": "https://majorleaguehacking.typeform.com/to/lVvRM8eO",
           "newTab": true
         },
         {
@@ -134,7 +139,7 @@
     "statisticsBlock": {
       "attendees": {
         "label": "Attendees",
-        "number": "250"
+        "number": "300"
       },
       "days": {
         "label": "Days",

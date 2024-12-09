@@ -2,7 +2,7 @@
 
 ### Dates and Location
 
-DevRelCon NY will take place on July 18-19, 2024 at [Industry City](https://maps.app.goo.gl/V3DV7JMcQ1CiYdfo7) in Brooklyn, New York City. DevRelCon New York will be the only North American DevRelCon this year.
+DevRelCon NY will take place on July 16-18, 2025 at [Industry City](https://maps.app.goo.gl/ht8BG4xB8GSJdJQY7) in Brooklyn, New York City. DevRelCon New York will be the only North American DevRelCon this year.
 
 ### Schedule
 
@@ -45,13 +45,13 @@ You may apply for a discounted or complementary ticket scholarship to attend Dev
 
 ### Where should I stay for DevRelCon NY?
 
-We’d recommend reading the [Neighborhood Guide](/neighborhood), which also includes a link to our [discounted hotel block](https://www.ihg.com/evenhotels/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qIta=99801505&icdv=99801505&qSlH=BXYEV&qCiD=17&qCiMy=062024&qCoD=21&qCoMy=062024&qGrpCd=DRC&qAAR=6CBARC&qRtP=6CBARC&setPMCookies=true&qSHBrC=VN&qDest=46%20Nevins%20St,%20Brooklyn,%20NY,%20US&srb_u=1&qChAge=&qRmFltr=) at the Even Hotel which is one subway stop away from the venue. If you would like to stay walking distance from the venue, our team is staying at the Wyndham Garden Inn Sunset Park Brooklyn, however it is a much more industrial area than where the Even Hotel is.
+We’d recommend reading the [Neighborhood Guide](/neighborhood). If you would like to stay walking distance from the venue, our team is staying at the Wyndham Garden Inn Sunset Park Brooklyn, however it is a much more industrial area than where our recommended hotels are.
 
 ## Transit & Directions
 
 ### How do I get to DevRelCon NY?
 
-We recommend taking the subway to the 36th Street station in Brooklyn. The D, N, and R lines all stop at 36th St but we would encourage you to check Google Maps for up to date schedule information. From the 36th st station, there is a short (<5 minute) walk to the venue. Alternatively, you may take a ride share or taxi directly to [33 34th Street in Brooklyn](https://maps.app.goo.gl/2Fv9MsF6tqrq4wE97) which we refer to as the Broadway Stage (52A).
+We recommend taking the subway to the 36th Street station in Brooklyn. The D, N, and R lines all stop at 36th St but we would encourage you to check Google Maps for up to date schedule information. From the 36th st station, there is a short (<5 minute) walk to the venue. Alternatively, you may take a ride share or taxi directly to [33 35th Street in Brooklyn](https://maps.app.goo.gl/ht8BG4xB8GSJdJQY7) which we refer to as the Broadway Stage (52A).
 
 ### Is there parking available on site?
 

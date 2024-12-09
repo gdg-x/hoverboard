@@ -54,7 +54,7 @@ export function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRa
           dayTags = combineTags(dayTags, subsession?.tags);
           scheduleTags = combineTags(scheduleTags, [mainTag]);
           
-          console.warn(`Parsing session ${sessionId}`);
+       //  console.warn(`Parsing session ${sessionId}`);
 
           const finalSubSession = {
             ...subsession,

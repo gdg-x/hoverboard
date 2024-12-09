@@ -5,8 +5,8 @@
     "blog": "https://developerrelations.com/all-content",
     "url": "https://sponsor.mlh.io"
   },
-  "startDate": "2024-07-18T09:00:00+03:00",
-  "endDate": "2024-07-19T19:00:00+03:00",
+  "startDate": "2025-07-17T09:00:00+03:00",
+  "endDate": "2025-07-18T19:00:00+03:00",
   "webapp": {
     "shortName": "DevRelCon NY",
     "themeColor": "#673AB7",
@@ -46,7 +46,7 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions.",
+      "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, Developer Marketing, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions.",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -132,7 +132,7 @@
     "name": "Industry City",
     "city": "Brooklyn, NYC",
     "short": "NYC",
-    "address": "33 34th St, Brooklyn, NY 11232, USA",
+    "address": "33 35th St, Brooklyn, NY 11232, USA",
     "pointer": {
       "latitude": 40.6578353670539,
       "longitude": -74.00697386511747,
