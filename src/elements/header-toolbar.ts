@@ -185,7 +185,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
             [[signInText]]
           </paper-tab>
 
-          <a href="https://ti.to/mlh/devrelcon-ny" target="_blank" rel="noopener noreferrer">
+          <a href="https://ti.to/mlh/devrelcon-ny-2025" target="_blank" rel="noopener noreferrer">
             <paper-button class="buy-button" primary>[[buyTicket]]</paper-button>
           </a>
         </paper-tabs>

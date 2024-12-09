@@ -29,7 +29,7 @@ There are ramps, elevators, and curbside dropoff spots available in both buildin
 
 ### How much does DevRelCon New York cost?
 
-Our early bird ticket sale has ended. Full priced tickets cost $699 USD. Tickets are [on sale right now](https://ti.to/mlh/devrelcon-ny)!
+Our early bird ticket sale has ended. Full priced tickets cost $699 USD. Tickets are [on sale right now](https://ti.to/mlh/devrelcon-ny-2025)!
 
 ### I’m a speaker, do I still need to buy a ticket?
 
