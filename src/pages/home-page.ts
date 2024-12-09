@@ -166,7 +166,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         hide-logo
       >
         <div class="home-content" layout vertical center>
-          <lazy-image class="hero-logo" src="/images/devrelcon.png" alt="[[siteTitle]]"></lazy-image>
+          <lazy-image class="hero-logo" src="/images/devrelcon25.png" alt="[[siteTitle]]"></lazy-image>
 
           <div class="info-items">
             <div class="info-item">[[city]]. [[dates]]</div>
