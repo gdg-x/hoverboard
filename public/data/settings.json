@@ -130,7 +130,7 @@
   "location": {
     "label": "Location",
     "name": "Industry City",
-    "city": "Brooklyn, NYC",
+    "city": "Industry City, Brooklyn, NYC",
     "short": "NYC",
     "address": "33 35th St, Brooklyn, NY 11232, USA",
     "pointer": {
