@@ -201,6 +201,9 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
               <span hidden$="[[!session.duration.mm]]">
                 [[session.duration.mm]] min[[getEnding(session.duration.mm)]]
               </span>
+              <span style="display:block;">
+                [[getTrackTitle(session.track, session.trackOverride)]]
+              </span>
             </div>
             <div class="tags" hidden$="[[!session.tags.length]]">
               <template is="dom-repeat" items="[[session.tags]]" as="tag">
@@ -302,7 +305,9 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
       store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked));
     }
   }
-
+  private getTrackTitle(track: { title?: string }, trackOverride?: string ) {
+    return trackOverride ? trackOverride : track?.title || '';
+  }
   private toggleFeedback(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();

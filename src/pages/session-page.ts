@@ -326,8 +326,8 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean })
   private acceptingFeedback: boolean = false;
 
-  private getTrackTitle(track: { title?: string }, trackOverride: { title?: string }) {
-    return trackOverride ? trackOverride.title : track?.title || '';
+  private getTrackTitle(track: { title?: string }, trackOverride?: string ) {
+    return trackOverride ? trackOverride : track?.title || '';
   }
 
   private hasSpeakers(speakers: Speaker[]): boolean {
