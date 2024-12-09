@@ -101,7 +101,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
           </div>
         </template>
 
-        <a href="https://majorleaguehacking.typeform.com/to/nkpmOqZp">
+        <a href="https://majorleaguehacking.typeform.com/to/lVvRM8eO">
         <paper-button class="cta-button animated icon-right">
           <span>[[partnersBlock.button]]</span>
           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
