@@ -240,7 +240,7 @@
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "DevRelCon is a global series of events, created by Hoopy, to provide a forum for developer relations and developer experience professionals share with other practitioners. Beginning in London in 2015, there are now also editions in Latin America, Prague, San Francisco, Tokyo and China. [https://sponsor.mlh.io/](Major League Hacking (MLH)) joined up with Hoopy as the local organizer to bring DevRelCon to NYC for the first time!"
+    "description": "DevRelCon is a global series of events, created by Hoopy, to provide a forum for developer relations and developer experience professionals share with other practitioners. Beginning in London in 2015, there are now also editions in Latin America, Prague, San Francisco, Tokyo and China. Major League Hacking joined up with Hoopy as the local organizer to bring DevRelCon back to the US with our inaugural 2024 event and continuing US events in 2025 and beyond."
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
