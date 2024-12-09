@@ -1,352 +1,352 @@
 {
-  "title": "DevRelCon NY",
-  "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, Developer Marketing, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions.<br><br>Whether you’re looking to advance your craft and career, are in-between roles, or simply want to reconnect with the wider DevRel community, DevRelCon is the place for you! Sessions will cover practical topics like metrics and ROI, managing up and down, community management, content creation, career paths, open source, improving and scaling using AI tools, and much more.",
-  "image": "images/social-share.png",
-  "keywords": "event, devrel, devrelcon, developer relations",
-  "dates": "July 16-18, 2025",
-  "partnershipProposition": "https://majorleaguehacking.typeform.com/to/lVvRM8eO",
-  "share": "Share",
-  "followOur": "Follow our",
-  "followUs": "Follow us",
-  "emailUs": "Email us",
-  "partnershipResources": "Partnership Resources",
-  "eventResources": "Event Resources",
-  "buyTicket": "Buy ticket",
-  "scholarshipTicket": "Apply Now",
-  "signIn": "Sign in",
-  "signOut": "Sign out",
-  "viewHighlights": "View Highlights",
-  "offlineMessage": "You can still work offline.",
-  "serviceWorkerInstalled": "App is now installed and available offline.",
-  "serviceWorkerAvailable": "A new version of this app is available.",
-  "serviceWorkerInstalling": "App being installed for offline use.",
-  "serviceWorkerError": "Error caching for offline use.",
-  "refresh": "Refresh",
-  "position": "Position",
-  "country": "Country",
-  "time": "Time",
-  "faq": "/data/faq.md",
-  "neighborhood": "/data/neighborhood.md",
-  "coc": "/data/coc.md",
-  "timezoneOffset": "-180",
-  "loading": "Loading...",
-  "footer": {
-    "blog": "Blog"
-  },
-  "bookmarked": {
-    "added": "Session saved to My Schedule",
-    "removed": "Session removed from My Schedule"
-  },
-  "mySchedule": {
-    "title": "My Schedule",
-    "browseSession": "Browse sessions"
-  },
-  "footerRelBlock": [
-    {
-      "title": "About",
-      "links": [
-        {
-          "name": "Major League Hacking",
-          "url": "https://sponsor.mlh.io/",
-          "newTab": true
+    "title": "DevRelCon NY",
+    "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, Developer Marketing, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions.<br><br>Whether you’re looking to advance your craft and career, are in-between roles, or simply want to reconnect with the wider DevRel community, DevRelCon is the place for you! Sessions will cover practical topics like metrics and ROI, managing up and down, community management, content creation, career paths, open source, improving and scaling using AI tools, and much more.",
+    "image": "images/social-share.png",
+    "keywords": "event, devrel, devrelcon, developer relations",
+    "dates": "July 16-18, 2025",
+    "partnershipProposition": "https://majorleaguehacking.typeform.com/to/lVvRM8eO",
+    "share": "Share",
+    "followOur": "Follow our",
+    "followUs": "Follow us",
+    "emailUs": "Email us",
+    "partnershipResources": "Partnership Resources",
+    "eventResources": "Event Resources",
+    "buyTicket": "Buy ticket",
+    "scholarshipTicket": "Apply Now",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "viewHighlights": "View Highlights",
+    "offlineMessage": "You can still work offline.",
+    "serviceWorkerInstalled": "App is now installed and available offline.",
+    "serviceWorkerAvailable": "A new version of this app is available.",
+    "serviceWorkerInstalling": "App being installed for offline use.",
+    "serviceWorkerError": "Error caching for offline use.",
+    "refresh": "Refresh",
+    "position": "Position",
+    "country": "Country",
+    "time": "Time",
+    "faq": "/data/faq.md",
+    "neighborhood": "/data/neighborhood.md",
+    "coc": "/data/coc.md",
+    "timezoneOffset": "-180",
+    "loading": "Loading...",
+    "footer": {
+        "blog": "Blog"
+    },
+    "bookmarked": {
+        "added": "Session saved to My Schedule",
+        "removed": "Session removed from My Schedule"
+    },
+    "mySchedule": {
+        "title": "My Schedule",
+        "browseSession": "Browse sessions"
+    },
+    "footerRelBlock": [{
+            "title": "About",
+            "links": [{
+                    "name": "Major League Hacking",
+                    "url": "https://sponsor.mlh.io/",
+                    "newTab": true
+                },
+                {
+                    "name": "Hoopy",
+                    "url": "https://hoopy.io/",
+                    "newTab": true
+                },
+                {
+                    "name": "Developer Relations",
+                    "url": "https://developerrelations.com/",
+                    "newTab": true
+                }
+            ]
         },
         {
-          "name": "Hoopy",
-          "url": "https://hoopy.io/",
-          "newTab": true
+            "title": "Explore Past DevRelCon Events",
+            "links": [{
+                    "name": "New York 2024",
+                    "url": "https://developerrelations.com/event/devrelcon-new-york-2024",
+                    "newTab": true
+                },
+                {
+                    "name": "London 2023",
+                    "url": "https://developerrelations.com/event/devrelcon-london-2023",
+                    "newTab": true
+                },
+                {
+                    "name": "Yokohama 2023",
+                    "url": "https://developerrelations.com/event/devrelcon-yokohama-2023",
+                    "newTab": true
+                },
+                {
+                    "name": "LATAM 2023",
+                    "url": "https://developerrelations.com/event/devrelcon-latam-2023",
+                    "newTab": true
+                },
+                {
+                    "name": "San Francisco 2019",
+                    "url": "https://developerrelations.com/event/devrelcon-san-francisco-2019",
+                    "newTab": true
+                }
+            ]
         },
         {
-          "name": "Developer Relations",
-          "url": "https://developerrelations.com/",
-          "newTab": true
+            "title": "Event Resources",
+            "links": [{
+                    "name": "Sponsor DevRelCon",
+                    "url": "https://majorleaguehacking.typeform.com/to/lVvRM8eO",
+                    "newTab": true
+                },
+                {
+                    "name": "FAQs",
+                    "url": "/faq",
+                    "newTab": false
+                },
+                {
+                    "name": "Neighborhood Guide",
+                    "url": "/neighborhood",
+                    "newTab": false
+                }
+            ]
         }
-      ]
+    ],
+    "subscribeNote": "No spam, only the latest news and updates!",
+    "codeOfConduct": "Code of Conduct",
+    "codeOfConductBlock": {
+        "organization": "Major League Hacking and Hoopy",
+        "form": "https://mlh.io/code-of-conduct",
+        "contacts": [
+            "Organizer, devrelcon@mlh.io"
+        ]
     },
-    {
-      "title": "Explore Past DevRelCon Events",
-      "links": [
-        {
-          "name": "New York 2024",
-          "url": "https://developerrelations.com/event/devrelcon-new-york-2024",
-          "newTab": true
-        },
-        {
-          "name": "London 2023",
-          "url": "https://developerrelations.com/event/devrelcon-london-2023",
-          "newTab": true
-        },
-        {
-          "name": "Yokohama 2023",
-          "url": "https://developerrelations.com/event/devrelcon-yokohama-2023",
-          "newTab": true
-        },
-        {
-          "name": "LATAM 2023",
-          "url": "https://developerrelations.com/event/devrelcon-latam-2023",
-          "newTab": true
-        },
-        {
-          "name": "San Francisco 2019",
-          "url": "https://developerrelations.com/event/devrelcon-san-francisco-2019",
-          "newTab": true
-        }
-      ]
-    },
-    {
-      "title": "Event Resources",
-      "links": [
-        {
-          "name": "Sponsor DevRelCon",
-          "url": "https://majorleaguehacking.typeform.com/to/lVvRM8eO",
-          "newTab": true
-        },
-        {
-          "name": "FAQs",
-          "url": "/faq",
-          "newTab": false
-        },
-        {
-          "name": "Neighborhood Guide",
-          "url": "/neighborhood",
-          "newTab": false
-        }
-      ]
-    }
-  ],
-  "subscribeNote": "No spam, only the latest news and updates!",
-  "codeOfConduct": "Code of Conduct",
-  "codeOfConductBlock": {
-    "organization": "Major League Hacking and Hoopy",
-    "form": "https://mlh.io/code-of-conduct",
-    "contacts": [
-      "Organizer, devrelcon@mlh.io"
-    ]
-  },
-  "aboutBlock": {
-    "title": "About",
-    "callToAction": {
-      "featuredSessions": {
-        "description": "See recorded sessions from previous events for examples of what to expect at DevRelCon NY!",
-        "label": "Watch past DevRelCon talks",
-        "link": "https://www.youtube.com/playlist?list=PLwOuygPowJYYza4HEzvjlQZyy4m4t1EPB"
-      },
-      "howItWas": {
-        "description": "DevRelCon is a global series of conferences for developer relations, developer experience and developer marketing professionals. Whether you’re looking to advance your craft and career, are in-between roles, or simply want to reconnect with the wider DevRel community, DevRelCon is the place for you! Sessions will cover practical topics like metrics and ROI, managing up and down, community management, content creation, career paths, open source, improving and scaling using AI tools, and much more.",
-        "label": "See why you should attend DevRelCon!",
-        "youtubeId": "VXbhT8lPEiY"
-      }
-    },
-    "statisticsBlock": {
-      "attendees": {
-        "label": "Attendees",
-        "number": "300"
-      },
-      "days": {
-        "label": "Days",
-        "number": "2"
-      },
-      "sessions": {
-        "label": "Sessions",
-        "number": "40"
-      },
-      "tracks": {
-        "label": "Tracks",
-        "number": "3"
-      }
-    }
-  },
-  "ticketsBlock": {
-    "title": "Tickets",
-    "ticketsDetails": "Tickets grant access to all conference sessions, coffee breaks, breakfast, lunch and party. Travel and accommodations are NOT included in the ticket price.",
-    "soldOut": "You missed it!",
-    "notAvailableYet": "Not available yet",
-    "save": "Save ${discount}% today"
-  },
-  "partnersBlock": {
-    "title": "Partners",
-    "button": "Become a partner",
-    "form": {
-      "title": "Become a partner!",
-      "submitLabel": "Submit",
-      "fullName": "Full Name",
-      "companyName": "Company Name"
-    },
-    "toast": "We will contact you soon!"
-  },
-  "featuredVideos": {
-    "title": "DevRelCon featured videos",
-    "callToAction": {
-      "label": "See all videos",
-      "link": "https://www.youtube.com/playlist?list=PLwOuygPowJYZ3AMB2Ry5SCH4XK4gKsIXb"
-    }
-  },
-  "blog": {
-    "published": "Published",
-    "suggested": "Up next"
-  },
-  "latestPostsBlock": {
-    "title": "The latest DevRel articles",
-    "callToAction": {
-      "label": "View all posts",
-      "link": "https://developerrelations.com/all-content"
-    }
-  },
-  "speakers": {
-    "skills": "Skills",
-    "previousYears": "Years",
-    "previousYear": "Year"
-  },
-  "speakersBlock": {
-    "title": "Featured Speakers",
-    "callToAction": {
-      "label": "View all speakers",
-      "link": "/speakers"
-    }
-  },
-  "previousSpeakersBlock": {
-    "title": "Previous speakers",
-    "callToAction": {
-      "label": "View all",
-      "link": "/previous-speakers"
-    }
-  },
-  "galleryBlock": {
-    "title": "#devrelcon highlights",
-    "description": "Learn more about past DevRelCon events - they are educational, fun, and help move the craft and strategy of DevRel forward.",
-    "callToAction": {
-      "label": "See past events",
-      "link": "https://developerrelations.com/devrelcon"
-    }
-  },
-  "mapBlock": {
-    "title": "Location"
-  },
-  "subscribeBlock": {
-    "callToAction": {
-      "description": "Get ongoing updates about Developer Relations events, content, and more!",
-      "label": "Subscribe"
-    },
-    "yourEmail": "Your email",
-    "emailAddress": "Email Address",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "formTitle": "Get the latest updates, insights and news about Developeer Relations sent to your inbox.",
-    "emailRequired": "Please enter a valid email address.",
-    "fieldRequired": "Field required.",
-    "subscribe": "Subscribe",
-    "subscribed": "Subscribed",
-    "close": "Close",
-    "generalError": "An error has occurred. Please, try again later.",
-    "toast": "Successfully subscribed!"
-  },
-  "team": {
-    "description": "DevRelCon is a global series of events, created by Hoopy, to provide a forum for developer relations and developer experience professionals share with other practitioners. Beginning in London in 2015, there are now also editions in Latin America, Prague, San Francisco, Tokyo and China. Major League Hacking joined up with Hoopy as the local organizer to bring DevRelCon back to the US with our inaugural 2024 event and continuing US events in 2025 and beyond."
-  },
-  "schedule": {
-    "saveSessionsSignedOut": "Sign in to save sessions"
-  },
-  "feedback": {
-    "save": "Save",
-    "headline": "Review session",
-    "leaveFeedback": "to leave feedback",
-    "sendFeedbackSignedOut": "Sign in to leave feedback",
-    "removeFeedbackSignedOut": "Sign in to delete feedback",
-    "feedbackRecorded": "Feedback saved",
-    "feedbackDeleted": "Feedback deleted",
-    "helperText": "Comments will be anonymously provided to speakers",
-    "somethingWentWrong": "Something went wrong",
-    "contentCaption": "Content quality",
-    "styleCaption": "Presentation style",
-    "deleteFeedback": "Delete",
-    "sessionClosed": "Session reviews are not open"
-  },
-  "sessionDetails": {
-    "contentLevel": "Content level",
-    "viewPresentation": "View presentation",
-    "viewVideo": "View video",
-    "speakers": "Speakers"
-  },
-  "speakerDetails": {
-    "sessions": "Sessions"
-  },
-  "notifications": {
-    "default": "Enable notifications",
-    "generalLabel": "General notifications",
-    "myScheduleLabel": "My Schedule notifications",
-    "enabled": "Get notified of general announcements and sessions starting",
-    "signIn": "Sign in to get personalized session notifications",
-    "enable": "Enable",
-    "subscribe": "Subscribe",
-    "unsubscribe": "Unsubscribe",
-    "myScheduleEnabled": "My Schedule notifications enabled",
-    "myScheduleDisabled": "My Schedule notifications disabled",
-    "generalEnabled": "General notifications enabled",
-    "generalDisabled": "General notifications disabled",
-    "blocked": {
-      "text": "Please enable notifications in your browser",
-      "label": "Enable",
-      "link": "https://support.google.com/chrome/answer/3220216"
-    },
-    "unsupported": {
-      "text": "Notifications are not supported on this device",
-      "label": "Details",
-      "link": "https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#browser_compatibility"
-    },
-    "unknown": {
-      "text": "Unknown error occurred"
-    },
-    "toast": {
-      "title": "Open"
-    }
-  },
-  "aboutOrganizerBlock": {
-    "image": "/images/team.webp",
-    "blocks": [
-      {
-        "title": "Organizers",
-        "description": "DevRelCon NY is organized by Major League Hacking (MLH), the largest community of early career developers in the world. For 10 years, MLH has helped the world's top brands connect with developers. DevRelCon was created globally by Hoopy, the DevRel and developer marketing agency.",
+    "aboutBlock": {
+        "title": "About",
         "callToAction": {
-          "label": "Learn more about Major League Hacking",
-          "link": "https://sponsor.mlh.io/",
-          "newTab": true
+            "featuredSessions": {
+                "description": "See recorded sessions from previous events for examples of what to expect at DevRelCon NY!",
+                "label": "Watch past DevRelCon talks",
+                "link": "https://www.youtube.com/playlist?list=PLwOuygPowJYYza4HEzvjlQZyy4m4t1EPB"
+            },
+            "howItWas": {
+                "description": "DevRelCon is a global series of conferences for developer relations, developer experience and developer marketing professionals. Whether you’re looking to advance your craft and career, are in-between roles, or simply want to reconnect with the wider DevRel community, DevRelCon is the place for you! Sessions will cover practical topics like metrics and ROI, managing up and down, community management, content creation, career paths, open source, improving and scaling using AI tools, and much more.",
+                "label": "See why you should attend DevRelCon!",
+                "youtubeId": "VXbhT8lPEiY"
+            }
         },
-        "callToAction2": {
-          "label": "Learn more about Hoopy",
-          "link": "https://hoopy.io/",
-          "newTab": true
+        "statisticsBlock": {
+            "attendees": {
+                "label": "Attendees",
+                "number": "300"
+            },
+            "days": {
+                "label": "Days",
+                "number": "2"
+            },
+            "sessions": {
+                "label": "Sessions",
+                "number": "40"
+            },
+            "tracks": {
+                "label": "Tracks",
+                "number": "3"
+            }
         }
-      },
-      {
-        "title": "What is DevRelCon?",
-        "description": "DevRelCon is a global series of events, created by Hoopy, to provide a forum for developer relations and developer experience professionals share with other practitioners. Beginning in London in 2015, there are now also editions in Latin America, Prague, San Francisco, Tokyo and China.",
+    },
+    "ticketsBlock": {
+        "title": "Tickets",
+        "ticketsDetails": "Tickets grant access to all conference sessions, coffee breaks, breakfast, lunch and party. Travel and accommodations are NOT included in the ticket price.",
+        "soldOut": "You missed it!",
+        "notAvailableYet": "Not available yet",
+        "save": "Save ${discount}% today"
+    },
+    "partnersBlock": {
+        "title": "Partners",
+        "button": "Become a partner",
+        "form": {
+            "title": "Become a partner!",
+            "submitLabel": "Submit",
+            "fullName": "Full Name",
+            "companyName": "Company Name"
+        },
+        "toast": "We will contact you soon!"
+    },
+    "featuredVideos": {
+        "title": "DevRelCon featured videos",
         "callToAction": {
-          "label": "See past events",
-          "link": "https://www.developerrelations.com/devrelcon/",
-          "newTab": true
-        },
-        "callToAction2": {
-          "label": "Read our FAQ",
-          "link": "/faq"
+            "label": "See all videos",
+            "link": "https://www.youtube.com/playlist?list=PLwOuygPowJYZ3AMB2Ry5SCH4XK4gKsIXb"
         }
-      }
-    ]
-  },
-  "signInDialog": {
-    "alreadyHaveAccount": "You already have an account",
-    "alreadyUsed": "You've already used",
-    "signInToContinue": {
-      "part1": "Sign in with",
-      "part2": "to continue."
+    },
+    "blog": {
+        "published": "Published",
+        "suggested": "Up next"
+    },
+    "latestPostsBlock": {
+        "title": "The latest DevRel articles",
+        "callToAction": {
+            "label": "View all posts",
+            "link": "https://developerrelations.com/all-content"
+        }
+    },
+    "speakers": {
+        "skills": "Skills",
+        "previousYears": "Years",
+        "previousYear": "Year"
+    },
+    "speakersBlock": {
+        "title": "Featured Speakers",
+        "callToAction": {
+            "label": "View all speakers",
+            "link": "/speakers"
+        }
+    },
+    "previousSpeakersBlock": {
+        "title": "Previous speakers",
+        "callToAction": {
+            "label": "View all",
+            "link": "/previous-speakers"
+        },
+        "carousel": {
+            "speakersPerSlide": 4,
+            "autoRotateInterval": 5000,
+            "showCompany": true
+        }
+    },
+    "galleryBlock": {
+        "title": "#devrelcon highlights",
+        "description": "Learn more about past DevRelCon events - they are educational, fun, and help move the craft and strategy of DevRel forward.",
+        "callToAction": {
+            "label": "See past events",
+            "link": "https://developerrelations.com/devrelcon"
+        }
+    },
+    "mapBlock": {
+        "title": "Location"
+    },
+    "subscribeBlock": {
+        "callToAction": {
+            "description": "Get ongoing updates about Developer Relations events, content, and more!",
+            "label": "Subscribe"
+        },
+        "yourEmail": "Your email",
+        "emailAddress": "Email Address",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "formTitle": "Get the latest updates, insights and news about Developeer Relations sent to your inbox.",
+        "emailRequired": "Please enter a valid email address.",
+        "fieldRequired": "Field required.",
+        "subscribe": "Subscribe",
+        "subscribed": "Subscribed",
+        "close": "Close",
+        "generalError": "An error has occurred. Please, try again later.",
+        "toast": "Successfully subscribed!"
+    },
+    "team": {
+        "description": "DevRelCon is a global series of events, created by Hoopy, to provide a forum for developer relations and developer experience professionals share with other practitioners. Beginning in London in 2015, there are now also editions in Latin America, Prague, San Francisco, Tokyo and China. Major League Hacking joined up with Hoopy as the local organizer to bring DevRelCon back to the US with our inaugural 2024 event and continuing US events in 2025 and beyond."
+    },
+    "schedule": {
+        "saveSessionsSignedOut": "Sign in to save sessions"
+    },
+    "feedback": {
+        "save": "Save",
+        "headline": "Review session",
+        "leaveFeedback": "to leave feedback",
+        "sendFeedbackSignedOut": "Sign in to leave feedback",
+        "removeFeedbackSignedOut": "Sign in to delete feedback",
+        "feedbackRecorded": "Feedback saved",
+        "feedbackDeleted": "Feedback deleted",
+        "helperText": "Comments will be anonymously provided to speakers",
+        "somethingWentWrong": "Something went wrong",
+        "contentCaption": "Content quality",
+        "styleCaption": "Presentation style",
+        "deleteFeedback": "Delete",
+        "sessionClosed": "Session reviews are not open"
+    },
+    "sessionDetails": {
+        "contentLevel": "Content level",
+        "viewPresentation": "View presentation",
+        "viewVideo": "View video",
+        "speakers": "Speakers"
+    },
+    "speakerDetails": {
+        "sessions": "Sessions"
+    },
+    "notifications": {
+        "default": "Enable notifications",
+        "generalLabel": "General notifications",
+        "myScheduleLabel": "My Schedule notifications",
+        "enabled": "Get notified of general announcements and sessions starting",
+        "signIn": "Sign in to get personalized session notifications",
+        "enable": "Enable",
+        "subscribe": "Subscribe",
+        "unsubscribe": "Unsubscribe",
+        "myScheduleEnabled": "My Schedule notifications enabled",
+        "myScheduleDisabled": "My Schedule notifications disabled",
+        "generalEnabled": "General notifications enabled",
+        "generalDisabled": "General notifications disabled",
+        "blocked": {
+            "text": "Please enable notifications in your browser",
+            "label": "Enable",
+            "link": "https://support.google.com/chrome/answer/3220216"
+        },
+        "unsupported": {
+            "text": "Notifications are not supported on this device",
+            "label": "Details",
+            "link": "https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#browser_compatibility"
+        },
+        "unknown": {
+            "text": "Unknown error occurred"
+        },
+        "toast": {
+            "title": "Open"
+        }
+    },
+    "aboutOrganizerBlock": {
+        "image": "/images/team.webp",
+        "blocks": [{
+                "title": "Organizers",
+                "description": "DevRelCon NY is organized by Major League Hacking (MLH), the largest community of early career developers in the world. For 10 years, MLH has helped the world's top brands connect with developers. DevRelCon was created globally by Hoopy, the DevRel and developer marketing agency.",
+                "callToAction": {
+                    "label": "Learn more about Major League Hacking",
+                    "link": "https://sponsor.mlh.io/",
+                    "newTab": true
+                },
+                "callToAction2": {
+                    "label": "Learn more about Hoopy",
+                    "link": "https://hoopy.io/",
+                    "newTab": true
+                }
+            },
+            {
+                "title": "What is DevRelCon?",
+                "description": "DevRelCon is a global series of events, created by Hoopy, to provide a forum for developer relations and developer experience professionals share with other practitioners. Beginning in London in 2015, there are now also editions in Latin America, Prague, San Francisco, Tokyo and China.",
+                "callToAction": {
+                    "label": "See past events",
+                    "link": "https://www.developerrelations.com/devrelcon/",
+                    "newTab": true
+                },
+                "callToAction2": {
+                    "label": "Read our FAQ",
+                    "link": "/faq"
+                }
+            }
+        ]
+    },
+    "signInDialog": {
+        "alreadyHaveAccount": "You already have an account",
+        "alreadyUsed": "You've already used",
+        "signInToContinue": {
+            "part1": "Sign in with",
+            "part2": "to continue."
+        }
+    },
+    "filters": {
+        "title": "Filters",
+        "results": "Results",
+        "tags": "Tags",
+        "complexity": "Complexity",
+        "clear": "Clear all"
+    },
+    "addToHomeScreen": {
+        "cta": "Add to Home Screen"
     }
-  },
-  "filters": {
-    "title": "Filters",
-    "results": "Results",
-    "tags": "Tags",
-    "complexity": "Complexity",
-    "clear": "Clear all"
-  },
-  "addToHomeScreen": {
-    "cta": "Add to Home Screen"
-  }
 }

@@ -17,6 +17,7 @@ import {
 import { loading, previousSpeakersBlock } from '../utils/data';
 import '../utils/icons';
 import './shared-styles';
+import './rotating-speakers-carousel';
 
 @customElement('previous-speakers-block')
 export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
@@ -74,25 +75,36 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
       <div class="container">
         <h1 class="container-title">[[previousSpeakersBlock.title]]</h1>
 
-        <div class="speakers-wrapper">
-          <template is="dom-if" if="[[pending]]">
-            <p>[[loading]]</p>
-          </template>
+        <template is="dom-if" if="[[pending]]">
+          <p>[[loading]]</p>
+        </template>
 
-          <template is="dom-if" if="[[failure]]">
-            <p>Error loading previous speakers.</p>
-          </template>
+        <template is="dom-if" if="[[failure]]">
+          <p>Error loading previous speakers.</p>
+        </template>
 
-          <template is="dom-repeat" items="[[speakers]]" as="speaker">
-            <a class="speaker" href$="[[previousSpeakerUrl(speaker.id)]]">
-              <lazy-image
-                class="photo"
-                src="[[speaker.photoUrl]]"
-                alt="[[speaker.name]]"
-              ></lazy-image>
-            </a>
-          </template>
-        </div>
+        <template is="dom-if" if="[[isHomePage]]">
+          <rotating-speakers-carousel
+            speakers="[[speakers]]"
+            speakers-per-slide="[[carouselConfig.speakersPerSlide]]"
+            auto-rotate-interval="[[carouselConfig.autoRotateInterval]]"
+            show-company="[[carouselConfig.showCompany]]"
+          ></rotating-speakers-carousel>
+        </template>
+
+        <template is="dom-if" if="[[!isHomePage]]">
+          <div class="speakers-wrapper">
+            <template is="dom-repeat" items="[[speakers]]" as="speaker">
+              <a class="speaker" href$="[[previousSpeakerUrl(speaker.id)]]">
+                <lazy-image
+                  class="photo"
+                  src="[[speaker.photoUrl]]"
+                  alt="[[speaker.name]]"
+                ></lazy-image>
+              </a>
+            </template>
+          </div>
+        </template>
 
         <a href="[[previousSpeakersBlock.callToAction.link]]">
           <paper-button class="animated icon-right">
@@ -111,6 +123,12 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
   previousSpeakers: PreviousSpeakersState = initialPreviousSpeakersState;
   @property({ type: Array })
   speakers: PreviousSpeaker[] = [];
+
+  @property({ type: Boolean })
+  isHomePage = false;
+
+  @property({ type: Object })
+  carouselConfig = previousSpeakersBlock.carousel;
 
   @computed('previousSpeakers')
   get pending() {
