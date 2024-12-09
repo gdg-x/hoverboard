@@ -6,7 +6,7 @@ DevRelCon NY will take place on July 16-18, 2025 at [Industry City](https://maps
 
 ### Schedule
 
-We will start the festivities on July 17th with an evening dinner for speakers and sponsors. The conference will officially kick off the morning of July 18th and wrap up by 6 PM on July 19th.
+We will start the festivities on July 16th with an evening dinner for speakers and sponsors. The conference will officially kick off the morning of July 17th and wrap up by 6 PM on July 18th.
 Check back soon for a full schedule of the event!
 
 ### Who is DevRelCon for?
@@ -15,7 +15,7 @@ DevRelCon is for everyone working with developers as customers, community member
 
 ### What is your COVID-19 Policy?
 
-All attendees will be required to be up to date with COVID-19 vaccines. Additionally, we ask anyone not feeling well or in contact with someone who tested positive for COVID-19 to stay home from the conference. Unfortunately, if you cannot attend the conference due to illness, we cannot refund your ticket.
+We ask anyone not feeling well or in contact with someone who tested positive for COVID-19 to stay home from the conference. Unfortunately, if you cannot attend the conference due to illness, we cannot refund your ticket.
 
 ### Is there a code of conduct?
 
@@ -27,17 +27,13 @@ There are ramps, elevators, and curbside dropoff spots available in both buildin
 
 ## Attendance
 
-### How much does DevRelCon New York cost?
-
-Our early bird ticket sale has ended. Full priced tickets cost $699 USD. Tickets are [on sale right now](https://ti.to/mlh/devrelcon-ny-2025)!
-
 ### I’m a speaker, do I still need to buy a ticket?
 
 Speakers get free tickets. DevRelCon sells out quickly, so make sure you buy a ticket to secure your spot. If you are selected to speak and are eligible for a ticket reimbursement after having purchased one, we will notify you via e-mail.
 
 ### What is included with a DevRelCon New York ticket?
 
-Tickets include conference programming, breakfast and lunch on July 18th + July 19th, and an invite to our all-conference happy hour with snacks and drinks on July 18th. They do not include travel and/or accommodations for the conference.
+Tickets include conference programming, breakfast and lunch on July 17th + July 18th, and an invite to our all-conference happy hour with snacks and drinks on July 17th. They do not include travel and/or accommodations for the conference.
 
 ### Do you have ticket scholarships?
 
