@@ -60,6 +60,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@vaadin/router": "^1.7.5",
     "firebase": "^10.13.1",
+    "firebase-functions": "^6.1.1",
     "lit": "^3.2.0",
     "marked": "^12.0.2",
     "marked-gfm-heading-id": "^3.2.0",
