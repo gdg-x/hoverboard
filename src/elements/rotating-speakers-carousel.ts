@@ -1,5 +1,6 @@
-import { customElement, property } from '@polymer/decorators';
+import { computed, customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
+import '@power-elements/lazy-image';
 import { PreviousSpeaker } from '../models/previous-speaker';
 
 @customElement('rotating-speakers-carousel')
@@ -14,6 +15,12 @@ export class RotatingSpeakersCarousel extends PolymerElement {
           overflow: hidden;
         }
 
+        .container-title {
+          margin-bottom: 32px;
+          font-size: 32px;
+          text-align: left;
+        }
+
         .carousel-container {
           display: flex;
           transition: transform 0.5s ease-in-out;
@@ -23,39 +30,54 @@ export class RotatingSpeakersCarousel extends PolymerElement {
           display: flex;
           flex: 0 0 100%;
           justify-content: center;
-          gap: 24px;
+          align-items: center;
+          gap: 48px;
+        }
+
+        .speaker-link {
+          text-decoration: none;
+          color: inherit;
+          cursor: pointer;
         }
 
         .speaker-card {
           text-align: center;
           padding: 16px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 200px;
         }
 
         .photo {
-          --lazy-image-width: 120px;
-          --lazy-image-height: 120px;
+          --lazy-image-width: 140px;
+          --lazy-image-height: 140px;
           --lazy-image-fit: cover;
+          --lazy-image-border-radius: 50%;
           width: var(--lazy-image-width);
           height: var(--lazy-image-height);
           border-radius: 50%;
-          margin-bottom: 12px;
+          margin-bottom: 16px;
+          overflow: hidden;
         }
 
         .name {
           font-size: 18px;
           font-weight: 500;
           margin: 8px 0 4px;
+          width: 100%;
         }
 
         .company {
           font-size: 14px;
           color: var(--secondary-text-color);
+          width: 100%;
         }
 
         @media (max-width: 640px) {
           .photo {
-            --lazy-image-width: 80px;
-            --lazy-image-height: 80px;
+            --lazy-image-width: 100px;
+            --lazy-image-height: 100px;
           }
         }
       </style>
@@ -64,15 +86,17 @@ export class RotatingSpeakersCarousel extends PolymerElement {
         <template is="dom-repeat" items="[[slides]]" as="slide">
           <div class="slide">
             <template is="dom-repeat" items="[[slide]]" as="speaker">
-              <div class="speaker-card">
-                <lazy-image
-                  class="photo"
-                  src="[[speaker.photoUrl]]"
-                  alt="[[speaker.name]]"
-                ></lazy-image>
-                <div class="name">[[speaker.name]]</div>
-                <div class="company" hidden$="[[!showCompany]]">[[speaker.company]]</div>
-              </div>
+              <a class="speaker-link" href$="[[_getSpeakerUrl(speaker.id)]]">
+                <div class="speaker-card">
+                  <lazy-image
+                    class="photo"
+                    src="[[speaker.photoUrl]]"
+                    alt="[[speaker.name]]"
+                  ></lazy-image>
+                  <div class="name">[[speaker.name]]</div>
+                  <div class="company" hidden$="[[!showCompany]]">[[speaker.company]]</div>
+                </div>
+              </a>
             </template>
           </div>
         </template>
@@ -90,7 +114,7 @@ export class RotatingSpeakersCarousel extends PolymerElement {
   showCompany = true;
 
   @property({ type: Number })
-  autoRotateInterval = 5000;
+  autoRotateInterval = 12000;
 
   @property({ type: Number })
   private currentSlide = 0;
@@ -125,11 +149,15 @@ export class RotatingSpeakersCarousel extends PolymerElement {
   }
 
   @computed('speakers', 'speakersPerSlide')
-  get slides() {
+  private get slides() {
     const slides = [];
     for (let i = 0; i < this.speakers.length; i += this.speakersPerSlide) {
       slides.push(this.speakers.slice(i, i + this.speakersPerSlide));
     }
     return slides;
+  }
+
+  private _getSpeakerUrl(id: string) {
+    return `/previous-speakers/${id}`;
   }
 } 

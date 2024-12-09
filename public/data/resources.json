@@ -124,7 +124,7 @@
             "featuredSessions": {
                 "description": "See recorded sessions from previous events for examples of what to expect at DevRelCon NY!",
                 "label": "Watch past DevRelCon talks",
-                "link": "https://www.youtube.com/playlist?list=PLwOuygPowJYYza4HEzvjlQZyy4m4t1EPB"
+                "link": "https://youtube.com/playlist?list=PLwOuygPowJYZnTPCmZUyNbJjvKtLFJujg&si=GjbDoG1zVqPOS-iq"
             },
             "howItWas": {
                 "description": "DevRelCon is a global series of conferences for developer relations, developer experience and developer marketing professionals. Whether you’re looking to advance your craft and career, are in-between roles, or simply want to reconnect with the wider DevRel community, DevRelCon is the place for you! Sessions will cover practical topics like metrics and ROI, managing up and down, community management, content creation, career paths, open source, improving and scaling using AI tools, and much more.",
@@ -173,7 +173,7 @@
         "title": "DevRelCon featured videos",
         "callToAction": {
             "label": "See all videos",
-            "link": "https://www.youtube.com/playlist?list=PLwOuygPowJYZ3AMB2Ry5SCH4XK4gKsIXb"
+            "link": "https://youtube.com/playlist?list=PLwOuygPowJYZnTPCmZUyNbJjvKtLFJujg&si=GjbDoG1zVqPOS-iq"
         }
     },
     "blog": {
@@ -200,9 +200,9 @@
         }
     },
     "previousSpeakersBlock": {
-        "title": "Previous speakers",
+        "title": "Previous Speakers",
         "callToAction": {
-            "label": "View all",
+            "label": "View Last Year's Speakers",
             "link": "/previous-speakers"
         },
         "carousel": {
@@ -301,7 +301,7 @@
         }
     },
     "aboutOrganizerBlock": {
-        "image": "/images/team.webp",
+        "image": "/images/jonmc.png",
         "blocks": [{
                 "title": "Organizers",
                 "description": "DevRelCon NY is organized by Major League Hacking (MLH), the largest community of early career developers in the world. For 10 years, MLH has helped the world's top brands connect with developers. DevRelCon was created globally by Hoopy, the DevRel and developer marketing agency.",

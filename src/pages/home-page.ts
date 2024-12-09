@@ -16,6 +16,7 @@ import '../elements/partners-block';
 import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
+import '../elements/previous-speakers-block';
 import { firebaseApp } from '../firebase';
 import { store } from '../store';
 import { ReduxMixin } from '../store/mixin';
@@ -251,6 +252,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         <fork-me-block></fork-me-block>
       </template>
       <about-block></about-block>
+
       <previous-speakers-block is-home-page></previous-speakers-block>
       <subscribe-block></subscribe-block>
       <tickets-block id="tickets-block"></tickets-block>

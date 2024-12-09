@@ -24,9 +24,9 @@
       "label": "Home"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers",
-      "label": "Speakers"
+      "route": "previous-speakers",
+      "permalink": "/previous-speakers",
+      "label": "Previous Speakers"
     },
     {
       "route": "schedule",
