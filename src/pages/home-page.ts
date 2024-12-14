@@ -68,7 +68,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         }
 
         .info-items > *:not(:first-of-type) {
-          margin-top: 4px;
+          margin-top: 34px;
         }
 
         .action-buttons {
