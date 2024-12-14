@@ -68,7 +68,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         }
 
         .info-items > *:not(:first-of-type) {
-          margin-top: 4px;
+          margin-top: 34px;
         }
 
         .action-buttons {
@@ -78,6 +78,12 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
         .action-buttons paper-button {
           margin: 8px;
+        }
+
+        .action-buttons a {
+          text-decoration: none;
+          display: flex;
+          align-items: center;
         }
 
         .action-buttons .watch-video {
@@ -174,9 +180,9 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
 
           <div class="action-buttons" layout horizontal center-justified wrap>
-            <paper-button class="watch-video" on-click="playVideo">
-              <iron-icon icon="hoverboard:movie"></iron-icon>
-              [[viewHighlights]]
+            <a href="https://majorleaguehacking.typeform.com/to/WH7Xl9n7" target="_blank" rel="noopener noreferrer">
+            <paper-button>
+              Apply to Speak
             </paper-button>
             <paper-button on-click="scrollToTickets" primary>
               <iron-icon icon="hoverboard:ticket"></iron-icon>

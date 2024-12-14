@@ -217,6 +217,10 @@
         "callToAction": {
             "label": "See past events",
             "link": "https://developerrelations.com/devrelcon"
+        },
+        "callToAction2": {
+            "label": "View 2024 Photos",
+            "link": "https://majorleaguehacking.smugmug.com/Event-Photos/DevRelCon-New-York-2024/n-6fvqWg"
         }
     },
     "mapBlock": {

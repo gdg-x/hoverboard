@@ -145,6 +145,11 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
             height: initial;
           }
         }
+
+        .nav-item[highlight] a {
+          color: var(--accent-color, #03a9f4);
+          font-weight: 500;
+        }
       </style>
 
       <app-toolbar class="header">
@@ -177,7 +182,15 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
         >
           <template is="dom-repeat" items="[[navigation]]" as="nav">
             <paper-tab name="[[nav.route]]" class="nav-item" link>
-              <a href="[[nav.permalink]]" layout vertical center-center>[[nav.label]]</a>
+              <a 
+                href$="[[item.permalink]]"
+                highlight$="[[item.highlight]]"
+                target$="[[_getTarget(item.permalink)]]"
+                rel$="[[_getRel(item.permalink)]]"
+                layout
+                vertical
+                center-center
+              >[[item.label]]</a>
             </paper-tab>
           </template>
 

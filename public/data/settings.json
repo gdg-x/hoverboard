@@ -42,6 +42,12 @@
       "route": "neighborhood",
       "permalink": "/neighborhood",
       "label": "Neighborhood Guide"
+    },
+    {
+      "route": "applytospeak",
+      "permalink": "https://majorleaguehacking.typeform.com/to/WH7Xl9n7",
+      "label": "Apply to Speak",
+      "highlight": true
     }
   ],
   "heroSettings": {
