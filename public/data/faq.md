@@ -2,7 +2,7 @@
 
 ### Dates and Location
 
-DevRelCon NY will take place on July 16-18, 2025 at [Industry City](https://maps.app.goo.gl/ht8BG4xB8GSJdJQY7) in Brooklyn, New York City. DevRelCon New York will be the only North American DevRelCon this year.
+DevRelCon NY will take place on July 17-18, 2025 at [Industry City](https://maps.app.goo.gl/ht8BG4xB8GSJdJQY7) in Brooklyn, New York City. DevRelCon New York will be the only North American DevRelCon this year.
 
 ### Schedule
 
