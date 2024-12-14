@@ -115,7 +115,7 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private viewport = initialUiState.viewport;
   @property({ type: Object })
-  private option = {
+  private options = {
     disableDefaultUI: true,
     disableDoubleClickZoom: true,
     scrollwheel: false,
