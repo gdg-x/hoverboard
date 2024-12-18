@@ -1,18 +1,39 @@
 <div class="nav-class">
   <div><p>Icon</p></div>
-  <div>
+  <div class="nav-list">
     <a href="">Home</a><a href="">Speakers</a><a href="">Agenda</a><a href=""
       >Values</a
-    ><a href="">Team</a><a href="">Pricing</a><a href="">Buy</a>
+    ><a href="">Team</a><a href="">Pricing</a><a href="">Blog</a><a href=""
+      >Buy</a
+    >
   </div>
 </div>
 
 <style>
   .nav-class {
-    background-color: "rgba(28, 33, 32, 1)";
+    background-color: #1c2120;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
   }
 
-  a {
+  .nav-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .nav-list a {
     padding: 16px 20px 16px 10px;
+    color: #faf9f6;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .nav-list a:last-child {
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: #faf9f6;
   }
 </style>
