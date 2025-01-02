@@ -3,6 +3,7 @@ interface Props {
 	title: string;
 }
 
+import "@fontsource-variable/montserrat";
 const { title } = Astro.props;
 ---
 
@@ -13,6 +14,7 @@ const { title } = Astro.props;
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>

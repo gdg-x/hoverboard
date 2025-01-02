@@ -1,0 +1,169 @@
+<div class="footer-all">
+  <div class="top-footer">
+    <h1>Collaborate with us</h1>
+    <p>Interested in further connecting with us?<br>Engage through our socials, or leave us a message below.</p>
+
+    <button>Contact Us</button>
+    <button>Sign up to<br>Present</button>
+
+    <div class="socials">
+      <a href="https://www.youtube.com/channel/UCFszRWq6xbjD_-37zB8ju0A" target="_blank">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://www.linkedin.com/company/code-to-cloud/posts/?feedView=all" target="_blank">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://discord.gg/ChVmrcbC8B" target="_blank">
+        <i class="fab fa-discord"></i>
+      </a>
+      <a href="https://github.com/codetocloudinc" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://x.com/codetocloud_io" target="_blank">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.instagram.com/codetocloud/" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="bottom-footer">
+      <object
+        id="svg1"
+        width="40"
+        height="30"
+        data="/code-to-cloud-icon.svg"
+        type="image/svg+xml"
+      />
+      <a
+        class="bottom-footer-main"
+        href="https://codetocloud.io/">
+        &copy; Code to Cloud Inc.
+      </a>
+
+      <a 
+        class="bottom-footer-policy"
+        href="/Code To Cloud Code Of Conduct Statement.pdf"
+        target="_blank">
+        Code of Conduct & Anti-Harassment Policy
+        </a> 
+  </div>
+</div>  
+
+<style>
+  .footer-all {
+    background-color: #2B2C2F;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 40px;
+  }
+
+  .top-footer {
+    text-align: center;
+    color: #FAF9F6;
+    margin-bottom: 30px;
+  }
+
+  .top-footer h1 {
+    font-size: 32px;
+  }
+
+  .top-footer p {
+    font-size: 20px;
+  }
+  
+  button {
+    background-color: transparent;
+    color: #FAF9F6;
+    border: 2px solid #FAF9F6;
+    padding: 20px 40px;
+    margin: 10px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    min-height: 80px;
+  }
+
+  button:hover {
+    background-color: #FAF9F6;
+    color: #2B2C2F;
+  }
+
+  .socials {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .socials a {
+    color: #FAF9F6;
+    font-size: 50px;
+    margin: 0 15px;
+    transition: transform 0.3s ease;
+  }
+
+  .socials a:hover {
+    transform: scale(1.2);
+  }
+
+  .bottom-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: #2B2C2F;
+    padding: 15px 25px;
+    height: 10px;
+  }
+
+  #svg1 {
+    margin-left:0%;
+  }
+
+  .bottom-footer-main {
+    color: #FAF9F6;
+    position: absolute;
+    text-decoration: none;
+    font-size: 14px;
+    transform: translateX(-50%);
+    left: 50%;
+  }
+
+  .bottom-footer-policy {
+    color: #FAF9F6;
+    margin-right: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    margin-right:0%;
+  }
+
+  @media (max-width:768px) {
+    .bottom-footer {
+      flex-direction: column;
+      justify-content: center;
+      height: auto;
+      padding: 10px 20px;
+    }
+
+    #svg1 {
+      margin-bottom: 10px;
+    }
+
+    .bottom-footer-main {
+      position: static;
+      transform: none;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .bottom-footer-policy {
+      text-align: center;
+    }
+  }
+
+</style>
