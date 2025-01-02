@@ -52,7 +52,7 @@ The [Getting Started guide](#getting-started) is probably a good first point of 
 
 ## Compatibility
 
-✅ Compatible with **latest two** major versions of of browsers that support [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+✅ Compatible with **latest two** major versions of browsers that support [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
 
 ## Technology Stack
 
