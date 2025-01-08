@@ -3,8 +3,14 @@
     <h1>Collaborate with us</h1>
     <p>Interested in further connecting with us?<br>Engage through our socials, or leave us a message below.</p>
 
-    <button>Contact Us</button>
-    <button>Sign up to<br>Present</button>
+    <div class="footer-buttons">
+      <div class="button-wrapper">
+        <a href="mailto:info@codetocloud.io">
+          <button>Contact Us</button>
+        </a>
+      </div>
+    </div>
+    
 
     <div class="socials">
       <a href="https://www.youtube.com/channel/UCFszRWq6xbjD_-37zB8ju0A" target="_blank">
@@ -41,7 +47,6 @@
         href="https://codetocloud.io/">
         &copy; Code to Cloud Inc.
       </a>
-
       <a 
         class="bottom-footer-policy"
         href="/Code To Cloud Code Of Conduct Statement.pdf"
@@ -57,7 +62,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-bottom: 40px;
+    padding-bottom: 15px;
+    width: 100%;
   }
 
   .top-footer {
@@ -82,10 +88,10 @@
     margin: 10px;
     border-radius: 40px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 22px;
     transition: all 0.3s ease;
-    min-width: 200px;
-    min-height: 80px;
+    width: 20%;
+    text-align: center;
   }
 
   button:hover {
@@ -96,7 +102,7 @@
   .socials {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 30px;
   }
 
   .socials a {
@@ -111,7 +117,6 @@
   }
 
   .bottom-footer {
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -140,30 +145,6 @@
     text-decoration: none;
     font-size: 14px;
     margin-right:0%;
-  }
-
-  @media (max-width:768px) {
-    .bottom-footer {
-      flex-direction: column;
-      justify-content: center;
-      height: auto;
-      padding: 10px 20px;
-    }
-
-    #svg1 {
-      margin-bottom: 10px;
-    }
-
-    .bottom-footer-main {
-      position: static;
-      transform: none;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .bottom-footer-policy {
-      text-align: center;
-    }
   }
 
 </style>
