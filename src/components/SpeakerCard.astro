@@ -1,0 +1,40 @@
+---
+// Import the `getCollection` utility
+import { getCollection } from "astro:content";
+
+// Fetch the speakers collection
+const speakers = await getCollection("speaker");
+
+
+interface SpeakerProps {
+    id: string;
+    collection: "speakers";
+    data: {
+        name: string;
+        role: string;
+        company: string;
+        talkTitle: string;
+        image: {
+            src: string,
+            alt: string
+        }
+    };
+};
+
+
+---
+
+<!-- Render the speakers dynamically -->
+<section>
+  <h1>Speakers</h1>
+  <ul>
+    {speakers.map((speaker) => (
+      <li id={speaker.id}>
+        <img src={speaker.data.image.src} alt={speaker.data.image.alt} />
+        <h2>{speaker.data.name}</h2>
+        <p>{speaker.data.role} at {speaker.data.company}</p>
+        <h3>{speaker.data.talkTitle}</h3>
+      </li>
+    ))}
+  </ul>
+</section>

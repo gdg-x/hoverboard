@@ -1,7 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import SpeakerHeader from '../components/SpeakerHeader.astro';
+import SpeakerCard from '../components/SpeakerCard.astro';
+
+
+import { getCollection } from "astro:content";
+
+const speakers = await getCollection("speaker");
 ---
+
 
 <Layout title="Welcome to Astro.">
 	<main>
@@ -33,6 +41,22 @@ import Card from '../components/Card.astro';
 				</linearGradient>
 			</defs>
 		</svg>
+		<SpeakerHeader/>
+		<SpeakerCard/>
+<!-- <section>
+  <h1>Speakers</h1>
+  <ul>
+    {speakers.map((speaker) => (
+      <li id={speaker.id}>
+        <img src={speaker.data.image.src} alt={speaker.data.image.alt} />
+        <h2>{speaker.data.name}</h2>
+        <p>{speaker.data.role} at {speaker.data.company}</p>
+        <h3>{speaker.data.talkTitle}</h3>
+      </li>
+    ))}
+  </ul>
+</section> -->
+
 		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
 		<p class="instructions">
 			To get started, open the directory <code>src/pages</code> in your project.<br />

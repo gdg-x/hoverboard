@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "name": "Angie Tran",
+    "role": "Principle Program Manager",
+    "company": "Microsoft",
+    "talkTitle": "The Adaptive Cloud",
+    "image": {
+      "src": "../images/carol-whitt.jpg",
+
+      "alt": "Head shot of speaker"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Bob Tran",
+    "role": "Principle Program Manager",
+    "company": "Microsoft",
+    "talkTitle": "The Adaptive Cloud",
+    "image": {
+      "src": "../images/carol-whitt.jpg",
+      "alt": "Head shot of speaker"
+    }
+  }
+]
