@@ -3,18 +3,49 @@
 import Image from 'astro/components/Image.astro';
 import cloudIcon from "../../public/images/icons/cloud.svg"
 
-// Import the `getCollection` utility
-import { getCollection } from "astro:content";
 
-// Fetch the speakers collection
-const speakers = await getCollection("speaker");
+
+import type { CollectionEntry } from 'astro:content';
+
+interface SpeakerContentProps {
+  speaker: CollectionEntry<'speakers'>
+}
+
+const { speaker } = Astro.props as SpeakerContentProps
+
 
 ---
 
-<section>
 
+<section>
+  <!-- <section>
+    <ul>
+      {speakers.map((speaker) => (
+        <li id={speaker.id} class="speaker-card">
+          <div class="image-container">
+            <Image 
+              src={import.meta.env.BASE_URL + speaker.data.image.src} 
+              alt={speaker.data.image.alt} 
+              class="speaker-image"
+              width={300} 
+              height={300}
+            />
+          </div>        
+          <p>{speaker.data.name}</p>
+          <p>{speaker.data.role} at {speaker.data.company}</p>
+          <p>{speaker.data.talkTitle}</p>
+          <div class="cloud-icon-container">
+            <Image src = {cloudIcon}
+              alt = "Cloud Icon"
+              class="cloud-icon-styles"
+              width={40} 
+              height={40}/>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section> -->
   <ul>
-    {speakers.map((speaker) => (
       <li id={speaker.id} class="speaker-card">
         <div class="image-container">
           <Image 
@@ -36,15 +67,14 @@ const speakers = await getCollection("speaker");
             height={40}/>
         </div>
       </li>
-    ))}
+   
   </ul>
 </section>
 
 
 <style>
 
-    
-
+  
 ul {
     list-style: none;
     padding: 0;
