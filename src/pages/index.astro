@@ -47,7 +47,7 @@ const allSpeakers = await getCollection("speaker");
 
 		<section>
 			<SpeakerHeader/>
-			<div>
+			<div class="speaker-grid-container">
   				{allSpeakers.map((speaker) => (
     			<SpeakerCard speaker={speaker} />
   				))}
@@ -86,6 +86,13 @@ const allSpeakers = await getCollection("speaker");
 </Layout>
 
 <style>
+
+	.speaker-grid-container {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+		padding: 0;
+	}
 	main {
 		margin: auto;
 		padding: 1rem;
