@@ -1,30 +1,13 @@
 ---
 
 import Image from 'astro/components/Image.astro';
-
+import cloudIcon from "../../public/images/icons/cloud.svg"
 
 // Import the `getCollection` utility
 import { getCollection } from "astro:content";
 
 // Fetch the speakers collection
 const speakers = await getCollection("speaker");
-
-
-// interface SpeakerProps {
-//     id: string;
-//     collection: "speakers";
-//     data: {
-//         name: string;
-//         role: string;
-//         company: string;
-//         talkTitle: string;
-//         image: {
-//             src: string,
-//             alt: string
-//         }
-//     };
-// };
-
 
 ---
 
@@ -37,6 +20,7 @@ const speakers = await getCollection("speaker");
           <Image 
             src={import.meta.env.BASE_URL + speaker.data.image.src} 
             alt={speaker.data.image.alt} 
+            class="speaker-image"
             width={300} 
             height={300}
           />
@@ -44,15 +28,14 @@ const speakers = await getCollection("speaker");
         <p>{speaker.data.name}</p>
         <p>{speaker.data.role} at {speaker.data.company}</p>
         <p>{speaker.data.talkTitle}</p>
+        <div class="cloud-icon-container">
+          <Image src = {cloudIcon}
+            alt = "Cloud Icon"
+            class="cloud-icon-styles"
+            width={40} 
+            height={40}/>
+        </div>
       </li>
-        //  <div class="image-container">
-        //   <Image 
-        //     src={import.meta.env.BASE_URL + speaker.data.image.src} 
-        //     alt={speaker.data.image.alt} 
-        //     width={10} 
-        //     height={10}
-        //   />
-        // </div>  
     ))}
   </ul>
 </section>
@@ -65,11 +48,11 @@ const speakers = await getCollection("speaker");
 ul {
     list-style: none;
     padding: 0;
-    margin: 0; /* Remove default margin on the list */
+    margin: 0; 
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Create a 3-column grid */
-    gap: 20px; /* Add spacing between grid items */
-    justify-content: center; /* Center the grid horizontally */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; 
+    justify-content: center; 
 }
 
 li.speaker-card {
@@ -78,7 +61,7 @@ li.speaker-card {
     flex-direction: column;
     align-items: center;
     border-radius: 30px;
-    padding: 30px;
+    padding: 20px;
     text-align: center;
 }
 
@@ -98,7 +81,16 @@ img {
 
 p {
     font-size: medium;
-    margin: 0.5rem 0; /* Add spacing between text lines */
+    margin: 0.5rem 0; 
+}
+
+.cloud-icon-container{
+  margin-top: 1rem;
+
+}
+
+img.cloud-icon-styles {
+    max-width: 50%; 
 }
 
 
@@ -111,7 +103,7 @@ p {
 
 @media (max-width: 480px) {
     ul {
-        grid-template-columns: 1fr; /* 1 column for mobile */
+        grid-template-columns: 1fr; 
     }
 }
 

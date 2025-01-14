@@ -1,73 +1,68 @@
 [
   {
     "id": 1,
-    "name": "Speaker 1",
-    "role": "Principle Program Manager",
-    "company": "Microsoft",
-    "talkTitle": "The Adaptive Cloud",
+    "name": "Speaker's Name",
+    "role": "Job Position",
+    "company": "Company",
+    "talkTitle": "Title of Talk",
     "image": {
-      "src": "../images/home/speakers/carol-whitt.jpg",
-
-      "alt": "Head shot of speaker"
-    },
-    "image": {
-      "src": "../images/home/speakers/carol-whitt.jpg",
+      "src": "../images/home/speakers/headshot-placeholder.png",
 
       "alt": "Head shot of speaker"
     }
   },
   {
     "id": 2,
-    "name": "Speaker 2",
-    "role": "Principle Program Manager",
-    "company": "Microsoft",
-    "talkTitle": "The Adaptive Cloud",
+    "name": "Speaker's Name",
+    "role": "Job Position",
+    "company": "Company",
+    "talkTitle": "Title of Talk",
     "image": {
-      "src": "../images/home/speakers/carol-whitt.jpg",
+      "src": "../images/home/speakers/headshot-placeholder.png",
       "alt": "Head shot of speaker"
     }
   },
   {
     "id": 3,
-    "name": "Speaker 3",
-    "role": "Principle Program Manager",
-    "company": "Microsoft",
-    "talkTitle": "The Adaptive Cloud",
+    "name": "Speaker's Name",
+    "role": "Job Position",
+    "company": "Company",
+    "talkTitle": "Title of Talk",
     "image": {
-      "src": "../images/home/speakers/carol-whitt.jpg",
+      "src": "../images/home/speakers/headshot-placeholder.png",
       "alt": "Head shot of speaker"
     }
   },
   {
     "id": 4,
-    "name": "Speaker 4",
-    "role": "Principle Program Manager",
-    "company": "Microsoft",
-    "talkTitle": "The Adaptive Cloud",
+    "name": "Speaker's Name",
+    "role": "Job Position",
+    "company": "Company",
+    "talkTitle": "Title of Talk",
     "image": {
-      "src": "../images/home/speakers/carol-whitt.jpg",
+      "src": "../images/home/speakers/headshot-placeholder.png",
       "alt": "Head shot of speaker"
     }
   },
   {
     "id": 5,
-    "name": "Speaker 5",
-    "role": "Principle Program Manager",
-    "company": "Microsoft",
-    "talkTitle": "The Adaptive Cloud",
+    "name": "Speaker's Name",
+    "role": "Job Position",
+    "company": "Company",
+    "talkTitle": "Title of Talk",
     "image": {
-      "src": "../images/home/speakers/carol-whitt.jpg",
+      "src": "../images/home/speakers/headshot-placeholder.png",
       "alt": "Head shot of speaker"
     }
   },
   {
     "id": 6,
-    "name": "Speaker 6",
-    "role": "Principle Program Manager",
-    "company": "Microsoft",
-    "talkTitle": "The Adaptive Cloud",
+    "name": "Speaker's Name",
+    "role": "Job Position",
+    "company": "Company",
+    "talkTitle": "Title of Talk",
     "image": {
-      "src": "../images/home/speakers/carol-whitt.jpg",
+      "src": "../images/home/speakers/headshot-placeholder.png",
       "alt": "Head shot of speaker"
     }
   }
