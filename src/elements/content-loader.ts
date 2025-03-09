@@ -84,7 +84,8 @@ export class ContentLoader extends PolymerElement {
           box-shadow: var(--card-box-shadow);
           border-radius: var(--card-border-radius);
 
-          background-image: linear-gradient(
+          background-image:
+            linear-gradient(
               90deg,
               var(--darkgrey) 0,
               var(--darkgrey-lighter) 50%,
