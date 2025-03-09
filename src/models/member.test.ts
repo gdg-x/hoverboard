@@ -14,6 +14,7 @@ describe('partner', () => {
       'socials',
       'title',
     ];
+
     expect(members).toHaveLength(8);
     expect(allKeys(members)).toStrictEqual(keys);
   });

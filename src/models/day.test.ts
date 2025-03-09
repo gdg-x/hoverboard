@@ -7,6 +7,7 @@ describe('day', () => {
   it('matches the shape of the default data', () => {
     const days: Day[] = Object.values(data['schedule']);
     const keys: Array<keyof Day> = ['date', 'dateReadable', 'timeslots', 'tracks'];
+
     expect(days).toHaveLength(2);
     expect(allKeys(days)).toStrictEqual(keys);
   });

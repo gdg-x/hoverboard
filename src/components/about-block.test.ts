@@ -38,6 +38,7 @@ describe('about-block', () => {
     const { getByText } = within(shadowRootForWithin);
 
     fireEvent.click(getByText(aboutBlock.callToAction.howItWas.label));
+
     expect(mockToggleVideoDialogs).toHaveBeenCalledTimes(1);
     expect(mockToggleVideoDialogs).toHaveBeenCalledWith({
       title: aboutBlock.callToAction.howItWas.label,

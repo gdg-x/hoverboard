@@ -13,6 +13,7 @@ describe('hero', () => {
       },
     ];
     const keys: Array<keyof Hero> = ['backgroundColor', 'backgroundImage', 'fontColor', 'hideLogo'];
+
     expect(heros).toHaveLength(1);
     expect(allKeys(heros)).toStrictEqual(keys);
   });

@@ -9,6 +9,7 @@ describe('speaker', () => {
       data['previousSpeakers']['adrian_kajda']['sessions']['2016'],
     );
     const keys: Array<keyof PreviousSession> = ['presentation', 'tags', 'title', 'videoId'];
+
     expect(sessions).toHaveLength(1);
     expect(allKeys(sessions)).toStrictEqual(keys);
   });

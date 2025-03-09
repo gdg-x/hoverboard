@@ -23,6 +23,7 @@ describe('speaker', () => {
       'socials',
       'title',
     ];
+
     expect(speakers).toHaveLength(27);
     expect(allKeys(speakers)).toStrictEqual(keys);
   });
