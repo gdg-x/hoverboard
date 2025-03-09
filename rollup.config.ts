@@ -18,7 +18,7 @@ const config: RollupOptions[] = [
     input: 'src/firebase-messaging-sw.ts',
     treeshake: production,
     output: {
-      file: 'dist/firebase-messaging-sw.js',
+      dir: 'dist',
       sourcemap: production,
     },
     plugins: [
