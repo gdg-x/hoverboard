@@ -22,7 +22,7 @@ const config: InitialOptionsTsJest = {
       setupFilesAfterEnv: ['<rootDir>/__tests__/web.setup.ts'],
       testEnvironment: 'jsdom',
       testMatch: ['<rootDir>/src/**/*.test.ts'],
-      transform: { '^.+\\.[t|j]sx?$': 'ts-jest' },
+      transform: { '^.+\\.[t|j]sx?$': ['ts-jest', { isolatedModules: true }] },
       transformIgnorePatterns: [`node_modules/(?!${ES_MODULE_DEPENDENCIES})`],
     } as Config.InitialProjectOptions, // InitialProjectOptions thinks `preset` isn't allowed
     {
