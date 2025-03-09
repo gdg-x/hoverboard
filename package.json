@@ -64,8 +64,7 @@
     "marked": "^15.0.3",
     "marked-gfm-heading-id": "^4.1.1",
     "pwa-helpers": "^0.9.1",
-    "register-service-worker": "^1.7.2",
-    "web-vitals": "^3.5.2"
+    "register-service-worker": "^1.7.2"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^3.0.4",
