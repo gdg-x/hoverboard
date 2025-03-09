@@ -29,7 +29,7 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
     "concurrently": "^9.1.2",
-    "cpx2": "^7.0.1",
+    "cpx2": "^8.0.0",
     "typescript": "^5.8.2"
   }
 }
