@@ -28,7 +28,7 @@ export const requestNotificationPermission = createAsyncThunk<string | undefined
       try {
         const messaging = getMessaging(firebaseApp);
         return await getToken(messaging);
-      } catch (_error) {
+      } catch (_) {
         throw new Error('unsupported');
       }
     } else if (permission === 'default') {
