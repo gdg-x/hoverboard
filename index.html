@@ -85,9 +85,6 @@
         rootPath: '{{ basepath }}',
       };
 
-      // prettier-ignore
-      {{ webVitalsPolyfill | safe }}
-
       // Capture the config object from /__/firebase/init.js for src/firebase.ts
       window.firebase = {
         initializeApp: (config) => {
