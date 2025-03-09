@@ -99,6 +99,7 @@ describe.skip('firestore', () => {
 
       it('data validation', () => {
         expect(updateDoc(ownDocRef, {})).toAllow();
+
         [
           { contentRating: -1 },
           { contentRating: 11 },

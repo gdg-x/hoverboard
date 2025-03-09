@@ -22,6 +22,7 @@ describe('hero-block', () => {
 
   it('has default values', async () => {
     const { element, shadowRoot } = await fixture<HeroBlock>(html`<hero-block></hero-block>`);
+
     expect(element.backgroundImage).toBe('');
     expect(element.backgroundColor).toBe('#fff');
     expect(element.fontColor).toBe('#000');
@@ -39,6 +40,7 @@ describe('hero-block', () => {
         hide-logo
       ></hero-block>
     `);
+
     expect(element.backgroundImage).toBe('/example.jpg');
     expect(element.backgroundColor).toBe('#000');
     expect(element.fontColor).toBe('#fff');
@@ -55,6 +57,7 @@ describe('hero-block', () => {
       </hero-block>
     `);
     const slots = shadowRoot.querySelectorAll('slot');
+
     expect(slots).toHaveLength(2);
     expect(screen.getByText('default slot')).toBeVisible();
     expect(slots[0]).not.toHaveAttribute('name');
@@ -68,11 +71,13 @@ describe('hero-block', () => {
     const { shadowRoot } = await fixture<HeroBlock>(
       html`<hero-block background-image="/example.jpg"></hero-block>`,
     );
+
     expect(shadowRoot.querySelector('.hero-image')).toHaveAttribute('src', '/example.jpg');
   });
 
   it('setHeroSettings notifies', async () => {
     await fixture<HeroBlock>(html`<hero-block background-image="/example.jpg"></hero-block>`);
+
     expect(mockSetHeroSettings).toHaveBeenCalledTimes(1);
     expect(mockSetHeroSettings).toHaveBeenCalledWith({
       backgroundColor: '#fff',

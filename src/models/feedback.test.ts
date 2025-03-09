@@ -12,6 +12,7 @@ describe('feedback', () => {
       },
     ];
     const keys: Array<keyof FeedbackData> = ['comment', 'contentRating', 'styleRating'];
+
     expect(feedback).toHaveLength(1);
     expect(allKeys(feedback)).toStrictEqual(keys);
   });

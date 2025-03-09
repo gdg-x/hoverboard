@@ -19,6 +19,7 @@ describe('session', () => {
       'title',
       'videoId',
     ];
+
     expect(sessions).toHaveLength(40);
     expect(allKeys(sessions)).toStrictEqual(keys);
   });

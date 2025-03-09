@@ -15,6 +15,7 @@ describe('post', () => {
       'source',
       'title',
     ];
+
     expect(posts).toHaveLength(5);
     expect(allKeys(posts)).toStrictEqual(keys);
   });

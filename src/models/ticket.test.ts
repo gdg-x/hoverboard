@@ -20,6 +20,7 @@ describe('ticket', () => {
       'starts',
       'url',
     ];
+
     expect(tickets).toHaveLength(5);
     expect(allKeys(tickets)).toStrictEqual(keys);
   });
