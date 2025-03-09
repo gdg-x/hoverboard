@@ -6,7 +6,7 @@
   "module": "dist/index.js",
   "type": "module",
   "engines": {
-    "node": "20",
+    "node": "22",
     "npm": "10"
   },
   "scripts": {
@@ -27,7 +27,7 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "@tsconfig/node20": "^20.1.4",
+    "@tsconfig/node22": "^22.0.0",
     "concurrently": "^9.1.2",
     "cpx2": "^8.0.0",
     "typescript": "^5.8.2"
