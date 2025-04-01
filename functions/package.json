@@ -27,7 +27,7 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "@tsconfig/node22": "^22.0.0",
+    "@tsconfig/node22": "^22.0.1",
     "concurrently": "^9.1.2",
     "cpx2": "^8.0.0",
     "typescript": "^5.8.2"
