@@ -37,7 +37,7 @@ Tickets include conference programming, breakfast and lunch on July 17th + July 
 
 ### Do you have ticket scholarships?
 
-You may apply for a discounted or complementary ticket scholarship to attend DevRelCon [via this form](https://forms.gle/SPSrxYFRLeFERwSu7).
+You may apply for a discounted or complementary ticket scholarship to attend DevRelCon [via this form](https://forms.gle/bf3DcXJ4hepH9A8x9).
 
 ### Where should I stay for DevRelCon NY?
 
