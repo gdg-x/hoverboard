@@ -42,16 +42,11 @@
       "route": "neighborhood",
       "permalink": "/neighborhood",
       "label": "Neighborhood Guide"
-    },
-    {
-      "route": "applytospeak",
-      "permalink": "https://majorleaguehacking.typeform.com/to/WH7Xl9n7",
-      "label": "Apply to Speak"
     }
   ],
   "heroSettings": {
     "home": {
-      "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, Developer Marketing, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions. Apply to speak and share your expertise before April 1, 2025.",
+      "description": "DevRelCon is the premiere global conference for Developer Relations, Developer Experience, Developer Marketing, and Technical Community Management. This is a unique opportunity to hear talks from industry leaders, connect with your peers on best practices and challenges, and participate in hands-on workshops and discussions.",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
