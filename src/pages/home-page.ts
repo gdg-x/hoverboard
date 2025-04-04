@@ -173,17 +173,6 @@ export class HomePage extends ReduxMixin(PolymerElement) {
             <div class="info-item">[[heroSettings.description]]</div>
           </div>
 
-          <div class="action-buttons" layout horizontal center-justified wrap>
-            <a href="https://majorleaguehacking.typeform.com/to/WH7Xl9n7" target="_blank" rel="noopener noreferrer">
-            <paper-button>
-              Apply to Speak
-            </paper-button></a>
-            <paper-button on-click="scrollToTickets" primary>
-              <iron-icon icon="hoverboard:ticket"></iron-icon>
-              [[buyTicket]]
-            </paper-button>
-          </div>
-
           <div class="scroll-down" on-click="scrollNextBlock">
             <svg
               xmlns="http://www.w3.org/2000/svg"
