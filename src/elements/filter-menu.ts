@@ -1,6 +1,6 @@
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/paper-button';
+import '@material/web/button/outlined-button.js';
 import { html, PolymerElement } from '@polymer/polymer';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
@@ -102,10 +102,10 @@ export class FilterMenu extends PolymerElement {
             >
               [[filters.clear]]
             </span>
-            <paper-button class="icon-right" on-click="toggleBoard">
+            <md-outlined-button class="icon-right" on-click="toggleBoard">
               [[filters.title]]
               <iron-icon icon="hoverboard:[[icon]]"></iron-icon>
-            </paper-button>
+            </md-outlined-button>
           </div>
         </div>
 
