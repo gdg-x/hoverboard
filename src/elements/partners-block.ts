@@ -1,7 +1,7 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/paper-button';
+import '@material/web/button/text-button.js';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
 import { RootState, store } from '../store';
@@ -101,10 +101,10 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
           </div>
         </template>
 
-        <paper-button class="cta-button animated icon-right" on-click="addPotentialPartner">
+        <md-text-button class="cta-button animated icon-right" on-click="addPotentialPartner">
           <span>[[partnersBlock.button]]</span>
           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-        </paper-button>
+        </md-text-button>
       </div>
     `;
   }
