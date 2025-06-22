@@ -95,11 +95,6 @@ export const theme = css`
     transition: border-color var(--animation);
   }
 
-  mwc-button {
-    --mdc-theme-primary: var(--default-primary-color);
-    --mdc-theme-on-primary: var(--default-background-color);
-  }
-
   md-outlined-button,
   md-filled-button,
   md-text-button {

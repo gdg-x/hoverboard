@@ -1,5 +1,5 @@
 import { Success } from '@abraham/remotedata';
-import '@material/mwc-button';
+import '@material/web/button/text-button.js';
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { RootState } from '../store';
@@ -15,12 +15,12 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
 
   override render() {
     return html`
-      <mwc-button
-        label="${signIn}"
+      <md-text-button
         @click="${() => openSigninDialog()}"
         ?hidden="${this.signedIn}"
-        dense
-      ></mwc-button>
+      >
+        ${signIn}
+      </md-text-button>
       <slot name="prompt" ?hidden="${this.signedIn}"></slot>
       <slot ?hidden="${!this.signedIn}"></slot>
     `;
