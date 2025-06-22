@@ -1,6 +1,6 @@
 // TODO: enable imports
 // import '@polymer/iron-icon';
-import '@material/web/button/outlined-button.js';
+import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { openVideoDialog } from '../store/ui/actions';
@@ -74,17 +74,17 @@ export class AboutBlock extends ThemedElement {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <md-outlined-button class="animated icon-right">
+            <md-text-button class="animated icon-right">
               <span class="cta-label">${aboutBlock.callToAction.featuredSessions.label}</span>
               <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-            </md-outlined-button>
+            </md-text-button>
           </a>
 
           <p>${aboutBlock.callToAction.howItWas.description}</p>
-          <md-outlined-button class="animated icon-right" @click="${() => this.playVideo()}">
+          <md-text-button class="animated icon-right" @click="${() => this.playVideo()}">
             <span>${aboutBlock.callToAction.howItWas.label}</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-          </md-outlined-button>
+          </md-text-button>
         </div>
 
         <div class="statistics-block">
