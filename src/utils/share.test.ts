@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, describe, expect, it } from '@jest/globals';
-import { SpyInstance, spyOn } from 'jest-mock';
+import { Spied, spyOn } from 'jest-mock';
 import { share } from './share';
 
 type Open = (
@@ -9,7 +9,7 @@ type Open = (
 ) => Window | null;
 
 describe('share', () => {
-  let open: SpyInstance<Open>;
+  let open: Spied<Open>;
   const features = (height: number) =>
     `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=600,height=${height}`;
   const twitterUrl = [
