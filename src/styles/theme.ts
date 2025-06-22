@@ -100,77 +100,74 @@ export const theme = css`
     --mdc-theme-on-primary: var(--default-background-color);
   }
 
-  paper-button {
-    padding: 0.7em;
-    border-radius: 2px;
-    font-size: 14px;
+  md-outlined-button,
+  md-filled-button,
+  md-text-button {
     color: var(--default-primary-color);
     transition: background-color var(--animation);
   }
 
-  paper-button:hover {
+  md-outlined-button:hover,
+  md-filled-button:hover,
+  md-text-button:hover {
     background-color: var(--primary-color-transparent);
   }
 
-  paper-button[disabled] {
+  md-outlined-button[disabled],
+  md-filled-button[disabled],
+  md-text-button[disabled] {
     cursor: default;
     background-color: var(--primary-color-transparent);
     opacity: 0.8;
   }
 
-  paper-button[primary] {
+  md-outlined-button[primary],
+  md-filled-button[primary],
+  md-text-button[primary]  {
     background-color: var(--default-primary-color);
     color: var(--text-primary-color);
   }
 
-  paper-button[primary]:hover {
+  md-outlined-button[primary]:hover,
+  md-filled-button[primary]:hover,
+  md-text-button[primary]:hover {
     background-color: var(--primary-color-light);
   }
 
-  paper-button[primary][invert] {
+  md-outlined-button[primary][invert],
+  md-filled-button[primary][invert],
+  md-text-button[primary][invert] {
     color: var(--default-primary-color);
     background-color: var(--text-primary-color);
   }
 
-  paper-button[primary][invert]:hover {
+  md-outlined-button[primary][invert]:hover,
+  md-filled-button[primary][invert]:hover,
+  md-text-button[primary][invert]:hover {
     background-color: var(--primary-color-white);
   }
 
-  paper-button[primary-text] {
+  md-outlined-button[primary-text],
+  md-filled-button[primary-text],
+  md-text-button[primary-text] {
     color: var(--default-primary-color);
-  }
-
-  paper-button iron-icon {
-    --iron-icon-height: 20px;
-    --iron-icon-width: 20px;
-  }
-
-  paper-button.icon-right iron-icon {
-    margin-left: 8px;
-  }
-
-  paper-button.icon-left iron-icon {
-    margin-right: 8px;
   }
 
   md-outlined-button.animated iron-icon,
   md-filled-button.animated iron-icon,
-  md-text-button.animated iron-icon,
-  paper-button.animated iron-icon {
+  md-text-button.animated iron-icon {
     transition: transform var(--animation);
   }
 
   md-outlined-button.animated.icon-right:hover iron-icon,
   md-filled-button.animated.icon-right:hover iron-icon,
-  md-text-button.animated.icon-right:hover iron-icon,
-  paper-button.animated.icon-right:hover iron-icon {
+  md-text-button.animated.icon-right:hover iron-icon {
     transform: translateX(4px);
   }
 
   md-outlined-button.animated.icon-left:hover iron-icon,
   md-filled-button.animated.icon-left:hover iron-icon,
-  md-text-button.animated.icon-left:hover iron-icon,
-  paper-button.animated.icon-left:hover iron-icon {
+  md-text-button.animated.icon-left:hover iron-icon {
     transform: translateX(-4px);
   }
 
