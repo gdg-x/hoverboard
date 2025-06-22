@@ -1,6 +1,6 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/paper-button';
+import '@material/web/button/outlined-button.js';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
 import { RootState, store } from '../store';
@@ -76,9 +76,11 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
           grid-area: 5 / 2 / 5 / 4;
         }
 
-        paper-button {
+        md-outlined-button {
           margin-top: 16px;
-          color: var(--text-primary-color);
+          --md-outlined-button-label-text-color: var(--text-primary-color);
+          --md-outlined-button-hover-label-text-color: var(--text-primary-color);
+          --md-outlined-button-outline-color: var(--text-primary-color);
         }
 
         @media (min-width: 640px) {
@@ -150,7 +152,7 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
               <p>[[galleryBlock.description]]</p>
             </div>
             <a href="[[galleryBlock.callToAction.link]]" target="_blank" rel="noopener noreferrer">
-              <paper-button>[[galleryBlock.callToAction.label]]</paper-button>
+              <md-outlined-button>[[galleryBlock.callToAction.label]]</md-outlined-button>
             </a>
           </div>
         </template>
