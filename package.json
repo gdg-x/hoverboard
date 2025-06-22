@@ -118,5 +118,8 @@
     "Oleh Zasadnyy, GDG Lviv",
     "Sophie Huts, GDG Lviv",
     "Abraham Williams, GDG Madison"
-  ]
+  ],
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.44.0"
+  }
 }
