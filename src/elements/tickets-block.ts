@@ -1,6 +1,6 @@
 import { Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/paper-button';
+import '@material/web/button/filled-button.js';
 import { html, PolymerElement } from '@polymer/polymer';
 import { Ticket } from '../models/ticket';
 import { RootState } from '../store';
@@ -113,11 +113,6 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
           width: 100%;
         }
 
-        paper-button[disabled] {
-          background-color: var(--primary-color-transparent);
-          font-size: 12px;
-        }
-
         @media (min-width: 640px) {
           .tickets-placeholder {
             grid-template-columns: repeat(auto-fill, 200px);
@@ -183,13 +178,12 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
               </div>
               <div class="actions">
                 <div class="sold-out" block$="[[ticket.soldOut]]">[[ticketsBlock.soldOut]]</div>
-                <paper-button
-                  primary
+                <md-filled-button
                   hidden$="[[ticket.soldOut]]"
                   disabled$="[[!ticket.available]]"
                 >
                   [[getButtonText(ticket.available)]]
-                </paper-button>
+                </md-filled-button>
               </div>
             </a>
           </template>
