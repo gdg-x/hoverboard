@@ -74,16 +74,16 @@ export class AboutBlock extends ThemedElement {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <md-text-button class="animated icon-right">
+            <md-text-button class="animated icon-right" trailing-icon>
               <span class="cta-label">${aboutBlock.callToAction.featuredSessions.label}</span>
-              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+              <iron-icon slot="icon" icon="hoverboard:arrow-right-circle"></iron-icon>
             </md-text-button>
           </a>
 
           <p>${aboutBlock.callToAction.howItWas.description}</p>
-          <md-text-button class="animated icon-right" @click="${() => this.playVideo()}">
+          <md-text-button class="animated icon-right" @click="${() => this.playVideo()}" trailing-icon>
             <span>${aboutBlock.callToAction.howItWas.label}</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            <iron-icon slot="icon" icon="hoverboard:arrow-right-circle"></iron-icon>
           </md-text-button>
         </div>
 
