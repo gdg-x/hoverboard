@@ -97,6 +97,7 @@ describe.skip('firestore', () => {
         expect(deleteDoc(ownDocRef)).toAllow();
       });
 
+      // eslint-disable-next-line jest/prefer-ending-with-an-expect
       it('data validation', () => {
         expect(updateDoc(ownDocRef, {})).toAllow();
 
