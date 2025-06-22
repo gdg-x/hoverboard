@@ -1,5 +1,5 @@
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { Filter } from '../models/filter';
@@ -104,7 +104,7 @@ export class FilterMenu extends PolymerElement {
             </span>
             <paper-button class="icon-right" on-click="toggleBoard">
               [[filters.title]]
-              <iron-icon icon="hoverboard:[[icon]]"></iron-icon>
+              <vaadin-icon icon="hoverboard:[[icon]]"></vaadin-icon>
             </paper-button>
           </div>
         </div>
@@ -124,7 +124,7 @@ export class FilterMenu extends PolymerElement {
               center
             >
               <span>[[selectedFilter.tag]]</span>
-              <iron-icon icon="hoverboard:close"></iron-icon>
+              <vaadin-icon icon="hoverboard:close"></vaadin-icon>
             </div>
           </template>
         </div>

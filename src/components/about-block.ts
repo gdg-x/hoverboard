@@ -1,11 +1,8 @@
-// TODO: enable imports
-// import '@polymer/iron-icon';
+import '@vaadin/icons';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { openVideoDialog } from '../store/ui/actions';
 import { aboutBlock } from '../utils/data';
-// TODO: enable imports
-// import '../utils/icons';
 import { ThemedElement } from './themed-element';
 
 @customElement('about-block')
@@ -75,14 +72,14 @@ export class AboutBlock extends ThemedElement {
           >
             <paper-button class="animated icon-right">
               <span class="cta-label">${aboutBlock.callToAction.featuredSessions.label}</span>
-              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+              <vaadin-icon icon="hoverboard:arrow-right-circle"></vaadin-icon>
             </paper-button>
           </a>
 
           <p>${aboutBlock.callToAction.howItWas.description}</p>
           <paper-button class="animated icon-right" @click="${this.playVideo}">
             <span>${aboutBlock.callToAction.howItWas.label}</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            <vaadin-icon icon="hoverboard:arrow-right-circle"></vaadin-icon>
           </paper-button>
         </div>
 

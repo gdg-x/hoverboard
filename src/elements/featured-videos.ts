@@ -1,6 +1,6 @@
 import { Failure, Initialized, Pending } from '@abraham/remotedata';
 import { computed, customElement, property, query } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-button';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -189,7 +189,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         <a href="[[featuredVideos.callToAction.link]]" target="_blank" rel="noopener noreferrer">
           <paper-button class="cta-button animated icon-right">
             <span>[[featuredVideos.callToAction.label]]</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            <vaadin-icon icon="hoverboard:arrow-right-circle"></vaadin-icon>
           </paper-button>
         </a>
       </div>

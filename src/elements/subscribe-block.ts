@@ -1,6 +1,6 @@
 import { Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { DialogData } from '../models/dialog-form';
@@ -65,7 +65,7 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
             on-click="subscribe"
           >
             <span class="cta-label">[[ctaLabel]]</span>
-            <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>
+            <vaadin-icon icon$="hoverboard:[[ctaIcon]]"></vaadin-icon>
           </paper-button>
         </div>
       </div>

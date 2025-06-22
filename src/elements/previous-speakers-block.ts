@@ -1,6 +1,6 @@
 import { Failure, Initialized, Pending } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
@@ -97,7 +97,7 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
         <a href="[[previousSpeakersBlock.callToAction.link]]">
           <paper-button class="animated icon-right">
             <span>[[previousSpeakersBlock.callToAction.label]]</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            <vaadin-icon icon="hoverboard:arrow-right-circle"></vaadin-icon>
           </paper-button>
         </a>
       </div>

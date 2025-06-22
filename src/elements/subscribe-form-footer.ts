@@ -1,6 +1,6 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-button';
 import '@polymer/paper-input/paper-input';
 import { PaperInputElement } from '@polymer/paper-input/paper-input';
@@ -69,11 +69,11 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
           autocomplete="off"
           disabled="[[subscribed.data]]"
         >
-          <iron-icon
+          <vaadin-icon
             icon="hoverboard:checked"
             slot="suffix"
             hidden$="[[!subscribed.data]]"
-          ></iron-icon>
+          ></vaadin-icon>
         </paper-input>
         <paper-button on-click="subscribe" disabled="[[disabled]]" layout self-end>
           [[ctaLabel]]

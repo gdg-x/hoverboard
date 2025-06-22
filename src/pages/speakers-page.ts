@@ -1,6 +1,6 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-icon-button';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -103,8 +103,8 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
         }
 
         .badge-icon {
-          --iron-icon-width: 12px;
-          --iron-icon-height: 12px;
+          --vaadin-icon-width: 12px;
+          --vaadin-icon-height: 12px;
           color: #fff;
         }
 
@@ -218,7 +218,7 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
                     horizontal
                     center-center
                   >
-                    <iron-icon icon="hoverboard:[[badge.name]]" class="badge-icon"></iron-icon>
+                    <vaadin-icon icon="hoverboard:[[badge.name]]" class="badge-icon"></vaadin-icon>
                   </a>
                 </template>
               </div>

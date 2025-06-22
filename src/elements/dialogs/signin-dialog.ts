@@ -3,7 +3,7 @@ import '@material/mwc-button';
 import '@material/mwc-dialog';
 import { Dialog } from '@material/mwc-dialog';
 import { observe, property, query } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RootState } from '../../store';
@@ -59,10 +59,10 @@ class SigninDialog extends ReduxMixin(PolymerElement) {
               provider-url="[[provider.url]]"
               flex
             >
-              <iron-icon
+              <vaadin-icon
                 icon="hoverboard:[[provider.name]]"
                 class="icon-[[provider.name]]"
-              ></iron-icon>
+              ></vaadin-icon>
               <span provider-url$="[[provider.url]]">[[provider.label]]</span>
             </paper-button>
           </template>

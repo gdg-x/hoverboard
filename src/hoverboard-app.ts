@@ -6,7 +6,7 @@ import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import { computed, customElement, property, query } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/iron-selector/iron-selector';
 import { html, PolymerElement } from '@polymer/polymer';
 import {
@@ -126,8 +126,8 @@ export class HoverboardApp extends PolymerElement {
           height: 100%;
         }
 
-        .drawer-content iron-icon {
-          --iron-icon-width: 14px;
+        .drawer-content vaadin-icon {
+          --vaadin-icon-width: 14px;
           margin-left: 6px;
         }
 
@@ -186,7 +186,7 @@ export class HoverboardApp extends PolymerElement {
                 center
               >
                 <span>[[buyTicket]]</span>
-                <iron-icon icon="hoverboard:open-in-new"></iron-icon>
+                <vaadin-icon icon="hoverboard:open-in-new"></vaadin-icon>
               </a>
             </div>
           </div>

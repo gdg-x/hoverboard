@@ -1,6 +1,6 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-fab';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -110,10 +110,10 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           user-select: none;
         }
 
-        .action iron-icon {
+        .action vaadin-icon {
           margin-right: 4px;
-          --iron-icon-width: 18px;
-          --iron-icon-height: 18px;
+          --vaadin-icon-width: 18px;
+          --vaadin-icon-height: 18px;
         }
 
         .additional-sections {
@@ -155,7 +155,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
             position: absolute;
             top: -8px;
             right: -48px;
-            --iron-icon-fill-color: #fff;
+            --vaadin-icon-fill-color: #fff;
           }
 
           .header-content,
@@ -257,7 +257,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
             horizontal
             center
           >
-            <iron-icon icon="hoverboard:presentation"></iron-icon>
+            <vaadin-icon icon="hoverboard:presentation"></vaadin-icon>
             <span>[[sessionDetails.viewPresentation]]</span>
           </a>
           <div
@@ -268,7 +268,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
             horizontal
             center
           >
-            <iron-icon icon="hoverboard:video"></iron-icon>
+            <vaadin-icon icon="hoverboard:video"></vaadin-icon>
             [[sessionDetails.viewVideo]]
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import { Day } from '../models/day';
@@ -123,7 +123,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
             horizontal
             center-center
           >
-            <iron-icon icon="hoverboard:add-circle-outline class="add-session-icon""></iron-icon>
+            <vaadin-icon icon="hoverboard:add-circle-outline class="add-session-icon""></vaadin-icon>
             <span>[[mySchedule.browseSession]]</span>
           </a>
 

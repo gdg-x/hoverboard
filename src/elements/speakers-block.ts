@@ -1,6 +1,6 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
@@ -186,7 +186,7 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
                       horizontal
                       center-center
                     >
-                      <iron-icon icon="hoverboard:[[badge.name]]" class="badge-icon"></iron-icon>
+                      <vaadin-icon icon="hoverboard:[[badge.name]]" class="badge-icon"></vaadin-icon>
                     </a>
                   </template>
                 </div>
@@ -213,7 +213,7 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
         <a href="[[speakersBlock.callToAction.link]]">
           <paper-button class="cta-button animated icon-right">
             <span>[[speakersBlock.callToAction.label]]</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            <vaadin-icon icon="hoverboard:arrow-right-circle"></vaadin-icon>
           </paper-button>
         </a>
       </div>

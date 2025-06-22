@@ -1,6 +1,6 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
@@ -103,10 +103,10 @@ export class SpeakerPage extends ReduxMixin(PolymerElement) {
           user-select: none;
         }
 
-        .action iron-icon {
+        .action vaadin-icon {
           margin-right: 4px;
-          --iron-icon-width: 18px;
-          --iron-icon-height: 18px;
+          --vaadin-icon-width: 18px;
+          --vaadin-icon-height: 18px;
         }
 
         .additional-sections {
@@ -190,7 +190,7 @@ export class SpeakerPage extends ReduxMixin(PolymerElement) {
         <div class="actions" layout horizontal>
           <template is="dom-repeat" items="[[speaker.socials]]" as="social">
             <a class="action" href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
-              <iron-icon icon="hoverboard:[[social.icon]]"></iron-icon>
+              <vaadin-icon icon="hoverboard:[[social.icon]]"></vaadin-icon>
             </a>
           </template>
         </div>

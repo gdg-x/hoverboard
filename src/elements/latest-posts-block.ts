@@ -1,6 +1,6 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
@@ -118,7 +118,7 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
         <a href="[[latestPostsBlock.callToAction.link]]">
           <paper-button class="cta-button animated icon-right">
             <span>[[latestPostsBlock.callToAction.label]]</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            <vaadin-icon icon="hoverboard:arrow-right-circle"></vaadin-icon>
           </paper-button>
         </a>
       </div>

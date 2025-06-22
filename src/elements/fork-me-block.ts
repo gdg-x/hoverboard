@@ -1,5 +1,5 @@
 import { customElement } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../utils/icons';
@@ -34,7 +34,7 @@ export class ForkMeBlock extends PolymerElement {
           <div class="cta-button">
             <paper-button class="icon-right">
               <span class="cta-label">Fork this project</span>
-              <iron-icon icon="hoverboard:github"></iron-icon>
+              <vaadin-icon icon="hoverboard:github"></vaadin-icon>
             </paper-button>
           </div>
         </a>

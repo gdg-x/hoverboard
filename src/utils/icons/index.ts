@@ -1,3 +1,4 @@
+import '@vaadin/icons';
 import '@polymer/iron-iconset-svg/iron-iconset-svg';
 import { html } from '@polymer/polymer/lib/utils/html-tag';
 import { account } from './account';

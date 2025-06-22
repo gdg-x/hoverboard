@@ -1,6 +1,6 @@
 import { Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
 import '../components/text-truncate';
@@ -166,7 +166,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         vertical
         relative
       >
-        <iron-icon icon="hoverboard:[[session.icon]]" class="session-icon"></iron-icon>
+        <vaadin-icon icon="hoverboard:[[session.icon]]" class="session-icon"></vaadin-icon>
 
         <div class="session-header" layout horizontal justified>
           <div flex>
@@ -183,18 +183,18 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
             <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
           </div>
           <div class="session-actions">
-            <iron-icon
+            <vaadin-icon
               icon="hoverboard:insert-comment"
               class="feedback-action"
               hidden="[[!acceptingFeedback()]]"
               on-click="toggleFeedback"
-            ></iron-icon>
-            <iron-icon
+            ></vaadin-icon>
+            <vaadin-icon
               icon="hoverboard:[[icon]]"
               class="bookmark-session"
               hidden="[[acceptingFeedback()]]"
               on-click="toggleFeaturedSession"
-            ></iron-icon>
+            ></vaadin-icon>
           </div>
         </div>
 

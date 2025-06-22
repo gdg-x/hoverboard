@@ -1,5 +1,5 @@
 import { customElement, property, query } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import '@vaadin/icons';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
@@ -82,8 +82,8 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           color: #fff;
         }
 
-        .action-buttons iron-icon {
-          --iron-icon-fill-color: currentColor;
+        .action-buttons vaadin-icon {
+          --vaadin-icon-fill-color: currentColor;
           margin-right: 8px;
         }
 
@@ -173,11 +173,11 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
           <div class="action-buttons" layout horizontal center-justified wrap>
             <paper-button class="watch-video" on-click="playVideo">
-              <iron-icon icon="hoverboard:movie"></iron-icon>
+              <vaadin-icon icon="hoverboard:movie"></vaadin-icon>
               [[viewHighlights]]
             </paper-button>
             <paper-button on-click="scrollToTickets" primary invert>
-              <iron-icon icon="hoverboard:ticket"></iron-icon>
+              <vaadin-icon icon="hoverboard:ticket"></vaadin-icon>
               [[buyTicket]]
             </paper-button>
           </div>
