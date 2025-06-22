@@ -3,7 +3,7 @@ import '@polymer/paper-fab';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../utils/icons';
 import { scrollToTop } from '../utils/scrolling';
-import './footer-nav';
+import '../components/footer-nav';
 import './footer-rel';
 import './footer-social';
 

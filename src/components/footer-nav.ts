@@ -1,13 +1,15 @@
-import { customElement, property } from '@polymer/decorators';
-import { html, PolymerElement } from '@polymer/polymer';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import '@power-elements/lazy-image';
 import { codeOfConduct, organizer } from '../utils/data';
+import { ThemedElement } from '../components/themed-element';
 
 @customElement('footer-nav')
-export class FooterNav extends PolymerElement {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
+export class FooterNav extends ThemedElement {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           margin: 0 20px;
         }
@@ -65,14 +67,18 @@ export class FooterNav extends PolymerElement {
             display: inline-flex;
           }
         }
-      </style>
+      `,
+    ];
+  }
 
+  override render() {
+    return html`
       <div class="nav-inline" layout flex>
-        <a href="[[organizer.url]]" target="_blank" rel="noopener noreferrer">
+        <a href="${this.organizer.url}" target="_blank" rel="noopener noreferrer">
           <lazy-image
             class="footer-logo"
             src="../../images/organizer-logo.svg"
-            alt="[[organizer.name]]"
+            alt="${this.organizer.name}"
           ></lazy-image>
         </a>
 
@@ -81,7 +87,7 @@ export class FooterNav extends PolymerElement {
           <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer"
             >Project Hoverboard</a
           >
-          · <a class="coc" href="/coc">[[codeOfConduct]]</a>
+          · <a class="coc" href="/coc">${this.codeOfConduct}</a>
         </div>
       </div>
     `;
@@ -89,6 +95,7 @@ export class FooterNav extends PolymerElement {
 
   @property({ type: Object })
   private organizer = organizer;
+
   @property()
   private codeOfConduct = codeOfConduct;
 }
