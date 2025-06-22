@@ -1,10 +1,9 @@
 import { Failure } from '@abraham/remotedata';
-import '@material/mwc-button';
 import '@material/mwc-dialog';
 import { Dialog } from '@material/mwc-dialog';
 import { observe, property, query } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/paper-button';
+import '@material/web/button/text-button.js';
 import { html, PolymerElement } from '@polymer/polymer';
 import { RootState } from '../../store';
 import { mergeAccounts, signIn } from '../../store/auth/actions';
@@ -53,10 +52,10 @@ class SigninDialog extends ReduxMixin(PolymerElement) {
       <mwc-dialog id="dialog" open="[[open]]" heading="[[signInText]]">
         <div hidden$="[[isMergeState]]">
           <template is="dom-repeat" items="[[signInProviders.providersData]]" as="provider">
-            <paper-button
+            <md-text-button
               class="sign-in-button"
               on-click="signIn"
-              provider-url="[[provider.url]]"
+              provider-url$="[[provider.url]]"
               flex
             >
               <iron-icon
@@ -64,7 +63,7 @@ class SigninDialog extends ReduxMixin(PolymerElement) {
                 class="icon-[[provider.name]]"
               ></iron-icon>
               <span provider-url$="[[provider.url]]">[[provider.label]]</span>
-            </paper-button>
+            </md-text-button>
           </template>
         </div>
         <div class="merge-content" hidden$="[[!isMergeState]]">
@@ -78,13 +77,13 @@ class SigninDialog extends ReduxMixin(PolymerElement) {
           </div>
 
           <div class="action-button" layout horizontal end-justified>
-            <paper-button class="merge-button" on-click="mergeAccounts" primary>
+            <md-text-button class="merge-button" on-click="mergeAccounts">
               <span>[[signInDialog.signInToContinue.part1]] [[providerCompanyName]]</span>
-            </paper-button>
+            </md-text-button>
           </div>
         </div>
 
-        <mwc-button slot="primaryAction" dialogAction="close">Close</mwc-button>
+        <md-text-button slot="primaryAction" dialogAction="close">Close</md-text-button>
       </mwc-dialog>
     `;
   }
