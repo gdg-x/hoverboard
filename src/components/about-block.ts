@@ -81,7 +81,11 @@ export class AboutBlock extends ThemedElement {
           </a>
 
           <p>${aboutBlock.callToAction.howItWas.description}</p>
-          <md-text-button class="animated icon-right" @click="${() => this.playVideo()}" trailing-icon>
+          <md-text-button
+            class="animated icon-right"
+            @click="${() => this.playVideo()}"
+            trailing-icon
+          >
             <span>${aboutBlock.callToAction.howItWas.label}</span>
             <iron-icon slot="icon" icon="hoverboard:arrow-right-circle"></iron-icon>
           </md-text-button>

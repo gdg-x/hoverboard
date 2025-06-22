@@ -106,9 +106,7 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
             <p>[[notifications.blocked.text]]</p>
             <div class="panel-actions" layout horizontal end-justified>
               <a href="[[notifications.blocked.link]]" target="_blank" rel="noopener noreferrer">
-                <md-text-button on-click="close">
-                  [[notifications.blocked.label]]
-                </md-text-button>
+                <md-text-button on-click="close"> [[notifications.blocked.label]] </md-text-button>
               </a>
             </div>
           </template>

@@ -15,10 +15,7 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
 
   override render() {
     return html`
-      <md-text-button
-        @click="${() => openSigninDialog()}"
-        ?hidden="${this.signedIn}"
-      >
+      <md-text-button @click="${() => openSigninDialog()}" ?hidden="${this.signedIn}">
         ${signIn}
       </md-text-button>
       <slot name="prompt" ?hidden="${this.signedIn}"></slot>

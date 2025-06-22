@@ -39,7 +39,9 @@ describe('auth-required', () => {
   });
 
   it('shows unauthenticated prompt', () => {
-    expect(shadowRoot.querySelector<HTMLDivElement>('md-text-button')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector<HTMLDivElement>('md-text-button')).not.toHaveAttribute(
+      'hidden',
+    );
 
     const slots = shadowRoot.querySelectorAll('slot');
 

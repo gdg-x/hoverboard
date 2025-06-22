@@ -178,10 +178,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
               </div>
               <div class="actions">
                 <div class="sold-out" block$="[[ticket.soldOut]]">[[ticketsBlock.soldOut]]</div>
-                <md-filled-button
-                  hidden$="[[ticket.soldOut]]"
-                  disabled$="[[!ticket.available]]"
-                >
+                <md-filled-button hidden$="[[ticket.soldOut]]" disabled$="[[!ticket.available]]">
                   [[getButtonText(ticket.available)]]
                 </md-filled-button>
               </div>

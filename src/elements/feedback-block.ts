@@ -79,7 +79,11 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
         <md-filled-button class="primary" hidden$="[[!hasRated]]" on-click="setFeedback">
           [[feedbackText.save]]
         </md-filled-button>
-        <md-outlined-button class="delete-button" hidden$="[[!feedback.data]]" on-click="deleteFeedback">
+        <md-outlined-button
+          class="delete-button"
+          hidden$="[[!feedback.data]]"
+          on-click="deleteFeedback"
+        >
           [[feedbackText.deleteFeedback]]
         </md-outlined-button>
       </div>

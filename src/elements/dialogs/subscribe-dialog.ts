@@ -90,7 +90,9 @@ class SubscribeDialog extends ReduxMixin(PolymerElement) {
         >
         </paper-input>
 
-        <md-filled-button on-click="subscribe" slot="primaryAction"> [[submitLabel]] </md-filled-button>
+        <md-filled-button on-click="subscribe" slot="primaryAction">
+          [[submitLabel]]
+        </md-filled-button>
         <md-outlined-button on-click="close" slot="secondaryAction" dialogAction="cancel">
           [[subscribeBlock.close]]
         </md-outlined-button>

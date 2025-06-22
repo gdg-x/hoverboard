@@ -118,7 +118,7 @@ export const theme = css`
 
   md-outlined-button[primary],
   md-filled-button[primary],
-  md-text-button[primary]  {
+  md-text-button[primary] {
     background-color: var(--default-primary-color);
     color: var(--text-primary-color);
   }
