@@ -3,7 +3,7 @@ import '@material/mwc-formfield';
 import '@material/mwc-switch';
 import { Switch } from '@material/mwc-switch';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/paper-button';
+import '@material/web/button/text-button.js';
 import '@polymer/paper-icon-button';
 import '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -74,9 +74,9 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
           <template is="dom-if" if="[[initialized]]">
             <p>[[notifications.default]]</p>
             <div class="panel-actions" layout horizontal end-justified>
-              <paper-button primary-text on-click="requestPermission">
+              <md-text-button on-click="requestPermission">
                 [[notifications.enable]]
-              </paper-button>
+              </md-text-button>
             </div>
           </template>
 
@@ -106,9 +106,9 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
             <p>[[notifications.blocked.text]]</p>
             <div class="panel-actions" layout horizontal end-justified>
               <a href="[[notifications.blocked.link]]" target="_blank" rel="noopener noreferrer">
-                <paper-button primary-text on-click="close">
+                <md-text-button on-click="close">
                   [[notifications.blocked.label]]
-                </paper-button>
+                </md-text-button>
               </a>
             </div>
           </template>
@@ -121,9 +121,9 @@ export class NotificationToggle extends ReduxMixin(PolymerElement) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <paper-button primary-text on-click="close">
+                <md-text-button on-click="close">
                   [[notifications.unsupported.label]]
-                </paper-button>
+                </md-text-button>
               </a>
             </div>
           </template>
