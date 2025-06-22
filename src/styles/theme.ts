@@ -153,14 +153,23 @@ export const theme = css`
     margin-right: 8px;
   }
 
+  md-outlined-button.animated iron-icon,
+  md-filled-button.animated iron-icon,
+  md-text-button.animated iron-icon,
   paper-button.animated iron-icon {
     transition: transform var(--animation);
   }
 
+  md-outlined-button.animated.icon-right:hover iron-icon,
+  md-filled-button.animated.icon-right:hover iron-icon,
+  md-text-button.animated.icon-right:hover iron-icon,
   paper-button.animated.icon-right:hover iron-icon {
     transform: translateX(4px);
   }
 
+  md-outlined-button.animated.icon-left:hover iron-icon,
+  md-filled-button.animated.icon-left:hover iron-icon,
+  md-text-button.animated.icon-left:hover iron-icon,
   paper-button.animated.icon-left:hover iron-icon {
     transform: translateX(-4px);
   }
