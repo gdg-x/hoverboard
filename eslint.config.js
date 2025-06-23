@@ -3,6 +3,8 @@ import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import htmlPlugin from 'eslint-plugin-html';
+import htmlEslintPlugin from '@html-eslint/eslint-plugin';
+import htmlEslintParser from '@html-eslint/parser';
 import importPlugin from 'eslint-plugin-import';
 import jestPlugin from 'eslint-plugin-jest';
 import jestDomPlugin from 'eslint-plugin-jest-dom';
@@ -138,7 +140,42 @@ export default [
     },
   },
 
-  // HTML files configuration
+  // HTML files configuration with @html-eslint/eslint-plugin
+  {
+    files: ['**/*.html'],
+    languageOptions: {
+      parser: htmlEslintParser,
+    },
+    plugins: {
+      '@html-eslint': htmlEslintPlugin,
+    },
+    rules: {
+      // Core HTML structure rules
+      '@html-eslint/require-doctype': 'error',
+      '@html-eslint/require-lang': 'error',
+      '@html-eslint/require-title': 'error',
+      '@html-eslint/require-meta-charset': 'error',
+      '@html-eslint/require-meta-viewport': 'error',
+      '@html-eslint/no-multiple-h1': 'error',
+      '@html-eslint/require-closing-tags': ['error', { selfClosing: 'always' }],
+      '@html-eslint/no-script-style-type': 'error',
+
+      // Formatting rules (more lenient)
+      '@html-eslint/no-inline-styles': 'warn',
+      '@html-eslint/element-newline': 'off', // Too strict for templates
+      '@html-eslint/indent': 'off', // Let Prettier handle this
+      '@html-eslint/quotes': ['error', 'double'],
+      '@html-eslint/no-extra-spacing-attrs': 'off', // Too strict for templates
+      '@html-eslint/attrs-newline': 'off', // Too strict for templates
+
+      // Accessibility rules
+      '@html-eslint/require-img-alt': 'error',
+      '@html-eslint/no-target-blank': 'error',
+      '@html-eslint/require-button-type': 'error',
+    },
+  },
+
+  // Legacy HTML plugin for embedded scripts in HTML
   {
     files: ['**/*.html'],
     plugins: {
