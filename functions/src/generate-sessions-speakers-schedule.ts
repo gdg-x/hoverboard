@@ -1,5 +1,5 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
-// eslint-disable-next-line import/no-unresolved
+
 import { getFirestore } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
 import { sessionsSpeakersMap } from './schedule-generator/speakers-sessions-map.js';

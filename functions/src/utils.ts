@@ -1,5 +1,5 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
-// eslint-disable-next-line import/no-unresolved
+
 import type { DocumentData, QuerySnapshot } from 'firebase-admin/firestore';
 // TODO: import actual types. Currently importing them changes `dist` structure.
 // import type { Schedule } from '../../src/models/schedule';

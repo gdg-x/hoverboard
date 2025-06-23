@@ -1,6 +1,7 @@
 {
   "name": "hoverboard",
   "version": "3.0.0",
+  "type": "module",
   "private": true,
   "description": "Conference website template",
   "engines": {
@@ -66,6 +67,7 @@
     "register-service-worker": "^1.7.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.18.0",
     "@firebase/rules-unit-testing": "^3.0.4",
     "@jest/globals": "^30.0.2",
     "@jest/types": "^30.0.1",
@@ -86,7 +88,7 @@
     "@typescript-eslint/parser": "^8.26.0",
     "@web/rollup-plugin-html": "^2.3.0",
     "concurrently": "^9.1.2",
-    "eslint": "^8.57.1",
+    "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-import-resolver-typescript": "^3.8.3",
     "eslint-plugin-html": "^8.1.2",
@@ -96,6 +98,7 @@
     "eslint-plugin-testing-library": "^7.1.1",
     "firebase-admin": "^12.7.0",
     "firebase-tools": "^13.33.0",
+    "globals": "^15.14.0",
     "jest": "^30.0.2",
     "jest-dev-server": "^11.0.0",
     "jest-environment-jsdom": "^30.0.2",

@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-
 import { html } from '@polymer/polymer/lib/utils/html-tag';
 
 export const microphone = html`
