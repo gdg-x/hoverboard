@@ -1,5 +1,5 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
-// eslint-disable-next-line import/no-unresolved
+
 import { initializeApp } from 'firebase-admin/app';
 import {
   scheduleWrite,

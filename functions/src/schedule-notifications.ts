@@ -1,8 +1,8 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
-// eslint-disable-next-line import/no-unresolved
+
 import { DocumentData, DocumentSnapshot, getFirestore } from 'firebase-admin/firestore';
 // https://github.com/import-js/eslint-plugin-import/issues/1810
-// eslint-disable-next-line import/no-unresolved
+
 import { getMessaging, MessagingPayload } from 'firebase-admin/messaging';
 import * as functions from 'firebase-functions';
 import moment from 'moment';
