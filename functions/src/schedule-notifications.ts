@@ -12,8 +12,6 @@ import {
   parseTimeAndGetFromNow,
 } from './time';
 
-const FORMAT = 'HH:mm';
-
 const removeUserTokens = (tokensToUsers) => {
   const userTokens = Object.keys(tokensToUsers).reduce((acc, token) => {
     const userId = tokensToUsers[token];
@@ -116,7 +114,6 @@ export const scheduleNotifications = functions.pubsub
         timeWindow,
         10, // notification offset in minutes
         notificationsConfig.timezone,
-        FORMAT,
       );
 
       const upcomingSessions = upcomingTimeslot.reduce(
@@ -152,7 +149,6 @@ export const scheduleNotifications = functions.pubsub
         const fromNow = parseTimeAndGetFromNow(
           upcomingTimeslot[0].startTime,
           notificationsConfig.timezone,
-          FORMAT,
         );
 
         if (userIdsFeaturedSession.length) {

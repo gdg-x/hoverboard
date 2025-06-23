@@ -1,8 +1,6 @@
-import moment from 'moment';
-
 export interface TimeWindow {
-  before: moment.Moment;
-  after: moment.Moment;
+  before: Date;
+  after: Date;
 }
 
 export interface TimeConfig {
@@ -10,21 +8,42 @@ export interface TimeConfig {
 }
 
 /**
+ * Parse timezone offset string (e.g., "+02:00", "-05:00") to minutes
+ */
+function parseTimezoneOffset(timezone: string): number {
+  if (!timezone) return 0;
+
+  const match = timezone.match(/^([+-])(\d{2}):(\d{2})$/);
+  if (!match) return 0;
+
+  const [, sign, hours, minutes] = match;
+  const offsetMinutes = parseInt(hours) * 60 + parseInt(minutes);
+  return sign === '+' ? offsetMinutes : -offsetMinutes;
+}
+
+/**
  * Get today's date formatted as YYYY-MM-DD in the specified timezone
  */
 export function getTodayDateString(timezone?: string): string {
-  return timezone
-    ? moment().utcOffset(timezone).format('YYYY-MM-DD')
-    : moment().format('YYYY-MM-DD');
+  const now = new Date();
+
+  if (timezone) {
+    const offsetMinutes = parseTimezoneOffset(timezone);
+    const localTime = new Date(now.getTime() + offsetMinutes * 60000);
+    return localTime.toISOString().split('T')[0];
+  }
+
+  return now.toISOString().split('T')[0];
 }
 
 /**
  * Create a time window around the current time with specified minutes before and after
  */
 export function createTimeWindow(minutesBefore: number, minutesAfter: number): TimeWindow {
+  const now = new Date();
   return {
-    before: moment().subtract(minutesBefore, 'minutes'),
-    after: moment().add(minutesAfter, 'minutes'),
+    before: new Date(now.getTime() - minutesBefore * 60000),
+    after: new Date(now.getTime() + minutesAfter * 60000),
   };
 }
 
@@ -34,39 +53,83 @@ export function createTimeWindow(minutesBefore: number, minutesAfter: number): T
 export function parseTimeAndSubtract(
   timeString: string,
   timezone: string,
-  format: string,
   minutesToSubtract: number,
-): moment.Moment {
-  // Use today's date to ensure we're parsing the time for the current day
-  const today = moment().format('YYYY-MM-DD');
-  return moment(`${today} ${timeString}${timezone}`, `YYYY-MM-DD ${format}Z`).subtract(
-    minutesToSubtract,
-    'minutes',
-  );
+): Date {
+  // Parse time format HH:mm
+  const [hours, minutes] = timeString.split(':').map(Number);
+
+  // Get today's date
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const day = today.getDate();
+
+  // Create date with the parsed time in UTC
+  const targetDate = new Date(Date.UTC(year, month, day, hours, minutes, 0, 0));
+
+  // Apply timezone offset (convert from specified timezone to UTC)
+  const offsetMinutes = parseTimezoneOffset(timezone);
+  const utcTime = targetDate.getTime() - offsetMinutes * 60000;
+
+  // Subtract the specified minutes
+  return new Date(utcTime - minutesToSubtract * 60000);
 }
 
 /**
- * Check if a given moment is between two other moments
+ * Check if a given date is between two other dates
  */
-export function isMomentBetween(
-  target: moment.Moment,
-  start: moment.Moment,
-  end: moment.Moment,
-): boolean {
-  return target.isBetween(start, end);
+export function isBetween(target: Date, start: Date, end: Date): boolean {
+  return target.getTime() >= start.getTime() && target.getTime() <= end.getTime();
+}
+
+/**
+ * Get relative time string from a date
+ */
+function getRelativeTimeString(date: Date): string {
+  const now = new Date();
+  const diffMs = date.getTime() - now.getTime();
+  const diffMinutes = Math.round(diffMs / 60000);
+
+  if (diffMinutes === 0) return 'now';
+
+  const absDiffMinutes = Math.abs(diffMinutes);
+  const isFuture = diffMinutes > 0;
+
+  if (absDiffMinutes < 60) {
+    return isFuture ? `in ${absDiffMinutes} minutes` : `${absDiffMinutes} minutes ago`;
+  }
+
+  const hours = Math.round(absDiffMinutes / 60);
+  if (hours < 24) {
+    return isFuture ? `in ${hours} hours` : `${hours} hours ago`;
+  }
+
+  const days = Math.round(hours / 24);
+  return isFuture ? `in ${days} days` : `${days} days ago`;
 }
 
 /**
  * Parse a time string with timezone and get the relative time from now
  */
-export function parseTimeAndGetFromNow(
-  timeString: string,
-  timezone: string,
-  format: string,
-): string {
-  // Use today's date to ensure we're parsing the time for the current day
-  const today = moment().format('YYYY-MM-DD');
-  return moment(`${today} ${timeString}${timezone}`, `YYYY-MM-DD ${format}Z`).fromNow();
+export function parseTimeAndGetFromNow(timeString: string, timezone: string): string {
+  // Parse time format HH:mm
+  const [hours, minutes] = timeString.split(':').map(Number);
+
+  // Get today's date
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const day = today.getDate();
+
+  // Create date with the parsed time in UTC
+  const targetDate = new Date(Date.UTC(year, month, day, hours, minutes, 0, 0));
+
+  // Apply timezone offset (convert from specified timezone to UTC)
+  const offsetMinutes = parseTimezoneOffset(timezone);
+  const utcTime = targetDate.getTime() - offsetMinutes * 60000;
+  const finalDate = new Date(utcTime);
+
+  return getRelativeTimeString(finalDate);
 }
 
 /**
@@ -77,15 +140,13 @@ export function filterUpcomingTimeslots<T extends { startTime: string; sessions?
   timeWindow: TimeWindow,
   notificationOffsetMinutes: number,
   timezone: string,
-  format: string,
 ): T[] {
   return timeslots.filter((timeslot) => {
     const timeslotTime = parseTimeAndSubtract(
       timeslot.startTime,
       timezone,
-      format,
       notificationOffsetMinutes,
     );
-    return isMomentBetween(timeslotTime, timeWindow.before, timeWindow.after);
+    return isBetween(timeslotTime, timeWindow.before, timeWindow.after);
   });
 }
