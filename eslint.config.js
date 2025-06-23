@@ -1,5 +1,6 @@
 import js from '@eslint/js';
 import json from '@eslint/json';
+import markdown from '@eslint/markdown';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -254,6 +255,39 @@ export default [
     files: ['src/utils/icons/**/*.{js,ts}'],
     rules: {
       'max-len': 'off',
+    },
+  },
+
+  // Markdown files configuration with @eslint/markdown
+  {
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
+    },
+    language: 'markdown/commonmark',
+    rules: {
+      // Recommended markdown rules
+      'markdown/no-html': 'warn',
+      'markdown/no-invalid-label-refs': 'error',
+      'markdown/no-duplicate-headings': 'error',
+      'markdown/no-empty-links': 'error',
+      'markdown/no-missing-label-refs': 'off', // Too strict for common patterns like [x], [e.g. ...]
+    },
+  },
+
+  // JavaScript/TypeScript code blocks in Markdown
+  {
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
+    },
+    language: 'markdown/gfm',
+    rules: {
+      // Apply basic JS/TS rules to code blocks
+      'no-console': 'off',
+      'no-undef': 'off',
+      'no-unused-vars': 'off',
+      'no-redeclare': 'off',
     },
   },
 
