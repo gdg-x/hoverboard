@@ -1,6 +1,7 @@
 import js from '@eslint/js';
 import json from '@eslint/json';
 import markdown from '@eslint/markdown';
+import css from '@eslint/css';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -288,6 +289,30 @@ export default [
       'no-undef': 'off',
       'no-unused-vars': 'off',
       'no-redeclare': 'off',
+    },
+  },
+
+  // CSS files configuration with @eslint/css
+  {
+    files: ['**/*.css'],
+    language: 'css/css',
+    ...css.configs.recommended,
+    rules: {
+      // CSS formatting and quality rules
+      'css/no-duplicate-properties': 'error',
+      'css/no-empty-blocks': 'error',
+      'css/no-invalid-properties': 'error',
+      'css/prefer-single-line-selectors': 'warn',
+    },
+  },
+
+  // CSS-in-JS within TypeScript files (for styled components, etc.)
+  {
+    files: ['src/components/**/*.ts', 'src/styles/**/*.ts'],
+    rules: {
+      // Allow template literals for CSS-in-JS
+      'prefer-template': 'off',
+      quotes: ['error', 'single', { allowTemplateLiterals: true }],
     },
   },
 
