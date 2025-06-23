@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import json from '@eslint/json';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -14,7 +15,15 @@ import globals from 'globals';
 export default [
   // Base configuration for all files
   {
-    ignores: ['dist/**', 'node_modules/**', 'functions/dist/**', 'public/**'],
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      'functions/dist/**',
+      'public/**',
+      '**/package-lock.json', // Auto-generated lockfiles
+      '**/yarn.lock', // Auto-generated lockfiles
+      '**/.vscode/**', // VS Code settings (often contain comments)
+    ],
   },
 
   // JavaScript files configuration (without TypeScript project)
@@ -180,6 +189,32 @@ export default [
     files: ['**/*.html'],
     plugins: {
       html: htmlPlugin,
+    },
+  },
+
+  // JSON files configuration with @eslint/json
+  {
+    files: ['**/*.json'],
+    language: 'json/json',
+    ...json.configs.recommended,
+    rules: {
+      // JSON formatting rules
+      'json/no-duplicate-keys': 'error',
+      'json/no-empty-keys': 'error',
+      'json/no-unsafe-values': 'error',
+    },
+  },
+
+  // JSONC files configuration (JSON with comments)
+  {
+    files: ['**/*.jsonc', '**/tsconfig*.json'],
+    language: 'json/jsonc',
+    ...json.configs.recommended,
+    rules: {
+      'json/no-duplicate-keys': 'error',
+      'json/no-empty-keys': 'error',
+      'json/no-unsafe-values': 'error',
+      'json/no-comments': 'off', // Allow comments in JSONC
     },
   },
 
