@@ -17,12 +17,10 @@
     "fix": "concurrently npm:fix:*",
     "fix:eslint": "eslint . --fix",
     "fix:prettier": "prettier . --write",
-    "fix:stylelint": "stylelint \"src/components/**/*.ts\" \"src/styles/**/*.ts\" --fix",
     "install:functions": "npm --prefix ./functions ci",
     "lint": "concurrently npm:lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check .",
-    "lint:stylelint": "stylelint \"src/components/**/*.ts\" \"src/styles/**/*.ts\"",
     "lint:types:functions": "npm --prefix ./functions run build",
     "lint:types:web": "tsc --noEmit",
     "postinstall": "npm run install:functions",
@@ -65,6 +63,7 @@
     "register-service-worker": "^1.7.2"
   },
   "devDependencies": {
+    "@eslint/css": "^0.8.0",
     "@eslint/js": "^9.18.0",
     "@eslint/json": "^0.8.0",
     "@eslint/markdown": "^6.2.0",
@@ -77,7 +76,6 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.2",
-    "@stylelint/postcss-css-in-js": "^0.38.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/jest": "^30.0.0",
@@ -111,8 +109,6 @@
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-workbox": "^8.1.2",
-    "stylelint": "^16.19.1",
-    "stylelint-config-standard": "^38.0.0",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
