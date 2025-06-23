@@ -1,4 +1,4 @@
-import '@material/mwc-button';
+import '@material/web/button/text-button.js';
 import '@material/mwc-icon-button';
 import '@material/mwc-snackbar';
 import { html, LitElement, nothing, svg } from 'lit';
@@ -30,9 +30,9 @@ export class SnackBar extends ReduxMixin(LitElement) {
   override render() {
     const action = this.state?.action
       ? html`
-          <mwc-button slot="action" @click="${this.state.action.callback}">
+          <md-text-button slot="action" @click="${this.state.action.callback}">
             ${this.state.action.title}
-          </mwc-button>
+          </md-text-button>
         `
       : nothing;
 

@@ -37,17 +37,16 @@
   "dependencies": {
     "@abraham/remotedata": "1.4.0",
     "@justinribeiro/lite-youtube": "^1.8.2",
-    "@material/mwc-button": "^0.27.0",
     "@material/mwc-dialog": "^0.27.0",
     "@material/mwc-formfield": "^0.27.0",
     "@material/mwc-icon-button": "^0.27.0",
     "@material/mwc-snackbar": "^0.27.0",
     "@material/mwc-switch": "^0.27.0",
+    "@material/web": "^2.3.0",
     "@polymer/app-layout": "^3.1.0",
     "@polymer/decorators": "^3.0.0",
     "@polymer/google-map": "git+https://git@github.com/abraham/google-map.git#3.0",
     "@polymer/iron-icon": "^3.0.1",
-    "@polymer/paper-button": "^3.0.1",
     "@polymer/paper-fab": "^3.0.1",
     "@polymer/paper-icon-button": "^3.0.2",
     "@polymer/paper-input": "^3.2.1",
@@ -119,5 +118,8 @@
     "Oleh Zasadnyy, GDG Lviv",
     "Sophie Huts, GDG Lviv",
     "Abraham Williams, GDG Madison"
-  ]
+  ],
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.44.0"
+  }
 }

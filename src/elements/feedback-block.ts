@@ -1,6 +1,7 @@
 import { Initialized, RemoteData, Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
-import '@polymer/paper-button';
+import '@material/web/button/filled-button.js';
+import '@material/web/button/outlined-button.js';
 import '@polymer/paper-input/paper-textarea';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@radi-cho/star-rating';
@@ -22,6 +23,11 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style>
+        /* TODO: consolidate this wiith positioning.ts */
+        [hidden] {
+          display: none !important;
+        }
+
         #feedback-comment {
           width: 100%;
         }
@@ -31,22 +37,6 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
           display: inline-block;
           vertical-align: bottom;
           --star-color: var(--default-primary-color);
-        }
-
-        paper-button {
-          margin: 0;
-          line-height: 1.4;
-          border: 1px solid var(--default-primary-color);
-        }
-
-        paper-button[primary] {
-          background-color: var(--default-primary-color);
-          color: var(--text-primary-color);
-        }
-
-        paper-button.delete-button {
-          color: var(--text-accent-color);
-          padding: -2px;
         }
 
         .helper {
@@ -86,12 +76,16 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
           maxlength="256"
         ></paper-textarea>
         <p hidden$="[[!hasRated]]" class="helper">[[feedbackText.helperText]]</p>
-        <paper-button primary hidden$="[[!hasRated]]" on-click="setFeedback">
+        <md-filled-button class="primary" hidden$="[[!hasRated]]" on-click="setFeedback">
           [[feedbackText.save]]
-        </paper-button>
-        <paper-button class="delete-button" hidden$="[[!feedback.data]]" on-click="deleteFeedback">
+        </md-filled-button>
+        <md-outlined-button
+          class="delete-button"
+          hidden$="[[!feedback.data]]"
+          on-click="deleteFeedback"
+        >
           [[feedbackText.deleteFeedback]]
-        </paper-button>
+        </md-outlined-button>
       </div>
     `;
   }

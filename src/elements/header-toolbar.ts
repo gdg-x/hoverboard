@@ -1,7 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import { computed, customElement, observe, property } from '@polymer/decorators';
-import '@polymer/paper-button';
+import '@material/web/button/filled-button.js';
 import '@polymer/paper-icon-button';
 import '@polymer/paper-menu-button';
 import '@polymer/paper-tabs';
@@ -129,7 +129,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           cursor: pointer;
         }
 
-        paper-button iron-icon {
+        md-filled-button iron-icon {
           margin-right: 8px;
           --iron-icon-fill-color: var(--hero-font-color);
         }
@@ -185,7 +185,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           </paper-tab>
 
           <a href$="[[ticketUrl]]" target="_blank" rel="noopener noreferrer">
-            <paper-button class="buy-button" primary>[[buyTicket]]</paper-button>
+            <md-filled-button class="buy-button">[[buyTicket]]</md-filled-button>
           </a>
         </paper-tabs>
 
