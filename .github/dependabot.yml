@@ -22,6 +22,7 @@ updates:
         patterns:
           - 'eslint*'
           - '@typescript-eslint/*'
+          - '@*eslin*/*'
       material:
         patterns:
           - '@material/*'
