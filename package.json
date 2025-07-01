@@ -58,7 +58,7 @@
     "firebase": "^10.14.1",
     "lit": "^3.3.0",
     "marked": "^15.0.12",
-    "marked-gfm-heading-id": "^4.1.1",
+    "marked-gfm-heading-id": "^4.1.2",
     "pwa-helpers": "^0.9.1",
     "register-service-worker": "^1.7.2"
   },
