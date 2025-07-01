@@ -68,7 +68,7 @@
     "@eslint/json": "^0.8.0",
     "@eslint/markdown": "^6.2.0",
     "@firebase/rules-unit-testing": "^3.0.4",
-    "@html-eslint/eslint-plugin": "^0.27.0",
+    "@html-eslint/eslint-plugin": "^0.42.0",
     "@html-eslint/parser": "^0.27.0",
     "@jest/globals": "^30.0.2",
     "@jest/types": "^30.0.1",
