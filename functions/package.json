@@ -30,6 +30,6 @@
     "@tsconfig/node22": "^22.0.2",
     "concurrently": "^9.2.0",
     "cpx2": "^8.0.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   }
 }
