@@ -1,4 +1,4 @@
-# Hoverboard
+# Sathya's Hoverboard
 
 ![Hoverboard logo](https://user-images.githubusercontent.com/2954281/42683571-55ba6be6-8696-11e8-8ff7-e9acd0db63e8.png)
 [⚡ Live demo](https://hoverboard-master.web.app) | [🚀 Get Started](#getting-started)
