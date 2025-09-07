@@ -1,6 +1,6 @@
 import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/paper-button';
+import '@material/web/button/text-button.js';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
 import '../components/markdown/short-markdown';
@@ -47,10 +47,6 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
         .description {
           color: var(--secondary-text-color);
         }
-
-        paper-button {
-          margin: 0;
-        }
       </style>
 
       <div class="container" layout horizontal>
@@ -73,18 +69,18 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
 
               <template is="dom-if" if="[[block.callToAction.newTab]]">
                 <a href="[[block.callToAction.link]]" target="_blank" rel="noopener noreferrer">
-                  <paper-button class="cta-button animated icon-right">
+                  <md-text-button class="cta-button animated icon-right">
                     <span>[[block.callToAction.label]]</span>
                     <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-                  </paper-button>
+                  </md-text-button>
                 </a>
               </template>
               <template is="dom-if" if="[[!block.callToAction.newTab]]">
                 <a href="[[block.callToAction.link]]">
-                  <paper-button class="cta-button animated icon-right">
+                  <md-text-button class="cta-button animated icon-right">
                     <span>[[block.callToAction.label]]</span>
                     <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-                  </paper-button>
+                  </md-text-button>
                 </a>
               </template>
             </div>

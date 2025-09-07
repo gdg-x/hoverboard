@@ -1,4 +1,5 @@
 import { Success } from '@abraham/remotedata';
+import '@material/web/button/outlined-button.js';
 import { Dialog } from '@material/mwc-dialog';
 import { observe, property, query } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -33,7 +34,7 @@ class FeedbackDialog extends ReduxMixin(PolymerElement) {
           <feedback-block session-id="[[session.id]]"></feedback-block>
         </div>
 
-        <mwc-button slot="primaryAction" dialogAction="close">Close</mwc-button>
+        <md-outlined-button slot="primaryAction" dialogAction="close">Close</md-outlined-button>
       </mwc-dialog>
     `;
   }

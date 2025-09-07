@@ -1,7 +1,7 @@
 import { Failure, Initialized, Pending } from '@abraham/remotedata';
 import { computed, customElement, property, query } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/paper-button';
+import '@material/web/button/text-button.js';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
@@ -179,7 +179,6 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
           </div>
           <paper-icon-button
             class="next-video slide-icon"
-            icon="hoverboard:chevron-right"
             on-click="shiftContentRight"
             hidden$="[[rightArrowHidden]]"
           >
@@ -187,10 +186,10 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
           >
         </div>
         <a href="[[featuredVideos.callToAction.link]]" target="_blank" rel="noopener noreferrer">
-          <paper-button class="cta-button animated icon-right">
+          <md-text-button class="cta-button animated icon-right" trailing-icon>
             <span>[[featuredVideos.callToAction.label]]</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-          </paper-button>
+            <iron-icon slot="icon" icon="hoverboard:arrow-right-circle"></iron-icon>
+          </md-text-button>
         </a>
       </div>
     `;

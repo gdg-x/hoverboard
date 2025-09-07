@@ -1,5 +1,5 @@
 import '@justinribeiro/lite-youtube';
-import '@material/mwc-button';
+import '@material/web/button/outlined-button.js';
 import '@material/mwc-dialog';
 import { Dialog } from '@material/mwc-dialog';
 import { property, query } from '@polymer/decorators';
@@ -35,9 +35,9 @@ class VideoDialog extends ReduxMixin(PolymerElement) {
             autoload
           ></lite-youtube>
         </div>
-        <mwc-button on-click="closeDialog" slot="primaryAction" dialogAction="close">
+        <md-outlined-button on-click="closeDialog" slot="primaryAction" dialogAction="close">
           Close
-        </mwc-button>
+        </md-outlined-button>
       </mwc-dialog>
     `;
   }

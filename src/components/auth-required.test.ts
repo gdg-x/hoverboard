@@ -39,7 +39,9 @@ describe('auth-required', () => {
   });
 
   it('shows unauthenticated prompt', () => {
-    expect(shadowRoot.querySelector<HTMLDivElement>('mwc-button')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector<HTMLDivElement>('md-text-button')).not.toHaveAttribute(
+      'hidden',
+    );
 
     const slots = shadowRoot.querySelectorAll('slot');
 
@@ -53,7 +55,7 @@ describe('auth-required', () => {
   });
 
   it('opens dialog on tap', () => {
-    fireEvent.click(shadowRoot.querySelector('mwc-button')!);
+    fireEvent.click(shadowRoot.querySelector('md-text-button')!);
 
     expect(mockOpenDialog).toHaveBeenCalledTimes(1);
   });
@@ -65,7 +67,7 @@ describe('auth-required', () => {
     });
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector<HTMLDivElement>('mwc-button')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector<HTMLDivElement>('md-text-button')).toHaveAttribute('hidden');
 
     const slots = shadowRoot.querySelectorAll('slot');
 

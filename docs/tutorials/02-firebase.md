@@ -10,7 +10,6 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 1. Click _Add Firebase to your web app_.
 
 1. Import initial data to the Firebase Database
-
    - Generate `serviceAccount.json` file
      - Go to [console.firebase.google.com](https://console.firebase.google.com) -> Project settings -> Service accounts
      - Ensure that **Node.js** is selected and press **Generate new private key**

@@ -1,6 +1,7 @@
 import { customElement, property, query } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/paper-button';
+import '@material/web/button/filled-button.js';
+import '@material/web/button/outlined-button.js';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
 import '../components/about-block';
@@ -8,6 +9,7 @@ import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
 import '../elements/about-organizer-block';
 import '../elements/featured-videos';
+import '../elements/footer-block';
 import '../elements/fork-me-block';
 import '../elements/gallery-block';
 import '../elements/latest-posts-block';
@@ -74,12 +76,16 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           font-size: 14px;
         }
 
-        .action-buttons paper-button {
+        .action-buttons md-filled-button,
+        .action-buttons md-outlined-button {
           margin: 8px;
         }
 
         .action-buttons .watch-video {
           color: #fff;
+          --md-outlined-button-label-text-color: #fff;
+          --md-outlined-button-hover-label-text-color: #fff;
+          --md-outlined-button-outline-color: #fff;
         }
 
         .action-buttons iron-icon {
@@ -172,14 +178,14 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
 
           <div class="action-buttons" layout horizontal center-justified wrap>
-            <paper-button class="watch-video" on-click="playVideo">
-              <iron-icon icon="hoverboard:movie"></iron-icon>
+            <md-outlined-button class="watch-video" on-click="playVideo">
+              <iron-icon icon="hoverboard:movie" slot="icon"></iron-icon>
               [[viewHighlights]]
-            </paper-button>
-            <paper-button on-click="scrollToTickets" primary invert>
-              <iron-icon icon="hoverboard:ticket"></iron-icon>
+            </md-outlined-button>
+            <md-filled-button on-click="scrollToTickets">
+              <iron-icon icon="hoverboard:ticket" slot="icon"></iron-icon>
               [[buyTicket]]
-            </paper-button>
+            </md-filled-button>
           </div>
 
           <div class="scroll-down" on-click="scrollNextBlock">

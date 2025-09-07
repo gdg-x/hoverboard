@@ -1,7 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/paper-button';
+import '@material/web/button/text-button.js';
 import { html, PolymerElement } from '@polymer/polymer';
 import { DialogData } from '../models/dialog-form';
 import { RootState, store } from '../store';
@@ -34,11 +34,13 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
           margin: 0 0 16px;
         }
 
-        paper-button {
+        md-text-button {
           color: #fff;
+          --md-text-button-label-text-color: #fff;
+          --md-text-button-hover-label-text-color: #fff;
         }
 
-        paper-button[disabled] {
+        md-text-button[disabled] {
           background: var(--default-primary-color);
           color: #fff;
         }
@@ -59,14 +61,14 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
       <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
         <div class="description">[[subscribeBlock.callToAction.description]]</div>
         <div class="cta-button">
-          <paper-button
+          <md-text-button
             class="animated icon-right"
             disabled$="[[subscribed.data]]"
             on-click="subscribe"
           >
             <span class="cta-label">[[ctaLabel]]</span>
             <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>
-          </paper-button>
+          </md-text-button>
         </div>
       </div>
     `;

@@ -17,7 +17,7 @@ import { expect } from './__tests__/helpers';
 jest.retryTimes(3, { logErrorsBeforeRetry: true });
 
 // TODO: This test is flaky. It should be fixed.
-// eslint-disable-next-line jest/no-disabled-tests
+
 describe.skip('firestore', () => {
   let testEnv: RulesTestContext;
 

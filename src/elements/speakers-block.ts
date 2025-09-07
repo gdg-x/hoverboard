@@ -1,7 +1,7 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/paper-button';
+import '@material/web/button/text-button.js';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
 import '../components/text-truncate';
@@ -211,10 +211,10 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
         </div>
 
         <a href="[[speakersBlock.callToAction.link]]">
-          <paper-button class="cta-button animated icon-right">
+          <md-outlined-button class="cta-button animated icon-right">
             <span>[[speakersBlock.callToAction.label]]</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-          </paper-button>
+          </md-outlined-button>
         </a>
       </div>
     `;

@@ -1,5 +1,3 @@
-/* eslint-disable jest/require-top-level-describe */
-
 import {
   initializeTestEnvironment,
   RulesTestContext,

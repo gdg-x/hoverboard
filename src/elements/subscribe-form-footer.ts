@@ -1,7 +1,7 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/paper-button';
+import '@material/web/button/filled-button.js';
 import '@polymer/paper-input/paper-input';
 import { PaperInputElement } from '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -41,20 +41,6 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
         iron-icon {
           margin-bottom: 5px;
         }
-
-        paper-button {
-          margin-top: 8px;
-          color: var(--secondary-text-color);
-        }
-
-        paper-button:hover {
-          cursor: pointer;
-        }
-
-        paper-button[disabled] {
-          background: none;
-          padding-right: 0;
-        }
       </style>
 
       <div class="form-content" layout vertical center>
@@ -75,9 +61,9 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
             hidden$="[[!subscribed.data]]"
           ></iron-icon>
         </paper-input>
-        <paper-button on-click="subscribe" disabled="[[disabled]]" layout self-end>
+        <md-filled-button on-click="subscribe" disabled$="[[disabled]]" layout self-end>
           [[ctaLabel]]
-        </paper-button>
+        </md-filled-button>
       </div>
     `;
   }

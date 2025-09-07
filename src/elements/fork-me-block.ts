@@ -1,6 +1,6 @@
 import { customElement } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/paper-button';
+import '@material/web/button/outlined-button.js';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../utils/icons';
 import './shared-styles';
@@ -18,8 +18,9 @@ export class ForkMeBlock extends PolymerElement {
           padding: 16px 0;
         }
 
-        paper-button {
-          color: #000;
+        md-outlined-button {
+          --md-outlined-button-label-text-color: #000;
+          --md-outlined-button-outline-color: #000;
         }
       </style>
 
@@ -32,10 +33,10 @@ export class ForkMeBlock extends PolymerElement {
         </p>
         <a href="https://github.com/gdg-x/hoverboard">
           <div class="cta-button">
-            <paper-button class="icon-right">
+            <md-outlined-button class="icon-right">
               <span class="cta-label">Fork this project</span>
               <iron-icon icon="hoverboard:github"></iron-icon>
-            </paper-button>
+            </md-outlined-button>
           </div>
         </a>
       </div>

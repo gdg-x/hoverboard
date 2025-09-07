@@ -1,9 +1,9 @@
 import { Failure, Success } from '@abraham/remotedata';
-import '@material/mwc-button';
+import '@material/web/button/filled-button.js';
+import '@material/web/button/outlined-button.js';
 import '@material/mwc-dialog';
 import { Dialog } from '@material/mwc-dialog';
 import { observe, property, query } from '@polymer/decorators';
-import '@polymer/paper-button';
 import '@polymer/paper-input/paper-input';
 import { PaperInputElement } from '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -90,10 +90,12 @@ class SubscribeDialog extends ReduxMixin(PolymerElement) {
         >
         </paper-input>
 
-        <mwc-button on-click="subscribe" slot="primaryAction"> [[submitLabel]] </mwc-button>
-        <mwc-button on-click="close" slot="secondaryAction" dialogAction="cancel">
+        <md-filled-button on-click="subscribe" slot="primaryAction">
+          [[submitLabel]]
+        </md-filled-button>
+        <md-outlined-button on-click="close" slot="secondaryAction" dialogAction="cancel">
           [[subscribeBlock.close]]
-        </mwc-button>
+        </md-outlined-button>
       </mwc-dialog>
     `;
   }
