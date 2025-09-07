@@ -1,15 +1,16 @@
-import { customElement } from '@polymer/decorators';
+import { customElement } from 'lit/decorators.js';
 import '@polymer/iron-icon';
 import '@material/web/button/outlined-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
+import { css, html } from 'lit';
 import '../utils/icons';
-import './shared-styles';
+import { ThemedElement } from '../components/themed-element';
 
 @customElement('fork-me-block')
-export class ForkMeBlock extends PolymerElement {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
+export class ForkMeBlock extends ThemedElement {
+  static override get styles() {
+    return [
+      ...ThemedElement.styles,
+      css`
         :host {
           display: flex;
           width: 100%;
@@ -22,8 +23,12 @@ export class ForkMeBlock extends PolymerElement {
           --md-outlined-button-label-text-color: #000;
           --md-outlined-button-outline-color: #000;
         }
-      </style>
+      `,
+    ];
+  }
 
+  override render() {
+    return html`
       <div class="container container-narrow">
         <h1 class="container-title">Fork me on GitHub</h1>
         <p>
