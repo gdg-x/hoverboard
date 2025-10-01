@@ -53,7 +53,7 @@
     "@polymer/polymer": "^3.5.2",
     "@power-elements/lazy-image": "^2.2.0",
     "@radi-cho/star-rating": "git+https://git@github.com/abraham/star-rating.git#polymer-3",
-    "@reduxjs/toolkit": "^2.8.2",
+    "@reduxjs/toolkit": "^2.9.0",
     "@vaadin/router": "^2.0.0",
     "firebase": "^10.14.1",
     "lit": "^3.3.1",
