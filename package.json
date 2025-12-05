@@ -103,7 +103,7 @@
     "jest-dev-server": "^11.0.0",
     "jest-environment-jsdom": "^30.2.0",
     "nunjucks": "^3.2.4",
-    "prettier": "3.6.2",
+    "prettier": "3.7.3",
     "prettier-plugin-package": "2.0.0",
     "rollup": "^4.52.5",
     "rollup-plugin-copy": "^3.5.0",
