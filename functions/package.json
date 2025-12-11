@@ -19,7 +19,7 @@
     "start:src": "npm run build:src -- --watch"
   },
   "dependencies": {
-    "@google-cloud/storage": "^7.17.2",
+    "@google-cloud/storage": "^7.18.0",
     "express": "^5.2.1",
     "firebase-admin": "^12.7.0",
     "firebase-functions": "^5.1.1",
