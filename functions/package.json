@@ -29,7 +29,7 @@
     "@jest/globals": "^30.3.0",
     "@tsconfig/node22": "^22.0.5",
     "concurrently": "^10.0.3",
-    "cpx2": "^8.0.2",
+    "cpx2": "^9.0.0",
     "typescript": "^5.9.3"
   }
 }
