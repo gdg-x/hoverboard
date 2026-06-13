@@ -35,3 +35,6 @@ updates:
       markdownlint:
         patterns:
           - 'markdownlint*'
+      typescript:
+        patterns:
+          - 'typescript'
