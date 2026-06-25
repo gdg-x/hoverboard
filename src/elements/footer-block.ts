@@ -4,7 +4,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import '../utils/icons';
 import { scrollToTop } from '../utils/scrolling';
 import '../components/footer-nav';
-import './footer-rel';
+import '../components/footer-rel';
 import './footer-social';
 
 @customElement('footer-block')
