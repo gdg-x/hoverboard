@@ -1,5 +1,3 @@
-/* eslint-env node */
-
 import type { GenerateSWOptions } from 'workbox-build';
 
 const ONE_WEEK = 60 * 60 * 24 * 7;

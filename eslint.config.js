@@ -8,9 +8,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 import htmlPlugin from 'eslint-plugin-html';
 import htmlEslintPlugin from '@html-eslint/eslint-plugin';
 import htmlEslintParser from '@html-eslint/parser';
-import importPlugin from 'eslint-plugin-import';
 import jestPlugin from 'eslint-plugin-jest';
-import jestDomPlugin from 'eslint-plugin-jest-dom';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
 import globals from 'globals';
 
@@ -60,9 +58,7 @@ export default [
     },
     plugins: {
       '@typescript-eslint': typescriptEslint,
-      import: importPlugin,
       jest: jestPlugin,
-      'jest-dom': jestDomPlugin,
       'testing-library': testingLibraryPlugin,
     },
     rules: {
@@ -70,6 +66,7 @@ export default [
 
       // Disable conflicting rules
       'no-unused-vars': 'off', // Replaced by @typescript-eslint/no-unused-vars
+      'preserve-caught-error': 'off',
 
       // Jest rules
       'jest/max-expects': ['warn', { max: 10 }],
@@ -80,12 +77,6 @@ export default [
 
       // Testing library rules
       'testing-library/no-node-access': 'warn',
-
-      // Import rules
-      'import/no-unresolved': 'error',
-      'import/named': 'error',
-      'import/default': 'error',
-      'import/export': 'error',
 
       // TypeScript rules
       '@typescript-eslint/unbound-method': 'warn',
@@ -114,17 +105,6 @@ export default [
         { anonymous: 'always', named: 'never', asyncArrow: 'always' },
       ],
       'linebreak-style': 0,
-    },
-    settings: {
-      'import/parsers': {
-        '@typescript-eslint/parser': ['.ts', '.tsx'],
-      },
-      'import/resolver': {
-        typescript: {
-          alwaysTryTypes: true,
-          project: './tsconfig.json',
-        },
-      },
     },
   },
 

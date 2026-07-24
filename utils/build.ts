@@ -1,5 +1,3 @@
-/* eslint-env node */
-
 import n from 'nunjucks';
 import fs from 'fs';
 
