@@ -19,6 +19,4 @@ interface FetchSessionsSuccessAction {
 }
 
 export type SessionsActions =
-  | FetchSessionsAction
-  | FetchSessionsFailureAction
-  | FetchSessionsSuccessAction;
+  FetchSessionsAction | FetchSessionsFailureAction | FetchSessionsSuccessAction;

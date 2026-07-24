@@ -53,7 +53,4 @@ interface ToggleVideoDialogAction {
 }
 
 export type UiActions =
-  | ViewPortSizeAction
-  | SetViewPortSizeAction
-  | SetHeroSettingsAction
-  | ToggleVideoDialogAction;
+  ViewPortSizeAction | SetViewPortSizeAction | SetHeroSettingsAction | ToggleVideoDialogAction;

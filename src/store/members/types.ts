@@ -19,6 +19,4 @@ interface FetchMembersSuccessAction {
 }
 
 export type MembersActions =
-  | FetchMembersAction
-  | FetchMembersFailureAction
-  | FetchMembersSuccessAction;
+  FetchMembersAction | FetchMembersFailureAction | FetchMembersSuccessAction;

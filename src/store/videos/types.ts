@@ -19,6 +19,4 @@ interface FetchVideosSuccessAction {
 }
 
 export type FetchVideosActions =
-  | FetchVideosAction
-  | FetchVideosFailureAction
-  | FetchVideosSuccessAction;
+  FetchVideosAction | FetchVideosFailureAction | FetchVideosSuccessAction;

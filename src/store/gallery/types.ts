@@ -19,6 +19,4 @@ interface FetchGallerySuccessAction {
 }
 
 export type GalleryActions =
-  | FetchGalleryAction
-  | FetchGalleryFailureAction
-  | FetchGallerySuccessAction;
+  FetchGalleryAction | FetchGalleryFailureAction | FetchGallerySuccessAction;
