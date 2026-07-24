@@ -19,6 +19,4 @@ interface FetchTicketsSeccessAction {
 }
 
 export type FetchTicketsActions =
-  | FetchTicketsAction
-  | FetchTicketsFailureAction
-  | FetchTicketsSeccessAction;
+  FetchTicketsAction | FetchTicketsFailureAction | FetchTicketsSeccessAction;

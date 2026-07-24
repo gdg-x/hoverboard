@@ -16,6 +16,4 @@ interface AddPotentialPartnerSuccessAction {
 }
 
 export type PotentialPartnerActions =
-  | AddPotentialPartnerAction
-  | AddPotentialPartnerFailureAction
-  | AddPotentialPartnerSuccessAction;
+  AddPotentialPartnerAction | AddPotentialPartnerFailureAction | AddPotentialPartnerSuccessAction;

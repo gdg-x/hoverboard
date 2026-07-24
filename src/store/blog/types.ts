@@ -19,6 +19,4 @@ interface FetchBlogListSuccessAction {
 }
 
 export type BlogActions =
-  | FetchBlogListAction
-  | FetchBlogListFailureAction
-  | FetchBlogListSuccessAction;
+  FetchBlogListAction | FetchBlogListFailureAction | FetchBlogListSuccessAction;

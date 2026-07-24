@@ -21,7 +21,4 @@ interface SubscribeResetAction {
 }
 
 export type SubscribeActions =
-  | SubscribeAction
-  | SubscribeSuccessAction
-  | SubscribeFailureAction
-  | SubscribeResetAction;
+  SubscribeAction | SubscribeSuccessAction | SubscribeFailureAction | SubscribeResetAction;

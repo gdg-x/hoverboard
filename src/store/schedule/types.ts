@@ -19,6 +19,4 @@ interface FetchScheduleSuccessAction {
 }
 
 export type ScheduleActions =
-  | FetchScheduleAction
-  | FetchScheduleFailureAction
-  | FetchScheduleSuccessAction;
+  FetchScheduleAction | FetchScheduleFailureAction | FetchScheduleSuccessAction;

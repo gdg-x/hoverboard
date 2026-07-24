@@ -19,6 +19,4 @@ interface FetchSpeakersSuccessAction {
 }
 
 export type SpeakerActions =
-  | FetchSpeakersAction
-  | FetchSpeakersFailureAction
-  | FetchSpeakersSuccessAction;
+  FetchSpeakersAction | FetchSpeakersFailureAction | FetchSpeakersSuccessAction;
