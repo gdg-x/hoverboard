@@ -1,5 +1,4 @@
 /* eslint spaced-comment: ["error", "always", { "markers": ["/"] }] */
-/* eslint-env serviceworker */
 
 /// <reference no-default-lib="true"/>
 /// <reference lib="ESnext" />
