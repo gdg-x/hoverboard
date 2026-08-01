@@ -28,7 +28,7 @@
   "devDependencies": {
     "@jest/globals": "^30.4.1",
     "@tsconfig/node22": "^22.0.5",
-    "concurrently": "^10.0.3",
+    "concurrently": "^10.0.4",
     "cpx2": "^9.0.0",
     "typescript": "^5.9.3"
   }
