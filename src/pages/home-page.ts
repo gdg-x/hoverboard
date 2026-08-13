@@ -10,7 +10,7 @@ import { HeroBlock } from '../components/hero/hero-block';
 import '../elements/about-organizer-block';
 import '../elements/featured-videos';
 import '../elements/footer-block';
-import '../elements/fork-me-block';
+import '../components/fork-me-block';
 import '../elements/gallery-block';
 import '../elements/latest-posts-block';
 import '../elements/map-block';
@@ -308,7 +308,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
       : false;
     if (showForkMeBlock) {
-      import('../elements/fork-me-block');
+      import('../components/fork-me-block');
     }
     return showForkMeBlock;
   }
