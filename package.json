@@ -108,7 +108,7 @@
     "rollup-plugin-workbox": "^9.0.0",
     "ts-jest": "^29.4.12",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   },
   "contributors": [
     "Oleh Zasadnyy, GDG Lviv",
