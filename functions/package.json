@@ -26,7 +26,7 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "@jest/globals": "^30.4.1",
+    "@jest/globals": "^30.5.0",
     "@tsconfig/node22": "^22.0.5",
     "concurrently": "^10.0.4",
     "cpx2": "^9.0.0",
