@@ -18,7 +18,7 @@ const mockUrlForName = mocked(router.urlForName);
 const speakers: SpeakerWithTags[] = [
   {
     id: 'speaker-1',
-    badges: [{ name: 'github', link: 'https://github.com/example', description: 'GitHub' }],
+    badges: [{ name: 'LinkedIn', link: 'https://linkedin.com/example', description: 'LinkedIn' }],
     bio: 'Speaker bio',
     company: 'Example',
     companyLogo: '',
@@ -52,6 +52,16 @@ describe('speakers-block', () => {
     const speakerLink = shadowRootForWithin.querySelector('a.speaker');
     expect(speakerLink).toHaveTextContent('Example Speaker');
     expect(speakerLink).toHaveAttribute('href', '/speakers/speaker-1');
-    expect(shadowRootForWithin.querySelector('hoverboard-icon')).toHaveAttribute('name', 'github');
+    expect(shadowRootForWithin.querySelector('hoverboard-icon')).toHaveAttribute(
+      'name',
+      'linkedin',
+    );
+    expect(
+      shadowRootForWithin.querySelector('hoverboard-icon')?.shadowRoot?.querySelector('svg'),
+    ).toBeInTheDocument();
+    expect(shadowRootForWithin.querySelector('md-outlined-button hoverboard-icon')).toHaveAttribute(
+      'slot',
+      'icon',
+    );
   });
 });

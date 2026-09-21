@@ -73,8 +73,8 @@ export class SpeakersBlock extends ReduxMixin(ThemedElement) {
         }
 
         .badge-icon {
-          --iron-icon-width: 12px;
-          --iron-icon-height: 12px;
+          width: 12px;
+          height: 12px;
           color: #fff;
         }
 
@@ -204,7 +204,7 @@ export class SpeakersBlock extends ReduxMixin(ThemedElement) {
                           center-center
                         >
                           <hoverboard-icon
-                            name="${badge.name}"
+                            name="${badge.name.toLowerCase()}"
                             class="badge-icon"
                           ></hoverboard-icon>
                         </a>
@@ -233,9 +233,9 @@ export class SpeakersBlock extends ReduxMixin(ThemedElement) {
         </div>
 
         <a href="${speakersBlock.callToAction.link}">
-          <md-outlined-button class="cta-button animated icon-right">
+          <md-outlined-button class="cta-button animated icon-right" trailing-icon>
             <span>${speakersBlock.callToAction.label}</span>
-            <hoverboard-icon name="arrow-right-circle"></hoverboard-icon>
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
           </md-outlined-button>
         </a>
       </div>

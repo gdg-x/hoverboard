@@ -71,9 +71,9 @@ export class AboutOrganizerBlock extends ReduxMixin(ThemedElement) {
                   target="${block.callToAction.newTab ? '_blank' : ''}"
                   rel="${block.callToAction.newTab ? 'noopener noreferrer' : ''}"
                 >
-                  <md-text-button class="cta-button animated icon-right">
+                  <md-text-button class="cta-button animated icon-right" trailing-icon>
                     <span>${block.callToAction.label}</span>
-                    <hoverboard-icon name="arrow-right-circle"></hoverboard-icon>
+                    <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
                   </md-text-button>
                 </a>
               </div>
