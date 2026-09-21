@@ -1,23 +1,25 @@
-import { customElement, property } from '@polymer/decorators';
-import { html, PolymerElement } from '@polymer/polymer';
+import { css, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { footerRelBlock, notifications, subscribeNote } from '../utils/data';
+import { ThemedElement } from './themed-element';
 import './subscribe-form-footer';
 
 @customElement('footer-rel')
-export class FooterRel extends PolymerElement {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
+export class FooterRel extends ThemedElement {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           border-top: 1px solid var(--border-light-color);
           border-bottom: 1px solid var(--border-light-color);
-          margin: 0 20px 0 20px;
+          margin: 0 20px;
           overflow: auto;
           overflow-y: hidden;
           padding: 10px 0;
           color: var(--footer-text-color);
           display: grid;
-          grid-gap: 16px;
+          gap: 16px;
           grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         }
 
@@ -63,38 +65,45 @@ export class FooterRel extends PolymerElement {
             margin-top: 0;
           }
         }
-      </style>
+      `,
+    ];
+  }
 
-      <template is="dom-repeat" items="[[footerRelBlock]]" as="footerRel">
-        <div class="col" layout vertical wrap flex-auto>
-          <div class="col-heading">[[footerRel.title]]</div>
-          <ul class="nav">
-            <template is="dom-repeat" items="[[footerRel.links]]" as="link">
-              <li>
-                <template is="dom-if" if="[[!link.newTab]]">
-                  <a href="[[link.url]]">[[link.name]]</a>
-                </template>
-                <template is="dom-if" if="[[link.newTab]]">
-                  <a href="[[link.url]]" target="_blank" rel="noopener noreferrer">[[link.name]]</a>
-                </template>
-              </li>
-            </template>
-          </ul>
-        </div>
-      </template>
+  override render() {
+    return html`
+      ${footerRelBlock.map(
+        (footerRel) => html`
+          <div class="col" layout vertical wrap flex-auto>
+            <div class="col-heading">${footerRel.title}</div>
+            <ul class="nav">
+              ${footerRel.links.map(
+                (link) => html`
+                  <li>
+                    <a
+                      href="${link.url}"
+                      target="${link.newTab ? '_blank' : ''}"
+                      rel="${link.newTab ? 'noopener noreferrer' : ''}"
+                      >${link.name}</a
+                    >
+                  </li>
+                `,
+              )}
+            </ul>
+          </div>
+        `,
+      )}
 
       <div class="col" layout vertical flex-auto wrap>
-        <div class="col-heading">[[notifications.subscribe]]</div>
-        <span>[[subscribeNote]]</span>
+        <div class="col-heading">${notifications.subscribe}</div>
+        <span>${subscribeNote}</span>
         <subscribe-form-footer></subscribe-form-footer>
       </div>
     `;
   }
+}
 
-  @property({ type: Array })
-  private footerRelBlock = footerRelBlock;
-  @property()
-  private subscribeNote = subscribeNote;
-  @property({ type: Object })
-  private notifications = notifications;
+declare global {
+  interface HTMLElementTagNameMap {
+    'footer-rel': FooterRel;
+  }
 }

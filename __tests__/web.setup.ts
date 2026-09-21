@@ -41,3 +41,27 @@ Object.defineProperty(Element.prototype, 'animate', {
     dispatchEvent: jest.fn(),
   }),
 });
+
+// JSDOM does not yet implement the ElementInternals APIs used by Material text fields.
+const attachInternals = jest.fn(() => ({
+  form: null,
+  labels: [],
+  states: new Set<string>(),
+  validity: { valid: true },
+  validationMessage: '',
+  willValidate: true,
+  checkValidity: jest.fn(() => true),
+  reportValidity: jest.fn(() => true),
+  setFormValue: jest.fn(),
+  setValidity: jest.fn(),
+}));
+
+Object.defineProperty(Element.prototype, 'attachInternals', {
+  writable: true,
+  value: attachInternals,
+});
+
+Object.defineProperty(HTMLElement.prototype, 'attachInternals', {
+  writable: true,
+  value: attachInternals,
+});

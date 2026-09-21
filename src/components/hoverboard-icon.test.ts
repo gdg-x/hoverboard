@@ -17,7 +17,7 @@ describe('hoverboard-icon', () => {
     expect(svg?.querySelector('path')).toBeInTheDocument();
   });
 
-  it.each(['linkedin', 'gde', 'gdg', 'google', 'website'])(
+  it.each(['linkedin', 'gde', 'gdg', 'google', 'website', 'checked', 'up'])(
     'renders the %s social icon',
     async (name) => {
       const { shadowRoot } = await fixture(

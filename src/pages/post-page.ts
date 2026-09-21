@@ -4,7 +4,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
 import '../components/hero/hero-block';
 import '../components/markdown/long-markdown';
-import '../elements/footer-block';
+import '../components/footer-block';
 import '../components/posts-list';
 import '../elements/shared-styles';
 import { Post } from '../models/post';
