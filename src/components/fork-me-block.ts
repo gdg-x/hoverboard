@@ -1,15 +1,15 @@
-import { customElement } from '@polymer/decorators';
-import '@polymer/iron-icon';
 import '@material/web/button/outlined-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
-import '../utils/icons';
-import './shared-styles';
+import { css, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { ThemedElement } from './themed-element';
+import './hoverboard-icon';
 
 @customElement('fork-me-block')
-export class ForkMeBlock extends PolymerElement {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
+export class ForkMeBlock extends ThemedElement {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           display: flex;
           width: 100%;
@@ -22,8 +22,16 @@ export class ForkMeBlock extends PolymerElement {
           --md-outlined-button-label-text-color: #000;
           --md-outlined-button-outline-color: #000;
         }
-      </style>
 
+        hoverboard-icon {
+          margin-left: 8px;
+        }
+      `,
+    ];
+  }
+
+  override render() {
+    return html`
       <div class="container container-narrow">
         <h1 class="container-title">Fork me on GitHub</h1>
         <p>
@@ -35,11 +43,17 @@ export class ForkMeBlock extends PolymerElement {
           <div class="cta-button">
             <md-outlined-button class="icon-right">
               <span class="cta-label">Fork this project</span>
-              <iron-icon icon="hoverboard:github"></iron-icon>
+              <hoverboard-icon name="github"></hoverboard-icon>
             </md-outlined-button>
           </div>
         </a>
       </div>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'fork-me-block': ForkMeBlock;
   }
 }
