@@ -7,7 +7,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
 import '../components/hero/simple-hero';
 import '../components/text-truncate';
-import '../elements/content-loader';
+import '../components/content-loader';
 import '../elements/filter-menu';
 import '../elements/previous-speakers-block';
 import '../elements/shared-styles';

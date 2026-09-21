@@ -1,14 +1,13 @@
-import { customElement, property } from '@polymer/decorators';
-import { html, PolymerElement } from '@polymer/polymer';
-import './shared-styles';
-
-// TODO: Rewrite
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { ThemedElement } from './themed-element';
 
 @customElement('content-loader')
-export class ContentLoader extends PolymerElement {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class ContentLoader extends ThemedElement {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           --darkgrey: rgba(250, 250, 250, 0);
           --darkgrey-lighter: rgba(250, 250, 250, 0.8);
@@ -25,7 +24,6 @@ export class ContentLoader extends PolymerElement {
             transparent 0
           );
           --horizontal-position: var(--card-padding);
-
           --avatar-size: 32px;
           --avatar-circle: 16px;
           --avatar-position: var(--horizontal-position) var(--card-padding);
@@ -34,7 +32,6 @@ export class ContentLoader extends PolymerElement {
             var(--content-color) 99%,
             transparent 0
           );
-
           --title-height: 32px;
           --title-width: 200px;
           --title-top-position: 180px;
@@ -43,7 +40,6 @@ export class ContentLoader extends PolymerElement {
             var(--content-color) var(--title-height),
             transparent 0
           );
-
           --desc-line-height: 16px;
           --desc-line-skeleton: linear-gradient(
             var(--content-color) var(--desc-line-height),
@@ -53,20 +49,16 @@ export class ContentLoader extends PolymerElement {
           --desc-line-1-position: var(--horizontal-position) calc(var(--title-top-position) + 62px);
           --desc-line-2-width: 180px;
           --desc-line-2-position: var(--horizontal-position) calc(var(--title-top-position) + 85px);
-
           --footer-height: 0px;
           --footer-position: 0 calc(var(--card-height) - var(--footer-height));
           --footer-skeleton: linear-gradient(
             var(--background-color) var(--footer-height),
             transparent 0
           );
-
           --blur-width: 200px;
           --blur-size: var(--blur-width) calc(var(--card-height) - var(--footer-height));
-
           --load-from: -150%;
           --load-to: 350%;
-
           --animation-time: 1.5s;
         }
 
@@ -83,7 +75,6 @@ export class ContentLoader extends PolymerElement {
           height: 100%;
           box-shadow: var(--card-box-shadow);
           border-radius: var(--card-border-radius);
-
           background-image:
             linear-gradient(
               90deg,
@@ -93,7 +84,6 @@ export class ContentLoader extends PolymerElement {
             ),
             var(--title-skeleton), var(--desc-line-skeleton), var(--desc-line-skeleton),
             var(--avatar-skeleton), var(--footer-skeleton), var(--card-skeleton);
-
           background-size:
             var(--blur-size),
             var(--title-width) var(--title-height),
@@ -102,7 +92,6 @@ export class ContentLoader extends PolymerElement {
             var(--avatar-size) var(--avatar-size),
             100% var(--footer-height),
             100% 100%;
-
           background-position:
             var(--load-from) 0,
             var(--title-position),
@@ -111,7 +100,6 @@ export class ContentLoader extends PolymerElement {
             var(--avatar-position),
             var(--footer-position),
             0 0;
-
           background-repeat: no-repeat;
           animation: loading var(--animation-time) infinite;
         }
@@ -128,73 +116,62 @@ export class ContentLoader extends PolymerElement {
               0 0;
           }
         }
-      </style>
-
-      <template is="dom-repeat" items="[[getArray()]]">
-        <div class="content"></div>
-      </template>
-    `;
+      `,
+    ];
   }
 
-  @property({ type: String })
-  private cardPadding: string | undefined;
-  @property({ type: String })
-  private cardMargin: string | undefined;
-  @property({ type: String })
-  private cardHeight: string | undefined;
-  @property({ type: String })
-  private cardWidth: string | undefined;
-  @property({ type: String })
-  private borderRadius: string | undefined;
-  @property({ type: String })
-  private horizontalPosition: string | undefined;
-  @property({ type: String })
-  private avatarSize = '0px';
-  @property({ type: String })
-  private avatarCircle = '0px';
-  @property({ type: String })
-  private titleTopPosition: string | undefined;
-  @property({ type: String })
-  private titleHeight: string | undefined;
-  @property({ type: String })
-  private titleWidth: string | undefined;
-  @property({ type: String })
-  private animationTime: string | undefined;
-  @property({ type: String })
-  private boxShadow: string | undefined;
-  @property({ type: String })
-  private blurWidth: string | undefined;
-  @property({ type: String })
-  private loadFrom: string | undefined;
-  @property({ type: String })
-  private loadTo: string | undefined;
-  @property({ type: Number })
-  private itemsCount = 0;
+  @property({ type: String }) cardPadding?: string;
+  @property({ type: String }) cardMargin?: string;
+  @property({ type: String }) cardHeight?: string;
+  @property({ type: String }) cardWidth?: string;
+  @property({ type: String }) borderRadius?: string;
+  @property({ type: String }) horizontalPosition?: string;
+  @property({ type: String }) avatarSize = '0px';
+  @property({ type: String }) avatarCircle = '0px';
+  @property({ type: String }) titleTopPosition?: string;
+  @property({ type: String }) titleHeight?: string;
+  @property({ type: String }) titleWidth?: string;
+  @property({ type: String }) animationTime?: string;
+  @property({ type: String }) boxShadow?: string;
+  @property({ type: String }) blurWidth?: string;
+  @property({ type: String }) loadFrom?: string;
+  @property({ type: String }) loadTo?: string;
+  @property({ type: Number }) itemsCount = 0;
 
-  override connectedCallback() {
-    super.connectedCallback();
+  override willUpdate() {
+    const variables: Record<string, string | undefined> = {
+      '--card-padding': this.cardPadding,
+      '--card-margin': this.cardMargin,
+      '--card-height': this.cardHeight,
+      '--card-width': this.cardWidth,
+      '--card-border-radius': this.borderRadius,
+      '--horizontal-position': this.horizontalPosition,
+      '--avatar-size': this.avatarSize,
+      '--avatar-circle': this.avatarCircle,
+      '--title-top-position': this.titleTopPosition,
+      '--title-height': this.titleHeight,
+      '--title-width': this.titleWidth,
+      '--animation-time': this.animationTime,
+      '--card-box-shadow': this.boxShadow,
+      '--blur-width': this.blurWidth,
+      '--load-from': this.loadFrom,
+      '--load-to': this.loadTo,
+    };
 
-    this.updateStyles({
-      '--card-padding': this.cardPadding || '',
-      '--card-margin': this.cardMargin || '',
-      '--card-height': this.cardHeight || '',
-      '--card-width': this.cardWidth || '',
-      '--card-border-radius': this.borderRadius || '',
-      '--horizontal-position': this.horizontalPosition || '',
-      '--avatar-size': this.avatarSize || '',
-      '--avatar-circle': this.avatarCircle || '',
-      '--title-top-position': this.titleTopPosition || '',
-      '--title-height': this.titleHeight || '',
-      '--title-width': this.titleWidth || '',
-      '--animation-time': this.animationTime || '',
-      '--card-box-shadow': this.boxShadow || '',
-      '--blur-width': this.blurWidth || '',
-      '--load-from': this.loadFrom || '',
-      '--load-to': this.loadTo || '',
-    });
+    for (const [name, value] of Object.entries(variables)) {
+      if (value !== undefined) {
+        this.style.setProperty(name, value);
+      }
+    }
   }
 
-  private getArray() {
-    return new Array(Number(this.itemsCount));
+  override render() {
+    return html`${Array.from({ length: Number(this.itemsCount) }, () => html`<div class="content"></div>`)}`;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'content-loader': ContentLoader;
   }
 }

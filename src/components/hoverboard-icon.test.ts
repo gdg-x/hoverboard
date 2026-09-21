@@ -17,6 +17,17 @@ describe('hoverboard-icon', () => {
     expect(svg?.querySelector('path')).toBeInTheDocument();
   });
 
+  it.each(['linkedin', 'gde', 'gdg', 'google', 'website'])(
+    'renders the %s social icon',
+    async (name) => {
+      const { shadowRoot } = await fixture(
+        html`<hoverboard-icon name="${name}"></hoverboard-icon>`,
+      );
+
+      expect(shadowRoot.querySelector('svg')).toBeInTheDocument();
+    },
+  );
+
   it('renders nothing for an unknown icon name', async () => {
     const element = document.createElement('hoverboard-icon') as HoverboardIcon;
     element.name = 'not-real';

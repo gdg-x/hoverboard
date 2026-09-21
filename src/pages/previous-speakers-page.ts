@@ -4,7 +4,7 @@ import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
 import '../components/hero/simple-hero';
-import '../elements/content-loader';
+import '../components/content-loader';
 import '../elements/shared-styles';
 import { PreviousSession } from '../models/previous-session';
 import { router } from '../router';
