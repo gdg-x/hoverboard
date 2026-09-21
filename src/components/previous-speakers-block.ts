@@ -1,9 +1,8 @@
-import { Failure, Initialized, Pending } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
 import '@material/web/button/text-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
+import { Failure, Initialized, Pending } from '@abraham/remotedata';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -15,17 +14,17 @@ import {
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
 import { loading, previousSpeakersBlock } from '../utils/data';
-import '../utils/icons';
-import './shared-styles';
+import './hoverboard-icon';
+import { ThemedElement } from './themed-element';
 
 @customElement('previous-speakers-block')
-export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class PreviousSpeakersBlock extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           margin: 32px auto;
-          display: block;
           text-align: center;
         }
 
@@ -69,58 +68,15 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
             --lazy-image-height: 96px;
           }
         }
-      </style>
-
-      <div class="container">
-        <h1 class="container-title">[[previousSpeakersBlock.title]]</h1>
-
-        <div class="speakers-wrapper">
-          <template is="dom-if" if="[[pending]]">
-            <p>[[loading]]</p>
-          </template>
-
-          <template is="dom-if" if="[[failure]]">
-            <p>Error loading previous speakers.</p>
-          </template>
-
-          <template is="dom-repeat" items="[[speakers]]" as="speaker">
-            <a class="speaker" href$="[[previousSpeakerUrl(speaker.id)]]">
-              <lazy-image
-                class="photo"
-                src="[[speaker.photoUrl]]"
-                alt="[[speaker.name]]"
-              ></lazy-image>
-            </a>
-          </template>
-        </div>
-
-        <a href="[[previousSpeakersBlock.callToAction.link]]">
-          <md-text-button class="animated icon-right" trailing-icon>
-            [[previousSpeakersBlock.callToAction.label]]
-            <iron-icon slot="icon" icon="hoverboard:arrow-right-circle"></iron-icon>
-          </md-text-button>
-        </a>
-      </div>
-    `;
+      `,
+    ];
   }
-
-  private previousSpeakersBlock = previousSpeakersBlock;
-  private loading = loading;
 
   @property({ type: Object })
   previousSpeakers: PreviousSpeakersState = initialPreviousSpeakersState;
+
   @property({ type: Array })
   speakers: PreviousSpeaker[] = [];
-
-  @computed('previousSpeakers')
-  get pending() {
-    return this.previousSpeakers instanceof Pending;
-  }
-
-  @computed('previousSpeakers')
-  get failure() {
-    return this.previousSpeakers instanceof Failure;
-  }
 
   override stateChanged(state: RootState) {
     this.previousSpeakers = state.previousSpeakers;
@@ -134,7 +90,52 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
-  previousSpeakerUrl(id: string) {
+  override render() {
+    return html`
+      <div class="container">
+        <h1 class="container-title">${previousSpeakersBlock.title}</h1>
+
+        <div class="speakers-wrapper">
+          ${this.pending ? html`<p>${loading}</p>` : ''}
+          ${this.failure ? html`<p>Error loading previous speakers.</p>` : ''}
+          ${this.speakers.map(
+            (speaker) => html`
+              <a class="speaker" href="${this.previousSpeakerUrl(speaker.id)}">
+                <lazy-image
+                  class="photo"
+                  src="${speaker.photoUrl}"
+                  alt="${speaker.name}"
+                ></lazy-image>
+              </a>
+            `,
+          )}
+        </div>
+
+        <a href="${previousSpeakersBlock.callToAction.link}">
+          <md-text-button class="animated icon-right" trailing-icon>
+            ${previousSpeakersBlock.callToAction.label}
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+          </md-text-button>
+        </a>
+      </div>
+    `;
+  }
+
+  private get pending() {
+    return this.previousSpeakers instanceof Pending;
+  }
+
+  private get failure() {
+    return this.previousSpeakers instanceof Failure;
+  }
+
+  private previousSpeakerUrl(id: string) {
     return router.urlForName('previous-speaker-page', { id });
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'previous-speakers-block': PreviousSpeakersBlock;
   }
 }

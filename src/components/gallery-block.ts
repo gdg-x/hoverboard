@@ -1,24 +1,22 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
 import '@material/web/button/outlined-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
+import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { Photo } from '../models/photo';
 import { RootState, store } from '../store';
 import { fetchGallery } from '../store/gallery/actions';
 import { initialGalleryState } from '../store/gallery/state';
 import { ReduxMixin } from '../store/mixin';
 import { galleryBlock } from '../utils/data';
-import './shared-styles';
+import { ThemedElement } from './themed-element';
 
 @customElement('gallery-block')
-export class GalleryBlock extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
-        :host {
-          display: block;
-        }
-
+export class GalleryBlock extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         .photos-grid {
           margin: 64px auto;
           display: grid;
@@ -56,14 +54,8 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
           grid-area: 5 / 1 / 5 / 1;
         }
 
-        .grid-item:nth-child(6) {
-          display: none;
-        }
-
-        .grid-item:nth-child(7) {
-          display: none;
-        }
-
+        .grid-item:nth-child(6),
+        .grid-item:nth-child(7),
         .grid-item:nth-child(8) {
           display: none;
         }
@@ -130,55 +122,12 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
             grid-area: 2 / 3 / 2 / 5;
           }
         }
-      </style>
-
-      <div class="photos-grid">
-        <template is="dom-if" if="[[pending]]">
-          <p>Loading...</p>
-        </template>
-
-        <template is="dom-if" if="[[failure]]">
-          <p>Error loading gallery.</p>
-        </template>
-
-        <template is="dom-repeat" items="[[gallery.data]]" as="photo">
-          <lazy-image class="grid-item" src="[[photo.url]]" alt="gallery photo"></lazy-image>
-        </template>
-
-        <template is="dom-if" if="[[success]]">
-          <div class="gallery-info" layout vertical justified>
-            <div>
-              <h2>[[galleryBlock.title]]</h2>
-              <p>[[galleryBlock.description]]</p>
-            </div>
-            <a href="[[galleryBlock.callToAction.link]]" target="_blank" rel="noopener noreferrer">
-              <md-outlined-button>[[galleryBlock.callToAction.label]]</md-outlined-button>
-            </a>
-          </div>
-        </template>
-      </div>
-    `;
+      `,
+    ];
   }
-
-  private galleryBlock = galleryBlock;
 
   @property({ type: Object })
   gallery = initialGalleryState;
-
-  @computed('gallery')
-  get pending() {
-    return this.gallery instanceof Pending;
-  }
-
-  @computed('gallery')
-  get failure() {
-    return this.gallery instanceof Failure;
-  }
-
-  @computed('gallery')
-  get success() {
-    return this.gallery instanceof Success;
-  }
 
   override stateChanged(state: RootState) {
     this.gallery = state.gallery;
@@ -190,5 +139,66 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
     if (this.gallery instanceof Initialized) {
       store.dispatch(fetchGallery);
     }
+  }
+
+  override render() {
+    return html`
+      <div class="photos-grid">
+        ${this.pending ? html`<p>Loading...</p>` : ''}
+        ${this.failure ? html`<p>Error loading gallery.</p>` : ''}
+        ${this.photos.map(
+          (photo) =>
+            html`<lazy-image
+              class="grid-item"
+              src="${photo.url}"
+              alt="gallery photo"
+            ></lazy-image>`,
+        )}
+        ${
+          this.success
+            ? html`
+                <div class="gallery-info" layout vertical justified>
+                  <div>
+                    <h2>${galleryBlock.title}</h2>
+                    <p>${galleryBlock.description}</p>
+                  </div>
+                  <a
+                    href="${galleryBlock.callToAction.link}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <md-outlined-button>${galleryBlock.callToAction.label}</md-outlined-button>
+                  </a>
+                </div>
+              `
+            : ''
+        }
+      </div>
+    `;
+  }
+
+  private get pending() {
+    return this.gallery instanceof Pending;
+  }
+
+  private get failure() {
+    return this.gallery instanceof Failure;
+  }
+
+  private get success() {
+    return this.gallery instanceof Success;
+  }
+
+  private get photos(): Photo[] {
+    if (this.gallery instanceof Success) {
+      return this.gallery.data;
+    }
+    return [];
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'gallery-block': GalleryBlock;
   }
 }

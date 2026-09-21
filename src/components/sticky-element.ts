@@ -1,15 +1,13 @@
-import { customElement, property, query } from '@polymer/decorators';
-import { html, PolymerElement } from '@polymer/polymer';
+import { css, html } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
+import { ThemedElement } from './themed-element';
 
 @customElement('sticky-element')
-export class StickyElement extends PolymerElement {
-  static get template() {
-    return html`
-      <style>
-        :host {
-          display: block;
-        }
-
+export class StickyElement extends ThemedElement {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         #content::before {
           position: absolute;
           right: 0;
@@ -43,29 +41,21 @@ export class StickyElement extends PolymerElement {
             margin-top: 64px;
           }
         }
-      </style>
-
-      <div id="trigger"></div>
-      <div id="content">
-        <slot></slot>
-      </div>
-    `;
+      `,
+    ];
   }
 
   @query('#content')
   content!: HTMLDivElement;
+
   @query('#trigger')
   trigger!: HTMLDivElement;
 
   @property({ type: Boolean })
   private waiting = false;
+
   @property({ type: Number })
   private endScrollHandle: number | undefined;
-
-  constructor() {
-    super();
-    this.onScroll = this.onScroll.bind(this);
-  }
 
   override connectedCallback() {
     super.connectedCallback();
@@ -75,10 +65,19 @@ export class StickyElement extends PolymerElement {
   override disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('scroll', this.onScroll);
-    this.content.classList.remove('sticked');
+    this.content?.classList.remove('sticked');
   }
 
-  private onScroll() {
+  override render() {
+    return html`
+      <div id="trigger" data-testid="trigger"></div>
+      <div id="content" data-testid="content">
+        <slot></slot>
+      </div>
+    `;
+  }
+
+  private onScroll = () => {
     if (this.waiting) {
       return;
     }
@@ -94,7 +93,7 @@ export class StickyElement extends PolymerElement {
     this.endScrollHandle = window.setTimeout(() => {
       this.toggleSticky();
     }, 200);
-  }
+  };
 
   private toggleSticky() {
     const trigger = this.trigger;
@@ -130,5 +129,11 @@ export class StickyElement extends PolymerElement {
         }),
       );
     }
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'sticky-element': StickyElement;
   }
 }

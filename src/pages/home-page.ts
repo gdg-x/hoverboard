@@ -11,7 +11,7 @@ import '../components/about-organizer-block';
 import '../elements/featured-videos';
 import '../elements/footer-block';
 import '../components/fork-me-block';
-import '../elements/gallery-block';
+import '../components/gallery-block';
 import '../elements/latest-posts-block';
 import '../elements/map-block';
 import '../elements/partners-block';
