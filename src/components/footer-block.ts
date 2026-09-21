@@ -34,9 +34,6 @@ export class FooterBlock extends ThemedElement {
           --md-fab-container-shape: 50%;
           --md-fab-icon-color: var(--footer-text-color);
           pointer-events: all;
-          box-shadow:
-            0 0 8px 0 rgba(0, 0, 0, 0.12),
-            0 8px 8px 0 rgba(0, 0, 0, 0.24);
         }
 
         .fab {
