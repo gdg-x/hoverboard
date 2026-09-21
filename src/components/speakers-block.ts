@@ -1,10 +1,10 @@
-import { Initialized, Success } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
-import '@material/web/button/text-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
+import '@material/web/button/outlined-button.js';
 import '@power-elements/lazy-image';
-import '../components/text-truncate';
+import { Initialized, Success } from '@abraham/remotedata';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import './hoverboard-icon';
+import './text-truncate';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -13,18 +13,14 @@ import { fetchSpeakers } from '../store/speakers/actions';
 import { initialSpeakersState } from '../store/speakers/state';
 import { randomOrder } from '../utils/arrays';
 import { speakersBlock } from '../utils/data';
-import '../utils/icons';
-import './shared-styles';
+import { ThemedElement } from './themed-element';
 
 @customElement('speakers-block')
-export class SpeakersBlock extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
-        :host {
-          display: block;
-        }
-
+export class SpeakersBlock extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         .speakers-wrapper {
           margin: 40px 0 32px;
           display: grid;
@@ -160,70 +156,12 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
             display: block;
           }
         }
-      </style>
-
-      <div class="container">
-        <h1 class="container-title">[[speakersBlock.title]]</h1>
-
-        <div class="speakers-wrapper">
-          <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
-            <a class="speaker" href$="[[speakerUrl(speaker.id)]]">
-              <div relative>
-                <lazy-image
-                  class="photo"
-                  src="[[speaker.photoUrl]]"
-                  alt="[[speaker.name]]"
-                ></lazy-image>
-                <div class="badges" layout horizontal>
-                  <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                    <a
-                      class$="badge [[badge.name]]-b"
-                      href$="[[badge.link]]"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title$="[[badge.description]]"
-                      layout
-                      horizontal
-                      center-center
-                    >
-                      <iron-icon icon="hoverboard:[[badge.name]]" class="badge-icon"></iron-icon>
-                    </a>
-                  </template>
-                </div>
-              </div>
-
-              <lazy-image
-                class="company-logo"
-                src="[[speaker.companyLogoUrl]]"
-                alt="[[speaker.company]]"
-              ></lazy-image>
-
-              <div class="description">
-                <text-truncate lines="1">
-                  <h3 class="name">[[speaker.name]]</h3>
-                </text-truncate>
-                <text-truncate lines="1">
-                  <div class="origin">[[speaker.country]]</div>
-                </text-truncate>
-              </div>
-            </a>
-          </template>
-        </div>
-
-        <a href="[[speakersBlock.callToAction.link]]">
-          <md-outlined-button class="cta-button animated icon-right">
-            <span>[[speakersBlock.callToAction.label]]</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-          </md-outlined-button>
-        </a>
-      </div>
-    `;
+      `,
+    ];
   }
 
   @property({ type: Object })
   speakers = initialSpeakersState;
-
-  private speakersBlock = speakersBlock;
 
   override connectedCallback() {
     super.connectedCallback();
@@ -234,23 +172,94 @@ export class SpeakersBlock extends ReduxMixin(PolymerElement) {
   }
 
   override stateChanged(state: RootState) {
-    super.stateChanged(state);
     this.speakers = state.speakers;
   }
 
-  @computed('speakers')
+  override render() {
+    return html`
+      <div class="container">
+        <h1 class="container-title">${speakersBlock.title}</h1>
+
+        <div class="speakers-wrapper">
+          ${this.featuredSpeakers.map(
+            (speaker) => html`
+              <a class="speaker" href="${this.speakerUrl(speaker.id)}">
+                <div relative>
+                  <lazy-image
+                    class="photo"
+                    src="${speaker.photoUrl}"
+                    alt="${speaker.name}"
+                  ></lazy-image>
+                  <div class="badges" layout horizontal>
+                    ${(speaker.badges ?? []).map(
+                      (badge) => html`
+                        <a
+                          class="badge ${badge.name}-b"
+                          href="${badge.link}"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="${badge.description}"
+                          layout
+                          horizontal
+                          center-center
+                        >
+                          <hoverboard-icon
+                            name="${badge.name}"
+                            class="badge-icon"
+                          ></hoverboard-icon>
+                        </a>
+                      `,
+                    )}
+                  </div>
+                </div>
+
+                <lazy-image
+                  class="company-logo"
+                  src="${speaker.companyLogoUrl}"
+                  alt="${speaker.company}"
+                ></lazy-image>
+
+                <div class="description">
+                  <text-truncate lines="1">
+                    <h3 class="name">${speaker.name}</h3>
+                  </text-truncate>
+                  <text-truncate lines="1">
+                    <div class="origin">${speaker.country}</div>
+                  </text-truncate>
+                </div>
+              </a>
+            `,
+          )}
+        </div>
+
+        <a href="${speakersBlock.callToAction.link}">
+          <md-outlined-button class="cta-button animated icon-right">
+            <span>${speakersBlock.callToAction.label}</span>
+            <hoverboard-icon name="arrow-right-circle"></hoverboard-icon>
+          </md-outlined-button>
+        </a>
+      </div>
+    `;
+  }
+
   get featuredSpeakers(): Speaker[] {
     if (this.speakers instanceof Success) {
       const { data } = this.speakers;
       const filteredSpeakers = data.filter((speaker) => speaker.featured);
       const randomSpeakers = randomOrder(filteredSpeakers.length ? filteredSpeakers : data);
       return randomSpeakers.slice(0, 4);
-    } else {
-      return [];
     }
+
+    return [];
   }
 
-  speakerUrl(id: string) {
+  private speakerUrl(id: string) {
     return router.urlForName('speaker-page', { id });
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'speakers-block': SpeakersBlock;
   }
 }

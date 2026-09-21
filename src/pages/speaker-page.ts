@@ -7,7 +7,7 @@ import '@power-elements/lazy-image';
 import { RouterLocation } from '@vaadin/router';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../elements/content-loader';
+import '../components/content-loader';
 import '../elements/previous-speakers-block';
 import '../elements/shared-styles';
 import { SpeakerWithTags } from '../models/speaker';
