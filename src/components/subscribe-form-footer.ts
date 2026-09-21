@@ -29,6 +29,10 @@ export class SubscribeFormFooter extends ReduxMixin(ThemedElement) {
           width: 100%;
         }
 
+        .form-content {
+          gap: 16px;
+        }
+
         hoverboard-icon {
           margin-bottom: 5px;
         }

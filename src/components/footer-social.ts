@@ -100,6 +100,8 @@ export class FooterSocial extends ThemedElement {
         }
 
         .social-networks {
+          display: flex;
+          align-items: center;
           margin-bottom: -10px;
         }
 
