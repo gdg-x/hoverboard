@@ -6,7 +6,8 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { router } from '../router';
 import { SpeakerWithTags } from '../models/speaker';
-import { SpeakersBlock } from './speakers-block';
+import type { SpeakersBlock } from './speakers-block';
+import './speakers-block';
 
 jest.mock('../router', () => ({
   router: { urlForName: jest.fn() },

@@ -9,7 +9,7 @@ import { ReduxMixin } from '../store/mixin';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState } from '../store/schedule/state';
 import { contentLoaders, mySchedule } from '../utils/data';
-import './content-loader';
+import '../components/content-loader';
 import './shared-styles';
 
 @customElement('header-bottom-toolbar')
