@@ -1,6 +1,6 @@
-import { customElement, property } from '@polymer/decorators';
-import '@polymer/paper-icon-button';
-import { html, PolymerElement } from '@polymer/polymer';
+import '@material/web/iconbutton/icon-button.js';
+import { css, html, nothing } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { share } from '../utils/share';
 import {
   emailUs,
@@ -11,12 +11,15 @@ import {
   organizer,
   socialNetwork,
 } from '../utils/data';
+import { ThemedElement } from './themed-element';
+import './hoverboard-icon';
 
 @customElement('footer-social')
-export class FooterSocial extends PolymerElement {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
+export class FooterSocial extends ThemedElement {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           padding-left: 4px;
           margin: 0 20px 0 20px;
@@ -147,65 +150,8 @@ export class FooterSocial extends PolymerElement {
             padding-top: 17px;
           }
         }
-      </style>
-
-      <div class="social-group share-block">
-        <div class="title">[[resources.share]]</div>
-        <div class="nav-inline">
-          <div class="share">
-            <paper-icon-button
-              class="share-facebook"
-              icon="hoverboard:facebook"
-              share="facebook"
-              on-click="share"
-            >
-            </paper-icon-button>
-          </div>
-          <div class="share">
-            <paper-icon-button
-              class="share-twitter"
-              icon="hoverboard:twitter"
-              share="twitter"
-              on-click="share"
-            >
-            </paper-icon-button>
-          </div>
-        </div>
-      </div>
-
-      <div class="social-group blog">
-        <div class="title">
-          [[followOur]]
-          <template is="dom-if" if="[[blogNewTab]]">
-            <a href="[[organizer.blog]]" target="_blank" rel="noopener noreferrer">
-              [[footer.blog]]
-            </a>
-          </template>
-          <template is="dom-if" if="[[!blogNewTab]]">
-            <a href="[[organizer.blog]]"> [[footer.blog]] </a>
-          </template>
-        </div>
-      </div>
-
-      <div class="social-group social-networks">
-        <div class="title">[[followUs]]</div>
-        <ul class="nav-inline">
-          <template is="dom-repeat" items="[[socialNetwork.follow]]" as="socFollow">
-            <li>
-              <a href="[[socFollow.url]]" target="_blank" rel="noopener noreferrer">
-                <paper-icon-button icon="hoverboard:[[socFollow.name]]"></paper-icon-button>
-              </a>
-            </li>
-          </template>
-        </ul>
-      </div>
-
-      <div class="social-group email">
-        <div class="title">
-          <a aria-label="[[emailUs]]" href="mailto:[[mailto]]">[[emailUs]]</a>
-        </div>
-      </div>
-    `;
+      `,
+    ];
   }
 
   @property({ type: Object })
@@ -225,7 +171,81 @@ export class FooterSocial extends PolymerElement {
   @property({ type: Boolean })
   private blogNewTab = organizer.blog.startsWith('http');
 
-  share(e: PointerEvent) {
-    return share(e);
+  override render() {
+    return html`
+      <div class="social-group share-block">
+        <!-- No label text: matches legacy behavior where the "share" resource key never
+             existed, leaving this title empty. -->
+        <div class="title"></div>
+        <div class="nav-inline">
+          <div class="share">
+            <md-icon-button
+              class="share-facebook"
+              aria-label="Share on Facebook"
+              share="facebook"
+              @click="${this.share}"
+            >
+              <hoverboard-icon name="facebook"></hoverboard-icon>
+            </md-icon-button>
+          </div>
+          <div class="share">
+            <md-icon-button
+              class="share-twitter"
+              aria-label="Share on Twitter"
+              share="twitter"
+              @click="${this.share}"
+            >
+              <hoverboard-icon name="twitter"></hoverboard-icon>
+            </md-icon-button>
+          </div>
+        </div>
+      </div>
+
+      <div class="social-group blog">
+        <div class="title">
+          ${this.followOur}
+          <a
+            href="${this.organizer.blog}"
+            target="${this.blogNewTab ? '_blank' : nothing}"
+            rel="${this.blogNewTab ? 'noopener noreferrer' : nothing}"
+          >
+            ${this.footer.blog}
+          </a>
+        </div>
+      </div>
+
+      <div class="social-group social-networks">
+        <div class="title">${this.followUs}</div>
+        <ul class="nav-inline">
+          ${this.socialNetwork.follow.map(
+            (socFollow) => html`
+              <li>
+                <a href="${socFollow.url}" target="_blank" rel="noopener noreferrer">
+                  <md-icon-button aria-label="${socFollow.name}">
+                    <hoverboard-icon name="${socFollow.name}"></hoverboard-icon>
+                  </md-icon-button>
+                </a>
+              </li>
+            `,
+          )}
+        </ul>
+      </div>
+
+      <div class="social-group email">
+        <div class="title">
+          <a aria-label="${this.emailUs}" href="mailto:${this.mailto}">${this.emailUs}</a>
+        </div>
+      </div>
+    `;
+  }
+
+  private share(e: PointerEvent) {
+    share(e);
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'footer-social': FooterSocial;
   }
 }

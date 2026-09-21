@@ -5,7 +5,7 @@ import { RouterLocation } from '@vaadin/router';
 import '../components/hero/hero-block';
 import '../components/markdown/long-markdown';
 import '../elements/footer-block';
-import '../elements/posts-list';
+import '../components/posts-list';
 import '../elements/shared-styles';
 import { Post } from '../models/post';
 import { router } from '../router';

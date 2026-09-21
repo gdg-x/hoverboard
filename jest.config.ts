@@ -11,6 +11,8 @@ const ES_MODULE_DEPENDENCIES = [
   '@material',
   'firebase',
   'lit',
+  'marked',
+  'marked-gfm-heading-id',
   'pwa-helpers',
 ].join('|');
 

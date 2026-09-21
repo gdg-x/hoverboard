@@ -5,7 +5,7 @@ import '../utils/icons';
 import { scrollToTop } from '../utils/scrolling';
 import '../components/footer-nav';
 import './footer-rel';
-import './footer-social';
+import '../components/footer-social';
 
 @customElement('footer-block')
 export class FooterBlock extends PolymerElement {
