@@ -8,7 +8,7 @@ import '../components/content-loader';
 import '../elements/filter-menu';
 import '../elements/header-bottom-toolbar';
 import '../elements/shared-styles';
-import '../elements/sticky-element';
+import '../components/sticky-element';
 import { Filter } from '../models/filter';
 import { FilterGroup } from '../models/filter-group';
 import { RootState, store } from '../store';

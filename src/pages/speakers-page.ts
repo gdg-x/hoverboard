@@ -9,7 +9,7 @@ import '../components/hero/simple-hero';
 import '../components/text-truncate';
 import '../components/content-loader';
 import '../elements/filter-menu';
-import '../elements/previous-speakers-block';
+import '../components/previous-speakers-block';
 import '../elements/shared-styles';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';

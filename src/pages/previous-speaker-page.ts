@@ -8,7 +8,7 @@ import { RouterLocation } from '@vaadin/router';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
 import '../components/content-loader';
-import '../elements/previous-speakers-block';
+import '../components/previous-speakers-block';
 import '../elements/shared-styles';
 import { PreviousSessionWithYear } from '../models/previous-session';
 import { PreviousSpeaker } from '../models/previous-speaker';
