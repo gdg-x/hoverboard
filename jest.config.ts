@@ -7,6 +7,7 @@ const ES_MODULE_DEPENDENCIES = [
   '@firebase/firestore',
   '@firebase/messaging',
   '@firebase/util',
+  '@justinribeiro/lite-youtube',
   '@lit',
   '@material',
   'firebase',

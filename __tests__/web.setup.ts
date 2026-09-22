@@ -1,8 +1,45 @@
 import { jest } from '@jest/globals';
 import '@testing-library/jest-dom/jest-globals';
+import { ReadableStream } from 'node:stream/web';
+import { TextDecoder, TextEncoder } from 'node:util';
 
 jest.mock('firebase/messaging');
 jest.mock('../src/firebase');
+
+// JSDOM does not provide these Node/Web globals used by firebase/auth's
+// dependency chain (undici).
+Object.defineProperty(globalThis, 'TextEncoder', {
+  writable: true,
+  value: TextEncoder,
+});
+
+Object.defineProperty(globalThis, 'TextDecoder', {
+  writable: true,
+  value: TextDecoder,
+});
+
+Object.defineProperty(globalThis, 'ReadableStream', {
+  writable: true,
+  value: ReadableStream,
+});
+
+// JSDOM does not implement IntersectionObserver, used by @justinribeiro/lite-youtube
+// (rendered inside video-dialog).
+class MockIntersectionObserver {
+  observe = jest.fn();
+  unobserve = jest.fn();
+  disconnect = jest.fn();
+}
+
+Object.defineProperty(window, 'IntersectionObserver', {
+  writable: true,
+  value: MockIntersectionObserver,
+});
+
+Object.defineProperty(globalThis, 'IntersectionObserver', {
+  writable: true,
+  value: MockIntersectionObserver,
+});
 
 // @material/web uses window.matchMedia which is not available in JSDOM.
 // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
@@ -64,4 +101,21 @@ Object.defineProperty(Element.prototype, 'attachInternals', {
 Object.defineProperty(HTMLElement.prototype, 'attachInternals', {
   writable: true,
   value: attachInternals,
+});
+
+// JSDOM does not implement the <dialog> element's showModal/close, used by
+// hoverboard-dialog.
+Object.defineProperty(HTMLDialogElement.prototype, 'showModal', {
+  writable: true,
+  value: jest.fn(function (this: HTMLDialogElement) {
+    this.setAttribute('open', '');
+  }),
+});
+
+Object.defineProperty(HTMLDialogElement.prototype, 'close', {
+  writable: true,
+  value: jest.fn(function (this: HTMLDialogElement) {
+    this.removeAttribute('open');
+    this.dispatchEvent(new Event('close'));
+  }),
 });
