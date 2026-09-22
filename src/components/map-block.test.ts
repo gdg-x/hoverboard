@@ -1,15 +1,9 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { location, mapBlock } from '../utils/data';
 import { initialUiState } from '../store/ui/state';
 import type { MapBlock } from './map-block';
-
-jest.mock('@polymer/google-map', () => ({}));
-jest.mock('../utils/config', () => ({
-  CONFIG: { GOOGLE_MAPS_API_KEY: 'google-maps-api-key' },
-  getConfig: jest.fn(() => 'test-api-key'),
-}));
 
 import './map-block';
 
@@ -38,7 +32,7 @@ describe('map-block', () => {
     } as never);
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('google-map')).toBeNull();
+    expect(shadowRoot.querySelector('gmp-map')).toBeNull();
   });
 
   it('renders the google map when viewport is tablet plus', async () => {
@@ -48,7 +42,7 @@ describe('map-block', () => {
     } as never);
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('google-map')).toBeInTheDocument();
-    expect(shadowRoot.querySelector('google-map-marker')).toHaveAttribute('title', location.name);
+    expect(shadowRoot.querySelector('gmp-map')).toBeInTheDocument();
+    expect(shadowRoot.querySelector('gmp-advanced-marker')).toHaveAttribute('title', location.name);
   });
 });

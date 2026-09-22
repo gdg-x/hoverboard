@@ -16,11 +16,6 @@ jest.mock('../router', () => ({
 jest.mock('../store/blog/actions', () => ({
   fetchBlogPosts: jest.fn(),
 }));
-jest.mock('@polymer/google-map', () => ({}));
-jest.mock('../utils/config', () => ({
-  CONFIG: { GOOGLE_MAPS_API_KEY: 'google-maps-api-key' },
-  getConfig: jest.fn(() => 'test-api-key'),
-}));
 jest.mock('../utils/scrolling', () => ({
   scrollToTop: jest.fn(),
   scrollToElement: jest.fn(),
