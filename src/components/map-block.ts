@@ -1,10 +1,8 @@
-import '@polymer/google-map';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { initialUiState } from '../store/ui/state';
-import { CONFIG, getConfig } from '../utils/config';
 import { location, mapBlock } from '../utils/data';
 import './hoverboard-icon';
 import { ThemedElement } from './themed-element';
@@ -44,7 +42,7 @@ export class MapBlock extends ReduxMixin(ThemedElement) {
             margin: 64px auto 72px;
           }
 
-          google-map {
+          gmp-map {
             display: block;
             height: 640px;
           }
@@ -67,7 +65,8 @@ export class MapBlock extends ReduxMixin(ThemedElement) {
 
   private location = location;
   private mapBlock = mapBlock;
-  private googleMapApiKey = getConfig(CONFIG.GOOGLE_MAPS_API_KEY);
+  private mapCenter = `${location.mapCenter.latitude},${location.mapCenter.longitude}`;
+  private markerPosition = `${location.pointer.latitude},${location.pointer.longitude}`;
 
   @property({ type: Object })
   private viewport = initialUiState.viewport;
@@ -106,22 +105,18 @@ export class MapBlock extends ReduxMixin(ThemedElement) {
       ${
         this.viewport.isTabletPlus
           ? html`
-              <google-map
+              <gmp-map
                 id="map"
-                latitude="${this.location.mapCenter.latitude}"
-                longitude="${this.location.mapCenter.longitude}"
-                api-key="${this.googleMapApiKey}"
+                center="${this.mapCenter}"
                 zoom="${this.location.pointer.zoom}"
                 disable-default-ui
                 draggable="false"
               >
-                <google-map-marker
-                  latitude="${this.location.pointer.latitude}"
-                  longitude="${this.location.pointer.longitude}"
+                <gmp-advanced-marker
+                  position="${this.markerPosition}"
                   title="${this.location.name}"
-                  icon="images/map-marker.svg"
-                ></google-map-marker>
-              </google-map>
+                ></gmp-advanced-marker>
+              </gmp-map>
             `
           : ''
       }
