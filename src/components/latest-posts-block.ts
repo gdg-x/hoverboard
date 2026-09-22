@@ -1,9 +1,8 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
 import '@material/web/button/text-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import '../components/markdown/short-markdown';
 import '../components/text-truncate';
 import { router } from '../router';
@@ -13,18 +12,15 @@ import { BlogState, initialBlogState } from '../store/blog/state';
 import { ReduxMixin } from '../store/mixin';
 import { latestPostsBlock } from '../utils/data';
 import { getDate } from '../utils/dates';
-import '../utils/icons';
-import './shared-styles';
+import './hoverboard-icon';
+import { ThemedElement } from './themed-element';
 
 @customElement('latest-posts-block')
-export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
-        :host {
-          display: block;
-        }
-
+export class LatestPostsBlock extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         .posts-wrapper {
           display: grid;
           grid-template-columns: 1fr;
@@ -86,43 +82,8 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
             display: flex;
           }
         }
-      </style>
-
-      <div class="container">
-        <h1 class="container-title">[[latestPostsBlock.title]]</h1>
-
-        <div class="posts-wrapper">
-          <template is="dom-repeat" items="[[latestPosts]]" as="post">
-            <a href$="[[postUrl(post.id)]]" class="post card" flex layout vertical>
-              <lazy-image
-                class="image"
-                src="[[post.image]]"
-                alt="[[post.title]]"
-                style$="background-color: [[post.backgroundColor]];"
-              ></lazy-image>
-              <div class="details" layout vertical justified flex-auto>
-                <div>
-                  <text-truncate lines="2">
-                    <h3 class="title">[[post.title]]</h3>
-                  </text-truncate>
-                  <text-truncate lines="3">
-                    <short-markdown class="description" content="[[post.brief]]"></short-markdown>
-                  </text-truncate>
-                </div>
-                <div class="date">[[getDate(post.published)]]</div>
-              </div>
-            </a>
-          </template>
-        </div>
-
-        <a href="[[latestPostsBlock.callToAction.link]]">
-          <md-text-button class="cta-button animated icon-right">
-            <span>[[latestPostsBlock.callToAction.label]]</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-          </md-text-button>
-        </a>
-      </div>
-    `;
+      `,
+    ];
   }
 
   private latestPostsBlock = latestPostsBlock;
@@ -141,8 +102,7 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
-  @computed('posts')
-  get latestPosts() {
+  private get latestPosts() {
     if (this.posts instanceof Success) {
       return this.posts.data.slice(0, 4);
     } else {
@@ -150,11 +110,58 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
-  postUrl(id: string) {
+  private postUrl(id: string) {
     return router.urlForName('post-page', { id });
   }
 
-  getDate(date: Date) {
+  private getDate(date: string | Date) {
     return getDate(date);
+  }
+
+  override render() {
+    return html`
+      <div class="container">
+        <h1 class="container-title">${this.latestPostsBlock.title}</h1>
+
+        <div class="posts-wrapper">
+          ${this.latestPosts.map(
+            (post) => html`
+              <a href="${this.postUrl(post.id)}" class="post card" flex layout vertical>
+                <lazy-image
+                  class="image"
+                  src="${post.image}"
+                  alt="${post.title}"
+                  style="background-color: ${post.backgroundColor};"
+                ></lazy-image>
+                <div class="details" layout vertical justified flex-auto>
+                  <div>
+                    <text-truncate lines="2">
+                      <h3 class="title">${post.title}</h3>
+                    </text-truncate>
+                    <text-truncate lines="3">
+                      <short-markdown class="description" content="${post.brief}"></short-markdown>
+                    </text-truncate>
+                  </div>
+                  <div class="date">${this.getDate(post.published)}</div>
+                </div>
+              </a>
+            `,
+          )}
+        </div>
+
+        <a href="${this.latestPostsBlock.callToAction.link}">
+          <md-text-button class="cta-button animated icon-right" trailing-icon>
+            <span>${this.latestPostsBlock.callToAction.label}</span>
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+          </md-text-button>
+        </a>
+      </div>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'latest-posts-block': LatestPostsBlock;
   }
 }
