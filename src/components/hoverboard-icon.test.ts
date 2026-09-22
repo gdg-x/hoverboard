@@ -17,16 +17,23 @@ describe('hoverboard-icon', () => {
     expect(svg?.querySelector('path')).toBeInTheDocument();
   });
 
-  it.each(['linkedin', 'gde', 'gdg', 'google', 'website', 'checked', 'up'])(
-    'renders the %s social icon',
-    async (name) => {
-      const { shadowRoot } = await fixture(
-        html`<hoverboard-icon name="${name}"></hoverboard-icon>`,
-      );
+  it.each([
+    'linkedin',
+    'gde',
+    'gdg',
+    'google',
+    'website',
+    'checked',
+    'up',
+    'bookmark-check',
+    'bookmark-plus',
+    'insert-comment',
+    'add-circle-outline',
+  ])('renders the %s social icon', async (name) => {
+    const { shadowRoot } = await fixture(html`<hoverboard-icon name="${name}"></hoverboard-icon>`);
 
-      expect(shadowRoot.querySelector('svg')).toBeInTheDocument();
-    },
-  );
+    expect(shadowRoot.querySelector('svg')).toBeInTheDocument();
+  });
 
   it('renders nothing for an unknown icon name', async () => {
     const element = document.createElement('hoverboard-icon') as HoverboardIcon;
