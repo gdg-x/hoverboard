@@ -72,7 +72,7 @@ const ROUTES: Route[] = [
         path: '/my-schedule',
         component: 'my-schedule',
         action: async () => {
-          await import('./elements/my-schedule.js');
+          await import('./components/my-schedule.js');
         },
       },
       {
@@ -83,7 +83,7 @@ const ROUTES: Route[] = [
           if (searchParams.get('sessionId')) {
             commands.redirect(`/sessions/${searchParams.get('sessionId')}`);
           } else {
-            await import('./elements/schedule-day.js');
+            await import('./components/schedule-day.js');
           }
         },
       },
@@ -149,21 +149,21 @@ const ROUTES: Route[] = [
     path: '/faq',
     component: 'faq-page',
     action: async () => {
-      await import('./pages/faq-page.js');
+      await import('./components/faq-page.js');
     },
   },
   {
     path: '/coc',
     component: 'coc-page',
     action: async () => {
-      await import('./pages/coc-page.js');
+      await import('./components/coc-page.js');
     },
   },
   {
     path: '(.*)',
     component: 'not-found-page',
     action: async () => {
-      await import('./pages/not-found-page.js');
+      await import('./components/not-found-page.js');
     },
   },
 ];

@@ -1,23 +1,24 @@
-import { customElement, property, query } from '@polymer/decorators';
-import '@polymer/iron-icon';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
+import { css, html, nothing } from 'lit';
+import { customElement, query, state } from 'lit/decorators.js';
 import '../components/about-block';
+import '../components/about-organizer-block';
+import '../components/featured-videos';
+import '../components/footer-block';
+import '../components/fork-me-block';
+import '../components/gallery-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
-import '../elements/about-organizer-block';
-import '../elements/featured-videos';
-import '../elements/footer-block';
-import '../components/fork-me-block';
-import '../elements/gallery-block';
-import '../elements/latest-posts-block';
-import '../elements/map-block';
-import '../elements/partners-block';
-import '../elements/speakers-block';
-import '../elements/subscribe-block';
-import '../elements/tickets-block';
+import '../components/hoverboard-icon';
+import '../components/latest-posts-block';
+import '../components/map-block';
+import '../components/partners-block';
+import '../components/speakers-block';
+import '../components/subscribe-block';
+import { ThemedElement } from '../components/themed-element';
+import '../components/tickets-block';
 import { firebaseApp } from '../firebase';
 import { store } from '../store';
 import { ReduxMixin } from '../store/mixin';
@@ -34,15 +35,15 @@ import {
   title,
   viewHighlights,
 } from '../utils/data';
-import '../utils/icons';
 import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
 
 @customElement('home-page')
-export class HomePage extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
+export class HomePage extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           display: block;
           height: 100%;
@@ -88,8 +89,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           --md-outlined-button-outline-color: #fff;
         }
 
-        .action-buttons iron-icon {
-          --iron-icon-fill-color: currentColor;
+        .action-buttons hoverboard-icon {
           margin-right: 8px;
         }
 
@@ -160,35 +160,91 @@ export class HomePage extends ReduxMixin(PolymerElement) {
             line-height: 1.1;
           }
         }
-      </style>
+      `,
+    ];
+  }
 
+  private city = location.city;
+  private siteTitle = title;
+  private dates = dates;
+  private viewHighlights = viewHighlights;
+  private buyTicket = buyTicket;
+  private heroSettings = heroSettings.home;
+  private aboutBlock = aboutBlock;
+
+  @query('#hero')
+  hero!: HeroBlock;
+  @query('#tickets-block')
+  private ticketsBlock!: HTMLElement;
+
+  @state()
+  private showForkMeBlock: boolean = false;
+
+  private playVideo() {
+    openVideoDialog({
+      title: this.aboutBlock.callToAction.howItWas.label,
+      youtubeId: this.aboutBlock.callToAction.howItWas.youtubeId,
+    });
+  }
+
+  private scrollToTickets() {
+    const element = this.ticketsBlock;
+    if (element) {
+      scrollToElement(element);
+    } else {
+      store.dispatch(queueSnackbar('Error scrolling to section.'));
+    }
+  }
+
+  private scrollNextBlock() {
+    scrollToElement(this.hero, POSITION.BOTTOM);
+  }
+
+  private shouldShowForkMeBlock(): boolean {
+    const showForkMeBlock = firebaseApp.options.appId
+      ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
+      : false;
+    if (showForkMeBlock) {
+      import('../components/fork-me-block');
+    }
+    return showForkMeBlock;
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    updateMetadata(title, description, INCLUDE_SITE_TITLE.NO);
+    this.showForkMeBlock = this.shouldShowForkMeBlock();
+  }
+
+  override render() {
+    return html`
       <hero-block
         id="hero"
-        background-image="[[heroSettings.background.image]]"
-        background-color="[[heroSettings.background.color]]"
-        font-color="[[heroSettings.fontColor]]"
+        background-image="${this.heroSettings.background.image}"
+        background-color="${this.heroSettings.background.color}"
+        font-color="${this.heroSettings.fontColor}"
         hide-logo
       >
         <div class="home-content" layout vertical center>
-          <lazy-image class="hero-logo" src="/images/logo.svg" alt="[[siteTitle]]"></lazy-image>
+          <lazy-image class="hero-logo" src="/images/logo.svg" alt="${this.siteTitle}"></lazy-image>
 
           <div class="info-items">
-            <div class="info-item">[[city]]. [[dates]]</div>
-            <div class="info-item">[[heroSettings.description]]</div>
+            <div class="info-item">${this.city}. ${this.dates}</div>
+            <div class="info-item">${this.heroSettings.description}</div>
           </div>
 
           <div class="action-buttons" layout horizontal center-justified wrap>
-            <md-outlined-button class="watch-video" on-click="playVideo">
-              <iron-icon icon="hoverboard:movie" slot="icon"></iron-icon>
-              [[viewHighlights]]
+            <md-outlined-button class="watch-video" @click="${this.playVideo}">
+              <hoverboard-icon name="movie" slot="icon"></hoverboard-icon>
+              ${this.viewHighlights}
             </md-outlined-button>
-            <md-filled-button on-click="scrollToTickets">
-              <iron-icon icon="hoverboard:ticket" slot="icon"></iron-icon>
-              [[buyTicket]]
+            <md-filled-button @click="${this.scrollToTickets}">
+              <hoverboard-icon name="ticket" slot="icon"></hoverboard-icon>
+              ${this.buyTicket}
             </md-filled-button>
           </div>
 
-          <div class="scroll-down" on-click="scrollNextBlock">
+          <div class="scroll-down" @click="${this.scrollNextBlock}">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               version="1.1"
@@ -252,9 +308,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
         </div>
       </hero-block>
-      <template is="dom-if" if="{{showForkMeBlock}}">
-        <fork-me-block></fork-me-block>
-      </template>
+      ${this.showForkMeBlock ? html`<fork-me-block></fork-me-block>` : nothing}
       <about-block></about-block>
       <speakers-block></speakers-block>
       <subscribe-block></subscribe-block>
@@ -268,54 +322,10 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       <footer-block></footer-block>
     `;
   }
+}
 
-  private city = location.city;
-  private siteTitle = title;
-  private dates = dates;
-  private viewHighlights = viewHighlights;
-  private buyTicket = buyTicket;
-  private heroSettings = heroSettings.home;
-  private aboutBlock = aboutBlock;
-
-  @query('#hero')
-  hero!: HeroBlock;
-
-  @property({ type: Boolean })
-  private showForkMeBlock: boolean = false;
-
-  private playVideo() {
-    openVideoDialog({
-      title: this.aboutBlock.callToAction.howItWas.label,
-      youtubeId: this.aboutBlock.callToAction.howItWas.youtubeId,
-    });
-  }
-
-  private scrollToTickets() {
-    const element = this.$['tickets-block'];
-    if (element) {
-      scrollToElement(element);
-    } else {
-      store.dispatch(queueSnackbar('Error scrolling to section.'));
-    }
-  }
-
-  private scrollNextBlock() {
-    scrollToElement(this.hero, POSITION.BOTTOM);
-  }
-
-  private shouldShowForkMeBlock(): boolean {
-    const showForkMeBlock = firebaseApp.options.appId
-      ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
-      : false;
-    if (showForkMeBlock) {
-      import('../components/fork-me-block');
-    }
-    return showForkMeBlock;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    updateMetadata(title, description, INCLUDE_SITE_TITLE.NO);
-    this.showForkMeBlock = this.shouldShowForkMeBlock();
+declare global {
+  interface HTMLElementTagNameMap {
+    'home-page': HomePage;
   }
 }

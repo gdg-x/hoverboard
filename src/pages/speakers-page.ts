@@ -1,16 +1,16 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
-import '@polymer/paper-icon-button';
-import '@polymer/paper-progress';
-import { html, PolymerElement } from '@polymer/polymer';
+import '@material/web/progress/linear-progress.js';
 import '@power-elements/lazy-image';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import '../components/content-loader';
+import '../components/filter-menu';
+import '../components/footer-block';
 import '../components/hero/simple-hero';
+import '../components/hoverboard-icon';
+import '../components/previous-speakers-block';
 import '../components/text-truncate';
-import '../elements/content-loader';
-import '../elements/filter-menu';
-import '../elements/previous-speakers-block';
-import '../elements/shared-styles';
+import { ThemedElement } from '../components/themed-element';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { SpeakerWithTags } from '../models/speaker';
@@ -23,14 +23,14 @@ import { fetchSpeakers } from '../store/speakers/actions';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
 import { initialSpeakersState } from '../store/speakers/state';
 import { contentLoaders, heroSettings } from '../utils/data';
-import '../utils/icons';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('speakers-page')
-export class SpeakersPage extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class SpeakersPage extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           display: block;
           height: 100%;
@@ -103,8 +103,8 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
         }
 
         .badge-icon {
-          --iron-icon-width: 12px;
-          --iron-icon-height: 12px;
+          width: 12px;
+          height: 12px;
           color: #fff;
         }
 
@@ -141,18 +141,16 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
         }
 
         .social-icon {
-          --paper-icon-button: {
-            padding: 6px;
-            width: 32px;
-            height: 32px;
-          }
+          padding: 6px;
+          width: 32px;
+          height: 32px;
           color: var(--secondary-text-color);
         }
 
-        paper-progress {
+        .progress {
           width: 100%;
-          --paper-progress-active-color: var(--default-primary-color);
-          --paper-progress-secondary-color: var(--default-primary-color);
+          --md-linear-progress-active-indicator-color: var(--default-primary-color);
+          --md-linear-progress-track-color: var(--default-primary-color);
         }
 
         @media (min-width: 640px) {
@@ -172,91 +170,8 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
             grid-template-columns: repeat(4, 1fr);
           }
         }
-      </style>
-
-      <simple-hero page="speakers"></simple-hero>
-
-      <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
-
-      <filter-menu
-        filter-groups="[[filterGroups]]"
-        selected-filters="[[selectedFilters]]"
-        results-count="[[speakersToRender.length]]"
-      ></filter-menu>
-
-      <content-loader
-        class="container"
-        card-padding="32px"
-        card-height="400px"
-        avatar-size="128px"
-        avatar-circle="64px"
-        horizontal-position="50%"
-        border-radius="4px"
-        box-shadow="var(--box-shadow)"
-        items-count="[[contentLoaders.speakers.itemsCount]]"
-        hidden$="[[contentLoaderVisibility]]"
-      ></content-loader>
-
-      <div class="container">
-        <template is="dom-repeat" items="[[speakersToRender]]" as="speaker">
-          <a class="speaker card" href$="[[speakerUrl(speaker.id)]]">
-            <div relative>
-              <lazy-image
-                class="photo"
-                src="[[speaker.photoUrl]]"
-                alt="[[speaker.name]]"
-              ></lazy-image>
-              <div class="badges" layout horizontal>
-                <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                  <a
-                    class$="badge [[badge.name]]-b"
-                    href$="[[badge.link]]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title$="[[badge.description]]"
-                    layout
-                    horizontal
-                    center-center
-                  >
-                    <iron-icon icon="hoverboard:[[badge.name]]" class="badge-icon"></iron-icon>
-                  </a>
-                </template>
-              </div>
-            </div>
-
-            <lazy-image
-              class="company-logo"
-              src="[[speaker.companyLogoUrl]]"
-              alt="[[speaker.company]]"
-            ></lazy-image>
-
-            <div class="description">
-              <h2 class="name">[[speaker.name]]</h2>
-              <div class="origin">[[speaker.country]]</div>
-
-              <text-truncate lines="5">
-                <div class="bio">[[speaker.bio]]</div>
-              </text-truncate>
-            </div>
-
-            <div class="contacts">
-              <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-                <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
-                  <paper-icon-button
-                    class="social-icon"
-                    icon="hoverboard:{{social.icon}}"
-                  ></paper-icon-button>
-                </a>
-              </template>
-            </div>
-          </a>
-        </template>
-      </div>
-
-      <previous-speakers-block></previous-speakers-block>
-
-      <footer-block></footer-block>
-    `;
+      `,
+    ];
   }
 
   private heroSettings = heroSettings.speakers;
@@ -266,11 +181,11 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
   speakers = initialSpeakersState;
 
   @property({ type: Array })
-  private filterGroups: FilterGroup[] = [];
+  filterGroups: FilterGroup[] = [];
   @property({ type: Array })
-  private selectedFilters: Filter[] = [];
+  selectedFilters: Filter[] = [];
   @property({ type: Array })
-  private speakersToRender: SpeakerWithTags[] = [];
+  speakersToRender: SpeakerWithTags[] = [];
 
   override connectedCallback() {
     super.connectedCallback();
@@ -282,19 +197,113 @@ export class SpeakersPage extends ReduxMixin(PolymerElement) {
   }
 
   override stateChanged(state: RootState) {
-    super.stateChanged(state);
     this.speakers = state.speakers;
     this.filterGroups = selectFilterGroups(state, [FilterGroupKey.tags]);
     this.selectedFilters = selectFilters(state);
     this.speakersToRender = selectFilteredSpeakers(state);
   }
 
-  @computed('speakers')
-  get contentLoaderVisibility() {
+  private get contentLoaderVisibility() {
     return this.speakers instanceof Success;
   }
 
-  speakerUrl(id: string) {
+  private speakerUrl(id: string) {
     return router.urlForName('speaker-page', { id });
+  }
+
+  override render() {
+    return html`
+      <simple-hero page="speakers"></simple-hero>
+
+      <md-linear-progress
+        class="progress"
+        indeterminate
+        ?hidden=${this.contentLoaderVisibility}
+      ></md-linear-progress>
+
+      <filter-menu
+        .filterGroups=${this.filterGroups}
+        .selectedFilters=${this.selectedFilters}
+        .resultsCount=${this.speakersToRender.length}
+      ></filter-menu>
+
+      <content-loader
+        class="container"
+        card-padding="32px"
+        card-height="400px"
+        avatar-size="128px"
+        avatar-circle="64px"
+        horizontal-position="50%"
+        border-radius="4px"
+        box-shadow="var(--box-shadow)"
+        items-count=${this.contentLoaders.speakers.itemsCount}
+        ?hidden=${this.contentLoaderVisibility}
+      ></content-loader>
+
+      <div class="container">
+        ${this.speakersToRender.map(
+          (speaker) => html`
+            <a class="speaker card" href=${this.speakerUrl(speaker.id)}>
+              <div relative>
+                <lazy-image class="photo" src=${speaker.photoUrl} alt=${speaker.name}></lazy-image>
+                <div class="badges" layout horizontal>
+                  ${speaker.badges?.map(
+                    (badge) => html`
+                      <a
+                        class="badge ${badge.name}-b"
+                        href=${badge.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title=${badge.description}
+                        layout
+                        horizontal
+                        center-center
+                      >
+                        <hoverboard-icon name=${badge.name} class="badge-icon"></hoverboard-icon>
+                      </a>
+                    `,
+                  )}
+                </div>
+              </div>
+
+              <lazy-image
+                class="company-logo"
+                src=${speaker.companyLogoUrl}
+                alt=${speaker.company}
+              ></lazy-image>
+
+              <div class="description">
+                <h2 class="name">${speaker.name}</h2>
+                <div class="origin">${speaker.country}</div>
+
+                <text-truncate lines="5">
+                  <div class="bio">${speaker.bio}</div>
+                </text-truncate>
+              </div>
+
+              <div class="contacts">
+                ${speaker.socials.map(
+                  (social) => html`
+                    <a href=${social.link} target="_blank" rel="noopener noreferrer">
+                      <hoverboard-icon name=${social.icon} class="social-icon"></hoverboard-icon>
+                    </a>
+                  `,
+                )}
+              </div>
+            </a>
+          `,
+        )}
+      </div>
+
+      <previous-speakers-block></previous-speakers-block>
+
+      <footer-block></footer-block>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'speakers-page': SpeakersPage;
   }
 }

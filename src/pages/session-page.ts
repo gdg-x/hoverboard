@@ -1,15 +1,18 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import { computed, customElement, observe, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
-import '@polymer/paper-fab';
-import '@polymer/paper-progress';
-import { html, PolymerElement } from '@polymer/polymer';
+import '@material/web/fab/fab.js';
+import '@material/web/progress/linear-progress.js';
 import '@power-elements/lazy-image';
+import { css, html, nothing } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 import { RouterLocation } from '@vaadin/router';
+import '../components/auth-required';
+import '../components/content-loader';
+import '../components/feedback-block';
+import '../components/footer-block';
 import '../components/hero/simple-hero';
+import '../components/hoverboard-icon';
 import '../components/markdown/short-markdown';
-import '../elements/feedback-block';
-import '../elements/shared-styles';
+import { ThemedElement } from '../components/themed-element';
 import { Session } from '../models/session';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
@@ -24,24 +27,35 @@ import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
 import { ReduxMixin } from '../store/mixin';
 import { fetchSessions } from '../store/sessions/actions';
 import { selectSession } from '../store/sessions/selectors';
-import { initialSessionsState, SessionsState } from '../store/sessions/state';
+import { initialSessionsState } from '../store/sessions/state';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui/actions';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
-import { UserState } from '../store/user/types';
 import { TempAny } from '../temp-any';
 import { disabledSchedule, feedback, schedule, sessionDetails } from '../utils/data';
 import { acceptingFeedback } from '../utils/feedback';
-import '../utils/icons';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
 
+// `Session` (as returned by `selectSession`) does not declare `dateReadable`,
+// `endTime`, `track`, or a resolved `speakers` array — the original template
+// read these fields directly without static type-checking. Keep this
+// augmentation so the template stays fully typed without changing today's
+// (already loosely-typed) output.
+type SessionWithDetails = Omit<Session, 'speakers'> & {
+  dateReadable?: string;
+  endTime?: string;
+  track?: { title?: string };
+  speakers?: Speaker[];
+};
+
 @customElement('session-page')
-export class SessionPage extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class SessionPage extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           margin: 0;
           display: block;
@@ -49,20 +63,6 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           width: 100%;
           background: #fff;
           color: var(--primary-text-color);
-        }
-
-        app-header {
-          background-color: var(--additional-background-color);
-        }
-
-        app-toolbar {
-          padding: 0;
-          height: auto;
-        }
-
-        .close-icon {
-          margin: 24px 24px 24px;
-          cursor: pointer;
         }
 
         .header-content,
@@ -110,10 +110,10 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           user-select: none;
         }
 
-        .action iron-icon {
+        .action hoverboard-icon {
           margin-right: 4px;
-          --iron-icon-width: 18px;
-          --iron-icon-height: 18px;
+          width: 18px;
+          height: 18px;
         }
 
         .additional-sections {
@@ -124,6 +124,7 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           margin-top: 16px;
           display: block;
           color: var(--primary-text-color);
+          cursor: pointer;
         }
 
         .section-photo {
@@ -150,14 +151,6 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
         }
 
         @media (min-width: 812px) {
-          .close-icon {
-            margin: 16px;
-            position: absolute;
-            top: -8px;
-            right: -48px;
-            --iron-icon-fill-color: #fff;
-          }
-
           .header-content,
           .content {
             padding: 24px;
@@ -175,140 +168,18 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
           }
         }
 
-        .section {
-          cursor: pointer;
-        }
-
-        .star-rating {
-          display: inline-block;
-          vertical-align: middle;
-        }
-
         .tags {
           display: flex;
           flex-wrap: wrap;
         }
 
-        paper-progress {
+        .progress {
           width: 100%;
-          --paper-progress-active-color: var(--default-primary-color);
-          --paper-progress-secondary-color: var(--default-primary-color);
+          --md-linear-progress-active-indicator-color: var(--default-primary-color);
+          --md-linear-progress-track-color: var(--default-primary-color);
         }
-      </style>
-
-      <simple-hero page="schedule">
-        <div class="header-content" layout vertical end-justified>
-          <h2 class="name">[[session.title]]</h2>
-          <div class="tags" hidden$="[[!session.tags.length]]">
-            <template is="dom-repeat" items="[[session.tags]]" as="tag">
-              <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
-            </template>
-          </div>
-
-          <div class="float-button" hidden$="[[!contentLoaderVisibility]]">
-            <paper-fab
-              icon="hoverboard:[[featuredSessionIcon]]"
-              hidden$="[[!viewport.isLaptopPlus]]"
-              on-click="toggleFeaturedSession"
-            ></paper-fab>
-          </div>
-        </div>
-      </simple-hero>
-
-      <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
-
-      <content-loader
-        class="container"
-        card-padding="32px"
-        card-height="400px"
-        horizontal-position="50%"
-        border-radius="4px"
-        box-shadow="var(--box-shadow)"
-        items-count="1"
-        hidden$="[[contentLoaderVisibility]]"
-      ></content-loader>
-
-      <div class="container content">
-        <div class="float-button" hidden$="[[!contentLoaderVisibility]]">
-          <paper-fab
-            icon="hoverboard:[[featuredSessionIcon]]"
-            hidden$="[[viewport.isLaptopPlus]]"
-            on-click="toggleFeaturedSession"
-          ></paper-fab>
-        </div>
-        <h3 class="meta-info" hidden$="[[disabledSchedule]]">
-          [[session.dateReadable]], [[session.startTime]] - [[session.endTime]]
-        </h3>
-        <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.track.title]]</h3>
-        <h3 class="meta-info" hidden$="[[!session.complexity]]">
-          [[sessionDetails.contentLevel]]: [[session.complexity]]
-        </h3>
-
-        <short-markdown class="description" content="[[session.description]]"></short-markdown>
-
-        <div class="actions" layout horizontal>
-          <a
-            class="action"
-            href$="[[session.presentation]]"
-            hidden$="[[!session.presentation]]"
-            target="_blank"
-            rel="noopener noreferrer"
-            layout
-            horizontal
-            center
-          >
-            <iron-icon icon="hoverboard:presentation"></iron-icon>
-            <span>[[sessionDetails.viewPresentation]]</span>
-          </a>
-          <div
-            class="action"
-            hidden$="[[!session.videoId]]"
-            on-click="openVideo"
-            layout
-            horizontal
-            center
-          >
-            <iron-icon icon="hoverboard:video"></iron-icon>
-            [[sessionDetails.viewVideo]]
-          </div>
-        </div>
-
-        <div class="additional-sections" hidden$="[[!session.speakers.length]]">
-          <h3>[[sessionDetails.speakers]]</h3>
-          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
-            <a class="section" href$="[[speakerUrl(speaker.id)]]">
-              <div layout horizontal center>
-                <lazy-image
-                  class="section-photo"
-                  src="[[speaker.photoUrl]]"
-                  alt="[[speaker.name]]"
-                ></lazy-image>
-
-                <div class="section-details" flex>
-                  <div class="section-primary-text">[[speaker.name]]</div>
-                  <div class="section-secondary-text">
-                    [[speaker.company]] / [[speaker.country]]
-                  </div>
-                </div>
-              </div>
-            </a>
-          </template>
-        </div>
-
-        <div id="feedback" class="additional-sections">
-          <h3>[[feedback.headline]]</h3>
-
-          <auth-required hidden="[[!acceptingFeedback]]">
-            <slot slot="prompt">[[feedback.leaveFeedback]]</slot>
-            <feedback-block session-id="[[session.id]]"></feedback-block>
-          </auth-required>
-
-          <p hidden="[[acceptingFeedback]]">[[feedback.sessionClosed]]</p>
-        </div>
-      </div>
-
-      <footer-block></footer-block>
-    `;
+      `,
+    ];
   }
 
   private feedback = feedback;
@@ -327,17 +198,16 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   auth = initialAuthState;
 
-  @property({ type: Object })
+  @state()
   private viewport = initialUiState.viewport;
-  @property({ type: Boolean })
+  @state()
   private disabledSchedule: boolean = disabledSchedule;
-  @property({ type: Boolean })
+  @state()
   private contentLoaderVisibility: boolean = false;
-  @property({ type: Boolean })
+  @state()
   private acceptingFeedback: boolean = false;
 
   override stateChanged(state: RootState) {
-    super.stateChanged(state);
     this.sessions = state.sessions;
     this.user = state.user;
     this.auth = state.auth;
@@ -353,28 +223,45 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  @observe('user')
-  private onUser(user: UserState) {
-    if (user instanceof Success && this.featuredSessions instanceof Initialized) {
+  onAfterEnter(location: RouterLocation) {
+    this.sessionId = location.params?.['id']?.toString();
+    this.updateSession();
+  }
+
+  override updated(changed: Map<string, unknown>) {
+    if (changed.has('user') && this.user instanceof Success) {
+      this.onUser();
+    }
+
+    if (changed.has('sessions') || changed.has('sessionId')) {
+      this.updateSession();
+    }
+  }
+
+  private onUser() {
+    if (this.user instanceof Success && this.featuredSessions instanceof Initialized) {
       store.dispatch(fetchUserFeaturedSessions);
     }
   }
 
-  onAfterEnter(location: RouterLocation) {
-    this.sessionId = location.params?.['id']?.toString();
+  private updateSession() {
+    if (this.sessionId && this.sessions instanceof Success) {
+      this.session = selectSession(store.getState(), this.sessionId);
+      this.contentLoaderVisibility = !!this.session;
+
+      if (!this.session) {
+        router.render('/404');
+      } else {
+        this.acceptingFeedback = acceptingFeedback(this.session);
+        const speaker: Speaker = this.session?.speakers?.[0] as TempAny;
+        updateImageMetadata(this.session.title, this.session.description, {
+          image: speaker.photoUrl,
+          imageAlt: speaker.name,
+        });
+      }
+    }
   }
 
-  @observe('session')
-  private onContentLoaderVisibility(session: Session | undefined) {
-    this.contentLoaderVisibility = !!session;
-  }
-
-  @observe('session')
-  private onSession() {
-    this.acceptingFeedback = this.session !== undefined && acceptingFeedback(this.session);
-  }
-
-  @computed('featuredSessions', 'sessionId')
   private get featuredSessionIcon() {
     if (
       this.featuredSessions instanceof Success &&
@@ -384,23 +271,6 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
       return 'bookmark-check';
     } else {
       return 'bookmark-plus';
-    }
-  }
-
-  @observe('sessions', 'sessionId')
-  private onSessionsAndSessionId(sessions: SessionsState, sessionId: string) {
-    if (sessionId && sessions instanceof Success) {
-      this.session = selectSession(store.getState(), sessionId);
-
-      if (!this.session) {
-        router.render('/404');
-      } else {
-        const speaker: Speaker = this.session?.speakers?.[0] as TempAny;
-        updateImageMetadata(this.session.title, this.session.description, {
-          image: speaker.photoUrl,
-          imageAlt: speaker.name,
-        });
-      }
     }
   }
 
@@ -444,10 +314,166 @@ export class SessionPage extends ReduxMixin(PolymerElement) {
   }
 
   private getVariableColor(value: string) {
-    return getVariableColor(this as unknown as PolymerElement, value);
+    return getVariableColor(this, value);
   }
 
   private speakerUrl(id: string) {
     return router.urlForName('speaker-page', { id });
+  }
+
+  override render() {
+    const session = this.session as SessionWithDetails | undefined;
+
+    return html`
+      <simple-hero page="schedule">
+        <div class="header-content" layout vertical end-justified>
+          <h2 class="name">${session?.title ?? ''}</h2>
+          ${
+            session?.tags?.length
+              ? html`
+                  <div class="tags">
+                    ${session.tags.map(
+                      (tag) => html`
+                        <span class="tag" style="color: ${this.getVariableColor(tag)}">${tag}</span>
+                      `,
+                    )}
+                  </div>
+                `
+              : nothing
+          }
+
+          <div class="float-button" ?hidden="${!this.contentLoaderVisibility}">
+            <md-fab
+              ?hidden="${!this.viewport.isLaptopPlus}"
+              aria-label="Toggle featured session"
+              @click="${this.toggleFeaturedSession}"
+            >
+              <hoverboard-icon slot="icon" name="${this.featuredSessionIcon}"></hoverboard-icon>
+            </md-fab>
+          </div>
+        </div>
+      </simple-hero>
+
+      <md-linear-progress
+        class="progress"
+        indeterminate
+        ?hidden="${this.contentLoaderVisibility}"
+      ></md-linear-progress>
+
+      <content-loader
+        class="container"
+        card-padding="32px"
+        card-height="400px"
+        horizontal-position="50%"
+        border-radius="4px"
+        box-shadow="var(--box-shadow)"
+        items-count="1"
+        ?hidden="${this.contentLoaderVisibility}"
+      ></content-loader>
+
+      <div class="container content">
+        <div class="float-button" ?hidden="${!this.contentLoaderVisibility}">
+          <md-fab
+            ?hidden="${this.viewport.isLaptopPlus}"
+            aria-label="Toggle featured session"
+            @click="${this.toggleFeaturedSession}"
+          >
+            <hoverboard-icon slot="icon" name="${this.featuredSessionIcon}"></hoverboard-icon>
+          </md-fab>
+        </div>
+        <h3 class="meta-info" ?hidden="${this.disabledSchedule}">
+          ${session?.dateReadable}, ${session?.startTime} - ${session?.endTime}
+        </h3>
+        <h3 class="meta-info" ?hidden="${this.disabledSchedule}">${session?.track?.title}</h3>
+        <h3 class="meta-info" ?hidden="${!session?.complexity}">
+          ${this.sessionDetails.contentLevel}: ${session?.complexity}
+        </h3>
+
+        <short-markdown
+          class="description"
+          .content="${session?.description ?? ''}"
+        ></short-markdown>
+
+        <div class="actions" layout horizontal>
+          ${
+            session?.presentation
+              ? html`
+                  <a
+                    class="action"
+                    href="${session.presentation}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    layout
+                    horizontal
+                    center
+                  >
+                    <hoverboard-icon name="presentation"></hoverboard-icon>
+                    <span>${this.sessionDetails.viewPresentation}</span>
+                  </a>
+                `
+              : nothing
+          }
+          ${
+            session?.videoId
+              ? html`
+                  <div class="action" @click="${this.openVideo}" layout horizontal center>
+                    <hoverboard-icon name="video"></hoverboard-icon>
+                    ${this.sessionDetails.viewVideo}
+                  </div>
+                `
+              : nothing
+          }
+        </div>
+
+        ${
+          session?.speakers?.length
+            ? html`
+                <div class="additional-sections">
+                  <h3>${this.sessionDetails.speakers}</h3>
+                  ${session.speakers.map(
+                    (speaker) => html`
+                      <a class="section" href="${this.speakerUrl(speaker.id)}">
+                        <div layout horizontal center>
+                          <lazy-image
+                            class="section-photo"
+                            src="${speaker.photoUrl}"
+                            alt="${speaker.name}"
+                          ></lazy-image>
+
+                          <div class="section-details" flex>
+                            <div class="section-primary-text">${speaker.name}</div>
+                            <div class="section-secondary-text">
+                              ${speaker.company} / ${speaker.country}
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    `,
+                  )}
+                </div>
+              `
+            : nothing
+        }
+
+        <div id="feedback" class="additional-sections">
+          <h3>${this.feedback.headline}</h3>
+
+          <auth-required ?hidden="${!this.acceptingFeedback}">
+            <slot slot="prompt">${this.feedback.leaveFeedback}</slot>
+            <feedback-block .sessionId="${session?.id}"></feedback-block>
+          </auth-required>
+
+          <p ?hidden="${this.acceptingFeedback}">${this.feedback.sessionClosed}</p>
+        </div>
+      </div>
+
+      <footer-block></footer-block>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'session-page': SessionPage;
   }
 }

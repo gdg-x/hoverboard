@@ -1,14 +1,15 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/paper-progress';
-import { html, PolymerElement } from '@polymer/polymer';
+import '@material/web/progress/linear-progress.js';
 import '@power-elements/lazy-image';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import '../components/content-loader';
+import '../components/footer-block';
 import '../components/hero/simple-hero';
-import '../components/text-truncate';
-import '../elements/content-loader';
-import '../elements/footer-block';
+import '../components/markdown/short-markdown';
 import '../components/posts-list';
-import '../elements/shared-styles';
+import '../components/text-truncate';
+import { ThemedElement } from '../components/themed-element';
 import { Post } from '../models/post';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -21,14 +22,11 @@ import { getDate } from '../utils/dates';
 import { updateMetadata } from '../utils/metadata';
 
 @customElement('blog-list-page')
-export class BlogListPage extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
-        :host {
-          display: block;
-        }
-
+export class BlogListPage extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         .featured-posts-wrapper {
           grid-template-columns: 1fr;
           display: grid;
@@ -81,10 +79,10 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
           opacity: 0.8;
         }
 
-        paper-progress {
+        .progress {
           width: 100%;
-          --paper-progress-active-color: var(--default-primary-color);
-          --paper-progress-secondary-color: var(--default-primary-color);
+          --md-linear-progress-active-indicator-color: var(--default-primary-color);
+          --md-linear-progress-track-color: var(--default-primary-color);
         }
 
         @media (min-width: 640px) {
@@ -96,73 +94,8 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
             height: 256px;
           }
         }
-      </style>
-
-      <simple-hero page="blog"></simple-hero>
-
-      <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
-
-      <div class="featured">
-        <div class="container">
-          <content-loader
-            class="featured-posts-wrapper"
-            card-padding="24px"
-            card-height="256px"
-            border-radius="var(--border-radius)"
-            title-top-position="32px"
-            title-height="42px"
-            title-width="70%"
-            load-from="-70%"
-            load-to="130%"
-            animation-time="1s"
-            items-count="[[contentLoaders.itemsCount]]"
-            hidden$="[[contentLoaderVisibility]]"
-          >
-          </content-loader>
-
-          <div class="featured-posts-wrapper">
-            <template is="dom-if" if="[[failure]]">
-              <p>Error loading posts.</p>
-            </template>
-
-            <template is="dom-repeat" items="[[featuredPosts]]" as="post">
-              <a
-                href$="[[postUrl(post.id)]]"
-                class="featured-post"
-                flex$="[[viewport.isTabletPlus]]"
-                relative
-              >
-                <lazy-image
-                  class="image"
-                  src$="[[post.image]]"
-                  alt="[[post.title]]"
-                  style$="background-color: [[post.backgroundColor]];"
-                ></lazy-image>
-
-                <div class="image-overlay" fit></div>
-                <div class="details" layout vertical justified>
-                  <div>
-                    <text-truncate lines="2">
-                      <h2 class="title">[[post.title]]</h2>
-                    </text-truncate>
-                    <text-truncate lines="[[addIfNotPhone(2, 1)]]">
-                      <short-markdown class="description" content="[[post.brief]]"></short-markdown>
-                    </text-truncate>
-                  </div>
-                  <span class="date">[[getDate(post.published)]]</span>
-                </div>
-              </a>
-            </template>
-          </div>
-        </div>
-      </div>
-
-      <div class="container-narrow">
-        <posts-list posts="[[posts.data]]"></posts-list>
-      </div>
-
-      <footer-block></footer-block>
-    `;
+      `,
+    ];
   }
 
   private heroSettings = heroSettings.blog;
@@ -173,14 +106,20 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private viewport = initialUiState.viewport;
 
-  @computed('posts')
   get pending() {
     return this.posts instanceof Pending;
   }
 
-  @computed('posts')
   get failure() {
     return this.posts instanceof Failure;
+  }
+
+  private get featuredPosts(): Post[] {
+    return this.posts instanceof Success ? this.posts.data.slice(0, 3) : [];
+  }
+
+  private get contentLoaderVisibility(): boolean {
+    return this.posts instanceof Success || this.posts instanceof Failure;
   }
 
   override stateChanged(state: RootState) {
@@ -197,41 +136,90 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  @computed('posts')
-  private get featuredPosts(): Post[] {
-    if (this.posts instanceof Success) {
-      return this.posts.data.slice(0, 3);
-    } else {
-      return [];
-    }
-  }
-
-  @computed('posts')
-  private get remainingPosts(): Post[] {
-    if (this.posts instanceof Success) {
-      return this.posts.data.slice(3);
-    } else {
-      return [];
-    }
-  }
-
-  @computed('posts')
-  private get contentLoaderVisibility(): boolean {
-    return this.posts instanceof Success || this.posts instanceof Failure;
-  }
-
   addIfNotPhone(base: number, additional: number) {
-    if (this.viewport.isTabletPlus) {
-      return base + additional;
-    }
-    return base;
-  }
-
-  private getDate(date: Date) {
-    return getDate(date);
+    return this.viewport.isTabletPlus ? base + additional : base;
   }
 
   private postUrl(id: string) {
     return router.urlForName('post-page', { id });
+  }
+
+  override render() {
+    const posts = this.posts instanceof Success ? this.posts.data : [];
+
+    return html`
+      <simple-hero page="blog"></simple-hero>
+
+      <md-linear-progress
+        class="progress"
+        indeterminate
+        ?hidden=${this.contentLoaderVisibility}
+      ></md-linear-progress>
+
+      <div class="featured">
+        <div class="container">
+          <content-loader
+            class="featured-posts-wrapper"
+            card-padding="24px"
+            card-height="256px"
+            border-radius="var(--border-radius)"
+            title-top-position="32px"
+            title-height="42px"
+            title-width="70%"
+            load-from="-70%"
+            load-to="130%"
+            animation-time="1s"
+            .itemsCount=${this.contentLoaders.itemsCount}
+            ?hidden=${this.contentLoaderVisibility}
+          ></content-loader>
+
+          <div class="featured-posts-wrapper">
+            ${this.failure ? html`<p>Error loading posts.</p>` : ''}
+            ${this.featuredPosts.map(
+              (post) => html`
+                <a
+                  href=${this.postUrl(post.id)}
+                  class="featured-post"
+                  ?flex=${this.viewport.isTabletPlus}
+                  relative
+                >
+                  <lazy-image
+                    class="image"
+                    src=${post.image}
+                    alt=${post.title}
+                    style="background-color: ${post.backgroundColor};"
+                  ></lazy-image>
+
+                  <div class="image-overlay" fit></div>
+                  <div class="details" layout vertical justified>
+                    <div>
+                      <text-truncate lines="2">
+                        <h2 class="title">${post.title}</h2>
+                      </text-truncate>
+                      <text-truncate lines=${this.addIfNotPhone(2, 1)}>
+                        <short-markdown class="description" content=${post.brief}></short-markdown>
+                      </text-truncate>
+                    </div>
+                    <span class="date">${getDate(post.published)}</span>
+                  </div>
+                </a>
+              `,
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div class="container-narrow">
+        <posts-list .posts=${posts}></posts-list>
+      </div>
+
+      <footer-block></footer-block>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'blog-list-page': BlogListPage;
   }
 }

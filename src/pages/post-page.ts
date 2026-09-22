@@ -1,45 +1,28 @@
 import { Failure, Initialized, RemoteData, Success } from '@abraham/remotedata';
-import { customElement, observe, property } from '@polymer/decorators';
-import { html, PolymerElement } from '@polymer/polymer';
+import { css, html } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 import { RouterLocation } from '@vaadin/router';
+import '../components/footer-block';
 import '../components/hero/hero-block';
 import '../components/markdown/long-markdown';
-import '../elements/footer-block';
 import '../components/posts-list';
-import '../elements/shared-styles';
+import { ThemedElement } from '../components/themed-element';
 import { Post } from '../models/post';
 import { router } from '../router';
 import { RootState, store } from '../store';
 import { fetchBlogPosts } from '../store/blog/actions';
-import { BlogState, initialBlogState } from '../store/blog/state';
+import { initialBlogState } from '../store/blog/state';
 import { ReduxMixin } from '../store/mixin';
 import { blog } from '../utils/data';
 import { getDate } from '../utils/dates';
 import { updateImageMetadata } from '../utils/metadata';
 
-// TODO: loading message
-
 @customElement('post-page')
-export class PostPage extends ReduxMixin(PolymerElement) {
-  @property({ type: Object })
-  posts = initialBlogState;
-
-  @property({ type: Object })
-  private post: RemoteData<Error, Post> = new Initialized();
-  @property({ type: Array })
-  private suggestedPosts: Post[] = [];
-  @property({ type: String })
-  private postContent: string = '';
-  @property({ type: Object })
-  private postData: { id?: string } = {};
-
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
-        :host {
-          display: block;
-        }
-
+export class PostPage extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         .post {
           margin-bottom: 32px;
         }
@@ -62,34 +45,28 @@ export class PostPage extends ReduxMixin(PolymerElement) {
             padding-bottom: 36px;
           }
         }
-      </style>
-
-      <hero-block
-        background-image="[[post.data.image]]"
-        background-color="[[post.data.primaryColor]]"
-        font-color="#fff"
-      >
-        <div class="hero-title">[[post.data.title]]</div>
-      </hero-block>
-
-      <div class="container-narrow">
-        <long-markdown class="post" content="[[postContent]]"></long-markdown>
-        <div class="date">[[blog.published]]: [[getDate(post.data.published)]]</div>
-      </div>
-
-      <div class="suggested-posts">
-        <div class="container-narrow">
-          <h3 class="container-title">[[blog.suggested]]</h3>
-          <posts-list posts="[[suggestedPosts]]"></posts-list>
-        </div>
-      </div>
-
-      <footer-block></footer-block>
-    `;
+      `,
+    ];
   }
+
+  @property({ type: Object })
+  posts = initialBlogState;
+
+  @state()
+  private post: RemoteData<Error, Post> = new Initialized();
+  @state()
+  private suggestedPosts: Post[] = [];
+  @state()
+  private postContent = '';
+  @state()
+  private postData: { id?: string } = {};
+
+  private blog = blog;
+  private contentRequest = 0;
 
   override stateChanged(state: RootState) {
     this.posts = state.blog;
+    this.updatePost();
   }
 
   override connectedCallback() {
@@ -99,44 +76,85 @@ export class PostPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  private blog = blog;
+  onAfterEnter(location: RouterLocation) {
+    this.postData = location.params;
+    this.updatePost();
+  }
 
-  @observe('post')
-  private async onPost(post: RemoteData<Error, Post>) {
-    if (post instanceof Success && post.data.source) {
-      try {
-        this.postContent = await fetch(post.data.source).then((response) => response.text());
-      } catch (error) {
+  private updatePost() {
+    const postId = this.postData.id;
+    if (!postId || !(this.posts instanceof Success)) {
+      return;
+    }
+
+    const post = this.posts.data.find(({ id }) => id === postId);
+    if (!post) {
+      router.render('/404');
+      return;
+    }
+
+    this.post = new Success(post);
+    this.postContent = post.content;
+    this.suggestedPosts = this.posts.data.filter(({ id }) => id !== postId).slice(0, 3);
+    updateImageMetadata(post.title, post.brief, {
+      image: post.image,
+      imageAlt: post.title,
+    });
+    void this.loadPostContent(post);
+  }
+
+  private async loadPostContent(post: Post) {
+    const request = ++this.contentRequest;
+    if (!post.source) {
+      return;
+    }
+
+    try {
+      const content = await fetch(post.source).then((response) => response.text());
+      if (request === this.contentRequest) {
+        this.postContent = content;
+      }
+    } catch (error) {
+      if (request === this.contentRequest) {
         this.post = new Failure(error as Error);
       }
     }
   }
 
-  onAfterEnter(location: RouterLocation) {
-    this.postData = location.params;
+  override render() {
+    const post =
+      this.post instanceof Success
+        ? (this.post.data as Post & { primaryColor?: string })
+        : undefined;
+
+    return html`
+      <hero-block
+        background-image=${post?.image ?? ''}
+        background-color=${post?.primaryColor ?? ''}
+        font-color="#fff"
+      >
+        <div class="hero-title">${post?.title ?? ''}</div>
+      </hero-block>
+
+      <div class="container-narrow">
+        <long-markdown class="post" .content=${this.postContent}></long-markdown>
+        <div class="date">${this.blog.published}: ${post ? getDate(post.published) : ''}</div>
+      </div>
+
+      <div class="suggested-posts">
+        <div class="container-narrow">
+          <h3 class="container-title">${this.blog.suggested}</h3>
+          <posts-list .posts=${this.suggestedPosts}></posts-list>
+        </div>
+      </div>
+
+      <footer-block></footer-block>
+    `;
   }
+}
 
-  // TODO: Move to selector
-  @observe('postData.id', 'posts')
-  private onPostDataIdAndPosts(postId: string, posts: BlogState) {
-    if (postId && posts instanceof Success) {
-      const post = posts.data.find(({ id }) => id === postId);
-      if (post) {
-        this.post = new Success(post);
-        this.postContent = post?.content;
-        this.suggestedPosts = posts.data.filter(({ id }) => id !== postId).slice(0, 3);
-
-        updateImageMetadata(post.title, post.brief, {
-          image: post.image,
-          imageAlt: post.title,
-        });
-      } else {
-        router.render('/404');
-      }
-    }
-  }
-
-  private getDate(date: string) {
-    return getDate(date);
+declare global {
+  interface HTMLElementTagNameMap {
+    'post-page': PostPage;
   }
 }

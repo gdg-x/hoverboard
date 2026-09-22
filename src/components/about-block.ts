@@ -1,12 +1,9 @@
-// TODO: enable imports
-// import '@polymer/iron-icon';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { openVideoDialog } from '../store/ui/actions';
 import { aboutBlock } from '../utils/data';
-// TODO: enable imports
-// import '../utils/icons';
+import './hoverboard-icon';
 import { ThemedElement } from './themed-element';
 
 @customElement('about-block')
@@ -76,7 +73,7 @@ export class AboutBlock extends ThemedElement {
           >
             <md-text-button class="animated icon-right" trailing-icon>
               <span class="cta-label">${aboutBlock.callToAction.featuredSessions.label}</span>
-              <iron-icon slot="icon" icon="hoverboard:arrow-right-circle"></iron-icon>
+              <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
             </md-text-button>
           </a>
 
@@ -87,7 +84,7 @@ export class AboutBlock extends ThemedElement {
             trailing-icon
           >
             <span>${aboutBlock.callToAction.howItWas.label}</span>
-            <iron-icon slot="icon" icon="hoverboard:arrow-right-circle"></iron-icon>
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
           </md-text-button>
         </div>
 

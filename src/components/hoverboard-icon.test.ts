@@ -17,6 +17,55 @@ describe('hoverboard-icon', () => {
     expect(svg?.querySelector('path')).toBeInTheDocument();
   });
 
+  it.each([
+    'linkedin',
+    'gde',
+    'gdg',
+    'google',
+    'website',
+    'checked',
+    'up',
+    'bookmark-check',
+    'bookmark-plus',
+    'insert-comment',
+    'add-circle-outline',
+    'chevron-left',
+    'chevron-right',
+    'play',
+    'directions',
+    'close',
+    'filter-list',
+    'menu',
+    'account',
+    'bell',
+    'bell-off',
+    'bell-outline',
+    'video',
+    'presentation',
+    'movie',
+    'ticket',
+    'achievement',
+    'arrow-left',
+    'calendar',
+    'coffee-break',
+    'document',
+    'lunch',
+    'location',
+    'microphone',
+    'open-in-new',
+    'opening',
+    'party',
+    'people',
+    'registration',
+    'tracks',
+    'work',
+    'wtm',
+  ])('renders the %s social icon', async (name) => {
+    const { shadowRoot } = await fixture(html`<hoverboard-icon name="${name}"></hoverboard-icon>`);
+
+    expect(shadowRoot.querySelector('svg')).toBeInTheDocument();
+  });
+
   it('renders nothing for an unknown icon name', async () => {
     const element = document.createElement('hoverboard-icon') as HoverboardIcon;
     element.name = 'not-real';

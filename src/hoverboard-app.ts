@@ -16,12 +16,12 @@ import {
 } from '@polymer/polymer/lib/utils/settings';
 import '@power-elements/lazy-image';
 import './components/snack-bar';
-import './elements/dialogs/feedback-dialog';
-import './elements/dialogs/signin-dialog';
-import './elements/dialogs/subscribe-dialog';
-import './elements/dialogs/video-dialog';
-import './elements/footer-block';
-import './elements/header-toolbar';
+import './components/feedback-dialog';
+import './components/signin-dialog';
+import './components/subscribe-dialog';
+import './components/video-dialog';
+import './components/footer-block';
+import './components/header-toolbar';
 import './elements/shared-styles';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';

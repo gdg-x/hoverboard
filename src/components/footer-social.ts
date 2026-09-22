@@ -79,6 +79,8 @@ export class FooterSocial extends ThemedElement {
         }
 
         .social-group {
+          display: flex;
+          align-items: center;
           margin-right: 0;
           margin-bottom: 10px;
           padding-top: 0;
@@ -91,7 +93,6 @@ export class FooterSocial extends ThemedElement {
 
         .email .title {
           padding-right: 0;
-          padding-top: 17px;
         }
 
         .email a {
@@ -143,11 +144,11 @@ export class FooterSocial extends ThemedElement {
           }
 
           .social-networks {
-            padding-top: 8px;
+            padding-top: 0;
           }
 
           .blog {
-            padding-top: 17px;
+            padding-top: 0;
           }
         }
       `,

@@ -1,4 +1,3 @@
-import { PolymerElement } from '@polymer/polymer';
 import { TempAny } from '../temp-any';
 
 export const generateClassName = (value: string | undefined): string => {
@@ -10,11 +9,7 @@ export const generateClassName = (value: string | undefined): string => {
     : '';
 };
 
-export const getVariableColor = (
-  element: PolymerElement,
-  value: string,
-  fallback?: string,
-): string => {
+export const getVariableColor = (element: Element, value: string, fallback?: string): string => {
   const ShadyCSS = (window as TempAny).ShadyCSS;
   const calculated = ShadyCSS
     ? ShadyCSS.getComputedStyleValue(element, `--${generateClassName(value)}`)
