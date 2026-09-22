@@ -127,9 +127,9 @@ export class FilterMenu extends ThemedElement {
             >
               ${this.filters.clear}
             </span>
-            <md-outlined-button class="icon-right" @click="${this.toggleBoard}">
+            <md-outlined-button class="icon-right" trailing-icon @click="${this.toggleBoard}">
               ${this.filters.title}
-              <hoverboard-icon name="${this.icon}"></hoverboard-icon>
+              <hoverboard-icon slot="icon" name="${this.icon}"></hoverboard-icon>
             </md-outlined-button>
           </div>
         </div>
