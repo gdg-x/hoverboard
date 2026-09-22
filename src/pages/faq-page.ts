@@ -2,7 +2,7 @@ import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../components/hero/simple-hero';
 import '../components/markdown/remote-markdown';
-import '../elements/footer-block';
+import '../components/footer-block';
 import { faq, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 

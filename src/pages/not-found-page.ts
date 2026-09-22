@@ -2,7 +2,7 @@ import { customElement } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
 import '../components/hero/simple-hero';
-import '../elements/footer-block';
+import '../components/footer-block';
 import { heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 

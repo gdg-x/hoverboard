@@ -1,20 +1,21 @@
-import { customElement } from '@polymer/decorators';
-import '@polymer/paper-fab';
-import { html, PolymerElement } from '@polymer/polymer';
-import '../utils/icons';
+import '@material/web/fab/fab.js';
+import { css, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { scrollToTop } from '../utils/scrolling';
-import '../components/footer-nav';
+import { ThemedElement } from './themed-element';
+import './footer-nav';
 import './footer-rel';
-import '../components/footer-social';
+import './footer-social';
+import './hoverboard-icon';
 
 @customElement('footer-block')
-export class FooterBlock extends PolymerElement {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class FooterBlock extends ThemedElement {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           margin-top: 40px;
-          display: block;
           position: relative;
           color: var(--footer-text-color);
           background: var(--footer-background-color);
@@ -28,13 +29,11 @@ export class FooterBlock extends PolymerElement {
           position: relative;
         }
 
-        .fab paper-fab {
-          background: var(--primary-background-color);
-          color: inherit;
+        .fab md-fab {
+          --md-fab-container-color: var(--primary-background-color);
+          --md-fab-container-shape: 50%;
+          --md-fab-icon-color: var(--footer-text-color);
           pointer-events: all;
-          box-shadow:
-            0 0 8px 0 rgba(0, 0, 0, 0.12),
-            0 8px 8px 0 rgba(0, 0, 0, 0.24);
         }
 
         .fab {
@@ -50,11 +49,17 @@ export class FooterBlock extends PolymerElement {
             padding: 15px 36px;
           }
         }
-      </style>
+      `,
+    ];
+  }
 
+  override render() {
+    return html`
       <div class="container">
         <div class="fab">
-          <paper-fab class="back-to-top" icon="hoverboard:up" on-click="backToTop"></paper-fab>
+          <md-fab class="back-to-top" aria-label="Back to top" @click="${scrollToTop}">
+            <hoverboard-icon slot="icon" name="up"></hoverboard-icon>
+          </md-fab>
         </div>
         <footer-social layout flex flex-auto horizontal wrap></footer-social>
         <footer-rel></footer-rel>
@@ -62,8 +67,10 @@ export class FooterBlock extends PolymerElement {
       </div>
     `;
   }
+}
 
-  backToTop() {
-    scrollToTop();
+declare global {
+  interface HTMLElementTagNameMap {
+    'footer-block': FooterBlock;
   }
 }
