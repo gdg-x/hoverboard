@@ -123,7 +123,6 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
           position: sticky;
           top: 0;
           z-index: 2;
-          background-color: var(--primary-background-color);
           box-shadow: var(--box-shadow);
           transition: box-shadow var(--animation);
         }
