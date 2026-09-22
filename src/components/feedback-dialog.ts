@@ -22,8 +22,8 @@ export class FeedbackDialog extends ReduxMixin(ThemedElement) {
       ...super.styles,
       css`
         md-dialog {
-          --md-dialog-container-max-inline-size: 420px;
-          --md-dialog-container-min-inline-size: 85%;
+          width: 85%;
+          max-width: 420px;
         }
       `,
     ];

@@ -17,12 +17,12 @@ export class VideoDialog extends ReduxMixin(ThemedElement) {
       ...super.styles,
       css`
         md-dialog {
-          --md-dialog-container-min-inline-size: 80vw;
+          min-width: 80vw;
         }
 
         @media only screen and (max-width: 600px) {
           md-dialog {
-            --md-dialog-container-min-inline-size: 100vw;
+            min-width: 100vw;
           }
         }
       `,
