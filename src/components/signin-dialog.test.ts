@@ -97,7 +97,7 @@ describe('signin-dialog', () => {
   it('dispatches closeDialog when the dialog is closed', async () => {
     const { shadowRoot } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
 
-    shadowRoot.querySelector('md-dialog')!.dispatchEvent(new Event('closed'));
+    shadowRoot.querySelector('hoverboard-dialog')!.dispatchEvent(new Event('closed'));
 
     expect(mockCloseDialog).toHaveBeenCalled();
   });

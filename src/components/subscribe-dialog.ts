@@ -1,8 +1,6 @@
 import { Failure, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
-import '@material/web/dialog/dialog.js';
-import { MdDialog } from '@material/web/dialog/dialog.js';
 import '@material/web/textfield/outlined-text-field.js';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import { css, html } from 'lit';
@@ -21,6 +19,8 @@ import {
 import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
 import { subscribeBlock } from '../utils/data';
 import { notEmpty, validEmail } from '../utils/strings';
+import { HoverboardDialog } from './hoverboard-dialog';
+import './hoverboard-dialog';
 import { ThemedElement } from './themed-element';
 
 // Used for adding documents to both `subscribers` and `potentialPartners` collections
@@ -55,7 +55,7 @@ export class SubscribeDialog extends ReduxMixin(ThemedElement) {
   private subscribeBlock = subscribeBlock;
 
   @query('#dialog')
-  dialog!: MdDialog;
+  dialog!: HoverboardDialog;
   @query('#emailInput')
   emailInput!: MdOutlinedTextField;
   @query('#firstFieldInput')
@@ -140,7 +140,7 @@ export class SubscribeDialog extends ReduxMixin(ThemedElement) {
 
   override render() {
     return html`
-      <md-dialog id="dialog" ?open="${this.open}">
+      <hoverboard-dialog id="dialog" ?open="${this.open}">
         <div slot="headline">${this.title}</div>
         <div slot="content">
           ${
@@ -189,7 +189,7 @@ export class SubscribeDialog extends ReduxMixin(ThemedElement) {
         <md-outlined-button slot="actions" @click="${this.close}">
           ${this.subscribeBlock.close}
         </md-outlined-button>
-      </md-dialog>
+      </hoverboard-dialog>
     `;
   }
 

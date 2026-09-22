@@ -29,7 +29,7 @@ describe('feedback-dialog', () => {
     const { shadowRoot } = await fixture<FeedbackDialog>(html`<feedback-dialog></feedback-dialog>`);
 
     expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent(feedback.headline);
-    expect(shadowRoot.querySelector('md-dialog')).not.toHaveAttribute('open');
+    expect(shadowRoot.querySelector('hoverboard-dialog')).not.toHaveAttribute('open');
   });
 
   it('opens the dialog and passes the session id to feedback-block', async () => {
@@ -40,21 +40,23 @@ describe('feedback-dialog', () => {
     element['session'] = session;
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('md-dialog')).toHaveAttribute('open');
+    expect(shadowRoot.querySelector('hoverboard-dialog')).toHaveAttribute('open');
     expect(shadowRoot.querySelector('feedback-block')).toHaveProperty('sessionId', session.id);
   });
 
   it('dispatches closeDialog when the dialog is closed', async () => {
     const { shadowRoot } = await fixture<FeedbackDialog>(html`<feedback-dialog></feedback-dialog>`);
 
-    shadowRoot.querySelector('md-dialog')!.dispatchEvent(new Event('closed'));
+    shadowRoot.querySelector('hoverboard-dialog')!.dispatchEvent(new Event('closed'));
 
     expect(mockCloseDialog).toHaveBeenCalled();
   });
 
   it('closes the dialog when the close button is clicked', async () => {
     const { shadowRoot } = await fixture<FeedbackDialog>(html`<feedback-dialog></feedback-dialog>`);
-    const dialog = shadowRoot.querySelector('md-dialog') as HTMLElement & { close: () => void };
+    const dialog = shadowRoot.querySelector('hoverboard-dialog') as HTMLElement & {
+      close: () => void;
+    };
     dialog.close = jest.fn();
 
     shadowRoot.querySelector<HTMLElement>('md-outlined-button')!.click();

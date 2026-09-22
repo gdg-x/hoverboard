@@ -1,7 +1,5 @@
 import { Success } from '@abraham/remotedata';
 import '@material/web/button/outlined-button.js';
-import '@material/web/dialog/dialog.js';
-import { MdDialog } from '@material/web/dialog/dialog.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { Session } from '../models/session';
@@ -13,6 +11,8 @@ import { DIALOG } from '../store/dialogs/types';
 import { ReduxMixin } from '../store/mixin';
 import { feedback } from '../utils/data';
 import './feedback-block';
+import { HoverboardDialog } from './hoverboard-dialog';
+import './hoverboard-dialog';
 import { ThemedElement } from './themed-element';
 
 @customElement('feedback-dialog')
@@ -21,9 +21,9 @@ export class FeedbackDialog extends ReduxMixin(ThemedElement) {
     return [
       ...super.styles,
       css`
-        md-dialog {
-          width: 85%;
-          max-width: 420px;
+        :host {
+          --hoverboard-dialog-width: 85%;
+          --hoverboard-dialog-max-width: 420px;
         }
       `,
     ];
@@ -32,7 +32,7 @@ export class FeedbackDialog extends ReduxMixin(ThemedElement) {
   private feedback = feedback;
 
   @query('#dialog')
-  dialog!: MdDialog;
+  dialog!: HoverboardDialog;
 
   @state()
   private open = false;
@@ -55,14 +55,14 @@ export class FeedbackDialog extends ReduxMixin(ThemedElement) {
 
   override render() {
     return html`
-      <md-dialog id="dialog" ?open="${this.open}">
+      <hoverboard-dialog id="dialog" ?open="${this.open}">
         <div slot="headline">${this.feedback.headline}</div>
         <div slot="content" class="feedback-content">
           <feedback-block .sessionId="${this.session?.id}"></feedback-block>
         </div>
 
         <md-outlined-button slot="actions" @click="${this.close}">Close</md-outlined-button>
-      </md-dialog>
+      </hoverboard-dialog>
     `;
   }
 

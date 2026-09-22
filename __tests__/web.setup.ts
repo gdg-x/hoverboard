@@ -23,7 +23,8 @@ Object.defineProperty(globalThis, 'ReadableStream', {
   value: ReadableStream,
 });
 
-// JSDOM does not implement IntersectionObserver, used by @material/web dialogs.
+// JSDOM does not implement IntersectionObserver, used by @justinribeiro/lite-youtube
+// (rendered inside video-dialog).
 class MockIntersectionObserver {
   observe = jest.fn();
   unobserve = jest.fn();
@@ -75,7 +76,6 @@ Object.defineProperty(Element.prototype, 'animate', {
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn(),
-    finished: Promise.resolve(),
   }),
 });
 
@@ -104,7 +104,7 @@ Object.defineProperty(HTMLElement.prototype, 'attachInternals', {
 });
 
 // JSDOM does not implement the <dialog> element's showModal/close, used by
-// @material/web dialogs.
+// hoverboard-dialog.
 Object.defineProperty(HTMLDialogElement.prototype, 'showModal', {
   writable: true,
   value: jest.fn(function (this: HTMLDialogElement) {

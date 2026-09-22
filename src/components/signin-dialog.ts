@@ -1,7 +1,5 @@
 import { Failure } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
-import '@material/web/dialog/dialog.js';
-import { MdDialog } from '@material/web/dialog/dialog.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { RootState } from '../store';
@@ -17,6 +15,8 @@ import { TempAny } from '../temp-any';
 import { signIn as signInText, signInDialog, signInProviders } from '../utils/data';
 import { getProviderCompanyName, PROVIDER } from '../utils/providers';
 import './hoverboard-icon';
+import { HoverboardDialog } from './hoverboard-dialog';
+import './hoverboard-dialog';
 import { ThemedElement } from './themed-element';
 
 @customElement('signin-dialog')
@@ -56,7 +56,7 @@ export class SigninDialog extends ReduxMixin(ThemedElement) {
   private signInText = signInText;
 
   @query('#dialog')
-  dialog!: MdDialog;
+  dialog!: HoverboardDialog;
 
   @state()
   private auth = initialAuthState;
@@ -100,7 +100,7 @@ export class SigninDialog extends ReduxMixin(ThemedElement) {
 
   override render() {
     return html`
-      <md-dialog id="dialog" ?open="${this.open}">
+      <hoverboard-dialog id="dialog" ?open="${this.open}">
         <div slot="headline">${this.signInText}</div>
         <div slot="content">
           ${
@@ -151,7 +151,7 @@ export class SigninDialog extends ReduxMixin(ThemedElement) {
         </div>
 
         <md-text-button slot="actions" @click="${this.close}">Close</md-text-button>
-      </md-dialog>
+      </hoverboard-dialog>
     `;
   }
 

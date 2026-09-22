@@ -111,7 +111,9 @@ describe('subscribe-dialog', () => {
     );
     element['errorOccurred'] = true;
     await element.updateComplete;
-    const dialog = shadowRoot.querySelector('md-dialog') as HTMLElement & { close: () => void };
+    const dialog = shadowRoot.querySelector('hoverboard-dialog') as HTMLElement & {
+      close: () => void;
+    };
     dialog.close = jest.fn();
 
     shadowRoot.querySelector<HTMLElement>('md-outlined-button')!.click();

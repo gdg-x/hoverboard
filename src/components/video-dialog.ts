@@ -1,13 +1,13 @@
 import '@justinribeiro/lite-youtube';
 import '@material/web/button/outlined-button.js';
-import '@material/web/dialog/dialog.js';
-import { MdDialog } from '@material/web/dialog/dialog.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { closeVideoDialog } from '../store/ui/actions';
 import { initialUiState } from '../store/ui/state';
+import { HoverboardDialog } from './hoverboard-dialog';
+import './hoverboard-dialog';
 import { ThemedElement } from './themed-element';
 
 @customElement('video-dialog')
@@ -16,13 +16,13 @@ export class VideoDialog extends ReduxMixin(ThemedElement) {
     return [
       ...super.styles,
       css`
-        md-dialog {
-          min-width: 80vw;
+        :host {
+          --hoverboard-dialog-min-width: 80vw;
         }
 
         @media only screen and (max-width: 600px) {
-          md-dialog {
-            min-width: 100vw;
+          :host {
+            --hoverboard-dialog-min-width: 100vw;
           }
         }
       `,
@@ -30,7 +30,7 @@ export class VideoDialog extends ReduxMixin(ThemedElement) {
   }
 
   @query('#dialog')
-  dialog!: MdDialog;
+  dialog!: HoverboardDialog;
 
   @state()
   private video = initialUiState.videoDialog;
@@ -45,7 +45,7 @@ export class VideoDialog extends ReduxMixin(ThemedElement) {
 
   override render() {
     return html`
-      <md-dialog id="dialog" ?open="${this.video.open}">
+      <hoverboard-dialog id="dialog" ?open="${this.video.open}">
         <div slot="headline">${this.video.title}</div>
         <div slot="content" class="video-wrapper">
           <lite-youtube
@@ -56,7 +56,7 @@ export class VideoDialog extends ReduxMixin(ThemedElement) {
           ></lite-youtube>
         </div>
         <md-outlined-button slot="actions" @click="${this.close}">Close</md-outlined-button>
-      </md-dialog>
+      </hoverboard-dialog>
     `;
   }
 
