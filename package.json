@@ -9,7 +9,7 @@
     "npm": "10"
   },
   "scripts": {
-    "build": "npm run clean && NODE_ENV=production rollup --config rollup.config.ts --configPlugin typescript",
+    "build": "npm run clean && NODE_ENV=production vite build && NODE_ENV=production vite build --config vite.sw.config.ts",
     "clean": "rm -rf dist",
     "deploy": "npm run build && NODE_ENV=production firebase deploy",
     "firestore:copy": "ts-node-script ./scripts/firestore-copy",
@@ -28,7 +28,8 @@
     "start": "npm run clean && NODE_ENV=development concurrently --kill-others npm:start:*",
     "start:emulators": "firebase emulators:start",
     "start:functions": "npm --prefix functions start",
-    "start:rollup": "mkdir -p dist && rollup --config rollup.config.ts --configPlugin typescript --watch",
+    "start:vite": "mkdir -p dist && vite build --watch",
+    "start:vite-sw": "vite build --watch --config vite.sw.config.ts",
     "test": "jest"
   },
   "dependencies": {
@@ -60,10 +61,6 @@
     "@html-eslint/parser": "^0.65.0",
     "@jest/globals": "^30.5.1",
     "@jest/types": "^30.5.1",
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-terser": "^1.0.0",
-    "@rollup/plugin-typescript": "^12.3.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@types/jest": "^30.0.0",
@@ -73,7 +70,6 @@
     "@types/nunjucks": "^3.2.6",
     "@typescript-eslint/eslint-plugin": "^8.68.0",
     "@typescript-eslint/parser": "^8.65.0",
-    "@web/rollup-plugin-html": "^4.0.0",
     "concurrently": "^10.0.5",
     "eslint": "^10.9.1",
     "eslint-config-prettier": "^10.1.8",
@@ -95,7 +91,8 @@
     "rollup-plugin-workbox": "^9.0.0",
     "ts-jest": "^29.4.12",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^8.3.0"
   },
   "contributors": [
     "Oleh Zasadnyy, GDG Lviv",
