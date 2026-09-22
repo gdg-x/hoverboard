@@ -3,11 +3,15 @@ import { fireEvent, screen, within } from '@testing-library/dom';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { openVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui';
 import { aboutBlock } from '../utils/data';
 import './about-block';
 
-jest.mock('../store/ui/actions');
+jest.mock('../store/ui', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/ui')>('../store/ui'),
+  openVideoDialog: jest.fn(),
+}));
 
 const mockToggleVideoDialogs = mocked(openVideoDialog);
 

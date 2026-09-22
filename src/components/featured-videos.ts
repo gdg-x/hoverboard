@@ -6,7 +6,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { Video } from '../models/video';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { openVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui';
 import { VideosState, selectVideos } from '../store/videos';
 import { featuredVideos, loading } from '../utils/data';
 import './hoverboard-icon';

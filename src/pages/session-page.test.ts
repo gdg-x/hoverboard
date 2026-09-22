@@ -7,10 +7,10 @@ import { fixture } from '../../__tests__/helpers/fixtures';
 import { Session } from '../models/session';
 import { User } from '../models/user';
 import { router } from '../router';
-import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
+import { setUserFeaturedSessions } from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
 import { queueComplexSnackbar } from '../store/snackbars';
-import { openVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui';
 import { updateImageMetadata } from '../utils/metadata';
 import './session-page';
 import { SessionPage } from './session-page';
@@ -25,14 +25,19 @@ jest.mock('../router', () => ({
 jest.mock('../store/sessions/selectors', () => ({
   selectSession: jest.fn(),
 }));
-jest.mock('../store/featured-sessions/actions', () => ({
-  fetchUserFeaturedSessions: jest.fn(),
-  setUserFeaturedSessions: jest.fn(() => ({ type: 'noop' })),
+jest.mock('../store/featured-sessions', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/featured-sessions')>('../store/featured-sessions'),
+  setUserFeaturedSessions: jest.fn(() => Promise.resolve()),
 }));
-jest.mock('../store/dialogs/actions', () => ({
+jest.mock('../store/dialogs', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
   openSigninDialog: jest.fn(),
 }));
-jest.mock('../store/ui/actions', () => ({
+jest.mock('../store/ui', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/ui')>('../store/ui'),
   openVideoDialog: jest.fn(),
   setHeroSettings: jest.fn(),
 }));

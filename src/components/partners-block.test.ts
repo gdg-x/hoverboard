@@ -4,20 +4,25 @@ import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { PartnerGroup } from '../models/partner-group';
-import { closeDialog, openSubscribeDialog } from '../store/dialogs/actions';
-import { addPotentialPartner } from '../store/potential-partners/actions';
+import { closeDialog, openSubscribeDialog } from '../store/dialogs';
+import { addPotentialPartner, initialPotentialPartnersState } from '../store/potential-partners';
 import { queueSnackbar } from '../store/snackbars';
-import { initialPotentialPartnersState } from '../store/potential-partners/state';
 import { partnersBlock } from '../utils/data';
 import type { PartnersBlock } from './partners-block';
 import './partners-block';
 
-jest.mock('../store/dialogs/actions', () => ({
+jest.mock('../store/dialogs', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
   closeDialog: jest.fn(),
   openSubscribeDialog: jest.fn(),
 }));
 
-jest.mock('../store/potential-partners/actions', () => ({
+jest.mock('../store/potential-partners', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/potential-partners')>(
+    '../store/potential-partners',
+  ),
   addPotentialPartner: jest.fn(),
 }));
 
@@ -92,7 +97,7 @@ describe('partners-block', () => {
   });
 
   it('opens the subscribe dialog when clicking the become a partner button', async () => {
-    mockAddPotentialPartner.mockReturnValue(jest.fn(async () => {}));
+    mockAddPotentialPartner.mockResolvedValue(undefined);
     const { shadowRoot } = await fixture<PartnersBlock>(html`<partners-block></partners-block>`);
 
     shadowRoot.querySelector<HTMLElement>('md-text-button')!.click();

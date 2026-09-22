@@ -4,11 +4,10 @@ import '@power-elements/lazy-image';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { RootState, store } from '../store';
-import { closeDialog, openSubscribeDialog } from '../store/dialogs/actions';
+import { closeDialog, openSubscribeDialog } from '../store/dialogs';
 import { ReduxMixin } from '../store/mixin';
 import { PartnerGroupsState, selectPartnerGroups } from '../store/partners';
-import { addPotentialPartner } from '../store/potential-partners/actions';
-import { initialPotentialPartnersState } from '../store/potential-partners/state';
+import { addPotentialPartner, initialPotentialPartnersState } from '../store/potential-partners';
 import { queueSnackbar } from '../store/snackbars';
 import { loading, partnersBlock } from '../utils/data';
 import './hoverboard-icon';
@@ -145,7 +144,7 @@ export class PartnersBlock extends ReduxMixin(ThemedElement) {
       submitLabel: this.partnersBlock.form.submitLabel,
       firstFieldLabel: this.partnersBlock.form.fullName,
       secondFieldLabel: this.partnersBlock.form.companyName,
-      submit: (data) => store.dispatch(addPotentialPartner(data)),
+      submit: (data) => addPotentialPartner(data),
     });
   }
 }

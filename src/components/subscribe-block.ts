@@ -1,15 +1,14 @@
-import { Success } from '@abraham/remotedata';
+import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { DialogData } from '../models/dialog-form';
-import { RootState, store } from '../store';
-import { openSubscribeDialog } from '../store/dialogs/actions';
+import { RootState } from '../store';
+import { openSubscribeDialog } from '../store/dialogs';
 import { ReduxMixin } from '../store/mixin';
-import { subscribe } from '../store/subscribe/actions';
-import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
-import { initialUiState } from '../store/ui/state';
-import { initialUserState } from '../store/user/state';
+import { subscribe, SubscribeState } from '../store/subscribe';
+import { initialUiState } from '../store/ui';
+import { UserState } from '../store/user';
 import { subscribeBlock } from '../utils/data';
 import './hoverboard-icon';
 import { ThemedElement } from './themed-element';
@@ -63,10 +62,10 @@ export class SubscribeBlock extends ReduxMixin(ThemedElement) {
   private subscribeBlock = subscribeBlock;
 
   @property({ type: Object })
-  subscribed: SubscribeState = initialSubscribeState;
+  subscribed: SubscribeState = new Initialized();
 
   @property({ type: Object })
-  user = initialUserState;
+  user: UserState = new Initialized();
   @property({ type: Object })
   viewport = initialUiState.viewport;
 
@@ -139,7 +138,7 @@ export class SubscribeBlock extends ReduxMixin(ThemedElement) {
   }
 
   private subscribeAction(data: DialogData) {
-    store.dispatch(subscribe(data));
+    subscribe(data);
   }
 }
 

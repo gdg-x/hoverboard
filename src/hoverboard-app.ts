@@ -14,7 +14,7 @@ import './components/header-toolbar';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
 import { ReduxMixin } from './store/mixin';
-import { onUser } from './store/auth/actions';
+import { onUser } from './store/auth';
 import { queueSnackbar } from './store/snackbars';
 import { TicketsState, selectTickets } from './store/tickets';
 import { DrawerOpenedChanged } from './utils/drawer';

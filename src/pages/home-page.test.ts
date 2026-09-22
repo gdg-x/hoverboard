@@ -3,7 +3,7 @@ import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { firebaseApp } from '../firebase';
-import { openVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui';
 import { aboutBlock, dates, location } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 import './home-page';
@@ -18,7 +18,9 @@ jest.mock('../utils/scrolling', () => ({
   scrollToElement: jest.fn(),
   POSITION: { TOP: 'top', BOTTOM: 'bottom' },
 }));
-jest.mock('../store/ui/actions', () => ({
+jest.mock('../store/ui', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/ui')>('../store/ui'),
   openVideoDialog: jest.fn(),
   setHeroSettings: jest.fn(),
 }));

@@ -14,8 +14,7 @@ import { RootState, store } from '..';
 import { db } from '../../firebase';
 import { Feedback, FeedbackId } from '../../models/feedback';
 import { dataWithParentId } from '../../utils/firestore';
-import { selectUser } from '../user/selectors';
-import { UserState } from '../user/types';
+import { selectUser, UserState } from '../user';
 
 export type SessionFeedback = RemoteData<Error, Feedback | false>;
 

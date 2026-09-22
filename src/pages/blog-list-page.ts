@@ -15,7 +15,7 @@ import { router } from '../router';
 import { RootState } from '../store';
 import { BlogState, selectBlogPosts } from '../store/blog';
 import { ReduxMixin } from '../store/mixin';
-import { initialUiState } from '../store/ui/state';
+import { initialUiState } from '../store/ui';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { getDate } from '../utils/dates';
 import { updateMetadata } from '../utils/metadata';

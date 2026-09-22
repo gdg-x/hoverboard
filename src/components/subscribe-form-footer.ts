@@ -4,10 +4,9 @@ import '@material/web/textfield/outlined-text-field.js';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import { css, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { RootState, store } from '../store';
+import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { subscribe } from '../store/subscribe/actions';
-import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
+import { subscribe, SubscribeState } from '../store/subscribe';
 import { subscribeBlock } from '../utils/data';
 import { ThemedElement } from './themed-element';
 import './hoverboard-icon';
@@ -41,7 +40,7 @@ export class SubscribeFormFooter extends ReduxMixin(ThemedElement) {
   }
 
   @property({ type: Object })
-  subscribed: SubscribeState = initialSubscribeState;
+  subscribed: SubscribeState = new Initialized();
 
   @property()
   email = '';
@@ -105,7 +104,7 @@ export class SubscribeFormFooter extends ReduxMixin(ThemedElement) {
 
   private subscribe = () => {
     if (this.initialized && this.emailInput?.reportValidity()) {
-      store.dispatch(subscribe({ email: this.email }));
+      subscribe({ email: this.email });
     }
   };
 }

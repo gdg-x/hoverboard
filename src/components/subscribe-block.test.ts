@@ -3,17 +3,19 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { openSubscribeDialog } from '../store/dialogs/actions';
-import { subscribe } from '../store/subscribe/actions';
+import { openSubscribeDialog } from '../store/dialogs';
+import { subscribe } from '../store/subscribe';
 import { subscribeBlock } from '../utils/data';
 import type { SubscribeBlock } from './subscribe-block';
 import './subscribe-block';
 
-jest.mock('../store/dialogs/actions', () => ({
+jest.mock('../store/dialogs', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
   openSubscribeDialog: jest.fn(),
 }));
 
-jest.mock('../store/subscribe/actions', () => ({
+jest.mock('../store/subscribe', () => ({
   subscribe: jest.fn(),
 }));
 
@@ -54,7 +56,7 @@ describe('subscribe-block', () => {
   });
 
   it('opens the subscribe dialog for a signed-out user', async () => {
-    mockSubscribe.mockReturnValue(jest.fn(async () => {}));
+    mockSubscribe.mockResolvedValue(undefined);
     const { element, shadowRoot } = await fixture<SubscribeBlock>(
       html`<subscribe-block></subscribe-block>`,
     );
@@ -73,7 +75,7 @@ describe('subscribe-block', () => {
   });
 
   it('subscribes directly for a signed-in user with an email', async () => {
-    mockSubscribe.mockReturnValue(jest.fn(async () => {}));
+    mockSubscribe.mockResolvedValue(undefined);
     mockOpenSubscribeDialog.mockClear();
     const { element, shadowRoot } = await fixture<SubscribeBlock>(
       html`<subscribe-block></subscribe-block>`,

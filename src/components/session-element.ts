@@ -1,4 +1,4 @@
-import { Success } from '@abraham/remotedata';
+import { Initialized, Success } from '@abraham/remotedata';
 import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -6,12 +6,15 @@ import { Session } from '../models/session';
 import { router } from '../router';
 import { TempAny } from '../temp-any';
 import { RootState, store } from '../store';
-import { openFeedbackDialog, openSigninDialog } from '../store/dialogs/actions';
-import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
-import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
+import { openFeedbackDialog, openSigninDialog } from '../store/dialogs';
+import {
+  FeaturedSessionsState,
+  selectFeaturedSessionsState,
+  setUserFeaturedSessions,
+} from '../store/featured-sessions';
 import { ReduxMixin } from '../store/mixin';
 import { queueComplexSnackbar } from '../store/snackbars';
-import { initialUserState } from '../store/user/state';
+import { UserState } from '../store/user';
 import { schedule } from '../utils/data';
 import { acceptingFeedback } from '../utils/feedback';
 import { getVariableColor } from '../utils/styles';
@@ -172,15 +175,15 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
   }
 
   @property({ type: Object })
-  user = initialUserState;
+  user: UserState = new Initialized();
   @property({ type: Object })
   session: Session | undefined;
   @property({ type: Object })
-  featuredSessions = initialFeaturedSessionsState;
+  featuredSessions: FeaturedSessionsState = new Initialized();
 
   override stateChanged(state: RootState) {
     this.user = state.user;
-    this.featuredSessions = state.featuredSessions;
+    this.featuredSessions = selectFeaturedSessionsState(state);
   }
 
   override render() {
@@ -321,7 +324,7 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
         [this.session.id]: bookmarked,
       };
 
-      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked));
+      setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked);
     }
   }
 

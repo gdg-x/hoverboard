@@ -5,14 +5,12 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { Hero } from '../models/hero';
 import { selectRouteName } from '../router';
 import { RootState } from '../store';
-import { signOut as signOutAction } from '../store/auth/actions';
-import { closeDialog, openSigninDialog } from '../store/dialogs/actions';
-import { selectIsDialogOpen } from '../store/dialogs/selectors';
-import { DIALOG } from '../store/dialogs/types';
+import { signOut as signOutAction } from '../store/auth';
+import { closeDialog, DIALOG, openSigninDialog, selectIsDialogOpen } from '../store/dialogs';
 import { ReduxMixin } from '../store/mixin';
 import { TicketsState, selectTickets } from '../store/tickets';
-import { initialUiState } from '../store/ui/state';
-import { initialUserState } from '../store/user/state';
+import { initialUiState } from '../store/ui';
+import { UserState } from '../store/user';
 import { updateSelectionBar } from '../utils/tab-selection-bar';
 import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../utils/data';
 import './hoverboard-icon';
@@ -217,7 +215,7 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
   @state()
   private signedIn = false;
   @state()
-  private user = initialUserState;
+  private user: UserState = new Initialized();
   @property({ type: Boolean, reflect: true })
   private transparent = false;
   @state()

@@ -2,7 +2,7 @@ import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { initialUiState } from '../store/ui/state';
+import { initialUiState } from '../store/ui';
 import { location, mapBlock } from '../utils/data';
 import './hoverboard-icon';
 import { ThemedElement } from './themed-element';

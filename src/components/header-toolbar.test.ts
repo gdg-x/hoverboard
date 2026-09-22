@@ -8,7 +8,9 @@ import type { HeaderToolbar } from './header-toolbar';
 jest.mock('../router', () => ({
   selectRouteName: jest.fn(() => 'home'),
 }));
-jest.mock('../store/auth/actions', () => ({
+jest.mock('../store/auth', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/auth')>('../store/auth'),
   signOut: jest.fn(),
 }));
 

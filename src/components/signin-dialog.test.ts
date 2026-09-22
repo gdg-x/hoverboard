@@ -3,19 +3,23 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { mergeAccounts, signIn } from '../store/auth/actions';
-import { closeDialog, openSigninDialog } from '../store/dialogs/actions';
+import { mergeAccounts, signIn } from '../store/auth';
+import { closeDialog, openSigninDialog } from '../store/dialogs';
 import { signIn as signInText, signInDialog, signInProviders } from '../utils/data';
 import { PROVIDER } from '../utils/providers';
 import type { SigninDialog } from './signin-dialog';
 import './signin-dialog';
 
-jest.mock('../store/auth/actions', () => ({
+jest.mock('../store/auth', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/auth')>('../store/auth'),
   mergeAccounts: jest.fn(),
   signIn: jest.fn(),
 }));
 
-jest.mock('../store/dialogs/actions', () => ({
+jest.mock('../store/dialogs', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
   closeDialog: jest.fn(),
   openSigninDialog: jest.fn(),
 }));

@@ -7,13 +7,12 @@ import { Filter } from '../models/filter';
 import { Session } from '../models/session';
 import { Time } from '../models/time';
 import { Timeslot } from '../models/timeslot';
-import { RootState, store } from '../store';
-import { fetchUserFeaturedSessions } from '../store/featured-sessions/actions';
-import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
-import { selectFilters } from '../store/filters/selectors';
+import { RootState } from '../store';
+import { FeaturedSessionsState, selectFeaturedSessionsState } from '../store/featured-sessions';
+import { selectFilters } from '../store/filters';
 import { ReduxMixin } from '../store/mixin';
 import { ScheduleState, selectScheduleState } from '../store/schedule';
-import { initialUserState } from '../store/user/state';
+import { UserState } from '../store/user';
 import { TempAny } from '../temp-any';
 import { mySchedule } from '../utils/data';
 import { generateClassName } from '../utils/styles';
@@ -116,9 +115,9 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
   day: Day | undefined;
 
   @property({ type: Object })
-  private user = initialUserState;
+  private user: UserState = new Initialized();
   @property({ type: Object })
-  private featuredSessions = initialFeaturedSessionsState;
+  private featuredSessions: FeaturedSessionsState = new Initialized();
   @property({ type: Boolean })
   onlyFeatured = false;
   @property({ type: Array })
@@ -132,18 +131,10 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
     this.schedule = selectScheduleState(state);
     this.user = state.user;
     this.selectedFilters = selectFilters(state);
-    this.featuredSessions = state.featuredSessions;
+    this.featuredSessions = selectFeaturedSessionsState(state);
   }
 
   override willUpdate(changedProperties: PropertyValues) {
-    if (
-      changedProperties.has('user') &&
-      this.user instanceof Success &&
-      this.featuredSessions instanceof Initialized
-    ) {
-      store.dispatch(fetchUserFeaturedSessions);
-    }
-
     if (
       changedProperties.has('location') ||
       changedProperties.has('schedule') ||

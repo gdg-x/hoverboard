@@ -3,8 +3,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import { PreviousSpeaker } from '../../models/previous-speaker';
 import { randomOrder } from '../../utils/arrays';
-import { selectViewport } from '../ui/selectors';
-import { Viewport } from '../ui/types';
+import { selectViewport, Viewport } from '../ui';
 import { selectPreviousSpeakersState } from '.';
 
 const selectSpeakerId = (_state: RootState, speakerId: string) => speakerId;

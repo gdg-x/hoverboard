@@ -1,6 +1,5 @@
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
-import { setViewportSize } from '../store/ui/actions';
-import { VIEWPORT } from '../store/ui/types';
+import { setViewportSize, VIEWPORT } from '../store/ui';
 
 installMediaQueryWatcher(`(max-width: 639px)`, (matches) => {
   setViewportSize({ size: VIEWPORT.isPhone, matches });

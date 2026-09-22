@@ -3,12 +3,14 @@ import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Session } from '../models/session';
-import { closeDialog } from '../store/dialogs/actions';
+import { closeDialog } from '../store/dialogs';
 import { feedback } from '../utils/data';
 import type { FeedbackDialog } from './feedback-dialog';
 import './feedback-dialog';
 
-jest.mock('../store/dialogs/actions', () => ({
+jest.mock('../store/dialogs', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
   closeDialog: jest.fn(),
 }));
 

@@ -3,11 +3,15 @@ import { screen } from '@testing-library/dom';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { setHeroSettings } from '../../store/ui/actions';
+import { setHeroSettings } from '../../store/ui';
 import './hero-block';
 import { HeroBlock } from './hero-block';
 
-jest.mock('../../store/ui/actions');
+jest.mock('../../store/ui', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../../store/ui')>('../../store/ui'),
+  setHeroSettings: jest.fn(),
+}));
 
 const mockSetHeroSettings = mocked(setHeroSettings);
 

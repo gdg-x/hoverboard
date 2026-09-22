@@ -2,11 +2,13 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { closeVideoDialog } from '../store/ui/actions';
+import { closeVideoDialog } from '../store/ui';
 import type { VideoDialog } from './video-dialog';
 import './video-dialog';
 
-jest.mock('../store/ui/actions', () => ({
+jest.mock('../store/ui', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/ui')>('../store/ui'),
   closeVideoDialog: jest.fn(),
 }));
 

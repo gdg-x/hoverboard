@@ -16,7 +16,7 @@ import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
 import { RootState } from '../store';
-import { selectFilters } from '../store/filters/selectors';
+import { selectFilters } from '../store/filters';
 import { ReduxMixin } from '../store/mixin';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
