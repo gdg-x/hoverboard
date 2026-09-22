@@ -33,6 +33,17 @@ describe('about-block', () => {
     expect(getByText(aboutBlock.statisticsBlock.attendees.label)).toBeInTheDocument();
   });
 
+  it('renders hoverboard-icon arrow-right-circle icons for both call-to-actions', async () => {
+    const { shadowRootForWithin } = await fixture(
+      html`<about-block data-testid="block"></about-block>`,
+    );
+
+    const icons = shadowRootForWithin.querySelectorAll(
+      'hoverboard-icon[name="arrow-right-circle"]',
+    );
+    expect(icons).toHaveLength(2);
+  });
+
   it('plays the video', async () => {
     const { shadowRootForWithin } = await fixture(html`<about-block></about-block>`);
     const { getByText } = within(shadowRootForWithin);

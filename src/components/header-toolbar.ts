@@ -1,6 +1,4 @@
 import { Success } from '@abraham/remotedata';
-import '@polymer/app-layout/app-toolbar/app-toolbar';
-import '@polymer/paper-tabs';
 import '@material/web/button/filled-button.js';
 import { css, html, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
@@ -15,6 +13,7 @@ import { ReduxMixin } from '../store/mixin';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
+import { updateSelectionBar } from '../utils/tab-selection-bar';
 import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../utils/data';
 import './hoverboard-icon';
 import './notification-toggle';
@@ -53,7 +52,9 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
           opacity: var(--hero-logo-opacity, 1);
         }
 
-        app-toolbar {
+        .toolbar {
+          display: flex;
+          align-items: center;
           margin: 0 auto;
           padding: 0 16px;
           height: auto;
@@ -70,8 +71,28 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
         }
 
         .nav-items {
-          --paper-tabs-selection-bar-color: var(--default-primary-color);
+          position: relative;
+          display: flex;
+          align-items: stretch;
           height: 64px;
+        }
+
+        .selection-bar {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 2px;
+          width: 0;
+          background-color: var(--default-primary-color);
+          transition:
+            left 0.2s ease,
+            width 0.2s ease;
+          pointer-events: none;
+        }
+
+        .nav-item {
+          display: flex;
+          align-items: center;
         }
 
         .nav-item a,
@@ -79,6 +100,12 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
           padding: 0 14px;
           color: inherit;
           text-transform: uppercase;
+        }
+
+        .signin-tab {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
         }
 
         .icon-button {
@@ -163,7 +190,7 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
         }
 
         @media (min-width: 640px) {
-          app-toolbar {
+          .toolbar {
             padding: 0 36px;
             height: initial;
           }
@@ -237,9 +264,21 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
     }
   }
 
+  override updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+    this.positionSelectionBar();
+  }
+
+  private positionSelectionBar() {
+    const container = this.renderRoot.querySelector('.nav-items');
+    const selected = container?.querySelector<HTMLElement>('.nav-item.selected');
+    const bar = container?.querySelector<HTMLElement>('.selection-bar');
+    updateSelectionBar(bar, selected);
+  }
+
   override render() {
     return html`
-      <app-toolbar class="header">
+      <div class="toolbar header">
         <div>
           <button
             type="button"
@@ -262,30 +301,30 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
           ></a>
         </div>
 
-        <paper-tabs
-          class="nav-items"
-          .selected="${this.routeName}"
-          attr-for-selected="name"
-          ?hidden="${!this.viewport.isLaptopPlus}"
-          role="navigation"
-          noink
-        >
+        <nav class="nav-items" ?hidden="${!this.viewport.isLaptopPlus}" role="navigation">
+          <span class="selection-bar"></span>
           ${this.navigation.map(
             (nav) => html`
-              <paper-tab name="${nav.route}" class="nav-item" link>
-                <a href="${nav.permalink}" layout vertical center-center>${nav.label}</a>
-              </paper-tab>
+              <div class="nav-item ${nav.route === this.routeName ? 'selected' : ''}">
+                <a href="${nav.permalink}">${nav.label}</a>
+              </div>
             `,
           )}
 
-          <paper-tab class="signin-tab" @click="${this.signIn}" link ?hidden="${this.signedIn}">
+          <div
+            class="signin-tab"
+            role="button"
+            tabindex="0"
+            @click="${this.signIn}"
+            ?hidden="${this.signedIn}"
+          >
             ${this.signInText}
-          </paper-tab>
+          </div>
 
           <a href="${this.ticketUrl}" target="_blank" rel="noopener noreferrer">
             <md-filled-button class="buy-button">${this.buyTicket}</md-filled-button>
           </a>
-        </paper-tabs>
+        </nav>
 
         <notification-toggle></notification-toggle>
 
@@ -333,7 +372,7 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
         >
           <hoverboard-icon name="account"></hoverboard-icon>
         </button>
-      </app-toolbar>
+      </div>
     `;
   }
 

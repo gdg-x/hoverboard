@@ -1,14 +1,13 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
-import '@polymer/app-layout/app-toolbar/app-toolbar';
-import '@polymer/paper-tabs';
 import { RouterLocation } from '@vaadin/router';
-import { css, html } from 'lit';
+import { css, html, PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState } from '../store/schedule/state';
 import { contentLoaders, mySchedule } from '../utils/data';
+import { updateSelectionBar } from '../utils/tab-selection-bar';
 import './content-loader';
 import { ThemedElement } from './themed-element';
 
@@ -23,7 +22,7 @@ export class HeaderBottomToolbar extends ReduxMixin(ThemedElement) {
           background-color: var(--primary-background-color);
         }
 
-        app-toolbar {
+        .toolbar {
           margin: 0 auto;
           padding: 0 16px;
           height: auto;
@@ -31,12 +30,36 @@ export class HeaderBottomToolbar extends ReduxMixin(ThemedElement) {
         }
 
         .nav-items {
-          --paper-tabs-selection-bar-color: var(--default-primary-color);
+          position: relative;
           width: 100%;
+          height: 64px;
+          display: flex;
+          align-items: stretch;
+          overflow-x: auto;
+          scrollbar-width: none;
         }
 
-        paper-tabs.nav-items {
-          height: 64px;
+        .nav-items::-webkit-scrollbar {
+          display: none;
+        }
+
+        .selection-bar {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 2px;
+          width: 0;
+          background-color: var(--default-primary-color);
+          transition:
+            left 0.2s ease,
+            width 0.2s ease;
+          pointer-events: none;
+        }
+
+        .nav-item {
+          display: flex;
+          align-items: center;
+          flex: none;
         }
 
         .nav-item a {
@@ -45,7 +68,7 @@ export class HeaderBottomToolbar extends ReduxMixin(ThemedElement) {
         }
 
         @media (min-width: 640px) {
-          app-toolbar {
+          .toolbar {
             padding: 0 36px;
           }
         }
@@ -75,9 +98,21 @@ export class HeaderBottomToolbar extends ReduxMixin(ThemedElement) {
     }
   }
 
+  override updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+    this.positionSelectionBar();
+  }
+
+  private positionSelectionBar() {
+    const container = this.renderRoot.querySelector('nav.nav-items');
+    const selected = container?.querySelector<HTMLElement>('.nav-item.selected');
+    const bar = container?.querySelector<HTMLElement>('.selection-bar');
+    updateSelectionBar(bar, selected);
+  }
+
   override render() {
     return html`
-      <app-toolbar class="bottom-toolbar">
+      <div class="toolbar bottom-toolbar">
         <content-loader
           class="nav-items"
           card-padding="15px"
@@ -99,39 +134,31 @@ export class HeaderBottomToolbar extends ReduxMixin(ThemedElement) {
         >
         </content-loader>
 
-        <paper-tabs
-          class="nav-items"
-          .selected="${this.selectedTab}"
-          attr-for-selected="day"
-          ?hidden="${this.pending}"
-          scrollable
-          hide-scroll-buttons
-          noink
-        >
+        <nav class="nav-items" ?hidden="${this.pending}" role="navigation">
+          <span class="selection-bar"></span>
           ${this.days.map(
             (day) => html`
-              <paper-tab class="nav-item" day="${day.date}" link>
-                <a
-                  href="${this.addQueryParams(day.date, this.location?.search)}"
-                  layout
-                  vertical
-                  center-center
+              <div
+                class="nav-item ${day.date === this.selectedTab ? 'selected' : ''}"
+                data-day="${day.date}"
+              >
+                <a href="${this.addQueryParams(day.date, this.location?.search)}"
                   >${day.dateReadable}</a
                 >
-              </paper-tab>
+              </div>
             `,
           )}
-          <paper-tab class="nav-item" day="my-schedule" ?hidden="${!this.signedIn}" link>
-            <a
-              href="${this.addQueryParams('my-schedule', this.location?.search)}"
-              layout
-              vertical
-              center-center
+          <div
+            class="nav-item ${this.selectedTab === 'my-schedule' ? 'selected' : ''}"
+            data-day="my-schedule"
+            ?hidden="${!this.signedIn}"
+          >
+            <a href="${this.addQueryParams('my-schedule', this.location?.search)}"
               >${this.mySchedule.title}</a
             >
-          </paper-tab>
-        </paper-tabs>
-      </app-toolbar>
+          </div>
+        </nav>
+      </div>
     `;
   }
 

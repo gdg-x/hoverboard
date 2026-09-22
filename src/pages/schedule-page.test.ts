@@ -14,8 +14,6 @@ import './schedule-page';
 import { SchedulePage } from './schedule-page';
 
 jest.mock('../utils/metadata');
-jest.mock('@polymer/app-layout/app-toolbar/app-toolbar', () => ({}));
-jest.mock('@polymer/paper-tabs', () => ({}));
 jest.mock('../utils/scrolling', () => ({
   scrollToTop: jest.fn(),
 }));
