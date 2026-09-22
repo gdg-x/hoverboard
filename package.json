@@ -44,6 +44,7 @@
     "@polymer/decorators": "^3.0.0",
     "@polymer/google-map": "git+https://git@github.com/abraham/google-map.git#3.0",
     "@polymer/iron-icon": "^3.0.1",
+    "@polymer/iron-iconset-svg": "^3.0.1",
     "@polymer/polymer": "^3.5.2",
     "@power-elements/lazy-image": "^2.2.0",
     "@reduxjs/toolkit": "^2.12.0",
