@@ -17,20 +17,19 @@ import { Session } from '../models/session';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
-import { initialAuthState } from '../store/auth/state';
-import { openSigninDialog } from '../store/dialogs/actions';
+import { initialAuthState } from '../store/auth';
+import { openSigninDialog } from '../store/dialogs';
 import {
-  fetchUserFeaturedSessions,
+  FeaturedSessionsState,
+  selectFeaturedSessionsState,
   setUserFeaturedSessions,
-} from '../store/featured-sessions/actions';
-import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
+} from '../store/featured-sessions';
 import { ReduxMixin } from '../store/mixin';
 import { selectSession } from '../store/sessions/selectors';
 import { SessionsState, selectSessionsState } from '../store/sessions';
 import { queueComplexSnackbar } from '../store/snackbars';
-import { openVideoDialog } from '../store/ui/actions';
-import { initialUiState } from '../store/ui/state';
-import { initialUserState } from '../store/user/state';
+import { initialUiState, openVideoDialog } from '../store/ui';
+import { UserState } from '../store/user';
 import { TempAny } from '../temp-any';
 import { disabledSchedule, feedback, schedule, sessionDetails } from '../utils/data';
 import { acceptingFeedback } from '../utils/feedback';
@@ -191,9 +190,9 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
   @property({ type: String })
   sessionId: string | undefined;
   @property({ type: Object })
-  featuredSessions = initialFeaturedSessionsState;
+  featuredSessions: FeaturedSessionsState = new Initialized();
   @property({ type: Object })
-  user = initialUserState;
+  user: UserState = new Initialized();
   @property({ type: Object })
   auth = initialAuthState;
 
@@ -210,7 +209,7 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
     this.sessions = selectSessionsState(state);
     this.user = state.user;
     this.auth = state.auth;
-    this.featuredSessions = state.featuredSessions;
+    this.featuredSessions = selectFeaturedSessionsState(state);
     this.viewport = state.ui.viewport;
   }
 
@@ -220,18 +219,8 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
   }
 
   override updated(changed: Map<string, unknown>) {
-    if (changed.has('user') && this.user instanceof Success) {
-      this.onUser();
-    }
-
     if (changed.has('sessions') || changed.has('sessionId')) {
       this.updateSession();
-    }
-  }
-
-  private onUser() {
-    if (this.user instanceof Success && this.featuredSessions instanceof Initialized) {
-      store.dispatch(fetchUserFeaturedSessions);
     }
   }
 
@@ -289,7 +278,7 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
         [this.session.id]: bookmarked,
       };
 
-      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked));
+      setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked);
     }
   }
 

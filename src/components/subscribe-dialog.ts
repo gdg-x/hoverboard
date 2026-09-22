@@ -1,4 +1,4 @@
-import { Failure, Success } from '@abraham/remotedata';
+import { Failure, Initialized, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
 import '@material/web/textfield/outlined-text-field.js';
@@ -7,16 +7,10 @@ import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { DialogForm } from '../models/dialog-form';
 import { RootState } from '../store';
-import { closeDialog } from '../store/dialogs/actions';
-import { selectIsDialogOpen } from '../store/dialogs/selectors';
-import { DialogState, initialDialogState } from '../store/dialogs/state';
-import { DIALOG } from '../store/dialogs/types';
+import { closeDialog, DialogState, DIALOG, selectIsDialogOpen } from '../store/dialogs';
 import { ReduxMixin } from '../store/mixin';
-import {
-  initialPotentialPartnersState,
-  PotentialPartnersState,
-} from '../store/potential-partners/state';
-import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
+import { initialPotentialPartnersState, PotentialPartnersState } from '../store/potential-partners';
+import { SubscribeState } from '../store/subscribe';
 import { subscribeBlock } from '../utils/data';
 import { notEmpty, validEmail } from '../utils/strings';
 import { HoverboardDialog } from './hoverboard-dialog';
@@ -68,13 +62,13 @@ export class SubscribeDialog extends ReduxMixin(ThemedElement) {
   @state()
   private open = false;
   @state()
-  private subscribed: SubscribeState = initialSubscribeState;
+  private subscribed: SubscribeState = new Initialized();
   @state()
   private potentialPartners: PotentialPartnersState = initialPotentialPartnersState;
   @state()
   private errorOccurred = false;
   @state()
-  private dialogState: DialogState = initialDialogState;
+  private dialogState: DialogState = new Initialized();
   @state()
   private firstFieldValue = '';
   @state()

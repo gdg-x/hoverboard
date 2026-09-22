@@ -15,7 +15,7 @@ import {
 } from '../store/feedback';
 import { ReduxMixin } from '../store/mixin';
 import { queueComplexSnackbar, queueSnackbar } from '../store/snackbars';
-import { initialUserState } from '../store/user/state';
+import { UserState } from '../store/user';
 import { feedback as feedbackText } from '../utils/data';
 import './star-rating';
 import { type StarRatingChangeDetail } from './star-rating';
@@ -73,7 +73,7 @@ export class FeedbackBlock extends ReduxMixin(ThemedElement) {
   @state()
   private comment = '';
   @state()
-  private user = initialUserState;
+  private user: UserState = new Initialized();
   @state()
   private feedback: RemoteData<Error, Feedback | false> = new Initialized();
 

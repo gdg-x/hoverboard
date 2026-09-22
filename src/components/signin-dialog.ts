@@ -3,13 +3,14 @@ import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { RootState } from '../store';
-import { mergeAccounts, signIn } from '../store/auth/actions';
-import { selectAuthMergeable } from '../store/auth/selectors';
-import { initialAuthState } from '../store/auth/state';
-import { ExistingAccountError } from '../store/auth/types';
-import { closeDialog, openSigninDialog } from '../store/dialogs/actions';
-import { selectIsDialogOpen } from '../store/dialogs/selectors';
-import { DIALOG } from '../store/dialogs/types';
+import {
+  ExistingAccountError,
+  initialAuthState,
+  mergeAccounts,
+  selectAuthMergeable,
+  signIn,
+} from '../store/auth';
+import { closeDialog, DIALOG, openSigninDialog, selectIsDialogOpen } from '../store/dialogs';
 import { ReduxMixin } from '../store/mixin';
 import { TempAny } from '../temp-any';
 import { signIn as signInText, signInDialog, signInProviders } from '../utils/data';

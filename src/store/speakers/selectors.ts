@@ -3,7 +3,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import { Filter } from '../../models/filter';
 import { SpeakerWithTags } from '../../models/speaker';
-import { selectFilters } from '../../store/filters/selectors';
+import { selectFilters } from '../filters';
 import { generateClassName } from '../../utils/styles';
 import { selectSpeakersState } from '.';
 

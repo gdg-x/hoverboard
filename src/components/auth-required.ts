@@ -3,7 +3,7 @@ import '@material/web/button/text-button.js';
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { RootState } from '../store';
-import { openSigninDialog } from '../store/dialogs/actions';
+import { openSigninDialog } from '../store/dialogs';
 import { ReduxMixin } from '../store/mixin';
 import { signIn } from '../utils/data';
 import { ThemedElement } from './themed-element';

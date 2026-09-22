@@ -3,7 +3,7 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { FilterGroupKey } from '../models/filter-group';
-import { selectFilters } from '../store/filters/selectors';
+import { selectFilters } from '../store/filters';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
@@ -14,7 +14,9 @@ jest.mock('../utils/metadata');
 jest.mock('../utils/scrolling', () => ({
   scrollToTop: jest.fn(),
 }));
-jest.mock('../store/filters/selectors', () => ({
+jest.mock('../store/filters', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/filters')>('../store/filters'),
   selectFilters: jest.fn().mockReturnValue([]),
 }));
 jest.mock('../store/sessions/selectors', () => ({

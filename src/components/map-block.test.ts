@@ -2,7 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { location, mapBlock } from '../utils/data';
-import { initialUiState } from '../store/ui/state';
+import { initialUiState } from '../store/ui';
 import type { MapBlock } from './map-block';
 
 import './map-block';

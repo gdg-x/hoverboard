@@ -5,12 +5,16 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { User } from '../models/user';
 import { store } from '../store';
-import { openSigninDialog } from '../store/dialogs/actions';
-import { SET_USER, UserActions } from '../store/user/types';
+import { openSigninDialog } from '../store/dialogs';
+import { setUserSuccess } from '../store/user';
 import './auth-required';
 import { AuthRequired } from './auth-required';
 
-jest.mock('../store/dialogs/actions');
+jest.mock('../store/dialogs', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
+  openSigninDialog: jest.fn(),
+}));
 
 const mockOpenDialog = mocked(openSigninDialog);
 
@@ -61,10 +65,7 @@ describe('auth-required', () => {
   });
 
   it('shows authenticated content', async () => {
-    store.dispatch<UserActions>({
-      type: SET_USER,
-      payload: { uid: '1' } as User,
-    });
+    store.dispatch(setUserSuccess({ uid: '1' } as User));
     await element.updateComplete;
 
     expect(shadowRoot.querySelector<HTMLDivElement>('md-text-button')).toHaveAttribute('hidden');

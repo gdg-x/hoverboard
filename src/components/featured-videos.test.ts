@@ -4,12 +4,14 @@ import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Video } from '../models/video';
-import { openVideoDialog } from '../store/ui/actions';
+import { openVideoDialog } from '../store/ui';
 import { featuredVideos, loading } from '../utils/data';
 import type { FeaturedVideos } from './featured-videos';
 import './featured-videos';
 
-jest.mock('../store/ui/actions', () => ({
+jest.mock('../store/ui', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/ui')>('../store/ui'),
   openVideoDialog: jest.fn(),
 }));
 

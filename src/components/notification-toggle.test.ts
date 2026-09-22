@@ -2,10 +2,19 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, jest } from '@jest/globals';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
+import { updateNotificationsSubscribers } from '../store/update-notifications-subscribers';
 import { notifications } from '../utils/data';
 import type { NotificationToggle } from './notification-toggle';
 
 import './notification-toggle';
+
+jest.mock('../store/update-notifications-subscribers', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/update-notifications-subscribers')>(
+    '../store/update-notifications-subscribers',
+  ),
+  updateNotificationsSubscribers: jest.fn(),
+}));
 
 describe('notification-toggle', () => {
   it('defines a component', () => {
@@ -103,12 +112,10 @@ describe('notification-toggle', () => {
   });
 
   it('toggles general notifications on and off', async () => {
-    const dispatch = jest.fn();
+    const mockUpdateNotificationsSubscribers = jest.mocked(updateNotificationsSubscribers);
     const { element, shadowRoot } = await fixture<NotificationToggle>(
       html`<notification-toggle></notification-toggle>`,
     );
-    const { store } = await import('../store');
-    jest.spyOn(store, 'dispatch').mockImplementation(dispatch as never);
 
     element['notificationPermission'] = new Success('token');
     await element.updateComplete;
@@ -119,8 +126,6 @@ describe('notification-toggle', () => {
     toggle.selected = true;
     toggle.dispatchEvent(new MouseEvent('click'));
 
-    expect(dispatch).toHaveBeenCalled();
-
-    jest.restoreAllMocks();
+    expect(mockUpdateNotificationsSubscribers).toHaveBeenCalledWith('token');
   });
 });

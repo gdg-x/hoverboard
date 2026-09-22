@@ -6,8 +6,7 @@ import { Session } from '../../models/session';
 import { Time } from '../../models/time';
 import { Timeslot } from '../../models/timeslot';
 import { TempAny } from '../../temp-any';
-import { selectFeaturedSessions } from '../featured-sessions/selectors';
-import { FeaturedSessions } from '../featured-sessions/state';
+import { FeaturedSessions, selectFeaturedSessions } from '../featured-sessions';
 import { selectScheduleState } from '.';
 
 const selectSchedule = (state: RootState): Day[] => {

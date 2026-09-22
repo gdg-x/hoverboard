@@ -1,13 +1,10 @@
-import { Success } from '@abraham/remotedata';
+import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { Session } from '../models/session';
 import { RootState } from '../store';
-import { closeDialog } from '../store/dialogs/actions';
-import { selectIsDialogOpen } from '../store/dialogs/selectors';
-import { DialogState, initialDialogState } from '../store/dialogs/state';
-import { DIALOG } from '../store/dialogs/types';
+import { closeDialog, DialogState, DIALOG, selectIsDialogOpen } from '../store/dialogs';
 import { ReduxMixin } from '../store/mixin';
 import { feedback } from '../utils/data';
 import './feedback-block';
@@ -37,7 +34,7 @@ export class FeedbackDialog extends ReduxMixin(ThemedElement) {
   @state()
   private open = false;
   @state()
-  private data: DialogState = initialDialogState;
+  private data: DialogState = new Initialized();
   @state()
   private session?: Session;
 

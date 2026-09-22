@@ -3,7 +3,7 @@ import '@power-elements/lazy-image';
 import { css, html, PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { setHeroSettings } from '../../store/ui/actions';
+import { setHeroSettings } from '../../store/ui';
 import { ThemedElement } from '../themed-element';
 
 @customElement('hero-block')

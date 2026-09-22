@@ -13,7 +13,7 @@ import { ThemedElement } from '../components/themed-element';
 import { Filter } from '../models/filter';
 import { FilterGroup } from '../models/filter-group';
 import { RootState } from '../store';
-import { selectFilters } from '../store/filters/selectors';
+import { selectFilters } from '../store/filters';
 import { ReduxMixin } from '../store/mixin';
 import { ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';

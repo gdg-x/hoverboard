@@ -7,8 +7,8 @@ import { fixture } from '../../__tests__/helpers/fixtures';
 import { Session } from '../models/session';
 import { User } from '../models/user';
 import { router } from '../router';
-import { openFeedbackDialog, openSigninDialog } from '../store/dialogs/actions';
-import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
+import { openFeedbackDialog, openSigninDialog } from '../store/dialogs';
+import { setUserFeaturedSessions } from '../store/featured-sessions';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { acceptingFeedback } from '../utils/feedback';
 import type { SessionElement } from './session-element';
@@ -17,8 +17,17 @@ import './session-element';
 jest.mock('../router', () => ({
   router: { urlForName: jest.fn() },
 }));
-jest.mock('../store/dialogs/actions');
-jest.mock('../store/featured-sessions/actions');
+jest.mock('../store/dialogs', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
+  openFeedbackDialog: jest.fn(),
+  openSigninDialog: jest.fn(),
+}));
+jest.mock('../store/featured-sessions', () => ({
+  __esModule: true,
+  ...jest.requireActual<typeof import('../store/featured-sessions')>('../store/featured-sessions'),
+  setUserFeaturedSessions: jest.fn(),
+}));
 jest.mock('../store/snackbars', () => ({
   ...jest.requireActual<typeof import('../store/snackbars')>('../store/snackbars'),
   queueComplexSnackbar: jest.fn(),
@@ -48,7 +57,7 @@ describe('session-element', () => {
     jest.clearAllMocks();
     mockUrlForName.mockReturnValue('/sessions/session-1');
     mockAcceptingFeedback.mockReturnValue(false);
-    mockSetUserFeaturedSessions.mockReturnValue({ type: 'SET_USER_FEATURED_SESSIONS' } as never);
+    mockSetUserFeaturedSessions.mockResolvedValue(undefined);
     mockQueueComplexSnackbar.mockReturnValue({ type: 'queueComplexSnackbar' } as never);
   });
 

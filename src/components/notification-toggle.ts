@@ -13,18 +13,20 @@ import {
   requestNotificationPermission,
   unsupportedNotificationPermission,
 } from '../store/notification-permission';
-import { selectNotificationsSubscribers } from '../store/notifications-subscribers/selectors';
-import { initialNotificationsSubscribersState } from '../store/notifications-subscribers/state';
-import { selectNotificationsUsersSubscribed } from '../store/notifications-users/selectors';
+import {
+  initialNotificationsSubscribersState,
+  selectNotificationsSubscribers,
+} from '../store/notifications-subscribers';
+import { selectNotificationsUsersSubscribed } from '../store/notifications-users';
 import {
   clearNotificationsSubscribers,
   updateNotificationsSubscribers,
-} from '../store/update-notifications-subscribers/actions';
+} from '../store/update-notifications-subscribers';
 import {
   removeNotificationsUsers,
   updateNotificationsUsers,
-} from '../store/update-notifications-users/actions';
-import { initialUserState } from '../store/user/state';
+} from '../store/update-notifications-users';
+import { UserState } from '../store/user';
 import { loading, notifications } from '../utils/data';
 import './auth-required';
 import './hoverboard-icon';
@@ -97,7 +99,7 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
   @state()
   private notificationsUsersSubscribed = false;
   @state()
-  private user = initialUserState;
+  private user: UserState = new Initialized();
 
   @state()
   private opened = false;
@@ -281,9 +283,9 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
     }
 
     if (selected) {
-      store.dispatch(updateNotificationsSubscribers(this.notificationPermission.data));
+      updateNotificationsSubscribers(this.notificationPermission.data);
     } else {
-      store.dispatch(clearNotificationsSubscribers(this.notificationPermission.data));
+      clearNotificationsSubscribers(this.notificationPermission.data);
     }
   }
 
@@ -294,13 +296,9 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
     }
 
     if (selected) {
-      store.dispatch(
-        updateNotificationsUsers(this.user.data.uid, this.notificationPermission.data),
-      );
+      updateNotificationsUsers(this.user.data.uid, this.notificationPermission.data);
     } else {
-      store.dispatch(
-        removeNotificationsUsers(this.user.data.uid, this.notificationPermission.data),
-      );
+      removeNotificationsUsers(this.user.data.uid, this.notificationPermission.data);
     }
   }
 
