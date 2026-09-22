@@ -22,10 +22,6 @@ export class ForkMeBlock extends ThemedElement {
           --md-outlined-button-label-text-color: #000;
           --md-outlined-button-outline-color: #000;
         }
-
-        hoverboard-icon {
-          margin-left: 8px;
-        }
       `,
     ];
   }
@@ -41,9 +37,9 @@ export class ForkMeBlock extends ThemedElement {
         </p>
         <a href="https://github.com/gdg-x/hoverboard">
           <div class="cta-button">
-            <md-outlined-button class="icon-right">
+            <md-outlined-button class="icon-right" trailing-icon>
               <span class="cta-label">Fork this project</span>
-              <hoverboard-icon name="github"></hoverboard-icon>
+              <hoverboard-icon slot="icon" name="github"></hoverboard-icon>
             </md-outlined-button>
           </div>
         </a>
