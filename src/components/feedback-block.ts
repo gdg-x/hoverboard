@@ -1,10 +1,11 @@
 import { Initialized, RemoteData, Success } from '@abraham/remotedata';
-import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
-import '@polymer/paper-input/paper-textarea';
-import { html, PolymerElement } from '@polymer/polymer';
+import '@material/web/textfield/outlined-text-field.js';
+import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import '@radi-cho/star-rating';
+import { css, html, PropertyValues } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 import { Feedback } from '../models/feedback';
 import { RootState, store } from '../store';
 import {
@@ -17,18 +18,19 @@ import { ReduxMixin } from '../store/mixin';
 import { queueComplexSnackbar, queueSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { feedback as feedbackText } from '../utils/data';
+import { ThemedElement } from './themed-element';
 
 @customElement('feedback-block')
-export class FeedbackBlock extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style>
-        /* TODO: consolidate this wiith positioning.ts */
-        [hidden] {
-          display: none !important;
+export class FeedbackBlock extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
+        #feedback-comment {
+          width: 100%;
         }
 
-        #feedback-comment {
+        md-outlined-text-field {
           width: 100%;
         }
 
@@ -56,38 +58,8 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
             display: block;
           }
         }
-      </style>
-
-      <div class="container">
-        <div>
-          <div class="caption">[[feedbackText.contentCaption]]:</div>
-          <star-rating rating="{{contentRating}}"></star-rating>
-        </div>
-        <div>
-          <div class="caption">[[feedbackText.styleCaption]]:</div>
-          <star-rating rating="{{styleRating}}"></star-rating>
-        </div>
-
-        <paper-textarea
-          id="commentInput"
-          hidden$="[[!hasRated]]"
-          label="Comment"
-          value="{{comment}}"
-          maxlength="256"
-        ></paper-textarea>
-        <p hidden$="[[!hasRated]]" class="helper">[[feedbackText.helperText]]</p>
-        <md-filled-button class="primary" hidden$="[[!hasRated]]" on-click="setFeedback">
-          [[feedbackText.save]]
-        </md-filled-button>
-        <md-outlined-button
-          class="delete-button"
-          hidden$="[[!feedback.data]]"
-          on-click="deleteFeedback"
-        >
-          [[feedbackText.deleteFeedback]]
-        </md-outlined-button>
-      </div>
-    `;
+      `,
+    ];
   }
 
   @property({ type: Number })
@@ -97,11 +69,11 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
   @property({ type: String })
   sessionId: string | undefined;
 
-  @property({ type: String })
+  @state()
   private comment = '';
-  @property({ type: Object })
+  @state()
   private user = initialUserState;
-  @property({ type: Object })
+  @state()
   private feedback: RemoteData<Error, Feedback | false> = new Initialized();
 
   private feedbackText = feedbackText;
@@ -109,6 +81,60 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
   override stateChanged(state: RootState) {
     this.user = state.user;
     this.feedback = selectFeedbackById(state, this.sessionId);
+  }
+
+  override willUpdate(changedProperties: PropertyValues) {
+    if (changedProperties.has('feedback')) {
+      this.onFeedback(this.feedback);
+    }
+  }
+
+  override render() {
+    return html`
+      <div class="container">
+        <div>
+          <div class="caption">${this.feedbackText.contentCaption}:</div>
+          <star-rating
+            .rating="${this.contentRating}"
+            @rating-changed="${(e: CustomEvent<{ value: number }>) =>
+              (this.contentRating = e.detail.value)}"
+          ></star-rating>
+        </div>
+        <div>
+          <div class="caption">${this.feedbackText.styleCaption}:</div>
+          <star-rating
+            .rating="${this.styleRating}"
+            @rating-changed="${(e: CustomEvent<{ value: number }>) =>
+              (this.styleRating = e.detail.value)}"
+          ></star-rating>
+        </div>
+
+        <md-outlined-text-field
+          id="commentInput"
+          type="textarea"
+          ?hidden="${!this.hasRated}"
+          label="Comment"
+          .value="${this.comment}"
+          maxlength="256"
+          @input="${this.onCommentInput}"
+        ></md-outlined-text-field>
+        <p ?hidden="${!this.hasRated}" class="helper">${this.feedbackText.helperText}</p>
+        <md-filled-button class="primary" ?hidden="${!this.hasRated}" @click="${this.setFeedback}">
+          ${this.feedbackText.save}
+        </md-filled-button>
+        <md-outlined-button
+          class="delete-button"
+          ?hidden="${!this.hasSavedFeedback}"
+          @click="${this.deleteFeedback}"
+        >
+          ${this.feedbackText.deleteFeedback}
+        </md-outlined-button>
+      </div>
+    `;
+  }
+
+  private onCommentInput(e: Event) {
+    this.comment = (e.target as MdOutlinedTextField).value;
   }
 
   private resetFeedback() {
@@ -184,7 +210,6 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
-  @observe('feedback')
   private onFeedback(feedback: SessionFeedback) {
     if (feedback instanceof Success && feedback.data) {
       this.contentRating = feedback.data.contentRating;
@@ -195,11 +220,20 @@ export class FeedbackBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
-  @computed('contentRating', 'styleRating')
-  get hasRated() {
+  private get hasSavedFeedback() {
+    return this.feedback instanceof Success && Boolean(this.feedback.data);
+  }
+
+  private get hasRated() {
     return (
       (this.contentRating > 0 && this.contentRating <= 5) ||
       (this.styleRating > 0 && this.styleRating <= 5)
     );
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'feedback-block': FeedbackBlock;
   }
 }

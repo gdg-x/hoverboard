@@ -12,7 +12,7 @@ import { DialogState, initialDialogState } from '../../store/dialogs/state';
 import { DIALOG } from '../../store/dialogs/types';
 import { ReduxMixin } from '../../store/mixin';
 import { feedback } from '../../utils/data';
-import '../feedback-block';
+import '../../components/feedback-block';
 import '../shared-styles';
 
 class FeedbackDialog extends ReduxMixin(PolymerElement) {
