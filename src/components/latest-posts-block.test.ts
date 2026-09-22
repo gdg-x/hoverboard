@@ -74,5 +74,7 @@ describe('latest-posts-block', () => {
     expect(shadowRoot.querySelector('.cta-button')).toHaveTextContent(
       latestPostsBlock.callToAction.label,
     );
+    expect(shadowRoot.querySelector('.cta-button')).toHaveAttribute('trailing-icon');
+    expect(shadowRoot.querySelector('.cta-button hoverboard-icon')).toHaveAttribute('slot', 'icon');
   });
 });

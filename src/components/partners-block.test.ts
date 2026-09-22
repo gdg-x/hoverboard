@@ -87,6 +87,8 @@ describe('partners-block', () => {
       'src',
       'https://example.com/logo-1.svg',
     );
+    expect(shadowRoot.querySelector('.cta-button')).toHaveAttribute('trailing-icon');
+    expect(shadowRoot.querySelector('.cta-button hoverboard-icon')).toHaveAttribute('slot', 'icon');
   });
 
   it('opens the subscribe dialog when clicking the become a partner button', async () => {

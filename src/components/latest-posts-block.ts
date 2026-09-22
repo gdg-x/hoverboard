@@ -150,9 +150,9 @@ export class LatestPostsBlock extends ReduxMixin(ThemedElement) {
         </div>
 
         <a href="${this.latestPostsBlock.callToAction.link}">
-          <md-text-button class="cta-button animated icon-right">
+          <md-text-button class="cta-button animated icon-right" trailing-icon>
             <span>${this.latestPostsBlock.callToAction.label}</span>
-            <hoverboard-icon name="arrow-right-circle"></hoverboard-icon>
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
           </md-text-button>
         </a>
       </div>

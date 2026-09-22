@@ -36,6 +36,8 @@ describe('subscribe-block', () => {
       'name',
       'arrow-right-circle',
     );
+    expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('slot', 'icon');
+    expect(shadowRoot.querySelector('md-text-button')).toHaveAttribute('trailing-icon');
     expect(shadowRoot.querySelector('md-text-button')).not.toHaveAttribute('disabled');
   });
 

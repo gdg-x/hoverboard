@@ -127,9 +127,13 @@ export class PartnersBlock extends ReduxMixin(ThemedElement) {
           `,
         )}
 
-        <md-text-button class="cta-button animated icon-right" @click="${this.addPotentialPartner}">
+        <md-text-button
+          class="cta-button animated icon-right"
+          trailing-icon
+          @click="${this.addPotentialPartner}"
+        >
           <span>${this.partnersBlock.button}</span>
-          <hoverboard-icon name="arrow-right-circle"></hoverboard-icon>
+          <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
         </md-text-button>
       </div>
     `;

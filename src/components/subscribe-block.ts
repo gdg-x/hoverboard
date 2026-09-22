@@ -93,11 +93,12 @@ export class SubscribeBlock extends ReduxMixin(ThemedElement) {
         <div class="cta-button">
           <md-text-button
             class="animated icon-right"
+            trailing-icon
             ?disabled="${this.subscribed instanceof Success}"
             @click="${this.subscribe}"
           >
             <span class="cta-label">${this.ctaLabel}</span>
-            <hoverboard-icon name="${this.ctaIcon}"></hoverboard-icon>
+            <hoverboard-icon slot="icon" name="${this.ctaIcon}"></hoverboard-icon>
           </md-text-button>
         </div>
       </div>

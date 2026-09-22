@@ -179,11 +179,10 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
           </div>
           <paper-icon-button
             class="next-video slide-icon"
+            icon="hoverboard:chevron-right"
             on-click="shiftContentRight"
             hidden$="[[rightArrowHidden]]"
-          >
-            &gt;</paper-icon-button
-          >
+          ></paper-icon-button>
         </div>
         <a href="[[featuredVideos.callToAction.link]]" target="_blank" rel="noopener noreferrer">
           <md-text-button class="cta-button animated icon-right" trailing-icon>
