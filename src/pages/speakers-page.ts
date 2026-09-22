@@ -15,13 +15,12 @@ import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
-import { RootState, store } from '../store';
+import { RootState } from '../store';
 import { selectFilters } from '../store/filters/selectors';
 import { ReduxMixin } from '../store/mixin';
 import { selectFilterGroups } from '../store/sessions/selectors';
-import { fetchSpeakers } from '../store/speakers/actions';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
-import { initialSpeakersState } from '../store/speakers/state';
+import { SpeakersState, selectSpeakersState } from '../store/speakers';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
@@ -178,7 +177,7 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
   private contentLoaders = contentLoaders;
 
   @property({ type: Object })
-  speakers = initialSpeakersState;
+  speakers: SpeakersState = new Initialized();
 
   @property({ type: Array })
   filterGroups: FilterGroup[] = [];
@@ -190,14 +189,10 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-
-    if (this.speakers instanceof Initialized) {
-      store.dispatch(fetchSpeakers);
-    }
   }
 
   override stateChanged(state: RootState) {
-    this.speakers = state.speakers;
+    this.speakers = selectSpeakersState(state);
     this.filterGroups = selectFilterGroups(state, [FilterGroupKey.tags]);
     this.selectedFilters = selectFilters(state);
     this.speakersToRender = selectFilteredSpeakers(state);

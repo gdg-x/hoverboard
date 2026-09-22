@@ -1,6 +1,6 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import { createSelector } from '@reduxjs/toolkit';
-import { RootState, store } from '..';
+import { RootState } from '..';
 import { Day } from '../../models/day';
 import { Session } from '../../models/session';
 import { Time } from '../../models/time';
@@ -8,15 +8,11 @@ import { Timeslot } from '../../models/timeslot';
 import { TempAny } from '../../temp-any';
 import { selectFeaturedSessions } from '../featured-sessions/selectors';
 import { FeaturedSessions } from '../featured-sessions/state';
-import { fetchSchedule } from './actions';
+import { selectScheduleState } from '.';
 
 const selectSchedule = (state: RootState): Day[] => {
-  if (state.schedule instanceof Success) {
-    return state.schedule.data;
-  } else if (state.schedule instanceof Initialized) {
-    store.dispatch(fetchSchedule);
-  }
-  return [];
+  const schedule = selectScheduleState(state);
+  return schedule instanceof Success ? schedule.data : [];
 };
 
 export const selectFeaturedSchedule = createSelector(

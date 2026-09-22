@@ -1,11 +1,10 @@
-import { Success } from '@abraham/remotedata';
+import { Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, jest } from '@jest/globals';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
-import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { updateImageMetadata } from '../utils/metadata';
 import './previous-speaker-page';
@@ -17,9 +16,6 @@ jest.mock('../utils/scrolling', () => ({
 }));
 jest.mock('../router', () => ({
   router: { urlForName: jest.fn(), render: jest.fn() },
-}));
-jest.mock('../store/previous-speakers/actions', () => ({
-  fetchPreviousSpeakers: jest.fn(),
 }));
 jest.mock('../store/previous-speakers/selectors', () => ({
   selectPreviousSpeaker: jest.fn(),
@@ -46,15 +42,12 @@ describe('previous-speaker-page', () => {
     expect(customElements.get('previous-speaker-page')).toBeDefined();
   });
 
-  it('dispatches the fetch thunk on connect', async () => {
-    const mockFetchPreviousSpeakers = fetchPreviousSpeakers as jest.MockedFunction<
-      typeof fetchPreviousSpeakers
-    >;
-    mockFetchPreviousSpeakers.mockClear();
+  it('triggers the fetch and starts in the pending state', async () => {
+    const { element } = await fixture<PreviousSpeakerPage>(
+      html`<previous-speaker-page></previous-speaker-page>`,
+    );
 
-    await fixture<PreviousSpeakerPage>(html`<previous-speaker-page></previous-speaker-page>`);
-
-    expect(mockFetchPreviousSpeakers).toHaveBeenCalled();
+    expect(element.speakers).toBeInstanceOf(Pending);
   });
 
   it('resolves the speaker from the route and updates metadata', async () => {

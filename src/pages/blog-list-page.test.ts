@@ -1,4 +1,4 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, jest } from '@jest/globals';
 import { within } from '@testing-library/dom';
 import { mocked } from 'jest-mock';
@@ -6,7 +6,6 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Post } from '../models/post';
 import { router } from '../router';
-import { fetchBlogPosts } from '../store/blog/actions';
 import { heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 import './blog-list-page';
@@ -14,9 +13,6 @@ import { BlogListPage } from './blog-list-page';
 
 jest.mock('../router', () => ({
   router: { urlForName: jest.fn() },
-}));
-jest.mock('../store/blog/actions', () => ({
-  fetchBlogPosts: jest.fn(),
 }));
 jest.mock('../utils/metadata');
 jest.mock('../utils/scrolling', () => ({
@@ -67,16 +63,13 @@ describe('blog-list-page', () => {
     expect(customElements.get('blog-list-page')).toBeDefined();
   });
 
-  it('dispatches the fetch thunk and updates metadata', async () => {
-    const mockFetchBlogPosts = mocked(fetchBlogPosts);
+  it('triggers the fetch, starts in the pending state, and updates metadata', async () => {
     const mockUpdateMetadata = mocked(updateMetadata);
-    mockFetchBlogPosts.mockClear();
     mockUpdateMetadata.mockClear();
 
     const { element } = await fixture<BlogListPage>(html`<blog-list-page></blog-list-page>`);
 
-    expect(element.posts).toBeInstanceOf(Initialized);
-    expect(mockFetchBlogPosts).toHaveBeenCalled();
+    expect(element.posts).toBeInstanceOf(Pending);
     expect(mockUpdateMetadata).toHaveBeenCalledWith(
       heroSettings.blog.title,
       heroSettings.blog.metaDescription,

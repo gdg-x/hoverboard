@@ -1,11 +1,10 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, jest } from '@jest/globals';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Post } from '../models/post';
 import { router } from '../router';
-import { fetchBlogPosts } from '../store/blog/actions';
 import { latestPostsBlock } from '../utils/data';
 import type { LatestPostsBlock } from './latest-posts-block';
 import './latest-posts-block';
@@ -14,12 +13,7 @@ jest.mock('../router', () => ({
   router: { urlForName: jest.fn() },
 }));
 
-jest.mock('../store/blog/actions', () => ({
-  fetchBlogPosts: jest.fn(),
-}));
-
 const mockUrlForName = mocked(router.urlForName);
-const mockFetchBlogPosts = mocked(fetchBlogPosts);
 
 const posts: Post[] = [
   {
@@ -47,14 +41,12 @@ describe('latest-posts-block', () => {
     expect(customElements.get('latest-posts-block')).toBeDefined();
   });
 
-  it('dispatches the blog fetch thunk from the initialized state', async () => {
-    mockFetchBlogPosts.mockClear();
+  it('triggers the fetch and starts in the pending state', async () => {
     const { element } = await fixture<LatestPostsBlock>(
       html`<latest-posts-block></latest-posts-block>`,
     );
 
-    expect(element.posts).toBeInstanceOf(Initialized);
-    expect(mockFetchBlogPosts).toHaveBeenCalled();
+    expect(element.posts).toBeInstanceOf(Pending);
   });
 
   it('renders up to four latest posts using the router', async () => {

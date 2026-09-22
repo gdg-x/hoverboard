@@ -8,10 +8,9 @@ import '../components/footer-block';
 import '../components/hero/simple-hero';
 import { PreviousSession } from '../models/previous-session';
 import { router } from '../router';
-import { RootState, store } from '../store';
+import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
-import { initialPreviousSpeakersState } from '../store/previous-speakers/state';
+import { PreviousSpeakersState, selectPreviousSpeakersState } from '../store/previous-speakers';
 import { contentLoaders, heroSettings, speakers } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 import { ThemedElement } from '../components/themed-element';
@@ -130,7 +129,7 @@ export class PreviousSpeakersPage extends ReduxMixin(ThemedElement) {
   }
 
   @property({ type: Object })
-  previousSpeakers = initialPreviousSpeakersState;
+  previousSpeakers: PreviousSpeakersState = new Initialized();
 
   private heroSettings = heroSettings.previousSpeakers;
   private contentLoaders = contentLoaders.previousSpeakers;
@@ -141,16 +140,12 @@ export class PreviousSpeakersPage extends ReduxMixin(ThemedElement) {
   }
 
   override stateChanged(state: RootState) {
-    this.previousSpeakers = state.previousSpeakers;
+    this.previousSpeakers = selectPreviousSpeakersState(state);
   }
 
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-
-    if (this.previousSpeakers instanceof Initialized) {
-      store.dispatch(fetchPreviousSpeakers);
-    }
   }
 
   private getYears(sessions: { [key: number]: PreviousSession[] }) {

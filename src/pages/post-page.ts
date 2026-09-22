@@ -9,9 +9,8 @@ import '../components/posts-list';
 import { ThemedElement } from '../components/themed-element';
 import { Post } from '../models/post';
 import { router } from '../router';
-import { RootState, store } from '../store';
-import { fetchBlogPosts } from '../store/blog/actions';
-import { initialBlogState } from '../store/blog/state';
+import { RootState } from '../store';
+import { BlogState, selectBlogPosts } from '../store/blog';
 import { ReduxMixin } from '../store/mixin';
 import { blog } from '../utils/data';
 import { getDate } from '../utils/dates';
@@ -50,7 +49,7 @@ export class PostPage extends ReduxMixin(ThemedElement) {
   }
 
   @property({ type: Object })
-  posts = initialBlogState;
+  posts: BlogState = new Initialized();
 
   @state()
   private post: RemoteData<Error, Post> = new Initialized();
@@ -65,15 +64,8 @@ export class PostPage extends ReduxMixin(ThemedElement) {
   private contentRequest = 0;
 
   override stateChanged(state: RootState) {
-    this.posts = state.blog;
+    this.posts = selectBlogPosts(state);
     this.updatePost();
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.posts instanceof Initialized) {
-      store.dispatch(fetchBlogPosts);
-    }
   }
 
   onAfterEnter(location: RouterLocation) {

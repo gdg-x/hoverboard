@@ -15,9 +15,8 @@ import { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { fetchSpeakers } from '../store/speakers/actions';
 import { selectSpeaker } from '../store/speakers/selectors';
-import { initialSpeakersState } from '../store/speakers/state';
+import { SpeakersState, selectSpeakersState } from '../store/speakers';
 import { speakerDetails } from '../utils/data';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
@@ -166,21 +165,13 @@ export class SpeakerPage extends ReduxMixin(ThemedElement) {
   @property({ type: Object })
   speaker: SpeakerWithTags | undefined;
   @property({ type: Object })
-  speakers = initialSpeakersState;
+  speakers: SpeakersState = new Initialized();
 
   @state()
   private speakerId: string | undefined;
 
   override stateChanged(state: RootState) {
-    this.speakers = state.speakers;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-
-    if (this.speakers instanceof Initialized) {
-      store.dispatch(fetchSpeakers);
-    }
+    this.speakers = selectSpeakersState(state);
   }
 
   onAfterEnter(location: RouterLocation) {

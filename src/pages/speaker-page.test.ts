@@ -1,11 +1,10 @@
-import { Success } from '@abraham/remotedata';
+import { Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, jest } from '@jest/globals';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
-import { fetchSpeakers } from '../store/speakers/actions';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { updateImageMetadata } from '../utils/metadata';
 import './speaker-page';
@@ -17,9 +16,6 @@ jest.mock('../utils/scrolling', () => ({
 }));
 jest.mock('../router', () => ({
   router: { urlForName: jest.fn(), render: jest.fn() },
-}));
-jest.mock('../store/speakers/actions', () => ({
-  fetchSpeakers: jest.fn(),
 }));
 jest.mock('../store/speakers/selectors', () => ({
   selectSpeaker: jest.fn(),
@@ -50,13 +46,10 @@ describe('speaker-page', () => {
     expect(customElements.get('speaker-page')).toBeDefined();
   });
 
-  it('dispatches the fetch thunk on connect', async () => {
-    const mockFetchSpeakers = fetchSpeakers as jest.MockedFunction<typeof fetchSpeakers>;
-    mockFetchSpeakers.mockClear();
+  it('triggers the fetch and starts in the pending state', async () => {
+    const { element } = await fixture<SpeakerPage>(html`<speaker-page></speaker-page>`);
 
-    await fixture<SpeakerPage>(html`<speaker-page></speaker-page>`);
-
-    expect(mockFetchSpeakers).toHaveBeenCalled();
+    expect(element.speakers).toBeInstanceOf(Pending);
   });
 
   it('resolves the speaker from the route and updates metadata', async () => {

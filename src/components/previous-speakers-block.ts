@@ -5,14 +5,10 @@ import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
-import { RootState, store } from '../store';
+import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { selectRandomPreviousSpeakers } from '../store/previous-speakers/selectors';
-import {
-  initialPreviousSpeakersState,
-  PreviousSpeakersState,
-} from '../store/previous-speakers/state';
+import { PreviousSpeakersState, selectPreviousSpeakersState } from '../store/previous-speakers';
 import { loading, previousSpeakersBlock } from '../utils/data';
 import './hoverboard-icon';
 import { ThemedElement } from './themed-element';
@@ -73,21 +69,14 @@ export class PreviousSpeakersBlock extends ReduxMixin(ThemedElement) {
   }
 
   @property({ type: Object })
-  previousSpeakers: PreviousSpeakersState = initialPreviousSpeakersState;
+  previousSpeakers: PreviousSpeakersState = new Initialized();
 
   @property({ type: Array })
   speakers: PreviousSpeaker[] = [];
 
   override stateChanged(state: RootState) {
-    this.previousSpeakers = state.previousSpeakers;
+    this.previousSpeakers = selectPreviousSpeakersState(state);
     this.speakers = selectRandomPreviousSpeakers(state);
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.previousSpeakers instanceof Initialized) {
-      store.dispatch(fetchPreviousSpeakers);
-    }
   }
 
   override render() {

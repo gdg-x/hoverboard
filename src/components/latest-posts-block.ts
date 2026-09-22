@@ -6,9 +6,8 @@ import { customElement, property } from 'lit/decorators.js';
 import '../components/markdown/short-markdown';
 import '../components/text-truncate';
 import { router } from '../router';
-import { RootState, store } from '../store';
-import { fetchBlogPosts } from '../store/blog/actions';
-import { BlogState, initialBlogState } from '../store/blog/state';
+import { RootState } from '../store';
+import { BlogState, selectBlogPosts } from '../store/blog';
 import { ReduxMixin } from '../store/mixin';
 import { latestPostsBlock } from '../utils/data';
 import { getDate } from '../utils/dates';
@@ -89,17 +88,10 @@ export class LatestPostsBlock extends ReduxMixin(ThemedElement) {
   private latestPostsBlock = latestPostsBlock;
 
   @property({ type: Object })
-  posts: BlogState = initialBlogState;
+  posts: BlogState = new Initialized();
 
   override stateChanged(state: RootState) {
-    this.posts = state.blog;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.posts instanceof Initialized) {
-      store.dispatch(fetchBlogPosts);
-    }
+    this.posts = selectBlogPosts(state);
   }
 
   private get latestPosts() {

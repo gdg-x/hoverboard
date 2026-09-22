@@ -13,10 +13,6 @@ jest.mock('../store/ui/actions', () => ({
   openVideoDialog: jest.fn(),
 }));
 
-jest.mock('../store/videos/actions', () => ({
-  fetchVideos: jest.fn(),
-}));
-
 const mockOpenVideoDialog = mocked(openVideoDialog);
 
 const video: Video = {
@@ -81,5 +77,11 @@ describe('featured-videos', () => {
       title: `${video.title} by ${video.speakers}`,
       youtubeId: video.youtubeId,
     });
+  });
+
+  it('triggers the fetch and starts in the pending state', async () => {
+    const { element } = await fixture<FeaturedVideos>(html`<featured-videos></featured-videos>`);
+
+    expect(element.videos).toBeInstanceOf(Pending);
   });
 });

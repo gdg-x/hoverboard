@@ -7,10 +7,9 @@ import './hoverboard-icon';
 import './text-truncate';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
-import { RootState, store } from '../store';
+import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { fetchSpeakers } from '../store/speakers/actions';
-import { initialSpeakersState } from '../store/speakers/state';
+import { SpeakersState, selectSpeakersState } from '../store/speakers';
 import { randomOrder } from '../utils/arrays';
 import { speakersBlock } from '../utils/data';
 import { ThemedElement } from './themed-element';
@@ -161,18 +160,10 @@ export class SpeakersBlock extends ReduxMixin(ThemedElement) {
   }
 
   @property({ type: Object })
-  speakers = initialSpeakersState;
-
-  override connectedCallback() {
-    super.connectedCallback();
-
-    if (this.speakers instanceof Initialized) {
-      store.dispatch(fetchSpeakers);
-    }
-  }
+  speakers: SpeakersState = new Initialized();
 
   override stateChanged(state: RootState) {
-    this.speakers = state.speakers;
+    this.speakers = selectSpeakersState(state);
   }
 
   override render() {

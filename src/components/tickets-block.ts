@@ -1,11 +1,11 @@
-import { Failure, Pending, Success } from '@abraham/remotedata';
+import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { Ticket } from '../models/ticket';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { initialTicketsState } from '../store/tickets/state';
+import { TicketsState, selectTickets } from '../store/tickets';
 import { buyTicket, contentLoaders, ticketsBlock } from '../utils/data';
 import './content-loader';
 import { ThemedElement } from './themed-element';
@@ -130,10 +130,10 @@ export class TicketsBlock extends ReduxMixin(ThemedElement) {
   private contentLoaders = contentLoaders.tickets;
 
   @property({ type: Object })
-  tickets = initialTicketsState;
+  tickets: TicketsState = new Initialized();
 
   override stateChanged(state: RootState) {
-    this.tickets = state.tickets;
+    this.tickets = selectTickets(state);
   }
 
   private get pending() {

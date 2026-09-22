@@ -1,4 +1,4 @@
-import { Success } from '@abraham/remotedata';
+import { Initialized, Success } from '@abraham/remotedata';
 import '@power-elements/lazy-image';
 import { css, html, PropertyValues } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
@@ -16,8 +16,7 @@ import { RootState, store } from './store';
 import { ReduxMixin } from './store/mixin';
 import { onUser } from './store/auth/actions';
 import { queueSnackbar } from './store/snackbars';
-import { fetchTickets } from './store/tickets/actions';
-import { initialTicketsState } from './store/tickets/state';
+import { TicketsState, selectTickets } from './store/tickets';
 import { DrawerOpenedChanged } from './utils/drawer';
 import {
   buyTicket,
@@ -164,7 +163,7 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
   header!: HTMLElement;
 
   @property({ type: Object })
-  tickets = initialTicketsState;
+  tickets: TicketsState = new Initialized();
 
   @property({ type: Boolean })
   private drawerOpened = false;
@@ -174,7 +173,7 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
   private routeName = 'home';
 
   override stateChanged(state: RootState) {
-    this.tickets = state.tickets;
+    this.tickets = selectTickets(state);
     this.routeName = selectRouteName(window.location.pathname);
   }
 
@@ -182,7 +181,6 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
     super.connectedCallback();
     window.addEventListener('element-sticked', (event) => this.toggleHeaderShadow(event));
     window.addEventListener('offline', () => store.dispatch(queueSnackbar(offlineMessage)));
-    store.dispatch(fetchTickets);
   }
 
   override firstUpdated(changedProperties: PropertyValues) {

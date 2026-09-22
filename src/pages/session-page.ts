@@ -25,9 +25,8 @@ import {
 } from '../store/featured-sessions/actions';
 import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
 import { ReduxMixin } from '../store/mixin';
-import { fetchSessions } from '../store/sessions/actions';
 import { selectSession } from '../store/sessions/selectors';
-import { initialSessionsState } from '../store/sessions/state';
+import { SessionsState, selectSessionsState } from '../store/sessions';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui/actions';
 import { initialUiState } from '../store/ui/state';
@@ -186,7 +185,7 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
   private sessionDetails = sessionDetails;
 
   @property({ type: Object })
-  sessions = initialSessionsState;
+  sessions: SessionsState = new Initialized();
   @property({ type: Object })
   session: Session | undefined;
   @property({ type: String })
@@ -208,19 +207,11 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
   private acceptingFeedback: boolean = false;
 
   override stateChanged(state: RootState) {
-    this.sessions = state.sessions;
+    this.sessions = selectSessionsState(state);
     this.user = state.user;
     this.auth = state.auth;
     this.featuredSessions = state.featuredSessions;
     this.viewport = state.ui.viewport;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-
-    if (this.sessions instanceof Initialized) {
-      store.dispatch(fetchSessions);
-    }
   }
 
   onAfterEnter(location: RouterLocation) {

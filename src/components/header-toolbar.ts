@@ -1,4 +1,4 @@
-import { Success } from '@abraham/remotedata';
+import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
 import { css, html, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
@@ -10,7 +10,7 @@ import { closeDialog, openSigninDialog } from '../store/dialogs/actions';
 import { selectIsDialogOpen } from '../store/dialogs/selectors';
 import { DIALOG } from '../store/dialogs/types';
 import { ReduxMixin } from '../store/mixin';
-import { initialTicketsState, TicketsState } from '../store/tickets/state';
+import { TicketsState, selectTickets } from '../store/tickets';
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
 import { updateSelectionBar } from '../utils/tab-selection-bar';
@@ -208,7 +208,7 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
   @property({ type: Boolean, attribute: 'drawer-opened' })
   drawerOpened = false;
   @property({ type: Object })
-  tickets: TicketsState = initialTicketsState;
+  tickets: TicketsState = new Initialized();
 
   @state()
   private viewport = initialUiState.viewport;
@@ -235,7 +235,7 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
   override stateChanged(state: RootState) {
     this.user = state.user;
     this.signedIn = state.user instanceof Success;
-    this.tickets = state.tickets;
+    this.tickets = selectTickets(state);
     this.heroSettings = state.ui.heroSettings;
     this.viewport = state.ui.viewport;
     this.routeName = selectRouteName(window.location.pathname);
