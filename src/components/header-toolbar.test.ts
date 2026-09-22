@@ -5,8 +5,6 @@ import { fixture } from '../../__tests__/helpers/fixtures';
 import { navigation, signIn, signOut as signOutText } from '../utils/data';
 import type { HeaderToolbar } from './header-toolbar';
 
-jest.mock('@polymer/app-layout/app-toolbar/app-toolbar', () => ({}));
-jest.mock('@polymer/paper-tabs', () => ({}));
 jest.mock('../router', () => ({
   selectRouteName: jest.fn(() => 'home'),
 }));
@@ -33,7 +31,7 @@ describe('header-toolbar', () => {
   it('renders a tab for every navigation item', async () => {
     const { shadowRoot } = await fixture<HeaderToolbar>(html`<header-toolbar></header-toolbar>`);
 
-    const tabs = shadowRoot.querySelectorAll('paper-tab.nav-item');
+    const tabs = shadowRoot.querySelectorAll('.nav-item');
     expect(tabs).toHaveLength(navigation.length);
     expect(tabs[0]?.querySelector('a')).toHaveAttribute('href', navigation[0]?.permalink);
     expect(tabs[0]).toHaveTextContent(navigation[0]?.label ?? '');
@@ -106,5 +104,24 @@ describe('header-toolbar', () => {
 
     expect(shadowRoot.querySelector('.icon-button[aria-label="menu"]')).toHaveAttribute('hidden');
     expect(shadowRoot.querySelector('.toolbar-logo')).not.toHaveAttribute('hidden');
+  });
+
+  it('positions the selection bar under the selected nav item', async () => {
+    const { element, shadowRoot } = await fixture<HeaderToolbar>(
+      html`<header-toolbar></header-toolbar>`,
+    );
+
+    const selected = shadowRoot.querySelector<HTMLElement>('.nav-item.selected');
+    const bar = shadowRoot.querySelector<HTMLElement>('.selection-bar');
+    expect(selected).not.toBeNull();
+    Object.defineProperty(selected, 'offsetLeft', { value: 42, configurable: true });
+    Object.defineProperty(selected, 'offsetWidth', { value: 84, configurable: true });
+
+    // jsdom doesn't compute real layout metrics, so re-invoke the private measurement hook
+    // directly after stubbing offsetLeft/offsetWidth to assert the positioning logic itself.
+    (element as unknown as { positionSelectionBar(): void }).positionSelectionBar();
+
+    expect(bar?.style.left).toBe('42px');
+    expect(bar?.style.width).toBe('84px');
   });
 });
