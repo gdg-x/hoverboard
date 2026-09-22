@@ -4,9 +4,8 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { Photo } from '../models/photo';
-import { RootState, store } from '../store';
-import { fetchGallery } from '../store/gallery/actions';
-import { initialGalleryState } from '../store/gallery/state';
+import { RootState } from '../store';
+import { GalleryState, selectGallery } from '../store/gallery';
 import { ReduxMixin } from '../store/mixin';
 import { galleryBlock } from '../utils/data';
 import { ThemedElement } from './themed-element';
@@ -127,18 +126,10 @@ export class GalleryBlock extends ReduxMixin(ThemedElement) {
   }
 
   @property({ type: Object })
-  gallery = initialGalleryState;
+  gallery: GalleryState = new Initialized();
 
   override stateChanged(state: RootState) {
-    this.gallery = state.gallery;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-
-    if (this.gallery instanceof Initialized) {
-      store.dispatch(fetchGallery);
-    }
+    this.gallery = selectGallery(state);
   }
 
   override render() {

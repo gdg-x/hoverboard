@@ -1,18 +1,10 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { Failure, Pending, Success } from '@abraham/remotedata';
+import { describe, expect, it } from '@jest/globals';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { fetchGallery } from '../store/gallery/actions';
 import { galleryBlock } from '../utils/data';
 import type { GalleryBlock } from './gallery-block';
 import './gallery-block';
-
-jest.mock('../store/gallery/actions', () => ({
-  fetchGallery: jest.fn(),
-}));
-
-const mockFetchGallery = mocked(fetchGallery);
 
 describe('gallery-block', () => {
   it('defines a component', () => {
@@ -57,11 +49,9 @@ describe('gallery-block', () => {
     );
   });
 
-  it('dispatches the gallery fetch thunk from the initialized state', async () => {
-    mockFetchGallery.mockClear();
+  it('triggers the fetch and starts in the pending state', async () => {
     const { element } = await fixture<GalleryBlock>(html`<gallery-block></gallery-block>`);
 
-    expect(element.gallery).toBeInstanceOf(Initialized);
-    expect(mockFetchGallery).toHaveBeenCalled();
+    expect(element.gallery).toBeInstanceOf(Pending);
   });
 });

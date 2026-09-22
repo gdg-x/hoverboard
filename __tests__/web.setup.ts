@@ -23,6 +23,18 @@ Object.defineProperty(globalThis, 'ReadableStream', {
   value: ReadableStream,
 });
 
+// JSDOM does not provide setImmediate/clearImmediate, used by @grpc/grpc-js
+// (a transitive dependency of firebase/firestore's realtime listeners).
+Object.defineProperty(globalThis, 'setImmediate', {
+  writable: true,
+  value: (fn: (...args: unknown[]) => void, ...args: unknown[]) => setTimeout(fn, 0, ...args),
+});
+
+Object.defineProperty(globalThis, 'clearImmediate', {
+  writable: true,
+  value: clearTimeout,
+});
+
 // JSDOM does not implement IntersectionObserver, used by @justinribeiro/lite-youtube
 // (rendered inside video-dialog).
 class MockIntersectionObserver {

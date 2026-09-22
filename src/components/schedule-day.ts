@@ -12,7 +12,7 @@ import { fetchUserFeaturedSessions } from '../store/featured-sessions/actions';
 import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
 import { selectFilters } from '../store/filters/selectors';
 import { ReduxMixin } from '../store/mixin';
-import { initialScheduleState, ScheduleState } from '../store/schedule/state';
+import { ScheduleState, selectScheduleState } from '../store/schedule';
 import { initialUserState } from '../store/user/state';
 import { TempAny } from '../temp-any';
 import { mySchedule } from '../utils/data';
@@ -109,7 +109,7 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
   private mySchedule = mySchedule;
 
   @property({ type: Object })
-  schedule: ScheduleState = initialScheduleState;
+  schedule: ScheduleState = new Initialized();
   @property({ type: Object })
   location: RouterLocation | undefined;
   @property({ type: Object })
@@ -129,7 +129,7 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
   }
 
   override stateChanged(state: RootState) {
-    this.schedule = state.schedule;
+    this.schedule = selectScheduleState(state);
     this.user = state.user;
     this.selectedFilters = selectFilters(state);
     this.featuredSessions = state.featuredSessions;

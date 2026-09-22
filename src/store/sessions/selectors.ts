@@ -1,11 +1,11 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import { createSelector } from '@reduxjs/toolkit';
-import { RootState, store } from '..';
+import { RootState } from '..';
 import { Filter } from '../../models/filter';
 import { FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import { Session } from '../../models/session';
 import { filters } from '../../utils/data';
-import { fetchSessions } from './actions';
+import { selectSessionsState } from '.';
 
 const buildFilter = (group: FilterGroupKey, tag: string): Filter => {
   return { group, tag };
@@ -31,12 +31,8 @@ const buildFilters = (sessions: Session[], filterGroupKey: FilterGroupKey): Filt
 const selectSessionId = (_state: RootState, sessionId: string) => sessionId;
 
 const selectSessions = (state: RootState) => {
-  if (state.sessions instanceof Success) {
-    return state.sessions.data;
-  } else if (state.sessions instanceof Initialized) {
-    store.dispatch(fetchSessions);
-  }
-  return [];
+  const sessions = selectSessionsState(state);
+  return sessions instanceof Success ? sessions.data : [];
 };
 
 export const selectSession = createSelector(

@@ -1,4 +1,4 @@
-import { Failure, Initialized, Success } from '@abraham/remotedata';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { waitFor, within } from '@testing-library/dom';
 import { mocked } from 'jest-mock';
@@ -6,7 +6,6 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Post } from '../models/post';
 import { router } from '../router';
-import { fetchBlogPosts } from '../store/blog/actions';
 import { updateImageMetadata } from '../utils/metadata';
 import './post-page';
 import { PostPage } from './post-page';
@@ -16,9 +15,6 @@ jest.mock('../router', () => ({
     render: jest.fn(),
     urlForName: jest.fn(),
   },
-}));
-jest.mock('../store/blog/actions', () => ({
-  fetchBlogPosts: jest.fn(),
 }));
 jest.mock('../utils/metadata');
 jest.mock('../utils/scrolling', () => ({
@@ -82,15 +78,11 @@ describe('post-page', () => {
     fetchMock.mockReset();
   });
 
-  it('defines a component and dispatches the fetch thunk', async () => {
-    const mockFetchBlogPosts = mocked(fetchBlogPosts);
-    mockFetchBlogPosts.mockClear();
-
+  it('defines a component and triggers the fetch, starting in the pending state', async () => {
     const { element } = await fixture<PostPage>(html`<post-page></post-page>`);
 
     expect(customElements.get('post-page')).toBeDefined();
-    expect(element.posts).toBeInstanceOf(Initialized);
-    expect(mockFetchBlogPosts).toHaveBeenCalled();
+    expect(element.posts).toBeInstanceOf(Pending);
   });
 
   it('synchronizes route data with posts and renders suggestions', async () => {

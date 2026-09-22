@@ -1,4 +1,4 @@
-import { Success } from '@abraham/remotedata';
+import { Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/dom';
 import { mocked } from 'jest-mock';
@@ -8,7 +8,6 @@ import { Session } from '../models/session';
 import { User } from '../models/user';
 import { router } from '../router';
 import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
-import { fetchSessions } from '../store/sessions/actions';
 import { selectSession } from '../store/sessions/selectors';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui/actions';
@@ -22,9 +21,6 @@ jest.mock('../utils/scrolling', () => ({
 }));
 jest.mock('../router', () => ({
   router: { urlForName: jest.fn(), render: jest.fn() },
-}));
-jest.mock('../store/sessions/actions', () => ({
-  fetchSessions: jest.fn(),
 }));
 jest.mock('../store/sessions/selectors', () => ({
   selectSession: jest.fn(),
@@ -71,13 +67,10 @@ describe('session-page', () => {
     expect(customElements.get('session-page')).toBeDefined();
   });
 
-  it('dispatches the fetch thunk on connect', async () => {
-    const mockFetchSessions = fetchSessions as jest.MockedFunction<typeof fetchSessions>;
-    mockFetchSessions.mockClear();
+  it('triggers the fetch and starts in the pending state', async () => {
+    const { element } = await fixture<SessionPage>(html`<session-page></session-page>`);
 
-    await fixture<SessionPage>(html`<session-page></session-page>`);
-
-    expect(mockFetchSessions).toHaveBeenCalled();
+    expect(element.sessions).toBeInstanceOf(Pending);
   });
 
   it('resolves the session from the route and updates metadata', async () => {

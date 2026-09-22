@@ -1,30 +1,30 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { authReducer } from './auth/reducers';
-import { blogReducer } from './blog/reducers';
+import blogReducer from './blog';
 import { dialogsReducer } from './dialogs/reducers';
 import { featuredSessionsReducer } from './featured-sessions/reducers';
 import feedback from './feedback';
 import { filtersReducer } from './filters/reducers';
-import { galleryReducer } from './gallery/reducers';
-import { membersReducer } from './members/reducers';
+import galleryReducer from './gallery';
+import membersReducer from './members';
 import notificationPermission from './notification-permission';
 import { notificationsSubscribersReducer } from './notifications-subscribers/reducers';
 import { notificationsUsersReducer } from './notifications-users/reducers';
 import partners from './partners';
 import { potentialPartnersReducer } from './potential-partners/reducers';
-import { previousSpeakersReducer } from './previous-speakers/reducers';
-import { scheduleReducer } from './schedule/reducers';
-import { sessionsReducer } from './sessions/reducers';
+import previousSpeakersReducer from './previous-speakers';
+import scheduleReducer from './schedule';
+import sessionsReducer from './sessions';
 import snackbars from './snackbars';
-import { speakersReducer } from './speakers/reducers';
+import speakersReducer from './speakers';
 import { subscribeReducer } from './subscribe/reducers';
-import { teamsReducer } from './teams/reducers';
-import { ticketsReducer } from './tickets/reducers';
+import teamsReducer from './teams';
+import ticketsReducer from './tickets';
 import { uiReducer } from './ui/reducers';
 import { updateNotificationsSubscribersReducer } from './update-notifications-subscribers/reducers';
 import { updateNotificationsUsersReducer } from './update-notifications-users/reducers';
 import { userReducer } from './user/reducers';
-import { videosReducer } from './videos/reducers';
+import videosReducer from './videos';
 
 export const reducers = combineReducers({
   auth: authReducer,

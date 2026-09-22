@@ -1,11 +1,10 @@
-import { Failure, Initialized, Success } from '@abraham/remotedata';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, jest } from '@jest/globals';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
-import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { heroSettings, speakers } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 import './previous-speakers-page';
@@ -17,9 +16,6 @@ jest.mock('../utils/scrolling', () => ({
 }));
 jest.mock('../router', () => ({
   router: { urlForName: jest.fn() },
-}));
-jest.mock('../store/previous-speakers/actions', () => ({
-  fetchPreviousSpeakers: jest.fn(),
 }));
 
 const speaker: PreviousSpeaker = {
@@ -56,17 +52,12 @@ describe('previous-speakers-page', () => {
     expect(shadowRoot).toHaveTextContent('2024');
   });
 
-  it('dispatches the fetch thunk from the initialized state', async () => {
-    const mockFetchPreviousSpeakers = fetchPreviousSpeakers as jest.MockedFunction<
-      typeof fetchPreviousSpeakers
-    >;
-    mockFetchPreviousSpeakers.mockClear();
+  it('triggers the fetch and starts in the pending state', async () => {
     const { element } = await fixture<PreviousSpeakersPage>(
       html`<previous-speakers-page></previous-speakers-page>`,
     );
 
-    expect(element.previousSpeakers).toBeInstanceOf(Initialized);
-    expect(mockFetchPreviousSpeakers).toHaveBeenCalled();
+    expect(element.previousSpeakers).toBeInstanceOf(Pending);
   });
 
   it('updates metadata and renders the completed-state progress visibility', async () => {

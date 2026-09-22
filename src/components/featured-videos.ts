@@ -4,11 +4,10 @@ import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { Video } from '../models/video';
-import { RootState, store } from '../store';
+import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { openVideoDialog } from '../store/ui/actions';
-import { fetchVideos } from '../store/videos/actions';
-import { initialVideosState } from '../store/videos/state';
+import { VideosState, selectVideos } from '../store/videos';
 import { featuredVideos, loading } from '../utils/data';
 import './hoverboard-icon';
 import { ThemedElement } from './themed-element';
@@ -145,7 +144,7 @@ export class FeaturedVideos extends ReduxMixin(ThemedElement) {
   videoList!: HTMLDivElement;
 
   @property({ type: Object })
-  videos = initialVideosState;
+  videos: VideosState = new Initialized();
 
   @property({ type: Boolean })
   private leftArrowHidden = true;
@@ -165,14 +164,7 @@ export class FeaturedVideos extends ReduxMixin(ThemedElement) {
   }
 
   override stateChanged(state: RootState) {
-    this.videos = state.videos;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.videos instanceof Initialized) {
-      store.dispatch(fetchVideos);
-    }
+    this.videos = selectVideos(state);
   }
 
   private shiftContentLeft() {

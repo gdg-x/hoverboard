@@ -2,10 +2,8 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { createSelector } from '@reduxjs/toolkit';
 import { Member } from '../../models/member';
 import { Team, TeamWithoutMembers } from '../../models/team';
-import { selectMembers } from '../members/selectors';
-import { MembersState } from '../members/state';
-import { selectTeams } from '../teams/selectors';
-import { TeamsState } from '../teams/state';
+import { MembersState, selectMembers } from '../members';
+import { TeamsState, selectTeams } from '../teams';
 import { TeamsMembersState } from './state';
 
 const mergeMembers = (team: TeamWithoutMembers, possibleMembers: Member[]): Team => {

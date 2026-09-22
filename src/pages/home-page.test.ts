@@ -13,9 +13,6 @@ jest.mock('../utils/metadata');
 jest.mock('../router', () => ({
   router: { urlForName: jest.fn() },
 }));
-jest.mock('../store/blog/actions', () => ({
-  fetchBlogPosts: jest.fn(),
-}));
 jest.mock('../utils/scrolling', () => ({
   scrollToTop: jest.fn(),
   scrollToElement: jest.fn(),

@@ -12,9 +12,8 @@ import '../components/text-truncate';
 import { ThemedElement } from '../components/themed-element';
 import { Post } from '../models/post';
 import { router } from '../router';
-import { RootState, store } from '../store';
-import { fetchBlogPosts } from '../store/blog/actions';
-import { initialBlogState } from '../store/blog/state';
+import { RootState } from '../store';
+import { BlogState, selectBlogPosts } from '../store/blog';
 import { ReduxMixin } from '../store/mixin';
 import { initialUiState } from '../store/ui/state';
 import { contentLoaders, heroSettings } from '../utils/data';
@@ -102,7 +101,7 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
   private contentLoaders = contentLoaders.blog;
 
   @property({ type: Object })
-  posts = initialBlogState;
+  posts: BlogState = new Initialized();
   @property({ type: Object })
   private viewport = initialUiState.viewport;
 
@@ -124,16 +123,12 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
 
   override stateChanged(state: RootState) {
     this.viewport = state.ui.viewport;
-    this.posts = state.blog;
+    this.posts = selectBlogPosts(state);
   }
 
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-
-    if (this.posts instanceof Initialized) {
-      store.dispatch(fetchBlogPosts);
-    }
   }
 
   addIfNotPhone(base: number, additional: number) {

@@ -1,27 +1,19 @@
-import { Failure, Initialized, Pending } from '@abraham/remotedata';
+import { Failure, Pending } from '@abraham/remotedata';
 import { describe, expect, it, jest } from '@jest/globals';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
-import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { loading, previousSpeakersBlock } from '../utils/data';
 import type { PreviousSpeakersBlock } from './previous-speakers-block';
 import './previous-speakers-block';
-
-jest.mock('../store/previous-speakers/actions', () => ({
-  fetchPreviousSpeakers: jest.fn(),
-}));
 
 jest.mock('../router', () => ({
   router: { urlForName: jest.fn() },
 }));
 
 const mockRouter = mocked(router);
-const mockFetchPreviousSpeakers = fetchPreviousSpeakers as jest.MockedFunction<
-  typeof fetchPreviousSpeakers
->;
 
 const speaker: PreviousSpeaker = {
   bio: 'Bio',
@@ -79,13 +71,11 @@ describe('previous-speakers-block', () => {
     );
   });
 
-  it('dispatches the previous speakers fetch thunk from the initialized state', async () => {
-    mockFetchPreviousSpeakers.mockClear();
+  it('triggers the fetch and starts in the pending state', async () => {
     const { element } = await fixture<PreviousSpeakersBlock>(
       html`<previous-speakers-block></previous-speakers-block>`,
     );
 
-    expect(element.previousSpeakers).toBeInstanceOf(Initialized);
-    expect(mockFetchPreviousSpeakers).toHaveBeenCalled();
+    expect(element.previousSpeakers).toBeInstanceOf(Pending);
   });
 });

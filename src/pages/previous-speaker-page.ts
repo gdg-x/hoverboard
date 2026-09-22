@@ -17,9 +17,8 @@ import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
-import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
-import { initialPreviousSpeakersState } from '../store/previous-speakers/state';
+import { PreviousSpeakersState, selectPreviousSpeakersState } from '../store/previous-speakers';
 import { sessionDetails, speakerDetails, speakers } from '../utils/data';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
@@ -160,21 +159,13 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
   @property({ type: Object })
   speaker: PreviousSpeaker | undefined;
   @property({ type: Object })
-  speakers = initialPreviousSpeakersState;
+  speakers: PreviousSpeakersState = new Initialized();
 
   @state()
   private speakerId: string | undefined;
 
-  override connectedCallback() {
-    super.connectedCallback();
-
-    if (this.speakers instanceof Initialized) {
-      store.dispatch(fetchPreviousSpeakers);
-    }
-  }
-
   override stateChanged(state: RootState) {
-    this.speakers = state.previousSpeakers;
+    this.speakers = selectPreviousSpeakersState(state);
   }
 
   onAfterEnter(location: RouterLocation) {

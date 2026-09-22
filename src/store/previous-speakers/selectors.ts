@@ -1,22 +1,17 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import { createSelector } from '@reduxjs/toolkit';
-import { RootState, store } from '..';
+import { RootState } from '..';
 import { PreviousSpeaker } from '../../models/previous-speaker';
 import { randomOrder } from '../../utils/arrays';
 import { selectViewport } from '../ui/selectors';
 import { Viewport } from '../ui/types';
-import { fetchPreviousSpeakers } from './actions';
+import { selectPreviousSpeakersState } from '.';
 
 const selectSpeakerId = (_state: RootState, speakerId: string) => speakerId;
 
 const selectPreviousSpeakers = (state: RootState): PreviousSpeaker[] => {
-  const { previousSpeakers } = state;
-  if (previousSpeakers instanceof Success) {
-    return previousSpeakers.data;
-  } else if (previousSpeakers instanceof Initialized) {
-    store.dispatch(fetchPreviousSpeakers);
-  }
-  return [];
+  const previousSpeakers = selectPreviousSpeakersState(state);
+  return previousSpeakers instanceof Success ? previousSpeakers.data : [];
 };
 
 export const selectPreviousSpeaker = createSelector(

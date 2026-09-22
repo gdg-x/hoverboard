@@ -1,4 +1,4 @@
-import { Initialized, Pending, Success } from '@abraham/remotedata';
+import { Initialized, Pending } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
@@ -12,16 +12,13 @@ import '../components/sticky-element';
 import { ThemedElement } from '../components/themed-element';
 import { Filter } from '../models/filter';
 import { FilterGroup } from '../models/filter-group';
-import { RootState, store } from '../store';
+import { RootState } from '../store';
 import { selectFilters } from '../store/filters/selectors';
 import { ReduxMixin } from '../store/mixin';
-import { fetchSchedule } from '../store/schedule/actions';
-import { initialScheduleState } from '../store/schedule/state';
-import { fetchSessions } from '../store/sessions/actions';
+import { ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';
-import { initialSessionsState } from '../store/sessions/state';
-import { fetchSpeakers } from '../store/speakers/actions';
-import { initialSpeakersState } from '../store/speakers/state';
+import { SessionsState, selectSessionsState } from '../store/sessions';
+import { SpeakersState, selectSpeakersState } from '../store/speakers';
 import { TempAny } from '../temp-any';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
@@ -66,11 +63,11 @@ export class SchedulePage extends ReduxMixin(ThemedElement) {
   private contentLoaders = contentLoaders.schedule;
 
   @property({ type: Object })
-  schedule = initialScheduleState;
+  schedule: ScheduleState = new Initialized();
   @property({ type: Object })
-  sessions = initialSessionsState;
+  sessions: SessionsState = new Initialized();
   @property({ type: Object })
-  speakers = initialSpeakersState;
+  speakers: SpeakersState = new Initialized();
 
   @state()
   private filterGroups: FilterGroup[] = [];
@@ -82,42 +79,18 @@ export class SchedulePage extends ReduxMixin(ThemedElement) {
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-
-    if (this.sessions instanceof Initialized) {
-      store.dispatch(fetchSessions);
-    }
-
-    if (this.speakers instanceof Initialized) {
-      store.dispatch(fetchSpeakers);
-    }
   }
 
   override stateChanged(state: RootState) {
-    this.schedule = state.schedule;
-    this.speakers = state.speakers;
-    this.sessions = state.sessions;
+    this.schedule = selectScheduleState(state);
+    this.speakers = selectSpeakersState(state);
+    this.sessions = selectSessionsState(state);
     this.filterGroups = selectFilterGroups(state);
     this.selectedFilters = selectFilters(state);
   }
 
   onAfterEnter(location: RouterLocation) {
     this.location = location;
-  }
-
-  override updated(changed: Map<string, unknown>) {
-    if (changed.has('sessions') || changed.has('speakers')) {
-      this.onSessionsAndSpeakersChanged();
-    }
-  }
-
-  private onSessionsAndSpeakersChanged() {
-    if (
-      this.schedule instanceof Initialized &&
-      this.sessions instanceof Success &&
-      this.speakers instanceof Success
-    ) {
-      store.dispatch(fetchSchedule);
-    }
   }
 
   private get pending() {
