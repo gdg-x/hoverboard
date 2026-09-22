@@ -1,8 +1,7 @@
 import { Success } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
 import '@material/web/button/text-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { DialogData } from '../models/dialog-form';
 import { RootState, store } from '../store';
 import { openSubscribeDialog } from '../store/dialogs/actions';
@@ -12,14 +11,15 @@ import { initialSubscribeState, SubscribeState } from '../store/subscribe/state'
 import { initialUiState } from '../store/ui/state';
 import { initialUserState } from '../store/user/state';
 import { subscribeBlock } from '../utils/data';
-import '../utils/icons';
-import './shared-styles';
+import './hoverboard-icon';
+import { ThemedElement } from './themed-element';
 
 @customElement('subscribe-block')
-export class SubscribeBlock extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
+export class SubscribeBlock extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           display: flex;
           width: 100%;
@@ -56,22 +56,8 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
             text-align: center;
           }
         }
-      </style>
-
-      <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
-        <div class="description">[[subscribeBlock.callToAction.description]]</div>
-        <div class="cta-button">
-          <md-text-button
-            class="animated icon-right"
-            disabled$="[[subscribed.data]]"
-            on-click="subscribe"
-          >
-            <span class="cta-label">[[ctaLabel]]</span>
-            <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>
-          </md-text-button>
-        </div>
-      </div>
-    `;
+      `,
+    ];
   }
 
   private subscribeBlock = subscribeBlock;
@@ -80,9 +66,9 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
   subscribed: SubscribeState = initialSubscribeState;
 
   @property({ type: Object })
-  private user = initialUserState;
+  user = initialUserState;
   @property({ type: Object })
-  private viewport = initialUiState.viewport;
+  viewport = initialUiState.viewport;
 
   override stateChanged(state: RootState) {
     this.subscribed = state.subscribed;
@@ -90,16 +76,32 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
     this.viewport = state.ui.viewport;
   }
 
-  @computed('subscribed')
   private get ctaIcon() {
     return this.subscribed instanceof Success ? 'checked' : 'arrow-right-circle';
   }
 
-  @computed('subscribed')
   private get ctaLabel() {
     return this.subscribed instanceof Success
       ? this.subscribeBlock.subscribed
       : this.subscribeBlock.callToAction.label;
+  }
+
+  override render() {
+    return html`
+      <div class="container" layout vertical ?center="${this.viewport.isTabletPlus}">
+        <div class="description">${this.subscribeBlock.callToAction.description}</div>
+        <div class="cta-button">
+          <md-text-button
+            class="animated icon-right"
+            ?disabled="${this.subscribed instanceof Success}"
+            @click="${this.subscribe}"
+          >
+            <span class="cta-label">${this.ctaLabel}</span>
+            <hoverboard-icon name="${this.ctaIcon}"></hoverboard-icon>
+          </md-text-button>
+        </div>
+      </div>
+    `;
   }
 
   private subscribe() {
@@ -137,5 +139,11 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
 
   private subscribeAction(data: DialogData) {
     store.dispatch(subscribe(data));
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'subscribe-block': SubscribeBlock;
   }
 }

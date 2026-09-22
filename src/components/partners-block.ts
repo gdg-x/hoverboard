@@ -1,32 +1,25 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
-import { computed, customElement, observe, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
 import '@material/web/button/text-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
+import { css, html, nothing, type PropertyValues } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { RootState, store } from '../store';
 import { closeDialog, openSubscribeDialog } from '../store/dialogs/actions';
 import { ReduxMixin } from '../store/mixin';
 import { PartnerGroupsState, selectPartnerGroups } from '../store/partners';
 import { addPotentialPartner } from '../store/potential-partners/actions';
-import {
-  initialPotentialPartnersState,
-  PotentialPartnersState,
-} from '../store/potential-partners/state';
+import { initialPotentialPartnersState } from '../store/potential-partners/state';
 import { queueSnackbar } from '../store/snackbars';
 import { loading, partnersBlock } from '../utils/data';
-import '../utils/icons';
-import './shared-styles';
+import './hoverboard-icon';
+import { ThemedElement } from './themed-element';
 
 @customElement('partners-block')
-export class PartnersBlock extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
-        :host {
-          display: block;
-        }
-
+export class PartnersBlock extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         .block-title {
           margin: 24px 0 8px;
         }
@@ -65,48 +58,8 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
             grid-template-columns: repeat(5, 1fr);
           }
         }
-      </style>
-
-      <div class="container">
-        <h1 class="container-title">[[partnersBlock.title]]</h1>
-
-        <template is="dom-if" if="[[pending]]">
-          <p>[[loading]]</p>
-        </template>
-        <template is="dom-if" if="[[failure]]">
-          <p>Error loading partners.</p>
-        </template>
-
-        <template is="dom-repeat" items="[[partners.data]]" as="block">
-          <h4 class="block-title">[[block.title]]</h4>
-          <div class="logos-wrapper">
-            <template is="dom-repeat" items="[[block.items]]" as="logo">
-              <a
-                class="logo-item"
-                href$="[[logo.url]]"
-                title$="[[logo.name]]"
-                target="_blank"
-                rel="noopener noreferrer"
-                layout
-                horizontal
-                center-center
-              >
-                <lazy-image
-                  class="logo-img"
-                  src="[[logo.logoUrl]]"
-                  alt="[[logo.name]]"
-                ></lazy-image>
-              </a>
-            </template>
-          </div>
-        </template>
-
-        <md-text-button class="cta-button animated icon-right" on-click="addPotentialPartner">
-          <span>[[partnersBlock.button]]</span>
-          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-        </md-text-button>
-      </div>
-    `;
+      `,
+    ];
   }
 
   private loading = loading;
@@ -117,19 +70,69 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   partners: PartnerGroupsState = new Initialized();
 
-  @computed('partners')
-  get pending() {
+  private get pending() {
     return this.partners instanceof Pending;
   }
 
-  @computed('partners')
-  get failure() {
+  private get failure() {
     return this.partners instanceof Failure;
   }
 
   override stateChanged(state: RootState) {
     this.partners = selectPartnerGroups(state);
     this.potentialPartners = state.potentialPartners;
+  }
+
+  override willUpdate(changedProperties: PropertyValues) {
+    if (changedProperties.has('potentialPartners') && this.potentialPartners instanceof Success) {
+      closeDialog();
+      store.dispatch(queueSnackbar(this.partnersBlock.toast));
+    }
+  }
+
+  override render() {
+    const partners = this.partners instanceof Success ? this.partners.data : [];
+
+    return html`
+      <div class="container">
+        <h1 class="container-title">${this.partnersBlock.title}</h1>
+
+        ${this.pending ? html`<p>${this.loading}</p>` : nothing}
+        ${this.failure ? html`<p>Error loading partners.</p>` : nothing}
+        ${partners.map(
+          (block) => html`
+            <h4 class="block-title">${block.title}</h4>
+            <div class="logos-wrapper">
+              ${block.items.map(
+                (logo) => html`
+                  <a
+                    class="logo-item"
+                    href="${logo.url}"
+                    title="${logo.name}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    layout
+                    horizontal
+                    center-center
+                  >
+                    <lazy-image
+                      class="logo-img"
+                      src="${logo.logoUrl}"
+                      alt="${logo.name}"
+                    ></lazy-image>
+                  </a>
+                `,
+              )}
+            </div>
+          `,
+        )}
+
+        <md-text-button class="cta-button animated icon-right" @click="${this.addPotentialPartner}">
+          <span>${this.partnersBlock.button}</span>
+          <hoverboard-icon name="arrow-right-circle"></hoverboard-icon>
+        </md-text-button>
+      </div>
+    `;
   }
 
   private addPotentialPartner() {
@@ -141,12 +144,10 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
       submit: (data) => store.dispatch(addPotentialPartner(data)),
     });
   }
+}
 
-  @observe('potentialPartners')
-  private onPotentialPartners(potentialPartners: PotentialPartnersState) {
-    if (potentialPartners instanceof Success) {
-      closeDialog();
-      store.dispatch(queueSnackbar(this.partnersBlock.toast));
-    }
+declare global {
+  interface HTMLElementTagNameMap {
+    'partners-block': PartnersBlock;
   }
 }
