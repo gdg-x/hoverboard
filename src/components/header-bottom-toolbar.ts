@@ -1,22 +1,23 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
-import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-tabs';
-import { html, PolymerElement } from '@polymer/polymer';
 import { RouterLocation } from '@vaadin/router';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState } from '../store/schedule/state';
 import { contentLoaders, mySchedule } from '../utils/data';
-import '../components/content-loader';
-import './shared-styles';
+import './content-loader';
+import { ThemedElement } from './themed-element';
 
 @customElement('header-bottom-toolbar')
-export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class HeaderBottomToolbar extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           display: block;
           background-color: var(--primary-background-color);
@@ -31,10 +32,11 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
 
         .nav-items {
           --paper-tabs-selection-bar-color: var(--default-primary-color);
-          --paper-tabs: {
-            height: 64px;
-          }
           width: 100%;
+        }
+
+        paper-tabs.nav-items {
+          height: 64px;
         }
 
         .nav-item a {
@@ -47,58 +49,8 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
             padding: 0 36px;
           }
         }
-      </style>
-
-      <app-toolbar class="bottom-toolbar">
-        <content-loader
-          class="nav-items"
-          card-padding="15px"
-          card-width="105px"
-          card-margin="0 14px 0 0"
-          card-height="64px"
-          avatar-size="0"
-          avatar-circle="0"
-          title-top-position="20px"
-          title-height="24px"
-          title-width="75%"
-          load-from="-240%"
-          load-to="350%"
-          blur-width="80px"
-          items-count="[[contentLoaders.itemsCount]]"
-          layout
-          horizontal
-          hidden$="[[!pending]]"
-        >
-        </content-loader>
-
-        <paper-tabs
-          class="nav-items"
-          selected="[[selectedTab]]"
-          attr-for-selected="day"
-          hidden$="[[pending]]"
-          scrollable
-          hide-scroll-buttons
-          noink
-        >
-          <template is="dom-repeat" items="[[schedule.data]]" as="day">
-            <paper-tab class="nav-item" day="[[day.date]]" link>
-              <a href$="[[addQueryParams(day.date, location.search)]]" layout vertical center-center
-                >[[day.dateReadable]]</a
-              >
-            </paper-tab>
-          </template>
-          <paper-tab class="nav-item" day="my-schedule" hidden$="[[!signedIn]]" link>
-            <a
-              href$="[[addQueryParams('my-schedule', location.search)]]"
-              layout
-              vertical
-              center-center
-              >[[mySchedule.title]]</a
-            >
-          </paper-tab>
-        </paper-tabs>
-      </app-toolbar>
-    `;
+      `,
+    ];
   }
 
   private mySchedule = mySchedule;
@@ -123,12 +75,74 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
     }
   }
 
-  @computed('schedule')
+  override render() {
+    return html`
+      <app-toolbar class="bottom-toolbar">
+        <content-loader
+          class="nav-items"
+          card-padding="15px"
+          card-width="105px"
+          card-margin="0 14px 0 0"
+          card-height="64px"
+          avatar-size="0"
+          avatar-circle="0"
+          title-top-position="20px"
+          title-height="24px"
+          title-width="75%"
+          load-from="-240%"
+          load-to="350%"
+          blur-width="80px"
+          items-count="${this.contentLoaders.itemsCount}"
+          layout
+          horizontal
+          ?hidden="${!this.pending}"
+        >
+        </content-loader>
+
+        <paper-tabs
+          class="nav-items"
+          .selected="${this.selectedTab}"
+          attr-for-selected="day"
+          ?hidden="${this.pending}"
+          scrollable
+          hide-scroll-buttons
+          noink
+        >
+          ${this.days.map(
+            (day) => html`
+              <paper-tab class="nav-item" day="${day.date}" link>
+                <a
+                  href="${this.addQueryParams(day.date, this.location?.search)}"
+                  layout
+                  vertical
+                  center-center
+                  >${day.dateReadable}</a
+                >
+              </paper-tab>
+            `,
+          )}
+          <paper-tab class="nav-item" day="my-schedule" ?hidden="${!this.signedIn}" link>
+            <a
+              href="${this.addQueryParams('my-schedule', this.location?.search)}"
+              layout
+              vertical
+              center-center
+              >${this.mySchedule.title}</a
+            >
+          </paper-tab>
+        </paper-tabs>
+      </app-toolbar>
+    `;
+  }
+
+  private get days() {
+    return this.schedule instanceof Success ? this.schedule.data : [];
+  }
+
   private get pending() {
     return this.schedule instanceof Pending;
   }
 
-  @computed('location', 'schedule')
   private get selectedTab() {
     if (this.location && this.schedule instanceof Success) {
       const {
@@ -145,7 +159,13 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
     }
   }
 
-  private addQueryParams(id: string, queryParams: string) {
+  private addQueryParams(id: string, queryParams?: string) {
     return `/schedule/${id}${queryParams || ''}`;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'header-bottom-toolbar': HeaderBottomToolbar;
   }
 }

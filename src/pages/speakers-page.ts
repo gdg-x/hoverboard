@@ -8,7 +8,7 @@ import '@power-elements/lazy-image';
 import '../components/hero/simple-hero';
 import '../components/text-truncate';
 import '../components/content-loader';
-import '../elements/filter-menu';
+import '../components/filter-menu';
 import '../components/previous-speakers-block';
 import '../elements/shared-styles';
 import { Filter } from '../models/filter';

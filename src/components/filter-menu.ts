@@ -1,20 +1,20 @@
-import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
 import '@material/web/button/outlined-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { filters } from '../utils/data';
 import { clearFilters, toggleFilter } from '../utils/filters';
-import '../utils/icons';
 import { generateClassName, getVariableColor } from '../utils/styles';
-import './shared-styles';
+import './hoverboard-icon';
+import { ThemedElement } from './themed-element';
 
 @customElement('filter-menu')
-export class FilterMenu extends PolymerElement {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class FilterMenu extends ThemedElement {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           display: block;
           width: 100%;
@@ -56,9 +56,9 @@ export class FilterMenu extends PolymerElement {
           text-transform: capitalize;
         }
 
-        .tag iron-icon {
-          --iron-icon-width: 12px;
-          --iron-icon-height: 12px;
+        .tag hoverboard-icon {
+          width: 12px;
+          height: 12px;
         }
 
         [selected] {
@@ -83,79 +83,8 @@ export class FilterMenu extends PolymerElement {
             padding: 16px 32px;
           }
         }
-      </style>
-
-      <div class="filters-toolbar container">
-        <div layout horizontal center>
-          <div layout horizontal center flex>
-            <div class="results" hidden$="[[hideResultText]]">
-              [[resultsCount]] [[filters.results]]
-            </div>
-          </div>
-
-          <div class="actions" layout horizontal center>
-            <span
-              class="reset-filters"
-              role="button"
-              on-click="resetFilters"
-              hidden$="[[!selectedFilters.length]]"
-            >
-              [[filters.clear]]
-            </span>
-            <md-outlined-button class="icon-right" on-click="toggleBoard">
-              [[filters.title]]
-              <iron-icon icon="hoverboard:[[icon]]"></iron-icon>
-            </md-outlined-button>
-          </div>
-        </div>
-
-        <div class="selected-filters" hidden$="[[!selectedFilters.length]]">
-          <template is="dom-repeat" items="[[selectedFilters]]" as="selectedFilter">
-            <div
-              class="tag"
-              style$="--color: [[getVariableColor(selectedFilter.tag, 'primary-text-color')]]"
-              filter-key$="[[selectedFilter.group]]"
-              filter-value$="[[selectedFilter.tag]]"
-              on-click="toggleFilter"
-              selected
-              layout
-              horizontal
-              inline
-              center
-            >
-              <span>[[selectedFilter.tag]]</span>
-              <iron-icon icon="hoverboard:close"></iron-icon>
-            </div>
-          </template>
-        </div>
-      </div>
-
-      <div class="filters-board" block$="[[opened]]">
-        <div class="container">
-          <template is="dom-repeat" items="[[filterGroups]]" as="filterGroup">
-            <div class="filter-group">
-              <h3 class="filter-title">[[filterGroup.title]]</h3>
-              <template is="dom-repeat" items="[[filterGroup.filters]]" as="filter">
-                <div
-                  layout
-                  horizontal
-                  inline
-                  center
-                  class="tag"
-                  style$="--color: [[getVariableColor(filter.tag, 'primary-text-color')]]"
-                  filter-key$="[[filterGroup.key]]"
-                  filter-value$="[[filter.tag]]"
-                  selected$="[[isSelected(selectedFilters, filter)]]"
-                  on-click="toggleFilter"
-                >
-                  [[filter.tag]]
-                </div>
-              </template>
-            </div>
-          </template>
-        </div>
-      </div>
-    `;
+      `,
+    ];
   }
 
   private filters = filters;
@@ -174,13 +103,99 @@ export class FilterMenu extends PolymerElement {
     this.clickOutsideListener = this.clickOutsideListener.bind(this);
   }
 
+  override disconnectedCallback() {
+    this.clickOutsideUnlisten();
+    super.disconnectedCallback();
+  }
+
+  override render() {
+    return html`
+      <div class="filters-toolbar container">
+        <div layout horizontal center>
+          <div layout horizontal center flex>
+            <div class="results" ?hidden="${this.hideResultText}">
+              ${this.resultsCount} ${this.filters.results}
+            </div>
+          </div>
+
+          <div class="actions" layout horizontal center>
+            <span
+              class="reset-filters"
+              role="button"
+              @click="${this.resetFilters}"
+              ?hidden="${!this.selectedFilters.length}"
+            >
+              ${this.filters.clear}
+            </span>
+            <md-outlined-button class="icon-right" @click="${this.toggleBoard}">
+              ${this.filters.title}
+              <hoverboard-icon name="${this.icon}"></hoverboard-icon>
+            </md-outlined-button>
+          </div>
+        </div>
+
+        <div class="selected-filters" ?hidden="${!this.selectedFilters.length}">
+          ${this.selectedFilters.map(
+            (selectedFilter) => html`
+              <div
+                class="tag"
+                style="--color: ${this.getVariableColor(selectedFilter.tag, 'primary-text-color')}"
+                filter-key="${selectedFilter.group}"
+                filter-value="${selectedFilter.tag}"
+                @click="${this.toggleFilter}"
+                selected
+                layout
+                horizontal
+                inline
+                center
+              >
+                <span>${selectedFilter.tag}</span>
+                <hoverboard-icon name="close"></hoverboard-icon>
+              </div>
+            `,
+          )}
+        </div>
+      </div>
+
+      <div class="filters-board" ?block="${this.opened}">
+        <div class="container">
+          ${this.filterGroups.map(
+            (filterGroup) => html`
+              <div class="filter-group">
+                <h3 class="filter-title">${filterGroup.title}</h3>
+                ${filterGroup.filters.map(
+                  (filter) => html`
+                    <div
+                      layout
+                      horizontal
+                      inline
+                      center
+                      class="tag"
+                      style="--color: ${this.getVariableColor(filter.tag, 'primary-text-color')}"
+                      filter-key="${filterGroup.key}"
+                      filter-value="${filter.tag}"
+                      ?selected="${this.isSelected(this.selectedFilters, filter)}"
+                      @click="${this.toggleFilter}"
+                    >
+                      ${filter.tag}
+                    </div>
+                  `,
+                )}
+              </div>
+            `,
+          )}
+        </div>
+      </div>
+    `;
+  }
+
   private isSelected(selectedFilters: Filter[], search: Filter) {
     return selectedFilters.some(
       (filter) => filter.tag === search.tag.toLocaleLowerCase() && filter.group === search.group,
     );
   }
 
-  private toggleFilter(e: PointerEvent) {
+  private toggleFilter(e: Event) {
     if (
       !(e.currentTarget instanceof HTMLElement) ||
       !e.currentTarget.getAttribute('filter-key') ||
@@ -210,12 +225,10 @@ export class FilterMenu extends PolymerElement {
     clearFilters();
   }
 
-  @computed('opened')
   private get icon() {
     return this.opened ? 'close' : 'filter-list';
   }
 
-  @computed('selectedFilters', 'resultsCount')
   private get hideResultText() {
     const { selectedFilters, resultsCount } = this;
     return selectedFilters.length === 0 || typeof resultsCount === 'undefined';
@@ -240,5 +253,11 @@ export class FilterMenu extends PolymerElement {
 
   private getVariableColor(value: string, fallback: string) {
     return getVariableColor(this, value, fallback);
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'filter-menu': FilterMenu;
   }
 }

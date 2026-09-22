@@ -8,7 +8,7 @@ import '@power-elements/lazy-image';
 import { RouterLocation } from '@vaadin/router';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../elements/feedback-block';
+import '../components/feedback-block';
 import '../elements/shared-styles';
 import { Session } from '../models/session';
 import { Speaker } from '../models/speaker';
