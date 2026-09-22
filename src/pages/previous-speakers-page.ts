@@ -1,11 +1,11 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/paper-progress';
-import { html, PolymerElement } from '@polymer/polymer';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import '@material/web/progress/linear-progress.js';
 import '@power-elements/lazy-image';
-import '../components/hero/simple-hero';
 import '../components/content-loader';
-import '../elements/shared-styles';
+import '../components/footer-block';
+import '../components/hero/simple-hero';
 import { PreviousSession } from '../models/previous-session';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -14,17 +14,15 @@ import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { initialPreviousSpeakersState } from '../store/previous-speakers/state';
 import { contentLoaders, heroSettings, speakers } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
+import { ThemedElement } from '../components/themed-element';
 
 @customElement('previous-speakers-page')
-export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
-  @property({ type: Object })
-  previousSpeakers = initialPreviousSpeakersState;
-
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class PreviousSpeakersPage extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
-          display: block;
           height: 100%;
         }
 
@@ -88,10 +86,10 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
           font-weight: normal;
         }
 
-        paper-progress {
+        .progress {
           width: 100%;
-          --paper-progress-active-color: var(--default-primary-color);
-          --paper-progress-secondary-color: var(--default-primary-color);
+          --md-linear-progress-active-indicator-color: var(--default-primary-color);
+          --md-linear-progress-track-color: var(--default-primary-color);
         }
 
         @media (min-width: 640px) {
@@ -127,52 +125,20 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
             --lazy-image-height: 128px;
           }
         }
-      </style>
-
-      <simple-hero page="previousSpeakers"></simple-hero>
-
-      <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
-
-      <content-loader
-        class="container"
-        card-padding="0"
-        card-height="128px"
-        avatar-size="128px"
-        avatar-circle="64px"
-        items-count="[[contentLoaders.itemsCount]]"
-        hidden$="[[contentLoaderVisibility]]"
-      ></content-loader>
-      <div class="container">
-        <template is="dom-repeat" items="[[previousSpeakers.data]]" as="speaker">
-          <a class="speaker" href$="[[previousSpeakerUrl(speaker.id)]]" layout horizontal>
-            <lazy-image
-              class="photo"
-              src="[[speaker.photoUrl]]"
-              alt="[[speaker.name]]"
-            ></lazy-image>
-
-            <div class="details" layout vertical center-justified start>
-              <h2 class="name">[[speaker.name]]</h2>
-              <div class="origin">[[speaker.country]]</div>
-
-              <img class="company-logo" src$="[[speaker.companyLogo]]" />
-
-              <div class="sessions">
-                <h5>[[previousYears]]:</h5>
-                [[getYears(speaker.sessions)]]
-              </div>
-            </div>
-          </a>
-        </template>
-      </div>
-
-      <footer-block></footer-block>
-    `;
+      `,
+    ];
   }
+
+  @property({ type: Object })
+  previousSpeakers = initialPreviousSpeakersState;
 
   private heroSettings = heroSettings.previousSpeakers;
   private contentLoaders = contentLoaders.previousSpeakers;
   private previousYears = speakers.previousYears;
+
+  get contentLoaderVisibility() {
+    return this.previousSpeakers instanceof Success || this.previousSpeakers instanceof Failure;
+  }
 
   override stateChanged(state: RootState) {
     this.previousSpeakers = state.previousSpeakers;
@@ -187,11 +153,6 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  @computed('previousSpeakers')
-  private get contentLoaderVisibility(): boolean {
-    return this.previousSpeakers instanceof Success || this.previousSpeakers instanceof Failure;
-  }
-
   private getYears(sessions: { [key: number]: PreviousSession[] }) {
     return Object.keys(sessions || {})
       .map(Number)
@@ -201,5 +162,56 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
 
   private previousSpeakerUrl(id: string) {
     return router.urlForName('previous-speaker-page', { id });
+  }
+
+  override render() {
+    const previousSpeakers =
+      this.previousSpeakers instanceof Success ? this.previousSpeakers.data : [];
+
+    return html`
+      <simple-hero page="previousSpeakers"></simple-hero>
+
+      <md-linear-progress
+        class="progress"
+        indeterminate
+        ?hidden=${this.contentLoaderVisibility}
+      ></md-linear-progress>
+
+      <content-loader
+        class="container"
+        card-padding="0"
+        card-height="128px"
+        avatar-size="128px"
+        avatar-circle="64px"
+        items-count=${this.contentLoaders.itemsCount}
+        ?hidden=${this.contentLoaderVisibility}
+      ></content-loader>
+      <div class="container">
+        ${previousSpeakers.map(
+          (speaker) => html`
+            <a class="speaker" href=${this.previousSpeakerUrl(speaker.id)} layout horizontal>
+              <lazy-image class="photo" src=${speaker.photoUrl} alt=${speaker.name}></lazy-image>
+              <div class="details" layout vertical center-justified start>
+                <h2 class="name">${speaker.name}</h2>
+                <div class="origin">${speaker.country}</div>
+                <img class="company-logo" src=${speaker.companyLogo ?? ''} />
+                <div class="sessions">
+                  <h5>${this.previousYears}:</h5>
+                  ${this.getYears(speaker.sessions)}
+                </div>
+              </div>
+            </a>
+          `,
+        )}
+      </div>
+
+      <footer-block></footer-block>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'previous-speakers-page': PreviousSpeakersPage;
   }
 }

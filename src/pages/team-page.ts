@@ -1,27 +1,25 @@
-import { Failure, Pending } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/paper-icon-button';
-import { html, PolymerElement } from '@polymer/polymer';
+import { Failure, Pending, Success } from '@abraham/remotedata';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import '@power-elements/lazy-image';
+import '../components/footer-block';
 import '../components/hero/simple-hero';
+import '../components/hoverboard-icon';
 import '../components/markdown/short-markdown';
-import '../elements/shared-styles';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { selectTeamsAndMembers } from '../store/teams-members/selectors';
 import { initialTeamsMembersState } from '../store/teams-members/state';
 import { heroSettings, loading, team } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
+import { ThemedElement } from '../components/themed-element';
 
 @customElement('team-page')
-export class TeamPage extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment">
-        :host {
-          display: block;
-        }
-
+export class TeamPage extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         .description-wrapper {
           background-color: var(--secondary-background-color);
           width: 100%;
@@ -56,7 +54,6 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
           border-radius: 50%;
           overflow: hidden;
           transform: translateZ(0);
-          border-radius: 50%;
           border: 5px solid var(--contrast-additional-background-color);
         }
 
@@ -76,12 +73,10 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
         }
 
         .social-icon {
-          --paper-icon-button: {
-            padding: 6px;
-            width: 32px;
-            height: 32px;
-          }
-
+          margin: 6px;
+          width: 20px;
+          height: 20px;
+          padding: 6px;
           color: var(--secondary-text-color);
           transition: transform var(--animation);
         }
@@ -117,59 +112,8 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
             --lazy-image-height: 128px;
           }
         }
-      </style>
-
-      <simple-hero page="team"></simple-hero>
-
-      <div class="description-wrapper">
-        <div class="container" layout horizontal justified>
-          <short-markdown content="[[team.description]]"></short-markdown>
-        </div>
-      </div>
-
-      <div class="container">
-        <template is="dom-if" if="[[pending]]">
-          <p>[[loading]]</p>
-        </template>
-
-        <template is="dom-if" if="[[failure]]">
-          <p>Error loading teams.</p>
-        </template>
-
-        <template is="dom-repeat" items="[[teamsMembers.data]]" as="team">
-          <div class="team-title">[[team.title]]</div>
-
-          <div class="team-block">
-            <template is="dom-repeat" items="[[team.members]]" as="member">
-              <div class="member" layout horizontal>
-                <lazy-image
-                  class="photo"
-                  src="[[member.photoUrl]]"
-                  alt="[[member.name]]"
-                ></lazy-image>
-
-                <div class="member-details" layout vertical center-justified start>
-                  <h2 class="name">[[member.name]]</h2>
-                  <div class="activity">[[member.title]]</div>
-                  <div class="contacts">
-                    <template is="dom-repeat" items="[[member.socials]]" as="social">
-                      <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
-                        <paper-icon-button
-                          class="social-icon"
-                          icon="hoverboard:{{social.icon}}"
-                        ></paper-icon-button>
-                      </a>
-                    </template>
-                  </div>
-                </div>
-              </div>
-            </template>
-          </div>
-        </template>
-      </div>
-
-      <footer-block></footer-block>
-    `;
+      `,
+    ];
   }
 
   private heroSettings = heroSettings.team;
@@ -179,15 +123,14 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   teamsMembers = initialTeamsMembersState;
 
-  @computed('teamsMembers')
   get pending() {
     return this.teamsMembers instanceof Pending;
   }
 
-  @computed('teamsMembers')
   get failure() {
     return this.teamsMembers instanceof Failure;
   }
+
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
@@ -195,5 +138,66 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
 
   override stateChanged(state: RootState) {
     this.teamsMembers = selectTeamsAndMembers(state);
+  }
+
+  override render() {
+    const teams = this.teamsMembers instanceof Success ? this.teamsMembers.data : [];
+
+    return html`
+      <simple-hero page="team"></simple-hero>
+
+      <div class="description-wrapper">
+        <div class="container" layout horizontal justified>
+          <short-markdown content=${this.team.description}></short-markdown>
+        </div>
+      </div>
+
+      <div class="container">
+        ${this.pending ? html`<p>${this.loading}</p>` : ''}
+        ${this.failure ? html`<p>Error loading teams.</p>` : ''}
+        ${teams.map(
+          (team) => html`
+            <div class="team-title">${team.title}</div>
+            <div class="team-block">
+              ${team.members.map(
+                (member) => html`
+                  <div class="member" layout horizontal>
+                    <lazy-image
+                      class="photo"
+                      src=${member.photoUrl}
+                      alt=${member.name}
+                    ></lazy-image>
+                    <div class="member-details" layout vertical center-justified start>
+                      <h2 class="name">${member.name}</h2>
+                      <div class="activity">${member.title}</div>
+                      <div class="contacts">
+                        ${member.socials.map(
+                          (social) => html`
+                            <a href=${social.link} target="_blank" rel="noopener noreferrer">
+                              <hoverboard-icon
+                                class="social-icon"
+                                name=${social.icon}
+                              ></hoverboard-icon>
+                            </a>
+                          `,
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                `,
+              )}
+            </div>
+          `,
+        )}
+      </div>
+
+      <footer-block></footer-block>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'team-page': TeamPage;
   }
 }
