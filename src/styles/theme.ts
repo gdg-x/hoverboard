@@ -148,29 +148,20 @@ export const theme = css`
     color: var(--default-primary-color);
   }
 
-  md-outlined-button.animated iron-icon,
   md-outlined-button.animated hoverboard-icon,
-  md-filled-button.animated iron-icon,
   md-filled-button.animated hoverboard-icon,
-  md-text-button.animated iron-icon,
   md-text-button.animated hoverboard-icon {
     transition: transform var(--animation);
   }
 
-  md-outlined-button.animated.icon-right:hover iron-icon,
   md-outlined-button.animated.icon-right:hover hoverboard-icon,
-  md-filled-button.animated.icon-right:hover iron-icon,
   md-filled-button.animated.icon-right:hover hoverboard-icon,
-  md-text-button.animated.icon-right:hover iron-icon,
   md-text-button.animated.icon-right:hover hoverboard-icon {
     transform: translateX(4px);
   }
 
-  md-outlined-button.animated.icon-left:hover iron-icon,
   md-outlined-button.animated.icon-left:hover hoverboard-icon,
-  md-filled-button.animated.icon-left:hover iron-icon,
   md-filled-button.animated.icon-left:hover hoverboard-icon,
-  md-text-button.animated.icon-left:hover iron-icon,
   md-text-button.animated.icon-left:hover hoverboard-icon {
     transform: translateX(-4px);
   }

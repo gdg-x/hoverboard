@@ -1,20 +1,9 @@
 import { Success } from '@abraham/remotedata';
-import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
-import '@polymer/app-layout/app-drawer/app-drawer';
-import { AppDrawerElement } from '@polymer/app-layout/app-drawer/app-drawer';
-import '@polymer/app-layout/app-header-layout/app-header-layout';
-import '@polymer/app-layout/app-header/app-header';
-import '@polymer/app-layout/app-toolbar/app-toolbar';
-import { computed, customElement, property, query } from '@polymer/decorators';
-import '@polymer/iron-icon';
-import '@polymer/iron-selector/iron-selector';
-import { html, PolymerElement } from '@polymer/polymer';
-import {
-  setPassiveTouchGestures,
-  setRemoveNestedTemplates,
-  setSuppressTemplateNotifications,
-} from '@polymer/polymer/lib/utils/settings';
 import '@power-elements/lazy-image';
+import { css, html, PropertyValues } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
+import { ThemedElement } from './components/themed-element';
+import './components/hoverboard-icon';
 import './components/snack-bar';
 import './components/feedback-dialog';
 import './components/signin-dialog';
@@ -22,14 +11,14 @@ import './components/subscribe-dialog';
 import './components/video-dialog';
 import './components/footer-block';
 import './components/header-toolbar';
-import './elements/shared-styles';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
+import { ReduxMixin } from './store/mixin';
 import { onUser } from './store/auth/actions';
 import { queueSnackbar } from './store/snackbars';
 import { fetchTickets } from './store/tickets/actions';
 import { initialTicketsState } from './store/tickets/state';
-import { OpenedChanged } from './utils/app-drawer';
+import { DrawerOpenedChanged } from './utils/drawer';
 import {
   buyTicket,
   dates,
@@ -39,69 +28,87 @@ import {
   signInProviders,
   title,
 } from './utils/data';
-import './utils/icons';
+import { flexReverse } from './styles/layout';
 import './utils/media-query';
 import { Stickied } from './utils/stickied';
 
-setPassiveTouchGestures(true);
-setRemoveNestedTemplates(true);
-setSuppressTemplateNotifications(true);
-
 @customElement('hoverboard-app')
-export class HoverboardApp extends PolymerElement {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-reverse flex-alignment positioning">
+export class HoverboardApp extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      flexReverse,
+      css`
         :host {
           display: block;
           position: relative;
           min-height: 100%;
           height: 100%;
-          --paper-menu-button-dropdown-background: var(--primary-background-color);
-          --app-drawer-content-container: {
-            display: flex;
-            flex-direction: column;
-          };
         }
 
-        app-drawer app-toolbar {
+        .scrim {
+          position: fixed;
+          inset: 0;
+          z-index: 10;
+          background-color: rgb(0 0 0 / 40%);
+        }
+
+        .drawer {
+          position: fixed;
+          inset: 0 auto 0 0;
+          z-index: 11;
+          display: flex;
+          flex-direction: column;
+          width: 300px;
+          max-width: 90vw;
+          background-color: var(--primary-background-color);
+          box-shadow: var(--box-shadow);
+          transform: translateX(-100%);
+          transition: transform var(--animation);
+        }
+
+        .drawer.opened {
+          transform: translateX(0);
+        }
+
+        .drawer-toolbar {
           padding: 36px 24px 24px;
+          height: auto;
           border-bottom: 1px solid var(--divider-color);
         }
 
-        app-drawer .dates {
+        @media (min-width: 640px) {
+          .drawer-toolbar {
+            padding: 0 36px;
+            height: initial;
+          }
+        }
+
+        .dates {
           margin-top: 42px;
           font-size: 22px;
           line-height: 0.95;
         }
 
-        app-drawer .location {
+        .location {
           margin-top: 4px;
           font-size: 15px;
           color: var(--secondary-text-color);
         }
 
-        .drawer-list {
+        .drawer-content {
           padding: 16px 0;
-          display: block;
         }
 
         .drawer-list a {
           display: block;
+          padding: 8px 24px;
           color: var(--primary-text-color);
           outline: 0;
         }
 
-        app-drawer a {
-          padding: 8px 24px;
-        }
-
         .drawer-list a.selected {
           font-weight: 500;
-        }
-
-        app-toolbar {
-          height: auto;
         }
 
         .toolbar-logo {
@@ -112,12 +119,16 @@ export class HoverboardApp extends PolymerElement {
           height: var(--lazy-image-height);
         }
 
-        app-header-layout {
-          margin-top: -1px;
+        .app-header {
+          position: sticky;
+          top: 0;
+          z-index: 2;
+          box-shadow: var(--box-shadow);
+          transition: box-shadow var(--animation);
         }
 
-        app-header.remove-shadow::before {
-          opacity: 0;
+        .app-header.remove-shadow {
+          box-shadow: none;
         }
 
         main {
@@ -126,88 +137,19 @@ export class HoverboardApp extends PolymerElement {
           height: 100%;
         }
 
-        .drawer-content iron-icon {
-          --iron-icon-width: 14px;
+        .drawer-content hoverboard-icon {
+          width: 14px;
+          height: 14px;
           margin-left: 6px;
         }
 
-        // Look for copies of this
+        /* Look for copies of this */
         .bottom-drawer-link {
           padding: 16px 24px;
           cursor: pointer;
         }
-
-        @media (min-width: 640px) {
-          app-toolbar {
-            padding: 0 36px;
-            height: initial;
-          }
-        }
-      </style>
-
-      <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
-        <app-drawer id="drawer" slot="drawer" opened="{{drawerOpened}}" swipe-open>
-          <app-toolbar layout vertical start>
-            <lazy-image
-              class="toolbar-logo"
-              src="/images/logo-monochrome.svg"
-              alt="[[alt]]"
-            ></lazy-image>
-            <h2 class="dates">[[dates]]</h2>
-            <h3 class="location">[[shortLocation]]</h3>
-          </app-toolbar>
-
-          <div class="drawer-content" layout vertical justified flex>
-            <iron-selector
-              class="drawer-list"
-              selected="[[routeName]]"
-              attr-for-selected="path"
-              selected-class="selected"
-              role="navigation"
-            >
-              <template is="dom-repeat" items="[[navigation]]" as="nav">
-                <a href="[[nav.permalink]]" path="[[nav.route]]" on-click="closeDrawer">
-                  [[nav.label]]
-                </a>
-              </template>
-            </iron-selector>
-
-            <div>
-              <app-install></app-install>
-
-              <a
-                class="bottom-drawer-link"
-                href$="[[ticketUrl]]"
-                target="_blank"
-                rel="noopener noreferrer"
-                on-click="closeDrawer"
-                layout
-                horizontal
-                center
-              >
-                <span>[[buyTicket]]</span>
-                <iron-icon icon="hoverboard:open-in-new"></iron-icon>
-              </a>
-            </div>
-          </div>
-        </app-drawer>
-
-        <app-header-layout id="headerLayout" fullbleed>
-          <app-header id="header" slot="header" condenses fixed>
-            <header-toolbar drawer-opened="{{drawerOpened}}"></header-toolbar>
-          </app-header>
-
-          <main></main>
-        </app-header-layout>
-      </app-drawer-layout>
-
-      <feedback-dialog></feedback-dialog>
-      <signin-dialog></signin-dialog>
-      <subscribe-dialog></subscribe-dialog>
-      <video-dialog></video-dialog>
-
-      <snack-bar></snack-bar>
-    `;
+      `,
+    ];
   }
 
   private alt = title;
@@ -216,8 +158,6 @@ export class HoverboardApp extends PolymerElement {
   private navigation = navigation;
   private shortLocation = location.short;
 
-  @query('#drawer')
-  drawer!: AppDrawerElement;
   @query('main')
   main!: HTMLElement;
   @query('#header')
@@ -233,33 +173,97 @@ export class HoverboardApp extends PolymerElement {
   @property({ type: String })
   private routeName = 'home';
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.tickets = state.tickets;
     this.routeName = selectRouteName(window.location.pathname);
-  }
-
-  constructor() {
-    super();
-    store.subscribe(() => this.stateChanged(store.getState()));
   }
 
   override connectedCallback() {
     super.connectedCallback();
     window.addEventListener('element-sticked', (event) => this.toggleHeaderShadow(event));
     window.addEventListener('offline', () => store.dispatch(queueSnackbar(offlineMessage)));
-    this.drawer.addEventListener('opened-changed', (event) => this.toggleDrawer(event));
     store.dispatch(fetchTickets);
   }
 
-  override ready() {
-    super.ready();
+  override firstUpdated(changedProperties: PropertyValues) {
+    super.firstUpdated(changedProperties);
     console.log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
     startRouter(this.main);
     onUser();
   }
 
-  closeDrawer() {
+  override render() {
+    return html`
+      <div class="scrim" ?hidden="${!this.drawerOpened}" @click="${this.closeDrawer}"></div>
+
+      <div id="drawer" class="drawer ${this.drawerOpened ? 'opened' : ''}">
+        <div class="drawer-toolbar" layout vertical start>
+          <lazy-image
+            class="toolbar-logo"
+            src="/images/logo-monochrome.svg"
+            alt="${this.alt}"
+          ></lazy-image>
+          <h2 class="dates">${this.dates}</h2>
+          <h3 class="location">${this.shortLocation}</h3>
+        </div>
+
+        <div class="drawer-content" layout vertical justified flex>
+          <nav class="drawer-list" role="navigation">
+            ${this.navigation.map(
+              (nav) => html`
+                <a
+                  href="${nav.permalink}"
+                  class="${nav.route === this.routeName ? 'selected' : ''}"
+                  @click="${this.closeDrawer}"
+                >
+                  ${nav.label}
+                </a>
+              `,
+            )}
+          </nav>
+
+          <div>
+            <app-install></app-install>
+
+            <a
+              class="bottom-drawer-link"
+              href="${this.ticketUrl}"
+              target="_blank"
+              rel="noopener noreferrer"
+              @click="${this.closeDrawer}"
+              layout
+              horizontal
+              center
+            >
+              <span>${this.buyTicket}</span>
+              <hoverboard-icon name="open-in-new"></hoverboard-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="headerLayout">
+        <div id="header" class="app-header">
+          <header-toolbar
+            .drawerOpened="${this.drawerOpened}"
+            @drawer-opened-changed="${this.onDrawerOpenedChanged}"
+          ></header-toolbar>
+        </div>
+
+        <main></main>
+      </div>
+
+      <feedback-dialog></feedback-dialog>
+      <signin-dialog></signin-dialog>
+      <subscribe-dialog></subscribe-dialog>
+      <video-dialog></video-dialog>
+
+      <snack-bar></snack-bar>
+    `;
+  }
+
+  private closeDrawer() {
     this.drawerOpened = false;
   }
 
@@ -267,11 +271,10 @@ export class HoverboardApp extends PolymerElement {
     this.header.classList.toggle('remove-shadow', e.detail.sticked);
   }
 
-  private toggleDrawer(e: CustomEvent<OpenedChanged>) {
+  private onDrawerOpenedChanged(e: CustomEvent<DrawerOpenedChanged>) {
     this.drawerOpened = e.detail.value;
   }
 
-  @computed('tickets')
   private get ticketUrl(): string {
     if (this.tickets instanceof Success && this.tickets.data.length > 0) {
       const availableTicket = this.tickets.data.find((ticket) => ticket.available);
@@ -280,5 +283,11 @@ export class HoverboardApp extends PolymerElement {
     } else {
       return '';
     }
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'hoverboard-app': HoverboardApp;
   }
 }
