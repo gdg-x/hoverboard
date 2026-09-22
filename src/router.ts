@@ -72,7 +72,7 @@ const ROUTES: Route[] = [
         path: '/my-schedule',
         component: 'my-schedule',
         action: async () => {
-          await import('./elements/my-schedule.js');
+          await import('./components/my-schedule.js');
         },
       },
       {
@@ -83,7 +83,7 @@ const ROUTES: Route[] = [
           if (searchParams.get('sessionId')) {
             commands.redirect(`/sessions/${searchParams.get('sessionId')}`);
           } else {
-            await import('./elements/schedule-day.js');
+            await import('./components/schedule-day.js');
           }
         },
       },

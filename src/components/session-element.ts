@@ -1,11 +1,10 @@
 import { Success } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
-import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
-import '../components/text-truncate';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { Session } from '../models/session';
 import { router } from '../router';
+import { TempAny } from '../temp-any';
 import { RootState, store } from '../store';
 import { openFeedbackDialog, openSigninDialog } from '../store/dialogs/actions';
 import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
@@ -15,15 +14,27 @@ import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { schedule } from '../utils/data';
 import { acceptingFeedback } from '../utils/feedback';
-import '../utils/icons';
 import { getVariableColor } from '../utils/styles';
-import './shared-styles';
+import './hoverboard-icon';
+import './text-truncate';
+import { ThemedElement } from './themed-element';
+
+// The runtime `session.speakers` payload is an enriched list of speaker summaries (see
+// `functions/src/schedule-generator/speakers-sessions-schedule-map.ts`), not the `string[]` of ids
+// declared on `SessionData`.
+interface SessionSpeaker {
+  company: string;
+  country: string;
+  name: string;
+  photoUrl: string;
+}
 
 @customElement('session-element')
-export class SessionElement extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class SessionElement extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           display: block;
           background-color: var(--primary-background-color);
@@ -43,9 +54,9 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         }
 
         .session-icon {
-          --iron-icon-width: 88px;
-          --iron-icon-height: 88px;
-          --iron-icon-fill-color: var(--border-light-color);
+          width: 88px;
+          height: 88px;
+          color: var(--border-light-color);
           position: absolute;
           right: 40px;
           bottom: -4px;
@@ -156,84 +167,8 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
             border: 1px solid var(--border-light-color);
           }
         }
-      </style>
-
-      <a
-        class="session"
-        href$="[[sessionUrl(session.id)]]"
-        featured$="[[isFeatured]]"
-        layout
-        vertical
-        relative
-      >
-        <iron-icon icon="hoverboard:[[session.icon]]" class="session-icon"></iron-icon>
-
-        <div class="session-header" layout horizontal justified>
-          <div flex>
-            <h3 class="session-title">[[session.title]]</h3>
-            <text-truncate lines="3">
-              <div class="session-description">[[summary]]</div>
-            </text-truncate>
-          </div>
-          <span class="language">[[slice(session.language, 2)]]</span>
-        </div>
-
-        <div class="session-content" flex layout horizontal justified>
-          <div class="session-meta">
-            <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
-          </div>
-          <div class="session-actions">
-            <iron-icon
-              icon="hoverboard:insert-comment"
-              class="feedback-action"
-              hidden="[[!acceptingFeedback()]]"
-              on-click="toggleFeedback"
-            ></iron-icon>
-            <iron-icon
-              icon="hoverboard:[[icon]]"
-              class="bookmark-session"
-              hidden="[[acceptingFeedback()]]"
-              on-click="toggleFeaturedSession"
-            ></iron-icon>
-          </div>
-        </div>
-
-        <div class="session-footer">
-          <div layout horizontal justified center-aligned>
-            <div class="session-meta" flex>
-              <span hidden$="[[!session.duration.hh]]">
-                [[session.duration.hh]] hour[[getEnding(session.duration.hh)]]
-              </span>
-              <span hidden$="[[!session.duration.mm]]">
-                [[session.duration.mm]] min[[getEnding(session.duration.mm)]]
-              </span>
-            </div>
-            <div class="tags" hidden$="[[!session.tags.length]]">
-              <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
-              </template>
-            </div>
-          </div>
-
-          <div class="speakers" hidden$="[[!session.speakers.length]]">
-            <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
-              <div class="speaker" layout horizontal center>
-                <lazy-image
-                  class="speaker-photo"
-                  src="[[speaker.photoUrl]]"
-                  alt="[[speaker.name]]"
-                ></lazy-image>
-
-                <div class="speaker-details" flex>
-                  <div class="speaker-name">[[speaker.name]]</div>
-                  <div class="speaker-title">[[join(speaker.company, speaker.country)]]</div>
-                </div>
-              </div>
-            </template>
-          </div>
-        </div>
-      </a>
-    `;
+      `,
+    ];
   }
 
   @property({ type: Object })
@@ -242,35 +177,116 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   session: Session | undefined;
   @property({ type: Object })
   featuredSessions = initialFeaturedSessionsState;
-  @property({ type: String })
-  private queryParams: string | undefined;
-  @property({ type: String })
-  private dayName: string | undefined;
 
   override stateChanged(state: RootState) {
     this.user = state.user;
     this.featuredSessions = state.featuredSessions;
   }
 
-  @computed('featuredSessions', 'session')
-  get isFeatured(): boolean {
+  override render() {
+    const session = this.session;
+    const duration = (session as TempAny)?.duration;
+    const summary = this.getSummary();
+    const isFeatured = this.isFeatured();
+    const icon = isFeatured ? 'bookmark-check' : 'bookmark-plus';
+    const acceptingSessionFeedback = this.isAcceptingFeedback();
+
+    return html`
+      <a
+        class="session"
+        href="${this.sessionUrl(session?.id)}"
+        ?featured="${isFeatured}"
+        layout
+        vertical
+        relative
+      >
+        <hoverboard-icon name="${session?.icon}" class="session-icon"></hoverboard-icon>
+
+        <div class="session-header" layout horizontal justified>
+          <div flex>
+            <h3 class="session-title">${session?.title}</h3>
+            <text-truncate lines="3">
+              <div class="session-description">${summary}</div>
+            </text-truncate>
+          </div>
+          <span class="language">${session?.language?.slice(0, 2)}</span>
+        </div>
+
+        <div class="session-content" flex layout horizontal justified>
+          <div class="session-meta">
+            <div ?hidden="${!session?.complexity}">${session?.complexity}</div>
+          </div>
+          <div class="session-actions">
+            <hoverboard-icon
+              name="insert-comment"
+              class="feedback-action"
+              ?hidden="${!acceptingSessionFeedback}"
+              @click="${this.toggleFeedback}"
+            ></hoverboard-icon>
+            <hoverboard-icon
+              name="${icon}"
+              class="bookmark-session"
+              ?hidden="${acceptingSessionFeedback}"
+              @click="${this.toggleFeaturedSession}"
+            ></hoverboard-icon>
+          </div>
+        </div>
+
+        <div class="session-footer">
+          <div layout horizontal justified center-aligned>
+            <div class="session-meta" flex>
+              <span ?hidden="${!duration?.hh}">
+                ${duration?.hh} hour${this.getEnding(duration?.hh)}
+              </span>
+              <span ?hidden="${!duration?.mm}">
+                ${duration?.mm} min${this.getEnding(duration?.mm)}
+              </span>
+            </div>
+            <div class="tags" ?hidden="${!session?.tags?.length}">
+              ${session?.tags?.map(
+                (tag) =>
+                  html`<span class="tag" style="color: ${this.getVariableColor(tag)}"
+                    >${tag}</span
+                  >`,
+              )}
+            </div>
+          </div>
+
+          <div class="speakers" ?hidden="${!session?.speakers?.length}">
+            ${(session?.speakers as TempAny as SessionSpeaker[] | undefined)?.map(
+              (speaker) => html`
+                <div class="speaker" layout horizontal center>
+                  <lazy-image
+                    class="speaker-photo"
+                    src="${speaker.photoUrl}"
+                    alt="${speaker.name}"
+                  ></lazy-image>
+
+                  <div class="speaker-details" flex>
+                    <div class="speaker-name">${speaker.name}</div>
+                    <div class="speaker-title">${this.join(speaker.company, speaker.country)}</div>
+                  </div>
+                </div>
+              `,
+            )}
+          </div>
+        </div>
+      </a>
+    `;
+  }
+
+  private isFeatured(): boolean {
     if (this.featuredSessions instanceof Success && this.session?.id) {
       return this.featuredSessions.data[this.session.id] ?? false;
     }
     return false;
   }
 
-  @computed('isFeatured')
-  private get icon() {
-    return this.isFeatured ? 'bookmark-check' : 'bookmark-plus';
+  private getEnding(number: number | undefined) {
+    return number && number > 1 ? 's' : '';
   }
 
-  private getEnding(number: number) {
-    return number > 1 ? 's' : '';
-  }
-
-  @computed('session')
-  private get summary() {
+  private getSummary() {
     const description = this.session?.description ?? '';
     // TODO: Move logic to utility function
     const indexes = [
@@ -317,7 +333,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     }
   }
 
-  private acceptingFeedback(): boolean {
+  private isAcceptingFeedback(): boolean {
     return this.session !== undefined && acceptingFeedback(this.session);
   }
 
@@ -329,11 +345,13 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     return getVariableColor(this, value);
   }
 
-  private slice(text: string, number: number) {
-    return text && text.slice(0, number);
+  private sessionUrl(id: string | undefined) {
+    return id ? router.urlForName('session-page', { id }) : '';
   }
+}
 
-  private sessionUrl(id: string) {
-    return router.urlForName('session-page', { id });
+declare global {
+  interface HTMLElementTagNameMap {
+    'session-element': SessionElement;
   }
 }
