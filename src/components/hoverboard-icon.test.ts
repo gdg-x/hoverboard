@@ -35,6 +35,11 @@ describe('hoverboard-icon', () => {
     'directions',
     'close',
     'filter-list',
+    'menu',
+    'account',
+    'bell',
+    'bell-off',
+    'bell-outline',
   ])('renders the %s social icon', async (name) => {
     const { shadowRoot } = await fixture(html`<hoverboard-icon name="${name}"></hoverboard-icon>`);
 

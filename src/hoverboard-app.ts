@@ -21,7 +21,7 @@ import './elements/dialogs/signin-dialog';
 import './elements/dialogs/subscribe-dialog';
 import './elements/dialogs/video-dialog';
 import './components/footer-block';
-import './elements/header-toolbar';
+import './components/header-toolbar';
 import './elements/shared-styles';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
