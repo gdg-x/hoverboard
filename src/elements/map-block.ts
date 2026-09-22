@@ -1,13 +1,10 @@
 import { customElement, property } from '@polymer/decorators';
-import '@polymer/google-map';
-import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
+import '../components/hoverboard-icon';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { initialUiState } from '../store/ui/state';
-import { CONFIG, getConfig } from '../utils/config';
 import { location, mapBlock } from '../utils/data';
-import '../utils/icons';
 import './shared-styles';
 
 @customElement('map-block')
@@ -33,21 +30,33 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
         }
 
         .directions {
-          --paper-icon-button: {
-            width: 48px;
-            height: 48px;
-            color: var(--text-primary-color);
-          };
+          width: 48px;
+          height: 48px;
+          border: 0;
+          border-radius: 50%;
+          background: transparent;
+          color: var(--text-primary-color);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          padding: 0;
+          transition: opacity 0.2s ease;
+        }
+
+        .directions:hover {
+          opacity: 0.8;
+        }
+
+        gmp-map {
+          display: block;
+          height: 640px;
+          width: 100%;
         }
 
         @media (min-width: 640px) {
           :host {
             margin: 64px auto 72px;
-          }
-
-          google-map {
-            display: block;
-            height: 640px;
           }
 
           .description-card {
@@ -65,23 +74,19 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <template is="dom-if" if="[[viewport.isTabletPlus]]">
-        <google-map
+        <gmp-map
           id="map"
-          latitude="[[location.mapCenter.latitude]]"
-          longitude="[[location.mapCenter.longitude]]"
-          api-key="[[googleMapApiKey]]"
+          center="[[mapCenter]]"
           zoom="[[location.pointer.zoom]]"
           disable-default-ui
           draggable="false"
-          additional-map-options="[[options]]"
+          style="height: 640px;"
         >
-          <google-map-marker
-            latitude="[[location.pointer.latitude]]"
-            longitude="[[location.pointer.longitude]]"
+          <gmp-advanced-marker
+            position="[[markerPosition]]"
             title="[[location.name]]"
-            icon="images/map-marker.svg"
-          ></google-map-marker>
-        </google-map>
+          ></gmp-advanced-marker>
+        </gmp-map>
       </template>
 
       <div class="container" layout vertical end-justified fit$="[[viewport.isTabletPlus]]">
@@ -97,10 +102,9 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <paper-icon-button
-                class="directions"
-                icon="hoverboard:directions"
-              ></paper-icon-button>
+              <button class="directions" type="button" aria-label="Get directions">
+                <hoverboard-icon name="directions"></hoverboard-icon>
+              </button>
             </a>
           </div>
         </div>
@@ -110,7 +114,8 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
 
   private location = location;
   private mapBlock = mapBlock;
-  private googleMapApiKey = getConfig(CONFIG.GOOGLE_MAPS_API_KEY);
+  private mapCenter = `${location.mapCenter.latitude},${location.mapCenter.longitude}`;
+  private markerPosition = `${location.pointer.latitude},${location.pointer.longitude}`;
 
   @property({ type: Object })
   private viewport = initialUiState.viewport;
