@@ -3,7 +3,6 @@ import '@material/web/button/outlined-button.js';
 import { Dialog } from '@material/mwc-dialog';
 import { observe, property, query } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
-import '@radi-cho/star-rating';
 import { Session } from '../../models/session';
 import { RootState } from '../../store';
 import { closeDialog } from '../../store/dialogs/actions';

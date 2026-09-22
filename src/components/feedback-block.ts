@@ -3,7 +3,6 @@ import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
 import '@material/web/textfield/outlined-text-field.js';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
-import '@radi-cho/star-rating';
 import { css, html, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { Feedback } from '../models/feedback';
@@ -18,6 +17,8 @@ import { ReduxMixin } from '../store/mixin';
 import { queueComplexSnackbar, queueSnackbar } from '../store/snackbars';
 import { initialUserState } from '../store/user/state';
 import { feedback as feedbackText } from '../utils/data';
+import './star-rating';
+import { type StarRatingChangeDetail } from './star-rating';
 import { ThemedElement } from './themed-element';
 
 @customElement('feedback-block')
@@ -96,16 +97,16 @@ export class FeedbackBlock extends ReduxMixin(ThemedElement) {
           <div class="caption">${this.feedbackText.contentCaption}:</div>
           <star-rating
             .rating="${this.contentRating}"
-            @rating-changed="${(e: CustomEvent<{ value: number }>) =>
-              (this.contentRating = e.detail.value)}"
+            @rating-changed="${(event: CustomEvent<StarRatingChangeDetail>) =>
+              this.onContentRatingChanged(event)}"
           ></star-rating>
         </div>
         <div>
           <div class="caption">${this.feedbackText.styleCaption}:</div>
           <star-rating
             .rating="${this.styleRating}"
-            @rating-changed="${(e: CustomEvent<{ value: number }>) =>
-              (this.styleRating = e.detail.value)}"
+            @rating-changed="${(event: CustomEvent<StarRatingChangeDetail>) =>
+              this.onStyleRatingChanged(event)}"
           ></star-rating>
         </div>
 
@@ -116,16 +117,20 @@ export class FeedbackBlock extends ReduxMixin(ThemedElement) {
           label="Comment"
           .value="${this.comment}"
           maxlength="256"
-          @input="${this.onCommentInput}"
+          @input="${(event: Event) => this.onCommentInput(event)}"
         ></md-outlined-text-field>
         <p ?hidden="${!this.hasRated}" class="helper">${this.feedbackText.helperText}</p>
-        <md-filled-button class="primary" ?hidden="${!this.hasRated}" @click="${this.setFeedback}">
+        <md-filled-button
+          class="primary"
+          ?hidden="${!this.hasRated}"
+          @click="${() => this.setFeedback()}"
+        >
           ${this.feedbackText.save}
         </md-filled-button>
         <md-outlined-button
           class="delete-button"
           ?hidden="${!this.hasSavedFeedback}"
-          @click="${this.deleteFeedback}"
+          @click="${() => this.deleteFeedback()}"
         >
           ${this.feedbackText.deleteFeedback}
         </md-outlined-button>
@@ -141,6 +146,14 @@ export class FeedbackBlock extends ReduxMixin(ThemedElement) {
     this.contentRating = 0;
     this.styleRating = 0;
     this.comment = '';
+  }
+
+  private onContentRatingChanged(event: CustomEvent<StarRatingChangeDetail>) {
+    this.contentRating = event.detail.value;
+  }
+
+  private onStyleRatingChanged(event: CustomEvent<StarRatingChangeDetail>) {
+    this.styleRating = event.detail.value;
   }
 
   private async setFeedback() {

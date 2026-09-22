@@ -1,13 +1,11 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Feedback } from '../models/feedback';
 import { RootState } from '../store';
 import { feedback as feedbackText } from '../utils/data';
 import type { FeedbackBlock } from './feedback-block';
-
-jest.mock('@radi-cho/star-rating', () => ({}));
 
 import './feedback-block';
 
