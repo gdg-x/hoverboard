@@ -1,15 +1,17 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import { computed, customElement, observe, property } from '@polymer/decorators';
-import '@polymer/iron-icon';
-import '@polymer/paper-progress';
-import { html, PolymerElement } from '@polymer/polymer';
+import '@material/web/progress/linear-progress.js';
 import '@power-elements/lazy-image';
+import { css, html, nothing } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 import { RouterLocation } from '@vaadin/router';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
 import '../components/content-loader';
+import '../components/footer-block';
+import '../components/hoverboard-icon';
 import '../components/previous-speakers-block';
-import '../elements/shared-styles';
+import { ThemedElement } from '../components/themed-element';
+import { Badge } from '../models/badge';
 import { PreviousSessionWithYear } from '../models/previous-session';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
@@ -17,21 +19,24 @@ import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { fetchPreviousSpeakers } from '../store/previous-speakers/actions';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
-import {
-  initialPreviousSpeakersState,
-  PreviousSpeakersState,
-} from '../store/previous-speakers/state';
-import { isEmpty } from '../utils/arrays';
+import { initialPreviousSpeakersState } from '../store/previous-speakers/state';
 import { sessionDetails, speakerDetails, speakers } from '../utils/data';
-import '../utils/icons';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
 
+// `PreviousSpeaker.badges`/`pronouns` are not currently declared on the model
+// (no action/selector/state populates them today), but the original template
+// rendered them when present. Keep this augmentation so the badges/subtitle
+// sections stay fully typed and ready to render the moment real data is
+// supplied, without changing today's output.
+type PreviousSpeakerWithDetails = PreviousSpeaker & { badges?: Badge[]; pronouns?: string };
+
 @customElement('previous-speaker-page')
-export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           background: #fff;
           box-shadow: var(--box-shadow);
@@ -103,10 +108,10 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
           user-select: none;
         }
 
-        .action iron-icon {
+        .action hoverboard-icon {
           margin-right: 4px;
-          --iron-icon-width: 18px;
-          --iron-icon-height: 18px;
+          width: 18px;
+          height: 18px;
         }
 
         .additional-sections {
@@ -139,113 +144,13 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
           line-height: 1;
         }
 
-        paper-progress {
+        .progress {
           width: 100%;
-          --paper-progress-active-color: var(--default-primary-color);
-          --paper-progress-secondary-color: var(--default-primary-color);
+          --md-linear-progress-active-indicator-color: var(--default-primary-color);
+          --md-linear-progress-track-color: var(--default-primary-color);
         }
-      </style>
-
-      <simple-hero page="speakers">
-        <div class="dialog-container header-content" layout horizontal center>
-          <lazy-image class="photo" src="[[speaker.photoUrl]]" alt="[[speaker.name]]"></lazy-image>
-          <div>
-            <h2 class="name" flex>[[speaker.name]]</h2>
-            <div class="subtitle">[[subtitle]]</div>
-          </div>
-        </div>
-      </simple-hero>
-
-      <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
-
-      <content-loader
-        class="container"
-        card-padding="32px"
-        card-height="400px"
-        horizontal-position="50%"
-        border-radius="4px"
-        box-shadow="var(--box-shadow)"
-        items-count="1"
-        hidden$="[[contentLoaderVisibility]]"
-      ></content-loader>
-
-      <div class="container content">
-        <h3 class="meta-info">[[companyInfo]]</h3>
-        <h3 class="meta-info" hidden$="[[isEmpty(speaker.badges)]]">
-          <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-            <a
-              class="badge"
-              href$="[[badge.link]]"
-              target="_blank"
-              rel="noopener noreferrer"
-              title$="[[badge.description]]"
-            >
-              [[badge.description]]
-            </a>
-          </template>
-        </h3>
-
-        <short-markdown class="description" content="[[speaker.bio]]"></short-markdown>
-
-        <div class="actions" layout horizontal>
-          <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-            <a class="action" href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
-              <iron-icon icon="hoverboard:[[social.icon]]"></iron-icon>
-            </a>
-          </template>
-        </div>
-
-        <div class="additional-sections" hidden$="[[!sessions.length]]">
-          <h3>[[speakerDetails.sessions]]</h3>
-
-          <template is="dom-repeat" items="[[sessions]]" as="session">
-            <div layout horizontal center>
-              <div class="section" flex>
-                <div class="section-primary-text">[[session.title]]</div>
-                <div class="section-secondary-text">[[previousYear]]: [[session.year]]</div>
-                <div class="tags" hidden$="[[!session.tags.length]]">
-                  <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                    <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
-                  </template>
-                </div>
-                <div class="actions" layout horizontal>
-                  <a
-                    class="action"
-                    href$="https://www.youtube.com/watch?v=[[session.videoId]]"
-                    hidden$="[[!session.videoId]]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    layout
-                    horizontal
-                    center
-                  >
-                    <iron-icon icon="hoverboard:video"></iron-icon>
-                    <span>[[sessionDetails.viewVideo]]</span>
-                  </a>
-                  <a
-                    class="action"
-                    href$="[[session.presentation]]"
-                    hidden$="[[!session.presentation]]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    layout
-                    horizontal
-                    center
-                  >
-                    <iron-icon icon="hoverboard:presentation"></iron-icon>
-                    <span>[[sessionDetails.viewPresentation]]</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </template>
-        </div>
-      </div>
-
-      <previous-speakers-block></previous-speakers-block>
-
-      <footer-block></footer-block>
-    `;
+      `,
+    ];
   }
 
   private previousYear = speakers.previousYear;
@@ -257,12 +162,8 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   speakers = initialPreviousSpeakersState;
 
-  @property({ type: String })
+  @state()
   private speakerId: string | undefined;
-  @property({ type: String, computed: 'computeJoin(speaker.country, speaker.pronouns)' })
-  private subtitle: string = '';
-  @property({ type: String, computed: 'computeCompanyInfo(speaker.title, speaker.company)' })
-  private companyInfo: string = '';
 
   override connectedCallback() {
     super.connectedCallback();
@@ -273,23 +174,23 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
   }
 
   override stateChanged(state: RootState) {
-    super.stateChanged(state);
     this.speakers = state.previousSpeakers;
   }
 
   onAfterEnter(location: RouterLocation) {
     this.speakerId = location.params?.['id']?.toString();
+    this.updateSpeaker();
   }
 
-  @computed('speaker')
-  get contentLoaderVisibility() {
-    return !!this.speaker;
+  override updated(changed: Map<string, unknown>) {
+    if (changed.has('speakers') || changed.has('speakerId')) {
+      this.updateSpeaker();
+    }
   }
 
-  @observe('speakers', 'speakerId')
-  onSpeakersAndSpeakerId(speakers: PreviousSpeakersState, speakerId: string) {
-    if (speakerId && speakers instanceof Success) {
-      this.speaker = selectPreviousSpeaker(store.getState(), speakerId);
+  private updateSpeaker() {
+    if (this.speakerId && this.speakers instanceof Success) {
+      this.speaker = selectPreviousSpeaker(store.getState(), this.speakerId);
       if (!this.speaker) {
         router.render('/404');
       } else {
@@ -301,25 +202,20 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  private computeJoin(...values: string[]) {
-    return values.filter(Boolean).join(' • ');
+  private get contentLoaderVisibility() {
+    return !!this.speaker;
   }
 
-  private computeCompanyInfo(title: string, company: string) {
-    return [title, company].filter(Boolean).join(', ');
+  private get subtitle() {
+    const speaker = this.speaker as PreviousSpeakerWithDetails | undefined;
+    return [speaker?.country, speaker?.pronouns].filter(Boolean).join(' • ');
   }
 
-  private getVariableColor(value: string) {
-    return getVariableColor(this as unknown as PolymerElement, value);
+  private get companyInfo() {
+    return [this.speaker?.title, this.speaker?.company].filter(Boolean).join(', ');
   }
 
-  private isEmpty(items: unknown[]) {
-    return isEmpty(items);
-  }
-
-  @computed('speaker')
   private get sessions(): PreviousSessionWithYear[] {
-    // TODO: Move to selector
     if (!this.speaker) {
       return [];
     }
@@ -331,5 +227,172 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
     }
 
     return sessions.sort((a, b) => Number(b.year) - Number(a.year));
+  }
+
+  private getVariableColor(value: string) {
+    return getVariableColor(this, value);
+  }
+
+  override render() {
+    const speaker = this.speaker as PreviousSpeakerWithDetails | undefined;
+    const sessions = this.sessions;
+
+    return html`
+      <simple-hero page="speakers">
+        <div class="dialog-container header-content" layout horizontal center>
+          <lazy-image
+            class="photo"
+            src=${speaker?.photoUrl ?? ''}
+            alt=${speaker?.name ?? ''}
+          ></lazy-image>
+          <div>
+            <h2 class="name" flex>${speaker?.name ?? ''}</h2>
+            <div class="subtitle">${this.subtitle}</div>
+          </div>
+        </div>
+      </simple-hero>
+
+      <md-linear-progress
+        class="progress"
+        indeterminate
+        ?hidden=${this.contentLoaderVisibility}
+      ></md-linear-progress>
+
+      <content-loader
+        class="container"
+        card-padding="32px"
+        card-height="400px"
+        horizontal-position="50%"
+        border-radius="4px"
+        box-shadow="var(--box-shadow)"
+        items-count="1"
+        ?hidden=${this.contentLoaderVisibility}
+      ></content-loader>
+
+      <div class="container content">
+        <h3 class="meta-info">${this.companyInfo}</h3>
+        ${
+          speaker?.badges?.length
+            ? html`
+                <h3 class="meta-info">
+                  ${speaker.badges.map(
+                    (badge) => html`
+                      <a
+                        class="badge"
+                        href=${badge.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title=${badge.description}
+                      >
+                        ${badge.description}
+                      </a>
+                    `,
+                  )}
+                </h3>
+              `
+            : nothing
+        }
+
+        <short-markdown class="description" .content=${speaker?.bio ?? ''}></short-markdown>
+
+        <div class="actions" layout horizontal>
+          ${speaker?.socials?.map(
+            (social) => html`
+              <a class="action" href=${social.link} target="_blank" rel="noopener noreferrer">
+                <hoverboard-icon name=${social.icon}></hoverboard-icon>
+              </a>
+            `,
+          )}
+        </div>
+
+        ${
+          sessions.length
+            ? html`
+                <div class="additional-sections">
+                  <h3>${this.speakerDetails.sessions}</h3>
+
+                  ${sessions.map(
+                    (session) => html`
+                      <div layout horizontal center>
+                        <div class="section" flex>
+                          <div class="section-primary-text">${session.title}</div>
+                          <div class="section-secondary-text">
+                            ${this.previousYear}: ${session.year}
+                          </div>
+                          ${
+                            session.tags.length
+                              ? html`
+                                  <div class="tags">
+                                    ${session.tags.map(
+                                      (tag) => html`
+                                        <span
+                                          class="tag"
+                                          style="color: ${this.getVariableColor(tag)}"
+                                          >${tag}</span
+                                        >
+                                      `,
+                                    )}
+                                  </div>
+                                `
+                              : nothing
+                          }
+                          <div class="actions" layout horizontal>
+                            ${
+                              session.videoId
+                                ? html`
+                                    <a
+                                      class="action"
+                                      href="https://www.youtube.com/watch?v=${session.videoId}"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      layout
+                                      horizontal
+                                      center
+                                    >
+                                      <hoverboard-icon name="video"></hoverboard-icon>
+                                      <span>${this.sessionDetails.viewVideo}</span>
+                                    </a>
+                                  `
+                                : nothing
+                            }
+                            ${
+                              session.presentation
+                                ? html`
+                                    <a
+                                      class="action"
+                                      href=${session.presentation}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      layout
+                                      horizontal
+                                      center
+                                    >
+                                      <hoverboard-icon name="presentation"></hoverboard-icon>
+                                      <span>${this.sessionDetails.viewPresentation}</span>
+                                    </a>
+                                  `
+                                : nothing
+                            }
+                          </div>
+                        </div>
+                      </div>
+                    `,
+                  )}
+                </div>
+              `
+            : nothing
+        }
+      </div>
+
+      <previous-speakers-block></previous-speakers-block>
+
+      <footer-block></footer-block>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'previous-speaker-page': PreviousSpeakerPage;
   }
 }
