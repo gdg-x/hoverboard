@@ -1,26 +1,24 @@
-import { Failure, Initialized, Pending } from '@abraham/remotedata';
-import { computed, customElement, property, query } from '@polymer/decorators';
-import '@polymer/iron-icon';
+import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
-import '@polymer/paper-icon-button';
-import { html, PolymerElement } from '@polymer/polymer';
 import '@power-elements/lazy-image';
+import { css, html } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { Video } from '../models/video';
 import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { openVideoDialog } from '../store/ui/actions';
 import { fetchVideos } from '../store/videos/actions';
 import { initialVideosState } from '../store/videos/state';
-import { TempAny } from '../temp-any';
 import { featuredVideos, loading } from '../utils/data';
-import '../utils/icons';
-import './shared-styles';
+import './hoverboard-icon';
+import { ThemedElement } from './themed-element';
 
 @customElement('featured-videos')
-export class FeaturedVideos extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
+export class FeaturedVideos extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         :host {
           display: block;
           --video-item-height: 200px;
@@ -134,64 +132,8 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
             right: 0;
           }
         }
-      </style>
-      <div class="container">
-        <div class="header" layout horizontal justified center wrap>
-          <h1 class="container-title">[[featuredVideos.title]]</h1>
-        </div>
-
-        <div class="videos-wrapper" layout flex horizontal>
-          <paper-icon-button
-            class="last-video slide-icon"
-            icon="hoverboard:chevron-left"
-            on-click="shiftContentLeft"
-            hidden$="[[leftArrowHidden]]"
-          ></paper-icon-button>
-          <div id="videoList" class="video-list" layout flex horizontal>
-            <div id="videos" class="videos" layout horizontal>
-              <template is="dom-if" if="[[pending]]">
-                <p>[[loading]]</p>
-              </template>
-
-              <template is="dom-if" if="[[failure]]">
-                <p>Error loading videos.</p>
-              </template>
-
-              <template is="dom-repeat" items="[[videos.data]]" as="block" index-as="index">
-                <div class="video-item" on-click="playVideo" video="[[block]]">
-                  <div class="thumbnail" relative layout horizontal center-center>
-                    <lazy-image
-                      id="image[[index]]"
-                      class="thumbnail-image"
-                      src="[[block.thumbnail]]"
-                      alt="[[block.title]]"
-                    ></lazy-image>
-                    <div class="image-overlay" fit></div>
-                    <paper-icon-button
-                      class="video-play-icon"
-                      icon="hoverboard:play"
-                    ></paper-icon-button>
-                  </div>
-                  <h4 class="video-title">[[block.title]]</h4>
-                </div>
-              </template>
-            </div>
-          </div>
-          <paper-icon-button
-            class="next-video slide-icon"
-            icon="hoverboard:chevron-right"
-            on-click="shiftContentRight"
-            hidden$="[[rightArrowHidden]]"
-          ></paper-icon-button>
-        </div>
-        <a href="[[featuredVideos.callToAction.link]]" target="_blank" rel="noopener noreferrer">
-          <md-text-button class="cta-button animated icon-right" trailing-icon>
-            <span>[[featuredVideos.callToAction.label]]</span>
-            <iron-icon slot="icon" icon="hoverboard:arrow-right-circle"></iron-icon>
-          </md-text-button>
-        </a>
-      </div>
-    `;
+      `,
+    ];
   }
 
   private featuredVideos = featuredVideos;
@@ -210,14 +152,16 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean })
   private rightArrowHidden = false;
 
-  @computed('videos')
-  get pending() {
+  private get pending() {
     return this.videos instanceof Pending;
   }
 
-  @computed('videos')
-  get failure() {
+  private get failure() {
     return this.videos instanceof Failure;
+  }
+
+  private get videosData(): Video[] {
+    return this.videos instanceof Success ? this.videos.data : [];
   }
 
   override stateChanged(state: RootState) {
@@ -231,7 +175,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     }
   }
 
-  shiftContentLeft() {
+  private shiftContentLeft() {
     const { cardWidth, currentPosition } = this.getVideosDetails();
 
     let newX = currentPosition + cardWidth;
@@ -253,7 +197,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     }
   }
 
-  shiftContentRight() {
+  private shiftContentRight() {
     const { cardWidth, maxRightPosition, currentPosition } = this.getVideosDetails();
 
     let newX = currentPosition - cardWidth;
@@ -276,7 +220,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     }
   }
 
-  getVideosDetails() {
+  private getVideosDetails() {
     const videos = this.shadowRoot!.querySelectorAll('.video-item');
     const lastVideo = videos[videos.length - 1];
 
@@ -302,28 +246,79 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     };
   }
 
-  getVideoListWidth() {
-    const videos = this.shadowRoot!.querySelectorAll('.video-item');
-    const lastVideo = videos[videos.length - 1];
-
-    if (!lastVideo) {
-      throw new Error('Featured videos elements missing');
-    }
-
-    const cardRect = lastVideo.getBoundingClientRect();
-    return cardRect.width * videos.length;
-  }
-
-  transformVideoList(el: HTMLElement, newPosition: number) {
+  private transformVideoList(el: HTMLElement, newPosition: number) {
     el.style.transform = 'translate3d(' + newPosition + 'px, 0, 0)';
   }
 
-  playVideo(e: PointerEvent) {
-    const video: Video = (e.currentTarget as TempAny).video;
+  private playVideo(video: Video) {
     const presenters = video.speakers ? ` by ${video.speakers}` : '';
     const title = video.title + presenters;
     const youtubeId = video.youtubeId;
 
     openVideoDialog({ title, youtubeId });
+  }
+
+  override render() {
+    return html`
+      <div class="container">
+        <div class="header" layout horizontal justified center wrap>
+          <h1 class="container-title">${this.featuredVideos.title}</h1>
+        </div>
+
+        <div class="videos-wrapper" layout flex horizontal>
+          <hoverboard-icon
+            class="last-video slide-icon"
+            name="chevron-left"
+            @click="${() => this.shiftContentLeft()}"
+            ?hidden="${this.leftArrowHidden}"
+          ></hoverboard-icon>
+          <div id="videoList" class="video-list" layout flex horizontal>
+            <div id="videos" class="videos" layout horizontal>
+              ${this.pending ? html`<p>${this.loading}</p>` : ''}
+              ${this.failure ? html`<p>Error loading videos.</p>` : ''}
+              ${this.videosData.map(
+                (block, index) => html`
+                  <div class="video-item" @click="${() => this.playVideo(block)}">
+                    <div class="thumbnail" relative layout horizontal center-center>
+                      <lazy-image
+                        id="image${index}"
+                        class="thumbnail-image"
+                        src="${block.thumbnail}"
+                        alt="${block.title}"
+                      ></lazy-image>
+                      <div class="image-overlay" fit></div>
+                      <hoverboard-icon class="video-play-icon" name="play"></hoverboard-icon>
+                    </div>
+                    <h4 class="video-title">${block.title}</h4>
+                  </div>
+                `,
+              )}
+            </div>
+          </div>
+          <hoverboard-icon
+            class="next-video slide-icon"
+            name="chevron-right"
+            @click="${() => this.shiftContentRight()}"
+            ?hidden="${this.rightArrowHidden}"
+          ></hoverboard-icon>
+        </div>
+        <a
+          href="${this.featuredVideos.callToAction.link}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <md-text-button class="cta-button animated icon-right" trailing-icon>
+            <span>${this.featuredVideos.callToAction.label}</span>
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+          </md-text-button>
+        </a>
+      </div>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'featured-videos': FeaturedVideos;
   }
 }

@@ -1,25 +1,21 @@
-import { Pending, Success } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
-import { html, PolymerElement } from '@polymer/polymer';
+import { css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { Ticket } from '../models/ticket';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { initialTicketsState } from '../store/tickets/state';
 import { buyTicket, contentLoaders, ticketsBlock } from '../utils/data';
-import '../utils/icons';
-import '../components/content-loader';
-import './shared-styles';
+import './content-loader';
+import { ThemedElement } from './themed-element';
 
 @customElement('tickets-block')
-export class TicketsBlock extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment positioning">
-        :host {
-          display: block;
-        }
-
+export class TicketsBlock extends ReduxMixin(ThemedElement) {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
         .tickets-wrapper {
           text-align: center;
         }
@@ -126,69 +122,8 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
             transform: scale(1.15);
           }
         }
-      </style>
-
-      <div class="tickets-wrapper container">
-        <h1 class="container-title">[[ticketsBlock.title]]</h1>
-        <content-loader
-          class="tickets-placeholder"
-          card-padding="24px"
-          card-height="216px"
-          border-radius="var(--border-radius)"
-          title-top-position="32px"
-          title-height="42px"
-          title-width="70%"
-          load-from="-70%"
-          load-to="130%"
-          animation-time="1s"
-          items-count="[[contentLoaders.itemsCount]]"
-          hidden$="[[!pending]]"
-        >
-        </content-loader>
-
-        <div class="tickets" layout horizontal wrap center-justified>
-          <template is="dom-if" if="[[tickets.error]]"> Error loading tickets </template>
-
-          <template is="dom-repeat" items="[[tickets.data]]" as="ticket">
-            <a
-              class="ticket-item card"
-              href$="[[ticket.url]]"
-              target="_blank"
-              rel="noopener noreferrer"
-              sold-out$="[[ticket.soldOut]]"
-              in-demand$="[[ticket.inDemand]]"
-              on-click="onTicketTap"
-              layout
-              vertical
-            >
-              <div class="header">
-                <h4>[[ticket.name]]</h4>
-              </div>
-              <div class="content" layout vertical flex-auto>
-                <div class="ticket-price-wrapper">
-                  <div class="price">[[ticket.currency]][[ticket.price]]</div>
-                  <div class="discount">[[getDiscount(ticket)]]</div>
-                </div>
-                <div class="type-description" layout vertical flex-auto center-justified>
-                  <div class="ticket-dates" hidden$="[[!ticket.starts]]">
-                    [[ticket.starts]] - [[ticket.ends]]
-                  </div>
-                  <div class="ticket-info">[[ticket.info]]</div>
-                </div>
-              </div>
-              <div class="actions">
-                <div class="sold-out" block$="[[ticket.soldOut]]">[[ticketsBlock.soldOut]]</div>
-                <md-filled-button hidden$="[[ticket.soldOut]]" disabled$="[[!ticket.available]]">
-                  [[getButtonText(ticket.available)]]
-                </md-filled-button>
-              </div>
-            </a>
-          </template>
-        </div>
-
-        <div class="additional-info">*[[ticketsBlock.ticketsDetails]]</div>
-      </div>
-    `;
+      `,
+    ];
   }
 
   private ticketsBlock = ticketsBlock;
@@ -201,7 +136,6 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
     this.tickets = state.tickets;
   }
 
-  @computed('tickets')
   private get pending() {
     return this.tickets instanceof Pending;
   }
@@ -222,8 +156,8 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
     return this.ticketsBlock.save.replace('${discount}', discount);
   }
 
-  private onTicketTap(e: PointerEvent & { model: { ticket: Ticket } }) {
-    if (e.model.ticket.soldOut || !e.model.ticket.available) {
+  private onTicketTap(e: PointerEvent, ticket: Ticket) {
+    if (ticket.soldOut || !ticket.available) {
       e.preventDefault();
       e.stopPropagation();
     }
@@ -231,5 +165,87 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
 
   private getButtonText(available: boolean) {
     return available ? buyTicket : this.ticketsBlock.notAvailableYet;
+  }
+
+  private get ticketsList(): Ticket[] {
+    return this.tickets instanceof Success ? this.tickets.data : [];
+  }
+
+  private get error(): boolean {
+    return this.tickets instanceof Failure;
+  }
+
+  override render() {
+    return html`
+      <div class="tickets-wrapper container">
+        <h1 class="container-title">${this.ticketsBlock.title}</h1>
+        <content-loader
+          class="tickets-placeholder"
+          card-padding="24px"
+          card-height="216px"
+          border-radius="var(--border-radius)"
+          title-top-position="32px"
+          title-height="42px"
+          title-width="70%"
+          load-from="-70%"
+          load-to="130%"
+          animation-time="1s"
+          items-count="${this.contentLoaders.itemsCount}"
+          ?hidden="${!this.pending}"
+        >
+        </content-loader>
+
+        <div class="tickets" layout horizontal wrap center-justified>
+          ${this.error ? html`Error loading tickets` : ''}
+          ${this.ticketsList.map(
+            (ticket) => html`
+              <a
+                class="ticket-item card"
+                href="${ticket.url}"
+                target="_blank"
+                rel="noopener noreferrer"
+                ?sold-out="${ticket.soldOut}"
+                ?in-demand="${ticket.inDemand}"
+                @click="${(e: PointerEvent) => this.onTicketTap(e, ticket)}"
+                layout
+                vertical
+              >
+                <div class="header">
+                  <h4>${ticket.name}</h4>
+                </div>
+                <div class="content" layout vertical flex-auto>
+                  <div class="ticket-price-wrapper">
+                    <div class="price">${ticket.currency}${ticket.price}</div>
+                    <div class="discount">${this.getDiscount(ticket)}</div>
+                  </div>
+                  <div class="type-description" layout vertical flex-auto center-justified>
+                    <div class="ticket-dates" ?hidden="${!ticket.starts}">
+                      ${ticket.starts} - ${ticket.ends}
+                    </div>
+                    <div class="ticket-info">${ticket.info}</div>
+                  </div>
+                </div>
+                <div class="actions">
+                  <div class="sold-out" ?block="${ticket.soldOut}">
+                    ${this.ticketsBlock.soldOut}
+                  </div>
+                  <md-filled-button ?hidden="${ticket.soldOut}" ?disabled="${!ticket.available}">
+                    ${this.getButtonText(ticket.available)}
+                  </md-filled-button>
+                </div>
+              </a>
+            `,
+          )}
+        </div>
+
+        <div class="additional-info">*${this.ticketsBlock.ticketsDetails}</div>
+      </div>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'tickets-block': TicketsBlock;
   }
 }
