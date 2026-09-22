@@ -5,9 +5,9 @@ type Data = typeof import('../public/data/resources.json') &
   typeof import('../public/data/settings.json') &
   typeof import('../config/production.json') & { NODE_ENV: string };
 
-const { BUILD_ENV, NODE_ENV, ROLLUP_WATCH } = process.env;
+const { BUILD_ENV, NODE_ENV } = process.env;
 export const production = NODE_ENV === 'production';
-export const watch = !!ROLLUP_WATCH;
+export const watch = process.argv.includes('--watch');
 const buildTarget = BUILD_ENV ? BUILD_ENV : production ? 'production' : 'development';
 
 const getConfigPath = () => {
@@ -54,6 +54,6 @@ const data = cleanupData(getData());
 
 const nunjucks = n.configure({ throwOnUndefined: true });
 
-const compileTemplate = (template: string) => nunjucks.renderString(template, data);
+export const compileTemplate = (template: string) => nunjucks.renderString(template, data);
 
 export const compileBufferTemplate = (body: Buffer) => compileTemplate(body.toString());
