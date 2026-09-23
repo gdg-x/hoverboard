@@ -11,7 +11,7 @@ import {
   filterUpcomingTimeslots,
   getTodayDateString,
   parseTimeAndGetFromNow,
-} from '../time';
+} from '../time.js';
 
 const removeUserTokens = (tokensToUsers) => {
   const userTokens = Object.keys(tokensToUsers).reduce((acc, token) => {
