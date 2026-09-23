@@ -6,7 +6,7 @@
     "outDir": "dist",
     "sourceMap": true,
     "module": "es2020",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "strict": false
   },
   "compileOnSave": true,
