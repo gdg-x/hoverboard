@@ -1,12 +1,18 @@
+import { SessionMap, SpeakerMap } from '../utils/firestore.js';
 import {
   calculateEndTime,
   calculateStartTime,
   collectSpeakers,
   getDuration,
+  RawScheduleDay,
 } from '../utils/schedule-time.js';
 import { combineTags, pickMainTag } from '../utils/tags.js';
 
-export function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
+export function sessionsSpeakersScheduleMap(
+  sessionsRaw: SessionMap,
+  speakersRaw: SpeakerMap,
+  scheduleRaw: Record<string, RawScheduleDay>,
+) {
   const sessions = {};
   let schedule = {};
   let scheduleTags = [];

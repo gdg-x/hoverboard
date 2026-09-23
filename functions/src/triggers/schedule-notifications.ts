@@ -12,6 +12,7 @@ import {
   getTodayDateString,
   parseTimeAndGetFromNow,
 } from '../time.js';
+import { isInvalidTokenError } from '../utils/messaging.js';
 
 const removeUserTokens = (tokensToUsers) => {
   const userTokens = Object.keys(tokensToUsers).reduce((acc, token) => {
@@ -66,10 +67,7 @@ const sendPushNotificationToUsers = async (userIds: string[], data: MulticastMes
     const error = result.error;
     if (error) {
       logger.error('Failure sending notification to', tokens[index], error);
-      if (
-        error.code === 'messaging/invalid-registration-token' ||
-        error.code === 'messaging/registration-token-not-registered'
-      ) {
+      if (isInvalidTokenError(error.code)) {
         const token = tokens[index];
         tokensToRemove[token] = tokensToUsers[token];
       }

@@ -6,11 +6,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { getMessaging, MulticastMessage } from 'firebase-admin/messaging';
 import * as logger from 'firebase-functions/logger';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
-
-const REMOVE_TOKEN_ERROR = [
-  'messaging/invalid-registration-token',
-  'messaging/registration-token-not-registered',
-];
+import { isInvalidTokenError } from '../utils/messaging.js';
 
 export const sendGeneralNotification = onDocumentCreated(
   '/notifications/{timestamp}',
@@ -63,7 +59,7 @@ export const sendGeneralNotification = onDocumentCreated(
       const error = result.error;
       if (error) {
         logger.error(`Failure sending notification to ${tokens[index]}`, error);
-        if (REMOVE_TOKEN_ERROR.includes(error.code)) {
+        if (isInvalidTokenError(error.code)) {
           const tokenRef = getFirestore().collection('notificationsSubscribers').doc(tokens[index]);
           tokensToRemove.push(tokenRef.delete());
         }
