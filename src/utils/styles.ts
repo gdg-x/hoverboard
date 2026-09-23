@@ -1,4 +1,6 @@
-import { TempAny } from '../temp-any';
+export interface ShadyCSSGlobal {
+  getComputedStyleValue(element: Element, property: string): string;
+}
 
 export const generateClassName = (value: string | undefined): string => {
   return value
@@ -9,8 +11,12 @@ export const generateClassName = (value: string | undefined): string => {
     : '';
 };
 
-export const getVariableColor = (element: Element, value: string, fallback?: string): string => {
-  const ShadyCSS = (window as TempAny).ShadyCSS;
+export const getVariableColor = (
+  element: Element,
+  value: string,
+  fallback?: string,
+): string | CSSStyleDeclaration | undefined => {
+  const ShadyCSS = (window as { ShadyCSS?: ShadyCSSGlobal }).ShadyCSS;
   const calculated = ShadyCSS
     ? ShadyCSS.getComputedStyleValue(element, `--${generateClassName(value)}`)
     : getComputedStyle(element, `--${generateClassName(value)}`);

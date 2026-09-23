@@ -3,9 +3,8 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import { Day } from '../../models/day';
 import { Session } from '../../models/session';
-import { Time } from '../../models/time';
+import { GeneratedSessionBlock, Time } from '../../models/time';
 import { Timeslot } from '../../models/timeslot';
-import { TempAny } from '../../temp-any';
 import { FeaturedSessions, selectFeaturedSessions } from '../featured-sessions';
 import { selectScheduleState } from '.';
 
@@ -26,7 +25,7 @@ export const selectFeaturedSchedule = createSelector(
           return {
             ...timeslot,
             sessions: timeslot.sessions.map((sessionBlock: Time) => {
-              const items = (sessionBlock.items as TempAny as Session[]).filter(
+              const items = (sessionBlock as GeneratedSessionBlock).items.filter(
                 (session: Session): boolean => Boolean(featuredSessions[session.id]),
               );
               return {

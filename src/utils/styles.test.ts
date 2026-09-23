@@ -1,6 +1,5 @@
 import { describe, expect, it, vi, afterEach } from 'vitest';
-import { TempAny } from '../temp-any';
-import { generateClassName, getVariableColor } from './styles';
+import { generateClassName, getVariableColor, ShadyCSSGlobal } from './styles';
 
 describe('generateClassName', () => {
   it('replaces non-word characters with a dash', () => {
@@ -29,7 +28,7 @@ describe('getVariableColor', () => {
   it('uses ShadyCSS.getComputedStyleValue when ShadyCSS is present', () => {
     const element = document.createElement('div');
     const getComputedStyleValue = vi.fn().mockReturnValue('#673ab7');
-    (window as TempAny).ShadyCSS = { getComputedStyleValue };
+    (window as { ShadyCSS?: ShadyCSSGlobal }).ShadyCSS = { getComputedStyleValue };
 
     expect(getVariableColor(element, 'primaryColor')).toBe('#673ab7');
     expect(getComputedStyleValue).toHaveBeenCalledWith(element, '--primary-color');
@@ -38,7 +37,7 @@ describe('getVariableColor', () => {
   it('falls back to another variable when ShadyCSS returns nothing', () => {
     const element = document.createElement('div');
     const getComputedStyleValue = vi.fn().mockReturnValueOnce('').mockReturnValueOnce('#ff5252');
-    (window as TempAny).ShadyCSS = { getComputedStyleValue };
+    (window as { ShadyCSS?: ShadyCSSGlobal }).ShadyCSS = { getComputedStyleValue };
 
     expect(getVariableColor(element, 'primaryColor', 'fallbackColor')).toBe('#ff5252');
     expect(getComputedStyleValue).toHaveBeenCalledWith(element, '--fallback-color');
