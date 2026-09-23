@@ -9,7 +9,7 @@
     "npm": "10"
   },
   "scripts": {
-    "build": "npm run clean && NODE_ENV=production vite build && NODE_ENV=production vite build --config vite.sw.config.ts",
+    "build": "npm run clean && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --config vite.sw.config.ts",
     "clean": "rm -rf dist",
     "deploy": "npm run build && NODE_ENV=production firebase deploy",
     "firestore:copy": "ts-node-script ./scripts/firestore-copy",
@@ -31,8 +31,8 @@
     "start": "npm run clean && NODE_ENV=development concurrently --kill-others npm:start:*",
     "start:emulators": "firebase emulators:start --import=./.firebase/emulator-data --export-on-exit",
     "start:functions": "npm --prefix functions start",
-    "start:vite": "mkdir -p dist && vite build --watch",
-    "start:vite-sw": "vite build --watch --config vite.sw.config.ts",
+    "start:vite": "mkdir -p dist && VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --watch",
+    "start:vite-sw": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --watch --config vite.sw.config.ts",
     "test": "vitest run"
   },
   "dependencies": {

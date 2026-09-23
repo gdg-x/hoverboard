@@ -7,7 +7,6 @@ import '../components/about-block';
 import '../components/about-organizer-block';
 import '../components/featured-videos';
 import '../components/footer-block';
-import '../components/fork-me-block';
 import '../components/gallery-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';

@@ -2,8 +2,8 @@
   "name": "hoverboard-functions",
   "private": true,
   "description": "Hoverboard serverless functions",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/src/index.js",
+  "module": "dist/src/index.js",
   "type": "module",
   "engines": {
     "node": "22",
