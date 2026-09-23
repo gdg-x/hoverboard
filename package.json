@@ -61,6 +61,7 @@
     "@html-eslint/parser": "^0.65.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
+    "@types/jsdom": "^30.0.0",
     "@types/marked": "^6.0.0",
     "@types/node": "^26.4.0",
     "@types/nunjucks": "^3.2.6",
