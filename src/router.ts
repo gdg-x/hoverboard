@@ -1,8 +1,9 @@
-import { Route, Router } from '@vaadin/router';
+import { Route, Router, type Commands, type RouteContext } from '@vaadin/router';
+import type { EmptyObject } from 'type-fest';
 import { logPageView } from './utils/analytics.js';
 import { CONFIG, getConfig } from './utils/config.js';
 
-export let router: Router;
+export let router: Router<EmptyObject, EmptyObject>;
 
 const url = getConfig(CONFIG.URL);
 
@@ -33,7 +34,12 @@ export const selectRouteName = (pathname: string): string => {
   return part || 'home';
 };
 
-const ROUTES: Route[] = [
+// TypeScript 6's checker hits "Type instantiation is excessively deep and
+// possibly infinite" (TS2589) when checking this literal against
+// `@vaadin/router`'s recursive `Route` type
+// (https://github.com/microsoft/TypeScript/issues/63376). Casting through
+// `unknown` avoids the deep structural check without any runtime effect.
+const ROUTES = [
   {
     path: '/',
     component: 'home-page',
@@ -78,7 +84,7 @@ const ROUTES: Route[] = [
       {
         path: '/:id?',
         component: 'schedule-day',
-        action: async (context, commands) => {
+        action: async (context: RouteContext, commands: Commands) => {
           const searchParams = new URLSearchParams(context.search);
           if (searchParams.get('sessionId')) {
             commands.redirect(`/sessions/${searchParams.get('sessionId')}`);
@@ -166,10 +172,10 @@ const ROUTES: Route[] = [
       await import('./components/not-found-page.js');
     },
   },
-];
+] as unknown as Array<Route<EmptyObject, EmptyObject>>;
 
 export const startRouter = (outlet: HTMLElement) => {
-  router = new Router(outlet);
+  router = new Router<EmptyObject, EmptyObject>(outlet);
   router.setRoutes(ROUTES);
   return router;
 };
