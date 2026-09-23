@@ -12,7 +12,6 @@ import {
 } from '../store/auth';
 import { closeDialog, DIALOG, openSigninDialog, selectIsDialogOpen } from '../store/dialogs';
 import { ReduxMixin } from '../store/mixin';
-import { TempAny } from '../temp-any';
 import { signIn as signInText, signInDialog, signInProviders } from '../utils/data';
 import { getProviderCompanyName, PROVIDER } from '../utils/providers';
 import './hoverboard-icon';
@@ -163,8 +162,10 @@ export class SigninDialog extends ReduxMixin(ThemedElement) {
   private mergeAccounts() {
     if (this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
-      mergeAccounts(error.providerId as TempAny, error.credential as TempAny);
-      closeDialog();
+      if (error.providerId && error.credential) {
+        mergeAccounts(error.providerId, error.credential);
+        closeDialog();
+      }
     }
   }
 

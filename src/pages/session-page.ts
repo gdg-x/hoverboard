@@ -30,7 +30,6 @@ import { SessionsState, selectSessionsState } from '../store/sessions';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUiState, openVideoDialog } from '../store/ui';
 import { UserState } from '../store/user';
-import { TempAny } from '../temp-any';
 import { disabledSchedule, feedback, schedule, sessionDetails } from '../utils/data';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
@@ -233,10 +232,10 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
         router.render('/404');
       } else {
         this.acceptingFeedback = acceptingFeedback(this.session);
-        const speaker: Speaker = this.session?.speakers?.[0] as TempAny;
+        const speaker = (this.session as unknown as SessionWithDetails).speakers?.[0];
         updateImageMetadata(this.session.title, this.session.description, {
-          image: speaker.photoUrl,
-          imageAlt: speaker.name,
+          image: speaker?.photoUrl ?? '',
+          imageAlt: speaker?.name ?? '',
         });
       }
     }

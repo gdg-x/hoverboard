@@ -19,9 +19,22 @@ import { ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { SessionsState, selectSessionsState } from '../store/sessions';
 import { SpeakersState, selectSpeakersState } from '../store/speakers';
-import { TempAny } from '../temp-any';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
+
+// `heroSettings.schedule` (from `settings.json`) doesn't declare a `background.image`
+// or a top-level `description` — unlike some other hero settings entries (e.g.
+// `heroSettings.home`). Model them as optional here instead of casting to `any`.
+interface ScheduleHeroSettings {
+  background: {
+    color: string;
+    image?: string;
+  };
+  description?: string;
+  fontColor: string;
+  metaDescription: string;
+  title: string;
+}
 
 @customElement('schedule-page')
 export class SchedulePage extends ReduxMixin(ThemedElement) {
@@ -59,7 +72,7 @@ export class SchedulePage extends ReduxMixin(ThemedElement) {
     ];
   }
 
-  private heroSettings = heroSettings.schedule;
+  private heroSettings: ScheduleHeroSettings = heroSettings.schedule;
   private contentLoaders = contentLoaders.schedule;
 
   @property({ type: Object })
@@ -100,12 +113,12 @@ export class SchedulePage extends ReduxMixin(ThemedElement) {
   override render() {
     return html`
       <hero-block
-        background-image="${(this.heroSettings.background as TempAny).image ?? ''}"
+        background-image="${this.heroSettings.background.image ?? ''}"
         background-color="${this.heroSettings.background.color}"
         font-color="${this.heroSettings.fontColor}"
       >
         <div class="hero-title">${this.heroSettings.title}</div>
-        <p class="hero-description">${(this.heroSettings as TempAny).description ?? ''}</p>
+        <p class="hero-description">${this.heroSettings.description ?? ''}</p>
         <sticky-element slot="bottom">
           <header-bottom-toolbar .location="${this.location}"></header-bottom-toolbar>
         </sticky-element>

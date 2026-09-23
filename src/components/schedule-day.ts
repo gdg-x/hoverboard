@@ -5,7 +5,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { Day } from '../models/day';
 import { Filter } from '../models/filter';
 import { Session } from '../models/session';
-import { Time } from '../models/time';
+import { GeneratedSessionBlock, Time } from '../models/time';
 import { Timeslot } from '../models/timeslot';
 import { RootState } from '../store';
 import { FeaturedSessionsState, selectFeaturedSessionsState } from '../store/featured-sessions';
@@ -13,7 +13,6 @@ import { selectFilters } from '../store/filters';
 import { ReduxMixin } from '../store/mixin';
 import { ScheduleState, selectScheduleState } from '../store/schedule';
 import { UserState } from '../store/user';
-import { TempAny } from '../temp-any';
 import { mySchedule } from '../utils/data';
 import { generateClassName } from '../utils/styles';
 import './hoverboard-icon';
@@ -164,7 +163,9 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
               class="add-session"
               href="/schedule/${day.date}#${timeslot.startTime}"
               ?hidden="${!this.showAddSession(timeslot, this.onlyFeatured)}"
-              style="grid-area: ${(timeslot.sessions[0] as TempAny)?.gridArea}"
+              style="grid-area: ${
+                (timeslot.sessions[0] as GeneratedSessionBlock | undefined)?.gridArea
+              }"
               layout
               horizontal
               center-center
@@ -179,12 +180,12 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
                 (sessionBlock) => html`
                   <div
                     class="session"
-                    style="grid-area: ${(sessionBlock as TempAny).gridArea}"
+                    style="grid-area: ${(sessionBlock as GeneratedSessionBlock).gridArea}"
                     layout
                     vertical
                   >
                     ${this.filterSessions(
-                      (sessionBlock as TempAny).items,
+                      (sessionBlock as GeneratedSessionBlock).items,
                       this.selectedFilters,
                     ).map(
                       (subSession) => html`

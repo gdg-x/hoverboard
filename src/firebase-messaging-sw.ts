@@ -15,15 +15,14 @@ importScripts('/__/firebase/8.10.0/firebase-messaging.js');
 importScripts('/__/firebase/init.js');
 
 import { MessagePayload, onBackgroundMessage } from 'firebase/messaging/sw';
-import { TempAny } from './temp-any';
 
 const messaging = (self as any).firebase.messaging();
 
 const showNotification = (payload: MessagePayload) => {
-  const data = payload.data as TempAny;
-  const body = data.body;
-  const icon = data.icon;
-  const title = data.title;
+  const data = payload.data ?? {};
+  const body = data['body'] ?? '';
+  const icon = data['icon'] ?? '';
+  const title = data['title'] ?? '';
   const notificationOptions = { body, icon, data };
 
   return self.registration.showNotification(title, notificationOptions);

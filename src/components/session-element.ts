@@ -4,7 +4,6 @@ import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { Session } from '../models/session';
 import { router } from '../router';
-import { TempAny } from '../temp-any';
 import { RootState, store } from '../store';
 import { openFeedbackDialog, openSigninDialog } from '../store/dialogs';
 import {
@@ -24,13 +23,24 @@ import { ThemedElement } from './themed-element';
 
 // The runtime `session.speakers` payload is an enriched list of speaker summaries (see
 // `functions/src/schedule-generator/speakers-sessions-schedule-map.ts`), not the `string[]` of ids
-// declared on `SessionData`.
+// declared on `SessionData`. The same generator also adds a computed `duration` that
+// isn't declared on `SessionData`.
 interface SessionSpeaker {
   company: string;
   country: string;
   name: string;
   photoUrl: string;
 }
+
+interface SessionDuration {
+  hh: number;
+  mm: number;
+}
+
+type SessionWithScheduleDetails = Omit<Session, 'speakers'> & {
+  duration?: SessionDuration;
+  speakers?: SessionSpeaker[];
+};
 
 @customElement('session-element')
 export class SessionElement extends ReduxMixin(ThemedElement) {
@@ -187,8 +197,8 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
   }
 
   override render() {
-    const session = this.session;
-    const duration = (session as TempAny)?.duration;
+    const session = this.session as SessionWithScheduleDetails | undefined;
+    const duration = session?.duration;
     const summary = this.getSummary();
     const isFeatured = this.isFeatured();
     const icon = isFeatured ? 'bookmark-check' : 'bookmark-plus';
@@ -256,7 +266,7 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
           </div>
 
           <div class="speakers" ?hidden="${!session?.speakers?.length}">
-            ${(session?.speakers as TempAny as SessionSpeaker[] | undefined)?.map(
+            ${session?.speakers?.map(
               (speaker) => html`
                 <div class="speaker" layout horizontal center>
                   <lazy-image

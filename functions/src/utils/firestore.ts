@@ -1,25 +1,28 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
 import type { DocumentData, QuerySnapshot } from 'firebase-admin/firestore';
-// TODO: import actual types. Currently importing them changes `dist` structure.
+// Importing the actual frontend models (`Schedule`, `Session`, `Speaker` from
+// `../../../src/models/*`) would pull those files into this package's TypeScript
+// program and change the emitted `dist` structure, so these are typed against the
+// real Firestore document shape (`DocumentData`) plus the specific fields the
+// schedule generator reads off raw session/speaker documents.
 // import type { Schedule } from '../../../src/models/schedule';
 // import type { Session } from '../../../src/models/session';
 // import type { Speaker } from '../../../src/models/speaker';
 
-// TODO: Remove TempAny
-type TempAny = any;
-type Session = TempAny;
-type Schedule = TempAny;
-type Speaker = TempAny;
-
-export interface SessionMap {
-  [id: string]: Session;
+export interface RawSessionData extends DocumentData {
+  speakers?: string[];
+  tags?: string[];
 }
 
-export type ScheduleMap = Schedule;
+export interface SessionMap {
+  [id: string]: RawSessionData;
+}
+
+export type ScheduleMap = DocumentData;
 
 export interface SpeakerMap {
-  [id: string]: Speaker;
+  [id: string]: DocumentData;
 }
 
 export const snapshotToObject = (snapshot: QuerySnapshot<DocumentData>) => {
