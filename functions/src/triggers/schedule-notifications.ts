@@ -10,7 +10,7 @@ import {
   filterUpcomingTimeslots,
   getTodayDateString,
   parseTimeAndGetFromNow,
-} from './time';
+} from '../time';
 
 const removeUserTokens = (tokensToUsers) => {
   const userTokens = Object.keys(tokensToUsers).reduce((acc, token) => {

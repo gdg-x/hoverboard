@@ -2,24 +2,24 @@ import { initializeApp } from 'firebase-admin/app';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('firebase-admin/app');
-vi.mock('../src/generate-sessions-speakers-schedule.js', () => ({
+vi.mock('../src/triggers/generate-sessions-speakers-schedule.js', () => ({
   scheduleWrite: 'scheduleWrite-marker',
   sessionsWrite: 'sessionsWrite-marker',
   speakersWrite: 'speakersWrite-marker',
 }));
-vi.mock('../src/mailchimp-subscribe.js', () => ({
+vi.mock('../src/triggers/mailchimp-subscribe.js', () => ({
   mailchimpSubscribe: 'mailchimpSubscribe-marker',
 }));
-vi.mock('../src/notifications.js', () => ({
+vi.mock('../src/triggers/notifications.js', () => ({
   sendGeneralNotification: 'sendGeneralNotification-marker',
 }));
-vi.mock('../src/optimize-images.js', () => ({
+vi.mock('../src/triggers/optimize-images.js', () => ({
   optimizeImages: 'optimizeImages-marker',
 }));
-vi.mock('../src/prerender.js', () => ({
+vi.mock('../src/triggers/prerender.js', () => ({
   prerender: 'prerender-marker',
 }));
-vi.mock('../src/schedule-notifications.js', () => ({
+vi.mock('../src/triggers/schedule-notifications.js', () => ({
   scheduleNotifications: 'scheduleNotifications-marker',
 }));
 

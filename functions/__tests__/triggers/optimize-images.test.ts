@@ -29,7 +29,7 @@ vi.mock('fs', () => ({
   },
 }));
 
-import { optimizeImages } from '../src/optimize-images';
+import { optimizeImages } from '../../src/triggers/optimize-images';
 
 const setupStorageMocks = ({
   metadata = {},

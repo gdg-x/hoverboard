@@ -2,9 +2,15 @@
 
 import { getFirestore } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
-import { sessionsSpeakersMap } from './schedule-generator/speakers-sessions-map.js';
-import { sessionsSpeakersScheduleMap } from './schedule-generator/speakers-sessions-schedule-map.js';
-import { isEmpty, ScheduleMap, SessionMap, snapshotToObject, SpeakerMap } from './utils.js';
+import { sessionsSpeakersMap } from '../schedule-generator/speakers-sessions-map.js';
+import { sessionsSpeakersScheduleMap } from '../schedule-generator/speakers-sessions-schedule-map.js';
+import {
+  isEmpty,
+  ScheduleMap,
+  SessionMap,
+  snapshotToObject,
+  SpeakerMap,
+} from '../utils/firestore.js';
 
 const isScheduleEnabled = async (): Promise<boolean> => {
   const doc = await getFirestore().collection('config').doc('schedule').get();

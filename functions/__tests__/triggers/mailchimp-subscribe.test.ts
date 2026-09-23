@@ -2,7 +2,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
 import fetch from 'node-fetch';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { mailchimpSubscribe } from '../src/mailchimp-subscribe';
+import { mailchimpSubscribe } from '../../src/triggers/mailchimp-subscribe';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('node-fetch');

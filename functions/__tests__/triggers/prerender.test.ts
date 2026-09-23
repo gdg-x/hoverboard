@@ -1,7 +1,7 @@
 import { getFirestore } from 'firebase-admin/firestore';
 import fetch from 'node-fetch';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { prerender } from '../src/prerender';
+import { prerender } from '../../src/triggers/prerender';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('node-fetch');

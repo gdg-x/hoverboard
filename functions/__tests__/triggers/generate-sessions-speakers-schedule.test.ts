@@ -5,15 +5,15 @@ import {
   scheduleWrite,
   sessionsWrite,
   speakersWrite,
-} from '../src/generate-sessions-speakers-schedule';
-import { sessionsSpeakersMap as sessionsSpeakersMapUntyped } from '../src/schedule-generator/speakers-sessions-map.js';
-import { sessionsSpeakersScheduleMap as sessionsSpeakersScheduleMapUntyped } from '../src/schedule-generator/speakers-sessions-schedule-map.js';
+} from '../../src/triggers/generate-sessions-speakers-schedule';
+import { sessionsSpeakersMap as sessionsSpeakersMapUntyped } from '../../src/schedule-generator/speakers-sessions-map.js';
+import { sessionsSpeakersScheduleMap as sessionsSpeakersScheduleMapUntyped } from '../../src/schedule-generator/speakers-sessions-schedule-map.js';
 
 vi.mock('firebase-admin/firestore');
-vi.mock('../src/schedule-generator/speakers-sessions-map.js', () => ({
+vi.mock('../../src/schedule-generator/speakers-sessions-map.js', () => ({
   sessionsSpeakersMap: vi.fn(),
 }));
-vi.mock('../src/schedule-generator/speakers-sessions-schedule-map.js', () => ({
+vi.mock('../../src/schedule-generator/speakers-sessions-schedule-map.js', () => ({
   sessionsSpeakersScheduleMap: vi.fn(),
 }));
 

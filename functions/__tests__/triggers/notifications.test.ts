@@ -2,7 +2,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { getMessaging } from 'firebase-admin/messaging';
 import * as functions from 'firebase-functions';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { sendGeneralNotification } from '../src/notifications';
+import { sendGeneralNotification } from '../../src/triggers/notifications';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('firebase-admin/messaging');
