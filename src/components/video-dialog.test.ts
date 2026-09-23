@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { closeVideoDialog } from '../store/ui';
@@ -14,6 +14,21 @@ vi.mock('../store/ui', async (importOriginal) => ({
 const mockCloseVideoDialog = vi.mocked(closeVideoDialog);
 
 describe('video-dialog', () => {
+  // <lite-youtube autoload> (rendered inside video-dialog) schedules setTimeouts
+  // internally (a 100ms poster-image check and, for shorts, a 2000ms autoplay
+  // attempt) that it never clears on disconnect. Using fake timers keeps those
+  // leaked timers from becoming real, pending timers that fire after jsdom
+  // teardown and throw (e.g. `Image is not defined`), which Vitest reports as
+  // an unhandled error even though no assertion fails.
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
+  });
+
   it('defines a component', () => {
     expect(customElements.get('video-dialog')).toBeDefined();
   });
