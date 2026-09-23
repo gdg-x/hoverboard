@@ -30,6 +30,10 @@ export class PartnersBlock extends ReduxMixin(ThemedElement) {
         }
 
         .logo-item {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
           padding: 12px;
         }
 
@@ -110,9 +114,6 @@ export class PartnersBlock extends ReduxMixin(ThemedElement) {
                     title="${logo.name}"
                     target="_blank"
                     rel="noopener noreferrer"
-                    layout
-                    horizontal
-                    center-center
                   >
                     <lazy-image
                       class="logo-img"
@@ -138,7 +139,7 @@ export class PartnersBlock extends ReduxMixin(ThemedElement) {
     `;
   }
 
-  private addPotentialPartner() {
+  private addPotentialPartner = () => {
     openSubscribeDialog({
       title: this.partnersBlock.form.title,
       submitLabel: this.partnersBlock.form.submitLabel,
@@ -146,7 +147,7 @@ export class PartnersBlock extends ReduxMixin(ThemedElement) {
       secondFieldLabel: this.partnersBlock.form.companyName,
       submit: (data) => addPotentialPartner(data),
     });
-  }
+  };
 }
 
 declare global {

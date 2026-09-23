@@ -31,6 +31,10 @@ export class SpeakersBlock extends ReduxMixin(ThemedElement) {
           text-align: center;
         }
 
+        .speaker-photo-wrapper {
+          position: relative;
+        }
+
         .photo {
           display: inline-block;
           --lazy-image-width: 72px;
@@ -48,12 +52,18 @@ export class SpeakersBlock extends ReduxMixin(ThemedElement) {
           position: absolute;
           top: 0;
           left: calc(50% + 24px);
+          display: flex;
+          flex-direction: row;
         }
 
         .badge {
           margin-left: -10px;
+          display: flex;
           width: 24px;
           height: 24px;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
           border-radius: 50%;
           border: 2px solid #fff;
           transition: transform var(--animation);
@@ -175,13 +185,13 @@ export class SpeakersBlock extends ReduxMixin(ThemedElement) {
           ${this.featuredSpeakers.map(
             (speaker) => html`
               <a class="speaker" href="${this.speakerUrl(speaker.id)}">
-                <div relative>
+                <div class="speaker-photo-wrapper">
                   <lazy-image
                     class="photo"
                     src="${speaker.photoUrl}"
                     alt="${speaker.name}"
                   ></lazy-image>
-                  <div class="badges" layout horizontal>
+                  <div class="badges">
                     ${(speaker.badges ?? []).map(
                       (badge) => html`
                         <a
@@ -190,9 +200,6 @@ export class SpeakersBlock extends ReduxMixin(ThemedElement) {
                           target="_blank"
                           rel="noopener noreferrer"
                           title="${badge.description}"
-                          layout
-                          horizontal
-                          center-center
                         >
                           <hoverboard-icon
                             name="${badge.name.toLowerCase()}"

@@ -16,8 +16,20 @@ export class AboutOrganizerBlock extends ReduxMixin(ThemedElement) {
     return [
       ...super.styles,
       css`
+        .container {
+          display: flex;
+        }
+
         .block:not(:last-of-type) {
           margin-bottom: 32px;
+        }
+
+        .image-column {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex: 1;
+          flex-basis: 1px;
         }
 
         .image-link {
@@ -36,6 +48,11 @@ export class AboutOrganizerBlock extends ReduxMixin(ThemedElement) {
         .description {
           color: var(--secondary-text-color);
         }
+
+        .description-block {
+          flex: 1;
+          flex-basis: 1px;
+        }
       `,
     ];
   }
@@ -49,8 +66,8 @@ export class AboutOrganizerBlock extends ReduxMixin(ThemedElement) {
 
   override render() {
     return html`
-      <div class="container" layout horizontal>
-        <div layout horizontal center-center flex ?hidden="${this.viewport.isPhone}">
+      <div class="container">
+        <div class="image-column" ?hidden="${this.viewport.isPhone}">
           <a href="/team" class="image-link">
             <lazy-image
               class="organizers-photo"
@@ -60,7 +77,7 @@ export class AboutOrganizerBlock extends ReduxMixin(ThemedElement) {
           </a>
         </div>
 
-        <div class="description-block" flex>
+        <div class="description-block">
           ${aboutOrganizerBlock.blocks.map(
             (block) => html`
               <div class="block">

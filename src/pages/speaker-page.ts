@@ -75,6 +75,8 @@ export class SpeakerPage extends ReduxMixin(ThemedElement) {
 
         .name {
           line-height: 1.2;
+          flex: 1;
+          flex-basis: 1px;
         }
 
         .subtitle {
@@ -124,11 +126,27 @@ export class SpeakerPage extends ReduxMixin(ThemedElement) {
           margin-top: 32px;
         }
 
+        .actions,
+        .header-content,
+        .section-content {
+          display: flex;
+        }
+
+        .header-content,
+        .section-content {
+          align-items: center;
+        }
+
         .section {
           margin-top: 16px;
           display: block;
           color: var(--primary-text-color);
           cursor: pointer;
+        }
+
+        .section-details {
+          flex: 1;
+          flex-basis: 1px;
         }
 
         .section-photo {
@@ -229,14 +247,14 @@ export class SpeakerPage extends ReduxMixin(ThemedElement) {
 
     return html`
       <simple-hero page="speakers">
-        <div class="dialog-container header-content" layout horizontal center>
+        <div class="dialog-container header-content">
           <lazy-image
             class="photo"
             src=${speaker?.photoUrl ?? ''}
             alt=${speaker?.name ?? ''}
           ></lazy-image>
           <div>
-            <h2 class="name" flex>${speaker?.name ?? ''}</h2>
+            <h2 class="name">${speaker?.name ?? ''}</h2>
             <div class="subtitle">${this.subtitle}</div>
           </div>
         </div>
@@ -285,7 +303,7 @@ export class SpeakerPage extends ReduxMixin(ThemedElement) {
 
         <short-markdown class="description" .content=${speaker?.bio ?? ''}></short-markdown>
 
-        <div class="actions" layout horizontal>
+        <div class="actions">
           ${speaker?.socials?.map(
             (social) => html`
               <a class="action" href=${social.link} target="_blank" rel="noopener noreferrer">
@@ -304,8 +322,8 @@ export class SpeakerPage extends ReduxMixin(ThemedElement) {
                   ${sessions.map(
                     (session) => html`
                       <a href=${this.sessionUrl(session.id)} class="section">
-                        <div layout horizontal center>
-                          <div class="section-details" flex>
+                        <div class="section-content">
+                          <div class="section-details">
                             <div class="section-primary-text">${session.title}</div>
                             ${
                               session.dateReadable

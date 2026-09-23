@@ -69,6 +69,9 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
 
         .header-content {
           position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
         }
 
         .name {
@@ -105,6 +108,8 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
           color: var(--primary-text-color);
           cursor: pointer;
           user-select: none;
+          display: flex;
+          align-items: center;
         }
 
         .action hoverboard-icon {
@@ -115,6 +120,15 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
 
         .additional-sections {
           margin-top: 32px;
+        }
+
+        .actions,
+        .section-content {
+          display: flex;
+        }
+
+        .section-content {
+          align-items: center;
         }
 
         .section {
@@ -145,6 +159,11 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
         .section-secondary-text {
           font-size: 12px;
           line-height: 1;
+        }
+
+        .section-details {
+          flex: 1;
+          flex-basis: 1px;
         }
 
         @media (min-width: 812px) {
@@ -253,7 +272,7 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
     }
   }
 
-  private toggleFeaturedSession(event: Event) {
+  private toggleFeaturedSession = (event: Event) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -279,9 +298,9 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
 
       setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked);
     }
-  }
+  };
 
-  private openVideo() {
+  private openVideo = () => {
     if (!this.session || !this.session.videoId) {
       return;
     }
@@ -290,7 +309,7 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
       title: this.session.title,
       youtubeId: this.session.videoId,
     });
-  }
+  };
 
   private getVariableColor(value: string) {
     return getVariableColor(this, value);
@@ -305,7 +324,7 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
 
     return html`
       <simple-hero page="schedule">
-        <div class="header-content" layout vertical end-justified>
+        <div class="header-content">
           <h2 class="name">${session?.title ?? ''}</h2>
           ${
             session?.tags?.length
@@ -373,7 +392,7 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
           .content="${session?.description ?? ''}"
         ></short-markdown>
 
-        <div class="actions" layout horizontal>
+        <div class="actions">
           ${
             session?.presentation
               ? html`
@@ -382,9 +401,6 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
                     href="${session.presentation}"
                     target="_blank"
                     rel="noopener noreferrer"
-                    layout
-                    horizontal
-                    center
                   >
                     <hoverboard-icon name="presentation"></hoverboard-icon>
                     <span>${this.sessionDetails.viewPresentation}</span>
@@ -395,7 +411,7 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
           ${
             session?.videoId
               ? html`
-                  <div class="action" @click="${this.openVideo}" layout horizontal center>
+                  <div class="action" @click="${this.openVideo}">
                     <hoverboard-icon name="video"></hoverboard-icon>
                     ${this.sessionDetails.viewVideo}
                   </div>
@@ -412,14 +428,14 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
                   ${session.speakers.map(
                     (speaker) => html`
                       <a class="section" href="${this.speakerUrl(speaker.id)}">
-                        <div layout horizontal center>
+                        <div class="section-content">
                           <lazy-image
                             class="section-photo"
                             src="${speaker.photoUrl}"
                             alt="${speaker.name}"
                           ></lazy-image>
 
-                          <div class="section-details" flex>
+                          <div class="section-details">
                             <div class="section-primary-text">${speaker.name}</div>
                             <div class="section-secondary-text">
                               ${speaker.company} / ${speaker.country}

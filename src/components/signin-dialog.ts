@@ -32,12 +32,19 @@ export class SigninDialog extends ReduxMixin(ThemedElement) {
         .sign-in-button {
           margin: 16px 0;
           display: block;
+          flex: 1;
+          flex-basis: 1px;
           color: var(--primary-text-color);
         }
 
         .merge-content .subtitle,
         .merge-content .explanation {
           margin-bottom: 16px;
+        }
+
+        .action-button {
+          display: flex;
+          justify-content: flex-end;
         }
 
         hoverboard-icon.icon-twitter {
@@ -118,7 +125,7 @@ export class SigninDialog extends ReduxMixin(ThemedElement) {
                       </div>
                     </div>
 
-                    <div class="action-button" layout horizontal end-justified>
+                    <div class="action-button">
                       <md-text-button class="merge-button" @click="${this.mergeAccounts}">
                         <span
                           >${this.signInDialog.signInToContinue.part1}
@@ -134,7 +141,6 @@ export class SigninDialog extends ReduxMixin(ThemedElement) {
                       (provider) => html`
                         <md-text-button
                           class="sign-in-button"
-                          flex
                           @click="${() => this.signIn(provider.url as PROVIDER)}"
                         >
                           <hoverboard-icon
@@ -155,11 +161,11 @@ export class SigninDialog extends ReduxMixin(ThemedElement) {
     `;
   }
 
-  private close() {
+  private close = () => {
     this.dialog.close();
-  }
+  };
 
-  private mergeAccounts() {
+  private mergeAccounts = () => {
     if (this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
       if (error.providerId && error.credential) {
@@ -167,7 +173,7 @@ export class SigninDialog extends ReduxMixin(ThemedElement) {
         closeDialog();
       }
     }
-  }
+  };
 
   private signIn(providerUrl: PROVIDER) {
     signIn(providerUrl);

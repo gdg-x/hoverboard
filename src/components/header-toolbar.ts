@@ -61,13 +61,22 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
         }
 
         .toolbar-logo {
-          display: block;
+          display: flex;
+          flex-direction: row;
           width: 150px;
           height: 32px;
           background-color: var(--default-primary-color);
           transition: background-color var(--animation);
           -webkit-mask: url('/images/logo-monochrome.svg') no-repeat;
           mask: url('/images/logo-monochrome.svg') no-repeat;
+        }
+
+        .brand {
+          display: flex;
+          flex: 1;
+          flex-basis: 1px;
+          flex-direction: row;
+          align-items: center;
         }
 
         .nav-items {
@@ -151,6 +160,7 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
 
         .dropdown-panel[open] {
           display: flex;
+          flex-direction: row;
         }
 
         .dropdown-panel .panel-actions {
@@ -158,10 +168,17 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
         }
 
         .profile-details .profile-image {
+          align-self: center;
           margin-right: 16px;
           width: 48px;
           height: 48px;
           cursor: default;
+        }
+
+        .profile-copy {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
         .profile-name,
@@ -246,7 +263,6 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
 
   override connectedCallback() {
     super.connectedCallback();
-    this.onScroll = this.onScroll.bind(this);
     window.addEventListener('scroll', this.onScroll, { passive: true });
     this.onScroll();
   }
@@ -291,13 +307,11 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
             <hoverboard-icon name="menu"></hoverboard-icon>
           </button>
         </div>
-        <div layout horizontal center flex>
+        <div class="brand">
           <a
             class="toolbar-logo"
             href="/"
             ?hidden="${!this.viewport.isLaptopPlus}"
-            layout
-            horizontal
             title="${this.logoTitle}"
           ></a>
         </div>
@@ -337,20 +351,14 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
             }')"
             @click="${this.toggleProfileMenu}"
           ></div>
-          <div
-            class="dropdown-panel profile-details"
-            ?open="${this.profileMenuOpened}"
-            layout
-            horizontal
-          >
+          <div class="dropdown-panel profile-details" ?open="${this.profileMenuOpened}">
             <div
               class="profile-image"
-              self-center
               style="background-image: url('${
                 this.user instanceof Success ? this.user.data.photoURL : ''
               }')"
             ></div>
-            <div layout vertical center-justified>
+            <div class="profile-copy">
               <span class="profile-name">
                 ${this.user instanceof Success ? this.user.data.displayName : ''}
               </span>
@@ -377,9 +385,9 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
     `;
   }
 
-  private openDrawer() {
+  private openDrawer = () => {
     this.setDrawerOpened(true);
-  }
+  };
 
   private setDrawerOpened(value: boolean) {
     this.drawerOpened = value;
@@ -392,18 +400,18 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
     );
   }
 
-  private signIn() {
+  private signIn = () => {
     openSigninDialog();
-  }
+  };
 
-  private signOut() {
+  private signOut = () => {
     signOutAction();
     this.closeProfileMenu();
-  }
+  };
 
-  private onScroll() {
+  private onScroll = () => {
     this.transparent = document.documentElement.scrollTop === 0;
-  }
+  };
 
   private onSignedIn() {
     if (this.isDialogOpen) {
@@ -434,14 +442,14 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
     );
   }
 
-  private toggleProfileMenu() {
+  private toggleProfileMenu = () => {
     if (this.profileMenuOpened) {
       this.clickOutsideController.stop();
     } else {
       this.clickOutsideController.start();
     }
     this.profileMenuOpened = !this.profileMenuOpened;
-  }
+  };
 
   private closeProfileMenu() {
     this.clickOutsideController.stop();

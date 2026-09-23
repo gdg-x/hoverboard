@@ -19,15 +19,32 @@ export class MapBlock extends ReduxMixin(ThemedElement) {
           position: relative;
         }
 
+        .container {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+        }
+
+        .container.fit {
+          position: absolute;
+          inset: 0;
+        }
+
         .description-card {
           margin: 0 -16px;
           padding: 16px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           background-color: var(--default-primary-color);
           color: var(--text-primary-color);
         }
 
         .bottom-info {
           margin-top: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
         }
 
         .directions {
@@ -120,13 +137,13 @@ export class MapBlock extends ReduxMixin(ThemedElement) {
           : ''
       }
 
-      <div class="container" layout vertical end-justified ?fit="${this.viewport.isTabletPlus}">
-        <div class="description-card" layout vertical justified>
+      <div class="container ${this.viewport.isTabletPlus ? 'fit' : ''}">
+        <div class="description-card">
           <div>
             <h2>${this.mapBlock.title}</h2>
             <p>${this.location.description}</p>
           </div>
-          <div class="bottom-info" layout horizontal justified center>
+          <div class="bottom-info">
             <span class="address">${this.location.address}</span>
             <a
               href="https://www.google.com/maps/dir/?api=1&amp;destination=${this.location.address}"

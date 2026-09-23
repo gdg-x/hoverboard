@@ -33,6 +33,7 @@ export class HeaderBottomToolbar extends ReduxMixin(ThemedElement) {
           width: 100%;
           height: 64px;
           display: flex;
+          flex-direction: row;
           align-items: stretch;
           overflow-x: auto;
           scrollbar-width: none;
@@ -120,8 +121,6 @@ export class HeaderBottomToolbar extends ReduxMixin(ThemedElement) {
           load-to="350%"
           blur-width="80px"
           items-count="${this.contentLoaders.itemsCount}"
-          layout
-          horizontal
           ?hidden="${!this.pending}"
         >
         </content-loader>

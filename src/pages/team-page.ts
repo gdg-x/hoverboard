@@ -41,6 +41,7 @@ export class TeamPage extends ReduxMixin(ThemedElement) {
         .member {
           padding: 16px 0;
           min-width: 300px;
+          display: flex;
         }
 
         .photo {
@@ -60,6 +61,10 @@ export class TeamPage extends ReduxMixin(ThemedElement) {
         .member-details {
           color: var(--primary-text-color);
           margin-left: 16px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
         }
 
         .name {
@@ -83,6 +88,11 @@ export class TeamPage extends ReduxMixin(ThemedElement) {
 
         .social-icon:hover {
           transform: scale(1.1);
+        }
+
+        .description-container {
+          display: flex;
+          justify-content: space-between;
         }
 
         @media (min-width: 640px) {
@@ -147,7 +157,7 @@ export class TeamPage extends ReduxMixin(ThemedElement) {
       <simple-hero page="team"></simple-hero>
 
       <div class="description-wrapper">
-        <div class="container" layout horizontal justified>
+        <div class="container description-container">
           <short-markdown content=${this.team.description}></short-markdown>
         </div>
       </div>
@@ -161,13 +171,13 @@ export class TeamPage extends ReduxMixin(ThemedElement) {
             <div class="team-block">
               ${team.members.map(
                 (member) => html`
-                  <div class="member" layout horizontal>
+                  <div class="member">
                     <lazy-image
                       class="photo"
                       src=${member.photoUrl}
                       alt=${member.name}
                     ></lazy-image>
-                    <div class="member-details" layout vertical center-justified start>
+                    <div class="member-details">
                       <h2 class="name">${member.name}</h2>
                       <div class="activity">${member.title}</div>
                       <div class="contacts">

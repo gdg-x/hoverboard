@@ -29,6 +29,21 @@ export class FooterBlock extends ThemedElement {
           position: relative;
         }
 
+        .footer-nav {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .footer-social {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          flex: 1 1 auto;
+        }
+
         .fab md-fab {
           --md-fab-container-color: var(--primary-background-color);
           --md-fab-container-shape: 50%;
@@ -61,9 +76,9 @@ export class FooterBlock extends ThemedElement {
             <hoverboard-icon slot="icon" name="up"></hoverboard-icon>
           </md-fab>
         </div>
-        <footer-social layout flex flex-auto horizontal wrap></footer-social>
+        <footer-social class="footer-social"></footer-social>
         <footer-rel></footer-rel>
-        <footer-nav layout horizontal wrap justified center></footer-nav>
+        <footer-nav class="footer-nav"></footer-nav>
       </div>
     `;
   }

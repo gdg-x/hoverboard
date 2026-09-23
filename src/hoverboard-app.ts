@@ -27,7 +27,6 @@ import {
   signInProviders,
   title,
 } from './utils/data';
-import { flexReverse } from './styles/layout';
 import './utils/media-query';
 import { Stickied } from './utils/stickied';
 
@@ -36,7 +35,6 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
   static override get styles() {
     return [
       ...super.styles,
-      flexReverse,
       css`
         :host {
           display: block;
@@ -71,6 +69,9 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
         }
 
         .drawer-toolbar {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
           padding: 36px 24px 24px;
           height: auto;
           border-bottom: 1px solid var(--divider-color);
@@ -96,6 +97,10 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
         }
 
         .drawer-content {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          flex: 1;
           padding: 16px 0;
         }
 
@@ -144,6 +149,9 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
 
         /* Look for copies of this */
         .bottom-drawer-link {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
           padding: 16px 24px;
           cursor: pointer;
         }
@@ -195,7 +203,7 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
       <div class="scrim" ?hidden="${!this.drawerOpened}" @click="${this.closeDrawer}"></div>
 
       <div id="drawer" class="drawer ${this.drawerOpened ? 'opened' : ''}">
-        <div class="drawer-toolbar" layout vertical start>
+        <div class="drawer-toolbar">
           <lazy-image
             class="toolbar-logo"
             src="/images/logo-monochrome.svg"
@@ -205,7 +213,7 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
           <h3 class="location">${this.shortLocation}</h3>
         </div>
 
-        <div class="drawer-content" layout vertical justified flex>
+        <div class="drawer-content">
           <nav class="drawer-list" role="navigation">
             ${this.navigation.map(
               (nav) => html`
@@ -229,9 +237,6 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
               target="_blank"
               rel="noopener noreferrer"
               @click="${this.closeDrawer}"
-              layout
-              horizontal
-              center
             >
               <span>${this.buyTicket}</span>
               <hoverboard-icon name="open-in-new"></hoverboard-icon>

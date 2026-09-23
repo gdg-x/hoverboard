@@ -58,7 +58,10 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
         }
 
         .session {
+          position: relative;
+          display: flex;
           height: 100%;
+          flex-direction: column;
           color: var(--primary-text-color);
           overflow: hidden;
         }
@@ -84,7 +87,15 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
         }
 
         .session-header {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
           padding-bottom: 8px;
+        }
+
+        .session-header-content {
+          flex: 1;
+          flex-basis: 1px;
         }
 
         .language {
@@ -95,6 +106,11 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
         }
 
         .session-content {
+          display: flex;
+          flex: 1;
+          flex-basis: 1px;
+          flex-direction: row;
+          justify-content: space-between;
           padding-top: 0;
           padding-bottom: 40px;
         }
@@ -133,8 +149,26 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
           font-size: 14px;
         }
 
+        .session-footer-row {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-content: center;
+        }
+
+        .session-duration {
+          flex: 1;
+          flex-basis: 1px;
+        }
+
         .speakers {
           margin-top: 10px;
+        }
+
+        .speaker {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
         }
 
         .speaker:not(:last-of-type) {
@@ -152,6 +186,11 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
           border-radius: 50%;
           overflow: hidden;
           transform: translateZ(0);
+        }
+
+        .speaker-details {
+          flex: 1;
+          flex-basis: 1px;
         }
 
         .speaker-name {
@@ -206,18 +245,11 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
     const acceptingSessionFeedback = this.isAcceptingFeedback();
 
     return html`
-      <a
-        class="session"
-        href="${this.sessionUrl(session?.id)}"
-        ?featured="${isFeatured}"
-        layout
-        vertical
-        relative
-      >
+      <a class="session" href="${this.sessionUrl(session?.id)}" ?featured="${isFeatured}">
         <hoverboard-icon name="${ifDefined(session?.icon)}" class="session-icon"></hoverboard-icon>
 
-        <div class="session-header" layout horizontal justified>
-          <div flex>
+        <div class="session-header">
+          <div class="session-header-content">
             <h3 class="session-title">${session?.title}</h3>
             <text-truncate lines="3">
               <div class="session-description">${summary}</div>
@@ -226,7 +258,7 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
           <span class="language">${session?.language?.slice(0, 2)}</span>
         </div>
 
-        <div class="session-content" flex layout horizontal justified>
+        <div class="session-content">
           <div class="session-meta">
             <div ?hidden="${!session?.complexity}">${session?.complexity}</div>
           </div>
@@ -247,8 +279,8 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
         </div>
 
         <div class="session-footer">
-          <div layout horizontal justified center-aligned>
-            <div class="session-meta" flex>
+          <div class="session-footer-row">
+            <div class="session-meta session-duration">
               <span ?hidden="${!duration?.hh}">
                 ${duration?.hh} hour${this.getEnding(duration?.hh)}
               </span>
@@ -269,14 +301,14 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
           <div class="speakers" ?hidden="${!session?.speakers?.length}">
             ${session?.speakers?.map(
               (speaker) => html`
-                <div class="speaker" layout horizontal center>
+                <div class="speaker">
                   <lazy-image
                     class="speaker-photo"
                     src="${speaker.photoUrl}"
                     alt="${speaker.name}"
                   ></lazy-image>
 
-                  <div class="speaker-details" flex>
+                  <div class="speaker-details">
                     <div class="speaker-name">${speaker.name}</div>
                     <div class="speaker-title">${this.join(speaker.company, speaker.country)}</div>
                   </div>
@@ -311,7 +343,7 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
     return description.slice(0, Math.min(...indexes));
   }
 
-  private toggleFeaturedSession(event: MouseEvent) {
+  private toggleFeaturedSession = (event: MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -337,15 +369,15 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
 
       setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked);
     }
-  }
+  };
 
-  private toggleFeedback(event: MouseEvent) {
+  private toggleFeedback = (event: MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
     if (this.session) {
       openFeedbackDialog(this.session);
     }
-  }
+  };
 
   private isAcceptingFeedback(): boolean {
     return this.session !== undefined && acceptingFeedback(this.session);

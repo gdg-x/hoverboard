@@ -60,6 +60,9 @@ export class GalleryBlock extends ReduxMixin(ThemedElement) {
         }
 
         .gallery-info {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           padding: 16px;
           background-color: var(--default-primary-color);
           color: var(--text-primary-color);
@@ -148,7 +151,7 @@ export class GalleryBlock extends ReduxMixin(ThemedElement) {
         ${
           this.success
             ? html`
-                <div class="gallery-info" layout vertical justified>
+                <div class="gallery-info">
                   <div>
                     <h2>${galleryBlock.title}</h2>
                     <p>${galleryBlock.description}</p>

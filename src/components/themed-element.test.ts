@@ -18,10 +18,10 @@ declare global {
 }
 
 describe('themed-element', () => {
-  it('composes the shared theme, flex, and positioning styles with a block display host style', () => {
+  it('composes the shared theme styles with a block display host style', () => {
     const styles = ThemedElement.styles as unknown[];
 
-    expect(styles).toHaveLength(5);
+    expect(styles).toHaveLength(2);
     expect(String(styles[styles.length - 1])).toContain('display: block');
   });
 

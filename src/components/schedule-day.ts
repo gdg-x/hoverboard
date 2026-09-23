@@ -50,6 +50,10 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
         }
 
         .add-session {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
           padding: 8px;
           grid-column-end: -1 !important;
           background-color: var(--primary-background-color);
@@ -66,6 +70,11 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
           width: 14px;
           height: 14px;
           margin-right: 8px;
+        }
+
+        .session {
+          display: flex;
+          flex-direction: column;
         }
 
         @media (min-width: 812px) {
@@ -175,9 +184,6 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
               style="${styleMap({
                 'grid-area': (timeslot.sessions[0] as GeneratedSessionBlock | undefined)?.gridArea,
               })}"
-              layout
-              horizontal
-              center-center
             >
               <hoverboard-icon name="add-circle-outline" class="add-session-icon"></hoverboard-icon>
               <span>${this.mySchedule.browseSession}</span>
@@ -192,8 +198,6 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
                     style="${styleMap({
                       'grid-area': (sessionBlock as GeneratedSessionBlock).gridArea,
                     })}"
-                    layout
-                    vertical
                   >
                     ${repeat(
                       this.filterSessions(

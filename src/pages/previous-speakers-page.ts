@@ -61,6 +61,10 @@ export class PreviousSpeakersPage extends ReduxMixin(ThemedElement) {
         .details {
           margin-left: 16px;
           color: var(--primary-text-color);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
         }
 
         .name {
@@ -89,6 +93,10 @@ export class PreviousSpeakersPage extends ReduxMixin(ThemedElement) {
           width: 100%;
           --md-linear-progress-active-indicator-color: var(--default-primary-color);
           --md-linear-progress-track-color: var(--default-primary-color);
+        }
+
+        .speaker {
+          display: flex;
         }
 
         @media (min-width: 640px) {
@@ -184,9 +192,9 @@ export class PreviousSpeakersPage extends ReduxMixin(ThemedElement) {
       <div class="container">
         ${previousSpeakers.map(
           (speaker) => html`
-            <a class="speaker" href=${this.previousSpeakerUrl(speaker.id)} layout horizontal>
+            <a class="speaker" href=${this.previousSpeakerUrl(speaker.id)}>
               <lazy-image class="photo" src=${speaker.photoUrl} alt=${speaker.name}></lazy-image>
-              <div class="details" layout vertical center-justified start>
+              <div class="details">
                 <h2 class="name">${speaker.name}</h2>
                 <div class="origin">${speaker.country}</div>
                 <img class="company-logo" src=${speaker.companyLogo ?? ''} />

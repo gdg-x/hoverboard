@@ -68,6 +68,8 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
 
         .name {
           line-height: 1.2;
+          flex: 1;
+          flex-basis: 1px;
         }
 
         .subtitle {
@@ -107,6 +109,13 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
           user-select: none;
         }
 
+        /* Only the download links (icon + label) originally had layout/horizontal/center;
+           the social icon links did not, so this modifier keeps that distinction. */
+        .action--download {
+          display: flex;
+          align-items: center;
+        }
+
         .action hoverboard-icon {
           margin-right: 4px;
           width: 18px;
@@ -117,10 +126,22 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
           margin-top: 32px;
         }
 
+        .actions {
+          display: flex;
+        }
+
         .section {
           margin-top: 16px;
           display: block;
           color: var(--primary-text-color);
+          flex: 1;
+          flex-basis: 1px;
+        }
+
+        .header-content,
+        .section-content {
+          display: flex;
+          align-items: center;
         }
 
         .section-photo {
@@ -230,14 +251,14 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
 
     return html`
       <simple-hero page="speakers">
-        <div class="dialog-container header-content" layout horizontal center>
+        <div class="dialog-container header-content">
           <lazy-image
             class="photo"
             src=${speaker?.photoUrl ?? ''}
             alt=${speaker?.name ?? ''}
           ></lazy-image>
           <div>
-            <h2 class="name" flex>${speaker?.name ?? ''}</h2>
+            <h2 class="name">${speaker?.name ?? ''}</h2>
             <div class="subtitle">${this.subtitle}</div>
           </div>
         </div>
@@ -286,7 +307,7 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
 
         <short-markdown class="description" .content=${speaker?.bio ?? ''}></short-markdown>
 
-        <div class="actions" layout horizontal>
+        <div class="actions">
           ${speaker?.socials?.map(
             (social) => html`
               <a class="action" href=${social.link} target="_blank" rel="noopener noreferrer">
@@ -304,8 +325,8 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
 
                   ${sessions.map(
                     (session) => html`
-                      <div layout horizontal center>
-                        <div class="section" flex>
+                      <div class="section-content">
+                        <div class="section">
                           <div class="section-primary-text">${session.title}</div>
                           <div class="section-secondary-text">
                             ${this.previousYear}: ${session.year}
@@ -327,18 +348,15 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
                                 `
                               : nothing
                           }
-                          <div class="actions" layout horizontal>
+                          <div class="actions">
                             ${
                               session.videoId
                                 ? html`
                                     <a
-                                      class="action"
+                                      class="action action--download"
                                       href="https://www.youtube.com/watch?v=${session.videoId}"
                                       target="_blank"
                                       rel="noopener noreferrer"
-                                      layout
-                                      horizontal
-                                      center
                                     >
                                       <hoverboard-icon name="video"></hoverboard-icon>
                                       <span>${this.sessionDetails.viewVideo}</span>
@@ -350,13 +368,10 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
                               session.presentation
                                 ? html`
                                     <a
-                                      class="action"
+                                      class="action action--download"
                                       href=${session.presentation}
                                       target="_blank"
                                       rel="noopener noreferrer"
-                                      layout
-                                      horizontal
-                                      center
                                     >
                                       <hoverboard-icon name="presentation"></hoverboard-icon>
                                       <span>${this.sessionDetails.viewPresentation}</span>

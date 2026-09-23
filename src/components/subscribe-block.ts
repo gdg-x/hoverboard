@@ -27,6 +27,15 @@ export class SubscribeBlock extends ReduxMixin(ThemedElement) {
           padding: 16px 0;
         }
 
+        .container {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .container.centered {
+          align-items: center;
+        }
+
         .description {
           font-size: 24px;
           line-height: 1.5;
@@ -87,7 +96,7 @@ export class SubscribeBlock extends ReduxMixin(ThemedElement) {
 
   override render() {
     return html`
-      <div class="container" layout vertical ?center="${this.viewport.isTabletPlus}">
+      <div class="container ${this.viewport.isTabletPlus ? 'centered' : ''}">
         <div class="description">${this.subscribeBlock.callToAction.description}</div>
         <div class="cta-button">
           <md-text-button
@@ -104,7 +113,7 @@ export class SubscribeBlock extends ReduxMixin(ThemedElement) {
     `;
   }
 
-  private subscribe() {
+  private subscribe = () => {
     let userData = {
       firstFieldValue: '',
       secondFieldValue: '',
@@ -135,7 +144,7 @@ export class SubscribeBlock extends ReduxMixin(ThemedElement) {
         submit: (data) => this.subscribeAction(data),
       });
     }
-  }
+  };
 
   private subscribeAction(data: DialogData) {
     subscribe(data);

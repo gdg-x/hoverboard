@@ -66,6 +66,17 @@ export const theme = css`
     -webkit-font-smoothing: antialiased;
   }
 
+  /*
+   * Native "hidden" attribute guarantee: some components apply an explicit
+   * "display" to the same element via their own class, which (per the CSS
+   * cascade) beats the UA stylesheet's "[hidden] { display: none }" rule.
+   * This restores that guarantee for every component without introducing a
+   * shared layout/attribute system.
+   */
+  [hidden] {
+    display: none !important;
+  }
+
   body {
     font-family: var(--font-family);
     text-rendering: optimizelegibility;

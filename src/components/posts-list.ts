@@ -20,7 +20,8 @@ export class PostsList extends ThemedElement {
 
         .post {
           padding: 24px 0;
-          display: block;
+          display: flex;
+          flex-direction: row;
           color: var(--primary-text-color);
         }
 
@@ -38,7 +39,15 @@ export class PostsList extends ThemedElement {
           border-radius: var(--border-radius);
         }
 
+        .post-content {
+          flex: 1;
+          flex-basis: 1px;
+        }
+
         .details {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           height: 100%;
         }
 
@@ -74,7 +83,7 @@ export class PostsList extends ThemedElement {
     return html`
       ${this.posts.map(
         (post) => html`
-          <a href="${this.postUrl(post.id)}" class="post" layout horizontal>
+          <a href="${this.postUrl(post.id)}" class="post">
             <lazy-image
               class="image"
               src="${post.image}"
@@ -82,8 +91,8 @@ export class PostsList extends ThemedElement {
               style="background-color: ${post.backgroundColor};"
               ?hidden="${!post.image}"
             ></lazy-image>
-            <div flex>
-              <div class="details" layout vertical justified>
+            <div class="post-content">
+              <div class="details">
                 <div>
                   <text-truncate lines="2">
                     <h2 class="title">${post.title}</h2>

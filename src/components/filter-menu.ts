@@ -41,6 +41,18 @@ export class FilterMenu extends ThemedElement {
           padding: 16px;
         }
 
+        .toolbar-row {
+          display: flex;
+          align-items: center;
+        }
+
+        .results-summary {
+          display: flex;
+          align-items: center;
+          flex: 1;
+          flex-basis: 1px;
+        }
+
         .filter-group {
           margin-bottom: 24px;
         }
@@ -53,6 +65,7 @@ export class FilterMenu extends ThemedElement {
           margin-right: 8px;
           margin-bottom: 8px;
           display: inline-flex;
+          align-items: center;
           font-size: 15px;
           cursor: pointer;
           color: var(--color);
@@ -74,11 +87,20 @@ export class FilterMenu extends ThemedElement {
           margin-bottom: 8px;
         }
 
+        .actions {
+          display: flex;
+          align-items: center;
+        }
+
         .reset-filters {
           margin-right: 8px;
           font-size: 14px;
           cursor: pointer;
           color: var(--default-primary-color);
+        }
+
+        .filters-board[open] {
+          display: block;
         }
 
         @media (min-width: 640px) {
@@ -108,14 +130,14 @@ export class FilterMenu extends ThemedElement {
   override render() {
     return html`
       <div class="filters-toolbar container">
-        <div layout horizontal center>
-          <div layout horizontal center flex>
+        <div class="toolbar-row">
+          <div class="results-summary">
             <div class="results" ?hidden="${this.hideResultText}">
               ${this.resultsCount} ${this.filters.results}
             </div>
           </div>
 
-          <div class="actions" layout horizontal center>
+          <div class="actions">
             <span
               class="reset-filters"
               role="button"
@@ -143,10 +165,6 @@ export class FilterMenu extends ThemedElement {
                 filter-value="${selectedFilter.tag}"
                 @click="${this.toggleFilter}"
                 selected
-                layout
-                horizontal
-                inline
-                center
               >
                 <span>${selectedFilter.tag}</span>
                 <hoverboard-icon name="close"></hoverboard-icon>
@@ -156,7 +174,7 @@ export class FilterMenu extends ThemedElement {
         </div>
       </div>
 
-      <div class="filters-board" ?block="${this.opened}">
+      <div class="filters-board" ?open="${this.opened}">
         <div class="container">
           ${this.filterGroups.map(
             (filterGroup) => html`
@@ -167,10 +185,6 @@ export class FilterMenu extends ThemedElement {
                   (filter) => `${filterGroup.key}:${filter.tag}`,
                   (filter) => html`
                     <div
-                      layout
-                      horizontal
-                      inline
-                      center
                       class="tag"
                       style="${styleMap({ '--color': this.getVariableColor(filter.tag, 'primary-text-color') })}"
                       filter-key="${filterGroup.key}"
@@ -196,7 +210,7 @@ export class FilterMenu extends ThemedElement {
     );
   }
 
-  private toggleFilter(e: Event) {
+  private toggleFilter = (e: Event) => {
     if (
       !(e.currentTarget instanceof HTMLElement) ||
       !e.currentTarget.getAttribute('filter-key') ||
@@ -210,21 +224,21 @@ export class FilterMenu extends ThemedElement {
     const group = currentTarget.getAttribute('filter-key')?.trim() as FilterGroupKey;
     const tag = generateClassName(currentTarget.getAttribute('filter-value')?.trim());
     toggleFilter({ group, tag });
-  }
+  };
 
-  private toggleBoard() {
+  private toggleBoard = () => {
     if (this.opened) {
       this.clickOutsideController.stop();
     } else {
       this.clickOutsideController.start();
     }
     this.opened = !this.opened;
-  }
+  };
 
-  private resetFilters(e: MouseEvent) {
+  private resetFilters = (e: MouseEvent) => {
     e.preventDefault();
     clearFilters();
-  }
+  };
 
   private get icon() {
     return this.opened ? 'close' : 'filter-list';

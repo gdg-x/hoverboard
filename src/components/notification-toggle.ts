@@ -79,6 +79,8 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
         }
 
         .dropdown-panel .panel-actions {
+          display: flex;
+          justify-content: flex-end;
           margin: 0 -16px -16px 0;
         }
 
@@ -145,7 +147,7 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
           this.initialized
             ? html`
                 <p>${this.notifications.default}</p>
-                <div class="panel-actions" layout horizontal end-justified>
+                <div class="panel-actions">
                   <md-text-button @click="${this.requestPermission}">
                     ${this.notifications.enable}
                   </md-text-button>
@@ -181,7 +183,7 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
           this.blocked
             ? html`
                 <p>${this.notifications.blocked.text}</p>
-                <div class="panel-actions" layout horizontal end-justified>
+                <div class="panel-actions">
                   <a
                     href="${this.notifications.blocked.link}"
                     target="_blank"
@@ -199,7 +201,7 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
           this.unsupported
             ? html`
                 <p>${this.notifications.unsupported.text}</p>
-                <div class="panel-actions" layout horizontal end-justified>
+                <div class="panel-actions">
                   <a
                     href="${this.notifications.unsupported.link}"
                     target="_blank"
@@ -262,14 +264,14 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
     );
   }
 
-  private requestPermission() {
+  private requestPermission = () => {
     if (this.notificationPermission instanceof Initialized) {
       store.dispatch(requestNotificationPermission(PROMPT_USER.YES));
     }
     this.toggleOpened();
-  }
+  };
 
-  private toggleGeneralNotifications(event: MouseEvent) {
+  private toggleGeneralNotifications = (event: MouseEvent) => {
     const { selected, disabled } = event.target as Switch;
     if (!(this.notificationPermission instanceof Success) || disabled) {
       return;
@@ -280,9 +282,9 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
     } else {
       clearNotificationsSubscribers(this.notificationPermission.data);
     }
-  }
+  };
 
-  private toggleMyScheduleNotifications(event: MouseEvent) {
+  private toggleMyScheduleNotifications = (event: MouseEvent) => {
     const { selected } = event.target as Switch;
     if (!(this.notificationPermission instanceof Success) || !(this.user instanceof Success)) {
       return;
@@ -293,7 +295,7 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
     } else {
       removeNotificationsUsers(this.user.data.uid, this.notificationPermission.data);
     }
-  }
+  };
 
   private get icon() {
     if (this.notificationPermission instanceof Success) {
@@ -314,10 +316,10 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
     this.opened = !this.opened;
   }
 
-  private close() {
+  private close = () => {
     this.clickOutsideController.stop();
     this.opened = false;
-  }
+  };
 }
 
 declare global {
