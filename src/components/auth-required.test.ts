@@ -1,6 +1,5 @@
-import { beforeAll, beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
-import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { User } from '../models/user';
@@ -10,13 +9,13 @@ import { setUserSuccess } from '../store/user';
 import './auth-required';
 import { AuthRequired } from './auth-required';
 
-jest.mock('../store/dialogs', () => ({
+vi.mock('../store/dialogs', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
-  openSigninDialog: jest.fn(),
+  ...(await importOriginal<typeof import('../store/dialogs')>()),
+  openSigninDialog: vi.fn(),
 }));
 
-const mockOpenDialog = mocked(openSigninDialog);
+const mockOpenDialog = vi.mocked(openSigninDialog);
 
 describe('auth-required', () => {
   let element!: AuthRequired;

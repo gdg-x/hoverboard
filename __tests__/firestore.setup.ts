@@ -4,10 +4,10 @@ import {
   RulesTestEnvironment,
   TestEnvironmentConfig,
 } from '@firebase/rules-unit-testing';
-import { afterAll, beforeAll } from '@jest/globals';
 import { doc, setDoc } from 'firebase/firestore';
 import { setup, teardown } from 'jest-dev-server';
 import { SpawndChildProcess } from 'spawnd';
+import { afterAll, beforeAll } from 'vitest';
 
 let testEnv: RulesTestEnvironment;
 let servers: SpawndChildProcess[] = [];

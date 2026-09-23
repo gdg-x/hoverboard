@@ -1,10 +1,10 @@
-import { jest } from '@jest/globals';
-import '@testing-library/jest-dom/jest-globals';
+import '@testing-library/jest-dom/vitest';
 import { ReadableStream } from 'node:stream/web';
 import { TextDecoder, TextEncoder } from 'node:util';
+import { vi } from 'vitest';
 
-jest.mock('firebase/messaging');
-jest.mock('../src/firebase');
+vi.mock('firebase/messaging');
+vi.mock('../src/firebase');
 
 // JSDOM does not provide these Node/Web globals used by firebase/auth's
 // dependency chain (undici).
@@ -38,9 +38,9 @@ Object.defineProperty(globalThis, 'clearImmediate', {
 // JSDOM does not implement IntersectionObserver, used by @justinribeiro/lite-youtube
 // (rendered inside video-dialog).
 class MockIntersectionObserver {
-  observe = jest.fn();
-  unobserve = jest.fn();
-  disconnect = jest.fn();
+  observe = vi.fn();
+  unobserve = vi.fn();
+  disconnect = vi.fn();
 }
 
 Object.defineProperty(window, 'IntersectionObserver', {
@@ -57,15 +57,15 @@ Object.defineProperty(globalThis, 'IntersectionObserver', {
 // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
+    addListener: vi.fn(), // deprecated
+    removeListener: vi.fn(), // deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
   })),
 });
 
@@ -78,31 +78,31 @@ Object.defineProperty(window, 'PointerEvent', {
 
 Object.defineProperty(Element.prototype, 'animate', {
   writable: true,
-  value: jest.fn().mockReturnValue({
-    cancel: jest.fn(),
-    finish: jest.fn(),
-    pause: jest.fn(),
-    play: jest.fn(),
-    reverse: jest.fn(),
-    updatePlaybackRate: jest.fn(),
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
+  value: vi.fn().mockReturnValue({
+    cancel: vi.fn(),
+    finish: vi.fn(),
+    pause: vi.fn(),
+    play: vi.fn(),
+    reverse: vi.fn(),
+    updatePlaybackRate: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
   }),
 });
 
 // JSDOM does not yet implement the ElementInternals APIs used by Material text fields.
-const attachInternals = jest.fn(() => ({
+const attachInternals = vi.fn(() => ({
   form: null,
   labels: [],
   states: new Set<string>(),
   validity: { valid: true },
   validationMessage: '',
   willValidate: true,
-  checkValidity: jest.fn(() => true),
-  reportValidity: jest.fn(() => true),
-  setFormValue: jest.fn(),
-  setValidity: jest.fn(),
+  checkValidity: vi.fn(() => true),
+  reportValidity: vi.fn(() => true),
+  setFormValue: vi.fn(),
+  setValidity: vi.fn(),
 }));
 
 Object.defineProperty(Element.prototype, 'attachInternals', {
@@ -119,14 +119,14 @@ Object.defineProperty(HTMLElement.prototype, 'attachInternals', {
 // hoverboard-dialog.
 Object.defineProperty(HTMLDialogElement.prototype, 'showModal', {
   writable: true,
-  value: jest.fn(function (this: HTMLDialogElement) {
+  value: vi.fn(function (this: HTMLDialogElement) {
     this.setAttribute('open', '');
   }),
 });
 
 Object.defineProperty(HTMLDialogElement.prototype, 'close', {
   writable: true,
-  value: jest.fn(function (this: HTMLDialogElement) {
+  value: vi.fn(function (this: HTMLDialogElement) {
     this.removeAttribute('open');
     this.dispatchEvent(new Event('close'));
   }),

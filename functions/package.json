@@ -26,10 +26,10 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "@jest/globals": "^30.5.1",
     "@tsconfig/node22": "^22.0.6",
     "concurrently": "^10.0.5",
     "cpx2": "^9.0.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.1"
   }
 }

@@ -1,6 +1,5 @@
 import { Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Post } from '../models/post';
@@ -9,11 +8,11 @@ import { latestPostsBlock } from '../utils/data';
 import type { LatestPostsBlock } from './latest-posts-block';
 import './latest-posts-block';
 
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn() },
 }));
 
-const mockUrlForName = mocked(router.urlForName);
+const mockUrlForName = vi.mocked(router.urlForName);
 
 const posts: Post[] = [
   {

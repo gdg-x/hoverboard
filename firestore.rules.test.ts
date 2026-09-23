@@ -1,5 +1,4 @@
 import { RulesTestContext } from '@firebase/rules-unit-testing';
-import { afterEach, beforeEach, describe, it, jest } from '@jest/globals';
 import {
   addDoc,
   collection,
@@ -11,14 +10,13 @@ import {
   getDocs,
   updateDoc,
 } from 'firebase/firestore';
+import { afterEach, beforeEach, describe, it } from 'vitest';
 import { setupApp, teardownApp } from './__tests__/firestore.setup';
 import { expect } from './__tests__/helpers';
 
-jest.retryTimes(3, { logErrorsBeforeRetry: true });
-
 // TODO: This test is flaky. It should be fixed.
 
-describe.skip('firestore', () => {
+describe.skip('firestore', { retry: 3 }, () => {
   let testEnv: RulesTestContext;
 
   afterEach(async () => {

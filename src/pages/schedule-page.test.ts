@@ -1,5 +1,5 @@
 import { Pending } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
+import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { FilterGroupKey } from '../models/filter-group';
@@ -10,17 +10,17 @@ import { updateMetadata } from '../utils/metadata';
 import './schedule-page';
 import { SchedulePage } from './schedule-page';
 
-jest.mock('../utils/metadata');
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
+vi.mock('../utils/metadata');
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
 }));
-jest.mock('../store/filters', () => ({
+vi.mock('../store/filters', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/filters')>('../store/filters'),
-  selectFilters: jest.fn().mockReturnValue([]),
+  ...(await importOriginal<typeof import('../store/filters')>()),
+  selectFilters: vi.fn().mockReturnValue([]),
 }));
-jest.mock('../store/sessions/selectors', () => ({
-  selectFilterGroups: jest.fn().mockReturnValue([]),
+vi.mock('../store/sessions/selectors', () => ({
+  selectFilterGroups: vi.fn().mockReturnValue([]),
 }));
 
 describe('schedule-page', () => {
@@ -29,7 +29,7 @@ describe('schedule-page', () => {
   });
 
   it('updates metadata and triggers the schedule, sessions, and speakers fetch on connect', async () => {
-    const mockUpdateMetadata = jest.mocked(updateMetadata);
+    const mockUpdateMetadata = vi.mocked(updateMetadata);
     mockUpdateMetadata.mockClear();
 
     const { element } = await fixture<SchedulePage>(html`<schedule-page></schedule-page>`);
@@ -67,10 +67,8 @@ describe('schedule-page', () => {
   });
 
   it('forwards filter groups and selected filters to filter-menu', async () => {
-    const mockSelectFilterGroups = selectFilterGroups as jest.MockedFunction<
-      typeof selectFilterGroups
-    >;
-    const mockSelectFilters = selectFilters as jest.MockedFunction<typeof selectFilters>;
+    const mockSelectFilterGroups = selectFilterGroups as MockedFunction<typeof selectFilterGroups>;
+    const mockSelectFilters = selectFilters as MockedFunction<typeof selectFilters>;
     const filterGroups = [{ title: 'Tags', key: FilterGroupKey.tags, filters: [] }];
     const selectedFilters = [{ group: FilterGroupKey.tags, tag: 'web' }];
     mockSelectFilterGroups.mockReturnValue(filterGroups);

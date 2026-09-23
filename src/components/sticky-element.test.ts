@@ -1,4 +1,4 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
@@ -22,10 +22,10 @@ describe('sticky-element', () => {
     );
     const trigger = within(shadowRootForWithin).getByTestId('trigger') as HTMLDivElement;
     const content = within(shadowRootForWithin).getByTestId('content') as HTMLDivElement;
-    const stickedHandler = jest.fn();
+    const stickedHandler = vi.fn();
     element.addEventListener('element-sticked', stickedHandler);
 
-    jest.spyOn(trigger, 'getBoundingClientRect').mockReturnValue({
+    vi.spyOn(trigger, 'getBoundingClientRect').mockReturnValue({
       bottom: 0,
       height: 0,
       left: 0,

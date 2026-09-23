@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, jest, beforeAll, afterAll } from '@jest/globals';
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   createTimeWindow,
   filterUpcomingTimeslots,
@@ -12,17 +12,17 @@ import {
 const MOCK_TIME = new Date('2025-06-22T14:30:00.000Z');
 
 beforeAll(() => {
-  jest.useFakeTimers();
-  jest.setSystemTime(MOCK_TIME);
+  vi.useFakeTimers();
+  vi.setSystemTime(MOCK_TIME);
 });
 
 afterAll(() => {
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
 
 describe('Time utilities', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('getTodayDateString', () => {

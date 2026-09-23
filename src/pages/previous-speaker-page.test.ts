@@ -1,6 +1,5 @@
 import { Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { PreviousSpeaker } from '../models/previous-speaker';
@@ -10,16 +9,16 @@ import { updateImageMetadata } from '../utils/metadata';
 import './previous-speaker-page';
 import { PreviousSpeakerPage } from './previous-speaker-page';
 
-jest.mock('../utils/metadata');
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
+vi.mock('../utils/metadata');
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
 }));
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn(), render: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn(), render: vi.fn() },
 }));
-jest.mock('../store/previous-speakers/selectors', () => ({
-  selectPreviousSpeaker: jest.fn(),
-  selectRandomPreviousSpeakers: jest.fn().mockReturnValue([]),
+vi.mock('../store/previous-speakers/selectors', () => ({
+  selectPreviousSpeaker: vi.fn(),
+  selectRandomPreviousSpeakers: vi.fn().mockReturnValue([]),
 }));
 
 const speaker: PreviousSpeaker = {
@@ -51,10 +50,10 @@ describe('previous-speaker-page', () => {
   });
 
   it('resolves the speaker from the route and updates metadata', async () => {
-    const mockSelectPreviousSpeaker = selectPreviousSpeaker as jest.MockedFunction<
+    const mockSelectPreviousSpeaker = selectPreviousSpeaker as MockedFunction<
       typeof selectPreviousSpeaker
     >;
-    const mockUpdateMetadata = jest.mocked(updateImageMetadata);
+    const mockUpdateMetadata = vi.mocked(updateImageMetadata);
     mockSelectPreviousSpeaker.mockReturnValue(speaker);
     mockUpdateMetadata.mockClear();
 
@@ -75,11 +74,11 @@ describe('previous-speaker-page', () => {
   });
 
   it('redirects to 404 when the speaker cannot be found', async () => {
-    const mockSelectPreviousSpeaker = selectPreviousSpeaker as jest.MockedFunction<
+    const mockSelectPreviousSpeaker = selectPreviousSpeaker as MockedFunction<
       typeof selectPreviousSpeaker
     >;
     mockSelectPreviousSpeaker.mockReturnValue(undefined);
-    mocked(router).render.mockClear();
+    vi.mocked(router).render.mockClear();
 
     const { element } = await fixture<PreviousSpeakerPage>(
       html`<previous-speaker-page></previous-speaker-page>`,
@@ -92,7 +91,7 @@ describe('previous-speaker-page', () => {
   });
 
   it('renders an empty additional-sessions section when the speaker has no sessions', async () => {
-    const mockSelectPreviousSpeaker = selectPreviousSpeaker as jest.MockedFunction<
+    const mockSelectPreviousSpeaker = selectPreviousSpeaker as MockedFunction<
       typeof selectPreviousSpeaker
     >;
     mockSelectPreviousSpeaker.mockReturnValue({ ...speaker, sessions: {} });

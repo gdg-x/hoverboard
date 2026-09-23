@@ -1,4 +1,4 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
@@ -56,7 +56,7 @@ describe('star-rating', () => {
     const { element, shadowRootForWithin } = await fixture<StarRating>(
       html`<star-rating></star-rating>`,
     );
-    const ratingChanged = jest.fn();
+    const ratingChanged = vi.fn();
     const events: CustomEvent<StarRatingChangeDetail>[] = [];
 
     element.addEventListener('rating-changed', (event) => {

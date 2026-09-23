@@ -1,7 +1,6 @@
 import { Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
+import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
-import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Session } from '../models/session';
@@ -15,34 +14,36 @@ import { updateImageMetadata } from '../utils/metadata';
 import './session-page';
 import { SessionPage } from './session-page';
 
-jest.mock('../utils/metadata');
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
+vi.mock('../utils/metadata');
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
 }));
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn(), render: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn(), render: vi.fn() },
 }));
-jest.mock('../store/sessions/selectors', () => ({
-  selectSession: jest.fn(),
+vi.mock('../store/sessions/selectors', () => ({
+  selectSession: vi.fn(),
 }));
-jest.mock('../store/featured-sessions', () => ({
+vi.mock('../store/featured-sessions', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/featured-sessions')>('../store/featured-sessions'),
-  setUserFeaturedSessions: jest.fn(() => Promise.resolve()),
+  ...(await importOriginal<typeof import('../store/featured-sessions')>()),
+  setUserFeaturedSessions: vi.fn(() => Promise.resolve()),
 }));
-jest.mock('../store/dialogs', () => ({
+vi.mock('../store/dialogs', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
-  openSigninDialog: jest.fn(),
+  ...(await importOriginal<typeof import('../store/dialogs')>()),
+  openSigninDialog: vi.fn(),
 }));
-jest.mock('../store/ui', () => ({
+vi.mock('../store/ui', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/ui')>('../store/ui'),
-  openVideoDialog: jest.fn(),
-  setHeroSettings: jest.fn(),
+  ...(await importOriginal<typeof import('../store/ui')>()),
+  openVideoDialog: vi.fn(),
+  setHeroSettings: vi.fn(),
 }));
-jest.mock('../store/snackbars', () => ({
-  queueComplexSnackbar: jest.fn(() => ({ type: 'noop' })),
+vi.mock('../store/snackbars', async (importOriginal) => ({
+  __esModule: true,
+  ...(await importOriginal<typeof import('../store/snackbars')>()),
+  queueComplexSnackbar: vi.fn(() => ({ type: 'noop' })),
 }));
 
 const session: Session = {
@@ -79,8 +80,8 @@ describe('session-page', () => {
   });
 
   it('resolves the session from the route and updates metadata', async () => {
-    const mockSelectSession = selectSession as jest.MockedFunction<typeof selectSession>;
-    const mockUpdateMetadata = jest.mocked(updateImageMetadata);
+    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
+    const mockUpdateMetadata = vi.mocked(updateImageMetadata);
     mockSelectSession.mockReturnValue({ ...session, speakers: speakers as never } as Session);
     mockUpdateMetadata.mockClear();
 
@@ -101,9 +102,9 @@ describe('session-page', () => {
   });
 
   it('redirects to 404 when the session cannot be found', async () => {
-    const mockSelectSession = selectSession as jest.MockedFunction<typeof selectSession>;
+    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
     mockSelectSession.mockReturnValue(undefined);
-    mocked(router).render.mockClear();
+    vi.mocked(router).render.mockClear();
 
     const { element } = await fixture<SessionPage>(html`<session-page></session-page>`);
     element.sessions = new Success([session]);
@@ -114,8 +115,8 @@ describe('session-page', () => {
   });
 
   it('queues a sign-in prompt when toggling a featured session while signed out', async () => {
-    const mockSelectSession = selectSession as jest.MockedFunction<typeof selectSession>;
-    const mockQueueComplexSnackbar = queueComplexSnackbar as jest.MockedFunction<
+    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
+    const mockQueueComplexSnackbar = queueComplexSnackbar as MockedFunction<
       typeof queueComplexSnackbar
     >;
     mockSelectSession.mockReturnValue({ ...session, speakers: speakers as never } as Session);
@@ -134,8 +135,8 @@ describe('session-page', () => {
   });
 
   it('dispatches setUserFeaturedSessions when signed in', async () => {
-    const mockSelectSession = selectSession as jest.MockedFunction<typeof selectSession>;
-    const mockSetUserFeaturedSessions = setUserFeaturedSessions as jest.MockedFunction<
+    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
+    const mockSetUserFeaturedSessions = setUserFeaturedSessions as MockedFunction<
       typeof setUserFeaturedSessions
     >;
     mockSelectSession.mockReturnValue({ ...session, speakers: speakers as never } as Session);
@@ -155,8 +156,8 @@ describe('session-page', () => {
   });
 
   it('opens the video dialog when the video action is clicked', async () => {
-    const mockSelectSession = selectSession as jest.MockedFunction<typeof selectSession>;
-    const mockOpenVideoDialog = openVideoDialog as jest.MockedFunction<typeof openVideoDialog>;
+    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
+    const mockOpenVideoDialog = openVideoDialog as MockedFunction<typeof openVideoDialog>;
     mockSelectSession.mockReturnValue({ ...session, speakers: speakers as never } as Session);
     mockOpenVideoDialog.mockClear();
 
@@ -177,7 +178,7 @@ describe('session-page', () => {
   });
 
   it('shows the feedback prompt only while accepting feedback', async () => {
-    const mockSelectSession = selectSession as jest.MockedFunction<typeof selectSession>;
+    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
     mockSelectSession.mockReturnValue({
       ...session,
       day: '2000-01-01',

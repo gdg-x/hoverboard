@@ -1,7 +1,6 @@
 import { Success } from '@abraham/remotedata';
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
-import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Session } from '../models/session';
@@ -14,32 +13,32 @@ import { acceptingFeedback } from '../utils/feedback';
 import type { SessionElement } from './session-element';
 import './session-element';
 
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn() },
 }));
-jest.mock('../store/dialogs', () => ({
+vi.mock('../store/dialogs', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
-  openFeedbackDialog: jest.fn(),
-  openSigninDialog: jest.fn(),
+  ...(await importOriginal<typeof import('../store/dialogs')>()),
+  openFeedbackDialog: vi.fn(),
+  openSigninDialog: vi.fn(),
 }));
-jest.mock('../store/featured-sessions', () => ({
+vi.mock('../store/featured-sessions', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/featured-sessions')>('../store/featured-sessions'),
-  setUserFeaturedSessions: jest.fn(),
+  ...(await importOriginal<typeof import('../store/featured-sessions')>()),
+  setUserFeaturedSessions: vi.fn(),
 }));
-jest.mock('../store/snackbars', () => ({
-  ...jest.requireActual<typeof import('../store/snackbars')>('../store/snackbars'),
-  queueComplexSnackbar: jest.fn(),
+vi.mock('../store/snackbars', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../store/snackbars')>()),
+  queueComplexSnackbar: vi.fn(),
 }));
-jest.mock('../utils/feedback');
+vi.mock('../utils/feedback');
 
-const mockUrlForName = mocked(router.urlForName);
-const mockOpenFeedbackDialog = mocked(openFeedbackDialog);
-const mockOpenSigninDialog = mocked(openSigninDialog);
-const mockSetUserFeaturedSessions = mocked(setUserFeaturedSessions);
-const mockQueueComplexSnackbar = mocked(queueComplexSnackbar);
-const mockAcceptingFeedback = mocked(acceptingFeedback);
+const mockUrlForName = vi.mocked(router.urlForName);
+const mockOpenFeedbackDialog = vi.mocked(openFeedbackDialog);
+const mockOpenSigninDialog = vi.mocked(openSigninDialog);
+const mockSetUserFeaturedSessions = vi.mocked(setUserFeaturedSessions);
+const mockQueueComplexSnackbar = vi.mocked(queueComplexSnackbar);
+const mockAcceptingFeedback = vi.mocked(acceptingFeedback);
 
 const session: Session = {
   id: 'session-1',
@@ -54,7 +53,7 @@ const session: Session = {
 
 describe('session-element', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUrlForName.mockReturnValue('/sessions/session-1');
     mockAcceptingFeedback.mockReturnValue(false);
     mockSetUserFeaturedSessions.mockResolvedValue(undefined);

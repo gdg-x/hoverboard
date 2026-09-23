@@ -1,7 +1,6 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { within } from '@testing-library/dom';
-import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Post } from '../models/post';
@@ -11,12 +10,12 @@ import { updateMetadata } from '../utils/metadata';
 import './blog-list-page';
 import { BlogListPage } from './blog-list-page';
 
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn() },
 }));
-jest.mock('../utils/metadata');
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
+vi.mock('../utils/metadata');
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
 }));
 
 const posts: Post[] = [
@@ -64,7 +63,7 @@ describe('blog-list-page', () => {
   });
 
   it('triggers the fetch, starts in the pending state, and updates metadata', async () => {
-    const mockUpdateMetadata = mocked(updateMetadata);
+    const mockUpdateMetadata = vi.mocked(updateMetadata);
     mockUpdateMetadata.mockClear();
 
     const { element } = await fixture<BlogListPage>(html`<blog-list-page></blog-list-page>`);
@@ -77,7 +76,7 @@ describe('blog-list-page', () => {
   });
 
   it('renders featured posts and passes the complete list to posts-list', async () => {
-    mocked(router.urlForName).mockImplementation(
+    vi.mocked(router.urlForName).mockImplementation(
       (_name, params) => `/blog/${(params as { id: string }).id}`,
     );
     const { element, shadowRootForWithin } = await fixture<BlogListPage>(

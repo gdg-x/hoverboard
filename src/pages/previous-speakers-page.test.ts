@@ -1,6 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { PreviousSpeaker } from '../models/previous-speaker';
@@ -10,12 +9,12 @@ import { updateMetadata } from '../utils/metadata';
 import './previous-speakers-page';
 import { PreviousSpeakersPage } from './previous-speakers-page';
 
-jest.mock('../utils/metadata');
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
+vi.mock('../utils/metadata');
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
 }));
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn() },
 }));
 
 const speaker: PreviousSpeaker = {
@@ -37,7 +36,7 @@ describe('previous-speakers-page', () => {
   });
 
   it('renders speaker links and years', async () => {
-    mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
+    vi.mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
     const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
       html`<previous-speakers-page></previous-speakers-page>`,
     );
@@ -61,7 +60,7 @@ describe('previous-speakers-page', () => {
   });
 
   it('updates metadata and renders the completed-state progress visibility', async () => {
-    const mockUpdateMetadata = jest.mocked(updateMetadata);
+    const mockUpdateMetadata = vi.mocked(updateMetadata);
     mockUpdateMetadata.mockClear();
     const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
       html`<previous-speakers-page></previous-speakers-page>`,

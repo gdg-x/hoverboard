@@ -1,6 +1,5 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { openSubscribeDialog } from '../store/dialogs';
@@ -9,18 +8,20 @@ import { subscribeBlock } from '../utils/data';
 import type { SubscribeBlock } from './subscribe-block';
 import './subscribe-block';
 
-jest.mock('../store/dialogs', () => ({
+vi.mock('../store/dialogs', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
-  openSubscribeDialog: jest.fn(),
+  ...(await importOriginal<typeof import('../store/dialogs')>()),
+  openSubscribeDialog: vi.fn(),
 }));
 
-jest.mock('../store/subscribe', () => ({
-  subscribe: jest.fn(),
+vi.mock('../store/subscribe', async (importOriginal) => ({
+  __esModule: true,
+  ...(await importOriginal<typeof import('../store/subscribe')>()),
+  subscribe: vi.fn(),
 }));
 
-const mockOpenSubscribeDialog = mocked(openSubscribeDialog);
-const mockSubscribe = mocked(subscribe);
+const mockOpenSubscribeDialog = vi.mocked(openSubscribeDialog);
+const mockSubscribe = vi.mocked(subscribe);
 
 describe('subscribe-block', () => {
   it('defines a component', () => {

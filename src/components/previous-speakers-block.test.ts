@@ -1,6 +1,5 @@
 import { Failure, Pending } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { PreviousSpeaker } from '../models/previous-speaker';
@@ -9,11 +8,11 @@ import { loading, previousSpeakersBlock } from '../utils/data';
 import type { PreviousSpeakersBlock } from './previous-speakers-block';
 import './previous-speakers-block';
 
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn() },
 }));
 
-const mockRouter = mocked(router);
+const mockRouter = vi.mocked(router);
 
 const speaker: PreviousSpeaker = {
   bio: 'Bio',

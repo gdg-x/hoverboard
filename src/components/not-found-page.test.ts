@@ -1,6 +1,5 @@
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { screen } from '@testing-library/dom';
-import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { heroSettings } from '../utils/data';
@@ -9,12 +8,12 @@ import './not-found-page';
 import { NotFoundPage } from './not-found-page';
 import { SimpleHero } from './hero/simple-hero';
 
-jest.mock('../utils/metadata');
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
+vi.mock('../utils/metadata');
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
 }));
 
-const mockUpdateMetadata = mocked(updateMetadata);
+const mockUpdateMetadata = vi.mocked(updateMetadata);
 
 describe('not-found-page', () => {
   beforeEach(() => {

@@ -1,18 +1,17 @@
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { closeVideoDialog } from '../store/ui';
 import type { VideoDialog } from './video-dialog';
 import './video-dialog';
 
-jest.mock('../store/ui', () => ({
+vi.mock('../store/ui', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/ui')>('../store/ui'),
-  closeVideoDialog: jest.fn(),
+  ...(await importOriginal<typeof import('../store/ui')>()),
+  closeVideoDialog: vi.fn(),
 }));
 
-const mockCloseVideoDialog = mocked(closeVideoDialog);
+const mockCloseVideoDialog = vi.mocked(closeVideoDialog);
 
 describe('video-dialog', () => {
   it('defines a component', () => {
@@ -49,7 +48,7 @@ describe('video-dialog', () => {
     const dialog = shadowRoot.querySelector('hoverboard-dialog') as HTMLElement & {
       close: () => void;
     };
-    dialog.close = jest.fn();
+    dialog.close = vi.fn();
 
     shadowRoot.querySelector<HTMLElement>('md-outlined-button')!.click();
 

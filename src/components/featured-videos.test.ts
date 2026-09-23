@@ -1,6 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Video } from '../models/video';
@@ -9,13 +8,13 @@ import { featuredVideos, loading } from '../utils/data';
 import type { FeaturedVideos } from './featured-videos';
 import './featured-videos';
 
-jest.mock('../store/ui', () => ({
+vi.mock('../store/ui', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/ui')>('../store/ui'),
-  openVideoDialog: jest.fn(),
+  ...(await importOriginal<typeof import('../store/ui')>()),
+  openVideoDialog: vi.fn(),
 }));
 
-const mockOpenVideoDialog = mocked(openVideoDialog);
+const mockOpenVideoDialog = vi.mocked(openVideoDialog);
 
 const video: Video = {
   speakers: 'Jane Doe',

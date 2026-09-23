@@ -1,6 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { PartnerGroup } from '../models/partner-group';
@@ -11,29 +10,29 @@ import { partnersBlock } from '../utils/data';
 import type { PartnersBlock } from './partners-block';
 import './partners-block';
 
-jest.mock('../store/dialogs', () => ({
+vi.mock('../store/dialogs', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
-  closeDialog: jest.fn(),
-  openSubscribeDialog: jest.fn(),
+  ...(await importOriginal<typeof import('../store/dialogs')>()),
+  closeDialog: vi.fn(),
+  openSubscribeDialog: vi.fn(),
 }));
 
-jest.mock('../store/potential-partners', () => ({
+vi.mock('../store/potential-partners', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/potential-partners')>(
-    '../store/potential-partners',
-  ),
-  addPotentialPartner: jest.fn(),
+  ...(await importOriginal<typeof import('../store/potential-partners')>()),
+  addPotentialPartner: vi.fn(),
 }));
 
-jest.mock('../store/snackbars', () => ({
-  queueSnackbar: jest.fn(() => ({ type: 'QUEUE_SNACKBAR' })),
+vi.mock('../store/snackbars', async (importOriginal) => ({
+  __esModule: true,
+  ...(await importOriginal<typeof import('../store/snackbars')>()),
+  queueSnackbar: vi.fn(() => ({ type: 'QUEUE_SNACKBAR' })),
 }));
 
-const mockCloseDialog = mocked(closeDialog);
-const mockOpenSubscribeDialog = mocked(openSubscribeDialog);
-const mockAddPotentialPartner = mocked(addPotentialPartner);
-const mockQueueSnackbar = mocked(queueSnackbar);
+const mockCloseDialog = vi.mocked(closeDialog);
+const mockOpenSubscribeDialog = vi.mocked(openSubscribeDialog);
+const mockAddPotentialPartner = vi.mocked(addPotentialPartner);
+const mockQueueSnackbar = vi.mocked(queueSnackbar);
 
 const partnerGroups: PartnerGroup[] = [
   {

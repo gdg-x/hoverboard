@@ -1,6 +1,5 @@
 import { Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { SpeakerWithTags } from '../models/speaker';
@@ -10,12 +9,12 @@ import { updateMetadata } from '../utils/metadata';
 import './speakers-page';
 import { SpeakersPage } from './speakers-page';
 
-jest.mock('../utils/metadata');
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
+vi.mock('../utils/metadata');
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
 }));
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn() },
 }));
 
 const speaker: SpeakerWithTags = {
@@ -43,7 +42,7 @@ describe('speakers-page', () => {
   });
 
   it('renders speaker cards with badges and socials', async () => {
-    mocked(router).urlForName.mockReturnValue('/speakers/speaker-1');
+    vi.mocked(router).urlForName.mockReturnValue('/speakers/speaker-1');
     const { element, shadowRoot } = await fixture<SpeakersPage>(
       html`<speakers-page></speakers-page>`,
     );
@@ -60,7 +59,7 @@ describe('speakers-page', () => {
   });
 
   it('triggers the fetch and starts in the pending state, and updates metadata', async () => {
-    const mockUpdateMetadata = jest.mocked(updateMetadata);
+    const mockUpdateMetadata = vi.mocked(updateMetadata);
     mockUpdateMetadata.mockClear();
 
     const { element } = await fixture<SpeakersPage>(html`<speakers-page></speakers-page>`);
