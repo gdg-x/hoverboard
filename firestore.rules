@@ -86,8 +86,7 @@ service cloud.firestore {
       allow list: if false;
 
       // Applies to document create requests
-      //allow create;
-      allow write;
+      allow create, update;
     }
 
     match /previousSpeakers/{speaker} {
@@ -186,8 +185,7 @@ service cloud.firestore {
       allow list: if false;
 
       // Applies to document create requests
-      //allow create;
-      allow write;
+      allow create, update;
     }
 
     match /team/{teamId} {
