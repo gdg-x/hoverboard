@@ -1,11 +1,12 @@
 import { getFirestore } from 'firebase-admin/firestore';
 import { getMessaging } from 'firebase-admin/messaging';
-import * as functions from 'firebase-functions';
+import * as logger from 'firebase-functions/logger';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { scheduleNotifications } from '../../src/triggers/schedule-notifications';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('firebase-admin/messaging');
+vi.mock('firebase-functions/logger');
 
 const MOCK_TIME = new Date('2025-06-22T14:30:00.000Z');
 
@@ -132,9 +133,9 @@ describe('scheduleNotifications', () => {
       scheduleDocs: [{ id: '2025-06-23', data: { timeslots: [] } }],
     });
     const { sendToDevice } = mockMessaging();
-    const logSpy = vi.spyOn(functions.logger, 'log').mockImplementation(() => undefined);
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
-    await scheduleNotifications.run(undefined as never, {} as never);
+    await scheduleNotifications.run(undefined as never);
     await flushAsyncCallbacks();
 
     expect(logSpy).toHaveBeenCalledWith('2025-06-22', 'was not found in the schedule');
@@ -157,9 +158,9 @@ describe('scheduleNotifications', () => {
       notificationsUsersDocs: { 'user-1': { tokens: ['device-token-1'] } },
     });
     const { sendToDevice } = mockMessaging();
-    const logSpy = vi.spyOn(functions.logger, 'log').mockImplementation(() => undefined);
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
-    await scheduleNotifications.run(undefined as never, {} as never);
+    await scheduleNotifications.run(undefined as never);
     await flushAsyncCallbacks();
 
     expect(sendToDevice).not.toHaveBeenCalled();
@@ -181,9 +182,9 @@ describe('scheduleNotifications', () => {
       sessionDocs: { 'session-1': { title: 'Keynote' } },
     });
     const { sendToDevice } = mockMessaging();
-    const logSpy = vi.spyOn(functions.logger, 'log').mockImplementation(() => undefined);
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
-    await scheduleNotifications.run(undefined as never, {} as never);
+    await scheduleNotifications.run(undefined as never);
     await flushAsyncCallbacks();
 
     expect(logSpy).toHaveBeenCalledWith('Upcoming sessions', ['session-1']);
@@ -207,7 +208,7 @@ describe('scheduleNotifications', () => {
     });
     const { sendToDevice } = mockMessaging();
 
-    await scheduleNotifications.run(undefined as never, {} as never);
+    await scheduleNotifications.run(undefined as never);
     await flushAsyncCallbacks();
 
     expect(sendToDevice).toHaveBeenCalledWith(['tokens'], {
@@ -239,9 +240,9 @@ describe('scheduleNotifications', () => {
       },
     });
     mockMessaging([{ error: { code: 'messaging/invalid-registration-token' } }]);
-    const errorSpy = vi.spyOn(functions.logger, 'error').mockImplementation(() => undefined);
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    await scheduleNotifications.run(undefined as never, {} as never);
+    await scheduleNotifications.run(undefined as never);
     await flushAsyncCallbacks();
 
     expect(errorSpy).toHaveBeenCalledWith(

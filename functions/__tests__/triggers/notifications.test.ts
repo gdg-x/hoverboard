@@ -1,11 +1,12 @@
 import { getFirestore } from 'firebase-admin/firestore';
 import { getMessaging } from 'firebase-admin/messaging';
-import * as functions from 'firebase-functions';
+import * as logger from 'firebase-functions/logger';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { sendGeneralNotification } from '../../src/triggers/notifications';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('firebase-admin/messaging');
+vi.mock('firebase-functions/logger');
 
 const mockSnapshot = (message?: Record<string, unknown>) => ({
   data: () => message,
@@ -66,10 +67,10 @@ describe('sendGeneralNotification', () => {
   });
 
   it('returns early when the created notification has no data', async () => {
-    await sendGeneralNotification.run(
-      mockSnapshot(undefined) as never,
-      { params: { timestamp: '12345' } } as never,
-    );
+    await sendGeneralNotification.run({
+      data: mockSnapshot(undefined),
+      params: { timestamp: '12345' },
+    } as never);
 
     expect(getFirestore).not.toHaveBeenCalled();
     expect(getMessaging).not.toHaveBeenCalled();
@@ -80,12 +81,12 @@ describe('sendGeneralNotification', () => {
       notificationsConfig: { icon: '/default-icon.png' },
       tokens: [],
     });
-    const logSpy = vi.spyOn(functions.logger, 'log').mockImplementation(() => undefined);
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
-    await sendGeneralNotification.run(
-      mockSnapshot({ title: 'Hello', body: 'World' }) as never,
-      { params: { timestamp: '12345' } } as never,
-    );
+    await sendGeneralNotification.run({
+      data: mockSnapshot({ title: 'Hello', body: 'World' }),
+      params: { timestamp: '12345' },
+    } as never);
 
     expect(logSpy).toHaveBeenCalledWith('There are no notification tokens to send to.');
     expect(getMessaging).not.toHaveBeenCalled();
@@ -98,14 +99,14 @@ describe('sendGeneralNotification', () => {
       tokens: ['token-1', 'token-2'],
     });
 
-    await sendGeneralNotification.run(
-      mockSnapshot({
+    await sendGeneralNotification.run({
+      data: mockSnapshot({
         title: 'Schedule update',
         body: 'Agenda changed',
         path: '/schedule/day-1',
-      }) as never,
-      { params: { timestamp: '12345' } } as never,
-    );
+      }),
+      params: { timestamp: '12345' },
+    } as never);
 
     expect(sendToDevice).toHaveBeenCalledWith(['token-1', 'token-2'], {
       data: {
@@ -124,14 +125,14 @@ describe('sendGeneralNotification', () => {
       tokens: ['token-1'],
     });
 
-    await sendGeneralNotification.run(
-      mockSnapshot({
+    await sendGeneralNotification.run({
+      data: mockSnapshot({
         title: 'Welcome',
         body: 'See you soon',
         icon: '/custom-icon.png',
-      }) as never,
-      { params: { timestamp: '12345' } } as never,
-    );
+      }),
+      params: { timestamp: '12345' },
+    } as never);
 
     expect(sendToDevice).toHaveBeenCalledWith(['token-1'], {
       data: {
@@ -153,15 +154,15 @@ describe('sendGeneralNotification', () => {
       ],
       tokens: ['token-1', 'token-2', 'token-3', 'token-4'],
     });
-    const errorSpy = vi.spyOn(functions.logger, 'error').mockImplementation(() => undefined);
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    await sendGeneralNotification.run(
-      mockSnapshot({
+    await sendGeneralNotification.run({
+      data: mockSnapshot({
         title: 'Reminder',
         body: 'Talk starts soon',
-      }) as never,
-      { params: { timestamp: '12345' } } as never,
-    );
+      }),
+      params: { timestamp: '12345' },
+    } as never);
 
     expect(sendToDevice).toHaveBeenCalledTimes(1);
     expect(deletedTokens).toStrictEqual(['token-2', 'token-3']);

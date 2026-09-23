@@ -1,5 +1,5 @@
 import { getFirestore } from 'firebase-admin/firestore';
-import * as functions from 'firebase-functions';
+import * as logger from 'firebase-functions/logger';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   scheduleWrite,
@@ -10,6 +10,7 @@ import { sessionsSpeakersMap as sessionsSpeakersMapUntyped } from '../../src/sch
 import { sessionsSpeakersScheduleMap as sessionsSpeakersScheduleMapUntyped } from '../../src/schedule-generator/speakers-sessions-schedule-map.js';
 
 vi.mock('firebase-admin/firestore');
+vi.mock('firebase-functions/logger');
 vi.mock('../../src/schedule-generator/speakers-sessions-map.js', () => ({
   sessionsSpeakersMap: vi.fn(),
 }));
@@ -120,15 +121,15 @@ describe('generate-sessions-speakers-schedule triggers', () => {
       speakersDocs: [['speaker-1', { name: 'Ada Lovelace' }]],
     });
     sessionsSpeakersMap.mockReturnValue(generated);
-    const errorSpy = vi.spyOn(functions.logger, 'error').mockImplementation(() => undefined);
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    await sessionsWrite.run(
-      {
+    await sessionsWrite.run({
+      data: {
         after: { exists: true, data: () => ({}) },
         before: { exists: true, data: () => ({}) },
-      } as never,
-      { params: { sessionId: 'session-1' } } as never,
-    );
+      },
+      params: { sessionId: 'session-1' },
+    } as never);
 
     expect(sessionsSpeakersMap).toHaveBeenCalledWith(
       { 'session-1': { title: 'Keynote', speakers: ['speaker-1'] } },
@@ -154,15 +155,15 @@ describe('generate-sessions-speakers-schedule triggers', () => {
     const { collection, writes } = setupFirestore({
       scheduleConfigExists: false,
     });
-    const errorSpy = vi.spyOn(functions.logger, 'error').mockImplementation(() => undefined);
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    const result = await scheduleWrite.run(
-      {
+    const result = await scheduleWrite.run({
+      data: {
         after: { exists: true, data: () => ({}) },
         before: { exists: true, data: () => ({}) },
-      } as never,
-      { params: { scheduleId: 'day-1' } } as never,
-    );
+      },
+      params: { scheduleId: 'day-1' },
+    } as never);
 
     expect(result).toBeNull();
     expect(errorSpy).toHaveBeenCalledWith(
@@ -194,10 +195,10 @@ describe('generate-sessions-speakers-schedule triggers', () => {
         'speaker-1': { name: 'Ada Lovelace' },
       },
     });
-    const errorSpy = vi.spyOn(functions.logger, 'error').mockImplementation(() => undefined);
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    await speakersWrite.run(
-      {
+    await speakersWrite.run({
+      data: {
         after: {
           exists: true,
           data: () => ({ name: 'Grace Hopper', company: 'Navy' }),
@@ -206,9 +207,9 @@ describe('generate-sessions-speakers-schedule triggers', () => {
           exists: false,
           data: () => undefined,
         },
-      } as never,
-      { params: { speakerId: 'speaker-2' } } as never,
-    );
+      },
+      params: { speakerId: 'speaker-2' },
+    } as never);
 
     expect(sessionsSpeakersMap).toHaveBeenCalledWith(
       { 'session-1': { title: 'Keynote', speakers: ['speaker-1'] } },
@@ -239,15 +240,15 @@ describe('generate-sessions-speakers-schedule triggers', () => {
       sessions: {},
       speakers: {},
     });
-    const errorSpy = vi.spyOn(functions.logger, 'error').mockImplementation(() => undefined);
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    await scheduleWrite.run(
-      {
+    await scheduleWrite.run({
+      data: {
         after: { exists: true, data: () => ({}) },
         before: { exists: true, data: () => ({}) },
-      } as never,
-      { params: { scheduleId: 'day-1' } } as never,
-    );
+      },
+      params: { scheduleId: 'day-1' },
+    } as never);
 
     expect(sessionsSpeakersScheduleMap).toHaveBeenCalledWith(
       { 'session-1': { title: 'Keynote' } },

@@ -1,6 +1,6 @@
 import os from 'os';
 import path from 'path';
-import * as functions from 'firebase-functions';
+import * as logger from 'firebase-functions/logger';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 const storageMocks = vi.hoisted(() => ({
@@ -28,6 +28,8 @@ vi.mock('fs', () => ({
     unlinkSync: storageMocks.unlinkSync,
   },
 }));
+
+vi.mock('firebase-functions/logger');
 
 import { optimizeImages } from '../../src/triggers/optimize-images';
 
@@ -59,16 +61,15 @@ describe('optimizeImages', () => {
   });
 
   it('returns early for non-image objects', async () => {
-    const logSpy = vi.spyOn(functions.logger, 'log').mockImplementation(() => undefined);
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
-    const result = await optimizeImages.run(
-      {
+    const result = await optimizeImages.run({
+      data: {
         bucket: 'hoverboard-assets',
         contentType: 'text/plain',
         name: 'notes.txt',
-      } as never,
-      {} as never,
-    );
+      },
+    } as never);
 
     expect(result).toBeNull();
     expect(logSpy).toHaveBeenCalledWith('This is not an image.');
@@ -80,16 +81,15 @@ describe('optimizeImages', () => {
     const { download, getMetadata, upload } = setupStorageMocks({
       metadata: { optimized: 'true' },
     });
-    const logSpy = vi.spyOn(functions.logger, 'log').mockImplementation(() => undefined);
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
-    const result = await optimizeImages.run(
-      {
+    const result = await optimizeImages.run({
+      data: {
         bucket: 'hoverboard-assets',
         contentType: 'image/png',
         name: 'images/photo.png',
-      } as never,
-      {} as never,
-    );
+      },
+    } as never);
 
     expect(result).toBeNull();
     expect(getMetadata).toHaveBeenCalledTimes(1);
@@ -111,7 +111,7 @@ describe('optimizeImages', () => {
     const tempLocalFile = path.join(os.tmpdir(), object.name);
     const tempLocalDir = path.dirname(tempLocalFile);
 
-    await optimizeImages.run(object as never, {} as never);
+    await optimizeImages.run({ data: object } as never);
 
     expect(storageMocks.bucket).toHaveBeenCalledWith('hoverboard-assets');
     expect(file).toHaveBeenNthCalledWith(1, 'images/photo.png');
