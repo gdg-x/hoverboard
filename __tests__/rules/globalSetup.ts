@@ -1,4 +1,4 @@
-import { execFileSync } from 'child_process';
+import { spawnSync } from 'child_process';
 import { existsSync } from 'fs';
 import { setup as startEmulator, teardown as stopEmulator } from 'jest-dev-server';
 import { SpawndChildProcess } from 'spawnd';
@@ -10,31 +10,47 @@ import { SpawndChildProcess } from 'spawnd';
 // `__tests__/rules/setup.ts`.
 let servers: SpawndChildProcess[] = [];
 
-// firebase-tools requires Java 21+ to run the Firestore emulator. If the
-// default `java` on PATH is older, but a compatible Homebrew JDK is
-// installed, prepend it to PATH for the emulator process only (this leaves
-// the rest of the environment untouched).
-const emulatorEnv = () => {
-  try {
-    const version = execFileSync('java', ['-version'], {
-      encoding: 'utf8',
-      stdio: ['ignore', 'ignore', 'pipe'],
-    });
-    const match = /version "(\d+)/.exec(version);
-    if (match && Number(match[1]) >= 21) {
-      return process.env;
-    }
-  } catch {
-    // `java` missing entirely; fall through to look for a Homebrew JDK.
+// firebase-tools requires Java 21+ to run the Firestore emulator, but that
+// isn't guaranteed to be the default `java` on PATH:
+// - GitHub-hosted runners preinstall several JDKs and expose each one's home
+//   via a `JAVA_HOME_<version>_*` env var, even when an older JDK is default.
+// - Locally (notably macOS with an older Homebrew `java` on PATH), a newer
+//   JDK may be installed but not linked as the default.
+// If the default `java` is missing or too old, look for one of these and
+// prepend its bin directory to PATH for the emulator process only (this
+// leaves the rest of the environment untouched).
+const findPreinstalledJavaHome = () => {
+  const versioned = Object.entries(process.env)
+    .map(([key, value]) => {
+      const match = /^JAVA_HOME_(\d+)/.exec(key);
+      return match && value ? { version: Number(match[1]), home: value } : null;
+    })
+    .filter(
+      (entry): entry is { version: number; home: string } => entry !== null && entry.version >= 21,
+    )
+    .sort((a, b) => b.version - a.version);
+  if (versioned[0]) {
+    return versioned[0].home;
   }
 
-  const candidate = ['/opt/homebrew/opt/openjdk@21/bin', '/opt/homebrew/opt/openjdk/bin'].find(
-    (bin) => existsSync(bin),
+  return ['/opt/homebrew/opt/openjdk@21', '/opt/homebrew/opt/openjdk'].find((home) =>
+    existsSync(home),
   );
-  if (!candidate) {
+};
+
+const emulatorEnv = () => {
+  // `java -version` writes to stderr, not stdout.
+  const { stderr } = spawnSync('java', ['-version'], { encoding: 'utf8' });
+  const match = /version "(\d+)/.exec(stderr ?? '');
+  if (match && Number(match[1]) >= 21) {
     return process.env;
   }
-  return { ...process.env, PATH: `${candidate}:${process.env['PATH'] ?? ''}` };
+
+  const javaHome = findPreinstalledJavaHome();
+  if (!javaHome) {
+    return process.env;
+  }
+  return { ...process.env, PATH: `${javaHome}/bin:${process.env['PATH'] ?? ''}` };
 };
 
 export async function setup() {
