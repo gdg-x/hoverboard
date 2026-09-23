@@ -2,6 +2,7 @@ import { Initialized, Success } from '@abraham/remotedata';
 import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { Session } from '../models/session';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -213,7 +214,7 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
         vertical
         relative
       >
-        <hoverboard-icon name="${session?.icon}" class="session-icon"></hoverboard-icon>
+        <hoverboard-icon name="${ifDefined(session?.icon)}" class="session-icon"></hoverboard-icon>
 
         <div class="session-header" layout horizontal justified>
           <div flex>

@@ -2,7 +2,7 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import '@power-elements/lazy-image';
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import '../components/content-loader';
 import '../components/footer-block';
 import '../components/hero/simple-hero';
@@ -102,7 +102,7 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
 
   @property({ type: Object })
   posts: BlogState = new Initialized();
-  @property({ type: Object })
+  @state()
   private viewport = initialUiState.viewport;
 
   get pending() {

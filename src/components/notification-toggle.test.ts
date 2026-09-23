@@ -94,14 +94,15 @@ describe('notification-toggle', () => {
   });
 
   it('closes the panel when clicking outside', async () => {
-    const { element } = await fixture<NotificationToggle>(
+    const { element, shadowRoot } = await fixture<NotificationToggle>(
       html`<notification-toggle></notification-toggle>`,
     );
     element['notificationPermission'] = new Failure(new Error('denied'));
     await element.updateComplete;
-    element['opened'] = true;
-    element['clickOutsideListen']();
+
+    shadowRoot.querySelector<HTMLElement>('.notifications-trigger')!.click();
     await element.updateComplete;
+    expect(element['opened']).toBe(true);
 
     document.body.click();
     await element.updateComplete;

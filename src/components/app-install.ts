@@ -20,12 +20,14 @@ export class AppInstall extends ThemedElement {
   @state()
   private deferredPrompt: BeforeInstallPromptEvent | undefined;
 
-  constructor() {
-    super();
-    window.addEventListener('beforeinstallprompt', (e: BeforeInstallPromptEvent) => {
-      e.preventDefault();
-      this.deferredPrompt = e;
-    });
+  override connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('beforeinstallprompt', this.onBeforeInstallPrompt);
+  }
+
+  override disconnectedCallback() {
+    window.removeEventListener('beforeinstallprompt', this.onBeforeInstallPrompt);
+    super.disconnectedCallback();
   }
 
   override render() {
@@ -43,6 +45,11 @@ export class AppInstall extends ThemedElement {
     this.deferredPrompt.prompt();
     this.deferredPrompt = undefined;
   }
+
+  private readonly onBeforeInstallPrompt = (e: BeforeInstallPromptEvent) => {
+    e.preventDefault();
+    this.deferredPrompt = e;
+  };
 }
 
 declare global {

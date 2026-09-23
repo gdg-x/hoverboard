@@ -1,6 +1,9 @@
 import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { repeat } from 'lit/directives/repeat.js';
+import { styleMap } from 'lit/directives/style-map.js';
+import { ClickOutsideController } from '../controllers/click-outside-controller';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { filters } from '../utils/data';
@@ -98,15 +101,9 @@ export class FilterMenu extends ThemedElement {
   @property({ type: Boolean })
   opened = false;
 
-  constructor() {
-    super();
-    this.clickOutsideListener = this.clickOutsideListener.bind(this);
-  }
-
-  override disconnectedCallback() {
-    this.clickOutsideUnlisten();
-    super.disconnectedCallback();
-  }
+  private readonly clickOutsideController = new ClickOutsideController(this, () =>
+    this.toggleBoard(),
+  );
 
   override render() {
     return html`
@@ -135,11 +132,13 @@ export class FilterMenu extends ThemedElement {
         </div>
 
         <div class="selected-filters" ?hidden="${!this.selectedFilters.length}">
-          ${this.selectedFilters.map(
+          ${repeat(
+            this.selectedFilters,
+            (selectedFilter) => `${selectedFilter.group}:${selectedFilter.tag}`,
             (selectedFilter) => html`
               <div
                 class="tag"
-                style="--color: ${this.getVariableColor(selectedFilter.tag, 'primary-text-color')}"
+                style="${styleMap({ '--color': this.getVariableColor(selectedFilter.tag, 'primary-text-color') })}"
                 filter-key="${selectedFilter.group}"
                 filter-value="${selectedFilter.tag}"
                 @click="${this.toggleFilter}"
@@ -163,7 +162,9 @@ export class FilterMenu extends ThemedElement {
             (filterGroup) => html`
               <div class="filter-group">
                 <h3 class="filter-title">${filterGroup.title}</h3>
-                ${filterGroup.filters.map(
+                ${repeat(
+                  filterGroup.filters,
+                  (filter) => `${filterGroup.key}:${filter.tag}`,
                   (filter) => html`
                     <div
                       layout
@@ -171,7 +172,7 @@ export class FilterMenu extends ThemedElement {
                       inline
                       center
                       class="tag"
-                      style="--color: ${this.getVariableColor(filter.tag, 'primary-text-color')}"
+                      style="${styleMap({ '--color': this.getVariableColor(filter.tag, 'primary-text-color') })}"
                       filter-key="${filterGroup.key}"
                       filter-value="${filter.tag}"
                       ?selected="${this.isSelected(this.selectedFilters, filter)}"
@@ -213,9 +214,9 @@ export class FilterMenu extends ThemedElement {
 
   private toggleBoard() {
     if (this.opened) {
-      this.clickOutsideUnlisten();
+      this.clickOutsideController.stop();
     } else {
-      this.clickOutsideListen();
+      this.clickOutsideController.start();
     }
     this.opened = !this.opened;
   }
@@ -234,25 +235,8 @@ export class FilterMenu extends ThemedElement {
     return selectedFilters.length === 0 || typeof resultsCount === 'undefined';
   }
 
-  private clickOutsideListen() {
-    this.clickOutsideUnlisten();
-    window.addEventListener('click', this.clickOutsideListener, false);
-  }
-
-  private clickOutsideUnlisten() {
-    window.removeEventListener('click', this.clickOutsideListener, false);
-  }
-
-  private clickOutsideListener(e: MouseEvent) {
-    const isOutside = !e.composedPath().find((path) => path === this);
-    if (isOutside) {
-      this.toggleBoard();
-      this.clickOutsideUnlisten();
-    }
-  }
-
   private getVariableColor(value: string, fallback: string) {
-    return getVariableColor(this, value, fallback);
+    return String(getVariableColor(this, value, fallback));
   }
 }
 

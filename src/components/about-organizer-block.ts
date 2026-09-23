@@ -1,7 +1,7 @@
 import '@material/web/button/text-button.js';
 import '@power-elements/lazy-image';
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { initialUiState } from '../store/ui';
@@ -40,7 +40,7 @@ export class AboutOrganizerBlock extends ReduxMixin(ThemedElement) {
     ];
   }
 
-  @property({ type: Object })
+  @state()
   private viewport = initialUiState.viewport;
 
   override stateChanged(state: RootState) {

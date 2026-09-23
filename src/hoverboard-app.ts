@@ -1,7 +1,7 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import '@power-elements/lazy-image';
 import { css, html, PropertyValues } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { ThemedElement } from './components/themed-element';
 import './components/hoverboard-icon';
 import './components/snack-bar';
@@ -165,11 +165,10 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
   @property({ type: Object })
   tickets: TicketsState = new Initialized();
 
-  @property({ type: Boolean })
+  @state()
   private drawerOpened = false;
-  @property({ type: Array })
   private providerUrls = signInProviders.allowedProvidersUrl;
-  @property({ type: String })
+  @state()
   private routeName = 'home';
 
   override stateChanged(state: RootState) {
