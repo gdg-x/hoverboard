@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from '@jest/globals';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { Success } from '@abraham/remotedata';
 import { html } from 'lit';

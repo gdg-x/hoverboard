@@ -1,5 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Day } from '../models/day';

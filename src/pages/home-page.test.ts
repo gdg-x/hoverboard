@@ -1,4 +1,4 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
@@ -9,20 +9,20 @@ import { updateMetadata } from '../utils/metadata';
 import './home-page';
 import { HomePage } from './home-page';
 
-jest.mock('../utils/metadata');
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn() },
+vi.mock('../utils/metadata');
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn() },
 }));
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
-  scrollToElement: jest.fn(),
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
+  scrollToElement: vi.fn(),
   POSITION: { TOP: 'top', BOTTOM: 'bottom' },
 }));
-jest.mock('../store/ui', () => ({
+vi.mock('../store/ui', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/ui')>('../store/ui'),
-  openVideoDialog: jest.fn(),
-  setHeroSettings: jest.fn(),
+  ...(await importOriginal<typeof import('../store/ui')>()),
+  openVideoDialog: vi.fn(),
+  setHeroSettings: vi.fn(),
 }));
 
 describe('home-page', () => {
@@ -31,7 +31,7 @@ describe('home-page', () => {
   });
 
   it('updates metadata on connect', async () => {
-    const mockUpdateMetadata = jest.mocked(updateMetadata);
+    const mockUpdateMetadata = vi.mocked(updateMetadata);
     mockUpdateMetadata.mockClear();
 
     const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
@@ -60,7 +60,7 @@ describe('home-page', () => {
   });
 
   it('opens the video dialog when the watch video button is clicked', async () => {
-    const mockOpenVideoDialog = openVideoDialog as jest.MockedFunction<typeof openVideoDialog>;
+    const mockOpenVideoDialog = openVideoDialog as MockedFunction<typeof openVideoDialog>;
     mockOpenVideoDialog.mockClear();
 
     const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);

@@ -1,4 +1,4 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
@@ -7,9 +7,9 @@ import * as filterUtils from '../utils/filters';
 import type { FilterMenu } from './filter-menu';
 import './filter-menu';
 
-jest.mock('../utils/filters', () => ({
-  clearFilters: jest.fn(),
-  toggleFilter: jest.fn(),
+vi.mock('../utils/filters', () => ({
+  clearFilters: vi.fn(),
+  toggleFilter: vi.fn(),
 }));
 
 const filterGroups: FilterGroup[] = [

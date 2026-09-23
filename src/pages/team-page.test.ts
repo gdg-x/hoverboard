@@ -1,5 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { updateMetadata } from '../utils/metadata';
@@ -7,9 +7,9 @@ import { heroSettings, team } from '../utils/data';
 import './team-page';
 import { TeamPage } from './team-page';
 
-jest.mock('../utils/metadata');
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
+vi.mock('../utils/metadata');
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
 }));
 
 const member = {
@@ -53,7 +53,7 @@ describe('team-page', () => {
   });
 
   it('updates page metadata', async () => {
-    const mockUpdateMetadata = jest.mocked(updateMetadata);
+    const mockUpdateMetadata = vi.mocked(updateMetadata);
     mockUpdateMetadata.mockClear();
     await fixture<TeamPage>(html`<team-page></team-page>`);
 

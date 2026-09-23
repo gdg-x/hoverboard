@@ -1,5 +1,5 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
@@ -67,7 +67,7 @@ describe('subscribe-dialog', () => {
   });
 
   it('submits the form data when all fields are valid', async () => {
-    const submit = jest.fn();
+    const submit = vi.fn();
     const { element, shadowRoot } = await fixture<SubscribeDialog>(
       html`<subscribe-dialog></subscribe-dialog>`,
     );
@@ -114,7 +114,7 @@ describe('subscribe-dialog', () => {
     const dialog = shadowRoot.querySelector('hoverboard-dialog') as HTMLElement & {
       close: () => void;
     };
-    dialog.close = jest.fn();
+    dialog.close = vi.fn();
 
     shadowRoot.querySelector<HTMLElement>('md-outlined-button')!.click();
 

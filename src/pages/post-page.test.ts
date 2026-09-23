@@ -1,7 +1,6 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
-import { afterEach, describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { waitFor, within } from '@testing-library/dom';
-import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Post } from '../models/post';
@@ -10,15 +9,15 @@ import { updateImageMetadata } from '../utils/metadata';
 import './post-page';
 import { PostPage } from './post-page';
 
-jest.mock('../router', () => ({
+vi.mock('../router', () => ({
   router: {
-    render: jest.fn(),
-    urlForName: jest.fn(),
+    render: vi.fn(),
+    urlForName: vi.fn(),
   },
 }));
-jest.mock('../utils/metadata');
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
+vi.mock('../utils/metadata');
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
 }));
 
 const posts: Post[] = [
@@ -66,7 +65,7 @@ const firstPostWithPrimaryColor = {
   ...firstPost,
   primaryColor: '#abc',
 } as Post & { primaryColor: string };
-const fetchMock = jest.fn<typeof fetch>();
+const fetchMock = vi.fn<typeof fetch>();
 Object.defineProperty(globalThis, 'fetch', {
   configurable: true,
   writable: true,
@@ -86,9 +85,9 @@ describe('post-page', () => {
   });
 
   it('synchronizes route data with posts and renders suggestions', async () => {
-    const mockUpdateImageMetadata = mocked(updateImageMetadata);
+    const mockUpdateImageMetadata = vi.mocked(updateImageMetadata);
     mockUpdateImageMetadata.mockClear();
-    mocked(router.urlForName).mockImplementation(
+    vi.mocked(router.urlForName).mockImplementation(
       (_name, params) => `/blog/${(params as { id: string }).id}`,
     );
     const { element, shadowRootForWithin } = await fixture<PostPage>(html`<post-page></post-page>`);

@@ -1,5 +1,5 @@
 import { Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Day } from '../models/day';
@@ -9,8 +9,8 @@ import './schedule-day';
 import type { SessionElement } from './session-element';
 import './session-element';
 
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn() },
 }));
 
 const day: Day = {

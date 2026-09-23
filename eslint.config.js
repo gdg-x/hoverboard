@@ -8,7 +8,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 import htmlPlugin from 'eslint-plugin-html';
 import htmlEslintPlugin from '@html-eslint/eslint-plugin';
 import htmlEslintParser from '@html-eslint/parser';
-import jestPlugin from 'eslint-plugin-jest';
+import vitestPlugin from '@vitest/eslint-plugin';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
 import globals from 'globals';
 
@@ -58,7 +58,7 @@ export default [
     },
     plugins: {
       '@typescript-eslint': typescriptEslint,
-      jest: jestPlugin,
+      vitest: vitestPlugin,
       'testing-library': testingLibraryPlugin,
     },
     rules: {
@@ -68,12 +68,12 @@ export default [
       'no-unused-vars': 'off', // Replaced by @typescript-eslint/no-unused-vars
       'preserve-caught-error': 'off',
 
-      // Jest rules
-      'jest/max-expects': ['warn', { max: 10 }],
-      'jest/no-hooks': 'off',
-      'jest/prefer-expect-assertions': 'off',
-      'jest/require-hook': 'off',
-      'jest/unbound-method': 'warn',
+      // Vitest rules
+      'vitest/max-expects': ['warn', { max: 10 }],
+      'vitest/no-hooks': 'off',
+      'vitest/prefer-expect-assertions': 'off',
+      'vitest/require-hook': 'off',
+      'vitest/unbound-method': 'warn',
 
       // Testing library rules
       'testing-library/no-node-access': 'warn',

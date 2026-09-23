@@ -1,5 +1,5 @@
 import { assertFails, assertSucceeds } from '@firebase/rules-unit-testing';
-import { expect } from '@jest/globals';
+import { expect } from 'vitest';
 
 expect.extend({
   async toAllow(pr: Promise<any>) {
@@ -36,10 +36,13 @@ expect.extend({
 
 export { expect };
 
-// https://github.com/facebook/jest/issues/11487
-declare module 'expect' {
-  interface Matchers<R> {
-    toDeny: () => R;
-    toAllow: () => R;
+declare module 'vitest' {
+  interface Assertion<T = any> {
+    toDeny: () => T;
+    toAllow: () => T;
+  }
+  interface AsymmetricMatchersContaining {
+    toDeny: () => void;
+    toAllow: () => void;
   }
 }

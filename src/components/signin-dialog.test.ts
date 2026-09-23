@@ -1,6 +1,5 @@
 import { Failure, Initialized } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { mergeAccounts, signIn } from '../store/auth';
@@ -10,24 +9,24 @@ import { PROVIDER } from '../utils/providers';
 import type { SigninDialog } from './signin-dialog';
 import './signin-dialog';
 
-jest.mock('../store/auth', () => ({
+vi.mock('../store/auth', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/auth')>('../store/auth'),
-  mergeAccounts: jest.fn(),
-  signIn: jest.fn(),
+  ...(await importOriginal<typeof import('../store/auth')>()),
+  mergeAccounts: vi.fn(),
+  signIn: vi.fn(),
 }));
 
-jest.mock('../store/dialogs', () => ({
+vi.mock('../store/dialogs', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
-  closeDialog: jest.fn(),
-  openSigninDialog: jest.fn(),
+  ...(await importOriginal<typeof import('../store/dialogs')>()),
+  closeDialog: vi.fn(),
+  openSigninDialog: vi.fn(),
 }));
 
-const mockMergeAccounts = mocked(mergeAccounts);
-const mockSignIn = mocked(signIn);
-const mockCloseDialog = mocked(closeDialog);
-const mockOpenSigninDialog = mocked(openSigninDialog);
+const mockMergeAccounts = vi.mocked(mergeAccounts);
+const mockSignIn = vi.mocked(signIn);
+const mockCloseDialog = vi.mocked(closeDialog);
+const mockOpenSigninDialog = vi.mocked(openSigninDialog);
 
 describe('signin-dialog', () => {
   it('defines a component', () => {

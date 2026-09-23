@@ -1,5 +1,4 @@
-import { afterEach, beforeAll, describe, expect, it } from '@jest/globals';
-import { Spied, spyOn } from 'jest-mock';
+import { afterEach, beforeAll, describe, expect, it, MockInstance, vi } from 'vitest';
 import { share } from './share';
 
 type Open = (
@@ -9,7 +8,7 @@ type Open = (
 ) => Window | null;
 
 describe('share', () => {
-  let open: Spied<Open>;
+  let open: MockInstance<Open>;
   const features = (height: number) =>
     `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=600,height=${height}`;
   const twitterUrl = [
@@ -19,7 +18,7 @@ describe('share', () => {
 
   beforeAll(() => {
     document.title = 'Awesome Schedule';
-    open = spyOn(window, 'open').mockImplementation(() => null);
+    open = vi.spyOn(window, 'open').mockImplementation(() => null);
   });
 
   afterEach(() => {

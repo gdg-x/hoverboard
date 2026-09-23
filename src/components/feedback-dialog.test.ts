@@ -1,5 +1,4 @@
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Session } from '../models/session';
@@ -8,13 +7,13 @@ import { feedback } from '../utils/data';
 import type { FeedbackDialog } from './feedback-dialog';
 import './feedback-dialog';
 
-jest.mock('../store/dialogs', () => ({
+vi.mock('../store/dialogs', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/dialogs')>('../store/dialogs'),
-  closeDialog: jest.fn(),
+  ...(await importOriginal<typeof import('../store/dialogs')>()),
+  closeDialog: vi.fn(),
 }));
 
-const mockCloseDialog = mocked(closeDialog);
+const mockCloseDialog = vi.mocked(closeDialog);
 
 const session: Session = {
   id: 'session-1',
@@ -59,7 +58,7 @@ describe('feedback-dialog', () => {
     const dialog = shadowRoot.querySelector('hoverboard-dialog') as HTMLElement & {
       close: () => void;
     };
-    dialog.close = jest.fn();
+    dialog.close = vi.fn();
 
     shadowRoot.querySelector<HTMLElement>('md-outlined-button')!.click();
 

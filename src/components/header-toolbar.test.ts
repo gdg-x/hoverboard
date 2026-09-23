@@ -1,17 +1,17 @@
 import { Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { navigation, signIn, signOut as signOutText } from '../utils/data';
 import type { HeaderToolbar } from './header-toolbar';
 
-jest.mock('../router', () => ({
-  selectRouteName: jest.fn(() => 'home'),
+vi.mock('../router', () => ({
+  selectRouteName: vi.fn(() => 'home'),
 }));
-jest.mock('../store/auth', () => ({
+vi.mock('../store/auth', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/auth')>('../store/auth'),
-  signOut: jest.fn(),
+  ...(await importOriginal<typeof import('../store/auth')>()),
+  signOut: vi.fn(),
 }));
 
 import './header-toolbar';
@@ -86,7 +86,7 @@ describe('header-toolbar', () => {
     const { element, shadowRoot } = await fixture<HeaderToolbar>(
       html`<header-toolbar></header-toolbar>`,
     );
-    const listener = jest.fn();
+    const listener = vi.fn();
     element.addEventListener('drawer-opened-changed', listener);
 
     shadowRoot.querySelector<HTMLElement>('.icon-button[aria-label="menu"]')!.click();

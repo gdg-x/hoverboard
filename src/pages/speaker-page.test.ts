@@ -1,6 +1,5 @@
 import { Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
-import { mocked } from 'jest-mock';
+import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { SpeakerWithTags } from '../models/speaker';
@@ -10,15 +9,15 @@ import { updateImageMetadata } from '../utils/metadata';
 import './speaker-page';
 import { SpeakerPage } from './speaker-page';
 
-jest.mock('../utils/metadata');
-jest.mock('../utils/scrolling', () => ({
-  scrollToTop: jest.fn(),
+vi.mock('../utils/metadata');
+vi.mock('../utils/scrolling', () => ({
+  scrollToTop: vi.fn(),
 }));
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn(), render: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn(), render: vi.fn() },
 }));
-jest.mock('../store/speakers/selectors', () => ({
-  selectSpeaker: jest.fn(),
+vi.mock('../store/speakers/selectors', () => ({
+  selectSpeaker: vi.fn(),
 }));
 
 const speaker: SpeakerWithTags = {
@@ -53,8 +52,8 @@ describe('speaker-page', () => {
   });
 
   it('resolves the speaker from the route and updates metadata', async () => {
-    const mockSelectSpeaker = selectSpeaker as jest.MockedFunction<typeof selectSpeaker>;
-    const mockUpdateMetadata = jest.mocked(updateImageMetadata);
+    const mockSelectSpeaker = selectSpeaker as MockedFunction<typeof selectSpeaker>;
+    const mockUpdateMetadata = vi.mocked(updateImageMetadata);
     mockSelectSpeaker.mockReturnValue(speaker);
     mockUpdateMetadata.mockClear();
 
@@ -74,9 +73,9 @@ describe('speaker-page', () => {
   });
 
   it('redirects to 404 when the speaker cannot be found', async () => {
-    const mockSelectSpeaker = selectSpeaker as jest.MockedFunction<typeof selectSpeaker>;
+    const mockSelectSpeaker = selectSpeaker as MockedFunction<typeof selectSpeaker>;
     mockSelectSpeaker.mockReturnValue(undefined);
-    mocked(router).render.mockClear();
+    vi.mocked(router).render.mockClear();
 
     const { element } = await fixture<SpeakerPage>(html`<speaker-page></speaker-page>`);
     element.speakers = new Success([speaker]);
@@ -87,7 +86,7 @@ describe('speaker-page', () => {
   });
 
   it('renders an empty additional-sessions section when no sessions are supplied', async () => {
-    const mockSelectSpeaker = selectSpeaker as jest.MockedFunction<typeof selectSpeaker>;
+    const mockSelectSpeaker = selectSpeaker as MockedFunction<typeof selectSpeaker>;
     mockSelectSpeaker.mockReturnValue(speaker);
 
     const { element, shadowRoot } = await fixture<SpeakerPage>(html`<speaker-page></speaker-page>`);
@@ -99,7 +98,7 @@ describe('speaker-page', () => {
   });
 
   it('renders additional sessions when the speaker data supplies them', async () => {
-    const mockSelectSpeaker = selectSpeaker as jest.MockedFunction<typeof selectSpeaker>;
+    const mockSelectSpeaker = selectSpeaker as MockedFunction<typeof selectSpeaker>;
     const speakerWithSessions = {
       ...speaker,
       sessions: [

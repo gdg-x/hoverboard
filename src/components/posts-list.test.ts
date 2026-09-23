@@ -1,17 +1,16 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { screen, within } from '@testing-library/dom';
-import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Post } from '../models/post';
 import { router } from '../router';
 import './posts-list';
 
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn() },
 }));
 
-const mockUrlForName = mocked(router.urlForName);
+const mockUrlForName = vi.mocked(router.urlForName);
 
 const posts: Post[] = [
   {

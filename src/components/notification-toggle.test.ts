@@ -1,5 +1,5 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { updateNotificationsSubscribers } from '../store/update-notifications-subscribers';
@@ -8,12 +8,10 @@ import type { NotificationToggle } from './notification-toggle';
 
 import './notification-toggle';
 
-jest.mock('../store/update-notifications-subscribers', () => ({
+vi.mock('../store/update-notifications-subscribers', async (importOriginal) => ({
   __esModule: true,
-  ...jest.requireActual<typeof import('../store/update-notifications-subscribers')>(
-    '../store/update-notifications-subscribers',
-  ),
-  updateNotificationsSubscribers: jest.fn(),
+  ...(await importOriginal<typeof import('../store/update-notifications-subscribers')>()),
+  updateNotificationsSubscribers: vi.fn(),
 }));
 
 describe('notification-toggle', () => {
@@ -112,7 +110,7 @@ describe('notification-toggle', () => {
   });
 
   it('toggles general notifications on and off', async () => {
-    const mockUpdateNotificationsSubscribers = jest.mocked(updateNotificationsSubscribers);
+    const mockUpdateNotificationsSubscribers = vi.mocked(updateNotificationsSubscribers);
     const { element, shadowRoot } = await fixture<NotificationToggle>(
       html`<notification-toggle></notification-toggle>`,
     );

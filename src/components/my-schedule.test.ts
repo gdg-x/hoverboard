@@ -1,4 +1,4 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Day } from '../models/day';
@@ -6,8 +6,8 @@ import type { MySchedule } from './my-schedule';
 import './my-schedule';
 import type { ScheduleDay } from './schedule-day';
 
-jest.mock('../router', () => ({
-  router: { urlForName: jest.fn() },
+vi.mock('../router', () => ({
+  router: { urlForName: vi.fn() },
 }));
 
 const days: Day[] = [

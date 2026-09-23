@@ -1,15 +1,14 @@
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, screen } from '@testing-library/dom';
-import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { emailUs, mailto, organizer, socialNetwork } from '../utils/data';
 import { share } from '../utils/share';
 import './footer-social';
 
-jest.mock('../utils/share');
+vi.mock('../utils/share');
 
-const mockShare = mocked(share);
+const mockShare = vi.mocked(share);
 
 describe('footer-social', () => {
   beforeEach(() => {

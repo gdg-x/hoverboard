@@ -1,11 +1,11 @@
-import { afterEach, describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { HoverboardDialog } from './hoverboard-dialog';
 import './hoverboard-dialog';
 
 afterEach(() => {
-  jest.restoreAllMocks();
+  vi.restoreAllMocks();
 });
 
 describe('hoverboard-dialog', () => {
@@ -42,7 +42,7 @@ describe('hoverboard-dialog', () => {
     const dialog = shadowRoot.querySelector('dialog')! as HTMLDialogElement & {
       showModal: () => void;
     };
-    const showModal = jest.fn(() => dialog.setAttribute('open', ''));
+    const showModal = vi.fn(() => dialog.setAttribute('open', ''));
     dialog.showModal = showModal;
 
     element.open = true;
@@ -58,7 +58,7 @@ describe('hoverboard-dialog', () => {
     );
     element.open = true;
     await element.updateComplete;
-    const closedHandler = jest.fn();
+    const closedHandler = vi.fn();
     element.addEventListener('closed', closedHandler);
 
     element.close();
@@ -74,7 +74,7 @@ describe('hoverboard-dialog', () => {
     );
     element.open = true;
     await element.updateComplete;
-    const closedHandler = jest.fn();
+    const closedHandler = vi.fn();
     element.addEventListener('closed', closedHandler);
 
     shadowRoot.querySelector('dialog')!.dispatchEvent(new Event('close'));
@@ -90,7 +90,7 @@ describe('hoverboard-dialog', () => {
     element.open = true;
     await element.updateComplete;
     const dialog = shadowRoot.querySelector('dialog')!;
-    dialog.getBoundingClientRect = jest.fn(() => ({
+    dialog.getBoundingClientRect = vi.fn(() => ({
       top: 100,
       left: 100,
       width: 200,
@@ -101,7 +101,7 @@ describe('hoverboard-dialog', () => {
       y: 100,
       toJSON: () => '',
     }));
-    const closedHandler = jest.fn();
+    const closedHandler = vi.fn();
     element.addEventListener('closed', closedHandler);
 
     dialog.dispatchEvent(new MouseEvent('click', { clientX: 10, clientY: 10 }));
@@ -116,7 +116,7 @@ describe('hoverboard-dialog', () => {
     element.open = true;
     await element.updateComplete;
     const dialog = shadowRoot.querySelector('dialog')!;
-    dialog.getBoundingClientRect = jest.fn(() => ({
+    dialog.getBoundingClientRect = vi.fn(() => ({
       top: 100,
       left: 100,
       width: 200,
@@ -127,7 +127,7 @@ describe('hoverboard-dialog', () => {
       y: 100,
       toJSON: () => '',
     }));
-    const closedHandler = jest.fn();
+    const closedHandler = vi.fn();
     element.addEventListener('closed', closedHandler);
 
     dialog.dispatchEvent(new MouseEvent('click', { clientX: 150, clientY: 150 }));
