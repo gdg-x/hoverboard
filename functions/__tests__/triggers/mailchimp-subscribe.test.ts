@@ -1,10 +1,11 @@
 import { getFirestore } from 'firebase-admin/firestore';
-import * as functions from 'firebase-functions';
+import * as logger from 'firebase-functions/logger';
 import fetch from 'node-fetch';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { mailchimpSubscribe } from '../../src/triggers/mailchimp-subscribe';
 
 vi.mock('firebase-admin/firestore');
+vi.mock('firebase-functions/logger');
 vi.mock('node-fetch');
 
 const mockConfigDoc = (data: Record<string, unknown> | undefined) => {
@@ -36,12 +37,12 @@ describe('mailchimpSubscribe', () => {
   it('subscribes a new user to the configured Mailchimp list', async () => {
     mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
     mockFetchResponse({ status: 'subscribed' });
-    const logSpy = vi.spyOn(functions.logger, 'log').mockImplementation(() => undefined);
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
-    await mailchimpSubscribe.run(
-      mockSnapshot({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }) as never,
-      {} as never,
-    );
+    await mailchimpSubscribe.run({
+      data: mockSnapshot({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }),
+      params: {},
+    } as never);
 
     expect(fetch).toHaveBeenCalledWith(
       'https://us1.api.mailchimp.com/3.0/lists/abc123/members',
@@ -65,12 +66,12 @@ describe('mailchimpSubscribe', () => {
         json: () => Promise.resolve({ status: 400, title: 'Member Exists' }),
       } as never)
       .mockResolvedValueOnce({ json: () => Promise.resolve({ status: 'updated' }) } as never);
-    const logSpy = vi.spyOn(functions.logger, 'log').mockImplementation(() => undefined);
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
-    await mailchimpSubscribe.run(
-      mockSnapshot({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }) as never,
-      {} as never,
-    );
+    await mailchimpSubscribe.run({
+      data: mockSnapshot({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }),
+      params: {},
+    } as never);
 
     expect(fetch).toHaveBeenCalledTimes(2);
     const [secondUrl, secondOptions] = vi.mocked(fetch).mock.calls[1]!;
@@ -84,12 +85,12 @@ describe('mailchimpSubscribe', () => {
   it('logs an error and still attempts to subscribe when the Mailchimp config is missing', async () => {
     mockConfigDoc(undefined);
     mockFetchResponse({ status: 'subscribed' });
-    const errorLogSpy = vi.spyOn(functions.logger, 'log').mockImplementation(() => undefined);
+    const errorLogSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
-    await mailchimpSubscribe.run(
-      mockSnapshot({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }) as never,
-      {} as never,
-    );
+    await mailchimpSubscribe.run({
+      data: mockSnapshot({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }),
+      params: {},
+    } as never);
 
     expect(errorLogSpy).toHaveBeenCalledWith("Can't subscribe user, Mailchimp config is empty.");
   });
@@ -97,12 +98,12 @@ describe('mailchimpSubscribe', () => {
   it('logs an error when the Mailchimp request fails', async () => {
     mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
     vi.mocked(fetch).mockRejectedValue(new Error('network down'));
-    const errorSpy = vi.spyOn(functions.logger, 'error').mockImplementation(() => undefined);
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    await mailchimpSubscribe.run(
-      mockSnapshot({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }) as never,
-      {} as never,
-    );
+    await mailchimpSubscribe.run({
+      data: mockSnapshot({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }),
+      params: {},
+    } as never);
 
     expect(errorSpy).toHaveBeenCalledWith(
       expect.stringContaining('Error occured during Mailchimp subscription:'),

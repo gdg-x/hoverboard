@@ -4,7 +4,8 @@ import { DocumentData, DocumentSnapshot, getFirestore } from 'firebase-admin/fir
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
 import { getMessaging, MessagingPayload } from 'firebase-admin/messaging';
-import * as functions from 'firebase-functions';
+import * as logger from 'firebase-functions/logger';
+import { onSchedule } from 'firebase-functions/v2/scheduler';
 import {
   createTimeWindow,
   filterUpcomingTimeslots,
@@ -45,12 +46,7 @@ const removeUserTokens = (tokensToUsers) => {
 };
 
 const sendPushNotificationToUsers = async (userIds: string[], payload: MessagingPayload) => {
-  functions.logger.log(
-    'sendPushNotificationToUsers user ids',
-    userIds,
-    'with notification',
-    payload,
-  );
+  logger.log('sendPushNotificationToUsers user ids', userIds, 'with notification', payload);
 
   const tokensPromise = userIds.map((id) => {
     return getFirestore().collection('notificationsUsers').doc(id).get();
@@ -69,7 +65,7 @@ const sendPushNotificationToUsers = async (userIds: string[], payload: Messaging
   messagingResponse.results.forEach((result, index) => {
     const error = result.error;
     if (error) {
-      functions.logger.error('Failure sending notification to', tokens[index], error);
+      logger.error('Failure sending notification to', tokens[index], error);
       if (
         error.code === 'messaging/invalid-registration-token' ||
         error.code === 'messaging/registration-token-not-registered'
@@ -83,96 +79,91 @@ const sendPushNotificationToUsers = async (userIds: string[], payload: Messaging
   return removeUserTokens(tokensToRemove);
 };
 
-export const scheduleNotifications = functions.pubsub
-  .schedule('every 5 minutes')
-  .onRun(async () => {
-    const notificationsConfigPromise = getFirestore()
-      .collection('config')
-      .doc('notifications')
-      .get();
-    const schedulePromise = getFirestore().collection('schedule').get();
+export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
+  const notificationsConfigPromise = getFirestore().collection('config').doc('notifications').get();
+  const schedulePromise = getFirestore().collection('schedule').get();
 
-    const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([
-      notificationsConfigPromise,
-      schedulePromise,
-    ]);
-    const notificationsConfig = notificationsConfigSnapshot.exists
-      ? notificationsConfigSnapshot.data()
-      : {};
+  const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([
+    notificationsConfigPromise,
+    schedulePromise,
+  ]);
+  const notificationsConfig = notificationsConfigSnapshot.exists
+    ? notificationsConfigSnapshot.data()
+    : {};
 
-    const schedule = scheduleSnapshot.docs.reduce(
-      (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
-      {},
+  const schedule = scheduleSnapshot.docs.reduce(
+    (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
+    {},
+  );
+  const todayDay = getTodayDateString(notificationsConfig.timezone);
+
+  if (schedule[todayDay]) {
+    const timeWindow = createTimeWindow(3, 3);
+
+    const upcomingTimeslot = filterUpcomingTimeslots(
+      schedule[todayDay].timeslots,
+      timeWindow,
+      10, // notification offset in minutes
+      notificationsConfig.timezone,
     );
-    const todayDay = getTodayDateString(notificationsConfig.timezone);
 
-    if (schedule[todayDay]) {
-      const timeWindow = createTimeWindow(3, 3);
+    const upcomingSessions = upcomingTimeslot.reduce(
+      (result, timeslot) =>
+        timeslot.sessions.reduce(
+          (aggregatedSessions, current) => [...aggregatedSessions, ...current.items],
+          result,
+        ),
+      [],
+    );
+    const usersIdsSnapshot = await getFirestore().collection('featuredSessions').get();
 
-      const upcomingTimeslot = filterUpcomingTimeslots(
-        schedule[todayDay].timeslots,
-        timeWindow,
-        10, // notification offset in minutes
+    upcomingSessions.forEach(async (upcomingSession, sessionIndex) => {
+      const sessionInfoSnapshot = await getFirestore()
+        .collection('sessions')
+        .doc(upcomingSession)
+        .get();
+      if (!sessionInfoSnapshot.exists) return undefined;
+
+      const usersIds = usersIdsSnapshot.docs.reduce(
+        (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
+        {},
+      );
+
+      const userIdsFeaturedSession = Object.keys(usersIds).filter(
+        (userId) =>
+          !!Object.keys(usersIds[userId]).filter(
+            (sessionId) => sessionId.toString() === upcomingSession.toString(),
+          ).length,
+      );
+
+      const session = sessionInfoSnapshot.data();
+      const fromNow = parseTimeAndGetFromNow(
+        upcomingTimeslot[0].startTime,
         notificationsConfig.timezone,
       );
 
-      const upcomingSessions = upcomingTimeslot.reduce(
-        (result, timeslot) =>
-          timeslot.sessions.reduce(
-            (aggregatedSessions, current) => [...aggregatedSessions, ...current.items],
-            result,
-          ),
-        [],
-      );
-      const usersIdsSnapshot = await getFirestore().collection('featuredSessions').get();
+      if (userIdsFeaturedSession.length) {
+        const payload: MessagingPayload = {
+          data: {
+            title: session.title,
+            body: `Starts ${fromNow}`,
+            icon: notificationsConfig.icon,
+            path: `/sessions/${upcomingSessions[sessionIndex]}`,
+          },
+        };
 
-      upcomingSessions.forEach(async (upcomingSession, sessionIndex) => {
-        const sessionInfoSnapshot = await getFirestore()
-          .collection('sessions')
-          .doc(upcomingSession)
-          .get();
-        if (!sessionInfoSnapshot.exists) return undefined;
+        return sendPushNotificationToUsers(userIdsFeaturedSession, payload);
+      }
 
-        const usersIds = usersIdsSnapshot.docs.reduce(
-          (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
-          {},
-        );
+      if (upcomingSessions.length) {
+        logger.log('Upcoming sessions', upcomingSessions);
+      } else {
+        logger.log('There is no sessions right now');
+      }
 
-        const userIdsFeaturedSession = Object.keys(usersIds).filter(
-          (userId) =>
-            !!Object.keys(usersIds[userId]).filter(
-              (sessionId) => sessionId.toString() === upcomingSession.toString(),
-            ).length,
-        );
-
-        const session = sessionInfoSnapshot.data();
-        const fromNow = parseTimeAndGetFromNow(
-          upcomingTimeslot[0].startTime,
-          notificationsConfig.timezone,
-        );
-
-        if (userIdsFeaturedSession.length) {
-          const payload: MessagingPayload = {
-            data: {
-              title: session.title,
-              body: `Starts ${fromNow}`,
-              icon: notificationsConfig.icon,
-              path: `/sessions/${upcomingSessions[sessionIndex]}`,
-            },
-          };
-
-          return sendPushNotificationToUsers(userIdsFeaturedSession, payload);
-        }
-
-        if (upcomingSessions.length) {
-          functions.logger.log('Upcoming sessions', upcomingSessions);
-        } else {
-          functions.logger.log('There is no sessions right now');
-        }
-
-        return undefined;
-      });
-    } else {
-      functions.logger.log(todayDay, 'was not found in the schedule');
-    }
-  });
+      return undefined;
+    });
+  } else {
+    logger.log(todayDay, 'was not found in the schedule');
+  }
+});

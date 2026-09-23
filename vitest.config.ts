@@ -22,6 +22,7 @@ export default defineConfig({
         test: {
           name: 'Functions',
           environment: 'node',
+          setupFiles: ['./functions/__tests__/functions.setup.ts'],
           include: ['functions/**/*.test.ts'],
         },
       },
