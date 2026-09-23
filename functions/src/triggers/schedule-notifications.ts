@@ -3,7 +3,7 @@
 import { DocumentData, DocumentSnapshot, getFirestore } from 'firebase-admin/firestore';
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
-import { getMessaging, MessagingPayload } from 'firebase-admin/messaging';
+import { getMessaging, MulticastMessage } from 'firebase-admin/messaging';
 import * as logger from 'firebase-functions/logger';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import {
@@ -45,8 +45,8 @@ const removeUserTokens = (tokensToUsers) => {
   return Promise.all(promises);
 };
 
-const sendPushNotificationToUsers = async (userIds: string[], payload: MessagingPayload) => {
-  logger.log('sendPushNotificationToUsers user ids', userIds, 'with notification', payload);
+const sendPushNotificationToUsers = async (userIds: string[], data: MulticastMessage['data']) => {
+  logger.log('sendPushNotificationToUsers user ids', userIds, 'with notification', data);
 
   const tokensPromise = userIds.map((id) => {
     return getFirestore().collection('notificationsUsers').doc(id).get();
@@ -61,8 +61,8 @@ const sendPushNotificationToUsers = async (userIds: string[], payload: Messaging
   const tokens = Object.keys(tokensToUsers);
 
   const tokensToRemove = {};
-  const messagingResponse = await getMessaging().sendToDevice(tokens, payload);
-  messagingResponse.results.forEach((result, index) => {
+  const messagingResponse = await getMessaging().sendEachForMulticast({ tokens, data });
+  messagingResponse.responses.forEach((result, index) => {
     const error = result.error;
     if (error) {
       logger.error('Failure sending notification to', tokens[index], error);
@@ -143,16 +143,14 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
       );
 
       if (userIdsFeaturedSession.length) {
-        const payload: MessagingPayload = {
-          data: {
-            title: session.title,
-            body: `Starts ${fromNow}`,
-            icon: notificationsConfig.icon,
-            path: `/sessions/${upcomingSessions[sessionIndex]}`,
-          },
+        const data: MulticastMessage['data'] = {
+          title: session.title,
+          body: `Starts ${fromNow}`,
+          icon: notificationsConfig.icon,
+          path: `/sessions/${upcomingSessions[sessionIndex]}`,
         };
 
-        return sendPushNotificationToUsers(userIdsFeaturedSession, payload);
+        return sendPushNotificationToUsers(userIdsFeaturedSession, data);
       }
 
       if (upcomingSessions.length) {

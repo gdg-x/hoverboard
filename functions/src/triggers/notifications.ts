@@ -3,7 +3,7 @@
 import { getFirestore } from 'firebase-admin/firestore';
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
-import { getMessaging, MessagingPayload } from 'firebase-admin/messaging';
+import { getMessaging, MulticastMessage } from 'firebase-admin/messaging';
 import * as logger from 'firebase-functions/logger';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 
@@ -44,7 +44,8 @@ export const sendGeneralNotification = onDocumentCreated(
     }
     logger.log(`There are ${tokens.length} tokens to send notifications to.`);
 
-    const payload: MessagingPayload = {
+    const multicastMessage: MulticastMessage = {
+      tokens,
       data: {
         title: message.title,
         body: message.body,
@@ -53,12 +54,12 @@ export const sendGeneralNotification = onDocumentCreated(
     };
 
     if (message.path) {
-      payload.data.path = message.path;
+      multicastMessage.data.path = message.path;
     }
 
     const tokensToRemove = [];
-    const messagingResponse = await getMessaging().sendToDevice(tokens, payload);
-    messagingResponse.results.forEach((result, index) => {
+    const messagingResponse = await getMessaging().sendEachForMulticast(multicastMessage);
+    messagingResponse.responses.forEach((result, index) => {
       const error = result.error;
       if (error) {
         logger.error(`Failure sending notification to ${tokens[index]}`, error);

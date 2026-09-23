@@ -98,14 +98,14 @@ const mockFirestore = ({
   return { runTransaction, transactionGet, transactionSet };
 };
 
-const mockMessaging = (results: Array<Record<string, unknown>> = [{}]) => {
-  const sendToDevice = vi.fn().mockResolvedValue({ results });
+const mockMessaging = (responses: Array<Record<string, unknown>> = [{ success: true }]) => {
+  const sendEachForMulticast = vi.fn().mockResolvedValue({ responses });
 
   vi.mocked(getMessaging).mockReturnValue({
-    sendToDevice,
+    sendEachForMulticast,
   } as never);
 
-  return { sendToDevice };
+  return { sendEachForMulticast };
 };
 
 beforeAll(() => {
@@ -132,14 +132,14 @@ describe('scheduleNotifications', () => {
       notificationsConfig: { timezone: '+00:00', icon: 'https://example.com/icon.png' },
       scheduleDocs: [{ id: '2025-06-23', data: { timeslots: [] } }],
     });
-    const { sendToDevice } = mockMessaging();
+    const { sendEachForMulticast } = mockMessaging();
     const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
     await scheduleNotifications.run(undefined as never);
     await flushAsyncCallbacks();
 
     expect(logSpy).toHaveBeenCalledWith('2025-06-22', 'was not found in the schedule');
-    expect(sendToDevice).not.toHaveBeenCalled();
+    expect(sendEachForMulticast).not.toHaveBeenCalled();
   });
 
   it('does not send notifications when no timeslots are currently upcoming', async () => {
@@ -157,13 +157,13 @@ describe('scheduleNotifications', () => {
       sessionDocs: { 'session-1': { title: 'Keynote' } },
       notificationsUsersDocs: { 'user-1': { tokens: ['device-token-1'] } },
     });
-    const { sendToDevice } = mockMessaging();
+    const { sendEachForMulticast } = mockMessaging();
     const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
     await scheduleNotifications.run(undefined as never);
     await flushAsyncCallbacks();
 
-    expect(sendToDevice).not.toHaveBeenCalled();
+    expect(sendEachForMulticast).not.toHaveBeenCalled();
     expect(logSpy).not.toHaveBeenCalled();
   });
 
@@ -181,14 +181,14 @@ describe('scheduleNotifications', () => {
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-2': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
     });
-    const { sendToDevice } = mockMessaging();
+    const { sendEachForMulticast } = mockMessaging();
     const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
     await scheduleNotifications.run(undefined as never);
     await flushAsyncCallbacks();
 
     expect(logSpy).toHaveBeenCalledWith('Upcoming sessions', ['session-1']);
-    expect(sendToDevice).not.toHaveBeenCalled();
+    expect(sendEachForMulticast).not.toHaveBeenCalled();
   });
 
   it('sends a push notification for a featured upcoming session', async () => {
@@ -206,12 +206,13 @@ describe('scheduleNotifications', () => {
       sessionDocs: { 'session-1': { title: 'Keynote' } },
       notificationsUsersDocs: { 'user-1': { tokens: ['device-token-1'] } },
     });
-    const { sendToDevice } = mockMessaging();
+    const { sendEachForMulticast } = mockMessaging();
 
     await scheduleNotifications.run(undefined as never);
     await flushAsyncCallbacks();
 
-    expect(sendToDevice).toHaveBeenCalledWith(['tokens'], {
+    expect(sendEachForMulticast).toHaveBeenCalledWith({
+      tokens: ['tokens'],
       data: {
         title: 'Keynote',
         body: 'Starts in 10 minutes',
@@ -239,7 +240,7 @@ describe('scheduleNotifications', () => {
         'device-token-1': { tokens: ['device-token-1'], keepToken: true },
       },
     });
-    mockMessaging([{ error: { code: 'messaging/invalid-registration-token' } }]);
+    mockMessaging([{ success: false, error: { code: 'messaging/invalid-registration-token' } }]);
     const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
     await scheduleNotifications.run(undefined as never);
