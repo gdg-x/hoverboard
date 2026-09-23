@@ -43,7 +43,9 @@ describe('selectFilters', () => {
   });
 
   it('parses and dispatches the default filters, returning an empty array, when uninitialized', () => {
-    vi.mocked(parseFilters).mockReturnValue([{ group: FilterGroupKey.complexity, tag: 'beginner' }]);
+    vi.mocked(parseFilters).mockReturnValue([
+      { group: FilterGroupKey.complexity, tag: 'beginner' },
+    ]);
     const state = { filters: new Initialized() } as unknown as RootState;
 
     expect(selectFilters(state)).toStrictEqual([]);

@@ -16,7 +16,9 @@ describe('selectFeaturedSchedule', () => {
           {
             startTime: '09:00',
             endTime: '10:00',
-            sessions: [{ items: [{ id: 'featured' }, { id: 'not-featured' }] as unknown as Session[] }],
+            sessions: [
+              { items: [{ id: 'featured' }, { id: 'not-featured' }] as unknown as Session[] },
+            ],
           },
         ],
       },
