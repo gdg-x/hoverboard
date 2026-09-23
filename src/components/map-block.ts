@@ -1,5 +1,5 @@
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { initialUiState } from '../store/ui';
@@ -68,10 +68,9 @@ export class MapBlock extends ReduxMixin(ThemedElement) {
   private mapCenter = `${location.mapCenter.latitude},${location.mapCenter.longitude}`;
   private markerPosition = `${location.pointer.latitude},${location.pointer.longitude}`;
 
-  @property({ type: Object })
+  @state()
   private viewport = initialUiState.viewport;
 
-  @property({ type: Object })
   private option = {
     disableDefaultUI: true,
     disableDoubleClickZoom: true,

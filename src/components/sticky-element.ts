@@ -1,5 +1,5 @@
 import { css, html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, query, state } from 'lit/decorators.js';
 import { ThemedElement } from './themed-element';
 
 @customElement('sticky-element')
@@ -51,15 +51,15 @@ export class StickyElement extends ThemedElement {
   @query('#trigger')
   trigger!: HTMLDivElement;
 
-  @property({ type: Boolean })
+  @state()
   private waiting = false;
 
-  @property({ type: Number })
+  @state()
   private endScrollHandle: number | undefined;
 
   override connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('scroll', this.onScroll);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
   }
 
   override disconnectedCallback() {

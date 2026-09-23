@@ -1,7 +1,9 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { RouterLocation } from '@vaadin/router';
 import { css, html, PropertyValues } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
+import { repeat } from 'lit/directives/repeat.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import { Day } from '../models/day';
 import { Filter } from '../models/filter';
 import { Session } from '../models/session';
@@ -113,13 +115,13 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
   @property({ type: Object })
   day: Day | undefined;
 
-  @property({ type: Object })
+  @state()
   private user: UserState = new Initialized();
-  @property({ type: Object })
+  @state()
   private featuredSessions: FeaturedSessionsState = new Initialized();
   @property({ type: Boolean })
   onlyFeatured = false;
-  @property({ type: Array })
+  @state()
   private selectedFilters: Filter[] = [];
 
   onAfterEnter(location: RouterLocation) {
@@ -143,17 +145,24 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
     }
   }
 
+  // The `<session-element .session="...">` binding below is flagged by lit-analyzer's
+  // no-incompatible-type-binding rule as a false positive: it reports the exact same
+  // intersection type (Session = Id & SessionData) as incompatible with itself when
+  // combined with exactOptionalPropertyTypes. tsc confirms the assignment is valid, so
+  // the rule is disabled project-wide via the `lint:lit-analyzer` script.
   override render() {
     const day = this.day;
 
     return html`
-      <div class="grid" style="--tracks-number: ${day?.tracks.length};">
-        ${day?.timeslots.map(
+      <div class="grid" style="${styleMap({ '--tracks-number': day?.tracks.length })}">
+        ${repeat(
+          day?.timeslots ?? [],
+          (timeslot) => timeslot.startTime,
           (timeslot, timeslotIndex) => html`
             <div
               id="${timeslot.startTime}"
               class="start-time"
-              style="grid-area: ${this.getTimePosition(timeslotIndex)}"
+              style="${styleMap({ 'grid-area': this.getTimePosition(timeslotIndex) })}"
             >
               <span class="hours">${this.splitText(timeslot.startTime, ':', 0)}</span>
               <span class="minutes">${this.splitText(timeslot.startTime, ':', 1)}</span>
@@ -161,11 +170,11 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
 
             <a
               class="add-session"
-              href="/schedule/${day.date}#${timeslot.startTime}"
+              href="/schedule/${day?.date}#${timeslot.startTime}"
               ?hidden="${!this.showAddSession(timeslot, this.onlyFeatured)}"
-              style="grid-area: ${
-                (timeslot.sessions[0] as GeneratedSessionBlock | undefined)?.gridArea
-              }"
+              style="${styleMap({
+                'grid-area': (timeslot.sessions[0] as GeneratedSessionBlock | undefined)?.gridArea,
+              })}"
               layout
               horizontal
               center-center
@@ -180,14 +189,18 @@ export class ScheduleDay extends ReduxMixin(ThemedElement) {
                 (sessionBlock) => html`
                   <div
                     class="session"
-                    style="grid-area: ${(sessionBlock as GeneratedSessionBlock).gridArea}"
+                    style="${styleMap({
+                      'grid-area': (sessionBlock as GeneratedSessionBlock).gridArea,
+                    })}"
                     layout
                     vertical
                   >
-                    ${this.filterSessions(
-                      (sessionBlock as GeneratedSessionBlock).items,
-                      this.selectedFilters,
-                    ).map(
+                    ${repeat(
+                      this.filterSessions(
+                        (sessionBlock as GeneratedSessionBlock).items,
+                        this.selectedFilters,
+                      ),
+                      (subSession) => subSession.id,
                       (subSession) => html`
                         <session-element
                           class="subsession"

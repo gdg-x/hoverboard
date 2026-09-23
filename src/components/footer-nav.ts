@@ -1,5 +1,5 @@
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import '@power-elements/lazy-image';
 import { codeOfConduct, organizer } from '../utils/data';
 import { ThemedElement } from '../components/themed-element';
@@ -93,9 +93,7 @@ export class FooterNav extends ThemedElement {
     `;
   }
 
-  @property({ type: Object })
   private organizer = organizer;
 
-  @property()
   private codeOfConduct = codeOfConduct;
 }

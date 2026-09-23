@@ -2,6 +2,7 @@ import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
 import { css, html, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { ClickOutsideController } from '../controllers/click-outside-controller';
 import { Hero } from '../models/hero';
 import { selectRouteName } from '../router';
 import { RootState } from '../store';
@@ -66,6 +67,7 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
           background-color: var(--default-primary-color);
           transition: background-color var(--animation);
           -webkit-mask: url('/images/logo-monochrome.svg') no-repeat;
+          mask: url('/images/logo-monochrome.svg') no-repeat;
         }
 
         .nav-items {
@@ -216,6 +218,9 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
   private signedIn = false;
   @state()
   private user: UserState = new Initialized();
+  // Intentionally @property (not @state): `reflect` is required so the
+  // `:host([transparent])` CSS selector can style the host, and @state
+  // does not support reflection.
   @property({ type: Boolean, reflect: true })
   private transparent = false;
   @state()
@@ -225,10 +230,9 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
   @state()
   private profileMenuOpened = false;
 
-  constructor() {
-    super();
-    this.clickOutsideListener = this.clickOutsideListener.bind(this);
-  }
+  private readonly clickOutsideController = new ClickOutsideController(this, () =>
+    this.closeProfileMenu(),
+  );
 
   override stateChanged(state: RootState) {
     this.user = state.user;
@@ -243,14 +247,13 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
   override connectedCallback() {
     super.connectedCallback();
     this.onScroll = this.onScroll.bind(this);
-    window.addEventListener('scroll', this.onScroll);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
     this.onScroll();
   }
 
   override disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('scroll', this.onScroll);
-    this.clickOutsideUnlisten();
   }
 
   override willUpdate(changedProperties: PropertyValues) {
@@ -433,32 +436,16 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
 
   private toggleProfileMenu() {
     if (this.profileMenuOpened) {
-      this.clickOutsideUnlisten();
+      this.clickOutsideController.stop();
     } else {
-      this.clickOutsideListen();
+      this.clickOutsideController.start();
     }
     this.profileMenuOpened = !this.profileMenuOpened;
   }
 
   private closeProfileMenu() {
-    this.clickOutsideUnlisten();
+    this.clickOutsideController.stop();
     this.profileMenuOpened = false;
-  }
-
-  private clickOutsideListen() {
-    this.clickOutsideUnlisten();
-    window.addEventListener('click', this.clickOutsideListener, false);
-  }
-
-  private clickOutsideUnlisten() {
-    window.removeEventListener('click', this.clickOutsideListener, false);
-  }
-
-  private clickOutsideListener(e: MouseEvent) {
-    const isOutside = !e.composedPath().find((path) => path === this);
-    if (isOutside) {
-      this.closeProfileMenu();
-    }
   }
 }
 

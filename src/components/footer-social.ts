@@ -1,6 +1,6 @@
 import '@material/web/iconbutton/icon-button.js';
 import { css, html, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { share } from '../utils/share';
 import {
   emailUs,
@@ -155,21 +155,13 @@ export class FooterSocial extends ThemedElement {
     ];
   }
 
-  @property({ type: Object })
   private socialNetwork = socialNetwork;
-  @property()
   private followOur = followOur;
-  @property()
   private followUs = followUs;
-  @property()
   private emailUs = emailUs;
-  @property()
   private mailto = mailto;
-  @property({ type: Object })
   private organizer = organizer;
-  @property({ type: Object })
   private footer = footer;
-  @property({ type: Boolean })
   private blogNewTab = organizer.blog.startsWith('http');
 
   override render() {

@@ -1,7 +1,7 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
 import { RouterLocation } from '@vaadin/router';
 import { css, html, PropertyValues } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { ScheduleState, selectScheduleState } from '../store/schedule';
@@ -82,7 +82,7 @@ export class HeaderBottomToolbar extends ReduxMixin(ThemedElement) {
   schedule: ScheduleState = new Initialized();
   @property({ type: Object })
   location: RouterLocation | undefined;
-  @property({ type: Boolean })
+  @state()
   private signedIn = false;
 
   override stateChanged(state: RootState) {

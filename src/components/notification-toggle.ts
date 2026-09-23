@@ -5,6 +5,7 @@ import { Switch } from '@material/mwc-switch';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
+import { ClickOutsideController } from '../controllers/click-outside-controller';
 import { RootState, store } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import {
@@ -104,10 +105,7 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
   @state()
   private opened = false;
 
-  constructor() {
-    super();
-    this.clickOutsideListener = this.clickOutsideListener.bind(this);
-  }
+  private readonly clickOutsideController = new ClickOutsideController(this, () => this.close());
 
   override connectedCallback() {
     super.connectedCallback();
@@ -122,11 +120,6 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
     } else {
       store.dispatch(unsupportedNotificationPermission());
     }
-  }
-
-  override disconnectedCallback() {
-    this.clickOutsideUnlisten();
-    super.disconnectedCallback();
   }
 
   override stateChanged(state: RootState) {
@@ -314,32 +307,16 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
 
   private toggleOpened() {
     if (this.opened) {
-      this.clickOutsideUnlisten();
+      this.clickOutsideController.stop();
     } else {
-      this.clickOutsideListen();
+      this.clickOutsideController.start();
     }
     this.opened = !this.opened;
   }
 
   private close() {
-    this.clickOutsideUnlisten();
+    this.clickOutsideController.stop();
     this.opened = false;
-  }
-
-  private clickOutsideListen() {
-    this.clickOutsideUnlisten();
-    window.addEventListener('click', this.clickOutsideListener, false);
-  }
-
-  private clickOutsideUnlisten() {
-    window.removeEventListener('click', this.clickOutsideListener, false);
-  }
-
-  private clickOutsideListener(e: MouseEvent) {
-    const isOutside = !e.composedPath().find((path) => path === this);
-    if (isOutside) {
-      this.close();
-    }
   }
 }
 

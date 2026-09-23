@@ -2,7 +2,7 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import '@power-elements/lazy-image';
 import { css, html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { Video } from '../models/video';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
@@ -146,9 +146,9 @@ export class FeaturedVideos extends ReduxMixin(ThemedElement) {
   @property({ type: Object })
   videos: VideosState = new Initialized();
 
-  @property({ type: Boolean })
+  @state()
   private leftArrowHidden = true;
-  @property({ type: Boolean })
+  @state()
   private rightArrowHidden = false;
 
   private get pending() {
