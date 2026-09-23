@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { within } from '@testing-library/dom';
@@ -76,6 +77,7 @@ describe('blog-list-page', () => {
   });
 
   it('renders featured posts and passes the complete list to posts-list', async () => {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     vi.mocked(router.urlForName).mockImplementation(
       (_name, params) => `/blog/${(params as { id: string }).id}`,
     );
@@ -112,14 +114,14 @@ describe('blog-list-page', () => {
     await element.updateComplete;
     expect(shadowRoot.querySelector('md-linear-progress')).toHaveAttribute('hidden');
     expect(shadowRoot.querySelectorAll('text-truncate')[1]).toHaveAttribute('lines', '2');
-    expect(shadowRoot.querySelector('a.featured-post')).not.toHaveAttribute('flex');
+    expect(shadowRoot.querySelector('a.featured-post')).not.toHaveClass('featured-post--flex');
 
     (element as unknown as { viewport: { isTabletPlus: boolean } }).viewport = {
       isTabletPlus: true,
     };
     await element.updateComplete;
     expect(shadowRoot.querySelectorAll('text-truncate')[1]).toHaveAttribute('lines', '3');
-    expect(shadowRoot.querySelector('a.featured-post')).toHaveAttribute('flex');
+    expect(shadowRoot.querySelector('a.featured-post')).toHaveClass('featured-post--flex');
   });
 
   it('renders the failure state and hides loaders', async () => {

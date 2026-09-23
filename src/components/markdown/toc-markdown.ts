@@ -25,6 +25,12 @@ export class TocMarkdown extends Markdown {
           overflow: hidden;
         }
 
+        .content {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+
         .col {
           font-size: 32px;
           line-height: 48px;
@@ -136,7 +142,7 @@ export class TocMarkdown extends Markdown {
     return html`
       <div class="content-wrapper">
         <div class="container">
-          <div class="content" layout justified horizontal wrap>
+          <div class="content">
             ${Object.keys(this.headerIds).map((headerId) =>
               this.renderHeader(headerId, this.headerIds[headerId]!),
             )}

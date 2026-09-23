@@ -31,6 +31,13 @@ export class FooterRel extends ThemedElement {
           margin-bottom: 10px;
         }
 
+        .col {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          flex: 1 1 auto;
+        }
+
         .nav {
           list-style: none;
           margin: 0;
@@ -73,7 +80,7 @@ export class FooterRel extends ThemedElement {
     return html`
       ${footerRelBlock.map(
         (footerRel) => html`
-          <div class="col" layout vertical wrap flex-auto>
+          <div class="col">
             <div class="col-heading">${footerRel.title}</div>
             <ul class="nav">
               ${footerRel.links.map(
@@ -93,7 +100,7 @@ export class FooterRel extends ThemedElement {
         `,
       )}
 
-      <div class="col" layout vertical flex-auto wrap>
+      <div class="col">
         <div class="col-heading">${notifications.subscribe}</div>
         <span>${subscribeNote}</span>
         <subscribe-form-footer></subscribe-form-footer>

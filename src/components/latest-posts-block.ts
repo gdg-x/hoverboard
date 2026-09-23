@@ -26,6 +26,13 @@ export class LatestPostsBlock extends ReduxMixin(ThemedElement) {
           grid-gap: 16px;
         }
 
+        .post {
+          display: flex;
+          flex: 1;
+          flex-basis: 1px;
+          flex-direction: column;
+        }
+
         .image {
           overflow: hidden;
           --lazy-image-width: 100%;
@@ -38,6 +45,10 @@ export class LatestPostsBlock extends ReduxMixin(ThemedElement) {
         }
 
         .details {
+          display: flex;
+          flex: 1 1 auto;
+          flex-direction: column;
+          justify-content: space-between;
           padding: 16px;
         }
 
@@ -118,14 +129,14 @@ export class LatestPostsBlock extends ReduxMixin(ThemedElement) {
         <div class="posts-wrapper">
           ${this.latestPosts.map(
             (post) => html`
-              <a href="${this.postUrl(post.id)}" class="post card" flex layout vertical>
+              <a href="${this.postUrl(post.id)}" class="post card">
                 <lazy-image
                   class="image"
                   src="${post.image}"
                   alt="${post.title}"
                   style="background-color: ${post.backgroundColor};"
                 ></lazy-image>
-                <div class="details" layout vertical justified flex-auto>
+                <div class="details">
                   <div>
                     <text-truncate lines="2">
                       <h3 class="title">${post.title}</h3>

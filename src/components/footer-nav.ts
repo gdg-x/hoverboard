@@ -24,6 +24,12 @@ export class FooterNav extends ThemedElement {
         }
 
         .nav-inline {
+          /* Note: no "display: flex" here on purpose — the original bare
+             "layout" attribute never had a matching "horizontal"/"vertical"
+             companion, so legacy CSS never actually made this a flex
+             container. Children are positioned with floats below. */
+          flex: 1;
+          flex-basis: 1px;
           list-style: none;
           margin: 0;
           padding: 0;
@@ -73,7 +79,7 @@ export class FooterNav extends ThemedElement {
 
   override render() {
     return html`
-      <div class="nav-inline" layout flex>
+      <div class="nav-inline">
         <a href="${this.organizer.url}" target="_blank" rel="noopener noreferrer">
           <lazy-image
             class="footer-logo"

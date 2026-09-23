@@ -29,7 +29,14 @@ export class SubscribeFormFooter extends ReduxMixin(ThemedElement) {
         }
 
         .form-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           gap: 16px;
+        }
+
+        .submit-button {
+          align-self: flex-end;
         }
 
         hoverboard-icon {
@@ -54,7 +61,7 @@ export class SubscribeFormFooter extends ReduxMixin(ThemedElement) {
 
   override render() {
     return html`
-      <div class="form-content" layout vertical center>
+      <div class="form-content">
         <md-outlined-text-field
           id="emailInput"
           type="email"
@@ -73,7 +80,11 @@ export class SubscribeFormFooter extends ReduxMixin(ThemedElement) {
               : ''
           }
         </md-outlined-text-field>
-        <md-filled-button ?disabled="${this.disabled}" layout self-end @click="${this.subscribe}">
+        <md-filled-button
+          class="submit-button"
+          ?disabled="${this.disabled}"
+          @click="${this.subscribe}"
+        >
           ${this.ctaLabel}
         </md-filled-button>
       </div>

@@ -87,7 +87,7 @@ describe('filter-menu', () => {
     await element.updateComplete;
 
     expect(element.opened).toBe(true);
-    expect(shadowRoot.querySelector('.filters-board')).toHaveAttribute('block');
+    expect(shadowRoot.querySelector('.filters-board')).toHaveAttribute('open');
     expect(shadowRoot.querySelector('md-outlined-button hoverboard-icon')).toHaveAttribute(
       'name',
       'close',

@@ -23,19 +23,37 @@ export class FeaturedVideos extends ReduxMixin(ThemedElement) {
           --video-item-height: 200px;
         }
 
+        .header {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+
         .videos-wrapper {
           position: relative;
+          display: flex;
+          flex-direction: row;
+          flex: 1;
+          flex-basis: 1px;
           overflow: hidden;
         }
 
         .video-list {
           margin-bottom: -20px;
+          display: flex;
+          flex: 1;
+          flex-basis: 1px;
+          flex-direction: row;
           flex-wrap: nowrap;
           overflow-x: auto;
           -webkit-overflow-scrolling: touch;
         }
 
         .videos {
+          display: flex;
+          flex-direction: row;
           transition: transform var(--slide-animation);
           will-change: transition;
           transform: translateX(0);
@@ -58,6 +76,11 @@ export class FeaturedVideos extends ReduxMixin(ThemedElement) {
         }
 
         .thumbnail {
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
           width: 100%;
           height: var(--video-item-height);
           overflow: hidden;
@@ -75,6 +98,8 @@ export class FeaturedVideos extends ReduxMixin(ThemedElement) {
         }
 
         .image-overlay {
+          position: absolute;
+          inset: 0;
           background-color: rgba(0, 0, 0, 0.4);
         }
 
@@ -253,32 +278,32 @@ export class FeaturedVideos extends ReduxMixin(ThemedElement) {
   override render() {
     return html`
       <div class="container">
-        <div class="header" layout horizontal justified center wrap>
+        <div class="header">
           <h1 class="container-title">${this.featuredVideos.title}</h1>
         </div>
 
-        <div class="videos-wrapper" layout flex horizontal>
+        <div class="videos-wrapper">
           <hoverboard-icon
             class="last-video slide-icon"
             name="chevron-left"
             @click="${() => this.shiftContentLeft()}"
             ?hidden="${this.leftArrowHidden}"
           ></hoverboard-icon>
-          <div id="videoList" class="video-list" layout flex horizontal>
-            <div id="videos" class="videos" layout horizontal>
+          <div id="videoList" class="video-list">
+            <div id="videos" class="videos">
               ${this.pending ? html`<p>${this.loading}</p>` : ''}
               ${this.failure ? html`<p>Error loading videos.</p>` : ''}
               ${this.videosData.map(
                 (block, index) => html`
                   <div class="video-item" @click="${() => this.playVideo(block)}">
-                    <div class="thumbnail" relative layout horizontal center-center>
+                    <div class="thumbnail">
                       <lazy-image
                         id="image${index}"
                         class="thumbnail-image"
                         src="${block.thumbnail}"
                         alt="${block.title}"
                       ></lazy-image>
-                      <div class="image-overlay" fit></div>
+                      <div class="image-overlay"></div>
                       <hoverboard-icon class="video-play-icon" name="play"></hoverboard-icon>
                     </div>
                     <h4 class="video-title">${block.title}</h4>

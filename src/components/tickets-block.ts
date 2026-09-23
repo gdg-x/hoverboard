@@ -22,11 +22,16 @@ export class TicketsBlock extends ReduxMixin(ThemedElement) {
 
         .tickets {
           margin: 32px 0 24px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
         }
 
         .ticket-item {
           margin: 16px 8px;
           width: 100%;
+          display: flex;
+          flex-direction: column;
           text-align: center;
           color: var(--primary-text-color);
           background-color: var(--default-background-color);
@@ -62,11 +67,18 @@ export class TicketsBlock extends ReduxMixin(ThemedElement) {
 
         .content {
           padding: 0 24px;
+          display: flex;
+          flex-direction: column;
+          flex: 1 1 auto;
         }
 
         .type-description {
           font-size: 12px;
           color: var(--secondary-text-color);
+          display: flex;
+          flex-direction: column;
+          flex: 1 1 auto;
+          justify-content: center;
         }
 
         .ticket-price-wrapper {
@@ -90,6 +102,10 @@ export class TicketsBlock extends ReduxMixin(ThemedElement) {
           text-transform: uppercase;
           height: 32px;
           color: var(--secondary-text-color);
+        }
+
+        .sold-out[visible] {
+          display: block !important;
         }
 
         .additional-info {
@@ -195,7 +211,7 @@ export class TicketsBlock extends ReduxMixin(ThemedElement) {
         >
         </content-loader>
 
-        <div class="tickets" layout horizontal wrap center-justified>
+        <div class="tickets">
           ${this.error ? html`Error loading tickets` : ''}
           ${this.ticketsList.map(
             (ticket) => html`
@@ -207,18 +223,16 @@ export class TicketsBlock extends ReduxMixin(ThemedElement) {
                 ?sold-out="${ticket.soldOut}"
                 ?in-demand="${ticket.inDemand}"
                 @click="${(e: PointerEvent) => this.onTicketTap(e, ticket)}"
-                layout
-                vertical
               >
                 <div class="header">
                   <h4>${ticket.name}</h4>
                 </div>
-                <div class="content" layout vertical flex-auto>
+                <div class="content">
                   <div class="ticket-price-wrapper">
                     <div class="price">${ticket.currency}${ticket.price}</div>
                     <div class="discount">${this.getDiscount(ticket)}</div>
                   </div>
-                  <div class="type-description" layout vertical flex-auto center-justified>
+                  <div class="type-description">
                     <div class="ticket-dates" ?hidden="${!ticket.starts}">
                       ${ticket.starts} - ${ticket.ends}
                     </div>
@@ -226,7 +240,7 @@ export class TicketsBlock extends ReduxMixin(ThemedElement) {
                   </div>
                 </div>
                 <div class="actions">
-                  <div class="sold-out" ?block="${ticket.soldOut}">
+                  <div class="sold-out" ?visible="${ticket.soldOut}">
                     ${this.ticketsBlock.soldOut}
                   </div>
                   <md-filled-button ?hidden="${ticket.soldOut}" ?disabled="${!ticket.available}">

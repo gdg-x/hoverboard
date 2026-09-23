@@ -75,6 +75,7 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
           position: absolute;
           top: 0;
           left: calc(50% + 32px);
+          display: flex;
         }
 
         .badge {
@@ -84,6 +85,9 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
           border-radius: 50%;
           border: 2px solid #fff;
           transition: transform var(--animation);
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .badge:hover {
@@ -122,6 +126,10 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
 
         .description {
           color: var(--primary-text-color);
+        }
+
+        .speaker-photo {
+          position: relative;
         }
 
         .name {
@@ -244,9 +252,9 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
         ${this.speakersToRender.map(
           (speaker) => html`
             <a class="speaker card" href=${this.speakerUrl(speaker.id)}>
-              <div relative>
+              <div class="speaker-photo">
                 <lazy-image class="photo" src=${speaker.photoUrl} alt=${speaker.name}></lazy-image>
-                <div class="badges" layout horizontal>
+                <div class="badges">
                   ${speaker.badges?.map(
                     (badge) => html`
                       <a
@@ -255,9 +263,6 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
                         target="_blank"
                         rel="noopener noreferrer"
                         title=${badge.description}
-                        layout
-                        horizontal
-                        center-center
                       >
                         <hoverboard-icon name=${badge.name} class="badge-icon"></hoverboard-icon>
                       </a>

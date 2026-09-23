@@ -40,6 +40,12 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
           height: 200px;
           border-radius: var(--border-radius);
           overflow: hidden;
+          position: relative;
+        }
+
+        .featured-post--flex {
+          flex: 1;
+          flex-basis: 1px;
         }
 
         .image {
@@ -53,6 +59,8 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
 
         .image-overlay {
           background-color: rgba(0, 0, 0, 0.6);
+          position: absolute;
+          inset: 0;
         }
 
         .details {
@@ -61,6 +69,9 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
           transform: translateZ(0);
           color: #fff;
           box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
 
         .title {
@@ -174,9 +185,7 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
               (post) => html`
                 <a
                   href=${this.postUrl(post.id)}
-                  class="featured-post"
-                  ?flex=${this.viewport.isTabletPlus}
-                  relative
+                  class="featured-post ${this.viewport.isTabletPlus ? 'featured-post--flex' : ''}"
                 >
                   <lazy-image
                     class="image"
@@ -185,8 +194,8 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
                     style="background-color: ${post.backgroundColor};"
                   ></lazy-image>
 
-                  <div class="image-overlay" fit></div>
-                  <div class="details" layout vertical justified>
+                  <div class="image-overlay"></div>
+                  <div class="details">
                     <div>
                       <text-truncate lines="2">
                         <h2 class="title">${post.title}</h2>

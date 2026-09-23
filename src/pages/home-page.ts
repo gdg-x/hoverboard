@@ -74,6 +74,9 @@ export class HomePage extends ReduxMixin(ThemedElement) {
         .action-buttons {
           margin: 0 -8px;
           font-size: 14px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
         }
 
         .action-buttons md-filled-button,
@@ -111,6 +114,12 @@ export class HomePage extends ReduxMixin(ThemedElement) {
         .scroll-down .scroller {
           fill: currentColor;
           animation: updown 2s infinite;
+        }
+
+        .home-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         @keyframes updown {
@@ -179,25 +188,25 @@ export class HomePage extends ReduxMixin(ThemedElement) {
   @state()
   private showForkMeBlock: boolean = false;
 
-  private playVideo() {
+  private playVideo = () => {
     openVideoDialog({
       title: this.aboutBlock.callToAction.howItWas.label,
       youtubeId: this.aboutBlock.callToAction.howItWas.youtubeId,
     });
-  }
+  };
 
-  private scrollToTickets() {
+  private scrollToTickets = () => {
     const element = this.ticketsBlock;
     if (element) {
       scrollToElement(element);
     } else {
       store.dispatch(queueSnackbar('Error scrolling to section.'));
     }
-  }
+  };
 
-  private scrollNextBlock() {
+  private scrollNextBlock = () => {
     scrollToElement(this.hero, POSITION.BOTTOM);
-  }
+  };
 
   private shouldShowForkMeBlock(): boolean {
     const showForkMeBlock = firebaseApp.options.appId
@@ -224,7 +233,7 @@ export class HomePage extends ReduxMixin(ThemedElement) {
         font-color="${this.heroSettings.fontColor}"
         hide-logo
       >
-        <div class="home-content" layout vertical center>
+        <div class="home-content">
           <lazy-image class="hero-logo" src="/images/logo.svg" alt="${this.siteTitle}"></lazy-image>
 
           <div class="info-items">
@@ -232,7 +241,7 @@ export class HomePage extends ReduxMixin(ThemedElement) {
             <div class="info-item">${this.heroSettings.description}</div>
           </div>
 
-          <div class="action-buttons" layout horizontal center-justified wrap>
+          <div class="action-buttons">
             <md-outlined-button class="watch-video" @click="${this.playVideo}">
               <hoverboard-icon name="movie" slot="icon"></hoverboard-icon>
               ${this.viewHighlights}

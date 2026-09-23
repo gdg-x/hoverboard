@@ -150,7 +150,6 @@ export class SchedulePage extends ReduxMixin(ThemedElement) {
           blur-width="300px"
           items-count="${this.contentLoaders.itemsCount}"
           ?hidden="${!this.pending}"
-          layout
         >
         </content-loader>
 
