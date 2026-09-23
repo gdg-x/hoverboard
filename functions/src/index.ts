@@ -5,12 +5,12 @@ import {
   scheduleWrite,
   sessionsWrite,
   speakersWrite,
-} from './generate-sessions-speakers-schedule.js';
-import { mailchimpSubscribe } from './mailchimp-subscribe.js';
-import { sendGeneralNotification } from './notifications.js';
-import { optimizeImages } from './optimize-images.js';
-import { prerender } from './prerender.js';
-import { scheduleNotifications } from './schedule-notifications.js';
+} from './triggers/generate-sessions-speakers-schedule.js';
+import { mailchimpSubscribe } from './triggers/mailchimp-subscribe.js';
+import { sendGeneralNotification } from './triggers/notifications.js';
+import { optimizeImages } from './triggers/optimize-images.js';
+import { prerender } from './triggers/prerender.js';
+import { scheduleNotifications } from './triggers/schedule-notifications.js';
 
 // TODO: Update `tsconfig.json`
 // - "noImplicitReturns": true,

@@ -2,10 +2,9 @@ import {
   calculateEndTime,
   calculateStartTime,
   collectSpeakers,
-  combineTags,
   getDuration,
-  pickMainTag,
-} from '../utils.js';
+} from '../utils/schedule-time.js';
+import { combineTags, pickMainTag } from '../utils/tags.js';
 
 export function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
   const sessions = {};

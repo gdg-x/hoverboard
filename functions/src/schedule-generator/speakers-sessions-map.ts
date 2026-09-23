@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
-import { combineTags, pickMainTag, SessionMap, SpeakerMap } from '../utils.js';
+import { SessionMap, SpeakerMap } from '../utils/firestore.js';
+import { combineTags, pickMainTag } from '../utils/tags.js';
 
 export function sessionsSpeakersMap(sessionsRaw: SessionMap, speakersRaw: SpeakerMap) {
   const sessions = {};
