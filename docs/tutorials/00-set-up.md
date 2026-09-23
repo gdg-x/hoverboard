@@ -10,17 +10,15 @@ Project Hoverboard locally in less than 15 minutes.
 1. Install project dependencies: `npm ci` (`yarn` should work but it's not officially supported)
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
 1. Update [Hoverboard config](/config) and [Resources](/data). More info can be found [here](01-configure-app.md)
-1. Import initial data to the Firebase Database
-   - Generate `serviceAccount.json` file
-     - Go to [console.firebase.google.com](https://console.firebase.google.com) -> Project settings -> Service accounts
-     - Ensure that **Node.js** is selected and press **Generate new private key**
-     - Read the warning and press **Generate key**
-     - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
-   - Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
-   - [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
-   - Select your Firebase project `npx firebase use <projectId>`
-     - [Optional] If you need to clear out all of your data first, run `npx firebase firestore:delete --recursive --all-collections`
-     - Run `npm run firestore:init`
+1. Select your Firebase project `npx firebase use <projectId>` (this is only needed to load your app's web config; local development runs against the [Firestore emulator](https://firebase.google.com/docs/emulator-suite), so it never reads or writes your project's live data)
+1. Seed the local Firestore emulator with data
+   - [Optional] You can edit `docs/default-firebase-data.json` to use your own data
+   - Run `npm start` in one terminal to launch the app together with the Firebase emulators
+   - In another terminal, run `npm run firestore:init` to import `docs/default-firebase-data.json` into the running emulator
+   - Browse and edit the seeded data in the [Emulator UI](http://localhost:4000/firestore)
+   - [Optional] Run `npm run firestore:export` to persist your edits to `.firebase/emulator-data`, so they're automatically reloaded next time you run `npm start`
+
+_Tip: See [Firestore utils](firebase-utils.md) for more on seeding, exporting, and copying Firestore data._
 
 ## Directory structure
 
