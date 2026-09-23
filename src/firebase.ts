@@ -1,6 +1,11 @@
 import { getAnalytics } from 'firebase/analytics';
 import { FirebaseOptions, initializeApp } from 'firebase/app';
-import { Firestore, initializeFirestore, persistentLocalCache } from 'firebase/firestore';
+import {
+  connectFirestoreEmulator,
+  Firestore,
+  initializeFirestore,
+  persistentLocalCache,
+} from 'firebase/firestore';
 import { getPerformance, initializePerformance } from 'firebase/performance';
 
 /**
@@ -16,6 +21,7 @@ import { getPerformance, initializePerformance } from 'firebase/performance';
 declare global {
   interface Window {
     firebaseConfig?: FirebaseOptions;
+    process?: { env: { NODE_ENV?: string } };
   }
 }
 
@@ -29,6 +35,17 @@ export const firebaseApp = initializeApp(firebaseConfig);
 export const db: Firestore = initializeFirestore(firebaseApp, {
   localCache: persistentLocalCache(),
 });
+
+/**
+ * `npm start` runs the app through the Firebase Hosting emulator alongside
+ * the Firestore emulator (see `firebase.json`), so local development never
+ * touches production data. Connect must happen before any other Firestore
+ * calls are made.
+ */
+if (window.process?.env.NODE_ENV === 'development') {
+  connectFirestoreEmulator(db, '127.0.0.1', 8080);
+}
+
 export const performance = getPerformance(firebaseApp);
 export const analytics = getAnalytics(firebaseApp);
 
