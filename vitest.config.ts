@@ -30,8 +30,11 @@ export default defineConfig({
         test: {
           name: 'Firestore',
           environment: 'node',
-          setupFiles: ['./__tests__/firestore.setup.ts'],
-          include: ['**/*.rules.test.ts'],
+          // Starts/stops the Firestore emulator once for the whole run (not
+          // per test file), since spinning it up is slow.
+          globalSetup: ['./__tests__/rules/globalSetup.ts'],
+          setupFiles: ['./__tests__/rules/setup.ts'],
+          include: ['__tests__/rules/*.rules.test.ts'],
         },
       },
     ],
