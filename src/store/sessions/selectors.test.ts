@@ -1,6 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { describe, expect, it } from 'vitest';
 import { selectFilterGroups, selectSession } from './selectors';
+import { FilterGroupKey } from '../../models/filter-group';
 import { Session } from '../../models/session';
 import { RootState } from '..';
 
@@ -42,5 +43,29 @@ describe('selectFilterGroups', () => {
         { group: 'complexity', tag: 'Advanced' },
       ]),
     );
+  });
+
+  it('memoizes across repeated calls with no explicit groups argument', () => {
+    const state = { sessions: new Success(sessions) } as unknown as RootState;
+
+    // Regression test: the default `groups` parameter used to be a fresh
+    // array literal on every call, which is a *new reference* each time and
+    // defeats `createSelector`'s reference-equality memoization. It's now a
+    // stable module-level constant, so repeated calls with the same state
+    // return the same (memoized) result reference instead of recomputing.
+    const first = selectFilterGroups(state);
+    const second = selectFilterGroups(state);
+
+    expect(second).toBe(first);
+  });
+
+  it('memoizes across repeated calls with the same groups array reference', () => {
+    const state = { sessions: new Success(sessions) } as unknown as RootState;
+    const groups = [FilterGroupKey.tags];
+
+    const first = selectFilterGroups(state, groups);
+    const second = selectFilterGroups(state, groups);
+
+    expect(second).toBe(first);
   });
 });

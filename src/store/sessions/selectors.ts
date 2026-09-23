@@ -43,10 +43,13 @@ export const selectSession = createSelector(
   },
 );
 
-const selectGroups = (
-  _state: RootState,
-  groups: FilterGroupKey[] = [FilterGroupKey.tags, FilterGroupKey.complexity],
-) => groups;
+// Kept as a stable module-level reference (rather than a default parameter
+// literal) so repeated calls with no explicit `groups` argument pass the
+// same array instance, preserving `createSelector`'s memoization.
+const DEFAULT_FILTER_GROUPS: FilterGroupKey[] = [FilterGroupKey.tags, FilterGroupKey.complexity];
+
+const selectGroups = (_state: RootState, groups: FilterGroupKey[] = DEFAULT_FILTER_GROUPS) =>
+  groups;
 
 export const selectFilterGroups = createSelector(
   selectSessions,
