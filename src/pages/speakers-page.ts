@@ -24,6 +24,11 @@ import { SpeakersState, selectSpeakersState } from '../store/speakers';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 
+// Stable module-level reference (rather than an inline literal in
+// `stateChanged`) so `selectFilterGroups`'s `createSelector` memoization
+// isn't defeated by a new array on every store dispatch.
+const SPEAKER_FILTER_GROUPS = [FilterGroupKey.tags];
+
 @customElement('speakers-page')
 export class SpeakersPage extends ReduxMixin(ThemedElement) {
   static override get styles() {
@@ -193,7 +198,7 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
 
   override stateChanged(state: RootState) {
     this.speakers = selectSpeakersState(state);
-    this.filterGroups = selectFilterGroups(state, [FilterGroupKey.tags]);
+    this.filterGroups = selectFilterGroups(state, SPEAKER_FILTER_GROUPS);
     this.selectedFilters = selectFilters(state);
     this.speakersToRender = selectFilteredSpeakers(state);
   }
