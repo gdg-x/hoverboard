@@ -15,16 +15,16 @@ const mockSnapshot = (message?: Record<string, unknown>) => ({
 const setupNotificationMocks = ({
   configExists = true,
   notificationsConfig = {},
-  results = [],
+  responses = [],
   tokens = [],
 }: {
   configExists?: boolean;
   notificationsConfig?: Record<string, unknown>;
-  results?: Array<{ error?: { code: string } }>;
+  responses?: Array<{ success: boolean; error?: { code: string } }>;
   tokens?: string[];
 }) => {
   const deletedTokens: string[] = [];
-  const sendToDevice = vi.fn().mockResolvedValue({ results });
+  const sendEachForMulticast = vi.fn().mockResolvedValue({ responses });
   const collection = vi.fn().mockImplementation((collectionName: string) => {
     if (collectionName === 'notificationsSubscribers') {
       return {
@@ -55,9 +55,9 @@ const setupNotificationMocks = ({
   });
 
   vi.mocked(getFirestore).mockReturnValue({ collection } as never);
-  vi.mocked(getMessaging).mockReturnValue({ sendToDevice } as never);
+  vi.mocked(getMessaging).mockReturnValue({ sendEachForMulticast } as never);
 
-  return { deletedTokens, sendToDevice };
+  return { deletedTokens, sendEachForMulticast };
 };
 
 describe('sendGeneralNotification', () => {
@@ -93,9 +93,9 @@ describe('sendGeneralNotification', () => {
   });
 
   it('uses the config icon fallback and includes the message path when present', async () => {
-    const { sendToDevice } = setupNotificationMocks({
+    const { sendEachForMulticast } = setupNotificationMocks({
       notificationsConfig: { icon: '/default-icon.png' },
-      results: [{}, {}],
+      responses: [{ success: true }, { success: true }],
       tokens: ['token-1', 'token-2'],
     });
 
@@ -108,7 +108,8 @@ describe('sendGeneralNotification', () => {
       params: { timestamp: '12345' },
     } as never);
 
-    expect(sendToDevice).toHaveBeenCalledWith(['token-1', 'token-2'], {
+    expect(sendEachForMulticast).toHaveBeenCalledWith({
+      tokens: ['token-1', 'token-2'],
       data: {
         title: 'Schedule update',
         body: 'Agenda changed',
@@ -119,9 +120,9 @@ describe('sendGeneralNotification', () => {
   });
 
   it('uses the message icon and omits path when the message does not include one', async () => {
-    const { sendToDevice } = setupNotificationMocks({
+    const { sendEachForMulticast } = setupNotificationMocks({
       notificationsConfig: { icon: '/default-icon.png' },
-      results: [{}],
+      responses: [{ success: true }],
       tokens: ['token-1'],
     });
 
@@ -134,7 +135,8 @@ describe('sendGeneralNotification', () => {
       params: { timestamp: '12345' },
     } as never);
 
-    expect(sendToDevice).toHaveBeenCalledWith(['token-1'], {
+    expect(sendEachForMulticast).toHaveBeenCalledWith({
+      tokens: ['token-1'],
       data: {
         title: 'Welcome',
         body: 'See you soon',
@@ -144,13 +146,13 @@ describe('sendGeneralNotification', () => {
   });
 
   it('removes invalid registration tokens after messaging failures', async () => {
-    const { deletedTokens, sendToDevice } = setupNotificationMocks({
+    const { deletedTokens, sendEachForMulticast } = setupNotificationMocks({
       notificationsConfig: { icon: '/default-icon.png' },
-      results: [
-        {},
-        { error: { code: 'messaging/invalid-registration-token' } },
-        { error: { code: 'messaging/registration-token-not-registered' } },
-        { error: { code: 'messaging/internal-error' } },
+      responses: [
+        { success: true },
+        { success: false, error: { code: 'messaging/invalid-registration-token' } },
+        { success: false, error: { code: 'messaging/registration-token-not-registered' } },
+        { success: false, error: { code: 'messaging/internal-error' } },
       ],
       tokens: ['token-1', 'token-2', 'token-3', 'token-4'],
     });
@@ -164,7 +166,7 @@ describe('sendGeneralNotification', () => {
       params: { timestamp: '12345' },
     } as never);
 
-    expect(sendToDevice).toHaveBeenCalledTimes(1);
+    expect(sendEachForMulticast).toHaveBeenCalledTimes(1);
     expect(deletedTokens).toStrictEqual(['token-2', 'token-3']);
     expect(errorSpy).toHaveBeenCalledTimes(3);
   });
