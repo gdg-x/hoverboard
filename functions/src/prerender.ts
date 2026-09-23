@@ -52,7 +52,7 @@ const checkForBots = (userAgent) => {
 // configured rewrites (see "Hosting Priorities" https://firebase.google.com/docs/hosting/url-redirects-rewrites)
 //
 // The trick is on L66, pwaShell(): You must update that file! Open for explainer.
-app.get('*', async (req, res) => {
+app.get('/{*splat}', async (req, res) => {
   // What say you bot tester?
   const botResult = checkForBots(req.headers['user-agent']);
   if (botResult) {
