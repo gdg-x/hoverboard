@@ -1,9 +1,31 @@
+import { SpeakerMap } from './firestore.js';
+
+export interface RawScheduleSession {
+  items?: string[];
+  extend?: number;
+}
+
+export interface RawScheduleTimeslot {
+  startTime?: string;
+  endTime?: string;
+  sessions?: RawScheduleSession[];
+}
+
+export interface RawScheduleDay {
+  tracks?: string[];
+  dateReadable?: string;
+  timeslots: RawScheduleTimeslot[];
+}
+
+/** Sessions built so far in the current schedule pass, keyed by session id. */
+export type BuiltSessions = Record<string, { endTime: string }>;
+
 export const calculateStartTime = (
   subSessionsLen: number,
   subSessionIndex: number,
   sessionIndex: number,
-  sessions: any,
-  timeslot: any,
+  sessions: BuiltSessions,
+  timeslot: RawScheduleTimeslot,
 ) => {
   return subSessionsLen > 1 && subSessionIndex > 0
     ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
@@ -12,9 +34,9 @@ export const calculateStartTime = (
 
 export const calculateEndTime = (
   subSessionsLen: number,
-  timeslot: any,
+  timeslot: RawScheduleTimeslot,
   sessionIndex: number,
-  day: any,
+  day: RawScheduleDay,
   timeslotsIndex: number,
   dayKey: string,
   subSessionIndex: number,
@@ -28,6 +50,19 @@ export const calculateEndTime = (
     : endTimeRaw;
 };
 
+/**
+ * Get the host machine's current timezone suffix (e.g. "GMT-0500 (EST)") so that
+ * `date`/`startTime`/`endTime` strings, which carry no timezone of their own, are parsed
+ * consistently by the `Date` constructor.
+ */
+function getLocalTimezoneSuffix(): string {
+  return new Date().toString().match(/([A-Z]+[+-][0-9]+.*)/)[1];
+}
+
+function toLocalTimestamp(date: string, time: string): number {
+  return new Date(`${date} ${time} ${getLocalTimezoneSuffix()}`).getTime();
+}
+
 const getEndTime = (
   date: string,
   startTime: string,
@@ -35,18 +70,14 @@ const getEndTime = (
   totalNumber: number,
   number: number,
 ) => {
-  const timezone = new Date().toString().match(/([A-Z]+[+-][0-9]+.*)/)[1];
-  const timeStart = new Date(`${date} ${startTime} ${timezone}`).getTime();
+  const timeStart = toLocalTimestamp(date, startTime);
   const difference = Math.floor(getTimeDifference(date, startTime, endTime) / totalNumber);
   const result = new Date(timeStart + difference * number);
   return result.getHours() + ':' + result.getMinutes();
 };
 
 function getTimeDifference(date: string, startTime: string, endTime: string) {
-  const timezone = new Date().toString().match(/([A-Z]+[+-][0-9]+.*)/)[1];
-  const timeStart = new Date(date + ' ' + startTime + ' ' + timezone).getTime();
-  const timeEnd = new Date(date + ' ' + endTime + ' ' + timezone).getTime();
-  return timeEnd - timeStart;
+  return toLocalTimestamp(date, endTime) - toLocalTimestamp(date, startTime);
 }
 
 export function getDuration(date: string, startTime: string, endTime: string) {
@@ -59,7 +90,7 @@ export function getDuration(date: string, startTime: string, endTime: string) {
   };
 }
 
-export const collectSpeakers = (speakerIds: string[], speakersRaw: any) => {
+export const collectSpeakers = (speakerIds: string[], speakersRaw: SpeakerMap) => {
   return (speakerIds || []).map((speakerId) => {
     return {
       id: speakerId,

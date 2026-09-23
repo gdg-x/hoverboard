@@ -48,17 +48,12 @@ export function createTimeWindow(minutesBefore: number, minutesAfter: number): T
 }
 
 /**
- * Parse a time string with timezone and subtract specified minutes
+ * Parse a "HH:mm" time string as today's date in the specified timezone, returning the
+ * equivalent UTC instant.
  */
-export function parseTimeAndSubtract(
-  timeString: string,
-  timezone: string,
-  minutesToSubtract: number,
-): Date {
-  // Parse time format HH:mm
+function parseTimeInTimezone(timeString: string, timezone: string): Date {
   const [hours, minutes] = timeString.split(':').map(Number);
 
-  // Get today's date
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth();
@@ -69,10 +64,19 @@ export function parseTimeAndSubtract(
 
   // Apply timezone offset (convert from specified timezone to UTC)
   const offsetMinutes = parseTimezoneOffset(timezone);
-  const utcTime = targetDate.getTime() - offsetMinutes * 60000;
+  return new Date(targetDate.getTime() - offsetMinutes * 60000);
+}
 
-  // Subtract the specified minutes
-  return new Date(utcTime - minutesToSubtract * 60000);
+/**
+ * Parse a time string with timezone and subtract specified minutes
+ */
+export function parseTimeAndSubtract(
+  timeString: string,
+  timezone: string,
+  minutesToSubtract: number,
+): Date {
+  const parsedTime = parseTimeInTimezone(timeString, timezone);
+  return new Date(parsedTime.getTime() - minutesToSubtract * 60000);
 }
 
 /**
@@ -112,24 +116,7 @@ function getRelativeTimeString(date: Date): string {
  * Parse a time string with timezone and get the relative time from now
  */
 export function parseTimeAndGetFromNow(timeString: string, timezone: string): string {
-  // Parse time format HH:mm
-  const [hours, minutes] = timeString.split(':').map(Number);
-
-  // Get today's date
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const day = today.getDate();
-
-  // Create date with the parsed time in UTC
-  const targetDate = new Date(Date.UTC(year, month, day, hours, minutes, 0, 0));
-
-  // Apply timezone offset (convert from specified timezone to UTC)
-  const offsetMinutes = parseTimezoneOffset(timezone);
-  const utcTime = targetDate.getTime() - offsetMinutes * 60000;
-  const finalDate = new Date(utcTime);
-
-  return getRelativeTimeString(finalDate);
+  return getRelativeTimeString(parseTimeInTimezone(timeString, timezone));
 }
 
 /**

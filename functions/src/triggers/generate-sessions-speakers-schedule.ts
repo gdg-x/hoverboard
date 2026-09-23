@@ -1,6 +1,6 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
-import { getFirestore } from 'firebase-admin/firestore';
+import { DocumentData, getFirestore } from 'firebase-admin/firestore';
 import * as logger from 'firebase-functions/logger';
 import { onDocumentWritten } from 'firebase-functions/v2/firestore';
 import { sessionsSpeakersMap } from '../schedule-generator/speakers-sessions-map.js';
@@ -12,6 +12,14 @@ import {
   snapshotToObject,
   SpeakerMap,
 } from '../utils/firestore.js';
+
+type ChangedSpeaker = DocumentData & { id: string };
+
+interface GeneratedData {
+  sessions?: SessionMap;
+  speakers?: SpeakerMap;
+  schedule?: Record<string, unknown>;
+}
 
 const isScheduleEnabled = async (): Promise<boolean> => {
   const doc = await getFirestore().collection('config').doc('schedule').get();
@@ -36,7 +44,7 @@ export const scheduleWrite = onDocumentWritten('schedule/{scheduleId}', async ()
 });
 
 export const speakersWrite = onDocumentWritten('speakers/{speakerId}', async (event) => {
-  const changedSpeaker = event.data?.after.exists
+  const changedSpeaker: ChangedSpeaker | null = event.data?.after.exists
     ? { id: event.params.speakerId, ...event.data.after.data() }
     : null;
   return generateAndSaveData(changedSpeaker);
@@ -50,18 +58,14 @@ const fetchData = () => {
   return Promise.all([sessionsPromise, schedulePromise, speakersPromise]);
 };
 
-async function generateAndSaveData(changedSpeaker?) {
+async function generateAndSaveData(changedSpeaker?: ChangedSpeaker | null) {
   const [sessionsSnapshot, scheduleSnapshot, speakersSnapshot] = await fetchData();
 
   const sessions = snapshotToObject(sessionsSnapshot);
   const schedule = snapshotToObject(scheduleSnapshot);
   const speakers = snapshotToObject(speakersSnapshot);
 
-  let generatedData: {
-    sessions?: {};
-    speakers?: {};
-    schedule?: {};
-  } = {};
+  let generatedData: GeneratedData = {};
   if (!Object.keys(sessions).length) {
     generatedData.speakers = { ...speakers };
   } else if (!(await isScheduleEnabled()) || !Object.keys(schedule).length) {

@@ -1,7 +1,7 @@
 import { Storage, UploadOptions } from '@google-cloud/storage';
 import { spawnSync } from 'child_process';
 import * as logger from 'firebase-functions/logger';
-import { onObjectFinalized } from 'firebase-functions/v2/storage';
+import { onObjectFinalized, StorageObjectData } from 'firebase-functions/v2/storage';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
@@ -22,7 +22,7 @@ export const optimizeImages = onObjectFinalized((event) => {
   return optimizeImage(object);
 });
 
-async function optimizeImage(object) {
+async function optimizeImage(object: StorageObjectData) {
   // File and directory paths.
   const filePath = object.name;
   const tempLocalFile = path.join(os.tmpdir(), filePath);
