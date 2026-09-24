@@ -1,14 +1,13 @@
 import { RootState } from '..';
 import { CollectionState, createCollectionSlice } from '../create-collection-slice';
 import { SpeakerWithTags } from '../../models/speaker';
-import { subscribeToCollection } from '../../utils/firestore';
+import { subscribeToSpeakers } from '../../db/speakers';
 
 export type SpeakersState = CollectionState<SpeakerWithTags>;
 
 const { reducer, selectOrFetch } = createCollectionSlice<SpeakerWithTags>(
   'speakers',
-  (onStart, onNext, onError) =>
-    subscribeToCollection('generatedSpeakers', onStart, onNext, onError),
+  subscribeToSpeakers,
 );
 
 export const selectSpeakersState = (state: RootState): SpeakersState =>

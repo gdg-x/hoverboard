@@ -1,12 +1,11 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
-import { orderBy } from 'firebase/firestore';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectVideos } from '.';
 import { Video } from '../../models/video';
-import { subscribeToCollection } from '../../utils/firestore';
+import { subscribeToVideos } from '../../db/videos';
 import { RootState } from '..';
 
-vi.mock('../../utils/firestore');
+vi.mock('../../db/videos');
 vi.mock('../dispatch');
 
 describe('videos', () => {
@@ -17,16 +16,14 @@ describe('videos', () => {
 
 describe('selectVideos', () => {
   it('subscribes on first read', () => {
-    vi.mocked(subscribeToCollection).mockReturnValue(new Success(vi.fn()));
+    vi.mocked(subscribeToVideos).mockReturnValue(new Success(vi.fn()));
     const state = { videos: new Initialized() } as unknown as RootState;
 
     expect(selectVideos(state)).toStrictEqual(new Pending());
-    expect(subscribeToCollection).toHaveBeenCalledWith(
-      'videos',
+    expect(subscribeToVideos).toHaveBeenCalledWith(
       expect.any(Function),
       expect.any(Function),
       expect.any(Function),
-      orderBy('order'),
     );
   });
 

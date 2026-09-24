@@ -1,16 +1,11 @@
-import { orderBy } from 'firebase/firestore';
 import { RootState } from '..';
 import { CollectionState, createCollectionSlice } from '../create-collection-slice';
 import { Day } from '../../models/day';
-import { subscribeToCollection } from '../../utils/firestore';
+import { subscribeToSchedule } from '../../db/schedule';
 
 export type ScheduleState = CollectionState<Day>;
 
-const { reducer, selectOrFetch } = createCollectionSlice<Day>(
-  'schedule',
-  (onStart, onNext, onError) =>
-    subscribeToCollection('generatedSchedule', onStart, onNext, onError, orderBy('date')),
-);
+const { reducer, selectOrFetch } = createCollectionSlice<Day>('schedule', subscribeToSchedule);
 
 export const selectScheduleState = (state: RootState): ScheduleState =>
   selectOrFetch(state.schedule);

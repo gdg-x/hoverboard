@@ -1,17 +1,15 @@
 import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '..';
+import {
+  subscribeToNotificationsUsers,
+  UserTokens,
+  UserTokensData,
+} from '../../db/notifications-users';
 import { dispatch } from '../dispatch';
-import { subscribeToDocument, Subscription } from '../../utils/firestore';
+import { Subscription } from '../../utils/firestore';
 
-export interface UserTokens {
-  id: string;
-  tokens: {
-    [key: string]: true;
-  };
-}
-
-export type UserTokensData = Omit<UserTokens, 'id'>;
+export type { UserTokens, UserTokensData };
 
 export type NotificationsUsersState = RemoteData<Error, UserTokens>;
 
@@ -35,8 +33,8 @@ let subscription: Subscription = new Initialized();
 
 const fetchNotificationsUsers = (uid: string) => {
   if (subscription instanceof Initialized) {
-    subscription = subscribeToDocument<UserTokens>(
-      `notificationsUsers/${uid}`,
+    subscription = subscribeToNotificationsUsers(
+      uid,
       () => dispatch(pending()),
       (payload) => dispatch(success(payload || { id: uid, tokens: {} })),
       (payload: Error) => dispatch(failure(payload)),

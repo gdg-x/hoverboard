@@ -1,19 +1,19 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
 import reducer, {
   resetFeaturedSessions,
   selectFeaturedSessions,
   selectFeaturedSessionsState,
   setUserFeaturedSessions,
 } from '.';
+import { fetchFeaturedSessions, saveFeaturedSessions } from '../../db/featured-sessions';
 import { bookmarked } from '../../utils/data';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { selectUserId } from '../user';
 import { RootState } from '..';
 
-vi.mock('firebase/firestore');
+vi.mock('../../db/featured-sessions');
 vi.mock('../dispatch');
 vi.mock('../snackbars', () => ({
   queueSnackbar: vi.fn((label: string) => ({
@@ -56,8 +56,7 @@ describe('featuredSessions', () => {
 
 describe('setUserFeaturedSessions', () => {
   it('cleans falsy session ids, persists them, and queues the added snackbar', async () => {
-    vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined);
+    vi.mocked(saveFeaturedSessions).mockResolvedValue(undefined);
     vi.mocked(queueSnackbar).mockReturnValue({
       type: 'snackbars/queueSnackbar',
       payload: bookmarked.added,
@@ -69,7 +68,7 @@ describe('setUserFeaturedSessions', () => {
       true,
     );
 
-    expect(setDoc).toHaveBeenCalledWith('doc-ref', { 'session-1': true });
+    expect(saveFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': true });
     expect(dispatch).toHaveBeenNthCalledWith(
       1,
       expect.objectContaining({ type: 'featuredSessions/pending' }),
@@ -93,8 +92,7 @@ describe('setUserFeaturedSessions', () => {
 
   it('dispatches failure when persisting featured sessions fails', async () => {
     const error = new Error('write failed');
-    vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(setDoc).mockRejectedValue(error);
+    vi.mocked(saveFeaturedSessions).mockRejectedValue(error);
 
     await setUserFeaturedSessions('user-1', { 'session-1': true }, false);
 
@@ -117,10 +115,7 @@ describe('featured session selectors', () => {
   it('dispatches a lazy fetch the first time the state is read for a signed-in user', async () => {
     vi.mocked(selectUserId).mockReturnValue('user-1');
     vi.mocked(getState).mockReturnValue({} as RootState);
-    vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(getDoc).mockResolvedValue({
-      data: () => ({ 'session-1': true }),
-    } as never);
+    vi.mocked(fetchFeaturedSessions).mockResolvedValue({ 'session-1': true });
     const state = {
       featuredSessions: new Initialized(),
     } as unknown as RootState;
@@ -130,7 +125,7 @@ describe('featured session selectors', () => {
     await flushPromises();
 
     expect(selectUserId).toHaveBeenCalledWith({});
-    expect(getDoc).toHaveBeenCalledWith('doc-ref');
+    expect(fetchFeaturedSessions).toHaveBeenCalledWith('user-1');
     expect(dispatch).toHaveBeenNthCalledWith(
       1,
       expect.objectContaining({ type: 'featuredSessions/pending' }),
@@ -155,7 +150,7 @@ describe('featured session selectors', () => {
 
     await flushPromises();
 
-    expect(getDoc).not.toHaveBeenCalled();
+    expect(fetchFeaturedSessions).not.toHaveBeenCalled();
     expect(dispatch).not.toHaveBeenCalled();
   });
 

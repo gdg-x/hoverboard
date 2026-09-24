@@ -1,12 +1,11 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
-import { orderBy } from 'firebase/firestore';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectScheduleState } from '.';
 import { Day } from '../../models/day';
-import { subscribeToCollection } from '../../utils/firestore';
+import { subscribeToSchedule } from '../../db/schedule';
 import { RootState } from '..';
 
-vi.mock('../../utils/firestore');
+vi.mock('../../db/schedule');
 vi.mock('../dispatch');
 
 describe('schedule', () => {
@@ -17,16 +16,14 @@ describe('schedule', () => {
 
 describe('selectScheduleState', () => {
   it('subscribes on first read', () => {
-    vi.mocked(subscribeToCollection).mockReturnValue(new Success(vi.fn()));
+    vi.mocked(subscribeToSchedule).mockReturnValue(new Success(vi.fn()));
     const state = { schedule: new Initialized() } as unknown as RootState;
 
     expect(selectScheduleState(state)).toStrictEqual(new Pending());
-    expect(subscribeToCollection).toHaveBeenCalledWith(
-      'generatedSchedule',
+    expect(subscribeToSchedule).toHaveBeenCalledWith(
       expect.any(Function),
       expect.any(Function),
       expect.any(Function),
-      orderBy('date'),
     );
   });
 

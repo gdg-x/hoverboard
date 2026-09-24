@@ -1,12 +1,11 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
-import { orderBy } from 'firebase/firestore';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectBlogPosts } from '.';
 import { Post } from '../../models/post';
-import { subscribeToCollection } from '../../utils/firestore';
+import { subscribeToBlog } from '../../db/blog';
 import { RootState } from '..';
 
-vi.mock('../../utils/firestore');
+vi.mock('../../db/blog');
 vi.mock('../dispatch');
 
 describe('blog', () => {
@@ -16,17 +15,15 @@ describe('blog', () => {
 });
 
 describe('selectBlogPosts', () => {
-  it('subscribes to the blog collection ordered by published date, descending, on first read', () => {
-    vi.mocked(subscribeToCollection).mockReturnValue(new Success(vi.fn()));
+  it('subscribes to the blog collection on first read', () => {
+    vi.mocked(subscribeToBlog).mockReturnValue(new Success(vi.fn()));
     const state = { blog: new Initialized() } as unknown as RootState;
 
     expect(selectBlogPosts(state)).toStrictEqual(new Pending());
-    expect(subscribeToCollection).toHaveBeenCalledWith(
-      'blog',
+    expect(subscribeToBlog).toHaveBeenCalledWith(
       expect.any(Function),
       expect.any(Function),
       expect.any(Function),
-      orderBy('published', 'desc'),
     );
   });
 

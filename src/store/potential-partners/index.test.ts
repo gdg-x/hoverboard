@@ -1,10 +1,10 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { doc, setDoc } from 'firebase/firestore';
 import reducer, { addPotentialPartner, initialPotentialPartnersState } from '.';
+import { savePotentialPartner } from '../../db/potential-partners';
 import { dispatch } from '../dispatch';
 
-vi.mock('firebase/firestore');
+vi.mock('../../db/potential-partners');
 vi.mock('../dispatch');
 
 describe('potential-partners', () => {
@@ -34,8 +34,7 @@ describe('potential-partners', () => {
   });
 
   it('writes the partner document and dispatches success', async () => {
-    vi.mocked(doc).mockReturnValue('partner-doc' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined as never);
+    vi.mocked(savePotentialPartner).mockResolvedValue(undefined as never);
 
     await addPotentialPartner({
       email: 'ada.lovelace+partners@example.com',
@@ -43,15 +42,10 @@ describe('potential-partners', () => {
       secondFieldValue: 'Analytical Engines',
     });
 
-    expect(doc).toHaveBeenCalledWith(
-      undefined,
-      'potentialPartners',
-      'adalovelacepartnersexamplecom',
-    );
-    expect(setDoc).toHaveBeenCalledWith('partner-doc', {
+    expect(savePotentialPartner).toHaveBeenCalledWith({
       email: 'ada.lovelace+partners@example.com',
-      fullName: 'Ada',
-      companyName: 'Analytical Engines',
+      firstFieldValue: 'Ada',
+      secondFieldValue: 'Analytical Engines',
     });
     expect(dispatch).toHaveBeenNthCalledWith(
       1,
@@ -66,8 +60,7 @@ describe('potential-partners', () => {
   it('dispatches failure when saving the partner fails', async () => {
     const error = new Error('write failed');
 
-    vi.mocked(doc).mockReturnValue('partner-doc' as never);
-    vi.mocked(setDoc).mockRejectedValue(error);
+    vi.mocked(savePotentialPartner).mockRejectedValue(error);
 
     await addPotentialPartner({
       email: 'ada@example.com',

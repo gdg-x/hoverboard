@@ -1,7 +1,6 @@
 import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { savePotentialPartner } from '../../db/potential-partners';
 import { DialogData } from '../../models/dialog-form';
 import { dispatch } from '../dispatch';
 
@@ -23,22 +22,11 @@ const slice = createSlice({
 
 const { pending, failure, success } = slice.actions;
 
-const setPartner = async (data: DialogData) => {
-  const id = data.email.replace(/[^\w\s]/gi, '');
-  const partner = {
-    email: data.email,
-    fullName: data.firstFieldValue || '',
-    companyName: data.secondFieldValue || '',
-  };
-
-  await setDoc(doc(db, 'potentialPartners', id), partner);
-};
-
 export const addPotentialPartner = async (data: DialogData) => {
   dispatch(pending());
 
   try {
-    await setPartner(data);
+    await savePotentialPartner(data);
 
     dispatch(success());
   } catch (error) {

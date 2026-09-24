@@ -1,10 +1,8 @@
 import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { saveNotificationsUsers } from '../../db/notifications-users';
 import { notifications } from '../../utils/data';
 import { dispatch, getState } from '../dispatch';
-import { UserTokensData } from '../notifications-users';
 import { queueSnackbar } from '../snackbars';
 
 export type UpdateNotificationsUsersState = RemoteData<Error, string>;
@@ -25,10 +23,6 @@ const slice = createSlice({
 
 const { pending, failure, success } = slice.actions;
 
-const setNotificationsUsersDoc = async (uid: string, data: UserTokensData): Promise<void> => {
-  await setDoc(doc(db, 'notificationsUsers', uid), data);
-};
-
 export const updateNotificationsUsers = async (uid: string, token: string) => {
   dispatch(pending());
 
@@ -36,7 +30,7 @@ export const updateNotificationsUsers = async (uid: string, token: string) => {
     const { notificationsUsers } = getState();
     const tokens = notificationsUsers instanceof Success ? notificationsUsers.data.tokens : {};
 
-    await setNotificationsUsersDoc(uid, { tokens: { ...tokens, [token]: true } });
+    await saveNotificationsUsers(uid, { tokens: { ...tokens, [token]: true } });
 
     dispatch(success(uid));
     dispatch(queueSnackbar(notifications.myScheduleEnabled));
@@ -53,7 +47,7 @@ export const removeNotificationsUsers = async (uid: string, token: string) => {
     const oldTokens = notificationsUsers instanceof Success ? notificationsUsers.data.tokens : {};
     const tokens = { ...oldTokens };
     delete tokens[token];
-    await setNotificationsUsersDoc(uid, { tokens });
+    await saveNotificationsUsers(uid, { tokens });
 
     dispatch(success(uid));
     dispatch(queueSnackbar(notifications.myScheduleDisabled));

@@ -1,12 +1,11 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
-import { orderBy } from 'firebase/firestore';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectTeams } from '.';
 import { TeamWithoutMembers } from '../../models/team';
-import { subscribeToCollection } from '../../utils/firestore';
+import { subscribeToTeams } from '../../db/teams';
 import { RootState } from '..';
 
-vi.mock('../../utils/firestore');
+vi.mock('../../db/teams');
 vi.mock('../dispatch');
 
 describe('teams', () => {
@@ -17,16 +16,14 @@ describe('teams', () => {
 
 describe('selectTeams', () => {
   it('subscribes on first read', () => {
-    vi.mocked(subscribeToCollection).mockReturnValue(new Success(vi.fn()));
+    vi.mocked(subscribeToTeams).mockReturnValue(new Success(vi.fn()));
     const state = { teams: new Initialized() } as unknown as RootState;
 
     expect(selectTeams(state)).toStrictEqual(new Pending());
-    expect(subscribeToCollection).toHaveBeenCalledWith(
-      'team',
+    expect(subscribeToTeams).toHaveBeenCalledWith(
       expect.any(Function),
       expect.any(Function),
       expect.any(Function),
-      orderBy('title'),
     );
   });
 

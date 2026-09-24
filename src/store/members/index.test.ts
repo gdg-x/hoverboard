@@ -2,10 +2,10 @@ import { Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectMembers } from '.';
 import { Member } from '../../models/member';
-import { subscribeToCollectionGroup } from '../../utils/firestore';
+import { subscribeToMembers } from '../../db/members';
 import { RootState } from '..';
 
-vi.mock('../../utils/firestore');
+vi.mock('../../db/members');
 vi.mock('../dispatch');
 
 describe('members', () => {
@@ -16,12 +16,11 @@ describe('members', () => {
 
 describe('selectMembers', () => {
   it('subscribes on first read', () => {
-    vi.mocked(subscribeToCollectionGroup).mockReturnValue(new Success(vi.fn()));
+    vi.mocked(subscribeToMembers).mockReturnValue(new Success(vi.fn()));
     const state = { members: new Initialized() } as unknown as RootState;
 
     expect(selectMembers(state)).toStrictEqual(new Pending());
-    expect(subscribeToCollectionGroup).toHaveBeenCalledWith(
-      'members',
+    expect(subscribeToMembers).toHaveBeenCalledWith(
       expect.any(Function),
       expect.any(Function),
       expect.any(Function),

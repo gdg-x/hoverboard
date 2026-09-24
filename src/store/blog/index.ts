@@ -1,14 +1,11 @@
-import { orderBy } from 'firebase/firestore';
 import { RootState } from '..';
 import { CollectionState, createCollectionSlice } from '../create-collection-slice';
 import { Post } from '../../models/post';
-import { subscribeToCollection } from '../../utils/firestore';
+import { subscribeToBlog } from '../../db/blog';
 
 export type BlogState = CollectionState<Post>;
 
-const { reducer, selectOrFetch } = createCollectionSlice<Post>('blog', (onStart, onNext, onError) =>
-  subscribeToCollection('blog', onStart, onNext, onError, orderBy('published', 'desc')),
-);
+const { reducer, selectOrFetch } = createCollectionSlice<Post>('blog', subscribeToBlog);
 
 export const selectBlogPosts = (state: RootState): BlogState => selectOrFetch(state.blog);
 

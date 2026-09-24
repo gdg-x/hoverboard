@@ -1,10 +1,10 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
-import { subscribeToDocument } from '../../utils/firestore';
+import { subscribeToNotificationsUsers } from '../../db/notifications-users';
 import { dispatch } from '../dispatch';
 import { RootState } from '..';
 
-vi.mock('../../utils/firestore');
+vi.mock('../../db/notifications-users');
 vi.mock('../dispatch');
 
 const loadModule = async () => import('.');
@@ -43,7 +43,7 @@ describe('selectNotificationsUsersSubscribed', () => {
       ((payload: { id: string; tokens: Record<string, true> } | undefined) => void) | undefined;
     let onError: ((error: Error) => void) | undefined;
 
-    vi.mocked(subscribeToDocument).mockImplementation((_path, start, next, error) => {
+    vi.mocked(subscribeToNotificationsUsers).mockImplementation((_uid, start, next, error) => {
       onStart = start;
       onNext = next;
       onError = error;
@@ -58,8 +58,8 @@ describe('selectNotificationsUsersSubscribed', () => {
     } as unknown as RootState;
 
     expect(selectNotificationsUsersSubscribed(state)).toBe(false);
-    expect(subscribeToDocument).toHaveBeenCalledWith(
-      'notificationsUsers/user-1',
+    expect(subscribeToNotificationsUsers).toHaveBeenCalledWith(
+      'user-1',
       expect.any(Function),
       expect.any(Function),
       expect.any(Function),
@@ -110,6 +110,6 @@ describe('selectNotificationsUsersSubscribed', () => {
 
     expect(selectNotificationsUsersSubscribed(subscribedState)).toBe(true);
     expect(selectNotificationsUsersSubscribed(unsubscribedState)).toBe(false);
-    expect(subscribeToDocument).not.toHaveBeenCalled();
+    expect(subscribeToNotificationsUsers).not.toHaveBeenCalled();
   });
 });

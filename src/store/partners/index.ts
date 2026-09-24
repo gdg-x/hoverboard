@@ -1,18 +1,13 @@
 import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  collection,
-  collectionGroup,
-  onSnapshot,
-  orderBy,
-  query,
-  Unsubscribe,
-} from 'firebase/firestore';
+import type { Unsubscribe } from 'firebase/firestore';
 import { RootState, store } from '..';
-import { db } from '../../firebase';
+import {
+  subscribeToPartnerGroups as subscribeGroupsDb,
+  subscribeToPartners as subscribePartnersDb,
+} from '../../db/partners';
 import { Partner } from '../../models/partner';
 import { PartnerGroup, PartnerGroupWithoutItems } from '../../models/partner-group';
-import { dataWithParentId, mergeDataAndId } from '../../utils/firestore';
 
 export type PartnerGroupsState = RemoteData<Error, PartnerGroup[]>;
 
@@ -31,22 +26,20 @@ export const initialState = {
 } as PartnersState;
 
 const subscribeToPartners = () => {
-  return onSnapshot(
-    query(collectionGroup(db, 'items'), orderBy('order')),
-    (snapshot) => {
-      store.dispatch(setPartnersSuccess(snapshot.docs.map<Partner>(dataWithParentId)));
+  return subscribePartnersDb(
+    (partners) => {
+      store.dispatch(setPartnersSuccess(partners));
     },
-    (error) => store.dispatch(setPartnersFailure(error as Error)),
+    (error) => store.dispatch(setPartnersFailure(error)),
   );
 };
 
 const subscribeToGroups = () => {
-  return onSnapshot(
-    query(collection(db, 'partners'), orderBy('order')),
-    (snapshot) => {
-      store.dispatch(setGroupsSuccess(snapshot.docs.map<PartnerGroupWithoutItems>(mergeDataAndId)));
+  return subscribeGroupsDb(
+    (groups) => {
+      store.dispatch(setGroupsSuccess(groups));
     },
-    (error) => store.dispatch(setGroupsFailure(error as Error)),
+    (error) => store.dispatch(setGroupsFailure(error)),
   );
 };
 

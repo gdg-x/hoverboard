@@ -1,7 +1,9 @@
 import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { deleteDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
-import { db } from '../../firebase';
+import {
+  removeNotificationsSubscriber,
+  saveNotificationsSubscriber,
+} from '../../db/notifications-subscribers';
 import { notifications } from '../../utils/data';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
@@ -25,22 +27,11 @@ const slice = createSlice({
 
 const { pending, reset, failure, success } = slice.actions;
 
-const setNotificationsSubscribersDoc = async (token: string): Promise<void> => {
-  await setDoc(doc(db, 'notificationsSubscribers', token), {
-    value: true,
-    updatedAt: Timestamp.now(),
-  });
-};
-
-const removeNotificationsSubscribersDoc = async (token: string): Promise<void> => {
-  await deleteDoc(doc(db, 'notificationsSubscribers', token));
-};
-
 export const updateNotificationsSubscribers = async (token: string) => {
   dispatch(pending());
 
   try {
-    await setNotificationsSubscribersDoc(token);
+    await saveNotificationsSubscriber(token);
 
     dispatch(success(token));
     dispatch(queueSnackbar(notifications.generalEnabled));
@@ -53,7 +44,7 @@ export const clearNotificationsSubscribers = async (token: string) => {
   dispatch(pending());
 
   try {
-    await removeNotificationsSubscribersDoc(token);
+    await removeNotificationsSubscriber(token);
 
     dispatch(reset());
     dispatch(queueSnackbar(notifications.generalDisabled));

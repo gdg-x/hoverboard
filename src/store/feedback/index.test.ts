@@ -1,14 +1,5 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
-import {
-  collectionGroup,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  query,
-  setDoc,
-  where,
-} from 'firebase/firestore';
 import reducer, {
   deleteFeedback,
   initialState,
@@ -16,12 +7,16 @@ import reducer, {
   setFeedback,
   subscribe,
 } from '.';
-import { db } from '../../firebase';
+import {
+  removeFeedback,
+  saveFeedback,
+  subscribeToFeedback as subscribeFeedback,
+} from '../../db/feedback';
 import { Feedback } from '../../models/feedback';
 import { store } from '..';
 import { RootState } from '..';
 
-vi.mock('firebase/firestore');
+vi.mock('../../db/feedback');
 vi.mock('..', () => ({
   store: {
     dispatch: vi.fn(),
@@ -44,7 +39,7 @@ describe('feedback', () => {
 
   it('subscribes and marks the feedback data as pending', () => {
     const unsubscribe = vi.fn();
-    vi.mocked(onSnapshot).mockReturnValue(unsubscribe);
+    vi.mocked(subscribeFeedback).mockReturnValue(unsubscribe);
 
     const state = reducer(initialState, {
       type: 'feedback/subscribeToFeedback',
@@ -132,31 +127,17 @@ describe('feedback', () => {
 describe('feedback thunks and subscriptions', () => {
   it('subscribes to the feedback collection group and dispatches mapped snapshot data', () => {
     const unsubscribe = vi.fn();
-    vi.mocked(collectionGroup).mockReturnValue('feedback-group' as never);
-    vi.mocked(where).mockReturnValue('where-clause' as never);
-    vi.mocked(query).mockReturnValue('query-ref' as never);
-    vi.mocked(onSnapshot).mockImplementation((_query, next) => {
-      (next as (snapshot: unknown) => void)({
-        docs: [
-          {
-            id: 'user-1',
-            data: () => ({
-              comment: 'Great talk',
-              contentRating: 5,
-              styleRating: 4,
-              userId: 'user-1',
-            }),
-            ref: { parent: { parent: { id: 'session-1' } } },
-          },
-        ],
-      });
-
+    vi.mocked(subscribeFeedback).mockImplementation((_userId, next) => {
+      next([feedback]);
       return unsubscribe;
     });
 
     expect(subscribe('user-1')).toBe(unsubscribe);
-    expect(collectionGroup).toHaveBeenCalled();
-    expect(where).toHaveBeenCalledWith('userId', '==', 'user-1');
+    expect(subscribeFeedback).toHaveBeenCalledWith(
+      'user-1',
+      expect.any(Function),
+      expect.any(Function),
+    );
     expect(store.dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
         type: 'feedback/setSuccess',
@@ -167,8 +148,8 @@ describe('feedback thunks and subscriptions', () => {
 
   it('dispatches subscription errors from Firestore', () => {
     const error = new Error('boom');
-    vi.mocked(onSnapshot).mockImplementation((_query, _next, onError) => {
-      (onError as unknown as (error: Error) => void)(error);
+    vi.mocked(subscribeFeedback).mockImplementation((_userId, _next, onError) => {
+      onError(error);
       return vi.fn();
     });
 
@@ -183,34 +164,22 @@ describe('feedback thunks and subscriptions', () => {
   });
 
   it('writes feedback documents and returns their id payload', async () => {
-    vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined);
+    const savedId = { parentId: 'session-1', userId: 'user-1', id: 'user-1' };
+    vi.mocked(saveFeedback).mockResolvedValue(savedId);
 
     const action = await setFeedback(feedback)(vi.fn(), vi.fn(), undefined);
 
-    expect(doc).toHaveBeenCalledWith(db, 'sessions', 'session-1', 'feedback', 'user-1');
-    expect(setDoc).toHaveBeenCalledWith('doc-ref', {
-      comment: 'Great talk',
-      contentRating: 5,
-      styleRating: 4,
-      userId: 'user-1',
-    });
-    expect(action.payload).toStrictEqual({
-      parentId: 'session-1',
-      userId: 'user-1',
-      id: 'user-1',
-    });
+    expect(saveFeedback).toHaveBeenCalledWith(feedback);
+    expect(action.payload).toStrictEqual(savedId);
   });
 
   it('deletes feedback documents and returns their id payload', async () => {
     const id = { parentId: 'session-1', userId: 'user-1', id: 'user-1' };
-    vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(deleteDoc).mockResolvedValue(undefined);
+    vi.mocked(removeFeedback).mockResolvedValue(id);
 
     const action = await deleteFeedback(id)(vi.fn(), vi.fn(), undefined);
 
-    expect(doc).toHaveBeenCalledWith(db, 'sessions', 'session-1', 'feedback', 'user-1');
-    expect(deleteDoc).toHaveBeenCalledWith('doc-ref');
+    expect(removeFeedback).toHaveBeenCalledWith(id);
     expect(action.payload).toStrictEqual(id);
   });
 });
