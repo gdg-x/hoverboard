@@ -1,6 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-import { firestore } from '../firebase-config';
+import { firestore } from '../../lib/firestore.js';
+
+// npm sets INIT_CWD to the directory it was originally invoked from, which
+// stays correct even when root's `npm --prefix ./packages/cli run ...`
+// delegation changes process.cwd() to this package's directory.
+const BASE_DIR = process.env['INIT_CWD'] || process.cwd();
 
 interface Document {
   [key: string]: unknown;
@@ -49,12 +54,12 @@ export async function saveData(data: Data, path: string): Promise<void> {
 }
 
 async function fetchDataFromFile(file: string): Promise<Data> {
-  const contents = await fs.promises.readFile(path.resolve(process.cwd(), file), 'utf8');
+  const contents = await fs.promises.readFile(path.resolve(BASE_DIR, file), 'utf8');
   return JSON.parse(contents);
 }
 
 async function saveDataToFile(data: object, file: string) {
-  await fs.promises.writeFile(path.resolve(process.cwd(), file), JSON.stringify(data, null, 2));
+  await fs.promises.writeFile(path.resolve(BASE_DIR, file), JSON.stringify(data, null, 2));
 }
 
 async function getDocument(collectionId: string, docId: string): Promise<Document> {

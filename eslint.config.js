@@ -211,16 +211,6 @@ export default [
     },
   },
 
-  // Node.js environment for scripts
-  {
-    files: ['scripts/**/*.{js,ts}'],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-      },
-    },
-  },
-
   // Node.js environment for the CLI package
   {
     files: ['packages/cli/**/*.{js,ts}'],

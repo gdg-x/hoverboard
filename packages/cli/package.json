@@ -15,10 +15,15 @@
     "build": "npm run clean && tsc",
     "clean": "rm -rf dist",
     "start": "tsx src/index.ts",
-    "doctor": "tsx src/index.ts doctor"
+    "doctor": "tsx src/index.ts doctor",
+    "firestore-copy": "tsx src/index.ts firestore-copy",
+    "firestore-copy:production": "FIRESTORE_TARGET=production tsx src/index.ts firestore-copy",
+    "firestore-init": "tsx src/index.ts firestore-init",
+    "firestore-init:production": "FIRESTORE_TARGET=production tsx src/index.ts firestore-init"
   },
   "dependencies": {
-    "commander": "^15.0.0"
+    "commander": "^15.0.0",
+    "firebase-admin": "^14.4.0"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.6",

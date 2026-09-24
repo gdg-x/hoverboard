@@ -8,6 +8,7 @@
     "sourceMap": true,
     "module": "es2020",
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "strict": true
   },
   "compileOnSave": true,
