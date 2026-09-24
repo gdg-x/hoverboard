@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import { runDoctor } from './commands/doctor.js';
+import { runDeploy } from './commands/deploy.js';
+import { runEmulators } from './commands/emulators.js';
 import { runFirestoreCopy } from './commands/firestore-copy/index.js';
+import { runFirestoreExport } from './commands/firestore-export.js';
 import { runFirestoreInit } from './commands/firestore-init/index.js';
+import { runSetup } from './commands/setup.js';
 
 const program = new Command();
 
@@ -16,6 +20,30 @@ program
   .description('Validate the local environment is ready to run and deploy Hoverboard.')
   .action(() => {
     process.exitCode = runDoctor() ? 0 : 1;
+  });
+
+program
+  .command('setup')
+  .description(
+    'Log in to Firebase and select a project for local development (docs/tutorials/00-set-up.md).',
+  )
+  .action(async () => {
+    process.exitCode = (await runSetup()) ? 0 : 1;
+  });
+
+program
+  .command('emulators')
+  .description('Start the Firebase emulators, importing/exporting local Firestore data.')
+  .action(() => {
+    process.exitCode = runEmulators() ? 0 : 1;
+  });
+
+program
+  .command('deploy')
+  .description('Build and deploy Hoverboard to the selected Firebase project.')
+  .option('-y, --yes', 'Skip the confirmation prompt.')
+  .action(async (options: { yes?: boolean }) => {
+    process.exitCode = (await runDeploy(options)) ? 0 : 1;
   });
 
 program
@@ -49,6 +77,13 @@ program
       console.log('Error! 💩', error);
       process.exitCode = 1;
     }
+  });
+
+program
+  .command('firestore-export')
+  .description('Export the running Firestore emulator data to .firebase/emulator-data.')
+  .action(() => {
+    process.exitCode = runFirestoreExport() ? 0 : 1;
   });
 
 program.parse();

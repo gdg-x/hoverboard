@@ -11,12 +11,13 @@ Project Hoverboard locally in less than 15 minutes.
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
 1. Update [Hoverboard config](/config) and [Resources](/data). More info can be found [here](01-configure-app.md)
 1. Select your Firebase project `npx firebase use <projectId>` (this is only needed to load your app's web config; local development runs against the [Firestore emulator](https://firebase.google.com/docs/emulator-suite), so it never reads or writes your project's live data)
+   - _Tip: `./hbd setup` automates the login and project-selection steps above, then runs `./hbd doctor` to confirm your environment is ready._
 1. Seed the local Firestore emulator with data
    - [Optional] You can edit `docs/default-firebase-data.json` to use your own data
    - Run `npm start` in one terminal to launch the app together with the Firebase emulators
-   - In another terminal, run `npm run firestore:init` to import `docs/default-firebase-data.json` into the running emulator
+   - In another terminal, run `./hbd firestore-init` to import `docs/default-firebase-data.json` into the running emulator
    - Browse and edit the seeded data in the [Emulator UI](http://localhost:4000/firestore)
-   - [Optional] Run `npm run firestore:export` to persist your edits to `.firebase/emulator-data`, so they're automatically reloaded next time you run `npm start`
+   - [Optional] Run `./hbd firestore-export` to persist your edits to `.firebase/emulator-data`, so they're automatically reloaded next time you run `npm start`
 
 _Tip: See [Firestore utils](firebase-utils.md) for more on seeding, exporting, and copying Firestore data._
 
@@ -61,7 +62,7 @@ The diagram below is a brief summary of the directories within the project.
 1. Run locally
    - `npm start`
 1. Deploy
-   - `npm run deploy`
+   - `./hbd deploy`
 
 There are two CLI flags you can set when running npm scripts:
 
@@ -73,7 +74,7 @@ The common npm scripts are:
 - `npm start`: Start a local development server using the Firebase emulator with livereload.
 - `npm run build`: Build a production version of the site to the `dist` directory.
 - `npm run serve`: Build a production version of the site and serve it locally.
-- `npm run deploy`: Build a production version of the site and deploy it to Firebase.
+- `./hbd deploy`: Build a production version of the site and deploy it to Firebase.
 
 Below is the grid of the common npm script commands and their supported CLI flags.
 
