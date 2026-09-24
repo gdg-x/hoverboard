@@ -19,6 +19,7 @@ export default [
       'dist/**',
       'node_modules/**',
       'functions/dist/**',
+      'packages/cli/dist/**',
       'public/**',
       '**/package-lock.json', // Auto-generated lockfiles
       '**/yarn.lock', // Auto-generated lockfiles
@@ -46,7 +47,7 @@ export default [
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
-        project: ['./tsconfig.json', './functions/tsconfig.json'],
+        project: ['./tsconfig.json', './functions/tsconfig.json', './packages/cli/tsconfig.json'],
         sourceType: 'module',
         ecmaVersion: 2020,
       },
@@ -213,6 +214,16 @@ export default [
   // Node.js environment for scripts
   {
     files: ['scripts/**/*.{js,ts}'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+
+  // Node.js environment for the CLI package
+  {
+    files: ['packages/cli/**/*.{js,ts}'],
     languageOptions: {
       globals: {
         ...globals.node,

@@ -8,6 +8,7 @@ updates:
     directories:
       - '/'
       - '/functions'
+      - '/packages/cli'
     schedule:
       interval: monthly
     open-pull-requests-limit: 25

@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/node22/tsconfig.json",
+  "compilerOptions": {
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "sourceMap": true,
+    "module": "es2020",
+    "moduleResolution": "bundler",
+    "strict": true
+  },
+  "compileOnSave": true,
+  "include": ["src/**/*.ts"]
+}
