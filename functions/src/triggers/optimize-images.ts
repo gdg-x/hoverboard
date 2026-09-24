@@ -12,9 +12,9 @@ const gcs = new Storage();
 
 export const optimizeImages = onObjectFinalized((event) => {
   const object = event.data;
-  const { contentType } = object;
+  const contentType = object?.contentType;
   // Exit if this is triggered on a file that is not an image.
-  if (!contentType.startsWith('image/')) {
+  if (!contentType?.startsWith('image/')) {
     logger.log('This is not an image.');
     return null;
   }

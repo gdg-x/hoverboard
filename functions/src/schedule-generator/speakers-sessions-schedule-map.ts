@@ -13,30 +13,32 @@ export function sessionsSpeakersScheduleMap(
   speakersRaw: SpeakerMap,
   scheduleRaw: Record<string, RawScheduleDay>,
 ) {
-  const sessions = {};
-  let schedule = {};
-  let scheduleTags = [];
-  let speakers = {};
+  const sessions: Record<string, unknown> = {};
+  let schedule: Record<string, unknown> = {};
+  let scheduleTags: string[] = [];
+  let speakers: Record<string, unknown> = {};
 
   for (const dayKey of Object.keys(scheduleRaw)) {
-    const day = scheduleRaw[dayKey];
-    const tracksNumber = day.tracks.length;
-    let dayTags = [];
-    const timeslots = [];
+    const day = scheduleRaw[dayKey]!;
+    const tracksNumber = day.tracks?.length || 0;
+    let dayTags: string[] = [];
+    const timeslots: unknown[] = [];
     const extensions: { [key: string]: number } = {};
 
-    const timeslotLen = day.timeslots.length;
+    const timeslotLen = day.timeslots?.length || 0;
     for (let timeslotsIndex = 0; timeslotsIndex < timeslotLen; timeslotsIndex++) {
-      const timeslot = day.timeslots[timeslotsIndex];
-      let innerSessions = [];
+      const timeslot = day.timeslots[timeslotsIndex]!;
+      let innerSessions: unknown[] = [];
 
-      const sessionsLen = timeslot.sessions.length;
+      const sessionsLen = timeslot.sessions?.length || 0;
       for (let sessionIndex = 0; sessionIndex < sessionsLen; sessionIndex++) {
-        const subSessions = [];
+        const subSessions: unknown[] = [];
 
-        const subSessionsLen = timeslot.sessions[sessionIndex].items.length;
+        const sessionBlock = timeslot.sessions?.[sessionIndex];
+        const subSessionsLen = sessionBlock?.items?.length || 0;
         for (let subSessionIndex = 0; subSessionIndex < subSessionsLen; subSessionIndex++) {
-          const sessionId = timeslot.sessions[sessionIndex].items[subSessionIndex];
+          const sessionId = sessionBlock?.items?.[subSessionIndex];
+          if (!sessionId) continue;
           const subsession = sessionsRaw[sessionId];
           const mainTag = pickMainTag(subsession?.tags);
           const endTime = calculateEndTime(
@@ -52,29 +54,29 @@ export function sessionsSpeakersScheduleMap(
             subSessionsLen,
             subSessionIndex,
             sessionIndex,
-            sessions,
+            sessions as Record<string, { endTime: string }>,
             timeslot,
           );
 
           dayTags = combineTags(dayTags, subsession?.tags);
-          scheduleTags = combineTags(scheduleTags, [mainTag]);
+          scheduleTags = combineTags(scheduleTags, mainTag ? [mainTag] : []);
 
           const finalSubSession = {
             ...subsession,
             mainTag,
             id: sessionId,
             day: dayKey,
-            track: subsession.track || day.tracks[sessionIndex],
+            track: subsession?.track || day.tracks?.[sessionIndex],
             startTime,
             endTime,
             duration: getDuration(dayKey, startTime, endTime),
             dateReadable: day.dateReadable,
-            speakers: collectSpeakers(subsession.speakers, speakersRaw),
+            speakers: collectSpeakers(subsession?.speakers || [], speakersRaw),
           };
 
           subSessions.push(finalSubSession);
           sessions[sessionId] = finalSubSession;
-          if (subsession.speakers) {
+          if (subsession?.speakers) {
             speakers = {
               ...speakers,
               ...updateSpeakersSessions(
@@ -87,7 +89,7 @@ export function sessionsSpeakersScheduleMap(
           }
         }
 
-        const displayStart = timeslotsIndex + (timeslot.sessions[sessionIndex].extend || 0) + 1;
+        const displayStart = timeslotsIndex + (sessionBlock?.extend || 0) + 1;
         const displayEnd =
           sessionsLen !== 1
             ? sessionIndex + 2
@@ -97,8 +99,8 @@ export function sessionsSpeakersScheduleMap(
         const start = `${timeslotsIndex + 1} / ${sessionIndex + 1}`;
         const end = `${displayStart} / ${displayEnd}`;
 
-        if (timeslot.sessions[sessionIndex].extend) {
-          extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
+        if (sessionBlock?.extend) {
+          extensions[sessionIndex + 1] = sessionBlock.extend;
         }
 
         innerSessions = [
@@ -141,27 +143,37 @@ export function sessionsSpeakersScheduleMap(
   };
 }
 
-function updateSpeakersSessions(speakersRaw, speakerIds, session, generatedSpeakers) {
-  const result = {};
+function updateSpeakersSessions(
+  speakersRaw: SpeakerMap,
+  speakerIds: string[],
+  session: { id: string; tags?: string[] },
+  generatedSpeakers: Record<string, any>,
+) {
+  const result: Record<string, unknown> = {};
   for (let i = 0; i < speakerIds.length; i++) {
-    const speaker = speakersRaw[speakerIds[i]];
-    const generatedSpeaker = generatedSpeakers[speakerIds[i]];
+    const speakerId = speakerIds[i]!;
+    const speaker = speakersRaw[speakerId];
+    const generatedSpeaker = generatedSpeakers[speakerId];
     const hasSessionsAssigned = generatedSpeaker?.sessions?.length;
 
     if (speaker) {
       const speakerSessions = hasSessionsAssigned ? [...generatedSpeaker.sessions] : [];
 
-      if (!speakerSessions.filter((speakerSession) => speakerSession.id === session.id).length) {
+      if (
+        !speakerSessions.filter(
+          (speakerSession: { id: string }) => speakerSession.id === session.id,
+        ).length
+      ) {
         speakerSessions.push(session);
       }
 
-      let speakerTags = hasSessionsAssigned ? [...generatedSpeaker.tags] : [];
-      speakerSessions.forEach((session) => {
-        speakerTags = combineTags(speakerTags, session.tags);
+      let speakerTags: string[] = hasSessionsAssigned ? [...generatedSpeaker.tags] : [];
+      speakerSessions.forEach((sessionItem: { tags?: string[] }) => {
+        speakerTags = combineTags(speakerTags, sessionItem.tags);
       });
 
-      result[speakerIds[i]] = Object.assign({}, speaker, {
-        id: speakerIds[i],
+      result[speakerId] = Object.assign({}, speaker, {
+        id: speakerId,
         sessions: speakerSessions,
         tags: speakerTags,
       });

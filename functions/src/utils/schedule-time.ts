@@ -27,9 +27,10 @@ export const calculateStartTime = (
   sessions: BuiltSessions,
   timeslot: RawScheduleTimeslot,
 ) => {
-  return subSessionsLen > 1 && subSessionIndex > 0
-    ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
-    : timeslot.startTime;
+  const previousSessionId = timeslot.sessions?.[sessionIndex]?.items?.[subSessionIndex - 1];
+  return subSessionsLen > 1 && subSessionIndex > 0 && previousSessionId
+    ? sessions[previousSessionId]?.endTime || timeslot.startTime || ''
+    : timeslot.startTime || '';
 };
 
 export const calculateEndTime = (
@@ -41,12 +42,13 @@ export const calculateEndTime = (
   dayKey: string,
   subSessionIndex: number,
 ) => {
-  const endTimeRaw = timeslot.sessions[sessionIndex].extend
-    ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
-    : timeslot.endTime;
+  const sessionBlock = timeslot.sessions?.[sessionIndex];
+  const endTimeRaw = sessionBlock?.extend
+    ? day.timeslots[timeslotsIndex + sessionBlock.extend - 1]?.endTime || ''
+    : timeslot.endTime || '';
 
   return subSessionsLen > 1
-    ? getEndTime(dayKey, timeslot.startTime, endTimeRaw, subSessionsLen, subSessionIndex + 1)
+    ? getEndTime(dayKey, timeslot.startTime || '', endTimeRaw, subSessionsLen, subSessionIndex + 1)
     : endTimeRaw;
 };
 
@@ -56,7 +58,8 @@ export const calculateEndTime = (
  * consistently by the `Date` constructor.
  */
 function getLocalTimezoneSuffix(): string {
-  return new Date().toString().match(/([A-Z]+[+-][0-9]+.*)/)[1];
+  const match = new Date().toString().match(/([A-Z]+[+-][0-9]+.*)/);
+  return match?.[1] || '';
 }
 
 function toLocalTimestamp(date: string, time: string): number {

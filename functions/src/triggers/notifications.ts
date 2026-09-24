@@ -29,7 +29,7 @@ export const sendGeneralNotification = onDocumentCreated(
       notificationsConfigPromise,
     ]);
     const notificationsConfig = notificationsConfigSnapshot.exists
-      ? notificationsConfigSnapshot.data()
+      ? (notificationsConfigSnapshot.data() as { icon?: string })
       : {};
 
     const tokens = tokensSnapshot.docs.map((doc) => doc.id);
@@ -45,22 +45,24 @@ export const sendGeneralNotification = onDocumentCreated(
       data: {
         title: message.title,
         body: message.body,
-        icon: message.icon || notificationsConfig.icon,
+        icon: message.icon || notificationsConfig.icon || '',
       },
     };
 
-    if (message.path) {
+    if (message.path && multicastMessage.data) {
       multicastMessage.data.path = message.path;
     }
 
-    const tokensToRemove = [];
+    const tokensToRemove: Promise<unknown>[] = [];
     const messagingResponse = await getMessaging().sendEachForMulticast(multicastMessage);
     messagingResponse.responses.forEach((result, index) => {
       const error = result.error;
       if (error) {
         logger.error(`Failure sending notification to ${tokens[index]}`, error);
         if (isInvalidTokenError(error.code)) {
-          const tokenRef = getFirestore().collection('notificationsSubscribers').doc(tokens[index]);
+          const tokenRef = getFirestore()
+            .collection('notificationsSubscribers')
+            .doc(tokens[index]!);
           tokensToRemove.push(tokenRef.delete());
         }
       }

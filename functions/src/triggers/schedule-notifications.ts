@@ -14,12 +14,13 @@ import {
 } from '../time.js';
 import { isInvalidTokenError } from '../utils/messaging.js';
 
-const removeUserTokens = (tokensToUsers) => {
-  const userTokens = Object.keys(tokensToUsers).reduce((acc, token) => {
+const removeUserTokens = (tokensToUsers: Record<string, string>) => {
+  const userTokens = Object.keys(tokensToUsers).reduce((acc: Record<string, string[]>, token) => {
     const userId = tokensToUsers[token];
-    const userTokens = acc[userId] || [];
+    if (!userId) return acc;
+    const existingTokens = acc[userId] || [];
 
-    return { ...acc, [userId]: [...userTokens, token] };
+    return { ...acc, [userId]: [...existingTokens, token] };
   }, {});
 
   const promises = Object.keys(userTokens).map((userId) => {
@@ -31,8 +32,8 @@ const removeUserTokens = (tokensToUsers) => {
           return;
         }
 
-        const val = doc.data();
-        const newVal = Object.keys(val).reduce((acc, token) => {
+        const val = doc.data() || {};
+        const newVal = Object.keys(val).reduce((acc: Record<string, boolean>, token) => {
           if (tokensToUsers[token]) return acc;
 
           return { ...acc, [token]: true };
@@ -54,21 +55,21 @@ const sendPushNotificationToUsers = async (userIds: string[], data: MulticastMes
   });
 
   const usersTokens: DocumentSnapshot<DocumentData>[] = await Promise.all(tokensPromise);
-  const tokensToUsers = usersTokens.reduce((aggregator, userTokens) => {
+  const tokensToUsers = usersTokens.reduce<Record<string, any>>((aggregator, userTokens) => {
     if (!userTokens.exists) return aggregator;
-    const { tokens } = userTokens.data();
+    const { tokens } = userTokens.data() || {};
     return { ...aggregator, tokens };
   }, {});
   const tokens = Object.keys(tokensToUsers);
 
-  const tokensToRemove = {};
+  const tokensToRemove: Record<string, string> = {};
   const messagingResponse = await getMessaging().sendEachForMulticast({ tokens, data });
   messagingResponse.responses.forEach((result, index) => {
     const error = result.error;
     if (error) {
       logger.error('Failure sending notification to', tokens[index], error);
       if (isInvalidTokenError(error.code)) {
-        const token = tokens[index];
+        const token = tokens[index]!;
         tokensToRemove[token] = tokensToUsers[token];
       }
     }
@@ -86,29 +87,33 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
     schedulePromise,
   ]);
   const notificationsConfig = notificationsConfigSnapshot.exists
-    ? notificationsConfigSnapshot.data()
+    ? (notificationsConfigSnapshot.data() as { timezone?: string; icon?: string })
     : {};
 
   const schedule = scheduleSnapshot.docs.reduce(
-    (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
+    (acc: Record<string, any>, doc) => ({ ...acc, [doc.id]: doc.data() }),
     {},
   );
   const todayDay = getTodayDateString(notificationsConfig.timezone);
 
   if (schedule[todayDay]) {
     const timeWindow = createTimeWindow(3, 3);
+    const timezone = notificationsConfig.timezone || '';
 
-    const upcomingTimeslot = filterUpcomingTimeslots(
-      schedule[todayDay].timeslots,
+    const upcomingTimeslots = filterUpcomingTimeslots(
+      schedule[todayDay].timeslots || [],
       timeWindow,
       10, // notification offset in minutes
-      notificationsConfig.timezone,
+      timezone,
     );
 
-    const upcomingSessions = upcomingTimeslot.reduce(
-      (result, timeslot) =>
-        timeslot.sessions.reduce(
-          (aggregatedSessions, current) => [...aggregatedSessions, ...current.items],
+    const upcomingSessions: string[] = upcomingTimeslots.reduce(
+      (result: string[], timeslot: { sessions?: { items?: string[] }[] }) =>
+        (timeslot.sessions || []).reduce(
+          (aggregatedSessions: string[], current: { items?: string[] }) => [
+            ...aggregatedSessions,
+            ...(current.items || []),
+          ],
           result,
         ),
       [],
@@ -120,35 +125,34 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
         .collection('sessions')
         .doc(upcomingSession)
         .get();
-      if (!sessionInfoSnapshot.exists) return undefined;
+      if (!sessionInfoSnapshot.exists) return;
 
       const usersIds = usersIdsSnapshot.docs.reduce(
-        (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
+        (acc: Record<string, Record<string, unknown>>, doc) => ({ ...acc, [doc.id]: doc.data() }),
         {},
       );
 
       const userIdsFeaturedSession = Object.keys(usersIds).filter(
         (userId) =>
-          !!Object.keys(usersIds[userId]).filter(
+          !!Object.keys(usersIds[userId] || {}).filter(
             (sessionId) => sessionId.toString() === upcomingSession.toString(),
           ).length,
       );
 
       const session = sessionInfoSnapshot.data();
-      const fromNow = parseTimeAndGetFromNow(
-        upcomingTimeslot[0].startTime,
-        notificationsConfig.timezone,
-      );
+      const firstTimeslot = upcomingTimeslots[0];
+      const fromNow = firstTimeslot
+        ? parseTimeAndGetFromNow(firstTimeslot.startTime, timezone)
+        : '';
 
       if (userIdsFeaturedSession.length) {
         const data: MulticastMessage['data'] = {
-          title: session.title,
+          title: session?.title || '',
           body: `Starts ${fromNow}`,
-          icon: notificationsConfig.icon,
+          icon: notificationsConfig.icon || '',
           path: `/sessions/${upcomingSessions[sessionIndex]}`,
         };
-
-        return sendPushNotificationToUsers(userIdsFeaturedSession, data);
+        await sendPushNotificationToUsers(userIdsFeaturedSession, data);
       }
 
       if (upcomingSessions.length) {
@@ -156,8 +160,6 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
       } else {
         logger.log('There is no sessions right now');
       }
-
-      return undefined;
     });
   } else {
     logger.log(todayDay, 'was not found in the schedule');

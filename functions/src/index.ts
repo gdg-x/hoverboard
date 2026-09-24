@@ -12,10 +12,6 @@ import { optimizeImages } from './triggers/optimize-images.js';
 import { prerender } from './triggers/prerender.js';
 import { scheduleNotifications } from './triggers/schedule-notifications.js';
 
-// TODO: Update `tsconfig.json`
-// - "noImplicitReturns": true,
-// - "strict": true,
-
 initializeApp();
 
 export {

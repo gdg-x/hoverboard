@@ -8,20 +8,37 @@ import fetch from 'node-fetch';
 
 const md5 = (data: string) => crypto.createHash('md5').update(data).digest('hex');
 
-const getMailchimpConfig = async () => {
+interface MailchimpConfig {
+  dc: string;
+  listid: string;
+  apikey: string;
+}
+
+interface SubscriberPayload {
+  email_address: string;
+  status: string;
+  merge_fields: {
+    FNAME?: string;
+    LNAME?: string;
+  };
+}
+
+const getMailchimpConfig = async (): Promise<MailchimpConfig | undefined> => {
   const doc = await getFirestore().collection('config').doc('mailchimp').get();
-  return doc.exists && doc.data();
+  return doc.exists ? (doc.data() as MailchimpConfig) : undefined;
 };
 
 export const mailchimpSubscribe = onDocumentCreated('/subscribers/{id}', async (event) => {
   const mailchimpConfig = await getMailchimpConfig();
   if (!mailchimpConfig) {
     logger.log("Can't subscribe user, Mailchimp config is empty.");
+    return;
   }
 
-  const subscriber = event.data.data();
+  const subscriber = event.data?.data();
+  if (!subscriber) return;
 
-  const subscriberData = {
+  const subscriberData: SubscriberPayload = {
     email_address: subscriber.email,
     status: 'subscribed',
     merge_fields: {
@@ -33,7 +50,11 @@ export const mailchimpSubscribe = onDocumentCreated('/subscribers/{id}', async (
   return subscribeToMailchimp(mailchimpConfig, subscriberData);
 });
 
-function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash?: string) {
+function subscribeToMailchimp(
+  mailchimpConfig: MailchimpConfig,
+  subscriberData: SubscriberPayload,
+  emailHash?: string,
+): Promise<void> {
   const uri = `https://${mailchimpConfig.dc}.api.mailchimp.com/3.0/lists/${mailchimpConfig.listid}/members`;
   const url = emailHash ? `${uri}/${emailHash}` : uri;
   const method = emailHash ? 'PATCH' : 'POST';
@@ -48,7 +69,7 @@ function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash?: strin
   });
 
   return subscribePromise
-    .then((res) => res.json())
+    .then((res) => res.json() as Promise<{ status?: number; title?: string }>)
     .then(({ status, title }) => {
       if (status === 400 && title === 'Member Exists') {
         subscriberData.status = 'pending';
@@ -59,6 +80,9 @@ function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash?: strin
       } else if (method === 'PATCH') {
         logger.log(`${subscriberData.email_address} was updated in subscribe list.`);
       }
+      return undefined;
     })
-    .catch((error) => logger.error(`Error occured during Mailchimp subscription: ${error}`));
+    .catch((error) => {
+      logger.error(`Error occured during Mailchimp subscription: ${error}`);
+    });
 }
