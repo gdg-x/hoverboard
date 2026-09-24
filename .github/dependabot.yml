@@ -10,6 +10,7 @@ updates:
       - '/packages/server/functions'
       - '/packages/cli'
       - '/packages/web'
+      - '/packages/storage'
     schedule:
       interval: monthly
     open-pull-requests-limit: 25
