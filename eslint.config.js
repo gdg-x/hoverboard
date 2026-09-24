@@ -53,6 +53,7 @@ export default [
           './packages/web/tsconfig.json',
           './packages/server/functions/tsconfig.json',
           './packages/cli/tsconfig.json',
+          './packages/storage/tsconfig.json',
         ],
         sourceType: 'module',
         ecmaVersion: 2020,
@@ -227,11 +228,22 @@ export default [
     },
   },
 
+  // Node.js environment for the storage rules/tests package
+  {
+    files: ['packages/storage/**/*.{js,ts}'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+
   // Test files configuration
   {
     files: [
       '__tests__/**/*.{js,ts}',
       'packages/web/__tests__/**/*.{js,ts}',
+      'packages/storage/__tests__/**/*.{js,ts}',
       '**/*.test.{js,ts}',
       '**/*.spec.{js,ts}',
     ],

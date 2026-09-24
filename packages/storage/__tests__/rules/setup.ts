@@ -15,7 +15,7 @@ import { afterAll, afterEach, beforeAll } from 'vitest';
 // cheap against an already-running emulator.
 let testEnv: RulesTestEnvironment;
 
-const rules = fs.readFileSync(path.join(process.cwd(), 'firestore.rules'), 'utf8');
+const rules = fs.readFileSync(path.join(process.cwd(), 'packages/storage/firestore.rules'), 'utf8');
 
 beforeAll(async () => {
   testEnv = await initializeTestEnvironment({

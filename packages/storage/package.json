@@ -1,0 +1,21 @@
+{
+  "name": "@hoverboard/storage",
+  "private": true,
+  "description": "Firebase security rules (Firestore, Storage, Realtime Database) and indexes, plus the Firestore rules test suite.",
+  "type": "module",
+  "engines": {
+    "node": "22",
+    "npm": "10"
+  },
+  "scripts": {
+    "lint:types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.2",
+    "@tsconfig/node22": "^22.0.6",
+    "@types/node": "^26.4.0",
+    "firebase": "^12.19.0",
+    "jest-dev-server": "^11.0.0",
+    "typescript": "^6.0.3"
+  }
+}
