@@ -24,7 +24,7 @@ import './text-truncate';
 import { ThemedElement } from './themed-element';
 
 // The runtime `session.speakers` payload is an enriched list of speaker summaries (see
-// `functions/src/schedule-generator/speakers-sessions-schedule-map.ts`), not the `string[]` of ids
+// `packages/server/functions/src/schedule-generator/speakers-sessions-schedule-map.ts`), not the `string[]` of ids
 // declared on `SessionData`. The same generator also adds a computed `duration` that
 // isn't declared on `SessionData`.
 interface SessionSpeaker {

@@ -7,7 +7,7 @@ updates:
   - package-ecosystem: npm
     directories:
       - '/'
-      - '/functions'
+      - '/packages/server/functions'
       - '/packages/cli'
     schedule:
       interval: monthly

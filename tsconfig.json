@@ -100,5 +100,5 @@
   },
   "compileOnSave": true,
   "include": ["**/*.ts", "*.ts"],
-  "exclude": ["functions"]
+  "exclude": ["packages"]
 }

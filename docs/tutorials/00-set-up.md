@@ -30,9 +30,9 @@ The diagram below is a brief summary of the directories within the project.
     |---data/
     |---dist/
     |---docs/
-    |---functions/
-    |---images/
     |---packages/cli/
+    |---packages/server/
+    |---images/
     |---node_modules/
     |---src/
     |   |---components/
@@ -45,9 +45,9 @@ The diagram below is a brief summary of the directories within the project.
 - `data/` folder with all data for the template including rest of config and resources for pages.
 - `dist/` is the directory to deploy to production.
 - `docs/` documentation.
-- `functions/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) used for notifications, optimizations, saving data, etc.
 - `images/` is for static images.
 - `packages/cli/` contains the `hoverboard` developer CLI that helps you work with the project and its data ([docs](./firebase-utils.md)).
+- `packages/server/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) (in `functions/`) used for notifications, optimizations, saving data, etc.
 - `node_modules/` is the place of Node dependencies.
 - `src/` is where you store all of your source code and do all of your development.
   - `components/` is where you keep your new LitElement custom elements.

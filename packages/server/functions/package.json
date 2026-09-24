@@ -1,5 +1,5 @@
 {
-  "name": "hoverboard-functions",
+  "name": "@hoverboard/functions",
   "private": true,
   "description": "Hoverboard serverless functions",
   "main": "dist/src/index.js",
@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "npm run clean && concurrently npm:build:*",
-    "build:index": "cpx \"../dist/*.html\" dist --verbose",
+    "build:index": "cpx \"../../../dist/*.html\" dist --verbose",
     "build:src": "tsc",
     "clean": "rm -rf dist",
     "start": "npm run clean && concurrently --kill-others npm:start:*",

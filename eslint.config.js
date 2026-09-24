@@ -18,7 +18,7 @@ export default [
     ignores: [
       'dist/**',
       'node_modules/**',
-      'functions/dist/**',
+      'packages/server/functions/dist/**',
       'packages/cli/dist/**',
       'public/**',
       '**/package-lock.json', // Auto-generated lockfiles
@@ -47,7 +47,11 @@ export default [
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
-        project: ['./tsconfig.json', './functions/tsconfig.json', './packages/cli/tsconfig.json'],
+        project: [
+          './tsconfig.json',
+          './packages/server/functions/tsconfig.json',
+          './packages/cli/tsconfig.json',
+        ],
         sourceType: 'module',
         ecmaVersion: 2020,
       },
@@ -203,7 +207,7 @@ export default [
 
   // Node.js environment for functions
   {
-    files: ['functions/**/*.{js,ts}'],
+    files: ['packages/server/functions/**/*.{js,ts}'],
     languageOptions: {
       globals: {
         ...globals.node,
