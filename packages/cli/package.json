@@ -5,7 +5,8 @@
   "description": "CLI to help developers set up, run, and deploy the Hoverboard site",
   "type": "module",
   "bin": {
-    "hoverboard": "bin/hoverboard.js"
+    "hoverboard": "bin/hoverboard.js",
+    "hbd": "bin/hoverboard.js"
   },
   "engines": {
     "node": "22",
