@@ -51,7 +51,7 @@
     "@firebase/rules-unit-testing": "^5.0.2",
     "@html-eslint/eslint-plugin": "^0.66.1",
     "@html-eslint/parser": "^0.66.1",
-    "@types/node": "^26.4.0",
+    "@types/node": "^22.20.4",
     "@typescript-eslint/eslint-plugin": "^8.68.0",
     "@typescript-eslint/parser": "^8.65.0",
     "@vitest/eslint-plugin": "^1.6.27",
