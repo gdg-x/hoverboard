@@ -8,15 +8,24 @@
 // https://github.com/microsoft/TypeScript/issues/14877
 declare const self: ServiceWorkerGlobalScope;
 
-// TODO: Migrate to v9 with imports
-importScripts('/__/firebase/8.10.0/firebase-app.js');
-importScripts('/__/firebase/8.10.0/firebase-messaging.js');
-// This is currently the only method of loading
+import { FirebaseOptions, initializeApp } from 'firebase/app';
+import { MessagePayload, getMessaging, onBackgroundMessage } from 'firebase/messaging/sw';
+
+// Capture the config object from /__/firebase/init.js
+let firebaseConfig: FirebaseOptions | undefined;
+(self as unknown as { firebase: { initializeApp: (config: FirebaseOptions) => void } }).firebase = {
+  initializeApp: (config) => {
+    firebaseConfig = config;
+  },
+};
 importScripts('/__/firebase/init.js');
 
-import { MessagePayload, onBackgroundMessage } from 'firebase/messaging/sw';
+if (!firebaseConfig) {
+  throw new Error('firebaseConfig is not defined');
+}
 
-const messaging = (self as any).firebase.messaging();
+const firebaseApp = initializeApp(firebaseConfig);
+const messaging = getMessaging(firebaseApp);
 
 const showNotification = (payload: MessagePayload) => {
   const data = payload.data ?? {};
@@ -28,13 +37,12 @@ const showNotification = (payload: MessagePayload) => {
   return self.registration.showNotification(title, notificationOptions);
 };
 
-// This seems to get called when site is closed
-messaging.setBackgroundMessageHandler(showNotification);
-
-// This seems to get called when site is open
 onBackgroundMessage(messaging, showNotification);
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  event.waitUntil(self.clients.openWindow(event.notification.data.path));
+  const path = event.notification.data?.path;
+  if (path) {
+    event.waitUntil(self.clients.openWindow(path));
+  }
 });
