@@ -8,7 +8,7 @@
     "source": "packages/server/functions"
   },
   "hosting": {
-    "public": "dist",
+    "public": "packages/web/dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {

@@ -1,0 +1,57 @@
+{
+  "name": "@hoverboard/web",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Hoverboard conference website frontend (Lit + Redux Toolkit PWA)",
+  "type": "module",
+  "engines": {
+    "node": "22",
+    "npm": "10"
+  },
+  "scripts": {
+    "build": "npm run clean && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --config vite.sw.config.ts",
+    "clean": "rm -rf dist",
+    "lint:lit-analyzer": "lit-analyzer 'src/**/*.ts' --rules.no-incompatible-type-binding off",
+    "lint:types": "tsc --noEmit",
+    "start:vite": "mkdir -p dist && VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --watch",
+    "start:vite-sw": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --watch --config vite.sw.config.ts"
+  },
+  "dependencies": {
+    "@abraham/remotedata": "1.4.0",
+    "@justinribeiro/lite-youtube": "^1.9.0",
+    "@material/mwc-dialog": "^0.27.0",
+    "@material/mwc-formfield": "^0.27.0",
+    "@material/mwc-icon-button": "^0.27.0",
+    "@material/mwc-snackbar": "^0.27.0",
+    "@material/mwc-switch": "^0.27.0",
+    "@material/web": "^2.5.0",
+    "@power-elements/lazy-image": "^2.2.0",
+    "@reduxjs/toolkit": "^2.12.0",
+    "@vaadin/router": "^2.0.1",
+    "firebase": "^12.19.0",
+    "lit": "^3.3.3",
+    "marked": "^18.0.11",
+    "marked-gfm-heading-id": "^4.1.4",
+    "pwa-helpers": "^0.9.1",
+    "register-service-worker": "^1.7.2"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@types/jsdom": "^30.0.0",
+    "@types/marked": "^6.0.0",
+    "@types/node": "^26.4.0",
+    "@types/nunjucks": "^3.2.6",
+    "lit-analyzer": "^2.0.3",
+    "nunjucks": "^3.2.4",
+    "rollup": "^4.63.1",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-workbox": "^9.0.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.44.0"
+  }
+}

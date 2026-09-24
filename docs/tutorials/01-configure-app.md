@@ -56,7 +56,7 @@ The top block (aka 'hero') view of the page can be adjusted via `heroSettings` i
 ```
 
 If you don't need some pages, don't forget to remove them (or comment out)
-in `src/router.ts`
+in `packages/web/src/router.ts`
 
 ## Toolbar Navigation
 

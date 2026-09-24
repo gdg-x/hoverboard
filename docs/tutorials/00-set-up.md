@@ -27,33 +27,32 @@ The diagram below is a brief summary of the directories within the project.
 
     /
     |---config/
-    |---data/
-    |---dist/
     |---docs/
     |---packages/cli/
     |---packages/server/
-    |---images/
-    |---node_modules/
-    |---src/
-    |   |---components/
-    |   |---elements/
-    |   |---mixins/
-    |   |---pages/
+    |---packages/web/
+    |   |---data/
+    |   |---dist/
+    |   |---node_modules/
+    |   |---src/
+    |   |   |---components/
+    |   |   |---elements/
+    |   |   |---mixins/
+    |   |   |---pages/
     |
 
-- `config/` folder for core project setup.
-- `data/` folder with all data for the template including rest of config and resources for pages.
-- `dist/` is the directory to deploy to production.
+- `config/` folder for core project setup, consumed by `packages/web`'s build.
 - `docs/` documentation.
-- `images/` is for static images.
 - `packages/cli/` contains the `hoverboard` developer CLI that helps you work with the project and its data ([docs](./firebase-utils.md)).
 - `packages/server/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) (in `functions/`) used for notifications, optimizations, saving data, etc.
-- `node_modules/` is the place of Node dependencies.
-- `src/` is where you store all of your source code and do all of your development.
-  - `components/` is where you keep your new LitElement custom elements.
-  - `elements/` is where you keep your old Polymer custom elements.
-  - `mixins/` is where you keep your shared component mixins.
-  - `pages/` is where you keep your pages' description.
+- `packages/web/` is the frontend app (own `package.json`/`node_modules`):
+  - `data/` folder with all data for the template including rest of config and resources for pages.
+  - `dist/` is the directory to deploy to production.
+  - `src/` is where you store all of your source code and do all of your development.
+    - `components/` is where you keep your new LitElement custom elements.
+    - `elements/` is where you keep your old Polymer custom elements.
+    - `mixins/` is where you keep your shared component mixins.
+    - `pages/` is where you keep your pages' description.
 
 ## Build and serve
 

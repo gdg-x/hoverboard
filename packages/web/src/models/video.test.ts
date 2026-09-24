@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import data from '../../docs/default-firebase-data.json';
+import data from '../../../../docs/default-firebase-data.json';
 import { allKeys } from './utils';
 import { Video } from './video';
 
