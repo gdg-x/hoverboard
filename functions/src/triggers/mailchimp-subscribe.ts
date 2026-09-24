@@ -1,10 +1,10 @@
 import crypto from 'crypto';
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
-import { getFirestore } from 'firebase-admin/firestore';
 import * as logger from 'firebase-functions/logger';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import fetch from 'node-fetch';
+import { fetchConfig } from '../db/config.js';
 
 const md5 = (data: string) => crypto.createHash('md5').update(data).digest('hex');
 
@@ -24,7 +24,7 @@ interface SubscriberPayload {
 }
 
 const getMailchimpConfig = async (): Promise<MailchimpConfig | undefined> => {
-  const doc = await getFirestore().collection('config').doc('mailchimp').get();
+  const doc = await fetchConfig<MailchimpConfig>('mailchimp');
   return doc.exists ? (doc.data() as MailchimpConfig) : undefined;
 };
 

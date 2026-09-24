@@ -1,19 +1,19 @@
 import express, { Request } from 'express';
-import { getFirestore } from 'firebase-admin/firestore';
 import { onRequest } from 'firebase-functions/v2/https';
 import fetch from 'node-fetch';
 import url, { URL } from 'url';
+import { fetchConfig } from '../db/config.js';
 
 const app = express();
 
 const getSiteDomain = async () => {
-  const doc = await getFirestore().collection('config').doc('site').get();
-  return (doc.data() as { domain?: string } | undefined)?.domain || '';
+  const doc = await fetchConfig<{ domain?: string }>('site');
+  return doc.data()?.domain || '';
 };
 
 const getRendertronServer = async () => {
-  const doc = await getFirestore().collection('config').doc('rendertron').get();
-  return (doc.data() as { server?: string } | undefined)?.server || '';
+  const doc = await fetchConfig<{ server?: string }>('rendertron');
+  return doc.data()?.server || '';
 };
 
 /**

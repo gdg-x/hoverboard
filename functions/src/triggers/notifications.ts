@@ -1,11 +1,13 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
-import { getFirestore } from 'firebase-admin/firestore';
-// https://github.com/import-js/eslint-plugin-import/issues/1810
-
 import { getMessaging, MulticastMessage } from 'firebase-admin/messaging';
 import * as logger from 'firebase-functions/logger';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
+import { fetchConfig } from '../db/config.js';
+import {
+  deleteNotificationSubscriber,
+  fetchNotificationSubscribers,
+} from '../db/notifications-subscribers.js';
 import { isInvalidTokenError } from '../utils/messaging.js';
 
 export const sendGeneralNotification = onDocumentCreated(
@@ -18,11 +20,8 @@ export const sendGeneralNotification = onDocumentCreated(
 
     logger.log(`New message added at ${timestamp} with payload ${message}`);
 
-    const deviceTokensPromise = getFirestore().collection('notificationsSubscribers').get();
-    const notificationsConfigPromise = getFirestore()
-      .collection('config')
-      .doc('notifications')
-      .get();
+    const deviceTokensPromise = fetchNotificationSubscribers();
+    const notificationsConfigPromise = fetchConfig<{ icon?: string }>('notifications');
 
     const [tokensSnapshot, notificationsConfigSnapshot] = await Promise.all([
       deviceTokensPromise,
@@ -60,10 +59,7 @@ export const sendGeneralNotification = onDocumentCreated(
       if (error) {
         logger.error(`Failure sending notification to ${tokens[index]}`, error);
         if (isInvalidTokenError(error.code)) {
-          const tokenRef = getFirestore()
-            .collection('notificationsSubscribers')
-            .doc(tokens[index]!);
-          tokensToRemove.push(tokenRef.delete());
+          tokensToRemove.push(deleteNotificationSubscriber(tokens[index]!));
         }
       }
     });
