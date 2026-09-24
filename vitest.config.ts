@@ -28,6 +28,13 @@ export default defineConfig({
       },
       {
         test: {
+          name: 'CLI',
+          environment: 'node',
+          include: ['packages/cli/src/**/*.test.ts'],
+        },
+      },
+      {
+        test: {
           name: 'Firestore',
           environment: 'node',
           // Starts/stops the Firestore emulator once for the whole run (not
