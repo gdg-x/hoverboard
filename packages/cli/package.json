@@ -17,8 +17,12 @@
     "clean": "rm -rf dist",
     "start": "tsx src/index.ts",
     "doctor": "tsx src/index.ts doctor",
+    "setup": "tsx src/index.ts setup",
+    "emulators": "tsx src/index.ts emulators",
+    "deploy": "tsx src/index.ts deploy",
     "firestore-copy": "tsx src/index.ts firestore-copy",
     "firestore-copy:production": "FIRESTORE_TARGET=production tsx src/index.ts firestore-copy",
+    "firestore-export": "tsx src/index.ts firestore-export",
     "firestore-init": "tsx src/index.ts firestore-init",
     "firestore-init:production": "FIRESTORE_TARGET=production tsx src/index.ts firestore-init"
   },
