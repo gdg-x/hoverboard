@@ -1,16 +1,11 @@
-import { orderBy } from 'firebase/firestore';
 import { RootState } from '..';
 import { CollectionState, createCollectionSlice } from '../create-collection-slice';
 import { Video } from '../../models/video';
-import { subscribeToCollection } from '../../utils/firestore';
+import { subscribeToVideos } from '../../db/videos';
 
 export type VideosState = CollectionState<Video>;
 
-const { reducer, selectOrFetch } = createCollectionSlice<Video>(
-  'videos',
-  (onStart, onNext, onError) =>
-    subscribeToCollection('videos', onStart, onNext, onError, orderBy('order')),
-);
+const { reducer, selectOrFetch } = createCollectionSlice<Video>('videos', subscribeToVideos);
 
 export const selectVideos = (state: RootState): VideosState => selectOrFetch(state.videos);
 

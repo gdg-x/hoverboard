@@ -2,10 +2,10 @@ import { Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectSpeakersState } from '.';
 import { SpeakerWithTags } from '../../models/speaker';
-import { subscribeToCollection } from '../../utils/firestore';
+import { subscribeToSpeakers } from '../../db/speakers';
 import { RootState } from '..';
 
-vi.mock('../../utils/firestore');
+vi.mock('../../db/speakers');
 vi.mock('../dispatch');
 
 describe('speakers', () => {
@@ -16,12 +16,11 @@ describe('speakers', () => {
 
 describe('selectSpeakersState', () => {
   it('subscribes on first read', () => {
-    vi.mocked(subscribeToCollection).mockReturnValue(new Success(vi.fn()));
+    vi.mocked(subscribeToSpeakers).mockReturnValue(new Success(vi.fn()));
     const state = { speakers: new Initialized() } as unknown as RootState;
 
     expect(selectSpeakersState(state)).toStrictEqual(new Pending());
-    expect(subscribeToCollection).toHaveBeenCalledWith(
-      'generatedSpeakers',
+    expect(subscribeToSpeakers).toHaveBeenCalledWith(
       expect.any(Function),
       expect.any(Function),
       expect.any(Function),

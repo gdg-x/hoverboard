@@ -1,14 +1,14 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { collection, collectionGroup, onSnapshot, orderBy } from 'firebase/firestore';
 import reducer, { initialState, selectPartnerGroups, subscribe, unsubscribe } from '.';
+import { subscribeToPartnerGroups, subscribeToPartners } from '../../db/partners';
 import type { Partner } from '../../models/partner';
 import type { PartnerGroupWithoutItems } from '../../models/partner-group';
 import type { RootState } from '..';
 import { store } from '..';
 import type { PartnersState } from '.';
 
-vi.mock('firebase/firestore');
+vi.mock('../../db/partners');
 vi.mock('..', () => ({
   store: {
     dispatch: vi.fn(),
@@ -21,11 +21,13 @@ describe('partners', () => {
   });
 
   it('subscribes only once while already subscribed', () => {
-    vi.mocked(onSnapshot).mockImplementation(() => vi.fn());
+    vi.mocked(subscribeToPartners).mockImplementation(() => vi.fn());
+    vi.mocked(subscribeToPartnerGroups).mockImplementation(() => vi.fn());
 
     const state = reducer(reducer(undefined, subscribe()), subscribe());
 
-    expect(onSnapshot).toHaveBeenCalledTimes(2);
+    expect(subscribeToPartners).toHaveBeenCalledTimes(1);
+    expect(subscribeToPartnerGroups).toHaveBeenCalledTimes(1);
     expect(state.partnersSubscription).toBeInstanceOf(Success);
     expect(state.groupsSubscription).toBeInstanceOf(Success);
   });
@@ -34,9 +36,8 @@ describe('partners', () => {
     const unsubscribePartners = vi.fn();
     const unsubscribeGroups = vi.fn();
 
-    vi.mocked(onSnapshot)
-      .mockImplementationOnce(() => unsubscribePartners)
-      .mockImplementationOnce(() => unsubscribeGroups);
+    vi.mocked(subscribeToPartners).mockImplementation(() => unsubscribePartners);
+    vi.mocked(subscribeToPartnerGroups).mockImplementation(() => unsubscribeGroups);
 
     const subscribedState = reducer(undefined, subscribe());
     const state = reducer(subscribedState, unsubscribe());
@@ -72,26 +73,21 @@ describe('selectPartnerGroups', () => {
   });
 
   it('subscribes on first read, then merges partner items into their groups', () => {
-    let partnersNext: ((snapshot: { docs: unknown[] }) => void) | undefined;
-    let groupsNext: ((snapshot: { docs: unknown[] }) => void) | undefined;
-    let subscriptionCallCount = 0;
+    let partnersNext: ((payload: Partner[]) => void) | undefined;
+    let groupsNext: ((payload: PartnerGroupWithoutItems[]) => void) | undefined;
 
-    vi.mocked(onSnapshot).mockImplementation((_query, nextOrObserver) => {
-      subscriptionCallCount += 1;
-
-      if (subscriptionCallCount === 1) {
-        partnersNext = nextOrObserver as (snapshot: { docs: unknown[] }) => void;
-      } else {
-        groupsNext = nextOrObserver as (snapshot: { docs: unknown[] }) => void;
-      }
-
+    vi.mocked(subscribeToPartners).mockImplementation((next) => {
+      partnersNext = next;
+      return vi.fn();
+    });
+    vi.mocked(subscribeToPartnerGroups).mockImplementation((next) => {
+      groupsNext = next;
       return vi.fn();
     });
 
     expect(selectPartnerGroups(getState())).toStrictEqual(new Pending());
-    expect(collectionGroup).toHaveBeenCalledWith(undefined, 'items');
-    expect(collection).toHaveBeenCalledWith(undefined, 'partners');
-    expect(orderBy).toHaveBeenCalledWith('order');
+    expect(subscribeToPartners).toHaveBeenCalled();
+    expect(subscribeToPartnerGroups).toHaveBeenCalled();
 
     const groups: PartnerGroupWithoutItems[] = [
       { id: 'group-1', order: 1, title: 'Gold Partners' },
@@ -116,24 +112,8 @@ describe('selectPartnerGroups', () => {
       },
     ];
 
-    groupsNext?.({
-      docs: groups.map((group) => ({
-        id: group.id,
-        data: () => ({ order: group.order, title: group.title }),
-      })),
-    });
-    partnersNext?.({
-      docs: partners.map((partner) => ({
-        id: partner.id,
-        data: () => ({
-          logoUrl: partner.logoUrl,
-          name: partner.name,
-          order: partner.order,
-          url: partner.url,
-        }),
-        ref: { parent: { parent: { id: partner.parentId } } },
-      })),
-    });
+    groupsNext?.(groups);
+    partnersNext?.(partners);
 
     expect(selectPartnerGroups(getState())).toStrictEqual(
       new Success([
@@ -145,15 +125,9 @@ describe('selectPartnerGroups', () => {
 
   it('returns the groups failure when the groups subscription errors', () => {
     let groupsError: ((error: Error) => void) | undefined;
-    let subscriptionCallCount = 0;
 
-    vi.mocked(onSnapshot).mockImplementation((_query, _nextOrObserver, errorCallback) => {
-      subscriptionCallCount += 1;
-
-      if (subscriptionCallCount === 2) {
-        groupsError = errorCallback as unknown as (error: Error) => void;
-      }
-
+    vi.mocked(subscribeToPartnerGroups).mockImplementation((_next, error) => {
+      groupsError = error;
       return vi.fn();
     });
 
@@ -167,15 +141,9 @@ describe('selectPartnerGroups', () => {
 
   it('returns the partners failure when the partners subscription errors', () => {
     let partnersError: ((error: Error) => void) | undefined;
-    let subscriptionCallCount = 0;
 
-    vi.mocked(onSnapshot).mockImplementation((_query, _nextOrObserver, errorCallback) => {
-      subscriptionCallCount += 1;
-
-      if (subscriptionCallCount === 1) {
-        partnersError = errorCallback as unknown as (error: Error) => void;
-      }
-
+    vi.mocked(subscribeToPartners).mockImplementation((_next, error) => {
+      partnersError = error;
       return vi.fn();
     });
 

@@ -1,12 +1,12 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { doc, setDoc } from 'firebase/firestore';
 import reducer, { resetSubscribed, subscribe } from '.';
+import { saveSubscriber } from '../../db/subscribers';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { subscribeBlock } from '../../utils/data';
 
-vi.mock('firebase/firestore');
+vi.mock('../../db/subscribers');
 vi.mock('../dispatch');
 
 describe('subscribe', () => {
@@ -40,8 +40,7 @@ describe('subscribe', () => {
   });
 
   it('stores the subscriber and queues a success toast', async () => {
-    vi.mocked(doc).mockReturnValue('subscriber-doc' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined as never);
+    vi.mocked(saveSubscriber).mockResolvedValue(true);
 
     await subscribe({
       email: 'ada.lovelace+subscribe@example.com',
@@ -49,11 +48,10 @@ describe('subscribe', () => {
       secondFieldValue: 'Lovelace',
     });
 
-    expect(doc).toHaveBeenCalledWith(undefined, 'subscribers', 'adalovelacesubscribeexamplecom');
-    expect(setDoc).toHaveBeenCalledWith('subscriber-doc', {
+    expect(saveSubscriber).toHaveBeenCalledWith({
       email: 'ada.lovelace+subscribe@example.com',
-      firstName: 'Ada',
-      lastName: 'Lovelace',
+      firstFieldValue: 'Ada',
+      secondFieldValue: 'Lovelace',
     });
     expect(dispatch).toHaveBeenNthCalledWith(
       1,
@@ -69,8 +67,7 @@ describe('subscribe', () => {
   it('dispatches failure when storing the subscriber fails', async () => {
     const error = new Error('write failed');
 
-    vi.mocked(doc).mockReturnValue('subscriber-doc' as never);
-    vi.mocked(setDoc).mockRejectedValue(error);
+    vi.mocked(saveSubscriber).mockRejectedValue(error);
 
     await subscribe({ email: 'ada@example.com' });
 

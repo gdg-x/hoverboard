@@ -1,19 +1,13 @@
 import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  collectionGroup,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  query,
-  setDoc,
-  Unsubscribe,
-  where,
-} from 'firebase/firestore';
+import type { Unsubscribe } from 'firebase/firestore';
 import { RootState, store } from '..';
-import { db } from '../../firebase';
+import {
+  removeFeedback,
+  saveFeedback,
+  subscribeToFeedback as subscribeFeedback,
+} from '../../db/feedback';
 import { Feedback, FeedbackId } from '../../models/feedback';
-import { dataWithParentId } from '../../utils/firestore';
 import { selectUser, UserState } from '../user';
 
 export type SessionFeedback = RemoteData<Error, Feedback | false>;
@@ -33,37 +27,24 @@ export const initialState = {
 } as FeedbackState;
 
 export const subscribe = (userId: string) => {
-  return onSnapshot(
-    query(collectionGroup(db, 'feedback'), where('userId', '==', userId)),
-    (snapshot) => store.dispatch(setSuccess(snapshot.docs.map<Feedback>(dataWithParentId))),
-    (error) => store.dispatch(setFailure(error as Error)),
+  return subscribeFeedback(
+    userId,
+    (feedbackList) => store.dispatch(setSuccess(feedbackList)),
+    (error) => store.dispatch(setFailure(error)),
   );
 };
 
 export const setFeedback = createAsyncThunk<FeedbackId, Feedback>(
   'feedback/set',
   async (data: Feedback) => {
-    await setDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId), {
-      contentRating: data.contentRating,
-      styleRating: data.styleRating,
-      comment: data.comment,
-      userId: data.userId,
-    });
-
-    return {
-      parentId: data.parentId,
-      userId: data.userId,
-      id: data.userId,
-    };
+    return saveFeedback(data);
   },
 );
 
 export const deleteFeedback = createAsyncThunk<FeedbackId, FeedbackId>(
   'feedback/delete',
   async (data: FeedbackId) => {
-    await deleteDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId));
-
-    return data;
+    return removeFeedback(data);
   },
 );
 

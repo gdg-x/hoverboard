@@ -1,7 +1,6 @@
 import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { saveSubscriber } from '../../db/subscribers';
 import { DialogData } from '../../models/dialog-form';
 import { subscribeBlock } from '../../utils/data';
 import { dispatch } from '../dispatch';
@@ -24,24 +23,11 @@ const slice = createSlice({
 
 const { pending, success, failure, reset } = slice.actions;
 
-const setSubscribe = async (data: DialogData): Promise<true> => {
-  const id = data.email.replace(/[^\w\s]/gi, '');
-  const subscriber = {
-    email: data.email,
-    firstName: data.firstFieldValue || '',
-    lastName: data.secondFieldValue || '',
-  };
-
-  await setDoc(doc(db, 'subscribers', id), subscriber);
-
-  return true;
-};
-
 export const subscribe = async (data: DialogData) => {
   dispatch(pending());
 
   try {
-    dispatch(success(await setSubscribe(data)));
+    dispatch(success(await saveSubscriber(data)));
     dispatch(queueSnackbar(subscribeBlock.toast));
   } catch (error) {
     dispatch(failure(error as Error));

@@ -1,23 +1,20 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { doc, setDoc } from 'firebase/firestore';
 import reducer, { removeNotificationsUsers, updateNotificationsUsers } from '.';
+import { saveNotificationsUsers } from '../../db/notifications-users';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { notifications } from '../../utils/data';
 import type { RootState } from '..';
 
-vi.mock('firebase/firestore', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('firebase/firestore')>();
-
-  return {
-    ...actual,
-    doc: vi.fn(),
-    getFirestore: vi.fn(),
-    setDoc: vi.fn(),
-  };
-});
+vi.mock('../../db/notifications-users');
 vi.mock('../dispatch');
+vi.mock('../snackbars', () => ({
+  queueSnackbar: vi.fn((label: string) => ({
+    type: 'snackbars/queueSnackbar',
+    payload: label,
+  })),
+}));
 
 describe('update-notifications-users', () => {
   beforeEach(() => {
@@ -57,13 +54,11 @@ describe('update-notifications-users', () => {
         },
       }),
     } as unknown as RootState);
-    vi.mocked(doc).mockReturnValue('notifications-user-doc' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined as never);
+    vi.mocked(saveNotificationsUsers).mockResolvedValue(undefined);
 
     await updateNotificationsUsers('user-1', 'new-token');
 
-    expect(doc).toHaveBeenCalledWith(undefined, 'notificationsUsers', 'user-1');
-    expect(setDoc).toHaveBeenCalledWith('notifications-user-doc', {
+    expect(saveNotificationsUsers).toHaveBeenCalledWith('user-1', {
       tokens: {
         existing: true,
         'new-token': true,
@@ -80,40 +75,49 @@ describe('update-notifications-users', () => {
     expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar(notifications.myScheduleEnabled));
   });
 
-  it('starts from an empty token set when notifications users have not loaded yet', async () => {
+  it('dispatches failure when storing user tokens fails', async () => {
+    const error = new Error('write failed');
     vi.mocked(getState).mockReturnValue({
-      notificationsUsers: new Initialized(),
+      notificationsUsers: new Success({
+        id: 'user-1',
+        tokens: {},
+      }),
     } as unknown as RootState);
-    vi.mocked(doc).mockReturnValue('notifications-user-doc' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined as never);
+    vi.mocked(saveNotificationsUsers).mockRejectedValue(error);
 
     await updateNotificationsUsers('user-1', 'new-token');
 
-    expect(setDoc).toHaveBeenCalledWith('notifications-user-doc', {
-      tokens: {
-        'new-token': true,
-      },
-    });
+    expect(dispatch).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({ type: 'updateNotificationsUsers/pending' }),
+    );
+    expect(dispatch).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({
+        type: 'updateNotificationsUsers/failure',
+        payload: error,
+      }),
+    );
+    expect(queueSnackbar).not.toHaveBeenCalled();
   });
 
-  it('removes only the requested token and queues a disabled toast', async () => {
+  it('removes the token from the stored user tokens and queues a disabled toast', async () => {
     vi.mocked(getState).mockReturnValue({
       notificationsUsers: new Success({
         id: 'user-1',
         tokens: {
-          keep: true,
-          remove: true,
+          existing: true,
+          'remove-me': true,
         },
       }),
     } as unknown as RootState);
-    vi.mocked(doc).mockReturnValue('notifications-user-doc' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined as never);
+    vi.mocked(saveNotificationsUsers).mockResolvedValue(undefined);
 
-    await removeNotificationsUsers('user-1', 'remove');
+    await removeNotificationsUsers('user-1', 'remove-me');
 
-    expect(setDoc).toHaveBeenCalledWith('notifications-user-doc', {
+    expect(saveNotificationsUsers).toHaveBeenCalledWith('user-1', {
       tokens: {
-        keep: true,
+        existing: true,
       },
     });
     expect(dispatch).toHaveBeenNthCalledWith(
@@ -127,45 +131,17 @@ describe('update-notifications-users', () => {
     expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar(notifications.myScheduleDisabled));
   });
 
-  it('dispatches failure when updating user tokens fails', async () => {
-    const error = new Error('write failed');
-
-    vi.mocked(getState).mockReturnValue({
-      notificationsUsers: new Success({
-        id: 'user-1',
-        tokens: {},
-      }),
-    } as unknown as RootState);
-    vi.mocked(doc).mockReturnValue('notifications-user-doc' as never);
-    vi.mocked(setDoc).mockRejectedValue(error);
-
-    await updateNotificationsUsers('user-1', 'new-token');
-
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'updateNotificationsUsers/pending' }),
-    );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({ type: 'updateNotificationsUsers/failure', payload: error }),
-    );
-  });
-
   it('dispatches failure when removing user tokens fails', async () => {
-    const error = new Error('write failed');
-
+    const error = new Error('remove failed');
     vi.mocked(getState).mockReturnValue({
       notificationsUsers: new Success({
         id: 'user-1',
-        tokens: {
-          remove: true,
-        },
+        tokens: { 'remove-me': true },
       }),
     } as unknown as RootState);
-    vi.mocked(doc).mockReturnValue('notifications-user-doc' as never);
-    vi.mocked(setDoc).mockRejectedValue(error);
+    vi.mocked(saveNotificationsUsers).mockRejectedValue(error);
 
-    await removeNotificationsUsers('user-1', 'remove');
+    await removeNotificationsUsers('user-1', 'remove-me');
 
     expect(dispatch).toHaveBeenNthCalledWith(
       1,
@@ -173,7 +149,11 @@ describe('update-notifications-users', () => {
     );
     expect(dispatch).toHaveBeenNthCalledWith(
       2,
-      expect.objectContaining({ type: 'updateNotificationsUsers/failure', payload: error }),
+      expect.objectContaining({
+        type: 'updateNotificationsUsers/failure',
+        payload: error,
+      }),
     );
+    expect(queueSnackbar).not.toHaveBeenCalled();
   });
 });

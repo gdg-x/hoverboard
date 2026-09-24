@@ -1,16 +1,17 @@
 import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { RootState } from '..';
-import { db } from '../../firebase';
+import {
+  fetchFeaturedSessions as getFeaturedSessions,
+  FeaturedSessions,
+  saveFeaturedSessions,
+} from '../../db/featured-sessions';
 import { bookmarked } from '../../utils/data';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { selectUserId } from '../user';
 
-export interface FeaturedSessions {
-  [sessionId: string]: boolean;
-}
+export type { FeaturedSessions };
 
 export type FeaturedSessionsState = RemoteData<Error, FeaturedSessions>;
 
@@ -30,12 +31,6 @@ const slice = createSlice({
 });
 
 const { pending, success, failure, reset } = slice.actions;
-
-const getFeaturedSessions = async (userId: string): Promise<FeaturedSessions> => {
-  const snapshot = await getDoc(doc(db, 'featuredSessions', userId));
-
-  return snapshot.data() || {};
-};
 
 const fetchUserFeaturedSessions = async () => {
   const userId = selectUserId(getState());
@@ -65,7 +60,7 @@ export const setUserFeaturedSessions = async (
 
   try {
     const cleanedFeaturedSessions = cleanFeaturedSessions(featuredSessions);
-    await setDoc(doc(db, 'featuredSessions', userId), cleanedFeaturedSessions);
+    await saveFeaturedSessions(userId, cleanedFeaturedSessions);
     dispatch(success(cleanedFeaturedSessions));
     dispatch(queueSnackbar(isBookmarked ? bookmarked.added : bookmarked.removed));
   } catch (error) {

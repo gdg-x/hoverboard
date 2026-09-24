@@ -1,26 +1,22 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { deleteDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
 import reducer, { clearNotificationsSubscribers, updateNotificationsSubscribers } from '.';
+import {
+  removeNotificationsSubscriber,
+  saveNotificationsSubscriber,
+} from '../../db/notifications-subscribers';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { notifications } from '../../utils/data';
 
-vi.mock('firebase/firestore', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('firebase/firestore')>();
-
-  return {
-    ...actual,
-    deleteDoc: vi.fn(),
-    doc: vi.fn(),
-    getFirestore: vi.fn(),
-    setDoc: vi.fn(),
-    Timestamp: {
-      now: vi.fn(),
-    },
-  };
-});
+vi.mock('../../db/notifications-subscribers');
 vi.mock('../dispatch');
+vi.mock('../snackbars', () => ({
+  queueSnackbar: vi.fn((label: string) => ({
+    type: 'snackbars/queueSnackbar',
+    payload: label,
+  })),
+}));
 
 describe('update-notifications-subscribers', () => {
   beforeEach(() => {
@@ -57,19 +53,11 @@ describe('update-notifications-subscribers', () => {
   });
 
   it('stores the subscriber token and queues an enabled toast', async () => {
-    const now = { seconds: 1 } as never;
-
-    vi.spyOn(Timestamp, 'now').mockReturnValue(now);
-    vi.mocked(doc).mockReturnValue('subscriber-doc' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined as never);
+    vi.mocked(saveNotificationsSubscriber).mockResolvedValue(undefined);
 
     await updateNotificationsSubscribers('token-1');
 
-    expect(doc).toHaveBeenCalledWith(undefined, 'notificationsSubscribers', 'token-1');
-    expect(setDoc).toHaveBeenCalledWith('subscriber-doc', {
-      value: true,
-      updatedAt: now,
-    });
+    expect(saveNotificationsSubscriber).toHaveBeenCalledWith('token-1');
     expect(dispatch).toHaveBeenNthCalledWith(
       1,
       expect.objectContaining({ type: 'updateNotificationsSubscribers/pending' }),
@@ -86,9 +74,7 @@ describe('update-notifications-subscribers', () => {
 
   it('dispatches failure when storing the subscriber token fails', async () => {
     const error = new Error('write failed');
-
-    vi.mocked(doc).mockReturnValue('subscriber-doc' as never);
-    vi.mocked(setDoc).mockRejectedValue(error);
+    vi.mocked(saveNotificationsSubscriber).mockRejectedValue(error);
 
     await updateNotificationsSubscribers('token-1');
 
@@ -103,16 +89,15 @@ describe('update-notifications-subscribers', () => {
         payload: error,
       }),
     );
+    expect(queueSnackbar).not.toHaveBeenCalled();
   });
 
   it('deletes the subscriber token and queues a disabled toast', async () => {
-    vi.mocked(doc).mockReturnValue('subscriber-doc' as never);
-    vi.mocked(deleteDoc).mockResolvedValue(undefined as never);
+    vi.mocked(removeNotificationsSubscriber).mockResolvedValue(undefined);
 
     await clearNotificationsSubscribers('token-1');
 
-    expect(doc).toHaveBeenCalledWith(undefined, 'notificationsSubscribers', 'token-1');
-    expect(deleteDoc).toHaveBeenCalledWith('subscriber-doc');
+    expect(removeNotificationsSubscriber).toHaveBeenCalledWith('token-1');
     expect(dispatch).toHaveBeenNthCalledWith(
       1,
       expect.objectContaining({ type: 'updateNotificationsSubscribers/pending' }),
@@ -126,9 +111,7 @@ describe('update-notifications-subscribers', () => {
 
   it('dispatches failure when deleting the subscriber token fails', async () => {
     const error = new Error('delete failed');
-
-    vi.mocked(doc).mockReturnValue('subscriber-doc' as never);
-    vi.mocked(deleteDoc).mockRejectedValue(error);
+    vi.mocked(removeNotificationsSubscriber).mockRejectedValue(error);
 
     await clearNotificationsSubscribers('token-1');
 
@@ -143,5 +126,6 @@ describe('update-notifications-subscribers', () => {
         payload: error,
       }),
     );
+    expect(queueSnackbar).not.toHaveBeenCalled();
   });
 });

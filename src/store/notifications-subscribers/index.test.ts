@@ -1,10 +1,10 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
-import { subscribeToDocument } from '../../utils/firestore';
+import { subscribeToNotificationsSubscribers } from '../../db/notifications-subscribers';
 import { dispatch } from '../dispatch';
 import { RootState } from '..';
 
-vi.mock('../../utils/firestore');
+vi.mock('../../db/notifications-subscribers');
 vi.mock('../dispatch');
 
 const loadModule = async () => import('.');
@@ -49,12 +49,14 @@ describe('selectNotificationsSubscribers', () => {
     let onNext: ((payload: { id: string | undefined } | undefined) => void) | undefined;
     let onError: ((error: Error) => void) | undefined;
 
-    vi.mocked(subscribeToDocument).mockImplementation((_path, start, next, error) => {
-      onStart = start;
-      onNext = next;
-      onError = error;
-      return new Success(vi.fn());
-    });
+    vi.mocked(subscribeToNotificationsSubscribers).mockImplementation(
+      (_token, start, next, error) => {
+        onStart = start;
+        onNext = next;
+        onError = error;
+        return new Success(vi.fn());
+      },
+    );
 
     const { selectNotificationsSubscribers } = await loadModule();
     const state = {
@@ -63,8 +65,8 @@ describe('selectNotificationsSubscribers', () => {
     } as unknown as RootState;
 
     expect(selectNotificationsSubscribers(state)).toStrictEqual(new Pending());
-    expect(subscribeToDocument).toHaveBeenCalledWith(
-      'notificationsSubscribers/token-123',
+    expect(subscribeToNotificationsSubscribers).toHaveBeenCalledWith(
+      'token-123',
       expect.any(Function),
       expect.any(Function),
       expect.any(Function),
@@ -110,6 +112,6 @@ describe('selectNotificationsSubscribers', () => {
     } as unknown as RootState;
 
     expect(selectNotificationsSubscribers(state)).toStrictEqual(new Success('user-1'));
-    expect(subscribeToDocument).not.toHaveBeenCalled();
+    expect(subscribeToNotificationsSubscribers).not.toHaveBeenCalled();
   });
 });

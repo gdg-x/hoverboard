@@ -1,12 +1,11 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
-import { orderBy } from 'firebase/firestore';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectSessionsState } from '.';
 import { Session } from '../../models/session';
-import { subscribeToCollection } from '../../utils/firestore';
+import { subscribeToSessions } from '../../db/sessions';
 import { RootState } from '..';
 
-vi.mock('../../utils/firestore');
+vi.mock('../../db/sessions');
 vi.mock('../dispatch');
 
 describe('sessions', () => {
@@ -17,16 +16,14 @@ describe('sessions', () => {
 
 describe('selectSessionsState', () => {
   it('subscribes on first read', () => {
-    vi.mocked(subscribeToCollection).mockReturnValue(new Success(vi.fn()));
+    vi.mocked(subscribeToSessions).mockReturnValue(new Success(vi.fn()));
     const state = { sessions: new Initialized() } as unknown as RootState;
 
     expect(selectSessionsState(state)).toStrictEqual(new Pending());
-    expect(subscribeToCollection).toHaveBeenCalledWith(
-      'generatedSessions',
+    expect(subscribeToSessions).toHaveBeenCalledWith(
       expect.any(Function),
       expect.any(Function),
       expect.any(Function),
-      orderBy('id'),
     );
   });
 
