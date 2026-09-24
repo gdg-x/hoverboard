@@ -20,10 +20,7 @@ export class Markdown extends ThemedElement {
     // Override type as no async extensions are in use
     template.innerHTML = marked.parse(this.content) as string;
     if (hasUnsupportedTags(template.content)) {
-      console.warn(`Invalid Markedown contains some of the following tags ${unsupportedHtmlTags}`);
-      // TODO: Enable
-      // Markdown wraps content in <p> which can not contain <div>s.
-      // template.innerHTML = 'Invalid Markedown contains `div` tags.';
+      console.warn(`Invalid Markdown contains some of the following tags: ${unsupportedHtmlTags}`);
     }
     return this.addTargets(template.content);
   }
@@ -38,9 +35,5 @@ export class Markdown extends ThemedElement {
       element.setAttribute('rel', 'noopener noreferrer');
     });
     return markdown;
-  }
-
-  private hasDiv(document: DocumentFragment) {
-    return document.querySelector('div') !== null;
   }
 }
