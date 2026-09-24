@@ -15,14 +15,16 @@
 1. Build and deploy with `/config/production.json`
 
    ```console
-     npm run deploy
+     ./hbd deploy
    ```
 
    or to deploy with a custom config pass the name of the config file. For example with `/config/custom.json`
 
    ```console
-     BUILD_ENV=custom npm run deploy
+     BUILD_ENV=custom ./hbd deploy
    ```
+
+   `./hbd deploy` checks your Node.js version and selected Firebase project first, prints which project it's about to deploy to, and asks for confirmation before building and deploying. Run `./hbd deploy --yes` to skip the confirmation prompt, e.g. in a scripted context.
 
    The URL to your live site is listed in the output.
 
