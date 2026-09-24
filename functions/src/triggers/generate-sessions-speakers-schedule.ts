@@ -1,17 +1,18 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
-import { DocumentData, getFirestore } from 'firebase-admin/firestore';
+import type { DocumentData } from 'firebase-admin/firestore';
 import * as logger from 'firebase-functions/logger';
 import { onDocumentWritten } from 'firebase-functions/v2/firestore';
+import { fetchConfig } from '../db/config.js';
+import { saveGeneratedSchedule } from '../db/generated-schedule.js';
+import { saveGeneratedSessions } from '../db/generated-sessions.js';
+import { saveGeneratedSpeakers } from '../db/generated-speakers.js';
+import { fetchSchedule } from '../db/schedule.js';
+import { fetchSessions } from '../db/sessions.js';
+import { fetchSpeakers } from '../db/speakers.js';
 import { sessionsSpeakersMap } from '../schedule-generator/speakers-sessions-map.js';
 import { sessionsSpeakersScheduleMap } from '../schedule-generator/speakers-sessions-schedule-map.js';
-import {
-  isEmpty,
-  ScheduleMap,
-  SessionMap,
-  snapshotToObject,
-  SpeakerMap,
-} from '../utils/firestore.js';
+import { snapshotToObject } from '../utils/firestore.js';
 import { RawScheduleDay } from '../utils/schedule-time.js';
 
 type ChangedSpeaker = DocumentData & { id: string };
@@ -23,7 +24,7 @@ interface GeneratedData {
 }
 
 const isScheduleEnabled = async (): Promise<boolean> => {
-  const doc = await getFirestore().collection('config').doc('schedule').get();
+  const doc = await fetchConfig('schedule');
 
   if (doc.exists) {
     const data = doc.data();
@@ -53,11 +54,7 @@ export const speakersWrite = onDocumentWritten('speakers/{speakerId}', async (ev
 });
 
 const fetchData = () => {
-  const sessionsPromise = getFirestore().collection('sessions').get();
-  const schedulePromise = getFirestore().collection('schedule').orderBy('date', 'desc').get();
-  const speakersPromise = getFirestore().collection('speakers').get();
-
-  return Promise.all([sessionsPromise, schedulePromise, speakersPromise]);
+  return Promise.all([fetchSessions(), fetchSchedule(), fetchSpeakers()]);
 };
 
 async function generateAndSaveData(changedSpeaker?: ChangedSpeaker | null) {
@@ -85,22 +82,7 @@ async function generateAndSaveData(changedSpeaker?: ChangedSpeaker | null) {
     generatedData.speakers[changedSpeaker.id] = changedSpeaker;
   }
 
-  saveGeneratedData(generatedData.sessions, 'generatedSessions');
-  saveGeneratedData(generatedData.speakers, 'generatedSpeakers');
-  saveGeneratedData(generatedData.schedule, 'generatedSchedule');
-}
-
-function saveGeneratedData(
-  data: Record<string, unknown> | SessionMap | SpeakerMap | ScheduleMap | undefined,
-  collectionName: string,
-) {
-  if (!data || isEmpty(data)) {
-    logger.error(`Attempting to write empty data to Firestore collection: "${collectionName}".`);
-    return;
-  }
-
-  for (let index = 0; index < Object.keys(data).length; index++) {
-    const key = Object.keys(data)[index]!;
-    getFirestore().collection(collectionName).doc(key).set(data[key]);
-  }
+  saveGeneratedSessions(generatedData.sessions);
+  saveGeneratedSpeakers(generatedData.speakers);
+  saveGeneratedSchedule(generatedData.schedule);
 }

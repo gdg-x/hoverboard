@@ -1,11 +1,16 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
-import { DocumentData, DocumentSnapshot, getFirestore } from 'firebase-admin/firestore';
+import type { DocumentData, DocumentSnapshot } from 'firebase-admin/firestore';
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
 import { getMessaging, MulticastMessage } from 'firebase-admin/messaging';
 import * as logger from 'firebase-functions/logger';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
+import { fetchConfig } from '../db/config.js';
+import { fetchFeaturedSessions } from '../db/featured-sessions.js';
+import { fetchNotificationsUser, removeUserTokens } from '../db/notifications-users.js';
+import { getSchedule } from '../db/schedule.js';
+import { fetchSession } from '../db/sessions.js';
 import {
   createTimeWindow,
   filterUpcomingTimeslots,
@@ -14,44 +19,11 @@ import {
 } from '../time.js';
 import { isInvalidTokenError } from '../utils/messaging.js';
 
-const removeUserTokens = (tokensToUsers: Record<string, string>) => {
-  const userTokens = Object.keys(tokensToUsers).reduce((acc: Record<string, string[]>, token) => {
-    const userId = tokensToUsers[token];
-    if (!userId) return acc;
-    const existingTokens = acc[userId] || [];
-
-    return { ...acc, [userId]: [...existingTokens, token] };
-  }, {});
-
-  const promises = Object.keys(userTokens).map((userId) => {
-    const ref = getFirestore().collection('notificationsUsers').doc(userId);
-
-    return getFirestore().runTransaction((transaction) =>
-      transaction.get(ref).then((doc) => {
-        if (!doc.exists) {
-          return;
-        }
-
-        const val = doc.data() || {};
-        const newVal = Object.keys(val).reduce((acc: Record<string, boolean>, token) => {
-          if (tokensToUsers[token]) return acc;
-
-          return { ...acc, [token]: true };
-        }, {});
-
-        transaction.set(ref, newVal);
-      }),
-    );
-  });
-
-  return Promise.all(promises);
-};
-
 const sendPushNotificationToUsers = async (userIds: string[], data: MulticastMessage['data']) => {
   logger.log('sendPushNotificationToUsers user ids', userIds, 'with notification', data);
 
   const tokensPromise = userIds.map((id) => {
-    return getFirestore().collection('notificationsUsers').doc(id).get();
+    return fetchNotificationsUser(id);
   });
 
   const usersTokens: DocumentSnapshot<DocumentData>[] = await Promise.all(tokensPromise);
@@ -79,8 +51,10 @@ const sendPushNotificationToUsers = async (userIds: string[], data: MulticastMes
 };
 
 export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
-  const notificationsConfigPromise = getFirestore().collection('config').doc('notifications').get();
-  const schedulePromise = getFirestore().collection('schedule').get();
+  const notificationsConfigPromise = fetchConfig<{ timezone?: string; icon?: string }>(
+    'notifications',
+  );
+  const schedulePromise = getSchedule();
 
   const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([
     notificationsConfigPromise,
@@ -118,13 +92,10 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
         ),
       [],
     );
-    const usersIdsSnapshot = await getFirestore().collection('featuredSessions').get();
+    const usersIdsSnapshot = await fetchFeaturedSessions();
 
     upcomingSessions.forEach(async (upcomingSession, sessionIndex) => {
-      const sessionInfoSnapshot = await getFirestore()
-        .collection('sessions')
-        .doc(upcomingSession)
-        .get();
+      const sessionInfoSnapshot = await fetchSession(upcomingSession);
       if (!sessionInfoSnapshot.exists) return;
 
       const usersIds = usersIdsSnapshot.docs.reduce(
