@@ -6,7 +6,7 @@ Browsers that support [`Navigator.permissions`](https://developer.mozilla.org/en
 
 ### My Schedule notifications
 
-A few minutes before a sessions starts, attendees can get reminder notifications. These are sent automatically by [`schedule-notifications.ts`](functions/src/schedule-notifications.ts).
+A few minutes before a sessions starts, attendees can get reminder notifications. These are sent automatically by [`schedule-notifications.ts`](../../packages/server/functions/src/triggers/schedule-notifications.ts).
 
 To get a notification an attendee has to:
 
