@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/syncpack/dist/schema.json",
+  "source": [
+    "package.json",
+    "packages/cli/package.json",
+    "packages/server/package.json",
+    "packages/server/functions/package.json",
+    "packages/web/package.json",
+    "packages/storage/package.json"
+  ]
+}

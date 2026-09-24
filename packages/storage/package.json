@@ -1,5 +1,6 @@
 {
   "name": "@hoverboard/storage",
+  "version": "0.1.0",
   "private": true,
   "description": "Firebase security rules (Firestore, Storage, Realtime Database) and indexes, plus the Firestore rules test suite.",
   "type": "module",

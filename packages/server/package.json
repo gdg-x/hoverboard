@@ -1,5 +1,6 @@
 {
   "name": "@hoverboard/server",
+  "version": "0.1.0",
   "private": true,
   "description": "Hoverboard server-side code. Currently just the Firebase Cloud Functions in functions/, its own independent npm package (Firebase's deploy tooling expects functions.source to be a self-contained directory it can npm install/build on its own).",
   "scripts": {

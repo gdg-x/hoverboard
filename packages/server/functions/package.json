@@ -1,5 +1,6 @@
 {
   "name": "@hoverboard/functions",
+  "version": "0.1.0",
   "private": true,
   "description": "Hoverboard serverless functions",
   "main": "dist/src/index.js",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.6",
+    "@types/node": "^22.20.4",
     "concurrently": "^10.0.5",
     "cpx2": "^9.0.3",
     "typescript": "^6.0.3"
