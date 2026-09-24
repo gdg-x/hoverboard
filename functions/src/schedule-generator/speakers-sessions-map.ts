@@ -3,14 +3,14 @@ import { SessionMap, SpeakerMap } from '../utils/firestore.js';
 import { combineTags, pickMainTag } from '../utils/tags.js';
 
 export function sessionsSpeakersMap(sessionsRaw: SessionMap, speakersRaw: SpeakerMap) {
-  const sessions = {};
-  const speakers = {};
+  const sessions: Record<string, unknown> = {};
+  const speakers: Record<string, unknown> = {};
   const { length } = Object.keys(sessionsRaw);
 
   for (let index = 0; index < length; index++) {
-    const sessionId = Object.keys(sessionsRaw)[index];
-    const currentSession = sessionsRaw[sessionId];
-    const sessionSpeakers = [];
+    const sessionId = Object.keys(sessionsRaw)[index]!;
+    const currentSession = sessionsRaw[sessionId]!;
+    const sessionSpeakers: unknown[] = [];
     const mainTag = pickMainTag(currentSession.tags);
     const currentSpeakers = currentSession.speakers ?? [];
 
@@ -21,7 +21,8 @@ export function sessionsSpeakersMap(sessionsRaw: SessionMap, speakersRaw: Speake
       }
 
       sessionSpeakers.push({ id: speakerId, ...speakersRaw[speakerId] });
-      const generatedSpeaker = speakers[speakerId];
+      const generatedSpeaker = speakers[speakerId] as
+        { tags?: string[]; sessions?: unknown[] } | undefined;
       const sessionBySpeaker = {
         id: sessionId,
         mainTag,

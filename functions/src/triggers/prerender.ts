@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request } from 'express';
 import { getFirestore } from 'firebase-admin/firestore';
 import { onRequest } from 'firebase-functions/v2/https';
 import fetch from 'node-fetch';
@@ -8,19 +8,19 @@ const app = express();
 
 const getSiteDomain = async () => {
   const doc = await getFirestore().collection('config').doc('site').get();
-  return doc.data().domain;
+  return (doc.data() as { domain?: string } | undefined)?.domain || '';
 };
 
 const getRendertronServer = async () => {
   const doc = await getFirestore().collection('config').doc('rendertron').get();
-  return doc.data().server;
+  return (doc.data() as { server?: string } | undefined)?.server || '';
 };
 
 /**
  * generateUrl() - Piece together request parts to form FQDN URL
  * @param {Object} request
  */
-const generateUrl = async (request) => {
+const generateUrl = async (request: Request) => {
   // Why do we use config site.domain instead of the domain from
   // the request? Because it'll give you the wrong domain (pointed at the
   // cloudfunctions.net)
@@ -35,7 +35,8 @@ const generateUrl = async (request) => {
  * checkForBots() - regex that UserAgent, find me a linkbot
  * @param {String} userAgent
  */
-const checkForBots = (userAgent) => {
+const checkForBots = (userAgent?: string) => {
+  if (!userAgent) return false;
   // These are link bots only!
   // DO NOT ADD GOOGLEBOT.
   // If you add Googlebot to this, you will not have a good day.

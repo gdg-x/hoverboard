@@ -12,12 +12,13 @@ import {
   snapshotToObject,
   SpeakerMap,
 } from '../utils/firestore.js';
+import { RawScheduleDay } from '../utils/schedule-time.js';
 
 type ChangedSpeaker = DocumentData & { id: string };
 
 interface GeneratedData {
-  sessions?: SessionMap;
-  speakers?: SpeakerMap;
+  sessions?: Record<string, unknown>;
+  speakers?: Record<string, unknown>;
   schedule?: Record<string, unknown>;
 }
 
@@ -25,7 +26,8 @@ const isScheduleEnabled = async (): Promise<boolean> => {
   const doc = await getFirestore().collection('config').doc('schedule').get();
 
   if (doc.exists) {
-    return doc.data().enabled === 'true' || doc.data().enabled === true;
+    const data = doc.data();
+    return data?.enabled === 'true' || data?.enabled === true;
   } else {
     logger.error(
       'Schedule config is not set. Set the `config/schedule.enabled=true` Firestore value.',
@@ -71,11 +73,15 @@ async function generateAndSaveData(changedSpeaker?: ChangedSpeaker | null) {
   } else if (!(await isScheduleEnabled()) || !Object.keys(schedule).length) {
     generatedData = sessionsSpeakersMap(sessions, speakers);
   } else {
-    generatedData = sessionsSpeakersScheduleMap(sessions, speakers, schedule);
+    generatedData = sessionsSpeakersScheduleMap(
+      sessions,
+      speakers,
+      schedule as Record<string, RawScheduleDay>,
+    );
   }
 
   // If changed speaker does not have assigned session(s) yet
-  if (changedSpeaker && !generatedData.speakers[changedSpeaker.id]) {
+  if (changedSpeaker && generatedData.speakers && !generatedData.speakers[changedSpeaker.id]) {
     generatedData.speakers[changedSpeaker.id] = changedSpeaker;
   }
 
@@ -84,14 +90,17 @@ async function generateAndSaveData(changedSpeaker?: ChangedSpeaker | null) {
   saveGeneratedData(generatedData.schedule, 'generatedSchedule');
 }
 
-function saveGeneratedData(data: SessionMap | SpeakerMap | ScheduleMap, collectionName: string) {
-  if (isEmpty(data)) {
+function saveGeneratedData(
+  data: Record<string, unknown> | SessionMap | SpeakerMap | ScheduleMap | undefined,
+  collectionName: string,
+) {
+  if (!data || isEmpty(data)) {
     logger.error(`Attempting to write empty data to Firestore collection: "${collectionName}".`);
     return;
   }
 
   for (let index = 0; index < Object.keys(data).length; index++) {
-    const key = Object.keys(data)[index];
+    const key = Object.keys(data)[index]!;
     getFirestore().collection(collectionName).doc(key).set(data[key]);
   }
 }

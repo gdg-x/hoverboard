@@ -25,8 +25,10 @@ export interface SpeakerMap {
   [id: string]: DocumentData;
 }
 
-export const snapshotToObject = (snapshot: QuerySnapshot<DocumentData>) => {
-  return snapshot.docs.reduce((data, doc) => {
+export const snapshotToObject = (
+  snapshot: QuerySnapshot<DocumentData>,
+): Record<string, DocumentData> => {
+  return snapshot.docs.reduce((data: Record<string, DocumentData>, doc) => {
     data[doc.id] = doc.data();
     return data;
   }, {});
