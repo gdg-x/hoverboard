@@ -1,6 +1,6 @@
 # Styling
 
-Styling of your app can be found in `src/elements/shared-styles.html`.
+Styling of your app can be found in `packages/web/src/elements/shared-styles.html`.
 
 ## Colors
 

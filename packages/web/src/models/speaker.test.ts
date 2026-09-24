@@ -1,26 +1,30 @@
 import { describe, expect, it } from 'vitest';
-import data from '../../docs/default-firebase-data.json';
-import { PreviousSpeaker } from './previous-speaker';
+import data from '../../../../docs/default-firebase-data.json';
+import { SpeakerData } from './speaker';
 import { allKeys } from './utils';
 
 describe('speaker', () => {
   it('matches the shape of the default data', () => {
-    const speakers: PreviousSpeaker[] = Object.values(data['previousSpeakers']);
-    const keys: Array<keyof PreviousSpeaker> = [
+    const speakers: SpeakerData[] = Object.values(data['speakers']);
+    const keys: Array<keyof SpeakerData> = [
+      'badges',
       'bio',
       'company',
       'companyLogo',
+      'companyLogoUrl',
       'country',
-      'id',
+      'featured',
       'name',
       'order',
+      'photo',
       'photoUrl',
-      'sessions',
+      'pronouns',
+      'shortBio',
       'socials',
       'title',
     ];
 
-    expect(speakers).toHaveLength(22);
+    expect(speakers).toHaveLength(27);
     expect(allKeys(speakers)).toStrictEqual(keys);
   });
 });

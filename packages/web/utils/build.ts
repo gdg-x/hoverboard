@@ -3,7 +3,7 @@ import fs from 'fs';
 
 type Data = typeof import('../public/data/resources.json') &
   typeof import('../public/data/settings.json') &
-  typeof import('../config/production.json') & { NODE_ENV: string };
+  typeof import('../../../config/production.json') & { NODE_ENV: string };
 
 const { BUILD_ENV, NODE_ENV } = process.env;
 export const production = NODE_ENV === 'production';
@@ -11,7 +11,7 @@ export const watch = process.argv.includes('--watch');
 const buildTarget = BUILD_ENV ? BUILD_ENV : production ? 'production' : 'development';
 
 const getConfigPath = () => {
-  const path = `./config/${buildTarget}.json`;
+  const path = `../../config/${buildTarget}.json`;
 
   if (!fs.existsSync(path)) {
     throw new Error(`

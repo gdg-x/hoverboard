@@ -29,7 +29,6 @@
     "@tsconfig/node22": "^22.0.6",
     "concurrently": "^10.0.5",
     "cpx2": "^9.0.3",
-    "typescript": "^6.0.3",
-    "vitest": "^5.0.1"
+    "typescript": "^6.0.3"
   }
 }

@@ -18,9 +18,10 @@ export default [
     ignores: [
       'dist/**',
       'node_modules/**',
+      'packages/web/dist/**',
       'packages/server/functions/dist/**',
       'packages/cli/dist/**',
-      'public/**',
+      'packages/web/public/**',
       '**/package-lock.json', // Auto-generated lockfiles
       '**/yarn.lock', // Auto-generated lockfiles
       '**/.vscode/**', // VS Code settings (often contain comments)
@@ -49,6 +50,7 @@ export default [
       parserOptions: {
         project: [
           './tsconfig.json',
+          './packages/web/tsconfig.json',
           './packages/server/functions/tsconfig.json',
           './packages/cli/tsconfig.json',
         ],
@@ -126,7 +128,7 @@ export default [
 
   // Build utility files (Node.js environment)
   {
-    files: ['utils/**/*.{js,ts}'],
+    files: ['packages/web/utils/**/*.{js,ts}'],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -227,7 +229,12 @@ export default [
 
   // Test files configuration
   {
-    files: ['__tests__/**/*.{js,ts}', '**/*.test.{js,ts}', '**/*.spec.{js,ts}'],
+    files: [
+      '__tests__/**/*.{js,ts}',
+      'packages/web/__tests__/**/*.{js,ts}',
+      '**/*.test.{js,ts}',
+      '**/*.spec.{js,ts}',
+    ],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -238,7 +245,7 @@ export default [
 
   // Icons specific configuration
   {
-    files: ['src/utils/icons/**/*.{js,ts}'],
+    files: ['packages/web/src/utils/icons/**/*.{js,ts}'],
     rules: {
       'max-len': 'off',
     },
@@ -293,7 +300,7 @@ export default [
 
   // CSS-in-JS within TypeScript files (for styled components, etc.)
   {
-    files: ['src/components/**/*.ts', 'src/styles/**/*.ts'],
+    files: ['packages/web/src/components/**/*.ts', 'packages/web/src/styles/**/*.ts'],
     rules: {
       // Allow template literals for CSS-in-JS
       'prefer-template': 'off',
