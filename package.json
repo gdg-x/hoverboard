@@ -85,7 +85,7 @@
     "jsdom": "^30.1.1",
     "lit-analyzer": "^2.0.3",
     "nunjucks": "^3.2.4",
-    "prettier": "3.9.6",
+    "prettier": "3.9.8",
     "prettier-plugin-package": "2.0.0",
     "rollup": "^4.63.1",
     "rollup-plugin-copy": "^3.5.0",
