@@ -23,8 +23,6 @@ import { unsubscribeFromFeedback } from '../feedback';
 import { resetSubscribed } from '../subscribe';
 import { removeUser, setUser } from '../user';
 
-// TODO: show login prompt on my-schedule
-
 export type ExistingAccountError = {
   code: string;
   credential: OAuthCredential | null;

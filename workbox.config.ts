@@ -10,7 +10,6 @@ const STATIC_EXPIRATION = {
 };
 
 export const workboxConfig: GenerateSWOptions = {
-  mode: 'debug', // TODO: Remove mode
   swDest: 'dist/service-worker.js',
   navigateFallback: '/index.html',
   navigateFallbackDenylist: [FIREBASE_RESERVED_URLS],

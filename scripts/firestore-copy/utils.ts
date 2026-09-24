@@ -18,7 +18,8 @@ interface PathObject {
   doc?: string;
 }
 
-// TODO: Describe what this pattern does
+// Matches a file extension at the end of a string (e.g. '.json') or immediately
+// preceding URL query parameters or hash fragments (e.g. '.json?foo=bar#baz').
 const FILE_EXTENSION_PATTERN = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gim;
 
 export async function getData(path: string): Promise<Data> {

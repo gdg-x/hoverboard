@@ -17,6 +17,7 @@ import { queueComplexSnackbar } from '../store/snackbars';
 import { UserState } from '../store/user';
 import { schedule } from '../utils/data';
 import { acceptingFeedback } from '../utils/feedback';
+import { getSummary } from '../utils/strings';
 import { getVariableColor } from '../utils/styles';
 import './hoverboard-icon';
 import './text-truncate';
@@ -239,7 +240,7 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
   override render() {
     const session = this.session as SessionWithScheduleDetails | undefined;
     const duration = session?.duration;
-    const summary = this.getSummary();
+    const summary = getSummary(session?.description);
     const isFeatured = this.isFeatured();
     const icon = isFeatured ? 'bookmark-check' : 'bookmark-plus';
     const acceptingSessionFeedback = this.isAcceptingFeedback();
@@ -330,17 +331,6 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
 
   private getEnding(number: number | undefined) {
     return number && number > 1 ? 's' : '';
-  }
-
-  private getSummary() {
-    const description = this.session?.description ?? '';
-    // TODO: Move logic to utility function
-    const indexes = [
-      description.indexOf('\n'),
-      description.indexOf('<br'),
-      description.length,
-    ].filter((index) => index > 0);
-    return description.slice(0, Math.min(...indexes));
   }
 
   private toggleFeaturedSession = (event: MouseEvent) => {

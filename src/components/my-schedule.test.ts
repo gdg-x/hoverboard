@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { Day } from '../models/day';
+import { schedule } from '../utils/data';
 import type { MySchedule } from './my-schedule';
 import './my-schedule';
 import type { ScheduleDay } from './schedule-day';
@@ -28,6 +29,17 @@ const days: Day[] = [
 describe('my-schedule', () => {
   it('defines a component', () => {
     expect(customElements.get('my-schedule')).toBeDefined();
+  });
+
+  it('renders an auth-required prompt with sign-in text', async () => {
+    const { shadowRoot } = await fixture<MySchedule>(html`<my-schedule></my-schedule>`);
+
+    const authRequired = shadowRoot.querySelector('auth-required');
+    expect(authRequired).toBeInTheDocument();
+
+    const prompt = shadowRoot.querySelector('[slot="prompt"]');
+    expect(prompt).toBeInTheDocument();
+    expect(prompt).toHaveTextContent(schedule.saveSessionsSignedOut);
   });
 
   it('renders a schedule-day for every featured day', async () => {

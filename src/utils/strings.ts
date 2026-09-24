@@ -7,3 +7,10 @@ export const validEmail = (value: string): boolean => {
 export const notEmpty = (value: string): boolean => {
   return value.trim().length > 0;
 };
+
+export const getSummary = (value = ''): string => {
+  const indexes = [value.indexOf('\n'), value.indexOf('<br'), value.length].filter(
+    (index) => index > 0,
+  );
+  return value.slice(0, Math.min(...indexes));
+};

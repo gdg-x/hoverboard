@@ -13,29 +13,29 @@ const selectSchedule = (state: RootState): Day[] => {
   return schedule instanceof Success ? schedule.data : [];
 };
 
+const filterSessionBlock = (sessionBlock: Time, featuredSessions: FeaturedSessions): Time => ({
+  ...sessionBlock,
+  items: (sessionBlock as GeneratedSessionBlock).items.filter((session: Session) =>
+    Boolean(featuredSessions[session.id]),
+  ),
+});
+
+const filterTimeslot = (timeslot: Timeslot, featuredSessions: FeaturedSessions): Timeslot => ({
+  ...timeslot,
+  sessions: timeslot.sessions.map((sessionBlock) =>
+    filterSessionBlock(sessionBlock, featuredSessions),
+  ),
+});
+
+const filterDay = (day: Day, featuredSessions: FeaturedSessions): Day => ({
+  ...day,
+  timeslots: day.timeslots.map((timeslot) => filterTimeslot(timeslot, featuredSessions)),
+});
+
 export const selectFeaturedSchedule = createSelector(
   selectSchedule,
   selectFeaturedSessions,
   (schedule: Day[], featuredSessions: FeaturedSessions): Day[] => {
-    // TODO: Cleanup
-    return schedule.map((day: Day) => {
-      return {
-        ...day,
-        timeslots: day.timeslots.map((timeslot: Timeslot) => {
-          return {
-            ...timeslot,
-            sessions: timeslot.sessions.map((sessionBlock: Time) => {
-              const items = (sessionBlock as GeneratedSessionBlock).items.filter(
-                (session: Session): boolean => Boolean(featuredSessions[session.id]),
-              );
-              return {
-                ...sessionBlock,
-                items,
-              };
-            }),
-          };
-        }),
-      };
-    });
+    return schedule.map((day) => filterDay(day, featuredSessions));
   },
 );

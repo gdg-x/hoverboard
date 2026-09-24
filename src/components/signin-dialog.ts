@@ -2,7 +2,7 @@ import { Failure } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import { RootState } from '../store';
+import { RootState, store } from '../store';
 import {
   ExistingAccountError,
   initialAuthState,
@@ -12,7 +12,8 @@ import {
 } from '../store/auth';
 import { closeDialog, DIALOG, openSigninDialog, selectIsDialogOpen } from '../store/dialogs';
 import { ReduxMixin } from '../store/mixin';
-import { signIn as signInText, signInDialog, signInProviders } from '../utils/data';
+import { queueSnackbar } from '../store/snackbars';
+import { signIn as signInText, signInDialog, signInProviders, subscribeBlock } from '../utils/data';
 import { getProviderCompanyName, PROVIDER } from '../utils/providers';
 import './hoverboard-icon';
 import { HoverboardDialog } from './hoverboard-dialog';
@@ -96,11 +97,11 @@ export class SigninDialog extends ReduxMixin(ThemedElement) {
     if (this.isMergeState && this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
       if (!error.email || !error.providerId) {
-        // TODO: Improve error handling
+        store.dispatch(queueSnackbar(subscribeBlock.generalError));
         return;
       }
       this.email = error.email;
-      this.providerCompanyName = error.providerId && getProviderCompanyName(error.providerId);
+      this.providerCompanyName = getProviderCompanyName(error.providerId);
       openSigninDialog();
     }
   }

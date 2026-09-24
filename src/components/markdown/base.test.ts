@@ -46,7 +46,7 @@ Some **bold** text"
       html`<markdown-test-subject content="<div>not allowed</div>"></markdown-test-subject>`,
     );
 
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('Invalid Markedown'));
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('Invalid Markdown'));
     warn.mockRestore();
   });
 

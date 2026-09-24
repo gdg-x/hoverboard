@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { notEmpty, validEmail } from './strings';
+import { getSummary, notEmpty, validEmail } from './strings';
 
 describe('validEmail', () => {
   it('returns true for a valid email', () => {
@@ -34,5 +34,40 @@ describe('notEmpty', () => {
 
   it('returns false for a whitespace-only string', () => {
     expect(notEmpty('   ')).toBe(false);
+  });
+});
+
+describe('getSummary', () => {
+  it('returns the full text when there are no newlines or break tags', () => {
+    expect(getSummary('A simple session description.')).toBe('A simple session description.');
+  });
+
+  it('truncates at the first newline', () => {
+    expect(getSummary('First line\nSecond line\nThird line')).toBe('First line');
+  });
+
+  it('truncates at the first <br> tag', () => {
+    expect(getSummary('First paragraph<br>Second paragraph')).toBe('First paragraph');
+  });
+
+  it('truncates at the first <br/> tag', () => {
+    expect(getSummary('First paragraph<br/>Second paragraph')).toBe('First paragraph');
+  });
+
+  it('truncates at the first <br /> tag', () => {
+    expect(getSummary('First paragraph<br />Second paragraph')).toBe('First paragraph');
+  });
+
+  it('truncates at whichever break delimiter comes first', () => {
+    expect(getSummary('First part\nSecond part<br>Third part')).toBe('First part');
+    expect(getSummary('First part<br>Second part\nThird part')).toBe('First part');
+  });
+
+  it('returns an empty string when given an empty string', () => {
+    expect(getSummary('')).toBe('');
+  });
+
+  it('returns an empty string when called without arguments', () => {
+    expect(getSummary()).toBe('');
   });
 });

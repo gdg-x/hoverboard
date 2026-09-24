@@ -4,6 +4,8 @@ import { Day } from '../models/day';
 import { RootState } from '../store';
 import { ReduxMixin } from '../store/mixin';
 import { selectFeaturedSchedule } from '../store/schedule/selectors';
+import { schedule } from '../utils/data';
+import './auth-required';
 import './schedule-day';
 import { ThemedElement } from './themed-element';
 
@@ -17,6 +19,15 @@ export class MySchedule extends ReduxMixin(ThemedElement) {
           display: block;
         }
 
+        auth-required {
+          --mdc-theme-primary: var(--default-primary-color);
+          display: block;
+        }
+
+        .sign-in-prompt {
+          margin: 16px;
+        }
+
         .date {
           margin: 16px;
           font-size: 24px;
@@ -27,6 +38,10 @@ export class MySchedule extends ReduxMixin(ThemedElement) {
         }
 
         @media (min-width: 640px) {
+          .sign-in-prompt {
+            margin-left: 64px;
+          }
+
           .date {
             margin-left: 64px;
             font-size: 32px;
@@ -35,6 +50,8 @@ export class MySchedule extends ReduxMixin(ThemedElement) {
       `,
     ];
   }
+
+  private schedule = schedule;
 
   @property({ type: Array })
   featuredSchedule: Day[] = [];
@@ -45,13 +62,17 @@ export class MySchedule extends ReduxMixin(ThemedElement) {
 
   override render() {
     return html`
-      ${this.featuredSchedule.map(
-        (day) => html`
-          <div class="date">${day.dateReadable}</div>
+      <auth-required>
+        <p slot="prompt" class="sign-in-prompt">${this.schedule.saveSessionsSignedOut}</p>
 
-          <schedule-day name="${day.date}" .day="${day}" .onlyFeatured="${true}"></schedule-day>
-        `,
-      )}
+        ${this.featuredSchedule.map(
+          (day) => html`
+            <div class="date">${day.dateReadable}</div>
+
+            <schedule-day name="${day.date}" .day="${day}" .onlyFeatured="${true}"></schedule-day>
+          `,
+        )}
+      </auth-required>
     `;
   }
 }

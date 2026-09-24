@@ -3,8 +3,6 @@ import { customElement } from 'lit/decorators.js';
 import { scrollToElement } from '../../utils/scrolling';
 import { Markdown } from './base';
 
-// TODO: Add copy URL to clipboard buttons on headers
-
 type Tree = {
   [id: string]: string[];
 };
