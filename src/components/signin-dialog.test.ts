@@ -1,10 +1,11 @@
 import { Failure, Initialized } from '@abraham/remotedata';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { mergeAccounts, signIn } from '../store/auth';
 import { closeDialog, openSigninDialog } from '../store/dialogs';
-import { signIn as signInText, signInDialog, signInProviders } from '../utils/data';
+import { queueSnackbar } from '../store/snackbars';
+import { signIn as signInText, signInDialog, signInProviders, subscribeBlock } from '../utils/data';
 import { PROVIDER } from '../utils/providers';
 import type { SigninDialog } from './signin-dialog';
 import './signin-dialog';
@@ -23,12 +24,22 @@ vi.mock('../store/dialogs', async (importOriginal) => ({
   openSigninDialog: vi.fn(),
 }));
 
+vi.mock('../store/snackbars', async (importOriginal) => ({
+  __esModule: true,
+  ...(await importOriginal<typeof import('../store/snackbars')>()),
+  queueSnackbar: vi.fn((label: string) => ({ type: 'snackbars/queueSnackbar', payload: label })),
+}));
+
 const mockMergeAccounts = vi.mocked(mergeAccounts);
 const mockSignIn = vi.mocked(signIn);
 const mockCloseDialog = vi.mocked(closeDialog);
 const mockOpenSigninDialog = vi.mocked(openSigninDialog);
+const mockQueueSnackbar = vi.mocked(queueSnackbar);
 
 describe('signin-dialog', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
   it('defines a component', () => {
     expect(customElements.get('signin-dialog')).toBeDefined();
   });
@@ -95,6 +106,44 @@ describe('signin-dialog', () => {
 
     expect(mockCloseDialog).toHaveBeenCalled();
     expect(mockOpenSigninDialog).toHaveBeenCalled();
+  });
+
+  it('queues an error snackbar and does not reopen dialog if email is missing', async () => {
+    const { element } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
+    element['auth'] = new Failure({
+      code: 'auth/account-exists-with-different-credential',
+      credential: { providerId: 'google.com' },
+      email: undefined,
+      providerId: PROVIDER['google.com'],
+    } as never);
+
+    element.stateChanged({
+      auth: element['auth'],
+      dialogs: new Initialized(),
+    } as never);
+
+    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(mockOpenSigninDialog).not.toHaveBeenCalled();
+    expect(mockQueueSnackbar).toHaveBeenCalledWith(subscribeBlock.generalError);
+  });
+
+  it('queues an error snackbar and does not reopen dialog if providerId is missing', async () => {
+    const { element } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
+    element['auth'] = new Failure({
+      code: 'auth/account-exists-with-different-credential',
+      credential: { providerId: 'google.com' },
+      email: 'attendee@example.com',
+      providerId: undefined,
+    } as never);
+
+    element.stateChanged({
+      auth: element['auth'],
+      dialogs: new Initialized(),
+    } as never);
+
+    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(mockOpenSigninDialog).not.toHaveBeenCalled();
+    expect(mockQueueSnackbar).toHaveBeenCalledWith(subscribeBlock.generalError);
   });
 
   it('dispatches closeDialog when the dialog is closed', async () => {
