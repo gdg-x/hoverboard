@@ -145,6 +145,19 @@ describe('sendGeneralNotification', () => {
     });
   });
 
+  it('sends to subscribers in batches of at most 500 tokens', async () => {
+    const tokens = Array.from({ length: 1001 }, (_, index) => `token-${index}`);
+    const { sendEachForMulticast } = setupNotificationMocks({ responses: [], tokens });
+
+    await sendGeneralNotification.run({
+      data: mockSnapshot({ title: 'Reminder', body: 'Talk starts soon' }),
+      params: { timestamp: '12345' },
+    } as never);
+
+    const batchSizes = sendEachForMulticast.mock.calls.map(([message]) => message.tokens.length);
+    expect(batchSizes).toStrictEqual([500, 500, 1]);
+  });
+
   it('removes invalid registration tokens after messaging failures', async () => {
     const { deletedTokens, sendEachForMulticast } = setupNotificationMocks({
       notificationsConfig: { icon: '/default-icon.png' },

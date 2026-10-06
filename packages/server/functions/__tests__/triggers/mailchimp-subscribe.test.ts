@@ -1,7 +1,7 @@
 import { getFirestore } from 'firebase-admin/firestore';
 import * as logger from 'firebase-functions/logger';
 import fetch from 'node-fetch';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mailchimpSubscribe } from '../../src/triggers/mailchimp-subscribe';
 
 vi.mock('firebase-admin/firestore');
@@ -21,22 +21,38 @@ const mockConfigDoc = (data: Record<string, unknown> | undefined) => {
   } as never);
 };
 
-const mockFetchResponse = (body: Record<string, unknown>) => {
-  vi.mocked(fetch).mockResolvedValue({ json: () => Promise.resolve(body) } as never);
+const mockFetchResponse = (body: Record<string, unknown>, status = 200) => ({
+  ok: status >= 200 && status < 300,
+  status,
+  json: () => Promise.resolve(body),
+});
+
+const mockFetchOnce = (body: Record<string, unknown>, status = 200) => {
+  vi.mocked(fetch).mockResolvedValueOnce(mockFetchResponse(body, status) as never);
 };
+
+const subscriberEvent = {
+  data: { data: () => ({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }) },
+  params: {},
+} as never;
 
 const mockSnapshot = (subscriber: Record<string, unknown>) => ({
   data: () => subscriber,
 });
 
 describe('mailchimpSubscribe', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(fetch).mockReset();
+  });
+
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
   it('subscribes a new user to the configured Mailchimp list', async () => {
     mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
-    mockFetchResponse({ status: 'subscribed' });
+    mockFetchOnce({ status: 'subscribed' });
     const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
     await mailchimpSubscribe.run({
@@ -62,10 +78,10 @@ describe('mailchimpSubscribe', () => {
   it('retries as a PATCH against the member hash when the member already exists', async () => {
     mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
     vi.mocked(fetch)
-      .mockResolvedValueOnce({
-        json: () => Promise.resolve({ status: 400, title: 'Member Exists' }),
-      } as never)
-      .mockResolvedValueOnce({ json: () => Promise.resolve({ status: 'updated' }) } as never);
+      .mockResolvedValueOnce(
+        mockFetchResponse({ status: 400, title: 'Member Exists' }, 400) as never,
+      )
+      .mockResolvedValueOnce(mockFetchResponse({ status: 'updated' }) as never);
     const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
     await mailchimpSubscribe.run({
@@ -82,9 +98,8 @@ describe('mailchimpSubscribe', () => {
     expect(logSpy).toHaveBeenCalledWith('ada@example.com was updated in subscribe list.');
   });
 
-  it('logs an error and still attempts to subscribe when the Mailchimp config is missing', async () => {
+  it('logs and skips subscribing when the Mailchimp config is missing', async () => {
     mockConfigDoc(undefined);
-    mockFetchResponse({ status: 'subscribed' });
     const errorLogSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
     await mailchimpSubscribe.run({
@@ -93,20 +108,49 @@ describe('mailchimpSubscribe', () => {
     } as never);
 
     expect(errorLogSpy).toHaveBeenCalledWith("Can't subscribe user, Mailchimp config is empty.");
+    expect(fetch).not.toHaveBeenCalled();
   });
 
-  it('logs an error when the Mailchimp request fails', async () => {
+  it('propagates network failures so the invocation can be retried', async () => {
     mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
     vi.mocked(fetch).mockRejectedValue(new Error('network down'));
-    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    await mailchimpSubscribe.run({
-      data: mockSnapshot({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }),
-      params: {},
-    } as never);
+    await expect(mailchimpSubscribe.run(subscriberEvent)).rejects.toThrow('network down');
+  });
+
+  it.each([429, 500, 503])('throws on retryable HTTP status %i', async (status) => {
+    mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
+    mockFetchOnce({ title: 'Service Unavailable', detail: 'try later' }, status);
+
+    await expect(mailchimpSubscribe.run(subscriberEvent)).rejects.toThrow(
+      `with status ${status}: Service Unavailable try later`,
+    );
+  });
+
+  it('logs an error without retrying on non-retryable HTTP failures', async () => {
+    mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
+    mockFetchOnce({ title: 'Invalid Resource', detail: 'bad email' }, 400);
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
+
+    await mailchimpSubscribe.run(subscriberEvent);
 
     expect(errorSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Error occured during Mailchimp subscription:'),
+      expect.stringContaining('with status 400: Invalid Resource bad email'),
     );
+    expect(logSpy).not.toHaveBeenCalled();
+  });
+
+  it('does not loop when the PATCH for an existing member also reports Member Exists', async () => {
+    mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
+    vi.mocked(fetch).mockResolvedValue(
+      mockFetchResponse({ status: 400, title: 'Member Exists' }, 400) as never,
+    );
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
+
+    await mailchimpSubscribe.run(subscriberEvent);
+
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(errorSpy).toHaveBeenCalled();
   });
 });

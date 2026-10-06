@@ -38,10 +38,6 @@ const mockRes = () => ({
   sendFile: vi.fn(),
 });
 
-// Waits for the fire-and-forget fetch().then().then() chain inside the bot
-// branch of prerender.ts to flush.
-const flushPromises = () => new Promise((resolve) => setImmediate(resolve));
-
 describe('prerender', () => {
   afterEach(() => {
     vi.restoreAllMocks();
@@ -67,11 +63,12 @@ describe('prerender', () => {
     const res = mockRes();
 
     await prerender(req as never, res as never);
-    await flushPromises();
+    // Express does not return the async route handler's promise, so wait for the response.
+    await vi.waitFor(() => expect(res.send).toHaveBeenCalled());
 
-    // Known pre-existing bug: `generateUrl(req)` is called without `await` in
-    // prerender.ts, so the un-resolved Promise is stringified into the URL.
-    expect(fetch).toHaveBeenCalledWith('https://rendertron.example.com/render/[object Promise]');
+    expect(fetch).toHaveBeenCalledWith(
+      'https://rendertron.example.com/render/https://example.com/talks/some-talk',
+    );
     expect(res.set).toHaveBeenCalledWith('Cache-Control', 'public, max-age=300, s-maxage=600');
     expect(res.set).toHaveBeenCalledWith('Vary', 'User-Agent');
     expect(res.send).toHaveBeenCalledWith('<html>prerendered</html>');

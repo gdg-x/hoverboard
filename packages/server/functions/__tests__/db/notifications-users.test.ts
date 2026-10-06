@@ -28,7 +28,7 @@ describe('db/notifications-users', () => {
   it('removes invalid user tokens inside a transaction', async () => {
     const mockUserDoc = {
       exists: true,
-      data: () => ({ 'token-1': true, 'token-2': true }),
+      data: () => ({ tokens: { 'token-1': true, 'token-2': true } }),
     };
     const transactionGet = vi.fn().mockResolvedValue(mockUserDoc);
     const transactionSet = vi.fn();
@@ -48,7 +48,7 @@ describe('db/notifications-users', () => {
     expect(doc).toHaveBeenCalledWith('user-1');
     expect(runTransaction).toHaveBeenCalled();
     expect(transactionGet).toHaveBeenCalledWith(docRef);
-    expect(transactionSet).toHaveBeenCalledWith(docRef, { 'token-2': true });
+    expect(transactionSet).toHaveBeenCalledWith(docRef, { tokens: { 'token-2': true } });
   });
 
   it('handles non-existent user doc in removeUserTokens', async () => {

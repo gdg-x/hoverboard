@@ -1,6 +1,5 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
-import { getMessaging, MulticastMessage } from 'firebase-admin/messaging';
 import * as logger from 'firebase-functions/logger';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import { fetchConfig } from '../db/config.js';
@@ -8,7 +7,7 @@ import {
   deleteNotificationSubscriber,
   fetchNotificationSubscribers,
 } from '../db/notifications-subscribers.js';
-import { isInvalidTokenError } from '../utils/messaging.js';
+import { isInvalidTokenError, sendToTokens } from '../utils/messaging.js';
 
 export const sendGeneralNotification = onDocumentCreated(
   '/notifications/{timestamp}',
@@ -39,29 +38,20 @@ export const sendGeneralNotification = onDocumentCreated(
     }
     logger.log(`There are ${tokens.length} tokens to send notifications to.`);
 
-    const multicastMessage: MulticastMessage = {
-      tokens,
-      data: {
-        title: message.title,
-        body: message.body,
-        icon: message.icon || notificationsConfig.icon || '',
-      },
+    const data: Record<string, string> = {
+      title: message.title,
+      body: message.body,
+      icon: message.icon || notificationsConfig.icon || '',
     };
 
-    if (message.path && multicastMessage.data) {
-      multicastMessage.data.path = message.path;
+    if (message.path) {
+      data.path = message.path;
     }
 
-    const tokensToRemove: Promise<unknown>[] = [];
-    const messagingResponse = await getMessaging().sendEachForMulticast(multicastMessage);
-    messagingResponse.responses.forEach((result, index) => {
-      const error = result.error;
-      if (error) {
-        logger.error(`Failure sending notification to ${tokens[index]}`, error);
-        if (isInvalidTokenError(error.code)) {
-          tokensToRemove.push(deleteNotificationSubscriber(tokens[index]!));
-        }
-      }
+    const failures = await sendToTokens(tokens, data);
+    const tokensToRemove = failures.flatMap(({ token, error }) => {
+      logger.error(`Failure sending notification to ${token}`, error);
+      return isInvalidTokenError(error.code) ? [deleteNotificationSubscriber(token)] : [];
     });
 
     return Promise.all(tokensToRemove);
