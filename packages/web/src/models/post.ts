@@ -1,4 +1,4 @@
-import { Id } from './types';
+import type { Id } from './types';
 
 export interface PostData {
   backgroundColor: string;

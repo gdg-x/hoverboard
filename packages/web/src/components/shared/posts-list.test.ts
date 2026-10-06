@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { Post } from '../../models/post';
+import type { Post } from '../../models/post';
 import { router } from '../../router';
 import './posts-list';
 

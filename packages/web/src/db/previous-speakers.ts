@@ -1,5 +1,5 @@
-import { PreviousSpeaker } from '../models/previous-speaker';
-import { subscribeToCollection, Subscription } from '../utils/firestore';
+import type { PreviousSpeaker } from '../models/previous-speaker';
+import { subscribeToCollection, type Subscription } from '../utils/firestore';
 
 export const subscribeToPreviousSpeakers = (
   onStart: () => void,

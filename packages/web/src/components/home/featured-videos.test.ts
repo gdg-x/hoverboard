@@ -2,7 +2,7 @@ import { Failure, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { Video } from '../../models/video';
+import type { Video } from '../../models/video';
 import { openVideoDialog } from '../../store/ui';
 import { featuredVideos, loading } from '../../utils/data';
 import type { FeaturedVideos } from './featured-videos';

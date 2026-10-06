@@ -5,8 +5,8 @@ import { customElement, property } from 'lit/decorators.js';
 import '../markdown/short-markdown';
 import '../shared/text-truncate';
 import { router } from '../../router';
-import { RootState } from '../../store';
-import { BlogState, selectBlogPosts } from '../../store/blog';
+import type { RootState } from '../../store';
+import { type BlogState, selectBlogPosts } from '../../store/blog';
 import { latestPostsBlock } from '../../utils/data';
 import { getDate } from '../../utils/dates';
 import '../shared/hoverboard-icon';
@@ -14,85 +14,80 @@ import { StatefulElement } from '../stateful-element';
 
 @customElement('latest-posts-block')
 export class LatestPostsBlock extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        .posts-wrapper {
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-gap: 16px;
-        }
+  static override styles = css`
+    .posts-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 16px;
+    }
 
-        .post {
-          display: flex;
-          flex: 1;
-          flex-basis: 1px;
-          flex-direction: column;
-        }
+    .post {
+      display: flex;
+      flex: 1;
+      flex-basis: 1px;
+      flex-direction: column;
+    }
 
-        .image {
-          overflow: hidden;
-          --lazy-image-width: 100%;
-          --lazy-image-height: 128px;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-          border-top-left-radius: var(--border-radius);
-          border-top-right-radius: var(--border-radius);
-        }
+    .image {
+      overflow: hidden;
+      --lazy-image-width: 100%;
+      --lazy-image-height: 128px;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+      border-top-left-radius: var(--border-radius);
+      border-top-right-radius: var(--border-radius);
+    }
 
-        .details {
-          display: flex;
-          flex: 1 1 auto;
-          flex-direction: column;
-          justify-content: space-between;
-          padding: 16px;
-        }
+    .details {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px;
+    }
 
-        .title {
-          font-size: 20px;
-          line-height: 1.2;
-        }
+    .title {
+      font-size: 20px;
+      line-height: 1.2;
+    }
 
-        .description {
-          margin-top: 8px;
-          color: var(--secondary-text-color);
-        }
+    .description {
+      margin-top: 8px;
+      color: var(--secondary-text-color);
+    }
 
-        .date {
-          margin-top: 16px;
-          font-size: 12px;
-          text-transform: uppercase;
-          color: var(--secondary-text-color);
-        }
+    .date {
+      margin-top: 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--secondary-text-color);
+    }
 
-        .cta-button {
-          margin-top: 24px;
-        }
+    .cta-button {
+      margin-top: 24px;
+    }
 
-        @media (min-width: 640px) {
-          .posts-wrapper {
-            grid-template-columns: repeat(3, 1fr);
-          }
+    @media (min-width: 640px) {
+      .posts-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+      }
 
-          .post:last-of-type {
-            display: none;
-          }
-        }
+      .post:last-of-type {
+        display: none;
+      }
+    }
 
-        @media (min-width: 812px) {
-          .posts-wrapper {
-            grid-template-columns: repeat(4, 1fr);
-          }
+    @media (min-width: 812px) {
+      .posts-wrapper {
+        grid-template-columns: repeat(4, 1fr);
+      }
 
-          .post:last-of-type {
-            display: flex;
-          }
-        }
-      `,
-    ];
-  }
+      .post:last-of-type {
+        display: flex;
+      }
+    }
+  `;
 
   private latestPostsBlock = latestPostsBlock;
 

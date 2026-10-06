@@ -1,9 +1,9 @@
-import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '..';
+import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '..';
 import { subscribeToNotificationsSubscribers } from '../../db/notifications-subscribers';
 import { dispatch } from '../dispatch';
-import { Subscription } from '../../utils/firestore';
+import type { Subscription } from '../../utils/firestore';
 
 export type NotificationsSubscribersState = RemoteData<Error, string | undefined>;
 

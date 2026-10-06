@@ -1,20 +1,20 @@
-import { Initialized, RemoteData, Success } from '@abraham/remotedata';
+import { Initialized, type RemoteData, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
 import '@material/web/textfield/outlined-text-field.js';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
-import { css, html, PropertyValues } from 'lit';
+import { css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { Feedback } from '../../models/feedback';
-import { RootState, store } from '../../store';
+import type { Feedback } from '../../models/feedback';
+import { type RootState, store } from '../../store';
 import {
   deleteFeedback,
   selectFeedbackById,
-  SessionFeedback,
+  type SessionFeedback,
   setFeedback,
 } from '../../store/feedback';
 import { queueComplexSnackbar, queueSnackbar } from '../../store/snackbars';
-import { UserState } from '../../store/user';
+import type { UserState } from '../../store/user';
 import { feedback as feedbackText } from '../../utils/data';
 import '../shared/star-rating';
 import { type StarRatingChangeDetail } from '../shared/star-rating';
@@ -22,45 +22,40 @@ import { StatefulElement } from '../stateful-element';
 
 @customElement('feedback-block')
 export class FeedbackBlock extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        #feedback-comment {
-          width: 100%;
-        }
+  static override styles = css`
+    #feedback-comment {
+      width: 100%;
+    }
 
-        md-outlined-text-field {
-          width: 100%;
-        }
+    md-outlined-text-field {
+      width: 100%;
+    }
 
-        star-rating,
-        .caption {
-          display: inline-block;
-          vertical-align: bottom;
-          --star-color: var(--default-primary-color);
-        }
+    star-rating,
+    .caption {
+      display: inline-block;
+      vertical-align: bottom;
+      --star-color: var(--default-primary-color);
+    }
 
-        .helper {
-          font-size: 12px;
-          line-height: 1;
-        }
+    .helper {
+      font-size: 12px;
+      line-height: 1;
+    }
 
-        @media (min-width: 640px) {
-          .caption {
-            width: 25%;
-          }
-        }
+    @media (min-width: 640px) {
+      .caption {
+        width: 25%;
+      }
+    }
 
-        @media (max-width: 640px) {
-          star-rating,
-          .caption {
-            display: block;
-          }
-        }
-      `,
-    ];
-  }
+    @media (max-width: 640px) {
+      star-rating,
+      .caption {
+        display: block;
+      }
+    }
+  `;
 
   @property({ type: Number })
   contentRating = 0;

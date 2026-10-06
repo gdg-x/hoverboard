@@ -4,46 +4,41 @@ import '@material/web/textfield/outlined-text-field.js';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import { css, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { RootState } from '../../store';
-import { subscribe, SubscribeState } from '../../store/subscribe';
+import type { RootState } from '../../store';
+import { subscribe, type SubscribeState } from '../../store/subscribe';
 import { subscribeBlock } from '../../utils/data';
 import '../shared/hoverboard-icon';
 import { StatefulElement } from '../stateful-element';
 
 @customElement('subscribe-form-footer')
 export class SubscribeFormFooter extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          --md-outlined-text-field-label-text-color: var(--footer-text-color);
-          --md-outlined-text-field-focus-label-text-color: var(--default-primary-color);
-          --md-outlined-text-field-input-text-color: var(--footer-text-color);
-        }
+  static override styles = css`
+    :host {
+      --md-outlined-text-field-label-text-color: var(--footer-text-color);
+      --md-outlined-text-field-focus-label-text-color: var(--default-primary-color);
+      --md-outlined-text-field-input-text-color: var(--footer-text-color);
+    }
 
-        md-outlined-text-field,
-        .form-content {
-          width: 100%;
-        }
+    md-outlined-text-field,
+    .form-content {
+      width: 100%;
+    }
 
-        .form-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 16px;
-        }
+    .form-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
 
-        .submit-button {
-          align-self: flex-end;
-        }
+    .submit-button {
+      align-self: flex-end;
+    }
 
-        hoverboard-icon {
-          margin-bottom: 5px;
-        }
-      `,
-    ];
-  }
+    hoverboard-icon {
+      margin-bottom: 5px;
+    }
+  `;
 
   @property({ type: Object })
   subscribed: SubscribeState = new Initialized();

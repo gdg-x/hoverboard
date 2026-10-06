@@ -1,9 +1,9 @@
 import { Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { selectPreviousSpeaker, selectRandomPreviousSpeakers } from './selectors';
-import { PreviousSpeaker } from '../../models/previous-speaker';
+import type { PreviousSpeaker } from '../../models/previous-speaker';
 import { selectViewport } from '../ui';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../ui');
 

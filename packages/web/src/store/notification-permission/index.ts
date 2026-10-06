@@ -1,4 +1,4 @@
-import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
+import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getId, getInstallations } from 'firebase/installations';
 import { getMessaging, getToken } from 'firebase/messaging';

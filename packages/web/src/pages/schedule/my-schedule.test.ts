@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { Day } from '../../models/day';
+import type { Day } from '../../models/day';
 import { schedule } from '../../utils/data';
 import type { MySchedule } from './my-schedule';
 import './my-schedule';

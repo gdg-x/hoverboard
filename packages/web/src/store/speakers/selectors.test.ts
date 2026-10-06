@@ -1,10 +1,10 @@
 import { Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { selectFilteredSpeakers, selectSpeaker } from './selectors';
-import { SpeakerWithTags } from '../../models/speaker';
+import type { SpeakerWithTags } from '../../models/speaker';
 import { FilterGroupKey } from '../../models/filter-group';
 import { selectFilters } from '../filters';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../filters');
 

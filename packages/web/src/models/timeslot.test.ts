@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import data from '../../../../docs/default-firebase-data.json';
-import { Timeslot } from './timeslot';
+import type { Timeslot } from './timeslot';
 import { allKeys } from './utils';
 
 describe('timeslot', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { FeedbackData } from './feedback';
+import type { FeedbackData } from './feedback';
 import { allKeys } from './utils';
 
 describe('feedback', () => {

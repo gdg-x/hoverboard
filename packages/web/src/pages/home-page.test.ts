@@ -1,4 +1,4 @@
-import { MockedFunction, describe, expect, it, vi } from 'vitest';
+import { type MockedFunction, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';

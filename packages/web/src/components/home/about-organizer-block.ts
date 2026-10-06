@@ -1,7 +1,7 @@
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { RootState } from '../../store';
+import type { RootState } from '../../store';
 import { initialUiState } from '../../store/ui';
 import { aboutOrganizerBlock } from '../../utils/data';
 import '../shared/hoverboard-icon';
@@ -10,50 +10,45 @@ import { StatefulElement } from '../stateful-element';
 
 @customElement('about-organizer-block')
 export class AboutOrganizerBlock extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        .container {
-          display: flex;
-        }
+  static override styles = css`
+    .container {
+      display: flex;
+    }
 
-        .block:not(:last-of-type) {
-          margin-bottom: 32px;
-        }
+    .block:not(:last-of-type) {
+      margin-bottom: 32px;
+    }
 
-        .image-column {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex: 1;
-          flex-basis: 1px;
-        }
+    .image-column {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      flex-basis: 1px;
+    }
 
-        .image-link {
-          width: 80%;
-          height: 80%;
-        }
+    .image-link {
+      width: 80%;
+      height: 80%;
+    }
 
-        .organizers-photo {
-          --lazy-image-width: 100%;
-          --lazy-image-height: 100%;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-        }
+    .organizers-photo {
+      --lazy-image-width: 100%;
+      --lazy-image-height: 100%;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+    }
 
-        .description {
-          color: var(--secondary-text-color);
-        }
+    .description {
+      color: var(--secondary-text-color);
+    }
 
-        .description-block {
-          flex: 1;
-          flex-basis: 1px;
-        }
-      `,
-    ];
-  }
+    .description-block {
+      flex: 1;
+      flex-basis: 1px;
+    }
+  `;
 
   @state()
   private viewport = initialUiState.viewport;

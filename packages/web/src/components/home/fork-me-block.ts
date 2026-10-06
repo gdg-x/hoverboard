@@ -6,25 +6,20 @@ import '../shared/hoverboard-icon';
 
 @customElement('fork-me-block')
 export class ForkMeBlock extends ThemedElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: flex;
-          width: 100%;
-          background: var(--accent-color);
-          color: var(--text-secondary-color);
-          padding: 16px 0;
-        }
+  static override styles = css`
+    :host {
+      display: flex;
+      width: 100%;
+      background: var(--accent-color);
+      color: var(--text-secondary-color);
+      padding: 16px 0;
+    }
 
-        md-outlined-button {
-          --md-outlined-button-label-text-color: #000;
-          --md-outlined-button-outline-color: #000;
-        }
-      `,
-    ];
-  }
+    md-outlined-button {
+      --md-outlined-button-label-text-color: #000;
+      --md-outlined-button-outline-color: #000;
+    }
+  `;
 
   override render() {
     return html`

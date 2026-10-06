@@ -1,4 +1,4 @@
-import { Session } from '../models/session';
+import type { Session } from '../models/session';
 import { timezoneOffset } from './data';
 
 const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;

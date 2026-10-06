@@ -1,4 +1,4 @@
-import { afterEach, beforeAll, describe, expect, it, MockInstance, vi } from 'vitest';
+import { afterEach, beforeAll, describe, expect, it, type MockInstance, vi } from 'vitest';
 import { share } from './share';
 
 type Open = (

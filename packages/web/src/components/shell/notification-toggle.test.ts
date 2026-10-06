@@ -37,10 +37,7 @@ describe('notification-toggle', () => {
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'bell');
-    expect(shadowRoot.querySelector('mwc-formfield')).toHaveAttribute(
-      'label',
-      notifications.generalLabel,
-    );
+    expect(shadowRoot.querySelector('.switch-row')).toHaveTextContent(notifications.generalLabel);
   });
 
   it('shows the bell-off icon and blocked message when denied', async () => {
@@ -139,11 +136,11 @@ describe('notification-toggle', () => {
     element['notificationPermission'] = new Success('token');
     await element.updateComplete;
 
-    const toggle = shadowRoot.querySelector('mwc-formfield mwc-switch') as HTMLElement & {
+    const toggle = shadowRoot.querySelector('label md-switch') as HTMLElement & {
       selected: boolean;
     };
     toggle.selected = true;
-    toggle.dispatchEvent(new MouseEvent('click'));
+    toggle.dispatchEvent(new Event('change'));
 
     expect(mockUpdateNotificationsSubscribers).toHaveBeenCalledWith('token');
   });

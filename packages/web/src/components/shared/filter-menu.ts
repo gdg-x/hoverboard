@@ -4,8 +4,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
-import { Filter } from '../../models/filter';
-import { FilterGroup, FilterGroupKey } from '../../models/filter-group';
+import type { Filter } from '../../models/filter';
+import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import { filters } from '../../utils/data';
 import { clearFilters, toggleFilter } from '../../utils/filters';
 import { generateClassName, getVariableColor } from '../../utils/styles';
@@ -14,109 +14,104 @@ import { ThemedElement } from '../themed-element';
 
 @customElement('filter-menu')
 export class FilterMenu extends ThemedElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-          width: 100%;
-          border-bottom: 1px solid var(--divider-color);
-          position: relative;
-        }
+  static override styles = css`
+    :host {
+      display: block;
+      width: 100%;
+      border-bottom: 1px solid var(--divider-color);
+      position: relative;
+    }
 
-        .filters-board {
-          position: absolute;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          z-index: 2;
-          background-color: var(--primary-background-color);
-          box-shadow: var(--box-shadow);
-          transform: translateY(100%);
-          display: none;
-        }
+    .filters-board {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 2;
+      background-color: var(--primary-background-color);
+      box-shadow: var(--box-shadow);
+      transform: translateY(100%);
+      display: none;
+    }
 
-        .filters-toolbar {
-          padding: 16px;
-        }
+    .filters-toolbar {
+      padding: 16px;
+    }
 
-        .toolbar-row {
-          display: flex;
-          align-items: center;
-        }
+    .toolbar-row {
+      display: flex;
+      align-items: center;
+    }
 
-        .results-summary {
-          display: flex;
-          align-items: center;
-          flex: 1;
-          flex-basis: 1px;
-        }
+    .results-summary {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      flex-basis: 1px;
+    }
 
-        .filter-group {
-          margin-bottom: 24px;
-        }
+    .filter-group {
+      margin-bottom: 24px;
+    }
 
-        .filter-title {
-          margin-bottom: 8px;
-        }
+    .filter-title {
+      margin-bottom: 8px;
+    }
 
-        .tag {
-          box-sizing: content-box;
-          margin-right: 8px;
-          margin-bottom: 8px;
-          display: inline-flex;
-          align-items: center;
-          font-family: inherit;
-          font-size: 15px;
-          cursor: pointer;
-          color: var(--color);
-          text-transform: capitalize;
-        }
+    .tag {
+      box-sizing: content-box;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      display: inline-flex;
+      align-items: center;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+      color: var(--color);
+      text-transform: capitalize;
+    }
 
-        .tag hoverboard-icon {
-          width: 12px;
-          height: 12px;
-        }
+    .tag hoverboard-icon {
+      width: 12px;
+      height: 12px;
+    }
 
-        [selected] {
-          background-color: var(--color);
-          border-color: var(--color);
-          color: white;
-        }
+    [selected] {
+      background-color: var(--color);
+      border-color: var(--color);
+      color: white;
+    }
 
-        .selected-filters {
-          margin-bottom: 8px;
-        }
+    .selected-filters {
+      margin-bottom: 8px;
+    }
 
-        .actions {
-          display: flex;
-          align-items: center;
-        }
+    .actions {
+      display: flex;
+      align-items: center;
+    }
 
-        .reset-filters {
-          margin-right: 8px;
-          padding: 0;
-          background: none;
-          border: none;
-          font-family: inherit;
-          font-size: 14px;
-          cursor: pointer;
-          color: var(--default-primary-color);
-        }
+    .reset-filters {
+      margin-right: 8px;
+      padding: 0;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--default-primary-color);
+    }
 
-        .filters-board[open] {
-          display: block;
-        }
+    .filters-board[open] {
+      display: block;
+    }
 
-        @media (min-width: 640px) {
-          .filters-toolbar {
-            padding: 16px 32px;
-          }
-        }
-      `,
-    ];
-  }
+    @media (min-width: 640px) {
+      .filters-toolbar {
+        padding: 16px 32px;
+      }
+    }
+  `;
 
   private filters = filters;
 

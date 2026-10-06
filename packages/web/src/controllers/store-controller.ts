@@ -1,5 +1,5 @@
-import { ReactiveController, ReactiveControllerHost } from 'lit';
-import { RootState, store } from '../store';
+import type { ReactiveController, ReactiveControllerHost } from 'lit';
+import { type RootState, store } from '../store';
 
 /**
  * Reactive controller that exposes a slice of the Redux state through `value` and only

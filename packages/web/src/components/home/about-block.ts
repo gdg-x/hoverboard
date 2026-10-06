@@ -8,57 +8,52 @@ import { ThemedElement } from '../themed-element';
 
 @customElement('about-block')
 export class AboutBlock extends ThemedElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        .container {
-          padding-top: 64px;
-          display: grid;
-          grid-gap: 32px;
-          grid-template-columns: 1fr;
-        }
+  static override styles = css`
+    .container {
+      padding-top: 64px;
+      display: grid;
+      grid-gap: 32px;
+      grid-template-columns: 1fr;
+    }
 
-        .statistics-block {
-          width: 100%;
-          display: grid;
-          grid-gap: 32px 16px;
-          grid-template-columns: repeat(2, 1fr);
-        }
+    .statistics-block {
+      width: 100%;
+      display: grid;
+      grid-gap: 32px 16px;
+      grid-template-columns: repeat(2, 1fr);
+    }
 
-        .numbers {
-          font-size: 40px;
-        }
+    .numbers {
+      font-size: 40px;
+    }
 
-        .numbers::after {
-          content: '';
-          display: block;
-          height: 2px;
-          width: 64px;
-          background-color: var(--default-primary-color);
-        }
+    .numbers::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 64px;
+      background-color: var(--default-primary-color);
+    }
 
-        .label {
-          margin-top: 4px;
-        }
+    .label {
+      margin-top: 4px;
+    }
 
-        @media (min-width: 640px) {
-          .content {
-            grid-gap: 64px;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-          }
+    @media (min-width: 640px) {
+      .content {
+        grid-gap: 64px;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      }
 
-          .statistics-block {
-            grid-gap: 32px;
-          }
+      .statistics-block {
+        grid-gap: 32px;
+      }
 
-          .numbers {
-            font-size: 56px;
-          }
-        }
-      `,
-    ];
-  }
+      .numbers {
+        font-size: 56px;
+      }
+    }
+  `;
 
   override render() {
     return html`

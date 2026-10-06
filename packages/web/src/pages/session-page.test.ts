@@ -1,10 +1,10 @@
 import { Pending, Success } from '@abraham/remotedata';
-import { MockedFunction, describe, expect, it, vi } from 'vitest';
+import { type MockedFunction, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { Session } from '../models/session';
-import { User } from '../models/user';
+import type { Session } from '../models/session';
+import type { User } from '../models/user';
 import { router } from '../router';
 import { setUserFeaturedSessions } from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';

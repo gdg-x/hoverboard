@@ -5,11 +5,11 @@ import {
   onSnapshot,
   query,
   setDoc,
-  Unsubscribe,
+  type Unsubscribe,
   where,
 } from 'firebase/firestore';
 import { db } from '../firebase';
-import { Feedback, FeedbackId } from '../models/feedback';
+import type { Feedback, FeedbackId } from '../models/feedback';
 import { dataWithParentId } from '../utils/firestore';
 
 export const subscribeToFeedback = (

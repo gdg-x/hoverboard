@@ -1,8 +1,8 @@
-import { Initialized, RemoteData, Success } from '@abraham/remotedata';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '..';
+import { Initialized, type RemoteData, Success } from '@abraham/remotedata';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '..';
 import { dispatch } from '../dispatch';
-import { FirebaseUser, toUser, User } from '../../models/user';
+import { type FirebaseUser, toUser, type User } from '../../models/user';
 
 export type UserState = RemoteData<Error, User>;
 

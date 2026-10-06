@@ -2,7 +2,7 @@ import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { User } from '../../models/user';
+import type { User } from '../../models/user';
 import { store } from '../../store';
 import { openSigninDialog } from '../../store/dialogs';
 import { setUserSuccess } from '../../store/user';

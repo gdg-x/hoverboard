@@ -1,5 +1,5 @@
-import { Partner, PartnerData } from './partner';
-import { Id } from './types';
+import type { Partner, PartnerData } from './partner';
+import type { Id } from './types';
 
 export interface PartnerGroupWithoutItems {
   id: string;

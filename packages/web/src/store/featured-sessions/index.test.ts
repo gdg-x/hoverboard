@@ -11,7 +11,7 @@ import { bookmarked } from '../../utils/data';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { selectUserId } from '../user';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../../db/featured-sessions');
 vi.mock('../dispatch');

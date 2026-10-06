@@ -1,7 +1,7 @@
-import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { savePotentialPartner } from '../../db/potential-partners';
-import { DialogData } from '../../models/dialog-form';
+import type { DialogData } from '../../models/dialog-form';
 import { dispatch } from '../dispatch';
 
 export type PotentialPartnersState = RemoteData<Error, true>;

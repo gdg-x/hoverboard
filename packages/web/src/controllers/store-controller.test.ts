@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { ReactiveControllerHost } from 'lit';
+import type { ReactiveControllerHost } from 'lit';
 import { store } from '../store';
 import { queueSnackbar, removeSnackbar } from '../store/snackbars';
 import { StoreController } from './store-controller';

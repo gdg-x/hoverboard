@@ -2,7 +2,7 @@ import { Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { Post } from '../../models/post';
+import type { Post } from '../../models/post';
 import { router } from '../../router';
 import { latestPostsBlock } from '../../utils/data';
 import type { LatestPostsBlock } from './latest-posts-block';

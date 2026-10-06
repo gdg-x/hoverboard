@@ -1,5 +1,5 @@
-import { Member } from '../models/member';
-import { subscribeToCollectionGroup, Subscription } from '../utils/firestore';
+import type { Member } from '../models/member';
+import { subscribeToCollectionGroup, type Subscription } from '../utils/firestore';
 
 export const subscribeToMembers = (
   onStart: () => void,

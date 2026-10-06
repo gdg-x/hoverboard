@@ -5,24 +5,19 @@ import { ThemedElement } from '../themed-element';
 
 @customElement('app-install')
 export class AppInstall extends ThemedElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        .bottom-drawer-link {
-          display: block;
-          width: 100%;
-          padding: 16px 24px;
-          cursor: pointer;
-          background: none;
-          border: none;
-          color: inherit;
-          font: inherit;
-          text-align: start;
-        }
-      `,
-    ];
-  }
+  static override styles = css`
+    .bottom-drawer-link {
+      display: block;
+      width: 100%;
+      padding: 16px 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: inherit;
+      font: inherit;
+      text-align: start;
+    }
+  `;
 
   @state()
   private deferredPrompt: BeforeInstallPromptEvent | undefined;

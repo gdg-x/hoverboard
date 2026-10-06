@@ -1,16 +1,16 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
-import { css, html, PropertyValues } from 'lit';
+import { css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
-import { Hero } from '../../models/hero';
+import type { Hero } from '../../models/hero';
 import { selectRouteName } from '../../router';
-import { RootState } from '../../store';
+import type { RootState } from '../../store';
 import { signOut as signOutAction } from '../../store/auth';
 import { closeDialog, DIALOG, openSigninDialog, selectIsDialogOpen } from '../../store/dialogs';
-import { TicketsState, selectTickets } from '../../store/tickets';
+import { type TicketsState, selectTickets } from '../../store/tickets';
 import { initialUiState } from '../../store/ui';
-import { UserState } from '../../store/user';
+import type { UserState } from '../../store/user';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
 import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../../utils/data';
 import '../shared/hoverboard-icon';
@@ -21,213 +21,208 @@ export const HEADER_HEIGHT = 76;
 
 @customElement('header-toolbar')
 export class HeaderToolbar extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          --iron-icon-fill-color: currentColor;
-          display: block;
-          z-index: 1;
-          border-bottom: 1px solid var(--divider-color);
-          background-color: var(--primary-background-color);
-          transition:
-            background-color var(--animation),
-            border-bottom-color var(--animation),
-            color var(--animation);
-          color: var(--primary-text-color);
-        }
+  static override styles = css`
+    :host {
+      --iron-icon-fill-color: currentColor;
+      display: block;
+      z-index: 1;
+      border-bottom: 1px solid var(--divider-color);
+      background-color: var(--primary-background-color);
+      transition:
+        background-color var(--animation),
+        border-bottom-color var(--animation),
+        color var(--animation);
+      color: var(--primary-text-color);
+    }
 
-        :host([transparent]) {
-          --iron-icon-fill-color: var(--hero-font-color, '#fff');
-          background-color: transparent;
-          border-bottom-color: transparent;
-          color: var(--hero-font-color, '#fff');
-        }
+    :host([transparent]) {
+      --iron-icon-fill-color: var(--hero-font-color, '#fff');
+      background-color: transparent;
+      border-bottom-color: transparent;
+      color: var(--hero-font-color, '#fff');
+    }
 
-        :host([transparent]) .toolbar-logo {
-          background-color: var(--hero-logo-color);
-          opacity: var(--hero-logo-opacity, 1);
-        }
+    :host([transparent]) .toolbar-logo {
+      background-color: var(--hero-logo-color);
+      opacity: var(--hero-logo-opacity, 1);
+    }
 
-        .toolbar {
-          display: flex;
-          align-items: center;
-          margin: 0 auto;
-          padding: 0 16px;
-          height: auto;
-          max-width: var(--max-container-width);
-        }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+      padding: 0 16px;
+      height: auto;
+      max-width: var(--max-container-width);
+    }
 
-        .toolbar-logo {
-          display: flex;
-          flex-direction: row;
-          width: 150px;
-          height: 32px;
-          background-color: var(--default-primary-color);
-          transition: background-color var(--animation);
-          -webkit-mask: url('/images/logo-monochrome.svg') no-repeat;
-          mask: url('/images/logo-monochrome.svg') no-repeat;
-        }
+    .toolbar-logo {
+      display: flex;
+      flex-direction: row;
+      width: 150px;
+      height: 32px;
+      background-color: var(--default-primary-color);
+      transition: background-color var(--animation);
+      -webkit-mask: url('/images/logo-monochrome.svg') no-repeat;
+      mask: url('/images/logo-monochrome.svg') no-repeat;
+    }
 
-        .brand {
-          display: flex;
-          flex: 1;
-          flex-basis: 1px;
-          flex-direction: row;
-          align-items: center;
-        }
+    .brand {
+      display: flex;
+      flex: 1;
+      flex-basis: 1px;
+      flex-direction: row;
+      align-items: center;
+    }
 
-        .nav-items {
-          position: relative;
-          display: flex;
-          align-items: stretch;
-          height: 64px;
-        }
+    .nav-items {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      height: 64px;
+    }
 
-        .selection-bar {
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          height: 2px;
-          width: 0;
-          background-color: var(--default-primary-color);
-          transition:
-            left 0.2s ease,
-            width 0.2s ease;
-          pointer-events: none;
-        }
+    .selection-bar {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0;
+      background-color: var(--default-primary-color);
+      transition:
+        left 0.2s ease,
+        width 0.2s ease;
+      pointer-events: none;
+    }
 
-        .nav-item {
-          display: flex;
-          align-items: center;
-        }
+    .nav-item {
+      display: flex;
+      align-items: center;
+    }
 
-        .nav-item a,
-        .signin-tab {
-          padding: 0 14px;
-          color: inherit;
-          text-transform: uppercase;
-        }
+    .nav-item a,
+    .signin-tab {
+      padding: 0 14px;
+      color: inherit;
+      text-transform: uppercase;
+    }
 
-        .signin-tab {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-          background: none;
-          border: none;
-          font: inherit;
-        }
+    .signin-tab {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font: inherit;
+    }
 
-        .icon-button {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 40px;
-          height: 40px;
-          cursor: pointer;
-          background: none;
-          border: none;
-          color: inherit;
-          padding: 0;
-        }
+    .icon-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+    }
 
-        .profile-menu {
-          position: relative;
-          display: inline-flex;
-        }
+    .profile-menu {
+      position: relative;
+      display: inline-flex;
+    }
 
-        .profile-image {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background-position: center;
-          background-size: cover;
-          cursor: pointer;
-        }
+    .profile-image {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+      cursor: pointer;
+    }
 
-        button.profile-image {
-          padding: 0;
-          border: none;
-          background-color: transparent;
-        }
+    button.profile-image {
+      padding: 0;
+      border: none;
+      background-color: transparent;
+    }
 
-        .dropdown-panel {
-          display: none;
-          position: absolute;
-          top: 100%;
-          right: 0;
-          z-index: 2;
-          padding: 24px;
-          max-width: 300px;
-          background: #fff;
-          box-shadow: var(--box-shadow);
-          font-size: 16px;
-          color: var(--primary-text-color);
-        }
+    .dropdown-panel {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      z-index: 2;
+      padding: 24px;
+      max-width: 300px;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      font-size: 16px;
+      color: var(--primary-text-color);
+    }
 
-        .dropdown-panel[open] {
-          display: flex;
-          flex-direction: row;
-        }
+    .dropdown-panel[open] {
+      display: flex;
+      flex-direction: row;
+    }
 
-        .dropdown-panel .panel-actions {
-          margin: 0 -16px -16px 0;
-        }
+    .dropdown-panel .panel-actions {
+      margin: 0 -16px -16px 0;
+    }
 
-        .profile-details .profile-image {
-          align-self: center;
-          margin-right: 16px;
-          width: 48px;
-          height: 48px;
-          cursor: default;
-        }
+    .profile-details .profile-image {
+      align-self: center;
+      margin-right: 16px;
+      width: 48px;
+      height: 48px;
+      cursor: default;
+    }
 
-        .profile-copy {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
+    .profile-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-        .profile-name,
-        .profile-email {
-          font-size: 14px;
-          display: block;
-          white-space: nowrap;
-          color: var(--secondary-text-color);
-        }
+    .profile-name,
+    .profile-email {
+      font-size: 14px;
+      display: block;
+      white-space: nowrap;
+      color: var(--secondary-text-color);
+    }
 
-        .profile-action {
-          margin-top: 4px;
-          padding: 0;
-          background: none;
-          border: none;
-          font-family: inherit;
-          text-align: start;
-          text-transform: uppercase;
-          color: var(--default-primary-color);
-          font-size: 14px;
-          cursor: pointer;
-        }
+    .profile-action {
+      margin-top: 4px;
+      padding: 0;
+      background: none;
+      border: none;
+      font-family: inherit;
+      text-align: start;
+      text-transform: uppercase;
+      color: var(--default-primary-color);
+      font-size: 14px;
+      cursor: pointer;
+    }
 
-        md-filled-button hoverboard-icon {
-          margin-right: 8px;
-          --iron-icon-fill-color: var(--hero-font-color);
-        }
+    md-filled-button hoverboard-icon {
+      margin-right: 8px;
+      --iron-icon-fill-color: var(--hero-font-color);
+    }
 
-        .buy-button {
-          margin-top: 12px;
-        }
+    .buy-button {
+      margin-top: 12px;
+    }
 
-        @media (min-width: 640px) {
-          .toolbar {
-            padding: 0 36px;
-            height: initial;
-          }
-        }
-      `,
-    ];
-  }
+    @media (min-width: 640px) {
+      .toolbar {
+        padding: 0 36px;
+        height: initial;
+      }
+    }
+  `;
 
   private logoTitle = title;
   private signInText = signIn;

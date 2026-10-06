@@ -1,6 +1,6 @@
-import { RootState } from '..';
-import { CollectionState, createCollectionSlice } from '../create-collection-slice';
-import { Photo } from '../../models/photo';
+import type { RootState } from '..';
+import { type CollectionState, createCollectionSlice } from '../create-collection-slice';
+import type { Photo } from '../../models/photo';
 import { subscribeToGallery } from '../../db/gallery';
 
 export type GalleryState = CollectionState<Photo>;

@@ -1,5 +1,5 @@
-import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { saveNotificationsUsers } from '../../db/notifications-users';
 import { notifications } from '../../utils/data';
 import { dispatch, getState } from '../dispatch';

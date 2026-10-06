@@ -4,7 +4,7 @@ import reducer, { selectFilters, setFilters } from '.';
 import { FilterGroupKey } from '../../models/filter-group';
 import { dispatch } from '../dispatch';
 import { parseFilters } from '../../utils/filters';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../dispatch');
 vi.mock('../../utils/filters');

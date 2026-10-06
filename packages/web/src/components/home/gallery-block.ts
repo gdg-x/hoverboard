@@ -2,129 +2,124 @@ import '@material/web/button/outlined-button.js';
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { Photo } from '../../models/photo';
-import { RootState } from '../../store';
-import { GalleryState, selectGallery } from '../../store/gallery';
+import type { Photo } from '../../models/photo';
+import type { RootState } from '../../store';
+import { type GalleryState, selectGallery } from '../../store/gallery';
 import { galleryBlock } from '../../utils/data';
 import { StatefulElement } from '../stateful-element';
 
 @customElement('gallery-block')
 export class GalleryBlock extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        .photos-grid {
-          margin: 64px auto;
-          display: grid;
-          width: 100%;
-          min-height: 400px;
-          height: calc(100vh - 40px);
-          max-height: 750px;
-          grid-template-columns: repeat(3, 1fr);
-          grid-template-rows: repeat(5, 1fr);
-          grid-gap: 2px;
-        }
+  static override styles = css`
+    .photos-grid {
+      margin: 64px auto;
+      display: grid;
+      width: 100%;
+      min-height: 400px;
+      height: calc(100vh - 40px);
+      max-height: 750px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      grid-gap: 2px;
+    }
 
-        .grid-item {
-          --lazy-image-fit: cover;
-          background-color: var(--secondary-background-color);
-        }
+    .grid-item {
+      --lazy-image-fit: cover;
+      background-color: var(--secondary-background-color);
+    }
 
-        .grid-item:first-child {
-          grid-area: 1 / 1 / 3 / 4;
-        }
+    .grid-item:first-child {
+      grid-area: 1 / 1 / 3 / 4;
+    }
 
-        .grid-item:nth-child(2) {
-          grid-area: 3 / 1 / 5 / 3;
-        }
+    .grid-item:nth-child(2) {
+      grid-area: 3 / 1 / 5 / 3;
+    }
 
-        .grid-item:nth-child(3) {
-          grid-area: 3 / 3 / 3 / 3;
-        }
+    .grid-item:nth-child(3) {
+      grid-area: 3 / 3 / 3 / 3;
+    }
 
-        .grid-item:nth-child(4) {
-          grid-area: 4 / 3 / 4 / 3;
-        }
+    .grid-item:nth-child(4) {
+      grid-area: 4 / 3 / 4 / 3;
+    }
 
-        .grid-item:nth-child(5) {
-          grid-area: 5 / 1 / 5 / 1;
-        }
+    .grid-item:nth-child(5) {
+      grid-area: 5 / 1 / 5 / 1;
+    }
 
-        .grid-item:nth-child(6),
-        .grid-item:nth-child(7),
-        .grid-item:nth-child(8) {
-          display: none;
-        }
+    .grid-item:nth-child(6),
+    .grid-item:nth-child(7),
+    .grid-item:nth-child(8) {
+      display: none;
+    }
 
-        .gallery-info {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          padding: 16px;
-          background-color: var(--default-primary-color);
-          color: var(--text-primary-color);
-          z-index: 1;
-          grid-area: 5 / 2 / 5 / 4;
-        }
+    .gallery-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px;
+      background-color: var(--default-primary-color);
+      color: var(--text-primary-color);
+      z-index: 1;
+      grid-area: 5 / 2 / 5 / 4;
+    }
 
-        md-outlined-button {
-          margin-top: 16px;
-          --md-outlined-button-label-text-color: var(--text-primary-color);
-          --md-outlined-button-hover-label-text-color: var(--text-primary-color);
-          --md-outlined-button-outline-color: var(--text-primary-color);
-        }
+    md-outlined-button {
+      margin-top: 16px;
+      --md-outlined-button-label-text-color: var(--text-primary-color);
+      --md-outlined-button-hover-label-text-color: var(--text-primary-color);
+      --md-outlined-button-outline-color: var(--text-primary-color);
+    }
 
-        @media (min-width: 640px) {
-          .photos-grid {
-            height: calc(100vh - 64px);
-            grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-          }
+    @media (min-width: 640px) {
+      .photos-grid {
+        height: calc(100vh - 64px);
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+      }
 
-          .grid-item:first-child {
-            grid-area: 1 / 1 / 1 / 3;
-          }
+      .grid-item:first-child {
+        grid-area: 1 / 1 / 1 / 3;
+      }
 
-          .grid-item:nth-child(2) {
-            grid-area: 1 / 3 / 2 / 5;
-          }
+      .grid-item:nth-child(2) {
+        grid-area: 1 / 3 / 2 / 5;
+      }
 
-          .grid-item:nth-child(3) {
-            grid-area: 1 / 5 / 3 / 5;
-          }
+      .grid-item:nth-child(3) {
+        grid-area: 1 / 5 / 3 / 5;
+      }
 
-          .grid-item:nth-child(4) {
-            grid-area: 2 / 1 / 2 / 1;
-          }
+      .grid-item:nth-child(4) {
+        grid-area: 2 / 1 / 2 / 1;
+      }
 
-          .grid-item:nth-child(5) {
-            grid-area: 2 / 2 / 2 / 2;
-          }
+      .grid-item:nth-child(5) {
+        grid-area: 2 / 2 / 2 / 2;
+      }
 
-          .grid-item:nth-child(6) {
-            grid-area: 3 / 1 / 3 / 3;
-            display: block;
-          }
+      .grid-item:nth-child(6) {
+        grid-area: 3 / 1 / 3 / 3;
+        display: block;
+      }
 
-          .grid-item:nth-child(7) {
-            grid-area: 3 / 3 / 3 / 3;
-            display: block;
-          }
+      .grid-item:nth-child(7) {
+        grid-area: 3 / 3 / 3 / 3;
+        display: block;
+      }
 
-          .grid-item:nth-child(8) {
-            grid-area: 3 / 4 / 3 / 6;
-            display: block;
-          }
+      .grid-item:nth-child(8) {
+        grid-area: 3 / 4 / 3 / 6;
+        display: block;
+      }
 
-          .gallery-info {
-            padding: 24px;
-            grid-area: 2 / 3 / 2 / 5;
-          }
-        }
-      `,
-    ];
-  }
+      .gallery-info {
+        padding: 24px;
+        grid-area: 2 / 3 / 2 / 5;
+      }
+    }
+  `;
 
   @property({ type: Object })
   gallery: GalleryState = new Initialized();

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { FilterGroup, FilterGroupKey } from '../../models/filter-group';
+import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import { filters as filtersText } from '../../utils/data';
 import * as filterUtils from '../../utils/filters';
 import type { FilterMenu } from './filter-menu';

@@ -1,9 +1,9 @@
-import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '..';
+import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '..';
 import {
   fetchFeaturedSessions as getFeaturedSessions,
-  FeaturedSessions,
+  type FeaturedSessions,
   saveFeaturedSessions,
 } from '../../db/featured-sessions';
 import { bookmarked } from '../../utils/data';

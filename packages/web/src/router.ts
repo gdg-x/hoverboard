@@ -1,4 +1,4 @@
-import { Route, Router, type Commands, type RouteContext } from '@vaadin/router';
+import { type Route, Router, type Commands, type RouteContext } from '@vaadin/router';
 import type { EmptyObject } from 'type-fest';
 import { logPageView } from './utils/analytics.js';
 import { CONFIG, getConfig } from './utils/config.js';

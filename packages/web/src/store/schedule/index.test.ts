@@ -1,9 +1,9 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectScheduleState } from '.';
-import { Day } from '../../models/day';
+import type { Day } from '../../models/day';
 import { subscribeToSchedule } from '../../db/schedule';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../../db/schedule');
 vi.mock('../dispatch');

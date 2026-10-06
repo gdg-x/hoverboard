@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import data from '../../../../docs/default-firebase-data.json';
 import { allKeys } from './utils';
-import { Video } from './video';
+import type { Video } from './video';
 
 describe('video', () => {
   it('matches the shape of the default data', () => {

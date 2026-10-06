@@ -2,7 +2,7 @@ import { Failure, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { PartnerGroup } from '../../models/partner-group';
+import type { PartnerGroup } from '../../models/partner-group';
 import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
 import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
 import { queueSnackbar } from '../../store/snackbars';

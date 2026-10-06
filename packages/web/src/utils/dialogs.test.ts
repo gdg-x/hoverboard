@@ -1,6 +1,6 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { describe, expect, it } from 'vitest';
-import { DIALOG, DialogState } from '../store/dialogs';
+import { DIALOG, type DialogState } from '../store/dialogs';
 import { isDialogOpen } from './dialogs';
 
 describe('isDialogOpen', () => {

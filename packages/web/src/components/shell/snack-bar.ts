@@ -1,10 +1,9 @@
 import '@material/web/button/text-button.js';
-import '@material/mwc-icon-button';
-import '@material/mwc-snackbar';
-import { html, LitElement, nothing, svg } from 'lit';
+import '@material/web/iconbutton/icon-button.js';
+import { css, html, LitElement, nothing, type PropertyValues, svg } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import { Snackbar, TIMEOUT } from '../../models/snackbar';
-import { RootState, store } from '../../store';
+import { type Snackbar, TIMEOUT } from '../../models/snackbar';
+import { type RootState, store } from '../../store';
 import { ReduxMixin } from '../../store/mixin';
 import { removeSnackbar } from '../../store/snackbars';
 
@@ -17,52 +16,119 @@ const closeIcon = svg`
 
 @customElement('snack-bar')
 export class SnackBar extends ReduxMixin(LitElement) {
+  static override styles = css`
+    .snackbar {
+      position: fixed;
+      inset: auto auto 16px 16px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-sizing: border-box;
+      min-width: 344px;
+      max-width: calc(100vw - 32px);
+      padding: 6px 8px 6px 16px;
+      border: none;
+      border-radius: 4px;
+      background: #323232;
+      color: rgb(255 255 255 / 87%);
+      font-size: 14px;
+      box-shadow: var(--box-shadow);
+    }
+
+    .snackbar:popover-open {
+      animation: snackbar-in 0.15s ease-out;
+    }
+
+    @keyframes snackbar-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+    }
+
+    @media (max-width: 599px) {
+      .snackbar {
+        inset: auto 0 0;
+        min-width: 0;
+        max-width: none;
+        border-radius: 0;
+      }
+    }
+
+    .label {
+      flex: 1;
+    }
+
+    .action {
+      --md-text-button-label-text-color: var(--light-primary-color, #d1c4e9);
+      --md-text-button-hover-label-text-color: var(--light-primary-color, #d1c4e9);
+      --md-text-button-focus-label-text-color: var(--light-primary-color, #d1c4e9);
+      --md-text-button-pressed-label-text-color: var(--light-primary-color, #d1c4e9);
+    }
+
+    .dismiss {
+      --md-icon-button-icon-color: #fff;
+    }
+  `;
+
   @state()
   private state: Snackbar | undefined;
-  @state()
-  private connected = false;
 
-  @query('mwc-snackbar')
-  snackbar!: import('@material/mwc-snackbar').Snackbar;
+  @query('.snackbar')
+  private snackbar!: HTMLElement;
+
+  private timeout: number | undefined;
 
   override render() {
     const action = this.state?.action
       ? html`
-          <md-text-button slot="action" @click="${this.state.action.callback}">
+          <md-text-button class="action" @click="${this.onAction}">
             ${this.state.action.title}
           </md-text-button>
         `
       : nothing;
 
-    const close = html`
-      <mwc-icon-button slot="dismiss" @click="${this.removeSnackbar}">
-        ${closeIcon}
-      </mwc-icon-button>
-    `;
-
     return html`
-      <mwc-snackbar
-        labelText="${this.state?.label ?? ''}"
-        timeoutMs=${this.state?.timeout ?? TIMEOUT.DEFAULT}
-        @MDCSnackbar:closed="${this.removeSnackbar}"
-      >
-        ${action} ${close}
-      </mwc-snackbar>
+      <div class="snackbar" role="status" popover="manual">
+        <span class="label">${this.state?.label ?? ''}</span>
+        ${action}
+        <md-icon-button class="dismiss" aria-label="dismiss" @click="${this.removeSnackbar}">
+          ${closeIcon}
+        </md-icon-button>
+      </div>
     `;
   }
 
-  override firstUpdated() {
-    this.connected = true;
-    if (this.state && !this.snackbar.open) {
-      this.snackbar.show();
+  override updated(changedProperties: PropertyValues) {
+    if (!changedProperties.has('state')) {
+      return;
     }
+
+    window.clearTimeout(this.timeout);
+    if (this.state) {
+      this.snackbar.togglePopover?.(true);
+      this.timeout = window.setTimeout(
+        () => this.removeSnackbar(),
+        this.state.timeout ?? TIMEOUT.DEFAULT,
+      );
+    } else {
+      this.snackbar.togglePopover?.(false);
+    }
+  }
+
+  override disconnectedCallback() {
+    window.clearTimeout(this.timeout);
+    super.disconnectedCallback();
   }
 
   override stateChanged(state: RootState) {
     this.state = state.snackbars[0];
-    if (this.connected && this.state && !this.snackbar.open) {
-      this.snackbar.show();
-    }
+  }
+
+  private onAction() {
+    this.state?.action?.callback();
+    this.removeSnackbar();
   }
 
   private removeSnackbar() {

@@ -1,17 +1,17 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import { css, html, nothing, PropertyValues } from 'lit';
+import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import './components/shell/app-install';
 import './components/footer/footer-block';
 import './components/shared/hoverboard-icon';
 import './components/shell/header-toolbar';
 import { selectRouteName, startRouter } from './router';
-import { RootState, store } from './store';
+import { type RootState, store } from './store';
 import { onUser } from './store/auth';
 import { DIALOG, selectIsDialogOpen } from './store/dialogs';
 import { queueSnackbar } from './store/snackbars';
-import { TicketsState, selectTickets } from './store/tickets';
-import { DrawerOpenedChanged } from './utils/drawer';
+import { type TicketsState, selectTickets } from './store/tickets';
+import type { DrawerOpenedChanged } from './utils/drawer';
 import {
   buyTicket,
   dates,
@@ -22,7 +22,7 @@ import {
   title,
 } from './utils/data';
 import './utils/media-query';
-import { Stickied } from './utils/stickied';
+import type { Stickied } from './utils/stickied';
 import { StatefulElement } from './components/stateful-element';
 
 type LazyElement =
@@ -30,132 +30,127 @@ type LazyElement =
 
 @customElement('hoverboard-app')
 export class HoverboardApp extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-          position: relative;
-          min-height: 100%;
-          height: 100%;
-        }
+  static override styles = css`
+    :host {
+      display: block;
+      position: relative;
+      min-height: 100%;
+      height: 100%;
+    }
 
-        .scrim {
-          position: fixed;
-          inset: 0;
-          z-index: 10;
-          background-color: rgb(0 0 0 / 40%);
-        }
+    .scrim {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      background-color: rgb(0 0 0 / 40%);
+    }
 
-        .drawer {
-          position: fixed;
-          inset: 0 auto 0 0;
-          z-index: 11;
-          display: flex;
-          flex-direction: column;
-          width: 300px;
-          max-width: 90vw;
-          background-color: var(--primary-background-color);
-          box-shadow: var(--box-shadow);
-          transform: translateX(-100%);
-          transition: transform var(--animation);
-        }
+    .drawer {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 11;
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      max-width: 90vw;
+      background-color: var(--primary-background-color);
+      box-shadow: var(--box-shadow);
+      transform: translateX(-100%);
+      transition: transform var(--animation);
+    }
 
-        .drawer.opened {
-          transform: translateX(0);
-        }
+    .drawer.opened {
+      transform: translateX(0);
+    }
 
-        .drawer-toolbar {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          padding: 36px 24px 24px;
-          height: auto;
-          border-bottom: 1px solid var(--divider-color);
-        }
+    .drawer-toolbar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 36px 24px 24px;
+      height: auto;
+      border-bottom: 1px solid var(--divider-color);
+    }
 
-        @media (min-width: 640px) {
-          .drawer-toolbar {
-            padding: 0 36px;
-            height: initial;
-          }
-        }
+    @media (min-width: 640px) {
+      .drawer-toolbar {
+        padding: 0 36px;
+        height: initial;
+      }
+    }
 
-        .dates {
-          margin-top: 42px;
-          font-size: 22px;
-          line-height: 0.95;
-        }
+    .dates {
+      margin-top: 42px;
+      font-size: 22px;
+      line-height: 0.95;
+    }
 
-        .location {
-          margin-top: 4px;
-          font-size: 15px;
-          color: var(--secondary-text-color);
-        }
+    .location {
+      margin-top: 4px;
+      font-size: 15px;
+      color: var(--secondary-text-color);
+    }
 
-        .drawer-content {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          flex: 1;
-          padding: 16px 0;
-        }
+    .drawer-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+      padding: 16px 0;
+    }
 
-        .drawer-list a {
-          display: block;
-          padding: 8px 24px;
-          color: var(--primary-text-color);
-          outline: 0;
-        }
+    .drawer-list a {
+      display: block;
+      padding: 8px 24px;
+      color: var(--primary-text-color);
+      outline: 0;
+    }
 
-        .drawer-list a.selected {
-          font-weight: 500;
-        }
+    .drawer-list a.selected {
+      font-weight: 500;
+    }
 
-        .toolbar-logo {
-          --lazy-image-width: auto;
-          --lazy-image-height: 32px;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-        }
+    .toolbar-logo {
+      --lazy-image-width: auto;
+      --lazy-image-height: 32px;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+    }
 
-        .app-header {
-          position: sticky;
-          top: 0;
-          z-index: 2;
-          box-shadow: var(--box-shadow);
-          transition: box-shadow var(--animation);
-        }
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      box-shadow: var(--box-shadow);
+      transition: box-shadow var(--animation);
+    }
 
-        .app-header.remove-shadow {
-          box-shadow: none;
-        }
+    .app-header.remove-shadow {
+      box-shadow: none;
+    }
 
-        main {
-          background-color: var(--primary-background-color);
-          min-height: 100%;
-          height: 100%;
-        }
+    main {
+      background-color: var(--primary-background-color);
+      min-height: 100%;
+      height: 100%;
+    }
 
-        .drawer-content hoverboard-icon {
-          width: 14px;
-          height: 14px;
-          margin-left: 6px;
-        }
+    .drawer-content hoverboard-icon {
+      width: 14px;
+      height: 14px;
+      margin-left: 6px;
+    }
 
-        /* Look for copies of this */
-        .bottom-drawer-link {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          padding: 16px 24px;
-          cursor: pointer;
-        }
-      `,
-    ];
-  }
+    /* Look for copies of this */
+    .bottom-drawer-link {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 16px 24px;
+      cursor: pointer;
+    }
+  `;
 
   private alt = title;
   private dates = dates;

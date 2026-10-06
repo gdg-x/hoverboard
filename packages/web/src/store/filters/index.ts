@@ -1,7 +1,7 @@
-import { Initialized, RemoteData, Success } from '@abraham/remotedata';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '..';
-import { Filter } from '../../models/filter';
+import { Initialized, type RemoteData, Success } from '@abraham/remotedata';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '..';
+import type { Filter } from '../../models/filter';
 import { parseFilters } from '../../utils/filters';
 import { dispatch } from '../dispatch';
 

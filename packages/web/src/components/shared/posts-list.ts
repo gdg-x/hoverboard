@@ -2,78 +2,73 @@ import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '../markdown/short-markdown';
 import './text-truncate';
-import { Post } from '../../models/post';
+import type { Post } from '../../models/post';
 import { router } from '../../router';
 import { getDate } from '../../utils/dates';
 import { ThemedElement } from '../themed-element';
 
 @customElement('posts-list')
 export class PostsList extends ThemedElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-        }
+  static override styles = css`
+    :host {
+      display: block;
+    }
 
-        .post {
-          padding: 24px 0;
-          display: flex;
-          flex-direction: row;
-          color: var(--primary-text-color);
-        }
+    .post {
+      padding: 24px 0;
+      display: flex;
+      flex-direction: row;
+      color: var(--primary-text-color);
+    }
 
-        .post:not(:last-of-type) {
-          border-bottom: 1px dotted var(--divider-color);
-        }
+    .post:not(:last-of-type) {
+      border-bottom: 1px dotted var(--divider-color);
+    }
 
-        .image {
-          margin-right: 24px;
-          --lazy-image-width: 64px;
-          --lazy-image-height: 64px;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-          border-radius: var(--border-radius);
-        }
+    .image {
+      margin-right: 24px;
+      --lazy-image-width: 64px;
+      --lazy-image-height: 64px;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+      border-radius: var(--border-radius);
+    }
 
-        .post-content {
-          flex: 1;
-          flex-basis: 1px;
-        }
+    .post-content {
+      flex: 1;
+      flex-basis: 1px;
+    }
 
-        .details {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          height: 100%;
-        }
+    .details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
 
-        .title {
-          line-height: 1.2;
-        }
+    .title {
+      line-height: 1.2;
+    }
 
-        .description {
-          padding-top: 8px;
-          color: var(--secondary-text-color);
-        }
+    .description {
+      padding-top: 8px;
+      color: var(--secondary-text-color);
+    }
 
-        .date {
-          font-size: 12px;
-          text-transform: uppercase;
-          color: var(--secondary-text-color);
-        }
+    .date {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--secondary-text-color);
+    }
 
-        @media (min-width: 640px) {
-          .image {
-            --lazy-image-width: 128px;
-            --lazy-image-height: 128px;
-          }
-        }
-      `,
-    ];
-  }
+    @media (min-width: 640px) {
+      .image {
+        --lazy-image-width: 128px;
+        --lazy-image-height: 128px;
+      }
+    }
+  `;
 
   @property({ type: Array })
   posts: Post[] = [];

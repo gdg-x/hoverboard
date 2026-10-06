@@ -13,7 +13,7 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: production,
     minify: production,
-    target: 'es2019',
+    target: 'es2022',
     rollupOptions: {
       input: 'src/firebase-messaging-sw.ts',
       output: {

@@ -1,6 +1,6 @@
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { RootState } from '../../store';
+import type { RootState } from '../../store';
 import { initialUiState } from '../../store/ui';
 import { location, mapBlock } from '../../utils/data';
 import '../shared/hoverboard-icon';
@@ -8,76 +8,71 @@ import { StatefulElement } from '../stateful-element';
 
 @customElement('map-block')
 export class MapBlock extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          margin: 32px auto;
-          display: block;
-          position: relative;
-        }
+  static override styles = css`
+    :host {
+      margin: 32px auto;
+      display: block;
+      position: relative;
+    }
 
-        .container {
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-        }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
 
-        .container.fit {
-          position: absolute;
-          inset: 0;
-        }
+    .container.fit {
+      position: absolute;
+      inset: 0;
+    }
 
-        .description-card {
-          margin: 0 -16px;
-          padding: 16px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          background-color: var(--default-primary-color);
-          color: var(--text-primary-color);
-        }
+    .description-card {
+      margin: 0 -16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: var(--default-primary-color);
+      color: var(--text-primary-color);
+    }
 
-        .bottom-info {
-          margin-top: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
+    .bottom-info {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        .directions {
-          width: 48px;
-          height: 48px;
-          color: var(--text-primary-color);
-          padding: 12px;
-        }
+    .directions {
+      width: 48px;
+      height: 48px;
+      color: var(--text-primary-color);
+      padding: 12px;
+    }
 
-        @media (min-width: 640px) {
-          :host {
-            margin: 64px auto 72px;
-          }
+    @media (min-width: 640px) {
+      :host {
+        margin: 64px auto 72px;
+      }
 
-          gmp-map {
-            display: block;
-            height: 640px;
-          }
+      gmp-map {
+        display: block;
+        height: 640px;
+      }
 
-          .description-card {
-            margin: 0;
-            padding: 24px;
-            max-width: 320px;
-            transform: translateY(80px);
-            border-radius: var(--border-radius);
-          }
+      .description-card {
+        margin: 0;
+        padding: 24px;
+        max-width: 320px;
+        transform: translateY(80px);
+        border-radius: var(--border-radius);
+      }
 
-          .address {
-            font-size: 12px;
-          }
-        }
-      `,
-    ];
-  }
+      .address {
+        font-size: 12px;
+      }
+    }
+  `;
 
   private location = location;
   private mapBlock = mapBlock;

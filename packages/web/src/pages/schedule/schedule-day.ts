@@ -1,19 +1,22 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import { RouterLocation } from '@vaadin/router';
-import { css, html, PropertyValues } from 'lit';
+import type { RouterLocation } from '@vaadin/router';
+import { css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { Day } from '../../models/day';
-import { Filter } from '../../models/filter';
-import { Session } from '../../models/session';
-import { GeneratedSessionBlock, Time } from '../../models/time';
-import { Timeslot } from '../../models/timeslot';
-import { RootState } from '../../store';
-import { FeaturedSessionsState, selectFeaturedSessionsState } from '../../store/featured-sessions';
+import type { Day } from '../../models/day';
+import type { Filter } from '../../models/filter';
+import type { Session } from '../../models/session';
+import type { GeneratedSessionBlock, Time } from '../../models/time';
+import type { Timeslot } from '../../models/timeslot';
+import type { RootState } from '../../store';
+import {
+  type FeaturedSessionsState,
+  selectFeaturedSessionsState,
+} from '../../store/featured-sessions';
 import { selectFilters } from '../../store/filters';
-import { ScheduleState, selectScheduleState } from '../../store/schedule';
-import { UserState } from '../../store/user';
+import { type ScheduleState, selectScheduleState } from '../../store/schedule';
+import type { UserState } from '../../store/user';
 import { mySchedule } from '../../utils/data';
 import { generateClassName } from '../../utils/styles';
 import '../../components/shared/hoverboard-icon';
@@ -22,97 +25,92 @@ import { StatefulElement } from '../../components/stateful-element';
 
 @customElement('schedule-day')
 export class ScheduleDay extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-          --tracks-number: 3;
-        }
+  static override styles = css`
+    :host {
+      display: block;
+      --tracks-number: 3;
+    }
 
-        .start-time {
-          margin-top: 16px;
-          padding: 8px 16px;
-          color: var(--secondary-text-color);
-          letter-spacing: -0.04em;
-          border-bottom: 1px solid var(--border-light-color);
-        }
+    .start-time {
+      margin-top: 16px;
+      padding: 8px 16px;
+      color: var(--secondary-text-color);
+      letter-spacing: -0.04em;
+      border-bottom: 1px solid var(--border-light-color);
+    }
 
-        .hours {
-          font-size: 24px;
-          font-weight: 300;
-        }
+    .hours {
+      font-size: 24px;
+      font-weight: 300;
+    }
 
-        .minutes {
-          font-size: 16px;
-        }
+    .minutes {
+      font-size: 16px;
+    }
 
-        .add-session {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          padding: 8px;
-          grid-column-end: -1 !important;
-          background-color: var(--primary-background-color);
-          border-bottom: 1px solid var(--border-light-color);
-          font-size: 14px;
-          color: var(--secondary-text-color);
-        }
+    .add-session {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      grid-column-end: -1 !important;
+      background-color: var(--primary-background-color);
+      border-bottom: 1px solid var(--border-light-color);
+      font-size: 14px;
+      color: var(--secondary-text-color);
+    }
 
-        .add-session:hover {
-          background-color: var(--additional-background-color);
-        }
+    .add-session:hover {
+      background-color: var(--additional-background-color);
+    }
 
-        .add-session-icon {
-          width: 14px;
-          height: 14px;
-          margin-right: 8px;
-        }
+    .add-session-icon {
+      width: 14px;
+      height: 14px;
+      margin-right: 8px;
+    }
 
-        .session {
-          display: flex;
-          flex-direction: column;
-        }
+    .session {
+      display: flex;
+      flex-direction: column;
+    }
 
-        @media (min-width: 812px) {
-          :host {
-            margin-left: auto;
-            display: block;
-            max-width: calc(100% - 64px);
-          }
+    @media (min-width: 812px) {
+      :host {
+        margin-left: auto;
+        display: block;
+        max-width: calc(100% - 64px);
+      }
 
-          .grid {
-            display: grid;
-            grid-column-gap: 16px;
-            grid-row-gap: 32px;
-            grid-template-columns: repeat(var(--tracks-number), 1fr);
-          }
+      .grid {
+        display: grid;
+        grid-column-gap: 16px;
+        grid-row-gap: 32px;
+        grid-template-columns: repeat(var(--tracks-number), 1fr);
+      }
 
-          .start-time {
-            margin: 0;
-            padding: 0;
-            text-align: right;
-            transform: translateX(calc(-100% - 16px));
-            border-bottom: 0;
-          }
+      .start-time {
+        margin: 0;
+        padding: 0;
+        text-align: right;
+        transform: translateX(calc(-100% - 16px));
+        border-bottom: 0;
+      }
 
-          .hours {
-            font-size: 32px;
-          }
+      .hours {
+        font-size: 32px;
+      }
 
-          .subsession:not(:last-of-type) {
-            margin-bottom: 16px;
-          }
+      .subsession:not(:last-of-type) {
+        margin-bottom: 16px;
+      }
 
-          .add-session {
-            border: 1px solid var(--border-light-color);
-          }
-        }
-      `,
-    ];
-  }
+      .add-session {
+        border: 1px solid var(--border-light-color);
+      }
+    }
+  `;
 
   private mySchedule = mySchedule;
 

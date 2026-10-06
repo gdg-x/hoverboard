@@ -4,7 +4,7 @@ import { screen } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { router } from '../../router';
-import { SpeakerWithTags } from '../../models/speaker';
+import type { SpeakerWithTags } from '../../models/speaker';
 import type { HoverboardIcon } from '../shared/hoverboard-icon';
 import type { SpeakersBlock } from './speakers-block';
 import './speakers-block';

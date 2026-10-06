@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { Session } from '../models/session';
+import type { Session } from '../models/session';
 import { timezoneOffset } from './data';
 import { acceptingFeedback } from './feedback';
 

@@ -1,4 +1,4 @@
-import { Filter } from '../models/filter';
+import type { Filter } from '../models/filter';
 import { FilterGroupKey } from '../models/filter-group';
 import { setFilters } from '../store/filters';
 import { logPageView } from './analytics';

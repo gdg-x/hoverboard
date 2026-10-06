@@ -1,6 +1,6 @@
 import { orderBy } from 'firebase/firestore';
-import { Ticket } from '../models/ticket';
-import { subscribeToCollection, Subscription } from '../utils/firestore';
+import type { Ticket } from '../models/ticket';
+import { subscribeToCollection, type Subscription } from '../utils/firestore';
 
 export const subscribeToTickets = (
   onStart: () => void,

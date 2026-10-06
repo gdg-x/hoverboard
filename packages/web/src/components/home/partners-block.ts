@@ -2,9 +2,9 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { RootState, store } from '../../store';
+import { type RootState, store } from '../../store';
 import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
-import { PartnerGroupsState, selectPartnerGroups } from '../../store/partners';
+import { type PartnerGroupsState, selectPartnerGroups } from '../../store/partners';
 import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
 import { queueSnackbar } from '../../store/snackbars';
 import { loading, partnersBlock } from '../../utils/data';
@@ -13,55 +13,50 @@ import { StatefulElement } from '../stateful-element';
 
 @customElement('partners-block')
 export class PartnersBlock extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        .block-title {
-          margin: 24px 0 8px;
-        }
+  static override styles = css`
+    .block-title {
+      margin: 24px 0 8px;
+    }
 
-        .logos-wrapper {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-          grid-gap: 8px;
-        }
+    .logos-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-gap: 8px;
+    }
 
-        .logo-item {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          padding: 12px;
-        }
+    .logo-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
 
-        .logo-img {
-          --lazy-image-width: 100%;
-          --lazy-image-height: 84px;
-          --lazy-image-fit: contain;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-        }
+    .logo-img {
+      --lazy-image-width: 100%;
+      --lazy-image-height: 84px;
+      --lazy-image-fit: contain;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+    }
 
-        .cta-button {
-          margin-top: 24px;
-          color: var(--default-primary-color);
-        }
+    .cta-button {
+      margin-top: 24px;
+      color: var(--default-primary-color);
+    }
 
-        @media (min-width: 640px) {
-          .logos-wrapper {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
+    @media (min-width: 640px) {
+      .logos-wrapper {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
 
-        @media (min-width: 812px) {
-          .logos-wrapper {
-            grid-template-columns: repeat(5, 1fr);
-          }
-        }
-      `,
-    ];
-  }
+    @media (min-width: 812px) {
+      .logos-wrapper {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+  `;
 
   private loading = loading;
   private partnersBlock = partnersBlock;

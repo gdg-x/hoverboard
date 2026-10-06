@@ -2,20 +2,20 @@ import { Initialized, Pending } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { RouterLocation } from '@vaadin/router';
+import type { RouterLocation } from '@vaadin/router';
 import '../components/hero/hero-block';
 import '../components/shared/content-loader';
 import '../components/shared/filter-menu';
 import '../components/schedule/header-bottom-toolbar';
 import '../components/schedule/sticky-element';
-import { Filter } from '../models/filter';
-import { FilterGroup } from '../models/filter-group';
-import { RootState } from '../store';
+import type { Filter } from '../models/filter';
+import type { FilterGroup } from '../models/filter-group';
+import type { RootState } from '../store';
 import { selectFilters } from '../store/filters';
-import { ScheduleState, selectScheduleState } from '../store/schedule';
+import { type ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';
-import { SessionsState, selectSessionsState } from '../store/sessions';
-import { SpeakersState, selectSpeakersState } from '../store/speakers';
+import { type SessionsState, selectSessionsState } from '../store/sessions';
+import { type SpeakersState, selectSpeakersState } from '../store/speakers';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 import { StatefulElement } from '../components/stateful-element';
@@ -36,39 +36,34 @@ interface ScheduleHeroSettings {
 
 @customElement('schedule-page')
 export class SchedulePage extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-          height: 100%;
-        }
+  static override styles = css`
+    :host {
+      display: block;
+      height: 100%;
+    }
 
-        .container {
-          min-height: 80%;
-        }
+    .container {
+      min-height: 80%;
+    }
 
-        .progress {
-          width: 100%;
-          --md-linear-progress-active-indicator-color: var(--default-primary-color);
-          --md-linear-progress-track-color: var(--default-primary-color);
-        }
+    .progress {
+      width: 100%;
+      --md-linear-progress-active-indicator-color: var(--default-primary-color);
+      --md-linear-progress-track-color: var(--default-primary-color);
+    }
 
-        @media (max-width: 640px) {
-          .container {
-            padding: 0 0 32px;
-          }
-        }
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 0 32px;
+      }
+    }
 
-        @media (min-width: 640px) {
-          :host {
-            background-color: #fff;
-          }
-        }
-      `,
-    ];
-  }
+    @media (min-width: 640px) {
+      :host {
+        background-color: #fff;
+      }
+    }
+  `;
 
   private heroSettings: ScheduleHeroSettings = heroSettings.schedule;
   private contentLoaders = contentLoaders.schedule;

@@ -1,6 +1,6 @@
 import { orderBy } from 'firebase/firestore';
-import { TeamWithoutMembers } from '../models/team';
-import { subscribeToCollection, Subscription } from '../utils/firestore';
+import type { TeamWithoutMembers } from '../models/team';
+import { subscribeToCollection, type Subscription } from '../utils/firestore';
 
 export const subscribeToTeams = (
   onStart: () => void,

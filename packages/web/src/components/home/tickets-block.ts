@@ -2,144 +2,139 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { Ticket } from '../../models/ticket';
-import { RootState } from '../../store';
-import { TicketsState, selectTickets } from '../../store/tickets';
+import type { Ticket } from '../../models/ticket';
+import type { RootState } from '../../store';
+import { type TicketsState, selectTickets } from '../../store/tickets';
 import { buyTicket, contentLoaders, ticketsBlock } from '../../utils/data';
 import '../shared/content-loader';
 import { StatefulElement } from '../stateful-element';
 
 @customElement('tickets-block')
 export class TicketsBlock extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        .tickets-wrapper {
-          text-align: center;
-        }
+  static override styles = css`
+    .tickets-wrapper {
+      text-align: center;
+    }
 
-        .tickets {
-          margin: 32px 0 24px;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-        }
+    .tickets {
+      margin: 32px 0 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        .ticket-item {
-          margin: 16px 8px;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          text-align: center;
-          color: var(--primary-text-color);
-          background-color: var(--default-background-color);
-        }
+    .ticket-item {
+      margin: 16px 8px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      color: var(--primary-text-color);
+      background-color: var(--default-background-color);
+    }
 
-        .ticket-item[in-demand] {
-          transform: scale(1.05);
-          box-shadow: var(--box-shadow-primary-color);
-          border-top: 2px solid var(--default-primary-color);
-          z-index: 1;
-        }
+    .ticket-item[in-demand] {
+      transform: scale(1.05);
+      box-shadow: var(--box-shadow-primary-color);
+      border-top: 2px solid var(--default-primary-color);
+      z-index: 1;
+    }
 
-        .ticket-item[in-demand]:hover {
-          box-shadow: var(--box-shadow-primary-color-hover);
-        }
+    .ticket-item[in-demand]:hover {
+      box-shadow: var(--box-shadow-primary-color-hover);
+    }
 
-        .ticket-item[sold-out] {
-          opacity: 0.5;
-          filter: grayscale(1);
-          cursor: not-allowed;
-        }
+    .ticket-item[sold-out] {
+      opacity: 0.5;
+      filter: grayscale(1);
+      cursor: not-allowed;
+    }
 
-        .ticket-item[sold-out]:hover {
-          box-shadow:
-            0 0 2px 0 rgba(0, 0, 0, 0.07),
-            0 2px 2px 0 rgba(0, 0, 0, 0.15);
-        }
+    .ticket-item[sold-out]:hover {
+      box-shadow:
+        0 0 2px 0 rgba(0, 0, 0, 0.07),
+        0 2px 2px 0 rgba(0, 0, 0, 0.15);
+    }
 
-        .header {
-          padding: 24px 0 0;
-          font-size: 16px;
-        }
+    .header {
+      padding: 24px 0 0;
+      font-size: 16px;
+    }
 
-        .content {
-          padding: 0 24px;
-          display: flex;
-          flex-direction: column;
-          flex: 1 1 auto;
-        }
+    .content {
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+    }
 
-        .type-description {
-          font-size: 12px;
-          color: var(--secondary-text-color);
-          display: flex;
-          flex-direction: column;
-          flex: 1 1 auto;
-          justify-content: center;
-        }
+    .type-description {
+      font-size: 12px;
+      color: var(--secondary-text-color);
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      justify-content: center;
+    }
 
-        .ticket-price-wrapper {
-          margin: 24px 0;
-          white-space: nowrap;
-        }
+    .ticket-price-wrapper {
+      margin: 24px 0;
+      white-space: nowrap;
+    }
 
-        .price {
-          color: var(--default-primary-color);
-          font-size: 40px;
-        }
+    .price {
+      color: var(--default-primary-color);
+      font-size: 40px;
+    }
 
-        .discount {
-          font-size: 14px;
-          color: var(--accent-color);
-        }
+    .discount {
+      font-size: 14px;
+      color: var(--accent-color);
+    }
 
-        .sold-out {
-          display: none;
-          font-size: 14px;
-          text-transform: uppercase;
-          height: 32px;
-          color: var(--secondary-text-color);
-        }
+    .sold-out {
+      display: none;
+      font-size: 14px;
+      text-transform: uppercase;
+      height: 32px;
+      color: var(--secondary-text-color);
+    }
 
-        .sold-out[visible] {
-          display: block !important;
-        }
+    .sold-out[visible] {
+      display: block !important;
+    }
 
-        .additional-info {
-          margin: 16px auto 0;
-          max-width: 480px;
-          font-size: 14px;
-          color: var(--secondary-text-color);
-        }
+    .additional-info {
+      margin: 16px auto 0;
+      max-width: 480px;
+      font-size: 14px;
+      color: var(--secondary-text-color);
+    }
 
-        .actions {
-          padding: 24px;
-          position: relative;
-        }
+    .actions {
+      padding: 24px;
+      position: relative;
+    }
 
-        .tickets-placeholder {
-          display: grid;
-          width: 100%;
-        }
+    .tickets-placeholder {
+      display: grid;
+      width: 100%;
+    }
 
-        @media (min-width: 640px) {
-          .tickets-placeholder {
-            grid-template-columns: repeat(auto-fill, 200px);
-          }
+    @media (min-width: 640px) {
+      .tickets-placeholder {
+        grid-template-columns: repeat(auto-fill, 200px);
+      }
 
-          .ticket-item {
-            max-width: 200px;
-          }
+      .ticket-item {
+        max-width: 200px;
+      }
 
-          .ticket-item[in-demand] {
-            transform: scale(1.15);
-          }
-        }
-      `,
-    ];
-  }
+      .ticket-item[in-demand] {
+        transform: scale(1.15);
+      }
+    }
+  `;
 
   private ticketsBlock = ticketsBlock;
   private contentLoaders = contentLoaders.tickets;

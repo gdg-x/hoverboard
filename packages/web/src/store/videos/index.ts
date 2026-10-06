@@ -1,6 +1,6 @@
-import { RootState } from '..';
-import { CollectionState, createCollectionSlice } from '../create-collection-slice';
-import { Video } from '../../models/video';
+import type { RootState } from '..';
+import { type CollectionState, createCollectionSlice } from '../create-collection-slice';
+import type { Video } from '../../models/video';
 import { subscribeToVideos } from '../../db/videos';
 
 export type VideosState = CollectionState<Video>;

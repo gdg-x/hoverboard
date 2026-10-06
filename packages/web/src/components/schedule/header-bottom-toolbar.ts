@@ -1,9 +1,9 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
-import { RouterLocation } from '@vaadin/router';
-import { css, html, PropertyValues } from 'lit';
+import type { RouterLocation } from '@vaadin/router';
+import { css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { RootState } from '../../store';
-import { ScheduleState, selectScheduleState } from '../../store/schedule';
+import type { RootState } from '../../store';
+import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { contentLoaders, mySchedule } from '../../utils/data';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
 import '../shared/content-loader';
@@ -11,69 +11,64 @@ import { StatefulElement } from '../stateful-element';
 
 @customElement('header-bottom-toolbar')
 export class HeaderBottomToolbar extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-          background-color: var(--primary-background-color);
-        }
+  static override styles = css`
+    :host {
+      display: block;
+      background-color: var(--primary-background-color);
+    }
 
-        .toolbar {
-          margin: 0 auto;
-          padding: 0 16px;
-          height: auto;
-          max-width: var(--max-container-width);
-        }
+    .toolbar {
+      margin: 0 auto;
+      padding: 0 16px;
+      height: auto;
+      max-width: var(--max-container-width);
+    }
 
-        .nav-items {
-          position: relative;
-          width: 100%;
-          height: 64px;
-          display: flex;
-          flex-direction: row;
-          align-items: stretch;
-          overflow-x: auto;
-          scrollbar-width: none;
-        }
+    .nav-items {
+      position: relative;
+      width: 100%;
+      height: 64px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
 
-        .nav-items::-webkit-scrollbar {
-          display: none;
-        }
+    .nav-items::-webkit-scrollbar {
+      display: none;
+    }
 
-        .selection-bar {
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          height: 2px;
-          width: 0;
-          background-color: var(--default-primary-color);
-          transition:
-            left 0.2s ease,
-            width 0.2s ease;
-          pointer-events: none;
-        }
+    .selection-bar {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0;
+      background-color: var(--default-primary-color);
+      transition:
+        left 0.2s ease,
+        width 0.2s ease;
+      pointer-events: none;
+    }
 
-        .nav-item {
-          display: flex;
-          align-items: center;
-          flex: none;
-        }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      flex: none;
+    }
 
-        .nav-item a {
-          padding: 0 14px;
-          color: var(--primary-text-color);
-        }
+    .nav-item a {
+      padding: 0 14px;
+      color: var(--primary-text-color);
+    }
 
-        @media (min-width: 640px) {
-          .toolbar {
-            padding: 0 36px;
-          }
-        }
-      `,
-    ];
-  }
+    @media (min-width: 640px) {
+      .toolbar {
+        padding: 0 36px;
+      }
+    }
+  `;
 
   private mySchedule = mySchedule;
   private contentLoaders = contentLoaders.schedule;

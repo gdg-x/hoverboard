@@ -3,6 +3,7 @@ import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { store } from '../../store';
+import { TIMEOUT } from '../../models/snackbar';
 import { queueComplexSnackbar, queueSnackbar, removeSnackbar } from '../../store/snackbars';
 import type { SnackBar } from './snack-bar';
 import './snack-bar';
@@ -36,10 +37,7 @@ describe('snack-bar', () => {
     store.dispatch(queueSnackbar('Saved successfully'));
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('mwc-snackbar')).toHaveAttribute(
-      'labelText',
-      'Saved successfully',
-    );
+    expect(shadowRoot.querySelector('.label')).toHaveTextContent('Saved successfully');
   });
 
   it('renders an action button for complex snackbars', async () => {
@@ -48,11 +46,12 @@ describe('snack-bar', () => {
     store.dispatch(queueComplexSnackbar({ label: 'Updated', action: { title: 'Undo', callback } }));
     await element.updateComplete;
 
-    const actionButton = shadowRoot.querySelector('[slot="action"]')!;
+    const actionButton = shadowRoot.querySelector('.action')!;
     expect(actionButton).toHaveTextContent('Undo');
 
     fireEvent.click(actionButton);
     expect(callback).toHaveBeenCalledTimes(1);
+    expect(mockRemoveSnackbar).toHaveBeenCalledTimes(1);
   });
 
   it('dispatches removeSnackbar when the dismiss button is clicked', async () => {
@@ -61,18 +60,23 @@ describe('snack-bar', () => {
     await element.updateComplete;
     const { id } = store.getState().snackbars[0]!;
 
-    fireEvent.click(shadowRoot.querySelector('[slot="dismiss"]')!);
+    fireEvent.click(shadowRoot.querySelector('.dismiss')!);
 
     expect(mockRemoveSnackbar).toHaveBeenCalledWith(id);
   });
 
-  it('dispatches removeSnackbar when the snackbar closes itself', async () => {
-    const { element, shadowRoot } = await fixture<SnackBar>(html`<snack-bar></snack-bar>`);
+  it('dispatches removeSnackbar when the timeout elapses', async () => {
+    vi.useFakeTimers();
+    const { element } = await fixture<SnackBar>(html`<snack-bar></snack-bar>`);
     store.dispatch(queueSnackbar('Auto dismiss'));
     await element.updateComplete;
     const { id } = store.getState().snackbars[0]!;
 
-    fireEvent(shadowRoot.querySelector('mwc-snackbar')!, new Event('MDCSnackbar:closed'));
+    vi.advanceTimersByTime(TIMEOUT.DEFAULT - 1);
+    expect(mockRemoveSnackbar).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(1);
+    vi.useRealTimers();
 
     expect(mockRemoveSnackbar).toHaveBeenCalledWith(id);
   });

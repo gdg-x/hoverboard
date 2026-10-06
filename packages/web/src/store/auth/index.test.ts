@@ -1,7 +1,7 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { FirebaseError } from 'firebase/app';
 import {
-  AuthError,
+  type AuthError,
   AuthErrorCodes,
   fetchSignInMethodsForEmail,
   getAuth,
@@ -11,7 +11,7 @@ import {
   signOut as firebaseSignOut,
 } from 'firebase/auth';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { FirebaseUser } from '../../models/user';
+import type { FirebaseUser } from '../../models/user';
 import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
 import { dispatch } from '../dispatch';
@@ -19,7 +19,7 @@ import { resetFeaturedSessions } from '../featured-sessions';
 import { unsubscribeFromFeedback } from '../feedback';
 import { resetSubscribed } from '../subscribe';
 import { removeUser, setUser } from '../user';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../dispatch');
 vi.mock('../../utils/analytics', () => ({

@@ -4,11 +4,11 @@ import {
   onSnapshot,
   orderBy,
   query,
-  Unsubscribe,
+  type Unsubscribe,
 } from 'firebase/firestore';
 import { db } from '../firebase';
-import { Partner } from '../models/partner';
-import { PartnerGroupWithoutItems } from '../models/partner-group';
+import type { Partner } from '../models/partner';
+import type { PartnerGroupWithoutItems } from '../models/partner-group';
 import { dataWithParentId, mergeDataAndId } from '../utils/firestore';
 
 export const subscribeToPartners = (

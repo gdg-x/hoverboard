@@ -3,29 +3,29 @@ import '@material/web/fab/fab.js';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { RouterLocation } from '@vaadin/router';
+import type { RouterLocation } from '@vaadin/router';
 import '../components/shared/auth-required';
 import '../components/shared/content-loader';
 import '../components/dialogs/feedback-block';
 import '../components/hero/simple-hero';
 import '../components/shared/hoverboard-icon';
 import '../components/markdown/short-markdown';
-import { Session } from '../models/session';
-import { Speaker } from '../models/speaker';
+import type { Session } from '../models/session';
+import type { Speaker } from '../models/speaker';
 import { router } from '../router';
-import { RootState, store } from '../store';
+import { type RootState, store } from '../store';
 import { initialAuthState } from '../store/auth';
 import { openSigninDialog } from '../store/dialogs';
 import {
-  FeaturedSessionsState,
+  type FeaturedSessionsState,
   selectFeaturedSessionsState,
   setUserFeaturedSessions,
 } from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
-import { SessionsState, selectSessionsState } from '../store/sessions';
+import { type SessionsState, selectSessionsState } from '../store/sessions';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUiState, openVideoDialog } from '../store/ui';
-import { UserState } from '../store/user';
+import type { UserState } from '../store/user';
 import { disabledSchedule, feedback, schedule, sessionDetails } from '../utils/data';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
@@ -46,154 +46,149 @@ type SessionWithDetails = Omit<Session, 'speakers'> & {
 
 @customElement('session-page')
 export class SessionPage extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          margin: 0;
-          display: block;
-          height: 100%;
-          width: 100%;
-          background: #fff;
-          color: var(--primary-text-color);
-        }
+  static override styles = css`
+    :host {
+      margin: 0;
+      display: block;
+      height: 100%;
+      width: 100%;
+      background: #fff;
+      color: var(--primary-text-color);
+    }
 
-        .header-content,
-        .content {
-          padding: 24px;
-        }
+    .header-content,
+    .content {
+      padding: 24px;
+    }
 
-        .header-content {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-        }
+    .header-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
 
-        .name {
-          line-height: 1.2;
-        }
+    .name {
+      line-height: 1.2;
+    }
 
-        .tags {
-          margin-top: 8px;
-        }
+    .tags {
+      margin-top: 8px;
+    }
 
-        .float-button {
-          position: fixed;
-          right: 24px;
-          bottom: 24px;
-        }
+    .float-button {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+    }
 
-        .content {
-          position: relative;
-          font-size: 15px;
-          line-height: 1.87;
-        }
+    .content {
+      position: relative;
+      font-size: 15px;
+      line-height: 1.87;
+    }
 
-        .meta-info {
-          line-height: 1.6;
-        }
+    .meta-info {
+      line-height: 1.6;
+    }
 
-        .description {
-          margin: 24px 0 32px;
-          max-width: 700px;
-        }
+    .description {
+      margin: 24px 0 32px;
+      max-width: 700px;
+    }
 
-        .action {
-          margin-right: 16px;
-          color: var(--primary-text-color);
-          cursor: pointer;
-          user-select: none;
-          display: flex;
-          align-items: center;
-        }
+    .action {
+      margin-right: 16px;
+      color: var(--primary-text-color);
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+    }
 
-        .action hoverboard-icon {
-          margin-right: 4px;
-          width: 18px;
-          height: 18px;
-        }
+    .action hoverboard-icon {
+      margin-right: 4px;
+      width: 18px;
+      height: 18px;
+    }
 
-        .additional-sections {
-          margin-top: 32px;
-        }
+    .additional-sections {
+      margin-top: 32px;
+    }
 
-        .actions,
-        .section-content {
-          display: flex;
-        }
+    .actions,
+    .section-content {
+      display: flex;
+    }
 
-        .section-content {
-          align-items: center;
-        }
+    .section-content {
+      align-items: center;
+    }
 
-        .section {
-          margin-top: 16px;
-          display: block;
-          color: var(--primary-text-color);
-          cursor: pointer;
-        }
+    .section {
+      margin-top: 16px;
+      display: block;
+      color: var(--primary-text-color);
+      cursor: pointer;
+    }
 
-        .section-photo {
-          margin-right: 16px;
-          --lazy-image-width: 48px;
-          --lazy-image-height: 48px;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-          background-color: var(--secondary-background-color);
-          border-radius: 50%;
-          overflow: hidden;
-          transform: translateZ(0);
-        }
+    .section-photo {
+      margin-right: 16px;
+      --lazy-image-width: 48px;
+      --lazy-image-height: 48px;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+      background-color: var(--secondary-background-color);
+      border-radius: 50%;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
 
-        .section-primary-text {
-          margin-bottom: 4px;
-          line-height: 1.2;
-        }
+    .section-primary-text {
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
 
-        .section-secondary-text {
-          font-size: 12px;
-          line-height: 1;
-        }
+    .section-secondary-text {
+      font-size: 12px;
+      line-height: 1;
+    }
 
-        .section-details {
-          flex: 1;
-          flex-basis: 1px;
-        }
+    .section-details {
+      flex: 1;
+      flex-basis: 1px;
+    }
 
-        @media (min-width: 812px) {
-          .header-content,
-          .content {
-            padding: 24px;
-            width: 100%;
-          }
+    @media (min-width: 812px) {
+      .header-content,
+      .content {
+        padding: 24px;
+        width: 100%;
+      }
 
-          .header-content {
-            min-height: 160px;
-          }
+      .header-content {
+        min-height: 160px;
+      }
 
-          .float-button {
-            position: absolute;
-            bottom: -60px;
-            transform: translate(50%, 50%);
-          }
-        }
+      .float-button {
+        position: absolute;
+        bottom: -60px;
+        transform: translate(50%, 50%);
+      }
+    }
 
-        .tags {
-          display: flex;
-          flex-wrap: wrap;
-        }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+    }
 
-        .progress {
-          width: 100%;
-          --md-linear-progress-active-indicator-color: var(--default-primary-color);
-          --md-linear-progress-track-color: var(--default-primary-color);
-        }
-      `,
-    ];
-  }
+    .progress {
+      width: 100%;
+      --md-linear-progress-active-indicator-color: var(--default-primary-color);
+      --md-linear-progress-track-color: var(--default-primary-color);
+    }
+  `;
 
   private feedback = feedback;
   private sessionDetails = sessionDetails;

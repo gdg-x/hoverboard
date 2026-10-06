@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import data from '../../../../docs/default-firebase-data.json';
-import { MemberData } from './member';
-import { TeamData } from './team';
+import type { MemberData } from './member';
+import type { TeamData } from './team';
 import { allKeys } from './utils';
 
 type Team = TeamData & {

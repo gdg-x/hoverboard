@@ -5,14 +5,14 @@ import '@material/web/textfield/outlined-text-field.js';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import { DialogForm } from '../../models/dialog-form';
-import { RootState } from '../../store';
-import { closeDialog, DialogState, DIALOG, selectIsDialogOpen } from '../../store/dialogs';
+import type { DialogForm } from '../../models/dialog-form';
+import type { RootState } from '../../store';
+import { closeDialog, type DialogState, DIALOG, selectIsDialogOpen } from '../../store/dialogs';
 import {
   initialPotentialPartnersState,
-  PotentialPartnersState,
+  type PotentialPartnersState,
 } from '../../store/potential-partners';
-import { SubscribeState } from '../../store/subscribe';
+import type { SubscribeState } from '../../store/subscribe';
 import { subscribeBlock } from '../../utils/data';
 import { notEmpty, validEmail } from '../../utils/strings';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';
@@ -23,30 +23,25 @@ import { StatefulElement } from '../stateful-element';
 
 @customElement('subscribe-dialog')
 export class SubscribeDialog extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          --md-outlined-text-field-focus-outline-color: var(--default-primary-color);
-        }
+  static override styles = css`
+    :host {
+      --md-outlined-text-field-focus-outline-color: var(--default-primary-color);
+    }
 
-        md-outlined-text-field {
-          display: block;
-          margin: 16px 32px 0;
-        }
+    md-outlined-text-field {
+      display: block;
+      margin: 16px 32px 0;
+    }
 
-        md-outlined-text-field:first-of-type {
-          margin-top: 0;
-        }
+    md-outlined-text-field:first-of-type {
+      margin-top: 0;
+    }
 
-        .general-error {
-          margin: 0 32px;
-          color: var(--error-color);
-        }
-      `,
-    ];
-  }
+    .general-error {
+      margin: 0 32px;
+      color: var(--error-color);
+    }
+  `;
 
   private subscribeBlock = subscribeBlock;
 

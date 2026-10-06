@@ -1,8 +1,8 @@
 import { Pending, Success } from '@abraham/remotedata';
-import { MockedFunction, describe, expect, it, vi } from 'vitest';
+import { type MockedFunction, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { PreviousSpeaker } from '../models/previous-speaker';
+import type { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { updateImageMetadata } from '../utils/metadata';

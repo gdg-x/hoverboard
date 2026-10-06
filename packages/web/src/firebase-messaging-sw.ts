@@ -8,8 +8,8 @@
 // https://github.com/microsoft/TypeScript/issues/14877
 declare const self: ServiceWorkerGlobalScope;
 
-import { FirebaseOptions, initializeApp } from 'firebase/app';
-import { MessagePayload, getMessaging, onBackgroundMessage } from 'firebase/messaging/sw';
+import { type FirebaseOptions, initializeApp } from 'firebase/app';
+import { type MessagePayload, getMessaging, onBackgroundMessage } from 'firebase/messaging/sw';
 
 // Capture the config object from /__/firebase/init.js
 let firebaseConfig: FirebaseOptions | undefined;

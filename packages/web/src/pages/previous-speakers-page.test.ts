@@ -2,7 +2,7 @@ import { Failure, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { PreviousSpeaker } from '../models/previous-speaker';
+import type { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { heroSettings, speakers } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';

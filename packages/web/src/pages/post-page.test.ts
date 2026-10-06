@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { waitFor, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { Post } from '../models/post';
+import type { Post } from '../models/post';
 import { router } from '../router';
 import { updateImageMetadata } from '../utils/metadata';
 import './post-page';

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { Session } from '../../models/session';
+import type { Session } from '../../models/session';
 import { closeDialog } from '../../store/dialogs';
 import { feedback } from '../../utils/data';
 import type { FeedbackDialog } from './feedback-dialog';

@@ -1,6 +1,6 @@
 import { orderBy } from 'firebase/firestore';
-import { Video } from '../models/video';
-import { subscribeToCollection, Subscription } from '../utils/firestore';
+import type { Video } from '../models/video';
+import { subscribeToCollection, type Subscription } from '../utils/firestore';
 
 export const subscribeToVideos = (
   onStart: () => void,

@@ -2,9 +2,9 @@ import { Failure } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import { RootState, store } from '../../store';
+import { type RootState, store } from '../../store';
 import {
-  ExistingAccountError,
+  type ExistingAccountError,
   initialAuthState,
   mergeAccounts,
   selectAuthMergeable,
@@ -26,42 +26,37 @@ import { StatefulElement } from '../stateful-element';
 
 @customElement('signin-dialog')
 export class SigninDialog extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          --mdc-theme-primary: var(--primary-text-color);
-        }
+  static override styles = css`
+    :host {
+      --mdc-theme-primary: var(--primary-text-color);
+    }
 
-        .sign-in-button {
-          margin: 16px 0;
-          display: block;
-          flex: 1;
-          flex-basis: 1px;
-          color: var(--primary-text-color);
-        }
+    .sign-in-button {
+      margin: 16px 0;
+      display: block;
+      flex: 1;
+      flex-basis: 1px;
+      color: var(--primary-text-color);
+    }
 
-        .merge-content .subtitle,
-        .merge-content .explanation {
-          margin-bottom: 16px;
-        }
+    .merge-content .subtitle,
+    .merge-content .explanation {
+      margin-bottom: 16px;
+    }
 
-        .action-button {
-          display: flex;
-          justify-content: flex-end;
-        }
+    .action-button {
+      display: flex;
+      justify-content: flex-end;
+    }
 
-        hoverboard-icon.icon-twitter {
-          color: var(--twitter-color);
-        }
+    hoverboard-icon.icon-twitter {
+      color: var(--twitter-color);
+    }
 
-        hoverboard-icon.icon-facebook {
-          color: var(--facebook-color);
-        }
-      `,
-    ];
-  }
+    hoverboard-icon.icon-facebook {
+      color: var(--facebook-color);
+    }
+  `;
 
   private signInProviders = signInProviders;
   private signInDialog = signInDialog;

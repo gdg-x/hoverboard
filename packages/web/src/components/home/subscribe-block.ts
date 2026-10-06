@@ -2,70 +2,65 @@ import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { DialogData } from '../../models/dialog-form';
-import { RootState } from '../../store';
+import type { DialogData } from '../../models/dialog-form';
+import type { RootState } from '../../store';
 import { openSubscribeDialog } from '../../store/dialogs';
-import { subscribe, SubscribeState } from '../../store/subscribe';
+import { subscribe, type SubscribeState } from '../../store/subscribe';
 import { initialUiState } from '../../store/ui';
-import { UserState } from '../../store/user';
+import type { UserState } from '../../store/user';
 import { subscribeBlock } from '../../utils/data';
 import '../shared/hoverboard-icon';
 import { StatefulElement } from '../stateful-element';
 
 @customElement('subscribe-block')
 export class SubscribeBlock extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: flex;
-          width: 100%;
-          background: var(--default-primary-color);
-          color: #fff;
-          padding: 16px 0;
-        }
+  static override styles = css`
+    :host {
+      display: flex;
+      width: 100%;
+      background: var(--default-primary-color);
+      color: #fff;
+      padding: 16px 0;
+    }
 
-        .container {
-          display: flex;
-          flex-direction: column;
-        }
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
 
-        .container.centered {
-          align-items: center;
-        }
+    .container.centered {
+      align-items: center;
+    }
 
-        .description {
-          font-size: 24px;
-          line-height: 1.5;
-          margin: 0 0 16px;
-        }
+    .description {
+      font-size: 24px;
+      line-height: 1.5;
+      margin: 0 0 16px;
+    }
 
-        md-text-button {
-          color: #fff;
-          --md-text-button-label-text-color: #fff;
-          --md-text-button-hover-label-text-color: #fff;
-        }
+    md-text-button {
+      color: #fff;
+      --md-text-button-label-text-color: #fff;
+      --md-text-button-hover-label-text-color: #fff;
+    }
 
-        md-text-button[disabled] {
-          background: var(--default-primary-color);
-          color: #fff;
-        }
+    md-text-button[disabled] {
+      background: var(--default-primary-color);
+      color: #fff;
+    }
 
-        @media (min-width: 640px) {
-          :host {
-            padding: 32px 0;
-          }
+    @media (min-width: 640px) {
+      :host {
+        padding: 32px 0;
+      }
 
-          .description {
-            font-size: 32px;
-            margin: 0 0 24px;
-            text-align: center;
-          }
-        }
-      `,
-    ];
-  }
+      .description {
+        font-size: 32px;
+        margin: 0 0 24px;
+        text-align: center;
+      }
+    }
+  `;
 
   private subscribeBlock = subscribeBlock;
 

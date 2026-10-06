@@ -1,5 +1,5 @@
-import { PreviousSession } from './previous-session';
-import { Social } from './social';
+import type { PreviousSession } from './previous-session';
+import type { Social } from './social';
 
 export interface PreviousSpeaker {
   bio: string;

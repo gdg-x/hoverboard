@@ -10,7 +10,7 @@ import {
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { removeFeedback, saveFeedback, subscribeToFeedback } from './feedback';
 import { db } from '../firebase';
-import { Feedback, FeedbackId } from '../models/feedback';
+import type { Feedback, FeedbackId } from '../models/feedback';
 
 vi.mock('firebase/firestore');
 

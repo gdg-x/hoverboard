@@ -4,134 +4,132 @@ import { customElement, property } from 'lit/decorators.js';
 import '@material/web/progress/linear-progress.js';
 import '../components/shared/content-loader';
 import '../components/hero/simple-hero';
-import { PreviousSession } from '../models/previous-session';
+import type { PreviousSession } from '../models/previous-session';
 import { router } from '../router';
-import { RootState } from '../store';
-import { PreviousSpeakersState, selectPreviousSpeakersState } from '../store/previous-speakers';
+import type { RootState } from '../store';
+import {
+  type PreviousSpeakersState,
+  selectPreviousSpeakersState,
+} from '../store/previous-speakers';
 import { contentLoaders, heroSettings, speakers } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
 import { StatefulElement } from '../components/stateful-element';
 
 @customElement('previous-speakers-page')
 export class PreviousSpeakersPage extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          height: 100%;
-        }
+  static override styles = css`
+    :host {
+      height: 100%;
+    }
 
-        .container {
-          margin: 32px auto;
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-gap: 32px;
-          min-height: 80%;
-        }
+    .container {
+      margin: 32px auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 32px;
+      min-height: 80%;
+    }
 
-        .speaker:hover .photo {
-          transform: scale(0.95);
-        }
+    .speaker:hover .photo {
+      transform: scale(0.95);
+    }
 
-        .photo {
-          --lazy-image-width: 96px;
-          --lazy-image-height: 96px;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-          background-color: var(--contrast-additional-background-color);
-          border: 3px solid var(--contrast-additional-background-color);
-          border-radius: 50%;
-          overflow: hidden;
-          transform: translateZ(0);
-          transition: transform var(--animation);
-          flex-shrink: 0;
-        }
+    .photo {
+      --lazy-image-width: 96px;
+      --lazy-image-height: 96px;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+      background-color: var(--contrast-additional-background-color);
+      border: 3px solid var(--contrast-additional-background-color);
+      border-radius: 50%;
+      overflow: hidden;
+      transform: translateZ(0);
+      transition: transform var(--animation);
+      flex-shrink: 0;
+    }
 
-        .company-logo {
-          max-width: 88px;
-          height: 16px;
-          margin: 8px 0;
-        }
+    .company-logo {
+      max-width: 88px;
+      height: 16px;
+      margin: 8px 0;
+    }
 
-        .details {
-          margin-left: 16px;
-          color: var(--primary-text-color);
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: flex-start;
-        }
+    .details {
+      margin-left: 16px;
+      color: var(--primary-text-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
 
-        .name {
-          font-size: 20px;
-          line-height: 1;
-        }
+    .name {
+      font-size: 20px;
+      line-height: 1;
+    }
 
-        .origin {
-          margin-top: 4px;
-          font-size: 14px;
-          line-height: 1.1;
-        }
+    .origin {
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 1.1;
+    }
 
-        .sessions {
-          font-size: 13px;
-          line-height: 1.1;
-          font-weight: bold;
-        }
+    .sessions {
+      font-size: 13px;
+      line-height: 1.1;
+      font-weight: bold;
+    }
 
-        .sessions h5 {
-          margin-right: 4px;
-          font-weight: normal;
-        }
+    .sessions h5 {
+      margin-right: 4px;
+      font-weight: normal;
+    }
 
-        .progress {
-          width: 100%;
-          --md-linear-progress-active-indicator-color: var(--default-primary-color);
-          --md-linear-progress-track-color: var(--default-primary-color);
-        }
+    .progress {
+      width: 100%;
+      --md-linear-progress-active-indicator-color: var(--default-primary-color);
+      --md-linear-progress-track-color: var(--default-primary-color);
+    }
 
-        .speaker {
-          display: flex;
-        }
+    .speaker {
+      display: flex;
+    }
 
-        @media (min-width: 640px) {
-          .container {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
+    @media (min-width: 640px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-        @media (min-width: 812px) {
-          .container {
-            grid-gap: 64px 32px;
-          }
+    @media (min-width: 812px) {
+      .container {
+        grid-gap: 64px 32px;
+      }
 
-          .photo {
-            --lazy-image-width: 115px;
-            --lazy-image-height: 115px;
-            border-width: 5px;
-          }
+      .photo {
+        --lazy-image-width: 115px;
+        --lazy-image-height: 115px;
+        border-width: 5px;
+      }
 
-          .name {
-            font-size: 24px;
-          }
-        }
+      .name {
+        font-size: 24px;
+      }
+    }
 
-        @media (min-width: 1024px) {
-          .container {
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 64px 32px;
-          }
+    @media (min-width: 1024px) {
+      .container {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 64px 32px;
+      }
 
-          .photo {
-            --lazy-image-width: 128px;
-            --lazy-image-height: 128px;
-          }
-        }
-      `,
-    ];
-  }
+      .photo {
+        --lazy-image-width: 128px;
+        --lazy-image-height: 128px;
+      }
+    }
+  `;
 
   @property({ type: Object })
   previousSpeakers: PreviousSpeakersState = new Initialized();

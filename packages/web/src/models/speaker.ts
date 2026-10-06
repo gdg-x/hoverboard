@@ -1,6 +1,6 @@
-import { Badge } from './badge';
-import { Social } from './social';
-import { Id } from './types';
+import type { Badge } from './badge';
+import type { Social } from './social';
+import type { Id } from './types';
 
 export interface SpeakerData {
   badges?: Badge[];

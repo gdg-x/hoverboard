@@ -2,161 +2,156 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { Video } from '../../models/video';
-import { RootState } from '../../store';
+import type { Video } from '../../models/video';
+import type { RootState } from '../../store';
 import { openVideoDialog } from '../../store/ui';
-import { VideosState, selectVideos } from '../../store/videos';
+import { type VideosState, selectVideos } from '../../store/videos';
 import { featuredVideos, loading } from '../../utils/data';
 import '../shared/hoverboard-icon';
 import { StatefulElement } from '../stateful-element';
 
 @customElement('featured-videos')
 export class FeaturedVideos extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-          --video-item-height: 200px;
-        }
+  static override styles = css`
+    :host {
+      display: block;
+      --video-item-height: 200px;
+    }
 
-        .header {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
-        }
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-        .videos-wrapper {
-          position: relative;
-          display: flex;
-          flex-direction: row;
-          flex: 1;
-          flex-basis: 1px;
-          overflow: hidden;
-        }
+    .videos-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      flex-basis: 1px;
+      overflow: hidden;
+    }
 
-        .video-list {
-          margin-bottom: -20px;
-          display: flex;
-          flex: 1;
-          flex-basis: 1px;
-          flex-direction: row;
-          flex-wrap: nowrap;
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-        }
+    .video-list {
+      margin-bottom: -20px;
+      display: flex;
+      flex: 1;
+      flex-basis: 1px;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
 
-        .videos {
-          display: flex;
-          flex-direction: row;
-          transition: transform var(--slide-animation);
-          will-change: transition;
-          transform: translateX(0);
-        }
+    .videos {
+      display: flex;
+      flex-direction: row;
+      transition: transform var(--slide-animation);
+      will-change: transition;
+      transform: translateX(0);
+    }
 
-        .slide-icon {
-          display: none;
-        }
+    .slide-icon {
+      display: none;
+    }
 
-        .video-item {
-          width: 300px;
-        }
+    .video-item {
+      width: 300px;
+    }
 
-        .video-item:not(:last-of-type) {
-          padding-right: 18px;
-        }
+    .video-item:not(:last-of-type) {
+      padding-right: 18px;
+    }
 
-        .video-item:hover .video-play-icon {
-          transform: scale(1.2) translateZ(0);
-        }
+    .video-item:hover .video-play-icon {
+      transform: scale(1.2) translateZ(0);
+    }
 
-        .thumbnail {
-          position: relative;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-          height: var(--video-item-height);
-          overflow: hidden;
-          border-radius: var(--border-radius);
-        }
+    .thumbnail {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: var(--video-item-height);
+      overflow: hidden;
+      border-radius: var(--border-radius);
+    }
 
-        .thumbnail-image {
-          position: absolute;
-          --lazy-image-width: 100%;
-          --lazy-image-height: 100%;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-          background-color: var(--secondary-background-color);
-        }
+    .thumbnail-image {
+      position: absolute;
+      --lazy-image-width: 100%;
+      --lazy-image-height: 100%;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+      background-color: var(--secondary-background-color);
+    }
 
-        .image-overlay {
-          position: absolute;
-          inset: 0;
-          background-color: rgba(0, 0, 0, 0.4);
-        }
+    .image-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
 
-        .video-play-icon {
-          width: 60px;
-          height: 60px;
-          color: #fff;
-          opacity: 0.8;
-          transform: translateZ(0);
-          transition: transform var(--animation);
-        }
+    .video-play-icon {
+      width: 60px;
+      height: 60px;
+      color: #fff;
+      opacity: 0.8;
+      transform: translateZ(0);
+      transition: transform var(--animation);
+    }
 
-        .video-title {
-          margin-top: 8px;
-          font-family: var(--font-family);
-          color: var(--secondary-text-color);
-        }
+    .video-title {
+      margin-top: 8px;
+      font-family: var(--font-family);
+      color: var(--secondary-text-color);
+    }
 
-        .cta-button {
-          margin-top: 24px;
-        }
+    .cta-button {
+      margin-top: 24px;
+    }
 
-        @media (min-width: 640px) {
-          :host {
-            --video-item-height: 256px;
-          }
+    @media (min-width: 640px) {
+      :host {
+        --video-item-height: 256px;
+      }
 
-          .video-item {
-            width: calc(var(--max-container-width) / 3 - 16px);
-            cursor: pointer;
-          }
+      .video-item {
+        width: calc(var(--max-container-width) / 3 - 16px);
+        cursor: pointer;
+      }
 
-          .video-item:not(:last-of-type) {
-            padding-right: 30px;
-          }
+      .video-item:not(:last-of-type) {
+        padding-right: 30px;
+      }
 
-          .slide-icon {
-            margin: 8px;
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            z-index: 1;
-            top: calc(var(--video-item-height) / 2 - 25px);
-            display: block;
-            opacity: 0.9;
-            background-color: #fff;
-            border-radius: 50%;
-            color: var(--default-primary-color);
-            transition: opacity var(--animation);
-            display: block;
-          }
+      .slide-icon {
+        margin: 8px;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        z-index: 1;
+        top: calc(var(--video-item-height) / 2 - 25px);
+        display: block;
+        opacity: 0.9;
+        background-color: #fff;
+        border-radius: 50%;
+        color: var(--default-primary-color);
+        transition: opacity var(--animation);
+        display: block;
+      }
 
-          .slide-icon:last-of-type {
-            right: 0;
-          }
-        }
-      `,
-    ];
-  }
+      .slide-icon:last-of-type {
+        right: 0;
+      }
+    }
+  `;
 
   private featuredVideos = featuredVideos;
   private loading = loading;

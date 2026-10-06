@@ -2,17 +2,17 @@ import { Initialized, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { Session } from '../../models/session';
+import type { Session } from '../../models/session';
 import { router } from '../../router';
-import { RootState, store } from '../../store';
+import { type RootState, store } from '../../store';
 import { openFeedbackDialog, openSigninDialog } from '../../store/dialogs';
 import {
-  FeaturedSessionsState,
+  type FeaturedSessionsState,
   selectFeaturedSessionsState,
   setUserFeaturedSessions,
 } from '../../store/featured-sessions';
 import { queueComplexSnackbar } from '../../store/snackbars';
-import { UserState } from '../../store/user';
+import type { UserState } from '../../store/user';
 import { schedule } from '../../utils/data';
 import { acceptingFeedback } from '../../utils/feedback';
 import { getSummary } from '../../utils/strings';
@@ -44,184 +44,179 @@ type SessionWithScheduleDetails = Omit<Session, 'speakers'> & {
 
 @customElement('session-element')
 export class SessionElement extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-          background-color: var(--primary-background-color);
-          border-bottom: 1px solid var(--border-light-color);
-          height: 100%;
-          border-radius: var(--border-radius);
-        }
+  static override styles = css`
+    :host {
+      display: block;
+      background-color: var(--primary-background-color);
+      border-bottom: 1px solid var(--border-light-color);
+      height: 100%;
+      border-radius: var(--border-radius);
+    }
 
-        .session {
-          position: relative;
-          display: flex;
-          height: 100%;
-          flex-direction: column;
-          color: var(--primary-text-color);
-          overflow: hidden;
-        }
+    .session {
+      position: relative;
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      color: var(--primary-text-color);
+      overflow: hidden;
+    }
 
-        .session:hover {
-          background-color: var(--additional-background-color);
-        }
+    .session:hover {
+      background-color: var(--additional-background-color);
+    }
 
-        .session-icon {
-          width: 88px;
-          height: 88px;
-          color: var(--border-light-color);
-          position: absolute;
-          right: 40px;
-          bottom: -4px;
-        }
+    .session-icon {
+      width: 88px;
+      height: 88px;
+      color: var(--border-light-color);
+      position: absolute;
+      right: 40px;
+      bottom: -4px;
+    }
 
-        .session-header,
-        .session-content,
-        .session-footer {
-          padding: 16px;
-          z-index: 1;
-        }
+    .session-header,
+    .session-content,
+    .session-footer {
+      padding: 16px;
+      z-index: 1;
+    }
 
-        .session-header {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          padding-bottom: 8px;
-        }
+    .session-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-bottom: 8px;
+    }
 
-        .session-header-content {
-          flex: 1;
-          flex-basis: 1px;
-        }
+    .session-header-content {
+      flex: 1;
+      flex-basis: 1px;
+    }
 
-        .language {
-          margin-left: 8px;
-          font-size: 12px;
-          text-transform: uppercase;
-          color: var(--secondary-text-color);
-        }
+    .language {
+      margin-left: 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--secondary-text-color);
+    }
 
-        .session-content {
-          display: flex;
-          flex: 1;
-          flex-basis: 1px;
-          flex-direction: row;
-          justify-content: space-between;
-          padding-top: 0;
-          padding-bottom: 40px;
-        }
+    .session-content {
+      display: flex;
+      flex: 1;
+      flex-basis: 1px;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-top: 0;
+      padding-bottom: 40px;
+    }
 
-        .bookmark-session,
-        .feedback-action {
-          color: var(--secondary-text-color);
-        }
+    .bookmark-session,
+    .feedback-action {
+      color: var(--secondary-text-color);
+    }
 
-        .session[featured] .bookmark-session {
-          color: var(--default-primary-color);
-        }
+    .session[featured] .bookmark-session {
+      color: var(--default-primary-color);
+    }
 
-        .bookmark-session:hover,
-        .feedback-action:hover {
-          color: var(--default-primary-color);
-        }
+    .bookmark-session:hover,
+    .feedback-action:hover {
+      color: var(--default-primary-color);
+    }
 
-        .session-title {
-          font-size: 20px;
-          line-height: 1.2;
-        }
+    .session-title {
+      font-size: 20px;
+      line-height: 1.2;
+    }
 
-        .session-description {
-          margin-top: 8px;
-        }
+    .session-description {
+      margin-top: 8px;
+    }
 
-        .session-meta {
-          margin: 0;
-          padding: 0;
-          font-size: 12px;
-          color: var(--secondary-text-color);
-        }
+    .session-meta {
+      margin: 0;
+      padding: 0;
+      font-size: 12px;
+      color: var(--secondary-text-color);
+    }
 
-        .session-footer {
-          font-size: 14px;
-        }
+    .session-footer {
+      font-size: 14px;
+    }
 
-        .session-footer-row {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-content: center;
-        }
+    .session-footer-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-content: center;
+    }
 
-        .session-duration {
-          flex: 1;
-          flex-basis: 1px;
-        }
+    .session-duration {
+      flex: 1;
+      flex-basis: 1px;
+    }
 
-        .speakers {
-          margin-top: 10px;
-        }
+    .speakers {
+      margin-top: 10px;
+    }
 
-        .speaker {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-        }
+    .speaker {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
 
-        .speaker:not(:last-of-type) {
-          padding-bottom: 10px;
-        }
+    .speaker:not(:last-of-type) {
+      padding-bottom: 10px;
+    }
 
-        .speaker-photo {
-          margin-right: 12px;
-          --lazy-image-width: 32px;
-          --lazy-image-height: 32px;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-          background-color: var(--secondary-background-color);
-          border-radius: 50%;
-          overflow: hidden;
-          transform: translateZ(0);
-        }
+    .speaker-photo {
+      margin-right: 12px;
+      --lazy-image-width: 32px;
+      --lazy-image-height: 32px;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+      background-color: var(--secondary-background-color);
+      border-radius: 50%;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
 
-        .speaker-details {
-          flex: 1;
-          flex-basis: 1px;
-        }
+    .speaker-details {
+      flex: 1;
+      flex-basis: 1px;
+    }
 
-        .speaker-name {
-          margin-bottom: 4px;
-          line-height: 1.2;
-        }
+    .speaker-name {
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
 
-        .speaker-title {
-          font-size: 12px;
-          line-height: 1;
-        }
+    .speaker-title {
+      font-size: 12px;
+      line-height: 1;
+    }
 
-        .tags {
-          display: flex;
-          flex-wrap: wrap;
-        }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+    }
 
-        @media (min-width: 640px) {
-          :host {
-            border: 1px solid var(--border-light-color);
-            border-top: 0;
-          }
-        }
+    @media (min-width: 640px) {
+      :host {
+        border: 1px solid var(--border-light-color);
+        border-top: 0;
+      }
+    }
 
-        @media (min-width: 812px) {
-          :host {
-            border: 1px solid var(--border-light-color);
-          }
-        }
-      `,
-    ];
-  }
+    @media (min-width: 812px) {
+      :host {
+        border: 1px solid var(--border-light-color);
+      }
+    }
+  `;
 
   @property({ type: Object })
   user: UserState = new Initialized();

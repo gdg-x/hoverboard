@@ -2,7 +2,7 @@ import '@justinribeiro/lite-youtube';
 import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import { RootState } from '../../store';
+import type { RootState } from '../../store';
 import { closeVideoDialog, initialUiState } from '../../store/ui';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';
 import '../shared/hoverboard-dialog';
@@ -10,22 +10,17 @@ import { StatefulElement } from '../stateful-element';
 
 @customElement('video-dialog')
 export class VideoDialog extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          --hoverboard-dialog-min-width: 80vw;
-        }
+  static override styles = css`
+    :host {
+      --hoverboard-dialog-min-width: 80vw;
+    }
 
-        @media only screen and (max-width: 600px) {
-          :host {
-            --hoverboard-dialog-min-width: 100vw;
-          }
-        }
-      `,
-    ];
-  }
+    @media only screen and (max-width: 600px) {
+      :host {
+        --hoverboard-dialog-min-width: 100vw;
+      }
+    }
+  `;
 
   @query('#dialog')
   dialog!: HoverboardDialog;

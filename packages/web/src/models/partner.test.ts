@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import data from '../../../../docs/default-firebase-data.json';
-import { PartnerData } from './partner';
+import type { PartnerData } from './partner';
 import { allKeys } from './utils';
 
 describe('partner', () => {

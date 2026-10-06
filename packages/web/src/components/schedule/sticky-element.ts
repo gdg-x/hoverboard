@@ -4,54 +4,49 @@ import { ThemedElement } from '../themed-element';
 
 @customElement('sticky-element')
 export class StickyElement extends ThemedElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          position: relative;
-        }
+  static override styles = css`
+    :host {
+      position: relative;
+    }
 
-        /* Leaves the viewport as the content reaches the bottom of the app header. */
-        #trigger {
-          position: absolute;
-          top: calc(-1 * var(--header-height));
-          left: 0;
-          width: 100%;
-          height: 1px;
-          pointer-events: none;
-        }
+    /* Leaves the viewport as the content reaches the bottom of the app header. */
+    #trigger {
+      position: absolute;
+      top: calc(-1 * var(--header-height));
+      left: 0;
+      width: 100%;
+      height: 1px;
+      pointer-events: none;
+    }
 
-        #content::before {
-          position: absolute;
-          right: 0;
-          bottom: -5px;
-          left: 0;
-          width: 100%;
-          height: 5px;
-          content: '';
-          transition: opacity 0.4s;
-          pointer-events: none;
-          opacity: 0;
-          box-shadow: inset 0 5px 6px -3px rgba(0, 0, 0, 0.4);
-          will-change: opacity;
-        }
+    #content::before {
+      position: absolute;
+      right: 0;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      content: '';
+      transition: opacity 0.4s;
+      pointer-events: none;
+      opacity: 0;
+      box-shadow: inset 0 5px 6px -3px rgba(0, 0, 0, 0.4);
+      will-change: opacity;
+    }
 
-        .sticked {
-          margin-top: var(--header-height);
-          position: fixed;
-          top: 0;
-          right: 0;
-          left: 0;
-          z-index: 9;
-        }
+    .sticked {
+      margin-top: var(--header-height);
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 9;
+    }
 
-        #content.sticked::before {
-          opacity: 1;
-        }
-      `,
-    ];
-  }
+    #content.sticked::before {
+      opacity: 1;
+    }
+  `;
 
   @query('#content')
   content!: HTMLDivElement;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import data from '../../../../docs/default-firebase-data.json';
-import { PreviousSpeaker } from './previous-speaker';
+import type { PreviousSpeaker } from './previous-speaker';
 import { allKeys } from './utils';
 
 describe('speaker', () => {

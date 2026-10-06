@@ -19,11 +19,6 @@
   "dependencies": {
     "@abraham/remotedata": "1.4.0",
     "@justinribeiro/lite-youtube": "^1.9.0",
-    "@material/mwc-dialog": "^0.27.0",
-    "@material/mwc-formfield": "^0.27.0",
-    "@material/mwc-icon-button": "^0.27.0",
-    "@material/mwc-snackbar": "^0.27.0",
-    "@material/mwc-switch": "^0.27.0",
     "@material/web": "^2.5.0",
     "@reduxjs/toolkit": "^2.12.0",
     "@vaadin/router": "^2.0.1",

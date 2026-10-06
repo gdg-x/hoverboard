@@ -9,10 +9,6 @@ import { ThemedElement } from '../themed-element';
 marked.use(gfmHeadingId());
 
 export class Markdown extends ThemedElement {
-  static override get styles() {
-    return [...super.styles];
-  }
-
   @property()
   content: string = '';
 

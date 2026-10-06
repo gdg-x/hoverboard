@@ -1,6 +1,6 @@
-import { RootState } from '..';
-import { CollectionState, createCollectionSlice } from '../create-collection-slice';
-import { Day } from '../../models/day';
+import type { RootState } from '..';
+import { type CollectionState, createCollectionSlice } from '../create-collection-slice';
+import type { Day } from '../../models/day';
 import { subscribeToSchedule } from '../../db/schedule';
 
 export type ScheduleState = CollectionState<Day>;

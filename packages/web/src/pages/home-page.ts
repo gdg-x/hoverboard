@@ -41,145 +41,138 @@ type LazyBlock = keyof typeof lazyBlocks;
 
 @customElement('home-page')
 export class HomePage extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-          height: 100%;
-        }
+  static override styles = css`
+    :host {
+      display: block;
+      height: 100%;
+    }
 
-        hero-block {
-          font-size: 24px;
-          text-align: center;
-        }
+    hero-block {
+      font-size: 24px;
+      text-align: center;
+    }
 
-        .hero-logo {
-          --lazy-image-width: 100%;
-          --lazy-image-height: 76px;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-          max-width: 240px;
-          max-height: 76px;
-        }
+    .hero-logo {
+      --lazy-image-width: 100%;
+      --lazy-image-height: 76px;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+      max-width: 240px;
+      max-height: 76px;
+    }
 
-        :is(tickets-block, gallery-block, featured-videos, map-block, partners-block):not(
-          :defined
-        ) {
-          display: block;
-          min-height: 480px;
-        }
+    :is(tickets-block, gallery-block, featured-videos, map-block, partners-block):not(:defined) {
+      display: block;
+      min-height: 480px;
+    }
 
-        .info-items {
-          margin: 24px auto;
-          font-size: 22px;
-        }
+    .info-items {
+      margin: 24px auto;
+      font-size: 22px;
+    }
 
-        .info-items > *:not(:first-of-type) {
-          margin-top: 4px;
-        }
+    .info-items > *:not(:first-of-type) {
+      margin-top: 4px;
+    }
 
-        .action-buttons {
-          margin: 0 -8px;
-          font-size: 14px;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-        }
+    .action-buttons {
+      margin: 0 -8px;
+      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        .action-buttons md-filled-button,
-        .action-buttons md-outlined-button {
-          margin: 8px;
-        }
+    .action-buttons md-filled-button,
+    .action-buttons md-outlined-button {
+      margin: 8px;
+    }
 
-        .action-buttons .watch-video {
-          color: #fff;
-          --md-outlined-button-label-text-color: #fff;
-          --md-outlined-button-hover-label-text-color: #fff;
-          --md-outlined-button-outline-color: #fff;
-        }
+    .action-buttons .watch-video {
+      color: #fff;
+      --md-outlined-button-label-text-color: #fff;
+      --md-outlined-button-hover-label-text-color: #fff;
+      --md-outlined-button-outline-color: #fff;
+    }
 
-        .action-buttons hoverboard-icon {
-          margin-right: 8px;
-        }
+    .action-buttons hoverboard-icon {
+      margin-right: 8px;
+    }
 
-        .scroll-down {
-          margin-top: 24px;
-          color: currentColor;
-          user-select: none;
-          cursor: pointer;
-        }
+    .scroll-down {
+      margin-top: 24px;
+      color: currentColor;
+      user-select: none;
+      cursor: pointer;
+    }
 
-        .scroll-down svg {
-          width: 24px;
-          opacity: 0.6;
-        }
+    .scroll-down svg {
+      width: 24px;
+      opacity: 0.6;
+    }
 
-        .scroll-down .stroke {
-          stroke: currentColor;
-        }
+    .scroll-down .stroke {
+      stroke: currentColor;
+    }
 
-        .scroll-down .scroller {
-          fill: currentColor;
-          animation: updown 2s infinite;
-        }
+    .scroll-down .scroller {
+      fill: currentColor;
+      animation: updown 2s infinite;
+    }
 
-        .home-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
+    .home-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        @keyframes updown {
-          0% {
-            transform: translate(0, 0);
-          }
-          50% {
-            transform: translate(0, 5px);
-          }
-          100% {
-            transform: translate(0, 0);
-          }
-        }
+    @keyframes updown {
+      0% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(0, 5px);
+      }
+      100% {
+        transform: translate(0, 0);
+      }
+    }
 
-        @media (min-height: 500px) {
-          hero-block {
-            height: calc(100vh + 57px);
-            max-height: calc(100vh + 1px);
-          }
+    @media (min-height: 500px) {
+      hero-block {
+        height: calc(100vh + 57px);
+        max-height: calc(100vh + 1px);
+      }
 
-          .home-content {
-            margin-top: -48px;
-          }
+      .home-content {
+        margin-top: -48px;
+      }
 
-          .scroll-down {
-            position: absolute;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-          }
-        }
+      .scroll-down {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+      }
+    }
 
-        @media (min-width: 812px) {
-          hero-block {
-            height: calc(100vh + 65px);
-          }
+    @media (min-width: 812px) {
+      hero-block {
+        height: calc(100vh + 65px);
+      }
 
-          .hero-logo {
-            max-width: 320px;
-          }
+      .hero-logo {
+        max-width: 320px;
+      }
 
-          .info-items {
-            margin: 48px auto;
-            font-size: 28px;
-            line-height: 1.1;
-          }
-        }
-      `,
-    ];
-  }
+      .info-items {
+        margin: 48px auto;
+        font-size: 28px;
+        line-height: 1.1;
+      }
+    }
+  `;
 
   private city = location.city;
   private siteTitle = title;

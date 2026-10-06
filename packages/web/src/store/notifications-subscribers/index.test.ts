@@ -2,7 +2,7 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { subscribeToNotificationsSubscribers } from '../../db/notifications-subscribers';
 import { dispatch } from '../dispatch';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../../db/notifications-subscribers');
 vi.mock('../dispatch');

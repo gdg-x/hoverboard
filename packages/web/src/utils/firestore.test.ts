@@ -3,7 +3,7 @@ import {
   collection,
   collectionGroup,
   doc,
-  DocumentData,
+  type DocumentData,
   DocumentSnapshot,
   onSnapshot,
   orderBy,

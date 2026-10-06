@@ -1,12 +1,11 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
-import '@material/mwc-formfield';
-import '@material/mwc-switch';
-import { Switch } from '@material/mwc-switch';
 import '@material/web/button/text-button.js';
+import '@material/web/switch/switch.js';
+import type { MdSwitch } from '@material/web/switch/switch.js';
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
-import { RootState, store } from '../../store';
+import { type RootState, store } from '../../store';
 import {
   initialNotificationPermissionState,
   PROMPT_USER,
@@ -26,7 +25,7 @@ import {
   removeNotificationsUsers,
   updateNotificationsUsers,
 } from '../../store/update-notifications-users';
-import { UserState } from '../../store/user';
+import type { UserState } from '../../store/user';
 import { loading, notifications } from '../../utils/data';
 import '../shared/auth-required';
 import '../shared/hoverboard-icon';
@@ -34,62 +33,64 @@ import { StatefulElement } from '../stateful-element';
 
 @customElement('notification-toggle')
 export class NotificationToggle extends StatefulElement {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          position: relative;
-        }
+  static override styles = css`
+    :host {
+      position: relative;
+    }
 
-        .notifications-trigger {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 40px;
-          height: 40px;
-          cursor: pointer;
-          background: none;
-          border: none;
-          color: inherit;
-          padding: 0;
-        }
+    .notifications-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+    }
 
-        .dropdown-panel {
-          display: none;
-          position: absolute;
-          top: 100%;
-          right: 0;
-          z-index: 2;
-          padding: 24px;
-          max-width: 300px;
-          background: #fff;
-          box-shadow: var(--box-shadow);
-          font-size: 16px;
-          color: var(--primary-text-color);
-        }
+    .dropdown-panel {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      z-index: 2;
+      padding: 24px;
+      max-width: 300px;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      font-size: 16px;
+      color: var(--primary-text-color);
+    }
 
-        .dropdown-panel[open] {
-          display: block;
-        }
+    .dropdown-panel[open] {
+      display: block;
+    }
 
-        .dropdown-panel p {
-          margin-top: 0;
-        }
+    .dropdown-panel p {
+      margin-top: 0;
+    }
 
-        .dropdown-panel .panel-actions {
-          display: flex;
-          justify-content: flex-end;
-          margin: 0 -16px -16px 0;
-        }
+    .dropdown-panel .panel-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 -16px -16px 0;
+    }
 
-        mwc-formfield,
-        auth-required {
-          margin: 12px 0;
-        }
-      `,
-    ];
-  }
+    .switch-row,
+    auth-required {
+      margin: 12px 0;
+    }
+
+    .switch-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+  `;
 
   private notifications = notifications;
   private loading = loading;
@@ -161,21 +162,23 @@ export class NotificationToggle extends StatefulElement {
           this.success
             ? html`
                 <p>${this.notifications.enabled}</p>
-                <mwc-formfield label="${this.notifications.generalLabel}">
-                  <mwc-switch
-                    @click="${this.toggleGeneralNotifications}"
-                    ?selected="${this.generalNotificationsSelected}"
-                  ></mwc-switch>
-                </mwc-formfield>
+                <label class="switch-row">
+                  <md-switch
+                    @change="${this.toggleGeneralNotifications}"
+                    .selected="${this.generalNotificationsSelected}"
+                  ></md-switch>
+                  ${this.notifications.generalLabel}
+                </label>
 
                 <auth-required>
                   <p slot="prompt">${this.notifications.signIn}</p>
-                  <mwc-formfield label="${this.notifications.myScheduleLabel}">
-                    <mwc-switch
-                      @click="${this.toggleMyScheduleNotifications}"
-                      ?selected="${this.notificationsUsersSubscribed}"
-                    ></mwc-switch>
-                  </mwc-formfield>
+                  <label class="switch-row">
+                    <md-switch
+                      @change="${this.toggleMyScheduleNotifications}"
+                      .selected="${this.notificationsUsersSubscribed}"
+                    ></md-switch>
+                    ${this.notifications.myScheduleLabel}
+                  </label>
                 </auth-required>
               `
             : ''
@@ -272,8 +275,8 @@ export class NotificationToggle extends StatefulElement {
     this.toggleOpened();
   };
 
-  private toggleGeneralNotifications = (event: MouseEvent) => {
-    const { selected, disabled } = event.target as Switch;
+  private toggleGeneralNotifications = (event: Event) => {
+    const { selected, disabled } = event.target as MdSwitch;
     if (!(this.notificationPermission instanceof Success) || disabled) {
       return;
     }
@@ -285,8 +288,8 @@ export class NotificationToggle extends StatefulElement {
     }
   };
 
-  private toggleMyScheduleNotifications = (event: MouseEvent) => {
-    const { selected } = event.target as Switch;
+  private toggleMyScheduleNotifications = (event: Event) => {
+    const { selected } = event.target as MdSwitch;
     if (!(this.notificationPermission instanceof Success) || !(this.user instanceof Success)) {
       return;
     }

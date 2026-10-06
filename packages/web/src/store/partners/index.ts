@@ -1,13 +1,13 @@
-import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { createSelector, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { Unsubscribe } from 'firebase/firestore';
-import { RootState, store } from '..';
+import { type RootState, store } from '..';
 import {
   subscribeToPartnerGroups as subscribeGroupsDb,
   subscribeToPartners as subscribePartnersDb,
 } from '../../db/partners';
-import { Partner } from '../../models/partner';
-import { PartnerGroup, PartnerGroupWithoutItems } from '../../models/partner-group';
+import type { Partner } from '../../models/partner';
+import type { PartnerGroup, PartnerGroupWithoutItems } from '../../models/partner-group';
 
 export type PartnerGroupsState = RemoteData<Error, PartnerGroup[]>;
 
