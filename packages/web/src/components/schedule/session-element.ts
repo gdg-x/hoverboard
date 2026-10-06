@@ -205,6 +205,12 @@ export class SessionElement extends ThemedElement {
       flex-wrap: wrap;
     }
 
+    .tag {
+      color: #fff;
+      background-color: var(--color, var(--secondary-text-color));
+      border-color: var(--color, var(--secondary-text-color));
+    }
+
     @media (min-width: 640px) {
       :host {
         border: 1px solid var(--border-light-color);
@@ -281,7 +287,7 @@ export class SessionElement extends ThemedElement {
             <div class="tags" ?hidden="${!session?.tags?.length}">
               ${session?.tags?.map(
                 (tag) =>
-                  html`<span class="tag" style="color: ${this.getVariableColor(tag)}"
+                  html`<span class="tag" style="--color: ${this.getVariableColor(tag) ?? ''}"
                     >${tag}</span
                   >`,
               )}
