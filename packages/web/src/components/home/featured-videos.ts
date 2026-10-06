@@ -1,17 +1,17 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, query, state } from 'lit/decorators.js';
 import type { Video } from '../../models/video';
-import type { RootState } from '../../store';
 import { openVideoDialog } from '../../store/ui';
 import { type VideosState, selectVideos } from '../../store/videos';
 import { featuredVideos, loading } from '../../utils/data';
 import '../shared/hoverboard-icon';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('featured-videos')
-export class FeaturedVideos extends StatefulElement {
+export class FeaturedVideos extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
@@ -161,8 +161,8 @@ export class FeaturedVideos extends StatefulElement {
   @query('#videoList')
   videoList!: HTMLDivElement;
 
-  @property({ type: Object })
-  videos: VideosState = new Initialized();
+  @fromStore((state) => selectVideos(state))
+  videos!: VideosState;
 
   @state()
   private leftArrowHidden = true;
@@ -179,10 +179,6 @@ export class FeaturedVideos extends StatefulElement {
 
   private get videosData(): Video[] {
     return this.videos instanceof Success ? this.videos.data : [];
-  }
-
-  override stateChanged(state: RootState) {
-    this.videos = selectVideos(state);
   }
 
   private shiftContentLeft() {

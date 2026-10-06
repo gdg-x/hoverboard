@@ -1,10 +1,10 @@
 import '@material/web/button/text-button.js';
 import '@material/web/iconbutton/icon-button.js';
 import { css, html, LitElement, nothing, type PropertyValues, svg } from 'lit';
-import { customElement, query, state } from 'lit/decorators.js';
+import { customElement, query } from 'lit/decorators.js';
+import { fromStore } from '../../controllers/from-store';
 import { type Snackbar, TIMEOUT } from '../../models/snackbar';
-import { type RootState, store } from '../../store';
-import { ReduxMixin } from '../../store/mixin';
+import { store } from '../../store';
 import { removeSnackbar } from '../../store/snackbars';
 
 const closeIcon = svg`
@@ -15,7 +15,7 @@ const closeIcon = svg`
 `;
 
 @customElement('snack-bar')
-export class SnackBar extends ReduxMixin(LitElement) {
+export class SnackBar extends LitElement {
   static override styles = css`
     .snackbar {
       position: fixed;
@@ -72,8 +72,8 @@ export class SnackBar extends ReduxMixin(LitElement) {
     }
   `;
 
-  @state()
-  private state: Snackbar | undefined;
+  @fromStore((state) => state.snackbars[0])
+  private state!: Snackbar | undefined;
 
   @query('.snackbar')
   private snackbar!: HTMLElement;
@@ -120,10 +120,6 @@ export class SnackBar extends ReduxMixin(LitElement) {
   override disconnectedCallback() {
     window.clearTimeout(this.timeout);
     super.disconnectedCallback();
-  }
-
-  override stateChanged(state: RootState) {
-    this.state = state.snackbars[0];
   }
 
   private onAction() {

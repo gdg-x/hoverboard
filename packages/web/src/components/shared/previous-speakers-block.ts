@@ -1,10 +1,9 @@
 import '@material/web/button/text-button.js';
-import { Failure, Initialized, Pending } from '@abraham/remotedata';
+import { Failure, Pending } from '@abraham/remotedata';
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
 import { router } from '../../router';
-import type { RootState } from '../../store';
 import { selectRandomPreviousSpeakers } from '../../store/previous-speakers/selectors';
 import {
   type PreviousSpeakersState,
@@ -12,10 +11,11 @@ import {
 } from '../../store/previous-speakers';
 import { loading, previousSpeakersBlock } from '../../utils/data';
 import './hoverboard-icon';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('previous-speakers-block')
-export class PreviousSpeakersBlock extends StatefulElement {
+export class PreviousSpeakersBlock extends ThemedElement {
   static override styles = css`
     :host {
       margin: 32px auto;
@@ -64,16 +64,11 @@ export class PreviousSpeakersBlock extends StatefulElement {
     }
   `;
 
-  @property({ type: Object })
-  previousSpeakers: PreviousSpeakersState = new Initialized();
+  @fromStore((state) => selectPreviousSpeakersState(state))
+  previousSpeakers!: PreviousSpeakersState;
 
-  @property({ type: Array })
-  speakers: PreviousSpeaker[] = [];
-
-  override stateChanged(state: RootState) {
-    this.previousSpeakers = selectPreviousSpeakersState(state);
-    this.speakers = selectRandomPreviousSpeakers(state);
-  }
+  @fromStore((state) => selectRandomPreviousSpeakers(state))
+  speakers!: PreviousSpeaker[];
 
   override render() {
     return html`

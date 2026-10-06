@@ -1,4 +1,4 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
@@ -12,7 +12,7 @@ import type { Badge } from '../models/badge';
 import type { PreviousSessionWithYear } from '../models/previous-session';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
-import { type RootState, store } from '../store';
+import { store } from '../store';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import {
   type PreviousSpeakersState,
@@ -21,7 +21,8 @@ import {
 import { sessionDetails, speakerDetails, speakers } from '../utils/data';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
-import { StatefulElement } from '../components/stateful-element';
+import { fromStore } from '../controllers/from-store';
+import { ThemedElement } from '../components/themed-element';
 
 // `PreviousSpeaker.badges`/`pronouns` are not currently declared on the model
 // (no action/selector/state populates them today), but the original template
@@ -31,7 +32,7 @@ import { StatefulElement } from '../components/stateful-element';
 type PreviousSpeakerWithDetails = PreviousSpeaker & { badges?: Badge[]; pronouns?: string };
 
 @customElement('previous-speaker-page')
-export class PreviousSpeakerPage extends StatefulElement {
+export class PreviousSpeakerPage extends ThemedElement {
   static override styles = css`
     :host {
       background: #fff;
@@ -174,15 +175,11 @@ export class PreviousSpeakerPage extends StatefulElement {
 
   @property({ type: Object })
   speaker: PreviousSpeaker | undefined;
-  @property({ type: Object })
-  speakers: PreviousSpeakersState = new Initialized();
+  @fromStore((state) => selectPreviousSpeakersState(state))
+  speakers!: PreviousSpeakersState;
 
   @state()
   private speakerId: string | undefined;
-
-  override stateChanged(state: RootState) {
-    this.speakers = selectPreviousSpeakersState(state);
-  }
 
   onAfterEnter(location: RouterLocation) {
     this.speakerId = location.params?.['id']?.toString();

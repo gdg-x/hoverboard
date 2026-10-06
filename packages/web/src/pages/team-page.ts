@@ -1,18 +1,18 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/shared/hoverboard-icon';
 import '../components/markdown/short-markdown';
-import type { RootState } from '../store';
 import { selectTeamsAndMembers } from '../store/teams-members/selectors';
 import { initialTeamsMembersState } from '../store/teams-members/state';
 import { heroSettings, loading, team } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
-import { StatefulElement } from '../components/stateful-element';
+import { fromStore } from '../controllers/from-store';
+import { ThemedElement } from '../components/themed-element';
 
 @customElement('team-page')
-export class TeamPage extends StatefulElement {
+export class TeamPage extends ThemedElement {
   static override styles = css`
     .description-wrapper {
       background-color: var(--secondary-background-color);
@@ -122,8 +122,8 @@ export class TeamPage extends StatefulElement {
   private loading = loading;
   private team = team;
 
-  @property({ type: Object })
-  teamsMembers = initialTeamsMembersState;
+  @fromStore((state) => selectTeamsAndMembers(state))
+  teamsMembers!: typeof initialTeamsMembersState;
 
   get pending() {
     return this.teamsMembers instanceof Pending;
@@ -136,10 +136,6 @@ export class TeamPage extends StatefulElement {
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-  }
-
-  override stateChanged(state: RootState) {
-    this.teamsMembers = selectTeamsAndMembers(state);
   }
 
   override render() {

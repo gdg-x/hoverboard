@@ -1,15 +1,15 @@
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
-import type { RootState } from '../../store';
+import { customElement } from 'lit/decorators.js';
 import { initialUiState } from '../../store/ui';
 import { aboutOrganizerBlock } from '../../utils/data';
 import '../shared/hoverboard-icon';
 import '../markdown/short-markdown';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('about-organizer-block')
-export class AboutOrganizerBlock extends StatefulElement {
+export class AboutOrganizerBlock extends ThemedElement {
   static override styles = css`
     .container {
       display: flex;
@@ -50,12 +50,8 @@ export class AboutOrganizerBlock extends StatefulElement {
     }
   `;
 
-  @state()
-  private viewport = initialUiState.viewport;
-
-  override stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
-  }
+  @fromStore((state) => state.ui.viewport)
+  private viewport!: typeof initialUiState.viewport;
 
   override render() {
     return html`

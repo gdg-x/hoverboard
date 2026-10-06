@@ -1,22 +1,22 @@
-import { Failure, Initialized, Success } from '@abraham/remotedata';
+import { Failure, Success } from '@abraham/remotedata';
 import { css, html, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import '@material/web/progress/linear-progress.js';
 import '../components/shared/content-loader';
 import '../components/hero/simple-hero';
 import type { PreviousSession } from '../models/previous-session';
 import { router } from '../router';
-import type { RootState } from '../store';
 import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
 import { contentLoaders, heroSettings, speakers } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
-import { StatefulElement } from '../components/stateful-element';
+import { fromStore } from '../controllers/from-store';
+import { ThemedElement } from '../components/themed-element';
 
 @customElement('previous-speakers-page')
-export class PreviousSpeakersPage extends StatefulElement {
+export class PreviousSpeakersPage extends ThemedElement {
   static override styles = css`
     :host {
       height: 100%;
@@ -131,8 +131,8 @@ export class PreviousSpeakersPage extends StatefulElement {
     }
   `;
 
-  @property({ type: Object })
-  previousSpeakers: PreviousSpeakersState = new Initialized();
+  @fromStore((state) => selectPreviousSpeakersState(state))
+  previousSpeakers!: PreviousSpeakersState;
 
   private heroSettings = heroSettings.previousSpeakers;
   private contentLoaders = contentLoaders.previousSpeakers;
@@ -140,10 +140,6 @@ export class PreviousSpeakersPage extends StatefulElement {
 
   get contentLoaderVisibility() {
     return this.previousSpeakers instanceof Success || this.previousSpeakers instanceof Failure;
-  }
-
-  override stateChanged(state: RootState) {
-    this.previousSpeakers = selectPreviousSpeakersState(state);
   }
 
   override connectedCallback() {

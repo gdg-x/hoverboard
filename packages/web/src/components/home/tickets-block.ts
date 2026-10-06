@@ -1,16 +1,16 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import type { Ticket } from '../../models/ticket';
-import type { RootState } from '../../store';
 import { type TicketsState, selectTickets } from '../../store/tickets';
 import { buyTicket, contentLoaders, ticketsBlock } from '../../utils/data';
 import '../shared/content-loader';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('tickets-block')
-export class TicketsBlock extends StatefulElement {
+export class TicketsBlock extends ThemedElement {
   static override styles = css`
     .tickets-wrapper {
       text-align: center;
@@ -139,12 +139,8 @@ export class TicketsBlock extends StatefulElement {
   private ticketsBlock = ticketsBlock;
   private contentLoaders = contentLoaders.tickets;
 
-  @property({ type: Object })
-  tickets: TicketsState = new Initialized();
-
-  override stateChanged(state: RootState) {
-    this.tickets = selectTickets(state);
-  }
+  @fromStore((state) => selectTickets(state))
+  tickets!: TicketsState;
 
   private get pending() {
     return this.tickets instanceof Pending;

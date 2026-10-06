@@ -1,11 +1,10 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
 import { css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
 import type { Hero } from '../../models/hero';
 import { selectRouteName } from '../../router';
-import type { RootState } from '../../store';
 import { signOut as signOutAction } from '../../store/auth';
 import { closeDialog, DIALOG, openSigninDialog, selectIsDialogOpen } from '../../store/dialogs';
 import { type TicketsState, selectTickets } from '../../store/tickets';
@@ -15,12 +14,13 @@ import { updateSelectionBar } from '../../utils/tab-selection-bar';
 import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../../utils/data';
 import '../shared/hoverboard-icon';
 import './notification-toggle';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 export const HEADER_HEIGHT = 76;
 
 @customElement('header-toolbar')
-export class HeaderToolbar extends StatefulElement {
+export class HeaderToolbar extends ThemedElement {
   static override styles = css`
     :host {
       --iron-icon-fill-color: currentColor;
@@ -232,42 +232,32 @@ export class HeaderToolbar extends StatefulElement {
 
   @property({ type: Boolean, attribute: 'drawer-opened' })
   drawerOpened = false;
-  @property({ type: Object })
-  tickets: TicketsState = new Initialized();
+  @fromStore((state) => selectTickets(state))
+  tickets!: TicketsState;
 
-  @state()
-  private viewport = initialUiState.viewport;
-  @state()
-  private heroSettings: Hero | undefined = initialUiState.heroSettings;
-  @state()
-  private signedIn = false;
-  @state()
-  private user: UserState = new Initialized();
+  @fromStore((state) => state.ui.viewport)
+  private viewport!: typeof initialUiState.viewport;
+  @fromStore((state) => state.ui.heroSettings)
+  private heroSettings!: Hero | undefined;
+  @fromStore((state) => state.user instanceof Success)
+  private signedIn!: boolean;
+  @fromStore((state) => state.user)
+  private user!: UserState;
   // Intentionally @property (not @state): `reflect` is required so the
   // `:host([transparent])` CSS selector can style the host, and @state
   // does not support reflection.
   @property({ type: Boolean, reflect: true })
   private transparent = false;
-  @state()
-  private routeName = '';
-  @state()
-  private isDialogOpen = false;
+  @fromStore(() => selectRouteName(window.location.pathname))
+  private routeName!: string;
+  @fromStore((state) => selectIsDialogOpen(state, DIALOG.SIGNIN))
+  private isDialogOpen!: boolean;
   @state()
   private profileMenuOpened = false;
 
   private readonly clickOutsideController = new ClickOutsideController(this, () =>
     this.closeProfileMenu(),
   );
-
-  override stateChanged(state: RootState) {
-    this.user = state.user;
-    this.signedIn = state.user instanceof Success;
-    this.tickets = selectTickets(state);
-    this.heroSettings = state.ui.heroSettings;
-    this.viewport = state.ui.viewport;
-    this.routeName = selectRouteName(window.location.pathname);
-    this.isDialogOpen = selectIsDialogOpen(state, DIALOG.SIGNIN);
-  }
 
   override connectedCallback() {
     super.connectedCallback();

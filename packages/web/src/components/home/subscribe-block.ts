@@ -1,19 +1,19 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import type { DialogData } from '../../models/dialog-form';
-import type { RootState } from '../../store';
 import { openSubscribeDialog } from '../../store/dialogs';
 import { subscribe, type SubscribeState } from '../../store/subscribe';
 import { initialUiState } from '../../store/ui';
 import type { UserState } from '../../store/user';
 import { subscribeBlock } from '../../utils/data';
 import '../shared/hoverboard-icon';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('subscribe-block')
-export class SubscribeBlock extends StatefulElement {
+export class SubscribeBlock extends ThemedElement {
   static override styles = css`
     :host {
       display: flex;
@@ -64,19 +64,13 @@ export class SubscribeBlock extends StatefulElement {
 
   private subscribeBlock = subscribeBlock;
 
-  @property({ type: Object })
-  subscribed: SubscribeState = new Initialized();
+  @fromStore((state) => state.subscribed)
+  subscribed!: SubscribeState;
 
-  @property({ type: Object })
-  user: UserState = new Initialized();
-  @property({ type: Object })
-  viewport = initialUiState.viewport;
-
-  override stateChanged(state: RootState) {
-    this.subscribed = state.subscribed;
-    this.user = state.user;
-    this.viewport = state.ui.viewport;
-  }
+  @fromStore((state) => state.user)
+  user!: UserState;
+  @fromStore((state) => state.ui.viewport)
+  viewport!: typeof initialUiState.viewport;
 
   private get ctaIcon() {
     return this.subscribed instanceof Success ? 'checked' : 'arrow-right-circle';

@@ -1,13 +1,18 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { setStoreState } from '../../../__tests__/helpers/store';
 import type { Feedback } from '../../models/feedback';
 import type { RootState } from '../../store';
 import { feedback as feedbackText } from '../../utils/data';
 import type { FeedbackBlock } from './feedback-block';
 
 import './feedback-block';
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 const feedback: Feedback = {
   id: 'user-id',
@@ -67,7 +72,7 @@ describe('feedback-block', () => {
       html`<feedback-block></feedback-block>`,
     );
     element.sessionId = 'session-id';
-    element.stateChanged({
+    setStoreState({
       user: new Initialized(),
       feedback: {
         data: new Success([feedback]),
@@ -75,7 +80,7 @@ describe('feedback-block', () => {
         set: new Initialized(),
         delete: new Initialized(),
       },
-    } as unknown as RootState);
+    } as unknown as Partial<RootState>);
     await element.updateComplete;
 
     expect(element.contentRating).toBe(feedback.contentRating);

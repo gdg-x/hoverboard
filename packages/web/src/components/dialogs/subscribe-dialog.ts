@@ -5,8 +5,9 @@ import '@material/web/textfield/outlined-text-field.js';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
+import { StoreController } from '../../controllers/store-controller';
+import { fromStore } from '../../controllers/from-store';
 import type { DialogForm } from '../../models/dialog-form';
-import type { RootState } from '../../store';
 import { closeDialog, type DialogState, DIALOG, selectIsDialogOpen } from '../../store/dialogs';
 import {
   initialPotentialPartnersState,
@@ -17,12 +18,12 @@ import { subscribeBlock } from '../../utils/data';
 import { notEmpty, validEmail } from '../../utils/strings';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';
 import '../shared/hoverboard-dialog';
-import { StatefulElement } from '../stateful-element';
+import { ThemedElement } from '../themed-element';
 
 // Used for adding documents to both `subscribers` and `potentialPartners` collections
 
 @customElement('subscribe-dialog')
-export class SubscribeDialog extends StatefulElement {
+export class SubscribeDialog extends ThemedElement {
   static override styles = css`
     :host {
       --md-outlined-text-field-focus-outline-color: var(--default-primary-color);
@@ -56,8 +57,8 @@ export class SubscribeDialog extends StatefulElement {
 
   @state()
   override title = '';
-  @state()
-  private open = false;
+  @fromStore((state) => selectIsDialogOpen(state, DIALOG.SUBSCRIBE))
+  private open!: boolean;
   @state()
   private subscribed: SubscribeState = new Initialized();
   @state()
@@ -85,43 +86,50 @@ export class SubscribeDialog extends StatefulElement {
   @state()
   private emailInvalid = false;
 
-  override stateChanged(state: RootState) {
-    const previousSubscribed = this.subscribed;
-    const previousPotentialPartners = this.potentialPartners;
-    const previousDialogState = this.dialogState;
-
-    this.subscribed = state.subscribed;
-    this.potentialPartners = state.potentialPartners;
-    this.open = selectIsDialogOpen(state, DIALOG.SUBSCRIBE);
-    this.dialogState = state.dialogs;
-
-    if (this.subscribed !== previousSubscribed) {
-      if (this.subscribed instanceof Success) {
-        closeDialog();
-      } else if (this.subscribed instanceof Failure) {
-        this.errorOccurred = true;
+  private readonly subscribedStore = new StoreController(this, (state) => state.subscribed, {
+    onChange: (value) => {
+      const previous = this.subscribed;
+      this.subscribed = value;
+      if (value !== previous) {
+        this.onResult(value);
       }
-    }
+    },
+  });
 
-    if (this.potentialPartners !== previousPotentialPartners) {
-      if (this.potentialPartners instanceof Success) {
-        closeDialog();
-      } else if (this.potentialPartners instanceof Failure) {
-        this.errorOccurred = true;
+  private readonly potentialPartnersStore = new StoreController(
+    this,
+    (state) => state.potentialPartners,
+    {
+      onChange: (value) => {
+        const previous = this.potentialPartners;
+        this.potentialPartners = value;
+        if (value !== previous) {
+          this.onResult(value);
+        }
+      },
+    },
+  );
+
+  private readonly dialogStore = new StoreController(this, (state) => state.dialogs, {
+    onChange: (value) => {
+      const previous = this.dialogState;
+      this.dialogState = value;
+      if (value !== previous && value instanceof Success && value.data.name === DIALOG.SUBSCRIBE) {
+        const data = value.data.data;
+        this.title = data.title || this.subscribeBlock.formTitle;
+        this.submitLabel = data.submitLabel || this.subscribeBlock.subscribe;
+        this.firstFieldLabel = data.firstFieldLabel || this.subscribeBlock.firstName;
+        this.secondFieldLabel = data.secondFieldLabel || this.subscribeBlock.lastName;
+        this.prefillFields(data);
       }
-    }
+    },
+  });
 
-    if (
-      this.dialogState !== previousDialogState &&
-      this.dialogState instanceof Success &&
-      this.dialogState.data.name === DIALOG.SUBSCRIBE
-    ) {
-      const data = this.dialogState.data.data;
-      this.title = data.title || this.subscribeBlock.formTitle;
-      this.submitLabel = data.submitLabel || this.subscribeBlock.subscribe;
-      this.firstFieldLabel = data.firstFieldLabel || this.subscribeBlock.firstName;
-      this.secondFieldLabel = data.secondFieldLabel || this.subscribeBlock.lastName;
-      this.prefillFields(data);
+  private onResult(result: SubscribeState | PotentialPartnersState) {
+    if (result instanceof Success) {
+      closeDialog();
+    } else if (result instanceof Failure) {
+      this.errorOccurred = true;
     }
   }
 

@@ -1,11 +1,16 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { setStoreState } from '../../../__tests__/helpers/store';
 import { subscribeBlock } from '../../utils/data';
 import type { SubscribeDialog } from './subscribe-dialog';
 import './subscribe-dialog';
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 describe('subscribe-dialog', () => {
   it('defines a component', () => {
@@ -125,12 +130,11 @@ describe('subscribe-dialog', () => {
   it('closes the dialog when subscribed succeeds', async () => {
     const { element } = await fixture<SubscribeDialog>(html`<subscribe-dialog></subscribe-dialog>`);
 
-    element.stateChanged({
+    setStoreState({
       subscribed: new Success(true),
       potentialPartners: new Initialized(),
       dialogs: new Initialized(),
-      ui: { videoDialog: { open: false, youtubeId: '', title: '' } },
-    } as never);
+    });
 
     expect(element['open']).toBe(false);
   });
@@ -138,12 +142,11 @@ describe('subscribe-dialog', () => {
   it('shows the general error when subscribing fails', async () => {
     const { element } = await fixture<SubscribeDialog>(html`<subscribe-dialog></subscribe-dialog>`);
 
-    element.stateChanged({
+    setStoreState({
       subscribed: new Failure(new Error('boom')),
       potentialPartners: new Initialized(),
       dialogs: new Initialized(),
-      ui: { videoDialog: { open: false, youtubeId: '', title: '' } },
-    } as never);
+    });
 
     expect(element['errorOccurred']).toBe(true);
   });

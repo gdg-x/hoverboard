@@ -4,14 +4,14 @@ import '@material/web/textfield/outlined-text-field.js';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import { css, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import type { RootState } from '../../store';
 import { subscribe, type SubscribeState } from '../../store/subscribe';
 import { subscribeBlock } from '../../utils/data';
 import '../shared/hoverboard-icon';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('subscribe-form-footer')
-export class SubscribeFormFooter extends StatefulElement {
+export class SubscribeFormFooter extends ThemedElement {
   static override styles = css`
     :host {
       --md-outlined-text-field-label-text-color: var(--footer-text-color);
@@ -40,18 +40,14 @@ export class SubscribeFormFooter extends StatefulElement {
     }
   `;
 
-  @property({ type: Object })
-  subscribed: SubscribeState = new Initialized();
+  @fromStore((state) => state.subscribed)
+  subscribed!: SubscribeState;
 
   @property()
   email = '';
 
   @query('#emailInput')
   private emailInput?: MdOutlinedTextField;
-
-  override stateChanged(state: RootState) {
-    this.subscribed = state.subscribed;
-  }
 
   override render() {
     return html`

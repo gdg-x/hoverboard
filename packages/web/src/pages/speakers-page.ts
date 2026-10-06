@@ -1,7 +1,7 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import '../components/shared/content-loader';
 import '../components/shared/filter-menu';
 import '../components/hero/simple-hero';
@@ -12,14 +12,14 @@ import type { Filter } from '../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../models/filter-group';
 import type { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
-import type { RootState } from '../store';
 import { selectFilters } from '../store/filters';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
-import { StatefulElement } from '../components/stateful-element';
+import { fromStore } from '../controllers/from-store';
+import { ThemedElement } from '../components/themed-element';
 
 // Stable module-level reference (rather than an inline literal in
 // `stateChanged`) so `selectFilterGroups`'s `createSelector` memoization
@@ -27,7 +27,7 @@ import { StatefulElement } from '../components/stateful-element';
 const SPEAKER_FILTER_GROUPS = [FilterGroupKey.tags];
 
 @customElement('speakers-page')
-export class SpeakersPage extends StatefulElement {
+export class SpeakersPage extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
@@ -181,26 +181,19 @@ export class SpeakersPage extends StatefulElement {
   private heroSettings = heroSettings.speakers;
   private contentLoaders = contentLoaders;
 
-  @property({ type: Object })
-  speakers: SpeakersState = new Initialized();
+  @fromStore((state) => selectSpeakersState(state))
+  speakers!: SpeakersState;
 
-  @property({ type: Array })
-  filterGroups: FilterGroup[] = [];
-  @property({ type: Array })
-  selectedFilters: Filter[] = [];
-  @property({ type: Array })
-  speakersToRender: SpeakerWithTags[] = [];
+  @fromStore((state) => selectFilterGroups(state, SPEAKER_FILTER_GROUPS))
+  filterGroups!: FilterGroup[];
+  @fromStore((state) => selectFilters(state))
+  selectedFilters!: Filter[];
+  @fromStore((state) => selectFilteredSpeakers(state))
+  speakersToRender!: SpeakerWithTags[];
 
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-  }
-
-  override stateChanged(state: RootState) {
-    this.speakers = selectSpeakersState(state);
-    this.filterGroups = selectFilterGroups(state, SPEAKER_FILTER_GROUPS);
-    this.selectedFilters = selectFilters(state);
-    this.speakersToRender = selectFilteredSpeakers(state);
   }
 
   private get contentLoaderVisibility() {

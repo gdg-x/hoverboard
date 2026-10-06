@@ -1,7 +1,7 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import type { RouterLocation } from '@vaadin/router';
 import { css, html, type PropertyValues } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { Day } from '../../models/day';
@@ -9,7 +9,6 @@ import type { Filter } from '../../models/filter';
 import type { Session } from '../../models/session';
 import type { GeneratedSessionBlock, Time } from '../../models/time';
 import type { Timeslot } from '../../models/timeslot';
-import type { RootState } from '../../store';
 import {
   type FeaturedSessionsState,
   selectFeaturedSessionsState,
@@ -21,10 +20,11 @@ import { mySchedule } from '../../utils/data';
 import { generateClassName } from '../../utils/styles';
 import '../../components/shared/hoverboard-icon';
 import '../../components/schedule/session-element';
-import { StatefulElement } from '../../components/stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../../components/themed-element';
 
 @customElement('schedule-day')
-export class ScheduleDay extends StatefulElement {
+export class ScheduleDay extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
@@ -114,31 +114,24 @@ export class ScheduleDay extends StatefulElement {
 
   private mySchedule = mySchedule;
 
-  @property({ type: Object })
-  schedule: ScheduleState = new Initialized();
+  @fromStore((state) => selectScheduleState(state))
+  schedule!: ScheduleState;
   @property({ type: Object })
   location: RouterLocation | undefined;
   @property({ type: Object })
   day: Day | undefined;
 
-  @state()
-  private user: UserState = new Initialized();
-  @state()
-  private featuredSessions: FeaturedSessionsState = new Initialized();
+  @fromStore((state) => state.user)
+  private user!: UserState;
+  @fromStore((state) => selectFeaturedSessionsState(state))
+  private featuredSessions!: FeaturedSessionsState;
   @property({ type: Boolean })
   onlyFeatured = false;
-  @state()
-  private selectedFilters: Filter[] = [];
+  @fromStore((state) => selectFilters(state))
+  private selectedFilters!: Filter[];
 
   onAfterEnter(location: RouterLocation) {
     this.location = location;
-  }
-
-  override stateChanged(state: RootState) {
-    this.schedule = selectScheduleState(state);
-    this.user = state.user;
-    this.selectedFilters = selectFilters(state);
-    this.featuredSessions = selectFeaturedSessionsState(state);
   }
 
   override willUpdate(changedProperties: PropertyValues) {

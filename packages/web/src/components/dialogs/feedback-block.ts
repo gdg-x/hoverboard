@@ -1,12 +1,13 @@
-import { Initialized, type RemoteData, Success } from '@abraham/remotedata';
+import { type RemoteData, Success } from '@abraham/remotedata';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
 import '@material/web/textfield/outlined-text-field.js';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import { css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { fromStore } from '../../controllers/from-store';
 import type { Feedback } from '../../models/feedback';
-import { type RootState, store } from '../../store';
+import { store } from '../../store';
 import {
   deleteFeedback,
   selectFeedbackById,
@@ -18,10 +19,10 @@ import type { UserState } from '../../store/user';
 import { feedback as feedbackText } from '../../utils/data';
 import '../shared/star-rating';
 import { type StarRatingChangeDetail } from '../shared/star-rating';
-import { StatefulElement } from '../stateful-element';
+import { ThemedElement } from '../themed-element';
 
 @customElement('feedback-block')
-export class FeedbackBlock extends StatefulElement {
+export class FeedbackBlock extends ThemedElement {
   static override styles = css`
     #feedback-comment {
       width: 100%;
@@ -66,17 +67,12 @@ export class FeedbackBlock extends StatefulElement {
 
   @state()
   private comment = '';
-  @state()
-  private user: UserState = new Initialized();
-  @state()
-  private feedback: RemoteData<Error, Feedback | false> = new Initialized();
+  @fromStore((state) => state.user)
+  private user!: UserState;
+  @fromStore((state, host: FeedbackBlock) => selectFeedbackById(state, host.sessionId))
+  private feedback!: RemoteData<Error, Feedback | false>;
 
   private feedbackText = feedbackText;
-
-  override stateChanged(state: RootState) {
-    this.user = state.user;
-    this.feedback = selectFeedbackById(state, this.sessionId);
-  }
 
   override willUpdate(changedProperties: PropertyValues) {
     if (changedProperties.has('feedback')) {

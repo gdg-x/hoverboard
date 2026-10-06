@@ -1,16 +1,16 @@
-import { Initialized, Pending, Success } from '@abraham/remotedata';
+import { Pending, Success } from '@abraham/remotedata';
 import type { RouterLocation } from '@vaadin/router';
 import { css, html, type PropertyValues } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import type { RootState } from '../../store';
+import { customElement, property } from 'lit/decorators.js';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { contentLoaders, mySchedule } from '../../utils/data';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
 import '../shared/content-loader';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('header-bottom-toolbar')
-export class HeaderBottomToolbar extends StatefulElement {
+export class HeaderBottomToolbar extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
@@ -73,17 +73,12 @@ export class HeaderBottomToolbar extends StatefulElement {
   private mySchedule = mySchedule;
   private contentLoaders = contentLoaders.schedule;
 
-  @property({ type: Object })
-  schedule: ScheduleState = new Initialized();
+  @fromStore((state) => selectScheduleState(state))
+  schedule!: ScheduleState;
   @property({ type: Object })
   location: RouterLocation | undefined;
-  @state()
-  private signedIn = false;
-
-  override stateChanged(state: RootState) {
-    this.schedule = selectScheduleState(state);
-    this.signedIn = state.user instanceof Success;
-  }
+  @fromStore((state) => state.user instanceof Success)
+  private signedIn!: boolean;
 
   override updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);

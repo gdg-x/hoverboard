@@ -1,4 +1,4 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import '@material/web/fab/fab.js';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
@@ -13,7 +13,7 @@ import '../components/markdown/short-markdown';
 import type { Session } from '../models/session';
 import type { Speaker } from '../models/speaker';
 import { router } from '../router';
-import { type RootState, store } from '../store';
+import { store } from '../store';
 import { initialAuthState } from '../store/auth';
 import { openSigninDialog } from '../store/dialogs';
 import {
@@ -30,7 +30,8 @@ import { disabledSchedule, feedback, schedule, sessionDetails } from '../utils/d
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
-import { StatefulElement } from '../components/stateful-element';
+import { fromStore } from '../controllers/from-store';
+import { ThemedElement } from '../components/themed-element';
 
 // `Session` (as returned by `selectSession`) does not declare `dateReadable`,
 // `endTime`, `track`, or a resolved `speakers` array — the original template
@@ -45,7 +46,7 @@ type SessionWithDetails = Omit<Session, 'speakers'> & {
 };
 
 @customElement('session-page')
-export class SessionPage extends StatefulElement {
+export class SessionPage extends ThemedElement {
   static override styles = css`
     :host {
       margin: 0;
@@ -193,35 +194,27 @@ export class SessionPage extends StatefulElement {
   private feedback = feedback;
   private sessionDetails = sessionDetails;
 
-  @property({ type: Object })
-  sessions: SessionsState = new Initialized();
+  @fromStore((state) => selectSessionsState(state))
+  sessions!: SessionsState;
   @property({ type: Object })
   session: Session | undefined;
   @property({ type: String })
   sessionId: string | undefined;
-  @property({ type: Object })
-  featuredSessions: FeaturedSessionsState = new Initialized();
-  @property({ type: Object })
-  user: UserState = new Initialized();
-  @property({ type: Object })
-  auth = initialAuthState;
+  @fromStore((state) => selectFeaturedSessionsState(state))
+  featuredSessions!: FeaturedSessionsState;
+  @fromStore((state) => state.user)
+  user!: UserState;
+  @fromStore((state) => state.auth)
+  auth!: typeof initialAuthState;
 
-  @state()
-  private viewport = initialUiState.viewport;
+  @fromStore((state) => state.ui.viewport)
+  private viewport!: typeof initialUiState.viewport;
   @state()
   private disabledSchedule: boolean = disabledSchedule;
   @state()
   private contentLoaderVisibility: boolean = false;
   @state()
   private acceptingFeedback: boolean = false;
-
-  override stateChanged(state: RootState) {
-    this.sessions = selectSessionsState(state);
-    this.user = state.user;
-    this.auth = state.auth;
-    this.featuredSessions = selectFeaturedSessionsState(state);
-    this.viewport = state.ui.viewport;
-  }
 
   onAfterEnter(location: RouterLocation) {
     this.sessionId = location.params?.['id']?.toString();
