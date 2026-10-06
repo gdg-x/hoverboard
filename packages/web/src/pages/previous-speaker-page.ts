@@ -1,8 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import type { RouterLocation } from '@vaadin/router';
+import { customElement, property } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
 import '../components/shared/content-loader';
@@ -178,13 +177,8 @@ export class PreviousSpeakerPage extends ThemedElement {
   @fromStore((state) => selectPreviousSpeakersState(state))
   speakers!: PreviousSpeakersState;
 
-  @state()
-  private speakerId: string | undefined;
-
-  onAfterEnter(location: RouterLocation) {
-    this.speakerId = location.params?.['id']?.toString();
-    this.updateSpeaker();
-  }
+  @property({ attribute: false })
+  speakerId: string | undefined;
 
   override updated(changed: Map<string, unknown>) {
     if (changed.has('speakers') || changed.has('speakerId')) {
@@ -196,7 +190,7 @@ export class PreviousSpeakerPage extends ThemedElement {
     if (this.speakerId && this.speakers instanceof Success) {
       this.speaker = selectPreviousSpeaker(store.getState(), this.speakerId);
       if (!this.speaker) {
-        router.render('/404');
+        void router.goto('/404');
       } else {
         updateImageMetadata(this.speaker.name, this.speaker.bio, {
           image: this.speaker.photoUrl,

@@ -19,7 +19,7 @@ vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
 }));
 vi.mock('../router', () => ({
-  router: { urlForName: vi.fn(), render: vi.fn() },
+  router: { urlForName: vi.fn(), goto: vi.fn() },
 }));
 vi.mock('../store/sessions/selectors', () => ({
   selectSession: vi.fn(),
@@ -87,7 +87,8 @@ describe('session-page', () => {
 
     const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
     element.sessions = new Success([session]);
-    element.onAfterEnter({ params: { id: 'session-1' } } as never);
+    element.sessionId = 'session-1';
+    await element.updateComplete;
     await element.updateComplete;
 
     expect(shadowRoot).toHaveTextContent('A great talk');
@@ -104,14 +105,15 @@ describe('session-page', () => {
   it('redirects to 404 when the session cannot be found', async () => {
     const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
     mockSelectSession.mockReturnValue(undefined);
-    vi.mocked(router).render.mockClear();
+    vi.mocked(router).goto.mockClear();
 
     const { element } = await fixture<SessionPage>(html`<session-page></session-page>`);
     element.sessions = new Success([session]);
-    element.onAfterEnter({ params: { id: 'missing' } } as never);
+    element.sessionId = 'missing';
+    await element.updateComplete;
     await element.updateComplete;
 
-    expect(router.render).toHaveBeenCalledWith('/404');
+    expect(router.goto).toHaveBeenCalledWith('/404');
   });
 
   it('queues a sign-in prompt when toggling a featured session while signed out', async () => {
@@ -124,7 +126,8 @@ describe('session-page', () => {
 
     const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
     element.sessions = new Success([session]);
-    element.onAfterEnter({ params: { id: 'session-1' } } as never);
+    element.sessionId = 'session-1';
+    await element.updateComplete;
     await element.updateComplete;
 
     const fab = shadowRoot.querySelector('md-fab');
@@ -146,7 +149,8 @@ describe('session-page', () => {
     element.user = new Success(user);
     element.featuredSessions = new Success({});
     element.sessions = new Success([session]);
-    element.onAfterEnter({ params: { id: 'session-1' } } as never);
+    element.sessionId = 'session-1';
+    await element.updateComplete;
     await element.updateComplete;
 
     const fab = shadowRoot.querySelector('md-fab');
@@ -163,7 +167,8 @@ describe('session-page', () => {
 
     const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
     element.sessions = new Success([session]);
-    element.onAfterEnter({ params: { id: 'session-1' } } as never);
+    element.sessionId = 'session-1';
+    await element.updateComplete;
     await element.updateComplete;
 
     const videoAction = Array.from(shadowRoot.querySelectorAll('.action')).find((el) =>
@@ -188,7 +193,8 @@ describe('session-page', () => {
 
     const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
     element.sessions = new Success([session]);
-    element.onAfterEnter({ params: { id: 'session-1' } } as never);
+    element.sessionId = 'session-1';
+    await element.updateComplete;
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('auth-required')).toHaveAttribute('hidden');

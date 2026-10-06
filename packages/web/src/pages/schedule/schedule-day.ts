@@ -1,5 +1,4 @@
 import { Success } from '@abraham/remotedata';
-import type { RouterLocation } from '@vaadin/router';
 import { css, html, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
@@ -9,6 +8,7 @@ import type { Filter } from '../../models/filter';
 import type { Session } from '../../models/session';
 import type { GeneratedSessionBlock, Time } from '../../models/time';
 import type { Timeslot } from '../../models/timeslot';
+import type { RouteLocation } from '../../router';
 import {
   type FeaturedSessionsState,
   selectFeaturedSessionsState,
@@ -117,7 +117,7 @@ export class ScheduleDay extends ThemedElement {
   @fromStore((state) => selectScheduleState(state))
   schedule!: ScheduleState;
   @property({ type: Object })
-  location: RouterLocation | undefined;
+  location: RouteLocation | undefined;
   @property({ type: Object })
   day: Day | undefined;
 
@@ -129,10 +129,6 @@ export class ScheduleDay extends ThemedElement {
   onlyFeatured = false;
   @fromStore((state) => selectFilters(state))
   private selectedFilters!: Filter[];
-
-  onAfterEnter(location: RouterLocation) {
-    this.location = location;
-  }
 
   override willUpdate(changedProperties: PropertyValues) {
     if (

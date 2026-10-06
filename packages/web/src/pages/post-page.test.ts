@@ -11,7 +11,7 @@ import { PostPage } from './post-page';
 
 vi.mock('../router', () => ({
   router: {
-    render: vi.fn(),
+    goto: vi.fn(),
     urlForName: vi.fn(),
   },
 }));
@@ -92,7 +92,8 @@ describe('post-page', () => {
     );
     const { element, shadowRootForWithin } = await fixture<PostPage>(html`<post-page></post-page>`);
     element.posts = new Success([firstPostWithPrimaryColor, ...posts.slice(1)]);
-    element.onAfterEnter({ params: { id: 'post-1' } } as never);
+    element.postId = 'post-1';
+    await element.updateComplete;
     await element.updateComplete;
 
     const view = within(shadowRootForWithin);
@@ -119,7 +120,8 @@ describe('post-page', () => {
     fetchMock.mockResolvedValue({ text: async () => 'Remote content' } as Response);
     const { element, shadowRoot } = await fixture<PostPage>(html`<post-page></post-page>`);
     element.posts = new Success([{ ...firstPost, source: '/post.md' }]);
-    element.onAfterEnter({ params: { id: 'post-1' } } as never);
+    element.postId = 'post-1';
+    await element.updateComplete;
 
     expect(fetchMock).toHaveBeenCalledWith('/post.md');
     await waitFor(() => {
@@ -137,8 +139,10 @@ describe('post-page', () => {
     );
     const { element, shadowRoot } = await fixture<PostPage>(html`<post-page></post-page>`);
     element.posts = new Success([{ ...firstPost, source: '/post.md' }, secondPost]);
-    element.onAfterEnter({ params: { id: 'post-1' } } as never);
-    element.onAfterEnter({ params: { id: 'post-2' } } as never);
+    element.postId = 'post-1';
+    await element.updateComplete;
+    element.postId = 'post-2';
+    await element.updateComplete;
     resolveFirst?.({ text: async () => 'Stale remote content' } as Response);
     await Promise.resolve();
     await Promise.resolve();
@@ -153,16 +157,17 @@ describe('post-page', () => {
   it('renders the 404 route when the requested post is missing', async () => {
     const { element } = await fixture<PostPage>(html`<post-page></post-page>`);
     element.posts = new Success(posts);
-    element.onAfterEnter({ params: { id: 'missing' } } as never);
+    element.postId = 'missing';
+    await element.updateComplete;
 
-    expect(router.render).toHaveBeenCalledWith('/404');
+    expect(router.goto).toHaveBeenCalledWith('/404');
   });
 
   it('stores a remote content fetch failure', async () => {
     fetchMock.mockRejectedValue(new Error('failed'));
     const { element } = await fixture<PostPage>(html`<post-page></post-page>`);
     element.posts = new Success([{ ...firstPost, source: '/post.md' }]);
-    element.onAfterEnter({ params: { id: 'post-1' } } as never);
+    element.postId = 'post-1';
 
     await waitFor(() => {
       expect((element as unknown as { post: unknown }).post).toBeInstanceOf(Failure);

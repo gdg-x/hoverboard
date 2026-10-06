@@ -57,7 +57,7 @@ describe('schedule-page', () => {
     const { element, shadowRoot } = await fixture<SchedulePage>(
       html`<schedule-page></schedule-page>`,
     );
-    element.onAfterEnter({ pathname: '/schedule/day-1' } as never);
+    element.location = { pathname: '/schedule/day-1', search: '', params: {} };
     await element.updateComplete;
 
     const toolbar = shadowRoot.querySelector('header-bottom-toolbar') as never as {

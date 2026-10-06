@@ -115,7 +115,7 @@ export class TocMarkdown extends Markdown {
         class="col-content"
         href="${window.location.pathname}#${headerId}"
         @click="${() => this.scrollToId(headerId)}"
-        router-ignore
+        rel="external"
         >${header?.textContent ?? headerId}</a
       >
     `;
