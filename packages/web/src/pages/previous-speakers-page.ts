@@ -2,7 +2,6 @@ import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@material/web/progress/linear-progress.js';
-import '@power-elements/lazy-image';
 import '../components/content-loader';
 import '../components/footer-block';
 import '../components/hero/simple-hero';
@@ -193,7 +192,13 @@ export class PreviousSpeakersPage extends ReduxMixin(ThemedElement) {
         ${previousSpeakers.map(
           (speaker) => html`
             <a class="speaker" href=${this.previousSpeakerUrl(speaker.id)}>
-              <lazy-image class="photo" src=${speaker.photoUrl} alt=${speaker.name}></lazy-image>
+              <img
+                loading="lazy"
+                decoding="async"
+                class="photo"
+                src=${speaker.photoUrl}
+                alt=${speaker.name}
+              />
               <div class="details">
                 <h2 class="name">${speaker.name}</h2>
                 <div class="origin">${speaker.country}</div>

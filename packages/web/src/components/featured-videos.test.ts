@@ -57,7 +57,7 @@ describe('featured-videos', () => {
 
     expect(shadowRoot).toHaveTextContent(featuredVideos.title);
     expect(shadowRoot).toHaveTextContent(video.title);
-    expect(shadowRoot.querySelector('lazy-image')).toHaveAttribute('src', video.thumbnail);
+    expect(shadowRoot.querySelector('img')).toHaveAttribute('src', video.thumbnail);
     expect(shadowRoot.querySelector('.cta-button')).toHaveAttribute('trailing-icon');
     expect(shadowRoot.querySelector('.cta-button hoverboard-icon')).toHaveAttribute(
       'name',

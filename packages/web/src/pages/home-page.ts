@@ -1,23 +1,17 @@
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
-import '@power-elements/lazy-image';
 import { css, html, nothing } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import '../components/about-block';
 import '../components/about-organizer-block';
-import '../components/featured-videos';
 import '../components/footer-block';
-import '../components/gallery-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
 import '../components/hoverboard-icon';
 import '../components/latest-posts-block';
-import '../components/map-block';
-import '../components/partners-block';
 import '../components/speakers-block';
 import '../components/subscribe-block';
 import { ThemedElement } from '../components/themed-element';
-import '../components/tickets-block';
 import { firebaseApp } from '../firebase';
 import { store } from '../store';
 import { ReduxMixin } from '../store/mixin';
@@ -36,6 +30,16 @@ import {
 } from '../utils/data';
 import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
+
+// Below-the-fold blocks load when they are about to scroll into view.
+const lazyBlocks = {
+  'tickets-block': () => import('../components/tickets-block'),
+  'gallery-block': () => import('../components/gallery-block'),
+  'featured-videos': () => import('../components/featured-videos'),
+  'map-block': () => import('../components/map-block'),
+  'partners-block': () => import('../components/partners-block'),
+};
+type LazyBlock = keyof typeof lazyBlocks;
 
 @customElement('home-page')
 export class HomePage extends ReduxMixin(ThemedElement) {
@@ -60,6 +64,13 @@ export class HomePage extends ReduxMixin(ThemedElement) {
           height: var(--lazy-image-height);
           max-width: 240px;
           max-height: 76px;
+        }
+
+        :is(tickets-block, gallery-block, featured-videos, map-block, partners-block):not(
+          :defined
+        ) {
+          display: block;
+          min-height: 480px;
         }
 
         .info-items {
@@ -195,7 +206,9 @@ export class HomePage extends ReduxMixin(ThemedElement) {
     });
   };
 
-  private scrollToTickets = () => {
+  private scrollToTickets = async () => {
+    // The block has no height until it is defined, so load it before scrolling.
+    await lazyBlocks['tickets-block']();
     const element = this.ticketsBlock;
     if (element) {
       scrollToElement(element);
@@ -222,6 +235,45 @@ export class HomePage extends ReduxMixin(ThemedElement) {
     super.connectedCallback();
     updateMetadata(title, description, INCLUDE_SITE_TITLE.NO);
     this.showForkMeBlock = this.shouldShowForkMeBlock();
+    if (this.hasUpdated) {
+      this.observeLazyBlocks();
+    }
+  }
+
+  override firstUpdated() {
+    this.observeLazyBlocks();
+  }
+
+  override disconnectedCallback() {
+    this.blockObserver?.disconnect();
+    super.disconnectedCallback();
+  }
+
+  private blockObserver?: IntersectionObserver;
+
+  private observeLazyBlocks() {
+    const tags = Object.keys(lazyBlocks) as LazyBlock[];
+    if (!('IntersectionObserver' in window)) {
+      tags.forEach((tag) => lazyBlocks[tag]());
+      return;
+    }
+
+    this.blockObserver?.disconnect();
+    this.blockObserver = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          this.blockObserver?.unobserve(entry.target);
+          lazyBlocks[entry.target.localName as LazyBlock]?.();
+        }),
+      { rootMargin: '600px 0px' },
+    );
+    tags.forEach((tag) => {
+      const element = this.renderRoot.querySelector(tag);
+      if (element && !customElements.get(tag)) {
+        this.blockObserver?.observe(element);
+      }
+    });
   }
 
   override render() {
@@ -234,7 +286,7 @@ export class HomePage extends ReduxMixin(ThemedElement) {
         hide-logo
       >
         <div class="home-content">
-          <lazy-image class="hero-logo" src="/images/logo.svg" alt="${this.siteTitle}"></lazy-image>
+          <img class="hero-logo" src="/images/logo.svg" alt="${this.siteTitle}" decoding="async" />
 
           <div class="info-items">
             <div class="info-item">${this.city}. ${this.dates}</div>

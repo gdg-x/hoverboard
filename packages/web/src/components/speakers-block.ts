@@ -1,5 +1,4 @@
 import '@material/web/button/outlined-button.js';
-import '@power-elements/lazy-image';
 import { Initialized, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -186,11 +185,13 @@ export class SpeakersBlock extends ReduxMixin(ThemedElement) {
             (speaker) => html`
               <a class="speaker" href="${this.speakerUrl(speaker.id)}">
                 <div class="speaker-photo-wrapper">
-                  <lazy-image
+                  <img
+                    loading="lazy"
+                    decoding="async"
                     class="photo"
                     src="${speaker.photoUrl}"
                     alt="${speaker.name}"
-                  ></lazy-image>
+                  />
                   <div class="badges">
                     ${(speaker.badges ?? []).map(
                       (badge) => html`
@@ -211,11 +212,13 @@ export class SpeakersBlock extends ReduxMixin(ThemedElement) {
                   </div>
                 </div>
 
-                <lazy-image
+                <img
+                  loading="lazy"
+                  decoding="async"
                   class="company-logo"
                   src="${speaker.companyLogoUrl}"
                   alt="${speaker.company}"
-                ></lazy-image>
+                />
 
                 <div class="description">
                   <text-truncate lines="1">

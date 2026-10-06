@@ -1,5 +1,4 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -303,11 +302,13 @@ export class SessionElement extends ReduxMixin(ThemedElement) {
             ${session?.speakers?.map(
               (speaker) => html`
                 <div class="speaker">
-                  <lazy-image
+                  <img
+                    loading="lazy"
+                    decoding="async"
                     class="speaker-photo"
                     src="${speaker.photoUrl}"
                     alt="${speaker.name}"
-                  ></lazy-image>
+                  />
 
                   <div class="speaker-details">
                     <div class="speaker-name">${speaker.name}</div>

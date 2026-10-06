@@ -87,7 +87,7 @@ describe('partners-block', () => {
     expect(shadowRoot).toHaveTextContent('Gold Partners');
     const logo = shadowRoot.querySelector('.logo-item');
     expect(logo).toHaveAttribute('href', 'https://example.com/partner-1');
-    expect(shadowRoot.querySelector('lazy-image')).toHaveAttribute(
+    expect(shadowRoot.querySelector('img')).toHaveAttribute(
       'src',
       'https://example.com/logo-1.svg',
     );

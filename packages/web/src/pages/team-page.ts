@@ -1,7 +1,6 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import '@power-elements/lazy-image';
 import '../components/footer-block';
 import '../components/hero/simple-hero';
 import '../components/hoverboard-icon';
@@ -172,11 +171,13 @@ export class TeamPage extends ReduxMixin(ThemedElement) {
               ${team.members.map(
                 (member) => html`
                   <div class="member">
-                    <lazy-image
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       class="photo"
                       src=${member.photoUrl}
                       alt=${member.name}
-                    ></lazy-image>
+                    />
                     <div class="member-details">
                       <h2 class="name">${member.name}</h2>
                       <div class="activity">${member.title}</div>

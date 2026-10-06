@@ -1,5 +1,4 @@
 // import { PropertyValues } from '@lit/reactive-element';
-import '@power-elements/lazy-image';
 import { css, html, PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
@@ -110,11 +109,13 @@ export class HeroBlock extends ThemedElement {
 
   private get image() {
     return html`
-      <lazy-image
+      <img
         class="hero-image"
         src="${this.backgroundImage}"
+        alt=""
+        decoding="async"
         style="${styleMap({ backgroundColor: this.backgroundColor })}"
-      ></lazy-image>
+      />
     `;
   }
 

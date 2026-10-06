@@ -1,5 +1,4 @@
 import '@material/web/button/text-button.js';
-import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { RootState } from '../store';
@@ -69,11 +68,13 @@ export class AboutOrganizerBlock extends ReduxMixin(ThemedElement) {
       <div class="container">
         <div class="image-column" ?hidden="${this.viewport.isPhone}">
           <a href="/team" class="image-link">
-            <lazy-image
+            <img
+              loading="lazy"
+              decoding="async"
               class="organizers-photo"
               src="${aboutOrganizerBlock.image}"
               alt="Organizer"
-            ></lazy-image>
+            />
           </a>
         </div>
 

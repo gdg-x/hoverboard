@@ -60,7 +60,7 @@ describe('posts-list', () => {
       html`<posts-list .posts="${posts}"></posts-list>`,
     );
 
-    const images = shadowRootForWithin.querySelectorAll('lazy-image');
+    const images = shadowRootForWithin.querySelectorAll('img');
     expect(images[0]).not.toHaveAttribute('hidden');
     expect(images[1]).toHaveAttribute('hidden');
   });

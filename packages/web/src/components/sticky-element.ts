@@ -1,5 +1,5 @@
 import { css, html } from 'lit';
-import { customElement, query, state } from 'lit/decorators.js';
+import { customElement, query } from 'lit/decorators.js';
 import { ThemedElement } from './themed-element';
 
 @customElement('sticky-element')
@@ -8,6 +8,20 @@ export class StickyElement extends ThemedElement {
     return [
       ...super.styles,
       css`
+        :host {
+          position: relative;
+        }
+
+        /* Leaves the viewport as the content reaches the bottom of the app header. */
+        #trigger {
+          position: absolute;
+          top: calc(-1 * var(--header-height));
+          left: 0;
+          width: 100%;
+          height: 1px;
+          pointer-events: none;
+        }
+
         #content::before {
           position: absolute;
           right: 0;
@@ -24,7 +38,7 @@ export class StickyElement extends ThemedElement {
         }
 
         .sticked {
-          margin-top: 56px;
+          margin-top: var(--header-height);
           position: fixed;
           top: 0;
           right: 0;
@@ -34,12 +48,6 @@ export class StickyElement extends ThemedElement {
 
         #content.sticked::before {
           opacity: 1;
-        }
-
-        @media (min-width: 812px) {
-          .sticked {
-            margin-top: 64px;
-          }
         }
       `,
     ];
@@ -51,21 +59,24 @@ export class StickyElement extends ThemedElement {
   @query('#trigger')
   trigger!: HTMLDivElement;
 
-  @state()
-  private waiting = false;
-
-  @state()
-  private endScrollHandle: number | undefined;
-
-  override connectedCallback() {
-    super.connectedCallback();
-    window.addEventListener('scroll', this.onScroll, { passive: true });
-  }
+  private observer: IntersectionObserver | undefined;
 
   override disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener('scroll', this.onScroll);
+    this.observer?.disconnect();
     this.content?.classList.remove('sticked');
+  }
+
+  override firstUpdated() {
+    this.observer = new IntersectionObserver(this.onIntersection);
+    this.observer.observe(this.trigger);
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    if (this.hasUpdated) {
+      this.observer?.observe(this.trigger);
+    }
   }
 
   override render() {
@@ -77,58 +88,32 @@ export class StickyElement extends ThemedElement {
     `;
   }
 
-  private onScroll = () => {
-    if (this.waiting) {
+  private onIntersection = (entries: IntersectionObserverEntry[]) => {
+    const entry = entries[entries.length - 1];
+    if (!entry) {
       return;
     }
-    this.waiting = true;
-    window.clearTimeout(this.endScrollHandle);
-
-    this.toggleSticky();
-
-    window.setTimeout(() => {
-      this.waiting = false;
-    }, 100);
-
-    this.endScrollHandle = window.setTimeout(() => {
-      this.toggleSticky();
-    }, 200);
+    this.setSticked(!entry.isIntersecting && entry.boundingClientRect.top < 0);
   };
 
-  private toggleSticky() {
-    const trigger = this.trigger;
+  private setSticked(sticked: boolean) {
     const content = this.content;
-
-    if (!trigger || !content) {
-      console.error('Missing trigger or content element.');
+    if (!content || content.classList.contains('sticked') === sticked) {
       return;
     }
 
-    const scrollTop = trigger.getBoundingClientRect().top;
-    if (scrollTop > 64 && content.classList.contains('sticked')) {
-      content.classList.remove('sticked');
-      this.dispatchEvent(
-        new CustomEvent('element-sticked', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            sticked: false,
-          },
-        }),
-      );
-    } else if (scrollTop <= 64 && !content.classList.contains('sticked')) {
-      this.style.height = `${this.content.offsetHeight}px`;
-      content.classList.add('sticked');
-      this.dispatchEvent(
-        new CustomEvent('element-sticked', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            sticked: true,
-          },
-        }),
-      );
+    if (sticked) {
+      // Keep the space in the layout while the content is fixed.
+      this.style.height = `${content.offsetHeight}px`;
     }
+    content.classList.toggle('sticked', sticked);
+    this.dispatchEvent(
+      new CustomEvent('element-sticked', {
+        bubbles: true,
+        composed: true,
+        detail: { sticked },
+      }),
+    );
   }
 }
 

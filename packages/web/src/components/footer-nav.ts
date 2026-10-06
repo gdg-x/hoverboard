@@ -1,6 +1,5 @@
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@power-elements/lazy-image';
 import { codeOfConduct, organizer } from '../utils/data';
 import { ThemedElement } from '../components/themed-element';
 
@@ -81,11 +80,13 @@ export class FooterNav extends ThemedElement {
     return html`
       <div class="nav-inline">
         <a href="${this.organizer.url}" target="_blank" rel="noopener noreferrer">
-          <lazy-image
+          <img
+            loading="lazy"
+            decoding="async"
             class="footer-logo"
             src="../../images/organizer-logo.svg"
             alt="${this.organizer.name}"
-          ></lazy-image>
+          />
         </a>
 
         <div class="copyright">

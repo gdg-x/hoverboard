@@ -1,6 +1,5 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
-import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import '../components/content-loader';
@@ -187,12 +186,14 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
                   href=${this.postUrl(post.id)}
                   class="featured-post ${this.viewport.isTabletPlus ? 'featured-post--flex' : ''}"
                 >
-                  <lazy-image
+                  <img
+                    loading="lazy"
+                    decoding="async"
                     class="image"
                     src=${post.image}
                     alt=${post.title}
                     style="background-color: ${post.backgroundColor};"
-                  ></lazy-image>
+                  />
 
                   <div class="image-overlay"></div>
                   <div class="details">

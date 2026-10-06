@@ -1,5 +1,4 @@
 import '@material/web/button/outlined-button.js';
-import '@power-elements/lazy-image';
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -142,11 +141,13 @@ export class GalleryBlock extends ReduxMixin(ThemedElement) {
         ${this.failure ? html`<p>Error loading gallery.</p>` : ''}
         ${this.photos.map(
           (photo) =>
-            html`<lazy-image
+            html`<img
+              loading="lazy"
+              decoding="async"
               class="grid-item"
               src="${photo.url}"
               alt="gallery photo"
-            ></lazy-image>`,
+            />`,
         )}
         ${
           this.success

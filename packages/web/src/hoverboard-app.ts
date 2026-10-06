@@ -1,20 +1,15 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import '@power-elements/lazy-image';
-import { css, html, PropertyValues } from 'lit';
+import { css, html, nothing, PropertyValues } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { ThemedElement } from './components/themed-element';
+import './components/app-install';
 import './components/hoverboard-icon';
-import './components/snack-bar';
-import './components/feedback-dialog';
-import './components/signin-dialog';
-import './components/subscribe-dialog';
-import './components/video-dialog';
-import './components/footer-block';
 import './components/header-toolbar';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
 import { ReduxMixin } from './store/mixin';
 import { onUser } from './store/auth';
+import { DIALOG, selectIsDialogOpen } from './store/dialogs';
 import { queueSnackbar } from './store/snackbars';
 import { TicketsState, selectTickets } from './store/tickets';
 import { DrawerOpenedChanged } from './utils/drawer';
@@ -29,6 +24,9 @@ import {
 } from './utils/data';
 import './utils/media-query';
 import { Stickied } from './utils/stickied';
+
+type LazyElement =
+  'feedback-dialog' | 'signin-dialog' | 'subscribe-dialog' | 'video-dialog' | 'snack-bar';
 
 @customElement('hoverboard-app')
 export class HoverboardApp extends ReduxMixin(ThemedElement) {
@@ -179,9 +177,44 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
   @state()
   private routeName = 'home';
 
+  // Loaded on first use so they stay out of the initial bundle.
+  private readonly lazyElements: Record<LazyElement, () => Promise<unknown>> = {
+    'feedback-dialog': () => import('./components/feedback-dialog'),
+    'signin-dialog': () => import('./components/signin-dialog'),
+    'subscribe-dialog': () => import('./components/subscribe-dialog'),
+    'video-dialog': () => import('./components/video-dialog'),
+    'snack-bar': () => import('./components/snack-bar'),
+  };
+  private readonly loadingElements = new Set<LazyElement>();
+  @state()
+  private loadedElements = new Set<LazyElement>();
+
   override stateChanged(state: RootState) {
     this.tickets = selectTickets(state);
     this.routeName = selectRouteName(window.location.pathname);
+    this.loadNeededElements(state);
+  }
+
+  private loadNeededElements(state: RootState) {
+    const needed: Record<LazyElement, boolean> = {
+      'feedback-dialog': selectIsDialogOpen(state, DIALOG.FEEDBACK),
+      'signin-dialog': selectIsDialogOpen(state, DIALOG.SIGNIN),
+      'subscribe-dialog': selectIsDialogOpen(state, DIALOG.SUBSCRIBE),
+      'video-dialog': state.ui.videoDialog.open,
+      'snack-bar': state.snackbars.length > 0,
+    };
+
+    (Object.keys(needed) as LazyElement[]).forEach((tag) => {
+      if (!needed[tag] || this.loadedElements.has(tag) || this.loadingElements.has(tag)) {
+        return;
+      }
+      this.loadingElements.add(tag);
+      this.lazyElements[tag]()
+        .then(() => {
+          this.loadedElements = new Set(this.loadedElements).add(tag);
+        })
+        .catch(() => this.loadingElements.delete(tag));
+    });
   }
 
   override connectedCallback() {
@@ -215,11 +248,13 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
 
       <div id="drawer" class="drawer ${this.drawerOpened ? 'opened' : ''}">
         <div class="drawer-toolbar">
-          <lazy-image
+          <img
+            loading="lazy"
+            decoding="async"
             class="toolbar-logo"
             src="/images/logo-monochrome.svg"
             alt="${this.alt}"
-          ></lazy-image>
+          />
           <h2 class="dates">${this.dates}</h2>
           <h3 class="location">${this.shortLocation}</h3>
         </div>
@@ -267,12 +302,19 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
         <main></main>
       </div>
 
-      <feedback-dialog></feedback-dialog>
-      <signin-dialog></signin-dialog>
-      <subscribe-dialog></subscribe-dialog>
-      <video-dialog></video-dialog>
-
-      <snack-bar></snack-bar>
+      ${
+        this.loadedElements.has('feedback-dialog')
+          ? html`<feedback-dialog></feedback-dialog>`
+          : nothing
+      }
+      ${this.loadedElements.has('signin-dialog') ? html`<signin-dialog></signin-dialog>` : nothing}
+      ${
+        this.loadedElements.has('subscribe-dialog')
+          ? html`<subscribe-dialog></subscribe-dialog>`
+          : nothing
+      }
+      ${this.loadedElements.has('video-dialog') ? html`<video-dialog></video-dialog>` : nothing}
+      ${this.loadedElements.has('snack-bar') ? html`<snack-bar></snack-bar>` : nothing}
     `;
   }
 

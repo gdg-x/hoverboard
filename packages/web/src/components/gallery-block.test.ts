@@ -41,7 +41,7 @@ describe('gallery-block', () => {
     ]);
     await element.updateComplete;
 
-    expect(shadowRoot.querySelectorAll('lazy-image')).toHaveLength(2);
+    expect(shadowRoot.querySelectorAll('img')).toHaveLength(2);
     expect(shadowRoot).toHaveTextContent(galleryBlock.title);
     expect(shadowRoot.querySelector('.gallery-info a')).toHaveAttribute(
       'href',

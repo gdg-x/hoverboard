@@ -1,6 +1,5 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
-import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { Video } from '../models/video';
@@ -297,12 +296,14 @@ export class FeaturedVideos extends ReduxMixin(ThemedElement) {
                 (block, index) => html`
                   <div class="video-item" @click="${() => this.playVideo(block)}">
                     <div class="thumbnail">
-                      <lazy-image
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         id="image${index}"
                         class="thumbnail-image"
                         src="${block.thumbnail}"
                         alt="${block.title}"
-                      ></lazy-image>
+                      />
                       <div class="image-overlay"></div>
                       <hoverboard-icon class="video-play-icon" name="play"></hoverboard-icon>
                     </div>

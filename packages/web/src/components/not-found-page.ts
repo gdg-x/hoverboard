@@ -1,4 +1,3 @@
-import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { heroSettings } from '../utils/data';
@@ -35,11 +34,13 @@ export class NotFoundPage extends ThemedElement {
     return html`
       <simple-hero page="notFound"></simple-hero>
 
-      <lazy-image
+      <img
+        loading="lazy"
+        decoding="async"
         class="not-found-image"
         src="../../images/not-found.svg"
         alt=${this.heroSettings.title}
-      ></lazy-image>
+      />
 
       <footer-block></footer-block>
     `;

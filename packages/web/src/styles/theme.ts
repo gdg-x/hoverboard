@@ -40,6 +40,7 @@ export const theme = css`
       -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, helvetica, arial, sans-serif,
       'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     --max-container-width: 1280px;
+    --header-height: 56px;
     --primary-color-transparent: rgb(103 58 183 / 10%);
     --primary-color-light: rgb(103 58 183 / 80%);
     --primary-color-white: #ede7f6;
@@ -231,6 +232,14 @@ export const theme = css`
     cursor: pointer;
   }
 
+  /* Sizing contract for native images that replaced the lazy-image element. */
+  :where(img[decoding='async']) {
+    display: block;
+    width: var(--lazy-image-width, 100%);
+    height: var(--lazy-image-height, 100%);
+    object-fit: var(--lazy-image-fit, contain);
+  }
+
   .tag {
     height: 32px;
     padding: 8px 12px;
@@ -241,6 +250,12 @@ export const theme = css`
     border-radius: 32px;
     margin: 1px;
     line-height: initial;
+  }
+
+  @media (min-width: 812px) {
+    :host {
+      --header-height: 64px;
+    }
   }
 
   @media (min-width: 640px) {

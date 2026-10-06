@@ -1,6 +1,5 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
-import '@power-elements/lazy-image';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { RootState, store } from '../store';
@@ -115,11 +114,13 @@ export class PartnersBlock extends ReduxMixin(ThemedElement) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <lazy-image
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       class="logo-img"
                       src="${logo.logoUrl}"
                       alt="${logo.name}"
-                    ></lazy-image>
+                    />
                   </a>
                 `,
               )}

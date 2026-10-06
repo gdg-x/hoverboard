@@ -29,7 +29,7 @@ describe('not-found-page', () => {
       html`<not-found-page data-testid="page"></not-found-page>`,
     );
     const hero = shadowRootForWithin.querySelector<SimpleHero>('simple-hero');
-    const image = shadowRootForWithin.querySelector('lazy-image');
+    const image = shadowRootForWithin.querySelector('img');
 
     expect(screen.getByTestId('page')).toBeInTheDocument();
     expect(hero?.page).toBe('notFound');

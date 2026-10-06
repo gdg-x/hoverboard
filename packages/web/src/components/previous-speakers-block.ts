@@ -1,5 +1,4 @@
 import '@material/web/button/text-button.js';
-import '@power-elements/lazy-image';
 import { Failure, Initialized, Pending } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -90,11 +89,13 @@ export class PreviousSpeakersBlock extends ReduxMixin(ThemedElement) {
           ${this.speakers.map(
             (speaker) => html`
               <a class="speaker" href="${this.previousSpeakerUrl(speaker.id)}">
-                <lazy-image
+                <img
+                  loading="lazy"
+                  decoding="async"
                   class="photo"
                   src="${speaker.photoUrl}"
                   alt="${speaker.name}"
-                ></lazy-image>
+                />
               </a>
             `,
           )}

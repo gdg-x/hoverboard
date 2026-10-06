@@ -1,6 +1,5 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
-import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '../components/markdown/short-markdown';
@@ -130,12 +129,14 @@ export class LatestPostsBlock extends ReduxMixin(ThemedElement) {
           ${this.latestPosts.map(
             (post) => html`
               <a href="${this.postUrl(post.id)}" class="post card">
-                <lazy-image
+                <img
+                  loading="lazy"
+                  decoding="async"
                   class="image"
                   src="${post.image}"
                   alt="${post.title}"
                   style="background-color: ${post.backgroundColor};"
-                ></lazy-image>
+                />
                 <div class="details">
                   <div>
                     <text-truncate lines="2">

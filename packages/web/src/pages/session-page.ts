@@ -1,7 +1,6 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/fab/fab.js';
 import '@material/web/progress/linear-progress.js';
-import '@power-elements/lazy-image';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { RouterLocation } from '@vaadin/router';
@@ -429,11 +428,13 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
                     (speaker) => html`
                       <a class="section" href="${this.speakerUrl(speaker.id)}">
                         <div class="section-content">
-                          <lazy-image
+                          <img
+                            loading="lazy"
+                            decoding="async"
                             class="section-photo"
                             src="${speaker.photoUrl}"
                             alt="${speaker.name}"
-                          ></lazy-image>
+                          />
 
                           <div class="section-details">
                             <div class="section-primary-text">${speaker.name}</div>

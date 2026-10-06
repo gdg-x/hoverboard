@@ -1,6 +1,5 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
-import '@power-elements/lazy-image';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { RouterLocation } from '@vaadin/router';
@@ -248,11 +247,13 @@ export class SpeakerPage extends ReduxMixin(ThemedElement) {
     return html`
       <simple-hero page="speakers">
         <div class="dialog-container header-content">
-          <lazy-image
+          <img
+            loading="lazy"
+            decoding="async"
             class="photo"
             src=${speaker?.photoUrl ?? ''}
             alt=${speaker?.name ?? ''}
-          ></lazy-image>
+          />
           <div>
             <h2 class="name">${speaker?.name ?? ''}</h2>
             <div class="subtitle">${this.subtitle}</div>

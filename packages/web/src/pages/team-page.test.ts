@@ -35,7 +35,7 @@ describe('team-page', () => {
 
     expect(shadowRoot).toHaveTextContent('Core team');
     expect(shadowRoot).toHaveTextContent('Ada Lovelace');
-    expect(shadowRoot.querySelector('lazy-image')).toHaveAttribute('alt', 'Ada Lovelace');
+    expect(shadowRoot.querySelector('img')).toHaveAttribute('alt', 'Ada Lovelace');
     expect(shadowRoot.querySelector('a')).toHaveAttribute('href', 'https://github.com/ada');
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'github');
   });

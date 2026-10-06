@@ -1,4 +1,3 @@
-import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '../components/markdown/short-markdown';
@@ -84,13 +83,15 @@ export class PostsList extends ThemedElement {
       ${this.posts.map(
         (post) => html`
           <a href="${this.postUrl(post.id)}" class="post">
-            <lazy-image
+            <img
+              loading="lazy"
+              decoding="async"
               class="image"
               src="${post.image}"
               alt="${post.title}"
               style="background-color: ${post.backgroundColor};"
               ?hidden="${!post.image}"
-            ></lazy-image>
+            />
             <div class="post-content">
               <div class="details">
                 <div>
