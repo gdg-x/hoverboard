@@ -1,26 +1,17 @@
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
-import '@power-elements/lazy-image';
 import { css, html, nothing } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import '../components/about-block';
-import '../components/about-organizer-block';
-import '../components/featured-videos';
-import '../components/footer-block';
-import '../components/gallery-block';
+import '../components/home/about-block';
+import '../components/home/about-organizer-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
-import '../components/hoverboard-icon';
-import '../components/latest-posts-block';
-import '../components/map-block';
-import '../components/partners-block';
-import '../components/speakers-block';
-import '../components/subscribe-block';
-import { ThemedElement } from '../components/themed-element';
-import '../components/tickets-block';
+import '../components/shared/hoverboard-icon';
+import '../components/home/latest-posts-block';
+import '../components/home/speakers-block';
+import '../components/home/subscribe-block';
 import { firebaseApp } from '../firebase';
 import { store } from '../store';
-import { ReduxMixin } from '../store/mixin';
 import { queueSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
 import {
@@ -36,141 +27,152 @@ import {
 } from '../utils/data';
 import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
+import { StatefulElement } from '../components/stateful-element';
+
+// Below-the-fold blocks load when they are about to scroll into view.
+const lazyBlocks = {
+  'tickets-block': () => import('../components/home/tickets-block'),
+  'gallery-block': () => import('../components/home/gallery-block'),
+  'featured-videos': () => import('../components/home/featured-videos'),
+  'map-block': () => import('../components/home/map-block'),
+  'partners-block': () => import('../components/home/partners-block'),
+};
+type LazyBlock = keyof typeof lazyBlocks;
 
 @customElement('home-page')
-export class HomePage extends ReduxMixin(ThemedElement) {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-          height: 100%;
-        }
+export class HomePage extends StatefulElement {
+  static override styles = css`
+    :host {
+      display: block;
+      height: 100%;
+    }
 
-        hero-block {
-          font-size: 24px;
-          text-align: center;
-        }
+    hero-block {
+      font-size: 24px;
+      text-align: center;
+    }
 
-        .hero-logo {
-          --lazy-image-width: 100%;
-          --lazy-image-height: 76px;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-          max-width: 240px;
-          max-height: 76px;
-        }
+    .hero-logo {
+      --lazy-image-width: 100%;
+      --lazy-image-height: 76px;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+      max-width: 240px;
+      max-height: 76px;
+    }
 
-        .info-items {
-          margin: 24px auto;
-          font-size: 22px;
-        }
+    :is(tickets-block, gallery-block, featured-videos, map-block, partners-block):not(:defined) {
+      display: block;
+      min-height: 480px;
+    }
 
-        .info-items > *:not(:first-of-type) {
-          margin-top: 4px;
-        }
+    .info-items {
+      margin: 24px auto;
+      font-size: 22px;
+    }
 
-        .action-buttons {
-          margin: 0 -8px;
-          font-size: 14px;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-        }
+    .info-items > *:not(:first-of-type) {
+      margin-top: 4px;
+    }
 
-        .action-buttons md-filled-button,
-        .action-buttons md-outlined-button {
-          margin: 8px;
-        }
+    .action-buttons {
+      margin: 0 -8px;
+      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        .action-buttons .watch-video {
-          color: #fff;
-          --md-outlined-button-label-text-color: #fff;
-          --md-outlined-button-hover-label-text-color: #fff;
-          --md-outlined-button-outline-color: #fff;
-        }
+    .action-buttons md-filled-button,
+    .action-buttons md-outlined-button {
+      margin: 8px;
+    }
 
-        .action-buttons hoverboard-icon {
-          margin-right: 8px;
-        }
+    .action-buttons .watch-video {
+      color: #fff;
+      --md-outlined-button-label-text-color: #fff;
+      --md-outlined-button-hover-label-text-color: #fff;
+      --md-outlined-button-outline-color: #fff;
+    }
 
-        .scroll-down {
-          margin-top: 24px;
-          color: currentColor;
-          user-select: none;
-          cursor: pointer;
-        }
+    .action-buttons hoverboard-icon {
+      margin-right: 8px;
+    }
 
-        .scroll-down svg {
-          width: 24px;
-          opacity: 0.6;
-        }
+    .scroll-down {
+      margin-top: 24px;
+      color: currentColor;
+      user-select: none;
+      cursor: pointer;
+    }
 
-        .scroll-down .stroke {
-          stroke: currentColor;
-        }
+    .scroll-down svg {
+      width: 24px;
+      opacity: 0.6;
+    }
 
-        .scroll-down .scroller {
-          fill: currentColor;
-          animation: updown 2s infinite;
-        }
+    .scroll-down .stroke {
+      stroke: currentColor;
+    }
 
-        .home-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
+    .scroll-down .scroller {
+      fill: currentColor;
+      animation: updown 2s infinite;
+    }
 
-        @keyframes updown {
-          0% {
-            transform: translate(0, 0);
-          }
-          50% {
-            transform: translate(0, 5px);
-          }
-          100% {
-            transform: translate(0, 0);
-          }
-        }
+    .home-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        @media (min-height: 500px) {
-          hero-block {
-            height: calc(100vh + 57px);
-            max-height: calc(100vh + 1px);
-          }
+    @keyframes updown {
+      0% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(0, 5px);
+      }
+      100% {
+        transform: translate(0, 0);
+      }
+    }
 
-          .home-content {
-            margin-top: -48px;
-          }
+    @media (min-height: 500px) {
+      hero-block {
+        height: calc(100vh + 57px);
+        max-height: calc(100vh + 1px);
+      }
 
-          .scroll-down {
-            position: absolute;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-          }
-        }
+      .home-content {
+        margin-top: -48px;
+      }
 
-        @media (min-width: 812px) {
-          hero-block {
-            height: calc(100vh + 65px);
-          }
+      .scroll-down {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+      }
+    }
 
-          .hero-logo {
-            max-width: 320px;
-          }
+    @media (min-width: 812px) {
+      hero-block {
+        height: calc(100vh + 65px);
+      }
 
-          .info-items {
-            margin: 48px auto;
-            font-size: 28px;
-            line-height: 1.1;
-          }
-        }
-      `,
-    ];
-  }
+      .hero-logo {
+        max-width: 320px;
+      }
+
+      .info-items {
+        margin: 48px auto;
+        font-size: 28px;
+        line-height: 1.1;
+      }
+    }
+  `;
 
   private city = location.city;
   private siteTitle = title;
@@ -195,7 +197,9 @@ export class HomePage extends ReduxMixin(ThemedElement) {
     });
   };
 
-  private scrollToTickets = () => {
+  private scrollToTickets = async () => {
+    // The block has no height until it is defined, so load it before scrolling.
+    await lazyBlocks['tickets-block']();
     const element = this.ticketsBlock;
     if (element) {
       scrollToElement(element);
@@ -213,7 +217,7 @@ export class HomePage extends ReduxMixin(ThemedElement) {
       ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
       : false;
     if (showForkMeBlock) {
-      import('../components/fork-me-block');
+      import('../components/home/fork-me-block');
     }
     return showForkMeBlock;
   }
@@ -222,6 +226,45 @@ export class HomePage extends ReduxMixin(ThemedElement) {
     super.connectedCallback();
     updateMetadata(title, description, INCLUDE_SITE_TITLE.NO);
     this.showForkMeBlock = this.shouldShowForkMeBlock();
+    if (this.hasUpdated) {
+      this.observeLazyBlocks();
+    }
+  }
+
+  override firstUpdated() {
+    this.observeLazyBlocks();
+  }
+
+  override disconnectedCallback() {
+    this.blockObserver?.disconnect();
+    super.disconnectedCallback();
+  }
+
+  private blockObserver?: IntersectionObserver;
+
+  private observeLazyBlocks() {
+    const tags = Object.keys(lazyBlocks) as LazyBlock[];
+    if (!('IntersectionObserver' in window)) {
+      tags.forEach((tag) => lazyBlocks[tag]());
+      return;
+    }
+
+    this.blockObserver?.disconnect();
+    this.blockObserver = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          this.blockObserver?.unobserve(entry.target);
+          lazyBlocks[entry.target.localName as LazyBlock]?.();
+        }),
+      { rootMargin: '600px 0px' },
+    );
+    tags.forEach((tag) => {
+      const element = this.renderRoot.querySelector(tag);
+      if (element && !customElements.get(tag)) {
+        this.blockObserver?.observe(element);
+      }
+    });
   }
 
   override render() {
@@ -234,7 +277,7 @@ export class HomePage extends ReduxMixin(ThemedElement) {
         hide-logo
       >
         <div class="home-content">
-          <lazy-image class="hero-logo" src="/images/logo.svg" alt="${this.siteTitle}"></lazy-image>
+          <img class="hero-logo" src="/images/logo.svg" alt="${this.siteTitle}" decoding="async" />
 
           <div class="info-items">
             <div class="info-item">${this.city}. ${this.dates}</div>
@@ -327,7 +370,6 @@ export class HomePage extends ReduxMixin(ThemedElement) {
       <latest-posts-block></latest-posts-block>
       <map-block></map-block>
       <partners-block></partners-block>
-      <footer-block></footer-block>
     `;
   }
 }

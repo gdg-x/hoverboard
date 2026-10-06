@@ -1,8 +1,8 @@
-import { Failure, Initialized, RemoteData, Success } from '@abraham/remotedata';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '..';
-import { DialogForm } from '../../models/dialog-form';
-import { Session } from '../../models/session';
+import { Failure, Initialized, type RemoteData, Success } from '@abraham/remotedata';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '..';
+import type { DialogForm } from '../../models/dialog-form';
+import type { Session } from '../../models/session';
 import { dispatch } from '../dispatch';
 
 export enum DIALOG {

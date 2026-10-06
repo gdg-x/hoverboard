@@ -1,6 +1,6 @@
-import { RootState } from '..';
-import { CollectionState, createCollectionSlice } from '../create-collection-slice';
-import { SpeakerWithTags } from '../../models/speaker';
+import type { RootState } from '..';
+import { type CollectionState, createCollectionSlice } from '../create-collection-slice';
+import type { SpeakerWithTags } from '../../models/speaker';
 import { subscribeToSpeakers } from '../../db/speakers';
 
 export type SpeakersState = CollectionState<SpeakerWithTags>;

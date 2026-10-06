@@ -12,19 +12,19 @@ describe('db/generated-speakers', () => {
     vi.clearAllMocks();
   });
 
-  it('logs an error when speaker data is undefined or empty', () => {
+  it('logs an error when speaker data is undefined or empty', async () => {
     const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    saveGeneratedSpeakers(undefined);
+    await saveGeneratedSpeakers(undefined);
     expect(errorSpy).toHaveBeenCalledWith(
       'Attempting to write empty data to Firestore collection: "generatedSpeakers".',
     );
 
-    saveGeneratedSpeakers({});
+    await saveGeneratedSpeakers({});
     expect(errorSpy).toHaveBeenCalledTimes(2);
   });
 
-  it('saves speaker data to generatedSpeakers collection', () => {
+  it('saves speaker data to generatedSpeakers collection', async () => {
     const set = vi.fn();
     const doc = vi.fn().mockReturnValue({ set });
     const collection = vi.fn().mockReturnValue({ doc });
@@ -34,10 +34,42 @@ describe('db/generated-speakers', () => {
       'speaker-1': { name: 'Ada Lovelace' },
     };
 
-    saveGeneratedSpeakers(speakersData);
+    await saveGeneratedSpeakers(speakersData);
 
     expect(collection).toHaveBeenCalledWith('generatedSpeakers');
     expect(doc).toHaveBeenCalledWith('speaker-1');
     expect(set).toHaveBeenCalledWith(speakersData['speaker-1']);
+  });
+
+  it('does not resolve until every write has completed', async () => {
+    let finishWrite!: () => void;
+    const set = vi.fn().mockReturnValue(
+      new Promise<void>((resolve) => {
+        finishWrite = resolve;
+      }),
+    );
+    const doc = vi.fn().mockReturnValue({ set });
+    vi.mocked(getFirestore).mockReturnValue({
+      collection: vi.fn().mockReturnValue({ doc }),
+    } as never);
+    const settled = vi.fn();
+
+    const saving = saveGeneratedSpeakers({ 'speaker-1': { name: 'Ada Lovelace' } }).then(settled);
+    await Promise.resolve();
+    expect(settled).not.toHaveBeenCalled();
+
+    finishWrite();
+    await saving;
+    expect(settled).toHaveBeenCalled();
+  });
+
+  it('rejects when a write fails', async () => {
+    const set = vi.fn().mockRejectedValue(new Error('write failed'));
+    const doc = vi.fn().mockReturnValue({ set });
+    vi.mocked(getFirestore).mockReturnValue({
+      collection: vi.fn().mockReturnValue({ doc }),
+    } as never);
+
+    await expect(saveGeneratedSpeakers({ 'speaker-1': {} })).rejects.toThrow('write failed');
   });
 });

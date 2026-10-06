@@ -1,6 +1,6 @@
 import { orderBy } from 'firebase/firestore';
-import { Session } from '../models/session';
-import { subscribeToCollection, Subscription } from '../utils/firestore';
+import type { Session } from '../models/session';
+import { subscribeToCollection, type Subscription } from '../utils/firestore';
 
 export const subscribeToSessions = (
   onStart: () => void,

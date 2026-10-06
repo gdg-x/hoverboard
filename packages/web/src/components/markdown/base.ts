@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { marked } from 'marked';
@@ -8,20 +9,18 @@ import { ThemedElement } from '../themed-element';
 marked.use(gfmHeadingId());
 
 export class Markdown extends ThemedElement {
-  static override get styles() {
-    return [...super.styles];
-  }
-
   @property()
   content: string = '';
 
   get document(): DocumentFragment {
     const template = document.createElement('template');
     // Override type as no async extensions are in use
-    template.innerHTML = marked.parse(this.content) as string;
+    const rendered = marked.parse(this.content) as string;
+    template.innerHTML = rendered;
     if (hasUnsupportedTags(template.content)) {
       console.warn(`Invalid Markdown contains some of the following tags: ${unsupportedHtmlTags}`);
     }
+    template.innerHTML = DOMPurify.sanitize(rendered);
     return this.addTargets(template.content);
   }
 

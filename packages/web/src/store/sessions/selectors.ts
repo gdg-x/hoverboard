@@ -1,9 +1,9 @@
 import { Success } from '@abraham/remotedata';
 import { createSelector } from '@reduxjs/toolkit';
-import { RootState } from '..';
-import { Filter } from '../../models/filter';
-import { FilterGroup, FilterGroupKey } from '../../models/filter-group';
-import { Session } from '../../models/session';
+import type { RootState } from '..';
+import type { Filter } from '../../models/filter';
+import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
+import type { Session } from '../../models/session';
 import { filters } from '../../utils/data';
 import { selectSessionsState } from '.';
 

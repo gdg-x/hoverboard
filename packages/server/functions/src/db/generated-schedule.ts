@@ -2,17 +2,20 @@ import { DocumentData, getFirestore, WithFieldValue } from 'firebase-admin/fires
 import * as logger from 'firebase-functions/logger';
 import { isEmpty, ScheduleMap } from '../utils/firestore.js';
 
-export const saveGeneratedSchedule = (schedule?: Record<string, unknown> | ScheduleMap): void => {
+export const saveGeneratedSchedule = async (
+  schedule?: Record<string, unknown> | ScheduleMap,
+): Promise<void> => {
   if (!schedule || isEmpty(schedule)) {
     logger.error('Attempting to write empty data to Firestore collection: "generatedSchedule".');
     return;
   }
 
-  for (let index = 0; index < Object.keys(schedule).length; index++) {
-    const key = Object.keys(schedule)[index]!;
-    getFirestore()
-      .collection('generatedSchedule')
-      .doc(key)
-      .set(schedule[key] as WithFieldValue<DocumentData>);
-  }
+  await Promise.all(
+    Object.keys(schedule).map((key) =>
+      getFirestore()
+        .collection('generatedSchedule')
+        .doc(key)
+        .set(schedule[key] as WithFieldValue<DocumentData>),
+    ),
+  );
 };

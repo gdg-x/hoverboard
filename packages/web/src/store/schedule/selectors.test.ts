@@ -1,11 +1,11 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { selectFeaturedSchedule } from './selectors';
-import { Day } from '../../models/day';
-import { Session } from '../../models/session';
-import { GeneratedSessionBlock } from '../../models/time';
-import { Track } from '../../models/track';
-import { RootState } from '..';
+import type { Day } from '../../models/day';
+import type { Session } from '../../models/session';
+import type { GeneratedSessionBlock } from '../../models/time';
+import type { Track } from '../../models/track';
+import type { RootState } from '..';
 
 vi.mock('../../utils/firestore');
 vi.mock('../dispatch');

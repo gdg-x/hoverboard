@@ -1,14 +1,19 @@
-import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
-import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+  type PayloadAction,
+} from '@reduxjs/toolkit';
 import type { Unsubscribe } from 'firebase/firestore';
-import { RootState, store } from '..';
+import { type RootState, store } from '..';
 import {
   removeFeedback,
   saveFeedback,
   subscribeToFeedback as subscribeFeedback,
 } from '../../db/feedback';
-import { Feedback, FeedbackId } from '../../models/feedback';
-import { selectUser, UserState } from '../user';
+import type { Feedback, FeedbackId } from '../../models/feedback';
+import { selectUser, type UserState } from '../user';
 
 export type SessionFeedback = RemoteData<Error, Feedback | false>;
 

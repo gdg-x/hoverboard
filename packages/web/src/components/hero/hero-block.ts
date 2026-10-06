@@ -1,6 +1,5 @@
 // import { PropertyValues } from '@lit/reactive-element';
-import '@power-elements/lazy-image';
-import { css, html, PropertyValues } from 'lit';
+import { css, html, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { setHeroSettings } from '../../store/ui';
@@ -17,81 +16,76 @@ export class HeroBlock extends ThemedElement {
   @property({ type: Boolean, attribute: 'hide-logo' })
   hideLogo = false;
 
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          margin-top: -56px;
-          display: block;
-          border-bottom: 1px solid var(--divider-color);
-        }
+  static override styles = css`
+    :host {
+      margin-top: -56px;
+      display: block;
+      border-bottom: 1px solid var(--divider-color);
+    }
 
-        .hero-block {
-          height: 100%;
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: center;
-          color: inherit;
-        }
+    .hero-block {
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      color: inherit;
+    }
 
-        .hero-overlay {
-          background-color: rgba(0, 0, 0, 0.6);
-          opacity: 0;
-          transition: opacity 0.3s;
-          position: absolute;
-          inset: 0;
-        }
+    .hero-overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      transition: opacity 0.3s;
+      position: absolute;
+      inset: 0;
+    }
 
-        .hero-overlay[show] {
-          opacity: 1;
-        }
+    .hero-overlay[show] {
+      opacity: 1;
+    }
 
-        .hero-image {
-          transition: background-color 0.3s;
-          position: absolute;
-          inset: 0;
-          --lazy-image-fit: cover;
-        }
+    .hero-image {
+      transition: background-color 0.3s;
+      position: absolute;
+      inset: 0;
+      --lazy-image-fit: cover;
+    }
 
-        .container {
-          padding: 0;
-          width: 100%;
-          height: unset;
-          z-index: 0;
-          position: unset;
-        }
+    .container {
+      padding: 0;
+      width: 100%;
+      height: unset;
+      z-index: 0;
+      position: unset;
+    }
 
-        .hero-content {
-          padding: 80px 32px 32px;
-          position: unset;
-        }
+    .hero-content {
+      padding: 80px 32px 32px;
+      position: unset;
+    }
 
-        div ::slotted(.hero-title) {
-          margin: 30px 0;
-          font-size: 40px;
-        }
+    div ::slotted(.hero-title) {
+      margin: 30px 0;
+      font-size: 40px;
+    }
 
-        div ::slotted(.hero-description) {
-          margin-bottom: 30px;
-          max-width: 600px;
-        }
+    div ::slotted(.hero-description) {
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
 
-        @media (min-width: 812px) {
-          :host {
-            margin-top: -64px;
-          }
+    @media (min-width: 812px) {
+      :host {
+        margin-top: -64px;
+      }
 
-          .hero-content {
-            padding-top: 120px;
-            padding-bottom: 60px;
-          }
-        }
-      `,
-    ];
-  }
+      .hero-content {
+        padding-top: 120px;
+        padding-bottom: 60px;
+      }
+    }
+  `;
 
   override render() {
     return html`
@@ -110,11 +104,13 @@ export class HeroBlock extends ThemedElement {
 
   private get image() {
     return html`
-      <lazy-image
+      <img
         class="hero-image"
         src="${this.backgroundImage}"
+        alt=""
+        decoding="async"
         style="${styleMap({ backgroundColor: this.backgroundColor })}"
-      ></lazy-image>
+      />
     `;
   }
 

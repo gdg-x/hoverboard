@@ -1,4 +1,4 @@
-import { HEADER_HEIGHT } from '../components/header-toolbar';
+import { HEADER_HEIGHT } from '../components/shell/header-toolbar';
 
 export enum POSITION {
   TOP = 'top',

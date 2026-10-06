@@ -1,7 +1,7 @@
-import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { dispatch } from './dispatch';
-import { Subscription } from '../utils/firestore';
+import type { Subscription } from '../utils/firestore';
 
 export type CollectionState<T> = RemoteData<Error, T[]>;
 

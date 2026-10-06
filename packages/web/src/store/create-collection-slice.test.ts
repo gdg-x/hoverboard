@@ -1,7 +1,7 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { createCollectionSlice } from './create-collection-slice';
-import { Subscription } from '../utils/firestore';
+import type { Subscription } from '../utils/firestore';
 
 // fetch()'s onStart/onNext/onError callbacks dispatch through the lazily
 // bound `dispatch` from `../dispatch`, which throws unless the real store

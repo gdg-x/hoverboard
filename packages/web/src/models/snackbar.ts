@@ -1,4 +1,4 @@
-import { Action } from './action';
+import type { Action } from './action';
 
 export enum TIMEOUT {
   DEFAULT = 5000,

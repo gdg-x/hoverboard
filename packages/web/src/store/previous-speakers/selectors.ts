@@ -1,9 +1,9 @@
 import { Success } from '@abraham/remotedata';
 import { createSelector } from '@reduxjs/toolkit';
-import { RootState } from '..';
-import { PreviousSpeaker } from '../../models/previous-speaker';
+import type { RootState } from '..';
+import type { PreviousSpeaker } from '../../models/previous-speaker';
 import { randomOrder } from '../../utils/arrays';
-import { selectViewport, Viewport } from '../ui';
+import { selectViewport, type Viewport } from '../ui';
 import { selectPreviousSpeakersState } from '.';
 
 const selectSpeakerId = (_state: RootState, speakerId: string) => speakerId;

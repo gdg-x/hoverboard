@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Snackbar } from '../../models/snackbar';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { Snackbar } from '../../models/snackbar';
 
 let id = 0;
 

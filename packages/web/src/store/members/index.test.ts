@@ -1,9 +1,9 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectMembers } from '.';
-import { Member } from '../../models/member';
+import type { Member } from '../../models/member';
 import { subscribeToMembers } from '../../db/members';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../../db/members');
 vi.mock('../dispatch');

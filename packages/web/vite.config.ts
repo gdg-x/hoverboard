@@ -28,12 +28,16 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: production,
     minify: production,
-    target: 'es2019',
+    target: 'es2022',
     rollupOptions: {
       treeshake: production,
       output: {
         entryFileNames: production ? '[name]-[hash].js' : '[name].js',
         chunkFileNames: production ? '[name]-[hash].js' : '[name].js',
+        // Keeps the rarely changing Firebase SDK in its own cacheable chunk.
+        codeSplitting: {
+          groups: [{ name: 'firebase', test: /node_modules[\\/](@firebase|firebase)[\\/]/ }],
+        },
       },
     },
   },

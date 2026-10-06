@@ -1,18 +1,18 @@
-import { RemoteData, Success } from '@abraham/remotedata';
+import { type RemoteData, Success } from '@abraham/remotedata';
 import {
   collection,
   collectionGroup,
   doc,
-  DocumentData,
+  type DocumentData,
   DocumentSnapshot,
   onSnapshot,
   orderBy,
   query,
   QueryDocumentSnapshot,
-  Unsubscribe,
+  type Unsubscribe,
 } from 'firebase/firestore';
 import { db } from '../firebase';
-import { Id, ParentId } from '../models/types';
+import type { Id, ParentId } from '../models/types';
 
 export const mergeDataAndId = <T>(
   snapshot: QueryDocumentSnapshot<DocumentData> | DocumentSnapshot<DocumentData>,

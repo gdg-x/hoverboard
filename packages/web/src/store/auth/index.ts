@@ -1,8 +1,8 @@
-import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { FirebaseError } from 'firebase/app';
 import {
-  AuthError,
+  type AuthError,
   AuthErrorCodes,
   fetchSignInMethodsForEmail,
   getAuth,
@@ -12,9 +12,9 @@ import {
   signInWithPopup,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
-import { RootState } from '..';
+import type { RootState } from '..';
 import { firebaseApp } from '../../firebase';
-import { FirebaseUser } from '../../models/user';
+import type { FirebaseUser } from '../../models/user';
 import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
 import { dispatch } from '../dispatch';

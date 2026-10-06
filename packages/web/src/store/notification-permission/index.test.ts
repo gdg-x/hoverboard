@@ -6,9 +6,11 @@ import reducer, {
   requestNotificationPermission,
   unsupportedNotificationPermission,
 } from '.';
+import { getId, getInstallations } from 'firebase/installations';
 import { getMessaging, getToken } from 'firebase/messaging';
 
 vi.mock('firebase/messaging');
+vi.mock('firebase/installations');
 
 const setNotification = (
   permission: NotificationPermission,
@@ -65,10 +67,12 @@ describe('notificationPermission', () => {
     });
   });
 
-  it('requests permission and stores the token when granted', async () => {
+  it('requests permission and stores the installation id when granted', async () => {
     const requestPermission = setNotification('default', vi.fn().mockResolvedValue('granted'));
     vi.mocked(getMessaging).mockReturnValue({} as never);
     vi.mocked(getToken).mockResolvedValue('token-123');
+    vi.mocked(getInstallations).mockReturnValue({} as never);
+    vi.mocked(getId).mockResolvedValue('fid-123');
 
     const action = await requestNotificationPermission(PROMPT_USER.YES)(
       vi.fn(),
@@ -79,8 +83,9 @@ describe('notificationPermission', () => {
     expect(requestPermission).toHaveBeenCalled();
     expect(getMessaging).toHaveBeenCalled();
     expect(getToken).toHaveBeenCalled();
+    expect(getId).toHaveBeenCalled();
     expect(reducer(initialNotificationPermissionState, action)).toStrictEqual({
-      value: new Success('token-123'),
+      value: new Success('fid-123'),
     });
   });
 

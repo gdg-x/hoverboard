@@ -1,28 +1,25 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
-import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import '../components/content-loader';
-import '../components/filter-menu';
-import '../components/footer-block';
+import '../components/shared/content-loader';
+import '../components/shared/filter-menu';
 import '../components/hero/simple-hero';
-import '../components/hoverboard-icon';
-import '../components/previous-speakers-block';
-import '../components/text-truncate';
-import { ThemedElement } from '../components/themed-element';
-import { Filter } from '../models/filter';
-import { FilterGroup, FilterGroupKey } from '../models/filter-group';
-import { SpeakerWithTags } from '../models/speaker';
+import '../components/shared/hoverboard-icon';
+import '../components/shared/previous-speakers-block';
+import '../components/shared/text-truncate';
+import type { Filter } from '../models/filter';
+import { type FilterGroup, FilterGroupKey } from '../models/filter-group';
+import type { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
-import { RootState } from '../store';
+import type { RootState } from '../store';
 import { selectFilters } from '../store/filters';
-import { ReduxMixin } from '../store/mixin';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
-import { SpeakersState, selectSpeakersState } from '../store/speakers';
+import { type SpeakersState, selectSpeakersState } from '../store/speakers';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
+import { StatefulElement } from '../components/stateful-element';
 
 // Stable module-level reference (rather than an inline literal in
 // `stateChanged`) so `selectFilterGroups`'s `createSelector` memoization
@@ -30,161 +27,156 @@ import { updateMetadata } from '../utils/metadata';
 const SPEAKER_FILTER_GROUPS = [FilterGroupKey.tags];
 
 @customElement('speakers-page')
-export class SpeakersPage extends ReduxMixin(ThemedElement) {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          display: block;
-          height: 100%;
-        }
+export class SpeakersPage extends StatefulElement {
+  static override styles = css`
+    :host {
+      display: block;
+      height: 100%;
+    }
 
-        .container {
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-gap: 16px;
-          min-height: 80%;
-        }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 16px;
+      min-height: 80%;
+    }
 
-        .speaker {
-          padding: 32px 24px;
-          background: var(--primary-background-color);
-          text-align: center;
-          transition: box-shadow var(--animation);
-        }
+    .speaker {
+      padding: 32px 24px;
+      background: var(--primary-background-color);
+      text-align: center;
+      transition: box-shadow var(--animation);
+    }
 
-        .speaker:hover {
-          box-shadow: var(--box-shadow);
-        }
+    .speaker:hover {
+      box-shadow: var(--box-shadow);
+    }
 
-        .photo {
-          display: inline-block;
-          --lazy-image-width: 128px;
-          --lazy-image-height: 128px;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-          background-color: var(--secondary-background-color);
-          border-radius: 50%;
-          overflow: hidden;
-          transform: translateZ(0);
-        }
+    .photo {
+      display: inline-block;
+      --lazy-image-width: 128px;
+      --lazy-image-height: 128px;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+      background-color: var(--secondary-background-color);
+      border-radius: 50%;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
 
-        .badges {
-          position: absolute;
-          top: 0;
-          left: calc(50% + 32px);
-          display: flex;
-        }
+    .badges {
+      position: absolute;
+      top: 0;
+      left: calc(50% + 32px);
+      display: flex;
+    }
 
-        .badge {
-          margin-left: -10px;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          border: 2px solid #fff;
-          transition: transform var(--animation);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
+    .badge {
+      margin-left: -10px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      transition: transform var(--animation);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .badge:hover {
-          transform: scale(1.1);
-        }
+    .badge:hover {
+      transform: scale(1.1);
+    }
 
-        .badge:nth-of-type(2) {
-          transform: translate(25%, 75%);
-        }
+    .badge:nth-of-type(2) {
+      transform: translate(25%, 75%);
+    }
 
-        .badge:nth-of-type(2):hover {
-          transform: translate3d(25%, 75%, 20px) scale(1.1);
-        }
+    .badge:nth-of-type(2):hover {
+      transform: translate3d(25%, 75%, 20px) scale(1.1);
+    }
 
-        .badge:nth-of-type(3) {
-          transform: translate(10%, 180%);
-        }
+    .badge:nth-of-type(3) {
+      transform: translate(10%, 180%);
+    }
 
-        .badge:nth-of-type(3):hover {
-          transform: translate3d(10%, 180%, 20px) scale(1.1);
-        }
+    .badge:nth-of-type(3):hover {
+      transform: translate3d(10%, 180%, 20px) scale(1.1);
+    }
 
-        .badge-icon {
-          width: 12px;
-          height: 12px;
-          color: #fff;
-        }
+    .badge-icon {
+      width: 12px;
+      height: 12px;
+      color: #fff;
+    }
 
-        .company-logo {
-          --lazy-image-width: 100%;
-          --lazy-image-height: 16px;
-          --lazy-image-fit: contain;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-        }
+    .company-logo {
+      --lazy-image-width: 100%;
+      --lazy-image-height: 16px;
+      --lazy-image-fit: contain;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+    }
 
-        .description {
-          color: var(--primary-text-color);
-        }
+    .description {
+      color: var(--primary-text-color);
+    }
 
-        .speaker-photo {
-          position: relative;
-        }
+    .speaker-photo {
+      position: relative;
+    }
 
-        .name {
-          margin-top: 8px;
-          line-height: 1;
-        }
+    .name {
+      margin-top: 8px;
+      line-height: 1;
+    }
 
-        .origin {
-          margin-top: 4px;
-          font-size: 14px;
-          line-height: 1.1;
-        }
+    .origin {
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 1.1;
+    }
 
-        .bio {
-          margin-top: 16px;
-          color: var(--secondary-text-color);
-        }
+    .bio {
+      margin-top: 16px;
+      color: var(--secondary-text-color);
+    }
 
-        .contacts {
-          margin-top: 16px;
-        }
+    .contacts {
+      margin-top: 16px;
+    }
 
-        .social-icon {
-          padding: 6px;
-          width: 32px;
-          height: 32px;
-          color: var(--secondary-text-color);
-        }
+    .social-icon {
+      padding: 6px;
+      width: 32px;
+      height: 32px;
+      color: var(--secondary-text-color);
+    }
 
-        .progress {
-          width: 100%;
-          --md-linear-progress-active-indicator-color: var(--default-primary-color);
-          --md-linear-progress-track-color: var(--default-primary-color);
-        }
+    .progress {
+      width: 100%;
+      --md-linear-progress-active-indicator-color: var(--default-primary-color);
+      --md-linear-progress-track-color: var(--default-primary-color);
+    }
 
-        @media (min-width: 640px) {
-          .container {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
+    @media (min-width: 640px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-        @media (min-width: 812px) {
-          .container {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
+    @media (min-width: 812px) {
+      .container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
 
-        @media (min-width: 1024px) {
-          .container {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
-      `,
-    ];
-  }
+    @media (min-width: 1024px) {
+      .container {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  `;
 
   private heroSettings = heroSettings.speakers;
   private contentLoaders = contentLoaders;
@@ -253,7 +245,13 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
           (speaker) => html`
             <a class="speaker card" href=${this.speakerUrl(speaker.id)}>
               <div class="speaker-photo">
-                <lazy-image class="photo" src=${speaker.photoUrl} alt=${speaker.name}></lazy-image>
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  class="photo"
+                  src=${speaker.photoUrl}
+                  alt=${speaker.name}
+                />
                 <div class="badges">
                   ${speaker.badges?.map(
                     (badge) => html`
@@ -271,11 +269,13 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
                 </div>
               </div>
 
-              <lazy-image
+              <img
+                loading="lazy"
+                decoding="async"
                 class="company-logo"
                 src=${speaker.companyLogoUrl}
                 alt=${speaker.company}
-              ></lazy-image>
+              />
 
               <div class="description">
                 <h2 class="name">${speaker.name}</h2>
@@ -301,8 +301,6 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
       </div>
 
       <previous-speakers-block></previous-speakers-block>
-
-      <footer-block></footer-block>
     `;
   }
 }

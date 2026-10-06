@@ -2,8 +2,8 @@ import { Success } from '@abraham/remotedata';
 import { describe, expect, it } from 'vitest';
 import { selectFilterGroups, selectSession } from './selectors';
 import { FilterGroupKey } from '../../models/filter-group';
-import { Session } from '../../models/session';
-import { RootState } from '..';
+import type { Session } from '../../models/session';
+import type { RootState } from '..';
 
 const sessions: Session[] = [
   { id: '1', title: 'Talk one', description: '', tags: ['a11y', 'web'], complexity: 'Beginner' },

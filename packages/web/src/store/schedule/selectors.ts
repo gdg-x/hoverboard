@@ -1,11 +1,11 @@
 import { Success } from '@abraham/remotedata';
 import { createSelector } from '@reduxjs/toolkit';
-import { RootState } from '..';
-import { Day } from '../../models/day';
-import { Session } from '../../models/session';
-import { GeneratedSessionBlock, Time } from '../../models/time';
-import { Timeslot } from '../../models/timeslot';
-import { FeaturedSessions, selectFeaturedSessions } from '../featured-sessions';
+import type { RootState } from '..';
+import type { Day } from '../../models/day';
+import type { Session } from '../../models/session';
+import type { GeneratedSessionBlock, Time } from '../../models/time';
+import type { Timeslot } from '../../models/timeslot';
+import { type FeaturedSessions, selectFeaturedSessions } from '../featured-sessions';
 import { selectScheduleState } from '.';
 
 const selectSchedule = (state: RootState): Day[] => {

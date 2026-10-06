@@ -1,27 +1,27 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
-import '@power-elements/lazy-image';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { RouterLocation } from '@vaadin/router';
+import type { RouterLocation } from '@vaadin/router';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../components/content-loader';
-import '../components/footer-block';
-import '../components/hoverboard-icon';
-import '../components/previous-speakers-block';
-import { ThemedElement } from '../components/themed-element';
-import { Badge } from '../models/badge';
-import { PreviousSessionWithYear } from '../models/previous-session';
-import { PreviousSpeaker } from '../models/previous-speaker';
+import '../components/shared/content-loader';
+import '../components/shared/hoverboard-icon';
+import '../components/shared/previous-speakers-block';
+import type { Badge } from '../models/badge';
+import type { PreviousSessionWithYear } from '../models/previous-session';
+import type { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
-import { RootState, store } from '../store';
-import { ReduxMixin } from '../store/mixin';
+import { type RootState, store } from '../store';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
-import { PreviousSpeakersState, selectPreviousSpeakersState } from '../store/previous-speakers';
+import {
+  type PreviousSpeakersState,
+  selectPreviousSpeakersState,
+} from '../store/previous-speakers';
 import { sessionDetails, speakerDetails, speakers } from '../utils/data';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
+import { StatefulElement } from '../components/stateful-element';
 
 // `PreviousSpeaker.badges`/`pronouns` are not currently declared on the model
 // (no action/selector/state populates them today), but the original template
@@ -31,147 +31,142 @@ import { getVariableColor } from '../utils/styles';
 type PreviousSpeakerWithDetails = PreviousSpeaker & { badges?: Badge[]; pronouns?: string };
 
 @customElement('previous-speaker-page')
-export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        :host {
-          background: #fff;
-          box-shadow: var(--box-shadow);
-          color: var(--primary-text-color);
-          display: block;
-          height: 100%;
-          margin: 0;
-          width: 100%;
-        }
+export class PreviousSpeakerPage extends StatefulElement {
+  static override styles = css`
+    :host {
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      color: var(--primary-text-color);
+      display: block;
+      height: 100%;
+      margin: 0;
+      width: 100%;
+    }
 
-        .content {
-          position: relative;
-          font-size: 15px;
-          line-height: 1.87;
-        }
+    .content {
+      position: relative;
+      font-size: 15px;
+      line-height: 1.87;
+    }
 
-        .photo {
-          margin-right: 16px;
-          --lazy-image-width: 96px;
-          --lazy-image-height: 96px;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-          overflow: hidden;
-          border-radius: 50%;
-          background-color: var(--contrast-additional-background-color);
-          transform: translateZ(0);
-          flex-shrink: 0;
-        }
+    .photo {
+      margin-right: 16px;
+      --lazy-image-width: 96px;
+      --lazy-image-height: 96px;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+      overflow: hidden;
+      border-radius: 50%;
+      background-color: var(--contrast-additional-background-color);
+      transform: translateZ(0);
+      flex-shrink: 0;
+    }
 
-        .name {
-          line-height: 1.2;
-          flex: 1;
-          flex-basis: 1px;
-        }
+    .name {
+      line-height: 1.2;
+      flex: 1;
+      flex-basis: 1px;
+    }
 
-        .subtitle {
-          font-size: 16px;
-          color: var(--secondary-text-color);
-        }
+    .subtitle {
+      font-size: 16px;
+      color: var(--secondary-text-color);
+    }
 
-        .badge:not(:last-of-type)::after {
-          margin-left: -4px;
-          content: ',';
-        }
+    .badge:not(:last-of-type)::after {
+      margin-left: -4px;
+      content: ',';
+    }
 
-        .tags {
-          display: flex;
-          flex-wrap: wrap;
-          margin-top: 8px;
-        }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
 
-        .star-rating {
-          display: inline-block;
-          vertical-align: middle;
-        }
+    .star-rating {
+      display: inline-block;
+      vertical-align: middle;
+    }
 
-        .meta-info {
-          line-height: 1.6;
-        }
+    .meta-info {
+      line-height: 1.6;
+    }
 
-        .description {
-          margin: 24px 0 32px;
-          max-width: 700px;
-        }
+    .description {
+      margin: 24px 0 32px;
+      max-width: 700px;
+    }
 
-        .action {
-          margin-right: 16px;
-          color: var(--secondary-text-color);
-          cursor: pointer;
-          user-select: none;
-        }
+    .action {
+      margin-right: 16px;
+      color: var(--secondary-text-color);
+      cursor: pointer;
+      user-select: none;
+    }
 
-        /* Only the download links (icon + label) originally had layout/horizontal/center;
+    /* Only the download links (icon + label) originally had layout/horizontal/center;
            the social icon links did not, so this modifier keeps that distinction. */
-        .action--download {
-          display: flex;
-          align-items: center;
-        }
+    .action--download {
+      display: flex;
+      align-items: center;
+    }
 
-        .action hoverboard-icon {
-          margin-right: 4px;
-          width: 18px;
-          height: 18px;
-        }
+    .action hoverboard-icon {
+      margin-right: 4px;
+      width: 18px;
+      height: 18px;
+    }
 
-        .additional-sections {
-          margin-top: 32px;
-        }
+    .additional-sections {
+      margin-top: 32px;
+    }
 
-        .actions {
-          display: flex;
-        }
+    .actions {
+      display: flex;
+    }
 
-        .section {
-          margin-top: 16px;
-          display: block;
-          color: var(--primary-text-color);
-          flex: 1;
-          flex-basis: 1px;
-        }
+    .section {
+      margin-top: 16px;
+      display: block;
+      color: var(--primary-text-color);
+      flex: 1;
+      flex-basis: 1px;
+    }
 
-        .header-content,
-        .section-content {
-          display: flex;
-          align-items: center;
-        }
+    .header-content,
+    .section-content {
+      display: flex;
+      align-items: center;
+    }
 
-        .section-photo {
-          margin-right: 16px;
-          width: 48px;
-          height: 48px;
-          background-color: var(--secondary-background-color);
-          border-radius: 50%;
-          overflow: hidden;
-          transform: translateZ(0);
-        }
+    .section-photo {
+      margin-right: 16px;
+      width: 48px;
+      height: 48px;
+      background-color: var(--secondary-background-color);
+      border-radius: 50%;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
 
-        .section-primary-text {
-          margin-bottom: 4px;
-          line-height: 1.2;
-        }
+    .section-primary-text {
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
 
-        .section-secondary-text {
-          font-size: 12px;
-          line-height: 1;
-        }
+    .section-secondary-text {
+      font-size: 12px;
+      line-height: 1;
+    }
 
-        .progress {
-          width: 100%;
-          --md-linear-progress-active-indicator-color: var(--default-primary-color);
-          --md-linear-progress-track-color: var(--default-primary-color);
-        }
-      `,
-    ];
-  }
+    .progress {
+      width: 100%;
+      --md-linear-progress-active-indicator-color: var(--default-primary-color);
+      --md-linear-progress-track-color: var(--default-primary-color);
+    }
+  `;
 
   private previousYear = speakers.previousYear;
   private sessionDetails = sessionDetails;
@@ -252,11 +247,13 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
     return html`
       <simple-hero page="speakers">
         <div class="dialog-container header-content">
-          <lazy-image
+          <img
+            loading="lazy"
+            decoding="async"
             class="photo"
             src=${speaker?.photoUrl ?? ''}
             alt=${speaker?.name ?? ''}
-          ></lazy-image>
+          />
           <div>
             <h2 class="name">${speaker?.name ?? ''}</h2>
             <div class="subtitle">${this.subtitle}</div>
@@ -391,8 +388,6 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
       </div>
 
       <previous-speakers-block></previous-speakers-block>
-
-      <footer-block></footer-block>
     `;
   }
 }

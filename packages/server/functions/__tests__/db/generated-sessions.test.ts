@@ -12,19 +12,19 @@ describe('db/generated-sessions', () => {
     vi.clearAllMocks();
   });
 
-  it('logs an error when session data is undefined or empty', () => {
+  it('logs an error when session data is undefined or empty', async () => {
     const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    saveGeneratedSessions(undefined);
+    await saveGeneratedSessions(undefined);
     expect(errorSpy).toHaveBeenCalledWith(
       'Attempting to write empty data to Firestore collection: "generatedSessions".',
     );
 
-    saveGeneratedSessions({});
+    await saveGeneratedSessions({});
     expect(errorSpy).toHaveBeenCalledTimes(2);
   });
 
-  it('saves session data to generatedSessions collection', () => {
+  it('saves session data to generatedSessions collection', async () => {
     const set = vi.fn();
     const doc = vi.fn().mockReturnValue({ set });
     const collection = vi.fn().mockReturnValue({ doc });
@@ -34,10 +34,42 @@ describe('db/generated-sessions', () => {
       'session-1': { title: 'Intro to AI' },
     };
 
-    saveGeneratedSessions(sessionsData);
+    await saveGeneratedSessions(sessionsData);
 
     expect(collection).toHaveBeenCalledWith('generatedSessions');
     expect(doc).toHaveBeenCalledWith('session-1');
     expect(set).toHaveBeenCalledWith(sessionsData['session-1']);
+  });
+
+  it('does not resolve until every write has completed', async () => {
+    let finishWrite!: () => void;
+    const set = vi.fn().mockReturnValue(
+      new Promise<void>((resolve) => {
+        finishWrite = resolve;
+      }),
+    );
+    const doc = vi.fn().mockReturnValue({ set });
+    vi.mocked(getFirestore).mockReturnValue({
+      collection: vi.fn().mockReturnValue({ doc }),
+    } as never);
+    const settled = vi.fn();
+
+    const saving = saveGeneratedSessions({ 'session-1': { title: 'Intro to AI' } }).then(settled);
+    await Promise.resolve();
+    expect(settled).not.toHaveBeenCalled();
+
+    finishWrite();
+    await saving;
+    expect(settled).toHaveBeenCalled();
+  });
+
+  it('rejects when a write fails', async () => {
+    const set = vi.fn().mockRejectedValue(new Error('write failed'));
+    const doc = vi.fn().mockReturnValue({ set });
+    vi.mocked(getFirestore).mockReturnValue({
+      collection: vi.fn().mockReturnValue({ doc }),
+    } as never);
+
+    await expect(saveGeneratedSessions({ 'session-1': {} })).rejects.toThrow('write failed');
   });
 });

@@ -12,9 +12,9 @@ import {
   saveFeedback,
   subscribeToFeedback as subscribeFeedback,
 } from '../../db/feedback';
-import { Feedback } from '../../models/feedback';
+import type { Feedback } from '../../models/feedback';
 import { store } from '..';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../../db/feedback');
 vi.mock('..', () => ({

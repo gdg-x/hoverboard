@@ -9,10 +9,10 @@ import reducer, {
   selectIsDialogOpen,
   setDialogError,
 } from '.';
-import { DialogForm } from '../../models/dialog-form';
-import { Session } from '../../models/session';
+import type { DialogForm } from '../../models/dialog-form';
+import type { Session } from '../../models/session';
 import { dispatch } from '../dispatch';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../dispatch');
 

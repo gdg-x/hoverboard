@@ -1,6 +1,6 @@
 import { orderBy } from 'firebase/firestore';
-import { Photo } from '../models/photo';
-import { subscribeToCollection, Subscription } from '../utils/firestore';
+import type { Photo } from '../models/photo';
+import { subscribeToCollection, type Subscription } from '../utils/firestore';
 
 export const subscribeToGallery = (
   onStart: () => void,

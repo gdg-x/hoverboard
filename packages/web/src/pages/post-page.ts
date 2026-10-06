@@ -1,52 +1,45 @@
-import { Failure, Initialized, RemoteData, Success } from '@abraham/remotedata';
+import { Failure, Initialized, type RemoteData, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { RouterLocation } from '@vaadin/router';
-import '../components/footer-block';
+import type { RouterLocation } from '@vaadin/router';
 import '../components/hero/hero-block';
 import '../components/markdown/long-markdown';
-import '../components/posts-list';
-import { ThemedElement } from '../components/themed-element';
-import { Post } from '../models/post';
+import '../components/shared/posts-list';
+import type { Post } from '../models/post';
 import { router } from '../router';
-import { RootState } from '../store';
-import { BlogState, selectBlogPosts } from '../store/blog';
-import { ReduxMixin } from '../store/mixin';
+import type { RootState } from '../store';
+import { type BlogState, selectBlogPosts } from '../store/blog';
 import { blog } from '../utils/data';
 import { getDate } from '../utils/dates';
 import { updateImageMetadata } from '../utils/metadata';
+import { StatefulElement } from '../components/stateful-element';
 
 @customElement('post-page')
-export class PostPage extends ReduxMixin(ThemedElement) {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        .post {
-          margin-bottom: 32px;
-        }
+export class PostPage extends StatefulElement {
+  static override styles = css`
+    .post {
+      margin-bottom: 32px;
+    }
 
-        .date {
-          font-size: 12px;
-          text-transform: uppercase;
-          color: var(--secondary-text-color);
-        }
+    .date {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--secondary-text-color);
+    }
 
-        .suggested-posts {
-          margin: 24px 0 -20px;
-          padding-top: 24px;
-          background-color: var(--primary-background-color);
-        }
+    .suggested-posts {
+      margin: 24px 0 -20px;
+      padding-top: 24px;
+      background-color: var(--primary-background-color);
+    }
 
-        @media (min-width: 640px) {
-          .suggested-posts {
-            margin-top: 48px;
-            padding-bottom: 36px;
-          }
-        }
-      `,
-    ];
-  }
+    @media (min-width: 640px) {
+      .suggested-posts {
+        margin-top: 48px;
+        padding-bottom: 36px;
+      }
+    }
+  `;
 
   @property({ type: Object })
   posts: BlogState = new Initialized();
@@ -139,8 +132,6 @@ export class PostPage extends ReduxMixin(ThemedElement) {
           <posts-list .posts=${this.suggestedPosts}></posts-list>
         </div>
       </div>
-
-      <footer-block></footer-block>
     `;
   }
 }

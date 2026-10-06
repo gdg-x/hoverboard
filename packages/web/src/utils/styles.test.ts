@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, afterEach } from 'vitest';
-import { generateClassName, getVariableColor, ShadyCSSGlobal } from './styles';
+import { generateClassName, getVariableColor, type ShadyCSSGlobal } from './styles';
 
 describe('generateClassName', () => {
   it('replaces non-word characters with a dash', () => {

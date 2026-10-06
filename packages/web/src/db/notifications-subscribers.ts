@@ -1,6 +1,6 @@
 import { deleteDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
-import { subscribeToDocument, Subscription } from '../utils/firestore';
+import { subscribeToDocument, type Subscription } from '../utils/firestore';
 
 export const subscribeToNotificationsSubscribers = (
   token: string,

@@ -1,6 +1,6 @@
-import { RootState } from '..';
-import { CollectionState, createCollectionSlice } from '../create-collection-slice';
-import { Post } from '../../models/post';
+import type { RootState } from '..';
+import { type CollectionState, createCollectionSlice } from '../create-collection-slice';
+import type { Post } from '../../models/post';
 import { subscribeToBlog } from '../../db/blog';
 
 export type BlogState = CollectionState<Post>;

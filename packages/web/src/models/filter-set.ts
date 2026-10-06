@@ -1,4 +1,4 @@
-import { Filter } from './filter';
+import type { Filter } from './filter';
 import { Filterable } from './filterable';
 
 export interface FilterSet {

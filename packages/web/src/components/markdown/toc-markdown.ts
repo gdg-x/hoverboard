@@ -9,99 +9,94 @@ type Tree = {
 
 @customElement('toc-markdown')
 export class TocMarkdown extends Markdown {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        img {
-          width: 100%;
-        }
+  static override styles = css`
+    img {
+      width: 100%;
+    }
 
-        .content-wrapper {
-          background-color: var(--secondary-background-color);
-          width: 100%;
-          overflow: hidden;
-        }
+    .content-wrapper {
+      background-color: var(--secondary-background-color);
+      width: 100%;
+      overflow: hidden;
+    }
 
-        .content {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-        }
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
 
-        .col {
-          font-size: 32px;
-          line-height: 48px;
-          margin-bottom: 24px;
-          z-index: 2;
-        }
+    .col {
+      font-size: 32px;
+      line-height: 48px;
+      margin-bottom: 24px;
+      z-index: 2;
+    }
 
-        .col-content {
-          line-height: 32px;
-          display: block;
-          font-size: 16px;
-        }
+    .col-content {
+      line-height: 32px;
+      display: block;
+      font-size: 16px;
+    }
 
-        h2 {
-          line-height: 2;
-        }
+    h2 {
+      line-height: 2;
+    }
 
-        @media (min-width: 640px) {
-          .content,
-          .markdown-text,
-          .markdown-wrapper {
-            padding: 0 18px;
-          }
+    @media (min-width: 640px) {
+      .content,
+      .markdown-text,
+      .markdown-wrapper {
+        padding: 0 18px;
+      }
 
-          .col {
-            margin-right: 24px;
-          }
+      .col {
+        margin-right: 24px;
+      }
 
-          .col:last-of-type {
-            margin-right: 0;
-          }
+      .col:last-of-type {
+        margin-right: 0;
+      }
 
-          h2 {
-            font-size: 40px;
-            width: 40%;
-            margin-bottom: 0;
-            display: inline-block;
-            transform: translateY(85%);
-            vertical-align: bottom;
-            line-height: 1;
-          }
+      h2 {
+        font-size: 40px;
+        width: 40%;
+        margin-bottom: 0;
+        display: inline-block;
+        transform: translateY(85%);
+        vertical-align: bottom;
+        line-height: 1;
+      }
 
-          h3 {
-            line-height: 1.5;
-          }
+      h3 {
+        line-height: 1.5;
+      }
 
-          h3,
-          h4,
-          p,
-          ol,
-          ul {
-            margin-left: 40%;
-          }
+      h3,
+      h4,
+      p,
+      ol,
+      ul {
+        margin-left: 40%;
+      }
 
-          h3::after {
-            display: none;
-          }
+      h3::after {
+        display: none;
+      }
 
-          h3:hover::after {
-            display: inline-block;
-          }
-        }
+      h3:hover::after {
+        display: inline-block;
+      }
+    }
 
-        @media (min-width: 812px) {
-          .content,
-          .markdown-text,
-          .markdown-wrapper {
-            padding: 0 40px;
-          }
-        }
-      `,
-    ];
-  }
+    @media (min-width: 812px) {
+      .content,
+      .markdown-text,
+      .markdown-wrapper {
+        padding: 0 40px;
+      }
+    }
+  `;
 
   override render() {
     return html`

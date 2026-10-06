@@ -15,6 +15,7 @@ export const removeUserTokens = (tokensToUsers: Record<string, string>): Promise
 
   const promises = Object.keys(userTokens).map((userId) => {
     const ref = getFirestore().collection('notificationsUsers').doc(userId);
+    const tokensToRemove = new Set(userTokens[userId]);
 
     return getFirestore().runTransaction((transaction) =>
       transaction.get(ref).then((doc) => {
@@ -22,14 +23,13 @@ export const removeUserTokens = (tokensToUsers: Record<string, string>): Promise
           return;
         }
 
-        const val = doc.data() || {};
-        const newVal = Object.keys(val).reduce((acc: Record<string, boolean>, token) => {
-          if (tokensToUsers[token]) return acc;
+        const { tokens = {} } = (doc.data() || {}) as { tokens?: Record<string, true> };
+        const remainingTokens = Object.keys(tokens).reduce<Record<string, true>>(
+          (acc, token) => (tokensToRemove.has(token) ? acc : { ...acc, [token]: true as const }),
+          {},
+        );
 
-          return { ...acc, [token]: true };
-        }, {});
-
-        transaction.set(ref, newVal);
+        transaction.set(ref, { tokens: remainingTokens });
       }),
     );
   });

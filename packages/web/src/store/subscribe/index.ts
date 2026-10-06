@@ -1,7 +1,7 @@
-import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { saveSubscriber } from '../../db/subscribers';
-import { DialogData } from '../../models/dialog-form';
+import type { DialogData } from '../../models/dialog-form';
 import { subscribeBlock } from '../../utils/data';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';

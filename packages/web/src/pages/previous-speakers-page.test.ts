@@ -2,7 +2,7 @@ import { Failure, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { PreviousSpeaker } from '../models/previous-speaker';
+import type { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { heroSettings, speakers } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
@@ -49,6 +49,28 @@ describe('previous-speakers-page', () => {
     );
     expect(shadowRoot).toHaveTextContent('Previous Speaker');
     expect(shadowRoot).toHaveTextContent('2024');
+  });
+
+  it('renders the company logo with the company name as alt text', async () => {
+    vi.mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
+    const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
+      html`<previous-speakers-page></previous-speakers-page>`,
+    );
+    element.previousSpeakers = new Success([{ ...speaker, companyLogo: '/logo.svg' }]);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.company-logo')).toHaveAttribute('alt', 'Example');
+  });
+
+  it('does not render a company logo image without a source', async () => {
+    vi.mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
+    const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
+      html`<previous-speakers-page></previous-speakers-page>`,
+    );
+    element.previousSpeakers = new Success([speaker]);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.company-logo')).toBeNull();
   });
 
   it('triggers the fetch and starts in the pending state', async () => {

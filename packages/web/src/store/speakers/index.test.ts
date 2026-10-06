@@ -1,9 +1,9 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectSpeakersState } from '.';
-import { SpeakerWithTags } from '../../models/speaker';
+import type { SpeakerWithTags } from '../../models/speaker';
 import { subscribeToSpeakers } from '../../db/speakers';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../../db/speakers');
 vi.mock('../dispatch');

@@ -1,6 +1,6 @@
-import { RootState } from '..';
-import { CollectionState, createCollectionSlice } from '../create-collection-slice';
-import { Session } from '../../models/session';
+import type { RootState } from '..';
+import { type CollectionState, createCollectionSlice } from '../create-collection-slice';
+import type { Session } from '../../models/session';
 import { subscribeToSessions } from '../../db/sessions';
 
 export type SessionsState = CollectionState<Session>;

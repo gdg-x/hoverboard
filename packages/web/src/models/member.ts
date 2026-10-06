@@ -1,5 +1,5 @@
-import { Social } from './social';
-import { ParentId } from './types';
+import type { Social } from './social';
+import type { ParentId } from './types';
 
 export interface MemberData {
   name: string;

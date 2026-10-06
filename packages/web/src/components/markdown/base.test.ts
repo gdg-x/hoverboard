@@ -50,6 +50,18 @@ Some **bold** text"
     warn.mockRestore();
   });
 
+  it('removes scripts, event handlers and javascript URLs', async () => {
+    const { shadowRoot } = await fixture<MarkdownTestSubject>(
+      html`<markdown-test-subject
+        .content=${'<script>window.xss = 1</script><img src=x onerror="window.xss = 1">[bad](javascript:alert(1))'}
+      ></markdown-test-subject>`,
+    );
+
+    expect(shadowRoot.querySelector('script')).toBeNull();
+    expect(shadowRoot.querySelector('img')?.hasAttribute('onerror')).toBe(false);
+    expect(shadowRoot.querySelector('a')?.getAttribute('href') ?? '').not.toContain('javascript');
+  });
+
   it('does not warn for supported content', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
 

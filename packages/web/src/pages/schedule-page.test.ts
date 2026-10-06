@@ -1,5 +1,5 @@
 import { Pending } from '@abraham/remotedata';
-import { MockedFunction, describe, expect, it, vi } from 'vitest';
+import { type MockedFunction, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { FilterGroupKey } from '../models/filter-group';

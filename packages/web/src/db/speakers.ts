@@ -1,5 +1,5 @@
-import { SpeakerWithTags } from '../models/speaker';
-import { subscribeToCollection, Subscription } from '../utils/firestore';
+import type { SpeakerWithTags } from '../models/speaker';
+import { subscribeToCollection, type Subscription } from '../utils/firestore';
 
 export const subscribeToSpeakers = (
   onStart: () => void,

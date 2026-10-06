@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import data from '../../../../docs/default-firebase-data.json';
-import { PostData } from './post';
+import type { PostData } from './post';
 import { allKeys } from './utils';
 
 describe('post', () => {

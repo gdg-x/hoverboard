@@ -9,7 +9,7 @@ import reducer, {
   VIEWPORT,
 } from '.';
 import { dispatch } from '../dispatch';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../dispatch');
 

@@ -1,6 +1,6 @@
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-import { DialogData } from '../models/dialog-form';
+import type { DialogData } from '../models/dialog-form';
 
 export const saveSubscriber = async (data: DialogData): Promise<true> => {
   const id = data.email.replace(/[^\w\s]/gi, '');

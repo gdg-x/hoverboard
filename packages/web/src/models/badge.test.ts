@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import data from '../../../../docs/default-firebase-data.json';
-import { Badge } from './badge';
+import type { Badge } from './badge';
 import { allKeys } from './utils';
 
 describe('badge', () => {

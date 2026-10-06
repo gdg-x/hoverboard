@@ -1,6 +1,6 @@
-import { RootState } from '..';
-import { CollectionState, createCollectionSlice } from '../create-collection-slice';
-import { TeamWithoutMembers } from '../../models/team';
+import type { RootState } from '..';
+import { type CollectionState, createCollectionSlice } from '../create-collection-slice';
+import type { TeamWithoutMembers } from '../../models/team';
 import { subscribeToTeams } from '../../db/teams';
 
 export type TeamsState = CollectionState<TeamWithoutMembers>;

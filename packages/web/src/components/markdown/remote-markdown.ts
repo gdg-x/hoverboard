@@ -1,5 +1,5 @@
-import { Failure, fold, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
-import { html, TemplateResult } from 'lit';
+import { Failure, fold, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import './toc-markdown';
 import { ThemedElement } from '../themed-element';

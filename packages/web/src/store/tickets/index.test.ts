@@ -1,9 +1,9 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectTickets } from '.';
-import { Ticket } from '../../models/ticket';
+import type { Ticket } from '../../models/ticket';
 import { subscribeToTickets } from '../../db/tickets';
-import { RootState } from '..';
+import type { RootState } from '..';
 
 vi.mock('../../db/tickets');
 vi.mock('../dispatch');

@@ -1,112 +1,104 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
-import '@power-elements/lazy-image';
 import { css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import '../components/content-loader';
-import '../components/footer-block';
+import '../components/shared/content-loader';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../components/posts-list';
-import '../components/text-truncate';
-import { ThemedElement } from '../components/themed-element';
-import { Post } from '../models/post';
+import '../components/shared/posts-list';
+import '../components/shared/text-truncate';
+import type { Post } from '../models/post';
 import { router } from '../router';
-import { RootState } from '../store';
-import { BlogState, selectBlogPosts } from '../store/blog';
-import { ReduxMixin } from '../store/mixin';
+import type { RootState } from '../store';
+import { type BlogState, selectBlogPosts } from '../store/blog';
 import { initialUiState } from '../store/ui';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { getDate } from '../utils/dates';
 import { updateMetadata } from '../utils/metadata';
+import { StatefulElement } from '../components/stateful-element';
 
 @customElement('blog-list-page')
-export class BlogListPage extends ReduxMixin(ThemedElement) {
-  static override get styles() {
-    return [
-      ...super.styles,
-      css`
-        .featured-posts-wrapper {
-          grid-template-columns: 1fr;
-          display: grid;
-          grid-gap: 24px;
-        }
+export class BlogListPage extends StatefulElement {
+  static override styles = css`
+    .featured-posts-wrapper {
+      grid-template-columns: 1fr;
+      display: grid;
+      grid-gap: 24px;
+    }
 
-        .featured {
-          background-color: var(--secondary-background-color);
-        }
+    .featured {
+      background-color: var(--secondary-background-color);
+    }
 
-        .featured-post {
-          height: 200px;
-          border-radius: var(--border-radius);
-          overflow: hidden;
-          position: relative;
-        }
+    .featured-post {
+      height: 200px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      position: relative;
+    }
 
-        .featured-post--flex {
-          flex: 1;
-          flex-basis: 1px;
-        }
+    .featured-post--flex {
+      flex: 1;
+      flex-basis: 1px;
+    }
 
-        .image {
-          position: absolute;
-          --lazy-image-width: 100%;
-          --lazy-image-height: 100%;
-          --lazy-image-fit: cover;
-          width: var(--lazy-image-width);
-          height: var(--lazy-image-height);
-        }
+    .image {
+      position: absolute;
+      --lazy-image-width: 100%;
+      --lazy-image-height: 100%;
+      --lazy-image-fit: cover;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+    }
 
-        .image-overlay {
-          background-color: rgba(0, 0, 0, 0.6);
-          position: absolute;
-          inset: 0;
-        }
+    .image-overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      inset: 0;
+    }
 
-        .details {
-          padding: 24px;
-          height: 100%;
-          transform: translateZ(0);
-          color: #fff;
-          box-sizing: border-box;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-        }
+    .details {
+      padding: 24px;
+      height: 100%;
+      transform: translateZ(0);
+      color: #fff;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-        .title {
-          line-height: 1.2;
-        }
+    .title {
+      line-height: 1.2;
+    }
 
-        .description {
-          padding-top: 8px;
-          opacity: 0.8;
-        }
+    .description {
+      padding-top: 8px;
+      opacity: 0.8;
+    }
 
-        .date {
-          font-size: 12px;
-          text-transform: uppercase;
-          opacity: 0.8;
-        }
+    .date {
+      font-size: 12px;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
 
-        .progress {
-          width: 100%;
-          --md-linear-progress-active-indicator-color: var(--default-primary-color);
-          --md-linear-progress-track-color: var(--default-primary-color);
-        }
+    .progress {
+      width: 100%;
+      --md-linear-progress-active-indicator-color: var(--default-primary-color);
+      --md-linear-progress-track-color: var(--default-primary-color);
+    }
 
-        @media (min-width: 640px) {
-          .featured-posts-wrapper {
-            grid-template-columns: repeat(3, 1fr);
-          }
+    @media (min-width: 640px) {
+      .featured-posts-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+      }
 
-          .featured-post {
-            height: 256px;
-          }
-        }
-      `,
-    ];
-  }
+      .featured-post {
+        height: 256px;
+      }
+    }
+  `;
 
   private heroSettings = heroSettings.blog;
   private contentLoaders = contentLoaders.blog;
@@ -187,12 +179,14 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
                   href=${this.postUrl(post.id)}
                   class="featured-post ${this.viewport.isTabletPlus ? 'featured-post--flex' : ''}"
                 >
-                  <lazy-image
+                  <img
+                    loading="lazy"
+                    decoding="async"
                     class="image"
                     src=${post.image}
                     alt=${post.title}
                     style="background-color: ${post.backgroundColor};"
-                  ></lazy-image>
+                  />
 
                   <div class="image-overlay"></div>
                   <div class="details">
@@ -216,8 +210,6 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
       <div class="container-narrow">
         <posts-list .posts=${posts}></posts-list>
       </div>
-
-      <footer-block></footer-block>
     `;
   }
 }

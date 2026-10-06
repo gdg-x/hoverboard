@@ -82,7 +82,9 @@ async function generateAndSaveData(changedSpeaker?: ChangedSpeaker | null) {
     generatedData.speakers[changedSpeaker.id] = changedSpeaker;
   }
 
-  saveGeneratedSessions(generatedData.sessions);
-  saveGeneratedSpeakers(generatedData.speakers);
-  saveGeneratedSchedule(generatedData.schedule);
+  await Promise.all([
+    saveGeneratedSessions(generatedData.sessions),
+    saveGeneratedSpeakers(generatedData.speakers),
+    saveGeneratedSchedule(generatedData.schedule),
+  ]);
 }
