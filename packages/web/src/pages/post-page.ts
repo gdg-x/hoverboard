@@ -1,7 +1,6 @@
 import { Failure, Initialized, type RemoteData, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { RouterLocation } from '@vaadin/router';
 import '../components/hero/hero-block';
 import '../components/markdown/long-markdown';
 import '../components/shared/posts-list';
@@ -44,14 +43,15 @@ export class PostPage extends ThemedElement {
   @property({ type: Object })
   posts: BlogState = new Initialized();
 
+  @property({ attribute: false })
+  postId: string | undefined;
+
   @state()
   private post: RemoteData<Error, Post> = new Initialized();
   @state()
   private suggestedPosts: Post[] = [];
   @state()
   private postContent = '';
-  @state()
-  private postData: { id?: string } = {};
 
   private blog = blog;
   private contentRequest = 0;
@@ -63,20 +63,21 @@ export class PostPage extends ThemedElement {
     },
   });
 
-  onAfterEnter(location: RouterLocation) {
-    this.postData = location.params;
-    this.updatePost();
+  override updated(changed: Map<string, unknown>) {
+    if (changed.has('postId')) {
+      this.updatePost();
+    }
   }
 
   private updatePost() {
-    const postId = this.postData.id;
+    const postId = this.postId;
     if (!postId || !(this.posts instanceof Success)) {
       return;
     }
 
     const post = this.posts.data.find(({ id }) => id === postId);
     if (!post) {
-      router.render('/404');
+      void router.goto('/404');
       return;
     }
 

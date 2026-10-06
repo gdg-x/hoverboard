@@ -14,7 +14,7 @@ vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
 }));
 vi.mock('../router', () => ({
-  router: { urlForName: vi.fn(), render: vi.fn() },
+  router: { urlForName: vi.fn(), goto: vi.fn() },
 }));
 vi.mock('../store/speakers/selectors', () => ({
   selectSpeaker: vi.fn(),
@@ -59,7 +59,8 @@ describe('speaker-page', () => {
 
     const { element, shadowRoot } = await fixture<SpeakerPage>(html`<speaker-page></speaker-page>`);
     element.speakers = new Success([speaker]);
-    element.onAfterEnter({ params: { id: 'speaker-1' } } as never);
+    element.speakerId = 'speaker-1';
+    await element.updateComplete;
     await element.updateComplete;
 
     expect(shadowRoot).toHaveTextContent('Ada Lovelace');
@@ -75,14 +76,15 @@ describe('speaker-page', () => {
   it('redirects to 404 when the speaker cannot be found', async () => {
     const mockSelectSpeaker = selectSpeaker as MockedFunction<typeof selectSpeaker>;
     mockSelectSpeaker.mockReturnValue(undefined);
-    vi.mocked(router).render.mockClear();
+    vi.mocked(router).goto.mockClear();
 
     const { element } = await fixture<SpeakerPage>(html`<speaker-page></speaker-page>`);
     element.speakers = new Success([speaker]);
-    element.onAfterEnter({ params: { id: 'missing' } } as never);
+    element.speakerId = 'missing';
+    await element.updateComplete;
     await element.updateComplete;
 
-    expect(router.render).toHaveBeenCalledWith('/404');
+    expect(router.goto).toHaveBeenCalledWith('/404');
   });
 
   it('renders an empty additional-sessions section when no sessions are supplied', async () => {
@@ -91,7 +93,8 @@ describe('speaker-page', () => {
 
     const { element, shadowRoot } = await fixture<SpeakerPage>(html`<speaker-page></speaker-page>`);
     element.speakers = new Success([speaker]);
-    element.onAfterEnter({ params: { id: 'speaker-1' } } as never);
+    element.speakerId = 'speaker-1';
+    await element.updateComplete;
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('.additional-sections')).toBeNull();
@@ -117,7 +120,8 @@ describe('speaker-page', () => {
 
     const { element, shadowRoot } = await fixture<SpeakerPage>(html`<speaker-page></speaker-page>`);
     element.speakers = new Success([speaker]);
-    element.onAfterEnter({ params: { id: 'speaker-1' } } as never);
+    element.speakerId = 'speaker-1';
+    await element.updateComplete;
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('.additional-sections')).not.toBeNull();

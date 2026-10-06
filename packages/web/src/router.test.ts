@@ -9,7 +9,7 @@ vi.mock('./utils/config.js', () => ({
 const logPageView = vi.fn();
 vi.mock('./utils/analytics.js', () => ({ logPageView }));
 
-const { selectRouteName } = await import('./router');
+const { onLocationChanged, selectRouteName, startRouter } = await import('./router');
 
 describe('selectRouteName', () => {
   it('returns "home" for the root path', () => {
@@ -35,18 +35,14 @@ describe('selectRouteName', () => {
   });
 });
 
-describe('vaadin-router-location-changed listener', () => {
+describe('onLocationChanged', () => {
   it('updates the canonical link and logs a page view', () => {
     const link = document.createElement('link');
     link.setAttribute('rel', 'canonical');
     document.head.appendChild(link);
     logPageView.mockClear();
 
-    window.dispatchEvent(
-      new CustomEvent('vaadin-router-location-changed', {
-        detail: { location: { pathname: '/blog/my-post' } },
-      }),
-    );
+    onLocationChanged('/blog/my-post');
 
     expect(link.getAttribute('href')).toBe('https://example.com/blog/my-post');
     expect(logPageView).toHaveBeenCalledTimes(1);
@@ -57,14 +53,50 @@ describe('vaadin-router-location-changed listener', () => {
     const error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
     logPageView.mockClear();
 
-    window.dispatchEvent(
-      new CustomEvent('vaadin-router-location-changed', {
-        detail: { location: { pathname: '/faq' } },
-      }),
-    );
+    onLocationChanged('/faq');
 
     expect(error).toHaveBeenCalledWith('Missing canonical link tag');
     expect(logPageView).toHaveBeenCalledTimes(1);
     error.mockRestore();
+  });
+});
+
+describe('urlForName', () => {
+  const host = Object.assign(document.createElement('div'), {
+    addController: vi.fn(),
+    requestUpdate: vi.fn(),
+  });
+  const router = startRouter(host as never);
+
+  it('builds a path from a route name and params', () => {
+    expect(router.urlForName('post-page', { id: 'my-post' })).toBe('/blog/my-post');
+    expect(router.urlForName('speaker-page', { id: 'ada' })).toBe('/speakers/ada');
+    expect(router.urlForName('session-page', { id: '1' })).toBe('/sessions/1');
+    expect(router.urlForName('previous-speaker-page', { id: 'ada' })).toBe(
+      '/previous-speakers/ada',
+    );
+  });
+
+  it('encodes params', () => {
+    expect(router.urlForName('post-page', { id: 'a b/c' })).toBe('/blog/a%20b%2Fc');
+  });
+
+  it('throws for an unknown route name', () => {
+    expect(() => router.urlForName('missing')).toThrow('Unknown route name: missing');
+  });
+});
+
+describe('goto', () => {
+  it('scrolls to the top after navigating', async () => {
+    const host = Object.assign(document.createElement('div'), {
+      addController: vi.fn(),
+      requestUpdate: vi.fn(),
+    });
+    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => undefined);
+
+    await startRouter(host as never).goto('/faq');
+
+    expect(scrollTo).toHaveBeenCalledWith(0, 0);
+    scrollTo.mockRestore();
   });
 });

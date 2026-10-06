@@ -3,7 +3,6 @@ import '@material/web/fab/fab.js';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { RouterLocation } from '@vaadin/router';
 import '../components/shared/auth-required';
 import '../components/shared/content-loader';
 import '../components/dialogs/feedback-block';
@@ -222,11 +221,6 @@ export class SessionPage extends ThemedElement {
   @state()
   private acceptingFeedback: boolean = false;
 
-  onAfterEnter(location: RouterLocation) {
-    this.sessionId = location.params?.['id']?.toString();
-    this.updateSession();
-  }
-
   override updated(changed: Map<string, unknown>) {
     if (changed.has('sessions') || changed.has('sessionId')) {
       this.updateSession();
@@ -239,7 +233,7 @@ export class SessionPage extends ThemedElement {
       this.contentLoaderVisibility = !!this.session;
 
       if (!this.session) {
-        router.render('/404');
+        void router.goto('/404');
       } else {
         this.acceptingFeedback = acceptingFeedback(this.session);
         const speaker = (this.session as unknown as SessionWithDetails).speakers?.[0];

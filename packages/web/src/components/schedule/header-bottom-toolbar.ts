@@ -1,7 +1,7 @@
 import { Pending, Success } from '@abraham/remotedata';
-import type { RouterLocation } from '@vaadin/router';
 import { css, html, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import type { RouteLocation } from '../../router';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { contentLoaders, mySchedule } from '../../utils/data';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
@@ -76,7 +76,7 @@ export class HeaderBottomToolbar extends ThemedElement {
   @fromStore((state) => selectScheduleState(state))
   schedule!: ScheduleState;
   @property({ type: Object })
-  location: RouterLocation | undefined;
+  location: RouteLocation | undefined;
   @fromStore((state) => state.user instanceof Success)
   private signedIn!: boolean;
 

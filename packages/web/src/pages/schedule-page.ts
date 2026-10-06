@@ -1,8 +1,7 @@
 import { Pending } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
-import type { RouterLocation } from '@vaadin/router';
+import { customElement, property } from 'lit/decorators.js';
 import '../components/hero/hero-block';
 import '../components/shared/content-loader';
 import '../components/shared/filter-menu';
@@ -10,6 +9,7 @@ import '../components/schedule/header-bottom-toolbar';
 import '../components/schedule/sticky-element';
 import type { Filter } from '../models/filter';
 import type { FilterGroup } from '../models/filter-group';
+import type { RouteLocation } from '../router';
 import { selectFilters } from '../store/filters';
 import { type ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';
@@ -79,16 +79,12 @@ export class SchedulePage extends ThemedElement {
   private filterGroups!: FilterGroup[];
   @fromStore((state) => selectFilters(state))
   private selectedFilters!: Filter[];
-  @state()
-  private location: RouterLocation | undefined;
+  @property({ attribute: false })
+  location: RouteLocation | undefined;
 
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-  }
-
-  onAfterEnter(location: RouterLocation) {
-    this.location = location;
   }
 
   private get pending() {

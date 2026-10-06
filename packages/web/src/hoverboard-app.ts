@@ -160,8 +160,8 @@ export class HoverboardApp extends ThemedElement {
   private navigation = navigation;
   private shortLocation = location.short;
 
-  @query('main')
-  main!: HTMLElement;
+  private readonly router = startRouter(this);
+
   @query('#header')
   header!: HTMLElement;
 
@@ -236,7 +236,6 @@ export class HoverboardApp extends ThemedElement {
     super.firstUpdated(changedProperties);
     console.log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
-    startRouter(this.main);
     onUser();
   }
 
@@ -297,7 +296,7 @@ export class HoverboardApp extends ThemedElement {
           ></header-toolbar>
         </div>
 
-        <main></main>
+        <main>${this.router.outlet()}</main>
         <footer-block></footer-block>
       </div>
 
