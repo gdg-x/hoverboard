@@ -15,10 +15,13 @@ export const getVariableColor = (
   element: Element,
   value: string,
   fallback?: string,
-): string | CSSStyleDeclaration | undefined => {
+): string | undefined => {
   const ShadyCSS = (window as { ShadyCSS?: ShadyCSSGlobal }).ShadyCSS;
-  const calculated = ShadyCSS
-    ? ShadyCSS.getComputedStyleValue(element, `--${generateClassName(value)}`)
-    : getComputedStyle(element, `--${generateClassName(value)}`);
-  return calculated || (fallback && getVariableColor(element, fallback));
+  const name = `--${generateClassName(value)}`;
+  const calculated = (
+    ShadyCSS
+      ? ShadyCSS.getComputedStyleValue(element, name)
+      : getComputedStyle(element).getPropertyValue(name)
+  ).trim();
+  return calculated || (fallback ? getVariableColor(element, fallback) : undefined);
 };

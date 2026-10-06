@@ -77,6 +77,12 @@ export class SessionPage extends ThemedElement {
       margin-top: 8px;
     }
 
+    .tag {
+      color: #fff;
+      background-color: var(--color, var(--secondary-text-color));
+      border-color: var(--color, var(--secondary-text-color));
+    }
+
     .float-button {
       position: fixed;
       right: 24px;
@@ -317,7 +323,9 @@ export class SessionPage extends ThemedElement {
                   <div class="tags">
                     ${session.tags.map(
                       (tag) => html`
-                        <span class="tag" style="color: ${this.getVariableColor(tag)}">${tag}</span>
+                        <span class="tag" style="--color: ${this.getVariableColor(tag) ?? ''}"
+                          >${tag}</span
+                        >
                       `,
                     )}
                   </div>

@@ -43,13 +43,31 @@ describe('getVariableColor', () => {
     expect(getComputedStyleValue).toHaveBeenCalledWith(element, '--fallback-color');
   });
 
-  it('uses window.getComputedStyle when ShadyCSS is not present', () => {
+  it('reads the custom property from the computed style when ShadyCSS is not present', () => {
     const element = document.createElement('div');
+    const getPropertyValue = vi.fn().mockReturnValue(' #673ab7 ');
     const getComputedStyle = vi.spyOn(window, 'getComputedStyle').mockReturnValue({
-      color: '#673ab7',
+      getPropertyValue,
     } as unknown as CSSStyleDeclaration);
 
-    expect(getVariableColor(element, 'primaryColor')).toStrictEqual({ color: '#673ab7' });
-    expect(getComputedStyle).toHaveBeenCalledWith(element, '--primary-color');
+    expect(getVariableColor(element, 'primaryColor')).toBe('#673ab7');
+    expect(getComputedStyle).toHaveBeenCalledWith(element);
+    expect(getPropertyValue).toHaveBeenCalledWith('--primary-color');
+  });
+
+  it('returns undefined when the variable is empty and there is no fallback', () => {
+    const element = document.createElement('div');
+
+    expect(getVariableColor(element, 'notDefined')).toBeUndefined();
+  });
+
+  it('resolves a custom property that is set on the element', () => {
+    const element = document.createElement('div');
+    element.style.setProperty('--android', '#78c257');
+    document.body.append(element);
+
+    expect(getVariableColor(element, 'Android')).toBe('#78c257');
+
+    element.remove();
   });
 });

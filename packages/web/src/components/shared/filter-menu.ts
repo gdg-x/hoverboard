@@ -255,7 +255,7 @@ export class FilterMenu extends ThemedElement {
   }
 
   private getVariableColor(value: string, fallback: string) {
-    return String(getVariableColor(this, value, fallback));
+    return getVariableColor(this, value, fallback) ?? '';
   }
 }
 
