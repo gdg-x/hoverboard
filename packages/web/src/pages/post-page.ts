@@ -2,22 +2,20 @@ import { Failure, Initialized, RemoteData, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { RouterLocation } from '@vaadin/router';
-import '../components/footer-block';
 import '../components/hero/hero-block';
 import '../components/markdown/long-markdown';
-import '../components/posts-list';
-import { ThemedElement } from '../components/themed-element';
+import '../components/shared/posts-list';
 import { Post } from '../models/post';
 import { router } from '../router';
 import { RootState } from '../store';
 import { BlogState, selectBlogPosts } from '../store/blog';
-import { ReduxMixin } from '../store/mixin';
 import { blog } from '../utils/data';
 import { getDate } from '../utils/dates';
 import { updateImageMetadata } from '../utils/metadata';
+import { StatefulElement } from '../components/stateful-element';
 
 @customElement('post-page')
-export class PostPage extends ReduxMixin(ThemedElement) {
+export class PostPage extends StatefulElement {
   static override get styles() {
     return [
       ...super.styles,
@@ -139,8 +137,6 @@ export class PostPage extends ReduxMixin(ThemedElement) {
           <posts-list .posts=${this.suggestedPosts}></posts-list>
         </div>
       </div>
-
-      <footer-block></footer-block>
     `;
   }
 }

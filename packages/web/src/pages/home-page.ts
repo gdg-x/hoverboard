@@ -2,19 +2,16 @@ import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
 import { css, html, nothing } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import '../components/about-block';
-import '../components/about-organizer-block';
-import '../components/footer-block';
+import '../components/home/about-block';
+import '../components/home/about-organizer-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
-import '../components/hoverboard-icon';
-import '../components/latest-posts-block';
-import '../components/speakers-block';
-import '../components/subscribe-block';
-import { ThemedElement } from '../components/themed-element';
+import '../components/shared/hoverboard-icon';
+import '../components/home/latest-posts-block';
+import '../components/home/speakers-block';
+import '../components/home/subscribe-block';
 import { firebaseApp } from '../firebase';
 import { store } from '../store';
-import { ReduxMixin } from '../store/mixin';
 import { queueSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
 import {
@@ -30,19 +27,20 @@ import {
 } from '../utils/data';
 import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
+import { StatefulElement } from '../components/stateful-element';
 
 // Below-the-fold blocks load when they are about to scroll into view.
 const lazyBlocks = {
-  'tickets-block': () => import('../components/tickets-block'),
-  'gallery-block': () => import('../components/gallery-block'),
-  'featured-videos': () => import('../components/featured-videos'),
-  'map-block': () => import('../components/map-block'),
-  'partners-block': () => import('../components/partners-block'),
+  'tickets-block': () => import('../components/home/tickets-block'),
+  'gallery-block': () => import('../components/home/gallery-block'),
+  'featured-videos': () => import('../components/home/featured-videos'),
+  'map-block': () => import('../components/home/map-block'),
+  'partners-block': () => import('../components/home/partners-block'),
 };
 type LazyBlock = keyof typeof lazyBlocks;
 
 @customElement('home-page')
-export class HomePage extends ReduxMixin(ThemedElement) {
+export class HomePage extends StatefulElement {
   static override get styles() {
     return [
       ...super.styles,
@@ -226,7 +224,7 @@ export class HomePage extends ReduxMixin(ThemedElement) {
       ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
       : false;
     if (showForkMeBlock) {
-      import('../components/fork-me-block');
+      import('../components/home/fork-me-block');
     }
     return showForkMeBlock;
   }
@@ -379,7 +377,6 @@ export class HomePage extends ReduxMixin(ThemedElement) {
       <latest-posts-block></latest-posts-block>
       <map-block></map-block>
       <partners-block></partners-block>
-      <footer-block></footer-block>
     `;
   }
 }

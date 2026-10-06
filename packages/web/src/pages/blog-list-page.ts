@@ -2,25 +2,23 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import '../components/content-loader';
-import '../components/footer-block';
+import '../components/shared/content-loader';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../components/posts-list';
-import '../components/text-truncate';
-import { ThemedElement } from '../components/themed-element';
+import '../components/shared/posts-list';
+import '../components/shared/text-truncate';
 import { Post } from '../models/post';
 import { router } from '../router';
 import { RootState } from '../store';
 import { BlogState, selectBlogPosts } from '../store/blog';
-import { ReduxMixin } from '../store/mixin';
 import { initialUiState } from '../store/ui';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { getDate } from '../utils/dates';
 import { updateMetadata } from '../utils/metadata';
+import { StatefulElement } from '../components/stateful-element';
 
 @customElement('blog-list-page')
-export class BlogListPage extends ReduxMixin(ThemedElement) {
+export class BlogListPage extends StatefulElement {
   static override get styles() {
     return [
       ...super.styles,
@@ -217,8 +215,6 @@ export class BlogListPage extends ReduxMixin(ThemedElement) {
       <div class="container-narrow">
         <posts-list .posts=${posts}></posts-list>
       </div>
-
-      <footer-block></footer-block>
     `;
   }
 }

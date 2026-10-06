@@ -1,0 +1,55 @@
+import '@material/web/button/outlined-button.js';
+import { css, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { ThemedElement } from '../themed-element';
+import '../shared/hoverboard-icon';
+
+@customElement('fork-me-block')
+export class ForkMeBlock extends ThemedElement {
+  static override get styles() {
+    return [
+      ...super.styles,
+      css`
+        :host {
+          display: flex;
+          width: 100%;
+          background: var(--accent-color);
+          color: var(--text-secondary-color);
+          padding: 16px 0;
+        }
+
+        md-outlined-button {
+          --md-outlined-button-label-text-color: #000;
+          --md-outlined-button-outline-color: #000;
+        }
+      `,
+    ];
+  }
+
+  override render() {
+    return html`
+      <div class="container container-narrow">
+        <h1 class="container-title">Fork me on GitHub</h1>
+        <p>
+          Hoverboard is open source conference website template and is developed entirely on a
+          voluntary basis. You can check the source code that generated this website on Github. If
+          you find a issue or you want to contribute, you're more than welcome!
+        </p>
+        <a href="https://github.com/gdg-x/hoverboard">
+          <div class="cta-button">
+            <md-outlined-button class="icon-right" trailing-icon>
+              <span class="cta-label">Fork this project</span>
+              <hoverboard-icon slot="icon" name="github"></hoverboard-icon>
+            </md-outlined-button>
+          </div>
+        </a>
+      </div>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'fork-me-block': ForkMeBlock;
+  }
+}

@@ -1,20 +1,18 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import '../components/footer-block';
 import '../components/hero/simple-hero';
-import '../components/hoverboard-icon';
+import '../components/shared/hoverboard-icon';
 import '../components/markdown/short-markdown';
 import { RootState } from '../store';
-import { ReduxMixin } from '../store/mixin';
 import { selectTeamsAndMembers } from '../store/teams-members/selectors';
 import { initialTeamsMembersState } from '../store/teams-members/state';
 import { heroSettings, loading, team } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
-import { ThemedElement } from '../components/themed-element';
+import { StatefulElement } from '../components/stateful-element';
 
 @customElement('team-page')
-export class TeamPage extends ReduxMixin(ThemedElement) {
+export class TeamPage extends StatefulElement {
   static override get styles() {
     return [
       ...super.styles,
@@ -201,8 +199,6 @@ export class TeamPage extends ReduxMixin(ThemedElement) {
           `,
         )}
       </div>
-
-      <footer-block></footer-block>
     `;
   }
 }

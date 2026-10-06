@@ -2,20 +2,18 @@ import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@material/web/progress/linear-progress.js';
-import '../components/content-loader';
-import '../components/footer-block';
+import '../components/shared/content-loader';
 import '../components/hero/simple-hero';
 import { PreviousSession } from '../models/previous-session';
 import { router } from '../router';
 import { RootState } from '../store';
-import { ReduxMixin } from '../store/mixin';
 import { PreviousSpeakersState, selectPreviousSpeakersState } from '../store/previous-speakers';
 import { contentLoaders, heroSettings, speakers } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
-import { ThemedElement } from '../components/themed-element';
+import { StatefulElement } from '../components/stateful-element';
 
 @customElement('previous-speakers-page')
-export class PreviousSpeakersPage extends ReduxMixin(ThemedElement) {
+export class PreviousSpeakersPage extends StatefulElement {
   static override get styles() {
     return [
       ...super.styles,
@@ -220,8 +218,6 @@ export class PreviousSpeakersPage extends ReduxMixin(ThemedElement) {
           `,
         )}
       </div>
-
-      <footer-block></footer-block>
     `;
   }
 }

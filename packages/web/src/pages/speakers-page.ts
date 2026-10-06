@@ -2,26 +2,24 @@ import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import '../components/content-loader';
-import '../components/filter-menu';
-import '../components/footer-block';
+import '../components/shared/content-loader';
+import '../components/shared/filter-menu';
 import '../components/hero/simple-hero';
-import '../components/hoverboard-icon';
-import '../components/previous-speakers-block';
-import '../components/text-truncate';
-import { ThemedElement } from '../components/themed-element';
+import '../components/shared/hoverboard-icon';
+import '../components/shared/previous-speakers-block';
+import '../components/shared/text-truncate';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
 import { RootState } from '../store';
 import { selectFilters } from '../store/filters';
-import { ReduxMixin } from '../store/mixin';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
 import { SpeakersState, selectSpeakersState } from '../store/speakers';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
+import { StatefulElement } from '../components/stateful-element';
 
 // Stable module-level reference (rather than an inline literal in
 // `stateChanged`) so `selectFilterGroups`'s `createSelector` memoization
@@ -29,7 +27,7 @@ import { updateMetadata } from '../utils/metadata';
 const SPEAKER_FILTER_GROUPS = [FilterGroupKey.tags];
 
 @customElement('speakers-page')
-export class SpeakersPage extends ReduxMixin(ThemedElement) {
+export class SpeakersPage extends StatefulElement {
   static override get styles() {
     return [
       ...super.styles,
@@ -308,8 +306,6 @@ export class SpeakersPage extends ReduxMixin(ThemedElement) {
       </div>
 
       <previous-speakers-block></previous-speakers-block>
-
-      <footer-block></footer-block>
     `;
   }
 }

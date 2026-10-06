@@ -5,22 +5,20 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { RouterLocation } from '@vaadin/router';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../components/content-loader';
-import '../components/footer-block';
-import '../components/hoverboard-icon';
-import '../components/previous-speakers-block';
-import { ThemedElement } from '../components/themed-element';
+import '../components/shared/content-loader';
+import '../components/shared/hoverboard-icon';
+import '../components/shared/previous-speakers-block';
 import { Badge } from '../models/badge';
 import { PreviousSessionWithYear } from '../models/previous-session';
 import { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
-import { ReduxMixin } from '../store/mixin';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { PreviousSpeakersState, selectPreviousSpeakersState } from '../store/previous-speakers';
 import { sessionDetails, speakerDetails, speakers } from '../utils/data';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
+import { StatefulElement } from '../components/stateful-element';
 
 // `PreviousSpeaker.badges`/`pronouns` are not currently declared on the model
 // (no action/selector/state populates them today), but the original template
@@ -30,7 +28,7 @@ import { getVariableColor } from '../utils/styles';
 type PreviousSpeakerWithDetails = PreviousSpeaker & { badges?: Badge[]; pronouns?: string };
 
 @customElement('previous-speaker-page')
-export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
+export class PreviousSpeakerPage extends StatefulElement {
   static override get styles() {
     return [
       ...super.styles,
@@ -392,8 +390,6 @@ export class PreviousSpeakerPage extends ReduxMixin(ThemedElement) {
       </div>
 
       <previous-speakers-block></previous-speakers-block>
-
-      <footer-block></footer-block>
     `;
   }
 }

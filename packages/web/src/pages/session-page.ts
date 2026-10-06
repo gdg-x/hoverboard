@@ -4,14 +4,12 @@ import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { RouterLocation } from '@vaadin/router';
-import '../components/auth-required';
-import '../components/content-loader';
-import '../components/feedback-block';
-import '../components/footer-block';
+import '../components/shared/auth-required';
+import '../components/shared/content-loader';
+import '../components/dialogs/feedback-block';
 import '../components/hero/simple-hero';
-import '../components/hoverboard-icon';
+import '../components/shared/hoverboard-icon';
 import '../components/markdown/short-markdown';
-import { ThemedElement } from '../components/themed-element';
 import { Session } from '../models/session';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
@@ -23,7 +21,6 @@ import {
   selectFeaturedSessionsState,
   setUserFeaturedSessions,
 } from '../store/featured-sessions';
-import { ReduxMixin } from '../store/mixin';
 import { selectSession } from '../store/sessions/selectors';
 import { SessionsState, selectSessionsState } from '../store/sessions';
 import { queueComplexSnackbar } from '../store/snackbars';
@@ -33,6 +30,7 @@ import { disabledSchedule, feedback, schedule, sessionDetails } from '../utils/d
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
+import { StatefulElement } from '../components/stateful-element';
 
 // `Session` (as returned by `selectSession`) does not declare `dateReadable`,
 // `endTime`, `track`, or a resolved `speakers` array — the original template
@@ -47,7 +45,7 @@ type SessionWithDetails = Omit<Session, 'speakers'> & {
 };
 
 @customElement('session-page')
-export class SessionPage extends ReduxMixin(ThemedElement) {
+export class SessionPage extends StatefulElement {
   static override get styles() {
     return [
       ...super.styles,
@@ -462,8 +460,6 @@ export class SessionPage extends ReduxMixin(ThemedElement) {
           <p ?hidden="${this.acceptingFeedback}">${this.feedback.sessionClosed}</p>
         </div>
       </div>
-
-      <footer-block></footer-block>
     `;
   }
 }

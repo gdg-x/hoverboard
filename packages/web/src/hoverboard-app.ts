@@ -1,13 +1,12 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { css, html, nothing, PropertyValues } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { ThemedElement } from './components/themed-element';
-import './components/app-install';
-import './components/hoverboard-icon';
-import './components/header-toolbar';
+import './components/shell/app-install';
+import './components/footer/footer-block';
+import './components/shared/hoverboard-icon';
+import './components/shell/header-toolbar';
 import { selectRouteName, startRouter } from './router';
 import { RootState, store } from './store';
-import { ReduxMixin } from './store/mixin';
 import { onUser } from './store/auth';
 import { DIALOG, selectIsDialogOpen } from './store/dialogs';
 import { queueSnackbar } from './store/snackbars';
@@ -24,12 +23,13 @@ import {
 } from './utils/data';
 import './utils/media-query';
 import { Stickied } from './utils/stickied';
+import { StatefulElement } from './components/stateful-element';
 
 type LazyElement =
   'feedback-dialog' | 'signin-dialog' | 'subscribe-dialog' | 'video-dialog' | 'snack-bar';
 
 @customElement('hoverboard-app')
-export class HoverboardApp extends ReduxMixin(ThemedElement) {
+export class HoverboardApp extends StatefulElement {
   static override get styles() {
     return [
       ...super.styles,
@@ -179,11 +179,11 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
 
   // Loaded on first use so they stay out of the initial bundle.
   private readonly lazyElements: Record<LazyElement, () => Promise<unknown>> = {
-    'feedback-dialog': () => import('./components/feedback-dialog'),
-    'signin-dialog': () => import('./components/signin-dialog'),
-    'subscribe-dialog': () => import('./components/subscribe-dialog'),
-    'video-dialog': () => import('./components/video-dialog'),
-    'snack-bar': () => import('./components/snack-bar'),
+    'feedback-dialog': () => import('./components/dialogs/feedback-dialog'),
+    'signin-dialog': () => import('./components/dialogs/signin-dialog'),
+    'subscribe-dialog': () => import('./components/dialogs/subscribe-dialog'),
+    'video-dialog': () => import('./components/dialogs/video-dialog'),
+    'snack-bar': () => import('./components/shell/snack-bar'),
   };
   private readonly loadingElements = new Set<LazyElement>();
   @state()
@@ -300,6 +300,7 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
         </div>
 
         <main></main>
+        <footer-block></footer-block>
       </div>
 
       ${

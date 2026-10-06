@@ -78,7 +78,7 @@ const ROUTES = [
         path: '/my-schedule',
         component: 'my-schedule',
         action: async () => {
-          await import('./components/my-schedule.js');
+          await import('./pages/schedule/my-schedule.js');
         },
       },
       {
@@ -89,7 +89,7 @@ const ROUTES = [
           if (searchParams.get('sessionId')) {
             commands.redirect(`/sessions/${searchParams.get('sessionId')}`);
           } else {
-            await import('./components/schedule-day.js');
+            await import('./pages/schedule/schedule-day.js');
           }
         },
       },
@@ -155,21 +155,21 @@ const ROUTES = [
     path: '/faq',
     component: 'faq-page',
     action: async () => {
-      await import('./components/faq-page.js');
+      await import('./pages/faq-page.js');
     },
   },
   {
     path: '/coc',
     component: 'coc-page',
     action: async () => {
-      await import('./components/coc-page.js');
+      await import('./pages/coc-page.js');
     },
   },
   {
     path: '(.*)',
     component: 'not-found-page',
     action: async () => {
-      await import('./components/not-found-page.js');
+      await import('./pages/not-found-page.js');
     },
   },
 ] as unknown as Array<Route<EmptyObject, EmptyObject>>;
