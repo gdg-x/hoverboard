@@ -165,7 +165,7 @@ describe('scheduleNotifications', () => {
       ],
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
-      notificationsUsersDocs: { 'user-1': { tokens: { 'device-token-1': true } } },
+      notificationsUsersDocs: { 'user-1': { tokens: { fid0000000000000000001: true } } },
     });
     const { sendEachForMulticast } = mockMessaging();
     const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
@@ -217,8 +217,8 @@ describe('scheduleNotifications', () => {
       ],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
       notificationsUsersDocs: {
-        'user-1': { tokens: { 'device-token-1': true, 'device-token-2': true } },
-        'user-2': { tokens: { 'device-token-3': true } },
+        'user-1': { tokens: { fid0000000000000000001: true, fid0000000000000000002: true } },
+        'user-2': { tokens: { fid0000000000000000003: true } },
       },
     });
     const { sendEachForMulticast } = mockMessaging();
@@ -227,7 +227,7 @@ describe('scheduleNotifications', () => {
 
     expect(sendEachForMulticast).toHaveBeenCalledTimes(1);
     expect(sendEachForMulticast).toHaveBeenCalledWith({
-      tokens: ['device-token-1', 'device-token-2', 'device-token-3'],
+      fids: ['fid0000000000000000001', 'fid0000000000000000002', 'fid0000000000000000003'],
       data: {
         title: 'Keynote',
         body: 'Starts in 10 minutes',
@@ -258,7 +258,7 @@ describe('scheduleNotifications', () => {
       scheduleDocs: upcomingSessionSchedule(['session-1', 'session-2']),
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true, 'session-2': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' }, 'session-2': { title: 'Workshop' } },
-      notificationsUsersDocs: { 'user-1': { tokens: { 'device-token-1': true } } },
+      notificationsUsersDocs: { 'user-1': { tokens: { fid0000000000000000001: true } } },
     });
     const { sendEachForMulticast } = mockMessaging();
 
@@ -273,7 +273,7 @@ describe('scheduleNotifications', () => {
       scheduleDocs: upcomingSessionSchedule(['session-1']),
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
-      notificationsUsersDocs: { 'user-1': { tokens: { 'device-token-1': true } } },
+      notificationsUsersDocs: { 'user-1': { tokens: { fid0000000000000000001: true } } },
     };
     const { claimed } = mockFirestore(options);
     const { sendEachForMulticast } = mockMessaging();
@@ -291,7 +291,7 @@ describe('scheduleNotifications', () => {
       scheduleDocs: upcomingSessionSchedule(['session-1']),
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
-      notificationsUsersDocs: { 'user-1': { tokens: { 'device-token-1': true } } },
+      notificationsUsersDocs: { 'user-1': { tokens: { fid0000000000000000001: true } } },
       claimedNotifications: ['2025-06-22-session-1'],
     });
     const { sendEachForMulticast } = mockMessaging();
@@ -307,7 +307,7 @@ describe('scheduleNotifications', () => {
       scheduleDocs: upcomingSessionSchedule(['session-1']),
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
-      notificationsUsersDocs: { 'user-1': { tokens: { 'device-token-1': true } } },
+      notificationsUsersDocs: { 'user-1': { tokens: { fid0000000000000000001: true } } },
     });
     vi.mocked(getMessaging).mockReturnValue({
       sendEachForMulticast: vi.fn().mockRejectedValue(new Error('fcm down')),
@@ -326,7 +326,7 @@ describe('scheduleNotifications', () => {
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
       notificationsUsersDocs: {
-        'user-1': { tokens: { 'device-token-1': true, 'device-token-2': true } },
+        'user-1': { tokens: { fid0000000000000000001: true, fid0000000000000000002: true } },
       },
     });
     mockMessaging([
@@ -339,12 +339,12 @@ describe('scheduleNotifications', () => {
 
     expect(errorSpy).toHaveBeenCalledWith(
       'Failure sending notification to',
-      'device-token-1',
+      'fid0000000000000000001',
       expect.objectContaining({ code: 'messaging/invalid-registration-token' }),
     );
     expect(runTransaction).toHaveBeenCalledTimes(1);
     expect(transactionSet).toHaveBeenCalledWith(expect.objectContaining({ id: 'user-1' }), {
-      tokens: { 'device-token-2': true },
+      tokens: { fid0000000000000000002: true },
     });
   });
 });

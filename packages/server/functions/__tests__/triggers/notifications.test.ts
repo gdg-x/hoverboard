@@ -96,7 +96,7 @@ describe('sendGeneralNotification', () => {
     const { sendEachForMulticast } = setupNotificationMocks({
       notificationsConfig: { icon: '/default-icon.png' },
       responses: [{ success: true }, { success: true }],
-      tokens: ['token-1', 'token-2'],
+      tokens: ['fid0000000000000000001', 'fid0000000000000000002'],
     });
 
     await sendGeneralNotification.run({
@@ -109,7 +109,7 @@ describe('sendGeneralNotification', () => {
     } as never);
 
     expect(sendEachForMulticast).toHaveBeenCalledWith({
-      tokens: ['token-1', 'token-2'],
+      fids: ['fid0000000000000000001', 'fid0000000000000000002'],
       data: {
         title: 'Schedule update',
         body: 'Agenda changed',
@@ -123,7 +123,7 @@ describe('sendGeneralNotification', () => {
     const { sendEachForMulticast } = setupNotificationMocks({
       notificationsConfig: { icon: '/default-icon.png' },
       responses: [{ success: true }],
-      tokens: ['token-1'],
+      tokens: ['fid0000000000000000001'],
     });
 
     await sendGeneralNotification.run({
@@ -136,7 +136,7 @@ describe('sendGeneralNotification', () => {
     } as never);
 
     expect(sendEachForMulticast).toHaveBeenCalledWith({
-      tokens: ['token-1'],
+      fids: ['fid0000000000000000001'],
       data: {
         title: 'Welcome',
         body: 'See you soon',
@@ -146,7 +146,10 @@ describe('sendGeneralNotification', () => {
   });
 
   it('sends to subscribers in batches of at most 500 tokens', async () => {
-    const tokens = Array.from({ length: 1001 }, (_, index) => `token-${index}`);
+    const tokens = Array.from(
+      { length: 1001 },
+      (_, index) => `fid${String(index).padStart(19, '0')}`,
+    );
     const { sendEachForMulticast } = setupNotificationMocks({ responses: [], tokens });
 
     await sendGeneralNotification.run({
@@ -154,7 +157,7 @@ describe('sendGeneralNotification', () => {
       params: { timestamp: '12345' },
     } as never);
 
-    const batchSizes = sendEachForMulticast.mock.calls.map(([message]) => message.tokens.length);
+    const batchSizes = sendEachForMulticast.mock.calls.map(([message]) => message.fids.length);
     expect(batchSizes).toStrictEqual([500, 500, 1]);
   });
 
@@ -167,7 +170,12 @@ describe('sendGeneralNotification', () => {
         { success: false, error: { code: 'messaging/registration-token-not-registered' } },
         { success: false, error: { code: 'messaging/internal-error' } },
       ],
-      tokens: ['token-1', 'token-2', 'token-3', 'token-4'],
+      tokens: [
+        'fid0000000000000000001',
+        'fid0000000000000000002',
+        'fid0000000000000000003',
+        'fid0000000000000000004',
+      ],
     });
     const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
@@ -180,7 +188,7 @@ describe('sendGeneralNotification', () => {
     } as never);
 
     expect(sendEachForMulticast).toHaveBeenCalledTimes(1);
-    expect(deletedTokens).toStrictEqual(['token-2', 'token-3']);
+    expect(deletedTokens).toStrictEqual(['fid0000000000000000002', 'fid0000000000000000003']);
     expect(errorSpy).toHaveBeenCalledTimes(3);
   });
 });

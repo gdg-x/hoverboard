@@ -1,5 +1,6 @@
 import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getId, getInstallations } from 'firebase/installations';
 import { getMessaging, getToken } from 'firebase/messaging';
 import { firebaseApp } from '../../firebase';
 
@@ -27,7 +28,9 @@ export const requestNotificationPermission = createAsyncThunk<string | undefined
     if (permission === 'granted') {
       try {
         const messaging = getMessaging(firebaseApp);
-        return await getToken(messaging);
+        // Registers this browser for push messages; the server addresses it by Installation ID.
+        await getToken(messaging);
+        return await getId(getInstallations(firebaseApp));
       } catch (_error) {
         throw new Error('unsupported');
       }
