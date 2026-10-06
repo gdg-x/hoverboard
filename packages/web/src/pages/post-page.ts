@@ -5,17 +5,17 @@ import type { RouterLocation } from '@vaadin/router';
 import '../components/hero/hero-block';
 import '../components/markdown/long-markdown';
 import '../components/shared/posts-list';
+import { StoreController } from '../controllers/store-controller';
 import type { Post } from '../models/post';
 import { router } from '../router';
-import type { RootState } from '../store';
 import { type BlogState, selectBlogPosts } from '../store/blog';
 import { blog } from '../utils/data';
 import { getDate } from '../utils/dates';
 import { updateImageMetadata } from '../utils/metadata';
-import { StatefulElement } from '../components/stateful-element';
+import { ThemedElement } from '../components/themed-element';
 
 @customElement('post-page')
-export class PostPage extends StatefulElement {
+export class PostPage extends ThemedElement {
   static override styles = css`
     .post {
       margin-bottom: 32px;
@@ -56,10 +56,12 @@ export class PostPage extends StatefulElement {
   private blog = blog;
   private contentRequest = 0;
 
-  override stateChanged(state: RootState) {
-    this.posts = selectBlogPosts(state);
-    this.updatePost();
-  }
+  private readonly postsStore = new StoreController(this, selectBlogPosts, {
+    onChange: (value) => {
+      this.posts = value;
+      this.updatePost();
+    },
+  });
 
   onAfterEnter(location: RouterLocation) {
     this.postData = location.params;

@@ -2,7 +2,9 @@ import { Failure } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import { type RootState, store } from '../../store';
+import { StoreController } from '../../controllers/store-controller';
+import { fromStore } from '../../controllers/from-store';
+import { store } from '../../store';
 import {
   type ExistingAccountError,
   initialAuthState,
@@ -22,10 +24,10 @@ import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 import '../shared/hoverboard-icon';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';
 import '../shared/hoverboard-dialog';
-import { StatefulElement } from '../stateful-element';
+import { ThemedElement } from '../themed-element';
 
 @customElement('signin-dialog')
-export class SigninDialog extends StatefulElement {
+export class SigninDialog extends ThemedElement {
   static override styles = css`
     :host {
       --mdc-theme-primary: var(--primary-text-color);
@@ -65,12 +67,12 @@ export class SigninDialog extends StatefulElement {
   @query('#dialog')
   dialog!: HoverboardDialog;
 
-  @state()
-  private auth = initialAuthState;
+  @fromStore((state) => state.auth)
+  private auth!: typeof initialAuthState;
   @state()
   private isMergeState = false;
-  @state()
-  private open = false;
+  @fromStore((state) => selectIsDialogOpen(state, DIALOG.SIGNIN))
+  private open!: boolean;
   @state()
   private email = '';
   @state()
@@ -80,16 +82,15 @@ export class SigninDialog extends StatefulElement {
     this.dialog.addEventListener('closed', () => closeDialog());
   }
 
-  override stateChanged(state: RootState) {
-    const wasMergeState = this.isMergeState;
-    this.auth = state.auth;
-    this.isMergeState = selectAuthMergeable(state);
-    this.open = selectIsDialogOpen(state, DIALOG.SIGNIN);
-
-    if (this.isMergeState !== wasMergeState) {
-      this.onIsMergeState();
-    }
-  }
+  private readonly mergeStore = new StoreController(this, selectAuthMergeable, {
+    onChange: (value) => {
+      const wasMergeState = this.isMergeState;
+      this.isMergeState = value;
+      if (value !== wasMergeState) {
+        this.onIsMergeState();
+      }
+    },
+  });
 
   private onIsMergeState() {
     closeDialog();

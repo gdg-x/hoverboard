@@ -2,17 +2,18 @@ import { Initialized, Success } from '@abraham/remotedata';
 import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
+import { StoreController } from '../../controllers/store-controller';
+import { fromStore } from '../../controllers/from-store';
 import type { Session } from '../../models/session';
-import type { RootState } from '../../store';
 import { closeDialog, type DialogState, DIALOG, selectIsDialogOpen } from '../../store/dialogs';
 import { feedback } from '../../utils/data';
 import './feedback-block';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';
 import '../shared/hoverboard-dialog';
-import { StatefulElement } from '../stateful-element';
+import { ThemedElement } from '../themed-element';
 
 @customElement('feedback-dialog')
-export class FeedbackDialog extends StatefulElement {
+export class FeedbackDialog extends ThemedElement {
   static override styles = css`
     :host {
       --hoverboard-dialog-width: 85%;
@@ -25,8 +26,8 @@ export class FeedbackDialog extends StatefulElement {
   @query('#dialog')
   dialog!: HoverboardDialog;
 
-  @state()
-  private open = false;
+  @fromStore((state) => selectIsDialogOpen(state, DIALOG.FEEDBACK))
+  private open!: boolean;
   @state()
   private data: DialogState = new Initialized();
   @state()
@@ -36,13 +37,14 @@ export class FeedbackDialog extends StatefulElement {
     this.dialog.addEventListener('closed', () => closeDialog());
   }
 
-  override stateChanged(state: RootState) {
-    this.data = state.dialogs;
-    this.open = selectIsDialogOpen(state, DIALOG.FEEDBACK);
-    if (this.data instanceof Success && this.data.data.name === DIALOG.FEEDBACK) {
-      this.session = this.data.data.data;
-    }
-  }
+  private readonly dialogStore = new StoreController(this, (state) => state.dialogs, {
+    onChange: (value) => {
+      this.data = value;
+      if (value instanceof Success && value.data.name === DIALOG.FEEDBACK) {
+        this.session = value.data.data;
+      }
+    },
+  });
 
   override render() {
     return html`

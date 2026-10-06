@@ -1,15 +1,15 @@
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import type { Day } from '../../models/day';
-import type { RootState } from '../../store';
 import { selectFeaturedSchedule } from '../../store/schedule/selectors';
 import { schedule } from '../../utils/data';
 import '../../components/shared/auth-required';
 import './schedule-day';
-import { StatefulElement } from '../../components/stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../../components/themed-element';
 
 @customElement('my-schedule')
-export class MySchedule extends StatefulElement {
+export class MySchedule extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
@@ -47,12 +47,8 @@ export class MySchedule extends StatefulElement {
 
   private schedule = schedule;
 
-  @property({ type: Array })
-  featuredSchedule: Day[] = [];
-
-  override stateChanged(state: RootState) {
-    this.featuredSchedule = selectFeaturedSchedule(state);
-  }
+  @fromStore((state) => selectFeaturedSchedule(state))
+  featuredSchedule!: Day[];
 
   override render() {
     return html`

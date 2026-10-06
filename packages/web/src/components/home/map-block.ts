@@ -1,13 +1,13 @@
 import { css, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
-import type { RootState } from '../../store';
+import { customElement } from 'lit/decorators.js';
 import { initialUiState } from '../../store/ui';
 import { location, mapBlock } from '../../utils/data';
 import '../shared/hoverboard-icon';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('map-block')
-export class MapBlock extends StatefulElement {
+export class MapBlock extends ThemedElement {
   static override styles = css`
     :host {
       margin: 32px auto;
@@ -79,8 +79,8 @@ export class MapBlock extends StatefulElement {
   private mapCenter = `${location.mapCenter.latitude},${location.mapCenter.longitude}`;
   private markerPosition = `${location.pointer.latitude},${location.pointer.longitude}`;
 
-  @state()
-  private viewport = initialUiState.viewport;
+  @fromStore((state) => state.ui.viewport)
+  private viewport!: typeof initialUiState.viewport;
 
   private option = {
     disableDefaultUI: true,
@@ -105,10 +105,6 @@ export class MapBlock extends StatefulElement {
       },
     ],
   };
-
-  override stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
-  }
 
   override render() {
     return html`

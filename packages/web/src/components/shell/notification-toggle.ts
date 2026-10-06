@@ -5,7 +5,7 @@ import type { MdSwitch } from '@material/web/switch/switch.js';
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
-import { type RootState, store } from '../../store';
+import { store } from '../../store';
 import {
   initialNotificationPermissionState,
   PROMPT_USER,
@@ -29,10 +29,11 @@ import type { UserState } from '../../store/user';
 import { loading, notifications } from '../../utils/data';
 import '../shared/auth-required';
 import '../shared/hoverboard-icon';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('notification-toggle')
-export class NotificationToggle extends StatefulElement {
+export class NotificationToggle extends ThemedElement {
   static override styles = css`
     :host {
       position: relative;
@@ -95,14 +96,14 @@ export class NotificationToggle extends StatefulElement {
   private notifications = notifications;
   private loading = loading;
 
-  @state()
-  private notificationPermission = initialNotificationPermissionState.value;
-  @state()
-  private notificationsSubscribers = initialNotificationsSubscribersState;
-  @state()
-  private notificationsUsersSubscribed = false;
-  @state()
-  private user: UserState = new Initialized();
+  @fromStore((state) => state.notificationPermission.value)
+  private notificationPermission!: typeof initialNotificationPermissionState.value;
+  @fromStore((state) => selectNotificationsSubscribers(state))
+  private notificationsSubscribers!: typeof initialNotificationsSubscribersState;
+  @fromStore((state) => selectNotificationsUsersSubscribed(state))
+  private notificationsUsersSubscribed!: boolean;
+  @fromStore((state) => state.user)
+  private user!: UserState;
 
   @state()
   private opened = false;
@@ -122,13 +123,6 @@ export class NotificationToggle extends StatefulElement {
     } else {
       store.dispatch(unsupportedNotificationPermission());
     }
-  }
-
-  override stateChanged(state: RootState) {
-    this.notificationPermission = state.notificationPermission.value;
-    this.user = state.user;
-    this.notificationsSubscribers = selectNotificationsSubscribers(state);
-    this.notificationsUsersSubscribed = selectNotificationsUsersSubscribed(state);
   }
 
   override render() {

@@ -1,11 +1,16 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { setStoreState } from '../../../__tests__/helpers/store';
 import { location, mapBlock } from '../../utils/data';
 import { initialUiState } from '../../store/ui';
 import type { MapBlock } from './map-block';
 
 import './map-block';
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 describe('map-block', () => {
   it('defines a component', () => {
@@ -27,9 +32,9 @@ describe('map-block', () => {
 
   it('does not render the google map when viewport is not tablet plus', async () => {
     const { element, shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
-    element.stateChanged({
+    setStoreState({
       ui: { ...initialUiState, viewport: { ...initialUiState.viewport, isTabletPlus: false } },
-    } as never);
+    });
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('gmp-map')).toBeNull();
@@ -37,9 +42,9 @@ describe('map-block', () => {
 
   it('renders the google map when viewport is tablet plus', async () => {
     const { element, shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
-    element.stateChanged({
+    setStoreState({
       ui: { ...initialUiState, viewport: { ...initialUiState.viewport, isTabletPlus: true } },
-    } as never);
+    });
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('gmp-map')).toBeInTheDocument();

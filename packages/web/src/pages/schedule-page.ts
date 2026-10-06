@@ -1,7 +1,7 @@
-import { Initialized, Pending } from '@abraham/remotedata';
+import { Pending } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import type { RouterLocation } from '@vaadin/router';
 import '../components/hero/hero-block';
 import '../components/shared/content-loader';
@@ -10,7 +10,6 @@ import '../components/schedule/header-bottom-toolbar';
 import '../components/schedule/sticky-element';
 import type { Filter } from '../models/filter';
 import type { FilterGroup } from '../models/filter-group';
-import type { RootState } from '../store';
 import { selectFilters } from '../store/filters';
 import { type ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';
@@ -18,7 +17,8 @@ import { type SessionsState, selectSessionsState } from '../store/sessions';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { updateMetadata } from '../utils/metadata';
-import { StatefulElement } from '../components/stateful-element';
+import { fromStore } from '../controllers/from-store';
+import { ThemedElement } from '../components/themed-element';
 
 // `heroSettings.schedule` (from `settings.json`) doesn't declare a `background.image`
 // or a top-level `description` — unlike some other hero settings entries (e.g.
@@ -35,7 +35,7 @@ interface ScheduleHeroSettings {
 }
 
 @customElement('schedule-page')
-export class SchedulePage extends StatefulElement {
+export class SchedulePage extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
@@ -68,31 +68,23 @@ export class SchedulePage extends StatefulElement {
   private heroSettings: ScheduleHeroSettings = heroSettings.schedule;
   private contentLoaders = contentLoaders.schedule;
 
-  @property({ type: Object })
-  schedule: ScheduleState = new Initialized();
-  @property({ type: Object })
-  sessions: SessionsState = new Initialized();
-  @property({ type: Object })
-  speakers: SpeakersState = new Initialized();
+  @fromStore((state) => selectScheduleState(state))
+  schedule!: ScheduleState;
+  @fromStore((state) => selectSessionsState(state))
+  sessions!: SessionsState;
+  @fromStore((state) => selectSpeakersState(state))
+  speakers!: SpeakersState;
 
-  @state()
-  private filterGroups: FilterGroup[] = [];
-  @state()
-  private selectedFilters: Filter[] = [];
+  @fromStore((state) => selectFilterGroups(state))
+  private filterGroups!: FilterGroup[];
+  @fromStore((state) => selectFilters(state))
+  private selectedFilters!: Filter[];
   @state()
   private location: RouterLocation | undefined;
 
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-  }
-
-  override stateChanged(state: RootState) {
-    this.schedule = selectScheduleState(state);
-    this.speakers = selectSpeakersState(state);
-    this.sessions = selectSessionsState(state);
-    this.filterGroups = selectFilterGroups(state);
-    this.selectedFilters = selectFilters(state);
   }
 
   onAfterEnter(location: RouterLocation) {

@@ -1,4 +1,4 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
@@ -10,13 +10,14 @@ import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-speakers-block';
 import type { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
-import { type RootState, store } from '../store';
+import { store } from '../store';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
 import { speakerDetails } from '../utils/data';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
-import { StatefulElement } from '../components/stateful-element';
+import { fromStore } from '../controllers/from-store';
+import { ThemedElement } from '../components/themed-element';
 
 // `speaker.sessions` is not currently populated by any action/selector/state for
 // `SpeakerWithTags`, so this augmentation and helper keep the (currently always-empty)
@@ -35,7 +36,7 @@ interface SpeakerSessionSummary {
 type SpeakerWithSessions = SpeakerWithTags & { sessions?: SpeakerSessionSummary[] };
 
 @customElement('speaker-page')
-export class SpeakerPage extends StatefulElement {
+export class SpeakerPage extends ThemedElement {
   static override styles = css`
     :host {
       background: #fff;
@@ -174,15 +175,11 @@ export class SpeakerPage extends StatefulElement {
 
   @property({ type: Object })
   speaker: SpeakerWithTags | undefined;
-  @property({ type: Object })
-  speakers: SpeakersState = new Initialized();
+  @fromStore((state) => selectSpeakersState(state))
+  speakers!: SpeakersState;
 
   @state()
   private speakerId: string | undefined;
-
-  override stateChanged(state: RootState) {
-    this.speakers = selectSpeakersState(state);
-  }
 
   onAfterEnter(location: RouterLocation) {
     this.speakerId = location.params?.['id']?.toString();

@@ -46,6 +46,23 @@ describe('StoreController', () => {
     controller.hostDisconnected();
   });
 
+  it('calls onChange on connect and when the selected value changes', () => {
+    const host = createHost();
+    const onChange = vi.fn();
+    const controller = new StoreController(host, (state) => state.snackbars.length, { onChange });
+
+    controller.hostConnected();
+    expect(onChange).toHaveBeenCalledWith(store.getState().snackbars.length, expect.anything());
+    expect(host.requestUpdate).not.toHaveBeenCalled();
+
+    store.dispatch(queueSnackbar('changed'));
+    expect(onChange).toHaveBeenLastCalledWith(store.getState().snackbars.length, 0);
+    expect(host.requestUpdate).toHaveBeenCalledTimes(1);
+
+    controller.hostDisconnected();
+    store.dispatch(removeSnackbar(store.getState().snackbars[0]!.id));
+  });
+
   it('stops listening when the host disconnects', () => {
     const host = createHost();
     const controller = new StoreController(host, (state) => state.snackbars.length);

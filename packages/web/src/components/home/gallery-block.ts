@@ -1,15 +1,15 @@
 import '@material/web/button/outlined-button.js';
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import type { Photo } from '../../models/photo';
-import type { RootState } from '../../store';
 import { type GalleryState, selectGallery } from '../../store/gallery';
 import { galleryBlock } from '../../utils/data';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('gallery-block')
-export class GalleryBlock extends StatefulElement {
+export class GalleryBlock extends ThemedElement {
   static override styles = css`
     .photos-grid {
       margin: 64px auto;
@@ -121,12 +121,8 @@ export class GalleryBlock extends StatefulElement {
     }
   `;
 
-  @property({ type: Object })
-  gallery: GalleryState = new Initialized();
-
-  override stateChanged(state: RootState) {
-    this.gallery = selectGallery(state);
-  }
+  @fromStore((state) => selectGallery(state))
+  gallery!: GalleryState;
 
   override render() {
     return html`

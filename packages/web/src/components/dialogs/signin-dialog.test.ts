@@ -1,7 +1,8 @@
-import { Failure, Initialized } from '@abraham/remotedata';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { Failure } from '@abraham/remotedata';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { setStoreState } from '../../../__tests__/helpers/store';
 import { mergeAccounts, signIn } from '../../store/auth';
 import { closeDialog, openSigninDialog } from '../../store/dialogs';
 import { queueSnackbar } from '../../store/snackbars';
@@ -44,6 +45,9 @@ const mockQueueSnackbar = vi.mocked(queueSnackbar);
 describe('signin-dialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
   it('defines a component', () => {
     expect(customElements.get('signin-dialog')).toBeDefined();
@@ -104,10 +108,7 @@ describe('signin-dialog', () => {
       providerId: PROVIDER['google.com'],
     } as never);
 
-    element.stateChanged({
-      auth: element['auth'],
-      dialogs: new Initialized(),
-    } as never);
+    setStoreState({ auth: element['auth'] });
 
     expect(mockCloseDialog).toHaveBeenCalled();
     expect(mockOpenSigninDialog).toHaveBeenCalled();
@@ -122,10 +123,7 @@ describe('signin-dialog', () => {
       providerId: PROVIDER['google.com'],
     } as never);
 
-    element.stateChanged({
-      auth: element['auth'],
-      dialogs: new Initialized(),
-    } as never);
+    setStoreState({ auth: element['auth'] });
 
     expect(mockCloseDialog).toHaveBeenCalled();
     expect(mockOpenSigninDialog).not.toHaveBeenCalled();
@@ -141,10 +139,7 @@ describe('signin-dialog', () => {
       providerId: undefined,
     } as never);
 
-    element.stateChanged({
-      auth: element['auth'],
-      dialogs: new Initialized(),
-    } as never);
+    setStoreState({ auth: element['auth'] });
 
     expect(mockCloseDialog).toHaveBeenCalled();
     expect(mockOpenSigninDialog).not.toHaveBeenCalled();

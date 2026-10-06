@@ -1,6 +1,13 @@
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
 import { type RootState, store } from '../store';
 
+export interface StoreControllerOptions<T> {
+  /** Decides whether two selected values are the same. Defaults to `Object.is`. */
+  equals?: (a: T, b: T) => boolean;
+  /** Called with the selected value on every connect and whenever the value changes. */
+  onChange?: (value: T, previous: T) => void;
+}
+
 /**
  * Reactive controller that exposes a slice of the Redux state through `value` and only
  * requests a host update when the selected value changes.
@@ -8,19 +15,23 @@ import { type RootState, store } from '../store';
 export class StoreController<T> implements ReactiveController {
   value: T;
   private unsubscribe: (() => void) | undefined;
+  private readonly equals: (a: T, b: T) => boolean;
+  private readonly onChange: ((value: T, previous: T) => void) | undefined;
 
   constructor(
     private readonly host: ReactiveControllerHost,
     private readonly selector: (state: RootState) => T,
-    private readonly equals: (a: T, b: T) => boolean = Object.is,
+    options: StoreControllerOptions<T> = {},
   ) {
+    this.equals = options.equals ?? Object.is;
+    this.onChange = options.onChange;
     this.value = selector(store.getState());
     host.addController(this);
   }
 
   hostConnected() {
-    this.update();
-    this.unsubscribe = store.subscribe(() => this.update());
+    this.update(true);
+    this.unsubscribe = store.subscribe(() => this.update(false));
   }
 
   hostDisconnected() {
@@ -28,12 +39,17 @@ export class StoreController<T> implements ReactiveController {
     this.unsubscribe = undefined;
   }
 
-  private update() {
+  private update(force: boolean) {
     const next = this.selector(store.getState());
-    if (this.equals(next, this.value)) {
+    const changed = !this.equals(next, this.value);
+    if (!changed && !force) {
       return;
     }
+    const previous = this.value;
     this.value = next;
-    this.host.requestUpdate();
+    this.onChange?.(next, previous);
+    if (changed) {
+      this.host.requestUpdate();
+    }
   }
 }

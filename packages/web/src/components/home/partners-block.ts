@@ -1,18 +1,19 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html, nothing, type PropertyValues } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { type RootState, store } from '../../store';
+import { customElement } from 'lit/decorators.js';
+import { store } from '../../store';
 import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
 import { type PartnerGroupsState, selectPartnerGroups } from '../../store/partners';
 import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
 import { queueSnackbar } from '../../store/snackbars';
 import { loading, partnersBlock } from '../../utils/data';
 import '../shared/hoverboard-icon';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('partners-block')
-export class PartnersBlock extends StatefulElement {
+export class PartnersBlock extends ThemedElement {
   static override styles = css`
     .block-title {
       margin: 24px 0 8px;
@@ -61,10 +62,10 @@ export class PartnersBlock extends StatefulElement {
   private loading = loading;
   private partnersBlock = partnersBlock;
 
-  @property({ type: Object })
-  potentialPartners = initialPotentialPartnersState;
-  @property({ type: Object })
-  partners: PartnerGroupsState = new Initialized();
+  @fromStore((state) => state.potentialPartners)
+  potentialPartners!: typeof initialPotentialPartnersState;
+  @fromStore((state) => selectPartnerGroups(state))
+  partners!: PartnerGroupsState;
 
   private get pending() {
     return this.partners instanceof Pending;
@@ -72,11 +73,6 @@ export class PartnersBlock extends StatefulElement {
 
   private get failure() {
     return this.partners instanceof Failure;
-  }
-
-  override stateChanged(state: RootState) {
-    this.partners = selectPartnerGroups(state);
-    this.potentialPartners = state.potentialPartners;
   }
 
   override willUpdate(changedProperties: PropertyValues) {

@@ -1,11 +1,16 @@
-import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import { setViewportSize, VIEWPORT } from '../store/ui';
 
-installMediaQueryWatcher(`(max-width: 639px)`, (matches) => {
+const watchMediaQuery = (query: string, onChange: (matches: boolean) => void) => {
+  const mediaQueryList = window.matchMedia(query);
+  mediaQueryList.addEventListener('change', (event) => onChange(event.matches));
+  onChange(mediaQueryList.matches);
+};
+
+watchMediaQuery(`(max-width: 639px)`, (matches) => {
   setViewportSize({ size: VIEWPORT.isPhone, matches });
   setViewportSize({ size: VIEWPORT.isTabletPlus, matches: !matches });
 });
 
-installMediaQueryWatcher(`(min-width: 812px)`, (matches) => {
+watchMediaQuery(`(min-width: 812px)`, (matches) => {
   setViewportSize({ size: VIEWPORT.isLaptopPlus, matches });
 });

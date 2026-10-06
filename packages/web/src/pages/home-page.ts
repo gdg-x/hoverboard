@@ -27,7 +27,7 @@ import {
 } from '../utils/data';
 import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
-import { StatefulElement } from '../components/stateful-element';
+import { ThemedElement } from '../components/themed-element';
 
 // Below-the-fold blocks load when they are about to scroll into view.
 const lazyBlocks = {
@@ -40,7 +40,7 @@ const lazyBlocks = {
 type LazyBlock = keyof typeof lazyBlocks;
 
 @customElement('home-page')
-export class HomePage extends StatefulElement {
+export class HomePage extends ThemedElement {
   static override styles = css`
     :host {
       display: block;

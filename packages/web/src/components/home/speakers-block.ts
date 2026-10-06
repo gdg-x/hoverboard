@@ -1,19 +1,19 @@
 import '@material/web/button/outlined-button.js';
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import '../shared/hoverboard-icon';
 import '../shared/text-truncate';
 import type { Speaker } from '../../models/speaker';
 import { router } from '../../router';
-import type { RootState } from '../../store';
 import { type SpeakersState, selectSpeakersState } from '../../store/speakers';
 import { randomOrder } from '../../utils/arrays';
 import { speakersBlock } from '../../utils/data';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('speakers-block')
-export class SpeakersBlock extends StatefulElement {
+export class SpeakersBlock extends ThemedElement {
   static override styles = css`
     .speakers-wrapper {
       margin: 40px 0 32px;
@@ -162,12 +162,8 @@ export class SpeakersBlock extends StatefulElement {
     }
   `;
 
-  @property({ type: Object })
-  speakers: SpeakersState = new Initialized();
-
-  override stateChanged(state: RootState) {
-    this.speakers = selectSpeakersState(state);
-  }
+  @fromStore((state) => selectSpeakersState(state))
+  speakers!: SpeakersState;
 
   override render() {
     return html`

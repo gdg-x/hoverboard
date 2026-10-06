@@ -1,10 +1,10 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Session } from '../../models/session';
 import { router } from '../../router';
-import { type RootState, store } from '../../store';
+import { store } from '../../store';
 import { openFeedbackDialog, openSigninDialog } from '../../store/dialogs';
 import {
   type FeaturedSessionsState,
@@ -19,7 +19,8 @@ import { getSummary } from '../../utils/strings';
 import { getVariableColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
 import '../shared/text-truncate';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 // The runtime `session.speakers` payload is an enriched list of speaker summaries (see
 // `packages/server/functions/src/schedule-generator/speakers-sessions-schedule-map.ts`), not the `string[]` of ids
@@ -43,7 +44,7 @@ type SessionWithScheduleDetails = Omit<Session, 'speakers'> & {
 };
 
 @customElement('session-element')
-export class SessionElement extends StatefulElement {
+export class SessionElement extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
@@ -218,17 +219,12 @@ export class SessionElement extends StatefulElement {
     }
   `;
 
-  @property({ type: Object })
-  user: UserState = new Initialized();
+  @fromStore((state) => state.user)
+  user!: UserState;
   @property({ type: Object })
   session: Session | undefined;
-  @property({ type: Object })
-  featuredSessions: FeaturedSessionsState = new Initialized();
-
-  override stateChanged(state: RootState) {
-    this.user = state.user;
-    this.featuredSessions = selectFeaturedSessionsState(state);
-  }
+  @fromStore((state) => selectFeaturedSessionsState(state))
+  featuredSessions!: FeaturedSessionsState;
 
   override render() {
     const session = this.session as SessionWithScheduleDetails | undefined;

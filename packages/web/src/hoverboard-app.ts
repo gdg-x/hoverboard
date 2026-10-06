@@ -1,12 +1,12 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import { css, html, nothing, type PropertyValues } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, query, state } from 'lit/decorators.js';
 import './components/shell/app-install';
 import './components/footer/footer-block';
 import './components/shared/hoverboard-icon';
 import './components/shell/header-toolbar';
 import { selectRouteName, startRouter } from './router';
-import { type RootState, store } from './store';
+import { store } from './store';
 import { onUser } from './store/auth';
 import { DIALOG, selectIsDialogOpen } from './store/dialogs';
 import { queueSnackbar } from './store/snackbars';
@@ -23,13 +23,15 @@ import {
 } from './utils/data';
 import './utils/media-query';
 import type { Stickied } from './utils/stickied';
-import { StatefulElement } from './components/stateful-element';
+import { ThemedElement } from './components/themed-element';
+import { StoreController } from './controllers/store-controller';
+import { fromStore } from './controllers/from-store';
 
 type LazyElement =
   'feedback-dialog' | 'signin-dialog' | 'subscribe-dialog' | 'video-dialog' | 'snack-bar';
 
 @customElement('hoverboard-app')
-export class HoverboardApp extends StatefulElement {
+export class HoverboardApp extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
@@ -163,14 +165,14 @@ export class HoverboardApp extends StatefulElement {
   @query('#header')
   header!: HTMLElement;
 
-  @property({ type: Object })
-  tickets: TicketsState = new Initialized();
+  @fromStore(selectTickets)
+  tickets!: TicketsState;
 
   @state()
   private drawerOpened = false;
   private providerUrls = signInProviders.allowedProvidersUrl;
-  @state()
-  private routeName = 'home';
+  @fromStore(() => selectRouteName(window.location.pathname))
+  private routeName!: string;
 
   // Loaded on first use so they stay out of the initial bundle.
   private readonly lazyElements: Record<LazyElement, () => Promise<unknown>> = {
@@ -184,21 +186,22 @@ export class HoverboardApp extends StatefulElement {
   @state()
   private loadedElements = new Set<LazyElement>();
 
-  override stateChanged(state: RootState) {
-    this.tickets = selectTickets(state);
-    this.routeName = selectRouteName(window.location.pathname);
-    this.loadNeededElements(state);
-  }
-
-  private loadNeededElements(state: RootState) {
-    const needed: Record<LazyElement, boolean> = {
+  private readonly neededElementsStore = new StoreController(
+    this,
+    (state): Record<LazyElement, boolean> => ({
       'feedback-dialog': selectIsDialogOpen(state, DIALOG.FEEDBACK),
       'signin-dialog': selectIsDialogOpen(state, DIALOG.SIGNIN),
       'subscribe-dialog': selectIsDialogOpen(state, DIALOG.SUBSCRIBE),
       'video-dialog': state.ui.videoDialog.open,
       'snack-bar': state.snackbars.length > 0,
-    };
+    }),
+    {
+      equals: (a, b) => (Object.keys(a) as LazyElement[]).every((tag) => a[tag] === b[tag]),
+      onChange: (needed) => this.loadNeededElements(needed),
+    },
+  );
 
+  private loadNeededElements(needed: Record<LazyElement, boolean>) {
     (Object.keys(needed) as LazyElement[]).forEach((tag) => {
       if (!needed[tag] || this.loadedElements.has(tag) || this.loadingElements.has(tag)) {
         return;

@@ -1,7 +1,7 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
 import { css, html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import '../components/shared/content-loader';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
@@ -9,16 +9,16 @@ import '../components/shared/posts-list';
 import '../components/shared/text-truncate';
 import type { Post } from '../models/post';
 import { router } from '../router';
-import type { RootState } from '../store';
 import { type BlogState, selectBlogPosts } from '../store/blog';
 import { initialUiState } from '../store/ui';
 import { contentLoaders, heroSettings } from '../utils/data';
 import { getDate } from '../utils/dates';
 import { updateMetadata } from '../utils/metadata';
-import { StatefulElement } from '../components/stateful-element';
+import { fromStore } from '../controllers/from-store';
+import { ThemedElement } from '../components/themed-element';
 
 @customElement('blog-list-page')
-export class BlogListPage extends StatefulElement {
+export class BlogListPage extends ThemedElement {
   static override styles = css`
     .featured-posts-wrapper {
       grid-template-columns: 1fr;
@@ -103,10 +103,10 @@ export class BlogListPage extends StatefulElement {
   private heroSettings = heroSettings.blog;
   private contentLoaders = contentLoaders.blog;
 
-  @property({ type: Object })
-  posts: BlogState = new Initialized();
-  @state()
-  private viewport = initialUiState.viewport;
+  @fromStore((state) => selectBlogPosts(state))
+  posts!: BlogState;
+  @fromStore((state) => state.ui.viewport)
+  private viewport!: typeof initialUiState.viewport;
 
   get pending() {
     return this.posts instanceof Pending;
@@ -122,11 +122,6 @@ export class BlogListPage extends StatefulElement {
 
   private get contentLoaderVisibility(): boolean {
     return this.posts instanceof Success || this.posts instanceof Failure;
-  }
-
-  override stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
-    this.posts = selectBlogPosts(state);
   }
 
   override connectedCallback() {

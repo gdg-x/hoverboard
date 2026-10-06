@@ -1,19 +1,19 @@
-import { Initialized, Success } from '@abraham/remotedata';
+import { Success } from '@abraham/remotedata';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import '../markdown/short-markdown';
 import '../shared/text-truncate';
 import { router } from '../../router';
-import type { RootState } from '../../store';
 import { type BlogState, selectBlogPosts } from '../../store/blog';
 import { latestPostsBlock } from '../../utils/data';
 import { getDate } from '../../utils/dates';
 import '../shared/hoverboard-icon';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('latest-posts-block')
-export class LatestPostsBlock extends StatefulElement {
+export class LatestPostsBlock extends ThemedElement {
   static override styles = css`
     .posts-wrapper {
       display: grid;
@@ -91,12 +91,8 @@ export class LatestPostsBlock extends StatefulElement {
 
   private latestPostsBlock = latestPostsBlock;
 
-  @property({ type: Object })
-  posts: BlogState = new Initialized();
-
-  override stateChanged(state: RootState) {
-    this.posts = selectBlogPosts(state);
-  }
+  @fromStore((state) => selectBlogPosts(state))
+  posts!: BlogState;
 
   private get latestPosts() {
     if (this.posts instanceof Success) {

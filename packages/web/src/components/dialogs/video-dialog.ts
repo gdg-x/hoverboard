@@ -1,15 +1,15 @@
 import '@justinribeiro/lite-youtube';
 import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
-import { customElement, query, state } from 'lit/decorators.js';
-import type { RootState } from '../../store';
+import { customElement, query } from 'lit/decorators.js';
 import { closeVideoDialog, initialUiState } from '../../store/ui';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';
 import '../shared/hoverboard-dialog';
-import { StatefulElement } from '../stateful-element';
+import { fromStore } from '../../controllers/from-store';
+import { ThemedElement } from '../themed-element';
 
 @customElement('video-dialog')
-export class VideoDialog extends StatefulElement {
+export class VideoDialog extends ThemedElement {
   static override styles = css`
     :host {
       --hoverboard-dialog-min-width: 80vw;
@@ -25,15 +25,11 @@ export class VideoDialog extends StatefulElement {
   @query('#dialog')
   dialog!: HoverboardDialog;
 
-  @state()
-  private video = initialUiState.videoDialog;
+  @fromStore((state) => state.ui.videoDialog)
+  private video!: typeof initialUiState.videoDialog;
 
   override firstUpdated() {
     this.dialog.addEventListener('closed', () => closeVideoDialog());
-  }
-
-  override stateChanged(state: RootState) {
-    this.video = state.ui.videoDialog;
   }
 
   override render() {

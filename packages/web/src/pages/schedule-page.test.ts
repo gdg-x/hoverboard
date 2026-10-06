@@ -77,7 +77,6 @@ describe('schedule-page', () => {
     const { element, shadowRoot } = await fixture<SchedulePage>(
       html`<schedule-page></schedule-page>`,
     );
-    element.stateChanged({} as never);
     await element.updateComplete;
 
     const filterMenu = shadowRoot.querySelector('filter-menu') as never as {
