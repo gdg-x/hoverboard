@@ -137,12 +137,14 @@ export class NotificationToggle extends ReduxMixin(ThemedElement) {
         type="button"
         class="notifications-trigger"
         aria-label="notifications"
+        aria-expanded="${this.opened}"
+        aria-controls="notifications-panel"
         @click="${this.requestPermission}"
       >
         <hoverboard-icon name="${this.icon}"></hoverboard-icon>
       </button>
 
-      <div class="dropdown-panel" ?open="${this.opened}">
+      <div id="notifications-panel" class="dropdown-panel" ?open="${this.opened}">
         ${
           this.initialized
             ? html`

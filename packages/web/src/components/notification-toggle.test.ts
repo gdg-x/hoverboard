@@ -93,6 +93,26 @@ describe('notification-toggle', () => {
     expect(shadowRoot.querySelector('.dropdown-panel')).toHaveAttribute('open');
   });
 
+  it('exposes the panel state on the trigger', async () => {
+    const { element, shadowRoot } = await fixture<NotificationToggle>(
+      html`<notification-toggle></notification-toggle>`,
+    );
+    element['notificationPermission'] = new Failure(new Error('denied'));
+    await element.updateComplete;
+    const trigger = shadowRoot.querySelector<HTMLElement>('.notifications-trigger')!;
+
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    expect(trigger).toHaveAttribute(
+      'aria-controls',
+      shadowRoot.querySelector('.dropdown-panel')!.id,
+    );
+
+    trigger.click();
+    await element.updateComplete;
+
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+  });
+
   it('closes the panel when clicking outside', async () => {
     const { element, shadowRoot } = await fixture<NotificationToggle>(
       html`<notification-toggle></notification-toggle>`,

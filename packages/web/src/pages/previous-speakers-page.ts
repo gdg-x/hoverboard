@@ -1,5 +1,5 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@material/web/progress/linear-progress.js';
 import '@power-elements/lazy-image';
@@ -197,7 +197,15 @@ export class PreviousSpeakersPage extends ReduxMixin(ThemedElement) {
               <div class="details">
                 <h2 class="name">${speaker.name}</h2>
                 <div class="origin">${speaker.country}</div>
-                <img class="company-logo" src=${speaker.companyLogo ?? ''} />
+                ${
+                  speaker.companyLogo
+                    ? html`<img
+                        class="company-logo"
+                        src=${speaker.companyLogo}
+                        alt=${speaker.company}
+                      />`
+                    : nothing
+                }
                 <div class="sessions">
                   <h5>${this.previousYears}:</h5>
                   ${this.getYears(speaker.sessions)}

@@ -41,6 +41,7 @@ export class HoverboardDialog extends LitElement {
     }
 
     .headline {
+      margin: 0;
       font-size: 1.25rem;
       font-weight: 500;
       line-height: 2rem;
@@ -92,8 +93,8 @@ export class HoverboardDialog extends LitElement {
 
   override render() {
     return html`
-      <dialog>
-        <div class="headline"><slot name="headline"></slot></div>
+      <dialog aria-labelledby="headline">
+        <h2 id="headline" class="headline"><slot name="headline"></slot></h2>
         <div class="content"><slot name="content"></slot></div>
         <div class="actions"><slot name="actions"></slot></div>
       </dialog>

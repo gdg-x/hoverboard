@@ -51,6 +51,28 @@ describe('previous-speakers-page', () => {
     expect(shadowRoot).toHaveTextContent('2024');
   });
 
+  it('renders the company logo with the company name as alt text', async () => {
+    vi.mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
+    const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
+      html`<previous-speakers-page></previous-speakers-page>`,
+    );
+    element.previousSpeakers = new Success([{ ...speaker, companyLogo: '/logo.svg' }]);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.company-logo')).toHaveAttribute('alt', 'Example');
+  });
+
+  it('does not render a company logo image without a source', async () => {
+    vi.mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
+    const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
+      html`<previous-speakers-page></previous-speakers-page>`,
+    );
+    element.previousSpeakers = new Success([speaker]);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.company-logo')).toBeNull();
+  });
+
   it('triggers the fetch and starts in the pending state', async () => {
     const { element } = await fixture<PreviousSpeakersPage>(
       html`<previous-speakers-page></previous-speakers-page>`,

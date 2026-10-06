@@ -27,6 +27,15 @@ describe('hoverboard-dialog', () => {
     expect(shadowRoot.querySelector('slot[name="actions"]')).not.toBeNull();
   });
 
+  it('names the dialog after its headline', async () => {
+    const { shadowRoot } = await fixture<HoverboardDialog>(
+      html`<hoverboard-dialog></hoverboard-dialog>`,
+    );
+
+    expect(shadowRoot.querySelector('h2#headline')).not.toBeNull();
+    expect(shadowRoot.querySelector('dialog')).toHaveAttribute('aria-labelledby', 'headline');
+  });
+
   it('is closed by default', async () => {
     const { shadowRoot } = await fixture<HoverboardDialog>(
       html`<hoverboard-dialog></hoverboard-dialog>`,
