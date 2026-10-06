@@ -186,9 +186,20 @@ export class HoverboardApp extends ReduxMixin(ThemedElement) {
 
   override connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('element-sticked', (event) => this.toggleHeaderShadow(event));
-    window.addEventListener('offline', () => store.dispatch(queueSnackbar(offlineMessage)));
+    window.addEventListener('element-sticked', this.onElementSticked);
+    window.addEventListener('offline', this.onOffline);
   }
+
+  override disconnectedCallback() {
+    window.removeEventListener('element-sticked', this.onElementSticked);
+    window.removeEventListener('offline', this.onOffline);
+    super.disconnectedCallback();
+  }
+
+  private readonly onElementSticked = (event: CustomEvent<Stickied>) =>
+    this.toggleHeaderShadow(event);
+
+  private readonly onOffline = () => store.dispatch(queueSnackbar(offlineMessage));
 
   override firstUpdated(changedProperties: PropertyValues) {
     super.firstUpdated(changedProperties);

@@ -29,7 +29,7 @@ describe('app-install', () => {
   it('hides the install link until the browser fires beforeinstallprompt', async () => {
     const { shadowRoot } = await fixture<AppInstall>(html`<app-install></app-install>`);
 
-    expect(shadowRoot.querySelector('a')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('button')).toHaveAttribute('hidden');
   });
 
   it('shows the install link once beforeinstallprompt fires and prevents the default prompt', async () => {
@@ -41,8 +41,8 @@ describe('app-install', () => {
     await element.updateComplete;
 
     expect(preventDefault).toHaveBeenCalled();
-    expect(shadowRoot.querySelector('a')).not.toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('a')).toHaveTextContent(addToHomeScreen.cta);
+    expect(shadowRoot.querySelector('button')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('button')).toHaveTextContent(addToHomeScreen.cta);
   });
 
   it('prompts for install and hides the link again on click', async () => {
@@ -53,19 +53,19 @@ describe('app-install', () => {
     window.dispatchEvent(event);
     await element.updateComplete;
 
-    fireEvent.click(shadowRoot.querySelector('a')!);
+    fireEvent.click(shadowRoot.querySelector('button')!);
     await element.updateComplete;
 
     expect(promptSpy).toHaveBeenCalledTimes(1);
-    expect(shadowRoot.querySelector('a')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('button')).toHaveAttribute('hidden');
   });
 
   it('does nothing when clicked without a deferred prompt', async () => {
     const { element, shadowRoot } = await fixture<AppInstall>(html`<app-install></app-install>`);
 
-    fireEvent.click(shadowRoot.querySelector('a')!);
+    fireEvent.click(shadowRoot.querySelector('button')!);
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('a')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('button')).toHaveAttribute('hidden');
   });
 });

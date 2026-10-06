@@ -62,10 +62,12 @@ export class FilterMenu extends ThemedElement {
         }
 
         .tag {
+          box-sizing: content-box;
           margin-right: 8px;
           margin-bottom: 8px;
           display: inline-flex;
           align-items: center;
+          font-family: inherit;
           font-size: 15px;
           cursor: pointer;
           color: var(--color);
@@ -94,6 +96,10 @@ export class FilterMenu extends ThemedElement {
 
         .reset-filters {
           margin-right: 8px;
+          padding: 0;
+          background: none;
+          border: none;
+          font-family: inherit;
           font-size: 14px;
           cursor: pointer;
           color: var(--default-primary-color);
@@ -138,14 +144,14 @@ export class FilterMenu extends ThemedElement {
           </div>
 
           <div class="actions">
-            <span
+            <button
+              type="button"
               class="reset-filters"
-              role="button"
               @click="${this.resetFilters}"
               ?hidden="${!this.selectedFilters.length}"
             >
               ${this.filters.clear}
-            </span>
+            </button>
             <md-outlined-button class="icon-right" trailing-icon @click="${this.toggleBoard}">
               ${this.filters.title}
               <hoverboard-icon slot="icon" name="${this.icon}"></hoverboard-icon>
@@ -158,17 +164,19 @@ export class FilterMenu extends ThemedElement {
             this.selectedFilters,
             (selectedFilter) => `${selectedFilter.group}:${selectedFilter.tag}`,
             (selectedFilter) => html`
-              <div
+              <button
+                type="button"
                 class="tag"
                 style="${styleMap({ '--color': this.getVariableColor(selectedFilter.tag, 'primary-text-color') })}"
                 filter-key="${selectedFilter.group}"
                 filter-value="${selectedFilter.tag}"
+                aria-pressed="true"
                 @click="${this.toggleFilter}"
                 selected
               >
                 <span>${selectedFilter.tag}</span>
                 <hoverboard-icon name="close"></hoverboard-icon>
-              </div>
+              </button>
             `,
           )}
         </div>
@@ -184,16 +192,18 @@ export class FilterMenu extends ThemedElement {
                   filterGroup.filters,
                   (filter) => `${filterGroup.key}:${filter.tag}`,
                   (filter) => html`
-                    <div
+                    <button
+                      type="button"
                       class="tag"
                       style="${styleMap({ '--color': this.getVariableColor(filter.tag, 'primary-text-color') })}"
                       filter-key="${filterGroup.key}"
                       filter-value="${filter.tag}"
                       ?selected="${this.isSelected(this.selectedFilters, filter)}"
+                      aria-pressed="${this.isSelected(this.selectedFilters, filter)}"
                       @click="${this.toggleFilter}"
                     >
                       ${filter.tag}
-                    </div>
+                    </button>
                   `,
                 )}
               </div>

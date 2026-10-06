@@ -115,6 +115,9 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
           display: flex;
           align-items: center;
           cursor: pointer;
+          background: none;
+          border: none;
+          font: inherit;
         }
 
         .icon-button {
@@ -142,6 +145,12 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
           background-position: center;
           background-size: cover;
           cursor: pointer;
+        }
+
+        button.profile-image {
+          padding: 0;
+          border: none;
+          background-color: transparent;
         }
 
         .dropdown-panel {
@@ -191,6 +200,11 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
 
         .profile-action {
           margin-top: 4px;
+          padding: 0;
+          background: none;
+          border: none;
+          font-family: inherit;
+          text-align: start;
           text-transform: uppercase;
           color: var(--default-primary-color);
           font-size: 14px;
@@ -326,15 +340,14 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
             `,
           )}
 
-          <div
+          <button
+            type="button"
             class="signin-tab"
-            role="button"
-            tabindex="0"
             @click="${this.signIn}"
             ?hidden="${this.signedIn}"
           >
             ${this.signInText}
-          </div>
+          </button>
 
           <a href="${this.ticketUrl}" target="_blank" rel="noopener noreferrer">
             <md-filled-button class="buy-button">${this.buyTicket}</md-filled-button>
@@ -344,13 +357,16 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
         <notification-toggle></notification-toggle>
 
         <div class="profile-menu" ?hidden="${!this.signedIn}">
-          <div
+          <button
+            type="button"
             class="profile-image"
+            aria-label="account menu"
+            aria-expanded="${this.profileMenuOpened}"
             style="background-image: url('${
               this.user instanceof Success ? this.user.data.photoURL : ''
             }')"
             @click="${this.toggleProfileMenu}"
-          ></div>
+          ></button>
           <div class="dropdown-panel profile-details" ?open="${this.profileMenuOpened}">
             <div
               class="profile-image"
@@ -365,9 +381,9 @@ export class HeaderToolbar extends ReduxMixin(ThemedElement) {
               <span class="profile-email">
                 ${this.user instanceof Success ? this.user.data.email : ''}
               </span>
-              <span class="profile-action" role="button" @click="${this.signOut}">
+              <button type="button" class="profile-action" @click="${this.signOut}">
                 ${this.signOutText}
-              </span>
+              </button>
             </div>
           </div>
         </div>
