@@ -6,7 +6,7 @@ import '../markdown/short-markdown';
 import '../shared/text-truncate';
 import { router } from '../../router';
 import { type BlogState, selectBlogPosts } from '../../store/blog';
-import { latestPostsBlock } from '../../utils/data';
+import { latestPostsBlock } from '../../config/site';
 import { getDate } from '../../utils/dates';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { heroSettings } from '../../utils/data';
+import { heroSettings } from '../../config/site';
 import type { SimpleHero } from './simple-hero';
 import './simple-hero';
 

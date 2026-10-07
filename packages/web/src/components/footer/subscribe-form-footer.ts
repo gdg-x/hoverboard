@@ -5,7 +5,7 @@ import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field
 import { css, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { subscribe, type SubscribeState } from '../../store/subscribe';
-import { subscribeBlock } from '../../utils/data';
+import { subscribeBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';

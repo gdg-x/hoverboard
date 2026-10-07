@@ -2,7 +2,7 @@ import { Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { navigation, signIn, signOut as signOutText } from '../../utils/data';
+import { navigation, signIn, signOut as signOutText } from '../../config/site';
 import type { HeaderToolbar } from './header-toolbar';
 
 vi.mock('../../router', () => ({

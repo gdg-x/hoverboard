@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { addToHomeScreen } from '../../utils/data';
+import { addToHomeScreen } from '../../config/site';
 import type { AppInstall } from './app-install';
 import './app-install';
 

@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
 import { openSigninDialog } from '../../store/dialogs';
-import { signIn } from '../../utils/data';
+import { signIn } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 
 @customElement('auth-required')

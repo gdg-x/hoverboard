@@ -9,7 +9,7 @@ import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
 } from '../../store/previous-speakers';
-import { loading, previousSpeakersBlock } from '../../utils/data';
+import { loading, previousSpeakersBlock } from '../../config/site';
 import './hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';

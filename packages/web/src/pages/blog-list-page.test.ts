@@ -6,7 +6,7 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { Post } from '../models/post';
 import { router } from '../router';
-import { heroSettings } from '../utils/data';
+import { heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './blog-list-page';
 import { BlogListPage } from './blog-list-page';

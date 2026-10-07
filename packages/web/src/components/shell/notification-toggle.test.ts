@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { updateNotificationsSubscribers } from '../../store/update-notifications-subscribers';
-import { notifications } from '../../utils/data';
+import { notifications } from '../../config/site';
 import type { NotificationToggle } from './notification-toggle';
 
 import './notification-toggle';

@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
-import { filters as filtersText } from '../../utils/data';
+import { filters as filtersText } from '../../config/site';
 import * as filterUtils from '../../utils/filters';
 import type { FilterMenu } from './filter-menu';
 import './filter-menu';

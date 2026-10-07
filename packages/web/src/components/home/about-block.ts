@@ -2,7 +2,7 @@ import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { openVideoDialog } from '../../store/ui';
-import { aboutBlock } from '../../utils/data';
+import { aboutBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
 import { ThemedElement } from '../themed-element';
 

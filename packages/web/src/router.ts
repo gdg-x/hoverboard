@@ -1,7 +1,7 @@
 import { type BaseRouteConfig, type RouteConfig, Router } from '@lit-labs/router';
 import { html, type ReactiveControllerHost, type TemplateResult } from 'lit';
 import { logPageView } from './utils/analytics.js';
-import { CONFIG, getConfig } from './utils/config.js';
+import { CONFIG, getConfig } from './config/site.js';
 
 type Params = Record<string, string | undefined>;
 

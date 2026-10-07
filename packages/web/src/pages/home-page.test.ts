@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { firebaseApp } from '../firebase';
 import { openVideoDialog } from '../store/ui';
-import { aboutBlock, dates, location } from '../utils/data';
+import { aboutBlock, dates, location } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './home-page';
 import { HomePage } from './home-page';

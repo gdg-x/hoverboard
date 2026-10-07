@@ -6,7 +6,7 @@ import { css, html, nothing } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import type { Session } from '../../models/session';
 import { downloadIcs, googleCalendarUrl, sessionToCalendarEvent } from '../../utils/calendar';
-import { sessionDetails } from '../../utils/data';
+import { sessionDetails } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 import './hoverboard-icon';
 

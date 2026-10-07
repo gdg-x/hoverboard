@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Day } from '../../models/day';
-import { mySchedule } from '../../utils/data';
+import { mySchedule } from '../../config/site';
 import type { ScheduleDay } from './schedule-day';
 import './schedule-day';
 import type { SessionElement } from '../../components/schedule/session-element';

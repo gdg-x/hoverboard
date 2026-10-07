@@ -3,7 +3,7 @@ import { screen } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import '../store';
-import { faq, heroSettings } from '../utils/data';
+import { faq, heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './faq-page';
 import { FaqPage } from './faq-page';

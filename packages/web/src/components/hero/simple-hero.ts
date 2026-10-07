@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { heroSettings } from '../../utils/data';
+import { heroSettings } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 import './hero-block';
 

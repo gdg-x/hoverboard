@@ -129,7 +129,7 @@ export default [
 
   // Build utility files (Node.js environment)
   {
-    files: ['packages/web/utils/**/*.{js,ts}'],
+    files: ['packages/web/build/**/*.{js,ts}'],
     languageOptions: {
       globals: {
         ...globals.node,

@@ -17,7 +17,7 @@ import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
-import { sessionDetails, speakerDetails, speakers } from '../utils/data';
+import { sessionDetails, speakerDetails, speakers } from '../config/site';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Session } from '../models/session';
 import { googleCalendarUrl, icsContent, sessionToCalendarEvent } from './calendar';
-import { timezoneOffset } from './data';
+import { timezoneOffset } from '../config/site';
 
 const session: Session & { endTime: string } = {
   id: 'session-1',

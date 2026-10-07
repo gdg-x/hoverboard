@@ -5,7 +5,7 @@ import { customElement, query, state } from 'lit/decorators.js';
 import type { Video } from '../../models/video';
 import { openVideoDialog } from '../../store/ui';
 import { type VideosState, selectVideos } from '../../store/videos';
-import { featuredVideos, loading } from '../../utils/data';
+import { featuredVideos, loading } from '../../config/site';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';

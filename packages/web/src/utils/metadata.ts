@@ -1,4 +1,4 @@
-import { image, title as siteTitle } from './data';
+import { image, title as siteTitle } from '../config/site';
 
 export enum INCLUDE_SITE_TITLE {
   YES,

@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Video } from '../../models/video';
 import { openVideoDialog } from '../../store/ui';
-import { featuredVideos, loading } from '../../utils/data';
+import { featuredVideos, loading } from '../../config/site';
 import type { FeaturedVideos } from './featured-videos';
 import './featured-videos';
 

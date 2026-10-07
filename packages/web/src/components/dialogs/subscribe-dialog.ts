@@ -14,7 +14,7 @@ import {
   type PotentialPartnersState,
 } from '../../store/potential-partners';
 import type { SubscribeState } from '../../store/subscribe';
-import { subscribeBlock } from '../../utils/data';
+import { subscribeBlock } from '../../config/site';
 import { notEmpty, validEmail } from '../../utils/strings';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';
 import '../shared/hoverboard-dialog';

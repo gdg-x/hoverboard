@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { production } from './utils/build';
+import { production } from './build/resolve-config';
 
 // The Firebase Messaging service worker is bundled as its own, fully
 // self-contained entry (no code-splitting with the main app) since it is

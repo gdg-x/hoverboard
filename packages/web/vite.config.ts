@@ -1,24 +1,10 @@
-import type { Plugin } from 'vite';
 import { defineConfig } from 'vite';
-import copy from 'rollup-plugin-copy';
 import livereload from 'rollup-plugin-livereload';
 import { generateSW } from 'rollup-plugin-workbox';
-import { compileBufferTemplate, compileTemplate, production, watch } from './utils/build';
-import { decorators } from './utils/decorators';
+import { decorators } from './build/decorators';
+import { production, watch } from './build/resolve-config';
+import { site } from './build/vite-plugin-site';
 import { workboxConfig } from './workbox.config';
-
-// index.html contains Nunjucks placeholders (e.g. {{ title }}) that need to be
-// rendered with the same config/resource data used for manifest.json and the
-// markdown pages below. Runs as an `order: 'pre'` transform so Vite's own HTML
-// parsing (module script discovery, asset href resolution) sees the final,
-// already-rendered markup.
-const templateHtml = (): Plugin => ({
-  name: 'hoverboard-template-html',
-  transformIndexHtml: {
-    order: 'pre',
-    handler: (html) => compileTemplate(html),
-  },
-});
 
 export default defineConfig({
   build: {
@@ -44,17 +30,7 @@ export default defineConfig({
   },
   plugins: [
     decorators(),
-    templateHtml(),
-    copy({
-      // Runs after Vite's own public/ copy (which happens during the
-      // write phase) so these overwrite the raw copies with their
-      // Nunjucks-rendered versions.
-      hook: 'writeBundle',
-      targets: [
-        { src: 'public/manifest.json', dest: 'dist', transform: compileBufferTemplate },
-        { src: 'public/data/*.md', dest: 'dist/data', transform: compileBufferTemplate },
-      ],
-    }),
+    ...site(),
     production && generateSW(workboxConfig),
     watch && livereload({ watch: 'dist' }),
   ],

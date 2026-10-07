@@ -10,7 +10,7 @@ import {
   mailto,
   organizer,
   socialNetwork,
-} from '../../utils/data';
+} from '../../config/site';
 import { ThemedElement } from '../themed-element';
 import '../shared/hoverboard-icon';
 

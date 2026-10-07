@@ -11,7 +11,7 @@ import {
   signInDialog,
   signInProviders,
   subscribeBlock,
-} from '../../utils/data';
+} from '../../config/site';
 import { PROVIDER } from '../../utils/providers';
 import type { SigninDialog } from './signin-dialog';
 import './signin-dialog';

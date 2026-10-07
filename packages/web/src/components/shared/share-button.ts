@@ -1,7 +1,7 @@
 import '@material/web/button/outlined-button.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { sessionDetails } from '../../utils/data';
+import { sessionDetails } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 import './hoverboard-icon';
 

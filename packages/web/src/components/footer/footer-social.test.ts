@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, screen } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { emailUs, mailto, organizer, socialNetwork } from '../../utils/data';
+import { emailUs, mailto, organizer, socialNetwork } from '../../config/site';
 import { share } from '../../utils/share';
 import './footer-social';
 

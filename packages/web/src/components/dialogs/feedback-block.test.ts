@@ -5,7 +5,7 @@ import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setStoreState } from '../../../__tests__/helpers/store';
 import type { Feedback } from '../../models/feedback';
 import type { RootState } from '../../store';
-import { feedback as feedbackText } from '../../utils/data';
+import { feedback as feedbackText } from '../../config/site';
 import type { FeedbackBlock } from './feedback-block';
 
 import './feedback-block';

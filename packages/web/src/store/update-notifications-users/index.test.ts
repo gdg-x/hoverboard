@@ -4,7 +4,7 @@ import reducer, { removeNotificationsUsers, updateNotificationsUsers } from '.';
 import { saveNotificationsUsers } from '../../db/notifications-users';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
-import { notifications } from '../../utils/data';
+import { notifications } from '../../config/site';
 import type { RootState } from '..';
 
 vi.mock('../../db/notifications-users');

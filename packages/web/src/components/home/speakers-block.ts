@@ -8,7 +8,7 @@ import type { Speaker } from '../../models/speaker';
 import { router } from '../../router';
 import { type SpeakersState, selectSpeakersState } from '../../store/speakers';
 import { randomOrder } from '../../utils/arrays';
-import { speakersBlock } from '../../utils/data';
+import { speakersBlock } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 

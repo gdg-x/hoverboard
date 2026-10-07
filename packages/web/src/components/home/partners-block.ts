@@ -7,7 +7,7 @@ import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
 import { type PartnerGroupsState, selectPartnerGroups } from '../../store/partners';
 import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
 import { queueSnackbar } from '../../store/snackbars';
-import { loading, partnersBlock } from '../../utils/data';
+import { loading, partnersBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';

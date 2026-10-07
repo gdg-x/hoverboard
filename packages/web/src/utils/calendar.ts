@@ -1,5 +1,5 @@
 import type { Session } from '../models/session';
-import { location, timezoneOffset, title } from './data';
+import { location, timezoneOffset, title } from '../config/site';
 
 export interface CalendarEvent {
   title: string;

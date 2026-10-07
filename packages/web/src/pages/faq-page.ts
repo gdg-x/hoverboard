@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { faq, heroSettings } from '../utils/data';
+import { faq, heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import '../components/hero/simple-hero';
 import '../components/markdown/remote-markdown';

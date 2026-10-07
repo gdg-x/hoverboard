@@ -1,4 +1,3 @@
-import n from 'nunjucks';
 import fs from 'fs';
 
 type Data = typeof import('../public/data/resources.json') &
@@ -50,10 +49,4 @@ const cleanupData = (data: Data) => {
   return data;
 };
 
-const data = cleanupData(getData());
-
-const nunjucks = n.configure({ throwOnUndefined: true });
-
-export const compileTemplate = (template: string) => nunjucks.renderString(template, data);
-
-export const compileBufferTemplate = (body: Buffer) => compileTemplate(body.toString());
+export const resolveConfig = (): Data => cleanupData(getData());

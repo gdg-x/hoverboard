@@ -1,6 +1,6 @@
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { addToHomeScreen } from '../../utils/data';
+import { addToHomeScreen } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 
 @customElement('app-install')

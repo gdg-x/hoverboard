@@ -4,7 +4,7 @@ import type { RootState } from '..';
 import type { Filter } from '../../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import type { Session } from '../../models/session';
-import { filters } from '../../utils/data';
+import { filters } from '../../config/site';
 import { selectSessionsState } from '.';
 
 const buildFilter = (group: FilterGroupKey, tag: string): Filter => {

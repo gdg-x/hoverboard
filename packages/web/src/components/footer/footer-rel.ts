@@ -1,6 +1,6 @@
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { footerRelBlock, notifications, subscribeNote } from '../../utils/data';
+import { footerRelBlock, notifications, subscribeNote } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 import './subscribe-form-footer';
 

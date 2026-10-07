@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Session } from '../models/session';
-import { timezoneOffset } from './data';
+import { timezoneOffset } from '../config/site';
 import { acceptingFeedback } from './feedback';
 
 const pad = (value: number): string => value.toString().padStart(2, '0');

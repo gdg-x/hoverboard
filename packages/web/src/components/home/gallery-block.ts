@@ -4,7 +4,7 @@ import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { Photo } from '../../models/photo';
 import { type GalleryState, selectGallery } from '../../store/gallery';
-import { galleryBlock } from '../../utils/data';
+import { galleryBlock } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 

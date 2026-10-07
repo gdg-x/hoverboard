@@ -4,7 +4,7 @@ import reducer, { resetSubscribed, subscribe } from '.';
 import { saveSubscriber } from '../../db/subscribers';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
-import { subscribeBlock } from '../../utils/data';
+import { subscribeBlock } from '../../config/site';
 
 vi.mock('../../db/subscribers');
 vi.mock('../dispatch');

@@ -4,7 +4,7 @@ import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setStoreState } from '../../../__tests__/helpers/store';
-import { subscribeBlock } from '../../utils/data';
+import { subscribeBlock } from '../../config/site';
 import type { SubscribeDialog } from './subscribe-dialog';
 import './subscribe-dialog';
 

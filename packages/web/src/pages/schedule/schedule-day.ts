@@ -16,7 +16,7 @@ import {
 import { selectFilters } from '../../store/filters';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import type { UserState } from '../../store/user';
-import { mySchedule } from '../../utils/data';
+import { mySchedule } from '../../config/site';
 import { generateClassName } from '../../utils/styles';
 import '../../components/shared/hoverboard-icon';
 import '../../components/schedule/session-element';

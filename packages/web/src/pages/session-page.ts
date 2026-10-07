@@ -28,7 +28,7 @@ import { type SessionsState, selectSessionsState } from '../store/sessions';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUiState, openVideoDialog } from '../store/ui';
 import type { UserState } from '../store/user';
-import { disabledSchedule, feedback, schedule, sessionDetails } from '../utils/data';
+import { disabledSchedule, feedback, schedule, sessionDetails } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
