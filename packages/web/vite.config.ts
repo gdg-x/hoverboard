@@ -4,6 +4,7 @@ import copy from 'rollup-plugin-copy';
 import livereload from 'rollup-plugin-livereload';
 import { generateSW } from 'rollup-plugin-workbox';
 import { compileBufferTemplate, compileTemplate, production, watch } from './utils/build';
+import { decorators } from './utils/decorators';
 import { workboxConfig } from './workbox.config';
 
 // index.html contains Nunjucks placeholders (e.g. {{ title }}) that need to be
@@ -42,6 +43,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    decorators(),
     templateHtml(),
     copy({
       // Runs after Vite's own public/ copy (which happens during the

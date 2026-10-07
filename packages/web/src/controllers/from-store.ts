@@ -9,35 +9,37 @@ import { StoreController } from './store-controller';
  *
  * ```ts
  * @fromStore((state) => state.user)
- * private user!: UserState;
+ * private accessor user!: UserState;
  * ```
  */
 export const fromStore =
-  <T, H = ReactiveElement>(
+  <T, H extends ReactiveElement = ReactiveElement>(
     selector: (state: RootState, host: H) => T,
     options: { equals?: (a: T, b: T) => boolean } = {},
   ) =>
-  (prototype: ReactiveElement, name: string) => {
+  (
+    _target: ClassAccessorDecoratorTarget<H, T>,
+    context: ClassAccessorDecoratorContext<H, T>,
+  ): ClassAccessorDecoratorResult<H, T> => {
+    const name = String(context.name);
     const controllers = new WeakMap<ReactiveElement, StoreController<T>>();
 
-    (prototype.constructor as typeof ReactiveElement).addInitializer((host) => {
+    context.addInitializer(function (this: H) {
       controllers.set(
-        host,
-        new StoreController(host, (state) => selector(state, host as unknown as H), {
+        this,
+        new StoreController(this, (state) => selector(state, this), {
           ...options,
-          onChange: (_value, previous) => host.requestUpdate(name, previous),
+          onChange: (_value, previous) => this.requestUpdate(name, previous),
         }),
       );
     });
 
-    Object.defineProperty(prototype, name, {
-      configurable: true,
-      enumerable: true,
-      get(this: ReactiveElement) {
-        return controllers.get(this)?.value;
+    return {
+      get(this: H) {
+        return controllers.get(this)?.value as T;
       },
       // Lets tests and callers override the value until the store next changes it.
-      set(this: ReactiveElement, value: T) {
+      set(this: H, value: T) {
         const controller = controllers.get(this);
         if (controller) {
           const previous = controller.value;
@@ -45,5 +47,5 @@ export const fromStore =
           this.requestUpdate(name, previous);
         }
       },
-    });
+    };
   };

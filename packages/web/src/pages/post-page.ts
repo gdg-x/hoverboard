@@ -41,17 +41,17 @@ export class PostPage extends ThemedElement {
   `;
 
   @property({ type: Object })
-  posts: BlogState = new Initialized();
+  accessor posts: BlogState = new Initialized();
 
   @property({ attribute: false })
-  postId: string | undefined;
+  accessor postId: string | undefined;
 
   @state()
-  private post: RemoteData<Error, Post> = new Initialized();
+  private accessor post: RemoteData<Error, Post> = new Initialized();
   @state()
-  private suggestedPosts: Post[] = [];
+  private accessor suggestedPosts: Post[] = [];
   @state()
-  private postContent = '';
+  private accessor postContent = '';
 
   private blog = blog;
   private contentRequest = 0;

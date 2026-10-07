@@ -182,14 +182,14 @@ export class SpeakersPage extends ThemedElement {
   private contentLoaders = contentLoaders;
 
   @fromStore((state) => selectSpeakersState(state))
-  speakers!: SpeakersState;
+  accessor speakers!: SpeakersState;
 
   @fromStore((state) => selectFilterGroups(state, SPEAKER_FILTER_GROUPS))
-  filterGroups!: FilterGroup[];
+  accessor filterGroups!: FilterGroup[];
   @fromStore((state) => selectFilters(state))
-  selectedFilters!: Filter[];
+  accessor selectedFilters!: Filter[];
   @fromStore((state) => selectFilteredSpeakers(state))
-  speakersToRender!: SpeakerWithTags[];
+  accessor speakersToRender!: SpeakerWithTags[];
 
   override connectedCallback() {
     super.connectedCallback();

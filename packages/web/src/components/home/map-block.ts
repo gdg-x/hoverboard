@@ -80,7 +80,7 @@ export class MapBlock extends ThemedElement {
   private markerPosition = `${location.pointer.latitude},${location.pointer.longitude}`;
 
   @fromStore((state) => state.ui.viewport)
-  private viewport!: typeof initialUiState.viewport;
+  private accessor viewport!: typeof initialUiState.viewport;
 
   private option = {
     disableDefaultUI: true,

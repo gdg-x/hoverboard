@@ -140,7 +140,7 @@ export class TicketsBlock extends ThemedElement {
   private contentLoaders = contentLoaders.tickets;
 
   @fromStore((state) => selectTickets(state))
-  tickets!: TicketsState;
+  accessor tickets!: TicketsState;
 
   private get pending() {
     return this.tickets instanceof Pending;

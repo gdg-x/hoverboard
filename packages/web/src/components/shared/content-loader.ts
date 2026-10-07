@@ -109,23 +109,23 @@ export class ContentLoader extends ThemedElement {
     }
   `;
 
-  @property({ type: String }) cardPadding?: string;
-  @property({ type: String }) cardMargin?: string;
-  @property({ type: String }) cardHeight?: string;
-  @property({ type: String }) cardWidth?: string;
-  @property({ type: String }) borderRadius?: string;
-  @property({ type: String }) horizontalPosition?: string;
-  @property({ type: String }) avatarSize = '0px';
-  @property({ type: String }) avatarCircle = '0px';
-  @property({ type: String }) titleTopPosition?: string;
-  @property({ type: String }) titleHeight?: string;
-  @property({ type: String }) titleWidth?: string;
-  @property({ type: String }) animationTime?: string;
-  @property({ type: String }) boxShadow?: string;
-  @property({ type: String }) blurWidth?: string;
-  @property({ type: String }) loadFrom?: string;
-  @property({ type: String }) loadTo?: string;
-  @property({ type: Number }) itemsCount = 0;
+  @property({ type: String }) accessor cardPadding: string | undefined;
+  @property({ type: String }) accessor cardMargin: string | undefined;
+  @property({ type: String }) accessor cardHeight: string | undefined;
+  @property({ type: String }) accessor cardWidth: string | undefined;
+  @property({ type: String }) accessor borderRadius: string | undefined;
+  @property({ type: String }) accessor horizontalPosition: string | undefined;
+  @property({ type: String }) accessor avatarSize = '0px';
+  @property({ type: String }) accessor avatarCircle = '0px';
+  @property({ type: String }) accessor titleTopPosition: string | undefined;
+  @property({ type: String }) accessor titleHeight: string | undefined;
+  @property({ type: String }) accessor titleWidth: string | undefined;
+  @property({ type: String }) accessor animationTime: string | undefined;
+  @property({ type: String }) accessor boxShadow: string | undefined;
+  @property({ type: String }) accessor blurWidth: string | undefined;
+  @property({ type: String }) accessor loadFrom: string | undefined;
+  @property({ type: String }) accessor loadTo: string | undefined;
+  @property({ type: Number }) accessor itemsCount = 0;
 
   override willUpdate() {
     const variables: Record<string, string | undefined> = {

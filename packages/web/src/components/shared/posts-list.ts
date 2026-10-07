@@ -71,7 +71,7 @@ export class PostsList extends ThemedElement {
   `;
 
   @property({ type: Array })
-  posts: Post[] = [];
+  accessor posts: Post[] = [];
 
   override render() {
     return html`

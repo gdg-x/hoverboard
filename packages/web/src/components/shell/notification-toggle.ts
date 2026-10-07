@@ -97,16 +97,16 @@ export class NotificationToggle extends ThemedElement {
   private loading = loading;
 
   @fromStore((state) => state.notificationPermission.value)
-  private notificationPermission!: typeof initialNotificationPermissionState.value;
+  private accessor notificationPermission!: typeof initialNotificationPermissionState.value;
   @fromStore((state) => selectNotificationsSubscribers(state))
-  private notificationsSubscribers!: typeof initialNotificationsSubscribersState;
+  private accessor notificationsSubscribers!: typeof initialNotificationsSubscribersState;
   @fromStore((state) => selectNotificationsUsersSubscribed(state))
-  private notificationsUsersSubscribed!: boolean;
+  private accessor notificationsUsersSubscribed!: boolean;
   @fromStore((state) => state.user)
-  private user!: UserState;
+  private accessor user!: UserState;
 
   @state()
-  private opened = false;
+  private accessor opened = false;
 
   private readonly clickOutsideController = new ClickOutsideController(this, () => this.close());
 

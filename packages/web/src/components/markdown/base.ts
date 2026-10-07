@@ -10,7 +10,7 @@ marked.use(gfmHeadingId());
 
 export class Markdown extends ThemedElement {
   @property()
-  content: string = '';
+  accessor content: string = '';
 
   get document(): DocumentFragment {
     const template = document.createElement('template');

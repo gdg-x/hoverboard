@@ -63,9 +63,9 @@ export class PartnersBlock extends ThemedElement {
   private partnersBlock = partnersBlock;
 
   @fromStore((state) => state.potentialPartners)
-  potentialPartners!: typeof initialPotentialPartnersState;
+  accessor potentialPartners!: typeof initialPotentialPartnersState;
   @fromStore((state) => selectPartnerGroups(state))
-  partners!: PartnerGroupsState;
+  accessor partners!: PartnerGroupsState;
 
   private get pending() {
     return this.partners instanceof Pending;

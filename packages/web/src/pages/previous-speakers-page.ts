@@ -132,7 +132,7 @@ export class PreviousSpeakersPage extends ThemedElement {
   `;
 
   @fromStore((state) => selectPreviousSpeakersState(state))
-  previousSpeakers!: PreviousSpeakersState;
+  accessor previousSpeakers!: PreviousSpeakersState;
 
   private heroSettings = heroSettings.previousSpeakers;
   private contentLoaders = contentLoaders.previousSpeakers;

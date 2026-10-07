@@ -157,17 +157,17 @@ export class FeaturedVideos extends ThemedElement {
   private loading = loading;
 
   @query('#videos')
-  videosElm!: HTMLDivElement;
+  accessor videosElm!: HTMLDivElement;
   @query('#videoList')
-  videoList!: HTMLDivElement;
+  accessor videoList!: HTMLDivElement;
 
   @fromStore((state) => selectVideos(state))
-  videos!: VideosState;
+  accessor videos!: VideosState;
 
   @state()
-  private leftArrowHidden = true;
+  private accessor leftArrowHidden = true;
   @state()
-  private rightArrowHidden = false;
+  private accessor rightArrowHidden = false;
 
   private get pending() {
     return this.videos instanceof Pending;

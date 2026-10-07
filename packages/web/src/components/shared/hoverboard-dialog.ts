@@ -71,10 +71,10 @@ export class HoverboardDialog extends LitElement {
 
   /** Whether the dialog is open. Setting this calls showModal()/close(). */
   @property({ type: Boolean, reflect: true })
-  open = false;
+  accessor open = false;
 
   @query('dialog')
-  private nativeDialog!: HTMLDialogElement;
+  private accessor nativeDialog!: HTMLDialogElement;
 
   override firstUpdated() {
     this.nativeDialog.addEventListener('close', () => this.onNativeClose());

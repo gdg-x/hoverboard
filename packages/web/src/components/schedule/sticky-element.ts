@@ -50,10 +50,10 @@ export class StickyElement extends ThemedElement {
   `;
 
   @query('#content')
-  content!: HTMLDivElement;
+  accessor content!: HTMLDivElement;
 
   @query('#trigger')
-  trigger!: HTMLDivElement;
+  accessor trigger!: HTMLDivElement;
 
   private readonly observer = new IntersectionController(this, {
     target: null,

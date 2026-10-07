@@ -173,12 +173,12 @@ export class PreviousSpeakerPage extends ThemedElement {
   private speakerDetails = speakerDetails;
 
   @property({ type: Object })
-  speaker: PreviousSpeaker | undefined;
+  accessor speaker: PreviousSpeaker | undefined;
   @fromStore((state) => selectPreviousSpeakersState(state))
-  speakers!: PreviousSpeakersState;
+  accessor speakers!: PreviousSpeakersState;
 
   @property({ attribute: false })
-  speakerId: string | undefined;
+  accessor speakerId: string | undefined;
 
   override updated(changed: Map<string, unknown>) {
     if (changed.has('speakers') || changed.has('speakerId')) {

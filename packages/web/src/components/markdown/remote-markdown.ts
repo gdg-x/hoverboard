@@ -9,10 +9,10 @@ type State = RemoteData<Error, string>;
 @customElement('remote-markdown')
 export class RemoteMarkDown extends ThemedElement {
   @property()
-  path: string = '';
+  accessor path: string = '';
 
   @state()
-  state: State = new Initialized();
+  accessor state: State = new Initialized();
 
   override render() {
     return html`${this.view(this.state)}`;

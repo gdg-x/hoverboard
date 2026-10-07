@@ -116,13 +116,13 @@ export class FilterMenu extends ThemedElement {
   private filters = filters;
 
   @property({ type: Array })
-  filterGroups: FilterGroup[] = [];
+  accessor filterGroups: FilterGroup[] = [];
   @property({ type: Number })
-  resultsCount: number | undefined;
+  accessor resultsCount: number | undefined;
   @property({ type: Array })
-  selectedFilters: Filter[] = [];
+  accessor selectedFilters: Filter[] = [];
   @property({ type: Boolean })
-  opened = false;
+  accessor opened = false;
 
   private readonly clickOutsideController = new ClickOutsideController(this, () =>
     this.toggleBoard(),

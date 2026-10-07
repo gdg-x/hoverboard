@@ -74,11 +74,11 @@ export class HeaderBottomToolbar extends ThemedElement {
   private contentLoaders = contentLoaders.schedule;
 
   @fromStore((state) => selectScheduleState(state))
-  schedule!: ScheduleState;
+  accessor schedule!: ScheduleState;
   @property({ type: Object })
-  location: RouteLocation | undefined;
+  accessor location: RouteLocation | undefined;
   @fromStore((state) => state.user instanceof Success)
-  private signedIn!: boolean;
+  private accessor signedIn!: boolean;
 
   override updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);

@@ -11,7 +11,7 @@ export class CocPage extends ThemedElement {
   private heroSettings = heroSettings.coc;
 
   @property()
-  source = coc;
+  accessor source = coc;
 
   override connectedCallback() {
     super.connectedCallback();

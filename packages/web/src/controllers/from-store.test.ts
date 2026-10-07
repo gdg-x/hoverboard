@@ -9,10 +9,10 @@ import { fromStore } from './from-store';
 @customElement('from-store-test-subject')
 class FromStoreTestSubject extends LitElement {
   @fromStore((state) => state.snackbars.length)
-  count!: number;
+  accessor count!: number;
 
   @fromStore((state, host: FromStoreTestSubject) => state.snackbars.length + host.offset)
-  total!: number;
+  accessor total!: number;
 
   offset = 100;
   changes: string[] = [];

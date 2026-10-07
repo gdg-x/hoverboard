@@ -226,11 +226,11 @@ export class SessionElement extends ThemedElement {
   `;
 
   @fromStore((state) => state.user)
-  user!: UserState;
+  accessor user!: UserState;
   @property({ type: Object })
-  session: Session | undefined;
+  accessor session: Session | undefined;
   @fromStore((state) => selectFeaturedSessionsState(state))
-  featuredSessions!: FeaturedSessionsState;
+  accessor featuredSessions!: FeaturedSessionsState;
 
   override render() {
     const session = this.session as SessionWithScheduleDetails | undefined;

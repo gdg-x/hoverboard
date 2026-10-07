@@ -41,13 +41,13 @@ export class SubscribeFormFooter extends ThemedElement {
   `;
 
   @fromStore((state) => state.subscribed)
-  subscribed!: SubscribeState;
+  accessor subscribed!: SubscribeState;
 
   @property()
-  email = '';
+  accessor email = '';
 
   @query('#emailInput')
-  private emailInput?: MdOutlinedTextField;
+  private accessor emailInput!: MdOutlinedTextField | null;
 
   override render() {
     return html`

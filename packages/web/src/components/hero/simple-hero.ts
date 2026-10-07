@@ -29,7 +29,7 @@ const hasTitle = (setting: Title | {}): setting is Title => {
 @customElement('simple-hero')
 export class SimpleHero extends ThemedElement {
   @property()
-  page: SimpleHeroKeys = 'notFound';
+  accessor page: SimpleHeroKeys = 'notFound';
 
   private renderDescription() {
     if (hasDescription(heroSettings[this.page])) {

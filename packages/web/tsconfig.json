@@ -5,8 +5,6 @@
     /* Language and Environment */
     "target": "es2022",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "lib": ["es2022", "dom"],                            /* Specify a set of bundled library declaration files that describe the target runtime environment. */
-    "experimentalDecorators": true,                      /* Lit decorators are legacy (TS experimental) decorators. */
-    "useDefineForClassFields": false,                    /* Required by legacy decorators on class fields. */
 
     /* Modules */
     "module": "esnext",                                  /* Specify what module code is generated. */

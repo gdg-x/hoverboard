@@ -92,7 +92,7 @@ export class LatestPostsBlock extends ThemedElement {
   private latestPostsBlock = latestPostsBlock;
 
   @fromStore((state) => selectBlogPosts(state))
-  posts!: BlogState;
+  accessor posts!: BlogState;
 
   private get latestPosts() {
     if (this.posts instanceof Success) {

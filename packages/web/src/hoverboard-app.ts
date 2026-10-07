@@ -163,16 +163,16 @@ export class HoverboardApp extends ThemedElement {
   private readonly router = startRouter(this);
 
   @query('#header')
-  header!: HTMLElement;
+  accessor header!: HTMLElement;
 
   @fromStore(selectTickets)
-  tickets!: TicketsState;
+  accessor tickets!: TicketsState;
 
   @state()
-  private drawerOpened = false;
+  private accessor drawerOpened = false;
   private providerUrls = signInProviders.allowedProvidersUrl;
   @fromStore(() => selectRouteName(window.location.pathname))
-  private routeName!: string;
+  private accessor routeName!: string;
 
   // Loaded on first use so they stay out of the initial bundle.
   private readonly lazyElements: Record<LazyElement, () => Promise<unknown>> = {
@@ -184,7 +184,7 @@ export class HoverboardApp extends ThemedElement {
   };
   private readonly loadingElements = new Set<LazyElement>();
   @state()
-  private loadedElements = new Set<LazyElement>();
+  private accessor loadedElements = new Set<LazyElement>();
 
   private readonly neededElementsStore = new StoreController(
     this,

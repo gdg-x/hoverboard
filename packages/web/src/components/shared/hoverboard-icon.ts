@@ -74,10 +74,10 @@ export class HoverboardIcon extends LitElement {
   `;
 
   @property()
-  name = '';
+  accessor name = '';
 
   @state()
-  private icon: SVGTemplateResult | undefined;
+  private accessor icon: SVGTemplateResult | undefined;
 
   private loading: Promise<void> | undefined;
 

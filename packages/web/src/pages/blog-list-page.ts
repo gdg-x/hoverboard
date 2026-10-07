@@ -104,9 +104,9 @@ export class BlogListPage extends ThemedElement {
   private contentLoaders = contentLoaders.blog;
 
   @fromStore((state) => selectBlogPosts(state))
-  posts!: BlogState;
+  accessor posts!: BlogState;
   @fromStore((state) => state.ui.viewport)
-  private viewport!: typeof initialUiState.viewport;
+  private accessor viewport!: typeof initialUiState.viewport;
 
   get pending() {
     return this.posts instanceof Pending;

@@ -20,7 +20,7 @@ export class AppInstall extends ThemedElement {
   `;
 
   @state()
-  private deferredPrompt: BeforeInstallPromptEvent | undefined;
+  private accessor deferredPrompt: BeforeInstallPromptEvent | undefined;
 
   override connectedCallback() {
     super.connectedCallback();

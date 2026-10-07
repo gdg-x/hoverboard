@@ -231,29 +231,29 @@ export class HeaderToolbar extends ThemedElement {
   private buyTicket = buyTicket;
 
   @property({ type: Boolean, attribute: 'drawer-opened' })
-  drawerOpened = false;
+  accessor drawerOpened = false;
   @fromStore((state) => selectTickets(state))
-  tickets!: TicketsState;
+  accessor tickets!: TicketsState;
 
   @fromStore((state) => state.ui.viewport)
-  private viewport!: typeof initialUiState.viewport;
+  private accessor viewport!: typeof initialUiState.viewport;
   @fromStore((state) => state.ui.heroSettings)
-  private heroSettings!: Hero | undefined;
+  private accessor heroSettings!: Hero | undefined;
   @fromStore((state) => state.user instanceof Success)
-  private signedIn!: boolean;
+  private accessor signedIn!: boolean;
   @fromStore((state) => state.user)
-  private user!: UserState;
+  private accessor user!: UserState;
   // Intentionally @property (not @state): `reflect` is required so the
   // `:host([transparent])` CSS selector can style the host, and @state
   // does not support reflection.
   @property({ type: Boolean, reflect: true })
-  private transparent = false;
+  private accessor transparent = false;
   @fromStore(() => selectRouteName(window.location.pathname))
-  private routeName!: string;
+  private accessor routeName!: string;
   @fromStore((state) => selectIsDialogOpen(state, DIALOG.SIGNIN))
-  private isDialogOpen!: boolean;
+  private accessor isDialogOpen!: boolean;
   @state()
-  private profileMenuOpened = false;
+  private accessor profileMenuOpened = false;
 
   private readonly clickOutsideController = new ClickOutsideController(this, () =>
     this.closeProfileMenu(),

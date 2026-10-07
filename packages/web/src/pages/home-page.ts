@@ -184,12 +184,12 @@ export class HomePage extends ThemedElement {
   private aboutBlock = aboutBlock;
 
   @query('#hero')
-  hero!: HeroBlock;
+  accessor hero!: HeroBlock;
   @query('#tickets-block')
-  private ticketsBlock!: HTMLElement;
+  private accessor ticketsBlock!: HTMLElement;
 
   @state()
-  private showForkMeBlock: boolean = false;
+  private accessor showForkMeBlock: boolean = false;
 
   private playVideo = () => {
     openVideoDialog({

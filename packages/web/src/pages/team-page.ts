@@ -123,7 +123,7 @@ export class TeamPage extends ThemedElement {
   private team = team;
 
   @fromStore((state) => selectTeamsAndMembers(state))
-  teamsMembers!: typeof initialTeamsMembersState;
+  accessor teamsMembers!: typeof initialTeamsMembersState;
 
   get pending() {
     return this.teamsMembers instanceof Pending;
