@@ -4,7 +4,7 @@ At the moment Firestore admin panel doesn't allow to export/import data from the
 These scripts allow you to load data on your machine, edit and bring it back.
 See examples to learn how it works.
 
-By default all of these scripts run against the local [Firestore emulator](https://firebase.google.com/docs/emulator-suite) (started by `npm start` / `./hbd emulators`), so they never touch your live project's data. To target **production** Firestore instead, set `FIRESTORE_TARGET=production`, e.g. `FIRESTORE_TARGET=production ./hbd firestore-init` or `FIRESTORE_TARGET=production ./hbd firestore-copy`. These sign in with your Firebase CLI login (`npx firebase login`) and use the selected project (`npx firebase use`).
+By default all of these scripts run against the local [Firestore emulator](https://firebase.google.com/docs/emulator-suite) (started by `npm start` / `./hbd emulators`), so they never touch your live project's data. To target **production** Firestore instead, set `FIRESTORE_TARGET=production`, e.g. `FIRESTORE_TARGET=production ./hbd firestore-init` or `FIRESTORE_TARGET=production ./hbd firestore-copy`. These sign in with your Firebase CLI login (`npx firebase login`) and use the project set as `firebase.projectId` in `packages/config/site.json`.
 
 ⚠️ The emulator-targeted scripts connect to an already-running Firestore emulator — make sure `npm start` or `./hbd emulators` is running in another terminal first. They always use the `demo-hoverboard` project, like the emulators, so data written by `firestore-init`/`firestore-copy` always shows up in the Emulator UI.
 

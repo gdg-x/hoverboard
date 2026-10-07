@@ -70,3 +70,7 @@ dist/
 serviceAccount.json
 *-adminsdk-*.json
 .DS_Store
+
+# Local planning notes
+scratch/
+

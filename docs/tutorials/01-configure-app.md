@@ -2,7 +2,7 @@
 
 Your site's config and content live in `packages/config`:
 
-- `site.json`: settings such as the site URL, base path, Google Maps key, organizer, location, social links and colors.
+- `site.json`: settings such as the Firebase project, site URL, base path, Google Maps key, organizer, location, social links and colors.
 - `content/resources.json`: event text, such as the title, description and the about blocks.
 - `content/faq.md`, `content/coc.md` and `content/posts/`: the FAQ, code of conduct and blog posts.
 
@@ -12,7 +12,7 @@ Upstream defaults for everything else, such as the UI text and page titles, are 
 
 ```json
   "$schema": "../web/schemas/site.schema.json",
-  "url": "https://my-devfest.web.app/",
+  "firebase": { "projectId": "my-devfest" },
   "shortName": "DevFest",
   "organizer": { "name": "..", "email": "..", ... },
   "event": { "startDate": "2027-10-15", "endDate": "2027-10-16", "location": {..} },
@@ -24,6 +24,8 @@ Upstream defaults for everything else, such as the UI text and page titles, are 
   "heroSettings": {..},
   ...
 ```
+
+`firebase.projectId` is the Firebase project that `./hbd deploy`, the deploy workflows and `FIRESTORE_TARGET=production` commands use. `url` defaults to `https://<projectId>.web.app/`. Set `url` only for a custom domain.
 
 ## Validation
 

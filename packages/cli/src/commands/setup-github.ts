@@ -343,7 +343,7 @@ export const runSetupGitHub = async (options: RunSetupGitHubOptions = {}): Promi
   const repoRoot = findRepoRoot(process.cwd());
   const projectId = repoRoot && resolveFirebaseProjectId(repoRoot);
   if (!repoRoot || !projectId) {
-    console.log('✘ No Firebase project is selected. Run `./hbd setup` first.');
+    console.log('✘ No Firebase project. Set firebase.projectId in packages/config/site.json.');
     return false;
   }
   const repo = options.repo ?? githubRepoFromGit(repoRoot);
@@ -379,7 +379,7 @@ export const checkGitHubDeploys = async (
 ): Promise<DoctorCheckResult> => {
   const name = 'GitHub deploys';
   if (!repoRoot || !projectId) {
-    return { name, ok: true, warning: true, message: 'Skipped, no Firebase project selected.' };
+    return { name, ok: true, warning: true, message: 'Skipped, no Firebase project.' };
   }
   const repo = githubRepoFromGit(repoRoot);
   if (!repo) {

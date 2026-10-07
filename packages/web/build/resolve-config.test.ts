@@ -68,6 +68,23 @@ describe('resolveConfig', () => {
     expect(site).not.toHaveProperty('title');
   });
 
+  it('defaults the URL to the Firebase Hosting address of the project', () => {
+    const paths = makePaths({ site: { firebase: { projectId: 'my-devfest' } } });
+
+    const { site } = resolveConfig({ paths, nodeEnv: 'production' });
+
+    expect(site.url).toBe('https://my-devfest.web.app/');
+    expect(site.image).toBe('https://my-devfest.web.app/images/social-share.jpg');
+  });
+
+  it('keeps a custom domain URL', () => {
+    const paths = makePaths({ site: { url: 'https://devfest.example.com/' } });
+
+    expect(resolveConfig({ paths, nodeEnv: 'production' }).site.url).toBe(
+      'https://devfest.example.com/',
+    );
+  });
+
   it('makes the share image an absolute URL', () => {
     const paths = makePaths({ site: { url: 'https://example.web.app/' } });
 
@@ -124,6 +141,20 @@ describe('config validation', () => {
 
     expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([
       "site.json: must have required property 'organizer'",
+    ]);
+  });
+
+  it('requires a valid Firebase project ID', () => {
+    const paths = makePaths();
+    const site = readJson(join(paths.site, 'site.json')) as Record<string, unknown>;
+    delete site['firebase'];
+    writeJson(join(paths.site, 'site.json'), site);
+
+    expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([
+      "site.json: must have required property 'firebase'",
+    ]);
+    expect(errorsFor({ site: { firebase: { projectId: 'My Project' } } })).toEqual([
+      'site.json/firebase/projectId: must match pattern "^[a-z][a-z0-9-]{4,28}[a-z0-9]$"',
     ]);
   });
 

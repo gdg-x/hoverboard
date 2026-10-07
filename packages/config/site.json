@@ -1,6 +1,8 @@
 {
   "$schema": "../web/schemas/site.schema.json",
-  "url": "https://hoverboard-master.web.app/",
+  "firebase": {
+    "projectId": "hoverboard-master"
+  },
   "basepath": "/",
   "shortName": "DevFest",
   "image": "images/social-share.jpg",

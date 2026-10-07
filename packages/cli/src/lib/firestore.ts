@@ -21,7 +21,7 @@ if (!repoRoot) {
 if (process.env['FIRESTORE_TARGET'] === 'production') {
   const projectId = resolveFirebaseProjectId(repoRoot);
   if (!projectId) {
-    throw new Error('No Firebase project is selected. Run `./hbd setup`.');
+    throw new Error('No Firebase project. Set firebase.projectId in packages/config/site.json.');
   }
   await useFirebaseLoginCredentials(repoRoot);
   initializeApp({ credential: applicationDefault(), projectId });

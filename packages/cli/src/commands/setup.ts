@@ -1,12 +1,14 @@
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import { resolveFirebaseBin } from '../lib/firebase-cli.js';
 import { runCommand } from '../lib/spawn.js';
-import { resolveFirebaseProjectId } from '../utils/firebase-project.js';
+import { SITE_CONFIG_PATH, resolveFirebaseProjectId } from '../utils/firebase-project.js';
 import { checkNodeVersion, findRepoRoot } from '../utils/node-version.js';
 import { runDoctor } from './doctor.js';
 
 /**
- * Interactively logs a new contributor in to Firebase and selects a project
- * for local development, automating the manual steps in
+ * Interactively logs a new contributor in to Firebase and points the Firebase CLI at the
+ * project in the site config, automating the manual steps in
  * docs/tutorials/00-set-up.md.
  */
 export const runSetup = async (): Promise<boolean> => {
@@ -28,11 +30,16 @@ export const runSetup = async (): Promise<boolean> => {
   console.log('\nLogging in to Firebase...');
   runCommand(firebaseBin, ['login'], repoRoot);
 
-  if (resolveFirebaseProjectId(repoRoot)) {
-    console.log('\n✔ A Firebase project is already selected.');
+  const projectId = resolveFirebaseProjectId(repoRoot);
+  if (projectId) {
+    // Lets plain `firebase` commands use the same project as `hbd`.
+    writeFileSync(
+      join(repoRoot, '.firebaserc'),
+      `${JSON.stringify({ projects: { default: projectId } }, null, 2)}\n`,
+    );
+    console.log(`\n✔ Firebase project: ${projectId}.`);
   } else {
-    console.log('\nSelect a Firebase project...');
-    runCommand(firebaseBin, ['use', '--add'], repoRoot);
+    console.log(`\n✘ Set firebase.projectId in ${SITE_CONFIG_PATH} to your Firebase project ID.`);
   }
 
   console.log(

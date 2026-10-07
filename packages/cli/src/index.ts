@@ -37,7 +37,7 @@ program
 program
   .command('setup-github')
   .description(
-    'Let GitHub Actions deploy to the selected Firebase project with Workload Identity ' +
+    'Let GitHub Actions deploy to the Firebase project in site.json with Workload Identity ' +
       'Federation, without a service account key.',
   )
   .option('--repo <owner/name>', 'The GitHub repository. Defaults to the origin remote.')
@@ -66,7 +66,7 @@ program
 
 program
   .command('deploy')
-  .description('Build and deploy Hoverboard to the selected Firebase project.')
+  .description('Build and deploy Hoverboard to the Firebase project in site.json.')
   .option('-y, --yes', 'Skip the confirmation prompt.')
   .action(async (options: { yes?: boolean }) => {
     process.exitCode = (await runDeploy(options)) ? 0 : 1;

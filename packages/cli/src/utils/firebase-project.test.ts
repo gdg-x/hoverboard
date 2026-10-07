@@ -1,8 +1,12 @@
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
-import { join } from 'path';
+import { dirname, join } from 'path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { checkFirebaseProject, resolveFirebaseProjectId } from './firebase-project.js';
+import {
+  SITE_CONFIG_PATH,
+  checkFirebaseProject,
+  resolveFirebaseProjectId,
+} from './firebase-project.js';
 
 const dirsToClean: string[] = [];
 const originalEnv = { ...process.env };
@@ -12,97 +16,65 @@ afterEach(() => {
   process.env = { ...originalEnv };
 });
 
-const makeTempDir = (): string => {
+const makeRepo = (site?: object | string): string => {
   const dir = mkdtempSync(join(tmpdir(), 'hoverboard-cli-'));
   dirsToClean.push(dir);
+  if (site !== undefined) {
+    const path = join(dir, SITE_CONFIG_PATH);
+    mkdirSync(dirname(path), { recursive: true });
+    writeFileSync(path, typeof site === 'string' ? site : JSON.stringify(site));
+  }
   return dir;
 };
 
-// Points HOME at an empty temp dir so firebase-tools' real configstore (if
-// any exists on the machine running the tests) can never leak in.
-const isolateHome = (): void => {
-  process.env['HOME'] = makeTempDir();
-};
-
 describe('resolveFirebaseProjectId', () => {
-  it('prefers GCLOUD_PROJECT over .firebaserc', () => {
-    isolateHome();
-    process.env['GCLOUD_PROJECT'] = 'from-env';
-    const root = makeTempDir();
+  it('reads firebase.projectId from the site config', () => {
+    delete process.env['GCLOUD_PROJECT'];
+    const root = makeRepo({ firebase: { projectId: 'my-devfest' } });
     writeFileSync(join(root, '.firebaserc'), JSON.stringify({ projects: { default: 'from-rc' } }));
 
-    expect(resolveFirebaseProjectId(root)).toBe('from-env');
+    expect(resolveFirebaseProjectId(root)).toBe('my-devfest');
   });
 
-  it("falls back to .firebaserc's default project", () => {
-    isolateHome();
-    delete process.env['GCLOUD_PROJECT'];
-    const root = makeTempDir();
-    writeFileSync(
-      join(root, '.firebaserc'),
-      JSON.stringify({ projects: { default: 'my-project', staging: 'other' } }),
+  it('lets GCLOUD_PROJECT override the site config', () => {
+    process.env['GCLOUD_PROJECT'] = 'from-env';
+
+    expect(resolveFirebaseProjectId(makeRepo({ firebase: { projectId: 'my-devfest' } }))).toBe(
+      'from-env',
     );
-
-    expect(resolveFirebaseProjectId(root)).toBe('my-project');
   });
 
-  it('falls back to the sole alias when there is no default', () => {
-    isolateHome();
-    delete process.env['GCLOUD_PROJECT'];
-    const root = makeTempDir();
-    writeFileSync(
-      join(root, '.firebaserc'),
-      JSON.stringify({ projects: { staging: 'only-project' } }),
-    );
-
-    expect(resolveFirebaseProjectId(root)).toBe('only-project');
-  });
-
-  it("reads an ancestor directory's .firebaserc", () => {
-    isolateHome();
-    delete process.env['GCLOUD_PROJECT'];
-    const root = makeTempDir();
-    writeFileSync(
-      join(root, '.firebaserc'),
-      JSON.stringify({ projects: { default: 'my-project' } }),
-    );
-    const nested = join(root, 'a', 'b');
-    mkdirSync(nested, { recursive: true });
-
-    expect(resolveFirebaseProjectId(nested)).toBe('my-project');
-  });
-
-  it('returns undefined when nothing resolves', () => {
-    isolateHome();
+  it.each([
+    ['there is no site config', undefined],
+    ['the site config has no project ID', { shortName: 'DevFest' }],
+    ['the site config is not valid JSON', '{'],
+  ])('returns undefined when %s', (_, site) => {
     delete process.env['GCLOUD_PROJECT'];
 
-    expect(resolveFirebaseProjectId(makeTempDir())).toBeUndefined();
+    expect(resolveFirebaseProjectId(makeRepo(site))).toBeUndefined();
   });
 });
 
 describe('checkFirebaseProject', () => {
-  it('passes when a project id resolves', () => {
-    isolateHome();
-    process.env['GCLOUD_PROJECT'] = 'demo-project';
-
-    const result = checkFirebaseProject(makeTempDir());
-
-    expect(result.ok).toBe(true);
-    expect(result.message).toContain('demo-project');
-  });
-
-  it('fails when no project id resolves', () => {
-    isolateHome();
+  it('passes when the site config sets a project ID', () => {
     delete process.env['GCLOUD_PROJECT'];
 
-    const result = checkFirebaseProject(makeTempDir());
+    const result = checkFirebaseProject(makeRepo({ firebase: { projectId: 'my-devfest' } }));
+
+    expect(result.ok).toBe(true);
+    expect(result.message).toContain('my-devfest');
+  });
+
+  it('fails when no project ID resolves', () => {
+    delete process.env['GCLOUD_PROJECT'];
+
+    const result = checkFirebaseProject(makeRepo());
 
     expect(result.ok).toBe(false);
-    expect(result.message).toContain('firebase use');
+    expect(result.message).toContain('firebase.projectId');
   });
 
   it('fails when repoRoot is undefined', () => {
-    isolateHome();
     delete process.env['GCLOUD_PROJECT'];
 
     expect(checkFirebaseProject(undefined).ok).toBe(false);
