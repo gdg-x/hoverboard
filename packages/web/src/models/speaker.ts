@@ -9,6 +9,7 @@ export interface SpeakerData {
   companyLogo: string;
   companyLogoUrl: string;
   country: string;
+  externalId?: string;
   featured: boolean;
   name: string;
   order: number;
@@ -17,6 +18,7 @@ export interface SpeakerData {
   pronouns?: string;
   shortBio: string;
   socials: Social[];
+  source?: string;
   title: string;
 }
 

@@ -27,6 +27,7 @@
     "firestore-init:production": "FIRESTORE_TARGET=production tsx src/index.ts firestore-init"
   },
   "dependencies": {
+    "ajv": "^8.20.0",
     "commander": "^15.0.0",
     "firebase-admin": "^14.4.0"
   },

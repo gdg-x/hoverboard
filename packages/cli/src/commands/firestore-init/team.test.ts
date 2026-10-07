@@ -19,9 +19,26 @@ vi.mock('../../lib/firestore.js', () => ({
   },
 }));
 
+const member = {
+  name: 'Abraham',
+  order: 0,
+  photo: '',
+  photoUrl: '',
+  socials: [],
+  title: 'Organizer',
+};
+
 vi.mock('../../../../../docs/default-firebase-data.json', () => ({
   default: {
-    team: [{ title: 'Organizers', members: [{ name: 'Abraham' }] }, undefined],
+    team: [
+      {
+        title: 'Organizers',
+        members: [
+          { name: 'Abraham', order: 0, photo: '', photoUrl: '', socials: [], title: 'Organizer' },
+        ],
+      },
+      undefined,
+    ],
   },
 }));
 
@@ -43,7 +60,7 @@ describe('importTeam', () => {
     });
     expect(membersCollectionMock).toHaveBeenCalledWith('members');
     expect(memberDocMock).toHaveBeenCalledWith('0');
-    expect(setMock).toHaveBeenCalledWith('members/0', { name: 'Abraham' });
+    expect(setMock).toHaveBeenCalledWith('members/0', member);
     expect(warnSpy).toHaveBeenCalledWith('Skipping missing team 1');
   });
 });

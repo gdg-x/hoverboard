@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hoverboard.dev/schemas/content.schema.json",
+  "title": "Hoverboard content",
+  "description": "The event content model, independent of how it is stored or shown. `$defs` describes each Firestore document. The root describes the seed file `docs/default-firebase-data.json`.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "blog": {
+      "description": "Blog posts by ID.",
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/post" }
+    },
+    "config": {
+      "description": "Runtime settings for functions, stored in the `config` collection. Not event content.",
+      "type": "object",
+      "additionalProperties": { "type": "object" }
+    },
+    "gallery": {
+      "description": "Gallery photo URLs, in display order.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "partners": {
+      "description": "Partner groups with their partners, in display order.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "allOf": [{ "$ref": "#/$defs/partnerGroup" }],
+        "properties": {
+          "items": { "type": "array", "items": { "$ref": "#/$defs/partner" } }
+        },
+        "required": ["items"],
+        "unevaluatedProperties": false
+      }
+    },
+    "previousSpeakers": {
+      "description": "Speakers from earlier editions by ID.",
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/previousSpeaker" }
+    },
+    "schedule": {
+      "description": "Schedule days by date.",
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/date" },
+      "additionalProperties": { "$ref": "#/$defs/day" }
+    },
+    "sessions": {
+      "description": "Sessions by ID.",
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/session" }
+    },
+    "speakers": {
+      "description": "Speakers by ID.",
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/speaker" }
+    },
+    "team": {
+      "description": "Teams with their members, in display order.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "allOf": [{ "$ref": "#/$defs/team" }],
+        "properties": {
+          "members": { "type": "array", "items": { "$ref": "#/$defs/member" } }
+        },
+        "required": ["members"],
+        "unevaluatedProperties": false
+      }
+    },
+    "tickets": {
+      "description": "Tickets, in display order.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/ticket" }
+    },
+    "videos": {
+      "description": "Featured videos, in display order.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/video" }
+    }
+  },
+  "$defs": {
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "time": { "type": "string", "pattern": "^\\d{2}:\\d{2}$" },
+    "order": {
+      "description": "Sort position. Lower comes first.",
+      "type": ["number", "string"]
+    },
+    "source": {
+      "description": "Where the record was imported from, for example `sessionize`. Absent for records edited in Hoverboard.",
+      "type": "string"
+    },
+    "externalId": {
+      "description": "The record's ID in `source`, so a later import updates it instead of adding a duplicate.",
+      "type": "string"
+    },
+    "social": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["icon", "link", "name"],
+      "properties": {
+        "icon": { "type": "string" },
+        "link": { "type": "string" },
+        "name": { "type": "string" }
+      }
+    },
+    "badge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description", "link", "name"],
+      "properties": {
+        "description": { "type": "string" },
+        "link": { "type": "string" },
+        "name": { "type": "string" }
+      }
+    },
+    "post": {
+      "description": "A blog post. Firestore: `blog/{postId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backgroundColor", "brief", "content", "image", "published", "title"],
+      "properties": {
+        "backgroundColor": { "type": "string" },
+        "brief": { "type": "string" },
+        "content": { "type": "string" },
+        "image": { "type": "string" },
+        "published": { "$ref": "#/$defs/date" },
+        "source": {
+          "description": "Path to a markdown file with the full post.",
+          "type": "string"
+        },
+        "title": { "type": "string" }
+      }
+    },
+    "photo": {
+      "description": "A gallery photo. Firestore: `gallery/{photoId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "order"],
+      "properties": {
+        "url": { "type": "string" },
+        "order": { "$ref": "#/$defs/order" }
+      }
+    },
+    "partnerGroup": {
+      "description": "A group of partners, such as a sponsor level. Firestore: `partners/{groupId}`.",
+      "type": "object",
+      "required": ["order", "title"],
+      "properties": {
+        "order": { "$ref": "#/$defs/order" },
+        "title": { "type": "string" }
+      }
+    },
+    "partnerGroupDocument": {
+      "$ref": "#/$defs/partnerGroup",
+      "unevaluatedProperties": false
+    },
+    "partner": {
+      "description": "A partner in a group. Firestore: `partners/{groupId}/items/{partnerId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logoUrl", "name", "order", "url"],
+      "properties": {
+        "logoUrl": { "type": "string" },
+        "name": { "type": "string" },
+        "order": { "$ref": "#/$defs/order" },
+        "url": { "type": "string" }
+      }
+    },
+    "previousSession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tags", "title"],
+      "properties": {
+        "presentation": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "title": { "type": "string" },
+        "videoId": { "type": "string" }
+      }
+    },
+    "previousSpeaker": {
+      "description": "A speaker from an earlier edition. Firestore: `previousSpeakers/{speakerId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bio",
+        "company",
+        "country",
+        "id",
+        "name",
+        "order",
+        "photoUrl",
+        "sessions",
+        "socials",
+        "title"
+      ],
+      "properties": {
+        "bio": { "type": "string" },
+        "company": { "type": "string" },
+        "companyLogo": { "type": "string" },
+        "country": { "type": "string" },
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "order": { "$ref": "#/$defs/order" },
+        "photoUrl": { "type": "string" },
+        "sessions": {
+          "description": "Sessions by year.",
+          "type": "object",
+          "propertyNames": { "pattern": "^\\d{4}$" },
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/previousSession" }
+          }
+        },
+        "socials": { "type": "array", "items": { "$ref": "#/$defs/social" } },
+        "title": { "type": "string" }
+      }
+    },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": { "type": "string" }
+      }
+    },
+    "timeslot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["endTime", "sessions", "startTime"],
+      "properties": {
+        "endTime": { "$ref": "#/$defs/time" },
+        "startTime": { "$ref": "#/$defs/time" },
+        "sessions": {
+          "description": "One entry per track, in track order.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["items"],
+            "properties": {
+              "extend": {
+                "description": "Number of extra timeslots the sessions span.",
+                "type": "number"
+              },
+              "items": {
+                "description": "Session IDs.",
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "day": {
+      "description": "A schedule day. Firestore: `schedule/{date}`. The schedule generator turns it into `generatedSchedule`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "dateReadable", "timeslots", "tracks"],
+      "properties": {
+        "date": { "$ref": "#/$defs/date" },
+        "dateReadable": { "type": "string" },
+        "timeslots": { "type": "array", "items": { "$ref": "#/$defs/timeslot" } },
+        "tracks": { "type": "array", "items": { "$ref": "#/$defs/track" } }
+      }
+    },
+    "session": {
+      "description": "A session. Firestore: `sessions/{sessionId}`. The schedule generator turns it into `generatedSessions`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description", "title"],
+      "properties": {
+        "complexity": { "type": "string" },
+        "description": { "type": "string" },
+        "extend": { "type": "number" },
+        "externalId": { "$ref": "#/$defs/externalId" },
+        "icon": { "type": "string" },
+        "image": { "type": "string" },
+        "language": { "type": "string" },
+        "presentation": { "type": "string" },
+        "source": { "$ref": "#/$defs/source" },
+        "speakers": {
+          "description": "Speaker IDs.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "title": { "type": "string" },
+        "videoId": { "type": "string" }
+      }
+    },
+    "speaker": {
+      "description": "A speaker. Firestore: `speakers/{speakerId}`. The schedule generator turns it into `generatedSpeakers`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bio",
+        "company",
+        "companyLogo",
+        "companyLogoUrl",
+        "country",
+        "featured",
+        "name",
+        "order",
+        "photo",
+        "photoUrl",
+        "shortBio",
+        "socials",
+        "title"
+      ],
+      "properties": {
+        "badges": { "type": "array", "items": { "$ref": "#/$defs/badge" } },
+        "bio": { "type": "string" },
+        "company": { "type": "string" },
+        "companyLogo": { "type": "string" },
+        "companyLogoUrl": { "type": "string" },
+        "country": { "type": "string" },
+        "externalId": { "$ref": "#/$defs/externalId" },
+        "featured": { "type": "boolean" },
+        "name": { "type": "string" },
+        "order": { "$ref": "#/$defs/order" },
+        "photo": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "pronouns": { "type": "string" },
+        "shortBio": { "type": "string" },
+        "socials": { "type": "array", "items": { "$ref": "#/$defs/social" } },
+        "source": { "$ref": "#/$defs/source" },
+        "title": { "type": "string" }
+      }
+    },
+    "team": {
+      "description": "A team. Firestore: `team/{teamId}`.",
+      "type": "object",
+      "required": ["title"],
+      "properties": {
+        "title": { "type": "string" }
+      }
+    },
+    "teamDocument": {
+      "$ref": "#/$defs/team",
+      "unevaluatedProperties": false
+    },
+    "member": {
+      "description": "A team member. Firestore: `team/{teamId}/members/{memberId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "order", "photo", "photoUrl", "socials", "title"],
+      "properties": {
+        "name": { "type": "string" },
+        "order": { "$ref": "#/$defs/order" },
+        "photo": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "socials": { "type": "array", "items": { "$ref": "#/$defs/social" } },
+        "title": { "type": "string" }
+      }
+    },
+    "ticket": {
+      "description": "A ticket. Firestore: `tickets/{ticketId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available", "currency", "info", "name", "price", "soldOut", "url"],
+      "properties": {
+        "available": { "type": "boolean" },
+        "currency": { "type": "string" },
+        "ends": { "type": "string" },
+        "inDemand": { "type": "boolean" },
+        "info": { "type": "string" },
+        "name": { "type": "string" },
+        "order": { "$ref": "#/$defs/order" },
+        "price": { "type": "number" },
+        "primary": { "type": "boolean" },
+        "regular": { "type": "boolean" },
+        "soldOut": { "type": "boolean" },
+        "starts": { "type": "string" },
+        "url": { "type": "string" }
+      }
+    },
+    "video": {
+      "description": "A featured video. Firestore: `videos/{videoId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["speakers", "thumbnail", "title", "youtubeId"],
+      "properties": {
+        "order": { "$ref": "#/$defs/order" },
+        "speakers": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "title": { "type": "string" },
+        "youtubeId": { "type": "string" }
+      }
+    }
+  }
+}

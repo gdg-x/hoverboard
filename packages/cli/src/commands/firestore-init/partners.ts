@@ -1,3 +1,4 @@
+import { validateContent } from '../../lib/content.js';
 import { firestore } from '../../lib/firestore.js';
 import data from '../../../../../docs/default-firebase-data.json';
 
@@ -13,18 +14,15 @@ export const importPartners = () => {
   Object.keys(partners).forEach((partnerId) => {
     const partner = partners[Number(partnerId)];
     if (partner) {
-      batch.set(firestore.collection('partners').doc(partnerId), {
-        title: partner.title,
-        order: partner.order,
-      });
+      const group = { title: partner.title, order: partner.order };
+      validateContent('partners', partnerId, group);
+      batch.set(firestore.collection('partners').doc(partnerId), group);
 
       partner.items.forEach((item, id) => {
+        const itemId = `${id}`.padStart(3, '0');
+        validateContent(`partners/${partnerId}/items`, itemId, item);
         batch.set(
-          firestore
-            .collection('partners')
-            .doc(`${partnerId}`)
-            .collection('items')
-            .doc(`${id}`.padStart(3, '0')),
+          firestore.collection('partners').doc(`${partnerId}`).collection('items').doc(itemId),
           item,
         );
       });
