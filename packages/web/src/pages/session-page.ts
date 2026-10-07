@@ -68,6 +68,21 @@ export class SessionPage extends ThemedElement {
       justify-content: flex-end;
     }
 
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      margin-bottom: 8px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .back-link hoverboard-icon {
+      margin-right: 4px;
+      width: 18px;
+      height: 18px;
+    }
+
     .name {
       line-height: 1.2;
     }
@@ -310,6 +325,10 @@ export class SessionPage extends ThemedElement {
     return html`
       <simple-hero page="schedule">
         <div class="header-content">
+          <a class="back-link" href="${session?.day ? `/schedule/${session.day}` : '/schedule'}">
+            <hoverboard-icon name="arrow-left"></hoverboard-icon>
+            <span>${this.sessionDetails.backToSchedule}</span>
+          </a>
           <h2 class="name">${session?.title ?? ''}</h2>
           ${
             session?.tags?.length

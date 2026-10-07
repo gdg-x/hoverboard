@@ -102,6 +102,19 @@ describe('session-page', () => {
     });
   });
 
+  it('links back to the schedule day of the session', async () => {
+    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
+    mockSelectSession.mockReturnValue({ ...session, day: '2024-01-02' } as Session);
+
+    const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
+    element.sessions = new Success([session]);
+    element.sessionId = 'session-1';
+    await element.updateComplete;
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.back-link')).toHaveAttribute('href', '/schedule/2024-01-02');
+  });
+
   it('redirects to 404 when the session cannot be found', async () => {
     const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
     mockSelectSession.mockReturnValue(undefined);

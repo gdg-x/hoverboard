@@ -273,7 +273,8 @@
     "contentLevel": "Content level",
     "viewPresentation": "View presentation",
     "viewVideo": "View video",
-    "speakers": "Speakers"
+    "speakers": "Speakers",
+    "backToSchedule": "Back to schedule"
   },
   "speakerDetails": {
     "sessions": "Sessions"
