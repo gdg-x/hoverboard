@@ -1,8 +1,9 @@
-import { css, html, LitElement } from 'lit';
+import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { ThemedElement } from '../themed-element';
 
 @customElement('text-truncate')
-export class TextTruncate extends LitElement {
+export class TextTruncate extends ThemedElement {
   static override get styles() {
     return css`
       :host {

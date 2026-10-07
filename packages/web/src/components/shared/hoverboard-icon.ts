@@ -1,5 +1,6 @@
-import { css, html, LitElement, type PropertyValues, type SVGTemplateResult } from 'lit';
+import { css, html, type PropertyValues, type SVGTemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { ThemedElement } from '../themed-element';
 
 // Lit replacement for the retired `<iron-icon icon="hoverboard:name">` Polymer iconset.
 // Each icon is its own module under ./icons so only the icons a page uses are loaded.
@@ -59,7 +60,7 @@ const ICONS: Record<string, () => Promise<{ default: SVGTemplateResult }>> = {
 const loaded = new Map<string, SVGTemplateResult>();
 
 @customElement('hoverboard-icon')
-export class HoverboardIcon extends LitElement {
+export class HoverboardIcon extends ThemedElement {
   static override styles = css`
     :host {
       display: inline-flex;
