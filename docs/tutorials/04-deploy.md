@@ -47,31 +47,10 @@ Make sure you are acting on the correct Firebase project.
   npx firebase use <projectId>
 ```
 
-Add service account credentials as secrets to your GitHub repo.
+Add service account credentials as a secret to your GitHub repo.
 
-```console
-npx firebase init hosting:github
-```
-
-This will open GitHub in the browser were you should authorize Firebase CLI access. Back in the terminal you will then get a number of questions that should be answered like the following. Watch for a constant name that starts with `FIREBASE_SERVICE_ACCOUNT_` and remember it.
-
-> For which GitHub repository would you like to set up a GitHub workflow?
-
-The username and reponame on GitHub. E.g. `gdg-x/hoverboard`.
-
-> Set up the workflow to run a build script before every deploy?
-
-Answer `no` as this has already been done.
-
-_If the script creates the `.github/workflows/firebase-hosting-pull-request.yml` you can delete it as it's already handled in the `.github/workflows/deploy-preview.yml` file._
-
-> Set up automatic deployment to your site's live channel when a PR is merged?
-
-Answer `no` as this has already been done.
-
-Update [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) and [`deploy.yaml`](.github/workflows/deploy.yaml).
-
-1. Replace `FIREBASE_SERVICE_ACCOUNT_HOVERBOARD_MASTER` with the constant that was output to your terminal.
-1. Replace `hoverboard-master` to the Firebase Project ID you'll be deploying to. This should match the value used in `npx firebase use`.
+1. In the Google Cloud console, create a service account in your project and grant it the `Firebase Admin` role (or narrower roles that cover Hosting, Functions, Firestore and Storage deploys). Also enable the Firebase Management API.
+1. Create a JSON key for it and add the contents as a GitHub secret named `FIREBASE_DEPLOY_SERVICE_ACCOUNT`.
+1. In [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) and [`deploy.yaml`](.github/workflows/deploy.yaml), replace `hoverboard-master` with the Firebase Project ID you'll be deploying to.
 
 You can now push to your `main` branch and it'll deploy to the production (`live`) Firebase Hosting channel and pull requests will deploy a temporary preview.
