@@ -1,7 +1,7 @@
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { initialUiState } from '../../store/ui';
-import { location, mapBlock } from '../../utils/data';
+import { location, mapBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';

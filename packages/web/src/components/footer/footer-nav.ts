@@ -1,6 +1,6 @@
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { codeOfConduct, organizer } from '../../utils/data';
+import { codeOfConduct, organizer } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 
 @customElement('footer-nav')

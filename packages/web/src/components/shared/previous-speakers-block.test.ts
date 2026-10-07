@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
 import { router } from '../../router';
-import { loading, previousSpeakersBlock } from '../../utils/data';
+import { loading, previousSpeakersBlock } from '../../config/site';
 import type { PreviousSpeakersBlock } from './previous-speakers-block';
 import './previous-speakers-block';
 

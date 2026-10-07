@@ -4,7 +4,7 @@ import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { Ticket } from '../../models/ticket';
 import { type TicketsState, selectTickets } from '../../store/tickets';
-import { buyTicket, contentLoaders, ticketsBlock } from '../../utils/data';
+import { buyTicket, contentLoaders, ticketsBlock } from '../../config/site';
 import '../shared/content-loader';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';

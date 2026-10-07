@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { codeOfConduct, organizer } from '../../utils/data';
+import { codeOfConduct, organizer } from '../../config/site';
 import './footer-nav';
 
 describe('footer-nav', () => {

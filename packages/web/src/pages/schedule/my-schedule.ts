@@ -2,7 +2,7 @@ import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { Day } from '../../models/day';
 import { selectFeaturedSchedule } from '../../store/schedule/selectors';
-import { schedule } from '../../utils/data';
+import { schedule } from '../../config/site';
 import '../../components/shared/auth-required';
 import './schedule-day';
 import { fromStore } from '../../controllers/from-store';

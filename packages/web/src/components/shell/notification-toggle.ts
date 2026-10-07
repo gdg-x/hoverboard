@@ -26,7 +26,7 @@ import {
   updateNotificationsUsers,
 } from '../../store/update-notifications-users';
 import type { UserState } from '../../store/user';
-import { loading, notifications } from '../../utils/data';
+import { loading, notifications } from '../../config/site';
 import '../shared/auth-required';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';

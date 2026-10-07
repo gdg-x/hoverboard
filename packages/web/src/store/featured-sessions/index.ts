@@ -6,7 +6,7 @@ import {
   type FeaturedSessions,
   saveFeaturedSessions,
 } from '../../db/featured-sessions';
-import { bookmarked } from '../../utils/data';
+import { bookmarked } from '../../config/site';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { selectUserId } from '../user';

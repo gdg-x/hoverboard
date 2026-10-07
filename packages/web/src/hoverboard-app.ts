@@ -20,7 +20,7 @@ import {
   offlineMessage,
   signInProviders,
   title,
-} from './utils/data';
+} from './config/site';
 import './utils/media-query';
 import type { Stickied } from './utils/stickied';
 import { ThemedElement } from './components/themed-element';

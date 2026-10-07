@@ -21,8 +21,8 @@ vi.mock('workbox-window', () => ({ Workbox: mocks.Workbox }));
 const { dispatch } = vi.hoisted(() => ({ dispatch: vi.fn() }));
 vi.mock('./store', () => ({ store: { dispatch } }));
 
-vi.mock('./utils/config', () => ({
-  CONFIG: { BASEPATH: 'basepath' },
+vi.mock('./config/site', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./config/site')>()),
   getConfig: () => '/base/',
 }));
 
@@ -33,7 +33,7 @@ const {
   serviceWorkerError,
   serviceWorkerInstalled,
   serviceWorkerInstalling,
-} = await import('./utils/data');
+} = await import('./config/site');
 
 // `clearMocks` (enabled project-wide) clears each mock's recorded calls
 // before every test, so capture what the module constructed once, up-front.

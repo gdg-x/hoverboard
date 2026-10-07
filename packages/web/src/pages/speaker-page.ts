@@ -12,7 +12,7 @@ import { router } from '../router';
 import { store } from '../store';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
-import { speakerDetails } from '../utils/data';
+import { speakerDetails } from '../config/site';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';

@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import type { Hero } from '../../models/hero';
-import { heroSettings } from '../../utils/data';
+import { heroSettings } from '../../config/site';
 import { dispatch } from '../dispatch';
 
 export type { Hero };

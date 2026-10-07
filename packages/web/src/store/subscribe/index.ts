@@ -2,7 +2,7 @@ import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraha
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { saveSubscriber } from '../../db/subscribers';
 import type { DialogData } from '../../models/dialog-form';
-import { subscribeBlock } from '../../utils/data';
+import { subscribeBlock } from '../../config/site';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 

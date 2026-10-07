@@ -6,7 +6,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
 import type { Filter } from '../../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
-import { filters } from '../../utils/data';
+import { filters } from '../../config/site';
 import { clearFilters, toggleFilter } from '../../utils/filters';
 import { generateClassName, getVariableColor } from '../../utils/styles';
 import './hoverboard-icon';

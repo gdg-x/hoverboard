@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Day } from '../../models/day';
-import { mySchedule } from '../../utils/data';
+import { mySchedule } from '../../config/site';
 import type { HeaderBottomToolbar } from './header-bottom-toolbar';
 
 import './header-bottom-toolbar';

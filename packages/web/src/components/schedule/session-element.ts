@@ -13,7 +13,7 @@ import {
 } from '../../store/featured-sessions';
 import { queueComplexSnackbar } from '../../store/snackbars';
 import type { UserState } from '../../store/user';
-import { schedule } from '../../utils/data';
+import { schedule } from '../../config/site';
 import { acceptingFeedback } from '../../utils/feedback';
 import { getSummary } from '../../utils/strings';
 import { getVariableColor } from '../../utils/styles';

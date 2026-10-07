@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
-import { decorators } from './packages/web/utils/decorators';
+import { decorators } from './packages/web/build/decorators';
 
 export default defineConfig({
   test: {

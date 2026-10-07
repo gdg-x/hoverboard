@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Post } from '../../models/post';
 import { router } from '../../router';
-import { latestPostsBlock } from '../../utils/data';
+import { latestPostsBlock } from '../../config/site';
 import type { LatestPostsBlock } from './latest-posts-block';
 import './latest-posts-block';
 

@@ -16,7 +16,7 @@ import { selectFilters } from '../store/filters';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
-import { contentLoaders, heroSettings } from '../utils/data';
+import { contentLoaders, heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';

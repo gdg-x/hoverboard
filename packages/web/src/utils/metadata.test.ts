@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { image, title as siteTitle } from './data';
+import { image, title as siteTitle } from '../config/site';
 import { INCLUDE_SITE_TITLE, updateImageMetadata, updateMetadata } from './metadata';
 
 const meta = (attribute: 'name' | 'property', value: string) =>

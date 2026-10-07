@@ -6,7 +6,7 @@ import '../components/shared/hoverboard-icon';
 import '../components/markdown/short-markdown';
 import { selectTeamsAndMembers } from '../store/teams-members/selectors';
 import { initialTeamsMembersState } from '../store/teams-members/state';
-import { heroSettings, loading, team } from '../utils/data';
+import { heroSettings, loading, team } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';

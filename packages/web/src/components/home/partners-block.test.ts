@@ -6,7 +6,7 @@ import type { PartnerGroup } from '../../models/partner-group';
 import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
 import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
 import { queueSnackbar } from '../../store/snackbars';
-import { partnersBlock } from '../../utils/data';
+import { partnersBlock } from '../../config/site';
 import type { PartnersBlock } from './partners-block';
 import './partners-block';
 

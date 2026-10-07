@@ -25,7 +25,7 @@ import {
   showForkMeBlockForProjectIds,
   title,
   viewHighlights,
-} from '../utils/data';
+} from '../config/site';
 import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
 import { ThemedElement } from '../components/themed-element';

@@ -19,7 +19,7 @@ import {
   signInDialog,
   signInProviders,
   subscribeBlock,
-} from '../../utils/data';
+} from '../../config/site';
 import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 import '../shared/hoverboard-icon';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';

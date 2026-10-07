@@ -5,7 +5,7 @@ import { fixture } from '../../__tests__/helpers/fixtures';
 import { FilterGroupKey } from '../models/filter-group';
 import { selectFilters } from '../store/filters';
 import { selectFilterGroups } from '../store/sessions/selectors';
-import { heroSettings } from '../utils/data';
+import { heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './schedule-page';
 import { SchedulePage } from './schedule-page';

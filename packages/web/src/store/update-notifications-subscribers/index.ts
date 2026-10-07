@@ -4,7 +4,7 @@ import {
   removeNotificationsSubscriber,
   saveNotificationsSubscriber,
 } from '../../db/notifications-subscribers';
-import { notifications } from '../../utils/data';
+import { notifications } from '../../config/site';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 

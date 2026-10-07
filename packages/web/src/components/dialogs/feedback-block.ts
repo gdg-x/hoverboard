@@ -16,7 +16,7 @@ import {
 } from '../../store/feedback';
 import { queueComplexSnackbar, queueSnackbar } from '../../store/snackbars';
 import type { UserState } from '../../store/user';
-import { feedback as feedbackText } from '../../utils/data';
+import { feedback as feedbackText } from '../../config/site';
 import '../shared/star-rating';
 import { type StarRatingChangeDetail } from '../shared/star-rating';
 import { ThemedElement } from '../themed-element';

@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
-import { heroSettings, speakers } from '../utils/data';
+import { heroSettings, speakers } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './previous-speakers-page';
 import { PreviousSpeakersPage } from './previous-speakers-page';

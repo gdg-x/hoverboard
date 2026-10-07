@@ -2,7 +2,7 @@ import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { initialUiState } from '../../store/ui';
-import { aboutOrganizerBlock } from '../../utils/data';
+import { aboutOrganizerBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
 import '../markdown/short-markdown';
 import { fromStore } from '../../controllers/from-store';

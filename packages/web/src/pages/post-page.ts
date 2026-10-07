@@ -8,7 +8,7 @@ import { StoreController } from '../controllers/store-controller';
 import type { Post } from '../models/post';
 import { router } from '../router';
 import { type BlogState, selectBlogPosts } from '../store/blog';
-import { blog } from '../utils/data';
+import { blog } from '../config/site';
 import { getDate } from '../utils/dates';
 import { fetchText } from '../utils/fetch-text';
 import { updateImageMetadata } from '../utils/metadata';

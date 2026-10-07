@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Ticket } from '../../models/ticket';
-import { buyTicket, ticketsBlock } from '../../utils/data';
+import { buyTicket, ticketsBlock } from '../../config/site';
 import type { TicketsBlock } from './tickets-block';
 import './tickets-block';
 

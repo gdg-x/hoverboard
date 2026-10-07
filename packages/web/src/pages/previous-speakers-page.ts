@@ -10,7 +10,7 @@ import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
-import { contentLoaders, heroSettings, speakers } from '../utils/data';
+import { contentLoaders, heroSettings, speakers } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';

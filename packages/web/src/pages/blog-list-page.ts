@@ -11,7 +11,7 @@ import type { Post } from '../models/post';
 import { router } from '../router';
 import { type BlogState, selectBlogPosts } from '../store/blog';
 import { initialUiState } from '../store/ui';
-import { contentLoaders, heroSettings } from '../utils/data';
+import { contentLoaders, heroSettings } from '../config/site';
 import { getDate } from '../utils/dates';
 import { updateMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';

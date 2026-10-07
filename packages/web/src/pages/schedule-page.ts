@@ -15,7 +15,7 @@ import { type ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { type SessionsState, selectSessionsState } from '../store/sessions';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
-import { contentLoaders, heroSettings } from '../utils/data';
+import { contentLoaders, heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';

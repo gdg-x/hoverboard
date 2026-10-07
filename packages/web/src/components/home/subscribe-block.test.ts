@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { openSubscribeDialog } from '../../store/dialogs';
 import { subscribe } from '../../store/subscribe';
-import { subscribeBlock } from '../../utils/data';
+import { subscribeBlock } from '../../config/site';
 import type { SubscribeBlock } from './subscribe-block';
 import './subscribe-block';
 

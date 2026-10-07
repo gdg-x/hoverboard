@@ -7,7 +7,7 @@ import {
 } from '../../db/notifications-subscribers';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
-import { notifications } from '../../utils/data';
+import { notifications } from '../../config/site';
 
 vi.mock('../../db/notifications-subscribers');
 vi.mock('../dispatch');

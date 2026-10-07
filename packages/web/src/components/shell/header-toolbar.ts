@@ -11,7 +11,7 @@ import { type TicketsState, selectTickets } from '../../store/tickets';
 import { initialUiState } from '../../store/ui';
 import type { UserState } from '../../store/user';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
-import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../../utils/data';
+import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../../config/site';
 import '../shared/hoverboard-icon';
 import './notification-toggle';
 import { fromStore } from '../../controllers/from-store';

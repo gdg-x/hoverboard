@@ -3,7 +3,7 @@ import { screen } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import '../store';
-import { coc, heroSettings } from '../utils/data';
+import { coc, heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './coc-page';
 import { CocPage } from './coc-page';

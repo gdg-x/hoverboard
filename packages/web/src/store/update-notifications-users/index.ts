@@ -1,7 +1,7 @@
 import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { saveNotificationsUsers } from '../../db/notifications-users';
-import { notifications } from '../../utils/data';
+import { notifications } from '../../config/site';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 

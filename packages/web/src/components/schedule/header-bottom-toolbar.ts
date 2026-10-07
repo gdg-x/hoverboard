@@ -3,7 +3,7 @@ import { css, html, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { RouteLocation } from '../../router';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
-import { contentLoaders, mySchedule } from '../../utils/data';
+import { contentLoaders, mySchedule } from '../../config/site';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
 import '../shared/content-loader';
 import { fromStore } from '../../controllers/from-store';

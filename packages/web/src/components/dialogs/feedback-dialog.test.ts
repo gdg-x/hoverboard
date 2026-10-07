@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Session } from '../../models/session';
 import { closeDialog } from '../../store/dialogs';
-import { feedback } from '../../utils/data';
+import { feedback } from '../../config/site';
 import type { FeedbackDialog } from './feedback-dialog';
 import './feedback-dialog';
 

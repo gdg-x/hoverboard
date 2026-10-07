@@ -1,4 +1,4 @@
-import { hashtag } from './data';
+import { hashtag } from '../config/site';
 
 export const share = (e: PointerEvent) => {
   const shareUrl = location.href;

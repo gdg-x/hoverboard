@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 
 const getConfig = vi.fn((_key: string) => 'https://example.com/');
-vi.mock('./utils/config.js', () => ({
-  CONFIG: { URL: 'url', BASEPATH: 'basepath', GOOGLE_MAPS_API_KEY: 'google-maps-api-key' },
+vi.mock('./config/site.js', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./config/site.js')>()),
   getConfig: (key: string) => getConfig(key),
 }));
 

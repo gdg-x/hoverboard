@@ -7,7 +7,7 @@ import { openSubscribeDialog } from '../../store/dialogs';
 import { subscribe, type SubscribeState } from '../../store/subscribe';
 import { initialUiState } from '../../store/ui';
 import type { UserState } from '../../store/user';
-import { subscribeBlock } from '../../utils/data';
+import { subscribeBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';

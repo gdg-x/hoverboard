@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Day } from '../../models/day';
-import { schedule } from '../../utils/data';
+import { schedule } from '../../config/site';
 import type { MySchedule } from './my-schedule';
 import './my-schedule';
 import type { ScheduleDay } from './schedule-day';

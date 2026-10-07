@@ -2,7 +2,7 @@ import { Failure, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { galleryBlock } from '../../utils/data';
+import { galleryBlock } from '../../config/site';
 import type { GalleryBlock } from './gallery-block';
 import './gallery-block';
 

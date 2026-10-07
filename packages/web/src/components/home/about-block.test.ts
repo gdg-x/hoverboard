@@ -3,7 +3,7 @@ import { fireEvent, screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { openVideoDialog } from '../../store/ui';
-import { aboutBlock } from '../../utils/data';
+import { aboutBlock } from '../../config/site';
 import './about-block';
 
 vi.mock('../../store/ui', async (importOriginal) => ({

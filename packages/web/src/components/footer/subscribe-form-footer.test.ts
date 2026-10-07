@@ -4,7 +4,7 @@ import { Success } from '@abraham/remotedata';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { SubscribeFormFooter } from './subscribe-form-footer';
-import { subscribeBlock } from '../../utils/data';
+import { subscribeBlock } from '../../config/site';
 import './subscribe-form-footer';
 
 describe('subscribe-form-footer', () => {
