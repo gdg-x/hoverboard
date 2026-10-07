@@ -1,17 +1,28 @@
 import { findRepoRoot, checkNodeVersion, type DoctorCheckResult } from '../utils/node-version.js';
-import { checkFirebaseProject } from '../utils/firebase-project.js';
+import { checkBilling } from '../utils/billing.js';
+import { checkFirebaseProject, resolveFirebaseProjectId } from '../utils/firebase-project.js';
+
+const symbol = (check: DoctorCheckResult): string => {
+  if (check.warning) return '!';
+  return check.ok ? '✔' : '✘';
+};
 
 /**
  * Runs environment checks a developer needs before running or deploying the
  * site, printing a report and returning whether everything passed.
  */
-export const runDoctor = (): boolean => {
+export const runDoctor = async (): Promise<boolean> => {
   const repoRoot = findRepoRoot(process.cwd());
+  const projectId = repoRoot ? resolveFirebaseProjectId(repoRoot) : undefined;
 
-  const checks: DoctorCheckResult[] = [checkNodeVersion(repoRoot), checkFirebaseProject(repoRoot)];
+  const checks: DoctorCheckResult[] = [
+    checkNodeVersion(repoRoot),
+    checkFirebaseProject(repoRoot),
+    await checkBilling(repoRoot, projectId),
+  ];
 
   for (const check of checks) {
-    console.log(`${check.ok ? '✔' : '✘'} ${check.name}: ${check.message}`);
+    console.log(`${symbol(check)} ${check.name}: ${check.message}`);
   }
 
   const allOk = checks.every((check) => check.ok);

@@ -4,6 +4,8 @@ import { dirname, join } from 'path';
 export interface DoctorCheckResult {
   name: string;
   ok: boolean;
+  /** Printed as a warning; doesn't fail the run. */
+  warning?: boolean;
   message: string;
 }
 

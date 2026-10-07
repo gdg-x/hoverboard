@@ -1,6 +1,6 @@
 # Styling
 
-Styling of your app can be found in `packages/web/src/elements/shared-styles.html`.
+Styling of your app can be found in `packages/web/src/styles/theme.ts`.
 
 ## Colors
 
@@ -8,34 +8,29 @@ Adjust the color scheme to your conference style.
 
 ```css
 :host {
-  /* Primary colors */
-  --dark-primary-color: #f57c00;
-  --default-primary-color: #ff9800;
-  --light-primary-color: #ffe0b2;
-  --text-primary-color: #212121; /* text / icons */
-
-  /* Accent colors */
-  --accent-color: #03a9f4;
-
-  /* Background colors */
-  --primary-background-color: #ffe0b2;
-
-  /* Text colors */
-  --primary-text-color: #212121;
-  --secondary-text-color: #727272;
+  --dark-primary-color: #512da8;
+  --default-primary-color: #673ab7;
+  --focused-color: #311b92;
+  --light-primary-color: #d1c4e9;
+  --text-primary-color: #fff;
+  --accent-color: #ff5252;
+  --primary-background-color: #fff;
+  --primary-text-color: #424242;
+  --secondary-text-color: #757575;
   --disabled-text-color: #bdbdbd;
-
-  /* Other colors */
-  --divider-color: #b6b6b6;
+  --divider-color: #ededed;
+  ...
 }
 ```
+
+Some variables, such as `--box-shadow-primary-color`, `--primary-color-transparent` and `--primary-color-light`, repeat the primary color as `rgb(103 58 183 / ...)`. Update them too when you change `--default-primary-color`.
 
 **Tip:** Choose base colors with [Material Palette][material palette]
 ![material_design_palette_generator](https://cloud.githubusercontent.com/assets/2954281/17750340/a02f8e76-64ca-11e6-80f0-53392b30f89a.png)
 
 ## Hero
 
-Color and images for header can be configured via `data/settings.json` in `heroSettings` object:
+Color and images for header can be configured via `packages/web/public/data/settings.json` in `heroSettings` object:
 
 ```json
 "heroSettings": {
@@ -61,7 +56,7 @@ Color and images for header can be configured via `data/settings.json` in `heroS
 
 ## Web app
 
-Edit Web app colors via `webapp` in `data/settings.json`
+Edit Web app colors via `webapp` in `packages/web/public/data/settings.json`
 
 ```json
 "webapp": {
