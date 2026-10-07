@@ -1,5 +1,6 @@
-import { css, html, LitElement, svg } from 'lit';
+import { css, html, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { ThemedElement } from '../themed-element';
 
 export interface StarRatingChangeDetail {
   rating: number;
@@ -11,7 +12,7 @@ const STAR_ICON = svg`<svg viewBox="0 0 24 24" aria-hidden="true">
 </svg>`;
 
 @customElement('star-rating')
-export class StarRating extends LitElement {
+export class StarRating extends ThemedElement {
   static override styles = css`
     :host {
       display: inline-block;

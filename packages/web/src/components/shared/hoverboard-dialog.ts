@@ -1,5 +1,6 @@
-import { css, html, LitElement, type PropertyValues } from 'lit';
+import { css, html, type PropertyValues } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import { ThemedElement } from '../themed-element';
 
 /**
  * A modal dialog built on the native `<dialog>` element
@@ -12,7 +13,7 @@ import { customElement, property, query } from 'lit/decorators.js';
  * trapping/restoration.
  */
 @customElement('hoverboard-dialog')
-export class HoverboardDialog extends LitElement {
+export class HoverboardDialog extends ThemedElement {
   static override styles = css`
     :host {
       display: contents;

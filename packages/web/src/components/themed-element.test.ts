@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { describe, expect, it } from 'vitest';
 import { customElement } from 'lit/decorators.js';
 import { html, css } from 'lit';
@@ -41,5 +42,18 @@ describe('themed-element', () => {
     );
 
     expect(shadowRoot.textContent).toContain('content');
+  });
+
+  it('is the base class of every component', () => {
+    const sources = import.meta.glob<string>(
+      ['../**/*.ts', '!../**/*.test.ts', '!./themed-element.ts'],
+      { query: '?raw', import: 'default', eager: true },
+    );
+    const offenders = Object.keys(sources).filter((path) =>
+      /extends LitElement\b/.test(sources[path] ?? ''),
+    );
+
+    expect(Object.keys(sources).length).toBeGreaterThan(100);
+    expect(offenders).toEqual([]);
   });
 });

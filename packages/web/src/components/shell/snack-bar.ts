@@ -1,11 +1,12 @@
 import '@material/web/button/text-button.js';
 import '@material/web/iconbutton/icon-button.js';
-import { css, html, LitElement, nothing, type PropertyValues, svg } from 'lit';
+import { css, html, nothing, type PropertyValues, svg } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
 import { type Snackbar, TIMEOUT } from '../../models/snackbar';
 import { store } from '../../store';
 import { removeSnackbar } from '../../store/snackbars';
+import { ThemedElement } from '../themed-element';
 
 const closeIcon = svg`
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
@@ -15,7 +16,7 @@ const closeIcon = svg`
 `;
 
 @customElement('snack-bar')
-export class SnackBar extends LitElement {
+export class SnackBar extends ThemedElement {
   static override styles = css`
     .snackbar {
       position: fixed;
