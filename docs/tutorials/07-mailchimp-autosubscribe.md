@@ -1,5 +1,7 @@
 This tutorial describes how to enable the MailChimp auto subscription feature. So, when a user subscribes to your website, they will be automatically added to the subscription list on MailChimp.
 
+It needs the `mailchimp` and `subscribe` features, which are on by default ([Features](01-configure-app.md#features)).
+
 ## Setup
 
 Set the firebase config variables for Mailchimp configuration (you can find API data on your account)

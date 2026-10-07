@@ -4,6 +4,7 @@ import type { DocumentData } from 'firebase-admin/firestore';
 import * as logger from 'firebase-functions/logger';
 import { onDocumentWritten } from 'firebase-functions/v2/firestore';
 import { fetchConfig } from '../db/config.js';
+import { isFeatureOff } from '../features.js';
 import { saveGeneratedSchedule } from '../db/generated-schedule.js';
 import { saveGeneratedSessions } from '../db/generated-sessions.js';
 import { saveGeneratedSpeakers } from '../db/generated-speakers.js';
@@ -37,9 +38,15 @@ const isScheduleEnabled = async (): Promise<boolean> => {
   }
 };
 
-export const sessionsWrite = onDocumentWritten('sessions/{sessionId}', () => generateAndSaveData());
+// One generator writes the data for both the schedule and the speakers pages.
+const isGeneratorOff = (functionName: string) => isFeatureOff(functionName, 'schedule', 'speakers');
+
+export const sessionsWrite = onDocumentWritten('sessions/{sessionId}', () =>
+  isGeneratorOff('sessionsWrite') ? null : generateAndSaveData(),
+);
 
 export const scheduleWrite = onDocumentWritten('schedule/{scheduleId}', async () => {
+  if (isGeneratorOff('scheduleWrite')) return null;
   if (await isScheduleEnabled()) {
     return generateAndSaveData();
   }
@@ -47,6 +54,7 @@ export const scheduleWrite = onDocumentWritten('schedule/{scheduleId}', async ()
 });
 
 export const speakersWrite = onDocumentWritten('speakers/{speakerId}', async (event) => {
+  if (isGeneratorOff('speakersWrite')) return null;
   const changedSpeaker: ChangedSpeaker | null = event.data?.after.exists
     ? { id: event.params.speakerId, ...event.data.after.data() }
     : null;
