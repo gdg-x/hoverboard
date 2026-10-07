@@ -1,4 +1,4 @@
-import { register } from 'register-service-worker';
+import { Workbox } from 'workbox-window';
 import { store } from './store';
 import { queueComplexSnackbar, queueSnackbar } from './store/snackbars';
 import { CONFIG, getConfig } from './utils/config';
@@ -10,27 +10,38 @@ import {
   serviceWorkerInstalling,
 } from './utils/data';
 
-register('service-worker.js', {
-  registrationOptions: { scope: getConfig(CONFIG.BASEPATH) },
-  cached() {
-    store.dispatch(queueSnackbar(serviceWorkerInstalled));
-  },
-  updated() {
+if ('serviceWorker' in navigator) {
+  const workbox = new Workbox('service-worker.js', { scope: getConfig(CONFIG.BASEPATH) });
+
+  workbox.addEventListener('installing', () => {
+    store.dispatch(queueSnackbar(serviceWorkerInstalling));
+  });
+
+  workbox.addEventListener('installed', (event) => {
+    if (!event.isUpdate) {
+      store.dispatch(queueSnackbar(serviceWorkerInstalled));
+    }
+  });
+
+  // The new worker waits until the user opts in so open tabs never run
+  // against precached assets deleted by the new version.
+  workbox.addEventListener('waiting', () => {
     store.dispatch(
       queueComplexSnackbar({
         label: serviceWorkerAvailable,
         action: {
           title: refresh,
-          callback: () => window.location.reload(),
+          callback: () => {
+            workbox.addEventListener('controlling', () => window.location.reload());
+            workbox.messageSkipWaiting();
+          },
         },
       }),
     );
-  },
-  updatefound() {
-    store.dispatch(queueSnackbar(serviceWorkerInstalling));
-  },
-  error(e) {
+  });
+
+  workbox.register().catch((e: unknown) => {
     console.error('Service worker registration failed:', e);
     store.dispatch(queueSnackbar(serviceWorkerError));
-  },
-});
+  });
+}
