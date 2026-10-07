@@ -6,10 +6,10 @@ Project Hoverboard locally in less than 15 minutes.
 ## Install the Hoverboard and dependencies
 
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
-1. Install [Node.js (v16)](https://nodejs.org/en/download/)
+1. Install [Node.js (v22)](https://nodejs.org/en/download/)
 1. Install project dependencies: `npm ci` (`yarn` should work but it's not officially supported)
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
-1. Update [Hoverboard config](/config) and [Resources](/data). More info can be found [here](01-configure-app.md)
+1. Update [Hoverboard config](/config) and [Resources](/packages/web/public/data). More info can be found [here](01-configure-app.md)
 1. Select your Firebase project `npx firebase use <projectId>` (this is only needed to load your app's web config; local development runs against the [Firestore emulator](https://firebase.google.com/docs/emulator-suite), so it never reads or writes your project's live data)
    - _Tip: `./hbd setup` automates the login and project-selection steps above, then runs `./hbd doctor` to confirm your environment is ready._
 1. Seed the local Firestore emulator with data
@@ -30,29 +30,41 @@ The diagram below is a brief summary of the directories within the project.
     |---docs/
     |---packages/cli/
     |---packages/server/
+    |---packages/storage/
     |---packages/web/
-    |   |---data/
     |   |---dist/
     |   |---node_modules/
+    |   |---public/
+    |   |   |---data/
+    |   |   |---images/
     |   |---src/
     |   |   |---components/
-    |   |   |---elements/
-    |   |   |---mixins/
+    |   |   |---controllers/
+    |   |   |---models/
     |   |   |---pages/
+    |   |   |---store/
+    |   |   |---styles/
+    |   |   |---utils/
     |
 
 - `config/` folder for core project setup, consumed by `packages/web`'s build.
 - `docs/` documentation.
 - `packages/cli/` contains the `hoverboard` developer CLI that helps you work with the project and its data ([docs](./firebase-utils.md)).
 - `packages/server/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) (in `functions/`) used for notifications, optimizations, saving data, etc.
+- `packages/storage/` Firestore, Storage and Realtime Database security rules, Firestore indexes, and their tests.
 - `packages/web/` is the frontend app (own `package.json`/`node_modules`):
-  - `data/` folder with all data for the template including rest of config and resources for pages.
   - `dist/` is the directory to deploy to production.
+  - `public/` is copied to `dist/` by the build.
+    - `data/` folder with the site settings, text resources, blog posts, FAQ and code of conduct.
+    - `images/` folder with the site images.
   - `src/` is where you store all of your source code and do all of your development.
-    - `components/` is where you keep your new LitElement custom elements.
-    - `elements/` is where you keep your old Polymer custom elements.
-    - `mixins/` is where you keep your shared component mixins.
-    - `pages/` is where you keep your pages' description.
+    - `components/` is where you keep your LitElement custom elements, grouped by area.
+    - `controllers/` is where you keep your shared Lit reactive controllers.
+    - `models/` is where you keep your data types.
+    - `pages/` is where you keep your page elements.
+    - `store/` is where you keep your Redux state.
+    - `styles/` is where you keep your theme.
+    - `utils/` is where you keep your shared helpers.
 
 ## Build and serve
 

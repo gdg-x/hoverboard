@@ -1,28 +1,36 @@
 # Configure
 
-Configuration data is split into two files:
-`data/settings.json` (configuration data):
+Configuration data is split into three places.
+
+`config/<BUILD_ENV>.json` (base path, site URL and Google Maps key):
+
+```json
+  "basepath": "/",
+  "url": "..",
+  "googleMapApiKey": ".."
+```
+
+`packages/web/public/data/settings.json` (configuration data):
 
 ```json
   "organizer": {..},
-  "url": "..",
   "startDate": "..",
   "endDate": "..",
   "webapp": {..},
   "hashtag": "..",
   "navigation": [..],
-  "location": {..}
-  "social": [..],
-  "gallery": {..},
+  "heroSettings": {..},
+  "location": {..},
+  "socialNetwork": {..},
   ...
 ```
 
-and `data/resources.json` (texts and other configurations):
+and `packages/web/public/data/resources.json` (texts and other configurations).
 
 ## Pages configuration
 
-Disable, reorder or modify blocks for individual pages inside their individual files that can be found in `/pages` folder.
-The top block (aka 'hero') view of the page can be adjusted via `heroSettings` in `data/settings.json`
+Disable, reorder or modify blocks for individual pages inside their individual files that can be found in the `packages/web/src/pages/` folder.
+The top block (aka 'hero') view of the page can be adjusted via `heroSettings` in `packages/web/public/data/settings.json`
 
 ```json
 "heroSettings": {
@@ -60,7 +68,7 @@ in `packages/web/src/router.ts`
 
 ## Toolbar Navigation
 
-Define a page's label and url in `navigation` in `data/settings.json`
+Define a page's label and url in `navigation` in `packages/web/public/data/settings.json`
 
 ```json
 "navigation": [
@@ -71,7 +79,7 @@ Define a page's label and url in `navigation` in `data/settings.json`
   },
   {
     "route": "speakers",
-    "permalink": "/speakers/",
+    "permalink": "/speakers",
     "label": "Speakers"
   },
   ...
