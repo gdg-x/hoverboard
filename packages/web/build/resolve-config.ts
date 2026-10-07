@@ -1,52 +1,79 @@
 import fs from 'fs';
+import { join } from 'path';
+import { deepMerge } from '../src/config/merge';
 
-type Data = typeof import('../public/data/resources.json') &
-  typeof import('../public/data/settings.json') &
-  typeof import('../../../config/production.json') & { NODE_ENV: string };
+type Site = typeof import('../defaults/site.json') & typeof import('../../config/site.json');
+type Resources = typeof import('../defaults/content/resources.json') &
+  typeof import('../../config/content/resources.json');
+
+/** Template data. Each file has its own namespace, for example `{{ site.url }}`. */
+export interface SiteConfig {
+  site: Site;
+  resources: Resources;
+  NODE_ENV: string;
+}
+
+export interface ConfigPaths {
+  /** Upstream defaults. */
+  defaults: string;
+  /** The site's own config, which only contains what it changes. */
+  site: string;
+  /** `<BUILD_ENV>.json` overrides for `site.json`. */
+  environments: string;
+}
 
 const { BUILD_ENV, NODE_ENV } = process.env;
 export const production = NODE_ENV === 'production';
 export const watch = process.argv.includes('--watch');
-const buildTarget = BUILD_ENV ? BUILD_ENV : production ? 'production' : 'development';
 
-const getConfigPath = () => {
-  const path = `../../config/${buildTarget}.json`;
+// Vite runs with packages/web as the working directory.
+export const CONFIG_PATHS: ConfigPaths = {
+  defaults: 'defaults',
+  site: '../config',
+  environments: '../../config',
+};
 
+const readJson = <T>(path: string): T => JSON.parse(fs.readFileSync(path, 'utf8')) as T;
+
+// `BUILD_ENV`, or `development` for development builds, picks an optional override file.
+const readEnvironment = (dir: string, buildEnv: string | undefined, isProduction: boolean) => {
+  const name = buildEnv || (isProduction ? undefined : 'development');
+  if (!name) return {};
+
+  const path = join(dir, `${name}.json`);
   if (!fs.existsSync(path)) {
-    throw new Error(`
-      ERROR: Config path '${path}' does not exists.
-      Please, use production|development.json files or add a configuration file at '${path}'.
-    `);
+    if (buildEnv) throw new Error(`BUILD_ENV is ${buildEnv}, but ${path} does not exist.`);
+    return {};
+  }
+  console.log(`Using ${path} over site.json.`);
+  return readJson<Partial<Site>>(path);
+};
+
+/** Reads the defaults, then the site's config over them. The dev server and the build both use it. */
+export const resolveConfig = ({
+  paths = CONFIG_PATHS,
+  buildEnv = BUILD_ENV,
+  nodeEnv = NODE_ENV,
+}: {
+  paths?: ConfigPaths;
+  buildEnv?: string | undefined;
+  nodeEnv?: string | undefined;
+} = {}): SiteConfig => {
+  const site = deepMerge(
+    deepMerge(
+      readJson<object>(join(paths.defaults, 'site.json')),
+      readJson<object>(join(paths.site, 'site.json')),
+    ),
+    readEnvironment(paths.environments, buildEnv, nodeEnv === 'production'),
+  ) as Site;
+  const resources = deepMerge(
+    readJson<object>(join(paths.defaults, 'content', 'resources.json')),
+    readJson<object>(join(paths.site, 'content', 'resources.json')),
+  ) as Resources;
+
+  if (!resources.image.startsWith('http')) {
+    resources.image = `${site.url}${resources.image}`;
   }
 
-  console.log(`File path ${path} selected as config...`);
-  return path;
+  return { site, resources, NODE_ENV: nodeEnv || 'production' };
 };
-
-const getData = (): Data => {
-  const settingsFiles = [
-    './public/data/resources.json',
-    './public/data/settings.json',
-    getConfigPath(),
-  ];
-  const combineSettings = (currentData: Partial<Data>, path: string) => {
-    const settingsData = JSON.parse(fs.readFileSync(path).toString());
-    return {
-      ...currentData,
-      ...settingsData,
-    };
-  };
-
-  return settingsFiles.reduce(combineSettings, {
-    NODE_ENV: NODE_ENV || 'production',
-  }) as Data;
-};
-
-const cleanupData = (data: Data) => {
-  if (!data.image.startsWith('http')) {
-    data.image = `${data.url}${data.image}`;
-  }
-  return data;
-};
-
-export const resolveConfig = (): Data => cleanupData(getData());

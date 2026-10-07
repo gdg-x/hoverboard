@@ -27,9 +27,25 @@ Lighter and transparent versions of the primary color, such as `--light-primary-
 **Tip:** Choose base colors with [Material Palette][material palette]
 ![material_design_palette_generator](https://cloud.githubusercontent.com/assets/2954281/17750340/a02f8e76-64ca-11e6-80f0-53392b30f89a.png)
 
+## Tags and badges
+
+Session tag colors are set by tag name in `theme.tagColors` in `packages/config/site.json`. Name each one like the tag in lowercase, with dashes instead of spaces. Speaker badge colors are in `theme.badgeColors`.
+
+```json
+"theme": {
+  "tagColors": {
+    "android": "#78c257",
+    "web": "#2196f3"
+  },
+  "badgeColors": {
+    "gde": "#3d5afe"
+  }
+}
+```
+
 ## Hero
 
-Color and images for header can be configured via `packages/web/public/data/settings.json` in `heroSettings` object:
+Color and images for header can be configured via `packages/config/site.json` in `heroSettings` object:
 
 ```json
 "heroSettings": {
@@ -55,7 +71,7 @@ Color and images for header can be configured via `packages/web/public/data/sett
 
 ## Web app
 
-Edit Web app colors via `webapp` in `packages/web/public/data/settings.json`
+Edit Web app colors via `webapp` in `packages/config/site.json`
 
 ```json
 "webapp": {

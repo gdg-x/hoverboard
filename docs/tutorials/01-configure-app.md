@@ -1,36 +1,36 @@
 # Configure
 
-Configuration data is split into three places.
+Your site's config and content live in `packages/config`:
 
-`config/<BUILD_ENV>.json` (base path, site URL and Google Maps key):
+- `site.json`: settings such as the site URL, base path, Google Maps key, organizer, location, social links and colors.
+- `content/resources.json`: event text, such as the title, description and the about blocks.
+- `content/faq.md`, `content/coc.md` and `content/posts/`: the FAQ, code of conduct and blog posts.
+
+Upstream defaults for everything else, such as the UI text and page titles, are in `packages/web/defaults/`. Your files only need the values you change. Objects merge with the defaults, and lists and other values replace them. For example, a `navigation` list in `site.json` replaces the whole default list.
+
+`packages/config/site.json`:
 
 ```json
-  "basepath": "/",
   "url": "..",
-  "googleMapApiKey": ".."
-```
-
-`packages/web/public/data/settings.json` (configuration data):
-
-```json
+  "basepath": "/",
+  "googleMapApiKey": "..",
   "organizer": {..},
   "startDate": "..",
   "endDate": "..",
   "webapp": {..},
   "hashtag": "..",
-  "navigation": [..],
   "heroSettings": {..},
   "location": {..},
   "socialNetwork": {..},
   ...
 ```
 
-and `packages/web/public/data/resources.json` (texts and other configurations).
+`index.html`, `manifest.json`, `faq.md` and `coc.md` can use these values in [Nunjucks](https://mozilla.github.io/nunjucks/) templates, with one namespace per file. For example `{{ site.url }}` comes from `site.json`, and `{{ resources.title }}` from `content/resources.json`.
 
 ## Pages configuration
 
 Disable, reorder or modify blocks for individual pages inside their individual files that can be found in the `packages/web/src/pages/` folder.
-The top block (aka 'hero') view of the page can be adjusted via `heroSettings` in `packages/web/public/data/settings.json`
+The top block (aka 'hero') view of the page can be adjusted via `heroSettings` in `packages/config/site.json`
 
 ```json
 "heroSettings": {
@@ -68,7 +68,7 @@ in `packages/web/src/router.ts`
 
 ## Toolbar Navigation
 
-Define a page's label and url in `navigation` in `packages/web/public/data/settings.json`
+Define a page's label and url in `navigation` in `packages/config/site.json`. The default list is in `packages/web/defaults/site.json`.
 
 ```json
 "navigation": [

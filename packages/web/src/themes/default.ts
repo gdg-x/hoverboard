@@ -26,18 +26,5 @@ export const defaultTheme = css`
     --star-rating-color: #faca43;
     --twitter-color: #4099ff;
     --facebook-color: #3b5998;
-
-    /* Badges */
-    --gde: #3d5afe;
-    --wtm: #1de9b6;
-    --gdg: #00b0ff;
-
-    /* Tags */
-    --general: #9e9e9e;
-    --android: #78c257;
-    --web: #2196f3;
-    --cloud: #3f51b5;
-    --community: #e91e63;
-    --design: #e91e63;
   }
 `;

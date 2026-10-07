@@ -1,9 +1,17 @@
 // The only client entry point for site config. Read config from here, never from the data files.
 
-import { navigation as allNavigation } from '../../public/data/settings.json';
+import siteResources from '../../../config/content/resources.json';
+import siteSettings from '../../../config/site.json';
+import defaultResources from '../../defaults/content/resources.json';
+import defaultSettings from '../../defaults/site.json';
 import { isFeature, isFeatureEnabled } from './features';
+import { deepMerge } from './merge';
 
-export {
+// Same order as packages/web/build/resolve-config.ts: upstream defaults, then the site.
+const resources = deepMerge(defaultResources, siteResources);
+const settings = deepMerge(defaultSettings, siteSettings);
+
+export const {
   aboutBlock,
   aboutOrganizerBlock,
   addToHomeScreen,
@@ -53,8 +61,8 @@ export {
   title,
   image,
   viewHighlights,
-} from '../../public/data/resources.json';
-export {
+} = resources;
+export const {
   contentLoaders,
   dateFormat,
   disabledSchedule,
@@ -66,10 +74,10 @@ export {
   showForkMeBlockForProjectIds,
   signInProviders,
   socialNetwork,
-} from '../../public/data/settings.json';
+} = settings;
 
 // Entries whose route names a feature are hidden when that feature is off.
-export const navigation = allNavigation.filter(
+export const navigation = settings.navigation.filter(
   ({ route }) => !isFeature(route) || isFeatureEnabled(route),
 );
 
