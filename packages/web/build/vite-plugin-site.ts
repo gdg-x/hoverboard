@@ -1,21 +1,33 @@
 import n from 'nunjucks';
-import type { Plugin, PluginOption } from 'vite';
+import type { HtmlTagDescriptor, Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
-import { FEATURES } from '../src/config/features';
+import { FEATURES, type Feature } from '../src/config/features';
 import { resolveConfig, type SiteConfig } from './resolve-config';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
 const RESOLVED_SITE_MODULE = `\0${SITE_MODULE}`;
 
-/** Feature flags as one constant, so the bundler can drop the code of disabled features. */
-export const featureDefines = (): Record<string, string> => ({
-  __HB_FEATURES__: JSON.stringify(Object.fromEntries(FEATURES.map((feature) => [feature, true]))),
+/**
+ * Feature flags as literals, for example `__HB_FEATURES__.blog` becomes `false`, so the bundler
+ * drops the code and `import()` calls of disabled features. The whole object serves dynamic lookups.
+ */
+export const featureDefines = (features: Record<Feature, boolean>): Record<string, string> => ({
+  __HB_FEATURES__: JSON.stringify(features),
+  ...Object.fromEntries(
+    FEATURES.map((feature) => [`__HB_FEATURES__.${feature}`, JSON.stringify(features[feature])]),
+  ),
 });
 
-/** Serves the resolved config as `virtual:hoverboard/site`, the client's only source of config. */
-export const siteModule = ({ site, resources }: SiteConfig): Plugin => ({
+/**
+ * Serves the resolved config as `virtual:hoverboard/site`, the client's only source of config.
+ * Tests pass `defineFeatures: false` and set `globalThis.__HB_FEATURES__` so they can toggle flags.
+ */
+export const siteModule = (
+  { site, resources }: SiteConfig,
+  { defineFeatures = true } = {},
+): Plugin => ({
   name: 'hoverboard-site-module',
-  config: () => ({ define: featureDefines() }),
+  config: () => (defineFeatures ? { define: featureDefines(site.features) } : {}),
   resolveId: (id) => (id === SITE_MODULE ? RESOLVED_SITE_MODULE : undefined),
   load: (id) =>
     id === RESOLVED_SITE_MODULE
@@ -28,6 +40,27 @@ export const themeColorsCss = ({ site }: SiteConfig): string => {
   const colors = { ...site.theme.badgeColors, ...site.theme.tagColors };
   const properties = Object.entries(colors).map(([name, color]) => `--${name}: ${color};`);
   return `:root { ${properties.join(' ')} }`;
+};
+
+export const headTags = (data: SiteConfig): HtmlTagDescriptor[] => {
+  const tags: HtmlTagDescriptor[] = [
+    { tag: 'style', children: themeColorsCss(data), injectTo: 'head' },
+  ];
+  const key = data.site.integrations?.googleMapsApiKey;
+  if (data.site.features.map && key) {
+    const query = new URLSearchParams({
+      key,
+      libraries: 'maps,marker',
+      loading: 'async',
+      v: 'beta',
+    });
+    tags.push({
+      tag: 'script',
+      attrs: { async: true, defer: true, src: `https://maps.googleapis.com/maps/api/js?${query}` },
+      injectTo: 'head',
+    });
+  }
+  return tags;
 };
 
 // Renders the Nunjucks placeholders (e.g. {{ resources.title }}) in index.html, manifest.json and
@@ -48,7 +81,7 @@ export const site = (): PluginOption[] => {
         order: 'pre',
         handler: (html) => ({
           html: compileTemplate(html),
-          tags: [{ tag: 'style', children: themeColorsCss(data), injectTo: 'head' }],
+          tags: headTags(data),
         }),
       },
     },

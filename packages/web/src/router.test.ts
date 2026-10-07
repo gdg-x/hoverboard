@@ -1,5 +1,6 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import type { RouteConfig } from '@lit-labs/router';
+import { setFeatures } from '../__tests__/helpers/features';
 
 vi.mock('./config/site.js', async (importOriginal) => ({
   ...(await importOriginal<typeof import('./config/site.js')>()),
@@ -8,12 +9,6 @@ vi.mock('./config/site.js', async (importOriginal) => ({
 
 const logPageView = vi.fn();
 vi.mock('./utils/analytics.js', () => ({ logPageView }));
-
-const isFeatureEnabled = vi.fn((_feature: string) => true);
-vi.mock('./config/features.js', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('./config/features.js')>()),
-  isFeatureEnabled: (feature: string) => isFeatureEnabled(feature),
-}));
 
 const { decodeParam, onLocationChanged, selectRouteName, startRouter } = await import('./router');
 
@@ -99,10 +94,6 @@ describe('feature routes', () => {
   });
   const routePath = (route: RouteConfig) => ('path' in route ? route.path : undefined);
 
-  afterEach(() => {
-    isFeatureEnabled.mockImplementation(() => true);
-  });
-
   it('installs the routes of every enabled feature', () => {
     const paths = startRouter(host as never).routes.map(routePath);
 
@@ -126,7 +117,7 @@ describe('feature routes', () => {
   });
 
   it('leaves out the routes of disabled features', () => {
-    isFeatureEnabled.mockImplementation((feature) => feature !== 'blog');
+    setFeatures({ blog: false });
 
     const router = startRouter(host as never);
 

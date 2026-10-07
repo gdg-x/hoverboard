@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { setFeatures } from '../../../__tests__/helpers/features';
 import { codeOfConduct, organizer } from '../../config/site';
 import './footer-nav';
 
@@ -34,5 +35,13 @@ describe('footer-nav', () => {
 
     expect(cocLink).toBeInTheDocument();
     expect(cocLink).toHaveAttribute('href', '/coc');
+  });
+
+  it('leaves out the code of conduct link when the feature is off', async () => {
+    setFeatures({ codeOfConduct: false });
+
+    const { shadowRoot } = await fixture(html`<footer-nav></footer-nav>`);
+
+    expect(shadowRoot.querySelector('a.coc')).toBeNull();
   });
 });

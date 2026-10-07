@@ -1,4 +1,4 @@
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { codeOfConduct, organizer } from '../../config/site';
 import { ThemedElement } from '../themed-element';
@@ -89,7 +89,11 @@ export class FooterNav extends ThemedElement {
           <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer"
             >Project Hoverboard</a
           >
-          · <a class="coc" href="/coc">${this.codeOfConduct}</a>
+          ${
+            __HB_FEATURES__.codeOfConduct
+              ? html`· <a class="coc" href="/coc">${this.codeOfConduct}</a>`
+              : nothing
+          }
         </div>
       </div>
     `;

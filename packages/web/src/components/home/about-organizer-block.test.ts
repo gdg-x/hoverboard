@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { setFeatures } from '../../../__tests__/helpers/features';
 import { aboutOrganizerBlock } from '../../config/site';
 import './about-organizer-block';
 
@@ -21,5 +22,15 @@ describe('about-organizer-block', () => {
     expect(getByText(firstBlock.title)).toBeInTheDocument();
     expect(getByText(firstBlock.callToAction.label)).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('img')).toBeInTheDocument();
+    expect(shadowRootForWithin.querySelector('a.image-link')).toHaveAttribute('href', '/team');
+  });
+
+  it('does not link the photo to the team page when team is off', async () => {
+    setFeatures({ team: false });
+
+    const { shadowRoot } = await fixture(html`<about-organizer-block></about-organizer-block>`);
+
+    expect(shadowRoot.querySelector('img')).not.toBeNull();
+    expect(shadowRoot.querySelector('a.image-link')).toBeNull();
   });
 });

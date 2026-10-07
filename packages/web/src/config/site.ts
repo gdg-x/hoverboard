@@ -53,15 +53,7 @@ export const {
   title,
   viewHighlights,
 } = resources;
-export const {
-  basepath,
-  dateFormat,
-  heroSettings,
-  image,
-  organizer,
-  showForkMeBlockForProjectIds,
-  url,
-} = settings;
+export const { basepath, dateFormat, heroSettings, image, organizer, url } = settings;
 export const disabledSchedule = !settings.schedule.published;
 export const hashtag = settings.social.hashtag;
 export const mailto = settings.organizer.email;

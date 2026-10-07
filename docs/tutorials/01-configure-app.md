@@ -76,8 +76,28 @@ The top block (aka 'hero') view of the page can be adjusted via `heroSettings` i
  }
 ```
 
-If you don't need some pages, don't forget to remove them (or comment out)
-in `packages/web/src/router.ts`
+If you don't need some pages, turn their features off. See [Features](#features).
+
+## Features
+
+Turn parts of the site off in `features` in `packages/config/site.json`. Every feature is on by default, except `forkMe`.
+
+```json
+"features": {
+  "previousSpeakers": false,
+  "tickets": false
+}
+```
+
+A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `blog`, `codeOfConduct`, `faq`, `feedback`, `forkMe`, `gallery`, `imageOptimization`, `mailchimp`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `schedule`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
+
+The build fails when:
+
+- a feature needs one that is off: `schedule` needs `speakers`, `mySchedule` and `feedback` need `schedule`, and `mailchimp` needs `subscribe`.
+- `map` is on without `integrations.googleMapsApiKey`.
+- event text links to the page of a feature that is off, for example `/faq` in `footerRelBlock`.
+
+Some parts of a feature still show when it is off: the feedback block and dialog, the My Schedule bookmark button, the notifications toggle, the ticket link in the header, and the Cloud Functions behind `mailchimp`, `notifications` and `imageOptimization`.
 
 ## Toolbar Navigation
 

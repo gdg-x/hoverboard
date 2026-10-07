@@ -54,18 +54,19 @@ export class AboutOrganizerBlock extends ThemedElement {
   private accessor viewport!: typeof initialUiState.viewport;
 
   override render() {
+    const photo = html`
+      <img
+        loading="lazy"
+        decoding="async"
+        class="organizers-photo"
+        src="${aboutOrganizerBlock.image}"
+        alt="Organizer"
+      />
+    `;
     return html`
       <div class="container">
         <div class="image-column" ?hidden="${this.viewport.isPhone}">
-          <a href="/team" class="image-link">
-            <img
-              loading="lazy"
-              decoding="async"
-              class="organizers-photo"
-              src="${aboutOrganizerBlock.image}"
-              alt="Organizer"
-            />
-          </a>
+          ${__HB_FEATURES__.team ? html`<a href="/team" class="image-link">${photo}</a>` : photo}
         </div>
 
         <div class="description-block">

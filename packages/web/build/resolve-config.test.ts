@@ -3,8 +3,9 @@ import { tmpdir } from 'os';
 import { dirname, join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { deepMerge } from '../src/config/merge';
+import { FEATURES, type Feature } from '../src/config/features';
 import { ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
-import { themeColorsCss } from './vite-plugin-site';
+import { featureDefines, headTags, themeColorsCss } from './vite-plugin-site';
 
 const repoPaths = configPaths(join(import.meta.dirname, '..'));
 const dirsToClean: string[] = [];
@@ -146,11 +147,91 @@ describe('config validation', () => {
     ]);
   });
 
+  it('rejects unknown features', () => {
+    expect(errorsFor({ site: { features: { sponsors: true } } })).toEqual([
+      'site.json/features: must NOT have additional properties "sponsors"',
+    ]);
+  });
+
+  it('rejects features whose required features are off', () => {
+    expect(errorsFor({ site: { features: { schedule: false } } })).toEqual([
+      'site.json/features/feedback: needs schedule, which is off',
+      'site.json/features/mySchedule: needs schedule, which is off',
+    ]);
+  });
+
+  it('requires a Google Maps key only when map is on', () => {
+    const paths = makePaths();
+    const site = readJson(join(paths.site, 'site.json')) as Record<string, unknown>;
+    delete site['integrations'];
+    writeJson(join(paths.site, 'site.json'), site);
+
+    expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([
+      'site.json/integrations/googleMapsApiKey: is required when map is on',
+    ]);
+
+    writeJson(join(paths.site, 'site.json'), { ...site, features: { map: false } });
+
+    expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([]);
+  });
+
+  it('rejects content links to features that are off', () => {
+    expect(errorsFor({ site: { features: { faq: false, team: false } } })).toEqual([
+      'content/resources.json/footerRelBlock/2/links/4/url: "/faq" links to faq, which is off',
+      'content/resources.json/aboutOrganizerBlock/blocks/0/callToAction/link: "/team" links to team, which is off',
+    ]);
+  });
+
+  it('lists every feature in the schema', () => {
+    const schema = readJson(join(repoPaths.schemas, 'site.schema.json')) as {
+      properties: { features: { properties: object } };
+    };
+
+    expect(Object.keys(schema.properties.features.properties)).toEqual([...FEATURES]);
+  });
+
   it('fails the build with every error', () => {
     const paths = makePaths({ site: { typo: true }, resources: { titel: 'DevFest' } });
 
     expect(() => resolveConfig({ paths, nodeEnv: 'production' })).toThrow(ConfigError);
     expect(() => resolveConfig({ paths, nodeEnv: 'production' })).toThrow(/typo[\s\S]*titel/);
+  });
+});
+
+describe('featureDefines', () => {
+  it('defines each flag as a literal, and the object for dynamic lookups', () => {
+    const features = Object.fromEntries(
+      FEATURES.map((feature) => [feature, feature !== 'blog']),
+    ) as Record<Feature, boolean>;
+
+    const defines = featureDefines(features);
+
+    expect(defines['__HB_FEATURES__.blog']).toBe('false');
+    expect(defines['__HB_FEATURES__.team']).toBe('true');
+    expect(JSON.parse(defines['__HB_FEATURES__'] ?? '')).toEqual(features);
+  });
+});
+
+describe('headTags', () => {
+  const configWith = (map: boolean) =>
+    ({
+      site: {
+        features: { map },
+        integrations: { googleMapsApiKey: 'key&x' },
+        theme: { badgeColors: {}, tagColors: {} },
+      },
+    }) as unknown as Parameters<typeof headTags>[0];
+
+  it('loads Google Maps when map is on', () => {
+    const script = headTags(configWith(true)).find(({ tag }) => tag === 'script');
+
+    expect(script?.attrs?.['src']).toBe(
+      'https://maps.googleapis.com/maps/api/js?key=key%26x&libraries=maps%2Cmarker&loading=async&v=beta',
+    );
+  });
+
+  it('skips Google Maps when map is off', () => {
+    expect(headTags(configWith(false)).map(({ tag }) => tag)).toEqual(['style']);
   });
 });
 

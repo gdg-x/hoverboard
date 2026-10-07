@@ -12,7 +12,9 @@ export default defineConfig({
       {
         plugins: [
           decorators(),
-          siteModule(resolveConfig({ paths: configPaths(webRoot), nodeEnv: 'test' })),
+          siteModule(resolveConfig({ paths: configPaths(webRoot), nodeEnv: 'test' }), {
+            defineFeatures: false,
+          }),
         ],
         // Vitest resolves lit-html's `isServer` with the Node condition (true), which
         // makes Lit controllers skip browser setup under jsdom.
