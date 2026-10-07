@@ -9,7 +9,6 @@ import {
 import { mailchimpSubscribe } from './triggers/mailchimp-subscribe.js';
 import { sendGeneralNotification } from './triggers/notifications.js';
 import { optimizeImages } from './triggers/optimize-images.js';
-import { prerender } from './triggers/prerender.js';
 import { scheduleNotifications } from './triggers/schedule-notifications.js';
 
 initializeApp();
@@ -19,7 +18,6 @@ export {
   scheduleNotifications,
   optimizeImages,
   mailchimpSubscribe,
-  prerender,
   scheduleWrite,
   sessionsWrite,
   speakersWrite,

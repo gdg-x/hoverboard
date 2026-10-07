@@ -11,17 +11,12 @@
     "npm": "10"
   },
   "scripts": {
-    "build": "npm run clean && concurrently npm:build:*",
-    "build:index": "cpx \"../../web/dist/*.html\" dist --verbose",
-    "build:src": "tsc",
+    "build": "npm run clean && tsc",
     "clean": "rm -rf dist",
-    "start": "npm run clean && concurrently --kill-others npm:start:*",
-    "start:index": "npm run build:index -- --watch",
-    "start:src": "npm run build:src -- --watch"
+    "start": "npm run clean && tsc --watch"
   },
   "dependencies": {
     "@google-cloud/storage": "^8.0.1",
-    "express": "^5.2.1",
     "firebase-admin": "^14.4.0",
     "firebase-functions": "^7.4.0",
     "node-fetch": "^3.3.2"
@@ -29,8 +24,6 @@
   "devDependencies": {
     "@tsconfig/node22": "^22.0.6",
     "@types/node": "^22.20.4",
-    "concurrently": "^10.0.5",
-    "cpx2": "^9.0.3",
     "typescript": "^6.0.3"
   }
 }
