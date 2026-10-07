@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import * as logger from 'firebase-functions/logger';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import { fetchConfig } from '../db/config.js';
+import { isFeatureOff } from '../features.js';
 
 const md5 = (data: string) => crypto.createHash('md5').update(data).digest('hex');
 
@@ -34,6 +35,8 @@ const getMailchimpConfig = async (): Promise<MailchimpConfig | undefined> => {
 export const mailchimpSubscribe = onDocumentCreated(
   { document: '/subscribers/{id}', retry: true },
   async (event) => {
+    if (isFeatureOff('mailchimpSubscribe', 'mailchimp')) return;
+
     const mailchimpConfig = await getMailchimpConfig();
     if (!mailchimpConfig) {
       logger.log(

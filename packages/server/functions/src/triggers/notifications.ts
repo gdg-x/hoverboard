@@ -3,6 +3,7 @@
 import * as logger from 'firebase-functions/logger';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import { fetchConfig } from '../db/config.js';
+import { isFeatureOff } from '../features.js';
 import {
   deleteNotificationSubscriber,
   fetchNotificationSubscribers,
@@ -12,6 +13,8 @@ import { isInvalidTokenError, sendToTokens } from '../utils/messaging.js';
 export const sendGeneralNotification = onDocumentCreated(
   '/notifications/{timestamp}',
   async (event) => {
+    if (isFeatureOff('sendGeneralNotification', 'notifications')) return undefined;
+
     const timestamp = event.params.timestamp;
     const message = event.data?.data();
 

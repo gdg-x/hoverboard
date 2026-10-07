@@ -11,9 +11,9 @@
     "npm": "10"
   },
   "scripts": {
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && node scripts/write-features.mjs && tsc",
     "clean": "rm -rf dist",
-    "start": "npm run clean && tsc --watch"
+    "start": "npm run clean && node scripts/write-features.mjs && tsc --watch"
   },
   "dependencies": {
     "@google-cloud/storage": "^8.0.1",
