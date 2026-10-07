@@ -1,5 +1,13 @@
 name: Deploy Preview
 on: pull_request
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+  # Lets google-github-actions/auth request a GitHub OIDC token for Workload Identity Federation.
+  id-token: write
+
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
@@ -12,9 +20,19 @@ jobs:
         run: echo "{}" > serviceAccount.json
       - run: npm ci
       - run: npm run build
+      # `./hbd setup-github` sets these variables. See docs/tutorials/04-deploy.md.
+      - uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: '${{ vars.WIF_PROVIDER }}'
+          service_account: '${{ vars.DEPLOY_SERVICE_ACCOUNT }}'
+      # action-hosting-deploy only accepts credentials as text, not a file path.
+      - id: credentials
+        run: |
+          credentials=$(jq -c . "$GOOGLE_APPLICATION_CREDENTIALS")
+          echo "::add-mask::$credentials"
+          echo "json=$credentials" >> "$GITHUB_OUTPUT"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          # See docs/tutorials/04-deploy.md for configuring these
           projectId: hoverboard-master
-          firebaseServiceAccount: '${{ secrets.FIREBASE_DEPLOY_SERVICE_ACCOUNT }}'
+          firebaseServiceAccount: '${{ steps.credentials.outputs.json }}'

@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: read
+  id-token: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,7 +18,9 @@ jobs:
         run: echo "{}" > serviceAccount.json
       - run: npm ci
       - run: npm run build
+      # `./hbd setup-github` sets these variables. See docs/tutorials/04-deploy.md.
       - uses: google-github-actions/auth@v3
         with:
-          credentials_json: ${{ secrets.FIREBASE_DEPLOY_SERVICE_ACCOUNT }}
+          workload_identity_provider: '${{ vars.WIF_PROVIDER }}'
+          service_account: '${{ vars.DEPLOY_SERVICE_ACCOUNT }}'
       - run: npx firebase deploy --project hoverboard-master --non-interactive
