@@ -49,7 +49,7 @@ Make sure you are acting on the correct Firebase project.
 
 Add service account credentials as a secret to your GitHub repo.
 
-1. In the Google Cloud console, create a service account in your project and grant it the `Firebase Admin` role (or narrower roles that cover Hosting, Functions, Firestore and Storage deploys). Also enable the Firebase Management API.
+1. In the Google Cloud console, create a service account in your project and grant it the `Firebase Admin`, `Firebase Rules Admin`, `Cloud Functions Admin`, `Cloud Run Admin`, `Artifact Registry Writer`, `Service Usage Admin` and `Service Account User` roles (or narrower roles that cover Hosting, Functions, Firestore and Storage deploys). Missing roles show up as `403` errors such as `Permission denied to get service` (Service Usage), a failed `firebaserules.googleapis.com` `:test` request (Rules) or `Failed to list functions` (Cloud Functions). Also enable the Firebase Management API.
 1. Create a JSON key for it and add the contents as a GitHub secret named `FIREBASE_DEPLOY_SERVICE_ACCOUNT`.
 1. In [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) and [`deploy.yaml`](.github/workflows/deploy.yaml), replace `hoverboard-master` with the Firebase Project ID you'll be deploying to.
 
