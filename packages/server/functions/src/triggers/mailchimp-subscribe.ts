@@ -24,7 +24,9 @@ interface SubscriberPayload {
 
 const getMailchimpConfig = async (): Promise<MailchimpConfig | undefined> => {
   const doc = await fetchConfig<MailchimpConfig>('mailchimp');
-  return doc.exists ? (doc.data() as MailchimpConfig) : undefined;
+  const config = doc.exists ? (doc.data() as MailchimpConfig) : undefined;
+  // `hbd firestore-init` seeds every field as an empty string.
+  return config?.dc && config.listid && config.apikey ? config : undefined;
 };
 
 // Retries are enabled so transient Mailchimp failures (thrown below) are re-attempted; a repeat
@@ -34,7 +36,9 @@ export const mailchimpSubscribe = onDocumentCreated(
   async (event) => {
     const mailchimpConfig = await getMailchimpConfig();
     if (!mailchimpConfig) {
-      logger.log("Can't subscribe user, Mailchimp config is empty.");
+      logger.log(
+        "Can't subscribe user, Mailchimp is not configured. Set `dc`, `listid` and `apikey` in the `config/mailchimp` Firestore document.",
+      );
       return;
     }
 

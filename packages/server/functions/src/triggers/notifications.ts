@@ -17,6 +17,12 @@ export const sendGeneralNotification = onDocumentCreated(
 
     if (!message) return undefined;
 
+    // FCM rejects data payloads with missing values.
+    if (typeof message.title !== 'string' || typeof message.body !== 'string') {
+      logger.error(`Notification ${timestamp} needs a \`title\` and a \`body\` string.`);
+      return undefined;
+    }
+
     logger.log(`New message added at ${timestamp} with payload ${message}`);
 
     const deviceTokensPromise = fetchNotificationSubscribers();
