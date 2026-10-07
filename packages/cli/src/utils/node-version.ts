@@ -25,16 +25,21 @@ export const findRepoRoot = (startDir: string): string | undefined => {
 };
 
 /**
- * Reads the major Node.js version pinned in the repo root's `.nvmrc`, the
- * same file `nvm`/`fnm`/CI use to select a Node version.
+ * Reads the major Node.js version from `engines.node` in the repo root's
+ * `package.json`, the same field CI's `actions/setup-node` reads.
  */
 export const requiredNodeMajorVersion = (repoRoot: string): number | undefined => {
-  const nvmrcPath = join(repoRoot, '.nvmrc');
-  if (!existsSync(nvmrcPath)) return undefined;
-  const match = readFileSync(nvmrcPath, 'utf8')
-    .trim()
-    .match(/^v?(\d+)/);
-  return match ? Number(match[1]) : undefined;
+  const packageJsonPath = join(repoRoot, 'package.json');
+  if (!existsSync(packageJsonPath)) return undefined;
+  try {
+    const { engines } = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as {
+      engines?: { node?: string };
+    };
+    const match = engines?.node?.match(/(\d+)/);
+    return match ? Number(match[1]) : undefined;
+  } catch {
+    return undefined;
+  }
 };
 
 export const checkNodeVersion = (repoRoot: string | undefined): DoctorCheckResult => {
@@ -45,7 +50,7 @@ export const checkNodeVersion = (repoRoot: string | undefined): DoctorCheckResul
     return {
       name: 'Node.js version',
       ok: false,
-      message: `Could not determine the required Node.js version (no .nvmrc found). Running ${process.version}.`,
+      message: `Could not determine the required Node.js version (no engines.node in package.json). Running ${process.version}.`,
     };
   }
 
@@ -53,7 +58,7 @@ export const checkNodeVersion = (repoRoot: string | undefined): DoctorCheckResul
     return {
       name: 'Node.js version',
       ok: false,
-      message: `Expected Node.js ${required}.x (see .nvmrc), but running ${process.version}. Run \`nvm use\`.`,
+      message: `Expected Node.js ${required}.x (see engines.node in package.json), but running ${process.version}. Run \`nvm install ${required}\`.`,
     };
   }
 

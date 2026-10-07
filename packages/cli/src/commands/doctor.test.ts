@@ -26,10 +26,13 @@ const makeRepo = (): string => {
   return dir;
 };
 
+const writeEngines = (repo: string, node: string): void =>
+  writeFileSync(join(repo, 'package.json'), JSON.stringify({ engines: { node } }));
+
 describe('runDoctor', () => {
   it('returns true and prints a success summary when every check passes', async () => {
     const repo = makeRepo();
-    writeFileSync(join(repo, '.nvmrc'), `${process.versions.node.split('.')[0]}\n`);
+    writeEngines(repo, String(parseInt(process.versions.node, 10)));
     process.env['GCLOUD_PROJECT'] = 'demo-project';
     isBillingEnabledMock.mockResolvedValue(true);
     vi.spyOn(process, 'cwd').mockReturnValue(repo);
@@ -41,7 +44,7 @@ describe('runDoctor', () => {
 
   it('still passes, with a warning, when the project is not on the Blaze plan', async () => {
     const repo = makeRepo();
-    writeFileSync(join(repo, '.nvmrc'), `${process.versions.node.split('.')[0]}\n`);
+    writeEngines(repo, String(parseInt(process.versions.node, 10)));
     process.env['GCLOUD_PROJECT'] = 'demo-project';
     isBillingEnabledMock.mockResolvedValue(false);
     vi.spyOn(process, 'cwd').mockReturnValue(repo);
@@ -53,7 +56,7 @@ describe('runDoctor', () => {
 
   it('returns false and prints a failure summary when a check fails', async () => {
     const repo = makeRepo();
-    writeFileSync(join(repo, '.nvmrc'), '1\n'); // no real Node major version is "1"
+    writeEngines(repo, '1'); // no real Node major version is "1"
     delete process.env['GCLOUD_PROJECT'];
     vi.spyOn(process, 'cwd').mockReturnValue(repo);
     const logSpy = vi.spyOn(console, 'log').mockImplementation(() => undefined);
