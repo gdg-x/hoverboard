@@ -1,8 +1,8 @@
 {
+  "$schema": "../../web/schemas/resources.schema.json",
   "title": "GDG DevFest Season 2018",
   "description": "Join the community, learn new things!",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "image": "images/social-share.jpg",
   "dates": "October 12-13, 2018",
   "timezoneOffset": "-180",
   "aboutBlock": {
@@ -178,5 +178,8 @@
         }
       ]
     }
-  ]
+  ],
+  "mapBlock": {
+    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+  }
 }

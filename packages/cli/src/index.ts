@@ -8,6 +8,8 @@ import { runFirestoreExport } from './commands/firestore-export.js';
 import { runFirestoreInit } from './commands/firestore-init/index.js';
 import { runSetup } from './commands/setup.js';
 import { runSetupGitHub } from './commands/setup-github.js';
+import { validateSiteConfig } from './utils/site-config.js';
+import { findRepoRoot } from './utils/node-version.js';
 
 const program = new Command();
 
@@ -42,6 +44,17 @@ program
   .option('--dry-run', 'Only report what would change.')
   .action(async (options: { repo?: string; dryRun?: boolean }) => {
     process.exitCode = (await runSetupGitHub(options)) ? 0 : 1;
+  });
+
+program
+  .command('validate-config')
+  .description('Check packages/config against the schemas, the same way the build does.')
+  .action(async () => {
+    const repoRoot = findRepoRoot(process.cwd());
+    const errors = repoRoot ? await validateSiteConfig(repoRoot) : ['Not in a Hoverboard repo.'];
+    for (const error of errors) console.log(`✘ ${error}`);
+    if (!errors.length) console.log('✔ packages/config is valid.');
+    process.exitCode = errors.length ? 1 : 0;
   });
 
 program

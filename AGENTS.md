@@ -28,15 +28,15 @@ Each package with dependencies has its own `package.json` and `package-lock.json
 
 Run from the repo root.
 
-| Command                        | Does                                                                                 |
-| ------------------------------ | ------------------------------------------------------------------------------------ |
-| `npm test`                     | All Vitest projects: Web, Functions, CLI, Firestore (starts the emulator)            |
-| `npx vitest run --project Web` | One project. Add a path to run one file                                              |
-| `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer and type checks for web, server and storage |
-| `npm run fix`                  | ESLint and Prettier autofix                                                          |
-| `npm run build`                | Production build of the web app to `packages/web/dist`                               |
-| `npm start`                    | Emulators, functions and web app in watch mode                                       |
-| `./hbd doctor`                 | Checks the local setup, Firebase login, project and billing plan                     |
+| Command                        | Does                                                                                              |
+| ------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `npm test`                     | All Vitest projects: Web, Functions, CLI, Firestore (starts the emulator)                         |
+| `npx vitest run --project Web` | One project. Add a path to run one file                                                           |
+| `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer, site config and type checks for web, server and storage |
+| `npm run fix`                  | ESLint and Prettier autofix                                                                       |
+| `npm run build`                | Production build of the web app to `packages/web/dist`                                            |
+| `npm start`                    | Emulators, functions and web app in watch mode                                                    |
+| `./hbd doctor`                 | Checks the local setup, Firebase login, project and billing plan                                  |
 
 Before finishing a change, run `npm run lint` and `npm test`, or at least the affected Vitest project and type check.
 
@@ -44,7 +44,7 @@ Before finishing a change, run `npm run lint` and `npm test`, or at least the af
 
 - **TypeScript** is strict, with `verbatimModuleSyntax`. Use `import type` for type-only imports. Custom elements register as a side effect, so import them with `import './my-element'` where they are used.
 - **Components** use `@customElement`, extend `ThemedElement` (which adds the shared theme styles), and read store state with the `@fromStore` decorator. Use the color tokens from `src/themes/default.ts`, never hex colors. A test fails on hex colors outside `src/themes/`.
-- **Site config.** Client code reads site config only through `src/config/site.ts`, never from the data files directly. Build-time config reads live in `packages/web/build/`.
+- **Site config.** Client code reads site config only through `src/config/site.ts`, never from the data files directly. Build-time config reads live in `packages/web/build/`. When you add or rename a key in `packages/config` or `packages/web/defaults`, update the schema in `packages/web/schemas/` too. `./hbd validate-config` checks it.
 - **Tests** sit next to the code as `*.test.ts`. Web tests run in jsdom: render with `fixture` from `packages/web/__tests__/helpers/fixtures.ts`, set state with `setStoreState`, and assert with the jest-dom matchers. Every bug fix or feature needs a test.
 - **Vitest** is configured once in the root `vitest.config.ts`. Do not add `vitest` to a package's `package.json`, because a second copy breaks `expect.extend` from setup files.
 - **Dependencies** shared by several packages must use the same version range. `npm run lint:syncpack` checks this.

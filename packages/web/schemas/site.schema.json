@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hoverboard.dev/schemas/site.schema.json",
+  "title": "Hoverboard site config",
+  "description": "packages/config/site.json. Only the values a site changes need to be set. Defaults come from packages/web/defaults/site.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["url", "shortName", "organizer", "event", "social", "integrations", "webapp"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "url": {
+      "description": "The site's canonical URL, ending with a slash.",
+      "type": "string",
+      "pattern": "^https?://.+/$"
+    },
+    "basepath": {
+      "description": "The path the site is served from, starting and ending with a slash.",
+      "type": "string",
+      "pattern": "^/(.*/)?$"
+    },
+    "shortName": {
+      "description": "The name shown under the home screen icon.",
+      "type": "string",
+      "minLength": 1
+    },
+    "image": {
+      "description": "The image shown when the site is shared. A path in packages/web/public, or a full URL.",
+      "type": "string",
+      "minLength": 1
+    },
+    "organizer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "email"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "url": { "$ref": "#/$defs/url" },
+        "blog": { "$ref": "#/$defs/url" },
+        "email": { "type": "string", "pattern": "^[^@\\s]+@[^@\\s]+$" },
+        "twitter": { "description": "A handle, without the @.", "type": "string" }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["startDate", "endDate", "location"],
+      "properties": {
+        "startDate": { "$ref": "#/$defs/date" },
+        "endDate": { "$ref": "#/$defs/date" },
+        "location": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "city", "short", "address", "pointer", "mapCenter"],
+          "properties": {
+            "name": { "type": "string" },
+            "city": { "type": "string" },
+            "short": { "type": "string" },
+            "address": { "type": "string" },
+            "pointer": {
+              "description": "The map marker.",
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["latitude", "longitude", "zoom"],
+              "properties": {
+                "latitude": { "$ref": "#/$defs/latitude" },
+                "longitude": { "$ref": "#/$defs/longitude" },
+                "zoom": { "type": "integer", "minimum": 0, "maximum": 22 }
+              }
+            },
+            "mapCenter": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["latitude", "longitude"],
+              "properties": {
+                "latitude": { "$ref": "#/$defs/latitude" },
+                "longitude": { "$ref": "#/$defs/longitude" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "published": {
+          "description": "Shows session times and tracks. Keep it false until the schedule is final.",
+          "type": "boolean"
+        }
+      }
+    },
+    "social": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hashtag", "follow"],
+      "properties": {
+        "hashtag": { "description": "Without the #.", "type": "string", "pattern": "^[^#\\s]+$" },
+        "follow": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "url"],
+            "properties": {
+              "name": { "description": "The icon name, for example twitter.", "type": "string" },
+              "url": { "$ref": "#/$defs/url" }
+            }
+          }
+        }
+      }
+    },
+    "auth": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "providers": {
+          "description": "Sign-in providers, in the order they are shown.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["google", "facebook", "twitter"] }
+        }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tagColors": {
+          "description": "Session tag colors by tag name, in lowercase with dashes instead of spaces.",
+          "$ref": "#/$defs/colors"
+        },
+        "badgeColors": {
+          "description": "Speaker badge colors by badge name.",
+          "$ref": "#/$defs/colors"
+        }
+      }
+    },
+    "integrations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["googleMapsApiKey"],
+      "properties": {
+        "googleMapsApiKey": {
+          "description": "A browser key, restricted by HTTP referrer to the site's domains.",
+          "type": "string"
+        }
+      }
+    },
+    "webapp": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["themeColor", "backgroundColor"],
+      "properties": {
+        "themeColor": { "$ref": "#/$defs/color" },
+        "backgroundColor": { "$ref": "#/$defs/color" }
+      }
+    },
+    "dateFormat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locale"],
+      "properties": {
+        "locale": { "description": "A BCP 47 language tag, for example en-US.", "type": "string" }
+      }
+    },
+    "navigation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["route", "permalink", "label"],
+        "properties": {
+          "route": { "description": "home, or a feature name.", "type": "string" },
+          "permalink": { "type": "string", "pattern": "^/" },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "heroSettings": {
+      "description": "The top block of each page.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["home"],
+      "properties": {
+        "home": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["description", "background", "fontColor"],
+          "properties": {
+            "description": { "type": "string" },
+            "background": { "$ref": "#/$defs/heroBackground" },
+            "fontColor": { "$ref": "#/$defs/color" }
+          }
+        },
+        "blog": { "$ref": "#/$defs/hero" },
+        "speakers": { "$ref": "#/$defs/hero" },
+        "previousSpeakers": { "$ref": "#/$defs/hero" },
+        "schedule": { "$ref": "#/$defs/hero" },
+        "team": { "$ref": "#/$defs/hero" },
+        "faq": { "$ref": "#/$defs/hero" },
+        "coc": { "$ref": "#/$defs/hero" },
+        "notFound": { "$ref": "#/$defs/hero" }
+      }
+    },
+    "showForkMeBlockForProjectIds": {
+      "description": "Firebase app IDs that show the fork me block on the home page.",
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "url": { "type": "string", "pattern": "^https?://" },
+    "date": {
+      "description": "An ISO date, for example 2027-10-15.",
+      "type": "string",
+      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+    },
+    "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+    "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
+    "color": {
+      "description": "A hex color, for example #673ab7.",
+      "type": "string",
+      "pattern": "^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+    },
+    "colors": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "additionalProperties": { "$ref": "#/$defs/color" }
+    },
+    "heroBackground": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["color"],
+      "properties": {
+        "color": { "$ref": "#/$defs/color" },
+        "image": { "type": "string" }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "metaDescription": { "type": "string" },
+        "description": { "type": "string" },
+        "background": { "$ref": "#/$defs/heroBackground" },
+        "fontColor": { "$ref": "#/$defs/color" }
+      }
+    }
+  }
+}

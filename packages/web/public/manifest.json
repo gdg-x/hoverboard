@@ -1,6 +1,6 @@
 {
   "name": "{{ resources.title }}",
-  "short_name": "{{ site.webapp.shortName }}",
+  "short_name": "{{ site.shortName }}",
   "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone",
   "background_color": "{{ site.webapp.backgroundColor }}",

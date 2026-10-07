@@ -1,4 +1,19 @@
 {
+  "basepath": "/",
+  "image": "images/social-share.jpg",
+  "schedule": {
+    "published": true
+  },
+  "auth": {
+    "providers": ["google"]
+  },
+  "theme": {
+    "badgeColors": {
+      "gde": "#3d5afe",
+      "wtm": "#1de9b6",
+      "gdg": "#00b0ff"
+    }
+  },
   "dateFormat": {
     "locale": "en-US"
   },
@@ -93,64 +108,6 @@
         "color": "#fff"
       },
       "fontColor": "#424242"
-    }
-  },
-  "socialNetwork": {
-    "share": [
-      {
-        "name": "facebook",
-        "url": "https://www.facebook.com/sharer.php?u="
-      },
-      {
-        "name": "twitter",
-        "url": "https://twitter.com/intent/tweet?text="
-      }
-    ]
-  },
-  "signInProviders": {
-    "providersData": [
-      {
-        "name": "google",
-        "label": "Sign in with Google",
-        "url": "https://accounts.google.com"
-      },
-      {
-        "name": "twitter",
-        "label": "Sign in with Twitter",
-        "url": "https://twitter.com"
-      }
-    ],
-    "allowedProvidersUrl": [
-      "https://accounts.google.com",
-      "https://www.facebook.com",
-      "https://twitter.com"
-    ]
-  },
-  "contentLoaders": {
-    "schedule": {
-      "itemsCount": 2
-    },
-    "blog": {
-      "itemsCount": 3
-    },
-    "speakers": {
-      "itemsCount": 4
-    },
-    "previousSpeakers": {
-      "itemsCount": 6
-    },
-    "tickets": {
-      "itemsCount": 5
-    }
-  },
-  "location": {
-    "label": "Location"
-  },
-  "theme": {
-    "badgeColors": {
-      "gde": "#3d5afe",
-      "wtm": "#1de9b6",
-      "gdg": "#00b0ff"
     }
   }
 }

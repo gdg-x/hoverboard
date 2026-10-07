@@ -23,6 +23,7 @@
     "firestore-copy": "tsx src/index.ts firestore-copy",
     "firestore-copy:production": "FIRESTORE_TARGET=production tsx src/index.ts firestore-copy",
     "firestore-export": "tsx src/index.ts firestore-export",
+    "validate-config": "tsx src/index.ts validate-config",
     "firestore-init": "tsx src/index.ts firestore-init",
     "firestore-init:production": "FIRESTORE_TARGET=production tsx src/index.ts firestore-init"
   },
