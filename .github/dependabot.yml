@@ -40,3 +40,6 @@ updates:
       typescript:
         patterns:
           - 'typescript'
+      node:
+        patterns:
+          - '@types/node'
