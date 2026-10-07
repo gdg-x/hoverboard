@@ -29,15 +29,9 @@ updates:
       material:
         patterns:
           - '@material/*'
-      stylelint:
-        patterns:
-          - '*stylelint*'
       firebase:
         patterns:
           - '*firebase*'
-      markdownlint:
-        patterns:
-          - 'markdownlint*'
       typescript:
         patterns:
           - 'typescript'
