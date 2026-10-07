@@ -38,6 +38,31 @@ interface FirebaseToolsApiV2 {
   Client: new (options: { urlPrefix: string; auth: boolean }) => FirebaseToolsClient;
 }
 
+interface FirebaseToolsDefaultCredentials {
+  getCredentialPathAsync: (account: Account) => Promise<string | undefined>;
+}
+
+/**
+ * Points Application Default Credentials at the Firebase CLI's current account, like the Functions
+ * emulator does, so Google client libraries such as firebase-admin need no key file. Without a
+ * Firebase login, an existing `GOOGLE_APPLICATION_CREDENTIALS` is used, for example in CI.
+ */
+export const useFirebaseLoginCredentials = async (repoRoot: string): Promise<void> => {
+  const requireFromRoot = createRequire(join(repoRoot, 'package.json'));
+  const auth = requireFromRoot('firebase-tools/lib/auth.js') as FirebaseToolsAuth;
+  const { getCredentialPathAsync } = requireFromRoot(
+    'firebase-tools/lib/defaultCredentials.js',
+  ) as FirebaseToolsDefaultCredentials;
+
+  const account = auth.selectAccount(undefined, repoRoot);
+  const credentialPath = account && (await getCredentialPathAsync(account));
+  if (credentialPath) {
+    process.env['GOOGLE_APPLICATION_CREDENTIALS'] = credentialPath;
+  } else if (!process.env['GOOGLE_APPLICATION_CREDENTIALS']) {
+    throw new Error('Not logged in to Firebase. Run `firebase login`.');
+  }
+};
+
 /**
  * A Google Cloud client signed in as the Firebase CLI's current account, so organizers need
  * `firebase login` but not gcloud. firebase-tools has no public API for this, so it reuses the

@@ -1,12 +1,14 @@
-import { cert, initializeApp } from 'firebase-admin/app';
+import { applicationDefault, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'fs';
+import { mkdirSync, mkdtempSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { useFirebaseLoginCredentials } from './google-cloud.js';
 
 vi.mock('firebase-admin/app');
 vi.mock('firebase-admin/firestore');
+vi.mock('./google-cloud.js');
 
 const dirsToClean: string[] = [];
 const originalEnv = { ...process.env };
@@ -73,26 +75,39 @@ describe('lib/firestore (emulator target, the default)', () => {
 });
 
 describe('lib/firestore (production target)', () => {
-  it('initializes with credentials from serviceAccount.json', async () => {
+  it('signs in as the Firebase CLI account to the selected project', async () => {
     const repoRoot = makeRepoRoot();
     process.env['FIRESTORE_TARGET'] = 'production';
-    writeFileSync(join(repoRoot, 'serviceAccount.json'), JSON.stringify({ projectId: 'prod' }));
+    process.env['GCLOUD_PROJECT'] = 'prod';
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
     const mockCredential = { fake: 'credential' };
-    vi.mocked(cert).mockReturnValue(mockCredential as never);
+    vi.mocked(applicationDefault).mockReturnValue(mockCredential as never);
 
     await import('./firestore.js');
 
-    expect(cert).toHaveBeenCalledWith({ projectId: 'prod' });
-    expect(initializeApp).toHaveBeenCalledWith({ credential: mockCredential });
+    expect(useFirebaseLoginCredentials).toHaveBeenCalledWith(repoRoot);
+    expect(initializeApp).toHaveBeenCalledWith({ credential: mockCredential, projectId: 'prod' });
   });
 
-  it('throws when serviceAccount.json is missing', async () => {
+  it('throws when no Firebase project is selected', async () => {
     const repoRoot = makeRepoRoot();
     process.env['FIRESTORE_TARGET'] = 'production';
+    delete process.env['GCLOUD_PROJECT'];
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
 
-    await expect(import('./firestore.js')).rejects.toThrow('serviceAccount.json not found');
+    await expect(import('./firestore.js')).rejects.toThrow('No Firebase project is selected');
+    expect(initializeApp).not.toHaveBeenCalled();
+  });
+
+  it('throws when nobody is signed in', async () => {
+    const repoRoot = makeRepoRoot();
+    process.env['FIRESTORE_TARGET'] = 'production';
+    process.env['GCLOUD_PROJECT'] = 'prod';
+    vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
+    vi.mocked(useFirebaseLoginCredentials).mockRejectedValue(new Error('Not logged in'));
+
+    await expect(import('./firestore.js')).rejects.toThrow('Not logged in');
+    expect(initializeApp).not.toHaveBeenCalled();
   });
 
   it('throws when no repository root can be found', async () => {

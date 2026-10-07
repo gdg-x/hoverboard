@@ -31,9 +31,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Create temp serviceAccount.json
-        run: echo "{}" > serviceAccount.json
-
       - name: Running ${{ matrix.script-name }}
         run: npm run ${{ matrix.script-name }}
 
@@ -72,9 +69,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Create temp serviceAccount.json
-        run: echo "{}" > serviceAccount.json
 
       - name: Running ${{ matrix.project }} tests
         run: npx vitest run --project ${{ matrix.project }}
