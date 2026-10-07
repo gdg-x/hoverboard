@@ -54,8 +54,7 @@
   ],
   "config": {
     "notifications": {
-      "icon": "/images/manifest/icon-192.png",
-      "timezone": "+03:00"
+      "icon": "/images/manifest/icon-192.png"
     },
     "site": {
       "domain": ""

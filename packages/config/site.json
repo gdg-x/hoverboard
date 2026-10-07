@@ -16,6 +16,7 @@
   "event": {
     "startDate": "2017-10-13",
     "endDate": "2017-10-14",
+    "timezone": "Europe/Kyiv",
     "location": {
       "name": "Planeta kino",
       "city": "Lviv",

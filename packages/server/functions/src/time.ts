@@ -3,37 +3,43 @@ export interface TimeWindow {
   after: Date;
 }
 
-export interface TimeConfig {
-  timezone?: string;
-}
+// The wall clock in `timeZone` at `date`, as numbers.
+const wallClockParts = (timeZone: string, date: Date) => {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    hourCycle: 'h23',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  }).formatToParts(date);
+  const part = (type: Intl.DateTimeFormatPartTypes) =>
+    Number(parts.find((item) => item.type === type)?.value);
+  return {
+    year: part('year'),
+    month: part('month'),
+    day: part('day'),
+    hour: part('hour'),
+    minute: part('minute'),
+    second: part('second'),
+  };
+};
+
+// Minutes that the clocks in `timeZone` are ahead of UTC at `date`.
+const offsetMinutes = (timeZone: string, date: Date): number => {
+  const { year, month, day, hour, minute, second } = wallClockParts(timeZone, date);
+  const wallClock = Date.UTC(year, month - 1, day, hour, minute, second);
+  return Math.round((wallClock - date.getTime()) / 60000);
+};
 
 /**
- * Parse timezone offset string (e.g., "+02:00", "-05:00") to minutes
+ * Get today's date formatted as YYYY-MM-DD in the specified IANA time zone
  */
-function parseTimezoneOffset(timezone: string): number {
-  if (!timezone) return 0;
-
-  const match = timezone.match(/^([+-])(\d{2}):(\d{2})$/);
-  if (!match) return 0;
-
-  const [, sign, hours, minutes] = match;
-  const offsetMinutes = parseInt(hours) * 60 + parseInt(minutes);
-  return sign === '+' ? offsetMinutes : -offsetMinutes;
-}
-
-/**
- * Get today's date formatted as YYYY-MM-DD in the specified timezone
- */
-export function getTodayDateString(timezone?: string): string {
-  const now = new Date();
-
-  if (timezone) {
-    const offsetMinutes = parseTimezoneOffset(timezone);
-    const localTime = new Date(now.getTime() + offsetMinutes * 60000);
-    return localTime.toISOString().split('T')[0];
-  }
-
-  return now.toISOString().split('T')[0];
+export function getTodayDateString(timeZone: string): string {
+  const { year, month, day } = wallClockParts(timeZone, new Date());
+  return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 }
 
 /**
@@ -48,23 +54,16 @@ export function createTimeWindow(minutesBefore: number, minutesAfter: number): T
 }
 
 /**
- * Parse a "HH:mm" time string as today's date in the specified timezone, returning the
+ * Parse a "HH:mm" time string as today's date in the specified IANA time zone, returning the
  * equivalent UTC instant.
  */
-function parseTimeInTimezone(timeString: string, timezone: string): Date {
+function parseTimeInTimezone(timeString: string, timeZone: string): Date {
   const [hours, minutes] = timeString.split(':').map(Number);
-
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const day = today.getDate();
-
-  // Create date with the parsed time in UTC
-  const targetDate = new Date(Date.UTC(year, month, day, hours, minutes, 0, 0));
-
-  // Apply timezone offset (convert from specified timezone to UTC)
-  const offsetMinutes = parseTimezoneOffset(timezone);
-  return new Date(targetDate.getTime() - offsetMinutes * 60000);
+  const [year, month, day] = getTodayDateString(timeZone).split('-').map(Number);
+  const wallClock = Date.UTC(year, month - 1, day, hours, minutes);
+  // The second pass uses the offset at the result, which differs near daylight saving changes.
+  const guess = wallClock - offsetMinutes(timeZone, new Date(wallClock)) * 60000;
+  return new Date(wallClock - offsetMinutes(timeZone, new Date(guess)) * 60000);
 }
 
 /**

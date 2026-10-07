@@ -73,6 +73,15 @@ const formatErrors = (file: string, errors: ErrorObject[] | null | undefined): s
 
 const isUrl = (value: string) => /^https?:\/\//.test(value);
 
+const isTimeZone = (timeZone: string) => {
+  try {
+    new Intl.DateTimeFormat('en', { timeZone });
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 // The first path segment of each feature's pages.
 const FEATURE_PATHS: Record<string, Feature> = {
   blog: 'blog',
@@ -126,6 +135,9 @@ const crossFileErrors = (site: Site, resources: Resources, publicDir: string): s
       ? []
       : [`site.json/navigation/${index}/route: "${route}" is not home or a feature`],
   );
+  if (!isTimeZone(site.event.timezone)) {
+    errors.push(`site.json/event/timezone: "${site.event.timezone}" is not a known time zone`);
+  }
   const images: [string, string | undefined][] = [
     ['site.json/image', site.image],
     ['site.json/heroSettings/home/background/image', site.heroSettings.home.background.image],

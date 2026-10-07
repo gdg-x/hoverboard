@@ -10,7 +10,6 @@
     "description",
     "keywords",
     "dates",
-    "timezoneOffset",
     "aboutBlock",
     "aboutOrganizerBlock",
     "team",
@@ -733,9 +732,6 @@
       "type": "string"
     },
     "dates": {
-      "type": "string"
-    },
-    "timezoneOffset": {
       "type": "string"
     },
     "aboutOrganizerBlock": {

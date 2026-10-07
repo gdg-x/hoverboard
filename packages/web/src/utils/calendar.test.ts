@@ -1,7 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import type { Session } from '../models/session';
 import { googleCalendarUrl, icsContent, sessionToCalendarEvent } from './calendar';
-import { timezoneOffset } from '../config/site';
+
+vi.mock('../config/site', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../config/site')>()),
+  timeZone: 'Europe/Kyiv',
+}));
 
 const session: Session & { endTime: string } = {
   id: 'session-1',
@@ -19,13 +23,11 @@ describe('calendar', () => {
     expect(sessionToCalendarEvent(withoutDay, 'https://x')).toBeUndefined();
   });
 
-  it('converts event-local times to UTC using the timezone offset', () => {
+  it('converts times in the event time zone to UTC', () => {
     const event = sessionToCalendarEvent(session, 'https://x')!;
 
-    expect(event.start.toISOString()).toBe(
-      new Date(Date.UTC(2024, 0, 2, 10, 0) + parseInt(timezoneOffset) * 60000).toISOString(),
-    );
-    expect(event.end.getTime() - event.start.getTime()).toBe(45 * 60000);
+    expect(event.start.toISOString()).toBe('2024-01-02T08:00:00.000Z');
+    expect(event.end.toISOString()).toBe('2024-01-02T08:45:00.000Z');
   });
 
   it('builds a Google Calendar url', () => {

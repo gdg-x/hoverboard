@@ -27,18 +27,15 @@ describe('Time utilities', () => {
 
   describe('getTodayDateString', () => {
     it('should return today date in YYYY-MM-DD format', () => {
-      const result = getTodayDateString();
-      expect(result).toBe('2025-06-22');
+      expect(getTodayDateString('UTC')).toBe('2025-06-22');
     });
 
-    it('should return today date with positive timezone offset', () => {
-      const result = getTodayDateString('+05:00');
-      expect(result).toBe('2025-06-22');
+    it('should return the next day where it is already tomorrow', () => {
+      expect(getTodayDateString('Pacific/Auckland')).toBe('2025-06-23');
     });
 
-    it('should handle negative timezone offset', () => {
-      const result = getTodayDateString('-08:00');
-      expect(result).toBe('2025-06-22');
+    it('should return the date in a time zone behind UTC', () => {
+      expect(getTodayDateString('America/Los_Angeles')).toBe('2025-06-22');
     });
   });
 
@@ -60,15 +57,21 @@ describe('Time utilities', () => {
 
   describe('parseTimeAndSubtract', () => {
     it('should parse time string and subtract minutes', () => {
-      const result = parseTimeAndSubtract('15:00', '+02:00', 10);
+      const result = parseTimeAndSubtract('15:00', 'Europe/Kyiv', 10);
 
-      expect(result.toISOString()).toBe('2025-06-22T12:50:00.000Z');
+      expect(result.toISOString()).toBe('2025-06-22T11:50:00.000Z');
     });
 
     it('should handle different timezones', () => {
-      const result = parseTimeAndSubtract('09:30', '-05:00', 5);
+      const result = parseTimeAndSubtract('09:30', 'America/New_York', 5);
 
-      expect(result.toISOString()).toBe('2025-06-22T14:25:00.000Z');
+      expect(result.toISOString()).toBe('2025-06-22T13:25:00.000Z');
+    });
+
+    it('should use today in the time zone, not in UTC', () => {
+      const result = parseTimeAndSubtract('03:00', 'Pacific/Auckland', 0);
+
+      expect(result.toISOString()).toBe('2025-06-22T15:00:00.000Z');
     });
   });
 
@@ -101,24 +104,21 @@ describe('Time utilities', () => {
   describe('parseTimeAndGetFromNow', () => {
     it('should handle past times', () => {
       // For a time in the past (14:00 UTC today from 14:30 UTC)
-      const result = parseTimeAndGetFromNow('14:00', '+00:00');
+      const result = parseTimeAndGetFromNow('14:00', 'UTC');
 
       expect(result).toContain('ago');
     });
 
     it('should handle future times', () => {
       // For a time in the future (15:00 UTC today from 14:30 UTC)
-      const result = parseTimeAndGetFromNow('15:00', '+00:00');
+      const result = parseTimeAndGetFromNow('15:00', 'UTC');
 
       expect(result).toContain('in');
     });
 
     it('should work with different timezones', () => {
-      // Test that the function doesn't throw and returns a string
-      const result = parseTimeAndGetFromNow('09:00', '-05:00');
-
-      expect(typeof result).toBe('string');
-      expect(result.length).toBeGreaterThan(0);
+      // 17:40 in Kyiv is 14:40 UTC.
+      expect(parseTimeAndGetFromNow('17:40', 'Europe/Kyiv')).toBe('in 10 minutes');
     });
   });
 
@@ -137,7 +137,7 @@ describe('Time utilities', () => {
         mockTimeslots,
         timeWindow,
         10, // notification offset
-        '+00:00',
+        'UTC',
       );
 
       // With a 10-minute notification offset, 14:30 start time becomes 14:20 notification time
@@ -149,7 +149,7 @@ describe('Time utilities', () => {
     it('should include timeslots that match the notification window', () => {
       const timeWindow = createTimeWindow(15, 5); // 14:15 to 14:35
 
-      const result = filterUpcomingTimeslots(mockTimeslots, timeWindow, 10, '+00:00');
+      const result = filterUpcomingTimeslots(mockTimeslots, timeWindow, 10, 'UTC');
 
       // 14:30 start time with 10min offset = 14:20 notification time (within 14:15-14:35)
       // 15:00 start time with 10min offset = 14:50 notification time (outside window)
@@ -159,7 +159,7 @@ describe('Time utilities', () => {
     it('should handle empty timeslots array', () => {
       const timeWindow = createTimeWindow(3, 3);
 
-      const result = filterUpcomingTimeslots([], timeWindow, 10, '+00:00');
+      const result = filterUpcomingTimeslots([], timeWindow, 10, 'UTC');
 
       expect(result).toEqual([]);
     });

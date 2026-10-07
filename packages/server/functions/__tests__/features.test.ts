@@ -12,7 +12,7 @@ const loadWith = async (features: Record<string, boolean> | Error) => {
   vi.resetModules();
   vi.mocked(readFileSync).mockImplementation(() => {
     if (features instanceof Error) throw features;
-    return JSON.stringify(features);
+    return JSON.stringify({ features, timeZone: 'UTC' });
   });
   return import('../src/features');
 };
@@ -53,14 +53,14 @@ describe('isFeatureOff', () => {
     );
   });
 
-  it('treats every feature as on when features.json is missing', async () => {
+  it('treats every feature as on when site-config.json is missing', async () => {
     const { isFeatureOff } = await loadWith(new Error('ENOENT'));
 
     expect(isFeatureOff('optimizeImages', 'imageOptimization')).toBe(false);
     expect(logger.warn).toHaveBeenCalledTimes(1);
   });
 
-  it('reads features.json once', async () => {
+  it('reads site-config.json once', async () => {
     const { isFeatureOff } = await loadWith({});
 
     isFeatureOff('optimizeImages', 'imageOptimization');

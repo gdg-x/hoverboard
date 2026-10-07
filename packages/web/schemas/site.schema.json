@@ -70,13 +70,18 @@
     "event": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["startDate", "endDate", "location"],
+      "required": ["startDate", "endDate", "timezone", "location"],
       "properties": {
         "startDate": {
           "$ref": "#/$defs/date"
         },
         "endDate": {
           "$ref": "#/$defs/date"
+        },
+        "timezone": {
+          "description": "The IANA time zone of the event, for example Europe/Kyiv. Session times are in this time zone.",
+          "type": "string",
+          "pattern": "^[A-Za-z_]+(/[A-Za-z0-9_+-]+)*$"
         },
         "location": {
           "type": "object",

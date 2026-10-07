@@ -1,5 +1,6 @@
 import type { Session } from '../models/session';
-import { location, timezoneOffset, title } from '../config/site';
+import { location, timeZone, title } from '../config/site';
+import { zonedTime } from './time-zone';
 
 export interface CalendarEvent {
   title: string;
@@ -8,16 +9,6 @@ export interface CalendarEvent {
   start: Date;
   end: Date;
 }
-
-const ONE_MINUTE_MS = 60 * 1000;
-
-// `day` is YYYY-MM-DD and times are HH:MM in the event timezone, whose offset follows `Date.getTimezoneOffset()` sign rules.
-const toDate = (day: string, time: string): Date => {
-  const [year, month, date] = day.split('-').map(Number);
-  const [hours, minutes] = time.split(':').map(Number);
-  const local = Date.UTC(year!, month! - 1, date!, hours!, minutes!);
-  return new Date(local + parseInt(timezoneOffset) * ONE_MINUTE_MS);
-};
 
 export const sessionToCalendarEvent = (
   session: Session & { endTime?: string },
@@ -31,8 +22,8 @@ export const sessionToCalendarEvent = (
     title: session.title,
     description: `${session.description}\n\n${url}`,
     location: `${location.name}, ${location.address}`,
-    start: toDate(session.day, session.startTime),
-    end: toDate(session.day, session.endTime),
+    start: zonedTime(session.day, session.startTime, timeZone),
+    end: zonedTime(session.day, session.endTime, timeZone),
   };
 };
 

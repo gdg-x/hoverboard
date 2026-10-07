@@ -5,6 +5,7 @@ import * as logger from 'firebase-functions/logger';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { fetchConfig } from '../db/config.js';
 import { isFeatureOff } from '../features.js';
+import { getSiteConfig } from '../site-config.js';
 import { fetchFeaturedSessions } from '../db/featured-sessions.js';
 import { fetchNotificationsUser, removeUserTokens } from '../db/notifications-users.js';
 import { getSchedule } from '../db/schedule.js';
@@ -60,41 +61,30 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
     return;
   }
 
-  const notificationsConfigPromise = fetchConfig<{ timezone?: string; icon?: string }>(
-    'notifications',
-  );
+  const notificationsConfigPromise = fetchConfig<{ icon?: string }>('notifications');
   const schedulePromise = getSchedule();
 
   const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([
     notificationsConfigPromise,
     schedulePromise,
   ]);
-  if (!notificationsConfigSnapshot.exists) {
-    logger.warn(
-      'Session notifications are not configured. Set the `config/notifications` Firestore document.',
-    );
-    return;
-  }
-  const notificationsConfig = notificationsConfigSnapshot.data() as {
-    timezone?: string;
-    icon?: string;
-  };
+  const icon = notificationsConfigSnapshot.data()?.icon || '';
+  const { timeZone } = getSiteConfig();
 
   const schedule = scheduleSnapshot.docs.reduce(
     (acc: Record<string, any>, doc) => ({ ...acc, [doc.id]: doc.data() }),
     {},
   );
-  const todayDay = getTodayDateString(notificationsConfig.timezone);
+  const todayDay = getTodayDateString(timeZone);
 
   if (schedule[todayDay]) {
     const timeWindow = createTimeWindow(3, 3);
-    const timezone = notificationsConfig.timezone || '';
 
     const upcomingTimeslots = filterUpcomingTimeslots(
       schedule[todayDay].timeslots || [],
       timeWindow,
       10, // notification offset in minutes
-      timezone,
+      timeZone,
     );
 
     const upcomingSessions: string[] = upcomingTimeslots.reduce(
@@ -128,14 +118,14 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
       const session = sessionInfoSnapshot.data();
       const firstTimeslot = upcomingTimeslots[0];
       const fromNow = firstTimeslot
-        ? parseTimeAndGetFromNow(firstTimeslot.startTime, timezone)
+        ? parseTimeAndGetFromNow(firstTimeslot.startTime, timeZone)
         : '';
 
       if (userIdsFeaturedSession.length) {
         const data: MulticastMessage['data'] = {
           title: session?.title || '',
           body: `Starts ${fromNow}`,
-          icon: notificationsConfig.icon || '',
+          icon,
           path: `/sessions/${upcomingSession}`,
         };
 
