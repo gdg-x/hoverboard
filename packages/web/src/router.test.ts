@@ -9,7 +9,7 @@ vi.mock('./utils/config.js', () => ({
 const logPageView = vi.fn();
 vi.mock('./utils/analytics.js', () => ({ logPageView }));
 
-const { onLocationChanged, selectRouteName, startRouter } = await import('./router');
+const { decodeParam, onLocationChanged, selectRouteName, startRouter } = await import('./router');
 
 describe('selectRouteName', () => {
   it('returns "home" for the root path', () => {
@@ -86,7 +86,30 @@ describe('urlForName', () => {
   });
 });
 
+describe('decodeParam', () => {
+  it('decodes percent-encoded values', () => {
+    expect(decodeParam('jakub_%C5%A1kv%C3%A1ra')).toBe('jakub_škvára');
+  });
+
+  it('returns undefined and malformed values unchanged', () => {
+    expect(decodeParam(undefined)).toBeUndefined();
+    expect(decodeParam('%E0%A4%A')).toBe('%E0%A4%A');
+  });
+});
+
 describe('goto', () => {
+  it('decodes percent-encoded route params', async () => {
+    const host = Object.assign(document.createElement('div'), {
+      addController: vi.fn(),
+      requestUpdate: vi.fn(),
+    });
+    const router = startRouter(host as never);
+
+    await router.goto('/speakers/jakub_%C5%A1kv%C3%A1ra');
+
+    expect((router.outlet() as { values: unknown[] }).values).toEqual(['jakub_škvára']);
+  });
+
   it('scrolls to the top after navigating', async () => {
     const host = Object.assign(document.createElement('div'), {
       addController: vi.fn(),
