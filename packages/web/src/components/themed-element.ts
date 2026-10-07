@@ -1,6 +1,5 @@
 import { css, type CSSResultGroup, type CSSResultOrNative, LitElement } from 'lit';
 import { theme } from '../styles/theme';
-import { defaultTheme } from '../themes/default';
 
 const host = css`
   :host {
@@ -9,8 +8,9 @@ const host = css`
 `;
 
 export class ThemedElement extends LitElement {
-  // Every subclass gets the theme tokens and shared styles first, so they only declare their own styles.
+  // Every subclass gets the shared styles first, so it only declares its own styles. The color
+  // tokens come from the `:root` style that the build writes into index.html.
   protected static override finalizeStyles(styles?: CSSResultGroup): CSSResultOrNative[] {
-    return [defaultTheme, theme, host, ...super.finalizeStyles(styles)];
+    return [theme, host, ...super.finalizeStyles(styles)];
   }
 }

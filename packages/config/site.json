@@ -74,18 +74,12 @@
   "integrations": {
     "googleMapsApiKey": "AIzaSyCJqlRVGIe6bfU43rga3cnK7tSXXwc7JD8"
   },
-  "webapp": {
-    "themeColor": "#673AB7",
-    "backgroundColor": "#673AB7"
-  },
   "heroSettings": {
     "home": {
       "description": "Join the commuity, learn new things!",
       "background": {
-        "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
-      },
-      "fontColor": "#FFF"
+      }
     },
     "speakers": {
       "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners."

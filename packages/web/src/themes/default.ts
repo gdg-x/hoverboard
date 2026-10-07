@@ -1,30 +1,28 @@
-import { css } from 'lit';
+import type { Theme } from './tokens';
 
-// The default theme: color tokens only. Shared styles derive the other colors from these.
-export const defaultTheme = css`
-  :host {
-    --default-primary-color: #673ab7;
-    --dark-primary-color: #512da8;
-    --focused-color: #311b92;
-    --accent-color: #ff5252;
-    --text-primary-color: #fff;
-    --primary-background-color: #fff;
-    --default-background-color: #fff;
-    --secondary-background-color: #f5f5f5;
-    --additional-background-color: #f7f7f7;
-    --contrast-additional-background-color: #e8e8e8;
-    --primary-text-color: #424242;
-    --secondary-text-color: #757575;
-    --disabled-text-color: #bdbdbd;
-    --divider-color: #ededed;
-    --border-light-color: #e2e2e2;
-    --footer-background-color: #f5f5f5;
-    --footer-text-color: #616161;
-    --error-color: #e64a19;
-    --snackbar-background-color: #323232;
-    --snackbar-text-color: rgb(255 255 255 / 87%);
-    --star-rating-color: #faca43;
-    --twitter-color: #4099ff;
-    --facebook-color: #3b5998;
-  }
-`;
+// The default theme. Shared styles derive lighter and transparent primary colors from these.
+export const defaultTheme: Theme = {
+  primary: '#673ab7',
+  primaryDark: '#512da8',
+  focused: '#311b92',
+  accent: '#ff5252',
+  onPrimary: '#fff',
+  background: '#fff',
+  defaultBackground: '#fff',
+  secondaryBackground: '#f5f5f5',
+  additionalBackground: '#f7f7f7',
+  contrastAdditionalBackground: '#e8e8e8',
+  text: '#424242',
+  secondaryText: '#757575',
+  disabledText: '#bdbdbd',
+  divider: '#ededed',
+  borderLight: '#e2e2e2',
+  footerBackground: '#f5f5f5',
+  footerText: '#616161',
+  error: '#e64a19',
+  snackbarBackground: '#323232',
+  snackbarText: 'rgb(255 255 255 / 87%)',
+  starRating: '#faca43',
+  twitter: '#4099ff',
+  facebook: '#3b5998',
+};

@@ -2,6 +2,7 @@ import n from 'nunjucks';
 import type { HtmlTagDescriptor, Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
 import { FEATURES, type Feature } from '../src/config/features';
+import { THEME_TOKENS, type ThemeToken } from '../src/themes/tokens';
 import { resolveConfig, type SiteConfig } from './resolve-config';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
@@ -35,10 +36,18 @@ export const siteModule = (
       : undefined,
 });
 
-// Tag names come from session data, so their colors are site config, not theme code.
-export const themeColorsCss = ({ site }: SiteConfig): string => {
-  const colors = { ...site.theme.badgeColors, ...site.theme.tagColors };
-  const properties = Object.entries(colors).map(([name, color]) => `--${name}: ${color};`);
+/**
+ * The theme tokens, and the badge and tag colors, as CSS variables on `:root`, so the first paint
+ * is themed. Tag names come from session data, so their colors are site config.
+ */
+export const themeColorsCss = ({ site, theme }: SiteConfig): string => {
+  const tokens = Object.entries(theme).map(
+    ([token, color]) => [THEME_TOKENS[token as ThemeToken], color] as const,
+  );
+  const named = Object.entries({ ...site.theme.badgeColors, ...site.theme.tagColors }).map(
+    ([name, color]) => [`--${name}`, color] as const,
+  );
+  const properties = [...tokens, ...named].map(([property, color]) => `${property}: ${color};`);
   return `:root { ${properties.join(' ')} }`;
 };
 

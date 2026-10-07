@@ -5,7 +5,7 @@
   "description": "packages/config/site.json. Only the values a site changes need to be set. Defaults come from packages/web/defaults/site.json.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["url", "shortName", "organizer", "event", "social", "webapp"],
+  "required": ["url", "shortName", "organizer", "event", "social"],
   "properties": {
     "$schema": {
       "type": "string"
@@ -176,6 +176,86 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "name": {
+          "description": "The built-in theme.",
+          "enum": ["default"]
+        },
+        "colors": {
+          "description": "Overrides for colors of the theme.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "primary": {
+              "$ref": "#/$defs/color"
+            },
+            "primaryDark": {
+              "$ref": "#/$defs/color"
+            },
+            "focused": {
+              "$ref": "#/$defs/color"
+            },
+            "accent": {
+              "$ref": "#/$defs/color"
+            },
+            "onPrimary": {
+              "$ref": "#/$defs/color"
+            },
+            "background": {
+              "$ref": "#/$defs/color"
+            },
+            "defaultBackground": {
+              "$ref": "#/$defs/color"
+            },
+            "secondaryBackground": {
+              "$ref": "#/$defs/color"
+            },
+            "additionalBackground": {
+              "$ref": "#/$defs/color"
+            },
+            "contrastAdditionalBackground": {
+              "$ref": "#/$defs/color"
+            },
+            "text": {
+              "$ref": "#/$defs/color"
+            },
+            "secondaryText": {
+              "$ref": "#/$defs/color"
+            },
+            "disabledText": {
+              "$ref": "#/$defs/color"
+            },
+            "divider": {
+              "$ref": "#/$defs/color"
+            },
+            "borderLight": {
+              "$ref": "#/$defs/color"
+            },
+            "footerBackground": {
+              "$ref": "#/$defs/color"
+            },
+            "footerText": {
+              "$ref": "#/$defs/color"
+            },
+            "error": {
+              "$ref": "#/$defs/color"
+            },
+            "snackbarBackground": {
+              "$ref": "#/$defs/color"
+            },
+            "snackbarText": {
+              "$ref": "#/$defs/color"
+            },
+            "starRating": {
+              "$ref": "#/$defs/color"
+            },
+            "twitter": {
+              "$ref": "#/$defs/color"
+            },
+            "facebook": {
+              "$ref": "#/$defs/color"
+            }
+          }
+        },
         "tagColors": {
           "description": "Session tag colors by tag name, in lowercase with dashes instead of spaces.",
           "$ref": "#/$defs/colors"
@@ -194,19 +274,6 @@
         "googleMapsApiKey": {
           "description": "A browser key, restricted by HTTP referrer to the site's domains. Required when the map feature is on.",
           "type": "string"
-        }
-      }
-    },
-    "webapp": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["themeColor", "backgroundColor"],
-      "properties": {
-        "themeColor": {
-          "$ref": "#/$defs/color"
-        },
-        "backgroundColor": {
-          "$ref": "#/$defs/color"
         }
       }
     },
@@ -251,16 +318,20 @@
         "home": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["description", "background", "fontColor"],
+          "required": ["description", "background"],
           "properties": {
             "description": {
               "type": "string"
             },
             "background": {
-              "$ref": "#/$defs/heroBackground"
-            },
-            "fontColor": {
-              "$ref": "#/$defs/color"
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["image"],
+              "properties": {
+                "image": {
+                  "type": "string"
+                }
+              }
             }
           }
         },
@@ -389,19 +460,6 @@
         "$ref": "#/$defs/color"
       }
     },
-    "heroBackground": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["color"],
-      "properties": {
-        "color": {
-          "$ref": "#/$defs/color"
-        },
-        "image": {
-          "type": "string"
-        }
-      }
-    },
     "hero": {
       "type": "object",
       "additionalProperties": false,
@@ -414,12 +472,6 @@
         },
         "description": {
           "type": "string"
-        },
-        "background": {
-          "$ref": "#/$defs/heroBackground"
-        },
-        "fontColor": {
-          "$ref": "#/$defs/color"
         }
       }
     }

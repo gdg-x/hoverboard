@@ -20,16 +20,9 @@ import { updateMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
-// `heroSettings.schedule` (from `settings.json`) doesn't declare a `background.image`
-// or a top-level `description` — unlike some other hero settings entries (e.g.
-// `heroSettings.home`). Model them as optional here instead of casting to `any`.
+// `heroSettings.schedule` has no `description`, unlike some other pages. Model it as optional.
 interface ScheduleHeroSettings {
-  background: {
-    color: string;
-    image?: string;
-  };
   description?: string;
-  fontColor: string;
   metaDescription: string;
   title: string;
 }
@@ -93,11 +86,7 @@ export class SchedulePage extends ThemedElement {
 
   override render() {
     return html`
-      <hero-block
-        background-image="${this.heroSettings.background.image ?? ''}"
-        background-color="${this.heroSettings.background.color}"
-        font-color="${this.heroSettings.fontColor}"
-      >
+      <hero-block>
         <div class="hero-title">${this.heroSettings.title}</div>
         <p class="hero-description">${this.heroSettings.description ?? ''}</p>
         <sticky-element slot="bottom">

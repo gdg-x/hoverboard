@@ -4,6 +4,9 @@ import { dirname, join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { deepMerge } from '../src/config/merge';
 import { FEATURES, type Feature } from '../src/config/features';
+import { THEMES } from '../src/themes/index';
+import { defaultTheme } from '../src/themes/default';
+import { THEME_TOKENS } from '../src/themes/tokens';
 import { ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
 import { featureDefines, headTags, themeColorsCss } from './vite-plugin-site';
 
@@ -50,13 +53,16 @@ describe('resolveConfig', () => {
   it('reads the defaults, then the site config over them, in separate namespaces', () => {
     const { site, resources } = resolveConfig({
       paths: makePaths({
-        site: { heroSettings: { blog: { fontColor: '#000' } }, navigation: [] },
+        site: { heroSettings: { blog: { title: 'News' } }, navigation: [] },
         resources: { signIn: 'Log in' },
       }),
       nodeEnv: 'production',
     });
 
-    expect(site.heroSettings.blog).toMatchObject({ title: 'Blog', fontColor: '#000' });
+    expect(site.heroSettings.blog).toMatchObject({
+      title: 'News',
+      metaDescription: 'Read stories from our team',
+    });
     expect(site.navigation).toEqual([]);
     expect(resources.signIn).toBe('Log in');
     expect(site).not.toHaveProperty('title');
@@ -220,6 +226,7 @@ describe('headTags', () => {
         integrations: { googleMapsApiKey: 'key&x' },
         theme: { badgeColors: {}, tagColors: {} },
       },
+      theme: {},
     }) as unknown as Parameters<typeof headTags>[0];
 
   it('loads Google Maps when map is on', () => {
@@ -236,11 +243,52 @@ describe('headTags', () => {
 });
 
 describe('themeColorsCss', () => {
-  it('writes the badge and tag colors as custom properties', () => {
+  it('writes the theme tokens and the badge and tag colors as custom properties', () => {
     const config = {
       site: { theme: { badgeColors: { gde: 'blue' }, tagColors: { android: 'green' } } },
+      theme: { primary: 'purple', text: 'black' },
     } as unknown as Parameters<typeof themeColorsCss>[0];
 
-    expect(themeColorsCss(config)).toBe(':root { --gde: blue; --android: green; }');
+    expect(themeColorsCss(config)).toBe(
+      ':root { --default-primary-color: purple; --primary-text-color: black; --gde: blue; --android: green; }',
+    );
+  });
+});
+
+describe('theme', () => {
+  it('uses the default theme', () => {
+    const { theme } = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
+
+    expect(theme).toEqual(defaultTheme);
+  });
+
+  it('overrides colors of the theme', () => {
+    const paths = makePaths({ site: { theme: { colors: { primary: '#e91e63' } } } });
+
+    const { theme } = resolveConfig({ paths, nodeEnv: 'production' });
+
+    expect(theme).toEqual({ ...defaultTheme, primary: '#e91e63' });
+  });
+
+  it('rejects unknown themes and colors', () => {
+    const paths = makePaths({ site: { theme: { name: 'dark', colors: { brand: '#000' } } } });
+
+    expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([
+      'site.json/theme/name: must be equal to one of the allowed values',
+      'site.json/theme/colors: must NOT have additional properties "brand"',
+    ]);
+  });
+
+  it('lists every theme and token in the schema', () => {
+    const schema = readJson(join(repoPaths.schemas, 'site.schema.json')) as {
+      properties: {
+        theme: { properties: { name: { enum: string[] }; colors: { properties: object } } };
+      };
+    };
+    const { name, colors } = schema.properties.theme.properties;
+
+    expect(name.enum).toEqual(Object.keys(THEMES));
+    expect(Object.keys(colors.properties)).toEqual(Object.keys(THEME_TOKENS));
+    expect(Object.keys(defaultTheme)).toEqual(Object.keys(THEME_TOKENS));
   });
 });
