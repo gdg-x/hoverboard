@@ -60,6 +60,15 @@ export const selectRouteName = (pathname: string): string => {
 // Updated on every navigation so renders reuse one object instead of re-creating it.
 let location: RouteLocation = { pathname: '/', search: '', params: {} };
 
+// URLPattern leaves groups percent-encoded (e.g. `%C5%A1` for `š`).
+export const decodeParam = (value: string | undefined): string | undefined => {
+  try {
+    return value === undefined ? value : decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+};
+
 const redirect = (path: string): false => {
   window.history.replaceState({}, '', path);
   void router.goto(path);
@@ -70,7 +79,13 @@ const enter =
   (...pages: Array<() => Promise<unknown>>) =>
   async (params: Params): Promise<boolean> => {
     const { pathname, search } = window.location;
-    location = { pathname, search, params };
+    location = {
+      pathname,
+      search,
+      params: Object.fromEntries(
+        Object.entries(params).map(([key, value]) => [key, decodeParam(value)]),
+      ),
+    };
     onLocationChanged(pathname);
     await Promise.all(pages.map((page) => page()));
     return true;
@@ -94,13 +109,13 @@ const ROUTES: Array<RouteConfig> = [
   },
   {
     path: '/blog/posts/:id',
-    enter: ({ id }) => redirect(`/blog/${encodeURIComponent(id ?? '')}`),
+    enter: ({ id }) => redirect(`/blog/${id ?? ''}`),
   },
   {
     path: '/blog/:id',
     name: 'post-page',
     enter: enter(() => import('./pages/post-page.js')),
-    render: ({ id }) => html`<post-page .postId="${id}"></post-page>`,
+    render: ({ id }) => html`<post-page .postId="${decodeParam(id)}"></post-page>`,
   },
   {
     path: '/schedule/my-schedule',
@@ -126,7 +141,7 @@ const ROUTES: Array<RouteConfig> = [
     path: '/sessions/:id',
     name: 'session-page',
     enter: enter(() => import('./pages/session-page.js')),
-    render: ({ id }) => html`<session-page .sessionId="${id}"></session-page>`,
+    render: ({ id }) => html`<session-page .sessionId="${decodeParam(id)}"></session-page>`,
   },
   {
     path: '/speakers',
@@ -137,7 +152,7 @@ const ROUTES: Array<RouteConfig> = [
     path: '/speakers/:id',
     name: 'speaker-page',
     enter: enter(() => import('./pages/speaker-page.js')),
-    render: ({ id }) => html`<speaker-page .speakerId="${id}"></speaker-page>`,
+    render: ({ id }) => html`<speaker-page .speakerId="${decodeParam(id)}"></speaker-page>`,
   },
   {
     path: '/previous-speakers',
@@ -148,7 +163,8 @@ const ROUTES: Array<RouteConfig> = [
     path: '/previous-speakers/:id',
     name: 'previous-speaker-page',
     enter: enter(() => import('./pages/previous-speaker-page.js')),
-    render: ({ id }) => html`<previous-speaker-page .speakerId="${id}"></previous-speaker-page>`,
+    render: ({ id }) =>
+      html`<previous-speaker-page .speakerId="${decodeParam(id)}"></previous-speaker-page>`,
   },
   {
     path: '/team',
