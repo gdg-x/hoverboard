@@ -16,9 +16,6 @@ vi.mock('../src/triggers/notifications.js', () => ({
 vi.mock('../src/triggers/optimize-images.js', () => ({
   optimizeImages: 'optimizeImages-marker',
 }));
-vi.mock('../src/triggers/prerender.js', () => ({
-  prerender: 'prerender-marker',
-}));
 vi.mock('../src/triggers/schedule-notifications.js', () => ({
   scheduleNotifications: 'scheduleNotifications-marker',
 }));
@@ -37,7 +34,6 @@ describe('functions entry point', () => {
       scheduleNotifications: 'scheduleNotifications-marker',
       optimizeImages: 'optimizeImages-marker',
       mailchimpSubscribe: 'mailchimpSubscribe-marker',
-      prerender: 'prerender-marker',
       scheduleWrite: 'scheduleWrite-marker',
       sessionsWrite: 'sessionsWrite-marker',
       speakersWrite: 'speakersWrite-marker',
