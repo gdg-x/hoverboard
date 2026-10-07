@@ -2,11 +2,13 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { getMessaging } from 'firebase-admin/messaging';
 import * as logger from 'firebase-functions/logger';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { getSiteConfig } from '../../src/site-config';
 import { scheduleNotifications } from '../../src/triggers/schedule-notifications';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('firebase-admin/messaging');
 vi.mock('firebase-functions/logger');
+vi.mock('../../src/site-config', () => ({ getSiteConfig: vi.fn() }));
 
 const MOCK_TIME = new Date('2025-06-22T14:30:00.000Z');
 
@@ -132,32 +134,67 @@ describe('scheduleNotifications', () => {
   beforeEach(() => {
     vi.mocked(getFirestore).mockReset();
     vi.mocked(getMessaging).mockReset();
+    vi.mocked(getSiteConfig).mockReturnValue({ features: {}, timeZone: 'UTC' });
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
-  it('warns and exits when notifications are not configured', async () => {
-    const { runTransaction } = mockFirestore({
-      notificationsConfig: undefined,
-      scheduleDocs: [{ id: '2025-06-22', data: { timeslots: [] } }],
+  it('sends reminders without an icon when config/notifications is missing', async () => {
+    mockFirestore({
+      scheduleDocs: upcomingSessionSchedule(['session-1']),
+      featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
+      sessionDocs: { 'session-1': { title: 'Keynote' } },
+      notificationsUsersDocs: { 'user-1': { tokens: { fid0000000000000000001: true } } },
     });
     const { sendEachForMulticast } = mockMessaging();
-    const warnSpy = vi.spyOn(logger, 'warn').mockImplementation(() => undefined);
 
     await scheduleNotifications.run(undefined as never);
 
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Session notifications are not configured.'),
+    expect(sendEachForMulticast).toHaveBeenCalledWith(
+      expect.objectContaining({ data: expect.objectContaining({ icon: '' }) }),
     );
-    expect(runTransaction).not.toHaveBeenCalled();
-    expect(sendEachForMulticast).not.toHaveBeenCalled();
+  });
+
+  it('finds today in the event time zone', async () => {
+    // 14:30 UTC is 02:30 the next day in Auckland.
+    vi.mocked(getSiteConfig).mockReturnValue({ features: {}, timeZone: 'Pacific/Auckland' });
+    mockFirestore({ scheduleDocs: [{ id: '2025-06-22', data: { timeslots: [] } }] });
+    mockMessaging();
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
+
+    await scheduleNotifications.run(undefined as never);
+
+    expect(logSpy).toHaveBeenCalledWith('2025-06-23', 'was not found in the schedule');
+  });
+
+  it('reads session start times in the event time zone', async () => {
+    // 14:30 UTC is 17:30 in Kyiv, so a session at 17:40 starts in 10 minutes.
+    vi.mocked(getSiteConfig).mockReturnValue({ features: {}, timeZone: 'Europe/Kyiv' });
+    mockFirestore({
+      scheduleDocs: [
+        {
+          id: '2025-06-22',
+          data: { timeslots: [{ startTime: '17:40', sessions: [{ items: ['session-1'] }] }] },
+        },
+      ],
+      featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
+      sessionDocs: { 'session-1': { title: 'Keynote' } },
+      notificationsUsersDocs: { 'user-1': { tokens: { fid0000000000000000001: true } } },
+    });
+    const { sendEachForMulticast } = mockMessaging();
+
+    await scheduleNotifications.run(undefined as never);
+
+    expect(sendEachForMulticast).toHaveBeenCalledWith(
+      expect.objectContaining({ data: expect.objectContaining({ body: 'Starts in 10 minutes' }) }),
+    );
   });
 
   it('logs and exits when today is missing from the schedule', async () => {
     mockFirestore({
-      notificationsConfig: { timezone: '+00:00', icon: 'https://example.com/icon.png' },
+      notificationsConfig: { icon: 'https://example.com/icon.png' },
       scheduleDocs: [{ id: '2025-06-23', data: { timeslots: [] } }],
     });
     const { sendEachForMulticast } = mockMessaging();
@@ -171,7 +208,7 @@ describe('scheduleNotifications', () => {
 
   it('does not send notifications when no timeslots are currently upcoming', async () => {
     mockFirestore({
-      notificationsConfig: { timezone: '+00:00', icon: 'https://example.com/icon.png' },
+      notificationsConfig: { icon: 'https://example.com/icon.png' },
       scheduleDocs: [
         {
           id: '2025-06-22',
@@ -195,7 +232,7 @@ describe('scheduleNotifications', () => {
 
   it('logs upcoming sessions when nobody has featured them', async () => {
     mockFirestore({
-      notificationsConfig: { timezone: '+00:00', icon: 'https://example.com/icon.png' },
+      notificationsConfig: { icon: 'https://example.com/icon.png' },
       scheduleDocs: [
         {
           id: '2025-06-22',
@@ -225,7 +262,7 @@ describe('scheduleNotifications', () => {
 
   it('sends a push notification to the device tokens of users who featured the session', async () => {
     mockFirestore({
-      notificationsConfig: { timezone: '+00:00', icon: 'https://example.com/icon.png' },
+      notificationsConfig: { icon: 'https://example.com/icon.png' },
       scheduleDocs: upcomingSessionSchedule(['session-1']),
       featuredSessionDocs: [
         { id: 'user-1', data: { 'session-1': true } },
@@ -256,7 +293,6 @@ describe('scheduleNotifications', () => {
 
   it('does not call messaging when the featuring users have no device tokens', async () => {
     mockFirestore({
-      notificationsConfig: { timezone: '+00:00' },
       scheduleDocs: upcomingSessionSchedule(['session-1']),
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
@@ -271,7 +307,6 @@ describe('scheduleNotifications', () => {
 
   it('waits for every session before resolving', async () => {
     mockFirestore({
-      notificationsConfig: { timezone: '+00:00' },
       scheduleDocs: upcomingSessionSchedule(['session-1', 'session-2']),
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true, 'session-2': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' }, 'session-2': { title: 'Workshop' } },
@@ -286,7 +321,6 @@ describe('scheduleNotifications', () => {
 
   it('does not send a session notification that was already sent by an earlier run', async () => {
     const options = {
-      notificationsConfig: { timezone: '+00:00' },
       scheduleDocs: upcomingSessionSchedule(['session-1']),
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
@@ -304,7 +338,6 @@ describe('scheduleNotifications', () => {
 
   it('skips a session whose notification was already claimed', async () => {
     mockFirestore({
-      notificationsConfig: { timezone: '+00:00' },
       scheduleDocs: upcomingSessionSchedule(['session-1']),
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
@@ -320,7 +353,6 @@ describe('scheduleNotifications', () => {
 
   it('releases the claim and rethrows when sending fails so a later run can retry', async () => {
     const { released, claimed } = mockFirestore({
-      notificationsConfig: { timezone: '+00:00' },
       scheduleDocs: upcomingSessionSchedule(['session-1']),
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },
@@ -338,7 +370,7 @@ describe('scheduleNotifications', () => {
 
   it('runs token cleanup when messaging reports an invalid registration token', async () => {
     const { runTransaction, transactionSet } = mockFirestore({
-      notificationsConfig: { timezone: '+00:00', icon: 'https://example.com/icon.png' },
+      notificationsConfig: { icon: 'https://example.com/icon.png' },
       scheduleDocs: upcomingSessionSchedule(['session-1']),
       featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
       sessionDocs: { 'session-1': { title: 'Keynote' } },

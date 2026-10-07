@@ -10,6 +10,8 @@ Notifications need the `notifications` feature, and My Schedule reminders also n
 
 A few minutes before a sessions starts, attendees can get reminder notifications. These are sent automatically by [`schedule-notifications.ts`](../../packages/server/functions/src/triggers/schedule-notifications.ts).
 
+Session times are read in the event time zone, `event.timezone` in `site.json`. The functions copy it at build time, so deploy the functions again after changing it. The optional `icon` in the Firestore `config/notifications` document sets the notification icon.
+
 To get a notification an attendee has to:
 
 1. Be authenticated

@@ -15,7 +15,7 @@ Upstream defaults for everything else, such as the UI text and page titles, are 
   "firebase": { "projectId": "my-devfest" },
   "shortName": "DevFest",
   "organizer": { "name": "..", "email": "..", ... },
-  "event": { "startDate": "2027-10-15", "endDate": "2027-10-16", "location": {..} },
+  "event": { "startDate": "2027-10-15", "endDate": "2027-10-16", "timezone": "Europe/Kyiv", "location": {..} },
   "schedule": { "published": true },
   "social": { "hashtag": "..", "follow": [..] },
   "auth": { "providers": ["google"] },
@@ -26,6 +26,8 @@ Upstream defaults for everything else, such as the UI text and page titles, are 
 ```
 
 `firebase.projectId` is the Firebase project that `./hbd deploy`, the deploy workflows and `FIRESTORE_TARGET=production` commands use. `url` defaults to `https://<projectId>.web.app/`. Set `url` only for a custom domain.
+
+`event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it.
 
 ## Validation
 
@@ -88,7 +90,7 @@ The build fails when:
 - `map` is on without `integrations.googleMapsApiKey`.
 - event text links to the page of a feature that is off, for example `/faq` in `footerRelBlock`.
 
-Every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, `optimizeImages` needs `imageOptimization`, and the schedule generator needs `schedule` or `speakers`. The functions read the flags from `features.json`, which their build copies from `site.json`, so deploy the functions again after changing these features.
+Every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, `optimizeImages` needs `imageOptimization`, and the schedule generator needs `schedule` or `speakers`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
 
 Some parts of a feature still show when it is off: the feedback block and dialog, the My Schedule bookmark button, the notifications toggle, and the ticket link in the header.
 

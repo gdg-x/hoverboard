@@ -1,33 +1,17 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Session } from '../models/session';
-import { timezoneOffset } from '../config/site';
 import { acceptingFeedback } from './feedback';
 
-const pad = (value: number): string => value.toString().padStart(2, '0');
+vi.mock('../config/site', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../config/site')>()),
+  timeZone: 'Europe/Kyiv',
+}));
 
-/**
- * Builds a `day`/`startTime` pair that, once parsed by `acceptingFeedback` as
- * local time and re-adjusted by `timezoneOffset`, lands `offsetMinutes`
- * minutes away from `now`. This keeps the test independent of the machine's
- * actual timezone.
- */
-const sessionStartingAt = (
-  now: Date,
-  offsetMinutes: number,
-): Pick<Session, 'day' | 'startTime'> => {
-  const totalOffset = parseInt(timezoneOffset) - now.getTimezoneOffset();
-  const targetConvertedTime = now.getTime() + offsetMinutes * 60 * 1000;
-  const currentTime = targetConvertedTime - totalOffset * 60 * 1000;
-  const local = new Date(currentTime);
-
-  return {
-    day: `${local.getFullYear()}-${pad(local.getMonth() + 1)}-${pad(local.getDate())}`,
-    startTime: `${pad(local.getHours())}:${pad(local.getMinutes())}:${pad(local.getSeconds())}`,
-  };
-};
+const session = (day: string, startTime: string) => ({ day, startTime }) as Session;
 
 describe('acceptingFeedback', () => {
-  const now = new Date('2024-01-15T12:00:00');
+  // 14:00 in Kyiv.
+  const now = new Date('2024-01-15T12:00:00Z');
 
   beforeEach(() => {
     vi.useFakeTimers();
@@ -39,20 +23,18 @@ describe('acceptingFeedback', () => {
   });
 
   it('returns true just after a session started', () => {
-    const session = sessionStartingAt(now, -60);
-
-    expect(acceptingFeedback(session as Session)).toBe(true);
+    expect(acceptingFeedback(session('2024-01-15', '13:59'))).toBe(true);
   });
 
   it('returns false for a session more than a week ago', () => {
-    const session = sessionStartingAt(now, -8 * 24 * 60);
-
-    expect(acceptingFeedback(session as Session)).toBe(false);
+    expect(acceptingFeedback(session('2024-01-07', '13:00'))).toBe(false);
   });
 
-  it('returns false for a session that has not started yet', () => {
-    const session = sessionStartingAt(now, 60);
+  it('returns false for a session that has not started yet in the event time zone', () => {
+    expect(acceptingFeedback(session('2024-01-15', '14:01'))).toBe(false);
+  });
 
-    expect(acceptingFeedback(session as Session)).toBe(false);
+  it('returns false for a session that is not in the schedule', () => {
+    expect(acceptingFeedback({ id: 'session-1', title: 'Talk' } as Session)).toBe(false);
   });
 });

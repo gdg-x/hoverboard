@@ -144,6 +144,15 @@ describe('config validation', () => {
     ]);
   });
 
+  it('rejects an unknown time zone', () => {
+    expect(errorsFor({ site: { event: { timezone: 'Europe/Atlantis' } } })).toEqual([
+      'site.json/event/timezone: "Europe/Atlantis" is not a known time zone',
+    ]);
+    expect(errorsFor({ site: { event: { timezone: '+03:00' } } })).toEqual([
+      'site.json/event/timezone: must match pattern "^[A-Za-z_]+(/[A-Za-z0-9_+-]+)*$"',
+    ]);
+  });
+
   it('requires a valid Firebase project ID', () => {
     const paths = makePaths();
     const site = readJson(join(paths.site, 'site.json')) as Record<string, unknown>;

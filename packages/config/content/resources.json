@@ -4,7 +4,6 @@
   "description": "Join the community, learn new things!",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "October 12-13, 2018",
-  "timezoneOffset": "-180",
   "aboutBlock": {
     "callToAction": {
       "featuredSessions": {
