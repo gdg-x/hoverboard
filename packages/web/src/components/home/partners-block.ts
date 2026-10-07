@@ -98,7 +98,7 @@ export class PartnersBlock extends ThemedElement {
               ${block.items.map(
                 (logo) => html`
                   <a
-                    class="logo-item"
+                    class="logo-item card"
                     href="${logo.url}"
                     title="${logo.name}"
                     target="_blank"

@@ -23,6 +23,8 @@ export class SpeakersBlock extends ThemedElement {
     }
 
     .speaker {
+      padding: 24px 16px;
+      color: inherit;
       text-align: center;
     }
 
@@ -173,7 +175,7 @@ export class SpeakersBlock extends ThemedElement {
         <div class="speakers-wrapper">
           ${this.featuredSpeakers.map(
             (speaker) => html`
-              <a class="speaker" href="${this.speakerUrl(speaker.id)}">
+              <a class="speaker card" href="${this.speakerUrl(speaker.id)}">
                 <div class="speaker-photo-wrapper">
                   <img
                     loading="lazy"
