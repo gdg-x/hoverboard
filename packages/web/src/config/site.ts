@@ -1,15 +1,7 @@
 // The only client entry point for site config. Read config from here, never from the data files.
 
-import siteResources from '../../../config/content/resources.json';
-import siteSettings from '../../../config/site.json';
-import defaultResources from '../../defaults/content/resources.json';
-import defaultSettings from '../../defaults/site.json';
+import { resources, site as settings } from 'virtual:hoverboard/site';
 import { isFeature, isFeatureEnabled } from './features';
-import { deepMerge } from './merge';
-
-// Same order as packages/web/build/resolve-config.ts: upstream defaults, then the site.
-const resources = deepMerge(defaultResources, siteResources);
-const settings = deepMerge(defaultSettings, siteSettings);
 
 export const {
   aboutBlock,
@@ -61,8 +53,15 @@ export const {
   title,
   viewHighlights,
 } = resources;
-export const { dateFormat, heroSettings, image, organizer, showForkMeBlockForProjectIds } =
-  settings;
+export const {
+  basepath,
+  dateFormat,
+  heroSettings,
+  image,
+  organizer,
+  showForkMeBlockForProjectIds,
+  url,
+} = settings;
 export const disabledSchedule = !settings.schedule.published;
 export const hashtag = settings.social.hashtag;
 export const mailto = settings.organizer.email;
@@ -102,20 +101,3 @@ export const signInProviders = {
 export const navigation = settings.navigation.filter(
   ({ route }) => !isFeature(route) || isFeatureEnabled(route),
 );
-
-// Deploy-specific values are rendered into meta tags in index.html at build time.
-export enum CONFIG {
-  BASEPATH = 'basepath',
-  URL = 'url',
-  GOOGLE_MAPS_API_KEY = 'google-maps-api-key',
-}
-
-export const getConfig = (key: CONFIG): string => {
-  const element = document.querySelector<HTMLMetaElement>(`meta[name="config-${key}"]`);
-
-  if (element === null || !element.content) {
-    throw new Error(`Config ${key} is missing or doesn't have a value`);
-  }
-
-  return element.content;
-};

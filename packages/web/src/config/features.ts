@@ -24,12 +24,10 @@ export const FEATURES = [
 
 export type Feature = (typeof FEATURES)[number];
 
-// Every feature stays on until site config can turn features off.
-const enabled = Object.fromEntries(FEATURES.map((feature) => [feature, true])) as Readonly<
-  Record<Feature, boolean>
->;
+// Replaced at build time by packages/web/build/vite-plugin-site.ts.
+declare const __HB_FEATURES__: Readonly<Record<Feature, boolean>>;
 
 export const isFeature = (value: string): value is Feature =>
   (FEATURES as readonly string[]).includes(value);
 
-export const isFeatureEnabled = (feature: Feature): boolean => enabled[feature];
+export const isFeatureEnabled = (feature: Feature): boolean => __HB_FEATURES__[feature];

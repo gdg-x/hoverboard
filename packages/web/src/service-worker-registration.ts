@@ -2,8 +2,7 @@ import { Workbox } from 'workbox-window';
 import { store } from './store';
 import { queueComplexSnackbar, queueSnackbar } from './store/snackbars';
 import {
-  CONFIG,
-  getConfig,
+  basepath,
   refresh,
   serviceWorkerAvailable,
   serviceWorkerError,
@@ -12,7 +11,7 @@ import {
 } from './config/site';
 
 if ('serviceWorker' in navigator) {
-  const workbox = new Workbox('service-worker.js', { scope: getConfig(CONFIG.BASEPATH) });
+  const workbox = new Workbox('service-worker.js', { scope: basepath });
 
   workbox.addEventListener('installing', () => {
     store.dispatch(queueSnackbar(serviceWorkerInstalling));

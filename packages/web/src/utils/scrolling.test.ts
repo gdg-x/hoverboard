@@ -1,8 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { POSITION, scrollToElement, scrollToTop } from './scrolling';
 
-// header-toolbar.ts (imported for HEADER_HEIGHT) imports the router, which
-// calls getConfig(CONFIG.URL) at module load time.
+// header-toolbar.ts (imported for HEADER_HEIGHT) imports the router and its routes.
 vi.mock('../router', () => ({
   router: { urlForName: vi.fn() },
 }));

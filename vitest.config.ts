@@ -1,12 +1,19 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 import { decorators } from './packages/web/build/decorators';
+import { configPaths, resolveConfig } from './packages/web/build/resolve-config';
+import { siteModule } from './packages/web/build/vite-plugin-site';
+
+const webRoot = fileURLToPath(new URL('./packages/web', import.meta.url));
 
 export default defineConfig({
   test: {
     projects: [
       {
-        plugins: [decorators()],
+        plugins: [
+          decorators(),
+          siteModule(resolveConfig({ paths: configPaths(webRoot), nodeEnv: 'test' })),
+        ],
         // Vitest resolves lit-html's `isServer` with the Node condition (true), which
         // makes Lit controllers skip browser setup under jsdom.
         resolve: {

@@ -7,8 +7,7 @@ import type { TocMarkdown } from './toc-markdown';
 import './toc-markdown';
 
 // toc-markdown scrolls headers into view via scrolling.ts, which imports
-// header-toolbar.ts (for HEADER_HEIGHT) which imports the router, calling
-// getConfig(CONFIG.URL) at module load time. Mock it out entirely.
+// header-toolbar.ts (for HEADER_HEIGHT) which imports the router. Mock it out entirely.
 vi.mock('../../utils/scrolling', () => ({
   scrollToElement: vi.fn(),
 }));

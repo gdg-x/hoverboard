@@ -23,7 +23,7 @@ vi.mock('./store', () => ({ store: { dispatch } }));
 
 vi.mock('./config/site', async (importOriginal) => ({
   ...(await importOriginal<typeof import('./config/site')>()),
-  getConfig: () => '/base/',
+  basepath: '/base/',
 }));
 
 const { queueComplexSnackbar, queueSnackbar } = await import('./store/snackbars');
