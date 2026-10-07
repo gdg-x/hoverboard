@@ -277,7 +277,8 @@
     "backToSchedule": "Back to schedule",
     "addToCalendar": "Add to calendar",
     "googleCalendar": "Google Calendar",
-    "appleCalendar": "Apple Calendar"
+    "appleCalendar": "Apple Calendar",
+    "share": "Share"
   },
   "speakerDetails": {
     "sessions": "Sessions"

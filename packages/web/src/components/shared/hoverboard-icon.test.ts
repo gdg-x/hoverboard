@@ -47,6 +47,7 @@ describe('hoverboard-icon', () => {
     'achievement',
     'arrow-left',
     'calendar',
+    'share',
     'coffee-break',
     'document',
     'lunch',
