@@ -1,12 +1,10 @@
 import { getFirestore } from 'firebase-admin/firestore';
 import * as logger from 'firebase-functions/logger';
-import fetch from 'node-fetch';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mailchimpSubscribe } from '../../src/triggers/mailchimp-subscribe';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('firebase-functions/logger');
-vi.mock('node-fetch');
 
 const mockConfigDoc = (data: Record<string, unknown> | undefined) => {
   vi.mocked(getFirestore).mockReturnValue({
@@ -43,11 +41,12 @@ const mockSnapshot = (subscriber: Record<string, unknown>) => ({
 describe('mailchimpSubscribe', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(fetch).mockReset();
+    vi.stubGlobal('fetch', vi.fn());
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
   });
 
   it('subscribes a new user to the configured Mailchimp list', async () => {

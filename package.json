@@ -49,7 +49,6 @@
     "@eslint/js": "^10.0.1",
     "@eslint/json": "^2.0.1",
     "@eslint/markdown": "^8.0.3",
-    "@firebase/rules-unit-testing": "^5.0.2",
     "@html-eslint/eslint-plugin": "^0.66.1",
     "@html-eslint/parser": "^0.66.1",
     "@types/node": "^22.20.4",
@@ -63,10 +62,8 @@
     "eslint-plugin-testing-library": "^7.16.2",
     "firebase-tools": "^15.32.1",
     "globals": "^17.11.0",
-    "jest-dev-server": "^11.0.0",
     "jsdom": "^30.1.1",
     "prettier": "3.9.9",
-    "prettier-plugin-package": "2.0.0",
     "syncpack": "^15.3.3",
     "typescript": "^6.0.3",
     "vitest": "^5.0.1"
