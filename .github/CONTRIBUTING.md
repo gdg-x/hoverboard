@@ -58,6 +58,6 @@ This fixes #20 by removing styles that leaked which would cause the page to turn
 
 3.  **At least one test for each bug fixed or feature added** as part of the pull request. Pull requests that fix bugs or add features without accompanying tests will not be considered.
 
-If a proposed change contains multiple commits, please [squash commits](https://www.google.com/url?q=http://blog.steveklabnik.com/posts/2012-11-08-how-to-squash-commits-in-a-github-pull-request) to as few as is necessary to succinctly express the change. A Polymer author can help you squash commits, so don’t be afraid to ask us if you need help with that!
+4.  **A [Conventional Commits](https://www.conventionalcommits.org/) title**, for example `fix(web): show session times in the event time zone`. Pull requests are squash merged and the title becomes the release note, so mark breaking changes with `!` and explain them in the description. See [docs/releases.md](../docs/releases.md#pull-requests).
 
 _Copied from [Polymer Elements contributing guide](https://github.com/PolymerElements/ContributionGuide)_

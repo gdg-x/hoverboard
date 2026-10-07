@@ -10,3 +10,7 @@
 - [Notifications](tutorials/05-notifications.md)
 - [MailChimp auto subscription](tutorials/07-mailchimp-autosubscribe.md)
 - [Firestore utils](tutorials/firebase-utils.md)
+
+## Maintainers
+
+- [Releases](releases.md)
