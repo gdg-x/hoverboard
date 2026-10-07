@@ -73,11 +73,11 @@ export class StarRating extends LitElement {
 
   private _rating = 0;
 
-  @property({ type: Number, reflect: true })
   get rating() {
     return this._rating;
   }
 
+  @property({ type: Number, reflect: true })
   set rating(value: number) {
     const oldRating = this._rating;
     this._rating = this.normalizeRating(Number(value));
@@ -85,13 +85,13 @@ export class StarRating extends LitElement {
   }
 
   @property({ type: Boolean, attribute: 'read-only' })
-  readOnly = false;
+  accessor readOnly = false;
 
   @property({ type: Boolean })
-  details = false;
+  accessor details = false;
 
   @property({ type: Number })
-  votes = 0;
+  accessor votes = 0;
 
   private readonly maxRating = 5;
 

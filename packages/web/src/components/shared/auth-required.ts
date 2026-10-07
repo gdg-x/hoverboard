@@ -10,7 +10,7 @@ import { ThemedElement } from '../themed-element';
 @customElement('auth-required')
 export class AuthRequired extends ThemedElement {
   @fromStore((state) => state.user instanceof Success)
-  private signedIn!: boolean;
+  private accessor signedIn!: boolean;
 
   override render() {
     const signedIn = this.signedIn;

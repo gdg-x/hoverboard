@@ -1,10 +1,12 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
+import { decorators } from './packages/web/utils/decorators';
 
 export default defineConfig({
   test: {
     projects: [
       {
+        plugins: [decorators()],
         // Vitest resolves lit-html's `isServer` with the Node condition (true), which
         // makes Lit controllers skip browser setup under jsdom.
         resolve: {

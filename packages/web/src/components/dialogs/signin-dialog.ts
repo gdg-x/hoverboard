@@ -65,18 +65,18 @@ export class SigninDialog extends ThemedElement {
   private signInText = signInText;
 
   @query('#dialog')
-  dialog!: HoverboardDialog;
+  accessor dialog!: HoverboardDialog;
 
   @fromStore((state) => state.auth)
-  private auth!: typeof initialAuthState;
+  private accessor auth!: typeof initialAuthState;
   @state()
-  private isMergeState = false;
+  private accessor isMergeState = false;
   @fromStore((state) => selectIsDialogOpen(state, DIALOG.SIGNIN))
-  private open!: boolean;
+  private accessor open!: boolean;
   @state()
-  private email = '';
+  private accessor email = '';
   @state()
-  private providerCompanyName = '';
+  private accessor providerCompanyName = '';
 
   override firstUpdated() {
     this.dialog.addEventListener('closed', () => closeDialog());

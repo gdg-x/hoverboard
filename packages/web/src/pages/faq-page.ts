@@ -11,7 +11,7 @@ export class FaqPage extends ThemedElement {
   private heroSettings = heroSettings.faq;
 
   @property()
-  source = faq;
+  accessor source = faq;
 
   override connectedCallback() {
     super.connectedCallback();

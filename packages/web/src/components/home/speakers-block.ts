@@ -165,7 +165,7 @@ export class SpeakersBlock extends ThemedElement {
   `;
 
   @fromStore((state) => selectSpeakersState(state))
-  speakers!: SpeakersState;
+  accessor speakers!: SpeakersState;
 
   override render() {
     return html`

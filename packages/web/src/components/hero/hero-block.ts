@@ -8,13 +8,13 @@ import { ThemedElement } from '../themed-element';
 @customElement('hero-block')
 export class HeroBlock extends ThemedElement {
   @property({ type: String, attribute: 'background-image' })
-  backgroundImage = '';
+  accessor backgroundImage = '';
   @property({ type: String, attribute: 'background-color' })
-  backgroundColor = '#fff';
+  accessor backgroundColor = '#fff';
   @property({ type: String, attribute: 'font-color' })
-  fontColor = '#000';
+  accessor fontColor = '#000';
   @property({ type: Boolean, attribute: 'hide-logo' })
-  hideLogo = false;
+  accessor hideLogo = false;
 
   static override styles = css`
     :host {

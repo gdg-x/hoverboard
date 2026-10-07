@@ -65,10 +65,10 @@ export class PreviousSpeakersBlock extends ThemedElement {
   `;
 
   @fromStore((state) => selectPreviousSpeakersState(state))
-  previousSpeakers!: PreviousSpeakersState;
+  accessor previousSpeakers!: PreviousSpeakersState;
 
   @fromStore((state) => selectRandomPreviousSpeakers(state))
-  speakers!: PreviousSpeaker[];
+  accessor speakers!: PreviousSpeaker[];
 
   override render() {
     return html`

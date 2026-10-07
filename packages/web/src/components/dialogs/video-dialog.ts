@@ -23,10 +23,10 @@ export class VideoDialog extends ThemedElement {
   `;
 
   @query('#dialog')
-  dialog!: HoverboardDialog;
+  accessor dialog!: HoverboardDialog;
 
   @fromStore((state) => state.ui.videoDialog)
-  private video!: typeof initialUiState.videoDialog;
+  private accessor video!: typeof initialUiState.videoDialog;
 
   override firstUpdated() {
     this.dialog.addEventListener('closed', () => closeVideoDialog());

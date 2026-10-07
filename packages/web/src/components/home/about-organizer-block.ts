@@ -51,7 +51,7 @@ export class AboutOrganizerBlock extends ThemedElement {
   `;
 
   @fromStore((state) => state.ui.viewport)
-  private viewport!: typeof initialUiState.viewport;
+  private accessor viewport!: typeof initialUiState.viewport;
 
   override render() {
     return html`

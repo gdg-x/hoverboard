@@ -69,18 +69,18 @@ export class SchedulePage extends ThemedElement {
   private contentLoaders = contentLoaders.schedule;
 
   @fromStore((state) => selectScheduleState(state))
-  schedule!: ScheduleState;
+  accessor schedule!: ScheduleState;
   @fromStore((state) => selectSessionsState(state))
-  sessions!: SessionsState;
+  accessor sessions!: SessionsState;
   @fromStore((state) => selectSpeakersState(state))
-  speakers!: SpeakersState;
+  accessor speakers!: SpeakersState;
 
   @fromStore((state) => selectFilterGroups(state))
-  private filterGroups!: FilterGroup[];
+  private accessor filterGroups!: FilterGroup[];
   @fromStore((state) => selectFilters(state))
-  private selectedFilters!: Filter[];
+  private accessor selectedFilters!: Filter[];
   @property({ attribute: false })
-  location: RouteLocation | undefined;
+  accessor location: RouteLocation | undefined;
 
   override connectedCallback() {
     super.connectedCallback();

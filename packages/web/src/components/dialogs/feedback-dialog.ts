@@ -24,14 +24,14 @@ export class FeedbackDialog extends ThemedElement {
   private feedback = feedback;
 
   @query('#dialog')
-  dialog!: HoverboardDialog;
+  accessor dialog!: HoverboardDialog;
 
   @fromStore((state) => selectIsDialogOpen(state, DIALOG.FEEDBACK))
-  private open!: boolean;
+  private accessor open!: boolean;
   @state()
-  private data: DialogState = new Initialized();
+  private accessor data: DialogState = new Initialized();
   @state()
-  private session?: Session;
+  private accessor session: Session | undefined;
 
   override firstUpdated() {
     this.dialog.addEventListener('closed', () => closeDialog());

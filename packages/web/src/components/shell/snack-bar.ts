@@ -73,10 +73,10 @@ export class SnackBar extends LitElement {
   `;
 
   @fromStore((state) => state.snackbars[0])
-  private state!: Snackbar | undefined;
+  private accessor state!: Snackbar | undefined;
 
   @query('.snackbar')
-  private snackbar!: HTMLElement;
+  private accessor snackbar!: HTMLElement;
 
   private timeout: number | undefined;
 

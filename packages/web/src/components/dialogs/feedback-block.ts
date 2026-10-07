@@ -59,18 +59,18 @@ export class FeedbackBlock extends ThemedElement {
   `;
 
   @property({ type: Number })
-  contentRating = 0;
+  accessor contentRating = 0;
   @property({ type: Number })
-  styleRating = 0;
+  accessor styleRating = 0;
   @property({ type: String })
-  sessionId: string | undefined;
+  accessor sessionId: string | undefined;
 
   @state()
-  private comment = '';
+  private accessor comment = '';
   @fromStore((state) => state.user)
-  private user!: UserState;
+  private accessor user!: UserState;
   @fromStore((state, host: FeedbackBlock) => selectFeedbackById(state, host.sessionId))
-  private feedback!: RemoteData<Error, Feedback | false>;
+  private accessor feedback!: RemoteData<Error, Feedback | false>;
 
   private feedbackText = feedbackText;
 

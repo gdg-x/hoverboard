@@ -48,7 +48,7 @@ export class MySchedule extends ThemedElement {
   private schedule = schedule;
 
   @fromStore((state) => selectFeaturedSchedule(state))
-  featuredSchedule!: Day[];
+  accessor featuredSchedule!: Day[];
 
   override render() {
     return html`

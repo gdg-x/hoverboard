@@ -65,12 +65,12 @@ export class SubscribeBlock extends ThemedElement {
   private subscribeBlock = subscribeBlock;
 
   @fromStore((state) => state.subscribed)
-  subscribed!: SubscribeState;
+  accessor subscribed!: SubscribeState;
 
   @fromStore((state) => state.user)
-  user!: UserState;
+  accessor user!: UserState;
   @fromStore((state) => state.ui.viewport)
-  viewport!: typeof initialUiState.viewport;
+  accessor viewport!: typeof initialUiState.viewport;
 
   private get ctaIcon() {
     return this.subscribed instanceof Success ? 'checked' : 'arrow-right-circle';

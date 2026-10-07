@@ -47,44 +47,44 @@ export class SubscribeDialog extends ThemedElement {
   private subscribeBlock = subscribeBlock;
 
   @query('#dialog')
-  dialog!: HoverboardDialog;
+  accessor dialog!: HoverboardDialog;
   @query('#emailInput')
-  emailInput!: MdOutlinedTextField;
+  accessor emailInput!: MdOutlinedTextField;
   @query('#firstFieldInput')
-  firstFieldInput!: MdOutlinedTextField;
+  accessor firstFieldInput!: MdOutlinedTextField;
   @query('#secondFieldInput')
-  secondFieldInput!: MdOutlinedTextField;
+  accessor secondFieldInput!: MdOutlinedTextField;
 
   @state()
-  override title = '';
+  override accessor title = '';
   @fromStore((state) => selectIsDialogOpen(state, DIALOG.SUBSCRIBE))
-  private open!: boolean;
+  private accessor open!: boolean;
   @state()
-  private subscribed: SubscribeState = new Initialized();
+  private accessor subscribed: SubscribeState = new Initialized();
   @state()
-  private potentialPartners: PotentialPartnersState = initialPotentialPartnersState;
+  private accessor potentialPartners: PotentialPartnersState = initialPotentialPartnersState;
   @state()
-  private errorOccurred = false;
+  private accessor errorOccurred = false;
   @state()
-  private dialogState: DialogState = new Initialized();
+  private accessor dialogState: DialogState = new Initialized();
   @state()
-  private firstFieldValue = '';
+  private accessor firstFieldValue = '';
   @state()
-  private secondFieldValue = '';
+  private accessor secondFieldValue = '';
   @state()
-  private submitLabel = '';
+  private accessor submitLabel = '';
   @state()
-  private firstFieldLabel = '';
+  private accessor firstFieldLabel = '';
   @state()
-  private secondFieldLabel = '';
+  private accessor secondFieldLabel = '';
   @state()
-  private email = '';
+  private accessor email = '';
   @state()
-  private firstFieldInvalid = false;
+  private accessor firstFieldInvalid = false;
   @state()
-  private secondFieldInvalid = false;
+  private accessor secondFieldInvalid = false;
   @state()
-  private emailInvalid = false;
+  private accessor emailInvalid = false;
 
   private readonly subscribedStore = new StoreController(this, (state) => state.subscribed, {
     onChange: (value) => {

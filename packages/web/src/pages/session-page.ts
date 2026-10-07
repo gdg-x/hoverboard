@@ -200,26 +200,26 @@ export class SessionPage extends ThemedElement {
   private sessionDetails = sessionDetails;
 
   @fromStore((state) => selectSessionsState(state))
-  sessions!: SessionsState;
+  accessor sessions!: SessionsState;
   @property({ type: Object })
-  session: Session | undefined;
+  accessor session: Session | undefined;
   @property({ type: String })
-  sessionId: string | undefined;
+  accessor sessionId: string | undefined;
   @fromStore((state) => selectFeaturedSessionsState(state))
-  featuredSessions!: FeaturedSessionsState;
+  accessor featuredSessions!: FeaturedSessionsState;
   @fromStore((state) => state.user)
-  user!: UserState;
+  accessor user!: UserState;
   @fromStore((state) => state.auth)
-  auth!: typeof initialAuthState;
+  accessor auth!: typeof initialAuthState;
 
   @fromStore((state) => state.ui.viewport)
-  private viewport!: typeof initialUiState.viewport;
+  private accessor viewport!: typeof initialUiState.viewport;
   @state()
-  private disabledSchedule: boolean = disabledSchedule;
+  private accessor disabledSchedule: boolean = disabledSchedule;
   @state()
-  private contentLoaderVisibility: boolean = false;
+  private accessor contentLoaderVisibility: boolean = false;
   @state()
-  private acceptingFeedback: boolean = false;
+  private accessor acceptingFeedback: boolean = false;
 
   override updated(changed: Map<string, unknown>) {
     if (changed.has('sessions') || changed.has('sessionId')) {

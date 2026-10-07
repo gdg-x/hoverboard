@@ -115,20 +115,20 @@ export class ScheduleDay extends ThemedElement {
   private mySchedule = mySchedule;
 
   @fromStore((state) => selectScheduleState(state))
-  schedule!: ScheduleState;
+  accessor schedule!: ScheduleState;
   @property({ type: Object })
-  location: RouteLocation | undefined;
+  accessor location: RouteLocation | undefined;
   @property({ type: Object })
-  day: Day | undefined;
+  accessor day: Day | undefined;
 
   @fromStore((state) => state.user)
-  private user!: UserState;
+  private accessor user!: UserState;
   @fromStore((state) => selectFeaturedSessionsState(state))
-  private featuredSessions!: FeaturedSessionsState;
+  private accessor featuredSessions!: FeaturedSessionsState;
   @property({ type: Boolean })
-  onlyFeatured = false;
+  accessor onlyFeatured = false;
   @fromStore((state) => selectFilters(state))
-  private selectedFilters!: Filter[];
+  private accessor selectedFilters!: Filter[];
 
   override willUpdate(changedProperties: PropertyValues) {
     if (

@@ -122,7 +122,7 @@ export class GalleryBlock extends ThemedElement {
   `;
 
   @fromStore((state) => selectGallery(state))
-  gallery!: GalleryState;
+  accessor gallery!: GalleryState;
 
   override render() {
     return html`
