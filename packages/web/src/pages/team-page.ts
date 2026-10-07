@@ -73,8 +73,8 @@ export class TeamPage extends ThemedElement {
 
     .social-icon {
       margin: 6px;
-      width: 20px;
-      height: 20px;
+      width: 32px;
+      height: 32px;
       padding: 6px;
       color: var(--secondary-text-color);
       transition: transform var(--animation);
