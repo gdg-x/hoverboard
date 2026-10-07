@@ -117,7 +117,7 @@ describe('post-page', () => {
   });
 
   it('loads remote content for the selected post', async () => {
-    fetchMock.mockResolvedValue({ text: async () => 'Remote content' } as Response);
+    fetchMock.mockResolvedValue(new Response('Remote content'));
     const { element, shadowRoot } = await fixture<PostPage>(html`<post-page></post-page>`);
     element.posts = new Success([{ ...firstPost, source: '/post.md' }]);
     element.postId = 'post-1';
@@ -143,7 +143,7 @@ describe('post-page', () => {
     await element.updateComplete;
     element.postId = 'post-2';
     await element.updateComplete;
-    resolveFirst?.({ text: async () => 'Stale remote content' } as Response);
+    resolveFirst?.(new Response('Stale remote content'));
     await Promise.resolve();
     await Promise.resolve();
     await element.updateComplete;
@@ -163,14 +163,31 @@ describe('post-page', () => {
     expect(router.goto).toHaveBeenCalledWith('/404');
   });
 
-  it('stores a remote content fetch failure', async () => {
+  it('stores a remote content fetch failure when the post has no inline content', async () => {
     fetchMock.mockRejectedValue(new Error('failed'));
     const { element } = await fixture<PostPage>(html`<post-page></post-page>`);
-    element.posts = new Success([{ ...firstPost, source: '/post.md' }]);
+    element.posts = new Success([{ ...firstPost, content: '', source: '/post.md' }]);
     element.postId = 'post-1';
 
     await waitFor(() => {
       expect((element as unknown as { post: unknown }).post).toBeInstanceOf(Failure);
     });
+  });
+
+  it('keeps the inline content when the source resolves to the HTML app shell', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    fetchMock.mockResolvedValue(
+      new Response('<html></html>', { headers: { 'content-type': 'text/html' } }),
+    );
+    const { element, shadowRoot } = await fixture<PostPage>(html`<post-page></post-page>`);
+    element.posts = new Success([{ ...firstPost, source: '/missing.md' }]);
+    element.postId = 'post-1';
+
+    await waitFor(() => expect(error).toHaveBeenCalled());
+    expect(shadowRoot.querySelector('long-markdown')).toHaveProperty(
+      'content',
+      'Inline first content',
+    );
+    error.mockRestore();
   });
 });

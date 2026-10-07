@@ -10,6 +10,7 @@ import { router } from '../router';
 import { type BlogState, selectBlogPosts } from '../store/blog';
 import { blog } from '../utils/data';
 import { getDate } from '../utils/dates';
+import { fetchText } from '../utils/fetch-text';
 import { updateImageMetadata } from '../utils/metadata';
 import { ThemedElement } from '../components/themed-element';
 
@@ -98,12 +99,18 @@ export class PostPage extends ThemedElement {
     }
 
     try {
-      const content = await fetch(post.source).then((response) => response.text());
+      const content = await fetchText(post.source);
       if (request === this.contentRequest) {
         this.postContent = content;
       }
     } catch (error) {
-      if (request === this.contentRequest) {
+      if (request !== this.contentRequest) {
+        return;
+      }
+      // The inline content is already shown, so a broken source only matters without it.
+      if (post.content) {
+        console.error(`Failed to load source for post ${post.id}:`, error);
+      } else {
         this.post = new Failure(error as Error);
       }
     }

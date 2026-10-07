@@ -38,7 +38,7 @@ describe('remote-markdown', () => {
   });
 
   it('fetches and renders the remote content as toc-markdown', async () => {
-    fetchMock.mockResolvedValue({ text: async () => '# Remote heading' } as Response);
+    fetchMock.mockResolvedValue(new Response('# Remote heading'));
     const { element, shadowRoot } = await renderRemoteMarkdown(
       html`<remote-markdown path="/content.md"></remote-markdown>`,
     );
@@ -57,6 +57,19 @@ describe('remote-markdown', () => {
     fetchMock.mockRejectedValue(new Error('network error'));
     const { shadowRoot } = await renderRemoteMarkdown(
       html`<remote-markdown path="/content.md"></remote-markdown>`,
+    );
+
+    await waitFor(() => {
+      expect(shadowRoot).toHaveTextContent('Error loading content');
+    });
+  });
+
+  it('renders an error when the path resolves to the HTML app shell', async () => {
+    fetchMock.mockResolvedValue(
+      new Response('<html></html>', { headers: { 'content-type': 'text/html' } }),
+    );
+    const { shadowRoot } = await renderRemoteMarkdown(
+      html`<remote-markdown path="/missing.md"></remote-markdown>`,
     );
 
     await waitFor(() => {
