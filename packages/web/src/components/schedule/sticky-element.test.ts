@@ -26,6 +26,7 @@ describe('sticky-element', () => {
       }
       observe = observe;
       disconnect = vi.fn();
+      takeRecords = () => [];
     } as unknown as typeof IntersectionObserver;
     const { element, shadowRootForWithin } = await fixture<StickyElement>(
       html`<sticky-element></sticky-element>`,
