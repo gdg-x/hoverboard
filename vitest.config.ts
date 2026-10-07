@@ -1,9 +1,22 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
     projects: [
       {
+        // Vitest resolves lit-html's `isServer` with the Node condition (true), which
+        // makes Lit controllers skip browser setup under jsdom.
+        resolve: {
+          alias: {
+            'lit-html/is-server.js': fileURLToPath(
+              new URL(
+                './packages/web/node_modules/lit-html/development/is-server.js',
+                import.meta.url,
+              ),
+            ),
+          },
+        },
         test: {
           name: 'Web',
           environment: 'jsdom',
@@ -15,6 +28,7 @@ export default defineConfig({
             },
           },
           setupFiles: ['./packages/web/__tests__/web.setup.ts'],
+          server: { deps: { inline: [/@lit-labs\/observers/] } },
           include: ['packages/web/src/**/*.test.ts'],
         },
       },

@@ -1,5 +1,6 @@
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
+import { IntersectionController } from '@lit-labs/observers/intersection-controller.js';
 import { css, html, nothing } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import '../components/home/about-block';
@@ -226,43 +227,28 @@ export class HomePage extends ThemedElement {
     super.connectedCallback();
     updateMetadata(title, description, INCLUDE_SITE_TITLE.NO);
     this.showForkMeBlock = this.shouldShowForkMeBlock();
-    if (this.hasUpdated) {
-      this.observeLazyBlocks();
-    }
   }
 
   override firstUpdated() {
     this.observeLazyBlocks();
   }
 
-  override disconnectedCallback() {
-    this.blockObserver?.disconnect();
-    super.disconnectedCallback();
-  }
-
-  private blockObserver?: IntersectionObserver;
+  private readonly blockObserver = new IntersectionController(this, {
+    target: null,
+    config: { rootMargin: '600px 0px' },
+    callback: (entries) =>
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        this.blockObserver.unobserve(entry.target);
+        lazyBlocks[entry.target.localName as LazyBlock]?.();
+      }),
+  });
 
   private observeLazyBlocks() {
-    const tags = Object.keys(lazyBlocks) as LazyBlock[];
-    if (!('IntersectionObserver' in window)) {
-      tags.forEach((tag) => lazyBlocks[tag]());
-      return;
-    }
-
-    this.blockObserver?.disconnect();
-    this.blockObserver = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          this.blockObserver?.unobserve(entry.target);
-          lazyBlocks[entry.target.localName as LazyBlock]?.();
-        }),
-      { rootMargin: '600px 0px' },
-    );
-    tags.forEach((tag) => {
+    (Object.keys(lazyBlocks) as LazyBlock[]).forEach((tag) => {
       const element = this.renderRoot.querySelector(tag);
       if (element && !customElements.get(tag)) {
-        this.blockObserver?.observe(element);
+        this.blockObserver.observe(element);
       }
     });
   }

@@ -1,3 +1,4 @@
+import { IntersectionController } from '@lit-labs/observers/intersection-controller.js';
 import { css, html } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 import { ThemedElement } from '../themed-element';
@@ -54,24 +55,18 @@ export class StickyElement extends ThemedElement {
   @query('#trigger')
   trigger!: HTMLDivElement;
 
-  private observer: IntersectionObserver | undefined;
+  private readonly observer = new IntersectionController(this, {
+    target: null,
+    callback: (entries) => this.onIntersection(entries),
+  });
 
   override disconnectedCallback() {
     super.disconnectedCallback();
-    this.observer?.disconnect();
     this.content?.classList.remove('sticked');
   }
 
   override firstUpdated() {
-    this.observer = new IntersectionObserver(this.onIntersection);
     this.observer.observe(this.trigger);
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.hasUpdated) {
-      this.observer?.observe(this.trigger);
-    }
   }
 
   override render() {
