@@ -2,14 +2,49 @@ name: Main
 on: push
 
 jobs:
-  test:
+  checks:
     runs-on: ubuntu-latest
     name: ${{ matrix.script-name }}
 
     strategy:
       fail-fast: false
       matrix:
-        script-name: [lint, test, build]
+        script-name: [lint, build]
+
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v7
+
+      - name: Cache node modules
+        uses: actions/cache@v6
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Setup node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: package.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create temp serviceAccount.json
+        run: echo "{}" > serviceAccount.json
+
+      - name: Running ${{ matrix.script-name }}
+        run: npm run ${{ matrix.script-name }}
+
+  test-project:
+    runs-on: ubuntu-latest
+    name: test (${{ matrix.project }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [Web, Functions, CLI, Firestore]
 
     steps:
       - name: Checkout the repo
@@ -29,7 +64,7 @@ jobs:
           node-version-file: package.json
 
       - name: Setup Java (required by the Firestore emulator)
-        if: matrix.script-name == 'test'
+        if: matrix.project == 'Firestore'
         uses: actions/setup-java@v6
         with:
           distribution: temurin
@@ -41,5 +76,16 @@ jobs:
       - name: Create temp serviceAccount.json
         run: echo "{}" > serviceAccount.json
 
-      - name: Running ${{ matrix.script-name }}
-        run: npm run ${{ matrix.script-name }}
+      - name: Running ${{ matrix.project }} tests
+        run: npx vitest run --project ${{ matrix.project }}
+
+  # One required check that passes only when every test project passes.
+  test:
+    runs-on: ubuntu-latest
+    name: test
+    needs: test-project
+    if: always()
+
+    steps:
+      - name: Check test results
+        run: test "${{ needs.test-project.result }}" = success
