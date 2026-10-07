@@ -1,11 +1,10 @@
 import { applicationDefault, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
-import { resolveFirebaseProjectId } from '../utils/firebase-project.js';
+import { DEMO_PROJECT_ID, resolveFirebaseProjectId } from '../utils/firebase-project.js';
 import { findRepoRoot } from '../utils/node-version.js';
 import { useFirebaseLoginCredentials } from './google-cloud.js';
 
 const DEFAULT_EMULATOR_HOST = '127.0.0.1:8080';
-const DEFAULT_PROJECT_ID = 'demo-hoverboard';
 
 const repoRoot = findRepoRoot(process.cwd());
 if (!repoRoot) {
@@ -30,7 +29,7 @@ if (process.env['FIRESTORE_TARGET'] === 'production') {
   // The Admin SDK routes all requests to the Firestore emulator, without
   // validating credentials, whenever FIRESTORE_EMULATOR_HOST is set.
   process.env['FIRESTORE_EMULATOR_HOST'] ??= DEFAULT_EMULATOR_HOST;
-  initializeApp({ projectId: resolveFirebaseProjectId(repoRoot) ?? DEFAULT_PROJECT_ID });
+  initializeApp({ projectId: DEMO_PROJECT_ID });
 }
 
 export { repoRoot };

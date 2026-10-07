@@ -10,8 +10,8 @@ Project Hoverboard locally in less than 15 minutes.
 1. Install project dependencies: `npm ci` (`yarn` should work but it's not officially supported)
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
 1. Update your site's config and content in [packages/config](/packages/config). More info can be found [here](01-configure-app.md)
-1. Select your Firebase project `npx firebase use <projectId>` (this is only needed to load your app's web config; local development runs against the [Firestore emulator](https://firebase.google.com/docs/emulator-suite), so it never reads or writes your project's live data)
-   - _Tip: `./hbd setup` automates the login and project-selection steps above, then runs `./hbd doctor` to confirm your environment is ready._
+1. Run the app locally. Local development always runs on the [Firebase emulators](https://firebase.google.com/docs/emulator-suite) with the `demo-hoverboard` project, so it needs no Firebase project and never reads or writes live data.
+   - _Tip: `./hbd setup` logs in and selects the Firebase project you deploy to, then runs `./hbd doctor` to confirm your environment is ready._
 1. Seed the local Firestore emulator with data
    - [Optional] You can edit `docs/default-firebase-data.json` to use your own data
    - Run `npm start` in one terminal to launch the app together with the Firebase emulators
@@ -26,17 +26,18 @@ _Tip: See [Firestore utils](firebase-utils.md) for more on seeding, exporting, a
 The diagram below is a brief summary of the directories within the project.
 
     /
-    |---config/
     |---docs/
     |---packages/cli/
+    |---packages/config/
     |---packages/server/
     |---packages/storage/
     |---packages/web/
+    |   |---defaults/
     |   |---dist/
     |   |---node_modules/
     |   |---public/
-    |   |   |---data/
     |   |   |---images/
+    |   |---schemas/
     |   |---src/
     |   |   |---components/
     |   |   |---controllers/
@@ -47,16 +48,17 @@ The diagram below is a brief summary of the directories within the project.
     |   |   |---utils/
     |
 
-- `config/` folder for core project setup, consumed by `packages/web`'s build.
 - `docs/` documentation.
 - `packages/cli/` contains the `hoverboard` developer CLI that helps you work with the project and its data ([docs](./firebase-utils.md)).
+- `packages/config/` is your site's config and content: `site.json`, event text, FAQ, code of conduct and blog posts ([docs](01-configure-app.md)).
 - `packages/server/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) (in `functions/`) used for notifications, optimizations, saving data, etc.
 - `packages/storage/` Firestore, Storage and Realtime Database security rules, Firestore indexes, and their tests.
 - `packages/web/` is the frontend app (own `package.json`/`node_modules`):
+  - `defaults/` has the upstream defaults that `packages/config` overrides.
   - `dist/` is the directory to deploy to production.
   - `public/` is copied to `dist/` by the build.
-    - `data/` folder with the site settings, text resources, blog posts, FAQ and code of conduct.
     - `images/` folder with the site images.
+  - `schemas/` has the JSON Schemas for `packages/config`.
   - `src/` is where you store all of your source code and do all of your development.
     - `components/` is where you keep your LitElement custom elements, grouped by area.
     - `controllers/` is where you keep your shared Lit reactive controllers.
@@ -68,35 +70,23 @@ The diagram below is a brief summary of the directories within the project.
 
 ## Build and serve
 
-1. Specify the Firebase project to use for development and deploy target
-   - `npx firebase use <projectid>`.
 1. Run locally
    - `npm start`
+1. Select the Firebase project to deploy to
+   - `npx firebase use <projectid>`.
 1. Deploy
    - `./hbd deploy`
 
-There are two CLI flags you can set when running npm scripts:
-
-- `NODE_ENV`: Control if code should be optimized for a production deployment with minimization or for faster local development.
-- `BUILD_ENV`: Which `config/<BUILD_ENV>.json` file overrides values in `packages/config/site.json`, such as the site URL or Google Maps key. Development builds use `config/development.json` when it exists.
+`NODE_ENV` controls whether code is optimized for a production deployment with minimization, or for faster local development. It does not change the site config: every build reads `packages/config`.
 
 The common npm scripts are:
 
 - `npm start`: Start a local development server using the Firebase emulator with livereload.
 - `npm run build`: Build a production version of the site to the `dist` directory.
-- `npm run serve`: Build a production version of the site and serve it locally.
+- `npm run serve`: Build a production version of the site and serve it locally on the emulators.
 - `./hbd deploy`: Build a production version of the site and deploy it to Firebase.
 
-Below is the grid of the common npm script commands and their supported CLI flags.
-
-|          | `NODE_ENV`    | `BUILD_ENV`             |
-| -------- | ------------- | ----------------------- |
-| `start`  | `development` | `development`\|`custom` |
-| `build`  | `production`  | `development`\|`custom` |
-| `serve`  | `production`  | `development`\|`custom` |
-| `deploy` | `production`  | `development`\|`custom` |
-
-For example `npm start` only supports `NODE_ENV=development` and uses `config/development.json` if it exists, while `npm run build` only supports `NODE_ENV=production` and uses only `packages/config/site.json` unless `BUILD_ENV` is set.
+Locally, the app runs on the emulators with the `demo-hoverboard` project. `demo-` projects only exist in the emulators, so sign-in uses the Auth emulator, and push notifications, Analytics and Performance Monitoring are off.
 
 ## Next steps
 

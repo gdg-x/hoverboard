@@ -35,16 +35,16 @@ const makeRepoRoot = (): string => {
 };
 
 describe('lib/firestore (emulator target, the default)', () => {
-  it('initializes with the resolved project id and sets FIRESTORE_EMULATOR_HOST', async () => {
+  it('initializes with the demo project and sets FIRESTORE_EMULATOR_HOST', async () => {
     const repoRoot = makeRepoRoot();
     delete process.env['FIRESTORE_TARGET'];
     delete process.env['FIRESTORE_EMULATOR_HOST'];
-    process.env['GCLOUD_PROJECT'] = 'demo-project';
+    delete process.env['GCLOUD_PROJECT'];
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
 
     const firestoreModule = await import('./firestore.js');
 
-    expect(initializeApp).toHaveBeenCalledWith({ projectId: 'demo-project' });
+    expect(initializeApp).toHaveBeenCalledWith({ projectId: 'demo-hoverboard' });
     expect(process.env['FIRESTORE_EMULATOR_HOST']).toBe('127.0.0.1:8080');
     expect(firestoreModule.repoRoot).toBe(repoRoot);
     expect(getFirestore).toHaveBeenCalled();
@@ -62,10 +62,10 @@ describe('lib/firestore (emulator target, the default)', () => {
     expect(process.env['FIRESTORE_EMULATOR_HOST']).toBe('10.0.0.1:9999');
   });
 
-  it('falls back to the demo project id when none resolves', async () => {
+  it('ignores the selected Firebase project', async () => {
     const repoRoot = makeRepoRoot();
     delete process.env['FIRESTORE_TARGET'];
-    delete process.env['GCLOUD_PROJECT'];
+    process.env['GCLOUD_PROJECT'] = 'my-production-project';
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
 
     await import('./firestore.js');

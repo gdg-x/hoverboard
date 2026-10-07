@@ -9,7 +9,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 
 1. Click _Add Firebase to your web app_.
 
-1. Select your Firebase project `npx firebase use <projectId>`
+1. Select your Firebase project `npx firebase use <projectId>`. Only deploys and `FIRESTORE_TARGET=production` commands use it. Local development always uses the `demo-hoverboard` project on the emulators.
    - _Tip: `./hbd setup` automates login and project selection for you._
 
 1. Seed data for local development

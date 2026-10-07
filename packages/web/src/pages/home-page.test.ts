@@ -74,7 +74,7 @@ describe('home-page', () => {
 
   it('does not render fork-me-block when the feature is off', async () => {
     vi.mocked(isFeatureEnabled).mockImplementation((feature) => feature !== 'forkMe');
-    (firebaseApp.options as { appId?: string }).appId = 'hoverboard-dev';
+    (firebaseApp.options as { appId?: string }).appId = 'hoverboard-master';
 
     const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
 
@@ -103,7 +103,7 @@ describe('home-page', () => {
   });
 
   it('renders fork-me-block for a matching firebase project', async () => {
-    (firebaseApp.options as { appId?: string }).appId = 'hoverboard-dev';
+    (firebaseApp.options as { appId?: string }).appId = 'hoverboard-master';
 
     const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
 

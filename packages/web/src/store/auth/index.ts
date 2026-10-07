@@ -4,6 +4,7 @@ import { FirebaseError } from 'firebase/app';
 import {
   type AuthError,
   AuthErrorCodes,
+  connectAuthEmulator,
   fetchSignInMethodsForEmail,
   getAuth,
   linkWithCredential,
@@ -13,7 +14,7 @@ import {
   signOut as firebaseSignOut,
 } from 'firebase/auth';
 import type { RootState } from '..';
-import { firebaseApp } from '../../firebase';
+import { firebaseApp, isDemoProject } from '../../firebase';
 import type { FirebaseUser } from '../../models/user';
 import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
@@ -61,6 +62,9 @@ let cachedAuth: ReturnType<typeof getAuth> | undefined;
 const getFirebaseAuth = () => {
   if (!cachedAuth) {
     cachedAuth = getAuth(firebaseApp);
+    if (isDemoProject) {
+      connectAuthEmulator(cachedAuth, 'http://127.0.0.1:9099', { disableWarnings: true });
+    }
   }
   return cachedAuth;
 };

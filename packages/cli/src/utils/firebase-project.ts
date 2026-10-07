@@ -61,6 +61,9 @@ export const resolveFirebaseProjectId = (repoRoot: string): string | undefined =
   projectIdFromFirebaseRc(repoRoot) ||
   projectIdFromFirebaseToolsConfigstore(repoRoot);
 
+/** Local development always uses this project. `demo-` projects only exist in the emulators. */
+export const DEMO_PROJECT_ID = 'demo-hoverboard';
+
 export const checkFirebaseProject = (repoRoot: string | undefined): DoctorCheckResult => {
   const projectId = repoRoot && resolveFirebaseProjectId(repoRoot);
 

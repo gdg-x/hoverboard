@@ -20,8 +20,6 @@ export interface ConfigPaths {
   defaults: string;
   /** The site's own config, which only contains what it changes. */
   site: string;
-  /** `<BUILD_ENV>.json` overrides for `site.json`. */
-  environments: string;
   schemas: string;
   /** Where images referenced by the config must exist. */
   public: string;
@@ -29,18 +27,16 @@ export interface ConfigPaths {
 
 export interface ResolveOptions {
   paths?: ConfigPaths;
-  buildEnv?: string | undefined;
   nodeEnv?: string | undefined;
 }
 
-const { BUILD_ENV, NODE_ENV } = process.env;
+const { NODE_ENV } = process.env;
 export const production = NODE_ENV === 'production';
 export const watch = process.argv.includes('--watch');
 
 const RELATIVE_PATHS: ConfigPaths = {
   defaults: 'defaults',
   site: '../config',
-  environments: '../../config',
   schemas: 'schemas',
   public: 'public',
 };
@@ -62,20 +58,6 @@ export class ConfigError extends Error {
 }
 
 const readJson = <T>(path: string): T => JSON.parse(fs.readFileSync(path, 'utf8')) as T;
-
-// `BUILD_ENV`, or `development` for development builds, picks an optional override file.
-const readEnvironment = (dir: string, buildEnv: string | undefined, isProduction: boolean) => {
-  const name = buildEnv || (isProduction ? undefined : 'development');
-  if (!name) return {};
-
-  const path = join(dir, `${name}.json`);
-  if (!fs.existsSync(path)) {
-    if (buildEnv) throw new Error(`BUILD_ENV is ${buildEnv}, but ${path} does not exist.`);
-    return {};
-  }
-  console.log(`Using ${path} over site.json.`);
-  return readJson<object>(path);
-};
 
 const formatErrors = (file: string, errors: ErrorObject[] | null | undefined): string[] =>
   (errors ?? []).map(({ instancePath, message, params }) => {
@@ -110,17 +92,13 @@ const crossFileErrors = (site: Site, resources: Resources, publicDir: string): s
  * Reads the defaults, then the site's config over them, and validates the result. The dev
  * server, the build and the CLI all use it, so they see the same config.
  */
-export const loadConfig = ({
-  paths = CONFIG_PATHS,
-  buildEnv = BUILD_ENV,
-  nodeEnv = NODE_ENV,
-}: ResolveOptions = {}): { config: SiteConfig; errors: string[] } => {
+export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: ResolveOptions = {}): {
+  config: SiteConfig;
+  errors: string[];
+} => {
   const site = deepMerge(
-    deepMerge(
-      readJson<object>(join(paths.defaults, 'site.json')),
-      readJson<object>(join(paths.site, 'site.json')),
-    ),
-    readEnvironment(paths.environments, buildEnv, nodeEnv === 'production'),
+    readJson<object>(join(paths.defaults, 'site.json')),
+    readJson<object>(join(paths.site, 'site.json')),
   ) as Site;
   const resources = deepMerge(
     readJson<object>(join(paths.defaults, 'content', 'resources.json')),
