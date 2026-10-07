@@ -50,6 +50,7 @@ const setupStorageMocks = ({
     file,
     upload,
   } as never);
+  storageMocks.spawnSync.mockReturnValue({ status: 0 });
 
   return { destinationFile, download, file, getMetadata, makePublic, upload };
 };
@@ -137,5 +138,26 @@ describe('optimizeImages', () => {
     });
     expect(makePublic).toHaveBeenCalledTimes(1);
     expect(storageMocks.unlinkSync).toHaveBeenCalledWith(tempLocalFile);
+  });
+
+  it('logs an error and keeps the original when ImageMagick is not available', async () => {
+    const { upload } = setupStorageMocks();
+    storageMocks.spawnSync.mockReturnValue({
+      status: null,
+      error: new Error('spawn convert ENOENT'),
+    });
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
+    const object = { bucket: 'hoverboard-assets', contentType: 'image/png', name: 'photo.png' };
+
+    const result = await optimizeImages.run({ data: object } as never);
+
+    expect(result).toBeNull();
+    expect(errorSpy).toHaveBeenCalledWith(
+      'ImageMagick could not optimize',
+      'photo.png',
+      expect.any(Error),
+    );
+    expect(upload).not.toHaveBeenCalled();
+    expect(storageMocks.unlinkSync).toHaveBeenCalledWith(path.join(os.tmpdir(), 'photo.png'));
   });
 });

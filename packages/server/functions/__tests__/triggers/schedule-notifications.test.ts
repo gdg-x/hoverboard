@@ -138,6 +138,23 @@ describe('scheduleNotifications', () => {
     vi.restoreAllMocks();
   });
 
+  it('warns and exits when notifications are not configured', async () => {
+    const { runTransaction } = mockFirestore({
+      notificationsConfig: undefined,
+      scheduleDocs: [{ id: '2025-06-22', data: { timeslots: [] } }],
+    });
+    const { sendEachForMulticast } = mockMessaging();
+    const warnSpy = vi.spyOn(logger, 'warn').mockImplementation(() => undefined);
+
+    await scheduleNotifications.run(undefined as never);
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Session notifications are not configured.'),
+    );
+    expect(runTransaction).not.toHaveBeenCalled();
+    expect(sendEachForMulticast).not.toHaveBeenCalled();
+  });
+
   it('logs and exits when today is missing from the schedule', async () => {
     mockFirestore({
       notificationsConfig: { timezone: '+00:00', icon: 'https://example.com/icon.png' },

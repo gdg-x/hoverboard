@@ -43,7 +43,7 @@ async function optimizeImage(object: StorageObjectData) {
   logger.log('The file has been downloaded to', tempLocalFile);
 
   // Generate a thumbnail using ImageMagick.
-  spawnSync('convert', [
+  const result = spawnSync('convert', [
     tempLocalFile,
     '-strip',
     '-interlace',
@@ -52,6 +52,15 @@ async function optimizeImage(object: StorageObjectData) {
     '82',
     tempLocalFile,
   ]);
+  if (result.error || result.status !== 0) {
+    logger.error(
+      'ImageMagick could not optimize',
+      filePath,
+      result.error ?? result.stderr?.toString(),
+    );
+    fs.unlinkSync(tempLocalFile);
+    return null;
+  }
   logger.log('Optimized image created at', tempLocalFile);
 
   // Uploading the Optimized image.

@@ -60,9 +60,16 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
     notificationsConfigPromise,
     schedulePromise,
   ]);
-  const notificationsConfig = notificationsConfigSnapshot.exists
-    ? (notificationsConfigSnapshot.data() as { timezone?: string; icon?: string })
-    : {};
+  if (!notificationsConfigSnapshot.exists) {
+    logger.warn(
+      'Session notifications are not configured. Set the `config/notifications` Firestore document.',
+    );
+    return;
+  }
+  const notificationsConfig = notificationsConfigSnapshot.data() as {
+    timezone?: string;
+    icon?: string;
+  };
 
   const schedule = scheduleSnapshot.docs.reduce(
     (acc: Record<string, any>, doc) => ({ ...acc, [doc.id]: doc.data() }),

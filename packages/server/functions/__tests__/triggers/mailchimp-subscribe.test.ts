@@ -106,7 +106,21 @@ describe('mailchimpSubscribe', () => {
       params: {},
     } as never);
 
-    expect(errorLogSpy).toHaveBeenCalledWith("Can't subscribe user, Mailchimp config is empty.");
+    expect(errorLogSpy).toHaveBeenCalledWith(
+      expect.stringContaining("Can't subscribe user, Mailchimp is not configured."),
+    );
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it('logs and skips subscribing when the Mailchimp config has empty values', async () => {
+    mockConfigDoc({ dc: '', listid: '', apikey: '' });
+    const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
+
+    await mailchimpSubscribe.run(subscriberEvent);
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("Can't subscribe user, Mailchimp is not configured."),
+    );
     expect(fetch).not.toHaveBeenCalled();
   });
 

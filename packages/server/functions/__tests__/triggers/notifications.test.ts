@@ -76,6 +76,21 @@ describe('sendGeneralNotification', () => {
     expect(getMessaging).not.toHaveBeenCalled();
   });
 
+  it('logs an error and returns when the notification has no title or body', async () => {
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
+
+    await sendGeneralNotification.run({
+      data: mockSnapshot({ body: 'World' }),
+      params: { timestamp: '12345' },
+    } as never);
+
+    expect(errorSpy).toHaveBeenCalledWith(
+      'Notification 12345 needs a `title` and a `body` string.',
+    );
+    expect(getFirestore).not.toHaveBeenCalled();
+    expect(getMessaging).not.toHaveBeenCalled();
+  });
+
   it('logs and returns when there are no subscriber tokens', async () => {
     setupNotificationMocks({
       notificationsConfig: { icon: '/default-icon.png' },
