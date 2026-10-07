@@ -19,7 +19,7 @@
 
     <link href="images/favicon.ico" rel="icon" />
 
-    <meta content="{{ site.webapp.themeColor }}" name="theme-color" />
+    <meta content="{{ theme.primary }}" name="theme-color" />
     <link href="manifest.json" rel="manifest" />
 
     <!-- Add to homescreen for Chrome on Android -->
@@ -41,7 +41,7 @@
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta content="images/manifest/icon-144.png" name="msapplication-TileImage" />
-    <meta content="#00aba9" name="msapplication-TileColor" />
+    <meta content="{{ theme.primary }}" name="msapplication-TileColor" />
     <meta content="no" name="msapplication-tap-highlight" />
 
     <!-- Facebook sharing meta data -->
@@ -122,7 +122,7 @@
         text-align: center;
         font-weight: 600;
         letter-spacing: 0.3em;
-        color: #202020;
+        color: var(--primary-text-color);
         overflow: visible;
       }
     </style>

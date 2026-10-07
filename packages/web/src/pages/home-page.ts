@@ -253,8 +253,8 @@ export class HomePage extends ThemedElement {
       <hero-block
         id="hero"
         background-image="${this.heroSettings.background.image}"
-        background-color="${this.heroSettings.background.color}"
-        font-color="${this.heroSettings.fontColor}"
+        background-color="var(--default-primary-color)"
+        font-color="var(--text-primary-color)"
         hide-logo
       >
         <div class="home-content">

@@ -51,10 +51,7 @@ export class SimpleHero extends ThemedElement {
 
   override render() {
     return html`
-      <hero-block
-        background-color="${heroSettings[this.page].background.color}"
-        font-color="${heroSettings[this.page].fontColor}"
-      >
+      <hero-block>
         ${this.renderTitle()} ${this.renderDescription()}
 
         <slot></slot>

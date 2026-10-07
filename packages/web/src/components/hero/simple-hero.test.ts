@@ -19,14 +19,7 @@ describe('simple-hero', () => {
   it('defaults to the notFound page settings', async () => {
     const { shadowRoot } = await fixture<SimpleHero>(html`<simple-hero></simple-hero>`);
 
-    expect(shadowRoot.querySelector('hero-block')).toHaveAttribute(
-      'background-color',
-      heroSettings.notFound.background.color,
-    );
-    expect(shadowRoot.querySelector('hero-block')).toHaveAttribute(
-      'font-color',
-      heroSettings.notFound.fontColor,
-    );
+    expect(shadowRoot.querySelector('hero-block')).not.toHaveAttribute('background-color');
     expect(shadowRoot.querySelector('.hero-title')).toHaveTextContent(heroSettings.notFound.title);
     expect(shadowRoot.querySelector('.hero-description')).toBeNull();
   });

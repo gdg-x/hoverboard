@@ -1,28 +1,26 @@
 # Styling
 
-Theme colors are in `packages/web/src/themes/default.ts`. Shared styles, such as layout, animation and shadows, are in `packages/web/src/styles/theme.ts`.
+Colors come from a theme. Pick it and change its colors in `theme` in `packages/config/site.json`. Shared styles, such as layout, animation and shadows, are in `packages/web/src/styles/theme.ts`.
 
 ## Colors
 
-Adjust the color scheme to your conference style.
+Hoverboard has one built-in theme, `default`. Override any of its colors in `theme.colors`, as a hex color:
 
-```css
-:host {
-  --default-primary-color: #673ab7;
-  --dark-primary-color: #512da8;
-  --focused-color: #311b92;
-  --accent-color: #ff5252;
-  --text-primary-color: #fff;
-  --primary-background-color: #fff;
-  --primary-text-color: #424242;
-  --secondary-text-color: #757575;
-  --disabled-text-color: #bdbdbd;
-  --divider-color: #ededed;
-  ...
+```json
+"theme": {
+  "name": "default",
+  "colors": {
+    "primary": "#f57c00",
+    "primaryDark": "#e65100"
+  }
 }
 ```
 
-Lighter and transparent versions of the primary color, such as `--light-primary-color`, `--primary-color-transparent` and `--box-shadow-primary-color`, are derived from `--default-primary-color`, so you only change it in one place.
+The colors and their defaults are in `packages/web/src/themes/default.ts`. `packages/web/src/themes/tokens.ts` lists the CSS variable that each one sets. The build writes them on `:root` in `index.html`, so the first paint already has your colors.
+
+Lighter and transparent versions of the primary color, such as `--light-primary-color`, `--primary-color-transparent` and `--box-shadow-primary-color`, are derived from `primary`, so you only change it in one place. The browser theme color, the home screen app colors and the Windows tile color are `primary` too.
+
+The home page hero uses `primary` as its background and `onPrimary` for its text. Other page heroes use `background` and `text`.
 
 **Tip:** Choose base colors with [Material Palette][material palette]
 ![material_design_palette_generator](https://cloud.githubusercontent.com/assets/2954281/17750340/a02f8e76-64ca-11e6-80f0-53392b30f89a.png)
@@ -45,38 +43,16 @@ Session tag colors are set by tag name in `theme.tagColors` in `packages/config/
 
 ## Hero
 
-Color and images for header can be configured via `packages/config/site.json` in `heroSettings` object:
+The home page hero image is `heroSettings.home.background.image` in `packages/config/site.json`:
 
 ```json
 "heroSettings": {
   "home": {
     "description": "Join the commuity, learn new things!",
     "background": {
-      "color": "#673ab7",
       "image": "/images/backgrounds/home.jpg"
-    },
-    "fontColor": "#FFF"
-  },
-  "blog": {
-    "title": "Blog",
-    "metaDescription": "Read stories from our team",
-    "background": {
-      "color": "#FFF"
-    },
-    "fontColor": "#424242"
-  },
-  ...
- }
-```
-
-## Web app
-
-Edit Web app colors via `webapp` in `packages/config/site.json`
-
-```json
-"webapp": {
-  "themeColor": "#F57C00",
-  "backgroundColor": "#F57C00"
+    }
+  }
 }
 ```
 

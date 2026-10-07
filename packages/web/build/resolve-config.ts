@@ -3,6 +3,8 @@ import fs from 'fs';
 import { join } from 'path';
 import { FEATURE_REQUIRES, FEATURES, isFeature, type Feature } from '../src/config/features';
 import { deepMerge } from '../src/config/merge';
+import { THEMES, type ThemeName } from '../src/themes/index';
+import type { Theme } from '../src/themes/tokens';
 
 type Site = typeof import('../defaults/site.json') & typeof import('../../config/site.json');
 type Resources = typeof import('../defaults/content/resources.json') &
@@ -12,6 +14,8 @@ type Resources = typeof import('../defaults/content/resources.json') &
 export interface SiteConfig {
   site: Site;
   resources: Resources;
+  /** The built-in theme that `theme.name` picks, with the `theme.colors` overrides. */
+  theme: Theme;
   NODE_ENV: string;
 }
 
@@ -166,7 +170,10 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
     site.image = `${site.url}${site.image}`;
   }
 
-  return { config: { site, resources, NODE_ENV: nodeEnv || 'production' }, errors };
+  const { name, colors } = site.theme as { name: string; colors?: Partial<Theme> };
+  const theme = { ...(THEMES[name as ThemeName] ?? THEMES.default), ...colors };
+
+  return { config: { site, resources, theme, NODE_ENV: nodeEnv || 'production' }, errors };
 };
 
 /** Like `loadConfig`, but throws a `ConfigError` that lists every problem. */

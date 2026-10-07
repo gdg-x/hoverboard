@@ -35,9 +35,9 @@ export interface UiState {
 
 export const initialUiState: UiState = {
   heroSettings: {
-    backgroundColor: heroSettings.home.background.color,
+    backgroundColor: 'var(--default-primary-color)',
     backgroundImage: heroSettings.home.background.image,
-    fontColor: heroSettings.home.fontColor,
+    fontColor: 'var(--text-primary-color)',
     hideLogo: false,
   },
   videoDialog: {

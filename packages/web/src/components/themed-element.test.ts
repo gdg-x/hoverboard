@@ -29,11 +29,10 @@ describe('themed-element', () => {
     await fixture(html`<themed-element-test-subject></themed-element-test-subject>`);
     const { elementStyles } = ThemedElementTestSubject as unknown as { elementStyles: unknown[] };
 
-    expect(elementStyles).toHaveLength(4);
-    expect(String(elementStyles[0])).toContain('--default-primary-color: #673ab7');
-    expect(String(elementStyles[1])).toContain('--primary-color-transparent');
-    expect(String(elementStyles[2])).toContain('display: block');
-    expect(String(elementStyles[3])).toContain('color: rebeccapurple');
+    expect(elementStyles).toHaveLength(3);
+    expect(String(elementStyles[0])).toContain('--primary-color-transparent');
+    expect(String(elementStyles[1])).toContain('display: block');
+    expect(String(elementStyles[2])).toContain('color: rebeccapurple');
   });
 
   it('is usable as a base class for rendering subclass content', async () => {
