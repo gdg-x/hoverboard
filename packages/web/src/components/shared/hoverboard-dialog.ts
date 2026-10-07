@@ -22,8 +22,8 @@ export class HoverboardDialog extends LitElement {
       border: none;
       border-radius: 12px;
       box-shadow: var(--box-shadow, 0 2px 8px rgb(0 0 0 / 30%));
-      background: var(--primary-background-color, #fff);
-      color: var(--primary-text-color, #424242);
+      background: var(--primary-background-color);
+      color: var(--primary-text-color);
       padding: 0;
       margin: auto;
       width: var(--hoverboard-dialog-width, fit-content);

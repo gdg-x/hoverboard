@@ -8,8 +8,8 @@ export class ContentLoader extends ThemedElement {
     :host {
       --darkgrey: rgba(250, 250, 250, 0);
       --darkgrey-lighter: rgba(250, 250, 250, 0.8);
-      --background-color: #fff;
-      --content-color: #e2e2e2;
+      --background-color: var(--default-background-color);
+      --content-color: var(--border-light-color);
       --card-padding: 24px;
       --card-height: 340px;
       --card-width: auto;

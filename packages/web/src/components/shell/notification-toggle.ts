@@ -60,7 +60,7 @@ export class NotificationToggle extends ThemedElement {
       z-index: 2;
       padding: 24px;
       max-width: 300px;
-      background: #fff;
+      background: var(--primary-background-color);
       box-shadow: var(--box-shadow);
       font-size: 16px;
       color: var(--primary-text-color);

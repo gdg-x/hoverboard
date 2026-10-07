@@ -77,7 +77,7 @@ export class SpeakersPage extends ThemedElement {
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      border: 2px solid #fff;
+      border: 2px solid var(--default-background-color);
       transition: transform var(--animation);
       display: flex;
       align-items: center;
@@ -107,7 +107,7 @@ export class SpeakersPage extends ThemedElement {
     .badge-icon {
       width: 12px;
       height: 12px;
-      color: #fff;
+      color: var(--text-primary-color);
     }
 
     .company-logo {

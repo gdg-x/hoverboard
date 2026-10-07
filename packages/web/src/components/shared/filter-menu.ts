@@ -79,7 +79,7 @@ export class FilterMenu extends ThemedElement {
     [selected] {
       background-color: var(--color);
       border-color: var(--color);
-      color: white;
+      color: var(--text-primary-color);
     }
 
     .selected-filters {

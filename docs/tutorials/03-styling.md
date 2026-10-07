@@ -1,6 +1,6 @@
 # Styling
 
-Styling of your app can be found in `packages/web/src/styles/theme.ts`.
+Theme colors are in `packages/web/src/themes/default.ts`. Shared styles, such as layout, animation and shadows, are in `packages/web/src/styles/theme.ts`.
 
 ## Colors
 
@@ -8,12 +8,11 @@ Adjust the color scheme to your conference style.
 
 ```css
 :host {
-  --dark-primary-color: #512da8;
   --default-primary-color: #673ab7;
+  --dark-primary-color: #512da8;
   --focused-color: #311b92;
-  --light-primary-color: #d1c4e9;
-  --text-primary-color: #fff;
   --accent-color: #ff5252;
+  --text-primary-color: #fff;
   --primary-background-color: #fff;
   --primary-text-color: #424242;
   --secondary-text-color: #757575;
@@ -23,7 +22,7 @@ Adjust the color scheme to your conference style.
 }
 ```
 
-Some variables, such as `--box-shadow-primary-color`, `--primary-color-transparent` and `--primary-color-light`, repeat the primary color as `rgb(103 58 183 / ...)`. Update them too when you change `--default-primary-color`.
+Lighter and transparent versions of the primary color, such as `--light-primary-color`, `--primary-color-transparent` and `--box-shadow-primary-color`, are derived from `--default-primary-color`, so you only change it in one place.
 
 **Tip:** Choose base colors with [Material Palette][material palette]
 ![material_design_palette_generator](https://cloud.githubusercontent.com/assets/2954281/17750340/a02f8e76-64ca-11e6-80f0-53392b30f89a.png)

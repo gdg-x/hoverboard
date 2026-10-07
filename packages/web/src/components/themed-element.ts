@@ -1,5 +1,6 @@
 import { css, type CSSResultGroup, type CSSResultOrNative, LitElement } from 'lit';
 import { theme } from '../styles/theme';
+import { defaultTheme } from '../themes/default';
 
 const host = css`
   :host {
@@ -8,8 +9,8 @@ const host = css`
 `;
 
 export class ThemedElement extends LitElement {
-  // Every subclass gets the shared theme first, so they only declare their own styles.
+  // Every subclass gets the theme tokens and shared styles first, so they only declare their own styles.
   protected static override finalizeStyles(styles?: CSSResultGroup): CSSResultOrNative[] {
-    return [theme, host, ...super.finalizeStyles(styles)];
+    return [defaultTheme, theme, host, ...super.finalizeStyles(styles)];
   }
 }

@@ -16,8 +16,8 @@ export class ForkMeBlock extends ThemedElement {
     }
 
     md-outlined-button {
-      --md-outlined-button-label-text-color: #000;
-      --md-outlined-button-outline-color: #000;
+      --md-outlined-button-label-text-color: var(--primary-text-color);
+      --md-outlined-button-outline-color: var(--primary-text-color);
     }
   `;
 

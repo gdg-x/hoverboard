@@ -19,7 +19,7 @@ export class SubscribeBlock extends ThemedElement {
       display: flex;
       width: 100%;
       background: var(--default-primary-color);
-      color: #fff;
+      color: var(--text-primary-color);
       padding: 16px 0;
     }
 
@@ -39,14 +39,14 @@ export class SubscribeBlock extends ThemedElement {
     }
 
     md-text-button {
-      color: #fff;
-      --md-text-button-label-text-color: #fff;
-      --md-text-button-hover-label-text-color: #fff;
+      color: var(--text-primary-color);
+      --md-text-button-label-text-color: var(--text-primary-color);
+      --md-text-button-hover-label-text-color: var(--text-primary-color);
     }
 
     md-text-button[disabled] {
       background: var(--default-primary-color);
-      color: #fff;
+      color: var(--text-primary-color);
     }
 
     @media (min-width: 640px) {

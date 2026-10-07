@@ -82,30 +82,6 @@ export class MapBlock extends ThemedElement {
   @fromStore((state) => state.ui.viewport)
   private accessor viewport!: typeof initialUiState.viewport;
 
-  private option = {
-    disableDefaultUI: true,
-    disableDoubleClickZoom: true,
-    scrollwheel: false,
-    draggable: false,
-    styles: [
-      {
-        stylers: [{ lightness: 40 }, { visibility: 'on' }, { gamma: 0.9 }, { weight: 0.4 }],
-      },
-      {
-        elementType: 'labels',
-        stylers: [{ visibility: 'on' }],
-      },
-      {
-        featureType: 'water',
-        stylers: [{ color: '#5dc7ff' }],
-      },
-      {
-        featureType: 'road',
-        stylers: [{ visibility: 'off' }],
-      },
-    ],
-  };
-
   override render() {
     return html`
       ${

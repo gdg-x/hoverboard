@@ -61,7 +61,7 @@ export class BlogListPage extends ThemedElement {
       padding: 24px;
       height: 100%;
       transform: translateZ(0);
-      color: #fff;
+      color: var(--text-primary-color);
       box-sizing: border-box;
       display: flex;
       flex-direction: column;

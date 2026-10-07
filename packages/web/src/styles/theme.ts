@@ -1,62 +1,38 @@
 import { css } from 'lit';
 
+// Shared styles for every theme. Colors come from the theme tokens in src/themes/.
 export const theme = css`
   :host {
-    --dark-primary-color: #512da8;
-    --default-primary-color: #673ab7;
-    --focused-color: #311b92;
-    --light-primary-color: #d1c4e9;
-    --text-primary-color: #fff;
-    --accent-color: #ff5252;
-    --primary-background-color: #fff;
-    --primary-text-color: #424242;
-    --secondary-text-color: #757575;
-    --disabled-text-color: #bdbdbd;
-    --divider-color: #ededed;
-    --footer-background-color: #f5f5f5;
-    --footer-text-color: #616161;
-    --twitter-color: #4099ff;
-    --facebook-color: #3b5998;
-    --border-light-color: #e2e2e2;
-    --error-color: #e64a19;
-
-    /* Custom */
-    --default-background-color: #fff;
-    --secondary-background-color: #f5f5f5;
-    --additional-background-color: #f7f7f7;
-    --contrast-additional-background-color: #e8e8e8;
+    --light-primary-color: color-mix(
+      in srgb,
+      var(--default-primary-color) 30%,
+      var(--primary-background-color)
+    );
+    --primary-color-white: color-mix(
+      in srgb,
+      var(--default-primary-color) 12%,
+      var(--primary-background-color)
+    );
+    --primary-color-transparent: color-mix(in srgb, var(--default-primary-color) 10%, transparent);
+    --primary-color-light: color-mix(in srgb, var(--default-primary-color) 80%, transparent);
     --animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --slide-animation: 0.4s cubic-bezier(0, 0, 0.2, 1);
     --border-radius: 4px;
     --box-shadow:
       0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
     --box-shadow-primary-color:
-      0 3px 3px -2px rgb(103 58 183 / 30%), 0 3px 4px 0 rgb(103 58 183 / 30%),
-      0 1px 8px 0 rgb(103 58 183 / 30%);
+      0 3px 3px -2px color-mix(in srgb, var(--default-primary-color) 30%, transparent),
+      0 3px 4px 0 color-mix(in srgb, var(--default-primary-color) 30%, transparent),
+      0 1px 8px 0 color-mix(in srgb, var(--default-primary-color) 30%, transparent);
     --box-shadow-primary-color-hover:
-      0 1px 3px -2px rgb(103 58 183 / 40%), 0 4px 5px 0 rgb(103 58 183 / 40%),
-      0 2px 9px 0 rgb(103 58 183 / 40%);
+      0 1px 3px -2px color-mix(in srgb, var(--default-primary-color) 40%, transparent),
+      0 4px 5px 0 color-mix(in srgb, var(--default-primary-color) 40%, transparent),
+      0 2px 9px 0 color-mix(in srgb, var(--default-primary-color) 40%, transparent);
     --font-family:
       -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, helvetica, arial, sans-serif,
       'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     --max-container-width: 1280px;
     --header-height: 56px;
-    --primary-color-transparent: rgb(103 58 183 / 10%);
-    --primary-color-light: rgb(103 58 183 / 80%);
-    --primary-color-white: #ede7f6;
-
-    /* Labels */
-    --gde: #3d5afe;
-    --wtm: #1de9b6;
-    --gdg: #00b0ff;
-
-    /* Tags */
-    --general: #9e9e9e;
-    --android: #78c257;
-    --web: #2196f3;
-    --cloud: #3f51b5;
-    --community: #e91e63;
-    --design: #e91e63;
   }
 
   *,
@@ -221,7 +197,7 @@ export const theme = css`
     --iron-icon-width: 18px;
     --iron-icon-height: 18px;
 
-    color: #fff;
+    color: var(--text-primary-color);
   }
 
   .card {
@@ -245,7 +221,7 @@ export const theme = css`
     padding: 8px 12px;
     font-size: 12px;
     color: currentcolor;
-    background: white;
+    background: var(--default-background-color);
     border: 1px solid currentcolor;
     border-radius: 32px;
     margin: 1px;

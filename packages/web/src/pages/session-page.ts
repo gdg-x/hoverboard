@@ -55,7 +55,7 @@ export class SessionPage extends ThemedElement {
       display: block;
       height: 100%;
       width: 100%;
-      background: #fff;
+      background: var(--primary-background-color);
       color: var(--primary-text-color);
     }
 
@@ -95,7 +95,7 @@ export class SessionPage extends ThemedElement {
     }
 
     .tag {
-      color: #fff;
+      color: var(--text-primary-color);
       background-color: var(--color, var(--secondary-text-color));
       border-color: var(--color, var(--secondary-text-color));
     }
