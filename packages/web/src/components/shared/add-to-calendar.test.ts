@@ -1,0 +1,49 @@
+import { describe, expect, it, vi } from 'vitest';
+import { html } from 'lit';
+import { fixture } from '../../../__tests__/helpers/fixtures';
+import type { Session } from '../../models/session';
+import * as calendar from '../../utils/calendar';
+import './add-to-calendar';
+import { AddToCalendar } from './add-to-calendar';
+
+const session: Session & { endTime: string } = {
+  id: 'session-1',
+  title: 'A great talk',
+  description: 'Session description',
+  day: '2024-01-02',
+  startTime: '10:00',
+  endTime: '10:45',
+};
+
+describe('add-to-calendar', () => {
+  it('should be registered', () => {
+    expect(customElements.get('add-to-calendar')).toBeDefined();
+  });
+
+  it('renders nothing when the session has no schedule times', async () => {
+    const { element, shadowRoot } = await fixture<AddToCalendar>(
+      html`<add-to-calendar></add-to-calendar>`,
+    );
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('md-outlined-button')).toBeNull();
+  });
+
+  it('links to Google Calendar and downloads an ics for Apple Calendar', async () => {
+    const download = vi.spyOn(calendar, 'downloadIcs').mockImplementation(() => undefined);
+    const { element, shadowRoot } = await fixture<AddToCalendar>(
+      html`<add-to-calendar .session="${session}"></add-to-calendar>`,
+    );
+    await element.updateComplete;
+
+    const [google, apple] = Array.from(shadowRoot.querySelectorAll('md-menu-item'));
+    expect(google).toHaveAttribute('href', expect.stringContaining('calendar.google.com'));
+
+    apple!.click();
+
+    expect(download).toHaveBeenCalledWith(
+      expect.objectContaining({ title: 'A great talk' }),
+      'session-1',
+    );
+  });
+});

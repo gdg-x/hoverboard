@@ -274,7 +274,10 @@
     "viewPresentation": "View presentation",
     "viewVideo": "View video",
     "speakers": "Speakers",
-    "backToSchedule": "Back to schedule"
+    "backToSchedule": "Back to schedule",
+    "addToCalendar": "Add to calendar",
+    "googleCalendar": "Google Calendar",
+    "appleCalendar": "Apple Calendar"
   },
   "speakerDetails": {
     "sessions": "Sessions"
