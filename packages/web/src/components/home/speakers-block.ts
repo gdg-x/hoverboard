@@ -62,7 +62,7 @@ export class SpeakersBlock extends ThemedElement {
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      border: 2px solid #fff;
+      border: 2px solid var(--default-background-color);
       transition: transform var(--animation);
     }
 
@@ -81,7 +81,7 @@ export class SpeakersBlock extends ThemedElement {
     .badge-icon {
       width: 12px;
       height: 12px;
-      color: #fff;
+      color: var(--text-primary-color);
     }
 
     .company-logo {

@@ -126,7 +126,7 @@ export class PostPage extends ThemedElement {
       <hero-block
         background-image=${post?.image ?? ''}
         background-color=${post?.primaryColor ?? ''}
-        font-color="#fff"
+        font-color="var(--text-primary-color)"
       >
         <div class="hero-title">${post?.title ?? ''}</div>
       </hero-block>

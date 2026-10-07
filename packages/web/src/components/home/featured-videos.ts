@@ -101,7 +101,7 @@ export class FeaturedVideos extends ThemedElement {
     .video-play-icon {
       width: 60px;
       height: 60px;
-      color: #fff;
+      color: var(--text-primary-color);
       opacity: 0.8;
       transform: translateZ(0);
       transition: transform var(--animation);
@@ -140,7 +140,7 @@ export class FeaturedVideos extends ThemedElement {
         top: calc(var(--video-item-height) / 2 - 25px);
         display: block;
         opacity: 0.9;
-        background-color: #fff;
+        background-color: var(--default-background-color);
         border-radius: 50%;
         color: var(--default-primary-color);
         transition: opacity var(--animation);

@@ -10,9 +10,9 @@ export class HeroBlock extends ThemedElement {
   @property({ type: String, attribute: 'background-image' })
   accessor backgroundImage = '';
   @property({ type: String, attribute: 'background-color' })
-  accessor backgroundColor = '#fff';
+  accessor backgroundColor = 'var(--primary-background-color)';
   @property({ type: String, attribute: 'font-color' })
-  accessor fontColor = '#000';
+  accessor fontColor = 'var(--primary-text-color)';
   @property({ type: Boolean, attribute: 'hide-logo' })
   accessor hideLogo = false;
 

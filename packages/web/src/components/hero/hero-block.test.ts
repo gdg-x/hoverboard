@@ -27,8 +27,8 @@ describe('hero-block', () => {
     const { element, shadowRoot } = await fixture<HeroBlock>(html`<hero-block></hero-block>`);
 
     expect(element.backgroundImage).toBe('');
-    expect(element.backgroundColor).toBe('#fff');
-    expect(element.fontColor).toBe('#000');
+    expect(element.backgroundColor).toBe('var(--primary-background-color)');
+    expect(element.fontColor).toBe('var(--primary-text-color)');
     expect(element.hideLogo).toBe(false);
     expect(shadowRoot.querySelector<HTMLDivElement>('.hero-overlay')).not.toHaveAttribute('show');
     expect(shadowRoot.querySelector<HTMLDivElement>('.hero-image')).toBeNull();
@@ -83,9 +83,9 @@ describe('hero-block', () => {
 
     expect(mockSetHeroSettings).toHaveBeenCalledTimes(1);
     expect(mockSetHeroSettings).toHaveBeenCalledWith({
-      backgroundColor: '#fff',
+      backgroundColor: 'var(--primary-background-color)',
       backgroundImage: '/example.jpg',
-      fontColor: '#000',
+      fontColor: 'var(--primary-text-color)',
       hideLogo: false,
     });
   });

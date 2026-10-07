@@ -60,7 +60,7 @@ export class SchedulePage extends ThemedElement {
 
     @media (min-width: 640px) {
       :host {
-        background-color: #fff;
+        background-color: var(--primary-background-color);
       }
     }
   `;

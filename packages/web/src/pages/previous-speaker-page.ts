@@ -34,7 +34,7 @@ type PreviousSpeakerWithDetails = PreviousSpeaker & { badges?: Badge[]; pronouns
 export class PreviousSpeakerPage extends ThemedElement {
   static override styles = css`
     :host {
-      background: #fff;
+      background: var(--primary-background-color);
       box-shadow: var(--box-shadow);
       color: var(--primary-text-color);
       display: block;

@@ -8,7 +8,7 @@ import { store } from '../../store';
 import { removeSnackbar } from '../../store/snackbars';
 
 const closeIcon = svg`
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
   </svg>
@@ -30,8 +30,8 @@ export class SnackBar extends LitElement {
       padding: 6px 8px 6px 16px;
       border: none;
       border-radius: 4px;
-      background: #323232;
-      color: rgb(255 255 255 / 87%);
+      background: var(--snackbar-background-color);
+      color: var(--snackbar-text-color);
       font-size: 14px;
       box-shadow: var(--box-shadow);
     }
@@ -61,14 +61,14 @@ export class SnackBar extends LitElement {
     }
 
     .action {
-      --md-text-button-label-text-color: var(--light-primary-color, #d1c4e9);
-      --md-text-button-hover-label-text-color: var(--light-primary-color, #d1c4e9);
-      --md-text-button-focus-label-text-color: var(--light-primary-color, #d1c4e9);
-      --md-text-button-pressed-label-text-color: var(--light-primary-color, #d1c4e9);
+      --md-text-button-label-text-color: var(--light-primary-color);
+      --md-text-button-hover-label-text-color: var(--light-primary-color);
+      --md-text-button-focus-label-text-color: var(--light-primary-color);
+      --md-text-button-pressed-label-text-color: var(--light-primary-color);
     }
 
     .dismiss {
-      --md-icon-button-icon-color: #fff;
+      --md-icon-button-icon-color: var(--text-primary-color);
     }
   `;
 

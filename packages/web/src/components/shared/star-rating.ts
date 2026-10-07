@@ -15,9 +15,9 @@ export class StarRating extends LitElement {
   static override styles = css`
     :host {
       display: inline-block;
-      --star-color: #faca43;
-      --empty-color: #bebebe;
-      --detail-color: #999;
+      --star-color: var(--star-rating-color);
+      --empty-color: var(--disabled-text-color);
+      --detail-color: var(--secondary-text-color);
     }
 
     .stars {

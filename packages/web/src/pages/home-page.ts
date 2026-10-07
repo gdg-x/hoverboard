@@ -92,10 +92,10 @@ export class HomePage extends ThemedElement {
     }
 
     .action-buttons .watch-video {
-      color: #fff;
-      --md-outlined-button-label-text-color: #fff;
-      --md-outlined-button-hover-label-text-color: #fff;
-      --md-outlined-button-outline-color: #fff;
+      color: var(--text-primary-color);
+      --md-outlined-button-label-text-color: var(--text-primary-color);
+      --md-outlined-button-hover-label-text-color: var(--text-primary-color);
+      --md-outlined-button-outline-color: var(--text-primary-color);
     }
 
     .action-buttons hoverboard-icon {
@@ -303,7 +303,7 @@ export class HomePage extends ThemedElement {
               <path
                 class="stroke"
                 fill="none"
-                stroke="#c7c4b8"
+                stroke="currentColor"
                 stroke-width="2.5"
                 stroke-miterlimit="10"
                 d="M12.5833445
@@ -331,7 +331,7 @@ export class HomePage extends ThemedElement {
               ></path>
               <path
                 class="scroller"
-                fill="#c7c4b8"
+                fill="currentColor"
                 d="M13.0833359
                 19.2157116h-0.9192753c-1.0999985
                 0-1.9999971-0.8999996-1.9999971-1.9999981v-5.428606c0-1.0999994

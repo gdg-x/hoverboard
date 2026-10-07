@@ -42,7 +42,7 @@ Before finishing a change, run `npm run lint` and `npm test`, or at least the af
 ## Conventions
 
 - **TypeScript** is strict, with `verbatimModuleSyntax`. Use `import type` for type-only imports. Custom elements register as a side effect, so import them with `import './my-element'` where they are used.
-- **Components** use `@customElement`, extend `ThemedElement` (which adds the shared theme styles), and read store state with the `@fromStore` decorator. Use theme CSS variables from `src/styles/theme.ts`, not hard-coded colors.
+- **Components** use `@customElement`, extend `ThemedElement` (which adds the shared theme styles), and read store state with the `@fromStore` decorator. Use the color tokens from `src/themes/default.ts`, never hex colors. A test fails on hex colors outside `src/themes/`.
 - **Site config.** Client code reads site config only through `src/config/site.ts`, never from the data files directly. Build-time config reads live in `packages/web/build/`.
 - **Tests** sit next to the code as `*.test.ts`. Web tests run in jsdom: render with `fixture` from `packages/web/__tests__/helpers/fixtures.ts`, set state with `setStoreState`, and assert with the jest-dom matchers. Every bug fix or feature needs a test.
 - **Vitest** is configured once in the root `vitest.config.ts`. Do not add `vitest` to a package's `package.json`, because a second copy breaks `expect.extend` from setup files.

@@ -36,10 +36,10 @@ export class HeaderToolbar extends ThemedElement {
     }
 
     :host([transparent]) {
-      --iron-icon-fill-color: var(--hero-font-color, '#fff');
+      --iron-icon-fill-color: var(--hero-font-color, var(--text-primary-color));
       background-color: transparent;
       border-bottom-color: transparent;
-      color: var(--hero-font-color, '#fff');
+      color: var(--hero-font-color, var(--text-primary-color));
     }
 
     :host([transparent]) .toolbar-logo {
@@ -157,7 +157,7 @@ export class HeaderToolbar extends ThemedElement {
       z-index: 2;
       padding: 24px;
       max-width: 300px;
-      background: #fff;
+      background: var(--primary-background-color);
       box-shadow: var(--box-shadow);
       font-size: 16px;
       color: var(--primary-text-color);
@@ -438,7 +438,7 @@ export class HeaderToolbar extends ThemedElement {
     this.style.setProperty('--hero-logo-opacity', settings.hideLogo ? '0' : '1');
     this.style.setProperty(
       '--hero-logo-color',
-      settings.backgroundImage ? '#fff' : 'var(--default-primary-color)',
+      settings.backgroundImage ? 'var(--text-primary-color)' : 'var(--default-primary-color)',
     );
   }
 
