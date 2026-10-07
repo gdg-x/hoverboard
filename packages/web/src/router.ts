@@ -1,6 +1,7 @@
 import { type BaseRouteConfig, type RouteConfig, Router } from '@lit-labs/router';
 import { html, type ReactiveControllerHost, type TemplateResult } from 'lit';
 import { logPageView } from './utils/analytics.js';
+import { type Feature, isFeatureEnabled } from './config/features.js';
 import { CONFIG, getConfig } from './config/site.js';
 
 type Params = Record<string, string | undefined>;
@@ -18,7 +19,7 @@ export class AppRouter extends Router {
   }
 
   urlForName(name: string, params: Record<string, string> = {}): string {
-    const route = ROUTES.find((route) => route.name === name);
+    const route = this.routes.find((route) => route.name === name);
     if (!route || !('path' in route)) {
       throw new Error(`Unknown route name: ${name}`);
     }
@@ -96,91 +97,111 @@ const schedulePage = (child: TemplateResult) =>
 
 const loadSchedulePage = () => import('./pages/schedule-page.js');
 
-const ROUTES: Array<RouteConfig> = [
+const forFeature = (feature: Feature, routes: Array<RouteConfig>) =>
+  isFeatureEnabled(feature) ? routes : [];
+
+const createRoutes = (): Array<RouteConfig> => [
   {
     path: '/',
     enter: enter(() => import('./pages/home-page.js')),
     render: () => html`<home-page></home-page>`,
   },
-  {
-    path: '/blog',
-    enter: enter(() => import('./pages/blog-list-page.js')),
-    render: () => html`<blog-list-page></blog-list-page>`,
-  },
-  {
-    path: '/blog/posts/:id',
-    enter: ({ id }) => redirect(`/blog/${id ?? ''}`),
-  },
-  {
-    path: '/blog/:id',
-    name: 'post-page',
-    enter: enter(() => import('./pages/post-page.js')),
-    render: ({ id }) => html`<post-page .postId="${decodeParam(id)}"></post-page>`,
-  },
-  {
-    path: '/schedule/my-schedule',
-    enter: enter(loadSchedulePage, () => import('./pages/schedule/my-schedule.js')),
-    render: () => schedulePage(html`<my-schedule></my-schedule>`),
-  },
-  {
-    path: '/schedule/:id?',
-    enter: (params) => {
-      const sessionId = new URLSearchParams(window.location.search).get('sessionId');
-      if (sessionId) {
-        return redirect(`/sessions/${encodeURIComponent(sessionId)}`);
-      }
-      return enter(loadSchedulePage, () => import('./pages/schedule/schedule-day.js'))(params);
+  ...forFeature('blog', [
+    {
+      path: '/blog',
+      enter: enter(() => import('./pages/blog-list-page.js')),
+      render: () => html`<blog-list-page></blog-list-page>`,
     },
-    render: () => schedulePage(html`<schedule-day .location="${location}"></schedule-day>`),
-  },
-  {
-    path: '/sessions',
-    enter: () => redirect('/schedule'),
-  },
-  {
-    path: '/sessions/:id',
-    name: 'session-page',
-    enter: enter(() => import('./pages/session-page.js')),
-    render: ({ id }) => html`<session-page .sessionId="${decodeParam(id)}"></session-page>`,
-  },
-  {
-    path: '/speakers',
-    enter: enter(() => import('./pages/speakers-page.js')),
-    render: () => html`<speakers-page></speakers-page>`,
-  },
-  {
-    path: '/speakers/:id',
-    name: 'speaker-page',
-    enter: enter(() => import('./pages/speaker-page.js')),
-    render: ({ id }) => html`<speaker-page .speakerId="${decodeParam(id)}"></speaker-page>`,
-  },
-  {
-    path: '/previous-speakers',
-    enter: enter(() => import('./pages/previous-speakers-page.js')),
-    render: () => html`<previous-speakers-page></previous-speakers-page>`,
-  },
-  {
-    path: '/previous-speakers/:id',
-    name: 'previous-speaker-page',
-    enter: enter(() => import('./pages/previous-speaker-page.js')),
-    render: ({ id }) =>
-      html`<previous-speaker-page .speakerId="${decodeParam(id)}"></previous-speaker-page>`,
-  },
-  {
-    path: '/team',
-    enter: enter(() => import('./pages/team-page.js')),
-    render: () => html`<team-page></team-page>`,
-  },
-  {
-    path: '/faq',
-    enter: enter(() => import('./pages/faq-page.js')),
-    render: () => html`<faq-page></faq-page>`,
-  },
-  {
-    path: '/coc',
-    enter: enter(() => import('./pages/coc-page.js')),
-    render: () => html`<coc-page></coc-page>`,
-  },
+    {
+      path: '/blog/posts/:id',
+      enter: ({ id }) => redirect(`/blog/${id ?? ''}`),
+    },
+    {
+      path: '/blog/:id',
+      name: 'post-page',
+      enter: enter(() => import('./pages/post-page.js')),
+      render: ({ id }) => html`<post-page .postId="${decodeParam(id)}"></post-page>`,
+    },
+  ]),
+  // Before `/schedule/:id?`, which would otherwise match `my-schedule` as a day.
+  ...forFeature('mySchedule', [
+    {
+      path: '/schedule/my-schedule',
+      enter: enter(loadSchedulePage, () => import('./pages/schedule/my-schedule.js')),
+      render: () => schedulePage(html`<my-schedule></my-schedule>`),
+    },
+  ]),
+  ...forFeature('schedule', [
+    {
+      path: '/schedule/:id?',
+      enter: (params) => {
+        const sessionId = new URLSearchParams(window.location.search).get('sessionId');
+        if (sessionId) {
+          return redirect(`/sessions/${encodeURIComponent(sessionId)}`);
+        }
+        return enter(loadSchedulePage, () => import('./pages/schedule/schedule-day.js'))(params);
+      },
+      render: () => schedulePage(html`<schedule-day .location="${location}"></schedule-day>`),
+    },
+    {
+      path: '/sessions',
+      enter: () => redirect('/schedule'),
+    },
+    {
+      path: '/sessions/:id',
+      name: 'session-page',
+      enter: enter(() => import('./pages/session-page.js')),
+      render: ({ id }) => html`<session-page .sessionId="${decodeParam(id)}"></session-page>`,
+    },
+  ]),
+  ...forFeature('speakers', [
+    {
+      path: '/speakers',
+      enter: enter(() => import('./pages/speakers-page.js')),
+      render: () => html`<speakers-page></speakers-page>`,
+    },
+    {
+      path: '/speakers/:id',
+      name: 'speaker-page',
+      enter: enter(() => import('./pages/speaker-page.js')),
+      render: ({ id }) => html`<speaker-page .speakerId="${decodeParam(id)}"></speaker-page>`,
+    },
+  ]),
+  ...forFeature('previousSpeakers', [
+    {
+      path: '/previous-speakers',
+      enter: enter(() => import('./pages/previous-speakers-page.js')),
+      render: () => html`<previous-speakers-page></previous-speakers-page>`,
+    },
+    {
+      path: '/previous-speakers/:id',
+      name: 'previous-speaker-page',
+      enter: enter(() => import('./pages/previous-speaker-page.js')),
+      render: ({ id }) =>
+        html`<previous-speaker-page .speakerId="${decodeParam(id)}"></previous-speaker-page>`,
+    },
+  ]),
+  ...forFeature('team', [
+    {
+      path: '/team',
+      enter: enter(() => import('./pages/team-page.js')),
+      render: () => html`<team-page></team-page>`,
+    },
+  ]),
+  ...forFeature('faq', [
+    {
+      path: '/faq',
+      enter: enter(() => import('./pages/faq-page.js')),
+      render: () => html`<faq-page></faq-page>`,
+    },
+  ]),
+  ...forFeature('codeOfConduct', [
+    {
+      path: '/coc',
+      enter: enter(() => import('./pages/coc-page.js')),
+      render: () => html`<coc-page></coc-page>`,
+    },
+  ]),
 ];
 
 const FALLBACK: BaseRouteConfig = {
@@ -189,6 +210,6 @@ const FALLBACK: BaseRouteConfig = {
 };
 
 export const startRouter = (host: ReactiveControllerHost & HTMLElement) => {
-  router = new AppRouter(host, ROUTES, { fallback: FALLBACK });
+  router = new AppRouter(host, createRoutes(), { fallback: FALLBACK });
   return router;
 };

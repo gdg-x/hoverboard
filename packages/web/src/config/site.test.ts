@@ -1,5 +1,34 @@
-import { afterEach, describe, expect, it } from 'vitest';
-import { CONFIG, getConfig } from './site';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { CONFIG, getConfig, navigation } from './site';
+
+describe('navigation', () => {
+  afterEach(() => {
+    vi.doUnmock('./features');
+    vi.resetModules();
+  });
+
+  it('keeps every entry when all features are on', () => {
+    expect(navigation.map(({ route }) => route)).toEqual([
+      'home',
+      'speakers',
+      'schedule',
+      'team',
+      'blog',
+    ]);
+  });
+
+  it('hides entries for features that are off', async () => {
+    vi.resetModules();
+    vi.doMock('./features', async (importOriginal) => ({
+      ...(await importOriginal<typeof import('./features')>()),
+      isFeatureEnabled: (feature: string) => feature !== 'blog',
+    }));
+
+    const { navigation } = await import('./site');
+
+    expect(navigation.map(({ route }) => route)).toEqual(['home', 'speakers', 'schedule', 'team']);
+  });
+});
 
 describe('getConfig', () => {
   afterEach(() => {

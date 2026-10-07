@@ -3,6 +3,7 @@ import '@material/web/button/outlined-button.js';
 import { IntersectionController } from '@lit-labs/observers/intersection-controller.js';
 import { css, html, nothing } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
+import { when } from 'lit/directives/when.js';
 import '../components/home/about-block';
 import '../components/home/about-organizer-block';
 import '../components/hero/hero-block';
@@ -12,6 +13,7 @@ import '../components/home/latest-posts-block';
 import '../components/home/speakers-block';
 import '../components/home/subscribe-block';
 import { firebaseApp } from '../firebase';
+import { isFeatureEnabled } from '../config/features';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
@@ -214,9 +216,10 @@ export class HomePage extends ThemedElement {
   };
 
   private shouldShowForkMeBlock(): boolean {
-    const showForkMeBlock = firebaseApp.options.appId
-      ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
-      : false;
+    const showForkMeBlock =
+      isFeatureEnabled('forkMe') && firebaseApp.options.appId
+        ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
+        : false;
     if (showForkMeBlock) {
       import('../components/home/fork-me-block');
     }
@@ -275,10 +278,15 @@ export class HomePage extends ThemedElement {
               <hoverboard-icon name="movie" slot="icon"></hoverboard-icon>
               ${this.viewHighlights}
             </md-outlined-button>
-            <md-filled-button @click="${this.scrollToTickets}">
-              <hoverboard-icon name="ticket" slot="icon"></hoverboard-icon>
-              ${this.buyTicket}
-            </md-filled-button>
+            ${when(
+              isFeatureEnabled('tickets'),
+              () => html`
+                <md-filled-button class="buy-ticket" @click="${this.scrollToTickets}">
+                  <hoverboard-icon name="ticket" slot="icon"></hoverboard-icon>
+                  ${this.buyTicket}
+                </md-filled-button>
+              `,
+            )}
           </div>
 
           <div class="scroll-down" @click="${this.scrollNextBlock}">
@@ -347,15 +355,18 @@ export class HomePage extends ThemedElement {
       </hero-block>
       ${this.showForkMeBlock ? html`<fork-me-block></fork-me-block>` : nothing}
       <about-block></about-block>
-      <speakers-block></speakers-block>
-      <subscribe-block></subscribe-block>
-      <tickets-block id="tickets-block"></tickets-block>
-      <gallery-block></gallery-block>
+      ${when(isFeatureEnabled('speakers'), () => html`<speakers-block></speakers-block>`)}
+      ${when(isFeatureEnabled('subscribe'), () => html`<subscribe-block></subscribe-block>`)}
+      ${when(
+        isFeatureEnabled('tickets'),
+        () => html`<tickets-block id="tickets-block"></tickets-block>`,
+      )}
+      ${when(isFeatureEnabled('gallery'), () => html`<gallery-block></gallery-block>`)}
       <about-organizer-block></about-organizer-block>
-      <featured-videos></featured-videos>
-      <latest-posts-block></latest-posts-block>
-      <map-block></map-block>
-      <partners-block></partners-block>
+      ${when(isFeatureEnabled('videos'), () => html`<featured-videos></featured-videos>`)}
+      ${when(isFeatureEnabled('blog'), () => html`<latest-posts-block></latest-posts-block>`)}
+      ${when(isFeatureEnabled('map'), () => html`<map-block></map-block>`)}
+      ${when(isFeatureEnabled('partners'), () => html`<partners-block></partners-block>`)}
     `;
   }
 }
