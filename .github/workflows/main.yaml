@@ -26,7 +26,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version-file: package.json
 
       - name: Setup Java (required by the Firestore emulator)
         if: matrix.script-name == 'test'

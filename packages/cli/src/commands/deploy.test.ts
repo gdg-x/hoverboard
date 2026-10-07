@@ -28,7 +28,10 @@ const makeRepo = (): string => {
   const dir = mkdtempSync(join(tmpdir(), 'hoverboard-cli-'));
   dirsToClean.push(dir);
   mkdirSync(join(dir, '.git'));
-  writeFileSync(join(dir, '.nvmrc'), `${process.versions.node.split('.')[0]}\n`);
+  writeFileSync(
+    join(dir, 'package.json'),
+    JSON.stringify({ engines: { node: process.versions.node.split('.')[0] } }),
+  );
   process.env['HOME'] = dir; // isolate from the real firebase-tools configstore
   process.env['GCLOUD_PROJECT'] = 'demo-project';
   vi.spyOn(process, 'cwd').mockReturnValue(dir);
@@ -92,7 +95,7 @@ describe('runDeploy', () => {
 
   it('fails fast when doctor-style checks fail, without prompting', async () => {
     const repo = makeRepo();
-    writeFileSync(join(repo, '.nvmrc'), '1\n'); // no real Node major version is "1"
+    writeFileSync(join(repo, 'package.json'), JSON.stringify({ engines: { node: '1' } })); // no real Node major version is "1"
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
 
     const result = await runDeploy();

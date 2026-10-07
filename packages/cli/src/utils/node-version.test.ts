@@ -16,6 +16,9 @@ const makeTempDir = (): string => {
   return dir;
 };
 
+const writeEngines = (root: string, node: string): void =>
+  writeFileSync(join(root, 'package.json'), JSON.stringify({ engines: { node } }));
+
 describe('findRepoRoot', () => {
   it('finds the ancestor directory containing .git', () => {
     const root = makeTempDir();
@@ -35,21 +38,28 @@ describe('findRepoRoot', () => {
 });
 
 describe('requiredNodeMajorVersion', () => {
-  it('reads the major version from .nvmrc', () => {
+  it('reads the major version from engines.node in package.json', () => {
     const root = makeTempDir();
-    writeFileSync(join(root, '.nvmrc'), '22\n');
+    writeEngines(root, '22');
 
     expect(requiredNodeMajorVersion(root)).toBe(22);
   });
 
-  it('accepts a leading "v" in .nvmrc', () => {
+  it('accepts a range in engines.node', () => {
     const root = makeTempDir();
-    writeFileSync(join(root, '.nvmrc'), 'v18.20.4');
+    writeEngines(root, '>=18.20.4');
 
     expect(requiredNodeMajorVersion(root)).toBe(18);
   });
 
-  it('returns undefined when there is no .nvmrc', () => {
+  it('returns undefined when package.json has no engines.node', () => {
+    const root = makeTempDir();
+    writeFileSync(join(root, 'package.json'), '{}');
+
+    expect(requiredNodeMajorVersion(root)).toBeUndefined();
+  });
+
+  it('returns undefined when there is no package.json', () => {
     expect(requiredNodeMajorVersion(makeTempDir())).toBeUndefined();
   });
 });
@@ -57,9 +67,9 @@ describe('requiredNodeMajorVersion', () => {
 describe('checkNodeVersion', () => {
   const runningMajor = Number(process.versions.node.split('.')[0]);
 
-  it('passes when the running major version matches .nvmrc', () => {
+  it('passes when the running major version matches engines.node', () => {
     const root = makeTempDir();
-    writeFileSync(join(root, '.nvmrc'), `${runningMajor}\n`);
+    writeEngines(root, String(runningMajor));
 
     const result = checkNodeVersion(root);
 
@@ -67,14 +77,14 @@ describe('checkNodeVersion', () => {
     expect(result.message).toContain(String(runningMajor));
   });
 
-  it('fails when the running major version does not match .nvmrc', () => {
+  it('fails when the running major version does not match engines.node', () => {
     const root = makeTempDir();
-    writeFileSync(join(root, '.nvmrc'), `${runningMajor + 1}\n`);
+    writeEngines(root, String(runningMajor + 1));
 
     const result = checkNodeVersion(root);
 
     expect(result.ok).toBe(false);
-    expect(result.message).toContain('nvm use');
+    expect(result.message).toContain(`nvm install ${runningMajor + 1}`);
   });
 
   it('fails when the required version cannot be determined', () => {
