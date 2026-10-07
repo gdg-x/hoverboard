@@ -83,21 +83,40 @@ describe('saveData', () => {
   });
 
   it('sets a single document for a collection/doc path', async () => {
-    await saveData({ name: 'Yonatan' }, 'speakers/yonatan_levin');
+    await saveData({ 101: true }, 'featuredSessions/user');
 
-    expect(collectionMock).toHaveBeenCalledWith('speakers');
-    expect(docMock).toHaveBeenCalledWith('yonatan_levin');
-    expect(setMock).toHaveBeenCalledWith({ name: 'Yonatan' });
+    expect(collectionMock).toHaveBeenCalledWith('featuredSessions');
+    expect(docMock).toHaveBeenCalledWith('user');
+    expect(setMock).toHaveBeenCalledWith({ 101: true });
   });
 
   it('batch-sets every document for a collection-only path', async () => {
-    await saveData({ a: { order: 0 }, b: { order: 1 } }, 'speakers');
+    await saveData({ a: { 101: true }, b: { 102: true } }, 'featuredSessions');
 
     expect(batchMock).toHaveBeenCalled();
-    expect(collectionMock).toHaveBeenCalledWith('speakers');
+    expect(collectionMock).toHaveBeenCalledWith('featuredSessions');
     expect(docMock).toHaveBeenCalledWith('a');
     expect(docMock).toHaveBeenCalledWith('b');
     expect(setMock).toHaveBeenCalledTimes(2);
     expect(commitMock).toHaveBeenCalled();
+  });
+
+  it('rejects an invalid content document without writing it', async () => {
+    await expect(saveData({ name: 'Yonatan' }, 'speakers/yonatan_levin')).rejects.toThrow(
+      'Invalid speakers/yonatan_levin',
+    );
+
+    expect(setMock).not.toHaveBeenCalled();
+  });
+
+  it('writes nothing from a collection when any document is invalid', async () => {
+    const valid = { title: 'Keynote', description: 'Opening talk' };
+
+    await expect(
+      saveData({ a: valid, b: { title: 'No description' } }, 'sessions'),
+    ).rejects.toThrow('Invalid sessions/b');
+
+    expect(setMock).not.toHaveBeenCalled();
+    expect(commitMock).not.toHaveBeenCalled();
   });
 });

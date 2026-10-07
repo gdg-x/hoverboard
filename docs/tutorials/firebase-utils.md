@@ -8,6 +8,12 @@ By default all of these scripts run against the local [Firestore emulator](https
 
 ⚠️ The emulator-targeted scripts connect to an already-running Firestore emulator — make sure `npm start` or `./hbd emulators` is running in another terminal first. They automatically target the same project id your emulator is using (from `firebase use`), so data written by `firestore-init`/`firestore-copy` always shows up in the Emulator UI. Set `GCLOUD_PROJECT` to override this if needed.
 
+## Content model
+
+Event content (speakers, sessions, schedule, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/content.schema.json`](../../packages/storage/schemas/content.schema.json). `firestore-init` and `firestore-copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked.
+
+Speakers and sessions have optional `source` and `externalId` fields for data imported from another tool, so a later import can update them instead of adding duplicates.
+
 ## Seed the emulator with fixture data
 
 Import the JSON fixtures in `docs/default-firebase-data.json` into the running Firestore emulator:

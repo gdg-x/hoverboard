@@ -1,3 +1,4 @@
+import { validateContent } from '../../lib/content.js';
 import { firestore } from '../../lib/firestore.js';
 import data from '../../../../../docs/default-firebase-data.json';
 
@@ -11,6 +12,7 @@ export const importBlog = () => {
   const batch = firestore.batch();
 
   Object.keys(blog).forEach((docId: string) => {
+    validateContent('blog', docId, blog[docId]);
     batch.set(firestore.collection('blog').doc(docId), blog[docId]);
   });
 

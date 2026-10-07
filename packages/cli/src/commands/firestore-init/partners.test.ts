@@ -22,7 +22,11 @@ vi.mock('../../lib/firestore.js', () => ({
 vi.mock('../../../../../docs/default-firebase-data.json', () => ({
   default: {
     partners: [
-      { order: 0, title: 'Template Creator', items: [{ order: 0, name: 'GDG Lviv' }] },
+      {
+        order: 0,
+        title: 'Template Creator',
+        items: [{ order: 0, name: 'GDG Lviv', logoUrl: '/logo.svg', url: 'https://example.com' }],
+      },
       null,
     ],
   },
@@ -47,7 +51,12 @@ describe('importPartners', () => {
     });
     expect(itemsCollectionMock).toHaveBeenCalledWith('items');
     expect(itemDocMock).toHaveBeenCalledWith('000');
-    expect(setMock).toHaveBeenCalledWith('items/000', { order: 0, name: 'GDG Lviv' });
+    expect(setMock).toHaveBeenCalledWith('items/000', {
+      order: 0,
+      name: 'GDG Lviv',
+      logoUrl: '/logo.svg',
+      url: 'https://example.com',
+    });
     expect(warnSpy).toHaveBeenCalledWith('Missing partner 1');
   });
 });

@@ -1,3 +1,5 @@
+import data from '../../../../../docs/default-firebase-data.json';
+import { validateSeedData } from '../../lib/content.js';
 import { importBlog } from './blog.js';
 import { importConfig } from './config.js';
 import { importGallery } from './gallery.js';
@@ -11,6 +13,8 @@ import { importTickets } from './tickets.js';
 import { importVideos } from './videos.js';
 
 export const runFirestoreInit = async (): Promise<void> => {
+  // Fail before anything is written, rather than part way through.
+  validateSeedData(data);
   await importConfig(); // Should always be first
   await importBlog();
   await importGallery();

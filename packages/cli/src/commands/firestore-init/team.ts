@@ -1,3 +1,4 @@
+import { validateContent } from '../../lib/content.js';
 import { firestore } from '../../lib/firestore.js';
 import data from '../../../../../docs/default-firebase-data.json';
 
@@ -13,11 +14,12 @@ export const importTeam = () => {
   Object.keys(teams).forEach((teamId) => {
     const team = teams[Number(teamId)];
     if (team) {
-      batch.set(firestore.collection('team').doc(teamId), {
-        title: team.title,
-      });
+      const teamDoc = { title: team.title };
+      validateContent('team', teamId, teamDoc);
+      batch.set(firestore.collection('team').doc(teamId), teamDoc);
 
       team.members.forEach((member, id) => {
+        validateContent(`team/${teamId}/members`, `${id}`, member);
         batch.set(
           firestore.collection('team').doc(`${teamId}`).collection('members').doc(`${id}`),
           member,

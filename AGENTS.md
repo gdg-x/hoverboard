@@ -9,7 +9,7 @@ Hoverboard is a conference website template. Organizers fork it, configure it an
 | `packages/web`              | The web app: Lit components, Redux Toolkit store, Vite build, Workbox service worker         |
 | `packages/server/functions` | Cloud Functions (v2 API). Must stay self-contained, because `firebase.json` deploys it alone |
 | `packages/cli`              | The `hbd` CLI (`./hbd <command>`), run with `tsx`, no build step                             |
-| `packages/storage`          | Firestore and Storage security rules, indexes, and the rules tests                           |
+| `packages/storage`          | Firestore and Storage security rules, indexes, the content schema and the rules tests        |
 | `config/`                   | Build-time site config (`development.json`, `production.json`), selected by `BUILD_ENV`      |
 | `packages/web/public/data/` | Site text and settings (`resources.json`, `settings.json`), FAQ, code of conduct, blog posts |
 | `docs/`                     | Tutorials and the release policy                                                             |
