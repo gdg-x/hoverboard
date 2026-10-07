@@ -8,10 +8,10 @@ Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#bi
      npx firebase login
    ```
 
-1. Select the Firebase project to deploy to
+1. Set the Firebase project to deploy to as `firebase.projectId` in `packages/config/site.json`
 
-   ```console
-     npx firebase use <projectId>
+   ```json
+     "firebase": { "projectId": "my-devfest" }
    ```
 
 1. Build and deploy with `packages/config/site.json`
@@ -20,7 +20,7 @@ Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#bi
      ./hbd deploy
    ```
 
-   `./hbd deploy` checks your Node.js version and selected Firebase project first, prints which project it's about to deploy to, and asks for confirmation before building and deploying. Run `./hbd deploy --yes` to skip the confirmation prompt, e.g. in a scripted context.
+   `./hbd deploy` checks your Node.js version and Firebase project first, prints which project it's about to deploy to, and asks for confirmation before building and deploying. Run `./hbd deploy --yes` to skip the confirmation prompt, e.g. in a scripted context.
 
    The URL to your live site is listed in the output.
 
@@ -37,13 +37,7 @@ To run the two `deploy` actions on your instance, you need to do a couple of sma
 
 ### Deploying to Firebase with Github Actions
 
-Make sure you are acting on the correct Firebase project.
-
-```console
-  npx firebase use <projectId>
-```
-
-In [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) and [`deploy.yaml`](.github/workflows/deploy.yaml), replace `hoverboard-master` with the Firebase Project ID you'll be deploying to.
+Both workflows deploy to `firebase.projectId` from `packages/config/site.json`. You don't need to edit them.
 
 Both workflows sign in to Google Cloud with Workload Identity Federation. GitHub gives each run a short-lived token, so there is no service account key to store or rotate. Only workflows in your repository can use it. Set it up once:
 

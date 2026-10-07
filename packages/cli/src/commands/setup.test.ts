@@ -1,4 +1,4 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -37,10 +37,10 @@ const makeRepo = (): string => {
 };
 
 describe('runSetup', () => {
-  it('logs in and prompts to select a project when none is selected', async () => {
+  it('logs in and asks for a project ID when the site config has none', async () => {
     const repo = makeRepo();
     delete process.env['GCLOUD_PROJECT'];
-    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => undefined);
 
     await runSetup();
 
@@ -49,26 +49,25 @@ describe('runSetup', () => {
       ['login'],
       repo,
     );
-    expect(runCommandMock).toHaveBeenCalledWith(
-      '/repo/node_modules/.bin/firebase',
-      ['use', '--add'],
-      repo,
-    );
+    expect(logSpy.mock.calls.flat().join('\n')).toContain('Set firebase.projectId');
+    expect(existsSync(join(repo, '.firebaserc'))).toBe(false);
   });
 
-  it('skips project selection when one is already resolved', async () => {
-    makeRepo();
-    process.env['GCLOUD_PROJECT'] = 'demo-project';
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+  it('writes .firebaserc from the site config', async () => {
+    const repo = makeRepo();
+    delete process.env['GCLOUD_PROJECT'];
+    mkdirSync(join(repo, 'packages/config'), { recursive: true });
+    writeFileSync(
+      join(repo, 'packages/config/site.json'),
+      JSON.stringify({ firebase: { projectId: 'my-devfest' } }),
+    );
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
 
     await runSetup();
 
-    expect(runCommandMock).not.toHaveBeenCalledWith(
-      expect.anything(),
-      ['use', '--add'],
-      expect.anything(),
-    );
-    expect(logSpy.mock.calls.flat().join('\n')).toContain('already selected');
+    expect(JSON.parse(readFileSync(join(repo, '.firebaserc'), 'utf8'))).toEqual({
+      projects: { default: 'my-devfest' },
+    });
   });
 
   it('bails out before logging in when the Node.js version is wrong', async () => {

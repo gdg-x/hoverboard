@@ -13,7 +13,7 @@ export const checkBilling = async (
   projectId: string | undefined,
 ): Promise<DoctorCheckResult> => {
   if (!repoRoot || !projectId) {
-    return { name, ok: true, warning: true, message: 'Skipped, no Firebase project selected.' };
+    return { name, ok: true, warning: true, message: 'Skipped, no Firebase project.' };
   }
 
   try {

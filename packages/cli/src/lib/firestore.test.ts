@@ -95,7 +95,9 @@ describe('lib/firestore (production target)', () => {
     delete process.env['GCLOUD_PROJECT'];
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
 
-    await expect(import('./firestore.js')).rejects.toThrow('No Firebase project is selected');
+    await expect(import('./firestore.js')).rejects.toThrow(
+      'No Firebase project. Set firebase.projectId',
+    );
     expect(initializeApp).not.toHaveBeenCalled();
   });
 

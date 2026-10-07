@@ -21,4 +21,4 @@ jobs:
         with:
           workload_identity_provider: '${{ vars.WIF_PROVIDER }}'
           service_account: '${{ vars.DEPLOY_SERVICE_ACCOUNT }}'
-      - run: npx firebase deploy --project hoverboard-master --non-interactive
+      - run: npx firebase deploy --project "$(jq -r .firebase.projectId packages/config/site.json)" --non-interactive

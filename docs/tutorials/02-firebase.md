@@ -9,8 +9,8 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 
 1. Click _Add Firebase to your web app_.
 
-1. Select your Firebase project `npx firebase use <projectId>`. Only deploys and `FIRESTORE_TARGET=production` commands use it. Local development always uses the `demo-hoverboard` project on the emulators.
-   - _Tip: `./hbd setup` automates login and project selection for you._
+1. Set your Firebase project ID as `firebase.projectId` in `packages/config/site.json`. Only deploys and `FIRESTORE_TARGET=production` commands use it. Local development always uses the `demo-hoverboard` project on the emulators.
+   - _Tip: `./hbd setup` logs you in and writes `.firebaserc` from it, so plain `npx firebase` commands use the same project._
 
 1. Seed data for local development
    - Local development runs against the [Firestore emulator](https://firebase.google.com/docs/emulator-suite) instead of your live project, so no Firestore database setup is required for this
@@ -19,7 +19,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 
 1. [Optional] Import initial data into the **production** Firebase Database
    - Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
-   - The command signs in with your Firebase CLI login (`npx firebase login`) and writes to the selected project (`npx firebase use`). No service account key is needed.
+   - The command signs in with your Firebase CLI login (`npx firebase login`) and writes to the project in `site.json`. No service account key is needed.
    - [Optional] If you need to clear out all of your data first, run `npx firebase firestore:delete --recursive --all-collections`
    - Run `FIRESTORE_TARGET=production ./hbd firestore-init`
 

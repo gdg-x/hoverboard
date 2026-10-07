@@ -29,8 +29,10 @@ jobs:
           credentials=$(jq -c . "$GOOGLE_APPLICATION_CREDENTIALS")
           echo "::add-mask::$credentials"
           echo "json=$credentials" >> "$GITHUB_OUTPUT"
+      - id: project
+        run: echo "id=$(jq -r .firebase.projectId packages/config/site.json)" >> "$GITHUB_OUTPUT"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          projectId: hoverboard-master
+          projectId: '${{ steps.project.outputs.id }}'
           firebaseServiceAccount: '${{ steps.credentials.outputs.json }}'

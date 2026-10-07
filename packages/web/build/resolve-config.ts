@@ -6,7 +6,8 @@ import { deepMerge } from '../src/config/merge';
 import { THEMES, type ThemeName } from '../src/themes/index';
 import type { Theme } from '../src/themes/tokens';
 
-type Site = typeof import('../defaults/site.json') & typeof import('../../config/site.json');
+type Site = typeof import('../defaults/site.json') &
+  typeof import('../../config/site.json') & { url: string };
 type Resources = typeof import('../defaults/content/resources.json') &
   typeof import('../../config/content/resources.json');
 
@@ -166,8 +167,9 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
     ...(siteValid && resourcesValid ? crossFileErrors(site, resources, paths.public) : []),
   ];
 
-  if (siteValid && !isUrl(site.image)) {
-    site.image = `${site.url}${site.image}`;
+  if (siteValid) {
+    site.url ??= `https://${site.firebase.projectId}.web.app/`;
+    if (!isUrl(site.image)) site.image = `${site.url}${site.image}`;
   }
 
   const { name, colors } = site.theme as { name: string; colors?: Partial<Theme> };

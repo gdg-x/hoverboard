@@ -9,7 +9,7 @@ export interface DeployOptions {
 }
 
 /**
- * Builds and deploys Hoverboard to the currently selected Firebase project,
+ * Builds and deploys Hoverboard to the Firebase project in the site config,
  * asking for confirmation first since deploying to the wrong project is the
  * costliest mistake this CLI can help prevent.
  */
@@ -20,12 +20,11 @@ export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> =
     console.log(`${check.ok ? '✔' : '✘'} ${check.name}: ${check.message}`);
   }
 
-  if (!repoRoot || checks.some((check) => !check.ok)) {
+  const projectId = repoRoot && resolveFirebaseProjectId(repoRoot);
+  if (!repoRoot || !projectId || checks.some((check) => !check.ok)) {
     console.log('\nFix the issues above before deploying (run `hoverboard doctor` for details).');
     return false;
   }
-
-  const projectId = resolveFirebaseProjectId(repoRoot);
 
   if (!options.yes) {
     const proceed = await confirm(`\nDeploy Hoverboard to Firebase project "${projectId}"?`);
@@ -42,8 +41,11 @@ export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> =
   }
 
   console.log('\nDeploying...');
-  const exitCode = runCommand(resolveFirebaseBin(repoRoot), ['deploy'], repoRoot, {
-    NODE_ENV: 'production',
-  });
+  const exitCode = runCommand(
+    resolveFirebaseBin(repoRoot),
+    ['deploy', '--project', projectId],
+    repoRoot,
+    { NODE_ENV: 'production' },
+  );
   return exitCode === 0;
 };

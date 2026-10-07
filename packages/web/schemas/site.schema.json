@@ -5,13 +5,25 @@
   "description": "packages/config/site.json. Only the values a site changes need to be set. Defaults come from packages/web/defaults/site.json.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["url", "shortName", "organizer", "event", "social"],
+  "required": ["firebase", "shortName", "organizer", "event", "social"],
   "properties": {
     "$schema": {
       "type": "string"
     },
+    "firebase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projectId"],
+      "properties": {
+        "projectId": {
+          "description": "The Firebase project the site deploys to.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{4,28}[a-z0-9]$"
+        }
+      }
+    },
     "url": {
-      "description": "The site's canonical URL, ending with a slash.",
+      "description": "The site's canonical URL, ending with a slash. Defaults to https://<firebase.projectId>.web.app/. Set it for a custom domain.",
       "type": "string",
       "pattern": "^https?://.+/$"
     },

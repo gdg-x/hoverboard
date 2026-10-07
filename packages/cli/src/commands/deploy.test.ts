@@ -52,7 +52,7 @@ describe('runDeploy', () => {
     expect(runCommandMock).toHaveBeenNthCalledWith(
       2,
       '/repo/node_modules/.bin/firebase',
-      ['deploy'],
+      ['deploy', '--project', 'demo-project'],
       repo,
       { NODE_ENV: 'production' },
     );

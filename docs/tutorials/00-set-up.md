@@ -72,8 +72,8 @@ The diagram below is a brief summary of the directories within the project.
 
 1. Run locally
    - `npm start`
-1. Select the Firebase project to deploy to
-   - `npx firebase use <projectid>`.
+1. Set the Firebase project to deploy to
+   - `firebase.projectId` in `packages/config/site.json`.
 1. Deploy
    - `./hbd deploy`
 
