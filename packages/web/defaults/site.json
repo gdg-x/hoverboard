@@ -109,5 +109,26 @@
       },
       "fontColor": "#424242"
     }
+  },
+  "features": {
+    "blog": true,
+    "codeOfConduct": true,
+    "faq": true,
+    "feedback": true,
+    "forkMe": false,
+    "gallery": true,
+    "imageOptimization": true,
+    "mailchimp": true,
+    "map": true,
+    "mySchedule": true,
+    "notifications": true,
+    "partners": true,
+    "previousSpeakers": true,
+    "schedule": true,
+    "speakers": true,
+    "subscribe": true,
+    "team": true,
+    "tickets": true,
+    "videos": true
   }
 }

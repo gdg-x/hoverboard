@@ -2,18 +2,12 @@ import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
 import { IntersectionController } from '@lit-labs/observers/intersection-controller.js';
 import { css, html, nothing } from 'lit';
-import { customElement, query, state } from 'lit/decorators.js';
-import { when } from 'lit/directives/when.js';
+import { customElement, query } from 'lit/decorators.js';
 import '../components/home/about-block';
 import '../components/home/about-organizer-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
 import '../components/shared/hoverboard-icon';
-import '../components/home/latest-posts-block';
-import '../components/home/speakers-block';
-import '../components/home/subscribe-block';
-import { firebaseApp } from '../firebase';
-import { isFeatureEnabled } from '../config/features';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
@@ -24,7 +18,6 @@ import {
   description,
   heroSettings,
   location,
-  showForkMeBlockForProjectIds,
   title,
   viewHighlights,
 } from '../config/site';
@@ -32,13 +25,27 @@ import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
 import { ThemedElement } from '../components/themed-element';
 
+// `__HB_FEATURES__.<name>` is a literal in the build, so blocks of disabled features are not bundled.
+if (__HB_FEATURES__.forkMe) void import('../components/home/fork-me-block');
+if (__HB_FEATURES__.speakers) void import('../components/home/speakers-block');
+if (__HB_FEATURES__.subscribe) void import('../components/home/subscribe-block');
+if (__HB_FEATURES__.blog) void import('../components/home/latest-posts-block');
+
 // Below-the-fold blocks load when they are about to scroll into view.
 const lazyBlocks = {
-  'tickets-block': () => import('../components/home/tickets-block'),
-  'gallery-block': () => import('../components/home/gallery-block'),
-  'featured-videos': () => import('../components/home/featured-videos'),
-  'map-block': () => import('../components/home/map-block'),
-  'partners-block': () => import('../components/home/partners-block'),
+  ...(__HB_FEATURES__.tickets && {
+    'tickets-block': () => import('../components/home/tickets-block'),
+  }),
+  ...(__HB_FEATURES__.gallery && {
+    'gallery-block': () => import('../components/home/gallery-block'),
+  }),
+  ...(__HB_FEATURES__.videos && {
+    'featured-videos': () => import('../components/home/featured-videos'),
+  }),
+  ...(__HB_FEATURES__.map && { 'map-block': () => import('../components/home/map-block') }),
+  ...(__HB_FEATURES__.partners && {
+    'partners-block': () => import('../components/home/partners-block'),
+  }),
 };
 type LazyBlock = keyof typeof lazyBlocks;
 
@@ -190,9 +197,6 @@ export class HomePage extends ThemedElement {
   @query('#tickets-block')
   private accessor ticketsBlock!: HTMLElement;
 
-  @state()
-  private accessor showForkMeBlock: boolean = false;
-
   private playVideo = () => {
     openVideoDialog({
       title: this.aboutBlock.callToAction.howItWas.label,
@@ -202,7 +206,7 @@ export class HomePage extends ThemedElement {
 
   private scrollToTickets = async () => {
     // The block has no height until it is defined, so load it before scrolling.
-    await lazyBlocks['tickets-block']();
+    await lazyBlocks['tickets-block']?.();
     const element = this.ticketsBlock;
     if (element) {
       scrollToElement(element);
@@ -215,21 +219,9 @@ export class HomePage extends ThemedElement {
     scrollToElement(this.hero, POSITION.BOTTOM);
   };
 
-  private shouldShowForkMeBlock(): boolean {
-    const showForkMeBlock =
-      isFeatureEnabled('forkMe') && firebaseApp.options.appId
-        ? showForkMeBlockForProjectIds.includes(firebaseApp.options.appId)
-        : false;
-    if (showForkMeBlock) {
-      import('../components/home/fork-me-block');
-    }
-    return showForkMeBlock;
-  }
-
   override connectedCallback() {
     super.connectedCallback();
     updateMetadata(title, description, INCLUDE_SITE_TITLE.NO);
-    this.showForkMeBlock = this.shouldShowForkMeBlock();
   }
 
   override firstUpdated() {
@@ -278,15 +270,16 @@ export class HomePage extends ThemedElement {
               <hoverboard-icon name="movie" slot="icon"></hoverboard-icon>
               ${this.viewHighlights}
             </md-outlined-button>
-            ${when(
-              isFeatureEnabled('tickets'),
-              () => html`
-                <md-filled-button class="buy-ticket" @click="${this.scrollToTickets}">
-                  <hoverboard-icon name="ticket" slot="icon"></hoverboard-icon>
-                  ${this.buyTicket}
-                </md-filled-button>
-              `,
-            )}
+            ${
+              __HB_FEATURES__.tickets
+                ? html`
+                    <md-filled-button class="buy-ticket" @click="${this.scrollToTickets}">
+                      <hoverboard-icon name="ticket" slot="icon"></hoverboard-icon>
+                      ${this.buyTicket}
+                    </md-filled-button>
+                  `
+                : nothing
+            }
           </div>
 
           <div class="scroll-down" @click="${this.scrollNextBlock}">
@@ -353,20 +346,19 @@ export class HomePage extends ThemedElement {
           </div>
         </div>
       </hero-block>
-      ${this.showForkMeBlock ? html`<fork-me-block></fork-me-block>` : nothing}
+      ${__HB_FEATURES__.forkMe ? html`<fork-me-block></fork-me-block>` : nothing}
       <about-block></about-block>
-      ${when(isFeatureEnabled('speakers'), () => html`<speakers-block></speakers-block>`)}
-      ${when(isFeatureEnabled('subscribe'), () => html`<subscribe-block></subscribe-block>`)}
-      ${when(
-        isFeatureEnabled('tickets'),
-        () => html`<tickets-block id="tickets-block"></tickets-block>`,
-      )}
-      ${when(isFeatureEnabled('gallery'), () => html`<gallery-block></gallery-block>`)}
+      ${__HB_FEATURES__.speakers ? html`<speakers-block></speakers-block>` : nothing}
+      ${__HB_FEATURES__.subscribe ? html`<subscribe-block></subscribe-block>` : nothing}
+      ${
+        __HB_FEATURES__.tickets ? html`<tickets-block id="tickets-block"></tickets-block>` : nothing
+      }
+      ${__HB_FEATURES__.gallery ? html`<gallery-block></gallery-block>` : nothing}
       <about-organizer-block></about-organizer-block>
-      ${when(isFeatureEnabled('videos'), () => html`<featured-videos></featured-videos>`)}
-      ${when(isFeatureEnabled('blog'), () => html`<latest-posts-block></latest-posts-block>`)}
-      ${when(isFeatureEnabled('map'), () => html`<map-block></map-block>`)}
-      ${when(isFeatureEnabled('partners'), () => html`<partners-block></partners-block>`)}
+      ${__HB_FEATURES__.videos ? html`<featured-videos></featured-videos>` : nothing}
+      ${__HB_FEATURES__.blog ? html`<latest-posts-block></latest-posts-block>` : nothing}
+      ${__HB_FEATURES__.map ? html`<map-block></map-block>` : nothing}
+      ${__HB_FEATURES__.partners ? html`<partners-block></partners-block>` : nothing}
     `;
   }
 }

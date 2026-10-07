@@ -62,6 +62,8 @@ export default [
         ...globals.browser,
         ...globals.es6,
         ServiceWorkerGlobalScope: true,
+        // Feature flags, replaced at build time by packages/web/build/vite-plugin-site.ts
+        __HB_FEATURES__: 'readonly',
       },
     },
     plugins: {

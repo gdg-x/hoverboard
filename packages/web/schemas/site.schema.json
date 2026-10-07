@@ -5,9 +5,11 @@
   "description": "packages/config/site.json. Only the values a site changes need to be set. Defaults come from packages/web/defaults/site.json.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["url", "shortName", "organizer", "event", "social", "integrations", "webapp"],
+  "required": ["url", "shortName", "organizer", "event", "social", "webapp"],
   "properties": {
-    "$schema": { "type": "string" },
+    "$schema": {
+      "type": "string"
+    },
     "url": {
       "description": "The site's canonical URL, ending with a slash.",
       "type": "string",
@@ -33,11 +35,24 @@
       "additionalProperties": false,
       "required": ["name", "email"],
       "properties": {
-        "name": { "type": "string", "minLength": 1 },
-        "url": { "$ref": "#/$defs/url" },
-        "blog": { "$ref": "#/$defs/url" },
-        "email": { "type": "string", "pattern": "^[^@\\s]+@[^@\\s]+$" },
-        "twitter": { "description": "A handle, without the @.", "type": "string" }
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "$ref": "#/$defs/url"
+        },
+        "blog": {
+          "$ref": "#/$defs/url"
+        },
+        "email": {
+          "type": "string",
+          "pattern": "^[^@\\s]+@[^@\\s]+$"
+        },
+        "twitter": {
+          "description": "A handle, without the @.",
+          "type": "string"
+        }
       }
     },
     "event": {
@@ -45,26 +60,46 @@
       "additionalProperties": false,
       "required": ["startDate", "endDate", "location"],
       "properties": {
-        "startDate": { "$ref": "#/$defs/date" },
-        "endDate": { "$ref": "#/$defs/date" },
+        "startDate": {
+          "$ref": "#/$defs/date"
+        },
+        "endDate": {
+          "$ref": "#/$defs/date"
+        },
         "location": {
           "type": "object",
           "additionalProperties": false,
           "required": ["name", "city", "short", "address", "pointer", "mapCenter"],
           "properties": {
-            "name": { "type": "string" },
-            "city": { "type": "string" },
-            "short": { "type": "string" },
-            "address": { "type": "string" },
+            "name": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "short": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
             "pointer": {
               "description": "The map marker.",
               "type": "object",
               "additionalProperties": false,
               "required": ["latitude", "longitude", "zoom"],
               "properties": {
-                "latitude": { "$ref": "#/$defs/latitude" },
-                "longitude": { "$ref": "#/$defs/longitude" },
-                "zoom": { "type": "integer", "minimum": 0, "maximum": 22 }
+                "latitude": {
+                  "$ref": "#/$defs/latitude"
+                },
+                "longitude": {
+                  "$ref": "#/$defs/longitude"
+                },
+                "zoom": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 22
+                }
               }
             },
             "mapCenter": {
@@ -72,8 +107,12 @@
               "additionalProperties": false,
               "required": ["latitude", "longitude"],
               "properties": {
-                "latitude": { "$ref": "#/$defs/latitude" },
-                "longitude": { "$ref": "#/$defs/longitude" }
+                "latitude": {
+                  "$ref": "#/$defs/latitude"
+                },
+                "longitude": {
+                  "$ref": "#/$defs/longitude"
+                }
               }
             }
           }
@@ -95,7 +134,11 @@
       "additionalProperties": false,
       "required": ["hashtag", "follow"],
       "properties": {
-        "hashtag": { "description": "Without the #.", "type": "string", "pattern": "^[^#\\s]+$" },
+        "hashtag": {
+          "description": "Without the #.",
+          "type": "string",
+          "pattern": "^[^#\\s]+$"
+        },
         "follow": {
           "type": "array",
           "items": {
@@ -103,8 +146,13 @@
             "additionalProperties": false,
             "required": ["name", "url"],
             "properties": {
-              "name": { "description": "The icon name, for example twitter.", "type": "string" },
-              "url": { "$ref": "#/$defs/url" }
+              "name": {
+                "description": "The icon name, for example twitter.",
+                "type": "string"
+              },
+              "url": {
+                "$ref": "#/$defs/url"
+              }
             }
           }
         }
@@ -118,7 +166,9 @@
           "description": "Sign-in providers, in the order they are shown.",
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["google", "facebook", "twitter"] }
+          "items": {
+            "enum": ["google", "facebook", "twitter"]
+          }
         }
       }
     },
@@ -139,10 +189,10 @@
     "integrations": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["googleMapsApiKey"],
+      "required": [],
       "properties": {
         "googleMapsApiKey": {
-          "description": "A browser key, restricted by HTTP referrer to the site's domains.",
+          "description": "A browser key, restricted by HTTP referrer to the site's domains. Required when the map feature is on.",
           "type": "string"
         }
       }
@@ -152,8 +202,12 @@
       "additionalProperties": false,
       "required": ["themeColor", "backgroundColor"],
       "properties": {
-        "themeColor": { "$ref": "#/$defs/color" },
-        "backgroundColor": { "$ref": "#/$defs/color" }
+        "themeColor": {
+          "$ref": "#/$defs/color"
+        },
+        "backgroundColor": {
+          "$ref": "#/$defs/color"
+        }
       }
     },
     "dateFormat": {
@@ -161,7 +215,10 @@
       "additionalProperties": false,
       "required": ["locale"],
       "properties": {
-        "locale": { "description": "A BCP 47 language tag, for example en-US.", "type": "string" }
+        "locale": {
+          "description": "A BCP 47 language tag, for example en-US.",
+          "type": "string"
+        }
       }
     },
     "navigation": {
@@ -171,9 +228,17 @@
         "additionalProperties": false,
         "required": ["route", "permalink", "label"],
         "properties": {
-          "route": { "description": "home, or a feature name.", "type": "string" },
-          "permalink": { "type": "string", "pattern": "^/" },
-          "label": { "type": "string" }
+          "route": {
+            "description": "home, or a feature name.",
+            "type": "string"
+          },
+          "permalink": {
+            "type": "string",
+            "pattern": "^/"
+          },
+          "label": {
+            "type": "string"
+          }
         }
       }
     },
@@ -188,36 +253,128 @@
           "additionalProperties": false,
           "required": ["description", "background", "fontColor"],
           "properties": {
-            "description": { "type": "string" },
-            "background": { "$ref": "#/$defs/heroBackground" },
-            "fontColor": { "$ref": "#/$defs/color" }
+            "description": {
+              "type": "string"
+            },
+            "background": {
+              "$ref": "#/$defs/heroBackground"
+            },
+            "fontColor": {
+              "$ref": "#/$defs/color"
+            }
           }
         },
-        "blog": { "$ref": "#/$defs/hero" },
-        "speakers": { "$ref": "#/$defs/hero" },
-        "previousSpeakers": { "$ref": "#/$defs/hero" },
-        "schedule": { "$ref": "#/$defs/hero" },
-        "team": { "$ref": "#/$defs/hero" },
-        "faq": { "$ref": "#/$defs/hero" },
-        "coc": { "$ref": "#/$defs/hero" },
-        "notFound": { "$ref": "#/$defs/hero" }
+        "blog": {
+          "$ref": "#/$defs/hero"
+        },
+        "speakers": {
+          "$ref": "#/$defs/hero"
+        },
+        "previousSpeakers": {
+          "$ref": "#/$defs/hero"
+        },
+        "schedule": {
+          "$ref": "#/$defs/hero"
+        },
+        "team": {
+          "$ref": "#/$defs/hero"
+        },
+        "faq": {
+          "$ref": "#/$defs/hero"
+        },
+        "coc": {
+          "$ref": "#/$defs/hero"
+        },
+        "notFound": {
+          "$ref": "#/$defs/hero"
+        }
       }
     },
-    "showForkMeBlockForProjectIds": {
-      "description": "Firebase app IDs that show the fork me block on the home page.",
-      "type": "array",
-      "items": { "type": "string" }
+    "features": {
+      "description": "Turns site features on or off. Every feature is on by default, except forkMe.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "blog": {
+          "type": "boolean"
+        },
+        "codeOfConduct": {
+          "type": "boolean"
+        },
+        "faq": {
+          "type": "boolean"
+        },
+        "feedback": {
+          "type": "boolean"
+        },
+        "forkMe": {
+          "type": "boolean"
+        },
+        "gallery": {
+          "type": "boolean"
+        },
+        "imageOptimization": {
+          "type": "boolean"
+        },
+        "mailchimp": {
+          "type": "boolean"
+        },
+        "map": {
+          "type": "boolean"
+        },
+        "mySchedule": {
+          "type": "boolean"
+        },
+        "notifications": {
+          "type": "boolean"
+        },
+        "partners": {
+          "type": "boolean"
+        },
+        "previousSpeakers": {
+          "type": "boolean"
+        },
+        "schedule": {
+          "type": "boolean"
+        },
+        "speakers": {
+          "type": "boolean"
+        },
+        "subscribe": {
+          "type": "boolean"
+        },
+        "team": {
+          "type": "boolean"
+        },
+        "tickets": {
+          "type": "boolean"
+        },
+        "videos": {
+          "type": "boolean"
+        }
+      }
     }
   },
   "$defs": {
-    "url": { "type": "string", "pattern": "^https?://" },
+    "url": {
+      "type": "string",
+      "pattern": "^https?://"
+    },
     "date": {
       "description": "An ISO date, for example 2027-10-15.",
       "type": "string",
       "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
     },
-    "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
-    "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
+    "latitude": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": -180,
+      "maximum": 180
+    },
     "color": {
       "description": "A hex color, for example #673ab7.",
       "type": "string",
@@ -225,27 +382,45 @@
     },
     "colors": {
       "type": "object",
-      "propertyNames": { "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-      "additionalProperties": { "$ref": "#/$defs/color" }
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/color"
+      }
     },
     "heroBackground": {
       "type": "object",
       "additionalProperties": false,
       "required": ["color"],
       "properties": {
-        "color": { "$ref": "#/$defs/color" },
-        "image": { "type": "string" }
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "image": {
+          "type": "string"
+        }
       }
     },
     "hero": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "title": { "type": "string" },
-        "metaDescription": { "type": "string" },
-        "description": { "type": "string" },
-        "background": { "$ref": "#/$defs/heroBackground" },
-        "fontColor": { "$ref": "#/$defs/color" }
+        "title": {
+          "type": "string"
+        },
+        "metaDescription": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "background": {
+          "$ref": "#/$defs/heroBackground"
+        },
+        "fontColor": {
+          "$ref": "#/$defs/color"
+        }
       }
     }
   }

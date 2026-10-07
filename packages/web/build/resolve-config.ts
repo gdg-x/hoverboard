@@ -1,7 +1,7 @@
 import { Ajv2020, type ErrorObject } from 'ajv/dist/2020.js';
 import fs from 'fs';
 import { join } from 'path';
-import { isFeature } from '../src/config/features';
+import { FEATURE_REQUIRES, FEATURES, isFeature, type Feature } from '../src/config/features';
 import { deepMerge } from '../src/config/merge';
 
 type Site = typeof import('../defaults/site.json') & typeof import('../../config/site.json');
@@ -68,6 +68,52 @@ const formatErrors = (file: string, errors: ErrorObject[] | null | undefined): s
 
 const isUrl = (value: string) => /^https?:\/\//.test(value);
 
+// The first path segment of each feature's pages.
+const FEATURE_PATHS: Record<string, Feature> = {
+  blog: 'blog',
+  coc: 'codeOfConduct',
+  faq: 'faq',
+  'previous-speakers': 'previousSpeakers',
+  schedule: 'schedule',
+  sessions: 'schedule',
+  speakers: 'speakers',
+  team: 'team',
+};
+
+const featureErrors = (site: Site, resources: Resources): string[] => {
+  const { features } = site;
+  const errors = FEATURES.flatMap((feature) =>
+    features[feature]
+      ? (FEATURE_REQUIRES[feature] ?? [])
+          .filter((required) => !features[required])
+          .map((required) => `site.json/features/${feature}: needs ${required}, which is off`)
+      : [],
+  );
+  if (features.map && !site.integrations?.googleMapsApiKey) {
+    errors.push('site.json/integrations/googleMapsApiKey: is required when map is on');
+  }
+
+  const links: [string, string][] = [
+    ...resources.footerRelBlock.flatMap(({ links }, block) =>
+      links.map(({ url }, link): [string, string] => [
+        `footerRelBlock/${block}/links/${link}/url`,
+        url,
+      ]),
+    ),
+    ...resources.aboutOrganizerBlock.blocks.map(({ callToAction }, block): [string, string] => [
+      `aboutOrganizerBlock/blocks/${block}/callToAction/link`,
+      callToAction.link,
+    ]),
+  ];
+  for (const [path, url] of links) {
+    const feature = url.startsWith('/') ? FEATURE_PATHS[url.split('/')[1] ?? ''] : undefined;
+    if (feature && !features[feature]) {
+      errors.push(`content/resources.json/${path}: "${url}" links to ${feature}, which is off`);
+    }
+  }
+  return errors;
+};
+
 // Checks that JSON Schema cannot express.
 const crossFileErrors = (site: Site, resources: Resources, publicDir: string): string[] => {
   const errors = site.navigation.flatMap(({ route }, index) =>
@@ -85,7 +131,7 @@ const crossFileErrors = (site: Site, resources: Resources, publicDir: string): s
       errors.push(`${path}: "${image}" is not in packages/web/public`);
     }
   }
-  return errors;
+  return [...errors, ...featureErrors(site, resources)];
 };
 
 /**

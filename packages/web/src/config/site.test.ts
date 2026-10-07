@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { setFeatures } from '../../__tests__/helpers/features';
 import { basepath, image, navigation, signIn, title, url } from './site';
 
 describe('navigation', () => {
   afterEach(() => {
-    vi.doUnmock('./features');
     vi.resetModules();
   });
 
@@ -19,10 +19,7 @@ describe('navigation', () => {
 
   it('hides entries for features that are off', async () => {
     vi.resetModules();
-    vi.doMock('./features', async (importOriginal) => ({
-      ...(await importOriginal<typeof import('./features')>()),
-      isFeatureEnabled: (feature: string) => feature !== 'blog',
-    }));
+    setFeatures({ blog: false });
 
     const { navigation } = await import('./site');
 

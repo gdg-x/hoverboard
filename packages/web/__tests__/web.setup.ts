@@ -2,10 +2,14 @@ import '@testing-library/jest-dom/vitest';
 import 'urlpattern-polyfill';
 import { ReadableStream } from 'node:stream/web';
 import { TextDecoder, TextEncoder } from 'node:util';
-import { vi } from 'vitest';
+import { beforeEach, vi } from 'vitest';
+import { setFeatures } from './helpers/features';
 
 vi.mock('firebase/messaging');
 vi.mock('../src/firebase');
+
+setFeatures();
+beforeEach(() => setFeatures());
 
 // JSDOM does not provide these Node/Web globals used by firebase/auth's
 // dependency chain (undici).
