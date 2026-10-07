@@ -14,13 +14,13 @@ Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#bi
      npx firebase use <projectId>
    ```
 
-1. Build and deploy with `/config/production.json`
+1. Build and deploy with `packages/config/site.json`
 
    ```console
      ./hbd deploy
    ```
 
-   or to deploy with a custom config pass the name of the config file. For example with `/config/custom.json`
+   or to override some of its values, add a file to the root `config/` folder and pass its name. For example with `/config/custom.json`
 
    ```console
      BUILD_ENV=custom ./hbd deploy

@@ -1,0 +1,191 @@
+{
+  "followOur": "Follow our",
+  "followUs": "Follow us",
+  "emailUs": "Email us",
+  "buyTicket": "Buy ticket",
+  "signIn": "Sign in",
+  "signOut": "Sign out",
+  "viewHighlights": "View Highlights",
+  "offlineMessage": "You can still work offline.",
+  "serviceWorkerInstalled": "App is now installed and available offline.",
+  "serviceWorkerAvailable": "A new version of this app is available.",
+  "serviceWorkerInstalling": "App being installed for offline use.",
+  "serviceWorkerError": "Error caching for offline use.",
+  "refresh": "Refresh",
+  "faq": "/data/faq.md",
+  "coc": "/data/coc.md",
+  "loading": "Loading...",
+  "footer": {
+    "blog": "Blog"
+  },
+  "bookmarked": {
+    "added": "Session saved to My Schedule",
+    "removed": "Session removed from My Schedule"
+  },
+  "mySchedule": {
+    "title": "My Schedule",
+    "browseSession": "Browse sessions"
+  },
+  "subscribeNote": "No spam, only the latest news and updates!",
+  "codeOfConduct": "Code of Conduct",
+  "ticketsBlock": {
+    "title": "Tickets",
+    "soldOut": "You missed it!",
+    "notAvailableYet": "Not available yet",
+    "save": "Save ${discount}% today"
+  },
+  "partnersBlock": {
+    "title": "Partners",
+    "button": "Become a partner",
+    "form": {
+      "title": "Become a partner!",
+      "submitLabel": "Submit",
+      "fullName": "Full Name",
+      "companyName": "Company Name"
+    },
+    "toast": "We will contact you soon!"
+  },
+  "featuredVideos": {
+    "callToAction": {
+      "label": "See all videos"
+    }
+  },
+  "blog": {
+    "published": "Published",
+    "suggested": "Up next"
+  },
+  "latestPostsBlock": {
+    "title": "The latest news",
+    "callToAction": {
+      "label": "View all stories",
+      "link": "/blog"
+    }
+  },
+  "speakers": {
+    "skills": "Skills",
+    "previousYears": "Years",
+    "previousYear": "Year"
+  },
+  "speakersBlock": {
+    "title": "Speakers",
+    "callToAction": {
+      "label": "View all speakers",
+      "link": "/speakers"
+    }
+  },
+  "previousSpeakersBlock": {
+    "title": "Previous speakers",
+    "callToAction": {
+      "label": "View all",
+      "link": "/previous-speakers"
+    }
+  },
+  "galleryBlock": {
+    "callToAction": {
+      "label": "See all photos"
+    }
+  },
+  "mapBlock": {
+    "title": "Location"
+  },
+  "subscribeBlock": {
+    "callToAction": {
+      "description": "Get notified about the important conference updates",
+      "label": "Subscribe"
+    },
+    "yourEmail": "Your email",
+    "emailAddress": "Email Address",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "emailRequired": "Please enter a valid email address.",
+    "fieldRequired": "Field required.",
+    "subscribe": "Subscribe",
+    "subscribed": "Subscribed",
+    "close": "Close",
+    "generalError": "An error has occurred. Please, try again later.",
+    "toast": "Successfully subscribed!"
+  },
+  "schedule": {
+    "saveSessionsSignedOut": "Sign in to save sessions"
+  },
+  "feedback": {
+    "save": "Save",
+    "headline": "Review session",
+    "leaveFeedback": "to leave feedback",
+    "sendFeedbackSignedOut": "Sign in to leave feedback",
+    "removeFeedbackSignedOut": "Sign in to delete feedback",
+    "feedbackRecorded": "Feedback saved",
+    "feedbackDeleted": "Feedback deleted",
+    "helperText": "Comments will be anonymously provided to speakers",
+    "somethingWentWrong": "Something went wrong",
+    "contentCaption": "Content quality",
+    "styleCaption": "Presentation style",
+    "deleteFeedback": "Delete",
+    "sessionClosed": "Session reviews are not open"
+  },
+  "sessionDetails": {
+    "contentLevel": "Content level",
+    "viewPresentation": "View presentation",
+    "viewVideo": "View video",
+    "speakers": "Speakers",
+    "backToSchedule": "Back to schedule",
+    "addToCalendar": "Add to calendar",
+    "googleCalendar": "Google Calendar",
+    "appleCalendar": "Apple Calendar",
+    "share": "Share"
+  },
+  "speakerDetails": {
+    "sessions": "Sessions"
+  },
+  "notifications": {
+    "default": "Enable notifications",
+    "generalLabel": "General notifications",
+    "myScheduleLabel": "My Schedule notifications",
+    "enabled": "Get notified of general announcements and sessions starting",
+    "signIn": "Sign in to get personalized session notifications",
+    "enable": "Enable",
+    "subscribe": "Subscribe",
+    "unsubscribe": "Unsubscribe",
+    "myScheduleEnabled": "My Schedule notifications enabled",
+    "myScheduleDisabled": "My Schedule notifications disabled",
+    "generalEnabled": "General notifications enabled",
+    "generalDisabled": "General notifications disabled",
+    "blocked": {
+      "text": "Please enable notifications in your browser",
+      "label": "Enable",
+      "link": "https://support.google.com/chrome/answer/3220216"
+    },
+    "unsupported": {
+      "text": "Notifications are not supported on this device",
+      "label": "Details",
+      "link": "https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#browser_compatibility"
+    },
+    "unknown": {
+      "text": "Unknown error occurred"
+    },
+    "toast": {
+      "title": "Open"
+    }
+  },
+  "signInDialog": {
+    "alreadyHaveAccount": "You already have an account",
+    "alreadyUsed": "You've already used",
+    "signInToContinue": {
+      "part1": "Sign in with",
+      "part2": "to continue."
+    }
+  },
+  "filters": {
+    "title": "Filters",
+    "results": "Results",
+    "tags": "Tags",
+    "complexity": "Complexity",
+    "clear": "Clear all"
+  },
+  "addToHomeScreen": {
+    "cta": "Add to Home Screen"
+  },
+  "aboutBlock": {
+    "title": "About"
+  }
+}

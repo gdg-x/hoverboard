@@ -280,6 +280,14 @@ export default [
     },
   },
 
+  // Site content is rendered by the web app, which allows HTML such as buttons in blog posts
+  {
+    files: ['packages/config/content/**/*.md'],
+    rules: {
+      'markdown/no-html': 'off',
+    },
+  },
+
   // JavaScript/TypeScript code blocks in Markdown
   {
     files: ['**/*.md'],

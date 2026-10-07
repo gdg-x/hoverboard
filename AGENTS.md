@@ -4,17 +4,18 @@ Hoverboard is a conference website template. Organizers fork it, configure it an
 
 ## Layout
 
-| Path                        | What it is                                                                                   |
-| --------------------------- | -------------------------------------------------------------------------------------------- |
-| `packages/web`              | The web app: Lit components, Redux Toolkit store, Vite build, Workbox service worker         |
-| `packages/server/functions` | Cloud Functions (v2 API). Must stay self-contained, because `firebase.json` deploys it alone |
-| `packages/cli`              | The `hbd` CLI (`./hbd <command>`), run with `tsx`, no build step                             |
-| `packages/storage`          | Firestore and Storage security rules, indexes, the content schema and the rules tests        |
-| `config/`                   | Build-time site config (`development.json`, `production.json`), selected by `BUILD_ENV`      |
-| `packages/web/public/data/` | Site text and settings (`resources.json`, `settings.json`), FAQ, code of conduct, blog posts |
-| `docs/`                     | Tutorials and the release policy                                                             |
+| Path                        | What it is                                                                                                 |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `packages/web`              | The web app: Lit components, Redux Toolkit store, Vite build, Workbox service worker                       |
+| `packages/server/functions` | Cloud Functions (v2 API). Must stay self-contained, because `firebase.json` deploys it alone               |
+| `packages/cli`              | The `hbd` CLI (`./hbd <command>`), run with `tsx`, no build step                                           |
+| `packages/storage`          | Firestore and Storage security rules, indexes, the content schema and the rules tests                      |
+| `packages/config`           | The site's own config and content: `site.json`, `content/resources.json`, FAQ, code of conduct, blog posts |
+| `packages/web/defaults`     | Upstream defaults that `packages/config` overrides. Objects merge, and arrays and other values replace     |
+| `config/`                   | Optional `<BUILD_ENV>.json` overrides for `site.json`. Development builds use `development.json`           |
+| `docs/`                     | Tutorials and the release policy                                                                           |
 
-Each package has its own `package.json` and `package-lock.json`. The root is a thin orchestrator: its scripts delegate with `npm --prefix ./packages/<name>`.
+Each package with dependencies has its own `package.json` and `package-lock.json`. The root is a thin orchestrator: its scripts delegate with `npm --prefix ./packages/<name>`.
 
 ## Setup
 
@@ -47,7 +48,7 @@ Before finishing a change, run `npm run lint` and `npm test`, or at least the af
 - **Tests** sit next to the code as `*.test.ts`. Web tests run in jsdom: render with `fixture` from `packages/web/__tests__/helpers/fixtures.ts`, set state with `setStoreState`, and assert with the jest-dom matchers. Every bug fix or feature needs a test.
 - **Vitest** is configured once in the root `vitest.config.ts`. Do not add `vitest` to a package's `package.json`, because a second copy breaks `expect.extend` from setup files.
 - **Dependencies** shared by several packages must use the same version range. `npm run lint:syncpack` checks this.
-- **Paths.** Vite runs with `packages/web` as the working directory, so its relative paths resolve from there. `config/` is two levels up.
+- **Paths.** Vite runs with `packages/web` as the working directory, so its relative paths resolve from there. `packages/config` is `../config`, and the root `config/` is `../../config`.
 - **Firestore commands** (`./hbd firestore-*`) use the emulator by default. Only target production with `FIRESTORE_TARGET=production` when explicitly asked.
 - **Formatting.** Prettier formats everything, including Markdown, JSON and YAML. Run `npx prettier --write <files>` after editing them.
 - **Docs** use short, plain sentences. Mark claims that were not tested with "verify".

@@ -1,22 +1,7 @@
 {
-  "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
-  },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
-  "webapp": {
-    "shortName": "DevFest",
-    "themeColor": "#673AB7",
-    "backgroundColor": "#673AB7"
-  },
   "dateFormat": {
     "locale": "en-US"
   },
-  "hashtag": "DevFest",
-  "disabledSchedule": false,
   "navigation": [
     {
       "route": "home",
@@ -45,14 +30,6 @@
     }
   ],
   "heroSettings": {
-    "home": {
-      "description": "Join the commuity, learn new things!",
-      "background": {
-        "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
-      },
-      "fontColor": "#FFF"
-    },
     "blog": {
       "title": "Blog",
       "metaDescription": "Read stories from our team",
@@ -64,7 +41,6 @@
     "speakers": {
       "title": "Speakers",
       "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
       "background": {
         "color": "#FFF"
       },
@@ -119,46 +95,7 @@
       "fontColor": "#424242"
     }
   },
-  "location": {
-    "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
-    "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
-    },
-    "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
-    },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
-  },
   "socialNetwork": {
-    "follow": [
-      {
-        "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
-      },
-      {
-        "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
-      },
-      {
-        "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
-      },
-      {
-        "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
-      }
-    ],
     "share": [
       {
         "name": "facebook",
@@ -170,7 +107,6 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
   "signInProviders": {
     "providersData": [
       {
@@ -207,5 +143,14 @@
       "itemsCount": 5
     }
   },
-  "showForkMeBlockForProjectIds": ["hoverboard-master", "hoverboard-dev"]
+  "location": {
+    "label": "Location"
+  },
+  "theme": {
+    "badgeColors": {
+      "gde": "#3d5afe",
+      "wtm": "#1de9b6",
+      "gdg": "#00b0ff"
+    }
+  }
 }

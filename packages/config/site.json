@@ -1,0 +1,85 @@
+{
+  "url": "https://hoverboard-master.web.app/",
+  "basepath": "/",
+  "googleMapApiKey": "AIzaSyCJqlRVGIe6bfU43rga3cnK7tSXXwc7JD8",
+  "organizer": {
+    "name": "GDG Lviv",
+    "twitter": "gdglviv",
+    "blog": "https://medium.com/gdg-lviv",
+    "url": "http://lviv.gdg.org.ua/"
+  },
+  "mailto": "devfest@gdg.org.ua",
+  "startDate": "2017-10-013T09:00:00+03:00",
+  "endDate": "2017-10-14T19:00:00+03:00",
+  "webapp": {
+    "shortName": "DevFest",
+    "themeColor": "#673AB7",
+    "backgroundColor": "#673AB7"
+  },
+  "hashtag": "DevFest",
+  "disabledSchedule": false,
+  "heroSettings": {
+    "home": {
+      "description": "Join the commuity, learn new things!",
+      "background": {
+        "color": "#673ab7",
+        "image": "/images/backgrounds/home.jpg"
+      },
+      "fontColor": "#FFF"
+    },
+    "speakers": {
+      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners."
+    }
+  },
+  "location": {
+    "name": "Planeta kino",
+    "city": "Lviv",
+    "short": "Lviv, Ukraine",
+    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "pointer": {
+      "latitude": 49.809841,
+      "longitude": 23.972805,
+      "zoom": 5
+    },
+    "mapCenter": {
+      "latitude": 48,
+      "longitude": 8
+    },
+    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+  },
+  "socialNetwork": {
+    "follow": [
+      {
+        "name": "meetup",
+        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
+      },
+      {
+        "name": "facebook",
+        "url": "https://www.facebook.com/devfest.ukraine/"
+      },
+      {
+        "name": "twitter",
+        "url": "https://twitter.com/devfest_ukraine/"
+      },
+      {
+        "name": "instagram",
+        "url": "https://www.instagram.com/devfestukraine"
+      },
+      {
+        "name": "youtube",
+        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+      }
+    ]
+  },
+  "showForkMeBlockForProjectIds": ["hoverboard-master", "hoverboard-dev"],
+  "theme": {
+    "tagColors": {
+      "general": "#9e9e9e",
+      "android": "#78c257",
+      "web": "#2196f3",
+      "cloud": "#3f51b5",
+      "community": "#e91e63",
+      "design": "#e91e63"
+    }
+  }
+}

@@ -9,7 +9,7 @@ Project Hoverboard locally in less than 15 minutes.
 1. Install [Node.js (v22)](https://nodejs.org/en/download/)
 1. Install project dependencies: `npm ci` (`yarn` should work but it's not officially supported)
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
-1. Update [Hoverboard config](/config) and [Resources](/packages/web/public/data). More info can be found [here](01-configure-app.md)
+1. Update your site's config and content in [packages/config](/packages/config). More info can be found [here](01-configure-app.md)
 1. Select your Firebase project `npx firebase use <projectId>` (this is only needed to load your app's web config; local development runs against the [Firestore emulator](https://firebase.google.com/docs/emulator-suite), so it never reads or writes your project's live data)
    - _Tip: `./hbd setup` automates the login and project-selection steps above, then runs `./hbd doctor` to confirm your environment is ready._
 1. Seed the local Firestore emulator with data
@@ -78,7 +78,7 @@ The diagram below is a brief summary of the directories within the project.
 There are two CLI flags you can set when running npm scripts:
 
 - `NODE_ENV`: Control if code should be optimized for a production deployment with minimization or for faster local development.
-- `BUILD_ENV`: Which `config` JSON file should be used when building. This is where you set the Firebase project details.
+- `BUILD_ENV`: Which `config/<BUILD_ENV>.json` file overrides values in `packages/config/site.json`, such as the site URL or Google Maps key. Development builds use `config/development.json` when it exists.
 
 The common npm scripts are:
 
@@ -89,14 +89,14 @@ The common npm scripts are:
 
 Below is the grid of the common npm script commands and their supported CLI flags.
 
-|          | `NODE_ENV`    | `BUILD_ENV`                           |
-| -------- | ------------- | ------------------------------------- |
-| `start`  | `development` | `development`\|`production`\|`custom` |
-| `build`  | `production`  | `development`\|`production`\|`custom` |
-| `serve`  | `production`  | `development`\|`production`\|`custom` |
-| `deploy` | `production`  | `development`\|`production`\|`custom` |
+|          | `NODE_ENV`    | `BUILD_ENV`             |
+| -------- | ------------- | ----------------------- |
+| `start`  | `development` | `development`\|`custom` |
+| `build`  | `production`  | `development`\|`custom` |
+| `serve`  | `production`  | `development`\|`custom` |
+| `deploy` | `production`  | `development`\|`custom` |
 
-For example `npm start` only supports `NODE_ENV=development` and defaults to `BUILD_ENV=development` while `npm run build` only supports `NODE_ENV=production` and defaults to `BUILD_ENV=production`.
+For example `npm start` only supports `NODE_ENV=development` and uses `config/development.json` if it exists, while `npm run build` only supports `NODE_ENV=production` and uses only `packages/config/site.json` unless `BUILD_ENV` is set.
 
 ## Next steps
 

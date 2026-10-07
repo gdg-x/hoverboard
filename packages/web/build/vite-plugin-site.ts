@@ -1,10 +1,17 @@
 import n from 'nunjucks';
 import type { PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
-import { resolveConfig } from './resolve-config';
+import { resolveConfig, type SiteConfig } from './resolve-config';
 
-// Renders the Nunjucks placeholders (e.g. {{ title }}) in index.html, manifest.json and the
-// markdown pages with the resolved site config.
+// Tag names come from session data, so their colors are site config, not theme code.
+export const themeColorsCss = ({ site }: SiteConfig): string => {
+  const colors = { ...site.theme.badgeColors, ...site.theme.tagColors };
+  const properties = Object.entries(colors).map(([name, color]) => `--${name}: ${color};`);
+  return `:root { ${properties.join(' ')} }`;
+};
+
+// Renders the Nunjucks placeholders (e.g. {{ resources.title }}) in index.html, manifest.json and
+// the markdown pages with the resolved site config.
 export const site = (): PluginOption[] => {
   const data = resolveConfig();
   const nunjucks = n.configure({ throwOnUndefined: true });
@@ -18,7 +25,10 @@ export const site = (): PluginOption[] => {
       // sees the final, already-rendered markup.
       transformIndexHtml: {
         order: 'pre',
-        handler: (html) => compileTemplate(html),
+        handler: (html) => ({
+          html: compileTemplate(html),
+          tags: [{ tag: 'style', children: themeColorsCss(data), injectTo: 'head' }],
+        }),
       },
     },
     copy({
@@ -27,7 +37,8 @@ export const site = (): PluginOption[] => {
       hook: 'writeBundle',
       targets: [
         { src: 'public/manifest.json', dest: 'dist', transform: compileBufferTemplate },
-        { src: 'public/data/*.md', dest: 'dist/data', transform: compileBufferTemplate },
+        { src: '../config/content/*.md', dest: 'dist/data', transform: compileBufferTemplate },
+        { src: '../config/content/posts/*.md', dest: 'dist/data/posts' },
       ],
     }),
   ];
