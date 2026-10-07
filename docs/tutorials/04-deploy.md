@@ -20,12 +20,6 @@ Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#bi
      ./hbd deploy
    ```
 
-   or to override some of its values, add a file to the root `config/` folder and pass its name. For example with `/config/custom.json`
-
-   ```console
-     BUILD_ENV=custom ./hbd deploy
-   ```
-
    `./hbd deploy` checks your Node.js version and selected Firebase project first, prints which project it's about to deploy to, and asks for confirmation before building and deploying. Run `./hbd deploy --yes` to skip the confirmation prompt, e.g. in a scripted context.
 
    The URL to your live site is listed in the output.

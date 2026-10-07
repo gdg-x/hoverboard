@@ -37,7 +37,14 @@ describe('runFirestoreExport', () => {
     expect(runFirestoreExport()).toBe(true);
     expect(runCommandMock).toHaveBeenCalledWith(
       '/repo/node_modules/.bin/firebase',
-      ['emulators:export', './.firebase/emulator-data', '--only', 'firestore', '--force'],
+      [
+        'emulators:export',
+        './.firebase/emulator-data',
+        '--project=demo-hoverboard',
+        '--only',
+        'firestore',
+        '--force',
+      ],
       repo,
     );
   });

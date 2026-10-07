@@ -12,3 +12,4 @@ export const firebaseApp = initializeApp({
   measurementId: 'G-MEASUREMENT_ID',
 });
 export const db = getFirestore(firebaseApp);
+export const isDemoProject = false;

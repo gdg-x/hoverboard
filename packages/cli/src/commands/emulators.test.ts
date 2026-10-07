@@ -37,7 +37,12 @@ describe('runEmulators', () => {
     expect(runEmulators()).toBe(true);
     expect(runCommandMock).toHaveBeenCalledWith(
       '/repo/node_modules/.bin/firebase',
-      ['emulators:start', '--import=./.firebase/emulator-data', '--export-on-exit'],
+      [
+        'emulators:start',
+        '--project=demo-hoverboard',
+        '--import=./.firebase/emulator-data',
+        '--export-on-exit',
+      ],
       repo,
     );
   });

@@ -1,8 +1,9 @@
 import { resolveFirebaseBin } from '../lib/firebase-cli.js';
 import { runCommand } from '../lib/spawn.js';
+import { DEMO_PROJECT_ID } from '../utils/firebase-project.js';
 import { findRepoRoot } from '../utils/node-version.js';
 
-/** Starts the Firebase emulators, importing/exporting local Firestore data. */
+/** Starts the Firebase emulators with the demo project, importing/exporting local Firestore data. */
 export const runEmulators = (): boolean => {
   const repoRoot = findRepoRoot(process.cwd());
   if (!repoRoot) {
@@ -12,7 +13,12 @@ export const runEmulators = (): boolean => {
 
   const exitCode = runCommand(
     resolveFirebaseBin(repoRoot),
-    ['emulators:start', '--import=./.firebase/emulator-data', '--export-on-exit'],
+    [
+      'emulators:start',
+      `--project=${DEMO_PROJECT_ID}`,
+      '--import=./.firebase/emulator-data',
+      '--export-on-exit',
+    ],
     repoRoot,
   );
   return exitCode === 0;

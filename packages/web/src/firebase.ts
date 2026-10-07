@@ -37,16 +37,19 @@ export const db: Firestore = initializeFirestore(firebaseApp, {
 });
 
 /**
- * `npm start` runs the app through the Firebase Hosting emulator alongside
- * the Firestore emulator (see `firebase.json`), so local development never
- * touches production data. Connect must happen before any other Firestore
- * calls are made.
+ * Local development always runs on the emulators with a `demo-` project (see `npm start`), which
+ * cannot reach real Firebase services. Connect must happen before any other Firestore calls.
  */
-if (window.process?.env.NODE_ENV === 'development') {
+export const isDemoProject = firebaseConfig.projectId?.startsWith('demo-') ?? false;
+
+if (isDemoProject) {
   connectFirestoreEmulator(db, '127.0.0.1', 8080);
 }
 
-export const performance = getPerformance(firebaseApp);
-export const analytics = getAnalytics(firebaseApp);
+// Demo projects have no app ID, which Analytics and Performance Monitoring need.
+export const analytics = isDemoProject ? undefined : getAnalytics(firebaseApp);
 
-initializePerformance(firebaseApp);
+if (!isDemoProject) {
+  getPerformance(firebaseApp);
+  initializePerformance(firebaseApp);
+}

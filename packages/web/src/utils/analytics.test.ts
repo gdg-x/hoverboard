@@ -20,3 +20,18 @@ describe('logLogin', () => {
     expect(logEvent).toHaveBeenCalledWith('mock-analytics-instance', 'login');
   });
 });
+
+describe('without Analytics', () => {
+  it('logs nothing in a demo project', async () => {
+    vi.resetModules();
+    vi.doMock('../firebase', () => ({ analytics: undefined }));
+    vi.mocked(logEvent).mockClear();
+    const { logLogin, logPageView } = await import('./analytics');
+
+    logPageView();
+    logLogin();
+
+    expect(logEvent).not.toHaveBeenCalled();
+    vi.doUnmock('../firebase');
+  });
+});

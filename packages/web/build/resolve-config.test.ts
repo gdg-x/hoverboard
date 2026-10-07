@@ -22,15 +22,7 @@ const writeJson = (path: string, data: unknown) => {
 };
 
 /** The repository's config, with `site` and `resources` merged over the site files. */
-const makePaths = ({
-  site = {},
-  resources = {},
-  environments = {},
-}: {
-  site?: object;
-  resources?: object;
-  environments?: Record<string, object>;
-} = {}) => {
+const makePaths = ({ site = {}, resources = {} }: { site?: object; resources?: object } = {}) => {
   const root = mkdtempSync(join(tmpdir(), 'hoverboard-config-'));
   dirsToClean.push(root);
   writeJson(
@@ -41,10 +33,7 @@ const makePaths = ({
     join(root, 'config/content/resources.json'),
     deepMerge(readJson(join(repoPaths.site, 'content/resources.json')), resources),
   );
-  for (const [name, data] of Object.entries(environments)) {
-    writeJson(join(root, 'environments', `${name}.json`), data);
-  }
-  return { ...repoPaths, site: join(root, 'config'), environments: join(root, 'environments') };
+  return { ...repoPaths, site: join(root, 'config') };
 };
 
 describe('resolveConfig', () => {
@@ -88,30 +77,13 @@ describe('resolveConfig', () => {
     );
   });
 
-  it('uses the development overrides for development builds', () => {
-    vi.spyOn(console, 'log').mockImplementation(() => undefined);
-    const paths = makePaths({ environments: { development: { url: 'https://dev.web.app/' } } });
+  it('resolves the same config for development and production builds', () => {
+    const development = resolveConfig({ paths: repoPaths, nodeEnv: 'development' });
+    const production = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
 
-    expect(resolveConfig({ paths, nodeEnv: 'development' }).site.url).toBe('https://dev.web.app/');
-    expect(resolveConfig({ paths, nodeEnv: 'production' }).site.url).not.toBe(
-      'https://dev.web.app/',
-    );
-  });
-
-  it('uses the BUILD_ENV overrides', () => {
-    vi.spyOn(console, 'log').mockImplementation(() => undefined);
-    const paths = makePaths({ environments: { custom: { url: 'https://custom.example.com/' } } });
-
-    const { site, NODE_ENV } = resolveConfig({ paths, buildEnv: 'custom', nodeEnv: 'production' });
-
-    expect(site.url).toBe('https://custom.example.com/');
-    expect(NODE_ENV).toBe('production');
-  });
-
-  it('throws when the BUILD_ENV overrides are missing', () => {
-    expect(() =>
-      resolveConfig({ paths: makePaths(), buildEnv: 'custom', nodeEnv: 'production' }),
-    ).toThrow('BUILD_ENV is custom');
+    expect(development.site).toEqual(production.site);
+    expect(development.resources).toEqual(production.resources);
+    expect(development.NODE_ENV).toBe('development');
   });
 });
 

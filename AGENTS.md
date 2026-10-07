@@ -12,7 +12,6 @@ Hoverboard is a conference website template. Organizers fork it, configure it an
 | `packages/storage`          | Firestore and Storage security rules, indexes, the content schema and the rules tests                      |
 | `packages/config`           | The site's own config and content: `site.json`, `content/resources.json`, FAQ, code of conduct, blog posts |
 | `packages/web/defaults`     | Upstream defaults that `packages/config` overrides. Objects merge, and arrays and other values replace     |
-| `config/`                   | Optional `<BUILD_ENV>.json` overrides for `site.json`. Development builds use `development.json`           |
 | `docs/`                     | Tutorials and the release policy                                                                           |
 
 Each package with dependencies has its own `package.json` and `package-lock.json`. The root is a thin orchestrator: its scripts delegate with `npm --prefix ./packages/<name>`.
@@ -48,7 +47,8 @@ Before finishing a change, run `npm run lint` and `npm test`, or at least the af
 - **Tests** sit next to the code as `*.test.ts`. Web tests run in jsdom: render with `fixture` from `packages/web/__tests__/helpers/fixtures.ts`, set state with `setStoreState`, and assert with the jest-dom matchers. Every bug fix or feature needs a test.
 - **Vitest** is configured once in the root `vitest.config.ts`. Do not add `vitest` to a package's `package.json`, because a second copy breaks `expect.extend` from setup files.
 - **Dependencies** shared by several packages must use the same version range. `npm run lint:syncpack` checks this.
-- **Paths.** Vite runs with `packages/web` as the working directory, so its relative paths resolve from there. `packages/config` is `../config`, and the root `config/` is `../../config`.
+- **Paths.** Vite runs with `packages/web` as the working directory, so its relative paths resolve from there. `packages/config` is `../config`.
+- **Local development** always uses the `demo-hoverboard` project on the emulators, whatever `firebase use` selects. The web app connects to the emulators and skips Analytics and Performance Monitoring when the project ID starts with `demo-`.
 - **Firestore commands** (`./hbd firestore-*`) use the emulator by default. Only target production with `FIRESTORE_TARGET=production` when explicitly asked.
 - **Formatting.** Prettier formats everything, including Markdown, JSON and YAML. Run `npx prettier --write <files>` after editing them.
 - **Docs** use short, plain sentences. Mark claims that were not tested with "verify".
