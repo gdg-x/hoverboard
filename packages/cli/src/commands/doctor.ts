@@ -1,6 +1,7 @@
 import { findRepoRoot, checkNodeVersion, type DoctorCheckResult } from '../utils/node-version.js';
 import { checkBilling } from '../utils/billing.js';
 import { checkFirebaseProject, resolveFirebaseProjectId } from '../utils/firebase-project.js';
+import { checkGitHubDeploys } from './setup-github.js';
 
 const symbol = (check: DoctorCheckResult): string => {
   if (check.warning) return '!';
@@ -19,6 +20,7 @@ export const runDoctor = async (): Promise<boolean> => {
     checkNodeVersion(repoRoot),
     checkFirebaseProject(repoRoot),
     await checkBilling(repoRoot, projectId),
+    await checkGitHubDeploys(repoRoot, projectId),
   ];
 
   for (const check of checks) {

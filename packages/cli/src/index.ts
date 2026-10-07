@@ -7,6 +7,7 @@ import { runFirestoreCopy } from './commands/firestore-copy/index.js';
 import { runFirestoreExport } from './commands/firestore-export.js';
 import { runFirestoreInit } from './commands/firestore-init/index.js';
 import { runSetup } from './commands/setup.js';
+import { runSetupGitHub } from './commands/setup-github.js';
 
 const program = new Command();
 
@@ -29,6 +30,18 @@ program
   )
   .action(async () => {
     process.exitCode = (await runSetup()) ? 0 : 1;
+  });
+
+program
+  .command('setup-github')
+  .description(
+    'Let GitHub Actions deploy to the selected Firebase project with Workload Identity ' +
+      'Federation, without a service account key.',
+  )
+  .option('--repo <owner/name>', 'The GitHub repository. Defaults to the origin remote.')
+  .option('--dry-run', 'Only report what would change.')
+  .action(async (options: { repo?: string; dryRun?: boolean }) => {
+    process.exitCode = (await runSetupGitHub(options)) ? 0 : 1;
   });
 
 program
