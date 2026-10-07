@@ -1,5 +1,6 @@
 {
-  "basepath": "/",
   "url": "https://hoverboard-dev.web.app/",
-  "googleMapApiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E"
+  "integrations": {
+    "googleMapsApiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E"
+  }
 }

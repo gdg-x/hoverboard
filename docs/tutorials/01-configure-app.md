@@ -11,19 +11,32 @@ Upstream defaults for everything else, such as the UI text and page titles, are 
 `packages/config/site.json`:
 
 ```json
-  "url": "..",
-  "basepath": "/",
-  "googleMapApiKey": "..",
-  "organizer": {..},
-  "startDate": "..",
-  "endDate": "..",
-  "webapp": {..},
-  "hashtag": "..",
+  "$schema": "../web/schemas/site.schema.json",
+  "url": "https://my-devfest.web.app/",
+  "shortName": "DevFest",
+  "organizer": { "name": "..", "email": "..", ... },
+  "event": { "startDate": "2027-10-15", "endDate": "2027-10-16", "location": {..} },
+  "schedule": { "published": true },
+  "social": { "hashtag": "..", "follow": [..] },
+  "auth": { "providers": ["google"] },
+  "theme": { "tagColors": {..} },
+  "integrations": { "googleMapsApiKey": ".." },
+  "webapp": { "themeColor": "..", "backgroundColor": ".." },
   "heroSettings": {..},
-  "location": {..},
-  "socialNetwork": {..},
   ...
 ```
+
+## Validation
+
+[JSON Schemas](https://json-schema.org/) in `packages/web/schemas/` describe both files: `site.schema.json` and `resources.schema.json`. Because the files set `$schema`, editors such as VS Code show completion and errors while you type. Unknown keys are errors, so typos fail early.
+
+The config is checked with the defaults merged in. The build, `npm run lint` and `./hbd doctor` all fail with every error and its path. Run the check on its own with:
+
+```console
+  ./hbd validate-config
+```
+
+The check also catches navigation to an unknown page, and images that are not in `packages/web/public`.
 
 `index.html`, `manifest.json`, `faq.md` and `coc.md` can use these values in [Nunjucks](https://mozilla.github.io/nunjucks/) templates, with one namespace per file. For example `{{ site.url }}` comes from `site.json`, and `{{ resources.title }}` from `content/resources.json`.
 

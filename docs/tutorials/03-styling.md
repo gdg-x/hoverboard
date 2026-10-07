@@ -75,7 +75,6 @@ Edit Web app colors via `webapp` in `packages/config/site.json`
 
 ```json
 "webapp": {
-  "shortName": "DevFest",
   "themeColor": "#F57C00",
   "backgroundColor": "#F57C00"
 }

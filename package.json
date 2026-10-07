@@ -27,6 +27,7 @@
     "install:storage": "npm --prefix ./packages/storage ci",
     "install:web": "npm --prefix ./packages/web ci",
     "lint": "concurrently npm:lint:*",
+    "lint:config": "npm --prefix ./packages/cli run validate-config",
     "lint:eslint": "eslint .",
     "lint:lit-analyzer": "npm --prefix ./packages/web run lint:lit-analyzer",
     "lint:prettier": "prettier --check .",

@@ -1,0 +1,842 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hoverboard.dev/schemas/resources.schema.json",
+  "title": "Hoverboard content",
+  "description": "packages/config/content/resources.json: event text. UI text defaults come from packages/web/defaults/content/resources.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "description",
+    "keywords",
+    "dates",
+    "timezoneOffset",
+    "aboutBlock",
+    "aboutOrganizerBlock",
+    "team",
+    "ticketsBlock",
+    "featuredVideos",
+    "galleryBlock",
+    "subscribeBlock",
+    "codeOfConductBlock",
+    "footerRelBlock",
+    "mapBlock"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "followOur": {
+      "type": "string"
+    },
+    "followUs": {
+      "type": "string"
+    },
+    "emailUs": {
+      "type": "string"
+    },
+    "buyTicket": {
+      "type": "string"
+    },
+    "signIn": {
+      "type": "string"
+    },
+    "signOut": {
+      "type": "string"
+    },
+    "viewHighlights": {
+      "type": "string"
+    },
+    "offlineMessage": {
+      "type": "string"
+    },
+    "serviceWorkerInstalled": {
+      "type": "string"
+    },
+    "serviceWorkerAvailable": {
+      "type": "string"
+    },
+    "serviceWorkerInstalling": {
+      "type": "string"
+    },
+    "serviceWorkerError": {
+      "type": "string"
+    },
+    "refresh": {
+      "type": "string"
+    },
+    "faq": {
+      "type": "string"
+    },
+    "coc": {
+      "type": "string"
+    },
+    "loading": {
+      "type": "string"
+    },
+    "footer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "blog": {
+          "type": "string"
+        }
+      }
+    },
+    "bookmarked": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "added": {
+          "type": "string"
+        },
+        "removed": {
+          "type": "string"
+        }
+      }
+    },
+    "mySchedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "browseSession": {
+          "type": "string"
+        }
+      }
+    },
+    "subscribeNote": {
+      "type": "string"
+    },
+    "codeOfConduct": {
+      "type": "string"
+    },
+    "ticketsBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ticketsDetails"],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "soldOut": {
+          "type": "string"
+        },
+        "notAvailableYet": {
+          "type": "string"
+        },
+        "save": {
+          "type": "string"
+        },
+        "ticketsDetails": {
+          "type": "string"
+        }
+      }
+    },
+    "partnersBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "button": {
+          "type": "string"
+        },
+        "form": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "submitLabel": {
+              "type": "string"
+            },
+            "fullName": {
+              "type": "string"
+            },
+            "companyName": {
+              "type": "string"
+            }
+          }
+        },
+        "toast": {
+          "type": "string"
+        }
+      }
+    },
+    "featuredVideos": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "callToAction"],
+      "properties": {
+        "callToAction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["link"],
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            }
+          }
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "blog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "published": {
+          "type": "string"
+        },
+        "suggested": {
+          "type": "string"
+        }
+      }
+    },
+    "latestPostsBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "callToAction": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "speakers": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "skills": {
+          "type": "string"
+        },
+        "previousYears": {
+          "type": "string"
+        },
+        "previousYear": {
+          "type": "string"
+        }
+      }
+    },
+    "speakersBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "callToAction": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "previousSpeakersBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "callToAction": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "galleryBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "description", "callToAction"],
+      "properties": {
+        "callToAction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["link"],
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            }
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "mapBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "subscribeBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["formTitle"],
+      "properties": {
+        "callToAction": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            }
+          }
+        },
+        "yourEmail": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "emailRequired": {
+          "type": "string"
+        },
+        "fieldRequired": {
+          "type": "string"
+        },
+        "subscribe": {
+          "type": "string"
+        },
+        "subscribed": {
+          "type": "string"
+        },
+        "close": {
+          "type": "string"
+        },
+        "generalError": {
+          "type": "string"
+        },
+        "toast": {
+          "type": "string"
+        },
+        "formTitle": {
+          "type": "string"
+        }
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "saveSessionsSignedOut": {
+          "type": "string"
+        }
+      }
+    },
+    "feedback": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "save": {
+          "type": "string"
+        },
+        "headline": {
+          "type": "string"
+        },
+        "leaveFeedback": {
+          "type": "string"
+        },
+        "sendFeedbackSignedOut": {
+          "type": "string"
+        },
+        "removeFeedbackSignedOut": {
+          "type": "string"
+        },
+        "feedbackRecorded": {
+          "type": "string"
+        },
+        "feedbackDeleted": {
+          "type": "string"
+        },
+        "helperText": {
+          "type": "string"
+        },
+        "somethingWentWrong": {
+          "type": "string"
+        },
+        "contentCaption": {
+          "type": "string"
+        },
+        "styleCaption": {
+          "type": "string"
+        },
+        "deleteFeedback": {
+          "type": "string"
+        },
+        "sessionClosed": {
+          "type": "string"
+        }
+      }
+    },
+    "sessionDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contentLevel": {
+          "type": "string"
+        },
+        "viewPresentation": {
+          "type": "string"
+        },
+        "viewVideo": {
+          "type": "string"
+        },
+        "speakers": {
+          "type": "string"
+        },
+        "backToSchedule": {
+          "type": "string"
+        },
+        "addToCalendar": {
+          "type": "string"
+        },
+        "googleCalendar": {
+          "type": "string"
+        },
+        "appleCalendar": {
+          "type": "string"
+        },
+        "share": {
+          "type": "string"
+        }
+      }
+    },
+    "speakerDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sessions": {
+          "type": "string"
+        }
+      }
+    },
+    "notifications": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "generalLabel": {
+          "type": "string"
+        },
+        "myScheduleLabel": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "string"
+        },
+        "signIn": {
+          "type": "string"
+        },
+        "enable": {
+          "type": "string"
+        },
+        "subscribe": {
+          "type": "string"
+        },
+        "unsubscribe": {
+          "type": "string"
+        },
+        "myScheduleEnabled": {
+          "type": "string"
+        },
+        "myScheduleDisabled": {
+          "type": "string"
+        },
+        "generalEnabled": {
+          "type": "string"
+        },
+        "generalDisabled": {
+          "type": "string"
+        },
+        "blocked": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            }
+          }
+        },
+        "unsupported": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            }
+          }
+        },
+        "unknown": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "type": "string"
+            }
+          }
+        },
+        "toast": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "signInDialog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "alreadyHaveAccount": {
+          "type": "string"
+        },
+        "alreadyUsed": {
+          "type": "string"
+        },
+        "signInToContinue": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "part1": {
+              "type": "string"
+            },
+            "part2": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "results": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "string"
+        },
+        "complexity": {
+          "type": "string"
+        },
+        "clear": {
+          "type": "string"
+        }
+      }
+    },
+    "addToHomeScreen": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cta": {
+          "type": "string"
+        }
+      }
+    },
+    "aboutBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["callToAction", "statisticsBlock"],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "callToAction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["featuredSessions", "howItWas"],
+          "properties": {
+            "featuredSessions": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["description", "label", "link"],
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "link": {
+                  "type": "string"
+                }
+              }
+            },
+            "howItWas": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["description", "label", "youtubeId"],
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "youtubeId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "statisticsBlock": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["attendees", "days", "sessions", "tracks"],
+          "properties": {
+            "attendees": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label", "number"],
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "number": {
+                  "type": "string"
+                }
+              }
+            },
+            "days": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label", "number"],
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "number": {
+                  "type": "string"
+                }
+              }
+            },
+            "sessions": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label", "number"],
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "number": {
+                  "type": "string"
+                }
+              }
+            },
+            "tracks": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label", "number"],
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "number": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "keywords": {
+      "type": "string"
+    },
+    "dates": {
+      "type": "string"
+    },
+    "timezoneOffset": {
+      "type": "string"
+    },
+    "aboutOrganizerBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["image", "blocks"],
+      "properties": {
+        "image": {
+          "type": "string"
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "description", "callToAction"],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "callToAction": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["label", "link"],
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  },
+                  "newTab": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "team": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "codeOfConductBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["form", "contacts"],
+      "properties": {
+        "form": {
+          "type": "string"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "footerRelBlock": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "links"],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "url", "newTab"],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "newTab": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

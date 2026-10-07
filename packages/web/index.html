@@ -18,7 +18,7 @@
     <!-- Config from compilation step -->
     <meta content="{{ site.url }}" name="config-url" />
     <meta content="{{ site.basepath }}" name="config-basepath" />
-    <meta content="{{ site.googleMapApiKey }}" name="config-google-maps-api-key" />
+    <meta content="{{ site.integrations.googleMapsApiKey }}" name="config-google-maps-api-key" />
 
     <link href="{{ site.url }}" rel="canonical" />
 
@@ -56,7 +56,7 @@
     <meta content="{{ site.url }}" property="og:url" />
     <meta content="{{ resources.description }}" property="og:description" />
     <meta content="Event" property="og:type" />
-    <meta content="{{ resources.image }}" property="og:image" />
+    <meta content="{{ site.image }}" property="og:image" />
     <meta content="image/jpeg" property="og:image:type" />
 
     <!-- Twitter meta data -->
@@ -64,9 +64,9 @@
     <meta content="@{{ site.organizer.twitter }}" name="twitter:creator" />
     <meta content="{{ resources.title }}" name="twitter:title" />
     <meta content="{{ resources.description }}" name="twitter:description" />
-    <meta content="{{ resources.image }}" name="twitter:image" />
-    <meta name="twitter:label1" value="{{ site.location.label }}" />
-    <meta name="twitter:data1" value="{{ site.location.name }}" />
+    <meta content="{{ site.image }}" name="twitter:image" />
+    <meta name="twitter:label1" value="{{ resources.mapBlock.title }}" />
+    <meta name="twitter:data1" value="{{ site.event.location.name }}" />
     <meta name="twitter:label2" />
     <meta name="twitter:data2" />
 
@@ -95,7 +95,7 @@
     <script
       async
       defer
-      src="https://maps.googleapis.com/maps/api/js?key={{ site.googleMapApiKey }}&libraries=maps,marker&loading=async&v=beta"
+      src="https://maps.googleapis.com/maps/api/js?key={{ site.integrations.googleMapsApiKey }}&libraries=maps,marker&loading=async&v=beta"
     ></script>
     <script src="./src/hoverboard-app.ts" type="module"></script>
     <script src="./src/service-worker-registration.ts" type="module"></script>

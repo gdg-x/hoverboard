@@ -38,6 +38,7 @@
     "@testing-library/jest-dom": "^7.0.1",
     "@types/node": "^22.20.4",
     "@types/nunjucks": "^3.2.6",
+    "ajv": "^8.20.0",
     "lit-analyzer": "^2.0.3",
     "nunjucks": "^3.2.4",
     "rollup-plugin-copy": "^3.5.0",
