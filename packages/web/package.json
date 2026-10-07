@@ -36,7 +36,7 @@
     "@rolldown/plugin-babel": "^0.2.4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
-    "@types/node": "^22.20.4",
+    "@types/node": "^25.9.9",
     "@types/nunjucks": "^3.2.6",
     "lit-analyzer": "^2.0.3",
     "nunjucks": "^3.2.4",
