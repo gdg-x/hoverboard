@@ -11,6 +11,7 @@ const { runCommandMock, resolveFirebaseBinMock } = vi.hoisted(() => ({
 
 vi.mock('../lib/spawn.js', () => ({ runCommand: runCommandMock }));
 vi.mock('../lib/firebase-cli.js', () => ({ resolveFirebaseBin: resolveFirebaseBinMock }));
+vi.mock('../lib/billing.js', () => ({ isBillingEnabled: vi.fn(async () => true) }));
 
 const dirsToClean: string[] = [];
 const originalEnv = { ...process.env };

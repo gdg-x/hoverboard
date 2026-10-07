@@ -1,5 +1,7 @@
 # Deploy to Firebase
 
+Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#billing).
+
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/):
 
    ```console

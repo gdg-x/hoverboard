@@ -30,3 +30,22 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 1. Whoa! You've set up Firebase into your app.
 
 _Tip: Check out [firestore utils](firebase-utils.md) docs_
+
+## Billing
+
+Hoverboard's Cloud Functions (schedule generation, notifications, image optimization and Mailchimp) need the [Blaze (pay as you go) plan](https://firebase.google.com/pricing). Upgrade in the Firebase console under **Usage and billing**. Run `./hbd doctor` to check the plan of the selected project. Local development with the emulators works without Blaze.
+
+Blaze includes no-cost usage for each product, and typical conference traffic should stay within or close to it, so most sites pay little or nothing. Deploying functions also uses Cloud Build and stores images in Artifact Registry. Run `npx firebase functions:artifacts:setpolicy` once so old images are cleaned up automatically.
+
+### Spend cap and budget
+
+Set up both in the Google Cloud console under [Billing > Budgets & alerts](https://console.cloud.google.com/billing/budgets):
+
+1. A [spend cap budget](https://docs.cloud.google.com/billing/docs/how-to/budgets-spend-caps) for **Cloud Run**. Hoverboard's functions are 2nd gen, which run as Cloud Run services and are billed at [Cloud Run pricing](https://cloud.google.com/run/pricing). Choose **Spend cap enforcement**, select your project and the **Cloud Run** service, and set a monthly amount.
+1. An [alerts-only budget](https://docs.cloud.google.com/billing/docs/how-to/budgets) for the whole project. Firestore, Hosting, Storage, Cloud Scheduler, Cloud Build and Artifact Registry can't be capped, so this budget only sends email.
+
+When the spend cap is reached:
+
+- The site keeps loading, because Hosting and Firestore aren't capped.
+- Functions stop until the next month, or until you lift the cap. Schedule, session and speaker pages aren't regenerated after edits, notifications aren't sent, uploaded images aren't optimized and Mailchimp subscriptions aren't processed.
+- The cap isn't enforced instantly, and usage over it is still billed. Set it a little below the most you're willing to pay.

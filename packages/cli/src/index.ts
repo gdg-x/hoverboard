@@ -18,8 +18,8 @@ program
 program
   .command('doctor')
   .description('Validate the local environment is ready to run and deploy Hoverboard.')
-  .action(() => {
-    process.exitCode = runDoctor() ? 0 : 1;
+  .action(async () => {
+    process.exitCode = (await runDoctor()) ? 0 : 1;
   });
 
 program
