@@ -3,6 +3,7 @@ import '@material/web/fab/fab.js';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import '../components/shared/add-to-calendar';
 import '../components/shared/auth-required';
 import '../components/shared/content-loader';
 import '../components/dialogs/feedback-block';
@@ -135,6 +136,10 @@ export class SessionPage extends ThemedElement {
 
     .additional-sections {
       margin-top: 32px;
+    }
+
+    .calendar {
+      margin-top: 16px;
     }
 
     .actions,
@@ -425,6 +430,8 @@ export class SessionPage extends ThemedElement {
               : nothing
           }
         </div>
+
+        <add-to-calendar class="calendar" .session="${this.session}"></add-to-calendar>
 
         ${
           session?.speakers?.length
