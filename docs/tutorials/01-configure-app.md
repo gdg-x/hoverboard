@@ -86,7 +86,9 @@ The build fails when:
 - `map` is on without `integrations.googleMapsApiKey`.
 - event text links to the page of a feature that is off, for example `/faq` in `footerRelBlock`.
 
-Some parts of a feature still show when it is off: the feedback block and dialog, the My Schedule bookmark button, the notifications toggle, the ticket link in the header, and the Cloud Functions behind `mailchimp`, `notifications` and `imageOptimization`.
+Every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, `optimizeImages` needs `imageOptimization`, and the schedule generator needs `schedule` or `speakers`. The functions read the flags from `features.json`, which their build copies from `site.json`, so deploy the functions again after changing these features.
+
+Some parts of a feature still show when it is off: the feedback block and dialog, the My Schedule bookmark button, the notifications toggle, and the ticket link in the header.
 
 ## Toolbar Navigation
 

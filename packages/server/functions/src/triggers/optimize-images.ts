@@ -5,12 +5,15 @@ import { onObjectFinalized, StorageObjectData } from 'firebase-functions/v2/stor
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import { isFeatureOff } from '../features.js';
 
 const mkdirp = (path: string) => fs.promises.mkdir(path, { recursive: true });
 
 const gcs = new Storage();
 
 export const optimizeImages = onObjectFinalized((event) => {
+  if (isFeatureOff('optimizeImages', 'imageOptimization')) return null;
+
   const object = event.data;
   const contentType = object?.contentType;
   // Exit if this is triggered on a file that is not an image.

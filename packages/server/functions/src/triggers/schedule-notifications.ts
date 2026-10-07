@@ -4,6 +4,7 @@ import type { MulticastMessage } from 'firebase-admin/messaging';
 import * as logger from 'firebase-functions/logger';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { fetchConfig } from '../db/config.js';
+import { isFeatureOff } from '../features.js';
 import { fetchFeaturedSessions } from '../db/featured-sessions.js';
 import { fetchNotificationsUser, removeUserTokens } from '../db/notifications-users.js';
 import { getSchedule } from '../db/schedule.js';
@@ -51,6 +52,14 @@ const sendPushNotificationToUsers = async (userIds: string[], data: MulticastMes
 };
 
 export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
+  // Session reminders go to the sessions that users saved to My Schedule.
+  if (
+    isFeatureOff('scheduleNotifications', 'notifications') ||
+    isFeatureOff('scheduleNotifications', 'mySchedule')
+  ) {
+    return;
+  }
+
   const notificationsConfigPromise = fetchConfig<{ timezone?: string; icon?: string }>(
     'notifications',
   );

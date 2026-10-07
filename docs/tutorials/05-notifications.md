@@ -4,6 +4,8 @@ There are two types of [push notifications](https://firebase.google.com/products
 
 Browsers that support [`Navigator.permissions`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/permissions) and are supported by [Firebase Messaging](https://firebase.google.com/docs/web/environments-js-sdk).
 
+Notifications need the `notifications` feature, and My Schedule reminders also need `mySchedule` ([Features](01-configure-app.md#features)). Both are on by default.
+
 ### My Schedule notifications
 
 A few minutes before a sessions starts, attendees can get reminder notifications. These are sent automatically by [`schedule-notifications.ts`](../../packages/server/functions/src/triggers/schedule-notifications.ts).
