@@ -36,21 +36,15 @@
     "@rolldown/plugin-babel": "^0.2.4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
-    "@types/jsdom": "^30.0.0",
-    "@types/marked": "^6.0.0",
     "@types/node": "^22.20.4",
     "@types/nunjucks": "^3.2.6",
     "lit-analyzer": "^2.0.3",
     "nunjucks": "^3.2.4",
-    "rollup": "^4.63.1",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-workbox": "^9.0.0",
     "typescript": "^6.0.3",
     "urlpattern-polyfill": "^10.1.0",
     "vite": "^8.3.0"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.44.0"
   }
 }
