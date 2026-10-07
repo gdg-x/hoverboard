@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap-sha": "80395b0ccc6e08cc1f0cdff50186ee119aad0b24",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "package-name": "hoverboard",
+      "include-component-in-tag": false,
+      "release-as": "4.0.0",
+      "changelog-sections": [
+        { "type": "feat", "section": "Features" },
+        { "type": "fix", "section": "Bug Fixes" },
+        { "type": "perf", "section": "Performance" },
+        { "type": "revert", "section": "Reverts" },
+        { "type": "docs", "section": "Documentation" },
+        { "type": "refactor", "section": "Refactors", "hidden": true },
+        { "type": "test", "section": "Tests", "hidden": true },
+        { "type": "build", "section": "Build", "hidden": true },
+        { "type": "ci", "section": "CI", "hidden": true },
+        { "type": "chore", "section": "Chores", "hidden": true },
+        { "type": "style", "section": "Style", "hidden": true }
+      ]
+    }
+  }
+}

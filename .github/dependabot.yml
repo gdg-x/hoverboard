@@ -4,6 +4,8 @@ updates:
     directory: '/'
     schedule:
       interval: monthly
+    commit-message:
+      prefix: ci
   - package-ecosystem: npm
     directories:
       - '/'
@@ -13,6 +15,9 @@ updates:
       - '/packages/storage'
     schedule:
       interval: monthly
+    commit-message:
+      prefix: chore
+      include: scope
     open-pull-requests-limit: 25
     groups:
       rollup:
