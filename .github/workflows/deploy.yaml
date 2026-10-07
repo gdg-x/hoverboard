@@ -14,8 +14,6 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version-file: package.json
-      - name: Create temp serviceAccount.json
-        run: echo "{}" > serviceAccount.json
       - run: npm ci
       - run: npm run build
       # `./hbd setup-github` sets these variables. See docs/tutorials/04-deploy.md.

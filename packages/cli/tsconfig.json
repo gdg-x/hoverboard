@@ -6,7 +6,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "sourceMap": true,
-    "module": "es2020",
+    "module": "es2022",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "strict": true

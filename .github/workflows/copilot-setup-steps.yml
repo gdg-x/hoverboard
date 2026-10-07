@@ -25,6 +25,3 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Create temp serviceAccount.json
-        run: echo "{}" > serviceAccount.json

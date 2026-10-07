@@ -1,6 +1,7 @@
 import { findRepoRoot, checkNodeVersion, type DoctorCheckResult } from '../utils/node-version.js';
 import { checkBilling } from '../utils/billing.js';
 import { checkFirebaseProject, resolveFirebaseProjectId } from '../utils/firebase-project.js';
+import { checkServiceAccountKeys } from '../utils/service-account-keys.js';
 import { checkGitHubDeploys } from './setup-github.js';
 
 const symbol = (check: DoctorCheckResult): string => {
@@ -19,6 +20,7 @@ export const runDoctor = async (): Promise<boolean> => {
   const checks: DoctorCheckResult[] = [
     checkNodeVersion(repoRoot),
     checkFirebaseProject(repoRoot),
+    checkServiceAccountKeys(repoRoot),
     await checkBilling(repoRoot, projectId),
     await checkGitHubDeploys(repoRoot, projectId),
   ];

@@ -21,7 +21,7 @@ Each package has its own `package.json` and `package-lock.json`. The root is a t
 - Node.js and npm versions come from `engines` in the root `package.json`. CI uses the same file.
 - `npm ci` at the root also installs every package through `postinstall`.
 - Java is needed for the Firestore emulator, which the rules tests and `npm start` use.
-- Some commands expect a `serviceAccount.json` at the root. For local checks, `echo "{}" > serviceAccount.json` is enough. Never commit a real one.
+- Production Firestore commands sign in with the Firebase CLI login (`npx firebase login`). There are no service account key files.
 
 ## Commands
 
