@@ -50,11 +50,7 @@ export const googleCalendarUrl = (event: CalendarEvent): string => {
 };
 
 const escapeText = (value: string) =>
-  value
-    .replace(/\\/g, '\\\\')
-    .replace(/\r?\n/g, '\\n')
-    .replace(/;/g, '\\;')
-    .replace(/,/g, '\\,');
+  value.replace(/\\/g, '\\\\').replace(/\r?\n/g, '\\n').replace(/;/g, '\\;').replace(/,/g, '\\,');
 
 export const icsContent = (event: CalendarEvent, uid: string): string =>
   [

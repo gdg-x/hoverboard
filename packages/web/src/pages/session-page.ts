@@ -1,4 +1,5 @@
 import { Success } from '@abraham/remotedata';
+import '@material/web/button/outlined-button.js';
 import '@material/web/fab/fab.js';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
@@ -120,7 +121,6 @@ export class SessionPage extends ThemedElement {
     }
 
     .action {
-      margin-right: 16px;
       color: var(--primary-text-color);
       cursor: pointer;
       user-select: none;
@@ -138,11 +138,13 @@ export class SessionPage extends ThemedElement {
       margin-top: 32px;
     }
 
-    .calendar {
-      margin-top: 16px;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
     }
 
-    .actions,
     .section-content {
       display: flex;
     }
@@ -422,16 +424,15 @@ export class SessionPage extends ThemedElement {
           ${
             session?.videoId
               ? html`
-                  <div class="action" @click="${this.openVideo}">
-                    <hoverboard-icon name="video"></hoverboard-icon>
+                  <md-outlined-button class="video-button" @click="${this.openVideo}">
+                    <hoverboard-icon slot="icon" name="video"></hoverboard-icon>
                     ${this.sessionDetails.viewVideo}
-                  </div>
+                  </md-outlined-button>
                 `
               : nothing
           }
+          <add-to-calendar .session="${this.session}"></add-to-calendar>
         </div>
-
-        <add-to-calendar class="calendar" .session="${this.session}"></add-to-calendar>
 
         ${
           session?.speakers?.length

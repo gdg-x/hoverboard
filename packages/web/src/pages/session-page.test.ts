@@ -184,9 +184,8 @@ describe('session-page', () => {
     await element.updateComplete;
     await element.updateComplete;
 
-    const videoAction = Array.from(shadowRoot.querySelectorAll('.action')).find((el) =>
-      el.textContent?.includes('View video'),
-    );
+    const videoAction = shadowRoot.querySelector('.video-button');
+    expect(videoAction).toHaveTextContent('View video');
     fireEvent.click(videoAction as Element);
 
     expect(mockOpenVideoDialog).toHaveBeenCalledWith({
