@@ -2,7 +2,7 @@ import { type BaseRouteConfig, type RouteConfig, Router } from '@lit-labs/router
 import { html, type ReactiveControllerHost, type TemplateResult } from 'lit';
 import { logPageView } from './utils/analytics.js';
 import { type Feature, isFeatureEnabled } from './config/features.js';
-import { CONFIG, getConfig } from './config/site.js';
+import { url } from './config/site.js';
 
 type Params = Record<string, string | undefined>;
 
@@ -28,8 +28,6 @@ export class AppRouter extends Router {
 }
 
 export let router: AppRouter;
-
-const url = getConfig(CONFIG.URL);
 
 export const onLocationChanged = (pathname: string) => {
   // url ends in a slash and pathname starts with a slash

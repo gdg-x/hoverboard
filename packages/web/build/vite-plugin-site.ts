@@ -1,7 +1,27 @@
 import n from 'nunjucks';
-import type { PluginOption } from 'vite';
+import type { Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
+import { FEATURES } from '../src/config/features';
 import { resolveConfig, type SiteConfig } from './resolve-config';
+
+export const SITE_MODULE = 'virtual:hoverboard/site';
+const RESOLVED_SITE_MODULE = `\0${SITE_MODULE}`;
+
+/** Feature flags as one constant, so the bundler can drop the code of disabled features. */
+export const featureDefines = (): Record<string, string> => ({
+  __HB_FEATURES__: JSON.stringify(Object.fromEntries(FEATURES.map((feature) => [feature, true]))),
+});
+
+/** Serves the resolved config as `virtual:hoverboard/site`, the client's only source of config. */
+export const siteModule = ({ site, resources }: SiteConfig): Plugin => ({
+  name: 'hoverboard-site-module',
+  config: () => ({ define: featureDefines() }),
+  resolveId: (id) => (id === SITE_MODULE ? RESOLVED_SITE_MODULE : undefined),
+  load: (id) =>
+    id === RESOLVED_SITE_MODULE
+      ? `export const site = ${JSON.stringify(site)};\nexport const resources = ${JSON.stringify(resources)};\n`
+      : undefined,
+});
 
 // Tag names come from session data, so their colors are site config, not theme code.
 export const themeColorsCss = ({ site }: SiteConfig): string => {
@@ -19,6 +39,7 @@ export const site = (): PluginOption[] => {
   const compileBufferTemplate = (body: Buffer) => compileTemplate(body.toString());
 
   return [
+    siteModule(data),
     {
       name: 'hoverboard-template-html',
       // `pre` so Vite's own HTML parsing (module script discovery, asset href resolution)

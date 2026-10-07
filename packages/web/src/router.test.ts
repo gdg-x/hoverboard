@@ -1,10 +1,9 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { RouteConfig } from '@lit-labs/router';
 
-const getConfig = vi.fn((_key: string) => 'https://example.com/');
 vi.mock('./config/site.js', async (importOriginal) => ({
   ...(await importOriginal<typeof import('./config/site.js')>()),
-  getConfig: (key: string) => getConfig(key),
+  url: 'https://example.com/',
 }));
 
 const logPageView = vi.fn();

@@ -5,8 +5,7 @@ import type { RemoteMarkDown } from './remote-markdown';
 import './remote-markdown';
 
 // toc-markdown.ts imports scrolling.ts, which imports header-toolbar.ts
-// (for HEADER_HEIGHT) which imports the router, calling getConfig(CONFIG.URL)
-// at module load time.
+// (for HEADER_HEIGHT) which imports the router and its routes.
 vi.mock('../../router', () => ({
   router: { urlForName: vi.fn() },
 }));

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { CONFIG, getConfig, navigation } from './site';
+import { basepath, image, navigation, signIn, title, url } from './site';
 
 describe('navigation', () => {
   afterEach(() => {
@@ -30,33 +30,15 @@ describe('navigation', () => {
   });
 });
 
-describe('getConfig', () => {
-  afterEach(() => {
-    document.head.innerHTML = '';
+describe('resolved config', () => {
+  it('has the deploy values the build resolved', () => {
+    expect(url).toMatch(/^https:\/\/.+\/$/);
+    expect(basepath).toBe('/');
+    expect(image).toBe(`${url}images/social-share.jpg`);
   });
 
-  it('returns the content of the matching meta tag', () => {
-    const meta = document.createElement('meta');
-    meta.name = `config-${CONFIG.BASEPATH}`;
-    meta.content = '/basepath';
-    document.head.appendChild(meta);
-
-    expect(getConfig(CONFIG.BASEPATH)).toBe('/basepath');
-  });
-
-  it('throws when the meta tag is missing', () => {
-    expect(() => getConfig(CONFIG.URL)).toThrow(
-      `Config ${CONFIG.URL} is missing or doesn't have a value`,
-    );
-  });
-
-  it('throws when the meta tag has an empty value', () => {
-    const meta = document.createElement('meta');
-    meta.name = `config-${CONFIG.GOOGLE_MAPS_API_KEY}`;
-    document.head.appendChild(meta);
-
-    expect(() => getConfig(CONFIG.GOOGLE_MAPS_API_KEY)).toThrow(
-      `Config ${CONFIG.GOOGLE_MAPS_API_KEY} is missing or doesn't have a value`,
-    );
+  it('has the site content merged over the default UI text', () => {
+    expect(title).toBeTruthy();
+    expect(signIn).toBe('Sign in');
   });
 });
