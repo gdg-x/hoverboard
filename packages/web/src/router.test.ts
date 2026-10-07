@@ -1,4 +1,5 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import type { RouteConfig } from '@lit-labs/router';
 
 const getConfig = vi.fn((_key: string) => 'https://example.com/');
 vi.mock('./config/site.js', async (importOriginal) => ({
@@ -8,6 +9,12 @@ vi.mock('./config/site.js', async (importOriginal) => ({
 
 const logPageView = vi.fn();
 vi.mock('./utils/analytics.js', () => ({ logPageView }));
+
+const isFeatureEnabled = vi.fn((_feature: string) => true);
+vi.mock('./config/features.js', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./config/features.js')>()),
+  isFeatureEnabled: (feature: string) => isFeatureEnabled(feature),
+}));
 
 const { decodeParam, onLocationChanged, selectRouteName, startRouter } = await import('./router');
 
@@ -83,6 +90,51 @@ describe('urlForName', () => {
 
   it('throws for an unknown route name', () => {
     expect(() => router.urlForName('missing')).toThrow('Unknown route name: missing');
+  });
+});
+
+describe('feature routes', () => {
+  const host = Object.assign(document.createElement('div'), {
+    addController: vi.fn(),
+    requestUpdate: vi.fn(),
+  });
+  const routePath = (route: RouteConfig) => ('path' in route ? route.path : undefined);
+
+  afterEach(() => {
+    isFeatureEnabled.mockImplementation(() => true);
+  });
+
+  it('installs the routes of every enabled feature', () => {
+    const paths = startRouter(host as never).routes.map(routePath);
+
+    expect(paths).toEqual([
+      '/',
+      '/blog',
+      '/blog/posts/:id',
+      '/blog/:id',
+      '/schedule/my-schedule',
+      '/schedule/:id?',
+      '/sessions',
+      '/sessions/:id',
+      '/speakers',
+      '/speakers/:id',
+      '/previous-speakers',
+      '/previous-speakers/:id',
+      '/team',
+      '/faq',
+      '/coc',
+    ]);
+  });
+
+  it('leaves out the routes of disabled features', () => {
+    isFeatureEnabled.mockImplementation((feature) => feature !== 'blog');
+
+    const router = startRouter(host as never);
+
+    expect(router.routes.map(routePath)).not.toContain('/blog');
+    expect(() => router.urlForName('post-page', { id: 'x' })).toThrow(
+      'Unknown route name: post-page',
+    );
   });
 });
 

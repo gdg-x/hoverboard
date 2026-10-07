@@ -1,5 +1,8 @@
 // The only client entry point for site config. Read config from here, never from the data files.
 
+import { navigation as allNavigation } from '../../public/data/settings.json';
+import { isFeature, isFeatureEnabled } from './features';
+
 export {
   aboutBlock,
   aboutOrganizerBlock,
@@ -59,12 +62,16 @@ export {
   heroSettings,
   location,
   mailto,
-  navigation,
   organizer,
   showForkMeBlockForProjectIds,
   signInProviders,
   socialNetwork,
 } from '../../public/data/settings.json';
+
+// Entries whose route names a feature are hidden when that feature is off.
+export const navigation = allNavigation.filter(
+  ({ route }) => !isFeature(route) || isFeatureEnabled(route),
+);
 
 // Deploy-specific values are rendered into meta tags in index.html at build time.
 export enum CONFIG {
