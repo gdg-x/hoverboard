@@ -3,11 +3,17 @@ on:
   push:
     branches:
       - main
+  # Rebuilds the pages from the current Firestore content, for example after editing it.
+  workflow_dispatch:
 permissions:
   contents: read
   id-token: write
+# A manual run and a push never deploy at the same time.
+concurrency: deploy
 jobs:
   deploy:
+    # A manual run can pick any branch. Only main deploys to the live site.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
