@@ -1,7 +1,8 @@
-import type { RefreshTheme } from './tokens';
+import type { Theme } from './tokens';
 
 // Inspired by DevFest for Ukraine: no outlines, soft glow shadows and one bright yellow accent.
-export const spotlight: RefreshTheme = {
+export const spotlight: Theme = {
+  fonts: { display: 'unbounded', body: 'inter', mono: 'jetbrains-mono' },
   light: {
     primary: '#2848c9',
     onPrimary: '#ffffff',

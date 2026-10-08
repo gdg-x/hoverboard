@@ -8,7 +8,10 @@
     "providers": ["google"]
   },
   "theme": {
-    "name": "default",
+    "name": "festival",
+    "colorScheme": "system",
+    "density": "default",
+    "decorations": true,
     "badgeColors": {
       "gde": "#3d5afe",
       "wtm": "#1de9b6",

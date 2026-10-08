@@ -1,15 +1,8 @@
 /*
- * Base styles for the visual refresh: tokens that do not depend on the theme, the color scheme
- * switch, and the focus ring. Theme colors and shapes come from src/themes/refresh/.
- * Only the design gallery loads this file until the refresh lands.
+ * Base styles: tokens that do not depend on the theme, the color scheme switch, and the focus ring.
+ * The build writes the theme's colors, shapes, fonts and density on `:root` in the page head.
  */
 :root {
-  color-scheme: light dark;
-
-  --hb-font-display: 'Unbounded Variable', ui-sans-serif, system-ui, sans-serif;
-  --hb-font-body: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --hb-font-mono: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-
   --hb-text-xs: 0.75rem;
   --hb-text-sm: 0.875rem;
   --hb-text-md: 1rem;
@@ -21,18 +14,17 @@
   --hb-text-5xl: clamp(2.75rem, 1.8rem + 4.5vw, 4.75rem);
   --hb-text-6xl: clamp(3.25rem, 1.9rem + 6.5vw, 6.5rem);
 
-  /* `theme.density` sets the factor. Type and touch targets do not change with it. */
-  --hb-density: 1;
-  --hb-space-1: calc(4px * var(--hb-density));
-  --hb-space-2: calc(8px * var(--hb-density));
-  --hb-space-3: calc(12px * var(--hb-density));
-  --hb-space-4: calc(16px * var(--hb-density));
-  --hb-space-5: calc(24px * var(--hb-density));
-  --hb-space-6: calc(32px * var(--hb-density));
-  --hb-space-7: calc(48px * var(--hb-density));
-  --hb-space-8: calc(64px * var(--hb-density));
-  --hb-space-9: calc(96px * var(--hb-density));
-  --hb-space-10: calc(128px * var(--hb-density));
+  /* `theme.density` sets --hb-density. Type and touch targets do not change with it. */
+  --hb-space-1: calc(4px * var(--hb-density, 1));
+  --hb-space-2: calc(8px * var(--hb-density, 1));
+  --hb-space-3: calc(12px * var(--hb-density, 1));
+  --hb-space-4: calc(16px * var(--hb-density, 1));
+  --hb-space-5: calc(24px * var(--hb-density, 1));
+  --hb-space-6: calc(32px * var(--hb-density, 1));
+  --hb-space-7: calc(48px * var(--hb-density, 1));
+  --hb-space-8: calc(64px * var(--hb-density, 1));
+  --hb-space-9: calc(96px * var(--hb-density, 1));
+  --hb-space-10: calc(128px * var(--hb-density, 1));
 
   --hb-radius-full: 9999px;
   --hb-target-min: 44px;
@@ -46,6 +38,10 @@
   --hb-content-max: 1200px;
   --hb-prose-max: 68ch;
   --hb-gutter: clamp(16px, 4vw, 40px);
+
+  /* @material/web components, until the hb-* primitives replace them. */
+  --md-ref-typeface-brand: var(--hb-font-body);
+  --md-ref-typeface-plain: var(--hb-font-body);
 }
 
 :root[data-color-scheme='light'] {
@@ -68,6 +64,11 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {

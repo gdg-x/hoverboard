@@ -53,6 +53,27 @@ export const workboxConfig: Omit<GenerateSWOptions, 'globDirectory' | 'swDest'> 
       },
     },
     {
+      // Font files are hashed, or versioned by the font service, so a cached font never goes stale.
+      urlPattern: ({ request }) => request.destination === 'font',
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'fonts-cache',
+        cacheableResponse: { statuses: [200] },
+        expiration: { maxAgeSeconds: ONE_WEEK * 52, maxEntries: 30 },
+      },
+    },
+    {
+      // Font service stylesheets from `theme.fonts`. The site's own CSS is precached.
+      urlPattern: ({ request, url }) =>
+        request.destination === 'style' && url.origin !== self.location.origin,
+      handler: 'StaleWhileRevalidate',
+      options: {
+        cacheName: 'font-stylesheets-cache',
+        cacheableResponse: { statuses: [0, 200] },
+        expiration: { maxAgeSeconds: ONE_WEEK, maxEntries: 10 },
+      },
+    },
+    {
       urlPattern: ({ url }) =>
         url.origin === self.location.origin && url.pathname.startsWith('/images/'),
       handler: 'StaleWhileRevalidate',

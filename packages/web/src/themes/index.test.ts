@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { contrastFailures, contrastRatio } from './contrast';
-import { REFRESH_THEMES, themeDeclarations } from './index';
+import { THEMES, themeDeclarations } from './index';
 import { COLOR_ROLES, cssColorVar } from './tokens';
 
 describe('contrastRatio', () => {
@@ -16,7 +16,7 @@ describe('contrastRatio', () => {
   });
 });
 
-describe.each(Object.entries(REFRESH_THEMES))('%s theme', (_, theme) => {
+describe.each(Object.entries(THEMES))('%s theme', (_, theme) => {
   it('passes every contrast pair in light and dark', () => {
     expect(contrastFailures(theme)).toEqual([]);
   });

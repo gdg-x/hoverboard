@@ -73,7 +73,8 @@ The diagram below is a brief summary of the directories within the project.
     - `pages/` has the Astro pages that every site has: not found, offline and the web app manifest.
     - `routes/` has the other Astro pages. The build only includes the pages of the features that are on.
     - `store/` is where you keep your Redux state.
-    - `styles/` is where you keep your theme.
+    - `styles/` has the shared styles: type scale, spacing and motion.
+    - `themes/` has the built-in themes, with their colors and fonts.
     - `utils/` is where you keep your shared helpers.
     - `views/` is where you keep your page elements.
 

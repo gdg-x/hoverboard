@@ -4,18 +4,18 @@ import { dirname, join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { deepMerge } from '../src/config/merge';
 import { FEATURES, type Feature } from '../src/config/features';
+import { festival } from '../src/themes/festival';
 import { THEMES } from '../src/themes/index';
-import { defaultTheme } from '../src/themes/default';
-import { THEME_TOKENS } from '../src/themes/tokens';
+import { COLOR_ROLES } from '../src/themes/tokens';
 import { ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
 import {
   buildMarkdown,
   featureDefines,
+  layoutThemeCss,
   mapsScriptSrc,
   markdownTranslations,
   siteModule,
   templateRenderer,
-  themeColorsCss,
 } from './vite-plugin-site';
 
 const repoPaths = configPaths(join(import.meta.dirname, '..'));
@@ -501,18 +501,18 @@ describe('siteModule', () => {
     ...resolveConfig({ paths: repoPaths, nodeEnv: 'production' }),
     contentTranslations: { es: { title: 'DevFest en español' } },
   };
-  const plugin = siteModule(config);
+  const plugin = siteModule(config, { siteDir: repoPaths.site });
   const resolveId = plugin.resolveId as (id: string) => string | undefined;
-  const load = plugin.load as (id: string) => string | undefined;
+  const load = plugin.load as (id: string) => Promise<string | undefined>;
 
-  it('lazy-loads each content translation from its own module', () => {
-    const code = load(resolveId('virtual:hoverboard/site')!)!;
+  it('lazy-loads each content translation from its own module', async () => {
+    const code = (await load(resolveId('virtual:hoverboard/site')!))!;
 
     expect(code).toContain(`export const resources = ${JSON.stringify(config.resources)};`);
     expect(code).toContain(
       'export const contentTranslations = {"es": () => import("virtual:hoverboard/content/es")};',
     );
-    expect(load(resolveId('virtual:hoverboard/content/es')!)).toBe(
+    expect(await load(resolveId('virtual:hoverboard/content/es')!)).toBe(
       'export default {"title":"DevFest en español"};\n',
     );
   });
@@ -522,12 +522,24 @@ describe('siteModule', () => {
     expect(resolveId('virtual:hoverboard/content/constructor')).toBeUndefined();
   });
 
-  it('serves the theme and head data to the layout', () => {
-    const code = load(resolveId('virtual:hoverboard/layout')!)!;
+  it('serves the theme and head data to the layout', async () => {
+    const code = (await load(resolveId('virtual:hoverboard/layout')!))!;
 
     expect(code).toContain(`export const theme = ${JSON.stringify(config.theme)};`);
-    expect(code).toContain(`export const themeCss = ${JSON.stringify(themeColorsCss(config))};`);
+    expect(code).toContain(`export const themeCss = ${JSON.stringify(layoutThemeCss(config))};`);
     expect(code).toContain(`export const mapsScript = ${JSON.stringify(mapsScriptSrc(config))};`);
+  });
+
+  it('serves the theme fonts with imported file URLs', async () => {
+    const code = (await load(resolveId('virtual:hoverboard/fonts')!))!;
+
+    expect(code).toContain(
+      'import font0 from "@fontsource-variable/unbounded/files/unbounded-cyrillic-ext-wght-normal.woff2?url&no-inline";',
+    );
+    expect(code).toContain(
+      '--hb-font-display:\\"Unbounded Variable\\", \\"Unbounded Variable Fallback\\", Arial, sans-serif;',
+    );
+    expect(code).toContain('export const fontStylesheets = [];');
   });
 });
 
@@ -548,53 +560,83 @@ describe('mapsScriptSrc', () => {
   });
 });
 
-describe('themeColorsCss', () => {
-  it('writes the theme tokens and the badge and tag colors as custom properties', () => {
-    const config = {
-      site: { theme: { badgeColors: { gde: 'blue' }, tagColors: { android: 'green' } } },
-      theme: { primary: 'purple', text: 'black' },
-    } as unknown as Parameters<typeof themeColorsCss>[0];
+describe('layoutThemeCss', () => {
+  it('writes the theme with the badge and tag colors', () => {
+    const config = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
 
-    expect(themeColorsCss(config)).toBe(
-      ':root { --default-primary-color: purple; --primary-text-color: black; --gde: blue; --android: green; }',
+    const css = layoutThemeCss(config);
+
+    expect(css).toContain(
+      `--hb-color-primary: light-dark(${festival.light.primary}, ${festival.dark.primary});`,
     );
+    expect(css).toContain('--gde: #3d5afe;');
+    expect(css).toContain(`--android: ${config.site.theme.tagColors.android};`);
   });
 });
 
 describe('theme', () => {
-  it('uses the default theme', () => {
+  it('uses the festival theme, following the system color scheme', () => {
     const { theme } = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
 
-    expect(theme).toEqual(defaultTheme);
+    expect(theme).toMatchObject({
+      name: 'festival',
+      colorScheme: 'system',
+      density: 'default',
+      decorations: true,
+      light: festival.light,
+      dark: festival.dark,
+    });
   });
 
   it('overrides colors of the theme', () => {
-    const paths = makePaths({ site: { theme: { colors: { primary: '#e91e63' } } } });
+    const paths = makePaths({
+      site: { theme: { colors: { primary: '#c2185b' }, darkColors: { primary: '#ff8fb8' } } },
+    });
 
     const { theme } = resolveConfig({ paths, nodeEnv: 'production' });
 
-    expect(theme).toEqual({ ...defaultTheme, primary: '#e91e63' });
+    expect(theme.light.primary).toBe('#c2185b');
+    expect(theme.dark.primary).toBe('#ff8fb8');
   });
 
-  it('rejects unknown themes and colors', () => {
-    const paths = makePaths({ site: { theme: { name: 'dark', colors: { brand: '#000' } } } });
+  it('rejects unknown themes, settings and colors', () => {
+    const paths = makePaths({
+      site: {
+        theme: {
+          name: 'default',
+          colorScheme: 'auto',
+          density: 'tight',
+          colors: { brand: '#000000', primary: '#3557e680' },
+        },
+      },
+    });
 
     expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([
       'site.json/theme/name: must be equal to one of the allowed values',
+      'site.json/theme/colorScheme: must be equal to one of the allowed values',
+      'site.json/theme/density: must be equal to one of the allowed values',
       'site.json/theme/colors: must NOT have additional properties "brand"',
+      'site.json/theme/colors/primary: must match pattern "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"',
     ]);
   });
 
-  it('lists every theme and token in the schema', () => {
-    const schema = readJson(join(repoPaths.schemas, 'site.schema.json')) as {
-      properties: {
-        theme: { properties: { name: { enum: string[] }; colors: { properties: object } } };
-      };
-    };
-    const { name, colors } = schema.properties.theme.properties;
+  it('rejects colors with too little contrast in the schemes the site uses', () => {
+    const errorsFor = (theme: object) =>
+      loadConfig({ paths: makePaths({ site: { theme } }), nodeEnv: 'production' }).errors;
 
-    expect(name.enum).toEqual(Object.keys(THEMES));
-    expect(Object.keys(colors.properties)).toEqual(Object.keys(THEME_TOKENS));
-    expect(Object.keys(defaultTheme)).toEqual(Object.keys(THEME_TOKENS));
+    expect(errorsFor({ darkColors: { onPrimary: '#ffffff' } })).toEqual([
+      'site.json/theme: onPrimary on primary has a contrast of 2.02:1 in the dark scheme, and needs 4.5:1. Change theme.darkColors.',
+    ]);
+    expect(errorsFor({ colorScheme: 'light', darkColors: { onPrimary: '#ffffff' } })).toEqual([]);
+  });
+
+  it('lists every theme and color in the schema', () => {
+    const schema = readJson(join(repoPaths.schemas, 'site.schema.json')) as {
+      properties: { theme: { properties: { name: { enum: string[] } } } };
+      $defs: { themeColors: { properties: object } };
+    };
+
+    expect(schema.properties.theme.properties.name.enum).toEqual(Object.keys(THEMES));
+    expect(Object.keys(schema.$defs.themeColors.properties)).toEqual([...COLOR_ROLES]);
   });
 });

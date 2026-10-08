@@ -19,7 +19,7 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
   "schedule": { "published": true },
   "social": { "hashtag": "..", "follow": [..] },
   "auth": { "providers": ["google"] },
-  "theme": { "name": "default", "colors": {..}, "tagColors": {..} },
+  "theme": { "name": "festival", "colorScheme": "system", "colors": {..}, "fonts": {..} },
   "integrations": { "googleMapsApiKey": ".." },
   "heroSettings": {..},
   ...

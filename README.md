@@ -24,7 +24,7 @@ Our goal is to allow event organizers to set up a professional conference websit
 | **SEO optimized**                    | index all content and get to the top in search results                                                                       |
 | **Speakers and schedule management** | keep and update all information in the Firebase                                                                              |
 | **My schedule**                      | let attendees save sessions they want to visit                                                                               |
-| **Customizable theme**               | change colors to match your style                                                                                            |
+| **Customizable theme**               | light and dark themes, with your own colors and fonts                                                                        |
 | **Blog**                             | post announcements, updates and useful information                                                                           |
 
 ## Getting Started

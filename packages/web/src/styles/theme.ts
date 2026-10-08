@@ -28,9 +28,7 @@ export const theme = css`
       0 1px 3px -2px color-mix(in srgb, var(--default-primary-color) 40%, transparent),
       0 4px 5px 0 color-mix(in srgb, var(--default-primary-color) 40%, transparent),
       0 2px 9px 0 color-mix(in srgb, var(--default-primary-color) 40%, transparent);
-    --font-family:
-      -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, helvetica, arial, sans-serif,
-      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    --font-family: var(--hb-font-body);
     --max-container-width: 1280px;
     --header-height: 56px;
   }

@@ -1,27 +1,24 @@
 ---
 // The design gallery for the visual refresh: tokens, primitives and mocks of the new pages, in
 // every theme, color scheme and density. Development only; `astro build` leaves it out.
-import '@fontsource-variable/inter';
-import '@fontsource-variable/jetbrains-mono';
-import '@fontsource-variable/unbounded';
+import { fontCss } from 'virtual:hoverboard/fonts';
 import HeroIllustration from '../design/HeroIllustration.astro';
 import Icon from '../design/Icon.astro';
 import ScheduleMock from '../design/ScheduleMock.astro';
 import SpeakerCard from '../design/SpeakerCard.astro';
 import '../design/prototype.css';
-import '../styles/refresh-base.css';
-import { contrastResults } from '../themes/refresh/contrast';
-import { REFRESH_THEMES, type RefreshThemeName, themeDeclarations } from '../themes/refresh/index';
-import { COLOR_ROLES, cssColorVar } from '../themes/refresh/tokens';
+import '../styles/base.css';
+import { contrastResults } from '../themes/contrast';
+import { THEMES, type ThemeName, themeDeclarations } from '../themes/index';
+import { COLOR_ROLES, cssColorVar } from '../themes/tokens';
 
-const themes = Object.entries(REFRESH_THEMES) as [
-  RefreshThemeName,
-  (typeof REFRESH_THEMES)[RefreshThemeName],
-][];
+const themes = Object.entries(THEMES) as [ThemeName, (typeof THEMES)[ThemeName]][];
 const themeNames = themes.map(([name]) => name);
-const themeCss = themes
-  .map(([name, theme]) => `:root[data-theme='${name}'] {\n${themeDeclarations(theme)}\n}`)
-  .join('\n');
+// The gallery switches theme, scheme and density itself, instead of using the site's settings.
+const themeCss = [
+  ':root { color-scheme: light dark; --hb-density: 1; }',
+  ...themes.map(([name, theme]) => `:root[data-theme='${name}'] {\n${themeDeclarations(theme)}\n}`),
+].join('\n');
 // Hides the parts of the gallery that belong to the other themes.
 const themeVisibilityCss = themeNames
   .map(
@@ -112,6 +109,7 @@ const speakers = [
       }
     </script>
     <style is:inline set:html={themeCss} />
+    <style is:inline set:html={fontCss} />
     <style is:inline set:html={themeVisibilityCss} />
   </head>
 

@@ -1,4 +1,4 @@
-import type { ColorRole, ColorSet, RefreshTheme } from './tokens';
+import type { ColorRole, ColorSet, Theme } from './tokens';
 
 const channel = (value: number) => {
   const c = value / 255;
@@ -67,9 +67,12 @@ export const contrastResults = (colors: ColorSet): ContrastResult[] =>
     min,
   }));
 
-/** Every pair below its minimum, in both schemes. */
-export const contrastFailures = (theme: RefreshTheme) =>
-  (['light', 'dark'] as const).flatMap((scheme) =>
+/** Every pair below its minimum, in the given schemes. */
+export const contrastFailures = (
+  theme: Pick<Theme, 'light' | 'dark'>,
+  schemes: readonly ('light' | 'dark')[] = ['light', 'dark'],
+) =>
+  schemes.flatMap((scheme) =>
     contrastResults(theme[scheme])
       .filter(({ ratio, min }) => ratio < min)
       .map((result) => ({ scheme, ...result })),

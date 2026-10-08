@@ -1,7 +1,8 @@
-import type { RefreshTheme } from './tokens';
+import type { Theme } from './tokens';
 
 // Paper surfaces, ink outlines and hard offset shadows. Accents: blue, red, yellow, green.
-export const festival: RefreshTheme = {
+export const festival: Theme = {
+  fonts: { display: 'unbounded', body: 'inter', mono: 'jetbrains-mono' },
   light: {
     primary: '#3557e6',
     onPrimary: '#ffffff',

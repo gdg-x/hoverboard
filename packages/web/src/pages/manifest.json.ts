@@ -11,8 +11,9 @@ export const GET: APIRoute = () =>
     lang: site.locales.source,
     start_url: './?utm_source=web_app_manifest',
     display: 'standalone',
-    background_color: theme.primary,
-    theme_color: theme.primary,
+    // The manifest has one theme color, so it uses the light scheme.
+    background_color: theme.light.primary,
+    theme_color: theme.light.primary,
     icons: ICON_SIZES.map((size) => ({
       src: `images/manifest/icon-${size}.png`,
       sizes: `${size}x${size}`,

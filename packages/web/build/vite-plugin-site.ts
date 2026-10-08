@@ -5,7 +5,7 @@ import n from 'nunjucks';
 import type { Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
 import { FEATURES, type Feature } from '../src/config/features';
-import { THEME_TOKENS, type ThemeToken } from '../src/themes/tokens';
+import { fontModuleCode, fontModuleParts } from './fonts';
 import {
   CONFIG_PATHS,
   MARKDOWN_PAGES,
@@ -13,12 +13,16 @@ import {
   resolveConfig,
   type SiteConfig,
 } from './resolve-config';
+import { type SiteTheme, themeCss } from './theme';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
 const RESOLVED_SITE_MODULE = `\0${SITE_MODULE}`;
 // What the layout needs beyond the client config. Only `.astro` files import it.
 export const LAYOUT_MODULE = 'virtual:hoverboard/layout';
 const RESOLVED_LAYOUT_MODULE = `\0${LAYOUT_MODULE}`;
+// The theme's `@font-face` rules and font variables. Only `.astro` files import it.
+export const FONTS_MODULE = 'virtual:hoverboard/fonts';
+const RESOLVED_FONTS_MODULE = `\0${FONTS_MODULE}`;
 // One module per locale, `virtual:hoverboard/content/<locale>`, so each is its own chunk.
 export const CONTENT_MODULE = 'virtual:hoverboard/content/';
 const RESOLVED_CONTENT_MODULE = `\0${CONTENT_MODULE}`;
@@ -42,18 +46,22 @@ export const featureDefines = (features: Record<Feature, boolean>): Record<strin
  * `contentTranslations` lazy-loads each locale's event content translation.
  * Tests pass `defineFeatures: false` and set `globalThis.__HB_FEATURES__` so they can toggle flags.
  */
-export const siteModule = (config: SiteConfig, { defineFeatures = true } = {}): Plugin => ({
+export const siteModule = (
+  config: SiteConfig,
+  { defineFeatures = true, siteDir = CONFIG_PATHS.site } = {},
+): Plugin => ({
   name: 'hoverboard-site-module',
   config: () => (defineFeatures ? { define: featureDefines(config.site.features) } : {}),
   resolveId: (id) => {
     if (id === SITE_MODULE) return RESOLVED_SITE_MODULE;
     if (id === LAYOUT_MODULE) return RESOLVED_LAYOUT_MODULE;
+    if (id === FONTS_MODULE) return RESOLVED_FONTS_MODULE;
     const locale = id.startsWith(CONTENT_MODULE) ? id.slice(CONTENT_MODULE.length) : undefined;
     return locale && Object.hasOwn(config.contentTranslations, locale)
       ? `${RESOLVED_CONTENT_MODULE}${locale}`
       : undefined;
   },
-  load: (id) => {
+  load: async (id) => {
     const { site, resources, contentTranslations } = config;
     if (id === RESOLVED_SITE_MODULE) {
       const loaders = Object.keys(contentTranslations).map(
@@ -70,10 +78,14 @@ export const siteModule = (config: SiteConfig, { defineFeatures = true } = {}): 
     if (id === RESOLVED_LAYOUT_MODULE) {
       return [
         `export const theme = ${JSON.stringify(config.theme)};`,
-        `export const themeCss = ${JSON.stringify(themeColorsCss(config))};`,
+        `export const themeCss = ${JSON.stringify(layoutThemeCss(config))};`,
         `export const mapsScript = ${JSON.stringify(mapsScriptSrc(config))};`,
         '',
       ].join('\n');
+    }
+    if (id === RESOLVED_FONTS_MODULE) {
+      const siteTheme = site.theme as unknown as SiteTheme;
+      return fontModuleCode(await fontModuleParts(config.theme.fonts, siteTheme.fonts, siteDir));
     }
     if (id.startsWith(RESOLVED_CONTENT_MODULE)) {
       const locale = id.slice(RESOLVED_CONTENT_MODULE.length);
@@ -87,16 +99,8 @@ export const siteModule = (config: SiteConfig, { defineFeatures = true } = {}): 
  * The theme tokens, and the badge and tag colors, as CSS variables on `:root`, so the first paint
  * is themed. Tag names come from session data, so their colors are site config.
  */
-export const themeColorsCss = ({ site, theme }: SiteConfig): string => {
-  const tokens = Object.entries(theme).map(
-    ([token, color]) => [THEME_TOKENS[token as ThemeToken], color] as const,
-  );
-  const named = Object.entries({ ...site.theme.badgeColors, ...site.theme.tagColors }).map(
-    ([name, color]) => [`--${name}`, color] as const,
-  );
-  const properties = [...tokens, ...named].map(([property, color]) => `${property}: ${color};`);
-  return `:root { ${properties.join(' ')} }`;
-};
+export const layoutThemeCss = ({ site, theme }: SiteConfig): string =>
+  themeCss(theme, { ...site.theme.badgeColors, ...site.theme.tagColors });
 
 /** The Google Maps script, when the map is on and the site has a key. */
 export const mapsScriptSrc = (data: SiteConfig): string | undefined => {
