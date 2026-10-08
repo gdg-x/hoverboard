@@ -1,6 +1,7 @@
 {
   "name": "{{ resources.title }}",
   "short_name": "{{ site.shortName }}",
+  "lang": "{{ site.locales.source }}",
   "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone",
   "background_color": "{{ theme.primary }}",

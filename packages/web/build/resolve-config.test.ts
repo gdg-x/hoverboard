@@ -13,6 +13,7 @@ import {
   headTags,
   markdownTranslations,
   siteModule,
+  templateRenderer,
   themeColorsCss,
 } from './vite-plugin-site';
 
@@ -448,6 +449,21 @@ describe('markdownTranslations', () => {
       es: { title: 'DevFest en español', faq: `/${files[0]!.fileName}` },
     });
     expect(config.contentTranslations).toEqual({ es: { title: 'DevFest en español' } });
+  });
+});
+
+describe('templateRenderer', () => {
+  const render = (file: string) => {
+    const config = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
+    const site = { ...config.site, locales: { source: 'es', targets: [] } };
+    return templateRenderer({ ...config, site })(
+      readFileSync(join(import.meta.dirname, '..', file), 'utf8'),
+    );
+  };
+
+  it('declares the source locale as the language of index.html and the manifest', () => {
+    expect(render('index.html')).toMatch(/<html [^>]*lang="es">/);
+    expect(JSON.parse(render('public/manifest.json'))).toMatchObject({ lang: 'es' });
   });
 });
 

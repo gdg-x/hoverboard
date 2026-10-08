@@ -125,12 +125,16 @@ export const markdownTranslations = (
   return { files, contentTranslations: translations };
 };
 
-// Renders the Nunjucks placeholders (e.g. {{ resources.title }}) in index.html, manifest.json and
-// the markdown pages with the resolved site config.
+/** Renders Nunjucks placeholders (e.g. {{ resources.title }}) with the resolved site config. */
+export const templateRenderer = (data: SiteConfig) => {
+  const nunjucks = n.configure({ throwOnUndefined: true });
+  return (template: string) => nunjucks.renderString(template, data);
+};
+
+// Renders index.html, manifest.json and the markdown pages with the resolved site config.
 export const site = (): PluginOption[] => {
   const data = resolveConfig();
-  const nunjucks = n.configure({ throwOnUndefined: true });
-  const compileTemplate = (template: string) => nunjucks.renderString(template, data);
+  const compileTemplate = templateRenderer(data);
   const compileBufferTemplate = (body: Buffer) => compileTemplate(body.toString());
   const markdown = markdownTranslations(data, compileTemplate);
 

@@ -108,7 +108,7 @@ Define the toolbar pages and their urls in `navigation` in `packages/config/site
 
 ## Languages
 
-`locales` in `packages/config/site.json` sets the languages of the site. `source` is the default locale and the language of your content. `targets` lists the other locales that visitors can pick in the footer. Every locale other than `en` needs UI translations in `packages/translations/xliff/`, and the build fails without them. None ship yet, so sites are in English only:
+`locales` in `packages/config/site.json` sets the languages of the site. `source` is the default locale and the language of your content. `index.html` and `manifest.json` are in this language, and their `lang` is set to it. `targets` lists the other locales that visitors can pick in the footer. Every locale other than `en` needs UI translations in `packages/translations/xliff/`, and the build fails without them. None ship yet, so sites are in English only:
 
 ```json
 "locales": { "source": "en", "targets": [] }
