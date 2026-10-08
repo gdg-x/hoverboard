@@ -25,12 +25,6 @@
     "$schema": {
       "type": "string"
     },
-    "buyTicket": {
-      "type": "string"
-    },
-    "viewHighlights": {
-      "type": "string"
-    },
     "faq": {
       "type": "string"
     },
@@ -45,52 +39,7 @@
       "additionalProperties": false,
       "required": ["ticketsDetails"],
       "properties": {
-        "title": {
-          "type": "string"
-        },
-        "soldOut": {
-          "type": "string"
-        },
-        "notAvailableYet": {
-          "type": "string"
-        },
-        "save": {
-          "type": "string"
-        },
         "ticketsDetails": {
-          "type": "string"
-        }
-      }
-    },
-    "partnersBlock": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "button": {
-          "type": "string"
-        },
-        "form": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "title": {
-              "type": "string"
-            },
-            "submitLabel": {
-              "type": "string"
-            },
-            "fullName": {
-              "type": "string"
-            },
-            "companyName": {
-              "type": "string"
-            }
-          }
-        },
-        "toast": {
           "type": "string"
         }
       }
@@ -105,9 +54,6 @@
           "additionalProperties": false,
           "required": ["link"],
           "properties": {
-            "label": {
-              "type": "string"
-            },
             "link": {
               "type": "string"
             }
@@ -115,48 +61,6 @@
         },
         "title": {
           "type": "string"
-        }
-      }
-    },
-    "latestPostsBlock": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "callToAction": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "label": {
-              "type": "string"
-            },
-            "link": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "speakersBlock": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "callToAction": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "label": {
-              "type": "string"
-            },
-            "link": {
-              "type": "string"
-            }
-          }
         }
       }
     },
@@ -170,9 +74,6 @@
           "additionalProperties": false,
           "required": ["link"],
           "properties": {
-            "label": {
-              "type": "string"
-            },
             "link": {
               "type": "string"
             }
@@ -191,9 +92,6 @@
       "additionalProperties": false,
       "required": ["description"],
       "properties": {
-        "title": {
-          "type": "string"
-        },
         "description": {
           "type": "string"
         }
@@ -214,9 +112,6 @@
       "additionalProperties": false,
       "required": ["callToAction", "statisticsBlock"],
       "properties": {
-        "title": {
-          "type": "string"
-        },
         "callToAction": {
           "type": "object",
           "additionalProperties": false,

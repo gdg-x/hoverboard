@@ -1,5 +1,6 @@
 import '@material/web/button/outlined-button.js';
 import { Failure, Pending, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { Photo } from '../../models/photo';
@@ -128,7 +129,11 @@ export class GalleryBlock extends ThemedElement {
     return html`
       <div class="photos-grid">
         ${this.pending ? html`<p>Loading...</p>` : ''}
-        ${this.failure ? html`<p>Error loading gallery.</p>` : ''}
+        ${
+          this.failure
+            ? html`<p>${msg('Error loading gallery.', { id: 'home.gallery-block.error' })}</p>`
+            : ''
+        }
         ${this.photos.map(
           (photo) =>
             html`<img
@@ -152,7 +157,9 @@ export class GalleryBlock extends ThemedElement {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <md-outlined-button>${galleryBlock.callToAction.label}</md-outlined-button>
+                    <md-outlined-button
+                      >${msg('See all photos', { id: 'home.gallery-block.cta' })}</md-outlined-button
+                    >
                   </a>
                 </div>
               `

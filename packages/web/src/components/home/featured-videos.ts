@@ -1,11 +1,12 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import type { Video } from '../../models/video';
 import { openVideoDialog } from '../../store/ui';
 import { type VideosState, selectVideos } from '../../store/videos';
-import { featuredVideos, loading } from '../../config/site';
+import { featuredVideos } from '../../config/site';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
@@ -154,7 +155,6 @@ export class FeaturedVideos extends ThemedElement {
   `;
 
   private featuredVideos = featuredVideos;
-  private loading = loading;
 
   @query('#videos')
   accessor videosElm!: HTMLDivElement;
@@ -280,8 +280,14 @@ export class FeaturedVideos extends ThemedElement {
           ></hoverboard-icon>
           <div id="videoList" class="video-list">
             <div id="videos" class="videos">
-              ${this.pending ? html`<p>${this.loading}</p>` : ''}
-              ${this.failure ? html`<p>Error loading videos.</p>` : ''}
+              ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : ''}
+              ${
+                this.failure
+                  ? html`<p>
+                      ${msg('Error loading videos.', { id: 'home.featured-videos.error' })}
+                    </p>`
+                  : ''
+              }
               ${this.videosData.map(
                 (block, index) => html`
                   <div class="video-item" @click="${() => this.playVideo(block)}">
@@ -316,7 +322,7 @@ export class FeaturedVideos extends ThemedElement {
           rel="noopener noreferrer"
         >
           <md-text-button class="cta-button animated icon-right" trailing-icon>
-            <span>${this.featuredVideos.callToAction.label}</span>
+            <span>${msg('See all videos', { id: 'home.featured-videos.cta' })}</span>
             <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
           </md-text-button>
         </a>

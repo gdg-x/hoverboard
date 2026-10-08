@@ -1,4 +1,5 @@
 import { Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
@@ -6,7 +7,6 @@ import '../markdown/short-markdown';
 import '../shared/text-truncate';
 import { router } from '../../router';
 import { type BlogState, selectBlogPosts } from '../../store/blog';
-import { latestPostsBlock } from '../../config/site';
 import { getDate } from '../../utils/dates';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
@@ -89,8 +89,6 @@ export class LatestPostsBlock extends ThemedElement {
     }
   `;
 
-  private latestPostsBlock = latestPostsBlock;
-
   @fromStore((state) => selectBlogPosts(state))
   accessor posts!: BlogState;
 
@@ -113,7 +111,9 @@ export class LatestPostsBlock extends ThemedElement {
   override render() {
     return html`
       <div class="container">
-        <h1 class="container-title">${this.latestPostsBlock.title}</h1>
+        <h1 class="container-title">
+          ${msg('The latest news', { id: 'home.latest-posts-block.title' })}
+        </h1>
 
         <div class="posts-wrapper">
           ${this.latestPosts.map(
@@ -143,9 +143,9 @@ export class LatestPostsBlock extends ThemedElement {
           )}
         </div>
 
-        <a href="${this.latestPostsBlock.callToAction.link}">
+        <a href="/blog">
           <md-text-button class="cta-button animated icon-right" trailing-icon>
-            <span>${this.latestPostsBlock.callToAction.label}</span>
+            <span>${msg('View all stories', { id: 'home.latest-posts-block.cta' })}</span>
             <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
           </md-text-button>
         </a>

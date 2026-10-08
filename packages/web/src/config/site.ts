@@ -6,7 +6,6 @@ import { isFeature, isFeatureEnabled, isNavigationRoute, type NavigationRoute } 
 export const {
   aboutBlock,
   aboutOrganizerBlock,
-  buyTicket,
   coc,
   dates,
   description,
@@ -14,16 +13,11 @@ export const {
   featuredVideos,
   footerRelBlock,
   galleryBlock,
-  latestPostsBlock,
   loading,
-  mapBlock,
-  partnersBlock,
-  speakersBlock,
   subscribeBlock,
   team,
   ticketsBlock,
   title,
-  viewHighlights,
 } = resources;
 export const { basepath, dateFormat, heroSettings, image, organizer, url } = settings;
 export const timeZone = settings.event.timezone;

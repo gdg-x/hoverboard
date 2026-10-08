@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Video } from '../../models/video';
 import { openVideoDialog } from '../../store/ui';
-import { featuredVideos, loading } from '../../config/site';
+import { featuredVideos } from '../../config/site';
 import type { FeaturedVideos } from './featured-videos';
 import './featured-videos';
 
@@ -35,7 +35,7 @@ describe('featured-videos', () => {
     element.videos = new Pending();
     await element.updateComplete;
 
-    expect(shadowRoot).toHaveTextContent(loading);
+    expect(shadowRoot).toHaveTextContent('Loading...');
   });
 
   it('renders the error state', async () => {

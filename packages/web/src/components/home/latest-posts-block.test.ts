@@ -4,7 +4,6 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Post } from '../../models/post';
 import { router } from '../../router';
-import { latestPostsBlock } from '../../config/site';
 import type { LatestPostsBlock } from './latest-posts-block';
 import './latest-posts-block';
 
@@ -57,14 +56,12 @@ describe('latest-posts-block', () => {
     element.posts = new Success(posts);
     await element.updateComplete;
 
-    expect(shadowRoot).toHaveTextContent(latestPostsBlock.title);
+    expect(shadowRoot).toHaveTextContent('The latest news');
     const links = shadowRoot.querySelectorAll('a.post');
     expect(links).toHaveLength(2);
     expect(links[0]).toHaveAttribute('href', '/blog/post-1');
     expect(links[1]).toHaveAttribute('href', '/blog/post-2');
-    expect(shadowRoot.querySelector('.cta-button')).toHaveTextContent(
-      latestPostsBlock.callToAction.label,
-    );
+    expect(shadowRoot.querySelector('.cta-button')).toHaveTextContent('View all stories');
     expect(shadowRoot.querySelector('.cta-button')).toHaveAttribute('trailing-icon');
     expect(shadowRoot.querySelector('.cta-button hoverboard-icon')).toHaveAttribute('slot', 'icon');
   });

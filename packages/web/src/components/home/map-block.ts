@@ -1,7 +1,8 @@
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { initialUiState } from '../../store/ui';
-import { location, mapBlock } from '../../config/site';
+import { location } from '../../config/site';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
@@ -75,7 +76,6 @@ export class MapBlock extends ThemedElement {
   `;
 
   private location = location;
-  private mapBlock = mapBlock;
   private mapCenter = `${location.mapCenter.latitude},${location.mapCenter.longitude}`;
   private markerPosition = `${location.pointer.latitude},${location.pointer.longitude}`;
 
@@ -106,7 +106,7 @@ export class MapBlock extends ThemedElement {
       <div class="container ${this.viewport.isTabletPlus ? 'fit' : ''}">
         <div class="description-card">
           <div>
-            <h2>${this.mapBlock.title}</h2>
+            <h2>${msg('Location', { id: 'home.map-block.title' })}</h2>
             <p>${this.location.description}</p>
           </div>
           <div class="bottom-info">

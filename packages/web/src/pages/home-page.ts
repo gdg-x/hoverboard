@@ -1,6 +1,7 @@
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
 import { IntersectionController } from '@lit-labs/observers/intersection-controller.js';
+import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 import '../components/home/about-block';
@@ -11,16 +12,7 @@ import '../components/shared/hoverboard-icon';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
-import {
-  aboutBlock,
-  buyTicket,
-  dates,
-  description,
-  heroSettings,
-  location,
-  title,
-  viewHighlights,
-} from '../config/site';
+import { aboutBlock, dates, description, heroSettings, location, title } from '../config/site';
 import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { POSITION, scrollToElement } from '../utils/scrolling';
 import { ThemedElement } from '../components/themed-element';
@@ -187,8 +179,6 @@ export class HomePage extends ThemedElement {
   private city = location.city;
   private siteTitle = title;
   private dates = dates;
-  private viewHighlights = viewHighlights;
-  private buyTicket = buyTicket;
   private heroSettings = heroSettings.home;
   private aboutBlock = aboutBlock;
 
@@ -211,7 +201,9 @@ export class HomePage extends ThemedElement {
     if (element) {
       scrollToElement(element);
     } else {
-      store.dispatch(queueSnackbar('Error scrolling to section.'));
+      store.dispatch(
+        queueSnackbar(msg('Error scrolling to section.', { id: 'pages.home.scroll-error' })),
+      );
     }
   };
 
@@ -268,14 +260,14 @@ export class HomePage extends ThemedElement {
           <div class="action-buttons">
             <md-outlined-button class="watch-video" @click="${this.playVideo}">
               <hoverboard-icon name="movie" slot="icon"></hoverboard-icon>
-              ${this.viewHighlights}
+              ${msg('View Highlights', { id: 'pages.home.view-highlights' })}
             </md-outlined-button>
             ${
               __HB_FEATURES__.tickets
                 ? html`
                     <md-filled-button class="buy-ticket" @click="${this.scrollToTickets}">
                       <hoverboard-icon name="ticket" slot="icon"></hoverboard-icon>
-                      ${this.buyTicket}
+                      ${msg('Buy ticket', { id: 'common.buy-ticket' })}
                     </md-filled-button>
                   `
                 : nothing

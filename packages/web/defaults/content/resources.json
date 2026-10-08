@@ -1,54 +1,5 @@
 {
-  "buyTicket": "Buy ticket",
-  "viewHighlights": "View Highlights",
   "faq": "/data/faq.md",
   "coc": "/data/coc.md",
-  "loading": "Loading...",
-  "ticketsBlock": {
-    "title": "Tickets",
-    "soldOut": "You missed it!",
-    "notAvailableYet": "Not available yet",
-    "save": "Save ${discount}% today"
-  },
-  "partnersBlock": {
-    "title": "Partners",
-    "button": "Become a partner",
-    "form": {
-      "title": "Become a partner!",
-      "submitLabel": "Submit",
-      "fullName": "Full Name",
-      "companyName": "Company Name"
-    },
-    "toast": "We will contact you soon!"
-  },
-  "featuredVideos": {
-    "callToAction": {
-      "label": "See all videos"
-    }
-  },
-  "latestPostsBlock": {
-    "title": "The latest news",
-    "callToAction": {
-      "label": "View all stories",
-      "link": "/blog"
-    }
-  },
-  "speakersBlock": {
-    "title": "Speakers",
-    "callToAction": {
-      "label": "View all speakers",
-      "link": "/speakers"
-    }
-  },
-  "galleryBlock": {
-    "callToAction": {
-      "label": "See all photos"
-    }
-  },
-  "mapBlock": {
-    "title": "Location"
-  },
-  "aboutBlock": {
-    "title": "About"
-  }
+  "loading": "Loading..."
 }

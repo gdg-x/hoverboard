@@ -92,11 +92,92 @@
 <trans-unit id="common.email-invalid">
   <source>Please enter a valid email address.</source>
 </trans-unit>
+<trans-unit id="home.about-block.title">
+  <source>About</source>
+</trans-unit>
+<trans-unit id="common.loading">
+  <source>Loading...</source>
+</trans-unit>
+<trans-unit id="home.featured-videos.error">
+  <source>Error loading videos.</source>
+</trans-unit>
+<trans-unit id="home.featured-videos.cta">
+  <source>See all videos</source>
+</trans-unit>
+<trans-unit id="home.fork-me-block.title">
+  <source>Fork me on GitHub</source>
+</trans-unit>
+<trans-unit id="home.fork-me-block.description">
+  <source>Hoverboard is open source conference website template and is developed entirely on a voluntary basis. You can check the source code that generated this website on Github. If you find a issue or you want to contribute, you're more than welcome!</source>
+</trans-unit>
+<trans-unit id="home.fork-me-block.cta">
+  <source>Fork this project</source>
+</trans-unit>
+<trans-unit id="home.gallery-block.error">
+  <source>Error loading gallery.</source>
+</trans-unit>
+<trans-unit id="home.gallery-block.cta">
+  <source>See all photos</source>
+</trans-unit>
+<trans-unit id="home.latest-posts-block.title">
+  <source>The latest news</source>
+</trans-unit>
+<trans-unit id="home.latest-posts-block.cta">
+  <source>View all stories</source>
+</trans-unit>
+<trans-unit id="home.map-block.title">
+  <source>Location</source>
+</trans-unit>
+<trans-unit id="home.partners-block.added">
+  <source>We will contact you soon!</source>
+</trans-unit>
+<trans-unit id="home.partners-block.title">
+  <source>Partners</source>
+</trans-unit>
+<trans-unit id="home.partners-block.error">
+  <source>Error loading partners.</source>
+</trans-unit>
+<trans-unit id="home.partners-block.cta">
+  <source>Become a partner</source>
+</trans-unit>
+<trans-unit id="home.partners-block.form-title">
+  <source>Become a partner!</source>
+</trans-unit>
+<trans-unit id="home.partners-block.submit">
+  <source>Submit</source>
+</trans-unit>
+<trans-unit id="home.partners-block.full-name">
+  <source>Full Name</source>
+</trans-unit>
+<trans-unit id="home.partners-block.company-name">
+  <source>Company Name</source>
+</trans-unit>
+<trans-unit id="home.speakers-block.title">
+  <source>Speakers</source>
+</trans-unit>
+<trans-unit id="home.speakers-block.cta">
+  <source>View all speakers</source>
+</trans-unit>
 <trans-unit id="common.subscribed">
   <source>Subscribed</source>
 </trans-unit>
 <trans-unit id="home.subscribe-block.description">
   <source>Get notified about the important conference updates</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.save">
+  <source>Save <x id="0" equiv-text="${discount}"/> today</source>
+</trans-unit>
+<trans-unit id="common.buy-ticket">
+  <source>Buy ticket</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.not-available">
+  <source>Not available yet</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.title">
+  <source>Tickets</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.error">
+  <source>Error loading tickets</source>
 </trans-unit>
 <trans-unit id="common.save-sessions-signed-out">
   <source>Sign in to save sessions</source>
@@ -131,9 +212,6 @@
 <trans-unit id="shared.previous-speakers-block.title">
   <source>Previous speakers</source>
 </trans-unit>
-<trans-unit id="common.loading">
-  <source>Loading...</source>
-</trans-unit>
 <trans-unit id="shared.previous-speakers-block.error">
   <source>Error loading previous speakers.</source>
 </trans-unit>
@@ -145,9 +223,6 @@
 </trans-unit>
 <trans-unit id="shell.header.menu">
   <source>Menu</source>
-</trans-unit>
-<trans-unit id="common.buy-ticket">
-  <source>Buy ticket</source>
 </trans-unit>
 <trans-unit id="shell.header.account-menu">
   <source>Account menu</source>
@@ -223,6 +298,12 @@
 </trans-unit>
 <trans-unit id="pages.blog-list.error">
   <source>Error loading posts.</source>
+</trans-unit>
+<trans-unit id="pages.home.scroll-error">
+  <source>Error scrolling to section.</source>
+</trans-unit>
+<trans-unit id="pages.home.view-highlights">
+  <source>View Highlights</source>
 </trans-unit>
 <trans-unit id="pages.post.published">
   <source>Published: <x id="0" equiv-text="${published}"/></source>
@@ -342,6 +423,10 @@
 <trans-unit id="shared.share-button.label">
   <source>Share</source>
   <note from="lit-localize">Shares the session.</note>
+</trans-unit>
+<trans-unit id="home.tickets-block.sold-out">
+  <source>You missed it!</source>
+  <note from="lit-localize">Shown on a sold-out ticket.</note>
 </trans-unit>
 </body>
 </file>
