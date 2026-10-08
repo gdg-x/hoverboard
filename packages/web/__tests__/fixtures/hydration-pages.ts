@@ -13,6 +13,8 @@ export interface HydrationPage {
   /** Defines the page's elements. Pages import some blocks without waiting, so wait for them. */
   load: () => Promise<unknown>;
   template: () => TemplateResult;
+  /** The query string the page loads with. Pages are built without one. */
+  search?: string;
 }
 
 const speakers = ['ada', 'grace', 'alan', 'barbara', 'edsger'].map((id, index) => ({
@@ -103,6 +105,12 @@ export const HYDRATION_PAGES: Record<string, HydrationPage> = {
     content: { speakers, sessions: [session], previousSpeakers },
     load: () => import('../../src/views/speakers-page'),
     template: () => html`<speakers-page></speakers-page>`,
+  },
+  'speakers page with a tag filter': {
+    content: { speakers, sessions: [session], previousSpeakers },
+    load: () => import('../../src/views/speakers-page'),
+    template: () => html`<speakers-page></speakers-page>`,
+    search: '?tags=Web',
   },
   'speaker page': {
     content: { speakers, previousSpeakers },

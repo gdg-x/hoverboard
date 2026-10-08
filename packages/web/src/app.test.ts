@@ -1,7 +1,8 @@
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { startApp } from './app';
 import { store } from './store';
 import { onUser } from './store/auth';
+import { selectFilters } from './store/filters';
 import { logPageView } from './utils/analytics';
 import { renderNextPageInSourceLocale, startLocalization } from './utils/localization';
 
@@ -27,7 +28,27 @@ describe('startApp', () => {
     vi.mocked(onUser).mockImplementationOnce(() => {
       startupCalls.push('onUser');
     });
+    window.history.replaceState({}, '', '/speakers?tags=Web');
     await startApp();
+  });
+
+  afterAll(() => window.history.replaceState({}, '', '/'));
+
+  it("applies the URL's filters once the page has hydrated", () => {
+    expect(selectFilters(store.getState())).toEqual([{ group: 'tags', tag: 'Web' }]);
+  });
+
+  it('clears the filters before the next page swaps in, then applies its URL', async () => {
+    document.dispatchEvent(new Event('astro:before-swap'));
+
+    expect(selectFilters(store.getState())).toEqual([]);
+
+    window.history.replaceState({}, '', '/schedule?complexity=Beginner');
+    document.dispatchEvent(new Event('astro:after-swap'));
+
+    await vi.waitFor(() =>
+      expect(selectFilters(store.getState())).toEqual([{ group: 'complexity', tag: 'Beginner' }]),
+    );
   });
 
   it('switches locale, then listens for the user, once the page has hydrated', () => {

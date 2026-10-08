@@ -41,13 +41,23 @@ export const PAGE_CONTENT_ID = 'hb-content';
 export const serializeContent = (content: Partial<Content>): string =>
   JSON.stringify(content).replaceAll('<', '\\u003c');
 
-/** Seeds the store with the content the page was built with, and keeps that content live. */
-export const seedFromPage = (dispatch: (action: UnknownAction) => unknown): void => {
+const pageContent = (): Partial<Content> | undefined => {
   const json = document.getElementById(PAGE_CONTENT_ID)?.textContent;
-  if (!json) return;
-  const content = JSON.parse(json) as Partial<Content>;
-  dispatch(seedContent(content));
-  subscribeToContent(Object.keys(content));
+  return json ? (JSON.parse(json) as Partial<Content>) : undefined;
+};
+
+/** Seeds the store with the content the page was built with. */
+export const seedFromPage = (dispatch: (action: UnknownAction) => unknown): void => {
+  const content = pageContent();
+  if (content) dispatch(seedContent(content));
+};
+
+/**
+ * Keeps the page's content live. Call it after the page hydrates: content that changed since the
+ * build would otherwise render differently from the page's HTML.
+ */
+export const subscribeToPageContent = (): void => {
+  subscribeToContent(Object.keys(pageContent() ?? {}));
 };
 
 const subscribers = new Map<string, () => void>();
