@@ -55,6 +55,7 @@ export default [
           './packages/server/functions/tsconfig.json',
           './packages/cli/tsconfig.json',
           './packages/storage/tsconfig.json',
+          './packages/translations/tsconfig.json',
         ],
         sourceType: 'module',
         ecmaVersion: 2020,

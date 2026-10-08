@@ -1,0 +1,7 @@
+{
+  "name": "@hoverboard/translations",
+  "version": "0.1.0",
+  "private": true,
+  "description": "UI translations from upstream's Crowdin project, as XLIFF files that packages/web reads by relative path.",
+  "type": "module"
+}

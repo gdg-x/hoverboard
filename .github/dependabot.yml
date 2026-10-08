@@ -13,6 +13,7 @@ updates:
       - '/packages/cli'
       - '/packages/web'
       - '/packages/storage'
+      - '/packages/translations'
     schedule:
       interval: monthly
     commit-message:

@@ -10,6 +10,7 @@ Hoverboard is a conference website template. Organizers fork it, configure it an
 | `packages/server/functions` | Cloud Functions (v2 API). Must stay self-contained, because `firebase.json` deploys it alone               |
 | `packages/cli`              | The `hbd` CLI (`./hbd <command>`), run with `tsx`, no build step                                           |
 | `packages/storage`          | Firestore and Storage security rules, indexes, the content schema and the rules tests                      |
+| `packages/translations`     | UI translations (XLIFF) from upstream's Crowdin project, read by `packages/web`. No dependencies           |
 | `packages/config`           | The site's own config and content: `site.json`, `content/resources.json`, FAQ, code of conduct, blog posts |
 | `packages/web/defaults`     | Upstream defaults that `packages/config` overrides. Objects merge, and arrays and other values replace     |
 | `docs/`                     | Tutorials and the release policy                                                                           |
@@ -29,7 +30,7 @@ Run from the repo root.
 
 | Command                        | Does                                                                                              |
 | ------------------------------ | ------------------------------------------------------------------------------------------------- |
-| `npm test`                     | All Vitest projects: Web, Functions, CLI, Firestore (starts the emulator) and Smoke               |
+| `npm test`                     | All Vitest projects: Web, Functions, CLI, Firestore (starts the emulator), Translations and Smoke |
 | `npx vitest run --project Web` | One project. Add a path to run one file                                                           |
 | `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer, site config and type checks for web, server and storage |
 | `npm run fix`                  | ESLint and Prettier autofix                                                                       |

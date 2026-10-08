@@ -34,6 +34,7 @@
     "lint:syncpack": "syncpack lint",
     "lint:types:server": "npm --prefix ./packages/server run build",
     "lint:types:storage": "npm --prefix ./packages/storage run lint:types",
+    "lint:types:translations": "tsc --noEmit -p packages/translations",
     "lint:types:web": "npm --prefix ./packages/web run lint:types",
     "postinstall": "concurrently npm:install:server npm:install:cli npm:install:web npm:install:storage",
     "serve": "NODE_ENV=production concurrently --kill-others npm:start:*",

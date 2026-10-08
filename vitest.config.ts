@@ -83,6 +83,13 @@ export default defineConfig({
       },
       {
         test: {
+          name: 'Translations',
+          environment: 'node',
+          include: ['packages/translations/__tests__/**/*.test.ts'],
+        },
+      },
+      {
+        test: {
           name: 'Firestore',
           environment: 'node',
           // Starts/stops the Firestore emulator once for the whole run (not
