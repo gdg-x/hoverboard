@@ -32,6 +32,7 @@
     "lint:lit-analyzer": "npm --prefix ./packages/web run lint:lit-analyzer",
     "lint:prettier": "prettier --check .",
     "lint:syncpack": "syncpack lint",
+    "lint:translations": "npm --prefix ./packages/web run localize:check",
     "lint:types:server": "npm --prefix ./packages/server run build",
     "lint:types:storage": "npm --prefix ./packages/storage run lint:types",
     "lint:types:translations": "tsc --noEmit -p packages/translations",
