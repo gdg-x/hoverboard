@@ -33,9 +33,14 @@ const web = {
         url: 'http://localhost/',
       },
     },
+    globalSetup: ['./packages/web/__tests__/localize.global-setup.ts'],
     setupFiles: ['./packages/web/__tests__/web.setup.ts'],
     server: { deps: { inline: [/@lit-labs\/observers/] } },
-    include: ['packages/web/src/**/*.test.ts', 'packages/web/build/**/*.test.ts'],
+    include: [
+      'packages/web/*.test.ts',
+      'packages/web/src/**/*.test.ts',
+      'packages/web/build/**/*.test.ts',
+    ],
     exclude: [...configDefaults.exclude, '**/*.smoke.test.ts'],
   },
 } satisfies TestProjectInlineConfiguration;
@@ -51,11 +56,37 @@ export default defineConfig({
         test: {
           ...web.test,
           name: `Smoke (${feature} off)`,
-          include: ['packages/web/src/**/*.smoke.test.ts'],
+          include: ['packages/web/src/hoverboard-app.smoke.test.ts'],
           exclude: configDefaults.exclude,
           provide: { featureOff: feature },
         },
       })),
+      {
+        ...web,
+        // Loads locales from the pseudo-translated build in test-locales/, so the fake locale stays
+        // out of the other projects and of production builds.
+        plugins: [
+          {
+            name: 'fake-locales',
+            enforce: 'pre',
+            transform(code, id) {
+              if (!id.endsWith('/src/utils/localization.ts')) return;
+              return code.replaceAll('../generated/locales/', '../generated/test-locales/');
+            },
+          },
+          ...web.plugins,
+        ],
+        test: {
+          ...web.test,
+          name: 'Smoke (fake locale)',
+          globalSetup: [
+            ...web.test.globalSetup,
+            './packages/web/__tests__/fake-locale.global-setup.ts',
+          ],
+          include: ['packages/web/src/localization.smoke.test.ts'],
+          exclude: configDefaults.exclude,
+        },
+      },
       {
         test: {
           name: 'Smoke (build)',
@@ -78,6 +109,13 @@ export default defineConfig({
           name: 'CLI',
           environment: 'node',
           include: ['packages/cli/src/**/*.test.ts'],
+        },
+      },
+      {
+        test: {
+          name: 'Translations',
+          environment: 'node',
+          include: ['packages/translations/__tests__/**/*.test.ts'],
         },
       },
       {

@@ -22,6 +22,7 @@ import {
   title,
 } from './config/site';
 import './utils/media-query';
+import { startLocalization } from './utils/localization';
 import type { Stickied } from './utils/stickied';
 import { ThemedElement } from './components/themed-element';
 import { StoreController } from './controllers/store-controller';
@@ -217,6 +218,7 @@ export class HoverboardApp extends ThemedElement {
 
   override connectedCallback() {
     super.connectedCallback();
+    void startLocalization();
     window.addEventListener('element-sticked', this.onElementSticked);
     window.addEventListener('offline', this.onOffline);
   }

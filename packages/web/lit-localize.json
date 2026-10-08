@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/lit/lit/main/packages/localize-tools/config.schema.json",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "inputFiles": ["src/**/*.ts", "!src/**/*.test.ts", "!src/generated/**"],
+  "output": {
+    "mode": "runtime",
+    "language": "ts",
+    "outputDir": "./src/generated/locales",
+    "localeCodesModule": "./src/generated/locale-codes.ts"
+  },
+  "interchange": {
+    "format": "xliff",
+    "xliffDir": "../translations/xliff/"
+  }
+}

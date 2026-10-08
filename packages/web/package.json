@@ -9,11 +9,14 @@
     "npm": "10"
   },
   "scripts": {
-    "build": "npm run clean && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --config vite.sw.config.ts",
+    "build": "npm run clean && npm run localize:build && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --config vite.sw.config.ts",
     "clean": "rm -rf dist",
     "lint:lit-analyzer": "lit-analyzer 'src/**/*.ts' --rules.no-incompatible-type-binding off",
-    "lint:types": "tsc --noEmit",
-    "start:vite": "mkdir -p dist && VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --watch",
+    "lint:types": "npm run localize:build && tsc --noEmit",
+    "localize:build": "lit-localize build",
+    "localize:check": "node build/localize-extract.mjs --check",
+    "localize:extract": "node build/localize-extract.mjs",
+    "start:vite": "mkdir -p dist && npm run localize:build && VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --watch",
     "start:vite-sw": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --watch --config vite.sw.config.ts"
   },
   "dependencies": {
@@ -21,6 +24,7 @@
     "@justinribeiro/lite-youtube": "^1.9.0",
     "@lit-labs/observers": "^2.1.0",
     "@lit-labs/router": "^0.1.4",
+    "@lit/localize": "^0.12.2",
     "@material/web": "^2.5.0",
     "@reduxjs/toolkit": "^2.13.0",
     "dompurify": "^3.4.16",
@@ -33,6 +37,7 @@
   "devDependencies": {
     "@babel/core": "^8.0.6",
     "@babel/plugin-proposal-decorators": "^8.0.2",
+    "@lit/localize-tools": "^0.8.2",
     "@rolldown/plugin-babel": "^0.2.4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",

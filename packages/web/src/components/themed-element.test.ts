@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { customElement } from 'lit/decorators.js';
 import { html, css } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
@@ -41,6 +41,19 @@ describe('themed-element', () => {
     );
 
     expect(shadowRoot.textContent).toContain('content');
+  });
+
+  it('re-renders when a locale finishes loading', async () => {
+    const { element } = await fixture<ThemedElementTestSubject>(
+      html`<themed-element-test-subject></themed-element-test-subject>`,
+    );
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+
+    window.dispatchEvent(
+      new CustomEvent('lit-localize-status', { detail: { status: 'ready', readyLocale: 'es' } }),
+    );
+
+    expect(requestUpdate).toHaveBeenCalled();
   });
 
   it('is the base class of every component', () => {
