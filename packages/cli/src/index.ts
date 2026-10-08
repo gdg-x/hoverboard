@@ -6,9 +6,10 @@ import { runEmulators } from './commands/emulators.js';
 import { runFirestoreCopy } from './commands/firestore-copy/index.js';
 import { runFirestoreExport } from './commands/firestore-export.js';
 import { runFirestoreInit } from './commands/firestore-init/index.js';
+import { type InitOptions, runInit } from './commands/init/index.js';
 import { runSetup } from './commands/setup.js';
 import { runSetupGitHub } from './commands/setup-github.js';
-import { validateSiteConfig } from './utils/site-config.js';
+import { githubAnnotation, validateSiteConfig } from './utils/site-config.js';
 import { findRepoRoot } from './utils/node-version.js';
 
 const program = new Command();
@@ -23,6 +24,23 @@ program
   .description('Validate the local environment is ready to run and deploy Hoverboard.')
   .action(async () => {
     process.exitCode = (await runDoctor()) ? 0 : 1;
+  });
+
+program
+  .command('init')
+  .description(
+    'Set up a new site: the Firebase project, the event details in packages/config, billing, ' +
+      'and optionally the first deploy and sample content. Safe to re-run.',
+  )
+  .option('--project <id>', 'The Firebase project. Without it, pick from your projects.')
+  .option('--create', 'Create the --project instead of using an existing one.')
+  .option('--details <file>', 'A JSON file with the site details, instead of the questions.')
+  .option('--deploy', 'Deploy without asking.')
+  .option('--no-deploy', 'Skip the deploy.')
+  .option('--seed', 'Add the sample content after deploying, without asking.')
+  .option('--no-seed', 'Skip the sample content.')
+  .action(async (options: InitOptions) => {
+    process.exitCode = (await runInit(options)) ? 0 : 1;
   });
 
 program
@@ -52,7 +70,8 @@ program
   .action(async () => {
     const repoRoot = findRepoRoot(process.cwd());
     const errors = repoRoot ? await validateSiteConfig(repoRoot) : ['Not in a Hoverboard repo.'];
-    for (const error of errors) console.log(`✘ ${error}`);
+    const inActions = process.env['GITHUB_ACTIONS'] === 'true';
+    for (const error of errors) console.log(inActions ? githubAnnotation(error) : `✘ ${error}`);
     if (!errors.length) console.log('✔ packages/config is valid.');
     process.exitCode = errors.length ? 1 : 0;
   });

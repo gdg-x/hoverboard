@@ -1,5 +1,9 @@
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'fs';
+import { tmpdir } from 'os';
+import { join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { runFirestoreInit } from './index.js';
+import { importConfig } from './config.js';
+import { runFirestoreInit, siteFeatures } from './index.js';
 
 const { calls, mockImport } = vi.hoisted(() => {
   const calls: string[] = [];
@@ -23,12 +27,13 @@ vi.mock('./videos.js', () => ({ importVideos: mockImport('videos') }));
 
 afterEach(() => {
   vi.clearAllMocks();
+  vi.restoreAllMocks();
   calls.length = 0;
 });
 
 describe('runFirestoreInit', () => {
   it('imports config first, then every other collection', async () => {
-    await runFirestoreInit();
+    await runFirestoreInit({});
 
     expect(calls[0]).toBe('config');
     expect(calls.slice(1).sort()).toEqual(
@@ -45,5 +50,55 @@ describe('runFirestoreInit', () => {
         'videos',
       ].sort(),
     );
+  });
+
+  it('skips the collections of features that are off', async () => {
+    const log = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const features = { blog: false, schedule: false, speakers: true, team: false };
+
+    await runFirestoreInit(features);
+
+    expect(importConfig).toHaveBeenCalledWith(features);
+    expect(calls.sort()).toEqual(
+      ['config', 'gallery', 'partners', 'previousSpeakers', 'speakers', 'tickets', 'videos'].sort(),
+    );
+    expect(log).toHaveBeenCalledWith(
+      'Skipped the data of features that are off in packages/config/site.json: blog, schedule, sessions, team.',
+    );
+  });
+});
+
+describe('siteFeatures', () => {
+  const dirsToClean: string[] = [];
+
+  afterEach(() => {
+    for (const dir of dirsToClean.splice(0)) rmSync(dir, { recursive: true, force: true });
+  });
+
+  const writeSite = (dir: string, path: string, site: object) => {
+    mkdirSync(join(dir, path, '..'), { recursive: true });
+    writeFileSync(join(dir, path), JSON.stringify(site));
+  };
+
+  it('reads the site features over the defaults', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'hoverboard-cli-'));
+    dirsToClean.push(dir);
+    writeSite(dir, 'packages/web/defaults/site.json', { features: { blog: true, team: true } });
+    writeSite(dir, 'packages/config/site.json', { features: { blog: false } });
+
+    expect(siteFeatures(dir)).toEqual({ blog: false, team: true });
+  });
+
+  it('uses the defaults when the site has no features', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'hoverboard-cli-'));
+    dirsToClean.push(dir);
+    writeSite(dir, 'packages/web/defaults/site.json', { features: { blog: true } });
+    writeSite(dir, 'packages/config/site.json', {});
+
+    expect(siteFeatures(dir)).toEqual({ blog: true });
+  });
+
+  it('reads the repository config', () => {
+    expect(siteFeatures()).toMatchObject({ blog: true, schedule: true, speakers: true });
   });
 });

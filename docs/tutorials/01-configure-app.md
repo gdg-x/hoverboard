@@ -41,6 +41,21 @@ The config is checked with the defaults merged in. The build, `npm run lint` and
 
 The check also catches navigation to an unknown page, and images that are not in `packages/web/public`.
 
+## Editing on GitHub
+
+You can change the config and content without installing anything, in the GitHub web editor. Every change gets a preview site before it goes live. This needs the deploy workflows set up first ([Deploying to Firebase with Github Actions](04-deploy.md#deploying-to-firebase-with-github-actions)).
+
+1. Open the file in `packages/config` on GitHub, for example `content/resources.json`, and select the pencil icon. To edit several files at once, press `.` on the repository page to open github.dev.
+1. Make your change. Keep the JSON valid: quotes around keys and text, commas between items, and no comma after the last item.
+1. Select **Commit changes**, choose **Create a new branch for this commit and start a pull request**, then **Propose changes** and **Create pull request**.
+1. The `Deploy Preview` workflow checks the config with `./hbd validate-config` first. If the config has errors, the `validate_config` check fails and nothing deploys. Each error shows on its file in the **Files changed** tab (verify). Fix them by editing the file on the pull request's branch.
+1. When the check passes, a comment on the pull request links to the preview site. It expires after a day, and every new commit updates it.
+1. Merge the pull request. The `Deploy` workflow publishes the change to the live site.
+
+The preview reads content from your production Firestore, so it shows the same sessions and speakers as the live site. Changes to Cloud Functions, rules and features that the functions read only take effect after the merge.
+
+Pull requests from forks are checked, but do not get a preview. Edit as a collaborator of the repository instead.
+
 `faq.md` and `coc.md` can use these values in [Nunjucks](https://mozilla.github.io/nunjucks/) templates, with one namespace per file. For example `{{ site.url }}` comes from `site.json`, and `{{ resources.title }}` from `content/resources.json`.
 
 ## Pages configuration

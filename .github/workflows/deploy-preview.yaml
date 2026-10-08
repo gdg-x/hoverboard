@@ -9,7 +9,21 @@ permissions:
   id-token: write
 
 jobs:
+  # Shows each error on its file in the pull request, and runs for pull requests from forks too.
+  validate_config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: package.json
+      - run: npm ci
+      - run: ./hbd validate-config
+
   build_and_preview:
+    needs: validate_config
+    # Pull requests from forks cannot get a token to deploy.
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
