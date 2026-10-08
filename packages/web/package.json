@@ -46,6 +46,7 @@
     "@webcomponents/template-shadowroot": "^0.2.1",
     "ajv": "^8.20.0",
     "astro": "^7.3.7",
+    "firebase-admin": "^14.5.0",
     "lit-analyzer": "^2.0.3",
     "nunjucks": "^3.2.4",
     "rollup-plugin-copy": "^3.5.0",
