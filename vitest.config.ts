@@ -36,7 +36,11 @@ const web = {
     globalSetup: ['./packages/web/__tests__/localize.global-setup.ts'],
     setupFiles: ['./packages/web/__tests__/web.setup.ts'],
     server: { deps: { inline: [/@lit-labs\/observers/] } },
-    include: ['packages/web/src/**/*.test.ts', 'packages/web/build/**/*.test.ts'],
+    include: [
+      'packages/web/*.test.ts',
+      'packages/web/src/**/*.test.ts',
+      'packages/web/build/**/*.test.ts',
+    ],
     exclude: [...configDefaults.exclude, '**/*.smoke.test.ts'],
   },
 } satisfies TestProjectInlineConfiguration;

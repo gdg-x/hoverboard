@@ -29,7 +29,19 @@ export const workboxConfig: GenerateSWOptions = {
   cleanupOutdatedCaches: true,
   globDirectory: 'dist',
   globPatterns: ['**/*.{html,js,css,json,svg,md}'],
+  // Locale modules are cached when they first load, so the precache does not grow with every locale.
+  globIgnores: ['locales/**'],
   runtimeCaching: [
+    {
+      // File names are hashed, so a cached locale never goes stale.
+      urlPattern: ({ url }) =>
+        url.origin === self.location.origin && url.pathname.startsWith('/locales/'),
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'locales-cache',
+        expiration: STATIC_EXPIRATION,
+      },
+    },
     {
       urlPattern: ({ url }) =>
         url.origin === self.location.origin && url.pathname.startsWith('/images/'),

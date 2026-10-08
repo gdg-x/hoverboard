@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import livereload from 'rollup-plugin-livereload';
 import { generateSW } from 'rollup-plugin-workbox';
+import { chunkFileNames } from './build/chunk-names';
 import { decorators } from './build/decorators';
 import { production, watch } from './build/resolve-config';
 import { site } from './build/vite-plugin-site';
@@ -20,7 +21,7 @@ export default defineConfig({
       treeshake: production,
       output: {
         entryFileNames: production ? '[name]-[hash].js' : '[name].js',
-        chunkFileNames: production ? '[name]-[hash].js' : '[name].js',
+        chunkFileNames: chunkFileNames(production),
         // Keeps the rarely changing Firebase SDK in its own cacheable chunk.
         codeSplitting: {
           groups: [{ name: 'firebase', test: /node_modules[\\/](@firebase|firebase)[\\/]/ }],
