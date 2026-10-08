@@ -31,7 +31,7 @@ Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#bi
 In the [`.github/workflows`](.github/workflows) folder, you can find two workflows to help you develop and deploy Hoverboard to Firebase:
 
 - [`main.yaml`](.github/workflows/main.yaml) Builds the project, runs the linter and the tests on every push.
-- [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) Deploys a preview of the website to Firebase after every push to a pull request. Functions and Firestore rules are not deployed.
+- [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) Checks `packages/config` with `./hbd validate-config`, then deploys a preview of the website to Firebase after every push to a pull request. Functions and Firestore rules are not deployed. See [Editing on GitHub](01-configure-app.md#editing-on-github).
 - [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every push to the `main` branch. You can also run it by hand, for example after you change content in Firestore: open **Actions** > **Deploy** > **Run workflow** on GitHub, or run `gh workflow run deploy.yaml`. It only deploys from `main`.
 
 The `main.yaml` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
@@ -61,6 +61,6 @@ If the auth step fails with `must specify exactly one of "workload_identity_prov
 
 Missing roles show up as `403` errors such as `Permission denied to get service` (Service Usage), a failed `firebaserules.googleapis.com` `:test` request (Rules) or `Failed to list functions` (Cloud Functions).
 
-Pull requests from forks cannot get a token, so they do not deploy a preview.
+Pull requests from forks cannot get a token, so they do not deploy a preview. Their config is still checked.
 
 You can now push to your `main` branch and it'll deploy to the production (`live`) Firebase Hosting channel and pull requests will deploy a temporary preview.

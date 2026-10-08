@@ -75,6 +75,16 @@ export class ConfigError extends Error {
 
 const readJson = <T>(path: string): T => JSON.parse(fs.readFileSync(path, 'utf8')) as T;
 
+/** Reads a file in packages/config. Invalid JSON throws a `ConfigError` naming the file. */
+const readSiteJson = <T>(paths: ConfigPaths, file: string): T => {
+  try {
+    return readJson<T>(join(paths.site, file));
+  } catch (error) {
+    if (!(error instanceof SyntaxError)) throw error;
+    throw new ConfigError([`${file}: is not valid JSON. ${error.message.replaceAll(/\s+/g, ' ')}`]);
+  }
+};
+
 const formatErrors = (file: string, errors: ErrorObject[] | null | undefined): string[] =>
   (errors ?? []).map(({ instancePath, message, params }) => {
     const property = params['additionalProperty'] as string | undefined;
@@ -242,7 +252,7 @@ const loadContentTranslations = (
     const file = `content/locales/${locale}/resources.json`;
     if (!files.includes('resources.json')) continue;
 
-    const translation = readJson<unknown>(join(paths.site, file));
+    const translation = readSiteJson<unknown>(paths, file);
     if (!isPlainObject(translation)) {
       errors.push(`${file}: must be an object`);
       continue;
@@ -273,9 +283,9 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
 } => {
   const site = deepMerge(
     readJson<object>(join(paths.defaults, 'site.json')),
-    readJson<object>(join(paths.site, 'site.json')),
+    readSiteJson<object>(paths, 'site.json'),
   ) as Site;
-  const siteContent = readJson<object>(join(paths.site, 'content', 'resources.json'));
+  const siteContent = readSiteJson<object>(paths, 'content/resources.json');
   const resources = siteContent as Resources;
 
   const ajv = new Ajv2020({ allErrors: true });

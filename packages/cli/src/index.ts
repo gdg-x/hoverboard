@@ -9,7 +9,7 @@ import { runFirestoreInit } from './commands/firestore-init/index.js';
 import { type InitOptions, runInit } from './commands/init/index.js';
 import { runSetup } from './commands/setup.js';
 import { runSetupGitHub } from './commands/setup-github.js';
-import { validateSiteConfig } from './utils/site-config.js';
+import { githubAnnotation, validateSiteConfig } from './utils/site-config.js';
 import { findRepoRoot } from './utils/node-version.js';
 
 const program = new Command();
@@ -70,7 +70,8 @@ program
   .action(async () => {
     const repoRoot = findRepoRoot(process.cwd());
     const errors = repoRoot ? await validateSiteConfig(repoRoot) : ['Not in a Hoverboard repo.'];
-    for (const error of errors) console.log(`✘ ${error}`);
+    const inActions = process.env['GITHUB_ACTIONS'] === 'true';
+    for (const error of errors) console.log(inActions ? githubAnnotation(error) : `✘ ${error}`);
     if (!errors.length) console.log('✔ packages/config is valid.');
     process.exitCode = errors.length ? 1 : 0;
   });

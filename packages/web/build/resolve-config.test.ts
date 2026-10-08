@@ -408,6 +408,16 @@ describe('config validation', () => {
     expect(Object.keys(schema.properties.features.properties)).toEqual([...FEATURES]);
   });
 
+  it('names the file with invalid JSON', () => {
+    const paths = makePaths();
+    writeFileSync(join(paths.site, 'content/resources.json'), '{\n  "title": "DevFest",\n}\n');
+
+    expect(() => loadConfig({ paths, nodeEnv: 'production' })).toThrow(ConfigError);
+    expect(() => loadConfig({ paths, nodeEnv: 'production' })).toThrow(
+      /content\/resources\.json: is not valid JSON\. .*\(line 3 column 1\)/,
+    );
+  });
+
   it('fails the build with every error', () => {
     const paths = makePaths({ site: { typo: true }, resources: { titel: 'DevFest' } });
 
