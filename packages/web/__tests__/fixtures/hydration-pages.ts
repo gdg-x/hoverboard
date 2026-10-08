@@ -116,6 +116,30 @@ export const HYDRATION_PAGES: Record<string, HydrationPage> = {
     load: () => import('../../src/views/speaker-page'),
     template: () => html`<speaker-page .speakerId=${'ada'}></speaker-page>`,
   },
+  'previous speakers page': {
+    content: { previousSpeakers },
+    load: () => import('../../src/views/previous-speakers-page'),
+    template: () => html`<previous-speakers-page></previous-speakers-page>`,
+  },
+  'team page': {
+    content: {
+      teams: [{ id: 'core', title: 'Core team' }],
+      members: [
+        {
+          id: 'ada',
+          parentId: 'core',
+          name: 'Ada',
+          title: 'Organizer',
+          order: 1,
+          photo: '',
+          photoUrl: 'https://example.com/ada.jpg',
+          socials: [{ icon: 'github', link: 'https://github.com/ada', name: 'GitHub' }],
+        },
+      ],
+    } as never,
+    load: () => import('../../src/views/team-page'),
+    template: () => html`<team-page></team-page>`,
+  },
   'session page': {
     content: { sessions: [session] },
     load: () => import('../../src/views/session-page'),

@@ -1,105 +1,85 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, vi } from 'vitest';
-import { html } from 'lit';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import { updateMetadata } from '../utils/metadata';
+import type { SpeakerCard } from '../components/shared/speaker-card';
+import { type PreviousSpeakersPage, speakersByYear } from './previous-speakers-page';
 import './previous-speakers-page';
-import { PreviousSpeakersPage } from './previous-speakers-page';
 
 vi.mock('../utils/metadata');
-vi.mock('../utils/scrolling', () => ({
-  scrollToTop: vi.fn(),
-}));
-const speaker: PreviousSpeaker = {
+
+const speaker = (id: string, years: number[]): PreviousSpeaker => ({
   bio: 'Bio',
   company: 'Example',
   country: 'United States',
-  id: 'speaker-1',
-  name: 'Previous Speaker',
+  id,
+  name: id,
   order: 1,
-  photoUrl: '/speaker.jpg',
-  sessions: { 2024: [] },
+  photoUrl: `/${id}.jpg`,
+  sessions: Object.fromEntries(years.map((year) => [year, [{ title: 'Talk', tags: [] }]])),
   socials: [],
   title: 'Engineer',
+});
+
+const ada = speaker('ada', [2023, 2024]);
+const grace = speaker('grace', [2023]);
+
+const render = async (previousSpeakers: PreviousSpeaker[]) => {
+  const result = await fixture<PreviousSpeakersPage>(
+    html`<previous-speakers-page></previous-speakers-page>`,
+  );
+  result.element.previousSpeakers = new Success(previousSpeakers);
+  await result.element.updateComplete;
+  return result;
 };
 
 describe('previous-speakers-page', () => {
-  it('defines a component', () => {
-    expect(customElements.get('previous-speakers-page')).toBeDefined();
+  afterEach(() => {
+    litRender(nothing, document.body);
   });
 
-  it('renders speaker links and years', async () => {
-    const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
-      html`<previous-speakers-page></previous-speakers-page>`,
-    );
-    element.previousSpeakers = new Success([speaker]);
-    await element.updateComplete;
-
-    expect(shadowRoot.querySelector('a.speaker')).toHaveAttribute(
-      'href',
-      '/previous-speakers/speaker-1',
-    );
-    expect(shadowRoot).toHaveTextContent('Previous Speaker');
-    expect(shadowRoot).toHaveTextContent('2024');
+  it('groups speakers by year, newest first', () => {
+    expect(
+      speakersByYear([ada, grace]).map(
+        ({ year, speakers }) => `${year}: ${speakers.map(({ id }) => id).join(', ')}`,
+      ),
+    ).toEqual(['2024: ada', '2023: ada, grace']);
   });
 
-  it('renders the company logo with the company name as alt text', async () => {
-    const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
-      html`<previous-speakers-page></previous-speakers-page>`,
-    );
-    element.previousSpeakers = new Success([{ ...speaker, companyLogo: '/logo.svg' }]);
-    await element.updateComplete;
+  it('shows each year as a heading over its speaker cards', async () => {
+    const { shadowRoot } = await render([ada, grace]);
+    const years = [...shadowRoot.querySelectorAll('h2.year')].map((year) => year.textContent);
 
-    expect(shadowRoot.querySelector('.company-logo')).toHaveAttribute('alt', 'Example');
+    expect(years).toEqual(['2024', '2023']);
+    const cards = shadowRoot.querySelectorAll<SpeakerCard>('section:last-of-type speaker-card');
+    expect(cards).toHaveLength(2);
+    expect(cards[1]).toHaveAttribute('href', '/previous-speakers/grace');
   });
 
-  it('does not render a company logo image without a source', async () => {
-    const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
-      html`<previous-speakers-page></previous-speakers-page>`,
+  it('names each photo for the view transition only once', async () => {
+    const { shadowRoot } = await render([ada, grace]);
+    const names = [...shadowRoot.querySelectorAll('speaker-card')].map((card) =>
+      card.getAttribute('transition-name'),
     );
-    element.previousSpeakers = new Success([speaker]);
-    await element.updateComplete;
 
-    expect(shadowRoot.querySelector('.company-logo')).toBeNull();
+    expect(names).toEqual(['previous-speaker-ada', 'none', 'previous-speaker-grace']);
   });
 
-  it('triggers the fetch and starts in the pending state', async () => {
-    const { element } = await fixture<PreviousSpeakersPage>(
-      html`<previous-speakers-page></previous-speakers-page>`,
-    );
+  it('sets the page metadata, and shows progress only while loading', async () => {
+    const { element, shadowRoot } = await render([]);
 
-    expect(element.previousSpeakers).toBeInstanceOf(Pending);
-  });
-
-  it('updates metadata and renders the completed-state progress visibility', async () => {
-    const mockUpdateMetadata = vi.mocked(updateMetadata);
-    mockUpdateMetadata.mockClear();
-    const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
-      html`<previous-speakers-page></previous-speakers-page>`,
-    );
-    element.previousSpeakers = new Failure(new Error('failed'));
-    await element.updateComplete;
-
-    expect(mockUpdateMetadata).toHaveBeenCalledWith(
+    expect(updateMetadata).toHaveBeenCalledWith(
       'Previous Speakers',
       'Check who was with us last years',
     );
+    element.previousSpeakers = new Pending();
+    await element.updateComplete;
+    expect(shadowRoot.querySelector('hb-progress')).not.toHaveAttribute('hidden');
+
+    element.previousSpeakers = new Failure(new Error('failed'));
+    await element.updateComplete;
     expect(shadowRoot.querySelector('hb-progress')).toHaveAttribute('hidden');
-  });
-
-  it('labels one year or several years', async () => {
-    const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
-      html`<previous-speakers-page></previous-speakers-page>`,
-    );
-    element.previousSpeakers = new Success([speaker]);
-    await element.updateComplete;
-
-    expect(shadowRoot).toHaveTextContent('Year: 2024');
-
-    element.previousSpeakers = new Success([{ ...speaker, sessions: { 2023: [], 2024: [] } }]);
-    await element.updateComplete;
-
-    expect(shadowRoot).toHaveTextContent('Years: 2024, 2023');
   });
 });

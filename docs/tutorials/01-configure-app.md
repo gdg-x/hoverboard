@@ -92,6 +92,10 @@ The numbers next to the about text are `aboutBlock.statisticsBlock` in `packages
 
 The venue block shows `event.location` with directions in Google Maps, Apple Maps and OpenStreetMap. With `integrations.googleMapsApiKey`, it also has a map that loads only when a visitor asks for it, so other visits do not load Google Maps.
 
+The team page opens with the organizers' photo, `aboutOrganizerBlock.image`, which the home page shows too, and `team.description`, both in `packages/config/content/resources.json`.
+
+A speaker's page lists their sessions and, when `previousSpeakers` is on and a previous speaker has the same ID, their talks in earlier years. The previous speakers page groups speakers by the years they spoke.
+
 If you don't need some pages, turn their features off. See [Features](#features).
 
 ## Features

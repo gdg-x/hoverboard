@@ -1,25 +1,21 @@
-import { Pending, Success } from '@abraham/remotedata';
-import { type MockedFunction, describe, expect, it, vi } from 'vitest';
-import { html } from 'lit';
+import { Success } from '@abraham/remotedata';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { within } from '@testing-library/dom';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { updateImageMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
+import type { PreviousSpeakerPage } from './previous-speaker-page';
 import './previous-speaker-page';
-import { PreviousSpeakerPage } from './previous-speaker-page';
 
 vi.mock('../utils/metadata');
 vi.mock('../utils/navigation', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../utils/navigation')>()),
   goto: vi.fn(),
 }));
-vi.mock('../utils/scrolling', () => ({
-  scrollToTop: vi.fn(),
-}));
-vi.mock('../store/previous-speakers/selectors', () => ({
-  selectPreviousSpeaker: vi.fn(),
-}));
+vi.mock('../store/previous-speakers/selectors', () => ({ selectPreviousSpeaker: vi.fn() }));
 
 const speaker: PreviousSpeaker = {
   bio: 'Speaker bio',
@@ -29,84 +25,76 @@ const speaker: PreviousSpeaker = {
   name: 'Ada Lovelace',
   order: 1,
   photoUrl: '/ada.jpg',
-  sessions: {
-    '2023': [{ tags: [], title: 'An old talk' }],
-  },
+  sessions: { '2023': [{ tags: [], title: 'An old talk' }] },
   socials: [{ icon: 'github', link: 'https://github.com/ada', name: 'GitHub' }],
   title: 'Engineer',
 };
 
+const render = async () => {
+  const result = await fixture<PreviousSpeakerPage>(
+    html`<previous-speaker-page></previous-speaker-page>`,
+  );
+  result.element.speakers = new Success([speaker]);
+  result.element.speakerId = 'speaker-1';
+  await result.element.updateComplete;
+  await result.element.updateComplete;
+  return { ...result, view: within(result.shadowRootForWithin) };
+};
+
 describe('previous-speaker-page', () => {
-  it('defines a component', () => {
-    expect(customElements.get('previous-speaker-page')).toBeDefined();
+  beforeEach(() => {
+    vi.mocked(selectPreviousSpeaker).mockReturnValue(speaker);
   });
 
-  it('triggers the fetch and starts in the pending state', async () => {
-    const { element } = await fixture<PreviousSpeakerPage>(
-      html`<previous-speaker-page></previous-speaker-page>`,
-    );
-
-    expect(element.speakers).toBeInstanceOf(Pending);
+  afterEach(() => {
+    litRender(nothing, document.body);
+    vi.clearAllMocks();
   });
 
-  it('resolves the speaker from the route and updates metadata', async () => {
-    const mockSelectPreviousSpeaker = selectPreviousSpeaker as MockedFunction<
-      typeof selectPreviousSpeaker
-    >;
-    const mockUpdateMetadata = vi.mocked(updateImageMetadata);
-    mockSelectPreviousSpeaker.mockReturnValue(speaker);
-    mockUpdateMetadata.mockClear();
+  it('shows the speaker, their talks and other previous speakers', async () => {
+    const { shadowRoot, view } = await render();
 
-    const { element, shadowRoot } = await fixture<PreviousSpeakerPage>(
-      html`<previous-speaker-page></previous-speaker-page>`,
+    expect(view.getByRole('heading', { level: 1 })).toHaveTextContent('Ada Lovelace');
+    expect(shadowRoot.querySelector('.details')).toHaveTextContent(
+      'Engineer, Example Inc · United States',
     );
-    element.speakers = new Success([speaker]);
-    element.speakerId = 'speaker-1';
-    await element.updateComplete;
-    await element.updateComplete;
-
-    expect(shadowRoot).toHaveTextContent('Engineer, Example Inc');
-    expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'github');
-    expect(shadowRoot).toHaveTextContent('An old talk');
-    expect(shadowRoot).toHaveTextContent('Year: 2023');
-    expect(mockUpdateMetadata).toHaveBeenCalledWith('Ada Lovelace', 'Speaker bio', {
+    expect(shadowRoot.querySelector('hb-icon-button')).toHaveAttribute('label', 'GitHub');
+    expect(shadowRoot.querySelector('previous-talks')).toHaveProperty('sessions', speaker.sessions);
+    expect(shadowRoot.querySelector('previous-speakers-block')).not.toBeNull();
+    expect(updateImageMetadata).toHaveBeenCalledWith('Ada Lovelace', 'Speaker bio', {
       image: '/ada.jpg',
       imageAlt: 'Ada Lovelace',
     });
   });
 
-  it('redirects to 404 when the speaker cannot be found', async () => {
-    const mockSelectPreviousSpeaker = selectPreviousSpeaker as MockedFunction<
-      typeof selectPreviousSpeaker
-    >;
-    mockSelectPreviousSpeaker.mockReturnValue(undefined);
-    vi.mocked(goto).mockClear();
+  it('names the photo like the card it came from', async () => {
+    const { shadowRoot } = await render();
 
-    const { element } = await fixture<PreviousSpeakerPage>(
-      html`<previous-speaker-page></previous-speaker-page>`,
+    expect(shadowRoot.querySelector<HTMLElement>('.photo')!.style.viewTransitionName).toBe(
+      'previous-speaker-speaker-1',
     );
-    element.speakers = new Success([speaker]);
-    element.speakerId = 'missing';
-    await element.updateComplete;
-    await element.updateComplete;
+  });
+
+  it('links back to all previous speakers', async () => {
+    const { view } = await render();
+
+    expect(view.getByRole('link', { name: 'All previous speakers' })).toHaveAttribute(
+      'href',
+      '/previous-speakers',
+    );
+  });
+
+  it('goes to the 404 page for a missing speaker', async () => {
+    vi.mocked(selectPreviousSpeaker).mockReturnValue(undefined);
+    await render();
 
     expect(goto).toHaveBeenCalledWith('/404');
   });
 
-  it('renders an empty additional-sessions section when the speaker has no sessions', async () => {
-    const mockSelectPreviousSpeaker = selectPreviousSpeaker as MockedFunction<
-      typeof selectPreviousSpeaker
-    >;
-    mockSelectPreviousSpeaker.mockReturnValue({ ...speaker, sessions: {} });
+  it('has no talks section without talks', async () => {
+    vi.mocked(selectPreviousSpeaker).mockReturnValue({ ...speaker, sessions: {} });
+    const { shadowRoot } = await render();
 
-    const { element, shadowRoot } = await fixture<PreviousSpeakerPage>(
-      html`<previous-speaker-page></previous-speaker-page>`,
-    );
-    element.speakers = new Success([speaker]);
-    element.speakerId = 'speaker-1';
-    await element.updateComplete;
-    await element.updateComplete;
-
-    expect(shadowRoot.querySelector('.additional-sections')).toBeNull();
+    expect(shadowRoot.querySelector('previous-talks')).toBeNull();
   });
 });

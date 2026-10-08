@@ -1,16 +1,14 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, vi } from 'vitest';
-import { html } from 'lit';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { within } from '@testing-library/dom';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
+import { aboutOrganizerBlock, team } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
-import { team } from '../config/site';
+import type { TeamPage } from './team-page';
 import './team-page';
-import { TeamPage } from './team-page';
 
 vi.mock('../utils/metadata');
-vi.mock('../utils/scrolling', () => ({
-  scrollToTop: vi.fn(),
-}));
 
 const member = {
   id: 'member-1',
@@ -23,25 +21,50 @@ const member = {
   title: 'Organizer',
 };
 
+const render = async () => {
+  const result = await fixture<TeamPage>(html`<team-page></team-page>`);
+  result.element.teamsMembers = new Success([
+    { id: 'team-1', title: 'Core team', members: [member] },
+  ]);
+  await result.element.updateComplete;
+  return { ...result, view: within(result.shadowRootForWithin) };
+};
+
 describe('team-page', () => {
-  it('defines a component', () => {
-    expect(customElements.get('team-page')).toBeDefined();
+  afterEach(() => {
+    litRender(nothing, document.body);
   });
 
-  it('renders team members and social links', async () => {
-    const { element, shadowRoot } = await fixture<TeamPage>(html`<team-page></team-page>`);
-    element.teamsMembers = new Success([{ id: 'team-1', title: 'Core team', members: [member] }]);
-    await element.updateComplete;
+  it('opens with the team photo and story', async () => {
+    const { shadowRoot } = await render();
 
-    expect(shadowRoot).toHaveTextContent('Core team');
-    expect(shadowRoot).toHaveTextContent('Ada Lovelace');
-    expect(shadowRoot.querySelector('img')).toHaveAttribute('alt', 'Ada Lovelace');
-    expect(shadowRoot.querySelector('a')).toHaveAttribute('href', 'https://github.com/ada');
-    expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'github');
+    expect(updateMetadata).toHaveBeenCalledWith('Team', 'Get more info about organizers');
+    expect(shadowRoot.querySelector('.team-photo')).toHaveAttribute(
+      'src',
+      aboutOrganizerBlock.image,
+    );
+    expect(shadowRoot.querySelector('.description')).toHaveProperty('content', team.description);
   });
 
-  it('renders loading and failure states', async () => {
-    const { element, shadowRoot } = await fixture<TeamPage>(html`<team-page></team-page>`);
+  it('shows each subteam under its own heading, with member cards', async () => {
+    const { shadowRoot, view } = await render();
+
+    expect(view.getByRole('heading', { level: 2, name: 'Core team' })).toBeInTheDocument();
+    expect(view.getByRole('heading', { level: 3, name: 'Ada Lovelace' })).toBeInTheDocument();
+    expect(shadowRoot.querySelector('.member .title')).toHaveTextContent('Organizer');
+    expect(shadowRoot.querySelector('.avatar')).toHaveAttribute('alt', '');
+  });
+
+  it("names each social link with the network and the member's name", async () => {
+    const { shadowRoot } = await render();
+    const link = shadowRoot.querySelector('.socials hb-icon-button')!;
+
+    expect(link).toHaveAttribute('href', 'https://github.com/ada');
+    expect(link).toHaveAttribute('label', 'GitHub: Ada Lovelace');
+  });
+
+  it('shows loading and failure states', async () => {
+    const { element, shadowRoot } = await render();
 
     element.teamsMembers = new Pending();
     await element.updateComplete;
@@ -50,14 +73,5 @@ describe('team-page', () => {
     element.teamsMembers = new Failure(new Error('failed'));
     await element.updateComplete;
     expect(shadowRoot).toHaveTextContent('Error loading teams.');
-  });
-
-  it('updates page metadata', async () => {
-    const mockUpdateMetadata = vi.mocked(updateMetadata);
-    mockUpdateMetadata.mockClear();
-    await fixture<TeamPage>(html`<team-page></team-page>`);
-
-    expect(mockUpdateMetadata).toHaveBeenCalledWith('Team', 'Get more info about organizers');
-    expect(team.description).toBeDefined();
   });
 });

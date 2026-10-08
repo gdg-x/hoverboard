@@ -92,9 +92,7 @@ describe('pages on the server', () => {
 
     const page = await renderToString(html`<speakers-page></speakers-page>`);
 
-    expect(page).toMatch(
-      /<a\s+class="speaker-link"\s+href="\/speakers\/ada"\s+aria-label="ada"\s*><\/a>/,
-    );
+    expect(page).toMatch(/<hb-card\s+href="\/speakers\/ada"\s+label="ada"/);
     expect(page).not.toMatch(/<a\s+class="speaker /);
   });
 

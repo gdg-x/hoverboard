@@ -1,15 +1,16 @@
 import { Success } from '@abraham/remotedata';
-import { msg, str } from '@lit/localize';
-import '../components/ui/hb-progress';
-import { css, html, nothing } from 'lit';
+import { msg } from '@lit/localize';
+import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import '../components/hero/simple-hero';
+import '../components/hero/hero-block';
+import { heroText } from '../components/hero/hero-block';
+import { PAGE_TONES } from '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../components/shared/content-loader';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-speakers-block';
-import type { Badge } from '../models/badge';
-import type { PreviousSessionWithYear } from '../models/previous-session';
+import '../components/shared/previous-talks';
+import '../components/ui/hb-icon-button';
+import '../components/ui/hb-progress';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import { goto } from '../utils/navigation';
 import { store } from '../store';
@@ -19,165 +20,41 @@ import {
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
 import { updateImageMetadata } from '../utils/metadata';
-import { variableColor } from '../utils/styles';
+import { photoTransitionName } from '../utils/styles';
+import { profile } from '../styles/profile';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
-// `PreviousSpeaker.badges`/`pronouns` are not currently declared on the model
-// (no action/selector/state populates them today), but the original template
-// rendered them when present. Keep this augmentation so the badges/subtitle
-// sections stay fully typed and ready to render the moment real data is
-// supplied, without changing today's output.
-type PreviousSpeakerWithDetails = PreviousSpeaker & { badges?: Badge[]; pronouns?: string };
-
+/** A speaker from earlier years: their photo, details, social links, bio and talks. */
 @customElement('previous-speaker-page')
 export class PreviousSpeakerPage extends ThemedElement {
-  static override styles = css`
-    :host {
-      background: var(--primary-background-color);
-      box-shadow: var(--box-shadow);
-      color: var(--primary-text-color);
-      display: block;
-      height: 100%;
-      margin: 0;
-      width: 100%;
-    }
+  static override styles = [
+    heroText,
+    profile,
+    css`
+      :host {
+        display: block;
+        background-color: var(--hb-color-surface);
+        color: var(--hb-color-on-surface);
+      }
+    `,
+  ];
 
-    .content {
-      position: relative;
-      font-size: 15px;
-      line-height: 1.87;
-    }
-
-    .photo {
-      margin-right: 16px;
-      --lazy-image-width: 96px;
-      --lazy-image-height: 96px;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      overflow: hidden;
-      border-radius: 50%;
-      background-color: var(--contrast-additional-background-color);
-      transform: translateZ(0);
-      flex-shrink: 0;
-    }
-
-    .name {
-      line-height: 1.2;
-      flex: 1;
-      flex-basis: 1px;
-    }
-
-    .subtitle {
-      font-size: 16px;
-      color: var(--secondary-text-color);
-    }
-
-    .badge:not(:last-of-type)::after {
-      margin-left: -4px;
-      content: ',';
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-
-    .star-rating {
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    .meta-info {
-      line-height: 1.6;
-    }
-
-    .description {
-      margin: 24px 0 32px;
-      max-width: 700px;
-    }
-
-    .action {
-      margin-right: 16px;
-      color: var(--secondary-text-color);
-      cursor: pointer;
-      user-select: none;
-    }
-
-    /* Only the download links (icon + label) originally had layout/horizontal/center;
-           the social icon links did not, so this modifier keeps that distinction. */
-    .action--download {
-      display: flex;
-      align-items: center;
-    }
-
-    .action hoverboard-icon {
-      margin-right: 4px;
-      width: 18px;
-      height: 18px;
-    }
-
-    .additional-sections {
-      margin-top: 32px;
-    }
-
-    .actions {
-      display: flex;
-    }
-
-    .section {
-      margin-top: 16px;
-      display: block;
-      color: var(--primary-text-color);
-      flex: 1;
-      flex-basis: 1px;
-    }
-
-    .header-content,
-    .section-content {
-      display: flex;
-      align-items: center;
-    }
-
-    .section-photo {
-      margin-right: 16px;
-      width: 48px;
-      height: 48px;
-      background-color: var(--secondary-background-color);
-      border-radius: 50%;
-      overflow: hidden;
-      transform: translateZ(0);
-    }
-
-    .section-primary-text {
-      margin-bottom: 4px;
-      line-height: 1.2;
-    }
-
-    .section-secondary-text {
-      font-size: 12px;
-      line-height: 1;
-    }
-  `;
-
-  @property({ type: Object })
+  @property({ attribute: false })
   accessor speaker: PreviousSpeaker | undefined;
   @fromStore((state) => selectPreviousSpeakersState(state))
   accessor speakers!: PreviousSpeakersState;
-
   @property({ attribute: false })
   accessor speakerId: string | undefined;
 
   // Runs on the server too, so the page renders the speaker. Side effects wait for `updated`.
-  override willUpdate(changed: Map<string, unknown>) {
+  override willUpdate(changed: PropertyValues<this>) {
     if ((changed.has('speakers') || changed.has('speakerId')) && this.isLoaded) {
       this.speaker = selectPreviousSpeaker(store.getState(), this.speakerId!);
     }
   }
 
-  override updated(changed: Map<string, unknown>) {
+  override updated(changed: PropertyValues<this>) {
     if ((changed.has('speakers') || changed.has('speakerId')) && this.isLoaded) {
       if (!this.speaker) {
         goto('/404');
@@ -194,183 +71,76 @@ export class PreviousSpeakerPage extends ThemedElement {
     return !!this.speakerId && this.speakers instanceof Success;
   }
 
-  private get contentLoaderVisibility() {
-    return !!this.speaker;
-  }
-
-  private get subtitle() {
-    const speaker = this.speaker as PreviousSpeakerWithDetails | undefined;
-    return [speaker?.country, speaker?.pronouns].filter(Boolean).join(' • ');
-  }
-
-  private get companyInfo() {
-    return [this.speaker?.title, this.speaker?.company].filter(Boolean).join(', ');
-  }
-
-  private get sessions(): PreviousSessionWithYear[] {
-    if (!this.speaker) {
-      return [];
-    }
-
-    let sessions: PreviousSessionWithYear[] = [];
-
-    for (const [year, previousSessions] of Object.entries(this.speaker.sessions)) {
-      sessions = [...sessions, ...previousSessions.map((session) => ({ ...session, year }))];
-    }
-
-    return sessions.sort((a, b) => Number(b.year) - Number(a.year));
-  }
-
-  private getVariableColor(value: string) {
-    return variableColor(value);
-  }
-
   override render() {
-    const speaker = this.speaker as PreviousSpeakerWithDetails | undefined;
-    const sessions = this.sessions;
+    const speaker = this.speaker;
+    const job = [speaker?.title, speaker?.company].filter(Boolean).join(', ');
+    const details = [job, speaker?.country].filter(Boolean).join(' · ');
 
     return html`
-      <simple-hero page="speakers">
-        <div class="dialog-container header-content">
-          <img
-            loading="lazy"
-            decoding="async"
-            class="photo"
-            src=${speaker?.photoUrl ?? ''}
-            alt=${speaker?.name ?? ''}
-          />
+      <hero-block tone="${PAGE_TONES.previousSpeakers}">
+        <a class="back" href="/previous-speakers">
+          <hoverboard-icon name="arrow-left"></hoverboard-icon>
+          ${msg('All previous speakers', { id: 'pages.previous-speaker.all' })}
+        </a>
+        <div class="profile">
+          ${
+            speaker
+              ? html`<img
+                  class="photo"
+                  src="${speaker.photoUrl}"
+                  alt=""
+                  width="160"
+                  height="160"
+                  style="view-transition-name: ${photoTransitionName('previous-speaker', speaker.id)}"
+                />`
+              : nothing
+          }
           <div>
-            <h2 class="name">${speaker?.name ?? ''}</h2>
-            <div class="subtitle">${this.subtitle}</div>
+            <h1 class="hero-title">${speaker?.name ?? ''}</h1>
+            ${details ? html`<p class="details">${details}</p>` : nothing}
           </div>
         </div>
-      </simple-hero>
+      </hero-block>
 
-      <hb-progress ?hidden=${this.contentLoaderVisibility}></hb-progress>
+      <hb-progress ?hidden="${!!speaker}"></hb-progress>
 
-      <content-loader
-        class="container"
-        card-padding="32px"
-        card-height="400px"
-        horizontal-position="50%"
-        border-radius="4px"
-        box-shadow="var(--box-shadow)"
-        items-count="1"
-        ?hidden=${this.contentLoaderVisibility}
-      ></content-loader>
-
-      <div class="container content">
-        <h3 class="meta-info">${this.companyInfo}</h3>
-        ${
-          speaker?.badges?.length
-            ? html`
-                <h3 class="meta-info">
-                  ${speaker.badges.map(
-                    (badge) => html`
-                      <a
-                        class="badge"
-                        href=${badge.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title=${badge.description}
-                      >
-                        ${badge.description}
-                      </a>
-                    `,
-                  )}
-                </h3>
-              `
-            : nothing
-        }
-
-        <short-markdown class="description" .content=${speaker?.bio ?? ''}></short-markdown>
-
-        <div class="actions">
-          ${speaker?.socials?.map(
-            (social) => html`
-              <a class="action" href=${social.link} target="_blank" rel="noopener noreferrer">
-                <hoverboard-icon name=${social.icon}></hoverboard-icon>
-              </a>
-            `,
-          )}
-        </div>
-
-        ${
-          sessions.length
-            ? html`
-                <div class="additional-sections">
-                  <h3>${msg('Sessions', { id: 'common.sessions' })}</h3>
-
-                  ${sessions.map(
-                    (session) => html`
-                      <div class="section-content">
-                        <div class="section">
-                          <div class="section-primary-text">${session.title}</div>
-                          <div class="section-secondary-text">
-                            ${msg(str`Year: ${session.year}`, { id: 'pages.previous-speaker.year' })}
-                          </div>
-                          ${
-                            session.tags.length
-                              ? html`
-                                  <div class="tags">
-                                    ${session.tags.map(
-                                      (tag) => html`
-                                        <span
-                                          class="tag"
-                                          style="color: ${this.getVariableColor(tag)}"
-                                          >${tag}</span
-                                        >
-                                      `,
-                                    )}
-                                  </div>
-                                `
-                              : nothing
-                          }
-                          <div class="actions">
-                            ${
-                              session.videoId
-                                ? html`
-                                    <a
-                                      class="action action--download"
-                                      href="https://www.youtube.com/watch?v=${session.videoId}"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      <hoverboard-icon name="video"></hoverboard-icon>
-                                      <span>${msg('View video', { id: 'common.view-video' })}</span>
-                                    </a>
-                                  `
-                                : nothing
-                            }
-                            ${
-                              session.presentation
-                                ? html`
-                                    <a
-                                      class="action action--download"
-                                      href=${session.presentation}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      <hoverboard-icon name="presentation"></hoverboard-icon>
-                                      <span
-                                        >${msg('View presentation', {
-                                          id: 'common.view-presentation',
-                                        })}</span
-                                      >
-                                    </a>
-                                  `
-                                : nothing
-                            }
-                          </div>
-                        </div>
-                      </div>
-                    `,
-                  )}
-                </div>
-              `
-            : nothing
-        }
-      </div>
+      ${
+        speaker
+          ? html`
+              <div class="inner">
+                ${
+                  speaker.socials?.length
+                    ? html`<ul aria-label="${msg('Social links', { id: 'pages.speaker.socials' })}">
+                        ${speaker.socials.map(
+                          (social) => html`
+                            <li>
+                              <hb-icon-button
+                                variant="tonal"
+                                href="${social.link}"
+                                target="_blank"
+                                label="${social.name}"
+                              >
+                                <hoverboard-icon name="${social.icon}"></hoverboard-icon>
+                              </hb-icon-button>
+                            </li>
+                          `,
+                        )}
+                      </ul>`
+                    : nothing
+                }
+                <short-markdown class="bio" .content="${speaker.bio ?? ''}"></short-markdown>
+                ${
+                  Object.keys(speaker.sessions ?? {}).length
+                    ? html`<h2 class="section-title">
+                          ${msg('Talks', { id: 'pages.previous-speaker.talks' })}
+                        </h2>
+                        <previous-talks .sessions="${speaker.sessions}"></previous-talks>`
+                    : nothing
+                }
+              </div>
+            `
+          : nothing
+      }
 
       <previous-speakers-block></previous-speakers-block>
     `;

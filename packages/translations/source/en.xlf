@@ -275,9 +275,6 @@
 <trans-unit id="common.sign-in">
   <source>Sign in</source>
 </trans-unit>
-<trans-unit id="shared.filter-menu.tags">
-  <source>Tags</source>
-</trans-unit>
 <trans-unit id="shared.filter-menu.complexity">
   <source>Complexity</source>
 </trans-unit>
@@ -299,11 +296,20 @@
 <trans-unit id="shared.previous-speakers-block.title">
   <source>Previous speakers</source>
 </trans-unit>
+<trans-unit id="shared.previous-speakers-block.view-all">
+  <source>View all</source>
+</trans-unit>
 <trans-unit id="shared.previous-speakers-block.error">
   <source>Error loading previous speakers.</source>
 </trans-unit>
-<trans-unit id="shared.previous-speakers-block.view-all">
-  <source>View all</source>
+<trans-unit id="shared.filter-menu.tags">
+  <source>Tags</source>
+</trans-unit>
+<trans-unit id="common.view-video">
+  <source>View video</source>
+</trans-unit>
+<trans-unit id="common.view-presentation">
+  <source>View presentation</source>
 </trans-unit>
 <trans-unit id="shared.star-rating.rate">
   <source>Rate <x id="0" equiv-text="${value}"/> out of <x id="1" equiv-text="${this.maxRating}"/></source>
@@ -509,17 +515,14 @@
 <trans-unit id="pages.post.up-next">
   <source>Up next</source>
 </trans-unit>
-<trans-unit id="common.sessions">
-  <source>Sessions</source>
+<trans-unit id="pages.previous-speaker.all">
+  <source>All previous speakers</source>
 </trans-unit>
-<trans-unit id="pages.previous-speaker.year">
-  <source>Year: <x id="0" equiv-text="${session.year}"/></source>
+<trans-unit id="pages.speaker.socials">
+  <source>Social links</source>
 </trans-unit>
-<trans-unit id="common.view-video">
-  <source>View video</source>
-</trans-unit>
-<trans-unit id="common.view-presentation">
-  <source>View presentation</source>
+<trans-unit id="pages.previous-speaker.talks">
+  <source>Talks</source>
 </trans-unit>
 <trans-unit id="schedule.page.time-zone">
   <source>Times in <x id="0" equiv-text="&lt;strong&gt;${zoneName(shownZone)}&lt;/strong&gt;"/></source>
@@ -532,9 +535,6 @@
 </trans-unit>
 <trans-unit id="schedule.day.no-results">
   <source>No sessions match these filters.</source>
-</trans-unit>
-<trans-unit id="schedule.day.clear-filters">
-  <source>Clear filters</source>
 </trans-unit>
 <trans-unit id="schedule.day.scroll-hint">
   <source><x id="0" equiv-text="${tracks}"/> tracks. Scroll sideways to see them all.</source>
@@ -572,6 +572,27 @@
 <trans-unit id="common.review-session">
   <source>Review session</source>
 </trans-unit>
+<trans-unit id="pages.speaker.all-speakers">
+  <source>All speakers</source>
+</trans-unit>
+<trans-unit id="pages.speaker.badges">
+  <source>Badges</source>
+</trans-unit>
+<trans-unit id="common.sessions">
+  <source>Sessions</source>
+</trans-unit>
+<trans-unit id="pages.speaker.previous-talks">
+  <source>Talks in earlier years</source>
+</trans-unit>
+<trans-unit id="pages.speakers.no-results">
+  <source>No speakers match these filters.</source>
+</trans-unit>
+<trans-unit id="schedule.day.clear-filters">
+  <source>Clear filters</source>
+</trans-unit>
+<trans-unit id="pages.team.photo-alt">
+  <source>The team</source>
+</trans-unit>
 <trans-unit id="pages.team.error">
   <source>Error loading teams.</source>
 </trans-unit>
@@ -586,14 +607,6 @@
 <trans-unit id="shared.add-to-calendar.apple">
   <source>Apple Calendar</source>
   <note from="lit-localize">Downloads an .ics file for Apple Calendar and other calendar apps.</note>
-</trans-unit>
-<trans-unit id="pages.previous-speakers.years.other">
-  <source>Years:</source>
-  <note from="lit-localize">Followed by a list of years.</note>
-</trans-unit>
-<trans-unit id="pages.previous-speakers.years.one">
-  <source>Year:</source>
-  <note from="lit-localize">Followed by a year.</note>
 </trans-unit>
 <trans-unit id="pages.session.leave-feedback">
   <source>to leave feedback</source>

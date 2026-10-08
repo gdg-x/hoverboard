@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { generateClassName, tagChipStyle, tagColor, variableColor } from './styles';
+import {
+  generateClassName,
+  photoTransitionName,
+  tagChipStyle,
+  tagColor,
+  variableColor,
+} from './styles';
 
 describe('generateClassName', () => {
   it('replaces non-word characters with a dash', () => {
@@ -35,6 +41,15 @@ describe('variableColor', () => {
 describe('tagColor', () => {
   it("references the tag's color, or the outline color", () => {
     expect(tagColor('Android')).toBe('var(--hb-tag-android, var(--hb-color-outline))');
+  });
+});
+
+describe('photoTransitionName', () => {
+  it('makes a CSS name from the kind and id', () => {
+    expect(photoTransitionName('speaker', 'ada')).toBe('speaker-ada');
+    expect(photoTransitionName('previous-speaker', 'jane.doe 2')).toBe(
+      'previous-speaker-jane-doe-2',
+    );
   });
 });
 

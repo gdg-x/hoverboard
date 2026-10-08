@@ -63,4 +63,41 @@ describe('speaker-card', () => {
     expect(shadowRoot.querySelector('.social')).toBeNull();
     expect(shadowRoot.querySelector('.badges')).toBeNull();
   });
+
+  it('names its photo for the view transition to the speaker page', async () => {
+    const { shadowRoot } = await fixture<SpeakerCard>(
+      html`<speaker-card .speaker=${speaker}></speaker-card>`,
+    );
+
+    expect(shadowRoot.querySelector<HTMLElement>('.photo')!.style.viewTransitionName).toBe(
+      'speaker-ada',
+    );
+  });
+
+  it('can link elsewhere, with its own transition name', async () => {
+    const { shadowRoot } = await fixture<SpeakerCard>(
+      html`<speaker-card
+        .speaker=${speaker}
+        href="/previous-speakers/ada"
+        transition-name="previous-speaker-ada"
+      ></speaker-card>`,
+    );
+
+    expect(shadowRoot.querySelector('hb-card')).toHaveAttribute('href', '/previous-speakers/ada');
+    expect(shadowRoot.querySelector<HTMLElement>('.photo')!.style.viewTransitionName).toBe(
+      'previous-speaker-ada',
+    );
+  });
+
+  it('colors badges with the badge colors', async () => {
+    const { shadowRoot } = await fixture<SpeakerCard>(
+      html`<speaker-card .speaker=${speaker}></speaker-card>`,
+    );
+
+    expect(
+      shadowRoot
+        .querySelector<HTMLElement>('.badges hb-chip')!
+        .style.getPropertyValue('--hb-chip-background'),
+    ).toContain('--hb-tag-gde-container');
+  });
 });

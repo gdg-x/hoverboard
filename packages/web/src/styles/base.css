@@ -138,6 +138,12 @@ a {
   white-space: nowrap;
 }
 
+/* A person's photo has the same view-transition-name on their card and their page, so it moves. */
+::view-transition-group(*) {
+  animation-duration: var(--hb-duration-medium);
+  animation-timing-function: var(--hb-ease-emphasized);
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* eslint-disable css/no-important -- must win over every component's own animation. */
   *,
@@ -147,6 +153,12 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
   /* eslint-enable css/no-important */
 }

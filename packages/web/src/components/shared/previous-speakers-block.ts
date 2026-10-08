@@ -5,6 +5,7 @@ import { customElement, state } from 'lit/decorators.js';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
 import { randomOrder } from '../../utils/arrays';
 import { previousSpeakerPath } from '../../utils/navigation';
+import { band } from '../../styles/band';
 import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
@@ -16,59 +17,61 @@ import { ThemedElement } from '../themed-element';
 
 @customElement('previous-speakers-block')
 export class PreviousSpeakersBlock extends ThemedElement {
-  static override styles = css`
-    :host {
-      margin: 32px auto;
-      text-align: center;
-    }
+  static override styles = [
+    band,
+    css`
+      :host {
+        background-color: var(--hb-color-surface-container);
+        color: var(--hb-color-on-surface);
+      }
 
-    .speakers-wrapper {
-      margin: 40px -8px 32px;
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-      overflow: hidden;
-      justify-content: center;
-    }
-
-    .speaker {
-      margin: 8px;
-    }
-
-    .photo {
-      --lazy-image-width: 64px;
-      --lazy-image-height: 64px;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      background-color: var(--contrast-additional-background-color);
-      border-radius: 50%;
-      overflow: hidden;
-      transform: translateZ(0);
-    }
-
-    @media (min-width: 640px) {
-      .speakers-wrapper {
-        margin-right: -12px;
-        margin-left: -12px;
+      .speakers {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--hb-space-3);
+        margin: 0;
+        padding: 0;
+        list-style: none;
       }
 
       .speaker {
-        margin: 12px;
+        display: block;
+        border-radius: var(--hb-radius-avatar);
+        transition: translate var(--hb-duration-short) var(--hb-ease-spring);
+      }
+
+      .speaker:hover {
+        translate: 0 -3px;
+      }
+
+      .speaker:focus-visible {
+        outline: 3px solid var(--hb-color-focus);
+        outline-offset: 2px;
       }
 
       .photo {
-        --lazy-image-width: 96px;
-        --lazy-image-height: 96px;
+        display: block;
+        inline-size: 72px;
+        block-size: 72px;
+        border: var(--hb-border-width) solid var(--hb-border-color);
+        border-radius: var(--hb-radius-avatar);
+        background-color: var(--hb-color-surface-bright);
+        object-fit: cover;
       }
-    }
 
-    @media (max-width: 639px) {
-      .speaker:nth-of-type(n + 9) {
-        display: none;
+      @container (width < 480px) {
+        .speakers li:nth-of-type(n + 9) {
+          display: none;
+        }
       }
-    }
-  `;
+
+      @media (prefers-reduced-motion: reduce) {
+        .speaker:hover {
+          translate: none;
+        }
+      }
+    `,
+  ];
 
   @fromStore((state) => selectPreviousSpeakersState(state))
   accessor previousSpeakers!: PreviousSpeakersState;
@@ -89,41 +92,46 @@ export class PreviousSpeakersBlock extends ThemedElement {
 
   override render() {
     return html`
-      <div class="container">
-        <h1 class="container-title">
-          ${msg('Previous speakers', { id: 'shared.previous-speakers-block.title' })}
-        </h1>
-
-        <div class="speakers-wrapper">
-          ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : ''}
-          ${
-            this.failure
-              ? html`<p>
-                  ${msg('Error loading previous speakers.', {
-                    id: 'shared.previous-speakers-block.error',
-                  })}
-                </p>`
-              : ''
-          }
-          ${this.speakers.map(
-            (speaker) => html`
-              <a class="speaker" href="${this.previousSpeakerUrl(speaker.id)}">
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  class="photo"
-                  src="${speaker.photoUrl}"
-                  alt="${speaker.name}"
-                />
-              </a>
-            `,
-          )}
+      <div class="inner">
+        <div class="band-header">
+          <h2 class="band-title">
+            ${msg('Previous speakers', { id: 'shared.previous-speakers-block.title' })}
+          </h2>
+          <hb-button variant="outlined" href="/previous-speakers" trailing-icon>
+            ${msg('View all', { id: 'shared.previous-speakers-block.view-all' })}
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+          </hb-button>
         </div>
 
-        <hb-button variant="text" href="/previous-speakers" trailing-icon>
-          ${msg('View all', { id: 'shared.previous-speakers-block.view-all' })}
-          <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-        </hb-button>
+        ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : ''}
+        ${
+          this.failure
+            ? html`<p>
+                ${msg('Error loading previous speakers.', {
+                  id: 'shared.previous-speakers-block.error',
+                })}
+              </p>`
+            : ''
+        }
+        <ul class="speakers">
+          ${this.speakers.map(
+            (speaker) => html`
+              <li>
+                <a class="speaker" href="${this.previousSpeakerUrl(speaker.id)}">
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    class="photo"
+                    src="${speaker.photoUrl}"
+                    alt="${speaker.name}"
+                    width="72"
+                    height="72"
+                  />
+                </a>
+              </li>
+            `,
+          )}
+        </ul>
       </div>
     `;
   }

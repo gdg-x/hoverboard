@@ -1,11 +1,17 @@
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import type { Speaker } from '../../models/speaker';
 import { speakerPath } from '../../utils/navigation';
+import { photoTransitionName, tagChipStyle } from '../../utils/styles';
 import { ThemedElement } from '../themed-element';
 import '../ui/hb-card';
 import '../ui/hb-chip';
 import './hoverboard-icon';
+
+/** What a card shows. Previous speakers have no badges. */
+export type CardSpeaker = Pick<Speaker, 'id' | 'name' | 'photoUrl' | 'company' | 'country'> &
+  Partial<Pick<Speaker, 'socials' | 'badges'>>;
 
 /**
  * A speaker as one link: photo, name, company, country and badges. In a container narrower than
@@ -122,14 +128,22 @@ export class SpeakerCard extends ThemedElement {
   `;
 
   @property({ attribute: false })
-  accessor speaker!: Speaker;
+  accessor speaker!: CardSpeaker;
+
+  /** Where the card links. Defaults to the speaker's page. */
+  @property()
+  accessor href: string | undefined;
+
+  /** Names the photo for the view transition to the same photo on the linked page. */
+  @property({ attribute: 'transition-name' })
+  accessor transitionName: string | undefined;
 
   override render() {
     const { speaker } = this;
     const social = speaker.socials?.[0];
     const meta = [speaker.company, speaker.country].filter(Boolean).join(' · ');
     return html`
-      <hb-card href="${speakerPath(speaker.id)}" label="${speaker.name}">
+      <hb-card href="${this.href ?? speakerPath(speaker.id)}" label="${speaker.name}">
         <div class="content">
           <div class="photo-frame">
             <img
@@ -139,6 +153,9 @@ export class SpeakerCard extends ThemedElement {
               loading="lazy"
               width="120"
               height="120"
+              style="view-transition-name: ${
+                this.transitionName ?? photoTransitionName('speaker', speaker.id)
+              }"
             />
             ${
               social
@@ -157,7 +174,10 @@ export class SpeakerCard extends ThemedElement {
                     ${speaker.badges.map(
                       (badge) =>
                         html`<li>
-                          <hb-chip title="${badge.description}">
+                          <hb-chip
+                            title="${badge.description}"
+                            style="${styleMap(tagChipStyle(badge.name))}"
+                          >
                             ${badge.name.toUpperCase()}
                           </hb-chip>
                         </li>`,

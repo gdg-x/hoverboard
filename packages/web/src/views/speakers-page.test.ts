@@ -1,103 +1,87 @@
-import { Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, vi } from 'vitest';
-import { html } from 'lit';
+import { Success } from '@abraham/remotedata';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
+import { FilterGroupKey } from '../models/filter-group';
 import type { SpeakerWithTags } from '../models/speaker';
 import { updateMetadata } from '../utils/metadata';
+import type { SpeakersPage } from './speakers-page';
 import './speakers-page';
-import { SpeakersPage } from './speakers-page';
 
 vi.mock('../utils/metadata');
-vi.mock('../utils/scrolling', () => ({
-  scrollToTop: vi.fn(),
-}));
-const speaker: SpeakerWithTags = {
-  badges: [{ description: 'GDE', link: 'https://gde.example', name: 'gde' }],
-  bio: 'Bio',
-  company: 'Example',
-  companyLogo: '/logo.png',
-  companyLogoUrl: '/logo.png',
-  country: 'United States',
-  featured: true,
+
+const speaker = {
   id: 'speaker-1',
   name: 'Ada Lovelace',
-  order: 1,
-  photo: '/ada.jpg',
+  company: 'Example',
+  country: 'United States',
   photoUrl: '/ada.jpg',
-  shortBio: 'Short bio',
-  socials: [{ icon: 'github', link: 'https://github.com/ada', name: 'GitHub' }],
-  tags: [],
-  title: 'Engineer',
+  socials: [],
+  tags: ['Web'],
+} as never as SpeakerWithTags;
+
+const render = async (props: Partial<SpeakersPage> = {}) => {
+  const result = await fixture<SpeakersPage>(html`<speakers-page></speakers-page>`);
+  Object.assign(result.element, props);
+  await result.element.updateComplete;
+  return result;
 };
 
 describe('speakers-page', () => {
-  it('defines a component', () => {
-    expect(customElements.get('speakers-page')).toBeDefined();
+  afterEach(() => {
+    litRender(nothing, document.body);
   });
 
-  it('renders speaker cards with badges and socials', async () => {
-    const { element, shadowRoot } = await fixture<SpeakersPage>(
-      html`<speakers-page></speakers-page>`,
-    );
-    element.speakersToRender = [speaker];
-    await element.updateComplete;
+  it('sets the page metadata and titles the page', async () => {
+    const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('a.speaker-link')).toHaveAttribute(
-      'href',
-      '/speakers/speaker-1',
-    );
-    expect(shadowRoot).toHaveTextContent('Ada Lovelace');
-    expect(shadowRoot.querySelector('hoverboard-icon.badge-icon')).toHaveAttribute('name', 'gde');
-    expect(shadowRoot.querySelector('hoverboard-icon.social-icon')).toHaveAttribute(
-      'name',
-      'github',
-    );
-  });
-
-  it('triggers the fetch and starts in the pending state, and updates metadata', async () => {
-    const mockUpdateMetadata = vi.mocked(updateMetadata);
-    mockUpdateMetadata.mockClear();
-
-    const { element } = await fixture<SpeakersPage>(html`<speakers-page></speakers-page>`);
-
-    expect(element.speakers).toBeInstanceOf(Pending);
-    expect(mockUpdateMetadata).toHaveBeenCalledWith(
+    expect(updateMetadata).toHaveBeenCalledWith(
       'Speakers',
       expect.stringMatching(/^Hear from the Googlers/),
     );
+    expect(shadowRoot.querySelector('simple-hero')).toHaveAttribute('page', 'speakers');
   });
 
-  it('shows and hides the loading indicators', async () => {
-    const { element, shadowRoot } = await fixture<SpeakersPage>(
-      html`<speakers-page></speakers-page>`,
-    );
+  it('shows every speaker as a card', async () => {
+    const { shadowRoot } = await render({ speakersToRender: [speaker] });
+
+    expect(shadowRoot.querySelector('.speakers speaker-card')).toHaveProperty('speaker', speaker);
+    expect(shadowRoot.querySelector('filter-menu')).toHaveProperty('resultsCount', 1);
+  });
+
+  it('shows progress until the speakers load', async () => {
+    const { element, shadowRoot } = await render();
 
     expect(shadowRoot.querySelector('hb-progress')).not.toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('content-loader')).not.toHaveAttribute('hidden');
 
     element.speakers = new Success([speaker]);
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('hb-progress')).toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('content-loader')).toHaveAttribute('hidden');
   });
 
-  it('passes filter state to the filter-menu', async () => {
-    const { element, shadowRoot } = await fixture<SpeakersPage>(
-      html`<speakers-page></speakers-page>`,
+  it('offers to clear filters that match nobody', async () => {
+    const { shadowRoot } = await render({
+      speakersToRender: [],
+      selectedFilters: [{ group: FilterGroupKey.tags, tag: 'design' }],
+    });
+
+    expect(shadowRoot.querySelector('.empty')).toHaveTextContent(
+      'No speakers match these filters.',
     );
-    element.speakersToRender = [speaker];
-    await element.updateComplete;
-
-    expect(shadowRoot.querySelector('filter-menu')).toHaveProperty('resultsCount', 1);
+    expect(shadowRoot.querySelector('.empty hb-button')).toHaveTextContent('Clear filters');
   });
 
-  it('leaves out previous speakers when that feature is off', async () => {
+  it('shows previous speakers only when that feature is on', async () => {
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector('previous-speakers-block')).not.toBeNull();
+
+    litRender(nothing, document.body);
     setFeatures({ previousSpeakers: false });
+    const off = await render();
 
-    const { shadowRoot } = await fixture<SpeakersPage>(html`<speakers-page></speakers-page>`);
-
-    expect(shadowRoot.querySelector('previous-speakers-block')).toBeNull();
+    expect(off.shadowRoot.querySelector('previous-speakers-block')).toBeNull();
   });
 });

@@ -20,6 +20,13 @@ export const variableColor = (value: string, fallback?: string): string => {
 export const tagColor = (tag: string): string =>
   `var(--hb-tag-${generateClassName(tag)}, var(--hb-color-outline))`;
 
+/**
+ * The `view-transition-name` of a person's photo, the same on their card and their page, so the
+ * photo moves from one to the other.
+ */
+export const photoTransitionName = (kind: 'speaker' | 'previous-speaker', id: string): string =>
+  `${kind}-${id.replace(/[^\w-]/g, '-')}`;
+
 /** `hb-chip` colors for a tag: the container and text colors the build derives from its color. */
 export const tagChipStyle = (tag: string): Record<string, string> => {
   const name = generateClassName(tag);

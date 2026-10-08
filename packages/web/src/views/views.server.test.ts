@@ -32,7 +32,7 @@ describe('detail pages on the server', () => {
 
     const page = await renderToString(html`<speaker-page .speakerId=${'ada'}></speaker-page>`);
 
-    expect(page).toContain('<h2 class="name">Ada Lovelace</h2>');
+    expect(page).toMatch(/<h1 class="hero-title">(<!--[^>]*-->)*Ada Lovelace/);
     expect(page).toContain(renderedBio);
   });
 
@@ -47,7 +47,7 @@ describe('detail pages on the server', () => {
       html`<previous-speaker-page .speakerId=${'grace'}></previous-speaker-page>`,
     );
 
-    expect(page).toContain('<h2 class="name">Grace Hopper</h2>');
+    expect(page).toMatch(/<h1 class="hero-title">(<!--[^>]*-->)*Grace Hopper/);
     expect(page).toContain(renderedBio);
   });
 
