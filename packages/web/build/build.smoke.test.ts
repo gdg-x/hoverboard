@@ -74,12 +74,12 @@ describe('a production build of a minimal site', () => {
     expect(build.status, build.stderr).toBe(0);
   });
 
-  it('builds only the home and not found pages when every feature is off', () => {
+  it('builds only the home, not found and offline pages when every feature is off', () => {
     const pages = readdirSync(dist, { recursive: true, encoding: 'utf8' }).filter((file) =>
       file.endsWith('.html'),
     );
 
-    expect(pages.sort()).toEqual(['404.html', 'index.html']);
+    expect(pages.sort()).toEqual(['404.html', 'index.html', 'offline.html']);
     expect(readFileSync(join(dist, 'index.html'), 'utf8')).toMatch(
       /<home-page[^>]*><template shadowroot="open" shadowrootmode="open">/,
     );
@@ -111,6 +111,18 @@ describe('a production build of a minimal site', () => {
       short_name: 'Minimal',
       lang: 'en',
     });
+  });
+
+  it('precaches the scripts and the home and offline pages', () => {
+    const worker = readFileSync(join(dist, 'service-worker.js'), 'utf8');
+    const precached = [...worker.matchAll(/url:"([^"]+)"/g)].map((match) => match[1] ?? '');
+
+    expect(precached.filter((url) => url.endsWith('.html')).sort()).toEqual([
+      'index.html',
+      'offline.html',
+    ]);
+    expect(precached).toEqual(expect.arrayContaining([expect.stringMatching(/^_astro\/.+\.js$/)]));
+    expect(precached).not.toContain('firebase-messaging-sw.js');
   });
 
   it('leaves out the pages and blocks of features that are off', () => {

@@ -377,6 +377,12 @@
 <trans-unit id="pages.not-found.description">
   <source>Page not found</source>
 </trans-unit>
+<trans-unit id="pages.offline.title">
+  <source>Offline</source>
+</trans-unit>
+<trans-unit id="pages.offline.description">
+  <source>This page is not available offline</source>
+</trans-unit>
 <trans-unit id="pages.previous-speakers.title">
   <source>Previous Speakers</source>
 </trans-unit>
@@ -409,6 +415,12 @@
 </trans-unit>
 <trans-unit id="pages.home.view-highlights">
   <source>View Highlights</source>
+</trans-unit>
+<trans-unit id="pages.offline.message">
+  <source>You are offline and this page has not been saved yet. Pages you have visited are still available.</source>
+</trans-unit>
+<trans-unit id="pages.offline.home-link">
+  <source>Go to the home page</source>
 </trans-unit>
 <trans-unit id="pages.post.published">
   <source>Published: <x id="0" equiv-text="${published}"/></source>

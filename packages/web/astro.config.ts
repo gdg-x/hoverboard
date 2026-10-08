@@ -4,6 +4,7 @@ import { chunkFileNames } from './build/chunk-names';
 import { decorators } from './build/decorators';
 import { production, resolveConfig } from './build/resolve-config';
 import { routes } from './build/routes';
+import { serviceWorker } from './build/service-worker';
 import { site } from './build/vite-plugin-site';
 
 const config = resolveConfig();
@@ -29,6 +30,7 @@ export default defineConfig({
       },
     },
     routes(config.site.features),
+    serviceWorker(),
   ],
   vite: {
     // The build smoke test links node_modules into a copy of this package. Astro fails on

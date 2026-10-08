@@ -1,7 +1,15 @@
 import { msg } from '@lit/localize';
 
 export type Page =
-  'blog' | 'coc' | 'faq' | 'notFound' | 'previousSpeakers' | 'schedule' | 'speakers' | 'team';
+  | 'blog'
+  | 'coc'
+  | 'faq'
+  | 'notFound'
+  | 'offline'
+  | 'previousSpeakers'
+  | 'schedule'
+  | 'speakers'
+  | 'team';
 
 interface PageText {
   title: string;
@@ -28,6 +36,12 @@ const PAGES: Record<Page, () => PageText> = {
   notFound: () => ({
     title: msg('Not Found', { id: 'pages.not-found.title' }),
     metaDescription: msg('Page not found', { id: 'pages.not-found.description' }),
+  }),
+  offline: () => ({
+    title: msg('Offline', { id: 'pages.offline.title' }),
+    metaDescription: msg('This page is not available offline', {
+      id: 'pages.offline.description',
+    }),
   }),
   previousSpeakers: () => ({
     title: msg('Previous Speakers', { id: 'pages.previous-speakers.title' }),
