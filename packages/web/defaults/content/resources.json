@@ -1,16 +1,10 @@
 {
-  "followOur": "Follow our",
-  "followUs": "Follow us",
-  "emailUs": "Email us",
   "buyTicket": "Buy ticket",
   "signIn": "Sign in",
   "viewHighlights": "View Highlights",
   "faq": "/data/faq.md",
   "coc": "/data/coc.md",
   "loading": "Loading...",
-  "footer": {
-    "blog": "Blog"
-  },
   "bookmarked": {
     "added": "Session saved to My Schedule",
     "removed": "Session removed from My Schedule"
@@ -18,8 +12,6 @@
   "mySchedule": {
     "browseSession": "Browse sessions"
   },
-  "subscribeNote": "No spam, only the latest news and updates!",
-  "codeOfConduct": "Code of Conduct",
   "ticketsBlock": {
     "title": "Tickets",
     "soldOut": "You missed it!",
@@ -85,7 +77,6 @@
       "description": "Get notified about the important conference updates",
       "label": "Subscribe"
     },
-    "yourEmail": "Your email",
     "emailAddress": "Email Address",
     "firstName": "First Name",
     "lastName": "Last Name",
@@ -130,7 +121,6 @@
     "sessions": "Sessions"
   },
   "notifications": {
-    "subscribe": "Subscribe",
     "unsubscribe": "Unsubscribe",
     "myScheduleEnabled": "My Schedule notifications enabled",
     "myScheduleDisabled": "My Schedule notifications disabled",

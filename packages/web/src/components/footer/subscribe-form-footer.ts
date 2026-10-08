@@ -1,11 +1,11 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/button/filled-button.js';
 import '@material/web/textfield/outlined-text-field.js';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import { css, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { subscribe, type SubscribeState } from '../../store/subscribe';
-import { subscribeBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
@@ -55,11 +55,11 @@ export class SubscribeFormFooter extends ThemedElement {
         <md-outlined-text-field
           id="emailInput"
           type="email"
-          label="${subscribeBlock.yourEmail}"
+          label="${msg('Your email', { id: 'footer.subscribe-form.email' })}"
           .value="${this.email}"
           required
           ?error="${this.validate}"
-          error-text="${subscribeBlock.emailRequired}"
+          error-text="${msg('Please enter a valid email address.', { id: 'common.email-invalid' })}"
           autocomplete="off"
           ?disabled="${this.subscribed instanceof Success}"
           @input="${this.onEmailChanged}"
@@ -87,8 +87,8 @@ export class SubscribeFormFooter extends ThemedElement {
 
   private get ctaLabel() {
     return this.subscribed instanceof Success
-      ? subscribeBlock.subscribed
-      : subscribeBlock.subscribe;
+      ? msg('Subscribed', { id: 'common.subscribed' })
+      : msg('Subscribe', { id: 'common.subscribe', desc: 'Button that submits a subscription.' });
   }
 
   private get disabled() {

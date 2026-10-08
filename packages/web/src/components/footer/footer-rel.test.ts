@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { footerRelBlock, notifications, subscribeNote } from '../../config/site';
+import { footerRelBlock } from '../../config/site';
 import './footer-rel';
 
 describe('footer-rel', () => {
@@ -25,8 +25,10 @@ describe('footer-rel', () => {
     expect(withinShadowRoot.getByText(firstFooterBlock!.title)).toBeInTheDocument();
     expect(withinShadowRoot.getByText(externalLink.name)).toHaveAttribute('href', externalLink.url);
     expect(withinShadowRoot.getByText(externalLink.name)).toHaveAttribute('target', '_blank');
-    expect(withinShadowRoot.getByText(notifications.subscribe)).toBeInTheDocument();
-    expect(withinShadowRoot.getByText(subscribeNote)).toBeInTheDocument();
+    expect(withinShadowRoot.getByText('Subscribe')).toBeInTheDocument();
+    expect(
+      withinShadowRoot.getByText('No spam, only the latest news and updates!'),
+    ).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('subscribe-form-footer')).toBeInTheDocument();
   });
 });

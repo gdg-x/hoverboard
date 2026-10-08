@@ -1,6 +1,7 @@
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { footerRelBlock, notifications, subscribeNote } from '../../config/site';
+import { footerRelBlock } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 import './subscribe-form-footer';
 
@@ -96,8 +97,15 @@ export class FooterRel extends ThemedElement {
       )}
 
       <div class="col">
-        <div class="col-heading">${notifications.subscribe}</div>
-        <span>${subscribeNote}</span>
+        <div class="col-heading">
+          ${msg('Subscribe', {
+            id: 'footer.rel.subscribe-heading',
+            desc: 'Heading above the newsletter sign-up form.',
+          })}
+        </div>
+        <span>
+          ${msg('No spam, only the latest news and updates!', { id: 'footer.rel.subscribe-note' })}
+        </span>
         <subscribe-form-footer></subscribe-form-footer>
       </div>
     `;

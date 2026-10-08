@@ -2,8 +2,38 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file source-language="en" original="lit-localize-inputs" datatype="plaintext">
 <body>
+<trans-unit id="footer.block.back-to-top">
+  <source>Back to top</source>
+</trans-unit>
+<trans-unit id="footer.nav.based-on">
+  <source>Based on <x id="0" equiv-text="${hoverboard}"/></source>
+</trans-unit>
+<trans-unit id="footer.rel.subscribe-note">
+  <source>No spam, only the latest news and updates!</source>
+</trans-unit>
+<trans-unit id="footer.social.email-us">
+  <source>Email us</source>
+</trans-unit>
+<trans-unit id="footer.social.follow-blog">
+  <source>Follow our <x id="0" equiv-text="&lt;a href=&quot;${blog}&quot; target=&quot;${target}&quot; rel=&quot;${rel}&quot;&gt;"/>Blog<x id="1" equiv-text="&lt;/a&gt;"/></source>
+</trans-unit>
+<trans-unit id="footer.social.follow-us">
+  <source>Follow us</source>
+</trans-unit>
+<trans-unit id="footer.social.share">
+  <source>Share on <x id="0" equiv-text="${network}"/></source>
+</trans-unit>
 <trans-unit id="footer.locale-picker.label">
   <source>Language</source>
+</trans-unit>
+<trans-unit id="footer.subscribe-form.email">
+  <source>Your email</source>
+</trans-unit>
+<trans-unit id="common.email-invalid">
+  <source>Please enter a valid email address.</source>
+</trans-unit>
+<trans-unit id="common.subscribed">
+  <source>Subscribed</source>
 </trans-unit>
 <trans-unit id="common.sign-in">
   <source>Sign in</source>
@@ -106,6 +136,14 @@
 </trans-unit>
 <trans-unit id="shell.service-worker.error">
   <source>Error caching for offline use.</source>
+</trans-unit>
+<trans-unit id="common.subscribe">
+  <source>Subscribe</source>
+  <note from="lit-localize">Button that submits a subscription.</note>
+</trans-unit>
+<trans-unit id="footer.rel.subscribe-heading">
+  <source>Subscribe</source>
+  <note from="lit-localize">Heading above the newsletter sign-up form.</note>
 </trans-unit>
 <trans-unit id="shell.notifications.unsupported-help">
   <source>Details</source>

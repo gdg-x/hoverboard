@@ -1,7 +1,11 @@
+import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { codeOfConduct, organizer } from '../../config/site';
+import { organizer } from '../../config/site';
+import { navigationLabel } from '../shell/navigation-label';
 import { ThemedElement } from '../themed-element';
+
+const HOVERBOARD_URL = 'https://github.com/gdg-x/hoverboard';
 
 @customElement('footer-nav')
 export class FooterNav extends ThemedElement {
@@ -72,6 +76,9 @@ export class FooterNav extends ThemedElement {
   `;
 
   override render() {
+    const hoverboard = html`<a href="${HOVERBOARD_URL}" target="_blank" rel="noopener noreferrer"
+      >Project Hoverboard</a
+    >`;
     return html`
       <div class="nav-inline">
         <a href="${this.organizer.url}" target="_blank" rel="noopener noreferrer">
@@ -85,13 +92,10 @@ export class FooterNav extends ThemedElement {
         </a>
 
         <div class="copyright">
-          Based on
-          <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer"
-            >Project Hoverboard</a
-          >
+          ${msg(html`Based on ${hoverboard}`, { id: 'footer.nav.based-on' })}
           ${
             __HB_FEATURES__.codeOfConduct
-              ? html`· <a class="coc" href="/coc">${this.codeOfConduct}</a>`
+              ? html`· <a class="coc" href="/coc">${navigationLabel('codeOfConduct')}</a>`
               : nothing
           }
         </div>
@@ -100,6 +104,4 @@ export class FooterNav extends ThemedElement {
   }
 
   private organizer = organizer;
-
-  private codeOfConduct = codeOfConduct;
 }

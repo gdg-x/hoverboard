@@ -25,15 +25,6 @@
     "$schema": {
       "type": "string"
     },
-    "followOur": {
-      "type": "string"
-    },
-    "followUs": {
-      "type": "string"
-    },
-    "emailUs": {
-      "type": "string"
-    },
     "buyTicket": {
       "type": "string"
     },
@@ -51,15 +42,6 @@
     },
     "loading": {
       "type": "string"
-    },
-    "footer": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "blog": {
-          "type": "string"
-        }
-      }
     },
     "bookmarked": {
       "type": "object",
@@ -81,12 +63,6 @@
           "type": "string"
         }
       }
-    },
-    "subscribeNote": {
-      "type": "string"
-    },
-    "codeOfConduct": {
-      "type": "string"
     },
     "ticketsBlock": {
       "type": "object",
@@ -312,9 +288,6 @@
             }
           }
         },
-        "yourEmail": {
-          "type": "string"
-        },
         "emailAddress": {
           "type": "string"
         },
@@ -450,9 +423,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "subscribe": {
-          "type": "string"
-        },
         "unsubscribe": {
           "type": "string"
         },

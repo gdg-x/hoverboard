@@ -3,7 +3,7 @@ import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../../__tests__/helpers/features';
-import { codeOfConduct, organizer } from '../../config/site';
+import { organizer } from '../../config/site';
 import './footer-nav';
 
 describe('footer-nav', () => {
@@ -31,7 +31,7 @@ describe('footer-nav', () => {
   it('renders code of conduct link', async () => {
     const { shadowRootForWithin } = await fixture(html`<footer-nav></footer-nav>`);
     const withinShadowRoot = within(shadowRootForWithin);
-    const cocLink = withinShadowRoot.getByText(codeOfConduct);
+    const cocLink = withinShadowRoot.getByText('Code of Conduct');
 
     expect(cocLink).toBeInTheDocument();
     expect(cocLink).toHaveAttribute('href', '/coc');
