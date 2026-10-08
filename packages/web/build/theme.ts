@@ -1,4 +1,4 @@
-import { deriveDarkColor } from '../src/themes/color';
+import { deriveDarkColor, tagContainerColors } from '../src/themes/color';
 import { contrastFailures, contrastRatio } from '../src/themes/contrast';
 import { THEMES, type ThemeName, themeDeclarations } from '../src/themes/index';
 import { LEGACY_VARIABLES } from '../src/themes/legacy';
@@ -114,23 +114,50 @@ export const heroPhotoErrors = (theme: ResolvedTheme): string[] => {
 };
 
 /**
+ * A tag or badge color as `--<name>` (the pre-refresh name) and `--hb-tag-<name>`, with a container
+ * and a text color for chips in each scheme.
+ */
+const tagDeclarations = (name: string, color: string, fallbackScheme: 'light' | 'dark') => {
+  const plain = [`--${name}: ${color};`, `--hb-tag-${name}: ${color};`];
+  if (!isHex(color)) return { declarations: plain, fallback: [] };
+  const { light, dark } = tagContainerColors(color);
+  const fallback = fallbackScheme === 'dark' ? dark : light;
+  return {
+    declarations: [
+      ...plain,
+      `--hb-tag-${name}-container: light-dark(${light.container}, ${dark.container});`,
+      `--hb-on-tag-${name}-container: light-dark(${light.onContainer}, ${dark.onContainer});`,
+    ],
+    fallback: [
+      `--hb-tag-${name}-container: ${fallback.container};`,
+      `--hb-on-tag-${name}-container: ${fallback.onContainer};`,
+    ],
+  };
+};
+
+/**
  * The theme as CSS on `:root`, so the first paint is themed: every color with `light-dark()`, the
  * other tokens, the density, the pre-refresh variables, and the tag and badge colors.
  */
 export const themeCss = (theme: ResolvedTheme, named: Record<string, string> = {}): string => {
   const scheme = theme.colorScheme === 'system' ? 'light dark' : theme.colorScheme;
   // Browsers without light-dark() get the scheme the site uses, or light.
-  const fallback = theme.colorScheme === 'dark' ? theme.dark : theme.light;
+  const fallbackScheme = theme.colorScheme === 'dark' ? 'dark' : 'light';
+  const fallback = theme[fallbackScheme];
+  const tags = Object.entries(named).map(([name, color]) =>
+    tagDeclarations(name, color, fallbackScheme),
+  );
   const declarations = [
     `color-scheme: ${scheme};`,
     `--hb-density: ${DENSITY_FACTORS[theme.density]};`,
     themeDeclarations(theme),
     ...Object.entries(LEGACY_VARIABLES).map(([property, value]) => `${property}: ${value};`),
-    ...Object.entries(named).map(([name, color]) => `--${name}: ${color};`),
+    ...tags.flatMap((tag) => tag.declarations),
   ];
-  const fallbackDeclarations = COLOR_ROLES.map(
-    (role) => `${cssColorVar(role)}: ${fallback[role]};`,
-  );
+  const fallbackDeclarations = [
+    ...COLOR_ROLES.map((role) => `${cssColorVar(role)}: ${fallback[role]};`),
+    ...tags.flatMap((tag) => tag.fallback),
+  ];
   return [
     `:root {\n${declarations.join('\n')}\n}`,
     `@supports not (color: light-dark(#000, #fff)) {\n:root {\n${fallbackDeclarations.join('\n')}\n}\n}`,

@@ -1,63 +1,57 @@
-import { describe, expect, it } from 'vitest';
-import { html } from 'lit';
+import { afterEach, describe, expect, it } from 'vitest';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Day } from '../../models/day';
 import type { MySchedule } from './my-schedule';
 import './my-schedule';
-import type { ScheduleDay } from './schedule-day';
 
-const days: Day[] = [
-  {
-    date: '2024-01-01',
-    dateReadable: 'January 1',
-    tracks: [{ title: 'Track 1' }],
-    timeslots: [],
-  },
-  {
-    date: '2024-01-02',
-    dateReadable: 'January 2',
-    tracks: [{ title: 'Track 1' }],
-    timeslots: [],
-  },
-];
+const day = (date: string, dateReadable: string, items: unknown[] = []): Day => ({
+  date,
+  dateReadable,
+  tracks: [{ title: 'Track 1' }],
+  timeslots: [{ startTime: '10:00', endTime: '11:00', sessions: [{ items } as never] }],
+});
+
+const render = async (featuredSchedule: Day[]) => {
+  const result = await fixture<MySchedule>(html`<my-schedule></my-schedule>`);
+  result.element.featuredSchedule = featuredSchedule;
+  await result.element.updateComplete;
+  return result;
+};
 
 describe('my-schedule', () => {
-  it('defines a component', () => {
-    expect(customElements.get('my-schedule')).toBeDefined();
+  afterEach(() => {
+    litRender(nothing, document.body);
   });
 
-  it('renders an auth-required prompt with sign-in text', async () => {
-    const { shadowRoot } = await fixture<MySchedule>(html`<my-schedule></my-schedule>`);
+  it('asks signed-out visitors to sign in', async () => {
+    const { shadowRoot } = await render([]);
 
-    const authRequired = shadowRoot.querySelector('auth-required');
-    expect(authRequired).toBeInTheDocument();
-
-    const prompt = shadowRoot.querySelector('[slot="prompt"]');
-    expect(prompt).toBeInTheDocument();
-    expect(prompt).toHaveTextContent('Sign in to save sessions');
+    expect(shadowRoot.querySelector('[slot="prompt"]')).toHaveTextContent(
+      'Sign in to save sessions',
+    );
   });
 
-  it('renders a schedule-day for every featured day', async () => {
-    const { element, shadowRoot } = await fixture<MySchedule>(html`<my-schedule></my-schedule>`);
-    element.featuredSchedule = days;
-    await element.updateComplete;
+  it('shows each day under its own heading, with only bookmarked sessions', async () => {
+    const days = [
+      day('2024-01-01', 'January 1', [{ id: 's1', title: 'One' }]),
+      day('2024-01-02', 'January 2'),
+    ];
+    const { shadowRoot } = await render(days);
 
-    const dates = shadowRoot.querySelectorAll('.date');
-    expect(dates).toHaveLength(2);
-    expect(dates[0]).toHaveTextContent('January 1');
-    expect(dates[1]).toHaveTextContent('January 2');
-
-    const scheduleDays = shadowRoot.querySelectorAll<ScheduleDay>('schedule-day');
-    expect(scheduleDays).toHaveLength(2);
-    expect(scheduleDays[0]?.day).toEqual(days[0]);
-    expect(scheduleDays[0]?.onlyFeatured).toBe(true);
-    expect(scheduleDays[0]).toHaveAttribute('name', '2024-01-01');
-    expect(scheduleDays[1]?.day).toEqual(days[1]);
+    const headings = shadowRoot.querySelectorAll('h2.date');
+    expect([...headings].map((heading) => heading.textContent)).toEqual(['January 1', 'January 2']);
+    const scheduleDays = shadowRoot.querySelectorAll('schedule-day');
+    expect(scheduleDays[0]!.day).toBe(days[0]);
+    expect(scheduleDays[0]!.onlyFeatured).toBe(true);
+    expect(shadowRoot.querySelector('.hint')).toBeNull();
   });
 
-  it('renders nothing when there is no featured schedule', async () => {
-    const { shadowRoot } = await fixture<MySchedule>(html`<my-schedule></my-schedule>`);
+  it('explains how to add sessions when none are bookmarked', async () => {
+    const { shadowRoot } = await render([day('2024-01-01', 'January 1')]);
 
-    expect(shadowRoot.querySelectorAll('schedule-day')).toHaveLength(0);
+    expect(shadowRoot.querySelector('.hint')).toHaveTextContent(
+      'Bookmark sessions in the schedule to see them here.',
+    );
   });
 });

@@ -1,92 +1,42 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { screen } from '@testing-library/dom';
-import { html } from 'lit';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { setHeroSettings } from '../../store/ui';
+import type { HeroBlock } from './hero-block';
 import './hero-block';
-import { HeroBlock } from './hero-block';
-
-vi.mock('../../store/ui', async (importOriginal) => ({
-  __esModule: true,
-  ...(await importOriginal<typeof import('../../store/ui')>()),
-  setHeroSettings: vi.fn(),
-}));
-
-const mockSetHeroSettings = vi.mocked(setHeroSettings);
 
 describe('hero-block', () => {
-  beforeEach(() => {
-    mockSetHeroSettings.mockClear();
+  afterEach(() => {
+    litRender(nothing, document.body);
   });
 
-  it('should be registered', () => {
-    expect(customElements.get('hero-block')).toBeDefined();
-  });
-
-  it('has default values', async () => {
+  it('uses the first accent and a pattern by default', async () => {
     const { element, shadowRoot } = await fixture<HeroBlock>(html`<hero-block></hero-block>`);
 
-    expect(element.backgroundImage).toBe('');
-    expect(element.backgroundColor).toBe('var(--primary-background-color)');
-    expect(element.fontColor).toBe('var(--primary-text-color)');
-    expect(element.hideLogo).toBe(false);
-    expect(shadowRoot.querySelector<HTMLDivElement>('.hero-overlay')).not.toHaveAttribute('show');
-    expect(shadowRoot.querySelector<HTMLDivElement>('.hero-image')).toBeNull();
+    expect(element).toHaveAttribute('tone', '1');
+    expect(shadowRoot.querySelector('.hero')).toHaveClass('pattern');
+    expect(shadowRoot.querySelector('img')).toBeNull();
   });
 
-  it('accepts values', async () => {
-    const { element, shadowRoot } = await fixture<HeroBlock>(html`
-      <hero-block
-        background-image="/example.jpg"
-        background-color="#000"
-        font-color="#fff"
-        hide-logo
-      ></hero-block>
-    `);
+  it('reflects the tone, so the band takes that accent', async () => {
+    const { element } = await fixture<HeroBlock>(html`<hero-block tone="3"></hero-block>`);
 
-    expect(element.backgroundImage).toBe('/example.jpg');
-    expect(element.backgroundColor).toBe('#000');
-    expect(element.fontColor).toBe('#fff');
-    expect(element.hideLogo).toBe(true);
-    expect(shadowRoot.querySelector<HTMLDivElement>('.hero-overlay')).toHaveAttribute('show');
-    expect(shadowRoot.querySelector<HTMLDivElement>('.hero-image')).not.toBeNull();
+    expect(element).toHaveAttribute('tone', '3');
   });
 
-  it('displays slot elements', async () => {
-    const { shadowRoot } = await fixture<HeroBlock>(html`
-      <hero-block>
-        <p>default slot</p>
-        <p slot="bottom">bottom slot</p>
-      </hero-block>
-    `);
-    const slots = shadowRoot.querySelectorAll('slot');
-
-    expect(slots).toHaveLength(2);
-    expect(screen.getByText('default slot')).toBeVisible();
-    expect(slots[0]).not.toHaveAttribute('name');
-    expect(slots[0]!.assignedElements()[0]).toHaveTextContent('default slot');
-    expect(screen.getByText('bottom slot')).toBeVisible();
-    expect(slots[1]).toHaveAttribute('name', 'bottom');
-    expect(slots[1]!.assignedElements()[0]).toHaveTextContent('bottom slot');
-  });
-
-  it('renders an image', async () => {
+  it('puts the text over a decorative photo', async () => {
     const { shadowRoot } = await fixture<HeroBlock>(
       html`<hero-block background-image="/example.jpg"></hero-block>`,
     );
 
-    expect(shadowRoot.querySelector('.hero-image')).toHaveAttribute('src', '/example.jpg');
+    expect(shadowRoot.querySelector('.hero')).toHaveClass('photo');
+    expect(shadowRoot.querySelector('img')).toHaveAttribute('src', '/example.jpg');
+    expect(shadowRoot.querySelector('img')).toHaveAttribute('alt', '');
   });
 
-  it('setHeroSettings notifies', async () => {
-    await fixture<HeroBlock>(html`<hero-block background-image="/example.jpg"></hero-block>`);
+  it('shows its content', async () => {
+    await fixture<HeroBlock>(html` <hero-block><h1 class="hero-title">Schedule</h1></hero-block> `);
 
-    expect(mockSetHeroSettings).toHaveBeenCalledTimes(1);
-    expect(mockSetHeroSettings).toHaveBeenCalledWith({
-      backgroundColor: 'var(--primary-background-color)',
-      backgroundImage: '/example.jpg',
-      fontColor: 'var(--primary-text-color)',
-      hideLogo: false,
-    });
+    expect(screen.getByRole('heading', { level: 1, name: 'Schedule' })).toBeVisible();
   });
 });

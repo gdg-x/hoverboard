@@ -34,3 +34,19 @@ export const zonedTime = (day: string, time: string, timeZone: string): Date => 
   const guess = wallClock - offsetMinutes(timeZone, new Date(wallClock)) * ONE_MINUTE_MS;
   return new Date(wallClock - offsetMinutes(timeZone, new Date(guess)) * ONE_MINUTE_MS);
 };
+
+/**
+ * The date (YYYY-MM-DD) and time (HH:MM) the clocks show at `instant`, in `timeZone` or, without
+ * one, in the browser's time zone.
+ */
+export const wallClock = (instant: Date, timeZone?: string): { date: string; time: string } => {
+  // `en-CA` writes dates as YYYY-MM-DD.
+  const date = new Intl.DateTimeFormat('en-CA', { timeZone }).format(instant);
+  const time = new Intl.DateTimeFormat('en-GB', {
+    timeZone,
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+  }).format(instant);
+  return { date, time };
+};

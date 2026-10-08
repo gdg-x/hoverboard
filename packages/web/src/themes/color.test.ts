@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deriveDarkColor, hexToOklch, oklchToHex } from './color';
+import { deriveDarkColor, hexToOklch, oklchToHex, tagContainerColors } from './color';
 import { contrastRatio } from './contrast';
 import { festival } from './festival';
 
@@ -30,5 +30,22 @@ describe('deriveDarkColor', () => {
     expect(hexToOklch(dark).h).toBeCloseTo(hexToOklch(pink).h, 1);
     // Readable as text on the dark surface, like the theme's own dark primary.
     expect(contrastRatio(dark, festival.dark.surface)).toBeGreaterThan(4.5);
+  });
+});
+
+describe('tagContainerColors', () => {
+  it('keeps chip text readable in both schemes for any hue and gray', () => {
+    const colors = ['#9e9e9e', '#78c257', '#2196f3', '#3f51b5', '#e91e63', '#ffeb3b', '#1de9b6'];
+    for (const color of [...colors, '#000000', '#ffffff']) {
+      for (const { container, onContainer } of Object.values(tagContainerColors(color))) {
+        expect(contrastRatio(onContainer, container)).toBeGreaterThan(4.5);
+      }
+    }
+  });
+
+  it('keeps the hue', () => {
+    const { light } = tagContainerColors('#2196f3');
+
+    expect(hexToOklch(light.container).h).toBeCloseTo(hexToOklch('#2196f3').h, 1);
   });
 });

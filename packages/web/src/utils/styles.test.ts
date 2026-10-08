@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { generateClassName, variableColor } from './styles';
+import { generateClassName, tagChipStyle, tagColor, variableColor } from './styles';
 
 describe('generateClassName', () => {
   it('replaces non-word characters with a dash', () => {
@@ -29,5 +29,21 @@ describe('variableColor', () => {
     expect(variableColor('primaryColor', 'fallbackColor')).toBe(
       'var(--primary-color, var(--fallback-color))',
     );
+  });
+});
+
+describe('tagColor', () => {
+  it("references the tag's color, or the outline color", () => {
+    expect(tagColor('Android')).toBe('var(--hb-tag-android, var(--hb-color-outline))');
+  });
+});
+
+describe('tagChipStyle', () => {
+  it("sets the chip colors to the tag's derived colors, with theme fallbacks", () => {
+    expect(tagChipStyle('Web')).toEqual({
+      '--hb-chip-background': 'var(--hb-tag-web-container, var(--hb-color-surface-container))',
+      '--hb-chip-color': 'var(--hb-on-tag-web-container, var(--hb-color-on-surface))',
+      '--hb-chip-border-color': 'transparent',
+    });
   });
 });

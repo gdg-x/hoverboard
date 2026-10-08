@@ -1,10 +1,12 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import reducer, {
   closeVideoDialog,
   initialUiState,
+  LOCAL_TIME_KEY,
+  loadLocalTime,
   openVideoDialog,
   selectViewport,
-  setHeroSettings,
+  setLocalTime,
   setViewportSize,
   VIEWPORT,
 } from '.';
@@ -28,16 +30,14 @@ describe('ui', () => {
     expect(state.viewport.isPhone).toBe(false);
   });
 
-  it('replaces the hero settings', () => {
-    const hero = {
-      backgroundColor: '#fff',
-      backgroundImage: '',
-      fontColor: '#000',
-      hideLogo: true,
-    };
-    const state = reducer(initialUiState, { type: 'ui/setHeroSettings', payload: hero });
+  it('starts in the event time zone', () => {
+    expect(initialUiState.localTime).toBe(false);
+  });
 
-    expect(state.heroSettings).toStrictEqual(hero);
+  it('sets the local time choice', () => {
+    const state = reducer(initialUiState, { type: 'ui/setLocalTime', payload: true });
+
+    expect(state.localTime).toBe(true);
   });
 
   it('opens and closes the video dialog', () => {
@@ -68,19 +68,57 @@ describe('setViewportSize', () => {
   });
 });
 
-describe('setHeroSettings', () => {
-  it('dispatches a setHeroSettings action', () => {
-    const hero = {
-      backgroundColor: '#111',
-      backgroundImage: 'img.png',
-      fontColor: '#222',
-      hideLogo: false,
-    };
-    setHeroSettings(hero);
+describe('setLocalTime', () => {
+  afterEach(() => {
+    localStorage.clear();
+    vi.restoreAllMocks();
+  });
+
+  it('dispatches the choice and stores it', () => {
+    setLocalTime(true);
 
     expect(dispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'ui/setHeroSettings', payload: hero }),
+      expect.objectContaining({ type: 'ui/setLocalTime', payload: true }),
     );
+    expect(localStorage.getItem(LOCAL_TIME_KEY)).toBe('true');
+
+    setLocalTime(false);
+
+    expect(localStorage.getItem(LOCAL_TIME_KEY)).toBeNull();
+  });
+
+  it('still dispatches when storage throws', () => {
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new Error('private mode');
+    });
+
+    expect(() => setLocalTime(true)).not.toThrow();
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'ui/setLocalTime', payload: true }),
+    );
+  });
+});
+
+describe('loadLocalTime', () => {
+  afterEach(() => {
+    localStorage.clear();
+    vi.mocked(dispatch).mockClear();
+  });
+
+  it('applies a stored choice', () => {
+    localStorage.setItem(LOCAL_TIME_KEY, 'true');
+
+    loadLocalTime();
+
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'ui/setLocalTime', payload: true }),
+    );
+  });
+
+  it('does nothing without one', () => {
+    loadLocalTime();
+
+    expect(dispatch).not.toHaveBeenCalled();
   });
 });
 

@@ -1,7 +1,7 @@
 import { updateWhenLocaleChanges } from '@lit/localize';
 import { css, type CSSResultGroup, type CSSResultOrNative, LitElement } from 'lit';
 import { theme } from '../styles/theme';
-// Each island loads on its own, and slice helpers such as `setHeroSettings` need the store to exist.
+// Each island loads on its own, and slice helpers such as `setLocalTime` need the store to exist.
 import '../store';
 
 const host = css`

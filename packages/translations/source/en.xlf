@@ -251,6 +251,21 @@
 <trans-unit id="markdown.remote-markdown.error">
   <source>Error loading content</source>
 </trans-unit>
+<trans-unit id="schedule.tabs.label">
+  <source>Schedule days</source>
+</trans-unit>
+<trans-unit id="schedule.tabs.day">
+  <source>Day <x id="0" equiv-text="${index + 1}"/></source>
+</trans-unit>
+<trans-unit id="schedule.session.rate">
+  <source>Rate <x id="0" equiv-text="${session.title}"/></source>
+</trans-unit>
+<trans-unit id="schedule.session.bookmark">
+  <source>Bookmark <x id="0" equiv-text="${session.title}"/></source>
+</trans-unit>
+<trans-unit id="common.save-sessions-signed-out">
+  <source>Sign in to save sessions</source>
+</trans-unit>
 <trans-unit id="shared.add-to-calendar.label">
   <source>Add to calendar</source>
 </trans-unit>
@@ -272,11 +287,14 @@
 <trans-unit id="shared.filter-menu.results.other">
   <source><x id="0" equiv-text="${count}"/> results</source>
 </trans-unit>
-<trans-unit id="shared.filter-menu.clear">
-  <source>Clear all</source>
-</trans-unit>
 <trans-unit id="shared.filter-menu.title">
   <source>Filters</source>
+</trans-unit>
+<trans-unit id="shared.filter-menu.selected">
+  <source>Selected filters</source>
+</trans-unit>
+<trans-unit id="shared.filter-menu.clear">
+  <source>Clear all</source>
 </trans-unit>
 <trans-unit id="shared.previous-speakers-block.title">
   <source>Previous speakers</source>
@@ -503,29 +521,56 @@
 <trans-unit id="common.view-presentation">
   <source>View presentation</source>
 </trans-unit>
+<trans-unit id="schedule.page.time-zone">
+  <source>Times in <x id="0" equiv-text="&lt;strong&gt;${zoneName(shownZone)}&lt;/strong&gt;"/></source>
+</trans-unit>
+<trans-unit id="schedule.page.local-time">
+  <source>Show my time zone, <x id="0" equiv-text="${zoneName(visitorZone)}"/></source>
+</trans-unit>
+<trans-unit id="schedule.my-schedule.empty">
+  <source>Bookmark sessions in the schedule to see them here.</source>
+</trans-unit>
+<trans-unit id="schedule.day.no-results">
+  <source>No sessions match these filters.</source>
+</trans-unit>
+<trans-unit id="schedule.day.clear-filters">
+  <source>Clear filters</source>
+</trans-unit>
+<trans-unit id="schedule.day.scroll-hint">
+  <source><x id="0" equiv-text="${tracks}"/> tracks. Scroll sideways to see them all.</source>
+</trans-unit>
+<trans-unit id="schedule.day.previous-track">
+  <source>Previous track</source>
+</trans-unit>
+<trans-unit id="schedule.day.next-track">
+  <source>Next track</source>
+</trans-unit>
+<trans-unit id="schedule.day.label">
+  <source>Schedule for <x id="0" equiv-text="${day.dateReadable}"/></source>
+</trans-unit>
+<trans-unit id="schedule.day.now">
+  <source>Now · <x id="0" equiv-text="${now.label}"/></source>
+</trans-unit>
 <trans-unit id="schedule.day.browse-sessions">
   <source>Browse sessions</source>
-</trans-unit>
-<trans-unit id="common.save-sessions-signed-out">
-  <source>Sign in to save sessions</source>
-</trans-unit>
-<trans-unit id="pages.session.toggle-featured">
-  <source>Toggle featured session</source>
 </trans-unit>
 <trans-unit id="pages.session.back-to-schedule">
   <source>Back to schedule</source>
 </trans-unit>
-<trans-unit id="pages.session.content-level">
-  <source>Content level: <x id="0" equiv-text="${complexity}"/></source>
+<trans-unit id="pages.session.details">
+  <source>Session details</source>
+</trans-unit>
+<trans-unit id="pages.session.bookmarked">
+  <source>Bookmarked</source>
+</trans-unit>
+<trans-unit id="pages.session.bookmark">
+  <source>Bookmark</source>
 </trans-unit>
 <trans-unit id="pages.session.speakers">
   <source>Speakers</source>
 </trans-unit>
 <trans-unit id="common.review-session">
   <source>Review session</source>
-</trans-unit>
-<trans-unit id="pages.session.feedback-closed">
-  <source>Session reviews are not open</source>
 </trans-unit>
 <trans-unit id="pages.team.error">
   <source>Error loading teams.</source>

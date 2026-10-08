@@ -1,131 +1,104 @@
 import { msg, str } from '@lit/localize';
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { ClickOutsideController } from '../../controllers/click-outside-controller';
 import type { Filter } from '../../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import { clearFilters, toggleFilter } from '../../utils/filters';
 import { getLocale } from '../../utils/localization';
-import { generateClassName, variableColor } from '../../utils/styles';
+import { generateClassName, tagChipStyle } from '../../utils/styles';
 import './hoverboard-icon';
 import '../ui/hb-button';
+import '../ui/hb-chip';
 import { ThemedElement } from '../themed-element';
 
+/**
+ * A Filters button that shows the tag and complexity chips under it, and the selected filters as
+ * chips that remove themselves. Filters live in the URL, so they survive reloads and links.
+ */
 @customElement('filter-menu')
 export class FilterMenu extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
-      width: 100%;
-      border-bottom: 1px solid var(--divider-color);
-      position: relative;
     }
 
-    .filters-board {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 2;
-      background-color: var(--primary-background-color);
-      box-shadow: var(--box-shadow);
-      transform: translateY(100%);
+    .bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--hb-space-2) var(--hb-space-3);
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--hb-space-2);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .clear {
+      min-block-size: var(--hb-target-min);
+      padding: 0 var(--hb-space-2);
+      border: 0;
+      background: none;
+      color: inherit;
+      font: inherit;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+      cursor: pointer;
+    }
+
+    .clear:focus-visible {
+      outline: 3px solid var(--hb-color-focus);
+      outline-offset: 2px;
+      border-radius: var(--hb-radius-s);
+    }
+
+    .results {
+      color: var(--hb-color-on-surface-variant);
+      font-size: var(--hb-text-sm);
+    }
+
+    .panel {
+      display: grid;
+      gap: var(--hb-space-5);
+      margin-block-start: var(--hb-space-3);
+      padding: var(--hb-space-5);
+      border: var(--hb-border-width) solid var(--hb-border-color);
+      border-radius: var(--hb-radius-l);
+      background-color: var(--hb-color-surface-bright);
+      color: var(--hb-color-on-surface);
+      box-shadow: var(--hb-shadow-card);
+    }
+
+    .panel[hidden] {
       display: none;
     }
 
-    .filters-toolbar {
-      padding: 16px;
-    }
-
-    .toolbar-row {
-      display: flex;
-      align-items: center;
-    }
-
-    .results-summary {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      flex-basis: 1px;
-    }
-
-    .filter-group {
-      margin-bottom: 24px;
-    }
-
-    .filter-title {
-      margin-bottom: 8px;
-    }
-
-    .tag {
-      box-sizing: content-box;
-      margin-right: 8px;
-      margin-bottom: 8px;
-      display: inline-flex;
-      align-items: center;
-      font-family: inherit;
-      font-size: 15px;
-      cursor: pointer;
-      color: var(--color);
-      text-transform: capitalize;
-    }
-
-    .tag hoverboard-icon {
-      width: 12px;
-      height: 12px;
-    }
-
-    [selected] {
-      background-color: var(--color);
-      border-color: var(--color);
-      color: var(--text-primary-color);
-    }
-
-    .selected-filters {
-      margin-bottom: 8px;
-    }
-
-    .actions {
-      display: flex;
-      align-items: center;
-    }
-
-    .reset-filters {
-      margin-right: 8px;
+    .group-title {
+      margin: 0 0 var(--hb-space-3);
       padding: 0;
-      background: none;
-      border: none;
-      font-family: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      color: var(--default-primary-color);
+      font: 700 var(--hb-text-md) / 1.3 var(--hb-font-body);
     }
 
-    .filters-board[open] {
-      display: block;
-    }
-
-    @media (min-width: 640px) {
-      .filters-toolbar {
-        padding: 16px 32px;
-      }
+    hb-chip {
+      text-transform: capitalize;
     }
   `;
 
-  @property({ type: Array })
+  @property({ attribute: false })
   accessor filterGroups: FilterGroup[] = [];
   @property({ type: Number })
   accessor resultsCount: number | undefined;
-  @property({ type: Array })
+  @property({ attribute: false })
   accessor selectedFilters: Filter[] = [];
   @property({ type: Boolean })
   accessor opened = false;
-
-  private readonly clickOutsideController = new ClickOutsideController(this, () =>
-    this.toggleBoard(),
-  );
 
   private groupTitle(key: FilterGroupKey) {
     return key === FilterGroupKey.tags
@@ -140,139 +113,98 @@ export class FilterMenu extends ThemedElement {
   }
 
   override render() {
+    const selected = this.selectedFilters;
     return html`
-      <div class="filters-toolbar container">
-        <div class="toolbar-row">
-          <div class="results-summary">
-            <div class="results" ?hidden="${this.hideResultText}">
-              ${this.resultsCount === undefined ? '' : this.resultsLabel(this.resultsCount)}
-            </div>
-          </div>
-
-          <div class="actions">
-            <button
-              type="button"
-              class="reset-filters"
-              @click="${this.resetFilters}"
-              ?hidden="${!this.selectedFilters.length}"
-            >
-              ${msg('Clear all', { id: 'shared.filter-menu.clear' })}
-            </button>
-            <hb-button
-              variant="outlined"
-              trailing-icon
-              .expanded="${this.opened}"
-              @click="${this.toggleBoard}"
-            >
-              ${msg('Filters', { id: 'shared.filter-menu.title' })}
-              <hoverboard-icon slot="icon" name="${this.icon}"></hoverboard-icon>
-            </hb-button>
-          </div>
-        </div>
-
-        <div class="selected-filters" ?hidden="${!this.selectedFilters.length}">
-          ${repeat(
-            this.selectedFilters,
-            (selectedFilter) => `${selectedFilter.group}:${selectedFilter.tag}`,
-            (selectedFilter) => html`
-              <button
-                type="button"
-                class="tag"
-                style="${styleMap({ '--color': this.getVariableColor(selectedFilter.tag, 'primary-text-color') })}"
-                filter-key="${selectedFilter.group}"
-                filter-value="${selectedFilter.tag}"
-                aria-pressed="true"
-                @click="${this.toggleFilter}"
-                selected
-              >
-                <span>${selectedFilter.tag}</span>
-                <hoverboard-icon name="close"></hoverboard-icon>
-              </button>
-            `,
-          )}
-        </div>
+      <div class="bar">
+        <hb-button
+          variant="outlined"
+          trailing-icon
+          .expanded="${this.opened}"
+          @click="${this.toggleBoard}"
+        >
+          ${msg('Filters', { id: 'shared.filter-menu.title' })}
+          <hoverboard-icon slot="icon" name="${this.opened ? 'close' : 'filter-list'}">
+          </hoverboard-icon>
+        </hb-button>
+        ${
+          selected.length
+            ? html`
+                <ul
+                  class="selected"
+                  aria-label="${msg('Selected filters', { id: 'shared.filter-menu.selected' })}"
+                >
+                  ${repeat(
+                    selected,
+                    (filter) => `${filter.group}:${filter.tag}`,
+                    (filter) => html`
+                      <li>
+                        <hb-chip filter selected @click="${() => this.toggle(filter)}">
+                          ${filter.tag}
+                        </hb-chip>
+                      </li>
+                    `,
+                  )}
+                </ul>
+                <button type="button" class="clear" @click="${clearFilters}">
+                  ${msg('Clear all', { id: 'shared.filter-menu.clear' })}
+                </button>
+                ${
+                  this.resultsCount === undefined
+                    ? nothing
+                    : html`<span class="results" role="status">
+                        ${this.resultsLabel(this.resultsCount)}
+                      </span>`
+                }
+              `
+            : nothing
+        }
       </div>
 
-      <div class="filters-board" ?open="${this.opened}">
-        <div class="container">
-          ${this.filterGroups.map(
-            (filterGroup) => html`
-              <div class="filter-group">
-                <h3 class="filter-title">${this.groupTitle(filterGroup.key)}</h3>
-                ${repeat(
-                  filterGroup.filters,
-                  (filter) => `${filterGroup.key}:${filter.tag}`,
-                  (filter) => html`
-                    <button
-                      type="button"
-                      class="tag"
-                      style="${styleMap({ '--color': this.getVariableColor(filter.tag, 'primary-text-color') })}"
-                      filter-key="${filterGroup.key}"
-                      filter-value="${filter.tag}"
-                      ?selected="${this.isSelected(this.selectedFilters, filter)}"
-                      aria-pressed="${this.isSelected(this.selectedFilters, filter)}"
-                      @click="${this.toggleFilter}"
-                    >
-                      ${filter.tag}
-                    </button>
-                  `,
-                )}
+      <div class="panel" ?hidden="${!this.opened}">
+        ${this.filterGroups
+          .filter((group) => group.filters.length)
+          .map(
+            (group) => html`
+              <div>
+                <h3 class="group-title" id="group-${group.key}">${this.groupTitle(group.key)}</h3>
+                <ul aria-labelledby="group-${group.key}">
+                  ${repeat(
+                    group.filters,
+                    (filter) => `${group.key}:${filter.tag}`,
+                    (filter) => html`
+                      <li>
+                        <hb-chip
+                          filter
+                          .selected="${this.isSelected(filter)}"
+                          style="${styleMap(group.key === FilterGroupKey.tags ? tagChipStyle(filter.tag) : {})}"
+                          @click="${() => this.toggle(filter)}"
+                        >
+                          ${filter.tag}
+                        </hb-chip>
+                      </li>
+                    `,
+                  )}
+                </ul>
               </div>
             `,
           )}
-        </div>
       </div>
     `;
   }
 
-  private isSelected(selectedFilters: Filter[], search: Filter) {
-    return selectedFilters.some(
-      (filter) => filter.tag === search.tag.toLocaleLowerCase() && filter.group === search.group,
+  private isSelected(search: Filter) {
+    return this.selectedFilters.some(
+      (filter) => filter.group === search.group && filter.tag === generateClassName(search.tag),
     );
   }
 
-  private toggleFilter = (e: Event) => {
-    if (
-      !(e.currentTarget instanceof HTMLElement) ||
-      !e.currentTarget.getAttribute('filter-key') ||
-      !e.currentTarget.getAttribute('filter-value')
-    ) {
-      console.error('Toggle filter invalid or missing attributes.');
-      return;
-    }
+  private toggle(filter: Filter) {
+    toggleFilter({ group: filter.group, tag: generateClassName(filter.tag) });
+  }
 
-    const currentTarget = e.currentTarget;
-    const group = currentTarget.getAttribute('filter-key')?.trim() as FilterGroupKey;
-    const tag = generateClassName(currentTarget.getAttribute('filter-value')?.trim());
-    toggleFilter({ group, tag });
-  };
-
-  private toggleBoard = () => {
-    if (this.opened) {
-      this.clickOutsideController.stop();
-    } else {
-      this.clickOutsideController.start();
-    }
+  private readonly toggleBoard = () => {
     this.opened = !this.opened;
   };
-
-  private resetFilters = (e: MouseEvent) => {
-    e.preventDefault();
-    clearFilters();
-  };
-
-  private get icon() {
-    return this.opened ? 'close' : 'filter-list';
-  }
-
-  private get hideResultText() {
-    const { selectedFilters, resultsCount } = this;
-    return selectedFilters.length === 0 || typeof resultsCount === 'undefined';
-  }
-
-  private getVariableColor(value: string, fallback: string) {
-    return variableColor(value, fallback);
-  }
 }
 
 declare global {

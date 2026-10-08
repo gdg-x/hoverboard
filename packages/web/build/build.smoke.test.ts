@@ -82,7 +82,7 @@ describe('a production build of a minimal site', () => {
       /<not-found-page[^>]*><template shadowroot="open" shadowrootmode="open">/,
     );
     expect(notFound).toMatch(
-      /<div class="hero-title">(<!--[^>]*-->)*Not Found(<!--[^>]*-->)*<\/div>/,
+      /<h1 class="hero-title">(<!--[^>]*-->)*Not Found(<!--[^>]*-->)*<\/h1>/,
     );
     expect(notFound).toMatch(
       /<footer-block[^>]*><template shadowroot="open" shadowrootmode="open">/,

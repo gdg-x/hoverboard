@@ -59,10 +59,6 @@ const posts: Post[] = [
 
 const firstPost = posts[0]!;
 const secondPost = posts[1]!;
-const firstPostWithPrimaryColor = {
-  ...firstPost,
-  primaryColor: '#abc',
-} as Post & { primaryColor: string };
 const fetchMock = vi.fn<typeof fetch>();
 Object.defineProperty(globalThis, 'fetch', {
   configurable: true,
@@ -86,7 +82,7 @@ describe('post-page', () => {
     const mockUpdateImageMetadata = vi.mocked(updateImageMetadata);
     mockUpdateImageMetadata.mockClear();
     const { element, shadowRootForWithin } = await fixture<PostPage>(html`<post-page></post-page>`);
-    element.posts = new Success([firstPostWithPrimaryColor, ...posts.slice(1)]);
+    element.posts = new Success(posts);
     element.postId = 'post-1';
     await element.updateComplete;
     await element.updateComplete;
@@ -100,8 +96,8 @@ describe('post-page', () => {
       'Inline first content',
     );
     expect(shadowRootForWithin.querySelector('hero-block')).toHaveProperty(
-      'backgroundColor',
-      '#abc',
+      'backgroundImage',
+      '/first.jpg',
     );
     expect(shadowRootForWithin.querySelector('posts-list')).toHaveProperty(
       'posts',

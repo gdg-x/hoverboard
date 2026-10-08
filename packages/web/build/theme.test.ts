@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { hexToOklch } from '../src/themes/color';
+import { hexToOklch, tagContainerColors } from '../src/themes/color';
 import { festival } from '../src/themes/festival';
 import {
   darkLogoCss,
@@ -71,6 +71,16 @@ describe('themeCss', () => {
     expect(css).toContain('--hb-radius-l: 28px;');
     expect(css).toContain('--default-primary-color: var(--hb-color-primary);');
     expect(css).toContain('--android: #78c257;');
+    expect(css).toContain('--hb-tag-android: #78c257;');
+    expect(css).toMatch(/--hb-tag-android-container: light-dark\(#[0-9a-f]{6}, #[0-9a-f]{6}\);/);
+    expect(css).toMatch(/--hb-on-tag-android-container: light-dark\(#[0-9a-f]{6}, #[0-9a-f]{6}\);/);
+  });
+
+  it('keeps a tag color that is not hex as is, with no containers', () => {
+    const css = themeCss(resolveTheme(siteTheme()), { web: 'rebeccapurple' });
+
+    expect(css).toContain('--hb-tag-web: rebeccapurple;');
+    expect(css).not.toContain('--hb-tag-web-container');
   });
 
   it('locks the scheme, and falls back to it without light-dark()', () => {
@@ -79,6 +89,15 @@ describe('themeCss', () => {
     expect(css).toContain('color-scheme: dark;');
     expect(css).toContain(
       `@supports not (color: light-dark(#000, #fff)) {\n:root {\n--hb-color-primary: ${festival.dark.primary};`,
+    );
+  });
+
+  it('gives tag containers the locked scheme without light-dark()', () => {
+    const css = themeCss(resolveTheme(siteTheme({ colorScheme: 'dark' })), { web: '#2196f3' });
+    const { dark } = tagContainerColors('#2196f3');
+
+    expect(css.slice(css.indexOf('@supports'))).toContain(
+      `--hb-tag-web-container: ${dark.container};`,
     );
   });
 });

@@ -15,3 +15,17 @@ export const variableColor = (value: string, fallback?: string): string => {
   const name = `--${generateClassName(value)}`;
   return fallback ? `var(${name}, var(--${generateClassName(fallback)}))` : `var(${name})`;
 };
+
+/** A tag's color from `theme.tagColors`, or the outline color for tags without one. */
+export const tagColor = (tag: string): string =>
+  `var(--hb-tag-${generateClassName(tag)}, var(--hb-color-outline))`;
+
+/** `hb-chip` colors for a tag: the container and text colors the build derives from its color. */
+export const tagChipStyle = (tag: string): Record<string, string> => {
+  const name = generateClassName(tag);
+  return {
+    '--hb-chip-background': `var(--hb-tag-${name}-container, var(--hb-color-surface-container))`,
+    '--hb-chip-color': `var(--hb-on-tag-${name}-container, var(--hb-color-on-surface))`,
+    '--hb-chip-border-color': 'transparent',
+  };
+};

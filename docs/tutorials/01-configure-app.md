@@ -27,7 +27,7 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
 
 `firebase.projectId` is the Firebase project that `./hbd deploy`, the deploy workflows and `FIRESTORE_TARGET=production` commands use. `url` defaults to `https://<projectId>.web.app/`. Set `url` only for a custom domain.
 
-`event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it.
+`event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it. The schedule shows times in it, and visitors in another time zone can switch the schedule to their own. During the event, a line on the schedule marks the current time.
 
 ## Validation
 
@@ -114,7 +114,7 @@ The build fails when:
 
 Every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, `optimizeImages` needs `imageOptimization`, and the schedule generator needs `schedule` or `speakers`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
 
-Some parts of a feature still show when it is off: the feedback block and dialog, and the My Schedule bookmark button.
+When `feedback` is off, the feedback dialog is still in the build, but nothing opens it. Bookmark buttons show only when `mySchedule` is on.
 
 The header follows the features too. Its button links to tickets until the event is over, or to the schedule otherwise. The account button shows when `mySchedule` or `feedback` is on, and the notifications bell when `notifications` is on. The footer links to the home page's subscribe band when `subscribe` is on, and shows a "Fork me on GitHub" sticker when `forkMe` is on.
 
@@ -154,7 +154,7 @@ UI text is the same on every site, so it is not in `packages/config`. To change 
 
 The app picks a visitor's language in this order: the one they picked before, the first of their browser's languages that the site offers, then `source`. A browser language with a region, such as `es-MX`, matches `es`. The picker in the footer shows only when the site offers more than one language, and the browser remembers the choice. A language downloads the first time a visitor picks it, and works offline after that.
 
-Dates and numbers follow the visitor's language. Session days and times stay in `event.timezone`.
+Dates and numbers follow the visitor's language. Session days and times stay in `event.timezone`, unless a visitor switches the schedule to their own time zone.
 
 These are not translated: data in Firestore, blog posts, push notifications, `manifest.json`, and the page titles and descriptions that search engines and link previews read.
 

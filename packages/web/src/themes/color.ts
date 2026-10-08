@@ -75,3 +75,21 @@ export const oklchToHex = (color: Oklch): string => {
  */
 export const deriveDarkColor = (light: string, themeDark: string): string =>
   oklchToHex({ ...hexToOklch(light), l: hexToOklch(themeDark).l });
+
+export interface TagColors {
+  container: string;
+  onContainer: string;
+}
+
+/**
+ * A pale container and dark text in the light scheme, and the reverse in the dark scheme, with the
+ * hue of a site's tag or badge color. The lightness gap keeps the text above 4.5:1 for any hue.
+ */
+export const tagContainerColors = (color: string): Record<'light' | 'dark', TagColors> => {
+  const { c, h } = hexToOklch(color);
+  const tone = (l: number, maxChroma: number) => oklchToHex({ l, c: Math.min(c, maxChroma), h });
+  return {
+    light: { container: tone(0.93, 0.06), onContainer: tone(0.33, 0.12) },
+    dark: { container: tone(0.33, 0.07), onContainer: tone(0.93, 0.05) },
+  };
+};

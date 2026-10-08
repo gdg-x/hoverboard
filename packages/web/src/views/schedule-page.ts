@@ -1,12 +1,13 @@
 import { Pending } from '@abraham/remotedata';
-import '../components/ui/hb-progress';
-import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import '../components/hero/hero-block';
-import '../components/shared/content-loader';
+import { msg, str } from '@lit/localize';
+import { css, html, nothing } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import '../components/hero/simple-hero';
+import '../components/schedule/schedule-tabs';
 import '../components/shared/filter-menu';
-import '../components/schedule/header-bottom-toolbar';
-import '../components/schedule/sticky-element';
+import '../components/ui/hb-progress';
+import '../components/ui/hb-switch';
+import type { HbSwitch } from '../components/ui/hb-switch';
 import type { Filter } from '../models/filter';
 import type { FilterGroup } from '../models/filter-group';
 import type { RouteLocation } from '../utils/navigation';
@@ -15,39 +16,91 @@ import { type ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { type SessionsState, selectSessionsState } from '../store/sessions';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
-import { contentLoaders, heroDescriptions } from '../config/site';
+import { loadLocalTime, selectLocalTime, setLocalTime } from '../store/ui';
+import { timeZone } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
-import { pageText } from '../utils/page-text';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
+/** IANA names such as `America/New_York`, as people read them. */
+const zoneName = (zone: string) => zone.replaceAll('_', ' ');
+
+/**
+ * The schedule's frame: the hero, the day tabs that stay under the header, the time zone switch and
+ * the filters. The day or My schedule is the slotted content.
+ */
 @customElement('schedule-page')
 export class SchedulePage extends ThemedElement {
   static override styles = css`
     :host {
+      --hb-schedule-tabs-height: calc(var(--hb-target-min) + 4px + 2 * var(--hb-space-3));
+      --hb-schedule-sticky-top: calc(var(--hb-header-height) + var(--hb-schedule-tabs-height));
+
       display: block;
-      height: 100%;
+      background-color: var(--hb-color-surface);
+      color: var(--hb-color-on-surface);
     }
 
-    .container {
-      min-height: 80%;
+    /* Content-box, so the text column lines up with the hero's. */
+    .inner {
+      box-sizing: content-box;
+      max-inline-size: var(--hb-content-max);
+      margin-inline: auto;
+      padding-inline: var(--hb-gutter);
     }
 
-    @media (max-width: 640px) {
-      .container {
-        padding: 0 0 32px;
-      }
+    .tabs {
+      position: sticky;
+      z-index: 5;
+      inset-block-start: var(--hb-header-height);
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      block-size: var(--hb-schedule-tabs-height);
+      border-block-end: 1px solid var(--hb-color-outline-variant);
+      background-color: var(--hb-color-surface);
     }
 
-    @media (min-width: 640px) {
-      :host {
-        background-color: var(--primary-background-color);
-      }
+    .tabs schedule-tabs {
+      flex: 1;
+      min-inline-size: 0;
+    }
+
+    .tabs .inner {
+      flex: 1;
+      min-inline-size: 0;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--hb-space-3) var(--hb-space-5);
+      padding-block: var(--hb-space-5) var(--hb-space-3);
+    }
+
+    .zone {
+      margin: 0;
+      color: var(--hb-color-on-surface-variant);
+      font-size: var(--hb-text-sm);
+    }
+
+    .zone strong {
+      color: var(--hb-color-on-surface);
+      font-family: var(--hb-font-mono);
+      font-weight: 600;
+    }
+
+    filter-menu {
+      flex-basis: 100%;
+    }
+
+    .content {
+      padding-block-end: var(--hb-space-9);
     }
   `;
 
   private readonly metadata = new PageMetadataController(this, 'schedule');
-  private contentLoaders = contentLoaders.schedule;
 
   @fromStore((state) => selectScheduleState(state))
   accessor schedule!: ScheduleState;
@@ -55,59 +108,73 @@ export class SchedulePage extends ThemedElement {
   accessor sessions!: SessionsState;
   @fromStore((state) => selectSpeakersState(state))
   accessor speakers!: SpeakersState;
-
   @fromStore((state) => selectFilterGroups(state))
   private accessor filterGroups!: FilterGroup[];
   @fromStore((state) => selectFilters(state))
   private accessor selectedFilters!: Filter[];
+  @fromStore((state) => selectLocalTime(state))
+  private accessor localTime!: boolean;
   @property({ attribute: false })
   accessor location: RouteLocation | undefined;
 
-  private get pending() {
-    return this.schedule instanceof Pending;
+  // The visitor's time zone, known only in the browser. The switch shows when it differs.
+  @state()
+  private accessor visitorTimeZone: string | undefined;
+
+  override firstUpdated() {
+    this.visitorTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    loadLocalTime();
   }
 
   override render() {
-    // A site can give the schedule page a description in content/resources.json.
-    const { schedule: description } = heroDescriptions as { schedule?: string };
+    const mySchedule = this.location?.pathname.endsWith('my-schedule') ?? false;
+    const visitorZone = this.visitorTimeZone;
+    const otherZone = !!visitorZone && visitorZone !== timeZone;
+    const shownZone = this.localTime && otherZone ? visitorZone : timeZone;
+
     return html`
-      <hero-block>
-        <div class="hero-title">${pageText('schedule').title}</div>
-        <p class="hero-description">${description ?? ''}</p>
-        <sticky-element slot="bottom">
-          <header-bottom-toolbar .location="${this.location}"></header-bottom-toolbar>
-        </sticky-element>
-      </hero-block>
+      <simple-hero page="schedule"></simple-hero>
 
-      <hb-progress ?hidden="${!this.pending}"></hb-progress>
+      <div class="tabs">
+        <div class="inner"><schedule-tabs .location="${this.location}"></schedule-tabs></div>
+      </div>
 
-      <filter-menu
-        .filterGroups="${this.filterGroups}"
-        .selectedFilters="${this.selectedFilters}"
-      ></filter-menu>
+      <div class="inner">
+        <div class="toolbar">
+          <p class="zone">
+            ${msg(html`Times in <strong>${zoneName(shownZone)}</strong>`, {
+              id: 'schedule.page.time-zone',
+            })}
+          </p>
+          ${
+            otherZone
+              ? html`<hb-switch .checked="${this.localTime}" @change="${this.onLocalTimeChange}">
+                  ${msg(str`Show my time zone, ${zoneName(visitorZone)}`, {
+                    id: 'schedule.page.local-time',
+                  })}
+                </hb-switch>`
+              : nothing
+          }
+          ${
+            mySchedule
+              ? nothing
+              : html`<filter-menu
+                  .filterGroups="${this.filterGroups}"
+                  .selectedFilters="${this.selectedFilters}"
+                ></filter-menu>`
+          }
+        </div>
 
-      <div class="container">
-        <content-loader
-          card-padding="15px"
-          card-margin="16px 0"
-          card-height="140px"
-          avatar-size="0"
-          avatar-circle="0"
-          title-top-position="20px"
-          title-height="42px"
-          title-width="70%"
-          load-from="-20%"
-          load-to="80%"
-          blur-width="300px"
-          items-count="${this.contentLoaders.itemsCount}"
-          ?hidden="${!this.pending}"
-        >
-        </content-loader>
+        <hb-progress ?hidden="${!(this.schedule instanceof Pending)}"></hb-progress>
 
-        <slot></slot>
+        <div class="content"><slot></slot></div>
       </div>
     `;
   }
+
+  private readonly onLocalTimeChange = (event: Event) => {
+    setLocalTime((event.target as HbSwitch).checked);
+  };
 }
 
 declare global {

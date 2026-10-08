@@ -92,6 +92,8 @@ For font files, the build adds a fallback font with the same size, so the text d
 
 Session tag colors are set by tag name in `theme.tagColors` in `packages/config/site.json`. Name each one like the tag in lowercase, with dashes instead of spaces. Speaker badge colors are in `theme.badgeColors`.
 
+The tag color marks the stripe on a session card. Tag chips use a pale version of it with dark text, and a deep version with light text in the dark scheme, which the build makes from the color, so any color stays readable.
+
 ```json
 "theme": {
   "tagColors": {
@@ -107,6 +109,8 @@ Session tag colors are set by tag name in `theme.tagColors` in `packages/config/
 ## Hero
 
 The home page hero uses the theme's first accent color with a dot pattern. `heroSettings.home` in `packages/config/site.json` can add an illustration or a background photo ([Pages configuration](01-configure-app.md#pages-configuration)). With a photo, the build checks that the dark scheme's `onSurface` text is readable on its `scrim` over a white photo. If it is not, set a darker `theme.darkColors.scrim`.
+
+Other pages start with a smaller band in one of the theme's accent colors, the same for each section: speakers in the first accent color, the blog in the second, the schedule in the third and the team in the fourth.
 
 The home page sections below the hero alternate between the surface color and the accent colors, whichever features are on. The subscribe band always uses the third accent color.
 

@@ -82,8 +82,9 @@ describe('pages on the server', () => {
       ></schedule-page>`,
     );
 
-    expect(page).toContain('October 8');
-    expect(page).toContain('href="/schedule/2026-10-08#10:00"');
+    expect(page).toContain('aria-label="Schedule for October 8"');
+    expect(page).toContain('href="/sessions/s1"');
+    expect(page).toMatch(/aria-current="page"[^>]*data-day="2026-10-08"/);
   });
 
   it('render speaker cards without links in links, which do not hydrate', async () => {

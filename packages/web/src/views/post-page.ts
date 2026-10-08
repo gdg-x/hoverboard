@@ -3,6 +3,7 @@ import { msg, str } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import '../components/hero/hero-block';
+import { heroText } from '../components/hero/hero-block';
 import '../components/markdown/long-markdown';
 import '../components/shared/posts-list';
 import { StoreController } from '../controllers/store-controller';
@@ -17,30 +18,33 @@ import { ThemedElement } from '../components/themed-element';
 
 @customElement('post-page')
 export class PostPage extends ThemedElement {
-  static override styles = css`
-    .post {
-      margin-bottom: 32px;
-    }
-
-    .date {
-      font-size: 12px;
-      text-transform: uppercase;
-      color: var(--secondary-text-color);
-    }
-
-    .suggested-posts {
-      margin: 24px 0 -20px;
-      padding-top: 24px;
-      background-color: var(--primary-background-color);
-    }
-
-    @media (min-width: 640px) {
-      .suggested-posts {
-        margin-top: 48px;
-        padding-bottom: 36px;
+  static override styles = [
+    heroText,
+    css`
+      .post {
+        margin-bottom: 32px;
       }
-    }
-  `;
+
+      .date {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: var(--secondary-text-color);
+      }
+
+      .suggested-posts {
+        margin: 24px 0 -20px;
+        padding-top: 24px;
+        background-color: var(--primary-background-color);
+      }
+
+      @media (min-width: 640px) {
+        .suggested-posts {
+          margin-top: 48px;
+          padding-bottom: 36px;
+        }
+      }
+    `,
+  ];
 
   // Starts from the store, so a page seeded on the server renders its post.
   @property({ attribute: false })
@@ -128,19 +132,12 @@ export class PostPage extends ThemedElement {
   }
 
   override render() {
-    const post =
-      this.post instanceof Success
-        ? (this.post.data as Post & { primaryColor?: string })
-        : undefined;
+    const post = this.post instanceof Success ? this.post.data : undefined;
     const published = post ? getDate(post.published) : '';
 
     return html`
-      <hero-block
-        background-image=${post?.image ?? ''}
-        background-color=${post?.primaryColor ?? ''}
-        font-color="var(--text-primary-color)"
-      >
-        <div class="hero-title">${post?.title ?? ''}</div>
+      <hero-block tone="2" background-image=${post?.image ?? ''}>
+        <h1 class="hero-title">${post?.title ?? ''}</h1>
       </hero-block>
 
       <div class="container-narrow">
