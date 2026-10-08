@@ -43,3 +43,21 @@ export const isFeature = (value: string): value is Feature =>
   (FEATURES as readonly string[]).includes(value);
 
 export const isFeatureEnabled = (feature: Feature): boolean => __HB_FEATURES__[feature];
+
+/** Routes a `navigation` entry in site.json can use: home and the features that have a page. */
+export const NAVIGATION_ROUTES = [
+  'home',
+  'blog',
+  'codeOfConduct',
+  'faq',
+  'mySchedule',
+  'previousSpeakers',
+  'schedule',
+  'speakers',
+  'team',
+] as const satisfies readonly ('home' | Feature)[];
+
+export type NavigationRoute = (typeof NAVIGATION_ROUTES)[number];
+
+export const isNavigationRoute = (value: string): value is NavigationRoute =>
+  (NAVIGATION_ROUTES as readonly string[]).includes(value);

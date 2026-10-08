@@ -1,10 +1,12 @@
 import { Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import './components/shell/app-install';
 import './components/footer/footer-block';
 import './components/shared/hoverboard-icon';
 import './components/shell/header-toolbar';
+import { navigationLabel } from './components/shell/navigation-label';
 import { selectRouteName, startRouter } from './router';
 import { store } from './store';
 import { onUser } from './store/auth';
@@ -12,15 +14,7 @@ import { DIALOG, selectIsDialogOpen } from './store/dialogs';
 import { queueSnackbar } from './store/snackbars';
 import { type TicketsState, selectTickets } from './store/tickets';
 import type { DrawerOpenedChanged } from './utils/drawer';
-import {
-  buyTicket,
-  dates,
-  location,
-  navigation,
-  offlineMessage,
-  signInProviders,
-  title,
-} from './config/site';
+import { dates, location, navigation, signInProviders, title } from './config/site';
 import './utils/media-query';
 import { startLocalization } from './utils/localization';
 import type { Stickied } from './utils/stickied';
@@ -157,7 +151,6 @@ export class HoverboardApp extends ThemedElement {
 
   private alt = title;
   private dates = dates;
-  private buyTicket = buyTicket;
   private navigation = navigation;
   private shortLocation = location.short;
 
@@ -232,7 +225,8 @@ export class HoverboardApp extends ThemedElement {
   private readonly onElementSticked = (event: CustomEvent<Stickied>) =>
     this.toggleHeaderShadow(event);
 
-  private readonly onOffline = () => store.dispatch(queueSnackbar(offlineMessage));
+  private readonly onOffline = () =>
+    store.dispatch(queueSnackbar(msg('You can still work offline.', { id: 'shell.app.offline' })));
 
   override firstUpdated(changedProperties: PropertyValues) {
     super.firstUpdated(changedProperties);
@@ -267,7 +261,7 @@ export class HoverboardApp extends ThemedElement {
                   class="${nav.route === this.routeName ? 'selected' : ''}"
                   @click="${this.closeDrawer}"
                 >
-                  ${nav.label}
+                  ${navigationLabel(nav.route)}
                 </a>
               `,
             )}
@@ -283,7 +277,7 @@ export class HoverboardApp extends ThemedElement {
               rel="noopener noreferrer"
               @click="${this.closeDrawer}"
             >
-              <span>${this.buyTicket}</span>
+              <span>${msg('Buy ticket', { id: 'common.buy-ticket' })}</span>
               <hoverboard-icon name="open-in-new"></hoverboard-icon>
             </a>
           </div>

@@ -182,9 +182,17 @@ describe('config validation', () => {
   it('rejects navigation to unknown routes', () => {
     expect(
       errorsFor({
-        site: { navigation: [{ route: 'sponsors', permalink: '/sponsors', label: 'S' }] },
+        site: { navigation: [{ route: 'sponsors', permalink: '/sponsors' }] },
       }),
-    ).toEqual(['site.json/navigation/0/route: "sponsors" is not home or a feature']);
+    ).toEqual(['site.json/navigation/0/route: "sponsors" is not home or a feature with a page']);
+  });
+
+  it('rejects navigation to a feature without a page', () => {
+    expect(
+      errorsFor({
+        site: { navigation: [{ route: 'gallery', permalink: '/#gallery' }] },
+      }),
+    ).toEqual(['site.json/navigation/0/route: "gallery" is not home or a feature with a page']);
   });
 
   it('rejects images that do not exist', () => {

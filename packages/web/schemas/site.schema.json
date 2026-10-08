@@ -310,18 +310,15 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["route", "permalink", "label"],
+        "required": ["route", "permalink"],
         "properties": {
           "route": {
-            "description": "home, or a feature name.",
+            "description": "home, or a feature that has a page. The label comes from the UI text, in the current locale.",
             "type": "string"
           },
           "permalink": {
             "type": "string",
             "pattern": "^/"
-          },
-          "label": {
-            "type": "string"
           }
         }
       }

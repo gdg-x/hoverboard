@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { addToHomeScreen } from '../../config/site';
 import type { AppInstall } from './app-install';
 import './app-install';
 
@@ -42,7 +41,7 @@ describe('app-install', () => {
 
     expect(preventDefault).toHaveBeenCalled();
     expect(shadowRoot.querySelector('button')).not.toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('button')).toHaveTextContent(addToHomeScreen.cta);
+    expect(shadowRoot.querySelector('button')).toHaveTextContent('Add to Home Screen');
   });
 
   it('prompts for install and hides the link again on click', async () => {

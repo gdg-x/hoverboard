@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { updateNotificationsSubscribers } from '../../store/update-notifications-subscribers';
-import { notifications } from '../../config/site';
 import type { NotificationToggle } from './notification-toggle';
 
 import './notification-toggle';
@@ -37,7 +36,7 @@ describe('notification-toggle', () => {
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'bell');
-    expect(shadowRoot.querySelector('.switch-row')).toHaveTextContent(notifications.generalLabel);
+    expect(shadowRoot.querySelector('.switch-row')).toHaveTextContent('General notifications');
   });
 
   it('shows the bell-off icon and blocked message when denied', async () => {
@@ -49,7 +48,7 @@ describe('notification-toggle', () => {
 
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'bell-off');
     expect(shadowRoot.querySelector('.dropdown-panel')).toHaveTextContent(
-      notifications.blocked.text,
+      'Please enable notifications in your browser',
     );
   });
 
@@ -61,7 +60,7 @@ describe('notification-toggle', () => {
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('.dropdown-panel')).toHaveTextContent(
-      notifications.unsupported.text,
+      'Notifications are not supported on this device',
     );
   });
 

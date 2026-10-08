@@ -13,6 +13,7 @@ const fakeLocale = inject('fakeLocale');
 
 const picker = () =>
   queryAllDeep(document, 'locale-picker')[0]?.shadowRoot?.querySelector('select') ?? null;
+const signInTab = () => queryAllDeep(document, '.signin-tab')[0];
 
 describe(`the app with the fake ${fakeLocale} locale`, () => {
   beforeAll(async () => {
@@ -28,6 +29,7 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     expect(document.documentElement).toHaveAttribute('lang', fakeLocale);
     expect([...picker()!.options].map(({ value }) => value)).toEqual(['en', fakeLocale]);
     expect(picker()).toHaveValue(fakeLocale);
+    expect(signInTab()).toHaveTextContent('[Sign in]');
   });
 
   it('switches back to the source locale from the picker', async () => {
@@ -38,5 +40,6 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     await vi.waitFor(() => expect(picker()).toHaveAttribute('aria-label', 'Language'));
     expect(document.documentElement).toHaveAttribute('lang', 'en');
     expect(localStorage.getItem('hoverboard-locale')).toBe('en');
+    expect(signInTab()).toHaveTextContent(/^Sign in$/);
   });
 });

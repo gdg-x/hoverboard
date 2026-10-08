@@ -96,20 +96,12 @@ Some parts of a feature still show when it is off: the feedback block and dialog
 
 ## Toolbar Navigation
 
-Define a page's label and url in `navigation` in `packages/config/site.json`. The default list is in `packages/web/defaults/site.json`.
+Define the toolbar pages and their urls in `navigation` in `packages/config/site.json`. The default list is in `packages/web/defaults/site.json`. A `route` is `home` or a feature that has a page: `blog`, `codeOfConduct`, `faq`, `mySchedule`, `previousSpeakers`, `schedule`, `speakers` or `team`. The labels are part of the UI text, so they follow the visitor's language.
 
 ```json
 "navigation": [
-  {
-    "route": "home",
-    "permalink": "/",
-    "label": "Home"
-  },
-  {
-    "route": "speakers",
-    "permalink": "/speakers",
-    "label": "Speakers"
-  },
+  { "route": "home", "permalink": "/" },
+  { "route": "speakers", "permalink": "/speakers" },
   ...
 ]
 ```

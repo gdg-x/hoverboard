@@ -27,13 +27,6 @@ vi.mock('./config/site', async (importOriginal) => ({
 }));
 
 const { queueComplexSnackbar, queueSnackbar } = await import('./store/snackbars');
-const {
-  refresh,
-  serviceWorkerAvailable,
-  serviceWorkerError,
-  serviceWorkerInstalled,
-  serviceWorkerInstalling,
-} = await import('./config/site');
 
 // `clearMocks` (enabled project-wide) clears each mock's recorded calls
 // before every test, so capture what the module constructed once, up-front.
@@ -56,7 +49,9 @@ describe('service-worker-registration', () => {
   it('queues a snackbar on first install', () => {
     mocks.emit('installed', { isUpdate: false });
 
-    expect(dispatch).toHaveBeenCalledWith(queueSnackbar(serviceWorkerInstalled));
+    expect(dispatch).toHaveBeenCalledWith(
+      queueSnackbar('App is now installed and available offline.'),
+    );
   });
 
   it('does not queue the installed snackbar for an update', () => {
@@ -68,7 +63,7 @@ describe('service-worker-registration', () => {
   it('queues a snackbar when a worker starts installing', () => {
     mocks.emit('installing');
 
-    expect(dispatch).toHaveBeenCalledWith(queueSnackbar(serviceWorkerInstalling));
+    expect(dispatch).toHaveBeenCalledWith(queueSnackbar('App being installed for offline use.'));
   });
 
   it('prompts to activate a waiting worker and reloads once it takes control', () => {
@@ -78,8 +73,8 @@ describe('service-worker-registration', () => {
     const [action] = dispatch.mock.calls[0]!;
     expect(action).toEqual(
       queueComplexSnackbar({
-        label: serviceWorkerAvailable,
-        action: { title: refresh, callback: expect.any(Function) },
+        label: 'A new version of this app is available.',
+        action: { title: 'Refresh', callback: expect.any(Function) },
       }),
     );
 
@@ -106,7 +101,7 @@ describe('service-worker-registration', () => {
     vi.resetModules();
     await import('./service-worker-registration');
     await vi.waitFor(() =>
-      expect(dispatch).toHaveBeenCalledWith(queueSnackbar(serviceWorkerError)),
+      expect(dispatch).toHaveBeenCalledWith(queueSnackbar('Error caching for offline use.')),
     );
 
     expect(error).toHaveBeenCalledWith('Service worker registration failed:', registrationError);

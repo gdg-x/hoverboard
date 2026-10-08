@@ -1,7 +1,12 @@
 import { Ajv2020, type ErrorObject } from 'ajv/dist/2020.js';
 import fs from 'fs';
 import { join } from 'path';
-import { FEATURE_REQUIRES, FEATURES, isFeature, type Feature } from '../src/config/features';
+import {
+  FEATURE_REQUIRES,
+  FEATURES,
+  isNavigationRoute,
+  type Feature,
+} from '../src/config/features';
 import { deepMerge } from '../src/config/merge';
 import { THEMES, type ThemeName } from '../src/themes/index';
 import type { Theme } from '../src/themes/tokens';
@@ -131,9 +136,9 @@ const featureErrors = (site: Site, resources: Resources): string[] => {
 // Checks that JSON Schema cannot express.
 const crossFileErrors = (site: Site, resources: Resources, publicDir: string): string[] => {
   const errors = site.navigation.flatMap(({ route }, index) =>
-    route === 'home' || isFeature(route)
+    isNavigationRoute(route)
       ? []
-      : [`site.json/navigation/${index}/route: "${route}" is not home or a feature`],
+      : [`site.json/navigation/${index}/route: "${route}" is not home or a feature with a page`],
   );
   if (!isTimeZone(site.event.timezone)) {
     errors.push(`site.json/event/timezone: "${site.event.timezone}" is not a known time zone`);

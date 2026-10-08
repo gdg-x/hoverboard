@@ -40,28 +40,7 @@
     "signIn": {
       "type": "string"
     },
-    "signOut": {
-      "type": "string"
-    },
     "viewHighlights": {
-      "type": "string"
-    },
-    "offlineMessage": {
-      "type": "string"
-    },
-    "serviceWorkerInstalled": {
-      "type": "string"
-    },
-    "serviceWorkerAvailable": {
-      "type": "string"
-    },
-    "serviceWorkerInstalling": {
-      "type": "string"
-    },
-    "serviceWorkerError": {
-      "type": "string"
-    },
-    "refresh": {
       "type": "string"
     },
     "faq": {
@@ -98,9 +77,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "title": {
-          "type": "string"
-        },
         "browseSession": {
           "type": "string"
         }
@@ -474,24 +450,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "default": {
-          "type": "string"
-        },
-        "generalLabel": {
-          "type": "string"
-        },
-        "myScheduleLabel": {
-          "type": "string"
-        },
-        "enabled": {
-          "type": "string"
-        },
-        "signIn": {
-          "type": "string"
-        },
-        "enable": {
-          "type": "string"
-        },
         "subscribe": {
           "type": "string"
         },
@@ -509,45 +467,6 @@
         },
         "generalDisabled": {
           "type": "string"
-        },
-        "blocked": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "text": {
-              "type": "string"
-            },
-            "label": {
-              "type": "string"
-            },
-            "link": {
-              "type": "string"
-            }
-          }
-        },
-        "unsupported": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "text": {
-              "type": "string"
-            },
-            "label": {
-              "type": "string"
-            },
-            "link": {
-              "type": "string"
-            }
-          }
-        },
-        "unknown": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "text": {
-              "type": "string"
-            }
-          }
         },
         "toast": {
           "type": "object",
@@ -601,15 +520,6 @@
           "type": "string"
         },
         "clear": {
-          "type": "string"
-        }
-      }
-    },
-    "addToHomeScreen": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "cta": {
           "type": "string"
         }
       }

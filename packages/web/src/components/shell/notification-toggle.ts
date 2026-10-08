@@ -1,4 +1,5 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/button/text-button.js';
 import '@material/web/switch/switch.js';
 import type { MdSwitch } from '@material/web/switch/switch.js';
@@ -26,11 +27,14 @@ import {
   updateNotificationsUsers,
 } from '../../store/update-notifications-users';
 import type { UserState } from '../../store/user';
-import { loading, notifications } from '../../config/site';
 import '../shared/auth-required';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
+
+const BLOCKED_HELP = 'https://support.google.com/chrome/answer/3220216';
+const UNSUPPORTED_HELP =
+  'https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#browser_compatibility';
 
 @customElement('notification-toggle')
 export class NotificationToggle extends ThemedElement {
@@ -93,9 +97,6 @@ export class NotificationToggle extends ThemedElement {
     }
   `;
 
-  private notifications = notifications;
-  private loading = loading;
-
   @fromStore((state) => state.notificationPermission.value)
   private accessor notificationPermission!: typeof initialNotificationPermissionState.value;
   @fromStore((state) => selectNotificationsSubscribers(state))
@@ -130,7 +131,7 @@ export class NotificationToggle extends ThemedElement {
       <button
         type="button"
         class="notifications-trigger"
-        aria-label="notifications"
+        aria-label="${msg('Notifications', { id: 'shell.notifications.toggle' })}"
         aria-expanded="${this.opened}"
         aria-controls="notifications-panel"
         @click="${this.requestPermission}"
@@ -142,36 +143,44 @@ export class NotificationToggle extends ThemedElement {
         ${
           this.initialized
             ? html`
-                <p>${this.notifications.default}</p>
+                <p>${msg('Enable notifications', { id: 'shell.notifications.prompt' })}</p>
                 <div class="panel-actions">
                   <md-text-button @click="${this.requestPermission}">
-                    ${this.notifications.enable}
+                    ${msg('Enable', { id: 'shell.notifications.enable' })}
                   </md-text-button>
                 </div>
               `
             : ''
         }
-        ${this.pending ? html`${this.loading}` : ''}
+        ${this.pending ? msg('Loading...', { id: 'common.loading' }) : ''}
         ${
           this.success
             ? html`
-                <p>${this.notifications.enabled}</p>
+                <p>
+                  ${msg('Get notified of general announcements and sessions starting', {
+                    id: 'shell.notifications.enabled',
+                  })}
+                </p>
                 <label class="switch-row">
                   <md-switch
                     @change="${this.toggleGeneralNotifications}"
                     .selected="${this.generalNotificationsSelected}"
                   ></md-switch>
-                  ${this.notifications.generalLabel}
+                  ${msg('General notifications', { id: 'shell.notifications.general' })}
                 </label>
 
                 <auth-required>
-                  <p slot="prompt">${this.notifications.signIn}</p>
+                  <p slot="prompt">
+                    ${msg('Sign in to get personalized session notifications', {
+                      id: 'shell.notifications.sign-in',
+                    })}
+                  </p>
                   <label class="switch-row">
                     <md-switch
                       @change="${this.toggleMyScheduleNotifications}"
                       .selected="${this.notificationsUsersSubscribed}"
                     ></md-switch>
-                    ${this.notifications.myScheduleLabel}
+                    ${msg('My Schedule notifications', { id: 'shell.notifications.my-schedule' })}
                   </label>
                 </auth-required>
               `
@@ -180,15 +189,18 @@ export class NotificationToggle extends ThemedElement {
         ${
           this.blocked
             ? html`
-                <p>${this.notifications.blocked.text}</p>
+                <p>
+                  ${msg('Please enable notifications in your browser', {
+                    id: 'shell.notifications.blocked',
+                  })}
+                </p>
                 <div class="panel-actions">
-                  <a
-                    href="${this.notifications.blocked.link}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="${BLOCKED_HELP}" target="_blank" rel="noopener noreferrer">
                     <md-text-button @click="${this.close}">
-                      ${this.notifications.blocked.label}
+                      ${msg('Enable', {
+                        id: 'shell.notifications.blocked-help',
+                        desc: 'Opens help on allowing notifications in the browser.',
+                      })}
                     </md-text-button>
                   </a>
                 </div>
@@ -198,22 +210,29 @@ export class NotificationToggle extends ThemedElement {
         ${
           this.unsupported
             ? html`
-                <p>${this.notifications.unsupported.text}</p>
+                <p>
+                  ${msg('Notifications are not supported on this device', {
+                    id: 'shell.notifications.unsupported',
+                  })}
+                </p>
                 <div class="panel-actions">
-                  <a
-                    href="${this.notifications.unsupported.link}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="${UNSUPPORTED_HELP}" target="_blank" rel="noopener noreferrer">
                     <md-text-button @click="${this.close}">
-                      ${this.notifications.unsupported.label}
+                      ${msg('Details', {
+                        id: 'shell.notifications.unsupported-help',
+                        desc: 'Opens a list of browsers that support notifications.',
+                      })}
                     </md-text-button>
                   </a>
                 </div>
               `
             : ''
         }
-        ${this.failure ? html`<p>${this.notifications.unknown.text}</p>` : ''}
+        ${
+          this.failure
+            ? html`<p>${msg('Unknown error occurred', { id: 'shell.notifications.error' })}</p>`
+            : ''
+        }
       </div>
     `;
   }

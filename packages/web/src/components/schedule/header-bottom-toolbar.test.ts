@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Day } from '../../models/day';
-import { mySchedule } from '../../config/site';
 import type { HeaderBottomToolbar } from './header-bottom-toolbar';
 
 import './header-bottom-toolbar';
@@ -81,7 +80,7 @@ describe('header-bottom-toolbar', () => {
 
     const myScheduleTab = shadowRoot.querySelector('.nav-item[data-day="my-schedule"]');
     expect(myScheduleTab).toHaveAttribute('hidden');
-    expect(myScheduleTab).toHaveTextContent(mySchedule.title);
+    expect(myScheduleTab).toHaveTextContent('My Schedule');
   });
 
   it('renders no tabs on failure', async () => {

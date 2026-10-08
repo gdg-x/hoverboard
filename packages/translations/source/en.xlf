@@ -5,6 +5,116 @@
 <trans-unit id="footer.locale-picker.label">
   <source>Language</source>
 </trans-unit>
+<trans-unit id="common.sign-in">
+  <source>Sign in</source>
+</trans-unit>
+<trans-unit id="shell.app-install.cta">
+  <source>Add to Home Screen</source>
+</trans-unit>
+<trans-unit id="shell.header.menu">
+  <source>Menu</source>
+</trans-unit>
+<trans-unit id="common.buy-ticket">
+  <source>Buy ticket</source>
+</trans-unit>
+<trans-unit id="shell.header.account-menu">
+  <source>Account menu</source>
+</trans-unit>
+<trans-unit id="shell.header.sign-out">
+  <source>Sign out</source>
+</trans-unit>
+<trans-unit id="shell.header.account">
+  <source>Account</source>
+</trans-unit>
+<trans-unit id="shell.nav.home">
+  <source>Home</source>
+</trans-unit>
+<trans-unit id="shell.nav.blog">
+  <source>Blog</source>
+</trans-unit>
+<trans-unit id="shell.nav.code-of-conduct">
+  <source>Code of Conduct</source>
+</trans-unit>
+<trans-unit id="shell.nav.faq">
+  <source>FAQs</source>
+</trans-unit>
+<trans-unit id="shell.nav.my-schedule">
+  <source>My Schedule</source>
+</trans-unit>
+<trans-unit id="shell.nav.previous-speakers">
+  <source>Previous Speakers</source>
+</trans-unit>
+<trans-unit id="shell.nav.schedule">
+  <source>Schedule</source>
+</trans-unit>
+<trans-unit id="shell.nav.speakers">
+  <source>Speakers</source>
+</trans-unit>
+<trans-unit id="shell.nav.team">
+  <source>Team</source>
+</trans-unit>
+<trans-unit id="shell.notifications.toggle">
+  <source>Notifications</source>
+</trans-unit>
+<trans-unit id="shell.notifications.prompt">
+  <source>Enable notifications</source>
+</trans-unit>
+<trans-unit id="shell.notifications.enable">
+  <source>Enable</source>
+</trans-unit>
+<trans-unit id="common.loading">
+  <source>Loading...</source>
+</trans-unit>
+<trans-unit id="shell.notifications.enabled">
+  <source>Get notified of general announcements and sessions starting</source>
+</trans-unit>
+<trans-unit id="shell.notifications.general">
+  <source>General notifications</source>
+</trans-unit>
+<trans-unit id="shell.notifications.sign-in">
+  <source>Sign in to get personalized session notifications</source>
+</trans-unit>
+<trans-unit id="shell.notifications.my-schedule">
+  <source>My Schedule notifications</source>
+</trans-unit>
+<trans-unit id="shell.notifications.blocked">
+  <source>Please enable notifications in your browser</source>
+</trans-unit>
+<trans-unit id="shell.notifications.unsupported">
+  <source>Notifications are not supported on this device</source>
+</trans-unit>
+<trans-unit id="shell.notifications.error">
+  <source>Unknown error occurred</source>
+</trans-unit>
+<trans-unit id="shell.snack-bar.dismiss">
+  <source>Dismiss</source>
+</trans-unit>
+<trans-unit id="shell.app.offline">
+  <source>You can still work offline.</source>
+</trans-unit>
+<trans-unit id="shell.service-worker.installing">
+  <source>App being installed for offline use.</source>
+</trans-unit>
+<trans-unit id="shell.service-worker.installed">
+  <source>App is now installed and available offline.</source>
+</trans-unit>
+<trans-unit id="shell.service-worker.available">
+  <source>A new version of this app is available.</source>
+</trans-unit>
+<trans-unit id="shell.service-worker.refresh">
+  <source>Refresh</source>
+</trans-unit>
+<trans-unit id="shell.service-worker.error">
+  <source>Error caching for offline use.</source>
+</trans-unit>
+<trans-unit id="shell.notifications.unsupported-help">
+  <source>Details</source>
+  <note from="lit-localize">Opens a list of browsers that support notifications.</note>
+</trans-unit>
+<trans-unit id="shell.notifications.blocked-help">
+  <source>Enable</source>
+  <note from="lit-localize">Opens help on allowing notifications in the browser.</note>
+</trans-unit>
 </body>
 </file>
 </xliff>

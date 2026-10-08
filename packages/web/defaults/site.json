@@ -19,31 +19,11 @@
     "locale": "en-US"
   },
   "navigation": [
-    {
-      "route": "home",
-      "permalink": "/",
-      "label": "Home"
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers",
-      "label": "Speakers"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule",
-      "label": "Schedule"
-    },
-    {
-      "route": "team",
-      "permalink": "/team",
-      "label": "Team"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog",
-      "label": "Blog"
-    }
+    { "route": "home", "permalink": "/" },
+    { "route": "speakers", "permalink": "/speakers" },
+    { "route": "schedule", "permalink": "/schedule" },
+    { "route": "team", "permalink": "/team" },
+    { "route": "blog", "permalink": "/blog" }
   ],
   "heroSettings": {
     "blog": {
