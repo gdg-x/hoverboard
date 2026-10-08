@@ -13,15 +13,11 @@ import {
   subscribeToFeedback as subscribeFeedback,
 } from '../../db/feedback';
 import type { Feedback } from '../../models/feedback';
-import { store } from '..';
 import type { RootState } from '..';
+import { dispatch } from '../dispatch';
 
 vi.mock('../../db/feedback');
-vi.mock('..', () => ({
-  store: {
-    dispatch: vi.fn(),
-  },
-}));
+vi.mock('../dispatch');
 
 const feedback: Feedback = {
   comment: 'Great talk',
@@ -138,7 +134,7 @@ describe('feedback thunks and subscriptions', () => {
       expect.any(Function),
       expect.any(Function),
     );
-    expect(store.dispatch).toHaveBeenCalledWith(
+    expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
         type: 'feedback/setSuccess',
         payload: [feedback],
@@ -155,7 +151,7 @@ describe('feedback thunks and subscriptions', () => {
 
     subscribe('user-1');
 
-    expect(store.dispatch).toHaveBeenCalledWith(
+    expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
         type: 'feedback/setFailure',
         payload: error,
@@ -192,7 +188,7 @@ describe('selectFeedbackById', () => {
     } as unknown as RootState;
 
     expect(selectFeedbackById(state, 'session-1')).toStrictEqual(new Pending());
-    expect(store.dispatch).toHaveBeenCalledWith(
+    expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
         type: 'feedback/subscribeToFeedback',
         payload: 'user-1',
