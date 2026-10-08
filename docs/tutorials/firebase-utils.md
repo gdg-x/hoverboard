@@ -24,6 +24,8 @@ Import the JSON fixtures in `docs/default-firebase-data.json` into the running F
 
 [Optional] Edit `docs/default-firebase-data.json` first to load your own data.
 
+It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` off it skips `schedule` and `sessions`. The `config/mailchimp` and `config/notifications` documents need their features, and `config/schedule` needs `schedule` or `speakers`.
+
 ## Export emulator data to prefill files
 
 Once your emulator has the data you want (whether from `firestore-init`, the Emulator UI, or your app), export it to `.firebase/emulator-data` so it's automatically reloaded the next time you run `npm start` or `./hbd emulators`:
