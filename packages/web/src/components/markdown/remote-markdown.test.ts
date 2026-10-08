@@ -53,6 +53,21 @@ describe('remote-markdown', () => {
     expect(element.path).toBe('/content.md');
   });
 
+  it('renders given content without fetching, as on a server-rendered page', async () => {
+    const { shadowRoot } = await renderRemoteMarkdown(
+      html`<remote-markdown
+        path="/content.md"
+        page-path="/faq"
+        .content=${'## Given heading'}
+      ></remote-markdown>`,
+    );
+
+    const toc = shadowRoot.querySelector('toc-markdown');
+    expect(toc).toHaveProperty('content', '## Given heading');
+    expect(toc).toHaveProperty('pagePath', '/faq');
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
   it('renders an error message when the fetch fails', async () => {
     fetchMock.mockRejectedValue(new Error('network error'));
     const { shadowRoot } = await renderRemoteMarkdown(

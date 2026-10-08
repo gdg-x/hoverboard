@@ -11,10 +11,17 @@
     "public": "packages/web/dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "trailingSlash": false,
-    "rewrites": [
+    "cleanUrls": true,
+    "redirects": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/blog/posts/:id",
+        "destination": "/blog/:id",
+        "type": 301
+      },
+      {
+        "source": "/sessions",
+        "destination": "/schedule",
+        "type": 301
       }
     ],
     "headers": [

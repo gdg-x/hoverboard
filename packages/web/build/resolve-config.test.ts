@@ -9,6 +9,7 @@ import { defaultTheme } from '../src/themes/default';
 import { THEME_TOKENS } from '../src/themes/tokens';
 import { ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
 import {
+  buildMarkdown,
   featureDefines,
   mapsScriptSrc,
   markdownTranslations,
@@ -454,6 +455,25 @@ describe('markdownTranslations', () => {
       es: { title: 'DevFest en español', faq: `/${files[0]!.fileName}` },
     });
     expect(config.contentTranslations).toEqual({ es: { title: 'DevFest en español' } });
+  });
+});
+
+describe('buildMarkdown', () => {
+  it('renders the markdown pages with the site config and reads the posts', () => {
+    const { pages, posts } = buildMarkdown(repoPaths.site, (template) =>
+      template.replaceAll('{{', '[').replaceAll('}}', ']'),
+    );
+
+    expect(Object.keys(pages)).toEqual(['faq', 'coc']);
+    expect(pages.faq).not.toContain('{{');
+    expect(Object.keys(posts)).toContain('2017-02-12-c4p.md');
+  });
+
+  it('skips markdown that a site does not have', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'hoverboard-markdown-'));
+    dirsToClean.push(dir);
+
+    expect(buildMarkdown(dir, (template) => template)).toEqual({ pages: {}, posts: {} });
   });
 });
 

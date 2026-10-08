@@ -1,7 +1,7 @@
 import createDOMPurify, { type DOMPurify, type WindowLike } from 'dompurify';
 import { isServer } from 'lit';
 import { marked } from 'marked';
-import { gfmHeadingId } from 'marked-gfm-heading-id';
+import { getHeadingList, gfmHeadingId } from 'marked-gfm-heading-id';
 
 marked.use(gfmHeadingId());
 
@@ -43,4 +43,20 @@ export const renderMarkdown = (content: string): string => {
     );
   }
   return html;
+};
+
+export interface MarkdownHeading {
+  id: string;
+  level: number;
+  /** Plain text, without markup. */
+  text: string;
+}
+
+/** Like `renderMarkdown()`, with the headings and the ids it gave them. */
+export const renderMarkdownWithHeadings = (
+  content: string,
+): { html: string; headings: MarkdownHeading[] } => {
+  const html = renderMarkdown(content);
+  const headings = getHeadingList().map(({ id, level, raw }) => ({ id, level, text: raw }));
+  return { html, headings };
 };

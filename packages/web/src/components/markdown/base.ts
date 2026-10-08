@@ -8,12 +8,6 @@ export class Markdown extends ThemedElement {
   @property()
   accessor content: string = '';
 
-  get document(): DocumentFragment {
-    const template = document.createElement('template');
-    template.innerHTML = renderMarkdown(this.content);
-    return template.content;
-  }
-
   override render() {
     return html`<div class="markdown-html">${unsafeHTML(renderMarkdown(this.content))}</div>`;
   }

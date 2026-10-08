@@ -4,6 +4,7 @@ import type {
   Query,
   QueryDocumentSnapshot,
 } from 'firebase-admin/firestore';
+import { env } from 'node:process';
 import type { Feature } from '../config/features';
 import type { Content } from '../store/content';
 import { connectFirestore } from './firestore';
@@ -41,21 +42,30 @@ const LOADERS = {
   videos: ['videos', (db) => read(db.collection('videos').orderBy('order'), withId)],
 } satisfies Record<keyof Content, [Feature, (db: Firestore) => Promise<DocumentData[]>]>;
 
+const enabledLoaders = () =>
+  Object.entries(LOADERS).filter(([, [feature]]) => __HB_FEATURES__[feature]);
+
 /** Reads the content of the enabled features. Disabled features have no key. */
 export const readContent = async (db: Firestore): Promise<Partial<Content>> => {
   const entries = await Promise.all(
-    Object.entries(LOADERS)
-      .filter(([, [feature]]) => __HB_FEATURES__[feature])
-      .map(async ([name, [, load]]) => [name, await load(db)] as const),
+    enabledLoaders().map(async ([name, [, load]]) => [name, await load(db)] as const),
   );
   // Firestore data is untyped. The models in src/models/ describe it, as they do for the client.
   return Object.fromEntries(entries) as Partial<Content>;
 };
 
+/** Every enabled collection, empty, for builds without Firestore such as CI checks. */
+export const emptyContent = (): Partial<Content> =>
+  Object.fromEntries(enabledLoaders().map(([name]) => [name, []]));
+
 let content: Promise<Partial<Content>> | undefined;
 
-/** The content for this build, read once and shared by every page. Development reads it fresh. */
+/**
+ * The content for this build, read once and shared by every page. Development reads it fresh.
+ * `FIRESTORE_TARGET=none` builds without Firestore and without content.
+ */
 export const loadContent = (): Promise<Partial<Content>> => {
+  if (env['FIRESTORE_TARGET'] === 'none') return Promise.resolve(emptyContent());
   if (import.meta.env.DEV) return connectFirestore().then(readContent);
   content ??= connectFirestore().then(readContent);
   return content;

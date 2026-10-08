@@ -1,10 +1,30 @@
 import { css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { type MarkdownHeading, renderMarkdownWithHeadings } from '../../utils/markdown';
 import { scrollToElement } from '../../utils/scrolling';
 import { Markdown } from './base';
 
-type Tree = {
-  [id: string]: string[];
+interface Section {
+  header: MarkdownHeading;
+  subheaders: MarkdownHeading[];
+}
+
+// Each h2 starts a section, and the h3s after it are its subheaders.
+const sections = (headings: MarkdownHeading[]): Section[] => {
+  const result: Section[] = [];
+  for (const heading of headings) {
+    if (heading.level === 2) {
+      result.push({ header: heading, subheaders: [] });
+    } else if (heading.level === 3) {
+      const section = result.at(-1);
+      if (!section) {
+        throw new Error('Markdown files must have an h2 header before any h3 header');
+      }
+      section.subheaders.push(heading);
+    }
+  }
+  return result;
 };
 
 @customElement('toc-markdown')
@@ -98,46 +118,44 @@ export class TocMarkdown extends Markdown {
     }
   `;
 
+  /** The page's path, for the table of contents links. The page has a `<base>`, so `#id` alone would leave it. */
+  @property({ attribute: 'page-path' })
+  accessor pagePath = '';
+
   override render() {
+    const { html: body, headings } = renderMarkdownWithHeadings(this.content);
     return html`
-      ${this.renderToc}
+      ${this.renderToc(headings)}
 
       <div class="container">
-        <div class="markdown-wrapper">${this.document}</div>
+        <div class="markdown-wrapper">${unsafeHTML(body)}</div>
       </div>
     `;
   }
 
-  private renderSubheader(headerId: string) {
-    const header = this.headers.find((header) => header.id === headerId);
+  private renderSubheader({ id, text }: MarkdownHeading) {
     return html`
       <a
         class="col-content"
-        href="${window.location.pathname}#${headerId}"
-        @click="${() => this.scrollToId(headerId)}"
+        href="${this.pagePath}#${id}"
+        @click="${() => this.scrollToId(id)}"
         rel="external"
-        >${header?.textContent ?? headerId}</a
+        >${text}</a
       >
     `;
   }
 
-  private renderHeader(headerId: string, subheaderIds: string[]) {
-    const header = this.headers.find((header) => header.id === headerId);
-    return html`
-      <div class="col">
-        ${header?.textContent ?? headerId}
-        ${subheaderIds.map((subheaderId) => this.renderSubheader(subheaderId))}
-      </div>
-    `;
-  }
-
-  private get renderToc() {
+  private renderToc(headings: MarkdownHeading[]) {
     return html`
       <div class="content-wrapper">
         <div class="container">
           <div class="content">
-            ${Object.keys(this.headerIds).map((headerId) =>
-              this.renderHeader(headerId, this.headerIds[headerId]!),
+            ${sections(headings).map(
+              ({ header, subheaders }) => html`
+                <div class="col">
+                  ${header.text} ${subheaders.map((subheader) => this.renderSubheader(subheader))}
+                </div>
+              `,
             )}
           </div>
         </div>
@@ -151,30 +169,6 @@ export class TocMarkdown extends Markdown {
     if (id) {
       this.updateComplete.then(() => this.scrollToId(id));
     }
-  }
-
-  private get headers() {
-    return Array.from(this.document.querySelectorAll('h2, h3'));
-  }
-
-  private get headerIds(): Tree {
-    const tree: Tree = {};
-    let parent: string | undefined = undefined;
-
-    for (const header of this.headers) {
-      // We care about h2 and h3 tags
-      if (header.tagName === 'H2') {
-        parent = header.id;
-        tree[parent] = [];
-      } else if (header.tagName === 'H3') {
-        if (!parent || tree[parent] === undefined) {
-          throw new Error('Markedown file h2 headers must be after an h3 header');
-        }
-        tree[parent]!.push(header.id);
-      }
-    }
-
-    return tree;
   }
 
   private scrollToId(id: string) {

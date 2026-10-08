@@ -2,8 +2,11 @@ import lit from '@awesome.me/astro-lit';
 import { defineConfig } from 'astro/config';
 import { chunkFileNames } from './build/chunk-names';
 import { decorators } from './build/decorators';
-import { production } from './build/resolve-config';
+import { production, resolveConfig } from './build/resolve-config';
+import { routes } from './build/routes';
 import { site } from './build/vite-plugin-site';
+
+const config = resolveConfig();
 
 export default defineConfig({
   output: 'static',
@@ -11,7 +14,7 @@ export default defineConfig({
   trailingSlash: 'never',
   // Pages share one store, which each page fills with its content in turn (`seedPage()`).
   build: { format: 'file', concurrency: 1 },
-  integrations: [lit()],
+  integrations: [lit(), routes(config.site.features)],
   vite: {
     // The build smoke test links node_modules into a copy of this package. Astro fails on
     // `.astro` files that resolve outside its root.
@@ -32,6 +35,6 @@ export default defineConfig({
     environments: {
       client: { build: { rolldownOptions: { output: { chunkFileNames } } } },
     },
-    plugins: [decorators(), ...site()],
+    plugins: [decorators(), ...site(config)],
   },
 });

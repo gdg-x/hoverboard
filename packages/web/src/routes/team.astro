@@ -1,0 +1,14 @@
+---
+import { loadContent } from '../data/content';
+import { pageMetadata } from '../data/metadata';
+import { seedPage } from '../data/page';
+import Base from '../layouts/base.astro';
+import { TeamPage } from '../views/team-page';
+
+const { teams, members } = await loadContent();
+const content = seedPage({ teams, members });
+---
+
+<Base {...pageMetadata('team')} content={content}>
+  <TeamPage client:load />
+</Base>

@@ -1,0 +1,14 @@
+---
+import { loadContent } from '../../data/content';
+import { pageMetadata } from '../../data/metadata';
+import { seedPage } from '../../data/page';
+import Base from '../../layouts/base.astro';
+import { SpeakersPage } from '../../views/speakers-page';
+
+const { speakers, sessions, previousSpeakers } = await loadContent();
+const content = seedPage({ speakers, sessions, previousSpeakers });
+---
+
+<Base {...pageMetadata('speakers')} content={content}>
+  <SpeakersPage client:load />
+</Base>

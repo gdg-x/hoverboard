@@ -99,4 +99,16 @@ describe('loadContent', () => {
     expect(first).toBe(second);
     expect(connectFirestore).toHaveBeenCalledTimes(1);
   });
+
+  it('builds without Firestore and without content with FIRESTORE_TARGET=none', async () => {
+    vi.stubEnv('FIRESTORE_TARGET', 'none');
+    setFeatures({ team: false });
+    vi.mocked(connectFirestore).mockClear();
+
+    const content = await loadContent();
+
+    expect(connectFirestore).not.toHaveBeenCalled();
+    expect(content.speakers).toEqual([]);
+    expect(content).not.toHaveProperty('teams');
+  });
 });

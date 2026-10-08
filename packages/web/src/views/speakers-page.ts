@@ -1,6 +1,6 @@
 import { Success } from '@abraham/remotedata';
 import '@material/web/progress/linear-progress.js';
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../components/shared/content-loader';
 import '../components/shared/filter-menu';
@@ -42,10 +42,21 @@ export class SpeakersPage extends ThemedElement {
     }
 
     .speaker {
+      position: relative;
       padding: 32px 24px;
       background: var(--primary-background-color);
       text-align: center;
       transition: box-shadow var(--animation);
+    }
+
+    /* Covers the card. Links may not nest, so the badge and social links sit above it. */
+    .speaker-link {
+      position: absolute;
+      inset: 0;
+    }
+
+    .contacts a {
+      position: relative;
     }
 
     .speaker:hover {
@@ -231,7 +242,12 @@ export class SpeakersPage extends ThemedElement {
       <div class="container">
         ${this.speakersToRender.map(
           (speaker) => html`
-            <a class="speaker card" href=${this.speakerUrl(speaker.id)}>
+            <div class="speaker card">
+              <a
+                class="speaker-link"
+                href=${this.speakerUrl(speaker.id)}
+                aria-label=${speaker.name}
+              ></a>
               <div class="speaker-photo">
                 <img
                   loading="lazy"
@@ -283,12 +299,12 @@ export class SpeakersPage extends ThemedElement {
                   `,
                 )}
               </div>
-            </a>
+            </div>
           `,
         )}
       </div>
 
-      <previous-speakers-block></previous-speakers-block>
+      ${__HB_FEATURES__.previousSpeakers ? html`<previous-speakers-block></previous-speakers-block>` : nothing}
     `;
   }
 }

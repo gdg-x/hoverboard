@@ -1,6 +1,6 @@
 import { Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
-import { screen } from '@testing-library/dom';
+import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { router } from '../../router';
@@ -49,9 +49,11 @@ describe('speakers-block', () => {
     element.speakers = new Success(speakers);
     await element.updateComplete;
     expect(screen.getByTestId('block')).toBeInTheDocument();
-    const speakerLink = shadowRootForWithin.querySelector('a.speaker');
-    expect(speakerLink).toHaveTextContent('Example Speaker');
+    const speakerLink = within(shadowRootForWithin).getByRole('link', { name: 'Example Speaker' });
     expect(speakerLink).toHaveAttribute('href', '/speakers/speaker-1');
+    expect(
+      within(shadowRootForWithin).getByRole('heading', { name: 'Example Speaker' }),
+    ).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('hoverboard-icon')).toHaveAttribute(
       'name',
       'linkedin',

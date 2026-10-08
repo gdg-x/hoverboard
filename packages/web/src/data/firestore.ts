@@ -45,8 +45,9 @@ export const connectFirestore = async (): Promise<Firestore> => {
   // Without a running emulator the SDK retries for minutes, so fail early instead.
   await checkListening(host).catch((error: unknown) => {
     throw new Error(
-      `The Firestore emulator is not running at ${host}. Start it with \`npm start\`, or build ` +
-        'from production with FIRESTORE_TARGET=production.',
+      `The Firestore emulator is not running at ${host}. Start it with \`npm start\`, build ` +
+        'from production with FIRESTORE_TARGET=production, or without content with ' +
+        'FIRESTORE_TARGET=none.',
       { cause: error },
     );
   });

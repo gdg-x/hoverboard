@@ -57,9 +57,12 @@ describe('a production build of a minimal site', () => {
     cpSync(fixture, join(root, 'packages/config'), { recursive: true });
     dist = join(web, 'dist');
 
-    const env = Object.fromEntries(
-      Object.entries(process.env).filter(([key]) => !key.startsWith('VITEST')),
-    );
+    const env = {
+      ...Object.fromEntries(
+        Object.entries(process.env).filter(([key]) => !key.startsWith('VITEST')),
+      ),
+      FIRESTORE_TARGET: 'none',
+    };
     build = spawnSync('npm', ['run', 'build'], { cwd: web, env, encoding: 'utf8' });
   });
 
@@ -69,6 +72,17 @@ describe('a production build of a minimal site', () => {
 
   it('builds', () => {
     expect(build.status, build.stderr).toBe(0);
+  });
+
+  it('builds only the home and not found pages when every feature is off', () => {
+    const pages = readdirSync(dist, { recursive: true, encoding: 'utf8' }).filter((file) =>
+      file.endsWith('.html'),
+    );
+
+    expect(pages.sort()).toEqual(['404.html', 'index.html']);
+    expect(readFileSync(join(dist, 'index.html'), 'utf8')).toMatch(
+      /<home-page[^>]*><template shadowroot="open" shadowrootmode="open">/,
+    );
   });
 
   it('renders the site config into the layout', () => {

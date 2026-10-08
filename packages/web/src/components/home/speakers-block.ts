@@ -2,7 +2,7 @@ import '@material/web/button/outlined-button.js';
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import '../shared/hoverboard-icon';
 import '../shared/text-truncate';
 import type { Speaker } from '../../models/speaker';
@@ -23,9 +23,16 @@ export class SpeakersBlock extends ThemedElement {
     }
 
     .speaker {
+      position: relative;
       padding: 24px 16px;
       color: inherit;
       text-align: center;
+    }
+
+    /* Covers the card. Links may not nest, so the badge links sit above it. */
+    .speaker-link {
+      position: absolute;
+      inset: 0;
     }
 
     .speaker-photo-wrapper {
@@ -175,7 +182,12 @@ export class SpeakersBlock extends ThemedElement {
         <div class="speakers-wrapper">
           ${this.featuredSpeakers.map(
             (speaker) => html`
-              <a class="speaker card" href="${this.speakerUrl(speaker.id)}">
+              <div class="speaker card">
+                <a
+                  class="speaker-link"
+                  href="${this.speakerUrl(speaker.id)}"
+                  aria-label="${speaker.name}"
+                ></a>
                 <div class="speaker-photo-wrapper">
                   <img
                     loading="lazy"
@@ -220,7 +232,7 @@ export class SpeakersBlock extends ThemedElement {
                     <div class="origin">${speaker.country}</div>
                   </text-truncate>
                 </div>
-              </a>
+              </div>
             `,
           )}
         </div>
@@ -239,11 +251,19 @@ export class SpeakersBlock extends ThemedElement {
     if (this.speakers instanceof Success) {
       const { data } = this.speakers;
       const filteredSpeakers = data.filter((speaker) => speaker.featured);
-      const randomSpeakers = randomOrder(filteredSpeakers.length ? filteredSpeakers : data);
-      return randomSpeakers.slice(0, 4);
+      const speakers = filteredSpeakers.length ? filteredSpeakers : data;
+      return (this.shuffled ? randomOrder(speakers) : speakers).slice(0, 4);
     }
 
     return [];
+  }
+
+  // The first render follows the stored order, as on the server, so hydration matches.
+  @state()
+  private accessor shuffled = false;
+
+  override firstUpdated() {
+    this.shuffled = true;
   }
 
   private speakerUrl(id: string) {

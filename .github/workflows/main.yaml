@@ -33,6 +33,9 @@ jobs:
 
       - name: Running ${{ matrix.script-name }}
         run: npm run ${{ matrix.script-name }}
+        env:
+          # The build has no Firestore to read content from, so it builds the pages without content.
+          FIRESTORE_TARGET: none
 
   test-project:
     runs-on: ubuntu-latest

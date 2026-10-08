@@ -1,0 +1,14 @@
+---
+import { loadContent } from '../../data/content';
+import { pageMetadata } from '../../data/metadata';
+import { seedPage } from '../../data/page';
+import Base from '../../layouts/base.astro';
+import { BlogListPage } from '../../views/blog-list-page';
+
+const { blog } = await loadContent();
+const content = seedPage({ blog });
+---
+
+<Base {...pageMetadata('blog')} content={content}>
+  <BlogListPage client:load />
+</Base>

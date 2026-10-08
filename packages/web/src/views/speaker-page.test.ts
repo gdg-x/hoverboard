@@ -2,6 +2,7 @@ import { Pending, Success } from '@abraham/remotedata';
 import { type MockedFunction, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
+import { setFeatures } from '../../__tests__/helpers/features';
 import type { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
 import { selectSpeaker } from '../store/speakers/selectors';
@@ -127,5 +128,13 @@ describe('speaker-page', () => {
     expect(shadowRoot.querySelector('.additional-sections')).not.toBeNull();
     expect(shadowRoot).toHaveTextContent('Sessions');
     expect(shadowRoot).toHaveTextContent('A great talk');
+  });
+
+  it('leaves out previous speakers when that feature is off', async () => {
+    setFeatures({ previousSpeakers: false });
+
+    const { shadowRoot } = await fixture<SpeakerPage>(html`<speaker-page></speaker-page>`);
+
+    expect(shadowRoot.querySelector('previous-speakers-block')).toBeNull();
   });
 });

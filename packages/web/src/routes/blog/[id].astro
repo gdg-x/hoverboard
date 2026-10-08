@@ -1,0 +1,25 @@
+---
+import { posts } from 'virtual:hoverboard/markdown';
+import { loadContent } from '../../data/content';
+import { itemMetadata } from '../../data/metadata';
+import { seedPage } from '../../data/page';
+import { withPostSource } from '../../data/posts';
+import type { Post } from '../../models/post';
+import Base from '../../layouts/base.astro';
+import { PostPage } from '../../views/post-page';
+
+export const getStaticPaths = async () => {
+  const { blog = [] } = await loadContent();
+  return blog.map((post) => ({ params: { id: post.id }, props: { post } }));
+};
+
+const { post } = Astro.props as { post: Post };
+const { blog = [] } = await loadContent();
+const content = seedPage({
+  blog: blog.map((item) => (item.id === post.id ? withPostSource(item, posts) : item)),
+});
+---
+
+<Base {...itemMetadata(post.title, post.brief, post.image)} content={content}>
+  <PostPage postId={post.id} client:load />
+</Base>

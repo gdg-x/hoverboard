@@ -4,11 +4,16 @@ import '@material/web/menu/menu.js';
 import '@material/web/menu/menu-item.js';
 import type { MdMenu } from '@material/web/menu/menu.js';
 import { css, html, nothing } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import type { Session } from '../../models/session';
 import { url } from '../../config/site';
 import { router } from '../../router';
-import { downloadIcs, googleCalendarUrl, sessionToCalendarEvent } from '../../utils/calendar';
+import {
+  type CalendarEvent,
+  downloadIcs,
+  googleCalendarUrl,
+  sessionToCalendarEvent,
+} from '../../utils/calendar';
 import { ThemedElement } from '../themed-element';
 import './hoverboard-icon';
 
@@ -26,6 +31,14 @@ export class AddToCalendar extends ThemedElement {
 
   @query('md-menu')
   private accessor menu!: MdMenu;
+
+  // The menu items do not hydrate, so the menu renders only after the first update.
+  @state()
+  private accessor menuReady = false;
+
+  override firstUpdated() {
+    this.menuReady = true;
+  }
 
   private get event() {
     if (!this.session) return undefined;
@@ -55,6 +68,12 @@ export class AddToCalendar extends ThemedElement {
         <hoverboard-icon slot="icon" name="calendar"></hoverboard-icon>
         ${msg('Add to calendar', { id: 'shared.add-to-calendar.label' })}
       </md-outlined-button>
+      ${this.menuReady ? this.renderMenu(event) : nothing}
+    `;
+  }
+
+  private renderMenu(event: CalendarEvent) {
+    return html`
       <md-menu anchor="anchor">
         <md-menu-item href="${googleCalendarUrl(event)}" target="_blank">
           <div slot="headline">

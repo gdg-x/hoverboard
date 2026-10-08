@@ -2,6 +2,7 @@ import { Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
+import { setFeatures } from '../../__tests__/helpers/features';
 import type { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
 import { updateMetadata } from '../utils/metadata';
@@ -48,7 +49,10 @@ describe('speakers-page', () => {
     element.speakersToRender = [speaker];
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('a.speaker')).toHaveAttribute('href', '/speakers/speaker-1');
+    expect(shadowRoot.querySelector('a.speaker-link')).toHaveAttribute(
+      'href',
+      '/speakers/speaker-1',
+    );
     expect(shadowRoot).toHaveTextContent('Ada Lovelace');
     expect(shadowRoot.querySelector('hoverboard-icon.badge-icon')).toHaveAttribute('name', 'gde');
     expect(shadowRoot.querySelector('hoverboard-icon.social-icon')).toHaveAttribute(
@@ -93,5 +97,13 @@ describe('speakers-page', () => {
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('filter-menu')).toHaveProperty('resultsCount', 1);
+  });
+
+  it('leaves out previous speakers when that feature is off', async () => {
+    setFeatures({ previousSpeakers: false });
+
+    const { shadowRoot } = await fixture<SpeakersPage>(html`<speakers-page></speakers-page>`);
+
+    expect(shadowRoot.querySelector('previous-speakers-block')).toBeNull();
   });
 });

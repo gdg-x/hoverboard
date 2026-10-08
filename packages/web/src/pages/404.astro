@@ -1,12 +1,12 @@
 ---
-import { resources } from 'virtual:hoverboard/site';
+import { pageMetadata } from '../data/metadata';
+import { seedPage } from '../data/page';
 import Base from '../layouts/base.astro';
-import { pageText } from '../utils/page-text';
 import { NotFoundPage } from '../views/not-found-page';
 
-const { title, metaDescription } = pageText('notFound');
+const content = seedPage({});
 ---
 
-<Base title={`${title} | ${resources.title}`} description={metaDescription}>
+<Base {...pageMetadata('notFound')} content={content}>
   <NotFoundPage client:load />
 </Base>

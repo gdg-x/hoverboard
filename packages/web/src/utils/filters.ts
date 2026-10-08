@@ -1,3 +1,4 @@
+import { isServer } from 'lit';
 import type { Filter } from '../models/filter';
 import { FilterGroupKey } from '../models/filter-group';
 import { setFilters } from '../store/filters';
@@ -14,6 +15,8 @@ const setQueryString = (search: string): void => {
 export const clearFilters = () => setQueryString('');
 
 export const parseFilters = (): Filter[] => {
+  // Pages are built without a query string.
+  if (isServer) return [];
   const { search } = window.location;
   const searchParams = new URLSearchParams(search);
   const tags = searchParams.getAll(FilterGroupKey.tags).map((tag) => {

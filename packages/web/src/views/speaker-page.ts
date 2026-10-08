@@ -352,7 +352,7 @@ export class SpeakerPage extends ThemedElement {
         }
       </div>
 
-      <previous-speakers-block></previous-speakers-block>
+      ${__HB_FEATURES__.previousSpeakers ? html`<previous-speakers-block></previous-speakers-block>` : nothing}
     `;
   }
 }

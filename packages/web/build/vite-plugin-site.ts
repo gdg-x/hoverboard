@@ -1,11 +1,18 @@
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
+import { join } from 'node:path';
 import n from 'nunjucks';
 import type { Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
 import { FEATURES, type Feature } from '../src/config/features';
 import { THEME_TOKENS, type ThemeToken } from '../src/themes/tokens';
-import { resolveConfig, type SiteConfig } from './resolve-config';
+import {
+  CONFIG_PATHS,
+  MARKDOWN_PAGES,
+  type MarkdownPage,
+  resolveConfig,
+  type SiteConfig,
+} from './resolve-config';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
 const RESOLVED_SITE_MODULE = `\0${SITE_MODULE}`;
@@ -15,6 +22,9 @@ const RESOLVED_LAYOUT_MODULE = `\0${LAYOUT_MODULE}`;
 // One module per locale, `virtual:hoverboard/content/<locale>`, so each is its own chunk.
 export const CONTENT_MODULE = 'virtual:hoverboard/content/';
 const RESOLVED_CONTENT_MODULE = `\0${CONTENT_MODULE}`;
+// The markdown that pages render at build time. Only server code imports it.
+export const MARKDOWN_MODULE = 'virtual:hoverboard/markdown';
+const RESOLVED_MARKDOWN_MODULE = `\0${MARKDOWN_MODULE}`;
 
 /**
  * Feature flags as literals, for example `__HB_FEATURES__.blog` becomes `false`, so the bundler
@@ -133,6 +143,43 @@ export const templateRenderer = (data: SiteConfig) => {
   return (template: string) => nunjucks.renderString(template, data);
 };
 
+export interface BuildMarkdown {
+  /** `content/faq.md` and `content/coc.md`, rendered with the site config, as the build copies them. */
+  pages: Partial<Record<MarkdownPage, string>>;
+  /** `content/posts/*.md` by file name. */
+  posts: Record<string, string>;
+}
+
+/** The site's markdown in the source locale, for pages to render at build time. */
+export const buildMarkdown = (
+  siteDir: string,
+  render: (template: string) => string,
+): BuildMarkdown => {
+  const read = (path: string) => fs.readFileSync(path, 'utf8');
+  const pages = MARKDOWN_PAGES.flatMap((page) => {
+    const path = join(siteDir, 'content', `${page}.md`);
+    return fs.existsSync(path) ? [[page, render(read(path))]] : [];
+  });
+  const postsDir = join(siteDir, 'content', 'posts');
+  const posts = fs.existsSync(postsDir)
+    ? fs
+        .readdirSync(postsDir)
+        .filter((file) => file.endsWith('.md'))
+        .map((file) => [file, read(join(postsDir, file))])
+    : [];
+  return { pages: Object.fromEntries(pages), posts: Object.fromEntries(posts) };
+};
+
+const markdownModule = (markdown: BuildMarkdown): Plugin => ({
+  name: 'hoverboard-markdown-module',
+  resolveId: (id) => (id === MARKDOWN_MODULE ? RESOLVED_MARKDOWN_MODULE : undefined),
+  load: (id) =>
+    id === RESOLVED_MARKDOWN_MODULE
+      ? `export const pages = ${JSON.stringify(markdown.pages)};\n` +
+        `export const posts = ${JSON.stringify(markdown.posts)};\n`
+      : undefined,
+});
+
 // Astro builds for the server and then the client. Files go out once, with the client build.
 const clientOnly = <P extends object>(plugin: P): P & Pick<Plugin, 'applyToEnvironment'> => ({
   ...plugin,
@@ -140,14 +187,14 @@ const clientOnly = <P extends object>(plugin: P): P & Pick<Plugin, 'applyToEnvir
 });
 
 // Serves the site config, and renders the markdown pages with it.
-export const site = (): PluginOption[] => {
-  const data = resolveConfig();
+export const site = (data: SiteConfig = resolveConfig()): PluginOption[] => {
   const compileTemplate = templateRenderer(data);
   const compileBufferTemplate = (body: Buffer) => compileTemplate(body.toString());
   const markdown = markdownTranslations(data, compileTemplate);
 
   return [
     siteModule({ ...data, contentTranslations: markdown.contentTranslations }),
+    markdownModule(buildMarkdown(CONFIG_PATHS.site, compileTemplate)),
     clientOnly<Plugin>({
       name: 'hoverboard-localized-markdown',
       generateBundle() {

@@ -114,9 +114,9 @@ export class ScheduleDay extends ThemedElement {
 
   @fromStore((state) => selectScheduleState(state))
   accessor schedule!: ScheduleState;
-  @property({ type: Object })
+  @property({ attribute: false })
   accessor location: RouteLocation | undefined;
-  @property({ type: Object })
+  @property({ attribute: false })
   accessor day: Day | undefined;
 
   @fromStore((state) => state.user)

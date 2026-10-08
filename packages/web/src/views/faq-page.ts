@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { faq } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import '../components/hero/simple-hero';
@@ -10,6 +10,10 @@ import { ThemedElement } from '../components/themed-element';
 export class FaqPage extends ThemedElement {
   private readonly metadata = new PageMetadataController(this, 'faq');
 
+  /** The FAQ in the source locale, which the build passes in. */
+  @property({ attribute: false })
+  accessor content: string | undefined;
+
   get source() {
     return faq;
   }
@@ -18,7 +22,12 @@ export class FaqPage extends ThemedElement {
     return html`
       <simple-hero page="faq"></simple-hero>
 
-      <remote-markdown toc path=${this.source}></remote-markdown>
+      <remote-markdown
+        toc
+        path=${this.source}
+        page-path="/faq"
+        .content=${this.content}
+      ></remote-markdown>
     `;
   }
 }
