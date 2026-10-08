@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { runCommand } from './spawn.js';
+import { captureCommand, runCommand } from './spawn.js';
 
 const { spawnSyncMock } = vi.hoisted(() => ({ spawnSyncMock: vi.fn() }));
 
@@ -42,5 +42,23 @@ describe('runCommand', () => {
     spawnSyncMock.mockReturnValue({ error: new Error('ENOENT') });
 
     expect(() => runCommand('missing-binary', [], '/repo')).toThrow('ENOENT');
+  });
+});
+
+describe('captureCommand', () => {
+  it('returns the exit status and output, without a terminal', () => {
+    spawnSyncMock.mockReturnValue({ status: 0, stdout: '{}', stderr: '' });
+
+    expect(captureCommand('firebase', ['projects:list'], '/repo')).toEqual({
+      status: 0,
+      stdout: '{}',
+      stderr: '',
+    });
+    expect(spawnSyncMock).toHaveBeenCalledWith(
+      'firebase',
+      ['projects:list'],
+      expect.objectContaining({ cwd: '/repo', encoding: 'utf8' }),
+    );
+    expect(spawnSyncMock.mock.calls[0]?.[2]).not.toHaveProperty('stdio');
   });
 });

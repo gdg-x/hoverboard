@@ -28,16 +28,17 @@ Each package with dependencies has its own `package.json` and `package-lock.json
 
 Run from the repo root.
 
-| Command                        | Does                                                                                                                           |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `npm test`                     | All Vitest projects: Web, Server, Hydration, Functions, CLI, Firestore (starts the emulator), Translations and Smoke           |
-| `npx vitest run --project Web` | One project. Add a path to run one file                                                                                        |
-| `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer, site config, `astro check` and type checks for web, server and storage               |
-| `npm run fix`                  | ESLint and Prettier autofix                                                                                                    |
-| `npm run build`                | Production build of every page to `packages/web/dist`. Reads content from the Firestore emulator, see `FIRESTORE_TARGET` below |
-| `npm start`                    | Emulators, functions and the Astro dev server at http://localhost:4321                                                         |
-| `npm run serve`                | Builds from the emulator data, then serves `dist` on the Hosting emulator at http://localhost:5000                             |
-| `./hbd doctor`                 | Checks the local setup, Firebase login, project and billing plan                                                               |
+| Command                        | Does                                                                                                                                                   |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm test`                     | All Vitest projects: Web, Server, Hydration, Functions, CLI, Firestore (starts the emulator), Translations and Smoke                                   |
+| `npx vitest run --project Web` | One project. Add a path to run one file                                                                                                                |
+| `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer, site config, `astro check` and type checks for web, server and storage                                       |
+| `npm run fix`                  | ESLint and Prettier autofix                                                                                                                            |
+| `npm run build`                | Production build of every page to `packages/web/dist`. Reads content from the Firestore emulator, see `FIRESTORE_TARGET` below                         |
+| `npm start`                    | Emulators, functions and the Astro dev server at http://localhost:4321                                                                                 |
+| `npm run serve`                | Builds from the emulator data, then serves `dist` on the Hosting emulator at http://localhost:5000                                                     |
+| `./hbd doctor`                 | Checks the local setup, Firebase login, project and billing plan                                                                                       |
+| `./hbd init`                   | Sets up a site: Firebase project and web app, event details in `packages/config`, billing, first deploy. Changes production, so only run it when asked |
 
 Before finishing a change, run `npm run lint` and `npm test`, or at least the affected Vitest project and type check.
 

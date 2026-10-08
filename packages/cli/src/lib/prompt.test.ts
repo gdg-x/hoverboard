@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { confirm } from './prompt.js';
+import { ask, confirm } from './prompt.js';
 
 const { createInterfaceMock, questionMock, closeMock } = vi.hoisted(() => {
   const questionMock = vi.fn();
@@ -33,5 +33,29 @@ describe('confirm', () => {
 
     await expect(confirm('Continue?')).rejects.toThrow('boom');
     expect(closeMock).toHaveBeenCalled();
+  });
+});
+
+describe('ask', () => {
+  it('returns the trimmed answer', async () => {
+    questionMock.mockResolvedValue('  Fest  ');
+
+    await expect(ask('Event name:', 'Old')).resolves.toBe('Fest');
+    expect(questionMock).toHaveBeenCalledWith('Event name: (Old) ');
+    expect(closeMock).toHaveBeenCalled();
+  });
+
+  it('returns the default for an empty answer', async () => {
+    questionMock.mockResolvedValue('');
+
+    await expect(ask('Event name:', 'Old')).resolves.toBe('Old');
+  });
+
+  it('shows no default when there is none', async () => {
+    questionMock.mockResolvedValue('Fest');
+
+    await ask('Event name:');
+
+    expect(questionMock).toHaveBeenCalledWith('Event name: ');
   });
 });
