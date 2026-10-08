@@ -14,8 +14,8 @@ Project Hoverboard locally in less than 15 minutes.
    - _Tip: `./hbd setup` logs in and selects the Firebase project you deploy to, then runs `./hbd doctor` to confirm your environment is ready._
 1. Seed the local Firestore emulator with data
    - [Optional] You can edit `docs/default-firebase-data.json` to use your own data
-   - Run `npm start` in one terminal to launch the app together with the Firebase emulators
-   - In another terminal, run `./hbd firestore-init` to import `docs/default-firebase-data.json` into the running emulator
+   - Run `npm start` in one terminal to launch the app together with the Firebase emulators. The site is at http://localhost:4321
+   - In another terminal, run `./hbd firestore-init` to import `docs/default-firebase-data.json` into the running emulator, then reload the page
    - Browse and edit the seeded data in the [Emulator UI](http://localhost:4000/firestore)
    - [Optional] Run `./hbd firestore-export` to persist your edits to `.firebase/emulator-data`, so they're automatically reloaded next time you run `npm start`
 
@@ -41,9 +41,11 @@ The diagram below is a brief summary of the directories within the project.
     |   |---src/
     |   |   |---components/
     |   |   |---controllers/
+    |   |   |---data/
     |   |   |---layouts/
     |   |   |---models/
     |   |   |---pages/
+    |   |   |---routes/
     |   |   |---store/
     |   |   |---styles/
     |   |   |---utils/
@@ -64,9 +66,11 @@ The diagram below is a brief summary of the directories within the project.
   - `src/` is where you store all of your source code and do all of your development.
     - `components/` is where you keep your LitElement custom elements, grouped by area.
     - `controllers/` is where you keep your shared Lit reactive controllers.
+    - `data/` reads the site's content from Firestore when the site is built.
     - `layouts/` has the Astro layout that every page uses.
     - `models/` is where you keep your data types.
-    - `pages/` has the Astro pages, one per route.
+    - `pages/` has the Astro pages that every site has: not found, offline and the web app manifest.
+    - `routes/` has the other Astro pages. The build only includes the pages of the features that are on.
     - `store/` is where you keep your Redux state.
     - `styles/` is where you keep your theme.
     - `utils/` is where you keep your shared helpers.
@@ -85,10 +89,12 @@ The diagram below is a brief summary of the directories within the project.
 
 The common npm scripts are:
 
-- `npm start`: Start a local development server using the Firebase emulator with livereload.
-- `npm run build`: Build a production version of the site to the `dist` directory.
-- `npm run serve`: Build a production version of the site and serve it locally on the emulators.
-- `./hbd deploy`: Build a production version of the site and deploy it to Firebase.
+- `npm start`: Start the Firebase emulators and a development server at http://localhost:4321 that reloads when you edit the code. Pages show the emulator's current data when you reload them.
+- `npm run build`: Build every page of the site to `packages/web/dist`, with the content in the Firestore emulator. The emulator must be running.
+- `npm run serve`: Build the site with the emulator's data, then serve it on the Hosting emulator at http://localhost:5000, as Firebase Hosting would.
+- `./hbd deploy`: Build the site with the content in your production Firestore and deploy it to Firebase.
+
+The build reads content from the Firestore emulator unless `FIRESTORE_TARGET` says otherwise. `FIRESTORE_TARGET=production` reads production Firestore, which `./hbd deploy` and the deploy workflows do. `FIRESTORE_TARGET=none` builds the pages without content, which CI uses to check that the site builds.
 
 Locally, the app runs on the emulators with the `demo-hoverboard` project. `demo-` projects only exist in the emulators, so sign-in uses the Auth emulator, and push notifications, Analytics and Performance Monitoring are off.
 

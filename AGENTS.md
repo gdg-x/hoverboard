@@ -1,12 +1,12 @@
 # AGENTS.md
 
-Hoverboard is a conference website template. Organizers fork it, configure it and deploy it to their own Firebase project. The web app is built with Lit and Vite, data lives in Firestore, and Cloud Functions handle schedule generation, notifications, image optimization and Mailchimp.
+Hoverboard is a conference website template. Organizers fork it, configure it and deploy it to their own Firebase project. The web app is Lit components that Astro renders to static pages at build time, from the site's content in Firestore. The pages then hydrate in the browser and keep the content live. Cloud Functions handle schedule generation, notifications, image optimization and Mailchimp.
 
 ## Layout
 
 | Path                        | What it is                                                                                                         |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `packages/web`              | The web app: Lit components, Redux Toolkit store, Vite build, Workbox service worker                               |
+| `packages/web`              | The web app: Astro pages, Lit components, Redux Toolkit store, Workbox service worker                              |
 | `packages/server/functions` | Cloud Functions (v2 API). Must stay self-contained, because `firebase.json` deploys it alone                       |
 | `packages/cli`              | The `hbd` CLI (`./hbd <command>`), run with `tsx`, no build step                                                   |
 | `packages/storage`          | Firestore and Storage security rules, indexes, the content schema and the rules tests                              |
@@ -28,15 +28,16 @@ Each package with dependencies has its own `package.json` and `package-lock.json
 
 Run from the repo root.
 
-| Command                        | Does                                                                                                                 |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| `npm test`                     | All Vitest projects: Web, Server, Hydration, Functions, CLI, Firestore (starts the emulator), Translations and Smoke |
-| `npx vitest run --project Web` | One project. Add a path to run one file                                                                              |
-| `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer, site config, `astro check` and type checks for web, server and storage     |
-| `npm run fix`                  | ESLint and Prettier autofix                                                                                          |
-| `npm run build`                | Production build of the web app to `packages/web/dist`                                                               |
-| `npm start`                    | Emulators, functions and web app in watch mode                                                                       |
-| `./hbd doctor`                 | Checks the local setup, Firebase login, project and billing plan                                                     |
+| Command                        | Does                                                                                                                           |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `npm test`                     | All Vitest projects: Web, Server, Hydration, Functions, CLI, Firestore (starts the emulator), Translations and Smoke           |
+| `npx vitest run --project Web` | One project. Add a path to run one file                                                                                        |
+| `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer, site config, `astro check` and type checks for web, server and storage               |
+| `npm run fix`                  | ESLint and Prettier autofix                                                                                                    |
+| `npm run build`                | Production build of every page to `packages/web/dist`. Reads content from the Firestore emulator, see `FIRESTORE_TARGET` below |
+| `npm start`                    | Emulators, functions and the Astro dev server at http://localhost:4321                                                         |
+| `npm run serve`                | Builds from the emulator data, then serves `dist` on the Hosting emulator at http://localhost:5000                             |
+| `./hbd doctor`                 | Checks the local setup, Firebase login, project and billing plan                                                               |
 
 Before finishing a change, run `npm run lint` and `npm test`, or at least the affected Vitest project and type check.
 
@@ -44,6 +45,8 @@ Before finishing a change, run `npm run lint` and `npm test`, or at least the af
 
 - **TypeScript** is strict, with `verbatimModuleSyntax`. Use `import type` for type-only imports. Custom elements register as a side effect, so import them with `import './my-element'` where they are used.
 - **Components** use `@customElement`, extend `ThemedElement` (which adds the shared theme styles), and read store state with the `@fromStore` decorator. Use the color tokens from `src/themes/tokens.ts` as CSS variables, never hex colors. A test fails on hex colors outside `src/themes/`.
+- **Pages** are Astro files in `src/routes/`. `build/routes.ts` adds the pages of enabled features, and `src/pages/` has the pages every site has. Each page reads its content with `loadContent()`, passes the collections its components read to `seedPage()` in its frontmatter, and renders its view with `client:load`. Components render on the server first, so their first render in the browser must match: no `window`, `document`, randomness or viewport checks before `firstUpdated()`. Use CSS media queries for layout by screen size.
+- **Build content** comes from `FIRESTORE_TARGET`: unset reads the emulator, `production` reads production Firestore (deploys only), and `none` builds without content (CI checks and smoke tests).
 - **Site config.** Client code reads site config only through `src/config/site.ts`, never from the data files directly. Build-time config reads live in `packages/web/build/`. When you add or rename a key in `packages/config` or `packages/web/defaults`, update the schema in `packages/web/schemas/` too. `./hbd validate-config` checks it.
 - **UI text** uses `msg()` from `@lit/localize` with an explicit `id` such as `footer.locale-picker.label`. After adding or changing one, run `npm --prefix packages/web run localize:extract` and commit `packages/translations/source/en.xlf`. `npm run lint` fails when it is out of date.
 - **Tests** sit next to the code as `*.test.ts`. Web tests run in jsdom: render with `fixture` from `packages/web/__tests__/helpers/fixtures.ts`, set state with `setStoreState`, turn features off with `setFeatures` from `helpers/features.ts`, switch locale with `useLocale` from `helpers/locale.ts` (only the `Smoke (fake locale)` project has a second locale), and assert with the jest-dom matchers. Every bug fix or feature needs a test.
@@ -53,7 +56,7 @@ Before finishing a change, run `npm run lint` and `npm test`, or at least the af
 - **Features** are gated with `__HB_FEATURES__.<name>` where the code of a disabled feature should be left out of the build. The build replaces it with `true` or `false`. Use `isFeatureEnabled(name)` only for names known at runtime.
 - **Vitest** is configured once in the root `vitest.config.ts`. Do not add `vitest` to a package's `package.json`, because a second copy breaks `expect.extend` from setup files.
 - **Dependencies** shared by several packages must use the same version range. `npm run lint:syncpack` checks this.
-- **Paths.** Vite runs with `packages/web` as the working directory, so its relative paths resolve from there. `packages/config` is `../config`.
+- **Paths.** Astro and Vite run with `packages/web` as the working directory, so their relative paths resolve from there. `packages/config` is `../config`.
 - **Local development** always uses the `demo-hoverboard` project on the emulators, whatever `firebase use` selects. The web app connects to the emulators and skips Analytics and Performance Monitoring when the project ID starts with `demo-`.
 - **Firestore commands** (`./hbd firestore-*`) use the emulator by default. Only target production with `FIRESTORE_TARGET=production` when explicitly asked.
 - **Formatting.** Prettier formats everything, including Markdown, JSON and YAML. Run `npx prettier --write <files>` after editing them.
