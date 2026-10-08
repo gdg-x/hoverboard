@@ -32,7 +32,7 @@ In the [`.github/workflows`](.github/workflows) folder, you can find two workflo
 
 - [`main.yaml`](.github/workflows/main.yaml) Builds the project, runs the linter and the tests on every push.
 - [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) Deploys a preview of the website to Firebase after every push to a pull request. Functions and Firestore rules are not deployed.
-- [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every push to the `main` branch.
+- [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every push to the `main` branch. You can also run it by hand, for example after you change content in Firestore: open **Actions** > **Deploy** > **Run workflow** on GitHub, or run `gh workflow run deploy.yaml`. It only deploys from `main`.
 
 The `main.yaml` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
 To run the two `deploy` actions on your instance, you need to do a couple of small setup:
