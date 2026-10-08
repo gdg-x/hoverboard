@@ -96,8 +96,7 @@ Object.defineProperty(Element.prototype, 'animate', {
   }),
 });
 
-// JSDOM does not implement the <dialog> element's showModal/close, used by
-// hoverboard-dialog.
+// JSDOM does not implement the <dialog> element's showModal/close, used by hb-dialog.
 Object.defineProperty(HTMLDialogElement.prototype, 'showModal', {
   writable: true,
   value: vi.fn(function (this: HTMLDialogElement) {

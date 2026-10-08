@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { hexToOklch } from '../src/themes/color';
 import { festival } from '../src/themes/festival';
-import { type SiteTheme, resolveTheme, themeCss, themeErrors } from './theme';
+import { darkLogoCss, type SiteTheme, resolveTheme, themeCss, themeErrors } from './theme';
 
 const siteTheme = (theme: Partial<SiteTheme> = {}): SiteTheme => ({
   name: 'festival',
@@ -73,5 +73,17 @@ describe('themeCss', () => {
     expect(css).toContain(
       `@supports not (color: light-dark(#000, #fff)) {\n:root {\n--hb-color-primary: ${festival.dark.primary};`,
     );
+  });
+});
+
+describe('darkLogoCss', () => {
+  it('uses the dark logo in the dark scheme', () => {
+    expect(darkLogoCss(true)).toContain('--hb-logo-dark-image: url("/images/logo-dark.svg");');
+    expect(darkLogoCss(true)).toContain('--hb-logo-dark-name-display: none;');
+  });
+
+  it('shows the short name instead without a dark logo', () => {
+    expect(darkLogoCss(false)).toContain('--hb-logo-dark-display: none;');
+    expect(darkLogoCss(false)).toContain('--hb-logo-dark-name-display: inline;');
   });
 });

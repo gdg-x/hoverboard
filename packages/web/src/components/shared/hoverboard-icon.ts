@@ -55,6 +55,9 @@ const ICONS: Record<string, () => Promise<{ default: SVGTemplateResult }>> = {
   wtm: () => import('./icons/wtm'),
   'bell-off': () => import('./icons/bell-off'),
   'bell-outline': () => import('./icons/bell-outline'),
+  monitor: () => import('./icons/monitor'),
+  sun: () => import('./icons/sun'),
+  moon: () => import('./icons/moon'),
 };
 
 const loaded = new Map<string, SVGTemplateResult>();

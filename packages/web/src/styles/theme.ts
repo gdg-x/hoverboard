@@ -30,7 +30,7 @@ export const theme = css`
       0 2px 9px 0 color-mix(in srgb, var(--default-primary-color) 40%, transparent);
     --font-family: var(--hb-font-body);
     --max-container-width: 1280px;
-    --header-height: 56px;
+    --header-height: var(--hb-header-height);
   }
 
   *,

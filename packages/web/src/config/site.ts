@@ -5,6 +5,9 @@ import { isFeature, isFeatureEnabled, isNavigationRoute, type NavigationRoute } 
 import { deepMerge } from './merge';
 
 export const { basepath, heroSettings, image, organizer, url } = settings;
+export const shortName = settings.shortName;
+/** `system` lets visitors pick a scheme in the footer. `light` and `dark` lock the site to one. */
+export const colorScheme = settings.theme.colorScheme as 'system' | 'light' | 'dark';
 export const siteLocales = settings.locales as { source: string; targets: string[] };
 export const timeZone = settings.event.timezone;
 export const eventDates = { start: settings.event.startDate, end: settings.event.endDate };

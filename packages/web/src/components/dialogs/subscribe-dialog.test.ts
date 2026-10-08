@@ -24,7 +24,8 @@ describe('subscribe-dialog', () => {
     element['title'] = subscribeBlock.formTitle;
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent(
+    expect(shadowRoot.querySelector('hb-dialog')).toHaveAttribute(
+      'heading',
       subscribeBlock.formTitle,
     );
     const fields = shadowRoot.querySelectorAll('hb-text-field');
@@ -129,16 +130,16 @@ describe('subscribe-dialog', () => {
     const { element, shadowRoot } = await fixture<SubscribeDialog>(
       html`<subscribe-dialog></subscribe-dialog>`,
     );
+    element['open'] = true;
     element['errorOccurred'] = true;
     await element.updateComplete;
-    const dialog = shadowRoot.querySelector('hoverboard-dialog') as HTMLElement & {
-      close: () => void;
-    };
-    dialog.close = vi.fn();
+    const dialog = shadowRoot.querySelector('hb-dialog')!;
+    await dialog.updateComplete;
 
     shadowRoot.querySelector<HTMLElement>('hb-button[variant="outlined"]')!.click();
+    await dialog.updateComplete;
 
-    expect(dialog.close).toHaveBeenCalled();
+    expect(dialog.open).toBe(false);
     expect(element['errorOccurred']).toBe(false);
   });
 

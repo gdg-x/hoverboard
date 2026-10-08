@@ -35,9 +35,6 @@
 <trans-unit id="dialogs.feedback.retry">
   <source>Retry</source>
 </trans-unit>
-<trans-unit id="common.close">
-  <source>Close</source>
-</trans-unit>
 <trans-unit id="dialogs.signin.sign-in-with">
   <source>Sign in with <x id="0" equiv-text="${provider}"/></source>
 </trans-unit>
@@ -68,32 +65,44 @@
 <trans-unit id="common.email-invalid">
   <source>Please enter a valid email address.</source>
 </trans-unit>
+<trans-unit id="footer.color-scheme.system">
+  <source>System</source>
+</trans-unit>
+<trans-unit id="footer.color-scheme.light">
+  <source>Light</source>
+</trans-unit>
+<trans-unit id="footer.color-scheme.dark">
+  <source>Dark</source>
+</trans-unit>
 <trans-unit id="footer.block.back-to-top">
   <source>Back to top</source>
+</trans-unit>
+<trans-unit id="footer.block.subscribe">
+  <source>Get updates by email</source>
+</trans-unit>
+<trans-unit id="footer.block.fork-me">
+  <source>Fork me on GitHub</source>
 </trans-unit>
 <trans-unit id="footer.nav.based-on">
   <source>Based on <x id="0" equiv-text="${hoverboard}"/></source>
 </trans-unit>
-<trans-unit id="footer.rel.subscribe-note">
-  <source>No spam, only the latest news and updates!</source>
-</trans-unit>
 <trans-unit id="footer.social.email-us">
   <source>Email us</source>
 </trans-unit>
-<trans-unit id="footer.social.follow-blog">
-  <source>Follow our <x id="0" equiv-text="&lt;a href=&quot;${blog}&quot; target=&quot;${target}&quot; rel=&quot;${rel}&quot;&gt;"/>Blog<x id="1" equiv-text="&lt;/a&gt;"/></source>
-</trans-unit>
 <trans-unit id="footer.social.follow-us">
   <source>Follow us</source>
+</trans-unit>
+<trans-unit id="footer.social.share-title">
+  <source>Share</source>
+</trans-unit>
+<trans-unit id="footer.social.follow-blog">
+  <source>Follow our <x id="0" equiv-text="&lt;a href=&quot;${blog}&quot; target=&quot;${target}&quot; rel=&quot;${rel}&quot;&gt;"/>Blog<x id="1" equiv-text="&lt;/a&gt;"/></source>
 </trans-unit>
 <trans-unit id="footer.social.share">
   <source>Share on <x id="0" equiv-text="${network}"/></source>
 </trans-unit>
 <trans-unit id="footer.locale-picker.label">
   <source>Language</source>
-</trans-unit>
-<trans-unit id="footer.subscribe-form.email">
-  <source>Your email</source>
 </trans-unit>
 <trans-unit id="home.about-block.title">
   <source>About</source>
@@ -173,6 +182,9 @@
 <trans-unit id="home.tickets-block.save">
   <source>Save <x id="0" equiv-text="${discount}"/> today</source>
 </trans-unit>
+<trans-unit id="common.buy-ticket">
+  <source>Buy ticket</source>
+</trans-unit>
 <trans-unit id="home.tickets-block.not-available">
   <source>Not available yet</source>
 </trans-unit>
@@ -236,23 +248,20 @@
 <trans-unit id="shared.star-rating.votes.other">
   <source>(<x id="0" equiv-text="${votes}"/> votes)</source>
 </trans-unit>
-<trans-unit id="shell.app-install.cta">
-  <source>Add to Home Screen</source>
-</trans-unit>
-<trans-unit id="shell.header.menu">
-  <source>Menu</source>
-</trans-unit>
-<trans-unit id="common.buy-ticket">
-  <source>Buy ticket</source>
-</trans-unit>
-<trans-unit id="shell.header.account-menu">
-  <source>Account menu</source>
+<trans-unit id="shell.account-menu.label">
+  <source>Account of <x id="0" equiv-text="${name}"/></source>
 </trans-unit>
 <trans-unit id="shell.header.sign-out">
   <source>Sign out</source>
 </trans-unit>
-<trans-unit id="shell.header.account">
-  <source>Account</source>
+<trans-unit id="shell.header.skip-link">
+  <source>Skip to content</source>
+</trans-unit>
+<trans-unit id="shell.header.menu">
+  <source>Menu</source>
+</trans-unit>
+<trans-unit id="shell.app-install.cta">
+  <source>Add to Home Screen</source>
 </trans-unit>
 <trans-unit id="shell.nav.home">
   <source>Home</source>
@@ -290,9 +299,6 @@
 <trans-unit id="shell.notifications.enable">
   <source>Enable</source>
 </trans-unit>
-<trans-unit id="common.loading">
-  <source>Loading...</source>
-</trans-unit>
 <trans-unit id="shell.notifications.enabled">
   <source>Get notified of general announcements and sessions starting</source>
 </trans-unit>
@@ -316,6 +322,12 @@
 </trans-unit>
 <trans-unit id="shell.snack-bar.dismiss">
   <source>Dismiss</source>
+</trans-unit>
+<trans-unit id="common.close">
+  <source>Close</source>
+</trans-unit>
+<trans-unit id="common.loading">
+  <source>Loading...</source>
 </trans-unit>
 <trans-unit id="shell.service-worker.installing">
   <source>App being installed for offline use.</source>
@@ -491,9 +503,9 @@
   <source>to leave feedback</source>
   <note from="lit-localize">Follows a Sign in button: "Sign in to leave feedback".</note>
 </trans-unit>
-<trans-unit id="footer.rel.subscribe-heading">
-  <source>Subscribe</source>
-  <note from="lit-localize">Heading above the newsletter sign-up form.</note>
+<trans-unit id="shell.header.nav-label">
+  <source>Main</source>
+  <note from="lit-localize">Names the main navigation.</note>
 </trans-unit>
 <trans-unit id="shell.notifications.unsupported-help">
   <source>Details</source>
@@ -502,6 +514,10 @@
 <trans-unit id="shell.notifications.blocked-help">
   <source>Enable</source>
   <note from="lit-localize">Opens help on allowing notifications in the browser.</note>
+</trans-unit>
+<trans-unit id="footer.color-scheme.legend">
+  <source>Appearance</source>
+  <note from="lit-localize">Picks the light or dark colors, or follows the device.</note>
 </trans-unit>
 <trans-unit id="shared.share.twitter-text">
   <source>Check out <x id="0" equiv-text="${title}"/> at #<x id="1" equiv-text="${hashtag}"/>: <x id="2" equiv-text="${shareUrl}"/></source>

@@ -13,9 +13,9 @@ import {
 import type { SubscribeState } from '../../store/subscribe';
 import { subscribeBlock } from '../../config/site';
 import { notEmpty, validEmail } from '../../utils/strings';
-import { HoverboardDialog } from '../shared/hoverboard-dialog';
-import '../shared/hoverboard-dialog';
 import '../ui/hb-button';
+import '../ui/hb-dialog';
+import type { HbDialog } from '../ui/hb-dialog';
 import '../ui/hb-text-field';
 import type { HbTextField } from '../ui/hb-text-field';
 import { ThemedElement } from '../themed-element';
@@ -25,17 +25,14 @@ import { ThemedElement } from '../themed-element';
 @customElement('subscribe-dialog')
 export class SubscribeDialog extends ThemedElement {
   static override styles = css`
-    hb-text-field {
-      margin: 16px 32px 0;
-    }
-
-    hb-text-field:first-of-type {
-      margin-top: 0;
+    .fields {
+      display: grid;
+      gap: var(--hb-space-4);
     }
 
     .general-error {
-      margin: 0 32px;
-      color: var(--error-color);
+      margin: 0;
+      color: var(--hb-color-error);
     }
   `;
 
@@ -43,8 +40,8 @@ export class SubscribeDialog extends ThemedElement {
     return subscribeBlock;
   }
 
-  @query('#dialog')
-  accessor dialog!: HoverboardDialog;
+  @query('hb-dialog')
+  accessor dialog!: HbDialog;
   @query('#emailInput')
   accessor emailInput!: HbTextField;
   @query('#firstFieldInput')
@@ -130,10 +127,6 @@ export class SubscribeDialog extends ThemedElement {
     }
   }
 
-  override firstUpdated() {
-    this.dialog.addEventListener('closed', () => closeDialog());
-  }
-
   override render() {
     const firstFieldLabel =
       this.firstFieldLabel || msg('First Name', { id: 'dialogs.subscribe.first-name' });
@@ -142,9 +135,8 @@ export class SubscribeDialog extends ThemedElement {
     const emailLabel = msg('Email Address', { id: 'dialogs.subscribe.email' });
     const fieldRequired = msg('Field required.', { id: 'dialogs.subscribe.field-required' });
     return html`
-      <hoverboard-dialog id="dialog" ?open="${this.open}">
-        <div slot="headline">${this.title}</div>
-        <div slot="content">
+      <hb-dialog heading="${this.title}" ?open="${this.open}" @close="${this.onClose}">
+        <div class="fields">
           ${
             this.errorOccurred
               ? html`<div class="general-error">
@@ -196,14 +188,18 @@ export class SubscribeDialog extends ThemedElement {
         <hb-button slot="actions" variant="outlined" @click="${this.close}">
           ${msg('Close', { id: 'common.close' })}
         </hb-button>
-      </hoverboard-dialog>
+      </hb-dialog>
     `;
   }
 
   private close() {
-    this.errorOccurred = false;
     this.dialog.close();
   }
+
+  private readonly onClose = () => {
+    this.errorOccurred = false;
+    closeDialog();
+  };
 
   private onFirstFieldChanged(event: Event) {
     this.firstFieldValue = (event.target as HbTextField).value;

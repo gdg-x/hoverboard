@@ -12,6 +12,8 @@ import '../data/markdown';
 import { seedPage } from '../data/page';
 import { openGraphLocale } from '../data/structured-data';
 import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
+import { colorSchemeScript } from '../utils/color-scheme';
+import { eventState } from '../utils/event-state';
 
 interface Props {
   title?: string;
@@ -41,7 +43,8 @@ const demoFirebaseConfig = {
   storageBucket: 'demo-hoverboard.appspot.com',
 };
 
-// The browser toolbar color follows the color scheme, unless the site locks one.
+// The browser toolbar color follows the color scheme, unless the site locks one. Both colors ride
+// along, so the footer toggle can pick one.
 const themeColors =
   theme.colorScheme === 'system'
     ? [
@@ -50,10 +53,16 @@ const themeColors =
       ]
     : [{ color: theme[theme.colorScheme].primary, media: undefined }];
 const fontOrigins = [...new Set(fontStylesheets.map((href) => new URL(href).origin))];
+// At build time. The header checks again in the browser.
+const builtEventState = eventState(new Date(), site.event);
 ---
 
 <!doctype html>
-<html data-decorations={theme.decorations ? undefined : 'off'} lang={site.locales.source}>
+<html
+  data-color-scheme={theme.colorScheme === 'system' ? undefined : theme.colorScheme}
+  data-decorations={theme.decorations ? undefined : 'off'}
+  lang={site.locales.source}
+>
   <head>
     <base href={site.basepath} />
     <meta charset="utf-8" />
@@ -77,8 +86,16 @@ const fontOrigins = [...new Set(fontStylesheets.map((href) => new URL(href).orig
       name="color-scheme"
     />
     {themeColors.map(({ color, media }) => (
-      <meta content={color} media={media} name="theme-color" />
+      <meta
+        content={color}
+        data-dark={theme.dark.primary}
+        data-light={theme.light.primary}
+        media={media}
+        name="theme-color"
+      />
     ))}
+    {/* After the theme-color tags it updates, and before any style, so the first paint is right. */}
+    {theme.colorScheme === 'system' && <script is:inline set:html={colorSchemeScript} />}
     <link href="manifest.json" rel="manifest" />
 
     <meta content="yes" name="mobile-web-app-capable" />
@@ -170,8 +187,14 @@ const fontOrigins = [...new Set(fontStylesheets.map((href) => new URL(href).orig
   </head>
 
   <body>
-    <AppHeader path={`/${path}`} client:load transition:persist="header" transition:persist-props />
-    <main>
+    <AppHeader
+      path={`/${path}`}
+      eventState={builtEventState}
+      client:load
+      transition:persist="header"
+      transition:persist-props
+    />
+    <main id="main" tabindex="-1">
       <slot />
     </main>
     <FooterBlock client:load transition:persist="footer" />

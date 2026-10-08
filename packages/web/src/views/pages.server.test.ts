@@ -6,6 +6,7 @@ import { seedPage } from '../data/page';
 import type { Day } from '../models/day';
 import type { Session } from '../models/session';
 import type { SpeakerWithTags } from '../models/speaker';
+import type { Ticket } from '../models/ticket';
 import type { RouteLocation } from '../utils/navigation';
 import '../components/home/speakers-block';
 import '../components/shared/add-to-calendar';
@@ -117,12 +118,20 @@ describe('pages on the server', () => {
     expect(page).toMatch(/popover="manual"\s+role="menu"/);
   });
 
-  it("render the header with the tab of the page's path selected", async () => {
-    seedPage({ tickets: [] });
+  it("render the header with the page's link marked as current, and the build's event state", async () => {
+    seedPage({
+      tickets: [{ name: 'Regular', url: 'https://example.com/t', available: true }] as Ticket[],
+    });
 
-    const page = await renderToString(html`<app-header path="/speakers/ada"></app-header>`);
+    const upcoming = await renderToString(
+      html`<app-header path="/speakers/ada" .eventState=${'upcoming'}></app-header>`,
+    );
+    const over = await renderToString(
+      html`<app-header path="/speakers/ada" .eventState=${'over'}></app-header>`,
+    );
 
-    expect(page).toMatch(/<div class="nav-item selected">\s*<a href="\/speakers">/);
-    expect(page).toMatch(/<a\s+href="\/speakers"\s+class="selected"/);
+    expect(upcoming).toMatch(/<a\s+href="\/speakers"\s+aria-current="page"/);
+    expect(upcoming).toMatch(/<hb-button[^>]*class="cta"[^>]*href="https:\/\/example\.com\/t"/);
+    expect(over).toMatch(/<hb-button[^>]*class="cta"[^>]*href="\/schedule"/);
   });
 });

@@ -17,7 +17,7 @@ describe('scrollToElement', () => {
 
     scrollToElement(element);
 
-    expect(scrollTo).toHaveBeenCalledWith({ top: 200 + 50 - 76, behavior: 'smooth' });
+    expect(scrollTo).toHaveBeenCalledWith({ top: 200 + 50 - 88, behavior: 'smooth' });
   });
 
   it('scrolls to the bottom of the element when given POSITION.BOTTOM', () => {
@@ -31,7 +31,7 @@ describe('scrollToElement', () => {
 
     scrollToElement(element, POSITION.BOTTOM);
 
-    expect(scrollTo).toHaveBeenCalledWith({ top: 300 - 76, behavior: 'smooth' });
+    expect(scrollTo).toHaveBeenCalledWith({ top: 300 - 88, behavior: 'smooth' });
   });
 });
 

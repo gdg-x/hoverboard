@@ -6,8 +6,7 @@ import { scrollToElement } from '../../utils/scrolling';
 import type { TocMarkdown } from './toc-markdown';
 import './toc-markdown';
 
-// toc-markdown scrolls headers into view via scrolling.ts, which imports
-// header-toolbar.ts (for HEADER_HEIGHT) which imports the store. Mock it out entirely.
+// Mocked, so the tests can check what the table of contents scrolls to.
 vi.mock('../../utils/scrolling', () => ({
   scrollToElement: vi.fn(),
 }));

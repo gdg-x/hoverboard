@@ -212,7 +212,25 @@ export class HomePage extends ThemedElement {
 
   override firstUpdated() {
     this.observeLazyBlocks();
+    this.scrollToHash();
   }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('hashchange', this.scrollToHash);
+  }
+
+  override disconnectedCallback() {
+    window.removeEventListener('hashchange', this.scrollToHash);
+    super.disconnectedCallback();
+  }
+
+  // Blocks are in the shadow root, where the browser does not look for `#subscribe` and others.
+  private readonly scrollToHash = () => {
+    const id = window.location.hash.slice(1);
+    const element = id ? this.renderRoot.querySelector(`#${CSS.escape(id)}`) : null;
+    if (element) scrollToElement(element);
+  };
 
   private readonly blockObserver = new IntersectionController(this, {
     target: null,
@@ -244,7 +262,13 @@ export class HomePage extends ThemedElement {
         hide-logo
       >
         <div class="home-content">
-          <img class="hero-logo" src="/images/logo.svg" alt="${this.siteTitle}" decoding="async" />
+          <!-- The hero is dark until the new home hero replaces it. -->
+          <img
+            class="hero-logo"
+            src="/images/logo-dark.svg"
+            alt="${this.siteTitle}"
+            decoding="async"
+          />
 
           <div class="info-items">
             <div class="info-item">${this.city}. ${this.dates}</div>
@@ -335,7 +359,7 @@ export class HomePage extends ThemedElement {
       ${__HB_FEATURES__.forkMe ? html`<fork-me-block></fork-me-block>` : nothing}
       <about-block></about-block>
       ${__HB_FEATURES__.speakers ? html`<speakers-block></speakers-block>` : nothing}
-      ${__HB_FEATURES__.subscribe ? html`<subscribe-block></subscribe-block>` : nothing}
+      ${__HB_FEATURES__.subscribe ? html`<subscribe-block id="subscribe"></subscribe-block>` : nothing}
       ${
         __HB_FEATURES__.tickets ? html`<tickets-block id="tickets-block"></tickets-block>` : nothing
       }

@@ -1,7 +1,7 @@
-import { Failure } from '@abraham/remotedata';
+import { Failure, Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
 import { css, html } from 'lit';
-import { customElement, query, state } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import { StoreController } from '../../controllers/store-controller';
 import { fromStore } from '../../controllers/from-store';
 import { store } from '../../store';
@@ -17,9 +17,8 @@ import { queueSnackbar } from '../../store/snackbars';
 import { signInProviders } from '../../config/site';
 import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 import '../shared/hoverboard-icon';
-import { HoverboardDialog } from '../shared/hoverboard-dialog';
-import '../shared/hoverboard-dialog';
 import '../ui/hb-button';
+import '../ui/hb-dialog';
 import { ThemedElement } from '../themed-element';
 
 const signInWith = (provider: string) =>
@@ -58,9 +57,6 @@ export class SigninDialog extends ThemedElement {
 
   private signInProviders = signInProviders;
 
-  @query('#dialog')
-  accessor dialog!: HoverboardDialog;
-
   @fromStore((state) => state.auth)
   private accessor auth!: typeof initialAuthState;
   @state()
@@ -72,10 +68,6 @@ export class SigninDialog extends ThemedElement {
   @state()
   private accessor providerCompanyName = '';
 
-  override firstUpdated() {
-    this.dialog.addEventListener('closed', () => closeDialog());
-  }
-
   private readonly mergeStore = new StoreController(this, selectAuthMergeable, {
     onChange: (value) => {
       const wasMergeState = this.isMergeState;
@@ -85,6 +77,16 @@ export class SigninDialog extends ThemedElement {
       }
     },
   });
+
+  private readonly signedInStore = new StoreController(
+    this,
+    (state) => state.user instanceof Success,
+    {
+      onChange: (signedIn) => {
+        if (signedIn && this.open) closeDialog();
+      },
+    },
+  );
 
   private onIsMergeState() {
     closeDialog();
@@ -104,71 +106,64 @@ export class SigninDialog extends ThemedElement {
     const { email } = this;
     const provider = this.providerCompanyName;
     return html`
-      <hoverboard-dialog id="dialog" ?open="${this.open}">
-        <div slot="headline">${msg('Sign in', { id: 'common.sign-in' })}</div>
-        <div slot="content">
-          ${
-            this.isMergeState
-              ? html`
-                  <div class="merge-content">
-                    <h3 class="subtitle">
-                      ${msg('You already have an account', {
-                        id: 'dialogs.signin.existing-account',
+      <hb-dialog
+        heading="${msg('Sign in', { id: 'common.sign-in' })}"
+        ?open="${this.open}"
+        @close="${() => closeDialog()}"
+      >
+        ${
+          this.isMergeState
+            ? html`
+                <div class="merge-content">
+                  <h3 class="subtitle">
+                    ${msg('You already have an account', {
+                      id: 'dialogs.signin.existing-account',
+                    })}
+                  </h3>
+                  <div class="explanation">
+                    <div class="row-1">
+                      ${msg(html`You've already used <b>${email}</b>.`, {
+                        id: 'dialogs.signin.existing-email',
                       })}
-                    </h3>
-                    <div class="explanation">
-                      <div class="row-1">
-                        ${msg(html`You've already used <b>${email}</b>.`, {
-                          id: 'dialogs.signin.existing-email',
-                        })}
-                      </div>
-                      <div class="row-2">
-                        ${msg(str`Sign in with ${provider} to continue.`, {
-                          id: 'dialogs.signin.continue-with',
-                        })}
-                      </div>
                     </div>
+                    <div class="row-2">
+                      ${msg(str`Sign in with ${provider} to continue.`, {
+                        id: 'dialogs.signin.continue-with',
+                      })}
+                    </div>
+                  </div>
 
-                    <div class="action-button">
-                      <hb-button variant="text" class="merge-button" @click="${this.mergeAccounts}">
-                        ${signInWith(provider)}
+                  <div class="action-button">
+                    <hb-button variant="text" class="merge-button" @click="${this.mergeAccounts}">
+                      ${signInWith(provider)}
+                    </hb-button>
+                  </div>
+                </div>
+              `
+            : html`
+                <div>
+                  ${this.signInProviders.providersData.map(
+                    (provider) => html`
+                      <hb-button
+                        variant="text"
+                        class="sign-in-button"
+                        @click="${() => this.signIn(provider.url as PROVIDER)}"
+                      >
+                        <hoverboard-icon
+                          slot="icon"
+                          name="${provider.name}"
+                          class="icon-${provider.name}"
+                        ></hoverboard-icon>
+                        ${signInWith(provider.label)}
                       </hb-button>
-                    </div>
-                  </div>
-                `
-              : html`
-                  <div>
-                    ${this.signInProviders.providersData.map(
-                      (provider) => html`
-                        <hb-button
-                          variant="text"
-                          class="sign-in-button"
-                          @click="${() => this.signIn(provider.url as PROVIDER)}"
-                        >
-                          <hoverboard-icon
-                            slot="icon"
-                            name="${provider.name}"
-                            class="icon-${provider.name}"
-                          ></hoverboard-icon>
-                          ${signInWith(provider.label)}
-                        </hb-button>
-                      `,
-                    )}
-                  </div>
-                `
-          }
-        </div>
-
-        <hb-button slot="actions" variant="text" @click="${this.close}">
-          ${msg('Close', { id: 'common.close' })}
-        </hb-button>
-      </hoverboard-dialog>
+                    `,
+                  )}
+                </div>
+              `
+        }
+      </hb-dialog>
     `;
   }
-
-  private close = () => {
-    this.dialog.close();
-  };
 
   private mergeAccounts = () => {
     if (this.auth instanceof Failure) {

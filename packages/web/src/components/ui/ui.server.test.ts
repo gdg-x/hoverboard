@@ -59,6 +59,14 @@ describe('primitives on the server', () => {
     expect(page).toMatch(/<progress\s+aria-label="Loading..."\s+max="1"\s*>/);
   });
 
+  it('render switches checked only when they are', async () => {
+    const on = await renderToString(html`<hb-switch label="Notifications" checked></hb-switch>`);
+    const off = await renderToString(html`<hb-switch label="Notifications"></hb-switch>`);
+
+    expect(on).toMatch(/<input[^>]*role="switch"[^>]*\schecked/);
+    expect(off).not.toMatch(/<input[^>]*\schecked/);
+  });
+
   it('render dialogs, menus and toasts closed', async () => {
     const page = await renderToString(html`
       <hb-dialog heading="Subscribe" open></hb-dialog>

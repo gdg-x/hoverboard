@@ -27,6 +27,7 @@ import type { UserState } from '../../store/user';
 import '../shared/auth-required';
 import '../shared/hoverboard-icon';
 import '../ui/hb-button';
+import '../ui/hb-icon-button';
 import '../ui/hb-switch';
 import type { HbSwitch } from '../ui/hb-switch';
 import { fromStore } from '../../controllers/from-store';
@@ -41,33 +42,23 @@ export class NotificationToggle extends ThemedElement {
   static override styles = css`
     :host {
       position: relative;
-    }
-
-    .notifications-trigger {
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      color: inherit;
-      padding: 0;
     }
 
     .dropdown-panel {
       display: none;
       position: absolute;
-      top: 100%;
-      right: 0;
+      inset-block-start: calc(100% + var(--hb-space-2));
+      inset-inline-end: 0;
       z-index: 2;
-      padding: 24px;
-      max-width: 300px;
-      background: var(--primary-background-color);
-      box-shadow: var(--box-shadow);
-      font-size: 16px;
-      color: var(--primary-text-color);
+      inline-size: max-content;
+      max-inline-size: min(320px, 100vw - 2 * var(--hb-space-4));
+      padding: var(--hb-space-5);
+      border: var(--hb-border-width) solid var(--hb-border-color);
+      border-radius: var(--hb-radius-m);
+      background-color: var(--hb-color-surface-bright);
+      color: var(--hb-color-on-surface);
+      box-shadow: var(--hb-shadow-card);
     }
 
     .dropdown-panel[open] {
@@ -124,16 +115,14 @@ export class NotificationToggle extends ThemedElement {
 
   override render() {
     return html`
-      <button
-        type="button"
+      <hb-icon-button
         class="notifications-trigger"
-        aria-label="${msg('Notifications', { id: 'shell.notifications.toggle' })}"
-        aria-expanded="${this.opened}"
-        aria-controls="notifications-panel"
+        label="${msg('Notifications', { id: 'shell.notifications.toggle' })}"
+        .expanded="${this.opened}"
         @click="${this.requestPermission}"
       >
         <hoverboard-icon name="${this.icon}"></hoverboard-icon>
-      </button>
+      </hb-icon-button>
 
       <div id="notifications-panel" class="dropdown-panel" ?open="${this.opened}">
         ${

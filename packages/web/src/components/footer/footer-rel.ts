@@ -1,74 +1,40 @@
-import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { footerRelBlock } from '../../config/site';
 import { ThemedElement } from '../themed-element';
-import './subscribe-form-footer';
 
+/** The link columns from `footerRelBlock`, such as past editions. */
 @customElement('footer-rel')
 export class FooterRel extends ThemedElement {
   static override styles = css`
     :host {
-      border-top: 1px solid var(--border-light-color);
-      border-bottom: 1px solid var(--border-light-color);
-      margin: 0 20px;
-      overflow: auto;
-      overflow-y: hidden;
-      padding: 10px 0;
-      color: var(--footer-text-color);
       display: grid;
-      gap: 16px;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: var(--hb-space-5);
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     }
 
     .col-heading {
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 21px;
-      margin-top: 25px;
-      margin-bottom: 10px;
-    }
-
-    .col {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      flex: 1 1 auto;
+      margin: 0 0 var(--hb-space-2);
+      font: 700 var(--hb-text-md) / 1.3 var(--hb-font-display);
     }
 
     .nav {
-      list-style: none;
+      display: grid;
+      gap: var(--hb-space-1);
       margin: 0;
       padding: 0;
+      list-style: none;
     }
 
     a {
-      color: var(--footer-text-color);
-      padding-bottom: 2px;
+      display: inline-block;
+      padding-block: var(--hb-space-1);
+      color: inherit;
       text-decoration: none;
-      pointer-events: all;
     }
 
-    li {
-      display: list-item;
-      line-height: 25px;
-      pointer-events: none;
-    }
-
-    li:hover {
+    a:hover {
       text-decoration: underline;
-    }
-
-    @media (min-width: 768px) {
-      :host {
-        margin: 15px 0;
-        padding: 30px 0;
-      }
-
-      .col-heading {
-        font-size: 18px;
-        margin-top: 0;
-      }
     }
   `;
 
@@ -77,7 +43,7 @@ export class FooterRel extends ThemedElement {
       ${footerRelBlock.map(
         (footerRel) => html`
           <div class="col">
-            <div class="col-heading">${footerRel.title}</div>
+            <h2 class="col-heading">${footerRel.title}</h2>
             <ul class="nav">
               ${footerRel.links.map(
                 (link) => html`
@@ -95,19 +61,6 @@ export class FooterRel extends ThemedElement {
           </div>
         `,
       )}
-
-      <div class="col">
-        <div class="col-heading">
-          ${msg('Subscribe', {
-            id: 'footer.rel.subscribe-heading',
-            desc: 'Heading above the newsletter sign-up form.',
-          })}
-        </div>
-        <span>
-          ${msg('No spam, only the latest news and updates!', { id: 'footer.rel.subscribe-note' })}
-        </span>
-        <subscribe-form-footer></subscribe-form-footer>
-      </div>
     `;
   }
 }

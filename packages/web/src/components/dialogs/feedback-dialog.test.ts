@@ -25,11 +25,11 @@ describe('feedback-dialog', () => {
     expect(customElements.get('feedback-dialog')).toBeDefined();
   });
 
-  it('renders the feedback headline and a closed dialog by default', async () => {
+  it('renders the feedback heading and a closed dialog by default', async () => {
     const { shadowRoot } = await fixture<FeedbackDialog>(html`<feedback-dialog></feedback-dialog>`);
 
-    expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent('Review session');
-    expect(shadowRoot.querySelector('hoverboard-dialog')).not.toHaveAttribute('open');
+    expect(shadowRoot.querySelector('hb-dialog')).toHaveAttribute('heading', 'Review session');
+    expect(shadowRoot.querySelector('hb-dialog')).not.toHaveAttribute('open');
   });
 
   it('opens the dialog and passes the session id to feedback-block', async () => {
@@ -40,27 +40,15 @@ describe('feedback-dialog', () => {
     element['session'] = session;
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('hoverboard-dialog')).toHaveAttribute('open');
+    expect(shadowRoot.querySelector('hb-dialog')).toHaveAttribute('open');
     expect(shadowRoot.querySelector('feedback-block')).toHaveProperty('sessionId', session.id);
   });
 
   it('dispatches closeDialog when the dialog is closed', async () => {
     const { shadowRoot } = await fixture<FeedbackDialog>(html`<feedback-dialog></feedback-dialog>`);
 
-    shadowRoot.querySelector('hoverboard-dialog')!.dispatchEvent(new Event('closed'));
+    shadowRoot.querySelector('hb-dialog')!.dispatchEvent(new Event('close'));
 
     expect(mockCloseDialog).toHaveBeenCalled();
-  });
-
-  it('closes the dialog when the close button is clicked', async () => {
-    const { shadowRoot } = await fixture<FeedbackDialog>(html`<feedback-dialog></feedback-dialog>`);
-    const dialog = shadowRoot.querySelector('hoverboard-dialog') as HTMLElement & {
-      close: () => void;
-    };
-    dialog.close = vi.fn();
-
-    shadowRoot.querySelector<HTMLElement>('hb-button')!.click();
-
-    expect(dialog.close).toHaveBeenCalled();
   });
 });

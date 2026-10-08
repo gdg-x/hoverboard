@@ -38,6 +38,12 @@
   --hb-content-max: 1200px;
   --hb-prose-max: 68ch;
   --hb-gutter: clamp(16px, 4vw, 40px);
+  --hb-header-height: 88px;
+
+  /* The header logo. The build sets the --hb-logo-dark-* values. */
+  --hb-logo-image: url('/images/logo.svg');
+  --hb-logo-display: block;
+  --hb-logo-name-display: none;
 }
 
 :root[data-color-scheme='light'] {
@@ -46,6 +52,17 @@
 
 :root[data-color-scheme='dark'] {
   color-scheme: dark;
+  --hb-logo-image: var(--hb-logo-dark-image);
+  --hb-logo-display: var(--hb-logo-dark-display);
+  --hb-logo-name-display: var(--hb-logo-dark-name-display);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-scheme='light']) {
+    --hb-logo-image: var(--hb-logo-dark-image);
+    --hb-logo-display: var(--hb-logo-dark-display);
+    --hb-logo-name-display: var(--hb-logo-dark-name-display);
+  }
 }
 
 :root[data-density='compact'] {
@@ -70,6 +87,15 @@
 html,
 body {
   min-height: 100%;
+}
+
+/* Focused elements and anchors are not hidden under the sticky header. */
+html {
+  scroll-padding-top: var(--hb-header-height);
+}
+
+main:focus {
+  outline: none;
 }
 
 body {

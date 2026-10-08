@@ -53,7 +53,7 @@ describe('signin-dialog', () => {
   it('renders a button for each sign-in provider', async () => {
     const { shadowRoot } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
 
-    expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent('Sign in');
+    expect(shadowRoot.querySelector('hb-dialog')).toHaveAttribute('heading', 'Sign in');
     const buttons = shadowRoot.querySelectorAll('.sign-in-button');
     expect(buttons).toHaveLength(signInProviders.providersData.length);
     expect(buttons[0]).toHaveTextContent(`Sign in with ${signInProviders.providersData[0]!.label}`);
@@ -149,7 +149,7 @@ describe('signin-dialog', () => {
   it('dispatches closeDialog when the dialog is closed', async () => {
     const { shadowRoot } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
 
-    shadowRoot.querySelector('hoverboard-dialog')!.dispatchEvent(new Event('closed'));
+    shadowRoot.querySelector('hb-dialog')!.dispatchEvent(new Event('close'));
 
     expect(mockCloseDialog).toHaveBeenCalled();
   });

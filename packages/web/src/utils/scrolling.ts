@@ -1,4 +1,5 @@
-import { HEADER_HEIGHT } from '../components/shell/header-toolbar';
+// The sticky header's height, `--hb-header-height` in base.css.
+const HEADER_HEIGHT = 88;
 
 export enum POSITION {
   TOP = 'top',

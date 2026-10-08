@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { updateNotificationsSubscribers } from '../../store/update-notifications-subscribers';
+import type { HbIconButton } from '../ui/hb-icon-button';
 import type { HbSwitch } from '../ui/hb-switch';
 import type { NotificationToggle } from './notification-toggle';
 
@@ -96,18 +97,14 @@ describe('notification-toggle', () => {
     );
     element['notificationPermission'] = new Failure(new Error('denied'));
     await element.updateComplete;
-    const trigger = shadowRoot.querySelector<HTMLElement>('.notifications-trigger')!;
+    const trigger = shadowRoot.querySelector<HbIconButton>('.notifications-trigger')!;
 
-    expect(trigger).toHaveAttribute('aria-expanded', 'false');
-    expect(trigger).toHaveAttribute(
-      'aria-controls',
-      shadowRoot.querySelector('.dropdown-panel')!.id,
-    );
+    expect(trigger.expanded).toBe(false);
 
     trigger.click();
     await element.updateComplete;
 
-    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    expect(trigger.expanded).toBe(true);
   });
 
   it('closes the panel when clicking outside', async () => {

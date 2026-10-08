@@ -1,7 +1,6 @@
 import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
 import { primitive } from '../../styles/shared';
 
 /**
@@ -107,6 +106,14 @@ export class HbSwitch extends LitElement {
   @property()
   accessor label: string | undefined;
 
+  @query('input')
+  private accessor input!: HTMLInputElement;
+
+  // A property, not a binding: Lit SSR writes `.checked` as a `checked` attribute even when false.
+  override updated() {
+    this.input.checked = this.checked;
+  }
+
   override render() {
     return html`
       <label>
@@ -115,7 +122,6 @@ export class HbSwitch extends LitElement {
           role="switch"
           aria-label="${ifDefined(this.label)}"
           ?checked="${this.checked}"
-          .checked="${live(this.checked)}"
           ?disabled="${this.disabled}"
           @change="${this.onChange}"
         />

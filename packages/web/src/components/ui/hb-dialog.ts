@@ -22,7 +22,7 @@ export class HbDialog extends LitElement {
       }
 
       dialog {
-        inline-size: min(560px, 100% - 2 * var(--hb-space-4));
+        inline-size: min(var(--hb-dialog-width, 560px), 100% - 2 * var(--hb-space-4));
         max-block-size: min(720px, 100% - 2 * var(--hb-space-4));
         padding: 0;
         border: var(--hb-border-width) solid var(--hb-border-color);
@@ -83,11 +83,26 @@ export class HbDialog extends LitElement {
           border-end-end-radius: 0;
         }
       }
+
+      :host([fullscreen]) dialog {
+        inline-size: 100%;
+        max-inline-size: 100%;
+        block-size: 100%;
+        max-block-size: 100%;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
     `,
   ];
 
   @property({ type: Boolean, reflect: true })
   accessor open = false;
+
+  /** Covers the whole screen, as the navigation sheet does. */
+  @property({ type: Boolean, reflect: true })
+  accessor fullscreen = false;
 
   @property()
   accessor heading = '';

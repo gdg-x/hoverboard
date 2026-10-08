@@ -15,11 +15,15 @@ Hoverboard has two built-in themes, `festival` (the default) and `spotlight`. Ea
 }
 ```
 
-- `colorScheme` is `system`, `light` or `dark`. With `system`, the site follows the visitor's device setting.
-- `density` is `compact`, `default` or `comfortable`. It scales the spacing.
+- `colorScheme` is `system`, `light` or `dark`. With `system`, the site follows the visitor's device setting, and visitors can pick System, Light or Dark under Appearance in the footer. Their browser remembers the choice. `light` and `dark` lock the site to one scheme and hide the footer choice.
+- `density` is `compact`, `default` or `roomy`. It scales the spacing.
 - `decorations` turns the theme's decorative shapes and illustrations on or off.
 
-The themes are in `packages/web/src/themes/`. The site components still use the colors of the old design. They move to the new themes in later releases.
+The themes are in `packages/web/src/themes/`. The header and footer use them. Other components still use the colors of the old design, and move to the new themes in later releases.
+
+## Logo
+
+The header shows `packages/web/public/images/logo.svg`, made for light backgrounds. Add `logo-dark.svg` next to it for the dark scheme. Without it, the header shows `shortName` from `site.json` as text in the dark scheme.
 
 ## Colors
 

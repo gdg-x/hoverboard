@@ -13,7 +13,7 @@ import {
   resolveConfig,
   type SiteConfig,
 } from './resolve-config';
-import { type SiteTheme, themeCss } from './theme';
+import { darkLogoCss, type SiteTheme, themeCss } from './theme';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
 const RESOLVED_SITE_MODULE = `\0${SITE_MODULE}`;
@@ -96,11 +96,14 @@ export const siteModule = (
 });
 
 /**
- * The theme tokens, and the badge and tag colors, as CSS variables on `:root`, so the first paint
- * is themed. Tag names come from session data, so their colors are site config.
+ * The theme tokens, the badge and tag colors, and the dark logo, as CSS variables on `:root`, so
+ * the first paint is themed. Tag names come from session data, so their colors are site config.
  */
 export const layoutThemeCss = ({ site, theme }: SiteConfig): string =>
-  themeCss(theme, { ...site.theme.badgeColors, ...site.theme.tagColors });
+  [
+    themeCss(theme, { ...site.theme.badgeColors, ...site.theme.tagColors }),
+    darkLogoCss(fs.existsSync(join(CONFIG_PATHS.public, 'images/logo-dark.svg'))),
+  ].join('\n');
 
 /** The Google Maps script, when the map is on and the site has a key. */
 export const mapsScriptSrc = (data: SiteConfig): string | undefined => {

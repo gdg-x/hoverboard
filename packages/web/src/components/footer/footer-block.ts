@@ -1,86 +1,140 @@
 import { msg } from '@lit/localize';
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { title } from '../../config/site';
 import { scrollToTop } from '../../utils/scrolling';
 import { ThemedElement } from '../themed-element';
+import './color-scheme-toggle';
 import './footer-nav';
 import './footer-rel';
 import './footer-social';
 import './locale-picker';
 import '../shared/hoverboard-icon';
 import '../ui/hb-icon-button';
+import '../ui/hb-sticker';
 
+const HOVERBOARD_URL = 'https://github.com/gdg-x/hoverboard';
+
+/** A full-width band with the event name, links, settings and the organizer. */
 @customElement('footer-block')
 export class FooterBlock extends ThemedElement {
   static override styles = css`
     :host {
-      margin-top: 40px;
-      position: relative;
-      color: var(--footer-text-color);
-      background: var(--footer-background-color);
-      font-size: 14px;
-      line-height: 1.5;
+      margin-block-start: var(--hb-space-8);
     }
 
-    .container {
-      margin: 0 auto;
-      padding: 20px 0;
-      position: relative;
+    footer {
+      padding: var(--hb-space-8) var(--hb-gutter) var(--hb-space-6);
+      background-color: var(--hb-footer-background);
+      color: var(--hb-footer-text);
     }
 
-    .footer-nav {
+    .inner {
+      display: grid;
+      gap: var(--hb-space-7);
+      max-inline-size: var(--hb-content-max);
+      margin-inline: auto;
+    }
+
+    .top {
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+      align-items: flex-start;
       justify-content: space-between;
-      align-items: center;
+      gap: var(--hb-space-4);
     }
 
-    .footer-social {
+    .event-name {
+      margin: 0;
+      font: 800 var(--hb-text-4xl) / 1.05 var(--hb-font-display);
+      overflow-wrap: anywhere;
+    }
+
+    .columns {
+      display: grid;
+      gap: var(--hb-space-7);
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    }
+
+    .connect {
+      display: grid;
+      align-content: start;
+      gap: var(--hb-space-4);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .settings {
       display: flex;
-      flex-direction: row;
       flex-wrap: wrap;
-      flex: 1 1 auto;
+      align-items: center;
+      gap: var(--hb-space-4) var(--hb-space-6);
+      padding-block-start: var(--hb-space-5);
+      border-block-start: 1px solid currentColor;
     }
 
-    .fab hb-icon-button {
-      pointer-events: all;
-    }
-
-    .fab {
-      position: absolute;
-      right: 25px;
-      top: -25px;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    @media (min-width: 640px) {
-      .container {
-        padding: 15px 36px;
-      }
+    .fork-me {
+      justify-self: start;
+      text-decoration: none;
     }
   `;
 
   override render() {
     return html`
-      <div class="container">
-        <div class="fab">
-          <hb-icon-button
-            class="back-to-top"
-            variant="tonal"
-            size="l"
-            label="${msg('Back to top', { id: 'footer.block.back-to-top' })}"
-            @click="${scrollToTop}"
-          >
-            <hoverboard-icon name="up"></hoverboard-icon>
-          </hb-icon-button>
+      <footer>
+        <div class="inner">
+          <div class="top">
+            <p class="event-name">${title}</p>
+            <hb-icon-button
+              class="back-to-top"
+              variant="tonal"
+              label="${msg('Back to top', { id: 'footer.block.back-to-top' })}"
+              @click="${scrollToTop}"
+            >
+              <hoverboard-icon name="up"></hoverboard-icon>
+            </hb-icon-button>
+          </div>
+
+          <div class="columns">
+            <footer-rel></footer-rel>
+            <div class="connect">
+              <footer-social></footer-social>
+              ${
+                __HB_FEATURES__.subscribe
+                  ? html`<a class="subscribe" href="/#subscribe">
+                      ${msg('Get updates by email', { id: 'footer.block.subscribe' })}
+                    </a>`
+                  : nothing
+              }
+            </div>
+          </div>
+
+          <div class="settings">
+            <locale-picker></locale-picker>
+            <color-scheme-toggle></color-scheme-toggle>
+          </div>
+
+          <footer-nav></footer-nav>
+
+          ${
+            __HB_FEATURES__.forkMe
+              ? html`<a
+                  class="fork-me"
+                  href="${HOVERBOARD_URL}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <hb-sticker tilt="-4"
+                    >${msg('Fork me on GitHub', { id: 'footer.block.fork-me' })}</hb-sticker
+                  >
+                </a>`
+              : nothing
+          }
         </div>
-        <footer-social class="footer-social"></footer-social>
-        <footer-rel></footer-rel>
-        <footer-nav class="footer-nav"></footer-nav>
-        <locale-picker></locale-picker>
-      </div>
+      </footer>
     `;
   }
 }

@@ -90,7 +90,7 @@ describe('a production build of a minimal site', () => {
     );
     expect(home).toMatch(/<home-page[^>]*><template shadowroot="open" shadowrootmode="open">/);
     expect(home).toContain('A minimal site');
-    expect(home).toMatch(/<header-toolbar[^>]*><template shadowroot="open" shadowrootmode="open">/);
+    expect(home).toMatch(/<app-header[^>]*><template shadowroot="open" shadowrootmode="open">/);
   });
 
   it('writes the service workers and the manifest', () => {
