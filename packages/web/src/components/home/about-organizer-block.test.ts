@@ -21,7 +21,7 @@ describe('about-organizer-block', () => {
     expect(screen.getByTestId('block')).toBeInTheDocument();
     expect(getByText(firstBlock.title)).toBeInTheDocument();
     expect(getByText(firstBlock.callToAction.label)).toBeInTheDocument();
-    expect(shadowRootForWithin.querySelector('img')).toBeInTheDocument();
+    expect(within(shadowRootForWithin).getByAltText('Organizer')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('a.image-link')).toHaveAttribute('href', '/team');
   });
 

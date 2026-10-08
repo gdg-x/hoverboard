@@ -128,7 +128,7 @@ export class GalleryBlock extends ThemedElement {
   override render() {
     return html`
       <div class="photos-grid">
-        ${this.pending ? html`<p>Loading...</p>` : ''}
+        ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : ''}
         ${
           this.failure
             ? html`<p>${msg('Error loading gallery.', { id: 'home.gallery-block.error' })}</p>`
@@ -141,7 +141,7 @@ export class GalleryBlock extends ThemedElement {
               decoding="async"
               class="grid-item"
               src="${photo.url}"
-              alt="gallery photo"
+              alt="${msg('Gallery photo', { id: 'home.gallery-block.photo-alt' })}"
             />`,
         )}
         ${

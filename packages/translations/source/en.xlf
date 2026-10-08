@@ -95,8 +95,8 @@
 <trans-unit id="home.about-block.title">
   <source>About</source>
 </trans-unit>
-<trans-unit id="common.loading">
-  <source>Loading...</source>
+<trans-unit id="home.about-organizer-block.photo-alt">
+  <source>Organizer</source>
 </trans-unit>
 <trans-unit id="home.featured-videos.error">
   <source>Error loading videos.</source>
@@ -113,8 +113,14 @@
 <trans-unit id="home.fork-me-block.cta">
   <source>Fork this project</source>
 </trans-unit>
+<trans-unit id="common.loading">
+  <source>Loading...</source>
+</trans-unit>
 <trans-unit id="home.gallery-block.error">
   <source>Error loading gallery.</source>
+</trans-unit>
+<trans-unit id="home.gallery-block.photo-alt">
+  <source>Gallery photo</source>
 </trans-unit>
 <trans-unit id="home.gallery-block.cta">
   <source>See all photos</source>
@@ -179,6 +185,9 @@
 <trans-unit id="home.tickets-block.error">
   <source>Error loading tickets</source>
 </trans-unit>
+<trans-unit id="markdown.remote-markdown.error">
+  <source>Error loading content</source>
+</trans-unit>
 <trans-unit id="common.save-sessions-signed-out">
   <source>Sign in to save sessions</source>
 </trans-unit>
@@ -217,6 +226,21 @@
 </trans-unit>
 <trans-unit id="shared.previous-speakers-block.view-all">
   <source>View all</source>
+</trans-unit>
+<trans-unit id="shared.star-rating.rate">
+  <source>Rate <x id="0" equiv-text="${value}"/> out of <x id="1" equiv-text="${this.maxRating}"/></source>
+</trans-unit>
+<trans-unit id="shared.star-rating.label">
+  <source><x id="0" equiv-text="${this.rating}"/> out of <x id="1" equiv-text="${this.maxRating}"/> stars</source>
+</trans-unit>
+<trans-unit id="shared.star-rating.votes.none">
+  <source>(No votes)</source>
+</trans-unit>
+<trans-unit id="shared.star-rating.votes.one">
+  <source>(<x id="0" equiv-text="${votes}"/> vote)</source>
+</trans-unit>
+<trans-unit id="shared.star-rating.votes.other">
+  <source>(<x id="0" equiv-text="${votes}"/> votes)</source>
 </trans-unit>
 <trans-unit id="shell.app-install.cta">
   <source>Add to Home Screen</source>
@@ -466,6 +490,10 @@
 <trans-unit id="shell.notifications.blocked-help">
   <source>Enable</source>
   <note from="lit-localize">Opens help on allowing notifications in the browser.</note>
+</trans-unit>
+<trans-unit id="shared.share.twitter-text">
+  <source>Check out <x id="0" equiv-text="${title}"/> at #<x id="1" equiv-text="${hashtag}"/>: <x id="2" equiv-text="${shareUrl}"/></source>
+  <note from="lit-localize">Post text. Followed by a page title, the event hashtag and a link.</note>
 </trans-unit>
 <trans-unit id="dialogs.feedback.save">
   <source>Save</source>
