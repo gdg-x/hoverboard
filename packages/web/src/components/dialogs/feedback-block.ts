@@ -1,4 +1,5 @@
 import { type RemoteData, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
 import '@material/web/textfield/outlined-text-field.js';
@@ -16,7 +17,6 @@ import {
 } from '../../store/feedback';
 import { queueComplexSnackbar, queueSnackbar } from '../../store/snackbars';
 import type { UserState } from '../../store/user';
-import { feedback as feedbackText } from '../../config/site';
 import '../shared/star-rating';
 import { type StarRatingChangeDetail } from '../shared/star-rating';
 import { ThemedElement } from '../themed-element';
@@ -72,8 +72,6 @@ export class FeedbackBlock extends ThemedElement {
   @fromStore((state, host: FeedbackBlock) => selectFeedbackById(state, host.sessionId))
   private accessor feedback!: RemoteData<Error, Feedback | false>;
 
-  private feedbackText = feedbackText;
-
   override willUpdate(changedProperties: PropertyValues) {
     if (changedProperties.has('feedback')) {
       this.onFeedback(this.feedback);
@@ -84,7 +82,9 @@ export class FeedbackBlock extends ThemedElement {
     return html`
       <div class="container">
         <div>
-          <div class="caption">${this.feedbackText.contentCaption}:</div>
+          <div class="caption">
+            ${msg('Content quality:', { id: 'dialogs.feedback.content-rating' })}
+          </div>
           <star-rating
             .rating="${this.contentRating}"
             @rating-changed="${(event: CustomEvent<StarRatingChangeDetail>) =>
@@ -92,7 +92,9 @@ export class FeedbackBlock extends ThemedElement {
           ></star-rating>
         </div>
         <div>
-          <div class="caption">${this.feedbackText.styleCaption}:</div>
+          <div class="caption">
+            ${msg('Presentation style:', { id: 'dialogs.feedback.style-rating' })}
+          </div>
           <star-rating
             .rating="${this.styleRating}"
             @rating-changed="${(event: CustomEvent<StarRatingChangeDetail>) =>
@@ -104,25 +106,29 @@ export class FeedbackBlock extends ThemedElement {
           id="commentInput"
           type="textarea"
           ?hidden="${!this.hasRated}"
-          label="Comment"
+          label="${msg('Comment', { id: 'dialogs.feedback.comment' })}"
           .value="${this.comment}"
           maxlength="256"
           @input="${(event: Event) => this.onCommentInput(event)}"
         ></md-outlined-text-field>
-        <p ?hidden="${!this.hasRated}" class="helper">${this.feedbackText.helperText}</p>
+        <p ?hidden="${!this.hasRated}" class="helper">
+          ${msg('Comments will be anonymously provided to speakers', {
+            id: 'dialogs.feedback.helper',
+          })}
+        </p>
         <md-filled-button
           class="primary"
           ?hidden="${!this.hasRated}"
           @click="${() => this.setFeedback()}"
         >
-          ${this.feedbackText.save}
+          ${msg('Save', { id: 'dialogs.feedback.save', desc: 'Saves the session review.' })}
         </md-filled-button>
         <md-outlined-button
           class="delete-button"
           ?hidden="${!this.hasSavedFeedback}"
           @click="${() => this.deleteFeedback()}"
         >
-          ${this.feedbackText.deleteFeedback}
+          ${msg('Delete', { id: 'dialogs.feedback.delete', desc: 'Deletes the session review.' })}
         </md-outlined-button>
       </div>
     `;
@@ -148,7 +154,9 @@ export class FeedbackBlock extends ThemedElement {
 
   private async setFeedback() {
     if (!(this.user instanceof Success)) {
-      store.dispatch(queueSnackbar(feedbackText.sendFeedbackSignedOut));
+      store.dispatch(
+        queueSnackbar(msg('Sign in to leave feedback', { id: 'dialogs.feedback.save-signed-out' })),
+      );
       return;
     }
     if (!this.sessionId) {
@@ -167,13 +175,13 @@ export class FeedbackBlock extends ThemedElement {
     );
 
     if (setFeedback.fulfilled.match(resultAction)) {
-      store.dispatch(queueSnackbar(feedbackText.feedbackRecorded));
+      store.dispatch(queueSnackbar(msg('Feedback saved', { id: 'dialogs.feedback.saved' })));
     } else {
       store.dispatch(
         queueComplexSnackbar({
-          label: feedbackText.somethingWentWrong,
+          label: this.errorMessage(),
           action: {
-            title: 'Retry',
+            title: this.retryLabel(),
             callback: () => this.setFeedback(),
           },
         }),
@@ -183,7 +191,11 @@ export class FeedbackBlock extends ThemedElement {
 
   private async deleteFeedback() {
     if (!(this.user instanceof Success)) {
-      store.dispatch(queueSnackbar(feedbackText.removeFeedbackSignedOut));
+      store.dispatch(
+        queueSnackbar(
+          msg('Sign in to delete feedback', { id: 'dialogs.feedback.delete-signed-out' }),
+        ),
+      );
       return;
     }
     if (!this.sessionId) {
@@ -199,18 +211,26 @@ export class FeedbackBlock extends ThemedElement {
     );
 
     if (deleteFeedback.fulfilled.match(resultAction)) {
-      store.dispatch(queueSnackbar(feedbackText.feedbackDeleted));
+      store.dispatch(queueSnackbar(msg('Feedback deleted', { id: 'dialogs.feedback.deleted' })));
     } else {
       store.dispatch(
         queueComplexSnackbar({
-          label: feedbackText.somethingWentWrong,
+          label: this.errorMessage(),
           action: {
-            title: 'Retry',
+            title: this.retryLabel(),
             callback: () => this.deleteFeedback(),
           },
         }),
       );
     }
+  }
+
+  private errorMessage() {
+    return msg('Something went wrong', { id: 'dialogs.feedback.error' });
+  }
+
+  private retryLabel() {
+    return msg('Retry', { id: 'dialogs.feedback.retry' });
   }
 
   private onFeedback(feedback: SessionFeedback) {

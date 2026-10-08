@@ -31,10 +31,8 @@ describe('subscribe-block', () => {
   it('renders the call to action', async () => {
     const { shadowRoot } = await fixture<SubscribeBlock>(html`<subscribe-block></subscribe-block>`);
 
-    expect(shadowRoot).toHaveTextContent(subscribeBlock.callToAction.description);
-    expect(shadowRoot.querySelector('.cta-label')).toHaveTextContent(
-      subscribeBlock.callToAction.label,
-    );
+    expect(shadowRoot).toHaveTextContent('Get notified about the important conference updates');
+    expect(shadowRoot.querySelector('.cta-label')).toHaveTextContent('Subscribe');
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute(
       'name',
       'arrow-right-circle',
@@ -51,7 +49,7 @@ describe('subscribe-block', () => {
     element.subscribed = new Success(true);
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('.cta-label')).toHaveTextContent(subscribeBlock.subscribed);
+    expect(shadowRoot.querySelector('.cta-label')).toHaveTextContent('Subscribed');
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'checked');
     expect(shadowRoot.querySelector('md-text-button')).toHaveAttribute('disabled');
   });

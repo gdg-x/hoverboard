@@ -1,6 +1,5 @@
 {
   "buyTicket": "Buy ticket",
-  "signIn": "Sign in",
   "viewHighlights": "View Highlights",
   "faq": "/data/faq.md",
   "coc": "/data/coc.md",
@@ -73,37 +72,14 @@
     "title": "Location"
   },
   "subscribeBlock": {
-    "callToAction": {
-      "description": "Get notified about the important conference updates",
-      "label": "Subscribe"
-    },
-    "emailAddress": "Email Address",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "emailRequired": "Please enter a valid email address.",
-    "fieldRequired": "Field required.",
-    "subscribe": "Subscribe",
-    "subscribed": "Subscribed",
-    "close": "Close",
-    "generalError": "An error has occurred. Please, try again later.",
     "toast": "Successfully subscribed!"
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
   },
   "feedback": {
-    "save": "Save",
     "headline": "Review session",
     "leaveFeedback": "to leave feedback",
-    "sendFeedbackSignedOut": "Sign in to leave feedback",
-    "removeFeedbackSignedOut": "Sign in to delete feedback",
-    "feedbackRecorded": "Feedback saved",
-    "feedbackDeleted": "Feedback deleted",
-    "helperText": "Comments will be anonymously provided to speakers",
-    "somethingWentWrong": "Something went wrong",
-    "contentCaption": "Content quality",
-    "styleCaption": "Presentation style",
-    "deleteFeedback": "Delete",
     "sessionClosed": "Session reviews are not open"
   },
   "sessionDetails": {
@@ -128,14 +104,6 @@
     "generalDisabled": "General notifications disabled",
     "toast": {
       "title": "Open"
-    }
-  },
-  "signInDialog": {
-    "alreadyHaveAccount": "You already have an account",
-    "alreadyUsed": "You've already used",
-    "signInToContinue": {
-      "part1": "Sign in with",
-      "part2": "to continue."
     }
   },
   "filters": {

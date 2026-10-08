@@ -1,4 +1,5 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
 import '@material/web/textfield/outlined-text-field.js';
@@ -117,9 +118,9 @@ export class SubscribeDialog extends ThemedElement {
       if (value !== previous && value instanceof Success && value.data.name === DIALOG.SUBSCRIBE) {
         const data = value.data.data;
         this.title = data.title || this.subscribeBlock.formTitle;
-        this.submitLabel = data.submitLabel || this.subscribeBlock.subscribe;
-        this.firstFieldLabel = data.firstFieldLabel || this.subscribeBlock.firstName;
-        this.secondFieldLabel = data.secondFieldLabel || this.subscribeBlock.lastName;
+        this.submitLabel = data.submitLabel ?? '';
+        this.firstFieldLabel = data.firstFieldLabel ?? '';
+        this.secondFieldLabel = data.secondFieldLabel ?? '';
         this.prefillFields(data);
       }
     },
@@ -138,44 +139,54 @@ export class SubscribeDialog extends ThemedElement {
   }
 
   override render() {
+    const firstFieldLabel =
+      this.firstFieldLabel || msg('First Name', { id: 'dialogs.subscribe.first-name' });
+    const secondFieldLabel =
+      this.secondFieldLabel || msg('Last Name', { id: 'dialogs.subscribe.last-name' });
+    const emailLabel = msg('Email Address', { id: 'dialogs.subscribe.email' });
+    const fieldRequired = msg('Field required.', { id: 'dialogs.subscribe.field-required' });
     return html`
       <hoverboard-dialog id="dialog" ?open="${this.open}">
         <div slot="headline">${this.title}</div>
         <div slot="content">
           ${
             this.errorOccurred
-              ? html`<div class="general-error">${this.subscribeBlock.generalError}</div>`
+              ? html`<div class="general-error">
+                  ${msg('An error has occurred. Please, try again later.', {
+                    id: 'common.general-error',
+                  })}
+                </div>`
               : ''
           }
           <md-outlined-text-field
             id="firstFieldInput"
-            label="${this.firstFieldLabel} *"
+            label="${firstFieldLabel} *"
             .value="${this.firstFieldValue}"
             required
             ?error="${this.firstFieldInvalid}"
-            error-text="${this.subscribeBlock.fieldRequired}"
+            error-text="${fieldRequired}"
             autocomplete="off"
             @input="${this.onFirstFieldChanged}"
           >
           </md-outlined-text-field>
           <md-outlined-text-field
             id="secondFieldInput"
-            label="${this.secondFieldLabel} *"
+            label="${secondFieldLabel} *"
             .value="${this.secondFieldValue}"
             required
             ?error="${this.secondFieldInvalid}"
-            error-text="${this.subscribeBlock.fieldRequired}"
+            error-text="${fieldRequired}"
             autocomplete="off"
             @input="${this.onSecondFieldChanged}"
           >
           </md-outlined-text-field>
           <md-outlined-text-field
             id="emailInput"
-            label="${this.subscribeBlock.emailAddress} *"
+            label="${emailLabel} *"
             .value="${this.email}"
             required
             ?error="${this.emailInvalid}"
-            error-text="${this.subscribeBlock.emailRequired}"
+            error-text="${msg('Please enter a valid email address.', { id: 'common.email-invalid' })}"
             autocomplete="off"
             @input="${this.onEmailChanged}"
           >
@@ -183,10 +194,16 @@ export class SubscribeDialog extends ThemedElement {
         </div>
 
         <md-filled-button slot="actions" @click="${this.subscribe}">
-          ${this.submitLabel}
+          ${
+            this.submitLabel ||
+            msg('Subscribe', {
+              id: 'common.subscribe',
+              desc: 'Button that submits a subscription.',
+            })
+          }
         </md-filled-button>
         <md-outlined-button slot="actions" @click="${this.close}">
-          ${this.subscribeBlock.close}
+          ${msg('Close', { id: 'common.close' })}
         </md-outlined-button>
       </hoverboard-dialog>
     `;

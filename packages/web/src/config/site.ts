@@ -27,8 +27,6 @@ export const {
   previousSpeakersBlock,
   schedule,
   sessionDetails,
-  signIn,
-  signInDialog,
   speakerDetails,
   speakers,
   speakersBlock,
@@ -69,7 +67,7 @@ export const signInProviders = {
   // The build validates the names against site.schema.json.
   providersData: (settings.auth.providers as Provider[]).map((name) => ({
     name,
-    label: `Sign in with ${PROVIDERS[name].label}`,
+    label: PROVIDERS[name].label,
     url: PROVIDERS[name].url,
   })),
   allowedProvidersUrl: Object.values(PROVIDERS).map(({ url }) => url),

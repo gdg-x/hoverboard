@@ -22,16 +22,29 @@ describe('subscribe-dialog', () => {
       html`<subscribe-dialog></subscribe-dialog>`,
     );
     element['title'] = subscribeBlock.formTitle;
-    element['submitLabel'] = subscribeBlock.subscribe;
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent(
       subscribeBlock.formTitle,
     );
-    expect(shadowRoot.querySelectorAll('md-outlined-text-field')).toHaveLength(3);
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent(
-      subscribeBlock.subscribe,
+    const fields = shadowRoot.querySelectorAll('md-outlined-text-field');
+    expect(fields).toHaveLength(3);
+    expect(fields[0]).toHaveAttribute('label', 'First Name *');
+    expect(fields[1]).toHaveAttribute('label', 'Last Name *');
+    expect(fields[2]).toHaveAttribute('label', 'Email Address *');
+    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Subscribe');
+  });
+
+  it('uses the labels the opener passes', async () => {
+    const { element, shadowRoot } = await fixture<SubscribeDialog>(
+      html`<subscribe-dialog></subscribe-dialog>`,
     );
+    element['submitLabel'] = 'Submit';
+    element['firstFieldLabel'] = 'Full Name';
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('#firstFieldInput')).toHaveAttribute('label', 'Full Name *');
+    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Submit');
   });
 
   it('shows the general error message when subscribing fails', async () => {
@@ -42,7 +55,7 @@ describe('subscribe-dialog', () => {
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('.general-error')).toHaveTextContent(
-      subscribeBlock.generalError,
+      'An error has occurred. Please, try again later.',
     );
   });
 

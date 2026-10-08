@@ -47,14 +47,14 @@ describe('resolveConfig', () => {
     expect(site.url).toMatch(/^https:\/\//);
     expect(site.navigation.length).toBeGreaterThan(0);
     expect(resources.title).toBeTruthy();
-    expect(resources.signIn).toBeTruthy();
+    expect(resources.loading).toBeTruthy();
   });
 
   it('reads the defaults, then the site config over them, in separate namespaces', () => {
     const { site, resources } = resolveConfig({
       paths: makePaths({
         site: { heroSettings: { blog: { title: 'News' } }, navigation: [] },
-        resources: { signIn: 'Log in' },
+        resources: { loading: 'Please wait' },
       }),
       nodeEnv: 'production',
     });
@@ -64,7 +64,7 @@ describe('resolveConfig', () => {
       metaDescription: 'Read stories from our team',
     });
     expect(site.navigation).toEqual([]);
-    expect(resources.signIn).toBe('Log in');
+    expect(resources.loading).toBe('Please wait');
     expect(site).not.toHaveProperty('title');
   });
 

@@ -3,7 +3,6 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Session } from '../../models/session';
 import { closeDialog } from '../../store/dialogs';
-import { feedback } from '../../config/site';
 import type { FeedbackDialog } from './feedback-dialog';
 import './feedback-dialog';
 
@@ -29,7 +28,7 @@ describe('feedback-dialog', () => {
   it('renders the feedback headline and a closed dialog by default', async () => {
     const { shadowRoot } = await fixture<FeedbackDialog>(html`<feedback-dialog></feedback-dialog>`);
 
-    expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent(feedback.headline);
+    expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent('Review session');
     expect(shadowRoot.querySelector('hoverboard-dialog')).not.toHaveAttribute('open');
   });
 

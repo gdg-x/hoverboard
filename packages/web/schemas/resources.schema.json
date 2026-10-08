@@ -28,9 +28,6 @@
     "buyTicket": {
       "type": "string"
     },
-    "signIn": {
-      "type": "string"
-    },
     "viewHighlights": {
       "type": "string"
     },
@@ -276,45 +273,6 @@
       "additionalProperties": false,
       "required": ["formTitle"],
       "properties": {
-        "callToAction": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "description": {
-              "type": "string"
-            },
-            "label": {
-              "type": "string"
-            }
-          }
-        },
-        "emailAddress": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "emailRequired": {
-          "type": "string"
-        },
-        "fieldRequired": {
-          "type": "string"
-        },
-        "subscribe": {
-          "type": "string"
-        },
-        "subscribed": {
-          "type": "string"
-        },
-        "close": {
-          "type": "string"
-        },
-        "generalError": {
-          "type": "string"
-        },
         "toast": {
           "type": "string"
         },
@@ -336,40 +294,10 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "save": {
-          "type": "string"
-        },
         "headline": {
           "type": "string"
         },
         "leaveFeedback": {
-          "type": "string"
-        },
-        "sendFeedbackSignedOut": {
-          "type": "string"
-        },
-        "removeFeedbackSignedOut": {
-          "type": "string"
-        },
-        "feedbackRecorded": {
-          "type": "string"
-        },
-        "feedbackDeleted": {
-          "type": "string"
-        },
-        "helperText": {
-          "type": "string"
-        },
-        "somethingWentWrong": {
-          "type": "string"
-        },
-        "contentCaption": {
-          "type": "string"
-        },
-        "styleCaption": {
-          "type": "string"
-        },
-        "deleteFeedback": {
           "type": "string"
         },
         "sessionClosed": {
@@ -443,30 +371,6 @@
           "additionalProperties": false,
           "properties": {
             "title": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "signInDialog": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "alreadyHaveAccount": {
-          "type": "string"
-        },
-        "alreadyUsed": {
-          "type": "string"
-        },
-        "signInToContinue": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "part1": {
-              "type": "string"
-            },
-            "part2": {
               "type": "string"
             }
           }

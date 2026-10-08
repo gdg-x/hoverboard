@@ -5,7 +5,6 @@ import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setStoreState } from '../../../__tests__/helpers/store';
 import type { Feedback } from '../../models/feedback';
 import type { RootState } from '../../store';
-import { feedback as feedbackText } from '../../config/site';
 import type { FeedbackBlock } from './feedback-block';
 
 import './feedback-block';
@@ -32,8 +31,8 @@ describe('feedback-block', () => {
     const { shadowRoot } = await fixture<FeedbackBlock>(html`<feedback-block></feedback-block>`);
 
     const captions = shadowRoot.querySelectorAll('.caption');
-    expect(captions[0]).toHaveTextContent(feedbackText.contentCaption);
-    expect(captions[1]).toHaveTextContent(feedbackText.styleCaption);
+    expect(captions[0]).toHaveTextContent('Content quality:');
+    expect(captions[1]).toHaveTextContent('Presentation style:');
     expect(shadowRoot.querySelectorAll('star-rating')).toHaveLength(2);
   });
 
@@ -50,7 +49,9 @@ describe('feedback-block', () => {
 
     expect(shadowRoot.querySelector('md-outlined-text-field')).not.toHaveAttribute('hidden');
     expect(shadowRoot.querySelector('md-filled-button')).not.toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('.helper')).toHaveTextContent(feedbackText.helperText);
+    expect(shadowRoot.querySelector('.helper')).toHaveTextContent(
+      'Comments will be anonymously provided to speakers',
+    );
   });
 
   it('updates the rating when star-rating notifies a change', async () => {
@@ -93,8 +94,6 @@ describe('feedback-block', () => {
     const { shadowRoot } = await fixture<FeedbackBlock>(html`<feedback-block></feedback-block>`);
 
     expect(shadowRoot.querySelector('.delete-button')).toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('.delete-button')).toHaveTextContent(
-      feedbackText.deleteFeedback,
-    );
+    expect(shadowRoot.querySelector('.delete-button')).toHaveTextContent('Delete');
   });
 });

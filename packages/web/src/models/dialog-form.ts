@@ -5,11 +5,14 @@ export interface DialogData {
 }
 
 export interface DialogForm {
-  firstFieldLabel: string;
+  /** Defaults to "First Name". */
+  firstFieldLabel?: string;
   firstFieldValue?: string;
-  secondFieldLabel: string;
+  /** Defaults to "Last Name". */
+  secondFieldLabel?: string;
   secondFieldValue?: string;
-  submitLabel: string;
+  /** Defaults to "Subscribe". */
+  submitLabel?: string;
   title: string;
   submit: (data: DialogData) => void;
 }
