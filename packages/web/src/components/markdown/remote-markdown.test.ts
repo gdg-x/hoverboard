@@ -5,12 +5,6 @@ import { html, render, type TemplateResult } from 'lit';
 import type { RemoteMarkDown } from './remote-markdown';
 import './remote-markdown';
 
-// toc-markdown.ts imports scrolling.ts, which imports header-toolbar.ts
-// (for HEADER_HEIGHT) which imports the router and its routes.
-vi.mock('../../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
-
 const fetchMock = vi.fn<typeof fetch>();
 Object.defineProperty(globalThis, 'fetch', {
   configurable: true,

@@ -4,18 +4,19 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import type { SpeakerWithTags } from '../models/speaker';
-import { router } from '../router';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { updateImageMetadata } from '../utils/metadata';
+import { goto } from '../utils/navigation';
 import './speaker-page';
 import { SpeakerPage } from './speaker-page';
 
 vi.mock('../utils/metadata');
+vi.mock('../utils/navigation', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../utils/navigation')>()),
+  goto: vi.fn(),
+}));
 vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
-}));
-vi.mock('../router', () => ({
-  router: { urlForName: vi.fn(), goto: vi.fn() },
 }));
 vi.mock('../store/speakers/selectors', () => ({
   selectSpeaker: vi.fn(),
@@ -77,7 +78,7 @@ describe('speaker-page', () => {
   it('redirects to 404 when the speaker cannot be found', async () => {
     const mockSelectSpeaker = selectSpeaker as MockedFunction<typeof selectSpeaker>;
     mockSelectSpeaker.mockReturnValue(undefined);
-    vi.mocked(router).goto.mockClear();
+    vi.mocked(goto).mockClear();
 
     const { element } = await fixture<SpeakerPage>(html`<speaker-page></speaker-page>`);
     element.speakers = new Success([speaker]);
@@ -85,7 +86,7 @@ describe('speaker-page', () => {
     await element.updateComplete;
     await element.updateComplete;
 
-    expect(router.goto).toHaveBeenCalledWith('/404');
+    expect(goto).toHaveBeenCalledWith('/404');
   });
 
   it('renders an empty additional-sessions section when no sessions are supplied', async () => {

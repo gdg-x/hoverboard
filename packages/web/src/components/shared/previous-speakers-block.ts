@@ -1,11 +1,11 @@
 import '@material/web/button/text-button.js';
-import { Failure, Pending } from '@abraham/remotedata';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
-import { router } from '../../router';
-import { selectRandomPreviousSpeakers } from '../../store/previous-speakers/selectors';
+import { randomOrder } from '../../utils/arrays';
+import { previousSpeakerPath } from '../../utils/navigation';
 import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
@@ -62,13 +62,30 @@ export class PreviousSpeakersBlock extends ThemedElement {
         --lazy-image-height: 96px;
       }
     }
+
+    @media (max-width: 639px) {
+      .speaker:nth-of-type(n + 9) {
+        display: none;
+      }
+    }
   `;
 
   @fromStore((state) => selectPreviousSpeakersState(state))
   accessor previousSpeakers!: PreviousSpeakersState;
 
-  @fromStore((state) => selectRandomPreviousSpeakers(state))
-  accessor speakers!: PreviousSpeaker[];
+  // The first render follows the stored order, as on the server, so hydration matches.
+  @state()
+  private accessor shuffled = false;
+
+  override firstUpdated() {
+    this.shuffled = true;
+  }
+
+  private get speakers(): PreviousSpeaker[] {
+    if (!(this.previousSpeakers instanceof Success)) return [];
+    const { data } = this.previousSpeakers;
+    return (this.shuffled ? randomOrder(data) : data).slice(0, 14);
+  }
 
   override render() {
     return html`
@@ -122,7 +139,7 @@ export class PreviousSpeakersBlock extends ThemedElement {
   }
 
   private previousSpeakerUrl(id: string) {
-    return router.urlForName('previous-speaker-page', { id });
+    return previousSpeakerPath(id);
   }
 }
 

@@ -1,7 +1,7 @@
 import { Pending, Success } from '@abraham/remotedata';
 import { css, html, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { RouteLocation } from '../../router';
+import type { RouteLocation } from '../../utils/navigation';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { contentLoaders } from '../../config/site';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';

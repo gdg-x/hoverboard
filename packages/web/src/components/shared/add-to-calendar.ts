@@ -7,7 +7,7 @@ import { css, html, nothing } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import type { Session } from '../../models/session';
 import { url } from '../../config/site';
-import { router } from '../../router';
+import { sessionPath } from '../../utils/navigation';
 import {
   type CalendarEvent,
   downloadIcs,
@@ -42,7 +42,7 @@ export class AddToCalendar extends ThemedElement {
 
   private get event() {
     if (!this.session) return undefined;
-    const path = router.urlForName('session-page', { id: this.session.id });
+    const path = sessionPath(this.session.id);
     return sessionToCalendarEvent(this.session, new URL(path.slice(1), url).href);
   }
 

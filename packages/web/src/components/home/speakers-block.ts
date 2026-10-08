@@ -6,7 +6,7 @@ import { customElement, state } from 'lit/decorators.js';
 import '../shared/hoverboard-icon';
 import '../shared/text-truncate';
 import type { Speaker } from '../../models/speaker';
-import { router } from '../../router';
+import { speakerPath } from '../../utils/navigation';
 import { type SpeakersState, selectSpeakersState } from '../../store/speakers';
 import { randomOrder } from '../../utils/arrays';
 import { fromStore } from '../../controllers/from-store';
@@ -267,7 +267,7 @@ export class SpeakersBlock extends ThemedElement {
   }
 
   private speakerUrl(id: string) {
-    return router.urlForName('speaker-page', { id });
+    return speakerPath(id);
   }
 }
 

@@ -9,7 +9,7 @@ import type { Filter } from '../../models/filter';
 import type { Session } from '../../models/session';
 import type { GeneratedSessionBlock, Time } from '../../models/time';
 import type { Timeslot } from '../../models/timeslot';
-import type { RouteLocation } from '../../router';
+import type { RouteLocation } from '../../utils/navigation';
 import {
   type FeaturedSessionsState,
   selectFeaturedSessionsState,

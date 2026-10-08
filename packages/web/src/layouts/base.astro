@@ -3,7 +3,11 @@ import { ClientRouter } from 'astro:transitions';
 import { mapsScript, theme, themeCss } from 'virtual:hoverboard/layout';
 import { resources, site } from 'virtual:hoverboard/site';
 import { FooterBlock } from '../components/footer/footer-block';
+import { AppHeader } from '../components/shell/app-header';
+import { AppOverlays } from '../components/shell/app-overlays';
+import { loadContent } from '../data/content';
 import '../data/markdown';
+import { seedPage } from '../data/page';
 import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
 
 interface Props {
@@ -18,8 +22,10 @@ const {
   title = resources.title,
   description = resources.description,
   image = site.image,
-  content = {},
+  content: pageContent = {},
 } = Astro.props;
+// The header links to tickets on every page. The page's own content has already rendered.
+const content = seedPage({ ...pageContent, tickets: (await loadContent()).tickets ?? [] });
 // The build sees file paths such as /index.html. Hosting serves them without `.html`.
 const path = Astro.url.pathname.replace(/(index)?\.html$/, '').slice(1);
 const url = new URL(path, site.url).href;
@@ -132,14 +138,9 @@ const demoFirebaseConfig = {
       set:html={serializeContent(content)}
     />
     <script>
-      // Must load before any component, or hydration renders components a second time.
-      import '@awesome.me/astro-lit/dsd-polyfill.js';
-      import '@awesome.me/astro-lit/hydration-support.js';
-      import { islandsHydrated } from '../utils/islands';
-      import { startLocalization } from '../utils/localization';
+      import { startApp } from '../app';
 
-      // Pages render in the source locale. Switching earlier would leave stale text in hydrated HTML.
-      void islandsHydrated().then(startLocalization);
+      void startApp();
     </script>
     <ClientRouter />
 
@@ -169,10 +170,17 @@ const demoFirebaseConfig = {
   </head>
 
   <body>
+    <AppHeader
+      path={`/${path}`}
+      client:load
+      transition:persist="header"
+      transition:persist-props
+    />
     <main>
       <slot />
     </main>
     <FooterBlock client:load transition:persist="footer" />
+    <AppOverlays client:load transition:persist="overlays" />
 
     <noscript>Please enable JavaScript to view this website.</noscript>
   </body>

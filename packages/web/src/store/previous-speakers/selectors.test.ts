@@ -1,11 +1,8 @@
 import { Success } from '@abraham/remotedata';
-import { describe, expect, it, vi } from 'vitest';
-import { selectPreviousSpeaker, selectRandomPreviousSpeakers } from './selectors';
+import { describe, expect, it } from 'vitest';
+import { selectPreviousSpeaker } from './selectors';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
-import { selectViewport } from '../ui';
 import type { RootState } from '..';
-
-vi.mock('../ui');
 
 const previousSpeakers: PreviousSpeaker[] = Array.from(
   { length: 20 },
@@ -27,29 +24,5 @@ describe('selectPreviousSpeaker', () => {
     const state = { previousSpeakers: new Success(previousSpeakers) } as unknown as RootState;
 
     expect(selectPreviousSpeaker(state, 'missing')).toBeUndefined();
-  });
-});
-
-describe('selectRandomPreviousSpeakers', () => {
-  it('returns 8 speakers on a phone viewport', () => {
-    vi.mocked(selectViewport).mockReturnValue({
-      isPhone: true,
-      isTabletPlus: false,
-      isLaptopPlus: false,
-    });
-    const state = { previousSpeakers: new Success(previousSpeakers) } as unknown as RootState;
-
-    expect(selectRandomPreviousSpeakers(state)).toHaveLength(8);
-  });
-
-  it('returns 14 speakers on a larger viewport', () => {
-    vi.mocked(selectViewport).mockReturnValue({
-      isPhone: false,
-      isTabletPlus: true,
-      isLaptopPlus: false,
-    });
-    const state = { previousSpeakers: new Success(previousSpeakers) } as unknown as RootState;
-
-    expect(selectRandomPreviousSpeakers(state)).toHaveLength(14);
   });
 });

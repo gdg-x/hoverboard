@@ -11,7 +11,7 @@ import '../components/shared/previous-speakers-block';
 import type { Badge } from '../models/badge';
 import type { PreviousSessionWithYear } from '../models/previous-session';
 import type { PreviousSpeaker } from '../models/previous-speaker';
-import { router } from '../router';
+import { goto } from '../utils/navigation';
 import { store } from '../store';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import {
@@ -186,7 +186,7 @@ export class PreviousSpeakerPage extends ThemedElement {
   override updated(changed: Map<string, unknown>) {
     if ((changed.has('speakers') || changed.has('speakerId')) && this.isLoaded) {
       if (!this.speaker) {
-        router.goto('/404');
+        goto('/404');
       } else {
         updateImageMetadata(this.speaker.name, this.speaker.bio, {
           image: this.speaker.photoUrl,

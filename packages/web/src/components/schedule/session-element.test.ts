@@ -5,7 +5,6 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Session } from '../../models/session';
 import type { User } from '../../models/user';
-import { router } from '../../router';
 import { openFeedbackDialog, openSigninDialog } from '../../store/dialogs';
 import { setUserFeaturedSessions } from '../../store/featured-sessions';
 import { queueComplexSnackbar } from '../../store/snackbars';
@@ -13,9 +12,6 @@ import { acceptingFeedback } from '../../utils/feedback';
 import type { SessionElement } from './session-element';
 import './session-element';
 
-vi.mock('../../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
 vi.mock('../../store/dialogs', async (importOriginal) => ({
   __esModule: true,
   ...(await importOriginal<typeof import('../../store/dialogs')>()),
@@ -33,7 +29,6 @@ vi.mock('../../store/snackbars', async (importOriginal) => ({
 }));
 vi.mock('../../utils/feedback');
 
-const mockUrlForName = vi.mocked(router.urlForName);
 const mockOpenFeedbackDialog = vi.mocked(openFeedbackDialog);
 const mockOpenSigninDialog = vi.mocked(openSigninDialog);
 const mockSetUserFeaturedSessions = vi.mocked(setUserFeaturedSessions);
@@ -54,7 +49,6 @@ const session: Session = {
 describe('session-element', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockUrlForName.mockReturnValue('/sessions/session-1');
     mockAcceptingFeedback.mockReturnValue(false);
     mockSetUserFeaturedSessions.mockResolvedValue(undefined);
     mockQueueComplexSnackbar.mockReturnValue({ type: 'queueComplexSnackbar' } as never);

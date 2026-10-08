@@ -89,9 +89,13 @@ describe(`the app with ${[...off].join(', ')} off`, () => {
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     // Flags are read when modules load, so import the app after setting them.
     setFeatures(flags);
-    await import('./hoverboard-app');
+    await import('./components/shell/app-header');
+    await import('./components/footer/footer-block');
     await import('./views/home-page');
-    render(html`<hoverboard-app><home-page></home-page></hoverboard-app>`, document.body);
+    render(
+      html`<app-header></app-header><home-page></home-page><footer-block></footer-block>`,
+      document.body,
+    );
     await vi.waitFor(
       () => {
         expect(queryAllDeep(document, 'home-page')).toHaveLength(1);

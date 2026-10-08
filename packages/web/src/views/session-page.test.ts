@@ -5,21 +5,22 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { Session } from '../models/session';
 import type { User } from '../models/user';
-import { router } from '../router';
 import { setUserFeaturedSessions } from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
 import { updateImageMetadata } from '../utils/metadata';
+import { goto } from '../utils/navigation';
 import './session-page';
 import { SessionPage } from './session-page';
 
 vi.mock('../utils/metadata');
+vi.mock('../utils/navigation', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../utils/navigation')>()),
+  goto: vi.fn(),
+}));
 vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
-}));
-vi.mock('../router', () => ({
-  router: { urlForName: vi.fn(() => '/sessions/session-id'), goto: vi.fn() },
 }));
 vi.mock('../store/sessions/selectors', () => ({
   selectSession: vi.fn(),
@@ -118,7 +119,7 @@ describe('session-page', () => {
   it('redirects to 404 when the session cannot be found', async () => {
     const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
     mockSelectSession.mockReturnValue(undefined);
-    vi.mocked(router).goto.mockClear();
+    vi.mocked(goto).mockClear();
 
     const { element } = await fixture<SessionPage>(html`<session-page></session-page>`);
     element.sessions = new Success([session]);
@@ -126,7 +127,7 @@ describe('session-page', () => {
     await element.updateComplete;
     await element.updateComplete;
 
-    expect(router.goto).toHaveBeenCalledWith('/404');
+    expect(goto).toHaveBeenCalledWith('/404');
   });
 
   it('queues a sign-in prompt when toggling a featured session while signed out', async () => {

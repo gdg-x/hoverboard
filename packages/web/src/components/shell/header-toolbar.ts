@@ -5,11 +5,10 @@ import { css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
 import type { Hero } from '../../models/hero';
-import { selectRouteName } from '../../router';
+import { routeNameFor } from '../../utils/navigation';
 import { signOut as signOutAction } from '../../store/auth';
 import { closeDialog, DIALOG, openSigninDialog, selectIsDialogOpen } from '../../store/dialogs';
 import { type TicketsState, selectTickets } from '../../store/tickets';
-import { initialUiState } from '../../store/ui';
 import type { UserState } from '../../store/user';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
 import { navigation, title } from '../../config/site';
@@ -224,6 +223,21 @@ export class HeaderToolbar extends ThemedElement {
         height: initial;
       }
     }
+
+    /* Media queries, not viewport state, so the server renders the same header for every size. */
+    @media (max-width: 811px) {
+      .toolbar-logo,
+      .nav-items {
+        display: none;
+      }
+    }
+
+    @media (min-width: 812px) {
+      .menu-button,
+      .account-button {
+        display: none;
+      }
+    }
   `;
 
   private get logoTitle() {
@@ -236,8 +250,6 @@ export class HeaderToolbar extends ThemedElement {
   @fromStore((state) => selectTickets(state))
   accessor tickets!: TicketsState;
 
-  @fromStore((state) => state.ui.viewport)
-  private accessor viewport!: typeof initialUiState.viewport;
   @fromStore((state) => state.ui.heroSettings)
   private accessor heroSettings!: Hero | undefined;
   @fromStore((state) => state.user instanceof Success)
@@ -249,8 +261,9 @@ export class HeaderToolbar extends ThemedElement {
   // does not support reflection.
   @property({ type: Boolean, reflect: true })
   private accessor transparent = false;
-  @fromStore(() => selectRouteName(window.location.pathname))
-  private accessor routeName!: string;
+  /** The current page's path, which selects its navigation tab. */
+  @property()
+  accessor path = '/';
   @fromStore((state) => selectIsDialogOpen(state, DIALOG.SIGNIN))
   private accessor isDialogOpen!: boolean;
   @state()
@@ -298,28 +311,22 @@ export class HeaderToolbar extends ThemedElement {
         <div>
           <button
             type="button"
-            class="icon-button"
+            class="icon-button menu-button"
             aria-label="${msg('Menu', { id: 'shell.header.menu' })}"
-            ?hidden="${this.viewport.isLaptopPlus}"
             @click="${this.openDrawer}"
           >
             <hoverboard-icon name="menu"></hoverboard-icon>
           </button>
         </div>
         <div class="brand">
-          <a
-            class="toolbar-logo"
-            href="/"
-            ?hidden="${!this.viewport.isLaptopPlus}"
-            title="${this.logoTitle}"
-          ></a>
+          <a class="toolbar-logo" href="/" title="${this.logoTitle}"></a>
         </div>
 
-        <nav class="nav-items" ?hidden="${!this.viewport.isLaptopPlus}" role="navigation">
+        <nav class="nav-items" role="navigation">
           <span class="selection-bar"></span>
           ${this.navigation.map(
             (nav) => html`
-              <div class="nav-item ${nav.route === this.routeName ? 'selected' : ''}">
+              <div class="nav-item ${nav.route === routeNameFor(this.path) ? 'selected' : ''}">
                 <a href="${nav.permalink}">${navigationLabel(nav.route)}</a>
               </div>
             `,
@@ -377,10 +384,10 @@ export class HeaderToolbar extends ThemedElement {
 
         <button
           type="button"
-          class="icon-button"
+          class="icon-button account-button"
           aria-label="${msg('Account', { id: 'shell.header.account' })}"
           @click="${this.signIn}"
-          ?hidden="${this.isAccountIconHidden}"
+          ?hidden="${this.signedIn}"
         >
           <hoverboard-icon name="account"></hoverboard-icon>
         </button>
@@ -420,10 +427,6 @@ export class HeaderToolbar extends ThemedElement {
     if (this.isDialogOpen) {
       closeDialog();
     }
-  }
-
-  private get isAccountIconHidden() {
-    return this.signedIn || this.viewport.isLaptopPlus;
   }
 
   private get ticketUrl() {

@@ -9,7 +9,7 @@ import '../components/schedule/header-bottom-toolbar';
 import '../components/schedule/sticky-element';
 import type { Filter } from '../models/filter';
 import type { FilterGroup } from '../models/filter-group';
-import type { RouteLocation } from '../router';
+import type { RouteLocation } from '../utils/navigation';
 import { selectFilters } from '../store/filters';
 import { type ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';

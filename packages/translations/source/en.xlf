@@ -2,6 +2,9 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file source-language="en" original="lit-localize-inputs" datatype="plaintext">
 <body>
+<trans-unit id="shell.app.offline">
+  <source>You can still work offline.</source>
+</trans-unit>
 <trans-unit id="dialogs.feedback.content-rating">
   <source>Content quality:</source>
 </trans-unit>
@@ -31,9 +34,6 @@
 </trans-unit>
 <trans-unit id="dialogs.feedback.retry">
   <source>Retry</source>
-</trans-unit>
-<trans-unit id="common.review-session">
-  <source>Review session</source>
 </trans-unit>
 <trans-unit id="common.close">
   <source>Close</source>
@@ -65,6 +65,9 @@
 <trans-unit id="dialogs.subscribe.field-required">
   <source>Field required.</source>
 </trans-unit>
+<trans-unit id="common.email-invalid">
+  <source>Please enter a valid email address.</source>
+</trans-unit>
 <trans-unit id="footer.block.back-to-top">
   <source>Back to top</source>
 </trans-unit>
@@ -91,12 +94,6 @@
 </trans-unit>
 <trans-unit id="footer.subscribe-form.email">
   <source>Your email</source>
-</trans-unit>
-<trans-unit id="common.email-invalid">
-  <source>Please enter a valid email address.</source>
-</trans-unit>
-<trans-unit id="common.subscribed">
-  <source>Subscribed</source>
 </trans-unit>
 <trans-unit id="home.about-block.title">
   <source>About</source>
@@ -166,6 +163,9 @@
 </trans-unit>
 <trans-unit id="home.speakers-block.cta">
   <source>View all speakers</source>
+</trans-unit>
+<trans-unit id="common.subscribed">
+  <source>Subscribed</source>
 </trans-unit>
 <trans-unit id="home.subscribe-block.description">
   <source>Get notified about the important conference updates</source>
@@ -317,9 +317,6 @@
 <trans-unit id="shell.snack-bar.dismiss">
   <source>Dismiss</source>
 </trans-unit>
-<trans-unit id="shell.app.offline">
-  <source>You can still work offline.</source>
-</trans-unit>
 <trans-unit id="shell.service-worker.installing">
   <source>App being installed for offline use.</source>
 </trans-unit>
@@ -448,6 +445,9 @@
 </trans-unit>
 <trans-unit id="pages.session.speakers">
   <source>Speakers</source>
+</trans-unit>
+<trans-unit id="common.review-session">
+  <source>Review session</source>
 </trans-unit>
 <trans-unit id="pages.session.feedback-closed">
   <source>Session reviews are not open</source>

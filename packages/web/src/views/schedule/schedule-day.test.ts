@@ -1,5 +1,5 @@
 import { Success } from '@abraham/remotedata';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Day } from '../../models/day';
@@ -7,10 +7,6 @@ import type { ScheduleDay } from './schedule-day';
 import './schedule-day';
 import type { SessionElement } from '../../components/schedule/session-element';
 import '../../components/schedule/session-element';
-
-vi.mock('../../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
 
 const day: Day = {
   date: '2024-01-01',

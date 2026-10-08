@@ -55,7 +55,7 @@ export default defineConfig({
         test: {
           ...web.test,
           name: `Smoke (${feature} off)`,
-          include: ['packages/web/src/hoverboard-app.smoke.test.ts'],
+          include: ['packages/web/src/app.smoke.test.ts'],
           exclude: configDefaults.exclude,
           provide: { featureOff: feature },
         },

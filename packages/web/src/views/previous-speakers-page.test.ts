@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../models/previous-speaker';
-import { router } from '../router';
 import { updateMetadata } from '../utils/metadata';
 import './previous-speakers-page';
 import { PreviousSpeakersPage } from './previous-speakers-page';
@@ -12,10 +11,6 @@ vi.mock('../utils/metadata');
 vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
 }));
-vi.mock('../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
-
 const speaker: PreviousSpeaker = {
   bio: 'Bio',
   company: 'Example',
@@ -35,7 +30,6 @@ describe('previous-speakers-page', () => {
   });
 
   it('renders speaker links and years', async () => {
-    vi.mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
     const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
       html`<previous-speakers-page></previous-speakers-page>`,
     );
@@ -51,7 +45,6 @@ describe('previous-speakers-page', () => {
   });
 
   it('renders the company logo with the company name as alt text', async () => {
-    vi.mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
     const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
       html`<previous-speakers-page></previous-speakers-page>`,
     );
@@ -62,7 +55,6 @@ describe('previous-speakers-page', () => {
   });
 
   it('does not render a company logo image without a source', async () => {
-    vi.mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
     const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
       html`<previous-speakers-page></previous-speakers-page>`,
     );
@@ -97,7 +89,6 @@ describe('previous-speakers-page', () => {
   });
 
   it('labels one year or several years', async () => {
-    vi.mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
     const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
       html`<previous-speakers-page></previous-speakers-page>`,
     );

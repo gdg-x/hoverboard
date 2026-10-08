@@ -49,7 +49,7 @@ describe('schedule-page', () => {
     expect(shadowRoot.querySelector('md-linear-progress')).not.toHaveAttribute('hidden');
   });
 
-  it('passes the router location to header-bottom-toolbar', async () => {
+  it('passes the location to header-bottom-toolbar', async () => {
     const { element, shadowRoot } = await fixture<SchedulePage>(
       html`<schedule-page></schedule-page>`,
     );

@@ -6,9 +6,10 @@ import { seedPage } from '../data/page';
 import type { Day } from '../models/day';
 import type { Session } from '../models/session';
 import type { SpeakerWithTags } from '../models/speaker';
-import type { RouteLocation } from '../router';
+import type { RouteLocation } from '../utils/navigation';
 import '../components/home/speakers-block';
 import '../components/shared/add-to-calendar';
+import '../components/shell/app-header';
 import './faq-page';
 import './schedule-page';
 import './schedule/schedule-day';
@@ -113,5 +114,14 @@ describe('pages on the server', () => {
 
     expect(page).toContain('<md-outlined-button');
     expect(page).not.toContain('<md-menu');
+  });
+
+  it("render the header with the tab of the page's path selected", async () => {
+    seedPage({ tickets: [] });
+
+    const page = await renderToString(html`<app-header path="/speakers/ada"></app-header>`);
+
+    expect(page).toMatch(/<div class="nav-item selected">\s*<a href="\/speakers">/);
+    expect(page).toMatch(/<a\s+href="\/speakers"\s+class="selected"/);
   });
 });

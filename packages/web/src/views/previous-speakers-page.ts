@@ -6,7 +6,7 @@ import '@material/web/progress/linear-progress.js';
 import '../components/shared/content-loader';
 import '../components/hero/simple-hero';
 import type { PreviousSession } from '../models/previous-session';
-import { router } from '../router';
+import { previousSpeakerPath } from '../utils/navigation';
 import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
@@ -161,7 +161,7 @@ export class PreviousSpeakersPage extends ThemedElement {
   }
 
   private previousSpeakerUrl(id: string) {
-    return router.urlForName('previous-speaker-page', { id });
+    return previousSpeakerPath(id);
   }
 
   override render() {

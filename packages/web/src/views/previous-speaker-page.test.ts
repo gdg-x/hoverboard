@@ -3,22 +3,22 @@ import { type MockedFunction, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../models/previous-speaker';
-import { router } from '../router';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { updateImageMetadata } from '../utils/metadata';
+import { goto } from '../utils/navigation';
 import './previous-speaker-page';
 import { PreviousSpeakerPage } from './previous-speaker-page';
 
 vi.mock('../utils/metadata');
+vi.mock('../utils/navigation', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../utils/navigation')>()),
+  goto: vi.fn(),
+}));
 vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
 }));
-vi.mock('../router', () => ({
-  router: { urlForName: vi.fn(), goto: vi.fn() },
-}));
 vi.mock('../store/previous-speakers/selectors', () => ({
   selectPreviousSpeaker: vi.fn(),
-  selectRandomPreviousSpeakers: vi.fn().mockReturnValue([]),
 }));
 
 const speaker: PreviousSpeaker = {
@@ -80,7 +80,7 @@ describe('previous-speaker-page', () => {
       typeof selectPreviousSpeaker
     >;
     mockSelectPreviousSpeaker.mockReturnValue(undefined);
-    vi.mocked(router).goto.mockClear();
+    vi.mocked(goto).mockClear();
 
     const { element } = await fixture<PreviousSpeakerPage>(
       html`<previous-speaker-page></previous-speaker-page>`,
@@ -90,7 +90,7 @@ describe('previous-speaker-page', () => {
     await element.updateComplete;
     await element.updateComplete;
 
-    expect(router.goto).toHaveBeenCalledWith('/404');
+    expect(goto).toHaveBeenCalledWith('/404');
   });
 
   it('renders an empty additional-sessions section when the speaker has no sessions', async () => {

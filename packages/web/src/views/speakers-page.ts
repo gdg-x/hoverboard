@@ -11,7 +11,7 @@ import '../components/shared/text-truncate';
 import type { Filter } from '../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../models/filter-group';
 import type { SpeakerWithTags } from '../models/speaker';
-import { router } from '../router';
+import { speakerPath } from '../utils/navigation';
 import { selectFilters } from '../store/filters';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
@@ -207,7 +207,7 @@ export class SpeakersPage extends ThemedElement {
   }
 
   private speakerUrl(id: string) {
-    return router.urlForName('speaker-page', { id });
+    return speakerPath(id);
   }
 
   override render() {

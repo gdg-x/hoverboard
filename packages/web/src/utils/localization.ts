@@ -72,6 +72,24 @@ export const startLocalization = async (): Promise<void> => {
   if (locale !== getLocale()) await applyLocale(locale);
 };
 
+/** Astro's `astro:before-preparation` event. Its loader fetches the next page. */
+export type PreparationEvent = Event & { loader: () => Promise<void> };
+
+/**
+ * Pages render in the source locale, so a page that client navigation swaps in must hydrate in
+ * it too, or its text would stay in the source locale. Before the swap, this switches the app
+ * back to the source locale. `startLocalization()` switches again once the page has hydrated.
+ */
+export const renderNextPageInSourceLocale = (event: PreparationEvent): void => {
+  const load = event.loader;
+  event.loader = async () => {
+    await load();
+    if (getLocale() === sourceLocale) return;
+    await loadContent(siteLocales.source);
+    await loadLocale(sourceLocale);
+  };
+};
+
 /** Switches locale and remembers the choice. Ignores locales the site does not offer. */
 export const setLocale = async (locale: string): Promise<void> => {
   if (!locales.includes(locale)) return;

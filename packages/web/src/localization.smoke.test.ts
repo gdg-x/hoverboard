@@ -22,9 +22,14 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
   beforeAll(async () => {
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     localStorage.setItem('hoverboard-locale', fakeLocale);
-    await import('./hoverboard-app');
+    await import('./components/shell/app-header');
+    await import('./components/footer/footer-block');
     await import('./views/home-page');
-    render(html`<hoverboard-app><home-page></home-page></hoverboard-app>`, document.body);
+    render(
+      html`<app-header></app-header><home-page></home-page><footer-block></footer-block>`,
+      document.body,
+    );
+    void (await import('./app')).startApp();
     await vi.waitFor(() => expect(picker()).not.toBeNull(), { timeout: 10_000 });
   });
 
@@ -59,5 +64,24 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     expect(document.documentElement).toHaveAttribute('lang', fakeLocale);
     await vi.waitFor(() => expect(signInTab()).toHaveTextContent('[Sign in]'));
     await expect(useLocale('xx')).rejects.toThrow('The site does not offer xx.');
+  });
+
+  it('hydrates the next page in the source locale, then switches back', async () => {
+    await useLocale(fakeLocale);
+    localStorage.setItem('hoverboard-locale', fakeLocale);
+    const event = Object.assign(new Event('astro:before-preparation'), {
+      loader: () => Promise.resolve(),
+    });
+
+    document.dispatchEvent(event);
+    await event.loader();
+
+    expect(getLocale()).toBe('en');
+    await vi.waitFor(() => expect(signInTab()).toHaveTextContent(/^Sign in$/));
+
+    document.dispatchEvent(new Event('astro:after-swap'));
+
+    await vi.waitFor(() => expect(getLocale()).toBe(fakeLocale));
+    await vi.waitFor(() => expect(signInTab()).toHaveTextContent('[Sign in]'));
   });
 });

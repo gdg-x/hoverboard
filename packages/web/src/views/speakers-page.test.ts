@@ -4,7 +4,6 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import type { SpeakerWithTags } from '../models/speaker';
-import { router } from '../router';
 import { updateMetadata } from '../utils/metadata';
 import './speakers-page';
 import { SpeakersPage } from './speakers-page';
@@ -13,10 +12,6 @@ vi.mock('../utils/metadata');
 vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
 }));
-vi.mock('../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
-
 const speaker: SpeakerWithTags = {
   badges: [{ description: 'GDE', link: 'https://gde.example', name: 'gde' }],
   bio: 'Bio',
@@ -42,7 +37,6 @@ describe('speakers-page', () => {
   });
 
   it('renders speaker cards with badges and socials', async () => {
-    vi.mocked(router).urlForName.mockReturnValue('/speakers/speaker-1');
     const { element, shadowRoot } = await fixture<SpeakersPage>(
       html`<speakers-page></speakers-page>`,
     );

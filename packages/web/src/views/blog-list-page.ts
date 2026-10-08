@@ -9,9 +9,8 @@ import '../components/markdown/short-markdown';
 import '../components/shared/posts-list';
 import '../components/shared/text-truncate';
 import type { Post } from '../models/post';
-import { router } from '../router';
+import { postPath } from '../utils/navigation';
 import { type BlogState, selectBlogPosts } from '../store/blog';
-import { initialUiState } from '../store/ui';
 import { contentLoaders } from '../config/site';
 import { getDate } from '../utils/dates';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
@@ -36,11 +35,6 @@ export class BlogListPage extends ThemedElement {
       border-radius: var(--border-radius);
       overflow: hidden;
       position: relative;
-    }
-
-    .featured-post--flex {
-      flex: 1;
-      flex-basis: 1px;
     }
 
     .image {
@@ -78,6 +72,10 @@ export class BlogListPage extends ThemedElement {
       opacity: 0.8;
     }
 
+    .brief {
+      -webkit-line-clamp: 2;
+    }
+
     .date {
       font-size: 12px;
       text-transform: uppercase;
@@ -98,6 +96,10 @@ export class BlogListPage extends ThemedElement {
       .featured-post {
         height: 256px;
       }
+
+      .brief {
+        -webkit-line-clamp: 3;
+      }
     }
   `;
 
@@ -106,8 +108,6 @@ export class BlogListPage extends ThemedElement {
 
   @fromStore((state) => selectBlogPosts(state))
   accessor posts!: BlogState;
-  @fromStore((state) => state.ui.viewport)
-  private accessor viewport!: typeof initialUiState.viewport;
 
   get pending() {
     return this.posts instanceof Pending;
@@ -125,12 +125,8 @@ export class BlogListPage extends ThemedElement {
     return this.posts instanceof Success || this.posts instanceof Failure;
   }
 
-  addIfNotPhone(base: number, additional: number) {
-    return this.viewport.isTabletPlus ? base + additional : base;
-  }
-
   private postUrl(id: string) {
-    return router.urlForName('post-page', { id });
+    return postPath(id);
   }
 
   override render() {
@@ -170,10 +166,7 @@ export class BlogListPage extends ThemedElement {
             }
             ${this.featuredPosts.map(
               (post) => html`
-                <a
-                  href=${this.postUrl(post.id)}
-                  class="featured-post ${this.viewport.isTabletPlus ? 'featured-post--flex' : ''}"
-                >
+                <a href=${this.postUrl(post.id)} class="featured-post">
                   <img
                     loading="lazy"
                     decoding="async"
@@ -189,7 +182,7 @@ export class BlogListPage extends ThemedElement {
                       <text-truncate lines="2">
                         <h2 class="title">${post.title}</h2>
                       </text-truncate>
-                      <text-truncate lines=${this.addIfNotPhone(2, 1)}>
+                      <text-truncate class="brief">
                         <short-markdown class="description" content=${post.brief}></short-markdown>
                       </text-truncate>
                     </div>

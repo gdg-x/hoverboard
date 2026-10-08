@@ -1,16 +1,9 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Post } from '../../models/post';
-import { router } from '../../router';
 import './posts-list';
-
-vi.mock('../../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
-
-const mockUrlForName = vi.mocked(router.urlForName);
 
 const posts: Post[] = [
   {
@@ -38,9 +31,7 @@ describe('posts-list', () => {
     expect(customElements.get('posts-list')).toBeDefined();
   });
 
-  it('renders a link for each post using the router', async () => {
-    mockUrlForName.mockImplementation((_name, params) => `/blog/${(params as { id: string }).id}`);
-
+  it('renders a link for each post', async () => {
     const { shadowRootForWithin } = await fixture(
       html`<posts-list data-testid="posts" .posts="${posts}"></posts-list>`,
     );

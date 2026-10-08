@@ -4,7 +4,7 @@ import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Session } from '../../models/session';
-import { router } from '../../router';
+import { sessionPath } from '../../utils/navigation';
 import { store } from '../../store';
 import { openFeedbackDialog, openSigninDialog } from '../../store/dialogs';
 import {
@@ -379,7 +379,7 @@ export class SessionElement extends ThemedElement {
   }
 
   private sessionUrl(id: string | undefined) {
-    return id ? router.urlForName('session-page', { id }) : '';
+    return id ? sessionPath(id) : '';
   }
 }
 

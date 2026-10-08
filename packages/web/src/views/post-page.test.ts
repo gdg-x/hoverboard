@@ -4,18 +4,16 @@ import { waitFor, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { Post } from '../models/post';
-import { router } from '../router';
 import { updateImageMetadata } from '../utils/metadata';
+import { goto } from '../utils/navigation';
 import './post-page';
 import { PostPage } from './post-page';
 
-vi.mock('../router', () => ({
-  router: {
-    goto: vi.fn(),
-    urlForName: vi.fn(),
-  },
-}));
 vi.mock('../utils/metadata');
+vi.mock('../utils/navigation', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../utils/navigation')>()),
+  goto: vi.fn(),
+}));
 vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
 }));
@@ -87,9 +85,6 @@ describe('post-page', () => {
   it('synchronizes route data with posts and renders suggestions', async () => {
     const mockUpdateImageMetadata = vi.mocked(updateImageMetadata);
     mockUpdateImageMetadata.mockClear();
-    vi.mocked(router.urlForName).mockImplementation(
-      (_name, params) => `/blog/${(params as { id: string }).id}`,
-    );
     const { element, shadowRootForWithin } = await fixture<PostPage>(html`<post-page></post-page>`);
     element.posts = new Success([firstPostWithPrimaryColor, ...posts.slice(1)]);
     element.postId = 'post-1';
@@ -162,7 +157,7 @@ describe('post-page', () => {
     element.postId = 'missing';
     await element.updateComplete;
 
-    expect(router.goto).toHaveBeenCalledWith('/404');
+    expect(goto).toHaveBeenCalledWith('/404');
   });
 
   it('stores a remote content fetch failure when the post has no inline content', async () => {

@@ -1,14 +1,10 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Day } from '../../models/day';
 import type { MySchedule } from './my-schedule';
 import './my-schedule';
 import type { ScheduleDay } from './schedule-day';
-
-vi.mock('../../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
 
 const days: Day[] = [
   {

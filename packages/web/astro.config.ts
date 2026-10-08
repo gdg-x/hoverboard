@@ -14,7 +14,22 @@ export default defineConfig({
   trailingSlash: 'never',
   // Pages share one store, which each page fills with its content in turn (`seedPage()`).
   build: { format: 'file', concurrency: 1 },
-  integrations: [lit(), routes(config.site.features)],
+  integrations: [
+    lit(),
+    {
+      name: 'hoverboard-hydration',
+      hooks: {
+        // Islands import this before their components. Loaded later, a component renders twice.
+        'astro:config:setup': ({ injectScript }) =>
+          injectScript(
+            'before-hydration',
+            `import '@awesome.me/astro-lit/dsd-polyfill.js';
+            import '@awesome.me/astro-lit/hydration-support.js';`,
+          ),
+      },
+    },
+    routes(config.site.features),
+  ],
   vite: {
     // The build smoke test links node_modules into a copy of this package. Astro fails on
     // `.astro` files that resolve outside its root.

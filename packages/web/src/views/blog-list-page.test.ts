@@ -5,14 +5,10 @@ import { within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { Post } from '../models/post';
-import { router } from '../router';
 import { updateMetadata } from '../utils/metadata';
 import './blog-list-page';
 import { BlogListPage } from './blog-list-page';
 
-vi.mock('../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
 vi.mock('../utils/metadata');
 vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
@@ -73,10 +69,6 @@ describe('blog-list-page', () => {
   });
 
   it('renders featured posts and passes the complete list to posts-list', async () => {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    vi.mocked(router.urlForName).mockImplementation(
-      (_name, params) => `/blog/${(params as { id: string }).id}`,
-    );
     const { element, shadowRootForWithin } = await fixture<BlogListPage>(
       html`<blog-list-page></blog-list-page>`,
     );
@@ -96,7 +88,7 @@ describe('blog-list-page', () => {
     expect(postsList).toHaveProperty('posts', posts);
   });
 
-  it('updates responsive truncation and loading visibility', async () => {
+  it('updates loading visibility', async () => {
     const { element, shadowRoot } = await fixture<BlogListPage>(
       html`<blog-list-page></blog-list-page>`,
     );
@@ -109,15 +101,6 @@ describe('blog-list-page', () => {
     element.posts = new Success(posts);
     await element.updateComplete;
     expect(shadowRoot.querySelector('md-linear-progress')).toHaveAttribute('hidden');
-    expect(shadowRoot.querySelectorAll('text-truncate')[1]).toHaveAttribute('lines', '2');
-    expect(shadowRoot.querySelector('a.featured-post')).not.toHaveClass('featured-post--flex');
-
-    (element as unknown as { viewport: { isTabletPlus: boolean } }).viewport = {
-      isTabletPlus: true,
-    };
-    await element.updateComplete;
-    expect(shadowRoot.querySelectorAll('text-truncate')[1]).toHaveAttribute('lines', '3');
-    expect(shadowRoot.querySelector('a.featured-post')).toHaveClass('featured-post--flex');
   });
 
   it('renders the failure state and hides loaders', async () => {

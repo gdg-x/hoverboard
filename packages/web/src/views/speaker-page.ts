@@ -9,7 +9,7 @@ import '../components/shared/content-loader';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-speakers-block';
 import type { SpeakerWithTags } from '../models/speaker';
-import { router } from '../router';
+import { goto, sessionPath } from '../utils/navigation';
 import { store } from '../store';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
@@ -188,7 +188,7 @@ export class SpeakerPage extends ThemedElement {
   override updated(changed: Map<string, unknown>) {
     if ((changed.has('speakers') || changed.has('speakerId')) && this.isLoaded) {
       if (!this.speaker) {
-        router.goto('/404');
+        goto('/404');
       } else {
         updateImageMetadata(this.speaker.name, this.speaker.bio, {
           image: this.speaker.photoUrl,
@@ -223,7 +223,7 @@ export class SpeakerPage extends ThemedElement {
   }
 
   private sessionUrl(id: string) {
-    return router.urlForName('session-page', { id });
+    return sessionPath(id);
   }
 
   override render() {

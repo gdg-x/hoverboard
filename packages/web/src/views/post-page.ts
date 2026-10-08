@@ -7,7 +7,7 @@ import '../components/markdown/long-markdown';
 import '../components/shared/posts-list';
 import { StoreController } from '../controllers/store-controller';
 import type { Post } from '../models/post';
-import { router } from '../router';
+import { goto } from '../utils/navigation';
 import { store } from '../store';
 import { type BlogState, selectBlogPosts } from '../store/blog';
 import { getDate } from '../utils/dates';
@@ -92,7 +92,7 @@ export class PostPage extends ThemedElement {
     if ((changed.has('posts') || changed.has('postId')) && this.isLoaded) {
       const post = this.foundPost;
       if (!post) {
-        router.goto('/404');
+        goto('/404');
         return;
       }
       updateImageMetadata(post.title, post.brief, {

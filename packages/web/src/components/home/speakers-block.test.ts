@@ -1,19 +1,12 @@
 import { Success } from '@abraham/remotedata';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { router } from '../../router';
 import type { SpeakerWithTags } from '../../models/speaker';
 import type { HoverboardIcon } from '../shared/hoverboard-icon';
 import type { SpeakersBlock } from './speakers-block';
 import './speakers-block';
-
-vi.mock('../../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
-
-const mockUrlForName = vi.mocked(router.urlForName);
 
 const speakers: SpeakerWithTags[] = [
   {
@@ -42,7 +35,6 @@ describe('speakers-block', () => {
   });
 
   it('renders featured speakers and routes speaker links', async () => {
-    mockUrlForName.mockReturnValue('/speakers/speaker-1');
     const { element, shadowRootForWithin } = await fixture<SpeakersBlock>(
       html`<speakers-block data-testid="block"></speakers-block>`,
     );

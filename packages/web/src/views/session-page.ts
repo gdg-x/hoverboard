@@ -15,7 +15,7 @@ import '../components/shared/hoverboard-icon';
 import '../components/markdown/short-markdown';
 import type { Session } from '../models/session';
 import type { Speaker } from '../models/speaker';
-import { router } from '../router';
+import { goto, speakerPath } from '../utils/navigation';
 import { store } from '../store';
 import { initialAuthState } from '../store/auth';
 import { openSigninDialog } from '../store/dialogs';
@@ -27,7 +27,7 @@ import {
 import { selectSession } from '../store/sessions/selectors';
 import { type SessionsState, selectSessionsState } from '../store/sessions';
 import { queueComplexSnackbar } from '../store/snackbars';
-import { initialUiState, openVideoDialog } from '../store/ui';
+import { openVideoDialog } from '../store/ui';
 import type { UserState } from '../store/user';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
@@ -105,6 +105,12 @@ export class SessionPage extends ThemedElement {
       position: fixed;
       right: 24px;
       bottom: 24px;
+    }
+
+    @media (max-width: 811px) {
+      .laptop-fab {
+        display: none;
+      }
     }
 
     .content {
@@ -206,6 +212,10 @@ export class SessionPage extends ThemedElement {
         bottom: -60px;
         transform: translate(50%, 50%);
       }
+
+      .phone-fab {
+        display: none;
+      }
     }
 
     .tags {
@@ -233,8 +243,6 @@ export class SessionPage extends ThemedElement {
   @fromStore((state) => state.auth)
   accessor auth!: typeof initialAuthState;
 
-  @fromStore((state) => state.ui.viewport)
-  private accessor viewport!: typeof initialUiState.viewport;
   @state()
   private accessor disabledSchedule: boolean = disabledSchedule;
   @state()
@@ -253,7 +261,7 @@ export class SessionPage extends ThemedElement {
   override updated(changed: Map<string, unknown>) {
     if ((changed.has('sessions') || changed.has('sessionId')) && this.isLoaded) {
       if (!this.session) {
-        router.goto('/404');
+        goto('/404');
       } else {
         // Depends on the time, so it waits for the browser.
         this.acceptingFeedback = acceptingFeedback(this.session);
@@ -326,7 +334,7 @@ export class SessionPage extends ThemedElement {
   }
 
   private speakerUrl(id: string) {
-    return router.urlForName('speaker-page', { id });
+    return speakerPath(id);
   }
 
   override render() {
@@ -360,7 +368,7 @@ export class SessionPage extends ThemedElement {
 
           <div class="float-button" ?hidden="${!this.contentLoaderVisibility}">
             <md-fab
-              ?hidden="${!this.viewport.isLaptopPlus}"
+              class="laptop-fab"
               aria-label="${toggleFeatured}"
               @click="${this.toggleFeaturedSession}"
             >
@@ -390,7 +398,7 @@ export class SessionPage extends ThemedElement {
       <div class="container content">
         <div class="float-button" ?hidden="${!this.contentLoaderVisibility}">
           <md-fab
-            ?hidden="${this.viewport.isLaptopPlus}"
+            class="phone-fab"
             aria-label="${toggleFeatured}"
             @click="${this.toggleFeaturedSession}"
           >

@@ -10,9 +10,6 @@ import './home-page';
 import { HomePage } from './home-page';
 
 vi.mock('../utils/metadata');
-vi.mock('../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
 vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
   scrollToElement: vi.fn(),
