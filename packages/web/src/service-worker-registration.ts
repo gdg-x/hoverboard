@@ -1,25 +1,29 @@
+import { msg } from '@lit/localize';
 import { Workbox } from 'workbox-window';
 import { store } from './store';
 import { queueComplexSnackbar, queueSnackbar } from './store/snackbars';
-import {
-  basepath,
-  refresh,
-  serviceWorkerAvailable,
-  serviceWorkerError,
-  serviceWorkerInstalled,
-  serviceWorkerInstalling,
-} from './config/site';
+import { basepath } from './config/site';
 
 if ('serviceWorker' in navigator) {
   const workbox = new Workbox('service-worker.js', { scope: basepath });
 
   workbox.addEventListener('installing', () => {
-    store.dispatch(queueSnackbar(serviceWorkerInstalling));
+    store.dispatch(
+      queueSnackbar(
+        msg('App being installed for offline use.', { id: 'shell.service-worker.installing' }),
+      ),
+    );
   });
 
   workbox.addEventListener('installed', (event) => {
     if (!event.isUpdate) {
-      store.dispatch(queueSnackbar(serviceWorkerInstalled));
+      store.dispatch(
+        queueSnackbar(
+          msg('App is now installed and available offline.', {
+            id: 'shell.service-worker.installed',
+          }),
+        ),
+      );
     }
   });
 
@@ -28,9 +32,11 @@ if ('serviceWorker' in navigator) {
   workbox.addEventListener('waiting', () => {
     store.dispatch(
       queueComplexSnackbar({
-        label: serviceWorkerAvailable,
+        label: msg('A new version of this app is available.', {
+          id: 'shell.service-worker.available',
+        }),
         action: {
-          title: refresh,
+          title: msg('Refresh', { id: 'shell.service-worker.refresh' }),
           callback: () => {
             workbox.addEventListener('controlling', () => window.location.reload());
             workbox.messageSkipWaiting();
@@ -42,6 +48,8 @@ if ('serviceWorker' in navigator) {
 
   workbox.register().catch((e: unknown) => {
     console.error('Service worker registration failed:', e);
-    store.dispatch(queueSnackbar(serviceWorkerError));
+    store.dispatch(
+      queueSnackbar(msg('Error caching for offline use.', { id: 'shell.service-worker.error' })),
+    );
   });
 }

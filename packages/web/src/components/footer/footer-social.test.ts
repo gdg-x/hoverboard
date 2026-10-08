@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, screen } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { emailUs, mailto, organizer, socialNetwork } from '../../config/site';
+import { mailto, organizer, socialNetwork } from '../../config/site';
 import { share } from '../../utils/share';
 import './footer-social';
 
@@ -49,7 +49,7 @@ describe('footer-social', () => {
   it('renders the email link', async () => {
     const { shadowRootForWithin } = await fixture(html`<footer-social></footer-social>`);
 
-    const emailLink = shadowRootForWithin.querySelector(`[aria-label="${emailUs}"]`);
+    const emailLink = shadowRootForWithin.querySelector('[aria-label="Email us"]');
     expect(emailLink).toHaveAttribute('href', `mailto:${mailto}`);
   });
 
@@ -58,5 +58,6 @@ describe('footer-social', () => {
     const blogLink = shadowRootForWithin.querySelector('.blog a');
 
     expect(blogLink).toHaveAttribute('href', organizer.blog);
+    expect(blogLink).toHaveTextContent('Blog');
   });
 });

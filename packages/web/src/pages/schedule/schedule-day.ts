@@ -1,4 +1,5 @@
 import { Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { css, html, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
@@ -16,7 +17,6 @@ import {
 import { selectFilters } from '../../store/filters';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import type { UserState } from '../../store/user';
-import { mySchedule } from '../../config/site';
 import { generateClassName } from '../../utils/styles';
 import '../../components/shared/hoverboard-icon';
 import '../../components/schedule/session-element';
@@ -112,8 +112,6 @@ export class ScheduleDay extends ThemedElement {
     }
   `;
 
-  private mySchedule = mySchedule;
-
   @fromStore((state) => selectScheduleState(state))
   accessor schedule!: ScheduleState;
   @property({ type: Object })
@@ -172,7 +170,7 @@ export class ScheduleDay extends ThemedElement {
               })}"
             >
               <hoverboard-icon name="add-circle-outline" class="add-session-icon"></hoverboard-icon>
-              <span>${this.mySchedule.browseSession}</span>
+              <span>${msg('Browse sessions', { id: 'schedule.day.browse-sessions' })}</span>
             </a>
 
             ${timeslot.sessions

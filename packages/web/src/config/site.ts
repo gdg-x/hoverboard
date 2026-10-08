@@ -1,58 +1,24 @@
 // The only client entry point for site config. Read config from here, never from the data files.
 
 import { resources, site as settings } from 'virtual:hoverboard/site';
-import { isFeature, isFeatureEnabled } from './features';
+import { isFeature, isFeatureEnabled, isNavigationRoute, type NavigationRoute } from './features';
 
 export const {
   aboutBlock,
   aboutOrganizerBlock,
-  addToHomeScreen,
-  blog,
-  bookmarked,
-  buyTicket,
   coc,
-  codeOfConduct,
   dates,
   description,
-  emailUs,
   faq,
   featuredVideos,
-  feedback,
-  filters,
-  followOur,
-  followUs,
-  footer,
   footerRelBlock,
   galleryBlock,
-  latestPostsBlock,
-  loading,
-  mapBlock,
-  mySchedule,
-  notifications,
-  offlineMessage,
-  partnersBlock,
-  previousSpeakersBlock,
-  refresh,
-  schedule,
-  serviceWorkerAvailable,
-  serviceWorkerError,
-  serviceWorkerInstalled,
-  serviceWorkerInstalling,
-  sessionDetails,
-  signIn,
-  signInDialog,
-  signOut,
-  speakerDetails,
-  speakers,
-  speakersBlock,
   subscribeBlock,
-  subscribeNote,
   team,
   ticketsBlock,
   title,
-  viewHighlights,
 } = resources;
-export const { basepath, dateFormat, heroSettings, image, organizer, url } = settings;
+export const { basepath, heroSettings, image, organizer, url } = settings;
 export const timeZone = settings.event.timezone;
 export const disabledSchedule = !settings.schedule.published;
 export const hashtag = settings.social.hashtag;
@@ -83,13 +49,14 @@ export const signInProviders = {
   // The build validates the names against site.schema.json.
   providersData: (settings.auth.providers as Provider[]).map((name) => ({
     name,
-    label: `Sign in with ${PROVIDERS[name].label}`,
+    label: PROVIDERS[name].label,
     url: PROVIDERS[name].url,
   })),
   allowedProvidersUrl: Object.values(PROVIDERS).map(({ url }) => url),
 };
 
-// Entries whose route names a feature are hidden when that feature is off.
+// Entries whose route names a feature are hidden when that feature is off. The build checks the routes.
 export const navigation = settings.navigation.filter(
-  ({ route }) => !isFeature(route) || isFeatureEnabled(route),
+  (entry): entry is typeof entry & { route: NavigationRoute } =>
+    isNavigationRoute(entry.route) && (!isFeature(entry.route) || isFeatureEnabled(entry.route)),
 );

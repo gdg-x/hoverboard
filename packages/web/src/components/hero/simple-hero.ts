@@ -1,58 +1,24 @@
 import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { heroSettings } from '../../config/site';
+import { type Page, pageText } from '../../utils/page-text';
 import { ThemedElement } from '../themed-element';
 import './hero-block';
 
-type HeroKeys = keyof typeof heroSettings;
-type SimpleHeroKeys = Extract<
-  HeroKeys,
-  'coc' | 'blog' | 'faq' | 'notFound' | 'previousSpeakers' | 'schedule' | 'speakers' | 'team'
->;
-
-interface Description {
-  description: string;
-}
-
-interface Title {
-  title: string;
-}
-
-const hasDescription = (setting: Description | {}): setting is Description => {
-  return 'description' in setting;
-};
-
-const hasTitle = (setting: Title | {}): setting is Title => {
-  return 'title' in setting;
-};
+// A site can give any page a description in site.json.
+const descriptions = heroSettings as Partial<Record<Page, { description?: string }>>;
 
 @customElement('simple-hero')
 export class SimpleHero extends ThemedElement {
   @property()
-  accessor page: SimpleHeroKeys = 'notFound';
-
-  private renderDescription() {
-    if (hasDescription(heroSettings[this.page])) {
-      return html`<p class="hero-description">
-        ${(heroSettings[this.page] as Description).description}
-      </p>`;
-    } else {
-      return nothing;
-    }
-  }
-
-  private renderTitle() {
-    if (hasTitle(heroSettings[this.page])) {
-      return html`<div class="hero-title">${(heroSettings[this.page] as Title).title}</div>`;
-    } else {
-      return nothing;
-    }
-  }
+  accessor page: Page = 'notFound';
 
   override render() {
+    const description = descriptions[this.page]?.description;
     return html`
       <hero-block>
-        ${this.renderTitle()} ${this.renderDescription()}
+        <div class="hero-title">${pageText(this.page).title}</div>
+        ${description ? html`<p class="hero-description">${description}</p>` : nothing}
 
         <slot></slot>
       </hero-block>

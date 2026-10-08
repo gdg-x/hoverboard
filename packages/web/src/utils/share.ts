@@ -1,3 +1,4 @@
+import { msg, str } from '@lit/localize';
 import { hashtag } from '../config/site';
 
 export const share = (e: PointerEvent) => {
@@ -34,7 +35,10 @@ const features = ({ height }: { height: number }): string => {
 };
 
 const openTwitter = ({ title, shareUrl }: { title: string; shareUrl: string }) => {
-  const text = `Check out ${title} at #${hashtag}: ${shareUrl}`;
+  const text = msg(str`Check out ${title} at #${hashtag}: ${shareUrl}`, {
+    id: 'shared.share.twitter-text',
+    desc: 'Post text. Followed by a page title, the event hashtag and a link.',
+  });
   const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
   window.open(url, 'share', features({ height: 275 }));
 };

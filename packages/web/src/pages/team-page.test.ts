@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { updateMetadata } from '../utils/metadata';
-import { heroSettings, team } from '../config/site';
+import { team } from '../config/site';
 import './team-page';
 import { TeamPage } from './team-page';
 
@@ -57,10 +57,7 @@ describe('team-page', () => {
     mockUpdateMetadata.mockClear();
     await fixture<TeamPage>(html`<team-page></team-page>`);
 
-    expect(mockUpdateMetadata).toHaveBeenCalledWith(
-      heroSettings.team.title,
-      heroSettings.team.metaDescription,
-    );
+    expect(mockUpdateMetadata).toHaveBeenCalledWith('Team', 'Get more info about organizers');
     expect(team.description).toBeDefined();
   });
 });

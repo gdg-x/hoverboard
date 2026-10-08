@@ -46,7 +46,7 @@ The check also catches navigation to an unknown page, and images that are not in
 ## Pages configuration
 
 Disable, reorder or modify blocks for individual pages inside their individual files that can be found in the `packages/web/src/pages/` folder.
-The top block (aka 'hero') view of the page can be adjusted via `heroSettings` in `packages/config/site.json`. Its colors come from the theme ([Styling](03-styling.md)).
+The top block (aka 'hero') view of the page can be adjusted via `heroSettings` in `packages/config/site.json`. Its colors come from the theme ([Styling](03-styling.md)). A page's `description` is shown under its title. The titles themselves are part of the UI text.
 
 ```json
 "heroSettings": {
@@ -56,13 +56,7 @@ The top block (aka 'hero') view of the page can be adjusted via `heroSettings` i
       "image": "/images/backgrounds/home.jpg"
     }
   },
-  "blog": {
-    "title": "Blog",
-    "metaDescription": "Read stories from our team"
-  },
   "speakers": {
-    "title": "Speakers",
-    "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of the cloud. Check back often as we add more speakers, including our customers and partners.",
     "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of the cloud. Check back often as we add more speakers, including our customers and partners."
   }
   ...
@@ -96,20 +90,12 @@ Some parts of a feature still show when it is off: the feedback block and dialog
 
 ## Toolbar Navigation
 
-Define a page's label and url in `navigation` in `packages/config/site.json`. The default list is in `packages/web/defaults/site.json`.
+Define the toolbar pages and their urls in `navigation` in `packages/config/site.json`. The default list is in `packages/web/defaults/site.json`. A `route` is `home` or a feature that has a page: `blog`, `codeOfConduct`, `faq`, `mySchedule`, `previousSpeakers`, `schedule`, `speakers` or `team`. The labels are part of the UI text, so they follow the visitor's language.
 
 ```json
 "navigation": [
-  {
-    "route": "home",
-    "permalink": "/",
-    "label": "Home"
-  },
-  {
-    "route": "speakers",
-    "permalink": "/speakers",
-    "label": "Speakers"
-  },
+  { "route": "home", "permalink": "/" },
+  { "route": "speakers", "permalink": "/speakers" },
   ...
 ]
 ```

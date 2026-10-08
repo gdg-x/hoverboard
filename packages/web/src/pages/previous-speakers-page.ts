@@ -1,4 +1,5 @@
 import { Failure, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '@material/web/progress/linear-progress.js';
@@ -10,8 +11,9 @@ import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
-import { contentLoaders, heroSettings, speakers } from '../config/site';
-import { updateMetadata } from '../utils/metadata';
+import { contentLoaders } from '../config/site';
+import { getLocale } from '../utils/localization';
+import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
@@ -134,17 +136,21 @@ export class PreviousSpeakersPage extends ThemedElement {
   @fromStore((state) => selectPreviousSpeakersState(state))
   accessor previousSpeakers!: PreviousSpeakersState;
 
-  private heroSettings = heroSettings.previousSpeakers;
+  private readonly metadata = new PageMetadataController(this, 'previousSpeakers');
   private contentLoaders = contentLoaders.previousSpeakers;
-  private previousYears = speakers.previousYears;
 
   get contentLoaderVisibility() {
     return this.previousSpeakers instanceof Success || this.previousSpeakers instanceof Failure;
   }
 
-  override connectedCallback() {
-    super.connectedCallback();
-    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
+  private yearsLabel(sessions: { [key: number]: PreviousSession[] }) {
+    const count = Object.keys(sessions || {}).length;
+    return new Intl.PluralRules(getLocale()).select(count) === 'one'
+      ? msg('Year:', { id: 'pages.previous-speakers.years.one', desc: 'Followed by a year.' })
+      : msg('Years:', {
+          id: 'pages.previous-speakers.years.other',
+          desc: 'Followed by a list of years.',
+        });
   }
 
   private getYears(sessions: { [key: number]: PreviousSession[] }) {
@@ -204,7 +210,7 @@ export class PreviousSpeakersPage extends ThemedElement {
                     : nothing
                 }
                 <div class="sessions">
-                  <h5>${this.previousYears}:</h5>
+                  <h5>${this.yearsLabel(speaker.sessions)}</h5>
                   ${this.getYears(speaker.sessions)}
                 </div>
               </div>

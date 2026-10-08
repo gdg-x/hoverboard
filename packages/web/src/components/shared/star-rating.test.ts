@@ -87,6 +87,28 @@ describe('star-rating', () => {
     expect(element.rating).toBe(5);
   });
 
+  it('labels the stars and the current rating', async () => {
+    const { shadowRootForWithin } = await fixture<StarRating>(
+      html`<star-rating .rating="${3}"></star-rating>`,
+    );
+    const queries = within(shadowRootForWithin);
+
+    expect(queries.getByRole('group')).toHaveAccessibleName('3 out of 5 stars');
+    expect(queries.getByLabelText('Rate 4 out of 5')).toBeInTheDocument();
+  });
+
+  it.each([
+    [0, '(No votes)'],
+    [1, '(1 vote)'],
+    [2, '(2 votes)'],
+  ])('shows %i votes as %s', async (votes, text) => {
+    const { shadowRoot } = await fixture<StarRating>(
+      html`<star-rating read-only details .votes="${votes}"></star-rating>`,
+    );
+
+    expect(shadowRoot).toHaveTextContent(text);
+  });
+
   it('clamps invalid and out-of-bounds rating values', async () => {
     const { element, shadowRootForWithin } = await fixture<StarRating>(
       html`<star-rating .rating="${8}"></star-rating>`,

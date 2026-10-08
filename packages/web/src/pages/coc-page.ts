@@ -1,22 +1,17 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { coc, heroSettings } from '../config/site';
-import { updateMetadata } from '../utils/metadata';
+import { coc } from '../config/site';
+import { PageMetadataController } from '../controllers/page-metadata-controller';
 import '../components/hero/simple-hero';
 import '../components/markdown/remote-markdown';
 import { ThemedElement } from '../components/themed-element';
 
 @customElement('coc-page')
 export class CocPage extends ThemedElement {
-  private heroSettings = heroSettings.coc;
+  private readonly metadata = new PageMetadataController(this, 'coc');
 
   @property()
   accessor source = coc;
-
-  override connectedCallback() {
-    super.connectedCallback();
-    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-  }
 
   override render() {
     return html`

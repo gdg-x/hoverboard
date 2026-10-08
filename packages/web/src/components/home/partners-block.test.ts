@@ -6,7 +6,6 @@ import type { PartnerGroup } from '../../models/partner-group';
 import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
 import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
 import { queueSnackbar } from '../../store/snackbars';
-import { partnersBlock } from '../../config/site';
 import type { PartnersBlock } from './partners-block';
 import './partners-block';
 
@@ -102,7 +101,7 @@ describe('partners-block', () => {
     shadowRoot.querySelector<HTMLElement>('md-text-button')!.click();
 
     expect(mockOpenSubscribeDialog).toHaveBeenCalledWith(
-      expect.objectContaining({ title: partnersBlock.form.title }),
+      expect.objectContaining({ title: 'Become a partner!' }),
     );
 
     const submit = mockOpenSubscribeDialog.mock.calls[0]![0].submit;
@@ -121,6 +120,6 @@ describe('partners-block', () => {
     await element.updateComplete;
 
     expect(mockCloseDialog).toHaveBeenCalled();
-    expect(mockQueueSnackbar).toHaveBeenCalledWith(partnersBlock.toast);
+    expect(mockQueueSnackbar).toHaveBeenCalledWith('We will contact you soon!');
   });
 });

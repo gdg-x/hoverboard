@@ -1,4 +1,5 @@
 import { Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/button/filled-button.js';
 import { css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
@@ -11,8 +12,9 @@ import { type TicketsState, selectTickets } from '../../store/tickets';
 import { initialUiState } from '../../store/ui';
 import type { UserState } from '../../store/user';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
-import { buyTicket, navigation, signIn, signOut as signOutText, title } from '../../config/site';
+import { navigation, title } from '../../config/site';
 import '../shared/hoverboard-icon';
+import { navigationLabel } from './navigation-label';
 import './notification-toggle';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
@@ -225,10 +227,7 @@ export class HeaderToolbar extends ThemedElement {
   `;
 
   private logoTitle = title;
-  private signInText = signIn;
   private navigation = navigation;
-  private signOutText = signOutText;
-  private buyTicket = buyTicket;
 
   @property({ type: Boolean, attribute: 'drawer-opened' })
   accessor drawerOpened = false;
@@ -298,7 +297,7 @@ export class HeaderToolbar extends ThemedElement {
           <button
             type="button"
             class="icon-button"
-            aria-label="menu"
+            aria-label="${msg('Menu', { id: 'shell.header.menu' })}"
             ?hidden="${this.viewport.isLaptopPlus}"
             @click="${this.openDrawer}"
           >
@@ -319,7 +318,7 @@ export class HeaderToolbar extends ThemedElement {
           ${this.navigation.map(
             (nav) => html`
               <div class="nav-item ${nav.route === this.routeName ? 'selected' : ''}">
-                <a href="${nav.permalink}">${nav.label}</a>
+                <a href="${nav.permalink}">${navigationLabel(nav.route)}</a>
               </div>
             `,
           )}
@@ -330,11 +329,13 @@ export class HeaderToolbar extends ThemedElement {
             @click="${this.signIn}"
             ?hidden="${this.signedIn}"
           >
-            ${this.signInText}
+            ${msg('Sign in', { id: 'common.sign-in' })}
           </button>
 
           <a href="${this.ticketUrl}" target="_blank" rel="noopener noreferrer">
-            <md-filled-button class="buy-button">${this.buyTicket}</md-filled-button>
+            <md-filled-button class="buy-button"
+              >${msg('Buy ticket', { id: 'common.buy-ticket' })}</md-filled-button
+            >
           </a>
         </nav>
 
@@ -344,7 +345,7 @@ export class HeaderToolbar extends ThemedElement {
           <button
             type="button"
             class="profile-image"
-            aria-label="account menu"
+            aria-label="${msg('Account menu', { id: 'shell.header.account-menu' })}"
             aria-expanded="${this.profileMenuOpened}"
             style="background-image: url('${
               this.user instanceof Success ? this.user.data.photoURL : ''
@@ -366,7 +367,7 @@ export class HeaderToolbar extends ThemedElement {
                 ${this.user instanceof Success ? this.user.data.email : ''}
               </span>
               <button type="button" class="profile-action" @click="${this.signOut}">
-                ${this.signOutText}
+                ${msg('Sign out', { id: 'shell.header.sign-out' })}
               </button>
             </div>
           </div>
@@ -375,7 +376,7 @@ export class HeaderToolbar extends ThemedElement {
         <button
           type="button"
           class="icon-button"
-          aria-label="account"
+          aria-label="${msg('Account', { id: 'shell.header.account' })}"
           @click="${this.signIn}"
           ?hidden="${this.isAccountIconHidden}"
         >

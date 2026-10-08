@@ -1,3 +1,4 @@
+import { msg } from '@lit/localize';
 import '@material/web/button/outlined-button.js';
 import '@material/web/menu/menu.js';
 import '@material/web/menu/menu-item.js';
@@ -6,7 +7,6 @@ import { css, html, nothing } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import type { Session } from '../../models/session';
 import { downloadIcs, googleCalendarUrl, sessionToCalendarEvent } from '../../utils/calendar';
-import { sessionDetails } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 import './hoverboard-icon';
 
@@ -49,14 +49,21 @@ export class AddToCalendar extends ThemedElement {
     return html`
       <md-outlined-button id="anchor" @click="${this.toggleMenu}">
         <hoverboard-icon slot="icon" name="calendar"></hoverboard-icon>
-        ${sessionDetails.addToCalendar}
+        ${msg('Add to calendar', { id: 'shared.add-to-calendar.label' })}
       </md-outlined-button>
       <md-menu anchor="anchor">
         <md-menu-item href="${googleCalendarUrl(event)}" target="_blank">
-          <div slot="headline">${sessionDetails.googleCalendar}</div>
+          <div slot="headline">
+            ${msg('Google Calendar', { id: 'shared.add-to-calendar.google' })}
+          </div>
         </md-menu-item>
         <md-menu-item @click="${this.download}">
-          <div slot="headline">${sessionDetails.appleCalendar}</div>
+          <div slot="headline">
+            ${msg('Apple Calendar', {
+              id: 'shared.add-to-calendar.apple',
+              desc: 'Downloads an .ics file for Apple Calendar and other calendar apps.',
+            })}
+          </div>
         </md-menu-item>
       </md-menu>
     `;

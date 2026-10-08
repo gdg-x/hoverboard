@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Day } from '../../models/day';
-import { schedule } from '../../config/site';
 import type { MySchedule } from './my-schedule';
 import './my-schedule';
 import type { ScheduleDay } from './schedule-day';
@@ -39,7 +38,7 @@ describe('my-schedule', () => {
 
     const prompt = shadowRoot.querySelector('[slot="prompt"]');
     expect(prompt).toBeInTheDocument();
-    expect(prompt).toHaveTextContent(schedule.saveSessionsSignedOut);
+    expect(prompt).toHaveTextContent('Sign in to save sessions');
   });
 
   it('renders a schedule-day for every featured day', async () => {

@@ -1,4 +1,5 @@
 import '@material/web/button/text-button.js';
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { initialUiState } from '../../store/ui';
@@ -60,7 +61,7 @@ export class AboutOrganizerBlock extends ThemedElement {
         decoding="async"
         class="organizers-photo"
         src="${aboutOrganizerBlock.image}"
-        alt="Organizer"
+        alt="${msg('Organizer', { id: 'home.about-organizer-block.photo-alt' })}"
       />
     `;
     return html`

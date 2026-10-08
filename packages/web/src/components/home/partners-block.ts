@@ -1,4 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/button/text-button.js';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement } from 'lit/decorators.js';
@@ -7,7 +8,6 @@ import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
 import { type PartnerGroupsState, selectPartnerGroups } from '../../store/partners';
 import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
 import { queueSnackbar } from '../../store/snackbars';
-import { loading, partnersBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
@@ -59,9 +59,6 @@ export class PartnersBlock extends ThemedElement {
     }
   `;
 
-  private loading = loading;
-  private partnersBlock = partnersBlock;
-
   @fromStore((state) => state.potentialPartners)
   accessor potentialPartners!: typeof initialPotentialPartnersState;
   @fromStore((state) => selectPartnerGroups(state))
@@ -78,7 +75,9 @@ export class PartnersBlock extends ThemedElement {
   override willUpdate(changedProperties: PropertyValues) {
     if (changedProperties.has('potentialPartners') && this.potentialPartners instanceof Success) {
       closeDialog();
-      store.dispatch(queueSnackbar(this.partnersBlock.toast));
+      store.dispatch(
+        queueSnackbar(msg('We will contact you soon!', { id: 'home.partners-block.added' })),
+      );
     }
   }
 
@@ -87,10 +86,14 @@ export class PartnersBlock extends ThemedElement {
 
     return html`
       <div class="container">
-        <h1 class="container-title">${this.partnersBlock.title}</h1>
+        <h1 class="container-title">${msg('Partners', { id: 'home.partners-block.title' })}</h1>
 
-        ${this.pending ? html`<p>${this.loading}</p>` : nothing}
-        ${this.failure ? html`<p>Error loading partners.</p>` : nothing}
+        ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : nothing}
+        ${
+          this.failure
+            ? html`<p>${msg('Error loading partners.', { id: 'home.partners-block.error' })}</p>`
+            : nothing
+        }
         ${partners.map(
           (block) => html`
             <h4 class="block-title">${block.title}</h4>
@@ -123,7 +126,7 @@ export class PartnersBlock extends ThemedElement {
           trailing-icon
           @click="${this.addPotentialPartner}"
         >
-          <span>${this.partnersBlock.button}</span>
+          <span>${msg('Become a partner', { id: 'home.partners-block.cta' })}</span>
           <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
         </md-text-button>
       </div>
@@ -132,10 +135,10 @@ export class PartnersBlock extends ThemedElement {
 
   private addPotentialPartner = () => {
     openSubscribeDialog({
-      title: this.partnersBlock.form.title,
-      submitLabel: this.partnersBlock.form.submitLabel,
-      firstFieldLabel: this.partnersBlock.form.fullName,
-      secondFieldLabel: this.partnersBlock.form.companyName,
+      title: msg('Become a partner!', { id: 'home.partners-block.form-title' }),
+      submitLabel: msg('Submit', { id: 'home.partners-block.submit' }),
+      firstFieldLabel: msg('Full Name', { id: 'home.partners-block.full-name' }),
+      secondFieldLabel: msg('Company Name', { id: 'home.partners-block.company-name' }),
       submit: (data) => addPotentialPartner(data),
     });
   };

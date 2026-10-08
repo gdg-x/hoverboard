@@ -1,16 +1,9 @@
+import { msg, str } from '@lit/localize';
 import '@material/web/iconbutton/icon-button.js';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { share } from '../../utils/share';
-import {
-  emailUs,
-  followOur,
-  followUs,
-  footer,
-  mailto,
-  organizer,
-  socialNetwork,
-} from '../../config/site';
+import { mailto, organizer, socialNetwork } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 import '../shared/hoverboard-icon';
 
@@ -151,15 +144,15 @@ export class FooterSocial extends ThemedElement {
   `;
 
   private socialNetwork = socialNetwork;
-  private followOur = followOur;
-  private followUs = followUs;
-  private emailUs = emailUs;
   private mailto = mailto;
   private organizer = organizer;
-  private footer = footer;
   private blogNewTab = organizer.blog.startsWith('http');
 
   override render() {
+    const emailUs = msg('Email us', { id: 'footer.social.email-us' });
+    const { blog } = this.organizer;
+    const target = this.blogNewTab ? '_blank' : nothing;
+    const rel = this.blogNewTab ? 'noopener noreferrer' : nothing;
     return html`
       <div class="social-group share-block">
         <!-- No label text: matches legacy behavior where the "share" resource key never
@@ -169,7 +162,7 @@ export class FooterSocial extends ThemedElement {
           <div class="share">
             <md-icon-button
               class="share-facebook"
-              aria-label="Share on Facebook"
+              aria-label="${this.shareLabel('Facebook')}"
               share="facebook"
               @click="${this.share}"
             >
@@ -179,7 +172,7 @@ export class FooterSocial extends ThemedElement {
           <div class="share">
             <md-icon-button
               class="share-twitter"
-              aria-label="Share on Twitter"
+              aria-label="${this.shareLabel('Twitter')}"
               share="twitter"
               @click="${this.share}"
             >
@@ -191,19 +184,14 @@ export class FooterSocial extends ThemedElement {
 
       <div class="social-group blog">
         <div class="title">
-          ${this.followOur}
-          <a
-            href="${this.organizer.blog}"
-            target="${this.blogNewTab ? '_blank' : nothing}"
-            rel="${this.blogNewTab ? 'noopener noreferrer' : nothing}"
-          >
-            ${this.footer.blog}
-          </a>
+          ${msg(html`Follow our <a href="${blog}" target="${target}" rel="${rel}">Blog</a>`, {
+            id: 'footer.social.follow-blog',
+          })}
         </div>
       </div>
 
       <div class="social-group social-networks">
-        <div class="title">${this.followUs}</div>
+        <div class="title">${msg('Follow us', { id: 'footer.social.follow-us' })}</div>
         <ul class="nav-inline">
           ${this.socialNetwork.follow.map(
             (socFollow) => html`
@@ -221,10 +209,14 @@ export class FooterSocial extends ThemedElement {
 
       <div class="social-group email">
         <div class="title">
-          <a aria-label="${this.emailUs}" href="mailto:${this.mailto}">${this.emailUs}</a>
+          <a aria-label="${emailUs}" href="mailto:${this.mailto}">${emailUs}</a>
         </div>
       </div>
     `;
+  }
+
+  private shareLabel(network: string) {
+    return msg(str`Share on ${network}`, { id: 'footer.social.share' });
   }
 
   private share(e: PointerEvent) {

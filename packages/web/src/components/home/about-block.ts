@@ -1,4 +1,5 @@
 import '@material/web/button/text-button.js';
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { openVideoDialog } from '../../store/ui';
@@ -59,7 +60,7 @@ export class AboutBlock extends ThemedElement {
     return html`
       <div class="container">
         <div>
-          <h1 class="container-title">${aboutBlock.title}</h1>
+          <h1 class="container-title">${msg('About', { id: 'home.about-block.title' })}</h1>
           <p>${aboutBlock.callToAction.featuredSessions.description}</p>
           <a
             href="${aboutBlock.callToAction.featuredSessions.link}"

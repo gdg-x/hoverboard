@@ -294,34 +294,20 @@
         }
       }
     },
-    "dateFormat": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["locale"],
-      "properties": {
-        "locale": {
-          "description": "A BCP 47 language tag, for example en-US.",
-          "type": "string"
-        }
-      }
-    },
     "navigation": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["route", "permalink", "label"],
+        "required": ["route", "permalink"],
         "properties": {
           "route": {
-            "description": "home, or a feature name.",
+            "description": "home, or a feature that has a page. The label comes from the UI text, in the current locale.",
             "type": "string"
           },
           "permalink": {
             "type": "string",
             "pattern": "^/"
-          },
-          "label": {
-            "type": "string"
           }
         }
       }
@@ -481,12 +467,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "title": {
-          "type": "string"
-        },
-        "metaDescription": {
-          "type": "string"
-        },
         "description": {
           "type": "string"
         }

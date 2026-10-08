@@ -1,5 +1,7 @@
+import { msg, str } from '@lit/localize';
 import { css, html, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { getLocale } from '../../utils/localization';
 import { ThemedElement } from '../themed-element';
 
 export interface StarRatingChangeDetail {
@@ -104,7 +106,7 @@ export class StarRating extends ThemedElement {
           this.showDetails
             ? html`<span class="details">
                 <span>${this.rating}</span>
-                <span>${this.votes ? `(${this.votes} votes)` : '(No votes)'}</span>
+                <span>${this.votesLabel}</span>
               </span>`
             : ''
         }
@@ -124,7 +126,9 @@ export class StarRating extends ThemedElement {
       <button
         class=${className}
         type="button"
-        aria-label=${`Rate ${value} out of ${this.maxRating}`}
+        aria-label=${msg(str`Rate ${value} out of ${this.maxRating}`, {
+          id: 'shared.star-rating.rate',
+        })}
         aria-pressed=${selected ? 'true' : 'false'}
         @click=${() => this.changeRating(value)}
         @keydown=${(event: KeyboardEvent) => this.onKeyDown(event, value)}
@@ -135,7 +139,19 @@ export class StarRating extends ThemedElement {
   }
 
   private get ratingLabel() {
-    return `${this.rating} out of ${this.maxRating} stars`;
+    return msg(str`${this.rating} out of ${this.maxRating} stars`, {
+      id: 'shared.star-rating.label',
+    });
+  }
+
+  private get votesLabel() {
+    const votes = this.votes;
+    if (!votes) {
+      return msg('(No votes)', { id: 'shared.star-rating.votes.none' });
+    }
+    return new Intl.PluralRules(getLocale()).select(votes) === 'one'
+      ? msg(str`(${votes} vote)`, { id: 'shared.star-rating.votes.one' })
+      : msg(str`(${votes} votes)`, { id: 'shared.star-rating.votes.other' });
   }
 
   private get showDetails() {

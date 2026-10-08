@@ -4,7 +4,6 @@ import reducer, { removeNotificationsUsers, updateNotificationsUsers } from '.';
 import { saveNotificationsUsers } from '../../db/notifications-users';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
-import { notifications } from '../../config/site';
 import type { RootState } from '..';
 
 vi.mock('../../db/notifications-users');
@@ -72,7 +71,7 @@ describe('update-notifications-users', () => {
       2,
       expect.objectContaining({ type: 'updateNotificationsUsers/success', payload: 'user-1' }),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar(notifications.myScheduleEnabled));
+    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar('My Schedule notifications enabled'));
   });
 
   it('dispatches failure when storing user tokens fails', async () => {
@@ -128,7 +127,10 @@ describe('update-notifications-users', () => {
       2,
       expect.objectContaining({ type: 'updateNotificationsUsers/success', payload: 'user-1' }),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar(notifications.myScheduleDisabled));
+    expect(dispatch).toHaveBeenNthCalledWith(
+      3,
+      queueSnackbar('My Schedule notifications disabled'),
+    );
   });
 
   it('dispatches failure when removing user tokens fails', async () => {

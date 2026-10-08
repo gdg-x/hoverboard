@@ -6,15 +6,12 @@ import { setStoreState } from '../../../__tests__/helpers/store';
 import { mergeAccounts, signIn } from '../../store/auth';
 import { closeDialog, openSigninDialog } from '../../store/dialogs';
 import { queueSnackbar } from '../../store/snackbars';
-import {
-  signIn as signInText,
-  signInDialog,
-  signInProviders,
-  subscribeBlock,
-} from '../../config/site';
+import { signInProviders } from '../../config/site';
 import { PROVIDER } from '../../utils/providers';
 import type { SigninDialog } from './signin-dialog';
 import './signin-dialog';
+
+const GENERAL_ERROR = 'An error has occurred. Please, try again later.';
 
 vi.mock('../../store/auth', async (importOriginal) => ({
   __esModule: true,
@@ -56,10 +53,10 @@ describe('signin-dialog', () => {
   it('renders a button for each sign-in provider', async () => {
     const { shadowRoot } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
 
-    expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent(signInText);
+    expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent('Sign in');
     const buttons = shadowRoot.querySelectorAll('.sign-in-button');
     expect(buttons).toHaveLength(signInProviders.providersData.length);
-    expect(buttons[0]).toHaveTextContent(signInProviders.providersData[0]!.label);
+    expect(buttons[0]).toHaveTextContent(`Sign in with ${signInProviders.providersData[0]!.label}`);
   });
 
   it('signs in with the clicked provider', async () => {
@@ -86,9 +83,12 @@ describe('signin-dialog', () => {
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('.merge-content')).toHaveTextContent(
-      signInDialog.alreadyHaveAccount,
+      'You already have an account',
     );
-    expect(shadowRoot.querySelector('.explanation')).toHaveTextContent('attendee@example.com');
+    expect(shadowRoot.querySelector('.explanation')).toHaveTextContent(
+      "You've already used attendee@example.com. Sign in with Google to continue.",
+    );
+    expect(shadowRoot.querySelector('.merge-button')).toHaveTextContent('Sign in with Google');
 
     shadowRoot.querySelector<HTMLElement>('.merge-button')!.click();
 
@@ -127,7 +127,7 @@ describe('signin-dialog', () => {
 
     expect(mockCloseDialog).toHaveBeenCalled();
     expect(mockOpenSigninDialog).not.toHaveBeenCalled();
-    expect(mockQueueSnackbar).toHaveBeenCalledWith(subscribeBlock.generalError);
+    expect(mockQueueSnackbar).toHaveBeenCalledWith(GENERAL_ERROR);
   });
 
   it('queues an error snackbar and does not reopen dialog if providerId is missing', async () => {
@@ -143,7 +143,7 @@ describe('signin-dialog', () => {
 
     expect(mockCloseDialog).toHaveBeenCalled();
     expect(mockOpenSigninDialog).not.toHaveBeenCalled();
-    expect(mockQueueSnackbar).toHaveBeenCalledWith(subscribeBlock.generalError);
+    expect(mockQueueSnackbar).toHaveBeenCalledWith(GENERAL_ERROR);
   });
 
   it('dispatches closeDialog when the dialog is closed', async () => {

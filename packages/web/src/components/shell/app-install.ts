@@ -1,6 +1,6 @@
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { addToHomeScreen } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 
 @customElement('app-install')
@@ -40,7 +40,7 @@ export class AppInstall extends ThemedElement {
         @click="${this.prompt}"
         ?hidden=${!this.deferredPrompt}
       >
-        ${addToHomeScreen.cta}
+        ${msg('Add to Home Screen', { id: 'shell.app-install.cta' })}
       </button>
     `;
   }

@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setStoreState } from '../../../__tests__/helpers/store';
-import { location, mapBlock } from '../../config/site';
+import { location } from '../../config/site';
 import { initialUiState } from '../../store/ui';
 import type { MapBlock } from './map-block';
 
@@ -20,7 +20,7 @@ describe('map-block', () => {
   it('renders the location description and address', async () => {
     const { shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
 
-    expect(shadowRoot).toHaveTextContent(mapBlock.title);
+    expect(shadowRoot).toHaveTextContent('Location');
     expect(shadowRoot).toHaveTextContent(location.description);
     expect(shadowRoot).toHaveTextContent(location.address);
     expect(shadowRoot.querySelector('a')).toHaveAttribute(

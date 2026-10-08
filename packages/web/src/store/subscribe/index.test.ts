@@ -4,7 +4,6 @@ import reducer, { resetSubscribed, subscribe } from '.';
 import { saveSubscriber } from '../../db/subscribers';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
-import { subscribeBlock } from '../../config/site';
 
 vi.mock('../../db/subscribers');
 vi.mock('../dispatch');
@@ -61,7 +60,7 @@ describe('subscribe', () => {
       2,
       expect.objectContaining({ type: 'subscribe/success' }),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar(subscribeBlock.toast));
+    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar('Successfully subscribed!'));
   });
 
   it('dispatches failure when storing the subscriber fails', async () => {

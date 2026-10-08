@@ -3,9 +3,10 @@ import { css, html, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { RouteLocation } from '../../router';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
-import { contentLoaders, mySchedule } from '../../config/site';
+import { contentLoaders } from '../../config/site';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
 import '../shared/content-loader';
+import { navigationLabel } from '../shell/navigation-label';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -70,7 +71,6 @@ export class HeaderBottomToolbar extends ThemedElement {
     }
   `;
 
-  private mySchedule = mySchedule;
   private contentLoaders = contentLoaders.schedule;
 
   @fromStore((state) => selectScheduleState(state))
@@ -134,7 +134,7 @@ export class HeaderBottomToolbar extends ThemedElement {
             ?hidden="${!this.signedIn}"
           >
             <a href="${this.addQueryParams('my-schedule', this.location?.search)}"
-              >${this.mySchedule.title}</a
+              >${navigationLabel('mySchedule')}</a
             >
           </div>
         </nav>

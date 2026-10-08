@@ -1,3 +1,4 @@
+import { msg, str } from '@lit/localize';
 import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -6,8 +7,8 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
 import type { Filter } from '../../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
-import { filters } from '../../config/site';
 import { clearFilters, toggleFilter } from '../../utils/filters';
+import { getLocale } from '../../utils/localization';
 import { generateClassName, getVariableColor } from '../../utils/styles';
 import './hoverboard-icon';
 import { ThemedElement } from '../themed-element';
@@ -113,8 +114,6 @@ export class FilterMenu extends ThemedElement {
     }
   `;
 
-  private filters = filters;
-
   @property({ type: Array })
   accessor filterGroups: FilterGroup[] = [];
   @property({ type: Number })
@@ -128,13 +127,25 @@ export class FilterMenu extends ThemedElement {
     this.toggleBoard(),
   );
 
+  private groupTitle(key: FilterGroupKey) {
+    return key === FilterGroupKey.tags
+      ? msg('Tags', { id: 'shared.filter-menu.tags' })
+      : msg('Complexity', { id: 'shared.filter-menu.complexity' });
+  }
+
+  private resultsLabel(count: number) {
+    return new Intl.PluralRules(getLocale()).select(count) === 'one'
+      ? msg(str`${count} result`, { id: 'shared.filter-menu.results.one' })
+      : msg(str`${count} results`, { id: 'shared.filter-menu.results.other' });
+  }
+
   override render() {
     return html`
       <div class="filters-toolbar container">
         <div class="toolbar-row">
           <div class="results-summary">
             <div class="results" ?hidden="${this.hideResultText}">
-              ${this.resultsCount} ${this.filters.results}
+              ${this.resultsCount === undefined ? '' : this.resultsLabel(this.resultsCount)}
             </div>
           </div>
 
@@ -145,10 +156,10 @@ export class FilterMenu extends ThemedElement {
               @click="${this.resetFilters}"
               ?hidden="${!this.selectedFilters.length}"
             >
-              ${this.filters.clear}
+              ${msg('Clear all', { id: 'shared.filter-menu.clear' })}
             </button>
             <md-outlined-button class="icon-right" trailing-icon @click="${this.toggleBoard}">
-              ${this.filters.title}
+              ${msg('Filters', { id: 'shared.filter-menu.title' })}
               <hoverboard-icon slot="icon" name="${this.icon}"></hoverboard-icon>
             </md-outlined-button>
           </div>
@@ -182,7 +193,7 @@ export class FilterMenu extends ThemedElement {
           ${this.filterGroups.map(
             (filterGroup) => html`
               <div class="filter-group">
-                <h3 class="filter-title">${filterGroup.title}</h3>
+                <h3 class="filter-title">${this.groupTitle(filterGroup.key)}</h3>
                 ${repeat(
                   filterGroup.filters,
                   (filter) => `${filterGroup.key}:${filter.tag}`,

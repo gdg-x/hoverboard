@@ -47,24 +47,21 @@ describe('resolveConfig', () => {
     expect(site.url).toMatch(/^https:\/\//);
     expect(site.navigation.length).toBeGreaterThan(0);
     expect(resources.title).toBeTruthy();
-    expect(resources.signIn).toBeTruthy();
+    expect(resources.faq).toBeTruthy();
   });
 
   it('reads the defaults, then the site config over them, in separate namespaces', () => {
     const { site, resources } = resolveConfig({
       paths: makePaths({
-        site: { heroSettings: { blog: { title: 'News' } }, navigation: [] },
-        resources: { signIn: 'Log in' },
+        site: { features: { forkMe: true }, navigation: [] },
+        resources: { faq: '/data/questions.md' },
       }),
       nodeEnv: 'production',
     });
 
-    expect(site.heroSettings.blog).toMatchObject({
-      title: 'News',
-      metaDescription: 'Read stories from our team',
-    });
+    expect(site.features).toMatchObject({ forkMe: true, blog: true });
     expect(site.navigation).toEqual([]);
-    expect(resources.signIn).toBe('Log in');
+    expect(resources.faq).toBe('/data/questions.md');
     expect(site).not.toHaveProperty('title');
   });
 
@@ -182,9 +179,17 @@ describe('config validation', () => {
   it('rejects navigation to unknown routes', () => {
     expect(
       errorsFor({
-        site: { navigation: [{ route: 'sponsors', permalink: '/sponsors', label: 'S' }] },
+        site: { navigation: [{ route: 'sponsors', permalink: '/sponsors' }] },
       }),
-    ).toEqual(['site.json/navigation/0/route: "sponsors" is not home or a feature']);
+    ).toEqual(['site.json/navigation/0/route: "sponsors" is not home or a feature with a page']);
+  });
+
+  it('rejects navigation to a feature without a page', () => {
+    expect(
+      errorsFor({
+        site: { navigation: [{ route: 'gallery', permalink: '/#gallery' }] },
+      }),
+    ).toEqual(['site.json/navigation/0/route: "gallery" is not home or a feature with a page']);
   });
 
   it('rejects images that do not exist', () => {

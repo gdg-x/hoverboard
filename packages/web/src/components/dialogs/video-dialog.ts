@@ -1,4 +1,5 @@
 import '@justinribeiro/lite-youtube';
+import { msg } from '@lit/localize';
 import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
@@ -44,7 +45,9 @@ export class VideoDialog extends ThemedElement {
             autoload
           ></lite-youtube>
         </div>
-        <md-outlined-button slot="actions" @click="${this.close}">Close</md-outlined-button>
+        <md-outlined-button slot="actions" @click="${this.close}">
+          ${msg('Close', { id: 'common.close' })}
+        </md-outlined-button>
       </hoverboard-dialog>
     `;
   }

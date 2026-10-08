@@ -6,7 +6,6 @@ export enum FilterGroupKey {
 }
 
 export interface FilterGroup {
-  title: string;
   key: FilterGroupKey;
   filters: Filter[];
 }

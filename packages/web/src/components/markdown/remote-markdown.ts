@@ -1,4 +1,5 @@
 import { Failure, fold, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { html, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import './toc-markdown';
@@ -22,8 +23,8 @@ export class RemoteMarkDown extends ThemedElement {
   get view() {
     return fold<TemplateResult<1>, Error, string>(
       () => html``,
-      () => html`Loading...`,
-      () => html`Error loading content`,
+      () => html`${msg('Loading...', { id: 'common.loading' })}`,
+      () => html`${msg('Error loading content', { id: 'markdown.remote-markdown.error' })}`,
       (data) => html`<toc-markdown content="${data}"></toc-markdown>`,
     );
   }

@@ -5,7 +5,6 @@ import { fixture } from '../../__tests__/helpers/fixtures';
 import { FilterGroupKey } from '../models/filter-group';
 import { selectFilters } from '../store/filters';
 import { selectFilterGroups } from '../store/sessions/selectors';
-import { heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './schedule-page';
 import { SchedulePage } from './schedule-page';
@@ -34,10 +33,7 @@ describe('schedule-page', () => {
 
     const { element } = await fixture<SchedulePage>(html`<schedule-page></schedule-page>`);
 
-    expect(mockUpdateMetadata).toHaveBeenCalledWith(
-      heroSettings.schedule.title,
-      heroSettings.schedule.metaDescription,
-    );
+    expect(mockUpdateMetadata).toHaveBeenCalledWith('Schedule', 'Choose your sessions to visit');
     expect(element.sessions).toBeInstanceOf(Pending);
     expect(element.speakers).toBeInstanceOf(Pending);
     expect(element.schedule).toBeInstanceOf(Pending);
@@ -69,7 +65,7 @@ describe('schedule-page', () => {
   it('forwards filter groups and selected filters to filter-menu', async () => {
     const mockSelectFilterGroups = selectFilterGroups as MockedFunction<typeof selectFilterGroups>;
     const mockSelectFilters = selectFilters as MockedFunction<typeof selectFilters>;
-    const filterGroups = [{ title: 'Tags', key: FilterGroupKey.tags, filters: [] }];
+    const filterGroups = [{ key: FilterGroupKey.tags, filters: [] }];
     const selectedFilters = [{ group: FilterGroupKey.tags, tag: 'web' }];
     mockSelectFilterGroups.mockReturnValue(filterGroups);
     mockSelectFilters.mockReturnValue(selectedFilters);

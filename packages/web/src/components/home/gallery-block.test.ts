@@ -1,4 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
+import { within } from '@testing-library/dom';
 import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
@@ -32,7 +33,7 @@ describe('gallery-block', () => {
   });
 
   it('renders photos and gallery CTA on success', async () => {
-    const { element, shadowRoot } = await fixture<GalleryBlock>(
+    const { element, shadowRoot, shadowRootForWithin } = await fixture<GalleryBlock>(
       html`<gallery-block></gallery-block>`,
     );
     element.gallery = new Success([
@@ -41,7 +42,7 @@ describe('gallery-block', () => {
     ]);
     await element.updateComplete;
 
-    expect(shadowRoot.querySelectorAll('img')).toHaveLength(2);
+    expect(within(shadowRootForWithin).getAllByAltText('Gallery photo')).toHaveLength(2);
     expect(shadowRoot).toHaveTextContent(galleryBlock.title);
     expect(shadowRoot.querySelector('.gallery-info a')).toHaveAttribute(
       'href',

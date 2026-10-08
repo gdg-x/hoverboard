@@ -2,7 +2,7 @@ import { Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { navigation, signIn, signOut as signOutText } from '../../config/site';
+import { navigation } from '../../config/site';
 import type { HeaderToolbar } from './header-toolbar';
 
 vi.mock('../../router', () => ({
@@ -36,7 +36,7 @@ describe('header-toolbar', () => {
     const tabs = shadowRoot.querySelectorAll('.nav-item');
     expect(tabs).toHaveLength(navigation.length);
     expect(tabs[0]?.querySelector('a')).toHaveAttribute('href', navigation[0]?.permalink);
-    expect(tabs[0]).toHaveTextContent(navigation[0]?.label ?? '');
+    expect(tabs[0]).toHaveTextContent('Home');
   });
 
   it('shows a sign-in tab when signed out and hides the profile menu', async () => {
@@ -47,7 +47,7 @@ describe('header-toolbar', () => {
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('.signin-tab')).not.toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('.signin-tab')).toHaveTextContent(signIn);
+    expect(shadowRoot.querySelector('.signin-tab')).toHaveTextContent('Sign in');
     expect(shadowRoot.querySelector('.profile-menu')).toHaveAttribute('hidden');
   });
 
@@ -63,7 +63,7 @@ describe('header-toolbar', () => {
     expect(shadowRoot.querySelector('.profile-menu')).not.toHaveAttribute('hidden');
     expect(shadowRoot.querySelector('.profile-name')).toHaveTextContent(user.displayName);
     expect(shadowRoot.querySelector('.profile-email')).toHaveTextContent(user.email);
-    expect(shadowRoot.querySelector('.profile-action')).toHaveTextContent(signOutText);
+    expect(shadowRoot.querySelector('.profile-action')).toHaveTextContent('Sign out');
   });
 
   it('opens the profile dropdown when the profile image is clicked', async () => {
@@ -89,7 +89,7 @@ describe('header-toolbar', () => {
     const listener = vi.fn();
     element.addEventListener('drawer-opened-changed', listener);
 
-    shadowRoot.querySelector<HTMLElement>('.icon-button[aria-label="menu"]')!.click();
+    shadowRoot.querySelector<HTMLElement>('.icon-button[aria-label="Menu"]')!.click();
     await element.updateComplete;
 
     expect(element.drawerOpened).toBe(true);
@@ -104,7 +104,7 @@ describe('header-toolbar', () => {
     element['viewport'] = { isPhone: false, isTabletPlus: true, isLaptopPlus: true };
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('.icon-button[aria-label="menu"]')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('.icon-button[aria-label="Menu"]')).toHaveAttribute('hidden');
     expect(shadowRoot.querySelector('.toolbar-logo')).not.toHaveAttribute('hidden');
   });
 

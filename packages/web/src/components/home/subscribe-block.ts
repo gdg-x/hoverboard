@@ -1,4 +1,5 @@
 import { Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
@@ -78,14 +79,18 @@ export class SubscribeBlock extends ThemedElement {
 
   private get ctaLabel() {
     return this.subscribed instanceof Success
-      ? this.subscribeBlock.subscribed
-      : this.subscribeBlock.callToAction.label;
+      ? msg('Subscribed', { id: 'common.subscribed' })
+      : msg('Subscribe', { id: 'common.subscribe', desc: 'Button that submits a subscription.' });
   }
 
   override render() {
     return html`
       <div class="container ${this.viewport.isTabletPlus ? 'centered' : ''}">
-        <div class="description">${this.subscribeBlock.callToAction.description}</div>
+        <div class="description">
+          ${msg('Get notified about the important conference updates', {
+            id: 'home.subscribe-block.description',
+          })}
+        </div>
         <div class="cta-button">
           <md-text-button
             class="animated icon-right"
@@ -124,9 +129,6 @@ export class SubscribeBlock extends ThemedElement {
     } else {
       openSubscribeDialog({
         title: this.subscribeBlock.formTitle,
-        submitLabel: this.subscribeBlock.subscribe,
-        firstFieldLabel: this.subscribeBlock.firstName,
-        secondFieldLabel: this.subscribeBlock.lastName,
         firstFieldValue: userData.firstFieldValue,
         secondFieldValue: userData.secondFieldValue,
         submit: (data) => this.subscribeAction(data),

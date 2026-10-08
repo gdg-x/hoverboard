@@ -7,7 +7,6 @@ import {
 } from '../../db/notifications-subscribers';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
-import { notifications } from '../../config/site';
 
 vi.mock('../../db/notifications-subscribers');
 vi.mock('../dispatch');
@@ -69,7 +68,7 @@ describe('update-notifications-subscribers', () => {
         payload: 'token-1',
       }),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar(notifications.generalEnabled));
+    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar('General notifications enabled'));
   });
 
   it('dispatches failure when storing the subscriber token fails', async () => {
@@ -106,7 +105,7 @@ describe('update-notifications-subscribers', () => {
       2,
       expect.objectContaining({ type: 'updateNotificationsSubscribers/reset' }),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar(notifications.generalDisabled));
+    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar('General notifications disabled'));
   });
 
   it('dispatches failure when deleting the subscriber token fails', async () => {

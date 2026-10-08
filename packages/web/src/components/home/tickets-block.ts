@@ -1,10 +1,12 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
+import { msg, str } from '@lit/localize';
 import '@material/web/button/filled-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { Ticket } from '../../models/ticket';
 import { type TicketsState, selectTickets } from '../../store/tickets';
-import { buyTicket, contentLoaders, ticketsBlock } from '../../config/site';
+import { contentLoaders, ticketsBlock } from '../../config/site';
+import { getLocale } from '../../utils/localization';
 import '../shared/content-loader';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
@@ -158,8 +160,10 @@ export class TicketsBlock extends ThemedElement {
     if (!ticket.regular || ticket.primary || ticket.soldOut || !maxPrice) {
       return '';
     }
-    const discount = String(Math.round(100 - (ticket.price * 100) / maxPrice));
-    return this.ticketsBlock.save.replace('${discount}', discount);
+    const discount = new Intl.NumberFormat(getLocale(), { style: 'percent' }).format(
+      Math.round(100 - (ticket.price * 100) / maxPrice) / 100,
+    );
+    return msg(str`Save ${discount} today`, { id: 'home.tickets-block.save' });
   }
 
   private onTicketTap(e: PointerEvent, ticket: Ticket) {
@@ -170,7 +174,9 @@ export class TicketsBlock extends ThemedElement {
   }
 
   private getButtonText(available: boolean) {
-    return available ? buyTicket : this.ticketsBlock.notAvailableYet;
+    return available
+      ? msg('Buy ticket', { id: 'common.buy-ticket' })
+      : msg('Not available yet', { id: 'home.tickets-block.not-available' });
   }
 
   private get ticketsList(): Ticket[] {
@@ -184,7 +190,7 @@ export class TicketsBlock extends ThemedElement {
   override render() {
     return html`
       <div class="tickets-wrapper container">
-        <h1 class="container-title">${this.ticketsBlock.title}</h1>
+        <h1 class="container-title">${msg('Tickets', { id: 'home.tickets-block.title' })}</h1>
         <content-loader
           class="tickets-placeholder"
           card-padding="24px"
@@ -202,7 +208,7 @@ export class TicketsBlock extends ThemedElement {
         </content-loader>
 
         <div class="tickets">
-          ${this.error ? html`Error loading tickets` : ''}
+          ${this.error ? msg('Error loading tickets', { id: 'home.tickets-block.error' }) : ''}
           ${this.ticketsList.map(
             (ticket) => html`
               <a
@@ -231,7 +237,10 @@ export class TicketsBlock extends ThemedElement {
                 </div>
                 <div class="actions">
                   <div class="sold-out" ?visible="${ticket.soldOut}">
-                    ${this.ticketsBlock.soldOut}
+                    ${msg('You missed it!', {
+                      id: 'home.tickets-block.sold-out',
+                      desc: 'Shown on a sold-out ticket.',
+                    })}
                   </div>
                   <md-filled-button ?hidden="${ticket.soldOut}" ?disabled="${!ticket.available}">
                     ${this.getButtonText(ticket.available)}

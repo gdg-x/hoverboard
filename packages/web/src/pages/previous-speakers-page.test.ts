@@ -4,7 +4,6 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import { router } from '../router';
-import { heroSettings, speakers } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './previous-speakers-page';
 import { PreviousSpeakersPage } from './previous-speakers-page';
@@ -91,10 +90,25 @@ describe('previous-speakers-page', () => {
     await element.updateComplete;
 
     expect(mockUpdateMetadata).toHaveBeenCalledWith(
-      heroSettings.previousSpeakers.title,
-      heroSettings.previousSpeakers.metaDescription,
+      'Previous Speakers',
+      'Check who was with us last years',
     );
     expect(shadowRoot.querySelector('md-linear-progress')).toHaveAttribute('hidden');
-    expect(speakers.previousYears).toBeDefined();
+  });
+
+  it('labels one year or several years', async () => {
+    vi.mocked(router).urlForName.mockReturnValue('/previous-speakers/speaker-1');
+    const { element, shadowRoot } = await fixture<PreviousSpeakersPage>(
+      html`<previous-speakers-page></previous-speakers-page>`,
+    );
+    element.previousSpeakers = new Success([speaker]);
+    await element.updateComplete;
+
+    expect(shadowRoot).toHaveTextContent('Year: 2024');
+
+    element.previousSpeakers = new Success([{ ...speaker, sessions: { 2023: [], 2024: [] } }]);
+    await element.updateComplete;
+
+    expect(shadowRoot).toHaveTextContent('Years: 2024, 2023');
   });
 });

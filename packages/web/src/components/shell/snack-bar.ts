@@ -1,3 +1,4 @@
+import { msg } from '@lit/localize';
 import '@material/web/button/text-button.js';
 import '@material/web/iconbutton/icon-button.js';
 import { css, html, nothing, type PropertyValues, svg } from 'lit';
@@ -94,7 +95,11 @@ export class SnackBar extends ThemedElement {
       <div class="snackbar" role="status" popover="manual">
         <span class="label">${this.state?.label ?? ''}</span>
         ${action}
-        <md-icon-button class="dismiss" aria-label="dismiss" @click="${this.removeSnackbar}">
+        <md-icon-button
+          class="dismiss"
+          aria-label="${msg('Dismiss', { id: 'shell.snack-bar.dismiss' })}"
+          @click="${this.removeSnackbar}"
+        >
           ${closeIcon}
         </md-icon-button>
       </div>

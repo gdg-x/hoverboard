@@ -1,4 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/progress/linear-progress.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
@@ -11,9 +12,9 @@ import type { Post } from '../models/post';
 import { router } from '../router';
 import { type BlogState, selectBlogPosts } from '../store/blog';
 import { initialUiState } from '../store/ui';
-import { contentLoaders, heroSettings } from '../config/site';
+import { contentLoaders } from '../config/site';
 import { getDate } from '../utils/dates';
-import { updateMetadata } from '../utils/metadata';
+import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
@@ -100,7 +101,7 @@ export class BlogListPage extends ThemedElement {
     }
   `;
 
-  private heroSettings = heroSettings.blog;
+  private readonly metadata = new PageMetadataController(this, 'blog');
   private contentLoaders = contentLoaders.blog;
 
   @fromStore((state) => selectBlogPosts(state))
@@ -122,11 +123,6 @@ export class BlogListPage extends ThemedElement {
 
   private get contentLoaderVisibility(): boolean {
     return this.posts instanceof Success || this.posts instanceof Failure;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
   }
 
   addIfNotPhone(base: number, additional: number) {
@@ -167,7 +163,11 @@ export class BlogListPage extends ThemedElement {
           ></content-loader>
 
           <div class="featured-posts-wrapper">
-            ${this.failure ? html`<p>Error loading posts.</p>` : ''}
+            ${
+              this.failure
+                ? html`<p>${msg('Error loading posts.', { id: 'pages.blog-list.error' })}</p>`
+                : ''
+            }
             ${this.featuredPosts.map(
               (post) => html`
                 <a

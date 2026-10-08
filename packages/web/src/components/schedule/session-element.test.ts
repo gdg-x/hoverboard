@@ -78,6 +78,16 @@ describe('session-element', () => {
     expect(shadowRoot.querySelector('.bookmark-session')).toHaveAttribute('name', 'bookmark-plus');
   });
 
+  it('formats the duration with units', async () => {
+    const { element, shadowRoot } = await fixture<SessionElement>(
+      html`<session-element></session-element>`,
+    );
+    element.session = { ...session, duration: { hh: 1, mm: 30 } } as Session;
+    await element.updateComplete;
+
+    expect(shadowRoot).toHaveTextContent('1 hour 30 minutes');
+  });
+
   it('shows the checked bookmark icon when the session is featured', async () => {
     const { element, shadowRoot } = await fixture<SessionElement>(
       html`<session-element></session-element>`,

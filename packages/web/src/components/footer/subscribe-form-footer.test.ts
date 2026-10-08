@@ -4,7 +4,6 @@ import { Success } from '@abraham/remotedata';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { SubscribeFormFooter } from './subscribe-form-footer';
-import { subscribeBlock } from '../../config/site';
 import './subscribe-form-footer';
 
 describe('subscribe-form-footer', () => {
@@ -24,10 +23,8 @@ describe('subscribe-form-footer', () => {
   });
 
   it('renders the subscription form with a disabled submit action', () => {
-    expect(shadowRoot.querySelector('[label]')).toHaveAttribute('label', subscribeBlock.yourEmail);
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent(
-      subscribeBlock.subscribe,
-    );
+    expect(shadowRoot.querySelector('[label]')).toHaveAttribute('label', 'Your email');
+    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Subscribe');
     expect(shadowRoot.querySelector('md-filled-button')).toBeDisabled();
   });
 
@@ -45,9 +42,7 @@ describe('subscribe-form-footer', () => {
     element.subscribed = new Success(true);
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent(
-      subscribeBlock.subscribed,
-    );
+    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Subscribed');
     expect(shadowRoot.querySelector('md-outlined-text-field')).toBeDisabled();
     expect(shadowRoot.querySelector('hoverboard-icon[name="checked"]')).toBeInTheDocument();
   });

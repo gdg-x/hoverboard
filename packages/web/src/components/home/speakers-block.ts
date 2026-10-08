@@ -1,5 +1,6 @@
 import '@material/web/button/outlined-button.js';
 import { Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../shared/hoverboard-icon';
@@ -8,7 +9,6 @@ import type { Speaker } from '../../models/speaker';
 import { router } from '../../router';
 import { type SpeakersState, selectSpeakersState } from '../../store/speakers';
 import { randomOrder } from '../../utils/arrays';
-import { speakersBlock } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -170,7 +170,7 @@ export class SpeakersBlock extends ThemedElement {
   override render() {
     return html`
       <div class="container">
-        <h1 class="container-title">${speakersBlock.title}</h1>
+        <h1 class="container-title">${msg('Speakers', { id: 'home.speakers-block.title' })}</h1>
 
         <div class="speakers-wrapper">
           ${this.featuredSpeakers.map(
@@ -225,9 +225,9 @@ export class SpeakersBlock extends ThemedElement {
           )}
         </div>
 
-        <a href="${speakersBlock.callToAction.link}">
+        <a href="/speakers">
           <md-outlined-button class="cta-button animated icon-right" trailing-icon>
-            <span>${speakersBlock.callToAction.label}</span>
+            <span>${msg('View all speakers', { id: 'home.speakers-block.cta' })}</span>
             <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
           </md-outlined-button>
         </a>

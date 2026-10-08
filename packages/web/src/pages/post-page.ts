@@ -1,4 +1,5 @@
 import { Failure, Initialized, type RemoteData, Success } from '@abraham/remotedata';
+import { msg, str } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import '../components/hero/hero-block';
@@ -8,7 +9,6 @@ import { StoreController } from '../controllers/store-controller';
 import type { Post } from '../models/post';
 import { router } from '../router';
 import { type BlogState, selectBlogPosts } from '../store/blog';
-import { blog } from '../config/site';
 import { getDate } from '../utils/dates';
 import { fetchText } from '../utils/fetch-text';
 import { updateImageMetadata } from '../utils/metadata';
@@ -54,7 +54,6 @@ export class PostPage extends ThemedElement {
   @state()
   private accessor postContent = '';
 
-  private blog = blog;
   private contentRequest = 0;
 
   private readonly postsStore = new StoreController(this, selectBlogPosts, {
@@ -121,6 +120,7 @@ export class PostPage extends ThemedElement {
       this.post instanceof Success
         ? (this.post.data as Post & { primaryColor?: string })
         : undefined;
+    const published = post ? getDate(post.published) : '';
 
     return html`
       <hero-block
@@ -133,12 +133,12 @@ export class PostPage extends ThemedElement {
 
       <div class="container-narrow">
         <long-markdown class="post" .content=${this.postContent}></long-markdown>
-        <div class="date">${this.blog.published}: ${post ? getDate(post.published) : ''}</div>
+        <div class="date">${msg(str`Published: ${published}`, { id: 'pages.post.published' })}</div>
       </div>
 
       <div class="suggested-posts">
         <div class="container-narrow">
-          <h3 class="container-title">${this.blog.suggested}</h3>
+          <h3 class="container-title">${msg('Up next', { id: 'pages.post.up-next' })}</h3>
           <posts-list .posts=${this.suggestedPosts}></posts-list>
         </div>
       </div>

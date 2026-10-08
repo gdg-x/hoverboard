@@ -1,7 +1,7 @@
 import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { saveNotificationsUsers } from '../../db/notifications-users';
-import { notifications } from '../../config/site';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 
@@ -33,7 +33,13 @@ export const updateNotificationsUsers = async (uid: string, token: string) => {
     await saveNotificationsUsers(uid, { tokens: { ...tokens, [token]: true } });
 
     dispatch(success(uid));
-    dispatch(queueSnackbar(notifications.myScheduleEnabled));
+    dispatch(
+      queueSnackbar(
+        msg('My Schedule notifications enabled', {
+          id: 'store.notifications.my-schedule-enabled',
+        }),
+      ),
+    );
   } catch (error) {
     dispatch(failure(error as Error));
   }
@@ -50,7 +56,13 @@ export const removeNotificationsUsers = async (uid: string, token: string) => {
     await saveNotificationsUsers(uid, { tokens });
 
     dispatch(success(uid));
-    dispatch(queueSnackbar(notifications.myScheduleDisabled));
+    dispatch(
+      queueSnackbar(
+        msg('My Schedule notifications disabled', {
+          id: 'store.notifications.my-schedule-disabled',
+        }),
+      ),
+    );
   } catch (error) {
     dispatch(failure(error as Error));
   }

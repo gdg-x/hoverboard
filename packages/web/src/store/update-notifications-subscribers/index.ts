@@ -1,10 +1,10 @@
 import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import {
   removeNotificationsSubscriber,
   saveNotificationsSubscriber,
 } from '../../db/notifications-subscribers';
-import { notifications } from '../../config/site';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 
@@ -34,7 +34,11 @@ export const updateNotificationsSubscribers = async (token: string) => {
     await saveNotificationsSubscriber(token);
 
     dispatch(success(token));
-    dispatch(queueSnackbar(notifications.generalEnabled));
+    dispatch(
+      queueSnackbar(
+        msg('General notifications enabled', { id: 'store.notifications.general-enabled' }),
+      ),
+    );
   } catch (error) {
     dispatch(failure(error as Error));
   }
@@ -47,7 +51,11 @@ export const clearNotificationsSubscribers = async (token: string) => {
     await removeNotificationsSubscriber(token);
 
     dispatch(reset());
-    dispatch(queueSnackbar(notifications.generalDisabled));
+    dispatch(
+      queueSnackbar(
+        msg('General notifications disabled', { id: 'store.notifications.general-disabled' }),
+      ),
+    );
   } catch (error) {
     dispatch(failure(error as Error));
   }

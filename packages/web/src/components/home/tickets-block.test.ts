@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Ticket } from '../../models/ticket';
-import { buyTicket, ticketsBlock } from '../../config/site';
 import type { TicketsBlock } from './tickets-block';
 import './tickets-block';
 
@@ -53,7 +52,20 @@ describe('tickets-block', () => {
     expect(shadowRoot).toHaveTextContent(ticket.name);
     expect(shadowRoot).toHaveTextContent(ticket.info);
     expect(shadowRoot.querySelector('.ticket-item')).toHaveAttribute('href', ticket.url);
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent(buyTicket);
+    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Buy ticket');
+  });
+
+  it('shows the discount against the primary ticket', async () => {
+    const { element, shadowRoot } = await fixture<TicketsBlock>(
+      html`<tickets-block></tickets-block>`,
+    );
+    element.tickets = new Success([
+      { ...ticket, name: 'Full price', primary: true, regular: false },
+      { ...ticket, price: 80 },
+    ]);
+    await element.updateComplete;
+
+    expect(shadowRoot).toHaveTextContent('Save 20% today');
   });
 
   it('prevents navigation for sold out tickets', async () => {
@@ -65,9 +77,7 @@ describe('tickets-block', () => {
 
     const link = shadowRoot.querySelector<HTMLAnchorElement>('.ticket-item')!;
     expect(link).toHaveAttribute('sold-out');
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent(
-      ticketsBlock.notAvailableYet,
-    );
+    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Not available yet');
 
     const event = new MouseEvent('click', { cancelable: true, bubbles: true });
     link.dispatchEvent(event);

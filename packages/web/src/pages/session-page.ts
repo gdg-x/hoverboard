@@ -1,4 +1,5 @@
 import { Success } from '@abraham/remotedata';
+import { msg, str } from '@lit/localize';
 import '@material/web/button/outlined-button.js';
 import '@material/web/fab/fab.js';
 import '@material/web/progress/linear-progress.js';
@@ -28,7 +29,7 @@ import { type SessionsState, selectSessionsState } from '../store/sessions';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { initialUiState, openVideoDialog } from '../store/ui';
 import type { UserState } from '../store/user';
-import { disabledSchedule, feedback, schedule, sessionDetails } from '../config/site';
+import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
@@ -219,9 +220,6 @@ export class SessionPage extends ThemedElement {
     }
   `;
 
-  private feedback = feedback;
-  private sessionDetails = sessionDetails;
-
   @fromStore((state) => selectSessionsState(state))
   accessor sessions!: SessionsState;
   @property({ type: Object })
@@ -287,9 +285,9 @@ export class SessionPage extends ThemedElement {
     if (!(this.user instanceof Success)) {
       store.dispatch(
         queueComplexSnackbar({
-          label: schedule.saveSessionsSignedOut,
+          label: msg('Sign in to save sessions', { id: 'common.save-sessions-signed-out' }),
           action: {
-            title: 'Sign in',
+            title: msg('Sign in', { id: 'common.sign-in' }),
             callback: () => openSigninDialog(),
           },
         }),
@@ -329,13 +327,15 @@ export class SessionPage extends ThemedElement {
 
   override render() {
     const session = this.session as SessionWithDetails | undefined;
+    const complexity = session?.complexity;
+    const toggleFeatured = msg('Toggle featured session', { id: 'pages.session.toggle-featured' });
 
     return html`
       <simple-hero page="schedule">
         <div class="header-content">
           <a class="back-link" href="${session?.day ? `/schedule/${session.day}` : '/schedule'}">
             <hoverboard-icon name="arrow-left"></hoverboard-icon>
-            <span>${this.sessionDetails.backToSchedule}</span>
+            <span>${msg('Back to schedule', { id: 'pages.session.back-to-schedule' })}</span>
           </a>
           <h2 class="name">${session?.title ?? ''}</h2>
           ${
@@ -357,7 +357,7 @@ export class SessionPage extends ThemedElement {
           <div class="float-button" ?hidden="${!this.contentLoaderVisibility}">
             <md-fab
               ?hidden="${!this.viewport.isLaptopPlus}"
-              aria-label="Toggle featured session"
+              aria-label="${toggleFeatured}"
               @click="${this.toggleFeaturedSession}"
             >
               <hoverboard-icon slot="icon" name="${this.featuredSessionIcon}"></hoverboard-icon>
@@ -387,7 +387,7 @@ export class SessionPage extends ThemedElement {
         <div class="float-button" ?hidden="${!this.contentLoaderVisibility}">
           <md-fab
             ?hidden="${this.viewport.isLaptopPlus}"
-            aria-label="Toggle featured session"
+            aria-label="${toggleFeatured}"
             @click="${this.toggleFeaturedSession}"
           >
             <hoverboard-icon slot="icon" name="${this.featuredSessionIcon}"></hoverboard-icon>
@@ -397,8 +397,8 @@ export class SessionPage extends ThemedElement {
           ${session?.dateReadable}, ${session?.startTime} - ${session?.endTime}
         </h3>
         <h3 class="meta-info" ?hidden="${this.disabledSchedule}">${session?.track?.title}</h3>
-        <h3 class="meta-info" ?hidden="${!session?.complexity}">
-          ${this.sessionDetails.contentLevel}: ${session?.complexity}
+        <h3 class="meta-info" ?hidden="${!complexity}">
+          ${msg(str`Content level: ${complexity}`, { id: 'pages.session.content-level' })}
         </h3>
 
         <short-markdown
@@ -417,7 +417,7 @@ export class SessionPage extends ThemedElement {
                     rel="noopener noreferrer"
                   >
                     <hoverboard-icon name="presentation"></hoverboard-icon>
-                    <span>${this.sessionDetails.viewPresentation}</span>
+                    <span>${msg('View presentation', { id: 'common.view-presentation' })}</span>
                   </a>
                 `
               : nothing
@@ -427,7 +427,7 @@ export class SessionPage extends ThemedElement {
               ? html`
                   <md-outlined-button class="video-button" @click="${this.openVideo}">
                     <hoverboard-icon slot="icon" name="video"></hoverboard-icon>
-                    ${this.sessionDetails.viewVideo}
+                    ${msg('View video', { id: 'common.view-video' })}
                   </md-outlined-button>
                 `
               : nothing
@@ -442,7 +442,7 @@ export class SessionPage extends ThemedElement {
           session?.speakers?.length
             ? html`
                 <div class="additional-sections">
-                  <h3>${this.sessionDetails.speakers}</h3>
+                  <h3>${msg('Speakers', { id: 'pages.session.speakers' })}</h3>
                   ${session.speakers.map(
                     (speaker) => html`
                       <a class="section" href="${this.speakerUrl(speaker.id)}">
@@ -471,14 +471,21 @@ export class SessionPage extends ThemedElement {
         }
 
         <div id="feedback" class="additional-sections">
-          <h3>${this.feedback.headline}</h3>
+          <h3>${msg('Review session', { id: 'common.review-session' })}</h3>
 
           <auth-required ?hidden="${!this.acceptingFeedback}">
-            <slot slot="prompt">${this.feedback.leaveFeedback}</slot>
+            <slot slot="prompt">
+              ${msg('to leave feedback', {
+                id: 'pages.session.leave-feedback',
+                desc: 'Follows a Sign in button: "Sign in to leave feedback".',
+              })}
+            </slot>
             <feedback-block .sessionId="${session?.id}"></feedback-block>
           </auth-required>
 
-          <p ?hidden="${this.acceptingFeedback}">${this.feedback.sessionClosed}</p>
+          <p ?hidden="${this.acceptingFeedback}">
+            ${msg('Session reviews are not open', { id: 'pages.session.feedback-closed' })}
+          </p>
         </div>
       </div>
     `;

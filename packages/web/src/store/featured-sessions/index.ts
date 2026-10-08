@@ -1,4 +1,5 @@
 import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import {
@@ -6,7 +7,6 @@ import {
   type FeaturedSessions,
   saveFeaturedSessions,
 } from '../../db/featured-sessions';
-import { bookmarked } from '../../config/site';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { selectUserId } from '../user';
@@ -62,7 +62,13 @@ export const setUserFeaturedSessions = async (
     const cleanedFeaturedSessions = cleanFeaturedSessions(featuredSessions);
     await saveFeaturedSessions(userId, cleanedFeaturedSessions);
     dispatch(success(cleanedFeaturedSessions));
-    dispatch(queueSnackbar(isBookmarked ? bookmarked.added : bookmarked.removed));
+    dispatch(
+      queueSnackbar(
+        isBookmarked
+          ? msg('Session saved to My Schedule', { id: 'store.featured-sessions.added' })
+          : msg('Session removed from My Schedule', { id: 'store.featured-sessions.removed' }),
+      ),
+    );
   } catch (error) {
     dispatch(failure(error as Error));
   }

@@ -1,3 +1,4 @@
+import { msg } from '@lit/localize';
 import '@material/web/fab/fab.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
@@ -68,7 +69,11 @@ export class FooterBlock extends ThemedElement {
     return html`
       <div class="container">
         <div class="fab">
-          <md-fab class="back-to-top" aria-label="Back to top" @click="${scrollToTop}">
+          <md-fab
+            class="back-to-top"
+            aria-label="${msg('Back to top', { id: 'footer.block.back-to-top' })}"
+            @click="${scrollToTop}"
+          >
             <hoverboard-icon slot="icon" name="up"></hoverboard-icon>
           </md-fab>
         </div>

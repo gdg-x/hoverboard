@@ -20,7 +20,7 @@ describe('simple-hero', () => {
     const { shadowRoot } = await fixture<SimpleHero>(html`<simple-hero></simple-hero>`);
 
     expect(shadowRoot.querySelector('hero-block')).not.toHaveAttribute('background-color');
-    expect(shadowRoot.querySelector('.hero-title')).toHaveTextContent(heroSettings.notFound.title);
+    expect(shadowRoot.querySelector('.hero-title')).toHaveTextContent('Not Found');
     expect(shadowRoot.querySelector('.hero-description')).toBeNull();
   });
 
@@ -29,7 +29,7 @@ describe('simple-hero', () => {
       html`<simple-hero page="speakers"></simple-hero>`,
     );
 
-    expect(shadowRoot.querySelector('.hero-title')).toHaveTextContent(heroSettings.speakers.title);
+    expect(shadowRoot.querySelector('.hero-title')).toHaveTextContent('Speakers');
     expect(shadowRoot.querySelector('.hero-description')).toHaveTextContent(
       heroSettings.speakers.description,
     );
@@ -38,7 +38,7 @@ describe('simple-hero', () => {
   it('renders only the title for pages without a description', async () => {
     const { shadowRoot } = await fixture<SimpleHero>(html`<simple-hero page="blog"></simple-hero>`);
 
-    expect(shadowRoot.querySelector('.hero-title')).toHaveTextContent(heroSettings.blog.title);
+    expect(shadowRoot.querySelector('.hero-title')).toHaveTextContent('Blog');
     expect(shadowRoot.querySelector('.hero-description')).toBeNull();
   });
 

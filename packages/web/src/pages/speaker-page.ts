@@ -1,4 +1,5 @@
 import { Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -12,7 +13,6 @@ import { router } from '../router';
 import { store } from '../store';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
-import { speakerDetails } from '../config/site';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
@@ -170,8 +170,6 @@ export class SpeakerPage extends ThemedElement {
     }
   `;
 
-  private speakerDetails = speakerDetails;
-
   @property({ type: Object })
   accessor speaker: SpeakerWithTags | undefined;
   @fromStore((state) => selectSpeakersState(state))
@@ -302,7 +300,7 @@ export class SpeakerPage extends ThemedElement {
           sessions.length
             ? html`
                 <div class="additional-sections">
-                  <h3>${this.speakerDetails.sessions}</h3>
+                  <h3>${msg('Sessions', { id: 'common.sessions' })}</h3>
 
                   ${sessions.map(
                     (session) => html`
