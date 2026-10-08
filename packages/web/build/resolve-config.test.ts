@@ -8,7 +8,13 @@ import { THEMES } from '../src/themes/index';
 import { defaultTheme } from '../src/themes/default';
 import { THEME_TOKENS } from '../src/themes/tokens';
 import { ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
-import { featureDefines, headTags, siteModule, themeColorsCss } from './vite-plugin-site';
+import {
+  featureDefines,
+  headTags,
+  markdownTranslations,
+  siteModule,
+  themeColorsCss,
+} from './vite-plugin-site';
 
 const repoPaths = configPaths(join(import.meta.dirname, '..'));
 const dirsToClean: string[] = [];
@@ -249,7 +255,11 @@ describe('config validation', () => {
 
   describe('event content translations', () => {
     /** A site with `es` as a target, its UI translations, and `content/locales/es/resources.json`. */
-    const spanishSite = (translation?: unknown, site: object = {}) => {
+    const spanishSite = (
+      translation?: unknown,
+      site: object = {},
+      files: Record<string, string> = {},
+    ) => {
       const translations = mkdtempSync(join(tmpdir(), 'hoverboard-translations-'));
       dirsToClean.push(translations);
       writeJson(join(translations, 'xliff/es.xlf'), '');
@@ -260,7 +270,11 @@ describe('config validation', () => {
       if (translation !== undefined) {
         writeJson(join(paths.site, 'content/locales/es/resources.json'), translation);
       }
-      return loadConfig({ paths, nodeEnv: 'production' });
+      for (const [name, text] of Object.entries(files)) {
+        mkdirSync(join(paths.site, 'content/locales/es'), { recursive: true });
+        writeFileSync(join(paths.site, 'content/locales/es', name), text);
+      }
+      return { ...loadConfig({ paths, nodeEnv: 'production' }), paths };
     };
 
     it('has none for the repository config', () => {
@@ -318,6 +332,29 @@ describe('config validation', () => {
       expect(
         spanishSite({ title: 'DevFest' }, { locales: { source: 'en', targets: [] } }).errors,
       ).toEqual(['content/locales/es: "es" is not in site.json/locales/targets']);
+    });
+
+    it('lists the translated markdown pages of each locale', () => {
+      const { config, errors, paths } = spanishSite(
+        undefined,
+        {},
+        {
+          'faq.md': '# Preguntas',
+          '.DS_Store': '',
+        },
+      );
+
+      expect(errors).toEqual([]);
+      expect(config.contentMarkdown).toEqual({
+        es: { faq: join(paths.site, 'content/locales/es/faq.md') },
+      });
+      expect(config.contentTranslations).toEqual({});
+    });
+
+    it('rejects other files in a locale folder', () => {
+      expect(spanishSite(undefined, {}, { 'FAQ.md': '# Preguntas' }).errors).toEqual([
+        'content/locales/es/FAQ.md: is not resources.json, faq.md, or coc.md',
+      ]);
     });
   });
 
@@ -383,6 +420,34 @@ describe('featureDefines', () => {
     expect(defines['__HB_FEATURES__.blog']).toBe('false');
     expect(defines['__HB_FEATURES__.team']).toBe('true');
     expect(JSON.parse(defines['__HB_FEATURES__'] ?? '')).toEqual(features);
+  });
+});
+
+describe('markdownTranslations', () => {
+  it('renders each translated page into a hashed file and points the translation at it', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'hoverboard-markdown-'));
+    dirsToClean.push(dir);
+    writeFileSync(join(dir, 'faq.md'), '# Preguntas de {{ name }}');
+    const config = {
+      ...resolveConfig({ paths: repoPaths, nodeEnv: 'production' }),
+      contentTranslations: { es: { title: 'DevFest en español' } },
+      contentMarkdown: { es: { faq: join(dir, 'faq.md') } },
+    };
+
+    const { files, contentTranslations } = markdownTranslations(config, (template) =>
+      template.replace('{{ name }}', 'DevFest'),
+    );
+
+    expect(files).toEqual([
+      {
+        fileName: expect.stringMatching(/^locales\/es-faq-[0-9a-f]{8}\.md$/),
+        source: '# Preguntas de DevFest',
+      },
+    ]);
+    expect(contentTranslations).toEqual({
+      es: { title: 'DevFest en español', faq: `/${files[0]!.fileName}` },
+    });
+    expect(config.contentTranslations).toEqual({ es: { title: 'DevFest en español' } });
   });
 });
 

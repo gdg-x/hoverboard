@@ -24,6 +24,8 @@ export interface SiteConfig {
   theme: Theme;
   /** `content/locales/<locale>/resources.json` by locale, the keys to merge over `resources`. */
   contentTranslations: Record<string, object>;
+  /** Paths of the translated markdown pages, `content/locales/<locale>/<page>.md`, by locale. */
+  contentMarkdown: Record<string, Partial<Record<MarkdownPage, string>>>;
   NODE_ENV: string;
 }
 
@@ -192,18 +194,28 @@ const unknownKeys = (translation: unknown, content: unknown, path: string): stri
       )
     : [];
 
-/** Reads `content/locales/<locale>/resources.json` for the target locales that have one. */
+/** Pages whose text is a markdown file in `content/`, which a locale folder can translate. */
+export const MARKDOWN_PAGES = ['faq', 'coc'] as const;
+export type MarkdownPage = (typeof MARKDOWN_PAGES)[number];
+const LOCALE_FILES = ['resources.json', ...MARKDOWN_PAGES.map((page) => `${page}.md`)];
+
+/** Reads `content/locales/<locale>/` for the target locales: `resources.json` and the markdown pages. */
 const loadContentTranslations = (
   site: Site,
   siteContent: object,
   resources: Resources,
   validateResources: ValidateFunction,
   paths: ConfigPaths,
-): { translations: Record<string, object>; errors: string[] } => {
+): {
+  translations: Record<string, object>;
+  markdown: Record<string, Partial<Record<MarkdownPage, string>>>;
+  errors: string[];
+} => {
   const translations: Record<string, object> = {};
+  const markdown: Record<string, Partial<Record<MarkdownPage, string>>> = {};
   const errors: string[] = [];
   const dir = join(paths.site, 'content', 'locales');
-  if (!fs.existsSync(dir)) return { translations, errors };
+  if (!fs.existsSync(dir)) return { translations, markdown, errors };
 
   const { targets } = site.locales as { targets: string[] };
   const folders = fs
@@ -214,11 +226,24 @@ const loadContentTranslations = (
       errors.push(`content/locales/${locale}: "${locale}" is not in site.json/locales/targets`);
       continue;
     }
-    const file = `content/locales/${locale}/resources.json`;
-    const path = join(paths.site, file);
-    if (!fs.existsSync(path)) continue;
+    const folder = join(dir, locale);
+    const files = fs.readdirSync(folder).filter((name) => !name.startsWith('.'));
+    for (const name of files.filter((name) => !LOCALE_FILES.includes(name))) {
+      errors.push(
+        `content/locales/${locale}/${name}: is not ${new Intl.ListFormat('en', { type: 'disjunction' }).format(LOCALE_FILES)}`,
+      );
+    }
+    const pages = MARKDOWN_PAGES.filter((page) => files.includes(`${page}.md`));
+    if (pages.length) {
+      markdown[locale] = Object.fromEntries(
+        pages.map((page) => [page, join(folder, `${page}.md`)]),
+      );
+    }
 
-    const translation = readJson<unknown>(path);
+    const file = `content/locales/${locale}/resources.json`;
+    if (!files.includes('resources.json')) continue;
+
+    const translation = readJson<unknown>(join(paths.site, file));
     if (!isPlainObject(translation)) {
       errors.push(`${file}: must be an object`);
       continue;
@@ -236,7 +261,7 @@ const loadContentTranslations = (
     delete content['$schema'];
     translations[locale] = content;
   }
-  return { translations, errors };
+  return { translations, markdown, errors };
 };
 
 /**
@@ -270,7 +295,7 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
   const content =
     siteValid && resourcesValid
       ? loadContentTranslations(site, siteContent, resources, validateResources, paths)
-      : { translations: {}, errors: [] };
+      : { translations: {}, markdown: {}, errors: [] };
   errors.push(...content.errors);
 
   if (siteValid) {
@@ -287,6 +312,7 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
       resources,
       theme,
       contentTranslations: content.translations,
+      contentMarkdown: content.markdown,
       NODE_ENV: nodeEnv || 'production',
     },
     errors,

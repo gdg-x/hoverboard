@@ -4,7 +4,6 @@ import { contentTranslations, resources, site as settings } from 'virtual:hoverb
 import { isFeature, isFeatureEnabled, isNavigationRoute, type NavigationRoute } from './features';
 import { deepMerge } from './merge';
 
-export const { coc, faq } = resources;
 export const { basepath, heroSettings, image, organizer, url } = settings;
 export const siteLocales = settings.locales as { source: string; targets: string[] };
 export const timeZone = settings.event.timezone;
@@ -18,7 +17,9 @@ export const socialNetwork = { follow: settings.social.follow };
 export let {
   aboutBlock,
   aboutOrganizerBlock,
+  coc,
   description,
+  faq,
   featuredVideos,
   footerRelBlock,
   galleryBlock,
@@ -43,7 +44,9 @@ export const loadContent = async (locale: string): Promise<void> => {
   ({
     aboutBlock,
     aboutOrganizerBlock,
+    coc,
     description,
+    faq,
     featuredVideos,
     footerRelBlock,
     galleryBlock,

@@ -60,6 +60,7 @@ describe('loadContent', () => {
   const es = {
     title: 'DevFest en español',
     aboutBlock: { statisticsBlock: { days: { label: 'Días' } } },
+    faq: '/locales/es-faq-1234abcd.md',
   };
 
   it('merges the translation over the source content, key by key', async () => {
@@ -71,6 +72,8 @@ describe('loadContent', () => {
     expect(site.title).toBe('DevFest en español');
     expect(site.aboutBlock.statisticsBlock.days).toEqual({ label: 'Días', number });
     expect(site.aboutBlock.statisticsBlock.attendees.label).toBe('Attendees');
+    expect(site.faq).toBe('/locales/es-faq-1234abcd.md');
+    expect(site.coc).toBe('/data/coc.md');
   });
 
   it('goes back to the source content for a locale without a translation', async () => {
@@ -81,6 +84,7 @@ describe('loadContent', () => {
 
     expect(site.title).toBe(title);
     expect(site.aboutBlock.statisticsBlock.days.label).toBe('Days');
+    expect(site.faq).toBe(faq);
   });
 
   it('keeps the content of the latest request when an earlier one finishes later', async () => {

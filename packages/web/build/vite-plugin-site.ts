@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+import fs from 'node:fs';
 import n from 'nunjucks';
 import type { HtmlTagDescriptor, Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
@@ -97,6 +99,32 @@ export const headTags = (data: SiteConfig): HtmlTagDescriptor[] => {
   return tags;
 };
 
+/**
+ * Renders each translated markdown page into `locales/<locale>-<page>-<hash>.md`, and sets the
+ * page's path (the `faq` or `coc` key) in that locale's content translation. The hash lets the
+ * service worker cache the file on first load, like the locale modules.
+ */
+export const markdownTranslations = (
+  { contentTranslations, contentMarkdown }: SiteConfig,
+  render: (template: string) => string,
+): {
+  files: { fileName: string; source: string }[];
+  contentTranslations: Record<string, object>;
+} => {
+  const files: { fileName: string; source: string }[] = [];
+  const translations = { ...contentTranslations };
+  for (const [locale, pages] of Object.entries(contentMarkdown)) {
+    for (const [page, path] of Object.entries(pages)) {
+      const source = render(fs.readFileSync(path, 'utf8'));
+      const hash = createHash('sha256').update(source).digest('hex').slice(0, 8);
+      const fileName = `locales/${locale}-${page}-${hash}.md`;
+      files.push({ fileName, source });
+      translations[locale] = { ...translations[locale], [page]: `/${fileName}` };
+    }
+  }
+  return { files, contentTranslations: translations };
+};
+
 // Renders the Nunjucks placeholders (e.g. {{ resources.title }}) in index.html, manifest.json and
 // the markdown pages with the resolved site config.
 export const site = (): PluginOption[] => {
@@ -104,9 +132,18 @@ export const site = (): PluginOption[] => {
   const nunjucks = n.configure({ throwOnUndefined: true });
   const compileTemplate = (template: string) => nunjucks.renderString(template, data);
   const compileBufferTemplate = (body: Buffer) => compileTemplate(body.toString());
+  const markdown = markdownTranslations(data, compileTemplate);
 
   return [
-    siteModule(data),
+    siteModule({ ...data, contentTranslations: markdown.contentTranslations }),
+    {
+      name: 'hoverboard-localized-markdown',
+      generateBundle() {
+        for (const { fileName, source } of markdown.files) {
+          this.emitFile({ type: 'asset', fileName, source });
+        }
+      },
+    },
     {
       name: 'hoverboard-template-html',
       // `pre` so Vite's own HTML parsing (module script discovery, asset href resolution)
