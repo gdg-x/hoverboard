@@ -6,7 +6,8 @@ import {
   type PayloadAction,
 } from '@reduxjs/toolkit';
 import type { Unsubscribe } from 'firebase/firestore';
-import { type RootState, store } from '..';
+import type { RootState } from '..';
+import { dispatch } from '../dispatch';
 import {
   removeFeedback,
   saveFeedback,
@@ -34,8 +35,8 @@ export const initialState = {
 export const subscribe = (userId: string) => {
   return subscribeFeedback(
     userId,
-    (feedbackList) => store.dispatch(setSuccess(feedbackList)),
-    (error) => store.dispatch(setFailure(error)),
+    (feedbackList) => dispatch(setSuccess(feedbackList)),
+    (error) => dispatch(setFailure(error)),
   );
 };
 
@@ -116,7 +117,7 @@ const selectSubscription = createSelector(
   selectFeedbackSubscription,
   (user: UserState, subscription: FeedbackState['subscription']): FeedbackState['subscription'] => {
     if (user instanceof Success && subscription instanceof Initialized) {
-      store.dispatch(subscribeToFeedback(user.data.uid));
+      dispatch(subscribeToFeedback(user.data.uid));
       return new Pending();
     } else {
       return subscription;

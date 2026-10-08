@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { store } from '.';
 
 describe('store', () => {
@@ -42,5 +42,13 @@ describe('store', () => {
 
     expect(getState()).toBe(store.getState());
     expect(() => dispatch({ type: '@@NOOP' })).not.toThrow();
+  });
+
+  it('registers the feedback reducer when the auth slice loads before the store', async () => {
+    vi.resetModules();
+    await import('./auth');
+    const { store: freshStore } = await import('.');
+
+    expect(freshStore.getState().feedback).toBeDefined();
   });
 });

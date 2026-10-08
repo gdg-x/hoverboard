@@ -1,0 +1,49 @@
+{
+  "$schema": "../../../../schemas/resources.schema.json",
+  "title": "Minimal Fest",
+  "description": "A site with only the required config",
+  "keywords": "minimal",
+  "dates": "October 15, 2027",
+  "aboutBlock": {
+    "callToAction": {
+      "featuredSessions": {
+        "description": "Sessions",
+        "label": "Explore",
+        "link": "https://example.com/"
+      },
+      "howItWas": {
+        "description": "Last year",
+        "label": "Watch",
+        "youtubeId": "aaaaaaaaaaa"
+      }
+    },
+    "statisticsBlock": {
+      "attendees": { "label": "Attendees", "number": "1" },
+      "days": { "label": "Days", "number": "1" },
+      "sessions": { "label": "Sessions", "number": "1" },
+      "tracks": { "label": "Tracks", "number": "1" }
+    }
+  },
+  "aboutOrganizerBlock": {
+    "image": "/images/team.jpg",
+    "blocks": [
+      {
+        "title": "Organizer",
+        "description": "The organizer",
+        "callToAction": { "label": "Read more", "link": "https://example.com/" }
+      }
+    ]
+  },
+  "team": { "description": "The team" },
+  "ticketsBlock": { "ticketsDetails": "Tickets" },
+  "featuredVideos": { "title": "Videos", "callToAction": { "link": "https://example.com/" } },
+  "galleryBlock": {
+    "title": "Gallery",
+    "description": "Photos",
+    "callToAction": { "link": "https://example.com/" }
+  },
+  "subscribeBlock": { "formTitle": "Subscribe" },
+  "codeOfConductBlock": { "form": "https://example.com/", "contacts": [] },
+  "footerRelBlock": [],
+  "mapBlock": { "description": "The venue" }
+}

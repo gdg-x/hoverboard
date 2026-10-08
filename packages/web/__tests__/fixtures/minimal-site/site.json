@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../schemas/site.schema.json",
+  "firebase": {
+    "projectId": "minimal-site"
+  },
+  "shortName": "Minimal",
+  "organizer": {
+    "name": "Organizer",
+    "email": "organizer@example.com"
+  },
+  "event": {
+    "startDate": "2027-10-15",
+    "endDate": "2027-10-15",
+    "timezone": "UTC",
+    "location": {
+      "name": "Venue",
+      "city": "City",
+      "short": "City",
+      "address": "1 Main Street, City",
+      "pointer": { "latitude": 0, "longitude": 0, "zoom": 5 },
+      "mapCenter": { "latitude": 0, "longitude": 0 }
+    }
+  },
+  "social": {
+    "hashtag": "Minimal",
+    "follow": []
+  },
+  "heroSettings": {
+    "home": {
+      "description": "A minimal site",
+      "background": { "image": "/images/backgrounds/home.jpg" }
+    }
+  },
+  "features": {
+    "blog": false,
+    "codeOfConduct": false,
+    "faq": false,
+    "feedback": false,
+    "forkMe": false,
+    "gallery": false,
+    "imageOptimization": false,
+    "mailchimp": false,
+    "map": false,
+    "mySchedule": false,
+    "notifications": false,
+    "partners": false,
+    "previousSpeakers": false,
+    "schedule": false,
+    "speakers": false,
+    "subscribe": false,
+    "team": false,
+    "tickets": false,
+    "videos": false
+  }
+}
