@@ -251,6 +251,9 @@
 <trans-unit id="markdown.remote-markdown.error">
   <source>Error loading content</source>
 </trans-unit>
+<trans-unit id="markdown.toc.title">
+  <source>On this page</source>
+</trans-unit>
 <trans-unit id="schedule.tabs.label">
   <source>Schedule days</source>
 </trans-unit>
@@ -503,11 +506,32 @@
 <trans-unit id="pages.home.scroll-error">
   <source>Error scrolling to section.</source>
 </trans-unit>
-<trans-unit id="pages.offline.message">
-  <source>You are offline and this page has not been saved yet. Pages you have visited are still available.</source>
+<trans-unit id="pages.not-found.joke">
+  <source>This session was moved to another room.</source>
+</trans-unit>
+<trans-unit id="pages.not-found.message">
+  <source>The page you are looking for is not here. It may have moved, or the link is wrong.</source>
 </trans-unit>
 <trans-unit id="pages.offline.home-link">
   <source>Go to the home page</source>
+</trans-unit>
+<trans-unit id="pages.not-found.schedule-link">
+  <source>See the schedule</source>
+</trans-unit>
+<trans-unit id="pages.offline.not-saved">
+  <source>You are offline, and this page was not saved on this device yet.</source>
+</trans-unit>
+<trans-unit id="pages.offline.works-title">
+  <source>What works offline</source>
+</trans-unit>
+<trans-unit id="pages.offline.visited">
+  <source>Pages you have visited before</source>
+</trans-unit>
+<trans-unit id="pages.offline.bookmarks">
+  <source>Your bookmarked sessions, in My Schedule</source>
+</trans-unit>
+<trans-unit id="pages.post.all-posts">
+  <source>All posts</source>
 </trans-unit>
 <trans-unit id="pages.post.published">
   <source>Published: <x id="0" equiv-text="${published}"/></source>

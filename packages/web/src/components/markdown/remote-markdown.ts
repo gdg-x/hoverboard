@@ -20,6 +20,10 @@ export class RemoteMarkDown extends ThemedElement {
   @property({ attribute: 'page-path' })
   accessor pagePath = '';
 
+  /** Shows each `###` question as a disclosure. */
+  @property({ type: Boolean })
+  accessor disclosures = false;
+
   @state()
   accessor state: State = new Initialized();
 
@@ -32,7 +36,12 @@ export class RemoteMarkDown extends ThemedElement {
       () => html``,
       () => html`${msg('Loading...', { id: 'common.loading' })}`,
       () => html`${msg('Error loading content', { id: 'markdown.remote-markdown.error' })}`,
-      (data) => html`<toc-markdown content="${data}" page-path="${this.pagePath}"></toc-markdown>`,
+      (data) =>
+        html`<toc-markdown
+          content="${data}"
+          page-path="${this.pagePath}"
+          ?disclosures="${this.disclosures}"
+        ></toc-markdown>`,
     );
   }
 

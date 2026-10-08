@@ -68,24 +68,16 @@ describe('blog-list-page', () => {
     expect(mockUpdateMetadata).toHaveBeenCalledWith('Blog', 'Read stories from our team');
   });
 
-  it('renders featured posts and passes the complete list to posts-list', async () => {
+  it('shows every post in the featured card grid', async () => {
     const { element, shadowRootForWithin } = await fixture<BlogListPage>(
       html`<blog-list-page></blog-list-page>`,
     );
     element.posts = new Success(posts);
     await element.updateComplete;
 
-    const view = within(shadowRootForWithin);
-    expect(view.getByText('First post')).toBeInTheDocument();
-    expect(view.getByText('Third post')).toBeInTheDocument();
-    expect(shadowRootForWithin.querySelectorAll('a.featured-post')).toHaveLength(3);
-    expect(shadowRootForWithin.querySelector('a.featured-post')).toHaveAttribute(
-      'href',
-      '/blog/post-1',
-    );
-
     const postsList = shadowRootForWithin.querySelector('posts-list');
     expect(postsList).toHaveProperty('posts', posts);
+    expect(postsList).toHaveAttribute('featured');
   });
 
   it('updates loading visibility', async () => {
@@ -96,7 +88,6 @@ describe('blog-list-page', () => {
     element.posts = new Pending();
     await element.updateComplete;
     expect(shadowRoot.querySelector('hb-progress')).not.toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('content-loader')).not.toHaveAttribute('hidden');
 
     element.posts = new Success(posts);
     await element.updateComplete;
@@ -112,6 +103,5 @@ describe('blog-list-page', () => {
 
     expect(within(shadowRootForWithin).getByText('Error loading posts.')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('hb-progress')).toHaveAttribute('hidden');
-    expect(shadowRootForWithin.querySelector('content-loader')).toHaveAttribute('hidden');
   });
 });

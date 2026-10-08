@@ -88,21 +88,21 @@ describe('post-page', () => {
     await element.updateComplete;
 
     const view = within(shadowRootForWithin);
-    expect(view.getByText('First post')).toBeInTheDocument();
-    expect(view.getByText(/^Published: /)).toBeInTheDocument();
-    expect(view.getByText('Up next')).toBeInTheDocument();
+    expect(view.getByRole('heading', { level: 1 })).toHaveTextContent('First post');
+    expect(view.getByText(/Published: /)).toBeInTheDocument();
+    expect(view.getByRole('heading', { level: 2, name: 'Up next' })).toBeInTheDocument();
+    expect(view.getByRole('link', { name: 'All posts' })).toHaveAttribute('href', '/blog');
     expect(shadowRootForWithin.querySelector('long-markdown')).toHaveProperty(
       'content',
       'Inline first content',
     );
-    expect(shadowRootForWithin.querySelector('hero-block')).toHaveProperty(
-      'backgroundImage',
-      '/first.jpg',
-    );
+    expect(shadowRootForWithin.querySelector('.cover')).toHaveAttribute('src', '/first.jpg');
+    expect(shadowRootForWithin.querySelector('.cover')).toHaveAttribute('alt', '');
     expect(shadowRootForWithin.querySelector('posts-list')).toHaveProperty(
       'posts',
       posts.slice(1, 4),
     );
+    expect(shadowRootForWithin.querySelector('posts-list')).toHaveAttribute('heading-level', '3');
     expect(mockUpdateImageMetadata).toHaveBeenCalledWith('First post', 'First brief', {
       image: '/first.jpg',
       imageAlt: 'First post',

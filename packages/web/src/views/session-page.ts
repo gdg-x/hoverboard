@@ -62,29 +62,6 @@ export class SessionPage extends ThemedElement {
         color: var(--hb-color-on-surface);
       }
 
-      .back {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--hb-space-1);
-        min-block-size: var(--hb-target-min);
-        margin-block-end: var(--hb-space-2);
-        color: inherit;
-        font-weight: 600;
-        text-decoration: underline;
-        text-underline-offset: 0.2em;
-      }
-
-      .back:focus-visible {
-        outline: 3px solid var(--hb-color-focus);
-        outline-offset: 2px;
-        border-radius: var(--hb-radius-s);
-      }
-
-      .back hoverboard-icon {
-        inline-size: 20px;
-        block-size: 20px;
-      }
-
       ul {
         display: flex;
         flex-wrap: wrap;

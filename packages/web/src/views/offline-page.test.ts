@@ -1,7 +1,8 @@
-import { screen, within } from '@testing-library/dom';
-import { html } from 'lit';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { within } from '@testing-library/dom';
+import { html, nothing, render as litRender } from 'lit';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../__tests__/helpers/fixtures';
+import { setFeatures } from '../../__tests__/helpers/features';
 import { updateMetadata } from '../utils/metadata';
 import type { OfflinePage } from './offline-page';
 import './offline-page';
@@ -9,19 +10,30 @@ import './offline-page';
 vi.mock('../utils/metadata');
 
 describe('offline-page', () => {
-  beforeEach(() => {
-    vi.mocked(updateMetadata).mockClear();
+  afterEach(() => {
+    litRender(nothing, document.body);
   });
 
-  it('explains that the page is not available offline and links home', async () => {
-    const { shadowRootForWithin } = await fixture<OfflinePage>(
-      html`<offline-page data-testid="page"></offline-page>`,
+  it('says what still works offline and links home', async () => {
+    const { shadowRoot, shadowRootForWithin } = await fixture<OfflinePage>(
+      html`<offline-page></offline-page>`,
     );
     const view = within(shadowRootForWithin);
 
-    expect(screen.getByTestId('page')).toBeInTheDocument();
     expect(view.getByText(/You are offline/)).toBeInTheDocument();
-    expect(view.getByRole('link', { name: 'Go to the home page' })).toHaveAttribute('href', '/');
+    expect(view.getByRole('heading', { level: 2 })).toHaveTextContent('What works offline');
+    expect([...shadowRoot.querySelectorAll('li')].map((item) => item.textContent?.trim())).toEqual([
+      'Pages you have visited before',
+      'Your bookmarked sessions, in My Schedule',
+    ]);
+    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('href', '/');
+  });
+
+  it('leaves out bookmarks when My Schedule is off', async () => {
+    setFeatures({ mySchedule: false });
+    const { shadowRoot } = await fixture<OfflinePage>(html`<offline-page></offline-page>`);
+
+    expect(shadowRoot.querySelectorAll('li')).toHaveLength(1);
   });
 
   it('sets the offline title and description', async () => {

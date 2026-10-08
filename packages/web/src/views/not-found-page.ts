@@ -1,21 +1,57 @@
-import { css, html } from 'lit';
+import { msg } from '@lit/localize';
+import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
-import { pageText } from '../utils/page-text';
 import '../components/hero/simple-hero';
+import '../components/ui/hb-button';
+import { pageInner } from '../styles/page';
 import { ThemedElement } from '../components/themed-element';
 
+/** A missing page: a drawing, a joke, and the way home and to the schedule. */
 @customElement('not-found-page')
 export class NotFoundPage extends ThemedElement {
-  static override styles = css`
-    .not-found-image {
-      --lazy-image-width: calc(100% - 94px);
-      --lazy-image-height: 400px;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      margin: 48px;
-    }
-  `;
+  static override styles = [
+    pageInner,
+    css`
+      .inner {
+        display: grid;
+        align-items: center;
+        gap: var(--hb-space-7);
+        container-type: inline-size;
+      }
+
+      .art {
+        display: block;
+        inline-size: 100%;
+        max-inline-size: 28rem;
+        block-size: auto;
+      }
+
+      .joke {
+        margin: 0 0 var(--hb-space-3);
+        font: 800 var(--hb-text-3xl) / 1.15 var(--hb-font-display);
+        text-wrap: balance;
+      }
+
+      .text p {
+        max-inline-size: var(--hb-prose-max);
+        font-size: var(--hb-text-lg);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--hb-space-3);
+        margin-block-start: var(--hb-space-5);
+      }
+
+      @media (min-width: 800px) {
+        .inner {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        }
+      }
+    `,
+  ];
 
   private readonly metadata = new PageMetadataController(this, 'notFound');
 
@@ -23,13 +59,34 @@ export class NotFoundPage extends ThemedElement {
     return html`
       <simple-hero page="notFound"></simple-hero>
 
-      <img
-        loading="lazy"
-        decoding="async"
-        class="not-found-image"
-        src="../../images/not-found.svg"
-        alt=${pageText('notFound').title}
-      />
+      <div class="inner">
+        <img class="art" src="/images/not-found.svg" alt="" width="1121" height="778" />
+        <div class="text">
+          <p class="joke">
+            ${msg('This session was moved to another room.', { id: 'pages.not-found.joke' })}
+          </p>
+          <p>
+            ${msg(
+              'The page you are looking for is not here. It may have moved, or the link is wrong.',
+              {
+                id: 'pages.not-found.message',
+              },
+            )}
+          </p>
+          <div class="actions">
+            <hb-button href="/">
+              ${msg('Go to the home page', { id: 'pages.offline.home-link' })}
+            </hb-button>
+            ${
+              __HB_FEATURES__.schedule
+                ? html`<hb-button variant="outlined" href="/schedule">
+                    ${msg('See the schedule', { id: 'pages.not-found.schedule-link' })}
+                  </hb-button>`
+                : nothing
+            }
+          </div>
+        </div>
+      </div>
     `;
   }
 }

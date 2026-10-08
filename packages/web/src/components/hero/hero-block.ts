@@ -5,8 +5,8 @@ import { ThemedElement } from '../themed-element';
 export type HeroTone = '1' | '2' | '3' | '4';
 
 /**
- * Styles for the `.hero-title` and `.hero-description` a page puts in the hero. Pages include them,
- * because their own heading styles win over the hero's `::slotted()` rules.
+ * Styles for what a page puts in the hero: the `.hero-title`, a `.hero-description` and a `.back`
+ * link. Pages include them, because their own heading styles win over the hero's `::slotted()`.
  */
 export const heroText = css`
   .hero-title {
@@ -22,6 +22,29 @@ export const heroText = css`
     max-inline-size: var(--hb-prose-max);
     margin: var(--hb-space-4) 0 0;
     font-size: var(--hb-text-lg);
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--hb-space-1);
+    min-block-size: var(--hb-target-min);
+    margin-block-end: var(--hb-space-3);
+    color: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .back:focus-visible {
+    outline: 3px solid var(--hb-color-focus);
+    outline-offset: 2px;
+    border-radius: var(--hb-radius-s);
+  }
+
+  .back hoverboard-icon {
+    inline-size: 20px;
+    block-size: 20px;
   }
 `;
 

@@ -1,46 +1,45 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { screen } from '@testing-library/dom';
-import { html } from 'lit';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { within } from '@testing-library/dom';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import '../store';
+import { setFeatures } from '../../__tests__/helpers/features';
 import { updateMetadata } from '../utils/metadata';
+import type { NotFoundPage } from './not-found-page';
 import './not-found-page';
-import { NotFoundPage } from './not-found-page';
-import { SimpleHero } from '../components/hero/simple-hero';
 
 vi.mock('../utils/metadata');
-vi.mock('../utils/scrolling', () => ({
-  scrollToTop: vi.fn(),
-}));
-
-const mockUpdateMetadata = vi.mocked(updateMetadata);
 
 describe('not-found-page', () => {
-  beforeEach(() => {
-    mockUpdateMetadata.mockClear();
+  afterEach(() => {
+    litRender(nothing, document.body);
   });
 
-  it('defines a component', () => {
-    expect(customElements.get('not-found-page')).toBeDefined();
-  });
-
-  it('renders the not-found page', async () => {
-    const { shadowRootForWithin } = await fixture<NotFoundPage>(
-      html`<not-found-page data-testid="page"></not-found-page>`,
+  it('shows a drawing, the joke, and links home and to the schedule', async () => {
+    const { shadowRoot, shadowRootForWithin } = await fixture<NotFoundPage>(
+      html`<not-found-page></not-found-page>`,
     );
-    const hero = shadowRootForWithin.querySelector<SimpleHero>('simple-hero');
-    const image = shadowRootForWithin.querySelector('img');
 
-    expect(screen.getByTestId('page')).toBeInTheDocument();
-    expect(hero?.page).toBe('notFound');
-    expect(image).toHaveAttribute('src', '../../images/not-found.svg');
-    expect(image).toHaveAttribute('alt', 'Not Found');
+    expect(shadowRoot.querySelector('simple-hero')).toHaveAttribute('page', 'notFound');
+    expect(shadowRoot.querySelector('.art')).toHaveAttribute('alt', '');
+    expect(
+      within(shadowRootForWithin).getByText('This session was moved to another room.'),
+    ).toBeInTheDocument();
+    const links = [...shadowRoot.querySelectorAll('hb-button')].map((link) =>
+      link.getAttribute('href'),
+    );
+    expect(links).toEqual(['/', '/schedule']);
+  });
+
+  it('has no schedule link when the schedule is off', async () => {
+    setFeatures({ schedule: false });
+    const { shadowRoot } = await fixture<NotFoundPage>(html`<not-found-page></not-found-page>`);
+
+    expect(shadowRoot.querySelectorAll('hb-button')).toHaveLength(1);
   });
 
   it('updates page metadata', async () => {
     await fixture<NotFoundPage>(html`<not-found-page></not-found-page>`);
 
-    expect(mockUpdateMetadata).toHaveBeenCalledTimes(1);
-    expect(mockUpdateMetadata).toHaveBeenCalledWith('Not Found', 'Page not found');
+    expect(updateMetadata).toHaveBeenCalledWith('Not Found', 'Page not found');
   });
 });

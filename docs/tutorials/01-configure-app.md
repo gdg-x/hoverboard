@@ -58,6 +58,8 @@ Pull requests from forks are checked, but do not get a preview. Edit as a collab
 
 `faq.md` and `coc.md` can use these values in [Nunjucks](https://mozilla.github.io/nunjucks/) templates, with one namespace per file. For example `{{ site.url }}` comes from `site.json`, and `{{ resources.title }}` from `content/resources.json`.
 
+Both pages list their `##` and `###` headings in a table of contents. Each `##` heading needs to come before the `###` headings under it. In the FAQ, `##` headings group the questions, and each `###` heading is a question that visitors open to read the answer below it.
+
 ## Pages configuration
 
 Disable, reorder or modify blocks for individual pages inside their individual files that can be found in the `packages/web/src/views/` folder.

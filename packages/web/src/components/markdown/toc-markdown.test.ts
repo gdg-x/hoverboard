@@ -1,6 +1,6 @@
-import { describe, expect, it, vi } from 'vitest';
-import { fireEvent } from '@testing-library/dom';
-import { html } from 'lit';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { fireEvent, within } from '@testing-library/dom';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { scrollToElement } from '../../utils/scrolling';
 import type { TocMarkdown } from './toc-markdown';
@@ -11,50 +11,70 @@ vi.mock('../../utils/scrolling', () => ({
   scrollToElement: vi.fn(),
 }));
 
-const content = ['## Section One', '', '### Sub A', '', '### Sub B', '', '## Section Two'].join(
-  '\n',
-);
+const content = [
+  '## Section One',
+  '',
+  '### Sub A',
+  '',
+  'Answer A.',
+  '',
+  '### Sub B',
+  '',
+  '## Section Two',
+].join('\n');
 
 describe('toc-markdown', () => {
-  it('defines a component', () => {
-    expect(customElements.get('toc-markdown')).toBeDefined();
+  afterEach(() => {
+    litRender(nothing, document.body);
+    vi.mocked(scrollToElement).mockClear();
   });
 
-  it('renders a table of contents column for each h2, with its h3s as subheaders', async () => {
+  it('lists every h2 with its h3s in a table of contents', async () => {
+    const { shadowRootForWithin } = await fixture<TocMarkdown>(
+      html`<toc-markdown content="${content}" page-path="/faq"></toc-markdown>`,
+    );
+    const toc = within(shadowRootForWithin).getByRole('navigation', { name: 'On this page' });
+    const links = within(toc).getAllByRole('link');
+
+    expect(links.map((link) => link.textContent)).toEqual([
+      'Section One',
+      'Sub A',
+      'Sub B',
+      'Section Two',
+    ]);
+    expect(links[1]).toHaveAttribute('href', '/faq#sub-a');
+  });
+
+  it('renders the markdown as prose', async () => {
     const { shadowRoot } = await fixture<TocMarkdown>(
       html`<toc-markdown content="${content}"></toc-markdown>`,
     );
 
-    const columns = shadowRoot.querySelectorAll('.col');
-    expect(columns).toHaveLength(2);
-    expect(columns[0]).toHaveTextContent('Section One');
-    expect(columns[1]).toHaveTextContent('Section Two');
-
-    const subheaders = shadowRoot.querySelectorAll('.col-content');
-    expect(subheaders).toHaveLength(2);
-    expect(subheaders[0]).toHaveTextContent('Sub A');
-    expect(subheaders[1]).toHaveTextContent('Sub B');
+    expect(shadowRoot.querySelector('.prose h2')).toHaveTextContent('Section One');
+    expect(shadowRoot.querySelector('details')).toBeNull();
   });
 
-  it('renders the markdown content alongside the table of contents', async () => {
+  it('shows each h3 as a disclosure with disclosures on', async () => {
     const { shadowRoot } = await fixture<TocMarkdown>(
-      html`<toc-markdown content="${content}"></toc-markdown>`,
+      html`<toc-markdown content="${content}" disclosures></toc-markdown>`,
     );
+    const disclosures = shadowRoot.querySelectorAll('details');
 
-    expect(shadowRoot.querySelector('.markdown-wrapper h2')).toHaveTextContent('Section One');
+    expect(disclosures).toHaveLength(2);
+    expect(disclosures[0]!.querySelector('summary h3')).toHaveTextContent('Sub A');
+    expect(disclosures[0]).not.toHaveAttribute('open');
   });
 
-  it('scrolls to the linked header when a subheader link is clicked', async () => {
+  it('opens and scrolls to the linked question', async () => {
     const { shadowRoot } = await fixture<TocMarkdown>(
-      html`<toc-markdown content="${content}"></toc-markdown>`,
+      html`<toc-markdown content="${content}" disclosures></toc-markdown>`,
     );
-    const link = shadowRoot.querySelector<HTMLAnchorElement>('.col-content')!;
-    const targetId = link.getAttribute('href')!.split('#')[1]!;
-    const target = shadowRoot.querySelector(`.markdown-wrapper #${targetId}`)!;
+    const target = shadowRoot.querySelector('#sub-a')!;
 
-    fireEvent.click(link);
+    fireEvent.click(shadowRoot.querySelectorAll('.toc a')[1]!);
 
-    expect(vi.mocked(scrollToElement)).toHaveBeenCalledWith(target);
+    expect(target.closest('details')).toHaveAttribute('open');
+    expect(scrollToElement).toHaveBeenCalledWith(target);
   });
 
   it('scrolls to the header matching the location hash on connect', async () => {
@@ -62,15 +82,15 @@ describe('toc-markdown', () => {
 
     await fixture<TocMarkdown>(html`<toc-markdown content="${content}"></toc-markdown>`);
 
-    expect(vi.mocked(scrollToElement)).toHaveBeenCalled();
+    expect(scrollToElement).toHaveBeenCalled();
     window.location.hash = '';
   });
 
-  it('renders nothing in the table of contents when there are no headers', async () => {
+  it('has no table of contents without headings', async () => {
     const { shadowRoot } = await fixture<TocMarkdown>(
       html`<toc-markdown content="Just a paragraph"></toc-markdown>`,
     );
 
-    expect(shadowRoot.querySelectorAll('.col')).toHaveLength(0);
+    expect(shadowRoot.querySelector('.toc')).toBeNull();
   });
 });

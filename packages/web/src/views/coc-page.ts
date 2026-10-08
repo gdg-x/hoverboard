@@ -4,10 +4,13 @@ import { coc } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import '../components/hero/simple-hero';
 import '../components/markdown/remote-markdown';
+import { pageInner } from '../styles/page';
 import { ThemedElement } from '../components/themed-element';
 
 @customElement('coc-page')
 export class CocPage extends ThemedElement {
+  static override styles = pageInner;
+
   private readonly metadata = new PageMetadataController(this, 'coc');
 
   /** The code of conduct in the source locale, which the build passes in. */
@@ -22,12 +25,14 @@ export class CocPage extends ThemedElement {
     return html`
       <simple-hero page="coc"></simple-hero>
 
-      <remote-markdown
-        toc
-        path=${this.source}
-        page-path="/coc"
-        .content=${this.content}
-      ></remote-markdown>
+      <div class="inner">
+        <remote-markdown
+          toc
+          path=${this.source}
+          page-path="/coc"
+          .content=${this.content}
+        ></remote-markdown>
+      </div>
     `;
   }
 }
