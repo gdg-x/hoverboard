@@ -29,6 +29,9 @@ const placeholders = (text: string) =>
     )
     .sort();
 
+// Text outside placeholders lands unescaped in the html templates of `msg(html`...`)` messages.
+const hasMarkup = (text: string) => /<|&lt;/.test(text.replace(PLACEHOLDER, ''));
+
 /** Problems with a translated file, compared with the source catalog. */
 export const xliffErrors = (source: TransUnit[], translated: TransUnit[]): string[] => {
   const sources = new Map(source.map((unit) => [unit.id, unit]));
@@ -36,10 +39,17 @@ export const xliffErrors = (source: TransUnit[], translated: TransUnit[]): strin
     const unit = sources.get(id);
     if (!unit) return [`${id}: not in source/en.xlf`];
     if (target === undefined) return [];
+    const errors: string[] = [];
     const expected = placeholders(unit.source);
     const actual = placeholders(target);
-    return expected.join('\n') === actual.join('\n')
-      ? []
-      : [`${id}: placeholders [${actual.join(', ')}] do not match [${expected.join(', ')}]`];
+    if (expected.join('\n') !== actual.join('\n')) {
+      errors.push(
+        `${id}: placeholders [${actual.join(', ')}] do not match [${expected.join(', ')}]`,
+      );
+    }
+    if (hasMarkup(target) && !hasMarkup(unit.source)) {
+      errors.push(`${id}: has markup outside its placeholders`);
+    }
+    return errors;
   });
 };
