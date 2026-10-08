@@ -33,7 +33,8 @@ const web = {
     },
     globalSetup: ['./packages/web/__tests__/localize.global-setup.ts'],
     setupFiles: ['./packages/web/__tests__/web.setup.ts'],
-    server: { deps: { inline: [/@lit-labs\/observers/] } },
+    // `lit` is inlined so its `isServer` re-export also goes through the alias above.
+    server: { deps: { inline: [/@lit-labs\/observers/, /node_modules\/lit\//] } },
     include: [
       'packages/web/*.test.ts',
       'packages/web/src/**/*.test.ts',

@@ -7,7 +7,7 @@ import './components/footer/footer-block';
 import './components/shared/hoverboard-icon';
 import './components/shell/header-toolbar';
 import { navigationLabel } from './components/shell/navigation-label';
-import { selectRouteName, startRouter } from './router';
+import { selectRouteName } from './router';
 import { store } from './store';
 import { onUser } from './store/auth';
 import { DIALOG, selectIsDialogOpen } from './store/dialogs';
@@ -159,8 +159,6 @@ export class HoverboardApp extends ThemedElement {
   private navigation = navigation;
   private shortLocation = location.short;
 
-  private readonly router = startRouter(this);
-
   @query('#header')
   accessor header!: HTMLElement;
 
@@ -297,7 +295,7 @@ export class HoverboardApp extends ThemedElement {
           ></header-toolbar>
         </div>
 
-        <main>${this.router.outlet()}</main>
+        <main><slot></slot></main>
         <footer-block></footer-block>
       </div>
 

@@ -39,4 +39,16 @@ describe('firebase', () => {
     expect(getAnalytics).toHaveBeenCalled();
     expect(getPerformance).toHaveBeenCalled();
   });
+
+  it('starts nothing on the server, and throws when used there', async () => {
+    vi.resetModules();
+    vi.doMock('lit', () => ({ isServer: true }));
+    const { db, firebaseApp, analytics } = await import('./firebase');
+    vi.doUnmock('lit');
+
+    expect(connectFirestoreEmulator).not.toHaveBeenCalled();
+    expect(analytics).toBeUndefined();
+    expect(() => db.type).toThrow('db is not available on the server');
+    expect(() => firebaseApp.name).toThrow('firebaseApp is not available on the server');
+  });
 });

@@ -1,5 +1,13 @@
 import { spawnSync, type SpawnSyncReturns } from 'node:child_process';
-import { cpSync, mkdtempSync, readdirSync, readFileSync, rmSync, symlinkSync } from 'node:fs';
+import {
+  cpSync,
+  mkdtempSync,
+  readdirSync,
+  readFileSync,
+  realpathSync,
+  rmSync,
+  symlinkSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -40,9 +48,10 @@ describe('a production build of a minimal site', () => {
 
   beforeAll(() => {
     // A copy of packages/web next to the fixture as packages/config, so the real dist is untouched.
-    root = mkdtempSync(join(tmpdir(), 'hoverboard-build-'));
+    // macOS links /var to /private/var. Astro needs its root as a real path to match module paths.
+    root = realpathSync(mkdtempSync(join(tmpdir(), 'hoverboard-build-')));
     const web = join(root, 'packages/web');
-    const skip = new Set([join(webRoot, 'node_modules'), join(webRoot, 'dist')]);
+    const skip = new Set(['node_modules', 'dist', '.astro'].map((name) => join(webRoot, name)));
     cpSync(webRoot, web, { recursive: true, filter: (source) => !skip.has(source) });
     symlinkSync(join(webRoot, 'node_modules'), join(web, 'node_modules'), 'junction');
     cpSync(fixture, join(root, 'packages/config'), { recursive: true });
@@ -62,13 +71,20 @@ describe('a production build of a minimal site', () => {
     expect(build.status, build.stderr).toBe(0);
   });
 
-  it('renders the site config into index.html', () => {
-    const index = readFileSync(join(dist, 'index.html'), 'utf8');
+  it('renders the site config into the layout', () => {
+    const page = readFileSync(join(dist, '404.html'), 'utf8');
 
-    expect(index).toContain('<title>Minimal Fest</title>');
-    expect(index).toMatch(/<html [^>]*lang="en">/);
-    expect(index).toContain('<link href="https://minimal-site.web.app/" rel="canonical" />');
-    expect(index).not.toContain('maps.googleapis.com');
+    expect(page).toContain('<title>Not Found | Minimal Fest</title>');
+    expect(page).toMatch(/<html [^>]*lang="en"/);
+    expect(page).toMatch(/<link href="https:\/\/minimal-site\.web\.app\/" rel="canonical"/);
+    expect(page).not.toContain('maps.googleapis.com');
+  });
+
+  it('renders the components on the server', () => {
+    const page = readFileSync(join(dist, '404.html'), 'utf8');
+
+    expect(page).toMatch(/<not-found-page[^>]*><template shadowroot="open" shadowrootmode="open">/);
+    expect(page).toMatch(/<footer-block[^>]*><template shadowroot="open" shadowrootmode="open">/);
   });
 
   it('writes the service workers and the manifest', () => {
@@ -84,10 +100,12 @@ describe('a production build of a minimal site', () => {
   });
 
   it('leaves out the pages and blocks of features that are off', () => {
-    const chunks = readdirSync(dist).filter((file) => file.endsWith('.js'));
-    const chunkName = (file: string) => file.replace(/-[\w-]{8}\.js$/, '');
+    const chunks = readdirSync(join(dist, '_astro')).filter((file) => file.endsWith('.js'));
+    const chunkName = (file: string) => file.replace(/\.[\w-]{8}\.js$/, '');
 
-    expect(chunks.map(chunkName)).toEqual(expect.arrayContaining(['home-page', 'not-found-page']));
+    expect(chunks.map(chunkName)).toEqual(
+      expect.arrayContaining(['footer-block', 'not-found-page']),
+    );
     expect(chunks.map(chunkName).filter((name) => DROPPED_CHUNKS.includes(name))).toEqual([]);
   });
 });

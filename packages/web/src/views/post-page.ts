@@ -77,7 +77,7 @@ export class PostPage extends ThemedElement {
 
     const post = this.posts.data.find(({ id }) => id === postId);
     if (!post) {
-      void router.goto('/404');
+      router.goto('/404');
       return;
     }
 

@@ -19,6 +19,7 @@ export default [
       'dist/**',
       'node_modules/**',
       'packages/web/dist/**',
+      'packages/web/.astro/**', // Types written by Astro
       'packages/web/src/generated/**', // Written by lit-localize build
       'packages/server/functions/dist/**',
       'packages/cli/dist/**',

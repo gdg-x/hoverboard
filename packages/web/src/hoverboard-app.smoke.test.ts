@@ -28,21 +28,6 @@ const featureOff = inject('featureOff');
 const off = new Set(withDependents(featureOff));
 const flags = Object.fromEntries([...off].map((feature) => [feature, false]));
 
-// Each page path and the element it renders.
-const PAGES: Partial<Record<Feature, Record<string, string>>> = {
-  blog: { '/blog': 'blog-list-page', '/blog/a-post': 'post-page' },
-  codeOfConduct: { '/coc': 'coc-page' },
-  faq: { '/faq': 'faq-page' },
-  mySchedule: { '/schedule/my-schedule': 'my-schedule' },
-  previousSpeakers: {
-    '/previous-speakers': 'previous-speakers-page',
-    '/previous-speakers/a-speaker': 'previous-speaker-page',
-  },
-  schedule: { '/schedule': 'schedule-day', '/sessions/a-session': 'session-page' },
-  speakers: { '/speakers': 'speakers-page', '/speakers/a-speaker': 'speaker-page' },
-  team: { '/team': 'team-page' },
-};
-
 const LINK_PATHS: Partial<Record<Feature, string[]>> = {
   blog: ['/blog'],
   codeOfConduct: ['/coc'],
@@ -97,13 +82,6 @@ const linksToOffPages = () =>
     .map((link) => link.getAttribute('href')!)
     .filter(isOffPath);
 
-let routerModule: typeof import('./router');
-
-const visit = async (path: string) => {
-  window.history.pushState({}, '', path);
-  await routerModule.router.goto(path);
-};
-
 const settle = () => new Promise((resolve) => setTimeout(resolve, 50));
 
 describe(`the app with ${[...off].join(', ')} off`, () => {
@@ -111,9 +89,9 @@ describe(`the app with ${[...off].join(', ')} off`, () => {
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     // Flags are read when modules load, so import the app after setting them.
     setFeatures(flags);
-    routerModule = await import('./router');
     await import('./hoverboard-app');
-    render(html`<hoverboard-app></hoverboard-app>`, document.body);
+    await import('./views/home-page');
+    render(html`<hoverboard-app><home-page></home-page></hoverboard-app>`, document.body);
     await vi.waitFor(
       () => {
         expect(queryAllDeep(document, 'home-page')).toHaveLength(1);
@@ -128,7 +106,6 @@ describe(`the app with ${[...off].join(', ')} off`, () => {
   beforeEach(() => setFeatures(flags));
 
   it('renders the home page without the blocks of features that are off', async () => {
-    await visit('/');
     await settle();
 
     for (const feature of off) {
@@ -139,38 +116,8 @@ describe(`the app with ${[...off].join(', ')} off`, () => {
   });
 
   it('does not link to pages of features that are off', async () => {
-    await visit('/');
     await settle();
 
     expect(linksToOffPages()).toEqual([]);
   });
-
-  const pages = Object.entries(PAGES).flatMap(([feature, pagesOfFeature]) =>
-    Object.entries(pagesOfFeature).map(([path, tag]) => ({
-      feature: feature as Feature,
-      path,
-      tag,
-    })),
-  );
-
-  it.each(pages.filter(({ feature }) => off.has(feature)))(
-    'does not render $tag at $path',
-    async ({ path, tag }) => {
-      await visit(path);
-      await settle();
-
-      expect(queryAllDeep(document, tag)).toHaveLength(0);
-    },
-  );
-
-  it.each(pages.filter(({ feature }) => !off.has(feature)))(
-    'renders $tag at $path',
-    async ({ path, tag }) => {
-      await visit(path);
-
-      await vi.waitFor(() => expect(queryAllDeep(document, tag)).toHaveLength(1), {
-        timeout: 10_000,
-      });
-    },
-  );
 });

@@ -45,7 +45,7 @@ The check also catches navigation to an unknown page, and images that are not in
 
 ## Pages configuration
 
-Disable, reorder or modify blocks for individual pages inside their individual files that can be found in the `packages/web/src/pages/` folder.
+Disable, reorder or modify blocks for individual pages inside their individual files that can be found in the `packages/web/src/views/` folder.
 The top block (aka 'hero') of the home page has its background image in `heroSettings` in `packages/config/site.json`. Its colors come from the theme ([Styling](03-styling.md)).
 
 ```json

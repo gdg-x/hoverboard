@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom/vitest';
-import 'urlpattern-polyfill';
 import { ReadableStream } from 'node:stream/web';
 import { TextDecoder, TextEncoder } from 'node:util';
 import { beforeEach, vi } from 'vitest';

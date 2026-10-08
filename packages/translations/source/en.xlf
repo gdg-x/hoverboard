@@ -32,6 +32,9 @@
 <trans-unit id="dialogs.feedback.retry">
   <source>Retry</source>
 </trans-unit>
+<trans-unit id="common.review-session">
+  <source>Review session</source>
+</trans-unit>
 <trans-unit id="common.close">
   <source>Close</source>
 </trans-unit>
@@ -92,6 +95,9 @@
 <trans-unit id="common.email-invalid">
   <source>Please enter a valid email address.</source>
 </trans-unit>
+<trans-unit id="common.subscribed">
+  <source>Subscribed</source>
+</trans-unit>
 <trans-unit id="home.about-block.title">
   <source>About</source>
 </trans-unit>
@@ -112,9 +118,6 @@
 </trans-unit>
 <trans-unit id="home.fork-me-block.cta">
   <source>Fork this project</source>
-</trans-unit>
-<trans-unit id="common.loading">
-  <source>Loading...</source>
 </trans-unit>
 <trans-unit id="home.gallery-block.error">
   <source>Error loading gallery.</source>
@@ -164,17 +167,11 @@
 <trans-unit id="home.speakers-block.cta">
   <source>View all speakers</source>
 </trans-unit>
-<trans-unit id="common.subscribed">
-  <source>Subscribed</source>
-</trans-unit>
 <trans-unit id="home.subscribe-block.description">
   <source>Get notified about the important conference updates</source>
 </trans-unit>
 <trans-unit id="home.tickets-block.save">
   <source>Save <x id="0" equiv-text="${discount}"/> today</source>
-</trans-unit>
-<trans-unit id="common.buy-ticket">
-  <source>Buy ticket</source>
 </trans-unit>
 <trans-unit id="home.tickets-block.not-available">
   <source>Not available yet</source>
@@ -187,9 +184,6 @@
 </trans-unit>
 <trans-unit id="markdown.remote-markdown.error">
   <source>Error loading content</source>
-</trans-unit>
-<trans-unit id="common.save-sessions-signed-out">
-  <source>Sign in to save sessions</source>
 </trans-unit>
 <trans-unit id="shared.add-to-calendar.label">
   <source>Add to calendar</source>
@@ -248,6 +242,9 @@
 <trans-unit id="shell.header.menu">
   <source>Menu</source>
 </trans-unit>
+<trans-unit id="common.buy-ticket">
+  <source>Buy ticket</source>
+</trans-unit>
 <trans-unit id="shell.header.account-menu">
   <source>Account menu</source>
 </trans-unit>
@@ -293,6 +290,9 @@
 <trans-unit id="shell.notifications.enable">
   <source>Enable</source>
 </trans-unit>
+<trans-unit id="common.loading">
+  <source>Loading...</source>
+</trans-unit>
 <trans-unit id="shell.notifications.enabled">
   <source>Get notified of general announcements and sessions starting</source>
 </trans-unit>
@@ -319,57 +319,6 @@
 </trans-unit>
 <trans-unit id="shell.app.offline">
   <source>You can still work offline.</source>
-</trans-unit>
-<trans-unit id="pages.blog-list.error">
-  <source>Error loading posts.</source>
-</trans-unit>
-<trans-unit id="pages.home.scroll-error">
-  <source>Error scrolling to section.</source>
-</trans-unit>
-<trans-unit id="pages.home.view-highlights">
-  <source>View Highlights</source>
-</trans-unit>
-<trans-unit id="pages.post.published">
-  <source>Published: <x id="0" equiv-text="${published}"/></source>
-</trans-unit>
-<trans-unit id="pages.post.up-next">
-  <source>Up next</source>
-</trans-unit>
-<trans-unit id="pages.previous-speaker.year">
-  <source>Year: <x id="0" equiv-text="${session.year}"/></source>
-</trans-unit>
-<trans-unit id="schedule.day.browse-sessions">
-  <source>Browse sessions</source>
-</trans-unit>
-<trans-unit id="pages.session.toggle-featured">
-  <source>Toggle featured session</source>
-</trans-unit>
-<trans-unit id="pages.session.back-to-schedule">
-  <source>Back to schedule</source>
-</trans-unit>
-<trans-unit id="pages.session.content-level">
-  <source>Content level: <x id="0" equiv-text="${complexity}"/></source>
-</trans-unit>
-<trans-unit id="common.view-presentation">
-  <source>View presentation</source>
-</trans-unit>
-<trans-unit id="common.view-video">
-  <source>View video</source>
-</trans-unit>
-<trans-unit id="pages.session.speakers">
-  <source>Speakers</source>
-</trans-unit>
-<trans-unit id="common.review-session">
-  <source>Review session</source>
-</trans-unit>
-<trans-unit id="pages.session.feedback-closed">
-  <source>Session reviews are not open</source>
-</trans-unit>
-<trans-unit id="common.sessions">
-  <source>Sessions</source>
-</trans-unit>
-<trans-unit id="pages.team.error">
-  <source>Error loading teams.</source>
 </trans-unit>
 <trans-unit id="shell.service-worker.installing">
   <source>App being installed for offline use.</source>
@@ -454,6 +403,57 @@
 </trans-unit>
 <trans-unit id="pages.team.description">
   <source>Get more info about organizers</source>
+</trans-unit>
+<trans-unit id="pages.blog-list.error">
+  <source>Error loading posts.</source>
+</trans-unit>
+<trans-unit id="pages.home.scroll-error">
+  <source>Error scrolling to section.</source>
+</trans-unit>
+<trans-unit id="pages.home.view-highlights">
+  <source>View Highlights</source>
+</trans-unit>
+<trans-unit id="pages.post.published">
+  <source>Published: <x id="0" equiv-text="${published}"/></source>
+</trans-unit>
+<trans-unit id="pages.post.up-next">
+  <source>Up next</source>
+</trans-unit>
+<trans-unit id="common.sessions">
+  <source>Sessions</source>
+</trans-unit>
+<trans-unit id="pages.previous-speaker.year">
+  <source>Year: <x id="0" equiv-text="${session.year}"/></source>
+</trans-unit>
+<trans-unit id="common.view-video">
+  <source>View video</source>
+</trans-unit>
+<trans-unit id="common.view-presentation">
+  <source>View presentation</source>
+</trans-unit>
+<trans-unit id="schedule.day.browse-sessions">
+  <source>Browse sessions</source>
+</trans-unit>
+<trans-unit id="common.save-sessions-signed-out">
+  <source>Sign in to save sessions</source>
+</trans-unit>
+<trans-unit id="pages.session.toggle-featured">
+  <source>Toggle featured session</source>
+</trans-unit>
+<trans-unit id="pages.session.back-to-schedule">
+  <source>Back to schedule</source>
+</trans-unit>
+<trans-unit id="pages.session.content-level">
+  <source>Content level: <x id="0" equiv-text="${complexity}"/></source>
+</trans-unit>
+<trans-unit id="pages.session.speakers">
+  <source>Speakers</source>
+</trans-unit>
+<trans-unit id="pages.session.feedback-closed">
+  <source>Session reviews are not open</source>
+</trans-unit>
+<trans-unit id="pages.team.error">
+  <source>Error loading teams.</source>
 </trans-unit>
 <trans-unit id="common.subscribe">
   <source>Subscribe</source>

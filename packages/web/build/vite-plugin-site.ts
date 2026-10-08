@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import n from 'nunjucks';
-import type { HtmlTagDescriptor, Plugin, PluginOption } from 'vite';
+import type { Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
 import { FEATURES, type Feature } from '../src/config/features';
 import { THEME_TOKENS, type ThemeToken } from '../src/themes/tokens';
@@ -9,6 +9,9 @@ import { resolveConfig, type SiteConfig } from './resolve-config';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
 const RESOLVED_SITE_MODULE = `\0${SITE_MODULE}`;
+// What the layout needs beyond the client config. Only `.astro` files import it.
+export const LAYOUT_MODULE = 'virtual:hoverboard/layout';
+const RESOLVED_LAYOUT_MODULE = `\0${LAYOUT_MODULE}`;
 // One module per locale, `virtual:hoverboard/content/<locale>`, so each is its own chunk.
 export const CONTENT_MODULE = 'virtual:hoverboard/content/';
 const RESOLVED_CONTENT_MODULE = `\0${CONTENT_MODULE}`;
@@ -29,20 +32,19 @@ export const featureDefines = (features: Record<Feature, boolean>): Record<strin
  * `contentTranslations` lazy-loads each locale's event content translation.
  * Tests pass `defineFeatures: false` and set `globalThis.__HB_FEATURES__` so they can toggle flags.
  */
-export const siteModule = (
-  { site, resources, contentTranslations }: SiteConfig,
-  { defineFeatures = true } = {},
-): Plugin => ({
+export const siteModule = (config: SiteConfig, { defineFeatures = true } = {}): Plugin => ({
   name: 'hoverboard-site-module',
-  config: () => (defineFeatures ? { define: featureDefines(site.features) } : {}),
+  config: () => (defineFeatures ? { define: featureDefines(config.site.features) } : {}),
   resolveId: (id) => {
     if (id === SITE_MODULE) return RESOLVED_SITE_MODULE;
+    if (id === LAYOUT_MODULE) return RESOLVED_LAYOUT_MODULE;
     const locale = id.startsWith(CONTENT_MODULE) ? id.slice(CONTENT_MODULE.length) : undefined;
-    return locale && Object.hasOwn(contentTranslations, locale)
+    return locale && Object.hasOwn(config.contentTranslations, locale)
       ? `${RESOLVED_CONTENT_MODULE}${locale}`
       : undefined;
   },
   load: (id) => {
+    const { site, resources, contentTranslations } = config;
     if (id === RESOLVED_SITE_MODULE) {
       const loaders = Object.keys(contentTranslations).map(
         (locale) =>
@@ -52,6 +54,14 @@ export const siteModule = (
         `export const site = ${JSON.stringify(site)};`,
         `export const resources = ${JSON.stringify(resources)};`,
         `export const contentTranslations = {${loaders.join(', ')}};`,
+        '',
+      ].join('\n');
+    }
+    if (id === RESOLVED_LAYOUT_MODULE) {
+      return [
+        `export const theme = ${JSON.stringify(config.theme)};`,
+        `export const themeCss = ${JSON.stringify(themeColorsCss(config))};`,
+        `export const mapsScript = ${JSON.stringify(mapsScriptSrc(config))};`,
         '',
       ].join('\n');
     }
@@ -78,25 +88,17 @@ export const themeColorsCss = ({ site, theme }: SiteConfig): string => {
   return `:root { ${properties.join(' ')} }`;
 };
 
-export const headTags = (data: SiteConfig): HtmlTagDescriptor[] => {
-  const tags: HtmlTagDescriptor[] = [
-    { tag: 'style', children: themeColorsCss(data), injectTo: 'head' },
-  ];
+/** The Google Maps script, when the map is on and the site has a key. */
+export const mapsScriptSrc = (data: SiteConfig): string | undefined => {
   const key = data.site.integrations?.googleMapsApiKey;
-  if (data.site.features.map && key) {
-    const query = new URLSearchParams({
-      key,
-      libraries: 'maps,marker',
-      loading: 'async',
-      v: 'beta',
-    });
-    tags.push({
-      tag: 'script',
-      attrs: { async: true, defer: true, src: `https://maps.googleapis.com/maps/api/js?${query}` },
-      injectTo: 'head',
-    });
-  }
-  return tags;
+  if (!data.site.features.map || !key) return undefined;
+  const query = new URLSearchParams({
+    key,
+    libraries: 'maps,marker',
+    loading: 'async',
+    v: 'beta',
+  });
+  return `https://maps.googleapis.com/maps/api/js?${query}`;
 };
 
 /**
@@ -131,7 +133,13 @@ export const templateRenderer = (data: SiteConfig) => {
   return (template: string) => nunjucks.renderString(template, data);
 };
 
-// Renders index.html, manifest.json and the markdown pages with the resolved site config.
+// Astro builds for the server and then the client. Files go out once, with the client build.
+const clientOnly = <P extends object>(plugin: P): P & Pick<Plugin, 'applyToEnvironment'> => ({
+  ...plugin,
+  applyToEnvironment: (environment) => environment.config.consumer === 'client',
+});
+
+// Serves the site config, and renders the markdown pages with it.
 export const site = (): PluginOption[] => {
   const data = resolveConfig();
   const compileTemplate = templateRenderer(data);
@@ -140,35 +148,22 @@ export const site = (): PluginOption[] => {
 
   return [
     siteModule({ ...data, contentTranslations: markdown.contentTranslations }),
-    {
+    clientOnly<Plugin>({
       name: 'hoverboard-localized-markdown',
       generateBundle() {
         for (const { fileName, source } of markdown.files) {
           this.emitFile({ type: 'asset', fileName, source });
         }
       },
-    },
-    {
-      name: 'hoverboard-template-html',
-      // `pre` so Vite's own HTML parsing (module script discovery, asset href resolution)
-      // sees the final, already-rendered markup.
-      transformIndexHtml: {
-        order: 'pre',
-        handler: (html) => ({
-          html: compileTemplate(html),
-          tags: headTags(data),
-        }),
-      },
-    },
-    copy({
-      // Runs after Vite's own public/ copy (which happens during the write phase) so these
-      // overwrite the raw copies with their rendered versions.
-      hook: 'writeBundle',
-      targets: [
-        { src: 'public/manifest.json', dest: 'dist', transform: compileBufferTemplate },
-        { src: '../config/content/*.md', dest: 'dist/data', transform: compileBufferTemplate },
-        { src: '../config/content/posts/*.md', dest: 'dist/data/posts' },
-      ],
     }),
+    clientOnly(
+      copy({
+        hook: 'writeBundle',
+        targets: [
+          { src: '../config/content/*.md', dest: 'dist/data', transform: compileBufferTemplate },
+          { src: '../config/content/posts/*.md', dest: 'dist/data/posts' },
+        ],
+      }),
+    ),
   ];
 };

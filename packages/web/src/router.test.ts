@@ -1,16 +1,6 @@
-import { describe, expect, it, vi } from 'vitest';
-import type { RouteConfig } from '@lit-labs/router';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { setFeatures } from '../__tests__/helpers/features';
-
-vi.mock('./config/site.js', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('./config/site.js')>()),
-  url: 'https://example.com/',
-}));
-
-const logPageView = vi.fn();
-vi.mock('./utils/analytics.js', () => ({ logPageView }));
-
-const { decodeParam, onLocationChanged, selectRouteName, startRouter } = await import('./router');
+import { router, selectRouteName } from './router';
 
 describe('selectRouteName', () => {
   it('returns "home" for the root path', () => {
@@ -36,39 +26,7 @@ describe('selectRouteName', () => {
   });
 });
 
-describe('onLocationChanged', () => {
-  it('updates the canonical link and logs a page view', () => {
-    const link = document.createElement('link');
-    link.setAttribute('rel', 'canonical');
-    document.head.appendChild(link);
-    logPageView.mockClear();
-
-    onLocationChanged('/blog/my-post');
-
-    expect(link.getAttribute('href')).toBe('https://example.com/blog/my-post');
-    expect(logPageView).toHaveBeenCalledTimes(1);
-    link.remove();
-  });
-
-  it('logs an error when the canonical link tag is missing', () => {
-    const error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    logPageView.mockClear();
-
-    onLocationChanged('/faq');
-
-    expect(error).toHaveBeenCalledWith('Missing canonical link tag');
-    expect(logPageView).toHaveBeenCalledTimes(1);
-    error.mockRestore();
-  });
-});
-
 describe('urlForName', () => {
-  const host = Object.assign(document.createElement('div'), {
-    addController: vi.fn(),
-    requestUpdate: vi.fn(),
-  });
-  const router = startRouter(host as never);
-
   it('builds a path from a route name and params', () => {
     expect(router.urlForName('post-page', { id: 'my-post' })).toBe('/blog/my-post');
     expect(router.urlForName('speaker-page', { id: 'ada' })).toBe('/speakers/ada');
@@ -85,83 +43,25 @@ describe('urlForName', () => {
   it('throws for an unknown route name', () => {
     expect(() => router.urlForName('missing')).toThrow('Unknown route name: missing');
   });
-});
 
-describe('feature routes', () => {
-  const host = Object.assign(document.createElement('div'), {
-    addController: vi.fn(),
-    requestUpdate: vi.fn(),
-  });
-  const routePath = (route: RouteConfig) => ('path' in route ? route.path : undefined);
-
-  it('installs the routes of every enabled feature', () => {
-    const paths = startRouter(host as never).routes.map(routePath);
-
-    expect(paths).toEqual([
-      '/',
-      '/blog',
-      '/blog/posts/:id',
-      '/blog/:id',
-      '/schedule/my-schedule',
-      '/schedule/:id?',
-      '/sessions',
-      '/sessions/:id',
-      '/speakers',
-      '/speakers/:id',
-      '/previous-speakers',
-      '/previous-speakers/:id',
-      '/team',
-      '/faq',
-      '/coc',
-    ]);
-  });
-
-  it('leaves out the routes of disabled features', () => {
+  it('throws for the routes of disabled features', () => {
     setFeatures({ blog: false });
 
-    const router = startRouter(host as never);
-
-    expect(router.routes.map(routePath)).not.toContain('/blog');
     expect(() => router.urlForName('post-page', { id: 'x' })).toThrow(
       'Unknown route name: post-page',
     );
   });
 });
 
-describe('decodeParam', () => {
-  it('decodes percent-encoded values', () => {
-    expect(decodeParam('jakub_%C5%A1kv%C3%A1ra')).toBe('jakub_škvára');
-  });
-
-  it('returns undefined and malformed values unchanged', () => {
-    expect(decodeParam(undefined)).toBeUndefined();
-    expect(decodeParam('%E0%A4%A')).toBe('%E0%A4%A');
-  });
-});
-
 describe('goto', () => {
-  it('decodes percent-encoded route params', async () => {
-    const host = Object.assign(document.createElement('div'), {
-      addController: vi.fn(),
-      requestUpdate: vi.fn(),
-    });
-    const router = startRouter(host as never);
+  afterEach(() => vi.unstubAllGlobals());
 
-    await router.goto('/speakers/jakub_%C5%A1kv%C3%A1ra');
+  it('loads the page', () => {
+    const assign = vi.fn();
+    vi.stubGlobal('location', { assign });
 
-    expect((router.outlet() as { values: unknown[] }).values).toEqual(['jakub_škvára']);
-  });
+    router.goto('/404');
 
-  it('scrolls to the top after navigating', async () => {
-    const host = Object.assign(document.createElement('div'), {
-      addController: vi.fn(),
-      requestUpdate: vi.fn(),
-    });
-    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => undefined);
-
-    await startRouter(host as never).goto('/faq');
-
-    expect(scrollTo).toHaveBeenCalledWith(0, 0);
-    scrollTo.mockRestore();
+    expect(assign).toHaveBeenCalledWith('/404');
   });
 });

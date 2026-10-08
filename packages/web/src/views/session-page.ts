@@ -254,7 +254,7 @@ export class SessionPage extends ThemedElement {
       this.contentLoaderVisibility = !!this.session;
 
       if (!this.session) {
-        void router.goto('/404');
+        router.goto('/404');
       } else {
         this.acceptingFeedback = acceptingFeedback(this.session);
         const speaker = (this.session as unknown as SessionWithDetails).speakers?.[0];

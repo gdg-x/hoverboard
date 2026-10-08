@@ -41,9 +41,9 @@
     "serve": "NODE_ENV=production concurrently --kill-others npm:start:*",
     "setup": "npm --prefix ./packages/cli run setup",
     "start": "npm run clean && NODE_ENV=development concurrently --kill-others npm:start:*",
+    "start:astro": "npm --prefix ./packages/web run start:astro",
     "start:emulators": "firebase emulators:start --project=demo-hoverboard --import=./.firebase/emulator-data --export-on-exit",
     "start:server": "npm --prefix ./packages/server start",
-    "start:vite": "npm --prefix ./packages/web run start:vite",
     "start:vite-sw": "npm --prefix ./packages/web run start:vite-sw",
     "test": "vitest run"
   },

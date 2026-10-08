@@ -1,5 +1,5 @@
 import { Success } from '@abraham/remotedata';
-import { msg, str } from '@lit/localize';
+import { msg } from '@lit/localize';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -8,30 +8,34 @@ import '../components/markdown/short-markdown';
 import '../components/shared/content-loader';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-speakers-block';
-import type { Badge } from '../models/badge';
-import type { PreviousSessionWithYear } from '../models/previous-session';
-import type { PreviousSpeaker } from '../models/previous-speaker';
+import type { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
 import { store } from '../store';
-import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
-import {
-  type PreviousSpeakersState,
-  selectPreviousSpeakersState,
-} from '../store/previous-speakers';
+import { selectSpeaker } from '../store/speakers/selectors';
+import { type SpeakersState, selectSpeakersState } from '../store/speakers';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
-// `PreviousSpeaker.badges`/`pronouns` are not currently declared on the model
-// (no action/selector/state populates them today), but the original template
-// rendered them when present. Keep this augmentation so the badges/subtitle
-// sections stay fully typed and ready to render the moment real data is
-// supplied, without changing today's output.
-type PreviousSpeakerWithDetails = PreviousSpeaker & { badges?: Badge[]; pronouns?: string };
+// `speaker.sessions` is not currently populated by any action/selector/state for
+// `SpeakerWithTags`, so this augmentation and helper keep the (currently always-empty)
+// "additional sessions" section fully typed and ready to render the moment real
+// session data is supplied, without changing today's output.
+interface SpeakerSessionSummary {
+  id: string;
+  title: string;
+  dateReadable?: string;
+  startTime?: string;
+  endTime?: string;
+  track?: { title?: string };
+  tags?: string[];
+}
 
-@customElement('previous-speaker-page')
-export class PreviousSpeakerPage extends ThemedElement {
+type SpeakerWithSessions = SpeakerWithTags & { sessions?: SpeakerSessionSummary[] };
+
+@customElement('speaker-page')
+export class SpeakerPage extends ThemedElement {
   static override styles = css`
     :host {
       background: var(--primary-background-color);
@@ -106,13 +110,6 @@ export class PreviousSpeakerPage extends ThemedElement {
       user-select: none;
     }
 
-    /* Only the download links (icon + label) originally had layout/horizontal/center;
-           the social icon links did not, so this modifier keeps that distinction. */
-    .action--download {
-      display: flex;
-      align-items: center;
-    }
-
     .action hoverboard-icon {
       margin-right: 4px;
       width: 18px;
@@ -123,22 +120,27 @@ export class PreviousSpeakerPage extends ThemedElement {
       margin-top: 32px;
     }
 
-    .actions {
+    .actions,
+    .header-content,
+    .section-content {
       display: flex;
+    }
+
+    .header-content,
+    .section-content {
+      align-items: center;
     }
 
     .section {
       margin-top: 16px;
       display: block;
       color: var(--primary-text-color);
-      flex: 1;
-      flex-basis: 1px;
+      cursor: pointer;
     }
 
-    .header-content,
-    .section-content {
-      display: flex;
-      align-items: center;
+    .section-details {
+      flex: 1;
+      flex-basis: 1px;
     }
 
     .section-photo {
@@ -169,9 +171,9 @@ export class PreviousSpeakerPage extends ThemedElement {
   `;
 
   @property({ type: Object })
-  accessor speaker: PreviousSpeaker | undefined;
-  @fromStore((state) => selectPreviousSpeakersState(state))
-  accessor speakers!: PreviousSpeakersState;
+  accessor speaker: SpeakerWithTags | undefined;
+  @fromStore((state) => selectSpeakersState(state))
+  accessor speakers!: SpeakersState;
 
   @property({ attribute: false })
   accessor speakerId: string | undefined;
@@ -184,9 +186,9 @@ export class PreviousSpeakerPage extends ThemedElement {
 
   private updateSpeaker() {
     if (this.speakerId && this.speakers instanceof Success) {
-      this.speaker = selectPreviousSpeaker(store.getState(), this.speakerId);
+      this.speaker = selectSpeaker(store.getState(), this.speakerId);
       if (!this.speaker) {
-        void router.goto('/404');
+        router.goto('/404');
       } else {
         updateImageMetadata(this.speaker.name, this.speaker.bio, {
           image: this.speaker.photoUrl,
@@ -201,34 +203,27 @@ export class PreviousSpeakerPage extends ThemedElement {
   }
 
   private get subtitle() {
-    const speaker = this.speaker as PreviousSpeakerWithDetails | undefined;
-    return [speaker?.country, speaker?.pronouns].filter(Boolean).join(' • ');
+    return [this.speaker?.country, this.speaker?.pronouns].filter(Boolean).join(' • ');
   }
 
   private get companyInfo() {
     return [this.speaker?.title, this.speaker?.company].filter(Boolean).join(', ');
   }
 
-  private get sessions(): PreviousSessionWithYear[] {
-    if (!this.speaker) {
-      return [];
-    }
-
-    let sessions: PreviousSessionWithYear[] = [];
-
-    for (const [year, previousSessions] of Object.entries(this.speaker.sessions)) {
-      sessions = [...sessions, ...previousSessions.map((session) => ({ ...session, year }))];
-    }
-
-    return sessions.sort((a, b) => Number(b.year) - Number(a.year));
+  private get sessions(): SpeakerSessionSummary[] {
+    return (this.speaker as SpeakerWithSessions | undefined)?.sessions ?? [];
   }
 
   private getVariableColor(value: string) {
     return getVariableColor(this, value);
   }
 
+  private sessionUrl(id: string) {
+    return router.urlForName('session-page', { id });
+  }
+
   override render() {
-    const speaker = this.speaker as PreviousSpeakerWithDetails | undefined;
+    const speaker = this.speaker;
     const sessions = this.sessions;
 
     return html`
@@ -309,67 +304,42 @@ export class PreviousSpeakerPage extends ThemedElement {
 
                   ${sessions.map(
                     (session) => html`
-                      <div class="section-content">
-                        <div class="section">
-                          <div class="section-primary-text">${session.title}</div>
-                          <div class="section-secondary-text">
-                            ${msg(str`Year: ${session.year}`, { id: 'pages.previous-speaker.year' })}
-                          </div>
-                          ${
-                            session.tags.length
-                              ? html`
-                                  <div class="tags">
-                                    ${session.tags.map(
-                                      (tag) => html`
-                                        <span
-                                          class="tag"
-                                          style="color: ${this.getVariableColor(tag)}"
-                                          >${tag}</span
-                                        >
-                                      `,
-                                    )}
-                                  </div>
-                                `
-                              : nothing
-                          }
-                          <div class="actions">
+                      <a href=${this.sessionUrl(session.id)} class="section">
+                        <div class="section-content">
+                          <div class="section-details">
+                            <div class="section-primary-text">${session.title}</div>
                             ${
-                              session.videoId
-                                ? html`
-                                    <a
-                                      class="action action--download"
-                                      href="https://www.youtube.com/watch?v=${session.videoId}"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      <hoverboard-icon name="video"></hoverboard-icon>
-                                      <span>${msg('View video', { id: 'common.view-video' })}</span>
-                                    </a>
-                                  `
+                              session.dateReadable
+                                ? html`<div class="section-secondary-text">
+                                    ${session.dateReadable}, ${session.startTime} -
+                                    ${session.endTime}
+                                  </div>`
                                 : nothing
                             }
                             ${
-                              session.presentation
-                                ? html`
-                                    <a
-                                      class="action action--download"
-                                      href=${session.presentation}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      <hoverboard-icon name="presentation"></hoverboard-icon>
-                                      <span
-                                        >${msg('View presentation', {
-                                          id: 'common.view-presentation',
-                                        })}</span
-                                      >
-                                    </a>
-                                  `
+                              session.track?.title
+                                ? html`<div class="section-secondary-text">
+                                    ${session.track.title}
+                                  </div>`
+                                : nothing
+                            }
+                            ${
+                              session.tags?.length
+                                ? html`<div class="tags">
+                                    ${session.tags.map(
+                                      (tag) =>
+                                        html`<span
+                                          class="tag"
+                                          style="color: ${this.getVariableColor(tag)}"
+                                          >${tag}</span
+                                        >`,
+                                    )}
+                                  </div>`
                                 : nothing
                             }
                           </div>
                         </div>
-                      </div>
+                      </a>
                     `,
                   )}
                 </div>
@@ -385,6 +355,6 @@ export class PreviousSpeakerPage extends ThemedElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'previous-speaker-page': PreviousSpeakerPage;
+    'speaker-page': SpeakerPage;
   }
 }

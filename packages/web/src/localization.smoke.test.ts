@@ -23,7 +23,8 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     localStorage.setItem('hoverboard-locale', fakeLocale);
     await import('./hoverboard-app');
-    render(html`<hoverboard-app></hoverboard-app>`, document.body);
+    await import('./views/home-page');
+    render(html`<hoverboard-app><home-page></home-page></hoverboard-app>`, document.body);
     await vi.waitFor(() => expect(picker()).not.toBeNull(), { timeout: 10_000 });
   });
 

@@ -60,4 +60,17 @@ describe('footer-social', () => {
     expect(blogLink).toHaveAttribute('href', organizer.blog);
     expect(blogLink).toHaveTextContent('Blog');
   });
+
+  it('leaves out the blog link when the organizer has no blog', async () => {
+    const { blog } = organizer;
+    delete (organizer as { blog?: string }).blog;
+
+    try {
+      const { shadowRootForWithin } = await fixture(html`<footer-social></footer-social>`);
+
+      expect(shadowRootForWithin.querySelector('.blog')).toBeNull();
+    } finally {
+      organizer.blog = blog;
+    }
+  });
 });

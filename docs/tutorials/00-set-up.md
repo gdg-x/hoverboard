@@ -41,11 +41,13 @@ The diagram below is a brief summary of the directories within the project.
     |   |---src/
     |   |   |---components/
     |   |   |---controllers/
+    |   |   |---layouts/
     |   |   |---models/
     |   |   |---pages/
     |   |   |---store/
     |   |   |---styles/
     |   |   |---utils/
+    |   |   |---views/
     |
 
 - `docs/` documentation.
@@ -62,11 +64,13 @@ The diagram below is a brief summary of the directories within the project.
   - `src/` is where you store all of your source code and do all of your development.
     - `components/` is where you keep your LitElement custom elements, grouped by area.
     - `controllers/` is where you keep your shared Lit reactive controllers.
+    - `layouts/` has the Astro layout that every page uses.
     - `models/` is where you keep your data types.
-    - `pages/` is where you keep your page elements.
+    - `pages/` has the Astro pages, one per route.
     - `store/` is where you keep your Redux state.
     - `styles/` is where you keep your theme.
     - `utils/` is where you keep your shared helpers.
+    - `views/` is where you keep your page elements.
 
 ## Build and serve
 
