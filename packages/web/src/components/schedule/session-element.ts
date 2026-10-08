@@ -1,4 +1,5 @@
 import { Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -13,8 +14,8 @@ import {
 } from '../../store/featured-sessions';
 import { queueComplexSnackbar } from '../../store/snackbars';
 import type { UserState } from '../../store/user';
-import { schedule } from '../../config/site';
 import { acceptingFeedback } from '../../utils/feedback';
+import { getLocale } from '../../utils/localization';
 import { getSummary } from '../../utils/strings';
 import { getVariableColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
@@ -277,12 +278,8 @@ export class SessionElement extends ThemedElement {
         <div class="session-footer">
           <div class="session-footer-row">
             <div class="session-meta session-duration">
-              <span ?hidden="${!duration?.hh}">
-                ${duration?.hh} hour${this.getEnding(duration?.hh)}
-              </span>
-              <span ?hidden="${!duration?.mm}">
-                ${duration?.mm} min${this.getEnding(duration?.mm)}
-              </span>
+              <span ?hidden="${!duration?.hh}">${this.formatDuration(duration?.hh, 'hour')}</span>
+              <span ?hidden="${!duration?.mm}">${this.formatDuration(duration?.mm, 'minute')}</span>
             </div>
             <div class="tags" ?hidden="${!session?.tags?.length}">
               ${session?.tags?.map(
@@ -326,8 +323,11 @@ export class SessionElement extends ThemedElement {
     return false;
   }
 
-  private getEnding(number: number | undefined) {
-    return number && number > 1 ? 's' : '';
+  private formatDuration(value: number | undefined, unit: 'hour' | 'minute') {
+    if (!value) return '';
+    return new Intl.NumberFormat(getLocale(), { style: 'unit', unit, unitDisplay: 'long' }).format(
+      value,
+    );
   }
 
   private toggleFeaturedSession = (event: MouseEvent) => {
@@ -337,9 +337,9 @@ export class SessionElement extends ThemedElement {
     if (!(this.user instanceof Success)) {
       store.dispatch(
         queueComplexSnackbar({
-          label: schedule.saveSessionsSignedOut,
+          label: msg('Sign in to save sessions', { id: 'common.save-sessions-signed-out' }),
           action: {
-            title: 'Sign in',
+            title: msg('Sign in', { id: 'common.sign-in' }),
             callback: () => openSigninDialog(),
           },
         }),

@@ -4,9 +4,6 @@
   "faq": "/data/faq.md",
   "coc": "/data/coc.md",
   "loading": "Loading...",
-  "mySchedule": {
-    "browseSession": "Browse sessions"
-  },
   "ticketsBlock": {
     "title": "Tickets",
     "soldOut": "You missed it!",
@@ -67,32 +64,12 @@
   "mapBlock": {
     "title": "Location"
   },
-  "schedule": {
-    "saveSessionsSignedOut": "Sign in to save sessions"
-  },
-  "feedback": {
-    "headline": "Review session",
-    "leaveFeedback": "to leave feedback",
-    "sessionClosed": "Session reviews are not open"
-  },
   "sessionDetails": {
-    "contentLevel": "Content level",
     "viewPresentation": "View presentation",
-    "viewVideo": "View video",
-    "speakers": "Speakers",
-    "backToSchedule": "Back to schedule",
-    "addToCalendar": "Add to calendar",
-    "googleCalendar": "Google Calendar",
-    "appleCalendar": "Apple Calendar",
-    "share": "Share"
+    "viewVideo": "View video"
   },
   "speakerDetails": {
     "sessions": "Sessions"
-  },
-  "filters": {
-    "title": "Filters",
-    "results": "Results",
-    "clear": "Clear all"
   },
   "aboutBlock": {
     "title": "About"

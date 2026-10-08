@@ -32,9 +32,6 @@
 <trans-unit id="dialogs.feedback.retry">
   <source>Retry</source>
 </trans-unit>
-<trans-unit id="common.review-session">
-  <source>Review session</source>
-</trans-unit>
 <trans-unit id="common.close">
   <source>Close</source>
 </trans-unit>
@@ -101,6 +98,15 @@
 <trans-unit id="home.subscribe-block.description">
   <source>Get notified about the important conference updates</source>
 </trans-unit>
+<trans-unit id="common.save-sessions-signed-out">
+  <source>Sign in to save sessions</source>
+</trans-unit>
+<trans-unit id="shared.add-to-calendar.label">
+  <source>Add to calendar</source>
+</trans-unit>
+<trans-unit id="shared.add-to-calendar.google">
+  <source>Google Calendar</source>
+</trans-unit>
 <trans-unit id="common.sign-in">
   <source>Sign in</source>
 </trans-unit>
@@ -109,6 +115,18 @@
 </trans-unit>
 <trans-unit id="shared.filter-menu.complexity">
   <source>Complexity</source>
+</trans-unit>
+<trans-unit id="shared.filter-menu.results.one">
+  <source><x id="0" equiv-text="${count}"/> result</source>
+</trans-unit>
+<trans-unit id="shared.filter-menu.results.other">
+  <source><x id="0" equiv-text="${count}"/> results</source>
+</trans-unit>
+<trans-unit id="shared.filter-menu.clear">
+  <source>Clear all</source>
+</trans-unit>
+<trans-unit id="shared.filter-menu.title">
+  <source>Filters</source>
 </trans-unit>
 <trans-unit id="shell.app-install.cta">
   <source>Add to Home Screen</source>
@@ -194,6 +212,33 @@
 <trans-unit id="shell.app.offline">
   <source>You can still work offline.</source>
 </trans-unit>
+<trans-unit id="schedule.day.browse-sessions">
+  <source>Browse sessions</source>
+</trans-unit>
+<trans-unit id="pages.session.toggle-featured">
+  <source>Toggle featured session</source>
+</trans-unit>
+<trans-unit id="pages.session.back-to-schedule">
+  <source>Back to schedule</source>
+</trans-unit>
+<trans-unit id="pages.session.content-level">
+  <source>Content level: <x id="0" equiv-text="${complexity}"/></source>
+</trans-unit>
+<trans-unit id="common.view-presentation">
+  <source>View presentation</source>
+</trans-unit>
+<trans-unit id="common.view-video">
+  <source>View video</source>
+</trans-unit>
+<trans-unit id="pages.session.speakers">
+  <source>Speakers</source>
+</trans-unit>
+<trans-unit id="common.review-session">
+  <source>Review session</source>
+</trans-unit>
+<trans-unit id="pages.session.feedback-closed">
+  <source>Session reviews are not open</source>
+</trans-unit>
 <trans-unit id="shell.service-worker.installing">
   <source>App being installed for offline use.</source>
 </trans-unit>
@@ -238,6 +283,14 @@
   <source>Delete</source>
   <note from="lit-localize">Deletes the session review.</note>
 </trans-unit>
+<trans-unit id="shared.add-to-calendar.apple">
+  <source>Apple Calendar</source>
+  <note from="lit-localize">Downloads an .ics file for Apple Calendar and other calendar apps.</note>
+</trans-unit>
+<trans-unit id="pages.session.leave-feedback">
+  <source>to leave feedback</source>
+  <note from="lit-localize">Follows a Sign in button: "Sign in to leave feedback".</note>
+</trans-unit>
 <trans-unit id="footer.rel.subscribe-heading">
   <source>Subscribe</source>
   <note from="lit-localize">Heading above the newsletter sign-up form.</note>
@@ -253,6 +306,10 @@
 <trans-unit id="dialogs.feedback.save">
   <source>Save</source>
   <note from="lit-localize">Saves the session review.</note>
+</trans-unit>
+<trans-unit id="shared.share-button.label">
+  <source>Share</source>
+  <note from="lit-localize">Shares the session.</note>
 </trans-unit>
 </body>
 </file>

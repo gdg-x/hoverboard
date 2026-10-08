@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Day } from '../../models/day';
-import { mySchedule } from '../../config/site';
 import type { ScheduleDay } from './schedule-day';
 import './schedule-day';
 import type { SessionElement } from '../../components/schedule/session-element';
@@ -68,7 +67,7 @@ describe('schedule-day', () => {
     const addSessionLinks = shadowRoot.querySelectorAll('.add-session');
     expect(addSessionLinks[0]).toHaveAttribute('hidden');
     expect(addSessionLinks[1]).not.toHaveAttribute('hidden');
-    expect(addSessionLinks[1]).toHaveTextContent(mySchedule.browseSession);
+    expect(addSessionLinks[1]).toHaveTextContent('Browse sessions');
     expect(addSessionLinks[1]?.querySelector('hoverboard-icon')).toHaveAttribute(
       'name',
       'add-circle-outline',

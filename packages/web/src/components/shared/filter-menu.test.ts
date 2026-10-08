@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
-import { filters as filtersText } from '../../config/site';
 import * as filterUtils from '../../utils/filters';
 import type { FilterMenu } from './filter-menu';
 import './filter-menu';
@@ -75,7 +74,12 @@ describe('filter-menu', () => {
 
     const results = shadowRoot.querySelector('.results');
     expect(results).not.toHaveAttribute('hidden');
-    expect(results).toHaveTextContent(`3 ${filtersText.results}`);
+    expect(results).toHaveTextContent('3 results');
+
+    element.resultsCount = 1;
+    await element.updateComplete;
+
+    expect(results).toHaveTextContent('1 result');
   });
 
   it('toggles the board and the icon when the toggle button is clicked', async () => {

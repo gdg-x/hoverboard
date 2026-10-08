@@ -40,15 +40,6 @@
     "loading": {
       "type": "string"
     },
-    "mySchedule": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "browseSession": {
-          "type": "string"
-        }
-      }
-    },
     "ticketsBlock": {
       "type": "object",
       "additionalProperties": false,
@@ -266,59 +257,14 @@
         }
       }
     },
-    "schedule": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "saveSessionsSignedOut": {
-          "type": "string"
-        }
-      }
-    },
-    "feedback": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "headline": {
-          "type": "string"
-        },
-        "leaveFeedback": {
-          "type": "string"
-        },
-        "sessionClosed": {
-          "type": "string"
-        }
-      }
-    },
     "sessionDetails": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "contentLevel": {
-          "type": "string"
-        },
         "viewPresentation": {
           "type": "string"
         },
         "viewVideo": {
-          "type": "string"
-        },
-        "speakers": {
-          "type": "string"
-        },
-        "backToSchedule": {
-          "type": "string"
-        },
-        "addToCalendar": {
-          "type": "string"
-        },
-        "googleCalendar": {
-          "type": "string"
-        },
-        "appleCalendar": {
-          "type": "string"
-        },
-        "share": {
           "type": "string"
         }
       }
@@ -328,21 +274,6 @@
       "additionalProperties": false,
       "properties": {
         "sessions": {
-          "type": "string"
-        }
-      }
-    },
-    "filters": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "results": {
-          "type": "string"
-        },
-        "clear": {
           "type": "string"
         }
       }

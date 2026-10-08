@@ -1,8 +1,8 @@
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { Day } from '../../models/day';
 import { selectFeaturedSchedule } from '../../store/schedule/selectors';
-import { schedule } from '../../config/site';
 import '../../components/shared/auth-required';
 import './schedule-day';
 import { fromStore } from '../../controllers/from-store';
@@ -45,15 +45,15 @@ export class MySchedule extends ThemedElement {
     }
   `;
 
-  private schedule = schedule;
-
   @fromStore((state) => selectFeaturedSchedule(state))
   accessor featuredSchedule!: Day[];
 
   override render() {
     return html`
       <auth-required>
-        <p slot="prompt" class="sign-in-prompt">${this.schedule.saveSessionsSignedOut}</p>
+        <p slot="prompt" class="sign-in-prompt">
+          ${msg('Sign in to save sessions', { id: 'common.save-sessions-signed-out' })}
+        </p>
 
         ${this.featuredSchedule.map(
           (day) => html`
