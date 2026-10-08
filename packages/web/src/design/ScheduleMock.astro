@@ -1,0 +1,200 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Track names, one column each. */
+  tracks: string[];
+  /** Labels the scrolling region, for example "Schedule for Day 1". */
+  label: string;
+}
+
+const { tracks, label } = Astro.props;
+
+interface MockSession {
+  title: string;
+  tag: string;
+  accent: 1 | 2 | 3 | 4;
+  speakers: string[];
+  minutes: number;
+}
+
+const SESSIONS: MockSession[] = [
+  {
+    title: 'Compose for every screen',
+    tag: 'Android',
+    accent: 4,
+    speakers: ['Olena Kovalenko'],
+    minutes: 40,
+  },
+  {
+    title: 'View transitions in practice',
+    tag: 'Web',
+    accent: 1,
+    speakers: ['Marco Rossi'],
+    minutes: 40,
+  },
+  {
+    title: 'Serverless at event scale',
+    tag: 'Cloud',
+    accent: 3,
+    speakers: ['Aiko Tanaka', 'Sam Okafor'],
+    minutes: 40,
+  },
+  {
+    title: 'Shipping on-device models',
+    tag: 'AI',
+    accent: 2,
+    speakers: ['Priya Raman'],
+    minutes: 40,
+  },
+  {
+    title: 'Accessible by default',
+    tag: 'Web',
+    accent: 1,
+    speakers: ['Lucía Fernández'],
+    minutes: 40,
+  },
+  {
+    title: 'Firestore rules that scale',
+    tag: 'Cloud',
+    accent: 3,
+    speakers: ['Sam Okafor'],
+    minutes: 40,
+  },
+];
+
+const pick = (offset: number) =>
+  tracks.map((_, index) => SESSIONS[(index + offset) % SESSIONS.length]!);
+const initials = (name: string) =>
+  name
+    .split(' ')
+    .map((part) => part[0])
+    .join('');
+
+const slots = [
+  { event: '10:00', local: '09:00', sessions: pick(0) },
+  {
+    event: '11:00',
+    local: '10:00',
+    sessions: pick(3).map((session, index) => (index % 2 ? null : session)),
+  },
+];
+---
+
+<div class="hb-schedule">
+  <div class="hb-schedule__pager" data-schedule-pager hidden>
+    <span class="hb-schedule__pager-text">{tracks.length} tracks. Scroll to see them all.</span>
+    <button class="hb-icon-btn" data-schedule-prev type="button" aria-label="Previous track">
+      <Icon name="chevronLeft" />
+    </button>
+    <button class="hb-icon-btn" data-schedule-next type="button" aria-label="Next track">
+      <Icon name="chevronRight" />
+    </button>
+  </div>
+  <div
+    class="hb-schedule__scroller"
+    data-schedule-scroller
+    role="region"
+    aria-label={label}
+    tabindex="0"
+  >
+    <div class="hb-schedule__grid" style={`--tracks: ${tracks.length}`}>
+      <div class="hb-schedule__corner" aria-hidden="true"></div>
+      {tracks.map((track) => (
+        <div class="hb-schedule__track">{track}</div>
+      ))}
+
+      <div class="hb-schedule__time">
+        <time data-event="09:00" data-local="08:00">
+          09:00
+        </time>
+      </div>
+      <article class="hb-session hb-session--wide" style="--stripe: var(--hb-color-accent-2)">
+        <div class="hb-session__chips">
+          <span class="hb-sticker hb-sticker--red">Keynote</span>
+        </div>
+        <h3 class="hb-session__title">
+          <a class="hb-card__link" href="#schedule">
+            Opening keynote
+          </a>
+        </h3>
+        <p class="hb-session__meta">{tracks[0]} · 50 min</p>
+        <button
+          class="hb-icon-btn hb-bookmark"
+          type="button"
+          aria-pressed="false"
+          aria-label="Bookmark Opening keynote"
+        >
+          <Icon name="star" />
+        </button>
+      </article>
+
+      {slots.map((slot, slotIndex) => (
+        <Fragment>
+          <div class="hb-schedule__time">
+            <time data-event={slot.event} data-local={slot.local}>
+              {slot.event}
+            </time>
+          </div>
+          {slot.sessions.map((session, index) =>
+            session ? (
+              <article
+                class="hb-session"
+                style={`--stripe: var(--hb-color-accent-${session.accent})`}
+              >
+                <div class="hb-session__chips">
+                  <span class={`hb-chip hb-chip--label hb-chip--accent-${session.accent}`}>
+                    {session.tag}
+                  </span>
+                </div>
+                <h3 class="hb-session__title">
+                  <a class="hb-card__link" href="#schedule">
+                    {session.title}
+                  </a>
+                </h3>
+                <ul class="hb-session__speakers">
+                  {session.speakers.map((speaker) => (
+                    <li>
+                      <span
+                        class={`hb-avatar hb-avatar--small hb-avatar--${session.accent}`}
+                        aria-hidden="true"
+                      >
+                        {initials(speaker)}
+                      </span>
+                      {speaker}
+                    </li>
+                  ))}
+                </ul>
+                <p class="hb-session__meta">
+                  {tracks[index]} · {session.minutes} min
+                </p>
+                <button
+                  class="hb-icon-btn hb-bookmark"
+                  type="button"
+                  aria-pressed="false"
+                  aria-label={`Bookmark ${session.title}`}
+                >
+                  <Icon name="star" />
+                </button>
+              </article>
+            ) : (
+              <div class="hb-session hb-session--empty" aria-hidden="true" />
+            ),
+          )}
+          {slotIndex === 0 && (
+            <div class="hb-schedule__now" role="note">
+              <span>Now · 10:42</span>
+            </div>
+          )}
+        </Fragment>
+      ))}
+
+      <div class="hb-schedule__time">
+        <time data-event="12:30" data-local="11:30">
+          12:30
+        </time>
+      </div>
+      <div class="hb-session hb-session--wide hb-session--break">Lunch</div>
+    </div>
+  </div>
+</div>

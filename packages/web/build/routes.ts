@@ -41,12 +41,16 @@ export const ROUTES: readonly Route[] = [
 export const enabledRoutes = (features: Record<Feature, boolean>): Route[] =>
   ROUTES.filter(({ feature }) => !feature || features[feature]);
 
+/** Pages for development only, such as the design gallery. `astro build` leaves them out. */
+export const DEV_ROUTES: readonly Route[] = [{ pattern: '/design', entrypoint: 'design.astro' }];
+
 /** Adds the pages of the features that are on. */
 export const routes = (features: Record<Feature, boolean>): AstroIntegration => ({
   name: 'hoverboard-routes',
   hooks: {
-    'astro:config:setup': ({ injectRoute }) => {
-      for (const { pattern, entrypoint } of enabledRoutes(features)) {
+    'astro:config:setup': ({ command, injectRoute }) => {
+      const devRoutes = command === 'dev' ? DEV_ROUTES : [];
+      for (const { pattern, entrypoint } of [...enabledRoutes(features), ...devRoutes]) {
         injectRoute({ pattern, entrypoint: `./src/routes/${entrypoint}` });
       }
     },

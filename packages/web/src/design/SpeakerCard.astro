@@ -1,0 +1,51 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  name: string;
+  company: string;
+  country?: string;
+  /** 1 to 4: which theme accent the placeholder photo uses. */
+  accent: 1 | 2 | 3 | 4;
+  badges?: string[];
+  featured?: boolean;
+}
+
+const { name, company, country, accent, badges = [], featured = false } = Astro.props;
+const initials = name
+  .split(' ')
+  .map((part) => part[0])
+  .join('');
+---
+
+<article class="hb-speaker-card hb-card hb-card--link">
+  <div class="hb-speaker-card__photo">
+    <span class={`hb-avatar hb-avatar--${accent}`} aria-hidden="true">
+      {initials}
+    </span>
+    <span class="hb-speaker-card__social" aria-hidden="true">
+      <Icon name="link" size={16} />
+    </span>
+  </div>
+  <div class="hb-speaker-card__text">
+    {featured && <span class="hb-sticker hb-sticker--yellow">Featured</span>}
+    <h3 class="hb-speaker-card__name">
+      <a class="hb-card__link" href="#speakers">
+        {name}
+      </a>
+    </h3>
+    <p class="hb-speaker-card__company">
+      {company}
+      {country && <span> · {country}</span>}
+    </p>
+    {badges.length > 0 && (
+      <ul class="hb-chip-list" aria-label="Badges">
+        {badges.map((badge) => (
+          <li>
+            <span class="hb-chip hb-chip--label">{badge}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</article>

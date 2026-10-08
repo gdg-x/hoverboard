@@ -321,11 +321,12 @@ export default [
     language: 'css/css',
     ...css.configs.recommended,
     rules: {
-      // CSS formatting and quality rules
-      'css/no-duplicate-properties': 'error',
+      ...css.configs.recommended.rules,
       'css/no-empty-blocks': 'error',
-      'css/no-invalid-properties': 'error',
-      'css/prefer-single-line-selectors': 'warn',
+      // Theme variables are written by the build, not declared in the CSS files.
+      'css/no-invalid-properties': ['error', { allowUnknownVariables: true }],
+      // The visual refresh uses features such as light-dark() and text-wrap: balance.
+      'css/use-baseline': ['error', { available: 'newly' }],
     },
   },
 
