@@ -2,11 +2,9 @@ import '@material/web/button/text-button.js';
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { initialUiState } from '../../store/ui';
 import { aboutOrganizerBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
 import '../markdown/short-markdown';
-import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
 @customElement('about-organizer-block')
@@ -49,10 +47,13 @@ export class AboutOrganizerBlock extends ThemedElement {
       flex: 1;
       flex-basis: 1px;
     }
-  `;
 
-  @fromStore((state) => state.ui.viewport)
-  private accessor viewport!: typeof initialUiState.viewport;
+    @media (max-width: 639px) {
+      .image-column {
+        display: none;
+      }
+    }
+  `;
 
   override render() {
     const photo = html`
@@ -66,7 +67,7 @@ export class AboutOrganizerBlock extends ThemedElement {
     `;
     return html`
       <div class="container">
-        <div class="image-column" ?hidden="${this.viewport.isPhone}">
+        <div class="image-column">
           ${__HB_FEATURES__.team ? html`<a href="/team" class="image-link">${photo}</a>` : photo}
         </div>
 

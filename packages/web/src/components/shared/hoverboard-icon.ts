@@ -1,4 +1,4 @@
-import { css, html, type PropertyValues, type SVGTemplateResult } from 'lit';
+import { css, html, isServer, type PropertyValues, type SVGTemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ThemedElement } from '../themed-element';
 
@@ -84,11 +84,10 @@ export class HoverboardIcon extends ThemedElement {
   private loading: Promise<void> | undefined;
 
   protected override willUpdate(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('name')) {
-      this.icon = loaded.get(this.name);
-      if (!this.icon) {
-        this.loadIcon(this.name);
-      }
+    // The first render is always empty, as on the server, so hydration matches. The icon follows.
+    if (changedProperties.has('name') && !isServer) {
+      this.icon = undefined;
+      this.loadIcon(this.name);
     }
   }
 
@@ -107,7 +106,8 @@ export class HoverboardIcon extends ThemedElement {
     if (!load) {
       return;
     }
-    const loading = load()
+    const cached = loaded.get(name);
+    const loading = (cached ? Promise.resolve({ default: cached }) : load())
       .then((module) => {
         loaded.set(name, module.default);
         if (this.name === name) {

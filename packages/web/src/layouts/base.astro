@@ -1,0 +1,179 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import { mapsScript, theme, themeCss } from 'virtual:hoverboard/layout';
+import { resources, site } from 'virtual:hoverboard/site';
+import { FooterBlock } from '../components/footer/footer-block';
+import { AppHeader } from '../components/shell/app-header';
+import { AppOverlays } from '../components/shell/app-overlays';
+import { loadContent } from '../data/content';
+import '../data/markdown';
+import { seedPage } from '../data/page';
+import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  /** The content from `seedPage()`, which the browser's store starts from. */
+  content?: Partial<Content>;
+}
+
+const {
+  title = resources.title,
+  description = resources.description,
+  image = site.image,
+  content: pageContent = {},
+} = Astro.props;
+// The header links to tickets on every page. The page's own content has already rendered.
+const content = seedPage({ ...pageContent, tickets: (await loadContent()).tickets ?? [] });
+// The build sees file paths such as /index.html. Hosting serves them without `.html`.
+const path = Astro.url.pathname.replace(/(index)?\.html$/, '').slice(1);
+const url = new URL(path, site.url).href;
+
+// Local development always uses the demo project on the emulators, and `astro dev` has no `/__/`.
+const demoFirebaseConfig = {
+  apiKey: 'demo-api-key',
+  authDomain: 'demo-hoverboard.firebaseapp.com',
+  projectId: 'demo-hoverboard',
+  storageBucket: 'demo-hoverboard.appspot.com',
+};
+---
+
+<!doctype html>
+<html itemscope itemtype="http://schema.org/Event" lang={site.locales.source}>
+  <head>
+    <base href={site.basepath} />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"
+      name="viewport"
+    />
+    <meta content={description} name="description" />
+    <meta content={resources.keywords} name="keywords" />
+    <meta content={site.organizer.name} name="author" />
+    <meta content="Project Hoverboard" name="generator" />
+
+    <title>{title}</title>
+
+    <link href={url} rel="canonical" />
+
+    <link href="images/favicon.ico" rel="icon" />
+
+    <meta content={theme.primary} name="theme-color" />
+    <link href="manifest.json" rel="manifest" />
+
+    <meta content="yes" name="mobile-web-app-capable" />
+    <meta content={resources.title} name="application-name" />
+
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+    <meta content={resources.title} name="apple-mobile-web-app-title" />
+
+    <link href="images/manifest/icon-48.png" rel="apple-touch-icon" />
+    <link href="images/manifest/icon-72.png" rel="apple-touch-icon" sizes="72x72" />
+    <link href="images/manifest/icon-96.png" rel="apple-touch-icon" sizes="96x96" />
+    <link href="images/manifest/icon-144.png" rel="apple-touch-icon" sizes="144x144" />
+    <link href="images/manifest/icon-192.png" rel="apple-touch-icon" sizes="192x192" />
+
+    <meta content="images/manifest/icon-144.png" name="msapplication-TileImage" />
+    <meta content={theme.primary} name="msapplication-TileColor" />
+    <meta content="no" name="msapplication-tap-highlight" />
+
+    <meta content={title} property="og:title" />
+    <meta content={resources.title} property="og:site_name" />
+    <meta content="website" property="og:type" />
+    <meta content={url} property="og:url" />
+    <meta content={description} property="og:description" />
+    <meta content={image} property="og:image" />
+    <meta content="image/jpeg" property="og:image:type" />
+
+    <meta content="summary_large_image" name="twitter:card" />
+    {site.organizer.twitter && (
+      <meta content={`@${site.organizer.twitter}`} name="twitter:creator" />
+    )}
+    <meta content={title} name="twitter:title" />
+    <meta content={description} name="twitter:description" />
+    <meta content={image} name="twitter:image" />
+    <meta name="twitter:label1" value="Location" />
+    <meta name="twitter:data1" value={site.event.location.name} />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://firestore.googleapis.com" rel="preconnect" />
+
+    <style is:inline set:html={themeCss} />
+    {mapsScript && <script async defer is:inline src={mapsScript} />}
+
+    {import.meta.env.DEV ? (
+      <script is:inline define:vars={{ demoFirebaseConfig }}>
+        window.firebaseConfig = demoFirebaseConfig;
+      </script>
+    ) : (
+      <Fragment>
+        <script is:inline>
+          // Capture the config object from /__/firebase/init.js for src/firebase.ts
+          window.firebase = {
+            initializeApp: (config) => {
+              window.firebaseConfig = config;
+              delete window.firebase;
+            },
+          };
+        </script>
+        <script is:inline src="/__/firebase/init.js" />
+      </Fragment>
+    )}
+
+    {import.meta.env.DEV && <script is:inline define:vars={{ features: site.features }}>
+      // The build inlines the flags. In development Vite sets them in /@vite/env, which loads too late.
+      globalThis.__HB_FEATURES__ = features;
+    </script>}
+
+    <script
+      is:inline
+      type="application/json"
+      id={PAGE_CONTENT_ID}
+      set:html={serializeContent(content)}
+    />
+    <script>
+      import '../service-worker-registration';
+      import { startApp } from '../app';
+
+      void startApp();
+    </script>
+    <ClientRouter />
+
+    <style is:global>
+      html,
+      body {
+        min-height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
+  </head>
+
+  <body>
+    <AppHeader path={`/${path}`} client:load transition:persist="header" transition:persist-props />
+    <main>
+      <slot />
+    </main>
+    <FooterBlock client:load transition:persist="footer" />
+    <AppOverlays client:load transition:persist="overlays" />
+
+    <noscript>Please enable JavaScript to view this website.</noscript>
+  </body>
+</html>

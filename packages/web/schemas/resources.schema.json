@@ -36,6 +36,7 @@
         "coc": { "type": "string" },
         "faq": { "type": "string" },
         "notFound": { "type": "string" },
+        "offline": { "type": "string" },
         "previousSpeakers": { "type": "string" },
         "schedule": { "type": "string" },
         "speakers": { "type": "string" },

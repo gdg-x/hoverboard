@@ -2,6 +2,7 @@ import { Failure, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { setFeatures } from '../../../__tests__/helpers/features';
 import type { Day } from '../../models/day';
 import type { HeaderBottomToolbar } from './header-bottom-toolbar';
 
@@ -81,6 +82,17 @@ describe('header-bottom-toolbar', () => {
     const myScheduleTab = shadowRoot.querySelector('.nav-item[data-day="my-schedule"]');
     expect(myScheduleTab).toHaveAttribute('hidden');
     expect(myScheduleTab).toHaveTextContent('My Schedule');
+  });
+
+  it('leaves out the my-schedule tab when that feature is off', async () => {
+    setFeatures({ mySchedule: false });
+    const { element, shadowRoot } = await fixture<HeaderBottomToolbar>(
+      html`<header-bottom-toolbar></header-bottom-toolbar>`,
+    );
+    element.schedule = new Success(days);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.nav-item[data-day="my-schedule"]')).toBeNull();
   });
 
   it('renders no tabs on failure', async () => {

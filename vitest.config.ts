@@ -33,30 +33,32 @@ const web = {
     },
     globalSetup: ['./packages/web/__tests__/localize.global-setup.ts'],
     setupFiles: ['./packages/web/__tests__/web.setup.ts'],
-    server: { deps: { inline: [/@lit-labs\/observers/] } },
+    // `lit` is inlined so its `isServer` re-export also goes through the alias above.
+    server: { deps: { inline: [/@lit-labs\/observers/, /node_modules\/lit\//] } },
     include: [
       'packages/web/*.test.ts',
       'packages/web/src/**/*.test.ts',
       'packages/web/build/**/*.test.ts',
     ],
-    exclude: [...configDefaults.exclude, '**/*.smoke.test.ts'],
+    exclude: [...configDefaults.exclude, '**/*.smoke.test.ts', '**/*.server.test.ts'],
   },
 } satisfies TestProjectInlineConfiguration;
+
+const BUILD_TIMEOUT = 5 * 60 * 1000;
 
 export default defineConfig({
   test: {
     projects: [
       web,
-      // One project per feature, so each renders the app in a fresh environment, with modules
-      // that read the flags on import loaded with that feature off.
+      // One build per feature, with that feature and the features that need it off.
       ...FEATURES.map((feature): TestProjectInlineConfiguration => ({
-        ...web,
         test: {
-          ...web.test,
           name: `Smoke (${feature} off)`,
-          include: ['packages/web/src/hoverboard-app.smoke.test.ts'],
-          exclude: configDefaults.exclude,
+          environment: 'node',
+          include: ['packages/web/build/features.smoke.test.ts'],
           provide: { featureOff: feature },
+          testTimeout: BUILD_TIMEOUT,
+          hookTimeout: BUILD_TIMEOUT,
         },
       })),
       {
@@ -93,12 +95,40 @@ export default defineConfig({
         },
       },
       {
+        // Renders pages with Lit SSR in the global setup, then hydrates them in jsdom.
+        ...web,
+        test: {
+          ...web.test,
+          name: 'Hydration',
+          globalSetup: [
+            ...web.test.globalSetup,
+            './packages/web/__tests__/hydration/global-setup.ts',
+          ],
+          setupFiles: ['./packages/web/__tests__/hydration/setup.ts', ...web.test.setupFiles],
+          server: {
+            deps: { inline: [...web.test.server.deps.inline, /@lit-labs\/ssr-client/] },
+          },
+          include: ['packages/web/__tests__/hydration/*.hydration.test.ts'],
+          exclude: configDefaults.exclude,
+        },
+      },
+      {
         test: {
           name: 'Smoke (build)',
           environment: 'node',
-          include: ['packages/web/build/**/*.smoke.test.ts'],
-          testTimeout: 5 * 60 * 1000,
-          hookTimeout: 5 * 60 * 1000,
+          include: ['packages/web/build/build.smoke.test.ts'],
+          testTimeout: BUILD_TIMEOUT,
+          hookTimeout: BUILD_TIMEOUT,
+        },
+      },
+      {
+        // Renders components with Lit SSR, as the build does. `isServer` is true here.
+        plugins: [decorators(), siteModule(siteConfig)],
+        test: {
+          name: 'Server',
+          environment: 'node',
+          setupFiles: ['./packages/web/__tests__/server.setup.ts'],
+          include: ['packages/web/src/**/*.server.test.ts'],
         },
       },
       {

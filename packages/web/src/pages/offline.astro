@@ -1,0 +1,12 @@
+---
+import { pageMetadata } from '../data/metadata';
+import { seedPage } from '../data/page';
+import Base from '../layouts/base.astro';
+import { OfflinePage } from '../views/offline-page';
+
+const content = seedPage({});
+---
+
+<Base {...pageMetadata('offline')} content={content}>
+  <OfflinePage client:load />
+</Base>

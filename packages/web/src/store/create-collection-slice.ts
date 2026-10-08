@@ -1,5 +1,6 @@
 import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { registerContentSubscriber, resetContent, seedContent } from './content';
 import { dispatch } from './dispatch';
 import type { Subscription } from '../utils/firestore';
 
@@ -27,11 +28,20 @@ export const createCollectionSlice = <T>(
     name,
     initialState: initialState as CollectionState<T>,
     reducers: {
-      pending: (): CollectionState<T> => new Pending(),
+      // Seeded data stays on screen while the subscription starts.
+      pending: (state): CollectionState<T> => (state instanceof Success ? state : new Pending()),
       success: (_state, action: PayloadAction<T[]>): CollectionState<T> =>
         new Success<T[]>(action.payload),
       failure: (_state, action: PayloadAction<Error>): CollectionState<T> =>
         new Failure<Error>(action.payload),
+    },
+    extraReducers: (builder) => {
+      builder.addCase(resetContent, (): CollectionState<T> => new Initialized());
+      builder.addCase(seedContent, (state, { payload }) => {
+        const data = (payload as Partial<Record<string, T[]>>)[name];
+        // RemoteData classes are not drafted, so `state` is the current value itself.
+        return data ? new Success(data) : (state as CollectionState<T>);
+      });
     },
   });
 
@@ -55,6 +65,8 @@ export const createCollectionSlice = <T>(
     }
     subscription = new Initialized();
   };
+
+  registerContentSubscriber(name, fetch);
 
   /** Triggers the subscription (once) the first time state is read, mirroring the
    * "select and lazily fetch" idiom used across the store. */

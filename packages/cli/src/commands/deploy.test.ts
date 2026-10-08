@@ -4,15 +4,20 @@ import { join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { runDeploy } from './deploy.js';
 
-const { runCommandMock, resolveFirebaseBinMock, confirmMock } = vi.hoisted(() => ({
-  runCommandMock: vi.fn(),
-  resolveFirebaseBinMock: vi.fn(() => '/repo/node_modules/.bin/firebase'),
-  confirmMock: vi.fn(),
-}));
+const { runCommandMock, resolveFirebaseBinMock, confirmMock, useFirebaseLoginCredentialsMock } =
+  vi.hoisted(() => ({
+    runCommandMock: vi.fn(),
+    resolveFirebaseBinMock: vi.fn(() => '/repo/node_modules/.bin/firebase'),
+    confirmMock: vi.fn(),
+    useFirebaseLoginCredentialsMock: vi.fn(),
+  }));
 
 vi.mock('../lib/spawn.js', () => ({ runCommand: runCommandMock }));
 vi.mock('../lib/firebase-cli.js', () => ({ resolveFirebaseBin: resolveFirebaseBinMock }));
 vi.mock('../lib/prompt.js', () => ({ confirm: confirmMock }));
+vi.mock('../lib/google-cloud.js', () => ({
+  useFirebaseLoginCredentials: useFirebaseLoginCredentialsMock,
+}));
 
 const dirsToClean: string[] = [];
 const originalEnv = { ...process.env };
@@ -48,7 +53,10 @@ describe('runDeploy', () => {
     const result = await runDeploy();
 
     expect(confirmMock).toHaveBeenCalledWith(expect.stringContaining('demo-project'));
-    expect(runCommandMock).toHaveBeenNthCalledWith(1, 'npm', ['run', 'build'], repo);
+    expect(useFirebaseLoginCredentialsMock).toHaveBeenCalledWith(repo);
+    expect(runCommandMock).toHaveBeenNthCalledWith(1, 'npm', ['run', 'build'], repo, {
+      FIRESTORE_TARGET: 'production',
+    });
     expect(runCommandMock).toHaveBeenNthCalledWith(
       2,
       '/repo/node_modules/.bin/firebase',
@@ -90,6 +98,19 @@ describe('runDeploy', () => {
     const result = await runDeploy();
 
     expect(runCommandMock).toHaveBeenCalledTimes(1);
+    expect(result).toBe(false);
+  });
+
+  it('does not build without credentials to read Firestore', async () => {
+    makeRepo();
+    confirmMock.mockResolvedValue(true);
+    useFirebaseLoginCredentialsMock.mockRejectedValueOnce(new Error('Run `firebase login`.'));
+    const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+
+    const result = await runDeploy();
+
+    expect(runCommandMock).not.toHaveBeenCalled();
+    expect(log).toHaveBeenCalledWith(expect.stringContaining('Run `firebase login`.'));
     expect(result).toBe(false);
   });
 

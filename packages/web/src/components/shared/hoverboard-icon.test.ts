@@ -77,4 +77,22 @@ describe('hoverboard-icon', () => {
 
     element.remove();
   });
+
+  it('renders nothing on the first render, even for a loaded icon, as the server does', async () => {
+    await fixture(html`<hoverboard-icon name="github"></hoverboard-icon>`);
+    const element = document.createElement('hoverboard-icon') as HoverboardIcon;
+    element.name = 'github';
+    let firstRender: boolean | undefined;
+    element.addController({
+      hostUpdated: () => {
+        firstRender ??= !!element.shadowRoot?.querySelector('svg');
+      },
+    });
+    document.body.append(element);
+    await element.updateComplete;
+
+    expect(firstRender).toBe(false);
+    expect(element.shadowRoot?.querySelector('svg')).toBeInTheDocument();
+    element.remove();
+  });
 });

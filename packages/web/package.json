@@ -9,21 +9,20 @@
     "npm": "10"
   },
   "scripts": {
-    "build": "npm run clean && npm run localize:build && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --config vite.sw.config.ts",
+    "build": "npm run clean && npm run localize:build && NODE_ENV=production astro build && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --config vite.sw.config.ts",
     "clean": "rm -rf dist",
+    "lint:astro": "npm run localize:build && astro check",
     "lint:lit-analyzer": "lit-analyzer 'src/**/*.ts' --rules.no-incompatible-type-binding off",
     "lint:types": "npm run localize:build && tsc --noEmit",
     "localize:build": "node build/localize-build.mjs",
     "localize:check": "node build/localize-extract.mjs --check",
     "localize:extract": "node build/localize-extract.mjs",
-    "start:vite": "mkdir -p dist && npm run localize:build && VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --watch",
-    "start:vite-sw": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --watch --config vite.sw.config.ts"
+    "start:astro": "npm run localize:build && astro dev"
   },
   "dependencies": {
     "@abraham/remotedata": "1.4.0",
     "@justinribeiro/lite-youtube": "^1.9.0",
     "@lit-labs/observers": "^2.1.0",
-    "@lit-labs/router": "^0.1.4",
     "@lit/localize": "^0.12.2",
     "@material/web": "^2.5.0",
     "@reduxjs/toolkit": "^2.13.0",
@@ -35,22 +34,28 @@
     "workbox-window": "^7.4.1"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@awesome.me/astro-lit": "^5.0.4",
     "@babel/core": "^8.0.6",
     "@babel/plugin-proposal-decorators": "^8.0.2",
+    "@lit-labs/ssr": "^4.1.0",
     "@lit/localize-tools": "^0.8.2",
     "@rolldown/plugin-babel": "^0.2.4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
+    "@types/jsdom": "^30.0.0",
     "@types/node": "^22.20.5",
     "@types/nunjucks": "^3.2.6",
+    "@webcomponents/template-shadowroot": "^0.2.1",
     "ajv": "^8.20.0",
+    "astro": "^7.3.7",
+    "firebase-admin": "^14.5.0",
+    "jsdom": "^30.1.2",
     "lit-analyzer": "^2.0.3",
     "nunjucks": "^3.2.4",
     "rollup-plugin-copy": "^3.5.0",
-    "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-workbox": "^9.0.0",
     "typescript": "^6.0.3",
-    "urlpattern-polyfill": "^10.1.0",
-    "vite": "^8.3.2"
+    "vite": "^8.3.2",
+    "workbox-build": "^7.4.1"
   }
 }

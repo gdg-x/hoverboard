@@ -111,9 +111,8 @@ export class NotificationToggle extends ThemedElement {
 
   private readonly clickOutsideController = new ClickOutsideController(this, () => this.close());
 
-  override connectedCallback() {
-    super.connectedCallback();
-
+  // After the first render, which must match the server's, where the permission is unknown.
+  override firstUpdated() {
     if ('Notification' in window && 'permissions' in navigator) {
       navigator.permissions.query({ name: 'notifications' }).then((permission) => {
         store.dispatch(requestNotificationPermission(PROMPT_USER.NO));

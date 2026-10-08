@@ -16,7 +16,7 @@ Hoverboard has one built-in theme, `default`. Override any of its colors in `the
 }
 ```
 
-The colors and their defaults are in `packages/web/src/themes/default.ts`. `packages/web/src/themes/tokens.ts` lists the CSS variable that each one sets. The build writes them on `:root` in `index.html`, so the first paint already has your colors.
+The colors and their defaults are in `packages/web/src/themes/default.ts`. `packages/web/src/themes/tokens.ts` lists the CSS variable that each one sets. The build writes them on `:root` in every page, so the first paint already has your colors.
 
 Lighter and transparent versions of the primary color, such as `--light-primary-color`, `--primary-color-transparent` and `--box-shadow-primary-color`, are derived from `primary`, so you only change it in one place. The browser theme color, the home screen app colors and the Windows tile color are `primary` too.
 

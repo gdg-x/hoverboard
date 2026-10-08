@@ -8,6 +8,7 @@ import {
 } from '../../db/partners';
 import type { Partner } from '../../models/partner';
 import type { PartnerGroup, PartnerGroupWithoutItems } from '../../models/partner-group';
+import { registerContentSubscriber, resetContent, seedContent } from '../content';
 
 export type PartnerGroupsState = RemoteData<Error, PartnerGroup[]>;
 
@@ -48,13 +49,14 @@ const partnersSlice = createSlice({
   initialState,
   reducers: {
     subscribe(state) {
+      // Seeded data stays on screen while the subscriptions start.
       if (state.partnersSubscription instanceof Initialized) {
         state.partnersSubscription = new Success(subscribeToPartners());
-        state.partners = new Pending();
+        if (!(state.partners instanceof Success)) state.partners = new Pending();
       }
       if (state.groupsSubscription instanceof Initialized) {
         state.groupsSubscription = new Success(subscribeToGroups());
-        state.groups = new Pending();
+        if (!(state.groups instanceof Success)) state.groups = new Pending();
       }
     },
     unsubscribe(state) {
@@ -81,6 +83,13 @@ const partnersSlice = createSlice({
     setGroupsFailure(state, action: PayloadAction<Error>) {
       state.groups = new Failure(action.payload);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(resetContent, () => initialState);
+    builder.addCase(seedContent, (state, { payload }) => {
+      if (payload.partners) state.partners = new Success(payload.partners);
+      if (payload.partnerGroups) state.groups = new Success(payload.partnerGroups);
+    });
   },
 });
 
@@ -126,6 +135,10 @@ const {
   setGroupsSuccess,
   setGroupsFailure,
 } = partnersSlice.actions;
+
+for (const name of ['partners', 'partnerGroups']) {
+  registerContentSubscriber(name, () => store.dispatch(subscribe()));
+}
 
 export { subscribe, unsubscribe };
 export default partnersSlice.reducer;

@@ -1,0 +1,21 @@
+---
+import { loadContent } from '../../data/content';
+import { itemMetadata } from '../../data/metadata';
+import { seedPage } from '../../data/page';
+import type { SpeakerWithTags } from '../../models/speaker';
+import Base from '../../layouts/base.astro';
+import { SpeakerPage } from '../../views/speaker-page';
+
+export const getStaticPaths = async () => {
+  const { speakers = [] } = await loadContent();
+  return speakers.map((speaker) => ({ params: { id: speaker.id }, props: { speaker } }));
+};
+
+const { speaker } = Astro.props as { speaker: SpeakerWithTags };
+const { speakers, previousSpeakers } = await loadContent();
+const content = seedPage({ speakers, previousSpeakers });
+---
+
+<Base {...itemMetadata(speaker.name, speaker.bio, speaker.photoUrl)} content={content}>
+  <SpeakerPage speakerId={speaker.id} client:load />
+</Base>

@@ -6,7 +6,6 @@ import { customElement } from 'lit/decorators.js';
 import type { DialogData } from '../../models/dialog-form';
 import { openSubscribeDialog } from '../../store/dialogs';
 import { subscribe, type SubscribeState } from '../../store/subscribe';
-import { initialUiState } from '../../store/ui';
 import type { UserState } from '../../store/user';
 import { subscribeBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
@@ -27,10 +26,6 @@ export class SubscribeBlock extends ThemedElement {
     .container {
       display: flex;
       flex-direction: column;
-    }
-
-    .container.centered {
-      align-items: center;
     }
 
     .description {
@@ -55,6 +50,10 @@ export class SubscribeBlock extends ThemedElement {
         padding: 32px 0;
       }
 
+      .container {
+        align-items: center;
+      }
+
       .description {
         font-size: 32px;
         margin: 0 0 24px;
@@ -72,8 +71,6 @@ export class SubscribeBlock extends ThemedElement {
 
   @fromStore((state) => state.user)
   accessor user!: UserState;
-  @fromStore((state) => state.ui.viewport)
-  accessor viewport!: typeof initialUiState.viewport;
 
   private get ctaIcon() {
     return this.subscribed instanceof Success ? 'checked' : 'arrow-right-circle';
@@ -87,7 +84,7 @@ export class SubscribeBlock extends ThemedElement {
 
   override render() {
     return html`
-      <div class="container ${this.viewport.isTabletPlus ? 'centered' : ''}">
+      <div class="container">
         <div class="description">
           ${msg('Get notified about the important conference updates', {
             id: 'home.subscribe-block.description',

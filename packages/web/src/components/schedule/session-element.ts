@@ -4,7 +4,7 @@ import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Session } from '../../models/session';
-import { router } from '../../router';
+import { sessionPath } from '../../utils/navigation';
 import { store } from '../../store';
 import { openFeedbackDialog, openSigninDialog } from '../../store/dialogs';
 import {
@@ -17,7 +17,7 @@ import type { UserState } from '../../store/user';
 import { acceptingFeedback } from '../../utils/feedback';
 import { getLocale } from '../../utils/localization';
 import { getSummary } from '../../utils/strings';
-import { getVariableColor } from '../../utils/styles';
+import { variableColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
 import '../shared/text-truncate';
 import { fromStore } from '../../controllers/from-store';
@@ -375,11 +375,11 @@ export class SessionElement extends ThemedElement {
   }
 
   private getVariableColor(value: string) {
-    return getVariableColor(this, value);
+    return variableColor(value);
   }
 
   private sessionUrl(id: string | undefined) {
-    return id ? router.urlForName('session-page', { id }) : '';
+    return id ? sessionPath(id) : '';
   }
 }
 

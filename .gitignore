@@ -67,6 +67,7 @@ node_modules/
 
 # Custom
 dist/
+.astro/
 packages/web/src/generated/
 serviceAccount.json
 *-adminsdk-*.json

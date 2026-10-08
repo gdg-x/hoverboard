@@ -1,0 +1,13 @@
+---
+import { pages } from 'virtual:hoverboard/markdown';
+import { pageMetadata } from '../data/metadata';
+import { seedPage } from '../data/page';
+import Base from '../layouts/base.astro';
+import { FaqPage } from '../views/faq-page';
+
+const content = seedPage({});
+---
+
+<Base {...pageMetadata('faq')} content={content}>
+  <FaqPage content={pages.faq} client:load />
+</Base>

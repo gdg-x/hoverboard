@@ -3,7 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import '../markdown/short-markdown';
 import './text-truncate';
 import type { Post } from '../../models/post';
-import { router } from '../../router';
+import { postPath } from '../../utils/navigation';
 import { getDate } from '../../utils/dates';
 import { ThemedElement } from '../themed-element';
 
@@ -107,7 +107,7 @@ export class PostsList extends ThemedElement {
   }
 
   private postUrl(id: string) {
-    return router.urlForName('post-page', { id });
+    return postPath(id);
   }
 }
 

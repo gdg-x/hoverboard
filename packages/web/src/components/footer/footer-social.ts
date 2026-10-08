@@ -146,7 +146,7 @@ export class FooterSocial extends ThemedElement {
   private socialNetwork = socialNetwork;
   private mailto = mailto;
   private organizer = organizer;
-  private blogNewTab = organizer.blog.startsWith('http');
+  private blogNewTab = organizer.blog?.startsWith('http') ?? false;
 
   override render() {
     const emailUs = msg('Email us', { id: 'footer.social.email-us' });
@@ -182,13 +182,17 @@ export class FooterSocial extends ThemedElement {
         </div>
       </div>
 
-      <div class="social-group blog">
-        <div class="title">
-          ${msg(html`Follow our <a href="${blog}" target="${target}" rel="${rel}">Blog</a>`, {
-            id: 'footer.social.follow-blog',
-          })}
-        </div>
-      </div>
+      ${
+        blog
+          ? html`<div class="social-group blog">
+              <div class="title">
+                ${msg(html`Follow our <a href="${blog}" target="${target}" rel="${rel}">Blog</a>`, {
+                  id: 'footer.social.follow-blog',
+                })}
+              </div>
+            </div>`
+          : nothing
+      }
 
       <div class="social-group social-networks">
         <div class="title">${msg('Follow us', { id: 'footer.social.follow-us' })}</div>

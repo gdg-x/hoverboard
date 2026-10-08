@@ -6,6 +6,7 @@ import type { Partner } from '../../models/partner';
 import type { PartnerGroupWithoutItems } from '../../models/partner-group';
 import type { RootState } from '..';
 import { store } from '..';
+import { seedContent, subscribeToContent } from '../content';
 import type { PartnersState } from '.';
 
 vi.mock('../../db/partners');
@@ -45,6 +46,26 @@ describe('partners', () => {
     expect(unsubscribePartners).toHaveBeenCalled();
     expect(unsubscribeGroups).toHaveBeenCalled();
     expect(state).toStrictEqual(initialState);
+  });
+
+  it('takes partners and groups from seeded content, and keeps them while subscribing', () => {
+    vi.mocked(subscribeToPartners).mockImplementation(() => vi.fn());
+    vi.mocked(subscribeToPartnerGroups).mockImplementation(() => vi.fn());
+    const partners = [{ id: 'p', parentId: 'g', name: 'Partner' }] as Partner[];
+    const partnerGroups = [{ id: 'g', title: 'Group' }] as PartnerGroupWithoutItems[];
+
+    const seeded = reducer(undefined, seedContent({ partners, partnerGroups }));
+    const state = reducer(seeded, subscribe());
+
+    expect(state.partners).toStrictEqual(new Success(partners));
+    expect(state.groups).toStrictEqual(new Success(partnerGroups));
+    expect(state.partnersSubscription).toBeInstanceOf(Success);
+  });
+
+  it('subscribes when asked to keep seeded partners live', () => {
+    subscribeToContent(['partnerGroups']);
+
+    expect(store.dispatch).toHaveBeenCalledWith(subscribe());
   });
 });
 

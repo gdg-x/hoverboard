@@ -1,4 +1,5 @@
 import { resolveFirebaseBin } from '../lib/firebase-cli.js';
+import { useFirebaseLoginCredentials } from '../lib/google-cloud.js';
 import { confirm } from '../lib/prompt.js';
 import { runCommand } from '../lib/spawn.js';
 import { checkFirebaseProject, resolveFirebaseProjectId } from '../utils/firebase-project.js';
@@ -35,7 +36,13 @@ export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> =
   }
 
   console.log('\nBuilding...');
-  if (runCommand('npm', ['run', 'build'], repoRoot) !== 0) {
+  try {
+    await useFirebaseLoginCredentials(repoRoot);
+  } catch (error) {
+    console.log(`The build reads the site's content from Firestore. ${(error as Error).message}`);
+    return false;
+  }
+  if (runCommand('npm', ['run', 'build'], repoRoot, { FIRESTORE_TARGET: 'production' }) !== 0) {
     console.log('Build failed.');
     return false;
   }

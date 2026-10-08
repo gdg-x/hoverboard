@@ -1,7 +1,7 @@
 import { Pending, Success } from '@abraham/remotedata';
-import { css, html, type PropertyValues } from 'lit';
+import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { RouteLocation } from '../../router';
+import type { RouteLocation } from '../../utils/navigation';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { contentLoaders } from '../../config/site';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
@@ -128,15 +128,19 @@ export class HeaderBottomToolbar extends ThemedElement {
               </div>
             `,
           )}
-          <div
-            class="nav-item ${this.selectedTab === 'my-schedule' ? 'selected' : ''}"
-            data-day="my-schedule"
-            ?hidden="${!this.signedIn}"
-          >
-            <a href="${this.addQueryParams('my-schedule', this.location?.search)}"
-              >${navigationLabel('mySchedule')}</a
-            >
-          </div>
+          ${
+            __HB_FEATURES__.mySchedule
+              ? html`<div
+                  class="nav-item ${this.selectedTab === 'my-schedule' ? 'selected' : ''}"
+                  data-day="my-schedule"
+                  ?hidden="${!this.signedIn}"
+                >
+                  <a href="${this.addQueryParams('my-schedule', this.location?.search)}"
+                    >${navigationLabel('mySchedule')}</a
+                  >
+                </div>`
+              : nothing
+          }
         </nav>
       </div>
     `;

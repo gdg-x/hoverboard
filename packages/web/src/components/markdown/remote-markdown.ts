@@ -13,6 +13,13 @@ export class RemoteMarkDown extends ThemedElement {
   @property()
   accessor path: string = '';
 
+  /** The markdown at `path` when the page was built, so the server renders it and the browser keeps it. */
+  @property({ attribute: false })
+  accessor content: string | undefined;
+
+  @property({ attribute: 'page-path' })
+  accessor pagePath = '';
+
   @state()
   accessor state: State = new Initialized();
 
@@ -25,13 +32,19 @@ export class RemoteMarkDown extends ThemedElement {
       () => html``,
       () => html`${msg('Loading...', { id: 'common.loading' })}`,
       () => html`${msg('Error loading content', { id: 'markdown.remote-markdown.error' })}`,
-      (data) => html`<toc-markdown content="${data}"></toc-markdown>`,
+      (data) => html`<toc-markdown content="${data}" page-path="${this.pagePath}"></toc-markdown>`,
     );
   }
 
-  override connectedCallback() {
-    super.connectedCallback();
-    this.loadContent();
+  // Not in connectedCallback: a server-rendered page sets `content` just before it hydrates.
+  override firstUpdated() {
+    if (this.content === undefined) this.loadContent();
+  }
+
+  override willUpdate(changed: PropertyValues<this>) {
+    if (changed.has('content') && this.content !== undefined && this.state instanceof Initialized) {
+      this.state = new Success(this.content);
+    }
   }
 
   // A page passes another path when the locale changes.

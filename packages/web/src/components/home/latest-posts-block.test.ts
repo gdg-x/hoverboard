@@ -1,17 +1,10 @@
 import { Pending, Success } from '@abraham/remotedata';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Post } from '../../models/post';
-import { router } from '../../router';
 import type { LatestPostsBlock } from './latest-posts-block';
 import './latest-posts-block';
-
-vi.mock('../../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
-
-const mockUrlForName = vi.mocked(router.urlForName);
 
 const posts: Post[] = [
   {
@@ -47,9 +40,7 @@ describe('latest-posts-block', () => {
     expect(element.posts).toBeInstanceOf(Pending);
   });
 
-  it('renders up to four latest posts using the router', async () => {
-    mockUrlForName.mockImplementation((_name, params) => `/blog/${(params as { id: string }).id}`);
-
+  it('renders up to four latest posts', async () => {
     const { element, shadowRoot } = await fixture<LatestPostsBlock>(
       html`<latest-posts-block data-testid="block"></latest-posts-block>`,
     );

@@ -9,6 +9,7 @@ import htmlPlugin from 'eslint-plugin-html';
 import htmlEslintPlugin from '@html-eslint/eslint-plugin';
 import htmlEslintParser from '@html-eslint/parser';
 import vitestPlugin from '@vitest/eslint-plugin';
+import astroPlugin from 'eslint-plugin-astro';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
 import globals from 'globals';
 
@@ -19,6 +20,7 @@ export default [
       'dist/**',
       'node_modules/**',
       'packages/web/dist/**',
+      'packages/web/.astro/**', // Types written by Astro
       'packages/web/src/generated/**', // Written by lit-localize build
       'packages/server/functions/dist/**',
       'packages/cli/dist/**',
@@ -46,6 +48,8 @@ export default [
   // TypeScript files configuration
   {
     files: ['**/*.{ts,tsx}'],
+    // Scripts in .astro files, which eslint-plugin-astro lints without type information.
+    ignores: ['**/*.astro/*.ts'],
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
@@ -142,6 +146,9 @@ export default [
       },
     },
   },
+
+  // Astro pages and layouts
+  ...astroPlugin.configs['flat/recommended'],
 
   // HTML files configuration with @html-eslint/eslint-plugin
   {

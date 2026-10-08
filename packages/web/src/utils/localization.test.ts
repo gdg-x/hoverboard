@@ -1,5 +1,12 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { getLocale, locales, pickLocale, setLocale, startLocalization } from './localization';
+import {
+  getLocale,
+  locales,
+  pickLocale,
+  renderNextPageInSourceLocale,
+  setLocale,
+  startLocalization,
+} from './localization';
 
 afterEach(() => {
   localStorage.clear();
@@ -83,6 +90,17 @@ describe('localization', () => {
 
     await startLocalization();
 
+    expect(getLocale()).toBe('en');
+  });
+
+  it('loads the next page as usual while the app is in the source locale', async () => {
+    const load = vi.fn(() => Promise.resolve());
+    const event = Object.assign(new Event('astro:before-preparation'), { loader: load });
+
+    renderNextPageInSourceLocale(event);
+    await event.loader();
+
+    expect(load).toHaveBeenCalledOnce();
     expect(getLocale()).toBe('en');
   });
 });

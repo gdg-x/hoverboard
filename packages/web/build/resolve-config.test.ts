@@ -9,8 +9,9 @@ import { defaultTheme } from '../src/themes/default';
 import { THEME_TOKENS } from '../src/themes/tokens';
 import { ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
 import {
+  buildMarkdown,
   featureDefines,
-  headTags,
+  mapsScriptSrc,
   markdownTranslations,
   siteModule,
   templateRenderer,
@@ -457,18 +458,31 @@ describe('markdownTranslations', () => {
   });
 });
 
+describe('buildMarkdown', () => {
+  it('renders the markdown pages with the site config and reads the posts', () => {
+    const { pages, posts } = buildMarkdown(repoPaths.site, (template) =>
+      template.replaceAll('{{', '[').replaceAll('}}', ']'),
+    );
+
+    expect(Object.keys(pages)).toEqual(['faq', 'coc']);
+    expect(pages.faq).not.toContain('{{');
+    expect(Object.keys(posts)).toContain('2017-02-12-c4p.md');
+  });
+
+  it('skips markdown that a site does not have', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'hoverboard-markdown-'));
+    dirsToClean.push(dir);
+
+    expect(buildMarkdown(dir, (template) => template)).toEqual({ pages: {}, posts: {} });
+  });
+});
+
 describe('templateRenderer', () => {
-  const render = (file: string) => {
+  it('renders the site config into a template', () => {
     const config = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
     const site = { ...config.site, locales: { source: 'es', targets: [] } };
-    return templateRenderer({ ...config, site })(
-      readFileSync(join(import.meta.dirname, '..', file), 'utf8'),
-    );
-  };
 
-  it('declares the source locale as the language of index.html and the manifest', () => {
-    expect(render('index.html')).toMatch(/<html [^>]*lang="es">/);
-    expect(JSON.parse(render('public/manifest.json'))).toMatchObject({ lang: 'es' });
+    expect(templateRenderer({ ...config, site })('{{ site.locales.source }}')).toBe('es');
   });
 });
 
@@ -497,29 +511,30 @@ describe('siteModule', () => {
     expect(resolveId('virtual:hoverboard/content/fr')).toBeUndefined();
     expect(resolveId('virtual:hoverboard/content/constructor')).toBeUndefined();
   });
+
+  it('serves the theme and head data to the layout', () => {
+    const code = load(resolveId('virtual:hoverboard/layout')!)!;
+
+    expect(code).toContain(`export const theme = ${JSON.stringify(config.theme)};`);
+    expect(code).toContain(`export const themeCss = ${JSON.stringify(themeColorsCss(config))};`);
+    expect(code).toContain(`export const mapsScript = ${JSON.stringify(mapsScriptSrc(config))};`);
+  });
 });
 
-describe('headTags', () => {
+describe('mapsScriptSrc', () => {
   const configWith = (map: boolean) =>
     ({
-      site: {
-        features: { map },
-        integrations: { googleMapsApiKey: 'key&x' },
-        theme: { badgeColors: {}, tagColors: {} },
-      },
-      theme: {},
-    }) as unknown as Parameters<typeof headTags>[0];
+      site: { features: { map }, integrations: { googleMapsApiKey: 'key&x' } },
+    }) as unknown as Parameters<typeof mapsScriptSrc>[0];
 
   it('loads Google Maps when map is on', () => {
-    const script = headTags(configWith(true)).find(({ tag }) => tag === 'script');
-
-    expect(script?.attrs?.['src']).toBe(
+    expect(mapsScriptSrc(configWith(true))).toBe(
       'https://maps.googleapis.com/maps/api/js?key=key%26x&libraries=maps%2Cmarker&loading=async&v=beta',
     );
   });
 
   it('skips Google Maps when map is off', () => {
-    expect(headTags(configWith(false)).map(({ tag }) => tag)).toEqual(['style']);
+    expect(mapsScriptSrc(configWith(false))).toBeUndefined();
   });
 });
 

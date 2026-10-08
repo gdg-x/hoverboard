@@ -1,0 +1,21 @@
+---
+import { loadContent } from '../data/content';
+import { seedPage } from '../data/page';
+import Base from '../layouts/base.astro';
+import { HomePage } from '../views/home-page';
+
+// The home page imports these blocks without waiting, so wait here for the server to render them.
+await Promise.all([
+  __HB_FEATURES__.forkMe && import('../components/home/fork-me-block'),
+  __HB_FEATURES__.speakers && import('../components/home/speakers-block'),
+  __HB_FEATURES__.subscribe && import('../components/home/subscribe-block'),
+  __HB_FEATURES__.blog && import('../components/home/latest-posts-block'),
+]);
+
+const { blog, speakers } = await loadContent();
+const content = seedPage({ blog, speakers });
+---
+
+<Base content={content}>
+  <HomePage client:load />
+</Base>

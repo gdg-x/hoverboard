@@ -1,0 +1,19 @@
+---
+import { loadContent } from '../../data/content';
+import { pageMetadata } from '../../data/metadata';
+import { seedPage } from '../../data/page';
+import type { RouteLocation } from '../../utils/navigation';
+import Base from '../../layouts/base.astro';
+import { SchedulePage } from '../../views/schedule-page';
+import { MySchedule } from '../../views/schedule/my-schedule';
+
+const location: RouteLocation = { pathname: '/schedule/my-schedule', search: '', params: {} };
+const { schedule, sessions, speakers } = await loadContent();
+const content = seedPage({ schedule, sessions, speakers });
+---
+
+<Base {...pageMetadata('schedule')} content={content}>
+  <SchedulePage location={location} client:load>
+    <MySchedule client:load />
+  </SchedulePage>
+</Base>

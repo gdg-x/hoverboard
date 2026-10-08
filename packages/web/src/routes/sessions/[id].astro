@@ -1,0 +1,23 @@
+---
+import { loadContent } from '../../data/content';
+import { itemMetadata } from '../../data/metadata';
+import { seedPage } from '../../data/page';
+import type { Session } from '../../models/session';
+import Base from '../../layouts/base.astro';
+import { SessionPage } from '../../views/session-page';
+
+export const getStaticPaths = async () => {
+  const { sessions = [] } = await loadContent();
+  return sessions.map((session) => ({ params: { id: session.id }, props: { session } }));
+};
+
+const { session } = Astro.props as { session: Session };
+// Generated sessions carry their speakers.
+const speaker = (session as { speakers?: { photoUrl?: string }[] }).speakers?.[0];
+const { sessions } = await loadContent();
+const content = seedPage({ sessions });
+---
+
+<Base {...itemMetadata(session.title, session.description, speaker?.photoUrl)} content={content}>
+  <SessionPage sessionId={session.id} client:load />
+</Base>

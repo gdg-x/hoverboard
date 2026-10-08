@@ -5,7 +5,7 @@ import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../markdown/short-markdown';
 import '../shared/text-truncate';
-import { router } from '../../router';
+import { postPath } from '../../utils/navigation';
 import { type BlogState, selectBlogPosts } from '../../store/blog';
 import { getDate } from '../../utils/dates';
 import '../shared/hoverboard-icon';
@@ -101,7 +101,7 @@ export class LatestPostsBlock extends ThemedElement {
   }
 
   private postUrl(id: string) {
-    return router.urlForName('post-page', { id });
+    return postPath(id);
   }
 
   private getDate(date: string | Date) {

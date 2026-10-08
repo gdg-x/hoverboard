@@ -5,9 +5,6 @@ import { fixture } from '../../../__tests__/helpers/fixtures';
 import { navigation } from '../../config/site';
 import type { HeaderToolbar } from './header-toolbar';
 
-vi.mock('../../router', () => ({
-  selectRouteName: vi.fn(() => 'home'),
-}));
 vi.mock('../../store/auth', async (importOriginal) => ({
   __esModule: true,
   ...(await importOriginal<typeof import('../../store/auth')>()),
@@ -97,15 +94,17 @@ describe('header-toolbar', () => {
     expect((listener.mock.calls[0]?.[0] as CustomEvent).detail).toEqual({ value: true });
   });
 
-  it('hides the menu button on laptop-plus viewports and shows the logo', async () => {
+  it("selects the tab of the page's path", async () => {
     const { element, shadowRoot } = await fixture<HeaderToolbar>(
-      html`<header-toolbar></header-toolbar>`,
+      html`<header-toolbar path="/sessions/101"></header-toolbar>`,
     );
-    element['viewport'] = { isPhone: false, isTabletPlus: true, isLaptopPlus: true };
+
+    expect(shadowRoot.querySelector('.nav-item.selected')).toHaveTextContent('Schedule');
+
+    element.path = '/blog';
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('.icon-button[aria-label="Menu"]')).toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('.toolbar-logo')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('.nav-item.selected')).toHaveTextContent('Blog');
   });
 
   it('positions the selection bar under the selected nav item', async () => {

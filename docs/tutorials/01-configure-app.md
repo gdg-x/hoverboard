@@ -41,11 +41,11 @@ The config is checked with the defaults merged in. The build, `npm run lint` and
 
 The check also catches navigation to an unknown page, and images that are not in `packages/web/public`.
 
-`index.html`, `manifest.json`, `faq.md` and `coc.md` can use these values in [Nunjucks](https://mozilla.github.io/nunjucks/) templates, with one namespace per file. For example `{{ site.url }}` comes from `site.json`, and `{{ resources.title }}` from `content/resources.json`.
+`faq.md` and `coc.md` can use these values in [Nunjucks](https://mozilla.github.io/nunjucks/) templates, with one namespace per file. For example `{{ site.url }}` comes from `site.json`, and `{{ resources.title }}` from `content/resources.json`.
 
 ## Pages configuration
 
-Disable, reorder or modify blocks for individual pages inside their individual files that can be found in the `packages/web/src/pages/` folder.
+Disable, reorder or modify blocks for individual pages inside their individual files that can be found in the `packages/web/src/views/` folder.
 The top block (aka 'hero') of the home page has its background image in `heroSettings` in `packages/config/site.json`. Its colors come from the theme ([Styling](03-styling.md)).
 
 ```json
@@ -122,7 +122,7 @@ UI text is the same on every site, so it is not in `packages/config`. To change 
 
 ### Site languages
 
-`locales` in `packages/config/site.json` sets the languages of the site. `source` is the default locale and the language of your content. `index.html` and `manifest.json` are in this language, and their `lang` is set to it. `targets` lists the other locales that visitors can pick in the footer. Every locale other than `en` needs UI translations in `packages/translations/xliff/`, and the build fails without them. None ship yet, so sites are in English only:
+`locales` in `packages/config/site.json` sets the languages of the site. `source` is the default locale and the language of your content. The pages and `manifest.json` are built in this language, and their `lang` is set to it. In a visitor's browser, the page switches to their language once it has loaded. `targets` lists the other locales that visitors can pick in the footer. Every locale other than `en` needs UI translations in `packages/translations/xliff/`, and the build fails without them. None ship yet, so sites are in English only:
 
 ```json
 "locales": { "source": "en", "targets": [] }
@@ -132,7 +132,7 @@ The app picks a visitor's language in this order: the one they picked before, th
 
 Dates and numbers follow the visitor's language. Session days and times stay in `event.timezone`.
 
-These are not translated: data in Firestore, blog posts, push notifications, and `index.html` and `manifest.json`.
+These are not translated: data in Firestore, blog posts, push notifications, `manifest.json`, and the page titles and descriptions that search engines and link previews read.
 
 ### Translating event content
 

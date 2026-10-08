@@ -1,17 +1,10 @@
-import { Failure, Pending } from '@abraham/remotedata';
-import { describe, expect, it, vi } from 'vitest';
+import { Failure, Pending, Success } from '@abraham/remotedata';
+import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
-import { router } from '../../router';
 import type { PreviousSpeakersBlock } from './previous-speakers-block';
 import './previous-speakers-block';
-
-vi.mock('../../router', () => ({
-  router: { urlForName: vi.fn() },
-}));
-
-const mockRouter = vi.mocked(router);
 
 const speaker: PreviousSpeaker = {
   bio: 'Bio',
@@ -52,11 +45,10 @@ describe('previous-speakers-block', () => {
   });
 
   it('renders speaker links and the CTA icon', async () => {
-    mockRouter.urlForName.mockReturnValue('/previous-speakers/speaker-1');
     const { element, shadowRoot } = await fixture<PreviousSpeakersBlock>(
       html`<previous-speakers-block></previous-speakers-block>`,
     );
-    element.speakers = [speaker];
+    element.previousSpeakers = new Success([speaker]);
     await element.updateComplete;
 
     const speakerLink = shadowRoot.querySelector('a.speaker');

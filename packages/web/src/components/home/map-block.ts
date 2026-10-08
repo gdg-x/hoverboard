@@ -3,6 +3,7 @@ import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { initialUiState } from '../../store/ui';
 import { location } from '../../config/site';
+import '../../utils/media-query';
 import '../shared/hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';

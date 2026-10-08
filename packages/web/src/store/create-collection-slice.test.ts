@@ -1,6 +1,7 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { createCollectionSlice } from './create-collection-slice';
+import { seedContent, subscribeToContent } from './content';
 import type { Subscription } from '../utils/firestore';
 
 // fetch()'s onStart/onNext/onError callbacks dispatch through the lazily
@@ -98,5 +99,32 @@ describe('createCollectionSlice', () => {
 
     expect(() => unsubscribe()).not.toThrow();
     expect(subscribeToSource).not.toHaveBeenCalled();
+  });
+
+  it('takes its own list from seeded content and ignores the rest', () => {
+    const { reducer } = createCollectionSlice<Item>('items', vi.fn());
+    const items: Item[] = [{ id: '1', name: 'Ada' }];
+    const seed = (payload: object) => seedContent(payload as Parameters<typeof seedContent>[0]);
+
+    expect(reducer(new Initialized(), seed({ items }))).toStrictEqual(new Success(items));
+    expect(reducer(new Initialized(), seed({ others: items }))).toStrictEqual(new Initialized());
+  });
+
+  it('keeps seeded data while the subscription starts', () => {
+    const { reducer } = createCollectionSlice<Item>('items', vi.fn());
+    const seeded = new Success<Item[]>([{ id: '1', name: 'Ada' }]);
+
+    expect(reducer(seeded, { type: 'items/pending' })).toBe(seeded);
+    expect(reducer(new Initialized(), { type: 'items/pending' })).toStrictEqual(new Pending());
+  });
+
+  it('subscribes once when asked to keep seeded content live', () => {
+    const subscribeToSource = vi.fn().mockReturnValue(new Success(vi.fn()));
+    createCollectionSlice<Item>('live-items', subscribeToSource);
+
+    subscribeToContent(['live-items', 'unknown']);
+    subscribeToContent(['live-items']);
+
+    expect(subscribeToSource).toHaveBeenCalledTimes(1);
   });
 });
