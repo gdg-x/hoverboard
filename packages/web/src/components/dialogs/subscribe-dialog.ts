@@ -45,7 +45,9 @@ export class SubscribeDialog extends ThemedElement {
     }
   `;
 
-  private subscribeBlock = subscribeBlock;
+  private get subscribeBlock() {
+    return subscribeBlock;
+  }
 
   @query('#dialog')
   accessor dialog!: HoverboardDialog;

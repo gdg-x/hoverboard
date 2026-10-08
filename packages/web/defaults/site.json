@@ -15,6 +15,10 @@
       "gdg": "#00b0ff"
     }
   },
+  "locales": {
+    "source": "en",
+    "targets": []
+  },
   "navigation": [
     { "route": "home", "permalink": "/" },
     { "route": "speakers", "permalink": "/speakers" },

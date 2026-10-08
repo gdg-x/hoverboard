@@ -66,6 +66,7 @@ describe('a production build of a minimal site', () => {
     const index = readFileSync(join(dist, 'index.html'), 'utf8');
 
     expect(index).toContain('<title>Minimal Fest</title>');
+    expect(index).toMatch(/<html [^>]*lang="en">/);
     expect(index).toContain('<link href="https://minimal-site.web.app/" rel="canonical" />');
     expect(index).not.toContain('maps.googleapis.com');
   });
@@ -78,6 +79,7 @@ describe('a production build of a minimal site', () => {
     );
     expect(JSON.parse(readFileSync(join(dist, 'manifest.json'), 'utf8'))).toMatchObject({
       short_name: 'Minimal',
+      lang: 'en',
     });
   });
 

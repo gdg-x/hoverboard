@@ -27,7 +27,6 @@
   },
   "heroSettings": {
     "home": {
-      "description": "A minimal site",
       "background": { "image": "/images/backgrounds/home.jpg" }
     }
   },

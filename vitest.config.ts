@@ -6,14 +6,12 @@ import { siteModule } from './packages/web/build/vite-plugin-site';
 import { FEATURES } from './packages/web/src/config/features';
 
 const webRoot = fileURLToPath(new URL('./packages/web', import.meta.url));
+const siteConfig = resolveConfig({ paths: configPaths(webRoot), nodeEnv: 'test' });
+// The locale that packages/web/__tests__/fake-locale.global-setup.ts builds.
+const FAKE_LOCALE = 'en-XA';
 
 const web = {
-  plugins: [
-    decorators(),
-    siteModule(resolveConfig({ paths: configPaths(webRoot), nodeEnv: 'test' }), {
-      defineFeatures: false,
-    }),
-  ],
+  plugins: [decorators(), siteModule(siteConfig, { defineFeatures: false })],
   // Vitest resolves lit-html's `isServer` with the Node condition (true), which
   // makes Lit controllers skip browser setup under jsdom.
   resolve: {
@@ -74,7 +72,14 @@ export default defineConfig({
               return code.replaceAll('../generated/locales/', '../generated/test-locales/');
             },
           },
-          ...web.plugins,
+          decorators(),
+          siteModule(
+            {
+              ...siteConfig,
+              contentTranslations: { [FAKE_LOCALE]: { title: `[${siteConfig.resources.title}]` } },
+            },
+            { defineFeatures: false },
+          ),
         ],
         test: {
           ...web.test,

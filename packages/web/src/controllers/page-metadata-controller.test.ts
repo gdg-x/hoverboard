@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { ReactiveControllerHost } from 'lit';
-import { updateMetadata } from '../utils/metadata';
+import { description, title } from '../config/site';
+import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
 import { PageMetadataController } from './page-metadata-controller';
 
 vi.mock('../utils/metadata');
@@ -25,5 +26,14 @@ describe('PageMetadataController', () => {
     controller.hostDisconnected();
     localeStatus('ready');
     expect(updateMetadata).toHaveBeenCalledTimes(2);
+  });
+
+  it('uses the site title and description on the home page', () => {
+    const controller = new PageMetadataController(host, 'home');
+
+    controller.hostConnected();
+    controller.hostDisconnected();
+
+    expect(updateMetadata).toHaveBeenLastCalledWith(title, description, INCLUDE_SITE_TITLE.NO);
   });
 });

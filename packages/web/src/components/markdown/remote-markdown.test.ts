@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { Success } from '@abraham/remotedata';
 import { waitFor } from '@testing-library/dom';
 import { html, render, type TemplateResult } from 'lit';
 import type { RemoteMarkDown } from './remote-markdown';
@@ -83,5 +84,26 @@ describe('remote-markdown', () => {
     await waitFor(() => {
       expect(shadowRoot).toHaveTextContent('Error loading content');
     });
+  });
+
+  it('loads the new path when it changes, and drops the earlier response', async () => {
+    let finishFirst = (_response: Response) => undefined as void;
+    fetchMock
+      .mockReturnValueOnce(new Promise((resolve) => (finishFirst = resolve)))
+      .mockResolvedValueOnce(new Response('# Preguntas'));
+    const { element } = await renderRemoteMarkdown(
+      html`<remote-markdown path="/data/faq.md"></remote-markdown>`,
+    );
+
+    element.path = '/locales/es-faq-1234abcd.md';
+    await element.updateComplete;
+
+    expect(fetchMock).toHaveBeenLastCalledWith('/locales/es-faq-1234abcd.md');
+    await waitFor(() => {
+      expect(element.state).toEqual(new Success('# Preguntas'));
+    });
+    finishFirst(new Response('# Questions'));
+    await new Promise((resolve) => setTimeout(resolve));
+    expect(element.state).toEqual(new Success('# Preguntas'));
   });
 });

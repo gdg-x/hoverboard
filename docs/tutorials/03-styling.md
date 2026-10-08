@@ -48,7 +48,6 @@ The home page hero image is `heroSettings.home.background.image` in `packages/co
 ```json
 "heroSettings": {
   "home": {
-    "description": "Join the commuity, learn new things!",
     "background": {
       "image": "/images/backgrounds/home.jpg"
     }

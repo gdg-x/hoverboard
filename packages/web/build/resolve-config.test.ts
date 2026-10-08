@@ -8,7 +8,14 @@ import { THEMES } from '../src/themes/index';
 import { defaultTheme } from '../src/themes/default';
 import { THEME_TOKENS } from '../src/themes/tokens';
 import { ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
-import { featureDefines, headTags, themeColorsCss } from './vite-plugin-site';
+import {
+  featureDefines,
+  headTags,
+  markdownTranslations,
+  siteModule,
+  templateRenderer,
+  themeColorsCss,
+} from './vite-plugin-site';
 
 const repoPaths = configPaths(join(import.meta.dirname, '..'));
 const dirsToClean: string[] = [];
@@ -198,6 +205,160 @@ describe('config validation', () => {
     ]);
   });
 
+  it('takes hero descriptions from content/resources.json, not site.json', () => {
+    expect(
+      errorsFor({
+        site: { heroSettings: { home: { description: 'Welcome' } } },
+        resources: { heroDescriptions: { teams: 'Organizers' } },
+      }),
+    ).toEqual([
+      'site.json/heroSettings/home: must NOT have additional properties "description"',
+      'content/resources.json/heroDescriptions: must NOT have additional properties "teams"',
+    ]);
+  });
+
+  it('defaults to English only', () => {
+    const { site } = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
+
+    expect(site.locales).toEqual({ source: 'en', targets: [] });
+  });
+
+  it('requires UI translations for every locale other than en', () => {
+    expect(errorsFor({ site: { locales: { source: 'es', targets: ['en', 'pt-BR'] } } })).toEqual([
+      'site.json/locales: "es" has no UI translations in packages/translations/xliff',
+      'site.json/locales: "pt-BR" has no UI translations in packages/translations/xliff',
+    ]);
+  });
+
+  it('accepts locales that have UI translations', () => {
+    const translations = mkdtempSync(join(tmpdir(), 'hoverboard-translations-'));
+    dirsToClean.push(translations);
+    writeJson(join(translations, 'xliff/es.xlf'), '');
+    const paths = {
+      ...makePaths({ site: { locales: { source: 'es', targets: ['en'] } } }),
+      translations,
+    };
+
+    expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([]);
+  });
+
+  it('rejects the source locale in the targets', () => {
+    expect(errorsFor({ site: { locales: { source: 'en', targets: ['en'] } } })).toEqual([
+      'site.json/locales/targets: includes the source locale "en"',
+    ]);
+  });
+
+  it('rejects locale codes that are not BCP 47', () => {
+    expect(errorsFor({ site: { locales: { source: 'en', targets: ['../es'] } } })).toEqual([
+      'site.json/locales/targets/0: must match pattern "^[a-z]{2,3}(-[A-Z][a-z]{3})?(-([A-Z]{2}|\\d{3}))?$"',
+    ]);
+  });
+
+  describe('event content translations', () => {
+    /** A site with `es` as a target, its UI translations, and `content/locales/es/resources.json`. */
+    const spanishSite = (
+      translation?: unknown,
+      site: object = {},
+      files: Record<string, string> = {},
+    ) => {
+      const translations = mkdtempSync(join(tmpdir(), 'hoverboard-translations-'));
+      dirsToClean.push(translations);
+      writeJson(join(translations, 'xliff/es.xlf'), '');
+      const paths = {
+        ...makePaths({ site: { locales: { source: 'en', targets: ['es'] }, ...site } }),
+        translations,
+      };
+      if (translation !== undefined) {
+        writeJson(join(paths.site, 'content/locales/es/resources.json'), translation);
+      }
+      for (const [name, text] of Object.entries(files)) {
+        mkdirSync(join(paths.site, 'content/locales/es'), { recursive: true });
+        writeFileSync(join(paths.site, 'content/locales/es', name), text);
+      }
+      return { ...loadConfig({ paths, nodeEnv: 'production' }), paths };
+    };
+
+    it('has none for the repository config', () => {
+      expect(
+        loadConfig({ paths: repoPaths, nodeEnv: 'production' }).config.contentTranslations,
+      ).toEqual({});
+    });
+
+    it('reads the translated keys of each target locale, without $schema', () => {
+      const { config, errors } = spanishSite({
+        $schema: '../../../../web/schemas/resources.schema.json',
+        title: 'DevFest en español',
+        aboutBlock: { statisticsBlock: { days: { label: 'Días' } } },
+      });
+
+      expect(errors).toEqual([]);
+      expect(config.contentTranslations).toEqual({
+        es: {
+          title: 'DevFest en español',
+          aboutBlock: { statisticsBlock: { days: { label: 'Días' } } },
+        },
+      });
+    });
+
+    it('allows a target locale without content translations', () => {
+      const { config, errors } = spanishSite();
+
+      expect(errors).toEqual([]);
+      expect(config.contentTranslations).toEqual({});
+    });
+
+    it('rejects keys that are not in content/resources.json', () => {
+      expect(
+        spanishSite({ titel: 'DevFest', aboutBlock: { heading: 'Acerca' }, faq: '/x.md' }).errors,
+      ).toEqual([
+        'content/locales/es/resources.json/titel: is not in content/resources.json',
+        'content/locales/es/resources.json/aboutBlock/heading: is not in content/resources.json',
+        'content/locales/es/resources.json/faq: is not in content/resources.json',
+      ]);
+    });
+
+    it('rejects values the schema does not allow', () => {
+      expect(spanishSite({ title: 5 }).errors).toEqual([
+        'content/locales/es/resources.json/title: must be string',
+      ]);
+    });
+
+    it('rejects a file that is not an object', () => {
+      expect(spanishSite(['DevFest']).errors).toEqual([
+        'content/locales/es/resources.json: must be an object',
+      ]);
+    });
+
+    it('rejects a locale folder that is not a target', () => {
+      expect(
+        spanishSite({ title: 'DevFest' }, { locales: { source: 'en', targets: [] } }).errors,
+      ).toEqual(['content/locales/es: "es" is not in site.json/locales/targets']);
+    });
+
+    it('lists the translated markdown pages of each locale', () => {
+      const { config, errors, paths } = spanishSite(
+        undefined,
+        {},
+        {
+          'faq.md': '# Preguntas',
+          '.DS_Store': '',
+        },
+      );
+
+      expect(errors).toEqual([]);
+      expect(config.contentMarkdown).toEqual({
+        es: { faq: join(paths.site, 'content/locales/es/faq.md') },
+      });
+      expect(config.contentTranslations).toEqual({});
+    });
+
+    it('rejects other files in a locale folder', () => {
+      expect(spanishSite(undefined, {}, { 'FAQ.md': '# Preguntas' }).errors).toEqual([
+        'content/locales/es/FAQ.md: is not resources.json, faq.md, or coc.md',
+      ]);
+    });
+  });
+
   it('rejects unknown features', () => {
     expect(errorsFor({ site: { features: { sponsors: true } } })).toEqual([
       'site.json/features: must NOT have additional properties "sponsors"',
@@ -260,6 +421,76 @@ describe('featureDefines', () => {
     expect(defines['__HB_FEATURES__.blog']).toBe('false');
     expect(defines['__HB_FEATURES__.team']).toBe('true');
     expect(JSON.parse(defines['__HB_FEATURES__'] ?? '')).toEqual(features);
+  });
+});
+
+describe('markdownTranslations', () => {
+  it('renders each translated page into a hashed file and points the translation at it', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'hoverboard-markdown-'));
+    dirsToClean.push(dir);
+    writeFileSync(join(dir, 'faq.md'), '# Preguntas de {{ name }}');
+    const config = {
+      ...resolveConfig({ paths: repoPaths, nodeEnv: 'production' }),
+      contentTranslations: { es: { title: 'DevFest en español' } },
+      contentMarkdown: { es: { faq: join(dir, 'faq.md') } },
+    };
+
+    const { files, contentTranslations } = markdownTranslations(config, (template) =>
+      template.replace('{{ name }}', 'DevFest'),
+    );
+
+    expect(files).toEqual([
+      {
+        fileName: expect.stringMatching(/^locales\/es-faq-[0-9a-f]{8}\.md$/),
+        source: '# Preguntas de DevFest',
+      },
+    ]);
+    expect(contentTranslations).toEqual({
+      es: { title: 'DevFest en español', faq: `/${files[0]!.fileName}` },
+    });
+    expect(config.contentTranslations).toEqual({ es: { title: 'DevFest en español' } });
+  });
+});
+
+describe('templateRenderer', () => {
+  const render = (file: string) => {
+    const config = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
+    const site = { ...config.site, locales: { source: 'es', targets: [] } };
+    return templateRenderer({ ...config, site })(
+      readFileSync(join(import.meta.dirname, '..', file), 'utf8'),
+    );
+  };
+
+  it('declares the source locale as the language of index.html and the manifest', () => {
+    expect(render('index.html')).toMatch(/<html [^>]*lang="es">/);
+    expect(JSON.parse(render('public/manifest.json'))).toMatchObject({ lang: 'es' });
+  });
+});
+
+describe('siteModule', () => {
+  const config = {
+    ...resolveConfig({ paths: repoPaths, nodeEnv: 'production' }),
+    contentTranslations: { es: { title: 'DevFest en español' } },
+  };
+  const plugin = siteModule(config);
+  const resolveId = plugin.resolveId as (id: string) => string | undefined;
+  const load = plugin.load as (id: string) => string | undefined;
+
+  it('lazy-loads each content translation from its own module', () => {
+    const code = load(resolveId('virtual:hoverboard/site')!)!;
+
+    expect(code).toContain(`export const resources = ${JSON.stringify(config.resources)};`);
+    expect(code).toContain(
+      'export const contentTranslations = {"es": () => import("virtual:hoverboard/content/es")};',
+    );
+    expect(load(resolveId('virtual:hoverboard/content/es')!)).toBe(
+      'export default {"title":"DevFest en español"};\n',
+    );
+  });
+
+  it('resolves only the locales that have a translation', () => {
+    expect(resolveId('virtual:hoverboard/content/fr')).toBeUndefined();
+    expect(resolveId('virtual:hoverboard/content/constructor')).toBeUndefined();
   });
 });
 

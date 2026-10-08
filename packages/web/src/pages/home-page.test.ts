@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import { openVideoDialog } from '../store/ui';
-import { aboutBlock, dates, location } from '../config/site';
+import { aboutBlock, heroDescriptions, location } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './home-page';
 import { HomePage } from './home-page';
@@ -77,7 +77,8 @@ describe('home-page', () => {
 
     expect(mockUpdateMetadata).toHaveBeenCalled();
     expect(shadowRoot).toHaveTextContent(location.city);
-    expect(shadowRoot).toHaveTextContent(dates);
+    expect(shadowRoot).toHaveTextContent('October 13 – 14, 2017');
+    expect(shadowRoot).toHaveTextContent(heroDescriptions.home);
   });
 
   it('renders fork-me-block when the feature is on', async () => {

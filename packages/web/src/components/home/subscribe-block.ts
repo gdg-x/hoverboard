@@ -63,7 +63,9 @@ export class SubscribeBlock extends ThemedElement {
     }
   `;
 
-  private subscribeBlock = subscribeBlock;
+  private get subscribeBlock() {
+    return subscribeBlock;
+  }
 
   @fromStore((state) => state.subscribed)
   accessor subscribed!: SubscribeState;

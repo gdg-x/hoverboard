@@ -154,7 +154,9 @@ export class FeaturedVideos extends ThemedElement {
     }
   `;
 
-  private featuredVideos = featuredVideos;
+  private get featuredVideos() {
+    return featuredVideos;
+  }
 
   @query('#videos')
   accessor videosElm!: HTMLDivElement;

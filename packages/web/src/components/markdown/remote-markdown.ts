@@ -1,6 +1,6 @@
 import { Failure, fold, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import { html, type TemplateResult } from 'lit';
+import { html, type PropertyValues, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import './toc-markdown';
 import { fetchText } from '../../utils/fetch-text';
@@ -34,16 +34,24 @@ export class RemoteMarkDown extends ThemedElement {
     this.loadContent();
   }
 
+  // A page passes another path when the locale changes.
+  override updated(changed: PropertyValues<this>) {
+    if (changed.has('path') && changed.get('path') !== undefined) this.loadContent();
+  }
+
+  private request = 0;
+
   private async loadContent() {
+    const request = ++this.request;
     this.state = new Pending();
     try {
       if (this.path === '') {
         throw new Error('Invalid path');
       }
       const content = await fetchText(this.path);
-      this.state = new Success(content);
+      if (request === this.request) this.state = new Success(content);
     } catch (error) {
-      this.state = new Failure(error as Error);
+      if (request === this.request) this.state = new Failure(error as Error);
     }
   }
 }

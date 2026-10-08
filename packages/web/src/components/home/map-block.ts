@@ -75,7 +75,9 @@ export class MapBlock extends ThemedElement {
     }
   `;
 
-  private location = location;
+  private get location() {
+    return location;
+  }
   private mapCenter = `${location.mapCenter.latitude},${location.mapCenter.longitude}`;
   private markerPosition = `${location.pointer.latitude},${location.pointer.longitude}`;
 

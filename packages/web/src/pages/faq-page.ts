@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { faq } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import '../components/hero/simple-hero';
@@ -10,8 +10,9 @@ import { ThemedElement } from '../components/themed-element';
 export class FaqPage extends ThemedElement {
   private readonly metadata = new PageMetadataController(this, 'faq');
 
-  @property()
-  accessor source = faq;
+  get source() {
+    return faq;
+  }
 
   override render() {
     return html`

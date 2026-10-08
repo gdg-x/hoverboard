@@ -3,7 +3,7 @@
   "title": "Minimal Fest",
   "description": "A site with only the required config",
   "keywords": "minimal",
-  "dates": "October 15, 2027",
+  "heroDescriptions": { "home": "A minimal site" },
   "aboutBlock": {
     "callToAction": {
       "featuredSessions": {

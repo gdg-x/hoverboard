@@ -1,32 +1,62 @@
 // The only client entry point for site config. Read config from here, never from the data files.
 
-import { resources, site as settings } from 'virtual:hoverboard/site';
+import { contentTranslations, resources, site as settings } from 'virtual:hoverboard/site';
 import { isFeature, isFeatureEnabled, isNavigationRoute, type NavigationRoute } from './features';
+import { deepMerge } from './merge';
 
-export const {
+export const { basepath, heroSettings, image, organizer, url } = settings;
+export const siteLocales = settings.locales as { source: string; targets: string[] };
+export const timeZone = settings.event.timezone;
+export const eventDates = { start: settings.event.startDate, end: settings.event.endDate };
+export const disabledSchedule = !settings.schedule.published;
+export const hashtag = settings.social.hashtag;
+export const mailto = settings.organizer.email;
+export const socialNetwork = { follow: settings.social.follow };
+
+// Event content. `loadContent()` reassigns these live bindings, so read them at render time.
+export let {
   aboutBlock,
   aboutOrganizerBlock,
   coc,
-  dates,
   description,
   faq,
   featuredVideos,
   footerRelBlock,
   galleryBlock,
+  heroDescriptions,
   subscribeBlock,
   team,
   ticketsBlock,
   title,
 } = resources;
-export const { basepath, heroSettings, image, organizer, url } = settings;
-export const timeZone = settings.event.timezone;
-export const disabledSchedule = !settings.schedule.published;
-export const hashtag = settings.social.hashtag;
-export const mailto = settings.organizer.email;
-export const socialNetwork = { follow: settings.social.follow };
-export const location = {
-  ...settings.event.location,
-  description: resources.mapBlock.description,
+export let location = { ...settings.event.location, description: resources.mapBlock.description };
+
+let contentRequest = 0;
+
+/** Uses the site's event content translation for `locale`, or the source content without one. */
+export const loadContent = async (locale: string): Promise<void> => {
+  const request = ++contentRequest;
+  const load = contentTranslations[locale];
+  const translation = load ? (await load()).default : {};
+  if (request !== contentRequest) return;
+
+  const content = deepMerge(resources, translation);
+  ({
+    aboutBlock,
+    aboutOrganizerBlock,
+    coc,
+    description,
+    faq,
+    featuredVideos,
+    footerRelBlock,
+    galleryBlock,
+    heroDescriptions,
+    subscribeBlock,
+    team,
+    ticketsBlock,
+    title,
+  } = content);
+  location = { ...settings.event.location, description: content.mapBlock.description };
 };
 
 // Skeleton sizes while content loads. The same for every site.

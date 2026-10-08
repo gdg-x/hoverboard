@@ -9,7 +9,7 @@
     "title",
     "description",
     "keywords",
-    "dates",
+    "heroDescriptions",
     "aboutBlock",
     "aboutOrganizerBlock",
     "team",
@@ -30,6 +30,23 @@
     },
     "coc": {
       "type": "string"
+    },
+    "heroDescriptions": {
+      "description": "Text under the title in the top block of each page. Only home is required.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["home"],
+      "properties": {
+        "home": { "type": "string" },
+        "blog": { "type": "string" },
+        "coc": { "type": "string" },
+        "faq": { "type": "string" },
+        "notFound": { "type": "string" },
+        "previousSpeakers": { "type": "string" },
+        "schedule": { "type": "string" },
+        "speakers": { "type": "string" },
+        "team": { "type": "string" }
+      }
     },
     "ticketsBlock": {
       "type": "object",
@@ -216,9 +233,6 @@
       "type": "string"
     },
     "keywords": {
-      "type": "string"
-    },
-    "dates": {
       "type": "string"
     },
     "aboutOrganizerBlock": {

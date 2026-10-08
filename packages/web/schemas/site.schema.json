@@ -294,6 +294,26 @@
         }
       }
     },
+    "locales": {
+      "description": "The languages of the site. Each one other than en needs UI translations in packages/translations.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "targets"],
+      "properties": {
+        "source": {
+          "description": "The default locale, and the language of the content in packages/config/content.",
+          "$ref": "#/$defs/locale"
+        },
+        "targets": {
+          "description": "The other locales the site offers.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/locale"
+          }
+        }
+      }
+    },
     "navigation": {
       "type": "array",
       "items": {
@@ -313,7 +333,7 @@
       }
     },
     "heroSettings": {
-      "description": "The top block of each page.",
+      "description": "The top block of the home page. The text under each page title is heroDescriptions in content/resources.json.",
       "type": "object",
       "additionalProperties": false,
       "required": ["home"],
@@ -321,11 +341,8 @@
         "home": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["description", "background"],
+          "required": ["background"],
           "properties": {
-            "description": {
-              "type": "string"
-            },
             "background": {
               "type": "object",
               "additionalProperties": false,
@@ -337,30 +354,6 @@
               }
             }
           }
-        },
-        "blog": {
-          "$ref": "#/$defs/hero"
-        },
-        "speakers": {
-          "$ref": "#/$defs/hero"
-        },
-        "previousSpeakers": {
-          "$ref": "#/$defs/hero"
-        },
-        "schedule": {
-          "$ref": "#/$defs/hero"
-        },
-        "team": {
-          "$ref": "#/$defs/hero"
-        },
-        "faq": {
-          "$ref": "#/$defs/hero"
-        },
-        "coc": {
-          "$ref": "#/$defs/hero"
-        },
-        "notFound": {
-          "$ref": "#/$defs/hero"
         }
       }
     },
@@ -439,6 +432,11 @@
       "type": "string",
       "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
     },
+    "locale": {
+      "description": "A BCP 47 locale code, for example en, pt-BR or zh-Hant.",
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(-[A-Z][a-z]{3})?(-([A-Z]{2}|\\d{3}))?$"
+    },
     "latitude": {
       "type": "number",
       "minimum": -90,
@@ -461,15 +459,6 @@
       },
       "additionalProperties": {
         "$ref": "#/$defs/color"
-      }
-    },
-    "hero": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "description": {
-          "type": "string"
-        }
       }
     }
   }

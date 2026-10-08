@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { getLocale, locales, pickLocale, setLocale, startLocalization } from './localization';
 
 afterEach(() => {
@@ -23,6 +23,36 @@ describe('pickLocale', () => {
 
   it('falls back to the source locale', () => {
     expect(pickLocale(available, 'xx', ['fr-FR'])).toBe('en');
+  });
+
+  it('falls back to the first available locale, the site default', () => {
+    expect(pickLocale(['es', 'en'], null, ['fr-FR'])).toBe('es');
+  });
+});
+
+describe('site locales', () => {
+  afterEach(() => {
+    vi.doUnmock('../config/site');
+    vi.doUnmock('@lit/localize');
+    vi.resetModules();
+  });
+
+  const localesFor = async (siteLocales: { source: string; targets: string[] }) => {
+    vi.resetModules();
+    vi.doMock('../config/site', () => ({ siteLocales }));
+    // Lit allows one configureLocalization() call, and the module above already made it.
+    vi.doMock('@lit/localize', () => ({
+      configureLocalization: () => ({ getLocale: () => siteLocales.source, setLocale: vi.fn() }),
+    }));
+    return (await import('./localization')).locales;
+  };
+
+  it('puts the default locale first and leaves out en when the site does not list it', async () => {
+    expect(await localesFor({ source: 'es', targets: [] })).toEqual(['es']);
+  });
+
+  it('offers en when the site lists it as a target', async () => {
+    expect(await localesFor({ source: 'es', targets: ['en'] })).toEqual(['es', 'en']);
   });
 });
 

@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 import { configureLocalization, type LocaleModule } from '@lit/localize';
+import { loadContent, siteLocales } from '../config/site';
 
 // Matches `sourceLocale` in lit-localize.json.
 export const sourceLocale = 'en';
@@ -10,10 +11,18 @@ const modules = import.meta.glob<LocaleModule>('../generated/locales/*.ts');
 const moduleFor = (locale: string) => `../generated/locales/${locale}.ts`;
 
 // Listed from the built modules, because locale-codes.ts writes an empty `targetLocales` as `[ , ]`.
+// localize:build builds the site's locales other than `en`.
 export const targetLocales = Object.keys(modules).map((path) => path.replace(/^.*\/|\.ts$/g, ''));
 
-/** Every locale the site offers, the source locale first. */
-export const locales = [sourceLocale, ...targetLocales];
+const offersSourceLocale = [siteLocales.source, ...siteLocales.targets].includes(sourceLocale);
+
+/** Every locale the site offers, its default locale (`locales.source` in site.json) first. */
+export const locales = [
+  siteLocales.source,
+  ...[...(offersSourceLocale ? [sourceLocale] : []), ...targetLocales].filter(
+    (locale) => locale !== siteLocales.source,
+  ),
+];
 
 const { getLocale, setLocale: loadLocale } = configureLocalization({
   sourceLocale,
@@ -25,7 +34,7 @@ export { getLocale };
 
 /**
  * The first of the stored choice and the browser's languages that is available, matching
- * `en-US` to `en` when there is no exact match. Falls back to the source locale.
+ * `en-US` to `en` when there is no exact match. Falls back to the first available locale.
  */
 export const pickLocale = (
   available: readonly string[],
@@ -39,7 +48,7 @@ export const pickLocale = (
     const match = find(candidate) ?? find(candidate.split('-')[0]!);
     if (match) return match;
   }
-  return sourceLocale;
+  return available[0] ?? sourceLocale;
 };
 
 const readStoredLocale = () => {
@@ -50,7 +59,9 @@ const readStoredLocale = () => {
   }
 };
 
+// Content first, so the re-render on the locale's `ready` event shows both.
 const applyLocale = async (locale: string) => {
+  await loadContent(locale);
   await loadLocale(locale);
   document.documentElement.lang = locale;
 };

@@ -1,6 +1,6 @@
 type PlainObject = Record<string, unknown>;
 
-const isPlainObject = (value: unknown): value is PlainObject =>
+export const isPlainObject = (value: unknown): value is PlainObject =>
   typeof value === 'object' && value !== null && !Array.isArray(value);
 
 /** Merges `override` into `base`. Objects merge deeply, and arrays and other values replace. */

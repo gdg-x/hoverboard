@@ -226,7 +226,9 @@ export class HeaderToolbar extends ThemedElement {
     }
   `;
 
-  private logoTitle = title;
+  private get logoTitle() {
+    return title;
+  }
   private navigation = navigation;
 
   @property({ type: Boolean, attribute: 'drawer-opened' })

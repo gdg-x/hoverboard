@@ -120,7 +120,9 @@ export class TeamPage extends ThemedElement {
   `;
 
   private readonly metadata = new PageMetadataController(this, 'team');
-  private team = team;
+  private get team() {
+    return team;
+  }
 
   @fromStore((state) => selectTeamsAndMembers(state))
   accessor teamsMembers!: typeof initialTeamsMembersState;
