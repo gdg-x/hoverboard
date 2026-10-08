@@ -83,15 +83,14 @@ describe('partners-block', () => {
     element.partners = new Success(partnerGroups);
     await element.updateComplete;
 
-    expect(shadowRoot).toHaveTextContent('Gold Partners');
-    const logo = shadowRoot.querySelector('.logo-item');
+    expect(shadowRoot.querySelector('h3.group-title')).toHaveTextContent('Gold Partners');
+    const logo = shadowRoot.querySelector('a.logo');
     expect(logo).toHaveAttribute('href', 'https://example.com/partner-1');
-    expect(shadowRoot.querySelector('img')).toHaveAttribute(
+    expect(shadowRoot.querySelector('a.logo img')).toHaveAttribute(
       'src',
       'https://example.com/logo-1.svg',
     );
-    expect(shadowRoot.querySelector('.cta-button')).toHaveAttribute('trailing-icon');
-    expect(shadowRoot.querySelector('.cta-button hoverboard-icon')).toHaveAttribute('slot', 'icon');
+    expect(shadowRoot.querySelector('.cta-button')).toHaveTextContent('Become a partner');
   });
 
   it('opens the subscribe dialog when clicking the become a partner button', async () => {

@@ -263,7 +263,7 @@
       "required": [],
       "properties": {
         "googleMapsApiKey": {
-          "description": "A browser key, restricted by HTTP referrer to the site's domains. Required when the map feature is on.",
+          "description": "A browser key, restricted by HTTP referrer to the site's domains. Without one, the venue block shows directions but no map.",
           "type": "string"
         }
       }
@@ -310,12 +310,10 @@
       "description": "The top block of the home page. The text under each page title is heroDescriptions in content/resources.json.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["home"],
       "properties": {
         "home": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["background"],
           "properties": {
             "background": {
               "type": "object",
@@ -323,9 +321,15 @@
               "required": ["image"],
               "properties": {
                 "image": {
+                  "description": "A photo behind the hero text, in packages/web/public or a URL. The hero darkens it so the text stays readable.",
                   "type": "string"
                 }
               }
+            },
+            "illustration": {
+              "description": "An SVG in packages/web/public, such as a line drawing of the city, shown next to the hero text. Drawn in currentColor, it follows the theme.",
+              "type": "string",
+              "pattern": "\\.svg$"
             }
           }
         }

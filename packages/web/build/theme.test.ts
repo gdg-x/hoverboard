@@ -1,7 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { hexToOklch } from '../src/themes/color';
 import { festival } from '../src/themes/festival';
-import { darkLogoCss, type SiteTheme, resolveTheme, themeCss, themeErrors } from './theme';
+import {
+  darkLogoCss,
+  type SiteTheme,
+  heroPhotoErrors,
+  resolveTheme,
+  themeCss,
+  themeErrors,
+} from './theme';
 
 const siteTheme = (theme: Partial<SiteTheme> = {}): SiteTheme => ({
   name: 'festival',
@@ -73,6 +80,21 @@ describe('themeCss', () => {
     expect(css).toContain(
       `@supports not (color: light-dark(#000, #fff)) {\n:root {\n--hb-color-primary: ${festival.dark.primary};`,
     );
+  });
+});
+
+describe('heroPhotoErrors', () => {
+  it('passes with the built-in scrims', () => {
+    expect(heroPhotoErrors(resolveTheme(siteTheme()))).toEqual([]);
+    expect(heroPhotoErrors(resolveTheme(siteTheme({ name: 'spotlight' })))).toEqual([]);
+  });
+
+  it('fails with a scrim too light for the text over a white photo', () => {
+    for (const scrim of ['rgb(0 0 0 / 20%)', 'rgba(0, 0, 0, 0.2)', '#0003']) {
+      expect(heroPhotoErrors(resolveTheme(siteTheme({ darkColors: { scrim } })))).toEqual([
+        expect.stringContaining('needs 4.5:1. Make theme.darkColors.scrim darker.'),
+      ]);
+    }
   });
 });
 

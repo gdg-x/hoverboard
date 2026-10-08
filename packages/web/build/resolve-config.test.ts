@@ -11,8 +11,8 @@ import { ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-c
 import {
   buildMarkdown,
   featureDefines,
+  heroIllustrationSvg,
   layoutThemeCss,
-  mapsScriptSrc,
   markdownTranslations,
   siteModule,
   templateRenderer,
@@ -211,6 +211,37 @@ describe('config validation', () => {
     ]);
   });
 
+  it('rejects a hero illustration that is not an SVG in packages/web/public', () => {
+    expect(
+      errorsFor({ site: { heroSettings: { home: { illustration: '/images/missing.svg' } } } }),
+    ).toEqual([
+      'site.json/heroSettings/home/illustration: "/images/missing.svg" is not in packages/web/public',
+    ]);
+    expect(
+      errorsFor({
+        site: { heroSettings: { home: { illustration: 'https://example.com/city.svg' } } },
+      }),
+    ).toEqual([
+      'site.json/heroSettings/home/illustration: "https://example.com/city.svg" is not in packages/web/public',
+    ]);
+    expect(
+      errorsFor({ site: { heroSettings: { home: { illustration: '/images/logo.png' } } } }),
+    ).toEqual(['site.json/heroSettings/home/illustration: must match pattern "\\.svg$"']);
+  });
+
+  it('checks the hero text over a photo against the scrim', () => {
+    const photo = {
+      heroSettings: { home: { background: { image: '/images/backgrounds/home.jpg' } } },
+    };
+
+    expect(errorsFor({ site: photo })).toEqual([]);
+    expect(
+      errorsFor({ site: { ...photo, theme: { darkColors: { scrim: '#00000033' } } } }),
+    ).toEqual([
+      'site.json/heroSettings/home/background: onSurface on the scrim over a white photo has a contrast of 1.40:1 in the dark scheme, and needs 4.5:1. Make theme.darkColors.scrim darker.',
+    ]);
+  });
+
   it('takes hero descriptions from content/resources.json, not site.json', () => {
     expect(
       errorsFor({
@@ -378,17 +409,11 @@ describe('config validation', () => {
     ]);
   });
 
-  it('requires a Google Maps key only when map is on', () => {
+  it('accepts the map without a Google Maps key, which then shows only directions', () => {
     const paths = makePaths();
     const site = readJson(join(paths.site, 'site.json')) as Record<string, unknown>;
     delete site['integrations'];
     writeJson(join(paths.site, 'site.json'), site);
-
-    expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([
-      'site.json/integrations/googleMapsApiKey: is required when map is on',
-    ]);
-
-    writeJson(join(paths.site, 'site.json'), { ...site, features: { map: false } });
 
     expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([]);
   });
@@ -512,6 +537,7 @@ describe('siteModule', () => {
     expect(code).toContain(
       'export const contentTranslations = {"es": () => import("virtual:hoverboard/content/es")};',
     );
+    expect(code).toContain('export const heroIllustration = undefined;');
     expect(await load(resolveId('virtual:hoverboard/content/es')!)).toBe(
       'export default {"title":"DevFest en español"};\n',
     );
@@ -527,7 +553,6 @@ describe('siteModule', () => {
 
     expect(code).toContain(`export const theme = ${JSON.stringify(config.theme)};`);
     expect(code).toContain(`export const themeCss = ${JSON.stringify(layoutThemeCss(config))};`);
-    expect(code).toContain(`export const mapsScript = ${JSON.stringify(mapsScriptSrc(config))};`);
   });
 
   it('serves the theme fonts with imported file URLs', async () => {
@@ -543,20 +568,28 @@ describe('siteModule', () => {
   });
 });
 
-describe('mapsScriptSrc', () => {
-  const configWith = (map: boolean) =>
-    ({
-      site: { features: { map }, integrations: { googleMapsApiKey: 'key&x' } },
-    }) as unknown as Parameters<typeof mapsScriptSrc>[0];
+describe('heroIllustrationSvg', () => {
+  const siteWith = (illustration?: string) =>
+    ({ heroSettings: { home: { illustration } } }) as unknown as Parameters<
+      typeof heroIllustrationSvg
+    >[0];
 
-  it('loads Google Maps when map is on', () => {
-    expect(mapsScriptSrc(configWith(true))).toBe(
-      'https://maps.googleapis.com/maps/api/js?key=key%26x&libraries=maps%2Cmarker&loading=async&v=beta',
+  it('reads the SVG from packages/web/public without its XML declaration', () => {
+    const publicDir = mkdtempSync(join(tmpdir(), 'hoverboard-public-'));
+    dirsToClean.push(publicDir);
+    mkdirSync(join(publicDir, 'images'));
+    writeFileSync(
+      join(publicDir, 'images/city.svg'),
+      '<?xml version="1.0"?>\n<svg viewBox="0 0 1 1"></svg>\n',
+    );
+
+    expect(heroIllustrationSvg(siteWith('/images/city.svg'), publicDir)).toBe(
+      '<svg viewBox="0 0 1 1"></svg>',
     );
   });
 
-  it('skips Google Maps when map is off', () => {
-    expect(mapsScriptSrc(configWith(false))).toBeUndefined();
+  it('is undefined without an illustration', () => {
+    expect(heroIllustrationSvg(siteWith())).toBeUndefined();
   });
 });
 

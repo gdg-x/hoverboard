@@ -48,7 +48,7 @@ export const featureDefines = (features: Record<Feature, boolean>): Record<strin
  */
 export const siteModule = (
   config: SiteConfig,
-  { defineFeatures = true, siteDir = CONFIG_PATHS.site } = {},
+  { defineFeatures = true, siteDir = CONFIG_PATHS.site, publicDir = CONFIG_PATHS.public } = {},
 ): Plugin => ({
   name: 'hoverboard-site-module',
   config: () => (defineFeatures ? { define: featureDefines(config.site.features) } : {}),
@@ -72,6 +72,7 @@ export const siteModule = (
         `export const site = ${JSON.stringify(site)};`,
         `export const resources = ${JSON.stringify(resources)};`,
         `export const contentTranslations = {${loaders.join(', ')}};`,
+        `export const heroIllustration = ${JSON.stringify(heroIllustrationSvg(site, publicDir))};`,
         '',
       ].join('\n');
     }
@@ -79,7 +80,6 @@ export const siteModule = (
       return [
         `export const theme = ${JSON.stringify(config.theme)};`,
         `export const themeCss = ${JSON.stringify(layoutThemeCss(config))};`,
-        `export const mapsScript = ${JSON.stringify(mapsScriptSrc(config))};`,
         '',
       ].join('\n');
     }
@@ -105,17 +105,18 @@ export const layoutThemeCss = ({ site, theme }: SiteConfig): string =>
     darkLogoCss(fs.existsSync(join(CONFIG_PATHS.public, 'images/logo-dark.svg'))),
   ].join('\n');
 
-/** The Google Maps script, when the map is on and the site has a key. */
-export const mapsScriptSrc = (data: SiteConfig): string | undefined => {
-  const key = data.site.integrations?.googleMapsApiKey;
-  if (!data.site.features.map || !key) return undefined;
-  const query = new URLSearchParams({
-    key,
-    libraries: 'maps,marker',
-    loading: 'async',
-    v: 'beta',
-  });
-  return `https://maps.googleapis.com/maps/api/js?${query}`;
+/** The site's own hero illustration, inlined so a drawing in `currentColor` follows the theme. */
+export const heroIllustrationSvg = (
+  site: SiteConfig['site'],
+  publicDir: string = CONFIG_PATHS.public,
+): string | undefined => {
+  const path = site.heroSettings?.home?.illustration;
+  return path
+    ? fs
+        .readFileSync(join(publicDir, path), 'utf8')
+        .replace(/<\?xml[^>]*\?>/, '')
+        .trim()
+    : undefined;
 };
 
 /**

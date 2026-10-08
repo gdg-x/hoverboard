@@ -1,13 +1,22 @@
 // The only client entry point for site config. Read config from here, never from the data files.
 
-import { contentTranslations, resources, site as settings } from 'virtual:hoverboard/site';
+import {
+  contentTranslations,
+  heroIllustration,
+  resources,
+  site as settings,
+} from 'virtual:hoverboard/site';
 import { isFeature, isFeatureEnabled, isNavigationRoute, type NavigationRoute } from './features';
 import { deepMerge } from './merge';
 
 export const { basepath, heroSettings, image, organizer, url } = settings;
+/** The site's own hero illustration's markup, from `heroSettings.home.illustration`. */
+export { heroIllustration };
 export const shortName = settings.shortName;
 /** `system` lets visitors pick a scheme in the footer. `light` and `dark` lock the site to one. */
 export const colorScheme = settings.theme.colorScheme as 'system' | 'light' | 'dark';
+/** Section patterns, rotated stickers and illustrations. */
+export const decorations = settings.theme.decorations as boolean;
 export const siteLocales = settings.locales as { source: string; targets: string[] };
 export const timeZone = settings.event.timezone;
 export const eventDates = { start: settings.event.startDate, end: settings.event.endDate };
@@ -15,6 +24,18 @@ export const disabledSchedule = !settings.schedule.published;
 export const hashtag = settings.social.hashtag;
 export const mailto = settings.organizer.email;
 export const socialNetwork = { follow: settings.social.follow };
+
+const mapsKey = (settings.integrations as { googleMapsApiKey?: string } | undefined)
+  ?.googleMapsApiKey;
+/** The Google Maps script, when the site has a key. The venue block loads it on request. */
+export const mapsScriptUrl = mapsKey
+  ? `https://maps.googleapis.com/maps/api/js?${new URLSearchParams({
+      key: mapsKey,
+      libraries: 'maps,marker',
+      loading: 'async',
+      v: 'beta',
+    })}`
+  : undefined;
 
 // The build copies content/faq.md and content/coc.md here. A translation can point elsewhere.
 const sourceContent = { ...resources, faq: '/data/faq.md', coc: '/data/coc.md' };

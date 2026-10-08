@@ -106,17 +106,9 @@ Session tag colors are set by tag name in `theme.tagColors` in `packages/config/
 
 ## Hero
 
-The home page hero image is `heroSettings.home.background.image` in `packages/config/site.json`:
+The home page hero uses the theme's first accent color with a dot pattern. `heroSettings.home` in `packages/config/site.json` can add an illustration or a background photo ([Pages configuration](01-configure-app.md#pages-configuration)). With a photo, the build checks that the dark scheme's `onSurface` text is readable on its `scrim` over a white photo. If it is not, set a darker `theme.darkColors.scrim`.
 
-```json
-"heroSettings": {
-  "home": {
-    "background": {
-      "image": "/images/backgrounds/home.jpg"
-    }
-  }
-}
-```
+The home page sections below the hero alternate between the surface color and the accent colors, whichever features are on. The subscribe band always uses the third accent color.
 
 The text under the hero titles is `heroDescriptions` in `packages/config/content/resources.json` ([Pages configuration](01-configure-app.md#pages-configuration)).
 

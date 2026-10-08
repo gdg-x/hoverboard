@@ -1,15 +1,17 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { setStoreState } from '../../../__tests__/helpers/store';
-import { location } from '../../config/site';
-import { initialUiState } from '../../store/ui';
-import type { MapBlock } from './map-block';
-
+import { location, mapsScriptUrl } from '../../config/site';
+import { applyColorScheme } from '../../utils/color-scheme';
+import { directionLinks, type MapBlock } from './map-block';
 import './map-block';
 
+const mapsScripts = () =>
+  [...document.head.querySelectorAll('script')].filter(({ src }) => src === mapsScriptUrl);
+
 afterEach(() => {
-  vi.restoreAllMocks();
+  mapsScripts().forEach((script) => script.remove());
+  applyColorScheme(document, null);
 });
 
 describe('map-block', () => {
@@ -17,37 +19,57 @@ describe('map-block', () => {
     expect(customElements.get('map-block')).toBeDefined();
   });
 
-  it('renders the location description and address', async () => {
+  it('renders the venue, its address and directions in three map apps', async () => {
     const { shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
 
-    expect(shadowRoot).toHaveTextContent('Location');
+    expect(shadowRoot.querySelector('h2')).toHaveTextContent('Location');
+    expect(shadowRoot.querySelector('.venue')).toHaveTextContent(location.name);
+    expect(shadowRoot.querySelector('address')).toHaveTextContent(location.address);
     expect(shadowRoot).toHaveTextContent(location.description);
-    expect(shadowRoot).toHaveTextContent(location.address);
-    expect(shadowRoot.querySelector('a')).toHaveAttribute(
-      'href',
-      `https://www.google.com/maps/dir/?api=1&destination=${location.address}`,
-    );
-    expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'directions');
+    expect(
+      [...shadowRoot.querySelectorAll('.directions hb-button')].map((link) =>
+        link.getAttribute('href'),
+      ),
+    ).toEqual(directionLinks(location).map(({ url }) => url));
   });
 
-  it('does not render the google map when viewport is not tablet plus', async () => {
-    const { element, shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
-    setStoreState({
-      ui: { ...initialUiState, viewport: { ...initialUiState.viewport, isTabletPlus: false } },
-    });
-    await element.updateComplete;
+  it('links to directions by address, or by the pin for OpenStreetMap', () => {
+    expect(
+      directionLinks({
+        address: '1 Main St, Lviv',
+        pointer: { latitude: 49.8, longitude: 23.9 },
+      }),
+    ).toEqual([
+      {
+        name: 'Google Maps',
+        url: 'https://www.google.com/maps/dir/?api=1&destination=1+Main+St%2C+Lviv',
+      },
+      { name: 'Apple Maps', url: 'https://maps.apple.com/?daddr=1+Main+St%2C+Lviv' },
+      {
+        name: 'OpenStreetMap',
+        url: 'https://www.openstreetmap.org/?mlat=49.8&mlon=23.9#map=17/49.8/23.9',
+      },
+    ]);
+  });
 
+  it('loads Google Maps only when asked, in the color scheme the page shows', async () => {
+    const { element, shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
+
+    expect(mapsScripts()).toHaveLength(0);
     expect(shadowRoot.querySelector('gmp-map')).toBeNull();
-  });
 
-  it('renders the google map when viewport is tablet plus', async () => {
-    const { element, shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
-    setStoreState({
-      ui: { ...initialUiState, viewport: { ...initialUiState.viewport, isTabletPlus: true } },
-    });
+    applyColorScheme(document, 'dark');
+    shadowRoot.querySelector<HTMLElement>('.show-map')!.click();
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('gmp-map')).toBeInTheDocument();
+    expect(shadowRoot.querySelector('.show-map')).toHaveAttribute('disabled');
+    expect(mapsScripts()).toHaveLength(1);
+
+    customElements.define('gmp-map', class extends HTMLElement {});
+    mapsScripts()[0]!.dispatchEvent(new Event('load'));
+    await vi.waitFor(() => expect(shadowRoot.querySelector('gmp-map')).not.toBeNull());
+
+    expect(shadowRoot.querySelector('gmp-map')).toHaveAttribute('color-scheme', 'DARK');
     expect(shadowRoot.querySelector('gmp-advanced-marker')).toHaveAttribute('title', location.name);
   });
 });

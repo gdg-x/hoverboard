@@ -1,10 +1,9 @@
 import { Success } from '@abraham/remotedata';
 import { describe, expect, it } from 'vitest';
-import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { SpeakerWithTags } from '../../models/speaker';
-import type { HoverboardIcon } from '../shared/hoverboard-icon';
+import type { SpeakerCard } from '../shared/speaker-card';
 import type { SpeakersBlock } from './speakers-block';
 import './speakers-block';
 
@@ -34,29 +33,33 @@ describe('speakers-block', () => {
     expect(customElements.get('speakers-block')).toBeDefined();
   });
 
-  it('renders featured speakers and routes speaker links', async () => {
-    const { element, shadowRootForWithin } = await fixture<SpeakersBlock>(
-      html`<speakers-block data-testid="block"></speakers-block>`,
+  it('renders up to four featured speakers as cards', async () => {
+    const { element, shadowRoot } = await fixture<SpeakersBlock>(
+      html`<speakers-block></speakers-block>`,
     );
-    element.speakers = new Success(speakers);
+    const others = Array.from({ length: 5 }, (_, index) => ({
+      ...speakers[0]!,
+      id: `featured-${index}`,
+    }));
+    element.speakers = new Success([
+      ...others,
+      { ...speakers[0]!, id: 'not-featured', featured: false },
+    ]);
     await element.updateComplete;
-    expect(screen.getByTestId('block')).toBeInTheDocument();
-    const speakerLink = within(shadowRootForWithin).getByRole('link', { name: 'Example Speaker' });
-    expect(speakerLink).toHaveAttribute('href', '/speakers/speaker-1');
-    expect(
-      within(shadowRootForWithin).getByRole('heading', { name: 'Example Speaker' }),
-    ).toBeInTheDocument();
-    expect(shadowRootForWithin.querySelector('hoverboard-icon')).toHaveAttribute(
-      'name',
-      'linkedin',
+
+    const cards = [...shadowRoot.querySelectorAll<SpeakerCard>('speaker-card')];
+    expect(cards).toHaveLength(4);
+    expect(cards.map(({ speaker }) => speaker.id)).not.toContain('not-featured');
+    expect(shadowRoot.querySelector('.cta-button')).toHaveAttribute('href', '/speakers');
+  });
+
+  it('shows any speakers when none is featured', async () => {
+    const { element, shadowRoot } = await fixture<SpeakersBlock>(
+      html`<speakers-block></speakers-block>`,
     );
-    await shadowRootForWithin.querySelector<HoverboardIcon>('hoverboard-icon')?.updateComplete;
-    expect(
-      shadowRootForWithin.querySelector('hoverboard-icon')?.shadowRoot?.querySelector('svg'),
-    ).toBeInTheDocument();
-    expect(shadowRootForWithin.querySelector('hb-button hoverboard-icon')).toHaveAttribute(
-      'slot',
-      'icon',
-    );
+    element.speakers = new Success([{ ...speakers[0]!, featured: false }]);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelectorAll('speaker-card')).toHaveLength(1);
   });
 });

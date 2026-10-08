@@ -9,10 +9,21 @@ import {
 } from '../src/config/features';
 import { deepMerge, isPlainObject } from '../src/config/merge';
 import { fontProblems } from './fonts';
-import { type ResolvedTheme, type SiteTheme, resolveTheme, themeErrors } from './theme';
+import {
+  type ResolvedTheme,
+  type SiteTheme,
+  heroPhotoErrors,
+  resolveTheme,
+  themeErrors,
+} from './theme';
+
+/** `heroSettings` in site.json. The demo site sets none. */
+interface HeroSettings {
+  home?: { background?: { image: string }; illustration?: string };
+}
 
 type Site = typeof import('../defaults/site.json') &
-  typeof import('../../config/site.json') & { url: string };
+  typeof import('../../config/site.json') & { url: string; heroSettings?: HeroSettings };
 type Resources = typeof import('../../config/content/resources.json');
 
 /** Template data. Each file has its own namespace, for example `{{ site.url }}`. */
@@ -124,9 +135,6 @@ const featureErrors = (site: Site, resources: Resources): string[] => {
           .map((required) => `site.json/features/${feature}: needs ${required}, which is off`)
       : [],
   );
-  if (features.map && !site.integrations?.googleMapsApiKey) {
-    errors.push('site.json/integrations/googleMapsApiKey: is required when map is on');
-  }
 
   const links: [string, string][] = [
     ...resources.footerRelBlock.flatMap(({ links }, block) =>
@@ -182,13 +190,20 @@ const crossFileErrors = (site: Site, resources: Resources, paths: ConfigPaths): 
   }
   const images: [string, string | undefined][] = [
     ['site.json/image', site.image],
-    ['site.json/heroSettings/home/background/image', site.heroSettings.home.background.image],
+    ['site.json/heroSettings/home/background/image', site.heroSettings?.home?.background?.image],
     ['content/resources.json/aboutOrganizerBlock/image', resources.aboutOrganizerBlock.image],
   ];
   for (const [path, image] of images) {
     if (image && !isUrl(image) && !fs.existsSync(join(paths.public, image))) {
       errors.push(`${path}: "${image}" is not in packages/web/public`);
     }
+  }
+  // The page inlines it, so it can be drawn in the theme's colors.
+  const illustration = site.heroSettings?.home?.illustration;
+  if (illustration && (isUrl(illustration) || !fs.existsSync(join(paths.public, illustration)))) {
+    errors.push(
+      `site.json/heroSettings/home/illustration: "${illustration}" is not in packages/web/public`,
+    );
   }
   return [...errors, ...localeErrors(site, paths.translations), ...featureErrors(site, resources)];
 };
@@ -316,6 +331,7 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
   const warnings: string[] = [];
   if (siteValid) {
     errors.push(...themeErrors(theme));
+    if (site.heroSettings?.home?.background) errors.push(...heroPhotoErrors(theme));
     const titles = Object.values(content.translations).map(
       (translation) => (translation as { title?: string }).title ?? '',
     );

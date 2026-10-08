@@ -12,6 +12,7 @@ import '../components/home/speakers-block';
 import '../components/shared/add-to-calendar';
 import '../components/shell/app-header';
 import './faq-page';
+import './home-page';
 import './schedule-page';
 import './schedule/schedule-day';
 import './speakers-page';
@@ -106,6 +107,18 @@ describe('pages on the server', () => {
     expect(new Set(pages).size).toBe(1);
     expect(pages[0]!.indexOf('/speakers/ada')).toBeLessThan(pages[0]!.indexOf('/speakers/grace'));
     expect(pages[0]!.indexOf('/speakers/grace')).toBeLessThan(pages[0]!.indexOf('/speakers/alan'));
+  });
+
+  it('render the home hero for the build-time event state', async () => {
+    seedPage({ speakers: [], blog: [] });
+
+    const page = await renderToString(
+      html`<home-page event-state="upcoming" days-to-go="12"></home-page>`,
+    );
+
+    expect(page).toMatch(/<h1\s+id="hero-title"\s+class="title"\s*>/);
+    expect(page).toContain('12 days to go');
+    expect(page).toMatch(/<about-block\s+class="band"/);
   });
 
   it('render the calendar button with its closed menu', async () => {

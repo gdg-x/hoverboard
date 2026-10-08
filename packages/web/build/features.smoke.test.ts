@@ -42,7 +42,6 @@ const FEATURE_CHUNKS: Partial<Record<Feature, string[]>> = {
   blog: ['blog-list-page', 'post-page', 'latest-posts-block'],
   codeOfConduct: ['coc-page'],
   faq: ['faq-page'],
-  forkMe: ['fork-me-block'],
   gallery: ['gallery-block'],
   map: ['map-block'],
   mySchedule: ['my-schedule'],

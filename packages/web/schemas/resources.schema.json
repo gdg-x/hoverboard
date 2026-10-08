@@ -161,62 +161,15 @@
           }
         },
         "statisticsBlock": {
+          "description": "The numbers next to the about text on the home page.",
           "type": "object",
           "additionalProperties": false,
           "required": ["attendees", "days", "sessions", "tracks"],
           "properties": {
-            "attendees": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["label", "number"],
-              "properties": {
-                "label": {
-                  "type": "string"
-                },
-                "number": {
-                  "type": "string"
-                }
-              }
-            },
-            "days": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["label", "number"],
-              "properties": {
-                "label": {
-                  "type": "string"
-                },
-                "number": {
-                  "type": "string"
-                }
-              }
-            },
-            "sessions": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["label", "number"],
-              "properties": {
-                "label": {
-                  "type": "string"
-                },
-                "number": {
-                  "type": "string"
-                }
-              }
-            },
-            "tracks": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["label", "number"],
-              "properties": {
-                "label": {
-                  "type": "string"
-                },
-                "number": {
-                  "type": "string"
-                }
-              }
-            }
+            "attendees": { "$ref": "#/$defs/statistic" },
+            "days": { "$ref": "#/$defs/statistic" },
+            "sessions": { "$ref": "#/$defs/statistic" },
+            "tracks": { "$ref": "#/$defs/statistic" }
           }
         }
       }
@@ -327,6 +280,25 @@
               }
             }
           }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "statistic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "number"],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "emoji": {
+          "description": "Shown next to the number, for fun.",
+          "type": "string"
         }
       }
     }

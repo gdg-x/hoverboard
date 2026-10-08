@@ -3,6 +3,7 @@ import {
   applyColorScheme,
   COLOR_SCHEME_KEY,
   colorSchemeScript,
+  currentColorScheme,
   readColorScheme,
 } from './color-scheme';
 
@@ -45,6 +46,18 @@ describe('color scheme', () => {
         throw new DOMException('denied', 'SecurityError');
       }),
     ).toBeNull();
+  });
+
+  it('tells the scheme the page shows: the locked one, or the browser setting', () => {
+    const matchMedia = vi.fn(() => ({ matches: true }) as MediaQueryList);
+    vi.stubGlobal('matchMedia', matchMedia);
+
+    expect(currentColorScheme()).toBe('dark');
+    expect(matchMedia).toHaveBeenCalledWith('(prefers-color-scheme: dark)');
+
+    applyColorScheme(document, 'light');
+    expect(currentColorScheme()).toBe('light');
+    vi.unstubAllGlobals();
   });
 
   it('locks the page and the toolbar color to a scheme, and unlocks them', () => {

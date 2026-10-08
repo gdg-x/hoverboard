@@ -110,20 +110,20 @@
 <trans-unit id="home.about-organizer-block.photo-alt">
   <source>Organizer</source>
 </trans-unit>
+<trans-unit id="home.featured-videos.previous">
+  <source>Previous videos</source>
+</trans-unit>
+<trans-unit id="home.featured-videos.next">
+  <source>Next videos</source>
+</trans-unit>
 <trans-unit id="home.featured-videos.error">
   <source>Error loading videos.</source>
 </trans-unit>
 <trans-unit id="home.featured-videos.cta">
   <source>See all videos</source>
 </trans-unit>
-<trans-unit id="home.fork-me-block.title">
-  <source>Fork me on GitHub</source>
-</trans-unit>
-<trans-unit id="home.fork-me-block.description">
-  <source>Hoverboard is open source conference website template and is developed entirely on a voluntary basis. You can check the source code that generated this website on Github. If you find a issue or you want to contribute, you're more than welcome!</source>
-</trans-unit>
-<trans-unit id="home.fork-me-block.cta">
-  <source>Fork this project</source>
+<trans-unit id="home.gallery-block.cta">
+  <source>See all photos</source>
 </trans-unit>
 <trans-unit id="home.gallery-block.error">
   <source>Error loading gallery.</source>
@@ -131,8 +131,38 @@
 <trans-unit id="home.gallery-block.photo-alt">
   <source>Gallery photo</source>
 </trans-unit>
-<trans-unit id="home.gallery-block.cta">
-  <source>See all photos</source>
+<trans-unit id="home.hero.details">
+  <source>Event details</source>
+</trans-unit>
+<trans-unit id="home.hero.live">
+  <source>Live now</source>
+</trans-unit>
+<trans-unit id="home.hero.over">
+  <source>Thanks for coming!</source>
+</trans-unit>
+<trans-unit id="home.hero.tomorrow">
+  <source>Starts tomorrow</source>
+</trans-unit>
+<trans-unit id="home.hero.days-to-go">
+  <source><x id="0" equiv-text="${this.daysToGo}"/> days to go</source>
+</trans-unit>
+<trans-unit id="home.hero.coming-soon">
+  <source>Coming soon</source>
+</trans-unit>
+<trans-unit id="pages.home.view-highlights">
+  <source>View Highlights</source>
+</trans-unit>
+<trans-unit id="home.hero.videos">
+  <source>Watch the videos</source>
+</trans-unit>
+<trans-unit id="home.hero.photos">
+  <source>See the photos</source>
+</trans-unit>
+<trans-unit id="common.buy-ticket">
+  <source>Buy ticket</source>
+</trans-unit>
+<trans-unit id="home.hero.live-schedule">
+  <source>See what's on now</source>
 </trans-unit>
 <trans-unit id="home.latest-posts-block.title">
   <source>The latest news</source>
@@ -143,17 +173,32 @@
 <trans-unit id="home.map-block.title">
   <source>Location</source>
 </trans-unit>
+<trans-unit id="home.map-block.directions">
+  <source>Directions</source>
+</trans-unit>
+<trans-unit id="home.map-block.map-note">
+  <source>The map loads from Google Maps.</source>
+</trans-unit>
+<trans-unit id="home.map-block.loading">
+  <source>Loading map…</source>
+</trans-unit>
+<trans-unit id="home.map-block.show-map">
+  <source>Show map</source>
+</trans-unit>
+<trans-unit id="home.map-block.error">
+  <source>The map did not load. Try again.</source>
+</trans-unit>
 <trans-unit id="home.partners-block.added">
   <source>We will contact you soon!</source>
 </trans-unit>
 <trans-unit id="home.partners-block.title">
   <source>Partners</source>
 </trans-unit>
-<trans-unit id="home.partners-block.error">
-  <source>Error loading partners.</source>
-</trans-unit>
 <trans-unit id="home.partners-block.cta">
   <source>Become a partner</source>
+</trans-unit>
+<trans-unit id="home.partners-block.error">
+  <source>Error loading partners.</source>
 </trans-unit>
 <trans-unit id="home.partners-block.form-title">
   <source>Become a partner!</source>
@@ -173,26 +218,35 @@
 <trans-unit id="home.speakers-block.cta">
   <source>View all speakers</source>
 </trans-unit>
-<trans-unit id="common.subscribed">
-  <source>Subscribed</source>
-</trans-unit>
 <trans-unit id="home.subscribe-block.description">
   <source>Get notified about the important conference updates</source>
 </trans-unit>
-<trans-unit id="home.tickets-block.save">
-  <source>Save <x id="0" equiv-text="${discount}"/> today</source>
+<trans-unit id="common.subscribed">
+  <source>Subscribed</source>
 </trans-unit>
-<trans-unit id="common.buy-ticket">
-  <source>Buy ticket</source>
+<trans-unit id="home.subscribe-block.email">
+  <source>Your email</source>
 </trans-unit>
-<trans-unit id="home.tickets-block.not-available">
-  <source>Not available yet</source>
+<trans-unit id="home.subscribe-block.error">
+  <source>Could not subscribe. Please try again.</source>
 </trans-unit>
 <trans-unit id="home.tickets-block.title">
   <source>Tickets</source>
 </trans-unit>
 <trans-unit id="home.tickets-block.error">
   <source>Error loading tickets</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.sold-out-sticker">
+  <source>Sold out</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.in-demand">
+  <source>Popular</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.not-available">
+  <source>Not available yet</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.save">
+  <source>Save <x id="0" equiv-text="${discount}"/> today</source>
 </trans-unit>
 <trans-unit id="markdown.remote-markdown.error">
   <source>Error loading content</source>
@@ -424,9 +478,6 @@
 </trans-unit>
 <trans-unit id="pages.home.scroll-error">
   <source>Error scrolling to section.</source>
-</trans-unit>
-<trans-unit id="pages.home.view-highlights">
-  <source>View Highlights</source>
 </trans-unit>
 <trans-unit id="pages.offline.message">
   <source>You are offline and this page has not been saved yet. Pages you have visited are still available.</source>

@@ -61,17 +61,21 @@ Pull requests from forks are checked, but do not get a preview. Edit as a collab
 ## Pages configuration
 
 Disable, reorder or modify blocks for individual pages inside their individual files that can be found in the `packages/web/src/views/` folder.
-The top block (aka 'hero') of the home page has its background image in `heroSettings` in `packages/config/site.json`. Its colors come from the theme ([Styling](03-styling.md)).
+
+The top block (aka 'hero') of the home page shows the event name, dates, place and `heroDescriptions.home`, on a dotted band in the theme's colors. `heroSettings` in `packages/config/site.json` is optional:
+
+- `illustration`: an SVG in `packages/web/public` shown next to the text, for example a line drawing of your city. A drawing in `currentColor` follows the theme and the color scheme. Without one, the hero shows a drawing of a talk. It is hidden on narrow screens and when `theme.decorations` is `false`.
+- `background.image`: a photo behind the text. The hero darkens it with the dark scheme's `scrim` color and uses the dark scheme's text color, and the build checks their contrast.
 
 ```json
 "heroSettings": {
   "home": {
-    "background": {
-      "image": "/images/backgrounds/home.jpg"
-    }
+    "illustration": "/images/lviv.svg"
   }
 }
 ```
+
+The hero follows the event dates in the event time zone. Before the event, it counts the days and offers tickets. During the event, it says "Live now" and links to the schedule. After the event, it thanks attendees and links to the videos and photos.
 
 The text under a page's title is in `heroDescriptions` in `packages/config/content/resources.json`, so it can be translated. `home` is required, and `blog`, `coc`, `faq`, `notFound`, `previousSpeakers`, `schedule`, `speakers` and `team` are optional. The titles themselves are part of the UI text.
 
@@ -83,6 +87,10 @@ The text under a page's title is in `heroDescriptions` in `packages/config/conte
 ```
 
 The event dates on the home page come from `event.startDate` and `event.endDate`, formatted for the visitor's language.
+
+The numbers next to the about text are `aboutBlock.statisticsBlock` in `packages/config/content/resources.json`. Each can have an `emoji`, for fun.
+
+The venue block shows `event.location` with directions in Google Maps, Apple Maps and OpenStreetMap. With `integrations.googleMapsApiKey`, it also has a map that loads only when a visitor asks for it, so other visits do not load Google Maps.
 
 If you don't need some pages, turn their features off. See [Features](#features).
 
@@ -102,7 +110,6 @@ A feature that is off has no pages, navigation entry or home page block, and its
 The build fails when:
 
 - a feature needs one that is off: `schedule` needs `speakers`, `mySchedule` and `feedback` need `schedule`, and `mailchimp` needs `subscribe`.
-- `map` is on without `integrations.googleMapsApiKey`.
 - event text links to the page of a feature that is off, for example `/faq` in `footerRelBlock`.
 
 Every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, `optimizeImages` needs `imageOptimization`, and the schedule generator needs `schedule` or `speakers`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.

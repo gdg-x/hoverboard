@@ -1,5 +1,5 @@
 import { deriveDarkColor } from '../src/themes/color';
-import { contrastFailures } from '../src/themes/contrast';
+import { contrastFailures, contrastRatio } from '../src/themes/contrast';
 import { THEMES, type ThemeName, themeDeclarations } from '../src/themes/index';
 import { LEGACY_VARIABLES } from '../src/themes/legacy';
 import {
@@ -74,6 +74,44 @@ export const themeErrors = (theme: ResolvedTheme): string[] =>
     ({ scheme, foreground, background, ratio, min }) =>
       `site.json/theme: ${foreground} on ${background} has a contrast of ${ratio.toFixed(2)}:1 in the ${scheme} scheme, and needs ${min}:1. Change theme.${scheme === 'dark' ? 'darkColors' : 'colors'}.`,
   );
+
+// `#rgb`, `#rgba`, `#rrggbb`, `#rrggbbaa`, `rgb(r g b / a%)` and `rgba(r, g, b, a)`.
+const parseColor = (color: string): [number, number, number, number] | undefined => {
+  const hex = /^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.exec(color)?.[1];
+  if (hex) {
+    const digits = hex.length <= 4 ? [...hex].map((digit) => digit + digit).join('') : hex;
+    const [r = 0, g = 0, b = 0, a = 255] = [0, 2, 4, 6]
+      .filter((start) => start < digits.length)
+      .map((start) => parseInt(digits.slice(start, start + 2), 16));
+    return [r, g, b, a / 255];
+  }
+  const rgb =
+    /^rgba?\(\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)\s*(?:[,/]\s*([\d.]+)(%?))?\s*\)$/i.exec(color);
+  if (!rgb) return undefined;
+  const alpha = rgb[4] === undefined ? 1 : Number(rgb[4]) / (rgb[5] ? 100 : 1);
+  return [Number(rgb[1]), Number(rgb[2]), Number(rgb[3]), alpha];
+};
+
+const toHex = (channels: number[]) =>
+  `#${channels.map((channel) => Math.round(channel).toString(16).padStart(2, '0')).join('')}`;
+
+/**
+ * The home hero over a photo uses the dark scheme, so its text is the dark `onSurface` on the dark
+ * `scrim`. The check puts the scrim over a white photo, the worst case.
+ */
+export const heroPhotoErrors = (theme: ResolvedTheme): string[] => {
+  const scrim = parseColor(theme.dark.scrim);
+  const text = theme.dark.onSurface;
+  if (!scrim || !isHex(text)) return [];
+  const [r, g, b, alpha] = scrim;
+  const background = toHex([r, g, b].map((channel) => channel * alpha + 255 * (1 - alpha)));
+  const ratio = contrastRatio(text, background);
+  return ratio < 4.5
+    ? [
+        `site.json/heroSettings/home/background: onSurface on the scrim over a white photo has a contrast of ${ratio.toFixed(2)}:1 in the dark scheme, and needs 4.5:1. Make theme.darkColors.scrim darker.`,
+      ]
+    : [];
+};
 
 /**
  * The theme as CSS on `:root`, so the first paint is themed: every color with `light-dark()`, the

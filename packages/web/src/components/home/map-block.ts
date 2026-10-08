@@ -1,131 +1,238 @@
 import { msg } from '@lit/localize';
-import { css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { initialUiState } from '../../store/ui';
-import { location } from '../../config/site';
-import '../../utils/media-query';
+import { css, html, nothing } from 'lit';
+import { customElement, state } from 'lit/decorators.js';
+import { location, mapsScriptUrl } from '../../config/site';
+import { band } from '../../styles/band';
+import { currentColorScheme } from '../../utils/color-scheme';
 import '../shared/hoverboard-icon';
-import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
+import '../ui/hb-button';
 
+let mapsScript: Promise<void> | undefined;
+
+/** Loads the Google Maps script once, and waits for its map element. */
+const loadMapsScript = (src: string) =>
+  (mapsScript ??= new Promise<void>((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.addEventListener('load', () => resolve());
+    script.addEventListener('error', () => {
+      mapsScript = undefined;
+      script.remove();
+      reject(new Error('Google Maps did not load'));
+    });
+    document.head.append(script);
+  }).then(() => customElements.whenDefined('gmp-map').then(() => undefined)));
+
+/** Links to directions in map apps for the venue, by its address or its pin. */
+export const directionLinks = ({
+  address,
+  pointer,
+}: {
+  address: string;
+  pointer: { latitude: number; longitude: number };
+}) => [
+  {
+    name: 'Google Maps',
+    url: `https://www.google.com/maps/dir/?${new URLSearchParams({ api: '1', destination: address })}`,
+  },
+  {
+    name: 'Apple Maps',
+    url: `https://maps.apple.com/?${new URLSearchParams({ daddr: address })}`,
+  },
+  {
+    name: 'OpenStreetMap',
+    url: `https://www.openstreetmap.org/?${new URLSearchParams({
+      mlat: String(pointer.latitude),
+      mlon: String(pointer.longitude),
+    })}#map=17/${pointer.latitude}/${pointer.longitude}`,
+  },
+];
+
+/**
+ * The venue: name, address, directions and, with a Maps key, a map that loads only when asked, so
+ * pages do not load Google Maps up front.
+ */
 @customElement('map-block')
 export class MapBlock extends ThemedElement {
-  static override styles = css`
-    :host {
-      margin: 32px auto;
-      display: block;
-      position: relative;
-    }
+  static override styles = [
+    band,
+    css`
+      .layout {
+        display: grid;
+        gap: var(--hb-space-7);
+      }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
+      .venue {
+        margin: var(--hb-space-5) 0 0;
+        font: 700 var(--hb-text-2xl) / 1.15 var(--hb-font-display);
+        overflow-wrap: anywhere;
+      }
 
-    .container.fit {
-      position: absolute;
-      inset: 0;
-    }
+      address {
+        margin-block-start: var(--hb-space-2);
+        font: 500 var(--hb-text-md) / 1.5 var(--hb-font-mono);
+        font-style: normal;
+      }
 
-    .description-card {
-      margin: 0 -16px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background-color: var(--default-primary-color);
-      color: var(--text-primary-color);
-    }
+      .description {
+        max-inline-size: var(--hb-prose-max);
+        margin: var(--hb-space-4) 0 0;
+      }
 
-    .bottom-info {
-      margin-top: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+      .directions-title {
+        margin: var(--hb-space-6) 0 var(--hb-space-3);
+        padding: 0;
+        font: 700 var(--hb-text-md) / 1.3 var(--hb-font-body);
+      }
 
-    .directions {
-      width: 48px;
-      height: 48px;
-      color: var(--text-primary-color);
-      padding: 12px;
-    }
+      .directions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--hb-space-2);
+      }
 
-    @media (min-width: 640px) {
-      :host {
-        margin: 64px auto 72px;
+      .map {
+        display: grid;
+        min-block-size: 20rem;
+        overflow: hidden;
+        border: var(--hb-border-width) solid var(--hb-border-color);
+        border-radius: var(--hb-radius-l);
+        background-color: var(--hb-color-surface-container);
+        color: var(--hb-color-on-surface);
+        box-shadow: var(--hb-shadow-card);
+      }
+
+      .placeholder {
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: var(--hb-space-3);
+        padding: var(--hb-space-6);
+        text-align: center;
+      }
+
+      .placeholder > hoverboard-icon {
+        inline-size: 48px;
+        block-size: 48px;
+      }
+
+      .placeholder p {
+        max-inline-size: 32ch;
+        margin: 0;
+      }
+
+      .error {
+        color: var(--hb-color-error);
+        font-weight: 600;
       }
 
       gmp-map {
         display: block;
-        height: 640px;
+        min-block-size: 20rem;
       }
 
-      .description-card {
-        margin: 0;
-        padding: 24px;
-        max-width: 320px;
-        transform: translateY(80px);
-        border-radius: var(--border-radius);
+      @container (width >= 800px) {
+        .layout {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        }
+
+        .map,
+        gmp-map {
+          min-block-size: 28rem;
+        }
       }
+    `,
+  ];
 
-      .address {
-        font-size: 12px;
-      }
-    }
-  `;
-
-  private get location() {
-    return location;
-  }
-  private mapCenter = `${location.mapCenter.latitude},${location.mapCenter.longitude}`;
-  private markerPosition = `${location.pointer.latitude},${location.pointer.longitude}`;
-
-  @fromStore((state) => state.ui.viewport)
-  private accessor viewport!: typeof initialUiState.viewport;
+  @state()
+  private accessor mapState: 'idle' | 'loading' | 'shown' | 'failed' = 'idle';
 
   override render() {
+    const { latitude, longitude } = location.pointer;
     return html`
-      ${
-        this.viewport.isTabletPlus
-          ? html`
-              <gmp-map
-                id="map"
-                center="${this.mapCenter}"
-                zoom="${this.location.pointer.zoom}"
-                disable-default-ui
-                draggable="false"
-              >
-                <gmp-advanced-marker
-                  position="${this.markerPosition}"
-                  title="${this.location.name}"
-                ></gmp-advanced-marker>
-              </gmp-map>
-            `
-          : ''
-      }
-
-      <div class="container ${this.viewport.isTabletPlus ? 'fit' : ''}">
-        <div class="description-card">
-          <div>
-            <h2>${msg('Location', { id: 'home.map-block.title' })}</h2>
-            <p>${this.location.description}</p>
-          </div>
-          <div class="bottom-info">
-            <span class="address">${this.location.address}</span>
-            <a
-              href="https://www.google.com/maps/dir/?api=1&amp;destination=${this.location.address}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <hoverboard-icon class="directions" name="directions"></hoverboard-icon>
-            </a>
-          </div>
+      <div class="inner layout">
+        <div>
+          <h2 class="band-title">${msg('Location', { id: 'home.map-block.title' })}</h2>
+          <p class="venue">${location.name}</p>
+          <address>${location.address}</address>
+          <p class="description">${location.description}</p>
+          <h3 class="directions-title" id="directions">
+            ${msg('Directions', { id: 'home.map-block.directions' })}
+          </h3>
+          <ul class="directions plain" aria-labelledby="directions">
+            ${directionLinks(location).map(
+              ({ name, url }) => html`
+                <li>
+                  <hb-button variant="outlined" href="${url}" target="_blank">
+                    <hoverboard-icon slot="icon" name="directions"></hoverboard-icon>
+                    ${name}
+                  </hb-button>
+                </li>
+              `,
+            )}
+          </ul>
         </div>
+        ${
+          mapsScriptUrl
+            ? html`<div class="map">
+                ${
+                  this.mapState === 'shown'
+                    ? html`<gmp-map
+                        center="${location.mapCenter.latitude},${location.mapCenter.longitude}"
+                        zoom="${location.pointer.zoom}"
+                        color-scheme="${currentColorScheme() === 'dark' ? 'DARK' : 'LIGHT'}"
+                        disable-default-ui
+                      >
+                        <gmp-advanced-marker
+                          position="${latitude},${longitude}"
+                          title="${location.name}"
+                        ></gmp-advanced-marker>
+                      </gmp-map>`
+                    : this.renderPlaceholder()
+                }
+              </div>`
+            : nothing
+        }
       </div>
     `;
   }
+
+  private renderPlaceholder() {
+    const loading = this.mapState === 'loading';
+    return html`
+      <div class="placeholder">
+        <hoverboard-icon name="location"></hoverboard-icon>
+        <p>${msg('The map loads from Google Maps.', { id: 'home.map-block.map-note' })}</p>
+        <hb-button class="show-map" ?disabled="${loading}" @click="${this.showMap}">
+          ${
+            loading
+              ? msg('Loading map…', { id: 'home.map-block.loading' })
+              : msg('Show map', { id: 'home.map-block.show-map' })
+          }
+        </hb-button>
+        ${
+          this.mapState === 'failed'
+            ? html`<p class="error" role="alert">
+                ${msg('The map did not load. Try again.', { id: 'home.map-block.error' })}
+              </p>`
+            : nothing
+        }
+      </div>
+    `;
+  }
+
+  private readonly showMap = async () => {
+    if (!mapsScriptUrl) return;
+    this.mapState = 'loading';
+    try {
+      await loadMapsScript(mapsScriptUrl);
+      this.mapState = 'shown';
+    } catch {
+      this.mapState = 'failed';
+    }
+  };
 }
 
 declare global {

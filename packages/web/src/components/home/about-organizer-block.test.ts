@@ -22,7 +22,13 @@ describe('about-organizer-block', () => {
     expect(getByText(firstBlock.title)).toBeInTheDocument();
     expect(getByText(firstBlock.callToAction.label)).toBeInTheDocument();
     expect(within(shadowRootForWithin).getByAltText('Organizer')).toBeInTheDocument();
-    expect(shadowRootForWithin.querySelector('a.image-link')).toHaveAttribute('href', '/team');
+    expect(shadowRootForWithin.querySelector('a.frame')).toHaveAttribute('href', '/team');
+  });
+
+  it('renders the descriptions as markdown', async () => {
+    const { shadowRoot } = await fixture(html`<about-organizer-block></about-organizer-block>`);
+
+    expect(shadowRoot.querySelector('.prose a')).toHaveAttribute('href', 'http://lviv.gdg.org.ua');
   });
 
   it('does not link the photo to the team page when team is off', async () => {
@@ -30,7 +36,7 @@ describe('about-organizer-block', () => {
 
     const { shadowRoot } = await fixture(html`<about-organizer-block></about-organizer-block>`);
 
-    expect(shadowRoot.querySelector('img')).not.toBeNull();
-    expect(shadowRoot.querySelector('a.image-link')).toBeNull();
+    expect(shadowRoot.querySelector('figure.frame img')).not.toBeNull();
+    expect(shadowRoot.querySelector('a.frame')).toBeNull();
   });
 });

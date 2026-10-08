@@ -1,7 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import { fontCss, fontStylesheets } from 'virtual:hoverboard/fonts';
-import { mapsScript, theme, themeCss } from 'virtual:hoverboard/layout';
+import { theme, themeCss } from 'virtual:hoverboard/layout';
 import { resources, site } from 'virtual:hoverboard/site';
 import '../styles/base.css';
 import { FooterBlock } from '../components/footer/footer-block';
@@ -145,7 +145,6 @@ const builtEventState = eventState(new Date(), site.event);
 
     <style is:inline set:html={themeCss} />
     <style is:inline set:html={fontCss} />
-    {mapsScript && <script async defer is:inline src={mapsScript} />}
 
     {import.meta.env.DEV ? (
       <script is:inline define:vars={{ demoFirebaseConfig }}>

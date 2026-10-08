@@ -36,7 +36,7 @@ export interface UiState {
 export const initialUiState: UiState = {
   heroSettings: {
     backgroundColor: 'var(--default-primary-color)',
-    backgroundImage: heroSettings.home.background.image,
+    backgroundImage: heroSettings?.home?.background?.image ?? '',
     fontColor: 'var(--text-primary-color)',
     hideLogo: false,
   },

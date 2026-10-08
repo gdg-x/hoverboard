@@ -2,10 +2,13 @@ import { eventDates } from '../config/site';
 import { getLocale } from './localization';
 
 export const getDate = (date: string | Date) => {
+  // `YYYY-MM-DD` is a calendar day that JavaScript reads as UTC midnight, so show it in UTC too.
+  const day = typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date);
   return new Date(date).toLocaleString(getLocale(), {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
+    ...(day && { timeZone: 'UTC' }),
   });
 };
 

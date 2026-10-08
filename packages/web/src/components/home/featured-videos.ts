@@ -1,327 +1,195 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
+import { featuredVideos } from '../../config/site';
+import { fromStore } from '../../controllers/from-store';
 import type { Video } from '../../models/video';
 import { openVideoDialog } from '../../store/ui';
 import { type VideosState, selectVideos } from '../../store/videos';
-import { featuredVideos } from '../../config/site';
+import { band } from '../../styles/band';
 import '../shared/hoverboard-icon';
-import '../ui/hb-button';
-import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
+import '../ui/hb-button';
+import '../ui/hb-icon-button';
 
+/** A rail of videos that scrolls sideways. Each plays in the video dialog. */
 @customElement('featured-videos')
 export class FeaturedVideos extends ThemedElement {
-  static override styles = css`
-    :host {
-      display: block;
-      --video-item-height: 200px;
-    }
-
-    .header {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .videos-wrapper {
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      flex: 1;
-      flex-basis: 1px;
-      overflow: hidden;
-    }
-
-    .video-list {
-      margin-bottom: -20px;
-      display: flex;
-      flex: 1;
-      flex-basis: 1px;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .videos {
-      display: flex;
-      flex-direction: row;
-      transition: transform var(--slide-animation);
-      will-change: transition;
-      transform: translateX(0);
-    }
-
-    .slide-icon {
-      display: none;
-    }
-
-    .video-item {
-      width: 300px;
-    }
-
-    .video-item:not(:last-of-type) {
-      padding-right: 18px;
-    }
-
-    .video-item:hover .video-play-icon {
-      transform: scale(1.2) translateZ(0);
-    }
-
-    .thumbnail {
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: var(--video-item-height);
-      overflow: hidden;
-      border-radius: var(--border-radius);
-    }
-
-    .thumbnail-image {
-      position: absolute;
-      --lazy-image-width: 100%;
-      --lazy-image-height: 100%;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      background-color: var(--secondary-background-color);
-    }
-
-    .image-overlay {
-      position: absolute;
-      inset: 0;
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .video-play-icon {
-      width: 60px;
-      height: 60px;
-      color: var(--text-primary-color);
-      opacity: 0.8;
-      transform: translateZ(0);
-      transition: transform var(--animation);
-    }
-
-    .video-title {
-      margin-top: 8px;
-      font-family: var(--font-family);
-      color: var(--secondary-text-color);
-    }
-
-    .cta-button {
-      margin-top: 24px;
-    }
-
-    @media (min-width: 640px) {
-      :host {
-        --video-item-height: 256px;
+  static override styles = [
+    band,
+    css`
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--hb-space-2);
       }
 
-      .video-item {
-        width: calc(var(--max-container-width) / 3 - 16px);
+      .rail {
+        display: grid;
+        grid-auto-columns: max(15rem, (100% - 2 * var(--hb-space-5)) / 3);
+        grid-auto-flow: column;
+        gap: var(--hb-space-5);
+        /* Room for the cards' shadows, which the scroll box would clip. */
+        padding: var(--hb-space-1) var(--hb-space-2) var(--hb-space-4) var(--hb-space-1);
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+      }
+
+      .rail li {
+        scroll-snap-align: start;
+      }
+
+      .video {
+        display: grid;
+        gap: var(--hb-space-3);
+        inline-size: 100%;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: none;
+        color: inherit;
+        font: inherit;
+        text-align: start;
         cursor: pointer;
       }
 
-      .video-item:not(:last-of-type) {
-        padding-right: 30px;
+      .thumbnail {
+        position: relative;
+        display: grid;
+        place-items: center;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        border: var(--hb-border-width) solid var(--hb-border-color);
+        border-radius: var(--hb-radius-m);
+        background-color: var(--hb-color-surface-container);
+        box-shadow: var(--hb-shadow-card);
+        transition:
+          translate var(--hb-duration-short) var(--hb-ease-spring),
+          box-shadow var(--hb-duration-short) var(--hb-ease-standard);
       }
 
-      .slide-icon {
-        margin: 8px;
-        width: 40px;
-        height: 40px;
+      .video:hover .thumbnail {
+        translate: -2px -2px;
+        box-shadow: var(--hb-shadow-card-hover);
+      }
+
+      .thumbnail img {
         position: absolute;
-        z-index: 1;
-        top: calc(var(--video-item-height) / 2 - 25px);
-        display: block;
-        opacity: 0.9;
-        background-color: var(--default-background-color);
+        inset: 0;
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+      }
+
+      .play {
+        position: relative;
+        display: grid;
+        place-items: center;
+        inline-size: 56px;
+        block-size: 56px;
+        border: var(--hb-border-width) solid var(--hb-border-color);
         border-radius: 50%;
-        color: var(--default-primary-color);
-        transition: opacity var(--animation);
-        display: block;
+        background-color: var(--hb-cta-background);
+        color: var(--hb-on-cta);
       }
 
-      .slide-icon:last-of-type {
-        right: 0;
+      .play hoverboard-icon {
+        inline-size: 28px;
+        block-size: 28px;
       }
-    }
-  `;
 
-  private get featuredVideos() {
-    return featuredVideos;
-  }
+      .title {
+        font-weight: 600;
+        line-height: 1.3;
+      }
 
-  @query('#videos')
-  accessor videosElm!: HTMLDivElement;
-  @query('#videoList')
-  accessor videoList!: HTMLDivElement;
+      .all {
+        margin-block-start: var(--hb-space-5);
+      }
+    `,
+  ];
 
   @fromStore((state) => selectVideos(state))
   accessor videos!: VideosState;
 
+  @query('.rail')
+  private accessor rail!: HTMLElement | null;
+
+  // At the start on the server and in the first render, where nothing has scrolled.
   @state()
-  private accessor leftArrowHidden = true;
+  private accessor atStart = true;
+
   @state()
-  private accessor rightArrowHidden = false;
+  private accessor atEnd = false;
 
-  private get pending() {
-    return this.videos instanceof Pending;
+  // Measured after the update, so a change does not start another update inside this one.
+  override firstUpdated() {
+    void this.updateComplete.then(this.updateEnds);
   }
 
-  private get failure() {
-    return this.videos instanceof Failure;
-  }
-
-  private get videosData(): Video[] {
-    return this.videos instanceof Success ? this.videos.data : [];
-  }
-
-  private shiftContentLeft() {
-    const { cardWidth, currentPosition } = this.getVideosDetails();
-
-    let newX = currentPosition + cardWidth;
-
-    if (currentPosition < 0) {
-      const adjustToLeft = newX > 0 || Math.abs(0 - Math.abs(newX)) < cardWidth;
-
-      if (adjustToLeft) {
-        newX = 0;
-      }
-
-      this.transformVideoList(this.videosElm, newX);
-
-      if (newX == 0) {
-        this.leftArrowHidden = true;
-      } else {
-        this.rightArrowHidden = false;
-      }
-    }
-  }
-
-  private shiftContentRight() {
-    const { cardWidth, maxRightPosition, currentPosition } = this.getVideosDetails();
-
-    let newX = currentPosition - cardWidth;
-
-    if (currentPosition >= maxRightPosition) {
-      const adjustToRight =
-        newX < maxRightPosition || Math.abs(maxRightPosition) - Math.abs(newX) < cardWidth;
-
-      if (adjustToRight) {
-        newX = maxRightPosition;
-      }
-
-      this.transformVideoList(this.videosElm, newX);
-
-      if (newX == maxRightPosition) {
-        this.rightArrowHidden = true;
-      } else {
-        this.leftArrowHidden = false;
-      }
-    }
-  }
-
-  private getVideosDetails() {
-    const videos = this.shadowRoot!.querySelectorAll('.video-item');
-    const lastVideo = videos[videos.length - 1];
-
-    if (!this.videosElm || !this.videoList || !lastVideo) {
-      throw new Error('Featured videos elements missing');
-    }
-
-    const cardRect = lastVideo.getBoundingClientRect();
-    const cardWidth = cardRect.width;
-    const videosContainerWidth = parseInt(
-      getComputedStyle(this.videoList, null).getPropertyValue('width'),
-    );
-    const videosWidth = parseInt(getComputedStyle(this.videosElm, null).getPropertyValue('width'));
-    const maxRightPosition = -(videosWidth - videosContainerWidth) - 16;
-    const currentPosition = parseInt(
-      getComputedStyle(this.videosElm, null).getPropertyValue('transform').split(',')[4] || '',
-    );
-
-    return {
-      cardWidth,
-      maxRightPosition,
-      currentPosition,
-    };
-  }
-
-  private transformVideoList(el: HTMLElement, newPosition: number) {
-    el.style.transform = 'translate3d(' + newPosition + 'px, 0, 0)';
-  }
-
-  private playVideo(video: Video) {
-    const presenters = video.speakers ? ` by ${video.speakers}` : '';
-    const title = video.title + presenters;
-    const youtubeId = video.youtubeId;
-
-    openVideoDialog({ title, youtubeId });
+  // The rail's width changes when the videos arrive.
+  override updated(changed: Map<PropertyKey, unknown>) {
+    if (changed.has('videos')) void this.updateComplete.then(this.updateEnds);
   }
 
   override render() {
     return html`
-      <div class="container">
-        <div class="header">
-          <h1 class="container-title">${this.featuredVideos.title}</h1>
-        </div>
-
-        <div class="videos-wrapper">
-          <hoverboard-icon
-            class="last-video slide-icon"
-            name="chevron-left"
-            @click="${() => this.shiftContentLeft()}"
-            ?hidden="${this.leftArrowHidden}"
-          ></hoverboard-icon>
-          <div id="videoList" class="video-list">
-            <div id="videos" class="videos">
-              ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : ''}
-              ${
-                this.failure
-                  ? html`<p>
-                      ${msg('Error loading videos.', { id: 'home.featured-videos.error' })}
-                    </p>`
-                  : ''
-              }
-              ${this.videosData.map(
-                (block, index) => html`
-                  <div class="video-item" @click="${() => this.playVideo(block)}">
-                    <div class="thumbnail">
-                      <img
-                        loading="lazy"
-                        decoding="async"
-                        id="image${index}"
-                        class="thumbnail-image"
-                        src="${block.thumbnail}"
-                        alt="${block.title}"
-                      />
-                      <div class="image-overlay"></div>
-                      <hoverboard-icon class="video-play-icon" name="play"></hoverboard-icon>
-                    </div>
-                    <h4 class="video-title">${block.title}</h4>
-                  </div>
-                `,
-              )}
-            </div>
+      <div class="inner">
+        <div class="band-header">
+          <h2 class="band-title">${featuredVideos.title}</h2>
+          <div class="controls">
+            <hb-icon-button
+              class="previous"
+              label="${msg('Previous videos', { id: 'home.featured-videos.previous' })}"
+              ?disabled="${this.atStart}"
+              @click="${() => this.scrollRail(-1)}"
+            >
+              <hoverboard-icon name="chevron-left"></hoverboard-icon>
+            </hb-icon-button>
+            <hb-icon-button
+              class="next"
+              label="${msg('Next videos', { id: 'home.featured-videos.next' })}"
+              ?disabled="${this.atEnd}"
+              @click="${() => this.scrollRail(1)}"
+            >
+              <hoverboard-icon name="chevron-right"></hoverboard-icon>
+            </hb-icon-button>
           </div>
-          <hoverboard-icon
-            class="next-video slide-icon"
-            name="chevron-right"
-            @click="${() => this.shiftContentRight()}"
-            ?hidden="${this.rightArrowHidden}"
-          ></hoverboard-icon>
         </div>
+        ${
+          this.videos instanceof Pending
+            ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>`
+            : nothing
+        }
+        ${
+          this.videos instanceof Failure
+            ? html`<p>${msg('Error loading videos.', { id: 'home.featured-videos.error' })}</p>`
+            : nothing
+        }
+        <ul class="rail plain" @scroll="${this.updateEnds}">
+          ${this.videosData.map(
+            (video) => html`
+              <li>
+                <button class="video" type="button" @click="${() => this.playVideo(video)}">
+                  <span class="thumbnail">
+                    <img src="${video.thumbnail}" alt="" loading="lazy" />
+                    <span class="play"><hoverboard-icon name="play"></hoverboard-icon></span>
+                  </span>
+                  <span class="title">${video.title}</span>
+                </button>
+              </li>
+            `,
+          )}
+        </ul>
         <hb-button
-          variant="text"
-          class="cta-button"
-          href="${this.featuredVideos.callToAction.link}"
+          variant="outlined"
+          class="all"
+          href="${featuredVideos.callToAction.link}"
           target="_blank"
           trailing-icon
         >
@@ -330,6 +198,30 @@ export class FeaturedVideos extends ThemedElement {
         </hb-button>
       </div>
     `;
+  }
+
+  private get videosData(): Video[] {
+    return this.videos instanceof Success ? this.videos.data : [];
+  }
+
+  private scrollRail(direction: 1 | -1) {
+    const { rail } = this;
+    if (!rail) return;
+    const rtl = getComputedStyle(rail).direction === 'rtl' ? -1 : 1;
+    rail.scrollBy({ left: direction * rtl * rail.clientWidth * 0.9 });
+  }
+
+  private readonly updateEnds = () => {
+    const { rail } = this;
+    if (!rail) return;
+    const scrolled = Math.abs(rail.scrollLeft);
+    this.atStart = scrolled <= 1;
+    this.atEnd = scrolled + rail.clientWidth >= rail.scrollWidth - 1;
+  };
+
+  private playVideo(video: Video) {
+    const presenters = video.speakers ? ` by ${video.speakers}` : '';
+    openVideoDialog({ title: video.title + presenters, youtubeId: video.youtubeId });
   }
 }
 

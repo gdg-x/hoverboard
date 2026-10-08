@@ -11,7 +11,6 @@ const DROPPED_CHUNKS = [
   'coc-page',
   'faq-page',
   'featured-videos',
-  'fork-me-block',
   'gallery-block',
   'latest-posts-block',
   'map-block',
@@ -90,6 +89,9 @@ describe('a production build of a minimal site', () => {
     );
     expect(home).toMatch(/<home-page[^>]*><template shadowroot="open" shadowrootmode="open">/);
     expect(home).toContain('A minimal site');
+    // The fixture sets a hero photo, so the hero darkens it.
+    expect(home).toMatch(/<section class="hero photo"/);
+    expect(home).toContain('src="/images/backgrounds/home.jpg"');
     expect(home).toMatch(/<app-header[^>]*><template shadowroot="open" shadowrootmode="open">/);
   });
 

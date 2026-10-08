@@ -94,7 +94,6 @@ export const HYDRATION_PAGES: Record<string, HydrationPage> = {
     load: () =>
       Promise.all([
         import('../../src/views/home-page'),
-        import('../../src/components/home/fork-me-block'),
         import('../../src/components/home/latest-posts-block'),
         import('../../src/components/home/speakers-block'),
         import('../../src/components/home/subscribe-block'),

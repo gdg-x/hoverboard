@@ -2,6 +2,13 @@ export const COLOR_SCHEME_KEY = 'hb-color-scheme';
 
 export type ChosenColorScheme = 'light' | 'dark';
 
+/** The scheme the page shows now: the locked or chosen one, or the browser's. */
+export const currentColorScheme = (doc: Document = document): ChosenColorScheme => {
+  const locked = doc.documentElement.getAttribute('data-color-scheme');
+  if (locked === 'light' || locked === 'dark') return locked;
+  return doc.defaultView?.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
 // The functions below run in the inline page head script too, so they must not use anything from
 // outside their own bodies.
 
