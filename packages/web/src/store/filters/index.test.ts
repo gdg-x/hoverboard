@@ -3,11 +3,9 @@ import { describe, expect, it, vi } from 'vitest';
 import reducer, { selectFilters, setFilters } from '.';
 import { FilterGroupKey } from '../../models/filter-group';
 import { dispatch } from '../dispatch';
-import { parseFilters } from '../../utils/filters';
 import type { RootState } from '..';
 
 vi.mock('../dispatch');
-vi.mock('../../utils/filters');
 
 describe('filters', () => {
   it('starts in the Initialized state', () => {
@@ -42,18 +40,10 @@ describe('selectFilters', () => {
     expect(selectFilters(state)).toStrictEqual(filters);
   });
 
-  it('parses and dispatches the default filters, returning an empty array, when uninitialized', () => {
-    vi.mocked(parseFilters).mockReturnValue([
-      { group: FilterGroupKey.complexity, tag: 'beginner' },
-    ]);
+  it('returns no filters until the app sets them', () => {
     const state = { filters: new Initialized() } as unknown as RootState;
 
     expect(selectFilters(state)).toStrictEqual([]);
-    expect(dispatch).toHaveBeenCalledWith(
-      expect.objectContaining({
-        type: 'filters/set',
-        payload: [{ group: FilterGroupKey.complexity, tag: 'beginner' }],
-      }),
-    );
+    expect(dispatch).not.toHaveBeenCalled();
   });
 });

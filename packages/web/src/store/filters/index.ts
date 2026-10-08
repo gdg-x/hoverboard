@@ -2,7 +2,6 @@ import { Initialized, type RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import type { Filter } from '../../models/filter';
-import { parseFilters } from '../../utils/filters';
 import { dispatch } from '../dispatch';
 
 export type FiltersState = RemoteData<Error, Filter[]>;
@@ -23,14 +22,10 @@ export const setFilters = (filters: Filter[]) => {
   dispatch(set(filters));
 };
 
+// Until the app applies the URL's filters after hydration, render unfiltered, as the server does.
 export const selectFilters = (state: RootState) => {
   const { filters } = state;
-  if (filters instanceof Success) {
-    return filters.data;
-  } else if (filters instanceof Initialized) {
-    setFilters(parseFilters());
-  }
-  return [];
+  return filters instanceof Success ? filters.data : [];
 };
 
 export default slice.reducer;

@@ -5,14 +5,19 @@ const xliff = (units: string) =>
   `<xliff version="1.2"><file source-language="en"><body>${units}</body></file></xliff>`;
 
 describe('extractSource', () => {
-  it('extracts the msg() calls into a source catalog without a target language', () => {
-    const source = extractSource();
+  // Runs `lit-localize extract`, which type-checks every source file. It takes about 6s on CI.
+  it(
+    'extracts the msg() calls into a source catalog without a target language',
+    { timeout: 60_000 },
+    () => {
+      const source = extractSource();
 
-    expect(source).toContain('<trans-unit id="footer.locale-picker.label">');
-    expect(source).toContain('<source>Language</source>');
-    expect(source).toContain('source-language="en"');
-    expect(source).not.toContain('target-language');
-  });
+      expect(source).toContain('<trans-unit id="footer.locale-picker.label">');
+      expect(source).toContain('<source>Language</source>');
+      expect(source).toContain('source-language="en"');
+      expect(source).not.toContain('target-language');
+    },
+  );
 });
 
 describe('untranslated', () => {

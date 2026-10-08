@@ -8,6 +8,7 @@ import {
   seedContent,
   seedFromPage,
   serializeContent,
+  subscribeToPageContent,
 } from './content';
 import { store } from '.';
 import { selectPartnerGroups } from './partners';
@@ -65,8 +66,7 @@ describe('serializeContent', () => {
 });
 
 describe('seedFromPage', () => {
-  it("seeds the store from the page's content and subscribes for live updates", () => {
-    vi.mocked(subscribeToSpeakers).mockReturnValue(new Success(vi.fn()));
+  it("seeds the store from the page's content without subscribing", () => {
     const speakers = [{ id: 'grace', name: 'Grace' }] as SpeakerWithTags[];
     const script = document.createElement('script');
     script.type = 'application/json';
@@ -78,7 +78,7 @@ describe('seedFromPage', () => {
     script.remove();
 
     expect(store.getState().speakers).toStrictEqual(new Success(speakers));
-    expect(subscribeToSpeakers).toHaveBeenCalledTimes(1);
+    expect(subscribeToSpeakers).not.toHaveBeenCalled();
   });
 
   it('does nothing on a page without content', () => {
@@ -87,5 +87,21 @@ describe('seedFromPage', () => {
     seedFromPage(dispatch);
 
     expect(dispatch).not.toHaveBeenCalled();
+  });
+});
+
+describe('subscribeToPageContent', () => {
+  it("subscribes to the page's content for live updates", () => {
+    vi.mocked(subscribeToSpeakers).mockReturnValue(new Success(vi.fn()));
+    const script = document.createElement('script');
+    script.type = 'application/json';
+    script.id = PAGE_CONTENT_ID;
+    script.textContent = serializeContent({ speakers: [] });
+    document.body.append(script);
+
+    subscribeToPageContent();
+    script.remove();
+
+    expect(subscribeToSpeakers).toHaveBeenCalledTimes(1);
   });
 });

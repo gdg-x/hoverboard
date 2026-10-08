@@ -6,6 +6,13 @@ import { store } from '../../src/store';
 import { resetContent, seedContent } from '../../src/store/content';
 import { HYDRATION_PAGES } from '../fixtures/hydration-pages';
 
+// Components subscribe to content the page did not seed. Without a backend, a late error from
+// one page's subscription would change the store while a later page hydrates.
+vi.mock('firebase/firestore', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('firebase/firestore')>()),
+  onSnapshot: vi.fn(() => () => undefined),
+}));
+
 const serverPages = inject('hydrationPages');
 
 const shadowHosts = (root: ParentNode): Element[] =>
@@ -38,6 +45,7 @@ describe.each(Object.keys(HYDRATION_PAGES))('the %s', (name) => {
   afterEach(() => {
     document.body.replaceChildren();
     store.dispatch(resetContent());
+    window.history.replaceState({}, '', '/');
   });
 
   it('hydrates the server HTML without errors or a second render', async () => {
@@ -45,6 +53,7 @@ describe.each(Object.keys(HYDRATION_PAGES))('the %s', (name) => {
     vi.spyOn(console, 'error').mockImplementation((...args) => errors.push(args));
     const onError = (event: ErrorEvent) => errors.push(event.error ?? event.message);
     window.addEventListener('error', onError);
+    if (page.search) window.history.replaceState({}, '', `/${page.search}`);
     store.dispatch(seedContent(page.content));
     const container = document.createElement('div');
     container.innerHTML = serverPages[name]!;
