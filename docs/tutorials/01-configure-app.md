@@ -6,7 +6,7 @@ Your site's config and content live in `packages/config`:
 - `content/resources.json`: event text, such as the title, description and the about blocks.
 - `content/faq.md`, `content/coc.md` and `content/posts/`: the FAQ, code of conduct and blog posts.
 
-Upstream defaults for everything else, such as the UI text and page titles, are in `packages/web/defaults/`. Your files only need the values you change. Objects merge with the defaults, and lists and other values replace them. For example, a `navigation` list in `site.json` replaces the whole default list.
+Upstream defaults for the other settings in `site.json`, such as `navigation` and `features`, are in `packages/web/defaults/site.json`. Your `site.json` only needs the values you change. Objects merge with the defaults, and lists and other values replace them. For example, a `navigation` list in `site.json` replaces the whole default list. The UI text, such as button labels and page titles, is part of the app and its translations, not of the config.
 
 `packages/config/site.json`:
 

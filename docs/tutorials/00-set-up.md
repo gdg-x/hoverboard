@@ -54,7 +54,7 @@ The diagram below is a brief summary of the directories within the project.
 - `packages/server/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) (in `functions/`) used for notifications, optimizations, saving data, etc.
 - `packages/storage/` Firestore, Storage and Realtime Database security rules, Firestore indexes, and their tests.
 - `packages/web/` is the frontend app (own `package.json`/`node_modules`):
-  - `defaults/` has the upstream defaults that `packages/config` overrides.
+  - `defaults/` has the upstream `site.json` defaults that `packages/config` overrides.
   - `dist/` is the directory to deploy to production.
   - `public/` is copied to `dist/` by the build.
     - `images/` folder with the site images.

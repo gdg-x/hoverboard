@@ -13,6 +13,9 @@ export const hashtag = settings.social.hashtag;
 export const mailto = settings.organizer.email;
 export const socialNetwork = { follow: settings.social.follow };
 
+// The build copies content/faq.md and content/coc.md here. A translation can point elsewhere.
+const sourceContent = { ...resources, faq: '/data/faq.md', coc: '/data/coc.md' };
+
 // Event content. `loadContent()` reassigns these live bindings, so read them at render time.
 export let {
   aboutBlock,
@@ -28,7 +31,7 @@ export let {
   team,
   ticketsBlock,
   title,
-} = resources;
+} = sourceContent;
 export let location = { ...settings.event.location, description: resources.mapBlock.description };
 
 let contentRequest = 0;
@@ -40,7 +43,7 @@ export const loadContent = async (locale: string): Promise<void> => {
   const translation = load ? (await load()).default : {};
   if (request !== contentRequest) return;
 
-  const content = deepMerge(resources, translation);
+  const content = deepMerge(sourceContent, translation);
   ({
     aboutBlock,
     aboutOrganizerBlock,

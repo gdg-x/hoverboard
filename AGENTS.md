@@ -4,16 +4,16 @@ Hoverboard is a conference website template. Organizers fork it, configure it an
 
 ## Layout
 
-| Path                        | What it is                                                                                                 |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `packages/web`              | The web app: Lit components, Redux Toolkit store, Vite build, Workbox service worker                       |
-| `packages/server/functions` | Cloud Functions (v2 API). Must stay self-contained, because `firebase.json` deploys it alone               |
-| `packages/cli`              | The `hbd` CLI (`./hbd <command>`), run with `tsx`, no build step                                           |
-| `packages/storage`          | Firestore and Storage security rules, indexes, the content schema and the rules tests                      |
-| `packages/translations`     | UI translations (XLIFF) from upstream's Crowdin project, read by `packages/web`. No dependencies           |
-| `packages/config`           | The site's own config and content: `site.json`, `content/resources.json`, FAQ, code of conduct, blog posts |
-| `packages/web/defaults`     | Upstream defaults that `packages/config` overrides. Objects merge, and arrays and other values replace     |
-| `docs/`                     | Tutorials and the release policy                                                                           |
+| Path                        | What it is                                                                                                         |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `packages/web`              | The web app: Lit components, Redux Toolkit store, Vite build, Workbox service worker                               |
+| `packages/server/functions` | Cloud Functions (v2 API). Must stay self-contained, because `firebase.json` deploys it alone                       |
+| `packages/cli`              | The `hbd` CLI (`./hbd <command>`), run with `tsx`, no build step                                                   |
+| `packages/storage`          | Firestore and Storage security rules, indexes, the content schema and the rules tests                              |
+| `packages/translations`     | UI translations (XLIFF) from upstream's Crowdin project, read by `packages/web`. No dependencies                   |
+| `packages/config`           | The site's own config and content: `site.json`, `content/resources.json`, FAQ, code of conduct, blog posts         |
+| `packages/web/defaults`     | Upstream `site.json` defaults that `packages/config` overrides. Objects merge, and arrays and other values replace |
+| `docs/`                     | Tutorials and the release policy                                                                                   |
 
 Each package with dependencies has its own `package.json` and `package-lock.json`. The root is a thin orchestrator: its scripts delegate with `npm --prefix ./packages/<name>`.
 
