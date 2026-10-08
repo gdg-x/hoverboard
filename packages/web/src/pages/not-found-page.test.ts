@@ -3,7 +3,6 @@ import { screen } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import '../store';
-import { heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './not-found-page';
 import { NotFoundPage } from './not-found-page';
@@ -35,16 +34,13 @@ describe('not-found-page', () => {
     expect(screen.getByTestId('page')).toBeInTheDocument();
     expect(hero?.page).toBe('notFound');
     expect(image).toHaveAttribute('src', '../../images/not-found.svg');
-    expect(image).toHaveAttribute('alt', heroSettings.notFound.title);
+    expect(image).toHaveAttribute('alt', 'Not Found');
   });
 
   it('updates page metadata', async () => {
     await fixture<NotFoundPage>(html`<not-found-page></not-found-page>`);
 
     expect(mockUpdateMetadata).toHaveBeenCalledTimes(1);
-    expect(mockUpdateMetadata).toHaveBeenCalledWith(
-      heroSettings.notFound.title,
-      heroSettings.notFound.metaDescription,
-    );
+    expect(mockUpdateMetadata).toHaveBeenCalledWith('Not Found', 'Page not found');
   });
 });

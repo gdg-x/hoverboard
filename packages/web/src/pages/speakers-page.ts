@@ -16,8 +16,8 @@ import { selectFilters } from '../store/filters';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
-import { contentLoaders, heroSettings } from '../config/site';
-import { updateMetadata } from '../utils/metadata';
+import { contentLoaders } from '../config/site';
+import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
@@ -178,7 +178,7 @@ export class SpeakersPage extends ThemedElement {
     }
   `;
 
-  private heroSettings = heroSettings.speakers;
+  private readonly metadata = new PageMetadataController(this, 'speakers');
   private contentLoaders = contentLoaders;
 
   @fromStore((state) => selectSpeakersState(state))
@@ -190,11 +190,6 @@ export class SpeakersPage extends ThemedElement {
   accessor selectedFilters!: Filter[];
   @fromStore((state) => selectFilteredSpeakers(state))
   accessor speakersToRender!: SpeakerWithTags[];
-
-  override connectedCallback() {
-    super.connectedCallback();
-    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-  }
 
   private get contentLoaderVisibility() {
     return this.speakers instanceof Success;

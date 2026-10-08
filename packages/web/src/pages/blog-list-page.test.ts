@@ -6,7 +6,6 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { Post } from '../models/post';
 import { router } from '../router';
-import { heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './blog-list-page';
 import { BlogListPage } from './blog-list-page';
@@ -70,10 +69,7 @@ describe('blog-list-page', () => {
     const { element } = await fixture<BlogListPage>(html`<blog-list-page></blog-list-page>`);
 
     expect(element.posts).toBeInstanceOf(Pending);
-    expect(mockUpdateMetadata).toHaveBeenCalledWith(
-      heroSettings.blog.title,
-      heroSettings.blog.metaDescription,
-    );
+    expect(mockUpdateMetadata).toHaveBeenCalledWith('Blog', 'Read stories from our team');
   });
 
   it('renders featured posts and passes the complete list to posts-list', async () => {

@@ -344,6 +344,9 @@
 <trans-unit id="common.sessions">
   <source>Sessions</source>
 </trans-unit>
+<trans-unit id="pages.team.error">
+  <source>Error loading teams.</source>
+</trans-unit>
 <trans-unit id="shell.service-worker.installing">
   <source>App being installed for offline use.</source>
 </trans-unit>
@@ -379,6 +382,54 @@
 </trans-unit>
 <trans-unit id="store.notifications.my-schedule-disabled">
   <source>My Schedule notifications disabled</source>
+</trans-unit>
+<trans-unit id="pages.blog.title">
+  <source>Blog</source>
+</trans-unit>
+<trans-unit id="pages.blog.description">
+  <source>Read stories from our team</source>
+</trans-unit>
+<trans-unit id="pages.coc.title">
+  <source>Code of Conduct</source>
+</trans-unit>
+<trans-unit id="pages.coc.description">
+  <source>Learn more about our expectations for all those who participate in our community</source>
+</trans-unit>
+<trans-unit id="pages.faq.title">
+  <source>FAQs</source>
+</trans-unit>
+<trans-unit id="pages.faq.description">
+  <source>Find you answer right here!</source>
+</trans-unit>
+<trans-unit id="pages.not-found.title">
+  <source>Not Found</source>
+</trans-unit>
+<trans-unit id="pages.not-found.description">
+  <source>Page not found</source>
+</trans-unit>
+<trans-unit id="pages.previous-speakers.title">
+  <source>Previous Speakers</source>
+</trans-unit>
+<trans-unit id="pages.previous-speakers.description">
+  <source>Check who was with us last years</source>
+</trans-unit>
+<trans-unit id="pages.schedule.title">
+  <source>Schedule</source>
+</trans-unit>
+<trans-unit id="pages.schedule.description">
+  <source>Choose your sessions to visit</source>
+</trans-unit>
+<trans-unit id="pages.speakers.title">
+  <source>Speakers</source>
+</trans-unit>
+<trans-unit id="pages.speakers.description">
+  <source>Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.</source>
+</trans-unit>
+<trans-unit id="pages.team.title">
+  <source>Team</source>
+</trans-unit>
+<trans-unit id="pages.team.description">
+  <source>Get more info about organizers</source>
 </trans-unit>
 <trans-unit id="common.subscribe">
   <source>Subscribe</source>

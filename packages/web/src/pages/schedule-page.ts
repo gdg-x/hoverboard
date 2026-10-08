@@ -16,16 +16,13 @@ import { selectFilterGroups } from '../store/sessions/selectors';
 import { type SessionsState, selectSessionsState } from '../store/sessions';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
 import { contentLoaders, heroSettings } from '../config/site';
-import { updateMetadata } from '../utils/metadata';
+import { PageMetadataController } from '../controllers/page-metadata-controller';
+import { pageText } from '../utils/page-text';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
-// `heroSettings.schedule` has no `description`, unlike some other pages. Model it as optional.
-interface ScheduleHeroSettings {
-  description?: string;
-  metaDescription: string;
-  title: string;
-}
+// A site can give the schedule page a description in site.json.
+const { description } = (heroSettings as { schedule?: { description?: string } }).schedule ?? {};
 
 @customElement('schedule-page')
 export class SchedulePage extends ThemedElement {
@@ -58,7 +55,7 @@ export class SchedulePage extends ThemedElement {
     }
   `;
 
-  private heroSettings: ScheduleHeroSettings = heroSettings.schedule;
+  private readonly metadata = new PageMetadataController(this, 'schedule');
   private contentLoaders = contentLoaders.schedule;
 
   @fromStore((state) => selectScheduleState(state))
@@ -75,11 +72,6 @@ export class SchedulePage extends ThemedElement {
   @property({ attribute: false })
   accessor location: RouteLocation | undefined;
 
-  override connectedCallback() {
-    super.connectedCallback();
-    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-  }
-
   private get pending() {
     return this.schedule instanceof Pending;
   }
@@ -87,8 +79,8 @@ export class SchedulePage extends ThemedElement {
   override render() {
     return html`
       <hero-block>
-        <div class="hero-title">${this.heroSettings.title}</div>
-        <p class="hero-description">${this.heroSettings.description ?? ''}</p>
+        <div class="hero-title">${pageText('schedule').title}</div>
+        <p class="hero-description">${description ?? ''}</p>
         <sticky-element slot="bottom">
           <header-bottom-toolbar .location="${this.location}"></header-bottom-toolbar>
         </sticky-element>

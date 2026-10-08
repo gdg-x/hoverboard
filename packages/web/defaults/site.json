@@ -25,40 +25,6 @@
     { "route": "team", "permalink": "/team" },
     { "route": "blog", "permalink": "/blog" }
   ],
-  "heroSettings": {
-    "blog": {
-      "title": "Blog",
-      "metaDescription": "Read stories from our team"
-    },
-    "speakers": {
-      "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners."
-    },
-    "previousSpeakers": {
-      "title": "Previous Speakers",
-      "metaDescription": "Check who was with us last years"
-    },
-    "schedule": {
-      "title": "Schedule",
-      "metaDescription": "Choose your sessions to visit"
-    },
-    "team": {
-      "title": "Team",
-      "metaDescription": "Get more info about organizers"
-    },
-    "faq": {
-      "title": "FAQs",
-      "metaDescription": "Find you answer right here!"
-    },
-    "coc": {
-      "title": "Code of Conduct",
-      "metaDescription": "Learn more about our expectations for all those who participate in our community"
-    },
-    "notFound": {
-      "title": "Not Found",
-      "metaDescription": "Page not found"
-    }
-  },
   "features": {
     "blog": true,
     "codeOfConduct": true,

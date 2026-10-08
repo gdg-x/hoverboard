@@ -4,7 +4,6 @@ import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
-import { heroSettings } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './speakers-page';
 import { SpeakersPage } from './speakers-page';
@@ -66,8 +65,8 @@ describe('speakers-page', () => {
 
     expect(element.speakers).toBeInstanceOf(Pending);
     expect(mockUpdateMetadata).toHaveBeenCalledWith(
-      heroSettings.speakers.title,
-      heroSettings.speakers.metaDescription,
+      'Speakers',
+      expect.stringMatching(/^Hear from the Googlers/),
     );
   });
 

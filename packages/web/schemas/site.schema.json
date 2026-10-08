@@ -478,12 +478,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "title": {
-          "type": "string"
-        },
-        "metaDescription": {
-          "type": "string"
-        },
         "description": {
           "type": "string"
         }

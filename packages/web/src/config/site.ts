@@ -13,7 +13,6 @@ export const {
   featuredVideos,
   footerRelBlock,
   galleryBlock,
-  loading,
   subscribeBlock,
   team,
   ticketsBlock,

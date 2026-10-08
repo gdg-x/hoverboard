@@ -47,24 +47,21 @@ describe('resolveConfig', () => {
     expect(site.url).toMatch(/^https:\/\//);
     expect(site.navigation.length).toBeGreaterThan(0);
     expect(resources.title).toBeTruthy();
-    expect(resources.loading).toBeTruthy();
+    expect(resources.faq).toBeTruthy();
   });
 
   it('reads the defaults, then the site config over them, in separate namespaces', () => {
     const { site, resources } = resolveConfig({
       paths: makePaths({
-        site: { heroSettings: { blog: { title: 'News' } }, navigation: [] },
-        resources: { loading: 'Please wait' },
+        site: { features: { forkMe: true }, navigation: [] },
+        resources: { faq: '/data/questions.md' },
       }),
       nodeEnv: 'production',
     });
 
-    expect(site.heroSettings.blog).toMatchObject({
-      title: 'News',
-      metaDescription: 'Read stories from our team',
-    });
+    expect(site.features).toMatchObject({ forkMe: true, blog: true });
     expect(site.navigation).toEqual([]);
-    expect(resources.loading).toBe('Please wait');
+    expect(resources.faq).toBe('/data/questions.md');
     expect(site).not.toHaveProperty('title');
   });
 

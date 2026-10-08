@@ -31,9 +31,6 @@
     "coc": {
       "type": "string"
     },
-    "loading": {
-      "type": "string"
-    },
     "ticketsBlock": {
       "type": "object",
       "additionalProperties": false,

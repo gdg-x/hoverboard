@@ -3,7 +3,7 @@ import { screen } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import '../store';
-import { faq, heroSettings } from '../config/site';
+import { faq } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './faq-page';
 import { FaqPage } from './faq-page';
@@ -44,9 +44,6 @@ describe('faq-page', () => {
     await fixture<FaqPage>(html`<faq-page></faq-page>`);
 
     expect(mockUpdateMetadata).toHaveBeenCalledTimes(1);
-    expect(mockUpdateMetadata).toHaveBeenCalledWith(
-      heroSettings.faq.title,
-      heroSettings.faq.metaDescription,
-    );
+    expect(mockUpdateMetadata).toHaveBeenCalledWith('FAQs', 'Find you answer right here!');
   });
 });

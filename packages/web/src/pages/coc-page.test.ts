@@ -3,7 +3,7 @@ import { screen } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import '../store';
-import { coc, heroSettings } from '../config/site';
+import { coc } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
 import './coc-page';
 import { CocPage } from './coc-page';
@@ -45,8 +45,8 @@ describe('coc-page', () => {
 
     expect(mockUpdateMetadata).toHaveBeenCalledTimes(1);
     expect(mockUpdateMetadata).toHaveBeenCalledWith(
-      heroSettings.coc.title,
-      heroSettings.coc.metaDescription,
+      'Code of Conduct',
+      'Learn more about our expectations for all those who participate in our community',
     );
   });
 });

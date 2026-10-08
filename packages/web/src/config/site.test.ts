@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { setFeatures } from '../../__tests__/helpers/features';
-import { basepath, image, loading, navigation, title, url } from './site';
+import { basepath, faq, image, navigation, title, url } from './site';
 
 describe('navigation', () => {
   afterEach(() => {
@@ -34,8 +34,8 @@ describe('resolved config', () => {
     expect(image).toBe(`${url}images/social-share.jpg`);
   });
 
-  it('has the site content merged over the default UI text', () => {
+  it('has the site content merged over the defaults', () => {
     expect(title).toBeTruthy();
-    expect(loading).toBe('Loading...');
+    expect(faq).toBe('/data/faq.md');
   });
 });

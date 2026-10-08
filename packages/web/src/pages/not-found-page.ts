@@ -1,7 +1,7 @@
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { heroSettings } from '../config/site';
-import { updateMetadata } from '../utils/metadata';
+import { PageMetadataController } from '../controllers/page-metadata-controller';
+import { pageText } from '../utils/page-text';
 import '../components/hero/simple-hero';
 import { ThemedElement } from '../components/themed-element';
 
@@ -17,12 +17,7 @@ export class NotFoundPage extends ThemedElement {
     }
   `;
 
-  private heroSettings = heroSettings.notFound;
-
-  override connectedCallback() {
-    super.connectedCallback();
-    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
-  }
+  private readonly metadata = new PageMetadataController(this, 'notFound');
 
   override render() {
     return html`
@@ -33,7 +28,7 @@ export class NotFoundPage extends ThemedElement {
         decoding="async"
         class="not-found-image"
         src="../../images/not-found.svg"
-        alt=${this.heroSettings.title}
+        alt=${pageText('notFound').title}
       />
     `;
   }

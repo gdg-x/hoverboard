@@ -11,9 +11,9 @@ import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
-import { contentLoaders, heroSettings } from '../config/site';
+import { contentLoaders } from '../config/site';
 import { getLocale } from '../utils/localization';
-import { updateMetadata } from '../utils/metadata';
+import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
@@ -136,16 +136,11 @@ export class PreviousSpeakersPage extends ThemedElement {
   @fromStore((state) => selectPreviousSpeakersState(state))
   accessor previousSpeakers!: PreviousSpeakersState;
 
-  private heroSettings = heroSettings.previousSpeakers;
+  private readonly metadata = new PageMetadataController(this, 'previousSpeakers');
   private contentLoaders = contentLoaders.previousSpeakers;
 
   get contentLoaderVisibility() {
     return this.previousSpeakers instanceof Success || this.previousSpeakers instanceof Failure;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
   }
 
   private yearsLabel(sessions: { [key: number]: PreviousSession[] }) {

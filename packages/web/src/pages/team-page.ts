@@ -1,4 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
@@ -6,8 +7,8 @@ import '../components/shared/hoverboard-icon';
 import '../components/markdown/short-markdown';
 import { selectTeamsAndMembers } from '../store/teams-members/selectors';
 import { initialTeamsMembersState } from '../store/teams-members/state';
-import { heroSettings, loading, team } from '../config/site';
-import { updateMetadata } from '../utils/metadata';
+import { team } from '../config/site';
+import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
@@ -118,8 +119,7 @@ export class TeamPage extends ThemedElement {
     }
   `;
 
-  private heroSettings = heroSettings.team;
-  private loading = loading;
+  private readonly metadata = new PageMetadataController(this, 'team');
   private team = team;
 
   @fromStore((state) => selectTeamsAndMembers(state))
@@ -131,11 +131,6 @@ export class TeamPage extends ThemedElement {
 
   get failure() {
     return this.teamsMembers instanceof Failure;
-  }
-
-  override connectedCallback() {
-    super.connectedCallback();
-    updateMetadata(this.heroSettings.title, this.heroSettings.metaDescription);
   }
 
   override render() {
@@ -151,8 +146,12 @@ export class TeamPage extends ThemedElement {
       </div>
 
       <div class="container">
-        ${this.pending ? html`<p>${this.loading}</p>` : ''}
-        ${this.failure ? html`<p>Error loading teams.</p>` : ''}
+        ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : ''}
+        ${
+          this.failure
+            ? html`<p>${msg('Error loading teams.', { id: 'pages.team.error' })}</p>`
+            : ''
+        }
         ${teams.map(
           (team) => html`
             <div class="team-title">${team.title}</div>
