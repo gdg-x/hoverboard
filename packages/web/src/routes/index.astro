@@ -1,6 +1,8 @@
 ---
+import { resources, site } from 'virtual:hoverboard/site';
 import { loadContent } from '../data/content';
 import { seedPage } from '../data/page';
+import { eventStructuredData, serializeJsonLd } from '../data/structured-data';
 import Base from '../layouts/base.astro';
 import { HomePage } from '../views/home-page';
 
@@ -17,5 +19,11 @@ const content = seedPage({ blog, speakers });
 ---
 
 <Base content={content}>
+  <script
+    is:inline
+    type="application/ld+json"
+    slot="head"
+    set:html={serializeJsonLd(eventStructuredData(site, resources))}
+  />
   <HomePage client:load />
 </Base>

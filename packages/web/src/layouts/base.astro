@@ -8,6 +8,7 @@ import { AppOverlays } from '../components/shell/app-overlays';
 import { loadContent } from '../data/content';
 import '../data/markdown';
 import { seedPage } from '../data/page';
+import { openGraphLocale } from '../data/structured-data';
 import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
 
 interface Props {
@@ -40,7 +41,7 @@ const demoFirebaseConfig = {
 ---
 
 <!doctype html>
-<html itemscope itemtype="http://schema.org/Event" lang={site.locales.source}>
+<html lang={site.locales.source}>
   <head>
     <base href={site.basepath} />
     <meta charset="utf-8" />
@@ -82,6 +83,7 @@ const demoFirebaseConfig = {
     <meta content={title} property="og:title" />
     <meta content={resources.title} property="og:site_name" />
     <meta content="website" property="og:type" />
+    <meta content={openGraphLocale(site.locales.source)} property="og:locale" />
     <meta content={url} property="og:url" />
     <meta content={description} property="og:description" />
     <meta content={image} property="og:image" />
@@ -99,6 +101,7 @@ const demoFirebaseConfig = {
 
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://firestore.googleapis.com" rel="preconnect" />
+    <slot name="head" />
 
     <style is:inline set:html={themeCss} />
     {mapsScript && <script async defer is:inline src={mapsScript} />}
@@ -173,7 +176,5 @@ const demoFirebaseConfig = {
     </main>
     <FooterBlock client:load transition:persist="footer" />
     <AppOverlays client:load transition:persist="overlays" />
-
-    <noscript>Please enable JavaScript to view this website.</noscript>
   </body>
 </html>
