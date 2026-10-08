@@ -67,6 +67,7 @@ node_modules/
 
 # Custom
 dist/
+packages/web/src/generated/
 serviceAccount.json
 *-adminsdk-*.json
 .DS_Store

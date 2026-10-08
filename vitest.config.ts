@@ -33,6 +33,7 @@ const web = {
         url: 'http://localhost/',
       },
     },
+    globalSetup: ['./packages/web/__tests__/localize.global-setup.ts'],
     setupFiles: ['./packages/web/__tests__/web.setup.ts'],
     server: { deps: { inline: [/@lit-labs\/observers/] } },
     include: ['packages/web/src/**/*.test.ts', 'packages/web/build/**/*.test.ts'],
