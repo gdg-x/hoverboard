@@ -55,6 +55,12 @@ The home page hero image is `heroSettings.home.background.image` in `packages/co
 }
 ```
 
+The text under the hero titles is `heroDescriptions` in `packages/config/content/resources.json` ([Pages configuration](01-configure-app.md#pages-configuration)).
+
+## Text
+
+Styling does not change the text. [Text and languages](01-configure-app.md#text-and-languages) lists where each kind of text is edited. Translated text is often longer than English, so leave room for it to wrap in custom styles. No other language ships yet, so this is not checked (verify).
+
 ## Next steps
 
 Learn how to [deploy the app to the web](04-deploy.md).

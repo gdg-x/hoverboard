@@ -13,8 +13,7 @@ import type { Theme } from '../src/themes/tokens';
 
 type Site = typeof import('../defaults/site.json') &
   typeof import('../../config/site.json') & { url: string };
-type Resources = typeof import('../defaults/content/resources.json') &
-  typeof import('../../config/content/resources.json');
+type Resources = typeof import('../../config/content/resources.json');
 
 /** Template data. Each file has its own namespace, for example `{{ site.url }}`. */
 export interface SiteConfig {
@@ -277,10 +276,7 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
     readJson<object>(join(paths.site, 'site.json')),
   ) as Site;
   const siteContent = readJson<object>(join(paths.site, 'content', 'resources.json'));
-  const resources = deepMerge(
-    readJson<object>(join(paths.defaults, 'content', 'resources.json')),
-    siteContent,
-  ) as Resources;
+  const resources = siteContent as Resources;
 
   const ajv = new Ajv2020({ allErrors: true });
   const validateSite = ajv.compile(readJson(join(paths.schemas, 'site.schema.json')));

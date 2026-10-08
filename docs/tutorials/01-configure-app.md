@@ -6,7 +6,7 @@ Your site's config and content live in `packages/config`:
 - `content/resources.json`: event text, such as the title, description and the about blocks.
 - `content/faq.md`, `content/coc.md` and `content/posts/`: the FAQ, code of conduct and blog posts.
 
-Upstream defaults for everything else, such as the UI text and page titles, are in `packages/web/defaults/`. Your files only need the values you change. Objects merge with the defaults, and lists and other values replace them. For example, a `navigation` list in `site.json` replaces the whole default list.
+Upstream defaults for the other settings in `site.json`, such as `navigation` and `features`, are in `packages/web/defaults/site.json`. Your `site.json` only needs the values you change. Objects merge with the defaults, and lists and other values replace them. For example, a `navigation` list in `site.json` replaces the whole default list. The UI text, such as button labels and page titles, is part of the app and its translations, not of the config.
 
 `packages/config/site.json`:
 
@@ -106,7 +106,21 @@ Define the toolbar pages and their urls in `navigation` in `packages/config/site
 ]
 ```
 
-## Languages
+## Text and languages
+
+The text on the site comes from your config, from Firestore and from the app:
+
+| Text                                                                                         | Where it is                                | Who edits it                 |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------ | ---------------------------- |
+| Event text, such as the title, description, hero descriptions, about blocks and footer links | `packages/config/content/resources.json`   | You                          |
+| The FAQ, the Code of Conduct and blog posts                                                  | `packages/config/content/`                 | You                          |
+| Sessions, speakers, the schedule, the team, partners and the blog list                       | Firestore                                  | You, in the database         |
+| UI text, such as buttons, labels, page titles, navigation and messages                       | `msg()` calls in `packages/web/src`        | Upstream                     |
+| UI translations                                                                              | `packages/translations/xliff/<locale>.xlf` | Upstream, not edited by hand |
+
+UI text is the same on every site, so it is not in `packages/config`. To change its wording, open a pull request upstream, so every site gets the change and translators see it. A fork can change a `msg()` call too. Then run `npm --prefix packages/web run localize:extract`, and expect conflicts when you upgrade. Existing translations of that text keep the old meaning.
+
+### Site languages
 
 `locales` in `packages/config/site.json` sets the languages of the site. `source` is the default locale and the language of your content. `index.html` and `manifest.json` are in this language, and their `lang` is set to it. `targets` lists the other locales that visitors can pick in the footer. Every locale other than `en` needs UI translations in `packages/translations/xliff/`, and the build fails without them. None ship yet, so sites are in English only:
 
@@ -114,7 +128,15 @@ Define the toolbar pages and their urls in `navigation` in `packages/config/site
 "locales": { "source": "en", "targets": [] }
 ```
 
-Translate your event content for a target locale in `packages/config/content/locales/<locale>/resources.json`. It takes the same keys as `content/resources.json`, and only the ones you translate. Objects merge with `content/resources.json`, and lists replace it. The build fails on a key that is not in `content/resources.json`, and on a folder whose locale is not in `targets`.
+The app picks a visitor's language in this order: the one they picked before, the first of their browser's languages that the site offers, then `source`. A browser language with a region, such as `es-MX`, matches `es`. The picker in the footer shows only when the site offers more than one language, and the browser remembers the choice. A language downloads the first time a visitor picks it, and works offline after that.
+
+Dates and numbers follow the visitor's language. Session days and times stay in `event.timezone`.
+
+These are not translated: data in Firestore, blog posts, push notifications, and `index.html` and `manifest.json`.
+
+### Translating event content
+
+Translate your event content for a target locale in `packages/config/content/locales/<locale>/resources.json`. It takes the same keys as `content/resources.json`, and only the ones you translate. Objects merge with `content/resources.json`, and lists replace it. A key you leave out shows the text in `source`. The build fails on a key that is not in `content/resources.json`, and on a folder whose locale is not in `targets`.
 
 ```json
 {

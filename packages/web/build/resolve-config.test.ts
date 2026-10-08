@@ -54,22 +54,27 @@ describe('resolveConfig', () => {
     expect(site.url).toMatch(/^https:\/\//);
     expect(site.navigation.length).toBeGreaterThan(0);
     expect(resources.title).toBeTruthy();
-    expect(resources.faq).toBeTruthy();
   });
 
-  it('reads the defaults, then the site config over them, in separate namespaces', () => {
+  it('reads the site.json defaults, then the site config over them, in separate namespaces', () => {
     const { site, resources } = resolveConfig({
       paths: makePaths({
         site: { features: { forkMe: true }, navigation: [] },
-        resources: { faq: '/data/questions.md' },
+        resources: { title: 'My DevFest' },
       }),
       nodeEnv: 'production',
     });
 
     expect(site.features).toMatchObject({ forkMe: true, blog: true });
     expect(site.navigation).toEqual([]);
-    expect(resources.faq).toBe('/data/questions.md');
+    expect(resources.title).toBe('My DevFest');
     expect(site).not.toHaveProperty('title');
+  });
+
+  it('has no upstream defaults for content', () => {
+    const { resources } = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
+
+    expect(resources).toEqual(readJson(join(repoPaths.site, 'content/resources.json')));
   });
 
   it('defaults the URL to the Firebase Hosting address of the project', () => {
