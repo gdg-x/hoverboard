@@ -36,3 +36,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           projectId: '${{ steps.project.outputs.id }}'
           firebaseServiceAccount: '${{ steps.credentials.outputs.json }}'
+          expires: 1d
