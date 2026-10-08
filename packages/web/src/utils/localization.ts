@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 import { configureLocalization, type LocaleModule } from '@lit/localize';
-import { siteLocales } from '../config/site';
+import { loadContent, siteLocales } from '../config/site';
 
 // Matches `sourceLocale` in lit-localize.json.
 export const sourceLocale = 'en';
@@ -59,7 +59,9 @@ const readStoredLocale = () => {
   }
 };
 
+// Content first, so the re-render on the locale's `ready` event shows both.
 const applyLocale = async (locale: string) => {
+  await loadContent(locale);
   await loadLocale(locale);
   document.documentElement.lang = locale;
 };

@@ -7,6 +7,9 @@ import { resolveConfig, type SiteConfig } from './resolve-config';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
 const RESOLVED_SITE_MODULE = `\0${SITE_MODULE}`;
+// One module per locale, `virtual:hoverboard/content/<locale>`, so each is its own chunk.
+export const CONTENT_MODULE = 'virtual:hoverboard/content/';
+const RESOLVED_CONTENT_MODULE = `\0${CONTENT_MODULE}`;
 
 /**
  * Feature flags as literals, for example `__HB_FEATURES__.blog` becomes `false`, so the bundler
@@ -21,19 +24,41 @@ export const featureDefines = (features: Record<Feature, boolean>): Record<strin
 
 /**
  * Serves the resolved config as `virtual:hoverboard/site`, the client's only source of config.
+ * `contentTranslations` lazy-loads each locale's event content translation.
  * Tests pass `defineFeatures: false` and set `globalThis.__HB_FEATURES__` so they can toggle flags.
  */
 export const siteModule = (
-  { site, resources }: SiteConfig,
+  { site, resources, contentTranslations }: SiteConfig,
   { defineFeatures = true } = {},
 ): Plugin => ({
   name: 'hoverboard-site-module',
   config: () => (defineFeatures ? { define: featureDefines(site.features) } : {}),
-  resolveId: (id) => (id === SITE_MODULE ? RESOLVED_SITE_MODULE : undefined),
-  load: (id) =>
-    id === RESOLVED_SITE_MODULE
-      ? `export const site = ${JSON.stringify(site)};\nexport const resources = ${JSON.stringify(resources)};\n`
-      : undefined,
+  resolveId: (id) => {
+    if (id === SITE_MODULE) return RESOLVED_SITE_MODULE;
+    const locale = id.startsWith(CONTENT_MODULE) ? id.slice(CONTENT_MODULE.length) : undefined;
+    return locale && Object.hasOwn(contentTranslations, locale)
+      ? `${RESOLVED_CONTENT_MODULE}${locale}`
+      : undefined;
+  },
+  load: (id) => {
+    if (id === RESOLVED_SITE_MODULE) {
+      const loaders = Object.keys(contentTranslations).map(
+        (locale) =>
+          `${JSON.stringify(locale)}: () => import(${JSON.stringify(`${CONTENT_MODULE}${locale}`)})`,
+      );
+      return [
+        `export const site = ${JSON.stringify(site)};`,
+        `export const resources = ${JSON.stringify(resources)};`,
+        `export const contentTranslations = {${loaders.join(', ')}};`,
+        '',
+      ].join('\n');
+    }
+    if (id.startsWith(RESOLVED_CONTENT_MODULE)) {
+      const locale = id.slice(RESOLVED_CONTENT_MODULE.length);
+      return `export default ${JSON.stringify(contentTranslations[locale])};\n`;
+    }
+    return undefined;
+  },
 });
 
 /**

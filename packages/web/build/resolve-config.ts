@@ -1,4 +1,4 @@
-import { Ajv2020, type ErrorObject } from 'ajv/dist/2020.js';
+import { Ajv2020, type ErrorObject, type ValidateFunction } from 'ajv/dist/2020.js';
 import fs from 'fs';
 import { join } from 'path';
 import {
@@ -7,7 +7,7 @@ import {
   isNavigationRoute,
   type Feature,
 } from '../src/config/features';
-import { deepMerge } from '../src/config/merge';
+import { deepMerge, isPlainObject } from '../src/config/merge';
 import { THEMES, type ThemeName } from '../src/themes/index';
 import type { Theme } from '../src/themes/tokens';
 
@@ -22,6 +22,8 @@ export interface SiteConfig {
   resources: Resources;
   /** The built-in theme that `theme.name` picks, with the `theme.colors` overrides. */
   theme: Theme;
+  /** `content/locales/<locale>/resources.json` by locale, the keys to merge over `resources`. */
+  contentTranslations: Record<string, object>;
   NODE_ENV: string;
 }
 
@@ -180,6 +182,63 @@ const crossFileErrors = (site: Site, resources: Resources, paths: ConfigPaths): 
   return [...errors, ...localeErrors(site, paths.translations), ...featureErrors(site, resources)];
 };
 
+// Each key must also be in the site's content/resources.json. Arrays replace, so their items are not checked.
+const unknownKeys = (translation: unknown, content: unknown, path: string): string[] =>
+  isPlainObject(translation) && isPlainObject(content)
+    ? Object.entries(translation).flatMap(([key, value]) =>
+        key in content
+          ? unknownKeys(value, content[key], `${path}/${key}`)
+          : [`${path}/${key}: is not in content/resources.json`],
+      )
+    : [];
+
+/** Reads `content/locales/<locale>/resources.json` for the target locales that have one. */
+const loadContentTranslations = (
+  site: Site,
+  siteContent: object,
+  resources: Resources,
+  validateResources: ValidateFunction,
+  paths: ConfigPaths,
+): { translations: Record<string, object>; errors: string[] } => {
+  const translations: Record<string, object> = {};
+  const errors: string[] = [];
+  const dir = join(paths.site, 'content', 'locales');
+  if (!fs.existsSync(dir)) return { translations, errors };
+
+  const { targets } = site.locales as { targets: string[] };
+  const folders = fs
+    .readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory());
+  for (const { name: locale } of folders) {
+    if (!targets.includes(locale)) {
+      errors.push(`content/locales/${locale}: "${locale}" is not in site.json/locales/targets`);
+      continue;
+    }
+    const file = `content/locales/${locale}/resources.json`;
+    const path = join(paths.site, file);
+    if (!fs.existsSync(path)) continue;
+
+    const translation = readJson<unknown>(path);
+    if (!isPlainObject(translation)) {
+      errors.push(`${file}: must be an object`);
+      continue;
+    }
+    const keyErrors = unknownKeys(translation, siteContent, file);
+    if (keyErrors.length) {
+      errors.push(...keyErrors);
+      continue;
+    }
+    if (!validateResources(deepMerge(resources, translation))) {
+      errors.push(...formatErrors(file, validateResources.errors));
+      continue;
+    }
+    const content = { ...translation };
+    delete content['$schema'];
+    translations[locale] = content;
+  }
+  return { translations, errors };
+};
+
 /**
  * Reads the defaults, then the site's config over them, and validates the result. The dev
  * server, the build and the CLI all use it, so they see the same config.
@@ -192,9 +251,10 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
     readJson<object>(join(paths.defaults, 'site.json')),
     readJson<object>(join(paths.site, 'site.json')),
   ) as Site;
+  const siteContent = readJson<object>(join(paths.site, 'content', 'resources.json'));
   const resources = deepMerge(
     readJson<object>(join(paths.defaults, 'content', 'resources.json')),
-    readJson<object>(join(paths.site, 'content', 'resources.json')),
+    siteContent,
   ) as Resources;
 
   const ajv = new Ajv2020({ allErrors: true });
@@ -207,6 +267,11 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
     ...formatErrors('content/resources.json', validateResources.errors),
     ...(siteValid && resourcesValid ? crossFileErrors(site, resources, paths) : []),
   ];
+  const content =
+    siteValid && resourcesValid
+      ? loadContentTranslations(site, siteContent, resources, validateResources, paths)
+      : { translations: {}, errors: [] };
+  errors.push(...content.errors);
 
   if (siteValid) {
     site.url ??= `https://${site.firebase.projectId}.web.app/`;
@@ -216,7 +281,16 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
   const { name, colors } = site.theme as { name: string; colors?: Partial<Theme> };
   const theme = { ...(THEMES[name as ThemeName] ?? THEMES.default), ...colors };
 
-  return { config: { site, resources, theme, NODE_ENV: nodeEnv || 'production' }, errors };
+  return {
+    config: {
+      site,
+      resources,
+      theme,
+      contentTranslations: content.translations,
+      NODE_ENV: nodeEnv || 'production',
+    },
+    errors,
+  };
 };
 
 /** Like `loadConfig`, but throws a `ConfigError` that lists every problem. */

@@ -12,8 +12,8 @@ import '../components/shared/hoverboard-icon';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
-import { aboutBlock, dates, description, heroSettings, location, title } from '../config/site';
-import { INCLUDE_SITE_TITLE, updateMetadata } from '../utils/metadata';
+import { aboutBlock, dates, heroSettings, location, title } from '../config/site';
+import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { POSITION, scrollToElement } from '../utils/scrolling';
 import { ThemedElement } from '../components/themed-element';
 
@@ -176,11 +176,18 @@ export class HomePage extends ThemedElement {
     }
   `;
 
+  private readonly metadata = new PageMetadataController(this, 'home');
   private city = location.city;
-  private siteTitle = title;
-  private dates = dates;
+  private get siteTitle() {
+    return title;
+  }
+  private get dates() {
+    return dates;
+  }
   private heroSettings = heroSettings.home;
-  private aboutBlock = aboutBlock;
+  private get aboutBlock() {
+    return aboutBlock;
+  }
 
   @query('#hero')
   accessor hero!: HeroBlock;
@@ -210,11 +217,6 @@ export class HomePage extends ThemedElement {
   private scrollNextBlock = () => {
     scrollToElement(this.hero, POSITION.BOTTOM);
   };
-
-  override connectedCallback() {
-    super.connectedCallback();
-    updateMetadata(title, description, INCLUDE_SITE_TITLE.NO);
-  }
 
   override firstUpdated() {
     this.observeLazyBlocks();

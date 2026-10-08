@@ -108,6 +108,15 @@ Define the toolbar pages and their urls in `navigation` in `packages/config/site
 "locales": { "source": "en", "targets": [] }
 ```
 
+Translate your event content for a target locale in `packages/config/content/locales/<locale>/resources.json`. It takes the same keys as `content/resources.json`, and only the ones you translate. Objects merge with `content/resources.json`, and lists replace it. The build fails on a key that is not in `content/resources.json`, and on a folder whose locale is not in `targets`.
+
+```json
+{
+  "title": "DevFest Ucrania",
+  "aboutBlock": { "statisticsBlock": { "days": { "label": "Días" } } }
+}
+```
+
 ## "Become a partner" - how it works?
 
 `Become a partner` button opens a form with `company name`, `name` and `email` fields. After a user (potential partner) filled a form, this data is saved into Firestore DB, `potentialPartners` node. It gives the possibility to contact back those people who are interested to be a partner with you and collaborate earlier.

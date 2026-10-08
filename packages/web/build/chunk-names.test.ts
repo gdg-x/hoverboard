@@ -10,6 +10,13 @@ describe('chunkFileNames', () => {
     expect(chunkFileNames(false)(locale)).toBe('locales/[name].js');
   });
 
+  it('puts event content translations under locales/, named after the locale', () => {
+    const content = { facadeModuleId: '\0virtual:hoverboard/content/pt-BR' };
+
+    expect(chunkFileNames(true)(content)).toBe('locales/content-pt-BR-[hash].js');
+    expect(chunkFileNames(false)(content)).toBe('locales/content-pt-BR.js');
+  });
+
   it('keeps other chunks at the top level', () => {
     expect(chunkFileNames(true)(page)).toBe('[name]-[hash].js');
     expect(chunkFileNames(true)({ facadeModuleId: null })).toBe('[name]-[hash].js');

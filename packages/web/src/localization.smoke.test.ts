@@ -1,5 +1,6 @@
 import { html, render } from 'lit';
 import { beforeAll, describe, expect, inject, it, vi } from 'vitest';
+import { resources } from 'virtual:hoverboard/site';
 import { queryAllDeep } from '../__tests__/helpers/dom';
 
 // Pages subscribe to Firestore when they render. Without a backend they stay loading.
@@ -32,6 +33,10 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     expect(signInTab()).toHaveTextContent('[Sign in]');
   });
 
+  it('shows the event content translated for the locale', async () => {
+    await vi.waitFor(() => expect(document.title).toBe(`[${resources.title}]`));
+  });
+
   it('switches back to the source locale from the picker', async () => {
     const select = picker()!;
     select.value = 'en';
@@ -41,5 +46,6 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     expect(document.documentElement).toHaveAttribute('lang', 'en');
     expect(localStorage.getItem('hoverboard-locale')).toBe('en');
     expect(signInTab()).toHaveTextContent(/^Sign in$/);
+    expect(document.title).toBe(resources.title);
   });
 });

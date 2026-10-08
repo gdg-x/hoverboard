@@ -138,7 +138,9 @@ export class TicketsBlock extends ThemedElement {
     }
   `;
 
-  private ticketsBlock = ticketsBlock;
+  private get ticketsBlock() {
+    return ticketsBlock;
+  }
   private contentLoaders = contentLoaders.tickets;
 
   @fromStore((state) => selectTickets(state))

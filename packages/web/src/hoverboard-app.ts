@@ -149,8 +149,12 @@ export class HoverboardApp extends ThemedElement {
     }
   `;
 
-  private alt = title;
-  private dates = dates;
+  private get alt() {
+    return title;
+  }
+  private get dates() {
+    return dates;
+  }
   private navigation = navigation;
   private shortLocation = location.short;
 
