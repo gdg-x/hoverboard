@@ -1,11 +1,11 @@
 import { msg, str } from '@lit/localize';
-import '@material/web/iconbutton/icon-button.js';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { share } from '../../utils/share';
 import { mailto, organizer, socialNetwork } from '../../config/site';
 import { ThemedElement } from '../themed-element';
 import '../shared/hoverboard-icon';
+import '../ui/hb-icon-button';
 
 @customElement('footer-social')
 export class FooterSocial extends ThemedElement {
@@ -160,24 +160,24 @@ export class FooterSocial extends ThemedElement {
         <div class="title"></div>
         <div class="nav-inline">
           <div class="share">
-            <md-icon-button
+            <hb-icon-button
               class="share-facebook"
-              aria-label="${this.shareLabel('Facebook')}"
+              label="${this.shareLabel('Facebook')}"
               share="facebook"
               @click="${this.share}"
             >
               <hoverboard-icon name="facebook"></hoverboard-icon>
-            </md-icon-button>
+            </hb-icon-button>
           </div>
           <div class="share">
-            <md-icon-button
+            <hb-icon-button
               class="share-twitter"
-              aria-label="${this.shareLabel('Twitter')}"
+              label="${this.shareLabel('Twitter')}"
               share="twitter"
               @click="${this.share}"
             >
               <hoverboard-icon name="twitter"></hoverboard-icon>
-            </md-icon-button>
+            </hb-icon-button>
           </div>
         </div>
       </div>
@@ -200,11 +200,9 @@ export class FooterSocial extends ThemedElement {
           ${this.socialNetwork.follow.map(
             (socFollow) => html`
               <li>
-                <a href="${socFollow.url}" target="_blank" rel="noopener noreferrer">
-                  <md-icon-button aria-label="${socFollow.name}">
-                    <hoverboard-icon name="${socFollow.name}"></hoverboard-icon>
-                  </md-icon-button>
-                </a>
+                <hb-icon-button label="${socFollow.name}" href="${socFollow.url}" target="_blank">
+                  <hoverboard-icon name="${socFollow.name}"></hoverboard-icon>
+                </hb-icon-button>
               </li>
             `,
           )}

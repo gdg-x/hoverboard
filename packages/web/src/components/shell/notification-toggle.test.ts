@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { updateNotificationsSubscribers } from '../../store/update-notifications-subscribers';
+import type { HbSwitch } from '../ui/hb-switch';
 import type { NotificationToggle } from './notification-toggle';
 
 import './notification-toggle';
@@ -135,10 +136,8 @@ describe('notification-toggle', () => {
     element['notificationPermission'] = new Success('token');
     await element.updateComplete;
 
-    const toggle = shadowRoot.querySelector('label md-switch') as HTMLElement & {
-      selected: boolean;
-    };
-    toggle.selected = true;
+    const toggle = shadowRoot.querySelector<HbSwitch>('hb-switch')!;
+    toggle.checked = true;
     toggle.dispatchEvent(new Event('change'));
 
     expect(mockUpdateNotificationsSubscribers).toHaveBeenCalledWith('token');

@@ -1,5 +1,4 @@
 import { msg } from '@lit/localize';
-import '@material/web/fab/fab.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { scrollToTop } from '../../utils/scrolling';
@@ -9,6 +8,7 @@ import './footer-rel';
 import './footer-social';
 import './locale-picker';
 import '../shared/hoverboard-icon';
+import '../ui/hb-icon-button';
 
 @customElement('footer-block')
 export class FooterBlock extends ThemedElement {
@@ -43,10 +43,7 @@ export class FooterBlock extends ThemedElement {
       flex: 1 1 auto;
     }
 
-    .fab md-fab {
-      --md-fab-container-color: var(--primary-background-color);
-      --md-fab-container-shape: 50%;
-      --md-fab-icon-color: var(--footer-text-color);
+    .fab hb-icon-button {
       pointer-events: all;
     }
 
@@ -69,13 +66,15 @@ export class FooterBlock extends ThemedElement {
     return html`
       <div class="container">
         <div class="fab">
-          <md-fab
+          <hb-icon-button
             class="back-to-top"
-            aria-label="${msg('Back to top', { id: 'footer.block.back-to-top' })}"
+            variant="tonal"
+            size="l"
+            label="${msg('Back to top', { id: 'footer.block.back-to-top' })}"
             @click="${scrollToTop}"
           >
-            <hoverboard-icon slot="icon" name="up"></hoverboard-icon>
-          </md-fab>
+            <hoverboard-icon name="up"></hoverboard-icon>
+          </hb-icon-button>
         </div>
         <footer-social class="footer-social"></footer-social>
         <footer-rel></footer-rel>

@@ -46,7 +46,7 @@ describe('schedule-page', () => {
     element.schedule = new Pending();
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('md-linear-progress')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('hb-progress')).not.toHaveAttribute('hidden');
   });
 
   it('passes the location to header-bottom-toolbar', async () => {

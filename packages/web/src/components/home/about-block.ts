@@ -1,10 +1,10 @@
-import '@material/web/button/text-button.js';
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { openVideoDialog } from '../../store/ui';
 import { aboutBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
+import '../ui/hb-button';
 import { ThemedElement } from '../themed-element';
 
 @customElement('about-block')
@@ -62,26 +62,21 @@ export class AboutBlock extends ThemedElement {
         <div>
           <h1 class="container-title">${msg('About', { id: 'home.about-block.title' })}</h1>
           <p>${aboutBlock.callToAction.featuredSessions.description}</p>
-          <a
+          <hb-button
+            variant="text"
             href="${aboutBlock.callToAction.featuredSessions.link}"
             target="_blank"
-            rel="noopener noreferrer"
-          >
-            <md-text-button class="animated icon-right" trailing-icon>
-              <span class="cta-label">${aboutBlock.callToAction.featuredSessions.label}</span>
-              <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-            </md-text-button>
-          </a>
-
-          <p>${aboutBlock.callToAction.howItWas.description}</p>
-          <md-text-button
-            class="animated icon-right"
-            @click="${() => this.playVideo()}"
             trailing-icon
           >
-            <span>${aboutBlock.callToAction.howItWas.label}</span>
+            <span class="cta-label">${aboutBlock.callToAction.featuredSessions.label}</span>
             <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-          </md-text-button>
+          </hb-button>
+
+          <p>${aboutBlock.callToAction.howItWas.description}</p>
+          <hb-button variant="text" @click="${() => this.playVideo()}" trailing-icon>
+            ${aboutBlock.callToAction.howItWas.label}
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+          </hb-button>
         </div>
 
         <div class="statistics-block">

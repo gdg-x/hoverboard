@@ -2,7 +2,7 @@ import { Failure, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@material/web/progress/linear-progress.js';
+import '../components/ui/hb-progress';
 import '../components/shared/content-loader';
 import '../components/hero/simple-hero';
 import type { PreviousSession } from '../models/previous-session';
@@ -88,12 +88,6 @@ export class PreviousSpeakersPage extends ThemedElement {
       font-weight: normal;
     }
 
-    .progress {
-      width: 100%;
-      --md-linear-progress-active-indicator-color: var(--default-primary-color);
-      --md-linear-progress-track-color: var(--default-primary-color);
-    }
-
     .speaker {
       display: flex;
     }
@@ -171,11 +165,7 @@ export class PreviousSpeakersPage extends ThemedElement {
     return html`
       <simple-hero page="previousSpeakers"></simple-hero>
 
-      <md-linear-progress
-        class="progress"
-        indeterminate
-        ?hidden=${this.contentLoaderVisibility}
-      ></md-linear-progress>
+      <hb-progress ?hidden=${this.contentLoaderVisibility}></hb-progress>
 
       <content-loader
         class="container"

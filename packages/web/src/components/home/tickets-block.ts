@@ -1,6 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
-import '@material/web/button/filled-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { Ticket } from '../../models/ticket';
@@ -8,6 +7,7 @@ import { type TicketsState, selectTickets } from '../../store/tickets';
 import { contentLoaders, ticketsBlock } from '../../config/site';
 import { getLocale } from '../../utils/localization';
 import '../shared/content-loader';
+import '../ui/hb-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -244,9 +244,10 @@ export class TicketsBlock extends ThemedElement {
                       desc: 'Shown on a sold-out ticket.',
                     })}
                   </div>
-                  <md-filled-button ?hidden="${ticket.soldOut}" ?disabled="${!ticket.available}">
+                  <!-- Inert, so a click on it follows the ticket link around it. -->
+                  <hb-button inert ?hidden="${ticket.soldOut}" ?disabled="${!ticket.available}">
                     ${this.getButtonText(ticket.available)}
-                  </md-filled-button>
+                  </hb-button>
                 </div>
               </a>
             `,

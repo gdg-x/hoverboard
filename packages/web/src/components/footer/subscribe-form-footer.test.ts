@@ -24,8 +24,8 @@ describe('subscribe-form-footer', () => {
 
   it('renders the subscription form with a disabled submit action', () => {
     expect(shadowRoot.querySelector('[label]')).toHaveAttribute('label', 'Your email');
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Subscribe');
-    expect(shadowRoot.querySelector('md-filled-button')).toBeDisabled();
+    expect(shadowRoot.querySelector('hb-button')).toHaveTextContent('Subscribe');
+    expect(shadowRoot.querySelector('hb-button')).toBeDisabled();
   });
 
   it('enables submission when the email input changes', async () => {
@@ -35,15 +35,15 @@ describe('subscribe-form-footer', () => {
     fireEvent.input(emailInput);
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('md-filled-button')).toBeEnabled();
+    expect(shadowRoot.querySelector('hb-button')).toBeEnabled();
   });
 
   it('shows the subscribed state', async () => {
     element.subscribed = new Success(true);
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Subscribed');
-    expect(shadowRoot.querySelector('md-outlined-text-field')).toBeDisabled();
+    expect(shadowRoot.querySelector('hb-button')).toHaveTextContent('Subscribed');
+    expect(shadowRoot.querySelector('hb-text-field')).toBeDisabled();
     expect(shadowRoot.querySelector('hoverboard-icon[name="checked"]')).toBeInTheDocument();
   });
 });

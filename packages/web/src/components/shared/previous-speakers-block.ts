@@ -1,4 +1,3 @@
-import '@material/web/button/text-button.js';
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
@@ -11,6 +10,7 @@ import {
   selectPreviousSpeakersState,
 } from '../../store/previous-speakers';
 import './hoverboard-icon';
+import '../ui/hb-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -120,12 +120,10 @@ export class PreviousSpeakersBlock extends ThemedElement {
           )}
         </div>
 
-        <a href="/previous-speakers">
-          <md-text-button class="animated icon-right" trailing-icon>
-            ${msg('View all', { id: 'shared.previous-speakers-block.view-all' })}
-            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-          </md-text-button>
-        </a>
+        <hb-button variant="text" href="/previous-speakers" trailing-icon>
+          ${msg('View all', { id: 'shared.previous-speakers-block.view-all' })}
+          <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+        </hb-button>
       </div>
     `;
   }

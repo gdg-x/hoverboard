@@ -1,6 +1,6 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/progress/linear-progress.js';
+import '../components/ui/hb-progress';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../components/shared/content-loader';
@@ -82,12 +82,6 @@ export class BlogListPage extends ThemedElement {
       opacity: 0.8;
     }
 
-    .progress {
-      width: 100%;
-      --md-linear-progress-active-indicator-color: var(--default-primary-color);
-      --md-linear-progress-track-color: var(--default-primary-color);
-    }
-
     @media (min-width: 640px) {
       .featured-posts-wrapper {
         grid-template-columns: repeat(3, 1fr);
@@ -135,11 +129,7 @@ export class BlogListPage extends ThemedElement {
     return html`
       <simple-hero page="blog"></simple-hero>
 
-      <md-linear-progress
-        class="progress"
-        indeterminate
-        ?hidden=${this.contentLoaderVisibility}
-      ></md-linear-progress>
+      <hb-progress ?hidden=${this.contentLoaderVisibility}></hb-progress>
 
       <div class="featured">
         <div class="container">

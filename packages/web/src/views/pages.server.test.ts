@@ -107,13 +107,14 @@ describe('pages on the server', () => {
     expect(pages[0]!.indexOf('/speakers/grace')).toBeLessThan(pages[0]!.indexOf('/speakers/alan'));
   });
 
-  it('render the calendar button without its menu, which does not hydrate', async () => {
+  it('render the calendar button with its closed menu', async () => {
     const page = await renderToString(
       html`<add-to-calendar .session=${session}></add-to-calendar>`,
     );
 
-    expect(page).toContain('<md-outlined-button');
-    expect(page).not.toContain('<md-menu');
+    expect(page).toMatch(/<hb-button\s+slot="trigger"\s+variant="outlined"/);
+    expect(page).toMatch(/<a\s+role="menuitem"\s+href="https:\/\/calendar\.google\.com/);
+    expect(page).toMatch(/popover="manual"\s+role="menu"/);
   });
 
   it("render the header with the tab of the page's path selected", async () => {

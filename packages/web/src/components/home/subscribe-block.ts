@@ -1,6 +1,5 @@
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { DialogData } from '../../models/dialog-form';
@@ -9,6 +8,7 @@ import { subscribe, type SubscribeState } from '../../store/subscribe';
 import type { UserState } from '../../store/user';
 import { subscribeBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
+import '../ui/hb-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -34,15 +34,10 @@ export class SubscribeBlock extends ThemedElement {
       margin: 0 0 16px;
     }
 
-    md-text-button {
-      color: var(--text-primary-color);
-      --md-text-button-label-text-color: var(--text-primary-color);
-      --md-text-button-hover-label-text-color: var(--text-primary-color);
-    }
-
-    md-text-button[disabled] {
-      background: var(--default-primary-color);
-      color: var(--text-primary-color);
+    hb-button {
+      --hb-button-color: var(--text-primary-color);
+      /* "Subscribed" stays readable. */
+      --hb-button-disabled-opacity: 1;
     }
 
     @media (min-width: 640px) {
@@ -91,15 +86,15 @@ export class SubscribeBlock extends ThemedElement {
           })}
         </div>
         <div class="cta-button">
-          <md-text-button
-            class="animated icon-right"
+          <hb-button
+            variant="text"
             trailing-icon
             ?disabled="${this.subscribed instanceof Success}"
             @click="${this.subscribe}"
           >
             <span class="cta-label">${this.ctaLabel}</span>
             <hoverboard-icon slot="icon" name="${this.ctaIcon}"></hoverboard-icon>
-          </md-text-button>
+          </hb-button>
         </div>
       </div>
     `;

@@ -1,4 +1,3 @@
-import '@material/web/button/outlined-button.js';
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
@@ -7,6 +6,7 @@ import type { Photo } from '../../models/photo';
 import { type GalleryState, selectGallery } from '../../store/gallery';
 import { galleryBlock } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
+import '../ui/hb-button';
 import { ThemedElement } from '../themed-element';
 
 @customElement('gallery-block')
@@ -66,11 +66,9 @@ export class GalleryBlock extends ThemedElement {
       grid-area: 5 / 2 / 5 / 4;
     }
 
-    md-outlined-button {
+    hb-button {
+      align-self: flex-start;
       margin-top: 16px;
-      --md-outlined-button-label-text-color: var(--text-primary-color);
-      --md-outlined-button-hover-label-text-color: var(--text-primary-color);
-      --md-outlined-button-outline-color: var(--text-primary-color);
     }
 
     @media (min-width: 640px) {
@@ -152,15 +150,12 @@ export class GalleryBlock extends ThemedElement {
                     <h2>${galleryBlock.title}</h2>
                     <p>${galleryBlock.description}</p>
                   </div>
-                  <a
+                  <hb-button
+                    variant="outlined"
                     href="${galleryBlock.callToAction.link}"
                     target="_blank"
-                    rel="noopener noreferrer"
+                    >${msg('See all photos', { id: 'home.gallery-block.cta' })}</hb-button
                   >
-                    <md-outlined-button
-                      >${msg('See all photos', { id: 'home.gallery-block.cta' })}</md-outlined-button
-                    >
-                  </a>
                 </div>
               `
             : ''

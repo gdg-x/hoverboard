@@ -54,7 +54,7 @@ describe('speakers-block', () => {
     expect(
       shadowRootForWithin.querySelector('hoverboard-icon')?.shadowRoot?.querySelector('svg'),
     ).toBeInTheDocument();
-    expect(shadowRootForWithin.querySelector('md-outlined-button hoverboard-icon')).toHaveAttribute(
+    expect(shadowRootForWithin.querySelector('hb-button hoverboard-icon')).toHaveAttribute(
       'slot',
       'icon',
     );

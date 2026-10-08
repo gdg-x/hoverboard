@@ -1,10 +1,10 @@
-import '@material/web/button/outlined-button.js';
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '../shared/hoverboard-icon';
 import '../shared/text-truncate';
+import '../ui/hb-button';
 import type { Speaker } from '../../models/speaker';
 import { speakerPath } from '../../utils/navigation';
 import { type SpeakersState, selectSpeakersState } from '../../store/speakers';
@@ -237,12 +237,10 @@ export class SpeakersBlock extends ThemedElement {
           )}
         </div>
 
-        <a href="/speakers">
-          <md-outlined-button class="cta-button animated icon-right" trailing-icon>
-            <span>${msg('View all speakers', { id: 'home.speakers-block.cta' })}</span>
-            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-          </md-outlined-button>
-        </a>
+        <hb-button variant="outlined" class="cta-button" href="/speakers" trailing-icon>
+          ${msg('View all speakers', { id: 'home.speakers-block.cta' })}
+          <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+        </hb-button>
       </div>
     `;
   }

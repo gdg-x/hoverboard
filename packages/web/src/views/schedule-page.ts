@@ -1,5 +1,5 @@
 import { Pending } from '@abraham/remotedata';
-import '@material/web/progress/linear-progress.js';
+import '../components/ui/hb-progress';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '../components/hero/hero-block';
@@ -31,12 +31,6 @@ export class SchedulePage extends ThemedElement {
 
     .container {
       min-height: 80%;
-    }
-
-    .progress {
-      width: 100%;
-      --md-linear-progress-active-indicator-color: var(--default-primary-color);
-      --md-linear-progress-track-color: var(--default-primary-color);
     }
 
     @media (max-width: 640px) {
@@ -85,11 +79,7 @@ export class SchedulePage extends ThemedElement {
         </sticky-element>
       </hero-block>
 
-      <md-linear-progress
-        class="progress"
-        indeterminate
-        ?hidden="${!this.pending}"
-      ></md-linear-progress>
+      <hb-progress ?hidden="${!this.pending}"></hb-progress>
 
       <filter-menu
         .filterGroups="${this.filterGroups}"

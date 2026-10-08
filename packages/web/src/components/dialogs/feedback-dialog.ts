@@ -1,6 +1,5 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { StoreController } from '../../controllers/store-controller';
@@ -10,6 +9,7 @@ import { closeDialog, type DialogState, DIALOG, selectIsDialogOpen } from '../..
 import './feedback-block';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';
 import '../shared/hoverboard-dialog';
+import '../ui/hb-button';
 import { ThemedElement } from '../themed-element';
 
 @customElement('feedback-dialog')
@@ -52,9 +52,9 @@ export class FeedbackDialog extends ThemedElement {
           <feedback-block .sessionId="${this.session?.id}"></feedback-block>
         </div>
 
-        <md-outlined-button slot="actions" @click="${this.close}">
+        <hb-button slot="actions" variant="outlined" @click="${this.close}">
           ${msg('Close', { id: 'common.close' })}
-        </md-outlined-button>
+        </hb-button>
       </hoverboard-dialog>
     `;
   }

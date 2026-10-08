@@ -73,13 +73,13 @@ describe('speakers-page', () => {
       html`<speakers-page></speakers-page>`,
     );
 
-    expect(shadowRoot.querySelector('md-linear-progress')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('hb-progress')).not.toHaveAttribute('hidden');
     expect(shadowRoot.querySelector('content-loader')).not.toHaveAttribute('hidden');
 
     element.speakers = new Success([speaker]);
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('md-linear-progress')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('hb-progress')).toHaveAttribute('hidden');
     expect(shadowRoot.querySelector('content-loader')).toHaveAttribute('hidden');
   });
 

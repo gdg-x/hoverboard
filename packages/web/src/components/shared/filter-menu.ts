@@ -1,5 +1,4 @@
 import { msg, str } from '@lit/localize';
-import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
@@ -11,6 +10,7 @@ import { clearFilters, toggleFilter } from '../../utils/filters';
 import { getLocale } from '../../utils/localization';
 import { generateClassName, variableColor } from '../../utils/styles';
 import './hoverboard-icon';
+import '../ui/hb-button';
 import { ThemedElement } from '../themed-element';
 
 @customElement('filter-menu')
@@ -158,10 +158,15 @@ export class FilterMenu extends ThemedElement {
             >
               ${msg('Clear all', { id: 'shared.filter-menu.clear' })}
             </button>
-            <md-outlined-button class="icon-right" trailing-icon @click="${this.toggleBoard}">
+            <hb-button
+              variant="outlined"
+              trailing-icon
+              .expanded="${this.opened}"
+              @click="${this.toggleBoard}"
+            >
               ${msg('Filters', { id: 'shared.filter-menu.title' })}
               <hoverboard-icon slot="icon" name="${this.icon}"></hoverboard-icon>
-            </md-outlined-button>
+            </hb-button>
           </div>
         </div>
 

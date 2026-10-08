@@ -98,7 +98,7 @@ describe('partners-block', () => {
     mockAddPotentialPartner.mockResolvedValue(undefined);
     const { shadowRoot } = await fixture<PartnersBlock>(html`<partners-block></partners-block>`);
 
-    shadowRoot.querySelector<HTMLElement>('md-text-button')!.click();
+    shadowRoot.querySelector<HTMLElement>('hb-button')!.click();
 
     expect(mockOpenSubscribeDialog).toHaveBeenCalledWith(
       expect.objectContaining({ title: 'Become a partner!' }),

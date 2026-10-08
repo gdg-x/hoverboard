@@ -1,11 +1,11 @@
 import '@justinribeiro/lite-youtube';
 import { msg } from '@lit/localize';
-import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 import { closeVideoDialog, initialUiState } from '../../store/ui';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';
 import '../shared/hoverboard-dialog';
+import '../ui/hb-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -45,9 +45,9 @@ export class VideoDialog extends ThemedElement {
             autoload
           ></lite-youtube>
         </div>
-        <md-outlined-button slot="actions" @click="${this.close}">
+        <hb-button slot="actions" variant="outlined" @click="${this.close}">
           ${msg('Close', { id: 'common.close' })}
-        </md-outlined-button>
+        </hb-button>
       </hoverboard-dialog>
     `;
   }

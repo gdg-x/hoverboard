@@ -1,6 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/text-button.js';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { store } from '../../store';
@@ -9,6 +8,7 @@ import { type PartnerGroupsState, selectPartnerGroups } from '../../store/partne
 import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
 import { queueSnackbar } from '../../store/snackbars';
 import '../shared/hoverboard-icon';
+import '../ui/hb-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -43,7 +43,6 @@ export class PartnersBlock extends ThemedElement {
 
     .cta-button {
       margin-top: 24px;
-      color: var(--default-primary-color);
     }
 
     @media (min-width: 640px) {
@@ -121,14 +120,15 @@ export class PartnersBlock extends ThemedElement {
           `,
         )}
 
-        <md-text-button
-          class="cta-button animated icon-right"
+        <hb-button
+          variant="text"
+          class="cta-button"
           trailing-icon
           @click="${this.addPotentialPartner}"
         >
-          <span>${msg('Become a partner', { id: 'home.partners-block.cta' })}</span>
+          ${msg('Become a partner', { id: 'home.partners-block.cta' })}
           <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-        </md-text-button>
+        </hb-button>
       </div>
     `;
   }

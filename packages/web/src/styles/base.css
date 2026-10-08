@@ -38,10 +38,6 @@
   --hb-content-max: 1200px;
   --hb-prose-max: 68ch;
   --hb-gutter: clamp(16px, 4vw, 40px);
-
-  /* @material/web components, until the hb-* primitives replace them. */
-  --md-ref-typeface-brand: var(--hb-font-body);
-  --md-ref-typeface-plain: var(--hb-font-body);
 }
 
 :root[data-color-scheme='light'] {
@@ -58,6 +54,11 @@
 
 :root[data-density='roomy'] {
   --hb-density: 1.25;
+}
+
+/* Multiplies decorative rotations, so stickers sit straight with `theme.decorations` off. */
+:root[data-decorations='off'] {
+  --hb-decorations: 0;
 }
 
 *,

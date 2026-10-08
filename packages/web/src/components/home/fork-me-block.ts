@@ -1,9 +1,9 @@
-import '@material/web/button/outlined-button.js';
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ThemedElement } from '../themed-element';
 import '../shared/hoverboard-icon';
+import '../ui/hb-button';
 
 @customElement('fork-me-block')
 export class ForkMeBlock extends ThemedElement {
@@ -14,11 +14,6 @@ export class ForkMeBlock extends ThemedElement {
       background: var(--accent-color);
       color: var(--text-secondary-color);
       padding: 16px 0;
-    }
-
-    md-outlined-button {
-      --md-outlined-button-label-text-color: var(--primary-text-color);
-      --md-outlined-button-outline-color: var(--primary-text-color);
     }
   `;
 
@@ -34,16 +29,14 @@ export class ForkMeBlock extends ThemedElement {
             { id: 'home.fork-me-block.description' },
           )}
         </p>
-        <a href="https://github.com/gdg-x/hoverboard">
-          <div class="cta-button">
-            <md-outlined-button class="icon-right" trailing-icon>
-              <span class="cta-label">
-                ${msg('Fork this project', { id: 'home.fork-me-block.cta' })}
-              </span>
-              <hoverboard-icon slot="icon" name="github"></hoverboard-icon>
-            </md-outlined-button>
-          </div>
-        </a>
+        <div class="cta-button">
+          <hb-button variant="outlined" href="https://github.com/gdg-x/hoverboard" trailing-icon>
+            <span class="cta-label">
+              ${msg('Fork this project', { id: 'home.fork-me-block.cta' })}
+            </span>
+            <hoverboard-icon slot="icon" name="github"></hoverboard-icon>
+          </hb-button>
+        </div>
       </div>
     `;
   }

@@ -144,7 +144,7 @@ describe('session-page', () => {
     await element.updateComplete;
     await element.updateComplete;
 
-    const fab = shadowRoot.querySelector('md-fab');
+    const fab = shadowRoot.querySelector('hb-icon-button');
     expect(fab).not.toBeNull();
     fireEvent.click(fab as Element);
 
@@ -167,8 +167,9 @@ describe('session-page', () => {
     await element.updateComplete;
     await element.updateComplete;
 
-    const fab = shadowRoot.querySelector('md-fab');
-    fireEvent.click(fab as Element);
+    const fab = shadowRoot.querySelector('hb-icon-button')!;
+    expect(fab.pressed).toBe(false);
+    fireEvent.click(fab);
 
     expect(mockSetUserFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': true }, true);
   });

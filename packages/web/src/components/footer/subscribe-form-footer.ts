@@ -1,25 +1,19 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/filled-button.js';
-import '@material/web/textfield/outlined-text-field.js';
-import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import { css, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { subscribe, type SubscribeState } from '../../store/subscribe';
 import '../shared/hoverboard-icon';
+import '../ui/hb-button';
+import '../ui/hb-text-field';
+import type { HbTextField } from '../ui/hb-text-field';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
 @customElement('subscribe-form-footer')
 export class SubscribeFormFooter extends ThemedElement {
   static override styles = css`
-    :host {
-      --md-outlined-text-field-label-text-color: var(--footer-text-color);
-      --md-outlined-text-field-focus-label-text-color: var(--default-primary-color);
-      --md-outlined-text-field-input-text-color: var(--footer-text-color);
-    }
-
-    md-outlined-text-field,
+    hb-text-field,
     .form-content {
       width: 100%;
     }
@@ -47,20 +41,23 @@ export class SubscribeFormFooter extends ThemedElement {
   accessor email = '';
 
   @query('#emailInput')
-  private accessor emailInput!: MdOutlinedTextField | null;
+  private accessor emailInput!: HbTextField | null;
 
   override render() {
     return html`
       <div class="form-content">
-        <md-outlined-text-field
+        <hb-text-field
           id="emailInput"
           type="email"
           label="${msg('Your email', { id: 'footer.subscribe-form.email' })}"
           .value="${this.email}"
           required
-          ?error="${this.validate}"
-          error-text="${msg('Please enter a valid email address.', { id: 'common.email-invalid' })}"
-          autocomplete="off"
+          error="${
+            this.validate
+              ? msg('Please enter a valid email address.', { id: 'common.email-invalid' })
+              : ''
+          }"
+          autocomplete="email"
           ?disabled="${this.subscribed instanceof Success}"
           @input="${this.onEmailChanged}"
         >
@@ -69,14 +66,10 @@ export class SubscribeFormFooter extends ThemedElement {
               ? html`<hoverboard-icon slot="suffix" name="checked"></hoverboard-icon>`
               : ''
           }
-        </md-outlined-text-field>
-        <md-filled-button
-          class="submit-button"
-          ?disabled="${this.disabled}"
-          @click="${this.subscribe}"
-        >
+        </hb-text-field>
+        <hb-button class="submit-button" ?disabled="${this.disabled}" @click="${this.subscribe}">
           ${this.ctaLabel}
-        </md-filled-button>
+        </hb-button>
       </div>
     `;
   }
@@ -100,7 +93,7 @@ export class SubscribeFormFooter extends ThemedElement {
   }
 
   private onEmailChanged = (event: Event) => {
-    this.email = (event.target as MdOutlinedTextField).value;
+    this.email = (event.target as HbTextField).value;
   };
 
   private subscribe = () => {

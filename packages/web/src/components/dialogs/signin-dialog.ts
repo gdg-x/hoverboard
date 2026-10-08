@@ -1,6 +1,5 @@
 import { Failure } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
-import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { StoreController } from '../../controllers/store-controller';
@@ -20,6 +19,7 @@ import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 import '../shared/hoverboard-icon';
 import { HoverboardDialog } from '../shared/hoverboard-dialog';
 import '../shared/hoverboard-dialog';
+import '../ui/hb-button';
 import { ThemedElement } from '../themed-element';
 
 const signInWith = (provider: string) =>
@@ -30,16 +30,11 @@ const generalError = () =>
 @customElement('signin-dialog')
 export class SigninDialog extends ThemedElement {
   static override styles = css`
-    :host {
-      --mdc-theme-primary: var(--primary-text-color);
-    }
-
     .sign-in-button {
+      --hb-button-color: var(--hb-color-on-surface);
+
       margin: 16px 0;
-      display: block;
-      flex: 1;
-      flex-basis: 1px;
-      color: var(--primary-text-color);
+      display: flex;
     }
 
     .merge-content .subtitle,
@@ -135,9 +130,9 @@ export class SigninDialog extends ThemedElement {
                     </div>
 
                     <div class="action-button">
-                      <md-text-button class="merge-button" @click="${this.mergeAccounts}">
-                        <span>${signInWith(provider)}</span>
-                      </md-text-button>
+                      <hb-button variant="text" class="merge-button" @click="${this.mergeAccounts}">
+                        ${signInWith(provider)}
+                      </hb-button>
                     </div>
                   </div>
                 `
@@ -145,16 +140,18 @@ export class SigninDialog extends ThemedElement {
                   <div>
                     ${this.signInProviders.providersData.map(
                       (provider) => html`
-                        <md-text-button
+                        <hb-button
+                          variant="text"
                           class="sign-in-button"
                           @click="${() => this.signIn(provider.url as PROVIDER)}"
                         >
                           <hoverboard-icon
+                            slot="icon"
                             name="${provider.name}"
                             class="icon-${provider.name}"
                           ></hoverboard-icon>
-                          <span>${signInWith(provider.label)}</span>
-                        </md-text-button>
+                          ${signInWith(provider.label)}
+                        </hb-button>
                       `,
                     )}
                   </div>
@@ -162,9 +159,9 @@ export class SigninDialog extends ThemedElement {
           }
         </div>
 
-        <md-text-button slot="actions" @click="${this.close}">
+        <hb-button slot="actions" variant="text" @click="${this.close}">
           ${msg('Close', { id: 'common.close' })}
-        </md-text-button>
+        </hb-button>
       </hoverboard-dialog>
     `;
   }

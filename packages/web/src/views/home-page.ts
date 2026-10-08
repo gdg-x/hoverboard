@@ -1,5 +1,3 @@
-import '@material/web/button/filled-button.js';
-import '@material/web/button/outlined-button.js';
 import { IntersectionController } from '@lit-labs/observers/intersection-controller.js';
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
@@ -9,6 +7,7 @@ import '../components/home/about-organizer-block';
 import '../components/hero/hero-block';
 import { HeroBlock } from '../components/hero/hero-block';
 import '../components/shared/hoverboard-icon';
+import '../components/ui/hb-button';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
@@ -86,20 +85,12 @@ export class HomePage extends ThemedElement {
       justify-content: center;
     }
 
-    .action-buttons md-filled-button,
-    .action-buttons md-outlined-button {
+    .action-buttons hb-button {
       margin: 8px;
     }
 
     .action-buttons .watch-video {
       color: var(--text-primary-color);
-      --md-outlined-button-label-text-color: var(--text-primary-color);
-      --md-outlined-button-hover-label-text-color: var(--text-primary-color);
-      --md-outlined-button-outline-color: var(--text-primary-color);
-    }
-
-    .action-buttons hoverboard-icon {
-      margin-right: 8px;
     }
 
     .scroll-down {
@@ -261,17 +252,17 @@ export class HomePage extends ThemedElement {
           </div>
 
           <div class="action-buttons">
-            <md-outlined-button class="watch-video" @click="${this.playVideo}">
+            <hb-button variant="outlined" class="watch-video" @click="${this.playVideo}">
               <hoverboard-icon name="movie" slot="icon"></hoverboard-icon>
               ${msg('View Highlights', { id: 'pages.home.view-highlights' })}
-            </md-outlined-button>
+            </hb-button>
             ${
               __HB_FEATURES__.tickets
                 ? html`
-                    <md-filled-button class="buy-ticket" @click="${this.scrollToTickets}">
+                    <hb-button class="buy-ticket" @click="${this.scrollToTickets}">
                       <hoverboard-icon name="ticket" slot="icon"></hoverboard-icon>
                       ${msg('Buy ticket', { id: 'common.buy-ticket' })}
-                    </md-filled-button>
+                    </hb-button>
                   `
                 : nothing
             }

@@ -1,6 +1,5 @@
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../markdown/short-markdown';
@@ -9,6 +8,7 @@ import { postPath } from '../../utils/navigation';
 import { type BlogState, selectBlogPosts } from '../../store/blog';
 import { getDate } from '../../utils/dates';
 import '../shared/hoverboard-icon';
+import '../ui/hb-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -143,12 +143,10 @@ export class LatestPostsBlock extends ThemedElement {
           )}
         </div>
 
-        <a href="/blog">
-          <md-text-button class="cta-button animated icon-right" trailing-icon>
-            <span>${msg('View all stories', { id: 'home.latest-posts-block.cta' })}</span>
-            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-          </md-text-button>
-        </a>
+        <hb-button variant="text" class="cta-button" href="/blog" trailing-icon>
+          ${msg('View all stories', { id: 'home.latest-posts-block.cta' })}
+          <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+        </hb-button>
       </div>
     `;
   }

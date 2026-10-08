@@ -38,8 +38,8 @@ describe('subscribe-block', () => {
       'arrow-right-circle',
     );
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('slot', 'icon');
-    expect(shadowRoot.querySelector('md-text-button')).toHaveAttribute('trailing-icon');
-    expect(shadowRoot.querySelector('md-text-button')).not.toHaveAttribute('disabled');
+    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('trailing-icon');
+    expect(shadowRoot.querySelector('hb-button')).not.toHaveAttribute('disabled');
   });
 
   it('shows the subscribed state and disables the button', async () => {
@@ -51,7 +51,7 @@ describe('subscribe-block', () => {
 
     expect(shadowRoot.querySelector('.cta-label')).toHaveTextContent('Subscribed');
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'checked');
-    expect(shadowRoot.querySelector('md-text-button')).toHaveAttribute('disabled');
+    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('disabled');
   });
 
   it('opens the subscribe dialog for a signed-out user', async () => {
@@ -62,7 +62,7 @@ describe('subscribe-block', () => {
     element.user = new Initialized();
     await element.updateComplete;
 
-    shadowRoot.querySelector<HTMLElement>('md-text-button')!.click();
+    shadowRoot.querySelector<HTMLElement>('hb-button')!.click();
 
     expect(mockOpenSubscribeDialog).toHaveBeenCalledWith(
       expect.objectContaining({ title: subscribeBlock.formTitle }),
@@ -89,7 +89,7 @@ describe('subscribe-block', () => {
     });
     await element.updateComplete;
 
-    shadowRoot.querySelector<HTMLElement>('md-text-button')!.click();
+    shadowRoot.querySelector<HTMLElement>('hb-button')!.click();
 
     expect(mockOpenSubscribeDialog).not.toHaveBeenCalled();
     expect(mockSubscribe).toHaveBeenCalledWith({

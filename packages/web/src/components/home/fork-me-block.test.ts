@@ -18,16 +18,16 @@ describe('fork-me-block', () => {
     expect(screen.getByTestId('fork-me')).toBeInTheDocument();
     expect(getByText('Fork this project')).toBeInTheDocument();
 
-    const link = shadowRootForWithin.querySelector('a');
+    const link = shadowRootForWithin.querySelector('hb-button');
     expect(link).toHaveAttribute('href', 'https://github.com/gdg-x/hoverboard');
   });
 
   it('renders the GitHub icon in the button trailing icon slot', async () => {
     const { shadowRoot } = await fixture(html`<fork-me-block></fork-me-block>`);
 
-    const icon = shadowRoot.querySelector('md-outlined-button hoverboard-icon');
+    const icon = shadowRoot.querySelector('hb-button hoverboard-icon');
     expect(icon).toHaveAttribute('name', 'github');
     expect(icon).toHaveAttribute('slot', 'icon');
-    expect(shadowRoot.querySelector('md-outlined-button')).toHaveAttribute('trailing-icon');
+    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('trailing-icon');
   });
 });

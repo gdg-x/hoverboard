@@ -1,11 +1,11 @@
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/text-button.js';
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
 import { openSigninDialog } from '../../store/dialogs';
 import { ThemedElement } from '../themed-element';
+import '../ui/hb-button';
 
 @customElement('auth-required')
 export class AuthRequired extends ThemedElement {
@@ -15,9 +15,9 @@ export class AuthRequired extends ThemedElement {
   override render() {
     const signedIn = this.signedIn;
     return html`
-      <md-text-button @click="${() => openSigninDialog()}" ?hidden="${signedIn}">
+      <hb-button variant="text" @click="${() => openSigninDialog()}" ?hidden="${signedIn}">
         ${msg('Sign in', { id: 'common.sign-in' })}
-      </md-text-button>
+      </hb-button>
       <slot name="prompt" ?hidden="${signedIn}"></slot>
       <slot ?hidden="${!signedIn}"></slot>
     `;

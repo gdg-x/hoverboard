@@ -27,7 +27,6 @@
     "@justinribeiro/lite-youtube": "^1.9.0",
     "@lit-labs/observers": "^2.1.0",
     "@lit/localize": "^0.12.2",
-    "@material/web": "^2.5.0",
     "@reduxjs/toolkit": "^2.13.0",
     "dompurify": "^3.4.16",
     "firebase": "^12.19.0",

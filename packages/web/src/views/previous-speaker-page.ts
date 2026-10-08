@@ -1,6 +1,6 @@
 import { Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
-import '@material/web/progress/linear-progress.js';
+import '../components/ui/hb-progress';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
@@ -160,12 +160,6 @@ export class PreviousSpeakerPage extends ThemedElement {
       font-size: 12px;
       line-height: 1;
     }
-
-    .progress {
-      width: 100%;
-      --md-linear-progress-active-indicator-color: var(--default-primary-color);
-      --md-linear-progress-track-color: var(--default-primary-color);
-    }
   `;
 
   @property({ type: Object })
@@ -252,11 +246,7 @@ export class PreviousSpeakerPage extends ThemedElement {
         </div>
       </simple-hero>
 
-      <md-linear-progress
-        class="progress"
-        indeterminate
-        ?hidden=${this.contentLoaderVisibility}
-      ></md-linear-progress>
+      <hb-progress ?hidden=${this.contentLoaderVisibility}></hb-progress>
 
       <content-loader
         class="container"

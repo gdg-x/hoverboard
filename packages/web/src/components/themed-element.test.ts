@@ -57,8 +57,10 @@ describe('themed-element', () => {
   });
 
   it('is the base class of every component', () => {
+    // The hb-* primitives only read tokens, so they skip the shared styles that the server would
+    // otherwise inline into every button's shadow root.
     const sources = import.meta.glob<string>(
-      ['../**/*.ts', '!../**/*.test.ts', '!./themed-element.ts'],
+      ['../**/*.ts', '!../**/*.test.ts', '!./themed-element.ts', '!./ui/**'],
       { query: '?raw', import: 'default', eager: true },
     );
     const offenders = Object.keys(sources).filter((path) =>

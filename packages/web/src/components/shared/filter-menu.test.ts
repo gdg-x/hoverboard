@@ -84,20 +84,19 @@ describe('filter-menu', () => {
 
   it('toggles the board and the icon when the toggle button is clicked', async () => {
     const { element, shadowRoot } = await fixture<FilterMenu>(html`<filter-menu></filter-menu>`);
-    const icon = shadowRoot.querySelector('md-outlined-button hoverboard-icon');
+    const icon = shadowRoot.querySelector('hb-button hoverboard-icon');
     expect(icon).toHaveAttribute('name', 'filter-list');
     expect(icon).toHaveAttribute('slot', 'icon');
-    expect(shadowRoot.querySelector('md-outlined-button')).toHaveAttribute('trailing-icon');
+    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('trailing-icon');
+    expect(shadowRoot.querySelector('hb-button')!.expanded).toBe(false);
 
-    shadowRoot.querySelector<HTMLElement>('md-outlined-button')!.click();
+    shadowRoot.querySelector<HTMLElement>('hb-button')!.click();
     await element.updateComplete;
 
     expect(element.opened).toBe(true);
+    expect(shadowRoot.querySelector('hb-button')!.expanded).toBe(true);
     expect(shadowRoot.querySelector('.filters-board')).toHaveAttribute('open');
-    expect(shadowRoot.querySelector('md-outlined-button hoverboard-icon')).toHaveAttribute(
-      'name',
-      'close',
-    );
+    expect(shadowRoot.querySelector('hb-button hoverboard-icon')).toHaveAttribute('name', 'close');
   });
 
   it('toggles a filter when a tag is clicked', async () => {

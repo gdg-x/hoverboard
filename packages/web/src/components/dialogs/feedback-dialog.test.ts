@@ -59,7 +59,7 @@ describe('feedback-dialog', () => {
     };
     dialog.close = vi.fn();
 
-    shadowRoot.querySelector<HTMLElement>('md-outlined-button')!.click();
+    shadowRoot.querySelector<HTMLElement>('hb-button')!.click();
 
     expect(dialog.close).toHaveBeenCalled();
   });

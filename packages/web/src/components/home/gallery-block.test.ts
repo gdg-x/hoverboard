@@ -44,7 +44,7 @@ describe('gallery-block', () => {
 
     expect(within(shadowRootForWithin).getAllByAltText('Gallery photo')).toHaveLength(2);
     expect(shadowRoot).toHaveTextContent(galleryBlock.title);
-    expect(shadowRoot.querySelector('.gallery-info a')).toHaveAttribute(
+    expect(shadowRoot.querySelector('.gallery-info hb-button')).toHaveAttribute(
       'href',
       galleryBlock.callToAction.link,
     );

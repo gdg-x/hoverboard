@@ -1,10 +1,10 @@
-import '@material/web/button/text-button.js';
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { aboutOrganizerBlock } from '../../config/site';
 import '../shared/hoverboard-icon';
 import '../markdown/short-markdown';
+import '../ui/hb-button';
 import { ThemedElement } from '../themed-element';
 
 @customElement('about-organizer-block')
@@ -77,16 +77,16 @@ export class AboutOrganizerBlock extends ThemedElement {
               <div class="block">
                 <h2>${block.title}</h2>
                 <short-markdown class="description" content="${block.description}"></short-markdown>
-                <a
+                <hb-button
+                  variant="text"
+                  class="cta-button"
                   href="${block.callToAction.link}"
-                  target="${block.callToAction.newTab ? '_blank' : ''}"
-                  rel="${block.callToAction.newTab ? 'noopener noreferrer' : ''}"
+                  .target="${block.callToAction.newTab ? '_blank' : undefined}"
+                  trailing-icon
                 >
-                  <md-text-button class="cta-button animated icon-right" trailing-icon>
-                    <span>${block.callToAction.label}</span>
-                    <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-                  </md-text-button>
-                </a>
+                  ${block.callToAction.label}
+                  <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+                </hb-button>
               </div>
             `,
           )}

@@ -1,6 +1,5 @@
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/filled-button.js';
 import { css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
@@ -13,6 +12,7 @@ import type { UserState } from '../../store/user';
 import { updateSelectionBar } from '../../utils/tab-selection-bar';
 import { navigation, title } from '../../config/site';
 import '../shared/hoverboard-icon';
+import '../ui/hb-button';
 import { navigationLabel } from './navigation-label';
 import './notification-toggle';
 import { fromStore } from '../../controllers/from-store';
@@ -208,11 +208,6 @@ export class HeaderToolbar extends ThemedElement {
       cursor: pointer;
     }
 
-    md-filled-button hoverboard-icon {
-      margin-right: 8px;
-      --iron-icon-fill-color: var(--hero-font-color);
-    }
-
     .buy-button {
       margin-top: 12px;
     }
@@ -341,11 +336,9 @@ export class HeaderToolbar extends ThemedElement {
             ${msg('Sign in', { id: 'common.sign-in' })}
           </button>
 
-          <a href="${this.ticketUrl}" target="_blank" rel="noopener noreferrer">
-            <md-filled-button class="buy-button"
-              >${msg('Buy ticket', { id: 'common.buy-ticket' })}</md-filled-button
-            >
-          </a>
+          <hb-button class="buy-button" href="${this.ticketUrl}" target="_blank"
+            >${msg('Buy ticket', { id: 'common.buy-ticket' })}</hb-button
+          >
         </nav>
 
         <notification-toggle></notification-toggle>

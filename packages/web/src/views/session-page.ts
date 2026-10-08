@@ -1,8 +1,5 @@
 import { Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
-import '@material/web/button/outlined-button.js';
-import '@material/web/fab/fab.js';
-import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import '../components/shared/add-to-calendar';
@@ -13,6 +10,9 @@ import '../components/dialogs/feedback-block';
 import '../components/hero/simple-hero';
 import '../components/shared/hoverboard-icon';
 import '../components/markdown/short-markdown';
+import '../components/ui/hb-button';
+import '../components/ui/hb-icon-button';
+import '../components/ui/hb-progress';
 import type { Session } from '../models/session';
 import type { Speaker } from '../models/speaker';
 import { goto, speakerPath } from '../utils/navigation';
@@ -222,12 +222,6 @@ export class SessionPage extends ThemedElement {
       display: flex;
       flex-wrap: wrap;
     }
-
-    .progress {
-      width: 100%;
-      --md-linear-progress-active-indicator-color: var(--default-primary-color);
-      --md-linear-progress-track-color: var(--default-primary-color);
-    }
   `;
 
   @fromStore((state) => selectSessionsState(state))
@@ -278,16 +272,16 @@ export class SessionPage extends ThemedElement {
     return !!this.sessionId && this.sessions instanceof Success;
   }
 
-  private get featuredSessionIcon() {
-    if (
+  private get isFeatured() {
+    return (
       this.featuredSessions instanceof Success &&
-      this.sessionId &&
-      this.featuredSessions.data[this.sessionId]
-    ) {
-      return 'bookmark-check';
-    } else {
-      return 'bookmark-plus';
-    }
+      !!this.sessionId &&
+      !!this.featuredSessions.data[this.sessionId]
+    );
+  }
+
+  private get featuredSessionIcon() {
+    return this.isFeatured ? 'bookmark-check' : 'bookmark-plus';
   }
 
   private toggleFeaturedSession = (event: Event) => {
@@ -367,22 +361,21 @@ export class SessionPage extends ThemedElement {
           }
 
           <div class="float-button" ?hidden="${!this.contentLoaderVisibility}">
-            <md-fab
+            <hb-icon-button
               class="laptop-fab"
-              aria-label="${toggleFeatured}"
+              variant="tonal"
+              size="l"
+              label="${toggleFeatured}"
+              .pressed="${this.isFeatured}"
               @click="${this.toggleFeaturedSession}"
             >
-              <hoverboard-icon slot="icon" name="${this.featuredSessionIcon}"></hoverboard-icon>
-            </md-fab>
+              <hoverboard-icon name="${this.featuredSessionIcon}"></hoverboard-icon>
+            </hb-icon-button>
           </div>
         </div>
       </simple-hero>
 
-      <md-linear-progress
-        class="progress"
-        indeterminate
-        ?hidden="${this.contentLoaderVisibility}"
-      ></md-linear-progress>
+      <hb-progress ?hidden="${this.contentLoaderVisibility}"></hb-progress>
 
       <content-loader
         class="container"
@@ -397,13 +390,16 @@ export class SessionPage extends ThemedElement {
 
       <div class="container content">
         <div class="float-button" ?hidden="${!this.contentLoaderVisibility}">
-          <md-fab
+          <hb-icon-button
             class="phone-fab"
-            aria-label="${toggleFeatured}"
+            variant="tonal"
+            size="l"
+            label="${toggleFeatured}"
+            .pressed="${this.isFeatured}"
             @click="${this.toggleFeaturedSession}"
           >
-            <hoverboard-icon slot="icon" name="${this.featuredSessionIcon}"></hoverboard-icon>
-          </md-fab>
+            <hoverboard-icon name="${this.featuredSessionIcon}"></hoverboard-icon>
+          </hb-icon-button>
         </div>
         <h3 class="meta-info" ?hidden="${this.disabledSchedule}">
           ${session?.dateReadable}, ${session?.startTime} - ${session?.endTime}
@@ -437,10 +433,10 @@ export class SessionPage extends ThemedElement {
           ${
             session?.videoId
               ? html`
-                  <md-outlined-button class="video-button" @click="${this.openVideo}">
+                  <hb-button variant="outlined" class="video-button" @click="${this.openVideo}">
                     <hoverboard-icon slot="icon" name="video"></hoverboard-icon>
                     ${msg('View video', { id: 'common.view-video' })}
-                  </md-outlined-button>
+                  </hb-button>
                 `
               : nothing
           }

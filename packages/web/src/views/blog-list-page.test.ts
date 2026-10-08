@@ -95,12 +95,12 @@ describe('blog-list-page', () => {
 
     element.posts = new Pending();
     await element.updateComplete;
-    expect(shadowRoot.querySelector('md-linear-progress')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('hb-progress')).not.toHaveAttribute('hidden');
     expect(shadowRoot.querySelector('content-loader')).not.toHaveAttribute('hidden');
 
     element.posts = new Success(posts);
     await element.updateComplete;
-    expect(shadowRoot.querySelector('md-linear-progress')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('hb-progress')).toHaveAttribute('hidden');
   });
 
   it('renders the failure state and hides loaders', async () => {
@@ -111,7 +111,7 @@ describe('blog-list-page', () => {
     await element.updateComplete;
 
     expect(within(shadowRootForWithin).getByText('Error loading posts.')).toBeInTheDocument();
-    expect(shadowRootForWithin.querySelector('md-linear-progress')).toHaveAttribute('hidden');
+    expect(shadowRootForWithin.querySelector('hb-progress')).toHaveAttribute('hidden');
     expect(shadowRootForWithin.querySelector('content-loader')).toHaveAttribute('hidden');
   });
 });

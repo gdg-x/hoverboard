@@ -85,7 +85,7 @@ describe('previous-speakers-page', () => {
       'Previous Speakers',
       'Check who was with us last years',
     );
-    expect(shadowRoot.querySelector('md-linear-progress')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('hb-progress')).toHaveAttribute('hidden');
   });
 
   it('labels one year or several years', async () => {

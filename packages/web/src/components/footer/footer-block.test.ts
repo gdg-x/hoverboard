@@ -21,7 +21,7 @@ describe('footer-block', () => {
       html`<footer-block data-testid="footer"></footer-block>`,
     );
     expect(screen.getByTestId('footer')).toBeInTheDocument();
-    expect(shadowRootForWithin.querySelector('[aria-label="Back to top"]')).toBeInTheDocument();
+    expect(shadowRootForWithin.querySelector('[label="Back to top"]')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('footer-social')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('footer-rel')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('footer-nav')).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe('footer-block', () => {
   it('scrolls to the top when the action is clicked', async () => {
     const { shadowRoot } = await fixture(html`<footer-block></footer-block>`);
 
-    fireEvent.click(shadowRoot.querySelector('[aria-label="Back to top"]')!);
+    fireEvent.click(shadowRoot.querySelector('[label="Back to top"]')!);
 
     expect(mockScrollToTop).toHaveBeenCalledTimes(1);
   });

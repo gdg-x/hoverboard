@@ -52,7 +52,7 @@ describe('tickets-block', () => {
     expect(shadowRoot).toHaveTextContent(ticket.name);
     expect(shadowRoot).toHaveTextContent(ticket.info);
     expect(shadowRoot.querySelector('.ticket-item')).toHaveAttribute('href', ticket.url);
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Buy ticket');
+    expect(shadowRoot.querySelector('hb-button')).toHaveTextContent('Buy ticket');
   });
 
   it('shows the discount against the primary ticket', async () => {
@@ -77,7 +77,7 @@ describe('tickets-block', () => {
 
     const link = shadowRoot.querySelector<HTMLAnchorElement>('.ticket-item')!;
     expect(link).toHaveAttribute('sold-out');
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Not available yet');
+    expect(shadowRoot.querySelector('hb-button')).toHaveTextContent('Not available yet');
 
     const event = new MouseEvent('click', { cancelable: true, bubbles: true });
     link.dispatchEvent(event);

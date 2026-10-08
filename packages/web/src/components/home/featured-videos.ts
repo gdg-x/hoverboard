@@ -1,6 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import type { Video } from '../../models/video';
@@ -8,6 +7,7 @@ import { openVideoDialog } from '../../store/ui';
 import { type VideosState, selectVideos } from '../../store/videos';
 import { featuredVideos } from '../../config/site';
 import '../shared/hoverboard-icon';
+import '../ui/hb-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -318,16 +318,16 @@ export class FeaturedVideos extends ThemedElement {
             ?hidden="${this.rightArrowHidden}"
           ></hoverboard-icon>
         </div>
-        <a
+        <hb-button
+          variant="text"
+          class="cta-button"
           href="${this.featuredVideos.callToAction.link}"
           target="_blank"
-          rel="noopener noreferrer"
+          trailing-icon
         >
-          <md-text-button class="cta-button animated icon-right" trailing-icon>
-            <span>${msg('See all videos', { id: 'home.featured-videos.cta' })}</span>
-            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-          </md-text-button>
-        </a>
+          ${msg('See all videos', { id: 'home.featured-videos.cta' })}
+          <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+        </hb-button>
       </div>
     `;
   }

@@ -1,8 +1,5 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/text-button.js';
-import '@material/web/switch/switch.js';
-import type { MdSwitch } from '@material/web/switch/switch.js';
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
@@ -29,6 +26,9 @@ import {
 import type { UserState } from '../../store/user';
 import '../shared/auth-required';
 import '../shared/hoverboard-icon';
+import '../ui/hb-button';
+import '../ui/hb-switch';
+import type { HbSwitch } from '../ui/hb-switch';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -91,9 +91,6 @@ export class NotificationToggle extends ThemedElement {
 
     .switch-row {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
     }
   `;
 
@@ -144,9 +141,9 @@ export class NotificationToggle extends ThemedElement {
             ? html`
                 <p>${msg('Enable notifications', { id: 'shell.notifications.prompt' })}</p>
                 <div class="panel-actions">
-                  <md-text-button @click="${this.requestPermission}">
+                  <hb-button variant="text" @click="${this.requestPermission}">
                     ${msg('Enable', { id: 'shell.notifications.enable' })}
-                  </md-text-button>
+                  </hb-button>
                 </div>
               `
             : ''
@@ -160,13 +157,12 @@ export class NotificationToggle extends ThemedElement {
                     id: 'shell.notifications.enabled',
                   })}
                 </p>
-                <label class="switch-row">
-                  <md-switch
-                    @change="${this.toggleGeneralNotifications}"
-                    .selected="${this.generalNotificationsSelected}"
-                  ></md-switch>
-                  ${msg('General notifications', { id: 'shell.notifications.general' })}
-                </label>
+                <hb-switch
+                  class="switch-row"
+                  .checked="${this.generalNotificationsSelected}"
+                  @change="${this.toggleGeneralNotifications}"
+                  >${msg('General notifications', { id: 'shell.notifications.general' })}</hb-switch
+                >
 
                 <auth-required>
                   <p slot="prompt">
@@ -174,13 +170,14 @@ export class NotificationToggle extends ThemedElement {
                       id: 'shell.notifications.sign-in',
                     })}
                   </p>
-                  <label class="switch-row">
-                    <md-switch
-                      @change="${this.toggleMyScheduleNotifications}"
-                      .selected="${this.notificationsUsersSubscribed}"
-                    ></md-switch>
-                    ${msg('My Schedule notifications', { id: 'shell.notifications.my-schedule' })}
-                  </label>
+                  <hb-switch
+                    class="switch-row"
+                    .checked="${this.notificationsUsersSubscribed}"
+                    @change="${this.toggleMyScheduleNotifications}"
+                    >${msg('My Schedule notifications', {
+                      id: 'shell.notifications.my-schedule',
+                    })}</hb-switch
+                  >
                 </auth-required>
               `
             : ''
@@ -194,14 +191,17 @@ export class NotificationToggle extends ThemedElement {
                   })}
                 </p>
                 <div class="panel-actions">
-                  <a href="${BLOCKED_HELP}" target="_blank" rel="noopener noreferrer">
-                    <md-text-button @click="${this.close}">
-                      ${msg('Enable', {
-                        id: 'shell.notifications.blocked-help',
-                        desc: 'Opens help on allowing notifications in the browser.',
-                      })}
-                    </md-text-button>
-                  </a>
+                  <hb-button
+                    variant="text"
+                    href="${BLOCKED_HELP}"
+                    target="_blank"
+                    @click="${this.close}"
+                  >
+                    ${msg('Enable', {
+                      id: 'shell.notifications.blocked-help',
+                      desc: 'Opens help on allowing notifications in the browser.',
+                    })}
+                  </hb-button>
                 </div>
               `
             : ''
@@ -215,14 +215,17 @@ export class NotificationToggle extends ThemedElement {
                   })}
                 </p>
                 <div class="panel-actions">
-                  <a href="${UNSUPPORTED_HELP}" target="_blank" rel="noopener noreferrer">
-                    <md-text-button @click="${this.close}">
-                      ${msg('Details', {
-                        id: 'shell.notifications.unsupported-help',
-                        desc: 'Opens a list of browsers that support notifications.',
-                      })}
-                    </md-text-button>
-                  </a>
+                  <hb-button
+                    variant="text"
+                    href="${UNSUPPORTED_HELP}"
+                    target="_blank"
+                    @click="${this.close}"
+                  >
+                    ${msg('Details', {
+                      id: 'shell.notifications.unsupported-help',
+                      desc: 'Opens a list of browsers that support notifications.',
+                    })}
+                  </hb-button>
                 </div>
               `
             : ''
@@ -288,12 +291,12 @@ export class NotificationToggle extends ThemedElement {
   };
 
   private toggleGeneralNotifications = (event: Event) => {
-    const { selected, disabled } = event.target as MdSwitch;
+    const { checked, disabled } = event.target as HbSwitch;
     if (!(this.notificationPermission instanceof Success) || disabled) {
       return;
     }
 
-    if (selected) {
+    if (checked) {
       updateNotificationsSubscribers(this.notificationPermission.data);
     } else {
       clearNotificationsSubscribers(this.notificationPermission.data);
@@ -301,12 +304,12 @@ export class NotificationToggle extends ThemedElement {
   };
 
   private toggleMyScheduleNotifications = (event: Event) => {
-    const { selected } = event.target as MdSwitch;
+    const { checked } = event.target as HbSwitch;
     if (!(this.notificationPermission instanceof Success) || !(this.user instanceof Success)) {
       return;
     }
 
-    if (selected) {
+    if (checked) {
       updateNotificationsUsers(this.user.data.uid, this.notificationPermission.data);
     } else {
       removeNotificationsUsers(this.user.data.uid, this.notificationPermission.data);
