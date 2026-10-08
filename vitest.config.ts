@@ -56,11 +56,37 @@ export default defineConfig({
         test: {
           ...web.test,
           name: `Smoke (${feature} off)`,
-          include: ['packages/web/src/**/*.smoke.test.ts'],
+          include: ['packages/web/src/hoverboard-app.smoke.test.ts'],
           exclude: configDefaults.exclude,
           provide: { featureOff: feature },
         },
       })),
+      {
+        ...web,
+        // Loads locales from the pseudo-translated build in test-locales/, so the fake locale stays
+        // out of the other projects and of production builds.
+        plugins: [
+          {
+            name: 'fake-locales',
+            enforce: 'pre',
+            transform(code, id) {
+              if (!id.endsWith('/src/utils/localization.ts')) return;
+              return code.replaceAll('../generated/locales/', '../generated/test-locales/');
+            },
+          },
+          ...web.plugins,
+        ],
+        test: {
+          ...web.test,
+          name: 'Smoke (fake locale)',
+          globalSetup: [
+            ...web.test.globalSetup,
+            './packages/web/__tests__/fake-locale.global-setup.ts',
+          ],
+          include: ['packages/web/src/localization.smoke.test.ts'],
+          exclude: configDefaults.exclude,
+        },
+      },
       {
         test: {
           name: 'Smoke (build)',

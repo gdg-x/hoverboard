@@ -1,6 +1,7 @@
 import { html, render } from 'lit';
 import { resources } from 'virtual:hoverboard/site';
 import { beforeAll, beforeEach, describe, expect, inject, it, vi } from 'vitest';
+import { queryAllDeep } from '../__tests__/helpers/dom';
 import { setFeatures } from '../__tests__/helpers/features';
 import { FEATURE_REQUIRES, FEATURES, type Feature } from './config/features';
 
@@ -90,13 +91,6 @@ for (const block of resources.footerRelBlock) {
 resources.aboutOrganizerBlock.blocks = resources.aboutOrganizerBlock.blocks.filter(
   ({ callToAction }) => !isOffPath(callToAction.link),
 );
-
-const queryAllDeep = (root: ParentNode, selector: string): Element[] => [
-  ...root.querySelectorAll(selector),
-  ...[...root.querySelectorAll('*')].flatMap((element) =>
-    element.shadowRoot ? queryAllDeep(element.shadowRoot, selector) : [],
-  ),
-];
 
 const linksToOffPages = () =>
   queryAllDeep(document, 'a[href]')
