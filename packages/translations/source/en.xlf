@@ -104,6 +104,12 @@
 <trans-unit id="common.sign-in">
   <source>Sign in</source>
 </trans-unit>
+<trans-unit id="shared.filter-menu.tags">
+  <source>Tags</source>
+</trans-unit>
+<trans-unit id="shared.filter-menu.complexity">
+  <source>Complexity</source>
+</trans-unit>
 <trans-unit id="shell.app-install.cta">
   <source>Add to Home Screen</source>
 </trans-unit>
@@ -202,6 +208,27 @@
 </trans-unit>
 <trans-unit id="shell.service-worker.error">
   <source>Error caching for offline use.</source>
+</trans-unit>
+<trans-unit id="store.featured-sessions.added">
+  <source>Session saved to My Schedule</source>
+</trans-unit>
+<trans-unit id="store.featured-sessions.removed">
+  <source>Session removed from My Schedule</source>
+</trans-unit>
+<trans-unit id="store.subscribe.success">
+  <source>Successfully subscribed!</source>
+</trans-unit>
+<trans-unit id="store.notifications.general-enabled">
+  <source>General notifications enabled</source>
+</trans-unit>
+<trans-unit id="store.notifications.general-disabled">
+  <source>General notifications disabled</source>
+</trans-unit>
+<trans-unit id="store.notifications.my-schedule-enabled">
+  <source>My Schedule notifications enabled</source>
+</trans-unit>
+<trans-unit id="store.notifications.my-schedule-disabled">
+  <source>My Schedule notifications disabled</source>
 </trans-unit>
 <trans-unit id="common.subscribe">
   <source>Subscribe</source>

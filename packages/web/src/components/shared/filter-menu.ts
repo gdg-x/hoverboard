@@ -1,3 +1,4 @@
+import { msg } from '@lit/localize';
 import '@material/web/button/outlined-button.js';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -128,6 +129,12 @@ export class FilterMenu extends ThemedElement {
     this.toggleBoard(),
   );
 
+  private groupTitle(key: FilterGroupKey) {
+    return key === FilterGroupKey.tags
+      ? msg('Tags', { id: 'shared.filter-menu.tags' })
+      : msg('Complexity', { id: 'shared.filter-menu.complexity' });
+  }
+
   override render() {
     return html`
       <div class="filters-toolbar container">
@@ -182,7 +189,7 @@ export class FilterMenu extends ThemedElement {
           ${this.filterGroups.map(
             (filterGroup) => html`
               <div class="filter-group">
-                <h3 class="filter-title">${filterGroup.title}</h3>
+                <h3 class="filter-title">${this.groupTitle(filterGroup.key)}</h3>
                 ${repeat(
                   filterGroup.filters,
                   (filter) => `${filterGroup.key}:${filter.tag}`,

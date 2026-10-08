@@ -69,7 +69,7 @@ describe('schedule-page', () => {
   it('forwards filter groups and selected filters to filter-menu', async () => {
     const mockSelectFilterGroups = selectFilterGroups as MockedFunction<typeof selectFilterGroups>;
     const mockSelectFilters = selectFilters as MockedFunction<typeof selectFilters>;
-    const filterGroups = [{ title: 'Tags', key: FilterGroupKey.tags, filters: [] }];
+    const filterGroups = [{ key: FilterGroupKey.tags, filters: [] }];
     const selectedFilters = [{ group: FilterGroupKey.tags, tag: 'web' }];
     mockSelectFilterGroups.mockReturnValue(filterGroups);
     mockSelectFilters.mockReturnValue(selectedFilters);

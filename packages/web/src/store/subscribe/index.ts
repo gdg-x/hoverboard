@@ -1,8 +1,8 @@
 import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { saveSubscriber } from '../../db/subscribers';
 import type { DialogData } from '../../models/dialog-form';
-import { subscribeBlock } from '../../config/site';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 
@@ -28,7 +28,7 @@ export const subscribe = async (data: DialogData) => {
 
   try {
     dispatch(success(await saveSubscriber(data)));
-    dispatch(queueSnackbar(subscribeBlock.toast));
+    dispatch(queueSnackbar(msg('Successfully subscribed!', { id: 'store.subscribe.success' })));
   } catch (error) {
     dispatch(failure(error as Error));
   }

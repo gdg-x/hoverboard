@@ -4,10 +4,6 @@
   "faq": "/data/faq.md",
   "coc": "/data/coc.md",
   "loading": "Loading...",
-  "bookmarked": {
-    "added": "Session saved to My Schedule",
-    "removed": "Session removed from My Schedule"
-  },
   "mySchedule": {
     "browseSession": "Browse sessions"
   },
@@ -71,9 +67,6 @@
   "mapBlock": {
     "title": "Location"
   },
-  "subscribeBlock": {
-    "toast": "Successfully subscribed!"
-  },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
   },
@@ -96,21 +89,9 @@
   "speakerDetails": {
     "sessions": "Sessions"
   },
-  "notifications": {
-    "unsubscribe": "Unsubscribe",
-    "myScheduleEnabled": "My Schedule notifications enabled",
-    "myScheduleDisabled": "My Schedule notifications disabled",
-    "generalEnabled": "General notifications enabled",
-    "generalDisabled": "General notifications disabled",
-    "toast": {
-      "title": "Open"
-    }
-  },
   "filters": {
     "title": "Filters",
     "results": "Results",
-    "tags": "Tags",
-    "complexity": "Complexity",
     "clear": "Clear all"
   },
   "aboutBlock": {

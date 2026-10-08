@@ -40,18 +40,6 @@
     "loading": {
       "type": "string"
     },
-    "bookmarked": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "added": {
-          "type": "string"
-        },
-        "removed": {
-          "type": "string"
-        }
-      }
-    },
     "mySchedule": {
       "type": "object",
       "additionalProperties": false,
@@ -273,9 +261,6 @@
       "additionalProperties": false,
       "required": ["formTitle"],
       "properties": {
-        "toast": {
-          "type": "string"
-        },
         "formTitle": {
           "type": "string"
         }
@@ -347,36 +332,6 @@
         }
       }
     },
-    "notifications": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "unsubscribe": {
-          "type": "string"
-        },
-        "myScheduleEnabled": {
-          "type": "string"
-        },
-        "myScheduleDisabled": {
-          "type": "string"
-        },
-        "generalEnabled": {
-          "type": "string"
-        },
-        "generalDisabled": {
-          "type": "string"
-        },
-        "toast": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "title": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
     "filters": {
       "type": "object",
       "additionalProperties": false,
@@ -385,12 +340,6 @@
           "type": "string"
         },
         "results": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "string"
-        },
-        "complexity": {
           "type": "string"
         },
         "clear": {

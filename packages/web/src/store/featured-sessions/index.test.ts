@@ -7,7 +7,6 @@ import reducer, {
   setUserFeaturedSessions,
 } from '.';
 import { fetchFeaturedSessions, saveFeaturedSessions } from '../../db/featured-sessions';
-import { bookmarked } from '../../config/site';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { selectUserId } from '../user';
@@ -29,6 +28,8 @@ const flushPromises = async () => {
   await Promise.resolve();
   await Promise.resolve();
 };
+
+const ADDED = 'Session saved to My Schedule';
 
 describe('featuredSessions', () => {
   it('starts in the Initialized state', () => {
@@ -59,7 +60,7 @@ describe('setUserFeaturedSessions', () => {
     vi.mocked(saveFeaturedSessions).mockResolvedValue(undefined);
     vi.mocked(queueSnackbar).mockReturnValue({
       type: 'snackbars/queueSnackbar',
-      payload: bookmarked.added,
+      payload: ADDED,
     } as never);
 
     await setUserFeaturedSessions(
@@ -80,12 +81,12 @@ describe('setUserFeaturedSessions', () => {
         payload: { 'session-1': true },
       }),
     );
-    expect(queueSnackbar).toHaveBeenCalledWith(bookmarked.added);
+    expect(queueSnackbar).toHaveBeenCalledWith(ADDED);
     expect(dispatch).toHaveBeenNthCalledWith(
       3,
       expect.objectContaining({
         type: 'snackbars/queueSnackbar',
-        payload: bookmarked.added,
+        payload: ADDED,
       }),
     );
   });
