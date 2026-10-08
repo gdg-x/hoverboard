@@ -65,6 +65,38 @@ describe('xliffErrors', () => {
 
     expect(xliffErrors(source, translated)).toEqual(['footer.block.removed: not in source/en.xlf']);
   });
+
+  it('reports markup outside placeholders', () => {
+    const translated = parseXliff(
+      xliff(`
+<trans-unit id="footer.block.back-to-top">
+  <source>Back to top</source>
+  <target>Volver &lt;img src=x onerror=alert(1)&gt; arriba</target>
+</trans-unit>`),
+    );
+
+    expect(xliffErrors(source, translated)).toEqual([
+      'footer.block.back-to-top: has markup outside its placeholders',
+    ]);
+  });
+
+  it('accepts markup inside placeholders', () => {
+    const markupSource = parseXliff(
+      xliff(`
+<trans-unit id="dialogs.signin.existing-email">
+  <source>You've already used <x id="0" equiv-text="&lt;b&gt;\${email}&lt;/b&gt;"/>.</source>
+</trans-unit>`),
+    );
+    const translated = parseXliff(
+      xliff(`
+<trans-unit id="dialogs.signin.existing-email">
+  <source>You've already used <x id="0" equiv-text="&lt;b&gt;\${email}&lt;/b&gt;"/>.</source>
+  <target>Ya usaste <x id="0" equiv-text="&lt;b&gt;\${email}&lt;/b&gt;"/>.</target>
+</trans-unit>`),
+    );
+
+    expect(xliffErrors(markupSource, translated)).toEqual([]);
+  });
 });
 
 describe('packages/translations', () => {

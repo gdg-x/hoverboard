@@ -2,6 +2,8 @@ import { html, render } from 'lit';
 import { beforeAll, describe, expect, inject, it, vi } from 'vitest';
 import { resources } from 'virtual:hoverboard/site';
 import { queryAllDeep } from '../__tests__/helpers/dom';
+import { useLocale } from '../__tests__/helpers/locale';
+import { getLocale } from './utils/localization';
 
 // Pages subscribe to Firestore when they render. Without a backend they stay loading.
 vi.mock('firebase/firestore', async (importOriginal) => ({
@@ -47,5 +49,14 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     expect(localStorage.getItem('hoverboard-locale')).toBe('en');
     expect(signInTab()).toHaveTextContent(/^Sign in$/);
     expect(document.title).toBe(resources.title);
+  });
+
+  it('switches locale with the useLocale helper', async () => {
+    await useLocale(fakeLocale);
+
+    expect(getLocale()).toBe(fakeLocale);
+    expect(document.documentElement).toHaveAttribute('lang', fakeLocale);
+    await vi.waitFor(() => expect(signInTab()).toHaveTextContent('[Sign in]'));
+    await expect(useLocale('xx')).rejects.toThrow('The site does not offer xx.');
   });
 });
