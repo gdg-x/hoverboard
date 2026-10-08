@@ -294,17 +294,6 @@
         }
       }
     },
-    "dateFormat": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["locale"],
-      "properties": {
-        "locale": {
-          "description": "A BCP 47 language tag, for example en-US.",
-          "type": "string"
-        }
-      }
-    },
     "navigation": {
       "type": "array",
       "items": {

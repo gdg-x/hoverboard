@@ -18,7 +18,7 @@ export const {
   ticketsBlock,
   title,
 } = resources;
-export const { basepath, dateFormat, heroSettings, image, organizer, url } = settings;
+export const { basepath, heroSettings, image, organizer, url } = settings;
 export const timeZone = settings.event.timezone;
 export const disabledSchedule = !settings.schedule.published;
 export const hashtag = settings.social.hashtag;

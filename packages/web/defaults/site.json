@@ -15,9 +15,6 @@
       "gdg": "#00b0ff"
     }
   },
-  "dateFormat": {
-    "locale": "en-US"
-  },
   "navigation": [
     { "route": "home", "permalink": "/" },
     { "route": "speakers", "permalink": "/speakers" },
