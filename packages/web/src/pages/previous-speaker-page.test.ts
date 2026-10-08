@@ -68,6 +68,7 @@ describe('previous-speaker-page', () => {
     expect(shadowRoot).toHaveTextContent('Engineer, Example Inc');
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'github');
     expect(shadowRoot).toHaveTextContent('An old talk');
+    expect(shadowRoot).toHaveTextContent('Year: 2023');
     expect(mockUpdateMetadata).toHaveBeenCalledWith('Ada Lovelace', 'Speaker bio', {
       image: '/ada.jpg',
       imageAlt: 'Ada Lovelace',

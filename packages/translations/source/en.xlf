@@ -128,6 +128,18 @@
 <trans-unit id="shared.filter-menu.title">
   <source>Filters</source>
 </trans-unit>
+<trans-unit id="shared.previous-speakers-block.title">
+  <source>Previous speakers</source>
+</trans-unit>
+<trans-unit id="common.loading">
+  <source>Loading...</source>
+</trans-unit>
+<trans-unit id="shared.previous-speakers-block.error">
+  <source>Error loading previous speakers.</source>
+</trans-unit>
+<trans-unit id="shared.previous-speakers-block.view-all">
+  <source>View all</source>
+</trans-unit>
 <trans-unit id="shell.app-install.cta">
   <source>Add to Home Screen</source>
 </trans-unit>
@@ -182,9 +194,6 @@
 <trans-unit id="shell.notifications.enable">
   <source>Enable</source>
 </trans-unit>
-<trans-unit id="common.loading">
-  <source>Loading...</source>
-</trans-unit>
 <trans-unit id="shell.notifications.enabled">
   <source>Get notified of general announcements and sessions starting</source>
 </trans-unit>
@@ -212,6 +221,18 @@
 <trans-unit id="shell.app.offline">
   <source>You can still work offline.</source>
 </trans-unit>
+<trans-unit id="pages.blog-list.error">
+  <source>Error loading posts.</source>
+</trans-unit>
+<trans-unit id="pages.post.published">
+  <source>Published: <x id="0" equiv-text="${published}"/></source>
+</trans-unit>
+<trans-unit id="pages.post.up-next">
+  <source>Up next</source>
+</trans-unit>
+<trans-unit id="pages.previous-speaker.year">
+  <source>Year: <x id="0" equiv-text="${session.year}"/></source>
+</trans-unit>
 <trans-unit id="schedule.day.browse-sessions">
   <source>Browse sessions</source>
 </trans-unit>
@@ -238,6 +259,9 @@
 </trans-unit>
 <trans-unit id="pages.session.feedback-closed">
   <source>Session reviews are not open</source>
+</trans-unit>
+<trans-unit id="common.sessions">
+  <source>Sessions</source>
 </trans-unit>
 <trans-unit id="shell.service-worker.installing">
   <source>App being installed for offline use.</source>
@@ -286,6 +310,14 @@
 <trans-unit id="shared.add-to-calendar.apple">
   <source>Apple Calendar</source>
   <note from="lit-localize">Downloads an .ics file for Apple Calendar and other calendar apps.</note>
+</trans-unit>
+<trans-unit id="pages.previous-speakers.years.other">
+  <source>Years:</source>
+  <note from="lit-localize">Followed by a list of years.</note>
+</trans-unit>
+<trans-unit id="pages.previous-speakers.years.one">
+  <source>Year:</source>
+  <note from="lit-localize">Followed by a year.</note>
 </trans-unit>
 <trans-unit id="pages.session.leave-feedback">
   <source>to leave feedback</source>

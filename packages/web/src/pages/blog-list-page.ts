@@ -1,4 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import '@material/web/progress/linear-progress.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
@@ -167,7 +168,11 @@ export class BlogListPage extends ThemedElement {
           ></content-loader>
 
           <div class="featured-posts-wrapper">
-            ${this.failure ? html`<p>Error loading posts.</p>` : ''}
+            ${
+              this.failure
+                ? html`<p>${msg('Error loading posts.', { id: 'pages.blog-list.error' })}</p>`
+                : ''
+            }
             ${this.featuredPosts.map(
               (post) => html`
                 <a

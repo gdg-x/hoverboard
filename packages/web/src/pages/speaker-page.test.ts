@@ -125,6 +125,7 @@ describe('speaker-page', () => {
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('.additional-sections')).not.toBeNull();
+    expect(shadowRoot).toHaveTextContent('Sessions');
     expect(shadowRoot).toHaveTextContent('A great talk');
   });
 });

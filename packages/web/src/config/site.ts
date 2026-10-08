@@ -6,7 +6,6 @@ import { isFeature, isFeatureEnabled, isNavigationRoute, type NavigationRoute } 
 export const {
   aboutBlock,
   aboutOrganizerBlock,
-  blog,
   buyTicket,
   coc,
   dates,
@@ -19,10 +18,6 @@ export const {
   loading,
   mapBlock,
   partnersBlock,
-  previousSpeakersBlock,
-  sessionDetails,
-  speakerDetails,
-  speakers,
   speakersBlock,
   subscribeBlock,
   team,

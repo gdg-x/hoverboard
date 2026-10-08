@@ -1,5 +1,6 @@
 import '@material/web/button/text-button.js';
 import { Failure, Pending } from '@abraham/remotedata';
+import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
@@ -9,7 +10,6 @@ import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
 } from '../../store/previous-speakers';
-import { loading, previousSpeakersBlock } from '../../config/site';
 import './hoverboard-icon';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
@@ -73,11 +73,21 @@ export class PreviousSpeakersBlock extends ThemedElement {
   override render() {
     return html`
       <div class="container">
-        <h1 class="container-title">${previousSpeakersBlock.title}</h1>
+        <h1 class="container-title">
+          ${msg('Previous speakers', { id: 'shared.previous-speakers-block.title' })}
+        </h1>
 
         <div class="speakers-wrapper">
-          ${this.pending ? html`<p>${loading}</p>` : ''}
-          ${this.failure ? html`<p>Error loading previous speakers.</p>` : ''}
+          ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : ''}
+          ${
+            this.failure
+              ? html`<p>
+                  ${msg('Error loading previous speakers.', {
+                    id: 'shared.previous-speakers-block.error',
+                  })}
+                </p>`
+              : ''
+          }
           ${this.speakers.map(
             (speaker) => html`
               <a class="speaker" href="${this.previousSpeakerUrl(speaker.id)}">
@@ -93,9 +103,9 @@ export class PreviousSpeakersBlock extends ThemedElement {
           )}
         </div>
 
-        <a href="${previousSpeakersBlock.callToAction.link}">
+        <a href="/previous-speakers">
           <md-text-button class="animated icon-right" trailing-icon>
-            ${previousSpeakersBlock.callToAction.label}
+            ${msg('View all', { id: 'shared.previous-speakers-block.view-all' })}
             <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
           </md-text-button>
         </a>

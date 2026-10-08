@@ -118,18 +118,6 @@
         }
       }
     },
-    "blog": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "published": {
-          "type": "string"
-        },
-        "suggested": {
-          "type": "string"
-        }
-      }
-    },
     "latestPostsBlock": {
       "type": "object",
       "additionalProperties": false,
@@ -151,43 +139,7 @@
         }
       }
     },
-    "speakers": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "skills": {
-          "type": "string"
-        },
-        "previousYears": {
-          "type": "string"
-        },
-        "previousYear": {
-          "type": "string"
-        }
-      }
-    },
     "speakersBlock": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "callToAction": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "label": {
-              "type": "string"
-            },
-            "link": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "previousSpeakersBlock": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -253,27 +205,6 @@
       "required": ["formTitle"],
       "properties": {
         "formTitle": {
-          "type": "string"
-        }
-      }
-    },
-    "sessionDetails": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "viewPresentation": {
-          "type": "string"
-        },
-        "viewVideo": {
-          "type": "string"
-        }
-      }
-    },
-    "speakerDetails": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "sessions": {
           "type": "string"
         }
       }

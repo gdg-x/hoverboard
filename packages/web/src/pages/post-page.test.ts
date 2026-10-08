@@ -98,6 +98,8 @@ describe('post-page', () => {
 
     const view = within(shadowRootForWithin);
     expect(view.getByText('First post')).toBeInTheDocument();
+    expect(view.getByText(/^Published: /)).toBeInTheDocument();
+    expect(view.getByText('Up next')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('long-markdown')).toHaveProperty(
       'content',
       'Inline first content',

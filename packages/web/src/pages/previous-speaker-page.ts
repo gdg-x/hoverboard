@@ -1,4 +1,5 @@
 import { Success } from '@abraham/remotedata';
+import { msg, str } from '@lit/localize';
 import '@material/web/progress/linear-progress.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -17,7 +18,6 @@ import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
-import { sessionDetails, speakerDetails, speakers } from '../config/site';
 import { updateImageMetadata } from '../utils/metadata';
 import { getVariableColor } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
@@ -168,10 +168,6 @@ export class PreviousSpeakerPage extends ThemedElement {
     }
   `;
 
-  private previousYear = speakers.previousYear;
-  private sessionDetails = sessionDetails;
-  private speakerDetails = speakerDetails;
-
   @property({ type: Object })
   accessor speaker: PreviousSpeaker | undefined;
   @fromStore((state) => selectPreviousSpeakersState(state))
@@ -309,7 +305,7 @@ export class PreviousSpeakerPage extends ThemedElement {
           sessions.length
             ? html`
                 <div class="additional-sections">
-                  <h3>${this.speakerDetails.sessions}</h3>
+                  <h3>${msg('Sessions', { id: 'common.sessions' })}</h3>
 
                   ${sessions.map(
                     (session) => html`
@@ -317,7 +313,7 @@ export class PreviousSpeakerPage extends ThemedElement {
                         <div class="section">
                           <div class="section-primary-text">${session.title}</div>
                           <div class="section-secondary-text">
-                            ${this.previousYear}: ${session.year}
+                            ${msg(str`Year: ${session.year}`, { id: 'pages.previous-speaker.year' })}
                           </div>
                           ${
                             session.tags.length
@@ -347,7 +343,7 @@ export class PreviousSpeakerPage extends ThemedElement {
                                       rel="noopener noreferrer"
                                     >
                                       <hoverboard-icon name="video"></hoverboard-icon>
-                                      <span>${this.sessionDetails.viewVideo}</span>
+                                      <span>${msg('View video', { id: 'common.view-video' })}</span>
                                     </a>
                                   `
                                 : nothing
@@ -362,7 +358,11 @@ export class PreviousSpeakerPage extends ThemedElement {
                                       rel="noopener noreferrer"
                                     >
                                       <hoverboard-icon name="presentation"></hoverboard-icon>
-                                      <span>${this.sessionDetails.viewPresentation}</span>
+                                      <span
+                                        >${msg('View presentation', {
+                                          id: 'common.view-presentation',
+                                        })}</span
+                                      >
                                     </a>
                                   `
                                 : nothing

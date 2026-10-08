@@ -4,7 +4,6 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
 import { router } from '../../router';
-import { loading, previousSpeakersBlock } from '../../config/site';
 import type { PreviousSpeakersBlock } from './previous-speakers-block';
 import './previous-speakers-block';
 
@@ -39,7 +38,7 @@ describe('previous-speakers-block', () => {
     element.previousSpeakers = new Pending();
     await element.updateComplete;
 
-    expect(shadowRoot).toHaveTextContent(loading);
+    expect(shadowRoot).toHaveTextContent('Loading...');
   });
 
   it('renders the error state', async () => {
@@ -63,7 +62,7 @@ describe('previous-speakers-block', () => {
     const speakerLink = shadowRoot.querySelector('a.speaker');
     expect(speakerLink).toHaveAttribute('href', '/previous-speakers/speaker-1');
     expect(speakerLink?.querySelector('img')).toHaveAttribute('alt', 'Previous Speaker');
-    expect(shadowRoot).toHaveTextContent(previousSpeakersBlock.callToAction.label);
+    expect(shadowRoot).toHaveTextContent('View all');
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute(
       'name',
       'arrow-right-circle',

@@ -26,10 +26,6 @@
       "label": "See all videos"
     }
   },
-  "blog": {
-    "published": "Published",
-    "suggested": "Up next"
-  },
   "latestPostsBlock": {
     "title": "The latest news",
     "callToAction": {
@@ -37,23 +33,11 @@
       "link": "/blog"
     }
   },
-  "speakers": {
-    "skills": "Skills",
-    "previousYears": "Years",
-    "previousYear": "Year"
-  },
   "speakersBlock": {
     "title": "Speakers",
     "callToAction": {
       "label": "View all speakers",
       "link": "/speakers"
-    }
-  },
-  "previousSpeakersBlock": {
-    "title": "Previous speakers",
-    "callToAction": {
-      "label": "View all",
-      "link": "/previous-speakers"
     }
   },
   "galleryBlock": {
@@ -63,13 +47,6 @@
   },
   "mapBlock": {
     "title": "Location"
-  },
-  "sessionDetails": {
-    "viewPresentation": "View presentation",
-    "viewVideo": "View video"
-  },
-  "speakerDetails": {
-    "sessions": "Sessions"
   },
   "aboutBlock": {
     "title": "About"
