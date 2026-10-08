@@ -19,6 +19,7 @@ export const {
   title,
 } = resources;
 export const { basepath, heroSettings, image, organizer, url } = settings;
+export const siteLocales = settings.locales as { source: string; targets: string[] };
 export const timeZone = settings.event.timezone;
 export const disabledSchedule = !settings.schedule.published;
 export const hashtag = settings.social.hashtag;

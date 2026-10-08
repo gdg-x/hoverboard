@@ -1,26 +1,24 @@
 // Writes packages/translations/source/en.xlf, the source catalog that Crowdin translates.
-// With --check, it fails instead when that file is out of date or a target locale in
-// lit-localize.json has untranslated messages.
+// With --check, it fails instead when that file is out of date or a locale the site lists in
+// site.json has untranslated messages.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join, resolve, sep } from 'node:path';
+import { dirname, join } from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
+import {
+  absolute,
+  cli,
+  config,
+  isLocale,
+  missingXliffErrors,
+  siteTargetLocales,
+  translationsRoot,
+  xliffPath,
+} from './localize-build.mjs';
 
-const webRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const translationsRoot = resolve(webRoot, '../translations');
 export const sourcePath = join(translationsRoot, 'source/en.xlf');
-const cli = join(webRoot, 'node_modules/@lit/localize-tools/bin/lit-localize.js');
-const config = JSON.parse(readFileSync(join(webRoot, 'lit-localize.json'), 'utf8'));
-
-const absolute = (pattern) => {
-  const negated = pattern.startsWith('!');
-  const path = resolve(webRoot, negated ? pattern.slice(1) : pattern)
-    .split(sep)
-    .join('/');
-  return negated ? `!${path}` : path;
-};
 
 /**
  * `lit-localize extract` only writes target locales, so this extracts to a placeholder locale in a
@@ -60,20 +58,16 @@ export const untranslated = (sourceXml, localeXml) => {
   return [...sourceXml.matchAll(UNIT)].map(([, id]) => id).filter((id) => !translated.has(id));
 };
 
-export const checkErrors = (source) => {
+export const checkErrors = (source, locales = siteTargetLocales()) => {
   const errors = [];
   if (!existsSync(sourcePath) || readFileSync(sourcePath, 'utf8') !== source) {
     errors.push(
       'packages/translations/source/en.xlf is out of date. Run `npm --prefix packages/web run localize:extract` and commit it.',
     );
   }
-  for (const locale of config.targetLocales) {
-    const path = join(translationsRoot, 'xliff', `${locale}.xlf`);
-    if (!existsSync(path)) {
-      errors.push(`${locale}: packages/translations/xliff/${locale}.xlf is missing.`);
-      continue;
-    }
-    const missing = untranslated(source, readFileSync(path, 'utf8'));
+  errors.push(...missingXliffErrors(locales));
+  for (const locale of locales.filter((code) => isLocale(code) && existsSync(xliffPath(code)))) {
+    const missing = untranslated(source, readFileSync(xliffPath(locale), 'utf8'));
     if (missing.length) errors.push(`${locale}: untranslated messages ${missing.join(', ')}`);
   }
   return errors;

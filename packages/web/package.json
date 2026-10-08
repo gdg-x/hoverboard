@@ -13,7 +13,7 @@
     "clean": "rm -rf dist",
     "lint:lit-analyzer": "lit-analyzer 'src/**/*.ts' --rules.no-incompatible-type-binding off",
     "lint:types": "npm run localize:build && tsc --noEmit",
-    "localize:build": "lit-localize build",
+    "localize:build": "node build/localize-build.mjs",
     "localize:check": "node build/localize-extract.mjs --check",
     "localize:extract": "node build/localize-extract.mjs",
     "start:vite": "mkdir -p dist && npm run localize:build && VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --watch",

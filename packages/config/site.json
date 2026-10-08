@@ -36,6 +36,10 @@
   "schedule": {
     "published": true
   },
+  "locales": {
+    "source": "en",
+    "targets": []
+  },
   "social": {
     "hashtag": "DevFest",
     "follow": [

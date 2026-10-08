@@ -33,6 +33,8 @@ export interface ConfigPaths {
   schemas: string;
   /** Where images referenced by the config must exist. */
   public: string;
+  /** UI translations, one XLIFF file per locale in `xliff/`. */
+  translations: string;
 }
 
 export interface ResolveOptions {
@@ -49,6 +51,7 @@ const RELATIVE_PATHS: ConfigPaths = {
   site: '../config',
   schemas: 'schemas',
   public: 'public',
+  translations: '../translations',
 };
 
 /** Config paths for a `packages/web` directory. */
@@ -133,8 +136,29 @@ const featureErrors = (site: Site, resources: Resources): string[] => {
   return errors;
 };
 
+// `sourceLocale` in lit-localize.json. The UI text in code is in this locale.
+const UI_SOURCE_LOCALE = 'en';
+
+const localeErrors = (site: Site, translationsDir: string): string[] => {
+  const { source, targets } = site.locales as { source: string; targets: string[] };
+  const errors = targets.includes(source)
+    ? [`site.json/locales/targets: includes the source locale "${source}"`]
+    : [];
+  for (const locale of new Set([source, ...targets])) {
+    if (
+      locale !== UI_SOURCE_LOCALE &&
+      !fs.existsSync(join(translationsDir, 'xliff', `${locale}.xlf`))
+    ) {
+      errors.push(
+        `site.json/locales: "${locale}" has no UI translations in packages/translations/xliff`,
+      );
+    }
+  }
+  return errors;
+};
+
 // Checks that JSON Schema cannot express.
-const crossFileErrors = (site: Site, resources: Resources, publicDir: string): string[] => {
+const crossFileErrors = (site: Site, resources: Resources, paths: ConfigPaths): string[] => {
   const errors = site.navigation.flatMap(({ route }, index) =>
     isNavigationRoute(route)
       ? []
@@ -149,11 +173,11 @@ const crossFileErrors = (site: Site, resources: Resources, publicDir: string): s
     ['content/resources.json/aboutOrganizerBlock/image', resources.aboutOrganizerBlock.image],
   ];
   for (const [path, image] of images) {
-    if (image && !isUrl(image) && !fs.existsSync(join(publicDir, image))) {
+    if (image && !isUrl(image) && !fs.existsSync(join(paths.public, image))) {
       errors.push(`${path}: "${image}" is not in packages/web/public`);
     }
   }
-  return [...errors, ...featureErrors(site, resources)];
+  return [...errors, ...localeErrors(site, paths.translations), ...featureErrors(site, resources)];
 };
 
 /**
@@ -181,7 +205,7 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
   const errors = [
     ...formatErrors('site.json', validateSite.errors),
     ...formatErrors('content/resources.json', validateResources.errors),
-    ...(siteValid && resourcesValid ? crossFileErrors(site, resources, paths.public) : []),
+    ...(siteValid && resourcesValid ? crossFileErrors(site, resources, paths) : []),
   ];
 
   if (siteValid) {

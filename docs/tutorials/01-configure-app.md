@@ -100,6 +100,14 @@ Define the toolbar pages and their urls in `navigation` in `packages/config/site
 ]
 ```
 
+## Languages
+
+`locales` in `packages/config/site.json` sets the languages of the site. `source` is the default locale and the language of your content. `targets` lists the other locales that visitors can pick in the footer. Every locale other than `en` needs UI translations in `packages/translations/xliff/`, and the build fails without them. None ship yet, so sites are in English only:
+
+```json
+"locales": { "source": "en", "targets": [] }
+```
+
 ## "Become a partner" - how it works?
 
 `Become a partner` button opens a form with `company name`, `name` and `email` fields. After a user (potential partner) filled a form, this data is saved into Firestore DB, `potentialPartners` node. It gives the possibility to contact back those people who are interested to be a partner with you and collaborate earlier.

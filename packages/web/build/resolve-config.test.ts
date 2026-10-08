@@ -198,6 +198,43 @@ describe('config validation', () => {
     ]);
   });
 
+  it('defaults to English only', () => {
+    const { site } = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
+
+    expect(site.locales).toEqual({ source: 'en', targets: [] });
+  });
+
+  it('requires UI translations for every locale other than en', () => {
+    expect(errorsFor({ site: { locales: { source: 'es', targets: ['en', 'pt-BR'] } } })).toEqual([
+      'site.json/locales: "es" has no UI translations in packages/translations/xliff',
+      'site.json/locales: "pt-BR" has no UI translations in packages/translations/xliff',
+    ]);
+  });
+
+  it('accepts locales that have UI translations', () => {
+    const translations = mkdtempSync(join(tmpdir(), 'hoverboard-translations-'));
+    dirsToClean.push(translations);
+    writeJson(join(translations, 'xliff/es.xlf'), '');
+    const paths = {
+      ...makePaths({ site: { locales: { source: 'es', targets: ['en'] } } }),
+      translations,
+    };
+
+    expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([]);
+  });
+
+  it('rejects the source locale in the targets', () => {
+    expect(errorsFor({ site: { locales: { source: 'en', targets: ['en'] } } })).toEqual([
+      'site.json/locales/targets: includes the source locale "en"',
+    ]);
+  });
+
+  it('rejects locale codes that are not BCP 47', () => {
+    expect(errorsFor({ site: { locales: { source: 'en', targets: ['../es'] } } })).toEqual([
+      'site.json/locales/targets/0: must match pattern "^[a-z]{2,3}(-[A-Z][a-z]{3})?(-([A-Z]{2}|\\d{3}))?$"',
+    ]);
+  });
+
   it('rejects unknown features', () => {
     expect(errorsFor({ site: { features: { sponsors: true } } })).toEqual([
       'site.json/features: must NOT have additional properties "sponsors"',
