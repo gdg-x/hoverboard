@@ -1,20 +1,9 @@
-import { spawnSync, type SpawnSyncReturns } from 'node:child_process';
-import {
-  cpSync,
-  mkdtempSync,
-  readdirSync,
-  readFileSync,
-  realpathSync,
-  rmSync,
-  symlinkSync,
-} from 'node:fs';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { cpSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { buildSite, type SiteBuild } from '../__tests__/helpers/build-site';
 
-const webRoot = fileURLToPath(new URL('..', import.meta.url));
-const fixture = join(webRoot, '__tests__/fixtures/minimal-site');
+const fixture = fileURLToPath(new URL('../__tests__/fixtures/minimal-site', import.meta.url));
 
 // Pages and home blocks of features that are all off in the fixture.
 const DROPPED_CHUNKS = [
@@ -42,51 +31,24 @@ const DROPPED_CHUNKS = [
 ];
 
 describe('a production build of a minimal site', () => {
-  let root: string;
-  let dist: string;
-  let build: SpawnSyncReturns<string>;
+  let build: SiteBuild;
 
   beforeAll(() => {
-    // A copy of packages/web next to the fixture as packages/config, so the real dist is untouched.
-    // macOS links /var to /private/var. Astro needs its root as a real path to match module paths.
-    root = realpathSync(mkdtempSync(join(tmpdir(), 'hoverboard-build-')));
-    const web = join(root, 'packages/web');
-    const skip = new Set(['node_modules', 'dist', '.astro'].map((name) => join(webRoot, name)));
-    cpSync(webRoot, web, { recursive: true, filter: (source) => !skip.has(source) });
-    symlinkSync(join(webRoot, 'node_modules'), join(web, 'node_modules'), 'junction');
-    cpSync(fixture, join(root, 'packages/config'), { recursive: true });
-    dist = join(web, 'dist');
-
-    const env = {
-      ...Object.fromEntries(
-        Object.entries(process.env).filter(([key]) => !key.startsWith('VITEST')),
-      ),
-      FIRESTORE_TARGET: 'none',
-    };
-    build = spawnSync('npm', ['run', 'build'], { cwd: web, env, encoding: 'utf8' });
+    build = buildSite((configDir) => cpSync(fixture, configDir, { recursive: true }));
   });
 
-  afterAll(() => {
-    rmSync(root, { recursive: true, force: true });
-  });
+  afterAll(() => build.remove());
 
   it('builds', () => {
     expect(build.status, build.stderr).toBe(0);
   });
 
   it('builds only the home, not found and offline pages when every feature is off', () => {
-    const pages = readdirSync(dist, { recursive: true, encoding: 'utf8' }).filter((file) =>
-      file.endsWith('.html'),
-    );
-
-    expect(pages.sort()).toEqual(['404.html', 'index.html', 'offline.html']);
-    expect(readFileSync(join(dist, 'index.html'), 'utf8')).toMatch(
-      /<home-page[^>]*><template shadowroot="open" shadowrootmode="open">/,
-    );
+    expect(build.pages).toEqual(['404.html', 'index.html', 'offline.html']);
   });
 
   it('renders the site config into the layout', () => {
-    const page = readFileSync(join(dist, '404.html'), 'utf8');
+    const page = build.read('404.html');
 
     expect(page).toContain('<title>Not Found | Minimal Fest</title>');
     expect(page).toMatch(/<html [^>]*lang="en"/);
@@ -94,27 +56,34 @@ describe('a production build of a minimal site', () => {
     expect(page).not.toContain('maps.googleapis.com');
   });
 
-  it('renders the components on the server', () => {
-    const page = readFileSync(join(dist, '404.html'), 'utf8');
+  it('renders the components and their text on the server', () => {
+    const notFound = build.read('404.html');
+    const home = build.read('index.html');
 
-    expect(page).toMatch(/<not-found-page[^>]*><template shadowroot="open" shadowrootmode="open">/);
-    expect(page).toMatch(/<footer-block[^>]*><template shadowroot="open" shadowrootmode="open">/);
+    expect(notFound).toMatch(
+      /<not-found-page[^>]*><template shadowroot="open" shadowrootmode="open">/,
+    );
+    expect(notFound).toMatch(
+      /<div class="hero-title">(<!--[^>]*-->)*Not Found(<!--[^>]*-->)*<\/div>/,
+    );
+    expect(notFound).toMatch(
+      /<footer-block[^>]*><template shadowroot="open" shadowrootmode="open">/,
+    );
+    expect(home).toMatch(/<home-page[^>]*><template shadowroot="open" shadowrootmode="open">/);
+    expect(home).toContain('A minimal site');
+    expect(home).toMatch(/<header-toolbar[^>]*><template shadowroot="open" shadowrootmode="open">/);
   });
 
   it('writes the service workers and the manifest', () => {
-    const files = readdirSync(dist);
-
-    expect(files).toEqual(
-      expect.arrayContaining(['service-worker.js', 'firebase-messaging-sw.js', 'manifest.json']),
-    );
-    expect(JSON.parse(readFileSync(join(dist, 'manifest.json'), 'utf8'))).toMatchObject({
+    expect(build.read('firebase-messaging-sw.js')).not.toBe('');
+    expect(JSON.parse(build.read('manifest.json'))).toMatchObject({
       short_name: 'Minimal',
       lang: 'en',
     });
   });
 
   it('precaches the scripts and the home and offline pages', () => {
-    const worker = readFileSync(join(dist, 'service-worker.js'), 'utf8');
+    const worker = build.read('service-worker.js');
     const precached = [...worker.matchAll(/url:"([^"]+)"/g)].map((match) => match[1] ?? '');
 
     expect(precached.filter((url) => url.endsWith('.html')).sort()).toEqual([
@@ -126,12 +95,7 @@ describe('a production build of a minimal site', () => {
   });
 
   it('leaves out the pages and blocks of features that are off', () => {
-    const chunks = readdirSync(join(dist, '_astro')).filter((file) => file.endsWith('.js'));
-    const chunkName = (file: string) => file.replace(/\.[\w-]{8}\.js$/, '');
-
-    expect(chunks.map(chunkName)).toEqual(
-      expect.arrayContaining(['footer-block', 'not-found-page']),
-    );
-    expect(chunks.map(chunkName).filter((name) => DROPPED_CHUNKS.includes(name))).toEqual([]);
+    expect(build.chunks).toEqual(expect.arrayContaining(['footer-block', 'not-found-page']));
+    expect(build.chunks.filter((name) => DROPPED_CHUNKS.includes(name))).toEqual([]);
   });
 });

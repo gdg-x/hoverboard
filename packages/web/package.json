@@ -11,6 +11,7 @@
   "scripts": {
     "build": "npm run clean && npm run localize:build && NODE_ENV=production astro build && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --config vite.sw.config.ts",
     "clean": "rm -rf dist",
+    "lint:astro": "npm run localize:build && astro check",
     "lint:lit-analyzer": "lit-analyzer 'src/**/*.ts' --rules.no-incompatible-type-binding off",
     "lint:types": "npm run localize:build && tsc --noEmit",
     "localize:build": "node build/localize-build.mjs",
@@ -34,6 +35,7 @@
     "workbox-window": "^7.4.1"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@awesome.me/astro-lit": "^5.0.4",
     "@babel/core": "^8.0.6",
     "@babel/plugin-proposal-decorators": "^8.0.2",

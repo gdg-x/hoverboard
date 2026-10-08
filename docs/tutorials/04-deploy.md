@@ -22,6 +22,8 @@ Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#bi
 
    `./hbd deploy` checks your Node.js version and Firebase project first, prints which project it's about to deploy to, and asks for confirmation before building and deploying. Run `./hbd deploy --yes` to skip the confirmation prompt, e.g. in a scripted context.
 
+   The build renders every page from the content in your production Firestore. It reads it with your Firebase CLI login (`npx firebase login`). After you change content in Firestore, deploy again to update the pages. Visitors' browsers still load the latest content after the page loads.
+
    The URL to your live site is listed in the output.
 
 ## Continuous integration with Github Actions

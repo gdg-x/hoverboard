@@ -87,6 +87,17 @@ describe('readContent', () => {
     expect(queries).not.toContain('group items by order asc');
     expect(content).toHaveProperty('speakers');
   });
+
+  it('reads sessions for the speakers page while the schedule is off', async () => {
+    setFeatures({ schedule: false });
+    const { db } = fakeFirestore();
+
+    expect(await readContent(db)).toHaveProperty('sessions');
+
+    setFeatures({ schedule: false, speakers: false });
+
+    expect(await readContent(db)).not.toHaveProperty('sessions');
+  });
 });
 
 describe('loadContent', () => {

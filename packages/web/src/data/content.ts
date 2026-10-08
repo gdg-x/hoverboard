@@ -23,7 +23,7 @@ const read = async (
   map: (doc: QueryDocumentSnapshot) => DocumentData,
 ): Promise<DocumentData[]> => (await query.get()).docs.map(map);
 
-// The same queries as the subscriptions in src/db/, and the feature each one belongs to.
+// The same queries as the subscriptions in src/db/, and the features that read each one.
 const LOADERS = {
   blog: ['blog', (db) => read(db.collection('blog').orderBy('published', 'desc'), withId)],
   gallery: ['gallery', (db) => read(db.collection('gallery').orderBy('order'), withId)],
@@ -35,15 +35,24 @@ const LOADERS = {
     (db) => read(db.collection('previousSpeakers').orderBy('name'), withId),
   ],
   schedule: ['schedule', (db) => read(db.collection('generatedSchedule').orderBy('date'), withId)],
-  sessions: ['schedule', (db) => read(db.collection('generatedSessions').orderBy('id'), withId)],
+  // The speakers page builds its filters from session tags.
+  sessions: [
+    ['schedule', 'speakers'],
+    (db) => read(db.collection('generatedSessions').orderBy('id'), withId),
+  ],
   speakers: ['speakers', (db) => read(db.collection('generatedSpeakers').orderBy('name'), withId)],
   teams: ['team', (db) => read(db.collection('team').orderBy('title'), withId)],
   tickets: ['tickets', (db) => read(db.collection('tickets').orderBy('order'), withId)],
   videos: ['videos', (db) => read(db.collection('videos').orderBy('order'), withId)],
-} satisfies Record<keyof Content, [Feature, (db: Firestore) => Promise<DocumentData[]>]>;
+} satisfies Record<
+  keyof Content,
+  [Feature | Feature[], (db: Firestore) => Promise<DocumentData[]>]
+>;
 
 const enabledLoaders = () =>
-  Object.entries(LOADERS).filter(([, [feature]]) => __HB_FEATURES__[feature]);
+  Object.entries(LOADERS).filter(([, [features]]) =>
+    [features].flat().some((feature) => __HB_FEATURES__[feature]),
+  );
 
 /** Reads the content of the enabled features. Disabled features have no key. */
 export const readContent = async (db: Firestore): Promise<Partial<Content>> => {

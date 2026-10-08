@@ -88,7 +88,9 @@ const demoFirebaseConfig = {
     <meta content="image/jpeg" property="og:image:type" />
 
     <meta content="summary_large_image" name="twitter:card" />
-    {site.organizer.twitter && <meta content={`@${site.organizer.twitter}`} name="twitter:creator" />}
+    {site.organizer.twitter && (
+      <meta content={`@${site.organizer.twitter}`} name="twitter:creator" />
+    )}
     <meta content={title} name="twitter:title" />
     <meta content={description} name="twitter:description" />
     <meta content={image} name="twitter:image" />
@@ -101,35 +103,29 @@ const demoFirebaseConfig = {
     <style is:inline set:html={themeCss} />
     {mapsScript && <script async defer is:inline src={mapsScript} />}
 
-    {
-      import.meta.env.DEV ? (
-        <script is:inline define:vars={{ demoFirebaseConfig }}>
-          window.firebaseConfig = demoFirebaseConfig;
+    {import.meta.env.DEV ? (
+      <script is:inline define:vars={{ demoFirebaseConfig }}>
+        window.firebaseConfig = demoFirebaseConfig;
+      </script>
+    ) : (
+      <Fragment>
+        <script is:inline>
+          // Capture the config object from /__/firebase/init.js for src/firebase.ts
+          window.firebase = {
+            initializeApp: (config) => {
+              window.firebaseConfig = config;
+              delete window.firebase;
+            },
+          };
         </script>
-      ) : (
-        <Fragment>
-          <script is:inline>
-            // Capture the config object from /__/firebase/init.js for src/firebase.ts
-            window.firebase = {
-              initializeApp: (config) => {
-                window.firebaseConfig = config;
-                delete window.firebase;
-              },
-            };
-          </script>
-          <script is:inline src="/__/firebase/init.js" />
-        </Fragment>
-      )
-    }
+        <script is:inline src="/__/firebase/init.js" />
+      </Fragment>
+    )}
 
-    {
-      import.meta.env.DEV && (
-        <script is:inline define:vars={{ features: site.features }}>
-          // The build inlines the flags. In development Vite sets them in /@vite/env, which loads too late.
-          globalThis.__HB_FEATURES__ = features;
-        </script>
-      )
-    }
+    {import.meta.env.DEV && <script is:inline define:vars={{ features: site.features }}>
+      // The build inlines the flags. In development Vite sets them in /@vite/env, which loads too late.
+      globalThis.__HB_FEATURES__ = features;
+    </script>}
 
     <script
       is:inline
@@ -171,12 +167,7 @@ const demoFirebaseConfig = {
   </head>
 
   <body>
-    <AppHeader
-      path={`/${path}`}
-      client:load
-      transition:persist="header"
-      transition:persist-props
-    />
+    <AppHeader path={`/${path}`} client:load transition:persist="header" transition:persist-props />
     <main>
       <slot />
     </main>

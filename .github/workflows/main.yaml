@@ -44,7 +44,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [Web, Server, Functions, CLI, Firestore, Translations]
+        project: [Web, Server, Hydration, Functions, CLI, Firestore, Translations]
 
     steps:
       - name: Checkout the repo
@@ -76,7 +76,7 @@ jobs:
       - name: Running ${{ matrix.project }} tests
         run: npx vitest run --project ${{ matrix.project }}
 
-  # Renders the app with each feature off, and builds a minimal site.
+  # Builds the site with each feature off, and builds a minimal site.
   smoke:
     runs-on: ubuntu-latest
     name: smoke
