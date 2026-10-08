@@ -6,6 +6,7 @@ import { ThemedElement } from '../themed-element';
 import './footer-nav';
 import './footer-rel';
 import './footer-social';
+import './locale-picker';
 import '../shared/hoverboard-icon';
 
 @customElement('footer-block')
@@ -74,6 +75,7 @@ export class FooterBlock extends ThemedElement {
         <footer-social class="footer-social"></footer-social>
         <footer-rel></footer-rel>
         <footer-nav class="footer-nav"></footer-nav>
+        <locale-picker></locale-picker>
       </div>
     `;
   }

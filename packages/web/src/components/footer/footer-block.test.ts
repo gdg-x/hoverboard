@@ -25,6 +25,7 @@ describe('footer-block', () => {
     expect(shadowRootForWithin.querySelector('footer-social')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('footer-rel')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('footer-nav')).toBeInTheDocument();
+    expect(shadowRootForWithin.querySelector('locale-picker')).toBeInTheDocument();
   });
 
   it('scrolls to the top when the action is clicked', async () => {
