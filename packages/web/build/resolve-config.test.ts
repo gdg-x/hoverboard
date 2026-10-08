@@ -198,6 +198,18 @@ describe('config validation', () => {
     ]);
   });
 
+  it('takes hero descriptions from content/resources.json, not site.json', () => {
+    expect(
+      errorsFor({
+        site: { heroSettings: { home: { description: 'Welcome' } } },
+        resources: { heroDescriptions: { teams: 'Organizers' } },
+      }),
+    ).toEqual([
+      'site.json/heroSettings/home: must NOT have additional properties "description"',
+      'content/resources.json/heroDescriptions: must NOT have additional properties "teams"',
+    ]);
+  });
+
   it('defaults to English only', () => {
     const { site } = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
 

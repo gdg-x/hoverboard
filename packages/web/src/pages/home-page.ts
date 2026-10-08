@@ -12,8 +12,9 @@ import '../components/shared/hoverboard-icon';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
-import { aboutBlock, dates, heroSettings, location, title } from '../config/site';
+import { aboutBlock, heroDescriptions, heroSettings, location, title } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
+import { getEventDates } from '../utils/dates';
 import { POSITION, scrollToElement } from '../utils/scrolling';
 import { ThemedElement } from '../components/themed-element';
 
@@ -182,7 +183,7 @@ export class HomePage extends ThemedElement {
     return title;
   }
   private get dates() {
-    return dates;
+    return getEventDates();
   }
   private heroSettings = heroSettings.home;
   private get aboutBlock() {
@@ -256,7 +257,7 @@ export class HomePage extends ThemedElement {
 
           <div class="info-items">
             <div class="info-item">${this.city}. ${this.dates}</div>
-            <div class="info-item">${this.heroSettings.description}</div>
+            <div class="info-item">${heroDescriptions.home}</div>
           </div>
 
           <div class="action-buttons">

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { heroSettings } from '../../config/site';
+import { heroDescriptions } from '../../config/site';
 import type { SimpleHero } from './simple-hero';
 import './simple-hero';
 
@@ -31,7 +31,7 @@ describe('simple-hero', () => {
 
     expect(shadowRoot.querySelector('.hero-title')).toHaveTextContent('Speakers');
     expect(shadowRoot.querySelector('.hero-description')).toHaveTextContent(
-      heroSettings.speakers.description,
+      heroDescriptions.speakers,
     );
   });
 

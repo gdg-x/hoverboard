@@ -14,7 +14,8 @@ import { DIALOG, selectIsDialogOpen } from './store/dialogs';
 import { queueSnackbar } from './store/snackbars';
 import { type TicketsState, selectTickets } from './store/tickets';
 import type { DrawerOpenedChanged } from './utils/drawer';
-import { dates, location, navigation, signInProviders, title } from './config/site';
+import { location, navigation, signInProviders, title } from './config/site';
+import { getEventDates } from './utils/dates';
 import './utils/media-query';
 import { startLocalization } from './utils/localization';
 import type { Stickied } from './utils/stickied';
@@ -153,7 +154,7 @@ export class HoverboardApp extends ThemedElement {
     return title;
   }
   private get dates() {
-    return dates;
+    return getEventDates();
   }
   private navigation = navigation;
   private shortLocation = location.short;

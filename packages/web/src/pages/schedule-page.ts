@@ -15,14 +15,11 @@ import { type ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { type SessionsState, selectSessionsState } from '../store/sessions';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
-import { contentLoaders, heroSettings } from '../config/site';
+import { contentLoaders, heroDescriptions } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { pageText } from '../utils/page-text';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
-
-// A site can give the schedule page a description in site.json.
-const { description } = (heroSettings as { schedule?: { description?: string } }).schedule ?? {};
 
 @customElement('schedule-page')
 export class SchedulePage extends ThemedElement {
@@ -77,6 +74,8 @@ export class SchedulePage extends ThemedElement {
   }
 
   override render() {
+    // A site can give the schedule page a description in content/resources.json.
+    const { schedule: description } = heroDescriptions as { schedule?: string };
     return html`
       <hero-block>
         <div class="hero-title">${pageText('schedule').title}</div>

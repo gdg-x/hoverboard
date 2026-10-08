@@ -8,6 +8,7 @@ export const { coc, faq } = resources;
 export const { basepath, heroSettings, image, organizer, url } = settings;
 export const siteLocales = settings.locales as { source: string; targets: string[] };
 export const timeZone = settings.event.timezone;
+export const eventDates = { start: settings.event.startDate, end: settings.event.endDate };
 export const disabledSchedule = !settings.schedule.published;
 export const hashtag = settings.social.hashtag;
 export const mailto = settings.organizer.email;
@@ -17,11 +18,11 @@ export const socialNetwork = { follow: settings.social.follow };
 export let {
   aboutBlock,
   aboutOrganizerBlock,
-  dates,
   description,
   featuredVideos,
   footerRelBlock,
   galleryBlock,
+  heroDescriptions,
   subscribeBlock,
   team,
   ticketsBlock,
@@ -42,11 +43,11 @@ export const loadContent = async (locale: string): Promise<void> => {
   ({
     aboutBlock,
     aboutOrganizerBlock,
-    dates,
     description,
     featuredVideos,
     footerRelBlock,
     galleryBlock,
+    heroDescriptions,
     subscribeBlock,
     team,
     ticketsBlock,

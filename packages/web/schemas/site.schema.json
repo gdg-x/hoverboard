@@ -333,7 +333,7 @@
       }
     },
     "heroSettings": {
-      "description": "The top block of each page.",
+      "description": "The top block of the home page. The text under each page title is heroDescriptions in content/resources.json.",
       "type": "object",
       "additionalProperties": false,
       "required": ["home"],
@@ -341,11 +341,8 @@
         "home": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["description", "background"],
+          "required": ["background"],
           "properties": {
-            "description": {
-              "type": "string"
-            },
             "background": {
               "type": "object",
               "additionalProperties": false,
@@ -357,30 +354,6 @@
               }
             }
           }
-        },
-        "blog": {
-          "$ref": "#/$defs/hero"
-        },
-        "speakers": {
-          "$ref": "#/$defs/hero"
-        },
-        "previousSpeakers": {
-          "$ref": "#/$defs/hero"
-        },
-        "schedule": {
-          "$ref": "#/$defs/hero"
-        },
-        "team": {
-          "$ref": "#/$defs/hero"
-        },
-        "faq": {
-          "$ref": "#/$defs/hero"
-        },
-        "coc": {
-          "$ref": "#/$defs/hero"
-        },
-        "notFound": {
-          "$ref": "#/$defs/hero"
         }
       }
     },
@@ -486,15 +459,6 @@
       },
       "additionalProperties": {
         "$ref": "#/$defs/color"
-      }
-    },
-    "hero": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "description": {
-          "type": "string"
-        }
       }
     }
   }
