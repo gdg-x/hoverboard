@@ -54,6 +54,25 @@ describe('a production build of a minimal site', () => {
     expect(page).toMatch(/<html [^>]*lang="en"/);
     expect(page).toMatch(/<link href="https:\/\/minimal-site\.web\.app\/404" rel="canonical"/);
     expect(page).not.toContain('maps.googleapis.com');
+    expect(page).toContain('<meta content="en" property="og:locale">');
+    expect(page).not.toContain('<noscript>');
+  });
+
+  it('describes the event for search engines on the home page only', () => {
+    const jsonLd = (file: string) =>
+      [...build.read(file).matchAll(/<script type="application\/ld\+json">([^<]*)<\/script>/g)].map(
+        ([, json]) => JSON.parse(json ?? '') as Record<string, unknown>,
+      );
+
+    expect(jsonLd('index.html')).toEqual([
+      expect.objectContaining({
+        '@type': 'Event',
+        name: 'Minimal Fest',
+        startDate: '2027-10-15',
+        url: 'https://minimal-site.web.app/',
+      }),
+    ]);
+    expect(jsonLd('404.html')).toEqual([]);
   });
 
   it('renders the components and their text on the server', () => {
