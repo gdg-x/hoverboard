@@ -14,7 +14,7 @@ import { store } from '../store';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
 import { updateImageMetadata } from '../utils/metadata';
-import { getVariableColor } from '../utils/styles';
+import { variableColor } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
@@ -178,15 +178,15 @@ export class SpeakerPage extends ThemedElement {
   @property({ attribute: false })
   accessor speakerId: string | undefined;
 
-  override updated(changed: Map<string, unknown>) {
-    if (changed.has('speakers') || changed.has('speakerId')) {
-      this.updateSpeaker();
+  // Runs on the server too, so the page renders the speaker. Side effects wait for `updated`.
+  override willUpdate(changed: Map<string, unknown>) {
+    if ((changed.has('speakers') || changed.has('speakerId')) && this.isLoaded) {
+      this.speaker = selectSpeaker(store.getState(), this.speakerId!);
     }
   }
 
-  private updateSpeaker() {
-    if (this.speakerId && this.speakers instanceof Success) {
-      this.speaker = selectSpeaker(store.getState(), this.speakerId);
+  override updated(changed: Map<string, unknown>) {
+    if ((changed.has('speakers') || changed.has('speakerId')) && this.isLoaded) {
       if (!this.speaker) {
         router.goto('/404');
       } else {
@@ -196,6 +196,10 @@ export class SpeakerPage extends ThemedElement {
         });
       }
     }
+  }
+
+  private get isLoaded() {
+    return !!this.speakerId && this.speakers instanceof Success;
   }
 
   private get contentLoaderVisibility() {
@@ -215,7 +219,7 @@ export class SpeakerPage extends ThemedElement {
   }
 
   private getVariableColor(value: string) {
-    return getVariableColor(this, value);
+    return variableColor(value);
   }
 
   private sessionUrl(id: string) {

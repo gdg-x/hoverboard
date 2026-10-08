@@ -6,6 +6,8 @@ import type { MdMenu } from '@material/web/menu/menu.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import type { Session } from '../../models/session';
+import { url } from '../../config/site';
+import { router } from '../../router';
 import { downloadIcs, googleCalendarUrl, sessionToCalendarEvent } from '../../utils/calendar';
 import { ThemedElement } from '../themed-element';
 import './hoverboard-icon';
@@ -26,7 +28,9 @@ export class AddToCalendar extends ThemedElement {
   private accessor menu!: MdMenu;
 
   private get event() {
-    return this.session ? sessionToCalendarEvent(this.session, window.location.href) : undefined;
+    if (!this.session) return undefined;
+    const path = router.urlForName('session-page', { id: this.session.id });
+    return sessionToCalendarEvent(this.session, new URL(path.slice(1), url).href);
   }
 
   private toggleMenu = () => {

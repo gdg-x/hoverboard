@@ -8,6 +8,7 @@ import '../components/shared/posts-list';
 import { StoreController } from '../controllers/store-controller';
 import type { Post } from '../models/post';
 import { router } from '../router';
+import { store } from '../store';
 import { type BlogState, selectBlogPosts } from '../store/blog';
 import { getDate } from '../utils/dates';
 import { fetchText } from '../utils/fetch-text';
@@ -41,8 +42,9 @@ export class PostPage extends ThemedElement {
     }
   `;
 
-  @property({ type: Object })
-  accessor posts: BlogState = new Initialized();
+  // Starts from the store, so a page seeded on the server renders its post.
+  @property({ attribute: false })
+  accessor posts: BlogState = selectBlogPosts(store.getState());
 
   @property({ attribute: false })
   accessor postId: string | undefined;
@@ -59,36 +61,46 @@ export class PostPage extends ThemedElement {
   private readonly postsStore = new StoreController(this, selectBlogPosts, {
     onChange: (value) => {
       this.posts = value;
-      this.updatePost();
     },
   });
 
-  override updated(changed: Map<string, unknown>) {
-    if (changed.has('postId')) {
-      this.updatePost();
+  private get foundPost(): Post | undefined {
+    return this.posts instanceof Success
+      ? this.posts.data.find(({ id }) => id === this.postId)
+      : undefined;
+  }
+
+  private get isLoaded() {
+    return !!this.postId && this.posts instanceof Success;
+  }
+
+  // Runs on the server too, so the page renders the post. Side effects wait for `updated`.
+  override willUpdate(changed: Map<string, unknown>) {
+    if ((changed.has('posts') || changed.has('postId')) && this.isLoaded) {
+      const post = this.foundPost;
+      if (post) {
+        this.post = new Success(post);
+        this.postContent = post.content;
+        this.suggestedPosts = (this.posts as Success<Post[]>).data
+          .filter(({ id }) => id !== post.id)
+          .slice(0, 3);
+      }
     }
   }
 
-  private updatePost() {
-    const postId = this.postId;
-    if (!postId || !(this.posts instanceof Success)) {
-      return;
+  override updated(changed: Map<string, unknown>) {
+    if ((changed.has('posts') || changed.has('postId')) && this.isLoaded) {
+      const post = this.foundPost;
+      if (!post) {
+        router.goto('/404');
+        return;
+      }
+      updateImageMetadata(post.title, post.brief, {
+        image: post.image,
+        imageAlt: post.title,
+      });
+      void this.loadPostContent(post);
     }
-
-    const post = this.posts.data.find(({ id }) => id === postId);
-    if (!post) {
-      router.goto('/404');
-      return;
-    }
-
-    this.post = new Success(post);
-    this.postContent = post.content;
-    this.suggestedPosts = this.posts.data.filter(({ id }) => id !== postId).slice(0, 3);
-    updateImageMetadata(post.title, post.brief, {
-      image: post.image,
-      imageAlt: post.title,
-    });
-    void this.loadPostContent(post);
   }
 
   private async loadPostContent(post: Post) {

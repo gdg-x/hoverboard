@@ -76,7 +76,7 @@ describe('a production build of a minimal site', () => {
 
     expect(page).toContain('<title>Not Found | Minimal Fest</title>');
     expect(page).toMatch(/<html [^>]*lang="en"/);
-    expect(page).toMatch(/<link href="https:\/\/minimal-site\.web\.app\/" rel="canonical"/);
+    expect(page).toMatch(/<link href="https:\/\/minimal-site\.web\.app\/404" rel="canonical"/);
     expect(page).not.toContain('maps.googleapis.com');
   });
 

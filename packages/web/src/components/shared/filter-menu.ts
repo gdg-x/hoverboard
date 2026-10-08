@@ -9,7 +9,7 @@ import type { Filter } from '../../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import { clearFilters, toggleFilter } from '../../utils/filters';
 import { getLocale } from '../../utils/localization';
-import { generateClassName, getVariableColor } from '../../utils/styles';
+import { generateClassName, variableColor } from '../../utils/styles';
 import './hoverboard-icon';
 import { ThemedElement } from '../themed-element';
 
@@ -266,7 +266,7 @@ export class FilterMenu extends ThemedElement {
   }
 
   private getVariableColor(value: string, fallback: string) {
-    return getVariableColor(this, value, fallback) ?? '';
+    return variableColor(value, fallback);
   }
 }
 

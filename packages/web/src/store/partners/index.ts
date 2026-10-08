@@ -8,7 +8,7 @@ import {
 } from '../../db/partners';
 import type { Partner } from '../../models/partner';
 import type { PartnerGroup, PartnerGroupWithoutItems } from '../../models/partner-group';
-import { registerContentSubscriber, seedContent } from '../content';
+import { registerContentSubscriber, resetContent, seedContent } from '../content';
 
 export type PartnerGroupsState = RemoteData<Error, PartnerGroup[]>;
 
@@ -85,6 +85,7 @@ const partnersSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(resetContent, () => initialState);
     builder.addCase(seedContent, (state, { payload }) => {
       if (payload.partners) state.partners = new Success(payload.partners);
       if (payload.partnerGroups) state.groups = new Success(payload.partnerGroups);

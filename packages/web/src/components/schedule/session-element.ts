@@ -17,7 +17,7 @@ import type { UserState } from '../../store/user';
 import { acceptingFeedback } from '../../utils/feedback';
 import { getLocale } from '../../utils/localization';
 import { getSummary } from '../../utils/strings';
-import { getVariableColor } from '../../utils/styles';
+import { variableColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
 import '../shared/text-truncate';
 import { fromStore } from '../../controllers/from-store';
@@ -375,7 +375,7 @@ export class SessionElement extends ThemedElement {
   }
 
   private getVariableColor(value: string) {
-    return getVariableColor(this, value);
+    return variableColor(value);
   }
 
   private sessionUrl(id: string | undefined) {

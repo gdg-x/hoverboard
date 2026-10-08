@@ -1,4 +1,4 @@
-import { css, html } from 'lit';
+import { css, html, isServer } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ThemedElement } from '../themed-element';
 
@@ -128,6 +128,8 @@ export class ContentLoader extends ThemedElement {
   @property({ type: Number }) accessor itemsCount = 0;
 
   override willUpdate() {
+    // Server-rendered elements have no `style`. The browser sets these once it hydrates.
+    if (isServer) return;
     const variables: Record<string, string | undefined> = {
       '--card-padding': this.cardPadding,
       '--card-margin': this.cardMargin,

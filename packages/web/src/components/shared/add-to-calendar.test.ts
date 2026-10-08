@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { url } from '../../config/site';
 import type { Session } from '../../models/session';
 import * as calendar from '../../utils/calendar';
 import './add-to-calendar';
@@ -43,6 +44,22 @@ describe('add-to-calendar', () => {
 
     expect(download).toHaveBeenCalledWith(
       expect.objectContaining({ title: 'A great talk' }),
+      'session-1',
+    );
+  });
+
+  it("links the event to the session's page on the site", async () => {
+    const download = vi.spyOn(calendar, 'downloadIcs').mockImplementation(() => undefined);
+    const { shadowRoot } = await fixture<AddToCalendar>(
+      html`<add-to-calendar .session="${session}"></add-to-calendar>`,
+    );
+
+    shadowRoot.querySelectorAll('md-menu-item')[1]!.click();
+
+    expect(download).toHaveBeenCalledWith(
+      expect.objectContaining({
+        description: `Session description\n\n${url}sessions/session-1`,
+      }),
       'session-1',
     );
   });

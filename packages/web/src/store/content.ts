@@ -1,4 +1,4 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createAction, type UnknownAction } from '@reduxjs/toolkit';
 import type { Day } from '../models/day';
 import type { Member } from '../models/member';
 import type { Partner } from '../models/partner';
@@ -30,6 +30,25 @@ export interface Content {
 
 /** Fills the store with content a page was built with, without subscribing to Firestore. */
 export const seedContent = createAction<Partial<Content>>('content/seed');
+
+/** Clears content on the server between pages, so each page renders only what it was built with. */
+export const resetContent = createAction('content/reset');
+
+/** The id of the script element that carries a page's content to the browser. */
+export const PAGE_CONTENT_ID = 'hb-content';
+
+/** Content as JSON for a script element. `<` is escaped, so the data cannot end the element. */
+export const serializeContent = (content: Partial<Content>): string =>
+  JSON.stringify(content).replaceAll('<', '\\u003c');
+
+/** Seeds the store with the content the page was built with, and keeps that content live. */
+export const seedFromPage = (dispatch: (action: UnknownAction) => unknown): void => {
+  const json = document.getElementById(PAGE_CONTENT_ID)?.textContent;
+  if (!json) return;
+  const content = JSON.parse(json) as Partial<Content>;
+  dispatch(seedContent(content));
+  subscribeToContent(Object.keys(content));
+};
 
 const subscribers = new Map<string, () => void>();
 

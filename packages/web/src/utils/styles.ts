@@ -1,7 +1,3 @@
-export interface ShadyCSSGlobal {
-  getComputedStyleValue(element: Element, property: string): string;
-}
-
 export const generateClassName = (value: string | undefined): string => {
   return value
     ? value
@@ -11,17 +7,11 @@ export const generateClassName = (value: string | undefined): string => {
     : '';
 };
 
-export const getVariableColor = (
-  element: Element,
-  value: string,
-  fallback?: string,
-): string | undefined => {
-  const ShadyCSS = (window as { ShadyCSS?: ShadyCSSGlobal }).ShadyCSS;
+/**
+ * A reference to the color variable of a tag or badge, such as `var(--android)`. The browser
+ * resolves it, so it renders the same on the server, which has no computed styles.
+ */
+export const variableColor = (value: string, fallback?: string): string => {
   const name = `--${generateClassName(value)}`;
-  const calculated = (
-    ShadyCSS
-      ? ShadyCSS.getComputedStyleValue(element, name)
-      : getComputedStyle(element).getPropertyValue(name)
-  ).trim();
-  return calculated || (fallback ? getVariableColor(element, fallback) : undefined);
+  return fallback ? `var(${name}, var(--${generateClassName(fallback)}))` : `var(${name})`;
 };

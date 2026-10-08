@@ -1,6 +1,6 @@
 import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { registerContentSubscriber, seedContent } from './content';
+import { registerContentSubscriber, resetContent, seedContent } from './content';
 import { dispatch } from './dispatch';
 import type { Subscription } from '../utils/firestore';
 
@@ -36,6 +36,7 @@ export const createCollectionSlice = <T>(
         new Failure<Error>(action.payload),
     },
     extraReducers: (builder) => {
+      builder.addCase(resetContent, (): CollectionState<T> => new Initialized());
       builder.addCase(seedContent, (state, { payload }) => {
         const data = (payload as Partial<Record<string, T[]>>)[name];
         // RemoteData classes are not drafted, so `state` is the current value itself.

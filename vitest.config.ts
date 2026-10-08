@@ -40,7 +40,7 @@ const web = {
       'packages/web/src/**/*.test.ts',
       'packages/web/build/**/*.test.ts',
     ],
-    exclude: [...configDefaults.exclude, '**/*.smoke.test.ts'],
+    exclude: [...configDefaults.exclude, '**/*.smoke.test.ts', '**/*.server.test.ts'],
   },
 } satisfies TestProjectInlineConfiguration;
 
@@ -100,6 +100,16 @@ export default defineConfig({
           include: ['packages/web/build/**/*.smoke.test.ts'],
           testTimeout: 5 * 60 * 1000,
           hookTimeout: 5 * 60 * 1000,
+        },
+      },
+      {
+        // Renders components with Lit SSR, as the build does. `isServer` is true here.
+        plugins: [decorators(), siteModule(siteConfig)],
+        test: {
+          name: 'Server',
+          environment: 'node',
+          setupFiles: ['./packages/web/__tests__/server.setup.ts'],
+          include: ['packages/web/src/**/*.server.test.ts'],
         },
       },
       {

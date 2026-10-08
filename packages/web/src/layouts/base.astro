@@ -3,13 +3,27 @@ import { ClientRouter } from 'astro:transitions';
 import { mapsScript, theme, themeCss } from 'virtual:hoverboard/layout';
 import { resources, site } from 'virtual:hoverboard/site';
 import { FooterBlock } from '../components/footer/footer-block';
+import '../data/markdown';
+import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  /** The content from `seedPage()`, which the browser's store starts from. */
+  content?: Partial<Content>;
 }
 
-const { title = resources.title, description = resources.description } = Astro.props;
+const {
+  title = resources.title,
+  description = resources.description,
+  image = site.image,
+  content = {},
+} = Astro.props;
+// The build sees file paths such as /index.html. Hosting serves them without `.html`.
+const path = Astro.url.pathname.replace(/(index)?\.html$/, '').slice(1);
+const url = new URL(path, site.url).href;
+
 // Local development always uses the demo project on the emulators, and `astro dev` has no `/__/`.
 const demoFirebaseConfig = {
   apiKey: 'demo-api-key',
@@ -35,7 +49,7 @@ const demoFirebaseConfig = {
 
     <title>{title}</title>
 
-    <link href={site.url} rel="canonical" />
+    <link href={url} rel="canonical" />
 
     <link href="images/favicon.ico" rel="icon" />
 
@@ -62,16 +76,16 @@ const demoFirebaseConfig = {
     <meta content={title} property="og:title" />
     <meta content={resources.title} property="og:site_name" />
     <meta content="website" property="og:type" />
-    <meta content={site.url} property="og:url" />
+    <meta content={url} property="og:url" />
     <meta content={description} property="og:description" />
-    <meta content={site.image} property="og:image" />
+    <meta content={image} property="og:image" />
     <meta content="image/jpeg" property="og:image:type" />
 
     <meta content="summary_large_image" name="twitter:card" />
     {site.organizer.twitter && <meta content={`@${site.organizer.twitter}`} name="twitter:creator" />}
     <meta content={title} name="twitter:title" />
     <meta content={description} name="twitter:description" />
-    <meta content={site.image} name="twitter:image" />
+    <meta content={image} name="twitter:image" />
     <meta name="twitter:label1" value="Location" />
     <meta name="twitter:data1" value={site.event.location.name} />
 
@@ -111,10 +125,21 @@ const demoFirebaseConfig = {
       )
     }
 
+    <script
+      is:inline
+      type="application/json"
+      id={PAGE_CONTENT_ID}
+      set:html={serializeContent(content)}
+    />
     <script>
       // Must load before any component, or hydration renders components a second time.
       import '@awesome.me/astro-lit/dsd-polyfill.js';
       import '@awesome.me/astro-lit/hydration-support.js';
+      import { islandsHydrated } from '../utils/islands';
+      import { startLocalization } from '../utils/localization';
+
+      // Pages render in the source locale. Switching earlier would leave stale text in hydrated HTML.
+      void islandsHydrated().then(startLocalization);
     </script>
     <ClientRouter />
 

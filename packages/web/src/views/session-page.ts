@@ -32,7 +32,7 @@ import type { UserState } from '../store/user';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
-import { getVariableColor } from '../utils/styles';
+import { variableColor } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
@@ -242,20 +242,20 @@ export class SessionPage extends ThemedElement {
   @state()
   private accessor acceptingFeedback: boolean = false;
 
-  override updated(changed: Map<string, unknown>) {
-    if (changed.has('sessions') || changed.has('sessionId')) {
-      this.updateSession();
+  // Runs on the server too, so the page renders the session. Side effects wait for `updated`.
+  override willUpdate(changed: Map<string, unknown>) {
+    if ((changed.has('sessions') || changed.has('sessionId')) && this.isLoaded) {
+      this.session = selectSession(store.getState(), this.sessionId!);
+      this.contentLoaderVisibility = !!this.session;
     }
   }
 
-  private updateSession() {
-    if (this.sessionId && this.sessions instanceof Success) {
-      this.session = selectSession(store.getState(), this.sessionId);
-      this.contentLoaderVisibility = !!this.session;
-
+  override updated(changed: Map<string, unknown>) {
+    if ((changed.has('sessions') || changed.has('sessionId')) && this.isLoaded) {
       if (!this.session) {
         router.goto('/404');
       } else {
+        // Depends on the time, so it waits for the browser.
         this.acceptingFeedback = acceptingFeedback(this.session);
         const speaker = (this.session as unknown as SessionWithDetails).speakers?.[0];
         updateImageMetadata(this.session.title, this.session.description, {
@@ -264,6 +264,10 @@ export class SessionPage extends ThemedElement {
         });
       }
     }
+  }
+
+  private get isLoaded() {
+    return !!this.sessionId && this.sessions instanceof Success;
   }
 
   private get featuredSessionIcon() {
@@ -318,7 +322,7 @@ export class SessionPage extends ThemedElement {
   };
 
   private getVariableColor(value: string) {
-    return getVariableColor(this, value);
+    return variableColor(value);
   }
 
   private speakerUrl(id: string) {

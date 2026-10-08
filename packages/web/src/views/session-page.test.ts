@@ -19,7 +19,7 @@ vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
 }));
 vi.mock('../router', () => ({
-  router: { urlForName: vi.fn(), goto: vi.fn() },
+  router: { urlForName: vi.fn(() => '/sessions/session-id'), goto: vi.fn() },
 }));
 vi.mock('../store/sessions/selectors', () => ({
   selectSession: vi.fn(),

@@ -9,7 +9,8 @@ export default defineConfig({
   output: 'static',
   // Matches `trailingSlash: false` in firebase.json: `/speakers/abc` is `speakers/abc.html`.
   trailingSlash: 'never',
-  build: { format: 'file' },
+  // Pages share one store, which each page fills with its content in turn (`seedPage()`).
+  build: { format: 'file', concurrency: 1 },
   integrations: [lit()],
   vite: {
     // The build smoke test links node_modules into a copy of this package. Astro fails on

@@ -41,7 +41,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [Web, Functions, CLI, Firestore, Translations]
+        project: [Web, Server, Functions, CLI, Firestore, Translations]
 
     steps:
       - name: Checkout the repo

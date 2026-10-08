@@ -28,15 +28,15 @@ Each package with dependencies has its own `package.json` and `package-lock.json
 
 Run from the repo root.
 
-| Command                        | Does                                                                                              |
-| ------------------------------ | ------------------------------------------------------------------------------------------------- |
-| `npm test`                     | All Vitest projects: Web, Functions, CLI, Firestore (starts the emulator), Translations and Smoke |
-| `npx vitest run --project Web` | One project. Add a path to run one file                                                           |
-| `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer, site config and type checks for web, server and storage |
-| `npm run fix`                  | ESLint and Prettier autofix                                                                       |
-| `npm run build`                | Production build of the web app to `packages/web/dist`                                            |
-| `npm start`                    | Emulators, functions and web app in watch mode                                                    |
-| `./hbd doctor`                 | Checks the local setup, Firebase login, project and billing plan                                  |
+| Command                        | Does                                                                                                      |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| `npm test`                     | All Vitest projects: Web, Server, Functions, CLI, Firestore (starts the emulator), Translations and Smoke |
+| `npx vitest run --project Web` | One project. Add a path to run one file                                                                   |
+| `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer, site config and type checks for web, server and storage         |
+| `npm run fix`                  | ESLint and Prettier autofix                                                                               |
+| `npm run build`                | Production build of the web app to `packages/web/dist`                                                    |
+| `npm start`                    | Emulators, functions and web app in watch mode                                                            |
+| `./hbd doctor`                 | Checks the local setup, Firebase login, project and billing plan                                          |
 
 Before finishing a change, run `npm run lint` and `npm test`, or at least the affected Vitest project and type check.
 
@@ -47,6 +47,7 @@ Before finishing a change, run `npm run lint` and `npm test`, or at least the af
 - **Site config.** Client code reads site config only through `src/config/site.ts`, never from the data files directly. Build-time config reads live in `packages/web/build/`. When you add or rename a key in `packages/config` or `packages/web/defaults`, update the schema in `packages/web/schemas/` too. `./hbd validate-config` checks it.
 - **UI text** uses `msg()` from `@lit/localize` with an explicit `id` such as `footer.locale-picker.label`. After adding or changing one, run `npm --prefix packages/web run localize:extract` and commit `packages/translations/source/en.xlf`. `npm run lint` fails when it is out of date.
 - **Tests** sit next to the code as `*.test.ts`. Web tests run in jsdom: render with `fixture` from `packages/web/__tests__/helpers/fixtures.ts`, set state with `setStoreState`, turn features off with `setFeatures` from `helpers/features.ts`, switch locale with `useLocale` from `helpers/locale.ts` (only the `Smoke (fake locale)` project has a second locale), and assert with the jest-dom matchers. Every bug fix or feature needs a test.
+- **Server tests** are `*.server.test.ts` files in the `Server` project. They render components with Lit SSR in Node, as the build does: fill the store with `seedPage()` from `src/data/page.ts`, then render with `render()` from `@lit-labs/ssr`. A component that reads content the page did not seed fails with "db is not available on the server".
 - **Smoke tests** are `*.smoke.test.ts` files in their own Vitest projects. `hoverboard-app.smoke.test.ts` renders the app once per feature with that feature off (`--project 'Smoke (blog off)'`), and `build.smoke.test.ts` builds the minimal site in `packages/web/__tests__/fixtures/minimal-site`. Run them all with `npx vitest run --project 'Smoke*'`.
 - **Features** are gated with `__HB_FEATURES__.<name>` where the code of a disabled feature should be left out of the build. The build replaces it with `true` or `false`. Use `isFeatureEnabled(name)` only for names known at runtime.
 - **Vitest** is configured once in the root `vitest.config.ts`. Do not add `vitest` to a package's `package.json`, because a second copy breaks `expect.extend` from setup files.
