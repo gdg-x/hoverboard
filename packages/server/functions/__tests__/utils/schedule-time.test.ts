@@ -81,4 +81,10 @@ describe('collectSpeakers', () => {
   it('returns an empty array when no speaker ids are provided', () => {
     expect(collectSpeakers(undefined as unknown as string[], speakersRaw)).toStrictEqual([]);
   });
+
+  it('skips speakers that do not exist', () => {
+    expect(collectSpeakers(['ada', 12 as unknown as string], speakersRaw)).toStrictEqual([
+      { id: 'ada', name: 'Ada Lovelace', sessions: null },
+    ]);
+  });
 });

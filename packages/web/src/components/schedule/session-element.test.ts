@@ -91,6 +91,14 @@ describe('session-element', () => {
     );
   });
 
+  it('skips a speaker that does not exist', async () => {
+    const { shadowRoot } = await render({
+      session: { ...session, speakers: [...session.speakers!, { id: 12 }] } as never,
+    });
+
+    expect(shadowRoot.querySelectorAll('.speakers li')).toHaveLength(1);
+  });
+
   it("draws the stripe in the main tag's color", async () => {
     const { shadowRoot } = await render();
 

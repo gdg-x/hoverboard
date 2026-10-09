@@ -127,6 +127,16 @@ describe('session-page', () => {
     expect(shadowRoot.querySelector('speaker-card')).toHaveProperty('speaker', speaker);
   });
 
+  it('skips a speaker that does not exist', async () => {
+    vi.mocked(selectSession).mockReturnValue({
+      ...session,
+      speakers: [speaker, { id: 12, sessions: null }],
+    } as never);
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelectorAll('speaker-card')).toHaveLength(1);
+  });
+
   it('goes to the 404 page for a missing session', async () => {
     vi.mocked(selectSession).mockReturnValue(undefined);
     await render({ sessionId: 'missing' });

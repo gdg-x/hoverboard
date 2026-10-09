@@ -28,6 +28,7 @@ describe('tagColor', () => {
 describe('photoTransitionName', () => {
   it('makes a CSS name from the kind and id', () => {
     expect(photoTransitionName('speaker', 'ada')).toBe('speaker-ada');
+    expect(photoTransitionName('speaker', 12 as unknown as string)).toBe('speaker-12');
     expect(photoTransitionName('previous-speaker', 'jane.doe 2')).toBe(
       'previous-speaker-jane-doe-2',
     );

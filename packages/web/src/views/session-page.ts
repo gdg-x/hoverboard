@@ -210,6 +210,8 @@ export class SessionPage extends ThemedElement {
 
   private renderContent(session: SessionWithDetails) {
     const bookmarked = this.isBookmarked;
+    // Generated sessions can list a speaker that does not exist, with only an `id`.
+    const speakers = (session.speakers ?? []).filter((speaker) => speaker.name);
     return html`
       <div class="inner">
         <div class="actions">
@@ -257,11 +259,11 @@ export class SessionPage extends ThemedElement {
         <short-markdown class="description" .content="${session.description}"></short-markdown>
 
         ${
-          session.speakers?.length
+          speakers.length
             ? html`
                 <h2>${msg('Speakers', { id: 'pages.session.speakers' })}</h2>
                 <ul class="speakers">
-                  ${session.speakers.map(
+                  ${speakers.map(
                     (speaker) => html`<li><speaker-card .speaker="${speaker}"></speaker-card></li>`,
                   )}
                 </ul>

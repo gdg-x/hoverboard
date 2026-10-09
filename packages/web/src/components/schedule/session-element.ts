@@ -230,23 +230,25 @@ export class SessionElement extends ThemedElement {
         }
         <h3 class="title"><a href="${sessionPath(session.id)}">${session.title}</a></h3>
         ${
-          session.speakers?.length
+          session.speakers?.some((speaker) => speaker.name)
             ? html`<ul class="speakers">
-                ${session.speakers.map(
-                  (speaker) => html`
-                    <li>
-                      <img
-                        src="${speaker.photoUrl}"
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        width="28"
-                        height="28"
-                      />
-                      ${speaker.name}
-                    </li>
-                  `,
-                )}
+                ${session.speakers
+                  .filter((speaker) => speaker.name)
+                  .map(
+                    (speaker) => html`
+                      <li>
+                        <img
+                          src="${speaker.photoUrl}"
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          width="28"
+                          height="28"
+                        />
+                        ${speaker.name}
+                      </li>
+                    `,
+                  )}
               </ul>`
             : nothing
         }
