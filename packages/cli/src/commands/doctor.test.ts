@@ -119,7 +119,7 @@ describe('runDoctor', () => {
     const text = output.join('');
     expect(text).toContain('\u2026 Node.js version');
     expect(text).toContain('\x1b[0J');
-    expect(output.at(-2)).toContain('Browser API key:');
+    expect(output.at(-2)).toContain('Firestore backups:');
   });
 
   it('runs up to 4 checks at once, and prints the results in order', async () => {
@@ -152,6 +152,7 @@ describe('runDoctor', () => {
       'GitHub deploys',
       'Service accounts',
       'Browser API key',
+      'Firestore backups',
     ]);
   });
 });

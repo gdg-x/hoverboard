@@ -22,6 +22,7 @@
 
     /* Emit */
     "outDir": "dist/.build",                             /* Specify an output folder for all emitted files. */
+    "rootDir": "..",                                     /* packages/, so the build can import the collection registry from packages/storage. */
 
     /* Interop Constraints */
     "isolatedModules": true,                             /* Ensure that each file can be safely transpiled without relying on other imports. */

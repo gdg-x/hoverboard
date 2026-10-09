@@ -10,7 +10,7 @@ By default all of these scripts run against the local [Firestore emulator](https
 
 ## Content model
 
-Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/content.schema.json`](../../packages/storage/schemas/content.schema.json). `firestore-init` and `firestore-copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked.
+Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/firestore.schema.json`](../../packages/storage/schemas/firestore.schema.json), which also describes the data visitors and functions write. [`packages/storage/collections.ts`](../../packages/storage/collections.ts) lists every collection Hoverboard uses, with its schema and features. `firestore-init` and `firestore-copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked as you make them. Check them with [`firestore-check`](#check-the-data).
 
 Speakers and sessions have optional `source` and `externalId` fields for data imported from another tool, so a later import can update them instead of adding duplicates.
 
@@ -20,33 +20,75 @@ A session is on the schedule with `day` (`YYYY-MM-DD`), `startTime` and `endTime
 
 Schedule edits show in the browser at once, and in the built pages after the next deploy, as for other content.
 
-## Move the schedule onto the sessions
-
-Before v4, a session's time and track came from where its ID was in the `schedule` collection, and functions copied the result into `generatedSchedule`, `generatedSessions` and `generatedSpeakers`. Hoverboard no longer reads these collections.
-
-`convert-schedule` reads the `schedule` collection, and writes each session's day, times and track onto the session. It writes the tracks to `schedule.tracks` in `packages/config/site.json`.
+## Check the data
 
 ```console
-    ./hb convert-schedule --dry-run
-    ./hb convert-schedule
+    FIRESTORE_TARGET=production ./hb firestore-check
+    FIRESTORE_TARGET=production ./hb firestore-check --collection speakers
 ```
 
-- `--dry-run` prints the changes without writing them.
+Reads every document, with subcollections, and checks it against the schema. It also checks the schedule, and that each session's speakers exist. Without `FIRESTORE_TARGET=production`, it reads the emulator. Without `--fix`, it doesn't change anything.
+
+- Each problem names the document, the field and the value, and links to the document in the Firebase console.
+- Problems in the data visitors write, such as `subscribers`, are counted by collection. Their document IDs and values are left out, since they can be emails, push tokens or user IDs.
+- Problems in the content of a feature that is off are warnings. So are collections from earlier versions, with the command that deletes them, and collections Hoverboard doesn't use.
+- Problems that `--fix` can fix end with "(fixable)".
+- It exits with an error when it finds a problem that isn't a warning, or a migration that hasn't run. In GitHub Actions, problems are annotations.
+
+## Fix the data
+
+```console
+    FIRESTORE_TARGET=production ./hb firestore-check --fix --dry-run
+    FIRESTORE_TARGET=production ./hb firestore-check --fix
+```
+
+`--fix` runs the data migrations that haven't run, then the safe fixes, then checks the data again. `--dry-run` shows the changes without writing them. Against production, it asks before it writes. Without a terminal to ask in, such as in CI, it needs `--yes`.
+
+The safe fixes are:
+
+- Spaces and line breaks around a link are removed.
+- A reference where an ID belongs, such as a session's speaker, becomes the ID: `ada` for `speakers/ada`.
+- A timestamp where a date belongs becomes the date in `event.timezone`.
+- Text that is a number, where a number belongs, becomes the number.
+- Fields Hoverboard stopped reading, such as `extend` and `shortDescription` on sessions and `timezone` on `config/notifications`, are removed.
+- A missing `updatedAt`, such as on push subscriptions from before the rules required it, is set to the time of the fix.
+- A `subscribers` or `potentialPartners` document without a valid email is deleted, since nobody can answer it. These are usually tests and spam.
+- A `null` entry in `featuredSessions`, which older sites wrote for a removed bookmark, is removed. The site removes the entry now.
+
+Other problems need an edit in the Firebase console. What visitors wrote is never changed: their data only gets the three fixes above, which add a missing time, drop empty bookmarks or delete the whole document. The plan counts those documents by collection, without their IDs, since they can be push tokens or user IDs.
+
+Each write only happens if the document hasn't changed since it was read. A document someone edited in the meantime is left alone and named. Run `--fix` again for it.
+
+With `--collection`, only the fixes run, since the migrations need every document.
+
+### Migrations
+
+A migration moves data from the shape of an older version to the current one. `config/migrations` records the ones that ran, with when and how many documents they changed.
+
+`4.0.0-schedule-on-sessions` runs when the `schedule` collection has days and no session has a day. Before v4, a session's time and track came from where its ID was in `schedule`, and functions copied the result into `generatedSchedule`, `generatedSessions` and `generatedSpeakers`. Hoverboard no longer reads these collections. The migration writes each session's day, times and track onto the session, and the tracks to `schedule.tracks` in `packages/config/site.json`.
+
 - A timeslot with several sessions in one track shares its time evenly between them, in whole minutes. Check those times afterwards.
 - A session on the schedule more than once gets a copy for each extra time, such as `lunch-2`.
 - A track that is only on some days gets those days in `days`.
 - It leaves the `schedule` collection in place.
 
-Check the schedule, deploy, then delete the old collections. `firestore:delete` takes one path at a time:
-
-```console
-    npx firebase firestore:delete --recursive schedule
-    npx firebase firestore:delete --recursive generatedSchedule
-    npx firebase firestore:delete --recursive generatedSessions
-    npx firebase firestore:delete --recursive generatedSpeakers
-```
+Commit the change to `site.json`, check the schedule and deploy. Then delete the old collections. `firestore-check` lists them with the command for each. Until the migration runs, it says to keep `schedule` instead, since the times are only there. The `generated*` collections can go at any time.
 
 Also delete the `config/schedule` document. `schedule.published` in `site.json` replaces it.
+
+`4.0.0-sign-up-ids` runs when a `subscribers` or `potentialPartners` document has the email as its ID. Before v4, the site saved sign-ups with the email, without its punctuation, as the ID, so the email showed in every link to them. The migration copies each one to a random ID, as the site writes them now, and deletes the old document in the same write. The plan shows only how many move, not the emails.
+
+### Backups and undo
+
+Before it changes a document, `--fix` saves it as it was in `.firebase/backups/<date>/documents.json`. Git ignores the folder. To undo a fix:
+
+```console
+    FIRESTORE_TARGET=production ./hb firestore-check --restore .firebase/backups/<date>
+```
+
+It writes back each document as it was, and deletes the session copies the migration created. Edits made since the fix are lost in those documents. It doesn't undo the change to `site.json`. Use `git checkout packages/config/site.json` for that.
+
+Backups hold your content, and the visitor documents a fix changed or deleted, such as push tokens and emails. `./hb doctor` warns about backups older than 30 days. Delete them once the fixes are checked.
 
 ## Seed the emulator with fixture data
 

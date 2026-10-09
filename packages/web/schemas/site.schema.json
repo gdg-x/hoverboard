@@ -10,6 +10,11 @@
     "$schema": {
       "type": "string"
     },
+    "schemaVersion": {
+      "description": "The version of this file's shape. `hb upgrade` moves it to the current one. Not in the defaults, since it describes this file.",
+      "type": "integer",
+      "minimum": 1
+    },
     "firebase": {
       "type": "object",
       "additionalProperties": false,

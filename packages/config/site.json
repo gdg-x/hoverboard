@@ -1,5 +1,6 @@
 {
   "$schema": "../web/schemas/site.schema.json",
+  "schemaVersion": 1,
   "firebase": {
     "projectId": "hoverboard-master"
   },

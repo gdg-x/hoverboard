@@ -35,9 +35,20 @@ Every breaking change must:
 
 - Use `!` in the pull request title, for example `feat(config)!: rename event.dates`.
 - Explain what organizers need to do in a `BREAKING CHANGE:` paragraph at the end of the pull request description. It becomes part of the release notes.
-- From v4 on, ship an `hb upgrade` migration for config and Firestore data changes, with tests against the previous shape.
+- From v4 on, ship an `hb upgrade` migration for config and Firestore data changes, with tests against the previous shape. See [Migrations](#migrations).
 
 When possible, deprecate first: keep the old behavior working in a minor release with a warning from the build or `hb doctor`, then remove it in the next major.
+
+## Migrations
+
+`./hb upgrade` brings a site's config and data up to the Hoverboard version it runs:
+
+1. It moves `packages/config/site.json` to the current `schemaVersion`, one config migration at a time, and checks the result like `./hb validate-config`.
+2. It runs the Firestore data migrations and fixes, as `./hb firestore-check --fix` does, with the same backup and confirmation. It reads the emulator unless `FIRESTORE_TARGET=production` is set.
+
+`--dry-run` shows both without writing anything. A `site.json` without `schemaVersion` is from before v4, and `hb upgrade` refuses it.
+
+To change the shape of `site.json`, add a migration to `CONFIG_MIGRATIONS` in [packages/cli/src/migrations/config.ts](../packages/cli/src/migrations/config.ts), with the next version, and set that `schemaVersion` in `packages/config/site.json`. A test fails when they disagree. To change Firestore data, add a migration to [packages/cli/src/migrations/](../packages/cli/src/migrations/) and list it in `MIGRATIONS`, as in [firebase-utils.md](tutorials/firebase-utils.md#migrations).
 
 ## Pull requests
 

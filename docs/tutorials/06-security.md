@@ -39,6 +39,7 @@ Do these once when you set up a site, and check them again before the event.
 - The GitHub deploy setup and its roles, as `./hb setup-github` sets them.
 - Service account keys, and old `github-action-*` accounts.
 - The browser API key and the Maps key: which sites and APIs they allow.
+- Backups from `./hb firestore-check --fix` older than 30 days. They hold your content.
 
 Each problem comes with what to change. Some checks need an API turned on in your project, and say so.
 

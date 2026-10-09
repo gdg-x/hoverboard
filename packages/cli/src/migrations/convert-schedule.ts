@@ -5,7 +5,8 @@ export interface OldScheduleDay {
   timeslots?: {
     startTime?: string;
     endTime?: string;
-    sessions?: { items?: string[]; extend?: number }[];
+    // Some old schedules list session IDs as numbers.
+    sessions?: { items?: (string | number)[]; extend?: number }[];
   }[];
 }
 
@@ -148,7 +149,7 @@ export const convertSchedule = (
             itemIndex === items.length - 1
               ? end
               : start + Math.floor(((end - start) * (itemIndex + 1)) / items.length);
-          const time = place(id, {
+          const time = place(String(id), {
             day: date,
             startTime: toTime(itemStart),
             endTime: toTime(itemEnd),

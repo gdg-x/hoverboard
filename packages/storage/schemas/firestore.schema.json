@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://hoverboard.dev/schemas/content.schema.json",
-  "title": "Hoverboard content",
-  "description": "The event content model, independent of how it is stored or shown. `$defs` describes each Firestore document. The root describes the seed file `docs/default-firebase-data.json`.",
+  "$id": "https://hoverboard.dev/schemas/firestore.schema.json",
+  "title": "Hoverboard Firestore data",
+  "description": "Every Firestore document Hoverboard uses, independent of how it is shown. `$defs` describes each document, and `packages/storage/collections.ts` says which collection uses which. The root describes the seed file `docs/default-firebase-data.json`.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -151,6 +151,7 @@
       }
     },
     "partnerGroupDocument": {
+      "type": "object",
       "$ref": "#/$defs/partnerGroup",
       "unevaluatedProperties": false
     },
@@ -311,6 +312,7 @@
       }
     },
     "teamDocument": {
+      "type": "object",
       "$ref": "#/$defs/team",
       "unevaluatedProperties": false
     },
@@ -360,6 +362,146 @@
         "thumbnail": { "$ref": "#/$defs/link" },
         "title": { "type": "string" },
         "youtubeId": { "type": "string" }
+      }
+    },
+    "timestamp": {
+      "description": "A Firestore timestamp, written as JSON for validation.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$timestamp"],
+      "properties": {
+        "$timestamp": {
+          "description": "ISO 8601 in UTC.",
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+        }
+      }
+    },
+    "reference": {
+      "description": "A Firestore document reference, written as JSON for validation. Hoverboard stores IDs, not references.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$reference"],
+      "properties": {
+        "$reference": { "description": "The document's path.", "type": "string" }
+      }
+    },
+    "email": {
+      "type": "string",
+      "maxLength": 254,
+      "pattern": "^[^@ ]+@[^@ ]+[.][^@ ]+$"
+    },
+    "name": { "type": "string", "maxLength": 100 },
+    "rating": { "type": "number", "minimum": 0, "maximum": 5 },
+    "feedback": {
+      "description": "A signed-in visitor's rating of a session. Firestore: `sessions/{sessionId}/feedback/{userId}`, where `userId` is also the document ID.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["comment", "contentRating", "styleRating", "userId"],
+      "properties": {
+        "comment": { "type": "string", "maxLength": 256 },
+        "contentRating": { "$ref": "#/$defs/rating" },
+        "styleRating": { "$ref": "#/$defs/rating" },
+        "userId": { "type": "string" }
+      }
+    },
+    "featuredSessions": {
+      "description": "A signed-in visitor's bookmarked sessions, by session ID. Firestore: `featuredSessions/{userId}`.",
+      "type": "object",
+      "maxProperties": 500,
+      "additionalProperties": { "type": "boolean" }
+    },
+    "notificationsUser": {
+      "description": "The push tokens of a signed-in visitor's devices, for session reminders. Firestore: `notificationsUsers/{userId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tokens"],
+      "properties": {
+        "tokens": {
+          "type": "object",
+          "maxProperties": 20,
+          "additionalProperties": { "const": true }
+        }
+      }
+    },
+    "notificationsSubscriber": {
+      "description": "A device subscribed to general notifications. Firestore: `notificationsSubscribers/{token}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["updatedAt", "value"],
+      "properties": {
+        "updatedAt": { "$ref": "#/$defs/timestamp" },
+        "value": { "const": true }
+      }
+    },
+    "subscriber": {
+      "description": "A visitor who asked for updates by email. Firestore: `subscribers/{subscriberId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["email", "firstName", "lastName"],
+      "properties": {
+        "email": { "$ref": "#/$defs/email" },
+        "firstName": { "$ref": "#/$defs/name" },
+        "lastName": { "$ref": "#/$defs/name" }
+      }
+    },
+    "potentialPartner": {
+      "description": "A company that asked about partnering. Firestore: `potentialPartners/{partnerId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["companyName", "email", "fullName"],
+      "properties": {
+        "companyName": { "$ref": "#/$defs/name" },
+        "email": { "$ref": "#/$defs/email" },
+        "fullName": { "$ref": "#/$defs/name" }
+      }
+    },
+    "notificationsConfig": {
+      "description": "Settings for push notifications. Firestore: `config/notifications`.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "icon": {
+          "description": "The icon notifications show, unless one sets its own.",
+          "$ref": "#/$defs/link"
+        }
+      }
+    },
+    "notification": {
+      "description": "A general notification. Adding one sends it to every subscribed device. Firestore: `notifications/{id}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["body", "title"],
+      "properties": {
+        "body": { "type": "string" },
+        "icon": { "$ref": "#/$defs/link" },
+        "path": {
+          "description": "The page the notification opens.",
+          "$ref": "#/$defs/link"
+        },
+        "title": { "type": "string" }
+      }
+    },
+    "sentNotification": {
+      "description": "A session reminder that was sent, so it is sent once. Firestore: `sentNotifications/{id}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["createdAt"],
+      "properties": {
+        "createdAt": { "$ref": "#/$defs/timestamp" }
+      }
+    },
+    "migrations": {
+      "description": "The data migrations that `hb firestore-check --fix` ran, by ID. Firestore: `config/migrations`.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["documents", "ranAt"],
+        "properties": {
+          "documents": { "description": "How many documents it changed.", "type": "number" },
+          "ranAt": { "$ref": "#/$defs/timestamp" }
+        }
       }
     }
   }

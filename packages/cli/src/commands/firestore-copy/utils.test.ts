@@ -103,7 +103,7 @@ describe('saveData', () => {
 
   it('rejects an invalid content document without writing it', async () => {
     await expect(saveData({ name: 'Yonatan' }, 'speakers/yonatan_levin')).rejects.toThrow(
-      'Invalid speakers/yonatan_levin',
+      'speakers/yonatan_levin: missing "bio".',
     );
 
     expect(setMock).not.toHaveBeenCalled();
@@ -114,7 +114,7 @@ describe('saveData', () => {
 
     await expect(
       saveData({ a: valid, b: { title: 'No description' } }, 'sessions'),
-    ).rejects.toThrow('Invalid sessions/b');
+    ).rejects.toThrow('sessions/b: missing "description".');
 
     expect(setMock).not.toHaveBeenCalled();
     expect(commitMock).not.toHaveBeenCalled();

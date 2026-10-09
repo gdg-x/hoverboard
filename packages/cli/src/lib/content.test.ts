@@ -10,7 +10,9 @@ describe('validateSeedData', () => {
   });
 
   it('rejects unknown top-level collections', () => {
-    expect(() => validateSeedData({ ...seed, triggers: {} })).toThrow('Invalid seed data');
+    expect(() => validateSeedData({ ...seed, triggers: {} })).toThrow(
+      'docs/default-firebase-data.json: unknown field "triggers"',
+    );
   });
 });
 
@@ -32,32 +34,32 @@ describe('validateContent', () => {
       validateContent('sessions', '101', { ...session, ...time, track: 'main-hall' }),
     ).not.toThrow();
     expect(() => validateContent('sessions', '101', { ...session, day: '2027-10-15' })).toThrow(
-      'sessions/101 must have properties startTime, endTime when property day is present',
+      'sessions/101: "day" needs "startTime" too.\nsessions/101: "day" needs "endTime" too.',
     );
     expect(() =>
       validateContent('sessions', '101', { ...session, ...time, startTime: '9:00' }),
-    ).toThrow('sessions/101/startTime must match pattern');
+    ).toThrow('sessions/101: startTime "9:00" must be a time, HH:MM.');
   });
 
-  it('names the document and the problem when a document is invalid', () => {
+  it('names the document, the field and the problem when a document is invalid', () => {
     expect(() => validateContent('sessions', '101', { title: 'Keynote' })).toThrow(
-      "Invalid sessions/101: sessions/101 must have required property 'description'",
+      'sessions/101: missing "description".',
     );
     expect(() => validateContent('sessions', '101', { ...session, speaker: 'ada' })).toThrow(
-      'must NOT have additional properties',
+      'sessions/101: unknown field "speaker". Hoverboard doesn\'t read it.',
     );
   });
 
   it('validates documents in subcollections', () => {
     expect(() => validateContent('team/0/members', '0', { name: 'Ada' })).toThrow(
-      'Invalid team/0/members/0',
+      'team/0/members/0: missing "order".',
     );
   });
 
   it('rejects extra fields on partner groups and teams', () => {
     expect(() => validateContent('team', '0', { title: 'Organizers' })).not.toThrow();
     expect(() => validateContent('team', '0', { title: 'Organizers', members: [] })).toThrow(
-      'must NOT have unevaluated properties',
+      'team/0: unknown field "members".',
     );
   });
 
@@ -68,7 +70,7 @@ describe('validateContent', () => {
 
   it('rejects the old schedule fields', () => {
     expect(() => validateContent('sessions', '101', { ...session, extend: 2 })).toThrow(
-      'must NOT have additional properties',
+      'sessions/101: unknown field "extend".',
     );
   });
 });
