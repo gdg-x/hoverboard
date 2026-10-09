@@ -31,9 +31,12 @@ const buildFilters = (sessions: Session[], filterGroupKey: FilterGroupKey): Filt
 
 const selectSessionId = (_state: RootState, sessionId: string) => sessionId;
 
+// The same array each time, so the selectors below stay memoized before the sessions load.
+const NO_SESSIONS: never[] = [];
+
 const selectSessions = (state: RootState): BuiltSession[] => {
   const sessions = selectSessionsState(state);
-  return sessions instanceof Success ? sessions.data : [];
+  return sessions instanceof Success ? sessions.data : NO_SESSIONS;
 };
 
 export const selectSession = createSelector(
@@ -55,7 +58,7 @@ const selectGroups = (_state: RootState, groups: FilterGroupKey[] = DEFAULT_FILT
 // The raw sessions have the same tags, and don't wait for the speakers.
 const selectRawSessions = (state: RootState): Session[] => {
   const sessions = selectRawSessionsState(state);
-  return sessions instanceof Success ? sessions.data : [];
+  return sessions instanceof Success ? sessions.data : NO_SESSIONS;
 };
 
 export const selectFilterGroups = createSelector(

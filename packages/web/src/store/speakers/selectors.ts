@@ -9,9 +9,11 @@ import { selectSpeakersState } from '../schedule';
 
 const selectSpeakerId = (_state: RootState, speakerId: string) => speakerId;
 
+const NO_SPEAKERS: BuiltSpeaker[] = [];
+
 const selectSpeakers = (state: RootState): BuiltSpeaker[] => {
   const speakers = selectSpeakersState(state);
-  return speakers instanceof Success ? speakers.data : [];
+  return speakers instanceof Success ? speakers.data : NO_SPEAKERS;
 };
 
 export const selectSpeaker = createSelector(
