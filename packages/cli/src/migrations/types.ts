@@ -13,6 +13,8 @@ export interface MigrationPlan {
   updates: { path: string; fields: Record<string, unknown> }[];
   /** New documents, which must not exist yet. */
   creates: { path: string; data: Record<string, unknown> }[];
+  /** Documents to copy to a new path, then delete. */
+  moves?: { from: string; to: string }[];
   /** A change to packages/config/site.json. */
   site?: (site: Record<string, unknown>) => Record<string, unknown>;
   /** What the migration changes, one line each. */

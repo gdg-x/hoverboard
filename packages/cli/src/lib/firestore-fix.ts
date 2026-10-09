@@ -184,10 +184,13 @@ export const applyFixes = async ({
   const byPath = new Map(documents.map((document) => [document.path, document]));
 
   for (const { migration, plan: migrationPlan } of plan.migrations) {
+    const moves = migrationPlan.moves ?? [];
     addToBackup(
       backupFolder,
-      migrationPlan.updates.flatMap(({ path }) => byPath.get(path) ?? []),
-      migrationPlan.creates.map(({ path }) => path),
+      [...migrationPlan.updates, ...moves.map(({ from }) => ({ path: from }))].flatMap(
+        ({ path }) => byPath.get(path) ?? [],
+      ),
+      [...migrationPlan.creates.map(({ path }) => path), ...moves.map(({ to }) => to)],
     );
     const before = { written: result.written, skipped: result.skipped.length };
     for (const { path, fields } of migrationPlan.updates) {
@@ -200,6 +203,20 @@ export const applyFixes = async ({
       } catch (error) {
         if (code(error) !== ALREADY_EXISTS) throw error;
         result.skipped.push(path);
+      }
+    }
+    for (const { from, to } of moves) {
+      const document = byPath.get(from)!;
+      // One batch, so a document changed since the check is neither copied nor deleted.
+      const batch = firestore.batch();
+      batch.create(firestore.doc(to), document.raw!);
+      batch.delete(firestore.doc(from), { lastUpdateTime: document.updateTime as Timestamp });
+      try {
+        await batch.commit();
+        result.written++;
+      } catch (error) {
+        if (code(error) !== FAILED_PRECONDITION && code(error) !== ALREADY_EXISTS) throw error;
+        result.skipped.push(from);
       }
     }
     if (migrationPlan.site) writeSite(repoRoot, migrationPlan.site);

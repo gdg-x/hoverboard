@@ -1,10 +1,11 @@
 import type { FirestoreDocument } from './types.js';
 import { scheduleOnSessions } from './4.0.0-schedule-on-sessions.js';
+import { signUpIds } from './4.0.0-sign-up-ids.js';
 
 export type { FirestoreDocument, Migration, MigrationPlan } from './types.js';
 
 /** Every data migration, oldest first. */
-export const MIGRATIONS = [scheduleOnSessions];
+export const MIGRATIONS = [scheduleOnSessions, signUpIds];
 
 /**
  * The migrations the data still needs, with what shows it. The data decides, not

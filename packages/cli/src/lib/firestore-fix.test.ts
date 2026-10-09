@@ -42,6 +42,21 @@ const fakeFirestore = (stale: string[] = []) => {
       set: async (...args: unknown[]) => writes.push(['set', path, ...args]),
       delete: async (...args: unknown[]) => writes.push(['delete', path, ...args]),
     }),
+    batch: () => {
+      const operations: unknown[][] = [];
+      return {
+        create: (ref: { path: string }, data: unknown) =>
+          operations.push(['create', ref.path, data]),
+        delete: (ref: { path: string }, precondition: unknown) =>
+          operations.push(['delete', ref.path, precondition]),
+        commit: async () => {
+          if (operations.some(([, path]) => stale.includes(path as string))) {
+            throw Object.assign(new Error('stale'), { code: 9 });
+          }
+          writes.push(['batch', ...operations]);
+        },
+      };
+    },
   } as unknown as Firestore;
   return { firestore, writes };
 };
@@ -96,6 +111,45 @@ describe('planFixes', () => {
 });
 
 describe('applyFixes', () => {
+  it('moves sign-ups off email IDs in one batch each, and backs them up', async () => {
+    const repo = makeRepo();
+    const { firestore, writes } = fakeFirestore(['subscribers/gracecompanycom']);
+    const ada = { email: 'ada@example.com', firstName: '', lastName: '' };
+    const grace = { email: 'grace@company.com', firstName: '', lastName: '' };
+    const documents = [
+      doc('subscribers/adaexamplecom', ada),
+      doc('subscribers/gracecompanycom', grace),
+    ];
+    const backupFolder = join(repo, 'backup');
+    const plan = planFixes(documents, 'UTC');
+    const [toAda] = plan.migrations[0]!.plan.moves!.map(({ to }) => to);
+
+    const result = await applyFixes({
+      firestore,
+      plan,
+      documents,
+      list: async () => documents,
+      timeZone: 'UTC',
+      repoRoot: repo,
+      backupFolder,
+    });
+
+    expect(result.skipped).toEqual(['subscribers/gracecompanycom']);
+    expect(writes).toEqual([
+      [
+        'batch',
+        ['create', toAda, ada],
+        ['delete', 'subscribers/adaexamplecom', { lastUpdateTime: at }],
+      ],
+    ]);
+    const backup = JSON.parse(readFileSync(join(backupFolder, 'documents.json'), 'utf8'));
+    expect(Object.keys(backup.documents)).toEqual([
+      'subscribers/adaexamplecom',
+      'subscribers/gracecompanycom',
+    ]);
+    expect(backup.created).toHaveLength(2);
+  });
+
   it('sets a missing updatedAt to the server time', async () => {
     const repo = makeRepo();
     const { firestore, writes } = fakeFirestore();

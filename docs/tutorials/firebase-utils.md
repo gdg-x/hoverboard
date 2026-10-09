@@ -76,6 +76,8 @@ Commit the change to `site.json`, check the schedule and deploy. Then delete the
 
 Also delete the `config/schedule` document. `schedule.published` in `site.json` replaces it.
 
+`4.0.0-sign-up-ids` runs when a `subscribers` or `potentialPartners` document has the email as its ID. Before v4, the site saved sign-ups with the email, without its punctuation, as the ID, so the email showed in every link to them. The migration copies each one to a random ID, as the site writes them now, and deletes the old document in the same write. The plan shows only how many move, not the emails.
+
 ### Backups and undo
 
 Before it changes a document, `--fix` saves it as it was in `.firebase/backups/<date>/documents.json`. Git ignores the folder. To undo a fix:
