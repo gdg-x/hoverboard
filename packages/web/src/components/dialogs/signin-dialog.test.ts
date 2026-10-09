@@ -57,6 +57,7 @@ describe('signin-dialog', () => {
     const buttons = shadowRoot.querySelectorAll('.sign-in-button');
     expect(buttons).toHaveLength(signInProviders.providersData.length);
     expect(buttons[0]).toHaveTextContent(`Sign in with ${signInProviders.providersData[0]!.label}`);
+    expect(shadowRoot.querySelector('.illustration')).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('signs in with the clicked provider', async () => {

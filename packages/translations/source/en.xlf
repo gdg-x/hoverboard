@@ -5,6 +5,9 @@
 <trans-unit id="shell.app.offline">
   <source>You can still work offline.</source>
 </trans-unit>
+<trans-unit id="dialogs.feedback.thanks">
+  <source>Thanks for your feedback.</source>
+</trans-unit>
 <trans-unit id="dialogs.feedback.content-rating">
   <source>Content quality:</source>
 </trans-unit>

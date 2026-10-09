@@ -25,6 +25,8 @@ import '../../components/ui/hb-button';
 import '../../components/ui/hb-icon-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../../components/themed-element';
+import { illustration, illustrationStyles } from '../../illustrations/illustration';
+import noResults from '../../illustrations/no-results.svg?raw';
 
 const ONE_MINUTE_MS = 60_000;
 
@@ -56,215 +58,222 @@ export const matchesFilters = (session: Session, filters: Filter[]) =>
  */
 @customElement('schedule-day')
 export class ScheduleDay extends ThemedElement {
-  static override styles = css`
-    :host {
-      display: block;
-      container-type: inline-size;
-    }
+  static override styles = [
+    illustrationStyles,
+    css`
+      :host {
+        display: block;
+        container-type: inline-size;
+      }
 
-    [hidden] {
-      display: none !important;
-    }
+      [hidden] {
+        display: none !important;
+      }
 
-    .pager {
-      display: flex;
-      align-items: center;
-      gap: var(--hb-space-1);
-      margin-block-end: var(--hb-space-2);
-      color: var(--hb-color-on-surface-variant);
-      font-size: var(--hb-text-sm);
-    }
+      .pager {
+        display: flex;
+        align-items: center;
+        gap: var(--hb-space-1);
+        margin-block-end: var(--hb-space-2);
+        color: var(--hb-color-on-surface-variant);
+        font-size: var(--hb-text-sm);
+      }
 
-    .pager-text {
-      margin-inline-end: auto;
-    }
+      .pager-text {
+        margin-inline-end: auto;
+      }
 
-    .grid,
-    .header-grid {
-      display: grid;
-      grid-template-columns: 4.5rem repeat(var(--tracks, 1), minmax(16rem, 1fr));
-      gap: var(--hb-space-3);
-      min-inline-size: min-content;
-    }
+      .grid,
+      .header-grid {
+        display: grid;
+        grid-template-columns: 4.5rem repeat(var(--tracks, 1), minmax(16rem, 1fr));
+        gap: var(--hb-space-3);
+        min-inline-size: min-content;
+      }
 
-    .header {
-      position: sticky;
-      z-index: 3;
-      inset-block-start: var(--hb-schedule-sticky-top, 0px);
-      overflow: hidden;
-      background-color: var(--hb-color-surface);
-    }
-
-    .header-grid {
-      padding-block: var(--hb-space-2);
-      padding-inline-end: var(--hb-space-2);
-      border-block-end: var(--hb-border-width) solid var(--hb-border-color);
-    }
-
-    .corner {
-      position: sticky;
-      z-index: 1;
-      inset-inline-start: 0;
-      background-color: var(--hb-color-surface);
-    }
-
-    .track {
-      padding-inline: var(--hb-space-3);
-      font-weight: 700;
-      overflow-wrap: anywhere;
-    }
-
-    .scroller {
-      overflow-x: auto;
-      scroll-snap-type: x proximity;
-      scroll-padding-inline-start: calc(4.5rem + var(--hb-space-3));
-      border-radius: var(--hb-radius-m);
-    }
-
-    .scroller:focus-visible {
-      outline: 3px solid var(--hb-color-focus);
-      outline-offset: 2px;
-    }
-
-    .grid {
-      position: relative;
-      padding-block: var(--hb-space-4);
-      padding-inline-end: var(--hb-space-2);
-    }
-
-    .time {
-      position: sticky;
-      z-index: 2;
-      inset-inline-start: 0;
-      grid-column: 1;
-      padding-block-start: var(--hb-space-3);
-      background-color: var(--hb-color-surface);
-      font: 600 var(--hb-text-md) / 1.2 var(--hb-font-mono);
-      scroll-margin-block-start: calc(var(--hb-schedule-sticky-top, 0px) + 4rem);
-    }
-
-    .block {
-      display: flex;
-      flex-direction: column;
-      gap: var(--hb-space-3);
-      min-inline-size: 0;
-      scroll-snap-align: start;
-    }
-
-    .block session-element {
-      flex: 1;
-    }
-
-    .browse {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--hb-space-2);
-      grid-column: 2 / -1;
-      min-block-size: 4rem;
-      border: var(--hb-border-width) dashed var(--hb-color-outline-variant);
-      border-radius: var(--hb-radius-m);
-      color: var(--hb-color-on-surface-variant);
-      text-decoration: none;
-    }
-
-    .browse:hover {
-      border-color: var(--hb-color-outline);
-      color: var(--hb-color-on-surface);
-    }
-
-    .browse:focus-visible {
-      outline: 3px solid var(--hb-color-focus);
-      outline-offset: 2px;
-    }
-
-    .browse hoverboard-icon {
-      inline-size: 20px;
-      block-size: 20px;
-    }
-
-    .now {
-      position: relative;
-      z-index: 4;
-      grid-column: 1 / -1;
-      pointer-events: none;
-    }
-
-    .now-line {
-      position: absolute;
-      inset-inline: 0;
-      display: flex;
-      align-items: center;
-      gap: var(--hb-space-2);
-      color: var(--hb-color-error);
-      font: 700 var(--hb-text-sm) / 1 var(--hb-font-mono);
-      translate: 0 -50%;
-    }
-
-    .now-line::after {
-      content: '';
-      flex: 1;
-      block-size: 2px;
-      background-color: currentColor;
-    }
-
-    /* The label stays in view when the grid scrolls sideways. */
-    .now-label {
-      position: sticky;
-      inset-inline-start: 0;
-      padding: var(--hb-space-1) var(--hb-space-2);
-      border-radius: var(--hb-radius-full);
-      background-color: var(--hb-color-surface);
-    }
-
-    .empty {
-      display: grid;
-      justify-items: start;
-      gap: var(--hb-space-3);
-      padding-block: var(--hb-space-6);
-    }
-
-    .empty p {
-      margin: 0;
-    }
-
-    @container (width < 640px) {
-      .pager,
       .header {
-        display: none;
+        position: sticky;
+        z-index: 3;
+        inset-block-start: var(--hb-schedule-sticky-top, 0px);
+        overflow: hidden;
+        background-color: var(--hb-color-surface);
+      }
+
+      .header-grid {
+        padding-block: var(--hb-space-2);
+        padding-inline-end: var(--hb-space-2);
+        border-block-end: var(--hb-border-width) solid var(--hb-border-color);
+      }
+
+      .corner {
+        position: sticky;
+        z-index: 1;
+        inset-inline-start: 0;
+        background-color: var(--hb-color-surface);
+      }
+
+      .track {
+        padding-inline: var(--hb-space-3);
+        font-weight: 700;
+        overflow-wrap: anywhere;
       }
 
       .scroller {
-        overflow: visible;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        scroll-padding-inline-start: calc(4.5rem + var(--hb-space-3));
+        border-radius: var(--hb-radius-m);
+      }
+
+      .scroller:focus-visible {
+        outline: 3px solid var(--hb-color-focus);
+        outline-offset: 2px;
       }
 
       .grid {
-        display: flex;
-        flex-direction: column;
-        min-inline-size: 0;
-        padding-inline-end: 0;
+        position: relative;
+        padding-block: var(--hb-space-4);
+        padding-inline-end: var(--hb-space-2);
       }
 
       .time {
-        position: static;
-        padding-block-start: var(--hb-space-4);
+        position: sticky;
+        z-index: 2;
+        inset-inline-start: 0;
+        grid-column: 1;
+        padding-block-start: var(--hb-space-3);
+        background-color: var(--hb-color-surface);
+        font: 600 var(--hb-text-md) / 1.2 var(--hb-font-mono);
+        scroll-margin-block-start: calc(var(--hb-schedule-sticky-top, 0px) + 4rem);
+      }
+
+      .block {
+        display: flex;
+        flex-direction: column;
+        gap: var(--hb-space-3);
+        min-inline-size: 0;
+        scroll-snap-align: start;
+      }
+
+      .block session-element {
+        flex: 1;
+      }
+
+      .browse {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--hb-space-2);
+        grid-column: 2 / -1;
+        min-block-size: 4rem;
+        border: var(--hb-border-width) dashed var(--hb-color-outline-variant);
+        border-radius: var(--hb-radius-m);
+        color: var(--hb-color-on-surface-variant);
+        text-decoration: none;
+      }
+
+      .browse:hover {
+        border-color: var(--hb-color-outline);
+        color: var(--hb-color-on-surface);
+      }
+
+      .browse:focus-visible {
+        outline: 3px solid var(--hb-color-focus);
+        outline-offset: 2px;
+      }
+
+      .browse hoverboard-icon {
+        inline-size: 20px;
+        block-size: 20px;
       }
 
       .now {
-        block-size: 1.5rem;
+        position: relative;
+        z-index: 4;
+        grid-column: 1 / -1;
+        pointer-events: none;
       }
 
       .now-line {
-        inset-block-start: 50% !important;
+        position: absolute;
+        inset-inline: 0;
+        display: flex;
+        align-items: center;
+        gap: var(--hb-space-2);
+        color: var(--hb-color-error);
+        font: 700 var(--hb-text-sm) / 1 var(--hb-font-mono);
+        translate: 0 -50%;
       }
-    }
 
-    @media (forced-colors: active) {
-      .now-line {
-        color: Highlight;
+      .now-line::after {
+        content: '';
+        flex: 1;
+        block-size: 2px;
+        background-color: currentColor;
       }
-    }
-  `;
+
+      /* The label stays in view when the grid scrolls sideways. */
+      .now-label {
+        position: sticky;
+        inset-inline-start: 0;
+        padding: var(--hb-space-1) var(--hb-space-2);
+        border-radius: var(--hb-radius-full);
+        background-color: var(--hb-color-surface);
+      }
+
+      .empty {
+        display: grid;
+        justify-items: start;
+        gap: var(--hb-space-3);
+        padding-block: var(--hb-space-6);
+      }
+
+      .empty p {
+        margin: 0;
+      }
+
+      .empty .illustration {
+        inline-size: min(100%, 12rem);
+      }
+
+      @container (width < 640px) {
+        .pager,
+        .header {
+          display: none;
+        }
+
+        .scroller {
+          overflow: visible;
+        }
+
+        .grid {
+          display: flex;
+          flex-direction: column;
+          min-inline-size: 0;
+          padding-inline-end: 0;
+        }
+
+        .time {
+          position: static;
+          padding-block-start: var(--hb-space-4);
+        }
+
+        .now {
+          block-size: 1.5rem;
+        }
+
+        .now-line {
+          inset-block-start: 50% !important;
+        }
+      }
+
+      @media (forced-colors: active) {
+        .now-line {
+          color: Highlight;
+        }
+      }
+    `,
+  ];
 
   @fromStore((state) => selectScheduleState(state))
   accessor schedule!: ScheduleState;
@@ -342,6 +351,7 @@ export class ScheduleDay extends ThemedElement {
     if (filtered && !this.onlyFeatured && visible.every((blocks) => blocks.length === 0)) {
       return html`
         <div class="empty">
+          ${illustration(noResults)}
           <p>${msg('No sessions match these filters.', { id: 'schedule.day.no-results' })}</p>
           <hb-button variant="tonal" @click="${clearFilters}">
             ${msg('Clear filters', { id: 'schedule.day.clear-filters' })}

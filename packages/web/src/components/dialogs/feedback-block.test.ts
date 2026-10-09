@@ -89,6 +89,11 @@ describe('feedback-block', () => {
     expect(element.styleRating).toBe(feedback.styleRating);
     expect(shadowRoot.querySelector('hb-text-field')!.value).toBe(feedback.comment);
     expect(shadowRoot.querySelector('.delete-button')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('.thanks')).toHaveTextContent('Thanks for your feedback.');
+    expect(shadowRoot.querySelector('.thanks .illustration')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    );
   });
 
   it('hides the delete button when there is no saved feedback', async () => {

@@ -20,7 +20,9 @@ describe('not-found-page', () => {
     );
 
     expect(shadowRoot.querySelector('simple-hero')).toHaveAttribute('page', 'notFound');
-    expect(shadowRoot.querySelector('.art')).toHaveAttribute('alt', '');
+    const art = shadowRoot.querySelector('.illustration.art');
+    expect(art).toHaveAttribute('aria-hidden', 'true');
+    expect(art?.querySelector('svg')).toBeInTheDocument();
     expect(
       within(shadowRootForWithin).getByText('This session was moved to another room.'),
     ).toBeInTheDocument();

@@ -3,6 +3,8 @@
  * The build writes the theme's colors, shapes, fonts and density on `:root` in the page head.
  */
 :root {
+  /* The accent color of the unDraw illustrations in src/illustrations/. */
+  --hb-illustration-accent: var(--hb-color-primary);
   --hb-text-xs: 0.75rem;
   --hb-text-sm: 0.875rem;
   --hb-text-md: 1rem;

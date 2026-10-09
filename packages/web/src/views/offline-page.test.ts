@@ -27,6 +27,8 @@ describe('offline-page', () => {
       'Your bookmarked sessions, in My Schedule',
     ]);
     expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('href', '/');
+    expect(shadowRoot.querySelector('.illustration svg')).toBeInTheDocument();
+    expect(shadowRoot.querySelector('.illustration')).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('leaves out bookmarks when My Schedule is off', async () => {

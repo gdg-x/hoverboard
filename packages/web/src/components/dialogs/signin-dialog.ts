@@ -16,6 +16,8 @@ import { closeDialog, DIALOG, openSigninDialog, selectIsDialogOpen } from '../..
 import { queueSnackbar } from '../../store/snackbars';
 import { signInProviders } from '../../config/site';
 import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
+import { illustration, illustrationStyles } from '../../illustrations/illustration';
+import signInArt from '../../illustrations/sign-in.svg?raw';
 import '../shared/hoverboard-icon';
 import '../ui/hb-button';
 import '../ui/hb-dialog';
@@ -28,24 +30,32 @@ const generalError = () =>
 
 @customElement('signin-dialog')
 export class SigninDialog extends ThemedElement {
-  static override styles = css`
-    .sign-in-button {
-      --hb-button-color: var(--hb-color-on-surface);
+  static override styles = [
+    illustrationStyles,
+    css`
+      .illustration {
+        inline-size: min(100%, 12rem);
+        margin: 0 auto var(--hb-space-4);
+      }
 
-      margin: 16px 0;
-      display: flex;
-    }
+      .sign-in-button {
+        --hb-button-color: var(--hb-color-on-surface);
 
-    .merge-content .subtitle,
-    .merge-content .explanation {
-      margin-bottom: 16px;
-    }
+        margin: 16px 0;
+        display: flex;
+      }
 
-    .action-button {
-      display: flex;
-      justify-content: flex-end;
-    }
-  `;
+      .merge-content .subtitle,
+      .merge-content .explanation {
+        margin-bottom: 16px;
+      }
+
+      .action-button {
+        display: flex;
+        justify-content: flex-end;
+      }
+    `,
+  ];
 
   private signInProviders = signInProviders;
 
@@ -134,6 +144,7 @@ export class SigninDialog extends ThemedElement {
               `
             : html`
                 <div>
+                  ${illustration(signInArt)}
                   ${this.signInProviders.providersData.map(
                     (provider) => html`
                       <hb-button

@@ -53,5 +53,6 @@ describe('my-schedule', () => {
     expect(shadowRoot.querySelector('.hint')).toHaveTextContent(
       'Bookmark sessions in the schedule to see them here.',
     );
+    expect(shadowRoot.querySelector('.empty .illustration')).toHaveAttribute('aria-hidden', 'true');
   });
 });

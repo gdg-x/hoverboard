@@ -109,6 +109,7 @@ describe('schedule-day', () => {
     expect(shadowRoot.querySelector('.empty')).toHaveTextContent(
       'No sessions match these filters.',
     );
+    expect(shadowRoot.querySelector('.empty .illustration svg')).toBeInTheDocument();
     expect(shadowRoot.querySelector('.empty hb-button')).toHaveTextContent('Clear filters');
   });
 

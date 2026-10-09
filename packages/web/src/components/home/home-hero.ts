@@ -24,7 +24,7 @@ import { ThemedElement } from '../themed-element';
 import '../ui/hb-button';
 import '../ui/hb-chip';
 import '../ui/hb-sticker';
-import { defaultIllustration } from './hero-illustration';
+import heroArt from '../../illustrations/hero.svg?raw';
 
 /**
  * The top of the home page: the event state, the event name, dates and place, and the calls to
@@ -200,7 +200,7 @@ export class HomeHero extends ThemedElement {
             // The demo banner can turn decorations on, so a demo site always has the drawing.
             decorations || __HB_FEATURES__.demo
               ? html`<div class="art" aria-hidden="true">
-                  ${heroIllustration ? unsafeHTML(heroIllustration) : defaultIllustration}
+                  ${unsafeHTML(heroIllustration ?? heroArt)}
                 </div>`
               : nothing
           }

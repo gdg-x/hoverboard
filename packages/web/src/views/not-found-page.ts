@@ -4,6 +4,8 @@ import { customElement } from 'lit/decorators.js';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import '../components/hero/simple-hero';
 import '../components/ui/hb-button';
+import { illustration, illustrationStyles } from '../illustrations/illustration';
+import notFound from '../illustrations/not-found.svg?raw';
 import { pageInner } from '../styles/page';
 import { ThemedElement } from '../components/themed-element';
 
@@ -12,6 +14,7 @@ import { ThemedElement } from '../components/themed-element';
 export class NotFoundPage extends ThemedElement {
   static override styles = [
     pageInner,
+    illustrationStyles,
     css`
       .inner {
         display: grid;
@@ -21,10 +24,7 @@ export class NotFoundPage extends ThemedElement {
       }
 
       .art {
-        display: block;
-        inline-size: 100%;
-        max-inline-size: 28rem;
-        block-size: auto;
+        max-inline-size: 24rem;
       }
 
       .joke {
@@ -60,7 +60,7 @@ export class NotFoundPage extends ThemedElement {
       <simple-hero page="notFound"></simple-hero>
 
       <div class="inner">
-        <img class="art" src="/images/not-found.svg" alt="" width="1121" height="778" />
+        ${illustration(notFound, 'art')}
         <div class="text">
           <p class="joke">
             ${msg('This session was moved to another room.', { id: 'pages.not-found.joke' })}

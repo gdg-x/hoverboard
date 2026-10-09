@@ -3,6 +3,8 @@ import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/ui/hb-button';
+import { illustration, illustrationStyles } from '../illustrations/illustration';
+import offline from '../illustrations/offline.svg?raw';
 import { pageInner } from '../styles/page';
 import { ThemedElement } from '../components/themed-element';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
@@ -12,7 +14,13 @@ import { PageMetadataController } from '../controllers/page-metadata-controller'
 export class OfflinePage extends ThemedElement {
   static override styles = [
     pageInner,
+    illustrationStyles,
     css`
+      .art {
+        max-inline-size: 18rem;
+        margin-block-end: var(--hb-space-6);
+      }
+
       .inner > p,
       li {
         max-inline-size: var(--hb-prose-max);
@@ -47,6 +55,7 @@ export class OfflinePage extends ThemedElement {
       <simple-hero page="offline"></simple-hero>
 
       <div class="inner">
+        ${illustration(offline, 'art')}
         <p>
           ${msg('You are offline, and this page was not saved on this device yet.', {
             id: 'pages.offline.not-saved',

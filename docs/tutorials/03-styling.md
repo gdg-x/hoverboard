@@ -113,6 +113,20 @@ The tag color marks the stripe on a session card. Tag chips use a pale version o
 }
 ```
 
+## Illustrations
+
+The drawings in the home hero, the subscribe band, the 404 and offline pages, the sign-in dialog, the feedback form, an empty My Schedule and filters with no results come from [unDraw](https://undraw.co/illustrations). Thanks to Katerina Limpitsouni for them. Their [license](https://undraw.co/license) needs no credit.
+
+They follow the theme: the accent is the theme's `primary` color, and the grays are the surface and text colors, so they also switch with the dark scheme. Only skin tones keep their own colors. With `decorations` off, the hero and subscribe band drawings are hidden; the others stay, because they explain an empty or error state.
+
+To change one, download an SVG from unDraw and run:
+
+```console
+npm --prefix packages/web run illustrations -- ~/Downloads/drawing.svg not-found
+```
+
+It optimizes the SVG and replaces its colors with theme colors, and writes `packages/web/src/illustrations/not-found.svg`. It stops on a color it does not know, so add that color to `build/illustrations.mjs`. A test checks that every illustration went through the script and is under 15KB.
+
 ## Hero
 
 The home page hero uses the theme's first accent color with a dot pattern. `heroSettings.home` in `packages/config/site.json` can add an illustration or a background photo ([Pages configuration](01-configure-app.md#pages-configuration)). With a photo, the build checks that the dark scheme's `onSurface` text is readable on its `scrim` over a white photo. If it is not, set a darker `theme.darkColors.scrim`.

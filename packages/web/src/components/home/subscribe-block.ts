@@ -1,9 +1,11 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import { css, html, type PropertyValues } from 'lit';
+import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import { subscribeBlock } from '../../config/site';
+import { decorations, subscribeBlock } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
+import { illustration, illustrationStyles } from '../../illustrations/illustration';
+import subscribeArt from '../../illustrations/subscribe.svg?raw';
 import { subscribe, type SubscribeState } from '../../store/subscribe';
 import type { UserState } from '../../store/user';
 import { band } from '../../styles/band';
@@ -18,6 +20,7 @@ import type { HbTextField } from '../ui/hb-text-field';
 export class SubscribeBlock extends ThemedElement {
   static override styles = [
     band,
+    illustrationStyles,
     css`
       :host {
         background-color: var(--hb-color-accent-3-container);
@@ -27,6 +30,12 @@ export class SubscribeBlock extends ThemedElement {
       .inner {
         display: grid;
         gap: var(--hb-space-6);
+      }
+
+      .illustration {
+        display: var(--hb-decorations-display, block);
+        inline-size: min(100%, 10rem);
+        margin-block-start: var(--hb-space-5);
       }
 
       /* A sentence, not a word, so smaller than other section titles. */
@@ -97,6 +106,10 @@ export class SubscribeBlock extends ThemedElement {
             })}
           </h2>
           <p class="band-lede">${subscribeBlock.formTitle}</p>
+          ${
+            // The demo banner can turn decorations on, so a demo site always has the drawing.
+            decorations || __HB_FEATURES__.demo ? illustration(subscribeArt) : nothing
+          }
         </div>
         ${this.subscribed instanceof Success ? this.renderSubscribed() : this.renderForm()}
       </div>

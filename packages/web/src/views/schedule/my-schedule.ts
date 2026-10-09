@@ -7,35 +7,51 @@ import '../../components/shared/auth-required';
 import './schedule-day';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../../components/themed-element';
+import { illustration, illustrationStyles } from '../../illustrations/illustration';
+import emptySchedule from '../../illustrations/empty-schedule.svg?raw';
 
 /** The signed-in visitor's bookmarked sessions, day by day. */
 @customElement('my-schedule')
 export class MySchedule extends ThemedElement {
-  static override styles = css`
-    :host {
-      display: block;
-    }
+  static override styles = [
+    illustrationStyles,
+    css`
+      :host {
+        display: block;
+      }
 
-    auth-required {
-      display: block;
-    }
+      .empty {
+        display: grid;
+        justify-items: start;
+        gap: var(--hb-space-4);
+        margin-block: var(--hb-space-6);
+      }
 
-    .prompt,
-    .hint {
-      margin: var(--hb-space-3) 0;
-      max-inline-size: var(--hb-prose-max);
-    }
+      .empty .illustration {
+        inline-size: min(100%, 16rem);
+      }
 
-    .date {
-      margin: var(--hb-space-7) 0 var(--hb-space-3);
-      padding: 0;
-      font: 800 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
-    }
+      auth-required {
+        display: block;
+      }
 
-    .date:first-of-type {
-      margin-block-start: var(--hb-space-4);
-    }
-  `;
+      .prompt,
+      .hint {
+        margin: var(--hb-space-3) 0;
+        max-inline-size: var(--hb-prose-max);
+      }
+
+      .date {
+        margin: var(--hb-space-7) 0 var(--hb-space-3);
+        padding: 0;
+        font: 800 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
+      }
+
+      .date:first-of-type {
+        margin-block-start: var(--hb-space-4);
+      }
+    `,
+  ];
 
   @fromStore((state) => selectFeaturedSchedule(state))
   accessor featuredSchedule!: Day[];
@@ -53,11 +69,14 @@ export class MySchedule extends ThemedElement {
         ${
           bookmarks || !this.featuredSchedule.length
             ? nothing
-            : html`<p class="hint">
-                ${msg('Bookmark sessions in the schedule to see them here.', {
-                  id: 'schedule.my-schedule.empty',
-                })}
-              </p>`
+            : html`<div class="empty">
+                ${illustration(emptySchedule)}
+                <p class="hint">
+                  ${msg('Bookmark sessions in the schedule to see them here.', {
+                    id: 'schedule.my-schedule.empty',
+                  })}
+                </p>
+              </div>`
         }
         ${this.featuredSchedule.map(
           (day) => html`

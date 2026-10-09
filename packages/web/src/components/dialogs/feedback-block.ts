@@ -1,8 +1,10 @@
 import { type RemoteData, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import { css, html, type PropertyValues } from 'lit';
+import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
+import { illustration, illustrationStyles } from '../../illustrations/illustration';
+import thankYou from '../../illustrations/thank-you.svg?raw';
 import type { Feedback } from '../../models/feedback';
 import { store } from '../../store';
 import {
@@ -22,35 +24,55 @@ import { ThemedElement } from '../themed-element';
 
 @customElement('feedback-block')
 export class FeedbackBlock extends ThemedElement {
-  static override styles = css`
-    .container {
-      padding: var(--hb-space-6) var(--hb-space-4);
-    }
-
-    #commentInput {
-      width: 100%;
-    }
-
-    star-rating,
-    .caption {
-      display: inline-block;
-      vertical-align: bottom;
-      --star-color: var(--hb-color-primary);
-    }
-
-    @media (min-width: 640px) {
-      .caption {
-        width: 25%;
+  static override styles = [
+    illustrationStyles,
+    css`
+      .container {
+        padding: var(--hb-space-6) var(--hb-space-4);
       }
-    }
 
-    @media (max-width: 640px) {
+      .thanks {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--hb-space-4);
+        margin-block-end: var(--hb-space-5);
+      }
+
+      .thanks .illustration {
+        inline-size: min(100%, 8rem);
+      }
+
+      .thanks p {
+        margin: 0;
+        font-weight: 600;
+      }
+
+      #commentInput {
+        width: 100%;
+      }
+
       star-rating,
       .caption {
-        display: block;
+        display: inline-block;
+        vertical-align: bottom;
+        --star-color: var(--hb-color-primary);
       }
-    }
-  `;
+
+      @media (min-width: 640px) {
+        .caption {
+          width: 25%;
+        }
+      }
+
+      @media (max-width: 640px) {
+        star-rating,
+        .caption {
+          display: block;
+        }
+      }
+    `,
+  ];
 
   @property({ type: Number })
   accessor contentRating = 0;
@@ -75,6 +97,14 @@ export class FeedbackBlock extends ThemedElement {
   override render() {
     return html`
       <div class="container">
+        ${
+          this.hasSavedFeedback
+            ? html`<div class="thanks">
+                ${illustration(thankYou)}
+                <p>${msg('Thanks for your feedback.', { id: 'dialogs.feedback.thanks' })}</p>
+              </div>`
+            : nothing
+        }
         <div>
           <div class="caption">
             ${msg('Content quality:', { id: 'dialogs.feedback.content-rating' })}

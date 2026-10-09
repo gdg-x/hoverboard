@@ -11,6 +11,7 @@
   "scripts": {
     "build": "npm run clean && npm run localize:build && NODE_ENV=production astro build && NODE_ENV=production VITE_CONFIG_NATIVE_IGNORE_WARNING=true vite build --config vite.sw.config.ts",
     "clean": "rm -rf dist",
+    "illustrations": "node build/illustrations.mjs",
     "lint:astro": "npm run localize:build && astro check",
     "lint:lit-analyzer": "lit-analyzer 'src/**/*.ts' --rules.no-incompatible-type-binding off",
     "lint:types": "npm run localize:build && tsc --noEmit",
@@ -60,6 +61,7 @@
     "lit-analyzer": "^2.0.3",
     "nunjucks": "^3.2.4",
     "rollup-plugin-copy": "^3.5.0",
+    "svgo": "^4.1.0",
     "typescript": "^6.0.3",
     "vite": "^8.3.2",
     "workbox-build": "^7.4.1"

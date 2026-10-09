@@ -19,6 +19,8 @@ import { clearFilters } from '../utils/filters';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
+import { illustration, illustrationStyles } from '../illustrations/illustration';
+import noResults from '../illustrations/no-results.svg?raw';
 
 // A stable reference, so `selectFilterGroups` stays memoized.
 const SPEAKER_FILTER_GROUPS = [FilterGroupKey.tags];
@@ -26,45 +28,52 @@ const SPEAKER_FILTER_GROUPS = [FilterGroupKey.tags];
 /** Every speaker as a card, with filters by the tags of their sessions. */
 @customElement('speakers-page')
 export class SpeakersPage extends ThemedElement {
-  static override styles = css`
-    :host {
-      display: block;
-      background-color: var(--hb-color-surface);
-      color: var(--hb-color-on-surface);
-    }
+  static override styles = [
+    illustrationStyles,
+    css`
+      :host {
+        display: block;
+        background-color: var(--hb-color-surface);
+        color: var(--hb-color-on-surface);
+      }
 
-    /* Content-box, so the text column lines up with the hero's. */
-    .inner {
-      box-sizing: content-box;
-      max-inline-size: var(--hb-content-max);
-      margin-inline: auto;
-      padding: var(--hb-space-5) var(--hb-gutter) var(--hb-space-9);
-    }
+      /* Content-box, so the text column lines up with the hero's. */
+      .inner {
+        box-sizing: content-box;
+        max-inline-size: var(--hb-content-max);
+        margin-inline: auto;
+        padding: var(--hb-space-5) var(--hb-gutter) var(--hb-space-9);
+      }
 
-    .speakers {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
-      gap: var(--hb-space-5);
-      margin: var(--hb-space-5) 0 0;
-      padding: 0;
-      list-style: none;
-    }
+      .speakers {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+        gap: var(--hb-space-5);
+        margin: var(--hb-space-5) 0 0;
+        padding: 0;
+        list-style: none;
+      }
 
-    .speakers > li {
-      display: grid;
-    }
+      .speakers > li {
+        display: grid;
+      }
 
-    .empty {
-      display: grid;
-      justify-items: start;
-      gap: var(--hb-space-3);
-      padding-block: var(--hb-space-6);
-    }
+      .empty {
+        display: grid;
+        justify-items: start;
+        gap: var(--hb-space-3);
+        padding-block: var(--hb-space-6);
+      }
 
-    .empty p {
-      margin: 0;
-    }
-  `;
+      .empty p {
+        margin: 0;
+      }
+
+      .empty .illustration {
+        inline-size: min(100%, 12rem);
+      }
+    `,
+  ];
 
   private readonly metadata = new PageMetadataController(this, 'speakers');
 
@@ -94,6 +103,7 @@ export class SpeakersPage extends ThemedElement {
         ${
           speakers.length === 0 && this.selectedFilters.length
             ? html`<div class="empty">
+                ${illustration(noResults)}
                 <p>
                   ${msg('No speakers match these filters.', { id: 'pages.speakers.no-results' })}
                 </p>

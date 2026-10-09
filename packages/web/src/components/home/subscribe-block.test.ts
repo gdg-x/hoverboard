@@ -54,6 +54,7 @@ describe('subscribe-block', () => {
     expect(field).toHaveAttribute('type', 'email');
     expect(field).toHaveAttribute('required');
     expect(shadowRoot.querySelector('hb-button')).toHaveTextContent('Subscribe');
+    expect(shadowRoot.querySelector('.illustration svg')).toBeInTheDocument();
   });
 
   it('subscribes the email', async () => {
