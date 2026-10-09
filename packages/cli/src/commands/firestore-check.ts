@@ -1,9 +1,4 @@
-import {
-  type CollectionReference,
-  DocumentReference,
-  type Firestore,
-  Timestamp,
-} from 'firebase-admin/firestore';
+import type { CollectionReference, Firestore } from 'firebase-admin/firestore';
 import {
   type CollectionInfo,
   RETIRED,
@@ -11,6 +6,7 @@ import {
   pathPattern,
 } from '../../../storage/collections.js';
 import { documentUrl } from '../../../storage/messages.js';
+import { toJson } from '../../../storage/validate.js';
 import type { Track } from '../../../web/src/schedule/build-schedule.js';
 import { documentMessages, scheduleMessages } from '../lib/content.js';
 import { resolveFirebaseProjectId } from '../utils/firebase-project.js';
@@ -52,17 +48,6 @@ export interface CheckOptions {
 
 // Firestore takes at most 500 documents in one read. Fewer keeps each request small.
 const GET_ALL_SIZE = 300;
-
-/** The data with timestamps and references as the schema writes them in JSON. */
-export const toJson = (value: unknown): unknown => {
-  if (value instanceof Timestamp) return { $timestamp: value.toDate().toISOString() };
-  if (value instanceof DocumentReference) return { $reference: value.path };
-  if (Array.isArray(value)) return value.map(toJson);
-  if (value && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype) {
-    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, toJson(item)]));
-  }
-  return value;
-};
 
 /**
  * Every document in the database, or in one collection, with subcollections, and missing

@@ -1,11 +1,11 @@
 import { Firestore, Timestamp } from 'firebase-admin/firestore';
 import { describe, expect, it } from 'vitest';
+import { toJson } from '../../../storage/validate.js';
 import {
   type FirestoreDocument,
   checkDocuments,
   formatReport,
   listAllDocuments,
-  toJson,
 } from './firestore-check.js';
 
 const tracks = [{ id: 'main', title: 'Main hall' }];

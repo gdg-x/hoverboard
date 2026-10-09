@@ -15,13 +15,18 @@ interface Doc {
 /** A Firestore stand-in that records each query and returns `docs` for its path. */
 const fakeFirestore = (docs: Record<string, Doc[]> = {}) => {
   const queries: string[] = [];
+  // The collections that partner items and team members are under.
+  const parents: Record<string, string> = { items: 'partners', members: 'team' };
   const get = (description: string, path: string) => () => {
     queries.push(description);
     return Promise.resolve({
       docs: (docs[path] ?? []).map(({ id, data, parentId }) => ({
         id,
         data: () => data,
-        ref: { parent: { parent: parentId ? { id: parentId } : null } },
+        ref: {
+          path: parentId ? `${parents[path]}/${parentId}/${path}/${id}` : `${path}/${id}`,
+          parent: { parent: parentId ? { id: parentId } : null },
+        },
       })),
     });
   };
@@ -99,7 +104,13 @@ describe('readContent', () => {
   });
 
   it('fails a build on sessions the schedule cannot show, and only warns in development', async () => {
-    const overlap = { day: '2016-09-09', track: 'expo-hall', endTime: '10:00' };
+    const overlap = {
+      title: 'Talk',
+      description: '',
+      day: '2016-09-09',
+      track: 'expo-hall',
+      endTime: '10:00',
+    };
     const { db } = fakeFirestore({
       sessions: [
         { id: 'a', data: { ...overlap, startTime: '09:00' } },
@@ -107,7 +118,9 @@ describe('readContent', () => {
       ],
     });
     const message =
-      'The schedule has problems:\n  sessions/a and sessions/b overlap on 2016-09-09 in expo-hall';
+      'The content in Firestore has problems:\n' +
+      '  sessions/a and sessions/b overlap on 2016-09-09 in expo-hall\n' +
+      'Fix them in the Firebase console, then check with `./hb firestore-check`.';
 
     vi.stubEnv('DEV', false);
     await expect(readContent(db)).rejects.toThrow(message);
@@ -117,6 +130,64 @@ describe('readContent', () => {
     await expect(readContent(db)).resolves.toHaveProperty('sessions');
     expect(warn).toHaveBeenCalledWith(message);
     warn.mockRestore();
+  });
+
+  it('fails a build on documents that the schema rejects, with links to them', async () => {
+    const { db } = fakeFirestore({
+      sessions: [{ id: 'talk', data: { title: 'Talk', extend: 2 } }],
+      members: [{ id: 'ada', parentId: 'core', data: { name: 'Ada' } }],
+    });
+
+    vi.stubEnv('DEV', false);
+    const error = await readContent(db).then(
+      () => new Error('The build passed'),
+      (caught: unknown) => caught as Error,
+    );
+
+    expect(error.message).toContain(
+      `  sessions/talk: missing "description". http://127.0.0.1:4000/firestore/default/data/sessions/talk`,
+    );
+    expect(error.message).toContain('  sessions/talk: unknown field "extend".');
+    expect(error.message).toContain('  team/core/members/ada: missing "order".');
+  });
+
+  it('links to the Firebase console when it reads production', async () => {
+    const { db } = fakeFirestore({ sessions: [{ id: 'talk', data: { title: 'Talk' } }] });
+
+    vi.stubEnv('DEV', false);
+    vi.stubEnv('FIRESTORE_TARGET', 'production');
+
+    await expect(readContent(db)).rejects.toThrow(
+      /https:\/\/console\.firebase\.google\.com\/project\/[\w-]+\/firestore\/databases\/-default-\/data\/~2Fsessions~2Ftalk/,
+    );
+  });
+
+  it('warns about invalid content of features that are off, without failing the build', async () => {
+    setFeatures({ blog: false });
+    const { db, queries } = fakeFirestore({ blog: [{ id: 'hello', data: { title: 'Hello' } }] });
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+
+    vi.stubEnv('DEV', false);
+    const content = await readContent(db);
+
+    expect(content).not.toHaveProperty('blog');
+    expect(queries).toContain('collection blog');
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringMatching(
+        /^blog\/hello: missing "\w+"\. .* Not a build error, because features\.blog is off\. Fix it before turning it on\.$/,
+      ),
+    );
+    warn.mockRestore();
+  });
+
+  it('only reads the content of features that are off in production builds', async () => {
+    setFeatures({ blog: false });
+    const { db, queries } = fakeFirestore();
+
+    vi.stubEnv('DEV', true);
+    await readContent(db);
+
+    expect(queries).not.toContain('collection blog');
   });
 
   it('leaves out the content of disabled features', async () => {

@@ -5,7 +5,10 @@ import type {
   QueryDocumentSnapshot,
 } from 'firebase-admin/firestore';
 import { env } from 'node:process';
+import { site } from 'virtual:hoverboard/site';
 import { COLLECTIONS, type CollectionPath } from '../../../storage/collections';
+import { documentUrl } from '../../../storage/messages';
+import { documentMessages, toJson } from '../../../storage/validate';
 import type { Feature } from '../config/features';
 import { scheduleTracks } from '../config/site';
 import { scheduleErrors } from '../schedule/build-schedule';
@@ -21,41 +24,72 @@ const withParentId = (doc: QueryDocumentSnapshot): DocumentData => ({
   id: doc.id,
 });
 
-const read = async (
-  query: Query,
-  map: (doc: QueryDocumentSnapshot) => DocumentData,
-): Promise<DocumentData[]> => (await query.get()).docs.map(map);
+type ToData = (doc: QueryDocumentSnapshot) => DocumentData;
 
 // The same queries as the subscriptions in src/db/, with the collection whose features they need.
 const LOADERS = {
-  blog: ['blog', (db) => read(db.collection('blog').orderBy('published', 'desc'), withId)],
-  gallery: ['gallery', (db) => read(db.collection('gallery').orderBy('order'), withId)],
-  members: [
-    'team/*/members',
-    (db) => read(db.collectionGroup('members').orderBy('name'), withParentId),
-  ],
-  partnerGroups: ['partners', (db) => read(db.collection('partners').orderBy('order'), withId)],
+  blog: ['blog', (db) => db.collection('blog').orderBy('published', 'desc'), withId],
+  gallery: ['gallery', (db) => db.collection('gallery').orderBy('order'), withId],
+  members: ['team/*/members', (db) => db.collectionGroup('members').orderBy('name'), withParentId],
+  partnerGroups: ['partners', (db) => db.collection('partners').orderBy('order'), withId],
   partners: [
     'partners/*/items',
-    (db) => read(db.collectionGroup('items').orderBy('order'), withParentId),
+    (db) => db.collectionGroup('items').orderBy('order'),
+    withParentId,
   ],
   previousSpeakers: [
     'previousSpeakers',
-    (db) => read(db.collection('previousSpeakers').orderBy('name'), withId),
+    (db) => db.collection('previousSpeakers').orderBy('name'),
+    withId,
   ],
-  sessions: ['sessions', (db) => read(db.collection('sessions'), withId)],
-  speakers: ['speakers', (db) => read(db.collection('speakers'), withId)],
-  teams: ['team', (db) => read(db.collection('team').orderBy('title'), withId)],
-  tickets: ['tickets', (db) => read(db.collection('tickets').orderBy('order'), withId)],
-  videos: ['videos', (db) => read(db.collection('videos').orderBy('order'), withId)],
-} satisfies Record<keyof Content, [CollectionPath, (db: Firestore) => Promise<DocumentData[]>]>;
+  sessions: ['sessions', (db) => db.collection('sessions'), withId],
+  speakers: ['speakers', (db) => db.collection('speakers'), withId],
+  teams: ['team', (db) => db.collection('team').orderBy('title'), withId],
+  tickets: ['tickets', (db) => db.collection('tickets').orderBy('order'), withId],
+  videos: ['videos', (db) => db.collection('videos').orderBy('order'), withId],
+} satisfies Record<keyof Content, [CollectionPath, (db: Firestore) => Query, ToData]>;
 
-const enabledLoaders = () =>
-  Object.entries(LOADERS).filter(([, [path]]) =>
-    COLLECTIONS[path].features.some((feature) => __HB_FEATURES__[feature as Feature]),
+const inUse = (path: CollectionPath) =>
+  COLLECTIONS[path].features.some((feature) => __HB_FEATURES__[feature as Feature]);
+
+const enabledLoaders = () => Object.entries(LOADERS).filter(([, [path]]) => inUse(path));
+
+/** The problems with the documents, against firestore.schema.json, with links to them. */
+const contentProblems = (docs: QueryDocumentSnapshot[]): string[] => {
+  const projectId = env['FIRESTORE_TARGET'] === 'production' ? site.firebase.projectId : undefined;
+  return docs.flatMap((doc) =>
+    documentMessages(doc.ref.path, toJson(doc.data()), documentUrl(doc.ref.path, projectId)),
   );
+};
 
-const checkSchedule = ({ sessions = [] }: Partial<Content>) => {
+/**
+ * Warns about invalid content of features that are off, which the site doesn't read, so it is
+ * right before a feature is turned on.
+ */
+const warnAboutUnusedContent = async (db: Firestore) => {
+  const unused = Object.entries(COLLECTIONS).filter(
+    ([path, { kind }]) => kind === 'content' && !inUse(path as CollectionPath),
+  );
+  const snapshots = await Promise.all(
+    unused.map(async ([path, { features }]) => {
+      // Partner items and team members are read as collection groups, like the site does.
+      const query = path.includes('/')
+        ? db.collectionGroup(path.split('/').pop()!)
+        : db.collection(path);
+      return [features, (await query.get()).docs] as const;
+    }),
+  );
+  for (const [features, docs] of snapshots) {
+    const names = features.map((feature) => `features.${feature}`).join(' and ');
+    for (const problem of contentProblems(docs)) {
+      console.warn(
+        `${problem} Not a build error, because ${names} ${features.length === 1 ? 'is' : 'are'} off. Fix it before turning it on.`,
+      );
+    }
+  }
+};
+
+const scheduleProblems = ({ sessions = [] }: Partial<Content>): string[] => {
   // Sessions from before v4 got their times from the `schedule` collection.
   if (__HB_FEATURES__.schedule && sessions.length && !sessions.some(({ day }) => day)) {
     console.warn(
@@ -63,22 +97,34 @@ const checkSchedule = ({ sessions = [] }: Partial<Content>) => {
         'Sessions from before v4 need `./hb convert-schedule`. See docs/tutorials/firebase-utils.md.',
     );
   }
-  const errors = scheduleErrors(sessions, scheduleTracks);
-  if (!errors.length) return;
-  const message = `The schedule has problems:\n${errors.map((error) => `  ${error}`).join('\n')}`;
-  // In development, the content can be halfway through an edit.
-  if (!import.meta.env.DEV) throw new Error(message);
-  console.warn(message);
+  return scheduleErrors(sessions, scheduleTracks);
 };
 
 /** Reads the content of the enabled features. Disabled features have no key. */
 export const readContent = async (db: Firestore): Promise<Partial<Content>> => {
-  const entries = await Promise.all(
-    enabledLoaders().map(async ([name, [, load]]) => [name, await load(db)] as const),
+  const loaded = await Promise.all(
+    enabledLoaders().map(async ([name, [, query, map]]) => {
+      const { docs } = await query(db).get();
+      return { name, docs, data: docs.map(map) };
+    }),
   );
   // Firestore data is untyped. The models in src/models/ describe it, as they do for the client.
-  const content = Object.fromEntries(entries) as Partial<Content>;
-  checkSchedule(content);
+  const content = Object.fromEntries(
+    loaded.map(({ name, data }) => [name, data]),
+  ) as Partial<Content>;
+  const problems = [
+    ...contentProblems(loaded.flatMap(({ docs }) => docs)),
+    ...scheduleProblems(content),
+  ];
+  if (problems.length) {
+    const message =
+      `The content in Firestore has problems:\n${problems.map((problem) => `  ${problem}`).join('\n')}\n` +
+      'Fix them in the Firebase console, then check with `./hb firestore-check`.';
+    // In development, the content can be halfway through an edit.
+    if (!import.meta.env.DEV) throw new Error(message);
+    console.warn(message);
+  }
+  if (!import.meta.env.DEV) await warnAboutUnusedContent(db);
   return content;
 };
 
