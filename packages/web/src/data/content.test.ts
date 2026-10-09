@@ -75,39 +75,17 @@ describe('readContent', () => {
     expect(content.members).toEqual([{ id: 'grace', parentId: 'core', name: 'Grace' }]);
   });
 
-  it('builds the schedule, sessions and speakers from the raw sessions and speakers', async () => {
+  it('reads the raw sessions and speakers', async () => {
     const { db } = fakeFirestore({
-      sessions: [
-        {
-          id: 'talk',
-          data: {
-            title: 'Talk',
-            speakers: ['ada'],
-            tags: ['Web'],
-            day: '2016-09-09',
-            startTime: '09:00',
-            endTime: '09:40',
-            track: 'expo-hall',
-          },
-        },
-      ],
+      sessions: [{ id: 'talk', data: { title: 'Talk', speakers: ['ada'] } }],
       speakers: [{ id: 'ada', data: { name: 'Ada' } }],
     });
 
     const content = await readContent(db);
 
-    expect(content.schedule?.map(({ date }) => date)).toEqual(['2016-09-09']);
-    expect(content.sessions?.[0]).toMatchObject({
-      id: 'talk',
-      mainTag: 'Web',
-      track: { id: 'expo-hall', title: 'Expo hall' },
-      speakers: [{ id: 'ada', name: 'Ada' }],
-    });
-    expect(content.speakers?.[0]).toMatchObject({
-      id: 'ada',
-      tags: ['Web'],
-      sessions: [{ id: 'talk' }],
-    });
+    expect(content.sessions).toEqual([{ id: 'talk', title: 'Talk', speakers: ['ada'] }]);
+    expect(content.speakers).toEqual([{ id: 'ada', name: 'Ada' }]);
+    expect(content).not.toHaveProperty('schedule');
   });
 
   it('fails a build on sessions the schedule cannot show, and only warns in development', async () => {
@@ -126,7 +104,7 @@ describe('readContent', () => {
 
     vi.stubEnv('DEV', true);
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
-    await expect(readContent(db)).resolves.toHaveProperty('schedule');
+    await expect(readContent(db)).resolves.toHaveProperty('sessions');
     expect(warn).toHaveBeenCalledWith(message);
     warn.mockRestore();
   });
@@ -150,7 +128,6 @@ describe('readContent', () => {
     const { db, queries } = fakeFirestore();
 
     expect(await readContent(db)).toHaveProperty('sessions');
-    expect(await readContent(db)).not.toHaveProperty('schedule');
 
     setFeatures({ schedule: false, speakers: false });
     queries.length = 0;

@@ -3,7 +3,7 @@ import { msg, str } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import type { Session } from '../../models/session';
+import type { BuiltSession } from '../../schedule/build-schedule';
 import { sessionPath } from '../../utils/navigation';
 import { store } from '../../store';
 import { openFeedbackDialog, openSigninDialog } from '../../store/dialogs';
@@ -23,22 +23,6 @@ import '../ui/hb-chip';
 import '../ui/hb-icon-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
-
-// The schedule generator (`packages/server/functions/src/schedule-generator/`) replaces speaker ids
-// with speaker summaries, and adds the main tag, track and duration.
-interface SessionSpeaker {
-  company: string;
-  country: string;
-  name: string;
-  photoUrl: string;
-}
-
-export type ScheduleSession = Omit<Session, 'speakers' | 'track'> & {
-  duration?: { hh: number; mm: number };
-  mainTag?: string;
-  speakers?: SessionSpeaker[];
-  track?: { title: string };
-};
 
 /** "1 hr 30 min", in the page locale. */
 export const formatDuration = ({ hh, mm }: { hh: number; mm: number }) =>
@@ -189,7 +173,7 @@ export class SessionElement extends ThemedElement {
   @fromStore((state) => state.user)
   accessor user!: UserState;
   @property({ attribute: false })
-  accessor session: Session | undefined;
+  accessor session: BuiltSession | undefined;
   @fromStore((state) => selectFeaturedSessionsState(state))
   accessor featuredSessions!: FeaturedSessionsState;
 
@@ -205,7 +189,7 @@ export class SessionElement extends ThemedElement {
   }
 
   override render() {
-    const session = this.session as ScheduleSession | undefined;
+    const session = this.session;
     if (!session) return nothing;
     const meta = [
       session.track?.title,
@@ -259,7 +243,7 @@ export class SessionElement extends ThemedElement {
     `;
   }
 
-  private renderAction(session: ScheduleSession) {
+  private renderAction(session: BuiltSession) {
     if (this.acceptingFeedback) {
       return html`
         <hb-icon-button

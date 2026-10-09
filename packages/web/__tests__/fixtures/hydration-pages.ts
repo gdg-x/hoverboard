@@ -1,9 +1,8 @@
 import { html, type TemplateResult } from 'lit';
-import type { Day } from '../../src/models/day';
 import type { Post } from '../../src/models/post';
 import type { PreviousSpeaker } from '../../src/models/previous-speaker';
 import type { Session } from '../../src/models/session';
-import type { SpeakerWithTags } from '../../src/models/speaker';
+import type { Speaker } from '../../src/models/speaker';
 import type { Content } from '../../src/store/content';
 import type { RouteLocation } from '../../src/utils/navigation';
 
@@ -28,8 +27,7 @@ const speakers = ['ada', 'grace', 'alan', 'barbara', 'edsger'].map((id, index) =
   bio: `**${id}** builds things.`,
   socials: [{ icon: 'github', link: `https://github.com/${id}`, name: 'GitHub' }],
   badges: [{ name: 'gde', link: 'https://developers.google.com', description: 'GDE' }],
-  tags: [],
-})) as never as SpeakerWithTags[];
+})) as never as Speaker[];
 
 const previousSpeakers = Array.from({ length: 16 }, (_, index) => ({
   id: `previous-${index}`,
@@ -46,21 +44,9 @@ const session = {
   day: '2026-10-08',
   startTime: '10:00',
   endTime: '11:00',
-  speakers: [],
+  speakers: ['ada'],
   tags: ['Web'],
 } as never as Session;
-
-const day: Day = {
-  date: '2026-10-08',
-  tracks: [{ title: 'Main' }],
-  timeslots: [
-    {
-      startTime: '10:00',
-      endTime: '11:00',
-      sessions: [{ items: [session], gridArea: '1 / 2 / 2 / 3' } as never],
-    },
-  ],
-};
 
 const post = {
   id: 'hello',
@@ -111,7 +97,7 @@ export const HYDRATION_PAGES: Record<string, HydrationPage> = {
     search: '?tags=Web',
   },
   'speaker page': {
-    content: { speakers, previousSpeakers },
+    content: { speakers: speakers.slice(0, 1), sessions: [session], previousSpeakers },
     load: () => import('../../src/views/speaker-page'),
     template: () => html`<speaker-page .speakerId=${'ada'}></speaker-page>`,
   },
@@ -140,12 +126,12 @@ export const HYDRATION_PAGES: Record<string, HydrationPage> = {
     template: () => html`<team-page></team-page>`,
   },
   'session page': {
-    content: { sessions: [session] },
+    content: { sessions: [session], speakers: speakers.slice(0, 1) },
     load: () => import('../../src/views/session-page'),
     template: () => html`<session-page .sessionId=${'s1'}></session-page>`,
   },
   'schedule day': {
-    content: { schedule: [day], sessions: [session], speakers },
+    content: { sessions: [session], speakers },
     load: () =>
       Promise.all([
         import('../../src/views/schedule-page'),

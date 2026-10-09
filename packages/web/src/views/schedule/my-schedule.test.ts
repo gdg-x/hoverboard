@@ -1,17 +1,18 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import type { Day } from '../../models/day';
+import type { BuiltDay } from '../../schedule/build-schedule';
 import type { MySchedule } from './my-schedule';
 import './my-schedule';
 
-const day = (date: string, items: unknown[] = []): Day => ({
+const day = (date: string, items: unknown[] = []): BuiltDay => ({
   date,
-  tracks: [{ title: 'Track 1' }],
+  tracks: [{ id: 'track-1', title: 'Track 1' }],
   timeslots: [{ startTime: '10:00', endTime: '11:00', sessions: [{ items } as never] }],
+  tags: [],
 });
 
-const render = async (featuredSchedule: Day[]) => {
+const render = async (featuredSchedule: BuiltDay[]) => {
   const result = await fixture<MySchedule>(html`<my-schedule></my-schedule>`);
   result.element.featuredSchedule = featuredSchedule;
   await result.element.updateComplete;

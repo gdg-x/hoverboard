@@ -324,7 +324,6 @@
         "country",
         "featured",
         "name",
-        "order",
         "photo",
         "photoUrl",
         "shortBio",
@@ -341,7 +340,10 @@
         "externalId": { "$ref": "#/$defs/externalId" },
         "featured": { "type": "boolean" },
         "name": { "type": "string" },
-        "order": { "$ref": "#/$defs/order" },
+        "order": {
+          "description": "The place of a featured speaker in the home page's speakers block. Without it on any, they shuffle.",
+          "$ref": "#/$defs/order"
+        },
         "photo": { "type": "string" },
         "photoUrl": { "type": "string" },
         "pronouns": { "type": "string" },

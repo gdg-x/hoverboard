@@ -10,11 +10,11 @@ import '../components/ui/hb-button';
 import '../components/ui/hb-progress';
 import type { Filter } from '../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../models/filter-group';
-import type { SpeakerWithTags } from '../models/speaker';
+import type { BuiltSpeaker } from '../schedule/build-schedule';
 import { selectFilters } from '../store/filters';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
-import { type SpeakersState, selectSpeakersState } from '../store/speakers';
+import { type SpeakersState, selectSpeakersState } from '../store/schedule';
 import { clearFilters } from '../utils/filters';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
@@ -84,7 +84,7 @@ export class SpeakersPage extends ThemedElement {
   @fromStore((state) => selectFilters(state))
   accessor selectedFilters!: Filter[];
   @fromStore((state) => selectFilteredSpeakers(state))
-  accessor speakersToRender!: SpeakerWithTags[];
+  accessor speakersToRender!: BuiltSpeaker[];
 
   override render() {
     const speakers = this.speakersToRender;

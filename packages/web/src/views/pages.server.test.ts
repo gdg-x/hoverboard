@@ -3,9 +3,8 @@ import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import { html, type TemplateResult } from 'lit';
 import { describe, expect, it } from 'vitest';
 import { seedPage } from '../data/page';
-import type { Day } from '../models/day';
 import type { Session } from '../models/session';
-import type { SpeakerWithTags } from '../models/speaker';
+import type { Speaker } from '../models/speaker';
 import type { Ticket } from '../models/ticket';
 import type { RouteLocation } from '../utils/navigation';
 import '../components/home/speakers-block';
@@ -27,8 +26,7 @@ const speakers = ['ada', 'grace', 'alan'].map((id) => ({
   featured: true,
   socials: [{ icon: 'github', link: `https://github.com/${id}`, name: 'GitHub' }],
   badges: [{ name: 'gde', link: 'https://developers.google.com', description: 'GDE' }],
-  tags: [],
-})) as never as SpeakerWithTags[];
+})) as never as Speaker[];
 
 const session = {
   id: 's1',
@@ -37,21 +35,9 @@ const session = {
   day: '2026-10-08',
   startTime: '10:00',
   endTime: '11:00',
-  speakers: [],
-  tags: [],
+  speakers: ['ada'],
+  tags: ['Web'],
 } as never as Session;
-
-const day: Day = {
-  date: '2026-10-08',
-  tracks: [{ title: 'Main' }],
-  timeslots: [
-    {
-      startTime: '10:00',
-      endTime: '11:00',
-      sessions: [{ items: [session], gridArea: '1 / 2 / 2 / 3' } as never],
-    },
-  ],
-};
 
 const location: RouteLocation = {
   pathname: '/schedule/2026-10-08',
@@ -73,7 +59,7 @@ describe('pages on the server', () => {
   });
 
   it("render the schedule day from the location's date", async () => {
-    seedPage({ schedule: [day], sessions: [session], speakers: [] });
+    seedPage({ sessions: [session], speakers });
 
     const page = await renderToString(
       html`<schedule-page .location=${location}

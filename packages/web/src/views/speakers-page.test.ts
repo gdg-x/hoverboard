@@ -4,7 +4,7 @@ import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import { FilterGroupKey } from '../models/filter-group';
-import type { SpeakerWithTags } from '../models/speaker';
+import type { BuiltSpeaker } from '../schedule/build-schedule';
 import { updateMetadata } from '../utils/metadata';
 import type { SpeakersPage } from './speakers-page';
 import './speakers-page';
@@ -18,8 +18,9 @@ const speaker = {
   country: 'United States',
   photoUrl: '/ada.jpg',
   socials: [],
+  sessions: [],
   tags: ['Web'],
-} as never as SpeakerWithTags;
+} as never as BuiltSpeaker;
 
 const render = async (props: Partial<SpeakersPage> = {}) => {
   const result = await fixture<SpeakersPage>(html`<speakers-page></speakers-page>`);

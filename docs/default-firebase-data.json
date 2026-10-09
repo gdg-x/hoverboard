@@ -1021,7 +1021,6 @@
       "pronouns": "he/him",
       "shortBio": "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app wa...",
       "socials": [],
-      "order": 0,
       "title": "Product Manager/Developer"
     },
     "aleksander_piotrowski": {
@@ -1058,7 +1057,6 @@
           "name": "Instagram"
         }
       ],
-      "order": 1,
       "title": "Code Monkey"
     },
     "anton__minashkin": {
@@ -1089,7 +1087,6 @@
           "name": "LinkedIn"
         }
       ],
-      "order": 2,
       "title": "Lead Software Developer"
     },
     "carmen_popovicu": {
@@ -1110,7 +1107,6 @@
           "name": "Twitter"
         }
       ],
-      "order": 3,
       "title": "Front-end Engineer"
     },
     "constantine_mars": {
@@ -1132,7 +1128,6 @@
       "photoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/constantine_mars.jpg",
       "shortBio": "Constantine is Senior Android Developer at DataArt and GDG Dnipro Organizer. He was speaker on De...",
       "socials": [],
-      "order": 4,
       "title": "Senior Android Developer"
     },
     "david_mayboroda": {
@@ -1158,7 +1153,6 @@
           "name": "GitHub"
         }
       ],
-      "order": 5,
       "title": "Android Engineer"
     },
     "david_vávra": {
@@ -1196,7 +1190,6 @@
           "name": "GitHub"
         }
       ],
-      "order": 6,
       "title": "Founder/CEO/Android Lead"
     },
     "dmytro_danylyk": {
@@ -1234,7 +1227,6 @@
           "name": "Twitter"
         }
       ],
-      "order": 7,
       "title": "Senior Android Developer"
     },
     "gerard_sans": {
@@ -1267,7 +1259,6 @@
           "name": "Website"
         }
       ],
-      "order": 8,
       "title": "Technical Evangelist"
     },
     "ihor_dvoretskyi": {
@@ -1300,7 +1291,6 @@
           "name": "Twitter"
         }
       ],
-      "order": 9,
       "title": "Deployment Engineer"
     },
     "jakub_škvára": {
@@ -1328,7 +1318,6 @@
           "name": "Twitter"
         }
       ],
-      "order": 10,
       "title": "Frontend engineer"
     },
     "jana_moudra": {
@@ -1371,7 +1360,6 @@
           "name": "GitHub"
         }
       ],
-      "order": 11,
       "title": "Co-Founder"
     },
     "jean-baptiste_clion": {
@@ -1409,7 +1397,6 @@
           "name": "Twitter"
         }
       ],
-      "order": 12,
       "title": "Founder"
     },
     "jozef_vodicka": {
@@ -1447,7 +1434,6 @@
           "description": "Developer Relations Regional Lead"
         }
       ],
-      "order": 13,
       "title": "Developer Relations Program Manager"
     },
     "konrad_dzwinel": {
@@ -1485,7 +1471,6 @@
           "name": "Twitter"
         }
       ],
-      "order": 14,
       "title": "Front-End Engineer"
     },
     "mateusz_herych": {
@@ -1523,7 +1508,6 @@
           "name": "LinkedIn"
         }
       ],
-      "order": 15,
       "title": "Android Tech Lead"
     },
     "mete_atamel": {
@@ -1561,7 +1545,6 @@
           "description": "Developer Advocate"
         }
       ],
-      "order": 16,
       "title": "Developer Advocate"
     },
     "michael_pustovit": {
@@ -1592,7 +1575,6 @@
           "name": "Twitter"
         }
       ],
-      "order": 17,
       "title": "Senior Android Developer"
     },
     "paul_lammertsma": {
@@ -1613,7 +1595,6 @@
           "name": "Twitter"
         }
       ],
-      "order": 18,
       "title": "CTO"
     },
     "resul_caner__yildirim": {
@@ -1661,7 +1642,6 @@
           "name": "LinkedIn"
         }
       ],
-      "order": 19,
       "title": "User Experience Expert"
     },
     "roman_herasymenko": {
@@ -1694,7 +1674,6 @@
           "name": "LinkedIn"
         }
       ],
-      "order": 20,
       "title": "CEO"
     },
     "rustem_arzymbetov": {
@@ -1709,7 +1688,6 @@
       "photoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/rustem_arzymbetov.jpg",
       "shortBio": "Rustem is working at Google for last 8 years. Was in Search and Android teams. Big fan of perform...",
       "socials": [],
-      "order": 21,
       "title": "Software Engineer"
     },
     "sascha_wolter": {
@@ -1740,7 +1718,6 @@
           "name": "LinkedIn"
         }
       ],
-      "order": 22,
       "title": "Senior Developer Evangelist Connected Home"
     },
     "sergii_khomenko": {
@@ -1761,7 +1738,6 @@
           "name": "Twitter"
         }
       ],
-      "order": 23,
       "title": "Data Scientist"
     },
     "sergiy_mokienko": {
@@ -1794,7 +1770,6 @@
           "name": "Facebook"
         }
       ],
-      "order": 24,
       "title": "Android Team Lead"
     },
     "valentyn_shybanov": {
@@ -1827,7 +1802,6 @@
           "name": "Website"
         }
       ],
-      "order": 25,
       "title": "Software Engineer/Country Manager"
     },
     "yonatan_levin": {
@@ -1860,7 +1834,6 @@
           "name": "Twitter"
         }
       ],
-      "order": 26,
       "title": "Android Evangelist & Developer"
     }
   },

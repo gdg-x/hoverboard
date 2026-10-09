@@ -8,28 +8,23 @@ import { heroText } from '../components/hero/hero-block';
 import { PAGE_TONES } from '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
 import '../components/schedule/session-element';
-import type { ScheduleSession } from '../components/schedule/session-element';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-talks';
 import '../components/ui/hb-chip';
 import '../components/ui/hb-icon-button';
 import '../components/ui/hb-progress';
 import type { PreviousSpeaker } from '../models/previous-speaker';
-import type { Session } from '../models/session';
-import type { SpeakerWithTags } from '../models/speaker';
+import type { BuiltSpeaker } from '../schedule/build-schedule';
 import { goto } from '../utils/navigation';
 import { store } from '../store';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { selectSpeaker } from '../store/speakers/selectors';
-import { type SpeakersState, selectSpeakersState } from '../store/speakers';
+import { type SpeakersState, selectSpeakersState } from '../store/schedule';
 import { updateImageMetadata } from '../utils/metadata';
 import { photoTransitionName, tagChipStyle } from '../utils/styles';
 import { profile } from '../styles/profile';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
-
-// The schedule generator adds the speaker's sessions to each speaker.
-type SpeakerWithSessions = SpeakerWithTags & { sessions?: ScheduleSession[] | null };
 
 /**
  * A speaker: their photo, which moves here from their card, name, details, badges, social links
@@ -60,7 +55,7 @@ export class SpeakerPage extends ThemedElement {
   ];
 
   @property({ attribute: false })
-  accessor speaker: SpeakerWithTags | undefined;
+  accessor speaker: BuiltSpeaker | undefined;
   @fromStore((state) => selectSpeakersState(state))
   accessor speakers!: SpeakersState;
   @property({ attribute: false })
@@ -96,7 +91,7 @@ export class SpeakerPage extends ThemedElement {
   }
 
   override render() {
-    const speaker = this.speaker as SpeakerWithSessions | undefined;
+    const speaker = this.speaker;
     const job = [speaker?.title, speaker?.company].filter(Boolean).join(', ');
     const details = [job, speaker?.country, speaker?.pronouns].filter(Boolean).join(' · ');
 
@@ -153,8 +148,8 @@ export class SpeakerPage extends ThemedElement {
     `;
   }
 
-  private renderContent(speaker: SpeakerWithSessions) {
-    const sessions = speaker.sessions ?? [];
+  private renderContent(speaker: BuiltSpeaker) {
+    const sessions = speaker.sessions;
     const previousTalks = Object.keys(this.previousSpeaker?.sessions ?? {}).length > 0;
     return html`
       <div class="inner">
@@ -189,9 +184,7 @@ export class SpeakerPage extends ThemedElement {
                   ${sessions.map(
                     (session) =>
                       html`<li>
-                        <session-element
-                          .session="${session as unknown as Session}"
-                        ></session-element>
+                        <session-element .session="${session}"></session-element>
                       </li>`,
                   )}
                 </ul>

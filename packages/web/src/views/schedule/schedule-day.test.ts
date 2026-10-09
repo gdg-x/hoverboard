@@ -6,20 +6,24 @@ import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setStoreState } from '../../../__tests__/helpers/store';
 import { store } from '../../store';
 import { FilterGroupKey } from '../../models/filter-group';
-import type { Day } from '../../models/day';
-import type { Session } from '../../models/session';
+import type { BuiltDay, BuiltSession } from '../../schedule/build-schedule';
 import { wallClock, zonedTime } from '../../utils/time-zone';
 import type { SessionElement } from '../../components/schedule/session-element';
 import { matchesFilters, type ScheduleDay, withTimeColumn } from './schedule-day';
 import './schedule-day';
 
-const web = { id: 'web', title: 'Web talk', description: '', tags: ['Web'] } as Session;
-const android = { id: 'android', title: 'Android talk', description: '', tags: ['Android'] };
+const session = (id: string, title: string, tags: string[]) =>
+  ({ id, title, description: '', tags, mainTag: tags[0]!, speakers: [] }) as BuiltSession;
+const web = session('web', 'Web talk', ['Web']);
+const android = session('android', 'Android talk', ['Android']);
 
 // The demo site's time zone is Europe/Kyiv, UTC+2 in January.
-const day: Day = {
+const day: BuiltDay = {
   date: '2024-01-01',
-  tracks: [{ title: 'Main hall' }, { title: 'Room 2' }],
+  tracks: [
+    { id: 'main', title: 'Main hall' },
+    { id: 'room-2', title: 'Room 2' },
+  ],
   timeslots: [
     {
       startTime: '10:00',
@@ -27,14 +31,15 @@ const day: Day = {
       sessions: [
         { items: [web], gridArea: '1 / 1 / 1 / 2' },
         { items: [android], gridArea: '1 / 2 / 1 / 3' },
-      ] as never,
+      ],
     },
     {
       startTime: '11:00',
       endTime: '12:00',
-      sessions: [{ items: [], gridArea: '2 / 1 / 2 / 3' }] as never,
+      sessions: [{ items: [], gridArea: '2 / 1 / 2 / 3' }],
     },
   ],
+  tags: ['Web', 'Android'],
 };
 
 const render = async (props: Partial<ScheduleDay> = {}) => {
@@ -118,6 +123,30 @@ describe('schedule-day', () => {
 
     expect(link).toHaveAttribute('href', '/schedule/2024-01-01#11:00');
     expect(view.getAllByRole('link', { name: 'Browse sessions' })).toHaveLength(1);
+  });
+
+  it('shows no time and no link for a row where no session starts, such as a break', async () => {
+    const withBreak: BuiltDay = {
+      ...day,
+      timeslots: [
+        ...day.timeslots,
+        { startTime: '12:00', endTime: '12:30', sessions: [] },
+        {
+          startTime: '12:30',
+          endTime: '13:00',
+          sessions: [{ items: [], gridArea: '4 / 1 / 5 / 3' }],
+        },
+      ],
+    };
+    const { shadowRoot, view } = await render({ day: withBreak, onlyFeatured: true });
+
+    const times = [...shadowRoot.querySelectorAll('.time')];
+    expect(times.map((time) => time.textContent?.trim())).toEqual(['10:00', '11:00', '12:30']);
+    expect(
+      view
+        .getAllByRole('link', { name: 'Browse sessions' })
+        .map((link) => link.getAttribute('href')),
+    ).toEqual(['/schedule/2024-01-01#11:00', '/schedule/2024-01-01#12:30']);
   });
 
   it('marks the current time during the day, after the first render', async () => {

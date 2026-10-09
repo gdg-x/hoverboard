@@ -14,8 +14,6 @@ import type { RouteLocation } from '../utils/navigation';
 import { selectFilters } from '../store/filters';
 import { type ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';
-import { type SessionsState, selectSessionsState } from '../store/sessions';
-import { type SpeakersState, selectSpeakersState } from '../store/speakers';
 import { loadLocalTime, selectLocalTime, setLocalTime } from '../store/ui';
 import { timeZone } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
@@ -105,10 +103,6 @@ export class SchedulePage extends ThemedElement {
 
   @fromStore((state) => selectScheduleState(state))
   accessor schedule!: ScheduleState;
-  @fromStore((state) => selectSessionsState(state))
-  accessor sessions!: SessionsState;
-  @fromStore((state) => selectSpeakersState(state))
-  accessor speakers!: SpeakersState;
   @fromStore((state) => selectFilterGroups(state))
   private accessor filterGroups!: FilterGroup[];
   @fromStore((state) => selectFilters(state))

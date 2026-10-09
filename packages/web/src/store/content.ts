@@ -1,5 +1,4 @@
 import { createAction, type UnknownAction } from '@reduxjs/toolkit';
-import type { Day } from '../models/day';
 import type { Member } from '../models/member';
 import type { Partner } from '../models/partner';
 import type { PartnerGroupWithoutItems } from '../models/partner-group';
@@ -7,12 +6,15 @@ import type { Photo } from '../models/photo';
 import type { Post } from '../models/post';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import type { Session } from '../models/session';
-import type { SpeakerWithTags } from '../models/speaker';
+import type { Speaker } from '../models/speaker';
 import type { TeamWithoutMembers } from '../models/team';
 import type { Ticket } from '../models/ticket';
 import type { Video } from '../models/video';
 
-/** The public event content, by store key. The build reads it from Firestore. */
+/**
+ * The public event content, by store key. The build reads it from Firestore. Sessions and speakers
+ * are the raw documents, which the store's selectors build the schedule from.
+ */
 export interface Content {
   blog: Post[];
   gallery: Photo[];
@@ -20,9 +22,8 @@ export interface Content {
   partnerGroups: PartnerGroupWithoutItems[];
   partners: Partner[];
   previousSpeakers: PreviousSpeaker[];
-  schedule: Day[];
   sessions: Session[];
-  speakers: SpeakerWithTags[];
+  speakers: Speaker[];
   teams: TeamWithoutMembers[];
   tickets: Ticket[];
   videos: Video[];

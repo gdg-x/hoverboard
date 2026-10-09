@@ -8,8 +8,8 @@ import { SchedulePage } from '../../views/schedule-page';
 import { MySchedule } from '../../views/schedule/my-schedule';
 
 const location: RouteLocation = { pathname: '/schedule/my-schedule', search: '', params: {} };
-const { schedule, sessions, speakers } = await loadContent();
-const content = seedPage({ schedule, sessions, speakers });
+const { sessions, speakers } = await loadContent();
+const content = seedPage({ sessions, speakers });
 ---
 
 <Base {...pageMetadata('schedule')} content={content}>

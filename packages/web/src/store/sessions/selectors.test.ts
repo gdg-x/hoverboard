@@ -11,14 +11,20 @@ const sessions: Session[] = [
 ];
 
 describe('selectSession', () => {
-  it('finds the session with the given id', () => {
-    const state = { sessions: new Success(sessions) } as unknown as RootState;
+  it('finds the built session with the given id', () => {
+    const state = {
+      sessions: new Success(sessions),
+      speakers: new Success([]),
+    } as unknown as RootState;
 
-    expect(selectSession(state, '2')).toStrictEqual(sessions[1]);
+    expect(selectSession(state, '2')).toMatchObject({ ...sessions[1], mainTag: 'web' });
   });
 
   it('returns undefined when no session matches', () => {
-    const state = { sessions: new Success(sessions) } as unknown as RootState;
+    const state = {
+      sessions: new Success(sessions),
+      speakers: new Success([]),
+    } as unknown as RootState;
 
     expect(selectSession(state, 'missing')).toBeUndefined();
   });

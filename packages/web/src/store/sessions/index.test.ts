@@ -1,6 +1,6 @@
 import { Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
-import reducer, { selectSessionsState } from '.';
+import reducer, { selectRawSessionsState } from '.';
 import type { Session } from '../../models/session';
 import { subscribeToSessions } from '../../db/sessions';
 import type { RootState } from '..';
@@ -14,12 +14,12 @@ describe('sessions', () => {
   });
 });
 
-describe('selectSessionsState', () => {
+describe('selectRawSessionsState', () => {
   it('subscribes on first read', () => {
     vi.mocked(subscribeToSessions).mockReturnValue(new Success(vi.fn()));
     const state = { sessions: new Initialized() } as unknown as RootState;
 
-    expect(selectSessionsState(state)).toStrictEqual(new Pending());
+    expect(selectRawSessionsState(state)).toStrictEqual(new Pending());
     expect(subscribeToSessions).toHaveBeenCalledWith(
       expect.any(Function),
       expect.any(Function),
@@ -31,6 +31,6 @@ describe('selectSessionsState', () => {
     const items = [{ id: '1' }] as unknown as Session[];
     const state = { sessions: new Success(items) } as unknown as RootState;
 
-    expect(selectSessionsState(state)).toStrictEqual(new Success(items));
+    expect(selectRawSessionsState(state)).toStrictEqual(new Success(items));
   });
 });

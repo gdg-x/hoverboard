@@ -1,16 +1,14 @@
 import type { RootState } from '..';
 import { type CollectionState, createCollectionSlice } from '../create-collection-slice';
-import type { SpeakerWithTags } from '../../models/speaker';
+import type { Speaker } from '../../models/speaker';
 import { subscribeToSpeakers } from '../../db/speakers';
 
-export type SpeakersState = CollectionState<SpeakerWithTags>;
+/** The `speakers` documents as they are. `selectSpeakersState` in `../schedule` builds them. */
+export type RawSpeakersState = CollectionState<Speaker>;
 
-const { reducer, selectOrFetch } = createCollectionSlice<SpeakerWithTags>(
-  'speakers',
-  subscribeToSpeakers,
-);
+const { reducer, selectOrFetch } = createCollectionSlice<Speaker>('speakers', subscribeToSpeakers);
 
-export const selectSpeakersState = (state: RootState): SpeakersState =>
+export const selectRawSpeakersState = (state: RootState): RawSpeakersState =>
   selectOrFetch(state.speakers);
 
 export default reducer;

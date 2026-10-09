@@ -4,14 +4,14 @@ import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../../__tests__/helpers/features';
-import type { Session } from '../../models/session';
+import type { BuiltSession } from '../../schedule/build-schedule';
 import type { User } from '../../models/user';
 import { openFeedbackDialog, openSigninDialog } from '../../store/dialogs';
 import { setUserFeaturedSessions } from '../../store/featured-sessions';
 import { queueComplexSnackbar } from '../../store/snackbars';
 import { acceptingFeedback } from '../../utils/feedback';
 import { confetti } from '../../utils/confetti';
-import { formatDuration, type ScheduleSession, type SessionElement } from './session-element';
+import { formatDuration, type SessionElement } from './session-element';
 import './session-element';
 
 vi.mock('../../store/dialogs', async (importOriginal) => ({
@@ -35,7 +35,7 @@ vi.mock('../../utils/confetti');
 const mockAcceptingFeedback = vi.mocked(acceptingFeedback);
 const mockQueueComplexSnackbar = vi.mocked(queueComplexSnackbar);
 
-const session: ScheduleSession = {
+const session = {
   id: 'session-1',
   title: 'Example Session',
   description: 'A great session',
@@ -43,14 +43,14 @@ const session: ScheduleSession = {
   complexity: 'Intermediate',
   tags: ['Web', 'Cloud'],
   mainTag: 'Web',
-  track: { title: 'Main hall' },
+  track: { id: 'main-hall', title: 'Main hall' },
   duration: { hh: 0, mm: 40 },
   speakers: [{ name: 'Ada', company: 'Example', country: 'UK', photoUrl: '/ada.jpg' }],
-};
+} as never as BuiltSession;
 
 const render = async (props: Partial<SessionElement> = {}) => {
   const result = await fixture<SessionElement>(html`<session-element></session-element>`);
-  Object.assign(result.element, { session: session as unknown as Session, ...props });
+  Object.assign(result.element, { session, ...props });
   await result.element.updateComplete;
   // `acceptingFeedback` is set after the first render.
   await result.element.updateComplete;

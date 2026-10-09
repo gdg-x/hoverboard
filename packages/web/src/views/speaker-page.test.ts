@@ -5,7 +5,7 @@ import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import type { PreviousSpeaker } from '../models/previous-speaker';
-import type { SpeakerWithTags } from '../models/speaker';
+import type { BuiltSpeaker } from '../schedule/build-schedule';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { updateImageMetadata } from '../utils/metadata';
@@ -21,7 +21,7 @@ vi.mock('../utils/navigation', async (importOriginal) => ({
 vi.mock('../store/speakers/selectors', () => ({ selectSpeaker: vi.fn() }));
 vi.mock('../store/previous-speakers/selectors', () => ({ selectPreviousSpeaker: vi.fn() }));
 
-const speaker: SpeakerWithTags = {
+const speaker: BuiltSpeaker = {
   badges: [{ description: 'Google Developer Expert', link: 'https://gde.example', name: 'gde' }],
   bio: 'Speaker bio',
   company: 'Example Inc',
@@ -37,6 +37,7 @@ const speaker: SpeakerWithTags = {
   pronouns: 'she/her',
   shortBio: 'Short bio',
   socials: [{ icon: 'github', link: 'https://github.com/ada', name: 'GitHub' }],
+  sessions: [],
   tags: [],
   title: 'Engineer',
 };
@@ -109,8 +110,16 @@ describe('speaker-page', () => {
   it('shows their sessions as session cards', async () => {
     vi.mocked(selectSpeaker).mockReturnValue({
       ...speaker,
-      sessions: [{ id: 'session-1', title: 'A great talk', description: '' }],
-    } as SpeakerWithTags);
+      sessions: [
+        {
+          id: 'session-1',
+          title: 'A great talk',
+          description: '',
+          mainTag: 'General',
+          speakers: [],
+        },
+      ],
+    });
     const { shadowRoot } = await render();
 
     expect(shadowRoot.querySelector('session-element')).toHaveProperty(

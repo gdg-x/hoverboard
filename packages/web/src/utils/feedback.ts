@@ -4,8 +4,10 @@ import { zonedTime } from './time-zone';
 
 const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-export const acceptingFeedback = (session: Session): boolean => {
-  const { day, startTime } = session;
+export const acceptingFeedback = ({
+  day,
+  startTime,
+}: Pick<Session, 'day' | 'startTime'>): boolean => {
   if (!day || !startTime) return false;
   const diff = Date.now() - zonedTime(day, startTime, timeZone).getTime();
 

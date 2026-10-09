@@ -1,3 +1,4 @@
+import { documentId, orderBy } from 'firebase/firestore';
 import { describe, expect, it, vi } from 'vitest';
 import { subscribeToSpeakers } from './speakers';
 import { subscribeToCollection } from '../utils/firestore';
@@ -5,7 +6,7 @@ import { subscribeToCollection } from '../utils/firestore';
 vi.mock('../utils/firestore');
 
 describe('db/speakers', () => {
-  it('subscribes to generatedSpeakers collection', () => {
+  it('subscribes to the speakers collection by document ID', () => {
     const onStart = vi.fn();
     const onNext = vi.fn();
     const onError = vi.fn();
@@ -13,10 +14,11 @@ describe('db/speakers', () => {
     subscribeToSpeakers(onStart, onNext, onError);
 
     expect(subscribeToCollection).toHaveBeenCalledWith(
-      'generatedSpeakers',
+      'speakers',
       onStart,
       onNext,
       onError,
+      orderBy(documentId()),
     );
   });
 });

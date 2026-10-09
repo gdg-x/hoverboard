@@ -6,7 +6,7 @@ import { seedPage } from '../data/page';
 import type { Post } from '../models/post';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import type { Session } from '../models/session';
-import type { SpeakerWithTags } from '../models/speaker';
+import type { Speaker } from '../models/speaker';
 import './post-page';
 import './previous-speaker-page';
 import './session-page';
@@ -21,11 +21,10 @@ const renderedBio =
   '<p>Builds <strong>things</strong> with <a href="https://lit.dev" target="_blank" rel="noopener noreferrer">Lit</a>.</p>';
 
 describe('detail pages on the server', () => {
-  it('render the speaker from the seeded store', async () => {
+  it('render the speaker and their sessions from the raw documents', async () => {
     seedPage({
-      speakers: [
-        { id: 'ada', name: 'Ada Lovelace', bio, socials: [], tags: [] },
-      ] as never as SpeakerWithTags[],
+      speakers: [{ id: 'ada', name: 'Ada Lovelace', bio, socials: [] }] as never as Speaker[],
+      sessions: [{ id: 's1', title: 'Engines', description: '', speakers: ['ada'] }],
       // The page also shows previous speakers.
       previousSpeakers: [],
     });
@@ -34,6 +33,7 @@ describe('detail pages on the server', () => {
 
     expect(page).toMatch(/<h1 class="hero-title">(<!--[^>]*-->)*Ada Lovelace/);
     expect(page).toContain(renderedBio);
+    expect(page).toContain('href="/sessions/s1"');
   });
 
   it('render the previous speaker from the seeded store', async () => {
@@ -51,15 +51,19 @@ describe('detail pages on the server', () => {
     expect(page).toContain(renderedBio);
   });
 
-  it('render the session from the seeded store', async () => {
+  it('render the session and its speakers from the raw documents', async () => {
     seedPage({
-      sessions: [{ id: 's1', title: 'Hydration', description: bio }] as Session[],
+      sessions: [
+        { id: 's1', title: 'Hydration', description: bio, speakers: ['ada'] },
+      ] as Session[],
+      speakers: [{ id: 'ada', name: 'Ada Lovelace', socials: [] }] as never as Speaker[],
     });
 
     const page = await renderToString(html`<session-page .sessionId=${'s1'}></session-page>`);
 
     expect(page).toContain('Hydration');
     expect(page).toContain(renderedBio);
+    expect(page).toContain('Ada Lovelace');
   });
 
   it('render the post from the seeded store', async () => {

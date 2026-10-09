@@ -4,7 +4,7 @@ import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
-import type { Session } from '../models/session';
+import type { BuiltSession } from '../schedule/build-schedule';
 import type { User } from '../models/user';
 import { setUserFeaturedSessions } from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
@@ -57,14 +57,14 @@ const session = {
   startTime: '10:00',
   endTime: '10:40',
   duration: { hh: 0, mm: 40 },
-  track: { title: 'Main hall' },
+  track: { id: 'main-hall', title: 'Main hall' },
   complexity: 'Beginner',
   language: 'English',
   presentation: 'https://slides.example',
   videoId: 'abc123',
   tags: ['Web'],
   speakers: [speaker],
-} as never as Session;
+} as never as BuiltSession;
 
 const render = async (props: Partial<SessionPage> = {}) => {
   const result = await fixture<SessionPage>(html`<session-page></session-page>`);
