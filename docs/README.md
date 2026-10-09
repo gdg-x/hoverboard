@@ -8,6 +8,7 @@
 - [Styling](tutorials/03-styling.md)
 - [Deploy](tutorials/04-deploy.md)
 - [Notifications](tutorials/05-notifications.md)
+- [Security](tutorials/06-security.md)
 - [Firestore utils](tutorials/firebase-utils.md)
 
 ## Maintainers

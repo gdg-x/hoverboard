@@ -17,8 +17,9 @@ import {
   signInWithPopup,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
+import { clearIndexedDbPersistence, terminate } from 'firebase/firestore';
 import type { RootState } from '..';
-import { firebaseApp, isDemoProject } from '../../firebase';
+import { db, firebaseApp, isDemoProject } from '../../firebase';
 import type { FirebaseUser } from '../../models/user';
 import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
@@ -133,7 +134,20 @@ export const onUser = () => {
   });
 };
 
-export const signOut = () => firebaseSignOut(getFirebaseAuth());
+/**
+ * Signs out and deletes Firestore's offline cache, which holds the user's documents, so the next
+ * person on this browser can't read them. Firestore can't be used after that, so the page reloads.
+ */
+export const signOut = async () => {
+  await firebaseSignOut(getFirebaseAuth());
+  await terminate(db);
+  try {
+    await clearIndexedDbPersistence(db);
+  } catch {
+    // Another tab still has the cache open.
+  }
+  window.location.reload();
+};
 
 // The address the link went to, so the visitor needn't type it again on the same browser.
 const SIGN_IN_EMAIL_KEY = 'hb-sign-in-email';
