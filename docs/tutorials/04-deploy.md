@@ -35,6 +35,7 @@ Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#bi
 In the [`.github/workflows`](.github/workflows) folder, you can find two workflows to help you develop and deploy Hoverboard to Firebase:
 
 - [`main.yaml`](.github/workflows/main.yaml) Builds the project, runs the linter and the tests on every push.
+- [`security.yaml`](.github/workflows/security.yaml) Checks the workflows with zizmor, and the dependencies for known vulnerabilities.
 - [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) Checks `packages/config` with `./hb validate-config`, then deploys a preview of the website to Firebase after every push to a pull request. Functions and Firestore rules are not deployed. See [Editing on GitHub](01-configure-app.md#editing-on-github).
 - [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every push to the `main` branch. You can also run it by hand, for example after you change content in Firestore: open **Actions** > **Deploy** > **Run workflow** on GitHub, or run `gh workflow run deploy.yaml`. It only deploys from `main`. It deploys with `--force`, so it deletes functions that are no longer in the code without asking.
 
@@ -55,7 +56,7 @@ Both workflows sign in to Google Cloud with Workload Identity Federation. GitHub
 The command uses your Firebase CLI login. It needs the Owner role, or permission to create service accounts, workload identity pools and IAM bindings. It is safe to run again. It:
 
 1. Enables the IAM, IAM Credentials, Security Token Service and Cloud Resource Manager APIs.
-1. Creates a `github-deploy` service account with the roles a deploy needs: `Firebase Hosting Admin`, `Firebase Rules Admin`, `Cloud Datastore Index Admin`, `Cloud Datastore Viewer` (the build reads your content), `Firebase Storage Viewer`, `Storage Bucket Viewer`, `Cloud Functions Admin`, `Cloud Scheduler Admin`, `Service Usage Consumer` and `Service Account User`. It can't write to Firestore or read Auth users and Storage files. Earlier versions granted `Firebase Admin`, `Cloud Run Admin`, `Artifact Registry Writer` and `Service Usage Admin`, and the command takes them away (verify with a deploy of every target).
+1. Creates a `github-deploy` service account with the roles a deploy needs: `Firebase Hosting Admin`, `Firebase Rules Admin`, `Cloud Datastore Index Admin`, `Cloud Datastore Viewer` (the build reads your content), `Firebase Storage Viewer`, `Storage Bucket Viewer`, `Cloud Functions Admin`, `Cloud Scheduler Admin`, `Service Usage Consumer` and `Service Account User`. It can't write to Firestore or read Auth users and Storage files. Earlier versions granted `Firebase Admin`, `Cloud Run Admin`, `Artifact Registry Writer` and `Service Usage Admin`, and the command takes them away.
 1. Creates a `github` workload identity pool and provider that only accept tokens from your repository. It reads the repository from the `origin` remote. Pass `--repo owner/name` to choose another one.
 1. Sets the `WIF_PROVIDER` and `DEPLOY_SERVICE_ACCOUNT` repository variables with the [GitHub CLI](https://cli.github.com/). Without it, the command prints the values to add in the repository settings.
 
@@ -74,3 +75,5 @@ The preview and the live deploys use the same service account. A pull request's 
 The first deploy, from `./hb init` or `./hb deploy`, runs with your own account. It enables the APIs, creates the Firestore database, and grants Google's service agents the roles functions need. The deploy account can't do these, so if a new kind of function needs another API, deploy once from your computer.
 
 You can now push to your `main` branch and it'll deploy to the production (`live`) Firebase Hosting channel and pull requests will deploy a temporary preview.
+
+Before the event, go through the [security checklist](06-security.md#what-you-set).

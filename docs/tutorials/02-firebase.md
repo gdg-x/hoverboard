@@ -35,7 +35,7 @@ Turn on the sign-in methods in `auth.providers` in the [Firebase console](https:
 - `google`: add **Google**.
 - `facebook` and `twitter`: add them with the app ID and secret from Facebook or X.
 
-The link in the email opens the page the visitor signed in from. Its domain must be under **Authentication** > **Settings** > **Authorized domains**. Firebase adds `localhost` and the project's `web.app` and `firebaseapp.com` domains. Add a custom domain yourself.
+The link in the email opens the page the visitor signed in from. Its domain must be under **Authentication** > **Settings** > **Authorized domains**. Firebase adds `localhost` and the project's `web.app` and `firebaseapp.com` domains. Add a custom domain yourself, and remove `localhost`. See [Security](06-security.md#what-you-set).
 
 Locally, the Auth emulator doesn't send email. Find the sign-in link under **Authentication** in the Emulator UI at http://localhost:4000, or in the emulator's log, and open it in the browser.
 
