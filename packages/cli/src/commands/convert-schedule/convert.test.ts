@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 import data from '../../../../../docs/default-firebase-data.json';
 import site from '../../../../config/site.json';
 import { type OldScheduleDay, convertSchedule, trackId } from './convert.js';
+// The demo's `schedule` collection before it was converted.
+import demoSchedule from './demo-schedule.fixture.json';
 
 const tracks = [{ title: 'Main hall' }, { title: 'Room 2' }];
 const day = (
@@ -174,8 +176,8 @@ describe('convertSchedule', () => {
   });
 
   it('matches the converted demo data', () => {
-    const { schedule, sessions } = data as unknown as {
-      schedule: Record<string, OldScheduleDay>;
+    const schedule = demoSchedule as Record<string, OldScheduleDay>;
+    const { sessions } = data as unknown as {
       sessions: Record<string, Record<string, unknown>>;
     };
     const copies = new Set(Object.keys(sessions).filter((id) => /-\d+$/.test(id)));

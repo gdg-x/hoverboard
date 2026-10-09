@@ -5,7 +5,6 @@ import data from '../../../../../docs/default-firebase-data.json';
 const DOC_FEATURES: Record<string, string[]> = {
   mailchimp: ['mailchimp'],
   notifications: ['notifications'],
-  schedule: ['schedule', 'speakers'],
 };
 
 export const importConfig = async (features: Record<string, boolean> = {}) => {

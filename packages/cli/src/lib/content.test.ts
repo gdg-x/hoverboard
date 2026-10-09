@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import seed from '../../../../docs/default-firebase-data.json';
-import { validateContent, validateSeedData } from './content.js';
+import { siteTracks, validateContent, validateSchedule, validateSeedData } from './content.js';
 
 const session = { title: 'Keynote', description: 'Opening talk' };
 
@@ -64,5 +64,63 @@ describe('validateContent', () => {
   it('passes documents outside the content collections', () => {
     expect(() => validateContent('config', 'mailchimp', { apikey: '' })).not.toThrow();
     expect(() => validateContent('featuredSessions', 'user', { 101: true })).not.toThrow();
+  });
+
+  it('rejects the old schedule fields', () => {
+    expect(() => validateContent('sessions', '101', { ...session, extend: 2 })).toThrow(
+      'must NOT have additional properties',
+    );
+  });
+});
+
+describe('validateSchedule', () => {
+  const tracks = [
+    { id: 'main', title: 'Main hall' },
+    { id: 'workshops', title: 'Workshops', days: ['2027-10-16'] },
+  ];
+  const at = (startTime: string, endTime: string, track?: string, day = '2027-10-15') => ({
+    ...session,
+    day,
+    startTime,
+    endTime,
+    ...(track ? { track } : {}),
+  });
+
+  it('accepts the demo sessions with the demo tracks', () => {
+    expect(() => validateSchedule(seed.sessions)).not.toThrow();
+  });
+
+  it('names every session the schedule cannot show', () => {
+    expect(() =>
+      validateSchedule(
+        {
+          gone: at('09:00', '09:40', 'gone'),
+          'wrong-day': at('09:00', '09:40', 'workshops'),
+          backwards: at('10:00', '09:00', 'main'),
+          a: at('11:00', '11:40', 'main'),
+          b: at('11:20', '12:00', 'main'),
+          later: session,
+        },
+        tracks,
+      ),
+    ).toThrow(
+      [
+        'Invalid schedule:',
+        '  sessions/a and sessions/b overlap on 2027-10-15 in main',
+        '  sessions/backwards: endTime 09:00 is not after startTime 10:00',
+        '  sessions/gone: track "gone" is not in schedule.tracks in site.json',
+        '  sessions/wrong-day: track "workshops" is not on 2027-10-15',
+      ].join('\n'),
+    );
+  });
+});
+
+describe('siteTracks', () => {
+  it('reads schedule.tracks from site.json', () => {
+    expect(siteTracks().map(({ id }) => id)).toEqual([
+      'expo-hall',
+      'conference-hall',
+      'workshops-hall',
+    ]);
   });
 });

@@ -38,7 +38,7 @@ program
   .option('--details <file>', 'A JSON file with the site details, instead of the questions.')
   .option('--deploy', 'Deploy without asking.')
   .option('--no-deploy', 'Skip the deploy.')
-  .option('--seed', 'Add the sample content after deploying, without asking.')
+  .option('--seed', 'Add the sample content without asking.')
   .option('--no-seed', 'Skip the sample content.')
   .action(async (options: InitOptions) => {
     process.exitCode = (await runInit(options)) ? 0 : 1;

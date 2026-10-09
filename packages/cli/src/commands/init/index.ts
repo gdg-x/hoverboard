@@ -220,16 +220,13 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
   }
   printBudgetSteps();
 
-  const deploy = billing && (options.deploy ?? (await confirm('\nBuild and deploy the site now?')));
-  if (deploy && !(await runDeploy({ yes: true }))) return false;
-
+  // Before the deploy, so the first build already has the content. Seeding doesn't need Blaze.
   const seed =
-    deploy &&
-    (options.seed ??
-      (await confirm(
-        'Add the sample speakers, sessions and schedule to Firestore? You can edit or delete ' +
-          'them in the Firebase console later.',
-      )));
+    options.seed ??
+    (await confirm(
+      'Add the sample speakers and sessions to Firestore? You can edit or delete them in the ' +
+        'Firebase console later.',
+    ));
   if (seed) {
     const exitCode = runCommand(
       'npm',
@@ -237,11 +234,10 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
       repoRoot,
     );
     if (exitCode !== 0) return false;
-    console.log(
-      '\nThe functions now build the schedule and speaker pages from the sample content. ' +
-        'In a few minutes, run `./hbd deploy` again so the pages include it.',
-    );
   }
+
+  const deploy = billing && (options.deploy ?? (await confirm('\nBuild and deploy the site now?')));
+  if (deploy && !(await runDeploy({ yes: true }))) return false;
 
   console.log(
     [
@@ -251,8 +247,9 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
         ? []
         : [
             '  - Add content in the Firebase console, or the sample content with ' +
-              '`npm run firestore:init:production` after the first deploy.',
+              '`npm run firestore:init:production`.',
           ]),
+      '  - Content edits show in the browser at once, and in the built pages after the next deploy.',
       `  - Edit the rest of the text in ${RESOURCES_PATH}, and the FAQ and code of conduct next to it.`,
       '  - Run `./hbd setup-github` so GitHub Actions deploys every push to main.',
     ].join('\n'),

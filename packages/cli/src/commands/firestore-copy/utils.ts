@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { validateContent } from '../../lib/content.js';
+import { validateContent, validateSchedule } from '../../lib/content.js';
 import { firestore } from '../../lib/firestore.js';
 
 // npm sets INIT_CWD to the directory it was originally invoked from, which
@@ -80,6 +80,7 @@ async function getCollection(collectionId: string): Promise<Collection> {
 
 async function setDocument(data: Data, collectionId: string, documentId: string) {
   validateContent(collectionId, documentId, data);
+  if (collectionId === 'sessions') validateSchedule({ [documentId]: data });
   await firestore.collection(collectionId).doc(documentId).set(data);
 }
 
@@ -88,6 +89,8 @@ async function setCollection(data: Data, collectionId: string) {
   Object.entries(data).forEach(([documentId, document]) =>
     validateContent(collectionId, documentId, document),
   );
+  // Sessions copied together are checked together. The build checks them with the ones already there.
+  if (collectionId === 'sessions') validateSchedule(data);
   const batch = firestore.batch();
   Object.entries(data).forEach(([documentId, document]) => {
     const docRef = firestore.collection(collectionId).doc(documentId);

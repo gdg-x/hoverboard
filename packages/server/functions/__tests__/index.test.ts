@@ -2,11 +2,6 @@ import { initializeApp } from 'firebase-admin/app';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('firebase-admin/app');
-vi.mock('../src/triggers/generate-sessions-speakers-schedule.js', () => ({
-  scheduleWrite: 'scheduleWrite-marker',
-  sessionsWrite: 'sessionsWrite-marker',
-  speakersWrite: 'speakersWrite-marker',
-}));
 vi.mock('../src/triggers/mailchimp-subscribe.js', () => ({
   mailchimpSubscribe: 'mailchimpSubscribe-marker',
 }));
@@ -29,14 +24,19 @@ describe('functions entry point', () => {
     const indexModule = await import('../src/index');
 
     expect(initializeApp).toHaveBeenCalledTimes(1);
-    expect(indexModule).toMatchObject({
-      sendGeneralNotification: 'sendGeneralNotification-marker',
-      scheduleNotifications: 'scheduleNotifications-marker',
-      optimizeImages: 'optimizeImages-marker',
-      mailchimpSubscribe: 'mailchimpSubscribe-marker',
-      scheduleWrite: 'scheduleWrite-marker',
-      sessionsWrite: 'sessionsWrite-marker',
-      speakersWrite: 'speakersWrite-marker',
-    });
+    expect(indexModule).toStrictEqual(
+      expect.objectContaining({
+        sendGeneralNotification: 'sendGeneralNotification-marker',
+        scheduleNotifications: 'scheduleNotifications-marker',
+        optimizeImages: 'optimizeImages-marker',
+        mailchimpSubscribe: 'mailchimpSubscribe-marker',
+      }),
+    );
+    expect(Object.keys(indexModule).sort()).toEqual([
+      'mailchimpSubscribe',
+      'optimizeImages',
+      'scheduleNotifications',
+      'sendGeneralNotification',
+    ]);
   });
 });

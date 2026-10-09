@@ -182,18 +182,41 @@ describe('runInit', () => {
     });
   });
 
-  it('deploys and adds the sample content when asked', async () => {
+  it('adds the sample content, then deploys once, when asked', async () => {
     mocks.confirm.mockResolvedValue(true);
+    const order: string[] = [];
+    mocks.runCommand.mockImplementation(() => (order.push('seed'), 0));
+    mocks.runDeploy.mockImplementation(async () => (order.push('deploy'), true));
 
     const result = await runInit({ project: 'new-fest', details: detailsFile() });
 
     expect(result).toBe(true);
-    expect(mocks.runDeploy).toHaveBeenCalledWith({ yes: true });
     expect(mocks.runCommand).toHaveBeenCalledWith(
       'npm',
       ['--prefix', 'packages/cli', 'run', 'firestore-init:production'],
       repo,
     );
+    expect(mocks.runDeploy).toHaveBeenCalledWith({ yes: true });
+    expect(order).toEqual(['seed', 'deploy']);
+  });
+
+  it('adds the sample content without a deploy or the Blaze plan', async () => {
+    mocks.isBillingEnabled.mockResolvedValueOnce(false);
+
+    const result = await runInit({
+      project: 'new-fest',
+      details: detailsFile(),
+      seed: true,
+      deploy: true,
+    });
+
+    expect(result).toBe(true);
+    expect(mocks.runCommand).toHaveBeenCalledWith(
+      'npm',
+      ['--prefix', 'packages/cli', 'run', 'firestore-init:production'],
+      repo,
+    );
+    expect(mocks.runDeploy).not.toHaveBeenCalled();
   });
 
   it('does not deploy without the Blaze plan, and links to the upgrade', async () => {

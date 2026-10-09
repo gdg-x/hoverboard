@@ -24,6 +24,8 @@ Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#bi
 
    The build renders every page from the content in your production Firestore. It reads it with your Firebase CLI login (`npx firebase login`). After you change content in Firestore, deploy again to update the pages. Visitors' browsers still load the latest content after the page loads.
 
+   When a deploy finds functions that are no longer in the code, such as the schedule generator's `sessionsWrite`, `scheduleWrite` and `speakersWrite` after upgrading to v4, Firebase asks before deleting them. Answer yes.
+
    The URL to your live site is listed in the output.
 
 ## Continuous integration with Github Actions
@@ -32,7 +34,7 @@ In the [`.github/workflows`](.github/workflows) folder, you can find two workflo
 
 - [`main.yaml`](.github/workflows/main.yaml) Builds the project, runs the linter and the tests on every push.
 - [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) Checks `packages/config` with `./hbd validate-config`, then deploys a preview of the website to Firebase after every push to a pull request. Functions and Firestore rules are not deployed. See [Editing on GitHub](01-configure-app.md#editing-on-github).
-- [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every push to the `main` branch. You can also run it by hand, for example after you change content in Firestore: open **Actions** > **Deploy** > **Run workflow** on GitHub, or run `gh workflow run deploy.yaml`. It only deploys from `main`.
+- [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every push to the `main` branch. You can also run it by hand, for example after you change content in Firestore: open **Actions** > **Deploy** > **Run workflow** on GitHub, or run `gh workflow run deploy.yaml`. It only deploys from `main`. It deploys with `--force`, so it deletes functions that are no longer in the code without asking.
 
 The `main.yaml` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
 To run the two `deploy` actions on your instance, you need to do a couple of small setup:

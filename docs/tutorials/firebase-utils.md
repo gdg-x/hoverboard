@@ -10,13 +10,19 @@ By default all of these scripts run against the local [Firestore emulator](https
 
 ## Content model
 
-Event content (speakers, sessions, schedule, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/content.schema.json`](../../packages/storage/schemas/content.schema.json). `firestore-init` and `firestore-copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked.
+Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/content.schema.json`](../../packages/storage/schemas/content.schema.json). `firestore-init` and `firestore-copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked.
 
 Speakers and sessions have optional `source` and `externalId` fields for data imported from another tool, so a later import can update them instead of adding duplicates.
 
-Sessions can also have `day` (`YYYY-MM-DD`), `startTime` and `endTime` (`HH:MM` in `event.timezone`) and `track`, a track ID from `schedule.tracks` in `packages/config/site.json`. A session without `track` spans every track. These replace the `schedule` collection, which the site still reads for now.
+A session is on the schedule with `day` (`YYYY-MM-DD`), `startTime` and `endTime` (`HH:MM` in `event.timezone`), and `track`, a track ID from `schedule.tracks` in `packages/config/site.json`. A session without `track` spans every track, such as a keynote or lunch. A session without a day and times isn't on the schedule yet, but shows on its own page and its speakers' pages. Two short talks in one slot are two sessions with their own times.
+
+`firestore-init`, `firestore-copy` and the build check the schedule: each `track` must be in `site.json` and on the session's day, `endTime` must be after `startTime`, and sessions in one track can't overlap. The build fails and names the sessions.
+
+Schedule edits show in the browser at once, and in the built pages after the next deploy, as for other content.
 
 ## Move the schedule onto the sessions
+
+Before v4, a session's time and track came from where its ID was in the `schedule` collection, and functions copied the result into `generatedSchedule`, `generatedSessions` and `generatedSpeakers`. Hoverboard no longer reads these collections.
 
 `convert-schedule` reads the `schedule` collection, and writes each session's day, times and track onto the session. It writes the tracks to `schedule.tracks` in `packages/config/site.json`.
 
@@ -31,6 +37,17 @@ Sessions can also have `day` (`YYYY-MM-DD`), `startTime` and `endTime` (`HH:MM` 
 - A track that is only on some days gets those days in `days`.
 - It leaves the `schedule` collection in place.
 
+Check the schedule, deploy, then delete the old collections. `firestore:delete` takes one path at a time:
+
+```console
+    npx firebase firestore:delete --recursive schedule
+    npx firebase firestore:delete --recursive generatedSchedule
+    npx firebase firestore:delete --recursive generatedSessions
+    npx firebase firestore:delete --recursive generatedSpeakers
+```
+
+Also delete the `config/schedule` document. `schedule.published` in `site.json` replaces it.
+
 ## Seed the emulator with fixture data
 
 Import the JSON fixtures in `docs/default-firebase-data.json` into the running Firestore emulator:
@@ -41,7 +58,7 @@ Import the JSON fixtures in `docs/default-firebase-data.json` into the running F
 
 [Optional] Edit `docs/default-firebase-data.json` first to load your own data.
 
-It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` off it skips `schedule` and `sessions`. The `config/mailchimp` and `config/notifications` documents need their features, and `config/schedule` needs `schedule` or `speakers`.
+It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` and `speakers` both off it skips `sessions`. The `config/mailchimp` and `config/notifications` documents need their features.
 
 ## Export emulator data to prefill files
 

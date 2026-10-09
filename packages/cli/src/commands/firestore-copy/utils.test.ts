@@ -119,4 +119,25 @@ describe('saveData', () => {
     expect(setMock).not.toHaveBeenCalled();
     expect(commitMock).not.toHaveBeenCalled();
   });
+
+  it('writes no sessions that overlap in a track', async () => {
+    const talk = (startTime: string) => ({
+      title: 'Talk',
+      description: '',
+      day: '2016-09-09',
+      startTime,
+      endTime: `${startTime.slice(0, 2)}:40`,
+      track: 'expo-hall',
+    });
+
+    await expect(saveData({ a: talk('09:00'), b: talk('09:20') }, 'sessions')).rejects.toThrow(
+      'sessions/a and sessions/b overlap on 2016-09-09 in expo-hall',
+    );
+    await expect(saveData({ ...talk('09:00'), track: 'gone' }, 'sessions/a')).rejects.toThrow(
+      'sessions/a: track "gone" is not in schedule.tracks in site.json',
+    );
+
+    expect(setMock).not.toHaveBeenCalled();
+    expect(commitMock).not.toHaveBeenCalled();
+  });
 });

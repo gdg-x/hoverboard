@@ -5,7 +5,6 @@ export interface SessionData {
   day?: string;
   description: string;
   endTime?: string;
-  extend?: number;
   externalId?: string;
   icon?: string;
   image?: string;

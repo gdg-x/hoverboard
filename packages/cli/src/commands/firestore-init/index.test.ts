@@ -18,7 +18,6 @@ vi.mock('./partners.js', () => ({ importPartners: mockImport('partners') }));
 vi.mock('./previous-speakers.js', () => ({
   importPreviousSpeakers: mockImport('previousSpeakers'),
 }));
-vi.mock('./schedule.js', () => ({ importSchedule: mockImport('schedule') }));
 vi.mock('./sessions.js', () => ({ importSessions: mockImport('sessions') }));
 vi.mock('./speakers.js', () => ({ importSpeakers: mockImport('speakers') }));
 vi.mock('./team.js', () => ({ importTeam: mockImport('team') }));
@@ -42,7 +41,6 @@ describe('runFirestoreInit', () => {
         'gallery',
         'partners',
         'previousSpeakers',
-        'schedule',
         'sessions',
         'speakers',
         'team',
@@ -60,11 +58,29 @@ describe('runFirestoreInit', () => {
 
     expect(importConfig).toHaveBeenCalledWith(features);
     expect(calls.sort()).toEqual(
-      ['config', 'gallery', 'partners', 'previousSpeakers', 'speakers', 'tickets', 'videos'].sort(),
+      [
+        'config',
+        'gallery',
+        'partners',
+        'previousSpeakers',
+        'sessions',
+        'speakers',
+        'tickets',
+        'videos',
+      ].sort(),
     );
     expect(log).toHaveBeenCalledWith(
-      'Skipped the data of features that are off in packages/config/site.json: blog, schedule, sessions, team.',
+      'Skipped the data of features that are off in packages/config/site.json: blog, team.',
     );
+  });
+
+  it('skips sessions only when the schedule and the speakers are off', async () => {
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    await runFirestoreInit({ schedule: false, speakers: false });
+
+    expect(calls).not.toContain('sessions');
+    expect(calls).not.toContain('speakers');
   });
 });
 

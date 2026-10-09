@@ -7,7 +7,6 @@ import { importConfig } from './config.js';
 import { importGallery } from './gallery.js';
 import { importPartners } from './partners.js';
 import { importPreviousSpeakers } from './previous-speakers.js';
-import { importSchedule } from './schedule.js';
 import { importSessions } from './sessions.js';
 import { importSpeakers } from './speakers.js';
 import { importTeam } from './team.js';
@@ -27,17 +26,18 @@ export const siteFeatures = (repoRoot = REPO_ROOT): Features => ({
   ...readFeatures(join(repoRoot, 'packages', 'config', 'site.json')),
 });
 
-const COLLECTIONS: [name: string, feature: string, importer: () => unknown][] = [
-  ['blog', 'blog', importBlog],
-  ['gallery', 'gallery', importGallery],
-  ['partners', 'partners', importPartners],
-  ['previousSpeakers', 'previousSpeakers', importPreviousSpeakers],
-  ['schedule', 'schedule', importSchedule],
-  ['sessions', 'schedule', importSessions],
-  ['speakers', 'speakers', importSpeakers],
-  ['team', 'team', importTeam],
-  ['tickets', 'tickets', importTickets],
-  ['videos', 'videos', importVideos],
+// Each collection is seeded while any of its features is on.
+const COLLECTIONS: [name: string, features: string[], importer: () => unknown][] = [
+  ['blog', ['blog'], importBlog],
+  ['gallery', ['gallery'], importGallery],
+  ['partners', ['partners'], importPartners],
+  ['previousSpeakers', ['previousSpeakers'], importPreviousSpeakers],
+  // Speaker pages list their sessions too.
+  ['sessions', ['schedule', 'speakers'], importSessions],
+  ['speakers', ['speakers'], importSpeakers],
+  ['team', ['team'], importTeam],
+  ['tickets', ['tickets'], importTickets],
+  ['videos', ['videos'], importVideos],
 ];
 
 export const runFirestoreInit = async (features: Features = siteFeatures()): Promise<void> => {
@@ -45,8 +45,8 @@ export const runFirestoreInit = async (features: Features = siteFeatures()): Pro
   validateSeedData(data);
   await importConfig(features); // Should always be first
   const skipped: string[] = [];
-  for (const [name, feature, importer] of COLLECTIONS) {
-    if (features[feature] === false) {
+  for (const [name, collectionFeatures, importer] of COLLECTIONS) {
+    if (collectionFeatures.every((feature) => features[feature] === false)) {
       skipped.push(name);
       continue;
     }

@@ -20,7 +20,6 @@ vi.mock('../../../../../docs/default-firebase-data.json', () => ({
       site: { domain: 'example.com' },
       notifications: { icon: '/icon.png' },
       mailchimp: { dc: '' },
-      schedule: { enabled: true },
     },
   },
 }));
@@ -39,22 +38,13 @@ describe('importConfig', () => {
     expect(docMock).toHaveBeenCalledWith('notifications');
     expect(setMock).toHaveBeenCalledWith('config/site', { domain: 'example.com' });
     expect(setMock).toHaveBeenCalledWith('config/notifications', { icon: '/icon.png' });
-    expect(setMock).toHaveBeenCalledTimes(4);
+    expect(setMock).toHaveBeenCalledTimes(3);
     expect(commitMock).toHaveBeenCalled();
   });
 
   it('leaves out the documents of features that are off', async () => {
-    await importConfig({ mailchimp: false, notifications: false, schedule: false });
+    await importConfig({ mailchimp: false, notifications: false });
 
-    expect(docMock.mock.calls.map(([id]) => id).sort()).toEqual(['schedule', 'site']);
-
-    vi.clearAllMocks();
-    await importConfig({ schedule: false, speakers: false });
-
-    expect(docMock.mock.calls.map(([id]) => id).sort()).toEqual([
-      'mailchimp',
-      'notifications',
-      'site',
-    ]);
+    expect(docMock.mock.calls.map(([id]) => id)).toEqual(['site']);
   });
 });

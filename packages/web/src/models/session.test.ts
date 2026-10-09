@@ -11,7 +11,6 @@ describe('session', () => {
       'day',
       'description',
       'endTime',
-      'extend',
       'icon',
       'image',
       'language',

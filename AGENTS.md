@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Hoverboard is a conference website template. Organizers fork it, configure it and deploy it to their own Firebase project. The web app is Lit components that Astro renders to static pages at build time, from the site's content in Firestore. The pages then hydrate in the browser and keep the content live. Cloud Functions handle schedule generation, notifications, image optimization and Mailchimp.
+Hoverboard is a conference website template. Organizers fork it, configure it and deploy it to their own Firebase project. The web app is Lit components that Astro renders to static pages at build time, from the site's content in Firestore. The pages then hydrate in the browser and keep the content live. Cloud Functions handle notifications, image optimization and Mailchimp.
 
 ## Layout
 

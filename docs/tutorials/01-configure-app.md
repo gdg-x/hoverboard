@@ -16,7 +16,7 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
   "shortName": "DevFest",
   "organizer": { "name": "..", "email": "..", ... },
   "event": { "startDate": "2027-10-15", "endDate": "2027-10-16", "timezone": "Europe/Kyiv", "location": {..} },
-  "schedule": { "published": true },
+  "schedule": { "published": true, "tracks": [{ "id": "main-hall", "title": "Main hall" }] },
   "social": { "hashtag": "..", "follow": [..] },
   "auth": { "providers": ["emailLink"] },
   "theme": { "name": "festival", "colorScheme": "system", "colors": {..}, "fonts": {..} },
@@ -28,6 +28,8 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
 `firebase.projectId` is the Firebase project that `./hbd deploy`, the deploy workflows and `FIRESTORE_TARGET=production` commands use. `url` defaults to `https://<projectId>.web.app/`. Set `url` only for a custom domain.
 
 `event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it. The schedule shows times in it, and visitors in another time zone can switch the schedule to their own. During the event, a line on the schedule marks the current time.
+
+`schedule.published` shows session times and tracks. Keep it `false` until the schedule is final. `schedule.tracks` lists the tracks or rooms, in the order the schedule shows them. A session names its track by `id`. A track is on every day, unless `days` lists the days it is on. Without tracks, the schedule has one column. See [Content model](firebase-utils.md#content-model) for a session's day, times and track.
 
 `theme` picks the look: the `festival`, `spotlight`, `paper` or `glass` theme, the color scheme, colors, fonts, spacing and decorations. See [Styling][style app].
 
@@ -129,7 +131,7 @@ The build fails when:
 
 `demo` adds a band across the top of every page where visitors can try the built-in themes, the spacing and light or dark. Their browser remembers the choices. It is meant for demo sites, so leave it off on an event's site.
 
-Every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, `optimizeImages` needs `imageOptimization`, and the schedule generator needs `schedule` or `speakers`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
+Every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, and `optimizeImages` needs `imageOptimization`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
 
 When `feedback` is off, the feedback dialog is still in the build, but nothing opens it. Bookmark buttons show only when `mySchedule` is on.
 

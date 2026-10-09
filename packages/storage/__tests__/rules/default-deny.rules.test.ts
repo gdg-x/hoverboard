@@ -3,8 +3,15 @@ import { beforeEach, describe, it } from 'vitest';
 import { expect } from '../helpers';
 import { anonContext, authedContext, seed } from './setup';
 
-describe('default deny for collections with no matching rule', () => {
-  const docPath = 'someUnknownCollection/doc-1';
+// The schedule and the generated collections are no longer read, so they have no rule either.
+describe.each([
+  'someUnknownCollection',
+  'schedule',
+  'generatedSchedule',
+  'generatedSessions',
+  'generatedSpeakers',
+])('default deny for %s, which has no matching rule', (collectionName) => {
+  const docPath = `${collectionName}/doc-1`;
 
   beforeEach(() => seed({ [docPath]: { foo: 'bar' } }));
 
@@ -19,13 +26,13 @@ describe('default deny for collections with no matching rule', () => {
 
     it('denies listing the collection', async () => {
       const context = getContext();
-      await expect(getDocs(collection(context.firestore(), 'someUnknownCollection'))).toDeny();
+      await expect(getDocs(collection(context.firestore(), collectionName))).toDeny();
     });
 
     it('denies creating a document', async () => {
       const context = getContext();
       await expect(
-        addDoc(collection(context.firestore(), 'someUnknownCollection'), { foo: 'baz' }),
+        addDoc(collection(context.firestore(), collectionName), { foo: 'baz' }),
       ).toDeny();
     });
 
