@@ -3,6 +3,7 @@ import { msg, str } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { RouteLocation } from '../../utils/navigation';
+import { getScheduleDay } from '../../utils/dates';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { navigationLabel } from '../shell/navigation-label';
 import { fromStore } from '../../controllers/from-store';
@@ -109,8 +110,8 @@ export class ScheduleTabs extends ThemedElement {
                   ${
                     days.length > 1
                       ? html`<span>${msg(str`Day ${index + 1}`, { id: 'schedule.tabs.day' })}</span>
-                          <span class="date">${day.dateReadable}</span>`
-                      : day.dateReadable
+                          <span class="date">${getScheduleDay(day.date)}</span>`
+                      : getScheduleDay(day.date)
                   }
                 </a>
               </li>

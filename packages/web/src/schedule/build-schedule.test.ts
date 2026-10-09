@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
+import data from '../../../../docs/default-firebase-data.json';
+import site from '../../../config/site.json';
 import type { Session } from '../models/session';
 import type { Speaker } from '../models/speaker';
-import { type BuiltDay, type Track, buildSchedule } from './build-schedule';
+import { type BuiltDay, type Track, buildSchedule, scheduleErrors } from './build-schedule';
 
 const DAY = '2027-10-15';
 const tracks: Track[] = [
@@ -236,5 +238,74 @@ describe('buildSchedule', () => {
 
     expect(sessions.map(({ id }) => id)).toEqual(['a', 'b']);
     expect(schedule.map(({ date }) => date)).toEqual([DAY, '2027-10-16']);
+  });
+});
+
+describe('scheduleErrors', () => {
+  const withWorkshops = [...tracks, { id: 'workshops', title: 'Workshops', days: ['2027-10-16'] }];
+
+  it('accepts sessions that fit, and sessions without times', () => {
+    expect(
+      scheduleErrors(
+        [
+          session('keynote', at('09:00', '10:00')),
+          session('a', at('10:00', '10:20', 'main')),
+          session('b', at('10:20', '10:40', 'main')),
+          session('c', at('10:00', '11:00', 'room-2')),
+          session('d', at('10:00', '11:00', 'workshops', '2027-10-16')),
+          session('later'),
+        ],
+        withWorkshops,
+      ),
+    ).toEqual([]);
+  });
+
+  it('names a track that is not in site.json, or not on the day', () => {
+    expect(
+      scheduleErrors(
+        [
+          session('a', at('09:00', '09:40', 'gone')),
+          session('b', at('09:00', '09:40', 'workshops')),
+        ],
+        withWorkshops,
+      ),
+    ).toEqual([
+      'sessions/a: track "gone" is not in schedule.tracks in site.json',
+      'sessions/b: track "workshops" is not on 2027-10-15',
+    ]);
+  });
+
+  it('names a session that ends before it starts', () => {
+    expect(scheduleErrors([session('a', at('10:00', '09:40', 'main'))], tracks)).toEqual([
+      'sessions/a: endTime 09:40 is not after startTime 10:00',
+    ]);
+  });
+
+  it('names both sessions that overlap in a track, or across every track', () => {
+    expect(
+      scheduleErrors(
+        [
+          session('a', at('09:00', '09:40', 'main')),
+          session('b', at('09:30', '10:00', 'main')),
+          session('c', at('09:30', '10:00', 'room-2')),
+          session('lunch', at('09:50', '11:00')),
+          session('other-day', at('09:00', '09:40', 'main', '2027-10-16')),
+        ],
+        tracks,
+      ),
+    ).toEqual([
+      'sessions/a and sessions/b overlap on 2027-10-15 in main',
+      'sessions/b and sessions/lunch overlap on 2027-10-15 in main',
+      'sessions/c and sessions/lunch overlap on 2027-10-15 in room-2',
+    ]);
+  });
+
+  it('accepts the demo data', () => {
+    expect(
+      scheduleErrors(
+        Object.entries(data.sessions).map(([id, fields]) => ({ ...fields, id }) as Session),
+        site.schedule.tracks,
+      ),
+    ).toEqual([]);
   });
 });

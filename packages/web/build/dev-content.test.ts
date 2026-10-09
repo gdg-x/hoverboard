@@ -24,10 +24,10 @@ describe('watchEmulatorContent', () => {
     const onChange = vi.fn();
     mocks.onSnapshot.mockReturnValue(mocks.unsubscribe);
 
-    const stop = watchEmulatorContent(['generatedSchedule'], onChange, 100);
+    const stop = watchEmulatorContent(['sessions'], onChange, 100);
     const [onNext, onError] = mocks.onSnapshot.mock.calls[0]!;
     onNext();
-    expect(onChange).toHaveBeenCalledWith('generatedSchedule');
+    expect(onChange).toHaveBeenCalledWith('sessions');
 
     onError(new Error('unavailable'));
     vi.advanceTimersByTime(100);
@@ -40,7 +40,7 @@ describe('watchEmulatorContent', () => {
   it('does nothing when the content is not from the emulator', () => {
     vi.stubEnv('FIRESTORE_TARGET', 'production');
 
-    watchEmulatorContent(['generatedSchedule'], vi.fn());
+    watchEmulatorContent(['sessions'], vi.fn());
 
     expect(mocks.onSnapshot).not.toHaveBeenCalled();
   });

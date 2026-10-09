@@ -3,7 +3,7 @@ import type { Track } from './track';
 
 export interface Day {
   date: string;
-  dateReadable: string;
+  dateReadable?: string;
   timeslots: Timeslot[];
   tracks: Track[];
 }

@@ -54,7 +54,6 @@ const session = {
   title: 'A great talk',
   description: 'Session description',
   day: '2024-01-02',
-  dateReadable: 'January 2',
   startTime: '10:00',
   endTime: '10:40',
   duration: { hh: 0, mm: 40 },

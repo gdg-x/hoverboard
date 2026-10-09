@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
 };
 
 const { session } = Astro.props as { session: Session };
-// Generated sessions carry their speakers.
+// Built sessions carry their speakers.
 const speaker = (session as { speakers?: { photoUrl?: string }[] }).speakers?.[0];
 const { sessions } = await loadContent();
 const content = seedPage({ sessions });

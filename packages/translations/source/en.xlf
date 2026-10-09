@@ -621,7 +621,7 @@
   <source>Next track</source>
 </trans-unit>
 <trans-unit id="schedule.day.label">
-  <source>Schedule for <x id="0" equiv-text="${day.dateReadable}"/></source>
+  <source>Schedule for <x id="0" equiv-text="${getScheduleDay(day.date)}"/></source>
 </trans-unit>
 <trans-unit id="schedule.day.now">
   <source>Now · <x id="0" equiv-text="${now.label}"/></source>

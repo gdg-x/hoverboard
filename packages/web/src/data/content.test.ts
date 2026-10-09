@@ -15,18 +15,20 @@ interface Doc {
 /** A Firestore stand-in that records each query and returns `docs` for its path. */
 const fakeFirestore = (docs: Record<string, Doc[]> = {}) => {
   const queries: string[] = [];
+  const get = (description: string, path: string) => () => {
+    queries.push(description);
+    return Promise.resolve({
+      docs: (docs[path] ?? []).map(({ id, data, parentId }) => ({
+        id,
+        data: () => data,
+        ref: { parent: { parent: parentId ? { id: parentId } : null } },
+      })),
+    });
+  };
   const query = (kind: string, path: string) => ({
+    get: get(`${kind} ${path}`, path),
     orderBy: (field: string, direction = 'asc') => ({
-      get: () => {
-        queries.push(`${kind} ${path} by ${field} ${direction}`);
-        return Promise.resolve({
-          docs: (docs[path] ?? []).map(({ id, data, parentId }) => ({
-            id,
-            data: () => data,
-            ref: { parent: { parent: parentId ? { id: parentId } : null } },
-          })),
-        });
-      },
+      get: get(`${kind} ${path} by ${field} ${direction}`, path),
     }),
   });
   const db = {
@@ -49,11 +51,10 @@ describe('readContent', () => {
     expect(queries.sort()).toEqual([
       'collection blog by published desc',
       'collection gallery by order asc',
-      'collection generatedSchedule by date asc',
-      'collection generatedSessions by id asc',
-      'collection generatedSpeakers by name asc',
       'collection partners by order asc',
       'collection previousSpeakers by name asc',
+      'collection sessions',
+      'collection speakers',
       'collection team by title asc',
       'collection tickets by order asc',
       'collection videos by order asc',
@@ -64,14 +65,70 @@ describe('readContent', () => {
 
   it('adds document IDs, and parent IDs for collection groups', async () => {
     const { db } = fakeFirestore({
-      generatedSpeakers: [{ id: 'ada', data: { name: 'Ada' } }],
+      previousSpeakers: [{ id: 'ada', data: { name: 'Ada' } }],
       members: [{ id: 'grace', parentId: 'core', data: { name: 'Grace' } }],
     });
 
     const content = await readContent(db);
 
-    expect(content.speakers).toEqual([{ id: 'ada', name: 'Ada' }]);
+    expect(content.previousSpeakers).toEqual([{ id: 'ada', name: 'Ada' }]);
     expect(content.members).toEqual([{ id: 'grace', parentId: 'core', name: 'Grace' }]);
+  });
+
+  it('builds the schedule, sessions and speakers from the raw sessions and speakers', async () => {
+    const { db } = fakeFirestore({
+      sessions: [
+        {
+          id: 'talk',
+          data: {
+            title: 'Talk',
+            speakers: ['ada'],
+            tags: ['Web'],
+            day: '2016-09-09',
+            startTime: '09:00',
+            endTime: '09:40',
+            track: 'expo-hall',
+          },
+        },
+      ],
+      speakers: [{ id: 'ada', data: { name: 'Ada' } }],
+    });
+
+    const content = await readContent(db);
+
+    expect(content.schedule?.map(({ date }) => date)).toEqual(['2016-09-09']);
+    expect(content.sessions?.[0]).toMatchObject({
+      id: 'talk',
+      mainTag: 'Web',
+      track: { id: 'expo-hall', title: 'Expo hall' },
+      speakers: [{ id: 'ada', name: 'Ada' }],
+    });
+    expect(content.speakers?.[0]).toMatchObject({
+      id: 'ada',
+      tags: ['Web'],
+      sessions: [{ id: 'talk' }],
+    });
+  });
+
+  it('fails a build on sessions the schedule cannot show, and only warns in development', async () => {
+    const overlap = { day: '2016-09-09', track: 'expo-hall', endTime: '10:00' };
+    const { db } = fakeFirestore({
+      sessions: [
+        { id: 'a', data: { ...overlap, startTime: '09:00' } },
+        { id: 'b', data: { ...overlap, startTime: '09:30' } },
+      ],
+    });
+    const message =
+      'The schedule has problems:\n  sessions/a and sessions/b overlap on 2016-09-09 in expo-hall';
+
+    vi.stubEnv('DEV', false);
+    await expect(readContent(db)).rejects.toThrow(message);
+
+    vi.stubEnv('DEV', true);
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    await expect(readContent(db)).resolves.toHaveProperty('schedule');
+    expect(warn).toHaveBeenCalledWith(message);
+    warn.mockRestore();
   });
 
   it('leaves out the content of disabled features', async () => {
@@ -90,13 +147,16 @@ describe('readContent', () => {
 
   it('reads sessions for the speakers page while the schedule is off', async () => {
     setFeatures({ schedule: false });
-    const { db } = fakeFirestore();
+    const { db, queries } = fakeFirestore();
 
     expect(await readContent(db)).toHaveProperty('sessions');
+    expect(await readContent(db)).not.toHaveProperty('schedule');
 
     setFeatures({ schedule: false, speakers: false });
+    queries.length = 0;
 
     expect(await readContent(db)).not.toHaveProperty('sessions');
+    expect(queries).not.toContain('collection sessions');
   });
 });
 

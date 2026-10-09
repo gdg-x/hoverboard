@@ -82,16 +82,20 @@ describe('routes', () => {
 
       integration.hooks['astro:server:setup']?.({ server: { watcher: { emit } } } as never);
       const [collections, onChange] = vi.mocked(watchEmulatorContent).mock.calls[0]!;
-      expect(collections).toEqual(['generatedSchedule', 'generatedSessions', 'generatedSpeakers']);
+      expect(collections).toEqual(['sessions', 'speakers']);
 
-      onChange('generatedSchedule');
-      onChange('generatedSchedule');
+      onChange('sessions');
+      onChange('sessions');
       vi.advanceTimersByTime(500);
 
-      expect(emit).toHaveBeenCalledTimes(1);
+      expect(emit).toHaveBeenCalledTimes(2);
       expect(emit).toHaveBeenCalledWith(
         'change',
         join(import.meta.dirname, '../src/routes/schedule/[...day].astro'),
+      );
+      expect(emit).toHaveBeenCalledWith(
+        'change',
+        join(import.meta.dirname, '../src/routes/sessions/[id].astro'),
       );
     });
   });

@@ -28,20 +28,21 @@ export const ROUTES: readonly Route[] = [
     pattern: '/schedule/[...day]',
     entrypoint: 'schedule/[...day].astro',
     feature: 'schedule',
-    content: 'generatedSchedule',
+    // The days come from the sessions.
+    content: 'sessions',
   },
   {
     pattern: '/sessions/[id]',
     entrypoint: 'sessions/[id].astro',
     feature: 'schedule',
-    content: 'generatedSessions',
+    content: 'sessions',
   },
   { pattern: '/speakers', entrypoint: 'speakers/index.astro', feature: 'speakers' },
   {
     pattern: '/speakers/[id]',
     entrypoint: 'speakers/[id].astro',
     feature: 'speakers',
-    content: 'generatedSpeakers',
+    content: 'speakers',
   },
   {
     pattern: '/previous-speakers',
@@ -89,7 +90,7 @@ export const routes = (features: Record<Feature, boolean>): AstroIntegration => 
         const timers = new Map<string, ReturnType<typeof setTimeout>>();
         stopWatching = watchEmulatorContent([...files.keys()], (collection) => {
           clearTimeout(timers.get(collection));
-          // The functions write the generated collections one document at a time.
+          // An import writes a collection one document at a time.
           timers.set(
             collection,
             setTimeout(() => {

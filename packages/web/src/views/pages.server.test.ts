@@ -43,7 +43,6 @@ const session = {
 
 const day: Day = {
   date: '2026-10-08',
-  dateReadable: 'October 8',
   tracks: [{ title: 'Main' }],
   timeslots: [
     {

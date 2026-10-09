@@ -16,6 +16,7 @@ import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { selectLocalTime } from '../../store/ui';
 import { timeZone } from '../../config/site';
 import { clearFilters } from '../../utils/filters';
+import { getScheduleDay } from '../../utils/dates';
 import { getLocale } from '../../utils/localization';
 import { generateClassName } from '../../utils/styles';
 import { wallClock, zonedTime } from '../../utils/time-zone';
@@ -396,7 +397,9 @@ export class ScheduleDay extends ThemedElement {
       <div
         class="scroller"
         role="region"
-        aria-label="${msg(str`Schedule for ${day.dateReadable}`, { id: 'schedule.day.label' })}"
+        aria-label="${msg(str`Schedule for ${getScheduleDay(day.date)}`, {
+          id: 'schedule.day.label',
+        })}"
         tabindex="${ifDefined(this.overflowing ? 0 : undefined)}"
         @scroll="${this.onScroll}"
       >

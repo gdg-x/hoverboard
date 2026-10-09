@@ -19,7 +19,6 @@ const android = { id: 'android', title: 'Android talk', description: '', tags: [
 // The demo site's time zone is Europe/Kyiv, UTC+2 in January.
 const day: Day = {
   date: '2024-01-01',
-  dateReadable: 'January 1',
   tracks: [{ title: 'Main hall' }, { title: 'Room 2' }],
   timeslots: [
     {
@@ -145,7 +144,7 @@ describe('schedule-day', () => {
   });
 
   it("finds the location's day in the schedule", async () => {
-    const other = { ...day, date: '2024-01-02', dateReadable: 'January 2' };
+    const other = { ...day, date: '2024-01-02' };
     const { element, view } = await render({
       day: undefined,
       schedule: new Success([day, other]),

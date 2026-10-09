@@ -125,6 +125,46 @@ const buildDay = (date: string, placed: Placed[], tracks: Track[]): BuiltDay => 
 };
 
 /**
+ * The sessions the schedule can't show as they are: a track that isn't in site.json or not on the
+ * session's day, an end that isn't after the start, or two sessions at once in one track.
+ */
+export const scheduleErrors = (sessions: Session[], tracks: Track[]): string[] => {
+  const errors: string[] = [];
+  const placed: { id: string; day: string; start: number; end: number; track?: string }[] = [];
+  for (const { id, day, startTime, endTime, track } of [...sessions].sort((a, b) =>
+    compare(a.id, b.id),
+  )) {
+    if (!day || !startTime || !endTime) continue;
+    const [start, end] = [toMinutes(startTime), toMinutes(endTime)];
+    if (end <= start) {
+      errors.push(`sessions/${id}: endTime ${endTime} is not after startTime ${startTime}`);
+      continue;
+    }
+    if (track !== undefined) {
+      const known = tracks.find((item) => item.id === track);
+      if (!known) {
+        errors.push(`sessions/${id}: track "${track}" is not in schedule.tracks in site.json`);
+        continue;
+      }
+      if (known.days && !known.days.includes(day)) {
+        errors.push(`sessions/${id}: track "${track}" is not on ${day}`);
+        continue;
+      }
+    }
+    for (const other of placed) {
+      const sameTrack = other.track === undefined || track === undefined || other.track === track;
+      if (other.day === day && sameTrack && other.start < end && start < other.end) {
+        errors.push(
+          `sessions/${other.id} and sessions/${id} overlap on ${day} in ${track ?? other.track ?? 'every track'}`,
+        );
+      }
+    }
+    placed.push({ id, day, start, end, ...(track === undefined ? {} : { track }) });
+  }
+  return errors;
+};
+
+/**
  * Builds the schedule, sessions and speakers from the raw `sessions` and `speakers`. A session is on
  * the schedule when the schedule is published, it has a day and times, and its track is on that day.
  */

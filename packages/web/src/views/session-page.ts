@@ -33,6 +33,7 @@ import { openVideoDialog } from '../store/ui';
 import type { UserState } from '../store/user';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
+import { getScheduleDay } from '../utils/dates';
 import { confetti } from '../utils/confetti';
 import { updateImageMetadata } from '../utils/metadata';
 import { tagChipStyle } from '../utils/styles';
@@ -41,9 +42,8 @@ import { ThemedElement } from '../components/themed-element';
 
 if (__HB_FEATURES__.feedback) void import('../components/dialogs/feedback-block');
 
-// Sessions from the schedule generator have the day's readable date, the end time and full speakers.
+// Sessions from the schedule generator have the end time and full speakers.
 type SessionWithDetails = Omit<ScheduleSession, 'speakers'> & {
-  dateReadable?: string;
   endTime?: string;
   speakers?: Speaker[];
 };
@@ -192,7 +192,7 @@ export class SessionPage extends ThemedElement {
     const when = disabledSchedule
       ? []
       : [
-          session.dateReadable,
+          session.day && getScheduleDay(session.day),
           session.startTime && [session.startTime, session.endTime].filter(Boolean).join('–'),
           session.duration && formatDuration(session.duration),
           session.track?.title,

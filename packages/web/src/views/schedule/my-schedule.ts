@@ -3,6 +3,7 @@ import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { Day } from '../../models/day';
 import { selectFeaturedSchedule } from '../../store/schedule/selectors';
+import { getScheduleDay } from '../../utils/dates';
 import '../../components/shared/auth-required';
 import './schedule-day';
 import { fromStore } from '../../controllers/from-store';
@@ -80,7 +81,7 @@ export class MySchedule extends ThemedElement {
         }
         ${this.featuredSchedule.map(
           (day) => html`
-            <h2 class="date">${day.dateReadable}</h2>
+            <h2 class="date">${getScheduleDay(day.date)}</h2>
             <schedule-day .day="${day}" .onlyFeatured="${true}"></schedule-day>
           `,
         )}

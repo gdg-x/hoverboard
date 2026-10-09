@@ -10,8 +10,8 @@ import type { ScheduleTabs } from './schedule-tabs';
 import './schedule-tabs';
 
 const days: Day[] = [
-  { date: '2024-01-01', dateReadable: 'January 1', tracks: [], timeslots: [] },
-  { date: '2024-01-02', dateReadable: 'January 2', tracks: [], timeslots: [] },
+  { date: '2024-01-01', tracks: [], timeslots: [] },
+  { date: '2024-01-02', tracks: [], timeslots: [] },
 ];
 
 const location = (pathname: string, search = ''): RouteLocation => ({
