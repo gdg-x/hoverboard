@@ -203,6 +203,7 @@ export class TicketsBlock extends ThemedElement {
           </div>
           <div class="stub">
             <hb-button
+              variant="cta"
               href="${ticket.url}"
               target="_blank"
               ?disabled="${ticket.soldOut || !ticket.available}"

@@ -277,13 +277,13 @@ export class AppHeader extends ThemedElement {
   private renderCallToAction() {
     if (__HB_FEATURES__.tickets && this.eventState !== 'over' && this.ticketUrl) {
       return html`
-        <hb-button class="cta" href="${this.ticketUrl}" target="_blank">
+        <hb-button class="cta" variant="cta" href="${this.ticketUrl}" target="_blank">
           ${msg('Buy ticket', { id: 'common.buy-ticket' })}
         </hb-button>
       `;
     }
     if (__HB_FEATURES__.schedule) {
-      return html`<hb-button class="cta" href="/schedule"
+      return html`<hb-button class="cta" variant="cta" href="/schedule"
         >${navigationLabel('schedule')}</hb-button
       >`;
     }

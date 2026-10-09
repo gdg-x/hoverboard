@@ -10,6 +10,7 @@ import { openFeedbackDialog, openSigninDialog } from '../../store/dialogs';
 import { setUserFeaturedSessions } from '../../store/featured-sessions';
 import { queueComplexSnackbar } from '../../store/snackbars';
 import { acceptingFeedback } from '../../utils/feedback';
+import { confetti } from '../../utils/confetti';
 import { formatDuration, type ScheduleSession, type SessionElement } from './session-element';
 import './session-element';
 
@@ -29,6 +30,7 @@ vi.mock('../../store/snackbars', async (importOriginal) => ({
   queueComplexSnackbar: vi.fn(),
 }));
 vi.mock('../../utils/feedback');
+vi.mock('../../utils/confetti');
 
 const mockAcceptingFeedback = vi.mocked(acceptingFeedback);
 const mockQueueComplexSnackbar = vi.mocked(queueComplexSnackbar);
@@ -125,9 +127,23 @@ describe('session-element', () => {
       featuredSessions: new Success({}),
     });
 
-    shadowRoot.querySelector<HTMLElement>('hb-icon-button')!.click();
+    const button = shadowRoot.querySelector<HTMLElement>('hb-icon-button')!;
+    button.click();
 
     expect(setUserFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': true }, true);
+    expect(confetti).toHaveBeenCalledWith(button);
+  });
+
+  it('removes a bookmark without confetti', async () => {
+    const { shadowRoot } = await render({
+      user: new Success({ uid: 'user-1' } as User),
+      featuredSessions: new Success({ 'session-1': true }),
+    });
+
+    shadowRoot.querySelector<HTMLElement>('hb-icon-button')!.click();
+
+    expect(setUserFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': false }, false);
+    expect(confetti).not.toHaveBeenCalled();
   });
 
   it('has no bookmark when My Schedule is off', async () => {

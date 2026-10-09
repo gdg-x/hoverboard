@@ -95,6 +95,14 @@ describe('a production build of a minimal site', () => {
     expect(home).toMatch(/<app-header[^>]*><template shadowroot="open" shadowrootmode="open">/);
   });
 
+  it('uses the spotlight theme with decorations off, as the fixture sets', () => {
+    const home = build.read('index.html');
+
+    expect(home).toMatch(/<html[^>]*data-decorations="off"/);
+    expect(home).toContain('--hb-cta-background: var(--hb-color-secondary);');
+    expect(home).toContain('--hb-border-width: 1px;');
+  });
+
   it('writes the service workers and the manifest', () => {
     expect(build.read('firebase-messaging-sw.js')).not.toBe('');
     expect(JSON.parse(build.read('manifest.json'))).toMatchObject({

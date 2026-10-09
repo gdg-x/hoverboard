@@ -1,5 +1,5 @@
 import { fireEvent, within } from '@testing-library/dom';
-import { html, type TemplateResult } from 'lit';
+import { type CSSResult, html, type TemplateResult } from 'lit';
 import { describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import './hb-button';
@@ -79,5 +79,18 @@ describe('hb-button', () => {
     expect(element).toHaveAttribute('variant', 'outlined');
     expect(element).toHaveAttribute('size', 'l');
     expect(element.trailingIcon).toBe(true);
+  });
+
+  it('has a call to action variant in the theme colors', async () => {
+    const { element } = await render(html`<hb-button variant="cta">Buy</hb-button>`);
+
+    expect(element).toHaveAttribute('variant', 'cta');
+    expect(
+      [...(element.constructor as typeof HbButton).elementStyles]
+        .map((style) => (style as CSSResult).cssText)
+        .join(''),
+    ).toMatch(
+      /:host\(\[variant='cta'\]\)\s*\{\s*--hb-button-background: var\(--hb-cta-background\)/,
+    );
   });
 });

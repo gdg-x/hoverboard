@@ -1,7 +1,25 @@
 import { css } from 'lit';
 
+/**
+ * Stops animations and transitions with reduced motion. The document's own rule in `base.css` does
+ * not reach into shadow roots, so every component includes this.
+ */
+export const reducedMotion = css`
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+`;
+
 /** Styles every `hb-*` primitive starts with. */
 export const primitive = css`
+  ${reducedMotion}
+
   :host([hidden]) {
     display: none !important;
   }

@@ -15,6 +15,7 @@ import {
 import { queueComplexSnackbar } from '../../store/snackbars';
 import type { UserState } from '../../store/user';
 import { acceptingFeedback } from '../../utils/feedback';
+import { confetti } from '../../utils/confetti';
 import { getLocale } from '../../utils/localization';
 import { tagChipStyle, tagColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
@@ -290,7 +291,7 @@ export class SessionElement extends ThemedElement {
     return false;
   }
 
-  private readonly toggleBookmark = () => {
+  private readonly toggleBookmark = (event: Event) => {
     if (!(this.user instanceof Success)) {
       store.dispatch(
         queueComplexSnackbar({
@@ -311,6 +312,7 @@ export class SessionElement extends ThemedElement {
         { ...this.featuredSessions.data, [this.session.id]: bookmarked },
         bookmarked,
       );
+      if (bookmarked) confetti(event.currentTarget as Element);
     }
   };
 

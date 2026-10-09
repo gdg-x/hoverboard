@@ -14,6 +14,15 @@ import { openVideoDialog } from '../../store/ui';
 import type { HomeHero } from './home-hero';
 import './home-hero';
 
+const config = vi.hoisted(() => ({ decorations: true }));
+
+vi.mock('../../config/site', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../../config/site')>()),
+  get decorations() {
+    return config.decorations;
+  },
+}));
+
 vi.mock('../../store/ui', async (importOriginal) => ({
   __esModule: true,
   ...(await importOriginal<typeof import('../../store/ui')>()),
@@ -36,6 +45,7 @@ describe('home-hero', () => {
   afterEach(() => {
     vi.useRealTimers();
     render(nothing, document.body);
+    config.decorations = true;
   });
 
   it('names the event in the page heading, with its dates, place and description', async () => {
@@ -55,6 +65,8 @@ describe('home-hero', () => {
     element.addEventListener('show-tickets', showTickets);
 
     expect(shadowRoot.querySelector('hb-sticker')).toHaveTextContent('12 days to go');
+    expect(shadowRoot.querySelector('.buy-ticket')).toHaveAttribute('variant', 'cta');
+    expect(shadowRoot.querySelector('.watch-video')).toHaveAttribute('variant', 'outlined');
     shadowRoot.querySelector<HTMLElement>('.buy-ticket')!.click();
     expect(showTickets).toHaveBeenCalledTimes(1);
 
@@ -118,5 +130,13 @@ describe('home-hero', () => {
     expect(shadowRoot.querySelector('.hero')).toHaveClass('pattern');
     expect(shadowRoot.querySelector('.art')).toHaveAttribute('aria-hidden', 'true');
     expect(shadowRoot.querySelector('.art svg')).not.toBeNull();
+  });
+
+  it('has no illustration with decorations off', async () => {
+    config.decorations = false;
+    const { shadowRoot } = await renderOn('2017-10-01T12:00:00Z');
+
+    expect(shadowRoot.querySelector('.art')).toBeNull();
+    expect(shadowRoot.querySelector('h1')).toHaveTextContent(title);
   });
 });

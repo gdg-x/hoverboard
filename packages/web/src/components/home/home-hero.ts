@@ -237,6 +237,7 @@ export class HomeHero extends ThemedElement {
         __HB_FEATURES__.videos
           ? html`<hb-button
               size="l"
+              variant="cta"
               class="videos"
               href="${featuredVideos.callToAction.link}"
               target="_blank"
@@ -248,7 +249,7 @@ export class HomeHero extends ThemedElement {
         __HB_FEATURES__.gallery
           ? html`<hb-button
               size="l"
-              variant="${__HB_FEATURES__.videos ? 'outlined' : 'filled'}"
+              variant="${__HB_FEATURES__.videos ? 'outlined' : 'cta'}"
               class="photos"
               href="${galleryBlock.callToAction.link}"
               target="_blank"
@@ -263,7 +264,7 @@ export class HomeHero extends ThemedElement {
 
     if (this.eventState === 'upcoming' && __HB_FEATURES__.tickets) {
       return [
-        html`<hb-button size="l" class="buy-ticket" @click="${this.showTickets}">
+        html`<hb-button size="l" variant="cta" class="buy-ticket" @click="${this.showTickets}">
           <hoverboard-icon slot="icon" name="ticket"></hoverboard-icon>
           ${msg('Buy ticket', { id: 'common.buy-ticket' })}
         </hb-button>`,
@@ -273,7 +274,7 @@ export class HomeHero extends ThemedElement {
 
     if (__HB_FEATURES__.schedule) {
       return [
-        html`<hb-button size="l" class="schedule" href="/schedule">
+        html`<hb-button size="l" variant="cta" class="schedule" href="/schedule">
           <hoverboard-icon slot="icon" name="calendar"></hoverboard-icon>
           ${
             this.eventState === 'live'

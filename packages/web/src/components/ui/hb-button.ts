@@ -4,11 +4,12 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { primitive, stateLayer } from '../../styles/shared';
 import { ariaBoolean, linkRel, stopDisabledClicks } from './controls';
 
-export type ButtonVariant = 'filled' | 'tonal' | 'outlined' | 'text';
+export type ButtonVariant = 'filled' | 'cta' | 'tonal' | 'outlined' | 'text';
 
 /**
  * A button, or a link that looks like one when it has an `href`. The label is the content, and an
- * icon goes in the `icon` slot, before the label or after it with `trailing-icon`.
+ * icon goes in the `icon` slot, before the label or after it with `trailing-icon`. `cta` is for a
+ * page's main call to action, in the theme's call to action colors.
  *
  * Colors can be changed with `--hb-button-background`, `--hb-button-color` and
  * `--hb-button-border-color`, for buttons on colored bands.
@@ -29,6 +30,11 @@ export class HbButton extends LitElement {
 
         display: inline-flex;
         vertical-align: middle;
+      }
+
+      :host([variant='cta']) {
+        --hb-button-background: var(--hb-cta-background);
+        --hb-button-color: var(--hb-on-cta);
       }
 
       :host([variant='tonal']) {

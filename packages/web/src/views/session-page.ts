@@ -33,6 +33,7 @@ import { openVideoDialog } from '../store/ui';
 import type { UserState } from '../store/user';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
+import { confetti } from '../utils/confetti';
 import { updateImageMetadata } from '../utils/metadata';
 import { tagChipStyle } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
@@ -291,7 +292,7 @@ export class SessionPage extends ThemedElement {
     `;
   }
 
-  private readonly toggleBookmark = () => {
+  private readonly toggleBookmark = (event: Event) => {
     if (!(this.user instanceof Success)) {
       store.dispatch(
         queueComplexSnackbar({
@@ -312,6 +313,7 @@ export class SessionPage extends ThemedElement {
         { ...this.featuredSessions.data, [this.session.id]: bookmarked },
         bookmarked,
       );
+      if (bookmarked) confetti(event.currentTarget as Element);
     }
   };
 

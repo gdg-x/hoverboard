@@ -25,14 +25,15 @@ declare global {
 }
 
 describe('themed-element', () => {
-  it('prepends the shared theme and block host styles to the subclass styles', async () => {
+  it('prepends the shared theme, block host and reduced motion styles to the subclass styles', async () => {
     await fixture(html`<themed-element-test-subject></themed-element-test-subject>`);
     const { elementStyles } = ThemedElementTestSubject as unknown as { elementStyles: unknown[] };
 
-    expect(elementStyles).toHaveLength(3);
+    expect(elementStyles).toHaveLength(4);
     expect(String(elementStyles[0])).toContain('--primary-color-transparent');
     expect(String(elementStyles[1])).toContain('display: block');
-    expect(String(elementStyles[2])).toContain('color: rebeccapurple');
+    expect(String(elementStyles[2])).toContain('prefers-reduced-motion: reduce');
+    expect(String(elementStyles[3])).toContain('color: rebeccapurple');
   });
 
   it('is usable as a base class for rendering subclass content', async () => {

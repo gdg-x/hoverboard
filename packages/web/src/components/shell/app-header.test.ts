@@ -90,6 +90,7 @@ describe('app-header', () => {
     const { callToAction } = await render();
 
     expect(callToAction()).toHaveTextContent('Buy ticket');
+    expect(callToAction()).toHaveAttribute('variant', 'cta');
     expect(callToAction()).toHaveAttribute('href', 'https://example.com/regular');
   });
 
