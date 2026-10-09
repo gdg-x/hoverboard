@@ -408,7 +408,7 @@ export const checkGitHubDeploys = async (
       name,
       ok: true,
       warning: true,
-      message: `Run \`./hbd setup-github\` so ${repo} can deploy to ${projectId}. Missing: ${changes.join('; ')}.`,
+      message: `Run \`./hb setup-github\` so ${repo} can deploy to ${projectId}. Missing: ${changes.join('; ')}.`,
     };
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);

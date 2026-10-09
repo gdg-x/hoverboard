@@ -187,7 +187,7 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
   });
   writeJson(repoRoot, SITE_CONFIG_PATH, updated.site);
   writeJson(repoRoot, RESOURCES_PATH, updated.resources);
-  // Lets plain `firebase` commands use the same project as `hbd`.
+  // Lets plain `firebase` commands use the same project as `hb`.
   writeJson(repoRoot, '.firebaserc', { projects: { default: projectId } });
   const prettier = join(repoRoot, 'node_modules', '.bin', 'prettier');
   if (existsSync(prettier)) {
@@ -202,7 +202,7 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
   const errors = await validateSiteConfig(repoRoot);
   if (errors.length) {
     for (const error of errors) console.log(`✘ ${error}`);
-    console.log('\nFix packages/config, then run `./hbd init` again.');
+    console.log('\nFix packages/config, then run `./hb init` again.');
     return false;
   }
 
@@ -248,7 +248,7 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
   console.log(
     [
       '\nNext:',
-      ...(deploy ? [] : ['  - Deploy with `./hbd deploy`.']),
+      ...(deploy ? [] : ['  - Deploy with `./hb deploy`.']),
       ...(seed
         ? []
         : [
@@ -257,7 +257,7 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
           ]),
       '  - Content edits show in the browser at once, and in the built pages after the next deploy.',
       `  - Edit the rest of the text in ${RESOURCES_PATH}, and the FAQ and code of conduct next to it.`,
-      '  - Run `./hbd setup-github` so GitHub Actions deploys every push to main.',
+      '  - Run `./hb setup-github` so GitHub Actions deploys every push to main.',
     ].join('\n'),
   );
   return true;

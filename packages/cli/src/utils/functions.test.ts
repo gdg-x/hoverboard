@@ -65,7 +65,7 @@ describe('checkFunctions', () => {
     expect(result.warning).toBeUndefined();
     expect(result.message).toBe(
       "mailchimpSubscribe is 1st gen, which a deploy can't upgrade to 2nd gen. Delete it with " +
-        '`npx firebase functions:delete mailchimpSubscribe --region us-central1`, then run `./hbd deploy`.',
+        '`npx firebase functions:delete mailchimpSubscribe --region us-central1`, then run `./hb deploy`.',
     );
   });
 
@@ -79,7 +79,7 @@ describe('checkFunctions', () => {
 
     expect(result).toMatchObject({ ok: true, warning: true });
     expect(result.message).toBe(
-      'mailchimpSubscribe, optimizeImages are not deployed. Run `./hbd deploy`. ' +
+      'mailchimpSubscribe, optimizeImages are not deployed. Run `./hb deploy`. ' +
         'sessionsWrite is no longer in the code. The next deploy deletes it.',
     );
   });

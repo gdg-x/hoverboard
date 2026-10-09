@@ -21,7 +21,7 @@ jobs:
         with:
           node-version-file: package.json
       - run: npm ci
-      # `./hbd setup-github` sets these variables. See docs/tutorials/04-deploy.md.
+      # `./hb setup-github` sets these variables. See docs/tutorials/04-deploy.md.
       - uses: google-github-actions/auth@v3
         with:
           workload_identity_provider: '${{ vars.WIF_PROVIDER }}'
@@ -32,5 +32,5 @@ jobs:
           FIRESTORE_TARGET: production
       # `--force` deletes functions that are no longer in the code, which non-interactive mode
       # otherwise refuses to do, and accepts Firebase's other deploy confirmations.
-      # `./hbd deploy-args` adds `--except functions` when features.functions is false.
-      - run: npx firebase deploy --project "$(jq -r .firebase.projectId packages/config/site.json)" --non-interactive --force $(./hbd deploy-args)
+      # `./hb deploy-args` adds `--except functions` when features.functions is false.
+      - run: npx firebase deploy --project "$(jq -r .firebase.projectId packages/config/site.json)" --non-interactive --force $(./hb deploy-args)

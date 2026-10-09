@@ -32,7 +32,7 @@ export const runSetup = async (): Promise<boolean> => {
 
   const projectId = resolveFirebaseProjectId(repoRoot);
   if (projectId) {
-    // Lets plain `firebase` commands use the same project as `hbd`.
+    // Lets plain `firebase` commands use the same project as `hb`.
     writeFileSync(
       join(repoRoot, '.firebaserc'),
       `${JSON.stringify({ projects: { default: projectId } }, null, 2)}\n`,

@@ -29,7 +29,7 @@ const app = (options: Parameters<typeof initializeApp>[0]): App =>
   getApps().find(({ name }) => name === APP_NAME) ?? initializeApp(options, APP_NAME);
 
 /**
- * Firestore for reading content at build time. Like `./hbd`, it uses the emulator unless
+ * Firestore for reading content at build time. Like `./hb`, it uses the emulator unless
  * `FIRESTORE_TARGET=production`, which reads the site's project with Application Default
  * Credentials.
  */

@@ -22,7 +22,7 @@ jobs:
       - id: get-short-pr
         run: |
           echo "pr=$(echo ${{github.head_ref}} | cut -c 1-20)" >> $GITHUB_OUTPUT
-      # `./hbd setup-github` sets these variables. See docs/tutorials/04-deploy.md.
+      # `./hb setup-github` sets these variables. See docs/tutorials/04-deploy.md.
       - uses: google-github-actions/auth@v3
         with:
           workload_identity_provider: '${{ vars.WIF_PROVIDER }}'

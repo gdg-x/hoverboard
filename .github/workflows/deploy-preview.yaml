@@ -18,7 +18,7 @@ jobs:
         with:
           node-version-file: package.json
       - run: npm ci
-      - run: ./hbd validate-config
+      - run: ./hb validate-config
 
   build_and_preview:
     needs: validate_config
@@ -31,7 +31,7 @@ jobs:
         with:
           node-version-file: package.json
       - run: npm ci
-      # `./hbd setup-github` sets these variables. See docs/tutorials/04-deploy.md.
+      # `./hb setup-github` sets these variables. See docs/tutorials/04-deploy.md.
       - uses: google-github-actions/auth@v3
         with:
           workload_identity_provider: '${{ vars.WIF_PROVIDER }}'

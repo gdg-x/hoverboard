@@ -17,13 +17,13 @@ Anything that makes an organizer change something to keep their site working aft
 - **Firestore data.** Renaming or removing a collection or field, changing a field's type, or adding a required field.
 - **Security rules.** Firestore or Storage rules that reject data or requests that were allowed before.
 - **Functions.** Removing or renaming a function, changing its trigger, or requiring a new secret, API or Firebase service.
-- **CLI.** Removing or renaming an `hbd` command or flag, or changing a default in a way that changes the result.
+- **CLI.** Removing or renaming an `hb` command or flag, or changing a default in a way that changes the result.
 - **Requirements.** Raising the minimum Node.js version in `engines`, requiring a different Firebase plan, or dropping a supported browser.
 - **URLs.** Removing or changing a route without a redirect, which breaks shared links and search results.
 
 ### Minor: features
 
-New features, new optional config keys with defaults, new built-in themes, new locales, new `hbd` commands and flags, and deprecations.
+New features, new optional config keys with defaults, new built-in themes, new locales, new `hb` commands and flags, and deprecations.
 
 ### Patch: fixes
 
@@ -35,9 +35,9 @@ Every breaking change must:
 
 - Use `!` in the pull request title, for example `feat(config)!: rename event.dates`.
 - Explain what organizers need to do in a `BREAKING CHANGE:` paragraph at the end of the pull request description. It becomes part of the release notes.
-- From v4 on, ship an `hbd upgrade` migration for config and Firestore data changes, with tests against the previous shape.
+- From v4 on, ship an `hb upgrade` migration for config and Firestore data changes, with tests against the previous shape.
 
-When possible, deprecate first: keep the old behavior working in a minor release with a warning from the build or `hbd doctor`, then remove it in the next major.
+When possible, deprecate first: keep the old behavior working in a minor release with a warning from the build or `hb doctor`, then remove it in the next major.
 
 ## Pull requests
 
