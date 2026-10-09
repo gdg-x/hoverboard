@@ -2,11 +2,13 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import { Ajv2020, type ValidateFunction } from 'ajv/dist/2020.js';
 import { collectionInfo } from '../../../storage/collections.js';
+import { documentProblems } from '../../../storage/messages.js';
 import schema from '../../../storage/schemas/firestore.schema.json';
 import { scheduleErrors, type Track } from '../../../web/src/schedule/build-schedule.js';
 import type { Session } from '../../../web/src/models/session.js';
 
-const ajv = new Ajv2020({ allErrors: true, allowUnionTypes: true });
+// `verbose` gives each error the data and the schema, which the messages read.
+const ajv = new Ajv2020({ allErrors: true, allowUnionTypes: true, verbose: true });
 ajv.addSchema(schema);
 
 const validator = (ref: string): ValidateFunction => {
@@ -19,7 +21,7 @@ const validator = (ref: string): ValidateFunction => {
 
 const assertValid = (validate: ValidateFunction, data: unknown, label: string) => {
   if (!validate(data)) {
-    throw new Error(`Invalid ${label}: ${ajv.errorsText(validate.errors, { dataVar: label })}`);
+    throw new Error(documentProblems(label, validate.errors).join('\n'));
   }
 };
 
@@ -31,9 +33,9 @@ export const validateContent = (collectionPath: string, documentId: string, data
   }
 };
 
-/** Throws when the seed file does not match the content schema. */
+/** Throws when the seed file does not match the Firestore schema. */
 export const validateSeedData = (data: unknown) => {
-  assertValid(validator(''), data, 'seed data');
+  assertValid(validator(''), data, 'docs/default-firebase-data.json');
 };
 
 const SITE_PATH = join(import.meta.dirname, '..', '..', '..', 'config', 'site.json');

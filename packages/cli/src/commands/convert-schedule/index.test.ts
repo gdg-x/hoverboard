@@ -110,7 +110,7 @@ describe('runConvertSchedule', () => {
   it('writes nothing when a session would be invalid', async () => {
     collections['sessions'] = { ...collections['sessions'], talk: { title: 'Talk' } };
 
-    await expect(runConvertSchedule()).rejects.toThrow('Invalid sessions/talk');
+    await expect(runConvertSchedule()).rejects.toThrow('sessions/talk: missing "description".');
     expect(writes).toEqual([]);
   });
 

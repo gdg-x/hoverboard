@@ -158,6 +158,13 @@ export default defineConfig({
       },
       {
         test: {
+          name: 'Storage',
+          environment: 'node',
+          include: ['packages/storage/*.test.ts'],
+        },
+      },
+      {
+        test: {
           name: 'Firestore',
           environment: 'node',
           // Starts/stops the Firestore emulator once for the whole run (not

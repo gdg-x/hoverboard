@@ -30,7 +30,7 @@ Run from the repo root.
 
 | Command                        | Does                                                                                                                                                   |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `npm test`                     | All Vitest projects: Web, Server, Hydration, Functions, CLI, Firestore (starts the emulator), Translations and Smoke                                   |
+| `npm test`                     | All Vitest projects: Web, Server, Hydration, Functions, CLI, Storage, Firestore (starts the emulator), Translations and Smoke                          |
 | `npx vitest run --project Web` | One project. Add a path to run one file                                                                                                                |
 | `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer, site config, `astro check` and type checks for web, server and storage                                       |
 | `npm run fix`                  | ESLint and Prettier autofix                                                                                                                            |
