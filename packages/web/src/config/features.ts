@@ -10,8 +10,6 @@ export const FEATURES = [
   'forkMe',
   'functions',
   'gallery',
-  'imageOptimization',
-  'mailchimp',
   'map',
   'mySchedule',
   'notifications',
@@ -35,10 +33,8 @@ declare global {
 /** Features that only work when other features are on. The build fails otherwise. */
 export const FEATURE_REQUIRES: Partial<Record<Feature, readonly Feature[]>> = {
   feedback: ['schedule'],
-  // These run in Cloud Functions.
-  imageOptimization: ['functions'],
-  mailchimp: ['subscribe', 'functions'],
   mySchedule: ['schedule'],
+  // It runs in Cloud Functions.
   notifications: ['functions'],
   // Session pages link to speaker pages.
   schedule: ['speakers'],

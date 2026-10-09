@@ -31,9 +31,8 @@ export const DEPLOY_ROLES = [
   'roles/datastore.indexAdmin',
   // The build reads the site's content.
   'roles/datastore.viewer',
-  // The Storage rules deploy looks up the default bucket, and the image trigger its region.
+  // The Storage rules deploy looks up the default bucket.
   'roles/firebasestorage.viewer',
-  'roles/storage.bucketViewer',
   // Functions, with their Eventarc triggers and Cloud Run services.
   'roles/cloudfunctions.admin',
   // The job that runs scheduleNotifications.

@@ -122,18 +122,18 @@ Turn parts of the site off in `features` in `packages/config/site.json`. Every f
 }
 ```
 
-A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `functions`, `gallery`, `imageOptimization`, `mailchimp`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `schedule`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
+A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `functions`, `gallery`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `schedule`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
 
 The build fails when:
 
-- a feature needs one that is off: `schedule` needs `speakers`, `mySchedule` and `feedback` need `schedule`, `mailchimp` needs `subscribe`, and `notifications`, `imageOptimization` and `mailchimp` need `functions`.
+- a feature needs one that is off: `schedule` needs `speakers`, `mySchedule` and `feedback` need `schedule`, and `notifications` needs `functions`.
 - event text links to the page of a feature that is off, for example `/faq` in `footerRelBlock`.
 
 `demo` adds a band across the top of every page where visitors can try the built-in themes, the spacing and light or dark. Their browser remembers the choices. It is meant for demo sites, so leave it off on an event's site.
 
-`functions` deploys the Cloud Functions, which need the [Blaze plan](02-firebase.md#billing). With it off, `./hb deploy` and the deploy workflow leave functions out, and the site runs on the free Spark plan, without notifications, image optimization and Mailchimp. Deploys don't delete functions that are already deployed: `./hb doctor` lists them, with the commands that delete them.
+`functions` deploys the Cloud Functions, which need the [Blaze plan](02-firebase.md#billing). With it off, `./hb deploy` and the deploy workflow leave functions out, and the site runs on the free Spark plan, without notifications. Deploys don't delete functions that are already deployed: `./hb doctor` lists them, with the commands that delete them.
 
-With `functions` on, every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, and `optimizeImages` needs `imageOptimization`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
+With `functions` on, every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `sendGeneralNotification` needs `notifications`, and `scheduleNotifications` needs `notifications` and `mySchedule`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
 
 When `feedback` is off, the feedback dialog is still in the build, but nothing opens it. Bookmark buttons show only when `mySchedule` is on.
 
@@ -209,9 +209,16 @@ Translate your event content for a target locale in `packages/config/content/loc
 
 Translate the FAQ and Code of Conduct pages with `faq.md` and `coc.md` in the same folder. A page without a translation shows `content/faq.md` or `content/coc.md`. The build fails on any other file in the folder.
 
-## "Become a partner" - how it works?
+## Subscribers and partner leads
 
-`Become a partner` button opens a form with `company name`, `name` and `email` fields. After a user (potential partner) filled a form, this data is saved into Firestore DB, `potentialPartners` node. It gives the possibility to contact back those people who are interested to be a partner with you and collaborate earlier.
+The subscribe band on the home page saves each visitor's email and name to the `subscribers` collection in Firestore. The "Become a partner" button opens a form for a company name, a name and an email, saved to `potentialPartners`. Nobody can read either collection from the site, so the same email can appear more than once. Export them as CSV, for example to import into your mailing tool:
+
+```console
+  FIRESTORE_TARGET=production ./hb firestore-csv subscribers
+  FIRESTORE_TARGET=production ./hb firestore-csv potentialPartners
+```
+
+See [Export a collection as CSV](firebase-utils.md#export-a-collection-as-csv).
 
 ## Next steps
 

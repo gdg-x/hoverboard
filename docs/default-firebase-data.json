@@ -58,11 +58,6 @@
     },
     "site": {
       "domain": ""
-    },
-    "mailchimp": {
-      "dc": "",
-      "listid": "",
-      "apikey": ""
     }
   },
   "partners": [

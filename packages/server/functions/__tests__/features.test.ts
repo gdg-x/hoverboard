@@ -23,18 +23,18 @@ describe('isFeatureOff', () => {
   });
 
   it('lets the function run when its feature is on', async () => {
-    const { isFeatureOff } = await loadWith({ mailchimp: true });
+    const { isFeatureOff } = await loadWith({ notifications: true });
 
-    expect(isFeatureOff('mailchimpSubscribe', 'mailchimp')).toBe(false);
+    expect(isFeatureOff('sendGeneralNotification', 'notifications')).toBe(false);
     expect(logger.error).not.toHaveBeenCalled();
   });
 
   it('logs an error that names the site.json key when the feature is off', async () => {
-    const { isFeatureOff } = await loadWith({ mailchimp: false });
+    const { isFeatureOff } = await loadWith({ notifications: false });
 
-    expect(isFeatureOff('mailchimpSubscribe', 'mailchimp')).toBe(true);
+    expect(isFeatureOff('sendGeneralNotification', 'notifications')).toBe(true);
     expect(logger.error).toHaveBeenCalledWith(
-      'mailchimpSubscribe did nothing because features.mailchimp is false in packages/config/site.json.',
+      'sendGeneralNotification did nothing because features.notifications is false in packages/config/site.json.',
     );
   });
 
@@ -56,15 +56,15 @@ describe('isFeatureOff', () => {
   it('treats every feature as on when site-config.json is missing', async () => {
     const { isFeatureOff } = await loadWith(new Error('ENOENT'));
 
-    expect(isFeatureOff('optimizeImages', 'imageOptimization')).toBe(false);
+    expect(isFeatureOff('sendGeneralNotification', 'notifications')).toBe(false);
     expect(logger.warn).toHaveBeenCalledTimes(1);
   });
 
   it('reads site-config.json once', async () => {
     const { isFeatureOff } = await loadWith({});
 
-    isFeatureOff('optimizeImages', 'imageOptimization');
-    isFeatureOff('mailchimpSubscribe', 'mailchimp');
+    isFeatureOff('scheduleNotifications', 'mySchedule');
+    isFeatureOff('sendGeneralNotification', 'notifications');
 
     expect(readFileSync).toHaveBeenCalledTimes(1);
   });

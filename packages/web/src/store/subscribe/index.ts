@@ -28,14 +28,7 @@ export const subscribe = async (data: DialogData) => {
 
   try {
     dispatch(success(await saveSubscriber(data)));
-    dispatch(
-      queueSnackbar(
-        // Mailchimp emails new subscribers to confirm before they are on the list.
-        __HB_FEATURES__.mailchimp
-          ? msg('Almost done! Check your email to confirm.', { id: 'store.subscribe.confirm' })
-          : msg('Successfully subscribed!', { id: 'store.subscribe.success' }),
-      ),
-    );
+    dispatch(queueSnackbar(msg('Successfully subscribed!', { id: 'store.subscribe.success' })));
   } catch (error) {
     dispatch(failure(error as Error));
   }

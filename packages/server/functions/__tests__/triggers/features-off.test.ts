@@ -1,14 +1,11 @@
 import { getFirestore } from 'firebase-admin/firestore';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { isFeatureOff } from '../../src/features';
-import { mailchimpSubscribe } from '../../src/triggers/mailchimp-subscribe';
 import { sendGeneralNotification } from '../../src/triggers/notifications';
-import { optimizeImages } from '../../src/triggers/optimize-images';
 import { scheduleNotifications } from '../../src/triggers/schedule-notifications';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('firebase-functions/logger');
-vi.mock('@google-cloud/storage', () => ({ Storage: vi.fn() }));
 vi.mock('../../src/features', () => ({ isFeatureOff: vi.fn(() => true) }));
 
 const event = {
@@ -22,7 +19,6 @@ describe('functions with their feature off', () => {
   });
 
   it.each([
-    ['mailchimpSubscribe', () => mailchimpSubscribe.run(event), ['mailchimp']],
     ['sendGeneralNotification', () => sendGeneralNotification.run(event), ['notifications']],
     [
       'scheduleNotifications',
@@ -34,15 +30,6 @@ describe('functions with their feature off', () => {
 
     expect(isFeatureOff).toHaveBeenCalledWith(name, ...features);
     expect(getFirestore).not.toHaveBeenCalled();
-  });
-
-  it('optimizeImages returns without reading the image', async () => {
-    const result = await optimizeImages.run({
-      data: { contentType: 'image/png', name: 'a.png', bucket: 'b' },
-    } as never);
-
-    expect(isFeatureOff).toHaveBeenCalledWith('optimizeImages', 'imageOptimization');
-    expect(result).toBeNull();
   });
 
   it('scheduleNotifications also needs mySchedule', async () => {

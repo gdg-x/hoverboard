@@ -254,7 +254,6 @@ describe('setupGitHub', () => {
       'roles/datastore.indexAdmin',
       'roles/datastore.viewer',
       'roles/firebasestorage.viewer',
-      'roles/storage.bucketViewer',
       'roles/cloudfunctions.admin',
       'roles/cloudscheduler.admin',
       'roles/serviceusage.serviceUsageConsumer',

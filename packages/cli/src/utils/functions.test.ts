@@ -48,14 +48,14 @@ describe('checkFunctions', () => {
     expect(result).toEqual({
       name: 'Cloud Functions',
       ok: true,
-      message: 'All 4 functions are deployed as 2nd gen.',
+      message: 'All 2 functions are deployed as 2nd gen.',
     });
     expect(listDeployedFunctionsMock).toHaveBeenCalledWith('/repo', 'demo-project');
   });
 
   it('fails on a 1st gen function, and says how to replace it', async () => {
     listDeployedFunctionsMock.mockResolvedValue([
-      deployed('mailchimpSubscribe', 'gcfv1'),
+      deployed('scheduleNotifications', 'gcfv1'),
       ...EXPECTED_FUNCTIONS.slice(1).map((id) => deployed(id)),
     ]);
 
@@ -64,23 +64,24 @@ describe('checkFunctions', () => {
     expect(result.ok).toBe(false);
     expect(result.warning).toBeUndefined();
     expect(result.message).toBe(
-      "mailchimpSubscribe is 1st gen, which a deploy can't upgrade to 2nd gen. Delete it with " +
-        '`npx firebase functions:delete mailchimpSubscribe --region us-central1`, then run `./hb deploy`.',
+      "scheduleNotifications is 1st gen, which a deploy can't upgrade to 2nd gen. Delete it with " +
+        '`npx firebase functions:delete scheduleNotifications --region us-central1`, then run `./hb deploy`.',
     );
   });
 
   it('warns about missing functions and functions no longer in the code', async () => {
     listDeployedFunctionsMock.mockResolvedValue([
-      ...EXPECTED_FUNCTIONS.slice(2).map((id) => deployed(id)),
-      deployed('sessionsWrite', 'gcfv1'),
+      ...EXPECTED_FUNCTIONS.slice(1).map((id) => deployed(id)),
+      deployed('mailchimpSubscribe'),
+      deployed('optimizeImages'),
     ]);
 
     const result = await checkFunctions('/repo', 'demo-project');
 
     expect(result).toMatchObject({ ok: true, warning: true });
     expect(result.message).toBe(
-      'mailchimpSubscribe, optimizeImages are not deployed. Run `./hb deploy`. ' +
-        'sessionsWrite is no longer in the code. The next deploy deletes it.',
+      'scheduleNotifications is not deployed. Run `./hb deploy`. ' +
+        'mailchimpSubscribe, optimizeImages are no longer in the code. The next deploy deletes them.',
     );
   });
 
@@ -107,14 +108,14 @@ describe('checkFunctions', () => {
 
     it('warns about functions still deployed, which deploys leave in place', async () => {
       functionsEnabledMock.mockReturnValueOnce(false);
-      listDeployedFunctionsMock.mockResolvedValue([deployed('optimizeImages')]);
+      listDeployedFunctionsMock.mockResolvedValue([deployed('sendGeneralNotification')]);
 
       const result = await checkFunctions('/repo', 'demo-project');
 
       expect(result).toMatchObject({ ok: true, warning: true });
       expect(result.message).toBe(
-        'features.functions is false, but optimizeImages is still deployed, and deploys leave it ' +
-          'in place. Delete it with `npx firebase functions:delete optimizeImages --region us-central1`.',
+        'features.functions is false, but sendGeneralNotification is still deployed, and deploys leave it ' +
+          'in place. Delete it with `npx firebase functions:delete sendGeneralNotification --region us-central1`.',
       );
     });
   });
