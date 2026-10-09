@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { COLLECTIONS, type CollectionPath } from '../../../../storage/collections.js';
 import data from '../../../../../docs/default-firebase-data.json';
 import { validateSeedData } from '../../lib/content.js';
 import { siteFeatures } from '../../utils/site-features.js';
@@ -18,17 +19,16 @@ type Features = Record<string, boolean>;
 const REPO_ROOT = join(import.meta.dirname, '..', '..', '..', '..', '..');
 
 // Each collection is seeded while any of its features is on.
-const COLLECTIONS: [name: string, features: string[], importer: () => unknown][] = [
-  ['blog', ['blog'], importBlog],
-  ['gallery', ['gallery'], importGallery],
-  ['partners', ['partners'], importPartners],
-  ['previousSpeakers', ['previousSpeakers'], importPreviousSpeakers],
-  // Speaker pages list their sessions too.
-  ['sessions', ['schedule', 'speakers'], importSessions],
-  ['speakers', ['speakers'], importSpeakers],
-  ['team', ['team'], importTeam],
-  ['tickets', ['tickets'], importTickets],
-  ['videos', ['videos'], importVideos],
+const IMPORTERS: [name: CollectionPath, importer: () => unknown][] = [
+  ['blog', importBlog],
+  ['gallery', importGallery],
+  ['partners', importPartners],
+  ['previousSpeakers', importPreviousSpeakers],
+  ['sessions', importSessions],
+  ['speakers', importSpeakers],
+  ['team', importTeam],
+  ['tickets', importTickets],
+  ['videos', importVideos],
 ];
 
 export const runFirestoreInit = async (
@@ -38,8 +38,8 @@ export const runFirestoreInit = async (
   validateSeedData(data);
   await importConfig(features); // Should always be first
   const skipped: string[] = [];
-  for (const [name, collectionFeatures, importer] of COLLECTIONS) {
-    if (collectionFeatures.every((feature) => features[feature] === false)) {
+  for (const [name, importer] of IMPORTERS) {
+    if (COLLECTIONS[name].features.every((feature) => features[feature] === false)) {
       skipped.push(name);
       continue;
     }

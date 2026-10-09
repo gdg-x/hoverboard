@@ -1,14 +1,11 @@
+import { collectionInfo } from '../../../../storage/collections.js';
 import { firestore } from '../../lib/firestore.js';
 import data from '../../../../../docs/default-firebase-data.json';
 
-// Config documents that only a function of these features reads. The others are always seeded.
-const DOC_FEATURES: Record<string, string[]> = {
-  notifications: ['notifications'],
-};
-
 export const importConfig = async (features: Record<string, boolean> = {}) => {
+  // Documents Hoverboard doesn't use, such as `config/site`, are always seeded.
   const isNeeded = (docId: string) =>
-    DOC_FEATURES[docId]?.some((name) => features[name] !== false) ?? true;
+    collectionInfo(`config/${docId}`)?.features.some((name) => features[name] !== false) ?? true;
   const docs: { [key: string]: object } = Object.fromEntries(
     Object.entries(data.config).filter(([docId]) => isNeeded(docId)),
   );

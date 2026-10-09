@@ -10,7 +10,7 @@ By default all of these scripts run against the local [Firestore emulator](https
 
 ## Content model
 
-Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/content.schema.json`](../../packages/storage/schemas/content.schema.json). `firestore-init` and `firestore-copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked.
+Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/firestore.schema.json`](../../packages/storage/schemas/firestore.schema.json), which also describes the data visitors and functions write. [`packages/storage/collections.ts`](../../packages/storage/collections.ts) lists every collection Hoverboard uses, with its schema and features. `firestore-init` and `firestore-copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked.
 
 Speakers and sessions have optional `source` and `externalId` fields for data imported from another tool, so a later import can update them instead of adding duplicates.
 

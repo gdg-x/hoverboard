@@ -5,6 +5,7 @@ import type {
   QueryDocumentSnapshot,
 } from 'firebase-admin/firestore';
 import { env } from 'node:process';
+import { COLLECTIONS, type CollectionPath } from '../../../storage/collections';
 import type { Feature } from '../config/features';
 import { scheduleTracks } from '../config/site';
 import { scheduleErrors } from '../schedule/build-schedule';
@@ -25,31 +26,33 @@ const read = async (
   map: (doc: QueryDocumentSnapshot) => DocumentData,
 ): Promise<DocumentData[]> => (await query.get()).docs.map(map);
 
-// The same queries as the subscriptions in src/db/, and the features that read each one.
+// The same queries as the subscriptions in src/db/, with the collection whose features they need.
 const LOADERS = {
   blog: ['blog', (db) => read(db.collection('blog').orderBy('published', 'desc'), withId)],
   gallery: ['gallery', (db) => read(db.collection('gallery').orderBy('order'), withId)],
-  members: ['team', (db) => read(db.collectionGroup('members').orderBy('name'), withParentId)],
+  members: [
+    'team/*/members',
+    (db) => read(db.collectionGroup('members').orderBy('name'), withParentId),
+  ],
   partnerGroups: ['partners', (db) => read(db.collection('partners').orderBy('order'), withId)],
-  partners: ['partners', (db) => read(db.collectionGroup('items').orderBy('order'), withParentId)],
+  partners: [
+    'partners/*/items',
+    (db) => read(db.collectionGroup('items').orderBy('order'), withParentId),
+  ],
   previousSpeakers: [
     'previousSpeakers',
     (db) => read(db.collection('previousSpeakers').orderBy('name'), withId),
   ],
-  // The schedule shows the speakers of sessions, and the speakers page filters by session tags.
-  sessions: [['schedule', 'speakers'], (db) => read(db.collection('sessions'), withId)],
-  speakers: [['schedule', 'speakers'], (db) => read(db.collection('speakers'), withId)],
+  sessions: ['sessions', (db) => read(db.collection('sessions'), withId)],
+  speakers: ['speakers', (db) => read(db.collection('speakers'), withId)],
   teams: ['team', (db) => read(db.collection('team').orderBy('title'), withId)],
   tickets: ['tickets', (db) => read(db.collection('tickets').orderBy('order'), withId)],
   videos: ['videos', (db) => read(db.collection('videos').orderBy('order'), withId)],
-} satisfies Record<
-  keyof Content,
-  [Feature | Feature[], (db: Firestore) => Promise<DocumentData[]>]
->;
+} satisfies Record<keyof Content, [CollectionPath, (db: Firestore) => Promise<DocumentData[]>]>;
 
 const enabledLoaders = () =>
-  Object.entries(LOADERS).filter(([, [features]]) =>
-    [features].flat().some((feature) => __HB_FEATURES__[feature]),
+  Object.entries(LOADERS).filter(([, [path]]) =>
+    COLLECTIONS[path].features.some((feature) => __HB_FEATURES__[feature as Feature]),
   );
 
 const checkSchedule = ({ sessions = [] }: Partial<Content>) => {

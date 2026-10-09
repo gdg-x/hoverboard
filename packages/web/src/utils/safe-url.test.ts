@@ -34,7 +34,7 @@ describe('safeUrl', () => {
   });
 
   it.each([
-    'packages/storage/schemas/content.schema.json',
+    'packages/storage/schemas/firestore.schema.json',
     'packages/web/schemas/resources.schema.json',
     'packages/web/schemas/site.schema.json',
   ])('matches the link pattern in %s', (file) => {

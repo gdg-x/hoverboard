@@ -42,6 +42,8 @@ export const buildSite = (writeConfig: (configDir: string) => void): SiteBuild =
     if (entry === '.vite' || entry === '.astro') continue;
     symlinkSync(join(webRoot, 'node_modules', entry), join(web, 'node_modules', entry), 'junction');
   }
+  // The build reads the collection registry from packages/storage.
+  symlinkSync(join(webRoot, '../storage'), join(root, 'packages/storage'), 'junction');
   writeConfig(join(root, 'packages/config'));
 
   const env = {

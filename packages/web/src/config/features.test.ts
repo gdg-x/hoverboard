@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { COLLECTIONS } from '../../../storage/collections';
 import { setFeatures } from '../../__tests__/helpers/features';
 import { FEATURES, isFeature, isFeatureEnabled } from './features';
 
@@ -20,4 +21,11 @@ describe('features', () => {
     expect(isFeature('blog')).toBe(true);
     expect(isFeature('home')).toBe(false);
   });
+
+  it.each(Object.entries(COLLECTIONS))(
+    'knows the features of the %s collection in packages/storage',
+    (_path, { features }) => {
+      expect(features.filter((feature) => !isFeature(feature))).toEqual([]);
+    },
+  );
 });

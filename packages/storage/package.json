@@ -15,6 +15,7 @@
     "@firebase/rules-unit-testing": "^5.0.2",
     "@tsconfig/node22": "^22.0.6",
     "@types/node": "^22.20.5",
+    "ajv": "^8.20.0",
     "firebase": "^12.19.0",
     "jest-dev-server": "^11.0.0",
     "typescript": "^6.0.3"
