@@ -6,6 +6,8 @@ on:
 
 permissions:
   contents: read
+  # Lets google-github-actions/auth request a GitHub OIDC token for Workload Identity Federation.
+  id-token: write
 
 jobs:
   destroy_preview:
@@ -14,17 +16,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: package.json
       - run: npm ci
-      - id: get-short-pr
-        run: |
-          echo "pr=$(echo ${{github.head_ref}} | cut -c 1-20)" >> $GITHUB_OUTPUT
       # `./hb setup-github` sets these variables. See docs/tutorials/04-deploy.md.
-      - uses: google-github-actions/auth@v3
+      - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
         with:
           workload_identity_provider: '${{ vars.WIF_PROVIDER }}'
           service_account: '${{ vars.DEPLOY_SERVICE_ACCOUNT }}'
-      - run: npx firebase hosting:channel:delete pr${{ github.event.pull_request.number }}-${{ steps.get-short-pr.outputs.pr }} --force --project "$(jq -r .firebase.projectId packages/config/site.json)"
+      # The channel name action-hosting-deploy gives a pull request (src/getChannelId.ts).
+      - run: |
+          channel="pr${PR_NUMBER}-${HEAD_REF:0:20}"
+          channel="${channel//[^a-zA-Z0-9_.-]/_}"
+          npx firebase hosting:channel:delete "$channel" --force --project "$(jq -r .firebase.projectId packages/config/site.json)"
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_REF: ${{ github.head_ref }}

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
+import { runAuditDeps } from './commands/audit-deps.js';
 import { runConvertSchedule } from './commands/convert-schedule/index.js';
 import { runDoctor } from './commands/doctor.js';
 import { runDeploy } from './commands/deploy.js';
@@ -101,6 +102,15 @@ program
   )
   .action(() => {
     console.log(firebaseDeployArgs(findRepoRoot(process.cwd()) ?? process.cwd()).join(' '));
+  });
+
+program
+  .command('audit-deps')
+  .description(
+    'Fail on high or critical advisories in production dependencies, except the accepted ones.',
+  )
+  .action(() => {
+    process.exitCode = runAuditDeps() ? 0 : 1;
   });
 
 program
