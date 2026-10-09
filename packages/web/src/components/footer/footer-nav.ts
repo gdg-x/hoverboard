@@ -2,7 +2,7 @@ import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { organizer } from '../../config/site';
+import { build, organizer } from '../../config/site';
 import { safeUrl } from '../../utils/safe-url';
 import { navigationLabel } from '../shell/navigation-label';
 import { ThemedElement } from '../themed-element';
@@ -70,6 +70,11 @@ export class FooterNav extends ThemedElement {
               ? html`· <a class="coc" href="/coc">${navigationLabel('codeOfConduct')}</a>`
               : nothing
           }
+          <span class="build"
+            >· ${build.sha ? html`${build.sha} · ` : nothing}<time datetime="${build.time}"
+              >${build.time.slice(0, 16).replace('T', ' ')} UTC</time
+            ></span
+          >
         </div>
       </div>
     `;

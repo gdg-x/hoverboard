@@ -1,4 +1,5 @@
 // Types for `virtual:hoverboard/site`, which vite-plugin-site.ts serves. tsconfig.json maps it here.
+import type { BuildInfo } from './build-info';
 import type { SiteConfig } from './resolve-config';
 
 export declare const site: SiteConfig['site'];
@@ -7,3 +8,4 @@ export declare const resources: SiteConfig['resources'];
 export declare const contentTranslations: Record<string, () => Promise<{ default: object }>>;
 /** `heroSettings.home.illustration`, the SVG file's markup. */
 export declare const heroIllustration: string | undefined;
+export declare const build: BuildInfo;
