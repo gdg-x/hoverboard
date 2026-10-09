@@ -26,6 +26,8 @@ Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#bi
 
    When a deploy finds functions that are no longer in the code, such as the schedule generator's `sessionsWrite`, `scheduleWrite` and `speakersWrite` after upgrading to v4, Firebase asks before deleting them. Answer yes.
 
+   `./hbd doctor` checks that every function is deployed as 2nd gen. A deploy can't upgrade a 1st gen function, so it names the command that deletes one first.
+
    The URL to your live site is listed in the output.
 
 ## Continuous integration with Github Actions

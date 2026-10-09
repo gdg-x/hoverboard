@@ -22,20 +22,16 @@ interface FirebaseToolsCloudBilling {
 }
 
 /**
- * Checks whether billing (the Blaze plan) is enabled for a project, signed in
- * as the Firebase CLI's current account. firebase-tools has no public API for
- * this, so it reuses the internal helpers `firebase deploy` uses; callers
- * should treat any error as "unknown".
+ * Signs firebase-tools' internal helpers in as the Firebase CLI's current account, and returns a
+ * `require` for them. firebase-tools has no public API for these, so callers should treat any
+ * error as "unknown".
  */
-export const isBillingEnabled = async (repoRoot: string, projectId: string): Promise<boolean> => {
+export const firebaseToolsSession = async (repoRoot: string, projectId: string) => {
   const requireFromRoot = createRequire(join(repoRoot, 'package.json'));
   const auth = requireFromRoot('firebase-tools/lib/auth.js') as FirebaseToolsAuth;
   const { requireAuth } = requireFromRoot(
     'firebase-tools/lib/requireAuth.js',
   ) as FirebaseToolsRequireAuth;
-  const { checkBillingEnabled } = requireFromRoot(
-    'firebase-tools/lib/gcp/cloudbilling.js',
-  ) as FirebaseToolsCloudBilling;
 
   const options: Options = { project: projectId, projectRoot: repoRoot };
   const account = auth.selectAccount(undefined, repoRoot);
@@ -46,6 +42,18 @@ export const isBillingEnabled = async (repoRoot: string, projectId: string): Pro
   }
 
   await requireAuth(options);
+  return requireFromRoot;
+};
+
+/**
+ * Checks whether billing (the Blaze plan) is enabled for a project, with the internal helper
+ * `firebase deploy` uses.
+ */
+export const isBillingEnabled = async (repoRoot: string, projectId: string): Promise<boolean> => {
+  const requireFromRoot = await firebaseToolsSession(repoRoot, projectId);
+  const { checkBillingEnabled } = requireFromRoot(
+    'firebase-tools/lib/gcp/cloudbilling.js',
+  ) as FirebaseToolsCloudBilling;
   // Like `firebase deploy`, this enables the Cloud Billing API on the project if needed.
   return checkBillingEnabled(projectId);
 };
