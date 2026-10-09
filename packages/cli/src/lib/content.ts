@@ -38,6 +38,21 @@ export const validateSeedData = (data: unknown) => {
   assertValid(validator(''), data, 'docs/default-firebase-data.json');
 };
 
+/**
+ * The problems with a document of any collection in the registry, with values left out of visitor
+ * data. A document Hoverboard doesn't use has none.
+ */
+export const documentMessages = (documentPath: string, data: unknown, url?: string): string[] => {
+  const info = collectionInfo(documentPath);
+  if (!info) return [];
+  const validate = validator(`#/$defs/${info.schema}`);
+  if (validate(data)) return [];
+  return documentProblems(documentPath, validate.errors, {
+    hideValues: info.kind === 'visitor',
+    ...(url ? { url } : {}),
+  });
+};
+
 const SITE_PATH = join(import.meta.dirname, '..', '..', '..', 'config', 'site.json');
 
 /** `schedule.tracks` in packages/config/site.json. */
@@ -46,17 +61,24 @@ export const siteTracks = (path = SITE_PATH): Track[] =>
     ?.tracks ?? [];
 
 /**
- * Throws when sessions are not on the schedule as they say: a track that isn't in site.json or not
- * on the session's day, an end that isn't after the start, or two sessions at once in one track.
+ * Sessions that are not on the schedule as they say: a track that isn't in site.json or not on the
+ * session's day, an end that isn't after the start, or two sessions at once in one track.
  */
+export const scheduleMessages = (
+  sessions: Record<string, unknown>,
+  tracks: Track[] = siteTracks(),
+): string[] =>
+  scheduleErrors(
+    Object.entries(sessions).map(([id, session]) => ({ ...(session as Session), id })),
+    tracks,
+  );
+
+/** Throws the {@link scheduleMessages} of the sessions. */
 export const validateSchedule = (
   sessions: Record<string, unknown>,
   tracks: Track[] = siteTracks(),
 ) => {
-  const errors = scheduleErrors(
-    Object.entries(sessions).map(([id, session]) => ({ ...(session as Session), id })),
-    tracks,
-  );
+  const errors = scheduleMessages(sessions, tracks);
   if (errors.length) {
     throw new Error(`Invalid schedule:\n${errors.map((error) => `  ${error}`).join('\n')}`);
   }

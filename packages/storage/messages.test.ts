@@ -151,6 +151,19 @@ describe('documentProblems', () => {
     ).toEqual(['doc/1: email must be an email address.']);
   });
 
+  it('leaves map keys and references out for personal data', () => {
+    const hidden = { hideValues: true };
+    expect(problems('notificationsUser', { tokens: { 'secret-token': false } }, hidden)).toEqual([
+      'doc/1: tokens.* must be true.',
+    ]);
+    expect(problems('featuredSessions', { '101': null }, hidden)).toEqual([
+      'doc/1: An entry must be a boolean, not null.',
+    ]);
+    expect(
+      problems('feedback', { ...feedback, userId: { $reference: 'users/ada' } }, hidden),
+    ).toEqual(['doc/1: userId must be a string, not a reference.']);
+  });
+
   it('ends each message with the link', () => {
     expect(problems('session', { title: 'Keynote' }, { url: 'https://example.com' })).toEqual([
       'doc/1: missing "description". https://example.com',

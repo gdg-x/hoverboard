@@ -6,6 +6,7 @@ import { runDoctor } from './commands/doctor.js';
 import { runDeploy } from './commands/deploy.js';
 import { runEmulators } from './commands/emulators.js';
 import { runFirestoreCopy } from './commands/firestore-copy/index.js';
+import { runFirestoreCheck } from './commands/firestore-check.js';
 import { runFirestoreCsv } from './commands/firestore-csv.js';
 import { runFirestoreExport } from './commands/firestore-export.js';
 import { runFirestoreInit } from './commands/firestore-init/index.js';
@@ -158,6 +159,22 @@ program
   .action(async (collection: string, file?: string) => {
     try {
       await runFirestoreCsv(collection, file);
+    } catch (error) {
+      console.log(error);
+      process.exitCode = 1;
+    }
+  });
+
+program
+  .command('firestore-check')
+  .description(
+    'Check every Firestore document against the schema, and the sessions against the schedule ' +
+      '(targets the local emulator unless FIRESTORE_TARGET=production is set). Read-only.',
+  )
+  .option('--collection <path>', 'Check one collection, such as speakers or partners/gold/items.')
+  .action(async (options: { collection?: string }) => {
+    try {
+      process.exitCode = (await runFirestoreCheck(options)) ? 0 : 1;
     } catch (error) {
       console.log(error);
       process.exitCode = 1;

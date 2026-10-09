@@ -10,7 +10,7 @@ By default all of these scripts run against the local [Firestore emulator](https
 
 ## Content model
 
-Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/firestore.schema.json`](../../packages/storage/schemas/firestore.schema.json), which also describes the data visitors and functions write. [`packages/storage/collections.ts`](../../packages/storage/collections.ts) lists every collection Hoverboard uses, with its schema and features. `firestore-init` and `firestore-copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked.
+Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/firestore.schema.json`](../../packages/storage/schemas/firestore.schema.json), which also describes the data visitors and functions write. [`packages/storage/collections.ts`](../../packages/storage/collections.ts) lists every collection Hoverboard uses, with its schema and features. `firestore-init` and `firestore-copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked as you make them. Check them with [`firestore-check`](#check-the-data).
 
 Speakers and sessions have optional `source` and `externalId` fields for data imported from another tool, so a later import can update them instead of adding duplicates.
 
@@ -47,6 +47,20 @@ Check the schedule, deploy, then delete the old collections. `firestore:delete` 
 ```
 
 Also delete the `config/schedule` document. `schedule.published` in `site.json` replaces it.
+
+## Check the data
+
+```console
+    FIRESTORE_TARGET=production ./hb firestore-check
+    FIRESTORE_TARGET=production ./hb firestore-check --collection speakers
+```
+
+Reads every document, with subcollections, and checks it against the schema. It also checks the schedule, and that each session's speakers exist. Without `FIRESTORE_TARGET=production`, it reads the emulator. It doesn't change anything.
+
+- Each problem names the document, the field and the value, and links to the document in the Firebase console.
+- Problems in the data visitors write, such as `subscribers`, are counted by collection. Their document IDs and values are left out, since they can be emails, push tokens or user IDs.
+- Problems in the content of a feature that is off are warnings. So are collections from earlier versions, with the command that deletes them, and collections Hoverboard doesn't use.
+- It exits with an error when it finds a problem that isn't a warning. In GitHub Actions, problems are annotations.
 
 ## Seed the emulator with fixture data
 

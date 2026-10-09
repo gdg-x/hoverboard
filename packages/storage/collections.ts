@@ -68,8 +68,11 @@ export const COLLECTIONS = {
 
 export type CollectionPath = keyof typeof COLLECTIONS;
 
-/** Collections that earlier versions used, with the version that stopped using them. */
+/** Collections and documents that earlier versions used, with the version that stopped. */
 export const RETIRED: Readonly<Record<string, string>> = {
+  'config/mailchimp': '4.0.0',
+  'config/schedule': '4.0.0',
+  'config/site': '4.0.0',
   generatedSchedule: '4.0.0',
   generatedSessions: '4.0.0',
   generatedSpeakers: '4.0.0',

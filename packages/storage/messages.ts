@@ -1,7 +1,7 @@
 import type { ErrorObject } from 'ajv';
 
 export interface MessageOptions {
-  /** Leaves values out, for documents with personal data. */
+  /** Leaves values, map keys and references out, for documents with personal data. */
   hideValues?: boolean;
   /** Ends each message with a link to the document. */
   url?: string;
@@ -45,9 +45,26 @@ export const fieldPath = (instancePath: string): string =>
 
 const join = (field: string, name: string) => (field ? `${field}.${name}` : name);
 
-const kindOf = (value: unknown): string => {
+/**
+ * The field path with the keys of maps and the indexes of arrays as `*`, since in visitor data
+ * keys can be push tokens or user IDs. A key at the top is "An entry".
+ */
+const maskedPath = (instancePath: string): string => {
+  const path = instancePath
+    .split('/')
+    .slice(1)
+    .map((segment, index) =>
+      index === 0 && !/^\d+$/.test(segment) ? unescapePointer(segment) : '*',
+    )
+    .join('.');
+  return path === '*' ? 'An entry' : path;
+};
+
+const kindOf = (value: unknown, hideValues = false): string => {
   if (value && typeof value === 'object' && !Array.isArray(value)) {
-    if ('$reference' in value) return `a reference to ${String(value.$reference)}`;
+    if ('$reference' in value) {
+      return hideValues ? 'a reference' : `a reference to ${String(value.$reference)}`;
+    }
     if ('$timestamp' in value) return 'a timestamp';
   }
   if (value === null) return 'null';
@@ -72,7 +89,7 @@ const message = (
   error: ErrorObject,
   { hideValues = false }: MessageOptions,
 ): string | undefined => {
-  const field = fieldPath(error.instancePath);
+  const field = hideValues ? maskedPath(error.instancePath) : fieldPath(error.instancePath);
   const params = error.params as Record<string, unknown>;
   const value = hideValues ? '' : ` ${shown(error.data)}`;
   const subject = `${field || 'The document'}${value}`;
@@ -97,10 +114,10 @@ const message = (
         .map((type) => TYPE_NAMES[type] ?? type)
         .join(' or ');
       const reference = (error.data as { $reference?: unknown } | null)?.$reference;
-      if (typeof reference === 'string' && expected.includes('string')) {
+      if (!hideValues && typeof reference === 'string' && expected.includes('string')) {
         return `${field} is a reference to ${reference}. It must be the ID "${reference.split('/').pop()}".`;
       }
-      return `${field || 'The document'} must be ${expected}, not ${kindOf(error.data)}.${description(error.parentSchema)}`;
+      return `${field || 'The document'} must be ${expected}, not ${kindOf(error.data, hideValues)}.${description(error.parentSchema)}`;
     }
     case 'pattern': {
       // Errors inside `propertyNames` are about a key. The `propertyNames` error names it.
@@ -110,7 +127,9 @@ const message = (
       return `${subject} ${meaning}.`;
     }
     case 'propertyNames':
-      return `${field || 'The document'} has a key that isn't allowed: "${String(params['propertyName'])}".`;
+      return hideValues
+        ? `${field || 'The document'} has a key that isn't allowed.`
+        : `${field || 'The document'} has a key that isn't allowed: "${String(params['propertyName'])}".`;
     case 'maxLength':
       return `${field} is longer than ${String(params['limit'])} characters.`;
     case 'minLength':

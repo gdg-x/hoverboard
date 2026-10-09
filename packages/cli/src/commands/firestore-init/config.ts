@@ -3,7 +3,7 @@ import { firestore } from '../../lib/firestore.js';
 import data from '../../../../../docs/default-firebase-data.json';
 
 export const importConfig = async (features: Record<string, boolean> = {}) => {
-  // Documents Hoverboard doesn't use, such as `config/site`, are always seeded.
+  // Documents outside the registry are always seeded.
   const isNeeded = (docId: string) =>
     collectionInfo(`config/${docId}`)?.features.some((name) => features[name] !== false) ?? true;
   const docs: { [key: string]: object } = Object.fromEntries(

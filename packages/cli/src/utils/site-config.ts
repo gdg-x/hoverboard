@@ -26,7 +26,7 @@ export const validateSiteConfig = async (repoRoot: string): Promise<string[]> =>
   }
 };
 
-const escapeAnnotation = (text: string) =>
+export const escapeAnnotation = (text: string) =>
   text.replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
 
 /**
