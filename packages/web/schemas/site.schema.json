@@ -336,7 +336,7 @@
       }
     },
     "features": {
-      "description": "Turns site features on or off. Every feature is on by default, except forkMe.",
+      "description": "Turns site features on or off. Every feature is on by default, except demo and forkMe.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -344,6 +344,10 @@
           "type": "boolean"
         },
         "codeOfConduct": {
+          "type": "boolean"
+        },
+        "demo": {
+          "description": "A banner across the top that lets visitors try the themes, spacing and brightness. For demo sites.",
           "type": "boolean"
         },
         "faq": {

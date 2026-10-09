@@ -41,6 +41,7 @@ const FEATURE_PATHS: Partial<Record<Feature, string[]>> = {
 const FEATURE_CHUNKS: Partial<Record<Feature, string[]>> = {
   blog: ['blog-list-page', 'post-page', 'latest-posts-block'],
   codeOfConduct: ['coc-page'],
+  demo: ['demo-banner'],
   faq: ['faq-page'],
   gallery: ['gallery-block'],
   map: ['map-block'],

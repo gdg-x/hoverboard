@@ -344,6 +344,27 @@
 <trans-unit id="shell.app-install.cta">
   <source>Add to Home Screen</source>
 </trans-unit>
+<trans-unit id="shell.demo.density.compact">
+  <source>Compact</source>
+</trans-unit>
+<trans-unit id="shell.demo.density.default">
+  <source>Default</source>
+</trans-unit>
+<trans-unit id="shell.demo.density.roomy">
+  <source>Roomy</source>
+</trans-unit>
+<trans-unit id="shell.demo.label">
+  <source>Demo</source>
+</trans-unit>
+<trans-unit id="shell.demo.badge">
+  <source>DEMO</source>
+</trans-unit>
+<trans-unit id="shell.demo.theme">
+  <source>Theme</source>
+</trans-unit>
+<trans-unit id="shell.demo.density">
+  <source>Spacing</source>
+</trans-unit>
 <trans-unit id="shell.nav.home">
   <source>Home</source>
 </trans-unit>

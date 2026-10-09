@@ -32,6 +32,7 @@
   "features": {
     "blog": true,
     "codeOfConduct": true,
+    "demo": false,
     "faq": true,
     "feedback": true,
     "forkMe": false,

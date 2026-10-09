@@ -1,10 +1,12 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { colorScheme } from '../../config/site';
+import { segmented } from '../../styles/segmented';
 import {
   applyColorScheme,
   type ChosenColorScheme,
+  COLOR_SCHEME_EVENT,
   COLOR_SCHEME_KEY,
   readColorScheme,
 } from '../../utils/color-scheme';
@@ -15,87 +17,24 @@ type Choice = ChosenColorScheme | 'system';
 
 const storage = () => localStorage;
 
-/** System, Light or Dark, for this browser. Hidden when the site locks a color scheme. */
+/**
+ * System, Light or Dark, for this browser. Hidden when the site locks a color scheme. `compact`
+ * shows only the icons, with System between Light and Dark.
+ */
 @customElement('color-scheme-toggle')
 export class ColorSchemeToggle extends ThemedElement {
-  static override styles = css`
-    fieldset {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--hb-space-2) var(--hb-space-3);
-      margin: 0;
-      padding: 0;
-      border: 0;
-    }
-
-    legend {
-      float: left;
-      padding: 0;
-      font-weight: 600;
-    }
-
-    .options {
-      display: inline-flex;
-      padding: 2px;
-      border: var(--hb-border-width) solid currentColor;
-      border-radius: var(--hb-radius-full);
-    }
-
-    label {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: var(--hb-space-1);
-      min-block-size: var(--hb-target-min);
-      padding-inline: var(--hb-space-3);
-      border-radius: var(--hb-radius-full);
-      cursor: pointer;
-    }
-
-    label:hover {
-      background-color: color-mix(in srgb, currentColor 8%, transparent);
-    }
-
-    label:has(input:checked) {
-      background-color: currentColor;
-    }
-
-    label:has(input:checked) span,
-    label:has(input:checked) hoverboard-icon {
-      /* The selected option's text takes the band's background color. */
-      color: var(--hb-footer-background, var(--hb-color-surface));
-    }
-
-    label:has(input:focus-visible) {
-      outline: 3px solid var(--hb-color-focus);
-      outline-offset: 2px;
-    }
-
-    input {
-      position: absolute;
-      inset: 0;
-      margin: 0;
-      opacity: 0;
-      cursor: inherit;
-    }
-
-    hoverboard-icon {
-      inline-size: 18px;
-      block-size: 18px;
-    }
-
-    @media (forced-colors: active) {
-      label:has(input:checked) {
-        background-color: Highlight;
+  static override styles = [
+    segmented,
+    css`
+      :host {
+        /* The selected option's text takes the band's background color. */
+        --hb-segmented-selected-color: var(--hb-footer-background);
       }
+    `,
+  ];
 
-      label:has(input:checked) span,
-      label:has(input:checked) hoverboard-icon {
-        color: HighlightText;
-      }
-    }
-  `;
+  @property({ type: Boolean, reflect: true })
+  accessor compact = false;
 
   // System on the server and in the first render, so hydration matches. The stored choice follows.
   @state()
@@ -104,6 +43,21 @@ export class ColorSchemeToggle extends ThemedElement {
   override firstUpdated() {
     this.choice = readColorScheme(storage) ?? 'system';
   }
+
+  // The footer and the demo banner can both have a toggle.
+  override connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener(COLOR_SCHEME_EVENT, this.onOtherChange);
+  }
+
+  override disconnectedCallback() {
+    window.removeEventListener(COLOR_SCHEME_EVENT, this.onOtherChange);
+    super.disconnectedCallback();
+  }
+
+  private readonly onOtherChange = () => {
+    this.choice = readColorScheme(storage) ?? 'system';
+  };
 
   // A property, not a binding: Lit SSR writes `.checked` as a `checked` attribute even when false.
   override updated() {
@@ -115,18 +69,26 @@ export class ColorSchemeToggle extends ThemedElement {
   override render() {
     if (colorScheme !== 'system') return nothing;
 
-    const options: { value: Choice; icon: string; label: string }[] = [
-      {
-        value: 'system',
-        icon: 'monitor',
-        label: msg('System', { id: 'footer.color-scheme.system' }),
-      },
-      { value: 'light', icon: 'sun', label: msg('Light', { id: 'footer.color-scheme.light' }) },
-      { value: 'dark', icon: 'moon', label: msg('Dark', { id: 'footer.color-scheme.dark' }) },
-    ];
+    const system = {
+      value: 'system' as const,
+      icon: 'monitor',
+      label: msg('System', { id: 'footer.color-scheme.system' }),
+    };
+    const light = {
+      value: 'light' as const,
+      icon: 'sun',
+      label: msg('Light', { id: 'footer.color-scheme.light' }),
+    };
+    const dark = {
+      value: 'dark' as const,
+      icon: 'moon',
+      label: msg('Dark', { id: 'footer.color-scheme.dark' }),
+    };
+    const options = this.compact ? [light, system, dark] : [system, light, dark];
+    const text = this.compact ? 'visually-hidden' : '';
     return html`
       <fieldset>
-        <legend>
+        <legend class="${text}">
           ${msg('Appearance', {
             id: 'footer.color-scheme.legend',
             desc: 'Picks the light or dark colors, or follows the device.',
@@ -144,7 +106,7 @@ export class ColorSchemeToggle extends ThemedElement {
                   @change="${this.onChange}"
                 />
                 <hoverboard-icon name="${icon}"></hoverboard-icon>
-                <span>${label}</span>
+                <span class="${text}">${label}</span>
               </label>
             `,
           )}
@@ -167,6 +129,7 @@ export class ColorSchemeToggle extends ThemedElement {
       // Storage can be off. The choice still applies to this page.
     }
     applyColorScheme(document, scheme);
+    window.dispatchEvent(new Event(COLOR_SCHEME_EVENT));
   };
 }
 

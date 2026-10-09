@@ -49,6 +49,9 @@ const ICONS: Record<string, () => Promise<{ default: SVGTemplateResult }>> = {
   monitor: () => import('./icons/monitor'),
   sun: () => import('./icons/sun'),
   moon: () => import('./icons/moon'),
+  'density-small': () => import('./icons/density-small'),
+  'density-medium': () => import('./icons/density-medium'),
+  'density-large': () => import('./icons/density-large'),
 };
 
 const loaded = new Map<string, SVGTemplateResult>();

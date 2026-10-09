@@ -17,6 +17,9 @@ export const shortName = settings.shortName;
 export const colorScheme = settings.theme.colorScheme as 'system' | 'light' | 'dark';
 /** Section patterns, rotated stickers and illustrations. */
 export const decorations = settings.theme.decorations as boolean;
+/** The built-in theme and the spacing the site picks. The demo banner starts from them. */
+export const themeName = settings.theme.name as string;
+export const density = settings.theme.density as 'compact' | 'default' | 'roomy';
 export const siteLocales = settings.locales as { source: string; targets: string[] };
 export const timeZone = settings.event.timezone;
 export const eventDates = { start: settings.event.startDate, end: settings.event.endDate };

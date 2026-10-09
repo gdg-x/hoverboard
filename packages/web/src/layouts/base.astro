@@ -13,6 +13,7 @@ import { seedPage } from '../data/page';
 import { openGraphLocale } from '../data/structured-data';
 import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
 import { colorSchemeScript } from '../utils/color-scheme';
+import { demoScript } from '../utils/demo';
 import { eventState } from '../utils/event-state';
 
 interface Props {
@@ -55,6 +56,8 @@ const themeColors =
 const fontOrigins = [...new Set(fontStylesheets.map((href) => new URL(href).origin))];
 // At build time. The header checks again in the browser.
 const builtEventState = eventState(new Date(), site.event);
+// The header imports the banner without waiting, so wait here for the server to render it.
+if (__HB_FEATURES__.demo) await import('../components/shell/demo-banner');
 ---
 
 <!doctype html>
@@ -96,6 +99,7 @@ const builtEventState = eventState(new Date(), site.event);
     ))}
     {/* After the theme-color tags it updates, and before any style, so the first paint is right. */}
     {theme.colorScheme === 'system' && <script is:inline set:html={colorSchemeScript} />}
+    {__HB_FEATURES__.demo && <script is:inline set:html={demoScript} />}
     <link href="manifest.json" rel="manifest" />
 
     <meta content="yes" name="mobile-web-app-capable" />

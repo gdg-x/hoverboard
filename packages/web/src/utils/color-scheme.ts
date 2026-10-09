@@ -1,5 +1,8 @@
 export const COLOR_SCHEME_KEY = 'hb-color-scheme';
 
+/** Fired on `window` when a toggle changes the stored choice. */
+export const COLOR_SCHEME_EVENT = 'hb-color-scheme-change';
+
 export type ChosenColorScheme = 'light' | 'dark';
 
 /** The scheme the page shows now: the locked or chosen one, or the browser's. */

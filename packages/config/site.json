@@ -82,6 +82,7 @@
     "googleMapsApiKey": "AIzaSyCJqlRVGIe6bfU43rga3cnK7tSXXwc7JD8"
   },
   "features": {
+    "demo": true,
     "forkMe": true
   }
 }

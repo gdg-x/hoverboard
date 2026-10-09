@@ -13,7 +13,7 @@ import {
   resolveConfig,
   type SiteConfig,
 } from './resolve-config';
-import { darkLogoCss, type SiteTheme, themeCss } from './theme';
+import { darkLogoCss, demoThemesCss, type SiteTheme, themeCss } from './theme';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
 const RESOLVED_SITE_MODULE = `\0${SITE_MODULE}`;
@@ -103,6 +103,7 @@ export const layoutThemeCss = ({ site, theme }: SiteConfig): string =>
   [
     themeCss(theme, { ...site.theme.badgeColors, ...site.theme.tagColors }),
     darkLogoCss(fs.existsSync(join(CONFIG_PATHS.public, 'images/logo-dark.svg'))),
+    ...(site.features.demo ? [demoThemesCss(site.theme as unknown as SiteTheme)] : []),
   ].join('\n');
 
 /** The site's own hero illustration, inlined so a drawing in `currentColor` follows the theme. */

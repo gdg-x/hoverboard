@@ -51,6 +51,17 @@ describe('app-header', () => {
     expect(view.getAllByRole('link')[0]).toHaveAttribute('href', '#main');
   });
 
+  it('shows the demo banner above the bar only when demo is on', async () => {
+    setFeatures({ demo: true });
+    const { shadowRoot } = await render();
+    expect(shadowRoot.querySelector('demo-banner + header')).toBeInTheDocument();
+
+    litRender(nothing, document.body);
+    setFeatures({ demo: false });
+    const { shadowRoot: withoutDemo } = await render();
+    expect(withoutDemo.querySelector('demo-banner')).toBeNull();
+  });
+
   it("marks the navigation link of the page's path as the current page", async () => {
     const { bar } = await render('/sessions/101');
 

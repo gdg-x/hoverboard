@@ -43,6 +43,21 @@ describe('color-scheme-toggle', () => {
     expect(view.getByRole('radio', { name: 'System' })).toBeChecked();
   });
 
+  it('shows only icons when compact, with System in the middle, and keeps the names', async () => {
+    const { element, view } = await render();
+    element.compact = true;
+    await element.updateComplete;
+
+    expect(view.getByRole('group', { name: 'Appearance' })).toBeInTheDocument();
+    expect(view.getAllByRole('radio').map((radio) => radio.getAttribute('value'))).toEqual([
+      'light',
+      'system',
+      'dark',
+    ]);
+    expect(view.getByText('System')).toHaveClass('visually-hidden');
+    expect(view.getByText('Appearance')).toHaveClass('visually-hidden');
+  });
+
   it('stores and applies a choice', async () => {
     const { view } = await render();
 

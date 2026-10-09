@@ -37,6 +37,7 @@
   "features": {
     "blog": false,
     "codeOfConduct": false,
+    "demo": false,
     "faq": false,
     "feedback": false,
     "forkMe": false,

@@ -163,6 +163,18 @@ export const themeCss = (theme: ResolvedTheme, named: Record<string, string> = {
 };
 
 /**
+ * Every built-in theme, with the site's colors over it, under `:root[data-theme='<name>']`, so the
+ * demo banner can switch themes in the browser.
+ */
+export const demoThemesCss = (site: SiteTheme): string =>
+  (Object.keys(THEMES) as ThemeName[])
+    .map(
+      (name) =>
+        `:root[data-theme='${name}'] {\n${themeDeclarations(resolveTheme({ ...site, name }))}\n}`,
+    )
+    .join('\n');
+
+/**
  * The header logo in the dark scheme, which `base.css` switches to: `/images/logo-dark.svg`, or the
  * event's short name as text when the site has no dark logo.
  */

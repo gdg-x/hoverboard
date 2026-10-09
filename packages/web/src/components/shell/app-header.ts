@@ -17,6 +17,8 @@ import './app-install';
 import { navigationLabel } from './navigation-label';
 import './notification-toggle';
 
+if (__HB_FEATURES__.demo) void import('./demo-banner');
+
 /** The skip link, the header bar and the navigation sheet. The layout keeps it across pages. */
 @customElement('app-header')
 export class AppHeader extends ThemedElement {
@@ -213,6 +215,7 @@ export class AppHeader extends ThemedElement {
       <a class="skip-link" href="#main">
         ${msg('Skip to content', { id: 'shell.header.skip-link' })}
       </a>
+      ${__HB_FEATURES__.demo ? html`<demo-banner></demo-banner>` : nothing}
       <header class="header">
         <div class="bar">
           <a class="brand" href="/">

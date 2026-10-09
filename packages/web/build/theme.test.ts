@@ -3,6 +3,7 @@ import { hexToOklch, tagContainerColors } from '../src/themes/color';
 import { festival } from '../src/themes/festival';
 import {
   darkLogoCss,
+  demoThemesCss,
   type SiteTheme,
   heroPhotoErrors,
   resolveTheme,
@@ -56,6 +57,19 @@ describe('themeErrors', () => {
         /^site\.json\/theme: onSurface on surface has a contrast of 1\.\d+:1 in the light scheme, and needs 4\.5:1\. Change theme\.colors\.$/,
       ),
     );
+  });
+});
+
+describe('demoThemesCss', () => {
+  it("writes every built-in theme with the site's colors under a data-theme selector", () => {
+    const css = demoThemesCss(siteTheme({ colors: { primary: '#c2185b' } }));
+
+    expect(css).toContain(":root[data-theme='festival'] {");
+    expect(css).toContain(":root[data-theme='spotlight'] {");
+    expect(css).toMatch(
+      /\[data-theme='spotlight'\] \{[^}]*--hb-color-primary: light-dark\(#c2185b,/,
+    );
+    expect(css).toMatch(/\[data-theme='spotlight'\] \{[^}]*--hb-border-width: 1px;/);
   });
 });
 

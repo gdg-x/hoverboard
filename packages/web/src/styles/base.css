@@ -69,6 +69,10 @@
   --hb-density: 0.75;
 }
 
+:root[data-density='default'] {
+  --hb-density: 1;
+}
+
 :root[data-density='roomy'] {
   --hb-density: 1.25;
 }
