@@ -13,6 +13,7 @@ import {
   resolveConfig,
   type SiteConfig,
 } from './resolve-config';
+import { sanitizeSvg } from './svg';
 import { darkLogoCss, demoThemesCss, type SiteTheme, themeCss } from './theme';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
@@ -112,12 +113,7 @@ export const heroIllustrationSvg = (
   publicDir: string = CONFIG_PATHS.public,
 ): string | undefined => {
   const path = site.heroSettings?.home?.illustration;
-  return path
-    ? fs
-        .readFileSync(join(publicDir, path), 'utf8')
-        .replace(/<\?xml[^>]*\?>/, '')
-        .trim()
-    : undefined;
+  return path ? sanitizeSvg(fs.readFileSync(join(publicDir, path), 'utf8')).svg : undefined;
 };
 
 /**

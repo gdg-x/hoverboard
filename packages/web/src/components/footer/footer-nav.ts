@@ -1,7 +1,9 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { organizer } from '../../config/site';
+import { safeUrl } from '../../utils/safe-url';
 import { navigationLabel } from '../shell/navigation-label';
 import { ThemedElement } from '../themed-element';
 
@@ -47,7 +49,11 @@ export class FooterNav extends ThemedElement {
     >`;
     return html`
       <div class="nav-inline">
-        <a href="${this.organizer.url}" target="_blank" rel="noopener noreferrer">
+        <a
+          href="${ifDefined(safeUrl(this.organizer.url))}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             loading="lazy"
             decoding="async"

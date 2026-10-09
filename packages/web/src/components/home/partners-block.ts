@@ -2,6 +2,7 @@ import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { fromStore } from '../../controllers/from-store';
 import { store } from '../../store';
 import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
@@ -9,6 +10,7 @@ import { type PartnerGroupsState, selectPartnerGroups } from '../../store/partne
 import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
 import { queueSnackbar } from '../../store/snackbars';
 import { band } from '../../styles/band';
+import { safeUrl } from '../../utils/safe-url';
 import '../shared/hoverboard-icon';
 import { ThemedElement } from '../themed-element';
 import '../ui/hb-button';
@@ -116,7 +118,7 @@ export class PartnersBlock extends ThemedElement {
                     <li>
                       <a
                         class="logo"
-                        href="${partner.url}"
+                        href="${ifDefined(safeUrl(partner.url))}"
                         target="_blank"
                         rel="noopener noreferrer"
                       >

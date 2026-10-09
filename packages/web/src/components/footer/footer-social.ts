@@ -1,6 +1,7 @@
 import { msg, str } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { safeUrl } from '../../utils/safe-url';
 import { share } from '../../utils/share';
 import { mailto, organizer, socialNetwork } from '../../config/site';
 import { ThemedElement } from '../themed-element';
@@ -49,7 +50,7 @@ export class FooterSocial extends ThemedElement {
 
   override render() {
     const emailUs = msg('Email us', { id: 'footer.social.email-us' });
-    const { blog } = this.organizer;
+    const blog = safeUrl(this.organizer.blog);
     const target = this.blogNewTab ? '_blank' : nothing;
     const rel = this.blogNewTab ? 'noopener noreferrer' : nothing;
     return html`

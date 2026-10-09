@@ -63,9 +63,7 @@
           "additionalProperties": false,
           "required": ["link"],
           "properties": {
-            "link": {
-              "type": "string"
-            }
+            "link": { "$ref": "#/$defs/link" }
           }
         },
         "title": {
@@ -83,9 +81,7 @@
           "additionalProperties": false,
           "required": ["link"],
           "properties": {
-            "link": {
-              "type": "string"
-            }
+            "link": { "$ref": "#/$defs/link" }
           }
         },
         "title": {
@@ -137,9 +133,7 @@
                 "label": {
                   "type": "string"
                 },
-                "link": {
-                  "type": "string"
-                }
+                "link": { "$ref": "#/$defs/link" }
               }
             },
             "howItWas": {
@@ -188,9 +182,7 @@
       "additionalProperties": false,
       "required": ["image", "blocks"],
       "properties": {
-        "image": {
-          "type": "string"
-        },
+        "image": { "$ref": "#/$defs/link" },
         "blocks": {
           "type": "array",
           "items": {
@@ -212,9 +204,7 @@
                   "label": {
                     "type": "string"
                   },
-                  "link": {
-                    "type": "string"
-                  },
+                  "link": { "$ref": "#/$defs/link" },
                   "newTab": {
                     "type": "boolean"
                   }
@@ -271,9 +261,7 @@
                 "name": {
                   "type": "string"
                 },
-                "url": {
-                  "type": "string"
-                },
+                "url": { "$ref": "#/$defs/link" },
                 "newTab": {
                   "type": "boolean"
                 }
@@ -285,6 +273,11 @@
     }
   },
   "$defs": {
+    "link": {
+      "description": "An http, https or mailto URL, or a path on the site. Other schemes, such as `javascript:`, could run code when clicked.",
+      "type": "string",
+      "pattern": "^(?![\\s\\u0000-\\u001f])(?!.*[\\t\\n\\r])(?:https?://|mailto:|(?![A-Za-z][A-Za-z0-9+.-]*:)(?!//))"
+    },
     "statistic": {
       "type": "object",
       "additionalProperties": false,

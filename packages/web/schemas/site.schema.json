@@ -39,6 +39,7 @@
     },
     "image": {
       "description": "The image shown when the site is shared. A path in packages/web/public, or a full URL.",
+      "$ref": "#/$defs/link",
       "type": "string",
       "minLength": 1
     },
@@ -342,7 +343,7 @@
               "properties": {
                 "image": {
                   "description": "A photo behind the hero text, in packages/web/public or a URL. The hero darkens it so the text stays readable.",
-                  "type": "string"
+                  "$ref": "#/$defs/link"
                 }
               }
             },
@@ -432,6 +433,11 @@
     "url": {
       "type": "string",
       "pattern": "^https?://"
+    },
+    "link": {
+      "description": "An http, https or mailto URL, or a path on the site. Other schemes, such as `javascript:`, could run code when clicked.",
+      "type": "string",
+      "pattern": "^(?![\\s\\u0000-\\u001f])(?!.*[\\t\\n\\r])(?:https?://|mailto:|(?![A-Za-z][A-Za-z0-9+.-]*:)(?!//))"
     },
     "date": {
       "description": "An ISO date, for example 2027-10-15.",

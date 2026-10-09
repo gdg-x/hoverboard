@@ -1,6 +1,7 @@
 import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { primitive } from '../../styles/shared';
+import { safeUrl } from '../../utils/safe-url';
 
 /**
  * A card. With `href`, a link named by `label` covers the whole card. Buttons and links in the
@@ -76,7 +77,7 @@ export class HbCard extends LitElement {
   accessor label = '';
 
   override render() {
-    const { href } = this;
+    const href = safeUrl(this.href);
     return html`
       <article class="card ${href === undefined ? '' : 'link'}">
         <slot></slot>
