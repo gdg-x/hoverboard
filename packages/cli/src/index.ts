@@ -17,7 +17,7 @@ import { firebaseDeployArgs } from './utils/site-features.js';
 const program = new Command();
 
 program
-  .name('hoverboard')
+  .name('hb')
   .description('CLI to help developers set up, run, and deploy Hoverboard.')
   .version('0.1.0');
 

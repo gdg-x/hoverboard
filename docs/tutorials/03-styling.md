@@ -24,7 +24,7 @@ Hoverboard has four built-in themes. Each has light and dark colors.
 - `density` is `compact`, `default` or `roomy`. It scales the spacing, not the text or button sizes.
 - `decorations` turns the playful details on or off: dot patterns, tilted stickers and photos, confetti when a visitor bookmarks a session, and the home page illustration. With `false`, the layout stays the same, with plain colors and straight labels. Visitors who ask their device for reduced motion never see the motion.
 
-The themes are in `packages/web/src/themes/`. `./hbd init` asks which one to use.
+The themes are in `packages/web/src/themes/`. `./hb init` asks which one to use.
 
 ## Custom CSS
 
@@ -54,7 +54,7 @@ When you change a light color and not its dark version, the build makes a dark v
 
 The color names are in `packages/web/src/themes/tokens.ts`, and their values in `festival.ts`, `spotlight.ts`, `paper.ts` and `glass.ts`. The build writes them on `:root` in every page as CSS variables, such as `--hb-color-primary`, so the first paint already has your colors.
 
-The build checks that text colors have enough contrast with their backgrounds, in each color scheme the site uses. For example, `onPrimary` on `primary` needs a ratio of 4.5:1. When a pair fails, `npm run build` and `./hbd validate-config` stop with an error like this:
+The build checks that text colors have enough contrast with their backgrounds, in each color scheme the site uses. For example, `onPrimary` on `primary` needs a ratio of 4.5:1. When a pair fails, `npm run build` and `./hb validate-config` stop with an error like this:
 
 ```text
 site.json/theme: onPrimary on primary has a contrast of 2.02:1 in the dark scheme, and needs 4.5:1. Change theme.darkColors.

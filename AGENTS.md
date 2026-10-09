@@ -8,7 +8,7 @@ Hoverboard is a conference website template. Organizers fork it, configure it an
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `packages/web`              | The web app: Astro pages, Lit components, Redux Toolkit store, Workbox service worker                              |
 | `packages/server/functions` | Cloud Functions (v2 API). Must stay self-contained, because `firebase.json` deploys it alone                       |
-| `packages/cli`              | The `hbd` CLI (`./hbd <command>`), run with `tsx`, no build step                                                   |
+| `packages/cli`              | The `hb` CLI (`./hb <command>`), run with `tsx`, no build step                                                     |
 | `packages/storage`          | Firestore and Storage security rules, indexes, the content schema and the rules tests                              |
 | `packages/translations`     | UI translations (XLIFF) from upstream's Crowdin project, read by `packages/web`. No dependencies                   |
 | `packages/config`           | The site's own config and content: `site.json`, `content/resources.json`, FAQ, code of conduct, blog posts         |
@@ -37,8 +37,8 @@ Run from the repo root.
 | `npm run build`                | Production build of every page to `packages/web/dist`. Reads content from the Firestore emulator, see `FIRESTORE_TARGET` below                         |
 | `npm start`                    | Emulators, functions and the Astro dev server at http://localhost:4321                                                                                 |
 | `npm run serve`                | Builds from the emulator data, then serves `dist` on the Hosting emulator at http://localhost:5000                                                     |
-| `./hbd doctor`                 | Checks the local setup, Firebase login, project, billing plan and deployed functions                                                                   |
-| `./hbd init`                   | Sets up a site: Firebase project and web app, event details in `packages/config`, billing, first deploy. Changes production, so only run it when asked |
+| `./hb doctor`                  | Checks the local setup, Firebase login, project, billing plan and deployed functions                                                                   |
+| `./hb init`                    | Sets up a site: Firebase project and web app, event details in `packages/config`, billing, first deploy. Changes production, so only run it when asked |
 
 Before finishing a change, run `npm run lint` and `npm test`, or at least the affected Vitest project and type check.
 
@@ -48,7 +48,7 @@ Before finishing a change, run `npm run lint` and `npm test`, or at least the af
 - **Components** use `@customElement`, extend `ThemedElement` (which adds the shared theme styles), and read store state with the `@fromStore` decorator. Use the color tokens from `src/themes/tokens.ts` as CSS variables, never hex colors. A test fails on hex colors outside `src/themes/`.
 - **Pages** are Astro files in `src/routes/`. `build/routes.ts` adds the pages of enabled features, and `src/pages/` has the pages every site has. Each page reads its content with `loadContent()`, passes the collections its components read to `seedPage()` in its frontmatter, and renders its view with `client:load`. Components render on the server first, so their first render in the browser must match: no `window`, `document`, randomness or viewport checks before `firstUpdated()`. Use CSS media queries for layout by screen size.
 - **Build content** comes from `FIRESTORE_TARGET`: unset reads the emulator, `production` reads production Firestore (deploys only), and `none` builds without content (CI checks and smoke tests).
-- **Site config.** Client code reads site config only through `src/config/site.ts`, never from the data files directly. Build-time config reads live in `packages/web/build/`. When you add or rename a key in `packages/config` or `packages/web/defaults`, update the schema in `packages/web/schemas/` too. `./hbd validate-config` checks it.
+- **Site config.** Client code reads site config only through `src/config/site.ts`, never from the data files directly. Build-time config reads live in `packages/web/build/`. When you add or rename a key in `packages/config` or `packages/web/defaults`, update the schema in `packages/web/schemas/` too. `./hb validate-config` checks it.
 - **UI text** uses `msg()` from `@lit/localize` with an explicit `id` such as `footer.locale-picker.label`. After adding or changing one, run `npm --prefix packages/web run localize:extract` and commit `packages/translations/source/en.xlf`. `npm run lint` fails when it is out of date.
 - **Tests** sit next to the code as `*.test.ts`. Web tests run in jsdom: render with `fixture` from `packages/web/__tests__/helpers/fixtures.ts`, set state with `setStoreState`, turn features off with `setFeatures` from `helpers/features.ts`, switch locale with `useLocale` from `helpers/locale.ts` (only the `Smoke (fake locale)` project has a second locale), and assert with the jest-dom matchers. Every bug fix or feature needs a test.
 - **Server tests** are `*.server.test.ts` files in the `Server` project. They render components with Lit SSR in Node, as the build does: fill the store with `seedPage()` from `src/data/page.ts`, then render with `render()` from `@lit-labs/ssr`. A component that reads content the page did not seed fails with "db is not available on the server".
@@ -59,7 +59,7 @@ Before finishing a change, run `npm run lint` and `npm test`, or at least the af
 - **Dependencies** shared by several packages must use the same version range. `npm run lint:syncpack` checks this.
 - **Paths.** Astro and Vite run with `packages/web` as the working directory, so their relative paths resolve from there. `packages/config` is `../config`.
 - **Local development** always uses the `demo-hoverboard` project on the emulators, whatever `firebase use` selects. The web app connects to the emulators and skips Analytics and Performance Monitoring when the project ID starts with `demo-`.
-- **Firestore commands** (`./hbd firestore-*`) use the emulator by default. Only target production with `FIRESTORE_TARGET=production` when explicitly asked.
+- **Firestore commands** (`./hb firestore-*`) use the emulator by default. Only target production with `FIRESTORE_TARGET=production` when explicitly asked.
 - **Formatting.** Prettier formats everything, including Markdown, JSON and YAML. Run `npx prettier --write <files>` after editing them.
 - **Docs** use short, plain sentences. Mark claims that were not tested with "verify".
 

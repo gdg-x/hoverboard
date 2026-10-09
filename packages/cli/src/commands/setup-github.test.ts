@@ -397,7 +397,7 @@ describe('checkGitHubDeploys', () => {
     const result = await check(cloud, github);
 
     expect(result).toMatchObject({ ok: true, warning: true });
-    expect(result.message).toContain('./hbd setup-github');
+    expect(result.message).toContain('./hb setup-github');
     expect(result.message).toContain(`create the service account ${EMAIL}`);
   });
 

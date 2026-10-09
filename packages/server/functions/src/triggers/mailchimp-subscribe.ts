@@ -26,7 +26,7 @@ interface SubscriberPayload {
 const getMailchimpConfig = async (): Promise<MailchimpConfig | undefined> => {
   const doc = await fetchConfig<MailchimpConfig>('mailchimp');
   const config = doc.exists ? (doc.data() as MailchimpConfig) : undefined;
-  // `hbd firestore-init` seeds every field as an empty string.
+  // `hb firestore-init` seeds every field as an empty string.
   return config?.dc && config.listid && config.apikey ? config : undefined;
 };
 

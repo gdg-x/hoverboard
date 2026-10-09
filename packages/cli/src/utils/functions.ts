@@ -72,11 +72,11 @@ export const checkFunctions = async (
       ? [
           `${list(notGen2.map(({ id }) => id))} ${is(notGen2)} 1st gen, which a deploy can't ` +
             `upgrade to 2nd gen. Delete ${them(notGen2)} with ${deleteCommands(notGen2)}, ` +
-            'then run `./hbd deploy`.',
+            'then run `./hb deploy`.',
         ]
       : []),
     ...(missing.length
-      ? [`${list(missing)} ${is(missing)} not deployed. Run \`./hbd deploy\`.`]
+      ? [`${list(missing)} ${is(missing)} not deployed. Run \`./hb deploy\`.`]
       : []),
     ...(extra.length
       ? [

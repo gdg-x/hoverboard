@@ -25,7 +25,7 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
   ...
 ```
 
-`firebase.projectId` is the Firebase project that `./hbd deploy`, the deploy workflows and `FIRESTORE_TARGET=production` commands use. `url` defaults to `https://<projectId>.web.app/`. Set `url` only for a custom domain.
+`firebase.projectId` is the Firebase project that `./hb deploy`, the deploy workflows and `FIRESTORE_TARGET=production` commands use. `url` defaults to `https://<projectId>.web.app/`. Set `url` only for a custom domain.
 
 `event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it. The schedule shows times in it, and visitors in another time zone can switch the schedule to their own. During the event, a line on the schedule marks the current time.
 
@@ -44,10 +44,10 @@ For example, `["emailLink", "google"]` adds Google, and `["google"]` turns email
 
 [JSON Schemas](https://json-schema.org/) in `packages/web/schemas/` describe both files: `site.schema.json` and `resources.schema.json`. Because the files set `$schema`, editors such as VS Code show completion and errors while you type. Unknown keys are errors, so typos fail early.
 
-The config is checked with the defaults merged in. The build, `npm run lint` and `./hbd doctor` all fail with every error and its path. Run the check on its own with:
+The config is checked with the defaults merged in. The build, `npm run lint` and `./hb doctor` all fail with every error and its path. Run the check on its own with:
 
 ```console
-  ./hbd validate-config
+  ./hb validate-config
 ```
 
 The check also catches navigation to an unknown page, and images that are not in `packages/web/public`.
@@ -59,7 +59,7 @@ You can change the config and content without installing anything, in the GitHub
 1. Open the file in `packages/config` on GitHub, for example `content/resources.json`, and select the pencil icon. To edit several files at once, press `.` on the repository page to open github.dev.
 1. Make your change. Keep the JSON valid: quotes around keys and text, commas between items, and no comma after the last item.
 1. Select **Commit changes**, choose **Create a new branch for this commit and start a pull request**, then **Propose changes** and **Create pull request**.
-1. The `Deploy Preview` workflow checks the config with `./hbd validate-config` first. If the config has errors, the `validate_config` check fails and nothing deploys. Each error shows on its file in the **Files changed** tab (verify). Fix them by editing the file on the pull request's branch.
+1. The `Deploy Preview` workflow checks the config with `./hb validate-config` first. If the config has errors, the `validate_config` check fails and nothing deploys. Each error shows on its file in the **Files changed** tab (verify). Fix them by editing the file on the pull request's branch.
 1. When the check passes, a comment on the pull request links to the preview site. It expires after a day, and every new commit updates it.
 1. Merge the pull request. The `Deploy` workflow publishes the change to the live site.
 
@@ -131,7 +131,7 @@ The build fails when:
 
 `demo` adds a band across the top of every page where visitors can try the built-in themes, the spacing and light or dark. Their browser remembers the choices. It is meant for demo sites, so leave it off on an event's site.
 
-`functions` deploys the Cloud Functions, which need the [Blaze plan](02-firebase.md#billing). With it off, `./hbd deploy` and the deploy workflow leave functions out, and the site runs on the free Spark plan, without notifications, image optimization and Mailchimp. Deploys don't delete functions that are already deployed: `./hbd doctor` lists them, with the commands that delete them.
+`functions` deploys the Cloud Functions, which need the [Blaze plan](02-firebase.md#billing). With it off, `./hb deploy` and the deploy workflow leave functions out, and the site runs on the free Spark plan, without notifications, image optimization and Mailchimp. Deploys don't delete functions that are already deployed: `./hb doctor` lists them, with the commands that delete them.
 
 With `functions` on, every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, and `optimizeImages` needs `imageOptimization`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
 

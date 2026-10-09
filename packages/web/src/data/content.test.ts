@@ -94,7 +94,7 @@ describe('readContent', () => {
 
     await readContent(db);
 
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('./hbd convert-schedule'));
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('./hb convert-schedule'));
     warn.mockRestore();
   });
 

@@ -6,7 +6,7 @@
   "type": "module",
   "bin": {
     "hoverboard": "bin/hoverboard.js",
-    "hbd": "bin/hoverboard.js"
+    "hb": "bin/hoverboard.js"
   },
   "engines": {
     "node": "22",

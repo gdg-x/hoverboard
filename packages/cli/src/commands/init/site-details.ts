@@ -1,4 +1,4 @@
-/** The details `hbd init` asks for, and writes to packages/config. */
+/** The details `hb init` asks for, and writes to packages/config. */
 export interface SiteDetails {
   title: string;
   description: string;
