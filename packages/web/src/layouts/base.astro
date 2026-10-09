@@ -5,7 +5,7 @@ import { theme, themeCss } from 'virtual:hoverboard/layout';
 import { resources, site } from 'virtual:hoverboard/site';
 import '../styles/base.css';
 import { FooterBlock } from '../components/footer/footer-block';
-import { AppHeader } from '../components/shell/app-header';
+import { AppHeader, demoBanner } from '../components/shell/app-header';
 import { AppOverlays } from '../components/shell/app-overlays';
 import { loadContent } from '../data/content';
 import '../data/markdown';
@@ -56,8 +56,8 @@ const themeColors =
 const fontOrigins = [...new Set(fontStylesheets.map((href) => new URL(href).origin))];
 // At build time. The header checks again in the browser.
 const builtEventState = eventState(new Date(), site.event);
-// The header imports the banner without waiting, so wait here for the server to render it.
-if (__HB_FEATURES__.demo) await import('../components/shell/demo-banner');
+// The header loads the banner without waiting, so wait here for the server to render it.
+await demoBanner;
 ---
 
 <!doctype html>

@@ -17,7 +17,8 @@ import './app-install';
 import { navigationLabel } from './navigation-label';
 import './notification-toggle';
 
-if (__HB_FEATURES__.demo) void import('./demo-banner');
+/** The demo banner, which the header loads without waiting. The server, and tests, wait for it. */
+export const demoBanner = __HB_FEATURES__.demo ? import('./demo-banner') : Promise.resolve();
 
 /** The skip link, the header bar and the navigation sheet. The layout keeps it across pages. */
 @customElement('app-header')

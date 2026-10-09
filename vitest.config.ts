@@ -24,6 +24,9 @@ const web = {
   test: {
     name: 'Web',
     environment: 'jsdom',
+    // Set so Vitest stops suggesting others: `vitest doctor` found they fail or save under 10%.
+    pool: 'forks',
+    isolate: true,
     environmentOptions: {
       jsdom: {
         // Match jest-environment-jsdom's default testURL so tests that
