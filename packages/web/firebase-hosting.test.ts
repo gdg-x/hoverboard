@@ -32,6 +32,9 @@ describe('Firebase Hosting headers', () => {
         'camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()',
       // Google sign-in uses signInWithPopup.
       'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
+      // What a <meta> policy can't set, or doesn't depend on the site. build/csp.ts writes the rest.
+      'Content-Security-Policy':
+        "frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'",
     });
   });
 

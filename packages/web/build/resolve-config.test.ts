@@ -276,6 +276,22 @@ describe('config validation', () => {
     );
   });
 
+  it('accepts CSP sources and rejects ones that would add a directive', () => {
+    expect(
+      errorsFor({ site: { security: { csp: { 'frame-src': ['https://widget.example.com'] } } } }),
+    ).toEqual([]);
+    expect(
+      errorsFor({
+        site: {
+          security: { csp: { 'script-src': ["'self'; frame-ancestors *"], 'base-uri': [] } },
+        },
+      }),
+    ).toEqual([
+      'site.json/security/csp: must NOT have additional properties "base-uri"',
+      expect.stringMatching(/^site\.json\/security\/csp\/script-src\/0: must match pattern/),
+    ]);
+  });
+
   it('rejects links that could run code', () => {
     expect(
       errorsFor({

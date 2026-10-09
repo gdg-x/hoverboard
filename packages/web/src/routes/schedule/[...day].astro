@@ -28,12 +28,14 @@ const content = seedPage({ sessions, speakers });
 ---
 
 <Base {...pageMetadata('schedule')} content={content}>
-  <script is:inline>
-    // Old links to a session were /schedule?sessionId=<id>.
-    const sessionId = new URLSearchParams(location.search).get('sessionId');
-    if (sessionId)
-      location.replace(new URL(`sessions/${encodeURIComponent(sessionId)}`, document.baseURI));
-  </script>
+  <Fragment slot="head">
+    <script is:inline>
+      // Old links to a session were /schedule?sessionId=<id>.
+      const sessionId = new URLSearchParams(location.search).get('sessionId');
+      if (sessionId)
+        location.replace(new URL(`sessions/${encodeURIComponent(sessionId)}`, document.baseURI));
+    </script>
+  </Fragment>
   <SchedulePage location={location} client:load>
     <ScheduleDay location={location} client:load />
   </SchedulePage>

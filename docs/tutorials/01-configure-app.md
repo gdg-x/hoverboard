@@ -139,6 +139,23 @@ When `feedback` is off, the feedback dialog is still in the build, but nothing o
 
 The header follows the features too. Its button links to tickets until the event is over, or to the schedule otherwise. The account button shows when `mySchedule` or `feedback` is on, and the notifications bell when `notifications` is on. The footer links to the home page's subscribe band when `subscribe` is on, and shows a "Fork me on GitHub" sticker when `forkMe` is on.
 
+## Content Security Policy
+
+Every page has a [Content Security Policy](https://developer.mozilla.org/docs/Web/HTTP/Guides/CSP) (CSP). It tells the browser where the page may load scripts, styles, frames and other files from, so a script that got into the page can't run. The build writes it from `site.json`: the Firebase project, the Google Maps key and the `theme.fonts` stylesheets. Images can come from any `https:` address.
+
+If you add a widget or an embed from another site, add its addresses to `security.csp` in `packages/config/site.json`, by directive:
+
+```json
+"security": {
+  "csp": {
+    "script-src": ["https://widget.example.com"],
+    "frame-src": ["https://widget.example.com"]
+  }
+}
+```
+
+The directives are `script-src`, `style-src`, `connect-src`, `img-src`, `font-src`, `frame-src`, `media-src` and `worker-src`. The browser console names what the policy blocked, and the directive to add it to. `npm start` runs without the policy, so check with `npm run serve` or a preview site.
+
 ## Navigation
 
 Define the header pages and their urls in `navigation` in `packages/config/site.json`. On narrow screens, they move to a full-screen menu. The default list is in `packages/web/defaults/site.json`. A `route` is `home` or a feature that has a page: `blog`, `codeOfConduct`, `faq`, `mySchedule`, `previousSpeakers`, `schedule`, `speakers` or `team`. The labels are part of the UI text, so they follow the visitor's language.

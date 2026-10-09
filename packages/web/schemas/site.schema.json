@@ -289,6 +289,27 @@
         }
       }
     },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "csp": {
+          "description": "Sources to add to the site's Content-Security-Policy, by directive. The browser blocks scripts, frames and other resources from origins the policy doesn't list, such as a widget you add to the site.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "script-src": { "$ref": "#/$defs/cspSources" },
+            "style-src": { "$ref": "#/$defs/cspSources" },
+            "connect-src": { "$ref": "#/$defs/cspSources" },
+            "img-src": { "$ref": "#/$defs/cspSources" },
+            "font-src": { "$ref": "#/$defs/cspSources" },
+            "frame-src": { "$ref": "#/$defs/cspSources" },
+            "media-src": { "$ref": "#/$defs/cspSources" },
+            "worker-src": { "$ref": "#/$defs/cspSources" }
+          }
+        }
+      }
+    },
     "locales": {
       "description": "The languages of the site. Each one other than en needs UI translations in packages/translations.",
       "type": "object",
@@ -568,6 +589,15 @@
       },
       "additionalProperties": {
         "$ref": "#/$defs/color"
+      }
+    },
+    "cspSources": {
+      "description": "CSP sources, such as https://widget.example.com or https://*.example.com.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[^\\s;,\"]+$"
       }
     }
   }

@@ -51,6 +51,10 @@
           {
             "key": "Cross-Origin-Opener-Policy",
             "value": "same-origin-allow-popups"
+          },
+          {
+            "key": "Content-Security-Policy",
+            "value": "frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
           }
         ]
       },
