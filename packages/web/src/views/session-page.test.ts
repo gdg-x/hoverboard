@@ -1,5 +1,5 @@
 import { Success } from '@abraham/remotedata';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
@@ -13,7 +13,7 @@ import { openVideoDialog } from '../store/ui';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
-import type { SessionPage } from './session-page';
+import { feedbackBlock, type SessionPage } from './session-page';
 import './session-page';
 
 vi.mock('../utils/metadata');
@@ -79,6 +79,9 @@ const render = async (props: Partial<SessionPage> = {}) => {
 };
 
 describe('session-page', () => {
+  // Otherwise it can finish loading after jsdom is gone, which fails the run.
+  beforeAll(() => feedbackBlock);
+
   beforeEach(() => {
     vi.mocked(selectSession).mockReturnValue(session);
     vi.mocked(acceptingFeedback).mockReturnValue(false);

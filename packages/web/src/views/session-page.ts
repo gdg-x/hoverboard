@@ -39,7 +39,10 @@ import { tagChipStyle } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
-if (__HB_FEATURES__.feedback) void import('../components/dialogs/feedback-block');
+/** The feedback block, which the page loads without waiting. Tests wait for it. */
+export const feedbackBlock = __HB_FEATURES__.feedback
+  ? import('../components/dialogs/feedback-block')
+  : Promise.resolve();
 
 /**
  * A session: its title, when and where it is, its tags, actions to bookmark, add to a calendar and
