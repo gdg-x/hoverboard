@@ -142,7 +142,7 @@ export class HomeHero extends ThemedElement {
       }
 
       .art {
-        display: block;
+        display: var(--hb-decorations-display, block);
       }
     }
 
@@ -197,7 +197,8 @@ export class HomeHero extends ThemedElement {
             <div class="actions">${this.renderActions()}</div>
           </div>
           ${
-            decorations
+            // The demo banner can turn decorations on, so a demo site always has the drawing.
+            decorations || __HB_FEATURES__.demo
               ? html`<div class="art" aria-hidden="true">
                   ${heroIllustration ? unsafeHTML(heroIllustration) : defaultIllustration}
                 </div>`

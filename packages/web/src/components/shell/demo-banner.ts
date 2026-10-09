@@ -1,13 +1,19 @@
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { density as siteDensity, themeName as siteTheme } from '../../config/site';
+import {
+  decorations as siteDecorations,
+  density as siteDensity,
+  themeName as siteTheme,
+} from '../../config/site';
 import { segmented } from '../../styles/segmented';
 import { THEMES } from '../../themes/index';
-import { chooseDemo, readDemoChoices } from '../../utils/demo';
+import { chooseDecorations, chooseDemo, readDemoChoices } from '../../utils/demo';
 import '../footer/color-scheme-toggle';
 import '../shared/hoverboard-icon';
 import { ThemedElement } from '../themed-element';
+import type { HbSwitch } from '../ui/hb-switch';
+import '../ui/hb-switch';
 
 type Density = typeof siteDensity;
 
@@ -84,18 +90,24 @@ export class DemoBanner extends ThemedElement {
     `,
   ];
 
-  // The site's own theme and spacing on the server and in the first render, so hydration matches.
+  // The site's own choices on the server and in the first render, so hydration matches.
   @state()
   private accessor theme: string = siteTheme;
 
   @state()
   private accessor density: Density = siteDensity;
 
+  @state()
+  private accessor decorations: boolean = siteDecorations;
+
   override firstUpdated() {
     const stored = readDemoChoices(storage);
     if (stored.theme && stored.theme in THEMES) this.theme = stored.theme;
     if (stored.density && (DENSITIES as readonly string[]).includes(stored.density)) {
       this.density = stored.density as Density;
+    }
+    if (stored.decorations === 'on' || stored.decorations === 'off') {
+      this.decorations = stored.decorations === 'on';
     }
   }
 
@@ -152,6 +164,13 @@ export class DemoBanner extends ThemedElement {
             </div>
           </fieldset>
           <color-scheme-toggle compact></color-scheme-toggle>
+          <hb-switch
+            label="${msg('Decorations', { id: 'shell.demo.decorations' })}"
+            ?checked="${this.decorations}"
+            @change="${this.onDecorations}"
+          >
+            <hoverboard-icon name="party"></hoverboard-icon>
+          </hb-switch>
         </div>
       </aside>
     `;
@@ -165,6 +184,11 @@ export class DemoBanner extends ThemedElement {
   private readonly onDensity = (event: Event) => {
     this.density = (event.target as HTMLInputElement).value as Density;
     chooseDemo('density', this.density === siteDensity ? null : this.density);
+  };
+
+  private readonly onDecorations = (event: Event) => {
+    this.decorations = (event.target as HbSwitch).checked;
+    chooseDecorations(this.decorations, siteDecorations);
   };
 }
 

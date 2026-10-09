@@ -2,9 +2,10 @@ import { fireEvent, within } from '@testing-library/dom';
 import { html, render as litRender, nothing } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { density, themeName } from '../../config/site';
+import { decorations, density, themeName } from '../../config/site';
 import { COLOR_SCHEME_KEY } from '../../utils/color-scheme';
-import { DEMO_DENSITY_KEY, DEMO_THEME_KEY } from '../../utils/demo';
+import { DEMO_DECORATIONS_KEY, DEMO_DENSITY_KEY, DEMO_THEME_KEY } from '../../utils/demo';
+import type { HbSwitch } from '../ui/hb-switch';
 import type { DemoBanner } from './demo-banner';
 import './demo-banner';
 
@@ -22,7 +23,7 @@ describe('demo-banner', () => {
   afterEach(() => {
     litRender(nothing, document.body);
     localStorage.clear();
-    for (const name of ['data-theme', 'data-density', 'data-color-scheme']) {
+    for (const name of ['data-theme', 'data-density', 'data-color-scheme', 'data-decorations']) {
       root.removeAttribute(name);
     }
   });
@@ -75,6 +76,22 @@ describe('demo-banner', () => {
 
     expect(root).toHaveAttribute('data-density', 'roomy');
     expect(localStorage.getItem(DEMO_DENSITY_KEY)).toBe('roomy');
+  });
+
+  it('switches the decorations', async () => {
+    const { shadowRoot } = await render();
+    const toggle = shadowRoot.querySelector<HbSwitch>('hb-switch')!;
+    await toggle.updateComplete;
+    const input = within(toggle.shadowRoot as unknown as HTMLElement).getByRole('switch', {
+      name: 'Decorations',
+    });
+    expect(input).toBeChecked();
+    expect(decorations).toBe(true);
+
+    fireEvent.click(input);
+
+    expect(root).toHaveAttribute('data-decorations', 'off');
+    expect(localStorage.getItem(DEMO_DECORATIONS_KEY)).toBe('off');
   });
 
   it('shows the stored choices after the first render, and ignores unknown ones', async () => {

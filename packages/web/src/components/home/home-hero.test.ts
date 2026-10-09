@@ -133,6 +133,7 @@ describe('home-hero', () => {
   });
 
   it('has no illustration with decorations off', async () => {
+    setFeatures({ demo: false });
     config.decorations = false;
     const { shadowRoot } = await renderOn('2017-10-01T12:00:00Z');
 

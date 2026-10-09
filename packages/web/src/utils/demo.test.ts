@@ -1,7 +1,9 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import {
   applyDemoChoices,
+  chooseDecorations,
   chooseDemo,
+  DEMO_DECORATIONS_KEY,
   DEMO_DENSITY_KEY,
   DEMO_THEME_KEY,
   demoScript,
@@ -15,27 +17,52 @@ describe('demo choices', () => {
     localStorage.clear();
     root.removeAttribute('data-theme');
     root.removeAttribute('data-density');
+    root.removeAttribute('data-decorations');
   });
 
-  it('reads the stored theme and spacing, or nothing when storage throws', () => {
+  it('reads the stored choices, or nothing when storage throws', () => {
     localStorage.setItem(DEMO_THEME_KEY, 'spotlight');
 
-    expect(readDemoChoices(() => localStorage)).toEqual({ theme: 'spotlight', density: null });
+    expect(readDemoChoices(() => localStorage)).toEqual({
+      theme: 'spotlight',
+      density: null,
+      decorations: null,
+    });
     expect(
       readDemoChoices(() => {
         throw new Error('blocked');
       }),
-    ).toEqual({ theme: null, density: null });
+    ).toEqual({ theme: null, density: null, decorations: null });
   });
 
   it('sets and clears the attributes the theme CSS switches on', () => {
-    applyDemoChoices(document, { theme: 'spotlight', density: 'roomy' });
+    applyDemoChoices(document, { theme: 'spotlight', density: 'roomy', decorations: 'off' });
     expect(root).toHaveAttribute('data-theme', 'spotlight');
     expect(root).toHaveAttribute('data-density', 'roomy');
+    expect(root).toHaveAttribute('data-decorations', 'off');
 
-    applyDemoChoices(document, { theme: null, density: null });
+    applyDemoChoices(document, { theme: null, density: null, decorations: 'on' });
     expect(root).not.toHaveAttribute('data-theme');
     expect(root).not.toHaveAttribute('data-density');
+    expect(root).not.toHaveAttribute('data-decorations');
+  });
+
+  it("keeps the site's decorations without a choice", () => {
+    root.setAttribute('data-decorations', 'off');
+
+    applyDemoChoices(document, { theme: null, density: null, decorations: null });
+
+    expect(root).toHaveAttribute('data-decorations', 'off');
+  });
+
+  it('turns decorations off and on, storing only a choice that differs from the site', () => {
+    chooseDecorations(false, true);
+    expect(localStorage.getItem(DEMO_DECORATIONS_KEY)).toBe('off');
+    expect(root).toHaveAttribute('data-decorations', 'off');
+
+    chooseDecorations(true, true);
+    expect(localStorage.getItem(DEMO_DECORATIONS_KEY)).toBeNull();
+    expect(root).not.toHaveAttribute('data-decorations');
   });
 
   it('stores a choice and applies it, and forgets it with null', () => {

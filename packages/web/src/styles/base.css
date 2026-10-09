@@ -80,6 +80,7 @@
 /* Multiplies decorative rotations, so stickers sit straight with `theme.decorations` off. */
 :root[data-decorations='off'] {
   --hb-decorations: 0;
+  --hb-decorations-display: none;
 }
 
 *,

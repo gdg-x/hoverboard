@@ -365,6 +365,9 @@
 <trans-unit id="shell.demo.density">
   <source>Spacing</source>
 </trans-unit>
+<trans-unit id="shell.demo.decorations">
+  <source>Decorations</source>
+</trans-unit>
 <trans-unit id="shell.nav.home">
   <source>Home</source>
 </trans-unit>
