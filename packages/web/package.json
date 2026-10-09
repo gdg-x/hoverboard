@@ -63,7 +63,7 @@
     "rollup-plugin-copy": "^3.5.0",
     "svgo": "^4.1.0",
     "typescript": "^6.0.3",
-    "vite": "^8.3.2",
+    "vite": "^8.3.3",
     "workbox-build": "^7.4.1"
   }
 }
