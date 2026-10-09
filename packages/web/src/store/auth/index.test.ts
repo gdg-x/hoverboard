@@ -5,12 +5,15 @@ import {
   AuthErrorCodes,
   fetchSignInMethodsForEmail,
   getAuth,
+  isSignInWithEmailLink,
   linkWithCredential,
   onAuthStateChanged,
+  sendSignInLinkToEmail,
+  signInWithEmailLink,
   signInWithPopup,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { FirebaseUser } from '../../models/user';
 import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
@@ -54,8 +57,11 @@ vi.mock('firebase/auth', async (importOriginal) => {
     ...actual,
     fetchSignInMethodsForEmail: vi.fn(),
     getAuth: vi.fn(),
+    isSignInWithEmailLink: vi.fn(),
     linkWithCredential: vi.fn(),
     onAuthStateChanged: vi.fn(),
+    sendSignInLinkToEmail: vi.fn(),
+    signInWithEmailLink: vi.fn(),
     signInWithPopup: vi.fn(),
     signOut: vi.fn(),
   };
@@ -279,5 +285,91 @@ describe('auth helpers', () => {
     await signOut();
 
     expect(firebaseSignOut).toHaveBeenCalledWith(auth);
+  });
+});
+
+describe('email link sign-in', () => {
+  const auth = { name: 'firebase-auth' };
+  const link =
+    'http://localhost/schedule?tags=Web&apiKey=key&oobCode=code&mode=signIn&lang=en#10:00';
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+    localStorage.clear();
+    vi.mocked(getAuth).mockReturnValue(auth as never);
+  });
+
+  afterEach(() => {
+    window.history.replaceState(null, '', '/');
+  });
+
+  it('emails a link back to the current page, and remembers the address', async () => {
+    window.history.replaceState(null, '', '/schedule?tags=Web#10:00');
+    const { sendSignInLink } = await loadModule();
+
+    await sendSignInLink('ada@example.com');
+
+    expect(sendSignInLinkToEmail).toHaveBeenCalledWith(auth, 'ada@example.com', {
+      url: 'http://localhost/schedule?tags=Web',
+      handleCodeInApp: true,
+    });
+    expect(localStorage.getItem('hb-sign-in-email')).toBe('ada@example.com');
+  });
+
+  it('ignores pages that were not opened from a sign-in link', async () => {
+    vi.mocked(isSignInWithEmailLink).mockReturnValue(false);
+    const { hasSignInLink, takeSignInLink } = await loadModule();
+
+    expect(takeSignInLink()).toBe(false);
+    expect(hasSignInLink()).toBe(false);
+  });
+
+  it('takes the link out of the URL and signs in with it', async () => {
+    window.history.replaceState(null, '', link);
+    vi.mocked(isSignInWithEmailLink).mockReturnValue(true);
+    localStorage.setItem('hb-sign-in-email', 'ada@example.com');
+    const { finishSignInWithLink, hasSignInLink, storedSignInEmail, takeSignInLink } =
+      await loadModule();
+
+    expect(takeSignInLink()).toBe(true);
+    expect(window.location.href).toBe('http://localhost/schedule?tags=Web#10:00');
+    expect(hasSignInLink()).toBe(true);
+
+    expect(await finishSignInWithLink(storedSignInEmail()!)).toBe('signed-in');
+    expect(signInWithEmailLink).toHaveBeenCalledWith(auth, 'ada@example.com', link);
+    expect(dispatch).toHaveBeenNthCalledWith(1, expect.objectContaining({ type: 'auth/pending' }));
+    expect(dispatch).toHaveBeenNthCalledWith(2, expect.objectContaining({ type: 'auth/success' }));
+    expect(hasSignInLink()).toBe(false);
+    expect(localStorage.getItem('hb-sign-in-email')).toBeNull();
+  });
+
+  it('keeps the link to try another address', async () => {
+    window.history.replaceState(null, '', link);
+    vi.mocked(isSignInWithEmailLink).mockReturnValue(true);
+    vi.mocked(signInWithEmailLink).mockRejectedValue(createAuthError(AuthErrorCodes.INVALID_EMAIL));
+    const { finishSignInWithLink, hasSignInLink, takeSignInLink } = await loadModule();
+    takeSignInLink();
+
+    expect(await finishSignInWithLink('grace@example.com')).toBe('wrong-email');
+    expect(hasSignInLink()).toBe(true);
+    expect(dispatch).toHaveBeenLastCalledWith(expect.objectContaining({ type: 'auth/unAuth' }));
+  });
+
+  it('drops an expired link and says to ask for a new one', async () => {
+    window.history.replaceState(null, '', link);
+    vi.mocked(isSignInWithEmailLink).mockReturnValue(true);
+    vi.mocked(signInWithEmailLink).mockRejectedValue(
+      createAuthError(AuthErrorCodes.EXPIRED_OOB_CODE),
+    );
+    const { finishSignInWithLink, hasSignInLink, takeSignInLink } = await loadModule();
+    takeSignInLink();
+
+    expect(await finishSignInWithLink('ada@example.com')).toBe('failed');
+    expect(hasSignInLink()).toBe(false);
+    expect(dispatch).toHaveBeenLastCalledWith({
+      type: 'snackbars/queueSnackbar',
+      payload: 'This sign-in link has expired or was already used. Ask for a new one.',
+    });
   });
 });

@@ -27,6 +27,18 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 
 _Tip: Check out [firestore utils](firebase-utils.md) docs_
 
+## Sign-in
+
+Turn on the sign-in methods in `auth.providers` in the [Firebase console](https://console.firebase.google.com/) under **Authentication** > **Sign-in method**:
+
+- `emailLink`: add **Email/Password**, and turn on **Email link (passwordless sign-in)**. The password option can stay off.
+- `google`: add **Google**.
+- `facebook` and `twitter`: add them with the app ID and secret from Facebook or X.
+
+The link in the email opens the page the visitor signed in from. Its domain must be under **Authentication** > **Settings** > **Authorized domains**. Firebase adds `localhost` and the project's `web.app` and `firebaseapp.com` domains. Add a custom domain yourself.
+
+Locally, the Auth emulator doesn't send email. Find the sign-in link under **Authentication** in the Emulator UI at http://localhost:4000, or in the emulator's log, and open it in the browser.
+
 ## Billing
 
 Hoverboard's Cloud Functions (schedule generation, notifications, image optimization and Mailchimp) need the [Blaze (pay as you go) plan](https://firebase.google.com/pricing). Upgrade in the Firebase console under **Usage and billing**. Run `./hbd doctor` to check the plan of the selected project. Local development with the emulators works without Blaze.

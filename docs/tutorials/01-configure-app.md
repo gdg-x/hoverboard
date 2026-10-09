@@ -18,7 +18,7 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
   "event": { "startDate": "2027-10-15", "endDate": "2027-10-16", "timezone": "Europe/Kyiv", "location": {..} },
   "schedule": { "published": true },
   "social": { "hashtag": "..", "follow": [..] },
-  "auth": { "providers": ["google"] },
+  "auth": { "providers": ["emailLink"] },
   "theme": { "name": "festival", "colorScheme": "system", "colors": {..}, "fonts": {..} },
   "integrations": { "googleMapsApiKey": ".." },
   "heroSettings": {..},
@@ -30,6 +30,13 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
 `event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it. The schedule shows times in it, and visitors in another time zone can switch the schedule to their own. During the event, a line on the schedule marks the current time.
 
 `theme` picks the look: the `festival`, `spotlight`, `paper` or `glass` theme, the color scheme, colors, fonts, spacing and decorations. See [Styling][style app].
+
+`auth.providers` lists the ways visitors sign in, in the order the sign-in dialog shows them. Visitors sign in to save sessions to My Schedule and to rate sessions.
+
+- `emailLink` (the default): visitors enter their email address and get a link that signs them in, with no password. It is the only one on by default.
+- `google`, `facebook` and `twitter`: sign in with that account in a popup.
+
+For example, `["emailLink", "google"]` adds Google, and `["google"]` turns email links off. Turn on each method you list in the Firebase console too. See [Sign-in](02-firebase.md#sign-in). When `mySchedule` or `feedback` is on, the list can't be empty.
 
 ## Validation
 

@@ -191,6 +191,8 @@ export const applySiteDetails = (
   } else {
     delete next['integrations'];
   }
+  // Other sign-in methods must be turned on in the new project first, so it starts with the default.
+  if (newProject) delete next['auth'];
 
   return {
     site: next,
