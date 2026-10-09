@@ -4,10 +4,11 @@ Colors, fonts and shapes come from a theme. Pick it and change it in `theme` in 
 
 ## Themes
 
-Hoverboard has two built-in themes. Each has light and dark colors.
+Hoverboard has three built-in themes. Each has light and dark colors.
 
 - `festival` (the default): paper colors, ink outlines, hard shadows and pastel bands in four accent colors.
 - `spotlight`: no outlines, soft shadows and one bright yellow color for the main buttons.
+- `paper`: white paper, light gray pencil outlines, nearly square corners and soft watercolor colors.
 
 ```json
 "theme": {
@@ -50,7 +51,7 @@ Override any theme color in `theme.colors`, as a hex color. Dark colors are in `
 
 When you change a light color and not its dark version, the build makes a dark version with the same hue, as light as the theme's dark color.
 
-The color names are in `packages/web/src/themes/tokens.ts`, and their values in `festival.ts` and `spotlight.ts`. The build writes them on `:root` in every page as CSS variables, such as `--hb-color-primary`, so the first paint already has your colors.
+The color names are in `packages/web/src/themes/tokens.ts`, and their values in `festival.ts`, `spotlight.ts` and `paper.ts`. The build writes them on `:root` in every page as CSS variables, such as `--hb-color-primary`, so the first paint already has your colors.
 
 The build checks that text colors have enough contrast with their backgrounds, in each color scheme the site uses. For example, `onPrimary` on `primary` needs a ratio of 4.5:1. When a pair fails, `npm run build` and `./hbd validate-config` stop with an error like this:
 
