@@ -13,6 +13,7 @@ import {
   signInWithPopup,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
+import { clearIndexedDbPersistence, terminate } from 'firebase/firestore';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { FirebaseUser } from '../../models/user';
 import { logLogin } from '../../utils/analytics';
@@ -66,6 +67,11 @@ vi.mock('firebase/auth', async (importOriginal) => {
     signOut: vi.fn(),
   };
 });
+vi.mock('firebase/firestore', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('firebase/firestore')>()),
+  clearIndexedDbPersistence: vi.fn(),
+  terminate: vi.fn(),
+}));
 
 const googleProvider = PROVIDER['google.com'];
 const facebookProvider = PROVIDER['facebook.com'];
@@ -276,15 +282,48 @@ describe('auth helpers', () => {
     expect(resetFeaturedSessions).toHaveBeenCalled();
   });
 
-  it('signs out through Firebase auth', async () => {
-    const auth = { name: 'firebase-auth' };
-    vi.mocked(getAuth).mockReturnValue(auth as never);
-    vi.mocked(firebaseSignOut).mockResolvedValue(undefined);
-    const { signOut } = await loadModule();
+  describe('signOut', () => {
+    const location = window.location;
+    const reload = vi.fn();
 
-    await signOut();
+    beforeEach(() => {
+      Object.defineProperty(window, 'location', {
+        configurable: true,
+        value: { ...location, reload },
+      });
+    });
 
-    expect(firebaseSignOut).toHaveBeenCalledWith(auth);
+    afterEach(() => {
+      Object.defineProperty(window, 'location', { configurable: true, value: location });
+    });
+
+    it("signs out, deletes Firestore's cache of the user's documents, then reloads", async () => {
+      const auth = { name: 'firebase-auth' };
+      const order: string[] = [];
+      vi.mocked(getAuth).mockReturnValue(auth as never);
+      vi.mocked(firebaseSignOut).mockImplementation(async () => void order.push('signOut'));
+      vi.mocked(terminate).mockImplementation(async () => void order.push('terminate'));
+      vi.mocked(clearIndexedDbPersistence).mockImplementation(async () => void order.push('clear'));
+      reload.mockImplementation(() => void order.push('reload'));
+      const { signOut } = await loadModule();
+      const { db } = await import('../../firebase');
+
+      await signOut();
+
+      expect(firebaseSignOut).toHaveBeenCalledWith(auth);
+      expect(terminate).toHaveBeenCalledWith(db);
+      expect(clearIndexedDbPersistence).toHaveBeenCalledWith(db);
+      expect(order).toEqual(['signOut', 'terminate', 'clear', 'reload']);
+    });
+
+    it('still reloads when another tab has the cache open', async () => {
+      vi.mocked(clearIndexedDbPersistence).mockRejectedValue(new Error('failed-precondition'));
+      const { signOut } = await loadModule();
+
+      await signOut();
+
+      expect(reload).toHaveBeenCalledTimes(1);
+    });
   });
 });
 
