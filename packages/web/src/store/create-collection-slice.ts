@@ -48,14 +48,21 @@ export const createCollectionSlice = <T>(
   const { pending, success, failure } = slice.actions;
 
   let subscription: Subscription = new Initialized();
+  // A page swapped in by the client router seeds the store with what it was built with.
+  let latest: T[] | undefined;
 
   const fetch = () => {
     if (subscription instanceof Initialized) {
       subscription = subscribeToSource(
         () => dispatch(pending()),
-        (payload) => dispatch(success(payload)),
+        (payload) => {
+          latest = payload;
+          dispatch(success(payload));
+        },
         (error) => dispatch(failure(error)),
       );
+    } else if (latest) {
+      dispatch(success(latest));
     }
   };
 
@@ -64,6 +71,7 @@ export const createCollectionSlice = <T>(
       subscription.data();
     }
     subscription = new Initialized();
+    latest = undefined;
   };
 
   registerContentSubscriber(name, fetch);

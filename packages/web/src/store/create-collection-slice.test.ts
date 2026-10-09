@@ -2,6 +2,7 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { createCollectionSlice } from './create-collection-slice';
 import { seedContent, subscribeToContent } from './content';
+import { dispatch } from './dispatch';
 import type { Subscription } from '../utils/firestore';
 
 // fetch()'s onStart/onNext/onError callbacks dispatch through the lazily
@@ -126,5 +127,24 @@ describe('createCollectionSlice', () => {
     subscribeToContent(['live-items']);
 
     expect(subscribeToSource).toHaveBeenCalledTimes(1);
+  });
+
+  it('puts the live data back when a swapped-in page asks again', () => {
+    let onNext: ((payload: Item[]) => void) | undefined;
+    const subscribeToSource = vi.fn((_start: () => void, next: (payload: Item[]) => void) => {
+      onNext = next;
+      return new Success(vi.fn());
+    });
+    createCollectionSlice<Item>('replayed-items', subscribeToSource);
+    const live: Item[] = [{ id: '1', name: 'Ada Lovelace' }];
+
+    subscribeToContent(['replayed-items']);
+    onNext!(live);
+    vi.mocked(dispatch).mockClear();
+    // The next page seeds what it was built with, then asks for live data once it hydrates.
+    subscribeToContent(['replayed-items']);
+
+    expect(subscribeToSource).toHaveBeenCalledTimes(1);
+    expect(dispatch).toHaveBeenCalledWith({ type: 'replayed-items/success', payload: live });
   });
 });
