@@ -75,6 +75,7 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     localStorage.setItem('hoverboard-locale', fakeLocale);
     const event = Object.assign(new Event('astro:before-preparation'), {
       loader: () => Promise.resolve(),
+      newDocument: document,
     });
 
     document.dispatchEvent(event);

@@ -8,10 +8,12 @@ import { FooterBlock } from '../components/footer/footer-block';
 import { AppHeader, demoBanner } from '../components/shell/app-header';
 import { AppOverlays } from '../components/shell/app-overlays';
 import { loadContent } from '../data/content';
+import { BUILD_ID } from '../data/build';
 import '../data/markdown';
 import { seedPage } from '../data/page';
 import { openGraphLocale } from '../data/structured-data';
 import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
+import { BUILD_META } from '../utils/build';
 import { colorSchemeScript } from '../utils/color-scheme';
 import { demoScript } from '../utils/demo';
 import { eventState } from '../utils/event-state';
@@ -77,6 +79,7 @@ await demoBanner;
     <meta content={resources.keywords} name="keywords" />
     <meta content={site.organizer.name} name="author" />
     <meta content="Project Hoverboard" name="generator" />
+    <meta content={BUILD_ID} name={BUILD_META} />
 
     <title>{title}</title>
 

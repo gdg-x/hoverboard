@@ -7,6 +7,7 @@ import { openSigninDialog } from './store/dialogs';
 import { setFilters } from './store/filters';
 import { queueSnackbar } from './store/snackbars';
 import { logPageView } from './utils/analytics';
+import { loadOtherBuildsInFull } from './utils/build';
 import { parseFilters } from './utils/filters';
 import { islandsHydrated } from './utils/islands';
 import {
@@ -29,6 +30,9 @@ export const startApp = async (): Promise<void> => {
   const openedFromSignInLink = emailLinkSignIn && takeSignInLink();
   window.addEventListener('offline', () =>
     store.dispatch(queueSnackbar(msg('You can still work offline.', { id: 'shell.app.offline' }))),
+  );
+  document.addEventListener('astro:before-preparation', (event) =>
+    loadOtherBuildsInFull(event as Parameters<typeof loadOtherBuildsInFull>[0]),
   );
   document.addEventListener('astro:before-preparation', (event) =>
     renderNextPageInSourceLocale(event as PreparationEvent),
