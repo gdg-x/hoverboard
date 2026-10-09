@@ -5,14 +5,20 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { runDoctor } from './doctor.js';
 import { EXPECTED_FUNCTIONS } from '../utils/functions.js';
 
-const { isBillingEnabledMock, listDeployedFunctionsMock } = vi.hoisted(() => ({
-  isBillingEnabledMock: vi.fn(),
-  listDeployedFunctionsMock: vi.fn(),
-}));
+const { isBillingEnabledMock, listDeployedFunctionsMock, listDatabaseInstancesMock } = vi.hoisted(
+  () => ({
+    isBillingEnabledMock: vi.fn(),
+    listDeployedFunctionsMock: vi.fn(),
+    listDatabaseInstancesMock: vi.fn(async () => []),
+  }),
+);
 
 vi.mock('../lib/billing.js', () => ({ isBillingEnabled: isBillingEnabledMock }));
 vi.mock('../lib/deployed-functions.js', () => ({
   listDeployedFunctions: listDeployedFunctionsMock,
+}));
+vi.mock('../lib/database-instances.js', () => ({
+  listDatabaseInstances: listDatabaseInstancesMock,
 }));
 
 const gen2 = (id: string) => ({ id, region: 'us-central1', platform: 'gcfv2' });
