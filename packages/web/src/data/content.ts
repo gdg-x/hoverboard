@@ -58,7 +58,9 @@ const enabledLoaders = () => Object.entries(LOADERS).filter(([, [path]]) => inUs
 const contentProblems = (docs: QueryDocumentSnapshot[]): string[] => {
   const projectId = env['FIRESTORE_TARGET'] === 'production' ? site.firebase.projectId : undefined;
   return docs.flatMap((doc) =>
-    documentMessages(doc.ref.path, toJson(doc.data()), documentUrl(doc.ref.path, projectId)),
+    documentMessages(doc.ref.path, toJson(doc.data()), {
+      url: documentUrl(doc.ref.path, projectId),
+    }),
   );
 };
 
@@ -94,7 +96,7 @@ const scheduleProblems = ({ sessions = [] }: Partial<Content>): string[] => {
   if (__HB_FEATURES__.schedule && sessions.length && !sessions.some(({ day }) => day)) {
     console.warn(
       `None of the ${sessions.length} sessions has a day and times, so the schedule is empty. ` +
-        'Sessions from before v4 need `./hb convert-schedule`. See docs/tutorials/firebase-utils.md.',
+        'Sessions from before v4 need `./hb firestore-check --fix`. See docs/tutorials/firebase-utils.md.',
     );
   }
   return scheduleErrors(sessions, scheduleTracks);
@@ -119,7 +121,8 @@ export const readContent = async (db: Firestore): Promise<Partial<Content>> => {
   if (problems.length) {
     const message =
       `The content in Firestore has problems:\n${problems.map((problem) => `  ${problem}`).join('\n')}\n` +
-      'Fix them in the Firebase console, then check with `./hb firestore-check`.';
+      'Fix them in the Firebase console, then check with `./hb firestore-check`. ' +
+      '`./hb firestore-check --fix` fixes some of them.';
     // In development, the content can be halfway through an edit.
     if (!import.meta.env.DEV) throw new Error(message);
     console.warn(message);

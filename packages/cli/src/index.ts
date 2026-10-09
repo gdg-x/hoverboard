@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import { runAuditDeps } from './commands/audit-deps.js';
-import { runConvertSchedule } from './commands/convert-schedule/index.js';
 import { runDoctor } from './commands/doctor.js';
 import { runDeploy } from './commands/deploy.js';
 import { runEmulators } from './commands/emulators.js';
 import { runFirestoreCopy } from './commands/firestore-copy/index.js';
-import { runFirestoreCheck } from './commands/firestore-check.js';
+import { runFirestoreCheck, type FirestoreCheckOptions } from './commands/firestore-check.js';
 import { runFirestoreCsv } from './commands/firestore-csv.js';
 import { runFirestoreExport } from './commands/firestore-export.js';
 import { runFirestoreInit } from './commands/firestore-init/index.js';
@@ -169,10 +168,18 @@ program
   .command('firestore-check')
   .description(
     'Check every Firestore document against the schema, and the sessions against the schedule ' +
-      '(targets the local emulator unless FIRESTORE_TARGET=production is set). Read-only.',
+      '(targets the local emulator unless FIRESTORE_TARGET=production is set). With --fix, run ' +
+      'the data migrations and the safe fixes first, after backing up what they change.',
   )
   .option('--collection <path>', 'Check one collection, such as speakers or partners/gold/items.')
-  .action(async (options: { collection?: string }) => {
+  .option('--fix', 'Run the pending migrations and the safe fixes.')
+  .option('--dry-run', 'With --fix, show the changes without writing them.')
+  .option('-y, --yes', 'With --fix or --restore, change production without asking.')
+  .option(
+    '--restore <folder>',
+    'Write back the documents a --fix backed up, from .firebase/backups.',
+  )
+  .action(async (options: FirestoreCheckOptions) => {
     try {
       process.exitCode = (await runFirestoreCheck(options)) ? 0 : 1;
     } catch (error) {
@@ -186,23 +193,6 @@ program
   .description('Export the running Firestore emulator data to .firebase/emulator-data.')
   .action(() => {
     process.exitCode = runFirestoreExport() ? 0 : 1;
-  });
-
-program
-  .command('convert-schedule')
-  .description(
-    'Move session times and tracks from the old schedule collection onto the sessions, and the ' +
-      'tracks to packages/config/site.json (targets the local emulator unless ' +
-      'FIRESTORE_TARGET=production is set). Leaves the schedule collection in place.',
-  )
-  .option('--dry-run', 'Print the changes without writing them.')
-  .action(async (options: { dryRun?: boolean }) => {
-    try {
-      await runConvertSchedule(options);
-    } catch (error) {
-      console.log(error);
-      process.exitCode = 1;
-    }
   });
 
 program.parse();

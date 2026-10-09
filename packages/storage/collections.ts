@@ -4,13 +4,14 @@
  * - `content`: organizers, in the Firebase console or with the CLI. The site reads it.
  * - `visitor`: the site, through the Firestore rules. It can hold personal data.
  * - `function`: organizers or Cloud Functions, with the Admin SDK. Only functions read it.
+ * - `cli`: the CLI, for its own records.
  */
-export type CollectionKind = 'content' | 'visitor' | 'function';
+export type CollectionKind = 'content' | 'visitor' | 'function' | 'cli';
 
 export interface CollectionInfo {
   /** The definition in `schemas/firestore.schema.json` `$defs` that each document follows. */
   readonly schema: string;
-  /** The site.json features that use it. It's in use while any of them is on. */
+  /** The site.json features that use it. It's in use while any of them is on, or always without any. */
   readonly features: readonly string[];
   readonly kind: CollectionKind;
 }
@@ -64,9 +65,17 @@ export const COLLECTIONS = {
     features: ['notifications'],
     kind: 'function',
   },
+
+  'config/migrations': { schema: 'migrations', features: [], kind: 'cli' },
 } as const satisfies Record<string, CollectionInfo>;
 
 export type CollectionPath = keyof typeof COLLECTIONS;
+
+/** Fields that earlier versions used, by `$defs` definition, with the version that stopped. */
+export const RETIRED_FIELDS: Readonly<Record<string, Readonly<Record<string, string>>>> = {
+  notificationsConfig: { timezone: '4.0.0' },
+  session: { extend: '4.0.0', shortDescription: '4.0.0' },
+};
 
 /** Collections and documents that earlier versions used, with the version that stopped. */
 export const RETIRED: Readonly<Record<string, string>> = {

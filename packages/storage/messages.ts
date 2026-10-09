@@ -1,10 +1,13 @@
 import type { ErrorObject } from 'ajv';
+import { RETIRED_FIELDS } from './collections';
 
 export interface MessageOptions {
   /** Leaves values, map keys and references out, for documents with personal data. */
   hideValues?: boolean;
   /** Ends each message with a link to the document. */
   url?: string;
+  /** Marks the problems that `hb firestore-check --fix` can fix. */
+  fixable?: (error: ErrorObject) => boolean;
 }
 
 const MAX_VALUE_LENGTH = 60;
@@ -78,7 +81,8 @@ const shown = (value: unknown): string => {
 };
 
 /** The `$defs` definition an error comes from, such as `link` for `#/$defs/link/pattern`. */
-const definitionOf = (error: ErrorObject) => /\$defs\/([^/]+)\/[^/]+$/.exec(error.schemaPath)?.[1];
+export const definitionOf = (error: ErrorObject) =>
+  /\$defs\/([^/]+)\/[^/]+$/.exec(error.schemaPath)?.[1];
 
 const description = (schema: unknown): string => {
   const text = (schema as { description?: unknown } | undefined)?.description;
@@ -103,6 +107,10 @@ const message = (
     case 'additionalProperties':
     case 'unevaluatedProperties': {
       const name = String(params['additionalProperty'] ?? params['unevaluatedProperty']);
+      const retired = RETIRED_FIELDS[definitionOf(error) ?? '']?.[name];
+      if (retired) {
+        return `retired field "${join(field, name)}", which Hoverboard stopped reading in ${retired}.`;
+      }
       return `unknown field "${join(field, name)}". Hoverboard doesn't read it.`;
     }
     case 'dependentRequired':
@@ -160,7 +168,11 @@ export const documentProblems = (
   options: MessageOptions = {},
 ): string[] => {
   const link = options.url ? ` ${options.url}` : '';
-  const messages = (errors ?? []).flatMap((error) => message(error, options) ?? []);
+  const messages = (errors ?? []).flatMap((error) => {
+    const text = message(error, options);
+    if (!text) return [];
+    return options.fixable?.(error) ? `${text} (fixable)` : text;
+  });
   return [...new Set(messages)].map((text) => `${documentPath}: ${text}${link}`);
 };
 

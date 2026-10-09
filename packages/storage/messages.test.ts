@@ -1,8 +1,9 @@
-import { Ajv2020 } from 'ajv/dist/2020.js';
+import { Ajv2020, type ErrorObject } from 'ajv/dist/2020.js';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { describe, expect, it } from 'vitest';
 import { documentProblems, documentUrl, fieldPath } from './messages';
+import { documentMessages } from './validate';
 
 const schema = JSON.parse(
   readFileSync(join(import.meta.dirname, 'schemas/firestore.schema.json'), 'utf8'),
@@ -31,8 +32,8 @@ describe('documentProblems', () => {
     [
       'additionalProperties',
       'session',
-      { ...session, extend: 2 },
-      'unknown field "extend". Hoverboard doesn\'t read it.',
+      { ...session, notes: '' },
+      'unknown field "notes". Hoverboard doesn\'t read it.',
     ],
     [
       'unevaluatedProperties',
@@ -167,6 +168,31 @@ describe('documentProblems', () => {
   it('ends each message with the link', () => {
     expect(problems('session', { title: 'Keynote' }, { url: 'https://example.com' })).toEqual([
       'doc/1: missing "description". https://example.com',
+    ]);
+  });
+
+  it('names retired fields, in the document and in nested definitions', () => {
+    expect(documentMessages('sessions/107', { ...session, extend: 2 })).toEqual([
+      'sessions/107: retired field "extend", which Hoverboard stopped reading in 4.0.0.',
+    ]);
+    expect(documentMessages('config/notifications', { icon: '/a.png', timezone: 'UTC' })).toEqual([
+      'config/notifications: retired field "timezone", which Hoverboard stopped reading in 4.0.0.',
+    ]);
+  });
+
+  it('marks the problems that can be fixed, before the link', () => {
+    expect(
+      problems(
+        'session',
+        { ...session, title: 3, extend: 2 },
+        {
+          url: 'https://example.com',
+          fixable: (error: ErrorObject) => error.keyword === 'type',
+        },
+      ),
+    ).toEqual([
+      'doc/1: unknown field "extend". Hoverboard doesn\'t read it. https://example.com',
+      'doc/1: title must be a string, not a number. (fixable) https://example.com',
     ]);
   });
 

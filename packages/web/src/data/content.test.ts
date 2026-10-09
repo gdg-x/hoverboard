@@ -99,7 +99,7 @@ describe('readContent', () => {
 
     await readContent(db);
 
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('./hb convert-schedule'));
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('./hb firestore-check --fix'));
     warn.mockRestore();
   });
 
@@ -120,7 +120,8 @@ describe('readContent', () => {
     const message =
       'The content in Firestore has problems:\n' +
       '  sessions/a and sessions/b overlap on 2016-09-09 in expo-hall\n' +
-      'Fix them in the Firebase console, then check with `./hb firestore-check`.';
+      'Fix them in the Firebase console, then check with `./hb firestore-check`. ' +
+      '`./hb firestore-check --fix` fixes some of them.';
 
     vi.stubEnv('DEV', false);
     await expect(readContent(db)).rejects.toThrow(message);
@@ -147,8 +148,9 @@ describe('readContent', () => {
     expect(error.message).toContain(
       `  sessions/talk: missing "description". http://127.0.0.1:4000/firestore/default/data/sessions/talk`,
     );
-    expect(error.message).toContain('  sessions/talk: unknown field "extend".');
+    expect(error.message).toContain('  sessions/talk: retired field "extend"');
     expect(error.message).toContain('  team/core/members/ada: missing "order".');
+    expect(error.message).toContain('`./hb firestore-check --fix` fixes some of them.');
   });
 
   it('links to the Firebase console when it reads production', async () => {

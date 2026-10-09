@@ -35,6 +35,11 @@ export const siteTracks = (path = SITE_PATH): Track[] =>
   (JSON.parse(readFileSync(path, 'utf8')) as { schedule?: { tracks?: Track[] } }).schedule
     ?.tracks ?? [];
 
+/** `event.timezone` in packages/config/site.json. */
+export const siteTimeZone = (path = SITE_PATH): string =>
+  (JSON.parse(readFileSync(path, 'utf8')) as { event?: { timezone?: string } }).event?.timezone ??
+  'UTC';
+
 /**
  * Sessions that are not on the schedule as they say: a track that isn't in site.json or not on the
  * session's day, an end that isn't after the start, or two sessions at once in one track.

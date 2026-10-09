@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import data from '../../../../../docs/default-firebase-data.json';
-import site from '../../../../config/site.json';
-import { type OldScheduleDay, convertSchedule, trackId } from './convert.js';
+import data from '../../../../docs/default-firebase-data.json';
+import site from '../../../config/site.json';
+import { type OldScheduleDay, convertSchedule, trackId } from './convert-schedule.js';
 // The demo's `schedule` collection before it was converted.
 import demoSchedule from './demo-schedule.fixture.json';
 
@@ -47,6 +47,18 @@ describe('convertSchedule', () => {
       web: { day: '2027-10-15', startTime: '10:00', endTime: '10:40', track: 'main-hall' },
       android: { day: '2027-10-15', startTime: '10:00', endTime: '10:40', track: 'room-2' },
     });
+    expect(result.warnings).toEqual([]);
+  });
+
+  it('reads session IDs written as numbers', () => {
+    const result = convertSchedule(
+      {
+        '2027-10-15': day([{ startTime: '09:00', endTime: '09:30', sessions: [{ items: [101] }] }]),
+      },
+      ['101'],
+    );
+
+    expect(result.times['101']).toMatchObject({ startTime: '09:00', endTime: '09:30' });
     expect(result.warnings).toEqual([]);
   });
 

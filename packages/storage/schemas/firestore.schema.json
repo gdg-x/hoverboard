@@ -490,6 +490,19 @@
       "properties": {
         "createdAt": { "$ref": "#/$defs/timestamp" }
       }
+    },
+    "migrations": {
+      "description": "The data migrations that `hb firestore-check --fix` ran, by ID. Firestore: `config/migrations`.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["documents", "ranAt"],
+        "properties": {
+          "documents": { "description": "How many documents it changed.", "type": "number" },
+          "ranAt": { "$ref": "#/$defs/timestamp" }
+        }
+      }
     }
   }
 }

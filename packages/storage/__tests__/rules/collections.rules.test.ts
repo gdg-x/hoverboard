@@ -72,17 +72,19 @@ describe('the collection registry', () => {
 
   it.each(entries)('names a schema definition and features for %s', (_path, info) => {
     expect(schema.$defs).toHaveProperty(info.schema);
-    expect(info.features.length).toBeGreaterThan(0);
+    // The CLI's own data is in use whatever the features.
+    if (info.kind === 'cli') expect(info.features).toEqual([]);
+    else expect(info.features.length).toBeGreaterThan(0);
   });
 
-  it.each(entries.filter(([, { kind }]) => kind !== 'function'))(
+  it.each(entries.filter(([, { kind }]) => kind === 'content' || kind === 'visitor'))(
     'has a rule for %s, which the site reads or writes',
     (path) => {
       expect(ruleCollections).toContain(collectionName(path));
     },
   );
 
-  it.each(entries.filter(([, { kind }]) => kind === 'function'))(
+  it.each(entries.filter(([, { kind }]) => kind === 'function' || kind === 'cli'))(
     'has no rule for %s, which only the Admin SDK uses',
     (path) => {
       expect(ruleCollections).not.toContain(collectionName(path));

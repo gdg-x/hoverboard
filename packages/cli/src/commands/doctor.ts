@@ -3,6 +3,7 @@ import { findRepoRoot, checkNodeVersion, type DoctorCheckResult } from '../utils
 import { checkApiKeys } from '../utils/api-keys.js';
 import { checkBilling } from '../utils/billing.js';
 import { checkFirebaseProject, resolveFirebaseProjectId } from '../utils/firebase-project.js';
+import { checkFirestoreBackups } from '../utils/firestore-backups.js';
 import { checkFunctions } from '../utils/functions.js';
 import { checkRealtimeDatabase } from '../utils/realtime-database.js';
 import { checkServiceAccountKeys } from '../utils/service-account-keys.js';
@@ -41,6 +42,7 @@ export const runDoctor = async (): Promise<boolean> => {
     ['GitHub deploys', () => checkGitHubDeploys(repoRoot, projectId)],
     ['Service accounts', () => checkServiceAccounts(repoRoot, projectId)],
     ['Browser API key', () => checkApiKeys(repoRoot, projectId)],
+    ['Firestore backups', () => checkFirestoreBackups(repoRoot)],
   ];
 
   const results: (DoctorCheckResult | undefined)[] = pending.map(() => undefined);

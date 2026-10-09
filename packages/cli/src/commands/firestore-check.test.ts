@@ -68,20 +68,56 @@ describe('checkDocuments', () => {
       on,
     );
 
-    expect(report).toEqual({ checked: 6, problems: [], retired: new Map(), unknown: new Map() });
+    expect(report).toEqual({
+      checked: 6,
+      problems: [],
+      retired: new Map(),
+      unknown: new Map(),
+      migrations: [],
+    });
+  });
+
+  it('marks the problems --fix can fix', () => {
+    const badge = { description: '', name: 'GDE', link: ' https://example.com' };
+    const { problems } = checkDocuments(
+      [
+        { path: 'speakers/ada', data: { ...speaker, badges: [badge] } },
+        { path: 'subscribers/a', data: { email: ' ada@example.com', firstName: '', lastName: '' } },
+        { path: 'notificationsSubscribers/token', data: { value: true } },
+      ],
+      on,
+    );
+
+    expect(problems.map(({ message }) => message)).toEqual([
+      'notificationsSubscribers: missing "updatedAt". In 1 document. (fixable)',
+      expect.stringMatching(/^speakers\/ada: badges\[0\]\.link " https:.* must .* \(fixable\)$/),
+      'subscribers: email must be an email address. In 1 document. (fixable)',
+    ]);
+  });
+
+  it('lists pending migrations only with every document', () => {
+    const documents = [
+      { path: 'sessions/101', data: session },
+      { path: 'schedule/2027-10-15', data: { date: '2027-10-15', timeslots: [], tracks: [] } },
+    ];
+
+    expect(checkDocuments(documents, on).migrations).toEqual([
+      { id: '4.0.0-schedule-on-sessions', reason: expect.any(String), reads: ['schedule'] },
+    ]);
+    expect(checkDocuments(documents, { ...on, complete: false }).migrations).toEqual([]);
   });
 
   it('reports each problem with a link to the document', () => {
     const { problems } = checkDocuments(
       [
-        { path: 'sessions/107', data: { ...session, extend: 2 } },
+        { path: 'sessions/107', data: { ...session, notes: '' } },
         { path: 'team/core/members/ada', data: { name: 'Ada' } },
       ],
       { ...on, projectId: 'demo-project' },
     );
 
     expect(problems).toContainEqual({
-      message: 'sessions/107: unknown field "extend". Hoverboard doesn\'t read it.',
+      message: 'sessions/107: unknown field "notes". Hoverboard doesn\'t read it.',
       warning: false,
       url: 'https://console.firebase.google.com/project/demo-project/firestore/databases/-default-/data/~2Fsessions~2F107',
     });
@@ -106,7 +142,7 @@ describe('checkDocuments', () => {
 
     expect(problems).toEqual([
       {
-        message: 'featuredSessions: An entry must be a boolean, not null. In 1 document.',
+        message: 'featuredSessions: An entry must be a boolean, not null. In 1 document. (fixable)',
         warning: false,
         url: emulatorUrl('featuredSessions'),
       },
@@ -116,7 +152,7 @@ describe('checkDocuments', () => {
         url: emulatorUrl('notificationsUsers'),
       },
       {
-        message: 'subscribers: email must be an email address. In 2 documents.',
+        message: 'subscribers: email must be an email address. In 2 documents. (fixable)',
         warning: false,
         url: emulatorUrl('subscribers'),
       },
@@ -240,6 +276,7 @@ describe('formatReport', () => {
       ['config/site', 1],
     ]),
     unknown: new Map([['misc', 1]]),
+    migrations: [],
   };
 
   it('prints errors, warnings, retired and unknown collections, and a summary', () => {
@@ -266,8 +303,47 @@ describe('formatReport', () => {
 
   it('says when there is nothing to fix', () => {
     expect(
-      formatReport({ checked: 1, problems: [], retired: new Map(), unknown: new Map() }),
+      formatReport({
+        checked: 1,
+        problems: [],
+        retired: new Map(),
+        unknown: new Map(),
+        migrations: [],
+      }),
     ).toEqual(['\n✔ 1 document checked, with no problems.']);
+  });
+
+  it('prints pending migrations as errors, and counts what --fix can fix', () => {
+    const migration = {
+      id: '4.0.0-schedule-on-sessions',
+      reason: 'No session has a day.',
+      reads: ['schedule'],
+    };
+    expect(
+      formatReport({
+        ...report,
+        problems: [{ message: 'speakers/ada: name must not start (fixable).', warning: false }],
+        migrations: [migration],
+      }),
+    ).toEqual(
+      expect.arrayContaining([
+        "✘ Migration 4.0.0-schedule-on-sessions hasn't run: No session has a day. Run it with --fix.",
+        '\n✘ Found 2 problems in 3 documents. 2 can be fixed with --fix.',
+      ]),
+    );
+  });
+
+  it('keeps a retired collection that a pending migration reads', () => {
+    const migration = { id: '4.0.0-schedule-on-sessions', reason: '', reads: ['schedule'] };
+    const lines = formatReport(
+      { ...report, retired: new Map([['schedule', 2]]), migrations: [migration] },
+      { projectId: 'demo-project' },
+    );
+
+    expect(lines).toContain(
+      '! schedule: 2 documents from before 4.0.0, which Hoverboard no longer uses. Keep them until migration 4.0.0-schedule-on-sessions runs.',
+    );
+    expect(lines.join('\n')).not.toContain('firestore:delete');
   });
 });
 
@@ -295,6 +371,7 @@ describe('listAllDocuments', () => {
         refs.map(({ path, doc }) => ({
           exists: doc.data !== undefined,
           data: () => doc.data,
+          updateTime: doc.data && Timestamp.fromMillis(1),
           ref: { path, listCollections: async () => collections(path, doc.collections ?? {}) },
         })),
     } as unknown as Firestore;
@@ -310,9 +387,16 @@ describe('listAllDocuments', () => {
       {
         path: 'speakers/ada',
         data: { name: 'Ada', at: { $timestamp: '1970-01-01T00:00:00.000Z' } },
+        raw: { name: 'Ada', at: Timestamp.fromMillis(0) },
+        updateTime: Timestamp.fromMillis(1),
       },
       { path: 'partners/gold', data: undefined },
-      { path: 'partners/gold/items/0', data: { name: 'GDG' } },
+      {
+        path: 'partners/gold/items/0',
+        data: { name: 'GDG' },
+        raw: { name: 'GDG' },
+        updateTime: Timestamp.fromMillis(1),
+      },
     ]);
   });
 

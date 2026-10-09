@@ -1,6 +1,6 @@
-import { Ajv2020, type ValidateFunction } from 'ajv/dist/2020.js';
+import { Ajv2020, type ErrorObject, type ValidateFunction } from 'ajv/dist/2020.js';
 import { collectionInfo } from './collections';
-import { documentProblems } from './messages';
+import { documentProblems, type MessageOptions } from './messages';
 import schema from './schemas/firestore.schema.json';
 
 // `verbose` gives each error the data and the schema, which the messages read.
@@ -36,17 +36,30 @@ export const toJson = (value: unknown): unknown => {
   return value;
 };
 
-/**
- * The problems with a document of any collection in the registry, with values left out of visitor
- * data. A document Hoverboard doesn't use has none. `data` is JSON, as from {@link toJson}.
- */
-export const documentMessages = (documentPath: string, data: unknown, url?: string): string[] => {
+/** Ajv's errors for a document of any collection in the registry. `data` is JSON, as from {@link toJson}. */
+export const documentErrors = (documentPath: string, data: unknown): ErrorObject[] => {
   const info = collectionInfo(documentPath);
   if (!info) return [];
   const validate = schemaValidator(`#/$defs/${info.schema}`);
   if (validate(data)) return [];
-  return documentProblems(documentPath, validate.errors, {
-    hideValues: info.kind === 'visitor',
-    ...(url ? { url } : {}),
-  });
+  // Paths in the definition itself start at `#/`. Name it, as for errors in other definitions.
+  return (validate.errors ?? []).map((error) =>
+    error.schemaPath.includes('$defs/')
+      ? error
+      : { ...error, schemaPath: error.schemaPath.replace('#/', `#/$defs/${info.schema}/`) },
+  );
 };
+
+/**
+ * The problems with a document of any collection in the registry, with values left out of visitor
+ * data. A document Hoverboard doesn't use has none. `data` is JSON, as from {@link toJson}.
+ */
+export const documentMessages = (
+  documentPath: string,
+  data: unknown,
+  options: Pick<MessageOptions, 'url' | 'fixable'> = {},
+): string[] =>
+  documentProblems(documentPath, documentErrors(documentPath, data), {
+    ...options,
+    hideValues: collectionInfo(documentPath)?.kind === 'visitor',
+  });
