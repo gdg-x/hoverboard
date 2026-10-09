@@ -1,4 +1,5 @@
 import { findRepoRoot, checkNodeVersion, type DoctorCheckResult } from '../utils/node-version.js';
+import { checkApiKeys } from '../utils/api-keys.js';
 import { checkBilling } from '../utils/billing.js';
 import { checkFirebaseProject, resolveFirebaseProjectId } from '../utils/firebase-project.js';
 import { checkFunctions } from '../utils/functions.js';
@@ -31,6 +32,7 @@ export const runDoctor = async (): Promise<boolean> => {
     await checkRealtimeDatabase(repoRoot, projectId),
     await checkGitHubDeploys(repoRoot, projectId),
     await checkServiceAccounts(repoRoot, projectId),
+    await checkApiKeys(repoRoot, projectId),
   ];
 
   for (const check of checks) {

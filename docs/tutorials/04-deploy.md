@@ -63,6 +63,8 @@ If the auth step fails with `must specify exactly one of "workload_identity_prov
 
 `./hb doctor` checks the Google Cloud and GitHub setup. It warns about anything `./hb setup-github` would still change. It also warns about service account keys, which never expire, and about the `github-action-*` accounts that `firebase init hosting:github` created for deploys before `./hb setup-github`. Delete those keys, the GitHub secrets that held them (such as `FIREBASE_SERVICE_ACCOUNT_*`), and the old accounts.
 
+`./hb doctor` also checks the browser API key of the Firebase web app, and the Maps key in `site.json` when the map is on. Each key should only work from the site's domain and `<project>.firebaseapp.com`, and only call the APIs the site uses with it. The browser key needs the Firebase APIs on [Firebase's list](https://firebase.google.com/docs/projects/api-keys#faq-required-apis-for-restricted-firebase-api-key) for Authentication, Cloud Firestore, Cloud Messaging and Performance Monitoring, and the Maps key needs the Maps JavaScript API. Doctor names any other API a key can call, and links to the key in the Google Cloud console. The check needs the API Keys API, and links to the page that turns it on.
+
 Missing roles show up as `403` errors such as `Permission denied to get service` (Service Usage), a failed `firebaserules.googleapis.com` `:test` request (Rules) or `Failed to list functions` (Cloud Functions).
 
 Pull requests from forks cannot get a token, so they do not deploy a preview. Their config is still checked.
