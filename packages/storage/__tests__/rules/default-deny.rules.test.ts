@@ -3,13 +3,17 @@ import { beforeEach, describe, it } from 'vitest';
 import { expect } from '../helpers';
 import { anonContext, authedContext, seed } from './setup';
 
-// The schedule and the generated collections are no longer read, so they have no rule either.
+// Collections only the Admin SDK reads and writes: the old schedule and generated collections,
+// the legacy `users`, and the notifications and reminders the functions send.
 describe.each([
   'someUnknownCollection',
   'schedule',
   'generatedSchedule',
   'generatedSessions',
   'generatedSpeakers',
+  'users',
+  'notifications',
+  'sentNotifications',
 ])('default deny for %s, which has no matching rule', (collectionName) => {
   const docPath = `${collectionName}/doc-1`;
 

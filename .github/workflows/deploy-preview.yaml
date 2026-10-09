@@ -1,20 +1,19 @@
 name: Deploy Preview
 on: pull_request
 
-permissions:
-  contents: read
-  checks: write
-  pull-requests: write
-  # Lets google-github-actions/auth request a GitHub OIDC token for Workload Identity Federation.
-  id-token: write
+permissions: {}
 
 jobs:
   # Shows each error on its file in the pull request, and runs for pull requests from forks too.
   validate_config:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: package.json
       - run: npm ci
@@ -25,14 +24,23 @@ jobs:
     # Pull requests from forks cannot get a token to deploy.
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # action-hosting-deploy adds a check run and comments the preview link.
+      checks: write
+      pull-requests: write
+      # Lets google-github-actions/auth request a GitHub OIDC token for Workload Identity Federation.
+      id-token: write
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: package.json
       - run: npm ci
       # `./hb setup-github` sets these variables. See docs/tutorials/04-deploy.md.
-      - uses: google-github-actions/auth@v3
+      - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
         with:
           workload_identity_provider: '${{ vars.WIF_PROVIDER }}'
           service_account: '${{ vars.DEPLOY_SERVICE_ACCOUNT }}'
@@ -48,7 +56,7 @@ jobs:
           echo "json=$credentials" >> "$GITHUB_OUTPUT"
       - id: project
         run: echo "id=$(jq -r .firebase.projectId packages/config/site.json)" >> "$GITHUB_OUTPUT"
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           projectId: '${{ steps.project.outputs.id }}'

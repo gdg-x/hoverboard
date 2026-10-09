@@ -1,7 +1,19 @@
 import { spawnSync } from 'child_process';
-import { existsSync } from 'fs';
+import { existsSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { setup as startEmulator, teardown as stopEmulator } from 'jest-dev-server';
+import { tmpdir } from 'os';
+import { join } from 'path';
 import { SpawndChildProcess } from 'spawnd';
+import type { TestProject } from 'vitest/node';
+import { type CoverageReport, untestedConditions } from './coverage';
+
+declare module 'vitest' {
+  export interface ProvidedContext {
+    rulesProjectsFile: string;
+  }
+}
+
+let projectsFile = '';
 
 // Vitest runs `setup` once for the whole run (not per test file/worker), so the
 // slow Firestore emulator process is started and stopped exactly once, however
@@ -53,16 +65,51 @@ const emulatorEnv = () => {
   return { ...process.env, PATH: `${javaHome}/bin:${process.env['PATH'] ?? ''}` };
 };
 
-export async function setup() {
+export async function setup(project: TestProject) {
+  projectsFile = join(mkdtempSync(join(tmpdir(), 'hoverboard-rules-')), 'projects.txt');
+  writeFileSync(projectsFile, '');
+  project.provide('rulesProjectsFile', projectsFile);
   servers = await startEmulator({
     command: 'npx firebase emulators:start --only firestore',
     launchTimeout: 30000,
     port: 8080,
-    usedPortAction: 'error',
+    // The emulator's address. On `::`, the port check misses an emulator on 127.0.0.1, then
+    // starts a second one, and spawnd exits the test run when that one fails.
+    host: '127.0.0.1',
+    // Reuses the emulator `npm start` runs. Each test file uses its own project, so its data is untouched.
+    usedPortAction: 'ignore',
     options: { env: emulatorEnv() },
   });
 }
 
+/** Fails when a rule condition was never both allowed and denied, after a run of every rules test. */
+const checkCoverage = async () => {
+  const projectIds = readFileSync(projectsFile, 'utf8').split('\n').filter(Boolean);
+  const testFiles = readdirSync(import.meta.dirname).filter((file) =>
+    file.endsWith('.rules.test.ts'),
+  );
+  if (projectIds.length < testFiles.length) return;
+
+  const reports = await Promise.all(
+    projectIds.map(async (id) => {
+      const response = await fetch(`http://127.0.0.1:8080/emulator/v1/projects/${id}:ruleCoverage`);
+      return (await response.json()) as CoverageReport;
+    }),
+  );
+  const untested = untestedConditions(reports);
+  if (untested.length) {
+    // Vitest fails the run on a teardown error, but doesn't print it.
+    console.error(
+      `\nThe rules tests never allowed and denied these Firestore rule conditions:\n${untested.join('\n')}\n`,
+    );
+    throw new Error('Untested Firestore rule conditions.');
+  }
+};
+
 export async function teardown() {
-  await stopEmulator(servers);
+  try {
+    await checkCoverage();
+  } finally {
+    await stopEmulator(servers);
+  }
 }

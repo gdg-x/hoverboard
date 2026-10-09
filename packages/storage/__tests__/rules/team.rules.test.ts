@@ -29,7 +29,7 @@ describe('team rules', () => {
   });
 });
 
-describe('team/{teamId}/members nested rule', () => {
+describe('team/{teamId}/members', () => {
   const docPath = 'team/team-1/members/member-1';
 
   beforeEach(() => seed({ [docPath]: { name: 'Member' } }));

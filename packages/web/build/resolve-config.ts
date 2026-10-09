@@ -9,6 +9,7 @@ import {
 } from '../src/config/features';
 import { deepMerge, isPlainObject } from '../src/config/merge';
 import { fontProblems } from './fonts';
+import { sanitizeSvg } from './svg';
 import {
   type ResolvedTheme,
   type SiteTheme,
@@ -210,6 +211,14 @@ const crossFileErrors = (site: Site, resources: Resources, paths: ConfigPaths): 
     errors.push(
       `site.json/heroSettings/home/illustration: "${illustration}" is not in packages/web/public`,
     );
+  } else if (illustration) {
+    const { removed } = sanitizeSvg(fs.readFileSync(join(paths.public, illustration), 'utf8'));
+    if (removed.length) {
+      errors.push(
+        `site.json/heroSettings/home/illustration: "${illustration}" has content that could run ` +
+          `on the site, which the build would remove: ${[...new Set(removed)].join(', ')}`,
+      );
+    }
   }
   return [
     ...errors,

@@ -19,7 +19,6 @@ vi.mock('../../../../../docs/default-firebase-data.json', () => ({
     config: {
       site: { domain: 'example.com' },
       notifications: { icon: '/icon.png' },
-      mailchimp: { dc: '' },
     },
   },
 }));
@@ -38,12 +37,12 @@ describe('importConfig', () => {
     expect(docMock).toHaveBeenCalledWith('notifications');
     expect(setMock).toHaveBeenCalledWith('config/site', { domain: 'example.com' });
     expect(setMock).toHaveBeenCalledWith('config/notifications', { icon: '/icon.png' });
-    expect(setMock).toHaveBeenCalledTimes(3);
+    expect(setMock).toHaveBeenCalledTimes(2);
     expect(commitMock).toHaveBeenCalled();
   });
 
   it('leaves out the documents of features that are off', async () => {
-    await importConfig({ mailchimp: false, notifications: false });
+    await importConfig({ notifications: false });
 
     expect(docMock.mock.calls.map(([id]) => id)).toEqual(['site']);
   });

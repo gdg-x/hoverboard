@@ -4,6 +4,7 @@ import * as logger from 'firebase-functions/logger';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { getSiteConfig } from '../../src/site-config';
 import { scheduleNotifications } from '../../src/triggers/schedule-notifications';
+import { expectNoPersonalDataLogged } from '../personal-data';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('firebase-admin/messaging');
@@ -142,6 +143,9 @@ describe('scheduleNotifications', () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
+
+  // Runs before the restore above, which removes the spies' calls.
+  afterEach(expectNoPersonalDataLogged);
 
   it('sends reminders without an icon when config/notifications is missing', async () => {
     mockFirestore({
@@ -375,8 +379,7 @@ describe('scheduleNotifications', () => {
     await scheduleNotifications.run(undefined as never);
 
     expect(errorSpy).toHaveBeenCalledWith(
-      'Failure sending notification to',
-      'fid0000000000000000001',
+      'Failure sending notification to token aa13b012ca',
       expect.objectContaining({ code: 'messaging/invalid-registration-token' }),
     );
     expect(runTransaction).toHaveBeenCalledTimes(1);

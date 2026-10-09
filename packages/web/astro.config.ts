@@ -1,6 +1,8 @@
 import lit from '@awesome.me/astro-lit';
 import { defineConfig } from 'astro/config';
+import { env } from 'node:process';
 import { chunkFileNames } from './build/chunk-names';
+import { csp, type CspSite } from './build/csp';
 import { decorators } from './build/decorators';
 import { production, resolveConfig } from './build/resolve-config';
 import { routes } from './build/routes';
@@ -30,6 +32,9 @@ export default defineConfig({
       },
     },
     routes(config.site.features),
+    // Before the service worker, which precaches the pages it changes. Deploys build with
+    // FIRESTORE_TARGET=production, and every other build may run on the emulators.
+    csp(config.site as CspSite, { emulators: env['FIRESTORE_TARGET'] !== 'production' }),
     serviceWorker(),
   ],
   vite: {

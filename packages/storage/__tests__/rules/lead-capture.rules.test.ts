@@ -1,52 +1,79 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
 import { beforeEach, describe, it } from 'vitest';
 import { expect } from '../helpers';
 import { anonContext, authedContext, seed } from './setup';
 
-// `potentialPartners/{partnerId}` and `subscribers/{subscriberId}` share the
-// same "open lead capture" shape: anyone can create/update any document
-// (there's no ownership check), `get` is open, but `list` and `delete` are
-// always denied.
-const LEAD_CAPTURE_COLLECTIONS = ['potentialPartners', 'subscribers'];
-
-describe.each(LEAD_CAPTURE_COLLECTIONS)('%s rules', (collectionName) => {
+// Forms anyone can send: `create` only, with validation, and nobody can read them back.
+describe.each([
+  {
+    collectionName: 'subscribers',
+    valid: { email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' },
+    nameFields: ['firstName', 'lastName'],
+  },
+  {
+    collectionName: 'potentialPartners',
+    valid: { email: 'ada@example.com', fullName: 'Ada Lovelace', companyName: 'Engines' },
+    nameFields: ['fullName', 'companyName'],
+  },
+])('$collectionName rules', ({ collectionName, valid, nameFields }) => {
   const docPath = `${collectionName}/lead-1`;
 
-  beforeEach(() => seed({ [docPath]: { email: 'lead@example.com' } }));
+  beforeEach(() => seed({ [docPath]: valid }));
 
   describe.each([
     ['unauthenticated', anonContext],
     ['authenticated', () => authedContext('user-1')],
   ] as const)('%s', (_label, getContext) => {
-    it('allows get', async () => {
-      const context = getContext();
-      await expect(getDoc(doc(context.firestore(), docPath))).toAllow();
+    const leads = () => collection(getContext().firestore(), collectionName);
+
+    it('allows creating a valid document', async () => {
+      await expect(addDoc(leads(), valid)).toAllow();
+    });
+
+    it('allows empty names, which the form sends when they are left out', async () => {
+      await expect(
+        addDoc(leads(), { ...valid, ...Object.fromEntries(nameFields.map((f) => [f, ''])) }),
+      ).toAllow();
+    });
+
+    it.each([
+      ['an email without @', { email: 'ada.example.com' }],
+      ['an email with a space', { email: 'ada lovelace@example.com' }],
+      ['an email over 254 characters', { email: `${'a'.repeat(250)}@example.com` }],
+      ['a number for the email', { email: 42 }],
+      ['an extra field', { admin: true }],
+    ])('denies %s', async (_case, overrides) => {
+      await expect(addDoc(leads(), { ...valid, ...overrides })).toDeny();
+    });
+
+    it.each(nameFields)('denies a missing or oversized %s', async (field) => {
+      const { [field as keyof typeof valid]: _omitted, ...missing } = valid;
+      await expect(addDoc(leads(), missing)).toDeny();
+      await expect(addDoc(leads(), { ...valid, [field]: 'x'.repeat(101) })).toDeny();
+    });
+
+    it('denies reading a document', async () => {
+      await expect(getDoc(doc(getContext().firestore(), docPath))).toDeny();
     });
 
     it('denies listing the collection', async () => {
-      const context = getContext();
-      await expect(getDocs(collection(context.firestore(), collectionName))).toDeny();
+      await expect(getDocs(leads())).toDeny();
     });
 
-    it('allows creating a new document (open lead capture, no ownership check)', async () => {
-      const context = getContext();
-      await expect(
-        setDoc(doc(context.firestore(), `${collectionName}/new-lead`), {
-          email: 'new@example.com',
-        }),
-      ).toAllow();
-    });
-
-    it('allows updating any existing document', async () => {
-      const context = getContext();
-      await expect(
-        updateDoc(doc(context.firestore(), docPath), { email: 'updated@example.com' }),
-      ).toAllow();
-    });
-
-    it('denies deleting a document', async () => {
-      const context = getContext();
-      await expect(deleteDoc(doc(context.firestore(), docPath))).toDeny();
+    it('denies overwriting, updating or deleting a document', async () => {
+      const ref = doc(getContext().firestore(), docPath);
+      await expect(setDoc(ref, valid)).toDeny();
+      await expect(updateDoc(ref, { email: 'eve@example.com' })).toDeny();
+      await expect(deleteDoc(ref)).toDeny();
     });
   });
 });

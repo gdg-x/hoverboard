@@ -8,7 +8,6 @@
 - [Styling](tutorials/03-styling.md)
 - [Deploy](tutorials/04-deploy.md)
 - [Notifications](tutorials/05-notifications.md)
-- [MailChimp auto subscription](tutorials/07-mailchimp-autosubscribe.md)
 - [Firestore utils](tutorials/firebase-utils.md)
 
 ## Maintainers

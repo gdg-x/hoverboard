@@ -2,6 +2,7 @@ import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { primitive, stateLayer } from '../../styles/shared';
+import { safeUrl } from '../../utils/safe-url';
 import { ariaBoolean, linkRel, stopDisabledClicks } from './controls';
 
 export type ButtonVariant = 'filled' | 'cta' | 'tonal' | 'outlined' | 'text';
@@ -167,11 +168,12 @@ export class HbButton extends LitElement {
       <slot name="icon"></slot>
       <span class="label"><slot></slot></span>
     `;
-    if (this.href !== undefined && !this.disabled) {
+    const href = safeUrl(this.href);
+    if (href !== undefined && !this.disabled) {
       return html`
         <a
           class="button state"
-          href="${this.href}"
+          href="${href}"
           target="${ifDefined(this.target)}"
           rel="${ifDefined(linkRel(this.target, this.rel))}"
           >${content}</a

@@ -1,11 +1,9 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
 import { initializeApp } from 'firebase-admin/app';
-import { mailchimpSubscribe } from './triggers/mailchimp-subscribe.js';
 import { sendGeneralNotification } from './triggers/notifications.js';
-import { optimizeImages } from './triggers/optimize-images.js';
 import { scheduleNotifications } from './triggers/schedule-notifications.js';
 
 initializeApp();
 
-export { sendGeneralNotification, scheduleNotifications, optimizeImages, mailchimpSubscribe };
+export { sendGeneralNotification, scheduleNotifications };

@@ -1,6 +1,8 @@
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { footerRelBlock } from '../../config/site';
+import { safeUrl } from '../../utils/safe-url';
 import { ThemedElement } from '../themed-element';
 
 /** The link columns from `footerRelBlock`, such as past editions. */
@@ -49,7 +51,7 @@ export class FooterRel extends ThemedElement {
                 (link) => html`
                   <li>
                     <a
-                      href="${link.url}"
+                      href="${ifDefined(safeUrl(link.url))}"
                       target="${link.newTab ? '_blank' : ''}"
                       rel="${link.newTab ? 'noopener noreferrer' : ''}"
                       >${link.name}</a

@@ -38,11 +38,16 @@ exports.allEndpoints = (backend) =>
 describe('listDeployedFunctions', () => {
   it("lists the project's functions with their region and platform", async () => {
     const repo = makeRepo([
-      { id: 'optimizeImages', region: 'us-central1', platform: 'gcfv2', runtime: 'nodejs22' },
+      {
+        id: 'sendGeneralNotification',
+        region: 'us-central1',
+        platform: 'gcfv2',
+        runtime: 'nodejs22',
+      },
     ]);
 
     await expect(listDeployedFunctions(repo, 'demo-project')).resolves.toEqual([
-      { id: 'optimizeImages', region: 'us-central1', platform: 'gcfv2' },
+      { id: 'sendGeneralNotification', region: 'us-central1', platform: 'gcfv2' },
     ]);
   });
 });

@@ -57,7 +57,7 @@ The diagram below is a brief summary of the directories within the project.
 - `packages/cli/` contains the `hoverboard` developer CLI that helps you work with the project and its data ([docs](./firebase-utils.md)).
 - `packages/config/` is your site's config and content: `site.json`, event text, FAQ, code of conduct and blog posts ([docs](01-configure-app.md)).
 - `packages/server/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) (in `functions/`) used for notifications, optimizations, saving data, etc.
-- `packages/storage/` Firestore, Storage and Realtime Database security rules, Firestore indexes, and their tests.
+- `packages/storage/` Firestore and Storage security rules, Firestore indexes, and their tests.
 - `packages/web/` is the frontend app (own `package.json`/`node_modules`):
   - `defaults/` has the upstream `site.json` defaults that `packages/config` overrides.
   - `dist/` is the directory to deploy to production.

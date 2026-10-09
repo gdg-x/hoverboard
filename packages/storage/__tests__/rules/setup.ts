@@ -6,7 +6,7 @@ import {
 import { doc, setDoc } from 'firebase/firestore';
 import * as fs from 'fs';
 import * as path from 'path';
-import { afterAll, afterEach, beforeAll } from 'vitest';
+import { afterAll, afterEach, beforeAll, inject } from 'vitest';
 
 // Runs once per test *file* (Vitest isolates each file's module graph), which
 // means the ruleset is applied once per suite file via a fast REST call
@@ -16,10 +16,13 @@ import { afterAll, afterEach, beforeAll } from 'vitest';
 let testEnv: RulesTestEnvironment;
 
 const rules = fs.readFileSync(path.join(process.cwd(), 'packages/storage/firestore.rules'), 'utf8');
+const projectId = `rules-spec-${process.pid}-${Date.now()}`;
+// `globalSetup.ts` reads the rules coverage of every project listed here.
+fs.appendFileSync(inject('rulesProjectsFile'), `${projectId}\n`);
 
 beforeAll(async () => {
   testEnv = await initializeTestEnvironment({
-    projectId: `rules-spec-${process.pid}-${Date.now()}`,
+    projectId,
     firestore: {
       rules,
       host: 'localhost',

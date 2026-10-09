@@ -29,7 +29,7 @@ describe('partners rules', () => {
   });
 });
 
-describe('partners/{groupId}/items nested rule', () => {
+describe('partners/{groupId}/items', () => {
   const docPath = 'partners/group-1/items/item-1';
 
   beforeEach(() => seed({ [docPath]: { order: 1 } }));

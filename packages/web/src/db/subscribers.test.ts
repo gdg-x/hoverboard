@@ -1,4 +1,4 @@
-import { doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { saveSubscriber } from './subscribers';
 import { db } from '../firebase';
@@ -10,9 +10,9 @@ describe('db/subscribers', () => {
     vi.clearAllMocks();
   });
 
-  it('saves a subscriber with sanitized email id', async () => {
-    vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined as never);
+  it('saves a subscriber under a random id', async () => {
+    vi.mocked(collection).mockReturnValue('collection-ref' as never);
+    vi.mocked(addDoc).mockResolvedValue({ id: 'random-id' } as never);
 
     const result = await saveSubscriber({
       email: 'ada.lovelace+subscribe@example.com',
@@ -20,8 +20,8 @@ describe('db/subscribers', () => {
       secondFieldValue: 'Lovelace',
     });
 
-    expect(doc).toHaveBeenCalledWith(db, 'subscribers', 'adalovelacesubscribeexamplecom');
-    expect(setDoc).toHaveBeenCalledWith('doc-ref', {
+    expect(collection).toHaveBeenCalledWith(db, 'subscribers');
+    expect(addDoc).toHaveBeenCalledWith('collection-ref', {
       email: 'ada.lovelace+subscribe@example.com',
       firstName: 'Ada',
       lastName: 'Lovelace',
@@ -30,13 +30,13 @@ describe('db/subscribers', () => {
   });
 
   it('uses default empty strings when fields are omitted', async () => {
-    vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined as never);
+    vi.mocked(collection).mockReturnValue('collection-ref' as never);
+    vi.mocked(addDoc).mockResolvedValue({ id: 'random-id' } as never);
 
     const result = await saveSubscriber({ email: 'ada@example.com' });
 
-    expect(doc).toHaveBeenCalledWith(db, 'subscribers', 'adaexamplecom');
-    expect(setDoc).toHaveBeenCalledWith('doc-ref', {
+    expect(collection).toHaveBeenCalledWith(db, 'subscribers');
+    expect(addDoc).toHaveBeenCalledWith('collection-ref', {
       email: 'ada@example.com',
       firstName: '',
       lastName: '',

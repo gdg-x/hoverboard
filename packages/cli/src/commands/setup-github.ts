@@ -21,15 +21,34 @@ export const REQUIRED_APIS = [
   'cloudresourcemanager.googleapis.com',
 ];
 
-// Same roles as the manual setup in docs/tutorials/04-deploy.md.
+// What `firebase deploy`, the preview deploys and the build need, and the manual setup in
+// docs/tutorials/04-deploy.md lists. No Firestore writes, Auth users or Storage objects.
 export const DEPLOY_ROLES = [
-  'roles/firebase.admin',
+  // Releases and preview channels.
+  'roles/firebasehosting.admin',
+  // Firestore and Storage rules.
   'roles/firebaserules.admin',
+  'roles/datastore.indexAdmin',
+  // The build reads the site's content.
+  'roles/datastore.viewer',
+  // The Storage rules deploy looks up the default bucket.
+  'roles/firebasestorage.viewer',
+  // Functions, with their Eventarc triggers and Cloud Run services.
   'roles/cloudfunctions.admin',
+  // The job that runs scheduleNotifications.
+  'roles/cloudscheduler.admin',
+  // firebase-tools checks which APIs are on.
+  'roles/serviceusage.serviceUsageConsumer',
+  // Functions run as the default compute service account.
+  'roles/iam.serviceAccountUser',
+];
+
+/** Roles that earlier versions granted the deploy account. Setup takes them away. */
+export const REMOVED_DEPLOY_ROLES = [
+  'roles/firebase.admin',
   'roles/run.admin',
   'roles/artifactregistry.writer',
   'roles/serviceusage.serviceUsageAdmin',
-  'roles/iam.serviceAccountUser',
 ];
 
 export const REQUIRED_PERMISSIONS = [
@@ -101,6 +120,16 @@ export const addMember = (policy: Policy, role: string, member: string): boolean
   } else {
     bindings.push({ role, members: [member] });
   }
+  return true;
+};
+
+/** Removes `member` from `role` in `policy`. Returns false when it wasn't there. */
+export const removeMember = (policy: Policy, role: string, member: string): boolean => {
+  const binding = policy.bindings?.find((entry) => entry.role === role && !entry.condition);
+  if (!binding?.members?.includes(member)) return false;
+  binding.members = binding.members.filter((entry) => entry !== member);
+  if (!binding.members.length)
+    policy.bindings = policy.bindings?.filter((entry) => entry !== binding);
   return true;
 };
 
@@ -224,11 +253,16 @@ export const setupGitHub = async ({
     `${CRM}/projects/${projectId}:getIamPolicy`,
     { options: { requestedPolicyVersion: 3 } },
   );
-  const addedRoles = DEPLOY_ROLES.filter((role) =>
-    addMember(projectPolicy, role, `serviceAccount:${email}`),
+  const member = `serviceAccount:${email}`;
+  const addedRoles = DEPLOY_ROLES.filter((role) => addMember(projectPolicy, role, member));
+  const removedRoles = REMOVED_DEPLOY_ROLES.filter((role) =>
+    removeMember(projectPolicy, role, member),
   );
-  if (addedRoles.length) {
-    change(`grant ${addedRoles.join(', ')} to ${email}`);
+  if (addedRoles.length) change(`grant ${addedRoles.join(', ')} to ${email}`);
+  if (removedRoles.length) {
+    change(`remove ${removedRoles.join(', ')} from ${email}, which deploys no longer need`);
+  }
+  if (addedRoles.length || removedRoles.length) {
     if (!dryRun) {
       await retry(() =>
         cloud.request('POST', `${CRM}/projects/${projectId}:setIamPolicy`, {

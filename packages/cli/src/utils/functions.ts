@@ -5,12 +5,7 @@ import { functionsEnabled } from './site-features.js';
 const name = 'Cloud Functions';
 
 /** The functions that packages/server/functions exports. Every one always deploys. */
-export const EXPECTED_FUNCTIONS = [
-  'mailchimpSubscribe',
-  'optimizeImages',
-  'scheduleNotifications',
-  'sendGeneralNotification',
-];
+export const EXPECTED_FUNCTIONS = ['scheduleNotifications', 'sendGeneralNotification'];
 
 const list = (names: string[]) => names.join(', ');
 const is = (names: unknown[]) => (names.length === 1 ? 'is' : 'are');

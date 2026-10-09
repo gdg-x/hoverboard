@@ -62,7 +62,7 @@ describe('validateContent', () => {
   });
 
   it('passes documents outside the content collections', () => {
-    expect(() => validateContent('config', 'mailchimp', { apikey: '' })).not.toThrow();
+    expect(() => validateContent('config', 'notifications', { icon: '' })).not.toThrow();
     expect(() => validateContent('featuredSessions', 'user', { 101: true })).not.toThrow();
   });
 

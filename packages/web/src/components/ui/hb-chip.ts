@@ -1,6 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { primitive, stateLayer } from '../../styles/shared';
+import { safeUrl } from '../../utils/safe-url';
 
 /**
  * A small pill: a label, a link with `href`, or a filter button with `filter` that shows
@@ -124,8 +125,9 @@ export class HbChip extends LitElement {
 
   override render() {
     const content = html`<slot name="icon"></slot><slot></slot>`;
-    if (this.href !== undefined) {
-      return html`<a class="chip state" href="${this.href}">${content}</a>`;
+    const href = safeUrl(this.href);
+    if (href !== undefined) {
+      return html`<a class="chip state" href="${href}">${content}</a>`;
     }
     if (this.filter) {
       return html`

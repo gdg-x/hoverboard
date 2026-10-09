@@ -39,6 +39,7 @@
     },
     "image": {
       "description": "The image shown when the site is shared. A path in packages/web/public, or a full URL.",
+      "$ref": "#/$defs/link",
       "type": "string",
       "minLength": 1
     },
@@ -288,6 +289,27 @@
         }
       }
     },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "csp": {
+          "description": "Sources to add to the site's Content-Security-Policy, by directive. The browser blocks scripts, frames and other resources from origins the policy doesn't list, such as a widget you add to the site.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "script-src": { "$ref": "#/$defs/cspSources" },
+            "style-src": { "$ref": "#/$defs/cspSources" },
+            "connect-src": { "$ref": "#/$defs/cspSources" },
+            "img-src": { "$ref": "#/$defs/cspSources" },
+            "font-src": { "$ref": "#/$defs/cspSources" },
+            "frame-src": { "$ref": "#/$defs/cspSources" },
+            "media-src": { "$ref": "#/$defs/cspSources" },
+            "worker-src": { "$ref": "#/$defs/cspSources" }
+          }
+        }
+      }
+    },
     "locales": {
       "description": "The languages of the site. Each one other than en needs UI translations in packages/translations.",
       "type": "object",
@@ -342,7 +364,7 @@
               "properties": {
                 "image": {
                   "description": "A photo behind the hero text, in packages/web/public or a URL. The hero darkens it so the text stays readable.",
-                  "type": "string"
+                  "$ref": "#/$defs/link"
                 }
               }
             },
@@ -380,16 +402,10 @@
           "type": "boolean"
         },
         "functions": {
-          "description": "Deploys the Cloud Functions, which need the Blaze plan. Off, the site can run on the free Spark plan, without notifications, image optimization and Mailchimp.",
+          "description": "Deploys the Cloud Functions, which need the Blaze plan. Off, the site can run on the free Spark plan, without notifications.",
           "type": "boolean"
         },
         "gallery": {
-          "type": "boolean"
-        },
-        "imageOptimization": {
-          "type": "boolean"
-        },
-        "mailchimp": {
           "type": "boolean"
         },
         "map": {
@@ -432,6 +448,11 @@
     "url": {
       "type": "string",
       "pattern": "^https?://"
+    },
+    "link": {
+      "description": "An http, https or mailto URL, or a path on the site. Other schemes, such as `javascript:`, could run code when clicked.",
+      "type": "string",
+      "pattern": "^(?![\\s\\u0000-\\u001f])(?!.*[\\t\\n\\r])(?:https?://|mailto:|(?![A-Za-z][A-Za-z0-9+.-]*:)(?!//))"
     },
     "date": {
       "description": "An ISO date, for example 2027-10-15.",
@@ -562,6 +583,15 @@
       },
       "additionalProperties": {
         "$ref": "#/$defs/color"
+      }
+    },
+    "cspSources": {
+      "description": "CSP sources, such as https://widget.example.com or https://*.example.com.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[^\\s;,\"]+$"
       }
     }
   }

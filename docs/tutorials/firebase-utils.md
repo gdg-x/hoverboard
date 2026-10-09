@@ -58,7 +58,7 @@ Import the JSON fixtures in `docs/default-firebase-data.json` into the running F
 
 [Optional] Edit `docs/default-firebase-data.json` first to load your own data.
 
-It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` and `speakers` both off it skips `sessions`. The `config/mailchimp` and `config/notifications` documents need their features.
+It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` and `speakers` both off it skips `sessions`. The `config/notifications` document needs `notifications`.
 
 ## Export emulator data to prefill files
 
@@ -69,6 +69,14 @@ Once your emulator has the data you want (whether from `firestore-init`, the Emu
 ```
 
 Starting the emulators (via `npm start` or `./hb emulators`) also automatically exports to `.firebase/emulator-data` on a clean exit (`Ctrl+C`), so your data persists across restarts without running this manually.
+
+## Export a collection as CSV
+
+```console
+    FIRESTORE_TARGET=production ./hb firestore-csv subscribers
+```
+
+Writes `subscribers.csv`, with one row per document: an `id` column, then every field. Pass a file name after the collection to write somewhere else. Without `FIRESTORE_TARGET=production`, it reads the emulator. Text that starts with `=`, `+`, `-` or `@` gets a `'` in front, so a spreadsheet shows it instead of running it as a formula. Git ignores `.csv` files, since these hold personal data.
 
 ## Save collection/doc to file
 

@@ -95,6 +95,8 @@ Change a font with `theme.fonts.display`, `body` or `mono`. Hoverboard assumes y
 
 `scale` multiplies the heading sizes, from 0.75 to 1.25, for very wide or narrow fonts.
 
+The site's [Content Security Policy](01-configure-app.md#content-security-policy) allows the stylesheet's address, and `fonts.gstatic.com` for Google Fonts. If a service serves its font files from another address, add it to `security.csp.font-src`.
+
 For font files, the build adds a fallback font with the same size, so the text does not move when the font loads. It warns when a role's files are over 150KB, and when the font has no glyphs for characters in the event name and title (verify with a font of your own).
 
 ## Tags and badges

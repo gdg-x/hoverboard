@@ -38,8 +38,6 @@
     "forkMe": false,
     "functions": true,
     "gallery": true,
-    "imageOptimization": true,
-    "mailchimp": true,
     "map": true,
     "mySchedule": true,
     "notifications": true,

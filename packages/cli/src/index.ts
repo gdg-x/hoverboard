@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
+import { runAuditDeps } from './commands/audit-deps.js';
 import { runConvertSchedule } from './commands/convert-schedule/index.js';
 import { runDoctor } from './commands/doctor.js';
 import { runDeploy } from './commands/deploy.js';
 import { runEmulators } from './commands/emulators.js';
 import { runFirestoreCopy } from './commands/firestore-copy/index.js';
+import { runFirestoreCsv } from './commands/firestore-csv.js';
 import { runFirestoreExport } from './commands/firestore-export.js';
 import { runFirestoreInit } from './commands/firestore-init/index.js';
 import { type InitOptions, runInit } from './commands/init/index.js';
@@ -104,6 +106,15 @@ program
   });
 
 program
+  .command('audit-deps')
+  .description(
+    'Fail on high or critical advisories in production dependencies, except the accepted ones.',
+  )
+  .action(() => {
+    process.exitCode = runAuditDeps() ? 0 : 1;
+  });
+
+program
   .command('firestore-init')
   .description(
     'Seed the Firestore project from docs/default-firebase-data.json (targets the local ' +
@@ -132,6 +143,23 @@ program
       console.log('Success! 🔥');
     } catch (error) {
       console.log('Error! 💩', error);
+      process.exitCode = 1;
+    }
+  });
+
+program
+  .command('firestore-csv')
+  .argument('<collection>', 'The collection, for example subscribers or potentialPartners.')
+  .argument('[file]', 'The CSV file to write. Defaults to <collection>.csv.')
+  .description(
+    'Export a Firestore collection as CSV, with one row per document (targets the local ' +
+      'emulator unless FIRESTORE_TARGET=production is set).',
+  )
+  .action(async (collection: string, file?: string) => {
+    try {
+      await runFirestoreCsv(collection, file);
+    } catch (error) {
+      console.log(error);
       process.exitCode = 1;
     }
   });

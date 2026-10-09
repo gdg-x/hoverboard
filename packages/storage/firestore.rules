@@ -1,213 +1,129 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    function validRating() {
-      return request.resource.data.contentRating >= 0 && request.resource.data.contentRating <= 5 &&
-        request.resource.data.styleRating >= 0 && request.resource.data.styleRating <= 5
-        && request.resource.data.comment.size() <= 256;
+    // Anything without a rule below, such as `config`, is only read and written with the Admin SDK.
+
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
     }
 
+    function hasExactly(keys) {
+      return request.resource.data.keys().hasAll(keys)
+        && request.resource.data.keys().hasOnly(keys);
+    }
+
+    function isText(value, maxSize) {
+      return value is string && value.size() <= maxSize;
+    }
+
+    function isEmail(value) {
+      return isText(value, 254) && value.matches('^[^@ ]+@[^@ ]+[.][^@ ]+$');
+    }
+
+    function isRating(value) {
+      return value is number && value >= 0 && value <= 5;
+    }
+
+    // Event content: anyone can read it, and only organizers write it.
     match /blog/{post} {
-      // Applies to single document read requests
-      allow get;
-
-      // Applies to queries and collection read requests
-      allow list;
-
-      // Disallow writes
-      allow write: if false;
-    }
-
-    match /config/{config} {
-      allow read, write: if false; // allow each section separately
-    }
-
-    match /featuredSessions/{userId} {
-      allow read, write: if request.auth.uid == userId;
+      allow read;
     }
 
     match /gallery/{photo} {
-      // Applies to single document read requests
-      allow get;
-
-      // Applies to queries and collection read requests
-      allow list;
-
-      // Disallow writes
-      allow write: if false;
-    }
-
-    match /notificationsSubscribers/{token} {
-      allow list: if false;
-
-      // Applies to document create requests
-      allow create;
-      allow update;
-      allow delete;
-      allow get;
-    }
-
-    match /notificationsUsers/{userId} {
-      allow read, write: if request.auth.uid == userId;
+      allow read;
     }
 
     match /partners/{groupId} {
-      // Applies to single document read requests
-      allow get;
-
-      // Applies to queries and collection read requests
-      allow list;
-
-      // Disallow writes
-      allow write: if false;
-
-      // TODO: Remove
-      match /items/{itemId} {
-        // Applies to single document read requests
-        allow get;
-
-        // Applies to queries and collection read requests
-        allow list;
-
-        // Disallow writes
-        allow write: if false;
-      }
-    }
-
-    match /{path=**}/items/{itemId} {
       allow read;
-      allow write: if false;
-    }
-
-    match /potentialPartners/{partnerId} {
-      allow delete: if false;
-
-      allow get;
-      allow list: if false;
-
-      // Applies to document create requests
-      allow create, update;
     }
 
     match /previousSpeakers/{speaker} {
-      // Applies to single document read requests
-      allow get;
-
-      // Applies to queries and collection read requests
-      allow list;
-
-      // Disallow writes
-      allow write: if false;
-    }
-
-    match /sessions/{session} {
-      // Applies to single document read requests
-      allow get;
-
-      // Applies to queries and collection read requests
-      allow list;
-
-      // Disallow writes
-      allow write: if false;
-
-      // TODO: remove
-      match /feedback/{userId} {
-        allow read, delete: if request.auth.uid == userId;
-        allow write: if request.auth.uid == userId && validRating();
-      }
-    }
-
-    match /{path=**}/feedback/{userId} {
-      allow read, delete: if request.auth.uid == userId;
-      allow list: if request.auth.uid == resource.data.userId;
-      allow write: if request.auth.uid == userId && resource.data.userId == userId && validRating();
+      allow read;
     }
 
     match /speakers/{speaker} {
-      // Applies to single document read requests
-      allow get;
-
-      // Applies to queries and collection read requests
-      allow list;
-
-      // Disallow writes
-      allow write: if false;
-    }
-
-    match /subscribers/{subscriberId} {
-      allow delete: if false;
-
-      allow get;
-      allow list: if false;
-
-      // Applies to document create requests
-      allow create, update;
+      allow read;
     }
 
     match /team/{teamId} {
-      // Applies to single document read requests
-      allow get;
-
-      // Applies to queries and collection read requests
-      allow list;
-
-      // Disallow writes
-      allow write: if false;
-
-      // TODO: remove
-      match /members/{memberId} {
-        // Applies to single document read requests
-        allow get;
-
-        // Applies to queries and collection read requests
-        allow list;
-
-        // Disallow writes
-        allow write: if false;
-      }
-    }
-
-    match /{path=**}/members/{memberId} {
-      // Applies to single document read requests
-      allow get;
-
-      // Applies to queries and collection read requests
-      allow list;
-
-      // Disallow writes
-      allow write: if false;
+      allow read;
     }
 
     match /tickets/{ticket} {
-      // Applies to single document read requests
-      allow get;
-
-      // Applies to queries and collection read requests
-      allow list;
-
-      // Disallow writes
-      allow write: if false;
-    }
-
-    // TODO: Remove along with data
-    match /users/{userId} {
-      allow list: if false;
-
-      allow get: if request.auth.uid == userId;
-
-      allow create, delete: if false;
-      allow update: if request.auth.uid == userId;
+      allow read;
     }
 
     match /videos/{video} {
-      // Applies to single document read requests
-      allow get;
+      allow read;
+    }
 
-      // Applies to queries and collection read requests
-      allow list;
+    // Partners and team members are read with collection group queries, which can't be limited
+    // to one parent, so no other collection may use these names.
+    match /{path=**}/items/{itemId} {
+      allow read;
+    }
 
-      // Disallow writes
-      allow write: if false;
+    match /{path=**}/members/{memberId} {
+      allow read;
+    }
+
+    match /sessions/{session} {
+      allow read;
+
+      // A signed-in user's rating of a session, keyed by their user ID.
+      match /feedback/{userId} {
+        allow get, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && exists(/databases/$(database)/documents/sessions/$(session))
+          && hasExactly(['contentRating', 'styleRating', 'comment', 'userId'])
+          && request.resource.data.userId == userId
+          && isRating(request.resource.data.contentRating)
+          && isRating(request.resource.data.styleRating)
+          && isText(request.resource.data.comment, 256);
+      }
+    }
+
+    // "My feedback" queries every session's feedback by `userId`.
+    match /{path=**}/feedback/{userId} {
+      allow list: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+
+    // Bookmarked sessions: a map of session IDs to booleans.
+    match /featuredSessions/{userId} {
+      allow get, delete: if isOwner(userId);
+      allow create, update: if isOwner(userId) && request.resource.data.size() <= 500;
+    }
+
+    // The push tokens of a signed-in user's devices, for session reminders.
+    match /notificationsUsers/{userId} {
+      allow get, delete: if isOwner(userId);
+      allow create, update: if isOwner(userId)
+        && hasExactly(['tokens'])
+        && request.resource.data.tokens is map
+        && request.resource.data.tokens.size() <= 20;
+    }
+
+    // Push tokens for general notifications, keyed by the token, which only its device knows.
+    match /notificationsSubscribers/{token} {
+      allow get, delete;
+      allow create, update: if hasExactly(['value', 'updatedAt'])
+        && request.resource.data.value == true
+        && request.resource.data.updatedAt is timestamp;
+    }
+
+    // Forms anyone can send. Nobody can read them back.
+    match /subscribers/{subscriberId} {
+      allow create: if hasExactly(['email', 'firstName', 'lastName'])
+        && isEmail(request.resource.data.email)
+        && isText(request.resource.data.firstName, 100)
+        && isText(request.resource.data.lastName, 100);
+    }
+
+    match /potentialPartners/{partnerId} {
+      allow create: if hasExactly(['email', 'fullName', 'companyName'])
+        && isEmail(request.resource.data.email)
+        && isText(request.resource.data.fullName, 100)
+        && isText(request.resource.data.companyName, 100);
     }
   }
 }

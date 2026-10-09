@@ -259,6 +259,59 @@ describe('config validation', () => {
     ).toEqual(['site.json/heroSettings/home/illustration: must match pattern "\\.svg$"']);
   });
 
+  it('rejects a hero illustration with content that could run on the site', () => {
+    const publicDir = mkdtempSync(join(tmpdir(), 'hoverboard-public-'));
+    dirsToClean.push(publicDir);
+    writeFileSync(
+      join(publicDir, 'city.svg'),
+      '<svg xmlns="http://www.w3.org/2000/svg" onload="alert(1)"><script>alert(1)</script></svg>',
+    );
+    const paths = {
+      ...makePaths({ site: { heroSettings: { home: { illustration: '/city.svg' } } } }),
+      public: publicDir,
+    };
+
+    expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toContain(
+      'site.json/heroSettings/home/illustration: "/city.svg" has content that could run on the site, which the build would remove: onload on <svg>, <script>',
+    );
+  });
+
+  it('accepts CSP sources and rejects ones that would add a directive', () => {
+    expect(
+      errorsFor({ site: { security: { csp: { 'frame-src': ['https://widget.example.com'] } } } }),
+    ).toEqual([]);
+    expect(
+      errorsFor({
+        site: {
+          security: { csp: { 'script-src': ["'self'; frame-ancestors *"], 'base-uri': [] } },
+        },
+      }),
+    ).toEqual([
+      'site.json/security/csp: must NOT have additional properties "base-uri"',
+      expect.stringMatching(/^site\.json\/security\/csp\/script-src\/0: must match pattern/),
+    ]);
+  });
+
+  it('rejects links that could run code', () => {
+    expect(
+      errorsFor({
+        resources: {
+          galleryBlock: { callToAction: { link: 'javascript:alert(1)' } },
+          footerRelBlock: [
+            { title: 'Links', links: [{ name: 'x', url: ' javascript:alert(1)', newTab: false }] },
+          ],
+        },
+      }),
+    ).toEqual([
+      expect.stringMatching(
+        /^content\/resources\.json\/galleryBlock\/callToAction\/link: must match pattern/,
+      ),
+      expect.stringMatching(
+        /^content\/resources\.json\/footerRelBlock\/0\/links\/0\/url: must match pattern/,
+      ),
+    ]);
+  });
+
   it('checks the hero text over a photo against the scrim', () => {
     const photo = {
       heroSettings: { home: { background: { image: '/images/backgrounds/home.jpg' } } },
@@ -620,6 +673,19 @@ describe('heroIllustrationSvg', () => {
 
   it('is undefined without an illustration', () => {
     expect(heroIllustrationSvg(siteWith())).toBeUndefined();
+  });
+
+  it('removes scripts and event handlers', () => {
+    const publicDir = mkdtempSync(join(tmpdir(), 'hoverboard-public-'));
+    dirsToClean.push(publicDir);
+    writeFileSync(
+      join(publicDir, 'city.svg'),
+      '<svg viewBox="0 0 1 1" onload="alert(1)"><script>alert(1)</script><path d="M0 0"/></svg>',
+    );
+
+    expect(heroIllustrationSvg(siteWith('/city.svg'), publicDir)).toBe(
+      '<svg viewBox="0 0 1 1"><path d="M0 0"></path></svg>',
+    );
   });
 });
 

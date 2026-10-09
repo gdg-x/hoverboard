@@ -3,7 +3,6 @@ import data from '../../../../../docs/default-firebase-data.json';
 
 // Config documents that only a function of these features reads. The others are always seeded.
 const DOC_FEATURES: Record<string, string[]> = {
-  mailchimp: ['mailchimp'],
   notifications: ['notifications'],
 };
 

@@ -2,6 +2,7 @@ import { cpSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { buildSite, type SiteBuild } from '../__tests__/helpers/build-site';
+import { inlineScripts, scriptHash } from './csp';
 
 const fixture = fileURLToPath(new URL('../__tests__/fixtures/minimal-site', import.meta.url));
 
@@ -126,5 +127,37 @@ describe('a production build of a minimal site', () => {
   it('leaves out the pages and blocks of features that are off', () => {
     expect(build.chunks).toEqual(expect.arrayContaining(['footer-block', 'not-found-page']));
     expect(build.chunks.filter((name) => DROPPED_CHUNKS.includes(name))).toEqual([]);
+  });
+
+  it('gives every page a CSP that allows its inline scripts and nothing else inline', () => {
+    const policies = build.pages.map((file) => {
+      const html = build.read(file);
+      const policy =
+        /^<!DOCTYPE html><html[^>]*><head><base [^>]*><meta charset="utf-8"><meta http-equiv="content-security-policy" content="([^"]+)">/.exec(
+          html,
+        )?.[1] ?? '';
+      const scriptSrc = policy.split('; ').find((directive) => directive.startsWith('script-src '));
+
+      expect(scriptSrc, file).toBeDefined();
+      expect(scriptSrc, file).not.toMatch(/'unsafe-(inline|eval)'/);
+      for (const { content } of inlineScripts(html))
+        expect(scriptSrc, file).toContain(scriptHash(content));
+      // The policy blocks event handler attributes.
+      expect(html, file).not.toMatch(/<[^>]+\son[a-z]+=/);
+      return policy;
+    });
+
+    expect(new Set(policies).size).toBe(1);
+    expect(policies[0]?.split('; ').map((directive) => directive.split(' ')[0])).toEqual([
+      'default-src',
+      'script-src',
+      'style-src',
+      'connect-src',
+      'img-src',
+      'font-src',
+      'frame-src',
+      'worker-src',
+      'manifest-src',
+    ]);
   });
 });

@@ -29,20 +29,32 @@
         "source": "**",
         "headers": [
           {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=31536000"
+          },
+          {
             "key": "X-Content-Type-Options",
             "value": "nosniff"
           },
           {
             "key": "X-Frame-Options",
-            "value": "sameorigin"
-          },
-          {
-            "key": "X-XSS-Protection",
-            "value": "1; mode=block"
+            "value": "SAMEORIGIN"
           },
           {
             "key": "Referrer-Policy",
-            "value": "same-origin"
+            "value": "strict-origin-when-cross-origin"
+          },
+          {
+            "key": "Permissions-Policy",
+            "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+          },
+          {
+            "key": "Cross-Origin-Opener-Policy",
+            "value": "same-origin-allow-popups"
+          },
+          {
+            "key": "Content-Security-Policy",
+            "value": "frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
           }
         ]
       },
@@ -80,14 +92,8 @@
     "auth": {
       "port": 9099
     },
-    "database": {
-      "port": 9000
-    },
     "storage": {
       "port": 9199
     }
-  },
-  "database": {
-    "rules": "packages/storage/database.rules.json"
   }
 }
