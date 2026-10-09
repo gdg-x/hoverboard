@@ -131,7 +131,8 @@ export class AppHeader extends ThemedElement {
     }
 
     @container (width >= 900px) {
-      .menu-button {
+      .menu-button,
+      .actions .cta.in-nav {
         display: none;
       }
     }
@@ -252,7 +253,7 @@ export class AppHeader extends ThemedElement {
         @close="${this.closeMenu}"
       >
         <nav aria-label="${label}" @click="${this.closeMenu}">${this.renderLinks()}</nav>
-        ${this.renderCallToAction()}
+        ${this.renderCallToAction({ inSheet: true })}
         <app-install></app-install>
       </hb-dialog>
     `;
@@ -277,8 +278,8 @@ export class AppHeader extends ThemedElement {
     `;
   }
 
-  // Tickets until the event is over, otherwise the schedule.
-  private renderCallToAction() {
+  // Tickets until the event is over, otherwise the schedule, unless the navigation links to it.
+  private renderCallToAction({ inSheet = false } = {}) {
     if (__HB_FEATURES__.tickets && this.eventState !== 'over' && this.ticketUrl) {
       return html`
         <hb-button class="cta" variant="cta" href="${this.ticketUrl}" target="_blank">
@@ -286,8 +287,10 @@ export class AppHeader extends ThemedElement {
         </hb-button>
       `;
     }
-    if (__HB_FEATURES__.schedule) {
-      return html`<hb-button class="cta" variant="cta" href="/schedule"
+    const inNav = navigation.some((nav) => nav.route === 'schedule');
+    if (__HB_FEATURES__.schedule && !(inNav && inSheet)) {
+      // The bar keeps it on narrow screens, where the navigation is behind the menu button.
+      return html`<hb-button class="cta ${inNav ? 'in-nav' : ''}" variant="cta" href="/schedule"
         >${navigationLabel('schedule')}</hb-button
       >`;
     }

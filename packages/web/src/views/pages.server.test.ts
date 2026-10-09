@@ -144,6 +144,8 @@ describe('pages on the server', () => {
 
     expect(upcoming).toMatch(/<a\s+href="\/speakers"\s+aria-current="page"/);
     expect(upcoming).toMatch(/<hb-button[^>]*class="cta"[^>]*href="https:\/\/example\.com\/t"/);
-    expect(over).toMatch(/<hb-button[^>]*class="cta"[^>]*href="\/schedule"/);
+    const overCallToAction = over.match(/<hb-button[^>]*variant="cta"[^>]*>/)?.[0];
+    expect(overCallToAction).toContain('href="/schedule"');
+    expect(overCallToAction).toContain('class="cta in-nav"');
   });
 });

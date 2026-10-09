@@ -126,6 +126,15 @@ describe('app-header', () => {
     expect(noCallToAction()).toBeNull();
   });
 
+  it('links to the schedule once in the bar and the sheet when the navigation has it', async () => {
+    setFeatures({ tickets: false });
+    const { callToAction, sheet } = await render();
+
+    // Hidden by a container query wherever the navigation shows.
+    expect(callToAction()).toHaveClass('in-nav');
+    expect(within(sheet).getAllByRole('link', { name: 'Schedule' })).toHaveLength(1);
+  });
+
   it('shows the account menu only when a feature needs sign-in', async () => {
     const { shadowRoot } = await render();
     expect(shadowRoot.querySelector('account-menu')).toBeInTheDocument();
