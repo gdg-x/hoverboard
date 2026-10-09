@@ -1,11 +1,9 @@
-import { type MockedFunction, describe, expect, it, vi } from 'vitest';
-import { fireEvent } from '@testing-library/dom';
-import { html } from 'lit';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { html, nothing, render } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
-import { openVideoDialog } from '../store/ui';
-import { aboutBlock, heroDescriptions, location } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
+import { scrollToElement } from '../utils/scrolling';
 import './home-page';
 import { HomePage } from './home-page';
 
@@ -15,34 +13,67 @@ vi.mock('../utils/scrolling', () => ({
   scrollToElement: vi.fn(),
   POSITION: { TOP: 'top', BOTTOM: 'bottom' },
 }));
-vi.mock('../store/ui', async (importOriginal) => ({
-  __esModule: true,
-  ...(await importOriginal<typeof import('../store/ui')>()),
-  openVideoDialog: vi.fn(),
-  setHeroSettings: vi.fn(),
-}));
+
+const BANDS = [
+  'about-block',
+  'speakers-block',
+  'tickets-block',
+  'gallery-block',
+  'about-organizer-block',
+  'featured-videos',
+  'latest-posts-block',
+  'map-block',
+  'partners-block',
+];
+
+const tones = (root: ShadowRoot) =>
+  [...root.querySelectorAll('.band')].map((band) => band.getAttribute('data-tone'));
 
 describe('home-page', () => {
+  afterEach(() => {
+    render(nothing, document.body);
+  });
+
   it('defines a component', () => {
     expect(customElements.get('home-page')).toBeDefined();
   });
 
-  it('renders the blocks of every enabled feature', async () => {
+  it('renders the hero, then the blocks of every enabled feature', async () => {
     const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
 
-    for (const block of [
-      'speakers-block',
-      'subscribe-block',
-      'tickets-block',
-      'gallery-block',
-      'featured-videos',
-      'latest-posts-block',
-      'map-block',
-      'partners-block',
-    ]) {
+    expect(shadowRoot.firstElementChild).toHaveProperty('localName', 'home-hero');
+    for (const block of [...BANDS, 'subscribe-block']) {
       expect(shadowRoot.querySelector(block)).not.toBeNull();
     }
-    expect(shadowRoot.querySelector('.buy-ticket')).not.toBeNull();
+  });
+
+  it('alternates the band colors over the blocks it shows, and keeps subscribe bright', async () => {
+    const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
+
+    expect([...shadowRoot.querySelectorAll('.band')].map(({ localName }) => localName)).toEqual(
+      BANDS,
+    );
+    expect(tones(shadowRoot)).toEqual([
+      'surface',
+      'accent-4',
+      'surface',
+      'accent-2',
+      'surface',
+      'accent-1',
+      'surface',
+      'accent-4',
+      'surface',
+    ]);
+    expect(shadowRoot.querySelector('subscribe-block')).not.toHaveClass('band');
+  });
+
+  it('keeps alternating when features are off', async () => {
+    setFeatures({ speakers: false, gallery: false });
+
+    const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
+
+    expect(tones(shadowRoot).slice(0, 3)).toEqual(['surface', 'accent-4', 'surface']);
+    expect(shadowRoot.querySelector('tickets-block')).toHaveAttribute('data-tone', 'accent-4');
   });
 
   it('leaves out the blocks of disabled features', async () => {
@@ -51,51 +82,38 @@ describe('home-page', () => {
     const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
 
     expect(shadowRoot.querySelector('tickets-block')).toBeNull();
-    expect(shadowRoot.querySelector('.buy-ticket')).toBeNull();
     expect(shadowRoot.querySelector('speakers-block')).toBeNull();
     expect(shadowRoot.querySelector('latest-posts-block')).toBeNull();
     expect(shadowRoot.querySelector('about-block')).not.toBeNull();
     expect(shadowRoot.querySelector('gallery-block')).not.toBeNull();
   });
 
-  it('does not render fork-me-block when the feature is off', async () => {
-    setFeatures({ forkMe: false });
+  it('passes the build-time event state to the hero', async () => {
+    const { shadowRoot } = await fixture<HomePage>(
+      html`<home-page event-state="live" days-to-go="0"></home-page>`,
+    );
 
+    expect(shadowRoot.querySelector('home-hero')).toHaveAttribute('event-state', 'live');
+  });
+
+  it('scrolls to the tickets when the hero asks', async () => {
     const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
 
-    expect(shadowRoot.querySelector('fork-me-block')).toBeNull();
+    shadowRoot
+      .querySelector('home-hero')!
+      .dispatchEvent(new CustomEvent('show-tickets', { bubbles: true, composed: true }));
+
+    await vi.waitFor(() =>
+      expect(scrollToElement).toHaveBeenCalledWith(shadowRoot.querySelector('#tickets')),
+    );
   });
 
   it('updates metadata on connect', async () => {
     const mockUpdateMetadata = vi.mocked(updateMetadata);
     mockUpdateMetadata.mockClear();
 
-    const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
+    await fixture<HomePage>(html`<home-page></home-page>`);
 
     expect(mockUpdateMetadata).toHaveBeenCalled();
-    expect(shadowRoot).toHaveTextContent(location.city);
-    expect(shadowRoot).toHaveTextContent('October 13 – 14, 2017');
-    expect(shadowRoot).toHaveTextContent(heroDescriptions.home);
-  });
-
-  it('renders fork-me-block when the feature is on', async () => {
-    setFeatures({ forkMe: true });
-
-    const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
-
-    expect(shadowRoot.querySelector('fork-me-block')).not.toBeNull();
-  });
-
-  it('opens the video dialog when the watch video button is clicked', async () => {
-    const mockOpenVideoDialog = openVideoDialog as MockedFunction<typeof openVideoDialog>;
-    mockOpenVideoDialog.mockClear();
-
-    const { shadowRoot } = await fixture<HomePage>(html`<home-page></home-page>`);
-    fireEvent.click(shadowRoot.querySelector('.watch-video') as Element);
-
-    expect(mockOpenVideoDialog).toHaveBeenCalledWith({
-      title: aboutBlock.callToAction.howItWas.label,
-      youtubeId: aboutBlock.callToAction.howItWas.youtubeId,
-    });
   });
 });

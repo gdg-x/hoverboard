@@ -11,12 +11,17 @@ const languageName = (locale: string) =>
 @customElement('locale-picker')
 export class LocalePicker extends ThemedElement {
   static override styles = css`
+    /* No box, so a site with one locale has no empty space next to the appearance toggle. */
+    :host {
+      display: contents;
+    }
+
     select {
       padding: 4px 8px;
       font: inherit;
       color: inherit;
       background: transparent;
-      border: 1px solid var(--divider-color);
+      border: 1px solid var(--hb-color-outline-variant);
       border-radius: 4px;
     }
   `;

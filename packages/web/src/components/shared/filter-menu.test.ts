@@ -1,8 +1,9 @@
-import { describe, expect, it, vi } from 'vitest';
-import { html } from 'lit';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import * as filterUtils from '../../utils/filters';
+import type { HbChip } from '../ui/hb-chip';
 import type { FilterMenu } from './filter-menu';
 import './filter-menu';
 
@@ -19,93 +20,82 @@ const filterGroups: FilterGroup[] = [
       { group: FilterGroupKey.tags, tag: 'Web' },
     ],
   },
-  { key: FilterGroupKey.complexity, filters: [] },
+  {
+    key: FilterGroupKey.complexity,
+    filters: [{ group: FilterGroupKey.complexity, tag: 'Beginner' }],
+  },
 ];
 
+const render = async (props: Partial<FilterMenu> = {}) => {
+  const result = await fixture<FilterMenu>(html`<filter-menu></filter-menu>`);
+  Object.assign(result.element, { filterGroups, ...props });
+  await result.element.updateComplete;
+  return result;
+};
+
 describe('filter-menu', () => {
-  it('defines a component', () => {
-    expect(customElements.get('filter-menu')).toBeDefined();
+  afterEach(() => {
+    litRender(nothing, document.body);
+    vi.mocked(filterUtils.toggleFilter).mockClear();
   });
 
-  it('renders a tag for every filter in every group', async () => {
-    const { element, shadowRoot } = await fixture<FilterMenu>(html`<filter-menu></filter-menu>`);
-    element.filterGroups = filterGroups;
+  it('shows the filter chips by group when the Filters button is pressed', async () => {
+    const { element, shadowRoot } = await render();
+    const button = shadowRoot.querySelector('hb-button')!;
+    const panel = shadowRoot.querySelector('.panel')!;
+
+    expect(button.expanded).toBe(false);
+    expect(panel).toHaveAttribute('hidden');
+
+    button.click();
     await element.updateComplete;
 
-    const titles = shadowRoot.querySelectorAll('.filter-title');
-    expect(titles[0]).toHaveTextContent('Tags');
-    expect(titles[1]).toHaveTextContent('Complexity');
-    const tags = shadowRoot.querySelectorAll('.filters-board .tag');
-    expect(tags).toHaveLength(2);
-    expect(tags[0]).toHaveTextContent('Android');
-    expect(tags[0]).toHaveAttribute('filter-key', 'tags');
-    expect(tags[0]).toHaveAttribute('filter-value', 'Android');
+    expect(button.expanded).toBe(true);
+    expect(panel).not.toHaveAttribute('hidden');
+    const titles = [...shadowRoot.querySelectorAll('.group-title')].map((title) =>
+      title.textContent?.trim(),
+    );
+    expect(titles).toEqual(['Tags', 'Complexity']);
+    const chips = panel.querySelectorAll('hb-chip');
+    expect([...chips].map((chip) => chip.textContent?.trim())).toEqual([
+      'Android',
+      'Web',
+      'Beginner',
+    ]);
+    expect(chips[0]).toHaveAttribute('filter');
   });
 
-  it('marks selected filters in the board', async () => {
-    const { element, shadowRoot } = await fixture<FilterMenu>(html`<filter-menu></filter-menu>`);
-    element.filterGroups = filterGroups;
-    element.selectedFilters = [{ group: FilterGroupKey.tags, tag: 'android' }];
-    await element.updateComplete;
+  it('leaves out groups without filters', async () => {
+    const { shadowRoot } = await render({
+      filterGroups: [{ key: FilterGroupKey.complexity, filters: [] }, filterGroups[0]!],
+    });
 
-    const tags = shadowRoot.querySelectorAll('.filters-board .tag');
-    expect(tags[0]).toHaveAttribute('selected');
-    expect(tags[1]).not.toHaveAttribute('selected');
+    expect(shadowRoot.querySelectorAll('.group-title')).toHaveLength(1);
   });
 
-  it('renders selected filters as removable chips', async () => {
-    const { element, shadowRoot } = await fixture<FilterMenu>(html`<filter-menu></filter-menu>`);
-    element.selectedFilters = [{ group: FilterGroupKey.tags, tag: 'android' }];
-    await element.updateComplete;
+  it('colors tag chips with their tag colors', async () => {
+    const { shadowRoot } = await render();
+    const web = shadowRoot.querySelectorAll<HTMLElement>('.panel hb-chip')[1]!;
 
-    const selected = shadowRoot.querySelector('.selected-filters');
-    expect(selected).not.toHaveAttribute('hidden');
-    expect(selected?.querySelector('.tag')).toHaveTextContent('android');
-    expect(selected?.querySelector('hoverboard-icon')).toHaveAttribute('name', 'close');
-  });
-
-  it('hides the result count until filters are selected', async () => {
-    const { element, shadowRoot } = await fixture<FilterMenu>(html`<filter-menu></filter-menu>`);
-    expect(shadowRoot.querySelector('.results')).toHaveAttribute('hidden');
-
-    element.selectedFilters = [{ group: FilterGroupKey.tags, tag: 'android' }];
-    element.resultsCount = 3;
-    await element.updateComplete;
-
-    const results = shadowRoot.querySelector('.results');
-    expect(results).not.toHaveAttribute('hidden');
-    expect(results).toHaveTextContent('3 results');
-
-    element.resultsCount = 1;
-    await element.updateComplete;
-
-    expect(results).toHaveTextContent('1 result');
-  });
-
-  it('toggles the board and the icon when the toggle button is clicked', async () => {
-    const { element, shadowRoot } = await fixture<FilterMenu>(html`<filter-menu></filter-menu>`);
-    const icon = shadowRoot.querySelector('md-outlined-button hoverboard-icon');
-    expect(icon).toHaveAttribute('name', 'filter-list');
-    expect(icon).toHaveAttribute('slot', 'icon');
-    expect(shadowRoot.querySelector('md-outlined-button')).toHaveAttribute('trailing-icon');
-
-    shadowRoot.querySelector<HTMLElement>('md-outlined-button')!.click();
-    await element.updateComplete;
-
-    expect(element.opened).toBe(true);
-    expect(shadowRoot.querySelector('.filters-board')).toHaveAttribute('open');
-    expect(shadowRoot.querySelector('md-outlined-button hoverboard-icon')).toHaveAttribute(
-      'name',
-      'close',
+    expect(web.style.getPropertyValue('--hb-chip-background')).toBe(
+      'var(--hb-tag-web-container, var(--hb-color-surface-container))',
     );
   });
 
-  it('toggles a filter when a tag is clicked', async () => {
-    const { element, shadowRoot } = await fixture<FilterMenu>(html`<filter-menu></filter-menu>`);
-    element.filterGroups = filterGroups;
-    await element.updateComplete;
+  it('marks selected filters as pressed', async () => {
+    const { shadowRoot } = await render({
+      selectedFilters: [{ group: FilterGroupKey.tags, tag: 'android' }],
+    });
+    const chips = shadowRoot.querySelectorAll<HbChip>('.panel hb-chip');
 
-    shadowRoot.querySelector<HTMLElement>('.filters-board .tag')!.click();
+    expect(chips[0]!.selected).toBe(true);
+    expect(chips[1]!.selected).toBe(false);
+  });
+
+  it('toggles a filter by its lowercase name', async () => {
+    const { shadowRoot } = await render();
+
+    shadowRoot.querySelector<HTMLElement>('.panel hb-chip')!.click();
 
     expect(filterUtils.toggleFilter).toHaveBeenCalledWith({
       group: FilterGroupKey.tags,
@@ -113,13 +103,48 @@ describe('filter-menu', () => {
     });
   });
 
-  it('clears filters when reset is clicked', async () => {
-    const { element, shadowRoot } = await fixture<FilterMenu>(html`<filter-menu></filter-menu>`);
+  it('lists selected filters as chips that remove them', async () => {
+    const { shadowRoot } = await render({
+      selectedFilters: [{ group: FilterGroupKey.tags, tag: 'android' }],
+    });
+    const list = shadowRoot.querySelector('ul.selected')!;
+
+    expect(list).toHaveAttribute('aria-label', 'Selected filters');
+    const chip = list.querySelector('hb-chip')!;
+    expect(chip).toHaveTextContent('android');
+    expect(chip.selected).toBe(true);
+
+    chip.click();
+
+    expect(filterUtils.toggleFilter).toHaveBeenCalledWith({
+      group: FilterGroupKey.tags,
+      tag: 'android',
+    });
+  });
+
+  it('clears every filter', async () => {
+    const { shadowRoot } = await render({
+      selectedFilters: [{ group: FilterGroupKey.tags, tag: 'android' }],
+    });
+
+    shadowRoot.querySelector<HTMLElement>('.clear')!.click();
+
+    expect(filterUtils.clearFilters).toHaveBeenCalled();
+  });
+
+  it('counts results only while filters are selected', async () => {
+    const { element, shadowRoot } = await render({ resultsCount: 3 });
+
+    expect(shadowRoot.querySelector('.results')).toBeNull();
+
     element.selectedFilters = [{ group: FilterGroupKey.tags, tag: 'android' }];
     await element.updateComplete;
 
-    shadowRoot.querySelector<HTMLElement>('.reset-filters')!.click();
+    expect(shadowRoot.querySelector('.results')).toHaveTextContent('3 results');
 
-    expect(filterUtils.clearFilters).toHaveBeenCalled();
+    element.resultsCount = 1;
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.results')).toHaveTextContent('1 result');
   });
 });

@@ -94,11 +94,14 @@ export function getDuration(date: string, startTime: string, endTime: string) {
 }
 
 export const collectSpeakers = (speakerIds: string[], speakersRaw: SpeakerMap) => {
-  return (speakerIds || []).map((speakerId) => {
-    return {
-      id: speakerId,
-      ...speakersRaw[speakerId],
-      sessions: null,
-    };
-  });
+  // A session can list a speaker that was deleted or never added.
+  return (speakerIds || [])
+    .filter((speakerId) => speakersRaw[speakerId])
+    .map((speakerId) => {
+      return {
+        id: speakerId,
+        ...speakersRaw[speakerId],
+        sessions: null,
+      };
+    });
 };

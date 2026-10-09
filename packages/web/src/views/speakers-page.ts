@@ -1,200 +1,84 @@
 import { Success } from '@abraham/remotedata';
-import '@material/web/progress/linear-progress.js';
+import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '../components/shared/content-loader';
-import '../components/shared/filter-menu';
 import '../components/hero/simple-hero';
-import '../components/shared/hoverboard-icon';
+import '../components/shared/filter-menu';
 import '../components/shared/previous-speakers-block';
-import '../components/shared/text-truncate';
+import '../components/shared/speaker-card';
+import '../components/ui/hb-button';
+import '../components/ui/hb-progress';
 import type { Filter } from '../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../models/filter-group';
 import type { SpeakerWithTags } from '../models/speaker';
-import { speakerPath } from '../utils/navigation';
 import { selectFilters } from '../store/filters';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
-import { contentLoaders } from '../config/site';
+import { clearFilters } from '../utils/filters';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
+import { illustration, illustrationStyles } from '../illustrations/illustration';
+import noResults from '../illustrations/no-results.svg?raw';
 
-// Stable module-level reference (rather than an inline literal in
-// `stateChanged`) so `selectFilterGroups`'s `createSelector` memoization
-// isn't defeated by a new array on every store dispatch.
+// A stable reference, so `selectFilterGroups` stays memoized.
 const SPEAKER_FILTER_GROUPS = [FilterGroupKey.tags];
 
+/** Every speaker as a card, with filters by the tags of their sessions. */
 @customElement('speakers-page')
 export class SpeakersPage extends ThemedElement {
-  static override styles = css`
-    :host {
-      display: block;
-      height: 100%;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-gap: 16px;
-      min-height: 80%;
-    }
-
-    .speaker {
-      position: relative;
-      padding: 32px 24px;
-      background: var(--primary-background-color);
-      text-align: center;
-      transition: box-shadow var(--animation);
-    }
-
-    /* Covers the card. Links may not nest, so the badge and social links sit above it. */
-    .speaker-link {
-      position: absolute;
-      inset: 0;
-    }
-
-    .contacts a {
-      position: relative;
-    }
-
-    .speaker:hover {
-      box-shadow: var(--box-shadow);
-    }
-
-    .photo {
-      display: inline-block;
-      --lazy-image-width: 128px;
-      --lazy-image-height: 128px;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      background-color: var(--secondary-background-color);
-      border-radius: 50%;
-      overflow: hidden;
-      transform: translateZ(0);
-    }
-
-    .badges {
-      position: absolute;
-      top: 0;
-      left: calc(50% + 32px);
-      display: flex;
-    }
-
-    .badge {
-      margin-left: -10px;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 2px solid var(--default-background-color);
-      transition: transform var(--animation);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .badge:hover {
-      transform: scale(1.1);
-    }
-
-    .badge:nth-of-type(2) {
-      transform: translate(25%, 75%);
-    }
-
-    .badge:nth-of-type(2):hover {
-      transform: translate3d(25%, 75%, 20px) scale(1.1);
-    }
-
-    .badge:nth-of-type(3) {
-      transform: translate(10%, 180%);
-    }
-
-    .badge:nth-of-type(3):hover {
-      transform: translate3d(10%, 180%, 20px) scale(1.1);
-    }
-
-    .badge-icon {
-      width: 12px;
-      height: 12px;
-      color: var(--text-primary-color);
-    }
-
-    .company-logo {
-      --lazy-image-width: 100%;
-      --lazy-image-height: 16px;
-      --lazy-image-fit: contain;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-    }
-
-    .description {
-      color: var(--primary-text-color);
-    }
-
-    .speaker-photo {
-      position: relative;
-    }
-
-    .name {
-      margin-top: 8px;
-      line-height: 1;
-    }
-
-    .origin {
-      margin-top: 4px;
-      font-size: 14px;
-      line-height: 1.1;
-    }
-
-    .bio {
-      margin-top: 16px;
-      color: var(--secondary-text-color);
-    }
-
-    .contacts {
-      margin-top: 16px;
-    }
-
-    .social-icon {
-      padding: 6px;
-      width: 32px;
-      height: 32px;
-      color: var(--secondary-text-color);
-    }
-
-    .progress {
-      width: 100%;
-      --md-linear-progress-active-indicator-color: var(--default-primary-color);
-      --md-linear-progress-track-color: var(--default-primary-color);
-    }
-
-    @media (min-width: 640px) {
-      .container {
-        grid-template-columns: repeat(2, 1fr);
+  static override styles = [
+    illustrationStyles,
+    css`
+      :host {
+        display: block;
+        background-color: var(--hb-section-background);
+        color: var(--hb-color-on-surface);
       }
-    }
 
-    @media (min-width: 812px) {
-      .container {
-        grid-template-columns: repeat(3, 1fr);
+      /* Content-box, so the text column lines up with the hero's. */
+      .inner {
+        box-sizing: content-box;
+        max-inline-size: var(--hb-content-max);
+        margin-inline: auto;
+        padding: var(--hb-space-5) var(--hb-gutter) var(--hb-space-9);
       }
-    }
 
-    @media (min-width: 1024px) {
-      .container {
-        grid-template-columns: repeat(4, 1fr);
+      .speakers {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+        gap: var(--hb-space-5);
+        margin: var(--hb-space-5) 0 0;
+        padding: 0;
+        list-style: none;
       }
-    }
-  `;
+
+      .speakers > li {
+        display: grid;
+      }
+
+      .empty {
+        display: grid;
+        justify-items: start;
+        gap: var(--hb-space-3);
+        padding-block: var(--hb-space-6);
+      }
+
+      .empty p {
+        margin: 0;
+      }
+
+      .empty .illustration {
+        inline-size: min(100%, 12rem);
+      }
+    `,
+  ];
 
   private readonly metadata = new PageMetadataController(this, 'speakers');
-  private contentLoaders = contentLoaders;
 
   @fromStore((state) => selectSpeakersState(state))
   accessor speakers!: SpeakersState;
-
   @fromStore((state) => selectFilterGroups(state, SPEAKER_FILTER_GROUPS))
   accessor filterGroups!: FilterGroup[];
   @fromStore((state) => selectFilters(state))
@@ -202,109 +86,44 @@ export class SpeakersPage extends ThemedElement {
   @fromStore((state) => selectFilteredSpeakers(state))
   accessor speakersToRender!: SpeakerWithTags[];
 
-  private get contentLoaderVisibility() {
-    return this.speakers instanceof Success;
-  }
-
-  private speakerUrl(id: string) {
-    return speakerPath(id);
-  }
-
   override render() {
+    const speakers = this.speakersToRender;
     return html`
       <simple-hero page="speakers"></simple-hero>
 
-      <md-linear-progress
-        class="progress"
-        indeterminate
-        ?hidden=${this.contentLoaderVisibility}
-      ></md-linear-progress>
+      <hb-progress ?hidden="${this.speakers instanceof Success}"></hb-progress>
 
-      <filter-menu
-        .filterGroups=${this.filterGroups}
-        .selectedFilters=${this.selectedFilters}
-        .resultsCount=${this.speakersToRender.length}
-      ></filter-menu>
+      <div class="inner">
+        <filter-menu
+          .filterGroups="${this.filterGroups}"
+          .selectedFilters="${this.selectedFilters}"
+          .resultsCount="${speakers.length}"
+        ></filter-menu>
 
-      <content-loader
-        class="container"
-        card-padding="32px"
-        card-height="400px"
-        avatar-size="128px"
-        avatar-circle="64px"
-        horizontal-position="50%"
-        border-radius="4px"
-        box-shadow="var(--box-shadow)"
-        items-count=${this.contentLoaders.speakers.itemsCount}
-        ?hidden=${this.contentLoaderVisibility}
-      ></content-loader>
-
-      <div class="container">
-        ${this.speakersToRender.map(
-          (speaker) => html`
-            <div class="speaker card">
-              <a
-                class="speaker-link"
-                href=${this.speakerUrl(speaker.id)}
-                aria-label=${speaker.name}
-              ></a>
-              <div class="speaker-photo">
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  class="photo"
-                  src=${speaker.photoUrl}
-                  alt=${speaker.name}
-                />
-                <div class="badges">
-                  ${speaker.badges?.map(
-                    (badge) => html`
-                      <a
-                        class="badge ${badge.name}-b"
-                        href=${badge.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title=${badge.description}
-                      >
-                        <hoverboard-icon name=${badge.name} class="badge-icon"></hoverboard-icon>
-                      </a>
-                    `,
-                  )}
-                </div>
-              </div>
-
-              <img
-                loading="lazy"
-                decoding="async"
-                class="company-logo"
-                src=${speaker.companyLogoUrl}
-                alt=${speaker.company}
-              />
-
-              <div class="description">
-                <h2 class="name">${speaker.name}</h2>
-                <div class="origin">${speaker.country}</div>
-
-                <text-truncate lines="5">
-                  <div class="bio">${speaker.bio}</div>
-                </text-truncate>
-              </div>
-
-              <div class="contacts">
-                ${speaker.socials.map(
-                  (social) => html`
-                    <a href=${social.link} target="_blank" rel="noopener noreferrer">
-                      <hoverboard-icon name=${social.icon} class="social-icon"></hoverboard-icon>
-                    </a>
-                  `,
+        ${
+          speakers.length === 0 && this.selectedFilters.length
+            ? html`<div class="empty">
+                ${illustration(noResults)}
+                <p>
+                  ${msg('No speakers match these filters.', { id: 'pages.speakers.no-results' })}
+                </p>
+                <hb-button variant="tonal" @click="${clearFilters}">
+                  ${msg('Clear filters', { id: 'schedule.day.clear-filters' })}
+                </hb-button>
+              </div>`
+            : html`<ul class="speakers">
+                ${speakers.map(
+                  (speaker) => html`<li><speaker-card .speaker="${speaker}"></speaker-card></li>`,
                 )}
-              </div>
-            </div>
-          `,
-        )}
+              </ul>`
+        }
       </div>
 
-      ${__HB_FEATURES__.previousSpeakers ? html`<previous-speakers-block></previous-speakers-block>` : nothing}
+      ${
+        __HB_FEATURES__.previousSpeakers
+          ? html`<previous-speakers-block></previous-speakers-block>`
+          : nothing
+      }
     `;
   }
 }

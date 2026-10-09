@@ -1,0 +1,43 @@
+---
+// Placeholder icons for the design gallery, drawn on a 24px grid with a 2px stroke.
+// The refresh replaces them with Material Symbols Rounded.
+const PATHS = {
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  moon: '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
+  monitor: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
+  star: '<path d="M12 3l2.8 5.9 6.2.7-4.6 4.4 1.2 6.3L12 17.2l-5.6 3.1 1.2-6.3L3 9.6l6.2-.7z"/>',
+  arrowRight: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  chevronLeft: '<path d="M15 6l-6 6 6 6"/>',
+  chevronRight: '<path d="M9 6l6 6-6 6"/>',
+  ticket:
+    '<path d="M3 8V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2a2 2 0 0 0 0 4v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2a2 2 0 0 0 0-4z"/><path d="M14 5v10" stroke-dasharray="2 2"/>',
+  play: '<path d="M8 5l11 7-11 7z"/>',
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  filter: '<path d="M4 6h16M7 12h10M10 18h4"/>',
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  pin: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  close: '<path d="M6 6l12 12M18 6L6 18"/>',
+} as const;
+
+interface Props {
+  name: keyof typeof PATHS;
+  size?: number;
+}
+
+const { name, size = 24 } = Astro.props;
+---
+
+<svg
+  aria-hidden="true"
+  class="hb-icon"
+  fill="none"
+  height={size}
+  set:html={PATHS[name]}
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  viewBox="0 0 24 24"
+  width={size}
+/>

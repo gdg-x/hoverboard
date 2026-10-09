@@ -6,10 +6,13 @@ type MatchCallback = Extract<Route['urlPattern'], (...args: never[]) => unknown>
 
 const route = (cacheName: string) =>
   workboxConfig.runtimeCaching!.find(({ options }) => options?.cacheName === cacheName)!;
-const matcher = (cacheName: string) => (path: string) =>
-  (route(cacheName).urlPattern as MatchCallback)({
-    url: new URL(path, self.location.origin),
-  } as Parameters<MatchCallback>[0]);
+const matcher =
+  (cacheName: string) =>
+  (path: string, destination = '') =>
+    (route(cacheName).urlPattern as MatchCallback)({
+      url: new URL(path, self.location.origin),
+      request: { destination },
+    } as Parameters<MatchCallback>[0]);
 
 describe('workboxConfig', () => {
   const matchesLocale = matcher('locales-cache');
@@ -48,5 +51,22 @@ describe('workboxConfig', () => {
     expect(matchesPage('/manifest.json')).toBe(false);
     expect(matchesPage('/__/firebase/init.js')).toBe(false);
     expect(matchesPage('https://example.com/speakers')).toBe(false);
+  });
+
+  it('caches fonts from the site and from font services', () => {
+    const matchesFont = matcher('fonts-cache');
+
+    expect(route('fonts-cache').handler).toBe('CacheFirst');
+    expect(matchesFont('/_astro/inter-latin-wght-normal.Bq3x9.woff2', 'font')).toBe(true);
+    expect(matchesFont('https://fonts.gstatic.com/s/inter/v1/a.woff2', 'font')).toBe(true);
+    expect(matchesFont('/_astro/home-page.Bq3x9.js', 'script')).toBe(false);
+  });
+
+  it('caches stylesheets from font services, but not the site CSS', () => {
+    const matchesStylesheet = matcher('font-stylesheets-cache');
+
+    expect(matchesStylesheet('https://use.typekit.net/abc.css', 'style')).toBe(true);
+    expect(matchesStylesheet('/_astro/base.Bq3x9.css', 'style')).toBe(false);
+    expect(matchesStylesheet('https://use.typekit.net/abc.js', 'script')).toBe(false);
   });
 });

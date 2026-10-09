@@ -38,6 +38,7 @@ describe('faq-page', () => {
     expect(hero?.page).toBe('faq');
     expect(markdown?.path).toBe(faq);
     expect(markdown).toHaveAttribute('toc');
+    expect(markdown).toHaveAttribute('disclosures');
   });
 
   it('updates page metadata', async () => {

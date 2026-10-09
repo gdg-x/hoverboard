@@ -1,0 +1,1018 @@
+---
+// The design gallery for the visual refresh: tokens, primitives and mocks of the new pages, in
+// every theme, color scheme and density. Development only; `astro build` leaves it out.
+import { fontCss } from 'virtual:hoverboard/fonts';
+import HeroIllustration from '../design/HeroIllustration.astro';
+import Icon from '../design/Icon.astro';
+import ScheduleMock from '../design/ScheduleMock.astro';
+import SpeakerCard from '../design/SpeakerCard.astro';
+import '../design/prototype.css';
+import '../styles/base.css';
+import { contrastResults } from '../themes/contrast';
+import { THEMES, type ThemeName, themeDeclarations } from '../themes/index';
+import { COLOR_ROLES, cssColorVar } from '../themes/tokens';
+
+const themes = Object.entries(THEMES) as [ThemeName, (typeof THEMES)[ThemeName]][];
+const themeNames = themes.map(([name]) => name);
+// The gallery switches theme, scheme and density itself, instead of using the site's settings.
+const themeCss = [
+  ':root { color-scheme: light dark; --hb-density: 1; }',
+  ...themes.map(([name, theme]) => `:root[data-theme='${name}'] {\n${themeDeclarations(theme)}\n}`),
+].join('\n');
+// Hides the parts of the gallery that belong to the other themes.
+const themeVisibilityCss = themeNames
+  .map(
+    (name) =>
+      `:root:not([data-theme='${name}']) [data-for-theme='${name}'] { display: none !important; }`,
+  )
+  .join('\n');
+const themeColors = Object.fromEntries(
+  themes.map(([name, theme]) => [name, { light: theme.light.surface, dark: theme.dark.surface }]),
+);
+
+const roleGroups = [
+  ['Primary and secondary', COLOR_ROLES.filter((role) => /rimary|econdary/.test(role))],
+  ['Surfaces and text', COLOR_ROLES.filter((role) => /urface/.test(role))],
+  [
+    'Lines, focus and status',
+    COLOR_ROLES.filter((role) =>
+      /^(outline|outlineVariant|ink|focus|error|onError|success|scrim)$/.test(role),
+    ),
+  ],
+  ['Accents', COLOR_ROLES.filter((role) => /ccent/.test(role))],
+] as const;
+
+const typeScale = ['6xl', '5xl', '4xl', '3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs'];
+const spaces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const speakers = [
+  {
+    name: 'Olena Kovalenko',
+    company: 'Kyivstar',
+    country: 'Ukraine',
+    accent: 4,
+    badges: ['GDE'],
+    featured: true,
+  },
+  {
+    name: 'Marco Rossi',
+    company: 'Università di Pisa',
+    country: 'Italy',
+    accent: 1,
+    badges: ['GDG'],
+  },
+  { name: 'Aiko Tanaka', company: 'Mercari', country: 'Japan', accent: 3, badges: [] },
+  {
+    name: 'Sam Okafor',
+    company: 'Flutterwave',
+    country: 'Nigeria',
+    accent: 2,
+    badges: ['WTM', 'GDE'],
+  },
+] as const;
+---
+
+<!doctype html>
+<html data-theme="festival" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="noindex" name="robots" />
+    <title>Design gallery · Hoverboard</title>
+    <meta content="light dark" name="color-scheme" />
+    <meta
+      content={themeColors.festival?.light}
+      data-scheme="light"
+      media="(prefers-color-scheme: light)"
+      name="theme-color"
+    />
+    <meta
+      content={themeColors.festival?.dark}
+      data-scheme="dark"
+      media="(prefers-color-scheme: dark)"
+      name="theme-color"
+    />
+    <!-- Runs before the first paint, like the color scheme script the refresh adds to every page. -->
+    <script is:inline define:vars={{ themeNames }}>
+      {
+        const root = document.documentElement;
+        try {
+          const scheme = localStorage.getItem('hb-color-scheme');
+          if (scheme === 'light' || scheme === 'dark') root.dataset.colorScheme = scheme;
+          const saved = JSON.parse(localStorage.getItem('hb-design-gallery') ?? '{}');
+          if (themeNames.includes(saved.theme)) root.dataset.theme = saved.theme;
+          if (['compact', 'roomy'].includes(saved.density)) root.dataset.density = saved.density;
+          if (saved.decorations === 'off') root.dataset.decorations = 'off';
+        } catch {
+          // Storage can be unavailable, for example in some private modes.
+        }
+      }
+    </script>
+    <style is:inline set:html={themeCss} />
+    <style is:inline set:html={fontCss} />
+    <style is:inline set:html={themeVisibilityCss} />
+  </head>
+
+  <body>
+    <a class="gallery-skip" href="#main">
+      Skip to content
+    </a>
+    <header class="gallery-bar">
+      <h1>Design gallery</h1>
+      <label>
+        Theme
+        <select data-control="theme">
+          {themeNames.map((name) => (
+            <option value={name}>{name}</option>
+          ))}
+        </select>
+      </label>
+      <label>
+        Color scheme
+        <select data-control="scheme">
+          <option value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+      <label>
+        Density
+        <select data-control="density">
+          <option value="compact">Compact</option>
+          <option value="default">Default</option>
+          <option value="roomy">Roomy</option>
+        </select>
+      </label>
+      <label class="hb-switch">
+        <input checked data-control="decorations" role="switch" type="checkbox" />
+        Decorations
+      </label>
+    </header>
+
+    <main id="main">
+      <section class="gallery-section" aria-labelledby="intro-title">
+        <div class="gallery-inner">
+          <h2 id="intro-title">Visual refresh</h2>
+          <p class="gallery-lede">
+            Step 1 of the visual refresh spec: the tokens, primitives and mocks of the home hero,
+            the speaker card and the schedule, to review before anything else changes. Switch the
+            theme, color scheme, density and decorations above. The color scheme choice is shared
+            with the Appearance toggle in the footer mock.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="page-title" class="gallery-page">
+        <h2 class="gallery-page__title" id="page-title">
+          Home page
+        </h2>
+        <div class="hb-header">
+          <div class="hb-header__bar">
+            <a class="hb-header__brand" href="#page-title">
+              DevFest
+            </a>
+            <nav aria-label="Main" class="hb-header__nav">
+              <ul>
+                <li>
+                  <a aria-current="page" href="#page-title">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#speakers-title">Speakers</a>
+                </li>
+                <li>
+                  <a href="#schedule-title">Schedule</a>
+                </li>
+                <li>
+                  <a href="#page-title">Team</a>
+                </li>
+                <li>
+                  <a href="#page-title">Blog</a>
+                </li>
+              </ul>
+            </nav>
+            <a class="hb-btn hb-btn--cta" href="#page-title">
+              <Icon name="ticket" />
+              Get tickets
+            </a>
+            <button aria-label="Menu" class="hb-icon-btn hb-header__menu" type="button">
+              <Icon name="menu" />
+            </button>
+          </div>
+        </div>
+
+        <div class="hb-band hb-band--1 hb-pattern hb-hero">
+          <div class="hb-hero__inner">
+            <div>
+              <span class="hb-sticker">12 days to go</span>
+              <h2 class="hb-hero__title">DevFest Lviv 2027</h2>
+              <ul aria-label="Event details" class="hb-hero__chips hb-chip-list">
+                <li>
+                  <span class="hb-chip">
+                    <Icon name="calendar" size={16} /> Oct 13–14
+                  </span>
+                </li>
+                <li>
+                  <span class="hb-chip">
+                    <Icon name="pin" size={16} /> Lviv, Ukraine
+                  </span>
+                </li>
+                <li>
+                  <span class="hb-chip">In person</span>
+                </li>
+              </ul>
+              <p class="hb-hero__lede">
+                Join the community, learn new things, and meet the people who build them.
+              </p>
+              <div class="hb-hero__actions">
+                <a class="hb-btn hb-btn--cta hb-btn--large" href="#page-title">
+                  <Icon name="ticket" />
+                  Get tickets
+                </a>
+                <a class="hb-btn hb-btn--large" href="#page-title">
+                  <Icon name="play" />
+                  Watch highlights
+                </a>
+              </div>
+            </div>
+            <div class="hb-hero__art">
+              <HeroIllustration />
+            </div>
+          </div>
+        </div>
+
+        <div class="hb-band hb-speakers" aria-labelledby="speakers-title">
+          <div class="gallery-inner">
+            <h2 class="gallery-block-title" id="speakers-title">
+              Speakers
+            </h2>
+            <ul class="hb-speakers__grid">
+              {speakers.map((speaker) => (
+                <li>
+                  <SpeakerCard {...speaker} badges={[...speaker.badges]} />
+                </li>
+              ))}
+            </ul>
+            <p class="gallery-actions">
+              <a class="hb-btn hb-btn--outlined" href="#speakers-title">
+                All speakers
+                <Icon name="arrowRight" />
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div class="hb-band" aria-labelledby="schedule-title">
+          <div class="gallery-inner">
+            <h2 class="gallery-block-title" id="schedule-title">
+              Schedule
+            </h2>
+            <nav aria-label="Days">
+              <ul class="hb-tabs">
+                <li>
+                  <a aria-current="page" href="#schedule-title">
+                    Day 1 · Oct 13
+                  </a>
+                </li>
+                <li>
+                  <a href="#schedule-title">Day 2 · Oct 14</a>
+                </li>
+                <li>
+                  <a href="#schedule-title">My schedule</a>
+                </li>
+              </ul>
+            </nav>
+            <div class="hb-schedule-toolbar">
+              <span data-time-zone-label>Times in Europe/Kyiv</span>
+              <label class="hb-switch">
+                <input data-time-zone-switch role="switch" type="checkbox" />
+                Show my time zone
+              </label>
+              <ul aria-label="Filters" class="hb-chip-list">
+                <li>
+                  <button aria-pressed="false" class="hb-chip" data-toggle type="button">
+                    Web
+                  </button>
+                </li>
+                <li>
+                  <button aria-pressed="true" class="hb-chip" data-toggle type="button">
+                    Android
+                  </button>
+                </li>
+                <li>
+                  <button aria-pressed="false" class="hb-chip" data-toggle type="button">
+                    Cloud
+                  </button>
+                </li>
+                <li>
+                  <button aria-pressed="false" class="hb-chip" data-toggle type="button">
+                    AI
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <ScheduleMock label="Schedule for Day 1" tracks={['Main hall', 'Room 2', 'Room 3']} />
+          </div>
+        </div>
+
+        <footer class="hb-footer">
+          <div class="hb-footer__inner">
+            <p class="hb-footer__name">DevFest Lviv 2027</p>
+            <div class="hb-footer__columns">
+              <div>
+                <h3>Previous editions</h3>
+                <ul>
+                  <li>
+                    <a href="#page-title">DevFest 2026</a>
+                  </li>
+                  <li>
+                    <a href="#page-title">DevFest 2025</a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3>Event</h3>
+                <ul>
+                  <li>
+                    <a href="#page-title">Code of conduct</a>
+                  </li>
+                  <li>
+                    <a href="#page-title">FAQ</a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3>Organizer</h3>
+                <ul>
+                  <li>
+                    <a href="#page-title">GDG Lviv</a>
+                  </li>
+                  <li>
+                    <a href="#page-title">Made with Hoverboard</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="hb-footer__settings">
+              <label class="hb-select">
+                Language
+                <select>
+                  <option>English</option>
+                  <option lang="uk">Українська</option>
+                </select>
+              </label>
+              <fieldset class="hb-segmented">
+                <legend>Appearance</legend>
+                <div class="hb-segmented__options">
+                  <label>
+                    <input name="appearance" type="radio" value="system" />
+                    <Icon name="monitor" size={20} /> System
+                  </label>
+                  <label>
+                    <input name="appearance" type="radio" value="light" />
+                    <Icon name="sun" size={20} /> Light
+                  </label>
+                  <label>
+                    <input name="appearance" type="radio" value="dark" />
+                    <Icon name="moon" size={20} /> Dark
+                  </label>
+                </div>
+              </fieldset>
+              <a class="hb-sticker hb-sticker--green" href="https://github.com/gdg-x/hoverboard">
+                Fork me on GitHub
+              </a>
+            </div>
+          </div>
+        </footer>
+      </section>
+
+      <section class="gallery-section" aria-labelledby="narrow-title">
+        <div class="gallery-inner">
+          <h2 id="narrow-title">Narrow containers</h2>
+          <p class="gallery-lede">
+            The same components in a 360px container. They respond to their container, not the
+            viewport, so the server and the browser render the same markup.
+          </p>
+          <div class="gallery-narrow">
+            <div class="gallery-frame">
+              <div class="hb-speakers">
+                <ul class="hb-speakers__grid">
+                  {speakers.slice(0, 2).map((speaker) => (
+                    <li>
+                      <SpeakerCard {...speaker} badges={[...speaker.badges]} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div class="gallery-frame">
+              <ScheduleMock label="Schedule for Day 1, narrow" tracks={['Main hall', 'Room 2']} />
+            </div>
+          </div>
+          <h3 class="gallery-subtitle">Six tracks</h3>
+          <p class="gallery-lede">
+            Columns keep a minimum width. When they do not fit, the grid scrolls inside its own
+            region, with the times fixed at the start edge.
+          </p>
+          <ScheduleMock
+            label="Schedule for Day 2"
+            tracks={['Main hall', 'Room 2', 'Room 3', 'Workshop A', 'Workshop B', 'Lounge']}
+          />
+        </div>
+      </section>
+
+      <section class="gallery-section" aria-labelledby="colors-title">
+        <div class="gallery-inner">
+          <h2 id="colors-title">Colors</h2>
+          <p class="gallery-lede">
+            Each token is written once with <code>light-dark()</code>. The swatches show the current
+            scheme, and the labels show the light and dark values.
+          </p>
+          {roleGroups.map(([title, roles]) => (
+            <Fragment>
+              <h3 class="gallery-subtitle">{title}</h3>
+              <ul class="swatches">
+                {roles.map((role) => (
+                  <li class="swatch">
+                    <span class="swatch__color" style={`background: var(${cssColorVar(role)})`} />
+                    <span class="swatch__text">
+                      <strong>{role}</strong>
+                      {themes.map(([name, theme]) => (
+                        <span data-for-theme={name}>
+                          {theme.light[role]} / {theme.dark[role]}
+                        </span>
+                      ))}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Fragment>
+          ))}
+
+          <h3 class="gallery-subtitle">Contrast</h3>
+          <p class="gallery-lede">
+            WCAG 2.2 AA: 4.5:1 for text, 3:1 for outlines and focus rings. The build will check the
+            same pairs, including colors a site overrides.
+          </p>
+          {themes.map(([name, theme]) => {
+            const light = contrastResults(theme.light);
+            const dark = contrastResults(theme.dark);
+            return (
+              <table class="contrast" data-for-theme={name}>
+                <caption>{name}</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Foreground on background</th>
+                    <th scope="col">Needs</th>
+                    <th scope="col">Light</th>
+                    <th scope="col">Dark</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {light.map((result, index) => (
+                    <tr>
+                      <th scope="row">
+                        {result.foreground} on {result.background}
+                      </th>
+                      <td>{result.min}:1</td>
+                      {[result, dark[index]!].map(({ ratio, min }) => (
+                        <td class={ratio >= min ? 'pass' : 'fail'}>
+                          {ratio.toFixed(2)}:1 {ratio >= min ? 'Pass' : 'Fail'}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            );
+          })}
+        </div>
+      </section>
+
+      <section class="gallery-section" aria-labelledby="type-title">
+        <div class="gallery-inner">
+          <h2 id="type-title">Type</h2>
+          <p class="gallery-lede">
+            Unbounded for display, Inter for body text, JetBrains Mono for times, rooms and tags.
+            All three cover Latin and Cyrillic.
+          </p>
+          <ul class="type-scale">
+            {typeScale.map((size) => (
+              <li>
+                <code>text-{size}</code>
+                <span
+                  class={
+                    ['6xl', '5xl', '4xl', '3xl', '2xl'].includes(size)
+                      ? 'type-display'
+                      : 'type-body'
+                  }
+                  style={`font-size: var(--hb-text-${size})`}
+                >
+                  DevFest Lviv 2027
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p class="type-display type-sample" lang="uk">
+            Конференція для розробників
+          </p>
+          <p class="type-body type-sample" lang="uk">
+            Приєднуйтесь до спільноти та вчіться новому.
+          </p>
+          <p class="type-mono type-sample">09:00 · Main hall · 40 min</p>
+        </div>
+      </section>
+
+      <section class="gallery-section" aria-labelledby="space-title">
+        <div class="gallery-inner">
+          <h2 id="space-title">Space, shape and elevation</h2>
+          <ul class="space-scale">
+            {spaces.map((space) => (
+              <li>
+                <code>space-{space}</code>
+                <span class="space-bar" style={`inline-size: var(--hb-space-${space})`} />
+              </li>
+            ))}
+          </ul>
+          <ul class="shapes">
+            <li class="hb-card shape" style="border-radius: var(--hb-radius-s)">
+              radius-s
+            </li>
+            <li class="hb-card shape" style="border-radius: var(--hb-radius-m)">
+              radius-m
+            </li>
+            <li class="hb-card shape" style="border-radius: var(--hb-radius-l)">
+              radius-l
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="gallery-section" aria-labelledby="primitives-title">
+        <div class="gallery-inner">
+          <h2 id="primitives-title">Primitives</h2>
+
+          <h3 class="gallery-subtitle">Buttons</h3>
+          <div class="stack">
+            <button class="hb-btn hb-btn--cta" type="button">
+              Call to action
+            </button>
+            <button class="hb-btn hb-btn--filled" type="button">
+              Filled
+            </button>
+            <button class="hb-btn hb-btn--tonal" type="button">
+              Tonal
+            </button>
+            <button class="hb-btn hb-btn--outlined" type="button">
+              Outlined
+            </button>
+            <button class="hb-btn" type="button">
+              Default
+            </button>
+            <button class="hb-btn hb-btn--text" type="button">
+              Text
+            </button>
+            <button
+              aria-label="Bookmark"
+              aria-pressed="false"
+              class="hb-icon-btn hb-bookmark"
+              type="button"
+            >
+              <Icon name="star" />
+            </button>
+          </div>
+
+          <h3 class="gallery-subtitle">Chips</h3>
+          <div class="stack">
+            <button aria-pressed="false" class="hb-chip" data-toggle type="button">
+              Filter
+            </button>
+            <button aria-pressed="true" class="hb-chip" data-toggle type="button">
+              Selected filter
+            </button>
+            <a class="hb-chip" href="#primitives-title">
+              Link chip
+            </a>
+            <span class="hb-chip hb-chip--accent-1">Web</span>
+            <span class="hb-chip hb-chip--accent-2">AI</span>
+            <span class="hb-chip hb-chip--accent-3">Cloud</span>
+            <span class="hb-chip hb-chip--accent-4">Android</span>
+          </div>
+
+          <h3 class="gallery-subtitle">Stickers</h3>
+          <div class="stack">
+            <span class="hb-sticker">Early bird</span>
+            <span class="hb-sticker hb-sticker--red">Sold out</span>
+            <span class="hb-sticker hb-sticker--blue">Live now</span>
+            <span class="hb-sticker hb-sticker--green">Free</span>
+          </div>
+
+          <h3 class="gallery-subtitle">Form controls</h3>
+          <div class="stack stack--top">
+            <div class="hb-field">
+              <label for="gallery-email">Email</label>
+              <input
+                autocomplete="email"
+                id="gallery-email"
+                type="email"
+                aria-describedby="gallery-email-hint"
+              />
+              <p class="hb-field__hint" id="gallery-email-hint">
+                We send one email a month.
+              </p>
+            </div>
+            <div class="hb-field hb-field--error">
+              <label for="gallery-name">Name</label>
+              <input
+                aria-describedby="gallery-name-error"
+                aria-invalid="true"
+                id="gallery-name"
+                type="text"
+              />
+              <p class="hb-field__error" id="gallery-name-error">
+                Enter your name.
+              </p>
+            </div>
+            <label class="hb-switch">
+              <input role="switch" type="checkbox" />
+              Notifications
+            </label>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script is:inline define:vars={{ themeColors }}>
+      {
+        const root = document.documentElement;
+        const controls = Object.fromEntries(
+          [...document.querySelectorAll('[data-control]')].map((element) => [
+            element.dataset.control,
+            element,
+          ]),
+        );
+
+        const save = () => {
+          try {
+            localStorage.setItem(
+              'hb-design-gallery',
+              JSON.stringify({
+                theme: root.dataset.theme,
+                density: root.dataset.density,
+                decorations: root.dataset.decorations,
+              }),
+            );
+          } catch {
+            // Storage can be unavailable.
+          }
+        };
+
+        // Locks the browser toolbar color to the chosen scheme, or lets it follow the system.
+        const updateThemeColor = () => {
+          const colors = themeColors[root.dataset.theme];
+          for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+            meta.content = colors[root.dataset.colorScheme ?? meta.dataset.scheme];
+          }
+        };
+
+        const setScheme = (scheme) => {
+          try {
+            if (scheme === 'system') {
+              delete root.dataset.colorScheme;
+              localStorage.removeItem('hb-color-scheme');
+            } else {
+              root.dataset.colorScheme = scheme;
+              localStorage.setItem('hb-color-scheme', scheme);
+            }
+          } catch {
+            // The choice still applies to this page.
+          }
+          controls.scheme.value = scheme;
+          for (const radio of document.querySelectorAll('input[name="appearance"]')) {
+            radio.checked = radio.value === scheme;
+          }
+          updateThemeColor();
+        };
+
+        controls.theme.value = root.dataset.theme;
+        controls.density.value = root.dataset.density ?? 'default';
+        controls.decorations.checked = root.dataset.decorations !== 'off';
+        setScheme(root.dataset.colorScheme ?? 'system');
+
+        controls.theme.addEventListener('change', () => {
+          root.dataset.theme = controls.theme.value;
+          updateThemeColor();
+          save();
+        });
+        controls.density.addEventListener('change', () => {
+          if (controls.density.value === 'default') delete root.dataset.density;
+          else root.dataset.density = controls.density.value;
+          save();
+        });
+        controls.decorations.addEventListener('change', () => {
+          if (controls.decorations.checked) delete root.dataset.decorations;
+          else root.dataset.decorations = 'off';
+          save();
+        });
+        controls.scheme.addEventListener('change', () => setScheme(controls.scheme.value));
+        for (const radio of document.querySelectorAll('input[name="appearance"]')) {
+          radio.addEventListener('change', () => setScheme(radio.value));
+        }
+
+        for (const button of document.querySelectorAll('[data-toggle], .hb-bookmark')) {
+          button.addEventListener('click', () => {
+            const pressed = button.getAttribute('aria-pressed') !== 'true';
+            button.setAttribute('aria-pressed', String(pressed));
+            if (pressed && button.classList.contains('hb-bookmark')) {
+              button.classList.add('is-bursting');
+              setTimeout(() => button.classList.remove('is-bursting'), 600);
+            }
+          });
+        }
+
+        const timeZoneSwitch = document.querySelector('[data-time-zone-switch]');
+        timeZoneSwitch.addEventListener('change', () => {
+          const local = timeZoneSwitch.checked;
+          document.querySelector('[data-time-zone-label]').textContent = local
+            ? `Times in your time zone, ${Intl.DateTimeFormat().resolvedOptions().timeZone}`
+            : 'Times in Europe/Kyiv';
+          for (const time of document.querySelectorAll('time[data-event]')) {
+            time.textContent = local ? time.dataset.local : time.dataset.event;
+          }
+        });
+
+        for (const schedule of document.querySelectorAll('.hb-schedule')) {
+          const scroller = schedule.querySelector('[data-schedule-scroller]');
+          const pager = schedule.querySelector('[data-schedule-pager]');
+          const previous = schedule.querySelector('[data-schedule-prev]');
+          const next = schedule.querySelector('[data-schedule-next]');
+          const update = () => {
+            pager.hidden = scroller.scrollWidth <= scroller.clientWidth + 1;
+            previous.disabled = scroller.scrollLeft <= 0;
+            next.disabled = scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 1;
+          };
+          const scrollByTrack = (direction) => {
+            const track = schedule.querySelector('.hb-schedule__track');
+            scroller.scrollBy({ left: direction * (track.getBoundingClientRect().width + 12) });
+          };
+          previous.addEventListener('click', () => scrollByTrack(-1));
+          next.addEventListener('click', () => scrollByTrack(1));
+          scroller.addEventListener('scroll', update, { passive: true });
+          new ResizeObserver(update).observe(scroller);
+        }
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  .gallery-skip {
+    position: absolute;
+    inset-inline-start: var(--hb-space-3);
+    inset-block-start: -100px;
+    z-index: 20;
+    padding: var(--hb-space-2) var(--hb-space-4);
+    background: var(--hb-color-surface-bright);
+  }
+
+  .gallery-skip:focus {
+    inset-block-start: var(--hb-space-3);
+  }
+
+  .gallery-bar {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--hb-space-2) var(--hb-space-5);
+    padding: var(--hb-space-2) var(--hb-gutter);
+    border-block-end: 1px solid var(--hb-color-outline-variant);
+    background: var(--hb-color-surface-bright);
+    font-size: var(--hb-text-sm);
+  }
+
+  .gallery-bar h1 {
+    margin-inline-end: auto;
+    font-size: var(--hb-text-lg);
+  }
+
+  .gallery-bar label:not(.hb-switch) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--hb-space-2);
+    font-weight: 600;
+  }
+
+  .gallery-bar select {
+    min-block-size: var(--hb-target-min);
+    padding-inline: var(--hb-space-2);
+    border: 1px solid var(--hb-color-outline);
+    border-radius: var(--hb-radius-s);
+    background: var(--hb-color-surface-bright);
+    color: inherit;
+    font: inherit;
+    font-weight: 400;
+  }
+
+  .gallery-section {
+    padding: var(--hb-space-8) var(--hb-gutter);
+  }
+
+  .gallery-section + .gallery-section {
+    border-block-start: 1px solid var(--hb-color-outline-variant);
+  }
+
+  .gallery-inner {
+    max-inline-size: var(--hb-content-max);
+    margin-inline: auto;
+  }
+
+  .gallery-section h2 {
+    margin-block-end: var(--hb-space-4);
+    font-size: var(--hb-text-3xl);
+  }
+
+  .gallery-lede {
+    max-inline-size: var(--hb-prose-max);
+    margin-block: 0 var(--hb-space-5);
+    color: var(--hb-color-on-surface-variant);
+  }
+
+  .gallery-subtitle {
+    margin-block: var(--hb-space-6) var(--hb-space-3);
+    font: 700 var(--hb-text-lg) / 1.3 var(--hb-font-body);
+  }
+
+  .gallery-page {
+    border-block: 1px solid var(--hb-color-outline-variant);
+  }
+
+  .gallery-page__title {
+    padding: var(--hb-space-3) var(--hb-gutter) 0;
+    color: var(--hb-color-on-surface-variant);
+    font: 600 var(--hb-text-sm) / 1.4 var(--hb-font-mono);
+  }
+
+  .gallery-block-title {
+    margin-block-end: var(--hb-space-6);
+    font-size: var(--hb-text-4xl);
+  }
+
+  .gallery-actions {
+    margin-block: var(--hb-space-6) 0;
+  }
+
+  .gallery-narrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: var(--hb-space-5);
+  }
+
+  .gallery-frame {
+    flex: 0 1 360px;
+    padding: var(--hb-space-4);
+    border: 2px dashed var(--hb-color-outline-variant);
+    border-radius: var(--hb-radius-m);
+  }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: var(--hb-space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .swatch {
+    overflow: hidden;
+    border: 1px solid var(--hb-color-outline-variant);
+    border-radius: var(--hb-radius-m);
+    background: var(--hb-color-surface-bright);
+  }
+
+  .swatch__color {
+    display: block;
+    block-size: 3.5rem;
+    border-block-end: 1px solid var(--hb-color-outline-variant);
+  }
+
+  .swatch__text {
+    display: grid;
+    padding: var(--hb-space-2) var(--hb-space-3);
+    font: var(--hb-text-xs) / 1.5 var(--hb-font-mono);
+  }
+
+  .contrast {
+    inline-size: 100%;
+    border-collapse: collapse;
+    font-size: var(--hb-text-sm);
+  }
+
+  .contrast caption {
+    padding-block-end: var(--hb-space-2);
+    font-weight: 700;
+    text-align: start;
+  }
+
+  .contrast :is(th, td) {
+    padding: var(--hb-space-2) var(--hb-space-3);
+    border-block-end: 1px solid var(--hb-color-outline-variant);
+    text-align: start;
+  }
+
+  .contrast tbody th {
+    font: var(--hb-text-sm) / 1.4 var(--hb-font-mono);
+  }
+
+  .contrast .fail {
+    color: var(--hb-color-error);
+    font-weight: 700;
+  }
+
+  .type-scale,
+  .space-scale {
+    display: grid;
+    gap: var(--hb-space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .type-scale li,
+  .space-scale li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    align-items: baseline;
+    gap: var(--hb-space-4);
+  }
+
+  .type-scale code,
+  .space-scale code {
+    color: var(--hb-color-on-surface-variant);
+    font: var(--hb-text-xs) / 1 var(--hb-font-mono);
+  }
+
+  .type-display {
+    font-family: var(--hb-font-display);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .type-body {
+    font-family: var(--hb-font-body);
+  }
+
+  .type-mono {
+    font-family: var(--hb-font-mono);
+  }
+
+  .type-sample {
+    margin-block: var(--hb-space-4) 0;
+    font-size: var(--hb-text-2xl);
+  }
+
+  .type-body.type-sample,
+  .type-mono.type-sample {
+    font-size: var(--hb-text-lg);
+  }
+
+  .space-bar {
+    display: block;
+    block-size: 16px;
+    border-radius: var(--hb-radius-s);
+    background: var(--hb-color-primary);
+  }
+
+  .shapes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--hb-space-6);
+    margin-block: var(--hb-space-6) 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .shape {
+    display: grid;
+    place-items: center;
+    inline-size: 9rem;
+    block-size: 6rem;
+    font: var(--hb-text-sm) / 1 var(--hb-font-mono);
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--hb-space-4);
+  }
+
+  .stack--top {
+    align-items: start;
+  }
+</style>

@@ -41,15 +41,16 @@ describe('feedback-block', () => {
       html`<feedback-block></feedback-block>`,
     );
 
-    expect(shadowRoot.querySelector('md-outlined-text-field')).toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('hb-text-field')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('hidden');
 
     element.contentRating = 4;
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('md-outlined-text-field')).not.toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('md-filled-button')).not.toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('.helper')).toHaveTextContent(
+    expect(shadowRoot.querySelector('hb-text-field')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('hb-button')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('hb-text-field')).toHaveAttribute(
+      'hint',
       'Comments will be anonymously provided to speakers',
     );
   });
@@ -86,8 +87,13 @@ describe('feedback-block', () => {
 
     expect(element.contentRating).toBe(feedback.contentRating);
     expect(element.styleRating).toBe(feedback.styleRating);
-    expect(shadowRoot.querySelector('md-outlined-text-field')).toHaveValue(feedback.comment);
+    expect(shadowRoot.querySelector('hb-text-field')!.value).toBe(feedback.comment);
     expect(shadowRoot.querySelector('.delete-button')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('.thanks')).toHaveTextContent('Thanks for your feedback.');
+    expect(shadowRoot.querySelector('.thanks .illustration')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    );
   });
 
   it('hides the delete button when there is no saved feedback', async () => {

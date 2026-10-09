@@ -10,68 +10,34 @@ const HOVERBOARD_URL = 'https://github.com/gdg-x/hoverboard';
 @customElement('footer-nav')
 export class FooterNav extends ThemedElement {
   static override styles = css`
-    :host {
-      margin: 0 20px;
+    .nav-inline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--hb-space-4);
+    }
+
+    /* Organizer logos are made for white backgrounds, and the footer is dark in both schemes. */
+    .footer-logo {
+      display: block;
+      inline-size: 140px;
+      block-size: 48px;
+      padding: var(--hb-space-2) var(--hb-space-3);
+      border-radius: var(--hb-radius-s);
+      background-color: white;
+      object-fit: contain;
     }
 
     .copyright {
-      padding: 15px 0 0;
-      float: left;
-    }
-
-    .coc {
-      display: block;
-    }
-
-    .nav-inline {
-      /* Note: no "display: flex" here on purpose — the original bare
-             "layout" attribute never had a matching "horizontal"/"vertical"
-             companion, so legacy CSS never actually made this a flex
-             container. Children are positioned with floats below. */
-      flex: 1;
-      flex-basis: 1px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .footer-logo {
-      --lazy-image-width: 120px;
-      --lazy-image-height: 24px;
-      --lazy-image-fit: contain;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      margin: 10px 30px 0 0;
-      float: left;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--hb-space-2);
     }
 
     a {
-      color: var(--footer-text-color);
-      padding-bottom: 2px;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    @media (min-width: 768px) {
-      :host {
-        margin: 15px 0;
-      }
-    }
-
-    @media (min-width: 505px) {
-      .copyright {
-        margin: 0;
-        padding: 15px 0 0 0;
-        float: right;
-        text-align: right;
-      }
-
-      .coc {
-        display: inline-flex;
-      }
+      color: inherit;
+      text-underline-offset: 0.2em;
     }
   `;
 

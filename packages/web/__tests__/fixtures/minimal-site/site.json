@@ -25,6 +25,10 @@
     "hashtag": "Minimal",
     "follow": []
   },
+  "theme": {
+    "name": "spotlight",
+    "decorations": false
+  },
   "heroSettings": {
     "home": {
       "background": { "image": "/images/backgrounds/home.jpg" }
@@ -33,6 +37,7 @@
   "features": {
     "blog": false,
     "codeOfConduct": false,
+    "demo": false,
     "faq": false,
     "feedback": false,
     "forkMe": false,

@@ -1,13 +1,14 @@
 import { msg } from '@lit/localize';
-import '@material/web/button/text-button.js';
-import '@material/web/iconbutton/icon-button.js';
-import { css, html, nothing, type PropertyValues, svg } from 'lit';
-import { customElement, query } from 'lit/decorators.js';
+import { html, nothing, type PropertyValues, svg } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
 import { type Snackbar, TIMEOUT } from '../../models/snackbar';
 import { store } from '../../store';
 import { removeSnackbar } from '../../store/snackbars';
 import { ThemedElement } from '../themed-element';
+import '../ui/hb-button';
+import '../ui/hb-icon-button';
+import '../ui/hb-toast';
 
 const closeIcon = svg`
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
@@ -18,91 +19,33 @@ const closeIcon = svg`
 
 @customElement('snack-bar')
 export class SnackBar extends ThemedElement {
-  static override styles = css`
-    .snackbar {
-      position: fixed;
-      inset: auto auto 16px 16px;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-sizing: border-box;
-      min-width: 344px;
-      max-width: calc(100vw - 32px);
-      padding: 6px 8px 6px 16px;
-      border: none;
-      border-radius: 4px;
-      background: var(--snackbar-background-color);
-      color: var(--snackbar-text-color);
-      font-size: 14px;
-      box-shadow: var(--box-shadow);
-    }
-
-    .snackbar:popover-open {
-      animation: snackbar-in 0.15s ease-out;
-    }
-
-    @keyframes snackbar-in {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-    }
-
-    @media (max-width: 599px) {
-      .snackbar {
-        inset: auto 0 0;
-        min-width: 0;
-        max-width: none;
-        border-radius: 0;
-      }
-    }
-
-    .label {
-      flex: 1;
-    }
-
-    .action {
-      --md-text-button-label-text-color: var(--light-primary-color);
-      --md-text-button-hover-label-text-color: var(--light-primary-color);
-      --md-text-button-focus-label-text-color: var(--light-primary-color);
-      --md-text-button-pressed-label-text-color: var(--light-primary-color);
-    }
-
-    .dismiss {
-      --md-icon-button-icon-color: var(--text-primary-color);
-    }
-  `;
-
   @fromStore((state) => state.snackbars[0])
   private accessor state!: Snackbar | undefined;
-
-  @query('.snackbar')
-  private accessor snackbar!: HTMLElement;
 
   private timeout: number | undefined;
 
   override render() {
     const action = this.state?.action
       ? html`
-          <md-text-button class="action" @click="${this.onAction}">
+          <hb-button slot="action" variant="text" class="action" @click="${this.onAction}">
             ${this.state.action.title}
-          </md-text-button>
+          </hb-button>
         `
       : nothing;
 
     return html`
-      <div class="snackbar" role="status" popover="manual">
+      <hb-toast ?open="${!!this.state}">
         <span class="label">${this.state?.label ?? ''}</span>
         ${action}
-        <md-icon-button
+        <hb-icon-button
+          slot="action"
           class="dismiss"
-          aria-label="${msg('Dismiss', { id: 'shell.snack-bar.dismiss' })}"
+          label="${msg('Dismiss', { id: 'shell.snack-bar.dismiss' })}"
           @click="${this.removeSnackbar}"
         >
           ${closeIcon}
-        </md-icon-button>
-      </div>
+        </hb-icon-button>
+      </hb-toast>
     `;
   }
 
@@ -113,13 +56,10 @@ export class SnackBar extends ThemedElement {
 
     window.clearTimeout(this.timeout);
     if (this.state) {
-      this.snackbar.togglePopover?.(true);
       this.timeout = window.setTimeout(
         () => this.removeSnackbar(),
         this.state.timeout ?? TIMEOUT.DEFAULT,
       );
-    } else {
-      this.snackbar.togglePopover?.(false);
     }
   }
 

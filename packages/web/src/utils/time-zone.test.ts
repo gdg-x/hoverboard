@@ -1,5 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import { zonedTime } from './time-zone';
+import { wallClock, zonedTime } from './time-zone';
+
+describe('wallClock', () => {
+  it('reads the date and time in a time zone', () => {
+    const instant = new Date('2024-07-02T22:30:00Z');
+
+    expect(wallClock(instant, 'UTC')).toEqual({ date: '2024-07-02', time: '22:30' });
+    expect(wallClock(instant, 'Europe/Kyiv')).toEqual({ date: '2024-07-03', time: '01:30' });
+    expect(wallClock(instant, 'America/New_York')).toEqual({ date: '2024-07-02', time: '18:30' });
+  });
+
+  it('uses 00 for midnight', () => {
+    expect(wallClock(new Date('2024-07-02T00:05:00Z'), 'UTC').time).toBe('00:05');
+  });
+});
 
 describe('zonedTime', () => {
   it.each([

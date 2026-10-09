@@ -81,14 +81,8 @@
   "integrations": {
     "googleMapsApiKey": "AIzaSyCJqlRVGIe6bfU43rga3cnK7tSXXwc7JD8"
   },
-  "heroSettings": {
-    "home": {
-      "background": {
-        "image": "/images/backgrounds/home.jpg"
-      }
-    }
-  },
   "features": {
+    "demo": true,
     "forkMe": true
   }
 }

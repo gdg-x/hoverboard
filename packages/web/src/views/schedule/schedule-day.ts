@@ -1,116 +1,282 @@
 import { Success } from '@abraham/remotedata';
-import { msg } from '@lit/localize';
-import { css, html, type PropertyValues } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { msg, str } from '@lit/localize';
+import { css, html, nothing, type PropertyValues } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { Day } from '../../models/day';
 import type { Filter } from '../../models/filter';
 import type { Session } from '../../models/session';
-import type { GeneratedSessionBlock, Time } from '../../models/time';
+import type { GeneratedSessionBlock } from '../../models/time';
 import type { Timeslot } from '../../models/timeslot';
 import type { RouteLocation } from '../../utils/navigation';
-import {
-  type FeaturedSessionsState,
-  selectFeaturedSessionsState,
-} from '../../store/featured-sessions';
 import { selectFilters } from '../../store/filters';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
-import type { UserState } from '../../store/user';
+import { selectLocalTime } from '../../store/ui';
+import { timeZone } from '../../config/site';
+import { clearFilters } from '../../utils/filters';
+import { getLocale } from '../../utils/localization';
 import { generateClassName } from '../../utils/styles';
+import { wallClock, zonedTime } from '../../utils/time-zone';
 import '../../components/shared/hoverboard-icon';
 import '../../components/schedule/session-element';
+import '../../components/ui/hb-button';
+import '../../components/ui/hb-icon-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../../components/themed-element';
+import { illustration, illustrationStyles } from '../../illustrations/illustration';
+import noResults from '../../illustrations/no-results.svg?raw';
 
+const ONE_MINUTE_MS = 60_000;
+
+/** Moves a generated `grid-area` one column over, to make room for the time column. */
+export const withTimeColumn = (gridArea: string | undefined): string | undefined => {
+  const parts = gridArea?.split('/').map((part) => Number(part.trim()));
+  if (parts?.length !== 4 || parts.some(Number.isNaN)) return undefined;
+  const [rowStart, columnStart, rowEnd, columnEnd] = parts as [number, number, number, number];
+  return `${rowStart} / ${columnStart + 1} / ${rowEnd} / ${columnEnd + 1}`;
+};
+
+const minutes = (time: string) => {
+  const [hours = 0, mins = 0] = time.split(':').map(Number);
+  return hours * 60 + mins;
+};
+
+export const matchesFilters = (session: Session, filters: Filter[]) =>
+  filters.every((filter) => {
+    const values = session[filter.group];
+    if (values === undefined) return false;
+    const tags = typeof values === 'string' ? [values] : values;
+    return tags.some((value) => generateClassName(value) === generateClassName(filter.tag));
+  });
+
+/**
+ * One day of the schedule. On wide containers, tracks are columns that scroll sideways when they do
+ * not fit, with the times fixed at the start and the track names fixed at the top. On narrow ones,
+ * sessions are one list in time order. During the day, a line marks the current time.
+ */
 @customElement('schedule-day')
 export class ScheduleDay extends ThemedElement {
-  static override styles = css`
-    :host {
-      display: block;
-      --tracks-number: 3;
-    }
-
-    .start-time {
-      margin-top: 16px;
-      padding: 8px 16px;
-      color: var(--secondary-text-color);
-      letter-spacing: -0.04em;
-      border-bottom: 1px solid var(--border-light-color);
-    }
-
-    .hours {
-      font-size: 24px;
-      font-weight: 300;
-    }
-
-    .minutes {
-      font-size: 16px;
-    }
-
-    .add-session {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-      grid-column-end: -1 !important;
-      background-color: var(--primary-background-color);
-      border-bottom: 1px solid var(--border-light-color);
-      font-size: 14px;
-      color: var(--secondary-text-color);
-    }
-
-    .add-session:hover {
-      background-color: var(--additional-background-color);
-    }
-
-    .add-session-icon {
-      width: 14px;
-      height: 14px;
-      margin-right: 8px;
-    }
-
-    .session {
-      display: flex;
-      flex-direction: column;
-    }
-
-    @media (min-width: 812px) {
+  static override styles = [
+    illustrationStyles,
+    css`
       :host {
-        margin-left: auto;
         display: block;
-        max-width: calc(100% - 64px);
+        container-type: inline-size;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .pager {
+        display: flex;
+        align-items: center;
+        gap: var(--hb-space-1);
+        margin-block-end: var(--hb-space-2);
+        color: var(--hb-color-on-surface-variant);
+        font-size: var(--hb-text-sm);
+      }
+
+      .pager-text {
+        margin-inline-end: auto;
+      }
+
+      .grid,
+      .header-grid {
+        display: grid;
+        grid-template-columns: 4.5rem repeat(var(--tracks, 1), minmax(16rem, 1fr));
+        gap: var(--hb-space-3);
+        min-inline-size: min-content;
+      }
+
+      .header {
+        position: sticky;
+        z-index: 3;
+        inset-block-start: var(--hb-schedule-sticky-top, 0px);
+        overflow: hidden;
+        background-color: var(--hb-bar-background);
+        backdrop-filter: var(--hb-backdrop-filter);
+      }
+
+      .header-grid {
+        padding-block: var(--hb-space-2);
+        padding-inline-end: var(--hb-space-2);
+        border-block-end: var(--hb-border-width) solid var(--hb-border-color);
+      }
+
+      .corner {
+        position: sticky;
+        z-index: 1;
+        inset-inline-start: 0;
+        background-color: var(--hb-bar-background);
+      }
+
+      .track {
+        padding-inline: var(--hb-space-3);
+        font-weight: 700;
+        overflow-wrap: anywhere;
+      }
+
+      .scroller {
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        scroll-padding-inline-start: calc(4.5rem + var(--hb-space-3));
+        border-radius: var(--hb-radius-m);
+      }
+
+      .scroller:focus-visible {
+        outline: 3px solid var(--hb-color-focus);
+        outline-offset: 2px;
       }
 
       .grid {
+        position: relative;
+        padding-block: var(--hb-space-4);
+        padding-inline-end: var(--hb-space-2);
+      }
+
+      .time {
+        position: sticky;
+        z-index: 2;
+        inset-inline-start: 0;
+        grid-column: 1;
+        padding-block-start: var(--hb-space-3);
+        background-color: var(--hb-bar-background);
+        backdrop-filter: var(--hb-backdrop-filter);
+        font: 600 var(--hb-text-md) / 1.2 var(--hb-font-mono);
+        scroll-margin-block-start: calc(var(--hb-schedule-sticky-top, 0px) + 4rem);
+      }
+
+      .block {
+        display: flex;
+        flex-direction: column;
+        gap: var(--hb-space-3);
+        min-inline-size: 0;
+        scroll-snap-align: start;
+      }
+
+      .block session-element {
+        flex: 1;
+      }
+
+      .browse {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--hb-space-2);
+        grid-column: 2 / -1;
+        min-block-size: 4rem;
+        border: var(--hb-border-width) dashed var(--hb-color-outline-variant);
+        border-radius: var(--hb-radius-m);
+        color: var(--hb-color-on-surface-variant);
+        text-decoration: none;
+      }
+
+      .browse:hover {
+        border-color: var(--hb-color-outline);
+        color: var(--hb-color-on-surface);
+      }
+
+      .browse:focus-visible {
+        outline: 3px solid var(--hb-color-focus);
+        outline-offset: 2px;
+      }
+
+      .browse hoverboard-icon {
+        inline-size: 20px;
+        block-size: 20px;
+      }
+
+      .now {
+        position: relative;
+        z-index: 4;
+        grid-column: 1 / -1;
+        pointer-events: none;
+      }
+
+      .now-line {
+        position: absolute;
+        inset-inline: 0;
+        display: flex;
+        align-items: center;
+        gap: var(--hb-space-2);
+        color: var(--hb-color-error);
+        font: 700 var(--hb-text-sm) / 1 var(--hb-font-mono);
+        translate: 0 -50%;
+      }
+
+      .now-line::after {
+        content: '';
+        flex: 1;
+        block-size: 2px;
+        background-color: currentColor;
+      }
+
+      /* The label stays in view when the grid scrolls sideways. */
+      .now-label {
+        position: sticky;
+        inset-inline-start: 0;
+        padding: var(--hb-space-1) var(--hb-space-2);
+        border-radius: var(--hb-radius-full);
+        background-color: var(--hb-bar-background);
+        backdrop-filter: var(--hb-backdrop-filter);
+      }
+
+      .empty {
         display: grid;
-        grid-column-gap: 16px;
-        grid-row-gap: 32px;
-        grid-template-columns: repeat(var(--tracks-number), 1fr);
+        justify-items: start;
+        gap: var(--hb-space-3);
+        padding-block: var(--hb-space-6);
       }
 
-      .start-time {
+      .empty p {
         margin: 0;
-        padding: 0;
-        text-align: right;
-        transform: translateX(calc(-100% - 16px));
-        border-bottom: 0;
       }
 
-      .hours {
-        font-size: 32px;
+      .empty .illustration {
+        inline-size: min(100%, 12rem);
       }
 
-      .subsession:not(:last-of-type) {
-        margin-bottom: 16px;
+      @container (width < 640px) {
+        .pager,
+        .header {
+          display: none;
+        }
+
+        .scroller {
+          overflow: visible;
+        }
+
+        .grid {
+          display: flex;
+          flex-direction: column;
+          min-inline-size: 0;
+          padding-inline-end: 0;
+        }
+
+        .time {
+          position: static;
+          padding-block-start: var(--hb-space-4);
+        }
+
+        .now {
+          block-size: 1.5rem;
+        }
+
+        .now-line {
+          inset-block-start: 50% !important;
+        }
       }
 
-      .add-session {
-        border: 1px solid var(--border-light-color);
+      @media (forced-colors: active) {
+        .now-line {
+          color: Highlight;
+        }
       }
-    }
-  `;
+    `,
+  ];
 
   @fromStore((state) => selectScheduleState(state))
   accessor schedule!: ScheduleState;
@@ -118,154 +284,250 @@ export class ScheduleDay extends ThemedElement {
   accessor location: RouteLocation | undefined;
   @property({ attribute: false })
   accessor day: Day | undefined;
-
-  @fromStore((state) => state.user)
-  private accessor user!: UserState;
-  @fromStore((state) => selectFeaturedSessionsState(state))
-  private accessor featuredSessions!: FeaturedSessionsState;
   @property({ type: Boolean })
   accessor onlyFeatured = false;
   @fromStore((state) => selectFilters(state))
   private accessor selectedFilters!: Filter[];
+  @fromStore((state) => selectLocalTime(state))
+  private accessor localTime!: boolean;
 
-  override willUpdate(changedProperties: PropertyValues) {
-    if (
-      changedProperties.has('location') ||
-      changedProperties.has('schedule') ||
-      changedProperties.has('onlyFeatured')
-    ) {
+  // The current time, set only in the browser so the first render matches the server's.
+  @state()
+  private accessor now: Date | undefined;
+  @state()
+  private accessor overflowing = false;
+  @state()
+  private accessor atStart = true;
+  @state()
+  private accessor atEnd = false;
+
+  @query('.scroller')
+  private accessor scroller!: HTMLElement | null;
+  @query('.header')
+  private accessor header!: HTMLElement | null;
+
+  private clock: ReturnType<typeof setInterval> | undefined;
+  private resizeObserver: ResizeObserver | undefined;
+  private scrolledToNow = false;
+
+  override willUpdate(changed: PropertyValues<this>) {
+    if (changed.has('location') || changed.has('schedule') || changed.has('onlyFeatured')) {
       this.updateDay();
     }
   }
 
-  // The `<session-element .session="...">` binding below is flagged by lit-analyzer's
-  // no-incompatible-type-binding rule as a false positive: it reports the exact same
-  // intersection type (Session = Id & SessionData) as incompatible with itself when
-  // combined with exactOptionalPropertyTypes. tsc confirms the assignment is valid, so
-  // the rule is disabled project-wide via the `lint:lit-analyzer` script.
+  override firstUpdated() {
+    this.now = new Date();
+    this.clock = setInterval(() => (this.now = new Date()), ONE_MINUTE_MS);
+    this.updateOverflow();
+    if (typeof ResizeObserver !== 'undefined' && this.scroller) {
+      this.resizeObserver = new ResizeObserver(() => this.updateOverflow());
+      this.resizeObserver.observe(this.scroller);
+    }
+    this.scrollToHash();
+  }
+
+  override updated() {
+    if (!this.scrolledToNow && !this.onlyFeatured && !window.location.hash) {
+      const line = this.renderRoot.querySelector('.now');
+      if (line) {
+        this.scrolledToNow = true;
+        line.scrollIntoView({ block: 'center' });
+      }
+    }
+  }
+
+  override disconnectedCallback() {
+    super.disconnectedCallback();
+    clearInterval(this.clock);
+    this.resizeObserver?.disconnect();
+  }
+
   override render() {
     const day = this.day;
+    if (!day) return nothing;
+    const tracks = day.tracks.length || 1;
+    const filtered = this.selectedFilters.length > 0;
+    const visible = day.timeslots.map((timeslot) => this.visibleBlocks(timeslot));
+    const now = this.nowPosition(day);
+
+    if (filtered && !this.onlyFeatured && visible.every((blocks) => blocks.length === 0)) {
+      return html`
+        <div class="empty">
+          ${illustration(noResults)}
+          <p>${msg('No sessions match these filters.', { id: 'schedule.day.no-results' })}</p>
+          <hb-button variant="tonal" @click="${clearFilters}">
+            ${msg('Clear filters', { id: 'schedule.day.clear-filters' })}
+          </hb-button>
+        </div>
+      `;
+    }
 
     return html`
-      <div class="grid" style="${styleMap({ '--tracks-number': day?.tracks.length })}">
-        ${repeat(
-          day?.timeslots ?? [],
-          (timeslot) => timeslot.startTime,
-          (timeslot, timeslotIndex) => html`
-            <div
-              id="${timeslot.startTime}"
-              class="start-time"
-              style="${styleMap({ 'grid-area': this.getTimePosition(timeslotIndex) })}"
-            >
-              <span class="hours">${this.splitText(timeslot.startTime, ':', 0)}</span>
-              <span class="minutes">${this.splitText(timeslot.startTime, ':', 1)}</span>
-            </div>
+      <div class="pager" ?hidden="${!this.overflowing}">
+        <span class="pager-text">
+          ${msg(str`${tracks} tracks. Scroll sideways to see them all.`, {
+            id: 'schedule.day.scroll-hint',
+          })}
+        </span>
+        <hb-icon-button
+          label="${msg('Previous track', { id: 'schedule.day.previous-track' })}"
+          ?disabled="${this.atStart}"
+          @click="${() => this.scrollByTrack(-1)}"
+        >
+          <hoverboard-icon name="chevron-left"></hoverboard-icon>
+        </hb-icon-button>
+        <hb-icon-button
+          label="${msg('Next track', { id: 'schedule.day.next-track' })}"
+          ?disabled="${this.atEnd}"
+          @click="${() => this.scrollByTrack(1)}"
+        >
+          <hoverboard-icon name="chevron-right"></hoverboard-icon>
+        </hb-icon-button>
+      </div>
 
-            <a
-              class="add-session"
-              href="/schedule/${day?.date}#${timeslot.startTime}"
-              ?hidden="${!this.showAddSession(timeslot, this.onlyFeatured)}"
-              style="${styleMap({
-                'grid-area': (timeslot.sessions[0] as GeneratedSessionBlock | undefined)?.gridArea,
-              })}"
-            >
-              <hoverboard-icon name="add-circle-outline" class="add-session-icon"></hoverboard-icon>
-              <span>${msg('Browse sessions', { id: 'schedule.day.browse-sessions' })}</span>
-            </a>
+      <div class="header" aria-hidden="true">
+        <div class="header-grid" style="${styleMap({ '--tracks': String(tracks) })}">
+          <div class="corner"></div>
+          ${day.tracks.map((track) => html`<div class="track">${track.title}</div>`)}
+        </div>
+      </div>
 
-            ${timeslot.sessions
-              .filter((sessionBlock) => this.isNotEmpty(sessionBlock))
-              .map(
-                (sessionBlock) => html`
+      <div
+        class="scroller"
+        role="region"
+        aria-label="${msg(str`Schedule for ${day.dateReadable}`, { id: 'schedule.day.label' })}"
+        tabindex="${ifDefined(this.overflowing ? 0 : undefined)}"
+        @scroll="${this.onScroll}"
+      >
+        <div class="grid" style="${styleMap({ '--tracks': String(tracks) })}">
+          ${repeat(
+            day.timeslots,
+            (timeslot) => timeslot.startTime,
+            (timeslot, index) => html`
+              <div class="time" id="${timeslot.startTime}" style="grid-row: ${index + 1}">
+                ${this.renderTime(day.date, timeslot.startTime)}
+              </div>
+              ${
+                now?.index === index
+                  ? html`<div class="now" style="grid-row: ${index + 1}">
+                      <div class="now-line" style="inset-block-start: ${now.offset}%">
+                        <span class="now-label">
+                          ${msg(str`Now · ${now.label}`, { id: 'schedule.day.now' })}
+                        </span>
+                      </div>
+                    </div>`
+                  : nothing
+              }
+              ${
+                this.onlyFeatured && visible[index]!.length === 0
+                  ? html`<a
+                      class="browse"
+                      href="/schedule/${day.date}#${timeslot.startTime}"
+                      style="grid-row: ${index + 1}"
+                    >
+                      <hoverboard-icon name="add-circle-outline"></hoverboard-icon>
+                      ${msg('Browse sessions', { id: 'schedule.day.browse-sessions' })}
+                    </a>`
+                  : nothing
+              }
+              ${visible[index]!.map(
+                ({ block, sessions }) => html`
                   <div
-                    class="session"
-                    style="${styleMap({
-                      'grid-area': (sessionBlock as GeneratedSessionBlock).gridArea,
-                    })}"
+                    class="block"
+                    style="${styleMap({ 'grid-area': withTimeColumn(block.gridArea) })}"
                   >
                     ${repeat(
-                      this.filterSessions(
-                        (sessionBlock as GeneratedSessionBlock).items,
-                        this.selectedFilters,
-                      ),
-                      (subSession) => subSession.id,
-                      (subSession) => html`
-                        <session-element
-                          class="subsession"
-                          .session="${subSession}"
-                        ></session-element>
-                      `,
+                      sessions,
+                      (session) => session.id,
+                      (session) => html`<session-element .session="${session}"></session-element>`,
                     )}
                   </div>
                 `,
               )}
-          `,
-        )}
+            `,
+          )}
+        </div>
       </div>
     `;
   }
 
-  private getTimePosition(timeslotIndex: number) {
-    return `${timeslotIndex + 1} / 1`;
+  /** The time in the event time zone, or the visitor's when they chose so. */
+  private renderTime(date: string, startTime: string) {
+    const instant = zonedTime(date, startTime, timeZone);
+    if (!this.localTime) {
+      return html`<time datetime="${instant.toISOString()}">${startTime}</time>`;
+    }
+    const local = wallClock(instant);
+    const weekday =
+      local.date === date
+        ? ''
+        : ` ${new Intl.DateTimeFormat(getLocale(), { weekday: 'short', timeZone: 'UTC' }).format(
+            new Date(`${local.date}T00:00:00Z`),
+          )}`;
+    return html`<time datetime="${instant.toISOString()}">${local.time}${weekday}</time>`;
   }
 
-  private splitText(text: string, divider: string, index: number) {
-    return text.split(divider)[index];
+  private visibleBlocks(timeslot: Timeslot) {
+    return timeslot.sessions
+      .map((block) => ({
+        block: block as GeneratedSessionBlock,
+        sessions: (block as GeneratedSessionBlock).items.filter((session) =>
+          matchesFilters(session, this.selectedFilters),
+        ),
+      }))
+      .filter(({ sessions }) => sessions.length > 0);
   }
 
-  private showAddSession(timeslot: Timeslot, onlyFeatured: boolean) {
-    return (
-      onlyFeatured &&
-      !timeslot.sessions.reduce(
-        (aggregator, sessionBlock) => aggregator + sessionBlock.items.length,
-        0,
-      )
+  /** Which timeslot holds the current time, and how far into it, during this day. */
+  private nowPosition(day: Day) {
+    if (!this.now) return undefined;
+    const event = wallClock(this.now, timeZone);
+    if (event.date !== day.date) return undefined;
+    const current = minutes(event.time);
+    const index = day.timeslots.findIndex(
+      ({ startTime, endTime }) => minutes(startTime) <= current && current < minutes(endTime),
     );
+    if (index === -1) return undefined;
+    const { startTime, endTime } = day.timeslots[index]!;
+    const offset = ((current - minutes(startTime)) / (minutes(endTime) - minutes(startTime))) * 100;
+    const label = this.localTime ? wallClock(this.now).time : event.time;
+    return { index, offset: Math.round(offset), label };
   }
 
-  private isNotEmpty(sessionBlock: Time) {
-    return !!sessionBlock.items.length;
+  private readonly onScroll = () => {
+    if (this.header && this.scroller) this.header.scrollLeft = this.scroller.scrollLeft;
+    this.updateOverflow();
+  };
+
+  private updateOverflow() {
+    const scroller = this.scroller;
+    if (!scroller) return;
+    this.overflowing = scroller.scrollWidth > scroller.clientWidth + 1;
+    this.atStart = scroller.scrollLeft <= 0;
+    this.atEnd = scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 1;
   }
 
-  private filterSessions(sessions: Session[], selectedFilters: Filter[]) {
-    if (selectedFilters.length === 0) {
-      return sessions;
-    }
-
-    return sessions.filter((session) => {
-      return selectedFilters.every((filter) => {
-        const values = session[filter.group];
-        if (values === undefined) {
-          return false;
-        } else if (typeof values === 'string') {
-          return generateClassName(values) === generateClassName(filter.tag);
-        } else {
-          return values.some((value) => generateClassName(value) === generateClassName(filter.tag));
-        }
-      });
-    });
+  private scrollByTrack(direction: 1 | -1) {
+    const track = this.renderRoot.querySelector('.track');
+    const width = track?.getBoundingClientRect().width ?? 0;
+    this.scroller?.scrollBy({ left: direction * width, behavior: 'smooth' });
   }
 
-  private get name(): string | undefined {
-    if (this.location && this.schedule instanceof Success) {
-      const {
-        params: { id },
-        pathname,
-      } = this.location;
-      if (pathname.endsWith('my-schedule')) {
-        return 'my-schedule';
-      } else {
-        return (id as string) || this.schedule.data[0]?.date;
-      }
-    } else {
-      return undefined;
-    }
+  // Ids in shadow roots are not fragment targets, so links such as `#10:00` scroll here.
+  private scrollToHash() {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) return;
+    const target = [...this.renderRoot.querySelectorAll('.time')].find((time) => time.id === id);
+    target?.scrollIntoView({ block: 'start' });
   }
 
   private updateDay() {
-    if (!this.onlyFeatured && this.name && this.schedule instanceof Success) {
-      this.day = this.schedule.data.find((day) => day.date === this.name);
-    }
+    if (this.onlyFeatured || !this.location || !(this.schedule instanceof Success)) return;
+    const { params, pathname } = this.location;
+    if (pathname.endsWith('my-schedule')) return;
+    const date = (params['id'] as string | undefined) || this.schedule.data[0]?.date;
+    this.day = this.schedule.data.find((day) => day.date === date);
   }
 }
 

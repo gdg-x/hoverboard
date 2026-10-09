@@ -34,10 +34,15 @@ describe('snack-bar', () => {
 
   it('renders the label of the first queued snackbar', async () => {
     const { element, shadowRoot } = await fixture<SnackBar>(html`<snack-bar></snack-bar>`);
+    const toast = shadowRoot.querySelector('hb-toast');
+
+    expect(toast).not.toHaveAttribute('open');
+
     store.dispatch(queueSnackbar('Saved successfully'));
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('.label')).toHaveTextContent('Saved successfully');
+    expect(toast).toHaveAttribute('open');
   });
 
   it('renders an action button for complex snackbars', async () => {

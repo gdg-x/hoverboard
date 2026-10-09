@@ -59,7 +59,16 @@ describe('remote-markdown', () => {
     const toc = shadowRoot.querySelector('toc-markdown');
     expect(toc).toHaveProperty('content', '## Given heading');
     expect(toc).toHaveProperty('pagePath', '/faq');
+    expect(toc).toHaveProperty('disclosures', false);
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('passes disclosures on', async () => {
+    const { shadowRoot } = await renderRemoteMarkdown(
+      html`<remote-markdown disclosures .content=${'## Given heading'}></remote-markdown>`,
+    );
+
+    expect(shadowRoot.querySelector('toc-markdown')).toHaveProperty('disclosures', true);
   });
 
   it('renders an error message when the fetch fails', async () => {

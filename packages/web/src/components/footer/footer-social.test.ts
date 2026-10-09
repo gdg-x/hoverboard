@@ -4,6 +4,7 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { mailto, organizer, socialNetwork } from '../../config/site';
 import { share } from '../../utils/share';
+import type { HbIconButton } from '../ui/hb-icon-button';
 import './footer-social';
 
 vi.mock('../../utils/share');
@@ -26,11 +27,11 @@ describe('footer-social', () => {
 
     expect(screen.getByTestId('footer-social')).toBeInTheDocument();
 
-    const facebookButton = shadowRootForWithin.querySelector('[aria-label="Share on Facebook"]')!;
+    const facebookButton = shadowRootForWithin.querySelector('[label="Share on Facebook"]')!;
     fireEvent.click(facebookButton);
     expect(mockShare).toHaveBeenCalledTimes(1);
 
-    const twitterButton = shadowRootForWithin.querySelector('[aria-label="Share on Twitter"]')!;
+    const twitterButton = shadowRootForWithin.querySelector('[label="Share on Twitter"]')!;
     fireEvent.click(twitterButton);
     expect(mockShare).toHaveBeenCalledTimes(2);
   });
@@ -39,7 +40,10 @@ describe('footer-social', () => {
     const { shadowRootForWithin } = await fixture(html`<footer-social></footer-social>`);
 
     for (const { name, url } of socialNetwork.follow) {
-      const link = shadowRootForWithin.querySelector(`[aria-label="${name}"]`)?.closest('a');
+      const button = shadowRootForWithin.querySelector<HbIconButton>(`[label="${name}"]`)!;
+      await button.updateComplete;
+      const link = button.shadowRoot!.querySelector('a');
+      expect(link).toHaveAccessibleName(name);
       expect(link).toHaveAttribute('href', url);
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noopener noreferrer');

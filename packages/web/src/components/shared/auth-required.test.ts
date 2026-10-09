@@ -42,9 +42,7 @@ describe('auth-required', () => {
   });
 
   it('shows unauthenticated prompt', () => {
-    expect(shadowRoot.querySelector<HTMLDivElement>('md-text-button')).not.toHaveAttribute(
-      'hidden',
-    );
+    expect(shadowRoot.querySelector<HTMLDivElement>('hb-button')).not.toHaveAttribute('hidden');
 
     const slots = shadowRoot.querySelectorAll('slot');
 
@@ -58,7 +56,7 @@ describe('auth-required', () => {
   });
 
   it('opens dialog on tap', () => {
-    fireEvent.click(shadowRoot.querySelector('md-text-button')!);
+    fireEvent.click(shadowRoot.querySelector('hb-button')!);
 
     expect(mockOpenDialog).toHaveBeenCalledTimes(1);
   });
@@ -67,7 +65,7 @@ describe('auth-required', () => {
     store.dispatch(setUserSuccess({ uid: '1' } as User));
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector<HTMLDivElement>('md-text-button')).toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector<HTMLDivElement>('hb-button')).toHaveAttribute('hidden');
 
     const slots = shadowRoot.querySelectorAll('slot');
 

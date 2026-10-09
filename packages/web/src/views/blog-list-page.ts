@@ -1,133 +1,25 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/progress/linear-progress.js';
-import { css, html } from 'lit';
+import { html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '../components/shared/content-loader';
 import '../components/hero/simple-hero';
-import '../components/markdown/short-markdown';
 import '../components/shared/posts-list';
-import '../components/shared/text-truncate';
-import type { Post } from '../models/post';
-import { postPath } from '../utils/navigation';
+import '../components/ui/hb-progress';
 import { type BlogState, selectBlogPosts } from '../store/blog';
-import { contentLoaders } from '../config/site';
-import { getDate } from '../utils/dates';
+import { pageInner } from '../styles/page';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
+/** Every blog post as a card, newest first, with the first one larger. */
 @customElement('blog-list-page')
 export class BlogListPage extends ThemedElement {
-  static override styles = css`
-    .featured-posts-wrapper {
-      grid-template-columns: 1fr;
-      display: grid;
-      grid-gap: 24px;
-    }
-
-    .featured {
-      background-color: var(--secondary-background-color);
-    }
-
-    .featured-post {
-      height: 200px;
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .image {
-      position: absolute;
-      --lazy-image-width: 100%;
-      --lazy-image-height: 100%;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-    }
-
-    .image-overlay {
-      background-color: rgba(0, 0, 0, 0.6);
-      position: absolute;
-      inset: 0;
-    }
-
-    .details {
-      padding: 24px;
-      height: 100%;
-      transform: translateZ(0);
-      color: var(--text-primary-color);
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .title {
-      line-height: 1.2;
-    }
-
-    .description {
-      padding-top: 8px;
-      opacity: 0.8;
-    }
-
-    .brief {
-      -webkit-line-clamp: 2;
-    }
-
-    .date {
-      font-size: 12px;
-      text-transform: uppercase;
-      opacity: 0.8;
-    }
-
-    .progress {
-      width: 100%;
-      --md-linear-progress-active-indicator-color: var(--default-primary-color);
-      --md-linear-progress-track-color: var(--default-primary-color);
-    }
-
-    @media (min-width: 640px) {
-      .featured-posts-wrapper {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .featured-post {
-        height: 256px;
-      }
-
-      .brief {
-        -webkit-line-clamp: 3;
-      }
-    }
-  `;
+  static override styles = pageInner;
 
   private readonly metadata = new PageMetadataController(this, 'blog');
-  private contentLoaders = contentLoaders.blog;
 
   @fromStore((state) => selectBlogPosts(state))
   accessor posts!: BlogState;
-
-  get pending() {
-    return this.posts instanceof Pending;
-  }
-
-  get failure() {
-    return this.posts instanceof Failure;
-  }
-
-  private get featuredPosts(): Post[] {
-    return this.posts instanceof Success ? this.posts.data.slice(0, 3) : [];
-  }
-
-  private get contentLoaderVisibility(): boolean {
-    return this.posts instanceof Success || this.posts instanceof Failure;
-  }
-
-  private postUrl(id: string) {
-    return postPath(id);
-  }
 
   override render() {
     const posts = this.posts instanceof Success ? this.posts.data : [];
@@ -135,68 +27,15 @@ export class BlogListPage extends ThemedElement {
     return html`
       <simple-hero page="blog"></simple-hero>
 
-      <md-linear-progress
-        class="progress"
-        indeterminate
-        ?hidden=${this.contentLoaderVisibility}
-      ></md-linear-progress>
+      <hb-progress ?hidden="${!(this.posts instanceof Pending)}"></hb-progress>
 
-      <div class="featured">
-        <div class="container">
-          <content-loader
-            class="featured-posts-wrapper"
-            card-padding="24px"
-            card-height="256px"
-            border-radius="var(--border-radius)"
-            title-top-position="32px"
-            title-height="42px"
-            title-width="70%"
-            load-from="-70%"
-            load-to="130%"
-            animation-time="1s"
-            .itemsCount=${this.contentLoaders.itemsCount}
-            ?hidden=${this.contentLoaderVisibility}
-          ></content-loader>
-
-          <div class="featured-posts-wrapper">
-            ${
-              this.failure
-                ? html`<p>${msg('Error loading posts.', { id: 'pages.blog-list.error' })}</p>`
-                : ''
-            }
-            ${this.featuredPosts.map(
-              (post) => html`
-                <a href=${this.postUrl(post.id)} class="featured-post">
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    class="image"
-                    src=${post.image}
-                    alt=${post.title}
-                    style="background-color: ${post.backgroundColor};"
-                  />
-
-                  <div class="image-overlay"></div>
-                  <div class="details">
-                    <div>
-                      <text-truncate lines="2">
-                        <h2 class="title">${post.title}</h2>
-                      </text-truncate>
-                      <text-truncate class="brief">
-                        <short-markdown class="description" content=${post.brief}></short-markdown>
-                      </text-truncate>
-                    </div>
-                    <span class="date">${getDate(post.published)}</span>
-                  </div>
-                </a>
-              `,
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div class="container-narrow">
-        <posts-list .posts=${posts}></posts-list>
+      <div class="inner">
+        ${
+          this.posts instanceof Failure
+            ? html`<p>${msg('Error loading posts.', { id: 'pages.blog-list.error' })}</p>`
+            : nothing
+        }
+        <posts-list featured .posts="${posts}"></posts-list>
       </div>
     `;
   }

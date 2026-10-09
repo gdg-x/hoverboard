@@ -1,7 +1,9 @@
 ---
 import { ClientRouter } from 'astro:transitions';
-import { mapsScript, theme, themeCss } from 'virtual:hoverboard/layout';
+import { fontCss, fontStylesheets } from 'virtual:hoverboard/fonts';
+import { theme, themeCss } from 'virtual:hoverboard/layout';
 import { resources, site } from 'virtual:hoverboard/site';
+import '../styles/base.css';
 import { FooterBlock } from '../components/footer/footer-block';
 import { AppHeader } from '../components/shell/app-header';
 import { AppOverlays } from '../components/shell/app-overlays';
@@ -10,6 +12,9 @@ import '../data/markdown';
 import { seedPage } from '../data/page';
 import { openGraphLocale } from '../data/structured-data';
 import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
+import { colorSchemeScript } from '../utils/color-scheme';
+import { demoScript } from '../utils/demo';
+import { eventState } from '../utils/event-state';
 
 interface Props {
   title?: string;
@@ -38,10 +43,29 @@ const demoFirebaseConfig = {
   projectId: 'demo-hoverboard',
   storageBucket: 'demo-hoverboard.appspot.com',
 };
+
+// The browser toolbar color follows the color scheme, unless the site locks one. Both colors ride
+// along, so the footer toggle can pick one.
+const themeColors =
+  theme.colorScheme === 'system'
+    ? [
+        { color: theme.light.primary, media: '(prefers-color-scheme: light)' },
+        { color: theme.dark.primary, media: '(prefers-color-scheme: dark)' },
+      ]
+    : [{ color: theme[theme.colorScheme].primary, media: undefined }];
+const fontOrigins = [...new Set(fontStylesheets.map((href) => new URL(href).origin))];
+// At build time. The header checks again in the browser.
+const builtEventState = eventState(new Date(), site.event);
+// The header imports the banner without waiting, so wait here for the server to render it.
+if (__HB_FEATURES__.demo) await import('../components/shell/demo-banner');
 ---
 
 <!doctype html>
-<html lang={site.locales.source}>
+<html
+  data-color-scheme={theme.colorScheme === 'system' ? undefined : theme.colorScheme}
+  data-decorations={theme.decorations ? undefined : 'off'}
+  lang={site.locales.source}
+>
   <head>
     <base href={site.basepath} />
     <meta charset="utf-8" />
@@ -60,7 +84,22 @@ const demoFirebaseConfig = {
 
     <link href="images/favicon.ico" rel="icon" />
 
-    <meta content={theme.primary} name="theme-color" />
+    <meta
+      content={theme.colorScheme === 'system' ? 'light dark' : theme.colorScheme}
+      name="color-scheme"
+    />
+    {themeColors.map(({ color, media }) => (
+      <meta
+        content={color}
+        data-dark={theme.dark.primary}
+        data-light={theme.light.primary}
+        media={media}
+        name="theme-color"
+      />
+    ))}
+    {/* After the theme-color tags it updates, and before any style, so the first paint is right. */}
+    {theme.colorScheme === 'system' && <script is:inline set:html={colorSchemeScript} />}
+    {__HB_FEATURES__.demo && <script is:inline set:html={demoScript} />}
     <link href="manifest.json" rel="manifest" />
 
     <meta content="yes" name="mobile-web-app-capable" />
@@ -77,7 +116,7 @@ const demoFirebaseConfig = {
     <link href="images/manifest/icon-192.png" rel="apple-touch-icon" sizes="192x192" />
 
     <meta content="images/manifest/icon-144.png" name="msapplication-TileImage" />
-    <meta content={theme.primary} name="msapplication-TileColor" />
+    <meta content={theme.light.primary} name="msapplication-TileColor" />
     <meta content="no" name="msapplication-tap-highlight" />
 
     <meta content={title} property="og:title" />
@@ -99,12 +138,17 @@ const demoFirebaseConfig = {
     <meta name="twitter:label1" value="Location" />
     <meta name="twitter:data1" value={site.event.location.name} />
 
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    {fontOrigins.map((origin) => (
+      <link crossorigin href={origin} rel="preconnect" />
+    ))}
     <link href="https://firestore.googleapis.com" rel="preconnect" />
+    {fontStylesheets.map((href) => (
+      <link href={href} rel="stylesheet" />
+    ))}
     <slot name="head" />
 
     <style is:inline set:html={themeCss} />
-    {mapsScript && <script async defer is:inline src={mapsScript} />}
+    <style is:inline set:html={fontCss} />
 
     {import.meta.env.DEV ? (
       <script is:inline define:vars={{ demoFirebaseConfig }}>
@@ -143,35 +187,17 @@ const demoFirebaseConfig = {
       void startApp();
     </script>
     <ClientRouter />
-
-    <style is:global>
-      html,
-      body {
-        min-height: 100%;
-      }
-
-      body {
-        margin: 0;
-        font-family:
-          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
-          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-        font-size: 16px;
-        line-height: 1.5;
-      }
-
-      *,
-      *:before,
-      *:after {
-        box-sizing: border-box;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-      }
-    </style>
   </head>
 
   <body>
-    <AppHeader path={`/${path}`} client:load transition:persist="header" transition:persist-props />
-    <main>
+    <AppHeader
+      path={`/${path}`}
+      eventState={builtEventState}
+      client:load
+      transition:persist="header"
+      transition:persist-props
+    />
+    <main id="main" tabindex="-1">
       <slot />
     </main>
     <FooterBlock client:load transition:persist="footer" />

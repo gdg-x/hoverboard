@@ -59,10 +59,6 @@ const posts: Post[] = [
 
 const firstPost = posts[0]!;
 const secondPost = posts[1]!;
-const firstPostWithPrimaryColor = {
-  ...firstPost,
-  primaryColor: '#abc',
-} as Post & { primaryColor: string };
 const fetchMock = vi.fn<typeof fetch>();
 Object.defineProperty(globalThis, 'fetch', {
   configurable: true,
@@ -86,27 +82,27 @@ describe('post-page', () => {
     const mockUpdateImageMetadata = vi.mocked(updateImageMetadata);
     mockUpdateImageMetadata.mockClear();
     const { element, shadowRootForWithin } = await fixture<PostPage>(html`<post-page></post-page>`);
-    element.posts = new Success([firstPostWithPrimaryColor, ...posts.slice(1)]);
+    element.posts = new Success(posts);
     element.postId = 'post-1';
     await element.updateComplete;
     await element.updateComplete;
 
     const view = within(shadowRootForWithin);
-    expect(view.getByText('First post')).toBeInTheDocument();
-    expect(view.getByText(/^Published: /)).toBeInTheDocument();
-    expect(view.getByText('Up next')).toBeInTheDocument();
+    expect(view.getByRole('heading', { level: 1 })).toHaveTextContent('First post');
+    expect(view.getByText(/Published: /)).toBeInTheDocument();
+    expect(view.getByRole('heading', { level: 2, name: 'Up next' })).toBeInTheDocument();
+    expect(view.getByRole('link', { name: 'All posts' })).toHaveAttribute('href', '/blog');
     expect(shadowRootForWithin.querySelector('long-markdown')).toHaveProperty(
       'content',
       'Inline first content',
     );
-    expect(shadowRootForWithin.querySelector('hero-block')).toHaveProperty(
-      'backgroundColor',
-      '#abc',
-    );
+    expect(shadowRootForWithin.querySelector('.cover')).toHaveAttribute('src', '/first.jpg');
+    expect(shadowRootForWithin.querySelector('.cover')).toHaveAttribute('alt', '');
     expect(shadowRootForWithin.querySelector('posts-list')).toHaveProperty(
       'posts',
       posts.slice(1, 4),
     );
+    expect(shadowRootForWithin.querySelector('posts-list')).toHaveAttribute('heading-level', '3');
     expect(mockUpdateImageMetadata).toHaveBeenCalledWith('First post', 'First brief', {
       image: '/first.jpg',
       imageAlt: 'First post',

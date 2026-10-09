@@ -6,11 +6,13 @@ import { seedPage } from '../data/page';
 import type { Day } from '../models/day';
 import type { Session } from '../models/session';
 import type { SpeakerWithTags } from '../models/speaker';
+import type { Ticket } from '../models/ticket';
 import type { RouteLocation } from '../utils/navigation';
 import '../components/home/speakers-block';
 import '../components/shared/add-to-calendar';
 import '../components/shell/app-header';
 import './faq-page';
+import './home-page';
 import './schedule-page';
 import './schedule/schedule-day';
 import './speakers-page';
@@ -80,8 +82,9 @@ describe('pages on the server', () => {
       ></schedule-page>`,
     );
 
-    expect(page).toContain('October 8');
-    expect(page).toContain('href="/schedule/2026-10-08#10:00"');
+    expect(page).toContain('aria-label="Schedule for October 8"');
+    expect(page).toContain('href="/sessions/s1"');
+    expect(page).toMatch(/aria-current="page"[^>]*data-day="2026-10-08"/);
   });
 
   it('render speaker cards without links in links, which do not hydrate', async () => {
@@ -89,9 +92,7 @@ describe('pages on the server', () => {
 
     const page = await renderToString(html`<speakers-page></speakers-page>`);
 
-    expect(page).toMatch(
-      /<a\s+class="speaker-link"\s+href="\/speakers\/ada"\s+aria-label="ada"\s*><\/a>/,
-    );
+    expect(page).toMatch(/<hb-card\s+href="\/speakers\/ada"\s+label="ada"/);
     expect(page).not.toMatch(/<a\s+class="speaker /);
   });
 
@@ -107,21 +108,44 @@ describe('pages on the server', () => {
     expect(pages[0]!.indexOf('/speakers/grace')).toBeLessThan(pages[0]!.indexOf('/speakers/alan'));
   });
 
-  it('render the calendar button without its menu, which does not hydrate', async () => {
+  it('render the home hero for the build-time event state', async () => {
+    seedPage({ speakers: [], blog: [] });
+
+    const page = await renderToString(
+      html`<home-page event-state="upcoming" days-to-go="12"></home-page>`,
+    );
+
+    expect(page).toMatch(/<h1\s+id="hero-title"\s+class="title"\s*>/);
+    expect(page).toContain('12 days to go');
+    expect(page).toMatch(/<about-block\s+class="band"/);
+  });
+
+  it('render the calendar button with its closed menu', async () => {
     const page = await renderToString(
       html`<add-to-calendar .session=${session}></add-to-calendar>`,
     );
 
-    expect(page).toContain('<md-outlined-button');
-    expect(page).not.toContain('<md-menu');
+    expect(page).toMatch(/<hb-button\s+slot="trigger"\s+variant="outlined"/);
+    expect(page).toMatch(/<a\s+role="menuitem"\s+href="https:\/\/calendar\.google\.com/);
+    expect(page).toMatch(/popover="manual"\s+role="menu"/);
   });
 
-  it("render the header with the tab of the page's path selected", async () => {
-    seedPage({ tickets: [] });
+  it("render the header with the page's link marked as current, and the build's event state", async () => {
+    seedPage({
+      tickets: [{ name: 'Regular', url: 'https://example.com/t', available: true }] as Ticket[],
+    });
 
-    const page = await renderToString(html`<app-header path="/speakers/ada"></app-header>`);
+    const upcoming = await renderToString(
+      html`<app-header path="/speakers/ada" .eventState=${'upcoming'}></app-header>`,
+    );
+    const over = await renderToString(
+      html`<app-header path="/speakers/ada" .eventState=${'over'}></app-header>`,
+    );
 
-    expect(page).toMatch(/<div class="nav-item selected">\s*<a href="\/speakers">/);
-    expect(page).toMatch(/<a\s+href="\/speakers"\s+class="selected"/);
+    expect(upcoming).toMatch(/<a\s+href="\/speakers"\s+aria-current="page"/);
+    expect(upcoming).toMatch(/<hb-button[^>]*class="cta"[^>]*href="https:\/\/example\.com\/t"/);
+    const overCallToAction = over.match(/<hb-button[^>]*variant="cta"[^>]*>/)?.[0];
+    expect(overCallToAction).toContain('href="/schedule"');
+    expect(overCallToAction).toContain('class="cta in-nav"');
   });
 });

@@ -11,7 +11,6 @@ const DROPPED_CHUNKS = [
   'coc-page',
   'faq-page',
   'featured-videos',
-  'fork-me-block',
   'gallery-block',
   'latest-posts-block',
   'map-block',
@@ -83,14 +82,25 @@ describe('a production build of a minimal site', () => {
       /<not-found-page[^>]*><template shadowroot="open" shadowrootmode="open">/,
     );
     expect(notFound).toMatch(
-      /<div class="hero-title">(<!--[^>]*-->)*Not Found(<!--[^>]*-->)*<\/div>/,
+      /<h1 class="hero-title">(<!--[^>]*-->)*Not Found(<!--[^>]*-->)*<\/h1>/,
     );
     expect(notFound).toMatch(
       /<footer-block[^>]*><template shadowroot="open" shadowrootmode="open">/,
     );
     expect(home).toMatch(/<home-page[^>]*><template shadowroot="open" shadowrootmode="open">/);
     expect(home).toContain('A minimal site');
-    expect(home).toMatch(/<header-toolbar[^>]*><template shadowroot="open" shadowrootmode="open">/);
+    // The fixture sets a hero photo, so the hero darkens it.
+    expect(home).toMatch(/<section class="hero photo"/);
+    expect(home).toContain('src="/images/backgrounds/home.jpg"');
+    expect(home).toMatch(/<app-header[^>]*><template shadowroot="open" shadowrootmode="open">/);
+  });
+
+  it('uses the spotlight theme with decorations off, as the fixture sets', () => {
+    const home = build.read('index.html');
+
+    expect(home).toMatch(/<html[^>]*data-decorations="off"/);
+    expect(home).toContain('--hb-cta-background: var(--hb-color-secondary);');
+    expect(home).toContain('--hb-border-width: 1px;');
   });
 
   it('writes the service workers and the manifest', () => {

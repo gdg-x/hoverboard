@@ -1,10 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
-import type { Hero } from '../../models/hero';
-import { heroSettings } from '../../config/site';
 import { dispatch } from '../dispatch';
 
-export type { Hero };
+/** Where the visitor's choice to see schedule times in their own time zone is stored. */
+export const LOCAL_TIME_KEY = 'hb-local-time';
 
 export enum VIEWPORT {
   isPhone = 'isPhone',
@@ -28,18 +27,14 @@ export interface VideoDialog {
 }
 
 export interface UiState {
-  heroSettings?: Hero;
+  /** Show schedule times in the visitor's time zone instead of the event's. */
+  localTime: boolean;
   videoDialog: VideoDialog;
   viewport: Viewport;
 }
 
 export const initialUiState: UiState = {
-  heroSettings: {
-    backgroundColor: 'var(--default-primary-color)',
-    backgroundImage: heroSettings.home.background.image,
-    fontColor: 'var(--text-primary-color)',
-    hideLogo: false,
-  },
+  localTime: false,
   videoDialog: {
     open: false,
     youtubeId: '',
@@ -59,8 +54,8 @@ const slice = createSlice({
     setViewportSize: (state, action: PayloadAction<SetViewport>): void => {
       state.viewport[action.payload.size] = action.payload.matches;
     },
-    setHeroSettings: (state, action: PayloadAction<Hero>): void => {
-      state.heroSettings = action.payload;
+    setLocalTime: (state, action: PayloadAction<boolean>): void => {
+      state.localTime = action.payload;
     },
     toggleVideoDialog: (state, action: PayloadAction<VideoDialog>): void => {
       state.videoDialog = action.payload;
@@ -70,7 +65,7 @@ const slice = createSlice({
 
 const {
   setViewportSize: setViewportSizeAction,
-  setHeroSettings: setHeroSettingsAction,
+  setLocalTime: setLocalTimeAction,
   toggleVideoDialog,
 } = slice.actions;
 
@@ -78,9 +73,27 @@ export const setViewportSize = (payload: SetViewport) => {
   dispatch(setViewportSizeAction(payload));
 };
 
-export const setHeroSettings = (payload: Hero) => {
-  dispatch(setHeroSettingsAction(payload));
+/** Shows schedule times in the visitor's time zone or the event's, and remembers the choice. */
+export const setLocalTime = (localTime: boolean) => {
+  dispatch(setLocalTimeAction(localTime));
+  try {
+    if (localTime) localStorage.setItem(LOCAL_TIME_KEY, 'true');
+    else localStorage.removeItem(LOCAL_TIME_KEY);
+  } catch {
+    // Storage can throw in private modes. The choice then lasts until the page reloads.
+  }
 };
+
+/** Applies the stored choice. Call it after the first render, which must match the server's. */
+export const loadLocalTime = () => {
+  try {
+    if (localStorage.getItem(LOCAL_TIME_KEY) === 'true') dispatch(setLocalTimeAction(true));
+  } catch {
+    // Storage can throw in private modes.
+  }
+};
+
+export const selectLocalTime = (state: RootState) => state.ui.localTime;
 
 export const closeVideoDialog = () => {
   dispatch(

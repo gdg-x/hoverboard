@@ -58,10 +58,9 @@ describe('featured-videos', () => {
     expect(shadowRoot).toHaveTextContent(featuredVideos.title);
     expect(shadowRoot).toHaveTextContent(video.title);
     expect(shadowRoot.querySelector('img')).toHaveAttribute('src', video.thumbnail);
-    expect(shadowRoot.querySelector('.cta-button')).toHaveAttribute('trailing-icon');
-    expect(shadowRoot.querySelector('.cta-button hoverboard-icon')).toHaveAttribute(
-      'name',
-      'arrow-right-circle',
+    expect(shadowRoot.querySelector('.all')).toHaveAttribute(
+      'href',
+      featuredVideos.callToAction.link,
     );
   });
 
@@ -72,12 +71,46 @@ describe('featured-videos', () => {
     element.videos = new Success([video]);
     await element.updateComplete;
 
-    shadowRoot.querySelector<HTMLElement>('.video-item')!.click();
+    shadowRoot.querySelector<HTMLButtonElement>('button.video')!.click();
 
     expect(mockOpenVideoDialog).toHaveBeenCalledWith({
       title: `${video.title} by ${video.speakers}`,
       youtubeId: video.youtubeId,
     });
+  });
+
+  it('scrolls the rail with the previous and next buttons, which turn off at the ends', async () => {
+    const { element, shadowRoot } = await fixture<FeaturedVideos>(
+      html`<featured-videos></featured-videos>`,
+    );
+    element.videos = new Success([video, video, video, video]);
+    await element.updateComplete;
+    const rail = shadowRoot.querySelector<HTMLElement>('.rail')!;
+    const previous = shadowRoot.querySelector('hb-icon-button.previous')!;
+    const next = shadowRoot.querySelector('hb-icon-button.next')!;
+    Object.defineProperties(rail, {
+      clientWidth: { value: 300 },
+      scrollWidth: { value: 1000 },
+      scrollLeft: { value: 0, writable: true },
+    });
+    rail.scrollBy = vi.fn();
+
+    rail.dispatchEvent(new Event('scroll'));
+    await element.updateComplete;
+
+    expect(previous).toHaveAttribute('disabled');
+    expect(next).not.toHaveAttribute('disabled');
+    expect(previous).toHaveAttribute('label', 'Previous videos');
+
+    next.shadowRoot!.querySelector('button')!.click();
+    expect(rail.scrollBy).toHaveBeenCalledWith({ left: 270 });
+
+    rail.scrollLeft = 700;
+    rail.dispatchEvent(new Event('scroll'));
+    await element.updateComplete;
+
+    expect(previous).not.toHaveAttribute('disabled');
+    expect(next).toHaveAttribute('disabled');
   });
 
   it('triggers the fetch and starts in the pending state', async () => {

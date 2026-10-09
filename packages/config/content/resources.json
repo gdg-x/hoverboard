@@ -23,7 +23,8 @@
     "statisticsBlock": {
       "attendees": {
         "label": "Attendees",
-        "number": "900"
+        "number": "900",
+        "emoji": "🎉"
       },
       "days": {
         "label": "Days",

@@ -25,14 +25,15 @@ declare global {
 }
 
 describe('themed-element', () => {
-  it('prepends the shared theme and block host styles to the subclass styles', async () => {
+  it('prepends the shared theme, block host and reduced motion styles to the subclass styles', async () => {
     await fixture(html`<themed-element-test-subject></themed-element-test-subject>`);
     const { elementStyles } = ThemedElementTestSubject as unknown as { elementStyles: unknown[] };
 
-    expect(elementStyles).toHaveLength(3);
-    expect(String(elementStyles[0])).toContain('--primary-color-transparent');
+    expect(elementStyles).toHaveLength(4);
+    expect(String(elementStyles[0])).toContain('box-sizing: border-box');
     expect(String(elementStyles[1])).toContain('display: block');
-    expect(String(elementStyles[2])).toContain('color: rebeccapurple');
+    expect(String(elementStyles[2])).toContain('prefers-reduced-motion: reduce');
+    expect(String(elementStyles[3])).toContain('color: rebeccapurple');
   });
 
   it('is usable as a base class for rendering subclass content', async () => {
@@ -57,8 +58,10 @@ describe('themed-element', () => {
   });
 
   it('is the base class of every component', () => {
+    // The hb-* primitives only read tokens, so they skip the shared styles that the server would
+    // otherwise inline into every button's shadow root.
     const sources = import.meta.glob<string>(
-      ['../**/*.ts', '!../**/*.test.ts', '!./themed-element.ts'],
+      ['../**/*.ts', '!../**/*.test.ts', '!./themed-element.ts', '!./ui/**'],
       { query: '?raw', import: 'default', eager: true },
     );
     const offenders = Object.keys(sources).filter((path) =>

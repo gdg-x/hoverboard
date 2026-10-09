@@ -10,7 +10,7 @@ describe('footer-rel', () => {
     expect(customElements.get('footer-rel')).toBeDefined();
   });
 
-  it('renders related links and the subscription form', async () => {
+  it('renders the related link columns, without a subscription form', async () => {
     const { shadowRootForWithin } = await fixture(
       html`<footer-rel data-testid="footer-rel"></footer-rel>`,
     );
@@ -22,13 +22,11 @@ describe('footer-rel', () => {
 
     expect(screen.getByTestId('footer-rel')).toBeInTheDocument();
     expect(firstFooterBlock).toBeDefined();
-    expect(withinShadowRoot.getByText(firstFooterBlock!.title)).toBeInTheDocument();
+    expect(
+      withinShadowRoot.getByRole('heading', { name: firstFooterBlock!.title }),
+    ).toBeInTheDocument();
     expect(withinShadowRoot.getByText(externalLink.name)).toHaveAttribute('href', externalLink.url);
     expect(withinShadowRoot.getByText(externalLink.name)).toHaveAttribute('target', '_blank');
-    expect(withinShadowRoot.getByText('Subscribe')).toBeInTheDocument();
-    expect(
-      withinShadowRoot.getByText('No spam, only the latest news and updates!'),
-    ).toBeInTheDocument();
-    expect(shadowRootForWithin.querySelector('subscribe-form-footer')).toBeInTheDocument();
+    expect(withinShadowRoot.queryByRole('textbox')).toBeNull();
   });
 });

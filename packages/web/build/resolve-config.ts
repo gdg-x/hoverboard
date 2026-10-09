@@ -8,19 +8,30 @@ import {
   type Feature,
 } from '../src/config/features';
 import { deepMerge, isPlainObject } from '../src/config/merge';
-import { THEMES, type ThemeName } from '../src/themes/index';
-import type { Theme } from '../src/themes/tokens';
+import { fontProblems } from './fonts';
+import {
+  type ResolvedTheme,
+  type SiteTheme,
+  heroPhotoErrors,
+  resolveTheme,
+  themeErrors,
+} from './theme';
+
+/** `heroSettings` in site.json. The demo site sets none. */
+interface HeroSettings {
+  home?: { background?: { image: string }; illustration?: string };
+}
 
 type Site = typeof import('../defaults/site.json') &
-  typeof import('../../config/site.json') & { url: string };
+  typeof import('../../config/site.json') & { url: string; heroSettings?: HeroSettings };
 type Resources = typeof import('../../config/content/resources.json');
 
 /** Template data. Each file has its own namespace, for example `{{ site.url }}`. */
 export interface SiteConfig {
   site: Site;
   resources: Resources;
-  /** The built-in theme that `theme.name` picks, with the `theme.colors` overrides. */
-  theme: Theme;
+  /** The built-in theme that `theme.name` picks, with the site's colors and settings over it. */
+  theme: ResolvedTheme;
   /** `content/locales/<locale>/resources.json` by locale, the keys to merge over `resources`. */
   contentTranslations: Record<string, object>;
   /** Paths of the translated markdown pages, `content/locales/<locale>/<page>.md`, by locale. */
@@ -124,9 +135,6 @@ const featureErrors = (site: Site, resources: Resources): string[] => {
           .map((required) => `site.json/features/${feature}: needs ${required}, which is off`)
       : [],
   );
-  if (features.map && !site.integrations?.googleMapsApiKey) {
-    errors.push('site.json/integrations/googleMapsApiKey: is required when map is on');
-  }
 
   const links: [string, string][] = [
     ...resources.footerRelBlock.flatMap(({ links }, block) =>
@@ -182,13 +190,20 @@ const crossFileErrors = (site: Site, resources: Resources, paths: ConfigPaths): 
   }
   const images: [string, string | undefined][] = [
     ['site.json/image', site.image],
-    ['site.json/heroSettings/home/background/image', site.heroSettings.home.background.image],
+    ['site.json/heroSettings/home/background/image', site.heroSettings?.home?.background?.image],
     ['content/resources.json/aboutOrganizerBlock/image', resources.aboutOrganizerBlock.image],
   ];
   for (const [path, image] of images) {
     if (image && !isUrl(image) && !fs.existsSync(join(paths.public, image))) {
       errors.push(`${path}: "${image}" is not in packages/web/public`);
     }
+  }
+  // The page inlines it, so it can be drawn in the theme's colors.
+  const illustration = site.heroSettings?.home?.illustration;
+  if (illustration && (isUrl(illustration) || !fs.existsSync(join(paths.public, illustration)))) {
+    errors.push(
+      `site.json/heroSettings/home/illustration: "${illustration}" is not in packages/web/public`,
+    );
   }
   return [...errors, ...localeErrors(site, paths.translations), ...featureErrors(site, resources)];
 };
@@ -280,6 +295,8 @@ const loadContentTranslations = (
 export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: ResolveOptions = {}): {
   config: SiteConfig;
   errors: string[];
+  /** Problems that do not stop the build, such as fonts without some characters. */
+  warnings: string[];
 } => {
   const site = deepMerge(
     readJson<object>(join(paths.defaults, 'site.json')),
@@ -309,8 +326,23 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
     if (!isUrl(site.image)) site.image = `${site.url}${site.image}`;
   }
 
-  const { name, colors } = site.theme as { name: string; colors?: Partial<Theme> };
-  const theme = { ...(THEMES[name as ThemeName] ?? THEMES.default), ...colors };
+  const siteTheme = site.theme as unknown as SiteTheme;
+  const theme = resolveTheme(siteTheme);
+  const warnings: string[] = [];
+  if (siteValid) {
+    errors.push(...themeErrors(theme));
+    if (site.heroSettings?.home?.background) errors.push(...heroPhotoErrors(theme));
+    const titles = Object.values(content.translations).map(
+      (translation) => (translation as { title?: string }).title ?? '',
+    );
+    const fonts = fontProblems(siteTheme.fonts, paths.site, [
+      resources.title,
+      site.shortName,
+      ...titles,
+    ]);
+    errors.push(...fonts.errors);
+    warnings.push(...fonts.warnings);
+  }
 
   return {
     config: {
@@ -322,12 +354,14 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
       NODE_ENV: nodeEnv || 'production',
     },
     errors,
+    warnings,
   };
 };
 
-/** Like `loadConfig`, but throws a `ConfigError` that lists every problem. */
+/** Like `loadConfig`, but throws a `ConfigError` that lists every problem, and logs warnings. */
 export const resolveConfig = (options: ResolveOptions = {}): SiteConfig => {
-  const { config, errors } = loadConfig(options);
+  const { config, errors, warnings } = loadConfig(options);
   if (errors.length) throw new ConfigError(errors);
+  for (const warning of warnings) console.warn(`Site config: ${warning}`);
   return config;
 };

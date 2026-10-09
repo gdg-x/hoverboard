@@ -1,23 +1,25 @@
 import { Success } from '@abraham/remotedata';
-import { msg, str } from '@lit/localize';
-import '@material/web/button/outlined-button.js';
-import '@material/web/fab/fab.js';
-import '@material/web/progress/linear-progress.js';
-import { css, html, nothing } from 'lit';
+import { msg } from '@lit/localize';
+import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import '../components/shared/add-to-calendar';
 import '../components/shared/share-button';
 import '../components/shared/auth-required';
-import '../components/shared/content-loader';
-import '../components/dialogs/feedback-block';
-import '../components/hero/simple-hero';
+import '../components/hero/hero-block';
+import { heroText } from '../components/hero/hero-block';
 import '../components/shared/hoverboard-icon';
+import '../components/shared/speaker-card';
 import '../components/markdown/short-markdown';
+import '../components/ui/hb-button';
+import '../components/ui/hb-chip';
+import '../components/ui/hb-progress';
+import { PAGE_TONES } from '../components/hero/simple-hero';
+import { formatDuration, type ScheduleSession } from '../components/schedule/session-element';
 import type { Session } from '../models/session';
 import type { Speaker } from '../models/speaker';
-import { goto, speakerPath } from '../utils/navigation';
+import { goto } from '../utils/navigation';
 import { store } from '../store';
-import { initialAuthState } from '../store/auth';
 import { openSigninDialog } from '../store/dialogs';
 import {
   type FeaturedSessionsState,
@@ -31,208 +33,97 @@ import { openVideoDialog } from '../store/ui';
 import type { UserState } from '../store/user';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
+import { confetti } from '../utils/confetti';
 import { updateImageMetadata } from '../utils/metadata';
-import { variableColor } from '../utils/styles';
+import { tagChipStyle } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
-// `Session` (as returned by `selectSession`) does not declare `dateReadable`,
-// `endTime`, `track`, or a resolved `speakers` array — the original template
-// read these fields directly without static type-checking. Keep this
-// augmentation so the template stays fully typed without changing today's
-// (already loosely-typed) output.
-type SessionWithDetails = Omit<Session, 'speakers'> & {
+if (__HB_FEATURES__.feedback) void import('../components/dialogs/feedback-block');
+
+// Sessions from the schedule generator have the day's readable date, the end time and full speakers.
+type SessionWithDetails = Omit<ScheduleSession, 'speakers'> & {
   dateReadable?: string;
   endTime?: string;
-  track?: { title?: string };
   speakers?: Speaker[];
 };
 
+/**
+ * A session: its title, when and where it is, its tags, actions to bookmark, add to a calendar and
+ * share, the description, its speakers and, once it started, a place to leave feedback.
+ */
 @customElement('session-page')
 export class SessionPage extends ThemedElement {
-  static override styles = css`
-    :host {
-      margin: 0;
-      display: block;
-      height: 100%;
-      width: 100%;
-      background: var(--primary-background-color);
-      color: var(--primary-text-color);
-    }
-
-    .header-content,
-    .content {
-      padding: 24px;
-    }
-
-    .header-content {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      align-self: flex-start;
-      margin-bottom: 8px;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .back-link hoverboard-icon {
-      margin-right: 4px;
-      width: 18px;
-      height: 18px;
-    }
-
-    .name {
-      line-height: 1.2;
-    }
-
-    .tags {
-      margin-top: 8px;
-    }
-
-    .tag {
-      color: var(--text-primary-color);
-      background-color: var(--color, var(--secondary-text-color));
-      border-color: var(--color, var(--secondary-text-color));
-    }
-
-    .float-button {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-    }
-
-    @media (max-width: 811px) {
-      .laptop-fab {
-        display: none;
-      }
-    }
-
-    .content {
-      position: relative;
-      font-size: 15px;
-      line-height: 1.87;
-    }
-
-    .meta-info {
-      line-height: 1.6;
-    }
-
-    .description {
-      margin: 24px 0 32px;
-      max-width: 700px;
-    }
-
-    .action {
-      color: var(--primary-text-color);
-      cursor: pointer;
-      user-select: none;
-      display: flex;
-      align-items: center;
-    }
-
-    .action hoverboard-icon {
-      margin-right: 4px;
-      width: 18px;
-      height: 18px;
-    }
-
-    .additional-sections {
-      margin-top: 32px;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .section-content {
-      display: flex;
-    }
-
-    .section-content {
-      align-items: center;
-    }
-
-    .section {
-      margin-top: 16px;
-      display: block;
-      color: var(--primary-text-color);
-      cursor: pointer;
-    }
-
-    .section-photo {
-      margin-right: 16px;
-      --lazy-image-width: 48px;
-      --lazy-image-height: 48px;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      background-color: var(--secondary-background-color);
-      border-radius: 50%;
-      overflow: hidden;
-      transform: translateZ(0);
-    }
-
-    .section-primary-text {
-      margin-bottom: 4px;
-      line-height: 1.2;
-    }
-
-    .section-secondary-text {
-      font-size: 12px;
-      line-height: 1;
-    }
-
-    .section-details {
-      flex: 1;
-      flex-basis: 1px;
-    }
-
-    @media (min-width: 812px) {
-      .header-content,
-      .content {
-        padding: 24px;
-        width: 100%;
+  static override styles = [
+    heroText,
+    css`
+      :host {
+        display: block;
+        background-color: var(--hb-section-background);
+        color: var(--hb-color-on-surface);
       }
 
-      .header-content {
-        min-height: 160px;
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--hb-space-2);
+        margin: 0;
+        padding: 0;
+        list-style: none;
       }
 
-      .float-button {
-        position: absolute;
-        bottom: -60px;
-        transform: translate(50%, 50%);
+      .details {
+        margin-block-start: var(--hb-space-5);
       }
 
-      .phone-fab {
-        display: none;
+      .details .plain {
+        --hb-chip-border-color: currentColor;
       }
-    }
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-    }
+      /* Content-box, so the text column lines up with the hero's. */
+      .inner {
+        box-sizing: content-box;
+        max-inline-size: var(--hb-content-max);
+        margin-inline: auto;
+        padding: var(--hb-space-6) var(--hb-gutter) var(--hb-space-9);
+      }
 
-    .progress {
-      width: 100%;
-      --md-linear-progress-active-indicator-color: var(--default-primary-color);
-      --md-linear-progress-track-color: var(--default-primary-color);
-    }
-  `;
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--hb-space-3);
+      }
+
+      .description {
+        display: block;
+        max-inline-size: var(--hb-prose-max);
+        margin-block: var(--hb-space-6);
+        font-size: var(--hb-text-lg);
+        line-height: 1.6;
+      }
+
+      h2 {
+        margin: var(--hb-space-8) 0 var(--hb-space-4);
+        padding: 0;
+        font: 800 var(--hb-text-2xl) / 1.15 var(--hb-font-display);
+      }
+
+      .speakers {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+        gap: var(--hb-space-5);
+      }
+
+      .speakers > li {
+        display: grid;
+      }
+    `,
+  ];
 
   @fromStore((state) => selectSessionsState(state))
   accessor sessions!: SessionsState;
-  @property({ type: Object })
+  @property({ attribute: false })
   accessor session: Session | undefined;
   @property({ type: String })
   accessor sessionId: string | undefined;
@@ -240,31 +131,24 @@ export class SessionPage extends ThemedElement {
   accessor featuredSessions!: FeaturedSessionsState;
   @fromStore((state) => state.user)
   accessor user!: UserState;
-  @fromStore((state) => state.auth)
-  accessor auth!: typeof initialAuthState;
 
+  // Depends on the time, so it is only set in the browser.
   @state()
-  private accessor disabledSchedule: boolean = disabledSchedule;
-  @state()
-  private accessor contentLoaderVisibility: boolean = false;
-  @state()
-  private accessor acceptingFeedback: boolean = false;
+  private accessor acceptingFeedback = false;
 
   // Runs on the server too, so the page renders the session. Side effects wait for `updated`.
-  override willUpdate(changed: Map<string, unknown>) {
+  override willUpdate(changed: PropertyValues<this>) {
     if ((changed.has('sessions') || changed.has('sessionId')) && this.isLoaded) {
       this.session = selectSession(store.getState(), this.sessionId!);
-      this.contentLoaderVisibility = !!this.session;
     }
   }
 
-  override updated(changed: Map<string, unknown>) {
+  override updated(changed: PropertyValues<this>) {
     if ((changed.has('sessions') || changed.has('sessionId')) && this.isLoaded) {
       if (!this.session) {
         goto('/404');
       } else {
-        // Depends on the time, so it waits for the browser.
-        this.acceptingFeedback = acceptingFeedback(this.session);
+        this.acceptingFeedback = __HB_FEATURES__.feedback && acceptingFeedback(this.session);
         const speaker = (this.session as unknown as SessionWithDetails).speakers?.[0];
         updateImageMetadata(this.session.title, this.session.description, {
           image: speaker?.photoUrl ?? '',
@@ -278,22 +162,139 @@ export class SessionPage extends ThemedElement {
     return !!this.sessionId && this.sessions instanceof Success;
   }
 
-  private get featuredSessionIcon() {
-    if (
+  private get isBookmarked() {
+    return (
       this.featuredSessions instanceof Success &&
-      this.sessionId &&
-      this.featuredSessions.data[this.sessionId]
-    ) {
-      return 'bookmark-check';
-    } else {
-      return 'bookmark-plus';
-    }
+      !!this.sessionId &&
+      !!this.featuredSessions.data[this.sessionId]
+    );
   }
 
-  private toggleFeaturedSession = (event: Event) => {
-    event.preventDefault();
-    event.stopPropagation();
+  override render() {
+    const session = this.session as SessionWithDetails | undefined;
+    return html`
+      <hero-block tone="${PAGE_TONES.schedule}">
+        <a class="back" href="${session?.day ? `/schedule/${session.day}` : '/schedule'}">
+          <hoverboard-icon name="arrow-left"></hoverboard-icon>
+          ${msg('Back to schedule', { id: 'pages.session.back-to-schedule' })}
+        </a>
+        <h1 class="hero-title">${session?.title ?? ''}</h1>
+        ${session ? this.renderDetails(session) : nothing}
+      </hero-block>
 
+      <hb-progress ?hidden="${!!session}"></hb-progress>
+
+      ${session ? this.renderContent(session) : nothing}
+    `;
+  }
+
+  private renderDetails(session: SessionWithDetails) {
+    const when = disabledSchedule
+      ? []
+      : [
+          session.dateReadable,
+          session.startTime && [session.startTime, session.endTime].filter(Boolean).join('–'),
+          session.duration && formatDuration(session.duration),
+          session.track?.title,
+        ];
+    const details = [...when, session.complexity, session.language].filter(Boolean);
+    return html`
+      <ul class="details" aria-label="${msg('Session details', { id: 'pages.session.details' })}">
+        ${details.map((detail) => html`<li><hb-chip class="plain">${detail}</hb-chip></li>`)}
+        ${(session.tags ?? []).map(
+          (tag) => html`<li><hb-chip style="${styleMap(tagChipStyle(tag))}">${tag}</hb-chip></li>`,
+        )}
+      </ul>
+    `;
+  }
+
+  private renderContent(session: SessionWithDetails) {
+    const bookmarked = this.isBookmarked;
+    // Generated sessions can list a speaker that does not exist, with only an `id`.
+    const speakers = (session.speakers ?? []).filter((speaker) => speaker.name);
+    return html`
+      <div class="inner">
+        <div class="actions">
+          ${
+            __HB_FEATURES__.mySchedule
+              ? html`<hb-button
+                  class="bookmark"
+                  variant="${bookmarked ? 'tonal' : 'filled'}"
+                  @click="${this.toggleBookmark}"
+                >
+                  <hoverboard-icon
+                    slot="icon"
+                    name="${bookmarked ? 'bookmark-check' : 'bookmark-plus'}"
+                  ></hoverboard-icon>
+                  ${
+                    bookmarked
+                      ? msg('Bookmarked', { id: 'pages.session.bookmarked' })
+                      : msg('Bookmark', { id: 'pages.session.bookmark' })
+                  }
+                </hb-button>`
+              : nothing
+          }
+          ${
+            session.videoId
+              ? html`<hb-button variant="outlined" class="video-button" @click="${this.openVideo}">
+                  <hoverboard-icon slot="icon" name="video"></hoverboard-icon>
+                  ${msg('View video', { id: 'common.view-video' })}
+                </hb-button>`
+              : nothing
+          }
+          ${
+            session.presentation
+              ? html`<hb-button variant="outlined" href="${session.presentation}" target="_blank">
+                  <hoverboard-icon slot="icon" name="presentation"></hoverboard-icon>
+                  ${msg('View presentation', { id: 'common.view-presentation' })}
+                </hb-button>`
+              : nothing
+          }
+          <add-to-calendar .session="${this.session}"></add-to-calendar>
+          <share-button
+            .data="${{ title: session.title, text: session.description }}"
+          ></share-button>
+        </div>
+
+        <short-markdown class="description" .content="${session.description}"></short-markdown>
+
+        ${
+          speakers.length
+            ? html`
+                <h2>${msg('Speakers', { id: 'pages.session.speakers' })}</h2>
+                <ul class="speakers">
+                  ${speakers.map(
+                    (speaker) => html`<li><speaker-card .speaker="${speaker}"></speaker-card></li>`,
+                  )}
+                </ul>
+              `
+            : nothing
+        }
+        ${
+          this.acceptingFeedback
+            ? html`
+                <section id="feedback" aria-labelledby="feedback-title">
+                  <h2 id="feedback-title">
+                    ${msg('Review session', { id: 'common.review-session' })}
+                  </h2>
+                  <auth-required>
+                    <span slot="prompt">
+                      ${msg('to leave feedback', {
+                        id: 'pages.session.leave-feedback',
+                        desc: 'Follows a Sign in button: "Sign in to leave feedback".',
+                      })}
+                    </span>
+                    <feedback-block .sessionId="${session.id}"></feedback-block>
+                  </auth-required>
+                </section>
+              `
+            : nothing
+        }
+      </div>
+    `;
+  }
+
+  private readonly toggleBookmark = (event: Event) => {
     if (!(this.user instanceof Success)) {
       store.dispatch(
         queueComplexSnackbar({
@@ -307,201 +308,22 @@ export class SessionPage extends ThemedElement {
       return;
     }
 
-    if (this.user instanceof Success && this.featuredSessions instanceof Success && this.session) {
+    if (this.featuredSessions instanceof Success && this.session) {
       const bookmarked = !this.featuredSessions.data[this.session.id];
-      const sessions = {
-        ...this.featuredSessions.data,
-        [this.session.id]: bookmarked,
-      };
-
-      setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked);
+      setUserFeaturedSessions(
+        this.user.data.uid,
+        { ...this.featuredSessions.data, [this.session.id]: bookmarked },
+        bookmarked,
+      );
+      if (bookmarked) confetti(event.currentTarget as Element);
     }
   };
 
-  private openVideo = () => {
-    if (!this.session || !this.session.videoId) {
-      return;
+  private readonly openVideo = () => {
+    if (this.session?.videoId) {
+      openVideoDialog({ title: this.session.title, youtubeId: this.session.videoId });
     }
-
-    openVideoDialog({
-      title: this.session.title,
-      youtubeId: this.session.videoId,
-    });
   };
-
-  private getVariableColor(value: string) {
-    return variableColor(value);
-  }
-
-  private speakerUrl(id: string) {
-    return speakerPath(id);
-  }
-
-  override render() {
-    const session = this.session as SessionWithDetails | undefined;
-    const complexity = session?.complexity;
-    const toggleFeatured = msg('Toggle featured session', { id: 'pages.session.toggle-featured' });
-
-    return html`
-      <simple-hero page="schedule">
-        <div class="header-content">
-          <a class="back-link" href="${session?.day ? `/schedule/${session.day}` : '/schedule'}">
-            <hoverboard-icon name="arrow-left"></hoverboard-icon>
-            <span>${msg('Back to schedule', { id: 'pages.session.back-to-schedule' })}</span>
-          </a>
-          <h2 class="name">${session?.title ?? ''}</h2>
-          ${
-            session?.tags?.length
-              ? html`
-                  <div class="tags">
-                    ${session.tags.map(
-                      (tag) => html`
-                        <span class="tag" style="--color: ${this.getVariableColor(tag) ?? ''}"
-                          >${tag}</span
-                        >
-                      `,
-                    )}
-                  </div>
-                `
-              : nothing
-          }
-
-          <div class="float-button" ?hidden="${!this.contentLoaderVisibility}">
-            <md-fab
-              class="laptop-fab"
-              aria-label="${toggleFeatured}"
-              @click="${this.toggleFeaturedSession}"
-            >
-              <hoverboard-icon slot="icon" name="${this.featuredSessionIcon}"></hoverboard-icon>
-            </md-fab>
-          </div>
-        </div>
-      </simple-hero>
-
-      <md-linear-progress
-        class="progress"
-        indeterminate
-        ?hidden="${this.contentLoaderVisibility}"
-      ></md-linear-progress>
-
-      <content-loader
-        class="container"
-        card-padding="32px"
-        card-height="400px"
-        horizontal-position="50%"
-        border-radius="4px"
-        box-shadow="var(--box-shadow)"
-        items-count="1"
-        ?hidden="${this.contentLoaderVisibility}"
-      ></content-loader>
-
-      <div class="container content">
-        <div class="float-button" ?hidden="${!this.contentLoaderVisibility}">
-          <md-fab
-            class="phone-fab"
-            aria-label="${toggleFeatured}"
-            @click="${this.toggleFeaturedSession}"
-          >
-            <hoverboard-icon slot="icon" name="${this.featuredSessionIcon}"></hoverboard-icon>
-          </md-fab>
-        </div>
-        <h3 class="meta-info" ?hidden="${this.disabledSchedule}">
-          ${session?.dateReadable}, ${session?.startTime} - ${session?.endTime}
-        </h3>
-        <h3 class="meta-info" ?hidden="${this.disabledSchedule}">${session?.track?.title}</h3>
-        <h3 class="meta-info" ?hidden="${!complexity}">
-          ${msg(str`Content level: ${complexity}`, { id: 'pages.session.content-level' })}
-        </h3>
-
-        <short-markdown
-          class="description"
-          .content="${session?.description ?? ''}"
-        ></short-markdown>
-
-        <div class="actions">
-          ${
-            session?.presentation
-              ? html`
-                  <a
-                    class="action"
-                    href="${session.presentation}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <hoverboard-icon name="presentation"></hoverboard-icon>
-                    <span>${msg('View presentation', { id: 'common.view-presentation' })}</span>
-                  </a>
-                `
-              : nothing
-          }
-          ${
-            session?.videoId
-              ? html`
-                  <md-outlined-button class="video-button" @click="${this.openVideo}">
-                    <hoverboard-icon slot="icon" name="video"></hoverboard-icon>
-                    ${msg('View video', { id: 'common.view-video' })}
-                  </md-outlined-button>
-                `
-              : nothing
-          }
-          <add-to-calendar .session="${this.session}"></add-to-calendar>
-          <share-button
-            .data="${session ? { title: session.title, text: session.description } : undefined}"
-          ></share-button>
-        </div>
-
-        ${
-          session?.speakers?.length
-            ? html`
-                <div class="additional-sections">
-                  <h3>${msg('Speakers', { id: 'pages.session.speakers' })}</h3>
-                  ${session.speakers.map(
-                    (speaker) => html`
-                      <a class="section" href="${this.speakerUrl(speaker.id)}">
-                        <div class="section-content">
-                          <img
-                            loading="lazy"
-                            decoding="async"
-                            class="section-photo"
-                            src="${speaker.photoUrl}"
-                            alt="${speaker.name}"
-                          />
-
-                          <div class="section-details">
-                            <div class="section-primary-text">${speaker.name}</div>
-                            <div class="section-secondary-text">
-                              ${speaker.company} / ${speaker.country}
-                            </div>
-                          </div>
-                        </div>
-                      </a>
-                    `,
-                  )}
-                </div>
-              `
-            : nothing
-        }
-
-        <div id="feedback" class="additional-sections">
-          <h3>${msg('Review session', { id: 'common.review-session' })}</h3>
-
-          <auth-required ?hidden="${!this.acceptingFeedback}">
-            <slot slot="prompt">
-              ${msg('to leave feedback', {
-                id: 'pages.session.leave-feedback',
-                desc: 'Follows a Sign in button: "Sign in to leave feedback".',
-              })}
-            </slot>
-            <feedback-block .sessionId="${session?.id}"></feedback-block>
-          </auth-required>
-
-          <p ?hidden="${this.acceptingFeedback}">
-            ${msg('Session reviews are not open', { id: 'pages.session.feedback-closed' })}
-          </p>
-        </div>
-      </div>
-    `;
-  }
 }
 
 declare global {

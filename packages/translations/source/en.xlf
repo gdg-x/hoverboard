@@ -5,6 +5,9 @@
 <trans-unit id="shell.app.offline">
   <source>You can still work offline.</source>
 </trans-unit>
+<trans-unit id="dialogs.feedback.thanks">
+  <source>Thanks for your feedback.</source>
+</trans-unit>
 <trans-unit id="dialogs.feedback.content-rating">
   <source>Content quality:</source>
 </trans-unit>
@@ -34,9 +37,6 @@
 </trans-unit>
 <trans-unit id="dialogs.feedback.retry">
   <source>Retry</source>
-</trans-unit>
-<trans-unit id="common.close">
-  <source>Close</source>
 </trans-unit>
 <trans-unit id="dialogs.signin.sign-in-with">
   <source>Sign in with <x id="0" equiv-text="${provider}"/></source>
@@ -68,23 +68,38 @@
 <trans-unit id="common.email-invalid">
   <source>Please enter a valid email address.</source>
 </trans-unit>
+<trans-unit id="footer.color-scheme.system">
+  <source>System</source>
+</trans-unit>
+<trans-unit id="footer.color-scheme.light">
+  <source>Light</source>
+</trans-unit>
+<trans-unit id="footer.color-scheme.dark">
+  <source>Dark</source>
+</trans-unit>
 <trans-unit id="footer.block.back-to-top">
   <source>Back to top</source>
+</trans-unit>
+<trans-unit id="footer.block.subscribe">
+  <source>Get updates by email</source>
+</trans-unit>
+<trans-unit id="footer.block.fork-me">
+  <source>Fork me on GitHub</source>
 </trans-unit>
 <trans-unit id="footer.nav.based-on">
   <source>Based on <x id="0" equiv-text="${hoverboard}"/></source>
 </trans-unit>
-<trans-unit id="footer.rel.subscribe-note">
-  <source>No spam, only the latest news and updates!</source>
-</trans-unit>
 <trans-unit id="footer.social.email-us">
   <source>Email us</source>
 </trans-unit>
-<trans-unit id="footer.social.follow-blog">
-  <source>Follow our <x id="0" equiv-text="&lt;a href=&quot;${blog}&quot; target=&quot;${target}&quot; rel=&quot;${rel}&quot;&gt;"/>Blog<x id="1" equiv-text="&lt;/a&gt;"/></source>
-</trans-unit>
 <trans-unit id="footer.social.follow-us">
   <source>Follow us</source>
+</trans-unit>
+<trans-unit id="footer.social.share-title">
+  <source>Share</source>
+</trans-unit>
+<trans-unit id="footer.social.follow-blog">
+  <source>Follow our <x id="0" equiv-text="&lt;a href=&quot;${blog}&quot; target=&quot;${target}&quot; rel=&quot;${rel}&quot;&gt;"/>Blog<x id="1" equiv-text="&lt;/a&gt;"/></source>
 </trans-unit>
 <trans-unit id="footer.social.share">
   <source>Share on <x id="0" equiv-text="${network}"/></source>
@@ -92,14 +107,17 @@
 <trans-unit id="footer.locale-picker.label">
   <source>Language</source>
 </trans-unit>
-<trans-unit id="footer.subscribe-form.email">
-  <source>Your email</source>
-</trans-unit>
 <trans-unit id="home.about-block.title">
   <source>About</source>
 </trans-unit>
 <trans-unit id="home.about-organizer-block.photo-alt">
   <source>Organizer</source>
+</trans-unit>
+<trans-unit id="home.featured-videos.previous">
+  <source>Previous videos</source>
+</trans-unit>
+<trans-unit id="home.featured-videos.next">
+  <source>Next videos</source>
 </trans-unit>
 <trans-unit id="home.featured-videos.error">
   <source>Error loading videos.</source>
@@ -107,14 +125,8 @@
 <trans-unit id="home.featured-videos.cta">
   <source>See all videos</source>
 </trans-unit>
-<trans-unit id="home.fork-me-block.title">
-  <source>Fork me on GitHub</source>
-</trans-unit>
-<trans-unit id="home.fork-me-block.description">
-  <source>Hoverboard is open source conference website template and is developed entirely on a voluntary basis. You can check the source code that generated this website on Github. If you find a issue or you want to contribute, you're more than welcome!</source>
-</trans-unit>
-<trans-unit id="home.fork-me-block.cta">
-  <source>Fork this project</source>
+<trans-unit id="home.gallery-block.cta">
+  <source>See all photos</source>
 </trans-unit>
 <trans-unit id="home.gallery-block.error">
   <source>Error loading gallery.</source>
@@ -122,8 +134,38 @@
 <trans-unit id="home.gallery-block.photo-alt">
   <source>Gallery photo</source>
 </trans-unit>
-<trans-unit id="home.gallery-block.cta">
-  <source>See all photos</source>
+<trans-unit id="home.hero.details">
+  <source>Event details</source>
+</trans-unit>
+<trans-unit id="home.hero.live">
+  <source>Live now</source>
+</trans-unit>
+<trans-unit id="home.hero.over">
+  <source>Thanks for coming!</source>
+</trans-unit>
+<trans-unit id="home.hero.tomorrow">
+  <source>Starts tomorrow</source>
+</trans-unit>
+<trans-unit id="home.hero.days-to-go">
+  <source><x id="0" equiv-text="${this.daysToGo}"/> days to go</source>
+</trans-unit>
+<trans-unit id="home.hero.coming-soon">
+  <source>Coming soon</source>
+</trans-unit>
+<trans-unit id="pages.home.view-highlights">
+  <source>View Highlights</source>
+</trans-unit>
+<trans-unit id="home.hero.videos">
+  <source>Watch the videos</source>
+</trans-unit>
+<trans-unit id="home.hero.photos">
+  <source>See the photos</source>
+</trans-unit>
+<trans-unit id="common.buy-ticket">
+  <source>Buy ticket</source>
+</trans-unit>
+<trans-unit id="home.hero.live-schedule">
+  <source>See what's on now</source>
 </trans-unit>
 <trans-unit id="home.latest-posts-block.title">
   <source>The latest news</source>
@@ -134,17 +176,32 @@
 <trans-unit id="home.map-block.title">
   <source>Location</source>
 </trans-unit>
+<trans-unit id="home.map-block.directions">
+  <source>Directions</source>
+</trans-unit>
+<trans-unit id="home.map-block.map-note">
+  <source>The map loads from Google Maps.</source>
+</trans-unit>
+<trans-unit id="home.map-block.loading">
+  <source>Loading map…</source>
+</trans-unit>
+<trans-unit id="home.map-block.show-map">
+  <source>Show map</source>
+</trans-unit>
+<trans-unit id="home.map-block.error">
+  <source>The map did not load. Try again.</source>
+</trans-unit>
 <trans-unit id="home.partners-block.added">
   <source>We will contact you soon!</source>
 </trans-unit>
 <trans-unit id="home.partners-block.title">
   <source>Partners</source>
 </trans-unit>
-<trans-unit id="home.partners-block.error">
-  <source>Error loading partners.</source>
-</trans-unit>
 <trans-unit id="home.partners-block.cta">
   <source>Become a partner</source>
+</trans-unit>
+<trans-unit id="home.partners-block.error">
+  <source>Error loading partners.</source>
 </trans-unit>
 <trans-unit id="home.partners-block.form-title">
   <source>Become a partner!</source>
@@ -164,17 +221,17 @@
 <trans-unit id="home.speakers-block.cta">
   <source>View all speakers</source>
 </trans-unit>
-<trans-unit id="common.subscribed">
-  <source>Subscribed</source>
-</trans-unit>
 <trans-unit id="home.subscribe-block.description">
   <source>Get notified about the important conference updates</source>
 </trans-unit>
-<trans-unit id="home.tickets-block.save">
-  <source>Save <x id="0" equiv-text="${discount}"/> today</source>
+<trans-unit id="common.subscribed">
+  <source>Subscribed</source>
 </trans-unit>
-<trans-unit id="home.tickets-block.not-available">
-  <source>Not available yet</source>
+<trans-unit id="home.subscribe-block.email">
+  <source>Your email</source>
+</trans-unit>
+<trans-unit id="home.subscribe-block.error">
+  <source>Could not subscribe. Please try again.</source>
 </trans-unit>
 <trans-unit id="home.tickets-block.title">
   <source>Tickets</source>
@@ -182,8 +239,38 @@
 <trans-unit id="home.tickets-block.error">
   <source>Error loading tickets</source>
 </trans-unit>
+<trans-unit id="home.tickets-block.sold-out-sticker">
+  <source>Sold out</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.in-demand">
+  <source>Popular</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.not-available">
+  <source>Not available yet</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.save">
+  <source>Save <x id="0" equiv-text="${discount}"/> today</source>
+</trans-unit>
 <trans-unit id="markdown.remote-markdown.error">
   <source>Error loading content</source>
+</trans-unit>
+<trans-unit id="markdown.toc.title">
+  <source>On this page</source>
+</trans-unit>
+<trans-unit id="schedule.tabs.label">
+  <source>Schedule days</source>
+</trans-unit>
+<trans-unit id="schedule.tabs.day">
+  <source>Day <x id="0" equiv-text="${index + 1}"/></source>
+</trans-unit>
+<trans-unit id="schedule.session.rate">
+  <source>Rate <x id="0" equiv-text="${session.title}"/></source>
+</trans-unit>
+<trans-unit id="schedule.session.bookmark">
+  <source>Bookmark <x id="0" equiv-text="${session.title}"/></source>
+</trans-unit>
+<trans-unit id="common.save-sessions-signed-out">
+  <source>Sign in to save sessions</source>
 </trans-unit>
 <trans-unit id="shared.add-to-calendar.label">
   <source>Add to calendar</source>
@@ -194,9 +281,6 @@
 <trans-unit id="common.sign-in">
   <source>Sign in</source>
 </trans-unit>
-<trans-unit id="shared.filter-menu.tags">
-  <source>Tags</source>
-</trans-unit>
 <trans-unit id="shared.filter-menu.complexity">
   <source>Complexity</source>
 </trans-unit>
@@ -206,20 +290,32 @@
 <trans-unit id="shared.filter-menu.results.other">
   <source><x id="0" equiv-text="${count}"/> results</source>
 </trans-unit>
-<trans-unit id="shared.filter-menu.clear">
-  <source>Clear all</source>
-</trans-unit>
 <trans-unit id="shared.filter-menu.title">
   <source>Filters</source>
+</trans-unit>
+<trans-unit id="shared.filter-menu.selected">
+  <source>Selected filters</source>
+</trans-unit>
+<trans-unit id="shared.filter-menu.clear">
+  <source>Clear all</source>
 </trans-unit>
 <trans-unit id="shared.previous-speakers-block.title">
   <source>Previous speakers</source>
 </trans-unit>
+<trans-unit id="shared.previous-speakers-block.view-all">
+  <source>View all</source>
+</trans-unit>
 <trans-unit id="shared.previous-speakers-block.error">
   <source>Error loading previous speakers.</source>
 </trans-unit>
-<trans-unit id="shared.previous-speakers-block.view-all">
-  <source>View all</source>
+<trans-unit id="shared.filter-menu.tags">
+  <source>Tags</source>
+</trans-unit>
+<trans-unit id="common.view-video">
+  <source>View video</source>
+</trans-unit>
+<trans-unit id="common.view-presentation">
+  <source>View presentation</source>
 </trans-unit>
 <trans-unit id="shared.star-rating.rate">
   <source>Rate <x id="0" equiv-text="${value}"/> out of <x id="1" equiv-text="${this.maxRating}"/></source>
@@ -236,23 +332,44 @@
 <trans-unit id="shared.star-rating.votes.other">
   <source>(<x id="0" equiv-text="${votes}"/> votes)</source>
 </trans-unit>
-<trans-unit id="shell.app-install.cta">
-  <source>Add to Home Screen</source>
-</trans-unit>
-<trans-unit id="shell.header.menu">
-  <source>Menu</source>
-</trans-unit>
-<trans-unit id="common.buy-ticket">
-  <source>Buy ticket</source>
-</trans-unit>
-<trans-unit id="shell.header.account-menu">
-  <source>Account menu</source>
+<trans-unit id="shell.account-menu.label">
+  <source>Account of <x id="0" equiv-text="${name}"/></source>
 </trans-unit>
 <trans-unit id="shell.header.sign-out">
   <source>Sign out</source>
 </trans-unit>
-<trans-unit id="shell.header.account">
-  <source>Account</source>
+<trans-unit id="shell.header.skip-link">
+  <source>Skip to content</source>
+</trans-unit>
+<trans-unit id="shell.header.menu">
+  <source>Menu</source>
+</trans-unit>
+<trans-unit id="shell.app-install.cta">
+  <source>Add to Home Screen</source>
+</trans-unit>
+<trans-unit id="shell.demo.density.compact">
+  <source>Compact</source>
+</trans-unit>
+<trans-unit id="shell.demo.density.default">
+  <source>Default</source>
+</trans-unit>
+<trans-unit id="shell.demo.density.roomy">
+  <source>Roomy</source>
+</trans-unit>
+<trans-unit id="shell.demo.label">
+  <source>Demo</source>
+</trans-unit>
+<trans-unit id="shell.demo.badge">
+  <source>DEMO</source>
+</trans-unit>
+<trans-unit id="shell.demo.theme">
+  <source>Theme</source>
+</trans-unit>
+<trans-unit id="shell.demo.density">
+  <source>Spacing</source>
+</trans-unit>
+<trans-unit id="shell.demo.decorations">
+  <source>Decorations</source>
 </trans-unit>
 <trans-unit id="shell.nav.home">
   <source>Home</source>
@@ -290,9 +407,6 @@
 <trans-unit id="shell.notifications.enable">
   <source>Enable</source>
 </trans-unit>
-<trans-unit id="common.loading">
-  <source>Loading...</source>
-</trans-unit>
 <trans-unit id="shell.notifications.enabled">
   <source>Get notified of general announcements and sessions starting</source>
 </trans-unit>
@@ -316,6 +430,12 @@
 </trans-unit>
 <trans-unit id="shell.snack-bar.dismiss">
   <source>Dismiss</source>
+</trans-unit>
+<trans-unit id="common.close">
+  <source>Close</source>
+</trans-unit>
+<trans-unit id="common.loading">
+  <source>Loading...</source>
 </trans-unit>
 <trans-unit id="shell.service-worker.installing">
   <source>App being installed for offline use.</source>
@@ -413,14 +533,32 @@
 <trans-unit id="pages.home.scroll-error">
   <source>Error scrolling to section.</source>
 </trans-unit>
-<trans-unit id="pages.home.view-highlights">
-  <source>View Highlights</source>
+<trans-unit id="pages.not-found.joke">
+  <source>This session was moved to another room.</source>
 </trans-unit>
-<trans-unit id="pages.offline.message">
-  <source>You are offline and this page has not been saved yet. Pages you have visited are still available.</source>
+<trans-unit id="pages.not-found.message">
+  <source>The page you are looking for is not here. It may have moved, or the link is wrong.</source>
 </trans-unit>
 <trans-unit id="pages.offline.home-link">
   <source>Go to the home page</source>
+</trans-unit>
+<trans-unit id="pages.not-found.schedule-link">
+  <source>See the schedule</source>
+</trans-unit>
+<trans-unit id="pages.offline.not-saved">
+  <source>You are offline, and this page was not saved on this device yet.</source>
+</trans-unit>
+<trans-unit id="pages.offline.works-title">
+  <source>What works offline</source>
+</trans-unit>
+<trans-unit id="pages.offline.visited">
+  <source>Pages you have visited before</source>
+</trans-unit>
+<trans-unit id="pages.offline.bookmarks">
+  <source>Your bookmarked sessions, in My Schedule</source>
+</trans-unit>
+<trans-unit id="pages.post.all-posts">
+  <source>All posts</source>
 </trans-unit>
 <trans-unit id="pages.post.published">
   <source>Published: <x id="0" equiv-text="${published}"/></source>
@@ -428,32 +566,56 @@
 <trans-unit id="pages.post.up-next">
   <source>Up next</source>
 </trans-unit>
-<trans-unit id="common.sessions">
-  <source>Sessions</source>
+<trans-unit id="pages.previous-speaker.all">
+  <source>All previous speakers</source>
 </trans-unit>
-<trans-unit id="pages.previous-speaker.year">
-  <source>Year: <x id="0" equiv-text="${session.year}"/></source>
+<trans-unit id="pages.speaker.socials">
+  <source>Social links</source>
 </trans-unit>
-<trans-unit id="common.view-video">
-  <source>View video</source>
+<trans-unit id="pages.previous-speaker.talks">
+  <source>Talks</source>
 </trans-unit>
-<trans-unit id="common.view-presentation">
-  <source>View presentation</source>
+<trans-unit id="schedule.page.time-zone">
+  <source>Times in <x id="0" equiv-text="&lt;strong&gt;${zoneName(shownZone)}&lt;/strong&gt;"/></source>
+</trans-unit>
+<trans-unit id="schedule.page.local-time">
+  <source>Show my time zone, <x id="0" equiv-text="${zoneName(visitorZone)}"/></source>
+</trans-unit>
+<trans-unit id="schedule.my-schedule.empty">
+  <source>Bookmark sessions in the schedule to see them here.</source>
+</trans-unit>
+<trans-unit id="schedule.day.no-results">
+  <source>No sessions match these filters.</source>
+</trans-unit>
+<trans-unit id="schedule.day.scroll-hint">
+  <source><x id="0" equiv-text="${tracks}"/> tracks. Scroll sideways to see them all.</source>
+</trans-unit>
+<trans-unit id="schedule.day.previous-track">
+  <source>Previous track</source>
+</trans-unit>
+<trans-unit id="schedule.day.next-track">
+  <source>Next track</source>
+</trans-unit>
+<trans-unit id="schedule.day.label">
+  <source>Schedule for <x id="0" equiv-text="${day.dateReadable}"/></source>
+</trans-unit>
+<trans-unit id="schedule.day.now">
+  <source>Now · <x id="0" equiv-text="${now.label}"/></source>
 </trans-unit>
 <trans-unit id="schedule.day.browse-sessions">
   <source>Browse sessions</source>
 </trans-unit>
-<trans-unit id="common.save-sessions-signed-out">
-  <source>Sign in to save sessions</source>
-</trans-unit>
-<trans-unit id="pages.session.toggle-featured">
-  <source>Toggle featured session</source>
-</trans-unit>
 <trans-unit id="pages.session.back-to-schedule">
   <source>Back to schedule</source>
 </trans-unit>
-<trans-unit id="pages.session.content-level">
-  <source>Content level: <x id="0" equiv-text="${complexity}"/></source>
+<trans-unit id="pages.session.details">
+  <source>Session details</source>
+</trans-unit>
+<trans-unit id="pages.session.bookmarked">
+  <source>Bookmarked</source>
+</trans-unit>
+<trans-unit id="pages.session.bookmark">
+  <source>Bookmark</source>
 </trans-unit>
 <trans-unit id="pages.session.speakers">
   <source>Speakers</source>
@@ -461,8 +623,26 @@
 <trans-unit id="common.review-session">
   <source>Review session</source>
 </trans-unit>
-<trans-unit id="pages.session.feedback-closed">
-  <source>Session reviews are not open</source>
+<trans-unit id="pages.speaker.all-speakers">
+  <source>All speakers</source>
+</trans-unit>
+<trans-unit id="pages.speaker.badges">
+  <source>Badges</source>
+</trans-unit>
+<trans-unit id="common.sessions">
+  <source>Sessions</source>
+</trans-unit>
+<trans-unit id="pages.speaker.previous-talks">
+  <source>Talks in earlier years</source>
+</trans-unit>
+<trans-unit id="pages.speakers.no-results">
+  <source>No speakers match these filters.</source>
+</trans-unit>
+<trans-unit id="schedule.day.clear-filters">
+  <source>Clear filters</source>
+</trans-unit>
+<trans-unit id="pages.team.photo-alt">
+  <source>The team</source>
 </trans-unit>
 <trans-unit id="pages.team.error">
   <source>Error loading teams.</source>
@@ -479,21 +659,13 @@
   <source>Apple Calendar</source>
   <note from="lit-localize">Downloads an .ics file for Apple Calendar and other calendar apps.</note>
 </trans-unit>
-<trans-unit id="pages.previous-speakers.years.other">
-  <source>Years:</source>
-  <note from="lit-localize">Followed by a list of years.</note>
-</trans-unit>
-<trans-unit id="pages.previous-speakers.years.one">
-  <source>Year:</source>
-  <note from="lit-localize">Followed by a year.</note>
-</trans-unit>
 <trans-unit id="pages.session.leave-feedback">
   <source>to leave feedback</source>
   <note from="lit-localize">Follows a Sign in button: "Sign in to leave feedback".</note>
 </trans-unit>
-<trans-unit id="footer.rel.subscribe-heading">
-  <source>Subscribe</source>
-  <note from="lit-localize">Heading above the newsletter sign-up form.</note>
+<trans-unit id="shell.header.nav-label">
+  <source>Main</source>
+  <note from="lit-localize">Names the main navigation.</note>
 </trans-unit>
 <trans-unit id="shell.notifications.unsupported-help">
   <source>Details</source>
@@ -502,6 +674,10 @@
 <trans-unit id="shell.notifications.blocked-help">
   <source>Enable</source>
   <note from="lit-localize">Opens help on allowing notifications in the browser.</note>
+</trans-unit>
+<trans-unit id="footer.color-scheme.legend">
+  <source>Appearance</source>
+  <note from="lit-localize">Picks the light or dark colors, or follows the device.</note>
 </trans-unit>
 <trans-unit id="shared.share.twitter-text">
   <source>Check out <x id="0" equiv-text="${title}"/> at #<x id="1" equiv-text="${hashtag}"/>: <x id="2" equiv-text="${shareUrl}"/></source>

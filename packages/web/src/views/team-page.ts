@@ -1,193 +1,222 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
-import '../components/shared/hoverboard-icon';
 import '../components/markdown/short-markdown';
+import '../components/shared/hoverboard-icon';
+import '../components/ui/hb-icon-button';
 import { selectTeamsAndMembers } from '../store/teams-members/selectors';
 import { initialTeamsMembersState } from '../store/teams-members/state';
-import { team } from '../config/site';
+import { aboutOrganizerBlock, team } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
+/** The team: the organizers' photo and story, then each subteam and its members. */
 @customElement('team-page')
 export class TeamPage extends ThemedElement {
   static override styles = css`
-    .description-wrapper {
-      background-color: var(--secondary-background-color);
-      width: 100%;
-      overflow: hidden;
+    :host {
+      display: block;
+      background-color: var(--hb-section-background);
+      color: var(--hb-color-on-surface);
+    }
+
+    /* Content-box, so the text column lines up with the hero's. */
+    .inner {
+      box-sizing: content-box;
+      max-inline-size: var(--hb-content-max);
+      margin-inline: auto;
+      padding: var(--hb-space-6) var(--hb-gutter) var(--hb-space-9);
+      container-type: inline-size;
+    }
+
+    .intro {
+      display: grid;
+      gap: var(--hb-space-6);
+      align-items: start;
+    }
+
+    .team-photo {
+      display: block;
+      inline-size: 100%;
+      aspect-ratio: 16 / 9;
+      border: var(--hb-border-width) solid var(--hb-border-color);
+      border-radius: var(--hb-radius-l);
+      background-color: var(--hb-color-surface-container);
+      box-shadow: var(--hb-shadow-card);
+      object-fit: cover;
+    }
+
+    .description {
+      display: block;
+      max-inline-size: var(--hb-prose-max);
+      font-size: var(--hb-text-lg);
+      line-height: 1.6;
     }
 
     .team-title {
-      font-size: 30px;
-      line-height: 2.5;
+      margin: var(--hb-space-8) 0 var(--hb-space-4);
+      padding: 0;
+      font: 800 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
     }
 
-    .team-block {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .members {
       display: grid;
-      grid-template-columns: 1fr;
-      grid-gap: 24px;
-      margin-bottom: 32px;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+      gap: var(--hb-space-5);
     }
 
     .member {
-      padding: 16px 0;
-      min-width: 300px;
       display: flex;
+      align-items: center;
+      gap: var(--hb-space-4);
+      padding: var(--hb-space-4);
+      border: var(--hb-border-width) solid var(--hb-border-color);
+      border-radius: var(--hb-radius-l);
+      background-color: var(--hb-panel-background);
+      backdrop-filter: var(--hb-backdrop-filter);
+      box-shadow: var(--hb-shadow-card);
     }
 
-    .photo {
+    .avatar {
       flex: none;
-      --lazy-image-width: 96px;
-      --lazy-image-height: 96px;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      background-color: var(--contrast-additional-background-color);
-      border-radius: 50%;
-      overflow: hidden;
-      transform: translateZ(0);
-      border: 5px solid var(--contrast-additional-background-color);
+      inline-size: 88px;
+      block-size: 88px;
+      border: var(--hb-border-width) solid var(--hb-border-color);
+      border-radius: var(--hb-radius-avatar);
+      background-color: var(--hb-color-surface-container);
+      object-fit: cover;
+      transition: rotate var(--hb-duration-medium) var(--hb-ease-spring);
+    }
+
+    .member:hover .avatar {
+      rotate: calc(-4deg * var(--hb-decorations, 1));
     }
 
     .member-details {
-      color: var(--primary-text-color);
-      margin-left: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
+      display: grid;
+      gap: var(--hb-space-1);
+      min-inline-size: 0;
     }
 
     .name {
-      padding-left: 6px;
-      line-height: 1.2;
+      margin: 0;
+      padding: 0;
+      font: 700 var(--hb-text-lg) / 1.2 var(--hb-font-body);
+      overflow-wrap: anywhere;
     }
 
-    .activity {
-      font-size: 16px;
-      padding-left: 6px;
+    .title {
+      margin: 0;
+      color: var(--hb-color-on-surface-variant);
+      font-size: var(--hb-text-sm);
     }
 
-    .social-icon {
-      margin: 6px;
-      width: 32px;
-      height: 32px;
-      padding: 6px;
-      color: var(--secondary-text-color);
-      transition: transform var(--animation);
-    }
-
-    .social-icon:hover {
-      transform: scale(1.1);
-    }
-
-    .description-container {
+    .socials {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-inline-start: calc(-1 * var(--hb-space-2));
     }
 
-    @media (min-width: 640px) {
-      .team-block {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .member {
-        padding: 32px 0;
+    @container (width >= 800px) {
+      .intro.with-photo {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
       }
     }
 
-    @media (min-width: 812px) {
-      .photo {
-        --lazy-image-width: 115px;
-        --lazy-image-height: 115px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .team-block {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .photo {
-        --lazy-image-width: 128px;
-        --lazy-image-height: 128px;
+    @media (prefers-reduced-motion: reduce) {
+      .member:hover .avatar {
+        rotate: none;
       }
     }
   `;
 
   private readonly metadata = new PageMetadataController(this, 'team');
-  private get team() {
-    return team;
-  }
 
   @fromStore((state) => selectTeamsAndMembers(state))
   accessor teamsMembers!: typeof initialTeamsMembersState;
 
-  get pending() {
-    return this.teamsMembers instanceof Pending;
-  }
-
-  get failure() {
-    return this.teamsMembers instanceof Failure;
-  }
-
   override render() {
     const teams = this.teamsMembers instanceof Success ? this.teamsMembers.data : [];
+    const photo = aboutOrganizerBlock.image;
 
     return html`
       <simple-hero page="team"></simple-hero>
 
-      <div class="description-wrapper">
-        <div class="container description-container">
-          <short-markdown content=${this.team.description}></short-markdown>
+      <div class="inner">
+        <div class="intro ${photo ? 'with-photo' : ''}">
+          ${
+            photo
+              ? html`<img
+                  class="team-photo"
+                  src="${photo}"
+                  alt="${msg('The team', { id: 'pages.team.photo-alt' })}"
+                  loading="lazy"
+                />`
+              : nothing
+          }
+          <short-markdown class="description" .content="${team.description}"></short-markdown>
         </div>
-      </div>
 
-      <div class="container">
-        ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : ''}
+        ${this.teamsMembers instanceof Pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : nothing}
         ${
-          this.failure
+          this.teamsMembers instanceof Failure
             ? html`<p>${msg('Error loading teams.', { id: 'pages.team.error' })}</p>`
-            : ''
+            : nothing
         }
         ${teams.map(
           (team) => html`
-            <div class="team-title">${team.title}</div>
-            <div class="team-block">
-              ${team.members.map(
-                (member) => html`
-                  <div class="member">
-                    <img
-                      loading="lazy"
-                      decoding="async"
-                      class="photo"
-                      src=${member.photoUrl}
-                      alt=${member.name}
-                    />
-                    <div class="member-details">
-                      <h2 class="name">${member.name}</h2>
-                      <div class="activity">${member.title}</div>
-                      <div class="contacts">
-                        ${member.socials.map(
-                          (social) => html`
-                            <a href=${social.link} target="_blank" rel="noopener noreferrer">
-                              <hoverboard-icon
-                                class="social-icon"
-                                name=${social.icon}
-                              ></hoverboard-icon>
-                            </a>
-                          `,
-                        )}
+            <section aria-labelledby="team-${team.id}">
+              <h2 class="team-title" id="team-${team.id}">${team.title}</h2>
+              <ul class="members">
+                ${team.members.map(
+                  (member) => html`
+                    <li class="member">
+                      <img
+                        class="avatar"
+                        src="${member.photoUrl}"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="88"
+                        height="88"
+                      />
+                      <div class="member-details">
+                        <h3 class="name">${member.name}</h3>
+                        ${member.title ? html`<p class="title">${member.title}</p>` : nothing}
+                        ${
+                          member.socials?.length
+                            ? html`<ul class="socials">
+                                ${member.socials.map(
+                                  (social) => html`
+                                    <li>
+                                      <hb-icon-button
+                                        href="${social.link}"
+                                        target="_blank"
+                                        label="${`${social.name}: ${member.name}`}"
+                                      >
+                                        <hoverboard-icon name="${social.icon}"></hoverboard-icon>
+                                      </hb-icon-button>
+                                    </li>
+                                  `,
+                                )}
+                              </ul>`
+                            : nothing
+                        }
                       </div>
-                    </div>
-                  </div>
-                `,
-              )}
-            </div>
+                    </li>
+                  `,
+                )}
+              </ul>
+            </section>
           `,
         )}
       </div>

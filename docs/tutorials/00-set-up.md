@@ -8,7 +8,7 @@ Project Hoverboard locally in less than 15 minutes.
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
 1. Install [Node.js (v22)](https://nodejs.org/en/download/)
 1. Install project dependencies: `npm ci` (`yarn` should work but it's not officially supported)
-1. Run `./hbd init` and answer its questions. It signs you in to Firebase, creates or picks your Firebase project, writes your event's name, dates, venue, organizer and features to [packages/config](/packages/config), and checks that the project is on the Blaze plan. It can also deploy the site and add sample content. You can run it again later; your current values are the defaults.
+1. Run `./hbd init` and answer its questions. It signs you in to Firebase, creates or picks your Firebase project, writes your event's name, dates, venue, organizer, theme and features to [packages/config](/packages/config), and checks that the project is on the Blaze plan. It can also deploy the site and add sample content. You can run it again later; your current values are the defaults.
    - _Tip: `./hbd init --help` lists flags such as `--project` and `--details <file>` for running it without questions._
 1. Update the rest of your site's config and content in [packages/config](/packages/config). More info can be found [here](01-configure-app.md)
 1. Run the app locally. Local development always runs on the [Firebase emulators](https://firebase.google.com/docs/emulator-suite) with the `demo-hoverboard` project, so it needs no Firebase project and never reads or writes live data.
@@ -73,7 +73,8 @@ The diagram below is a brief summary of the directories within the project.
     - `pages/` has the Astro pages that every site has: not found, offline and the web app manifest.
     - `routes/` has the other Astro pages. The build only includes the pages of the features that are on.
     - `store/` is where you keep your Redux state.
-    - `styles/` is where you keep your theme.
+    - `styles/` has the shared styles: type scale, spacing and motion.
+    - `themes/` has the built-in themes, with their colors and fonts.
     - `utils/` is where you keep your shared helpers.
     - `views/` is where you keep your page elements.
 

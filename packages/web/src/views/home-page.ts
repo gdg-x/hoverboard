@@ -1,25 +1,18 @@
-import '@material/web/button/filled-button.js';
-import '@material/web/button/outlined-button.js';
 import { IntersectionController } from '@lit-labs/observers/intersection-controller.js';
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
-import { customElement, query } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import '../components/home/about-block';
 import '../components/home/about-organizer-block';
-import '../components/hero/hero-block';
-import { HeroBlock } from '../components/hero/hero-block';
-import '../components/shared/hoverboard-icon';
+import '../components/home/home-hero';
+import { ThemedElement } from '../components/themed-element';
+import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
-import { openVideoDialog } from '../store/ui';
-import { aboutBlock, heroDescriptions, heroSettings, location, title } from '../config/site';
-import { PageMetadataController } from '../controllers/page-metadata-controller';
-import { getEventDates } from '../utils/dates';
-import { POSITION, scrollToElement } from '../utils/scrolling';
-import { ThemedElement } from '../components/themed-element';
+import type { EventState } from '../utils/event-state';
+import { scrollToElement } from '../utils/scrolling';
 
 // `__HB_FEATURES__.<name>` is a literal in the build, so blocks of disabled features are not bundled.
-if (__HB_FEATURES__.forkMe) void import('../components/home/fork-me-block');
 if (__HB_FEATURES__.speakers) void import('../components/home/speakers-block');
 if (__HB_FEATURES__.subscribe) void import('../components/home/subscribe-block');
 if (__HB_FEATURES__.blog) void import('../components/home/latest-posts-block');
@@ -47,162 +40,58 @@ export class HomePage extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
-      height: 100%;
     }
 
-    hero-block {
-      font-size: 24px;
-      text-align: center;
+    /*
+     * Sections alternate between the surface and an accent color, counted over the blocks the
+     * site shows, so turning a feature off never puts two of the same color together.
+     */
+    .band {
+      --hb-band-background: var(--hb-color-surface);
+      --hb-band-color: var(--hb-color-on-surface);
+
+      background-color: color-mix(
+        in srgb,
+        var(--hb-band-background) var(--hb-tint-opacity),
+        transparent
+      );
+      color: var(--hb-band-color);
     }
 
-    .hero-logo {
-      --lazy-image-width: 100%;
-      --lazy-image-height: 76px;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      max-width: 240px;
-      max-height: 76px;
+    .band[data-tone='accent-4'] {
+      --hb-band-background: var(--hb-color-accent-4-container);
+      --hb-band-color: var(--hb-color-on-accent-4-container);
     }
 
-    :is(tickets-block, gallery-block, featured-videos, map-block, partners-block):not(:defined) {
+    .band[data-tone='accent-2'] {
+      --hb-band-background: var(--hb-color-accent-2-container);
+      --hb-band-color: var(--hb-color-on-accent-2-container);
+    }
+
+    .band[data-tone='accent-1'] {
+      --hb-band-background: var(--hb-color-accent-1-container);
+      --hb-band-color: var(--hb-color-on-accent-1-container);
+    }
+
+    .band:not(:defined) {
       display: block;
-      min-height: 480px;
-    }
-
-    .info-items {
-      margin: 24px auto;
-      font-size: 22px;
-    }
-
-    .info-items > *:not(:first-of-type) {
-      margin-top: 4px;
-    }
-
-    .action-buttons {
-      margin: 0 -8px;
-      font-size: 14px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .action-buttons md-filled-button,
-    .action-buttons md-outlined-button {
-      margin: 8px;
-    }
-
-    .action-buttons .watch-video {
-      color: var(--text-primary-color);
-      --md-outlined-button-label-text-color: var(--text-primary-color);
-      --md-outlined-button-hover-label-text-color: var(--text-primary-color);
-      --md-outlined-button-outline-color: var(--text-primary-color);
-    }
-
-    .action-buttons hoverboard-icon {
-      margin-right: 8px;
-    }
-
-    .scroll-down {
-      margin-top: 24px;
-      color: currentColor;
-      user-select: none;
-      cursor: pointer;
-    }
-
-    .scroll-down svg {
-      width: 24px;
-      opacity: 0.6;
-    }
-
-    .scroll-down .stroke {
-      stroke: currentColor;
-    }
-
-    .scroll-down .scroller {
-      fill: currentColor;
-      animation: updown 2s infinite;
-    }
-
-    .home-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    @keyframes updown {
-      0% {
-        transform: translate(0, 0);
-      }
-      50% {
-        transform: translate(0, 5px);
-      }
-      100% {
-        transform: translate(0, 0);
-      }
-    }
-
-    @media (min-height: 500px) {
-      hero-block {
-        height: calc(100vh + 57px);
-        max-height: calc(100vh + 1px);
-      }
-
-      .home-content {
-        margin-top: -48px;
-      }
-
-      .scroll-down {
-        position: absolute;
-        bottom: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 2;
-      }
-    }
-
-    @media (min-width: 812px) {
-      hero-block {
-        height: calc(100vh + 65px);
-      }
-
-      .hero-logo {
-        max-width: 320px;
-      }
-
-      .info-items {
-        margin: 48px auto;
-        font-size: 28px;
-        line-height: 1.1;
-      }
+      min-block-size: 480px;
     }
   `;
 
   private readonly metadata = new PageMetadataController(this, 'home');
-  private city = location.city;
-  private get siteTitle() {
-    return title;
-  }
-  private get dates() {
-    return getEventDates();
-  }
-  private heroSettings = heroSettings.home;
-  private get aboutBlock() {
-    return aboutBlock;
-  }
 
-  @query('#hero')
-  accessor hero!: HeroBlock;
-  @query('#tickets-block')
-  private accessor ticketsBlock!: HTMLElement;
+  /** The event state when the page was built. The hero checks again in the browser. */
+  @property({ attribute: 'event-state' })
+  accessor eventState: EventState = 'upcoming';
 
-  private playVideo = () => {
-    openVideoDialog({
-      title: this.aboutBlock.callToAction.howItWas.label,
-      youtubeId: this.aboutBlock.callToAction.howItWas.youtubeId,
-    });
-  };
+  @property({ type: Number, attribute: 'days-to-go' })
+  accessor daysToGo = 0;
 
-  private scrollToTickets = async () => {
+  @query('#tickets')
+  private accessor ticketsBlock!: HTMLElement | null;
+
+  private readonly scrollToTickets = async () => {
     // The block has no height until it is defined, so load it before scrolling.
     await lazyBlocks['tickets-block']?.();
     const element = this.ticketsBlock;
@@ -215,13 +104,27 @@ export class HomePage extends ThemedElement {
     }
   };
 
-  private scrollNextBlock = () => {
-    scrollToElement(this.hero, POSITION.BOTTOM);
-  };
-
   override firstUpdated() {
     this.observeLazyBlocks();
+    this.scrollToHash();
   }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('hashchange', this.scrollToHash);
+  }
+
+  override disconnectedCallback() {
+    window.removeEventListener('hashchange', this.scrollToHash);
+    super.disconnectedCallback();
+  }
+
+  // Blocks are in the shadow root, where the browser does not look for `#subscribe` and others.
+  private readonly scrollToHash = () => {
+    const id = window.location.hash.slice(1);
+    const element = id ? this.renderRoot.querySelector(`#${CSS.escape(id)}`) : null;
+    if (element) scrollToElement(element);
+  };
 
   private readonly blockObserver = new IntersectionController(this, {
     target: null,
@@ -244,119 +147,91 @@ export class HomePage extends ThemedElement {
   }
 
   override render() {
+    const tone = bandTones();
     return html`
-      <hero-block
-        id="hero"
-        background-image="${this.heroSettings.background.image}"
-        background-color="var(--default-primary-color)"
-        font-color="var(--text-primary-color)"
-        hide-logo
-      >
-        <div class="home-content">
-          <img class="hero-logo" src="/images/logo.svg" alt="${this.siteTitle}" decoding="async" />
-
-          <div class="info-items">
-            <div class="info-item">${this.city}. ${this.dates}</div>
-            <div class="info-item">${heroDescriptions.home}</div>
-          </div>
-
-          <div class="action-buttons">
-            <md-outlined-button class="watch-video" @click="${this.playVideo}">
-              <hoverboard-icon name="movie" slot="icon"></hoverboard-icon>
-              ${msg('View Highlights', { id: 'pages.home.view-highlights' })}
-            </md-outlined-button>
-            ${
-              __HB_FEATURES__.tickets
-                ? html`
-                    <md-filled-button class="buy-ticket" @click="${this.scrollToTickets}">
-                      <hoverboard-icon name="ticket" slot="icon"></hoverboard-icon>
-                      ${msg('Buy ticket', { id: 'common.buy-ticket' })}
-                    </md-filled-button>
-                  `
-                : nothing
-            }
-          </div>
-
-          <div class="scroll-down" @click="${this.scrollNextBlock}">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              version="1.1"
-              id="Layer_2"
-              x="0px"
-              y="0px"
-              viewBox="0 0 25.166666 37.8704414"
-              enable-background="new 0 0 25.166666 37.8704414"
-              xml:space="preserve"
-            >
-              <path
-                class="stroke"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-miterlimit="10"
-                d="M12.5833445
-                36.6204414h-0.0000229C6.3499947
-                36.6204414
-                1.25
-                31.5204487
-                1.25
-                25.2871208V12.5833216C1.25
-                6.3499947
-                6.3499951
-                1.25
-                12.5833216
-                1.25h0.0000229c6.2333269
-                0
-                11.3333216
-                5.0999947
-                11.3333216
-                11.3333216v12.7037992C23.916666
-                31.5204487
-                18.8166714
-                36.6204414
-                12.5833445
-                36.6204414z"
-              ></path>
-              <path
-                class="scroller"
-                fill="currentColor"
-                d="M13.0833359
-                19.2157116h-0.9192753c-1.0999985
-                0-1.9999971-0.8999996-1.9999971-1.9999981v-5.428606c0-1.0999994
-                0.8999987-1.9999981
-                1.9999971-1.9999981h0.9192753c1.0999985
-                0
-                1.9999981
-                0.8999987
-                1.9999981
-                1.9999981v5.428606C15.083334
-                18.315712
-                14.1833344
-                19.2157116
-                13.0833359
-                19.2157116z"
-              ></path>
-            </svg>
-            <i class="icon icon-arrow-down"></i>
-          </div>
-        </div>
-      </hero-block>
-      ${__HB_FEATURES__.forkMe ? html`<fork-me-block></fork-me-block>` : nothing}
-      <about-block></about-block>
-      ${__HB_FEATURES__.speakers ? html`<speakers-block></speakers-block>` : nothing}
-      ${__HB_FEATURES__.subscribe ? html`<subscribe-block></subscribe-block>` : nothing}
+      <home-hero
+        event-state="${this.eventState}"
+        days-to-go="${this.daysToGo}"
+        @show-tickets="${this.scrollToTickets}"
+      ></home-hero>
+      <about-block class="band" data-tone="${tone('about-block')}"></about-block>
       ${
-        __HB_FEATURES__.tickets ? html`<tickets-block id="tickets-block"></tickets-block>` : nothing
+        __HB_FEATURES__.speakers
+          ? html`<speakers-block
+              class="band"
+              data-tone="${tone('speakers-block')}"
+            ></speakers-block>`
+          : nothing
       }
-      ${__HB_FEATURES__.gallery ? html`<gallery-block></gallery-block>` : nothing}
-      <about-organizer-block></about-organizer-block>
-      ${__HB_FEATURES__.videos ? html`<featured-videos></featured-videos>` : nothing}
-      ${__HB_FEATURES__.blog ? html`<latest-posts-block></latest-posts-block>` : nothing}
-      ${__HB_FEATURES__.map ? html`<map-block></map-block>` : nothing}
-      ${__HB_FEATURES__.partners ? html`<partners-block></partners-block>` : nothing}
+      ${__HB_FEATURES__.subscribe ? html`<subscribe-block id="subscribe"></subscribe-block>` : nothing}
+      ${
+        __HB_FEATURES__.tickets
+          ? html`<tickets-block
+              id="tickets"
+              class="band"
+              data-tone="${tone('tickets-block')}"
+            ></tickets-block>`
+          : nothing
+      }
+      ${
+        __HB_FEATURES__.gallery
+          ? html`<gallery-block class="band" data-tone="${tone('gallery-block')}"></gallery-block>`
+          : nothing
+      }
+      <about-organizer-block
+        class="band"
+        data-tone="${tone('about-organizer-block')}"
+      ></about-organizer-block>
+      ${
+        __HB_FEATURES__.videos
+          ? html`<featured-videos
+              class="band"
+              data-tone="${tone('featured-videos')}"
+            ></featured-videos>`
+          : nothing
+      }
+      ${
+        __HB_FEATURES__.blog
+          ? html`<latest-posts-block
+              class="band"
+              data-tone="${tone('latest-posts-block')}"
+            ></latest-posts-block>`
+          : nothing
+      }
+      ${
+        __HB_FEATURES__.map
+          ? html`<map-block class="band" data-tone="${tone('map-block')}"></map-block>`
+          : nothing
+      }
+      ${
+        __HB_FEATURES__.partners
+          ? html`<partners-block
+              class="band"
+              data-tone="${tone('partners-block')}"
+            ></partners-block>`
+          : nothing
+      }
     `;
   }
 }
+
+const TONES = ['surface', 'accent-4', 'surface', 'accent-2', 'surface', 'accent-1'];
+
+/** Each band's tone by its place among the blocks the site shows. Subscribe has its own. */
+const bandTones = () => {
+  const bands = [
+    'about-block',
+    __HB_FEATURES__.speakers && 'speakers-block',
+    __HB_FEATURES__.tickets && 'tickets-block',
+    __HB_FEATURES__.gallery && 'gallery-block',
+    'about-organizer-block',
+    __HB_FEATURES__.videos && 'featured-videos',
+    __HB_FEATURES__.blog && 'latest-posts-block',
+    __HB_FEATURES__.map && 'map-block',
+    __HB_FEATURES__.partners && 'partners-block',
+  ].filter((band) => typeof band === 'string');
+  return (band: string) => TONES[bands.indexOf(band) % TONES.length] ?? 'surface';
+};
 
 declare global {
   interface HTMLElementTagNameMap {

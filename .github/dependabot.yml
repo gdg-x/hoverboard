@@ -32,9 +32,6 @@ updates:
           - 'eslint*'
           - '@typescript-eslint/*'
           - '@*eslin*/*'
-      material:
-        patterns:
-          - '@material/*'
       firebase:
         patterns:
           - '*firebase*'

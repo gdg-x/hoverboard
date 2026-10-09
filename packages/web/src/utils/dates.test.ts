@@ -18,6 +18,14 @@ describe('getDate', () => {
     expect(getDate(new Date('2016-09-09T00:00:00'))).toBe('Sep 9, 2016');
   });
 
+  it('shows a date without a time as that day, in any time zone', () => {
+    const toLocaleString = vi.spyOn(Date.prototype, 'toLocaleString');
+
+    expect(getDate('2016-09-09')).toBe('Sep 9, 2016');
+    expect(toLocaleString).toHaveBeenCalledWith('en', expect.objectContaining({ timeZone: 'UTC' }));
+    toLocaleString.mockRestore();
+  });
+
   it('formats in the active locale', () => {
     localization.getLocale.mockReturnValue('ja');
 

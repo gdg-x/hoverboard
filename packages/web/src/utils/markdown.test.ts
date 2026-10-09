@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { renderMarkdown } from './markdown';
+import { renderMarkdown, renderMarkdownWithHeadings, withDisclosures } from './markdown';
 
 describe('renderMarkdown', () => {
   it('renders markdown to HTML', () => {
@@ -37,5 +37,44 @@ describe('renderMarkdown', () => {
 
     expect(warn).not.toHaveBeenCalled();
     warn.mockRestore();
+  });
+});
+
+describe('renderMarkdownWithHeadings', () => {
+  it('gives each heading as plain text, with its symbols', () => {
+    const { headings } = renderMarkdownWithHeadings(
+      '## Livestream & Recordings\n\n### Ticket `types` *now*',
+    );
+
+    expect(headings).toEqual([
+      { id: 'livestream--recordings', level: 2, text: 'Livestream & Recordings' },
+      { id: 'ticket-types-now', level: 3, text: 'Ticket types now' },
+    ]);
+  });
+});
+
+describe('withDisclosures', () => {
+  it('wraps each h3 and its answer in a disclosure, and keeps h2 sections open', () => {
+    const html = withDisclosures(
+      renderMarkdown('## Venue\n\nIntro.\n\n### Parking\n\nNearby.\n\n- One\n\n### Food\n\nYes.'),
+    );
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+
+    const text = (selector: string, root: ParentNode = doc) =>
+      root.querySelector(selector)?.textContent?.replace(/\s+/g, ' ').trim();
+
+    expect(doc.body.firstElementChild?.outerHTML).toBe('<h2 id="venue">Venue</h2>');
+    expect(text('body > p')).toBe('Intro.');
+    const disclosures = doc.querySelectorAll('details');
+    expect(disclosures).toHaveLength(2);
+    expect(text('summary > h3#parking', disclosures[0])).toBe('Parking');
+    expect(text('.answer', disclosures[0])).toBe('Nearby. One');
+    expect(text('.answer', disclosures[1])).toBe('Yes.');
+  });
+
+  it('leaves markdown without h3 headings alone', () => {
+    const html = renderMarkdown('## Rules\n\nBe kind.');
+
+    expect(withDisclosures(html)).toBe(html);
   });
 });

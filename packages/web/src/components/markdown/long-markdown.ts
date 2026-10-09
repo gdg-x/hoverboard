@@ -1,44 +1,18 @@
-import { css } from 'lit';
+import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { renderMarkdown } from '../../utils/markdown';
+import { prose } from '../../styles/prose';
 import { Markdown } from './base';
 
+/** A blog post's text, in the reading layout. */
 @customElement('long-markdown')
 export class LongMarkdown extends Markdown {
-  static override styles = css`
-    .markdown-html {
-      font-size: 18px;
-      line-height: 1.8;
-      color: var(--primary-text-color);
-    }
+  static override styles = prose;
 
-    .markdown-html h1,
-    .markdown-html h2,
-    .markdown-html h3 {
-      margin: 48px 0 16px;
-    }
-
-    .markdown-html p {
-      margin-top: 0;
-      margin-bottom: 24px;
-    }
-
-    .markdown-html img {
-      width: 100%;
-    }
-
-    .markdown-html img {
-      margin: 32px 0 8px -16px;
-      width: calc(100% + 32px);
-      min-height: 200px;
-      background-color: var(--secondary-background-color);
-    }
-
-    @media (min-width: 640px) {
-      .markdown-html img {
-        min-height: 400px;
-      }
-    }
-  `;
+  override render() {
+    return html`<div class="markdown-html prose">${unsafeHTML(renderMarkdown(this.content))}</div>`;
+  }
 }
 
 declare global {

@@ -1,8 +1,8 @@
 import { Success } from '@abraham/remotedata';
-import { msg } from '@lit/localize';
-import { css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import { msg, str } from '@lit/localize';
+import { css, html, nothing, type PropertyValues } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import type { Session } from '../../models/session';
 import { sessionPath } from '../../utils/navigation';
 import { store } from '../../store';
@@ -15,18 +15,17 @@ import {
 import { queueComplexSnackbar } from '../../store/snackbars';
 import type { UserState } from '../../store/user';
 import { acceptingFeedback } from '../../utils/feedback';
+import { confetti } from '../../utils/confetti';
 import { getLocale } from '../../utils/localization';
-import { getSummary } from '../../utils/strings';
-import { variableColor } from '../../utils/styles';
+import { tagChipStyle, tagColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
-import '../shared/text-truncate';
+import '../ui/hb-chip';
+import '../ui/hb-icon-button';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
-// The runtime `session.speakers` payload is an enriched list of speaker summaries (see
-// `packages/server/functions/src/schedule-generator/speakers-sessions-schedule-map.ts`), not the `string[]` of ids
-// declared on `SessionData`. The same generator also adds a computed `duration` that
-// isn't declared on `SessionData`.
+// The schedule generator (`packages/server/functions/src/schedule-generator/`) replaces speaker ids
+// with speaker summaries, and adds the main tag, track and duration.
 interface SessionSpeaker {
   company: string;
   country: string;
@@ -34,306 +33,268 @@ interface SessionSpeaker {
   photoUrl: string;
 }
 
-interface SessionDuration {
-  hh: number;
-  mm: number;
-}
-
-type SessionWithScheduleDetails = Omit<Session, 'speakers'> & {
-  duration?: SessionDuration;
+export type ScheduleSession = Omit<Session, 'speakers'> & {
+  duration?: { hh: number; mm: number };
+  mainTag?: string;
   speakers?: SessionSpeaker[];
+  track?: { title: string };
 };
 
+/** "1 hr 30 min", in the page locale. */
+export const formatDuration = ({ hh, mm }: { hh: number; mm: number }) =>
+  (
+    [
+      [hh, 'hour'],
+      [mm, 'minute'],
+    ] as const
+  )
+    .filter(([value]) => value)
+    .map(([value, unit]) =>
+      new Intl.NumberFormat(getLocale(), { style: 'unit', unit, unitDisplay: 'short' }).format(
+        value,
+      ),
+    )
+    .join(' ');
+
+/**
+ * A session in the schedule: a stripe in its main tag's color, its tags as chips, the title as the
+ * link to the session page, speakers, and the track and duration. The bookmark button sits above
+ * the link, and turns into a feedback button while the session takes feedback.
+ */
 @customElement('session-element')
 export class SessionElement extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
-      background-color: var(--primary-background-color);
-      border-bottom: 1px solid var(--border-light-color);
-      height: 100%;
-      border-radius: var(--border-radius);
     }
 
     .session {
       position: relative;
       display: flex;
-      height: 100%;
       flex-direction: column;
-      color: var(--primary-text-color);
-      overflow: hidden;
+      gap: var(--hb-space-2);
+      box-sizing: border-box;
+      block-size: 100%;
+      padding: var(--hb-space-4) var(--hb-space-4) var(--hb-space-4) calc(var(--hb-space-4) + 6px);
+      border: var(--hb-border-width) solid var(--hb-border-color);
+      border-radius: var(--hb-radius-m);
+      background-color: var(--hb-panel-background);
+      backdrop-filter: var(--hb-backdrop-filter);
+      background-image: linear-gradient(
+        to right,
+        var(--stripe, var(--hb-color-outline-variant)) 0 6px,
+        transparent 6px
+      );
+      color: var(--hb-color-on-surface);
+      box-shadow: var(--hb-shadow-card);
+      transition:
+        translate var(--hb-duration-short) var(--hb-ease-spring),
+        box-shadow var(--hb-duration-short) var(--hb-ease-standard);
     }
 
     .session:hover {
-      background-color: var(--additional-background-color);
+      translate: -2px -2px;
+      box-shadow: var(--hb-shadow-card-hover);
     }
 
-    .session-icon {
-      width: 88px;
-      height: 88px;
-      color: var(--border-light-color);
-      position: absolute;
-      right: 40px;
-      bottom: -4px;
+    .session:has(.title a:focus-visible) {
+      outline: 3px solid var(--hb-color-focus);
+      outline-offset: 2px;
     }
 
-    .session-header,
-    .session-content,
-    .session-footer {
-      padding: 16px;
-      z-index: 1;
-    }
-
-    .session-header {
+    ul {
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding-bottom: 8px;
-    }
-
-    .session-header-content {
-      flex: 1;
-      flex-basis: 1px;
-    }
-
-    .language {
-      margin-left: 8px;
-      font-size: 12px;
-      text-transform: uppercase;
-      color: var(--secondary-text-color);
-    }
-
-    .session-content {
-      display: flex;
-      flex: 1;
-      flex-basis: 1px;
-      flex-direction: row;
-      justify-content: space-between;
-      padding-top: 0;
-      padding-bottom: 40px;
-    }
-
-    .bookmark-session,
-    .feedback-action {
-      color: var(--secondary-text-color);
-    }
-
-    .session[featured] .bookmark-session {
-      color: var(--default-primary-color);
-    }
-
-    .bookmark-session:hover,
-    .feedback-action:hover {
-      color: var(--default-primary-color);
-    }
-
-    .session-title {
-      font-size: 20px;
-      line-height: 1.2;
-    }
-
-    .session-description {
-      margin-top: 8px;
-    }
-
-    .session-meta {
+      flex-wrap: wrap;
       margin: 0;
       padding: 0;
-      font-size: 12px;
-      color: var(--secondary-text-color);
+      list-style: none;
     }
 
-    .session-footer {
-      font-size: 14px;
+    .chips {
+      gap: var(--hb-space-1);
+      padding-inline-end: var(--hb-target-min);
     }
 
-    .session-footer-row {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-content: center;
+    .title {
+      margin: 0;
+      padding-inline-end: var(--hb-target-min);
+      font: 700 var(--hb-text-lg) / 1.3 var(--hb-font-body);
+      overflow-wrap: anywhere;
     }
 
-    .session-duration {
-      flex: 1;
-      flex-basis: 1px;
+    .title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .title a:focus-visible {
+      outline: none;
+    }
+
+    /* The whole card is the link. */
+    .title a::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      border-radius: inherit;
     }
 
     .speakers {
-      margin-top: 10px;
+      gap: var(--hb-space-2) var(--hb-space-4);
+      font-size: var(--hb-text-sm);
     }
 
-    .speaker {
-      display: flex;
-      flex-direction: row;
+    .speakers li {
+      display: inline-flex;
       align-items: center;
+      gap: var(--hb-space-2);
     }
 
-    .speaker:not(:last-of-type) {
-      padding-bottom: 10px;
-    }
-
-    .speaker-photo {
-      margin-right: 12px;
-      --lazy-image-width: 32px;
-      --lazy-image-height: 32px;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      background-color: var(--secondary-background-color);
+    .speakers img {
+      inline-size: 28px;
+      block-size: 28px;
       border-radius: 50%;
-      overflow: hidden;
-      transform: translateZ(0);
+      background-color: var(--hb-color-surface-container);
+      object-fit: cover;
     }
 
-    .speaker-details {
-      flex: 1;
-      flex-basis: 1px;
+    .meta {
+      margin: auto 0 0;
+      color: var(--hb-color-on-surface-variant);
+      font: var(--hb-text-sm) / 1.4 var(--hb-font-mono);
     }
 
-    .speaker-name {
-      margin-bottom: 4px;
-      line-height: 1.2;
+    .action {
+      position: absolute;
+      z-index: 2;
+      inset-block-start: var(--hb-space-1);
+      inset-inline-end: var(--hb-space-1);
     }
 
-    .speaker-title {
-      font-size: 12px;
-      line-height: 1;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      color: var(--text-primary-color);
-      background-color: var(--color, var(--secondary-text-color));
-      border-color: var(--color, var(--secondary-text-color));
-    }
-
-    @media (min-width: 640px) {
-      :host {
-        border: 1px solid var(--border-light-color);
-        border-top: 0;
+    @media (prefers-reduced-motion: reduce) {
+      .session:hover {
+        translate: none;
       }
     }
 
-    @media (min-width: 812px) {
-      :host {
-        border: 1px solid var(--border-light-color);
+    @media (forced-colors: active) {
+      .session {
+        border-color: CanvasText;
+        border-inline-start-width: 6px;
       }
     }
   `;
 
   @fromStore((state) => state.user)
   accessor user!: UserState;
-  @property({ type: Object })
+  @property({ attribute: false })
   accessor session: Session | undefined;
   @fromStore((state) => selectFeaturedSessionsState(state))
   accessor featuredSessions!: FeaturedSessionsState;
 
+  // Depends on the time, so it is only set in the browser.
+  @state()
+  private accessor acceptingFeedback = false;
+
+  override updated(changed: PropertyValues<this>) {
+    if (changed.has('session')) {
+      this.acceptingFeedback =
+        __HB_FEATURES__.feedback && !!this.session && acceptingFeedback(this.session);
+    }
+  }
+
   override render() {
-    const session = this.session as SessionWithScheduleDetails | undefined;
-    const duration = session?.duration;
-    const summary = getSummary(session?.description);
-    const isFeatured = this.isFeatured();
-    const icon = isFeatured ? 'bookmark-check' : 'bookmark-plus';
-    const acceptingSessionFeedback = this.isAcceptingFeedback();
+    const session = this.session as ScheduleSession | undefined;
+    if (!session) return nothing;
+    const meta = [
+      session.track?.title,
+      session.duration && formatDuration(session.duration),
+      session.complexity,
+      session.language,
+    ].filter(Boolean);
 
     return html`
-      <a class="session" href="${this.sessionUrl(session?.id)}" ?featured="${isFeatured}">
-        <hoverboard-icon name="${ifDefined(session?.icon)}" class="session-icon"></hoverboard-icon>
-
-        <div class="session-header">
-          <div class="session-header-content">
-            <h3 class="session-title">${session?.title}</h3>
-            <text-truncate lines="3">
-              <div class="session-description">${summary}</div>
-            </text-truncate>
-          </div>
-          <span class="language">${session?.language?.slice(0, 2)}</span>
-        </div>
-
-        <div class="session-content">
-          <div class="session-meta">
-            <div ?hidden="${!session?.complexity}">${session?.complexity}</div>
-          </div>
-          <div class="session-actions">
-            <hoverboard-icon
-              name="insert-comment"
-              class="feedback-action"
-              ?hidden="${!acceptingSessionFeedback}"
-              @click="${this.toggleFeedback}"
-            ></hoverboard-icon>
-            <hoverboard-icon
-              name="${icon}"
-              class="bookmark-session"
-              ?hidden="${acceptingSessionFeedback}"
-              @click="${this.toggleFeaturedSession}"
-            ></hoverboard-icon>
-          </div>
-        </div>
-
-        <div class="session-footer">
-          <div class="session-footer-row">
-            <div class="session-meta session-duration">
-              <span ?hidden="${!duration?.hh}">${this.formatDuration(duration?.hh, 'hour')}</span>
-              <span ?hidden="${!duration?.mm}">${this.formatDuration(duration?.mm, 'minute')}</span>
-            </div>
-            <div class="tags" ?hidden="${!session?.tags?.length}">
-              ${session?.tags?.map(
-                (tag) =>
-                  html`<span class="tag" style="--color: ${this.getVariableColor(tag) ?? ''}"
-                    >${tag}</span
-                  >`,
-              )}
-            </div>
-          </div>
-
-          <div class="speakers" ?hidden="${!session?.speakers?.length}">
-            ${session?.speakers?.map(
-              (speaker) => html`
-                <div class="speaker">
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    class="speaker-photo"
-                    src="${speaker.photoUrl}"
-                    alt="${speaker.name}"
-                  />
-
-                  <div class="speaker-details">
-                    <div class="speaker-name">${speaker.name}</div>
-                    <div class="speaker-title">${this.join(speaker.company, speaker.country)}</div>
-                  </div>
-                </div>
-              `,
-            )}
-          </div>
-        </div>
-      </a>
+      <article
+        class="session"
+        style="${styleMap({ '--stripe': session.mainTag ? tagColor(session.mainTag) : undefined })}"
+      >
+        ${
+          session.tags?.length
+            ? html`<ul class="chips">
+                ${session.tags.map(
+                  (tag) =>
+                    html`<li><hb-chip style="${styleMap(tagChipStyle(tag))}">${tag}</hb-chip></li>`,
+                )}
+              </ul>`
+            : nothing
+        }
+        <h3 class="title"><a href="${sessionPath(session.id)}">${session.title}</a></h3>
+        ${
+          session.speakers?.some((speaker) => speaker.name)
+            ? html`<ul class="speakers">
+                ${session.speakers
+                  .filter((speaker) => speaker.name)
+                  .map(
+                    (speaker) => html`
+                      <li>
+                        <img
+                          src="${speaker.photoUrl}"
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          width="28"
+                          height="28"
+                        />
+                        ${speaker.name}
+                      </li>
+                    `,
+                  )}
+              </ul>`
+            : nothing
+        }
+        ${meta.length ? html`<p class="meta">${meta.join(' · ')}</p>` : nothing}
+        ${this.renderAction(session)}
+      </article>
     `;
   }
 
-  private isFeatured(): boolean {
+  private renderAction(session: ScheduleSession) {
+    if (this.acceptingFeedback) {
+      return html`
+        <hb-icon-button
+          class="action feedback"
+          label="${msg(str`Rate ${session.title}`, { id: 'schedule.session.rate' })}"
+          @click="${this.openFeedback}"
+        >
+          <hoverboard-icon name="insert-comment"></hoverboard-icon>
+        </hb-icon-button>
+      `;
+    }
+    if (!__HB_FEATURES__.mySchedule) return nothing;
+    const bookmarked = this.isBookmarked;
+    return html`
+      <hb-icon-button
+        class="action bookmark"
+        label="${msg(str`Bookmark ${session.title}`, { id: 'schedule.session.bookmark' })}"
+        .pressed="${bookmarked}"
+        @click="${this.toggleBookmark}"
+      >
+        <hoverboard-icon
+          name="${bookmarked ? 'bookmark-check' : 'bookmark-plus'}"
+        ></hoverboard-icon>
+      </hb-icon-button>
+    `;
+  }
+
+  private get isBookmarked(): boolean {
     if (this.featuredSessions instanceof Success && this.session?.id) {
       return this.featuredSessions.data[this.session.id] ?? false;
     }
     return false;
   }
 
-  private formatDuration(value: number | undefined, unit: 'hour' | 'minute') {
-    if (!value) return '';
-    return new Intl.NumberFormat(getLocale(), { style: 'unit', unit, unitDisplay: 'long' }).format(
-      value,
-    );
-  }
-
-  private toggleFeaturedSession = (event: MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-
+  private readonly toggleBookmark = (event: Event) => {
     if (!(this.user instanceof Success)) {
       store.dispatch(
         queueComplexSnackbar({
@@ -347,40 +308,20 @@ export class SessionElement extends ThemedElement {
       return;
     }
 
-    if (this.user instanceof Success && this.featuredSessions instanceof Success && this.session) {
+    if (this.featuredSessions instanceof Success && this.session) {
       const bookmarked = !this.featuredSessions.data[this.session.id];
-      const sessions = {
-        ...this.featuredSessions.data,
-        [this.session.id]: bookmarked,
-      };
-
-      setUserFeaturedSessions(this.user.data.uid, sessions, bookmarked);
+      setUserFeaturedSessions(
+        this.user.data.uid,
+        { ...this.featuredSessions.data, [this.session.id]: bookmarked },
+        bookmarked,
+      );
+      if (bookmarked) confetti(event.currentTarget as Element);
     }
   };
 
-  private toggleFeedback = (event: MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    if (this.session) {
-      openFeedbackDialog(this.session);
-    }
+  private readonly openFeedback = () => {
+    if (this.session) openFeedbackDialog(this.session);
   };
-
-  private isAcceptingFeedback(): boolean {
-    return this.session !== undefined && acceptingFeedback(this.session);
-  }
-
-  private join(company: string, country: string) {
-    return [company, country].filter(Boolean).join(' / ');
-  }
-
-  private getVariableColor(value: string) {
-    return variableColor(value);
-  }
-
-  private sessionUrl(id: string | undefined) {
-    return id ? sessionPath(id) : '';
-  }
 }
 
 declare global {

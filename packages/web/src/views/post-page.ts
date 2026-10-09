@@ -1,9 +1,13 @@
 import { Failure, Initialized, type RemoteData, Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import '../components/hero/hero-block';
+import { heroText } from '../components/hero/hero-block';
+import { PAGE_TONES } from '../components/hero/simple-hero';
 import '../components/markdown/long-markdown';
+import '../components/shared/hoverboard-icon';
 import '../components/shared/posts-list';
 import { StoreController } from '../controllers/store-controller';
 import type { Post } from '../models/post';
@@ -13,34 +17,45 @@ import { type BlogState, selectBlogPosts } from '../store/blog';
 import { getDate } from '../utils/dates';
 import { fetchText } from '../utils/fetch-text';
 import { updateImageMetadata } from '../utils/metadata';
+import { pageInner } from '../styles/page';
 import { ThemedElement } from '../components/themed-element';
 
+/** A blog post in a reading layout, and the next posts to read. */
 @customElement('post-page')
 export class PostPage extends ThemedElement {
-  static override styles = css`
-    .post {
-      margin-bottom: 32px;
-    }
-
-    .date {
-      font-size: 12px;
-      text-transform: uppercase;
-      color: var(--secondary-text-color);
-    }
-
-    .suggested-posts {
-      margin: 24px 0 -20px;
-      padding-top: 24px;
-      background-color: var(--primary-background-color);
-    }
-
-    @media (min-width: 640px) {
-      .suggested-posts {
-        margin-top: 48px;
-        padding-bottom: 36px;
+  static override styles = [
+    heroText,
+    pageInner,
+    css`
+      .published {
+        margin: var(--hb-space-4) 0 0;
+        font: 500 var(--hb-text-md) / 1.4 var(--hb-font-mono);
       }
-    }
-  `;
+
+      .cover {
+        display: block;
+        inline-size: 100%;
+        max-inline-size: var(--hb-prose-max);
+        block-size: auto;
+        aspect-ratio: 16 / 9;
+        margin-block-end: var(--hb-space-7);
+        border: var(--hb-border-width) solid var(--hb-border-color);
+        border-radius: var(--hb-radius-l);
+        box-shadow: var(--hb-shadow-card);
+        object-fit: cover;
+      }
+
+      .up-next {
+        background-color: var(--hb-color-surface-container);
+      }
+
+      .up-next-title {
+        margin: 0 0 var(--hb-space-5);
+        padding: 0;
+        font: 800 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
+      }
+    `,
+  ];
 
   // Starts from the store, so a page seeded on the server renders its post.
   @property({ attribute: false })
@@ -128,32 +143,48 @@ export class PostPage extends ThemedElement {
   }
 
   override render() {
-    const post =
-      this.post instanceof Success
-        ? (this.post.data as Post & { primaryColor?: string })
-        : undefined;
+    const post = this.post instanceof Success ? this.post.data : undefined;
     const published = post ? getDate(post.published) : '';
 
     return html`
-      <hero-block
-        background-image=${post?.image ?? ''}
-        background-color=${post?.primaryColor ?? ''}
-        font-color="var(--text-primary-color)"
-      >
-        <div class="hero-title">${post?.title ?? ''}</div>
+      <hero-block tone="${PAGE_TONES.blog}">
+        <a class="back" href="/blog">
+          <hoverboard-icon name="arrow-left"></hoverboard-icon>
+          ${msg('All posts', { id: 'pages.post.all-posts' })}
+        </a>
+        <h1 class="hero-title">${post?.title ?? ''}</h1>
+        <p class="published">
+          ${msg(str`Published: ${published}`, { id: 'pages.post.published' })}
+        </p>
       </hero-block>
 
-      <div class="container-narrow">
+      <article class="inner">
+        ${
+          post?.image
+            ? html`<img
+                class="cover"
+                src="${post.image}"
+                alt=""
+                decoding="async"
+                style="${styleMap({ backgroundColor: post.backgroundColor })}"
+              />`
+            : nothing
+        }
         <long-markdown class="post" .content=${this.postContent}></long-markdown>
-        <div class="date">${msg(str`Published: ${published}`, { id: 'pages.post.published' })}</div>
-      </div>
+      </article>
 
-      <div class="suggested-posts">
-        <div class="container-narrow">
-          <h3 class="container-title">${msg('Up next', { id: 'pages.post.up-next' })}</h3>
-          <posts-list .posts=${this.suggestedPosts}></posts-list>
-        </div>
-      </div>
+      ${
+        this.suggestedPosts.length
+          ? html`<section class="up-next" aria-labelledby="up-next">
+              <div class="inner">
+                <h2 class="up-next-title" id="up-next">
+                  ${msg('Up next', { id: 'pages.post.up-next' })}
+                </h2>
+                <posts-list heading-level="3" .posts=${this.suggestedPosts}></posts-list>
+              </div>
+            </section>`
+          : nothing
+      }
     `;
   }
 }

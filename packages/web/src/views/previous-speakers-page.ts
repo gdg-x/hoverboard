@@ -1,135 +1,73 @@
-import { Failure, Success } from '@abraham/remotedata';
-import { msg } from '@lit/localize';
-import { css, html, nothing } from 'lit';
+import { Pending, Success } from '@abraham/remotedata';
+import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@material/web/progress/linear-progress.js';
-import '../components/shared/content-loader';
 import '../components/hero/simple-hero';
-import type { PreviousSession } from '../models/previous-session';
+import '../components/shared/speaker-card';
+import '../components/ui/hb-progress';
+import type { PreviousSpeaker } from '../models/previous-speaker';
 import { previousSpeakerPath } from '../utils/navigation';
 import {
   type PreviousSpeakersState,
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
-import { contentLoaders } from '../config/site';
-import { getLocale } from '../utils/localization';
+import { photoTransitionName } from '../utils/styles';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
+/** Each year with talks, newest first, and its speakers in their order. */
+export const speakersByYear = (speakers: PreviousSpeaker[]) => {
+  const years = [
+    ...new Set(speakers.flatMap((speaker) => Object.keys(speaker.sessions ?? {}))),
+  ].sort((a, b) => Number(b) - Number(a));
+  return years.map((year) => ({
+    year,
+    speakers: speakers.filter((speaker) => year in (speaker.sessions ?? {})),
+  }));
+};
+
+/** Speakers from earlier years, grouped by the year they spoke, under sticky year headings. */
 @customElement('previous-speakers-page')
 export class PreviousSpeakersPage extends ThemedElement {
   static override styles = css`
     :host {
-      height: 100%;
+      display: block;
+      background-color: var(--hb-section-background);
+      color: var(--hb-color-on-surface);
     }
 
-    .container {
-      margin: 32px auto;
+    /* Content-box, so the text column lines up with the hero's. */
+    .inner {
+      box-sizing: content-box;
+      max-inline-size: var(--hb-content-max);
+      margin-inline: auto;
+      padding: var(--hb-space-5) var(--hb-gutter) var(--hb-space-9);
+    }
+
+    .year {
+      position: sticky;
+      z-index: 2;
+      inset-block-start: var(--hb-header-height);
+      margin: var(--hb-space-6) calc(-1 * var(--hb-space-3)) var(--hb-space-4);
+      padding: var(--hb-space-2) var(--hb-space-3);
+      background-color: var(--hb-bar-background);
+      backdrop-filter: var(--hb-backdrop-filter);
+      /* Covers the cards that scroll under the header's margin too. */
+      box-shadow: 0 calc(-1 * var(--hb-space-5)) 0 0 var(--hb-bar-background);
+      font: 800 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
+    }
+
+    ul {
       display: grid;
-      grid-template-columns: 1fr;
-      grid-gap: 32px;
-      min-height: 80%;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+      gap: var(--hb-space-5);
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
-    .speaker:hover .photo {
-      transform: scale(0.95);
-    }
-
-    .photo {
-      --lazy-image-width: 96px;
-      --lazy-image-height: 96px;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      background-color: var(--contrast-additional-background-color);
-      border: 3px solid var(--contrast-additional-background-color);
-      border-radius: 50%;
-      overflow: hidden;
-      transform: translateZ(0);
-      transition: transform var(--animation);
-      flex-shrink: 0;
-    }
-
-    .company-logo {
-      max-width: 88px;
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .details {
-      margin-left: 16px;
-      color: var(--primary-text-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    .name {
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .origin {
-      margin-top: 4px;
-      font-size: 14px;
-      line-height: 1.1;
-    }
-
-    .sessions {
-      font-size: 13px;
-      line-height: 1.1;
-      font-weight: bold;
-    }
-
-    .sessions h5 {
-      margin-right: 4px;
-      font-weight: normal;
-    }
-
-    .progress {
-      width: 100%;
-      --md-linear-progress-active-indicator-color: var(--default-primary-color);
-      --md-linear-progress-track-color: var(--default-primary-color);
-    }
-
-    .speaker {
-      display: flex;
-    }
-
-    @media (min-width: 640px) {
-      .container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 812px) {
-      .container {
-        grid-gap: 64px 32px;
-      }
-
-      .photo {
-        --lazy-image-width: 115px;
-        --lazy-image-height: 115px;
-        border-width: 5px;
-      }
-
-      .name {
-        font-size: 24px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .container {
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 64px 32px;
-      }
-
-      .photo {
-        --lazy-image-width: 128px;
-        --lazy-image-height: 128px;
-      }
+    li {
+      display: grid;
     }
   `;
 
@@ -137,84 +75,39 @@ export class PreviousSpeakersPage extends ThemedElement {
   accessor previousSpeakers!: PreviousSpeakersState;
 
   private readonly metadata = new PageMetadataController(this, 'previousSpeakers');
-  private contentLoaders = contentLoaders.previousSpeakers;
-
-  get contentLoaderVisibility() {
-    return this.previousSpeakers instanceof Success || this.previousSpeakers instanceof Failure;
-  }
-
-  private yearsLabel(sessions: { [key: number]: PreviousSession[] }) {
-    const count = Object.keys(sessions || {}).length;
-    return new Intl.PluralRules(getLocale()).select(count) === 'one'
-      ? msg('Year:', { id: 'pages.previous-speakers.years.one', desc: 'Followed by a year.' })
-      : msg('Years:', {
-          id: 'pages.previous-speakers.years.other',
-          desc: 'Followed by a list of years.',
-        });
-  }
-
-  private getYears(sessions: { [key: number]: PreviousSession[] }) {
-    return Object.keys(sessions || {})
-      .map(Number)
-      .sort((a, b) => b - a)
-      .join(', ');
-  }
-
-  private previousSpeakerUrl(id: string) {
-    return previousSpeakerPath(id);
-  }
 
   override render() {
-    const previousSpeakers =
-      this.previousSpeakers instanceof Success ? this.previousSpeakers.data : [];
+    const pending = this.previousSpeakers instanceof Pending;
+    const groups = speakersByYear(
+      this.previousSpeakers instanceof Success ? this.previousSpeakers.data : [],
+    );
+    // A speaker in several years gets the transition name once, as names must be unique.
+    const named = new Set<string>();
 
     return html`
       <simple-hero page="previousSpeakers"></simple-hero>
 
-      <md-linear-progress
-        class="progress"
-        indeterminate
-        ?hidden=${this.contentLoaderVisibility}
-      ></md-linear-progress>
+      <hb-progress ?hidden="${!pending}"></hb-progress>
 
-      <content-loader
-        class="container"
-        card-padding="0"
-        card-height="128px"
-        avatar-size="128px"
-        avatar-circle="64px"
-        items-count=${this.contentLoaders.itemsCount}
-        ?hidden=${this.contentLoaderVisibility}
-      ></content-loader>
-      <div class="container">
-        ${previousSpeakers.map(
-          (speaker) => html`
-            <a class="speaker" href=${this.previousSpeakerUrl(speaker.id)}>
-              <img
-                loading="lazy"
-                decoding="async"
-                class="photo"
-                src=${speaker.photoUrl}
-                alt=${speaker.name}
-              />
-              <div class="details">
-                <h2 class="name">${speaker.name}</h2>
-                <div class="origin">${speaker.country}</div>
-                ${
-                  speaker.companyLogo
-                    ? html`<img
-                        class="company-logo"
-                        src=${speaker.companyLogo}
-                        alt=${speaker.company}
-                      />`
-                    : nothing
-                }
-                <div class="sessions">
-                  <h5>${this.yearsLabel(speaker.sessions)}</h5>
-                  ${this.getYears(speaker.sessions)}
-                </div>
-              </div>
-            </a>
+      <div class="inner">
+        ${groups.map(
+          ({ year, speakers }) => html`
+            <section aria-labelledby="year-${year}">
+              <h2 class="year" id="year-${year}">${year}</h2>
+              <ul>
+                ${speakers.map((speaker) => {
+                  const first = !named.has(speaker.id);
+                  named.add(speaker.id);
+                  return html`<li>
+                    <speaker-card
+                      .speaker="${speaker}"
+                      href="${previousSpeakerPath(speaker.id)}"
+                      transition-name="${first ? photoTransitionName('previous-speaker', speaker.id) : 'none'}"
+                    ></speaker-card>
+                  </li>`;
+                })}
+              </ul>
+            </section>
           `,
         )}
       </div>

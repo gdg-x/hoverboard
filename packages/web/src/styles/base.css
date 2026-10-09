@@ -1,0 +1,184 @@
+/*
+ * Base styles: tokens that do not depend on the theme, the color scheme switch, and the focus ring.
+ * The build writes the theme's colors, shapes, fonts and density on `:root` in the page head.
+ */
+:root {
+  /* The accent color of the unDraw illustrations in src/illustrations/. */
+  --hb-illustration-accent: var(--hb-color-primary);
+  --hb-text-xs: 0.75rem;
+  --hb-text-sm: 0.875rem;
+  --hb-text-md: 1rem;
+  --hb-text-lg: 1.125rem;
+  --hb-text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --hb-text-2xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --hb-text-3xl: clamp(1.875rem, 1.4rem + 2vw, 2.75rem);
+  --hb-text-4xl: clamp(2.25rem, 1.6rem + 3vw, 3.5rem);
+  --hb-text-5xl: clamp(2.75rem, 1.8rem + 4.5vw, 4.75rem);
+  --hb-text-6xl: clamp(3.25rem, 1.9rem + 6.5vw, 6.5rem);
+
+  /* `theme.density` sets --hb-density. Type and touch targets do not change with it. */
+  --hb-space-1: calc(4px * var(--hb-density, 1));
+  --hb-space-2: calc(8px * var(--hb-density, 1));
+  --hb-space-3: calc(12px * var(--hb-density, 1));
+  --hb-space-4: calc(16px * var(--hb-density, 1));
+  --hb-space-5: calc(24px * var(--hb-density, 1));
+  --hb-space-6: calc(32px * var(--hb-density, 1));
+  --hb-space-7: calc(48px * var(--hb-density, 1));
+  --hb-space-8: calc(64px * var(--hb-density, 1));
+  --hb-space-9: calc(96px * var(--hb-density, 1));
+  --hb-space-10: calc(128px * var(--hb-density, 1));
+
+  --hb-radius-full: 9999px;
+  --hb-target-min: 44px;
+
+  --hb-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --hb-ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
+  --hb-ease-spring: linear(0, 0.22 9%, 0.66 21%, 1.04 36%, 1.1 45%, 1.03 60%, 0.99 75%, 1);
+  --hb-duration-short: 120ms;
+  --hb-duration-medium: 240ms;
+
+  --hb-content-max: 1200px;
+  --hb-prose-max: 68ch;
+  --hb-gutter: clamp(16px, 4vw, 40px);
+  --hb-header-height: 88px;
+
+  /* The header logo. The build sets the --hb-logo-dark-* values. */
+  --hb-logo-image: url('/images/logo.svg');
+  --hb-logo-display: block;
+  --hb-logo-name-display: none;
+}
+
+:root[data-color-scheme='light'] {
+  color-scheme: light;
+}
+
+:root[data-color-scheme='dark'] {
+  color-scheme: dark;
+  --hb-logo-image: var(--hb-logo-dark-image);
+  --hb-logo-display: var(--hb-logo-dark-display);
+  --hb-logo-name-display: var(--hb-logo-dark-name-display);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-scheme='light']) {
+    --hb-logo-image: var(--hb-logo-dark-image);
+    --hb-logo-display: var(--hb-logo-dark-display);
+    --hb-logo-name-display: var(--hb-logo-dark-name-display);
+  }
+}
+
+:root[data-density='compact'] {
+  --hb-density: 0.75;
+}
+
+:root[data-density='default'] {
+  --hb-density: 1;
+}
+
+:root[data-density='roomy'] {
+  --hb-density: 1.25;
+}
+
+/* Multiplies decorative rotations, so stickers sit straight with `theme.decorations` off. */
+:root[data-decorations='off'] {
+  --hb-decorations: 0;
+  --hb-decorations-display: none;
+}
+
+/* eslint-disable css/use-baseline, css/no-important -- browsers without the query keep the glass; `!important` beats the theme's values, whatever selector sets them. */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --hb-page-background: var(--hb-color-surface) !important;
+    --hb-section-background: var(--hb-color-surface) !important;
+    --hb-tint-opacity: 100% !important;
+    --hb-panel-background: var(--hb-color-surface-bright) !important;
+    --hb-bar-background: var(--hb-color-surface) !important;
+    --hb-backdrop-filter: none !important;
+  }
+}
+/* eslint-enable css/use-baseline, css/no-important */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+/* Focused elements and anchors are not hidden under the sticky header. */
+html {
+  scroll-padding-top: var(--hb-header-height);
+}
+
+main:focus {
+  outline: none;
+}
+
+body {
+  margin: 0;
+  background: var(--hb-page-background);
+  color: var(--hb-color-on-surface);
+  font-family: var(--hb-font-body);
+  font-size: var(--hb-text-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--hb-font-display);
+  line-height: 1.1;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+a {
+  color: var(--hb-color-primary);
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--hb-color-focus);
+  outline-offset: 2px;
+}
+
+.hb-visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* A person's photo has the same view-transition-name on their card and their page, so it moves. */
+::view-transition-group(*) {
+  animation-duration: var(--hb-duration-medium);
+  animation-timing-function: var(--hb-ease-emphasized);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* eslint-disable css/no-important -- must win over every component's own animation. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+  /* eslint-enable css/no-important */
+}

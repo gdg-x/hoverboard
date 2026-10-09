@@ -1,127 +1,160 @@
-// import { PropertyValues } from '@lit/reactive-element';
-import { css, html, type PropertyValues } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { styleMap } from 'lit/directives/style-map.js';
-import { setHeroSettings } from '../../store/ui';
 import { ThemedElement } from '../themed-element';
 
+export type HeroTone = '1' | '2' | '3' | '4';
+
+/**
+ * Styles for what a page puts in the hero: the `.hero-title`, a `.hero-description` and a `.back`
+ * link. Pages include them, because their own heading styles win over the hero's `::slotted()`.
+ */
+export const heroText = css`
+  .hero-title {
+    margin: 0;
+    padding: 0;
+    font: 800 var(--hb-text-5xl) / 1.05 var(--hb-font-display);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-description {
+    max-inline-size: var(--hb-prose-max);
+    margin: var(--hb-space-4) 0 0;
+    font-size: var(--hb-text-lg);
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--hb-space-1);
+    min-block-size: var(--hb-target-min);
+    margin-block-end: var(--hb-space-3);
+    color: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .back:focus-visible {
+    outline: 3px solid var(--hb-color-focus);
+    outline-offset: 2px;
+    border-radius: var(--hb-radius-s);
+  }
+
+  .back hoverboard-icon {
+    inline-size: 20px;
+    block-size: 20px;
+  }
+`;
+
+/**
+ * The top of a page: a band in one of the theme's accent colors with the page title (a slotted
+ * `.hero-title`, styled by `heroText`), a `.hero-description` and anything else the page adds.
+ * With a photo, the text sits on the scrim in the dark scheme's colors, as in the home hero.
+ */
 @customElement('hero-block')
 export class HeroBlock extends ThemedElement {
-  @property({ type: String, attribute: 'background-image' })
-  accessor backgroundImage = '';
-  @property({ type: String, attribute: 'background-color' })
-  accessor backgroundColor = 'var(--primary-background-color)';
-  @property({ type: String, attribute: 'font-color' })
-  accessor fontColor = 'var(--primary-text-color)';
-  @property({ type: Boolean, attribute: 'hide-logo' })
-  accessor hideLogo = false;
-
   static override styles = css`
     :host {
-      margin-top: -56px;
+      --hb-hero-background: var(--hb-color-accent-1-container);
+      --hb-hero-color: var(--hb-color-on-accent-1-container);
+
       display: block;
-      border-bottom: 1px solid var(--divider-color);
+      container-type: inline-size;
     }
 
-    .hero-block {
-      height: 100%;
+    :host([tone='2']) {
+      --hb-hero-background: var(--hb-color-accent-2-container);
+      --hb-hero-color: var(--hb-color-on-accent-2-container);
+    }
+
+    :host([tone='3']) {
+      --hb-hero-background: var(--hb-color-accent-3-container);
+      --hb-hero-color: var(--hb-color-on-accent-3-container);
+    }
+
+    :host([tone='4']) {
+      --hb-hero-background: var(--hb-color-accent-4-container);
+      --hb-hero-color: var(--hb-color-on-accent-4-container);
+    }
+
+    .hero {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      color: inherit;
+      isolation: isolate;
+      overflow: hidden;
+      padding: var(--hb-space-8) var(--hb-gutter) var(--hb-space-7);
+      background-color: color-mix(
+        in srgb,
+        var(--hb-hero-background) var(--hb-tint-opacity),
+        transparent
+      );
+      color: var(--hb-hero-color);
     }
 
-    .hero-overlay {
-      background-color: rgba(0, 0, 0, 0.6);
-      opacity: 0;
-      transition: opacity 0.3s;
+    .pattern::before {
+      content: '';
       position: absolute;
+      z-index: -1;
       inset: 0;
+      background-image: radial-gradient(
+        color-mix(in srgb, currentColor 14%, transparent) 1.5px,
+        transparent 1.6px
+      );
+      background-size: 22px 22px;
+      opacity: var(--hb-decorations, 1);
     }
 
-    .hero-overlay[show] {
-      opacity: 1;
+    .photo {
+      color-scheme: dark;
+      background-color: var(--hb-color-surface);
+      color: var(--hb-color-on-surface);
     }
 
-    .hero-image {
-      transition: background-color 0.3s;
+    .photo::before {
+      content: '';
       position: absolute;
+      z-index: -1;
       inset: 0;
-      --lazy-image-fit: cover;
+      background-color: var(--hb-color-scrim);
     }
 
-    .container {
-      padding: 0;
-      width: 100%;
-      height: unset;
-      z-index: 0;
-      position: unset;
+    .background {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
     }
 
-    .hero-content {
-      padding: 80px 32px 32px;
-      position: unset;
+    .inner {
+      max-inline-size: var(--hb-content-max);
+      margin-inline: auto;
     }
 
-    div ::slotted(.hero-title) {
-      margin: 30px 0;
-      font-size: 40px;
-    }
-
-    div ::slotted(.hero-description) {
-      margin-bottom: 30px;
-      max-width: 600px;
-    }
-
-    @media (min-width: 812px) {
-      :host {
-        margin-top: -64px;
-      }
-
-      .hero-content {
-        padding-top: 120px;
-        padding-bottom: 60px;
+    @media (forced-colors: active) {
+      .pattern::before {
+        display: none;
       }
     }
   `;
 
+  @property({ attribute: 'background-image' })
+  accessor backgroundImage = '';
+
+  /** The theme accent the band uses. */
+  @property({ reflect: true })
+  accessor tone: HeroTone = '1';
+
   override render() {
+    const photo = this.backgroundImage;
     return html`
-      <div class="hero-block" style="${styleMap({ color: this.fontColor })}">
-        ${this.backgroundImage && this.image}
-        <div class="hero-overlay" ?show="${!!this.backgroundImage}"></div>
-        <div class="container">
-          <div class="hero-content">
-            <slot></slot>
-          </div>
-        </div>
+      <div class="hero ${photo ? 'photo' : 'pattern'}">
+        ${photo ? html`<img class="background" src="${photo}" alt="" decoding="async" />` : nothing}
+        <div class="inner"><slot></slot></div>
       </div>
-      <slot name="bottom"></slot>
     `;
-  }
-
-  private get image() {
-    return html`
-      <img
-        class="hero-image"
-        src="${this.backgroundImage}"
-        alt=""
-        decoding="async"
-        style="${styleMap({ backgroundColor: this.backgroundColor })}"
-      />
-    `;
-  }
-
-  override updated(changedProperties: PropertyValues) {
-    super.updated(changedProperties);
-    setHeroSettings({
-      backgroundImage: this.backgroundImage,
-      backgroundColor: this.backgroundColor,
-      fontColor: this.fontColor,
-      hideLogo: this.hideLogo,
-    });
   }
 }
 

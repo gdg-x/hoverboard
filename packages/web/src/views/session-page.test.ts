@@ -1,26 +1,26 @@
-import { Pending, Success } from '@abraham/remotedata';
-import { type MockedFunction, describe, expect, it, vi } from 'vitest';
-import { fireEvent } from '@testing-library/dom';
-import { html } from 'lit';
+import { Success } from '@abraham/remotedata';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { within } from '@testing-library/dom';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
+import { setFeatures } from '../../__tests__/helpers/features';
 import type { Session } from '../models/session';
 import type { User } from '../models/user';
 import { setUserFeaturedSessions } from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
+import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
+import type { SessionPage } from './session-page';
 import './session-page';
-import { SessionPage } from './session-page';
 
 vi.mock('../utils/metadata');
+vi.mock('../utils/feedback');
 vi.mock('../utils/navigation', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../utils/navigation')>()),
   goto: vi.fn(),
-}));
-vi.mock('../utils/scrolling', () => ({
-  scrollToTop: vi.fn(),
 }));
 vi.mock('../store/sessions/selectors', () => ({
   selectSession: vi.fn(),
@@ -30,16 +30,10 @@ vi.mock('../store/featured-sessions', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../store/featured-sessions')>()),
   setUserFeaturedSessions: vi.fn(() => Promise.resolve()),
 }));
-vi.mock('../store/dialogs', async (importOriginal) => ({
-  __esModule: true,
-  ...(await importOriginal<typeof import('../store/dialogs')>()),
-  openSigninDialog: vi.fn(),
-}));
 vi.mock('../store/ui', async (importOriginal) => ({
   __esModule: true,
   ...(await importOriginal<typeof import('../store/ui')>()),
   openVideoDialog: vi.fn(),
-  setHeroSettings: vi.fn(),
 }));
 vi.mock('../store/snackbars', async (importOriginal) => ({
   __esModule: true,
@@ -47,169 +41,193 @@ vi.mock('../store/snackbars', async (importOriginal) => ({
   queueComplexSnackbar: vi.fn(() => ({ type: 'noop' })),
 }));
 
-const session: Session = {
-  description: 'Session description',
-  id: 'session-1',
-  presentation: 'https://slides.example',
-  speakers: ['speaker-1'],
-  tags: ['web'],
-  title: 'A great talk',
-  videoId: 'abc123',
+const speaker = {
+  id: 'speaker-1',
+  name: 'Ada Lovelace',
+  photoUrl: '/ada.jpg',
+  company: 'Example',
+  country: 'UK',
 };
 
-const speakers = [
-  {
-    id: 'speaker-1',
-    name: 'Ada Lovelace',
-    photoUrl: '/ada.jpg',
-    company: 'Example',
-    country: 'US',
-  },
-];
+const session = {
+  id: 'session-1',
+  title: 'A great talk',
+  description: 'Session description',
+  day: '2024-01-02',
+  dateReadable: 'January 2',
+  startTime: '10:00',
+  endTime: '10:40',
+  duration: { hh: 0, mm: 40 },
+  track: { title: 'Main hall' },
+  complexity: 'Beginner',
+  language: 'English',
+  presentation: 'https://slides.example',
+  videoId: 'abc123',
+  tags: ['Web'],
+  speakers: [speaker],
+} as never as Session;
 
-const user: User = { uid: 'user-1' } as User;
+const render = async (props: Partial<SessionPage> = {}) => {
+  const result = await fixture<SessionPage>(html`<session-page></session-page>`);
+  Object.assign(result.element, {
+    sessions: new Success([session]),
+    sessionId: 'session-1',
+    ...props,
+  });
+  await result.element.updateComplete;
+  await result.element.updateComplete;
+  return { ...result, view: within(result.shadowRootForWithin) };
+};
 
 describe('session-page', () => {
-  it('defines a component', () => {
-    expect(customElements.get('session-page')).toBeDefined();
+  beforeEach(() => {
+    vi.mocked(selectSession).mockReturnValue(session);
+    vi.mocked(acceptingFeedback).mockReturnValue(false);
   });
 
-  it('triggers the fetch and starts in the pending state', async () => {
-    const { element } = await fixture<SessionPage>(html`<session-page></session-page>`);
-
-    expect(element.sessions).toBeInstanceOf(Pending);
+  afterEach(() => {
+    litRender(nothing, document.body);
+    vi.clearAllMocks();
   });
 
-  it('resolves the session from the route and updates metadata', async () => {
-    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
-    const mockUpdateMetadata = vi.mocked(updateImageMetadata);
-    mockSelectSession.mockReturnValue({ ...session, speakers: speakers as never } as Session);
-    mockUpdateMetadata.mockClear();
+  it('titles the page with the session and sets its metadata', async () => {
+    const { view } = await render();
 
-    const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
-    element.sessions = new Success([session]);
-    element.sessionId = 'session-1';
-    await element.updateComplete;
-    await element.updateComplete;
-
-    expect(shadowRoot).toHaveTextContent('A great talk');
-    const markdown = shadowRoot.querySelector('short-markdown') as unknown as {
-      content: string;
-    };
-    expect(markdown.content).toBe('Session description');
-    expect(mockUpdateMetadata).toHaveBeenCalledWith('A great talk', 'Session description', {
+    expect(view.getByRole('heading', { level: 1 })).toHaveTextContent('A great talk');
+    expect(updateImageMetadata).toHaveBeenCalledWith('A great talk', 'Session description', {
       image: '/ada.jpg',
       imageAlt: 'Ada Lovelace',
     });
   });
 
-  it('links back to the schedule day of the session', async () => {
-    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
-    mockSelectSession.mockReturnValue({ ...session, day: '2024-01-02' } as Session);
+  it('shows when, where and what as chips', async () => {
+    const { shadowRoot } = await render();
+    const chips = [...shadowRoot.querySelectorAll('.details hb-chip')].map((chip) =>
+      chip.textContent?.trim(),
+    );
 
-    const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
-    element.sessions = new Success([session]);
-    element.sessionId = 'session-1';
-    await element.updateComplete;
-    await element.updateComplete;
-
-    expect(shadowRoot.querySelector('.back-link')).toHaveAttribute('href', '/schedule/2024-01-02');
+    expect(chips).toEqual([
+      'January 2',
+      '10:00–10:40',
+      '40 min',
+      'Main hall',
+      'Beginner',
+      'English',
+      'Web',
+    ]);
   });
 
-  it('redirects to 404 when the session cannot be found', async () => {
-    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
-    mockSelectSession.mockReturnValue(undefined);
-    vi.mocked(goto).mockClear();
+  it('leaves out the language when the session has none', async () => {
+    vi.mocked(selectSession).mockReturnValue({ ...session, language: undefined } as never);
+    const { shadowRoot } = await render();
 
-    const { element } = await fixture<SessionPage>(html`<session-page></session-page>`);
-    element.sessions = new Success([session]);
-    element.sessionId = 'missing';
-    await element.updateComplete;
-    await element.updateComplete;
+    expect(shadowRoot.querySelector('.details')).not.toHaveTextContent('English');
+  });
+
+  it('links back to the schedule day of the session', async () => {
+    const { view } = await render();
+
+    expect(view.getByRole('link', { name: 'Back to schedule' })).toHaveAttribute(
+      'href',
+      '/schedule/2024-01-02',
+    );
+  });
+
+  it('shows the description and the speakers as cards', async () => {
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector('short-markdown')).toHaveProperty(
+      'content',
+      'Session description',
+    );
+    expect(shadowRoot.querySelector('speaker-card')).toHaveProperty('speaker', speaker);
+  });
+
+  it('skips a speaker that does not exist', async () => {
+    vi.mocked(selectSession).mockReturnValue({
+      ...session,
+      speakers: [speaker, { id: 12, sessions: null }],
+    } as never);
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelectorAll('speaker-card')).toHaveLength(1);
+  });
+
+  it('goes to the 404 page for a missing session', async () => {
+    vi.mocked(selectSession).mockReturnValue(undefined);
+    await render({ sessionId: 'missing' });
 
     expect(goto).toHaveBeenCalledWith('/404');
   });
 
-  it('queues a sign-in prompt when toggling a featured session while signed out', async () => {
-    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
-    const mockQueueComplexSnackbar = queueComplexSnackbar as MockedFunction<
-      typeof queueComplexSnackbar
-    >;
-    mockSelectSession.mockReturnValue({ ...session, speakers: speakers as never } as Session);
-    mockQueueComplexSnackbar.mockClear();
+  it('asks to sign in before bookmarking', async () => {
+    const { shadowRoot } = await render();
 
-    const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
-    element.sessions = new Success([session]);
-    element.sessionId = 'session-1';
-    await element.updateComplete;
-    await element.updateComplete;
+    shadowRoot.querySelector<HTMLElement>('.bookmark')!.click();
 
-    const fab = shadowRoot.querySelector('md-fab');
-    expect(fab).not.toBeNull();
-    fireEvent.click(fab as Element);
-
-    expect(mockQueueComplexSnackbar).toHaveBeenCalled();
+    expect(queueComplexSnackbar).toHaveBeenCalled();
+    expect(setUserFeaturedSessions).not.toHaveBeenCalled();
   });
 
-  it('dispatches setUserFeaturedSessions when signed in', async () => {
-    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
-    const mockSetUserFeaturedSessions = setUserFeaturedSessions as MockedFunction<
-      typeof setUserFeaturedSessions
-    >;
-    mockSelectSession.mockReturnValue({ ...session, speakers: speakers as never } as Session);
-    mockSetUserFeaturedSessions.mockClear();
-
-    const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
-    element.user = new Success(user);
-    element.featuredSessions = new Success({});
-    element.sessions = new Success([session]);
-    element.sessionId = 'session-1';
-    await element.updateComplete;
-    await element.updateComplete;
-
-    const fab = shadowRoot.querySelector('md-fab');
-    fireEvent.click(fab as Element);
-
-    expect(mockSetUserFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': true }, true);
-  });
-
-  it('opens the video dialog when the video action is clicked', async () => {
-    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
-    const mockOpenVideoDialog = openVideoDialog as MockedFunction<typeof openVideoDialog>;
-    mockSelectSession.mockReturnValue({ ...session, speakers: speakers as never } as Session);
-    mockOpenVideoDialog.mockClear();
-
-    const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
-    element.sessions = new Success([session]);
-    element.sessionId = 'session-1';
-    await element.updateComplete;
-    await element.updateComplete;
-
-    const videoAction = shadowRoot.querySelector('.video-button');
-    expect(videoAction).toHaveTextContent('View video');
-    fireEvent.click(videoAction as Element);
-
-    expect(mockOpenVideoDialog).toHaveBeenCalledWith({
-      title: 'A great talk',
-      youtubeId: 'abc123',
+  it('bookmarks the session when signed in', async () => {
+    const { shadowRoot } = await render({
+      user: new Success({ uid: 'user-1' } as User),
+      featuredSessions: new Success({}),
     });
+    const bookmark = shadowRoot.querySelector<HTMLElement>('.bookmark')!;
+
+    expect(bookmark).toHaveTextContent('Bookmark');
+    bookmark.click();
+
+    expect(setUserFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': true }, true);
   });
 
-  it('shows the feedback prompt only while accepting feedback', async () => {
-    const mockSelectSession = selectSession as MockedFunction<typeof selectSession>;
-    mockSelectSession.mockReturnValue({
-      ...session,
-      day: '2000-01-01',
-      startTime: '00:00',
-      speakers: speakers as never,
-    } as Session);
+  it('says when the session is bookmarked', async () => {
+    const { shadowRoot } = await render({
+      featuredSessions: new Success({ 'session-1': true }),
+    });
 
-    const { element, shadowRoot } = await fixture<SessionPage>(html`<session-page></session-page>`);
-    element.sessions = new Success([session]);
-    element.sessionId = 'session-1';
-    await element.updateComplete;
-    await element.updateComplete;
+    expect(shadowRoot.querySelector('.bookmark')).toHaveTextContent('Bookmarked');
+  });
 
-    expect(shadowRoot.querySelector('auth-required')).toHaveAttribute('hidden');
+  it('has no bookmark when My Schedule is off', async () => {
+    setFeatures({ mySchedule: false });
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector('.bookmark')).toBeNull();
+  });
+
+  it('plays the video and links the slides', async () => {
+    const { shadowRoot } = await render();
+
+    shadowRoot.querySelector<HTMLElement>('.video-button')!.click();
+
+    expect(openVideoDialog).toHaveBeenCalledWith({ title: 'A great talk', youtubeId: 'abc123' });
+    expect(shadowRoot.querySelector('hb-button[href="https://slides.example"]')).toHaveTextContent(
+      'View presentation',
+    );
+  });
+
+  it('asks for feedback only once the session started', async () => {
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector('#feedback')).toBeNull();
+
+    litRender(nothing, document.body);
+    vi.mocked(acceptingFeedback).mockReturnValue(true);
+    const started = await render();
+
+    expect(started.shadowRoot.querySelector('#feedback feedback-block')).toHaveProperty(
+      'sessionId',
+      'session-1',
+    );
+  });
+
+  it('never asks for feedback when feedback is off', async () => {
+    setFeatures({ feedback: false });
+    vi.mocked(acceptingFeedback).mockReturnValue(true);
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector('#feedback')).toBeNull();
   });
 });

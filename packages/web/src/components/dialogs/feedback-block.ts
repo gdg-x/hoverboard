@@ -1,12 +1,10 @@
 import { type RemoteData, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/filled-button.js';
-import '@material/web/button/outlined-button.js';
-import '@material/web/textfield/outlined-text-field.js';
-import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
-import { css, html, type PropertyValues } from 'lit';
+import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
+import { illustration, illustrationStyles } from '../../illustrations/illustration';
+import thankYou from '../../illustrations/thank-you.svg?raw';
 import type { Feedback } from '../../models/feedback';
 import { store } from '../../store';
 import {
@@ -19,44 +17,62 @@ import { queueComplexSnackbar, queueSnackbar } from '../../store/snackbars';
 import type { UserState } from '../../store/user';
 import '../shared/star-rating';
 import { type StarRatingChangeDetail } from '../shared/star-rating';
+import '../ui/hb-button';
+import '../ui/hb-text-field';
+import type { HbTextField } from '../ui/hb-text-field';
 import { ThemedElement } from '../themed-element';
 
 @customElement('feedback-block')
 export class FeedbackBlock extends ThemedElement {
-  static override styles = css`
-    #feedback-comment {
-      width: 100%;
-    }
-
-    md-outlined-text-field {
-      width: 100%;
-    }
-
-    star-rating,
-    .caption {
-      display: inline-block;
-      vertical-align: bottom;
-      --star-color: var(--default-primary-color);
-    }
-
-    .helper {
-      font-size: 12px;
-      line-height: 1;
-    }
-
-    @media (min-width: 640px) {
-      .caption {
-        width: 25%;
+  static override styles = [
+    illustrationStyles,
+    css`
+      .container {
+        padding: var(--hb-space-6) var(--hb-space-4);
       }
-    }
 
-    @media (max-width: 640px) {
+      .thanks {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--hb-space-4);
+        margin-block-end: var(--hb-space-5);
+      }
+
+      .thanks .illustration {
+        inline-size: min(100%, 8rem);
+      }
+
+      .thanks p {
+        margin: 0;
+        font-weight: 600;
+      }
+
+      #commentInput {
+        width: 100%;
+      }
+
       star-rating,
       .caption {
-        display: block;
+        display: inline-block;
+        vertical-align: bottom;
+        --star-color: var(--hb-color-primary);
       }
-    }
-  `;
+
+      @media (min-width: 640px) {
+        .caption {
+          width: 25%;
+        }
+      }
+
+      @media (max-width: 640px) {
+        star-rating,
+        .caption {
+          display: block;
+        }
+      }
+    `,
+  ];
 
   @property({ type: Number })
   accessor contentRating = 0;
@@ -81,6 +97,14 @@ export class FeedbackBlock extends ThemedElement {
   override render() {
     return html`
       <div class="container">
+        ${
+          this.hasSavedFeedback
+            ? html`<div class="thanks">
+                ${illustration(thankYou)}
+                <p>${msg('Thanks for your feedback.', { id: 'dialogs.feedback.thanks' })}</p>
+              </div>`
+            : nothing
+        }
         <div>
           <div class="caption">
             ${msg('Content quality:', { id: 'dialogs.feedback.content-rating' })}
@@ -102,40 +126,35 @@ export class FeedbackBlock extends ThemedElement {
           ></star-rating>
         </div>
 
-        <md-outlined-text-field
+        <hb-text-field
           id="commentInput"
           type="textarea"
           ?hidden="${!this.hasRated}"
           label="${msg('Comment', { id: 'dialogs.feedback.comment' })}"
+          hint="${msg('Comments will be anonymously provided to speakers', {
+            id: 'dialogs.feedback.helper',
+          })}"
           .value="${this.comment}"
           maxlength="256"
           @input="${(event: Event) => this.onCommentInput(event)}"
-        ></md-outlined-text-field>
-        <p ?hidden="${!this.hasRated}" class="helper">
-          ${msg('Comments will be anonymously provided to speakers', {
-            id: 'dialogs.feedback.helper',
-          })}
-        </p>
-        <md-filled-button
-          class="primary"
-          ?hidden="${!this.hasRated}"
-          @click="${() => this.setFeedback()}"
-        >
+        ></hb-text-field>
+        <hb-button ?hidden="${!this.hasRated}" @click="${() => this.setFeedback()}">
           ${msg('Save', { id: 'dialogs.feedback.save', desc: 'Saves the session review.' })}
-        </md-filled-button>
-        <md-outlined-button
+        </hb-button>
+        <hb-button
+          variant="outlined"
           class="delete-button"
           ?hidden="${!this.hasSavedFeedback}"
           @click="${() => this.deleteFeedback()}"
         >
           ${msg('Delete', { id: 'dialogs.feedback.delete', desc: 'Deletes the session review.' })}
-        </md-outlined-button>
+        </hb-button>
       </div>
     `;
   }
 
   private onCommentInput(e: Event) {
-    this.comment = (e.target as MdOutlinedTextField).value;
+    this.comment = (e.target as HbTextField).value;
   }
 
   private resetFeedback() {

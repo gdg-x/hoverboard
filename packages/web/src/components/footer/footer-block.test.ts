@@ -1,8 +1,11 @@
 import { describe, expect, it, vi } from 'vitest';
-import { fireEvent, screen } from '@testing-library/dom';
+import { fireEvent, screen, within } from '@testing-library/dom';
 import { html } from 'lit';
+import { setFeatures } from '../../../__tests__/helpers/features';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { title } from '../../config/site';
 import { scrollToTop } from '../../utils/scrolling';
+import type { FooterBlock } from './footer-block';
 import './footer-block';
 
 vi.mock('../../utils/scrolling', () => ({
@@ -21,7 +24,7 @@ describe('footer-block', () => {
       html`<footer-block data-testid="footer"></footer-block>`,
     );
     expect(screen.getByTestId('footer')).toBeInTheDocument();
-    expect(shadowRootForWithin.querySelector('[aria-label="Back to top"]')).toBeInTheDocument();
+    expect(shadowRootForWithin.querySelector('[label="Back to top"]')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('footer-social')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('footer-rel')).toBeInTheDocument();
     expect(shadowRootForWithin.querySelector('footer-nav')).toBeInTheDocument();
@@ -31,8 +34,45 @@ describe('footer-block', () => {
   it('scrolls to the top when the action is clicked', async () => {
     const { shadowRoot } = await fixture(html`<footer-block></footer-block>`);
 
-    fireEvent.click(shadowRoot.querySelector('[aria-label="Back to top"]')!);
+    fireEvent.click(shadowRoot.querySelector('[label="Back to top"]')!);
 
     expect(mockScrollToTop).toHaveBeenCalledTimes(1);
+  });
+
+  it('shows the event name, the appearance toggle and a link to the subscribe band', async () => {
+    const { shadowRootForWithin } = await fixture(html`<footer-block></footer-block>`);
+    const view = within(shadowRootForWithin);
+
+    expect(view.getByRole('contentinfo')).toHaveTextContent(title);
+    expect(shadowRootForWithin.querySelector('color-scheme-toggle')).toBeInTheDocument();
+    expect(view.getByRole('link', { name: 'Get updates by email' })).toHaveAttribute(
+      'href',
+      '/#subscribe',
+    );
+  });
+
+  it('leaves out the subscribe link when subscribing is off', async () => {
+    setFeatures({ subscribe: false });
+    const { shadowRootForWithin } = await fixture(html`<footer-block></footer-block>`);
+
+    expect(
+      within(shadowRootForWithin).queryByRole('link', { name: 'Get updates by email' }),
+    ).toBeNull();
+  });
+
+  it('shows the fork me sticker only when the feature is on', async () => {
+    setFeatures({ forkMe: false });
+    const { element, shadowRootForWithin } = await fixture<FooterBlock>(
+      html`<footer-block></footer-block>`,
+    );
+    expect(shadowRootForWithin.querySelector('hb-sticker')).toBeNull();
+
+    setFeatures({ forkMe: true });
+    element.requestUpdate();
+    await element.updateComplete;
+
+    expect(
+      within(shadowRootForWithin).getByRole('link', { name: 'Fork me on GitHub' }),
+    ).toHaveAttribute('href', 'https://github.com/gdg-x/hoverboard');
   });
 });

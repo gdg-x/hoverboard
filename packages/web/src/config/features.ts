@@ -4,6 +4,7 @@
 export const FEATURES = [
   'blog',
   'codeOfConduct',
+  'demo',
   'faq',
   'feedback',
   'forkMe',

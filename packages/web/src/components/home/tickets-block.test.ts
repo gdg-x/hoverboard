@@ -29,7 +29,7 @@ describe('tickets-block', () => {
     element.tickets = new Pending();
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('content-loader')).not.toHaveAttribute('hidden');
+    expect(shadowRoot.querySelector('content-loader')).not.toBeNull();
   });
 
   it('renders an error message on failure', async () => {
@@ -51,8 +51,9 @@ describe('tickets-block', () => {
 
     expect(shadowRoot).toHaveTextContent(ticket.name);
     expect(shadowRoot).toHaveTextContent(ticket.info);
-    expect(shadowRoot.querySelector('.ticket-item')).toHaveAttribute('href', ticket.url);
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Buy ticket');
+    expect(shadowRoot.querySelector('.price')).toHaveTextContent('$100');
+    expect(shadowRoot.querySelector('.stub hb-button')).toHaveAttribute('href', ticket.url);
+    expect(shadowRoot.querySelector('.stub hb-button')).toHaveTextContent('Buy ticket');
   });
 
   it('shows the discount against the primary ticket', async () => {
@@ -65,22 +66,42 @@ describe('tickets-block', () => {
     ]);
     await element.updateComplete;
 
-    expect(shadowRoot).toHaveTextContent('Save 20% today');
+    expect(shadowRoot.querySelector('hb-sticker')).toHaveTextContent('Save 20% today');
   });
 
-  it('prevents navigation for sold out tickets', async () => {
+  it('marks a popular ticket with a sticker', async () => {
     const { element, shadowRoot } = await fixture<TicketsBlock>(
       html`<tickets-block></tickets-block>`,
     );
-    element.tickets = new Success([{ ...ticket, soldOut: true, available: false }]);
+    element.tickets = new Success([{ ...ticket, inDemand: true }]);
     await element.updateComplete;
 
-    const link = shadowRoot.querySelector<HTMLAnchorElement>('.ticket-item')!;
-    expect(link).toHaveAttribute('sold-out');
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Not available yet');
+    expect(shadowRoot.querySelector('.ticket')).toHaveClass('in-demand');
+    expect(shadowRoot.querySelector('hb-sticker')).toHaveTextContent('Popular');
+  });
 
-    const event = new MouseEvent('click', { cancelable: true, bubbles: true });
-    link.dispatchEvent(event);
-    expect(event.defaultPrevented).toBe(true);
+  it('turns off buying a sold out ticket, and says so in text', async () => {
+    const { element, shadowRoot } = await fixture<TicketsBlock>(
+      html`<tickets-block></tickets-block>`,
+    );
+    element.tickets = new Success([{ ...ticket, soldOut: true, inDemand: true }]);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.ticket')).toHaveClass('sold-out');
+    expect(shadowRoot.querySelectorAll('hb-sticker')).toHaveLength(1);
+    expect(shadowRoot.querySelector('hb-sticker')).toHaveTextContent('Sold out');
+    expect(shadowRoot.querySelector('.stub hb-button')).toHaveAttribute('disabled');
+    expect(shadowRoot.querySelector('.stub hb-button')).toHaveTextContent('You missed it!');
+  });
+
+  it('turns off buying a ticket that is not available yet', async () => {
+    const { element, shadowRoot } = await fixture<TicketsBlock>(
+      html`<tickets-block></tickets-block>`,
+    );
+    element.tickets = new Success([{ ...ticket, available: false }]);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.stub hb-button')).toHaveAttribute('disabled');
+    expect(shadowRoot.querySelector('.stub hb-button')).toHaveTextContent('Not available yet');
   });
 });

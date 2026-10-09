@@ -58,7 +58,7 @@ Object.defineProperty(globalThis, 'IntersectionObserver', {
   value: MockIntersectionObserver,
 });
 
-// @material/web uses window.matchMedia which is not available in JSDOM.
+// JSDOM does not implement window.matchMedia, used by src/utils/media-query.ts.
 // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -96,32 +96,7 @@ Object.defineProperty(Element.prototype, 'animate', {
   }),
 });
 
-// JSDOM does not yet implement the ElementInternals APIs used by Material text fields.
-const attachInternals = vi.fn(() => ({
-  form: null,
-  labels: [],
-  states: new Set<string>(),
-  validity: { valid: true },
-  validationMessage: '',
-  willValidate: true,
-  checkValidity: vi.fn(() => true),
-  reportValidity: vi.fn(() => true),
-  setFormValue: vi.fn(),
-  setValidity: vi.fn(),
-}));
-
-Object.defineProperty(Element.prototype, 'attachInternals', {
-  writable: true,
-  value: attachInternals,
-});
-
-Object.defineProperty(HTMLElement.prototype, 'attachInternals', {
-  writable: true,
-  value: attachInternals,
-});
-
-// JSDOM does not implement the <dialog> element's showModal/close, used by
-// hoverboard-dialog.
+// JSDOM does not implement the <dialog> element's showModal/close, used by hb-dialog.
 Object.defineProperty(HTMLDialogElement.prototype, 'showModal', {
   writable: true,
   value: vi.fn(function (this: HTMLDialogElement) {
@@ -134,5 +109,24 @@ Object.defineProperty(HTMLDialogElement.prototype, 'close', {
   value: vi.fn(function (this: HTMLDialogElement) {
     this.removeAttribute('open');
     this.dispatchEvent(new Event('close'));
+  }),
+});
+
+// JSDOM does not implement the Popover API, used by hb-menu and hb-toast. Its default styles hide
+// popovers, and it does not focus hidden elements. Open popovers get a `data-popover-open`
+// attribute, as a stand-in for `:popover-open`, and are shown.
+Object.defineProperty(HTMLElement.prototype, 'showPopover', {
+  writable: true,
+  value: vi.fn(function (this: HTMLElement) {
+    this.toggleAttribute('data-popover-open', true);
+    this.style.setProperty('display', 'block');
+  }),
+});
+
+Object.defineProperty(HTMLElement.prototype, 'hidePopover', {
+  writable: true,
+  value: vi.fn(function (this: HTMLElement) {
+    this.toggleAttribute('data-popover-open', false);
+    this.style.removeProperty('display');
   }),
 });

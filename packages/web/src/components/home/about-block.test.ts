@@ -36,15 +36,23 @@ describe('about-block', () => {
     expect(getByText(aboutBlock.statisticsBlock.attendees.label)).toBeInTheDocument();
   });
 
-  it('renders hoverboard-icon arrow-right-circle icons for both call-to-actions', async () => {
-    const { shadowRootForWithin } = await fixture(
-      html`<about-block data-testid="block"></about-block>`,
-    );
+  it('renders the numbers as a list, with the optional emoji hidden from screen readers', async () => {
+    const { shadowRoot } = await fixture(html`<about-block></about-block>`);
 
-    const icons = shadowRootForWithin.querySelectorAll(
-      'hoverboard-icon[name="arrow-right-circle"]',
+    const stats = shadowRoot.querySelectorAll('.stat');
+    expect(stats).toHaveLength(4);
+    expect(stats[0]).toHaveTextContent(aboutBlock.statisticsBlock.attendees.label);
+    expect(shadowRoot.querySelector('.emoji')).toHaveAttribute('aria-hidden', 'true');
+    expect(shadowRoot.querySelectorAll('.emoji')).toHaveLength(
+      Object.values(aboutBlock.statisticsBlock).filter((stat) => 'emoji' in stat).length,
     );
-    expect(icons).toHaveLength(2);
+  });
+
+  it('has a section heading below the page title', async () => {
+    const { shadowRoot } = await fixture(html`<about-block></about-block>`);
+
+    expect(shadowRoot.querySelector('h2')).toHaveTextContent('About');
+    expect(shadowRoot.querySelector('h1')).toBeNull();
   });
 
   it('plays the video', async () => {

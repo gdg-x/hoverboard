@@ -1,9 +1,5 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/filled-button.js';
-import '@material/web/button/outlined-button.js';
-import '@material/web/textfield/outlined-text-field.js';
-import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 import { css, html } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { StoreController } from '../../controllers/store-controller';
@@ -17,8 +13,11 @@ import {
 import type { SubscribeState } from '../../store/subscribe';
 import { subscribeBlock } from '../../config/site';
 import { notEmpty, validEmail } from '../../utils/strings';
-import { HoverboardDialog } from '../shared/hoverboard-dialog';
-import '../shared/hoverboard-dialog';
+import '../ui/hb-button';
+import '../ui/hb-dialog';
+import type { HbDialog } from '../ui/hb-dialog';
+import '../ui/hb-text-field';
+import type { HbTextField } from '../ui/hb-text-field';
 import { ThemedElement } from '../themed-element';
 
 // Used for adding documents to both `subscribers` and `potentialPartners` collections
@@ -26,22 +25,14 @@ import { ThemedElement } from '../themed-element';
 @customElement('subscribe-dialog')
 export class SubscribeDialog extends ThemedElement {
   static override styles = css`
-    :host {
-      --md-outlined-text-field-focus-outline-color: var(--default-primary-color);
-    }
-
-    md-outlined-text-field {
-      display: block;
-      margin: 16px 32px 0;
-    }
-
-    md-outlined-text-field:first-of-type {
-      margin-top: 0;
+    .fields {
+      display: grid;
+      gap: var(--hb-space-4);
     }
 
     .general-error {
-      margin: 0 32px;
-      color: var(--error-color);
+      margin: 0;
+      color: var(--hb-color-error);
     }
   `;
 
@@ -49,14 +40,14 @@ export class SubscribeDialog extends ThemedElement {
     return subscribeBlock;
   }
 
-  @query('#dialog')
-  accessor dialog!: HoverboardDialog;
+  @query('hb-dialog')
+  accessor dialog!: HbDialog;
   @query('#emailInput')
-  accessor emailInput!: MdOutlinedTextField;
+  accessor emailInput!: HbTextField;
   @query('#firstFieldInput')
-  accessor firstFieldInput!: MdOutlinedTextField;
+  accessor firstFieldInput!: HbTextField;
   @query('#secondFieldInput')
-  accessor secondFieldInput!: MdOutlinedTextField;
+  accessor secondFieldInput!: HbTextField;
 
   @state()
   override accessor title = '';
@@ -136,10 +127,6 @@ export class SubscribeDialog extends ThemedElement {
     }
   }
 
-  override firstUpdated() {
-    this.dialog.addEventListener('closed', () => closeDialog());
-  }
-
   override render() {
     const firstFieldLabel =
       this.firstFieldLabel || msg('First Name', { id: 'dialogs.subscribe.first-name' });
@@ -148,9 +135,8 @@ export class SubscribeDialog extends ThemedElement {
     const emailLabel = msg('Email Address', { id: 'dialogs.subscribe.email' });
     const fieldRequired = msg('Field required.', { id: 'dialogs.subscribe.field-required' });
     return html`
-      <hoverboard-dialog id="dialog" ?open="${this.open}">
-        <div slot="headline">${this.title}</div>
-        <div slot="content">
+      <hb-dialog heading="${this.title}" ?open="${this.open}" @close="${this.onClose}">
+        <div class="fields">
           ${
             this.errorOccurred
               ? html`<div class="general-error">
@@ -160,42 +146,37 @@ export class SubscribeDialog extends ThemedElement {
                 </div>`
               : ''
           }
-          <md-outlined-text-field
+          <hb-text-field
             id="firstFieldInput"
             label="${firstFieldLabel} *"
             .value="${this.firstFieldValue}"
             required
-            ?error="${this.firstFieldInvalid}"
-            error-text="${fieldRequired}"
+            error="${this.firstFieldInvalid ? fieldRequired : ''}"
             autocomplete="off"
             @input="${this.onFirstFieldChanged}"
-          >
-          </md-outlined-text-field>
-          <md-outlined-text-field
+          ></hb-text-field>
+          <hb-text-field
             id="secondFieldInput"
             label="${secondFieldLabel} *"
             .value="${this.secondFieldValue}"
             required
-            ?error="${this.secondFieldInvalid}"
-            error-text="${fieldRequired}"
+            error="${this.secondFieldInvalid ? fieldRequired : ''}"
             autocomplete="off"
             @input="${this.onSecondFieldChanged}"
-          >
-          </md-outlined-text-field>
-          <md-outlined-text-field
+          ></hb-text-field>
+          <hb-text-field
             id="emailInput"
+            type="email"
             label="${emailLabel} *"
             .value="${this.email}"
             required
-            ?error="${this.emailInvalid}"
-            error-text="${msg('Please enter a valid email address.', { id: 'common.email-invalid' })}"
-            autocomplete="off"
+            error="${this.emailInvalid ? msg('Please enter a valid email address.', { id: 'common.email-invalid' }) : ''}"
+            autocomplete="email"
             @input="${this.onEmailChanged}"
-          >
-          </md-outlined-text-field>
+          ></hb-text-field>
         </div>
 
-        <md-filled-button slot="actions" @click="${this.subscribe}">
+        <hb-button slot="actions" @click="${this.subscribe}">
           ${
             this.submitLabel ||
             msg('Subscribe', {
@@ -203,29 +184,33 @@ export class SubscribeDialog extends ThemedElement {
               desc: 'Button that submits a subscription.',
             })
           }
-        </md-filled-button>
-        <md-outlined-button slot="actions" @click="${this.close}">
+        </hb-button>
+        <hb-button slot="actions" variant="outlined" @click="${this.close}">
           ${msg('Close', { id: 'common.close' })}
-        </md-outlined-button>
-      </hoverboard-dialog>
+        </hb-button>
+      </hb-dialog>
     `;
   }
 
   private close() {
-    this.errorOccurred = false;
     this.dialog.close();
   }
 
+  private readonly onClose = () => {
+    this.errorOccurred = false;
+    closeDialog();
+  };
+
   private onFirstFieldChanged(event: Event) {
-    this.firstFieldValue = (event.target as MdOutlinedTextField).value;
+    this.firstFieldValue = (event.target as HbTextField).value;
   }
 
   private onSecondFieldChanged(event: Event) {
-    this.secondFieldValue = (event.target as MdOutlinedTextField).value;
+    this.secondFieldValue = (event.target as HbTextField).value;
   }
 
   private onEmailChanged(event: Event) {
-    this.email = (event.target as MdOutlinedTextField).value;
+    this.email = (event.target as HbTextField).value;
   }
 
   private subscribe() {

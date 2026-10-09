@@ -36,7 +36,7 @@ describe('video-dialog', () => {
   it('renders a closed dialog by default', async () => {
     const { shadowRoot } = await fixture<VideoDialog>(html`<video-dialog></video-dialog>`);
 
-    expect(shadowRoot.querySelector('hoverboard-dialog')).not.toHaveAttribute('open');
+    expect(shadowRoot.querySelector('hb-dialog')).not.toHaveAttribute('open');
   });
 
   it('renders the video title and id when opened', async () => {
@@ -44,8 +44,8 @@ describe('video-dialog', () => {
     element['video'] = { open: true, youtubeId: 'abc123', title: 'A great talk' };
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('hoverboard-dialog')).toHaveAttribute('open');
-    expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent('A great talk');
+    expect(shadowRoot.querySelector('hb-dialog')).toHaveAttribute('open');
+    expect(shadowRoot.querySelector('hb-dialog')).toHaveAttribute('heading', 'A great talk');
     expect(shadowRoot.querySelector('lite-youtube')).toHaveAttribute('videoid', 'abc123');
     expect(shadowRoot.querySelector('lite-youtube')).toHaveAttribute('videotitle', 'A great talk');
   });
@@ -53,20 +53,8 @@ describe('video-dialog', () => {
   it('dispatches closeVideoDialog when the dialog is closed', async () => {
     const { shadowRoot } = await fixture<VideoDialog>(html`<video-dialog></video-dialog>`);
 
-    shadowRoot.querySelector('hoverboard-dialog')!.dispatchEvent(new Event('closed'));
+    shadowRoot.querySelector('hb-dialog')!.dispatchEvent(new Event('close'));
 
     expect(mockCloseVideoDialog).toHaveBeenCalled();
-  });
-
-  it('closes the dialog when the close button is clicked', async () => {
-    const { shadowRoot } = await fixture<VideoDialog>(html`<video-dialog></video-dialog>`);
-    const dialog = shadowRoot.querySelector('hoverboard-dialog') as HTMLElement & {
-      close: () => void;
-    };
-    dialog.close = vi.fn();
-
-    shadowRoot.querySelector<HTMLElement>('md-outlined-button')!.click();
-
-    expect(dialog.close).toHaveBeenCalled();
   });
 });

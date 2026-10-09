@@ -24,15 +24,16 @@ describe('subscribe-dialog', () => {
     element['title'] = subscribeBlock.formTitle;
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('[slot="headline"]')).toHaveTextContent(
+    expect(shadowRoot.querySelector('hb-dialog')).toHaveAttribute(
+      'heading',
       subscribeBlock.formTitle,
     );
-    const fields = shadowRoot.querySelectorAll('md-outlined-text-field');
+    const fields = shadowRoot.querySelectorAll('hb-text-field');
     expect(fields).toHaveLength(3);
     expect(fields[0]).toHaveAttribute('label', 'First Name *');
     expect(fields[1]).toHaveAttribute('label', 'Last Name *');
     expect(fields[2]).toHaveAttribute('label', 'Email Address *');
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Subscribe');
+    expect(shadowRoot.querySelector('hb-button')).toHaveTextContent('Subscribe');
   });
 
   it('uses the labels the opener passes', async () => {
@@ -44,7 +45,7 @@ describe('subscribe-dialog', () => {
     await element.updateComplete;
 
     expect(shadowRoot.querySelector('#firstFieldInput')).toHaveAttribute('label', 'Full Name *');
-    expect(shadowRoot.querySelector('md-filled-button')).toHaveTextContent('Submit');
+    expect(shadowRoot.querySelector('hb-button')).toHaveTextContent('Submit');
   });
 
   it('shows the general error message when subscribing fails', async () => {
@@ -78,10 +79,12 @@ describe('subscribe-dialog', () => {
     } as never);
     await element.updateComplete;
 
-    shadowRoot.querySelector<HTMLElement>('md-filled-button')!.click();
+    shadowRoot.querySelector<HTMLElement>('hb-button')!.click();
     await element.updateComplete;
 
-    expect((shadowRoot.querySelector('#firstFieldInput') as { error?: boolean })!.error).toBe(true);
+    expect((shadowRoot.querySelector('#firstFieldInput') as { error?: string })!.error).toBe(
+      'Field required.',
+    );
   });
 
   it('submits the form data when all fields are valid', async () => {
@@ -114,7 +117,7 @@ describe('subscribe-dialog', () => {
     fireEvent.input(emailInput);
 
     await element.updateComplete;
-    shadowRoot.querySelector<HTMLElement>('md-filled-button')!.click();
+    shadowRoot.querySelector<HTMLElement>('hb-button')!.click();
 
     expect(submit).toHaveBeenCalledWith({
       email: 'ada@example.com',
@@ -127,16 +130,16 @@ describe('subscribe-dialog', () => {
     const { element, shadowRoot } = await fixture<SubscribeDialog>(
       html`<subscribe-dialog></subscribe-dialog>`,
     );
+    element['open'] = true;
     element['errorOccurred'] = true;
     await element.updateComplete;
-    const dialog = shadowRoot.querySelector('hoverboard-dialog') as HTMLElement & {
-      close: () => void;
-    };
-    dialog.close = vi.fn();
+    const dialog = shadowRoot.querySelector('hb-dialog')!;
+    await dialog.updateComplete;
 
-    shadowRoot.querySelector<HTMLElement>('md-outlined-button')!.click();
+    shadowRoot.querySelector<HTMLElement>('hb-button[variant="outlined"]')!.click();
+    await dialog.updateComplete;
 
-    expect(dialog.close).toHaveBeenCalled();
+    expect(dialog.open).toBe(false);
     expect(element['errorOccurred']).toBe(false);
   });
 

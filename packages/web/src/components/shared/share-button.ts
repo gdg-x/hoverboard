@@ -1,8 +1,8 @@
 import { msg } from '@lit/localize';
-import '@material/web/button/outlined-button.js';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ThemedElement } from '../themed-element';
+import '../ui/hb-button';
 import './hoverboard-icon';
 
 @customElement('share-button')
@@ -34,10 +34,10 @@ export class ShareButton extends ThemedElement {
     }
 
     return html`
-      <md-outlined-button @click="${this.share}">
+      <hb-button variant="outlined" @click="${this.share}">
         <hoverboard-icon slot="icon" name="share"></hoverboard-icon>
         ${msg('Share', { id: 'shared.share-button.label', desc: 'Shares the session.' })}
-      </md-outlined-button>
+      </hb-button>
     `;
   }
 }

@@ -1,154 +1,111 @@
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/text-button.js';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '../markdown/short-markdown';
-import '../shared/text-truncate';
-import { postPath } from '../../utils/navigation';
-import { type BlogState, selectBlogPosts } from '../../store/blog';
-import { getDate } from '../../utils/dates';
-import '../shared/hoverboard-icon';
+import { styleMap } from 'lit/directives/style-map.js';
 import { fromStore } from '../../controllers/from-store';
+import { type BlogState, selectBlogPosts } from '../../store/blog';
+import { band } from '../../styles/band';
+import { getDate } from '../../utils/dates';
+import { postPath } from '../../utils/navigation';
+import '../shared/hoverboard-icon';
 import { ThemedElement } from '../themed-element';
+import '../ui/hb-button';
+import '../ui/hb-card';
 
+/** The three newest blog posts as cards. */
 @customElement('latest-posts-block')
 export class LatestPostsBlock extends ThemedElement {
-  static override styles = css`
-    .posts-wrapper {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-gap: 16px;
-    }
-
-    .post {
-      display: flex;
-      flex: 1;
-      flex-basis: 1px;
-      flex-direction: column;
-    }
-
-    .image {
-      overflow: hidden;
-      --lazy-image-width: 100%;
-      --lazy-image-height: 128px;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      border-top-left-radius: var(--border-radius);
-      border-top-right-radius: var(--border-radius);
-    }
-
-    .details {
-      display: flex;
-      flex: 1 1 auto;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 16px;
-    }
-
-    .title {
-      font-size: 20px;
-      line-height: 1.2;
-    }
-
-    .description {
-      margin-top: 8px;
-      color: var(--secondary-text-color);
-    }
-
-    .date {
-      margin-top: 16px;
-      font-size: 12px;
-      text-transform: uppercase;
-      color: var(--secondary-text-color);
-    }
-
-    .cta-button {
-      margin-top: 24px;
-    }
-
-    @media (min-width: 640px) {
-      .posts-wrapper {
-        grid-template-columns: repeat(3, 1fr);
+  static override styles = [
+    band,
+    css`
+      .posts {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+        gap: var(--hb-space-5);
       }
 
-      .post:last-of-type {
-        display: none;
-      }
-    }
-
-    @media (min-width: 812px) {
-      .posts-wrapper {
-        grid-template-columns: repeat(4, 1fr);
+      @container (width >= 900px) {
+        .posts {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
       }
 
-      .post:last-of-type {
-        display: flex;
+      hb-card {
+        block-size: 100%;
       }
-    }
-  `;
+
+      .image {
+        display: block;
+        inline-size: 100%;
+        block-size: auto;
+        aspect-ratio: 16 / 9;
+        border-block-end: var(--hb-border-width) solid var(--hb-border-color);
+        border-start-start-radius: calc(var(--hb-radius-l) - var(--hb-border-width));
+        border-start-end-radius: calc(var(--hb-radius-l) - var(--hb-border-width));
+        object-fit: cover;
+      }
+
+      .body {
+        padding: var(--hb-space-4) var(--hb-space-5) var(--hb-space-5);
+      }
+
+      .date {
+        margin: 0;
+        color: var(--hb-color-on-surface-variant);
+        font: 500 var(--hb-text-sm) / 1.4 var(--hb-font-mono);
+      }
+
+      .title {
+        margin: var(--hb-space-2) 0 0;
+        padding: 0;
+        font: 700 var(--hb-text-xl) / 1.2 var(--hb-font-display);
+        overflow-wrap: anywhere;
+      }
+    `,
+  ];
 
   @fromStore((state) => selectBlogPosts(state))
   accessor posts!: BlogState;
 
   private get latestPosts() {
-    if (this.posts instanceof Success) {
-      return this.posts.data.slice(0, 4);
-    } else {
-      return [];
-    }
-  }
-
-  private postUrl(id: string) {
-    return postPath(id);
-  }
-
-  private getDate(date: string | Date) {
-    return getDate(date);
+    return this.posts instanceof Success ? this.posts.data.slice(0, 3) : [];
   }
 
   override render() {
     return html`
-      <div class="container">
-        <h1 class="container-title">
-          ${msg('The latest news', { id: 'home.latest-posts-block.title' })}
-        </h1>
-
-        <div class="posts-wrapper">
-          ${this.latestPosts.map(
-            (post) => html`
-              <a href="${this.postUrl(post.id)}" class="post card">
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  class="image"
-                  src="${post.image}"
-                  alt="${post.title}"
-                  style="background-color: ${post.backgroundColor};"
-                />
-                <div class="details">
-                  <div>
-                    <text-truncate lines="2">
-                      <h3 class="title">${post.title}</h3>
-                    </text-truncate>
-                    <text-truncate lines="3">
-                      <short-markdown class="description" content="${post.brief}"></short-markdown>
-                    </text-truncate>
-                  </div>
-                  <div class="date">${this.getDate(post.published)}</div>
-                </div>
-              </a>
-            `,
-          )}
+      <div class="inner">
+        <div class="band-header">
+          <h2 class="band-title">
+            ${msg('The latest news', { id: 'home.latest-posts-block.title' })}
+          </h2>
+          <hb-button variant="outlined" class="cta-button" href="/blog" trailing-icon>
+            ${msg('View all stories', { id: 'home.latest-posts-block.cta' })}
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+          </hb-button>
         </div>
 
-        <a href="/blog">
-          <md-text-button class="cta-button animated icon-right" trailing-icon>
-            <span>${msg('View all stories', { id: 'home.latest-posts-block.cta' })}</span>
-            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-          </md-text-button>
-        </a>
+        <ul class="posts plain">
+          ${this.latestPosts.map(
+            (post) => html`
+              <li>
+                <hb-card href="${postPath(post.id)}" label="${post.title}">
+                  <img
+                    class="image"
+                    src="${post.image}"
+                    alt=""
+                    loading="lazy"
+                    style="${styleMap({ backgroundColor: post.backgroundColor })}"
+                  />
+                  <div class="body">
+                    <p class="date">${getDate(post.published)}</p>
+                    <h3 class="title">${post.title}</h3>
+                  </div>
+                </hb-card>
+              </li>
+            `,
+          )}
+        </ul>
       </div>
     `;
   }

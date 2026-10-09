@@ -1,76 +1,73 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/button/text-button.js';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { fromStore } from '../../controllers/from-store';
 import { store } from '../../store';
 import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
 import { type PartnerGroupsState, selectPartnerGroups } from '../../store/partners';
 import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
 import { queueSnackbar } from '../../store/snackbars';
+import { band } from '../../styles/band';
 import '../shared/hoverboard-icon';
-import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
+import '../ui/hb-button';
 
+/** Partner logos by group, each group under its own heading. */
 @customElement('partners-block')
 export class PartnersBlock extends ThemedElement {
-  static override styles = css`
-    .block-title {
-      margin: 24px 0 8px;
-    }
-
-    .logos-wrapper {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      grid-gap: 8px;
-    }
-
-    .logo-item {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-    }
-
-    .logo-img {
-      --lazy-image-width: 100%;
-      --lazy-image-height: 84px;
-      --lazy-image-fit: contain;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-    }
-
-    .cta-button {
-      margin-top: 24px;
-      color: var(--default-primary-color);
-    }
-
-    @media (min-width: 640px) {
-      .logos-wrapper {
-        grid-template-columns: repeat(4, 1fr);
+  static override styles = [
+    band,
+    css`
+      .group + .group {
+        margin-block-start: var(--hb-space-7);
       }
-    }
 
-    @media (min-width: 812px) {
-      .logos-wrapper {
-        grid-template-columns: repeat(5, 1fr);
+      .group-title {
+        margin: 0 0 var(--hb-space-4);
+        padding: 0;
+        font: 700 var(--hb-text-xl) / 1.2 var(--hb-font-display);
       }
-    }
-  `;
+
+      .logos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+        gap: var(--hb-space-4);
+      }
+
+      /* Most logos are made for white backgrounds, so the tiles stay white in the dark scheme. */
+      .logo {
+        display: grid;
+        place-items: center;
+        block-size: 7rem;
+        padding: var(--hb-space-4);
+        border: var(--hb-border-width) solid var(--hb-border-color);
+        border-radius: var(--hb-radius-m);
+        background-color: white;
+        box-shadow: var(--hb-shadow-card);
+        transition:
+          translate var(--hb-duration-short) var(--hb-ease-spring),
+          box-shadow var(--hb-duration-short) var(--hb-ease-standard);
+      }
+
+      .logo:hover {
+        translate: -2px -2px;
+        box-shadow: var(--hb-shadow-card-hover);
+      }
+
+      .logo img {
+        display: block;
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: contain;
+      }
+    `,
+  ];
 
   @fromStore((state) => state.potentialPartners)
   accessor potentialPartners!: typeof initialPotentialPartnersState;
   @fromStore((state) => selectPartnerGroups(state))
   accessor partners!: PartnerGroupsState;
-
-  private get pending() {
-    return this.partners instanceof Pending;
-  }
-
-  private get failure() {
-    return this.partners instanceof Failure;
-  }
 
   override willUpdate(changedProperties: PropertyValues) {
     if (changedProperties.has('potentialPartners') && this.potentialPartners instanceof Success) {
@@ -82,53 +79,56 @@ export class PartnersBlock extends ThemedElement {
   }
 
   override render() {
-    const partners = this.partners instanceof Success ? this.partners.data : [];
+    const groups = this.partners instanceof Success ? this.partners.data : [];
 
     return html`
-      <div class="container">
-        <h1 class="container-title">${msg('Partners', { id: 'home.partners-block.title' })}</h1>
+      <div class="inner">
+        <div class="band-header">
+          <h2 class="band-title">${msg('Partners', { id: 'home.partners-block.title' })}</h2>
+          <hb-button
+            variant="outlined"
+            class="cta-button"
+            trailing-icon
+            @click="${this.addPotentialPartner}"
+          >
+            ${msg('Become a partner', { id: 'home.partners-block.cta' })}
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+          </hb-button>
+        </div>
 
-        ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : nothing}
         ${
-          this.failure
+          this.partners instanceof Pending
+            ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>`
+            : nothing
+        }
+        ${
+          this.partners instanceof Failure
             ? html`<p>${msg('Error loading partners.', { id: 'home.partners-block.error' })}</p>`
             : nothing
         }
-        ${partners.map(
-          (block) => html`
-            <h4 class="block-title">${block.title}</h4>
-            <div class="logos-wrapper">
-              ${block.items.map(
-                (logo) => html`
-                  <a
-                    class="logo-item card"
-                    href="${logo.url}"
-                    title="${logo.name}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      loading="lazy"
-                      decoding="async"
-                      class="logo-img"
-                      src="${logo.logoUrl}"
-                      alt="${logo.name}"
-                    />
-                  </a>
-                `,
-              )}
-            </div>
+        ${groups.map(
+          (group) => html`
+            <section class="group">
+              <h3 class="group-title">${group.title}</h3>
+              <ul class="logos plain">
+                ${group.items.map(
+                  (partner) => html`
+                    <li>
+                      <a
+                        class="logo"
+                        href="${partner.url}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img src="${partner.logoUrl}" alt="${partner.name}" loading="lazy" />
+                      </a>
+                    </li>
+                  `,
+                )}
+              </ul>
+            </section>
           `,
         )}
-
-        <md-text-button
-          class="cta-button animated icon-right"
-          trailing-icon
-          @click="${this.addPotentialPartner}"
-        >
-          <span>${msg('Become a partner', { id: 'home.partners-block.cta' })}</span>
-          <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-        </md-text-button>
       </div>
     `;
   }

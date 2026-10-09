@@ -92,6 +92,12 @@ beforeEach(() => {
     JSON.stringify({ features: { forkMe: false, map: true, schedule: true, speakers: true } }),
   );
   write(
+    'packages/web/schemas/site.schema.json',
+    JSON.stringify({
+      properties: { theme: { properties: { name: { enum: ['festival', 'spotlight'] } } } },
+    }),
+  );
+  write(
     'packages/web/src/config/features.ts',
     "export const FEATURE_REQUIRES = { schedule: ['speakers'] };\n",
   );
@@ -163,6 +169,7 @@ describe('runInit', () => {
 
     expect(mocks.ask).toHaveBeenCalledWith('Project number or ID:', '1');
     expect(mocks.ask).toHaveBeenCalledWith('Event name:', 'Old Fest');
+    expect(mocks.ask).toHaveBeenCalledWith('Theme (festival or spotlight):', 'festival');
     expect(mocks.ask).toHaveBeenCalledWith(
       expect.stringContaining('Google Maps API key'),
       'old-key',
@@ -170,6 +177,7 @@ describe('runInit', () => {
     expect(read('packages/config/site.json')).toMatchObject({
       firebase: { projectId: 'old-fest' },
       integrations: { googleMapsApiKey: 'old-key' },
+      theme: { name: 'festival' },
       features: { forkMe: true, map: true },
     });
   });

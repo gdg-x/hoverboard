@@ -16,7 +16,7 @@ const fakeLocale = inject('fakeLocale');
 
 const picker = () =>
   queryAllDeep(document, 'locale-picker')[0]?.shadowRoot?.querySelector('select') ?? null;
-const signInTab = () => queryAllDeep(document, '.signin-tab')[0];
+const skipLink = () => queryAllDeep(document, '.skip-link')[0];
 
 describe(`the app with the fake ${fakeLocale} locale`, () => {
   beforeAll(async () => {
@@ -38,7 +38,7 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     expect(document.documentElement).toHaveAttribute('lang', fakeLocale);
     expect([...picker()!.options].map(({ value }) => value)).toEqual(['en', fakeLocale]);
     expect(picker()).toHaveValue(fakeLocale);
-    expect(signInTab()).toHaveTextContent('[Sign in]');
+    expect(skipLink()).toHaveTextContent('[Skip to content]');
   });
 
   it('shows the event content translated for the locale', async () => {
@@ -53,7 +53,7 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     await vi.waitFor(() => expect(picker()).toHaveAttribute('aria-label', 'Language'));
     expect(document.documentElement).toHaveAttribute('lang', 'en');
     expect(localStorage.getItem('hoverboard-locale')).toBe('en');
-    expect(signInTab()).toHaveTextContent(/^Sign in$/);
+    expect(skipLink()).toHaveTextContent(/^Skip to content$/);
     expect(document.title).toBe(resources.title);
   });
 
@@ -62,7 +62,7 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
 
     expect(getLocale()).toBe(fakeLocale);
     expect(document.documentElement).toHaveAttribute('lang', fakeLocale);
-    await vi.waitFor(() => expect(signInTab()).toHaveTextContent('[Sign in]'));
+    await vi.waitFor(() => expect(skipLink()).toHaveTextContent('[Skip to content]'));
     await expect(useLocale('xx')).rejects.toThrow('The site does not offer xx.');
   });
 
@@ -77,11 +77,11 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
     await event.loader();
 
     expect(getLocale()).toBe('en');
-    await vi.waitFor(() => expect(signInTab()).toHaveTextContent(/^Sign in$/));
+    await vi.waitFor(() => expect(skipLink()).toHaveTextContent(/^Skip to content$/));
 
     document.dispatchEvent(new Event('astro:after-swap'));
 
     await vi.waitFor(() => expect(getLocale()).toBe(fakeLocale));
-    await vi.waitFor(() => expect(signInTab()).toHaveTextContent('[Sign in]'));
+    await vi.waitFor(() => expect(skipLink()).toHaveTextContent('[Skip to content]'));
   });
 });

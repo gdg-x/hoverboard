@@ -1,191 +1,84 @@
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import '@material/web/progress/linear-progress.js';
-import { css, html, nothing } from 'lit';
+import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import '../components/hero/simple-hero';
+import { styleMap } from 'lit/directives/style-map.js';
+import '../components/hero/hero-block';
+import { heroText } from '../components/hero/hero-block';
+import { PAGE_TONES } from '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../components/shared/content-loader';
+import '../components/schedule/session-element';
+import type { ScheduleSession } from '../components/schedule/session-element';
 import '../components/shared/hoverboard-icon';
-import '../components/shared/previous-speakers-block';
+import '../components/shared/previous-talks';
+import '../components/ui/hb-chip';
+import '../components/ui/hb-icon-button';
+import '../components/ui/hb-progress';
+import type { PreviousSpeaker } from '../models/previous-speaker';
+import type { Session } from '../models/session';
 import type { SpeakerWithTags } from '../models/speaker';
-import { goto, sessionPath } from '../utils/navigation';
+import { goto } from '../utils/navigation';
 import { store } from '../store';
+import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/speakers';
 import { updateImageMetadata } from '../utils/metadata';
-import { variableColor } from '../utils/styles';
+import { photoTransitionName, tagChipStyle } from '../utils/styles';
+import { profile } from '../styles/profile';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
-// `speaker.sessions` is not currently populated by any action/selector/state for
-// `SpeakerWithTags`, so this augmentation and helper keep the (currently always-empty)
-// "additional sessions" section fully typed and ready to render the moment real
-// session data is supplied, without changing today's output.
-interface SpeakerSessionSummary {
-  id: string;
-  title: string;
-  dateReadable?: string;
-  startTime?: string;
-  endTime?: string;
-  track?: { title?: string };
-  tags?: string[];
-}
+// The schedule generator adds the speaker's sessions to each speaker.
+type SpeakerWithSessions = SpeakerWithTags & { sessions?: ScheduleSession[] | null };
 
-type SpeakerWithSessions = SpeakerWithTags & { sessions?: SpeakerSessionSummary[] };
-
+/**
+ * A speaker: their photo, which moves here from their card, name, details, badges, social links
+ * and bio, then their sessions and, with `previousSpeakers` on, their talks in earlier years.
+ */
 @customElement('speaker-page')
 export class SpeakerPage extends ThemedElement {
-  static override styles = css`
-    :host {
-      background: var(--primary-background-color);
-      box-shadow: var(--box-shadow);
-      color: var(--primary-text-color);
-      display: block;
-      height: 100%;
-      margin: 0;
-      width: 100%;
-    }
+  static override styles = [
+    heroText,
+    profile,
+    css`
+      :host {
+        display: block;
+        background-color: var(--hb-section-background);
+        color: var(--hb-color-on-surface);
+      }
 
-    .content {
-      position: relative;
-      font-size: 15px;
-      line-height: 1.87;
-    }
+      .sessions {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+        gap: var(--hb-space-4);
+      }
 
-    .photo {
-      margin-right: 16px;
-      --lazy-image-width: 96px;
-      --lazy-image-height: 96px;
-      --lazy-image-fit: cover;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-      overflow: hidden;
-      border-radius: 50%;
-      background-color: var(--contrast-additional-background-color);
-      transform: translateZ(0);
-      flex-shrink: 0;
-    }
+      .sessions > li {
+        display: grid;
+      }
+    `,
+  ];
 
-    .name {
-      line-height: 1.2;
-      flex: 1;
-      flex-basis: 1px;
-    }
-
-    .subtitle {
-      font-size: 16px;
-      color: var(--secondary-text-color);
-    }
-
-    .badge:not(:last-of-type)::after {
-      margin-left: -4px;
-      content: ',';
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-
-    .star-rating {
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    .meta-info {
-      line-height: 1.6;
-    }
-
-    .description {
-      margin: 24px 0 32px;
-      max-width: 700px;
-    }
-
-    .action {
-      margin-right: 16px;
-      color: var(--secondary-text-color);
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .action hoverboard-icon {
-      margin-right: 4px;
-      width: 18px;
-      height: 18px;
-    }
-
-    .additional-sections {
-      margin-top: 32px;
-    }
-
-    .actions,
-    .header-content,
-    .section-content {
-      display: flex;
-    }
-
-    .header-content,
-    .section-content {
-      align-items: center;
-    }
-
-    .section {
-      margin-top: 16px;
-      display: block;
-      color: var(--primary-text-color);
-      cursor: pointer;
-    }
-
-    .section-details {
-      flex: 1;
-      flex-basis: 1px;
-    }
-
-    .section-photo {
-      margin-right: 16px;
-      width: 48px;
-      height: 48px;
-      background-color: var(--secondary-background-color);
-      border-radius: 50%;
-      overflow: hidden;
-      transform: translateZ(0);
-    }
-
-    .section-primary-text {
-      margin-bottom: 4px;
-      line-height: 1.2;
-    }
-
-    .section-secondary-text {
-      font-size: 12px;
-      line-height: 1;
-    }
-
-    .progress {
-      width: 100%;
-      --md-linear-progress-active-indicator-color: var(--default-primary-color);
-      --md-linear-progress-track-color: var(--default-primary-color);
-    }
-  `;
-
-  @property({ type: Object })
+  @property({ attribute: false })
   accessor speaker: SpeakerWithTags | undefined;
   @fromStore((state) => selectSpeakersState(state))
   accessor speakers!: SpeakersState;
-
   @property({ attribute: false })
   accessor speakerId: string | undefined;
 
+  private previousSpeaker: PreviousSpeaker | undefined;
+
   // Runs on the server too, so the page renders the speaker. Side effects wait for `updated`.
-  override willUpdate(changed: Map<string, unknown>) {
+  override willUpdate(changed: PropertyValues<this>) {
     if ((changed.has('speakers') || changed.has('speakerId')) && this.isLoaded) {
       this.speaker = selectSpeaker(store.getState(), this.speakerId!);
+      this.previousSpeaker = __HB_FEATURES__.previousSpeakers
+        ? selectPreviousSpeaker(store.getState(), this.speakerId!)
+        : undefined;
     }
   }
 
-  override updated(changed: Map<string, unknown>) {
+  override updated(changed: PropertyValues<this>) {
     if ((changed.has('speakers') || changed.has('speakerId')) && this.isLoaded) {
       if (!this.speaker) {
         goto('/404');
@@ -202,157 +95,120 @@ export class SpeakerPage extends ThemedElement {
     return !!this.speakerId && this.speakers instanceof Success;
   }
 
-  private get contentLoaderVisibility() {
-    return !!this.speaker;
-  }
-
-  private get subtitle() {
-    return [this.speaker?.country, this.speaker?.pronouns].filter(Boolean).join(' • ');
-  }
-
-  private get companyInfo() {
-    return [this.speaker?.title, this.speaker?.company].filter(Boolean).join(', ');
-  }
-
-  private get sessions(): SpeakerSessionSummary[] {
-    return (this.speaker as SpeakerWithSessions | undefined)?.sessions ?? [];
-  }
-
-  private getVariableColor(value: string) {
-    return variableColor(value);
-  }
-
-  private sessionUrl(id: string) {
-    return sessionPath(id);
-  }
-
   override render() {
-    const speaker = this.speaker;
-    const sessions = this.sessions;
+    const speaker = this.speaker as SpeakerWithSessions | undefined;
+    const job = [speaker?.title, speaker?.company].filter(Boolean).join(', ');
+    const details = [job, speaker?.country, speaker?.pronouns].filter(Boolean).join(' · ');
 
     return html`
-      <simple-hero page="speakers">
-        <div class="dialog-container header-content">
-          <img
-            loading="lazy"
-            decoding="async"
-            class="photo"
-            src=${speaker?.photoUrl ?? ''}
-            alt=${speaker?.name ?? ''}
-          />
+      <hero-block tone="${PAGE_TONES.speakers}">
+        <a class="back" href="/speakers">
+          <hoverboard-icon name="arrow-left"></hoverboard-icon>
+          ${msg('All speakers', { id: 'pages.speaker.all-speakers' })}
+        </a>
+        <div class="profile">
+          ${
+            speaker
+              ? html`<img
+                  class="photo"
+                  src="${speaker.photoUrl}"
+                  alt=""
+                  width="160"
+                  height="160"
+                  style="view-transition-name: ${photoTransitionName('speaker', speaker.id)}"
+                />`
+              : nothing
+          }
           <div>
-            <h2 class="name">${speaker?.name ?? ''}</h2>
-            <div class="subtitle">${this.subtitle}</div>
+            <h1 class="hero-title">${speaker?.name ?? ''}</h1>
+            ${details ? html`<p class="details">${details}</p>` : nothing}
+            ${
+              speaker?.badges?.length
+                ? html`<ul
+                    class="badges"
+                    aria-label="${msg('Badges', { id: 'pages.speaker.badges' })}"
+                  >
+                    ${speaker.badges.map(
+                      (badge) => html`
+                        <li>
+                          <hb-chip
+                            href="${badge.link}"
+                            style="${styleMap(tagChipStyle(badge.name))}"
+                          >
+                            ${badge.description}
+                          </hb-chip>
+                        </li>
+                      `,
+                    )}
+                  </ul>`
+                : nothing
+            }
           </div>
         </div>
-      </simple-hero>
+      </hero-block>
 
-      <md-linear-progress
-        class="progress"
-        indeterminate
-        ?hidden=${this.contentLoaderVisibility}
-      ></md-linear-progress>
+      <hb-progress ?hidden="${!!speaker}"></hb-progress>
 
-      <content-loader
-        class="container"
-        card-padding="32px"
-        card-height="400px"
-        horizontal-position="50%"
-        border-radius="4px"
-        box-shadow="var(--box-shadow)"
-        items-count="1"
-        ?hidden=${this.contentLoaderVisibility}
-      ></content-loader>
+      ${speaker ? this.renderContent(speaker) : nothing}
+    `;
+  }
 
-      <div class="container content">
-        <h3 class="meta-info">${this.companyInfo}</h3>
+  private renderContent(speaker: SpeakerWithSessions) {
+    const sessions = speaker.sessions ?? [];
+    const previousTalks = Object.keys(this.previousSpeaker?.sessions ?? {}).length > 0;
+    return html`
+      <div class="inner">
         ${
-          speaker?.badges?.length
-            ? html`
-                <h3 class="meta-info">
-                  ${speaker.badges.map(
-                    (badge) => html`
-                      <a
-                        class="badge"
-                        href=${badge.link}
+          speaker.socials?.length
+            ? html`<ul aria-label="${msg('Social links', { id: 'pages.speaker.socials' })}">
+                ${speaker.socials.map(
+                  (social) => html`
+                    <li>
+                      <hb-icon-button
+                        variant="tonal"
+                        href="${social.link}"
                         target="_blank"
-                        rel="noopener noreferrer"
-                        title=${badge.description}
+                        label="${social.name}"
                       >
-                        ${badge.description}
-                      </a>
-                    `,
-                  )}
-                </h3>
-              `
+                        <hoverboard-icon name="${social.icon}"></hoverboard-icon>
+                      </hb-icon-button>
+                    </li>
+                  `,
+                )}
+              </ul>`
             : nothing
         }
 
-        <short-markdown class="description" .content=${speaker?.bio ?? ''}></short-markdown>
-
-        <div class="actions">
-          ${speaker?.socials?.map(
-            (social) => html`
-              <a class="action" href=${social.link} target="_blank" rel="noopener noreferrer">
-                <hoverboard-icon name=${social.icon}></hoverboard-icon>
-              </a>
-            `,
-          )}
-        </div>
+        <short-markdown class="bio" .content="${speaker.bio ?? ''}"></short-markdown>
 
         ${
           sessions.length
             ? html`
-                <div class="additional-sections">
-                  <h3>${msg('Sessions', { id: 'common.sessions' })}</h3>
-
+                <h2 class="section-title">${msg('Sessions', { id: 'common.sessions' })}</h2>
+                <ul class="sessions">
                   ${sessions.map(
-                    (session) => html`
-                      <a href=${this.sessionUrl(session.id)} class="section">
-                        <div class="section-content">
-                          <div class="section-details">
-                            <div class="section-primary-text">${session.title}</div>
-                            ${
-                              session.dateReadable
-                                ? html`<div class="section-secondary-text">
-                                    ${session.dateReadable}, ${session.startTime} -
-                                    ${session.endTime}
-                                  </div>`
-                                : nothing
-                            }
-                            ${
-                              session.track?.title
-                                ? html`<div class="section-secondary-text">
-                                    ${session.track.title}
-                                  </div>`
-                                : nothing
-                            }
-                            ${
-                              session.tags?.length
-                                ? html`<div class="tags">
-                                    ${session.tags.map(
-                                      (tag) =>
-                                        html`<span
-                                          class="tag"
-                                          style="color: ${this.getVariableColor(tag)}"
-                                          >${tag}</span
-                                        >`,
-                                    )}
-                                  </div>`
-                                : nothing
-                            }
-                          </div>
-                        </div>
-                      </a>
-                    `,
+                    (session) =>
+                      html`<li>
+                        <session-element
+                          .session="${session as unknown as Session}"
+                        ></session-element>
+                      </li>`,
                   )}
-                </div>
+                </ul>
+              `
+            : nothing
+        }
+        ${
+          previousTalks
+            ? html`
+                <h2 class="section-title">
+                  ${msg('Talks in earlier years', { id: 'pages.speaker.previous-talks' })}
+                </h2>
+                <previous-talks .sessions="${this.previousSpeaker!.sessions}"></previous-talks>
               `
             : nothing
         }
       </div>
-
-      ${__HB_FEATURES__.previousSpeakers ? html`<previous-speakers-block></previous-speakers-block>` : nothing}
     `;
   }
 }

@@ -52,11 +52,39 @@ export interface MarkdownHeading {
   text: string;
 }
 
+const ENTITIES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" };
+
+// A heading's HTML as text. Its `raw` text drops characters such as `&`.
+const plainText = (html: string) =>
+  html
+    .replace(/<[^>]*>/g, '')
+    .replace(/&(amp|lt|gt|quot|#39);/g, (_, name: string) => ENTITIES[name]!);
+
 /** Like `renderMarkdown()`, with the headings and the ids it gave them. */
 export const renderMarkdownWithHeadings = (
   content: string,
 ): { html: string; headings: MarkdownHeading[] } => {
   const html = renderMarkdown(content);
-  const headings = getHeadingList().map(({ id, level, raw }) => ({ id, level, text: raw }));
+  const headings = getHeadingList().map(({ id, level, text }) => ({
+    id,
+    level,
+    text: plainText(text),
+  }));
   return { html, headings };
 };
+
+/**
+ * Turns each `###` question and the content up to the next heading into a `<details>` disclosure,
+ * with the heading in its `<summary>`, so a long FAQ is easy to scan. Takes `renderMarkdown()`
+ * output, where headings are top-level elements.
+ */
+export const withDisclosures = (html: string): string =>
+  html
+    .split(/(?=<h[23][\s>])/)
+    .map((chunk) => {
+      const question = /^(<h3[\s>][\s\S]*?<\/h3>)([\s\S]*)$/.exec(chunk);
+      return question
+        ? `<details><summary>${question[1]}</summary><div class="answer">${question[2]}</div></details>`
+        : chunk;
+    })
+    .join('');

@@ -40,20 +40,25 @@ describe('latest-posts-block', () => {
     expect(element.posts).toBeInstanceOf(Pending);
   });
 
-  it('renders up to four latest posts', async () => {
+  it('renders up to three latest posts as cards', async () => {
     const { element, shadowRoot } = await fixture<LatestPostsBlock>(
       html`<latest-posts-block data-testid="block"></latest-posts-block>`,
     );
-    element.posts = new Success(posts);
+    element.posts = new Success([
+      ...posts,
+      { ...posts[0]!, id: 'post-3' },
+      { ...posts[0]!, id: 'post-4' },
+    ]);
     await element.updateComplete;
 
     expect(shadowRoot).toHaveTextContent('The latest news');
-    const links = shadowRoot.querySelectorAll('a.post');
-    expect(links).toHaveLength(2);
-    expect(links[0]).toHaveAttribute('href', '/blog/post-1');
-    expect(links[1]).toHaveAttribute('href', '/blog/post-2');
+    const cards = shadowRoot.querySelectorAll('hb-card');
+    expect(cards).toHaveLength(3);
+    expect(cards[0]).toHaveAttribute('href', '/blog/post-1');
+    expect(cards[0]).toHaveAttribute('label', 'First post');
+    expect(cards[1]).toHaveAttribute('href', '/blog/post-2');
+    expect(cards[0]).toHaveTextContent('Jan 1, 2024');
     expect(shadowRoot.querySelector('.cta-button')).toHaveTextContent('View all stories');
-    expect(shadowRoot.querySelector('.cta-button')).toHaveAttribute('trailing-icon');
-    expect(shadowRoot.querySelector('.cta-button hoverboard-icon')).toHaveAttribute('slot', 'icon');
+    expect(shadowRoot.querySelector('.cta-button')).toHaveAttribute('href', '/blog');
   });
 });

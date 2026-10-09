@@ -21,10 +21,11 @@ describe('hoverboard-icon', () => {
     'linkedin',
     'gde',
     'gdg',
+    'wtm',
     'google',
     'website',
-    'checked',
     'up',
+    'checked',
     'bookmark-check',
     'bookmark-plus',
     'insert-comment',
@@ -44,27 +45,51 @@ describe('hoverboard-icon', () => {
     'presentation',
     'movie',
     'ticket',
-    'achievement',
     'arrow-left',
     'calendar',
     'share',
     'coffee-break',
-    'document',
     'lunch',
     'location',
-    'microphone',
-    'open-in-new',
     'opening',
     'party',
     'people',
     'registration',
-    'tracks',
-    'work',
-    'wtm',
-  ])('renders the %s social icon', async (name) => {
+    'density-small',
+    'density-medium',
+    'density-large',
+  ])('renders the %s icon', async (name) => {
     const { shadowRoot } = await fixture(html`<hoverboard-icon name="${name}"></hoverboard-icon>`);
 
     expect(shadowRoot.querySelector('svg')).toBeInTheDocument();
+  });
+
+  it('has every icon that a component names', async () => {
+    const sources = import.meta.glob<string>(['../../**/*.ts', '!../../**/*.test.ts'], {
+      query: '?raw',
+      import: 'default',
+      eager: true,
+    });
+    // A literal name, or the quoted names in an expression such as `${open ? 'close' : 'menu'}`.
+    const names = new Set(
+      Object.values(sources).flatMap((source) =>
+        [...source.matchAll(/<hoverboard-icon[^>]*?\sname="([^"]+)"/g)].flatMap(([, value]) =>
+          value!.startsWith('${')
+            ? [...value!.matchAll(/'([a-z-]+)'/g)].map(([, name]) => name!)
+            : [value!],
+        ),
+      ),
+    );
+    expect(names).toContain('up');
+
+    const missing = [];
+    for (const name of names) {
+      const { shadowRoot } = await fixture(
+        html`<hoverboard-icon name="${name}"></hoverboard-icon>`,
+      );
+      if (!shadowRoot.querySelector('svg')) missing.push(name);
+    }
+    expect(missing).toEqual([]);
   });
 
   it('renders nothing for an unknown icon name', async () => {

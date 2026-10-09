@@ -1,191 +1,114 @@
-import '@material/web/button/outlined-button.js';
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import type { Photo } from '../../models/photo';
-import { type GalleryState, selectGallery } from '../../store/gallery';
 import { galleryBlock } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
+import type { Photo } from '../../models/photo';
+import { type GalleryState, selectGallery } from '../../store/gallery';
+import { band } from '../../styles/band';
+import '../shared/hoverboard-icon';
 import { ThemedElement } from '../themed-element';
+import '../ui/hb-button';
 
+/** Up to seven photos in a bento grid, and a link to the full gallery. */
 @customElement('gallery-block')
 export class GalleryBlock extends ThemedElement {
-  static override styles = css`
-    .photos-grid {
-      margin: 64px auto;
-      display: grid;
-      width: 100%;
-      min-height: 400px;
-      height: calc(100vh - 40px);
-      max-height: 750px;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(5, 1fr);
-      grid-gap: 2px;
-    }
-
-    .grid-item {
-      --lazy-image-fit: cover;
-      background-color: var(--secondary-background-color);
-    }
-
-    .grid-item:first-child {
-      grid-area: 1 / 1 / 3 / 4;
-    }
-
-    .grid-item:nth-child(2) {
-      grid-area: 3 / 1 / 5 / 3;
-    }
-
-    .grid-item:nth-child(3) {
-      grid-area: 3 / 3 / 3 / 3;
-    }
-
-    .grid-item:nth-child(4) {
-      grid-area: 4 / 3 / 4 / 3;
-    }
-
-    .grid-item:nth-child(5) {
-      grid-area: 5 / 1 / 5 / 1;
-    }
-
-    .grid-item:nth-child(6),
-    .grid-item:nth-child(7),
-    .grid-item:nth-child(8) {
-      display: none;
-    }
-
-    .gallery-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 16px;
-      background-color: var(--default-primary-color);
-      color: var(--text-primary-color);
-      z-index: 1;
-      grid-area: 5 / 2 / 5 / 4;
-    }
-
-    md-outlined-button {
-      margin-top: 16px;
-      --md-outlined-button-label-text-color: var(--text-primary-color);
-      --md-outlined-button-hover-label-text-color: var(--text-primary-color);
-      --md-outlined-button-outline-color: var(--text-primary-color);
-    }
-
-    @media (min-width: 640px) {
-      .photos-grid {
-        height: calc(100vh - 64px);
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(3, 1fr);
+  static override styles = [
+    band,
+    css`
+      .photos {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 9rem;
+        grid-auto-flow: dense;
+        gap: var(--hb-space-3);
       }
 
-      .grid-item:first-child {
-        grid-area: 1 / 1 / 1 / 3;
+      .photos li:first-child {
+        grid-row: span 2;
+        grid-column: span 2;
       }
 
-      .grid-item:nth-child(2) {
-        grid-area: 1 / 3 / 2 / 5;
-      }
-
-      .grid-item:nth-child(3) {
-        grid-area: 1 / 5 / 3 / 5;
-      }
-
-      .grid-item:nth-child(4) {
-        grid-area: 2 / 1 / 2 / 1;
-      }
-
-      .grid-item:nth-child(5) {
-        grid-area: 2 / 2 / 2 / 2;
-      }
-
-      .grid-item:nth-child(6) {
-        grid-area: 3 / 1 / 3 / 3;
+      .photo {
         display: block;
+        inline-size: 100%;
+        block-size: 100%;
+        border: var(--hb-border-width) solid var(--hb-border-color);
+        border-radius: var(--hb-radius-m);
+        background-color: var(--hb-color-surface-container);
+        object-fit: cover;
       }
 
-      .grid-item:nth-child(7) {
-        grid-area: 3 / 3 / 3 / 3;
-        display: block;
-      }
+      @container (width >= 720px) {
+        .photos {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          grid-auto-rows: 11rem;
+          gap: var(--hb-space-4);
+        }
 
-      .grid-item:nth-child(8) {
-        grid-area: 3 / 4 / 3 / 6;
-        display: block;
-      }
+        .photos li:nth-child(4) {
+          grid-row: span 2;
+        }
 
-      .gallery-info {
-        padding: 24px;
-        grid-area: 2 / 3 / 2 / 5;
+        .photos li:nth-child(6) {
+          grid-column: span 2;
+        }
       }
-    }
-  `;
+    `,
+  ];
 
   @fromStore((state) => selectGallery(state))
   accessor gallery!: GalleryState;
 
   override render() {
     return html`
-      <div class="photos-grid">
-        ${this.pending ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>` : ''}
+      <div class="inner">
+        <div class="band-header">
+          <div>
+            <h2 class="band-title">${galleryBlock.title}</h2>
+            <p class="band-lede">${galleryBlock.description}</p>
+          </div>
+          <hb-button
+            variant="outlined"
+            href="${galleryBlock.callToAction.link}"
+            target="_blank"
+            trailing-icon
+          >
+            ${msg('See all photos', { id: 'home.gallery-block.cta' })}
+            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+          </hb-button>
+        </div>
         ${
-          this.failure
+          this.gallery instanceof Pending
+            ? html`<p>${msg('Loading...', { id: 'common.loading' })}</p>`
+            : nothing
+        }
+        ${
+          this.gallery instanceof Failure
             ? html`<p>${msg('Error loading gallery.', { id: 'home.gallery-block.error' })}</p>`
-            : ''
+            : nothing
         }
-        ${this.photos.map(
-          (photo) =>
-            html`<img
-              loading="lazy"
-              decoding="async"
-              class="grid-item"
-              src="${photo.url}"
-              alt="${msg('Gallery photo', { id: 'home.gallery-block.photo-alt' })}"
-            />`,
-        )}
-        ${
-          this.success
-            ? html`
-                <div class="gallery-info">
-                  <div>
-                    <h2>${galleryBlock.title}</h2>
-                    <p>${galleryBlock.description}</p>
-                  </div>
-                  <a
-                    href="${galleryBlock.callToAction.link}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <md-outlined-button
-                      >${msg('See all photos', { id: 'home.gallery-block.cta' })}</md-outlined-button
-                    >
-                  </a>
-                </div>
-              `
-            : ''
-        }
+        <ul class="photos plain">
+          ${this.photos.map(
+            (photo) => html`
+              <li>
+                <img
+                  class="photo"
+                  src="${photo.url}"
+                  alt="${msg('Gallery photo', { id: 'home.gallery-block.photo-alt' })}"
+                  loading="lazy"
+                />
+              </li>
+            `,
+          )}
+        </ul>
       </div>
     `;
   }
 
-  private get pending() {
-    return this.gallery instanceof Pending;
-  }
-
-  private get failure() {
-    return this.gallery instanceof Failure;
-  }
-
-  private get success() {
-    return this.gallery instanceof Success;
-  }
-
   private get photos(): Photo[] {
-    if (this.gallery instanceof Success) {
-      return this.gallery.data;
-    }
-    return [];
+    return this.gallery instanceof Success ? this.gallery.data.slice(0, 7) : [];
   }
 }
 

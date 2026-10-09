@@ -21,7 +21,7 @@ describe('share-button', () => {
     setShare(undefined);
     const { shadowRoot } = await fixture<ShareButton>(html`<share-button></share-button>`);
 
-    expect(shadowRoot.querySelector('md-outlined-button')).toBeNull();
+    expect(shadowRoot.querySelector('hb-button')).toBeNull();
   });
 
   it('shares the data and current url when clicked', async () => {
@@ -31,7 +31,7 @@ describe('share-button', () => {
       html`<share-button .data="${{ title: 'A talk', text: 'About' }}"></share-button>`,
     );
 
-    fireEvent.click(shadowRoot.querySelector('md-outlined-button')!);
+    fireEvent.click(shadowRoot.querySelector('hb-button')!);
 
     expect(share).toHaveBeenCalledWith({
       url: window.location.href,
@@ -45,7 +45,7 @@ describe('share-button', () => {
     setShare(share);
     const { shadowRoot } = await fixture<ShareButton>(html`<share-button></share-button>`);
 
-    fireEvent.click(shadowRoot.querySelector('md-outlined-button')!);
+    fireEvent.click(shadowRoot.querySelector('hb-button')!);
     await Promise.resolve();
 
     expect(share).toHaveBeenCalled();

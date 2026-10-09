@@ -44,10 +44,26 @@ describe('gallery-block', () => {
 
     expect(within(shadowRootForWithin).getAllByAltText('Gallery photo')).toHaveLength(2);
     expect(shadowRoot).toHaveTextContent(galleryBlock.title);
-    expect(shadowRoot.querySelector('.gallery-info a')).toHaveAttribute(
+    expect(shadowRoot.querySelector('.band-header hb-button')).toHaveAttribute(
       'href',
       galleryBlock.callToAction.link,
     );
+  });
+
+  it('shows at most seven photos', async () => {
+    const { element, shadowRoot } = await fixture<GalleryBlock>(
+      html`<gallery-block></gallery-block>`,
+    );
+    element.gallery = new Success(
+      Array.from({ length: 10 }, (_, index) => ({
+        id: `photo-${index}`,
+        order: String(index),
+        url: `https://example.com/photo-${index}.jpg`,
+      })),
+    );
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelectorAll('.photo')).toHaveLength(7);
   });
 
   it('triggers the fetch and starts in the pending state', async () => {

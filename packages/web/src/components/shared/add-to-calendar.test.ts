@@ -27,7 +27,7 @@ describe('add-to-calendar', () => {
     );
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('md-outlined-button')).toBeNull();
+    expect(shadowRoot.querySelector('hb-menu')).toBeNull();
   });
 
   it('links to Google Calendar and downloads an ics for Apple Calendar', async () => {
@@ -37,8 +37,11 @@ describe('add-to-calendar', () => {
     );
     await element.updateComplete;
 
-    const [google, apple] = Array.from(shadowRoot.querySelectorAll('md-menu-item'));
+    const [google, apple] = Array.from(
+      shadowRoot.querySelectorAll<HTMLElement>('hb-menu [role="menuitem"]'),
+    );
     expect(google).toHaveAttribute('href', expect.stringContaining('calendar.google.com'));
+    expect(google).toHaveAttribute('rel', 'noopener noreferrer');
 
     apple!.click();
 
@@ -54,7 +57,7 @@ describe('add-to-calendar', () => {
       html`<add-to-calendar .session="${session}"></add-to-calendar>`,
     );
 
-    shadowRoot.querySelectorAll('md-menu-item')[1]!.click();
+    shadowRoot.querySelectorAll<HTMLElement>('[role="menuitem"]')[1]!.click();
 
     expect(download).toHaveBeenCalledWith(
       expect.objectContaining({

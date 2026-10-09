@@ -195,81 +195,55 @@
       "properties": {
         "name": {
           "description": "The built-in theme.",
-          "enum": ["default"]
+          "enum": ["festival", "spotlight", "paper", "glass"]
+        },
+        "colorScheme": {
+          "description": "system follows the visitor's browser setting. light or dark locks the site to one scheme and hides the footer toggle.",
+          "enum": ["system", "light", "dark"]
+        },
+        "density": {
+          "description": "Spacing: compact, default or roomy. Type and touch targets keep their size.",
+          "enum": ["compact", "default", "roomy"]
+        },
+        "decorations": {
+          "description": "Section patterns, rotated stickers, confetti and the hero illustration.",
+          "type": "boolean"
         },
         "colors": {
-          "description": "Overrides for colors of the theme.",
+          "description": "Overrides for colors of the theme's light scheme. A color without a darkColors value gets a dark version with the same hue.",
+          "$ref": "#/$defs/themeColors"
+        },
+        "darkColors": {
+          "description": "Overrides for colors of the theme's dark scheme.",
+          "$ref": "#/$defs/themeColors"
+        },
+        "fonts": {
+          "description": "Overrides for the theme's fonts. Hoverboard assumes the site has the right to use them.",
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "primary": {
-              "$ref": "#/$defs/color"
+            "display": {
+              "type": "object",
+              "$ref": "#/$defs/font",
+              "properties": {
+                "scale": {
+                  "description": "Multiplies the display type sizes, for very wide or narrow fonts.",
+                  "type": "number",
+                  "minimum": 0.75,
+                  "maximum": 1.25
+                }
+              },
+              "unevaluatedProperties": false
             },
-            "primaryDark": {
-              "$ref": "#/$defs/color"
+            "body": {
+              "type": "object",
+              "$ref": "#/$defs/font",
+              "unevaluatedProperties": false
             },
-            "focused": {
-              "$ref": "#/$defs/color"
-            },
-            "accent": {
-              "$ref": "#/$defs/color"
-            },
-            "onPrimary": {
-              "$ref": "#/$defs/color"
-            },
-            "background": {
-              "$ref": "#/$defs/color"
-            },
-            "defaultBackground": {
-              "$ref": "#/$defs/color"
-            },
-            "secondaryBackground": {
-              "$ref": "#/$defs/color"
-            },
-            "additionalBackground": {
-              "$ref": "#/$defs/color"
-            },
-            "contrastAdditionalBackground": {
-              "$ref": "#/$defs/color"
-            },
-            "text": {
-              "$ref": "#/$defs/color"
-            },
-            "secondaryText": {
-              "$ref": "#/$defs/color"
-            },
-            "disabledText": {
-              "$ref": "#/$defs/color"
-            },
-            "divider": {
-              "$ref": "#/$defs/color"
-            },
-            "borderLight": {
-              "$ref": "#/$defs/color"
-            },
-            "footerBackground": {
-              "$ref": "#/$defs/color"
-            },
-            "footerText": {
-              "$ref": "#/$defs/color"
-            },
-            "error": {
-              "$ref": "#/$defs/color"
-            },
-            "snackbarBackground": {
-              "$ref": "#/$defs/color"
-            },
-            "snackbarText": {
-              "$ref": "#/$defs/color"
-            },
-            "starRating": {
-              "$ref": "#/$defs/color"
-            },
-            "twitter": {
-              "$ref": "#/$defs/color"
-            },
-            "facebook": {
-              "$ref": "#/$defs/color"
+            "mono": {
+              "type": "object",
+              "$ref": "#/$defs/font",
+              "unevaluatedProperties": false
             }
           }
         },
@@ -289,7 +263,7 @@
       "required": [],
       "properties": {
         "googleMapsApiKey": {
-          "description": "A browser key, restricted by HTTP referrer to the site's domains. Required when the map feature is on.",
+          "description": "A browser key, restricted by HTTP referrer to the site's domains. Without one, the venue block shows directions but no map.",
           "type": "string"
         }
       }
@@ -336,12 +310,10 @@
       "description": "The top block of the home page. The text under each page title is heroDescriptions in content/resources.json.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["home"],
       "properties": {
         "home": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["background"],
           "properties": {
             "background": {
               "type": "object",
@@ -349,16 +321,22 @@
               "required": ["image"],
               "properties": {
                 "image": {
+                  "description": "A photo behind the hero text, in packages/web/public or a URL. The hero darkens it so the text stays readable.",
                   "type": "string"
                 }
               }
+            },
+            "illustration": {
+              "description": "An SVG in packages/web/public, such as a line drawing of the city, shown next to the hero text. Drawn in currentColor, it follows the theme.",
+              "type": "string",
+              "pattern": "\\.svg$"
             }
           }
         }
       }
     },
     "features": {
-      "description": "Turns site features on or off. Every feature is on by default, except forkMe.",
+      "description": "Turns site features on or off. Every feature is on by default, except demo and forkMe.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -366,6 +344,10 @@
           "type": "boolean"
         },
         "codeOfConduct": {
+          "type": "boolean"
+        },
+        "demo": {
+          "description": "A banner across the top that lets visitors try the themes, spacing and brightness. For demo sites.",
           "type": "boolean"
         },
         "faq": {
@@ -451,6 +433,103 @@
       "description": "A hex color, for example #673ab7.",
       "type": "string",
       "pattern": "^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+    },
+    "opaqueColor": {
+      "description": "A hex color without transparency, for example #3557e6.",
+      "type": "string",
+      "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+    },
+    "themeColors": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "primary": { "$ref": "#/$defs/opaqueColor" },
+        "onPrimary": { "$ref": "#/$defs/opaqueColor" },
+        "primaryContainer": { "$ref": "#/$defs/opaqueColor" },
+        "onPrimaryContainer": { "$ref": "#/$defs/opaqueColor" },
+        "secondary": { "$ref": "#/$defs/opaqueColor" },
+        "onSecondary": { "$ref": "#/$defs/opaqueColor" },
+        "surface": { "$ref": "#/$defs/opaqueColor" },
+        "surfaceDim": { "$ref": "#/$defs/opaqueColor" },
+        "surfaceBright": { "$ref": "#/$defs/opaqueColor" },
+        "surfaceContainer": { "$ref": "#/$defs/opaqueColor" },
+        "surfaceContainerHigh": { "$ref": "#/$defs/opaqueColor" },
+        "onSurface": { "$ref": "#/$defs/opaqueColor" },
+        "onSurfaceVariant": { "$ref": "#/$defs/opaqueColor" },
+        "outline": { "$ref": "#/$defs/opaqueColor" },
+        "outlineVariant": { "$ref": "#/$defs/opaqueColor" },
+        "ink": { "$ref": "#/$defs/opaqueColor" },
+        "focus": { "$ref": "#/$defs/opaqueColor" },
+        "error": { "$ref": "#/$defs/opaqueColor" },
+        "onError": { "$ref": "#/$defs/opaqueColor" },
+        "success": { "$ref": "#/$defs/opaqueColor" },
+        "scrim": {
+          "description": "The overlay behind dialogs and over hero photos. It may be transparent.",
+          "$ref": "#/$defs/color"
+        },
+        "accent1": { "$ref": "#/$defs/opaqueColor" },
+        "accent1Container": { "$ref": "#/$defs/opaqueColor" },
+        "onAccent1Container": { "$ref": "#/$defs/opaqueColor" },
+        "accent2": { "$ref": "#/$defs/opaqueColor" },
+        "accent2Container": { "$ref": "#/$defs/opaqueColor" },
+        "onAccent2Container": { "$ref": "#/$defs/opaqueColor" },
+        "accent3": { "$ref": "#/$defs/opaqueColor" },
+        "accent3Container": { "$ref": "#/$defs/opaqueColor" },
+        "onAccent3Container": { "$ref": "#/$defs/opaqueColor" },
+        "accent4": { "$ref": "#/$defs/opaqueColor" },
+        "accent4Container": { "$ref": "#/$defs/opaqueColor" },
+        "onAccent4Container": { "$ref": "#/$defs/opaqueColor" }
+      }
+    },
+    "font": {
+      "description": "Local files in packages/config, a font service's stylesheet, or only a family to use installed fonts.",
+      "type": "object",
+      "required": ["family"],
+      "properties": {
+        "family": {
+          "description": "The CSS font family. With neither files nor a stylesheet, a whole font stack such as \"ui-monospace, Menlo, monospace\".",
+          "type": "string",
+          "minLength": 1
+        },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/fontFile" }
+        },
+        "stylesheet": {
+          "description": "An https URL of a stylesheet that defines the family, such as an Adobe Fonts kit.",
+          "type": "string",
+          "pattern": "^https://"
+        }
+      },
+      "not": { "required": ["files", "stylesheet"] }
+    },
+    "fontFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["src", "weight"],
+      "properties": {
+        "src": {
+          "description": "A woff2 or woff file, as a path in packages/config, for example fonts/brand.woff2.",
+          "type": "string",
+          "pattern": "^(?!/)(?!.*\\.\\./).+\\.woff2?$"
+        },
+        "weight": {
+          "description": "A weight such as 400, or a range such as \"300 900\" for a variable font.",
+          "oneOf": [
+            { "type": "integer", "minimum": 1, "maximum": 1000 },
+            { "type": "string", "pattern": "^\\d{1,4} \\d{1,4}$" }
+          ]
+        },
+        "style": {
+          "enum": ["normal", "italic"]
+        },
+        "unicodeRange": {
+          "description": "The characters this file covers, for example U+0000-00FF, U+0400-045F.",
+          "type": "string",
+          "pattern": "^U\\+[0-9A-Fa-f?]{1,6}(-[0-9A-Fa-f]{1,6})?( *, *U\\+[0-9A-Fa-f?]{1,6}(-[0-9A-Fa-f]{1,6})?)*$"
+        }
+      }
     },
     "colors": {
       "type": "object",
