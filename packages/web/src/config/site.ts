@@ -1,6 +1,7 @@
 // The only client entry point for site config. Read config from here, never from the data files.
 
 import {
+  build,
   contentTranslations,
   heroIllustration,
   resources,
@@ -13,6 +14,8 @@ import { deepMerge } from './merge';
 export const { basepath, heroSettings, image, organizer, url } = settings;
 /** The site's own hero illustration's markup, from `heroSettings.home.illustration`. */
 export { heroIllustration };
+/** The commit and time of the build. */
+export { build };
 export const shortName = settings.shortName;
 /** `system` lets visitors pick a scheme in the footer. `light` and `dark` lock the site to one. */
 export const colorScheme = settings.theme.colorScheme as 'system' | 'light' | 'dark';

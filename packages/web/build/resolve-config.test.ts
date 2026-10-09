@@ -609,7 +609,10 @@ describe('siteModule', () => {
     ...resolveConfig({ paths: repoPaths, nodeEnv: 'production' }),
     contentTranslations: { es: { title: 'DevFest en español' } },
   };
-  const plugin = siteModule(config, { siteDir: repoPaths.site });
+  const plugin = siteModule(config, {
+    siteDir: repoPaths.site,
+    build: { sha: 'abc1234', time: '2027-10-15T09:00:00.000Z' },
+  });
   const resolveId = plugin.resolveId as (id: string) => string | undefined;
   const load = plugin.load as (id: string) => Promise<string | undefined>;
 
@@ -621,6 +624,9 @@ describe('siteModule', () => {
       'export const contentTranslations = {"es": () => import("virtual:hoverboard/content/es")};',
     );
     expect(code).toContain('export const heroIllustration = undefined;');
+    expect(code).toContain(
+      'export const build = {"sha":"abc1234","time":"2027-10-15T09:00:00.000Z"};',
+    );
     expect(await load(resolveId('virtual:hoverboard/content/es')!)).toBe(
       'export default {"title":"DevFest en español"};\n',
     );

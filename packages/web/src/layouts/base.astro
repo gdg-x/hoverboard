@@ -2,13 +2,12 @@
 import { ClientRouter } from 'astro:transitions';
 import { fontCss, fontStylesheets } from 'virtual:hoverboard/fonts';
 import { theme, themeCss } from 'virtual:hoverboard/layout';
-import { resources, site } from 'virtual:hoverboard/site';
+import { resources, site, build } from 'virtual:hoverboard/site';
 import '../styles/base.css';
 import { FooterBlock } from '../components/footer/footer-block';
 import { AppHeader, demoBanner } from '../components/shell/app-header';
 import { AppOverlays } from '../components/shell/app-overlays';
 import { loadContent } from '../data/content';
-import { BUILD_ID } from '../data/build';
 import '../data/markdown';
 import { seedPage } from '../data/page';
 import { openGraphLocale } from '../data/structured-data';
@@ -79,7 +78,7 @@ await demoBanner;
     <meta content={resources.keywords} name="keywords" />
     <meta content={site.organizer.name} name="author" />
     <meta content="Project Hoverboard" name="generator" />
-    <meta content={BUILD_ID} name={BUILD_META} />
+    <meta content={build.time} name={BUILD_META} />
 
     <title>{title}</title>
 

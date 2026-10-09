@@ -3,12 +3,20 @@ import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../../__tests__/helpers/features';
-import { organizer } from '../../config/site';
+import { build, organizer } from '../../config/site';
 import './footer-nav';
 
 describe('footer-nav', () => {
   it('defines a component', () => {
     expect(customElements.get('footer-nav')).toBeDefined();
+  });
+
+  it('shows the commit and time of the build, in UTC', async () => {
+    const { shadowRootForWithin } = await fixture(html`<footer-nav></footer-nav>`);
+    const time = within(shadowRootForWithin).getByText(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2} UTC$/);
+
+    expect(time).toHaveAttribute('datetime', build.time);
+    expect(within(shadowRootForWithin).getByText(build.sha ?? '', { exact: false })).toBeVisible();
   });
 
   it('renders organizer logo and links', async () => {

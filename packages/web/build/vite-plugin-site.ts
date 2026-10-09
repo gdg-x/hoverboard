@@ -5,6 +5,7 @@ import n from 'nunjucks';
 import type { Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
 import { FEATURES, type Feature } from '../src/config/features';
+import { buildInfo } from './build-info';
 import { fontModuleCode, fontModuleParts } from './fonts';
 import {
   CONFIG_PATHS,
@@ -49,7 +50,12 @@ export const featureDefines = (features: Record<Feature, boolean>): Record<strin
  */
 export const siteModule = (
   config: SiteConfig,
-  { defineFeatures = true, siteDir = CONFIG_PATHS.site, publicDir = CONFIG_PATHS.public } = {},
+  {
+    defineFeatures = true,
+    siteDir = CONFIG_PATHS.site,
+    publicDir = CONFIG_PATHS.public,
+    build = buildInfo(),
+  } = {},
 ): Plugin => ({
   name: 'hoverboard-site-module',
   config: () => (defineFeatures ? { define: featureDefines(config.site.features) } : {}),
@@ -74,6 +80,7 @@ export const siteModule = (
         `export const resources = ${JSON.stringify(resources)};`,
         `export const contentTranslations = {${loaders.join(', ')}};`,
         `export const heroIllustration = ${JSON.stringify(heroIllustrationSvg(site, publicDir))};`,
+        `export const build = ${JSON.stringify(build)};`,
         '',
       ].join('\n');
     }
