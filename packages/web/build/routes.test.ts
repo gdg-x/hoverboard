@@ -1,8 +1,11 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { FEATURES, type Feature } from '../src/config/features';
+import { watchEmulatorContent } from './dev-content';
 import { DEV_ROUTES, ROUTES, enabledRoutes, routes } from './routes';
+
+vi.mock('./dev-content', () => ({ watchEmulatorContent: vi.fn(() => () => undefined) }));
 
 const allFeatures = (enabled: boolean) =>
   Object.fromEntries(FEATURES.map((feature) => [feature, enabled])) as Record<Feature, boolean>;
@@ -14,6 +17,10 @@ describe('routes', () => {
     );
 
     expect(missing).toEqual([]);
+  });
+
+  it('names the content collection of every page with a path parameter', () => {
+    expect(ROUTES.filter(({ pattern, content }) => pattern.includes('[') && !content)).toEqual([]);
   });
 
   it('builds every page when all features are on', () => {
@@ -61,5 +68,31 @@ describe('routes', () => {
       [{ pattern: '/', entrypoint: './src/routes/index.astro' }],
       [{ pattern: '/design', entrypoint: './src/routes/design.astro' }],
     ]);
+  });
+
+  describe('in development', () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it('reloads the pages of a collection when its content changes', () => {
+      vi.useFakeTimers();
+      const emit = vi.fn();
+      const integration = routes({ ...allFeatures(false), speakers: true, schedule: true });
+
+      integration.hooks['astro:server:setup']?.({ server: { watcher: { emit } } } as never);
+      const [collections, onChange] = vi.mocked(watchEmulatorContent).mock.calls[0]!;
+      expect(collections).toEqual(['generatedSchedule', 'generatedSessions', 'generatedSpeakers']);
+
+      onChange('generatedSchedule');
+      onChange('generatedSchedule');
+      vi.advanceTimersByTime(500);
+
+      expect(emit).toHaveBeenCalledTimes(1);
+      expect(emit).toHaveBeenCalledWith(
+        'change',
+        join(import.meta.dirname, '../src/routes/schedule/[...day].astro'),
+      );
+    });
   });
 });
