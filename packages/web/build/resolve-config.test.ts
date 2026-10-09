@@ -189,6 +189,25 @@ describe('config validation', () => {
     ]);
   });
 
+  it('rejects tracks with the same ID, and track days outside the event', () => {
+    const event = { startDate: '2027-10-15', endDate: '2027-10-16' };
+    const tracks = [
+      { id: 'main', title: 'Main hall' },
+      { id: 'main', title: 'Room 2', days: ['2027-10-16', '2027-10-17'] },
+    ];
+
+    expect(errorsFor({ site: { event, schedule: { tracks } } })).toEqual([
+      'site.json/schedule/tracks/1/id: "main" is the ID of another track',
+      'site.json/schedule/tracks/1/days/1: "2027-10-17" is not between event.startDate and event.endDate',
+    ]);
+    expect(errorsFor({ site: { schedule: { tracks: [{ id: 'Main Hall', title: '' }] } } })).toEqual(
+      [
+        'site.json/schedule/tracks/0/id: must match pattern "^[a-z0-9]+(-[a-z0-9]+)*$"',
+        'site.json/schedule/tracks/0/title: must NOT have fewer than 1 characters',
+      ],
+    );
+  });
+
   it('needs a sign-in method when a feature needs sign-in', () => {
     expect(errorsFor({ site: { auth: { providers: [] } } })).toEqual([
       'site.json/auth/providers: mySchedule and feedback need a way to sign in, and there is none',

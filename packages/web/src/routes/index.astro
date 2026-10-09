@@ -5,14 +5,10 @@ import { seedPage } from '../data/page';
 import { eventStructuredData, serializeJsonLd } from '../data/structured-data';
 import Base from '../layouts/base.astro';
 import { daysUntilStart, eventState } from '../utils/event-state';
-import { HomePage } from '../views/home-page';
+import { HomePage, homeBlocks } from '../views/home-page';
 
-// The home page imports these blocks without waiting, so wait here for the server to render them.
-await Promise.all([
-  __HB_FEATURES__.speakers && import('../components/home/speakers-block'),
-  __HB_FEATURES__.subscribe && import('../components/home/subscribe-block'),
-  __HB_FEATURES__.blog && import('../components/home/latest-posts-block'),
-]);
+// The home page loads these blocks without waiting, so wait here for the server to render them.
+await homeBlocks;
 
 const { blog, speakers } = await loadContent();
 const content = seedPage({ blog, speakers });

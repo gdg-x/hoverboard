@@ -17,7 +17,7 @@ export class FeedbackDialog extends ThemedElement {
   @state()
   private accessor data: DialogState = new Initialized();
   @state()
-  private accessor session: Session | undefined;
+  private accessor session: Pick<Session, 'id' | 'title'> | undefined;
 
   private readonly dialogStore = new StoreController(this, (state) => state.dialogs, {
     onChange: (value) => {

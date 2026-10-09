@@ -46,4 +46,10 @@ describe('selectFilters', () => {
     expect(selectFilters(state)).toStrictEqual([]);
     expect(dispatch).not.toHaveBeenCalled();
   });
+
+  it('returns the same empty array each time, so selectors that read it stay memoized', () => {
+    const state = { filters: new Initialized() } as unknown as RootState;
+
+    expect(selectFilters(state)).toBe(selectFilters({ ...state }));
+  });
 });

@@ -34,7 +34,21 @@
     }
   },
   "schedule": {
-    "published": true
+    "published": true,
+    "tracks": [
+      {
+        "id": "expo-hall",
+        "title": "Expo hall"
+      },
+      {
+        "id": "conference-hall",
+        "title": "Conference hall"
+      },
+      {
+        "id": "workshops-hall",
+        "title": "Workshops hall"
+      }
+    ]
   },
   "locales": {
     "source": "en",

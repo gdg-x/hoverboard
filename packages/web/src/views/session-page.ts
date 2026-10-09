@@ -15,9 +15,8 @@ import '../components/ui/hb-button';
 import '../components/ui/hb-chip';
 import '../components/ui/hb-progress';
 import { PAGE_TONES } from '../components/hero/simple-hero';
-import { formatDuration, type ScheduleSession } from '../components/schedule/session-element';
-import type { Session } from '../models/session';
-import type { Speaker } from '../models/speaker';
+import { formatDuration } from '../components/schedule/session-element';
+import type { BuiltSession } from '../schedule/build-schedule';
 import { goto } from '../utils/navigation';
 import { store } from '../store';
 import { openSigninDialog } from '../store/dialogs';
@@ -27,26 +26,23 @@ import {
   setUserFeaturedSessions,
 } from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
-import { type SessionsState, selectSessionsState } from '../store/sessions';
+import { type SessionsState, selectSessionsState } from '../store/schedule';
 import { queueComplexSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
 import type { UserState } from '../store/user';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
+import { getScheduleDay } from '../utils/dates';
 import { confetti } from '../utils/confetti';
 import { updateImageMetadata } from '../utils/metadata';
 import { tagChipStyle } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
-if (__HB_FEATURES__.feedback) void import('../components/dialogs/feedback-block');
-
-// Sessions from the schedule generator have the day's readable date, the end time and full speakers.
-type SessionWithDetails = Omit<ScheduleSession, 'speakers'> & {
-  dateReadable?: string;
-  endTime?: string;
-  speakers?: Speaker[];
-};
+/** The feedback block, which the page loads without waiting. Tests wait for it. */
+export const feedbackBlock = __HB_FEATURES__.feedback
+  ? import('../components/dialogs/feedback-block')
+  : Promise.resolve();
 
 /**
  * A session: its title, when and where it is, its tags, actions to bookmark, add to a calendar and
@@ -124,7 +120,7 @@ export class SessionPage extends ThemedElement {
   @fromStore((state) => selectSessionsState(state))
   accessor sessions!: SessionsState;
   @property({ attribute: false })
-  accessor session: Session | undefined;
+  accessor session: BuiltSession | undefined;
   @property({ type: String })
   accessor sessionId: string | undefined;
   @fromStore((state) => selectFeaturedSessionsState(state))
@@ -149,7 +145,7 @@ export class SessionPage extends ThemedElement {
         goto('/404');
       } else {
         this.acceptingFeedback = __HB_FEATURES__.feedback && acceptingFeedback(this.session);
-        const speaker = (this.session as unknown as SessionWithDetails).speakers?.[0];
+        const speaker = this.session.speakers[0];
         updateImageMetadata(this.session.title, this.session.description, {
           image: speaker?.photoUrl ?? '',
           imageAlt: speaker?.name ?? '',
@@ -171,7 +167,7 @@ export class SessionPage extends ThemedElement {
   }
 
   override render() {
-    const session = this.session as SessionWithDetails | undefined;
+    const session = this.session;
     return html`
       <hero-block tone="${PAGE_TONES.schedule}">
         <a class="back" href="${session?.day ? `/schedule/${session.day}` : '/schedule'}">
@@ -188,11 +184,11 @@ export class SessionPage extends ThemedElement {
     `;
   }
 
-  private renderDetails(session: SessionWithDetails) {
+  private renderDetails(session: BuiltSession) {
     const when = disabledSchedule
       ? []
       : [
-          session.dateReadable,
+          session.day && getScheduleDay(session.day),
           session.startTime && [session.startTime, session.endTime].filter(Boolean).join('–'),
           session.duration && formatDuration(session.duration),
           session.track?.title,
@@ -208,10 +204,10 @@ export class SessionPage extends ThemedElement {
     `;
   }
 
-  private renderContent(session: SessionWithDetails) {
+  private renderContent(session: BuiltSession) {
     const bookmarked = this.isBookmarked;
-    // Generated sessions can list a speaker that does not exist, with only an `id`.
-    const speakers = (session.speakers ?? []).filter((speaker) => speaker.name);
+    // A speaker document can be missing its name while it is being added.
+    const speakers = session.speakers.filter((speaker) => speaker.name);
     return html`
       <div class="inner">
         <div class="actions">

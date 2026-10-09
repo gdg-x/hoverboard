@@ -1,7 +1,7 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { subscribeToSpeakers } from '../db/speakers';
-import type { SpeakerWithTags } from '../models/speaker';
+import type { Speaker } from '../models/speaker';
 import {
   PAGE_CONTENT_ID,
   resetContent,
@@ -12,13 +12,13 @@ import {
 } from './content';
 import { store } from '.';
 import { selectPartnerGroups } from './partners';
-import { selectSpeakersState } from './speakers';
+import { selectRawSpeakersState } from './speakers';
 
 vi.mock('../db/speakers');
 
 describe('seedContent', () => {
   it('fills the store without subscribing to Firestore', () => {
-    const speakers = [{ id: 'ada', name: 'Ada' }] as SpeakerWithTags[];
+    const speakers = [{ id: 'ada', name: 'Ada' }] as Speaker[];
 
     store.dispatch(
       seedContent({
@@ -28,7 +28,7 @@ describe('seedContent', () => {
       }),
     );
 
-    expect(selectSpeakersState(store.getState())).toStrictEqual(new Success(speakers));
+    expect(selectRawSpeakersState(store.getState())).toStrictEqual(new Success(speakers));
     expect(subscribeToSpeakers).not.toHaveBeenCalled();
     expect(selectPartnerGroups(store.getState())).toStrictEqual(
       new Success([
@@ -67,7 +67,7 @@ describe('serializeContent', () => {
 
 describe('seedFromPage', () => {
   it("seeds the store from the page's content without subscribing", () => {
-    const speakers = [{ id: 'grace', name: 'Grace' }] as SpeakerWithTags[];
+    const speakers = [{ id: 'grace', name: 'Grace' }] as Speaker[];
     const script = document.createElement('script');
     script.type = 'application/json';
     script.id = PAGE_CONTENT_ID;

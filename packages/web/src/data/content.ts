@@ -6,6 +6,8 @@ import type {
 } from 'firebase-admin/firestore';
 import { env } from 'node:process';
 import type { Feature } from '../config/features';
+import { scheduleTracks } from '../config/site';
+import { scheduleErrors } from '../schedule/build-schedule';
 import type { Content } from '../store/content';
 import { connectFirestore } from './firestore';
 
@@ -34,13 +36,9 @@ const LOADERS = {
     'previousSpeakers',
     (db) => read(db.collection('previousSpeakers').orderBy('name'), withId),
   ],
-  schedule: ['schedule', (db) => read(db.collection('generatedSchedule').orderBy('date'), withId)],
-  // The speakers page builds its filters from session tags.
-  sessions: [
-    ['schedule', 'speakers'],
-    (db) => read(db.collection('generatedSessions').orderBy('id'), withId),
-  ],
-  speakers: ['speakers', (db) => read(db.collection('generatedSpeakers').orderBy('name'), withId)],
+  // The schedule shows the speakers of sessions, and the speakers page filters by session tags.
+  sessions: [['schedule', 'speakers'], (db) => read(db.collection('sessions'), withId)],
+  speakers: [['schedule', 'speakers'], (db) => read(db.collection('speakers'), withId)],
   teams: ['team', (db) => read(db.collection('team').orderBy('title'), withId)],
   tickets: ['tickets', (db) => read(db.collection('tickets').orderBy('order'), withId)],
   videos: ['videos', (db) => read(db.collection('videos').orderBy('order'), withId)],
@@ -54,13 +52,31 @@ const enabledLoaders = () =>
     [features].flat().some((feature) => __HB_FEATURES__[feature]),
   );
 
+const checkSchedule = ({ sessions = [] }: Partial<Content>) => {
+  // Sessions from before v4 got their times from the `schedule` collection.
+  if (__HB_FEATURES__.schedule && sessions.length && !sessions.some(({ day }) => day)) {
+    console.warn(
+      `None of the ${sessions.length} sessions has a day and times, so the schedule is empty. ` +
+        'Sessions from before v4 need `./hbd convert-schedule`. See docs/tutorials/firebase-utils.md.',
+    );
+  }
+  const errors = scheduleErrors(sessions, scheduleTracks);
+  if (!errors.length) return;
+  const message = `The schedule has problems:\n${errors.map((error) => `  ${error}`).join('\n')}`;
+  // In development, the content can be halfway through an edit.
+  if (!import.meta.env.DEV) throw new Error(message);
+  console.warn(message);
+};
+
 /** Reads the content of the enabled features. Disabled features have no key. */
 export const readContent = async (db: Firestore): Promise<Partial<Content>> => {
   const entries = await Promise.all(
     enabledLoaders().map(async ([name, [, load]]) => [name, await load(db)] as const),
   );
   // Firestore data is untyped. The models in src/models/ describe it, as they do for the client.
-  return Object.fromEntries(entries) as Partial<Content>;
+  const content = Object.fromEntries(entries) as Partial<Content>;
+  checkSchedule(content);
+  return content;
 };
 
 /** Every enabled collection, empty, for builds without Firestore such as CI checks. */

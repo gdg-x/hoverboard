@@ -2,8 +2,7 @@ import * as logger from 'firebase-functions/logger';
 import { getSiteConfig } from './site-config.js';
 
 /** The site features that functions depend on. */
-export type FunctionFeature =
-  'imageOptimization' | 'mailchimp' | 'mySchedule' | 'notifications' | 'schedule' | 'speakers';
+export type FunctionFeature = 'imageOptimization' | 'mailchimp' | 'mySchedule' | 'notifications';
 
 /**
  * Every function always deploys. When none of `anyOf` is on, this logs an error that names the

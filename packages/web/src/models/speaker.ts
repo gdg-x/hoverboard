@@ -12,7 +12,8 @@ export interface SpeakerData {
   externalId?: string;
   featured: boolean;
   name: string;
-  order: number;
+  /** Only the home page's speakers block uses it. */
+  order?: number;
   photo: string;
   photoUrl: string;
   pronouns?: string;

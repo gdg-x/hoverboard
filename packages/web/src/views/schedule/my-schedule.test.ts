@@ -1,18 +1,18 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import type { Day } from '../../models/day';
+import type { BuiltDay } from '../../schedule/build-schedule';
 import type { MySchedule } from './my-schedule';
 import './my-schedule';
 
-const day = (date: string, dateReadable: string, items: unknown[] = []): Day => ({
+const day = (date: string, items: unknown[] = []): BuiltDay => ({
   date,
-  dateReadable,
-  tracks: [{ title: 'Track 1' }],
+  tracks: [{ id: 'track-1', title: 'Track 1' }],
   timeslots: [{ startTime: '10:00', endTime: '11:00', sessions: [{ items } as never] }],
+  tags: [],
 });
 
-const render = async (featuredSchedule: Day[]) => {
+const render = async (featuredSchedule: BuiltDay[]) => {
   const result = await fixture<MySchedule>(html`<my-schedule></my-schedule>`);
   result.element.featuredSchedule = featuredSchedule;
   await result.element.updateComplete;
@@ -33,10 +33,7 @@ describe('my-schedule', () => {
   });
 
   it('shows each day under its own heading, with only bookmarked sessions', async () => {
-    const days = [
-      day('2024-01-01', 'January 1', [{ id: 's1', title: 'One' }]),
-      day('2024-01-02', 'January 2'),
-    ];
+    const days = [day('2024-01-01', [{ id: 's1', title: 'One' }]), day('2024-01-02')];
     const { shadowRoot } = await render(days);
 
     const headings = shadowRoot.querySelectorAll('h2.date');
@@ -48,7 +45,7 @@ describe('my-schedule', () => {
   });
 
   it('explains how to add sessions when none are bookmarked', async () => {
-    const { shadowRoot } = await render([day('2024-01-01', 'January 1')]);
+    const { shadowRoot } = await render([day('2024-01-01')]);
 
     expect(shadowRoot.querySelector('.hint')).toHaveTextContent(
       'Bookmark sessions in the schedule to see them here.',

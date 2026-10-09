@@ -1,4 +1,4 @@
-import { validateContent } from '../../lib/content.js';
+import { validateContent, validateSchedule } from '../../lib/content.js';
 import { firestore } from '../../lib/firestore.js';
 import data from '../../../../../docs/default-firebase-data.json';
 
@@ -8,6 +8,7 @@ export const importSessions = () => {
     return Promise.resolve();
   }
   console.log('Importing sessions...');
+  validateSchedule(docs);
 
   const batch = firestore.batch();
 

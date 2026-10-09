@@ -29,7 +29,7 @@ afterEach(() => {
   process.env = { ...originalEnv };
 });
 
-const makeRepo = (): string => {
+const makeRepo = (features: Record<string, boolean> = {}): string => {
   const dir = mkdtempSync(join(tmpdir(), 'hoverboard-cli-'));
   dirsToClean.push(dir);
   mkdirSync(join(dir, '.git'));
@@ -37,6 +37,13 @@ const makeRepo = (): string => {
     join(dir, 'package.json'),
     JSON.stringify({ engines: { node: process.versions.node.split('.')[0] } }),
   );
+  mkdirSync(join(dir, 'packages', 'web', 'defaults'), { recursive: true });
+  mkdirSync(join(dir, 'packages', 'config'), { recursive: true });
+  writeFileSync(
+    join(dir, 'packages', 'web', 'defaults', 'site.json'),
+    JSON.stringify({ features: { functions: true } }),
+  );
+  writeFileSync(join(dir, 'packages', 'config', 'site.json'), JSON.stringify({ features }));
   process.env['HOME'] = dir; // isolate from the real firebase-tools configstore
   process.env['GCLOUD_PROJECT'] = 'demo-project';
   vi.spyOn(process, 'cwd').mockReturnValue(dir);
@@ -65,6 +72,21 @@ describe('runDeploy', () => {
       { NODE_ENV: 'production' },
     );
     expect(result).toBe(true);
+  });
+
+  it('leaves out Cloud Functions when features.functions is false', async () => {
+    const repo = makeRepo({ functions: false });
+    runCommandMock.mockReturnValue(0);
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+
+    await runDeploy({ yes: true });
+
+    expect(runCommandMock).toHaveBeenLastCalledWith(
+      '/repo/node_modules/.bin/firebase',
+      ['deploy', '--project', 'demo-project', '--except', 'functions'],
+      repo,
+      { NODE_ENV: 'production' },
+    );
   });
 
   it('skips the confirmation prompt with --yes', async () => {

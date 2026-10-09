@@ -13,9 +13,12 @@ import type { EventState } from '../utils/event-state';
 import { scrollToElement } from '../utils/scrolling';
 
 // `__HB_FEATURES__.<name>` is a literal in the build, so blocks of disabled features are not bundled.
-if (__HB_FEATURES__.speakers) void import('../components/home/speakers-block');
-if (__HB_FEATURES__.subscribe) void import('../components/home/subscribe-block');
-if (__HB_FEATURES__.blog) void import('../components/home/latest-posts-block');
+/** The blocks the page loads without waiting. The server, and tests, wait for them. */
+export const homeBlocks = Promise.all([
+  __HB_FEATURES__.speakers && import('../components/home/speakers-block'),
+  __HB_FEATURES__.subscribe && import('../components/home/subscribe-block'),
+  __HB_FEATURES__.blog && import('../components/home/latest-posts-block'),
+]);
 
 // Below-the-fold blocks load when they are about to scroll into view.
 const lazyBlocks = {

@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   createTimeWindow,
-  filterUpcomingTimeslots,
+  filterUpcoming,
   getTodayDateString,
   isBetween,
   parseTimeAndGetFromNow,
@@ -122,19 +122,19 @@ describe('Time utilities', () => {
     });
   });
 
-  describe('filterUpcomingTimeslots', () => {
-    const mockTimeslots = [
+  describe('filterUpcoming', () => {
+    const mockSessions = [
       { id: '1', startTime: '14:00' },
       { id: '2', startTime: '14:30' },
       { id: '3', startTime: '15:00' },
       { id: '4', startTime: '16:00' },
     ];
 
-    it('should filter timeslots within the time window', () => {
+    it('should filter sessions within the time window', () => {
       const timeWindow = createTimeWindow(3, 3);
 
-      const result = filterUpcomingTimeslots(
-        mockTimeslots,
+      const result = filterUpcoming(
+        mockSessions,
         timeWindow,
         10, // notification offset
         'UTC',
@@ -146,20 +146,20 @@ describe('Time utilities', () => {
       expect(result).toEqual([]);
     });
 
-    it('should include timeslots that match the notification window', () => {
+    it('should include sessions that match the notification window', () => {
       const timeWindow = createTimeWindow(15, 5); // 14:15 to 14:35
 
-      const result = filterUpcomingTimeslots(mockTimeslots, timeWindow, 10, 'UTC');
+      const result = filterUpcoming(mockSessions, timeWindow, 10, 'UTC');
 
       // 14:30 start time with 10min offset = 14:20 notification time (within 14:15-14:35)
       // 15:00 start time with 10min offset = 14:50 notification time (outside window)
       expect(result).toEqual([{ id: '2', startTime: '14:30' }]);
     });
 
-    it('should handle empty timeslots array', () => {
+    it('should handle no sessions', () => {
       const timeWindow = createTimeWindow(3, 3);
 
-      const result = filterUpcomingTimeslots([], timeWindow, 10, 'UTC');
+      const result = filterUpcoming([], timeWindow, 10, 'UTC');
 
       expect(result).toEqual([]);
     });

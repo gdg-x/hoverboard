@@ -119,20 +119,21 @@ export function parseTimeAndGetFromNow(timeString: string, timezone: string): st
 }
 
 /**
- * Filter timeslots that fall within a time window, accounting for a notification offset
+ * Filter sessions whose reminder, `notificationOffsetMinutes` before they start, falls within a
+ * time window
  */
-export function filterUpcomingTimeslots<T extends { startTime: string; sessions?: any[] }>(
-  timeslots: T[],
+export function filterUpcoming<T extends { startTime: string }>(
+  sessions: T[],
   timeWindow: TimeWindow,
   notificationOffsetMinutes: number,
   timezone: string,
 ): T[] {
-  return timeslots.filter((timeslot) => {
-    const timeslotTime = parseTimeAndSubtract(
-      timeslot.startTime,
+  return sessions.filter((session) => {
+    const reminderTime = parseTimeAndSubtract(
+      session.startTime,
       timezone,
       notificationOffsetMinutes,
     );
-    return isBetween(timeslotTime, timeWindow.before, timeWindow.after);
+    return isBetween(reminderTime, timeWindow.before, timeWindow.after);
   });
 }

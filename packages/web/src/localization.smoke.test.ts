@@ -22,9 +22,13 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
   beforeAll(async () => {
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     localStorage.setItem('hoverboard-locale', fakeLocale);
-    await import('./components/shell/app-header');
+    await (
+      await import('./components/shell/app-header')
+    ).demoBanner;
     await import('./components/footer/footer-block');
-    await import('./views/home-page');
+    await (
+      await import('./views/home-page')
+    ).homeBlocks;
     render(
       html`<app-header></app-header><home-page></home-page><footer-block></footer-block>`,
       document.body,

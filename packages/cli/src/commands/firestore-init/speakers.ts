@@ -11,8 +11,7 @@ export const importSpeakers = () => {
 
   const batch = firestore.batch();
 
-  Object.keys(speakers).forEach((speakerId, order) => {
-    const speaker = { ...speakers[speakerId], order };
+  Object.entries(speakers).forEach(([speakerId, speaker]) => {
     validateContent('speakers', speakerId, speaker);
     batch.set(firestore.collection('speakers').doc(speakerId), speaker);
   });

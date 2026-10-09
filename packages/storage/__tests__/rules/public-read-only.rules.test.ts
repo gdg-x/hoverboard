@@ -10,14 +10,10 @@ const PUBLIC_READ_ONLY_COLLECTIONS = [
   'blog',
   'gallery',
   'previousSpeakers',
-  'schedule',
-  'generatedSchedule',
   'speakers',
-  'generatedSpeakers',
   'tickets',
   'videos',
   'sessions',
-  'generatedSessions',
 ];
 
 describe.each(PUBLIC_READ_ONLY_COLLECTIONS)('%s rules', (collectionName) => {

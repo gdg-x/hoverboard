@@ -1,8 +1,9 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import type { Day } from '../../models/day';
+import type { BuiltDay } from '../../schedule/build-schedule';
 import { selectFeaturedSchedule } from '../../store/schedule/selectors';
+import { getScheduleDay } from '../../utils/dates';
 import '../../components/shared/auth-required';
 import './schedule-day';
 import { fromStore } from '../../controllers/from-store';
@@ -54,7 +55,7 @@ export class MySchedule extends ThemedElement {
   ];
 
   @fromStore((state) => selectFeaturedSchedule(state))
-  accessor featuredSchedule!: Day[];
+  accessor featuredSchedule!: BuiltDay[];
 
   override render() {
     const bookmarks = this.featuredSchedule.some((day) =>
@@ -80,7 +81,7 @@ export class MySchedule extends ThemedElement {
         }
         ${this.featuredSchedule.map(
           (day) => html`
-            <h2 class="date">${day.dateReadable}</h2>
+            <h2 class="date">${getScheduleDay(day.date)}</h2>
             <schedule-day .day="${day}" .onlyFeatured="${true}"></schedule-day>
           `,
         )}

@@ -4,7 +4,7 @@ export interface SessionData {
   complexity?: string;
   day?: string;
   description: string;
-  extend?: number;
+  endTime?: string;
   externalId?: string;
   icon?: string;
   image?: string;
@@ -15,6 +15,8 @@ export interface SessionData {
   startTime?: string;
   tags?: string[];
   title: string;
+  /** A track ID from `schedule.tracks` in site.json. Without it, the session spans every track. */
+  track?: string;
   videoId?: string;
 }
 

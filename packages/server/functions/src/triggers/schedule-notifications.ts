@@ -8,12 +8,11 @@ import { isFeatureOff } from '../features.js';
 import { getSiteConfig } from '../site-config.js';
 import { fetchFeaturedSessions } from '../db/featured-sessions.js';
 import { fetchNotificationsUser, removeUserTokens } from '../db/notifications-users.js';
-import { getSchedule } from '../db/schedule.js';
 import { claimSentNotification, releaseSentNotification } from '../db/sent-notifications.js';
-import { fetchSession } from '../db/sessions.js';
+import { fetchSessionsOn } from '../db/sessions.js';
 import {
   createTimeWindow,
-  filterUpcomingTimeslots,
+  filterUpcoming,
   getTodayDateString,
   parseTimeAndGetFromNow,
 } from '../time.js';
@@ -61,96 +60,65 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
     return;
   }
 
-  const notificationsConfigPromise = fetchConfig<{ icon?: string }>('notifications');
-  const schedulePromise = getSchedule();
-
-  const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([
-    notificationsConfigPromise,
-    schedulePromise,
+  const { timeZone } = getSiteConfig();
+  const todayDay = getTodayDateString(timeZone);
+  const [notificationsConfigSnapshot, todaySessions] = await Promise.all([
+    fetchConfig<{ icon?: string }>('notifications'),
+    fetchSessionsOn(todayDay),
   ]);
   const icon = notificationsConfigSnapshot.data()?.icon || '';
-  const { timeZone } = getSiteConfig();
 
-  const schedule = scheduleSnapshot.docs.reduce(
-    (acc: Record<string, any>, doc) => ({ ...acc, [doc.id]: doc.data() }),
+  if (todaySessions.empty) {
+    logger.log(todayDay, 'has no sessions');
+    return;
+  }
+
+  const upcomingSessions = filterUpcoming(
+    todaySessions.docs.flatMap((doc) => {
+      const { title, startTime } = doc.data() as { title?: string; startTime?: string };
+      return startTime ? [{ id: doc.id, title, startTime }] : [];
+    }),
+    createTimeWindow(3, 3),
+    10, // notification offset in minutes
+    timeZone,
+  );
+  if (!upcomingSessions.length) return;
+  logger.log(
+    'Upcoming sessions',
+    upcomingSessions.map(({ id }) => id),
+  );
+
+  const usersIdsSnapshot = await fetchFeaturedSessions();
+  const usersIds = usersIdsSnapshot.docs.reduce(
+    (acc: Record<string, Record<string, unknown>>, doc) => ({ ...acc, [doc.id]: doc.data() }),
     {},
   );
-  const todayDay = getTodayDateString(timeZone);
 
-  if (schedule[todayDay]) {
-    const timeWindow = createTimeWindow(3, 3);
-
-    const upcomingTimeslots = filterUpcomingTimeslots(
-      schedule[todayDay].timeslots || [],
-      timeWindow,
-      10, // notification offset in minutes
-      timeZone,
+  for (const session of upcomingSessions) {
+    const userIdsFeaturedSession = Object.keys(usersIds).filter((userId) =>
+      Object.keys(usersIds[userId] || {}).includes(session.id),
     );
+    if (!userIdsFeaturedSession.length) continue;
 
-    const upcomingSessions: string[] = upcomingTimeslots.reduce(
-      (result: string[], timeslot: { sessions?: { items?: string[] }[] }) =>
-        (timeslot.sessions || []).reduce(
-          (aggregatedSessions: string[], current: { items?: string[] }) => [
-            ...aggregatedSessions,
-            ...(current.items || []),
-          ],
-          result,
-        ),
-      [],
-    );
-    const usersIdsSnapshot = await fetchFeaturedSessions();
-    const usersIds = usersIdsSnapshot.docs.reduce(
-      (acc: Record<string, Record<string, unknown>>, doc) => ({ ...acc, [doc.id]: doc.data() }),
-      {},
-    );
+    const data: MulticastMessage['data'] = {
+      title: session.title || '',
+      body: `Starts ${parseTimeAndGetFromNow(session.startTime, timeZone)}`,
+      icon,
+      path: `/sessions/${session.id}`,
+    };
 
-    for (const upcomingSession of upcomingSessions) {
-      const sessionInfoSnapshot = await fetchSession(upcomingSession);
-      if (!sessionInfoSnapshot.exists) continue;
-
-      const userIdsFeaturedSession = Object.keys(usersIds).filter(
-        (userId) =>
-          !!Object.keys(usersIds[userId] || {}).filter(
-            (sessionId) => sessionId.toString() === upcomingSession.toString(),
-          ).length,
-      );
-
-      const session = sessionInfoSnapshot.data();
-      const firstTimeslot = upcomingTimeslots[0];
-      const fromNow = firstTimeslot
-        ? parseTimeAndGetFromNow(firstTimeslot.startTime, timeZone)
-        : '';
-
-      if (userIdsFeaturedSession.length) {
-        const data: MulticastMessage['data'] = {
-          title: session?.title || '',
-          body: `Starts ${fromNow}`,
-          icon,
-          path: `/sessions/${upcomingSession}`,
-        };
-
-        // The selection window is wider than the 5 minute schedule interval, so consecutive runs
-        // can pick the same session. Claim it first so it is only sent once.
-        const notificationId = `${todayDay}-${upcomingSession}`;
-        if (await claimSentNotification(notificationId)) {
-          try {
-            await sendPushNotificationToUsers(userIdsFeaturedSession, data);
-          } catch (error) {
-            await releaseSentNotification(notificationId);
-            throw error;
-          }
-        } else {
-          logger.log('Notification was already sent for session', upcomingSession);
-        }
+    // The selection window is wider than the 5 minute schedule interval, so consecutive runs
+    // can pick the same session. Claim it first so it is only sent once.
+    const notificationId = `${todayDay}-${session.id}`;
+    if (await claimSentNotification(notificationId)) {
+      try {
+        await sendPushNotificationToUsers(userIdsFeaturedSession, data);
+      } catch (error) {
+        await releaseSentNotification(notificationId);
+        throw error;
       }
-
-      if (upcomingSessions.length) {
-        logger.log('Upcoming sessions', upcomingSessions);
-      } else {
-        logger.log('There is no sessions right now');
-      }
+    } else {
+      logger.log('Notification was already sent for session', session.id);
     }
-  } else {
-    logger.log(todayDay, 'was not found in the schedule');
   }
 });

@@ -12,6 +12,12 @@ export const getDate = (date: string | Date) => {
   });
 };
 
+/** A `YYYY-MM-DD` day of the schedule in the current locale, for example `October 13`. */
+export const getScheduleDay = (date: string) =>
+  new Intl.DateTimeFormat(getLocale(), { month: 'long', day: 'numeric', timeZone: 'UTC' }).format(
+    new Date(`${date}T00:00:00Z`),
+  );
+
 /** The event's days in the current locale, for example `October 13 – 14, 2027`. */
 export const getEventDates = ({ start, end } = eventDates) =>
   // The dates are calendar days with no time zone, so they are read and formatted as UTC.

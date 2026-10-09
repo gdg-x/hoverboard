@@ -5,17 +5,20 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import type { Day } from '../../models/day';
 import type { Filter } from '../../models/filter';
-import type { Session } from '../../models/session';
-import type { GeneratedSessionBlock } from '../../models/time';
-import type { Timeslot } from '../../models/timeslot';
+import type {
+  BuiltDay,
+  BuiltSession,
+  BuiltTimeslot,
+  SessionBlock,
+} from '../../schedule/build-schedule';
 import type { RouteLocation } from '../../utils/navigation';
 import { selectFilters } from '../../store/filters';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { selectLocalTime } from '../../store/ui';
 import { timeZone } from '../../config/site';
 import { clearFilters } from '../../utils/filters';
+import { getScheduleDay } from '../../utils/dates';
 import { getLocale } from '../../utils/localization';
 import { generateClassName } from '../../utils/styles';
 import { wallClock, zonedTime } from '../../utils/time-zone';
@@ -43,7 +46,7 @@ const minutes = (time: string) => {
   return hours * 60 + mins;
 };
 
-export const matchesFilters = (session: Session, filters: Filter[]) =>
+export const matchesFilters = (session: BuiltSession, filters: Filter[]) =>
   filters.every((filter) => {
     const values = session[filter.group];
     if (values === undefined) return false;
@@ -283,7 +286,7 @@ export class ScheduleDay extends ThemedElement {
   @property({ attribute: false })
   accessor location: RouteLocation | undefined;
   @property({ attribute: false })
-  accessor day: Day | undefined;
+  accessor day: BuiltDay | undefined;
   @property({ type: Boolean })
   accessor onlyFeatured = false;
   @fromStore((state) => selectFilters(state))
@@ -396,7 +399,9 @@ export class ScheduleDay extends ThemedElement {
       <div
         class="scroller"
         role="region"
-        aria-label="${msg(str`Schedule for ${day.dateReadable}`, { id: 'schedule.day.label' })}"
+        aria-label="${msg(str`Schedule for ${getScheduleDay(day.date)}`, {
+          id: 'schedule.day.label',
+        })}"
         tabindex="${ifDefined(this.overflowing ? 0 : undefined)}"
         @scroll="${this.onScroll}"
       >
@@ -405,9 +410,18 @@ export class ScheduleDay extends ThemedElement {
             day.timeslots,
             (timeslot) => timeslot.startTime,
             (timeslot, index) => html`
-              <div class="time" id="${timeslot.startTime}" style="grid-row: ${index + 1}">
-                ${this.renderTime(day.date, timeslot.startTime)}
-              </div>
+              ${
+                // A row where no session starts, such as a break, has no time.
+                timeslot.sessions.length
+                  ? html`<div
+                      class="time"
+                      id="${timeslot.startTime}"
+                      style="grid-row: ${index + 1}"
+                    >
+                      ${this.renderTime(day.date, timeslot.startTime)}
+                    </div>`
+                  : nothing
+              }
               ${
                 now?.index === index
                   ? html`<div class="now" style="grid-row: ${index + 1}">
@@ -420,7 +434,7 @@ export class ScheduleDay extends ThemedElement {
                   : nothing
               }
               ${
-                this.onlyFeatured && visible[index]!.length === 0
+                this.onlyFeatured && timeslot.sessions.length && visible[index]!.length === 0
                   ? html`<a
                       class="browse"
                       href="/schedule/${day.date}#${timeslot.startTime}"
@@ -468,19 +482,19 @@ export class ScheduleDay extends ThemedElement {
     return html`<time datetime="${instant.toISOString()}">${local.time}${weekday}</time>`;
   }
 
-  private visibleBlocks(timeslot: Timeslot) {
+  private visibleBlocks(
+    timeslot: BuiltTimeslot,
+  ): { block: SessionBlock; sessions: BuiltSession[] }[] {
     return timeslot.sessions
       .map((block) => ({
-        block: block as GeneratedSessionBlock,
-        sessions: (block as GeneratedSessionBlock).items.filter((session) =>
-          matchesFilters(session, this.selectedFilters),
-        ),
+        block,
+        sessions: block.items.filter((session) => matchesFilters(session, this.selectedFilters)),
       }))
       .filter(({ sessions }) => sessions.length > 0);
   }
 
   /** Which timeslot holds the current time, and how far into it, during this day. */
-  private nowPosition(day: Day) {
+  private nowPosition(day: BuiltDay) {
     if (!this.now) return undefined;
     const event = wallClock(this.now, timeZone);
     if (event.date !== day.date) return undefined;

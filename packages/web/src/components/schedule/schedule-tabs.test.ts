@@ -4,14 +4,14 @@ import { screen, within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../../__tests__/helpers/features';
-import type { Day } from '../../models/day';
+import type { BuiltDay } from '../../schedule/build-schedule';
 import type { RouteLocation } from '../../utils/navigation';
 import type { ScheduleTabs } from './schedule-tabs';
 import './schedule-tabs';
 
-const days: Day[] = [
-  { date: '2024-01-01', dateReadable: 'January 1', tracks: [], timeslots: [] },
-  { date: '2024-01-02', dateReadable: 'January 2', tracks: [], timeslots: [] },
+const days: BuiltDay[] = [
+  { date: '2024-01-01', tracks: [], timeslots: [], tags: [] },
+  { date: '2024-01-02', tracks: [], timeslots: [], tags: [] },
 ];
 
 const location = (pathname: string, search = ''): RouteLocation => ({

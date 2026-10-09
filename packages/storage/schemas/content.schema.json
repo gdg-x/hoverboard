@@ -39,12 +39,6 @@
       "type": "object",
       "additionalProperties": { "$ref": "#/$defs/previousSpeaker" }
     },
-    "schedule": {
-      "description": "Schedule days by date.",
-      "type": "object",
-      "propertyNames": { "$ref": "#/$defs/date" },
-      "additionalProperties": { "$ref": "#/$defs/day" }
-    },
     "sessions": {
       "description": "Sessions by ID.",
       "type": "object",
@@ -216,64 +210,22 @@
         "title": { "type": "string" }
       }
     },
-    "track": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title"],
-      "properties": {
-        "title": { "type": "string" }
-      }
-    },
-    "timeslot": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["endTime", "sessions", "startTime"],
-      "properties": {
-        "endTime": { "$ref": "#/$defs/time" },
-        "startTime": { "$ref": "#/$defs/time" },
-        "sessions": {
-          "description": "One entry per track, in track order.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["items"],
-            "properties": {
-              "extend": {
-                "description": "Number of extra timeslots the sessions span.",
-                "type": "number"
-              },
-              "items": {
-                "description": "Session IDs.",
-                "type": "array",
-                "items": { "type": "string" }
-              }
-            }
-          }
-        }
-      }
-    },
-    "day": {
-      "description": "A schedule day. Firestore: `schedule/{date}`. The schedule generator turns it into `generatedSchedule`.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["date", "dateReadable", "timeslots", "tracks"],
-      "properties": {
-        "date": { "$ref": "#/$defs/date" },
-        "dateReadable": { "type": "string" },
-        "timeslots": { "type": "array", "items": { "$ref": "#/$defs/timeslot" } },
-        "tracks": { "type": "array", "items": { "$ref": "#/$defs/track" } }
-      }
-    },
     "session": {
-      "description": "A session. Firestore: `sessions/{sessionId}`. The schedule generator turns it into `generatedSessions`.",
+      "description": "A session. Firestore: `sessions/{sessionId}`.",
       "type": "object",
       "additionalProperties": false,
       "required": ["description", "title"],
       "properties": {
         "complexity": { "type": "string" },
+        "day": {
+          "description": "The day of the session. Without it, the session is not on the schedule yet.",
+          "$ref": "#/$defs/date"
+        },
         "description": { "type": "string" },
-        "extend": { "type": "number" },
+        "endTime": {
+          "description": "When the session ends, in the event time zone.",
+          "$ref": "#/$defs/time"
+        },
         "externalId": { "$ref": "#/$defs/externalId" },
         "icon": { "type": "string" },
         "image": { "type": "string" },
@@ -285,13 +237,27 @@
           "type": "array",
           "items": { "type": "string" }
         },
+        "startTime": {
+          "description": "When the session starts, in the event time zone.",
+          "$ref": "#/$defs/time"
+        },
         "tags": { "type": "array", "items": { "type": "string" } },
         "title": { "type": "string" },
+        "track": {
+          "description": "A track ID from `schedule.tracks` in site.json. Without it, the session spans every track.",
+          "type": "string"
+        },
         "videoId": { "type": "string" }
+      },
+      "dependentRequired": {
+        "day": ["startTime", "endTime"],
+        "startTime": ["day", "endTime"],
+        "endTime": ["day", "startTime"],
+        "track": ["day"]
       }
     },
     "speaker": {
-      "description": "A speaker. Firestore: `speakers/{speakerId}`. The schedule generator turns it into `generatedSpeakers`.",
+      "description": "A speaker. Firestore: `speakers/{speakerId}`.",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -302,7 +268,6 @@
         "country",
         "featured",
         "name",
-        "order",
         "photo",
         "photoUrl",
         "shortBio",
@@ -319,7 +284,10 @@
         "externalId": { "$ref": "#/$defs/externalId" },
         "featured": { "type": "boolean" },
         "name": { "type": "string" },
-        "order": { "$ref": "#/$defs/order" },
+        "order": {
+          "description": "The place of a featured speaker in the home page's speakers block. Without it on any, they shuffle.",
+          "$ref": "#/$defs/order"
+        },
         "photo": { "type": "string" },
         "photoUrl": { "type": "string" },
         "pronouns": { "type": "string" },

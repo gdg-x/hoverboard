@@ -1,10 +1,10 @@
 import { Success } from '@abraham/remotedata';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
-import type { Session } from '../models/session';
+import type { BuiltSession } from '../schedule/build-schedule';
 import type { User } from '../models/user';
 import { setUserFeaturedSessions } from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
@@ -13,7 +13,7 @@ import { openVideoDialog } from '../store/ui';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
-import type { SessionPage } from './session-page';
+import { feedbackBlock, type SessionPage } from './session-page';
 import './session-page';
 
 vi.mock('../utils/metadata');
@@ -54,18 +54,17 @@ const session = {
   title: 'A great talk',
   description: 'Session description',
   day: '2024-01-02',
-  dateReadable: 'January 2',
   startTime: '10:00',
   endTime: '10:40',
   duration: { hh: 0, mm: 40 },
-  track: { title: 'Main hall' },
+  track: { id: 'main-hall', title: 'Main hall' },
   complexity: 'Beginner',
   language: 'English',
   presentation: 'https://slides.example',
   videoId: 'abc123',
   tags: ['Web'],
   speakers: [speaker],
-} as never as Session;
+} as never as BuiltSession;
 
 const render = async (props: Partial<SessionPage> = {}) => {
   const result = await fixture<SessionPage>(html`<session-page></session-page>`);
@@ -80,6 +79,9 @@ const render = async (props: Partial<SessionPage> = {}) => {
 };
 
 describe('session-page', () => {
+  // Otherwise it can finish loading after jsdom is gone, which fails the run.
+  beforeAll(() => feedbackBlock);
+
   beforeEach(() => {
     vi.mocked(selectSession).mockReturnValue(session);
     vi.mocked(acceptingFeedback).mockReturnValue(false);

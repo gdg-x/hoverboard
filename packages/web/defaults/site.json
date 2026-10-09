@@ -36,6 +36,7 @@
     "faq": true,
     "feedback": true,
     "forkMe": false,
+    "functions": true,
     "gallery": true,
     "imageOptimization": true,
     "mailchimp": true,

@@ -15,7 +15,6 @@ describe('speaker', () => {
       'country',
       'featured',
       'name',
-      'order',
       'photo',
       'photoUrl',
       'pronouns',

@@ -1,11 +1,6 @@
 import { getFirestore } from 'firebase-admin/firestore';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { isFeatureOff } from '../../src/features';
-import {
-  sessionsWrite,
-  scheduleWrite,
-  speakersWrite,
-} from '../../src/triggers/generate-sessions-speakers-schedule';
 import { mailchimpSubscribe } from '../../src/triggers/mailchimp-subscribe';
 import { sendGeneralNotification } from '../../src/triggers/notifications';
 import { optimizeImages } from '../../src/triggers/optimize-images';
@@ -34,9 +29,6 @@ describe('functions with their feature off', () => {
       () => scheduleNotifications.run(undefined as never),
       ['notifications'],
     ],
-    ['sessionsWrite', () => sessionsWrite.run(event), ['schedule', 'speakers']],
-    ['scheduleWrite', () => scheduleWrite.run(event), ['schedule', 'speakers']],
-    ['speakersWrite', () => speakersWrite.run(event), ['schedule', 'speakers']],
   ])('%s returns without reading Firestore', async (name, run, features) => {
     await run();
 

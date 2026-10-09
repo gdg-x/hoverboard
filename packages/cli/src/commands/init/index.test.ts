@@ -182,18 +182,41 @@ describe('runInit', () => {
     });
   });
 
-  it('deploys and adds the sample content when asked', async () => {
+  it('adds the sample content, then deploys once, when asked', async () => {
     mocks.confirm.mockResolvedValue(true);
+    const order: string[] = [];
+    mocks.runCommand.mockImplementation(() => (order.push('seed'), 0));
+    mocks.runDeploy.mockImplementation(async () => (order.push('deploy'), true));
 
     const result = await runInit({ project: 'new-fest', details: detailsFile() });
 
     expect(result).toBe(true);
-    expect(mocks.runDeploy).toHaveBeenCalledWith({ yes: true });
     expect(mocks.runCommand).toHaveBeenCalledWith(
       'npm',
       ['--prefix', 'packages/cli', 'run', 'firestore-init:production'],
       repo,
     );
+    expect(mocks.runDeploy).toHaveBeenCalledWith({ yes: true });
+    expect(order).toEqual(['seed', 'deploy']);
+  });
+
+  it('adds the sample content without a deploy or the Blaze plan', async () => {
+    mocks.isBillingEnabled.mockResolvedValueOnce(false);
+
+    const result = await runInit({
+      project: 'new-fest',
+      details: detailsFile(),
+      seed: true,
+      deploy: true,
+    });
+
+    expect(result).toBe(true);
+    expect(mocks.runCommand).toHaveBeenCalledWith(
+      'npm',
+      ['--prefix', 'packages/cli', 'run', 'firestore-init:production'],
+      repo,
+    );
+    expect(mocks.runDeploy).not.toHaveBeenCalled();
   });
 
   it('does not deploy without the Blaze plan, and links to the upgrade', async () => {
@@ -206,6 +229,26 @@ describe('runInit', () => {
     expect(console.log).toHaveBeenCalledWith(
       expect.stringContaining('https://console.firebase.google.com/project/new-fest/usage/details'),
     );
+  });
+
+  it('deploys without the Blaze plan when the site has no functions', async () => {
+    write(
+      'packages/web/defaults/site.json',
+      JSON.stringify({ features: { functions: true, schedule: true, speakers: true } }),
+    );
+    write('details.json', JSON.stringify({ ...details, featuresOff: ['functions'] }));
+
+    const result = await runInit({
+      project: 'new-fest',
+      details: join(repo, 'details.json'),
+      deploy: true,
+      seed: false,
+    });
+
+    expect(result).toBe(true);
+    expect(read('packages/config/site.json')).toMatchObject({ features: { functions: false } });
+    expect(mocks.isBillingEnabled).not.toHaveBeenCalled();
+    expect(mocks.runDeploy).toHaveBeenCalledWith({ yes: true });
   });
 
   it('stops before deploying when the config is not valid', async () => {

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
+import { runConvertSchedule } from './commands/convert-schedule/index.js';
 import { runDoctor } from './commands/doctor.js';
 import { runDeploy } from './commands/deploy.js';
 import { runEmulators } from './commands/emulators.js';
@@ -11,6 +12,7 @@ import { runSetup } from './commands/setup.js';
 import { runSetupGitHub } from './commands/setup-github.js';
 import { githubAnnotation, validateSiteConfig } from './utils/site-config.js';
 import { findRepoRoot } from './utils/node-version.js';
+import { firebaseDeployArgs } from './utils/site-features.js';
 
 const program = new Command();
 
@@ -37,7 +39,7 @@ program
   .option('--details <file>', 'A JSON file with the site details, instead of the questions.')
   .option('--deploy', 'Deploy without asking.')
   .option('--no-deploy', 'Skip the deploy.')
-  .option('--seed', 'Add the sample content after deploying, without asking.')
+  .option('--seed', 'Add the sample content without asking.')
   .option('--no-seed', 'Skip the sample content.')
   .action(async (options: InitOptions) => {
     process.exitCode = (await runInit(options)) ? 0 : 1;
@@ -92,6 +94,16 @@ program
   });
 
 program
+  .command('deploy-args')
+  .description(
+    'Print the arguments `firebase deploy` needs for site.json, such as `--except functions` ' +
+      'when features.functions is false. The deploy workflow uses it.',
+  )
+  .action(() => {
+    console.log(firebaseDeployArgs(findRepoRoot(process.cwd()) ?? process.cwd()).join(' '));
+  });
+
+program
   .command('firestore-init')
   .description(
     'Seed the Firestore project from docs/default-firebase-data.json (targets the local ' +
@@ -129,6 +141,23 @@ program
   .description('Export the running Firestore emulator data to .firebase/emulator-data.')
   .action(() => {
     process.exitCode = runFirestoreExport() ? 0 : 1;
+  });
+
+program
+  .command('convert-schedule')
+  .description(
+    'Move session times and tracks from the old schedule collection onto the sessions, and the ' +
+      'tracks to packages/config/site.json (targets the local emulator unless ' +
+      'FIRESTORE_TARGET=production is set). Leaves the schedule collection in place.',
+  )
+  .option('--dry-run', 'Print the changes without writing them.')
+  .action(async (options: { dryRun?: boolean }) => {
+    try {
+      await runConvertSchedule(options);
+    } catch (error) {
+      console.log(error);
+      process.exitCode = 1;
+    }
   });
 
 program.parse();

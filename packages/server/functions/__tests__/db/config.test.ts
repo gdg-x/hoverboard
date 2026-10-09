@@ -11,16 +11,20 @@ describe('db/config', () => {
   });
 
   it('fetches a config document by id', async () => {
-    const mockDocSnapshot = { id: 'schedule', exists: true, data: () => ({ enabled: true }) };
+    const mockDocSnapshot = {
+      id: 'notifications',
+      exists: true,
+      data: () => ({ icon: '/icon.png' }),
+    };
     const get = vi.fn().mockResolvedValue(mockDocSnapshot);
     const doc = vi.fn().mockReturnValue({ get });
     const collection = vi.fn().mockReturnValue({ doc });
     vi.mocked(getFirestore).mockReturnValue({ collection } as never);
 
-    const result = await fetchConfig('schedule');
+    const result = await fetchConfig('notifications');
 
     expect(collection).toHaveBeenCalledWith('config');
-    expect(doc).toHaveBeenCalledWith('schedule');
+    expect(doc).toHaveBeenCalledWith('notifications');
     expect(get).toHaveBeenCalled();
     expect(result).toBe(mockDocSnapshot);
   });

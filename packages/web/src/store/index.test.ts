@@ -21,7 +21,6 @@ describe('store', () => {
         'partners',
         'potentialPartners',
         'previousSpeakers',
-        'schedule',
         'sessions',
         'snackbars',
         'speakers',

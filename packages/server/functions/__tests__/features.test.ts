@@ -39,17 +39,17 @@ describe('isFeatureOff', () => {
   });
 
   it('runs while any of several features is on', async () => {
-    const { isFeatureOff } = await loadWith({ schedule: false, speakers: true });
+    const { isFeatureOff } = await loadWith({ notifications: false, mySchedule: true });
 
-    expect(isFeatureOff('scheduleWrite', 'schedule', 'speakers')).toBe(false);
+    expect(isFeatureOff('reminders', 'notifications', 'mySchedule')).toBe(false);
   });
 
   it('stops when all of several features are off', async () => {
-    const { isFeatureOff } = await loadWith({ schedule: false, speakers: false });
+    const { isFeatureOff } = await loadWith({ notifications: false, mySchedule: false });
 
-    expect(isFeatureOff('scheduleWrite', 'schedule', 'speakers')).toBe(true);
+    expect(isFeatureOff('reminders', 'notifications', 'mySchedule')).toBe(true);
     expect(logger.error).toHaveBeenCalledWith(
-      'scheduleWrite did nothing because features.schedule and features.speakers are false in packages/config/site.json.',
+      'reminders did nothing because features.notifications and features.mySchedule are false in packages/config/site.json.',
     );
   });
 

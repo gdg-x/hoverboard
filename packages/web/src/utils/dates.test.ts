@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { getDate, getEventDates } from './dates';
+import { getDate, getEventDates, getScheduleDay } from './dates';
 
 const localization = vi.hoisted(() => ({ getLocale: vi.fn(() => 'en') }));
 
@@ -59,5 +59,19 @@ describe('getEventDates', () => {
     localization.getLocale.mockReturnValue('es');
 
     expect(getEventDates()).toBe('13–14 de octubre de 2017');
+  });
+});
+
+describe('getScheduleDay', () => {
+  afterEach(() => {
+    localization.getLocale.mockReturnValue('en');
+  });
+
+  it('formats a day as month and day, in the active locale', () => {
+    expect(getScheduleDay('2016-09-09')).toBe('September 9');
+
+    localization.getLocale.mockReturnValue('es');
+
+    expect(getScheduleDay('2016-09-09')).toBe('9 de septiembre');
   });
 });

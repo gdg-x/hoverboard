@@ -4,7 +4,9 @@ import type { RootState } from '..';
 import type { Filter } from '../../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import type { Session } from '../../models/session';
-import { selectSessionsState } from '.';
+import type { BuiltSession } from '../../schedule/build-schedule';
+import { selectSessionsState } from '../schedule';
+import { selectRawSessionsState } from '.';
 
 const buildFilter = (group: FilterGroupKey, tag: string): Filter => {
   return { group, tag };
@@ -29,15 +31,18 @@ const buildFilters = (sessions: Session[], filterGroupKey: FilterGroupKey): Filt
 
 const selectSessionId = (_state: RootState, sessionId: string) => sessionId;
 
-const selectSessions = (state: RootState) => {
+// The same array each time, so the selectors below stay memoized before the sessions load.
+const NO_SESSIONS: never[] = [];
+
+const selectSessions = (state: RootState): BuiltSession[] => {
   const sessions = selectSessionsState(state);
-  return sessions instanceof Success ? sessions.data : [];
+  return sessions instanceof Success ? sessions.data : NO_SESSIONS;
 };
 
 export const selectSession = createSelector(
   selectSessions,
   selectSessionId,
-  (sessions: Session[], sessionId: string): Session | undefined => {
+  (sessions: BuiltSession[], sessionId: string): BuiltSession | undefined => {
     return sessions.find((session) => session.id === sessionId);
   },
 );
@@ -50,8 +55,14 @@ const DEFAULT_FILTER_GROUPS: FilterGroupKey[] = [FilterGroupKey.tags, FilterGrou
 const selectGroups = (_state: RootState, groups: FilterGroupKey[] = DEFAULT_FILTER_GROUPS) =>
   groups;
 
+// The raw sessions have the same tags, and don't wait for the speakers.
+const selectRawSessions = (state: RootState): Session[] => {
+  const sessions = selectRawSessionsState(state);
+  return sessions instanceof Success ? sessions.data : NO_SESSIONS;
+};
+
 export const selectFilterGroups = createSelector(
-  selectSessions,
+  selectRawSessions,
   selectGroups,
   (sessions: Session[], groups: FilterGroupKey[]): FilterGroup[] => {
     return [

@@ -6,6 +6,7 @@ import {
   resources,
   site as settings,
 } from 'virtual:hoverboard/site';
+import type { Track } from '../schedule/build-schedule';
 import { isFeature, isFeatureEnabled, isNavigationRoute, type NavigationRoute } from './features';
 import { deepMerge } from './merge';
 
@@ -24,6 +25,9 @@ export const siteLocales = settings.locales as { source: string; targets: string
 export const timeZone = settings.event.timezone;
 export const eventDates = { start: settings.event.startDate, end: settings.event.endDate };
 export const disabledSchedule = !settings.schedule.published;
+export const scheduleTracks = (settings.schedule as { tracks?: Track[] }).tracks ?? [];
+/** For `buildSchedule()`, so the build and the browser build the same schedule. */
+export const scheduleOptions = { published: !disabledSchedule, tracks: scheduleTracks };
 export const hashtag = settings.social.hashtag;
 export const mailto = settings.organizer.email;
 export const socialNetwork = { follow: settings.social.follow };

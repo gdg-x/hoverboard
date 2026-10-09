@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Hoverboard is a conference website template. Organizers fork it, configure it and deploy it to their own Firebase project. The web app is Lit components that Astro renders to static pages at build time, from the site's content in Firestore. The pages then hydrate in the browser and keep the content live. Cloud Functions handle schedule generation, notifications, image optimization and Mailchimp.
+Hoverboard is a conference website template. Organizers fork it, configure it and deploy it to their own Firebase project. The web app is Lit components that Astro renders to static pages at build time, from the site's content in Firestore. The pages then hydrate in the browser and keep the content live. Cloud Functions handle notifications, image optimization and Mailchimp.
 
 ## Layout
 
@@ -37,7 +37,7 @@ Run from the repo root.
 | `npm run build`                | Production build of every page to `packages/web/dist`. Reads content from the Firestore emulator, see `FIRESTORE_TARGET` below                         |
 | `npm start`                    | Emulators, functions and the Astro dev server at http://localhost:4321                                                                                 |
 | `npm run serve`                | Builds from the emulator data, then serves `dist` on the Hosting emulator at http://localhost:5000                                                     |
-| `./hbd doctor`                 | Checks the local setup, Firebase login, project and billing plan                                                                                       |
+| `./hbd doctor`                 | Checks the local setup, Firebase login, project, billing plan and deployed functions                                                                   |
 | `./hbd init`                   | Sets up a site: Firebase project and web app, event details in `packages/config`, billing, first deploy. Changes production, so only run it when asked |
 
 Before finishing a change, run `npm run lint` and `npm test`, or at least the affected Vitest project and type check.

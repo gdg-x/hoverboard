@@ -1,11 +1,11 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { html, nothing, render } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import { updateMetadata } from '../utils/metadata';
 import { scrollToElement } from '../utils/scrolling';
 import './home-page';
-import { HomePage } from './home-page';
+import { HomePage, homeBlocks } from './home-page';
 
 vi.mock('../utils/metadata');
 vi.mock('../utils/scrolling', () => ({
@@ -30,6 +30,9 @@ const tones = (root: ShadowRoot) =>
   [...root.querySelectorAll('.band')].map((band) => band.getAttribute('data-tone'));
 
 describe('home-page', () => {
+  // Otherwise they can finish loading after jsdom is gone, which fails the run.
+  beforeAll(() => homeBlocks);
+
   afterEach(() => {
     render(nothing, document.body);
   });

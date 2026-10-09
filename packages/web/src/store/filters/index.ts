@@ -22,10 +22,13 @@ export const setFilters = (filters: Filter[]) => {
   dispatch(set(filters));
 };
 
+// The same array each time, so selectors that read the filters stay memoized.
+const NO_FILTERS: Filter[] = [];
+
 // Until the app applies the URL's filters after hydration, render unfiltered, as the server does.
 export const selectFilters = (state: RootState) => {
   const { filters } = state;
-  return filters instanceof Success ? filters.data : [];
+  return filters instanceof Success ? filters.data : NO_FILTERS;
 };
 
 export default slice.reducer;

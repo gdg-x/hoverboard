@@ -32,5 +32,6 @@ if (process.env['FIRESTORE_TARGET'] === 'production') {
   initializeApp({ projectId: DEMO_PROJECT_ID });
 }
 
-export { repoRoot };
+const root: string = repoRoot;
+export { root as repoRoot };
 export const firestore = getFirestore();

@@ -20,7 +20,7 @@ export interface SubscribeDialog {
 }
 export interface FeedbackDialog {
   name: DIALOG.FEEDBACK;
-  data: Session;
+  data: Pick<Session, 'id' | 'title'>;
 }
 
 export type Dialog = SigninDialog | SubscribeDialog | FeedbackDialog;

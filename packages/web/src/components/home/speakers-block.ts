@@ -4,7 +4,7 @@ import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
 import type { Speaker } from '../../models/speaker';
-import { type SpeakersState, selectSpeakersState } from '../../store/speakers';
+import { type RawSpeakersState, selectRawSpeakersState } from '../../store/speakers';
 import { band } from '../../styles/band';
 import { randomOrder } from '../../utils/arrays';
 import '../shared/hoverboard-icon';
@@ -12,7 +12,10 @@ import '../shared/speaker-card';
 import { ThemedElement } from '../themed-element';
 import '../ui/hb-button';
 
-/** Up to four featured speakers, and a link to all of them. */
+/**
+ * Up to four featured speakers, and a link to all of them. Speakers with an `order` come first in
+ * that order. Without any, the speakers shuffle.
+ */
 @customElement('speakers-block')
 export class SpeakersBlock extends ThemedElement {
   static override styles = [
@@ -41,8 +44,8 @@ export class SpeakersBlock extends ThemedElement {
     `,
   ];
 
-  @fromStore((state) => selectSpeakersState(state))
-  accessor speakers!: SpeakersState;
+  @fromStore((state) => selectRawSpeakersState(state))
+  accessor speakers!: RawSpeakersState;
 
   // The first render follows the stored order, as on the server, so hydration matches.
   @state()
@@ -79,6 +82,12 @@ export class SpeakersBlock extends ThemedElement {
       const { data } = this.speakers;
       const filteredSpeakers = data.filter((speaker) => speaker.featured);
       const speakers = filteredSpeakers.length ? filteredSpeakers : data;
+      const ordered = speakers
+        .filter(({ order }) => order !== undefined)
+        .sort((a, b) => a.order! - b.order!);
+      if (ordered.length) {
+        return [...ordered, ...speakers.filter(({ order }) => order === undefined)].slice(0, 4);
+      }
       return (this.shuffled ? randomOrder(speakers) : speakers).slice(0, 4);
     }
 

@@ -1,14 +1,14 @@
 import { Success } from '@abraham/remotedata';
 import { fireEvent, within } from '@testing-library/dom';
 import { html, render as litRender, nothing } from 'lit';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { setFeatures } from '../../../__tests__/helpers/features';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setStoreState } from '../../../__tests__/helpers/store';
 import { eventDates } from '../../config/site';
 import type { Ticket } from '../../models/ticket';
 import type { HbDialog } from '../ui/hb-dialog';
-import type { AppHeader } from './app-header';
+import { demoBanner, type AppHeader } from './app-header';
 import './app-header';
 
 const render = async (path = '/') => {
@@ -32,6 +32,9 @@ const tickets = new Success([
 ] as Ticket[]);
 
 describe('app-header', () => {
+  // Otherwise it can finish loading after jsdom is gone, which fails the run.
+  beforeAll(() => demoBanner);
+
   beforeEach(() => {
     // The day before the event, so tickets are on sale.
     vi.useFakeTimers({ toFake: ['Date'] });

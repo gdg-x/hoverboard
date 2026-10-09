@@ -8,19 +8,23 @@ describe('session', () => {
     const sessions: SessionData[] = Object.values(data['sessions']);
     const keys: Array<keyof SessionData> = [
       'complexity',
+      'day',
       'description',
-      'extend',
+      'endTime',
       'icon',
       'image',
       'language',
       'presentation',
       'speakers',
+      'startTime',
       'tags',
       'title',
+      'track',
       'videoId',
     ];
 
-    expect(sessions).toHaveLength(40);
+    // 40 sessions, and 6 copies of sessions the old schedule showed more than once.
+    expect(sessions).toHaveLength(46);
     expect(allKeys(sessions)).toStrictEqual(keys);
   });
 });
