@@ -60,6 +60,7 @@ const session = {
   duration: { hh: 0, mm: 40 },
   track: { title: 'Main hall' },
   complexity: 'Beginner',
+  language: 'English',
   presentation: 'https://slides.example',
   videoId: 'abc123',
   tags: ['Web'],
@@ -105,7 +106,22 @@ describe('session-page', () => {
       chip.textContent?.trim(),
     );
 
-    expect(chips).toEqual(['January 2', '10:00–10:40', '40 min', 'Main hall', 'Beginner', 'Web']);
+    expect(chips).toEqual([
+      'January 2',
+      '10:00–10:40',
+      '40 min',
+      'Main hall',
+      'Beginner',
+      'English',
+      'Web',
+    ]);
+  });
+
+  it('leaves out the language when the session has none', async () => {
+    vi.mocked(selectSession).mockReturnValue({ ...session, language: undefined } as never);
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector('.details')).not.toHaveTextContent('English');
   });
 
   it('links back to the schedule day of the session', async () => {

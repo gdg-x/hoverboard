@@ -197,7 +197,7 @@ export class SessionPage extends ThemedElement {
           session.duration && formatDuration(session.duration),
           session.track?.title,
         ];
-    const details = [...when, session.complexity].filter(Boolean);
+    const details = [...when, session.complexity, session.language].filter(Boolean);
     return html`
       <ul class="details" aria-label="${msg('Session details', { id: 'pages.session.details' })}">
         ${details.map((detail) => html`<li><hb-chip class="plain">${detail}</hb-chip></li>`)}
