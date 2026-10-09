@@ -61,7 +61,7 @@ The command uses your Firebase CLI login. It needs the Owner role, or permission
 
 If the auth step fails with `must specify exactly one of "workload_identity_provider" or "credentials_json"`, the repository variables are missing. Run `./hb setup-github`.
 
-`./hb doctor` checks the Google Cloud and GitHub setup. It warns about anything `./hb setup-github` would still change.
+`./hb doctor` checks the Google Cloud and GitHub setup. It warns about anything `./hb setup-github` would still change. It also warns about service account keys, which never expire, and about the `github-action-*` accounts that `firebase init hosting:github` created for deploys before `./hb setup-github`. Delete those keys, the GitHub secrets that held them (such as `FIREBASE_SERVICE_ACCOUNT_*`), and the old accounts.
 
 Missing roles show up as `403` errors such as `Permission denied to get service` (Service Usage), a failed `firebaserules.googleapis.com` `:test` request (Rules) or `Failed to list functions` (Cloud Functions).
 
