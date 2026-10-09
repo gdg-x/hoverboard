@@ -15,6 +15,8 @@ const ICONS: Record<string, () => Promise<{ default: SVGTemplateResult }>> = {
   youtube: () => import('./icons/youtube'),
   website: () => import('./icons/website'),
   'arrow-right-circle': () => import('./icons/arrow-right-circle'),
+  up: () => import('./icons/up'),
+  checked: () => import('./icons/checked'),
   'bookmark-check': () => import('./icons/bookmark-check'),
   'bookmark-plus': () => import('./icons/bookmark-plus'),
   'insert-comment': () => import('./icons/insert-comment'),
