@@ -3,22 +3,23 @@ import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { Speaker } from '../../models/speaker';
 import { speakerPath } from '../../utils/navigation';
-import { photoTransitionName, tagChipStyle, tagColor } from '../../utils/styles';
+import { photoTransitionName, tagColor } from '../../utils/styles';
 import { ThemedElement } from '../themed-element';
 import '../ui/hb-card';
-import '../ui/hb-chip';
 import './hoverboard-icon';
 
 /** Badges with an icon for the photo. */
 const AFFILIATIONS = ['gde', 'gdg', 'google', 'wtm'];
+/** Where each badge sits on the photo's edge, clockwise from the right. */
+const ANGLES = [45, 10, 80, -25];
 
 /** What a card shows. Previous speakers have no badges. */
 export type CardSpeaker = Pick<Speaker, 'id' | 'name' | 'photoUrl' | 'company' | 'country'> &
   Partial<Pick<Speaker, 'socials' | 'badges'>>;
 
 /**
- * A speaker as one link: photo, name, company, country and badges. In a container narrower than
- * 480px, such as a one-column list, it is a compact row.
+ * A speaker as one link: photo with their GDE, GDG, Google and WTM badges, name, company and
+ * country. In a container narrower than 480px, such as a one-column list, it is a compact row.
  */
 @customElement('speaker-card')
 export class SpeakerCard extends ThemedElement {
@@ -41,14 +42,17 @@ export class SpeakerCard extends ThemedElement {
     }
 
     .photo-frame {
+      --photo-size: 120px;
+      --badge-size: 32px;
+
       position: relative;
       flex: none;
     }
 
     .photo {
       display: block;
-      inline-size: 120px;
-      block-size: 120px;
+      inline-size: var(--photo-size);
+      block-size: var(--photo-size);
       border: var(--hb-border-width) solid var(--hb-border-color);
       border-radius: var(--hb-radius-avatar);
       background-color: var(--hb-color-accent-1-container);
@@ -56,21 +60,23 @@ export class SpeakerCard extends ThemedElement {
     }
 
     .affiliation {
+      --radius: calc(var(--photo-size) * 0.57);
+
       position: absolute;
-      inset-block-end: -4px;
-      inset-inline-end: -4px;
+      inset-block-start: calc(50% + sin(var(--angle)) * var(--radius) - var(--badge-size) / 2);
+      inset-inline-start: calc(50% + cos(var(--angle)) * var(--radius) - var(--badge-size) / 2);
       display: grid;
       place-items: center;
-      inline-size: 32px;
-      block-size: 32px;
+      inline-size: var(--badge-size);
+      block-size: var(--badge-size);
       border: var(--hb-border-width) solid var(--hb-border-color);
       border-radius: 50%;
       background-color: var(--hb-color-surface-bright);
     }
 
     .affiliation hoverboard-icon {
-      inline-size: 18px;
-      block-size: 18px;
+      inline-size: 55%;
+      block-size: 55%;
     }
 
     .text {
@@ -93,16 +99,6 @@ export class SpeakerCard extends ThemedElement {
       font-size: var(--hb-text-sm);
     }
 
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: var(--hb-space-1);
-      margin: var(--hb-space-1) 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
     @container (width < 480px) {
       .content {
         flex-direction: row;
@@ -110,22 +106,13 @@ export class SpeakerCard extends ThemedElement {
         text-align: start;
       }
 
-      .photo {
-        inline-size: 64px;
-        block-size: 64px;
-      }
-
-      .affiliation {
-        inline-size: 26px;
-        block-size: 26px;
+      .photo-frame {
+        --photo-size: 64px;
+        --badge-size: 26px;
       }
 
       .text {
         justify-items: start;
-      }
-
-      .badges {
-        justify-content: flex-start;
       }
     }
   `;
@@ -143,7 +130,9 @@ export class SpeakerCard extends ThemedElement {
 
   override render() {
     const { speaker } = this;
-    const affiliation = speaker.badges?.find((badge) => AFFILIATIONS.includes(badge.name));
+    const affiliations = (speaker.badges ?? [])
+      .filter((badge) => AFFILIATIONS.includes(badge.name))
+      .slice(0, ANGLES.length);
     const meta = [speaker.company, speaker.country].filter(Boolean).join(' · ');
     return html`
       <hb-card href="${this.href ?? speakerPath(speaker.id)}" label="${speaker.name}">
@@ -160,37 +149,25 @@ export class SpeakerCard extends ThemedElement {
                 this.transitionName ?? photoTransitionName('speaker', speaker.id)
               }"
             />
-            ${
-              affiliation
-                ? html`<span class="affiliation" aria-hidden="true">
-                    <hoverboard-icon
-                      name="${affiliation.name}"
-                      style="color: ${tagColor(affiliation.name)}"
-                    ></hoverboard-icon>
-                  </span>`
-                : nothing
-            }
+            ${affiliations.map(
+              (badge, index) =>
+                html`<span
+                  class="affiliation"
+                  role="img"
+                  aria-label="${badge.description || badge.name.toUpperCase()}"
+                  title="${badge.description || badge.name.toUpperCase()}"
+                  style="${styleMap({ '--angle': `${ANGLES[index]}deg` })}"
+                >
+                  <hoverboard-icon
+                    name="${badge.name}"
+                    style="color: ${tagColor(badge.name)}"
+                  ></hoverboard-icon>
+                </span>`,
+            )}
           </div>
           <div class="text">
             <h3 class="name">${speaker.name}</h3>
             ${meta ? html`<p class="meta">${meta}</p>` : nothing}
-            ${
-              speaker.badges?.length
-                ? html`<ul class="badges">
-                    ${speaker.badges.map(
-                      (badge) =>
-                        html`<li>
-                          <hb-chip
-                            title="${badge.description}"
-                            style="${styleMap(tagChipStyle(badge.name))}"
-                          >
-                            ${badge.name.toUpperCase()}
-                          </hb-chip>
-                        </li>`,
-                    )}
-                  </ul>`
-                : nothing
-            }
           </div>
         </div>
       </hb-card>

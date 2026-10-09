@@ -28,7 +28,7 @@ describe('speaker-card', () => {
     expect(shadowRoot.querySelectorAll('a')).toHaveLength(0);
   });
 
-  it('shows the name, company, country and badges as text', async () => {
+  it('shows the name, company and country as text', async () => {
     const { shadowRoot, shadowRootForWithin } = await fixture<SpeakerCard>(
       html`<speaker-card .speaker=${speaker}></speaker-card>`,
     );
@@ -39,25 +39,32 @@ describe('speaker-card', () => {
     expect(shadowRoot.querySelector('.meta')).toHaveTextContent(
       'Analytical Engines · United Kingdom',
     );
-    expect(shadowRoot.querySelector('.badges hb-chip')).toHaveTextContent('GDE');
+    expect(shadowRoot.querySelector('hb-chip')).toBeNull();
   });
 
-  it('shows the first GDE, GDG, Google or WTM badge on the photo, not a social link', async () => {
-    const { shadowRoot } = await fixture<SpeakerCard>(
+  it('shows every GDE, GDG, Google and WTM badge around the photo, not social links', async () => {
+    const { shadowRoot, shadowRootForWithin } = await fixture<SpeakerCard>(
       html`<speaker-card
         .speaker=${{
           ...speaker,
-          badges: [{ name: 'other', link: '', description: 'Other' }, ...speaker.badges!],
+          badges: [
+            ...speaker.badges!,
+            { name: 'other', link: '', description: 'Other' },
+            { name: 'gdg', link: '', description: '' },
+          ],
         }}
       ></speaker-card>`,
     );
 
-    const affiliation = shadowRoot.querySelector('.affiliation')!;
-    expect(affiliation).toHaveAttribute('aria-hidden', 'true');
-    expect(affiliation.querySelector('hoverboard-icon')).toHaveAttribute('name', 'gde');
-    expect(affiliation.querySelector<HTMLElement>('hoverboard-icon')!.style.color).toBe(
-      'var(--hb-tag-gde, var(--hb-color-outline))',
-    );
+    const badges = within(shadowRootForWithin).getAllByRole('img');
+    expect(badges.map((badge) => badge.getAttribute('aria-label'))).toEqual(['GDE', 'GDG']);
+    expect(badges.map((badge) => badge.style.getPropertyValue('--angle'))).toEqual([
+      '45deg',
+      '10deg',
+    ]);
+    const icon = badges[0]!.querySelector<HTMLElement>('hoverboard-icon')!;
+    expect(icon).toHaveAttribute('name', 'gde');
+    expect(icon.style.color).toBe('var(--hb-tag-gde, var(--hb-color-outline))');
     expect(shadowRoot.querySelector('.photo')).toHaveAttribute('alt', '');
   });
 
@@ -78,7 +85,6 @@ describe('speaker-card', () => {
 
     expect(shadowRoot.querySelector('.meta')).toBeNull();
     expect(shadowRoot.querySelector('.affiliation')).toBeNull();
-    expect(shadowRoot.querySelector('.badges')).toBeNull();
   });
 
   it('names its photo for the view transition to the speaker page', async () => {
@@ -104,17 +110,5 @@ describe('speaker-card', () => {
     expect(shadowRoot.querySelector<HTMLElement>('.photo')!.style.viewTransitionName).toBe(
       'previous-speaker-ada',
     );
-  });
-
-  it('colors badges with the badge colors', async () => {
-    const { shadowRoot } = await fixture<SpeakerCard>(
-      html`<speaker-card .speaker=${speaker}></speaker-card>`,
-    );
-
-    expect(
-      shadowRoot
-        .querySelector<HTMLElement>('.badges hb-chip')!
-        .style.getPropertyValue('--hb-chip-background'),
-    ).toContain('--hb-tag-gde-container');
   });
 });
