@@ -38,7 +38,8 @@ export class ScheduleTabs extends ThemedElement {
       padding-inline: var(--hb-space-4);
       border: var(--hb-border-width) solid var(--hb-border-color);
       border-radius: var(--hb-radius-full);
-      background-color: var(--hb-color-surface-bright);
+      background-color: var(--hb-panel-background);
+      backdrop-filter: var(--hb-backdrop-filter);
       color: var(--hb-color-on-surface);
       font-weight: 600;
       text-decoration: none;

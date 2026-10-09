@@ -43,7 +43,11 @@ export class HomeHero extends ThemedElement {
       isolation: isolate;
       overflow: hidden;
       padding: var(--hb-space-8) var(--hb-gutter) var(--hb-space-9);
-      background-color: var(--hb-color-accent-1-container);
+      background-color: color-mix(
+        in srgb,
+        var(--hb-color-accent-1-container) var(--hb-tint-opacity),
+        transparent
+      );
       color: var(--hb-color-on-accent-1-container);
     }
 

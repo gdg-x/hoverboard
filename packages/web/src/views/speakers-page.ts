@@ -33,7 +33,7 @@ export class SpeakersPage extends ThemedElement {
     css`
       :host {
         display: block;
-        background-color: var(--hb-color-surface);
+        background-color: var(--hb-section-background);
         color: var(--hb-color-on-surface);
       }
 

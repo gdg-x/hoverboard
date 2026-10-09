@@ -20,7 +20,8 @@ export class HbCard extends LitElement {
         block-size: 100%;
         border: var(--hb-border-width) solid var(--hb-border-color);
         border-radius: var(--hb-radius-l);
-        background-color: var(--hb-color-surface-bright);
+        background-color: var(--hb-panel-background);
+        backdrop-filter: var(--hb-backdrop-filter);
         color: var(--hb-color-on-surface);
         box-shadow: var(--hb-shadow-card);
         transition:

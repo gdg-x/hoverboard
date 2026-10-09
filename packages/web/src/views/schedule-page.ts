@@ -37,7 +37,7 @@ export class SchedulePage extends ThemedElement {
       --hb-schedule-sticky-top: calc(var(--hb-header-height) + var(--hb-schedule-tabs-height));
 
       display: block;
-      background-color: var(--hb-color-surface);
+      background-color: var(--hb-section-background);
       color: var(--hb-color-on-surface);
     }
 
@@ -58,7 +58,8 @@ export class SchedulePage extends ThemedElement {
       box-sizing: border-box;
       block-size: var(--hb-schedule-tabs-height);
       border-block-end: 1px solid var(--hb-color-outline-variant);
-      background-color: var(--hb-color-surface);
+      background-color: var(--hb-bar-background);
+      backdrop-filter: var(--hb-backdrop-filter);
     }
 
     .tabs schedule-tabs {

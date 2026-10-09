@@ -56,7 +56,8 @@ export class NotificationToggle extends ThemedElement {
       padding: var(--hb-space-5);
       border: var(--hb-border-width) solid var(--hb-border-color);
       border-radius: var(--hb-radius-m);
-      background-color: var(--hb-color-surface-bright);
+      background-color: var(--hb-panel-background);
+      backdrop-filter: var(--hb-backdrop-filter);
       color: var(--hb-color-on-surface);
       box-shadow: var(--hb-shadow-card);
     }

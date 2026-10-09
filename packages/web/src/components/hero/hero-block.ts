@@ -84,7 +84,11 @@ export class HeroBlock extends ThemedElement {
       isolation: isolate;
       overflow: hidden;
       padding: var(--hb-space-8) var(--hb-gutter) var(--hb-space-7);
-      background-color: var(--hb-hero-background);
+      background-color: color-mix(
+        in srgb,
+        var(--hb-hero-background) var(--hb-tint-opacity),
+        transparent
+      );
       color: var(--hb-hero-color);
     }
 

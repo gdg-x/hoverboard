@@ -85,6 +85,19 @@
   --hb-decorations-display: none;
 }
 
+/* eslint-disable css/use-baseline, css/no-important -- browsers without the query keep the glass; `!important` beats the theme's values, whatever selector sets them. */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --hb-page-background: var(--hb-color-surface) !important;
+    --hb-section-background: var(--hb-color-surface) !important;
+    --hb-tint-opacity: 100% !important;
+    --hb-panel-background: var(--hb-color-surface-bright) !important;
+    --hb-bar-background: var(--hb-color-surface) !important;
+    --hb-backdrop-filter: none !important;
+  }
+}
+/* eslint-enable css/use-baseline, css/no-important */
+
 *,
 *::before,
 *::after {
@@ -107,7 +120,7 @@ main:focus {
 
 body {
   margin: 0;
-  background: var(--hb-color-surface);
+  background: var(--hb-page-background);
   color: var(--hb-color-on-surface);
   font-family: var(--hb-font-body);
   font-size: var(--hb-text-md);

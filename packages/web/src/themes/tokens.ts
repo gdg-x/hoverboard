@@ -60,6 +60,18 @@ export interface ThemeStyle {
   onCta: string;
   footerBackground: string;
   footerText: string;
+  /** Behind everything, on `body`. */
+  pageBackground: string;
+  /** Behind a page's content, under its hero. */
+  sectionBackground: string;
+  /** How much of the page background the colored bands and heroes cover. */
+  tintOpacity: string;
+  /** Cards, menus, dialogs and the header. */
+  panelBackground: string;
+  /** Sticky bars, such as the schedule's tabs, track names and times. */
+  barBackground: string;
+  /** Applied to panels and bars, such as a blur for frosted glass. */
+  backdropFilter: string;
 }
 
 /** A theme has a light and a dark color set. It cannot ship with only one. */

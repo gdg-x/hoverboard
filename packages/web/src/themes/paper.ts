@@ -90,5 +90,11 @@ export const paper: Theme = {
     onCta: 'var(--hb-color-on-primary)',
     footerBackground: 'var(--hb-color-surface-container)',
     footerText: 'var(--hb-color-on-surface)',
+    pageBackground: 'var(--hb-color-surface)',
+    sectionBackground: 'var(--hb-color-surface)',
+    tintOpacity: '100%',
+    panelBackground: 'var(--hb-color-surface-bright)',
+    barBackground: 'var(--hb-color-surface)',
+    backdropFilter: 'none',
   },
 };

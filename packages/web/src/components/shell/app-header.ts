@@ -62,7 +62,8 @@ export class AppHeader extends ThemedElement {
       padding: var(--hb-space-1) var(--hb-space-2) var(--hb-space-1) var(--hb-space-5);
       border: var(--hb-border-width) solid var(--hb-border-color);
       border-radius: var(--hb-radius-full);
-      background-color: var(--hb-color-surface-bright);
+      background-color: var(--hb-panel-background);
+      backdrop-filter: var(--hb-backdrop-filter);
       color: var(--hb-color-on-surface);
       box-shadow: var(--hb-shadow-card);
     }

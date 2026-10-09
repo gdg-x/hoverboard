@@ -50,7 +50,11 @@ export class HomePage extends ThemedElement {
       --hb-band-background: var(--hb-color-surface);
       --hb-band-color: var(--hb-color-on-surface);
 
-      background-color: var(--hb-band-background);
+      background-color: color-mix(
+        in srgb,
+        var(--hb-band-background) var(--hb-tint-opacity),
+        transparent
+      );
       color: var(--hb-band-color);
     }
 

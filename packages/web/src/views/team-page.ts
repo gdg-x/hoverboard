@@ -19,7 +19,7 @@ export class TeamPage extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
-      background-color: var(--hb-color-surface);
+      background-color: var(--hb-section-background);
       color: var(--hb-color-on-surface);
     }
 
@@ -81,7 +81,8 @@ export class TeamPage extends ThemedElement {
       padding: var(--hb-space-4);
       border: var(--hb-border-width) solid var(--hb-border-color);
       border-radius: var(--hb-radius-l);
-      background-color: var(--hb-color-surface-bright);
+      background-color: var(--hb-panel-background);
+      backdrop-filter: var(--hb-backdrop-filter);
       box-shadow: var(--hb-shadow-card);
     }
 

@@ -90,5 +90,11 @@ export const festival: Theme = {
     // An ink band in light. In dark, ink is light, so the band uses a dim surface instead.
     footerBackground: 'light-dark(var(--hb-color-ink), var(--hb-color-surface-dim))',
     footerText: 'light-dark(var(--hb-color-surface), var(--hb-color-on-surface))',
+    pageBackground: 'var(--hb-color-surface)',
+    sectionBackground: 'var(--hb-color-surface)',
+    tintOpacity: '100%',
+    panelBackground: 'var(--hb-color-surface-bright)',
+    barBackground: 'var(--hb-color-surface)',
+    backdropFilter: 'none',
   },
 };

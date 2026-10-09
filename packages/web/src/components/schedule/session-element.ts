@@ -78,7 +78,8 @@ export class SessionElement extends ThemedElement {
       padding: var(--hb-space-4) var(--hb-space-4) var(--hb-space-4) calc(var(--hb-space-4) + 6px);
       border: var(--hb-border-width) solid var(--hb-border-color);
       border-radius: var(--hb-radius-m);
-      background-color: var(--hb-color-surface-bright);
+      background-color: var(--hb-panel-background);
+      backdrop-filter: var(--hb-backdrop-filter);
       background-image: linear-gradient(
         to right,
         var(--stripe, var(--hb-color-outline-variant)) 0 6px,

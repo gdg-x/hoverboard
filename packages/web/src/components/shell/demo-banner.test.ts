@@ -38,7 +38,7 @@ describe('demo-banner', () => {
     expect(view.getByRole('combobox', { name: 'Theme' })).toHaveValue(themeName);
     expect(
       view.getAllByRole('option').map((option) => (option as HTMLOptionElement).value),
-    ).toEqual(['festival', 'spotlight', 'paper']);
+    ).toEqual(['festival', 'spotlight', 'paper', 'glass']);
     const spacing = within(view.getByRole('group', { name: 'Spacing' }));
     expect(spacing.getAllByRole('radio').map((radio) => radio.getAttribute('value'))).toEqual([
       'compact',

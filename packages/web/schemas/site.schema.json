@@ -195,7 +195,7 @@
       "properties": {
         "name": {
           "description": "The built-in theme.",
-          "enum": ["festival", "spotlight", "paper"]
+          "enum": ["festival", "spotlight", "paper", "glass"]
         },
         "colorScheme": {
           "description": "system follows the visitor's browser setting. light or dark locks the site to one scheme and hides the footer toggle.",

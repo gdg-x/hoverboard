@@ -1,10 +1,14 @@
 import { festival } from './festival';
+import { glass } from './glass';
 import { paper } from './paper';
 import { spotlight } from './spotlight';
 import { COLOR_ROLES, type Theme, type ThemeStyle, cssColorVar, cssStyleVar } from './tokens';
 
 /** The built-in themes. `theme.name` in site.json picks one. */
-export const THEMES = { festival, spotlight, paper } as const satisfies Record<string, Theme>;
+export const THEMES = { festival, spotlight, paper, glass } as const satisfies Record<
+  string,
+  Theme
+>;
 
 export type ThemeName = keyof typeof THEMES;
 

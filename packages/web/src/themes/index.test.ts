@@ -1,7 +1,9 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { contrastFailures, contrastRatio } from './contrast';
 import { THEMES, themeDeclarations } from './index';
-import { COLOR_ROLES, cssColorVar } from './tokens';
+import { COLOR_ROLES, type ThemeStyle, cssColorVar, cssStyleVar } from './tokens';
 
 describe('contrastRatio', () => {
   it('matches the WCAG ratios', () => {
@@ -28,6 +30,29 @@ describe.each(Object.entries(THEMES))('%s theme', (_, theme) => {
       expect(css).toContain(
         `${cssColorVar(role)}: light-dark(${theme.light[role]}, ${theme.dark[role]});`,
       );
+    }
+  });
+});
+
+describe('glass theme', () => {
+  it('turns solid for visitors who reduce transparency', () => {
+    const baseCss = readFileSync(join(import.meta.dirname, '../styles/base.css'), 'utf8');
+    const reduced = /@media \(prefers-reduced-transparency: reduce\) \{([^@]*?)\n\}/.exec(
+      baseCss,
+    )?.[1];
+    const solid: Partial<ThemeStyle> = {
+      pageBackground: 'var(--hb-color-surface)',
+      sectionBackground: 'var(--hb-color-surface)',
+      tintOpacity: '100%',
+      panelBackground: 'var(--hb-color-surface-bright)',
+      barBackground: 'var(--hb-color-surface)',
+      backdropFilter: 'none',
+    };
+
+    for (const [key, value] of Object.entries(solid) as [keyof ThemeStyle, string][]) {
+      expect(THEMES.glass.style[key]).not.toBe(value);
+      expect(THEMES.festival.style[key]).toBe(value);
+      expect(reduced).toContain(`${cssStyleVar(key)}: ${value} !important;`);
     }
   });
 });

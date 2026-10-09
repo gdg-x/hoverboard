@@ -32,7 +32,7 @@ export class PreviousSpeakersPage extends ThemedElement {
   static override styles = css`
     :host {
       display: block;
-      background-color: var(--hb-color-surface);
+      background-color: var(--hb-section-background);
       color: var(--hb-color-on-surface);
     }
 
@@ -50,9 +50,10 @@ export class PreviousSpeakersPage extends ThemedElement {
       inset-block-start: var(--hb-header-height);
       margin: var(--hb-space-6) calc(-1 * var(--hb-space-3)) var(--hb-space-4);
       padding: var(--hb-space-2) var(--hb-space-3);
-      background-color: var(--hb-color-surface);
+      background-color: var(--hb-bar-background);
+      backdrop-filter: var(--hb-backdrop-filter);
       /* Covers the cards that scroll under the header's margin too. */
-      box-shadow: 0 calc(-1 * var(--hb-space-5)) 0 0 var(--hb-color-surface);
+      box-shadow: 0 calc(-1 * var(--hb-space-5)) 0 0 var(--hb-bar-background);
       font: 800 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
     }
 

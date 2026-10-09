@@ -96,7 +96,8 @@ export class ScheduleDay extends ThemedElement {
         z-index: 3;
         inset-block-start: var(--hb-schedule-sticky-top, 0px);
         overflow: hidden;
-        background-color: var(--hb-color-surface);
+        background-color: var(--hb-bar-background);
+        backdrop-filter: var(--hb-backdrop-filter);
       }
 
       .header-grid {
@@ -109,7 +110,7 @@ export class ScheduleDay extends ThemedElement {
         position: sticky;
         z-index: 1;
         inset-inline-start: 0;
-        background-color: var(--hb-color-surface);
+        background-color: var(--hb-bar-background);
       }
 
       .track {
@@ -142,7 +143,8 @@ export class ScheduleDay extends ThemedElement {
         inset-inline-start: 0;
         grid-column: 1;
         padding-block-start: var(--hb-space-3);
-        background-color: var(--hb-color-surface);
+        background-color: var(--hb-bar-background);
+        backdrop-filter: var(--hb-backdrop-filter);
         font: 600 var(--hb-text-md) / 1.2 var(--hb-font-mono);
         scroll-margin-block-start: calc(var(--hb-schedule-sticky-top, 0px) + 4rem);
       }
@@ -218,7 +220,8 @@ export class ScheduleDay extends ThemedElement {
         inset-inline-start: 0;
         padding: var(--hb-space-1) var(--hb-space-2);
         border-radius: var(--hb-radius-full);
-        background-color: var(--hb-color-surface);
+        background-color: var(--hb-bar-background);
+        backdrop-filter: var(--hb-backdrop-filter);
       }
 
       .empty {
