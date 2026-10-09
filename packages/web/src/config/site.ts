@@ -101,13 +101,18 @@ const PROVIDERS = {
 };
 type Provider = keyof typeof PROVIDERS;
 
+/** Sign-in with a link sent by email, with no password. */
+export const emailLinkSignIn = settings.auth.providers.includes('emailLink');
+
 export const signInProviders = {
   // The build validates the names against site.schema.json.
-  providersData: (settings.auth.providers as Provider[]).map((name) => ({
-    name,
-    label: PROVIDERS[name].label,
-    url: PROVIDERS[name].url,
-  })),
+  providersData: (settings.auth.providers.filter((name) => name !== 'emailLink') as Provider[]).map(
+    (name) => ({
+      name,
+      label: PROVIDERS[name].label,
+      url: PROVIDERS[name].url,
+    }),
+  ),
   allowedProvidersUrl: Object.values(PROVIDERS).map(({ url }) => url),
 };
 

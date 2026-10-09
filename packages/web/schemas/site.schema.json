@@ -180,11 +180,11 @@
       "additionalProperties": false,
       "properties": {
         "providers": {
-          "description": "Sign-in providers, in the order they are shown.",
+          "description": "Sign-in methods, in the order they are shown. `emailLink` emails a sign-in link, with no password.",
           "type": "array",
           "uniqueItems": true,
           "items": {
-            "enum": ["google", "facebook", "twitter"]
+            "enum": ["emailLink", "google", "facebook", "twitter"]
           }
         }
       }

@@ -189,6 +189,17 @@ describe('config validation', () => {
     ]);
   });
 
+  it('needs a sign-in method when a feature needs sign-in', () => {
+    expect(errorsFor({ site: { auth: { providers: [] } } })).toEqual([
+      'site.json/auth/providers: mySchedule and feedback need a way to sign in, and there is none',
+    ]);
+    expect(
+      errorsFor({
+        site: { auth: { providers: [] }, features: { mySchedule: false, feedback: false } },
+      }),
+    ).toEqual([]);
+  });
+
   it('rejects navigation to unknown routes', () => {
     expect(
       errorsFor({

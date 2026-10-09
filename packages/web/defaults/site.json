@@ -5,7 +5,7 @@
     "published": true
   },
   "auth": {
-    "providers": ["google"]
+    "providers": ["emailLink"]
   },
   "theme": {
     "name": "festival",

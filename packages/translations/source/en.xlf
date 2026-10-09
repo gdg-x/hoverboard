@@ -41,8 +41,8 @@
 <trans-unit id="dialogs.signin.sign-in-with">
   <source>Sign in with <x id="0" equiv-text="${provider}"/></source>
 </trans-unit>
-<trans-unit id="common.general-error">
-  <source>An error has occurred. Please, try again later.</source>
+<trans-unit id="dialogs.signin.use-email-link">
+  <source><x id="0" equiv-text="${error.email}"/> signed in with an email link before. Sign in that way.</source>
 </trans-unit>
 <trans-unit id="dialogs.signin.existing-account">
   <source>You already have an account</source>
@@ -52,6 +52,24 @@
 </trans-unit>
 <trans-unit id="dialogs.signin.continue-with">
   <source>Sign in with <x id="0" equiv-text="${provider}"/> to continue.</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.link-sent">
+  <source>Check your email. We sent a sign-in link to <x id="0" equiv-text="&lt;b&gt;${email}&lt;/b&gt;"/>.</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.confirm-email">
+  <source>Enter your email address again to finish signing in.</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.email">
+  <source>Email</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.send-link">
+  <source>Email me a sign-in link</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.wrong-email">
+  <source>Use the email address the link was sent to.</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.send-error">
+  <source>Could not send the link. Please try again.</source>
 </trans-unit>
 <trans-unit id="dialogs.subscribe.first-name">
   <source>First Name</source>
@@ -452,6 +470,12 @@
 <trans-unit id="shell.service-worker.error">
   <source>Error caching for offline use.</source>
 </trans-unit>
+<trans-unit id="auth.sign-in-link-expired">
+  <source>This sign-in link has expired or was already used. Ask for a new one.</source>
+</trans-unit>
+<trans-unit id="common.general-error">
+  <source>An error has occurred. Please, try again later.</source>
+</trans-unit>
 <trans-unit id="store.featured-sessions.added">
   <source>Session saved to My Schedule</source>
 </trans-unit>
@@ -646,6 +670,10 @@
 </trans-unit>
 <trans-unit id="pages.team.error">
   <source>Error loading teams.</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.or">
+  <source>or</source>
+  <note from="lit-localize">Between signing in by email and signing in with another account.</note>
 </trans-unit>
 <trans-unit id="common.subscribe">
   <source>Subscribe</source>

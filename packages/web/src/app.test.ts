@@ -1,14 +1,22 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { startApp } from './app';
 import { store } from './store';
-import { onUser } from './store/auth';
+import { finishSignInWithLink, onUser, storedSignInEmail, takeSignInLink } from './store/auth';
+import { openSigninDialog } from './store/dialogs';
 import { selectFilters } from './store/filters';
 import { logPageView } from './utils/analytics';
 import { renderNextPageInSourceLocale, startLocalization } from './utils/localization';
 
 vi.mock('./store/auth', async (importOriginal) => ({
   ...(await importOriginal<typeof import('./store/auth')>()),
+  finishSignInWithLink: vi.fn(),
   onUser: vi.fn(),
+  storedSignInEmail: vi.fn(),
+  takeSignInLink: vi.fn(() => false),
+}));
+vi.mock('./store/dialogs', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./store/dialogs')>()),
+  openSigninDialog: vi.fn(),
 }));
 vi.mock('./utils/analytics', () => ({ logPageView: vi.fn() }));
 vi.mock('./utils/localization', async (importOriginal) => ({
@@ -74,5 +82,38 @@ describe('startApp', () => {
     window.dispatchEvent(new Event('offline'));
 
     expect(store.getState().snackbars.at(-1)?.label).toBe('You can still work offline.');
+  });
+});
+
+describe('startApp from a sign-in link', () => {
+  it('signs in with the address this browser sent the link to', async () => {
+    vi.mocked(takeSignInLink).mockReturnValueOnce(true);
+    vi.mocked(storedSignInEmail).mockReturnValueOnce('ada@example.com');
+    vi.mocked(finishSignInWithLink).mockResolvedValueOnce('signed-in');
+
+    await startApp();
+
+    expect(finishSignInWithLink).toHaveBeenCalledWith('ada@example.com');
+    expect(openSigninDialog).not.toHaveBeenCalled();
+  });
+
+  it('asks for the address in another browser', async () => {
+    vi.mocked(takeSignInLink).mockReturnValueOnce(true);
+    vi.mocked(storedSignInEmail).mockReturnValueOnce(null);
+
+    await startApp();
+
+    expect(finishSignInWithLink).not.toHaveBeenCalled();
+    expect(openSigninDialog).toHaveBeenCalled();
+  });
+
+  it('opens the dialog to try again when signing in fails', async () => {
+    vi.mocked(takeSignInLink).mockReturnValueOnce(true);
+    vi.mocked(storedSignInEmail).mockReturnValueOnce('ada@example.com');
+    vi.mocked(finishSignInWithLink).mockResolvedValueOnce('failed');
+
+    await startApp();
+
+    expect(openSigninDialog).toHaveBeenCalled();
   });
 });

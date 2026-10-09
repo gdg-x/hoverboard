@@ -32,6 +32,7 @@ const site = {
   },
   social: { hashtag: 'Old', follow: [{ name: 'x', url: 'https://x.com/old' }] },
   integrations: { googleMapsApiKey: 'old-key' },
+  auth: { providers: ['emailLink', 'google'] },
   features: { forkMe: true },
   theme: { name: 'festival', tagColors: { web: '#2196f3' } },
 };
@@ -150,6 +151,11 @@ describe('applySiteDetails', () => {
     expect(next['organizer']).toEqual({ name: 'GDG Springfield', email: 'hi@example.com' });
     expect(next['social']).toEqual({ hashtag: 'NewFest', follow: [] });
     expect(next).not.toHaveProperty('url');
+  });
+
+  it('starts a new project with the default sign-in, and keeps it when the project stays', () => {
+    expect(apply().site).not.toHaveProperty('auth');
+    expect(apply({}, false).site['auth']).toEqual(site.auth);
   });
 
   it('keeps the organizer and social links when the project stays', () => {

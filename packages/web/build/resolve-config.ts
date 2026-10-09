@@ -135,6 +135,12 @@ const featureErrors = (site: Site, resources: Resources): string[] => {
           .map((required) => `site.json/features/${feature}: needs ${required}, which is off`)
       : [],
   );
+  const needSignIn = (['mySchedule', 'feedback'] as const).filter((feature) => features[feature]);
+  if (needSignIn.length && !site.auth.providers.length) {
+    errors.push(
+      `site.json/auth/providers: ${needSignIn.join(' and ')} need a way to sign in, and there is none`,
+    );
+  }
 
   const links: [string, string][] = [
     ...resources.footerRelBlock.flatMap(({ links }, block) =>
