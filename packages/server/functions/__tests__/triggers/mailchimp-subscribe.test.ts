@@ -53,9 +53,9 @@ describe('mailchimpSubscribe', () => {
   // Runs before the restore above, which removes the spies' calls.
   afterEach(expectNoPersonalDataLogged);
 
-  it('subscribes a new user to the configured Mailchimp list', async () => {
+  it('adds a new user to the configured Mailchimp list as pending, so Mailchimp asks them to confirm', async () => {
     mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
-    mockFetchOnce({ status: 'subscribed' });
+    mockFetchOnce({ status: 'pending' });
     const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
     await mailchimpSubscribe.run({
@@ -69,36 +69,30 @@ describe('mailchimpSubscribe', () => {
         method: 'POST',
         body: JSON.stringify({
           email_address: 'ada@example.com',
-          status: 'subscribed',
+          status: 'pending',
           merge_fields: { FNAME: 'Ada', LNAME: 'Lovelace' },
         }),
         headers: expect.objectContaining({ Authorization: 'apiKey key-us1' }),
       }),
     );
-    expect(logSpy).toHaveBeenCalledWith('Added subscriber b5fc85e557 to the subscribe list.');
+    expect(logSpy).toHaveBeenCalledWith(
+      'Added subscriber b5fc85e557 to the subscribe list. Mailchimp asks them to confirm.',
+    );
   });
 
-  it('retries as a PATCH against the member hash when the member already exists', async () => {
+  it('leaves a member who is already on the list as they are', async () => {
     mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
-    vi.mocked(fetch)
-      .mockResolvedValueOnce(
-        mockFetchResponse({ status: 400, title: 'Member Exists' }, 400) as never,
-      )
-      .mockResolvedValueOnce(mockFetchResponse({ status: 'updated' }) as never);
+    mockFetchOnce({ status: 400, title: 'Member Exists' }, 400);
     const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
+    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
 
-    await mailchimpSubscribe.run({
-      data: mockSnapshot({ email: 'ada@example.com', firstName: 'Ada', lastName: 'Lovelace' }),
-      params: {},
-    } as never);
+    await mailchimpSubscribe.run(subscriberEvent);
 
-    expect(fetch).toHaveBeenCalledTimes(2);
-    const [secondUrl, secondOptions] = vi.mocked(fetch).mock.calls[1]!;
-    expect(secondUrl).toMatch(
-      /^https:\/\/us1\.api\.mailchimp\.com\/3\.0\/lists\/abc123\/members\/[a-f0-9]{32}$/,
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(logSpy).toHaveBeenCalledWith(
+      'Left subscriber b5fc85e557 as is, since they are already on the subscribe list.',
     );
-    expect(secondOptions).toMatchObject({ method: 'PATCH' });
-    expect(logSpy).toHaveBeenCalledWith('Updated subscriber b5fc85e557 in the subscribe list.');
+    expect(errorSpy).not.toHaveBeenCalled();
   });
 
   it('logs and skips subscribing when the Mailchimp config is missing', async () => {
@@ -163,18 +157,5 @@ describe('mailchimpSubscribe', () => {
       'Mailchimp POST failed for subscriber b5fc85e557 with status 400: Invalid Resource <email> looks fake or invalid',
     );
     expect(logSpy).not.toHaveBeenCalled();
-  });
-
-  it('does not loop when the PATCH for an existing member also reports Member Exists', async () => {
-    mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
-    vi.mocked(fetch).mockResolvedValue(
-      mockFetchResponse({ status: 400, title: 'Member Exists' }, 400) as never,
-    );
-    const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
-
-    await mailchimpSubscribe.run(subscriberEvent);
-
-    expect(fetch).toHaveBeenCalledTimes(2);
-    expect(errorSpy).toHaveBeenCalled();
   });
 });

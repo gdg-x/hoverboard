@@ -17,3 +17,9 @@ Set the firebase config variables for Mailchimp configuration (you can find API 
   }
 }
 ```
+
+## Confirmation
+
+New subscribers join the list as pending, and Mailchimp emails them to confirm (double opt-in). They are only subscribed once they confirm, so nobody can sign up someone else's address. You can change the confirmation email in Mailchimp's signup form settings (verify the menu path).
+
+People who are already on the list are left as they are, so sending the form again can't unsubscribe them or change their name.

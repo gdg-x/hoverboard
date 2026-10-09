@@ -15,17 +15,15 @@ import { anonContext, authedContext, seed } from './setup';
 
 const ownerUid = 'owner-uid';
 const otherUid = 'other-uid';
-const validFeedback = { contentRating: 5, styleRating: 4, comment: 'Great talk' };
+const validFeedback = { contentRating: 5, styleRating: 4, comment: 'Great talk', userId: ownerUid };
 const ownFeedbackPath = `sessions/session-1/feedback/${ownerUid}`;
 
-// Both the deprecated nested rule (`sessions/{session}/feedback/{userId}`)
-// and the newer generic rule (`{path=**}/feedback/{userId}`) match this
-// path simultaneously and are combined with OR semantics.
 describe('sessions/{session}/feedback rules', () => {
   beforeEach(() =>
     seed({
       'sessions/session-1': { title: 'Talk' },
-      [ownFeedbackPath]: { ...validFeedback, userId: ownerUid },
+      'sessions/session-2': { title: 'Talk 2' },
+      [ownFeedbackPath]: validFeedback,
     }),
   );
 
@@ -33,9 +31,7 @@ describe('sessions/{session}/feedback rules', () => {
     it('denies get/create/update/delete', async () => {
       const context = anonContext();
       await expect(getDoc(doc(context.firestore(), ownFeedbackPath))).toDeny();
-      await expect(
-        setDoc(doc(context.firestore(), ownFeedbackPath), { ...validFeedback, userId: ownerUid }),
-      ).toDeny();
+      await expect(setDoc(doc(context.firestore(), ownFeedbackPath), validFeedback)).toDeny();
       await expect(deleteDoc(doc(context.firestore(), ownFeedbackPath))).toDeny();
     });
   });
@@ -50,43 +46,50 @@ describe('sessions/{session}/feedback rules', () => {
       await expect(deleteDoc(doc(context.firestore(), ownFeedbackPath))).toAllow();
     });
 
-    it('allows creating a new feedback document keyed by their own uid', async () => {
-      await seed({ 'sessions/session-2': { title: 'Talk 2' } });
+    it('allows creating feedback keyed by their own uid', async () => {
       const context = authedContext(ownerUid);
-      const newPath = `sessions/session-2/feedback/${ownerUid}`;
       await expect(
-        setDoc(doc(context.firestore(), newPath), { ...validFeedback, userId: ownerUid }),
+        setDoc(doc(context.firestore(), `sessions/session-2/feedback/${ownerUid}`), validFeedback),
       ).toAllow();
+    });
+
+    it('denies feedback on a session that does not exist', async () => {
+      const context = authedContext(ownerUid);
+      await expect(
+        setDoc(doc(context.firestore(), `sessions/missing/feedback/${ownerUid}`), validFeedback),
+      ).toDeny();
     });
 
     it.each([
       { contentRating: -1 },
       { contentRating: 6 },
+      { contentRating: '5' },
       { styleRating: -1 },
       { styleRating: 6 },
       { comment: null },
       { comment: 'c'.repeat(257) },
-    ])('rejects invalid feedback %o', async (overrides) => {
+      { userId: otherUid },
+      { extra: true },
+    ])('denies invalid feedback %o', async (overrides) => {
       const context = authedContext(ownerUid);
       await expect(
-        setDoc(doc(context.firestore(), ownFeedbackPath), {
-          ...validFeedback,
-          userId: ownerUid,
-          ...overrides,
-        }),
+        setDoc(doc(context.firestore(), ownFeedbackPath), { ...validFeedback, ...overrides }),
       ).toDeny();
     });
 
-    it('allows updating even when the stored userId field disagrees with the document id (legacy nested rule has no data-consistency check)', async () => {
-      const mismatchedPath = `sessions/session-3/feedback/${ownerUid}`;
-      await seed({
-        'sessions/session-3': { title: 'Talk 3' },
-        [mismatchedPath]: { ...validFeedback, userId: otherUid },
-      });
+    it('denies feedback without a comment field', async () => {
+      const { comment: _comment, ...withoutComment } = validFeedback;
+      const context = authedContext(ownerUid);
+      await expect(setDoc(doc(context.firestore(), ownFeedbackPath), withoutComment)).toDeny();
+    });
+
+    it('denies keeping a stored userId that is not the document id', async () => {
+      const mismatchedPath = `sessions/session-2/feedback/${ownerUid}`;
+      await seed({ [mismatchedPath]: { ...validFeedback, userId: otherUid } });
       const context = authedContext(ownerUid);
       await expect(
-        updateDoc(doc(context.firestore(), mismatchedPath), { comment: 'still works' }),
-      ).toAllow();
+        updateDoc(doc(context.firestore(), mismatchedPath), { comment: 'still mine?' }),
+      ).toDeny();
     });
   });
 
@@ -128,6 +131,15 @@ describe('sessions/{session}/feedback rules', () => {
       const q = query(
         collectionGroup(context.firestore(), 'feedback'),
         where('userId', '==', otherUid),
+      );
+      await expect(getDocs(q)).toDeny();
+    });
+
+    it('denies listing for signed-out visitors', async () => {
+      const context = anonContext();
+      const q = query(
+        collectionGroup(context.firestore(), 'feedback'),
+        where('userId', '==', ownerUid),
       );
       await expect(getDocs(q)).toDeny();
     });

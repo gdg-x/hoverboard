@@ -151,6 +151,7 @@ export class SubscribeDialog extends ThemedElement {
             label="${firstFieldLabel} *"
             .value="${this.firstFieldValue}"
             required
+            maxlength="100"
             error="${this.firstFieldInvalid ? fieldRequired : ''}"
             autocomplete="off"
             @input="${this.onFirstFieldChanged}"
@@ -160,6 +161,7 @@ export class SubscribeDialog extends ThemedElement {
             label="${secondFieldLabel} *"
             .value="${this.secondFieldValue}"
             required
+            maxlength="100"
             error="${this.secondFieldInvalid ? fieldRequired : ''}"
             autocomplete="off"
             @input="${this.onSecondFieldChanged}"
@@ -170,6 +172,7 @@ export class SubscribeDialog extends ThemedElement {
             label="${emailLabel} *"
             .value="${this.email}"
             required
+            maxlength="254"
             error="${this.emailInvalid ? msg('Please enter a valid email address.', { id: 'common.email-invalid' }) : ''}"
             autocomplete="email"
             @input="${this.onEmailChanged}"

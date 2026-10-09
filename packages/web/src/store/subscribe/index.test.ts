@@ -1,5 +1,6 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { setFeatures } from '../../../__tests__/helpers/features';
 import reducer, { resetSubscribed, subscribe } from '.';
 import { saveSubscriber } from '../../db/subscribers';
 import { dispatch } from '../dispatch';
@@ -60,6 +61,18 @@ describe('subscribe', () => {
       2,
       expect.objectContaining({ type: 'subscribe/success' }),
     );
+    expect(dispatch).toHaveBeenNthCalledWith(
+      3,
+      queueSnackbar('Almost done! Check your email to confirm.'),
+    );
+  });
+
+  it('says the subscription is done when Mailchimp is off', async () => {
+    setFeatures({ mailchimp: false });
+    vi.mocked(saveSubscriber).mockResolvedValue(true);
+
+    await subscribe({ email: 'ada@example.com' });
+
     expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar('Successfully subscribed!'));
   });
 

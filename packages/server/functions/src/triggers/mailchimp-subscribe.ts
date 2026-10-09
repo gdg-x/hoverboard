@@ -1,4 +1,3 @@
-import crypto from 'crypto';
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
 import * as logger from 'firebase-functions/logger';
@@ -6,8 +5,6 @@ import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import { fetchConfig } from '../db/config.js';
 import { isFeatureOff } from '../features.js';
 import { logId } from '../utils/log-id.js';
-
-const md5 = (data: string) => crypto.createHash('md5').update(data).digest('hex');
 
 /** Mailchimp's error details can repeat the email address. */
 const withoutEmail = (text: string, email: string) => text.split(email).join('<email>');
@@ -35,7 +32,7 @@ const getMailchimpConfig = async (): Promise<MailchimpConfig | undefined> => {
 };
 
 // Retries are enabled so transient Mailchimp failures (thrown below) are re-attempted; a repeat
-// subscribe is idempotent because an existing member is updated instead of duplicated.
+// subscribe is harmless because an existing member is left as it is.
 export const mailchimpSubscribe = onDocumentCreated(
   { document: '/subscribers/{id}', retry: true },
   async (event) => {
@@ -54,7 +51,8 @@ export const mailchimpSubscribe = onDocumentCreated(
 
     const subscriberData: SubscriberPayload = {
       email_address: subscriber.email,
-      status: 'subscribed',
+      // Anyone can send the form, so Mailchimp emails the address to confirm (double opt-in).
+      status: 'pending',
       merge_fields: {
         FNAME: subscriber.firstName,
         LNAME: subscriber.lastName,
@@ -70,15 +68,12 @@ const isRetryableStatus = (status: number) => status === 429 || status >= 500;
 async function subscribeToMailchimp(
   mailchimpConfig: MailchimpConfig,
   subscriberData: SubscriberPayload,
-  emailHash?: string,
 ): Promise<void> {
-  const uri = `https://${mailchimpConfig.dc}.api.mailchimp.com/3.0/lists/${mailchimpConfig.listid}/members`;
-  const url = emailHash ? `${uri}/${emailHash}` : uri;
-  const method = emailHash ? 'PATCH' : 'POST';
+  const url = `https://${mailchimpConfig.dc}.api.mailchimp.com/3.0/lists/${mailchimpConfig.listid}/members`;
 
   // Network failures reject here and propagate so the invocation fails and is retried.
   const response = await fetch(url, {
-    method,
+    method: 'POST',
     body: JSON.stringify(subscriberData),
     headers: {
       Authorization: `apiKey ${mailchimpConfig.apikey}`,
@@ -88,26 +83,23 @@ async function subscribeToMailchimp(
   const body = (await response.json().catch(() => ({}))) as { title?: string; detail?: string };
   const subscriber = `subscriber ${logId(subscriberData.email_address)}`;
 
-  if (!response.ok) {
-    if (!emailHash && response.status === 400 && body.title === 'Member Exists') {
-      const hash = md5(subscriberData.email_address);
-      return subscribeToMailchimp(mailchimpConfig, { ...subscriberData, status: 'pending' }, hash);
-    }
-
-    const detail = withoutEmail(body.detail ?? '', subscriberData.email_address);
-    const message =
-      `Mailchimp ${method} failed for ${subscriber} with status ${response.status}: ${body.title ?? ''} ${detail}`.trim();
-    if (isRetryableStatus(response.status)) {
-      throw new Error(message);
-    }
-    // Other 4xx responses (invalid email, bad credentials) will not succeed on retry.
-    logger.error(message);
+  if (response.ok) {
+    logger.log(`Added ${subscriber} to the subscribe list. Mailchimp asks them to confirm.`);
+    return;
+  }
+  // Changing an existing member, such as setting them back to pending, would let anyone
+  // unsubscribe them or change their name.
+  if (response.status === 400 && body.title === 'Member Exists') {
+    logger.log(`Left ${subscriber} as is, since they are already on the subscribe list.`);
     return;
   }
 
-  logger.log(
-    method === 'POST'
-      ? `Added ${subscriber} to the subscribe list.`
-      : `Updated ${subscriber} in the subscribe list.`,
-  );
+  const detail = withoutEmail(body.detail ?? '', subscriberData.email_address);
+  const message =
+    `Mailchimp POST failed for ${subscriber} with status ${response.status}: ${body.title ?? ''} ${detail}`.trim();
+  if (isRetryableStatus(response.status)) {
+    throw new Error(message);
+  }
+  // Other 4xx responses (invalid email, bad credentials) will not succeed on retry.
+  logger.error(message);
 }

@@ -3,9 +3,8 @@ import { beforeEach, describe, it } from 'vitest';
 import { expect } from '../helpers';
 import { anonContext, authedContext, seed } from './setup';
 
-// Every one of these collections shares the exact same rule shape in
-// firestore.rules: `get`/`list` are open to everyone, and every write
-// operation is unconditionally denied (`allow write: if false;`).
+// Event content: anyone can read it, and every write is denied, since only organizers write it
+// with the Admin SDK.
 const PUBLIC_READ_ONLY_COLLECTIONS = [
   'blog',
   'gallery',

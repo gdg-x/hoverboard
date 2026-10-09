@@ -482,6 +482,9 @@
 <trans-unit id="store.featured-sessions.removed">
   <source>Session removed from My Schedule</source>
 </trans-unit>
+<trans-unit id="store.subscribe.confirm">
+  <source>Almost done! Check your email to confirm.</source>
+</trans-unit>
 <trans-unit id="store.subscribe.success">
   <source>Successfully subscribed!</source>
 </trans-unit>
