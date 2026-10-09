@@ -602,8 +602,8 @@ describe('layoutThemeCss', () => {
     expect(css).toContain(
       `--hb-color-primary: light-dark(${festival.light.primary}, ${festival.dark.primary});`,
     );
-    expect(css).toContain('--gde: #3d5afe;');
-    expect(css).toContain(`--android: ${config.site.theme.tagColors.android};`);
+    expect(css).toContain('--hb-tag-gde: #3d5afe;');
+    expect(css).toContain(`--hb-tag-android: ${config.site.theme.tagColors.android};`);
   });
 });
 

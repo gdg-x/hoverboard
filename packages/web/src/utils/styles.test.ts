@@ -1,11 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  generateClassName,
-  photoTransitionName,
-  tagChipStyle,
-  tagColor,
-  variableColor,
-} from './styles';
+import { generateClassName, photoTransitionName, tagChipStyle, tagColor } from './styles';
 
 describe('generateClassName', () => {
   it('replaces non-word characters with a dash', () => {
@@ -22,19 +16,6 @@ describe('generateClassName', () => {
 
   it('returns an empty string for an empty string', () => {
     expect(generateClassName('')).toBe('');
-  });
-});
-
-describe('variableColor', () => {
-  it('references the color variable named after the value', () => {
-    expect(variableColor('Android')).toBe('var(--android)');
-    expect(variableColor('primaryColor')).toBe('var(--primary-color)');
-  });
-
-  it('falls back to another color variable', () => {
-    expect(variableColor('primaryColor', 'fallbackColor')).toBe(
-      'var(--primary-color, var(--fallback-color))',
-    );
   });
 });
 

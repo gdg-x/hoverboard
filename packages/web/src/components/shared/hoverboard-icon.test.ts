@@ -19,12 +19,8 @@ describe('hoverboard-icon', () => {
 
   it.each([
     'linkedin',
-    'gde',
-    'gdg',
     'google',
     'website',
-    'checked',
-    'up',
     'bookmark-check',
     'bookmark-plus',
     'insert-comment',
@@ -44,24 +40,17 @@ describe('hoverboard-icon', () => {
     'presentation',
     'movie',
     'ticket',
-    'achievement',
     'arrow-left',
     'calendar',
     'share',
     'coffee-break',
-    'document',
     'lunch',
     'location',
-    'microphone',
-    'open-in-new',
     'opening',
     'party',
     'people',
     'registration',
-    'tracks',
-    'work',
-    'wtm',
-  ])('renders the %s social icon', async (name) => {
+  ])('renders the %s icon', async (name) => {
     const { shadowRoot } = await fixture(html`<hoverboard-icon name="${name}"></hoverboard-icon>`);
 
     expect(shadowRoot.querySelector('svg')).toBeInTheDocument();

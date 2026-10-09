@@ -29,6 +29,8 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
 
 `event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it. The schedule shows times in it, and visitors in another time zone can switch the schedule to their own. During the event, a line on the schedule marks the current time.
 
+`theme` picks the look: the `festival` or `spotlight` theme, the color scheme, colors, fonts, spacing and decorations. See [Styling][style app].
+
 ## Validation
 
 [JSON Schemas](https://json-schema.org/) in `packages/web/schemas/` describe both files: `site.schema.json` and `resources.schema.json`. Because the files set `$schema`, editors such as VS Code show completion and errors while you type. Unknown keys are errors, so typos fail early.

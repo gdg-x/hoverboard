@@ -21,7 +21,7 @@ export class LocalePicker extends ThemedElement {
       font: inherit;
       color: inherit;
       background: transparent;
-      border: 1px solid var(--divider-color);
+      border: 1px solid var(--hb-color-outline-variant);
       border-radius: 4px;
     }
   `;

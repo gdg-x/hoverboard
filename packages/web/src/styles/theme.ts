@@ -1,38 +1,7 @@
 import { css } from 'lit';
 
-// Shared styles for every theme. Colors come from the theme tokens in src/themes/.
+// Shared styles for every component that extends ThemedElement. Colors come from the theme tokens.
 export const theme = css`
-  :host {
-    --light-primary-color: color-mix(
-      in srgb,
-      var(--default-primary-color) 30%,
-      var(--primary-background-color)
-    );
-    --primary-color-white: color-mix(
-      in srgb,
-      var(--default-primary-color) 12%,
-      var(--primary-background-color)
-    );
-    --primary-color-transparent: color-mix(in srgb, var(--default-primary-color) 10%, transparent);
-    --primary-color-light: color-mix(in srgb, var(--default-primary-color) 80%, transparent);
-    --animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --slide-animation: 0.4s cubic-bezier(0, 0, 0.2, 1);
-    --border-radius: 4px;
-    --box-shadow:
-      0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
-    --box-shadow-primary-color:
-      0 3px 3px -2px color-mix(in srgb, var(--default-primary-color) 30%, transparent),
-      0 3px 4px 0 color-mix(in srgb, var(--default-primary-color) 30%, transparent),
-      0 1px 8px 0 color-mix(in srgb, var(--default-primary-color) 30%, transparent);
-    --box-shadow-primary-color-hover:
-      0 1px 3px -2px color-mix(in srgb, var(--default-primary-color) 40%, transparent),
-      0 4px 5px 0 color-mix(in srgb, var(--default-primary-color) 40%, transparent),
-      0 2px 9px 0 color-mix(in srgb, var(--default-primary-color) 40%, transparent);
-    --font-family: var(--hb-font-body);
-    --max-container-width: 1280px;
-    --header-height: var(--hb-header-height);
-  }
-
   *,
   *::before,
   *::after {
@@ -41,21 +10,9 @@ export const theme = css`
     -webkit-font-smoothing: antialiased;
   }
 
-  /*
-   * Native "hidden" attribute guarantee: some components apply an explicit
-   * "display" to the same element via their own class, which (per the CSS
-   * cascade) beats the UA stylesheet's "[hidden] { display: none }" rule.
-   * This restores that guarantee for every component without introducing a
-   * shared layout/attribute system.
-   */
+  /* An explicit "display" on an element would otherwise beat the "hidden" attribute. */
   [hidden] {
     display: none !important;
-  }
-
-  body {
-    font-family: var(--font-family);
-    text-rendering: optimizelegibility;
-    color: var(--primary-text-color);
   }
 
   h1,
@@ -68,107 +25,15 @@ export const theme = css`
     font-weight: normal;
   }
 
-  h1 {
-    padding: 8px 8px 24px 14px;
-    font-size: 24px;
-    line-height: 30px;
-    font-weight: 500;
-  }
-
   a {
-    color: var(--default-primary-color);
+    color: var(--hb-color-primary);
     text-decoration: none;
-    transition: border-color var(--animation);
   }
 
-  .container,
-  .container-narrow {
-    margin: 0 auto;
-    padding: 24px 16px;
-    max-width: var(--max-container-width);
-  }
-
-  .container-narrow {
-    max-width: 800px;
-  }
-
-  .container-title {
-    margin-bottom: 24px;
-    padding: 0;
-    font-size: 32px;
-    line-height: 30px;
-  }
-
-  .big-icon {
-    --iron-icon-height: 48px;
-    --iron-icon-width: 48px;
-  }
-
-  .gde-b {
-    background-color: var(--gde);
-  }
-
-  .wtm-b {
-    background-color: var(--wtm);
-  }
-
-  .gdg-b {
-    background-color: var(--gdg);
-  }
-
-  .google-b {
-    background-color: var(--secondary-background-color);
-  }
-
-  .google-b .badge-icon {
-    --iron-icon-width: 18px;
-    --iron-icon-height: 18px;
-
-    color: var(--text-primary-color);
-  }
-
-  .card {
-    background-color: var(--default-background-color);
-    box-shadow: var(--box-shadow);
-    border-radius: var(--border-radius);
-    transition: box-shadow var(--animation);
-    cursor: pointer;
-  }
-
-  /* Sizing contract for native images that replaced the lazy-image element. */
   :where(img[decoding='async']) {
     display: block;
-    width: var(--lazy-image-width, 100%);
-    height: var(--lazy-image-height, 100%);
-    object-fit: var(--lazy-image-fit, contain);
-  }
-
-  .tag {
-    height: 32px;
-    padding: 8px 12px;
-    font-size: 12px;
-    color: currentcolor;
-    background: var(--default-background-color);
-    border: 1px solid currentcolor;
-    border-radius: 32px;
-    margin: 1px;
-    line-height: initial;
-  }
-
-  @media (min-width: 812px) {
-    :host {
-      --header-height: 64px;
-    }
-  }
-
-  @media (min-width: 640px) {
-    .container,
-    .container-narrow {
-      padding: 32px;
-    }
-
-    .card:hover {
-      box-shadow: var(--box-shadow);
-    }
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 `;

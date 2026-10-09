@@ -88,10 +88,6 @@ export const loadContent = async (locale: string): Promise<void> => {
 
 // Skeleton sizes while content loads. The same for every site.
 export const contentLoaders = {
-  schedule: { itemsCount: 2 },
-  blog: { itemsCount: 3 },
-  speakers: { itemsCount: 4 },
-  previousSpeakers: { itemsCount: 6 },
   tickets: { itemsCount: 5 },
 };
 

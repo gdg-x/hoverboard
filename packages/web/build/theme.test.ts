@@ -60,7 +60,7 @@ describe('themeErrors', () => {
 });
 
 describe('themeCss', () => {
-  it('writes every color with light-dark(), the density and the old variable names', () => {
+  it('writes every color with light-dark(), the density and the tag colors', () => {
     const css = themeCss(resolveTheme(siteTheme({ density: 'compact' })), { android: '#78c257' });
 
     expect(css).toContain('color-scheme: light dark;');
@@ -69,8 +69,8 @@ describe('themeCss', () => {
       `--hb-color-surface: light-dark(${festival.light.surface}, ${festival.dark.surface});`,
     );
     expect(css).toContain('--hb-radius-l: 28px;');
-    expect(css).toContain('--default-primary-color: var(--hb-color-primary);');
-    expect(css).toContain('--android: #78c257;');
+    expect(css).not.toContain('--default-primary-color');
+    expect(css).not.toContain('--android:');
     expect(css).toContain('--hb-tag-android: #78c257;');
     expect(css).toMatch(/--hb-tag-android-container: light-dark\(#[0-9a-f]{6}, #[0-9a-f]{6}\);/);
     expect(css).toMatch(/--hb-on-tag-android-container: light-dark\(#[0-9a-f]{6}, #[0-9a-f]{6}\);/);

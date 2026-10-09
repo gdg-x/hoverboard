@@ -1,7 +1,6 @@
 import { deriveDarkColor, tagContainerColors } from '../src/themes/color';
 import { contrastFailures, contrastRatio } from '../src/themes/contrast';
 import { THEMES, type ThemeName, themeDeclarations } from '../src/themes/index';
-import { LEGACY_VARIABLES } from '../src/themes/legacy';
 import {
   COLOR_ROLES,
   type ColorRole,
@@ -114,11 +113,11 @@ export const heroPhotoErrors = (theme: ResolvedTheme): string[] => {
 };
 
 /**
- * A tag or badge color as `--<name>` (the pre-refresh name) and `--hb-tag-<name>`, with a container
- * and a text color for chips in each scheme.
+ * A tag or badge color as `--hb-tag-<name>`, with a container and a text color for chips in each
+ * scheme.
  */
 const tagDeclarations = (name: string, color: string, fallbackScheme: 'light' | 'dark') => {
-  const plain = [`--${name}: ${color};`, `--hb-tag-${name}: ${color};`];
+  const plain = [`--hb-tag-${name}: ${color};`];
   if (!isHex(color)) return { declarations: plain, fallback: [] };
   const { light, dark } = tagContainerColors(color);
   const fallback = fallbackScheme === 'dark' ? dark : light;
@@ -137,7 +136,7 @@ const tagDeclarations = (name: string, color: string, fallbackScheme: 'light' | 
 
 /**
  * The theme as CSS on `:root`, so the first paint is themed: every color with `light-dark()`, the
- * other tokens, the density, the pre-refresh variables, and the tag and badge colors.
+ * other tokens, the density, and the tag and badge colors.
  */
 export const themeCss = (theme: ResolvedTheme, named: Record<string, string> = {}): string => {
   const scheme = theme.colorScheme === 'system' ? 'light dark' : theme.colorScheme;
@@ -151,7 +150,6 @@ export const themeCss = (theme: ResolvedTheme, named: Record<string, string> = {
     `color-scheme: ${scheme};`,
     `--hb-density: ${DENSITY_FACTORS[theme.density]};`,
     themeDeclarations(theme),
-    ...Object.entries(LEGACY_VARIABLES).map(([property, value]) => `${property}: ${value};`),
     ...tags.flatMap((tag) => tag.declarations),
   ];
   const fallbackDeclarations = [

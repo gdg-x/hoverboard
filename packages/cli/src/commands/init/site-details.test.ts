@@ -33,9 +33,10 @@ const site = {
   social: { hashtag: 'Old', follow: [{ name: 'x', url: 'https://x.com/old' }] },
   integrations: { googleMapsApiKey: 'old-key' },
   features: { forkMe: true },
-  theme: { name: 'default' },
+  theme: { name: 'festival', tagColors: { web: '#2196f3' } },
 };
 const resources = { title: 'Old Fest', description: 'Old', heroDescriptions: { home: 'Old' } };
+const THEMES = ['festival', 'spotlight'];
 
 const details: SiteDetails = {
   title: 'New Fest',
@@ -97,6 +98,7 @@ describe('currentDetails', () => {
     expect(current).toMatchObject({
       title: 'Old Fest',
       url: 'https://old.example/',
+      theme: 'festival',
       featuresOff: [],
       map: { apiKey: 'old-key', latitude: 49.8, longitude: 23.9 },
     });
@@ -133,7 +135,7 @@ describe('applySiteDetails', () => {
         },
       },
       integrations: { googleMapsApiKey: 'new-key' },
-      theme: { name: 'default' },
+      theme: { name: 'festival', tagColors: { web: '#2196f3' } },
     });
     expect(nextResources).toEqual({
       title: 'New Fest',
@@ -159,6 +161,13 @@ describe('applySiteDetails', () => {
 
   it('keeps a custom URL', () => {
     expect(apply({ url: 'https://fest.example/' }).site['url']).toBe('https://fest.example/');
+  });
+
+  it('sets the theme and keeps the other theme settings', () => {
+    expect(apply({ theme: 'spotlight' }).site['theme']).toEqual({
+      name: 'spotlight',
+      tagColors: { web: '#2196f3' },
+    });
   });
 
   it('lists every feature, with the dependents of features that are off', () => {
@@ -196,6 +205,7 @@ describe('askSiteDetails', () => {
       'First day': ['tomorrow', '2027-10-15'],
       'Last day': ['2027-10-14', '2027-10-16'],
       'Features to turn off': ['forkMe, nope', 'forkMe'],
+      Theme: ['default', 'spotlight'],
     });
 
     const answers = await askSiteDetails(
@@ -203,16 +213,19 @@ describe('askSiteDetails', () => {
       { ...details, map: undefined },
       'new-project',
       FEATURES,
+      THEMES,
     );
 
     expect(answers).toMatchObject({
       title: 'New Fest',
       startDate: '2027-10-15',
       endDate: '2027-10-16',
+      theme: 'spotlight',
       featuresOff: ['forkMe', 'map'],
     });
     expect(answers).not.toHaveProperty('url');
     expect(ask).toHaveBeenCalledWith('First day (YYYY-MM-DD):', '2027-10-15');
+    expect(ask).toHaveBeenCalledWith('Theme (festival or spotlight):', 'festival');
   });
 
   it('asks for the venue coordinates when the map has a key', async () => {
@@ -222,7 +235,7 @@ describe('askSiteDetails', () => {
       'Venue longitude': ['-74'],
     });
 
-    const answers = await askSiteDetails(ask, details, 'new-project', FEATURES);
+    const answers = await askSiteDetails(ask, details, 'new-project', FEATURES, THEMES);
 
     expect(answers.map).toEqual({ apiKey: 'key', latitude: 40.5, longitude: -74 });
     expect(answers.featuresOff).toEqual(['forkMe']);

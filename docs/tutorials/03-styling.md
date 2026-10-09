@@ -4,7 +4,10 @@ Colors, fonts and shapes come from a theme. Pick it and change it in `theme` in 
 
 ## Themes
 
-Hoverboard has two built-in themes, `festival` (the default) and `spotlight`. Each has light and dark colors.
+Hoverboard has two built-in themes. Each has light and dark colors.
+
+- `festival` (the default): paper colors, ink outlines, hard shadows and pastel bands in four accent colors.
+- `spotlight`: no outlines, soft shadows and one bright yellow color for the main buttons.
 
 ```json
 "theme": {
@@ -16,10 +19,14 @@ Hoverboard has two built-in themes, `festival` (the default) and `spotlight`. Ea
 ```
 
 - `colorScheme` is `system`, `light` or `dark`. With `system`, the site follows the visitor's device setting, and visitors can pick System, Light or Dark under Appearance in the footer. Their browser remembers the choice. `light` and `dark` lock the site to one scheme and hide the footer choice.
-- `density` is `compact`, `default` or `roomy`. It scales the spacing.
-- `decorations` turns the theme's decorative shapes and illustrations on or off.
+- `density` is `compact`, `default` or `roomy`. It scales the spacing, not the text or button sizes.
+- `decorations` turns the playful details on or off: dot patterns, tilted stickers and photos, confetti when a visitor bookmarks a session, and the home page illustration. With `false`, the layout stays the same, with plain colors and straight labels. Visitors who ask their device for reduced motion never see the motion.
 
-The themes are in `packages/web/src/themes/`. The header and footer use them. Other components still use the colors of the old design, and move to the new themes in later releases.
+The themes are in `packages/web/src/themes/`. `./hbd init` asks which one to use.
+
+## Custom CSS
+
+Every component reads the theme through CSS variables that start with `--hb-`, such as `--hb-color-primary`, `--hb-space-4` and `--hb-radius-m`. Use them in your own styles, so they follow the theme and the dark scheme. The variables of Hoverboard 3, such as `--default-primary-color`, are gone.
 
 ## Logo
 

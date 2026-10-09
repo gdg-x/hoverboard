@@ -35,6 +35,7 @@ type Json = Record<string, unknown>;
 
 const RESOURCES_PATH = 'packages/config/content/resources.json';
 const DEFAULTS_PATH = 'packages/web/defaults/site.json';
+const SCHEMA_PATH = 'packages/web/schemas/site.schema.json';
 const FEATURES_MODULE = 'packages/web/src/config/features.ts';
 
 const readJson = (repoRoot: string, path: string) =>
@@ -54,6 +55,14 @@ const loadFeatureRequires = async (repoRoot: string) => {
     FEATURE_REQUIRES: Partial<Record<string, readonly string[]>>;
   };
   return module.FEATURE_REQUIRES;
+};
+
+/** The built-in theme names, from the site.json schema. */
+const readThemes = (repoRoot: string) => {
+  const schema = readJson(repoRoot, SCHEMA_PATH) as {
+    properties: { theme: { properties: { name: { enum: string[] } } } };
+  };
+  return schema.properties.theme.properties.name.enum;
 };
 
 const chooseProject = async (
@@ -166,6 +175,7 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
         }),
         projectId,
         features,
+        readThemes(repoRoot),
       );
 
   const updated = applySiteDetails(site, resources, details, {

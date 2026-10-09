@@ -23,6 +23,10 @@ import { ThemedElement } from '../themed-element';
 @customElement('feedback-block')
 export class FeedbackBlock extends ThemedElement {
   static override styles = css`
+    .container {
+      padding: var(--hb-space-6) var(--hb-space-4);
+    }
+
     #commentInput {
       width: 100%;
     }
@@ -31,7 +35,7 @@ export class FeedbackBlock extends ThemedElement {
     .caption {
       display: inline-block;
       vertical-align: bottom;
-      --star-color: var(--default-primary-color);
+      --star-color: var(--hb-color-primary);
     }
 
     @media (min-width: 640px) {

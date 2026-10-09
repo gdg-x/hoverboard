@@ -7,15 +7,6 @@ export const generateClassName = (value: string | undefined): string => {
     : '';
 };
 
-/**
- * A reference to the color variable of a tag or badge, such as `var(--android)`. The browser
- * resolves it, so it renders the same on the server, which has no computed styles.
- */
-export const variableColor = (value: string, fallback?: string): string => {
-  const name = `--${generateClassName(value)}`;
-  return fallback ? `var(${name}, var(--${generateClassName(fallback)}))` : `var(${name})`;
-};
-
 /** A tag's color from `theme.tagColors`, or the outline color for tags without one. */
 export const tagColor = (tag: string): string =>
   `var(--hb-tag-${generateClassName(tag)}, var(--hb-color-outline))`;

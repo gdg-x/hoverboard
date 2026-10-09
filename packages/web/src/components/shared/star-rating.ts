@@ -18,9 +18,9 @@ export class StarRating extends ThemedElement {
   static override styles = css`
     :host {
       display: inline-block;
-      --star-color: var(--star-rating-color);
-      --empty-color: var(--disabled-text-color);
-      --detail-color: var(--secondary-text-color);
+      --star-color: var(--hb-color-accent-3);
+      --empty-color: var(--hb-color-outline);
+      --detail-color: var(--hb-color-on-surface-variant);
     }
 
     .stars {
@@ -47,7 +47,7 @@ export class StarRating extends ThemedElement {
     }
 
     button:focus-visible {
-      outline: 2px solid var(--focused-color, var(--star-color));
+      outline: 3px solid var(--hb-color-focus);
       outline-offset: 2px;
       border-radius: 50%;
     }

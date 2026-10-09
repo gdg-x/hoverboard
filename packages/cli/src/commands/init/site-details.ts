@@ -14,6 +14,8 @@ export interface SiteDetails {
   organizerEmail: string;
   /** A custom domain. Without it, the site is at https://<projectId>.web.app/. */
   url?: string;
+  /** A built-in theme. Without it, the site keeps its current theme. */
+  theme?: string;
   featuresOff: string[];
   /** Only when the map is on. */
   map?: { apiKey: string; latitude: number; longitude: number };
@@ -87,6 +89,7 @@ export const currentDetails = ({
   const organizer = (site['organizer'] ?? {}) as Json;
   const pointer = location.pointer ?? {};
   const apiKey = ((site['integrations'] ?? {}) as Json)['googleMapsApiKey'];
+  const theme = ((site['theme'] ?? {}) as Json)['name'];
   const off = Object.keys(features).filter((feature) => !features[feature]);
 
   return {
@@ -103,6 +106,7 @@ export const currentDetails = ({
     organizerName: String(organizer['name'] ?? ''),
     organizerEmail: String(organizer['email'] ?? ''),
     ...(!newProject && typeof site['url'] === 'string' ? { url: site['url'] } : {}),
+    theme: typeof theme === 'string' ? theme : 'festival',
     // The demo's "Fork me on GitHub" ribbon does not belong on a new site.
     featuresOff: newProject ? [...new Set([...off, 'forkMe'])].sort() : off,
     ...(features['map'] && !newProject && typeof apiKey === 'string'
@@ -174,6 +178,9 @@ export const applySiteDetails = (
       : {}),
     features: Object.fromEntries(features.map((feature) => [feature, !off.has(feature)])),
   };
+  if (details.theme) {
+    next['theme'] = { ...((site['theme'] ?? {}) as Json), name: details.theme };
+  }
   if (details.url && details.url !== defaultUrl(projectId)) {
     next['url'] = details.url;
   } else {
@@ -223,6 +230,7 @@ export const askSiteDetails = async (
   defaults: SiteDetails,
   projectId: string,
   features: readonly string[],
+  themes: readonly string[],
 ): Promise<SiteDetails> => {
   const text = (question: string, value: string) =>
     askValid(ask, question, value, required, 'Required.');
@@ -275,6 +283,13 @@ export const askSiteDetails = async (
     defaults.url ?? defaultUrl(projectId),
     isSiteUrl,
     'Use a full URL that ends with a slash, such as https://devfest.example.com/.',
+  );
+  const theme = await askValid(
+    ask,
+    `Theme (${themes.join(' or ')}):`,
+    defaults.theme && themes.includes(defaults.theme) ? defaults.theme : themes[0]!,
+    (value) => themes.includes(value),
+    `Use ${themes.join(' or ')}.`,
   );
 
   console.log(`\nFeatures: ${features.join(', ')}.`);
@@ -334,6 +349,7 @@ export const askSiteDetails = async (
     organizerName,
     organizerEmail,
     ...(url === defaultUrl(projectId) ? {} : { url }),
+    theme,
     featuresOff,
     ...(map ? { map } : {}),
   };

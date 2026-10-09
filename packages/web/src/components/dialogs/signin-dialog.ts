@@ -45,14 +45,6 @@ export class SigninDialog extends ThemedElement {
       display: flex;
       justify-content: flex-end;
     }
-
-    hoverboard-icon.icon-twitter {
-      color: var(--twitter-color);
-    }
-
-    hoverboard-icon.icon-facebook {
-      color: var(--facebook-color);
-    }
   `;
 
   private signInProviders = signInProviders;

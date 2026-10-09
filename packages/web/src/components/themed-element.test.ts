@@ -30,7 +30,7 @@ describe('themed-element', () => {
     const { elementStyles } = ThemedElementTestSubject as unknown as { elementStyles: unknown[] };
 
     expect(elementStyles).toHaveLength(4);
-    expect(String(elementStyles[0])).toContain('--primary-color-transparent');
+    expect(String(elementStyles[0])).toContain('box-sizing: border-box');
     expect(String(elementStyles[1])).toContain('display: block');
     expect(String(elementStyles[2])).toContain('prefers-reduced-motion: reduce');
     expect(String(elementStyles[3])).toContain('color: rebeccapurple');
