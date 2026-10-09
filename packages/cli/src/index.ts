@@ -12,6 +12,7 @@ import { runFirestoreInit } from './commands/firestore-init/index.js';
 import { type InitOptions, runInit } from './commands/init/index.js';
 import { runSetup } from './commands/setup.js';
 import { runSetupGitHub } from './commands/setup-github.js';
+import { type UpgradeOptions, runUpgrade } from './commands/upgrade.js';
 import { githubAnnotation, validateSiteConfig } from './utils/site-config.js';
 import { findRepoRoot } from './utils/node-version.js';
 import { firebaseDeployArgs } from './utils/site-features.js';
@@ -193,6 +194,24 @@ program
   .description('Export the running Firestore emulator data to .firebase/emulator-data.')
   .action(() => {
     process.exitCode = runFirestoreExport() ? 0 : 1;
+  });
+
+program
+  .command('upgrade')
+  .description(
+    'Move packages/config/site.json to the current schemaVersion, then run the Firestore data ' +
+      'migrations and fixes, as firestore-check --fix does (targets the local emulator unless ' +
+      'FIRESTORE_TARGET=production is set).',
+  )
+  .option('--dry-run', 'Show the changes without writing them.')
+  .option('-y, --yes', 'Change production Firestore without asking.')
+  .action(async (options: UpgradeOptions) => {
+    try {
+      process.exitCode = (await runUpgrade(options)) ? 0 : 1;
+    } catch (error) {
+      console.log(error);
+      process.exitCode = 1;
+    }
   });
 
 program.parse();

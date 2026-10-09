@@ -146,7 +146,8 @@ const update = async (
   }
 };
 
-const writeSite = (repoRoot: string, change: NonNullable<MigrationPlan['site']>) => {
+/** Changes packages/config/site.json, then formats it with Prettier. */
+export const writeSite = (repoRoot: string, change: NonNullable<MigrationPlan['site']>) => {
   const path = join(repoRoot, SITE_CONFIG_PATH);
   const site = JSON.parse(readFileSync(path, 'utf8')) as Record<string, unknown>;
   writeFileSync(path, `${JSON.stringify(change(site), null, 2)}\n`);
