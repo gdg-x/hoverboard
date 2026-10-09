@@ -66,7 +66,9 @@ export function sessionsSpeakersScheduleMap(
             mainTag,
             id: sessionId,
             day: dayKey,
-            track: subsession?.track || day.tracks?.[sessionIndex],
+            // A string `track` is a track ID for the new schedule, which this generator doesn't read.
+            track:
+              typeof subsession?.track === 'object' ? subsession.track : day.tracks?.[sessionIndex],
             startTime,
             endTime,
             duration: getDuration(dayKey, startTime, endTime),

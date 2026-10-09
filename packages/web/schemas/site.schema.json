@@ -143,6 +143,26 @@
         "published": {
           "description": "Shows session times and tracks. Keep it false until the schedule is final.",
           "type": "boolean"
+        },
+        "tracks": {
+          "description": "The tracks or rooms of the schedule, in the order it shows them. Sessions name them by `id`.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "title"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+              "title": { "type": "string", "minLength": 1 },
+              "days": {
+                "description": "The days the track is on. Without it, the track is on every day.",
+                "type": "array",
+                "uniqueItems": true,
+                "minItems": 1,
+                "items": { "$ref": "#/$defs/date" }
+              }
+            }
+          }
         }
       }
     },

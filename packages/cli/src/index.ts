@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
+import { runConvertSchedule } from './commands/convert-schedule/index.js';
 import { runDoctor } from './commands/doctor.js';
 import { runDeploy } from './commands/deploy.js';
 import { runEmulators } from './commands/emulators.js';
@@ -129,6 +130,23 @@ program
   .description('Export the running Firestore emulator data to .firebase/emulator-data.')
   .action(() => {
     process.exitCode = runFirestoreExport() ? 0 : 1;
+  });
+
+program
+  .command('convert-schedule')
+  .description(
+    'Move session times and tracks from the old schedule collection onto the sessions, and the ' +
+      'tracks to packages/config/site.json (targets the local emulator unless ' +
+      'FIRESTORE_TARGET=production is set). Leaves the schedule collection in place.',
+  )
+  .option('--dry-run', 'Print the changes without writing them.')
+  .action(async (options: { dryRun?: boolean }) => {
+    try {
+      await runConvertSchedule(options);
+    } catch (error) {
+      console.log(error);
+      process.exitCode = 1;
+    }
   });
 
 program.parse();

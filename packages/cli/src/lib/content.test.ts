@@ -25,6 +25,20 @@ describe('validateContent', () => {
     ).not.toThrow();
   });
 
+  it("accepts a session's day, times and track, all together or none", () => {
+    const time = { day: '2027-10-15', startTime: '09:00', endTime: '09:40' };
+    expect(() => validateContent('sessions', '101', { ...session, ...time })).not.toThrow();
+    expect(() =>
+      validateContent('sessions', '101', { ...session, ...time, track: 'main-hall' }),
+    ).not.toThrow();
+    expect(() => validateContent('sessions', '101', { ...session, day: '2027-10-15' })).toThrow(
+      'sessions/101 must have properties startTime, endTime when property day is present',
+    );
+    expect(() =>
+      validateContent('sessions', '101', { ...session, ...time, startTime: '9:00' }),
+    ).toThrow('sessions/101/startTime must match pattern');
+  });
+
   it('names the document and the problem when a document is invalid', () => {
     expect(() => validateContent('sessions', '101', { title: 'Keynote' })).toThrow(
       "Invalid sessions/101: sessions/101 must have required property 'description'",

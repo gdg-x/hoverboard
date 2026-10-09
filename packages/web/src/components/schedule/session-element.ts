@@ -33,7 +33,7 @@ interface SessionSpeaker {
   photoUrl: string;
 }
 
-export type ScheduleSession = Omit<Session, 'speakers'> & {
+export type ScheduleSession = Omit<Session, 'speakers' | 'track'> & {
   duration?: { hh: number; mm: number };
   mainTag?: string;
   speakers?: SessionSpeaker[];

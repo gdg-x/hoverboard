@@ -272,7 +272,15 @@
       "required": ["description", "title"],
       "properties": {
         "complexity": { "type": "string" },
+        "day": {
+          "description": "The day of the session. Without it, the session is not on the schedule yet.",
+          "$ref": "#/$defs/date"
+        },
         "description": { "type": "string" },
+        "endTime": {
+          "description": "When the session ends, in the event time zone.",
+          "$ref": "#/$defs/time"
+        },
         "extend": { "type": "number" },
         "externalId": { "$ref": "#/$defs/externalId" },
         "icon": { "type": "string" },
@@ -285,9 +293,23 @@
           "type": "array",
           "items": { "type": "string" }
         },
+        "startTime": {
+          "description": "When the session starts, in the event time zone.",
+          "$ref": "#/$defs/time"
+        },
         "tags": { "type": "array", "items": { "type": "string" } },
         "title": { "type": "string" },
+        "track": {
+          "description": "A track ID from `schedule.tracks` in site.json. Without it, the session spans every track.",
+          "type": "string"
+        },
         "videoId": { "type": "string" }
+      },
+      "dependentRequired": {
+        "day": ["startTime", "endTime"],
+        "startTime": ["day", "endTime"],
+        "endTime": ["day", "startTime"],
+        "track": ["day"]
       }
     },
     "speaker": {

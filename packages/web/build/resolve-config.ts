@@ -211,7 +211,35 @@ const crossFileErrors = (site: Site, resources: Resources, paths: ConfigPaths): 
       `site.json/heroSettings/home/illustration: "${illustration}" is not in packages/web/public`,
     );
   }
-  return [...errors, ...localeErrors(site, paths.translations), ...featureErrors(site, resources)];
+  return [
+    ...errors,
+    ...trackErrors(site),
+    ...localeErrors(site, paths.translations),
+    ...featureErrors(site, resources),
+  ];
+};
+
+interface Track {
+  id: string;
+  title: string;
+  days?: string[];
+}
+
+const trackErrors = (site: Site): string[] => {
+  const tracks = (site.schedule as { tracks?: Track[] }).tracks ?? [];
+  const { startDate, endDate } = site.event;
+  return tracks.flatMap(({ id, days = [] }, index) => [
+    ...(tracks.findIndex((track) => track.id === id) < index
+      ? [`site.json/schedule/tracks/${index}/id: "${id}" is the ID of another track`]
+      : []),
+    ...days.flatMap((day, dayIndex) =>
+      day < startDate || day > endDate
+        ? [
+            `site.json/schedule/tracks/${index}/days/${dayIndex}: "${day}" is not between event.startDate and event.endDate`,
+          ]
+        : [],
+    ),
+  ]);
 };
 
 // Each key must also be in the site's content/resources.json. Arrays replace, so their items are not checked.

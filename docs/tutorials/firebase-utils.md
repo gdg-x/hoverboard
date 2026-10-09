@@ -14,6 +14,23 @@ Event content (speakers, sessions, schedule, partners, team, tickets, videos, ga
 
 Speakers and sessions have optional `source` and `externalId` fields for data imported from another tool, so a later import can update them instead of adding duplicates.
 
+Sessions can also have `day` (`YYYY-MM-DD`), `startTime` and `endTime` (`HH:MM` in `event.timezone`) and `track`, a track ID from `schedule.tracks` in `packages/config/site.json`. A session without `track` spans every track. These replace the `schedule` collection, which the site still reads for now.
+
+## Move the schedule onto the sessions
+
+`convert-schedule` reads the `schedule` collection, and writes each session's day, times and track onto the session. It writes the tracks to `schedule.tracks` in `packages/config/site.json`.
+
+```console
+    ./hbd convert-schedule --dry-run
+    ./hbd convert-schedule
+```
+
+- `--dry-run` prints the changes without writing them.
+- A timeslot with several sessions in one track shares its time evenly between them, in whole minutes. Check those times afterwards.
+- A session on the schedule more than once gets a copy for each extra time, such as `lunch-2`.
+- A track that is only on some days gets those days in `days`.
+- It leaves the `schedule` collection in place.
+
 ## Seed the emulator with fixture data
 
 Import the JSON fixtures in `docs/default-firebase-data.json` into the running Firestore emulator:

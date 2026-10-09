@@ -51,6 +51,34 @@ describe('sessionsSpeakersScheduleMap', () => {
     });
   });
 
+  it("keeps the schedule's track and times over the session's own fields for the new schedule", () => {
+    const sessionsRaw = {
+      s1: {
+        title: 'Talk one',
+        day: '2025-06-23',
+        startTime: '11:00',
+        endTime: '11:30',
+        track: 'room-b',
+      },
+    };
+    const scheduleRaw = {
+      '2025-06-22': {
+        tracks: [{ title: 'Room A' }],
+        dateReadable: 'June 22, 2025',
+        timeslots: [{ startTime: '09:00', endTime: '10:00', sessions: [{ items: ['s1'] }] }],
+      },
+    };
+
+    const { sessions } = sessionsSpeakersScheduleMap(sessionsRaw, {}, scheduleRaw);
+
+    expect(sessions.s1).toMatchObject({
+      day: '2025-06-22',
+      track: { title: 'Room A' },
+      startTime: '09:00',
+      endTime: '10:00',
+    });
+  });
+
   it('splits a timeslot into evenly-timed sub-sessions', () => {
     const sessionsRaw = {
       s1: { title: 'Talk one', tags: ['web'] },
@@ -94,7 +122,7 @@ describe('sessionsSpeakersScheduleMap', () => {
   it('falls back to the session track only when the session does not already have one', () => {
     const sessionsRaw = {
       s1: { title: 'Talk one' },
-      s2: { title: 'Talk two', track: 'Custom Track' },
+      s2: { title: 'Talk two', track: { title: 'Custom Track' } },
     };
     const scheduleRaw = {
       '2025-06-22': {
@@ -113,7 +141,7 @@ describe('sessionsSpeakersScheduleMap', () => {
     const { sessions } = sessionsSpeakersScheduleMap(sessionsRaw, {}, scheduleRaw);
 
     expect(sessions.s1.track).toBe('Track A');
-    expect(sessions.s2.track).toBe('Custom Track');
+    expect(sessions.s2.track).toEqual({ title: 'Custom Track' });
   });
 
   it('accumulates a speaker across multiple sessions with combined tags', () => {

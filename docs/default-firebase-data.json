@@ -474,7 +474,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/mete-atamel-windows-and-net-on-google-cloud-platform",
       "speakers": ["mete_atamel", "adrian_kajda"],
       "tags": ["Cloud"],
-      "title": "Windows and .NET on Google Cloud Platform "
+      "title": "Windows and .NET on Google Cloud Platform ",
+      "day": "2016-09-09",
+      "startTime": "14:00",
+      "endTime": "14:40",
+      "track": "expo-hall"
     },
     "102": {
       "complexity": "Beginner",
@@ -482,7 +486,11 @@
       "language": "English",
       "speakers": ["mete_atamel"],
       "tags": ["Cloud"],
-      "title": "Hands-on gRPC experience building your own multiplayer game client"
+      "title": "Hands-on gRPC experience building your own multiplayer game client",
+      "day": "2016-09-10",
+      "startTime": "14:00",
+      "endTime": "15:30",
+      "track": "workshops-hall"
     },
     "103": {
       "complexity": "Intermediate",
@@ -491,7 +499,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/yonatan-levin-knock-knock-whos-there-doze",
       "speakers": ["yonatan_levin"],
       "tags": ["Android"],
-      "title": "Knock knock! Who's there? Doze."
+      "title": "Knock knock! Who's there? Doze.",
+      "day": "2016-09-09",
+      "startTime": "11:00",
+      "endTime": "11:20",
+      "track": "expo-hall"
     },
     "104": {
       "complexity": "Beginner",
@@ -501,7 +513,11 @@
       "speakers": ["sascha_wolter"],
       "tags": ["Web"],
       "title": "The Physical Web: Context is King!",
-      "videoId": "fLfQNp75kbc"
+      "videoId": "fLfQNp75kbc",
+      "day": "2016-09-10",
+      "startTime": "11:50",
+      "endTime": "12:30",
+      "track": "expo-hall"
     },
     "105": {
       "complexity": "Intermediate",
@@ -511,7 +527,11 @@
       "speakers": ["rustem_arzymbetov"],
       "tags": ["Cloud"],
       "title": "Intro to TensorFlow",
-      "videoId": "e3cuSz1hEPs"
+      "videoId": "e3cuSz1hEPs",
+      "day": "2016-09-09",
+      "startTime": "16:00",
+      "endTime": "16:40",
+      "track": "expo-hall"
     },
     "106": {
       "complexity": "Beginner",
@@ -521,7 +541,11 @@
       "speakers": ["adrian_kajda"],
       "tags": ["Android"],
       "title": "Fuelio. Success story",
-      "videoId": "qK7ysoohsaM"
+      "videoId": "qK7ysoohsaM",
+      "day": "2016-09-09",
+      "startTime": "17:40",
+      "endTime": "18:20",
+      "track": "expo-hall"
     },
     "107": {
       "complexity": "Beginner",
@@ -530,7 +554,11 @@
       "language": "English",
       "speakers": ["gerard_sans"],
       "tags": ["Web"],
-      "title": "Introduction to Progressive Web Apps in Angular 2"
+      "title": "Introduction to Progressive Web Apps in Angular 2",
+      "day": "2016-09-09",
+      "startTime": "14:00",
+      "endTime": "15:30",
+      "track": "workshops-hall"
     },
     "108": {
       "complexity": "Intermediate",
@@ -540,7 +568,11 @@
       "speakers": ["gerard_sans"],
       "tags": ["Web"],
       "title": "New Data Architecture in Angular 2",
-      "videoId": "pgmLkwD-mqM"
+      "videoId": "pgmLkwD-mqM",
+      "day": "2016-09-10",
+      "startTime": "14:00",
+      "endTime": "14:40",
+      "track": "expo-hall"
     },
     "109": {
       "complexity": "Beginner",
@@ -549,7 +581,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/jozef-vodicka-how-much-money-firebase-can-save-you",
       "speakers": ["jozef_vodicka"],
       "tags": ["Cloud"],
-      "title": "How much money Firebase can save you"
+      "title": "How much money Firebase can save you",
+      "day": "2016-09-09",
+      "startTime": "11:00",
+      "endTime": "12:30",
+      "track": "workshops-hall"
     },
     "110": {
       "complexity": "Intermediate",
@@ -558,7 +594,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/mateusz-herych-the-ultimate-guide-to-mvp-pattern-on-android",
       "speakers": ["mateusz_herych"],
       "tags": ["Android"],
-      "title": "The ultimate guide to MVP pattern on Android"
+      "title": "The ultimate guide to MVP pattern on Android",
+      "day": "2016-09-10",
+      "startTime": "14:50",
+      "endTime": "15:30",
+      "track": "expo-hall"
     },
     "111": {
       "complexity": "Intermediate",
@@ -567,7 +607,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/kseniia-shumelchyk-building-modular-architecture-apps-with-dagger-2",
       "speakers": ["david_mayboroda"],
       "tags": ["Android"],
-      "title": "Building modular architecture apps with Dagger 2"
+      "title": "Building modular architecture apps with Dagger 2",
+      "day": "2016-09-09",
+      "startTime": "16:50",
+      "endTime": "17:30",
+      "track": "conference-hall"
     },
     "112": {
       "complexity": "Intermediate",
@@ -575,7 +619,11 @@
       "language": "English",
       "speakers": ["konrad_dzwinel"],
       "tags": ["Web"],
-      "title": "Building web apps in 2016"
+      "title": "Building web apps in 2016",
+      "day": "2016-09-09",
+      "startTime": "11:20",
+      "endTime": "11:40",
+      "track": "expo-hall"
     },
     "113": {
       "complexity": "Intermediate",
@@ -584,7 +632,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/jean-baptiste-clion-microservices-in-google-app-engine",
       "speakers": ["jean-baptiste_clion"],
       "tags": ["Cloud"],
-      "title": "Microservices in Google App Engine"
+      "title": "Microservices in Google App Engine",
+      "day": "2016-09-10",
+      "startTime": "11:00",
+      "endTime": "11:40",
+      "track": "conference-hall"
     },
     "114": {
       "complexity": "Intermediate",
@@ -592,7 +644,11 @@
       "language": "English",
       "speakers": ["paul_lammertsma"],
       "tags": ["Android"],
-      "title": "I’ve been doing some syncing…"
+      "title": "I’ve been doing some syncing…",
+      "day": "2016-09-10",
+      "startTime": "10:10",
+      "endTime": "10:50",
+      "track": "expo-hall"
     },
     "115": {
       "complexity": "Beginner",
@@ -602,7 +658,11 @@
       "speakers": ["paul_lammertsma"],
       "tags": ["Android"],
       "title": "Android tool-chain and run-time improvements in N",
-      "videoId": "WqULb6bdwwg"
+      "videoId": "WqULb6bdwwg",
+      "day": "2016-09-10",
+      "startTime": "16:50",
+      "endTime": "17:30",
+      "track": "expo-hall"
     },
     "116": {
       "complexity": "Beginner",
@@ -611,7 +671,11 @@
       "presentation": "http://carmenpopoviciu.github.io/on-polymer-and-smileys/",
       "speakers": ["aleksander_piotrowski"],
       "tags": ["Web"],
-      "title": "On Polymer and smileys... or Polysmileys"
+      "title": "On Polymer and smileys... or Polysmileys",
+      "day": "2016-09-09",
+      "startTime": "11:50",
+      "endTime": "12:30",
+      "track": "conference-hall"
     },
     "117": {
       "complexity": "Beginner",
@@ -620,7 +684,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/sergii-khomenko-building-data-pipelines-from-simple-to-more-advanced-hands-on-experience",
       "speakers": ["carmen_popovicu"],
       "tags": ["Cloud"],
-      "title": "Building data pipelines: from simple to more advanced - hands-on experience"
+      "title": "Building data pipelines: from simple to more advanced - hands-on experience",
+      "day": "2016-09-10",
+      "startTime": "10:10",
+      "endTime": "10:50",
+      "track": "conference-hall"
     },
     "118": {
       "complexity": "Intermediate",
@@ -629,7 +697,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/dmytro-danylyk-kotlin-plus-android",
       "speakers": ["sergii_khomenko"],
       "tags": ["Android"],
-      "title": "Kotlin + Android"
+      "title": "Kotlin + Android",
+      "day": "2016-09-09",
+      "startTime": "14:00",
+      "endTime": "14:40",
+      "track": "conference-hall"
     },
     "119": {
       "complexity": "Beginner",
@@ -638,7 +710,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/jana-moudra-hands-on-with-ui-testing-for-android-developers",
       "speakers": ["dmytro_danylyk"],
       "tags": ["Android"],
-      "title": "Hands-on with UI testing for Android developers"
+      "title": "Hands-on with UI testing for Android developers",
+      "day": "2016-09-09",
+      "startTime": "16:00",
+      "endTime": "18:20",
+      "track": "workshops-hall"
     },
     "120": {
       "complexity": "Beginner",
@@ -647,7 +723,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/jakub-skvara-progressive-web-apps-prepare-your-web-for-2017",
       "speakers": ["jana_moudra"],
       "tags": ["Web"],
-      "title": "Progressive web apps - prepare your web for 2017"
+      "title": "Progressive web apps - prepare your web for 2017",
+      "day": "2016-09-09",
+      "startTime": "11:00",
+      "endTime": "11:40",
+      "track": "conference-hall"
     },
     "121": {
       "complexity": "Intermediate",
@@ -655,7 +735,11 @@
       "language": "English",
       "speakers": ["jana_moudra"],
       "tags": ["Web"],
-      "title": "Offline-first progressive web apps"
+      "title": "Offline-first progressive web apps",
+      "day": "2016-09-10",
+      "startTime": "10:10",
+      "endTime": "10:50",
+      "track": "workshops-hall"
     },
     "122": {
       "complexity": "Intermediate",
@@ -665,7 +749,11 @@
       "speakers": ["jakub_škvára"],
       "tags": ["Android"],
       "title": "Firebase + Kotlin + RxJava + MVP: Practical Tips",
-      "videoId": "b9NgjqM6dvk"
+      "videoId": "b9NgjqM6dvk",
+      "day": "2016-09-10",
+      "startTime": "11:00",
+      "endTime": "11:40",
+      "track": "expo-hall"
     },
     "123": {
       "complexity": "Beginner",
@@ -673,7 +761,11 @@
       "language": "English",
       "speakers": ["david_vávra"],
       "tags": ["Web"],
-      "title": "TBD"
+      "title": "TBD",
+      "day": "2016-09-10",
+      "startTime": "14:50",
+      "endTime": "15:30",
+      "track": "conference-hall"
     },
     "124": {
       "complexity": "Intermediate",
@@ -682,7 +774,11 @@
       "speakers": ["valentyn_shybanov"],
       "tags": ["Android"],
       "title": "Continues Integration in Android",
-      "videoId": "MmGDQkgknfY"
+      "videoId": "MmGDQkgknfY",
+      "day": "2016-09-10",
+      "startTime": "11:50",
+      "endTime": "12:30",
+      "track": "conference-hall"
     },
     "125": {
       "complexity": "Intermediate",
@@ -690,7 +786,11 @@
       "language": "English",
       "speakers": ["sergiy_mokienko"],
       "tags": ["Cloud"],
-      "title": "Kubernetes in a real world"
+      "title": "Kubernetes in a real world",
+      "day": "2016-09-09",
+      "startTime": "17:40",
+      "endTime": "18:20",
+      "track": "conference-hall"
     },
     "126": {
       "complexity": "Intermediate",
@@ -700,7 +800,11 @@
       "speakers": ["ihor_dvoretskyi"],
       "tags": ["Android"],
       "title": "Android hacking for dummies: ‘if’ operator demolytion",
-      "videoId": "We04nyIIsA0"
+      "videoId": "We04nyIIsA0",
+      "day": "2016-09-09",
+      "startTime": "14:50",
+      "endTime": "15:30",
+      "track": "conference-hall"
     },
     "127": {
       "complexity": "Intermediate",
@@ -709,7 +813,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/anton-minashkin-exoplayer-media-playback-without-pain-almost-dot-dot-dot",
       "speakers": ["michael_pustovit"],
       "tags": ["Android"],
-      "title": "ExoPlayer: Media playback without pain (almost...)"
+      "title": "ExoPlayer: Media playback without pain (almost...)",
+      "day": "2016-09-09",
+      "startTime": "16:00",
+      "endTime": "16:40",
+      "track": "conference-hall"
     },
     "128": {
       "complexity": "Beginner",
@@ -717,7 +825,11 @@
       "language": "English",
       "speakers": ["anton__minashkin"],
       "tags": ["Android"],
-      "title": "Android Wear 2.0: Great Changes Upcoming this Fall"
+      "title": "Android Wear 2.0: Great Changes Upcoming this Fall",
+      "day": "2016-09-10",
+      "startTime": "14:00",
+      "endTime": "14:40",
+      "track": "conference-hall"
     },
     "129": {
       "complexity": "Intermediate",
@@ -726,7 +838,11 @@
       "presentation": "https://speakerdeck.com/gdglviv/resul-caner-yildirim-accessibility-on-android",
       "speakers": ["constantine_mars"],
       "tags": ["Android"],
-      "title": "Accessibility on Android"
+      "title": "Accessibility on Android",
+      "day": "2016-09-09",
+      "startTime": "11:50",
+      "endTime": "12:30",
+      "track": "expo-hall"
     },
     "130": {
       "complexity": "Intermediate",
@@ -734,7 +850,11 @@
       "language": "English",
       "speakers": ["constantine_mars"],
       "tags": ["Android"],
-      "title": "Designing an Android Wear Application"
+      "title": "Designing an Android Wear Application",
+      "day": "2016-09-10",
+      "startTime": "16:00",
+      "endTime": "17:30",
+      "track": "workshops-hall"
     },
     "131": {
       "complexity": "Intermediate",
@@ -743,44 +863,66 @@
       "presentation": "https://speakerdeck.com/gdglviv/roman-herasymenko-deal-with-it-android-databinding-explained",
       "speakers": ["resul_caner__yildirim"],
       "tags": ["Android"],
-      "title": "Deal with it: Android DataBinding explained"
+      "title": "Deal with it: Android DataBinding explained",
+      "day": "2016-09-10",
+      "startTime": "16:00",
+      "endTime": "16:40",
+      "track": "expo-hall"
     },
     "132": {
       "description": "Get your badge, coffee, enjoy talking with tech edicts around",
       "icon": "registration",
       "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fregistration.jpg?alt=media&token=27328646-d323-4cca-904c-75f021bc3ffe",
-      "title": "Registration & morning Coffee"
+      "title": "Registration & morning Coffee",
+      "day": "2016-09-09",
+      "startTime": "09:00",
+      "endTime": "10:00"
     },
     "133": {
       "description": "Foooooooood!",
       "icon": "lunch",
       "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Flunch.jpg?alt=media&token=bc82aaff-92cc-4dcc-a00e-2b6f30a40225",
-      "title": "Lunch"
+      "title": "Lunch",
+      "day": "2016-09-09",
+      "startTime": "12:30",
+      "endTime": "14:00"
     },
     "134": {
       "description": "Coffeeeeeee!",
       "icon": "coffee-break",
       "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fcoffee-break.jpg?alt=media&token=7c2c929b-cb94-4be8-a05a-b3f678136cb7",
-      "title": "Coffee break"
+      "title": "Coffee break",
+      "day": "2016-09-09",
+      "startTime": "15:30",
+      "endTime": "16:00"
     },
     "135": {
       "description": "Coffeeeeeee!",
       "icon": "coffee-break",
       "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fmorning.jpg?alt=media&token=d0da3d64-fc63-48c6-9d41-1460451dca64",
-      "title": "Morning coffee"
+      "title": "Morning coffee",
+      "day": "2016-09-10",
+      "startTime": "09:30",
+      "endTime": "10:10"
     },
     "136": {
       "description": "Official start of the conference. Greetings from the organizers, sponsors and partners.",
       "icon": "opening",
       "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fopening.jpg?alt=media&token=aa52dd45-50c9-4e36-9485-c1f9138ecd6b",
       "language": "English",
-      "title": "GDG DevFest Ukraine 2016 Opening"
+      "title": "GDG DevFest Ukraine 2016 Opening",
+      "day": "2016-09-09",
+      "startTime": "10:00",
+      "endTime": "10:15"
     },
     "137": {
       "description": "Afterparty is a great time to have some fun and meet new people",
       "icon": "party",
       "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fparty.jpg?alt=media&token=8e413f01-373a-40bf-bb87-1dcf1d8e6af1",
-      "title": "Afterparty & Networking"
+      "title": "Afterparty & Networking",
+      "day": "2016-09-09",
+      "startTime": "18:30",
+      "endTime": "22:30"
     },
     "138": {
       "description": "Make sure you won't miss closing ceremony, all gifts from out sponsors and partners will find their owners during this session.",
@@ -790,12 +932,79 @@
     "139": {
       "description": "",
       "language": "English",
-      "title": "Keynote"
+      "title": "Keynote",
+      "day": "2016-09-09",
+      "startTime": "10:15",
+      "endTime": "11:00"
     },
     "140": {
       "description": "TBD",
       "language": "English",
-      "title": "TBD"
+      "title": "TBD",
+      "day": "2016-09-09",
+      "startTime": "14:50",
+      "endTime": "15:30",
+      "track": "expo-hall"
+    },
+    "112-2": {
+      "complexity": "Intermediate",
+      "description": "Last year brought a lot of new capabilities to browsers, fundamentally changing the way we will build web apps in 2016. 60FPS, push messages, offline support and background sync became a reality marking the birth of Progressive Web Apps.",
+      "language": "English",
+      "speakers": ["konrad_dzwinel"],
+      "tags": ["Web"],
+      "title": "Building web apps in 2016",
+      "day": "2016-09-09",
+      "startTime": "16:50",
+      "endTime": "17:30",
+      "track": "expo-hall"
+    },
+    "121-2": {
+      "complexity": "Intermediate",
+      "description": "Using service workers and other modern progressive web apps capabilities we can update our web applications to be offline-fires. In this session we'll show how to easily convert your applications be usable without the internet connection.",
+      "language": "English",
+      "speakers": ["jana_moudra"],
+      "tags": ["Web"],
+      "title": "Offline-first progressive web apps",
+      "day": "2016-09-10",
+      "startTime": "11:00",
+      "endTime": "12:30",
+      "track": "workshops-hall"
+    },
+    "133-2": {
+      "description": "Foooooooood!",
+      "icon": "lunch",
+      "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Flunch.jpg?alt=media&token=bc82aaff-92cc-4dcc-a00e-2b6f30a40225",
+      "title": "Lunch",
+      "day": "2016-09-10",
+      "startTime": "12:30",
+      "endTime": "14:00"
+    },
+    "134-2": {
+      "description": "Coffeeeeeee!",
+      "icon": "coffee-break",
+      "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fcoffee-break.jpg?alt=media&token=7c2c929b-cb94-4be8-a05a-b3f678136cb7",
+      "title": "Coffee break",
+      "day": "2016-09-10",
+      "startTime": "15:30",
+      "endTime": "16:00"
+    },
+    "140-2": {
+      "description": "TBD",
+      "language": "English",
+      "title": "TBD",
+      "day": "2016-09-10",
+      "startTime": "16:00",
+      "endTime": "16:40",
+      "track": "conference-hall"
+    },
+    "140-3": {
+      "description": "TBD",
+      "language": "English",
+      "title": "TBD",
+      "day": "2016-09-10",
+      "startTime": "16:50",
+      "endTime": "17:30",
+      "track": "conference-hall"
     }
   },
   "speakers": {
