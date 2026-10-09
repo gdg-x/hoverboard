@@ -3,6 +3,7 @@ import { getMessaging } from 'firebase-admin/messaging';
 import * as logger from 'firebase-functions/logger';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { sendGeneralNotification } from '../../src/triggers/notifications';
+import { expectNoPersonalDataLogged } from '../personal-data';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('firebase-admin/messaging');
@@ -65,6 +66,9 @@ describe('sendGeneralNotification', () => {
     vi.restoreAllMocks();
     vi.clearAllMocks();
   });
+
+  // Runs before the restore above, which removes the spies' calls.
+  afterEach(expectNoPersonalDataLogged);
 
   it('returns early when the created notification has no data', async () => {
     await sendGeneralNotification.run({

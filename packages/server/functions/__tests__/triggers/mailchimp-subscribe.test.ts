@@ -2,6 +2,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import * as logger from 'firebase-functions/logger';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mailchimpSubscribe } from '../../src/triggers/mailchimp-subscribe';
+import { expectNoPersonalDataLogged } from '../personal-data';
 
 vi.mock('firebase-admin/firestore');
 vi.mock('firebase-functions/logger');
@@ -49,6 +50,9 @@ describe('mailchimpSubscribe', () => {
     vi.unstubAllGlobals();
   });
 
+  // Runs before the restore above, which removes the spies' calls.
+  afterEach(expectNoPersonalDataLogged);
+
   it('subscribes a new user to the configured Mailchimp list', async () => {
     mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
     mockFetchOnce({ status: 'subscribed' });
@@ -71,7 +75,7 @@ describe('mailchimpSubscribe', () => {
         headers: expect.objectContaining({ Authorization: 'apiKey key-us1' }),
       }),
     );
-    expect(logSpy).toHaveBeenCalledWith('ada@example.com was added to subscribe list.');
+    expect(logSpy).toHaveBeenCalledWith('Added subscriber b5fc85e557 to the subscribe list.');
   });
 
   it('retries as a PATCH against the member hash when the member already exists', async () => {
@@ -94,7 +98,7 @@ describe('mailchimpSubscribe', () => {
       /^https:\/\/us1\.api\.mailchimp\.com\/3\.0\/lists\/abc123\/members\/[a-f0-9]{32}$/,
     );
     expect(secondOptions).toMatchObject({ method: 'PATCH' });
-    expect(logSpy).toHaveBeenCalledWith('ada@example.com was updated in subscribe list.');
+    expect(logSpy).toHaveBeenCalledWith('Updated subscriber b5fc85e557 in the subscribe list.');
   });
 
   it('logs and skips subscribing when the Mailchimp config is missing', async () => {
@@ -135,21 +139,28 @@ describe('mailchimpSubscribe', () => {
     mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
     mockFetchOnce({ title: 'Service Unavailable', detail: 'try later' }, status);
 
-    await expect(mailchimpSubscribe.run(subscriberEvent)).rejects.toThrow(
-      `with status ${status}: Service Unavailable try later`,
+    const error = await mailchimpSubscribe.run(subscriberEvent).catch((e: Error) => e);
+
+    // The runtime logs the thrown error, so it must not hold the email either.
+    expect(error).toBeInstanceOf(Error);
+    expect((error as Error).message).toBe(
+      `Mailchimp POST failed for subscriber b5fc85e557 with status ${status}: Service Unavailable try later`,
     );
   });
 
   it('logs an error without retrying on non-retryable HTTP failures', async () => {
     mockConfigDoc({ dc: 'us1', listid: 'abc123', apikey: 'key-us1' });
-    mockFetchOnce({ title: 'Invalid Resource', detail: 'bad email' }, 400);
+    mockFetchOnce(
+      { title: 'Invalid Resource', detail: 'ada@example.com looks fake or invalid' },
+      400,
+    );
     const errorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
     const logSpy = vi.spyOn(logger, 'log').mockImplementation(() => undefined);
 
     await mailchimpSubscribe.run(subscriberEvent);
 
     expect(errorSpy).toHaveBeenCalledWith(
-      expect.stringContaining('with status 400: Invalid Resource bad email'),
+      'Mailchimp POST failed for subscriber b5fc85e557 with status 400: Invalid Resource <email> looks fake or invalid',
     );
     expect(logSpy).not.toHaveBeenCalled();
   });

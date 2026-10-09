@@ -17,9 +17,10 @@ import {
   parseTimeAndGetFromNow,
 } from '../time.js';
 import { isInvalidTokenError, sendToTokens } from '../utils/messaging.js';
+import { logId } from '../utils/log-id.js';
 
 const sendPushNotificationToUsers = async (userIds: string[], data: MulticastMessage['data']) => {
-  logger.log('sendPushNotificationToUsers user ids', userIds, 'with notification', data);
+  logger.log(`Sending the reminder for ${data?.['path']} to ${userIds.length} users.`);
 
   const usersSnapshots = await Promise.all(userIds.map((id) => fetchNotificationsUser(id)));
 
@@ -35,14 +36,14 @@ const sendPushNotificationToUsers = async (userIds: string[], data: MulticastMes
   const tokens = Object.keys(tokensToUsers);
 
   if (!tokens.length) {
-    logger.log('There are no device tokens to send to for user ids', userIds);
+    logger.log(`None of the ${userIds.length} users has a device token.`);
     return [];
   }
 
   const tokensToRemove: Record<string, string> = {};
   const failures = await sendToTokens(tokens, data);
   failures.forEach(({ token, error }) => {
-    logger.error('Failure sending notification to', token, error);
+    logger.error(`Failure sending notification to token ${logId(token)}`, error);
     if (isInvalidTokenError(error.code)) {
       tokensToRemove[token] = tokensToUsers[token]!;
     }

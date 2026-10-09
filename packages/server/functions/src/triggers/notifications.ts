@@ -9,6 +9,7 @@ import {
   fetchNotificationSubscribers,
 } from '../db/notifications-subscribers.js';
 import { isInvalidTokenError, sendToTokens } from '../utils/messaging.js';
+import { logId } from '../utils/log-id.js';
 
 export const sendGeneralNotification = onDocumentCreated(
   '/notifications/{timestamp}',
@@ -26,7 +27,7 @@ export const sendGeneralNotification = onDocumentCreated(
       return undefined;
     }
 
-    logger.log(`New message added at ${timestamp} with payload ${message}`);
+    logger.log(`Sending notification ${timestamp}.`);
 
     const deviceTokensPromise = fetchNotificationSubscribers();
     const notificationsConfigPromise = fetchConfig<{ icon?: string }>('notifications');
@@ -59,7 +60,7 @@ export const sendGeneralNotification = onDocumentCreated(
 
     const failures = await sendToTokens(tokens, data);
     const tokensToRemove = failures.flatMap(({ token, error }) => {
-      logger.error(`Failure sending notification to ${token}`, error);
+      logger.error(`Failure sending notification to token ${logId(token)}`, error);
       return isInvalidTokenError(error.code) ? [deleteNotificationSubscriber(token)] : [];
     });
 

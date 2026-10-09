@@ -5,8 +5,12 @@ import * as logger from 'firebase-functions/logger';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import { fetchConfig } from '../db/config.js';
 import { isFeatureOff } from '../features.js';
+import { logId } from '../utils/log-id.js';
 
 const md5 = (data: string) => crypto.createHash('md5').update(data).digest('hex');
+
+/** Mailchimp's error details can repeat the email address. */
+const withoutEmail = (text: string, email: string) => text.split(email).join('<email>');
 
 interface MailchimpConfig {
   dc: string;
@@ -82,6 +86,7 @@ async function subscribeToMailchimp(
     },
   });
   const body = (await response.json().catch(() => ({}))) as { title?: string; detail?: string };
+  const subscriber = `subscriber ${logId(subscriberData.email_address)}`;
 
   if (!response.ok) {
     if (!emailHash && response.status === 400 && body.title === 'Member Exists') {
@@ -89,8 +94,9 @@ async function subscribeToMailchimp(
       return subscribeToMailchimp(mailchimpConfig, { ...subscriberData, status: 'pending' }, hash);
     }
 
+    const detail = withoutEmail(body.detail ?? '', subscriberData.email_address);
     const message =
-      `Mailchimp ${method} failed for ${subscriberData.email_address} with status ${response.status}: ${body.title ?? ''} ${body.detail ?? ''}`.trim();
+      `Mailchimp ${method} failed for ${subscriber} with status ${response.status}: ${body.title ?? ''} ${detail}`.trim();
     if (isRetryableStatus(response.status)) {
       throw new Error(message);
     }
@@ -101,7 +107,7 @@ async function subscribeToMailchimp(
 
   logger.log(
     method === 'POST'
-      ? `${subscriberData.email_address} was added to subscribe list.`
-      : `${subscriberData.email_address} was updated in subscribe list.`,
+      ? `Added ${subscriber} to the subscribe list.`
+      : `Updated ${subscriber} in the subscribe list.`,
   );
 }
