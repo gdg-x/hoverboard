@@ -1,6 +1,7 @@
 import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
+import { FieldValue } from 'firebase-admin/firestore';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { runCommand } from '../../lib/spawn.js';
 import { runConvertSchedule } from './index.js';
@@ -111,5 +112,39 @@ describe('runConvertSchedule', () => {
 
     await expect(runConvertSchedule()).rejects.toThrow('Invalid sessions/talk');
     expect(writes).toEqual([]);
+  });
+
+  it('removes the old `extend` field from every session', async () => {
+    collections['sessions'] = {
+      lunch: { ...session, extend: 2 },
+      talk: { title: 'Talk', description: 'About' },
+      later: { title: 'Later', description: 'Not on the schedule', extend: 1 },
+    };
+
+    await runConvertSchedule();
+
+    expect(writes).toEqual([
+      {
+        id: 'talk',
+        data: { day: '2027-10-15', startTime: '10:00', endTime: '10:40' },
+        options: { merge: true },
+      },
+      {
+        id: 'lunch',
+        data: {
+          day: '2027-10-15',
+          startTime: '12:00',
+          endTime: '13:00',
+          extend: FieldValue.delete(),
+        },
+        options: { merge: true },
+      },
+      {
+        id: 'lunch-2',
+        data: { ...session, day: '2027-10-16', startTime: '12:30', endTime: '13:30' },
+        options: { merge: false },
+      },
+      { id: 'later', data: { extend: FieldValue.delete() }, options: { merge: true } },
+    ]);
   });
 });

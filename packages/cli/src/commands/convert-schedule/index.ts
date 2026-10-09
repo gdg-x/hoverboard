@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import type { DocumentData } from 'firebase-admin/firestore';
+import { type DocumentData, FieldValue } from 'firebase-admin/firestore';
 import { validateContent } from '../../lib/content.js';
 import { firestore, repoRoot } from '../../lib/firestore.js';
 import { runCommand } from '../../lib/spawn.js';
@@ -9,6 +9,9 @@ import { type Conversion, type OldScheduleDay, convertSchedule } from './convert
 
 // Firestore takes at most 500 writes in a batch.
 const BATCH_SIZE = 400;
+
+/** A session without `extend`, the old schedule's field for the timeslots a session spans. */
+const withoutExtend = ({ extend: _extend, ...session }: DocumentData): DocumentData => session;
 
 const formatTime = (time: Conversion['times'][string]) =>
   `${time.day} ${time.startTime}–${time.endTime}, ${time.track ?? 'every track'}`;
@@ -40,24 +43,34 @@ export const runConvertSchedule = async ({ dryRun = false } = {}): Promise<Conve
     sessionsSnapshot.docs.map((doc) => [doc.id, doc.data()]),
   );
   const conversion = convertSchedule(schedule, sessions.keys());
+  const removeExtend = (id: string) =>
+    sessions.get(id) && 'extend' in sessions.get(id)! ? { extend: FieldValue.delete() } : {};
 
   const writes: [id: string, data: DocumentData, merge: boolean][] = [
     ...Object.entries(conversion.times).map(([id, time]): [string, DocumentData, boolean] => [
       id,
-      time,
+      { ...time, ...removeExtend(id) },
       true,
     ]),
     ...Object.entries(conversion.copies).map(
       ([id, { from, ...time }]): [string, DocumentData, boolean] => [
         id,
-        { ...sessions.get(from), ...time },
+        { ...withoutExtend(sessions.get(from)!), ...time },
         false,
       ],
     ),
+    // Sessions that aren't on the old schedule lose `extend` too.
+    ...[...sessions.keys()]
+      .filter((id) => !conversion.times[id] && 'extend' in sessions.get(id)!)
+      .map((id): [string, DocumentData, boolean] => [id, removeExtend(id), true]),
   ];
   // Fail before anything is written, rather than part way through.
   for (const [id, data, merge] of writes) {
-    validateContent('sessions', id, merge ? { ...sessions.get(id), ...data } : data);
+    validateContent(
+      'sessions',
+      id,
+      merge ? { ...withoutExtend(sessions.get(id)!), ...withoutExtend(data) } : data,
+    );
   }
 
   for (const warning of conversion.warnings) console.log(`! ${warning}`);

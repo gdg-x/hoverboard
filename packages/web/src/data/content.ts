@@ -52,8 +52,15 @@ const enabledLoaders = () =>
     [features].flat().some((feature) => __HB_FEATURES__[feature]),
   );
 
-const checkSchedule = ({ sessions }: Partial<Content>) => {
-  const errors = scheduleErrors(sessions ?? [], scheduleTracks);
+const checkSchedule = ({ sessions = [] }: Partial<Content>) => {
+  // Sessions from before v4 got their times from the `schedule` collection.
+  if (__HB_FEATURES__.schedule && sessions.length && !sessions.some(({ day }) => day)) {
+    console.warn(
+      `None of the ${sessions.length} sessions has a day and times, so the schedule is empty. ` +
+        'Sessions from before v4 need `./hbd convert-schedule`. See docs/tutorials/firebase-utils.md.',
+    );
+  }
+  const errors = scheduleErrors(sessions, scheduleTracks);
   if (!errors.length) return;
   const message = `The schedule has problems:\n${errors.map((error) => `  ${error}`).join('\n')}`;
   // In development, the content can be halfway through an edit.

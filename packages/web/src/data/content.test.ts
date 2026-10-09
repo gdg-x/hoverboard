@@ -88,6 +88,16 @@ describe('readContent', () => {
     expect(content).not.toHaveProperty('schedule');
   });
 
+  it('warns when no session has a day, as before converting the old schedule', async () => {
+    const { db } = fakeFirestore({ sessions: [{ id: 'talk', data: { title: 'Talk' } }] });
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+
+    await readContent(db);
+
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('./hbd convert-schedule'));
+    warn.mockRestore();
+  });
+
   it('fails a build on sessions the schedule cannot show, and only warns in development', async () => {
     const overlap = { day: '2016-09-09', track: 'expo-hall', endTime: '10:00' };
     const { db } = fakeFirestore({
