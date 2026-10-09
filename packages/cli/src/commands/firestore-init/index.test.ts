@@ -1,9 +1,6 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'fs';
-import { tmpdir } from 'os';
-import { join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { importConfig } from './config.js';
-import { runFirestoreInit, siteFeatures } from './index.js';
+import { runFirestoreInit } from './index.js';
 
 const { calls, mockImport } = vi.hoisted(() => {
   const calls: string[] = [];
@@ -81,40 +78,5 @@ describe('runFirestoreInit', () => {
 
     expect(calls).not.toContain('sessions');
     expect(calls).not.toContain('speakers');
-  });
-});
-
-describe('siteFeatures', () => {
-  const dirsToClean: string[] = [];
-
-  afterEach(() => {
-    for (const dir of dirsToClean.splice(0)) rmSync(dir, { recursive: true, force: true });
-  });
-
-  const writeSite = (dir: string, path: string, site: object) => {
-    mkdirSync(join(dir, path, '..'), { recursive: true });
-    writeFileSync(join(dir, path), JSON.stringify(site));
-  };
-
-  it('reads the site features over the defaults', () => {
-    const dir = mkdtempSync(join(tmpdir(), 'hoverboard-cli-'));
-    dirsToClean.push(dir);
-    writeSite(dir, 'packages/web/defaults/site.json', { features: { blog: true, team: true } });
-    writeSite(dir, 'packages/config/site.json', { features: { blog: false } });
-
-    expect(siteFeatures(dir)).toEqual({ blog: false, team: true });
-  });
-
-  it('uses the defaults when the site has no features', () => {
-    const dir = mkdtempSync(join(tmpdir(), 'hoverboard-cli-'));
-    dirsToClean.push(dir);
-    writeSite(dir, 'packages/web/defaults/site.json', { features: { blog: true } });
-    writeSite(dir, 'packages/config/site.json', {});
-
-    expect(siteFeatures(dir)).toEqual({ blog: true });
-  });
-
-  it('reads the repository config', () => {
-    expect(siteFeatures()).toMatchObject({ blog: true, schedule: true, speakers: true });
   });
 });

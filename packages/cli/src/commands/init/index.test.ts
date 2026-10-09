@@ -231,6 +231,26 @@ describe('runInit', () => {
     );
   });
 
+  it('deploys without the Blaze plan when the site has no functions', async () => {
+    write(
+      'packages/web/defaults/site.json',
+      JSON.stringify({ features: { functions: true, schedule: true, speakers: true } }),
+    );
+    write('details.json', JSON.stringify({ ...details, featuresOff: ['functions'] }));
+
+    const result = await runInit({
+      project: 'new-fest',
+      details: join(repo, 'details.json'),
+      deploy: true,
+      seed: false,
+    });
+
+    expect(result).toBe(true);
+    expect(read('packages/config/site.json')).toMatchObject({ features: { functions: false } });
+    expect(mocks.isBillingEnabled).not.toHaveBeenCalled();
+    expect(mocks.runDeploy).toHaveBeenCalledWith({ yes: true });
+  });
+
   it('stops before deploying when the config is not valid', async () => {
     mocks.validateSiteConfig.mockResolvedValueOnce(['site.json/event: bad']);
 

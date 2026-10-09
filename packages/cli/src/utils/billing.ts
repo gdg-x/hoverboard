@@ -1,5 +1,6 @@
 import { isBillingEnabled } from '../lib/billing.js';
 import type { DoctorCheckResult } from './node-version.js';
+import { functionsEnabled } from './site-features.js';
 
 const name = 'Blaze plan';
 
@@ -14,6 +15,13 @@ export const checkBilling = async (
 ): Promise<DoctorCheckResult> => {
   if (!repoRoot || !projectId) {
     return { name, ok: true, warning: true, message: 'Skipped, no Firebase project.' };
+  }
+  if (!functionsEnabled(repoRoot)) {
+    return {
+      name,
+      ok: true,
+      message: 'Not needed, as features.functions is false. The free Spark plan is enough.',
+    };
   }
 
   try {

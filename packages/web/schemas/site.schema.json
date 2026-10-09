@@ -379,6 +379,10 @@
         "forkMe": {
           "type": "boolean"
         },
+        "functions": {
+          "description": "Deploys the Cloud Functions, which need the Blaze plan. Off, the site can run on the free Spark plan, without notifications, image optimization and Mailchimp.",
+          "type": "boolean"
+        },
         "gallery": {
           "type": "boolean"
         },

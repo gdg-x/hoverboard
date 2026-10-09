@@ -41,7 +41,7 @@ Locally, the Auth emulator doesn't send email. Find the sign-in link under **Aut
 
 ## Billing
 
-Hoverboard's Cloud Functions (notifications, image optimization and Mailchimp) need the [Blaze (pay as you go) plan](https://firebase.google.com/pricing). Upgrade in the Firebase console under **Usage and billing**. Run `./hbd doctor` to check the plan of the selected project. Local development with the emulators works without Blaze.
+Hoverboard's Cloud Functions (notifications, image optimization and Mailchimp) need the [Blaze (pay as you go) plan](https://firebase.google.com/pricing). Upgrade in the Firebase console under **Usage and billing**. Run `./hbd doctor` to check the plan of the selected project. Local development with the emulators works without Blaze. A site without these can turn off `functions` in `features` and stay on the free Spark plan. See [Features](01-configure-app.md#features).
 
 Blaze includes no-cost usage for each product, and typical conference traffic should stay within or close to it, so most sites pay little or nothing. Deploying functions also uses Cloud Build and stores images in Artifact Registry. Run `npx firebase functions:artifacts:setpolicy` once so old images are cleaned up automatically.
 

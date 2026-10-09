@@ -122,16 +122,18 @@ Turn parts of the site off in `features` in `packages/config/site.json`. Every f
 }
 ```
 
-A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `gallery`, `imageOptimization`, `mailchimp`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `schedule`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
+A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `functions`, `gallery`, `imageOptimization`, `mailchimp`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `schedule`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
 
 The build fails when:
 
-- a feature needs one that is off: `schedule` needs `speakers`, `mySchedule` and `feedback` need `schedule`, and `mailchimp` needs `subscribe`.
+- a feature needs one that is off: `schedule` needs `speakers`, `mySchedule` and `feedback` need `schedule`, `mailchimp` needs `subscribe`, and `notifications`, `imageOptimization` and `mailchimp` need `functions`.
 - event text links to the page of a feature that is off, for example `/faq` in `footerRelBlock`.
 
 `demo` adds a band across the top of every page where visitors can try the built-in themes, the spacing and light or dark. Their browser remembers the choices. It is meant for demo sites, so leave it off on an event's site.
 
-Every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, and `optimizeImages` needs `imageOptimization`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
+`functions` deploys the Cloud Functions, which need the [Blaze plan](02-firebase.md#billing). With it off, `./hbd deploy` and the deploy workflow leave functions out, and the site runs on the free Spark plan, without notifications, image optimization and Mailchimp. Deploys don't delete functions that are already deployed: `./hbd doctor` lists them, with the commands that delete them.
+
+With `functions` on, every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `mailchimpSubscribe` needs `mailchimp`, `sendGeneralNotification` needs `notifications`, `scheduleNotifications` needs `notifications` and `mySchedule`, and `optimizeImages` needs `imageOptimization`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
 
 When `feedback` is off, the feedback dialog is still in the build, but nothing opens it. Bookmark buttons show only when `mySchedule` is on.
 

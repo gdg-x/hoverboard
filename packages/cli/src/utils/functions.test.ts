@@ -3,11 +3,15 @@ import { join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { checkFunctions, EXPECTED_FUNCTIONS } from './functions.js';
 
-const { listDeployedFunctionsMock } = vi.hoisted(() => ({ listDeployedFunctionsMock: vi.fn() }));
+const { listDeployedFunctionsMock, functionsEnabledMock } = vi.hoisted(() => ({
+  listDeployedFunctionsMock: vi.fn(),
+  functionsEnabledMock: vi.fn(() => true),
+}));
 
 vi.mock('../lib/deployed-functions.js', () => ({
   listDeployedFunctions: listDeployedFunctionsMock,
 }));
+vi.mock('./site-features.js', () => ({ functionsEnabled: functionsEnabledMock }));
 
 const deployed = (id: string, platform = 'gcfv2') => ({ id, region: 'us-central1', platform });
 
@@ -87,5 +91,31 @@ describe('checkFunctions', () => {
 
     expect(result).toMatchObject({ ok: true, warning: true });
     expect(result.message).toContain('Not logged in to Firebase.');
+  });
+
+  describe('with features.functions off', () => {
+    it('passes when no function is deployed', async () => {
+      functionsEnabledMock.mockReturnValueOnce(false);
+      listDeployedFunctionsMock.mockResolvedValue([]);
+
+      expect(await checkFunctions('/repo', 'demo-project')).toEqual({
+        name: 'Cloud Functions',
+        ok: true,
+        message: 'None deployed, as features.functions is false.',
+      });
+    });
+
+    it('warns about functions still deployed, which deploys leave in place', async () => {
+      functionsEnabledMock.mockReturnValueOnce(false);
+      listDeployedFunctionsMock.mockResolvedValue([deployed('optimizeImages')]);
+
+      const result = await checkFunctions('/repo', 'demo-project');
+
+      expect(result).toMatchObject({ ok: true, warning: true });
+      expect(result.message).toBe(
+        'features.functions is false, but optimizeImages is still deployed, and deploys leave it ' +
+          'in place. Delete it with `npx firebase functions:delete optimizeImages --region us-central1`.',
+      );
+    });
   });
 });

@@ -1,15 +1,30 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { checkBilling } from './billing.js';
 
-const { isBillingEnabledMock } = vi.hoisted(() => ({ isBillingEnabledMock: vi.fn() }));
+const { isBillingEnabledMock, functionsEnabledMock } = vi.hoisted(() => ({
+  isBillingEnabledMock: vi.fn(),
+  functionsEnabledMock: vi.fn(() => true),
+}));
 
 vi.mock('../lib/billing.js', () => ({ isBillingEnabled: isBillingEnabledMock }));
+vi.mock('./site-features.js', () => ({ functionsEnabled: functionsEnabledMock }));
 
 afterEach(() => {
   vi.clearAllMocks();
 });
 
 describe('checkBilling', () => {
+  it('passes without checking when the site deploys no functions', async () => {
+    functionsEnabledMock.mockReturnValueOnce(false);
+
+    const result = await checkBilling('/repo', 'demo-project');
+
+    expect(result).toMatchObject({ ok: true });
+    expect(result.warning).toBeUndefined();
+    expect(result.message).toContain('features.functions is false');
+    expect(isBillingEnabledMock).not.toHaveBeenCalled();
+  });
+
   it('skips with a warning when no project is selected', async () => {
     const result = await checkBilling('/repo', undefined);
 

@@ -12,6 +12,7 @@ import { runSetup } from './commands/setup.js';
 import { runSetupGitHub } from './commands/setup-github.js';
 import { githubAnnotation, validateSiteConfig } from './utils/site-config.js';
 import { findRepoRoot } from './utils/node-version.js';
+import { firebaseDeployArgs } from './utils/site-features.js';
 
 const program = new Command();
 
@@ -90,6 +91,16 @@ program
   .option('-y, --yes', 'Skip the confirmation prompt.')
   .action(async (options: { yes?: boolean }) => {
     process.exitCode = (await runDeploy(options)) ? 0 : 1;
+  });
+
+program
+  .command('deploy-args')
+  .description(
+    'Print the arguments `firebase deploy` needs for site.json, such as `--except functions` ' +
+      'when features.functions is false. The deploy workflow uses it.',
+  )
+  .action(() => {
+    console.log(firebaseDeployArgs(findRepoRoot(process.cwd()) ?? process.cwd()).join(' '));
   });
 
 program

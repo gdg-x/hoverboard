@@ -4,6 +4,7 @@ import { confirm } from '../lib/prompt.js';
 import { runCommand } from '../lib/spawn.js';
 import { checkFirebaseProject, resolveFirebaseProjectId } from '../utils/firebase-project.js';
 import { checkNodeVersion, findRepoRoot } from '../utils/node-version.js';
+import { firebaseDeployArgs } from '../utils/site-features.js';
 
 export interface DeployOptions {
   yes?: boolean;
@@ -48,9 +49,15 @@ export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> =
   }
 
   console.log('\nDeploying...');
+  const extraArgs = firebaseDeployArgs(repoRoot);
+  if (extraArgs.length) {
+    console.log(
+      'Skipping Cloud Functions: features.functions is false in packages/config/site.json.',
+    );
+  }
   const exitCode = runCommand(
     resolveFirebaseBin(repoRoot),
-    ['deploy', '--project', projectId],
+    ['deploy', '--project', projectId, ...extraArgs],
     repoRoot,
     { NODE_ENV: 'production' },
   );

@@ -1,7 +1,7 @@
-import { readFileSync } from 'fs';
 import { join } from 'path';
 import data from '../../../../../docs/default-firebase-data.json';
 import { validateSeedData } from '../../lib/content.js';
+import { siteFeatures } from '../../utils/site-features.js';
 import { importBlog } from './blog.js';
 import { importConfig } from './config.js';
 import { importGallery } from './gallery.js';
@@ -17,15 +17,6 @@ type Features = Record<string, boolean>;
 
 const REPO_ROOT = join(import.meta.dirname, '..', '..', '..', '..', '..');
 
-const readFeatures = (path: string): Features =>
-  (JSON.parse(readFileSync(path, 'utf8')) as { features?: Features }).features ?? {};
-
-/** The `features` of packages/config/site.json over the upstream defaults. */
-export const siteFeatures = (repoRoot = REPO_ROOT): Features => ({
-  ...readFeatures(join(repoRoot, 'packages', 'web', 'defaults', 'site.json')),
-  ...readFeatures(join(repoRoot, 'packages', 'config', 'site.json')),
-});
-
 // Each collection is seeded while any of its features is on.
 const COLLECTIONS: [name: string, features: string[], importer: () => unknown][] = [
   ['blog', ['blog'], importBlog],
@@ -40,7 +31,9 @@ const COLLECTIONS: [name: string, features: string[], importer: () => unknown][]
   ['videos', ['videos'], importVideos],
 ];
 
-export const runFirestoreInit = async (features: Features = siteFeatures()): Promise<void> => {
+export const runFirestoreInit = async (
+  features: Features = siteFeatures(REPO_ROOT),
+): Promise<void> => {
   // Fail before anything is written, rather than part way through.
   validateSeedData(data);
   await importConfig(features); // Should always be first

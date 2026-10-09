@@ -8,6 +8,7 @@ import { runCommand } from '../../lib/spawn.js';
 import { SITE_CONFIG_PATH, resolveFirebaseProjectId } from '../../utils/firebase-project.js';
 import { checkNodeVersion, findRepoRoot } from '../../utils/node-version.js';
 import { validateSiteConfig } from '../../utils/site-config.js';
+import { functionsEnabled } from '../../utils/site-features.js';
 import { runDeploy } from '../deploy.js';
 import { type FirebaseProjects, firebaseProjects } from './firebase-projects.js';
 import {
@@ -205,20 +206,25 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
     return false;
   }
 
-  let billing: boolean | undefined;
-  try {
-    billing = await isBillingEnabled(repoRoot, projectId);
-  } catch {
-    billing = undefined;
+  // Without functions, the site runs on the free Spark plan.
+  const functions = functionsEnabled(repoRoot);
+  let billing: boolean | undefined = !functions || undefined;
+  if (functions) {
+    try {
+      billing = await isBillingEnabled(repoRoot, projectId);
+    } catch {
+      billing = undefined;
+    }
+    if (!billing) {
+      console.log(
+        `\n! ${projectId} ${billing === false ? 'is not' : 'may not be'} on the Blaze plan, ` +
+          'which deploying Cloud Functions needs. Upgrade at ' +
+          `https://console.firebase.google.com/project/${projectId}/usage/details, ` +
+          'or turn off features.functions in packages/config/site.json.',
+      );
+    }
+    printBudgetSteps();
   }
-  if (!billing) {
-    console.log(
-      `\n! ${projectId} ${billing === false ? 'is not' : 'may not be'} on the Blaze plan, ` +
-        'which deploying Cloud Functions needs. Upgrade at ' +
-        `https://console.firebase.google.com/project/${projectId}/usage/details.`,
-    );
-  }
-  printBudgetSteps();
 
   // Before the deploy, so the first build already has the content. Seeding doesn't need Blaze.
   const seed =
