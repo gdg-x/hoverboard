@@ -19,6 +19,9 @@ describe('hoverboard-icon', () => {
 
   it.each([
     'linkedin',
+    'gde',
+    'gdg',
+    'wtm',
     'google',
     'website',
     'up',

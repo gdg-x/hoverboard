@@ -42,14 +42,31 @@ describe('speaker-card', () => {
     expect(shadowRoot.querySelector('.badges hb-chip')).toHaveTextContent('GDE');
   });
 
-  it('shows the first social network as a decoration', async () => {
+  it('shows the first GDE, GDG, Google or WTM badge on the photo, not a social link', async () => {
     const { shadowRoot } = await fixture<SpeakerCard>(
-      html`<speaker-card .speaker=${speaker}></speaker-card>`,
+      html`<speaker-card
+        .speaker=${{
+          ...speaker,
+          badges: [{ name: 'other', link: '', description: 'Other' }, ...speaker.badges!],
+        }}
+      ></speaker-card>`,
     );
 
-    expect(shadowRoot.querySelector('.social')).toHaveAttribute('aria-hidden', 'true');
-    expect(shadowRoot.querySelector('.social hoverboard-icon')).toHaveAttribute('name', 'github');
+    const affiliation = shadowRoot.querySelector('.affiliation')!;
+    expect(affiliation).toHaveAttribute('aria-hidden', 'true');
+    expect(affiliation.querySelector('hoverboard-icon')).toHaveAttribute('name', 'gde');
+    expect(affiliation.querySelector<HTMLElement>('hoverboard-icon')!.style.color).toBe(
+      'var(--hb-tag-gde, var(--hb-color-outline))',
+    );
     expect(shadowRoot.querySelector('.photo')).toHaveAttribute('alt', '');
+  });
+
+  it('has no photo badge without an affiliation, whatever links the speaker has', async () => {
+    const { shadowRoot } = await fixture<SpeakerCard>(
+      html`<speaker-card .speaker=${{ ...speaker, badges: [] }}></speaker-card>`,
+    );
+
+    expect(shadowRoot.querySelector('.affiliation')).toBeNull();
   });
 
   it('leaves out what the speaker does not have', async () => {
@@ -60,7 +77,7 @@ describe('speaker-card', () => {
     );
 
     expect(shadowRoot.querySelector('.meta')).toBeNull();
-    expect(shadowRoot.querySelector('.social')).toBeNull();
+    expect(shadowRoot.querySelector('.affiliation')).toBeNull();
     expect(shadowRoot.querySelector('.badges')).toBeNull();
   });
 

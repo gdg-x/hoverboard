@@ -3,11 +3,14 @@ import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { Speaker } from '../../models/speaker';
 import { speakerPath } from '../../utils/navigation';
-import { photoTransitionName, tagChipStyle } from '../../utils/styles';
+import { photoTransitionName, tagChipStyle, tagColor } from '../../utils/styles';
 import { ThemedElement } from '../themed-element';
 import '../ui/hb-card';
 import '../ui/hb-chip';
 import './hoverboard-icon';
+
+/** Badges with an icon for the photo. */
+const AFFILIATIONS = ['gde', 'gdg', 'google', 'wtm'];
 
 /** What a card shows. Previous speakers have no badges. */
 export type CardSpeaker = Pick<Speaker, 'id' | 'name' | 'photoUrl' | 'company' | 'country'> &
@@ -52,7 +55,7 @@ export class SpeakerCard extends ThemedElement {
       object-fit: cover;
     }
 
-    .social {
+    .affiliation {
       position: absolute;
       inset-block-end: -4px;
       inset-inline-end: -4px;
@@ -65,9 +68,9 @@ export class SpeakerCard extends ThemedElement {
       background-color: var(--hb-color-surface-bright);
     }
 
-    .social hoverboard-icon {
-      inline-size: 16px;
-      block-size: 16px;
+    .affiliation hoverboard-icon {
+      inline-size: 18px;
+      block-size: 18px;
     }
 
     .text {
@@ -112,7 +115,7 @@ export class SpeakerCard extends ThemedElement {
         block-size: 64px;
       }
 
-      .social {
+      .affiliation {
         inline-size: 26px;
         block-size: 26px;
       }
@@ -140,7 +143,7 @@ export class SpeakerCard extends ThemedElement {
 
   override render() {
     const { speaker } = this;
-    const social = speaker.socials?.[0];
+    const affiliation = speaker.badges?.find((badge) => AFFILIATIONS.includes(badge.name));
     const meta = [speaker.company, speaker.country].filter(Boolean).join(' · ');
     return html`
       <hb-card href="${this.href ?? speakerPath(speaker.id)}" label="${speaker.name}">
@@ -158,9 +161,12 @@ export class SpeakerCard extends ThemedElement {
               }"
             />
             ${
-              social
-                ? html`<span class="social" aria-hidden="true">
-                    <hoverboard-icon name="${social.icon}"></hoverboard-icon>
+              affiliation
+                ? html`<span class="affiliation" aria-hidden="true">
+                    <hoverboard-icon
+                      name="${affiliation.name}"
+                      style="color: ${tagColor(affiliation.name)}"
+                    ></hoverboard-icon>
                   </span>`
                 : nothing
             }
