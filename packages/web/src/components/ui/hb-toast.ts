@@ -19,7 +19,6 @@ export class HbToast extends LitElement {
         position: fixed;
         inset: auto auto var(--hb-space-5) 50%;
         translate: -50% 0;
-        display: flex;
         align-items: center;
         gap: var(--hb-space-4);
         inline-size: max-content;
@@ -31,6 +30,11 @@ export class HbToast extends LitElement {
         background-color: var(--hb-color-ink);
         color: var(--hb-color-surface);
         box-shadow: var(--hb-shadow-card);
+      }
+
+      /* A display on the closed popover would beat the browser's display: none and keep it shown. */
+      .toast:popover-open {
+        display: flex;
       }
 
       .message {

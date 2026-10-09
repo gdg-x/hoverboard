@@ -1,8 +1,7 @@
-import { html } from 'lit';
+import { type CSSResult, html } from 'lit';
 import { describe, expect, it } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import './hb-toast';
-import type { HbToast } from './hb-toast';
+import { HbToast } from './hb-toast';
 
 describe('hb-toast', () => {
   it('opens and closes in a status region', async () => {
@@ -21,5 +20,12 @@ describe('hb-toast', () => {
     await element.updateComplete;
 
     expect(toast).not.toHaveAttribute('data-popover-open');
+  });
+
+  it('is laid out only while open, so closing it hides it', () => {
+    const css = HbToast.elementStyles.map((style) => (style as CSSResult).cssText).join('');
+
+    expect(css).toMatch(/\.toast:popover-open \{\s*display: flex;/);
+    expect(css).not.toMatch(/\.toast \{[^}]*display:/);
   });
 });
