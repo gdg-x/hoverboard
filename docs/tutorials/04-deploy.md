@@ -55,7 +55,7 @@ Both workflows sign in to Google Cloud with Workload Identity Federation. GitHub
 The command uses your Firebase CLI login. It needs the Owner role, or permission to create service accounts, workload identity pools and IAM bindings. It is safe to run again. It:
 
 1. Enables the IAM, IAM Credentials, Security Token Service and Cloud Resource Manager APIs.
-1. Creates a `github-deploy` service account with the `Firebase Admin`, `Firebase Rules Admin`, `Cloud Functions Admin`, `Cloud Run Admin`, `Artifact Registry Writer`, `Service Usage Admin` and `Service Account User` roles.
+1. Creates a `github-deploy` service account with the roles a deploy needs: `Firebase Hosting Admin`, `Firebase Rules Admin`, `Cloud Datastore Index Admin`, `Cloud Datastore Viewer` (the build reads your content), `Firebase Storage Viewer`, `Storage Bucket Viewer`, `Cloud Functions Admin`, `Cloud Scheduler Admin`, `Service Usage Consumer` and `Service Account User`. It can't write to Firestore or read Auth users and Storage files. Earlier versions granted `Firebase Admin`, `Cloud Run Admin`, `Artifact Registry Writer` and `Service Usage Admin`, and the command takes them away (verify with a deploy of every target).
 1. Creates a `github` workload identity pool and provider that only accept tokens from your repository. It reads the repository from the `origin` remote. Pass `--repo owner/name` to choose another one.
 1. Sets the `WIF_PROVIDER` and `DEPLOY_SERVICE_ACCOUNT` repository variables with the [GitHub CLI](https://cli.github.com/). Without it, the command prints the values to add in the repository settings.
 
@@ -66,5 +66,9 @@ If the auth step fails with `must specify exactly one of "workload_identity_prov
 Missing roles show up as `403` errors such as `Permission denied to get service` (Service Usage), a failed `firebaserules.googleapis.com` `:test` request (Rules) or `Failed to list functions` (Cloud Functions).
 
 Pull requests from forks cannot get a token, so they do not deploy a preview. Their config is still checked.
+
+The preview and the live deploys use the same service account. A pull request's workflow runs the code on its branch, so anyone who can push a branch to your repository can deploy to the live site, deploy functions and rules, and read your Firestore data, including subscribers. Only give write access to the repository to people you would trust with the Firebase console. A separate account for previews wouldn't help much: it would still need Hosting Admin, which can release to the live site too, and read access to Firestore.
+
+The first deploy, from `./hb init` or `./hb deploy`, runs with your own account. It enables the APIs, creates the Firestore database, and grants Google's service agents the roles functions need. The deploy account can't do these, so if a new kind of function needs another API, deploy once from your computer.
 
 You can now push to your `main` branch and it'll deploy to the production (`live`) Firebase Hosting channel and pull requests will deploy a temporary preview.

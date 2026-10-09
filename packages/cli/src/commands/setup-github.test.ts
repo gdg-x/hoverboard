@@ -228,7 +228,7 @@ describe('setupGitHub', () => {
       projectPolicy: {
         bindings: [
           {
-            role: 'roles/firebase.admin',
+            role: 'roles/firebasehosting.admin',
             members: ['user:owner@example.com', `serviceAccount:${EMAIL}`],
           },
         ],
@@ -238,11 +238,75 @@ describe('setupGitHub', () => {
 
     await run(cloud, github);
 
-    expect(membersOf(state.projectPolicy, 'roles/firebase.admin')).toEqual([
+    expect(membersOf(state.projectPolicy, 'roles/firebasehosting.admin')).toEqual([
       'user:owner@example.com',
       `serviceAccount:${EMAIL}`,
     ]);
-    expect(membersOf(state.projectPolicy, 'roles/run.admin')).toEqual([`serviceAccount:${EMAIL}`]);
+    expect(membersOf(state.projectPolicy, 'roles/cloudscheduler.admin')).toEqual([
+      `serviceAccount:${EMAIL}`,
+    ]);
+  });
+
+  it('grants only the roles a deploy needs', () => {
+    expect(DEPLOY_ROLES).toEqual([
+      'roles/firebasehosting.admin',
+      'roles/firebaserules.admin',
+      'roles/datastore.indexAdmin',
+      'roles/datastore.viewer',
+      'roles/firebasestorage.viewer',
+      'roles/storage.bucketViewer',
+      'roles/cloudfunctions.admin',
+      'roles/cloudscheduler.admin',
+      'roles/serviceusage.serviceUsageConsumer',
+      'roles/iam.serviceAccountUser',
+    ]);
+  });
+
+  it('takes the roles earlier versions granted away from the deploy account only', async () => {
+    const { cloud, state } = fakeCloud({
+      account: true,
+      projectPolicy: {
+        bindings: [
+          ...DEPLOY_ROLES.map((role) => ({ role, members: [`serviceAccount:${EMAIL}`] })),
+          {
+            role: 'roles/firebase.admin',
+            members: ['user:owner@example.com', `serviceAccount:${EMAIL}`],
+          },
+          { role: 'roles/run.admin', members: [`serviceAccount:${EMAIL}`] },
+        ],
+      },
+    });
+    const { github } = fakeGitHub();
+
+    const { changes } = await run(cloud, github);
+
+    expect(changes).toContain(
+      `remove roles/firebase.admin, roles/run.admin from ${EMAIL}, which deploys no longer need`,
+    );
+    expect(membersOf(state.projectPolicy, 'roles/firebase.admin')).toEqual([
+      'user:owner@example.com',
+    ]);
+    expect(state.projectPolicy.bindings?.map(({ role }) => role)).not.toContain('roles/run.admin');
+  });
+
+  it('only reports the roles it would take away in a dry run', async () => {
+    const { cloud, state, requests } = fakeCloud({
+      account: true,
+      projectPolicy: {
+        bindings: [{ role: 'roles/firebase.admin', members: [`serviceAccount:${EMAIL}`] }],
+      },
+    });
+    const { github } = fakeGitHub();
+
+    const { changes } = await run(cloud, github, true);
+
+    expect(changes).toContain(
+      `remove roles/firebase.admin from ${EMAIL}, which deploys no longer need`,
+    );
+    expect(membersOf(state.projectPolicy, 'roles/firebase.admin')).toEqual([
+      `serviceAccount:${EMAIL}`,
+    ]);
+    expect(requests.filter((request) => request.includes(':setIamPolicy'))).toEqual([]);
   });
 
   it('limits an existing provider to the repository', async () => {
