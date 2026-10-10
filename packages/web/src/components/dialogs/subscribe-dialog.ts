@@ -1,15 +1,12 @@
-import { Failure, Initialized, Success } from '@abraham/remotedata';
+import { Failure, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import { css, html } from 'lit';
+import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
-import { StoreController } from '../../controllers/store-controller';
 import { fromStore } from '../../controllers/from-store';
-import type { DialogForm } from '../../models/dialog-form';
-import { closeDialog, type DialogState, DIALOG, selectIsDialogOpen } from '../../store/dialogs';
-import {
-  initialPotentialPartnersState,
-  type PotentialPartnersState,
-} from '../../store/potential-partners';
+import type { DialogData, DialogForm } from '../../models/dialog-form';
+import type { RootState } from '../../store';
+import { closeDialog, DIALOG } from '../../store/dialogs';
+import type { PotentialPartnersState } from '../../store/potential-partners';
 import type { SubscribeState } from '../../store/subscribe';
 import { needsNetworkMessage, selectOnline } from '../../store/sync';
 import { subscribeBlock } from '../../config/site';
@@ -21,8 +18,59 @@ import '../ui/hb-text-field';
 import type { HbTextField } from '../ui/hb-text-field';
 import { ThemedComponent } from '../themed-component';
 
-// Used for adding documents to both `subscribers` and `potentialPartners` collections
+type FieldName = keyof Required<DialogData>;
 
+interface Field {
+  name: FieldName;
+  label: string;
+  type: 'text' | 'email';
+  maxlength: number;
+  autocomplete: string;
+  error: string;
+  valid: (value: string) => boolean;
+}
+
+// In the order they show and are checked.
+const fields = (form: DialogForm | undefined): Field[] => {
+  const required = msg('Field required.', { id: 'dialogs.subscribe.field-required' });
+  const text = { type: 'text', maxlength: 100, autocomplete: 'off', error: required } as const;
+  return [
+    {
+      ...text,
+      name: 'firstFieldValue',
+      label: form?.firstFieldLabel || msg('First Name', { id: 'dialogs.subscribe.first-name' }),
+      valid: notEmpty,
+    },
+    {
+      ...text,
+      name: 'secondFieldValue',
+      label: form?.secondFieldLabel || msg('Last Name', { id: 'dialogs.subscribe.last-name' }),
+      valid: notEmpty,
+    },
+    {
+      name: 'email',
+      label: msg('Email Address', { id: 'dialogs.subscribe.email' }),
+      type: 'email',
+      maxlength: 254,
+      autocomplete: 'email',
+      error: msg('Please enter a valid email address.', { id: 'common.email-invalid' }),
+      valid: validEmail,
+    },
+  ];
+};
+
+const EMPTY: Record<FieldName, string> = { firstFieldValue: '', secondFieldValue: '', email: '' };
+
+// The form the opener passed, while the dialog is open.
+const selectForm = ({ dialogs }: RootState): DialogForm | undefined =>
+  dialogs instanceof Success && dialogs.data.name === DIALOG.SUBSCRIBE
+    ? dialogs.data.data
+    : undefined;
+
+/**
+ * A form with two text fields and an email address, which an opener labels and submits, such as
+ * the partner request. It closes once the submission succeeds.
+ */
 @customElement('subscribe-dialog')
 export class SubscribeDialog extends ThemedComponent {
   static override styles = css`
@@ -42,90 +90,90 @@ export class SubscribeDialog extends ThemedComponent {
     }
   `;
 
-  private get subscribeBlock() {
-    return subscribeBlock;
-  }
-
   @query('hb-dialog')
-  accessor dialog!: HbDialog;
-  @query('#emailInput')
-  accessor emailInput!: HbTextField;
-  @query('#firstFieldInput')
-  accessor firstFieldInput!: HbTextField;
-  @query('#secondFieldInput')
-  accessor secondFieldInput!: HbTextField;
+  private accessor dialog!: HbDialog;
 
-  @state()
-  override accessor title = '';
-  @fromStore((state) => selectIsDialogOpen(state, DIALOG.SUBSCRIBE))
-  private accessor open!: boolean;
+  @fromStore(selectForm)
+  private accessor form: DialogForm | undefined;
   @fromStore(selectOnline)
   private accessor online!: boolean;
+  @fromStore((state) => state.subscribed)
+  private accessor subscribed!: SubscribeState;
+  @fromStore((state) => state.potentialPartners)
+  private accessor potentialPartners!: PotentialPartnersState;
+
   @state()
-  private accessor subscribed: SubscribeState = new Initialized();
+  private accessor values = EMPTY;
   @state()
-  private accessor potentialPartners: PotentialPartnersState = initialPotentialPartnersState;
+  private accessor invalid: FieldName | undefined;
   @state()
   private accessor errorOccurred = false;
-  @state()
-  private accessor dialogState: DialogState = new Initialized();
-  @state()
-  private accessor firstFieldValue = '';
-  @state()
-  private accessor secondFieldValue = '';
-  @state()
-  private accessor submitLabel = '';
-  @state()
-  private accessor firstFieldLabel = '';
-  @state()
-  private accessor secondFieldLabel = '';
-  @state()
-  private accessor email = '';
-  @state()
-  private accessor firstFieldInvalid = false;
-  @state()
-  private accessor secondFieldInvalid = false;
-  @state()
-  private accessor emailInvalid = false;
 
-  private readonly subscribedStore = new StoreController(this, (state) => state.subscribed, {
-    onChange: (value) => {
-      const previous = this.subscribed;
-      this.subscribed = value;
-      if (value !== previous) {
-        this.onResult(value);
+  override willUpdate(changed: PropertyValues) {
+    if (changed.has('form') && this.form) {
+      const { firstFieldValue = '', secondFieldValue = '' } = this.form;
+      this.values = { ...EMPTY, firstFieldValue, secondFieldValue };
+      this.invalid = undefined;
+    }
+    // Only a submission from this dialog, not the state the page loaded with.
+    for (const name of ['subscribed', 'potentialPartners'] as const) {
+      if (this.form && changed.has(name) && changed.get(name) !== undefined) {
+        this.onResult(this[name]);
       }
-    },
-  });
+    }
+  }
 
-  private readonly potentialPartnersStore = new StoreController(
-    this,
-    (state) => state.potentialPartners,
-    {
-      onChange: (value) => {
-        const previous = this.potentialPartners;
-        this.potentialPartners = value;
-        if (value !== previous) {
-          this.onResult(value);
-        }
-      },
-    },
-  );
+  override render() {
+    const form = this.form;
+    return html`
+      <hb-dialog
+        heading="${form?.title || subscribeBlock.formTitle}"
+        ?open="${!!form}"
+        @close="${this.onClose}"
+      >
+        <div class="fields">
+          ${
+            this.errorOccurred
+              ? html`<div class="general-error">
+                  ${msg('An error has occurred. Please, try again later.', {
+                    id: 'common.general-error',
+                  })}
+                </div>`
+              : nothing
+          }
+          ${this.online ? nothing : html`<p class="offline">${needsNetworkMessage()}</p>`}
+          ${fields(form).map(
+            (field) => html`
+              <hb-text-field
+                name="${field.name}"
+                type="${field.type}"
+                label="${field.label} *"
+                .value="${this.values[field.name]}"
+                required
+                maxlength="${field.maxlength}"
+                error="${this.invalid === field.name ? field.error : ''}"
+                autocomplete="${field.autocomplete}"
+                @input="${(event: Event) => this.onInput(field.name, event)}"
+              ></hb-text-field>
+            `,
+          )}
+        </div>
 
-  private readonly dialogStore = new StoreController(this, (state) => state.dialogs, {
-    onChange: (value) => {
-      const previous = this.dialogState;
-      this.dialogState = value;
-      if (value !== previous && value instanceof Success && value.data.name === DIALOG.SUBSCRIBE) {
-        const data = value.data.data;
-        this.title = data.title || this.subscribeBlock.formTitle;
-        this.submitLabel = data.submitLabel ?? '';
-        this.firstFieldLabel = data.firstFieldLabel ?? '';
-        this.secondFieldLabel = data.secondFieldLabel ?? '';
-        this.prefillFields(data);
-      }
-    },
-  });
+        <hb-button slot="actions" ?disabled="${!this.online}" @click="${this.submit}">
+          ${
+            form?.submitLabel ||
+            msg('Subscribe', {
+              id: 'common.subscribe',
+              desc: 'Button that submits a subscription.',
+            })
+          }
+        </hb-button>
+        <hb-button slot="actions" variant="outlined" @click="${() => this.dialog.close()}">
+          ${msg('Close', { id: 'common.close' })}
+        </hb-button>
+      </hb-dialog>
+    `;
+  }
 
   private onResult(result: SubscribeState | PotentialPartnersState) {
     if (result instanceof Success) {
@@ -135,140 +183,25 @@ export class SubscribeDialog extends ThemedComponent {
     }
   }
 
-  override render() {
-    const firstFieldLabel =
-      this.firstFieldLabel || msg('First Name', { id: 'dialogs.subscribe.first-name' });
-    const secondFieldLabel =
-      this.secondFieldLabel || msg('Last Name', { id: 'dialogs.subscribe.last-name' });
-    const emailLabel = msg('Email Address', { id: 'dialogs.subscribe.email' });
-    const fieldRequired = msg('Field required.', { id: 'dialogs.subscribe.field-required' });
-    return html`
-      <hb-dialog heading="${this.title}" ?open="${this.open}" @close="${this.onClose}">
-        <div class="fields">
-          ${
-            this.errorOccurred
-              ? html`<div class="general-error">
-                  ${msg('An error has occurred. Please, try again later.', {
-                    id: 'common.general-error',
-                  })}
-                </div>`
-              : ''
-          }
-          ${this.online ? '' : html`<p class="offline">${needsNetworkMessage()}</p>`}
-          <hb-text-field
-            id="firstFieldInput"
-            label="${firstFieldLabel} *"
-            .value="${this.firstFieldValue}"
-            required
-            maxlength="100"
-            error="${this.firstFieldInvalid ? fieldRequired : ''}"
-            autocomplete="off"
-            @input="${this.onFirstFieldChanged}"
-          ></hb-text-field>
-          <hb-text-field
-            id="secondFieldInput"
-            label="${secondFieldLabel} *"
-            .value="${this.secondFieldValue}"
-            required
-            maxlength="100"
-            error="${this.secondFieldInvalid ? fieldRequired : ''}"
-            autocomplete="off"
-            @input="${this.onSecondFieldChanged}"
-          ></hb-text-field>
-          <hb-text-field
-            id="emailInput"
-            type="email"
-            label="${emailLabel} *"
-            .value="${this.email}"
-            required
-            maxlength="254"
-            error="${this.emailInvalid ? msg('Please enter a valid email address.', { id: 'common.email-invalid' }) : ''}"
-            autocomplete="email"
-            @input="${this.onEmailChanged}"
-          ></hb-text-field>
-        </div>
-
-        <hb-button slot="actions" ?disabled="${!this.online}" @click="${this.subscribe}">
-          ${
-            this.submitLabel ||
-            msg('Subscribe', {
-              id: 'common.subscribe',
-              desc: 'Button that submits a subscription.',
-            })
-          }
-        </hb-button>
-        <hb-button slot="actions" variant="outlined" @click="${this.close}">
-          ${msg('Close', { id: 'common.close' })}
-        </hb-button>
-      </hb-dialog>
-    `;
-  }
-
-  private close() {
-    this.dialog.close();
-  }
-
   private readonly onClose = () => {
     this.errorOccurred = false;
     closeDialog();
   };
 
-  private onFirstFieldChanged(event: Event) {
-    this.firstFieldValue = (event.target as HbTextField).value;
+  private onInput(name: FieldName, event: Event) {
+    this.values = { ...this.values, [name]: (event.target as HbTextField).value };
   }
 
-  private onSecondFieldChanged(event: Event) {
-    this.secondFieldValue = (event.target as HbTextField).value;
-  }
-
-  private onEmailChanged(event: Event) {
-    this.email = (event.target as HbTextField).value;
-  }
-
-  private subscribe() {
-    if (this.dialogState instanceof Success && this.dialogState.data.name === DIALOG.SUBSCRIBE) {
-      if (!this.firstFieldInput.reportValidity() || !this.validateField(this.firstFieldValue)) {
-        this.firstFieldInvalid = true;
-        return;
-      }
-      this.firstFieldInvalid = false;
-
-      if (!this.secondFieldInput.reportValidity() || !this.validateField(this.secondFieldValue)) {
-        this.secondFieldInvalid = true;
-        return;
-      }
-      this.secondFieldInvalid = false;
-
-      if (!this.emailInput.reportValidity() || !this.validateEmail(this.email)) {
-        this.emailInvalid = true;
-        return;
-      }
-      this.emailInvalid = false;
-
-      this.dialogState.data.data.submit({
-        email: this.email,
-        firstFieldValue: this.firstFieldValue,
-        secondFieldValue: this.secondFieldValue,
-      });
-    }
-  }
-
-  private validateEmail(email: string) {
-    return validEmail(email);
-  }
-
-  private validateField(value: string) {
-    return notEmpty(value);
-  }
-
-  private prefillFields(userData: DialogForm) {
-    this.firstFieldValue = userData ? userData.firstFieldValue || '' : '';
-    this.secondFieldValue = userData ? userData.secondFieldValue || '' : '';
-    this.email = '';
-    this.firstFieldInvalid = false;
-    this.secondFieldInvalid = false;
-    this.emailInvalid = false;
-  }
+  private readonly submit = () => {
+    const form = this.form;
+    if (!form) return;
+    // The first field that isn't valid shows its error, and stops the submission.
+    this.invalid = fields(form).find(({ name, valid }) => {
+      const input = this.renderRoot.querySelector<HbTextField>(`hb-text-field[name="${name}"]`);
+      return !input?.reportValidity() || !valid(this.values[name]);
+    })?.name;
+    if (!this.invalid) form.submit(this.values);
+  };
 }
 
 declare global {

@@ -71,6 +71,9 @@
 <trans-unit id="dialogs.signin.continue-with">
   <source>Sign in with <x id="0" equiv-text="${provider}"/> to continue.</source>
 </trans-unit>
+<trans-unit id="dialogs.subscribe.field-required">
+  <source>Field required.</source>
+</trans-unit>
 <trans-unit id="dialogs.subscribe.first-name">
   <source>First Name</source>
 </trans-unit>
@@ -79,9 +82,6 @@
 </trans-unit>
 <trans-unit id="dialogs.subscribe.email">
   <source>Email Address</source>
-</trans-unit>
-<trans-unit id="dialogs.subscribe.field-required">
-  <source>Field required.</source>
 </trans-unit>
 <trans-unit id="common.email-invalid">
   <source>Please enter a valid email address.</source>
