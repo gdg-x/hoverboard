@@ -1,14 +1,29 @@
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import type { Id } from '../models/types';
+import { type SnapshotState, type Subscription, subscribeToDocument } from '../utils/firestore';
 
 export interface FeaturedSessions {
   [sessionId: string]: boolean;
 }
 
-export const fetchFeaturedSessions = async (userId: string): Promise<FeaturedSessions> => {
-  const snapshot = await getDoc(doc(db, 'featuredSessions', userId));
-  return snapshot.data() || {};
-};
+/** Listens to a visitor's bookmarks, so writes from this tab, other tabs and the server show. */
+export const subscribeToFeaturedSessions = (
+  userId: string,
+  onStart: () => void,
+  onNext: (featuredSessions: FeaturedSessions, state: SnapshotState) => void,
+  onError: (error: Error) => void,
+): Subscription =>
+  subscribeToDocument<FeaturedSessions>(
+    `featuredSessions/${userId}`,
+    onStart,
+    (document, state) => {
+      // The helper adds the document ID, which isn't a bookmark.
+      const { id: _id, ...featuredSessions } = (document ?? {}) as FeaturedSessions & Partial<Id>;
+      onNext(featuredSessions, state);
+    },
+    onError,
+  );
 
 export const saveFeaturedSessions = async (
   userId: string,

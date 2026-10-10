@@ -3,10 +3,11 @@ import { msg } from '@lit/localize';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import {
-  fetchFeaturedSessions as getFeaturedSessions,
   type FeaturedSessions,
   saveFeaturedSessions,
+  subscribeToFeaturedSessions,
 } from '../../db/featured-sessions';
+import type { Subscription } from '../../utils/firestore';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { selectUserId } from '../user';
@@ -32,18 +33,18 @@ const slice = createSlice({
 
 const { pending, success, failure, reset } = slice.actions;
 
-const fetchUserFeaturedSessions = async () => {
+let subscription: Subscription = new Initialized();
+
+const subscribeToUserFeaturedSessions = () => {
   const userId = selectUserId(getState());
+  if (!userId || !(subscription instanceof Initialized)) return;
 
-  if (!userId) return;
-
-  dispatch(pending());
-
-  try {
-    dispatch(success(await getFeaturedSessions(userId)));
-  } catch (error) {
-    dispatch(failure(error as Error));
-  }
+  subscription = subscribeToFeaturedSessions(
+    userId,
+    () => dispatch(pending()),
+    (featuredSessions) => dispatch(success(featuredSessions)),
+    (error) => dispatch(failure(error)),
+  );
 };
 
 const cleanFeaturedSessions = (object: FeaturedSessions): FeaturedSessions => {
@@ -75,15 +76,17 @@ export const setUserFeaturedSessions = async (
 };
 
 export const resetFeaturedSessions = () => {
+  if (subscription instanceof Success) subscription.data();
+  subscription = new Initialized();
   dispatch(reset());
 };
 
-/** Triggers the fetch (once) the first time state is read, mirroring the
+/** Starts listening (once) the first time state is read, mirroring the
  * "select and lazily fetch" idiom used across the store. */
 export const selectFeaturedSessionsState = (state: RootState): FeaturedSessionsState => {
   const { featuredSessions } = state;
   if (featuredSessions instanceof Initialized) {
-    fetchUserFeaturedSessions();
+    subscribeToUserFeaturedSessions();
   }
   return featuredSessions;
 };

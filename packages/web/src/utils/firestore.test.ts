@@ -51,46 +51,56 @@ describe('dataWithParentId', () => {
 });
 
 describe('subscribeToDocument', () => {
-  it('subscribes, calls onStart, and forwards existing document data', () => {
+  it('subscribes with metadata, calls onStart, and forwards existing document data', () => {
     const unsubscribe = vi.fn();
     const onStart = vi.fn();
     const onNext = vi.fn();
     const onError = vi.fn();
     vi.mocked(doc).mockReturnValue('doc-ref' as unknown as ReturnType<typeof doc>);
-    vi.mocked(onSnapshot).mockImplementation((_ref, nextOrObserver) => {
+    vi.mocked(onSnapshot).mockImplementation((_ref, _options, nextOrObserver) => {
       const snapshot = {
         exists: () => true,
         id: 'abc',
         data: () => ({ name: 'Ada' }),
+        metadata: { hasPendingWrites: true },
       } as unknown as DocumentSnapshot<DocumentData>;
-      (nextOrObserver as (snapshot: DocumentSnapshot<DocumentData>) => void)(snapshot);
+      (nextOrObserver as unknown as (snapshot: DocumentSnapshot<DocumentData>) => void)(snapshot);
       return unsubscribe;
     });
 
     const subscription = subscribeToDocument('users/abc', onStart, onNext, onError);
 
+    expect(onSnapshot).toHaveBeenCalledWith(
+      'doc-ref',
+      { includeMetadataChanges: true },
+      expect.any(Function),
+      expect.any(Function),
+    );
     expect(onStart).toHaveBeenCalled();
-    expect(onNext).toHaveBeenCalledWith({ name: 'Ada', id: 'abc' });
+    expect(onNext).toHaveBeenCalledWith({ name: 'Ada', id: 'abc' }, { pending: true });
     expect(subscription).toStrictEqual(new Success(unsubscribe));
   });
 
   it('forwards undefined when the document does not exist', () => {
     const onNext = vi.fn();
-    vi.mocked(onSnapshot).mockImplementation((_ref, nextOrObserver) => {
-      const snapshot = { exists: () => false } as unknown as DocumentSnapshot<DocumentData>;
-      (nextOrObserver as (snapshot: DocumentSnapshot<DocumentData>) => void)(snapshot);
+    vi.mocked(onSnapshot).mockImplementation((_ref, _options, nextOrObserver) => {
+      const snapshot = {
+        exists: () => false,
+        metadata: { hasPendingWrites: false },
+      } as unknown as DocumentSnapshot<DocumentData>;
+      (nextOrObserver as unknown as (snapshot: DocumentSnapshot<DocumentData>) => void)(snapshot);
       return vi.fn();
     });
 
     subscribeToDocument('users/abc', vi.fn(), onNext, vi.fn());
 
-    expect(onNext).toHaveBeenCalledWith(undefined);
+    expect(onNext).toHaveBeenCalledWith(undefined, { pending: false });
   });
 
   it('forwards errors', () => {
     const onError = vi.fn();
     const error = new Error('boom');
-    vi.mocked(onSnapshot).mockImplementation((_ref, _nextOrObserver, errorCallback) => {
+    vi.mocked(onSnapshot).mockImplementation((_ref, _options, _next, errorCallback) => {
       (errorCallback as unknown as (error: Error) => void)(error);
       return vi.fn();
     });

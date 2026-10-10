@@ -35,15 +35,26 @@ export const dataWithParentId = <T>(
 
 export type Subscription = RemoteData<Error, Unsubscribe>;
 
+/** What a snapshot says beyond its data. */
+export interface SnapshotState {
+  /** The document has local writes the server hasn't confirmed yet, such as ones made offline. */
+  pending: boolean;
+}
+
+/** Listens to a document, and to its metadata, so a write the server confirms updates `pending`. */
 export const subscribeToDocument = <T>(
   path: string,
   onStart: () => void,
-  onNext: (payload: T | undefined) => void,
+  onNext: (payload: T | undefined, state: SnapshotState) => void,
   onError: (error: Error) => void,
 ): Subscription => {
   const unsubscribe = onSnapshot(
     doc(db, path),
-    (snapshot) => onNext(snapshot.exists() ? mergeDataAndId(snapshot) : undefined),
+    { includeMetadataChanges: true },
+    (snapshot) =>
+      onNext(snapshot.exists() ? mergeDataAndId(snapshot) : undefined, {
+        pending: snapshot.metadata.hasPendingWrites,
+      }),
     (payload) => onError(payload),
   );
 

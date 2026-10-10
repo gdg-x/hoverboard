@@ -6,7 +6,7 @@ import reducer, {
   selectFeaturedSessionsState,
   setUserFeaturedSessions,
 } from '.';
-import { fetchFeaturedSessions, saveFeaturedSessions } from '../../db/featured-sessions';
+import { saveFeaturedSessions, subscribeToFeaturedSessions } from '../../db/featured-sessions';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { selectUserId } from '../user';
@@ -23,11 +23,6 @@ vi.mock('../snackbars', () => ({
 vi.mock('../user', () => ({
   selectUserId: vi.fn(),
 }));
-
-const flushPromises = async () => {
-  await Promise.resolve();
-  await Promise.resolve();
-};
 
 const ADDED = 'Session saved to My Schedule';
 
@@ -113,45 +108,70 @@ describe('setUserFeaturedSessions', () => {
 });
 
 describe('featured session selectors', () => {
-  it('dispatches a lazy fetch the first time the state is read for a signed-in user', async () => {
+  const listen = () => {
+    const unsubscribe = vi.fn();
+    let onNext: ((sessions: Record<string, boolean>) => void) | undefined;
+    vi.mocked(subscribeToFeaturedSessions).mockImplementation((_userId, onStart, next) => {
+      onNext = (sessions) => next(sessions, { pending: false });
+      onStart();
+      return new Success(unsubscribe);
+    });
+    return { unsubscribe, next: (sessions: Record<string, boolean>) => onNext!(sessions) };
+  };
+  const initialized = { featuredSessions: new Initialized() } as unknown as RootState;
+
+  it("listens to a signed-in visitor's bookmarks the first time the state is read", () => {
     vi.mocked(selectUserId).mockReturnValue('user-1');
     vi.mocked(getState).mockReturnValue({} as RootState);
-    vi.mocked(fetchFeaturedSessions).mockResolvedValue({ 'session-1': true });
-    const state = {
-      featuredSessions: new Initialized(),
-    } as unknown as RootState;
+    const { next } = listen();
 
-    expect(selectFeaturedSessionsState(state)).toStrictEqual(new Initialized());
+    expect(selectFeaturedSessionsState(initialized)).toStrictEqual(new Initialized());
+    selectFeaturedSessionsState(initialized);
+    next({ 'session-1': true });
+    next({ 'session-1': true, 'session-2': true });
 
-    await flushPromises();
-
-    expect(selectUserId).toHaveBeenCalledWith({});
-    expect(fetchFeaturedSessions).toHaveBeenCalledWith('user-1');
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
+    expect(subscribeToFeaturedSessions).toHaveBeenCalledOnce();
+    expect(subscribeToFeaturedSessions).toHaveBeenCalledWith(
+      'user-1',
+      expect.any(Function),
+      expect.any(Function),
+      expect.any(Function),
+    );
+    expect(vi.mocked(dispatch).mock.calls.map(([action]) => action)).toEqual([
       expect.objectContaining({ type: 'featuredSessions/pending' }),
-    );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        type: 'featuredSessions/success',
-        payload: { 'session-1': true },
-      }),
-    );
+      { type: 'featuredSessions/success', payload: { 'session-1': true } },
+      { type: 'featuredSessions/success', payload: { 'session-1': true, 'session-2': true } },
+    ]);
+    resetFeaturedSessions();
   });
 
-  it('does nothing when lazy fetch runs without a signed-in user', async () => {
+  it('stops listening on reset, and listens again for the next visitor', () => {
+    vi.mocked(selectUserId).mockReturnValue('user-1');
+    vi.mocked(getState).mockReturnValue({} as RootState);
+    const { unsubscribe } = listen();
+
+    selectFeaturedSessionsState(initialized);
+    resetFeaturedSessions();
+    vi.mocked(selectUserId).mockReturnValue('user-2');
+    selectFeaturedSessionsState(initialized);
+
+    expect(unsubscribe).toHaveBeenCalledOnce();
+    expect(subscribeToFeaturedSessions).toHaveBeenLastCalledWith(
+      'user-2',
+      expect.any(Function),
+      expect.any(Function),
+      expect.any(Function),
+    );
+    resetFeaturedSessions();
+  });
+
+  it('does nothing without a signed-in user', () => {
     vi.mocked(selectUserId).mockReturnValue(undefined);
     vi.mocked(getState).mockReturnValue({} as RootState);
-    const state = {
-      featuredSessions: new Initialized(),
-    } as unknown as RootState;
 
-    expect(selectFeaturedSessionsState(state)).toStrictEqual(new Initialized());
+    expect(selectFeaturedSessionsState(initialized)).toStrictEqual(new Initialized());
 
-    await flushPromises();
-
-    expect(fetchFeaturedSessions).not.toHaveBeenCalled();
+    expect(subscribeToFeaturedSessions).not.toHaveBeenCalled();
     expect(dispatch).not.toHaveBeenCalled();
   });
 
