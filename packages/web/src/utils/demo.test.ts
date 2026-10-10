@@ -1,12 +1,15 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   applyDemoChoices,
   chooseDecorations,
   chooseDemo,
+  chooseDemoAttendance,
+  DEMO_ATTENDANCE_KEY,
   DEMO_DECORATIONS_KEY,
   DEMO_DENSITY_KEY,
   DEMO_THEME_KEY,
   demoScript,
+  readDemoAttendance,
   readDemoChoices,
 } from './demo';
 
@@ -73,6 +76,26 @@ describe('demo choices', () => {
     chooseDemo('density', null);
     expect(localStorage.getItem(DEMO_DENSITY_KEY)).toBeNull();
     expect(root).not.toHaveAttribute('data-density');
+  });
+
+  it('reads how people attend, ignoring unknown values', () => {
+    expect(readDemoAttendance()).toBeNull();
+    localStorage.setItem(DEMO_ATTENDANCE_KEY, 'hybrid');
+    expect(readDemoAttendance()).toBe('hybrid');
+    localStorage.setItem(DEMO_ATTENDANCE_KEY, 'remote');
+    expect(readDemoAttendance()).toBeNull();
+  });
+
+  it('stores how people attend, or forgets it, then reloads', () => {
+    const reload = vi.fn();
+
+    chooseDemoAttendance('online', reload);
+    expect(localStorage.getItem(DEMO_ATTENDANCE_KEY)).toBe('online');
+    expect(reload).toHaveBeenCalledTimes(1);
+
+    chooseDemoAttendance(null, reload);
+    expect(localStorage.getItem(DEMO_ATTENDANCE_KEY)).toBeNull();
+    expect(reload).toHaveBeenCalledTimes(2);
   });
 
   it('applies the stored choices from the inline head script', () => {

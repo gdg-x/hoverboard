@@ -1,6 +1,37 @@
 export const DEMO_THEME_KEY = 'hb-demo-theme';
 export const DEMO_DENSITY_KEY = 'hb-demo-density';
 export const DEMO_DECORATIONS_KEY = 'hb-demo-decorations';
+export const DEMO_ATTENDANCE_KEY = 'hb-demo-attendance';
+
+export const ATTENDANCES = ['inPerson', 'hybrid', 'online'] as const;
+export type Attendance = (typeof ATTENDANCES)[number];
+
+/** How people attend, as picked in the demo banner, or `null` for the site's own. */
+export const readDemoAttendance = (): Attendance | null => {
+  try {
+    const value = localStorage.getItem(DEMO_ATTENDANCE_KEY);
+    return ATTENDANCES.find((attendance) => attendance === value) ?? null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Stores how people attend, or forgets it with `null`, and reloads: it changes what much of the
+ * site shows, which the config reads once.
+ */
+export const chooseDemoAttendance = (
+  value: Attendance | null,
+  reload = () => window.location.reload(),
+): void => {
+  try {
+    if (value) localStorage.setItem(DEMO_ATTENDANCE_KEY, value);
+    else localStorage.removeItem(DEMO_ATTENDANCE_KEY);
+  } catch {
+    return;
+  }
+  reload();
+};
 
 export interface DemoChoices {
   theme: string | null;

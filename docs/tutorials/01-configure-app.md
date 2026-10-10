@@ -153,7 +153,7 @@ The build fails when:
 - a feature needs one that is off: `schedule` needs `speakers`, `mySchedule` and `feedback` need `schedule`, and `notifications` needs `functions`.
 - event text links to the page of a feature that is off, for example `/faq` in `footerRelBlock`.
 
-`demo` adds a band across the top of every page where visitors can try the built-in themes, the spacing and light or dark. Their browser remembers the choices. It is meant for demo sites, so leave it off on an event's site.
+`demo` adds a band across the top of every page where visitors can try the built-in themes, the spacing, light or dark, and how people attend: in person, hybrid or online. Changing how people attend reloads the page. Their browser remembers the choices. It is meant for demo sites, so leave it off on an event's site.
 
 `functions` deploys the Cloud Functions, which need the [Blaze plan](02-firebase.md#billing). With it off, `./hb deploy` and the deploy workflow leave functions out, and the site runs on the free Spark plan, without notifications. Deploys don't delete functions that are already deployed: `./hb doctor` lists them, with the commands that delete them.
 

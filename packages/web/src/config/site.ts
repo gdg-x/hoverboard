@@ -8,6 +8,7 @@ import {
   site as settings,
 } from 'virtual:hoverboard/site';
 import type { Track } from '../schedule/build-schedule';
+import { readDemoAttendance } from '../utils/demo';
 import { isFeature, isFeatureEnabled, isNavigationRoute, type NavigationRoute } from './features';
 import { deepMerge } from './merge';
 
@@ -26,8 +27,13 @@ export const themeName = settings.theme.name as string;
 export const density = settings.theme.density as 'compact' | 'default' | 'roomy';
 export const siteLocales = settings.locales as { source: string; targets: string[] };
 export const timeZone = settings.event.timezone;
-/** How people attend: `inPerson`, `online` or `hybrid`. */
-export const attendance = settings.event.attendance;
+/** How people attend: `inPerson`, `online` or `hybrid`, as site.json says. */
+export const siteAttendance = settings.event.attendance;
+/** How people attend. A demo site lets visitors pick it in the banner, so the browser may differ. */
+export let attendance = siteAttendance;
+if (__HB_FEATURES__.demo && typeof window !== 'undefined') {
+  attendance = readDemoAttendance() ?? attendance;
+}
 /** The link to watch the event online. */
 export const stream = settings.event.stream;
 export const eventDates = { start: settings.event.startDate, end: settings.event.endDate };
@@ -71,10 +77,14 @@ export let {
   title,
 } = sourceContent;
 // An online event has no venue, even when site.json still has one.
-const venue = attendance === 'online' ? undefined : settings.event.location;
-const withDescription = (description: string) => venue && { ...venue, description };
+const venueFor = (mode: typeof attendance, description: string) =>
+  mode === 'online' || !settings.event.location
+    ? undefined
+    : { ...settings.event.location, description };
 /** The venue, or `undefined` for an online event. */
-export let location = withDescription(resources.mapBlock.description);
+export let location = venueFor(attendance, resources.mapBlock.description);
+/** The venue as site.json has it, without a demo's choice, for the server's render. */
+export const siteLocation = venueFor(siteAttendance, resources.mapBlock.description);
 
 let contentRequest = 0;
 
@@ -101,7 +111,7 @@ export const loadContent = async (locale: string): Promise<void> => {
     ticketsBlock,
     title,
   } = content);
-  location = withDescription(content.mapBlock.description);
+  location = venueFor(attendance, content.mapBlock.description);
 };
 
 // Skeleton sizes while content loads. The same for every site.
