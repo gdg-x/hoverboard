@@ -264,7 +264,7 @@
   <source>On now</source>
 </trans-unit>
 <trans-unit id="home.on-now.until">
-  <source>Until <x id="0" equiv-text="${session.endTime}"/></source>
+  <source>Until <x id="0" equiv-text="${this.time(session, session.endTime!)}"/></source>
 </trans-unit>
 <trans-unit id="home.on-now.next">
   <source>Up next</source>
@@ -727,6 +727,9 @@
 </trans-unit>
 <trans-unit id="event.online">
   <source>Online</source>
+</trans-unit>
+<trans-unit id="common.your-time">
+  <source><x id="0" equiv-text="${time}"/> (your time)</source>
 </trans-unit>
 <trans-unit id="pages.blog-list.error">
   <source>Error loading posts.</source>

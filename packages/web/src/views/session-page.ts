@@ -21,11 +21,12 @@ import { goto } from '../utils/navigation';
 import { store } from '../store';
 import { selectSession } from '../store/sessions/selectors';
 import { type SessionsState, selectSessionsState } from '../store/schedule';
-import { openVideoDialog } from '../store/ui';
+import { openVideoDialog, loadLocalTime, selectLocalTime } from '../store/ui';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
 import { isLive, sessionStream } from '../utils/stream';
 import { getScheduleDay } from '../utils/dates';
+import { otherTimeZone, visitorClock, yourTime } from '../utils/visitor-time';
 import { updateImageMetadata, updateTextMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';
 import { ThemedComponent } from '../components/themed-component';
@@ -122,6 +123,8 @@ export class SessionPage extends ThemedComponent {
   accessor session: BuiltSession | undefined;
   @property({ type: String })
   accessor sessionId: string | undefined;
+  @fromStore(selectLocalTime)
+  private accessor localTime!: boolean;
 
   // Depends on the time, so it is only set in the browser.
   @state()
@@ -134,6 +137,10 @@ export class SessionPage extends ThemedComponent {
     super.connectedCallback();
     // Runs only in the browser. The live link comes and goes without a reload.
     this.liveTimer = setInterval(() => this.checkLive(), 60 * 1000);
+  }
+
+  override firstUpdated() {
+    loadLocalTime();
   }
 
   override disconnectedCallback() {
@@ -195,14 +202,7 @@ export class SessionPage extends ThemedComponent {
   }
 
   private renderDetails(session: BuiltSession) {
-    const when = disabledSchedule
-      ? []
-      : [
-          session.day && getScheduleDay(session.day),
-          session.startTime && [session.startTime, session.endTime].filter(Boolean).join('–'),
-          session.duration && formatDuration(session.duration),
-          session.track?.title,
-        ];
+    const when = disabledSchedule ? [] : [...this.when(session), session.track?.title];
     const details = [...when, session.complexity, session.language].filter(Boolean);
     return html`
       <session-chips
@@ -303,6 +303,22 @@ export class SessionPage extends ThemedComponent {
         }
       </div>
     `;
+  }
+
+  /** The day, times and duration, in the visitor's time zone when they chose so. */
+  private when(session: BuiltSession) {
+    const { day, startTime, endTime } = session;
+    const duration = session.duration && formatDuration(session.duration);
+    if (this.localTime && day && startTime && endTime && otherTimeZone()) {
+      const start = visitorClock(day, startTime);
+      const end = visitorClock(day, endTime);
+      return [getScheduleDay(start.date), yourTime(`${start.time}–${end.time}`), duration];
+    }
+    return [
+      day && getScheduleDay(day),
+      startTime && [startTime, endTime].filter(Boolean).join('–'),
+      duration,
+    ];
   }
 
   private readonly openVideo = () => {

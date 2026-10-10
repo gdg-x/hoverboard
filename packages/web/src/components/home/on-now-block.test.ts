@@ -2,8 +2,11 @@ import { Success } from '@abraham/remotedata';
 import { html, nothing, render as litRender } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { setStoreState } from '../../../__tests__/helpers/store';
 import type { BuiltSession } from '../../schedule/build-schedule';
+import { store as appStore } from '../../store';
 import { sessionStream } from '../../utils/stream';
+import { wallClock, zonedTime } from '../../utils/time-zone';
 import { NEXT_WINDOW_MS, type OnNowBlock, sessionsAround } from './on-now-block';
 import './on-now-block';
 
@@ -16,6 +19,10 @@ vi.mock('../../store/schedule', async (importOriginal) => ({
 vi.mock('../../utils/stream', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../../utils/stream')>()),
   sessionStream: vi.fn(),
+}));
+vi.mock('../../utils/visitor-time', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../../utils/visitor-time')>()),
+  otherTimeZone: () => true,
 }));
 
 // The demo event is in Kyiv, UTC+3 in October.
@@ -73,6 +80,7 @@ describe('on-now-block', () => {
   afterEach(() => {
     litRender(nothing, document.body);
     vi.useRealTimers();
+    vi.restoreAllMocks();
     vi.clearAllMocks();
     store.sessions = [];
   });
@@ -130,6 +138,19 @@ describe('on-now-block', () => {
 
     expect(element.hidden).toBe(true);
     expect(shadowRoot.querySelector('section')).toBeNull();
+  });
+
+  it("shows times in the visitor's time zone when they chose so", async () => {
+    store.sessions = [keynote, talk];
+    setStoreState({ ui: { ...appStore.getState().ui, localTime: true } });
+    const { shadowRoot } = await render();
+    const time = (at: string) => wallClock(zonedTime('2017-10-13', at, 'Europe/Kyiv')).time;
+    const [on, next] = shadowRoot.querySelectorAll('ul.sessions');
+
+    expect(on!.querySelector('.meta')).toHaveTextContent(
+      `Until ${time('11:00')} (your time) · Main hall`,
+    );
+    expect(next!.querySelector('.meta')).toHaveTextContent(`${time('11:00')} (your time)`);
   });
 
   it('moves on each minute', async () => {

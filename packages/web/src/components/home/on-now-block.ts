@@ -6,10 +6,12 @@ import { timeZone } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import type { BuiltSession } from '../../schedule/build-schedule';
 import { type SessionsState, selectSessionsState } from '../../store/schedule';
+import { loadLocalTime, selectLocalTime } from '../../store/ui';
 import { band } from '../../styles/band';
 import { sessionPath } from '../../utils/navigation';
 import { isLive, sessionStream } from '../../utils/stream';
 import { zonedTime } from '../../utils/time-zone';
+import { otherTimeZone, visitorClock, yourTime } from '../../utils/visitor-time';
 import '../shared/hoverboard-icon';
 import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
@@ -98,6 +100,8 @@ export class OnNowBlock extends ThemedComponent {
 
   @fromStore(selectSessionsState)
   private accessor sessions!: SessionsState;
+  @fromStore(selectLocalTime)
+  private accessor localTime!: boolean;
 
   // The block is only in the browser, so it can read the time from the start.
   @state()
@@ -106,6 +110,7 @@ export class OnNowBlock extends ThemedComponent {
 
   override connectedCallback() {
     super.connectedCallback();
+    loadLocalTime();
     this.now = Date.now();
     this.clock = setInterval(() => (this.now = Date.now()), ONE_MINUTE_MS);
   }
@@ -139,7 +144,9 @@ export class OnNowBlock extends ThemedComponent {
                 ${on.map((session) =>
                   this.renderSession(
                     session,
-                    msg(str`Until ${session.endTime}`, { id: 'home.on-now.until' }),
+                    msg(str`Until ${this.time(session, session.endTime!)}`, {
+                      id: 'home.on-now.until',
+                    }),
                   ),
                 )}
               </ul>`
@@ -149,12 +156,21 @@ export class OnNowBlock extends ThemedComponent {
           next.length
             ? html`<h3>${msg('Up next', { id: 'home.on-now.next' })}</h3>
                 <ul class="sessions plain">
-                  ${next.map((session) => this.renderSession(session, session.startTime!))}
+                  ${next.map((session) =>
+                    this.renderSession(session, this.time(session, session.startTime!)),
+                  )}
                 </ul>`
             : nothing
         }
       </section>
     `;
+  }
+
+  /** A time of the session, in the visitor's time zone when they chose so. */
+  private time(session: BuiltSession, time: string) {
+    return this.localTime && otherTimeZone()
+      ? yourTime(visitorClock(session.day!, time).time)
+      : time;
   }
 
   private renderSession(session: BuiltSession, time: string) {

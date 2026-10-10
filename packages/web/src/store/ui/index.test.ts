@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import reducer, {
   closeVideoDialog,
   initialUiState,
@@ -13,7 +13,15 @@ import reducer, {
 import { dispatch } from '../dispatch';
 import type { RootState } from '..';
 
+const config = vi.hoisted(() => ({ attendance: 'inPerson' }));
+
 vi.mock('../dispatch');
+vi.mock('../../config/site', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../../config/site')>()),
+  get attendance() {
+    return config.attendance;
+  },
+}));
 
 describe('ui', () => {
   it('starts with the default hero, viewport, and video dialog state', () => {
@@ -84,7 +92,7 @@ describe('setLocalTime', () => {
 
     setLocalTime(false);
 
-    expect(localStorage.getItem(LOCAL_TIME_KEY)).toBeNull();
+    expect(localStorage.getItem(LOCAL_TIME_KEY)).toBe('false');
   });
 
   it('still dispatches when storage throws', () => {
@@ -119,6 +127,32 @@ describe('loadLocalTime', () => {
     loadLocalTime();
 
     expect(dispatch).not.toHaveBeenCalled();
+  });
+
+  describe('for an online event', () => {
+    beforeEach(() => {
+      config.attendance = 'online';
+    });
+
+    afterEach(() => {
+      config.attendance = 'inPerson';
+    });
+
+    it("uses the visitor's time zone without a stored choice", () => {
+      loadLocalTime();
+
+      expect(dispatch).toHaveBeenCalledWith(
+        expect.objectContaining({ type: 'ui/setLocalTime', payload: true }),
+      );
+    });
+
+    it("keeps the event's time zone when the visitor chose it", () => {
+      localStorage.setItem(LOCAL_TIME_KEY, 'false');
+
+      loadLocalTime();
+
+      expect(dispatch).not.toHaveBeenCalled();
+    });
   });
 });
 

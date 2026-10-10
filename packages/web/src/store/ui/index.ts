@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
+import { attendance } from '../../config/site';
 import { dispatch } from '../dispatch';
 
 /** Where the visitor's choice to see schedule times in their own time zone is stored. */
@@ -77,20 +78,25 @@ export const setViewportSize = (payload: SetViewport) => {
 export const setLocalTime = (localTime: boolean) => {
   dispatch(setLocalTimeAction(localTime));
   try {
-    if (localTime) localStorage.setItem(LOCAL_TIME_KEY, 'true');
-    else localStorage.removeItem(LOCAL_TIME_KEY);
+    localStorage.setItem(LOCAL_TIME_KEY, String(localTime));
   } catch {
     // Storage can throw in private modes. The choice then lasts until the page reloads.
   }
 };
 
-/** Applies the stored choice. Call it after the first render, which must match the server's. */
+/**
+ * Applies the stored choice, or, without one, the visitor's time zone for an online event. Call it
+ * after the first render, which must match the server's.
+ */
 export const loadLocalTime = () => {
+  let stored: string | null = null;
   try {
-    if (localStorage.getItem(LOCAL_TIME_KEY) === 'true') dispatch(setLocalTimeAction(true));
+    stored = localStorage.getItem(LOCAL_TIME_KEY);
   } catch {
     // Storage can throw in private modes.
   }
+  const localTime = stored === null ? attendance === 'online' : stored === 'true';
+  if (localTime) dispatch(setLocalTimeAction(true));
 };
 
 export const selectLocalTime = (state: RootState) => state.ui.localTime;
