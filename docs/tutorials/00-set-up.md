@@ -100,6 +100,8 @@ The build reads content from the Firestore emulator unless `FIRESTORE_TARGET` sa
 
 Locally, the app runs on the emulators with the `demo-hoverboard` project. `demo-` projects only exist in the emulators, so sign-in uses the Auth emulator, and push notifications, Analytics and Performance Monitoring are off.
 
+On the emulators, images without alt text, or with an empty one, have a thick red outline, so you can add the text before you deploy. Alt text describes an image to people who can't see it. Deployed sites don't show the outline.
+
 ## Next steps
 
 Now that your Hoverboard is up and running, learn how to

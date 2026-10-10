@@ -9,6 +9,7 @@ import {
 } from 'firebase/firestore';
 import { getPerformance, initializePerformance } from 'firebase/performance';
 import { isServer } from 'lit';
+import { highlightMissingAlt } from './utils/missing-alt';
 
 /**
  * Load Firebase config in the layout with /__/firebase/init.js. It stubs out
@@ -46,6 +47,8 @@ const start = (firebaseConfig: FirebaseOptions | undefined) => {
 
   if (isDemoProject) {
     connectFirestoreEmulator(db, '127.0.0.1', 8080);
+    // So organizers see the images that need alt text before they deploy.
+    highlightMissingAlt();
   }
 
   // Demo projects have no app ID, which Analytics and Performance Monitoring need.

@@ -25,15 +25,16 @@ declare global {
 }
 
 describe('themed-component', () => {
-  it('prepends the shared theme, block host and reduced motion styles to the subclass styles', async () => {
+  it('prepends the shared theme, block host, reduced motion and missing alt styles to the subclass styles', async () => {
     await fixture(html`<themed-component-test-subject></themed-component-test-subject>`);
     const { elementStyles } = ThemedComponentTestSubject as unknown as { elementStyles: unknown[] };
 
-    expect(elementStyles).toHaveLength(4);
+    expect(elementStyles).toHaveLength(5);
     expect(String(elementStyles[0])).toContain('box-sizing: border-box');
     expect(String(elementStyles[1])).toContain('display: block');
     expect(String(elementStyles[2])).toContain('prefers-reduced-motion: reduce');
-    expect(String(elementStyles[3])).toContain('color: rebeccapurple');
+    expect(String(elementStyles[3])).toContain('--hb-missing-alt-outline');
+    expect(String(elementStyles[4])).toContain('color: rebeccapurple');
   });
 
   it('is usable as a base class for rendering subclass content', async () => {
