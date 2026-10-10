@@ -77,6 +77,45 @@
 <trans-unit id="home.partners-block.submit">
   <source>Submit</source>
 </trans-unit>
+<trans-unit id="dialogs.profile.heading">
+  <source>Public profile</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.intro-photo">
+  <source>Your name and photo show to everyone with your reactions.</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.intro">
+  <source>Your name shows to everyone with your reactions.</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.name">
+  <source>Name</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.name-required">
+  <source>Enter the name to show.</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.show-photo">
+  <source>Show my photo</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.save">
+  <source>Save</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.delete">
+  <source>Delete profile</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.delete-confirm">
+  <source>Delete your profile and all your reactions? Others won't see your name anymore.</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.delete-yes">
+  <source>Delete</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.delete-no">
+  <source>Cancel</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.saved">
+  <source>Profile saved</source>
+</trans-unit>
+<trans-unit id="dialogs.profile.deleted">
+  <source>Profile deleted</source>
+</trans-unit>
 <trans-unit id="dialogs.signin.sign-in-with">
   <source>Sign in with <x id="0" equiv-text="${provider}"/></source>
 </trans-unit>
@@ -367,6 +406,9 @@
 </trans-unit>
 <trans-unit id="shell.account-menu.label">
   <source>Account of <x id="0" equiv-text="${name}"/></source>
+</trans-unit>
+<trans-unit id="shell.account-menu.profile">
+  <source>Public profile</source>
 </trans-unit>
 <trans-unit id="shell.header.skip-link">
   <source>Skip to content</source>

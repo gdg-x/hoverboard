@@ -6,6 +6,7 @@ import reducer, {
   openFeedbackDialog,
   openSigninDialog,
   openPartnerDialog,
+  openProfileDialog,
   selectIsDialogOpen,
   setDialogError,
 } from '.';
@@ -91,6 +92,14 @@ describe('dialog action helpers', () => {
         type: 'dialogs/open',
         payload: { name: DIALOG.PARTNER },
       }),
+    );
+  });
+
+  it('dispatches the profile dialog', () => {
+    openProfileDialog();
+
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'dialogs/open', payload: { name: DIALOG.PROFILE } }),
     );
   });
 

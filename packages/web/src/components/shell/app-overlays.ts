@@ -5,7 +5,12 @@ import { DIALOG, selectIsDialogOpen } from '../../store/dialogs';
 import { ThemedComponent } from '../themed-component';
 
 type LazyElement =
-  'feedback-dialog' | 'signin-dialog' | 'partner-dialog' | 'video-dialog' | 'snack-bar';
+  | 'feedback-dialog'
+  | 'signin-dialog'
+  | 'partner-dialog'
+  | 'profile-dialog'
+  | 'video-dialog'
+  | 'snack-bar';
 
 /** The dialogs and the snackbar. Each loads the first time the store asks for it. */
 @customElement('app-overlays')
@@ -14,6 +19,8 @@ export class AppOverlays extends ThemedComponent {
     'feedback-dialog': () => import('../dialogs/feedback-dialog'),
     'signin-dialog': () => import('../dialogs/signin-dialog'),
     'partner-dialog': () => import('../dialogs/partner-dialog'),
+    'profile-dialog': () =>
+      __HB_FEATURES__.reactions ? import('../dialogs/profile-dialog') : Promise.resolve(),
     'video-dialog': () => import('../dialogs/video-dialog'),
     'snack-bar': () => import('./snack-bar'),
   };
@@ -27,6 +34,7 @@ export class AppOverlays extends ThemedComponent {
       'feedback-dialog': selectIsDialogOpen(state, DIALOG.FEEDBACK),
       'signin-dialog': selectIsDialogOpen(state, DIALOG.SIGNIN),
       'partner-dialog': selectIsDialogOpen(state, DIALOG.PARTNER),
+      'profile-dialog': selectIsDialogOpen(state, DIALOG.PROFILE),
       'video-dialog': state.ui.videoDialog.open,
       'snack-bar': state.snackbars.length > 0,
     }),
@@ -57,6 +65,7 @@ export class AppOverlays extends ThemedComponent {
       ${loaded.has('feedback-dialog') ? html`<feedback-dialog></feedback-dialog>` : nothing}
       ${loaded.has('signin-dialog') ? html`<signin-dialog></signin-dialog>` : nothing}
       ${loaded.has('partner-dialog') ? html`<partner-dialog></partner-dialog>` : nothing}
+      ${loaded.has('profile-dialog') ? html`<profile-dialog></profile-dialog>` : nothing}
       ${loaded.has('video-dialog') ? html`<video-dialog></video-dialog>` : nothing}
       ${loaded.has('snack-bar') ? html`<snack-bar></snack-bar>` : nothing}
     `;

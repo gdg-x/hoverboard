@@ -7,6 +7,7 @@ import { dispatch } from '../dispatch';
 export enum DIALOG {
   FEEDBACK = 'feedback',
   PARTNER = 'partner',
+  PROFILE = 'profile',
   SIGNIN = 'signin',
 }
 
@@ -16,12 +17,15 @@ export interface SigninDialog {
 export interface PartnerDialog {
   name: DIALOG.PARTNER;
 }
+export interface ProfileDialog {
+  name: DIALOG.PROFILE;
+}
 export interface FeedbackDialog {
   name: DIALOG.FEEDBACK;
   data: Pick<Session, 'id' | 'title'>;
 }
 
-export type Dialog = SigninDialog | PartnerDialog | FeedbackDialog;
+export type Dialog = SigninDialog | PartnerDialog | ProfileDialog | FeedbackDialog;
 
 export type DialogState = RemoteData<Error, Dialog>;
 
@@ -53,6 +57,10 @@ export const openSigninDialog = () => {
 
 export const openPartnerDialog = () => {
   dispatch(open({ name: DIALOG.PARTNER }));
+};
+
+export const openProfileDialog = () => {
+  dispatch(open({ name: DIALOG.PROFILE }));
 };
 
 export const openFeedbackDialog = (data: FeedbackDialog['data']) => {
