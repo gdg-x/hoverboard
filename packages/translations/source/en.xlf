@@ -335,6 +335,9 @@
 <trans-unit id="home.map-block.title">
   <source>Location</source>
 </trans-unit>
+<trans-unit id="home.map-block.attending">
+  <source>More about attending</source>
+</trans-unit>
 <trans-unit id="home.on-now.title">
   <source>On now</source>
 </trans-unit>

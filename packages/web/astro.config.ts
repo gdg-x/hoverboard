@@ -7,7 +7,7 @@ import { csp, type CspSite } from './build/csp';
 import { decorators } from './build/decorators';
 import { production, resolveConfig } from './build/resolve-config';
 import { routes } from './build/routes';
-import { serviceWorker } from './build/service-worker';
+import { attendingPrecache, serviceWorker } from './build/service-worker';
 import { site } from './build/vite-plugin-site';
 
 const config = resolveConfig();
@@ -38,7 +38,7 @@ export default defineConfig({
     // Before the service worker, which precaches the pages it changes. Deploys build with
     // FIRESTORE_TARGET=production, and every other build may run on the emulators.
     csp(config.site as CspSite, { emulators: env['FIRESTORE_TARGET'] !== 'production' }),
-    serviceWorker(),
+    serviceWorker(attendingPrecache(config)),
   ],
   vite: {
     // The build smoke test links node_modules into a copy of this package. Astro fails on

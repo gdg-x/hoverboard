@@ -1,6 +1,7 @@
 import { msg, str } from '@lit/localize';
 import { css, html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import {
   aboutBlock,
@@ -201,7 +202,10 @@ export class HomeHero extends ThemedComponent {
                 </hb-chip>
               </li>
               <li>
-                <hb-chip>
+                <hb-chip
+                  class="place"
+                  href="${ifDefined(__HB_FEATURES__.attending ? '/attending' : undefined)}"
+                >
                   <hoverboard-icon
                     slot="icon"
                     name="${this.where.location ? 'location' : 'monitor'}"

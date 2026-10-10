@@ -23,6 +23,7 @@ export const workboxConfig: Omit<GenerateSWOptions, 'globDirectory' | 'swDest'> 
   clientsClaim: true,
   cleanupOutdatedCaches: true,
   // Other pages are cached when they are visited, so the precache does not grow with the content.
+  // The build adds the attending page and its images, which `attendingPrecache()` lists.
   globPatterns: ['index.html', OFFLINE_PAGE.slice(1), '**/*.{js,css,json,svg,md}'],
   // Locale modules are cached when they first load, so the precache does not grow with every locale.
   globIgnores: ['locales/**'],

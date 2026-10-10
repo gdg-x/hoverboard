@@ -53,7 +53,8 @@ export const directionLinks = ({
 
 /**
  * The venue: its name, address, directions and, with a Maps key, a map that loads only when asked,
- * so pages do not load Google Maps up front. The page puts its heading in the `heading` slot.
+ * so pages do not load Google Maps up front. The page puts its heading in the `heading` slot, and
+ * may add links after the directions in the default slot.
  * Without a venue, as for an online event, it renders nothing.
  */
 @customElement('venue-section')
@@ -98,6 +99,10 @@ export class VenueSection extends ThemedComponent {
       margin: 0;
       padding: 0;
       list-style: none;
+    }
+
+    ::slotted(:not([slot])) {
+      margin-block-start: var(--hb-space-5);
     }
 
     .media {
@@ -205,6 +210,7 @@ export class VenueSection extends ThemedComponent {
               `,
             )}
           </ul>
+          <slot></slot>
         </div>
         ${
           this.photo || mapsScriptUrl
