@@ -141,11 +141,20 @@ It optimizes the SVG and replaces its colors with theme colors, and writes `pack
 
 The home page hero uses the theme's first accent color with a dot pattern. `heroSettings.home` in `packages/config/site.json` can add an illustration or a background photo ([Pages configuration](01-configure-app.md#pages-configuration)). With a photo, the build checks that the dark scheme's `onSurface` text is readable on its `scrim` over a white photo. If it is not, set a darker `theme.darkColors.scrim`.
 
-Other pages start with a smaller band in one of the theme's accent colors, the same for each section: speakers in the first accent color, the blog in the second, the schedule in the third and the team in the fourth.
+Other pages start with a smaller band in one of the theme's accent colors, the same for each section: speakers in the first accent color, the blog in the second, the schedule and the attending page in the third and the team in the fourth.
 
 The home page sections below the hero alternate between the surface color and the accent colors, whichever features are on. The subscribe band always uses the third accent color.
 
 The text under the hero titles is `heroDescriptions` in `packages/config/content/resources.json` ([Pages configuration](01-configure-app.md#pages-configuration)).
+
+## Attending page images
+
+The [attending page](01-configure-app.md#attending-page) has two images, `attendingPage.photo` and `attendingPage.floorPlan`.
+
+- **The venue photo** is cropped to a 3:2 frame, and shows up to about 800 pixels wide. A 1600×1067 JPEG or WebP is sharp on high-density screens. Keep the subject in the middle, since the edges may be cropped.
+- **The floor plan** is not cropped, and shows up to 1200 pixels wide, the width of the content. Visitors can open it full size, so make it 2400 pixels wide, or an SVG. Use high-contrast labels that are still readable on a phone.
+
+The service worker downloads both for offline use when a visitor first opens the site, so keep each under 500 KB if you can. Images over 2 MB are left out, and the build warns about them.
 
 ## Text
 

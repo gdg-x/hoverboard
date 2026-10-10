@@ -114,7 +114,7 @@ The top block (aka 'hero') of the home page shows the event name, dates, place a
 
 The hero follows the event dates in the event time zone. Before the event, it counts the days and offers tickets. During the event, it says "Live now" and links to the schedule. After the event, it thanks attendees and links to the videos and photos.
 
-The text under a page's title is in `heroDescriptions` in `packages/config/content/resources.json`, so it can be translated. `home` is required, and `blog`, `coc`, `faq`, `notFound`, `previousSpeakers`, `schedule`, `speakers` and `team` are optional. The titles themselves are part of the UI text.
+The text under a page's title is in `heroDescriptions` in `packages/config/content/resources.json`, so it can be translated. `home` is required, and `attending`, `blog`, `coc`, `faq`, `notFound`, `previousSpeakers`, `schedule`, `speakers` and `team` are optional. The titles themselves are part of the UI text.
 
 ```json
 "heroDescriptions": {
@@ -127,13 +127,77 @@ The event dates on the home page come from `event.startDate` and `event.endDate`
 
 The numbers next to the about text are `aboutBlock.statisticsBlock` in `packages/config/content/resources.json`. Each can have an `emoji`, for fun.
 
-The venue block shows `event.location` with directions in Google Maps, Apple Maps and OpenStreetMap. With `integrations.googleMapsApiKey`, it also has a map that loads only when a visitor asks for it, so other visits do not load Google Maps.
+The venue block shows `event.location` with directions in Google Maps, Apple Maps and OpenStreetMap. With `integrations.googleMapsApiKey`, it also has a map that loads only when a visitor asks for it, so other visits do not load Google Maps. With `attending` on, it links to the [attending page](#attending-page).
 
 The team page opens with the organizers' photo, `aboutOrganizerBlock.image`, which the home page shows too, and `team.description`, both in `packages/config/content/resources.json`.
 
 A speaker's page lists their sessions and, when `previousSpeakers` is on and a previous speaker has the same ID, their talks in earlier years. The previous speakers page groups speakers by the years they spoke.
 
 If you don't need some pages, turn their features off. See [Features](#features).
+
+## Attending page
+
+The `/attending` page tells attendees how to get to the event and how to take part. It is one place to link to from the welcome email or the ticket confirmation. The default `navigation` links to it, and so do the place in the home page hero and the venue block.
+
+The page fills some sections from `site.json` on its own:
+
+- **Where it is:** the venue, its address, `mapBlock.description`, directions, and the map with a Google Maps key, as on the home page.
+- **Joining online:** for an online or hybrid event, the link in `event.stream` and the time zone the site's times are in.
+
+The other sections are what only you know. Write them in `attendingPage` in `packages/config/content/resources.json`. Every field is optional, and a section without content is left out of the page and its table of contents. Text fields are short [Markdown](https://commonmark.org/help/), so they can have links and `code`.
+
+```json
+"attendingPage": {
+  "description": "How to get to DevFest Ukraine, when the doors open, and what to expect at the venue.",
+  "photo": { "image": "/images/venue.jpg", "alt": "The glass front of the venue" },
+  "floorPlan": {
+    "image": "/images/floor-plan.png",
+    "alt": "The ground floor: registration at the entrance, the main hall to the left"
+  },
+  "online": "Ask questions in the chat under the stream. Speakers answer them at the end.",
+  "gettingThere": [
+    { "mode": "train", "text": "The station is 15 minutes away by tram 6." },
+    { "mode": "parking", "text": "Paid parking under the venue." },
+    { "mode": "other", "title": "By rocket", "text": "Land on the roof." }
+  ],
+  "doors": [
+    { "day": "2027-10-15", "open": "08:00", "close": "20:00", "note": "Registration at the main entrance." },
+    { "day": "2027-10-16", "open": "08:30", "close": "19:00" }
+  ],
+  "accessibility": "Every room is step-free. Tell us what you need when you register.",
+  "accommodation": {
+    "text": "We have a discount at a hotel across the street.",
+    "hotels": [
+      {
+        "name": "Hotel Example",
+        "address": "3 Example Street",
+        "note": "Rooms from 90€ a night.",
+        "code": "DEVFEST",
+        "url": "https://hotel.example/book"
+      }
+    ]
+  },
+  "atVenue": [
+    { "topic": "wifi", "text": "Network `DevFest`, password `devfest2027`." },
+    { "topic": "food", "text": "Lunch and coffee are included." }
+  ]
+}
+```
+
+- `description` is the page's description for search engines and link previews. The text under the page title is `heroDescriptions.attending`.
+- `photo` shows next to the venue's address, and `floorPlan` in its own section, with a button that opens it full size. Each needs `alt`, which describes the image for people who can't see it. Put the images in `packages/web/public/images`. See [Images](03-styling.md#attending-page-images) for their sizes.
+- `online` shows under the link to the stream, for an online or hybrid event.
+- `gettingThere` lists the ways to get to the venue, in your order. `mode` picks the icon and the heading: `train` (By train), `plane`, `bus`, `tram`, `metro`, `car`, `parking`, `bike`, `walk` (On foot) or `other`.
+- `doors` lists when the doors open and close each day. `day` is a day of the event, and `open` and `close` are `HH:MM` in `event.timezone`.
+- `accommodation` has your text, then each hotel. Visitors can copy `code` with a button.
+- `atVenue` lists practical details. `topic` picks the icon and the heading: `wifi`, `food`, `cloakroom`, `firstAid`, `quietRoom`, `lostAndFound`, `childcare` or `other`.
+- In `gettingThere` and `atVenue`, `title` replaces the heading, for example "By tram line 1". `other` needs one.
+
+The headings are UI text, so they follow the visitor's language. For an online event, the page leaves out the floor plan, getting there, doors, accommodation and at the venue, since there is no venue.
+
+The build fails when an image is not in `packages/web/public`, an image has no `alt`, a door's `day` is not between `event.startDate` and `event.endDate`, or a door closes before it opens. `./hb init` removes doors outside the new dates.
+
+The service worker downloads the page and its images when a visitor first opens the site, so attendees can open it at the venue without a connection, even if they never opened it before. Images over 2 MB are left out of that download.
 
 ## Features
 
@@ -161,7 +225,7 @@ With `functions` on, every Cloud Function always deploys. When its feature is of
 
 When `feedback` is off, the feedback dialog is still in the build, but nothing opens it. Save buttons show only when `mySchedule` is on.
 
-`attending` adds an `/attending` page for attendees. It shows the event's dates and place, the venue with its address, description and directions, and the map when the site has a Google Maps key, as on the home page. For an online or hybrid event with `event.stream`, it adds a "Joining online" section with the link. Each section has a heading in the page's table of contents. `heroDescriptions.attending` in `content/resources.json` is the text under the title. The default `navigation` links to it.
+`attending` adds the [attending page](#attending-page), at `/attending`. With it off, the home page doesn't link to it.
 
 `reactions` adds a row of reactions to each session page: Applause, Love, Insightful, Mind blown and Funny. Signed-in visitors add any of them, each once. Everyone sees the counts, and each count's label names the latest people who reacted. Visitors can react before a session and until a week after it ends, in `event.timezone`. After that, they can only take their reactions away. Reactions show only on session pages, so they need `schedule` to show anywhere. They don't need `functions`.
 
@@ -244,6 +308,8 @@ Translate your event content for a target locale in `packages/config/content/loc
 ```
 
 Translate the FAQ and Code of Conduct pages with `faq.md` and `coc.md` in the same folder. A page without a translation shows `content/faq.md` or `content/coc.md`. The build fails on any other file in the folder.
+
+Since lists replace, translating one item of `attendingPage.gettingThere`, `doors`, `accommodation.hotels` or `atVenue` means copying the whole list. Keep each door's `day`, `open` and `close`, which the build checks in translations too.
 
 ## Subscribers and partner leads
 
