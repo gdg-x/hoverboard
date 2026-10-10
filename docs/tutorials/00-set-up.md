@@ -8,7 +8,7 @@ Project Hoverboard locally in less than 15 minutes.
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
 1. Install [Node.js (v22)](https://nodejs.org/en/download/)
 1. Install project dependencies: `npm ci` (`yarn` should work but it's not officially supported)
-1. Run `./hb init` and answer its questions. It signs you in to Firebase, creates or picks your Firebase project, writes your event's name, dates, venue, organizer, theme and features to [packages/config](/packages/config), and checks that the project is on the Blaze plan. It can also deploy the site and add sample content. You can run it again later; your current values are the defaults.
+1. Run `./hb init` and answer its questions. It signs you in to Firebase, creates or picks your Firebase project, writes your event's name, dates, whether it is in person, online or both, its venue or stream link, organizer, theme and features to [packages/config](/packages/config), and checks that the project is on the Blaze plan. It can also deploy the site and add sample content. You can run it again later; your current values are the defaults.
    - _Tip: `./hb init --help` lists flags such as `--project` and `--details <file>` for running it without questions._
 1. Update the rest of your site's config and content in [packages/config](/packages/config). More info can be found [here](01-configure-app.md)
 1. Run the app locally. Local development always runs on the [Firebase emulators](https://firebase.google.com/docs/emulator-suite) with the `demo-hoverboard` project, so it needs no Firebase project and never reads or writes live data.

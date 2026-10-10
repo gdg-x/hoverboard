@@ -1,3 +1,7 @@
+/** How people attend: `event.attendance` in site.json. */
+export const ATTENDANCE = ['inPerson', 'online', 'hybrid'] as const;
+export type Attendance = (typeof ATTENDANCE)[number];
+
 /** The details `hb init` asks for, and writes to packages/config. */
 export interface SiteDetails {
   title: string;
@@ -6,6 +10,10 @@ export interface SiteDetails {
   startDate: string;
   endDate: string;
   timezone: string;
+  attendance: Attendance;
+  /** The link to watch online. Required online, optional for a hybrid event. */
+  stream?: string;
+  /** The venue, empty for an online event. */
   venue: string;
   address: string;
   city: string;
@@ -47,6 +55,11 @@ export const isTimeZone = (value: string): boolean => {
 export const isEmail = (value: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
 export const isSiteUrl = (value: string): boolean => /^https?:\/\/.+\/$/.test(value);
+
+export const isStreamUrl = (value: string): boolean => /^https:\/\/\S+$/.test(value);
+
+const isAttendance = (value: unknown): value is Attendance =>
+  ATTENDANCE.includes(value as Attendance);
 
 export const defaultUrl = (projectId: string): string => `https://${projectId}.web.app/`;
 
@@ -99,6 +112,8 @@ export const currentDetails = ({
     startDate: String(event['startDate'] ?? ''),
     endDate: String(event['endDate'] ?? ''),
     timezone: String(event['timezone'] ?? Intl.DateTimeFormat().resolvedOptions().timeZone),
+    attendance: isAttendance(event['attendance']) ? event['attendance'] : 'inPerson',
+    ...(typeof event['stream'] === 'string' ? { stream: event['stream'] } : {}),
     venue: String(location['name'] ?? ''),
     address: String(location['address'] ?? ''),
     city: String(location['city'] ?? ''),
@@ -136,11 +151,16 @@ export const applySiteDetails = (
   { projectId, newProject, features, requires }: ApplyOptions,
 ): { site: Json; resources: Json } => {
   const event = (site['event'] ?? {}) as Json & { location?: Location };
-  const location = event.location ?? {};
+  const { location: oldLocation, attendance: _attendance, stream: _stream, ...eventRest } = event;
+  const location = oldLocation ?? {};
+  const online = details.attendance === 'online';
   const coordinates = details.map
     ? { latitude: details.map.latitude, longitude: details.map.longitude }
     : {};
-  const off = new Set(withDependents(details.featuresOff, requires));
+  // An online event has no venue to show on a map.
+  const off = new Set(
+    withDependents(online ? [...details.featuresOff, 'map'] : details.featuresOff, requires),
+  );
   const integrations = { ...((site['integrations'] ?? {}) as Json) };
   if (details.map && !off.has('map')) {
     integrations['googleMapsApiKey'] = details.map.apiKey;
@@ -159,19 +179,27 @@ export const applySiteDetails = (
       email: details.organizerEmail,
     },
     event: {
-      ...event,
+      ...eventRest,
+      ...(details.attendance && details.attendance !== 'inPerson'
+        ? { attendance: details.attendance }
+        : {}),
+      ...(details.stream ? { stream: details.stream } : {}),
       startDate: details.startDate,
       endDate: details.endDate,
       timezone: details.timezone,
-      location: {
-        ...location,
-        name: details.venue,
-        address: details.address,
-        city: details.city,
-        short: details.shortLocation,
-        pointer: { latitude: 0, longitude: 0, zoom: 5, ...location.pointer, ...coordinates },
-        mapCenter: { latitude: 0, longitude: 0, ...location.mapCenter, ...coordinates },
-      },
+      ...(online
+        ? {}
+        : {
+            location: {
+              ...location,
+              name: details.venue,
+              address: details.address,
+              city: details.city,
+              short: details.shortLocation,
+              pointer: { latitude: 0, longitude: 0, zoom: 5, ...location.pointer, ...coordinates },
+              mapCenter: { latitude: 0, longitude: 0, ...location.mapCenter, ...coordinates },
+            },
+          }),
     },
     ...(newProject
       ? { social: { hashtag: details.shortName.replace(/[#\s]/g, ''), follow: [] } }
@@ -259,18 +287,44 @@ export const askSiteDetails = async (
   );
   const timezone = await askValid(
     ask,
-    'Time zone of the venue:',
+    'Time zone of the event:',
     defaults.timezone,
     isTimeZone,
     'Use an IANA name such as Europe/Kyiv or America/New_York.',
   );
-  const venue = await text('Venue name:', defaults.venue);
-  const address = await text('Venue address:', defaults.address);
-  const city = await text('City:', defaults.city);
-  const shortLocation = await text(
-    'Short location, such as "Lviv, Ukraine":',
-    defaults.shortLocation || city,
-  );
+  const attendance = (await askValid(
+    ask,
+    `How people attend (${ATTENDANCE.join(', ')}):`,
+    defaults.attendance,
+    isAttendance,
+    `Use ${ATTENDANCE.join(', ')}.`,
+  )) as Attendance;
+  let stream: string | undefined;
+  if (attendance === 'online') {
+    stream = await askValid(
+      ask,
+      'Link to watch the event (https://):',
+      defaults.stream ?? '',
+      isStreamUrl,
+      'Use an https:// link.',
+    );
+  } else if (attendance === 'hybrid') {
+    stream =
+      (await askValid(
+        ask,
+        'Link to watch the event online (https://, leave empty for none):',
+        defaults.stream ?? '',
+        (value) => !value || isStreamUrl(value),
+        'Use an https:// link, or leave it empty.',
+      )) || undefined;
+  }
+  const online = attendance === 'online';
+  const venue = online ? '' : await text('Venue name:', defaults.venue);
+  const address = online ? '' : await text('Venue address:', defaults.address);
+  const city = online ? '' : await text('City:', defaults.city);
+  const shortLocation = online
+    ? ''
+    : await text('Short location, such as "Lviv, Ukraine":', defaults.shortLocation || city);
   const organizerName = await text('Organizer name:', defaults.organizerName);
   const organizerEmail = await askValid(
     ask,
@@ -313,7 +367,9 @@ export const askSiteDetails = async (
     .filter(Boolean);
 
   let map: SiteDetails['map'];
-  if (!featuresOff.includes('map')) {
+  if (online) {
+    if (!featuresOff.includes('map')) featuresOff.push('map');
+  } else if (!featuresOff.includes('map')) {
     const apiKey = await ask(
       'Google Maps API key for the venue map (leave empty to turn the map off):',
       defaults.map?.apiKey ?? '',
@@ -344,6 +400,8 @@ export const askSiteDetails = async (
     startDate,
     endDate,
     timezone,
+    attendance,
+    ...(stream ? { stream } : {}),
     venue,
     address,
     city,

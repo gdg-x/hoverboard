@@ -8,7 +8,7 @@ Notifications need the `notifications` feature, and My Schedule reminders also n
 
 ### My Schedule notifications
 
-A few minutes before a sessions starts, attendees can get reminder notifications. These are sent automatically by [`schedule-notifications.ts`](../../packages/server/functions/src/triggers/schedule-notifications.ts).
+A few minutes before a sessions starts, attendees can get reminder notifications. These are sent automatically by [`schedule-notifications.ts`](../../packages/server/functions/src/triggers/schedule-notifications.ts). When the session has a stream link, the reminder has a **Watch live** button that opens it, where the browser shows notification buttons (verify on iOS). See [Content model](firebase-utils.md#content-model) for stream links. After changing `event.attendance`, `event.stream` or the tracks' `stream`, deploy the functions again.
 
 Session times are read in the event time zone, `event.timezone` in `site.json`. The functions copy it at build time, so deploy the functions again after changing it. The optional `icon` in the Firestore `config/notifications` document sets the notification icon.
 

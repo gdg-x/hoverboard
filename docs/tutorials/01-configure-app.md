@@ -33,11 +33,24 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
 
 An `online` event needs no `event.location`, and the site ignores one that is there. The home page, social images and link previews say "Online" instead of the venue. Calendar links point to `event.stream`. Search engines get the event as online, at `event.stream`. A `hybrid` event shows both: "Lviv, Ukraine · Online", the venue in calendar links with the stream below the description, and both places for search engines.
 
+For example, an online event with one stream per track. `./hb init` writes this when you answer `online`, without the tracks:
+
 ```json
 "event": {
   "attendance": "online",
-  "stream": "https://www.youtube.com/@example/live"
-}
+  "stream": "https://www.youtube.com/@example/live",
+  "startDate": "2027-11-05",
+  "endDate": "2027-11-05",
+  "timezone": "America/New_York"
+},
+"schedule": {
+  "published": true,
+  "tracks": [
+    { "id": "main", "title": "Main stage", "stream": "https://www.youtube.com/watch?v=main" },
+    { "id": "workshops", "title": "Workshops", "stream": "https://meet.example/workshops" }
+  ]
+},
+"features": { "map": false }
 ```
 
 `schedule.published` shows session times and tracks. Keep it `false` until the schedule is final. `schedule.tracks` lists the tracks or rooms, in the order the schedule shows them. A session names its track by `id`. A track is on every day, unless `days` lists the days it is on. A track's `stream` is the `https:` link to watch its sessions live, such as one link per room. Without tracks, the schedule has one column. See [Content model](firebase-utils.md#content-model) for a session's day, times and track.

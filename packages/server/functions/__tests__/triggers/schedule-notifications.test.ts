@@ -387,4 +387,50 @@ describe('scheduleNotifications', () => {
       tokens: { fid0000000000000000002: true },
     });
   });
+
+  describe('stream links', () => {
+    const remind = async (
+      session: Record<string, unknown>,
+      config: Partial<ReturnType<typeof getSiteConfig>> = {},
+    ) => {
+      vi.mocked(getSiteConfig).mockReturnValue({ features: {}, timeZone: 'UTC', ...config });
+      mockFirestore({
+        sessionDocs: [
+          {
+            id: 'session-1',
+            data: { title: 'Keynote', day: '2025-06-22', startTime: '14:40', ...session },
+          },
+        ],
+        featuredSessionDocs: [{ id: 'user-1', data: { 'session-1': true } }],
+        notificationsUsersDocs: { 'user-1': { tokens: { fid0000000000000000001: true } } },
+      });
+      const { sendEachForMulticast } = mockMessaging();
+      await scheduleNotifications.run(undefined as never);
+      return (sendEachForMulticast.mock.calls[0]![0] as { data: Record<string, string> }).data;
+    };
+    const online = {
+      attendance: 'online',
+      stream: 'https://stream.example/event',
+      trackStreams: { main: 'https://stream.example/main' },
+    };
+
+    it("sends the session's link, then its track's, then the event's online", async () => {
+      expect(
+        (await remind({ track: 'main', stream: 'https://stream.example/own' }, online)).stream,
+      ).toBe('https://stream.example/own');
+      expect((await remind({ track: 'main' }, online)).stream).toBe('https://stream.example/main');
+      expect((await remind({ track: 'side' }, online)).stream).toBe('https://stream.example/event');
+    });
+
+    it("sends no link in person without the session's or track's own", async () => {
+      expect(await remind({}, { ...online, attendance: 'inPerson' })).not.toHaveProperty('stream');
+      expect((await remind({ track: 'main' }, { ...online, attendance: 'inPerson' })).stream).toBe(
+        'https://stream.example/main',
+      );
+    });
+
+    it('sends no link that is not https', async () => {
+      expect(await remind({ stream: 'javascript:alert(1)' })).not.toHaveProperty('stream');
+    });
+  });
 });

@@ -46,6 +46,7 @@ const details: SiteDetails = {
   startDate: '2027-10-15',
   endDate: '2027-10-16',
   timezone: 'America/New_York',
+  attendance: 'inPerson',
   venue: 'Hall',
   address: '1 Main Street',
   city: 'Springfield',
@@ -111,6 +112,20 @@ describe('currentDetails', () => {
     expect(current.url).toBeUndefined();
     expect(current.map).toBeUndefined();
     expect(current.featuresOff).toEqual(['forkMe']);
+  });
+
+  it('reads how people attend, in person by default', () => {
+    expect(currentDetails({ site, resources, features, newProject: false }).attendance).toBe(
+      'inPerson',
+    );
+    const online = {
+      ...site,
+      event: { ...site.event, attendance: 'online', stream: 'https://stream.example/' },
+    };
+    expect(currentDetails({ site: online, resources, features, newProject: false })).toMatchObject({
+      attendance: 'online',
+      stream: 'https://stream.example/',
+    });
   });
 });
 
@@ -195,6 +210,34 @@ describe('applySiteDetails', () => {
     expect(next).not.toHaveProperty('integrations');
     expect((next['features'] as Record<string, boolean>)['map']).toBe(false);
   });
+
+  it('writes an online event with its stream, no venue and no map', () => {
+    const { site: next } = apply({ attendance: 'online', stream: 'https://stream.example/' });
+    const event = next['event'] as Record<string, unknown>;
+
+    expect(event).toMatchObject({ attendance: 'online', stream: 'https://stream.example/' });
+    expect(event).not.toHaveProperty('location');
+    expect((next['features'] as Record<string, boolean>)['map']).toBe(false);
+    expect(next).not.toHaveProperty('integrations');
+  });
+
+  it('keeps the venue of a hybrid event, and leaves in person as the default', () => {
+    const hybrid = apply({ attendance: 'hybrid', stream: 'https://stream.example/' }).site;
+    expect(hybrid['event']).toMatchObject({
+      attendance: 'hybrid',
+      stream: 'https://stream.example/',
+      location: { name: 'Hall' },
+    });
+
+    const inPerson = applySiteDetails(hybrid, resources, details, {
+      projectId: 'new-project',
+      newProject: false,
+      features: FEATURES,
+      requires: REQUIRES,
+    }).site['event'];
+    expect(inPerson).not.toHaveProperty('attendance');
+    expect(inPerson).not.toHaveProperty('stream');
+  });
 });
 
 describe('askSiteDetails', () => {
@@ -245,5 +288,41 @@ describe('askSiteDetails', () => {
 
     expect(answers.map).toEqual({ apiKey: 'key', latitude: 40.5, longitude: -74 });
     expect(answers.featuresOff).toEqual(['forkMe']);
+  });
+
+  it('asks an online event for its stream, and not for a venue or a map', async () => {
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const ask = answering({
+      'How people attend': ['remote', 'online'],
+      'Link to watch': ['http://stream.example/', 'https://stream.example/'],
+    });
+
+    const answers = await askSiteDetails(ask, details, 'new-project', FEATURES, THEMES);
+
+    expect(answers).toMatchObject({
+      attendance: 'online',
+      stream: 'https://stream.example/',
+      venue: '',
+      featuresOff: ['forkMe', 'map'],
+    });
+    expect(answers).not.toHaveProperty('map');
+    const questions = ask.mock.calls.map(([question]) => question);
+    expect(questions.some((question) => question.startsWith('Venue'))).toBe(false);
+    expect(questions.some((question) => question.startsWith('Google Maps'))).toBe(false);
+  });
+
+  it('lets a hybrid event leave out the stream, and still asks for the venue', async () => {
+    const ask = answering({ 'How people attend': ['hybrid'] });
+
+    const answers = await askSiteDetails(
+      ask,
+      { ...details, map: undefined },
+      'new-project',
+      FEATURES,
+      THEMES,
+    );
+
+    expect(answers).toMatchObject({ attendance: 'hybrid', venue: 'Hall' });
+    expect(answers).not.toHaveProperty('stream');
   });
 });
