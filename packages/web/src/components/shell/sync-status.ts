@@ -1,15 +1,19 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
 import { selectOnline, selectPendingCount, syncLabel } from '../../store/sync';
 import '../shared/hoverboard-icon';
 import '../ui/hb-popover';
 import { ThemedComponent } from '../themed-component';
 
+/** How long a change made online may take to sync before the chip says it's syncing. */
+export const SYNCING_DELAY_MS = 3000;
+
 /**
  * Says when the site is offline, or syncing changes made offline. Opening it explains what works
- * offline. Nothing shows on the server or in the first render, which assume online.
+ * offline. Nothing shows on the server or in the first render, which assume online. Changes made
+ * online usually sync in well under a second, so it says "Syncing…" only when one takes longer.
  */
 @customElement('sync-status')
 export class SyncStatus extends ThemedComponent {
@@ -72,8 +76,38 @@ export class SyncStatus extends ThemedComponent {
   private accessor online!: boolean;
   @fromStore(selectPendingCount)
   private accessor pending!: number;
+  @state()
+  private accessor showSyncing = false;
+  private syncingTimer: ReturnType<typeof setTimeout> | undefined;
+
+  override willUpdate() {
+    if (!this.online) {
+      // Back online, the chip goes straight from the offline count to "Syncing…".
+      this.stopTimer();
+      this.showSyncing = true;
+    } else if (!this.pending) {
+      this.stopTimer();
+      this.showSyncing = false;
+    } else if (!this.showSyncing && !this.syncingTimer) {
+      this.syncingTimer = setTimeout(() => {
+        this.syncingTimer = undefined;
+        this.showSyncing = true;
+      }, SYNCING_DELAY_MS);
+    }
+  }
+
+  override disconnectedCallback() {
+    super.disconnectedCallback();
+    this.stopTimer();
+  }
+
+  private stopTimer() {
+    clearTimeout(this.syncingTimer);
+    this.syncingTimer = undefined;
+  }
 
   override render() {
+    if (this.online && !this.showSyncing) return nothing;
     const label = syncLabel(this.online, this.pending);
     if (!label) return nothing;
     return html`
