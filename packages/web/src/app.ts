@@ -1,5 +1,11 @@
 import { emailLinkSignIn } from './config/site';
-import { finishSignInWithLink, onUser, storedSignInEmail, takeSignInLink } from './store/auth';
+import {
+  finishSignInWithLink,
+  onUser,
+  reportSignOut,
+  storedSignInEmail,
+  takeSignInLink,
+} from './store/auth';
 import { subscribeToPageContent } from './store/content';
 import { openSigninDialog } from './store/dialogs';
 import { setFilters } from './store/filters';
@@ -41,6 +47,7 @@ export const startApp = async (): Promise<void> => {
 
   await afterHydration();
   watchConnection();
+  reportSignOut();
   // The signed-in state changes the header, so it waits for hydration too.
   onUser();
   if (openedFromSignInLink) {

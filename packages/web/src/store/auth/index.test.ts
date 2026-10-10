@@ -373,13 +373,36 @@ describe('auth helpers', () => {
       expect(reload).toHaveBeenCalledTimes(1);
     });
 
-    it('still reloads when another tab has the cache open', async () => {
+    it('still reloads when another tab has the cache open, then says to close it', async () => {
       vi.mocked(clearIndexedDbPersistence).mockRejectedValue(new Error('failed-precondition'));
-      const { signOut } = await loadModule();
+      onTestFinished(() => {
+        vi.mocked(clearIndexedDbPersistence).mockReset();
+        sessionStorage.clear();
+      });
+      const { signOut, reportSignOut } = await loadModule();
 
       await signOut();
 
       expect(reload).toHaveBeenCalledTimes(1);
+      reportSignOut();
+      expect(dispatch).toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload:
+            "Signed out. Close this site's other tabs to remove your data from this browser.",
+        }),
+      );
+      vi.mocked(dispatch).mockClear();
+      reportSignOut();
+      expect(dispatch).not.toHaveBeenCalled();
+    });
+
+    it('says nothing after a sign-out that deleted the cache', async () => {
+      const { signOut, reportSignOut } = await loadModule();
+
+      await signOut();
+      reportSignOut();
+
+      expect(dispatch).not.toHaveBeenCalled();
     });
   });
 });

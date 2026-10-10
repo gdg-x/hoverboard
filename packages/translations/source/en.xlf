@@ -485,6 +485,9 @@
 <trans-unit id="shell.header.sign-out">
   <source>Sign out</source>
 </trans-unit>
+<trans-unit id="store.auth.cache-kept">
+  <source>Signed out. Close this site's other tabs to remove your data from this browser.</source>
+</trans-unit>
 <trans-unit id="auth.sign-in-link-expired">
   <source>This sign-in link has expired or was already used. Ask for a new one.</source>
 </trans-unit>
