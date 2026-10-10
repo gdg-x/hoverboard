@@ -204,9 +204,18 @@ export class SessionElement extends ThemedElement {
         style="${styleMap({ '--stripe': session.mainTag ? tagColor(session.mainTag) : undefined })}"
       >
         ${
-          session.tags?.length
+          session.sponsor || session.tags?.length
             ? html`<ul class="chips">
-                ${session.tags.map(
+                ${
+                  session.sponsor
+                    ? html`<li>
+                        <hb-chip class="sponsored" accent="1">
+                          ${msg('Sponsored', { id: 'schedule.session.sponsored' })}
+                        </hb-chip>
+                      </li>`
+                    : nothing
+                }
+                ${(session.tags ?? []).map(
                   (tag) =>
                     html`<li><hb-chip style="${styleMap(tagChipStyle(tag))}">${tag}</hb-chip></li>`,
                 )}

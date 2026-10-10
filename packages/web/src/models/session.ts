@@ -12,6 +12,8 @@ export interface SessionData {
   presentation?: string;
   speakers?: string[];
   source?: string;
+  /** The sponsor's name, for a session given to a sponsor. The schedule labels it as sponsored. */
+  sponsor?: string;
   startTime?: string;
   tags?: string[];
   title: string;

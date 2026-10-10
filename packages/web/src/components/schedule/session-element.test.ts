@@ -91,6 +91,22 @@ describe('session-element', () => {
     );
   });
 
+  it('labels a sponsored session before its tags', async () => {
+    const { shadowRoot } = await render({ session: { ...session, sponsor: 'Acme' } });
+    const chips = [...shadowRoot.querySelectorAll('.chips hb-chip')];
+
+    expect(chips.map((chip) => chip.textContent?.trim())).toEqual(['Sponsored', 'Web', 'Cloud']);
+    expect(chips[0]).toHaveAttribute('accent', '1');
+  });
+
+  it('labels a sponsored session without tags', async () => {
+    const { shadowRoot } = await render({
+      session: { ...session, tags: [], sponsor: 'Acme' },
+    });
+
+    expect(shadowRoot.querySelector('.chips')).toHaveTextContent('Sponsored');
+  });
+
   it('skips a speaker that does not exist', async () => {
     const { shadowRoot } = await render({
       session: { ...session, speakers: [...session.speakers!, { id: 12 }] } as never,

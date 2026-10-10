@@ -1,5 +1,5 @@
 import { Success } from '@abraham/remotedata';
-import { msg } from '@lit/localize';
+import { msg, str } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
@@ -197,6 +197,17 @@ export class SessionPage extends ThemedElement {
     return html`
       <ul class="details" aria-label="${msg('Session details', { id: 'pages.session.details' })}">
         ${details.map((detail) => html`<li><hb-chip class="plain">${detail}</hb-chip></li>`)}
+        ${
+          session.sponsor
+            ? html`<li>
+                <hb-chip class="sponsored" accent="1">
+                  ${msg(str`Sponsored by ${session.sponsor}`, {
+                    id: 'pages.session.sponsored-by',
+                  })}
+                </hb-chip>
+              </li>`
+            : nothing
+        }
         ${(session.tags ?? []).map(
           (tag) => html`<li><hb-chip style="${styleMap(tagChipStyle(tag))}">${tag}</hb-chip></li>`,
         )}

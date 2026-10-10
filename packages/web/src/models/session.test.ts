@@ -16,6 +16,7 @@ describe('session', () => {
       'language',
       'presentation',
       'speakers',
+      'sponsor',
       'startTime',
       'tags',
       'title',

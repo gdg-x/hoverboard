@@ -150,6 +150,7 @@
       "language": "English",
       "presentation": "https://speakerdeck.com/gdglviv/mete-atamel-windows-and-net-on-google-cloud-platform",
       "speakers": ["mete_atamel", "adrian_kajda"],
+      "sponsor": "Google",
       "tags": ["Cloud"],
       "title": "Windows and .NET on Google Cloud Platform ",
       "day": "2016-09-09",
