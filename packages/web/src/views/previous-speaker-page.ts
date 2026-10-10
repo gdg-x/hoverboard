@@ -9,6 +9,7 @@ import '../components/markdown/short-markdown';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-speakers-block';
 import '../components/shared/previous-talks';
+import '../components/shared/speaker-photo';
 import '../components/ui/hb-icon-button';
 import '../components/ui/hb-progress';
 import type { PreviousSpeaker } from '../models/previous-speaker';
@@ -85,14 +86,13 @@ export class PreviousSpeakerPage extends ThemedElement {
         <div class="profile">
           ${
             speaker
-              ? html`<img
+              ? html`<speaker-photo
                   class="photo"
+                  size="l"
+                  loading="eager"
                   src="${speaker.photoUrl}"
-                  alt=""
-                  width="160"
-                  height="160"
                   style="view-transition-name: ${photoTransitionName('previous-speaker', speaker.id)}"
-                />`
+                ></speaker-photo>`
               : nothing
           }
           <div>

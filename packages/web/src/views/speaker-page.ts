@@ -10,6 +10,7 @@ import '../components/markdown/short-markdown';
 import '../components/schedule/session-element';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-talks';
+import '../components/shared/speaker-photo';
 import '../components/ui/hb-chip';
 import '../components/ui/hb-icon-button';
 import '../components/ui/hb-progress';
@@ -104,14 +105,13 @@ export class SpeakerPage extends ThemedElement {
         <div class="profile">
           ${
             speaker
-              ? html`<img
+              ? html`<speaker-photo
                   class="photo"
+                  size="l"
+                  loading="eager"
                   src="${speaker.photoUrl}"
-                  alt=""
-                  width="160"
-                  height="160"
                   style="view-transition-name: ${photoTransitionName('speaker', speaker.id)}"
-                />`
+                ></speaker-photo>`
               : nothing
           }
           <div>

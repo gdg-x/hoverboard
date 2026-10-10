@@ -19,6 +19,7 @@ import { confetti } from '../../utils/confetti';
 import { getLocale } from '../../utils/localization';
 import { tagColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
+import '../shared/speaker-photo';
 import '../ui/hb-icon-button';
 import './session-chips';
 import { fromStore } from '../../controllers/from-store';
@@ -136,14 +137,6 @@ export class SessionElement extends ThemedElement {
       gap: var(--hb-space-2);
     }
 
-    .speakers img {
-      inline-size: 28px;
-      block-size: 28px;
-      border-radius: 50%;
-      background-color: var(--hb-color-surface-container);
-      object-fit: cover;
-    }
-
     .meta {
       margin: auto 0 0;
       color: var(--hb-color-on-surface-variant);
@@ -218,14 +211,7 @@ export class SessionElement extends ThemedElement {
                   .map(
                     (speaker) => html`
                       <li>
-                        <img
-                          src="${speaker.photoUrl}"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          width="28"
-                          height="28"
-                        />
+                        <speaker-photo size="xs" src="${speaker.photoUrl}"></speaker-photo>
                         ${speaker.name}
                       </li>
                     `,

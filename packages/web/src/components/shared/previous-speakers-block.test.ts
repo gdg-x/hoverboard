@@ -53,7 +53,7 @@ describe('previous-speakers-block', () => {
 
     const speakerLink = shadowRoot.querySelector('a.speaker');
     expect(speakerLink).toHaveAttribute('href', '/previous-speakers/speaker-1');
-    expect(speakerLink?.querySelector('img')).toHaveAttribute('alt', 'Previous Speaker');
+    expect(speakerLink?.querySelector('speaker-photo')).toHaveProperty('alt', 'Previous Speaker');
     expect(shadowRoot.querySelector('h2')).toHaveTextContent('Previous speakers');
     expect(shadowRoot).toHaveTextContent('View all');
     expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute(

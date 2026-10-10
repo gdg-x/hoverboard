@@ -86,7 +86,7 @@ describe('session-element', () => {
     expect(chips.session).toBe(session);
     expect(chips.nameSponsor).toBe(false);
     expect(view.getByText('Ada')).toBeInTheDocument();
-    expect(shadowRoot.querySelector('.speakers img')).toHaveAttribute('alt', '');
+    expect(shadowRoot.querySelector('.speakers speaker-photo')).toHaveAttribute('size', 'xs');
     expect(shadowRoot.querySelector('.meta')).toHaveTextContent(
       'Main hall · 40 min · Intermediate · English',
     );

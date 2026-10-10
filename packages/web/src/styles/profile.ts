@@ -14,17 +14,6 @@ export const profile = css`
     min-inline-size: 0;
   }
 
-  .photo {
-    flex: none;
-    inline-size: 160px;
-    block-size: 160px;
-    border: var(--hb-border-width) solid var(--hb-border-color);
-    border-radius: var(--hb-radius-avatar);
-    background-color: var(--hb-color-surface-container);
-    box-shadow: var(--hb-shadow-card);
-    object-fit: cover;
-  }
-
   .details {
     margin: var(--hb-space-3) 0 0;
     font-size: var(--hb-text-lg);

@@ -65,7 +65,8 @@ describe('speaker-card', () => {
     const icon = badges[0]!.querySelector<HTMLElement>('hoverboard-icon')!;
     expect(icon).toHaveAttribute('name', 'gde');
     expect(icon.style.color).toBe('var(--hb-tag-gde, var(--hb-color-outline))');
-    expect(shadowRoot.querySelector('.photo')).toHaveAttribute('alt', '');
+    expect(shadowRoot.querySelector('speaker-photo.photo')).toHaveProperty('alt', '');
+    expect(shadowRoot.querySelector('speaker-photo.photo')).toHaveAttribute('size', 'm');
   });
 
   it('has no photo badge without an affiliation, whatever links the speaker has', async () => {
