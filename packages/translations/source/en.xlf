@@ -431,8 +431,14 @@
 <trans-unit id="shell.nav.team">
   <source>Team</source>
 </trans-unit>
-<trans-unit id="shell.notifications.toggle">
-  <source>Notifications</source>
+<trans-unit id="shell.notifications.blocked">
+  <source>Please enable notifications in your browser</source>
+</trans-unit>
+<trans-unit id="shell.notifications.unsupported">
+  <source>Notifications are not supported on this device</source>
+</trans-unit>
+<trans-unit id="shell.notifications.error">
+  <source>Unknown error occurred</source>
 </trans-unit>
 <trans-unit id="shell.notifications.prompt">
   <source>Enable notifications</source>
@@ -458,14 +464,8 @@
 <trans-unit id="shell.notifications.my-schedule">
   <source>My Schedule notifications</source>
 </trans-unit>
-<trans-unit id="shell.notifications.blocked">
-  <source>Please enable notifications in your browser</source>
-</trans-unit>
-<trans-unit id="shell.notifications.unsupported">
-  <source>Notifications are not supported on this device</source>
-</trans-unit>
-<trans-unit id="shell.notifications.error">
-  <source>Unknown error occurred</source>
+<trans-unit id="shell.notifications.toggle">
+  <source>Notifications</source>
 </trans-unit>
 <trans-unit id="shell.snack-bar.dismiss">
   <source>Dismiss</source>

@@ -1,8 +1,8 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import { css, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
-import { ClickOutsideController } from '../../controllers/click-outside-controller';
+import { html } from 'lit';
+import { customElement, query } from 'lit/decorators.js';
+import { fromStore } from '../../controllers/from-store';
 import { store } from '../../store';
 import {
   initialNotificationPermissionState,
@@ -10,105 +10,29 @@ import {
   requestNotificationPermission,
   unsupportedNotificationPermission,
 } from '../../store/notification-permission';
-import {
-  initialNotificationsSubscribersState,
-  selectNotificationsSubscribers,
-} from '../../store/notifications-subscribers';
-import { selectNotificationsUsersSubscribed } from '../../store/notifications-users';
 import { selectOnline } from '../../store/sync';
-import {
-  clearNotificationsSubscribers,
-  updateNotificationsSubscribers,
-} from '../../store/update-notifications-subscribers';
-import {
-  removeNotificationsUsers,
-  updateNotificationsUsers,
-} from '../../store/update-notifications-users';
-import type { UserState } from '../../store/user';
-import '../shared/auth-required';
 import '../shared/hoverboard-icon';
-import '../ui/hb-button';
 import '../ui/hb-icon-button';
-import '../ui/hb-switch';
-import type { HbSwitch } from '../ui/hb-switch';
-import { fromStore } from '../../controllers/from-store';
+import '../ui/hb-popover';
+import type { HbPopover } from '../ui/hb-popover';
+import './notification-settings';
 import { ThemedComponent } from '../themed-component';
 
-const BLOCKED_HELP = 'https://support.google.com/chrome/answer/3220216';
-const UNSUPPORTED_HELP =
-  'https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#browser_compatibility';
-
+/** The header's bell: its icon shows the browser's permission, and it opens the settings. */
 @customElement('notification-toggle')
 export class NotificationToggle extends ThemedComponent {
-  static override styles = css`
-    :host {
-      position: relative;
-      display: inline-flex;
-    }
-
-    .dropdown-panel {
-      display: none;
-      position: absolute;
-      inset-block-start: calc(100% + var(--hb-space-2));
-      inset-inline-end: 0;
-      z-index: 2;
-      inline-size: max-content;
-      max-inline-size: min(320px, 100vw - 2 * var(--hb-space-4));
-      padding: var(--hb-space-5);
-      border: var(--hb-border-width) solid var(--hb-border-color);
-      border-radius: var(--hb-radius-m);
-      background-color: var(--hb-panel-background);
-      backdrop-filter: var(--hb-backdrop-filter);
-      color: var(--hb-color-on-surface);
-      box-shadow: var(--hb-shadow-card);
-    }
-
-    .dropdown-panel[open] {
-      display: block;
-    }
-
-    .dropdown-panel p {
-      margin-top: 0;
-    }
-
-    .dropdown-panel .panel-actions {
-      display: flex;
-      justify-content: flex-end;
-      margin: 0 -16px -16px 0;
-    }
-
-    .switch-row,
-    auth-required {
-      margin: 12px 0;
-    }
-
-    .switch-row {
-      display: flex;
-    }
-
-    .offline {
-      font-weight: 600;
-    }
-  `;
-
   @fromStore((state) => state.notificationPermission.value)
   private accessor notificationPermission!: typeof initialNotificationPermissionState.value;
-  @fromStore((state) => selectNotificationsSubscribers(state))
-  private accessor notificationsSubscribers!: typeof initialNotificationsSubscribersState;
-  @fromStore((state) => selectNotificationsUsersSubscribed(state))
-  private accessor notificationsUsersSubscribed!: boolean;
-  @fromStore((state) => state.user)
-  private accessor user!: UserState;
   @fromStore(selectOnline)
   private accessor online!: boolean;
 
-  @state()
-  private accessor opened = false;
+  @query('hb-popover')
+  private accessor panel!: HbPopover | null;
 
-  private readonly clickOutsideController = new ClickOutsideController(this, () => this.close());
-
-  // After the first render, which must match the server's, where the permission is unknown.
-  override firstUpdated() {
+  // After the first render, which must match the server's, where the permission is unknown. The
+  // settings render it too, so they hydrate first.
+  override async firstUpdated() {
+    await this.renderRoot.querySelector('notification-settings')?.updateComplete;
     if ('Notification' in window && 'permissions' in navigator) {
       navigator.permissions.query({ name: 'notifications' }).then((permission) => {
         store.dispatch(requestNotificationPermission(PROMPT_USER.NO));
@@ -123,217 +47,29 @@ export class NotificationToggle extends ThemedComponent {
 
   override render() {
     return html`
-      <hb-icon-button
-        class="notifications-trigger"
-        label="${msg('Notifications', { id: 'shell.notifications.toggle' })}"
-        .expanded="${this.opened}"
-        @click="${this.requestPermission}"
-      >
-        <hoverboard-icon name="${this.icon}"></hoverboard-icon>
-      </hb-icon-button>
-
-      <div id="notifications-panel" class="dropdown-panel" ?open="${this.opened}">
-        ${
-          this.initialized
-            ? html`
-                <p>${msg('Enable notifications', { id: 'shell.notifications.prompt' })}</p>
-                ${
-                  this.online
-                    ? ''
-                    : html`<p class="offline">
-                        ${msg('Connect to the internet to turn on notifications.', {
-                          id: 'shell.notifications.offline',
-                        })}
-                      </p>`
-                }
-                <div class="panel-actions">
-                  <hb-button
-                    variant="text"
-                    ?disabled="${!this.online}"
-                    @click="${this.requestPermission}"
-                  >
-                    ${msg('Enable', { id: 'shell.notifications.enable' })}
-                  </hb-button>
-                </div>
-              `
-            : ''
-        }
-        ${this.pending ? msg('Loading...', { id: 'common.loading' }) : ''}
-        ${
-          this.success
-            ? html`
-                <p>
-                  ${msg('Get notified of general announcements and sessions starting', {
-                    id: 'shell.notifications.enabled',
-                  })}
-                </p>
-                <hb-switch
-                  class="switch-row"
-                  .checked="${this.generalNotificationsSelected}"
-                  ?disabled="${!this.online}"
-                  @change="${this.toggleGeneralNotifications}"
-                  >${msg('General notifications', { id: 'shell.notifications.general' })}</hb-switch
-                >
-                ${
-                  this.online
-                    ? ''
-                    : html`<p class="offline">
-                        ${msg('Connect to the internet to change general notifications.', {
-                          id: 'shell.notifications.general-offline',
-                        })}
-                      </p>`
-                }
-
-                <auth-required>
-                  <p slot="prompt">
-                    ${msg('Sign in to get personalized session notifications', {
-                      id: 'shell.notifications.sign-in',
-                    })}
-                  </p>
-                  <hb-switch
-                    class="switch-row"
-                    .checked="${this.notificationsUsersSubscribed}"
-                    @change="${this.toggleMyScheduleNotifications}"
-                    >${msg('My Schedule notifications', {
-                      id: 'shell.notifications.my-schedule',
-                    })}</hb-switch
-                  >
-                </auth-required>
-              `
-            : ''
-        }
-        ${
-          this.blocked
-            ? html`
-                <p>
-                  ${msg('Please enable notifications in your browser', {
-                    id: 'shell.notifications.blocked',
-                  })}
-                </p>
-                <div class="panel-actions">
-                  <hb-button
-                    variant="text"
-                    href="${BLOCKED_HELP}"
-                    target="_blank"
-                    @click="${this.close}"
-                  >
-                    ${msg('Enable', {
-                      id: 'shell.notifications.blocked-help',
-                      desc: 'Opens help on allowing notifications in the browser.',
-                    })}
-                  </hb-button>
-                </div>
-              `
-            : ''
-        }
-        ${
-          this.unsupported
-            ? html`
-                <p>
-                  ${msg('Notifications are not supported on this device', {
-                    id: 'shell.notifications.unsupported',
-                  })}
-                </p>
-                <div class="panel-actions">
-                  <hb-button
-                    variant="text"
-                    href="${UNSUPPORTED_HELP}"
-                    target="_blank"
-                    @click="${this.close}"
-                  >
-                    ${msg('Details', {
-                      id: 'shell.notifications.unsupported-help',
-                      desc: 'Opens a list of browsers that support notifications.',
-                    })}
-                  </hb-button>
-                </div>
-              `
-            : ''
-        }
-        ${
-          this.failure
-            ? html`<p>${msg('Unknown error occurred', { id: 'shell.notifications.error' })}</p>`
-            : ''
-        }
-      </div>
+      <hb-popover>
+        <hb-icon-button
+          slot="trigger"
+          class="notifications-trigger"
+          label="${msg('Notifications', { id: 'shell.notifications.toggle' })}"
+          @click="${this.requestPermission}"
+        >
+          <hoverboard-icon name="${this.icon}"></hoverboard-icon>
+        </hb-icon-button>
+        <notification-settings @close="${this.close}"></notification-settings>
+      </hb-popover>
     `;
   }
 
-  private get initialized() {
-    return (
-      this.notificationPermission instanceof Initialized ||
-      this.notificationPermission instanceof Pending
-    );
-  }
-
-  private get pending() {
-    return this.notificationPermission instanceof Pending;
-  }
-
-  private get blocked() {
-    return (
-      this.notificationPermission instanceof Failure &&
-      this.notificationPermission.error.message === 'denied'
-    );
-  }
-
-  private get unsupported() {
-    return (
-      this.notificationPermission instanceof Failure &&
-      this.notificationPermission.error.message === 'unsupported'
-    );
-  }
-
-  private get failure() {
-    return (
-      this.notificationPermission instanceof Failure &&
-      this.notificationPermission.error.message !== 'denied' &&
-      this.notificationPermission.error.message !== 'unsupported'
-    );
-  }
-
-  private get success() {
-    return this.notificationPermission instanceof Success;
-  }
-
-  private get generalNotificationsSelected() {
-    return (
-      this.notificationsSubscribers instanceof Success &&
-      Boolean(this.notificationsSubscribers.data)
-    );
-  }
-
-  private requestPermission = () => {
+  // Opening the panel for the first time also asks the browser.
+  private readonly requestPermission = () => {
     if (this.notificationPermission instanceof Initialized && this.online) {
       store.dispatch(requestNotificationPermission(PROMPT_USER.YES));
     }
-    this.toggleOpened();
   };
 
-  private toggleGeneralNotifications = (event: Event) => {
-    const { checked, disabled } = event.target as HbSwitch;
-    if (!(this.notificationPermission instanceof Success) || disabled) {
-      return;
-    }
-
-    if (checked) {
-      updateNotificationsSubscribers(this.notificationPermission.data);
-    } else {
-      clearNotificationsSubscribers(this.notificationPermission.data);
-    }
-  };
-
-  private toggleMyScheduleNotifications = (event: Event) => {
-    const { checked } = event.target as HbSwitch;
-    if (!(this.notificationPermission instanceof Success) || !(this.user instanceof Success)) {
-      return;
-    }
-
-    if (checked) {
-      updateNotificationsUsers(this.user.data.uid, this.notificationPermission.data);
-    } else {
-      removeNotificationsUsers(this.user.data.uid, this.notificationPermission.data);
-    }
+  private readonly close = () => {
+    this.panel?.close();
   };
 
   private get icon() {
@@ -345,20 +81,6 @@ export class NotificationToggle extends ThemedComponent {
       return 'bell-outline';
     }
   }
-
-  private toggleOpened() {
-    if (this.opened) {
-      this.clickOutsideController.stop();
-    } else {
-      this.clickOutsideController.start();
-    }
-    this.opened = !this.opened;
-  }
-
-  private close = () => {
-    this.clickOutsideController.stop();
-    this.opened = false;
-  };
 }
 
 declare global {

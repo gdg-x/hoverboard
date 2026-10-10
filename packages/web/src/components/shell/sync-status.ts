@@ -4,6 +4,7 @@ import { customElement } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
 import { selectOnline, selectPendingCount, syncLabel } from '../../store/sync';
 import '../shared/hoverboard-icon';
+import '../ui/hb-popover';
 import { ThemedComponent } from '../themed-component';
 
 /**
@@ -14,11 +15,10 @@ import { ThemedComponent } from '../themed-component';
 export class SyncStatus extends ThemedComponent {
   static override styles = css`
     :host {
-      position: relative;
       display: inline-flex;
     }
 
-    summary {
+    .chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -32,15 +32,11 @@ export class SyncStatus extends ThemedComponent {
       color: var(--hb-color-on-accent-2-container);
       font: 600 var(--hb-text-sm) / 1 var(--hb-font-mono);
       white-space: nowrap;
-      list-style: none;
+      border: 0;
       cursor: pointer;
     }
 
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    summary:focus-visible {
+    .chip:focus-visible {
       outline: 3px solid var(--hb-color-focus);
       outline-offset: 2px;
     }
@@ -61,23 +57,12 @@ export class SyncStatus extends ThemedComponent {
     }
 
     .help {
-      position: absolute;
-      z-index: 10;
-      inset-block-start: calc(100% + var(--hb-space-2));
-      inset-inline-end: 0;
-      inline-size: min(320px, 100vw - 32px);
       margin: 0;
-      padding: var(--hb-space-4);
-      border: var(--hb-border-width) solid var(--hb-border-color);
-      border-radius: var(--hb-radius-m);
-      background-color: var(--hb-panel-background);
-      color: var(--hb-color-on-surface);
-      box-shadow: var(--hb-shadow-card);
       font: var(--hb-text-sm) / 1.5 var(--hb-font-body);
     }
 
     @media (forced-colors: active) {
-      summary {
+      .chip {
         border: 1px solid CanvasText;
       }
     }
@@ -92,19 +77,20 @@ export class SyncStatus extends ThemedComponent {
     const label = syncLabel(this.online, this.pending);
     if (!label) return nothing;
     return html`
-      <details>
-        <summary role="status" title="${label}">
+      <hb-popover>
+        <!-- A live region, so screen readers say when the count changes. -->
+        <button slot="trigger" class="chip" type="button" aria-live="polite" title="${label}">
           ${this.pending ? html`<span aria-hidden="true">${this.pending}</span>` : nothing}
           <hoverboard-icon name="${this.pending ? 'cloud-upload' : 'cloud-off'}"></hoverboard-icon>
           <span class="visually-hidden">${label}</span>
-        </summary>
+        </button>
         <p class="help">
           ${msg(
             'Bookmarks, feedback and reminders you change are saved on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.',
             { id: 'shell.sync.help' },
           )}
         </p>
-      </details>
+      </hb-popover>
     `;
   }
 }
