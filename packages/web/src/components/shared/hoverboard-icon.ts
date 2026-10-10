@@ -26,6 +26,7 @@ const ICONS: Record<string, () => Promise<{ default: SVGTemplateResult }>> = {
   star: () => import('./icons/star'),
   'insert-comment': () => import('./icons/insert-comment'),
   'add-circle-outline': () => import('./icons/add-circle-outline'),
+  'add-reaction': () => import('./icons/add-reaction'),
   'chevron-left': () => import('./icons/chevron-left'),
   'chevron-right': () => import('./icons/chevron-right'),
   play: () => import('./icons/play'),

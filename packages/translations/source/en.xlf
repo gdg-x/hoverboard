@@ -335,6 +335,45 @@
 <trans-unit id="schedule.session.sponsored">
   <source>Sponsored</source>
 </trans-unit>
+<trans-unit id="reactions.applause">
+  <source>Applause</source>
+</trans-unit>
+<trans-unit id="reactions.love">
+  <source>Love</source>
+</trans-unit>
+<trans-unit id="reactions.insightful">
+  <source>Insightful</source>
+</trans-unit>
+<trans-unit id="reactions.mind-blown">
+  <source>Mind blown</source>
+</trans-unit>
+<trans-unit id="reactions.funny">
+  <source>Funny</source>
+</trans-unit>
+<trans-unit id="reactions.count-one">
+  <source>1 person reacted with <x id="0" equiv-text="${label}"/></source>
+</trans-unit>
+<trans-unit id="reactions.count-many">
+  <source><x id="0" equiv-text="${count}"/> people reacted with <x id="1" equiv-text="${label}"/></source>
+</trans-unit>
+<trans-unit id="reactions.others-one">
+  <source>1 other</source>
+</trans-unit>
+<trans-unit id="reactions.others-many">
+  <source><x id="0" equiv-text="${others}"/> others</source>
+</trans-unit>
+<trans-unit id="reactions.who">
+  <source><x id="0" equiv-text="${who}"/> reacted with <x id="1" equiv-text="${label}"/></source>
+</trans-unit>
+<trans-unit id="reactions.add">
+  <source>Add a reaction</source>
+</trans-unit>
+<trans-unit id="reactions.label">
+  <source>Reactions</source>
+</trans-unit>
+<trans-unit id="reactions.signed-out">
+  <source>Sign in to react to sessions</source>
+</trans-unit>
 <trans-unit id="shared.add-to-calendar.label">
   <source>Add to calendar</source>
 </trans-unit>

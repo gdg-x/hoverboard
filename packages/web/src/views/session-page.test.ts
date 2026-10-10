@@ -7,16 +7,22 @@ import { setFeatures } from '../../__tests__/helpers/features';
 import type { BuiltSession } from '../schedule/build-schedule';
 import type { SaveButton } from '../components/schedule/save-button';
 import type { SessionChips } from '../components/schedule/session-chips';
+import type { SessionReactions } from '../components/schedule/session-reactions';
 import { selectSession } from '../store/sessions/selectors';
 import { openVideoDialog } from '../store/ui';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata, updateTextMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
-import { feedbackBlock, type SessionPage } from './session-page';
+import { feedbackBlock, reactionsRow, type SessionPage } from './session-page';
 import './session-page';
 
 vi.mock('../utils/metadata');
 vi.mock('../utils/feedback');
+vi.mock('../store/reactions', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../store/reactions')>()),
+  watchSessionReactions: vi.fn(),
+  unwatchSessionReactions: vi.fn(),
+}));
 vi.mock('../utils/navigation', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../utils/navigation')>()),
   goto: vi.fn(),
@@ -69,7 +75,7 @@ const render = async (props: Partial<SessionPage> = {}) => {
 
 describe('session-page', () => {
   // Otherwise it can finish loading after jsdom is gone, which fails the run.
-  beforeAll(() => feedbackBlock);
+  beforeAll(() => Promise.all([feedbackBlock, reactionsRow]));
 
   beforeEach(() => {
     vi.mocked(selectSession).mockReturnValue(session);
@@ -174,6 +180,21 @@ describe('session-page', () => {
     const { shadowRoot } = await render();
 
     expect(shadowRoot.querySelector('save-button')).toBeNull();
+  });
+
+  it('shows the reactions to the session', async () => {
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector<SessionReactions>('session-reactions.reactions')!.session).toBe(
+      session,
+    );
+  });
+
+  it('has no reactions when reactions are off', async () => {
+    setFeatures({ reactions: false });
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector('session-reactions')).toBeNull();
   });
 
   it('plays the video and links the slides', async () => {

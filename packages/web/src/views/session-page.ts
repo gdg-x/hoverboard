@@ -34,6 +34,11 @@ export const feedbackBlock = __HB_FEATURES__.feedback
   ? import('../components/dialogs/feedback-block')
   : Promise.resolve();
 
+/** The reactions row, which renders in the browser once it loads. Tests wait for it. */
+export const reactionsRow = __HB_FEATURES__.reactions
+  ? import('../components/schedule/session-reactions')
+  : Promise.resolve();
+
 /**
  * A session: its title, when and where it is, its tags, actions to save, add to a calendar and
  * share, the description, its speakers and, once it started, a place to leave feedback.
@@ -75,6 +80,13 @@ export class SessionPage extends ThemedComponent {
         flex-wrap: wrap;
         align-items: center;
         gap: var(--hb-space-3);
+      }
+
+      /* Its height while the row loads, so the page doesn't move. */
+      .reactions {
+        display: flex;
+        min-block-size: 40px;
+        margin-block-start: var(--hb-space-4);
       }
 
       .description {
@@ -219,6 +231,12 @@ export class SessionPage extends ThemedComponent {
             .data="${{ title: session.title, text: session.description }}"
           ></share-button>
         </div>
+
+        ${
+          __HB_FEATURES__.reactions
+            ? html`<session-reactions class="reactions" .session="${session}"></session-reactions>`
+            : nothing
+        }
 
         <short-markdown class="description" .content="${session.description}"></short-markdown>
 

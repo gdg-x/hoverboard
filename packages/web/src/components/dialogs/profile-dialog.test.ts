@@ -8,6 +8,7 @@ import type { Profile } from '../../models/profile';
 import type { RootState } from '../../store';
 import { closeDialog, DIALOG } from '../../store/dialogs';
 import { deleteOwnProfile, setOwnProfile } from '../../store/profiles';
+import { setUserReactions } from '../../store/reactions';
 import { queueSnackbar } from '../../store/snackbars';
 import type { HbSwitch } from '../ui/hb-switch';
 import type { HbTextField } from '../ui/hb-text-field';
@@ -28,6 +29,7 @@ vi.mock('../../store/profiles', async (importOriginal) => ({
 vi.mock('../../store/reactions', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../../store/reactions')>()),
   selectOwnReactionsState: (state: RootState) => state.reactions.own,
+  setUserReactions: vi.fn(),
 }));
 vi.mock('../../store/snackbars', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../../store/snackbars')>()),
@@ -40,6 +42,7 @@ const user = (data: Partial<User> = {}) =>
 
 interface Setup {
   open?: boolean;
+  data?: { sessionId: string; reaction: 'love' };
   signedIn?: RootState['user'];
   own?: RootState['profiles']['own'];
   reactions?: RootState['reactions']['own'];
@@ -47,11 +50,12 @@ interface Setup {
 
 const state = ({
   open = true,
+  data,
   signedIn = user(),
   own = new Success(false),
   reactions = new Success({}),
 }: Setup = {}): Partial<RootState> => ({
-  dialogs: open ? new Success({ name: DIALOG.PROFILE }) : new Initialized(),
+  dialogs: open ? new Success({ name: DIALOG.PROFILE, ...(data && { data }) }) : new Initialized(),
   user: signedIn,
   profiles: { own, byId: {} },
   reactions: { own: reactions, bySession: {} },
@@ -116,6 +120,22 @@ describe('profile-dialog', () => {
     expect(setOwnProfile).toHaveBeenCalledWith('ada', { name: 'Ada', photoUrl: photo });
     expect(closeDialog).toHaveBeenCalled();
     expect(queueSnackbar).toHaveBeenCalledWith('Profile saved');
+    expect(setUserReactions).not.toHaveBeenCalled();
+  });
+
+  it('adds the reaction that opened it after saving', async () => {
+    const { button } = await render({
+      data: { sessionId: 'session-1', reaction: 'love' },
+      reactions: new Success({ 'session-1': ['funny'] }),
+    });
+
+    button('Save')!.click();
+
+    expect(setOwnProfile).toHaveBeenCalled();
+    expect(setUserReactions).toHaveBeenCalledWith('session-1', 'ada', ['love', 'funny']);
+    expect(vi.mocked(setOwnProfile).mock.invocationCallOrder[0]).toBeLessThan(
+      vi.mocked(setUserReactions).mock.invocationCallOrder[0]!,
+    );
   });
 
   it('saves without the photo when it is turned off', async () => {

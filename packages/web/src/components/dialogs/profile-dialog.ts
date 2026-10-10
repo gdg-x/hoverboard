@@ -4,14 +4,25 @@ import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
 import { store } from '../../store';
-import { closeDialog, DIALOG, selectIsDialogOpen } from '../../store/dialogs';
+import {
+  closeDialog,
+  DIALOG,
+  selectIsDialogOpen,
+  selectProfileDialogReaction,
+} from '../../store/dialogs';
 import {
   deleteOwnProfile,
   type ProfilesState,
   selectOwnProfileState,
   setOwnProfile,
 } from '../../store/profiles';
-import { type ReactionsState, selectOwnReactionsState } from '../../store/reactions';
+import {
+  type ReactionsState,
+  selectOwnReactionsState,
+  selectOwnSessionReactions,
+  setUserReactions,
+  toggled,
+} from '../../store/reactions';
 import { queueSnackbar } from '../../store/snackbars';
 import type { UserState } from '../../store/user';
 import { notEmpty } from '../../utils/strings';
@@ -216,10 +227,17 @@ export class ProfileDialog extends ThemedComponent {
     if (!(this.user instanceof Success)) return;
     this.invalid = !notEmpty(this.name);
     if (this.invalid) return;
-    setOwnProfile(this.user.data.uid, {
+    const { uid } = this.user.data;
+    setOwnProfile(uid, {
       name: this.name,
       photoUrl: this.showPhoto ? this.photo : '',
     });
+    // The profile's write is queued first, so the rules see it before the reaction.
+    const react = selectProfileDialogReaction(store.getState());
+    if (react) {
+      const current = selectOwnSessionReactions(store.getState(), react.sessionId);
+      setUserReactions(react.sessionId, uid, toggled(current, react.reaction));
+    }
     closeDialog();
     store.dispatch(queueSnackbar(msg('Profile saved', { id: 'dialogs.profile.saved' })));
   };
