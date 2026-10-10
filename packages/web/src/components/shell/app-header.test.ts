@@ -143,7 +143,11 @@ describe('app-header', () => {
     expect(shadowRoot.querySelector('account-menu')).toBeInTheDocument();
 
     setFeatures({ mySchedule: false, feedback: false });
-    const { shadowRoot: withoutAccount } = await render('/blog');
+    const { shadowRoot: withReactions } = await render('/blog');
+    expect(withReactions.querySelector('account-menu')).toBeInTheDocument();
+
+    setFeatures({ mySchedule: false, feedback: false, reactions: false });
+    const { shadowRoot: withoutAccount } = await render('/team');
     expect(withoutAccount.querySelector('account-menu')).toBeNull();
   });
 

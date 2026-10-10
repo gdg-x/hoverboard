@@ -33,12 +33,12 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
 
 `theme` picks the look: the `festival`, `spotlight`, `paper` or `glass` theme, the color scheme, colors, fonts, spacing and decorations. See [Styling][style app].
 
-`auth.providers` lists the ways visitors sign in, in the order the sign-in dialog shows them. Visitors sign in to save sessions to My Schedule and to rate sessions.
+`auth.providers` lists the ways visitors sign in, in the order the sign-in dialog shows them. Visitors sign in to save sessions to My Schedule, to rate sessions and to react to them.
 
 - `emailLink` (the default): visitors enter their email address and get a link that signs them in, with no password. It is the only one on by default.
 - `google`, `facebook` and `twitter`: sign in with that account in a popup.
 
-For example, `["emailLink", "google"]` adds Google, and `["google"]` turns email links off. Turn on each method you list in the Firebase console too. See [Sign-in](02-firebase.md#sign-in). When `mySchedule` or `feedback` is on, the list can't be empty.
+For example, `["emailLink", "google"]` adds Google, and `["google"]` turns email links off. Turn on each method you list in the Firebase console too. See [Sign-in](02-firebase.md#sign-in). When `mySchedule` or `feedback` is on, the list can't be empty. With an empty list, turn `reactions` off too, since nobody could react.
 
 ## Validation
 
@@ -137,11 +137,17 @@ With `functions` on, every Cloud Function always deploys. When its feature is of
 
 When `feedback` is off, the feedback dialog is still in the build, but nothing opens it. Save buttons show only when `mySchedule` is on.
 
+`reactions` adds a row of reactions to each session page: Applause, Love, Insightful, Mind blown and Funny. Signed-in visitors add any of them, each once. Everyone sees the counts, and each count's label names the latest people who reacted. Visitors can react before a session and until a week after it ends, in `event.timezone`. After that, they can only take their reactions away. Reactions show only on session pages, so they need `schedule` to show anywhere. They don't need `functions`.
+
+The first time visitors react, they pick the name to show, and the photo from their sign-in account if it has one. That is their public profile, in the `profiles` collection, and anyone can read it. Visitors change it or delete it under **Public profile** in the account menu. Deleting it deletes their reactions too. Reactions are in `sessions/{sessionId}/reactions/{userId}`. To remove an abusive name or reaction, delete the document in the Firebase console.
+
+A session page reads every reaction to its session, and the profiles of up to 10 people it names, each time it opens. A session with 200 reactions costs about 210 Firestore reads per view (verify).
+
 `socialImages` builds a share image for each session and speaker page, which social networks and chat apps show with a link to the page. A session's image has its title, speakers, day, time and track. A speaker's image has their photo, name, company and the event's dates. Both have the logo from `packages/web/public/images/logo.svg`, the venue and the site's address, in the theme's colors and fonts. The build downloads speaker photos for them, and a photo that fails to download shows the speaker's initials, with a warning in the build output. With `socialImages` off, those pages share the first speaker's photo or `image` from `site.json`.
 
 The images come from the content at build time, like the rest of the page. After changing sessions or speakers, deploy again to update them. Each image's file name changes with what it shows, so social networks fetch the new one. To check how a page looks when shared, paste its URL into the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) or the [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/).
 
-The header follows the features too. Its button links to tickets until the event is over, or to the schedule otherwise. The account button shows when `mySchedule` or `feedback` is on, and the notifications bell when `notifications` is on. The footer links to the home page's subscribe band when `subscribe` is on, and shows a "Fork me on GitHub" sticker when `forkMe` is on.
+The header follows the features too. Its button links to tickets until the event is over, or to the schedule otherwise. The account button shows when `mySchedule`, `feedback` or `reactions` is on, and the notifications bell when `notifications` is on. The footer links to the home page's subscribe band when `subscribe` is on, and shows a "Fork me on GitHub" sticker when `forkMe` is on.
 
 ## Content Security Policy
 

@@ -48,6 +48,7 @@ const FEATURE_CHUNKS: Partial<Record<Feature, string[]>> = {
   mySchedule: ['my-schedule'],
   partners: ['partners-block'],
   previousSpeakers: ['previous-speakers-page', 'previous-speaker-page'],
+  reactions: ['session-reactions', 'profile-dialog'],
   schedule: ['schedule-page', 'session-page'],
   speakers: ['speakers-page', 'speaker-page', 'speakers-block'],
   subscribe: ['subscribe-block'],

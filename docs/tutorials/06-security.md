@@ -4,11 +4,12 @@ What Hoverboard protects for you, and what you set in your own Firebase project 
 
 ## What Hoverboard does
 
-- **Firestore rules.** Visitors can only read your content. You change it in the Firebase console or with `./hb firestore-*`. Signed-in visitors can write only their own saved sessions, notification settings and feedback. The subscribe and partner forms can only add documents, with checked fields and sizes, and nobody can read them from the site. Export them with [`./hb firestore-csv`](01-configure-app.md#subscribers-and-partner-leads).
+- **Firestore rules.** Visitors can only read your content. You change it in the Firebase console or with `./hb firestore-*`. Signed-in visitors can write only their own saved sessions, notification settings, feedback, reactions and public profile. A reaction needs its author's profile and a session that exists, and the rules check every field. The subscribe and partner forms can only add documents, with checked fields and sizes, and nobody can read them from the site. Export them with [`./hb firestore-csv`](01-configure-app.md#subscribers-and-partner-leads).
 - **Storage rules.** The site can't read or write your Storage bucket.
 - **Content.** Links in your config and content can only be `https:`, `http:`, `mailto:` or a path on your site. The site drops other links, such as `javascript:` ones, even when they come straight from the Firebase console. Markdown is sanitized before it is shown, and the build sanitizes the hero illustration.
 - **Headers.** `firebase.json` sends `Strict-Transport-Security`, `Referrer-Policy`, `Permissions-Policy` and other headers on every page, and every page has a [Content Security Policy](01-configure-app.md#content-security-policy).
 - **Sign-out.** Signing out deletes the copy of the visitor's data that the site keeps in the browser for offline use.
+- **Public profiles.** With `reactions` on, the name and photo a visitor picks show to anyone, with their reactions. Nobody has a profile until they react and confirm it. The photo can only be the one from their sign-in account, so a profile can't point other visitors' browsers at any other address. Visitors delete their profile and reactions themselves. To delete someone's data on request, delete their `profiles/{userId}` document and their documents in `sessions/*/reactions` in the Firebase console.
 - **Logs.** The functions don't log emails, push tokens or user IDs.
 - **Deploys.** GitHub Actions deploy without a service account key, with only the roles a deploy needs. See [Deploying to Firebase with Github Actions](04-deploy.md#deploying-to-firebase-with-github-actions).
 
