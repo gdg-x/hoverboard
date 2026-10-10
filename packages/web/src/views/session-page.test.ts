@@ -5,11 +5,9 @@ import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import type { BuiltSession } from '../schedule/build-schedule';
+import type { BookmarkButton } from '../components/schedule/bookmark-button';
 import type { SessionChips } from '../components/schedule/session-chips';
-import type { User } from '../models/user';
-import { setUserFeaturedSessions } from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
-import { queueComplexSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata } from '../utils/metadata';
@@ -26,20 +24,10 @@ vi.mock('../utils/navigation', async (importOriginal) => ({
 vi.mock('../store/sessions/selectors', () => ({
   selectSession: vi.fn(),
 }));
-vi.mock('../store/featured-sessions', async (importOriginal) => ({
-  __esModule: true,
-  ...(await importOriginal<typeof import('../store/featured-sessions')>()),
-  setUserFeaturedSessions: vi.fn(() => Promise.resolve()),
-}));
 vi.mock('../store/ui', async (importOriginal) => ({
   __esModule: true,
   ...(await importOriginal<typeof import('../store/ui')>()),
   openVideoDialog: vi.fn(),
-}));
-vi.mock('../store/snackbars', async (importOriginal) => ({
-  __esModule: true,
-  ...(await importOriginal<typeof import('../store/snackbars')>()),
-  queueComplexSnackbar: vi.fn(() => ({ type: 'noop' })),
 }));
 
 const speaker = {
@@ -165,41 +153,19 @@ describe('session-page', () => {
     expect(goto).toHaveBeenCalledWith('/404');
   });
 
-  it('asks to sign in before bookmarking', async () => {
+  it('bookmarks the session from a full button', async () => {
     const { shadowRoot } = await render();
+    const bookmark = shadowRoot.querySelector<BookmarkButton>('bookmark-button.bookmark')!;
 
-    shadowRoot.querySelector<HTMLElement>('.bookmark')!.click();
-
-    expect(queueComplexSnackbar).toHaveBeenCalled();
-    expect(setUserFeaturedSessions).not.toHaveBeenCalled();
-  });
-
-  it('bookmarks the session when signed in', async () => {
-    const { shadowRoot } = await render({
-      user: new Success({ uid: 'user-1' } as User),
-      featuredSessions: new Success({}),
-    });
-    const bookmark = shadowRoot.querySelector<HTMLElement>('.bookmark')!;
-
-    expect(bookmark).toHaveTextContent('Bookmark');
-    bookmark.click();
-
-    expect(setUserFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': true }, true);
-  });
-
-  it('says when the session is bookmarked', async () => {
-    const { shadowRoot } = await render({
-      featuredSessions: new Success({ 'session-1': true }),
-    });
-
-    expect(shadowRoot.querySelector('.bookmark')).toHaveTextContent('Bookmarked');
+    expect(bookmark.session).toBe(session);
+    expect(bookmark.variant).toBe('button');
   });
 
   it('has no bookmark when My Schedule is off', async () => {
     setFeatures({ mySchedule: false });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('.bookmark')).toBeNull();
+    expect(shadowRoot.querySelector('bookmark-button')).toBeNull();
   });
 
   it('plays the video and links the slides', async () => {

@@ -1,16 +1,12 @@
-import { Success } from '@abraham/remotedata';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../../__tests__/helpers/features';
 import type { BuiltSession } from '../../schedule/build-schedule';
-import type { User } from '../../models/user';
-import { openFeedbackDialog, openSigninDialog } from '../../store/dialogs';
-import { setUserFeaturedSessions } from '../../store/featured-sessions';
-import { queueComplexSnackbar } from '../../store/snackbars';
+import { openFeedbackDialog } from '../../store/dialogs';
 import { acceptingFeedback } from '../../utils/feedback';
-import { confetti } from '../../utils/confetti';
+import type { BookmarkButton } from './bookmark-button';
 import { formatDuration, type SessionCard } from './session-card';
 import type { SessionChips } from './session-chips';
 import './session-card';
@@ -19,22 +15,10 @@ vi.mock('../../store/dialogs', async (importOriginal) => ({
   __esModule: true,
   ...(await importOriginal<typeof import('../../store/dialogs')>()),
   openFeedbackDialog: vi.fn(),
-  openSigninDialog: vi.fn(),
-}));
-vi.mock('../../store/featured-sessions', async (importOriginal) => ({
-  __esModule: true,
-  ...(await importOriginal<typeof import('../../store/featured-sessions')>()),
-  setUserFeaturedSessions: vi.fn(),
-}));
-vi.mock('../../store/snackbars', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('../../store/snackbars')>()),
-  queueComplexSnackbar: vi.fn(),
 }));
 vi.mock('../../utils/feedback');
-vi.mock('../../utils/confetti');
 
 const mockAcceptingFeedback = vi.mocked(acceptingFeedback);
-const mockQueueComplexSnackbar = vi.mocked(queueComplexSnackbar);
 
 const session = {
   id: 'session-1',
@@ -61,7 +45,6 @@ const render = async (props: Partial<SessionCard> = {}) => {
 describe('session-card', () => {
   beforeEach(() => {
     mockAcceptingFeedback.mockReturnValue(false);
-    mockQueueComplexSnackbar.mockReturnValue({ type: 'queueComplexSnackbar' } as never);
   });
 
   afterEach(() => {
@@ -122,65 +105,27 @@ describe('session-card', () => {
     ).toBe('var(--hb-tag-web, var(--hb-color-outline))');
   });
 
-  it('shows a pressed bookmark for a bookmarked session', async () => {
-    const { shadowRoot } = await render({ featuredSessions: new Success({ 'session-1': true }) });
-    const bookmark = shadowRoot.querySelector('hb-icon-button')!;
-
-    expect(bookmark).toHaveAttribute('label', 'Bookmark Example Session');
-    expect(bookmark.pressed).toBe(true);
-    expect(bookmark.querySelector('hoverboard-icon')).toHaveAttribute('name', 'bookmark-check');
-  });
-
-  it('asks to sign in before bookmarking', async () => {
+  it('bookmarks the session from an icon button', async () => {
     const { shadowRoot } = await render();
+    const bookmark = shadowRoot.querySelector<BookmarkButton>('bookmark-button.action')!;
 
-    shadowRoot.querySelector<HTMLElement>('hb-icon-button')!.click();
-
-    expect(mockQueueComplexSnackbar).toHaveBeenCalledWith(
-      expect.objectContaining({ label: 'Sign in to save sessions' }),
-    );
-    expect(setUserFeaturedSessions).not.toHaveBeenCalled();
-    mockQueueComplexSnackbar.mock.calls[0]![0].action?.callback();
-    expect(openSigninDialog).toHaveBeenCalled();
-  });
-
-  it('bookmarks the session when signed in', async () => {
-    const { shadowRoot } = await render({
-      user: new Success({ uid: 'user-1' } as User),
-      featuredSessions: new Success({}),
-    });
-
-    const button = shadowRoot.querySelector<HTMLElement>('hb-icon-button')!;
-    button.click();
-
-    expect(setUserFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': true }, true);
-    expect(confetti).toHaveBeenCalledWith(button);
-  });
-
-  it('removes a bookmark without confetti', async () => {
-    const { shadowRoot } = await render({
-      user: new Success({ uid: 'user-1' } as User),
-      featuredSessions: new Success({ 'session-1': true }),
-    });
-
-    shadowRoot.querySelector<HTMLElement>('hb-icon-button')!.click();
-
-    expect(setUserFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': false }, false);
-    expect(confetti).not.toHaveBeenCalled();
+    expect(bookmark.session).toBe(session);
+    expect(bookmark.variant).toBe('icon');
   });
 
   it('has no bookmark when My Schedule is off', async () => {
     setFeatures({ mySchedule: false });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('hb-icon-button')).toBeNull();
+    expect(shadowRoot.querySelector('bookmark-button')).toBeNull();
   });
 
   it('asks for feedback instead of a bookmark while the session takes feedback', async () => {
     mockAcceptingFeedback.mockReturnValue(true);
     const { shadowRoot } = await render();
-    const button = shadowRoot.querySelector<HTMLElement>('hb-icon-button')!;
+    const button = shadowRoot.querySelector<HTMLElement>('hb-icon-button.feedback')!;
 
+    expect(shadowRoot.querySelector('bookmark-button')).toBeNull();
     expect(button).toHaveAttribute('label', 'Rate Example Session');
 
     button.click();
@@ -193,10 +138,8 @@ describe('session-card', () => {
     mockAcceptingFeedback.mockReturnValue(true);
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('hb-icon-button')).toHaveAttribute(
-      'label',
-      'Bookmark Example Session',
-    );
+    expect(shadowRoot.querySelector('hb-icon-button.feedback')).toBeNull();
+    expect(shadowRoot.querySelector('bookmark-button')).toBeInTheDocument();
   });
 });
 

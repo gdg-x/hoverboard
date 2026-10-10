@@ -275,6 +275,18 @@
 <trans-unit id="markdown.toc.title">
   <source>On this page</source>
 </trans-unit>
+<trans-unit id="pages.session.bookmarked">
+  <source>Bookmarked</source>
+</trans-unit>
+<trans-unit id="pages.session.bookmark">
+  <source>Bookmark</source>
+</trans-unit>
+<trans-unit id="schedule.session.bookmark">
+  <source>Bookmark <x id="0" equiv-text="${session.title}"/></source>
+</trans-unit>
+<trans-unit id="common.save-sessions-signed-out">
+  <source>Sign in to save sessions</source>
+</trans-unit>
 <trans-unit id="schedule.tabs.label">
   <source>Schedule days</source>
 </trans-unit>
@@ -283,12 +295,6 @@
 </trans-unit>
 <trans-unit id="schedule.session.rate">
   <source>Rate <x id="0" equiv-text="${session.title}"/></source>
-</trans-unit>
-<trans-unit id="schedule.session.bookmark">
-  <source>Bookmark <x id="0" equiv-text="${session.title}"/></source>
-</trans-unit>
-<trans-unit id="common.save-sessions-signed-out">
-  <source>Sign in to save sessions</source>
 </trans-unit>
 <trans-unit id="pages.session.sponsored-by">
   <source>Sponsored by <x id="0" equiv-text="${sponsor}"/></source>
@@ -685,12 +691,6 @@
 </trans-unit>
 <trans-unit id="pages.session.details">
   <source>Session details</source>
-</trans-unit>
-<trans-unit id="pages.session.bookmarked">
-  <source>Bookmarked</source>
-</trans-unit>
-<trans-unit id="pages.session.bookmark">
-  <source>Bookmark</source>
 </trans-unit>
 <trans-unit id="pages.session.speakers">
   <source>Speakers</source>

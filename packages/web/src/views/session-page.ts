@@ -14,25 +14,17 @@ import '../components/ui/hb-button';
 import '../components/ui/hb-progress';
 import { PAGE_TONES } from '../components/hero/simple-hero';
 import { formatDuration } from '../components/schedule/session-card';
+import '../components/schedule/bookmark-button';
 import '../components/schedule/session-chips';
 import type { BuiltSession } from '../schedule/build-schedule';
 import { goto } from '../utils/navigation';
 import { store } from '../store';
-import { openSigninDialog } from '../store/dialogs';
-import {
-  type FeaturedSessionsState,
-  selectFeaturedSessionsState,
-  setUserFeaturedSessions,
-} from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
 import { type SessionsState, selectSessionsState } from '../store/schedule';
-import { queueComplexSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
-import type { UserState } from '../store/user';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
 import { getScheduleDay } from '../utils/dates';
-import { confetti } from '../utils/confetti';
 import { updateImageMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';
 import { ThemedComponent } from '../components/themed-component';
@@ -117,10 +109,6 @@ export class SessionPage extends ThemedComponent {
   accessor session: BuiltSession | undefined;
   @property({ type: String })
   accessor sessionId: string | undefined;
-  @fromStore((state) => selectFeaturedSessionsState(state))
-  accessor featuredSessions!: FeaturedSessionsState;
-  @fromStore((state) => state.user)
-  accessor user!: UserState;
 
   // Depends on the time, so it is only set in the browser.
   @state()
@@ -150,14 +138,6 @@ export class SessionPage extends ThemedComponent {
 
   private get isLoaded() {
     return !!this.sessionId && this.sessions instanceof Success;
-  }
-
-  private get isBookmarked() {
-    return (
-      this.featuredSessions instanceof Success &&
-      !!this.sessionId &&
-      !!this.featuredSessions.data[this.sessionId]
-    );
   }
 
   override render() {
@@ -200,7 +180,6 @@ export class SessionPage extends ThemedComponent {
   }
 
   private renderContent(session: BuiltSession) {
-    const bookmarked = this.isBookmarked;
     // A speaker document can be missing its name while it is being added.
     const speakers = session.speakers.filter((speaker) => speaker.name);
     return html`
@@ -208,21 +187,11 @@ export class SessionPage extends ThemedComponent {
         <div class="actions">
           ${
             __HB_FEATURES__.mySchedule
-              ? html`<hb-button
+              ? html`<bookmark-button
                   class="bookmark"
-                  variant="${bookmarked ? 'tonal' : 'filled'}"
-                  @click="${this.toggleBookmark}"
-                >
-                  <hoverboard-icon
-                    slot="icon"
-                    name="${bookmarked ? 'bookmark-check' : 'bookmark-plus'}"
-                  ></hoverboard-icon>
-                  ${
-                    bookmarked
-                      ? msg('Bookmarked', { id: 'pages.session.bookmarked' })
-                      : msg('Bookmark', { id: 'pages.session.bookmark' })
-                  }
-                </hb-button>`
+                  variant="button"
+                  .session="${session}"
+                ></bookmark-button>`
               : nothing
           }
           ${
@@ -284,31 +253,6 @@ export class SessionPage extends ThemedComponent {
       </div>
     `;
   }
-
-  private readonly toggleBookmark = (event: Event) => {
-    if (!(this.user instanceof Success)) {
-      store.dispatch(
-        queueComplexSnackbar({
-          label: msg('Sign in to save sessions', { id: 'common.save-sessions-signed-out' }),
-          action: {
-            title: msg('Sign in', { id: 'common.sign-in' }),
-            callback: () => openSigninDialog(),
-          },
-        }),
-      );
-      return;
-    }
-
-    if (this.featuredSessions instanceof Success && this.session) {
-      const bookmarked = !this.featuredSessions.data[this.session.id];
-      setUserFeaturedSessions(
-        this.user.data.uid,
-        { ...this.featuredSessions.data, [this.session.id]: bookmarked },
-        bookmarked,
-      );
-      if (bookmarked) confetti(event.currentTarget as Element);
-    }
-  };
 
   private readonly openVideo = () => {
     if (this.session?.videoId) {

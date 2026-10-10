@@ -1,28 +1,18 @@
-import { Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { BuiltSession } from '../../schedule/build-schedule';
 import { sessionPath } from '../../utils/navigation';
-import { store } from '../../store';
-import { openFeedbackDialog, openSigninDialog } from '../../store/dialogs';
-import {
-  type FeaturedSessionsState,
-  selectFeaturedSessionsState,
-  setUserFeaturedSessions,
-} from '../../store/featured-sessions';
-import { queueComplexSnackbar } from '../../store/snackbars';
-import type { UserState } from '../../store/user';
+import { openFeedbackDialog } from '../../store/dialogs';
 import { acceptingFeedback } from '../../utils/feedback';
-import { confetti } from '../../utils/confetti';
 import { getLocale } from '../../utils/localization';
 import { tagColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
 import '../shared/speaker-photo';
 import '../ui/hb-icon-button';
+import './bookmark-button';
 import './session-chips';
-import { fromStore } from '../../controllers/from-store';
 import { ThemedComponent } from '../themed-component';
 
 /** "1 hr 30 min", in the page locale. */
@@ -164,12 +154,8 @@ export class SessionCard extends ThemedComponent {
     }
   `;
 
-  @fromStore((state) => state.user)
-  accessor user!: UserState;
   @property({ attribute: false })
   accessor session: BuiltSession | undefined;
-  @fromStore((state) => selectFeaturedSessionsState(state))
-  accessor featuredSessions!: FeaturedSessionsState;
 
   // Depends on the time, so it is only set in the browser.
   @state()
@@ -237,52 +223,8 @@ export class SessionCard extends ThemedComponent {
       `;
     }
     if (!__HB_FEATURES__.mySchedule) return nothing;
-    const bookmarked = this.isBookmarked;
-    return html`
-      <hb-icon-button
-        class="action bookmark"
-        label="${msg(str`Bookmark ${session.title}`, { id: 'schedule.session.bookmark' })}"
-        .pressed="${bookmarked}"
-        @click="${this.toggleBookmark}"
-      >
-        <hoverboard-icon
-          name="${bookmarked ? 'bookmark-check' : 'bookmark-plus'}"
-        ></hoverboard-icon>
-      </hb-icon-button>
-    `;
+    return html`<bookmark-button class="action bookmark" .session="${session}"></bookmark-button>`;
   }
-
-  private get isBookmarked(): boolean {
-    if (this.featuredSessions instanceof Success && this.session?.id) {
-      return this.featuredSessions.data[this.session.id] ?? false;
-    }
-    return false;
-  }
-
-  private readonly toggleBookmark = (event: Event) => {
-    if (!(this.user instanceof Success)) {
-      store.dispatch(
-        queueComplexSnackbar({
-          label: msg('Sign in to save sessions', { id: 'common.save-sessions-signed-out' }),
-          action: {
-            title: msg('Sign in', { id: 'common.sign-in' }),
-            callback: () => openSigninDialog(),
-          },
-        }),
-      );
-      return;
-    }
-
-    if (this.featuredSessions instanceof Success && this.session) {
-      const bookmarked = !this.featuredSessions.data[this.session.id];
-      setUserFeaturedSessions(
-        this.user.data.uid,
-        { ...this.featuredSessions.data, [this.session.id]: bookmarked },
-        bookmarked,
-      );
-      if (bookmarked) confetti(event.currentTarget as Element);
-    }
-  };
 
   private readonly openFeedback = () => {
     if (this.session) openFeedbackDialog(this.session);
