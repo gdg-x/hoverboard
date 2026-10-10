@@ -22,7 +22,13 @@ To get a notification an attendee has to:
 
 General notifications are sent to everyone (authenticated and anonymous) who has enabled "General notifications". These are sent manually by conference organizers.
 
-To send a "General notification":
+To send a "General notification" from the command line:
+
+    FIRESTORE_TARGET=production ./hb notify --title "Doors open" --body "Registration is in the main hall." --path /schedule
+
+`--path` is the page the notification opens, or a full `https://` link. `--icon` replaces the icon from `config/notifications`. It asks before sending from production, and `--yes` sends without asking. Without `FIRESTORE_TARGET=production`, it adds the notification to the emulator, where `npm start` runs the function. It needs the `notifications` and `functions` features, since the `sendGeneralNotification` function sends it.
+
+To send one from the Firebase console instead:
 
 1. Got to the [project's Firestore page](https://console.firebase.google.com/u/0/project/_/firestore/data/)
 1. "Start collection" with the ID `notifications`

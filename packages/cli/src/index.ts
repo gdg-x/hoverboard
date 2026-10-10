@@ -10,6 +10,7 @@ import { runFirestoreCsv } from './commands/firestore-csv.js';
 import { runFirestoreExport } from './commands/firestore-export.js';
 import { runFirestoreInit } from './commands/firestore-init/index.js';
 import { type InitOptions, runInit } from './commands/init/index.js';
+import { type NotifyOptions, runNotify } from './commands/notify.js';
 import { runSetup } from './commands/setup.js';
 import { runSetupGitHub } from './commands/setup-github.js';
 import { type UpgradeOptions, runUpgrade } from './commands/upgrade.js';
@@ -208,6 +209,26 @@ program
   .action(async (options: UpgradeOptions) => {
     try {
       process.exitCode = (await runUpgrade(options)) ? 0 : 1;
+    } catch (error) {
+      console.log(error);
+      process.exitCode = 1;
+    }
+  });
+
+program
+  .command('notify')
+  .description(
+    'Send a push notification to every device that turned on general notifications ' +
+      '(targets the local emulator unless FIRESTORE_TARGET=production is set).',
+  )
+  .requiredOption('--title <text>', 'The title.')
+  .requiredOption('--body <text>', 'The text under the title.')
+  .option('--path <path>', 'The page it opens, such as /schedule, or a full https:// link.')
+  .option('--icon <url>', 'An icon instead of the one in config/notifications.')
+  .option('-y, --yes', 'Send it from production without asking.')
+  .action(async (options: NotifyOptions) => {
+    try {
+      process.exitCode = (await runNotify(options)) ? 0 : 1;
     } catch (error) {
       console.log(error);
       process.exitCode = 1;
