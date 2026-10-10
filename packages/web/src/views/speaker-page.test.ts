@@ -122,7 +122,7 @@ describe('speaker-page', () => {
     });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('session-element')).toHaveProperty(
+    expect(shadowRoot.querySelector('session-card')).toHaveProperty(
       'session',
       expect.objectContaining({ id: 'session-1' }),
     );
@@ -131,7 +131,7 @@ describe('speaker-page', () => {
   it('has no sessions section without sessions', async () => {
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('session-element')).toBeNull();
+    expect(shadowRoot.querySelector('session-card')).toBeNull();
     expect(shadowRoot.querySelector('.section-title')).toBeNull();
   });
 

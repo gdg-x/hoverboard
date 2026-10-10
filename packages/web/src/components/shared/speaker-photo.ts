@@ -1,6 +1,6 @@
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 /** The pixel size of each `size`, which also sets the image's `width` and `height`. */
 export const SPEAKER_PHOTO_SIZES = { xs: 28, s: 72, m: 120, l: 160 } as const;
@@ -13,7 +13,7 @@ export type SpeakerPhotoSize = keyof typeof SPEAKER_PHOTO_SIZES;
  * card, and `--hb-speaker-photo-background` the color behind it while it loads.
  */
 @customElement('speaker-photo')
-export class SpeakerPhoto extends ThemedElement {
+export class SpeakerPhoto extends ThemedComponent {
   static override styles = css`
     :host {
       --size: ${SPEAKER_PHOTO_SIZES.m}px;

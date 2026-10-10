@@ -1,6 +1,6 @@
 import { css, html, isServer, type PropertyValues, type SVGTemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import cloudOff from './icons/cloud-off';
 import cloudUpload from './icons/cloud-upload';
 
@@ -66,7 +66,7 @@ const loaded = new Map<string, SVGTemplateResult>([
 ]);
 
 @customElement('hoverboard-icon')
-export class HoverboardIcon extends ThemedElement {
+export class HoverboardIcon extends ThemedComponent {
   static override styles = css`
     :host {
       display: inline-flex;

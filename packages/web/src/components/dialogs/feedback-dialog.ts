@@ -8,10 +8,10 @@ import type { Session } from '../../models/session';
 import { closeDialog, type DialogState, DIALOG, selectIsDialogOpen } from '../../store/dialogs';
 import './feedback-block';
 import '../ui/hb-dialog';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 @customElement('feedback-dialog')
-export class FeedbackDialog extends ThemedElement {
+export class FeedbackDialog extends ThemedComponent {
   @fromStore((state) => selectIsDialogOpen(state, DIALOG.FEEDBACK))
   private accessor open!: boolean;
   @state()

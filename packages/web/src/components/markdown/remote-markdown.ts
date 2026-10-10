@@ -4,12 +4,12 @@ import { html, type PropertyValues, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import './toc-markdown';
 import { fetchText } from '../../utils/fetch-text';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 type State = RemoteData<Error, string>;
 
 @customElement('remote-markdown')
-export class RemoteMarkDown extends ThemedElement {
+export class RemoteMarkDown extends ThemedComponent {
   @property()
   accessor path: string = '';
 

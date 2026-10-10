@@ -5,13 +5,13 @@ import type { Session } from '../../models/session';
 import { url } from '../../config/site';
 import { sessionPath } from '../../utils/navigation';
 import { downloadIcs, googleCalendarUrl, sessionToCalendarEvent } from '../../utils/calendar';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-menu';
 import './hoverboard-icon';
 
 @customElement('add-to-calendar')
-export class AddToCalendar extends ThemedElement {
+export class AddToCalendar extends ThemedComponent {
   static override styles = css`
     :host {
       display: inline-block;

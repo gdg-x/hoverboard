@@ -9,13 +9,13 @@ import { openVideoDialog } from '../../store/ui';
 import { type VideosState, selectVideos } from '../../store/videos';
 import { band } from '../../styles/band';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-icon-button';
 
 /** A rail of videos that scrolls sideways. Each plays in the video dialog. */
 @customElement('featured-videos')
-export class FeaturedVideos extends ThemedElement {
+export class FeaturedVideos extends ThemedComponent {
   static override styles = [
     band,
     css`

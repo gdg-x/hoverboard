@@ -7,7 +7,7 @@ import '../components/hero/hero-block';
 import { heroText } from '../components/hero/hero-block';
 import { PAGE_TONES } from '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../components/schedule/session-element';
+import '../components/schedule/session-card';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-talks';
 import '../components/shared/speaker-photo';
@@ -25,14 +25,14 @@ import { updateImageMetadata } from '../utils/metadata';
 import { photoTransitionName, tagChipStyle } from '../utils/styles';
 import { profile } from '../styles/profile';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /**
  * A speaker: their photo, which moves here from their card, name, details, badges, social links
  * and bio, then their sessions and, with `previousSpeakers` on, their talks in earlier years.
  */
 @customElement('speaker-page')
-export class SpeakerPage extends ThemedElement {
+export class SpeakerPage extends ThemedComponent {
   static override styles = [
     heroText,
     profile,
@@ -184,7 +184,7 @@ export class SpeakerPage extends ThemedElement {
                   ${sessions.map(
                     (session) =>
                       html`<li>
-                        <session-element .session="${session}"></session-element>
+                        <session-card .session="${session}"></session-card>
                       </li>`,
                   )}
                 </ul>

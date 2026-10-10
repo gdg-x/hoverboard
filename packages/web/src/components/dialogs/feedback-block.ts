@@ -20,10 +20,10 @@ import { type StarRatingChangeDetail } from '../shared/star-rating';
 import '../ui/hb-button';
 import '../ui/hb-text-field';
 import type { HbTextField } from '../ui/hb-text-field';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 @customElement('feedback-block')
-export class FeedbackBlock extends ThemedElement {
+export class FeedbackBlock extends ThemedComponent {
   static override styles = [
     illustrationStyles,
     css`

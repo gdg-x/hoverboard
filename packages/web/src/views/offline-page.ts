@@ -6,12 +6,12 @@ import '../components/ui/hb-button';
 import { illustration, illustrationStyles } from '../illustrations/illustration';
 import offline from '../illustrations/offline.svg?raw';
 import { pageInner } from '../styles/page';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 
 /** The service worker shows this page when another page is neither online nor cached. */
 @customElement('offline-page')
-export class OfflinePage extends ThemedElement {
+export class OfflinePage extends ThemedComponent {
   static override styles = [
     pageInner,
     illustrationStyles,

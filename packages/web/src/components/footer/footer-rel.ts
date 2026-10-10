@@ -3,11 +3,11 @@ import { customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { footerRelBlock } from '../../config/site';
 import { safeUrl } from '../../utils/safe-url';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 /** The link columns from `footerRelBlock`, such as past editions. */
 @customElement('footer-rel')
-export class FooterRel extends ThemedElement {
+export class FooterRel extends ThemedComponent {
   static override styles = css`
     :host {
       display: grid;

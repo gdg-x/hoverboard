@@ -12,12 +12,12 @@ import { queueSnackbar } from '../../store/snackbars';
 import { band } from '../../styles/band';
 import { safeUrl } from '../../utils/safe-url';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 
 /** Partner logos by group, each group under its own heading. */
 @customElement('partners-block')
-export class PartnersBlock extends ThemedElement {
+export class PartnersBlock extends ThemedComponent {
   static override styles = [
     band,
     css`

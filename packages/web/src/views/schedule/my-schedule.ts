@@ -7,13 +7,13 @@ import { getScheduleDay } from '../../utils/dates';
 import '../../components/shared/auth-required';
 import './schedule-day';
 import { fromStore } from '../../controllers/from-store';
-import { ThemedElement } from '../../components/themed-element';
+import { ThemedComponent } from '../../components/themed-component';
 import { illustration, illustrationStyles } from '../../illustrations/illustration';
 import emptySchedule from '../../illustrations/empty-schedule.svg?raw';
 
 /** The signed-in visitor's bookmarked sessions, day by day. */
 @customElement('my-schedule')
-export class MySchedule extends ThemedElement {
+export class MySchedule extends ThemedComponent {
   static override styles = [
     illustrationStyles,
     css`

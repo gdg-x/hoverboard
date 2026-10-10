@@ -6,11 +6,11 @@ import '../ui/hb-card';
 import type { Post } from '../../models/post';
 import { postPath } from '../../utils/navigation';
 import { getDate } from '../../utils/dates';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 /** Blog posts as a grid of cards. With `featured`, the first card is twice as wide. */
 @customElement('posts-list')
-export class PostsList extends ThemedElement {
+export class PostsList extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;

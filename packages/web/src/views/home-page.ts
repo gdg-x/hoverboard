@@ -5,7 +5,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import '../components/home/about-block';
 import '../components/home/about-organizer-block';
 import '../components/home/home-hero';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
@@ -39,7 +39,7 @@ const lazyBlocks = {
 type LazyBlock = keyof typeof lazyBlocks;
 
 @customElement('home-page')
-export class HomePage extends ThemedElement {
+export class HomePage extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;

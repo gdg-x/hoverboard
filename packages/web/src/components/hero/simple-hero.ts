@@ -2,7 +2,7 @@ import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { heroDescriptions } from '../../config/site';
 import { type Page, pageText } from '../../utils/page-text';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import './hero-block';
 import { type HeroTone, heroText } from './hero-block';
 
@@ -20,7 +20,7 @@ export const PAGE_TONES: Readonly<Record<Page, HeroTone>> = {
 };
 
 @customElement('simple-hero')
-export class SimpleHero extends ThemedElement {
+export class SimpleHero extends ThemedComponent {
   static override styles = heroText;
 
   @property()

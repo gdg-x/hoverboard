@@ -11,9 +11,9 @@ import { setUserFeaturedSessions } from '../../store/featured-sessions';
 import { queueComplexSnackbar } from '../../store/snackbars';
 import { acceptingFeedback } from '../../utils/feedback';
 import { confetti } from '../../utils/confetti';
-import { formatDuration, type SessionElement } from './session-element';
+import { formatDuration, type SessionCard } from './session-card';
 import type { SessionChips } from './session-chips';
-import './session-element';
+import './session-card';
 
 vi.mock('../../store/dialogs', async (importOriginal) => ({
   __esModule: true,
@@ -49,8 +49,8 @@ const session = {
   speakers: [{ name: 'Ada', company: 'Example', country: 'UK', photoUrl: '/ada.jpg' }],
 } as never as BuiltSession;
 
-const render = async (props: Partial<SessionElement> = {}) => {
-  const result = await fixture<SessionElement>(html`<session-element></session-element>`);
+const render = async (props: Partial<SessionCard> = {}) => {
+  const result = await fixture<SessionCard>(html`<session-card></session-card>`);
   Object.assign(result.element, { session, ...props });
   await result.element.updateComplete;
   // `acceptingFeedback` is set after the first render.
@@ -58,7 +58,7 @@ const render = async (props: Partial<SessionElement> = {}) => {
   return { ...result, view: within(result.shadowRootForWithin) };
 };
 
-describe('session-element', () => {
+describe('session-card', () => {
   beforeEach(() => {
     mockAcceptingFeedback.mockReturnValue(false);
     mockQueueComplexSnackbar.mockReturnValue({ type: 'queueComplexSnackbar' } as never);

@@ -5,10 +5,10 @@ import { PageMetadataController } from '../controllers/page-metadata-controller'
 import '../components/hero/simple-hero';
 import '../components/markdown/remote-markdown';
 import { pageInner } from '../styles/page';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 @customElement('faq-page')
-export class FaqPage extends ThemedElement {
+export class FaqPage extends ThemedComponent {
   static override styles = pageInner;
 
   private readonly metadata = new PageMetadataController(this, 'faq');

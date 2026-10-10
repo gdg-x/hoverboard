@@ -11,11 +11,11 @@ import { initialTeamsMembersState } from '../store/teams-members/state';
 import { aboutOrganizerBlock, team } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** The team: the organizers' photo and story, then each subteam and its members. */
 @customElement('team-page')
-export class TeamPage extends ThemedElement {
+export class TeamPage extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;

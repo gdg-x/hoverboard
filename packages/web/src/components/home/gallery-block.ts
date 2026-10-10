@@ -8,12 +8,12 @@ import type { Photo } from '../../models/photo';
 import { type GalleryState, selectGallery } from '../../store/gallery';
 import { band } from '../../styles/band';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 
 /** Up to seven photos in a bento grid, and a link to the full gallery. */
 @customElement('gallery-block')
-export class GalleryBlock extends ThemedElement {
+export class GalleryBlock extends ThemedComponent {
   static override styles = [
     band,
     css`

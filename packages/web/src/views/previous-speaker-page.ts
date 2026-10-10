@@ -24,11 +24,11 @@ import { updateImageMetadata } from '../utils/metadata';
 import { photoTransitionName } from '../utils/styles';
 import { profile } from '../styles/profile';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** A speaker from earlier years: their photo, details, social links, bio and talks. */
 @customElement('previous-speaker-page')
-export class PreviousSpeakerPage extends ThemedElement {
+export class PreviousSpeakerPage extends ThemedComponent {
   static override styles = [
     heroText,
     profile,

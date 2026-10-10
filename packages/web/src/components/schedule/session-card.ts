@@ -23,7 +23,7 @@ import '../shared/speaker-photo';
 import '../ui/hb-icon-button';
 import './session-chips';
 import { fromStore } from '../../controllers/from-store';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 /** "1 hr 30 min", in the page locale. */
 export const formatDuration = ({ hh, mm }: { hh: number; mm: number }) =>
@@ -46,8 +46,8 @@ export const formatDuration = ({ hh, mm }: { hh: number; mm: number }) =>
  * the session page, speakers, and the track and duration. The bookmark button sits above
  * the link, and turns into a feedback button while the session takes feedback.
  */
-@customElement('session-element')
-export class SessionElement extends ThemedElement {
+@customElement('session-card')
+export class SessionCard extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;
@@ -291,6 +291,6 @@ export class SessionElement extends ThemedElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'session-element': SessionElement;
+    'session-card': SessionCard;
   }
 }

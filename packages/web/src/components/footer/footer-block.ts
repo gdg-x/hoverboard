@@ -3,7 +3,7 @@ import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { title } from '../../config/site';
 import { scrollToTop } from '../../utils/scrolling';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import './color-scheme-toggle';
 import './footer-nav';
 import './footer-rel';
@@ -17,7 +17,7 @@ const HOVERBOARD_URL = 'https://github.com/gdg-x/hoverboard';
 
 /** A full-width band with the event name, links, settings and the organizer. */
 @customElement('footer-block')
-export class FooterBlock extends ThemedElement {
+export class FooterBlock extends ThemedComponent {
   static override styles = css`
     :host {
       margin-block-start: var(--hb-space-8);

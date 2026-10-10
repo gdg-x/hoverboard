@@ -7,7 +7,7 @@ import { availableOnlineMessage, selectOnline } from '../../store/sync';
 import { band } from '../../styles/band';
 import { currentColorScheme } from '../../utils/color-scheme';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 
 let mapsScript: Promise<void> | undefined;
@@ -57,7 +57,7 @@ export const directionLinks = ({
  * pages do not load Google Maps up front.
  */
 @customElement('map-block')
-export class MapBlock extends ThemedElement {
+export class MapBlock extends ThemedComponent {
   static override styles = [
     band,
     css`

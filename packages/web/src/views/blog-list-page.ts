@@ -9,11 +9,11 @@ import { type BlogState, selectBlogPosts } from '../store/blog';
 import { pageInner } from '../styles/page';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** Every blog post as a card, newest first, with the first one larger. */
 @customElement('blog-list-page')
-export class BlogListPage extends ThemedElement {
+export class BlogListPage extends ThemedComponent {
   static override styles = pageInner;
 
   private readonly metadata = new PageMetadataController(this, 'blog');

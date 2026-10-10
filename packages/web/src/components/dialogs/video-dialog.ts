@@ -6,10 +6,10 @@ import { closeVideoDialog, initialUiState } from '../../store/ui';
 import '../shared/hoverboard-icon';
 import '../ui/hb-dialog';
 import { fromStore } from '../../controllers/from-store';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 @customElement('video-dialog')
-export class VideoDialog extends ThemedElement {
+export class VideoDialog extends ThemedComponent {
   static override styles = css`
     hb-dialog {
       --hb-dialog-width: 960px;

@@ -2,14 +2,14 @@ import { html, nothing } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { StoreController } from '../../controllers/store-controller';
 import { DIALOG, selectIsDialogOpen } from '../../store/dialogs';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 type LazyElement =
   'feedback-dialog' | 'signin-dialog' | 'subscribe-dialog' | 'video-dialog' | 'snack-bar';
 
 /** The dialogs and the snackbar. Each loads the first time the store asks for it. */
 @customElement('app-overlays')
-export class AppOverlays extends ThemedElement {
+export class AppOverlays extends ThemedComponent {
   private readonly lazyElements: Record<LazyElement, () => Promise<unknown>> = {
     'feedback-dialog': () => import('../dialogs/feedback-dialog'),
     'signin-dialog': () => import('../dialogs/signin-dialog'),

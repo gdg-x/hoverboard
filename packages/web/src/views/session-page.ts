@@ -13,7 +13,7 @@ import '../components/markdown/short-markdown';
 import '../components/ui/hb-button';
 import '../components/ui/hb-progress';
 import { PAGE_TONES } from '../components/hero/simple-hero';
-import { formatDuration } from '../components/schedule/session-element';
+import { formatDuration } from '../components/schedule/session-card';
 import '../components/schedule/session-chips';
 import type { BuiltSession } from '../schedule/build-schedule';
 import { goto } from '../utils/navigation';
@@ -35,7 +35,7 @@ import { getScheduleDay } from '../utils/dates';
 import { confetti } from '../utils/confetti';
 import { updateImageMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** The feedback block, which the page loads without waiting. Tests wait for it. */
 export const feedbackBlock = __HB_FEATURES__.feedback
@@ -47,7 +47,7 @@ export const feedbackBlock = __HB_FEATURES__.feedback
  * share, the description, its speakers and, once it started, a place to leave feedback.
  */
 @customElement('session-page')
-export class SessionPage extends ThemedElement {
+export class SessionPage extends ThemedComponent {
   static override styles = [
     heroText,
     css`

@@ -4,7 +4,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import type { Speaker } from '../../models/speaker';
 import { speakerPath } from '../../utils/navigation';
 import { photoTransitionName, tagColor } from '../../utils/styles';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-card';
 import './hoverboard-icon';
 import './speaker-photo';
@@ -23,7 +23,7 @@ export type CardSpeaker = Pick<Speaker, 'id' | 'name' | 'photoUrl' | 'company' |
  * country. In a container narrower than 480px, such as a one-column list, it is a compact row.
  */
 @customElement('speaker-card')
-export class SpeakerCard extends ThemedElement {
+export class SpeakerCard extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;

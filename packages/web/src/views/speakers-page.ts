@@ -18,7 +18,7 @@ import { type SpeakersState, selectSpeakersState } from '../store/schedule';
 import { clearFilters } from '../utils/filters';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 import { illustration, illustrationStyles } from '../illustrations/illustration';
 import noResults from '../illustrations/no-results.svg?raw';
 
@@ -27,7 +27,7 @@ const SPEAKER_FILTER_GROUPS = [FilterGroupKey.tags];
 
 /** Every speaker as a card, with filters by the tags of their sessions. */
 @customElement('speakers-page')
-export class SpeakersPage extends ThemedElement {
+export class SpeakersPage extends ThemedComponent {
   static override styles = [
     illustrationStyles,
     css`

@@ -9,13 +9,13 @@ import { type TicketsState, selectTickets } from '../../store/tickets';
 import { band } from '../../styles/band';
 import { getLocale } from '../../utils/localization';
 import '../shared/content-loader';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-sticker';
 
 /** Ticket-shaped cards with the price, a status sticker and a link to buy. */
 @customElement('tickets-block')
-export class TicketsBlock extends ThemedElement {
+export class TicketsBlock extends ThemedComponent {
   static override styles = [
     band,
     css`

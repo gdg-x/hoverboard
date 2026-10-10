@@ -19,12 +19,12 @@ import '../ui/hb-dialog';
 import type { HbDialog } from '../ui/hb-dialog';
 import '../ui/hb-text-field';
 import type { HbTextField } from '../ui/hb-text-field';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 // Used for adding documents to both `subscribers` and `potentialPartners` collections
 
 @customElement('subscribe-dialog')
-export class SubscribeDialog extends ThemedElement {
+export class SubscribeDialog extends ThemedComponent {
   static override styles = css`
     .fields {
       display: grid;

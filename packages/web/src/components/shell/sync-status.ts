@@ -4,14 +4,14 @@ import { customElement } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
 import { selectOnline, selectPendingCount, syncLabel } from '../../store/sync';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 /**
  * Says when the site is offline, or syncing changes made offline. Opening it explains what works
  * offline. Nothing shows on the server or in the first render, which assume online.
  */
 @customElement('sync-status')
-export class SyncStatus extends ThemedElement {
+export class SyncStatus extends ThemedComponent {
   static override styles = css`
     :host {
       position: relative;

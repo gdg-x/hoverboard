@@ -14,10 +14,10 @@ import './hoverboard-icon';
 import './speaker-photo';
 import '../ui/hb-button';
 import { fromStore } from '../../controllers/from-store';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 @customElement('previous-speakers-block')
-export class PreviousSpeakersBlock extends ThemedElement {
+export class PreviousSpeakersBlock extends ThemedComponent {
   static override styles = [
     band,
     css`

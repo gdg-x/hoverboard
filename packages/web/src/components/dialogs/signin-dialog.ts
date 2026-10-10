@@ -28,7 +28,7 @@ import '../ui/hb-button';
 import '../ui/hb-dialog';
 import '../ui/hb-text-field';
 import type { HbTextField } from '../ui/hb-text-field';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 const signInWith = (provider: string) =>
   msg(str`Sign in with ${provider}`, { id: 'dialogs.signin.sign-in-with' });
@@ -36,7 +36,7 @@ const generalError = () =>
   msg('An error has occurred. Please, try again later.', { id: 'common.general-error' });
 
 @customElement('signin-dialog')
-export class SigninDialog extends ThemedElement {
+export class SigninDialog extends ThemedComponent {
   static override styles = [
     illustrationStyles,
     css`

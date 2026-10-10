@@ -25,11 +25,11 @@ import { getLocale } from '../../utils/localization';
 import { generateClassName } from '../../utils/styles';
 import { wallClock, zonedTime } from '../../utils/time-zone';
 import '../../components/shared/hoverboard-icon';
-import '../../components/schedule/session-element';
+import '../../components/schedule/session-card';
 import '../../components/ui/hb-button';
 import '../../components/ui/hb-icon-button';
 import { fromStore } from '../../controllers/from-store';
-import { ThemedElement } from '../../components/themed-element';
+import { ThemedComponent } from '../../components/themed-component';
 import { illustration, illustrationStyles } from '../../illustrations/illustration';
 import noResults from '../../illustrations/no-results.svg?raw';
 
@@ -89,7 +89,7 @@ export const narrowGridArea = (gridArea: string, columns: number[]): string | un
  * sessions are one list in time order. During the day, a line marks the current time.
  */
 @customElement('schedule-day')
-export class ScheduleDay extends ThemedElement {
+export class ScheduleDay extends ThemedComponent {
   static override styles = [
     illustrationStyles,
     css`
@@ -189,7 +189,7 @@ export class ScheduleDay extends ThemedElement {
         scroll-snap-align: start;
       }
 
-      .block session-element {
+      .block session-card {
         flex: 1;
       }
 
@@ -482,7 +482,7 @@ export class ScheduleDay extends ThemedElement {
                     ${repeat(
                       sessions,
                       (session) => session.id,
-                      (session) => html`<session-element .session="${session}"></session-element>`,
+                      (session) => html`<session-card .session="${session}"></session-card>`,
                     )}
                   </div>
                 `,

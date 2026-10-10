@@ -6,12 +6,12 @@ import { aboutOrganizerBlock } from '../../config/site';
 import { band } from '../../styles/band';
 import { renderMarkdown } from '../../utils/markdown';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 
 /** The organizers' photo in a frame, and a few short texts about them. */
 @customElement('about-organizer-block')
-export class AboutOrganizerBlock extends ThemedElement {
+export class AboutOrganizerBlock extends ThemedComponent {
   static override styles = [
     band,
     css`

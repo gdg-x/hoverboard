@@ -5,7 +5,7 @@ import { fromStore } from '../../controllers/from-store';
 import { type Snackbar, TIMEOUT } from '../../models/snackbar';
 import { store } from '../../store';
 import { removeSnackbar } from '../../store/snackbars';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-icon-button';
 import '../ui/hb-toast';
@@ -18,7 +18,7 @@ const closeIcon = svg`
 `;
 
 @customElement('snack-bar')
-export class SnackBar extends ThemedElement {
+export class SnackBar extends ThemedComponent {
   @fromStore((state) => state.snackbars[0])
   private accessor state!: Snackbar | undefined;
 

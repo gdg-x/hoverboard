@@ -5,7 +5,7 @@ import { aboutBlock } from '../../config/site';
 import { openVideoDialog } from '../../store/ui';
 import { band } from '../../styles/band';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 
 interface Statistic {
@@ -16,7 +16,7 @@ interface Statistic {
 
 /** The event in a few words, and its numbers in a bento grid. */
 @customElement('about-block')
-export class AboutBlock extends ThemedElement {
+export class AboutBlock extends ThemedComponent {
   static override styles = [
     band,
     css`

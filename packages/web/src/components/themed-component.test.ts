@@ -3,10 +3,10 @@ import { describe, expect, it, vi } from 'vitest';
 import { customElement } from 'lit/decorators.js';
 import { html, css } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { ThemedElement } from './themed-element';
+import { ThemedComponent } from './themed-component';
 
-@customElement('themed-element-test-subject')
-class ThemedElementTestSubject extends ThemedElement {
+@customElement('themed-component-test-subject')
+class ThemedComponentTestSubject extends ThemedComponent {
   static override styles = css`
     :host {
       color: rebeccapurple;
@@ -20,14 +20,14 @@ class ThemedElementTestSubject extends ThemedElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'themed-element-test-subject': ThemedElementTestSubject;
+    'themed-component-test-subject': ThemedComponentTestSubject;
   }
 }
 
-describe('themed-element', () => {
+describe('themed-component', () => {
   it('prepends the shared theme, block host and reduced motion styles to the subclass styles', async () => {
-    await fixture(html`<themed-element-test-subject></themed-element-test-subject>`);
-    const { elementStyles } = ThemedElementTestSubject as unknown as { elementStyles: unknown[] };
+    await fixture(html`<themed-component-test-subject></themed-component-test-subject>`);
+    const { elementStyles } = ThemedComponentTestSubject as unknown as { elementStyles: unknown[] };
 
     expect(elementStyles).toHaveLength(4);
     expect(String(elementStyles[0])).toContain('box-sizing: border-box');
@@ -38,15 +38,15 @@ describe('themed-element', () => {
 
   it('is usable as a base class for rendering subclass content', async () => {
     const { shadowRoot } = await fixture(
-      html`<themed-element-test-subject></themed-element-test-subject>`,
+      html`<themed-component-test-subject></themed-component-test-subject>`,
     );
 
     expect(shadowRoot.textContent).toContain('content');
   });
 
   it('re-renders when a locale finishes loading', async () => {
-    const { element } = await fixture<ThemedElementTestSubject>(
-      html`<themed-element-test-subject></themed-element-test-subject>`,
+    const { element } = await fixture<ThemedComponentTestSubject>(
+      html`<themed-component-test-subject></themed-component-test-subject>`,
     );
     const requestUpdate = vi.spyOn(element, 'requestUpdate');
 
@@ -61,7 +61,7 @@ describe('themed-element', () => {
     // The hb-* primitives only read tokens, so they skip the shared styles that the server would
     // otherwise inline into every button's shadow root.
     const sources = import.meta.glob<string>(
-      ['../**/*.ts', '!../**/*.test.ts', '!./themed-element.ts', '!./ui/**'],
+      ['../**/*.ts', '!../**/*.test.ts', '!./themed-component.ts', '!./ui/**'],
       { query: '?raw', import: 'default', eager: true },
     );
     const offenders = Object.keys(sources).filter((path) =>

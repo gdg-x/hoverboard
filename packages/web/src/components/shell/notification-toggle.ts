@@ -32,14 +32,14 @@ import '../ui/hb-icon-button';
 import '../ui/hb-switch';
 import type { HbSwitch } from '../ui/hb-switch';
 import { fromStore } from '../../controllers/from-store';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 const BLOCKED_HELP = 'https://support.google.com/chrome/answer/3220216';
 const UNSUPPORTED_HELP =
   'https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#browser_compatibility';
 
 @customElement('notification-toggle')
-export class NotificationToggle extends ThemedElement {
+export class NotificationToggle extends ThemedComponent {
   static override styles = css`
     :host {
       position: relative;

@@ -11,7 +11,7 @@ const host = css`
   }
 `;
 
-export class ThemedElement extends LitElement {
+export class ThemedComponent extends LitElement {
   constructor() {
     super();
     updateWhenLocaleChanges(this);

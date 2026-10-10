@@ -9,13 +9,13 @@ import { band } from '../../styles/band';
 import { getDate } from '../../utils/dates';
 import { postPath } from '../../utils/navigation';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-card';
 
 /** The three newest blog posts as cards. */
 @customElement('latest-posts-block')
-export class LatestPostsBlock extends ThemedElement {
+export class LatestPostsBlock extends ThemedComponent {
   static override styles = [
     band,
     css`

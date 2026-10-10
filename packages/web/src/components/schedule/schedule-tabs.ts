@@ -7,11 +7,11 @@ import { getScheduleDay } from '../../utils/dates';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { navigationLabel } from '../shell/navigation-label';
 import { fromStore } from '../../controllers/from-store';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 /** The schedule's days and My schedule as one row of links, so each day keeps its own URL. */
 @customElement('schedule-tabs')
-export class ScheduleTabs extends ThemedElement {
+export class ScheduleTabs extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;

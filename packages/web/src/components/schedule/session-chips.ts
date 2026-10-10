@@ -5,11 +5,11 @@ import { styleMap } from 'lit/directives/style-map.js';
 import type { BuiltSession } from '../../schedule/build-schedule';
 import { tagChipStyle } from '../../utils/styles';
 import '../ui/hb-chip';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 /** A session's chips: plain details, such as its day and track, then whether it is sponsored, then its tags. */
 @customElement('session-chips')
-export class SessionChips extends ThemedElement {
+export class SessionChips extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;
