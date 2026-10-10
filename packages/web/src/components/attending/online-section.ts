@@ -1,16 +1,19 @@
 import { msg, str } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { attendance, stream, timeZone } from '../../config/site';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { attendance, attendingPage, stream, timeZone } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import { loadLocalTime, selectLocalTime } from '../../store/ui';
+import { renderMarkdown } from '../../utils/markdown';
 import '../shared/hoverboard-icon';
 import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 
 /**
- * How to join an online or hybrid event: the link to watch it, and which time zone the site's times
- * are in. The page puts its heading in the `heading` slot. In person, it renders nothing.
+ * How to join an online or hybrid event: the link to watch it, the organizers' text, and which time
+ * zone the site's times are in. The page puts its heading in the `heading` slot. In person, or
+ * without a stream or text, it renders nothing.
  */
 @customElement('online-section')
 export class OnlineSection extends ThemedComponent {
@@ -21,6 +24,19 @@ export class OnlineSection extends ThemedComponent {
 
     .watch {
       margin-block-start: var(--hb-space-5);
+    }
+
+    .text {
+      max-inline-size: var(--hb-prose-max);
+      margin-block-start: var(--hb-space-4);
+    }
+
+    .text > :first-child {
+      margin-block-start: 0;
+    }
+
+    .text > :last-child {
+      margin-block-end: 0;
     }
 
     .time-zone {
@@ -46,13 +62,19 @@ export class OnlineSection extends ThemedComponent {
   }
 
   override render() {
-    if (this.attendance === 'inPerson' || !stream) return nothing;
+    const text = attendingPage?.online;
+    if (this.attendance === 'inPerson' || !(stream || text)) return nothing;
     return html`
       <slot name="heading"></slot>
-      <hb-button class="watch" href="${stream}" target="_blank">
-        <hoverboard-icon slot="icon" name="play"></hoverboard-icon>
-        ${msg('Watch live', { id: 'pages.session.watch-live' })}
-      </hb-button>
+      ${
+        stream
+          ? html`<hb-button class="watch" href="${stream}" target="_blank">
+              <hoverboard-icon slot="icon" name="play"></hoverboard-icon>
+              ${msg('Watch live', { id: 'pages.session.watch-live' })}
+            </hb-button>`
+          : nothing
+      }
+      ${text ? html`<div class="text">${unsafeHTML(renderMarkdown(text))}</div>` : nothing}
       ${
         this.hydrated
           ? html`<p class="time-zone">

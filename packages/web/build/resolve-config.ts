@@ -41,7 +41,48 @@ type Site = Omit<SiteJson, 'event'> & {
     location?: Venue;
   };
 };
-type Resources = typeof import('../../config/content/resources.json');
+type Resources = Omit<typeof import('../../config/content/resources.json'), 'attendingPage'> & {
+  attendingPage?: AttendingPage;
+};
+
+interface Image {
+  image: string;
+  alt: string;
+}
+
+/** `attendingPage` in content/resources.json: what only the organizers know. Text is markdown. */
+export interface AttendingPage {
+  description?: string;
+  photo?: Image;
+  floorPlan?: Image;
+  online?: string;
+  gettingThere?: {
+    mode:
+      'train' | 'plane' | 'bus' | 'tram' | 'metro' | 'car' | 'parking' | 'bike' | 'walk' | 'other';
+    title?: string;
+    text: string;
+  }[];
+  /** `day` is `YYYY-MM-DD`, and `open` and `close` are `HH:MM` in `event.timezone`. */
+  doors?: { day: string; open: string; close: string; note?: string }[];
+  accessibility?: string;
+  accommodation?: {
+    text?: string;
+    hotels?: { name: string; address?: string; note?: string; code?: string; url?: string }[];
+  };
+  atVenue?: {
+    topic:
+      | 'wifi'
+      | 'food'
+      | 'cloakroom'
+      | 'firstAid'
+      | 'quietRoom'
+      | 'lostAndFound'
+      | 'childcare'
+      | 'other';
+    title?: string;
+    text: string;
+  }[];
+}
 
 /** Template data. Each file has its own namespace, for example `{{ site.url }}`. */
 export interface SiteConfig {
@@ -124,6 +165,42 @@ const formatErrors = (file: string, errors: ErrorObject[] | null | undefined): s
     });
 
 const isUrl = (value: string) => /^https?:\/\//.test(value);
+
+const imageErrors = (images: [string, string | undefined][], publicDir: string): string[] =>
+  images.flatMap(([path, image]) =>
+    image && !isUrl(image) && !fs.existsSync(join(publicDir, image))
+      ? [`${path}: "${image}" is not in packages/web/public`]
+      : [],
+  );
+
+/** Checks `attendingPage` from `file`, the source content or a translation merged over it. */
+const attendingErrors = (
+  site: Site,
+  page: AttendingPage | undefined,
+  file: string,
+  paths: ConfigPaths,
+): string[] => {
+  if (!page) return [];
+  const path = `${file}/attendingPage`;
+  const { startDate, endDate } = site.event;
+  return [
+    ...imageErrors(
+      [
+        [`${path}/photo/image`, page.photo?.image],
+        [`${path}/floorPlan/image`, page.floorPlan?.image],
+      ],
+      paths.public,
+    ),
+    ...(page.doors ?? []).flatMap(({ day, open, close }, index) => [
+      ...(day < startDate || day > endDate
+        ? [`${path}/doors/${index}/day: "${day}" is not between event.startDate and event.endDate`]
+        : []),
+      ...(close <= open
+        ? [`${path}/doors/${index}/close: "${close}" is not after open, "${open}"`]
+        : []),
+    ]),
+  ];
+};
 
 const isTimeZone = (timeZone: string) => {
   try {
@@ -228,11 +305,8 @@ const crossFileErrors = (site: Site, resources: Resources, paths: ConfigPaths): 
     ['site.json/heroSettings/home/background/image', site.heroSettings?.home?.background?.image],
     ['content/resources.json/aboutOrganizerBlock/image', resources.aboutOrganizerBlock.image],
   ];
-  for (const [path, image] of images) {
-    if (image && !isUrl(image) && !fs.existsSync(join(paths.public, image))) {
-      errors.push(`${path}: "${image}" is not in packages/web/public`);
-    }
-  }
+  errors.push(...imageErrors(images, paths.public));
+  errors.push(...attendingErrors(site, resources.attendingPage, 'content/resources.json', paths));
   errors.push(...iconErrors(site.icon, paths.public));
   // The page inlines it, so it can be drawn in the theme's colors.
   const illustration = site.heroSettings?.home?.illustration;
@@ -351,6 +425,13 @@ const loadContentTranslations = (
     }
     if (!validateResources(deepMerge(resources, translation))) {
       errors.push(...formatErrors(file, validateResources.errors));
+      continue;
+    }
+    // Only what the translation sets, so the source's errors are not repeated. Arrays replace.
+    const { attendingPage } = translation as { attendingPage?: AttendingPage };
+    const attending = attendingErrors(site, attendingPage, file, paths);
+    if (attending.length) {
+      errors.push(...attending);
       continue;
     }
     const content = { ...translation };

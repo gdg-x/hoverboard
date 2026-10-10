@@ -10,6 +10,8 @@ import './attending-page';
 const config = vi.hoisted(() => ({
   attendance: 'inPerson' as 'inPerson' | 'online' | 'hybrid',
   stream: 'https://stream.example/live' as string | undefined,
+  attendingPage: undefined as
+    { online?: string; photo?: { image: string; alt: string } } | undefined,
 }));
 
 vi.mock('../config/site', async (importOriginal) => {
@@ -18,6 +20,9 @@ vi.mock('../config/site', async (importOriginal) => {
     ...actual,
     get attendance() {
       return config.attendance;
+    },
+    get attendingPage() {
+      return config.attendingPage;
     },
     get location() {
       return config.attendance === 'online' ? undefined : actual.location;
@@ -48,6 +53,7 @@ describe('attending-page', () => {
   beforeEach(() => {
     config.attendance = 'inPerson';
     config.stream = 'https://stream.example/live';
+    config.attendingPage = undefined;
   });
 
   afterEach(() => {
@@ -109,6 +115,23 @@ describe('attending-page', () => {
     const { shadowRoot } = await render();
 
     expect(sectionIds(shadowRoot)).toEqual(['where']);
+  });
+
+  it('shows joining online without a stream when the organizers wrote about it', async () => {
+    config.attendance = 'hybrid';
+    config.stream = undefined;
+    config.attendingPage = { online: 'Join the chat.' };
+    const { shadowRoot } = await render();
+
+    expect(sectionIds(shadowRoot)).toEqual(['where', 'online']);
+  });
+
+  it("passes the venue's photo to the venue section", async () => {
+    const photo = { image: '/images/venue.jpg', alt: 'The venue' };
+    config.attendingPage = { photo };
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector('venue-section')).toHaveProperty('photo', photo);
   });
 
   it('scrolls to the section in the address, which the browser cannot find in the shadow root', async () => {

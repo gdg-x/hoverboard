@@ -113,4 +113,16 @@ describe('venue-section', () => {
     expect(shadowRoot.querySelector('gmp-map')).toHaveAttribute('color-scheme', 'DARK');
     expect(shadowRoot.querySelector('gmp-advanced-marker')).toHaveAttribute('title', location.name);
   });
+
+  it('shows a photo of the venue when the page passes one', async () => {
+    const { element, shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector('.photo')).toBeNull();
+
+    element.photo = { image: '/images/venue.jpg', alt: 'The venue from the street' };
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.media .photo')).toHaveAttribute('src', '/images/venue.jpg');
+    expect(shadowRoot.querySelector('.photo')).toHaveAttribute('alt', 'The venue from the street');
+  });
 });

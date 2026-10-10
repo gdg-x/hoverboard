@@ -7,7 +7,14 @@ import '../components/hero/simple-hero';
 import { ThemedComponent } from '../components/themed-component';
 import '../components/ui/hb-chip';
 import '../components/shared/hoverboard-icon';
-import { attendance, location, siteAttendance, siteLocation, stream } from '../config/site';
+import {
+  attendance,
+  attendingPage,
+  location,
+  siteAttendance,
+  siteLocation,
+  stream,
+} from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { BAND_TONES, bandContent, bandTones } from '../styles/band';
 import { getEventDates } from '../utils/dates';
@@ -119,10 +126,13 @@ export class AttendingPage extends ThemedComponent {
       sections.push({
         id: 'where',
         title: msg('Where it is', { id: 'attending.where' }),
-        render: (heading) => html`<venue-section .venue=${venue}>${heading}</venue-section>`,
+        render: (heading) =>
+          html`<venue-section .venue=${venue} .photo=${attendingPage?.photo}
+            >${heading}</venue-section
+          >`,
       });
     }
-    if (mode !== 'inPerson' && stream) {
+    if (mode !== 'inPerson' && (stream || attendingPage?.online)) {
       sections.push({
         id: 'online',
         title: msg('Joining online', { id: 'attending.online' }),

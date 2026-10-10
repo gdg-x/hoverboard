@@ -103,6 +103,145 @@
         }
       }
     },
+    "attendingPage": {
+      "description": "What only the organizers know for the attending page. The venue, the map and the stream come from site.json. Every field is optional, and a section without content is left out. Text fields are short markdown.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "The page's description for search and link previews. The text under the hero is heroDescriptions.attending.",
+          "type": "string"
+        },
+        "photo": {
+          "description": "A photo of the venue, next to its address.",
+          "$ref": "#/$defs/image"
+        },
+        "floorPlan": {
+          "description": "The venue's floor plan. It opens full size in a new tab.",
+          "$ref": "#/$defs/image"
+        },
+        "online": {
+          "description": "How to take part online, under the link to the stream. Online and hybrid events only.",
+          "type": "string"
+        },
+        "gettingThere": {
+          "description": "Each way to get to the venue, in the order to show them.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["mode", "text"],
+            "if": { "properties": { "mode": { "const": "other" } } },
+            "then": { "required": ["title"] },
+            "properties": {
+              "mode": {
+                "description": "Picks the icon and the heading, such as \"By train\". `other` needs a title.",
+                "enum": [
+                  "train",
+                  "plane",
+                  "bus",
+                  "tram",
+                  "metro",
+                  "car",
+                  "parking",
+                  "bike",
+                  "walk",
+                  "other"
+                ]
+              },
+              "title": {
+                "description": "Replaces the heading, for example \"By tram line 1\".",
+                "type": "string",
+                "minLength": 1
+              },
+              "text": { "type": "string" }
+            }
+          }
+        },
+        "doors": {
+          "description": "When the doors open and close each day, in event.timezone.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["day", "open", "close"],
+            "properties": {
+              "day": {
+                "description": "A day between event.startDate and event.endDate.",
+                "$ref": "#/$defs/date"
+              },
+              "open": { "$ref": "#/$defs/time" },
+              "close": { "$ref": "#/$defs/time" },
+              "note": { "type": "string" }
+            }
+          }
+        },
+        "accessibility": {
+          "description": "Step-free access, toilets, seating, quiet spaces and how to ask for help.",
+          "type": "string"
+        },
+        "accommodation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "text": { "type": "string" },
+            "hotels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["name"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "note": { "type": "string" },
+                  "code": {
+                    "description": "A discount code, which visitors can copy.",
+                    "type": "string"
+                  },
+                  "url": {
+                    "description": "Where to book.",
+                    "$ref": "#/$defs/link"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "atVenue": {
+          "description": "Practical details at the venue, in the order to show them.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["topic", "text"],
+            "if": { "properties": { "topic": { "const": "other" } } },
+            "then": { "required": ["title"] },
+            "properties": {
+              "topic": {
+                "description": "Picks the icon and the heading, such as \"Wi-Fi\". `other` needs a title.",
+                "enum": [
+                  "wifi",
+                  "food",
+                  "cloakroom",
+                  "firstAid",
+                  "quietRoom",
+                  "lostAndFound",
+                  "childcare",
+                  "other"
+                ]
+              },
+              "title": {
+                "description": "Replaces the heading.",
+                "type": "string",
+                "minLength": 1
+              },
+              "text": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
     "subscribeBlock": {
       "type": "object",
       "additionalProperties": false,
@@ -278,6 +417,32 @@
       "description": "An http, https or mailto URL, or a path on the site. Other schemes, such as `javascript:`, could run code when clicked.",
       "type": "string",
       "pattern": "^(?![\\s\\u0000-\\u001f])(?!.*[\\t\\n\\r])(?:https?://|mailto:|(?![A-Za-z][A-Za-z0-9+.-]*:)(?!//))"
+    },
+    "date": {
+      "description": "An ISO date, for example 2027-10-15.",
+      "type": "string",
+      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+    },
+    "time": {
+      "description": "A time of day, HH:MM, for example 08:30.",
+      "type": "string",
+      "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+    },
+    "image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["image", "alt"],
+      "properties": {
+        "image": {
+          "description": "A path in packages/web/public, such as /images/venue.jpg, or a URL.",
+          "$ref": "#/$defs/link"
+        },
+        "alt": {
+          "description": "What the image shows, for people who can't see it.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
     },
     "statistic": {
       "type": "object",

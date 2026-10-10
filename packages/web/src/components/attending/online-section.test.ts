@@ -7,13 +7,19 @@ import { loadLocalTime } from '../../store/ui';
 import type { OnlineSection } from './online-section';
 import './online-section';
 
-const config = vi.hoisted(() => ({ stream: 'https://stream.example/live' as string | undefined }));
+const config = vi.hoisted(() => ({
+  stream: 'https://stream.example/live' as string | undefined,
+  online: undefined as string | undefined,
+}));
 
 vi.mock('../../config/site', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../../config/site')>()),
   timeZone: 'Europe/Kyiv',
   get stream() {
     return config.stream;
+  },
+  get attendingPage() {
+    return { online: config.online };
   },
 }));
 vi.mock('../../store/ui', async (importOriginal) => ({
@@ -34,6 +40,7 @@ const render = async (attendance: 'inPerson' | 'online' | 'hybrid' = 'online') =
 describe('online-section', () => {
   beforeEach(() => {
     config.stream = 'https://stream.example/live';
+    config.online = undefined;
   });
 
   afterEach(() => {
@@ -55,7 +62,7 @@ describe('online-section', () => {
     }
   });
 
-  it('renders nothing in person, or without a stream', async () => {
+  it('renders nothing in person, or without a stream or text', async () => {
     const inPerson = await render('inPerson');
     expect(inPerson.shadowRoot.querySelector('slot, .watch')).toBeNull();
     litRender(nothing, document.body);
@@ -63,6 +70,27 @@ describe('online-section', () => {
     config.stream = undefined;
     const withoutStream = await render('online');
     expect(withoutStream.shadowRoot.querySelector('slot, .watch')).toBeNull();
+  });
+
+  it("shows the organizers' text as markdown, with or without a stream", async () => {
+    config.online = 'Ask questions in the [chat](https://chat.example/).';
+    const withStream = await render('hybrid');
+
+    expect(withStream.shadowRoot.querySelector('.watch')).not.toBeNull();
+    expect(withStream.shadowRoot.querySelector('.text a')).toHaveAttribute(
+      'href',
+      'https://chat.example/',
+    );
+    litRender(nothing, document.body);
+
+    config.stream = undefined;
+    const withoutStream = await render('hybrid');
+
+    expect(withoutStream.shadowRoot.querySelector('slot[name="heading"]')).not.toBeNull();
+    expect(withoutStream.shadowRoot.querySelector('.watch')).toBeNull();
+    expect(withoutStream.shadowRoot.querySelector('.text')).toHaveTextContent(
+      'Ask questions in the chat.',
+    );
   });
 
   it("says which time zone the site's times are in, once in the browser", async () => {

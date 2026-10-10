@@ -222,6 +222,14 @@ export const applySiteDetails = (
   // Other sign-in methods must be turned on in the new project first, so it starts with the default.
   if (newProject) delete next['auth'];
 
+  // Doors on days outside the new dates would fail the build.
+  const attendingPage = resources['attendingPage'] as
+    (Json & { doors?: { day: string }[] }) | undefined;
+  const { doors: oldDoors, ...attendingRest } = attendingPage ?? {};
+  const doors = (oldDoors ?? []).filter(
+    ({ day }) => day >= details.startDate && day <= details.endDate,
+  );
+
   return {
     site: next,
     resources: {
@@ -232,6 +240,9 @@ export const applySiteDetails = (
         ...((resources['heroDescriptions'] ?? {}) as Json),
         home: details.description,
       },
+      ...(attendingPage
+        ? { attendingPage: doors.length ? { ...attendingRest, doors } : attendingRest }
+        : {}),
     },
   };
 };

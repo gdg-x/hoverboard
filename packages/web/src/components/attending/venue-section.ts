@@ -100,6 +100,21 @@ export class VenueSection extends ThemedComponent {
       list-style: none;
     }
 
+    .media {
+      display: grid;
+      align-content: start;
+      gap: var(--hb-space-5);
+    }
+
+    .photo {
+      display: block;
+      inline-size: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      border-radius: var(--hb-radius-l);
+      box-shadow: var(--hb-shadow-card);
+    }
+
     .map {
       display: grid;
       min-block-size: 20rem;
@@ -156,6 +171,10 @@ export class VenueSection extends ThemedComponent {
   @property({ attribute: false })
   accessor venue: typeof location = location;
 
+  /** A photo of the venue, which the attending page passes. */
+  @property({ attribute: false })
+  accessor photo: { image: string; alt: string } | undefined;
+
   @state()
   private accessor mapState: 'idle' | 'loading' | 'shown' | 'failed' = 'idle';
   @fromStore(selectOnline)
@@ -164,7 +183,6 @@ export class VenueSection extends ThemedComponent {
   override render() {
     const venue = this.venue;
     if (!venue) return nothing;
-    const { latitude, longitude } = venue.pointer;
     return html`
       <div class="layout">
         <div>
@@ -189,28 +207,40 @@ export class VenueSection extends ThemedComponent {
           </ul>
         </div>
         ${
-          mapsScriptUrl
-            ? html`<div class="map">
+          this.photo || mapsScriptUrl
+            ? html`<div class="media">
                 ${
-                  this.mapState === 'shown'
-                    ? html`<gmp-map
-                        center="${venue.mapCenter.latitude},${venue.mapCenter.longitude}"
-                        zoom="${venue.pointer.zoom}"
-                        color-scheme="${currentColorScheme() === 'dark' ? 'DARK' : 'LIGHT'}"
-                        disable-default-ui
-                      >
-                        <gmp-advanced-marker
-                          position="${latitude},${longitude}"
-                          title="${venue.name}"
-                        ></gmp-advanced-marker>
-                      </gmp-map>`
-                    : this.renderPlaceholder()
+                  this.photo
+                    ? html`<img class="photo" src="${this.photo.image}" alt="${this.photo.alt}" />`
+                    : nothing
                 }
+                ${mapsScriptUrl ? this.renderMap(venue) : nothing}
               </div>`
             : nothing
         }
       </div>
     `;
+  }
+
+  private renderMap(venue: NonNullable<typeof location>) {
+    const { latitude, longitude } = venue.pointer;
+    return html`<div class="map">
+      ${
+        this.mapState === 'shown'
+          ? html`<gmp-map
+              center="${venue.mapCenter.latitude},${venue.mapCenter.longitude}"
+              zoom="${venue.pointer.zoom}"
+              color-scheme="${currentColorScheme() === 'dark' ? 'DARK' : 'LIGHT'}"
+              disable-default-ui
+            >
+              <gmp-advanced-marker
+                position="${latitude},${longitude}"
+                title="${venue.name}"
+              ></gmp-advanced-marker>
+            </gmp-map>`
+          : this.renderPlaceholder()
+      }
+    </div>`;
   }
 
   private renderPlaceholder() {

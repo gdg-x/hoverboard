@@ -160,6 +160,36 @@ describe('applySiteDetails', () => {
     });
   });
 
+  it("keeps the attending page's content, without doors outside the new dates", () => {
+    const attendingPage = {
+      accessibility: 'Step-free.',
+      doors: [
+        { day: '2017-10-13', open: '08:00', close: '20:00' },
+        { day: '2027-10-16', open: '09:00', close: '18:00' },
+      ],
+    };
+    const apply = (doors: typeof attendingPage.doors) =>
+      applySiteDetails(
+        site,
+        { ...resources, attendingPage: { ...attendingPage, doors } },
+        details,
+        {
+          projectId: 'new-project',
+          newProject: true,
+          features: FEATURES,
+          requires: REQUIRES,
+        },
+      ).resources;
+
+    expect(apply(attendingPage.doors)['attendingPage']).toEqual({
+      accessibility: 'Step-free.',
+      doors: [{ day: '2027-10-16', open: '09:00', close: '18:00' }],
+    });
+    expect(apply(attendingPage.doors.slice(0, 1))['attendingPage']).toEqual({
+      accessibility: 'Step-free.',
+    });
+  });
+
   it("clears the old project's organizer links, social links and URL", () => {
     const { site: next } = apply();
 

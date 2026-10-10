@@ -185,5 +185,68 @@
   ],
   "mapBlock": {
     "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+  },
+  "attendingPage": {
+    "description": "How to get to GDG DevFest Ukraine in Lviv, when the doors open, and what to expect at the venue.",
+    "online": "Ask questions in the chat under the stream. Speakers answer them at the end of their talk.",
+    "gettingThere": [
+      {
+        "mode": "train",
+        "text": "From Lviv railway station, the venue is about 20 minutes away by taxi."
+      },
+      {
+        "mode": "plane",
+        "text": "From Lviv airport, the venue is about 15 minutes away by taxi."
+      },
+      {
+        "mode": "parking",
+        "text": "Parking is free for attendees. Show your ticket at the gate."
+      },
+      {
+        "mode": "other",
+        "title": "By rocket",
+        "text": "Land on the roof. We'll take care of it."
+      }
+    ],
+    "doors": [
+      {
+        "day": "2017-10-13",
+        "open": "08:00",
+        "close": "20:00",
+        "note": "Registration is at the main entrance. Bring your ticket, on your phone or on paper."
+      },
+      {
+        "day": "2017-10-14",
+        "open": "08:30",
+        "close": "19:00"
+      }
+    ],
+    "accessibility": "Every room is step-free, with lifts between floors. Tell us what you need when you register, or ask any volunteer in a DevFest t-shirt.",
+    "accommodation": {
+      "text": "We have a discount at a hotel next to the venue.",
+      "hotels": [
+        {
+          "name": "Hotel Example",
+          "address": "1 Example St, Lviv",
+          "note": "Rooms from 1,200 UAH a night.",
+          "code": "DEVFEST",
+          "url": "https://example.com/book"
+        }
+      ]
+    },
+    "atVenue": [
+      {
+        "topic": "wifi",
+        "text": "Network `DevFest`, password `devfest2017`."
+      },
+      {
+        "topic": "food",
+        "text": "Lunch and coffee are included. Tell us about allergies when you register."
+      },
+      {
+        "topic": "cloakroom",
+        "text": "Free, next to registration."
+      }
+    ]
   }
 }
