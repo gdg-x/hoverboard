@@ -2,7 +2,9 @@ import {
   collection,
   collectionGroup,
   deleteDoc,
+  disableNetwork,
   doc,
+  enableNetwork,
   getDoc,
   getDocs,
   query,
@@ -170,5 +172,38 @@ describe('sessions/{session}/reactions rules', () => {
 
     expect((await getDocs(own)).empty).toBe(true);
     expect((await getDoc(doc(firestore, path('unscheduled', otherUid)))).exists()).toBe(true);
+  });
+
+  describe('offline', () => {
+    const newUid = 'new-uid';
+
+    it('syncs a first reaction made offline after its profile, so the rules see the profile', async () => {
+      const firestore = authedContext(newUid).firestore();
+      await disableNetwork(firestore);
+
+      const profile = setDoc(doc(firestore, `profiles/${newUid}`), {
+        name: 'Katherine Johnson',
+        photoUrl: '',
+        updatedAt: serverTimestamp(),
+      });
+      const first = setDoc(doc(firestore, path('upcoming', newUid)), reaction(['love'], newUid));
+      await enableNetwork(firestore);
+
+      await expect(profile).toAllow();
+      await expect(first).toAllow();
+    });
+
+    it('syncs deleting a profile made offline, reactions first', async () => {
+      const firestore = asOwner();
+      await disableNetwork(firestore);
+
+      const reactionGone = deleteDoc(doc(firestore, path('past')));
+      const profileGone = deleteDoc(doc(firestore, `profiles/${ownerUid}`));
+      await enableNetwork(firestore);
+
+      await expect(reactionGone).toAllow();
+      await expect(profileGone).toAllow();
+      expect((await getDoc(doc(firestore, path('past')))).exists()).toBe(false);
+    });
   });
 });

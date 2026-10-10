@@ -551,6 +551,9 @@
 <trans-unit id="shell.snack-bar.dismiss">
   <source>Dismiss</source>
 </trans-unit>
+<trans-unit id="shell.sync.help-reactions">
+  <source>Saved sessions, feedback, reminders, reactions and your profile are kept on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.</source>
+</trans-unit>
 <trans-unit id="shell.sync.help">
   <source>Saved sessions, feedback and reminders are kept on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.</source>
 </trans-unit>

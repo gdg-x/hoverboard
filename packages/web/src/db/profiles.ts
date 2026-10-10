@@ -80,7 +80,7 @@ export const saveProfile = (
 
 /**
  * Deletes the visitor's reactions in each of `sessionIds`, then their profile. The writes queue in
- * order, so the reactions are gone before the profile (verify the order holds offline).
+ * order, offline too, so the reactions are gone before the profile.
  */
 export const deleteProfile = (
   userId: string,

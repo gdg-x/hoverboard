@@ -85,10 +85,17 @@ export class SyncStatus extends ThemedComponent {
           <span class="visually-hidden">${label}</span>
         </button>
         <p class="help">
-          ${msg(
-            'Saved sessions, feedback and reminders are kept on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.',
-            { id: 'shell.sync.help' },
-          )}
+          ${
+            __HB_FEATURES__.reactions
+              ? msg(
+                  'Saved sessions, feedback, reminders, reactions and your profile are kept on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.',
+                  { id: 'shell.sync.help-reactions' },
+                )
+              : msg(
+                  'Saved sessions, feedback and reminders are kept on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.',
+                  { id: 'shell.sync.help' },
+                )
+          }
         </p>
       </hb-popover>
     `;
