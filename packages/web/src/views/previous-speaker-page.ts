@@ -10,7 +10,7 @@ import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-speakers-block';
 import '../components/shared/previous-talks';
 import '../components/shared/social-links';
-import '../components/shared/speaker-photo';
+import '../components/shared/speaker-profile';
 import '../components/ui/hb-progress';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import { goto } from '../utils/navigation';
@@ -21,7 +21,6 @@ import {
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
 import { updateImageMetadata } from '../utils/metadata';
-import { photoTransitionName } from '../utils/styles';
 import { profile } from '../styles/profile';
 import { fromStore } from '../controllers/from-store';
 import { ThemedComponent } from '../components/themed-component';
@@ -74,8 +73,6 @@ export class PreviousSpeakerPage extends ThemedComponent {
 
   override render() {
     const speaker = this.speaker;
-    const job = [speaker?.title, speaker?.company].filter(Boolean).join(', ');
-    const details = [job, speaker?.country].filter(Boolean).join(' · ');
 
     return html`
       <hero-block tone="${PAGE_TONES.previousSpeakers}">
@@ -83,23 +80,7 @@ export class PreviousSpeakerPage extends ThemedComponent {
           <hoverboard-icon name="arrow-left"></hoverboard-icon>
           ${msg('All previous speakers', { id: 'pages.previous-speaker.all' })}
         </a>
-        <div class="profile">
-          ${
-            speaker
-              ? html`<speaker-photo
-                  class="photo"
-                  size="l"
-                  loading="eager"
-                  src="${speaker.photoUrl}"
-                  style="view-transition-name: ${photoTransitionName('previous-speaker', speaker.id)}"
-                ></speaker-photo>`
-              : nothing
-          }
-          <div>
-            <h1 class="hero-title">${speaker?.name ?? ''}</h1>
-            ${details ? html`<p class="details">${details}</p>` : nothing}
-          </div>
-        </div>
+        <speaker-profile kind="previous-speaker" .speaker="${speaker}"></speaker-profile>
       </hero-block>
 
       <hb-progress ?hidden="${!!speaker}"></hb-progress>

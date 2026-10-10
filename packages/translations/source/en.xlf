@@ -347,6 +347,9 @@
 <trans-unit id="common.view-presentation">
   <source>View presentation</source>
 </trans-unit>
+<trans-unit id="pages.speaker.badges">
+  <source>Badges</source>
+</trans-unit>
 <trans-unit id="shared.star-rating.rate">
   <source>Rate <x id="0" equiv-text="${value}"/> out of <x id="1" equiv-text="${this.maxRating}"/></source>
 </trans-unit>
@@ -697,9 +700,6 @@
 </trans-unit>
 <trans-unit id="pages.speaker.all-speakers">
   <source>All speakers</source>
-</trans-unit>
-<trans-unit id="pages.speaker.badges">
-  <source>Badges</source>
 </trans-unit>
 <trans-unit id="common.sessions">
   <source>Sessions</source>

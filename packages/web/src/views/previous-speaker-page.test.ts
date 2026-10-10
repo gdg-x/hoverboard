@@ -5,6 +5,7 @@ import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import type { SocialLinks } from '../components/shared/social-links';
+import type { SpeakerProfile } from '../components/shared/speaker-profile';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { updateImageMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
@@ -53,12 +54,11 @@ describe('previous-speaker-page', () => {
   });
 
   it('shows the speaker, their talks and other previous speakers', async () => {
-    const { shadowRoot, view } = await render();
+    const { shadowRoot } = await render();
+    const profile = shadowRoot.querySelector<SpeakerProfile>('speaker-profile')!;
 
-    expect(view.getByRole('heading', { level: 1 })).toHaveTextContent('Ada Lovelace');
-    expect(shadowRoot.querySelector('.details')).toHaveTextContent(
-      'Engineer, Example Inc · United States',
-    );
+    expect(profile.speaker).toBe(speaker);
+    expect(profile).toHaveAttribute('kind', 'previous-speaker');
     expect(shadowRoot.querySelector<SocialLinks>('social-links')!.socials).toBe(speaker.socials);
     expect(shadowRoot.querySelector('previous-talks')).toHaveProperty('sessions', speaker.sessions);
     expect(shadowRoot.querySelector('previous-speakers-block')).not.toBeNull();
@@ -66,14 +66,6 @@ describe('previous-speaker-page', () => {
       image: '/ada.jpg',
       imageAlt: 'Ada Lovelace',
     });
-  });
-
-  it('names the photo like the card it came from', async () => {
-    const { shadowRoot } = await render();
-
-    expect(shadowRoot.querySelector<HTMLElement>('.photo')!.style.viewTransitionName).toBe(
-      'previous-speaker-speaker-1',
-    );
   });
 
   it('links back to all previous speakers', async () => {

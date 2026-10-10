@@ -6,6 +6,7 @@ import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import type { SocialLinks } from '../components/shared/social-links';
+import type { SpeakerProfile } from '../components/shared/speaker-profile';
 import type { BuiltSpeaker } from '../schedule/build-schedule';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { selectSpeaker } from '../store/speakers/selectors';
@@ -63,33 +64,16 @@ describe('speaker-page', () => {
     vi.clearAllMocks();
   });
 
-  it("titles the page with the speaker's name and sets the metadata", async () => {
-    const { view } = await render();
+  it("shows the speaker's profile and sets the metadata", async () => {
+    const { shadowRoot } = await render();
+    const profile = shadowRoot.querySelector<SpeakerProfile>('speaker-profile')!;
 
-    expect(view.getByRole('heading', { level: 1 })).toHaveTextContent('Ada Lovelace');
+    expect(profile.speaker).toBe(speaker);
+    expect(profile).toHaveAttribute('kind', 'speaker');
     expect(updateImageMetadata).toHaveBeenCalledWith('Ada Lovelace', 'Speaker bio', {
       image: '/ada.jpg',
       imageAlt: 'Ada Lovelace',
     });
-  });
-
-  it('shows their job, country, pronouns and badges', async () => {
-    const { shadowRoot } = await render();
-
-    expect(shadowRoot.querySelector('.details')).toHaveTextContent(
-      'Engineer, Example Inc · United States · she/her',
-    );
-    const badge = shadowRoot.querySelector('.badges hb-chip')!;
-    expect(badge).toHaveTextContent('Google Developer Expert');
-    expect(badge).toHaveAttribute('href', 'https://gde.example');
-  });
-
-  it('names the photo like the card it came from', async () => {
-    const { shadowRoot } = await render();
-
-    expect(shadowRoot.querySelector<HTMLElement>('.photo')!.style.viewTransitionName).toBe(
-      'speaker-speaker-1',
-    );
   });
 
   it('links back to all speakers and to their social networks', async () => {

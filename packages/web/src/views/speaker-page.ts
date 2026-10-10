@@ -2,7 +2,6 @@ import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { styleMap } from 'lit/directives/style-map.js';
 import '../components/hero/hero-block';
 import { heroText } from '../components/hero/hero-block';
 import { PAGE_TONES } from '../components/hero/simple-hero';
@@ -11,8 +10,7 @@ import '../components/schedule/session-card';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-talks';
 import '../components/shared/social-links';
-import '../components/shared/speaker-photo';
-import '../components/ui/hb-chip';
+import '../components/shared/speaker-profile';
 import '../components/ui/hb-progress';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import type { BuiltSpeaker } from '../schedule/build-schedule';
@@ -22,7 +20,6 @@ import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/schedule';
 import { updateImageMetadata } from '../utils/metadata';
-import { photoTransitionName, tagChipStyle } from '../utils/styles';
 import { profile } from '../styles/profile';
 import { fromStore } from '../controllers/from-store';
 import { ThemedComponent } from '../components/themed-component';
@@ -93,8 +90,6 @@ export class SpeakerPage extends ThemedComponent {
 
   override render() {
     const speaker = this.speaker;
-    const job = [speaker?.title, speaker?.company].filter(Boolean).join(', ');
-    const details = [job, speaker?.country, speaker?.pronouns].filter(Boolean).join(' · ');
 
     return html`
       <hero-block tone="${PAGE_TONES.speakers}">
@@ -102,44 +97,7 @@ export class SpeakerPage extends ThemedComponent {
           <hoverboard-icon name="arrow-left"></hoverboard-icon>
           ${msg('All speakers', { id: 'pages.speaker.all-speakers' })}
         </a>
-        <div class="profile">
-          ${
-            speaker
-              ? html`<speaker-photo
-                  class="photo"
-                  size="l"
-                  loading="eager"
-                  src="${speaker.photoUrl}"
-                  style="view-transition-name: ${photoTransitionName('speaker', speaker.id)}"
-                ></speaker-photo>`
-              : nothing
-          }
-          <div>
-            <h1 class="hero-title">${speaker?.name ?? ''}</h1>
-            ${details ? html`<p class="details">${details}</p>` : nothing}
-            ${
-              speaker?.badges?.length
-                ? html`<ul
-                    class="badges"
-                    aria-label="${msg('Badges', { id: 'pages.speaker.badges' })}"
-                  >
-                    ${speaker.badges.map(
-                      (badge) => html`
-                        <li>
-                          <hb-chip
-                            href="${badge.link}"
-                            style="${styleMap(tagChipStyle(badge.name))}"
-                          >
-                            ${badge.description}
-                          </hb-chip>
-                        </li>
-                      `,
-                    )}
-                  </ul>`
-                : nothing
-            }
-          </div>
-        </div>
+        <speaker-profile kind="speaker" .speaker="${speaker}"></speaker-profile>
       </hero-block>
 
       <hb-progress ?hidden="${!!speaker}"></hb-progress>
