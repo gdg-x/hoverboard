@@ -1,12 +1,10 @@
-import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { styleMap } from 'lit/directives/style-map.js';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
 import type { Speaker } from '../../models/speaker';
-import { photoTransitionName, tagChipStyle } from '../../utils/styles';
+import { photoTransitionName } from '../../utils/styles';
 import { heroText } from '../hero/hero-block';
-import '../ui/hb-chip';
+import './speaker-badges';
 import './speaker-photo';
 import { ThemedComponent } from '../themed-component';
 
@@ -44,12 +42,7 @@ export class SpeakerProfile extends ThemedComponent {
       }
 
       .badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--hb-space-2);
-        margin: var(--hb-space-4) 0 0;
-        padding: 0;
-        list-style: none;
+        margin-block-start: var(--hb-space-4);
       }
     `,
   ];
@@ -82,17 +75,7 @@ export class SpeakerProfile extends ThemedComponent {
         ${details ? html`<p class="details">${details}</p>` : nothing}
         ${
           speaker?.badges?.length
-            ? html`<ul class="badges" aria-label="${msg('Badges', { id: 'pages.speaker.badges' })}">
-                ${speaker.badges.map(
-                  (badge) => html`
-                    <li>
-                      <hb-chip href="${badge.link}" style="${styleMap(tagChipStyle(badge.name))}">
-                        ${badge.description}
-                      </hb-chip>
-                    </li>
-                  `,
-                )}
-              </ul>`
+            ? html`<speaker-badges class="badges" .badges="${speaker.badges}"></speaker-badges>`
             : nothing
         }
       </div>

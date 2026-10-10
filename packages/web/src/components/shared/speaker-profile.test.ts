@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import type { SpeakerBadges } from './speaker-badges';
 import type { ProfileSpeaker, SpeakerProfile } from './speaker-profile';
 import './speaker-profile';
 
@@ -37,12 +38,10 @@ describe('speaker-profile', () => {
     );
   });
 
-  it('links their badges', async () => {
-    const { view } = await render({ speaker });
-    const badge = within(view.getByRole('list', { name: 'Badges' })).getByRole('listitem');
+  it('shows their badges', async () => {
+    const { shadowRoot } = await render({ speaker });
 
-    expect(badge.querySelector('hb-chip')).toHaveTextContent('Google Developer Expert');
-    expect(badge.querySelector('hb-chip')).toHaveAttribute('href', 'https://gde.example');
+    expect(shadowRoot.querySelector<SpeakerBadges>('speaker-badges')!.badges).toBe(speaker.badges);
   });
 
   it('names the photo like the card it came from', async () => {
