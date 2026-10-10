@@ -38,7 +38,7 @@ describe('my-schedule', () => {
     );
   });
 
-  it('shows each day under its own heading, with only bookmarked sessions', async () => {
+  it('shows each day under its own heading, with only saved sessions', async () => {
     const days = [day('2024-01-01', [{ id: 's1', title: 'One' }]), day('2024-01-02')];
     const { shadowRoot } = await render(days);
 
@@ -50,11 +50,11 @@ describe('my-schedule', () => {
     expect(shadowRoot.querySelector('.hint')).toBeNull();
   });
 
-  it('explains how to add sessions when none are bookmarked', async () => {
+  it('explains how to add sessions when none are saved', async () => {
     const { shadowRoot } = await render([day('2024-01-01')]);
 
     expect(shadowRoot.querySelector('.hint')).toHaveTextContent(
-      'Bookmark sessions in the schedule to see them here.',
+      'Save sessions in the schedule to see them here.',
     );
     expect(shadowRoot.querySelector('.empty .illustration')).toHaveAttribute('aria-hidden', 'true');
   });

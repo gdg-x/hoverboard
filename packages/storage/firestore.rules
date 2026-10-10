@@ -88,7 +88,7 @@ service cloud.firestore {
       allow list: if request.auth != null && resource.data.userId == request.auth.uid;
     }
 
-    // Bookmarked sessions: a map of session IDs to booleans.
+    // Saved sessions: a map of session IDs to booleans.
     match /featuredSessions/{userId} {
       allow get, delete: if isOwner(userId);
       allow create, update: if isOwner(userId) && request.resource.data.size() <= 500;

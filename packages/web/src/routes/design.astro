@@ -574,9 +574,9 @@ const speakers = [
               Text
             </button>
             <button
-              aria-label="Bookmark"
+              aria-label="Save"
               aria-pressed="false"
-              class="hb-icon-btn hb-bookmark"
+              class="hb-icon-btn hb-save"
               type="button"
             >
               <Icon name="star" />
@@ -720,11 +720,11 @@ const speakers = [
           radio.addEventListener('change', () => setScheme(radio.value));
         }
 
-        for (const button of document.querySelectorAll('[data-toggle], .hb-bookmark')) {
+        for (const button of document.querySelectorAll('[data-toggle], .hb-save')) {
           button.addEventListener('click', () => {
             const pressed = button.getAttribute('aria-pressed') !== 'true';
             button.setAttribute('aria-pressed', String(pressed));
-            if (pressed && button.classList.contains('hb-bookmark')) {
+            if (pressed && button.classList.contains('hb-save')) {
               button.classList.add('is-bursting');
               setTimeout(() => button.classList.remove('is-bursting'), 600);
             }

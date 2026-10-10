@@ -7,8 +7,8 @@ import { openSigninDialog } from '../../store/dialogs';
 import { setUserFeaturedSessions } from '../../store/featured-sessions';
 import { queueComplexSnackbar } from '../../store/snackbars';
 import { confetti } from '../../utils/confetti';
-import type { BookmarkButton } from './bookmark-button';
-import './bookmark-button';
+import type { SaveButton } from './save-button';
+import './save-button';
 
 vi.mock('../../store/dialogs', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../../store/dialogs')>()),
@@ -27,14 +27,14 @@ vi.mock('../../utils/confetti');
 const session = { id: 'session-1', title: 'Example Session' };
 const signedIn = new Success({ uid: 'user-1' } as User);
 
-const render = async (props: Partial<BookmarkButton> = {}) => {
-  const result = await fixture<BookmarkButton>(html`<bookmark-button></bookmark-button>`);
+const render = async (props: Partial<SaveButton> = {}) => {
+  const result = await fixture<SaveButton>(html`<save-button></save-button>`);
   Object.assign(result.element, { session, ...props });
   await result.element.updateComplete;
   return result;
 };
 
-describe('bookmark-button', () => {
+describe('save-button', () => {
   beforeEach(() => {
     vi.mocked(queueComplexSnackbar).mockReturnValue({ type: 'queueComplexSnackbar' } as never);
   });
@@ -44,34 +44,42 @@ describe('bookmark-button', () => {
     vi.clearAllMocks();
   });
 
-  it('is a pressed icon button for a bookmarked session', async () => {
+  it('is a pressed button with a filled star for a saved session', async () => {
     const { shadowRoot } = await render({ featuredSessions: new Success({ 'session-1': true }) });
     const button = shadowRoot.querySelector('hb-icon-button')!;
 
-    expect(button).toHaveAttribute('label', 'Bookmark Example Session');
+    expect(button).toHaveAttribute('label', 'Save Example Session');
     expect(button.pressed).toBe(true);
-    expect(button.querySelector('hoverboard-icon')).toHaveAttribute('name', 'bookmark-check');
+    expect(button.querySelector('hoverboard-icon')).toHaveAttribute('name', 'star-filled');
   });
 
-  it('says whether the session is bookmarked as a button', async () => {
+  it('has an outlined star for a session that is not saved', async () => {
+    const { shadowRoot } = await render({ featuredSessions: new Success({}) });
+    const button = shadowRoot.querySelector('hb-icon-button')!;
+
+    expect(button.pressed).toBe(false);
+    expect(button.querySelector('hoverboard-icon')).toHaveAttribute('name', 'star');
+  });
+
+  it('says whether the session is saved as a button', async () => {
     const { element, shadowRoot } = await render({
       variant: 'button',
       featuredSessions: new Success({}),
     });
     const button = shadowRoot.querySelector('hb-button')!;
 
-    expect(button).toHaveTextContent('Bookmark');
+    expect(button).toHaveTextContent(/^Save$/);
     expect(button).toHaveAttribute('variant', 'filled');
     expect(button.querySelector('hoverboard-icon')).toHaveAttribute('slot', 'icon');
 
     element.featuredSessions = new Success({ 'session-1': true });
     await element.updateComplete;
 
-    expect(button).toHaveTextContent('Bookmarked');
+    expect(button).toHaveTextContent(/^Saved$/);
     expect(button).toHaveAttribute('variant', 'tonal');
   });
 
-  it('asks to sign in before bookmarking', async () => {
+  it('asks to sign in before saving', async () => {
     const { shadowRoot } = await render();
 
     shadowRoot.querySelector<HTMLElement>('hb-icon-button')!.click();
@@ -84,7 +92,7 @@ describe('bookmark-button', () => {
     expect(openSigninDialog).toHaveBeenCalled();
   });
 
-  it('bookmarks the session with confetti when signed in', async () => {
+  it('saves the session with confetti when signed in', async () => {
     const { shadowRoot } = await render({ user: signedIn, featuredSessions: new Success({}) });
 
     const button = shadowRoot.querySelector<HTMLElement>('hb-icon-button')!;
@@ -94,7 +102,7 @@ describe('bookmark-button', () => {
     expect(confetti).toHaveBeenCalledWith(button);
   });
 
-  it('removes a bookmark without confetti', async () => {
+  it('unsaves a session without confetti', async () => {
     const { shadowRoot } = await render({
       variant: 'button',
       user: signedIn,

@@ -135,7 +135,7 @@ The build fails when:
 
 With `functions` on, every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `sendGeneralNotification` needs `notifications`, and `scheduleNotifications` needs `notifications` and `mySchedule`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
 
-When `feedback` is off, the feedback dialog is still in the build, but nothing opens it. Bookmark buttons show only when `mySchedule` is on.
+When `feedback` is off, the feedback dialog is still in the build, but nothing opens it. Save buttons show only when `mySchedule` is on.
 
 `socialImages` builds a share image for each session and speaker page, which social networks and chat apps show with a link to the page. A session's image has its title, speakers, day, time and track. A speaker's image has their photo, name, company and the event's dates. Both have the logo from `packages/web/public/images/logo.svg`, the venue and the site's address, in the theme's colors and fonts. The build downloads speaker photos for them, and a photo that fails to download shows the speaker's initials, with a warning in the build output. With `socialImages` off, those pages share the first speaker's photo or `image` from `site.json`.
 

@@ -53,9 +53,9 @@ The safe fixes are:
 - Fields Hoverboard stopped reading, such as `extend` and `shortDescription` on sessions and `timezone` on `config/notifications`, are removed.
 - A missing `updatedAt`, such as on push subscriptions from before the rules required it, is set to the time of the fix.
 - A `subscribers` or `potentialPartners` document without a valid email is deleted, since nobody can answer it. These are usually tests and spam.
-- A `null` entry in `featuredSessions`, which older sites wrote for a removed bookmark, is removed. The site removes the entry now.
+- A `null` entry in `featuredSessions`, which older sites wrote for a session that was unsaved, is removed. The site removes the entry now.
 
-Other problems need an edit in the Firebase console. What visitors wrote is never changed: their data only gets the three fixes above, which add a missing time, drop empty bookmarks or delete the whole document. The plan counts those documents by collection, without their IDs, since they can be push tokens or user IDs.
+Other problems need an edit in the Firebase console. What visitors wrote is never changed: their data only gets the three fixes above, which add a missing time, drop empty saved sessions or delete the whole document. The plan counts those documents by collection, without their IDs, since they can be push tokens or user IDs.
 
 Each write only happens if the document hasn't changed since it was read. A document someone edited in the meantime is left alone and named. Run `--fix` again for it.
 

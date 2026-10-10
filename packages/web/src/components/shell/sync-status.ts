@@ -86,7 +86,7 @@ export class SyncStatus extends ThemedComponent {
         </button>
         <p class="help">
           ${msg(
-            'Bookmarks, feedback and reminders you change are saved on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.',
+            'Saved sessions, feedback and reminders are kept on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.',
             { id: 'shell.sync.help' },
           )}
         </p>

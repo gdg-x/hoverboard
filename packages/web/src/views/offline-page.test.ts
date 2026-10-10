@@ -24,14 +24,14 @@ describe('offline-page', () => {
     expect(view.getByRole('heading', { level: 2 })).toHaveTextContent('What works offline');
     expect([...shadowRoot.querySelectorAll('li')].map((item) => item.textContent?.trim())).toEqual([
       'Pages you have visited before',
-      'Your bookmarked sessions, in My Schedule',
+      'Your saved sessions, in My Schedule',
     ]);
     expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('href', '/');
     expect(shadowRoot.querySelector('.illustration svg')).toBeInTheDocument();
     expect(shadowRoot.querySelector('.illustration')).toHaveAttribute('aria-hidden', 'true');
   });
 
-  it('leaves out bookmarks when My Schedule is off', async () => {
+  it('leaves out saved sessions when My Schedule is off', async () => {
     setFeatures({ mySchedule: false });
     const { shadowRoot } = await fixture<OfflinePage>(html`<offline-page></offline-page>`);
 

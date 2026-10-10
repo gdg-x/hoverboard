@@ -12,7 +12,7 @@ export interface FeaturedSessions {
   [sessionId: string]: boolean;
 }
 
-/** Listens to a visitor's bookmarks, so writes from this tab, other tabs and the server show. */
+/** Listens to a visitor's saved sessions, so writes from this tab, other tabs and the server show. */
 export const subscribeToFeaturedSessions = (
   userId: string,
   onStart: () => void,
@@ -23,7 +23,7 @@ export const subscribeToFeaturedSessions = (
     `featuredSessions/${userId}`,
     onStart,
     (document, state) => {
-      // The helper adds the document ID, which isn't a bookmark.
+      // The helper adds the document ID, which isn't a saved session.
       const { id: _id, ...featuredSessions } = (document ?? {}) as FeaturedSessions & Partial<Id>;
       onNext(featuredSessions, state);
     },

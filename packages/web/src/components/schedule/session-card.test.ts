@@ -6,7 +6,7 @@ import { setFeatures } from '../../../__tests__/helpers/features';
 import type { BuiltSession } from '../../schedule/build-schedule';
 import { openFeedbackDialog } from '../../store/dialogs';
 import { acceptingFeedback } from '../../utils/feedback';
-import type { BookmarkButton } from './bookmark-button';
+import type { SaveButton } from './save-button';
 import { formatDuration, type SessionCard } from './session-card';
 import type { SessionChips } from './session-chips';
 import './session-card';
@@ -105,27 +105,27 @@ describe('session-card', () => {
     ).toBe('var(--hb-tag-web, var(--hb-color-outline))');
   });
 
-  it('bookmarks the session from an icon button', async () => {
+  it('saves the session from an icon button', async () => {
     const { shadowRoot } = await render();
-    const bookmark = shadowRoot.querySelector<BookmarkButton>('bookmark-button.action')!;
+    const save = shadowRoot.querySelector<SaveButton>('save-button.action')!;
 
-    expect(bookmark.session).toBe(session);
-    expect(bookmark.variant).toBe('icon');
+    expect(save.session).toBe(session);
+    expect(save.variant).toBe('icon');
   });
 
-  it('has no bookmark when My Schedule is off', async () => {
+  it('has no save button when My Schedule is off', async () => {
     setFeatures({ mySchedule: false });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('bookmark-button')).toBeNull();
+    expect(shadowRoot.querySelector('save-button')).toBeNull();
   });
 
-  it('asks for feedback instead of a bookmark while the session takes feedback', async () => {
+  it('asks for feedback instead of saving while the session takes feedback', async () => {
     mockAcceptingFeedback.mockReturnValue(true);
     const { shadowRoot } = await render();
     const button = shadowRoot.querySelector<HTMLElement>('hb-icon-button.feedback')!;
 
-    expect(shadowRoot.querySelector('bookmark-button')).toBeNull();
+    expect(shadowRoot.querySelector('save-button')).toBeNull();
     expect(button).toHaveAttribute('label', 'Rate Example Session');
 
     button.click();
@@ -139,7 +139,7 @@ describe('session-card', () => {
     const { shadowRoot } = await render();
 
     expect(shadowRoot.querySelector('hb-icon-button.feedback')).toBeNull();
-    expect(shadowRoot.querySelector('bookmark-button')).toBeInTheDocument();
+    expect(shadowRoot.querySelector('save-button')).toBeInTheDocument();
   });
 });
 

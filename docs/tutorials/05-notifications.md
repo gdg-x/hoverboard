@@ -16,7 +16,7 @@ To get a notification an attendee has to:
 
 1. Be authenticated
 1. Have enabled "My Schedule notifications"
-1. Have bookmarked the session that is about to start
+1. Have saved the session that is about to start
 
 ### General notifications
 

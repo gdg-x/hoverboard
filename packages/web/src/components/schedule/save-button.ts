@@ -21,11 +21,11 @@ import { ThemedComponent } from '../themed-component';
 
 /**
  * Adds a session to the visitor's schedule, or removes it, with confetti when added. Signed out, it
- * asks them to sign in. `icon` is a pressed icon button, for a card; `button` says "Bookmark" or
- * "Bookmarked", for a page.
+ * asks them to sign in. `icon` is a pressed star button, for a card; `button` says "Save" or
+ * "Saved", for a page.
  */
-@customElement('bookmark-button')
-export class BookmarkButton extends ThemedComponent {
+@customElement('save-button')
+export class SaveButton extends ThemedComponent {
   static override styles = css`
     :host {
       display: inline-flex;
@@ -41,7 +41,7 @@ export class BookmarkButton extends ThemedComponent {
   @fromStore((state) => selectFeaturedSessionsState(state))
   accessor featuredSessions!: FeaturedSessionsState;
 
-  private get bookmarked(): boolean {
+  private get saved(): boolean {
     return (
       this.featuredSessions instanceof Success &&
       !!this.session &&
@@ -52,28 +52,28 @@ export class BookmarkButton extends ThemedComponent {
   override render() {
     const session = this.session;
     if (!session) return nothing;
-    const bookmarked = this.bookmarked;
+    const saved = this.saved;
     const icon = html`<hoverboard-icon
       slot="${this.variant === 'button' ? 'icon' : nothing}"
-      name="${bookmarked ? 'bookmark-check' : 'bookmark-plus'}"
+      name="${saved ? 'star-filled' : 'star'}"
     ></hoverboard-icon>`;
 
     if (this.variant === 'button') {
       return html`
-        <hb-button variant="${bookmarked ? 'tonal' : 'filled'}" @click="${this.toggle}">
+        <hb-button variant="${saved ? 'tonal' : 'filled'}" @click="${this.toggle}">
           ${icon}
           ${
-            bookmarked
-              ? msg('Bookmarked', { id: 'pages.session.bookmarked' })
-              : msg('Bookmark', { id: 'pages.session.bookmark' })
+            saved
+              ? msg('Saved', { id: 'pages.session.saved' })
+              : msg('Save', { id: 'pages.session.save' })
           }
         </hb-button>
       `;
     }
     return html`
       <hb-icon-button
-        label="${msg(str`Bookmark ${session.title}`, { id: 'schedule.session.bookmark' })}"
-        .pressed="${bookmarked}"
+        label="${msg(str`Save ${session.title}`, { id: 'schedule.session.save' })}"
+        .pressed="${saved}"
         @click="${this.toggle}"
       >
         ${icon}
@@ -96,19 +96,19 @@ export class BookmarkButton extends ThemedComponent {
     }
 
     if (this.featuredSessions instanceof Success && this.session) {
-      const bookmarked = !this.bookmarked;
+      const saved = !this.saved;
       setUserFeaturedSessions(
         this.user.data.uid,
-        { ...this.featuredSessions.data, [this.session.id]: bookmarked },
-        bookmarked,
+        { ...this.featuredSessions.data, [this.session.id]: saved },
+        saved,
       );
-      if (bookmarked) confetti(event.currentTarget as Element);
+      if (saved) confetti(event.currentTarget as Element);
     }
   };
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'bookmark-button': BookmarkButton;
+    'save-button': SaveButton;
   }
 }

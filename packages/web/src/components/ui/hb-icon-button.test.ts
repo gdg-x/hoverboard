@@ -31,7 +31,7 @@ describe('hb-icon-button', () => {
 
   it('reports whether it is pressed', async () => {
     const { element, shadowRootForWithin } = await fixture<HbIconButton>(
-      html`<hb-icon-button label="Bookmark"></hb-icon-button>`,
+      html`<hb-icon-button label="Save"></hb-icon-button>`,
     );
     const button = within(shadowRootForWithin).getByRole('button');
 

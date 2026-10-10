@@ -53,7 +53,7 @@ describe('selectFeaturedSchedule', () => {
     expect(selectFeaturedSchedule(state)).toStrictEqual([]);
   });
 
-  it('keeps every day and row, with only the bookmarked sessions', () => {
+  it('keeps every day and row, with only the saved sessions', () => {
     const state = stateWith(new Success({ keynote: true, redux: true, firebase: false }));
 
     expect(ids(state)).toEqual([
@@ -68,7 +68,7 @@ describe('selectFeaturedSchedule', () => {
     ]);
   });
 
-  it('has no sessions before the bookmarks load', () => {
+  it('has no sessions before the saved sessions load', () => {
     expect(ids(stateWith(new Initialized()))).toEqual([
       ['2024-01-01', []],
       ['2024-01-02', []],

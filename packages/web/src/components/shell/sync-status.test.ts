@@ -39,7 +39,7 @@ describe('sync-status', () => {
     expect(status).toHaveAttribute('aria-live', 'polite');
     expect(status).toHaveAttribute('slot', 'trigger');
     expect(shadowRoot.querySelector('hb-popover .help')).toHaveTextContent(
-      /saved on this device, and sync when you are online/,
+      /^Saved sessions, feedback and reminders are kept on this device, and sync when you are online/,
     );
   });
 

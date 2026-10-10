@@ -4,7 +4,7 @@ What Hoverboard protects for you, and what you set in your own Firebase project 
 
 ## What Hoverboard does
 
-- **Firestore rules.** Visitors can only read your content. You change it in the Firebase console or with `./hb firestore-*`. Signed-in visitors can write only their own bookmarks, notification settings and feedback. The subscribe and partner forms can only add documents, with checked fields and sizes, and nobody can read them from the site. Export them with [`./hb firestore-csv`](01-configure-app.md#subscribers-and-partner-leads).
+- **Firestore rules.** Visitors can only read your content. You change it in the Firebase console or with `./hb firestore-*`. Signed-in visitors can write only their own saved sessions, notification settings and feedback. The subscribe and partner forms can only add documents, with checked fields and sizes, and nobody can read them from the site. Export them with [`./hb firestore-csv`](01-configure-app.md#subscribers-and-partner-leads).
 - **Storage rules.** The site can't read or write your Storage bucket.
 - **Content.** Links in your config and content can only be `https:`, `http:`, `mailto:` or a path on your site. The site drops other links, such as `javascript:` ones, even when they come straight from the Firebase console. Markdown is sanitized before it is shown, and the build sanitizes the hero illustration.
 - **Headers.** `firebase.json` sends `Strict-Transport-Security`, `Referrer-Policy`, `Permissions-Policy` and other headers on every page, and every page has a [Content Security Policy](01-configure-app.md#content-security-policy).

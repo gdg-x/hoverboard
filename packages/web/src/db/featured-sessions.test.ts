@@ -16,7 +16,7 @@ describe('db/featured-sessions', () => {
     vi.clearAllMocks();
   });
 
-  it("listens to the visitor's bookmarks, without the document ID", () => {
+  it("listens to the visitor's saved sessions, without the document ID", () => {
     const onNext = vi.fn();
     const subscription = new Success(vi.fn());
     vi.mocked(subscribeToDocument).mockImplementation((_path, _onStart, next) => {

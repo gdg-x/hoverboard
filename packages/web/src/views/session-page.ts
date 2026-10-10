@@ -14,7 +14,7 @@ import '../components/ui/hb-button';
 import '../components/ui/hb-progress';
 import { PAGE_TONES } from '../components/hero/simple-hero';
 import { formatDuration } from '../components/schedule/session-card';
-import '../components/schedule/bookmark-button';
+import '../components/schedule/save-button';
 import '../components/schedule/session-chips';
 import type { BuiltSession } from '../schedule/build-schedule';
 import { goto } from '../utils/navigation';
@@ -35,7 +35,7 @@ export const feedbackBlock = __HB_FEATURES__.feedback
   : Promise.resolve();
 
 /**
- * A session: its title, when and where it is, its tags, actions to bookmark, add to a calendar and
+ * A session: its title, when and where it is, its tags, actions to save, add to a calendar and
  * share, the description, its speakers and, once it started, a place to leave feedback.
  */
 @customElement('session-page')
@@ -191,11 +191,11 @@ export class SessionPage extends ThemedComponent {
         <div class="actions">
           ${
             __HB_FEATURES__.mySchedule
-              ? html`<bookmark-button
-                  class="bookmark"
+              ? html`<save-button
+                  class="save"
                   variant="button"
                   .session="${session}"
-                ></bookmark-button>`
+                ></save-button>`
               : nothing
           }
           ${

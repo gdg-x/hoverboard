@@ -104,7 +104,7 @@ export class HbIconButton extends LitElement {
   @property({ type: Boolean, reflect: true })
   accessor disabled = false;
 
-  /** `aria-pressed`, for toggle buttons such as a bookmark. */
+  /** `aria-pressed`, for toggle buttons such as save. */
   @property({ attribute: false })
   accessor pressed: boolean | undefined;
 

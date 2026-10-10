@@ -91,15 +91,15 @@ describe('documentFixes', () => {
     ]);
   });
 
-  it('removes null bookmarks, and keeps the others', () => {
-    const bookmarks = { '101': null, '102': true, '103': null };
-    const fixes = documentFixes('featuredSessions/uid', bookmarks, options);
+  it('removes null saved sessions, and keeps the others', () => {
+    const saved = { '101': null, '102': true, '103': null };
+    const fixes = documentFixes('featuredSessions/uid', saved, options);
 
     expect(fixes.map(({ segments, value }) => [segments.join('/'), value])).toEqual([
       ['101', DELETE],
       ['103', DELETE],
     ]);
-    expect(fieldUpdates(bookmarks, fixes)).toEqual({ '101': DELETE, '103': DELETE });
+    expect(fieldUpdates(saved, fixes)).toEqual({ '101': DELETE, '103': DELETE });
   });
 
   it('sets a missing updatedAt to the current time, in visitor data too', () => {
