@@ -74,6 +74,7 @@ const expectedPages = [
   ...enabledRoutes(features)
     .map(({ pattern }) => pattern)
     .filter((pattern) => !pattern.includes('[') || pattern.endsWith('[...day]'))
+    .filter((pattern) => !pattern.endsWith('.xml'))
     .map(pageFile),
 ].sort();
 
@@ -126,5 +127,13 @@ describe(`a build with ${[...off].join(', ')} off`, () => {
     const offChunks = [...off].flatMap((feature) => FEATURE_CHUNKS[feature] ?? []);
 
     expect(build.chunks.filter((chunk) => offChunks.includes(chunk))).toEqual([]);
+  });
+
+  it('builds the blog feed only with the blog on', () => {
+    if (off.has('blog')) {
+      expect(() => build.read('blog/rss.xml')).toThrow();
+    } else {
+      expect(build.read('blog/rss.xml')).toContain('<rss');
+    }
   });
 });

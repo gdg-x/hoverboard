@@ -20,6 +20,7 @@ const ALLOWED: Record<string, string> = {
   './illustrations/illustration.ts': 'built-in SVG files',
   './layouts/base.astro': 'build-time scripts, styles and JSON escaped by serializeContent()',
   './routes/index.astro': 'JSON-LD escaped by serializeJsonLd()',
+  './routes/blog/rss.xml.ts': 'markdown sanitized by renderMarkdown(), in a build-time template',
   './routes/design.astro': 'the development-only design gallery',
   './design/Icon.astro': 'built-in icon paths, in the development-only design gallery',
 };

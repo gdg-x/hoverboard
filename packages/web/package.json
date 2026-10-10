@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@astrojs/rss": "^4.0.19",
     "@awesome.me/astro-lit": "^5.0.4",
     "@babel/core": "^8.0.6",
     "@babel/plugin-proposal-decorators": "^8.0.2",
