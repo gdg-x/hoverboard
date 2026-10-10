@@ -433,6 +433,10 @@
         "previousSpeakers": {
           "type": "boolean"
         },
+        "reactions": {
+          "description": "Signed-in visitors react to sessions, under the name in their public profile. Session pages only exist with schedule on.",
+          "type": "boolean"
+        },
         "schedule": {
           "type": "boolean"
         },

@@ -122,7 +122,7 @@ Turn parts of the site off in `features` in `packages/config/site.json`. Every f
 }
 ```
 
-A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `functions`, `gallery`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `schedule`, `socialImages`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
+A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `functions`, `gallery`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `reactions`, `schedule`, `socialImages`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
 
 The build fails when:
 

@@ -415,6 +415,39 @@
       "maxProperties": 500,
       "additionalProperties": { "type": "boolean" }
     },
+    "profile": {
+      "description": "What other visitors see of a signed-in visitor, such as who reacted to a session. Firestore: `profiles/{userId}`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "photoUrl", "updatedAt"],
+      "properties": {
+        "name": { "type": "string", "maxLength": 100, "pattern": "\\S" },
+        "photoUrl": {
+          "description": "The photo from the visitor's sign-in provider, or an empty string.",
+          "type": "string"
+        },
+        "updatedAt": { "$ref": "#/$defs/timestamp" }
+      }
+    },
+    "reactionId": {
+      "enum": ["applause", "love", "insightful", "mind-blown", "funny"]
+    },
+    "reaction": {
+      "description": "A signed-in visitor's reactions to a session. Firestore: `sessions/{sessionId}/reactions/{userId}`, where `userId` is also the document ID.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reactions", "updatedAt", "userId"],
+      "properties": {
+        "reactions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/reactionId" }
+        },
+        "updatedAt": { "$ref": "#/$defs/timestamp" },
+        "userId": { "type": "string" }
+      }
+    },
     "notificationsUser": {
       "description": "The push tokens of a signed-in visitor's devices, for session reminders. Firestore: `notificationsUsers/{userId}`.",
       "type": "object",

@@ -49,6 +49,8 @@ export const seed = (data: { [path: string]: object }) =>
     );
   });
 
-export const authedContext = (userId: string) => testEnv.authenticatedContext(userId);
+/** A signed-in user. `token` adds claims, such as the `picture` a sign-in provider sets. */
+export const authedContext = (userId: string, token?: Record<string, string>) =>
+  testEnv.authenticatedContext(userId, token);
 
 export const anonContext = () => testEnv.unauthenticatedContext();
