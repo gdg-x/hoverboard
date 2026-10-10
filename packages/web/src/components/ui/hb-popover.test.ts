@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { HbIconButton } from './hb-icon-button';
@@ -81,5 +81,33 @@ describe('hb-popover', () => {
 
     expect(element.open).toBe(false);
     expect(document.activeElement).toBe(trigger);
+  });
+
+  describe('in the viewport', () => {
+    const openAt = async (left: number, right: number) => {
+      vi.spyOn(document.documentElement, 'clientWidth', 'get').mockReturnValue(400);
+      const { element, shadowRoot } = await render();
+      const panel = shadowRoot.querySelector<HTMLElement>('.panel')!;
+      vi.spyOn(panel, 'getBoundingClientRect').mockReturnValue({ left, right } as DOMRect);
+      element.show();
+      await element.updateComplete;
+      return panel;
+    };
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('stays where it opens when it fits', async () => {
+      expect((await openAt(100, 300)).style.translate).toBe('');
+    });
+
+    it('moves right when it would open past the start of the viewport', async () => {
+      expect((await openAt(-150, 50)).style.translate).toBe('166px');
+    });
+
+    it('moves left when it would open past the end of the viewport', async () => {
+      expect((await openAt(300, 420)).style.translate).toBe('-36px');
+    });
   });
 });
