@@ -1,4 +1,4 @@
-import { Failure, Pending, Success } from '@abraham/remotedata';
+import { Failure, Success } from '@abraham/remotedata';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html, nothing, render } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
@@ -55,6 +55,19 @@ describe('subscribe-block', () => {
     expect(field).toHaveAttribute('required');
     expect(shadowRoot.querySelector('hb-button')).toHaveTextContent('Subscribe');
     expect(shadowRoot.querySelector('.illustration svg')).toBeInTheDocument();
+  });
+
+  it('needs the internet to subscribe', async () => {
+    const { element, shadowRoot } = await fixture<SubscribeBlock>(
+      html`<subscribe-block></subscribe-block>`,
+    );
+    element['online'] = false;
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('disabled');
+    expect(shadowRoot.querySelector('.offline')).toHaveTextContent(
+      'Connect to the internet to send this.',
+    );
   });
 
   it('subscribes the email', async () => {
@@ -116,15 +129,10 @@ describe('subscribe-block', () => {
     });
   });
 
-  it('turns the button off while subscribing, and shows an error when it fails', async () => {
+  it('shows an error when subscribing fails', async () => {
     const { element, shadowRoot } = await fixture<SubscribeBlock>(
       html`<subscribe-block></subscribe-block>`,
     );
-    element.subscribed = new Pending();
-    await element.updateComplete;
-
-    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('disabled');
-
     element.subscribed = new Failure(new Error('offline'));
     await element.updateComplete;
 

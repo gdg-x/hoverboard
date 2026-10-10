@@ -11,6 +11,7 @@ import {
   type PotentialPartnersState,
 } from '../../store/potential-partners';
 import type { SubscribeState } from '../../store/subscribe';
+import { needsNetworkMessage, selectOnline } from '../../store/sync';
 import { subscribeBlock } from '../../config/site';
 import { notEmpty, validEmail } from '../../utils/strings';
 import '../ui/hb-button';
@@ -34,6 +35,11 @@ export class SubscribeDialog extends ThemedElement {
       margin: 0;
       color: var(--hb-color-error);
     }
+
+    .offline {
+      margin: 0;
+      font-weight: 600;
+    }
   `;
 
   private get subscribeBlock() {
@@ -53,6 +59,8 @@ export class SubscribeDialog extends ThemedElement {
   override accessor title = '';
   @fromStore((state) => selectIsDialogOpen(state, DIALOG.SUBSCRIBE))
   private accessor open!: boolean;
+  @fromStore(selectOnline)
+  private accessor online!: boolean;
   @state()
   private accessor subscribed: SubscribeState = new Initialized();
   @state()
@@ -146,6 +154,7 @@ export class SubscribeDialog extends ThemedElement {
                 </div>`
               : ''
           }
+          ${this.online ? '' : html`<p class="offline">${needsNetworkMessage()}</p>`}
           <hb-text-field
             id="firstFieldInput"
             label="${firstFieldLabel} *"
@@ -179,7 +188,7 @@ export class SubscribeDialog extends ThemedElement {
           ></hb-text-field>
         </div>
 
-        <hb-button slot="actions" @click="${this.subscribe}">
+        <hb-button slot="actions" ?disabled="${!this.online}" @click="${this.subscribe}">
           ${
             this.submitLabel ||
             msg('Subscribe', {

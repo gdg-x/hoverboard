@@ -1,11 +1,13 @@
-import { Failure, Pending, Success } from '@abraham/remotedata';
+import { Failure, Success } from '@abraham/remotedata';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import reducer, { addPotentialPartner, initialPotentialPartnersState } from '.';
 import { savePotentialPartner } from '../../db/potential-partners';
 import { dispatch } from '../dispatch';
+import { canWriteNow } from '../sync';
 
 vi.mock('../../db/potential-partners');
 vi.mock('../dispatch');
+vi.mock('../sync', () => ({ canWriteNow: vi.fn(() => true) }));
 
 describe('potential-partners', () => {
   beforeEach(() => {
@@ -16,12 +18,9 @@ describe('potential-partners', () => {
     expect(reducer(undefined, { type: '@@INIT' })).toStrictEqual(initialPotentialPartnersState);
   });
 
-  it('handles pending, failure, and success actions', () => {
+  it('handles failure and success actions', () => {
     const error = new Error('failed');
 
-    expect(
-      reducer(initialPotentialPartnersState, { type: 'potentialPartners/pending' }),
-    ).toStrictEqual(new Pending());
     expect(
       reducer(initialPotentialPartnersState, {
         type: 'potentialPartners/failure',
@@ -33,46 +32,45 @@ describe('potential-partners', () => {
     ).toStrictEqual(new Success(true));
   });
 
-  it('writes the partner document and dispatches success', async () => {
-    vi.mocked(savePotentialPartner).mockResolvedValue(undefined as never);
-
-    await addPotentialPartner({
+  it('writes the partner document and dispatches success without waiting', () => {
+    addPotentialPartner({
       email: 'ada.lovelace+partners@example.com',
       firstFieldValue: 'Ada',
       secondFieldValue: 'Analytical Engines',
     });
 
-    expect(savePotentialPartner).toHaveBeenCalledWith({
-      email: 'ada.lovelace+partners@example.com',
-      firstFieldValue: 'Ada',
-      secondFieldValue: 'Analytical Engines',
-    });
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'potentialPartners/pending' }),
+    expect(savePotentialPartner).toHaveBeenCalledWith(
+      {
+        email: 'ada.lovelace+partners@example.com',
+        firstFieldValue: 'Ada',
+        secondFieldValue: 'Analytical Engines',
+      },
+      expect.any(Function),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
+    expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'potentialPartners/success' }),
     );
   });
 
-  it('dispatches failure when saving the partner fails', async () => {
-    const error = new Error('write failed');
+  it('dispatches failure when the server refuses the partner', () => {
+    const error = new Error('permission-denied');
+    vi.mocked(savePotentialPartner).mockImplementation((_data, onRejected) => onRejected(error));
 
-    vi.mocked(savePotentialPartner).mockRejectedValue(error);
+    addPotentialPartner({ email: 'ada@example.com' });
 
-    await addPotentialPartner({
-      email: 'ada@example.com',
-    });
-
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'potentialPartners/pending' }),
-    );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
+    expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'potentialPartners/failure', payload: error }),
+    );
+  });
+
+  it('needs the network, since the visitor has no account to sync it later', () => {
+    vi.mocked(canWriteNow).mockReturnValueOnce(false);
+
+    addPotentialPartner({ email: 'ada@example.com' });
+
+    expect(savePotentialPartner).not.toHaveBeenCalled();
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'potentialPartners/failure' }),
     );
   });
 });

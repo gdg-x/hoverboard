@@ -1,6 +1,6 @@
 import { deleteDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
-import { subscribeToDocument, type Subscription } from '../utils/firestore';
+import { subscribeToDocument, type Subscription, write } from '../utils/firestore';
 
 export const subscribeToNotificationsSubscribers = (
   token: string,
@@ -16,13 +16,20 @@ export const subscribeToNotificationsSubscribers = (
   );
 };
 
-export const saveNotificationsSubscriber = async (token: string): Promise<void> => {
-  await setDoc(doc(db, 'notificationsSubscribers', token), {
-    value: true,
-    updatedAt: Timestamp.now(),
-  });
-};
+export const saveNotificationsSubscriber = (
+  token: string,
+  onRejected: (error: Error) => void,
+): void =>
+  write(
+    () =>
+      setDoc(doc(db, 'notificationsSubscribers', token), {
+        value: true,
+        updatedAt: Timestamp.now(),
+      }),
+    onRejected,
+  );
 
-export const removeNotificationsSubscriber = async (token: string): Promise<void> => {
-  await deleteDoc(doc(db, 'notificationsSubscribers', token));
-};
+export const removeNotificationsSubscriber = (
+  token: string,
+  onRejected: (error: Error) => void,
+): void => write(() => deleteDoc(doc(db, 'notificationsSubscribers', token)), onRejected);

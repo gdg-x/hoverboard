@@ -1,5 +1,5 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { Failure, Initialized, Success } from '@abraham/remotedata';
+import { beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import reducer, { clearNotificationsSubscribers, updateNotificationsSubscribers } from '.';
 import {
   removeNotificationsSubscriber,
@@ -7,9 +7,11 @@ import {
 } from '../../db/notifications-subscribers';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
+import { canWriteNow } from '../sync';
 
 vi.mock('../../db/notifications-subscribers');
 vi.mock('../dispatch');
+vi.mock('../sync', () => ({ canWriteNow: vi.fn(() => true) }));
 vi.mock('../snackbars', () => ({
   queueSnackbar: vi.fn((label: string) => ({
     type: 'snackbars/queueSnackbar',
@@ -26,12 +28,9 @@ describe('update-notifications-subscribers', () => {
     expect(reducer(undefined, { type: '@@INIT' })).toStrictEqual(new Initialized());
   });
 
-  it('handles pending, success, failure, and reset actions', () => {
+  it('handles success, failure, and reset actions', () => {
     const error = new Error('failed');
 
-    expect(
-      reducer(new Initialized(), { type: 'updateNotificationsSubscribers/pending' }),
-    ).toStrictEqual(new Pending());
     expect(
       reducer(new Initialized(), {
         type: 'updateNotificationsSubscribers/success',
@@ -45,86 +44,56 @@ describe('update-notifications-subscribers', () => {
       }),
     ).toStrictEqual(new Failure(error));
     expect(
-      reducer(new Success('token-1'), {
-        type: 'updateNotificationsSubscribers/reset',
-      }),
+      reducer(new Success('token-1'), { type: 'updateNotificationsSubscribers/reset' }),
     ).toStrictEqual(new Initialized());
   });
 
-  it('stores the subscriber token and queues an enabled toast', async () => {
-    vi.mocked(saveNotificationsSubscriber).mockResolvedValue(undefined);
+  it('stores the token and confirms without waiting for the server', () => {
+    updateNotificationsSubscribers('token-1');
 
-    await updateNotificationsSubscribers('token-1');
-
-    expect(saveNotificationsSubscriber).toHaveBeenCalledWith('token-1');
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'updateNotificationsSubscribers/pending' }),
-    );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
+    expect(saveNotificationsSubscriber).toHaveBeenCalledWith('token-1', expect.any(Function));
+    expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
         type: 'updateNotificationsSubscribers/success',
         payload: 'token-1',
       }),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar('General notifications enabled'));
+    expect(queueSnackbar).toHaveBeenCalledWith('General notifications enabled');
   });
 
-  it('dispatches failure when storing the subscriber token fails', async () => {
-    const error = new Error('write failed');
-    vi.mocked(saveNotificationsSubscriber).mockRejectedValue(error);
+  it('deletes the token and confirms without waiting for the server', () => {
+    clearNotificationsSubscribers('token-1');
 
-    await updateNotificationsSubscribers('token-1');
-
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'updateNotificationsSubscribers/pending' }),
-    );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        type: 'updateNotificationsSubscribers/failure',
-        payload: error,
-      }),
-    );
-    expect(queueSnackbar).not.toHaveBeenCalled();
-  });
-
-  it('deletes the subscriber token and queues a disabled toast', async () => {
-    vi.mocked(removeNotificationsSubscriber).mockResolvedValue(undefined);
-
-    await clearNotificationsSubscribers('token-1');
-
-    expect(removeNotificationsSubscriber).toHaveBeenCalledWith('token-1');
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'updateNotificationsSubscribers/pending' }),
-    );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
+    expect(removeNotificationsSubscriber).toHaveBeenCalledWith('token-1', expect.any(Function));
+    expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'updateNotificationsSubscribers/reset' }),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar('General notifications disabled'));
+    expect(queueSnackbar).toHaveBeenCalledWith('General notifications disabled');
   });
 
-  it('dispatches failure when deleting the subscriber token fails', async () => {
-    const error = new Error('delete failed');
-    vi.mocked(removeNotificationsSubscriber).mockRejectedValue(error);
-
-    await clearNotificationsSubscribers('token-1');
-
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'updateNotificationsSubscribers/pending' }),
+  it('dispatches failure when the server refuses the token', () => {
+    const error = new Error('permission-denied');
+    vi.mocked(removeNotificationsSubscriber).mockImplementation((_token, onRejected) =>
+      onRejected(error),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        type: 'updateNotificationsSubscribers/failure',
-        payload: error,
-      }),
+
+    clearNotificationsSubscribers('token-1');
+
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'updateNotificationsSubscribers/failure', payload: error }),
     );
-    expect(queueSnackbar).not.toHaveBeenCalled();
+  });
+
+  it('needs the network, since the token belongs to the device, not an account', () => {
+    vi.mocked(canWriteNow).mockReturnValue(false);
+    onTestFinished(() => {
+      vi.mocked(canWriteNow).mockReturnValue(true);
+    });
+
+    updateNotificationsSubscribers('token-1');
+    clearNotificationsSubscribers('token-1');
+
+    expect(saveNotificationsSubscriber).not.toHaveBeenCalled();
+    expect(removeNotificationsSubscriber).not.toHaveBeenCalled();
   });
 });

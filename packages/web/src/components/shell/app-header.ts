@@ -16,6 +16,7 @@ import './account-menu';
 import './app-install';
 import { navigationLabel } from './navigation-label';
 import './notification-toggle';
+import './sync-status';
 
 /** The demo banner, which the header loads without waiting. The server, and tests, wait for it. */
 export const demoBanner = __HB_FEATURES__.demo ? import('./demo-banner') : Promise.resolve();
@@ -227,6 +228,7 @@ export class AppHeader extends ThemedElement {
           </a>
           <nav class="nav" aria-label="${label}">${this.renderLinks()}</nav>
           <div class="actions">
+            <sync-status></sync-status>
             ${this.renderCallToAction()}
             ${__HB_FEATURES__.notifications ? html`<notification-toggle></notification-toggle>` : nothing}
             ${

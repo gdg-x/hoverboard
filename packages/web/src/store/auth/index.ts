@@ -17,16 +17,17 @@ import {
   signInWithPopup,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
-import { clearIndexedDbPersistence, terminate } from 'firebase/firestore';
+import { clearIndexedDbPersistence, terminate, waitForPendingWrites } from 'firebase/firestore';
 import type { RootState } from '..';
 import { db, firebaseApp, isDemoProject } from '../../firebase';
 import type { FirebaseUser } from '../../models/user';
 import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
-import { dispatch } from '../dispatch';
+import { dispatch, getState } from '../dispatch';
 import { resetFeaturedSessions } from '../featured-sessions';
+import { resetPending, selectOnline, selectPendingCount } from '../sync';
 import { unsubscribeFromFeedback } from '../feedback';
-import { queueSnackbar } from '../snackbars';
+import { queueComplexSnackbar, queueSnackbar } from '../snackbars';
 import { resetSubscribed } from '../subscribe';
 import { removeUser, setUser } from '../user';
 
@@ -130,23 +131,74 @@ export const onUser = () => {
       resetSubscribed();
       dispatch(unsubscribeFromFeedback());
       resetFeaturedSessions();
+      resetPending();
     }
   });
 };
 
+/** How long sign-out waits for queued writes to reach the server. */
+export const PENDING_WRITES_TIMEOUT = 5000;
+
+// Set when sign-out couldn't delete the cache, for the page after the reload.
+const CACHE_KEPT_KEY = 'hb-signed-out-cache-kept';
+
 /**
  * Signs out and deletes Firestore's offline cache, which holds the user's documents, so the next
  * person on this browser can't read them. Firestore can't be used after that, so the page reloads.
+ * Deleting the cache drops writes that haven't synced, so online it waits for them first, and
+ * offline it asks before losing them.
  */
-export const signOut = async () => {
+export const signOut = async ({ discardUnsynced = false } = {}) => {
+  const state = getState();
+  if (selectOnline(state)) {
+    await Promise.race([
+      waitForPendingWrites(db),
+      new Promise((resolve) => setTimeout(resolve, PENDING_WRITES_TIMEOUT)),
+    ]);
+  } else if (!discardUnsynced && selectPendingCount(state) > 0) {
+    dispatch(
+      queueComplexSnackbar({
+        label: msg("You have changes that haven't synced. Signing out now loses them.", {
+          id: 'store.auth.sign-out-unsynced',
+        }),
+        action: {
+          title: msg('Sign out', { id: 'shell.header.sign-out' }),
+          callback: () => signOut({ discardUnsynced: true }),
+        },
+      }),
+    );
+    return;
+  }
   await firebaseSignOut(getFirebaseAuth());
   await terminate(db);
   try {
     await clearIndexedDbPersistence(db);
   } catch {
-    // Another tab still has the cache open.
+    // Another tab still has the cache open, so the next page says to close it.
+    try {
+      sessionStorage.setItem(CACHE_KEPT_KEY, 'true');
+    } catch {
+      // Without storage, the message is lost, and the cache stays as it would anyway.
+    }
   }
   window.location.reload();
+};
+
+/** Says, after signing out, when other tabs kept the cache of the visitor's documents. */
+export const reportSignOut = (): void => {
+  try {
+    if (!sessionStorage.getItem(CACHE_KEPT_KEY)) return;
+    sessionStorage.removeItem(CACHE_KEPT_KEY);
+  } catch {
+    return;
+  }
+  dispatch(
+    queueSnackbar(
+      msg("Signed out. Close this site's other tabs to remove your data from this browser.", {
+        id: 'store.auth.cache-kept',
+      }),
+    ),
+  );
 };
 
 // The address the link went to, so the visitor needn't type it again on the same browser.

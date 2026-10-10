@@ -1,4 +1,4 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { Failure, Initialized, Success } from '@abraham/remotedata';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import reducer, { removeNotificationsUsers, updateNotificationsUsers } from '.';
 import { saveNotificationsUsers } from '../../db/notifications-users';
@@ -15,6 +15,11 @@ vi.mock('../snackbars', () => ({
   })),
 }));
 
+const withTokens = (tokens: Record<string, true>) =>
+  vi.mocked(getState).mockReturnValue({
+    notificationsUsers: new Success({ id: 'user-1', tokens }),
+  } as unknown as RootState);
+
 describe('update-notifications-users', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -24,12 +29,9 @@ describe('update-notifications-users', () => {
     expect(reducer(undefined, { type: '@@INIT' })).toStrictEqual(new Initialized());
   });
 
-  it('handles pending, success, and failure actions', () => {
+  it('handles success and failure actions', () => {
     const error = new Error('failed');
 
-    expect(reducer(new Initialized(), { type: 'updateNotificationsUsers/pending' })).toStrictEqual(
-      new Pending(),
-    );
     expect(
       reducer(new Initialized(), {
         type: 'updateNotificationsUsers/success',
@@ -44,118 +46,46 @@ describe('update-notifications-users', () => {
     ).toStrictEqual(new Failure(error));
   });
 
-  it('adds the new token to the stored user tokens and queues an enabled toast', async () => {
-    vi.mocked(getState).mockReturnValue({
-      notificationsUsers: new Success({
-        id: 'user-1',
-        tokens: {
-          existing: true,
-        },
-      }),
-    } as unknown as RootState);
-    vi.mocked(saveNotificationsUsers).mockResolvedValue(undefined);
+  it('adds the token and confirms without waiting for the server', () => {
+    withTokens({ 'token-1': true });
 
-    await updateNotificationsUsers('user-1', 'new-token');
+    updateNotificationsUsers('user-1', 'token-2');
 
-    expect(saveNotificationsUsers).toHaveBeenCalledWith('user-1', {
-      tokens: {
-        existing: true,
-        'new-token': true,
-      },
-    });
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'updateNotificationsUsers/pending' }),
+    expect(saveNotificationsUsers).toHaveBeenCalledWith(
+      'user-1',
+      { tokens: { 'token-1': true, 'token-2': true } },
+      expect.any(Function),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
+    expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'updateNotificationsUsers/success', payload: 'user-1' }),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(3, queueSnackbar('My Schedule notifications enabled'));
+    expect(queueSnackbar).toHaveBeenCalledWith('My Schedule notifications enabled');
   });
 
-  it('dispatches failure when storing user tokens fails', async () => {
-    const error = new Error('write failed');
-    vi.mocked(getState).mockReturnValue({
-      notificationsUsers: new Success({
-        id: 'user-1',
-        tokens: {},
-      }),
-    } as unknown as RootState);
-    vi.mocked(saveNotificationsUsers).mockRejectedValue(error);
+  it('removes the token and confirms without waiting for the server', () => {
+    withTokens({ 'token-1': true, 'token-2': true });
 
-    await updateNotificationsUsers('user-1', 'new-token');
+    removeNotificationsUsers('user-1', 'token-2');
 
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'updateNotificationsUsers/pending' }),
+    expect(saveNotificationsUsers).toHaveBeenCalledWith(
+      'user-1',
+      { tokens: { 'token-1': true } },
+      expect.any(Function),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        type: 'updateNotificationsUsers/failure',
-        payload: error,
-      }),
-    );
-    expect(queueSnackbar).not.toHaveBeenCalled();
+    expect(queueSnackbar).toHaveBeenCalledWith('My Schedule notifications disabled');
   });
 
-  it('removes the token from the stored user tokens and queues a disabled toast', async () => {
-    vi.mocked(getState).mockReturnValue({
-      notificationsUsers: new Success({
-        id: 'user-1',
-        tokens: {
-          existing: true,
-          'remove-me': true,
-        },
-      }),
-    } as unknown as RootState);
-    vi.mocked(saveNotificationsUsers).mockResolvedValue(undefined);
-
-    await removeNotificationsUsers('user-1', 'remove-me');
-
-    expect(saveNotificationsUsers).toHaveBeenCalledWith('user-1', {
-      tokens: {
-        existing: true,
-      },
-    });
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'updateNotificationsUsers/pending' }),
+  it('dispatches failure when the server refuses the tokens', () => {
+    const error = new Error('permission-denied');
+    withTokens({});
+    vi.mocked(saveNotificationsUsers).mockImplementation((_uid, _data, onRejected) =>
+      onRejected(error),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({ type: 'updateNotificationsUsers/success', payload: 'user-1' }),
-    );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      3,
-      queueSnackbar('My Schedule notifications disabled'),
-    );
-  });
 
-  it('dispatches failure when removing user tokens fails', async () => {
-    const error = new Error('remove failed');
-    vi.mocked(getState).mockReturnValue({
-      notificationsUsers: new Success({
-        id: 'user-1',
-        tokens: { 'remove-me': true },
-      }),
-    } as unknown as RootState);
-    vi.mocked(saveNotificationsUsers).mockRejectedValue(error);
+    updateNotificationsUsers('user-1', 'token-1');
 
-    await removeNotificationsUsers('user-1', 'remove-me');
-
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'updateNotificationsUsers/pending' }),
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'updateNotificationsUsers/failure', payload: error }),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        type: 'updateNotificationsUsers/failure',
-        payload: error,
-      }),
-    );
-    expect(queueSnackbar).not.toHaveBeenCalled();
   });
 });

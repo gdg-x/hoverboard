@@ -36,6 +36,19 @@ describe('subscribe-dialog', () => {
     expect(shadowRoot.querySelector('hb-button')).toHaveTextContent('Subscribe');
   });
 
+  it('needs the internet to send', async () => {
+    const { element, shadowRoot } = await fixture<SubscribeDialog>(
+      html`<subscribe-dialog></subscribe-dialog>`,
+    );
+    element['online'] = false;
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('disabled');
+    expect(shadowRoot.querySelector('.offline')).toHaveTextContent(
+      'Connect to the internet to send this.',
+    );
+  });
+
   it('uses the labels the opener passes', async () => {
     const { element, shadowRoot } = await fixture<SubscribeDialog>(
       html`<subscribe-dialog></subscribe-dialog>`,

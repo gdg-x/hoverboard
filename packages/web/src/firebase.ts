@@ -5,6 +5,7 @@ import {
   Firestore,
   initializeFirestore,
   persistentLocalCache,
+  persistentMultipleTabManager,
 } from 'firebase/firestore';
 import { getPerformance, initializePerformance } from 'firebase/performance';
 import { isServer } from 'lit';
@@ -32,8 +33,9 @@ const start = (firebaseConfig: FirebaseOptions | undefined) => {
   }
 
   const firebaseApp = initializeApp(firebaseConfig);
+  // Every tab shares one cache and one queue of writes, so a change in one tab shows in the others.
   const db: Firestore = initializeFirestore(firebaseApp, {
-    localCache: persistentLocalCache(),
+    localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }),
   });
 
   /**

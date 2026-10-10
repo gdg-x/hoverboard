@@ -9,7 +9,10 @@ import { db } from '../firebase';
 import { subscribeToDocument } from '../utils/firestore';
 
 vi.mock('firebase/firestore');
-vi.mock('../utils/firestore');
+vi.mock('../utils/firestore', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../utils/firestore')>()),
+  subscribeToDocument: vi.fn(),
+}));
 
 describe('db/notifications-subscribers', () => {
   beforeEach(() => {
@@ -31,13 +34,13 @@ describe('db/notifications-subscribers', () => {
     );
   });
 
-  it('saves subscriber token with timestamp', async () => {
+  it('saves subscriber token with timestamp', () => {
     const now = { seconds: 123 } as never;
     vi.spyOn(Timestamp, 'now').mockReturnValue(now);
     vi.mocked(doc).mockReturnValue('doc-ref' as never);
     vi.mocked(setDoc).mockResolvedValue(undefined as never);
 
-    await saveNotificationsSubscriber('token-1');
+    saveNotificationsSubscriber('token-1', vi.fn());
 
     expect(doc).toHaveBeenCalledWith(db, 'notificationsSubscribers', 'token-1');
     expect(setDoc).toHaveBeenCalledWith('doc-ref', {
@@ -46,11 +49,11 @@ describe('db/notifications-subscribers', () => {
     });
   });
 
-  it('removes subscriber token', async () => {
+  it('removes subscriber token', () => {
     vi.mocked(doc).mockReturnValue('doc-ref' as never);
     vi.mocked(deleteDoc).mockResolvedValue(undefined as never);
 
-    await removeNotificationsSubscriber('token-1');
+    removeNotificationsSubscriber('token-1', vi.fn());
 
     expect(doc).toHaveBeenCalledWith(db, 'notificationsSubscribers', 'token-1');
     expect(deleteDoc).toHaveBeenCalledWith('doc-ref');

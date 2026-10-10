@@ -80,6 +80,21 @@ describe('signin-dialog', () => {
     expect(mockSignIn).toHaveBeenCalledWith(signInProviders.providersData[0]!.url as PROVIDER);
   });
 
+  it('needs the internet to sign in', async () => {
+    const { element, shadowRoot } = await fixture<SigninDialog>(
+      html`<signin-dialog></signin-dialog>`,
+    );
+    element['online'] = false;
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.offline')).toHaveTextContent(
+      'Connect to the internet to sign in.',
+    );
+    for (const button of shadowRoot.querySelectorAll('.sign-in-button, .email-button')) {
+      expect(button).toHaveAttribute('disabled');
+    }
+  });
+
   it('shows the merge-account prompt and merges on click', async () => {
     const { element, shadowRoot } = await fixture<SigninDialog>(
       html`<signin-dialog></signin-dialog>`,

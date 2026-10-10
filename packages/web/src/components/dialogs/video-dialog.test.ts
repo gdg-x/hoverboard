@@ -50,6 +50,16 @@ describe('video-dialog', () => {
     expect(shadowRoot.querySelector('lite-youtube')).toHaveAttribute('videotitle', 'A great talk');
   });
 
+  it('says the video is available online instead of loading it offline', async () => {
+    const { element, shadowRoot } = await fixture<VideoDialog>(html`<video-dialog></video-dialog>`);
+    element['video'] = { open: true, youtubeId: 'abc123', title: 'A great talk' };
+    element['online'] = false;
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('lite-youtube')).toBeNull();
+    expect(shadowRoot.querySelector('.offline')).toHaveTextContent("Available when you're online.");
+  });
+
   it('dispatches closeVideoDialog when the dialog is closed', async () => {
     const { shadowRoot } = await fixture<VideoDialog>(html`<video-dialog></video-dialog>`);
 

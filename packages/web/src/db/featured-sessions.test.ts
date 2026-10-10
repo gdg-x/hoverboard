@@ -1,46 +1,54 @@
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { Success } from '@abraham/remotedata';
+import { doc, setDoc } from 'firebase/firestore';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { fetchFeaturedSessions, saveFeaturedSessions } from './featured-sessions';
+import { saveFeaturedSessions, subscribeToFeaturedSessions } from './featured-sessions';
 import { db } from '../firebase';
+import { subscribeToDocument } from '../utils/firestore';
 
 vi.mock('firebase/firestore');
+vi.mock('../utils/firestore', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../utils/firestore')>()),
+  subscribeToDocument: vi.fn(),
+}));
 
 describe('db/featured-sessions', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('fetches featured sessions for a user and returns data or empty object', async () => {
-    vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(getDoc).mockResolvedValue({
-      data: () => ({ 'session-1': true }),
-    } as never);
+  it("listens to the visitor's bookmarks, without the document ID", () => {
+    const onNext = vi.fn();
+    const subscription = new Success(vi.fn());
+    vi.mocked(subscribeToDocument).mockImplementation((_path, _onStart, next) => {
+      next({ 'session-1': true, id: 'user-1' }, { pending: true });
+      next(undefined, { pending: false });
+      return subscription;
+    });
 
-    const result = await fetchFeaturedSessions('user-1');
+    expect(subscribeToFeaturedSessions('user-1', vi.fn(), onNext, vi.fn())).toBe(subscription);
 
-    expect(doc).toHaveBeenCalledWith(db, 'featuredSessions', 'user-1');
-    expect(getDoc).toHaveBeenCalledWith('doc-ref');
-    expect(result).toStrictEqual({ 'session-1': true });
+    expect(subscribeToDocument).toHaveBeenCalledWith(
+      'featuredSessions/user-1',
+      expect.any(Function),
+      expect.any(Function),
+      expect.any(Function),
+    );
+    expect(onNext.mock.calls).toEqual([
+      [{ 'session-1': true }, { pending: true }],
+      [{}, { pending: false }],
+    ]);
   });
 
-  it('returns empty object when doc has no data', async () => {
+  it('saves featured sessions for a user, and reports a rejection', async () => {
+    const error = new Error('permission-denied');
     vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(getDoc).mockResolvedValue({
-      data: () => undefined,
-    } as never);
+    vi.mocked(setDoc).mockRejectedValue(error);
+    const onRejected = vi.fn();
 
-    const result = await fetchFeaturedSessions('user-1');
-
-    expect(result).toStrictEqual({});
-  });
-
-  it('saves featured sessions for a user', async () => {
-    vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined as never);
-
-    await saveFeaturedSessions('user-1', { 'session-1': true });
+    saveFeaturedSessions('user-1', { 'session-1': true }, onRejected);
 
     expect(doc).toHaveBeenCalledWith(db, 'featuredSessions', 'user-1');
     expect(setDoc).toHaveBeenCalledWith('doc-ref', { 'session-1': true });
+    await vi.waitFor(() => expect(onRejected).toHaveBeenCalledWith(error));
   });
 });

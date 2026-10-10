@@ -5,7 +5,10 @@ import { db } from '../firebase';
 import { subscribeToDocument } from '../utils/firestore';
 
 vi.mock('firebase/firestore');
-vi.mock('../utils/firestore');
+vi.mock('../utils/firestore', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../utils/firestore')>()),
+  subscribeToDocument: vi.fn(),
+}));
 
 describe('db/notifications-users', () => {
   beforeEach(() => {
@@ -27,11 +30,11 @@ describe('db/notifications-users', () => {
     );
   });
 
-  it('saves notifications users data', async () => {
+  it('saves notifications users data', () => {
     vi.mocked(doc).mockReturnValue('doc-ref' as never);
     vi.mocked(setDoc).mockResolvedValue(undefined as never);
 
-    await saveNotificationsUsers('user-1', { tokens: { 'token-1': true } });
+    saveNotificationsUsers('user-1', { tokens: { 'token-1': true } }, vi.fn());
 
     expect(doc).toHaveBeenCalledWith(db, 'notificationsUsers', 'user-1');
     expect(setDoc).toHaveBeenCalledWith('doc-ref', { tokens: { 'token-1': true } });

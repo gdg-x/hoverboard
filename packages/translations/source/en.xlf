@@ -2,9 +2,6 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file source-language="en" original="lit-localize-inputs" datatype="plaintext">
 <body>
-<trans-unit id="shell.app.offline">
-  <source>You can still work offline.</source>
-</trans-unit>
 <trans-unit id="dialogs.feedback.thanks">
   <source>Thanks for your feedback.</source>
 </trans-unit>
@@ -43,6 +40,9 @@
 </trans-unit>
 <trans-unit id="dialogs.signin.use-email-link">
   <source><x id="0" equiv-text="${error.email}"/> signed in with an email link before. Sign in that way.</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.offline">
+  <source>Connect to the internet to sign in.</source>
 </trans-unit>
 <trans-unit id="dialogs.signin.existing-account">
   <source>You already have an account</source>
@@ -353,9 +353,6 @@
 <trans-unit id="shell.account-menu.label">
   <source>Account of <x id="0" equiv-text="${name}"/></source>
 </trans-unit>
-<trans-unit id="shell.header.sign-out">
-  <source>Sign out</source>
-</trans-unit>
 <trans-unit id="shell.header.skip-link">
   <source>Skip to content</source>
 </trans-unit>
@@ -422,6 +419,9 @@
 <trans-unit id="shell.notifications.prompt">
   <source>Enable notifications</source>
 </trans-unit>
+<trans-unit id="shell.notifications.offline">
+  <source>Connect to the internet to turn on notifications.</source>
+</trans-unit>
 <trans-unit id="shell.notifications.enable">
   <source>Enable</source>
 </trans-unit>
@@ -430,6 +430,9 @@
 </trans-unit>
 <trans-unit id="shell.notifications.general">
   <source>General notifications</source>
+</trans-unit>
+<trans-unit id="shell.notifications.general-offline">
+  <source>Connect to the internet to change general notifications.</source>
 </trans-unit>
 <trans-unit id="shell.notifications.sign-in">
   <source>Sign in to get personalized session notifications</source>
@@ -448,6 +451,9 @@
 </trans-unit>
 <trans-unit id="shell.snack-bar.dismiss">
   <source>Dismiss</source>
+</trans-unit>
+<trans-unit id="shell.sync.help">
+  <source>Bookmarks, feedback and reminders you change are saved on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.</source>
 </trans-unit>
 <trans-unit id="common.close">
   <source>Close</source>
@@ -470,11 +476,23 @@
 <trans-unit id="shell.service-worker.error">
   <source>Error caching for offline use.</source>
 </trans-unit>
+<trans-unit id="store.auth.sign-out-unsynced">
+  <source>You have changes that haven't synced. Signing out now loses them.</source>
+</trans-unit>
+<trans-unit id="shell.header.sign-out">
+  <source>Sign out</source>
+</trans-unit>
+<trans-unit id="store.auth.cache-kept">
+  <source>Signed out. Close this site's other tabs to remove your data from this browser.</source>
+</trans-unit>
 <trans-unit id="auth.sign-in-link-expired">
   <source>This sign-in link has expired or was already used. Ask for a new one.</source>
 </trans-unit>
 <trans-unit id="common.general-error">
   <source>An error has occurred. Please, try again later.</source>
+</trans-unit>
+<trans-unit id="store.featured-sessions.failed">
+  <source>Couldn't save your schedule. Try again.</source>
 </trans-unit>
 <trans-unit id="store.featured-sessions.added">
   <source>Session saved to My Schedule</source>
@@ -484,6 +502,30 @@
 </trans-unit>
 <trans-unit id="store.subscribe.success">
   <source>Successfully subscribed!</source>
+</trans-unit>
+<trans-unit id="shell.sync.syncing">
+  <source>Syncing…</source>
+</trans-unit>
+<trans-unit id="shell.sync.offline">
+  <source>Offline</source>
+</trans-unit>
+<trans-unit id="shell.sync.offline-one">
+  <source>Offline · 1 change to sync</source>
+</trans-unit>
+<trans-unit id="shell.sync.offline-many">
+  <source>Offline · <x id="0" equiv-text="${pending}"/> changes to sync</source>
+</trans-unit>
+<trans-unit id="store.offline.needs-network">
+  <source>Connect to the internet to send this.</source>
+</trans-unit>
+<trans-unit id="shell.sync.available-online">
+  <source>Available when you're online.</source>
+</trans-unit>
+<trans-unit id="shell.sync.saved">
+  <source>Back online. Your changes are saved.</source>
+</trans-unit>
+<trans-unit id="shell.sync.online">
+  <source>Back online.</source>
 </trans-unit>
 <trans-unit id="store.notifications.general-enabled">
   <source>General notifications enabled</source>

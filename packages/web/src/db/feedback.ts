@@ -10,36 +10,41 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import type { Feedback, FeedbackId } from '../models/feedback';
-import { dataWithParentId } from '../utils/firestore';
+import { dataWithParentId, write } from '../utils/firestore';
 
+/** Listens to a visitor's feedback, with the sessions whose feedback the server hasn't confirmed. */
 export const subscribeToFeedback = (
   userId: string,
-  onNext: (payload: Feedback[]) => void,
+  onNext: (payload: Feedback[], pendingSessionIds: string[]) => void,
   onError: (error: Error) => void,
 ): Unsubscribe => {
   return onSnapshot(
     query(collectionGroup(db, 'feedback'), where('userId', '==', userId)),
-    (snapshot) => onNext(snapshot.docs.map<Feedback>(dataWithParentId)),
+    { includeMetadataChanges: true },
+    (snapshot) => {
+      const feedback = snapshot.docs.map<Feedback>(dataWithParentId);
+      onNext(
+        feedback,
+        feedback
+          .filter((_item, index) => snapshot.docs[index]!.metadata.hasPendingWrites)
+          .map(({ parentId }) => parentId),
+      );
+    },
     (error) => onError(error as Error),
   );
 };
 
-export const saveFeedback = async (data: Feedback): Promise<FeedbackId> => {
-  await setDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId), {
-    contentRating: data.contentRating,
-    styleRating: data.styleRating,
-    comment: data.comment,
-    userId: data.userId,
-  });
+export const saveFeedback = (data: Feedback, onRejected: (error: Error) => void): void =>
+  write(
+    () =>
+      setDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId), {
+        contentRating: data.contentRating,
+        styleRating: data.styleRating,
+        comment: data.comment,
+        userId: data.userId,
+      }),
+    onRejected,
+  );
 
-  return {
-    parentId: data.parentId,
-    userId: data.userId,
-    id: data.userId,
-  };
-};
-
-export const removeFeedback = async (data: FeedbackId): Promise<FeedbackId> => {
-  await deleteDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId));
-  return data;
-};
+export const removeFeedback = (data: FeedbackId, onRejected: (error: Error) => void): void =>
+  write(() => deleteDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId)), onRejected);

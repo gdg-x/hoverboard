@@ -13,13 +13,14 @@ import {
   signInWithPopup,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
-import { clearIndexedDbPersistence, terminate } from 'firebase/firestore';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { clearIndexedDbPersistence, terminate, waitForPendingWrites } from 'firebase/firestore';
+import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import type { FirebaseUser } from '../../models/user';
 import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
-import { dispatch } from '../dispatch';
+import { dispatch, getState } from '../dispatch';
 import { resetFeaturedSessions } from '../featured-sessions';
+import type { queueComplexSnackbar } from '../snackbars';
 import { unsubscribeFromFeedback } from '../feedback';
 import { resetSubscribed } from '../subscribe';
 import { removeUser, setUser } from '../user';
@@ -71,6 +72,7 @@ vi.mock('firebase/firestore', async (importOriginal) => ({
   ...(await importOriginal<typeof import('firebase/firestore')>()),
   clearIndexedDbPersistence: vi.fn(),
   terminate: vi.fn(),
+  waitForPendingWrites: vi.fn(async () => {}),
 }));
 
 const googleProvider = PROVIDER['google.com'];
@@ -285,22 +287,27 @@ describe('auth helpers', () => {
   describe('signOut', () => {
     const location = window.location;
     const reload = vi.fn();
+    const syncState = (sync: RootState['sync']) =>
+      vi.mocked(getState).mockReturnValue({ sync } as RootState);
 
     beforeEach(() => {
       Object.defineProperty(window, 'location', {
         configurable: true,
         value: { ...location, reload },
       });
+      syncState({ online: true, pending: {} });
+      vi.mocked(waitForPendingWrites).mockResolvedValue(undefined);
     });
 
     afterEach(() => {
       Object.defineProperty(window, 'location', { configurable: true, value: location });
     });
 
-    it("signs out, deletes Firestore's cache of the user's documents, then reloads", async () => {
+    it("waits for queued writes, signs out, deletes Firestore's cache of the user's documents, then reloads", async () => {
       const auth = { name: 'firebase-auth' };
       const order: string[] = [];
       vi.mocked(getAuth).mockReturnValue(auth as never);
+      vi.mocked(waitForPendingWrites).mockImplementation(async () => void order.push('wait'));
       vi.mocked(firebaseSignOut).mockImplementation(async () => void order.push('signOut'));
       vi.mocked(terminate).mockImplementation(async () => void order.push('terminate'));
       vi.mocked(clearIndexedDbPersistence).mockImplementation(async () => void order.push('clear'));
@@ -310,19 +317,92 @@ describe('auth helpers', () => {
 
       await signOut();
 
+      expect(waitForPendingWrites).toHaveBeenCalledWith(db);
       expect(firebaseSignOut).toHaveBeenCalledWith(auth);
       expect(terminate).toHaveBeenCalledWith(db);
       expect(clearIndexedDbPersistence).toHaveBeenCalledWith(db);
-      expect(order).toEqual(['signOut', 'terminate', 'clear', 'reload']);
+      expect(order).toEqual(['wait', 'signOut', 'terminate', 'clear', 'reload']);
     });
 
-    it('still reloads when another tab has the cache open', async () => {
-      vi.mocked(clearIndexedDbPersistence).mockRejectedValue(new Error('failed-precondition'));
+    it('stops waiting for queued writes after a while', async () => {
+      vi.mocked(waitForPendingWrites).mockReturnValue(new Promise(() => {}));
+      const timeout = vi
+        .spyOn(globalThis, 'setTimeout')
+        .mockImplementation(((done: () => void) => done()) as never);
+      onTestFinished(() => {
+        timeout.mockRestore();
+      });
+      const { signOut, PENDING_WRITES_TIMEOUT } = await loadModule();
+
+      await signOut();
+
+      expect(timeout).toHaveBeenCalledWith(expect.any(Function), PENDING_WRITES_TIMEOUT);
+
+      expect(reload).toHaveBeenCalledTimes(1);
+    });
+
+    it('asks before losing changes that have not synced while offline', async () => {
+      syncState({ online: false, pending: { featuredSessions: ['session-1'] } });
       const { signOut } = await loadModule();
 
       await signOut();
 
+      expect(firebaseSignOut).not.toHaveBeenCalled();
+      const [[action]] = vi.mocked(dispatch).mock.calls as [
+        [ReturnType<typeof queueComplexSnackbar>],
+      ];
+      expect(action.payload.label).toBe(
+        "You have changes that haven't synced. Signing out now loses them.",
+      );
+      expect(action.payload.action?.title).toBe('Sign out');
+
+      await action.payload.action?.callback();
+
+      expect(waitForPendingWrites).not.toHaveBeenCalled();
+      expect(firebaseSignOut).toHaveBeenCalled();
       expect(reload).toHaveBeenCalledTimes(1);
+    });
+
+    it('signs out at once offline with everything synced', async () => {
+      syncState({ online: false, pending: {} });
+      const { signOut } = await loadModule();
+
+      await signOut();
+
+      expect(waitForPendingWrites).not.toHaveBeenCalled();
+      expect(reload).toHaveBeenCalledTimes(1);
+    });
+
+    it('still reloads when another tab has the cache open, then says to close it', async () => {
+      vi.mocked(clearIndexedDbPersistence).mockRejectedValue(new Error('failed-precondition'));
+      onTestFinished(() => {
+        vi.mocked(clearIndexedDbPersistence).mockReset();
+        sessionStorage.clear();
+      });
+      const { signOut, reportSignOut } = await loadModule();
+
+      await signOut();
+
+      expect(reload).toHaveBeenCalledTimes(1);
+      reportSignOut();
+      expect(dispatch).toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload:
+            "Signed out. Close this site's other tabs to remove your data from this browser.",
+        }),
+      );
+      vi.mocked(dispatch).mockClear();
+      reportSignOut();
+      expect(dispatch).not.toHaveBeenCalled();
+    });
+
+    it('says nothing after a sign-out that deleted the cache', async () => {
+      const { signOut, reportSignOut } = await loadModule();
+
+      await signOut();
+      reportSignOut();
+
+      expect(dispatch).not.toHaveBeenCalled();
     });
   });
 });

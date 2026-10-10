@@ -52,6 +52,20 @@ describe('map-block', () => {
     ]);
   });
 
+  it('says the map is available online instead of loading it offline', async () => {
+    const { element, shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
+    element['online'] = false;
+    await element.updateComplete;
+
+    shadowRoot.querySelector<HTMLElement>('.show-map')!.click();
+
+    expect(shadowRoot.querySelector('.placeholder')).toHaveTextContent(
+      "Available when you're online.",
+    );
+    expect(shadowRoot.querySelector('.show-map')).toHaveAttribute('disabled');
+    expect(mapsScripts()).toHaveLength(0);
+  });
+
   it('loads Google Maps only when asked, in the color scheme the page shows', async () => {
     const { element, shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
 

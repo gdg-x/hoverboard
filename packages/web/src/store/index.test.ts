@@ -25,6 +25,7 @@ describe('store', () => {
         'snackbars',
         'speakers',
         'subscribed',
+        'sync',
         'teams',
         'tickets',
         'ui',

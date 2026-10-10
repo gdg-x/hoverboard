@@ -1,4 +1,4 @@
-import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
+import { Failure, Initialized, type RemoteData, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { saveNotificationsUsers } from '../../db/notifications-users';
@@ -13,7 +13,6 @@ const slice = createSlice({
   name: 'updateNotificationsUsers',
   initialState: initialState as UpdateNotificationsUsersState,
   reducers: {
-    pending: (): UpdateNotificationsUsersState => new Pending(),
     failure: (_state, action: PayloadAction<Error>): UpdateNotificationsUsersState =>
       new Failure(action.payload),
     success: (_state, action: PayloadAction<string>): UpdateNotificationsUsersState =>
@@ -21,51 +20,40 @@ const slice = createSlice({
   },
 });
 
-const { pending, failure, success } = slice.actions;
+const { failure, success } = slice.actions;
 
-export const updateNotificationsUsers = async (uid: string, token: string) => {
-  dispatch(pending());
-
-  try {
-    const { notificationsUsers } = getState();
-    const tokens = notificationsUsers instanceof Success ? notificationsUsers.data.tokens : {};
-
-    await saveNotificationsUsers(uid, { tokens: { ...tokens, [token]: true } });
-
-    dispatch(success(uid));
-    dispatch(
-      queueSnackbar(
-        msg('My Schedule notifications enabled', {
-          id: 'store.notifications.my-schedule-enabled',
-        }),
-      ),
-    );
-  } catch (error) {
-    dispatch(failure(error as Error));
-  }
+const tokensNow = () => {
+  const { notificationsUsers } = getState();
+  return notificationsUsers instanceof Success ? notificationsUsers.data.tokens : {};
 };
 
-export const removeNotificationsUsers = async (uid: string, token: string) => {
-  dispatch(pending());
+/** Saves the token for session reminders. Works offline, since the document is the visitor's own. */
+export const updateNotificationsUsers = (uid: string, token: string): void => {
+  saveNotificationsUsers(uid, { tokens: { ...tokensNow(), [token]: true } }, (error) =>
+    dispatch(failure(error)),
+  );
+  dispatch(success(uid));
+  dispatch(
+    queueSnackbar(
+      msg('My Schedule notifications enabled', {
+        id: 'store.notifications.my-schedule-enabled',
+      }),
+    ),
+  );
+};
 
-  try {
-    const { notificationsUsers } = getState();
-    const oldTokens = notificationsUsers instanceof Success ? notificationsUsers.data.tokens : {};
-    const tokens = { ...oldTokens };
-    delete tokens[token];
-    await saveNotificationsUsers(uid, { tokens });
-
-    dispatch(success(uid));
-    dispatch(
-      queueSnackbar(
-        msg('My Schedule notifications disabled', {
-          id: 'store.notifications.my-schedule-disabled',
-        }),
-      ),
-    );
-  } catch (error) {
-    dispatch(failure(error as Error));
-  }
+export const removeNotificationsUsers = (uid: string, token: string): void => {
+  const tokens = { ...tokensNow() };
+  delete tokens[token];
+  saveNotificationsUsers(uid, { tokens }, (error) => dispatch(failure(error)));
+  dispatch(success(uid));
+  dispatch(
+    queueSnackbar(
+      msg('My Schedule notifications disabled', {
+        id: 'store.notifications.my-schedule-disabled',
+      }),
+    ),
+  );
 };
 
 export default slice.reducer;

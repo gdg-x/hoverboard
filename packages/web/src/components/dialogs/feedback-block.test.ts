@@ -79,8 +79,6 @@ describe('feedback-block', () => {
       feedback: {
         data: new Success([feedback]),
         subscription: new Initialized(),
-        set: new Initialized(),
-        delete: new Initialized(),
       },
     } as unknown as Partial<RootState>);
     await element.updateComplete;

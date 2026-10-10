@@ -1,4 +1,4 @@
-import { Failure, Pending, Success } from '@abraham/remotedata';
+import { Failure, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
@@ -7,6 +7,7 @@ import { fromStore } from '../../controllers/from-store';
 import { illustration, illustrationStyles } from '../../illustrations/illustration';
 import subscribeArt from '../../illustrations/subscribe.svg?raw';
 import { subscribe, type SubscribeState } from '../../store/subscribe';
+import { needsNetworkMessage, selectOnline } from '../../store/sync';
 import type { UserState } from '../../store/user';
 import { band } from '../../styles/band';
 import '../shared/hoverboard-icon';
@@ -54,6 +55,12 @@ export class SubscribeBlock extends ThemedElement {
         flex: 1 1 18rem;
       }
 
+      .offline {
+        flex-basis: 100%;
+        margin: 0;
+        font-weight: 600;
+      }
+
       .subscribed {
         display: flex;
         align-items: center;
@@ -82,6 +89,9 @@ export class SubscribeBlock extends ThemedElement {
 
   @fromStore((state) => state.user)
   accessor user!: UserState;
+
+  @fromStore(selectOnline)
+  private accessor online!: boolean;
 
   @state()
   private accessor email = '';
@@ -145,16 +155,13 @@ export class SubscribeBlock extends ThemedElement {
           @input="${this.onInput}"
           @keydown="${this.onKeydown}"
         ></hb-text-field>
-        <hb-button
-          size="l"
-          ?disabled="${this.subscribed instanceof Pending}"
-          @click="${this.submit}"
-        >
+        <hb-button size="l" ?disabled="${!this.online}" @click="${this.submit}">
           ${msg('Subscribe', {
             id: 'common.subscribe',
             desc: 'Button that submits a subscription.',
           })}
         </hb-button>
+        ${this.online ? nothing : html`<p class="offline">${needsNetworkMessage()}</p>`}
       </div>
     `;
   }
@@ -172,10 +179,10 @@ export class SubscribeBlock extends ThemedElement {
   };
 
   private readonly submit = () => {
-    if (this.subscribed instanceof Pending || !this.emailField?.reportValidity()) return;
+    if (!this.emailField?.reportValidity()) return;
     const [firstFieldValue = '', secondFieldValue = ''] =
       this.user instanceof Success ? (this.user.data.displayName?.split(' ') ?? []) : [];
-    void subscribe({ email: this.email, firstFieldValue, secondFieldValue });
+    subscribe({ email: this.email, firstFieldValue, secondFieldValue });
   };
 }
 

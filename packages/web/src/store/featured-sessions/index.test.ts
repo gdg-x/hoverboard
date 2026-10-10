@@ -1,12 +1,13 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, {
+  unsyncedSessions,
   resetFeaturedSessions,
   selectFeaturedSessions,
   selectFeaturedSessionsState,
   setUserFeaturedSessions,
 } from '.';
-import { fetchFeaturedSessions, saveFeaturedSessions } from '../../db/featured-sessions';
+import { saveFeaturedSessions, subscribeToFeaturedSessions } from '../../db/featured-sessions';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { selectUserId } from '../user';
@@ -14,6 +15,7 @@ import type { RootState } from '..';
 
 vi.mock('../../db/featured-sessions');
 vi.mock('../dispatch');
+vi.mock('../sync', () => ({ setPendingIds: vi.fn() }));
 vi.mock('../snackbars', () => ({
   queueSnackbar: vi.fn((label: string) => ({
     type: 'snackbars/queueSnackbar',
@@ -23,11 +25,6 @@ vi.mock('../snackbars', () => ({
 vi.mock('../user', () => ({
   selectUserId: vi.fn(),
 }));
-
-const flushPromises = async () => {
-  await Promise.resolve();
-  await Promise.resolve();
-};
 
 const ADDED = 'Session saved to My Schedule';
 
@@ -56,102 +53,114 @@ describe('featuredSessions', () => {
 });
 
 describe('setUserFeaturedSessions', () => {
-  it('cleans falsy session ids, persists them, and queues the added snackbar', async () => {
-    vi.mocked(saveFeaturedSessions).mockResolvedValue(undefined);
-    vi.mocked(queueSnackbar).mockReturnValue({
-      type: 'snackbars/queueSnackbar',
-      payload: ADDED,
-    } as never);
-
-    await setUserFeaturedSessions(
+  it('saves only bookmarked sessions, and confirms without waiting for the server', () => {
+    setUserFeaturedSessions(
       'user-1',
       { 'session-1': true, 'session-2': false, 'session-3': 0 as never },
       true,
     );
 
-    expect(saveFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': true });
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'featuredSessions/pending' }),
+    expect(saveFeaturedSessions).toHaveBeenCalledWith(
+      'user-1',
+      { 'session-1': true },
+      expect.any(Function),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        type: 'featuredSessions/success',
-        payload: { 'session-1': true },
-      }),
-    );
-    expect(queueSnackbar).toHaveBeenCalledWith(ADDED);
-    expect(dispatch).toHaveBeenNthCalledWith(
-      3,
-      expect.objectContaining({
-        type: 'snackbars/queueSnackbar',
-        payload: ADDED,
-      }),
-    );
+    // The listener updates the bookmarks, so the store only queues the confirmation.
+    expect(vi.mocked(dispatch).mock.calls.map(([action]) => action)).toEqual([
+      { type: 'snackbars/queueSnackbar', payload: ADDED },
+    ]);
   });
 
-  it('dispatches failure when persisting featured sessions fails', async () => {
-    const error = new Error('write failed');
-    vi.mocked(saveFeaturedSessions).mockRejectedValue(error);
-
-    await setUserFeaturedSessions('user-1', { 'session-1': true }, false);
-
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'featuredSessions/pending' }),
+  it('says so when the server refuses the bookmarks', () => {
+    vi.mocked(saveFeaturedSessions).mockImplementation((_userId, _sessions, onRejected) =>
+      onRejected(new Error('permission-denied')),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        type: 'featuredSessions/failure',
-        payload: error,
-      }),
-    );
-    expect(queueSnackbar).not.toHaveBeenCalled();
+
+    setUserFeaturedSessions('user-1', { 'session-1': true }, false);
+
+    expect(queueSnackbar).toHaveBeenCalledWith("Couldn't save your schedule. Try again.");
+  });
+});
+
+describe('unsyncedSessions', () => {
+  it('is empty once the server has confirmed the bookmarks', () => {
+    expect(unsyncedSessions({ a: true }, false, undefined)).toEqual([]);
+  });
+
+  it('lists the sessions whose bookmark changed since the server confirmed them', () => {
+    expect(unsyncedSessions({ a: true, c: true }, true, { a: true, b: true })).toEqual(['c', 'b']);
+  });
+
+  it('lists every bookmark before the server has answered, as after a reload offline', () => {
+    expect(unsyncedSessions({ a: true, b: false }, true, undefined)).toEqual(['a']);
   });
 });
 
 describe('featured session selectors', () => {
-  it('dispatches a lazy fetch the first time the state is read for a signed-in user', async () => {
+  const listen = () => {
+    const unsubscribe = vi.fn();
+    let onNext: ((sessions: Record<string, boolean>) => void) | undefined;
+    vi.mocked(subscribeToFeaturedSessions).mockImplementation((_userId, onStart, next) => {
+      onNext = (sessions) => next(sessions, { pending: false });
+      onStart();
+      return new Success(unsubscribe);
+    });
+    return { unsubscribe, next: (sessions: Record<string, boolean>) => onNext!(sessions) };
+  };
+  const initialized = { featuredSessions: new Initialized() } as unknown as RootState;
+
+  it("listens to a signed-in visitor's bookmarks the first time the state is read", () => {
     vi.mocked(selectUserId).mockReturnValue('user-1');
     vi.mocked(getState).mockReturnValue({} as RootState);
-    vi.mocked(fetchFeaturedSessions).mockResolvedValue({ 'session-1': true });
-    const state = {
-      featuredSessions: new Initialized(),
-    } as unknown as RootState;
+    const { next } = listen();
 
-    expect(selectFeaturedSessionsState(state)).toStrictEqual(new Initialized());
+    expect(selectFeaturedSessionsState(initialized)).toStrictEqual(new Initialized());
+    selectFeaturedSessionsState(initialized);
+    next({ 'session-1': true });
+    next({ 'session-1': true, 'session-2': true });
 
-    await flushPromises();
-
-    expect(selectUserId).toHaveBeenCalledWith({});
-    expect(fetchFeaturedSessions).toHaveBeenCalledWith('user-1');
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
+    expect(subscribeToFeaturedSessions).toHaveBeenCalledOnce();
+    expect(subscribeToFeaturedSessions).toHaveBeenCalledWith(
+      'user-1',
+      expect.any(Function),
+      expect.any(Function),
+      expect.any(Function),
+    );
+    expect(vi.mocked(dispatch).mock.calls.map(([action]) => action)).toEqual([
       expect.objectContaining({ type: 'featuredSessions/pending' }),
-    );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        type: 'featuredSessions/success',
-        payload: { 'session-1': true },
-      }),
-    );
+      { type: 'featuredSessions/success', payload: { 'session-1': true } },
+      { type: 'featuredSessions/success', payload: { 'session-1': true, 'session-2': true } },
+    ]);
+    resetFeaturedSessions();
   });
 
-  it('does nothing when lazy fetch runs without a signed-in user', async () => {
+  it('stops listening on reset, and listens again for the next visitor', () => {
+    vi.mocked(selectUserId).mockReturnValue('user-1');
+    vi.mocked(getState).mockReturnValue({} as RootState);
+    const { unsubscribe } = listen();
+
+    selectFeaturedSessionsState(initialized);
+    resetFeaturedSessions();
+    vi.mocked(selectUserId).mockReturnValue('user-2');
+    selectFeaturedSessionsState(initialized);
+
+    expect(unsubscribe).toHaveBeenCalledOnce();
+    expect(subscribeToFeaturedSessions).toHaveBeenLastCalledWith(
+      'user-2',
+      expect.any(Function),
+      expect.any(Function),
+      expect.any(Function),
+    );
+    resetFeaturedSessions();
+  });
+
+  it('does nothing without a signed-in user', () => {
     vi.mocked(selectUserId).mockReturnValue(undefined);
     vi.mocked(getState).mockReturnValue({} as RootState);
-    const state = {
-      featuredSessions: new Initialized(),
-    } as unknown as RootState;
 
-    expect(selectFeaturedSessionsState(state)).toStrictEqual(new Initialized());
+    expect(selectFeaturedSessionsState(initialized)).toStrictEqual(new Initialized());
 
-    await flushPromises();
-
-    expect(fetchFeaturedSessions).not.toHaveBeenCalled();
+    expect(subscribeToFeaturedSessions).not.toHaveBeenCalled();
     expect(dispatch).not.toHaveBeenCalled();
   });
 

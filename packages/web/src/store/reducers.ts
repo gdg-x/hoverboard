@@ -17,6 +17,7 @@ import sessionsReducer from './sessions';
 import snackbars from './snackbars';
 import speakersReducer from './speakers';
 import subscribeReducer from './subscribe';
+import syncReducer from './sync';
 import teamsReducer from './teams';
 import ticketsReducer from './tickets';
 import uiReducer from './ui';
@@ -44,6 +45,7 @@ export const reducers = combineReducers({
   snackbars,
   speakers: speakersReducer,
   subscribed: subscribeReducer,
+  sync: syncReducer,
   teams: teamsReducer,
   tickets: ticketsReducer,
   ui: uiReducer,
