@@ -48,6 +48,11 @@
       "type": "string",
       "minLength": 1
     },
+    "icon": {
+      "description": "The app icon, in packages/web/public. The build makes every size the site needs from it. A square SVG, or a square PNG of at least 512×512 pixels.",
+      "type": "string",
+      "pattern": "^(?![A-Za-z][A-Za-z0-9+.-]*:)(?!//).+\\.(png|svg)$"
+    },
     "organizer": {
       "type": "object",
       "additionalProperties": false,

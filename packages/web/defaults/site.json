@@ -1,6 +1,7 @@
 {
   "basepath": "/",
   "image": "images/social-share.jpg",
+  "icon": "images/icon.png",
   "schedule": {
     "published": true
   },

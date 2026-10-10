@@ -1,8 +1,7 @@
 import type { APIRoute } from 'astro';
 import { theme } from 'virtual:hoverboard/layout';
 import { resources, site } from 'virtual:hoverboard/site';
-
-const ICON_SIZES = [16, 32, 48, 57, 60, 72, 76, 96, 114, 120, 144, 152, 180, 192, 512];
+import { ICON_SIZES, iconPath } from '../data/icons';
 
 export const GET: APIRoute = () =>
   Response.json({
@@ -15,7 +14,7 @@ export const GET: APIRoute = () =>
     background_color: theme.light.primary,
     theme_color: theme.light.primary,
     icons: ICON_SIZES.map((size) => ({
-      src: `images/manifest/icon-${size}.png`,
+      src: iconPath(size),
       sizes: `${size}x${size}`,
       type: 'image/png',
     })),
