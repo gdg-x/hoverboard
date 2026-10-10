@@ -16,6 +16,7 @@ export const FEATURES = [
   'partners',
   'previousSpeakers',
   'schedule',
+  'socialImages',
   'speakers',
   'subscribe',
   'team',

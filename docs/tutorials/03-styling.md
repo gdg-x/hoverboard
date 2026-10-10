@@ -99,6 +99,8 @@ The site's [Content Security Policy](01-configure-app.md#content-security-policy
 
 For font files, the build adds a fallback font with the same size, so the text does not move when the font loads. It warns when a role's files are over 150KB, and when the font has no glyphs for characters in the event name and title (verify with a font of your own).
 
+[Share images](01-configure-app.md#features) use the `display` and `body` fonts too, from `.ttf`, `.otf` or `.woff` files with a single weight, such as `"weight": 700`. They can't read `.woff2` files, variable weights such as `"300 900"`, or a font service's stylesheet, so with those they use the theme's built-in font, and the build warns.
+
 ## Tags and badges
 
 Session tag colors are set by tag name in `theme.tagColors` in `packages/config/site.json`. Name each one like the tag in lowercase, with dashes instead of spaces. Speaker badge colors are in `theme.badgeColors`.

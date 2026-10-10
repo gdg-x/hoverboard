@@ -43,4 +43,10 @@ describe('Firebase Hosting headers', () => {
 
     expect(keys).not.toContain('X-XSS-Protection');
   });
+
+  it('caches share images for good, since their names change with them', () => {
+    expect(headersFor('/social/**')).toEqual({
+      'Cache-Control': 'public, max-age=31536000, immutable',
+    });
+  });
 });

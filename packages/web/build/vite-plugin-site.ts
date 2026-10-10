@@ -15,6 +15,7 @@ import {
   type SiteConfig,
 } from './resolve-config';
 import { sanitizeSvg } from './svg';
+import { socialImageDesign } from './social-images';
 import { darkLogoCss, demoThemesCss, type SiteTheme, themeCss } from './theme';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
@@ -25,6 +26,9 @@ const RESOLVED_LAYOUT_MODULE = `\0${LAYOUT_MODULE}`;
 // The theme's `@font-face` rules and font variables. Only `.astro` files import it.
 export const FONTS_MODULE = 'virtual:hoverboard/fonts';
 const RESOLVED_FONTS_MODULE = `\0${FONTS_MODULE}`;
+// The fonts, colors and logo of the share images. Only server code imports it.
+export const SOCIAL_IMAGES_MODULE = 'virtual:hoverboard/social-images';
+const RESOLVED_SOCIAL_IMAGES_MODULE = `\0${SOCIAL_IMAGES_MODULE}`;
 // One module per locale, `virtual:hoverboard/content/<locale>`, so each is its own chunk.
 export const CONTENT_MODULE = 'virtual:hoverboard/content/';
 const RESOLVED_CONTENT_MODULE = `\0${CONTENT_MODULE}`;
@@ -63,12 +67,13 @@ export const siteModule = (
     if (id === SITE_MODULE) return RESOLVED_SITE_MODULE;
     if (id === LAYOUT_MODULE) return RESOLVED_LAYOUT_MODULE;
     if (id === FONTS_MODULE) return RESOLVED_FONTS_MODULE;
+    if (id === SOCIAL_IMAGES_MODULE) return RESOLVED_SOCIAL_IMAGES_MODULE;
     const locale = id.startsWith(CONTENT_MODULE) ? id.slice(CONTENT_MODULE.length) : undefined;
     return locale && Object.hasOwn(config.contentTranslations, locale)
       ? `${RESOLVED_CONTENT_MODULE}${locale}`
       : undefined;
   },
-  load: async (id) => {
+  load: async function (id) {
     const { site, resources, contentTranslations } = config;
     if (id === RESOLVED_SITE_MODULE) {
       const loaders = Object.keys(contentTranslations).map(
@@ -94,6 +99,17 @@ export const siteModule = (
     if (id === RESOLVED_FONTS_MODULE) {
       const siteTheme = site.theme as unknown as SiteTheme;
       return fontModuleCode(await fontModuleParts(config.theme.fonts, siteTheme.fonts, siteDir));
+    }
+    if (id === RESOLVED_SOCIAL_IMAGES_MODULE) {
+      const siteTheme = site.theme as unknown as SiteTheme;
+      const { design, warnings } = socialImageDesign(config.theme, siteTheme.fonts, {
+        siteDir,
+        publicDir,
+      });
+      for (const warning of warnings) this.warn(warning);
+      return Object.entries(design)
+        .map(([name, value]) => `export const ${name} = ${JSON.stringify(value)};\n`)
+        .join('');
     }
     if (id.startsWith(RESOLVED_CONTENT_MODULE)) {
       const locale = id.slice(RESOLVED_CONTENT_MODULE.length);

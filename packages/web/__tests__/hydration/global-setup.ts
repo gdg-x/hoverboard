@@ -16,7 +16,8 @@ const webRoot = fileURLToPath(new URL('../..', import.meta.url));
 
 // The pages render in Node, where `isServer` is true, as in the build. The tests run in jsdom.
 export default async function setup(project: TestProject): Promise<void> {
-  const siteConfig = resolveConfig({ paths: configPaths(webRoot), nodeEnv: 'test' });
+  const paths = configPaths(webRoot);
+  const siteConfig = resolveConfig({ paths, nodeEnv: 'test' });
   const server = await createServer({
     root: webRoot,
     configFile: false,
@@ -24,7 +25,10 @@ export default async function setup(project: TestProject): Promise<void> {
     appType: 'custom',
     // Without a watcher, files that other global setups write cannot reload modules mid-render.
     server: { middlewareMode: true, hmr: false, ws: false, watch: null },
-    plugins: [decorators(), siteModule(siteConfig)],
+    plugins: [
+      decorators(),
+      siteModule(siteConfig, { siteDir: paths.site, publicDir: paths.public }),
+    ],
   });
   try {
     const module = (await server.ssrLoadModule('/__tests__/hydration/render-pages.ts')) as {

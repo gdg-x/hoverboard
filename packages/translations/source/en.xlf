@@ -476,6 +476,12 @@
 <trans-unit id="common.loading">
   <source>Loading...</source>
 </trans-unit>
+<trans-unit id="social-image.session.alt">
+  <source><x id="0" equiv-text="${title}"/>, by <x id="1" equiv-text="${by}"/></source>
+</trans-unit>
+<trans-unit id="social-image.speaker.alt">
+  <source>Speaker at <x id="0" equiv-text="${shortName}"/></source>
+</trans-unit>
 <trans-unit id="shell.service-worker.installing">
   <source>App being installed for offline use.</source>
 </trans-unit>

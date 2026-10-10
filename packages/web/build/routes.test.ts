@@ -41,6 +41,18 @@ describe('routes', () => {
     expect(patterns).toContain('/previous-speakers');
   });
 
+  it('builds share images only when their page and socialImages are on', () => {
+    const patterns = (features: Partial<Record<Feature, boolean>>) =>
+      enabledRoutes({ ...allFeatures(true), ...features }).map(({ pattern }) => pattern);
+
+    expect(patterns({})).toContain('/social/sessions/[file].png');
+    expect(patterns({ schedule: false })).not.toContain('/social/sessions/[file].png');
+    expect(patterns({ schedule: false })).toContain('/social/speakers/[file].png');
+    expect(
+      patterns({ socialImages: false }).filter((pattern) => pattern.startsWith('/social')),
+    ).toEqual([]);
+  });
+
   it('injects the enabled routes from src/routes', () => {
     const injectRoute = vi.fn();
     const setup = routes({ ...allFeatures(false), team: true }).hooks['astro:config:setup'];

@@ -431,6 +431,10 @@
         "schedule": {
           "type": "boolean"
         },
+        "socialImages": {
+          "description": "Builds a share image for each session and speaker page, with their photos, the logo, the date and the place. Off, those pages share the speaker's photo or the site's image.",
+          "type": "boolean"
+        },
         "speakers": {
           "type": "boolean"
         },

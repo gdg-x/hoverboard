@@ -55,6 +55,9 @@ describe('a production build of a minimal site', () => {
     expect(page).toMatch(/<link href="https:\/\/minimal-site\.web\.app\/404" rel="canonical"/);
     expect(page).not.toContain('maps.googleapis.com');
     expect(page).toContain('<meta content="en" property="og:locale">');
+    expect(page).toContain(
+      '<meta content="https://minimal-site.web.app/images/social-share.jpg" property="og:image"><meta content="image/jpeg" property="og:image:type">',
+    );
     expect(page).not.toContain('<noscript>');
   });
 

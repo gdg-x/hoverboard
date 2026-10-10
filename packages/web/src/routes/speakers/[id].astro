@@ -3,6 +3,7 @@ import { loadContent } from '../../data/content';
 import { itemMetadata } from '../../data/metadata';
 import { seedPage } from '../../data/page';
 import { speakerContent } from '../../data/schedule';
+import { socialImageMetadata, speakerImage } from '../../data/social-images';
 import type { Speaker } from '../../models/speaker';
 import Base from '../../layouts/base.astro';
 import { SpeakerPage } from '../../views/speaker-page';
@@ -18,8 +19,11 @@ const content = seedPage({
   ...speakerContent(all, speaker.id),
   ...(all.previousSpeakers && { previousSpeakers: all.previousSpeakers }),
 });
+const image = __HB_FEATURES__.socialImages
+  ? socialImageMetadata(speakerImage(speaker))
+  : speaker.photoUrl;
 ---
 
-<Base {...itemMetadata(speaker.name, speaker.bio, speaker.photoUrl)} content={content}>
+<Base {...itemMetadata(speaker.name, speaker.bio, image)} content={content}>
   <SpeakerPage speakerId={speaker.id} client:load />
 </Base>

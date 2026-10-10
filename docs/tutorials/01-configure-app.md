@@ -122,7 +122,7 @@ Turn parts of the site off in `features` in `packages/config/site.json`. Every f
 }
 ```
 
-A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `functions`, `gallery`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `schedule`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
+A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `functions`, `gallery`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `schedule`, `socialImages`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
 
 The build fails when:
 
@@ -136,6 +136,10 @@ The build fails when:
 With `functions` on, every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `sendGeneralNotification` needs `notifications`, and `scheduleNotifications` needs `notifications` and `mySchedule`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
 
 When `feedback` is off, the feedback dialog is still in the build, but nothing opens it. Bookmark buttons show only when `mySchedule` is on.
+
+`socialImages` builds a share image for each session and speaker page, which social networks and chat apps show with a link to the page. A session's image has its title, speakers, day, time and track. A speaker's image has their photo, name, company and the event's dates. Both have the logo from `packages/web/public/images/logo.svg`, the venue and the site's address, in the theme's colors and fonts. The build downloads speaker photos for them, and a photo that fails to download shows the speaker's initials, with a warning in the build output. With `socialImages` off, those pages share the first speaker's photo or `image` from `site.json`.
+
+The images come from the content at build time, like the rest of the page. After changing sessions or speakers, deploy again to update them. Each image's file name changes with what it shows, so social networks fetch the new one. To check how a page looks when shared, paste its URL into the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) or the [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/).
 
 The header follows the features too. Its button links to tickets until the event is over, or to the schedule otherwise. The account button shows when `mySchedule` or `feedback` is on, and the notifications bell when `notifications` is on. The footer links to the home page's subscribe band when `subscribe` is on, and shows a "Fork me on GitHub" sticker when `forkMe` is on.
 
