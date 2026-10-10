@@ -13,6 +13,7 @@ vi.mock('firebase/app');
 vi.mock('firebase/firestore');
 vi.mock('firebase/analytics');
 vi.mock('firebase/performance');
+vi.mock('./utils/missing-alt');
 
 const load = async (projectId: string) => {
   vi.resetModules();
@@ -46,6 +47,14 @@ describe('firebase', () => {
     expect(analytics).toBeUndefined();
     expect(getAnalytics).not.toHaveBeenCalled();
     expect(getPerformance).not.toHaveBeenCalled();
+  });
+
+  it('highlights images without alt text on the emulators only', async () => {
+    await load('hoverboard-master');
+    expect((await import('./utils/missing-alt')).highlightMissingAlt).not.toHaveBeenCalled();
+
+    await load('demo-hoverboard');
+    expect((await import('./utils/missing-alt')).highlightMissingAlt).toHaveBeenCalledOnce();
   });
 
   it('uses the real services for other projects', async () => {
