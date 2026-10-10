@@ -58,6 +58,8 @@ describe('hoverboard-icon', () => {
     'density-small',
     'density-medium',
     'density-large',
+    'cloud-off',
+    'cloud-upload',
   ])('renders the %s icon', async (name) => {
     const { shadowRoot } = await fixture(html`<hoverboard-icon name="${name}"></hoverboard-icon>`);
 
@@ -90,6 +92,15 @@ describe('hoverboard-icon', () => {
       if (!shadowRoot.querySelector('svg')) missing.push(name);
     }
     expect(missing).toEqual([]);
+  });
+
+  it('bundles the icons that show offline, which cannot load a chunk then', async () => {
+    const source = (await import('./hoverboard-icon.ts?raw')).default;
+
+    for (const name of ['cloud-off', 'cloud-upload']) {
+      expect(source).toMatch(new RegExp(`^import \\w+ from './icons/${name}';$`, 'm'));
+      expect(source).not.toContain(`import('./icons/${name}')`);
+    }
   });
 
   it('renders nothing for an unknown icon name', async () => {

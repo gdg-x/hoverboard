@@ -34,12 +34,7 @@ const slice = createSlice({
 
 const { setOnline, setPending, clearPending } = slice.actions;
 
-const NONE: string[] = [];
-
 export const selectOnline = (state: RootState): boolean => state.sync.online;
-
-export const selectPending = (state: RootState, source: PendingSource): string[] =>
-  state.sync.pending[source] ?? NONE;
 
 export const selectPendingCount = (state: RootState): number =>
   Object.values(state.sync.pending).reduce((count, ids) => count + ids.length, 0);
@@ -52,10 +47,6 @@ export const syncLabel = (online: boolean, pending: number): string | undefined 
     ? msg('Offline · 1 change to sync', { id: 'shell.sync.offline-one' })
     : msg(str`Offline · ${pending} changes to sync`, { id: 'shell.sync.offline-many' });
 };
-
-/** Says that a change, such as a bookmark, hasn't synced yet. */
-export const unsyncedMessage = (): string =>
-  msg("Saved on this device. Syncs when you're online.", { id: 'shell.sync.unsynced' });
 
 /** Says that a form needs the network to send. */
 export const needsNetworkMessage = (): string =>

@@ -5,9 +5,6 @@
 <trans-unit id="dialogs.feedback.thanks">
   <source>Thanks for your feedback.</source>
 </trans-unit>
-<trans-unit id="dialogs.feedback.unsynced">
-  <source>Not sent yet. It sends when you're online.</source>
-</trans-unit>
 <trans-unit id="dialogs.feedback.content-rating">
   <source>Content quality:</source>
 </trans-unit>
@@ -517,9 +514,6 @@
 </trans-unit>
 <trans-unit id="shell.sync.offline-many">
   <source>Offline · <x id="0" equiv-text="${pending}"/> changes to sync</source>
-</trans-unit>
-<trans-unit id="shell.sync.unsynced">
-  <source>Saved on this device. Syncs when you're online.</source>
 </trans-unit>
 <trans-unit id="store.offline.needs-network">
   <source>Connect to the internet to send this.</source>

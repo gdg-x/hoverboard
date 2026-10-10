@@ -3,7 +3,6 @@ import reducer, {
   canWriteNow,
   resetPending,
   selectOnline,
-  selectPending,
   selectPendingCount,
   setPendingIds,
   syncLabel,
@@ -44,7 +43,6 @@ describe('sync', () => {
     setPendingIds('featuredSessions', ['session-1', 'session-2']);
     setPendingIds('feedback', ['session-3']);
     expect(selectPendingCount(store.getState())).toBe(3);
-    expect(selectPending(store.getState(), 'feedback')).toEqual(['session-3']);
 
     go(true);
     expect(lastSnackbar()).not.toBe('Back online. Your changes are saved.');

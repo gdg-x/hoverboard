@@ -14,12 +14,28 @@ describe('sync-status', () => {
     expect(element.shadowRoot?.querySelector('details')).toBeNull();
   });
 
-  it('says when the site is offline, with the changes to sync and what works offline', async () => {
-    setStoreState({ sync: { online: false, pending: { featuredSessions: ['a', 'b'] } } });
-    const { shadowRootForWithin } = await fixture(html`<sync-status></sync-status>`);
-    const view = within(shadowRootForWithin);
+  it('shows only an icon while offline with nothing to sync', async () => {
+    setStoreState({ sync: { online: false, pending: {} } });
+    const { shadowRoot, shadowRootForWithin } = await fixture(html`<sync-status></sync-status>`);
+    const status = within(shadowRootForWithin).getByRole('status');
 
-    expect(view.getByRole('status')).toHaveTextContent('Offline · 2 changes to sync');
+    expect(status).toHaveTextContent(/^Offline$/);
+    expect(status.querySelector('[aria-hidden]')).toBeNull();
+    expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'cloud-off');
+  });
+
+  it('shows the number of changes to sync, with what works offline', async () => {
+    setStoreState({ sync: { online: false, pending: { featuredSessions: ['a', 'b'] } } });
+    const { shadowRoot, shadowRootForWithin } = await fixture(html`<sync-status></sync-status>`);
+    const view = within(shadowRootForWithin);
+    const status = view.getByRole('status');
+
+    expect(status.querySelector('[aria-hidden="true"]')).toHaveTextContent(/^2$/);
+    expect(shadowRoot.querySelector('hoverboard-icon')).toHaveAttribute('name', 'cloud-upload');
+    expect(status.querySelector('.visually-hidden')).toHaveTextContent(
+      'Offline · 2 changes to sync',
+    );
+    expect(status).toHaveAttribute('title', 'Offline · 2 changes to sync');
     expect(
       view.getByText(/saved on this device, and sync when you are online/),
     ).toBeInTheDocument();
@@ -28,7 +44,9 @@ describe('sync-status', () => {
   it('says when it syncs changes made offline', async () => {
     setStoreState({ sync: { online: true, pending: { feedback: ['a'] } } });
     const { shadowRootForWithin } = await fixture(html`<sync-status></sync-status>`);
+    const status = within(shadowRootForWithin).getByRole('status');
 
-    expect(within(shadowRootForWithin).getByRole('status')).toHaveTextContent('Syncing…');
+    expect(status.querySelector('[aria-hidden="true"]')).toHaveTextContent(/^1$/);
+    expect(status.querySelector('.visually-hidden')).toHaveTextContent('Syncing…');
   });
 });

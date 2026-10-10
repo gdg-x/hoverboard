@@ -190,18 +190,6 @@ describe('session-page', () => {
     });
 
     expect(shadowRoot.querySelector('.bookmark')).toHaveTextContent('Bookmarked');
-    expect(shadowRoot.querySelector('.unsynced')).toBeNull();
-  });
-
-  it('says when the bookmark has not synced yet', async () => {
-    const { shadowRoot } = await render({
-      featuredSessions: new Success({ 'session-1': true }),
-      unsyncedBookmarks: ['session-1'],
-    } as never);
-
-    expect(shadowRoot.querySelector('.unsynced')).toHaveTextContent(
-      "Saved on this device. Syncs when you're online.",
-    );
   });
 
   it('has no bookmark when My Schedule is off', async () => {

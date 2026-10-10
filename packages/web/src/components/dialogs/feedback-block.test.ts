@@ -92,24 +92,6 @@ describe('feedback-block', () => {
       'aria-hidden',
       'true',
     );
-    expect(shadowRoot.querySelector('.thanks .unsynced')).toBeNull();
-  });
-
-  it('says when saved feedback has not been sent yet', async () => {
-    const { element, shadowRoot } = await fixture<FeedbackBlock>(
-      html`<feedback-block></feedback-block>`,
-    );
-    element.sessionId = 'session-id';
-    setStoreState({
-      user: new Initialized(),
-      feedback: { data: new Success([feedback]), subscription: new Initialized() },
-      sync: { online: false, pending: { feedback: ['session-id'] } },
-    } as unknown as Partial<RootState>);
-    await element.updateComplete;
-
-    expect(shadowRoot.querySelector('.thanks .unsynced')).toHaveTextContent(
-      "Not sent yet. It sends when you're online.",
-    );
   });
 
   it('hides the delete button when there is no saved feedback', async () => {

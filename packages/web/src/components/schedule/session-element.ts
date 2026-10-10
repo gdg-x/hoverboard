@@ -13,7 +13,6 @@ import {
   setUserFeaturedSessions,
 } from '../../store/featured-sessions';
 import { queueComplexSnackbar } from '../../store/snackbars';
-import { selectPending, unsyncedMessage } from '../../store/sync';
 import type { UserState } from '../../store/user';
 import { acceptingFeedback } from '../../utils/feedback';
 import { confetti } from '../../utils/confetti';
@@ -157,16 +156,6 @@ export class SessionElement extends ThemedElement {
       inset-inline-end: var(--hb-space-1);
     }
 
-    .unsynced {
-      position: absolute;
-      inset-block-end: 4px;
-      inset-inline-end: 4px;
-      inline-size: 14px;
-      block-size: 14px;
-      border-radius: 50%;
-      background-color: var(--hb-panel-background);
-    }
-
     @media (prefers-reduced-motion: reduce) {
       .session:hover {
         translate: none;
@@ -187,8 +176,6 @@ export class SessionElement extends ThemedElement {
   accessor session: BuiltSession | undefined;
   @fromStore((state) => selectFeaturedSessionsState(state))
   accessor featuredSessions!: FeaturedSessionsState;
-  @fromStore((state) => selectPending(state, 'featuredSessions'))
-  private accessor unsyncedBookmarks!: string[];
 
   // Depends on the time, so it is only set in the browser.
   @state()
@@ -270,23 +257,16 @@ export class SessionElement extends ThemedElement {
     }
     if (!__HB_FEATURES__.mySchedule) return nothing;
     const bookmarked = this.isBookmarked;
-    const unsynced = bookmarked && this.unsyncedBookmarks.includes(session.id);
-    const label = msg(str`Bookmark ${session.title}`, { id: 'schedule.session.bookmark' });
     return html`
       <hb-icon-button
         class="action bookmark"
-        label="${unsynced ? `${label}. ${unsyncedMessage()}` : label}"
+        label="${msg(str`Bookmark ${session.title}`, { id: 'schedule.session.bookmark' })}"
         .pressed="${bookmarked}"
         @click="${this.toggleBookmark}"
       >
         <hoverboard-icon
           name="${bookmarked ? 'bookmark-check' : 'bookmark-plus'}"
         ></hoverboard-icon>
-        ${
-          unsynced
-            ? html`<hoverboard-icon class="unsynced" name="cloud-upload"></hoverboard-icon>`
-            : nothing
-        }
       </hb-icon-button>
     `;
   }

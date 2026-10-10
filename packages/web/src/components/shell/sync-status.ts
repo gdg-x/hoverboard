@@ -21,13 +21,17 @@ export class SyncStatus extends ThemedElement {
     summary {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: var(--hb-space-1);
-      min-block-size: 32px;
-      padding: var(--hb-space-1) var(--hb-space-3);
+      min-inline-size: 40px;
+      block-size: 40px;
+      box-sizing: border-box;
+      padding: 0 var(--hb-space-2);
       border-radius: var(--hb-radius-full);
       background-color: var(--hb-color-accent-2-container);
       color: var(--hb-color-on-accent-2-container);
-      font: 500 var(--hb-text-sm) / 1.2 var(--hb-font-mono);
+      font: 600 var(--hb-text-sm) / 1 var(--hb-font-mono);
+      white-space: nowrap;
       list-style: none;
       cursor: pointer;
     }
@@ -42,8 +46,18 @@ export class SyncStatus extends ThemedElement {
     }
 
     hoverboard-icon {
-      inline-size: 18px;
-      block-size: 18px;
+      inline-size: 20px;
+      block-size: 20px;
+    }
+
+    /* Still read by screen readers. */
+    .visually-hidden {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
 
     .help {
@@ -79,9 +93,10 @@ export class SyncStatus extends ThemedElement {
     if (!label) return nothing;
     return html`
       <details>
-        <summary role="status">
-          <hoverboard-icon name="${this.online ? 'cloud-upload' : 'cloud-off'}"></hoverboard-icon>
-          ${label}
+        <summary role="status" title="${label}">
+          ${this.pending ? html`<span aria-hidden="true">${this.pending}</span>` : nothing}
+          <hoverboard-icon name="${this.pending ? 'cloud-upload' : 'cloud-off'}"></hoverboard-icon>
+          <span class="visually-hidden">${label}</span>
         </summary>
         <p class="help">
           ${msg(
