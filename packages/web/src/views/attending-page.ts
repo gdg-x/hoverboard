@@ -1,6 +1,12 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing, type TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
+import '../components/attending/accessibility-section';
+import '../components/attending/accommodation-section';
+import '../components/attending/at-venue-section';
+import '../components/attending/doors-section';
+import '../components/attending/floor-plan-section';
+import '../components/attending/getting-there-section';
 import '../components/attending/online-section';
 import '../components/attending/venue-section';
 import '../components/hero/simple-hero';
@@ -24,6 +30,8 @@ import { scrollToElement } from '../utils/scrolling';
 interface Section {
   id: string;
   title: string;
+  /** Whether the section has content. */
+  shows: boolean;
   render: (heading: TemplateResult) => TemplateResult;
 }
 
@@ -118,28 +126,62 @@ export class AttendingPage extends ThemedComponent {
     if (element) scrollToElement(element);
   };
 
-  /** The sections with content, in the page's order. */
+  /** The sections with content, in the page's order. Each section checks the same content. */
   private sections(): Section[] {
     const { attendance: mode, location: venue } = this.where;
-    const sections: Section[] = [];
-    if (venue) {
-      sections.push({
+    const page = attendingPage;
+    const sections: Section[] = [
+      {
         id: 'where',
         title: msg('Where it is', { id: 'attending.where' }),
+        shows: !!venue,
         render: (heading) =>
-          html`<venue-section .venue=${venue} .photo=${attendingPage?.photo}
-            >${heading}</venue-section
-          >`,
-      });
-    }
-    if (mode !== 'inPerson' && (stream || attendingPage?.online)) {
-      sections.push({
+          html`<venue-section .venue=${venue} .photo=${page?.photo}>${heading}</venue-section>`,
+      },
+      {
         id: 'online',
         title: msg('Joining online', { id: 'attending.online' }),
+        shows: mode !== 'inPerson' && !!(stream || page?.online),
         render: (heading) => html`<online-section .attendance=${mode}>${heading}</online-section>`,
-      });
-    }
-    return sections;
+      },
+      {
+        id: 'floor-plan',
+        title: msg('Floor plan', { id: 'attending.floor-plan' }),
+        shows: !!venue && !!page?.floorPlan,
+        render: (heading) => html`<floor-plan-section>${heading}</floor-plan-section>`,
+      },
+      {
+        id: 'getting-there',
+        title: msg('Getting there', { id: 'attending.getting-there' }),
+        shows: !!venue && !!page?.gettingThere?.length,
+        render: (heading) => html`<getting-there-section>${heading}</getting-there-section>`,
+      },
+      {
+        id: 'doors',
+        title: msg('Doors', { id: 'attending.doors' }),
+        shows: !!venue && !!page?.doors?.length,
+        render: (heading) => html`<doors-section>${heading}</doors-section>`,
+      },
+      {
+        id: 'accessibility',
+        title: msg('Accessibility', { id: 'attending.accessibility' }),
+        shows: !!page?.accessibility,
+        render: (heading) => html`<accessibility-section>${heading}</accessibility-section>`,
+      },
+      {
+        id: 'accommodation',
+        title: msg('Accommodation', { id: 'attending.accommodation' }),
+        shows: !!venue && !!(page?.accommodation?.text || page?.accommodation?.hotels?.length),
+        render: (heading) => html`<accommodation-section>${heading}</accommodation-section>`,
+      },
+      {
+        id: 'at-venue',
+        title: msg('At the venue', { id: 'attending.at-venue' }),
+        shows: !!venue && !!page?.atVenue?.length,
+        render: (heading) => html`<at-venue-section>${heading}</at-venue-section>`,
+      },
+    ];
+    return sections.filter(({ shows }) => shows);
   }
 
   override render() {

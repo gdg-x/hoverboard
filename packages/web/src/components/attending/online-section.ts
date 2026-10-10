@@ -1,14 +1,13 @@
 import { msg, str } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { attendance, attendingPage, stream, timeZone } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import { loadLocalTime, selectLocalTime } from '../../store/ui';
-import { renderMarkdown } from '../../utils/markdown';
 import '../shared/hoverboard-icon';
 import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
+import { contentStyles, markdown } from './content';
 
 /**
  * How to join an online or hybrid event: the link to watch it, the organizers' text, and which time
@@ -17,33 +16,19 @@ import '../ui/hb-button';
  */
 @customElement('online-section')
 export class OnlineSection extends ThemedComponent {
-  static override styles = css`
-    :host {
-      display: block;
-    }
+  static override styles = [
+    contentStyles,
+    css`
+      .watch {
+        margin-block-start: var(--hb-space-5);
+      }
 
-    .watch {
-      margin-block-start: var(--hb-space-5);
-    }
-
-    .text {
-      max-inline-size: var(--hb-prose-max);
-      margin-block-start: var(--hb-space-4);
-    }
-
-    .text > :first-child {
-      margin-block-start: 0;
-    }
-
-    .text > :last-child {
-      margin-block-end: 0;
-    }
-
-    .time-zone {
-      max-inline-size: var(--hb-prose-max);
-      margin: var(--hb-space-4) 0 0;
-    }
-  `;
+      .time-zone {
+        max-inline-size: var(--hb-prose-max);
+        margin: var(--hb-space-4) 0 0;
+      }
+    `,
+  ];
 
   /** How people attend, from site.json unless the page passes the one it rendered on the server. */
   @property({ attribute: false })
@@ -74,7 +59,7 @@ export class OnlineSection extends ThemedComponent {
             </hb-button>`
           : nothing
       }
-      ${text ? html`<div class="text">${unsafeHTML(renderMarkdown(text))}</div>` : nothing}
+      ${markdown(text)}
       ${
         this.hydrated
           ? html`<p class="time-zone">

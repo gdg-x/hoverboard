@@ -2,6 +2,75 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file source-language="en" original="lit-localize-inputs" datatype="plaintext">
 <body>
+<trans-unit id="attending.accommodation.book">
+  <source>Book</source>
+</trans-unit>
+<trans-unit id="attending.accommodation.code">
+  <source>Discount code</source>
+</trans-unit>
+<trans-unit id="attending.accommodation.copy">
+  <source>Copy <x id="0" equiv-text="${code}"/></source>
+</trans-unit>
+<trans-unit id="attending.accommodation.copied">
+  <source>Copied <x id="0" equiv-text="${code}"/>.</source>
+</trans-unit>
+<trans-unit id="attending.accommodation.copy-failed">
+  <source>Could not copy the code. Select it to copy it.</source>
+</trans-unit>
+<trans-unit id="attending.topic.wifi">
+  <source>Wi-Fi</source>
+</trans-unit>
+<trans-unit id="attending.topic.food">
+  <source>Food and drink</source>
+</trans-unit>
+<trans-unit id="attending.topic.cloakroom">
+  <source>Cloakroom</source>
+</trans-unit>
+<trans-unit id="attending.topic.first-aid">
+  <source>First aid</source>
+</trans-unit>
+<trans-unit id="attending.topic.quiet-room">
+  <source>Quiet room</source>
+</trans-unit>
+<trans-unit id="attending.topic.lost-and-found">
+  <source>Lost and found</source>
+</trans-unit>
+<trans-unit id="attending.topic.childcare">
+  <source>Childcare</source>
+</trans-unit>
+<trans-unit id="attending.doors.time-zone">
+  <source>Times are at the venue, in <x id="0" equiv-text="${timeZone.replaceAll('_', ' ')}"/>.</source>
+</trans-unit>
+<trans-unit id="attending.floor-plan.open">
+  <source>Open full size</source>
+</trans-unit>
+<trans-unit id="attending.mode.train">
+  <source>By train</source>
+</trans-unit>
+<trans-unit id="attending.mode.plane">
+  <source>By plane</source>
+</trans-unit>
+<trans-unit id="attending.mode.bus">
+  <source>By bus</source>
+</trans-unit>
+<trans-unit id="attending.mode.tram">
+  <source>By tram</source>
+</trans-unit>
+<trans-unit id="attending.mode.metro">
+  <source>By metro</source>
+</trans-unit>
+<trans-unit id="attending.mode.car">
+  <source>By car</source>
+</trans-unit>
+<trans-unit id="attending.mode.parking">
+  <source>Parking</source>
+</trans-unit>
+<trans-unit id="attending.mode.bike">
+  <source>By bike</source>
+</trans-unit>
+<trans-unit id="attending.mode.walk">
+  <source>On foot</source>
+</trans-unit>
 <trans-unit id="pages.session.watch-live">
   <source>Watch live</source>
 </trans-unit>
@@ -772,6 +841,24 @@
 </trans-unit>
 <trans-unit id="attending.online">
   <source>Joining online</source>
+</trans-unit>
+<trans-unit id="attending.floor-plan">
+  <source>Floor plan</source>
+</trans-unit>
+<trans-unit id="attending.getting-there">
+  <source>Getting there</source>
+</trans-unit>
+<trans-unit id="attending.doors">
+  <source>Doors</source>
+</trans-unit>
+<trans-unit id="attending.accessibility">
+  <source>Accessibility</source>
+</trans-unit>
+<trans-unit id="attending.accommodation">
+  <source>Accommodation</source>
+</trans-unit>
+<trans-unit id="attending.at-venue">
+  <source>At the venue</source>
 </trans-unit>
 <trans-unit id="home.hero.details">
   <source>Event details</source>

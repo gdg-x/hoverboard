@@ -10,8 +10,7 @@ import './attending-page';
 const config = vi.hoisted(() => ({
   attendance: 'inPerson' as 'inPerson' | 'online' | 'hybrid',
   stream: 'https://stream.example/live' as string | undefined,
-  attendingPage: undefined as
-    { online?: string; photo?: { image: string; alt: string } } | undefined,
+  attendingPage: undefined as (typeof import('../config/site'))['attendingPage'],
 }));
 
 vi.mock('../config/site', async (importOriginal) => {
@@ -132,6 +131,46 @@ describe('attending-page', () => {
     const { shadowRoot } = await render();
 
     expect(shadowRoot.querySelector('venue-section')).toHaveProperty('photo', photo);
+  });
+
+  const everySection = {
+    online: 'Join the chat.',
+    floorPlan: { image: '/images/plan.svg', alt: 'The plan' },
+    gettingThere: [{ mode: 'train' as const, text: 'Tram 6.' }],
+    doors: [{ day: '2017-10-13', open: '08:00', close: '20:00' }],
+    accessibility: 'Step-free.',
+    accommodation: { hotels: [{ name: 'Hotel Example' }] },
+    atVenue: [{ topic: 'wifi' as const, text: 'Network DevFest.' }],
+  };
+
+  it('shows every section with content in order, each with its heading', async () => {
+    config.attendance = 'hybrid';
+    config.attendingPage = everySection;
+    const { shadowRoot } = await render();
+
+    expect(tocLinks(shadowRoot)).toEqual([
+      ['#where', 'Where it is'],
+      ['#online', 'Joining online'],
+      ['#floor-plan', 'Floor plan'],
+      ['#getting-there', 'Getting there'],
+      ['#doors', 'Doors'],
+      ['#accessibility', 'Accessibility'],
+      ['#accommodation', 'Accommodation'],
+      ['#at-venue', 'At the venue'],
+    ]);
+    for (const section of shadowRoot.querySelectorAll('section.band')) {
+      const heading = section.querySelector('h2[slot="heading"]')!;
+      expect(heading.parentElement!.shadowRoot!.querySelector('slot')).not.toBeNull();
+      expect(heading.id).toBe(`${section.id}-title`);
+    }
+  });
+
+  it('leaves out the sections about the venue for an online event', async () => {
+    config.attendance = 'online';
+    config.attendingPage = everySection;
+    const { shadowRoot } = await render();
+
+    expect(sectionIds(shadowRoot)).toEqual(['online', 'accessibility']);
   });
 
   it('scrolls to the section in the address, which the browser cannot find in the shadow root', async () => {

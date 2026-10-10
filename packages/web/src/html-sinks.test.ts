@@ -16,7 +16,7 @@ const ALLOWED: Record<string, string> = {
   './components/markdown/long-markdown.ts': 'markdown sanitized by renderMarkdown()',
   './components/markdown/toc-markdown.ts': 'markdown sanitized by renderMarkdown()',
   './components/home/about-organizer-block.ts': 'markdown sanitized by renderMarkdown()',
-  './components/attending/online-section.ts': 'markdown sanitized by renderMarkdown()',
+  './components/attending/content.ts': 'markdown sanitized by renderMarkdown()',
   './components/home/home-hero.ts': 'the built-in drawing, or the site SVG the build sanitizes',
   './illustrations/illustration.ts': 'built-in SVG files',
   './layouts/base.astro': 'build-time scripts, styles and JSON escaped by serializeContent()',
