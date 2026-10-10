@@ -12,6 +12,7 @@ describe('navigation', () => {
       'home',
       'speakers',
       'schedule',
+      'attending',
       'team',
       'blog',
     ]);
@@ -19,7 +20,7 @@ describe('navigation', () => {
 
   it('hides entries for features that are off', async () => {
     vi.resetModules();
-    setFeatures({ blog: false });
+    setFeatures({ blog: false, attending: false });
 
     const { navigation } = await import('./site');
 

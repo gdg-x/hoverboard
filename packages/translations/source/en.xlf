@@ -2,6 +2,15 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file source-language="en" original="lit-localize-inputs" datatype="plaintext">
 <body>
+<trans-unit id="pages.session.watch-live">
+  <source>Watch live</source>
+</trans-unit>
+<trans-unit id="attending.online.your-time">
+  <source>Times on this site are in your time zone.</source>
+</trans-unit>
+<trans-unit id="attending.online.event-time">
+  <source>Times on this site are in <x id="0" equiv-text="${timeZone.replaceAll('_', ' ')}"/>.</source>
+</trans-unit>
 <trans-unit id="home.map-block.directions">
   <source>Directions</source>
 </trans-unit>
@@ -218,9 +227,6 @@
 <trans-unit id="home.gallery-block.photo-alt">
   <source>Gallery photo</source>
 </trans-unit>
-<trans-unit id="home.hero.details">
-  <source>Event details</source>
-</trans-unit>
 <trans-unit id="home.hero.live">
   <source>Live now</source>
 </trans-unit>
@@ -268,9 +274,6 @@
 </trans-unit>
 <trans-unit id="home.on-now.next">
   <source>Up next</source>
-</trans-unit>
-<trans-unit id="pages.session.watch-live">
-  <source>Watch live</source>
 </trans-unit>
 <trans-unit id="home.partners-block.title">
   <source>Partners</source>
@@ -527,6 +530,9 @@
 <trans-unit id="shell.nav.home">
   <source>Home</source>
 </trans-unit>
+<trans-unit id="shell.nav.attending">
+  <source>Attending</source>
+</trans-unit>
 <trans-unit id="shell.nav.blog">
   <source>Blog</source>
 </trans-unit>
@@ -695,6 +701,12 @@
 <trans-unit id="calendar.watch-online">
   <source>Watch online: <x id="0" equiv-text="${stream}"/></source>
 </trans-unit>
+<trans-unit id="pages.attending.title">
+  <source>Attending</source>
+</trans-unit>
+<trans-unit id="pages.attending.description">
+  <source>How to get to the event, and how to join online</source>
+</trans-unit>
 <trans-unit id="pages.blog.title">
   <source>Blog</source>
 </trans-unit>
@@ -754,6 +766,18 @@
 </trans-unit>
 <trans-unit id="common.your-time">
   <source><x id="0" equiv-text="${time}"/> (your time)</source>
+</trans-unit>
+<trans-unit id="attending.where">
+  <source>Where it is</source>
+</trans-unit>
+<trans-unit id="attending.online">
+  <source>Joining online</source>
+</trans-unit>
+<trans-unit id="home.hero.details">
+  <source>Event details</source>
+</trans-unit>
+<trans-unit id="attending.toc">
+  <source>On this page</source>
 </trans-unit>
 <trans-unit id="pages.blog-list.error">
   <source>Error loading posts.</source>

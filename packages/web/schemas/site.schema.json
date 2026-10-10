@@ -408,6 +408,10 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "attending": {
+          "description": "An /attending page with the venue, its directions and map, and how to join online.",
+          "type": "boolean"
+        },
         "blog": {
           "type": "boolean"
         },

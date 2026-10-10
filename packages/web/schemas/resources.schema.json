@@ -32,6 +32,7 @@
       "required": ["home"],
       "properties": {
         "home": { "type": "string" },
+        "attending": { "type": "string" },
         "blog": { "type": "string" },
         "coc": { "type": "string" },
         "faq": { "type": "string" },

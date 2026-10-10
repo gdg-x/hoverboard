@@ -12,6 +12,7 @@ export const PAGE_TONES: Readonly<Record<Page, HeroTone>> = {
   previousSpeakers: '1',
   blog: '2',
   schedule: '3',
+  attending: '3',
   team: '4',
   faq: '4',
   coc: '4',

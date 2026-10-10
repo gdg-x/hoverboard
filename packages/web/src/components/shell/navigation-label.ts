@@ -3,6 +3,7 @@ import type { NavigationRoute } from '../../config/features';
 
 const LABELS: Record<NavigationRoute, () => string> = {
   home: () => msg('Home', { id: 'shell.nav.home' }),
+  attending: () => msg('Attending', { id: 'shell.nav.attending' }),
   blog: () => msg('Blog', { id: 'shell.nav.blog' }),
   codeOfConduct: () => msg('Code of Conduct', { id: 'shell.nav.code-of-conduct' }),
   faq: () => msg('FAQs', { id: 'shell.nav.faq' }),

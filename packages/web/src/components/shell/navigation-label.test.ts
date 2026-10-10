@@ -6,6 +6,7 @@ describe('navigationLabel', () => {
   it('labels every navigation route', () => {
     expect(NAVIGATION_ROUTES.map(navigationLabel)).toEqual([
       'Home',
+      'Attending',
       'Blog',
       'Code of Conduct',
       'FAQs',

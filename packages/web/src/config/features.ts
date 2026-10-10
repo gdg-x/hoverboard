@@ -2,6 +2,7 @@
 // at the boundary, so components never check flags themselves. Read `__HB_FEATURES__.<name>`
 // directly where a disabled feature's code should be dropped from the bundle.
 export const FEATURES = [
+  'attending',
   'blog',
   'codeOfConduct',
   'demo',
@@ -50,6 +51,7 @@ export const isFeatureEnabled = (feature: Feature): boolean => __HB_FEATURES__[f
 /** Routes a `navigation` entry in site.json can use: home and the features that have a page. */
 export const NAVIGATION_ROUTES = [
   'home',
+  'attending',
   'blog',
   'codeOfConduct',
   'faq',

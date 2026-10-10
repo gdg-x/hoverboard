@@ -1,0 +1,12 @@
+---
+import { pageMetadata } from '../data/metadata';
+import { seedPage } from '../data/page';
+import Base from '../layouts/base.astro';
+import { AttendingPage } from '../views/attending-page';
+
+const content = seedPage({});
+---
+
+<Base {...pageMetadata('attending')} content={content}>
+  <AttendingPage client:load />
+</Base>

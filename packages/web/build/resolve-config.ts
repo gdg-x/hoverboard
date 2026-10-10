@@ -136,6 +136,7 @@ const isTimeZone = (timeZone: string) => {
 
 // The first path segment of each feature's pages.
 const FEATURE_PATHS: Record<string, Feature> = {
+  attending: 'attending',
   blog: 'blog',
   coc: 'codeOfConduct',
   faq: 'faq',

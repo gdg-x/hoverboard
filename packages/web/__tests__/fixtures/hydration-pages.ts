@@ -147,6 +147,11 @@ export const HYDRATION_PAGES: Record<string, HydrationPage> = {
     load: () => import('../../src/views/post-page'),
     template: () => html`<post-page .postId=${'hello'}></post-page>`,
   },
+  'attending page': {
+    content: {},
+    load: () => import('../../src/views/attending-page'),
+    template: () => html`<attending-page></attending-page>`,
+  },
   'FAQ page': {
     content: {},
     load: () => import('../../src/views/faq-page'),

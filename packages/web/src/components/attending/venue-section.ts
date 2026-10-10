@@ -1,6 +1,6 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { location, mapsScriptUrl } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import { availableOnlineMessage, selectOnline } from '../../store/sync';
@@ -140,7 +140,6 @@ export class VenueSection extends ThemedComponent {
       min-block-size: 20rem;
     }
 
-    /* The page's container, such as a home page band. */
     @container (width >= 800px) {
       .layout {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
@@ -153,13 +152,17 @@ export class VenueSection extends ThemedComponent {
     }
   `;
 
+  /** The venue, from site.json unless the page passes the one it rendered on the server. */
+  @property({ attribute: false })
+  accessor venue: typeof location = location;
+
   @state()
   private accessor mapState: 'idle' | 'loading' | 'shown' | 'failed' = 'idle';
   @fromStore(selectOnline)
   private accessor online!: boolean;
 
   override render() {
-    const venue = location;
+    const venue = this.venue;
     if (!venue) return nothing;
     const { latitude, longitude } = venue.pointer;
     return html`

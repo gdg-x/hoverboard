@@ -146,7 +146,7 @@ Turn parts of the site off in `features` in `packages/config/site.json`. Every f
 }
 ```
 
-A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `functions`, `gallery`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `reactions`, `schedule`, `socialImages`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
+A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `attending`, `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `functions`, `gallery`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `reactions`, `schedule`, `socialImages`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
 
 The build fails when:
 
@@ -160,6 +160,8 @@ The build fails when:
 With `functions` on, every Cloud Function always deploys. When its feature is off, it logs an error that names the `site.json` key and does nothing. `sendGeneralNotification` needs `notifications`, and `scheduleNotifications` needs `notifications` and `mySchedule`. The functions read the flags and `event.timezone` from `site-config.json`, which their build copies from `site.json`, so deploy the functions again after changing these values.
 
 When `feedback` is off, the feedback dialog is still in the build, but nothing opens it. Save buttons show only when `mySchedule` is on.
+
+`attending` adds an `/attending` page for attendees. It shows the event's dates and place, the venue with its address, description and directions, and the map when the site has a Google Maps key, as on the home page. For an online or hybrid event with `event.stream`, it adds a "Joining online" section with the link. Each section has a heading in the page's table of contents. `heroDescriptions.attending` in `content/resources.json` is the text under the title. The default `navigation` links to it.
 
 `reactions` adds a row of reactions to each session page: Applause, Love, Insightful, Mind blown and Funny. Signed-in visitors add any of them, each once. Everyone sees the counts, and each count's label names the latest people who reacted. Visitors can react before a session and until a week after it ends, in `event.timezone`. After that, they can only take their reactions away. Reactions show only on session pages, so they need `schedule` to show anywhere. They don't need `functions`.
 
@@ -192,7 +194,7 @@ The directives are `script-src`, `style-src`, `connect-src`, `img-src`, `font-sr
 
 ## Navigation
 
-Define the header pages and their urls in `navigation` in `packages/config/site.json`. On narrow screens, they move to a full-screen menu. The default list is in `packages/web/defaults/site.json`. A `route` is `home` or a feature that has a page: `blog`, `codeOfConduct`, `faq`, `mySchedule`, `previousSpeakers`, `schedule`, `speakers` or `team`. The labels are part of the UI text, so they follow the visitor's language.
+Define the header pages and their urls in `navigation` in `packages/config/site.json`. On narrow screens, they move to a full-screen menu. The default list is in `packages/web/defaults/site.json`. A `route` is `home` or a feature that has a page: `attending`, `blog`, `codeOfConduct`, `faq`, `mySchedule`, `previousSpeakers`, `schedule`, `speakers` or `team`. The labels are part of the UI text, so they follow the visitor's language.
 
 ```json
 "navigation": [
