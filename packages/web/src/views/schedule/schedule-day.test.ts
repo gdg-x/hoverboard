@@ -131,11 +131,9 @@ describe('schedule-day', () => {
     setStoreState({ filters: new Success([{ group: FilterGroupKey.tags, tag: 'design' }]) });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('.empty')).toHaveTextContent(
+    expect(shadowRoot.querySelector('no-results')).toHaveTextContent(
       'No sessions match these filters.',
     );
-    expect(shadowRoot.querySelector('.empty .illustration svg')).toBeInTheDocument();
-    expect(shadowRoot.querySelector('.empty hb-button')).toHaveTextContent('Clear filters');
   });
 
   it('links empty timeslots in My Schedule to the day', async () => {

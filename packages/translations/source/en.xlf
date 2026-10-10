@@ -332,6 +332,9 @@
 <trans-unit id="shared.filter-menu.clear">
   <source>Clear all</source>
 </trans-unit>
+<trans-unit id="schedule.day.clear-filters">
+  <source>Clear filters</source>
+</trans-unit>
 <trans-unit id="shared.previous-speakers-block.title">
   <source>Previous speakers</source>
 </trans-unit>
@@ -712,9 +715,6 @@
 </trans-unit>
 <trans-unit id="pages.speakers.no-results">
   <source>No speakers match these filters.</source>
-</trans-unit>
-<trans-unit id="schedule.day.clear-filters">
-  <source>Clear filters</source>
 </trans-unit>
 <trans-unit id="pages.team.photo-alt">
   <source>The team</source>
