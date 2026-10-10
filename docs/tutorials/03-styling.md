@@ -34,6 +34,10 @@ Every component reads the theme through CSS variables that start with `--hb-`, s
 
 The header shows `packages/web/public/images/logo.svg`, made for light backgrounds. Add `logo-dark.svg` next to it for the dark scheme. Without it, the header shows `shortName` from `site.json` as text in the dark scheme.
 
+## App icon
+
+The icon of the installed app, and of the site on phone home screens, is `packages/web/public/images/icon.png`. The build resizes it to every size the web app manifest and browsers need, from 16 to 512 pixels, including the favicon. Replace it with a square PNG of at least 512×512 pixels, or point `icon` in `site.json` at a square SVG in `packages/web/public`. An icon that isn't square sits centered on a transparent square.
+
 ## Colors
 
 Override any theme color in `theme.colors`, as a hex color. Dark colors are in `theme.darkColors`:

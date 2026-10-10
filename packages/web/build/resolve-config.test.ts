@@ -241,6 +241,18 @@ describe('config validation', () => {
     ]);
   });
 
+  it('rejects an icon that is not a PNG or SVG in packages/web/public', () => {
+    expect(errorsFor({ site: { icon: 'images/missing.png' } })).toEqual([
+      'site.json/icon: "images/missing.png" is not in packages/web/public',
+    ]);
+    expect(errorsFor({ site: { icon: 'https://example.com/icon.png' } })).toEqual([
+      expect.stringMatching(/^site\.json\/icon: must match pattern/),
+    ]);
+    expect(errorsFor({ site: { icon: 'images/social-share.jpg' } })).toEqual([
+      expect.stringMatching(/^site\.json\/icon: must match pattern/),
+    ]);
+  });
+
   it('rejects a hero illustration that is not an SVG in packages/web/public', () => {
     expect(
       errorsFor({ site: { heroSettings: { home: { illustration: '/images/missing.svg' } } } }),

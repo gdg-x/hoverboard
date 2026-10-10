@@ -8,6 +8,7 @@ import { FooterBlock } from '../components/footer/footer-block';
 import { AppHeader, demoBanner } from '../components/shell/app-header';
 import { AppOverlays } from '../components/shell/app-overlays';
 import { loadContent } from '../data/content';
+import { iconPath } from '../data/icons';
 import '../data/markdown';
 import { imageType, pageMetadata } from '../data/metadata';
 import { seedPage } from '../data/page';
@@ -93,7 +94,9 @@ await demoBanner;
 
     <link href={url} rel="canonical" />
 
-    <link href="images/favicon.ico" rel="icon" />
+    {([16, 32] as const).map((size) => (
+      <link href={iconPath(size)} rel="icon" sizes={`${size}x${size}`} type="image/png" />
+    ))}
 
     <meta
       content={theme.colorScheme === 'system' ? 'light dark' : theme.colorScheme}
@@ -128,13 +131,12 @@ await demoBanner;
     <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
     <meta content={resources.title} name="apple-mobile-web-app-title" />
 
-    <link href="images/manifest/icon-48.png" rel="apple-touch-icon" />
-    <link href="images/manifest/icon-72.png" rel="apple-touch-icon" sizes="72x72" />
-    <link href="images/manifest/icon-96.png" rel="apple-touch-icon" sizes="96x96" />
-    <link href="images/manifest/icon-144.png" rel="apple-touch-icon" sizes="144x144" />
-    <link href="images/manifest/icon-192.png" rel="apple-touch-icon" sizes="192x192" />
+    <link href={iconPath(48)} rel="apple-touch-icon" />
+    {([72, 96, 144, 192] as const).map((size) => (
+      <link href={iconPath(size)} rel="apple-touch-icon" sizes={`${size}x${size}`} />
+    ))}
 
-    <meta content="images/manifest/icon-144.png" name="msapplication-TileImage" />
+    <meta content={iconPath(144)} name="msapplication-TileImage" />
     <meta content={theme.light.primary} name="msapplication-TileColor" />
     <meta content="no" name="msapplication-tap-highlight" />
 

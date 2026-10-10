@@ -9,6 +9,7 @@ import {
 } from '../src/config/features';
 import { deepMerge, isPlainObject } from '../src/config/merge';
 import { fontProblems } from './fonts';
+import { iconErrors } from './icons';
 import { sanitizeSvg } from './svg';
 import {
   type ResolvedTheme,
@@ -205,6 +206,7 @@ const crossFileErrors = (site: Site, resources: Resources, paths: ConfigPaths): 
       errors.push(`${path}: "${image}" is not in packages/web/public`);
     }
   }
+  errors.push(...iconErrors(site.icon, paths.public));
   // The page inlines it, so it can be drawn in the theme's colors.
   const illustration = site.heroSettings?.home?.illustration;
   if (illustration && (isUrl(illustration) || !fs.existsSync(join(paths.public, illustration)))) {

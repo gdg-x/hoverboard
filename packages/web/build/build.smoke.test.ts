@@ -115,6 +115,19 @@ describe('a production build of a minimal site', () => {
     });
   });
 
+  it("makes every icon in the manifest and the page's favicons from the site's icon", () => {
+    const { icons } = JSON.parse(build.read('manifest.json')) as { icons: { src: string }[] };
+    const favicons = [
+      ...build.read('index.html').matchAll(/<link href="([^"]+)" rel="icon" sizes="(\d+)x\2"/g),
+    ].map(([, href]) => href ?? '');
+
+    expect(icons.length).toBeGreaterThan(0);
+    expect(favicons).toEqual(['images/manifest/icon-16.png', 'images/manifest/icon-32.png']);
+    for (const src of [...icons.map(({ src }) => src), ...favicons]) {
+      expect(build.read(src).slice(1, 4), src).toBe('PNG');
+    }
+  });
+
   it('lists the home page in the sitemap, and links to it from robots.txt', () => {
     const locs = (file: string) =>
       [...build.read(file).matchAll(/<loc>([^<]*)<\/loc>/g)].map(([, loc]) => loc);

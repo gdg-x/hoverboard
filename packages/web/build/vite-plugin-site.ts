@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import n from 'nunjucks';
 import type { Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
@@ -29,6 +29,9 @@ const RESOLVED_FONTS_MODULE = `\0${FONTS_MODULE}`;
 // The fonts, colors and logo of the share images. Only server code imports it.
 export const SOCIAL_IMAGES_MODULE = 'virtual:hoverboard/social-images';
 const RESOLVED_SOCIAL_IMAGES_MODULE = `\0${SOCIAL_IMAGES_MODULE}`;
+// The app icon's file, which the icon pages resize. Only server code imports it.
+export const ICON_MODULE = 'virtual:hoverboard/icon';
+const RESOLVED_ICON_MODULE = `\0${ICON_MODULE}`;
 // One module per locale, `virtual:hoverboard/content/<locale>`, so each is its own chunk.
 export const CONTENT_MODULE = 'virtual:hoverboard/content/';
 const RESOLVED_CONTENT_MODULE = `\0${CONTENT_MODULE}`;
@@ -68,6 +71,7 @@ export const siteModule = (
     if (id === LAYOUT_MODULE) return RESOLVED_LAYOUT_MODULE;
     if (id === FONTS_MODULE) return RESOLVED_FONTS_MODULE;
     if (id === SOCIAL_IMAGES_MODULE) return RESOLVED_SOCIAL_IMAGES_MODULE;
+    if (id === ICON_MODULE) return RESOLVED_ICON_MODULE;
     const locale = id.startsWith(CONTENT_MODULE) ? id.slice(CONTENT_MODULE.length) : undefined;
     return locale && Object.hasOwn(config.contentTranslations, locale)
       ? `${RESOLVED_CONTENT_MODULE}${locale}`
@@ -110,6 +114,9 @@ export const siteModule = (
       return Object.entries(design)
         .map(([name, value]) => `export const ${name} = ${JSON.stringify(value)};\n`)
         .join('');
+    }
+    if (id === RESOLVED_ICON_MODULE) {
+      return `export const iconFile = ${JSON.stringify(resolve(publicDir, site.icon))};\n`;
     }
     if (id.startsWith(RESOLVED_CONTENT_MODULE)) {
       const locale = id.slice(RESOLVED_CONTENT_MODULE.length);
