@@ -2,6 +2,21 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file source-language="en" original="lit-localize-inputs" datatype="plaintext">
 <body>
+<trans-unit id="home.map-block.directions">
+  <source>Directions</source>
+</trans-unit>
+<trans-unit id="home.map-block.map-note">
+  <source>The map loads from Google Maps.</source>
+</trans-unit>
+<trans-unit id="home.map-block.loading">
+  <source>Loading map…</source>
+</trans-unit>
+<trans-unit id="home.map-block.show-map">
+  <source>Show map</source>
+</trans-unit>
+<trans-unit id="home.map-block.error">
+  <source>The map did not load. Try again.</source>
+</trans-unit>
 <trans-unit id="dialogs.signin.link-sent">
   <source>Check your email. We sent a sign-in link to <x id="0" equiv-text="&lt;b&gt;${email}&lt;/b&gt;"/>.</source>
 </trans-unit>
@@ -244,21 +259,6 @@
 </trans-unit>
 <trans-unit id="home.map-block.title">
   <source>Location</source>
-</trans-unit>
-<trans-unit id="home.map-block.directions">
-  <source>Directions</source>
-</trans-unit>
-<trans-unit id="home.map-block.map-note">
-  <source>The map loads from Google Maps.</source>
-</trans-unit>
-<trans-unit id="home.map-block.loading">
-  <source>Loading map…</source>
-</trans-unit>
-<trans-unit id="home.map-block.show-map">
-  <source>Show map</source>
-</trans-unit>
-<trans-unit id="home.map-block.error">
-  <source>The map did not load. Try again.</source>
 </trans-unit>
 <trans-unit id="home.on-now.title">
   <source>On now</source>
