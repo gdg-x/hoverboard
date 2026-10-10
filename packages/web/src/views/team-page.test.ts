@@ -5,7 +5,7 @@ import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { aboutOrganizerBlock, team } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
-import type { SocialLinks } from '../components/shared/social-links';
+import type { TeamMember } from '../components/shared/team-member';
 import type { TeamPage } from './team-page';
 import './team-page';
 
@@ -51,19 +51,7 @@ describe('team-page', () => {
     const { shadowRoot, view } = await render();
 
     expect(view.getByRole('heading', { level: 2, name: 'Core team' })).toBeInTheDocument();
-    expect(view.getByRole('heading', { level: 3, name: 'Ada Lovelace' })).toBeInTheDocument();
-    expect(shadowRoot.querySelector('.member .title')).toHaveTextContent('Organizer');
-    expect(shadowRoot.querySelector('.avatar')).toHaveAttribute('alt', '');
-  });
-
-  it("names each member's social links after the member", async () => {
-    const { shadowRoot } = await render();
-    const socials = shadowRoot.querySelector<SocialLinks>('social-links.socials')!;
-
-    expect(socials.socials).toEqual([
-      { icon: 'github', link: 'https://github.com/ada', name: 'GitHub' },
-    ]);
-    expect(socials).toHaveAttribute('owner', 'Ada Lovelace');
+    expect(shadowRoot.querySelector<TeamMember>('.members team-member')!.member).toBe(member);
   });
 
   it('shows loading and failure states', async () => {
