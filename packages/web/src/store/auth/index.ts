@@ -25,6 +25,8 @@ import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
 import { dispatch, getState } from '../dispatch';
 import { resetFeaturedSessions } from '../featured-sessions';
+import { resetProfiles } from '../profiles';
+import { resetReactions } from '../reactions';
 import { resetPending, selectOnline, selectPendingCount } from '../sync';
 import { unsubscribeFromFeedback } from '../feedback';
 import { queueComplexSnackbar, queueSnackbar } from '../snackbars';
@@ -131,6 +133,8 @@ export const onUser = () => {
       resetSubscribed();
       dispatch(unsubscribeFromFeedback());
       resetFeaturedSessions();
+      resetReactions();
+      resetProfiles();
       resetPending();
     }
   });

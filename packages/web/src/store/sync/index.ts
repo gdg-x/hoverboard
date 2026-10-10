@@ -5,7 +5,8 @@ import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 
 /** The listeners that report the visitor's own changes the server hasn't confirmed yet. */
-export type PendingSource = 'featuredSessions' | 'feedback' | 'notificationsUsers';
+export type PendingSource =
+  'featuredSessions' | 'feedback' | 'notificationsUsers' | 'profiles' | 'reactions';
 
 export interface SyncState {
   /** From the browser's `online` and `offline` events. The server, and the first render, assume online. */

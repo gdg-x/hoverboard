@@ -521,6 +521,12 @@
 <trans-unit id="store.featured-sessions.removed">
   <source>Session removed from My Schedule</source>
 </trans-unit>
+<trans-unit id="store.profiles.failed">
+  <source>Couldn't save your profile. Try again.</source>
+</trans-unit>
+<trans-unit id="store.reactions.failed">
+  <source>Couldn't save your reaction. Try again.</source>
+</trans-unit>
 <trans-unit id="store.subscribe.success">
   <source>Successfully subscribed!</source>
 </trans-unit>
