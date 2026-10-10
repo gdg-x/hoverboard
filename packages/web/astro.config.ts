@@ -1,3 +1,4 @@
+import sitemap from '@astrojs/sitemap';
 import lit from '@awesome.me/astro-lit';
 import { defineConfig } from 'astro/config';
 import { env } from 'node:process';
@@ -12,6 +13,7 @@ import { site } from './build/vite-plugin-site';
 const config = resolveConfig();
 
 export default defineConfig({
+  site: config.site.url,
   output: 'static',
   // Matches `trailingSlash: false` in firebase.json: `/speakers/abc` is `speakers/abc.html`.
   trailingSlash: 'never',
@@ -32,6 +34,7 @@ export default defineConfig({
       },
     },
     routes(config.site.features),
+    sitemap({ filter: (page) => !page.endsWith('/offline') }),
     // Before the service worker, which precaches the pages it changes. Deploys build with
     // FIRESTORE_TARGET=production, and every other build may run on the emulators.
     csp(config.site as CspSite, { emulators: env['FIRESTORE_TARGET'] !== 'production' }),
