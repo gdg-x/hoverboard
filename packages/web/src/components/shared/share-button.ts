@@ -1,12 +1,12 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import './hoverboard-icon';
 
 @customElement('share-button')
-export class ShareButton extends ThemedElement {
+export class ShareButton extends ThemedComponent {
   static override styles = css`
     :host {
       display: inline-block;

@@ -5,7 +5,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import type { PreviousSessionWithYear } from '../../models/previous-session';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
 import { tagChipStyle } from '../../utils/styles';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import './hoverboard-icon';
 import '../ui/hb-button';
 import '../ui/hb-chip';
@@ -18,7 +18,7 @@ export const talksByYear = (sessions: PreviousSpeaker['sessions']): PreviousSess
     .sort((a, b) => Number(b.year) - Number(a.year));
 
 @customElement('previous-talks')
-export class PreviousTalks extends ThemedElement {
+export class PreviousTalks extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;

@@ -20,7 +20,7 @@ import { getEventDates } from '../../utils/dates';
 import { type EventState, daysUntilStart, eventState } from '../../utils/event-state';
 import '../shared/hoverboard-icon';
 import { navigationLabel } from '../shell/navigation-label';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-chip';
 import '../ui/hb-sticker';
@@ -31,7 +31,7 @@ import heroArt from '../../illustrations/hero.svg?raw';
  * action for the event state. "Buy ticket" fires `show-tickets` for the page to scroll to them.
  */
 @customElement('home-hero')
-export class HomeHero extends ThemedElement {
+export class HomeHero extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;

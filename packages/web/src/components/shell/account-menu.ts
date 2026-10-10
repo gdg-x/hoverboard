@@ -9,12 +9,12 @@ import type { UserState } from '../../store/user';
 import '../shared/hoverboard-icon';
 import '../ui/hb-icon-button';
 import '../ui/hb-menu';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import { navigationLabel } from './navigation-label';
 
 /** Sign in, or the signed-in visitor's menu. The header shows it when a feature needs sign-in. */
 @customElement('account-menu')
-export class AccountMenu extends ThemedElement {
+export class AccountMenu extends ThemedComponent {
   static override styles = css`
     :host {
       display: inline-flex;

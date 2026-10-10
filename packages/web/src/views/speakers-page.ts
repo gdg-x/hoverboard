@@ -4,9 +4,9 @@ import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/shared/filter-menu';
+import '../components/shared/no-results';
 import '../components/shared/previous-speakers-block';
 import '../components/shared/speaker-card';
-import '../components/ui/hb-button';
 import '../components/ui/hb-progress';
 import type { Filter } from '../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../models/filter-group';
@@ -15,21 +15,17 @@ import { selectFilters } from '../store/filters';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/schedule';
-import { clearFilters } from '../utils/filters';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
-import { illustration, illustrationStyles } from '../illustrations/illustration';
-import noResults from '../illustrations/no-results.svg?raw';
+import { ThemedComponent } from '../components/themed-component';
 
 // A stable reference, so `selectFilterGroups` stays memoized.
 const SPEAKER_FILTER_GROUPS = [FilterGroupKey.tags];
 
 /** Every speaker as a card, with filters by the tags of their sessions. */
 @customElement('speakers-page')
-export class SpeakersPage extends ThemedElement {
+export class SpeakersPage extends ThemedComponent {
   static override styles = [
-    illustrationStyles,
     css`
       :host {
         display: block;
@@ -56,21 +52,6 @@ export class SpeakersPage extends ThemedElement {
 
       .speakers > li {
         display: grid;
-      }
-
-      .empty {
-        display: grid;
-        justify-items: start;
-        gap: var(--hb-space-3);
-        padding-block: var(--hb-space-6);
-      }
-
-      .empty p {
-        margin: 0;
-      }
-
-      .empty .illustration {
-        inline-size: min(100%, 12rem);
       }
     `,
   ];
@@ -102,15 +83,9 @@ export class SpeakersPage extends ThemedElement {
 
         ${
           speakers.length === 0 && this.selectedFilters.length
-            ? html`<div class="empty">
-                ${illustration(noResults)}
-                <p>
-                  ${msg('No speakers match these filters.', { id: 'pages.speakers.no-results' })}
-                </p>
-                <hb-button variant="tonal" @click="${clearFilters}">
-                  ${msg('Clear filters', { id: 'schedule.day.clear-filters' })}
-                </hb-button>
-              </div>`
+            ? html`<no-results>
+                ${msg('No speakers match these filters.', { id: 'pages.speakers.no-results' })}
+              </no-results>`
             : html`<ul class="speakers">
                 ${speakers.map(
                   (speaker) => html`<li><speaker-card .speaker="${speaker}"></speaker-card></li>`,

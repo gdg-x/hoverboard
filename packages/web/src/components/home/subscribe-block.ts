@@ -11,14 +11,14 @@ import { needsNetworkMessage, selectOnline } from '../../store/sync';
 import type { UserState } from '../../store/user';
 import { band } from '../../styles/band';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-text-field';
 import type { HbTextField } from '../ui/hb-text-field';
 
 /** A bright band with the site's only subscribe form: one email field. */
 @customElement('subscribe-block')
-export class SubscribeBlock extends ThemedElement {
+export class SubscribeBlock extends ThemedComponent {
   static override styles = [
     band,
     illustrationStyles,
@@ -180,9 +180,9 @@ export class SubscribeBlock extends ThemedElement {
 
   private readonly submit = () => {
     if (!this.emailField?.reportValidity()) return;
-    const [firstFieldValue = '', secondFieldValue = ''] =
+    const [firstName = '', lastName = ''] =
       this.user instanceof Success ? (this.user.data.displayName?.split(' ') ?? []) : [];
-    subscribe({ email: this.email, firstFieldValue, secondFieldValue });
+    subscribe({ email: this.email, firstName, lastName });
   };
 }
 

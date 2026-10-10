@@ -1,10 +1,10 @@
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 @customElement('app-install')
-export class AppInstall extends ThemedElement {
+export class AppInstall extends ThemedComponent {
   static override styles = css`
     .bottom-drawer-link {
       display: block;

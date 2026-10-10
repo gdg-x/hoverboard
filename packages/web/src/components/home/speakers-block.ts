@@ -9,7 +9,7 @@ import { band } from '../../styles/band';
 import { randomOrder } from '../../utils/arrays';
 import '../shared/hoverboard-icon';
 import '../shared/speaker-card';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 
 /**
@@ -17,7 +17,7 @@ import '../ui/hb-button';
  * that order. Without any, the speakers shuffle.
  */
 @customElement('speakers-block')
-export class SpeakersBlock extends ThemedElement {
+export class SpeakersBlock extends ThemedComponent {
   static override styles = [
     band,
     css`

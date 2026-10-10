@@ -13,7 +13,7 @@ import {
 import { photoTransitionName } from '../utils/styles';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** Each year with talks, newest first, and its speakers in their order. */
 export const speakersByYear = (speakers: PreviousSpeaker[]) => {
@@ -28,7 +28,7 @@ export const speakersByYear = (speakers: PreviousSpeaker[]) => {
 
 /** Speakers from earlier years, grouped by the year they spoke, under sticky year headings. */
 @customElement('previous-speakers-page')
-export class PreviousSpeakersPage extends ThemedElement {
+export class PreviousSpeakersPage extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;

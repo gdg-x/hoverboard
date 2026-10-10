@@ -2,7 +2,7 @@ import { Failure, Initialized, type RemoteData, Success } from '@abraham/remoted
 import { msg } from '@lit/localize';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { saveSubscriber } from '../../db/subscribers';
-import type { DialogData } from '../../models/dialog-form';
+import type { Subscriber } from '../../models/subscriber';
 import { dispatch } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
 import { canWriteNow } from '../sync';
@@ -24,12 +24,12 @@ const slice = createSlice({
 const { success, failure, reset } = slice.actions;
 
 /** Sends the form, without waiting for the server. Visitors without an account need the network. */
-export const subscribe = (data: DialogData): void => {
+export const subscribe = (subscriber: Subscriber): void => {
   if (!canWriteNow()) {
     dispatch(failure(new Error('Offline')));
     return;
   }
-  saveSubscriber(data, (error) => dispatch(failure(error)));
+  saveSubscriber(subscriber, (error) => dispatch(failure(error)));
   dispatch(success(true));
   dispatch(queueSnackbar(msg('Successfully subscribed!', { id: 'store.subscribe.success' })));
 };

@@ -11,14 +11,14 @@ import { generateClassName, tagChipStyle } from '../../utils/styles';
 import './hoverboard-icon';
 import '../ui/hb-button';
 import '../ui/hb-chip';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 /**
  * A Filters button that shows the track, tag and complexity chips under it, and the selected filters
  * chips that remove themselves. Filters live in the URL, so they survive reloads and links.
  */
 @customElement('filter-menu')
-export class FilterMenu extends ThemedElement {
+export class FilterMenu extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;

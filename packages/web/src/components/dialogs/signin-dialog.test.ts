@@ -1,21 +1,14 @@
 import { Failure } from '@abraham/remotedata';
-import { waitFor } from '@testing-library/dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { html, nothing, render as litRender } from 'lit';
+import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setStoreState } from '../../../__tests__/helpers/store';
-import {
-  finishSignInWithLink,
-  hasSignInLink,
-  mergeAccounts,
-  sendSignInLink,
-  signIn,
-} from '../../store/auth';
+import { hasSignInLink, mergeAccounts, signIn } from '../../store/auth';
 import { closeDialog, openSigninDialog } from '../../store/dialogs';
 import { queueSnackbar } from '../../store/snackbars';
 import { signInProviders } from '../../config/site';
 import { PROVIDER } from '../../utils/providers';
-import type { HbTextField } from '../ui/hb-text-field';
+import type { EmailLinkForm } from './email-link-form';
 import type { SigninDialog } from './signin-dialog';
 import './signin-dialog';
 
@@ -90,7 +83,7 @@ describe('signin-dialog', () => {
     expect(shadowRoot.querySelector('.offline')).toHaveTextContent(
       'Connect to the internet to sign in.',
     );
-    for (const button of shadowRoot.querySelectorAll('.sign-in-button, .email-button')) {
+    for (const button of shadowRoot.querySelectorAll('.sign-in-button')) {
       expect(button).toHaveAttribute('disabled');
     }
   });
@@ -182,92 +175,22 @@ describe('signin-dialog', () => {
     expect(mockCloseDialog).toHaveBeenCalled();
   });
 
-  describe('email link', () => {
-    const typeEmail = async (shadowRoot: ShadowRoot, email: string) => {
-      const field = shadowRoot.querySelector<HbTextField>('hb-text-field')!;
-      await field.updateComplete;
-      const input = field.shadowRoot!.querySelector('input')!;
-      input.value = email;
-      input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
-    };
+  it('signs in by email above the other ways to sign in', async () => {
+    const { shadowRoot } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
 
-    afterEach(() => {
-      litRender(nothing, document.body);
-    });
+    expect(shadowRoot.querySelector('email-link-form.email-link + .or')).toHaveTextContent('or');
+  });
 
-    it('asks for an email address above the other ways to sign in', async () => {
-      const { shadowRoot } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
+  it('starts the email form again each time it opens', async () => {
+    const { element, shadowRoot } = await fixture<SigninDialog>(
+      html`<signin-dialog></signin-dialog>`,
+    );
+    const reset = vi.spyOn(shadowRoot.querySelector<EmailLinkForm>('email-link-form')!, 'reset');
 
-      expect(shadowRoot.querySelector('hb-text-field')).toHaveAttribute('label', 'Email');
-      expect(shadowRoot.querySelector('hb-text-field')).toHaveAttribute('type', 'email');
-      expect(shadowRoot.querySelector('.email-button')).toHaveTextContent(
-        'Email me a sign-in link',
-      );
-      expect(shadowRoot.querySelector('.email-link + .or')).toHaveTextContent('or');
-    });
+    element['open'] = true;
+    await element.updateComplete;
 
-    it('emails a link and says where it went', async () => {
-      vi.mocked(sendSignInLink).mockResolvedValue();
-      const { shadowRoot } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
-
-      await typeEmail(shadowRoot, 'ada@example.com');
-      shadowRoot.querySelector<HTMLElement>('.email-button')!.click();
-
-      expect(sendSignInLink).toHaveBeenCalledWith('ada@example.com');
-      await waitFor(() =>
-        expect(shadowRoot.querySelector('.link-sent')).toHaveTextContent(
-          'Check your email. We sent a sign-in link to ada@example.com.',
-        ),
-      );
-      expect(shadowRoot.querySelector('.link-sent')).toHaveAttribute('role', 'status');
-    });
-
-    it('does not send a link to an address that is not valid', async () => {
-      const { shadowRoot } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
-
-      await typeEmail(shadowRoot, 'not an email');
-      shadowRoot.querySelector<HTMLElement>('.email-button')!.click();
-
-      expect(sendSignInLink).not.toHaveBeenCalled();
-    });
-
-    it('shows an error when the link cannot be sent', async () => {
-      vi.mocked(sendSignInLink).mockRejectedValue(new Error('auth/operation-not-allowed'));
-      const { shadowRoot } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
-
-      await typeEmail(shadowRoot, 'ada@example.com');
-      shadowRoot.querySelector<HTMLElement>('.email-button')!.click();
-
-      await waitFor(() =>
-        expect(shadowRoot.querySelector('hb-text-field')).toHaveAttribute(
-          'error',
-          'Could not send the link. Please try again.',
-        ),
-      );
-    });
-
-    it('finishes signing in from a link opened in another browser', async () => {
-      vi.mocked(hasSignInLink).mockReturnValue(true);
-      vi.mocked(finishSignInWithLink).mockResolvedValue('wrong-email');
-      const { shadowRoot } = await fixture<SigninDialog>(html`<signin-dialog></signin-dialog>`);
-
-      expect(shadowRoot.querySelector('.email-link')).toHaveTextContent(
-        'Enter your email address again to finish signing in.',
-      );
-      expect(shadowRoot.querySelector('.email-button')).toHaveTextContent('Sign in');
-
-      await typeEmail(shadowRoot, 'grace@example.com');
-      shadowRoot.querySelector<HTMLElement>('.email-button')!.click();
-
-      expect(finishSignInWithLink).toHaveBeenCalledWith('grace@example.com');
-      expect(sendSignInLink).not.toHaveBeenCalled();
-      await waitFor(() =>
-        expect(shadowRoot.querySelector('hb-text-field')).toHaveAttribute(
-          'error',
-          'Use the email address the link was sent to.',
-        ),
-      );
-    });
+    expect(reset).toHaveBeenCalledTimes(1);
   });
 
   it('says to sign in with an email link when the account was made with one', async () => {

@@ -8,7 +8,7 @@ import { store } from '../../store';
 import { FilterGroupKey } from '../../models/filter-group';
 import type { BuiltDay, BuiltSession } from '../../schedule/build-schedule';
 import { wallClock, zonedTime } from '../../utils/time-zone';
-import type { SessionElement } from '../../components/schedule/session-element';
+import type { SessionCard } from '../../components/schedule/session-card';
 import {
   matchesFilters,
   narrowGridArea,
@@ -76,7 +76,7 @@ describe('schedule-day', () => {
       'datetime',
       zonedTime('2024-01-01', '10:00', 'Europe/Kyiv').toISOString(),
     );
-    const sessions = [...shadowRoot.querySelectorAll<SessionElement>('session-element')];
+    const sessions = [...shadowRoot.querySelectorAll<SessionCard>('session-card')];
     expect(sessions.map((session) => session.session?.id)).toEqual(['web', 'android']);
   });
 
@@ -108,7 +108,7 @@ describe('schedule-day', () => {
     setStoreState({ filters: new Success([{ group: FilterGroupKey.tags, tag: 'web' }]) });
     const { shadowRoot } = await render();
 
-    const sessions = [...shadowRoot.querySelectorAll<SessionElement>('session-element')];
+    const sessions = [...shadowRoot.querySelectorAll<SessionCard>('session-card')];
     expect(sessions.map((session) => session.session?.id)).toEqual(['web']);
   });
 
@@ -119,7 +119,7 @@ describe('schedule-day', () => {
     expect([...shadowRoot.querySelectorAll('.track')].map((track) => track.textContent)).toEqual([
       'Room 2',
     ]);
-    const sessions = [...shadowRoot.querySelectorAll<SessionElement>('session-element')];
+    const sessions = [...shadowRoot.querySelectorAll<SessionCard>('session-card')];
     expect(sessions.map((session) => session.session?.id)).toEqual(['android']);
     expect(shadowRoot.querySelector<HTMLElement>('.block')!.style.gridArea).toBe('1 / 2 / 1 / 3');
     expect(shadowRoot.querySelector<HTMLElement>('.grid')!.style.getPropertyValue('--tracks')).toBe(
@@ -131,11 +131,9 @@ describe('schedule-day', () => {
     setStoreState({ filters: new Success([{ group: FilterGroupKey.tags, tag: 'design' }]) });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('.empty')).toHaveTextContent(
+    expect(shadowRoot.querySelector('no-results')).toHaveTextContent(
       'No sessions match these filters.',
     );
-    expect(shadowRoot.querySelector('.empty .illustration svg')).toBeInTheDocument();
-    expect(shadowRoot.querySelector('.empty hb-button')).toHaveTextContent('Clear filters');
   });
 
   it('links empty timeslots in My Schedule to the day', async () => {

@@ -13,7 +13,7 @@ describe('isDialogOpen', () => {
   it('returns false when a different dialog is open', () => {
     const dialog: DialogState = new Success({ name: DIALOG.SIGNIN });
 
-    expect(isDialogOpen(dialog, DIALOG.SUBSCRIBE)).toBe(false);
+    expect(isDialogOpen(dialog, DIALOG.PARTNER)).toBe(false);
   });
 
   it('returns false when no dialog is open', () => {

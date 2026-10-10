@@ -11,12 +11,13 @@ import {
   selectPreviousSpeakersState,
 } from '../../store/previous-speakers';
 import './hoverboard-icon';
+import './speaker-photo';
 import '../ui/hb-button';
 import { fromStore } from '../../controllers/from-store';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 @customElement('previous-speakers-block')
-export class PreviousSpeakersBlock extends ThemedElement {
+export class PreviousSpeakersBlock extends ThemedComponent {
   static override styles = [
     band,
     css`
@@ -50,13 +51,7 @@ export class PreviousSpeakersBlock extends ThemedElement {
       }
 
       .photo {
-        display: block;
-        inline-size: 72px;
-        block-size: 72px;
-        border: var(--hb-border-width) solid var(--hb-border-color);
-        border-radius: var(--hb-radius-avatar);
-        background-color: var(--hb-color-surface-bright);
-        object-fit: cover;
+        --hb-speaker-photo-background: var(--hb-color-surface-bright);
       }
 
       @container (width < 480px) {
@@ -118,15 +113,12 @@ export class PreviousSpeakersBlock extends ThemedElement {
             (speaker) => html`
               <li>
                 <a class="speaker" href="${this.previousSpeakerUrl(speaker.id)}">
-                  <img
-                    loading="lazy"
-                    decoding="async"
+                  <speaker-photo
                     class="photo"
+                    size="s"
                     src="${speaker.photoUrl}"
                     alt="${speaker.name}"
-                    width="72"
-                    height="72"
-                  />
+                  ></speaker-photo>
                 </a>
               </li>
             `,

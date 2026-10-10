@@ -18,7 +18,7 @@ import { loadLocalTime, selectLocalTime, setLocalTime } from '../store/ui';
 import { timeZone } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** IANA names such as `America/New_York`, as people read them. */
 const zoneName = (zone: string) => zone.replaceAll('_', ' ');
@@ -28,7 +28,7 @@ const zoneName = (zone: string) => zone.replaceAll('_', ' ');
  * the filters. The day or My schedule is the slotted content.
  */
 @customElement('schedule-page')
-export class SchedulePage extends ThemedElement {
+export class SchedulePage extends ThemedComponent {
   static override styles = css`
     :host {
       --hb-schedule-tabs-height: calc(var(--hb-target-min) + 4px + 2 * var(--hb-space-3));

@@ -68,11 +68,9 @@ describe('speakers-page', () => {
       selectedFilters: [{ group: FilterGroupKey.tags, tag: 'design' }],
     });
 
-    expect(shadowRoot.querySelector('.empty')).toHaveTextContent(
+    expect(shadowRoot.querySelector('no-results')).toHaveTextContent(
       'No speakers match these filters.',
     );
-    expect(shadowRoot.querySelector('.empty .illustration svg')).toBeInTheDocument();
-    expect(shadowRoot.querySelector('.empty hb-button')).toHaveTextContent('Clear filters');
   });
 
   it('shows previous speakers only when that feature is on', async () => {

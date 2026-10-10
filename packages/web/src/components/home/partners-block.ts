@@ -1,23 +1,20 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
-import { css, html, nothing, type PropertyValues } from 'lit';
+import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { fromStore } from '../../controllers/from-store';
-import { store } from '../../store';
-import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
+import { openPartnerDialog } from '../../store/dialogs';
 import { type PartnerGroupsState, selectPartnerGroups } from '../../store/partners';
-import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
-import { queueSnackbar } from '../../store/snackbars';
 import { band } from '../../styles/band';
 import { safeUrl } from '../../utils/safe-url';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 
 /** Partner logos by group, each group under its own heading. */
 @customElement('partners-block')
-export class PartnersBlock extends ThemedElement {
+export class PartnersBlock extends ThemedComponent {
   static override styles = [
     band,
     css`
@@ -66,19 +63,8 @@ export class PartnersBlock extends ThemedElement {
     `,
   ];
 
-  @fromStore((state) => state.potentialPartners)
-  accessor potentialPartners!: typeof initialPotentialPartnersState;
   @fromStore((state) => selectPartnerGroups(state))
   accessor partners!: PartnerGroupsState;
-
-  override willUpdate(changedProperties: PropertyValues) {
-    if (changedProperties.has('potentialPartners') && this.potentialPartners instanceof Success) {
-      closeDialog();
-      store.dispatch(
-        queueSnackbar(msg('We will contact you soon!', { id: 'home.partners-block.added' })),
-      );
-    }
-  }
 
   override render() {
     const groups = this.partners instanceof Success ? this.partners.data : [];
@@ -91,7 +77,7 @@ export class PartnersBlock extends ThemedElement {
             variant="outlined"
             class="cta-button"
             trailing-icon
-            @click="${this.addPotentialPartner}"
+            @click="${openPartnerDialog}"
           >
             ${msg('Become a partner', { id: 'home.partners-block.cta' })}
             <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
@@ -134,16 +120,6 @@ export class PartnersBlock extends ThemedElement {
       </div>
     `;
   }
-
-  private addPotentialPartner = () => {
-    openSubscribeDialog({
-      title: msg('Become a partner!', { id: 'home.partners-block.form-title' }),
-      submitLabel: msg('Submit', { id: 'home.partners-block.submit' }),
-      firstFieldLabel: msg('Full Name', { id: 'home.partners-block.full-name' }),
-      secondFieldLabel: msg('Company Name', { id: 'home.partners-block.company-name' }),
-      submit: (data) => addPotentialPartner(data),
-    });
-  };
 }
 
 declare global {

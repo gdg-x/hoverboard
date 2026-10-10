@@ -2,7 +2,7 @@ import { msg, str } from '@lit/localize';
 import { css, html, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { getLocale } from '../../utils/localization';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 export interface StarRatingChangeDetail {
   rating: number;
@@ -14,7 +14,7 @@ const STAR_ICON = svg`<svg viewBox="0 0 24 24" aria-hidden="true">
 </svg>`;
 
 @customElement('star-rating')
-export class StarRating extends ThemedElement {
+export class StarRating extends ThemedComponent {
   static override styles = css`
     :host {
       display: inline-block;

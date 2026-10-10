@@ -2,6 +2,24 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file source-language="en" original="lit-localize-inputs" datatype="plaintext">
 <body>
+<trans-unit id="dialogs.signin.link-sent">
+  <source>Check your email. We sent a sign-in link to <x id="0" equiv-text="&lt;b&gt;${email}&lt;/b&gt;"/>.</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.confirm-email">
+  <source>Enter your email address again to finish signing in.</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.email">
+  <source>Email</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.send-link">
+  <source>Email me a sign-in link</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.wrong-email">
+  <source>Use the email address the link was sent to.</source>
+</trans-unit>
+<trans-unit id="dialogs.signin.send-error">
+  <source>Could not send the link. Please try again.</source>
+</trans-unit>
 <trans-unit id="dialogs.feedback.thanks">
   <source>Thanks for your feedback.</source>
 </trans-unit>
@@ -35,6 +53,30 @@
 <trans-unit id="dialogs.feedback.retry">
   <source>Retry</source>
 </trans-unit>
+<trans-unit id="dialogs.subscribe.field-required">
+  <source>Field required.</source>
+</trans-unit>
+<trans-unit id="home.partners-block.full-name">
+  <source>Full Name</source>
+</trans-unit>
+<trans-unit id="home.partners-block.company-name">
+  <source>Company Name</source>
+</trans-unit>
+<trans-unit id="dialogs.subscribe.email">
+  <source>Email Address</source>
+</trans-unit>
+<trans-unit id="common.email-invalid">
+  <source>Please enter a valid email address.</source>
+</trans-unit>
+<trans-unit id="home.partners-block.added">
+  <source>We will contact you soon!</source>
+</trans-unit>
+<trans-unit id="home.partners-block.form-title">
+  <source>Become a partner!</source>
+</trans-unit>
+<trans-unit id="home.partners-block.submit">
+  <source>Submit</source>
+</trans-unit>
 <trans-unit id="dialogs.signin.sign-in-with">
   <source>Sign in with <x id="0" equiv-text="${provider}"/></source>
 </trans-unit>
@@ -52,39 +94,6 @@
 </trans-unit>
 <trans-unit id="dialogs.signin.continue-with">
   <source>Sign in with <x id="0" equiv-text="${provider}"/> to continue.</source>
-</trans-unit>
-<trans-unit id="dialogs.signin.link-sent">
-  <source>Check your email. We sent a sign-in link to <x id="0" equiv-text="&lt;b&gt;${email}&lt;/b&gt;"/>.</source>
-</trans-unit>
-<trans-unit id="dialogs.signin.confirm-email">
-  <source>Enter your email address again to finish signing in.</source>
-</trans-unit>
-<trans-unit id="dialogs.signin.email">
-  <source>Email</source>
-</trans-unit>
-<trans-unit id="dialogs.signin.send-link">
-  <source>Email me a sign-in link</source>
-</trans-unit>
-<trans-unit id="dialogs.signin.wrong-email">
-  <source>Use the email address the link was sent to.</source>
-</trans-unit>
-<trans-unit id="dialogs.signin.send-error">
-  <source>Could not send the link. Please try again.</source>
-</trans-unit>
-<trans-unit id="dialogs.subscribe.first-name">
-  <source>First Name</source>
-</trans-unit>
-<trans-unit id="dialogs.subscribe.last-name">
-  <source>Last Name</source>
-</trans-unit>
-<trans-unit id="dialogs.subscribe.email">
-  <source>Email Address</source>
-</trans-unit>
-<trans-unit id="dialogs.subscribe.field-required">
-  <source>Field required.</source>
-</trans-unit>
-<trans-unit id="common.email-invalid">
-  <source>Please enter a valid email address.</source>
 </trans-unit>
 <trans-unit id="footer.color-scheme.system">
   <source>System</source>
@@ -209,9 +218,6 @@
 <trans-unit id="home.map-block.error">
   <source>The map did not load. Try again.</source>
 </trans-unit>
-<trans-unit id="home.partners-block.added">
-  <source>We will contact you soon!</source>
-</trans-unit>
 <trans-unit id="home.partners-block.title">
   <source>Partners</source>
 </trans-unit>
@@ -220,18 +226,6 @@
 </trans-unit>
 <trans-unit id="home.partners-block.error">
   <source>Error loading partners.</source>
-</trans-unit>
-<trans-unit id="home.partners-block.form-title">
-  <source>Become a partner!</source>
-</trans-unit>
-<trans-unit id="home.partners-block.submit">
-  <source>Submit</source>
-</trans-unit>
-<trans-unit id="home.partners-block.full-name">
-  <source>Full Name</source>
-</trans-unit>
-<trans-unit id="home.partners-block.company-name">
-  <source>Company Name</source>
 </trans-unit>
 <trans-unit id="home.speakers-block.title">
   <source>Speakers</source>
@@ -251,12 +245,6 @@
 <trans-unit id="home.subscribe-block.error">
   <source>Could not subscribe. Please try again.</source>
 </trans-unit>
-<trans-unit id="home.tickets-block.title">
-  <source>Tickets</source>
-</trans-unit>
-<trans-unit id="home.tickets-block.error">
-  <source>Error loading tickets</source>
-</trans-unit>
 <trans-unit id="home.tickets-block.sold-out-sticker">
   <source>Sold out</source>
 </trans-unit>
@@ -269,11 +257,29 @@
 <trans-unit id="home.tickets-block.save">
   <source>Save <x id="0" equiv-text="${discount}"/> today</source>
 </trans-unit>
+<trans-unit id="home.tickets-block.title">
+  <source>Tickets</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.error">
+  <source>Error loading tickets</source>
+</trans-unit>
 <trans-unit id="markdown.remote-markdown.error">
   <source>Error loading content</source>
 </trans-unit>
 <trans-unit id="markdown.toc.title">
   <source>On this page</source>
+</trans-unit>
+<trans-unit id="pages.session.bookmarked">
+  <source>Bookmarked</source>
+</trans-unit>
+<trans-unit id="pages.session.bookmark">
+  <source>Bookmark</source>
+</trans-unit>
+<trans-unit id="schedule.session.bookmark">
+  <source>Bookmark <x id="0" equiv-text="${session.title}"/></source>
+</trans-unit>
+<trans-unit id="common.save-sessions-signed-out">
+  <source>Sign in to save sessions</source>
 </trans-unit>
 <trans-unit id="schedule.tabs.label">
   <source>Schedule days</source>
@@ -281,17 +287,14 @@
 <trans-unit id="schedule.tabs.day">
   <source>Day <x id="0" equiv-text="${index + 1}"/></source>
 </trans-unit>
-<trans-unit id="schedule.session.sponsored">
-  <source>Sponsored</source>
-</trans-unit>
 <trans-unit id="schedule.session.rate">
   <source>Rate <x id="0" equiv-text="${session.title}"/></source>
 </trans-unit>
-<trans-unit id="schedule.session.bookmark">
-  <source>Bookmark <x id="0" equiv-text="${session.title}"/></source>
+<trans-unit id="pages.session.sponsored-by">
+  <source>Sponsored by <x id="0" equiv-text="${sponsor}"/></source>
 </trans-unit>
-<trans-unit id="common.save-sessions-signed-out">
-  <source>Sign in to save sessions</source>
+<trans-unit id="schedule.session.sponsored">
+  <source>Sponsored</source>
 </trans-unit>
 <trans-unit id="shared.add-to-calendar.label">
   <source>Add to calendar</source>
@@ -323,6 +326,9 @@
 <trans-unit id="shared.filter-menu.clear">
   <source>Clear all</source>
 </trans-unit>
+<trans-unit id="schedule.day.clear-filters">
+  <source>Clear filters</source>
+</trans-unit>
 <trans-unit id="shared.previous-speakers-block.title">
   <source>Previous speakers</source>
 </trans-unit>
@@ -340,6 +346,9 @@
 </trans-unit>
 <trans-unit id="common.view-presentation">
   <source>View presentation</source>
+</trans-unit>
+<trans-unit id="pages.speaker.badges">
+  <source>Badges</source>
 </trans-unit>
 <trans-unit id="shared.star-rating.rate">
   <source>Rate <x id="0" equiv-text="${value}"/> out of <x id="1" equiv-text="${this.maxRating}"/></source>
@@ -419,8 +428,14 @@
 <trans-unit id="shell.nav.team">
   <source>Team</source>
 </trans-unit>
-<trans-unit id="shell.notifications.toggle">
-  <source>Notifications</source>
+<trans-unit id="shell.notifications.blocked">
+  <source>Please enable notifications in your browser</source>
+</trans-unit>
+<trans-unit id="shell.notifications.unsupported">
+  <source>Notifications are not supported on this device</source>
+</trans-unit>
+<trans-unit id="shell.notifications.error">
+  <source>Unknown error occurred</source>
 </trans-unit>
 <trans-unit id="shell.notifications.prompt">
   <source>Enable notifications</source>
@@ -446,14 +461,8 @@
 <trans-unit id="shell.notifications.my-schedule">
   <source>My Schedule notifications</source>
 </trans-unit>
-<trans-unit id="shell.notifications.blocked">
-  <source>Please enable notifications in your browser</source>
-</trans-unit>
-<trans-unit id="shell.notifications.unsupported">
-  <source>Notifications are not supported on this device</source>
-</trans-unit>
-<trans-unit id="shell.notifications.error">
-  <source>Unknown error occurred</source>
+<trans-unit id="shell.notifications.toggle">
+  <source>Notifications</source>
 </trans-unit>
 <trans-unit id="shell.snack-bar.dismiss">
   <source>Dismiss</source>
@@ -683,15 +692,6 @@
 <trans-unit id="pages.session.details">
   <source>Session details</source>
 </trans-unit>
-<trans-unit id="pages.session.sponsored-by">
-  <source>Sponsored by <x id="0" equiv-text="${session.sponsor}"/></source>
-</trans-unit>
-<trans-unit id="pages.session.bookmarked">
-  <source>Bookmarked</source>
-</trans-unit>
-<trans-unit id="pages.session.bookmark">
-  <source>Bookmark</source>
-</trans-unit>
 <trans-unit id="pages.session.speakers">
   <source>Speakers</source>
 </trans-unit>
@@ -701,9 +701,6 @@
 <trans-unit id="pages.speaker.all-speakers">
   <source>All speakers</source>
 </trans-unit>
-<trans-unit id="pages.speaker.badges">
-  <source>Badges</source>
-</trans-unit>
 <trans-unit id="common.sessions">
   <source>Sessions</source>
 </trans-unit>
@@ -712,9 +709,6 @@
 </trans-unit>
 <trans-unit id="pages.speakers.no-results">
   <source>No speakers match these filters.</source>
-</trans-unit>
-<trans-unit id="schedule.day.clear-filters">
-  <source>Clear filters</source>
 </trans-unit>
 <trans-unit id="pages.team.photo-alt">
   <source>The team</source>

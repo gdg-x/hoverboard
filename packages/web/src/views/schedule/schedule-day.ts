@@ -19,19 +19,16 @@ import { selectFilters } from '../../store/filters';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { selectLocalTime } from '../../store/ui';
 import { timeZone } from '../../config/site';
-import { clearFilters } from '../../utils/filters';
 import { getScheduleDay } from '../../utils/dates';
 import { getLocale } from '../../utils/localization';
 import { generateClassName } from '../../utils/styles';
 import { wallClock, zonedTime } from '../../utils/time-zone';
 import '../../components/shared/hoverboard-icon';
-import '../../components/schedule/session-element';
-import '../../components/ui/hb-button';
+import '../../components/shared/no-results';
+import '../../components/schedule/session-card';
 import '../../components/ui/hb-icon-button';
 import { fromStore } from '../../controllers/from-store';
-import { ThemedElement } from '../../components/themed-element';
-import { illustration, illustrationStyles } from '../../illustrations/illustration';
-import noResults from '../../illustrations/no-results.svg?raw';
+import { ThemedComponent } from '../../components/themed-component';
 
 const ONE_MINUTE_MS = 60_000;
 
@@ -89,9 +86,8 @@ export const narrowGridArea = (gridArea: string, columns: number[]): string | un
  * sessions are one list in time order. During the day, a line marks the current time.
  */
 @customElement('schedule-day')
-export class ScheduleDay extends ThemedElement {
+export class ScheduleDay extends ThemedComponent {
   static override styles = [
-    illustrationStyles,
     css`
       :host {
         display: block;
@@ -189,7 +185,7 @@ export class ScheduleDay extends ThemedElement {
         scroll-snap-align: start;
       }
 
-      .block session-element {
+      .block session-card {
         flex: 1;
       }
 
@@ -254,21 +250,6 @@ export class ScheduleDay extends ThemedElement {
         border-radius: var(--hb-radius-full);
         background-color: var(--hb-bar-background);
         backdrop-filter: var(--hb-backdrop-filter);
-      }
-
-      .empty {
-        display: grid;
-        justify-items: start;
-        gap: var(--hb-space-3);
-        padding-block: var(--hb-space-6);
-      }
-
-      .empty p {
-        margin: 0;
-      }
-
-      .empty .illustration {
-        inline-size: min(100%, 12rem);
       }
 
       @container (width < 640px) {
@@ -387,13 +368,9 @@ export class ScheduleDay extends ThemedElement {
 
     if (filtered && !this.onlyFeatured && visible.every((blocks) => blocks.length === 0)) {
       return html`
-        <div class="empty">
-          ${illustration(noResults)}
-          <p>${msg('No sessions match these filters.', { id: 'schedule.day.no-results' })}</p>
-          <hb-button variant="tonal" @click="${clearFilters}">
-            ${msg('Clear filters', { id: 'schedule.day.clear-filters' })}
-          </hb-button>
-        </div>
+        <no-results>
+          ${msg('No sessions match these filters.', { id: 'schedule.day.no-results' })}
+        </no-results>
       `;
     }
 
@@ -482,7 +459,7 @@ export class ScheduleDay extends ThemedElement {
                     ${repeat(
                       sessions,
                       (session) => session.id,
-                      (session) => html`<session-element .session="${session}"></session-element>`,
+                      (session) => html`<session-card .session="${session}"></session-card>`,
                     )}
                   </div>
                 `,

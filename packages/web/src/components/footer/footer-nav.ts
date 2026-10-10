@@ -5,12 +5,12 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { build, organizer } from '../../config/site';
 import { safeUrl } from '../../utils/safe-url';
 import { navigationLabel } from '../shell/navigation-label';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 const HOVERBOARD_URL = 'https://github.com/gdg-x/hoverboard';
 
 @customElement('footer-nav')
-export class FooterNav extends ThemedElement {
+export class FooterNav extends ThemedComponent {
   static override styles = css`
     .nav-inline {
       display: flex;

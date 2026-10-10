@@ -1,6 +1,6 @@
 import { css } from 'lit';
 
-// Shared styles for every component that extends ThemedElement. Colors come from the theme tokens.
+// Shared styles for every component that extends ThemedComponent. Colors come from the theme tokens.
 export const theme = css`
   *,
   *::before,

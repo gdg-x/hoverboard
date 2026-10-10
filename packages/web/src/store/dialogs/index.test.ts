@@ -5,24 +5,15 @@ import reducer, {
   DIALOG,
   openFeedbackDialog,
   openSigninDialog,
-  openSubscribeDialog,
+  openPartnerDialog,
   selectIsDialogOpen,
   setDialogError,
 } from '.';
-import type { DialogForm } from '../../models/dialog-form';
 import type { Session } from '../../models/session';
 import { dispatch } from '../dispatch';
 import type { RootState } from '..';
 
 vi.mock('../dispatch');
-
-const dialogForm: DialogForm = {
-  firstFieldLabel: 'First name',
-  secondFieldLabel: 'Email',
-  submitLabel: 'Submit',
-  title: 'Subscribe',
-  submit: vi.fn(),
-};
 
 const session: Session = {
   id: 'session-1',
@@ -39,9 +30,9 @@ describe('dialogs', () => {
     expect(
       reducer(new Initialized(), {
         type: 'dialogs/open',
-        payload: { name: DIALOG.SUBSCRIBE, data: dialogForm },
+        payload: { name: DIALOG.PARTNER },
       }),
-    ).toStrictEqual(new Success({ name: DIALOG.SUBSCRIBE, data: dialogForm }));
+    ).toStrictEqual(new Success({ name: DIALOG.PARTNER }));
   });
 
   it('stores dialog errors as a Failure', () => {
@@ -92,13 +83,13 @@ describe('dialog action helpers', () => {
     );
   });
 
-  it('dispatches the subscribe dialog payload', () => {
-    openSubscribeDialog(dialogForm);
+  it('dispatches the partner dialog', () => {
+    openPartnerDialog();
 
     expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
         type: 'dialogs/open',
-        payload: { name: DIALOG.SUBSCRIBE, data: dialogForm },
+        payload: { name: DIALOG.PARTNER },
       }),
     );
   });

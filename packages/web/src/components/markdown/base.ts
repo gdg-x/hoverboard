@@ -2,9 +2,9 @@ import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { renderMarkdown } from '../../utils/markdown';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
-export class Markdown extends ThemedElement {
+export class Markdown extends ThemedComponent {
   @property()
   accessor content: string = '';
 

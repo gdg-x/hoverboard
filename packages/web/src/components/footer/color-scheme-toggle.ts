@@ -11,7 +11,7 @@ import {
   readColorScheme,
 } from '../../utils/color-scheme';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 type Choice = ChosenColorScheme | 'system';
 
@@ -22,7 +22,7 @@ const storage = () => localStorage;
  * shows only the icons, with System between Light and Dark.
  */
 @customElement('color-scheme-toggle')
-export class ColorSchemeToggle extends ThemedElement {
+export class ColorSchemeToggle extends ThemedComponent {
   static override styles = [
     segmented,
     css`

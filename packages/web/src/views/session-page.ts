@@ -1,8 +1,7 @@
 import { Success } from '@abraham/remotedata';
-import { msg, str } from '@lit/localize';
+import { msg } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { styleMap } from 'lit/directives/style-map.js';
 import '../components/shared/add-to-calendar';
 import '../components/shared/share-button';
 import '../components/shared/auth-required';
@@ -12,32 +11,23 @@ import '../components/shared/hoverboard-icon';
 import '../components/shared/speaker-card';
 import '../components/markdown/short-markdown';
 import '../components/ui/hb-button';
-import '../components/ui/hb-chip';
 import '../components/ui/hb-progress';
 import { PAGE_TONES } from '../components/hero/simple-hero';
-import { formatDuration } from '../components/schedule/session-element';
+import { formatDuration } from '../components/schedule/session-card';
+import '../components/schedule/bookmark-button';
+import '../components/schedule/session-chips';
 import type { BuiltSession } from '../schedule/build-schedule';
 import { goto } from '../utils/navigation';
 import { store } from '../store';
-import { openSigninDialog } from '../store/dialogs';
-import {
-  type FeaturedSessionsState,
-  selectFeaturedSessionsState,
-  setUserFeaturedSessions,
-} from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
 import { type SessionsState, selectSessionsState } from '../store/schedule';
-import { queueComplexSnackbar } from '../store/snackbars';
 import { openVideoDialog } from '../store/ui';
-import type { UserState } from '../store/user';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
 import { getScheduleDay } from '../utils/dates';
-import { confetti } from '../utils/confetti';
 import { updateImageMetadata } from '../utils/metadata';
-import { tagChipStyle } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** The feedback block, which the page loads without waiting. Tests wait for it. */
 export const feedbackBlock = __HB_FEATURES__.feedback
@@ -49,7 +39,7 @@ export const feedbackBlock = __HB_FEATURES__.feedback
  * share, the description, its speakers and, once it started, a place to leave feedback.
  */
 @customElement('session-page')
-export class SessionPage extends ThemedElement {
+export class SessionPage extends ThemedComponent {
   static override styles = [
     heroText,
     css`
@@ -70,10 +60,6 @@ export class SessionPage extends ThemedElement {
 
       .details {
         margin-block-start: var(--hb-space-5);
-      }
-
-      .details .plain {
-        --hb-chip-border-color: currentColor;
       }
 
       /* Content-box, so the text column lines up with the hero's. */
@@ -123,10 +109,6 @@ export class SessionPage extends ThemedElement {
   accessor session: BuiltSession | undefined;
   @property({ type: String })
   accessor sessionId: string | undefined;
-  @fromStore((state) => selectFeaturedSessionsState(state))
-  accessor featuredSessions!: FeaturedSessionsState;
-  @fromStore((state) => state.user)
-  accessor user!: UserState;
 
   // Depends on the time, so it is only set in the browser.
   @state()
@@ -158,14 +140,6 @@ export class SessionPage extends ThemedElement {
     return !!this.sessionId && this.sessions instanceof Success;
   }
 
-  private get isBookmarked() {
-    return (
-      this.featuredSessions instanceof Success &&
-      !!this.sessionId &&
-      !!this.featuredSessions.data[this.sessionId]
-    );
-  }
-
   override render() {
     const session = this.session;
     return html`
@@ -195,28 +169,17 @@ export class SessionPage extends ThemedElement {
         ];
     const details = [...when, session.complexity, session.language].filter(Boolean);
     return html`
-      <ul class="details" aria-label="${msg('Session details', { id: 'pages.session.details' })}">
-        ${details.map((detail) => html`<li><hb-chip class="plain">${detail}</hb-chip></li>`)}
-        ${
-          session.sponsor
-            ? html`<li>
-                <hb-chip class="sponsored" accent="1">
-                  ${msg(str`Sponsored by ${session.sponsor}`, {
-                    id: 'pages.session.sponsored-by',
-                  })}
-                </hb-chip>
-              </li>`
-            : nothing
-        }
-        ${(session.tags ?? []).map(
-          (tag) => html`<li><hb-chip style="${styleMap(tagChipStyle(tag))}">${tag}</hb-chip></li>`,
-        )}
-      </ul>
+      <session-chips
+        class="details"
+        label="${msg('Session details', { id: 'pages.session.details' })}"
+        .details="${details}"
+        .session="${session}"
+        name-sponsor
+      ></session-chips>
     `;
   }
 
   private renderContent(session: BuiltSession) {
-    const bookmarked = this.isBookmarked;
     // A speaker document can be missing its name while it is being added.
     const speakers = session.speakers.filter((speaker) => speaker.name);
     return html`
@@ -224,21 +187,11 @@ export class SessionPage extends ThemedElement {
         <div class="actions">
           ${
             __HB_FEATURES__.mySchedule
-              ? html`<hb-button
+              ? html`<bookmark-button
                   class="bookmark"
-                  variant="${bookmarked ? 'tonal' : 'filled'}"
-                  @click="${this.toggleBookmark}"
-                >
-                  <hoverboard-icon
-                    slot="icon"
-                    name="${bookmarked ? 'bookmark-check' : 'bookmark-plus'}"
-                  ></hoverboard-icon>
-                  ${
-                    bookmarked
-                      ? msg('Bookmarked', { id: 'pages.session.bookmarked' })
-                      : msg('Bookmark', { id: 'pages.session.bookmark' })
-                  }
-                </hb-button>`
+                  variant="button"
+                  .session="${session}"
+                ></bookmark-button>`
               : nothing
           }
           ${
@@ -300,31 +253,6 @@ export class SessionPage extends ThemedElement {
       </div>
     `;
   }
-
-  private readonly toggleBookmark = (event: Event) => {
-    if (!(this.user instanceof Success)) {
-      store.dispatch(
-        queueComplexSnackbar({
-          label: msg('Sign in to save sessions', { id: 'common.save-sessions-signed-out' }),
-          action: {
-            title: msg('Sign in', { id: 'common.sign-in' }),
-            callback: () => openSigninDialog(),
-          },
-        }),
-      );
-      return;
-    }
-
-    if (this.featuredSessions instanceof Success && this.session) {
-      const bookmarked = !this.featuredSessions.data[this.session.id];
-      setUserFeaturedSessions(
-        this.user.data.uid,
-        { ...this.featuredSessions.data, [this.session.id]: bookmarked },
-        bookmarked,
-      );
-      if (bookmarked) confetti(event.currentTarget as Element);
-    }
-  };
 
   private readonly openVideo = () => {
     if (this.session?.videoId) {

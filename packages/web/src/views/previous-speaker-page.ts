@@ -9,7 +9,8 @@ import '../components/markdown/short-markdown';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-speakers-block';
 import '../components/shared/previous-talks';
-import '../components/ui/hb-icon-button';
+import '../components/shared/social-links';
+import '../components/shared/speaker-profile';
 import '../components/ui/hb-progress';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import { goto } from '../utils/navigation';
@@ -20,14 +21,13 @@ import {
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
 import { updateImageMetadata } from '../utils/metadata';
-import { photoTransitionName } from '../utils/styles';
 import { profile } from '../styles/profile';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** A speaker from earlier years: their photo, details, social links, bio and talks. */
 @customElement('previous-speaker-page')
-export class PreviousSpeakerPage extends ThemedElement {
+export class PreviousSpeakerPage extends ThemedComponent {
   static override styles = [
     heroText,
     profile,
@@ -73,8 +73,6 @@ export class PreviousSpeakerPage extends ThemedElement {
 
   override render() {
     const speaker = this.speaker;
-    const job = [speaker?.title, speaker?.company].filter(Boolean).join(', ');
-    const details = [job, speaker?.country].filter(Boolean).join(' · ');
 
     return html`
       <hero-block tone="${PAGE_TONES.previousSpeakers}">
@@ -82,24 +80,7 @@ export class PreviousSpeakerPage extends ThemedElement {
           <hoverboard-icon name="arrow-left"></hoverboard-icon>
           ${msg('All previous speakers', { id: 'pages.previous-speaker.all' })}
         </a>
-        <div class="profile">
-          ${
-            speaker
-              ? html`<img
-                  class="photo"
-                  src="${speaker.photoUrl}"
-                  alt=""
-                  width="160"
-                  height="160"
-                  style="view-transition-name: ${photoTransitionName('previous-speaker', speaker.id)}"
-                />`
-              : nothing
-          }
-          <div>
-            <h1 class="hero-title">${speaker?.name ?? ''}</h1>
-            ${details ? html`<p class="details">${details}</p>` : nothing}
-          </div>
-        </div>
+        <speaker-profile kind="previous-speaker" .speaker="${speaker}"></speaker-profile>
       </hero-block>
 
       <hb-progress ?hidden="${!!speaker}"></hb-progress>
@@ -108,26 +89,11 @@ export class PreviousSpeakerPage extends ThemedElement {
         speaker
           ? html`
               <div class="inner">
-                ${
-                  speaker.socials?.length
-                    ? html`<ul aria-label="${msg('Social links', { id: 'pages.speaker.socials' })}">
-                        ${speaker.socials.map(
-                          (social) => html`
-                            <li>
-                              <hb-icon-button
-                                variant="tonal"
-                                href="${social.link}"
-                                target="_blank"
-                                label="${social.name}"
-                              >
-                                <hoverboard-icon name="${social.icon}"></hoverboard-icon>
-                              </hb-icon-button>
-                            </li>
-                          `,
-                        )}
-                      </ul>`
-                    : nothing
-                }
+                <social-links
+                  variant="tonal"
+                  label="${msg('Social links', { id: 'pages.speaker.socials' })}"
+                  .socials="${speaker.socials ?? []}"
+                ></social-links>
                 <short-markdown class="bio" .content="${speaker.bio ?? ''}"></short-markdown>
                 ${
                   Object.keys(speaker.sessions ?? {}).length

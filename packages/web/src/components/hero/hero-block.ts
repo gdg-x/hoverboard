@@ -1,6 +1,6 @@
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 export type HeroTone = '1' | '2' | '3' | '4';
 
@@ -54,7 +54,7 @@ export const heroText = css`
  * With a photo, the text sits on the scrim in the dark scheme's colors, as in the home hero.
  */
 @customElement('hero-block')
-export class HeroBlock extends ThemedElement {
+export class HeroBlock extends ThemedComponent {
   static override styles = css`
     :host {
       --hb-hero-background: var(--hb-color-accent-1-container);

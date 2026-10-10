@@ -1,29 +1,27 @@
 import { Failure, Initialized, type RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
-import type { DialogForm } from '../../models/dialog-form';
 import type { Session } from '../../models/session';
 import { dispatch } from '../dispatch';
 
 export enum DIALOG {
   FEEDBACK = 'feedback',
-  SUBSCRIBE = 'subscribe',
+  PARTNER = 'partner',
   SIGNIN = 'signin',
 }
 
 export interface SigninDialog {
   name: DIALOG.SIGNIN;
 }
-export interface SubscribeDialog {
-  name: DIALOG.SUBSCRIBE;
-  data: DialogForm;
+export interface PartnerDialog {
+  name: DIALOG.PARTNER;
 }
 export interface FeedbackDialog {
   name: DIALOG.FEEDBACK;
   data: Pick<Session, 'id' | 'title'>;
 }
 
-export type Dialog = SigninDialog | SubscribeDialog | FeedbackDialog;
+export type Dialog = SigninDialog | PartnerDialog | FeedbackDialog;
 
 export type DialogState = RemoteData<Error, Dialog>;
 
@@ -53,8 +51,8 @@ export const openSigninDialog = () => {
   dispatch(open({ name: DIALOG.SIGNIN }));
 };
 
-export const openSubscribeDialog = (data: SubscribeDialog['data']) => {
-  dispatch(open({ name: DIALOG.SUBSCRIBE, data }));
+export const openPartnerDialog = () => {
+  dispatch(open({ name: DIALOG.PARTNER }));
 };
 
 export const openFeedbackDialog = (data: FeedbackDialog['data']) => {

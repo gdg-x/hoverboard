@@ -7,11 +7,11 @@ import '../components/ui/hb-button';
 import { illustration, illustrationStyles } from '../illustrations/illustration';
 import notFound from '../illustrations/not-found.svg?raw';
 import { pageInner } from '../styles/page';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** A missing page: a drawing, a joke, and the way home and to the schedule. */
 @customElement('not-found-page')
-export class NotFoundPage extends ThemedElement {
+export class NotFoundPage extends ThemedComponent {
   static override styles = [
     pageInner,
     illustrationStyles,

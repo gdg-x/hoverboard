@@ -4,12 +4,12 @@ import { customElement } from 'lit/decorators.js';
 import { safeUrl } from '../../utils/safe-url';
 import { share } from '../../utils/share';
 import { mailto, organizer, socialNetwork } from '../../config/site';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../shared/hoverboard-icon';
 import '../ui/hb-icon-button';
 
 @customElement('footer-social')
-export class FooterSocial extends ThemedElement {
+export class FooterSocial extends ThemedComponent {
   static override styles = css`
     :host {
       display: grid;

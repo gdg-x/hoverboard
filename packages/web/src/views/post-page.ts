@@ -18,11 +18,11 @@ import { getDate } from '../utils/dates';
 import { fetchText } from '../utils/fetch-text';
 import { updateImageMetadata } from '../utils/metadata';
 import { pageInner } from '../styles/page';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** A blog post in a reading layout, and the next posts to read. */
 @customElement('post-page')
-export class PostPage extends ThemedElement {
+export class PostPage extends ThemedComponent {
   static override styles = [
     heroText,
     pageInner,

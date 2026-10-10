@@ -1,35 +1,7 @@
 import { css } from 'lit';
 
-/** A person's page: the hero with their photo, name, details and badges, and the body below it. */
+/** The body of a person's page, under the hero: the bio and its sections. */
 export const profile = css`
-  .profile {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--hb-space-5) var(--hb-space-6);
-  }
-
-  .profile > div {
-    flex: 1 1 18rem;
-    min-inline-size: 0;
-  }
-
-  .photo {
-    flex: none;
-    inline-size: 160px;
-    block-size: 160px;
-    border: var(--hb-border-width) solid var(--hb-border-color);
-    border-radius: var(--hb-radius-avatar);
-    background-color: var(--hb-color-surface-container);
-    box-shadow: var(--hb-shadow-card);
-    object-fit: cover;
-  }
-
-  .details {
-    margin: var(--hb-space-3) 0 0;
-    font-size: var(--hb-text-lg);
-  }
-
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -37,10 +9,6 @@ export const profile = css`
     margin: 0;
     padding: 0;
     list-style: none;
-  }
-
-  .badges {
-    margin-block-start: var(--hb-space-4);
   }
 
   /* Content-box, so the text column lines up with the hero's. */

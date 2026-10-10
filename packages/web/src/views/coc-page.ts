@@ -5,10 +5,10 @@ import { PageMetadataController } from '../controllers/page-metadata-controller'
 import '../components/hero/simple-hero';
 import '../components/markdown/remote-markdown';
 import { pageInner } from '../styles/page';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 @customElement('coc-page')
-export class CocPage extends ThemedElement {
+export class CocPage extends ThemedComponent {
   static override styles = pageInner;
 
   private readonly metadata = new PageMetadataController(this, 'coc');

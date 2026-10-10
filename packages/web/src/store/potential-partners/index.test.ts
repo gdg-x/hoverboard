@@ -35,15 +35,15 @@ describe('potential-partners', () => {
   it('writes the partner document and dispatches success without waiting', () => {
     addPotentialPartner({
       email: 'ada.lovelace+partners@example.com',
-      firstFieldValue: 'Ada',
-      secondFieldValue: 'Analytical Engines',
+      fullName: 'Ada',
+      companyName: 'Analytical Engines',
     });
 
     expect(savePotentialPartner).toHaveBeenCalledWith(
       {
         email: 'ada.lovelace+partners@example.com',
-        firstFieldValue: 'Ada',
-        secondFieldValue: 'Analytical Engines',
+        fullName: 'Ada',
+        companyName: 'Analytical Engines',
       },
       expect.any(Function),
     );
@@ -56,7 +56,11 @@ describe('potential-partners', () => {
     const error = new Error('permission-denied');
     vi.mocked(savePotentialPartner).mockImplementation((_data, onRejected) => onRejected(error));
 
-    addPotentialPartner({ email: 'ada@example.com' });
+    addPotentialPartner({
+      email: 'ada@example.com',
+      fullName: 'Ada',
+      companyName: 'Analytical Engines',
+    });
 
     expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'potentialPartners/failure', payload: error }),
@@ -66,7 +70,11 @@ describe('potential-partners', () => {
   it('needs the network, since the visitor has no account to sync it later', () => {
     vi.mocked(canWriteNow).mockReturnValueOnce(false);
 
-    addPotentialPartner({ email: 'ada@example.com' });
+    addPotentialPartner({
+      email: 'ada@example.com',
+      fullName: 'Ada',
+      companyName: 'Analytical Engines',
+    });
 
     expect(savePotentialPartner).not.toHaveBeenCalled();
     expect(dispatch).toHaveBeenCalledWith(

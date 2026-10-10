@@ -1,9 +1,9 @@
 import { css, html, isServer } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 @customElement('content-loader')
-export class ContentLoader extends ThemedElement {
+export class ContentLoader extends ThemedComponent {
   static override styles = css`
     :host {
       --darkgrey: rgba(250, 250, 250, 0);

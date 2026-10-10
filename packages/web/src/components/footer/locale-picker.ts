@@ -2,14 +2,14 @@ import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { getLocale, locales, setLocale } from '../../utils/localization';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 
 // Each language in its own language, so people can find theirs.
 const languageName = (locale: string) =>
   new Intl.DisplayNames([locale], { type: 'language' }).of(locale) ?? locale;
 
 @customElement('locale-picker')
-export class LocalePicker extends ThemedElement {
+export class LocalePicker extends ThemedComponent {
   static override styles = css`
     /* No box, so a site with one locale has no empty space next to the appearance toggle. */
     :host {

@@ -11,7 +11,7 @@ import '../shared/hoverboard-icon';
 import '../ui/hb-button';
 import '../ui/hb-dialog';
 import '../ui/hb-icon-button';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import './account-menu';
 import './app-install';
 import { navigationLabel } from './navigation-label';
@@ -23,7 +23,7 @@ export const demoBanner = __HB_FEATURES__.demo ? import('./demo-banner') : Promi
 
 /** The skip link, the header bar and the navigation sheet. The layout keeps it across pages. */
 @customElement('app-header')
-export class AppHeader extends ThemedElement {
+export class AppHeader extends ThemedComponent {
   static override styles = css`
     /* No box of its own, so the header sticks while the whole page scrolls. */
     :host {

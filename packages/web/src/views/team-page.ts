@@ -4,18 +4,17 @@ import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../components/shared/hoverboard-icon';
-import '../components/ui/hb-icon-button';
+import '../components/shared/team-member';
 import { selectTeamsAndMembers } from '../store/teams-members/selectors';
 import { initialTeamsMembersState } from '../store/teams-members/state';
 import { aboutOrganizerBlock, team } from '../config/site';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import { fromStore } from '../controllers/from-store';
-import { ThemedElement } from '../components/themed-element';
+import { ThemedComponent } from '../components/themed-component';
 
 /** The team: the organizers' photo and story, then each subteam and its members. */
 @customElement('team-page')
-export class TeamPage extends ThemedElement {
+export class TeamPage extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;
@@ -74,67 +73,14 @@ export class TeamPage extends ThemedElement {
       gap: var(--hb-space-5);
     }
 
-    .member {
-      display: flex;
-      align-items: center;
-      gap: var(--hb-space-4);
-      padding: var(--hb-space-4);
-      border: var(--hb-border-width) solid var(--hb-border-color);
-      border-radius: var(--hb-radius-l);
-      background-color: var(--hb-panel-background);
-      backdrop-filter: var(--hb-backdrop-filter);
-      box-shadow: var(--hb-shadow-card);
-    }
-
-    .avatar {
-      flex: none;
-      inline-size: 88px;
-      block-size: 88px;
-      border: var(--hb-border-width) solid var(--hb-border-color);
-      border-radius: var(--hb-radius-avatar);
-      background-color: var(--hb-color-surface-container);
-      object-fit: cover;
-      transition: rotate var(--hb-duration-medium) var(--hb-ease-spring);
-    }
-
-    .member:hover .avatar {
-      rotate: calc(-4deg * var(--hb-decorations, 1));
-    }
-
-    .member-details {
+    /* Cards in a row share its height. */
+    .members > li {
       display: grid;
-      gap: var(--hb-space-1);
-      min-inline-size: 0;
-    }
-
-    .name {
-      margin: 0;
-      padding: 0;
-      font: 700 var(--hb-text-lg) / 1.2 var(--hb-font-body);
-      overflow-wrap: anywhere;
-    }
-
-    .title {
-      margin: 0;
-      color: var(--hb-color-on-surface-variant);
-      font-size: var(--hb-text-sm);
-    }
-
-    .socials {
-      display: flex;
-      flex-wrap: wrap;
-      margin-inline-start: calc(-1 * var(--hb-space-2));
     }
 
     @container (width >= 800px) {
       .intro.with-photo {
         grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .member:hover .avatar {
-        rotate: none;
       }
     }
   `;
@@ -178,42 +124,7 @@ export class TeamPage extends ThemedElement {
               <h2 class="team-title" id="team-${team.id}">${team.title}</h2>
               <ul class="members">
                 ${team.members.map(
-                  (member) => html`
-                    <li class="member">
-                      <img
-                        class="avatar"
-                        src="${member.photoUrl}"
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        width="88"
-                        height="88"
-                      />
-                      <div class="member-details">
-                        <h3 class="name">${member.name}</h3>
-                        ${member.title ? html`<p class="title">${member.title}</p>` : nothing}
-                        ${
-                          member.socials?.length
-                            ? html`<ul class="socials">
-                                ${member.socials.map(
-                                  (social) => html`
-                                    <li>
-                                      <hb-icon-button
-                                        href="${social.link}"
-                                        target="_blank"
-                                        label="${`${social.name}: ${member.name}`}"
-                                      >
-                                        <hoverboard-icon name="${social.icon}"></hoverboard-icon>
-                                      </hb-icon-button>
-                                    </li>
-                                  `,
-                                )}
-                              </ul>`
-                            : nothing
-                        }
-                      </div>
-                    </li>
-                  `,
+                  (member) => html` <li><team-member .member="${member}"></team-member></li> `,
                 )}
               </ul>
             </section>

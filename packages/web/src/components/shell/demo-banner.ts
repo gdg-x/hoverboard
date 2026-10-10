@@ -11,7 +11,7 @@ import { THEMES } from '../../themes/index';
 import { chooseDecorations, chooseDemo, readDemoChoices } from '../../utils/demo';
 import '../footer/color-scheme-toggle';
 import '../shared/hoverboard-icon';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import type { HbSwitch } from '../ui/hb-switch';
 import '../ui/hb-switch';
 
@@ -30,7 +30,7 @@ const storage = () => localStorage;
  * light or dark. The choices stay in this browser.
  */
 @customElement('demo-banner')
-export class DemoBanner extends ThemedElement {
+export class DemoBanner extends ThemedComponent {
   static override styles = [
     segmented,
     css`

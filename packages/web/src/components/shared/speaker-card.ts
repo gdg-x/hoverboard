@@ -4,9 +4,10 @@ import { styleMap } from 'lit/directives/style-map.js';
 import type { Speaker } from '../../models/speaker';
 import { speakerPath } from '../../utils/navigation';
 import { photoTransitionName, tagColor } from '../../utils/styles';
-import { ThemedElement } from '../themed-element';
+import { ThemedComponent } from '../themed-component';
 import '../ui/hb-card';
 import './hoverboard-icon';
+import './speaker-photo';
 
 /** Badges with an icon for the photo. */
 const AFFILIATIONS = ['gde', 'gdg', 'google', 'wtm'];
@@ -22,7 +23,7 @@ export type CardSpeaker = Pick<Speaker, 'id' | 'name' | 'photoUrl' | 'company' |
  * country. In a container narrower than 480px, such as a one-column list, it is a compact row.
  */
 @customElement('speaker-card')
-export class SpeakerCard extends ThemedElement {
+export class SpeakerCard extends ThemedComponent {
   static override styles = css`
     :host {
       display: block;
@@ -50,13 +51,8 @@ export class SpeakerCard extends ThemedElement {
     }
 
     .photo {
-      display: block;
-      inline-size: var(--photo-size);
-      block-size: var(--photo-size);
-      border: var(--hb-border-width) solid var(--hb-border-color);
-      border-radius: var(--hb-radius-avatar);
-      background-color: var(--hb-color-accent-1-container);
-      object-fit: cover;
+      --hb-speaker-photo-size: var(--photo-size);
+      --hb-speaker-photo-background: var(--hb-color-accent-1-container);
     }
 
     .affiliation {
@@ -138,17 +134,14 @@ export class SpeakerCard extends ThemedElement {
       <hb-card href="${this.href ?? speakerPath(speaker.id)}" label="${speaker.name}">
         <div class="content">
           <div class="photo-frame">
-            <img
+            <speaker-photo
               class="photo"
+              size="m"
               src="${speaker.photoUrl}"
-              alt=""
-              loading="lazy"
-              width="120"
-              height="120"
               style="view-transition-name: ${
                 this.transitionName ?? photoTransitionName('speaker', speaker.id)
               }"
-            />
+            ></speaker-photo>
             ${affiliations.map(
               (badge, index) =>
                 html`<span
