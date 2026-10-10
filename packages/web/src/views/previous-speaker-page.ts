@@ -9,8 +9,8 @@ import '../components/markdown/short-markdown';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-speakers-block';
 import '../components/shared/previous-talks';
+import '../components/shared/social-links';
 import '../components/shared/speaker-photo';
-import '../components/ui/hb-icon-button';
 import '../components/ui/hb-progress';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import { goto } from '../utils/navigation';
@@ -108,26 +108,11 @@ export class PreviousSpeakerPage extends ThemedComponent {
         speaker
           ? html`
               <div class="inner">
-                ${
-                  speaker.socials?.length
-                    ? html`<ul aria-label="${msg('Social links', { id: 'pages.speaker.socials' })}">
-                        ${speaker.socials.map(
-                          (social) => html`
-                            <li>
-                              <hb-icon-button
-                                variant="tonal"
-                                href="${social.link}"
-                                target="_blank"
-                                label="${social.name}"
-                              >
-                                <hoverboard-icon name="${social.icon}"></hoverboard-icon>
-                              </hb-icon-button>
-                            </li>
-                          `,
-                        )}
-                      </ul>`
-                    : nothing
-                }
+                <social-links
+                  variant="tonal"
+                  label="${msg('Social links', { id: 'pages.speaker.socials' })}"
+                  .socials="${speaker.socials ?? []}"
+                ></social-links>
                 <short-markdown class="bio" .content="${speaker.bio ?? ''}"></short-markdown>
                 ${
                   Object.keys(speaker.sessions ?? {}).length

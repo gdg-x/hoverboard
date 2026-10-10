@@ -5,6 +5,7 @@ import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import type { PreviousSpeaker } from '../models/previous-speaker';
+import type { SocialLinks } from '../components/shared/social-links';
 import type { BuiltSpeaker } from '../schedule/build-schedule';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { selectSpeaker } from '../store/speakers/selectors';
@@ -95,9 +96,12 @@ describe('speaker-page', () => {
     const { shadowRoot, view } = await render();
 
     expect(view.getByRole('link', { name: 'All speakers' })).toHaveAttribute('href', '/speakers');
-    const social = shadowRoot.querySelector('hb-icon-button')!;
-    expect(social).toHaveAttribute('href', 'https://github.com/ada');
-    expect(social).toHaveAttribute('label', 'GitHub');
+    const socials = shadowRoot.querySelector<SocialLinks>('social-links')!;
+    expect(socials.socials).toEqual([
+      { icon: 'github', link: 'https://github.com/ada', name: 'GitHub' },
+    ]);
+    expect(socials).toHaveAttribute('label', 'Social links');
+    expect(socials).toHaveAttribute('variant', 'tonal');
   });
 
   it('goes to the 404 page for a missing speaker', async () => {

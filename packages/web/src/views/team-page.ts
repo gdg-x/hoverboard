@@ -4,8 +4,7 @@ import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
-import '../components/shared/hoverboard-icon';
-import '../components/ui/hb-icon-button';
+import '../components/shared/social-links';
 import { selectTeamsAndMembers } from '../store/teams-members/selectors';
 import { initialTeamsMembersState } from '../store/teams-members/state';
 import { aboutOrganizerBlock, team } from '../config/site';
@@ -121,8 +120,8 @@ export class TeamPage extends ThemedComponent {
     }
 
     .socials {
-      display: flex;
-      flex-wrap: wrap;
+      --hb-social-links-gap: 0;
+
       margin-inline-start: calc(-1 * var(--hb-space-2));
     }
 
@@ -194,21 +193,11 @@ export class TeamPage extends ThemedComponent {
                         ${member.title ? html`<p class="title">${member.title}</p>` : nothing}
                         ${
                           member.socials?.length
-                            ? html`<ul class="socials">
-                                ${member.socials.map(
-                                  (social) => html`
-                                    <li>
-                                      <hb-icon-button
-                                        href="${social.link}"
-                                        target="_blank"
-                                        label="${`${social.name}: ${member.name}`}"
-                                      >
-                                        <hoverboard-icon name="${social.icon}"></hoverboard-icon>
-                                      </hb-icon-button>
-                                    </li>
-                                  `,
-                                )}
-                              </ul>`
+                            ? html`<social-links
+                                class="socials"
+                                owner="${member.name}"
+                                .socials="${member.socials}"
+                              ></social-links>`
                             : nothing
                         }
                       </div>

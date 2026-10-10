@@ -5,6 +5,7 @@ import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { aboutOrganizerBlock, team } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
+import type { SocialLinks } from '../components/shared/social-links';
 import type { TeamPage } from './team-page';
 import './team-page';
 
@@ -55,12 +56,14 @@ describe('team-page', () => {
     expect(shadowRoot.querySelector('.avatar')).toHaveAttribute('alt', '');
   });
 
-  it("names each social link with the network and the member's name", async () => {
+  it("names each member's social links after the member", async () => {
     const { shadowRoot } = await render();
-    const link = shadowRoot.querySelector('.socials hb-icon-button')!;
+    const socials = shadowRoot.querySelector<SocialLinks>('social-links.socials')!;
 
-    expect(link).toHaveAttribute('href', 'https://github.com/ada');
-    expect(link).toHaveAttribute('label', 'GitHub: Ada Lovelace');
+    expect(socials.socials).toEqual([
+      { icon: 'github', link: 'https://github.com/ada', name: 'GitHub' },
+    ]);
+    expect(socials).toHaveAttribute('owner', 'Ada Lovelace');
   });
 
   it('shows loading and failure states', async () => {

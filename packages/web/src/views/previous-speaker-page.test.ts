@@ -4,6 +4,7 @@ import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../models/previous-speaker';
+import type { SocialLinks } from '../components/shared/social-links';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { updateImageMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
@@ -58,7 +59,7 @@ describe('previous-speaker-page', () => {
     expect(shadowRoot.querySelector('.details')).toHaveTextContent(
       'Engineer, Example Inc · United States',
     );
-    expect(shadowRoot.querySelector('hb-icon-button')).toHaveAttribute('label', 'GitHub');
+    expect(shadowRoot.querySelector<SocialLinks>('social-links')!.socials).toBe(speaker.socials);
     expect(shadowRoot.querySelector('previous-talks')).toHaveProperty('sessions', speaker.sessions);
     expect(shadowRoot.querySelector('previous-speakers-block')).not.toBeNull();
     expect(updateImageMetadata).toHaveBeenCalledWith('Ada Lovelace', 'Speaker bio', {
