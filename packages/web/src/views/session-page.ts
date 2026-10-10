@@ -28,6 +28,7 @@ import {
 import { selectSession } from '../store/sessions/selectors';
 import { type SessionsState, selectSessionsState } from '../store/schedule';
 import { queueComplexSnackbar } from '../store/snackbars';
+import { selectPending, unsyncedMessage } from '../store/sync';
 import { openVideoDialog } from '../store/ui';
 import type { UserState } from '../store/user';
 import { disabledSchedule } from '../config/site';
@@ -91,6 +92,20 @@ export class SessionPage extends ThemedElement {
         gap: var(--hb-space-3);
       }
 
+      .unsynced {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--hb-space-1);
+        margin: 0;
+        color: var(--hb-color-on-surface-variant);
+        font-size: var(--hb-text-sm);
+      }
+
+      .unsynced hoverboard-icon {
+        inline-size: 18px;
+        block-size: 18px;
+      }
+
       .description {
         display: block;
         max-inline-size: var(--hb-prose-max);
@@ -125,6 +140,8 @@ export class SessionPage extends ThemedElement {
   accessor sessionId: string | undefined;
   @fromStore((state) => selectFeaturedSessionsState(state))
   accessor featuredSessions!: FeaturedSessionsState;
+  @fromStore((state) => selectPending(state, 'featuredSessions'))
+  private accessor unsyncedBookmarks!: string[];
   @fromStore((state) => state.user)
   accessor user!: UserState;
 
@@ -214,20 +231,28 @@ export class SessionPage extends ThemedElement {
           ${
             __HB_FEATURES__.mySchedule
               ? html`<hb-button
-                  class="bookmark"
-                  variant="${bookmarked ? 'tonal' : 'filled'}"
-                  @click="${this.toggleBookmark}"
-                >
-                  <hoverboard-icon
-                    slot="icon"
-                    name="${bookmarked ? 'bookmark-check' : 'bookmark-plus'}"
-                  ></hoverboard-icon>
+                    class="bookmark"
+                    variant="${bookmarked ? 'tonal' : 'filled'}"
+                    @click="${this.toggleBookmark}"
+                  >
+                    <hoverboard-icon
+                      slot="icon"
+                      name="${bookmarked ? 'bookmark-check' : 'bookmark-plus'}"
+                    ></hoverboard-icon>
+                    ${
+                      bookmarked
+                        ? msg('Bookmarked', { id: 'pages.session.bookmarked' })
+                        : msg('Bookmark', { id: 'pages.session.bookmark' })
+                    }
+                  </hb-button>
                   ${
-                    bookmarked
-                      ? msg('Bookmarked', { id: 'pages.session.bookmarked' })
-                      : msg('Bookmark', { id: 'pages.session.bookmark' })
-                  }
-                </hb-button>`
+                    bookmarked && this.unsyncedBookmarks.includes(session.id)
+                      ? html`<p class="unsynced">
+                          <hoverboard-icon name="cloud-upload"></hoverboard-icon>
+                          ${unsyncedMessage()}
+                        </p>`
+                      : nothing
+                  }`
               : nothing
           }
           ${

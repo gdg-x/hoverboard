@@ -7,6 +7,7 @@ import {
   type UserTokensData,
 } from '../../db/notifications-users';
 import { dispatch } from '../dispatch';
+import { setPendingIds } from '../sync';
 import type { Subscription } from '../../utils/firestore';
 
 export type { UserTokens, UserTokensData };
@@ -36,7 +37,10 @@ const fetchNotificationsUsers = (uid: string) => {
     subscription = subscribeToNotificationsUsers(
       uid,
       () => dispatch(pending()),
-      (payload) => dispatch(success(payload || { id: uid, tokens: {} })),
+      (payload, state) => {
+        setPendingIds('notificationsUsers', state.pending ? [uid] : []);
+        dispatch(success(payload || { id: uid, tokens: {} }));
+      },
       (payload: Error) => dispatch(failure(payload)),
     );
   }

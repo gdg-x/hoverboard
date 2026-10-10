@@ -10,6 +10,7 @@ import {
 import type { Subscription } from '../../utils/firestore';
 import { dispatch, getState } from '../dispatch';
 import { queueSnackbar } from '../snackbars';
+import { setPendingIds } from '../sync';
 import { selectUserId } from '../user';
 
 export type { FeaturedSessions };
@@ -34,6 +35,20 @@ const slice = createSlice({
 const { pending, success, failure, reset } = slice.actions;
 
 let subscription: Subscription = new Initialized();
+// The bookmarks as the server last confirmed them, to tell which ones haven't synced.
+let synced: FeaturedSessions | undefined;
+
+/** The sessions whose bookmark differs from the server's. All of them, before the server has answered. */
+export const unsyncedSessions = (
+  featuredSessions: FeaturedSessions,
+  pending: boolean,
+  confirmed: FeaturedSessions | undefined,
+): string[] => {
+  if (!pending) return [];
+  if (!confirmed) return Object.keys(featuredSessions).filter((id) => featuredSessions[id]);
+  const ids = new Set([...Object.keys(featuredSessions), ...Object.keys(confirmed)]);
+  return [...ids].filter((id) => Boolean(featuredSessions[id]) !== Boolean(confirmed[id]));
+};
 
 const subscribeToUserFeaturedSessions = () => {
   const userId = selectUserId(getState());
@@ -42,7 +57,11 @@ const subscribeToUserFeaturedSessions = () => {
   subscription = subscribeToFeaturedSessions(
     userId,
     () => dispatch(pending()),
-    (featuredSessions) => dispatch(success(featuredSessions)),
+    (featuredSessions, state) => {
+      setPendingIds('featuredSessions', unsyncedSessions(featuredSessions, state.pending, synced));
+      if (!state.pending) synced = featuredSessions;
+      dispatch(success(featuredSessions));
+    },
     (error) => dispatch(failure(error)),
   );
 };
@@ -77,6 +96,7 @@ export const setUserFeaturedSessions = (
 export const resetFeaturedSessions = () => {
   if (subscription instanceof Success) subscription.data();
   subscription = new Initialized();
+  synced = undefined;
   dispatch(reset());
 };
 

@@ -48,6 +48,8 @@ const ICONS: Record<string, () => Promise<{ default: SVGTemplateResult }>> = {
   people: () => import('./icons/people'),
   registration: () => import('./icons/registration'),
   'bell-off': () => import('./icons/bell-off'),
+  'cloud-off': () => import('./icons/cloud-off'),
+  'cloud-upload': () => import('./icons/cloud-upload'),
   'bell-outline': () => import('./icons/bell-outline'),
   monitor: () => import('./icons/monitor'),
   sun: () => import('./icons/sun'),

@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { startApp } from './app';
 import { store } from './store';
 import { finishSignInWithLink, onUser, storedSignInEmail, takeSignInLink } from './store/auth';
@@ -78,10 +78,17 @@ describe('startApp', () => {
     expect(renderNextPageInSourceLocale).toHaveBeenCalledWith(event);
   });
 
-  it('tells the visitor when the app goes offline', () => {
-    window.dispatchEvent(new Event('offline'));
+  it('follows the connection once the page has hydrated', () => {
+    const onLine = vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(false);
+    onTestFinished(() => onLine.mockRestore());
 
-    expect(store.getState().snackbars.at(-1)?.label).toBe('You can still work offline.');
+    window.dispatchEvent(new Event('offline'));
+    expect(store.getState().sync.online).toBe(false);
+
+    onLine.mockReturnValue(true);
+    window.dispatchEvent(new Event('online'));
+    expect(store.getState().sync.online).toBe(true);
+    expect(store.getState().snackbars.at(-1)?.label).toBe('Back online.');
   });
 });
 

@@ -79,8 +79,6 @@ describe('feedback-block', () => {
       feedback: {
         data: new Success([feedback]),
         subscription: new Initialized(),
-        set: new Initialized(),
-        delete: new Initialized(),
       },
     } as unknown as Partial<RootState>);
     await element.updateComplete;
@@ -93,6 +91,24 @@ describe('feedback-block', () => {
     expect(shadowRoot.querySelector('.thanks .illustration')).toHaveAttribute(
       'aria-hidden',
       'true',
+    );
+    expect(shadowRoot.querySelector('.thanks .unsynced')).toBeNull();
+  });
+
+  it('says when saved feedback has not been sent yet', async () => {
+    const { element, shadowRoot } = await fixture<FeedbackBlock>(
+      html`<feedback-block></feedback-block>`,
+    );
+    element.sessionId = 'session-id';
+    setStoreState({
+      user: new Initialized(),
+      feedback: { data: new Success([feedback]), subscription: new Initialized() },
+      sync: { online: false, pending: { feedback: ['session-id'] } },
+    } as unknown as Partial<RootState>);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.thanks .unsynced')).toHaveTextContent(
+      "Not sent yet. It sends when you're online.",
     );
   });
 

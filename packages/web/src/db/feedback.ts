@@ -12,14 +12,24 @@ import { db } from '../firebase';
 import type { Feedback, FeedbackId } from '../models/feedback';
 import { dataWithParentId, write } from '../utils/firestore';
 
+/** Listens to a visitor's feedback, with the sessions whose feedback the server hasn't confirmed. */
 export const subscribeToFeedback = (
   userId: string,
-  onNext: (payload: Feedback[]) => void,
+  onNext: (payload: Feedback[], pendingSessionIds: string[]) => void,
   onError: (error: Error) => void,
 ): Unsubscribe => {
   return onSnapshot(
     query(collectionGroup(db, 'feedback'), where('userId', '==', userId)),
-    (snapshot) => onNext(snapshot.docs.map<Feedback>(dataWithParentId)),
+    { includeMetadataChanges: true },
+    (snapshot) => {
+      const feedback = snapshot.docs.map<Feedback>(dataWithParentId);
+      onNext(
+        feedback,
+        feedback
+          .filter((_item, index) => snapshot.docs[index]!.metadata.hasPendingWrites)
+          .map(({ parentId }) => parentId),
+      );
+    },
     (error) => onError(error as Error),
   );
 };

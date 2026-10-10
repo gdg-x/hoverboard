@@ -1,45 +1,81 @@
 import { describe, expect, it, onTestFinished, vi } from 'vitest';
-import reducer, { canWriteNow, selectOnline, watchConnection } from '.';
-import type { RootState } from '..';
-import { dispatch, getState } from '../dispatch';
-import { queueSnackbar } from '../snackbars';
+import reducer, {
+  canWriteNow,
+  resetPending,
+  selectOnline,
+  selectPending,
+  selectPendingCount,
+  setPendingIds,
+  syncLabel,
+  watchConnection,
+} from '.';
+import { store } from '..';
 
-vi.mock('../dispatch');
+const lastSnackbar = () => store.getState().snackbars.at(-1)?.label;
 
-const offline = () => {
-  const onLine = vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(false);
+const connection = () => {
+  const onLine = vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(true);
   onTestFinished(() => onLine.mockRestore());
-  return onLine;
+  return (online: boolean) => {
+    onLine.mockReturnValue(online);
+    window.dispatchEvent(new Event(online ? 'online' : 'offline'));
+  };
 };
 
 describe('sync', () => {
-  it('assumes online until the browser says otherwise, so the first render matches the server', () => {
-    expect(reducer(undefined, { type: '@@INIT' })).toEqual({ online: true });
+  it('assumes online with nothing to sync, so the first render matches the server', () => {
+    expect(reducer(undefined, { type: '@@INIT' })).toEqual({ online: true, pending: {} });
   });
 
-  it('follows the online and offline events', () => {
-    const onLine = offline();
-
+  it('follows the online and offline events, and says when it is back online', () => {
+    const go = connection();
     watchConnection();
-    expect(dispatch).toHaveBeenLastCalledWith({ type: 'sync/setOnline', payload: false });
 
-    onLine.mockReturnValue(true);
-    window.dispatchEvent(new Event('online'));
-    expect(dispatch).toHaveBeenLastCalledWith({ type: 'sync/setOnline', payload: true });
+    go(false);
+    expect(selectOnline(store.getState())).toBe(false);
+    go(true);
+    expect(selectOnline(store.getState())).toBe(true);
+    expect(lastSnackbar()).toBe('Back online.');
+  });
 
-    onLine.mockReturnValue(false);
-    window.dispatchEvent(new Event('offline'));
-    expect(dispatch).toHaveBeenLastCalledWith({ type: 'sync/setOnline', payload: false });
+  it('waits for changes made offline to sync before saying they are saved', () => {
+    const go = connection();
+    go(false);
+    setPendingIds('featuredSessions', ['session-1', 'session-2']);
+    setPendingIds('feedback', ['session-3']);
+    expect(selectPendingCount(store.getState())).toBe(3);
+    expect(selectPending(store.getState(), 'feedback')).toEqual(['session-3']);
+
+    go(true);
+    expect(lastSnackbar()).not.toBe('Back online. Your changes are saved.');
+    setPendingIds('featuredSessions', []);
+    expect(lastSnackbar()).not.toBe('Back online. Your changes are saved.');
+    setPendingIds('feedback', []);
+    expect(lastSnackbar()).toBe('Back online. Your changes are saved.');
+  });
+
+  it('forgets what has not synced on sign-out', () => {
+    setPendingIds('notificationsUsers', ['user-1']);
+    resetPending();
+    expect(selectPendingCount(store.getState())).toBe(0);
+  });
+
+  it('labels the connection for the header', () => {
+    expect(syncLabel(true, 0)).toBeUndefined();
+    expect(syncLabel(true, 2)).toBe('Syncing…');
+    expect(syncLabel(false, 0)).toBe('Offline');
+    expect(syncLabel(false, 1)).toBe('Offline · 1 change to sync');
+    expect(syncLabel(false, 3)).toBe('Offline · 3 changes to sync');
   });
 
   it('lets writes that need the network start only online, and says why otherwise', () => {
-    vi.mocked(getState).mockReturnValue({ sync: { online: true } } as RootState);
+    const go = connection();
+    go(true);
     expect(canWriteNow()).toBe(true);
-    expect(dispatch).not.toHaveBeenCalled();
 
-    vi.mocked(getState).mockReturnValue({ sync: { online: false } } as RootState);
+    go(false);
     expect(canWriteNow()).toBe(false);
-    expect(dispatch).toHaveBeenCalledWith(queueSnackbar('Connect to the internet to send this.'));
-    expect(selectOnline({ sync: { online: false } } as RootState)).toBe(false);
+    expect(lastSnackbar()).toBe('Connect to the internet to send this.');
+    go(true);
   });
 });

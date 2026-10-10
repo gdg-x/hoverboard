@@ -28,13 +28,13 @@ describe('db/feedback', () => {
     vi.clearAllMocks();
   });
 
-  it('subscribes to feedback collection group filtered by userId', () => {
+  it('subscribes to feedback collection group filtered by userId, with what has not synced', () => {
     const unsubscribe = vi.fn();
     vi.mocked(collectionGroup).mockReturnValue('feedback-group' as never);
     vi.mocked(where).mockReturnValue('where-clause' as never);
     vi.mocked(query).mockReturnValue('query-ref' as never);
-    vi.mocked(onSnapshot).mockImplementation((_q, onNext) => {
-      (onNext as (snapshot: unknown) => void)({
+    vi.mocked(onSnapshot).mockImplementation((_q, _options, onNext) => {
+      (onNext as unknown as (snapshot: unknown) => void)({
         docs: [
           {
             id: 'user-1',
@@ -45,6 +45,7 @@ describe('db/feedback', () => {
               userId: 'user-1',
             }),
             ref: { parent: { parent: { id: 'session-1' } } },
+            metadata: { hasPendingWrites: true },
           },
         ],
       });
@@ -59,12 +60,18 @@ describe('db/feedback', () => {
     expect(unsub).toBe(unsubscribe);
     expect(collectionGroup).toHaveBeenCalledWith(db, 'feedback');
     expect(where).toHaveBeenCalledWith('userId', '==', 'user-1');
-    expect(onNext).toHaveBeenCalledWith([feedback]);
+    expect(onSnapshot).toHaveBeenCalledWith(
+      'query-ref',
+      { includeMetadataChanges: true },
+      expect.any(Function),
+      expect.any(Function),
+    );
+    expect(onNext).toHaveBeenCalledWith([feedback], ['session-1']);
   });
 
   it('forwards subscription error to onError', () => {
     const error = new Error('boom');
-    vi.mocked(onSnapshot).mockImplementation((_q, _onNext, onError) => {
+    vi.mocked(onSnapshot).mockImplementation((_q, _options, _onNext, onError) => {
       (onError as unknown as (err: Error) => void)(error);
       return vi.fn();
     });

@@ -25,6 +25,7 @@ import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
 import { dispatch } from '../dispatch';
 import { resetFeaturedSessions } from '../featured-sessions';
+import { resetPending } from '../sync';
 import { unsubscribeFromFeedback } from '../feedback';
 import { queueSnackbar } from '../snackbars';
 import { resetSubscribed } from '../subscribe';
@@ -130,6 +131,7 @@ export const onUser = () => {
       resetSubscribed();
       dispatch(unsubscribeFromFeedback());
       resetFeaturedSessions();
+      resetPending();
     }
   });
 };

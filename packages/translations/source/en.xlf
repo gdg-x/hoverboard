@@ -2,11 +2,11 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file source-language="en" original="lit-localize-inputs" datatype="plaintext">
 <body>
-<trans-unit id="shell.app.offline">
-  <source>You can still work offline.</source>
-</trans-unit>
 <trans-unit id="dialogs.feedback.thanks">
   <source>Thanks for your feedback.</source>
+</trans-unit>
+<trans-unit id="dialogs.feedback.unsynced">
+  <source>Not sent yet. It sends when you're online.</source>
 </trans-unit>
 <trans-unit id="dialogs.feedback.content-rating">
   <source>Content quality:</source>
@@ -449,6 +449,9 @@
 <trans-unit id="shell.snack-bar.dismiss">
   <source>Dismiss</source>
 </trans-unit>
+<trans-unit id="shell.sync.help">
+  <source>Bookmarks, feedback and reminders you change are saved on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.</source>
+</trans-unit>
 <trans-unit id="common.close">
   <source>Close</source>
 </trans-unit>
@@ -487,6 +490,27 @@
 </trans-unit>
 <trans-unit id="store.subscribe.success">
   <source>Successfully subscribed!</source>
+</trans-unit>
+<trans-unit id="shell.sync.syncing">
+  <source>Syncing…</source>
+</trans-unit>
+<trans-unit id="shell.sync.offline">
+  <source>Offline</source>
+</trans-unit>
+<trans-unit id="shell.sync.offline-one">
+  <source>Offline · 1 change to sync</source>
+</trans-unit>
+<trans-unit id="shell.sync.offline-many">
+  <source>Offline · <x id="0" equiv-text="${pending}"/> changes to sync</source>
+</trans-unit>
+<trans-unit id="shell.sync.unsynced">
+  <source>Saved on this device. Syncs when you're online.</source>
+</trans-unit>
+<trans-unit id="shell.sync.saved">
+  <source>Back online. Your changes are saved.</source>
+</trans-unit>
+<trans-unit id="shell.sync.online">
+  <source>Back online.</source>
 </trans-unit>
 <trans-unit id="store.offline.needs-network">
   <source>Connect to the internet to send this.</source>

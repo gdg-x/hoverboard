@@ -1,6 +1,11 @@
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-import { subscribeToDocument, type Subscription, write } from '../utils/firestore';
+import {
+  type SnapshotState,
+  subscribeToDocument,
+  type Subscription,
+  write,
+} from '../utils/firestore';
 
 export interface UserTokens {
   id: string;
@@ -14,7 +19,7 @@ export type UserTokensData = Omit<UserTokens, 'id'>;
 export const subscribeToNotificationsUsers = (
   uid: string,
   onStart: () => void,
-  onNext: (payload: UserTokens | undefined) => void,
+  onNext: (payload: UserTokens | undefined, state: SnapshotState) => void,
   onError: (error: Error) => void,
 ): Subscription => {
   return subscribeToDocument<UserTokens>(`notificationsUsers/${uid}`, onStart, onNext, onError);

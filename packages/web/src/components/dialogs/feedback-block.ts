@@ -14,6 +14,7 @@ import {
   setFeedback,
 } from '../../store/feedback';
 import { queueComplexSnackbar, queueSnackbar } from '../../store/snackbars';
+import { selectPending } from '../../store/sync';
 import type { UserState } from '../../store/user';
 import '../shared/star-rating';
 import { type StarRatingChangeDetail } from '../shared/star-rating';
@@ -46,6 +47,12 @@ export class FeedbackBlock extends ThemedElement {
       .thanks p {
         margin: 0;
         font-weight: 600;
+      }
+
+      .thanks .unsynced {
+        flex-basis: 100%;
+        color: var(--hb-color-on-surface-variant);
+        font-weight: 400;
       }
 
       #commentInput {
@@ -87,6 +94,8 @@ export class FeedbackBlock extends ThemedElement {
   private accessor user!: UserState;
   @fromStore((state, host: FeedbackBlock) => selectFeedbackById(state, host.sessionId))
   private accessor feedback!: RemoteData<Error, Feedback | false>;
+  @fromStore((state) => selectPending(state, 'feedback'))
+  private accessor unsyncedFeedback!: string[];
 
   override willUpdate(changedProperties: PropertyValues) {
     if (changedProperties.has('feedback')) {
@@ -102,6 +111,15 @@ export class FeedbackBlock extends ThemedElement {
             ? html`<div class="thanks">
                 ${illustration(thankYou)}
                 <p>${msg('Thanks for your feedback.', { id: 'dialogs.feedback.thanks' })}</p>
+                ${
+                  this.sessionId && this.unsyncedFeedback.includes(this.sessionId)
+                    ? html`<p class="unsynced">
+                        ${msg("Not sent yet. It sends when you're online.", {
+                          id: 'dialogs.feedback.unsynced',
+                        })}
+                      </p>`
+                    : nothing
+                }
               </div>`
             : nothing
         }

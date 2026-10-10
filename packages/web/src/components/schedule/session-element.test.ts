@@ -114,6 +114,21 @@ describe('session-element', () => {
     expect(bookmark).toHaveAttribute('label', 'Bookmark Example Session');
     expect(bookmark.pressed).toBe(true);
     expect(bookmark.querySelector('hoverboard-icon')).toHaveAttribute('name', 'bookmark-check');
+    expect(shadowRoot.querySelector('.unsynced')).toBeNull();
+  });
+
+  it('marks a bookmark that has not synced yet', async () => {
+    const { shadowRoot } = await render({
+      featuredSessions: new Success({ 'session-1': true }),
+      unsyncedBookmarks: ['session-1'],
+    } as never);
+    const bookmark = shadowRoot.querySelector('hb-icon-button')!;
+
+    expect(bookmark).toHaveAttribute(
+      'label',
+      "Bookmark Example Session. Saved on this device. Syncs when you're online.",
+    );
+    expect(bookmark.querySelector('.unsynced')).toHaveAttribute('name', 'cloud-upload');
   });
 
   it('asks to sign in before bookmarking', async () => {

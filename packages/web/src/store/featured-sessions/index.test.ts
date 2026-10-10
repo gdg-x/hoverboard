@@ -1,6 +1,7 @@
 import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import reducer, {
+  unsyncedSessions,
   resetFeaturedSessions,
   selectFeaturedSessions,
   selectFeaturedSessionsState,
@@ -14,6 +15,7 @@ import type { RootState } from '..';
 
 vi.mock('../../db/featured-sessions');
 vi.mock('../dispatch');
+vi.mock('../sync', () => ({ setPendingIds: vi.fn() }));
 vi.mock('../snackbars', () => ({
   queueSnackbar: vi.fn((label: string) => ({
     type: 'snackbars/queueSnackbar',
@@ -77,6 +79,20 @@ describe('setUserFeaturedSessions', () => {
     setUserFeaturedSessions('user-1', { 'session-1': true }, false);
 
     expect(queueSnackbar).toHaveBeenCalledWith("Couldn't save your schedule. Try again.");
+  });
+});
+
+describe('unsyncedSessions', () => {
+  it('is empty once the server has confirmed the bookmarks', () => {
+    expect(unsyncedSessions({ a: true }, false, undefined)).toEqual([]);
+  });
+
+  it('lists the sessions whose bookmark changed since the server confirmed them', () => {
+    expect(unsyncedSessions({ a: true, c: true }, true, { a: true, b: true })).toEqual(['c', 'b']);
+  });
+
+  it('lists every bookmark before the server has answered, as after a reload offline', () => {
+    expect(unsyncedSessions({ a: true, b: false }, true, undefined)).toEqual(['a']);
   });
 });
 

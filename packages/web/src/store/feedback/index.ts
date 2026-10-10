@@ -3,6 +3,7 @@ import { createSelector, createSlice, type PayloadAction } from '@reduxjs/toolki
 import type { Unsubscribe } from 'firebase/firestore';
 import type { RootState } from '..';
 import { dispatch } from '../dispatch';
+import { setPendingIds } from '../sync';
 import {
   removeFeedback,
   saveFeedback,
@@ -26,7 +27,10 @@ export const initialState = {
 export const subscribe = (userId: string) => {
   return subscribeFeedback(
     userId,
-    (feedbackList) => dispatch(setSuccess(feedbackList)),
+    (feedbackList, pendingSessionIds) => {
+      setPendingIds('feedback', pendingSessionIds);
+      dispatch(setSuccess(feedbackList));
+    },
     (error) => dispatch(setFailure(error)),
   );
 };

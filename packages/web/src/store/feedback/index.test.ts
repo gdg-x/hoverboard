@@ -15,9 +15,11 @@ import {
 import type { Feedback } from '../../models/feedback';
 import type { RootState } from '..';
 import { dispatch } from '../dispatch';
+import { setPendingIds } from '../sync';
 
 vi.mock('../../db/feedback');
 vi.mock('../dispatch');
+vi.mock('../sync', () => ({ setPendingIds: vi.fn() }));
 
 const feedback: Feedback = {
   comment: 'Great talk',
@@ -85,11 +87,12 @@ describe('feedback writes and subscriptions', () => {
   it('subscribes to the feedback collection group and dispatches mapped snapshot data', () => {
     const unsubscribe = vi.fn();
     vi.mocked(subscribeFeedback).mockImplementation((_userId, next) => {
-      next([feedback]);
+      next([feedback], ['session-1']);
       return unsubscribe;
     });
 
     expect(subscribe('user-1')).toBe(unsubscribe);
+    expect(setPendingIds).toHaveBeenCalledWith('feedback', ['session-1']);
     expect(subscribeFeedback).toHaveBeenCalledWith(
       'user-1',
       expect.any(Function),

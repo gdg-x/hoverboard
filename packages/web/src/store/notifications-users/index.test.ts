@@ -2,10 +2,12 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it, vi } from 'vitest';
 import { subscribeToNotificationsUsers } from '../../db/notifications-users';
 import { dispatch } from '../dispatch';
+import { setPendingIds } from '../sync';
 import type { RootState } from '..';
 
 vi.mock('../../db/notifications-users');
 vi.mock('../dispatch');
+vi.mock('../sync', () => ({ setPendingIds: vi.fn() }));
 
 const loadModule = async () => import('.');
 
@@ -40,7 +42,11 @@ describe('selectNotificationsUsersSubscribed', () => {
     vi.resetModules();
     let onStart: (() => void) | undefined;
     let onNext:
-      ((payload: { id: string; tokens: Record<string, true> } | undefined) => void) | undefined;
+      | ((
+          payload: { id: string; tokens: Record<string, true> } | undefined,
+          state: { pending: boolean },
+        ) => void)
+      | undefined;
     let onError: ((error: Error) => void) | undefined;
 
     vi.mocked(subscribeToNotificationsUsers).mockImplementation((_uid, start, next, error) => {
@@ -70,7 +76,8 @@ describe('selectNotificationsUsersSubscribed', () => {
       expect.objectContaining({ type: 'notificationsUsers/pending' }),
     );
 
-    onNext?.({ id: 'user-1', tokens: { 'token-123': true } });
+    onNext?.({ id: 'user-1', tokens: { 'token-123': true } }, { pending: true });
+    expect(setPendingIds).toHaveBeenLastCalledWith('notificationsUsers', ['user-1']);
     expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
         type: 'notificationsUsers/success',
@@ -78,7 +85,8 @@ describe('selectNotificationsUsersSubscribed', () => {
       }),
     );
 
-    onNext?.(undefined);
+    onNext?.(undefined, { pending: false });
+    expect(setPendingIds).toHaveBeenLastCalledWith('notificationsUsers', []);
     expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
         type: 'notificationsUsers/success',

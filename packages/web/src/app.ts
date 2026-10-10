@@ -1,11 +1,8 @@
-import { msg } from '@lit/localize';
 import { emailLinkSignIn } from './config/site';
-import { store } from './store';
 import { finishSignInWithLink, onUser, storedSignInEmail, takeSignInLink } from './store/auth';
 import { subscribeToPageContent } from './store/content';
 import { openSigninDialog } from './store/dialogs';
 import { setFilters } from './store/filters';
-import { queueSnackbar } from './store/snackbars';
 import { watchConnection } from './store/sync';
 import { logPageView } from './utils/analytics';
 import { loadOtherBuildsInFull } from './utils/build';
@@ -29,9 +26,6 @@ const afterHydration = async () => {
 /** Starts what lasts across pages. The layout calls it once, when the first page loads. */
 export const startApp = async (): Promise<void> => {
   const openedFromSignInLink = emailLinkSignIn && takeSignInLink();
-  window.addEventListener('offline', () =>
-    store.dispatch(queueSnackbar(msg('You can still work offline.', { id: 'shell.app.offline' }))),
-  );
   document.addEventListener('astro:before-preparation', (event) =>
     loadOtherBuildsInFull(event as Parameters<typeof loadOtherBuildsInFull>[0]),
   );
