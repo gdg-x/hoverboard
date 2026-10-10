@@ -9,6 +9,7 @@ import { AppHeader, demoBanner } from '../components/shell/app-header';
 import { AppOverlays } from '../components/shell/app-overlays';
 import { loadContent } from '../data/content';
 import '../data/markdown';
+import { pageMetadata } from '../data/metadata';
 import { seedPage } from '../data/page';
 import { openGraphLocale } from '../data/structured-data';
 import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
@@ -103,6 +104,14 @@ await demoBanner;
     {theme.colorScheme === 'system' && <script is:inline set:html={colorSchemeScript} />}
     {__HB_FEATURES__.demo && <script is:inline set:html={demoScript} />}
     <link href="manifest.json" rel="manifest" />
+    {__HB_FEATURES__.blog && (
+      <link
+        href="blog/rss.xml"
+        rel="alternate"
+        title={pageMetadata('blog').title}
+        type="application/rss+xml"
+      />
+    )}
 
     <meta content="yes" name="mobile-web-app-capable" />
     <meta content={resources.title} name="application-name" />

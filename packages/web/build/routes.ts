@@ -19,6 +19,7 @@ export const ROUTES: readonly Route[] = [
   { pattern: '/', entrypoint: 'index.astro' },
   { pattern: '/blog', entrypoint: 'blog/index.astro', feature: 'blog' },
   { pattern: '/blog/[id]', entrypoint: 'blog/[id].astro', feature: 'blog', content: 'blog' },
+  { pattern: '/blog/rss.xml', entrypoint: 'blog/rss.xml.ts', feature: 'blog' },
   {
     pattern: '/schedule/my-schedule',
     entrypoint: 'schedule/my-schedule.astro',
