@@ -191,6 +191,7 @@ export class SessionElement extends ThemedElement {
       session.complexity,
       session.language,
     ].filter(Boolean);
+    const speakers = session.speakers?.filter((speaker) => speaker.name) ?? [];
 
     return html`
       <article
@@ -204,18 +205,16 @@ export class SessionElement extends ThemedElement {
         }
         <h3 class="title"><a href="${sessionPath(session.id)}">${session.title}</a></h3>
         ${
-          session.speakers?.some((speaker) => speaker.name)
+          speakers.length
             ? html`<ul class="speakers">
-                ${session.speakers
-                  .filter((speaker) => speaker.name)
-                  .map(
-                    (speaker) => html`
-                      <li>
-                        <speaker-photo size="xs" src="${speaker.photoUrl}"></speaker-photo>
-                        ${speaker.name}
-                      </li>
-                    `,
-                  )}
+                ${speakers.map(
+                  (speaker) => html`
+                    <li>
+                      <speaker-photo size="xs" src="${speaker.photoUrl}"></speaker-photo>
+                      ${speaker.name}
+                    </li>
+                  `,
+                )}
               </ul>`
             : nothing
         }
