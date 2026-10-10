@@ -24,6 +24,27 @@ service cloud.firestore {
       return value is number && value >= 0 && value <= 5;
     }
 
+    function isName(value) {
+      return isText(value, 100) && value.trim().size() > 0;
+    }
+
+    function isReactions(value) {
+      return value is list
+        && value.size() > 0
+        && value.size() == value.toSet().size()
+        && value.toSet().hasOnly(['applause', 'love', 'insightful', 'mind-blown', 'funny']);
+    }
+
+    // Until 8 days after the session's day, midnight UTC: a week after it ends, with a day for time zones.
+    function isOpen(session) {
+      return !('day' in session)
+        || request.time < timestamp.date(
+          int(session.day.split('-')[0]),
+          int(session.day.split('-')[1]),
+          int(session.day.split('-')[2])
+        ) + duration.value(8, 'd');
+    }
+
     // Event content: anyone can read it, and only organizers write it.
     match /blog/{post} {
       allow read;
@@ -81,11 +102,44 @@ service cloud.firestore {
           && isRating(request.resource.data.styleRating)
           && isText(request.resource.data.comment, 256);
       }
+
+      // A signed-in user's reactions to a session, keyed by their user ID. Anyone can see them.
+      match /reactions/{userId} {
+        allow read;
+        allow delete: if isOwner(userId);
+        // After the session's window, a visitor can only take reactions away.
+        allow create, update: if isOwner(userId)
+          && exists(/databases/$(database)/documents/profiles/$(userId))
+          && exists(/databases/$(database)/documents/sessions/$(session))
+          && hasExactly(['reactions', 'userId', 'updatedAt'])
+          && isReactions(request.resource.data.reactions)
+          && request.resource.data.userId == userId
+          && request.resource.data.updatedAt == request.time
+          && (isOpen(get(/databases/$(database)/documents/sessions/$(session)).data)
+            || (resource != null
+              && request.resource.data.reactions.toSet().hasOnly(resource.data.reactions)));
+      }
     }
 
     // "My feedback" queries every session's feedback by `userId`.
     match /{path=**}/feedback/{userId} {
       allow list: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+
+    // A visitor's own reactions in every session, to delete them with their profile.
+    match /{path=**}/reactions/{userId} {
+      allow list: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+
+    // The name and photo others see of a signed-in user. The photo can only be their sign-in provider's.
+    match /profiles/{userId} {
+      allow read;
+      allow delete: if isOwner(userId);
+      allow create, update: if isOwner(userId)
+        && hasExactly(['name', 'photoUrl', 'updatedAt'])
+        && isName(request.resource.data.name)
+        && request.resource.data.photoUrl in ['', request.auth.token.get('picture', '')]
+        && request.resource.data.updatedAt == request.time;
     }
 
     // Saved sessions: a map of session IDs to booleans.

@@ -232,7 +232,7 @@ export class AppHeader extends ThemedComponent {
             ${this.renderCallToAction()}
             ${__HB_FEATURES__.notifications ? html`<notification-toggle></notification-toggle>` : nothing}
             ${
-              __HB_FEATURES__.mySchedule || __HB_FEATURES__.feedback
+              __HB_FEATURES__.mySchedule || __HB_FEATURES__.feedback || __HB_FEATURES__.reactions
                 ? html`<account-menu></account-menu>`
                 : nothing
             }

@@ -13,6 +13,8 @@ import notificationsUsersReducer from './notifications-users';
 import partners from './partners';
 import potentialPartnersReducer from './potential-partners';
 import previousSpeakersReducer from './previous-speakers';
+import profilesReducer from './profiles';
+import reactionsReducer from './reactions';
 import sessionsReducer from './sessions';
 import snackbars from './snackbars';
 import speakersReducer from './speakers';
@@ -41,6 +43,8 @@ export const reducers = combineReducers({
   partners,
   potentialPartners: potentialPartnersReducer,
   previousSpeakers: previousSpeakersReducer,
+  profiles: profilesReducer,
+  reactions: reactionsReducer,
   sessions: sessionsReducer,
   snackbars,
   speakers: speakersReducer,

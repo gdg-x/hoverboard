@@ -2,7 +2,7 @@ import { waitFor } from '@testing-library/dom';
 import { html, render } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { store } from '../../store';
-import { closeDialog, openSigninDialog } from '../../store/dialogs';
+import { closeDialog, openProfileDialog, openSigninDialog } from '../../store/dialogs';
 import type { AppOverlays } from './app-overlays';
 import './app-overlays';
 
@@ -30,5 +30,13 @@ describe('app-overlays', () => {
 
     await waitFor(() => expect(shadowRoot.querySelector('signin-dialog')).not.toBeNull());
     expect(customElements.get('signin-dialog')).toBeDefined();
+  });
+
+  it('loads and renders the profile dialog when it opens', async () => {
+    const shadowRoot = await renderOverlays();
+
+    openProfileDialog();
+
+    await waitFor(() => expect(shadowRoot.querySelector('profile-dialog')).not.toBeNull());
   });
 });

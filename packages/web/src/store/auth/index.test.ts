@@ -20,6 +20,8 @@ import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
 import { dispatch, getState } from '../dispatch';
 import { resetFeaturedSessions } from '../featured-sessions';
+import { resetProfiles } from '../profiles';
+import { resetReactions } from '../reactions';
 import type { queueComplexSnackbar } from '../snackbars';
 import { unsubscribeFromFeedback } from '../feedback';
 import { resetSubscribed } from '../subscribe';
@@ -42,6 +44,8 @@ vi.mock('../../utils/providers', async (importOriginal) => {
 vi.mock('../featured-sessions', () => ({
   resetFeaturedSessions: vi.fn(),
 }));
+vi.mock('../profiles', () => ({ resetProfiles: vi.fn() }));
+vi.mock('../reactions', () => ({ resetReactions: vi.fn() }));
 vi.mock('../feedback', () => ({
   unsubscribeFromFeedback: vi.fn(() => ({ type: 'feedback/unsubscribeFromFeedback' })),
 }));
@@ -282,6 +286,8 @@ describe('auth helpers', () => {
       expect.objectContaining({ type: 'feedback/unsubscribeFromFeedback' }),
     );
     expect(resetFeaturedSessions).toHaveBeenCalled();
+    expect(resetReactions).toHaveBeenCalled();
+    expect(resetProfiles).toHaveBeenCalled();
   });
 
   describe('signOut', () => {

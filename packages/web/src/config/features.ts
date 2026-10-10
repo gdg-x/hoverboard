@@ -15,6 +15,7 @@ export const FEATURES = [
   'notifications',
   'partners',
   'previousSpeakers',
+  'reactions',
   'schedule',
   'socialImages',
   'speakers',

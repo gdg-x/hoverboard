@@ -1,5 +1,5 @@
 import { Ajv2020 } from 'ajv/dist/2020.js';
-import { doc, setDoc, Timestamp } from 'firebase/firestore';
+import { doc, serverTimestamp, setDoc, Timestamp } from 'firebase/firestore';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { beforeEach, describe, it } from 'vitest';
@@ -15,11 +15,15 @@ ajv.addSchema(schema);
 
 type Data = Record<string, unknown>;
 
-/** Turns the schema's `{ $timestamp }` into a Firestore timestamp, for writing through the rules. */
-const toFirestore = (data: Data): Data =>
+/**
+ * Turns the schema's `{ $timestamp }` into a Firestore timestamp, for writing through the rules.
+ * Fields in `serverTimes` become the server's time, which rules that check `request.time` need.
+ */
+const toFirestore = (data: Data, serverTimes: string[] = []): Data =>
   Object.fromEntries(
     Object.entries(data).map(([key, value]) => {
       const timestamp = (value as { $timestamp?: string } | null)?.$timestamp;
+      if (timestamp && serverTimes.includes(key)) return [key, serverTimestamp()];
       return [key, timestamp ? Timestamp.fromDate(new Date(timestamp)) : value];
     }),
   );
@@ -32,8 +36,12 @@ interface Fixture {
   path: string;
   /** The signed-in user who writes it, if any. */
   userId?: string;
+  /** Claims of the user's sign-in token. */
+  token?: Record<string, string>;
   /** Documents the rules need, such as the session a rating is for. */
   existing?: Record<string, Data>;
+  /** Timestamps the site writes as the server's time. */
+  serverTimes?: string[];
   valid: Data;
   invalid: [description: string, data: Data][];
 }
@@ -63,6 +71,78 @@ const FIXTURES: Record<string, Fixture> = {
     userId: 'user-1',
     valid: { '101': true, '102': false },
     invalid: [['over 500 sessions', entries(501, true)]],
+  },
+  profiles: {
+    path: 'profiles/user-1',
+    userId: 'user-1',
+    token: { picture: 'https://photos.test/ada.jpg' },
+    serverTimes: ['updatedAt'],
+    valid: {
+      name: 'Ada Lovelace',
+      photoUrl: 'https://photos.test/ada.jpg',
+      updatedAt: { $timestamp: '2026-10-09T10:00:00.000Z' },
+    },
+    invalid: [
+      [
+        'a blank name',
+        { name: ' ', photoUrl: '', updatedAt: { $timestamp: '2026-10-09T10:00:00.000Z' } },
+      ],
+      [
+        'a name over 100 characters',
+        {
+          name: 'x'.repeat(101),
+          photoUrl: '',
+          updatedAt: { $timestamp: '2026-10-09T10:00:00.000Z' },
+        },
+      ],
+      ['no photo field', { name: 'Ada', updatedAt: { $timestamp: '2026-10-09T10:00:00.000Z' } }],
+      [
+        'an extra field',
+        {
+          name: 'Ada',
+          photoUrl: '',
+          updatedAt: { $timestamp: '2026-10-09T10:00:00.000Z' },
+          bio: '',
+        },
+      ],
+    ],
+  },
+  'sessions/*/reactions': {
+    path: 'sessions/101/reactions/user-1',
+    userId: 'user-1',
+    existing: {
+      'sessions/101': { title: 'Keynote', description: 'Opening talk' },
+      'profiles/user-1': { name: 'Ada Lovelace', photoUrl: '' },
+    },
+    serverTimes: ['updatedAt'],
+    valid: {
+      reactions: ['applause', 'mind-blown'],
+      userId: 'user-1',
+      updatedAt: { $timestamp: '2026-10-09T10:00:00.000Z' },
+    },
+    invalid: [
+      [
+        'no reactions',
+        { reactions: [], userId: 'user-1', updatedAt: { $timestamp: '2026-10-09T10:00:00.000Z' } },
+      ],
+      [
+        'an unknown reaction',
+        {
+          reactions: ['meh'],
+          userId: 'user-1',
+          updatedAt: { $timestamp: '2026-10-09T10:00:00.000Z' },
+        },
+      ],
+      [
+        'a repeated reaction',
+        {
+          reactions: ['love', 'love'],
+          userId: 'user-1',
+          updatedAt: { $timestamp: '2026-10-09T10:00:00.000Z' },
+        },
+      ],
+      ['no userId', { reactions: ['love'], updatedAt: { $timestamp: '2026-10-09T10:00:00.000Z' } }],
+    ],
   },
   notificationsUsers: {
     path: 'notificationsUsers/user-1',
@@ -128,8 +208,8 @@ describe('the schema and the rules', () => {
   describe.each(Object.entries(FIXTURES))('%s', (pattern, fixture) => {
     const validate = ajv.getSchema(`${schema.$id}#/$defs/${collectionInfo(fixture.path)!.schema}`)!;
     const write = (data: Data) => {
-      const context = fixture.userId ? authedContext(fixture.userId) : anonContext();
-      return setDoc(doc(context.firestore(), fixture.path), toFirestore(data));
+      const context = fixture.userId ? authedContext(fixture.userId, fixture.token) : anonContext();
+      return setDoc(doc(context.firestore(), fixture.path), toFirestore(data, fixture.serverTimes));
     };
 
     beforeEach(() => (fixture.existing ? seed(fixture.existing) : undefined));

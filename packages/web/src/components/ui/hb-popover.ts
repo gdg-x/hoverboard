@@ -1,10 +1,11 @@
 import { css, html, LitElement, type PropertyValues } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { ClickOutsideController } from '../../controllers/click-outside-controller';
 import { primitive } from '../../styles/shared';
 
 /**
  * A panel that opens under its trigger, the element in the `trigger` slot, and holds any content.
+ * It lines up with the trigger's end, and moves over to stay inside the viewport.
  * Clicking the trigger toggles it, and Escape or a click outside closes it.
  */
 @customElement('hb-popover')
@@ -42,6 +43,9 @@ export class HbPopover extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   accessor open = false;
+
+  @query('.panel')
+  private accessor panel!: HTMLElement;
 
   private readonly clickOutside = new ClickOutsideController(this, () => this.close());
 
@@ -82,10 +86,22 @@ export class HbPopover extends LitElement {
     if (!changed.has('open')) return;
     this.updateTrigger();
     if (this.open) {
+      this.fitViewport();
       this.clickOutside.start();
     } else {
       this.clickOutside.stop();
     }
+  }
+
+  private fitViewport() {
+    const { panel } = this;
+    panel.style.translate = '';
+    const margin = 16;
+    const { left, right } = panel.getBoundingClientRect();
+    const viewport = document.documentElement.clientWidth;
+    const shift =
+      left < margin ? margin - left : right > viewport - margin ? viewport - margin - right : 0;
+    if (shift) panel.style.translate = `${shift}px`;
   }
 
   private readonly updateTrigger = () => {

@@ -6,7 +6,9 @@ import reducer, {
   openFeedbackDialog,
   openSigninDialog,
   openPartnerDialog,
+  openProfileDialog,
   selectIsDialogOpen,
+  selectProfileDialogReaction,
   setDialogError,
 } from '.';
 import type { Session } from '../../models/session';
@@ -92,6 +94,40 @@ describe('dialog action helpers', () => {
         payload: { name: DIALOG.PARTNER },
       }),
     );
+  });
+
+  it('dispatches the profile dialog', () => {
+    openProfileDialog();
+
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'dialogs/open', payload: { name: DIALOG.PROFILE } }),
+    );
+  });
+
+  it('dispatches the profile dialog with the reaction to save after it', () => {
+    const data = { sessionId: 'session-1', reaction: 'love' } as const;
+
+    openProfileDialog(data);
+
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'dialogs/open', payload: { name: DIALOG.PROFILE, data } }),
+    );
+  });
+
+  it('selects the reaction the profile dialog saves after the profile', () => {
+    const data = { sessionId: 'session-1', reaction: 'love' } as const;
+    const withDialogs = (dialogs: RootState['dialogs']) => ({ dialogs }) as RootState;
+
+    expect(
+      selectProfileDialogReaction(withDialogs(new Success({ name: DIALOG.PROFILE, data }))),
+    ).toEqual(data);
+    expect(
+      selectProfileDialogReaction(withDialogs(new Success({ name: DIALOG.PROFILE }))),
+    ).toBeUndefined();
+    expect(
+      selectProfileDialogReaction(withDialogs(new Success({ name: DIALOG.SIGNIN }))),
+    ).toBeUndefined();
+    expect(selectProfileDialogReaction(withDialogs(new Initialized()))).toBeUndefined();
   });
 
   it('dispatches the feedback dialog payload', () => {

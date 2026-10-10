@@ -4,7 +4,7 @@ import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { fromStore } from '../../controllers/from-store';
 import { signOut } from '../../store/auth';
-import { openSigninDialog } from '../../store/dialogs';
+import { openProfileDialog, openSigninDialog } from '../../store/dialogs';
 import type { UserState } from '../../store/user';
 import '../shared/hoverboard-icon';
 import '../ui/hb-icon-button';
@@ -81,6 +81,13 @@ export class AccountMenu extends ThemedComponent {
               >`
             : nothing
         }
+        ${
+          __HB_FEATURES__.reactions
+            ? html`<button role="menuitem" type="button" @click="${this.editProfile}">
+                ${msg('Public profile', { id: 'shell.account-menu.profile' })}
+              </button>`
+            : nothing
+        }
         <button role="menuitem" type="button" @click="${this.signOut}">
           ${msg('Sign out', { id: 'shell.header.sign-out' })}
         </button>
@@ -90,6 +97,10 @@ export class AccountMenu extends ThemedComponent {
 
   private readonly signIn = () => {
     openSigninDialog();
+  };
+
+  private readonly editProfile = () => {
+    openProfileDialog();
   };
 
   private readonly signOut = () => {

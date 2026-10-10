@@ -6,7 +6,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { setFeatures } from '../../../__tests__/helpers/features';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { signOut } from '../../store/auth';
-import { openSigninDialog } from '../../store/dialogs';
+import { openProfileDialog, openSigninDialog } from '../../store/dialogs';
 import type { AccountMenu } from './account-menu';
 import './account-menu';
 
@@ -17,6 +17,7 @@ vi.mock('../../store/auth', async (importOriginal) => ({
 
 vi.mock('../../store/dialogs', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../../store/dialogs')>()),
+  openProfileDialog: vi.fn(),
   openSigninDialog: vi.fn(),
 }));
 
@@ -75,11 +76,28 @@ describe('account-menu', () => {
   });
 
   it('leaves out My Schedule when the feature is off', async () => {
-    setFeatures({ mySchedule: false });
+    setFeatures({ mySchedule: false, reactions: false });
     const { shadowRoot } = await render(ada);
     const menu = within(shadowRoot.querySelector<HTMLElement>('hb-menu')!);
 
     expect(menu.getAllByRole('menuitem', { hidden: true })).toHaveLength(1);
     expect(menu.queryByRole('menuitem', { name: 'My Schedule', hidden: true })).toBeNull();
+  });
+
+  it('opens the public profile, with reactions on', async () => {
+    const { shadowRoot } = await render(ada);
+    const menu = within(shadowRoot.querySelector<HTMLElement>('hb-menu')!);
+
+    fireEvent.click(menu.getByRole('menuitem', { name: 'Public profile', hidden: true }));
+
+    expect(openProfileDialog).toHaveBeenCalled();
+  });
+
+  it('has no public profile with reactions off', async () => {
+    setFeatures({ reactions: false });
+    const { shadowRoot } = await render(ada);
+    const menu = within(shadowRoot.querySelector<HTMLElement>('hb-menu')!);
+
+    expect(menu.queryByRole('menuitem', { name: 'Public profile', hidden: true })).toBeNull();
   });
 });

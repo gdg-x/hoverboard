@@ -41,6 +41,8 @@ export const COLLECTIONS = {
 
   'sessions/*/feedback': { schema: 'feedback', features: ['feedback'], kind: 'visitor' },
   featuredSessions: { schema: 'featuredSessions', features: ['mySchedule'], kind: 'visitor' },
+  profiles: { schema: 'profile', features: ['reactions'], kind: 'visitor' },
+  'sessions/*/reactions': { schema: 'reaction', features: ['reactions'], kind: 'visitor' },
   notificationsUsers: {
     schema: 'notificationsUser',
     features: ['notifications'],

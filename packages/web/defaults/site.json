@@ -44,6 +44,7 @@
     "notifications": true,
     "partners": true,
     "previousSpeakers": true,
+    "reactions": true,
     "schedule": true,
     "socialImages": true,
     "speakers": true,
