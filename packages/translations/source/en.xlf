@@ -797,6 +797,9 @@
 <trans-unit id="pages.session.details">
   <source>Session details</source>
 </trans-unit>
+<trans-unit id="pages.session.watch-live">
+  <source>Watch live</source>
+</trans-unit>
 <trans-unit id="pages.session.speakers">
   <source>Speakers</source>
 </trans-unit>

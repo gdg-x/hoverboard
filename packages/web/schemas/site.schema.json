@@ -176,6 +176,11 @@
             "properties": {
               "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
               "title": { "type": "string", "minLength": 1 },
+              "stream": {
+                "description": "The link to watch the track's sessions live. It wins over `event.stream`.",
+                "type": "string",
+                "pattern": "^https://"
+              },
               "days": {
                 "description": "The days the track is on. Without it, the track is on every day.",
                 "type": "array",

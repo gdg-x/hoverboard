@@ -1,6 +1,7 @@
 import { msg, str } from '@lit/localize';
 import type { Session } from '../models/session';
-import { attendance, location, stream, timeZone, title } from '../config/site';
+import { location, timeZone, title } from '../config/site';
+import { sessionStream } from './stream';
 import { zonedTime } from './time-zone';
 
 export interface CalendarEvent {
@@ -19,10 +20,11 @@ export const sessionToCalendarEvent = (
     return undefined;
   }
 
-  // Online, the stream is the place. A hybrid event keeps the venue, and adds the stream below.
+  // Without a venue, the stream is the place. With one, the stream goes below the description.
+  const stream = sessionStream(session);
   const place = location ? `${location.name}, ${location.address}` : (stream ?? '');
   const watch =
-    attendance === 'hybrid' && stream
+    location && stream
       ? `\n\n${msg(str`Watch online: ${stream}`, { id: 'calendar.watch-online' })}`
       : '';
 

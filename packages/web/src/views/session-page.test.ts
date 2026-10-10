@@ -13,11 +13,13 @@ import { openVideoDialog } from '../store/ui';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata, updateTextMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
+import { isLive, sessionStream } from '../utils/stream';
 import { feedbackBlock, reactionsRow, type SessionPage } from './session-page';
 import './session-page';
 
 vi.mock('../utils/metadata');
 vi.mock('../utils/feedback');
+vi.mock('../utils/stream');
 vi.mock('../store/reactions', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../store/reactions')>()),
   watchSessionReactions: vi.fn(),
@@ -80,11 +82,14 @@ describe('session-page', () => {
   beforeEach(() => {
     vi.mocked(selectSession).mockReturnValue(session);
     vi.mocked(acceptingFeedback).mockReturnValue(false);
+    vi.mocked(isLive).mockReturnValue(false);
+    vi.mocked(sessionStream).mockReturnValue('https://stream.example/main');
   });
 
   afterEach(() => {
     litRender(nothing, document.body);
     vi.clearAllMocks();
+    vi.useRealTimers();
   });
 
   it('titles the page with the session and keeps its share image', async () => {
@@ -229,5 +234,42 @@ describe('session-page', () => {
     const { shadowRoot } = await render();
 
     expect(shadowRoot.querySelector('#feedback')).toBeNull();
+  });
+
+  describe('watch live', () => {
+    it('links to the stream first while the session is on', async () => {
+      vi.mocked(isLive).mockReturnValue(true);
+      const { shadowRoot } = await render();
+
+      const button = shadowRoot.querySelector('.live-button');
+      expect(button).toHaveTextContent('Watch live');
+      expect(button).toHaveAttribute('href', 'https://stream.example/main');
+      expect(button).toHaveAttribute('target', '_blank');
+      expect(shadowRoot.querySelector('.actions')!.firstElementChild).toBe(button);
+      expect(sessionStream).toHaveBeenCalledWith(session);
+    });
+
+    it('has no link before or after the session, or without a stream', async () => {
+      const { shadowRoot } = await render();
+      expect(shadowRoot.querySelector('.live-button')).toBeNull();
+
+      litRender(nothing, document.body);
+      vi.mocked(isLive).mockReturnValue(true);
+      vi.mocked(sessionStream).mockReturnValue(undefined);
+      const withoutStream = await render();
+      expect(withoutStream.shadowRoot.querySelector('.live-button')).toBeNull();
+    });
+
+    it('checks each minute whether the session is on', async () => {
+      vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval'] });
+      const { element, shadowRoot } = await render();
+      expect(shadowRoot.querySelector('.live-button')).toBeNull();
+
+      vi.mocked(isLive).mockReturnValue(true);
+      vi.advanceTimersByTime(60 * 1000);
+      await element.updateComplete;
+
+      expect(shadowRoot.querySelector('.live-button')).not.toBeNull();
+    });
   });
 });

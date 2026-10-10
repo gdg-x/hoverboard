@@ -40,7 +40,7 @@ An `online` event needs no `event.location`, and the site ignores one that is th
 }
 ```
 
-`schedule.published` shows session times and tracks. Keep it `false` until the schedule is final. `schedule.tracks` lists the tracks or rooms, in the order the schedule shows them. A session names its track by `id`. A track is on every day, unless `days` lists the days it is on. Without tracks, the schedule has one column. See [Content model](firebase-utils.md#content-model) for a session's day, times and track.
+`schedule.published` shows session times and tracks. Keep it `false` until the schedule is final. `schedule.tracks` lists the tracks or rooms, in the order the schedule shows them. A session names its track by `id`. A track is on every day, unless `days` lists the days it is on. A track's `stream` is the `https:` link to watch its sessions live, such as one link per room. Without tracks, the schedule has one column. See [Content model](firebase-utils.md#content-model) for a session's day, times and track.
 
 `theme` picks the look: the `festival`, `spotlight`, `paper` or `glass` theme, the color scheme, colors, fonts, spacing and decorations. See [Styling][style app].
 

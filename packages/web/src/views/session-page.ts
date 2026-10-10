@@ -24,6 +24,7 @@ import { type SessionsState, selectSessionsState } from '../store/schedule';
 import { openVideoDialog } from '../store/ui';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
+import { isLive, sessionStream } from '../utils/stream';
 import { getScheduleDay } from '../utils/dates';
 import { updateImageMetadata, updateTextMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';
@@ -125,6 +126,24 @@ export class SessionPage extends ThemedComponent {
   // Depends on the time, so it is only set in the browser.
   @state()
   private accessor acceptingFeedback = false;
+  @state()
+  private accessor live = false;
+  private liveTimer: ReturnType<typeof setInterval> | undefined;
+
+  override connectedCallback() {
+    super.connectedCallback();
+    // Runs only in the browser. The live link comes and goes without a reload.
+    this.liveTimer = setInterval(() => this.checkLive(), 60 * 1000);
+  }
+
+  override disconnectedCallback() {
+    super.disconnectedCallback();
+    clearInterval(this.liveTimer);
+  }
+
+  private checkLive() {
+    this.live = !!this.session && isLive(this.session);
+  }
 
   // Runs on the server too, so the page renders the session. Side effects wait for `updated`.
   override willUpdate(changed: PropertyValues<this>) {
@@ -139,6 +158,7 @@ export class SessionPage extends ThemedComponent {
         goto('/404');
       } else {
         this.acceptingFeedback = __HB_FEATURES__.feedback && acceptingFeedback(this.session);
+        this.checkLive();
         const speaker = this.session.speakers[0];
         if (__HB_FEATURES__.socialImages) {
           updateTextMetadata(this.session.title, this.session.description);
@@ -198,9 +218,18 @@ export class SessionPage extends ThemedComponent {
   private renderContent(session: BuiltSession) {
     // A speaker document can be missing its name while it is being added.
     const speakers = session.speakers.filter((speaker) => speaker.name);
+    const stream = this.live ? sessionStream(session) : undefined;
     return html`
       <div class="inner">
         <div class="actions">
+          ${
+            stream
+              ? html`<hb-button class="live-button" href="${stream}" target="_blank">
+                  <hoverboard-icon slot="icon" name="play"></hoverboard-icon>
+                  ${msg('Watch live', { id: 'pages.session.watch-live' })}
+                </hb-button>`
+              : nothing
+          }
           ${
             __HB_FEATURES__.mySchedule
               ? html`<save-button

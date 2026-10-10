@@ -47,6 +47,18 @@ describe('calendar', () => {
     expect(event.description).toBe('Line one\nLine two\n\nhttps://x');
   });
 
+  it("adds a session's own stream below the description in person", () => {
+    const event = sessionToCalendarEvent(
+      { ...session, stream: 'https://stream.example/talk' },
+      'https://x',
+    )!;
+
+    expect(event.location).toBe('Planeta kino, 36 Shchyretska St, Lviv, Ukraine');
+    expect(event.description).toBe(
+      'Line one\nLine two\n\nhttps://x\n\nWatch online: https://stream.example/talk',
+    );
+  });
+
   it('places a session at the stream online', () => {
     config.attendance = 'online';
     config.stream = 'https://stream.example/live';

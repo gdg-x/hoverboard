@@ -413,7 +413,12 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
     ]);
     errors.push(...fonts.errors);
     warnings.push(...fonts.warnings);
-    if (site.event.attendance === 'hybrid' && !site.event.stream) {
+    const tracks = (site.schedule as { tracks?: { stream?: string }[] }).tracks ?? [];
+    if (
+      site.event.attendance === 'hybrid' &&
+      !site.event.stream &&
+      !tracks.some(({ stream }) => stream)
+    ) {
       warnings.push(
         'site.json/event/stream: a hybrid event has no link to watch it, so people online have nowhere to go',
       );

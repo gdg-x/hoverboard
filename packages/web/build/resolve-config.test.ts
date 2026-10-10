@@ -197,6 +197,17 @@ describe('config validation', () => {
       );
       expect(warningsFor({ attendance: 'hybrid', stream })).toEqual([]);
       expect(warningsFor({ attendance: 'inPerson' })).toEqual([]);
+      expect(
+        loadConfig({
+          paths: makePaths({
+            site: {
+              event: { attendance: 'hybrid' },
+              schedule: { tracks: [{ id: 'main', title: 'Main', stream }] },
+            },
+          }),
+          nodeEnv: 'production',
+        }).warnings,
+      ).toEqual([]);
     });
 
     it('needs a venue, except online', () => {

@@ -7,6 +7,8 @@ export interface Track {
   title: string;
   /** Without it, the track is on every day. */
   days?: string[];
+  /** The link to watch the track's sessions live. */
+  stream?: string;
 }
 
 export interface ScheduleTrack {
