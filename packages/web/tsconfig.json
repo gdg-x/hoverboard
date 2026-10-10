@@ -13,7 +13,8 @@
       "virtual:hoverboard/site": ["./build/site-module.d.ts"],
       "virtual:hoverboard/layout": ["./build/layout-module.d.ts"],
       "virtual:hoverboard/fonts": ["./build/fonts-module.d.ts"],
-      "virtual:hoverboard/markdown": ["./build/markdown-module.d.ts"]
+      "virtual:hoverboard/markdown": ["./build/markdown-module.d.ts"],
+      "virtual:hoverboard/social-images": ["./build/social-images-module.d.ts"]
     }, /* Types for the modules that build/vite-plugin-site.ts serves. */
     "resolveJsonModule": true,                           /* Enable importing .json files */
 

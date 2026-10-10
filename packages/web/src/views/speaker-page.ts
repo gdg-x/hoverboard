@@ -19,7 +19,7 @@ import { store } from '../store';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { selectSpeaker } from '../store/speakers/selectors';
 import { type SpeakersState, selectSpeakersState } from '../store/schedule';
-import { updateImageMetadata } from '../utils/metadata';
+import { updateImageMetadata, updateTextMetadata } from '../utils/metadata';
 import { profile } from '../styles/profile';
 import { fromStore } from '../controllers/from-store';
 import { ThemedComponent } from '../components/themed-component';
@@ -75,6 +75,8 @@ export class SpeakerPage extends ThemedComponent {
     if ((changed.has('speakers') || changed.has('speakerId')) && this.isLoaded) {
       if (!this.speaker) {
         goto('/404');
+      } else if (__HB_FEATURES__.socialImages) {
+        updateTextMetadata(this.speaker.name, this.speaker.bio);
       } else {
         updateImageMetadata(this.speaker.name, this.speaker.bio, {
           image: this.speaker.photoUrl,

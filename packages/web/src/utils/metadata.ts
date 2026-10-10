@@ -54,6 +54,11 @@ export const updateImageMetadata = (title: string, description: string, data: Im
   });
 };
 
+/** Leaves the image tags as the build wrote them, such as a page's share image. */
+export const updateTextMetadata = (title: string, description: string) => {
+  applyMetadata({ title: `${title} | ${siteTitle}`, description, image: '', imageAlt: '' });
+};
+
 export const updateMetadata = (
   title: string,
   description: string,

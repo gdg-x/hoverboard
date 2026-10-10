@@ -10,7 +10,7 @@ import type { SessionChips } from '../components/schedule/session-chips';
 import { selectSession } from '../store/sessions/selectors';
 import { openVideoDialog } from '../store/ui';
 import { acceptingFeedback } from '../utils/feedback';
-import { updateImageMetadata } from '../utils/metadata';
+import { updateImageMetadata, updateTextMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
 import { feedbackBlock, type SessionPage } from './session-page';
 import './session-page';
@@ -81,10 +81,18 @@ describe('session-page', () => {
     vi.clearAllMocks();
   });
 
-  it('titles the page with the session and sets its metadata', async () => {
+  it('titles the page with the session and keeps its share image', async () => {
     const { view } = await render();
 
     expect(view.getByRole('heading', { level: 1 })).toHaveTextContent('A great talk');
+    expect(updateTextMetadata).toHaveBeenCalledWith('A great talk', 'Session description');
+    expect(updateImageMetadata).not.toHaveBeenCalled();
+  });
+
+  it("uses the first speaker's photo without share images", async () => {
+    setFeatures({ socialImages: false });
+    await render();
+
     expect(updateImageMetadata).toHaveBeenCalledWith('A great talk', 'Session description', {
       image: '/ada.jpg',
       imageAlt: 'Ada Lovelace',

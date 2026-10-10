@@ -6,12 +6,15 @@ import { siteModule } from './packages/web/build/vite-plugin-site';
 import { FEATURES } from './packages/web/src/config/features';
 
 const webRoot = fileURLToPath(new URL('./packages/web', import.meta.url));
-const siteConfig = resolveConfig({ paths: configPaths(webRoot), nodeEnv: 'test' });
+const paths = configPaths(webRoot);
+const siteConfig = resolveConfig({ paths, nodeEnv: 'test' });
+// Vitest runs from the repo root, so the plugin's paths relative to packages/web would miss.
+const pluginPaths = { siteDir: paths.site, publicDir: paths.public };
 // The locale that packages/web/__tests__/fake-locale.global-setup.ts builds.
 const FAKE_LOCALE = 'en-XA';
 
 const web = {
-  plugins: [decorators(), siteModule(siteConfig, { defineFeatures: false })],
+  plugins: [decorators(), siteModule(siteConfig, { defineFeatures: false, ...pluginPaths })],
   // Vitest resolves lit-html's `isServer` with the Node condition (true), which
   // makes Lit controllers skip browser setup under jsdom.
   resolve: {
@@ -83,7 +86,7 @@ export default defineConfig({
               ...siteConfig,
               contentTranslations: { [FAKE_LOCALE]: { title: `[${siteConfig.resources.title}]` } },
             },
-            { defineFeatures: false },
+            { defineFeatures: false, ...pluginPaths },
           ),
         ],
         test: {
@@ -126,7 +129,7 @@ export default defineConfig({
       },
       {
         // Renders components with Lit SSR, as the build does. `isServer` is true here.
-        plugins: [decorators(), siteModule(siteConfig)],
+        plugins: [decorators(), siteModule(siteConfig, pluginPaths)],
         test: {
           name: 'Server',
           environment: 'node',

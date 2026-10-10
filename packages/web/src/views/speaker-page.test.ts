@@ -10,7 +10,7 @@ import type { SpeakerProfile } from '../components/shared/speaker-profile';
 import type { BuiltSpeaker } from '../schedule/build-schedule';
 import { selectPreviousSpeaker } from '../store/previous-speakers/selectors';
 import { selectSpeaker } from '../store/speakers/selectors';
-import { updateImageMetadata } from '../utils/metadata';
+import { updateImageMetadata, updateTextMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
 import type { SpeakerPage } from './speaker-page';
 import './speaker-page';
@@ -64,12 +64,20 @@ describe('speaker-page', () => {
     vi.clearAllMocks();
   });
 
-  it("shows the speaker's profile and sets the metadata", async () => {
+  it("shows the speaker's profile and keeps the share image", async () => {
     const { shadowRoot } = await render();
     const profile = shadowRoot.querySelector<SpeakerProfile>('speaker-profile')!;
 
     expect(profile.speaker).toBe(speaker);
     expect(profile).toHaveAttribute('kind', 'speaker');
+    expect(updateTextMetadata).toHaveBeenCalledWith('Ada Lovelace', 'Speaker bio');
+    expect(updateImageMetadata).not.toHaveBeenCalled();
+  });
+
+  it("uses the speaker's photo without share images", async () => {
+    setFeatures({ socialImages: false });
+    await render();
+
     expect(updateImageMetadata).toHaveBeenCalledWith('Ada Lovelace', 'Speaker bio', {
       image: '/ada.jpg',
       imageAlt: 'Ada Lovelace',

@@ -9,7 +9,7 @@ import { AppHeader, demoBanner } from '../components/shell/app-header';
 import { AppOverlays } from '../components/shell/app-overlays';
 import { loadContent } from '../data/content';
 import '../data/markdown';
-import { pageMetadata } from '../data/metadata';
+import { imageType, pageMetadata } from '../data/metadata';
 import { seedPage } from '../data/page';
 import { openGraphLocale } from '../data/structured-data';
 import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
@@ -22,6 +22,10 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
+  imageType?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   /** The content from `seedPage()`, which the browser's store starts from. */
   content?: Partial<Content>;
 }
@@ -30,8 +34,12 @@ const {
   title = resources.title,
   description = resources.description,
   image = site.image,
+  imageAlt,
+  imageWidth,
+  imageHeight,
   content: pageContent = {},
 } = Astro.props;
+const { imageType: type = imageType(image) } = Astro.props;
 // The header links to tickets on every page. The page's own content has already rendered.
 const content = seedPage({ ...pageContent, tickets: (await loadContent()).tickets ?? [] });
 // The build sees file paths such as /index.html. Hosting serves them without `.html`.
@@ -137,7 +145,10 @@ await demoBanner;
     <meta content={url} property="og:url" />
     <meta content={description} property="og:description" />
     <meta content={image} property="og:image" />
-    <meta content="image/jpeg" property="og:image:type" />
+    {type && <meta content={type} property="og:image:type" />}
+    {imageWidth && <meta content={String(imageWidth)} property="og:image:width" />}
+    {imageHeight && <meta content={String(imageHeight)} property="og:image:height" />}
+    {imageAlt && <meta content={imageAlt} property="og:image:alt" />}
 
     <meta content="summary_large_image" name="twitter:card" />
     {site.organizer.twitter && (
@@ -146,6 +157,7 @@ await demoBanner;
     <meta content={title} name="twitter:title" />
     <meta content={description} name="twitter:description" />
     <meta content={image} name="twitter:image" />
+    {imageAlt && <meta content={imageAlt} name="twitter:image:alt" />}
     <meta name="twitter:label1" value="Location" />
     <meta name="twitter:data1" value={site.event.location.name} />
 

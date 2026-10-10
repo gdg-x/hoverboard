@@ -8,8 +8,8 @@ export interface Route {
   pattern: string;
   /** In `src/routes/`. */
   entrypoint: string;
-  /** The feature the page belongs to. Pages without one always build. */
-  feature?: Feature;
+  /** The feature the page belongs to, or features that must all be on. Pages without one always build. */
+  feature?: Feature | readonly Feature[];
   /** The Firestore collection whose documents `getStaticPaths()` turns into pages. */
   content?: string;
 }
@@ -56,13 +56,25 @@ export const ROUTES: readonly Route[] = [
     feature: 'previousSpeakers',
     content: 'previousSpeakers',
   },
+  {
+    pattern: '/social/sessions/[file].png',
+    entrypoint: 'social/sessions/[file].png.ts',
+    feature: ['schedule', 'socialImages'],
+    content: 'sessions',
+  },
+  {
+    pattern: '/social/speakers/[file].png',
+    entrypoint: 'social/speakers/[file].png.ts',
+    feature: ['speakers', 'socialImages'],
+    content: 'speakers',
+  },
   { pattern: '/team', entrypoint: 'team.astro', feature: 'team' },
   { pattern: '/faq', entrypoint: 'faq.astro', feature: 'faq' },
   { pattern: '/coc', entrypoint: 'coc.astro', feature: 'codeOfConduct' },
 ];
 
 export const enabledRoutes = (features: Record<Feature, boolean>): Route[] =>
-  ROUTES.filter(({ feature }) => !feature || features[feature]);
+  ROUTES.filter(({ feature = [] }) => [feature].flat().every((name) => features[name]));
 
 /** Pages for development only, such as the design gallery. `astro build` leaves them out. */
 export const DEV_ROUTES: readonly Route[] = [{ pattern: '/design', entrypoint: 'design.astro' }];

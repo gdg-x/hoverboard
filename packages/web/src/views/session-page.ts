@@ -25,7 +25,7 @@ import { openVideoDialog } from '../store/ui';
 import { disabledSchedule } from '../config/site';
 import { acceptingFeedback } from '../utils/feedback';
 import { getScheduleDay } from '../utils/dates';
-import { updateImageMetadata } from '../utils/metadata';
+import { updateImageMetadata, updateTextMetadata } from '../utils/metadata';
 import { fromStore } from '../controllers/from-store';
 import { ThemedComponent } from '../components/themed-component';
 
@@ -128,10 +128,14 @@ export class SessionPage extends ThemedComponent {
       } else {
         this.acceptingFeedback = __HB_FEATURES__.feedback && acceptingFeedback(this.session);
         const speaker = this.session.speakers[0];
-        updateImageMetadata(this.session.title, this.session.description, {
-          image: speaker?.photoUrl ?? '',
-          imageAlt: speaker?.name ?? '',
-        });
+        if (__HB_FEATURES__.socialImages) {
+          updateTextMetadata(this.session.title, this.session.description);
+        } else {
+          updateImageMetadata(this.session.title, this.session.description, {
+            image: speaker?.photoUrl ?? '',
+            imageAlt: speaker?.name ?? '',
+          });
+        }
       }
     }
   }

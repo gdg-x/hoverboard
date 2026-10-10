@@ -48,6 +48,7 @@
     "partners": false,
     "previousSpeakers": false,
     "schedule": false,
+    "socialImages": false,
     "speakers": false,
     "subscribe": false,
     "team": false,
