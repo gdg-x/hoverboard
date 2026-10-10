@@ -6,10 +6,12 @@ import { decorations, density, siteAttendance, themeName } from '../../config/si
 import { COLOR_SCHEME_KEY } from '../../utils/color-scheme';
 import {
   chooseDemoAttendance,
+  chooseDemoTime,
   DEMO_ATTENDANCE_KEY,
   DEMO_DECORATIONS_KEY,
   DEMO_DENSITY_KEY,
   DEMO_THEME_KEY,
+  DEMO_TIME_KEY,
 } from '../../utils/demo';
 import type { HbSwitch } from '../ui/hb-switch';
 import type { DemoBanner } from './demo-banner';
@@ -19,6 +21,7 @@ import './demo-banner';
 vi.mock('../../utils/demo', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../../utils/demo')>()),
   chooseDemoAttendance: vi.fn(),
+  chooseDemoTime: vi.fn(),
 }));
 
 const root = document.documentElement;
@@ -148,6 +151,32 @@ describe('demo-banner', () => {
     await element.updateComplete;
 
     expect(view.getByRole('combobox', { name: 'How people attend' })).toHaveValue('hybrid');
+  });
+
+  it('makes it before, during or after the event, or now again', async () => {
+    const { view } = await render();
+    const select = view.getByRole('combobox', { name: 'When' });
+
+    expect(select).toHaveValue('now');
+    expect(
+      within(select)
+        .getAllByRole('option')
+        .map((option) => option.textContent?.trim()),
+    ).toEqual(['Now', 'Before the event', 'During the event', 'After the event']);
+
+    fireEvent.change(select, { target: { value: 'during' } });
+    expect(chooseDemoTime).toHaveBeenLastCalledWith('during');
+
+    fireEvent.change(select, { target: { value: 'now' } });
+    expect(chooseDemoTime).toHaveBeenLastCalledWith(null);
+  });
+
+  it('shows the stored time after the first render', async () => {
+    localStorage.setItem(DEMO_TIME_KEY, 'after');
+    const { element, view } = await render();
+    await element.updateComplete;
+
+    expect(view.getByRole('combobox', { name: 'When' })).toHaveValue('after');
   });
 
   it('keeps its brightness toggle in sync with the one in the footer', async () => {

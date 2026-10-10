@@ -4,13 +4,16 @@ import {
   chooseDecorations,
   chooseDemo,
   chooseDemoAttendance,
+  chooseDemoTime,
   DEMO_ATTENDANCE_KEY,
   DEMO_DECORATIONS_KEY,
   DEMO_DENSITY_KEY,
   DEMO_THEME_KEY,
+  DEMO_TIME_KEY,
   demoScript,
   readDemoAttendance,
   readDemoChoices,
+  readDemoTime,
 } from './demo';
 
 const root = document.documentElement;
@@ -96,6 +99,23 @@ describe('demo choices', () => {
     chooseDemoAttendance(null, reload);
     expect(localStorage.getItem(DEMO_ATTENDANCE_KEY)).toBeNull();
     expect(reload).toHaveBeenCalledTimes(2);
+  });
+
+  it('stores when it is, or forgets it, then reloads, and reads only known values', () => {
+    const reload = vi.fn();
+    expect(readDemoTime()).toBeNull();
+
+    chooseDemoTime('during', reload);
+    expect(localStorage.getItem(DEMO_TIME_KEY)).toBe('during');
+    expect(readDemoTime()).toBe('during');
+    expect(reload).toHaveBeenCalledTimes(1);
+
+    chooseDemoTime(null, reload);
+    expect(localStorage.getItem(DEMO_TIME_KEY)).toBeNull();
+    expect(reload).toHaveBeenCalledTimes(2);
+
+    localStorage.setItem(DEMO_TIME_KEY, 'tomorrow');
+    expect(readDemoTime()).toBeNull();
   });
 
   it('applies the stored choices from the inline head script', () => {

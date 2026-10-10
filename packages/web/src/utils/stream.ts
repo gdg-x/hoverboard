@@ -1,5 +1,6 @@
 import type { Session } from '../models/session';
 import { attendance, scheduleTracks, stream, timeZone } from '../config/site';
+import { currentTime } from './clock';
 import { zonedTime } from './time-zone';
 
 /** How long before a session starts its live link shows. */
@@ -27,7 +28,7 @@ export const sessionStream = ({
 /** Whether a session is on: from `LIVE_EARLY_MS` before it starts until it ends. */
 export const isLive = (
   { day, startTime, endTime }: Pick<Session, 'day' | 'startTime' | 'endTime'>,
-  now = Date.now(),
+  now = currentTime(),
 ): boolean => {
   if (!day || !startTime || !endTime) return false;
   return (

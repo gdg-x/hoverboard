@@ -19,6 +19,7 @@ import {
   title,
 } from '../../config/site';
 import { openVideoDialog } from '../../store/ui';
+import { currentTime } from '../../utils/clock';
 import { getEventDates } from '../../utils/dates';
 import { type EventState, daysUntilStart, eventState } from '../../utils/event-state';
 import { eventPlace, type Attending } from '../../utils/place';
@@ -174,7 +175,7 @@ export class HomeHero extends ThemedComponent {
 
   // The event may have come closer, started or ended since the build.
   override firstUpdated() {
-    const now = new Date();
+    const now = new Date(currentTime());
     const dates = { startDate: eventDates.start, endDate: eventDates.end, timezone: timeZone };
     this.eventState = eventState(now, dates);
     this.daysToGo = daysUntilStart(now, dates);

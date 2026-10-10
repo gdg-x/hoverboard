@@ -10,6 +10,7 @@ import { PageMetadataController } from '../controllers/page-metadata-controller'
 import { disabledSchedule, eventDates, timeZone } from '../config/site';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
+import { currentTime } from '../utils/clock';
 import { type EventState, eventState } from '../utils/event-state';
 import { scrollToElement } from '../utils/scrolling';
 
@@ -122,7 +123,7 @@ export class HomePage extends ThemedComponent {
     if (
       __HB_FEATURES__.schedule &&
       !disabledSchedule &&
-      eventState(new Date(), {
+      eventState(new Date(currentTime()), {
         startDate: eventDates.start,
         endDate: eventDates.end,
         timezone: timeZone,

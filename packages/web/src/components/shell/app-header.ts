@@ -15,6 +15,7 @@ import { ThemedComponent } from '../themed-component';
 import './account-menu';
 import './app-install';
 import { navigationLabel } from './navigation-label';
+import { currentTime } from '../../utils/clock';
 import './notification-toggle';
 import './sync-status';
 
@@ -201,7 +202,7 @@ export class AppHeader extends ThemedComponent {
 
   // The event may have started or ended since the build.
   override firstUpdated() {
-    this.eventState = eventState(new Date(), {
+    this.eventState = eventState(new Date(currentTime()), {
       startDate: eventDates.start,
       endDate: eventDates.end,
       timezone: timeZone,

@@ -2,36 +2,52 @@ export const DEMO_THEME_KEY = 'hb-demo-theme';
 export const DEMO_DENSITY_KEY = 'hb-demo-density';
 export const DEMO_DECORATIONS_KEY = 'hb-demo-decorations';
 export const DEMO_ATTENDANCE_KEY = 'hb-demo-attendance';
+export const DEMO_TIME_KEY = 'hb-demo-time';
 
 export const ATTENDANCES = ['inPerson', 'hybrid', 'online'] as const;
 export type Attendance = (typeof ATTENDANCES)[number];
 
-/** How people attend, as picked in the demo banner, or `null` for the site's own. */
-export const readDemoAttendance = (): Attendance | null => {
+export const DEMO_TIMES = ['before', 'during', 'after'] as const;
+export type DemoTime = (typeof DEMO_TIMES)[number];
+
+const readChoice = <T extends string>(key: string, values: readonly T[]): T | null => {
   try {
-    const value = localStorage.getItem(DEMO_ATTENDANCE_KEY);
-    return ATTENDANCES.find((attendance) => attendance === value) ?? null;
+    const value = localStorage.getItem(key);
+    return values.find((choice) => choice === value) ?? null;
   } catch {
     return null;
   }
 };
 
-/**
- * Stores how people attend, or forgets it with `null`, and reloads: it changes what much of the
- * site shows, which the config reads once.
- */
-export const chooseDemoAttendance = (
-  value: Attendance | null,
-  reload = () => window.location.reload(),
-): void => {
+/** Stores a choice that changes what much of the site shows, or forgets it with `null`, and reloads. */
+const chooseAndReload = (key: string, value: string | null, reload: () => void) => {
   try {
-    if (value) localStorage.setItem(DEMO_ATTENDANCE_KEY, value);
-    else localStorage.removeItem(DEMO_ATTENDANCE_KEY);
+    if (value) localStorage.setItem(key, value);
+    else localStorage.removeItem(key);
   } catch {
     return;
   }
   reload();
 };
+
+/** How people attend, as picked in the demo banner, or `null` for the site's own. */
+export const readDemoAttendance = (): Attendance | null =>
+  readChoice(DEMO_ATTENDANCE_KEY, ATTENDANCES);
+
+/** Stores how people attend, or forgets it with `null`, and reloads, since the config reads it once. */
+export const chooseDemoAttendance = (
+  value: Attendance | null,
+  reload = () => window.location.reload(),
+): void => chooseAndReload(DEMO_ATTENDANCE_KEY, value, reload);
+
+/** When the demo banner says it is, relative to the event, or `null` for the real time. */
+export const readDemoTime = (): DemoTime | null => readChoice(DEMO_TIME_KEY, DEMO_TIMES);
+
+/** Stores when it is, or forgets it with `null`, and reloads, since the clock reads it once. */
+export const chooseDemoTime = (
+  value: DemoTime | null,
+  reload = () => window.location.reload(),
+): void => chooseAndReload(DEMO_TIME_KEY, value, reload);
 
 export interface DemoChoices {
   theme: string | null;

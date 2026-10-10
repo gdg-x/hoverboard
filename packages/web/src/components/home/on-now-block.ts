@@ -8,6 +8,7 @@ import type { BuiltSession } from '../../schedule/build-schedule';
 import { type SessionsState, selectSessionsState } from '../../store/schedule';
 import { loadLocalTime, selectLocalTime } from '../../store/ui';
 import { band } from '../../styles/band';
+import { currentTime } from '../../utils/clock';
 import { sessionPath } from '../../utils/navigation';
 import { isLive, sessionStream } from '../../utils/stream';
 import { zonedTime } from '../../utils/time-zone';
@@ -105,14 +106,14 @@ export class OnNowBlock extends ThemedComponent {
 
   // The block is only in the browser, so it can read the time from the start.
   @state()
-  private accessor now = Date.now();
+  private accessor now = currentTime();
   private clock: ReturnType<typeof setInterval> | undefined;
 
   override connectedCallback() {
     super.connectedCallback();
     loadLocalTime();
-    this.now = Date.now();
-    this.clock = setInterval(() => (this.now = Date.now()), ONE_MINUTE_MS);
+    this.now = currentTime();
+    this.clock = setInterval(() => (this.now = currentTime()), ONE_MINUTE_MS);
   }
 
   override disconnectedCallback() {
