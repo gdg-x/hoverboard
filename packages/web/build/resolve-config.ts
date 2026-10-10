@@ -27,12 +27,20 @@ interface HeroSettings {
 /** How people attend the event. */
 export type Attendance = 'inPerson' | 'online' | 'hybrid';
 
-type Site = typeof import('../defaults/site.json') &
-  typeof import('../../config/site.json') & {
-    url: string;
-    heroSettings?: HeroSettings;
-    event: { attendance: Attendance; stream?: string };
+type SiteJson = typeof import('../defaults/site.json') & typeof import('../../config/site.json');
+/** `event.location` in site.json. */
+export type Venue = SiteJson['event']['location'];
+
+type Site = Omit<SiteJson, 'event'> & {
+  url: string;
+  heroSettings?: HeroSettings;
+  event: Omit<SiteJson['event'], 'attendance' | 'location'> & {
+    attendance: Attendance;
+    stream?: string;
+    /** Required, except for an online event. */
+    location?: Venue;
   };
+};
 type Resources = typeof import('../../config/content/resources.json');
 
 /** Template data. Each file has its own namespace, for example `{{ site.url }}`. */
@@ -106,11 +114,14 @@ const readSiteJson = <T>(paths: ConfigPaths, file: string): T => {
 };
 
 const formatErrors = (file: string, errors: ErrorObject[] | null | undefined): string[] =>
-  (errors ?? []).map(({ instancePath, message, params }) => {
-    const property = params['additionalProperty'] as string | undefined;
-    const extra = property ? ` "${property}"` : '';
-    return `${file}${instancePath}: ${message ?? 'is invalid'}${extra}`;
-  });
+  (errors ?? [])
+    // `if` only repeats the errors of its branch.
+    .filter(({ keyword }) => keyword !== 'if')
+    .map(({ instancePath, message, params }) => {
+      const property = params['additionalProperty'] as string | undefined;
+      const extra = property ? ` "${property}"` : '';
+      return `${file}${instancePath}: ${message ?? 'is invalid'}${extra}`;
+    });
 
 const isUrl = (value: string) => /^https?:\/\//.test(value);
 

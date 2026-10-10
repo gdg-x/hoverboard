@@ -653,6 +653,9 @@
 <trans-unit id="store.notifications.my-schedule-disabled">
   <source>My Schedule notifications disabled</source>
 </trans-unit>
+<trans-unit id="calendar.watch-online">
+  <source>Watch online: <x id="0" equiv-text="${stream}"/></source>
+</trans-unit>
 <trans-unit id="pages.blog.title">
   <source>Blog</source>
 </trans-unit>
@@ -706,6 +709,9 @@
 </trans-unit>
 <trans-unit id="pages.team.description">
   <source>Get more info about organizers</source>
+</trans-unit>
+<trans-unit id="event.online">
+  <source>Online</source>
 </trans-unit>
 <trans-unit id="pages.blog-list.error">
   <source>Error loading posts.</source>

@@ -81,7 +81,9 @@
     "event": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["startDate", "endDate", "timezone", "location"],
+      "required": ["startDate", "endDate", "timezone"],
+      "if": { "properties": { "attendance": { "const": "online" } } },
+      "else": { "required": ["location"] },
       "properties": {
         "attendance": {
           "description": "How people attend: at the venue, online, or both.",

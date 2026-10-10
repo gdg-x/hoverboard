@@ -18,6 +18,7 @@ import {
 import { openVideoDialog } from '../../store/ui';
 import { getEventDates } from '../../utils/dates';
 import { type EventState, daysUntilStart, eventState } from '../../utils/event-state';
+import { eventPlace } from '../../utils/place';
 import '../shared/hoverboard-icon';
 import { navigationLabel } from '../shell/navigation-label';
 import { ThemedComponent } from '../themed-component';
@@ -192,8 +193,11 @@ export class HomeHero extends ThemedComponent {
               </li>
               <li>
                 <hb-chip>
-                  <hoverboard-icon slot="icon" name="location"></hoverboard-icon>
-                  ${location.short}
+                  <hoverboard-icon
+                    slot="icon"
+                    name="${location ? 'location' : 'monitor'}"
+                  ></hoverboard-icon>
+                  ${eventPlace(({ short }) => short)}
                 </hb-chip>
               </li>
             </ul>

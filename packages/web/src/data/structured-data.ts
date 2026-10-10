@@ -1,3 +1,9 @@
+interface Venue {
+  name: string;
+  address: string;
+  city: string;
+}
+
 interface EventSite {
   url: string;
   image: string;
@@ -5,7 +11,9 @@ interface EventSite {
   event: {
     startDate: string;
     endDate: string;
-    location: { name: string; address: string; city: string };
+    attendance: 'inPerson' | 'online' | 'hybrid';
+    stream?: string;
+    location?: Venue;
   };
 }
 
@@ -13,6 +21,31 @@ interface EventResources {
   title: string;
   description: string;
 }
+
+const ATTENDANCE_MODES = {
+  inPerson: 'https://schema.org/OfflineEventAttendanceMode',
+  online: 'https://schema.org/OnlineEventAttendanceMode',
+  hybrid: 'https://schema.org/MixedEventAttendanceMode',
+};
+
+/** The venue, the stream, or both for a hybrid event. */
+const eventLocation = ({ attendance, stream, location }: EventSite['event']) => {
+  const places = [
+    attendance !== 'online' && location
+      ? {
+          '@type': 'Place',
+          name: location.name,
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: location.address,
+            addressLocality: location.city,
+          },
+        }
+      : undefined,
+    attendance !== 'inPerson' && stream ? { '@type': 'VirtualLocation', url: stream } : undefined,
+  ].filter((place) => place !== undefined);
+  return places.length === 1 ? places[0] : places;
+};
 
 /** The event as schema.org JSON-LD, for search results. See https://developers.google.com/search/docs/appearance/structured-data/event */
 export const eventStructuredData = (site: EventSite, resources: EventResources) => ({
@@ -23,16 +56,8 @@ export const eventStructuredData = (site: EventSite, resources: EventResources) 
   startDate: site.event.startDate,
   endDate: site.event.endDate,
   eventStatus: 'https://schema.org/EventScheduled',
-  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-  location: {
-    '@type': 'Place',
-    name: site.event.location.name,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: site.event.location.address,
-      addressLocality: site.event.location.city,
-    },
-  },
+  eventAttendanceMode: ATTENDANCE_MODES[site.event.attendance],
+  location: eventLocation(site.event),
   image: [site.image],
   url: site.url,
   organizer: {

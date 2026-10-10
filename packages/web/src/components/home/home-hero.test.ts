@@ -14,14 +14,26 @@ import { openVideoDialog } from '../../store/ui';
 import type { HomeHero } from './home-hero';
 import './home-hero';
 
-const config = vi.hoisted(() => ({ decorations: true }));
-
-vi.mock('../../config/site', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('../../config/site')>()),
-  get decorations() {
-    return config.decorations;
-  },
+const config = vi.hoisted(() => ({
+  decorations: true,
+  attendance: 'inPerson' as 'inPerson' | 'online' | 'hybrid',
 }));
+
+vi.mock('../../config/site', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../config/site')>();
+  return {
+    ...actual,
+    get decorations() {
+      return config.decorations;
+    },
+    get attendance() {
+      return config.attendance;
+    },
+    get location() {
+      return config.attendance === 'online' ? undefined : actual.location;
+    },
+  };
+});
 
 vi.mock('../../store/ui', async (importOriginal) => ({
   __esModule: true,
@@ -46,6 +58,7 @@ describe('home-hero', () => {
     vi.useRealTimers();
     render(nothing, document.body);
     config.decorations = true;
+    config.attendance = 'inPerson';
   });
 
   it('names the event in the page heading, with its dates, place and description', async () => {
@@ -55,8 +68,26 @@ describe('home-hero', () => {
     const details = shadowRoot.querySelector('ul.details')!;
     expect(details).toHaveAttribute('aria-label', 'Event details');
     expect(details).toHaveTextContent('October 13 – 14, 2017');
-    expect(details).toHaveTextContent(location.short);
+    expect(details).toHaveTextContent(location!.short);
     expect(shadowRoot).toHaveTextContent(heroDescriptions.home);
+  });
+
+  it('says the event is online instead of naming a venue', async () => {
+    config.attendance = 'online';
+    const { shadowRoot } = await renderOn('2017-10-01T12:00:00Z');
+    const place = shadowRoot.querySelectorAll('ul.details hb-chip')[1]!;
+
+    expect(place).toHaveTextContent(/^Online$/);
+    expect(place.querySelector('hoverboard-icon')).toHaveAttribute('name', 'monitor');
+  });
+
+  it('names the venue and online for a hybrid event', async () => {
+    config.attendance = 'hybrid';
+    const { shadowRoot } = await renderOn('2017-10-01T12:00:00Z');
+    const place = shadowRoot.querySelectorAll('ul.details hb-chip')[1]!;
+
+    expect(place).toHaveTextContent(`${location!.short} · Online`);
+    expect(place.querySelector('hoverboard-icon')).toHaveAttribute('name', 'location');
   });
 
   it('counts the days to go, and offers tickets and the highlights', async () => {

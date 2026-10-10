@@ -1,11 +1,28 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { Session } from '../models/session';
 import { googleCalendarUrl, icsContent, sessionToCalendarEvent } from './calendar';
 
-vi.mock('../config/site', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('../config/site')>()),
-  timeZone: 'Europe/Kyiv',
+const config = vi.hoisted(() => ({
+  attendance: 'inPerson' as 'inPerson' | 'online' | 'hybrid',
+  stream: undefined as string | undefined,
 }));
+
+vi.mock('../config/site', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../config/site')>();
+  return {
+    ...actual,
+    timeZone: 'Europe/Kyiv',
+    get attendance() {
+      return config.attendance;
+    },
+    get stream() {
+      return config.stream;
+    },
+    get location() {
+      return config.attendance === 'online' ? undefined : actual.location;
+    },
+  };
+});
 
 const session: Session & { endTime: string } = {
   id: 'session-1',
@@ -17,6 +34,38 @@ const session: Session & { endTime: string } = {
 };
 
 describe('calendar', () => {
+  afterEach(() => {
+    config.attendance = 'inPerson';
+    config.stream = undefined;
+  });
+
+  it('places a session at the venue in person', () => {
+    config.stream = 'https://stream.example/live';
+    const event = sessionToCalendarEvent(session, 'https://x')!;
+
+    expect(event.location).toBe('Planeta kino, 36 Shchyretska St, Lviv, Ukraine');
+    expect(event.description).toBe('Line one\nLine two\n\nhttps://x');
+  });
+
+  it('places a session at the stream online', () => {
+    config.attendance = 'online';
+    config.stream = 'https://stream.example/live';
+
+    expect(sessionToCalendarEvent(session, 'https://x')!.location).toBe(
+      'https://stream.example/live',
+    );
+  });
+
+  it('places a hybrid session at the venue, with the stream in the description', () => {
+    config.attendance = 'hybrid';
+    config.stream = 'https://stream.example/live';
+    const event = sessionToCalendarEvent(session, 'https://x')!;
+
+    expect(event.location).toBe('Planeta kino, 36 Shchyretska St, Lviv, Ukraine');
+    expect(event.description).toBe(
+      'Line one\nLine two\n\nhttps://x\n\nWatch online: https://stream.example/live',
+    );
+  });
   it('returns undefined when the session has no schedule times', () => {
     const { day: _day, ...withoutDay } = session;
 

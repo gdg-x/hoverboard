@@ -154,19 +154,21 @@ export class MapBlock extends ThemedComponent {
   private accessor online!: boolean;
 
   override render() {
-    const { latitude, longitude } = location.pointer;
+    const venue = location;
+    if (!venue) return nothing;
+    const { latitude, longitude } = venue.pointer;
     return html`
       <div class="inner layout">
         <div>
           <h2 class="band-title">${msg('Location', { id: 'home.map-block.title' })}</h2>
-          <p class="venue">${location.name}</p>
-          <address>${location.address}</address>
-          <p class="description">${location.description}</p>
+          <p class="venue">${venue.name}</p>
+          <address>${venue.address}</address>
+          <p class="description">${venue.description}</p>
           <h3 class="directions-title" id="directions">
             ${msg('Directions', { id: 'home.map-block.directions' })}
           </h3>
           <ul class="directions plain" aria-labelledby="directions">
-            ${directionLinks(location).map(
+            ${directionLinks(venue).map(
               ({ name, url }) => html`
                 <li>
                   <hb-button variant="outlined" href="${url}" target="_blank">
@@ -184,14 +186,14 @@ export class MapBlock extends ThemedComponent {
                 ${
                   this.mapState === 'shown'
                     ? html`<gmp-map
-                        center="${location.mapCenter.latitude},${location.mapCenter.longitude}"
-                        zoom="${location.pointer.zoom}"
+                        center="${venue.mapCenter.latitude},${venue.mapCenter.longitude}"
+                        zoom="${venue.pointer.zoom}"
                         color-scheme="${currentColorScheme() === 'dark' ? 'DARK' : 'LIGHT'}"
                         disable-default-ui
                       >
                         <gmp-advanced-marker
                           position="${latitude},${longitude}"
-                          title="${location.name}"
+                          title="${venue.name}"
                         ></gmp-advanced-marker>
                       </gmp-map>`
                     : this.renderPlaceholder()

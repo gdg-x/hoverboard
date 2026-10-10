@@ -199,6 +199,23 @@ describe('config validation', () => {
       expect(warningsFor({ attendance: 'inPerson' })).toEqual([]);
     });
 
+    it('needs a venue, except online', () => {
+      const errorsWithoutVenue = (event: object) => {
+        const paths = makePaths({ site: { event, features: { map: false } } });
+        const site = readJson(join(paths.site, 'site.json')) as { event: Record<string, unknown> };
+        delete site.event['location'];
+        writeJson(join(paths.site, 'site.json'), site);
+        return loadConfig({ paths, nodeEnv: 'production' }).errors;
+      };
+
+      expect(errorsWithoutVenue({ attendance: 'online', stream })).toEqual([]);
+      for (const attendance of ['inPerson', 'hybrid']) {
+        expect(errorsWithoutVenue({ attendance, stream })).toEqual([
+          "site.json/event: must have required property 'location'",
+        ]);
+      }
+    });
+
     it('rejects an unknown attendance and a stream that is not https', () => {
       expect(
         errorsFor({ site: { event: { attendance: 'remote', stream: 'http://example.com/live' } } }),

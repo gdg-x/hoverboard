@@ -26,6 +26,10 @@ export const themeName = settings.theme.name as string;
 export const density = settings.theme.density as 'compact' | 'default' | 'roomy';
 export const siteLocales = settings.locales as { source: string; targets: string[] };
 export const timeZone = settings.event.timezone;
+/** How people attend: `inPerson`, `online` or `hybrid`. */
+export const attendance = settings.event.attendance;
+/** The link to watch the event online. */
+export const stream = settings.event.stream;
 export const eventDates = { start: settings.event.startDate, end: settings.event.endDate };
 export const disabledSchedule = !settings.schedule.published;
 export const scheduleTracks = (settings.schedule as { tracks?: Track[] }).tracks ?? [];
@@ -66,7 +70,11 @@ export let {
   ticketsBlock,
   title,
 } = sourceContent;
-export let location = { ...settings.event.location, description: resources.mapBlock.description };
+// An online event has no venue, even when site.json still has one.
+const venue = attendance === 'online' ? undefined : settings.event.location;
+const withDescription = (description: string) => venue && { ...venue, description };
+/** The venue, or `undefined` for an online event. */
+export let location = withDescription(resources.mapBlock.description);
 
 let contentRequest = 0;
 
@@ -93,7 +101,7 @@ export const loadContent = async (locale: string): Promise<void> => {
     ticketsBlock,
     title,
   } = content);
-  location = { ...settings.event.location, description: content.mapBlock.description };
+  location = withDescription(content.mapBlock.description);
 };
 
 // Skeleton sizes while content loads. The same for every site.

@@ -31,6 +31,8 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
 
 `event.attendance` says how people attend: `inPerson` (the default), `online` or `hybrid`. `event.stream` is the `https:` link to watch the event online. An `online` event needs `event.stream`, and the build fails with `map` on, since there is no venue to show. A `hybrid` event without `event.stream` builds with a warning.
 
+An `online` event needs no `event.location`, and the site ignores one that is there. The home page, social images and link previews say "Online" instead of the venue. Calendar links point to `event.stream`. Search engines get the event as online, at `event.stream`. A `hybrid` event shows both: "Lviv, Ukraine · Online", the venue in calendar links with the stream below the description, and both places for search engines.
+
 ```json
 "event": {
   "attendance": "online",

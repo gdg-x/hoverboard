@@ -8,10 +8,21 @@ const site = {
   event: {
     startDate: '2027-10-15',
     endDate: '2027-10-16',
+    attendance: 'inPerson' as const,
     location: { name: 'Hall', address: '1 Main Street, City', city: 'City' },
   },
 };
 const resources = { title: 'Example Fest', description: 'A conference' };
+const hall = {
+  '@type': 'Place',
+  name: 'Hall',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '1 Main Street, City',
+    addressLocality: 'City',
+  },
+};
+const stream = 'https://www.youtube.com/@example/live';
 
 describe('eventStructuredData', () => {
   it('describes the event from the site config', () => {
@@ -46,6 +57,42 @@ describe('eventStructuredData', () => {
     );
 
     expect(organizer).toEqual({ '@type': 'Organization', name: 'GDG Example' });
+  });
+
+  it('places an online event at its stream, even with a venue in the config', () => {
+    const data = eventStructuredData(
+      { ...site, event: { ...site.event, attendance: 'online', stream } },
+      resources,
+    );
+
+    expect(data.eventAttendanceMode).toBe('https://schema.org/OnlineEventAttendanceMode');
+    expect(data.location).toEqual({ '@type': 'VirtualLocation', url: stream });
+  });
+
+  it('places a hybrid event at its venue and its stream', () => {
+    const hybrid = (extra: { stream?: string }) =>
+      eventStructuredData(
+        { ...site, event: { ...site.event, attendance: 'hybrid', ...extra } },
+        resources,
+      );
+
+    expect(hybrid({ stream }).eventAttendanceMode).toBe(
+      'https://schema.org/MixedEventAttendanceMode',
+    );
+    expect(hybrid({ stream }).location).toEqual([
+      hall,
+      { '@type': 'VirtualLocation', url: stream },
+    ]);
+    expect(hybrid({}).location).toEqual(hall);
+  });
+
+  it('names no stream for an in-person event', () => {
+    const { location } = eventStructuredData(
+      { ...site, event: { ...site.event, stream } },
+      resources,
+    );
+
+    expect(location).toEqual(hall);
   });
 });
 

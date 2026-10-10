@@ -1,10 +1,23 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { location, mapsScriptUrl } from '../../config/site';
+import { location as venue, mapsScriptUrl } from '../../config/site';
 import { applyColorScheme } from '../../utils/color-scheme';
 import { directionLinks, type MapBlock } from './map-block';
 import './map-block';
+
+const location = venue!;
+const config = vi.hoisted(() => ({ online: false }));
+
+vi.mock('../../config/site', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../config/site')>();
+  return {
+    ...actual,
+    get location() {
+      return config.online ? undefined : actual.location;
+    },
+  };
+});
 
 const mapsScripts = () =>
   [...document.head.querySelectorAll('script')].filter(({ src }) => src === mapsScriptUrl);
@@ -17,6 +30,17 @@ afterEach(() => {
 describe('map-block', () => {
   it('defines a component', () => {
     expect(customElements.get('map-block')).toBeDefined();
+  });
+
+  it('renders nothing without a venue', async () => {
+    config.online = true;
+    try {
+      const { shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
+
+      expect(shadowRoot.querySelector('.inner')).toBeNull();
+    } finally {
+      config.online = false;
+    }
   });
 
   it('renders the venue, its address and directions in three map apps', async () => {
