@@ -1,7 +1,7 @@
 import { Failure, Initialized, type RemoteData, Success } from '@abraham/remotedata';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { savePotentialPartner } from '../../db/potential-partners';
-import type { DialogData } from '../../models/dialog-form';
+import type { PotentialPartner } from '../../models/potential-partner';
 import { dispatch } from '../dispatch';
 import { canWriteNow } from '../sync';
 
@@ -23,12 +23,12 @@ const slice = createSlice({
 const { failure, success } = slice.actions;
 
 /** Sends the form, without waiting for the server. Visitors without an account need the network. */
-export const addPotentialPartner = (data: DialogData): void => {
+export const addPotentialPartner = (partner: PotentialPartner): void => {
   if (!canWriteNow()) {
     dispatch(failure(new Error('Offline')));
     return;
   }
-  savePotentialPartner(data, (error) => dispatch(failure(error)));
+  savePotentialPartner(partner, (error) => dispatch(failure(error)));
   dispatch(success());
 };
 

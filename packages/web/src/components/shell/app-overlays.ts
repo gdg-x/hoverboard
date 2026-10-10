@@ -5,7 +5,7 @@ import { DIALOG, selectIsDialogOpen } from '../../store/dialogs';
 import { ThemedComponent } from '../themed-component';
 
 type LazyElement =
-  'feedback-dialog' | 'signin-dialog' | 'subscribe-dialog' | 'video-dialog' | 'snack-bar';
+  'feedback-dialog' | 'signin-dialog' | 'partner-dialog' | 'video-dialog' | 'snack-bar';
 
 /** The dialogs and the snackbar. Each loads the first time the store asks for it. */
 @customElement('app-overlays')
@@ -13,7 +13,7 @@ export class AppOverlays extends ThemedComponent {
   private readonly lazyElements: Record<LazyElement, () => Promise<unknown>> = {
     'feedback-dialog': () => import('../dialogs/feedback-dialog'),
     'signin-dialog': () => import('../dialogs/signin-dialog'),
-    'subscribe-dialog': () => import('../dialogs/subscribe-dialog'),
+    'partner-dialog': () => import('../dialogs/partner-dialog'),
     'video-dialog': () => import('../dialogs/video-dialog'),
     'snack-bar': () => import('./snack-bar'),
   };
@@ -26,7 +26,7 @@ export class AppOverlays extends ThemedComponent {
     (state): Record<LazyElement, boolean> => ({
       'feedback-dialog': selectIsDialogOpen(state, DIALOG.FEEDBACK),
       'signin-dialog': selectIsDialogOpen(state, DIALOG.SIGNIN),
-      'subscribe-dialog': selectIsDialogOpen(state, DIALOG.SUBSCRIBE),
+      'partner-dialog': selectIsDialogOpen(state, DIALOG.PARTNER),
       'video-dialog': state.ui.videoDialog.open,
       'snack-bar': state.snackbars.length > 0,
     }),
@@ -56,7 +56,7 @@ export class AppOverlays extends ThemedComponent {
     return html`
       ${loaded.has('feedback-dialog') ? html`<feedback-dialog></feedback-dialog>` : nothing}
       ${loaded.has('signin-dialog') ? html`<signin-dialog></signin-dialog>` : nothing}
-      ${loaded.has('subscribe-dialog') ? html`<subscribe-dialog></subscribe-dialog>` : nothing}
+      ${loaded.has('partner-dialog') ? html`<partner-dialog></partner-dialog>` : nothing}
       ${loaded.has('video-dialog') ? html`<video-dialog></video-dialog>` : nothing}
       ${loaded.has('snack-bar') ? html`<snack-bar></snack-bar>` : nothing}
     `;

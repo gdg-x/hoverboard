@@ -1,17 +1,11 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
-import type { DialogData } from '../models/dialog-form';
+import type { PotentialPartner } from '../models/potential-partner';
 import { write } from '../utils/firestore';
 
 export const savePotentialPartner = (
-  data: DialogData,
+  partner: PotentialPartner,
   onRejected: (error: Error) => void,
 ): void => {
-  const partner = {
-    email: data.email,
-    fullName: data.firstFieldValue || '',
-    companyName: data.secondFieldValue || '',
-  };
-
   write(() => addDoc(collection(db, 'potentialPartners'), partner), onRejected);
 };

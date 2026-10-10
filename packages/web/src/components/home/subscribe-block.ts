@@ -180,9 +180,9 @@ export class SubscribeBlock extends ThemedComponent {
 
   private readonly submit = () => {
     if (!this.emailField?.reportValidity()) return;
-    const [firstFieldValue = '', secondFieldValue = ''] =
+    const [firstName = '', lastName = ''] =
       this.user instanceof Success ? (this.user.data.displayName?.split(' ') ?? []) : [];
-    subscribe({ email: this.email, firstFieldValue, secondFieldValue });
+    subscribe({ email: this.email, firstName, lastName });
   };
 }
 

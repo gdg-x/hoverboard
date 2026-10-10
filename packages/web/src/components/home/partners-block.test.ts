@@ -3,35 +3,14 @@ import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { PartnerGroup } from '../../models/partner-group';
-import { closeDialog, openSubscribeDialog } from '../../store/dialogs';
-import { addPotentialPartner, initialPotentialPartnersState } from '../../store/potential-partners';
-import { queueSnackbar } from '../../store/snackbars';
+import { openPartnerDialog } from '../../store/dialogs';
 import type { PartnersBlock } from './partners-block';
 import './partners-block';
 
 vi.mock('../../store/dialogs', async (importOriginal) => ({
-  __esModule: true,
   ...(await importOriginal<typeof import('../../store/dialogs')>()),
-  closeDialog: vi.fn(),
-  openSubscribeDialog: vi.fn(),
+  openPartnerDialog: vi.fn(),
 }));
-
-vi.mock('../../store/potential-partners', async (importOriginal) => ({
-  __esModule: true,
-  ...(await importOriginal<typeof import('../../store/potential-partners')>()),
-  addPotentialPartner: vi.fn(),
-}));
-
-vi.mock('../../store/snackbars', async (importOriginal) => ({
-  __esModule: true,
-  ...(await importOriginal<typeof import('../../store/snackbars')>()),
-  queueSnackbar: vi.fn(() => ({ type: 'QUEUE_SNACKBAR' })),
-}));
-
-const mockCloseDialog = vi.mocked(closeDialog);
-const mockOpenSubscribeDialog = vi.mocked(openSubscribeDialog);
-const mockAddPotentialPartner = vi.mocked(addPotentialPartner);
-const mockQueueSnackbar = vi.mocked(queueSnackbar);
 
 const partnerGroups: PartnerGroup[] = [
   {
@@ -93,32 +72,11 @@ describe('partners-block', () => {
     expect(shadowRoot.querySelector('.cta-button')).toHaveTextContent('Become a partner');
   });
 
-  it('opens the subscribe dialog when clicking the become a partner button', async () => {
-    mockAddPotentialPartner.mockResolvedValue(undefined);
+  it('opens the partner dialog from the become a partner button', async () => {
     const { shadowRoot } = await fixture<PartnersBlock>(html`<partners-block></partners-block>`);
 
     shadowRoot.querySelector<HTMLElement>('hb-button')!.click();
 
-    expect(mockOpenSubscribeDialog).toHaveBeenCalledWith(
-      expect.objectContaining({ title: 'Become a partner!' }),
-    );
-
-    const submit = mockOpenSubscribeDialog.mock.calls[0]![0].submit;
-    submit({ email: 'partner@example.com' });
-    expect(mockAddPotentialPartner).toHaveBeenCalledWith({ email: 'partner@example.com' });
-  });
-
-  it('closes the dialog and queues a toast when the partner is added successfully', async () => {
-    const { element } = await fixture<PartnersBlock>(html`<partners-block></partners-block>`);
-    element.potentialPartners = initialPotentialPartnersState;
-    await element.updateComplete;
-    mockCloseDialog.mockClear();
-    mockQueueSnackbar.mockClear();
-
-    element.potentialPartners = new Success(true);
-    await element.updateComplete;
-
-    expect(mockCloseDialog).toHaveBeenCalled();
-    expect(mockQueueSnackbar).toHaveBeenCalledWith('We will contact you soon!');
+    expect(openPartnerDialog).toHaveBeenCalled();
   });
 });

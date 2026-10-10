@@ -81,8 +81,8 @@ describe('subscribe-block', () => {
 
     expect(mockSubscribe).toHaveBeenCalledWith({
       email: 'grace@example.com',
-      firstFieldValue: '',
-      secondFieldValue: '',
+      firstName: '',
+      lastName: '',
     });
   });
 
@@ -124,8 +124,8 @@ describe('subscribe-block', () => {
 
     expect(mockSubscribe).toHaveBeenCalledWith({
       email: 'ada@example.com',
-      firstFieldValue: 'Ada',
-      secondFieldValue: 'Lovelace',
+      firstName: 'Ada',
+      lastName: 'Lovelace',
     });
   });
 
