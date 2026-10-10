@@ -8,7 +8,13 @@ import './my-schedule';
 const day = (date: string, items: unknown[] = []): BuiltDay => ({
   date,
   tracks: [{ id: 'track-1', title: 'Track 1' }],
-  timeslots: [{ startTime: '10:00', endTime: '11:00', sessions: [{ items } as never] }],
+  timeslots: [
+    {
+      startTime: '10:00',
+      endTime: '11:00',
+      sessions: [{ gridArea: '1 / 1 / 2 / 2', items } as never],
+    },
+  ],
   tags: [],
 });
 

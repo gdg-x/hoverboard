@@ -1,6 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '..';
+import { scheduleTracks } from '../../config/site';
 import type { Filter } from '../../models/filter';
 import { type FilterGroup, FilterGroupKey } from '../../models/filter-group';
 import type { Session } from '../../models/session';
@@ -50,7 +51,11 @@ export const selectSession = createSelector(
 // Kept as a stable module-level reference (rather than a default parameter
 // literal) so repeated calls with no explicit `groups` argument pass the
 // same array instance, preserving `createSelector`'s memoization.
-const DEFAULT_FILTER_GROUPS: FilterGroupKey[] = [FilterGroupKey.tags, FilterGroupKey.complexity];
+const DEFAULT_FILTER_GROUPS: FilterGroupKey[] = [
+  FilterGroupKey.track,
+  FilterGroupKey.tags,
+  FilterGroupKey.complexity,
+];
 
 const selectGroups = (_state: RootState, groups: FilterGroupKey[] = DEFAULT_FILTER_GROUPS) =>
   groups;
@@ -66,6 +71,18 @@ export const selectFilterGroups = createSelector(
   selectGroups,
   (sessions: Session[], groups: FilterGroupKey[]): FilterGroup[] => {
     return [
+      {
+        key: FilterGroupKey.track,
+        // With one track, there's nothing to pick.
+        filters:
+          scheduleTracks.length > 1
+            ? scheduleTracks.map(({ id, title }) => ({
+                group: FilterGroupKey.track,
+                tag: id,
+                label: title,
+              }))
+            : [],
+      },
       {
         key: FilterGroupKey.tags,
         filters: buildFilters(sessions, FilterGroupKey.tags),

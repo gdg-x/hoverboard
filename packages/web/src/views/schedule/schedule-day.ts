@@ -6,10 +6,12 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { Filter } from '../../models/filter';
+import { FilterGroupKey } from '../../models/filter-group';
 import type {
   BuiltDay,
   BuiltSession,
   BuiltTimeslot,
+  ScheduleTrack,
   SessionBlock,
 } from '../../schedule/build-schedule';
 import type { RouteLocation } from '../../utils/navigation';
@@ -46,13 +48,40 @@ const minutes = (time: string) => {
   return hours * 60 + mins;
 };
 
+// Track filters pick columns, in `trackColumns`, rather than sessions.
 export const matchesFilters = (session: BuiltSession, filters: Filter[]) =>
   filters.every((filter) => {
+    if (filter.group === FilterGroupKey.track) return true;
     const values = session[filter.group];
     if (values === undefined) return false;
     const tags = typeof values === 'string' ? [values] : values;
     return tags.some((value) => generateClassName(value) === generateClassName(filter.tag));
   });
+
+/** The columns of the tracks the filters pick, or every column without a track filter. */
+export const trackColumns = (tracks: ScheduleTrack[], filters: Filter[]): number[] => {
+  if (tracks.length === 0) return [1];
+  const columns = tracks.map((_, index) => index + 1);
+  const picked = filters
+    .filter((filter) => filter.group === FilterGroupKey.track)
+    .map((filter) => filter.tag);
+  if (picked.length === 0) return columns;
+  return columns.filter((column) => picked.includes(generateClassName(tracks[column - 1]!.id)));
+};
+
+/**
+ * Fits a block's `grid-area` to the columns shown, or nothing when it is in none of them. A session
+ * that spans every track spans the ones shown.
+ */
+export const narrowGridArea = (gridArea: string, columns: number[]): string | undefined => {
+  const [rowStart, columnStart = 1, rowEnd, columnEnd = 2] = gridArea
+    .split('/')
+    .map((part) => Number(part.trim()));
+  const shown = columns.filter((column) => column >= columnStart && column < columnEnd);
+  if (shown.length === 0) return undefined;
+  const start = columns.indexOf(shown[0]!) + 1;
+  return `${rowStart} / ${start} / ${rowEnd} / ${start + shown.length}`;
+};
 
 /**
  * One day of the schedule. On wide containers, tracks are columns that scroll sideways when they do
@@ -349,9 +378,11 @@ export class ScheduleDay extends ThemedElement {
   override render() {
     const day = this.day;
     if (!day) return nothing;
-    const tracks = day.tracks.length || 1;
+    const columns = trackColumns(day.tracks, this.selectedFilters);
+    const shownTracks = day.tracks.filter((_, index) => columns.includes(index + 1));
+    const tracks = columns.length;
     const filtered = this.selectedFilters.length > 0;
-    const visible = day.timeslots.map((timeslot) => this.visibleBlocks(timeslot));
+    const visible = day.timeslots.map((timeslot) => this.visibleBlocks(timeslot, columns));
     const now = this.nowPosition(day);
 
     if (filtered && !this.onlyFeatured && visible.every((blocks) => blocks.length === 0)) {
@@ -392,7 +423,7 @@ export class ScheduleDay extends ThemedElement {
       <div class="header" aria-hidden="true">
         <div class="header-grid" style="${styleMap({ '--tracks': String(tracks) })}">
           <div class="corner"></div>
-          ${day.tracks.map((track) => html`<div class="track">${track.title}</div>`)}
+          ${shownTracks.map((track) => html`<div class="track">${track.title}</div>`)}
         </div>
       </div>
 
@@ -446,11 +477,8 @@ export class ScheduleDay extends ThemedElement {
                   : nothing
               }
               ${visible[index]!.map(
-                ({ block, sessions }) => html`
-                  <div
-                    class="block"
-                    style="${styleMap({ 'grid-area': withTimeColumn(block.gridArea) })}"
-                  >
+                ({ gridArea, sessions }) => html`
+                  <div class="block" style="${styleMap({ 'grid-area': withTimeColumn(gridArea) })}">
                     ${repeat(
                       sessions,
                       (session) => session.id,
@@ -484,13 +512,15 @@ export class ScheduleDay extends ThemedElement {
 
   private visibleBlocks(
     timeslot: BuiltTimeslot,
-  ): { block: SessionBlock; sessions: BuiltSession[] }[] {
-    return timeslot.sessions
-      .map((block) => ({
-        block,
-        sessions: block.items.filter((session) => matchesFilters(session, this.selectedFilters)),
-      }))
-      .filter(({ sessions }) => sessions.length > 0);
+    columns: number[],
+  ): { gridArea: string; sessions: BuiltSession[] }[] {
+    return timeslot.sessions.flatMap((block: SessionBlock) => {
+      const gridArea = narrowGridArea(block.gridArea, columns);
+      const sessions = block.items.filter((session) =>
+        matchesFilters(session, this.selectedFilters),
+      );
+      return gridArea && sessions.length ? [{ gridArea, sessions }] : [];
+    });
   }
 
   /** Which timeslot holds the current time, and how far into it, during this day. */

@@ -1,6 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { describe, expect, it } from 'vitest';
 import { selectFilterGroups, selectSession } from './selectors';
+import { scheduleTracks } from '../../config/site';
 import { FilterGroupKey } from '../../models/filter-group';
 import type { Session } from '../../models/session';
 import type { RootState } from '..';
@@ -31,19 +32,22 @@ describe('selectSession', () => {
 });
 
 describe('selectFilterGroups', () => {
-  it('builds filter groups from the unique tags and complexity values, for the requested groups', () => {
+  it('builds filter groups from the tracks and the unique tags and complexity values', () => {
     const state = { sessions: new Success(sessions) } as unknown as RootState;
 
     const groups = selectFilterGroups(state, undefined);
 
-    expect(groups.map((group) => group.key)).toStrictEqual(['tags', 'complexity']);
+    expect(groups.map((group) => group.key)).toStrictEqual(['track', 'tags', 'complexity']);
     expect(groups[0]!.filters).toStrictEqual(
+      scheduleTracks.map(({ id, title }) => ({ group: 'track', tag: id, label: title })),
+    );
+    expect(groups[1]!.filters).toStrictEqual(
       expect.arrayContaining([
         { group: 'tags', tag: 'a11y' },
         { group: 'tags', tag: 'web' },
       ]),
     );
-    expect(groups[1]!.filters).toStrictEqual(
+    expect(groups[2]!.filters).toStrictEqual(
       expect.arrayContaining([
         { group: 'complexity', tag: 'Beginner' },
         { group: 'complexity', tag: 'Advanced' },

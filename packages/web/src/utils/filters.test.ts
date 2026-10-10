@@ -18,13 +18,14 @@ describe('parseFilters', () => {
     expect(parseFilters()).toStrictEqual([]);
   });
 
-  it('parses tags and complexity query params into filters', () => {
-    setUrl('/?tags=a11y&tags=web&complexity=beginner');
+  it('parses tags, complexity and track query params into filters', () => {
+    setUrl('/?tags=a11y&tags=web&complexity=beginner&track=expo-hall');
 
     expect(parseFilters()).toStrictEqual([
       { group: FilterGroupKey.tags, tag: 'a11y' },
       { group: FilterGroupKey.tags, tag: 'web' },
       { group: FilterGroupKey.complexity, tag: 'beginner' },
+      { group: FilterGroupKey.track, tag: 'expo-hall' },
     ]);
   });
 });
