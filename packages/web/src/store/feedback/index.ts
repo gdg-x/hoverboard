@@ -1,10 +1,5 @@
 import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
-import {
-  createAsyncThunk,
-  createSelector,
-  createSlice,
-  type PayloadAction,
-} from '@reduxjs/toolkit';
+import { createSelector, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { Unsubscribe } from 'firebase/firestore';
 import type { RootState } from '..';
 import { dispatch } from '../dispatch';
@@ -19,17 +14,13 @@ import { selectUser, type UserState } from '../user';
 export type SessionFeedback = RemoteData<Error, Feedback | false>;
 
 export type FeedbackState = {
-  set: RemoteData<Error, FeedbackId>;
   subscription: RemoteData<Error, Unsubscribe>;
   data: RemoteData<Error, Feedback[]>;
-  delete: RemoteData<Error, FeedbackId>;
 };
 
 export const initialState = {
-  set: new Initialized(),
   subscription: new Initialized(),
   data: new Initialized(),
-  delete: new Initialized(),
 } as FeedbackState;
 
 export const subscribe = (userId: string) => {
@@ -40,19 +31,12 @@ export const subscribe = (userId: string) => {
   );
 };
 
-export const setFeedback = createAsyncThunk<FeedbackId, Feedback>(
-  'feedback/set',
-  async (data: Feedback) => {
-    return saveFeedback(data);
-  },
-);
+/** Saves feedback. The visitor's feedback listener shows it at once, and again if the server refuses it. */
+export const setFeedback = (data: Feedback, onRejected: (error: Error) => void): void =>
+  saveFeedback(data, onRejected);
 
-export const deleteFeedback = createAsyncThunk<FeedbackId, FeedbackId>(
-  'feedback/delete',
-  async (data: FeedbackId) => {
-    return removeFeedback(data);
-  },
-);
+export const deleteFeedback = (data: FeedbackId, onRejected: (error: Error) => void): void =>
+  removeFeedback(data, onRejected);
 
 const feedbackSlice = createSlice({
   name: 'feedback',
@@ -68,10 +52,8 @@ const feedbackSlice = createSlice({
       if (state.subscription instanceof Success) {
         state.subscription.data();
       }
-      state.set = new Initialized();
       state.subscription = new Initialized();
       state.data = new Initialized();
-      state.delete = new Initialized();
     },
     setSuccess(state, action: PayloadAction<Feedback[]>) {
       state.data = new Success(action.payload);
@@ -80,37 +62,14 @@ const feedbackSlice = createSlice({
       state.data = new Failure(action.payload);
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(setFeedback.pending, (state) => {
-        state.set = new Pending();
-      })
-      .addCase(setFeedback.fulfilled, (state, action) => {
-        state.set = new Success(action.payload);
-      })
-      .addCase(setFeedback.rejected, (state, action) => {
-        state.set = new Failure(new Error(action.error.message));
-      })
-      .addCase(deleteFeedback.pending, (state) => {
-        state.delete = new Pending();
-      })
-      .addCase(deleteFeedback.fulfilled, (state, action) => {
-        state.delete = new Success(action.payload);
-      })
-      .addCase(deleteFeedback.rejected, (state, action) => {
-        state.delete = new Failure(new Error(action.error.message));
-      });
-  },
 });
 
 const { subscribeToFeedback, unsubscribeFromFeedback, setSuccess, setFailure } =
   feedbackSlice.actions;
 
 const selectParentId = (_state: RootState, parentId: string | undefined) => parentId;
-export const selectFeedbackSet = (state: RootState) => state.feedback.set;
 export const selectFeedbackSubscription = (state: RootState) => state.feedback.subscription;
 export const selectFeedback = (state: RootState) => state.feedback.data;
-export const selectFeedbackDelete = (state: RootState) => state.feedback.delete;
 
 const selectSubscription = createSelector(
   selectUser,

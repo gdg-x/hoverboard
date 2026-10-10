@@ -10,15 +10,18 @@ describe('db/potential-partners', () => {
     vi.clearAllMocks();
   });
 
-  it('saves a potential partner under a random id', async () => {
+  it('saves a potential partner under a random id', () => {
     vi.mocked(collection).mockReturnValue('collection-ref' as never);
     vi.mocked(addDoc).mockResolvedValue({ id: 'random-id' } as never);
 
-    await savePotentialPartner({
-      email: 'ada.lovelace+partners@example.com',
-      firstFieldValue: 'Ada',
-      secondFieldValue: 'Analytical Engines',
-    });
+    savePotentialPartner(
+      {
+        email: 'ada.lovelace+partners@example.com',
+        firstFieldValue: 'Ada',
+        secondFieldValue: 'Analytical Engines',
+      },
+      vi.fn(),
+    );
 
     expect(collection).toHaveBeenCalledWith(db, 'potentialPartners');
     expect(addDoc).toHaveBeenCalledWith('collection-ref', {
@@ -28,11 +31,11 @@ describe('db/potential-partners', () => {
     });
   });
 
-  it('uses default empty strings when fields are omitted', async () => {
+  it('uses default empty strings when fields are omitted', () => {
     vi.mocked(collection).mockReturnValue('collection-ref' as never);
     vi.mocked(addDoc).mockResolvedValue({ id: 'random-id' } as never);
 
-    await savePotentialPartner({ email: 'ada@example.com' });
+    savePotentialPartner({ email: 'ada@example.com' }, vi.fn());
 
     expect(collection).toHaveBeenCalledWith(db, 'potentialPartners');
     expect(addDoc).toHaveBeenCalledWith('collection-ref', {

@@ -6,7 +6,10 @@ import { db } from '../firebase';
 import { subscribeToDocument } from '../utils/firestore';
 
 vi.mock('firebase/firestore');
-vi.mock('../utils/firestore', () => ({ subscribeToDocument: vi.fn() }));
+vi.mock('../utils/firestore', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../utils/firestore')>()),
+  subscribeToDocument: vi.fn(),
+}));
 
 describe('db/featured-sessions', () => {
   beforeEach(() => {
@@ -36,13 +39,16 @@ describe('db/featured-sessions', () => {
     ]);
   });
 
-  it('saves featured sessions for a user', async () => {
+  it('saves featured sessions for a user, and reports a rejection', async () => {
+    const error = new Error('permission-denied');
     vi.mocked(doc).mockReturnValue('doc-ref' as never);
-    vi.mocked(setDoc).mockResolvedValue(undefined as never);
+    vi.mocked(setDoc).mockRejectedValue(error);
+    const onRejected = vi.fn();
 
-    await saveFeaturedSessions('user-1', { 'session-1': true });
+    saveFeaturedSessions('user-1', { 'session-1': true }, onRejected);
 
     expect(doc).toHaveBeenCalledWith(db, 'featuredSessions', 'user-1');
     expect(setDoc).toHaveBeenCalledWith('doc-ref', { 'session-1': true });
+    await vi.waitFor(() => expect(onRejected).toHaveBeenCalledWith(error));
   });
 });

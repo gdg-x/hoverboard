@@ -75,11 +75,11 @@ describe('db/feedback', () => {
     expect(onError).toHaveBeenCalledWith(error);
   });
 
-  it('saves feedback document and returns FeedbackId', async () => {
+  it('saves the feedback document', () => {
     vi.mocked(doc).mockReturnValue('doc-ref' as never);
     vi.mocked(setDoc).mockResolvedValue(undefined as never);
 
-    const result = await saveFeedback(feedback);
+    saveFeedback(feedback, vi.fn());
 
     expect(doc).toHaveBeenCalledWith(db, 'sessions', 'session-1', 'feedback', 'user-1');
     expect(setDoc).toHaveBeenCalledWith('doc-ref', {
@@ -88,22 +88,16 @@ describe('db/feedback', () => {
       comment: 'Great talk',
       userId: 'user-1',
     });
-    expect(result).toStrictEqual({
-      parentId: 'session-1',
-      userId: 'user-1',
-      id: 'user-1',
-    });
   });
 
-  it('removes feedback document and returns FeedbackId', async () => {
+  it('removes the feedback document', () => {
     const feedbackId: FeedbackId = { parentId: 'session-1', userId: 'user-1', id: 'user-1' };
     vi.mocked(doc).mockReturnValue('doc-ref' as never);
     vi.mocked(deleteDoc).mockResolvedValue(undefined as never);
 
-    const result = await removeFeedback(feedbackId);
+    removeFeedback(feedbackId, vi.fn());
 
     expect(doc).toHaveBeenCalledWith(db, 'sessions', 'session-1', 'feedback', 'user-1');
     expect(deleteDoc).toHaveBeenCalledWith('doc-ref');
-    expect(result).toStrictEqual(feedbackId);
   });
 });

@@ -50,10 +50,8 @@ describe('feedback', () => {
     const unsubscribe = vi.fn();
     const state = reducer(
       {
-        set: new Success({ parentId: 'session-1', userId: 'user-1', id: 'user-1' }),
         subscription: new Success(unsubscribe),
         data: new Success([feedback]),
-        delete: new Success({ parentId: 'session-1', userId: 'user-1', id: 'user-1' }),
       },
       {
         type: 'feedback/unsubscribeFromFeedback',
@@ -81,46 +79,9 @@ describe('feedback', () => {
       }).data,
     ).toStrictEqual(new Failure(error));
   });
-
-  it('handles async set and delete reducer transitions', () => {
-    const savedId = { parentId: 'session-1', userId: 'user-1', id: 'user-1' };
-
-    expect(reducer(initialState, setFeedback.pending('request-id', feedback)).set).toStrictEqual(
-      new Pending(),
-    );
-    expect(
-      reducer(initialState, setFeedback.fulfilled(savedId, 'request-id', feedback)).set,
-    ).toStrictEqual(new Success(savedId));
-    expect(
-      reducer(initialState, {
-        type: setFeedback.rejected.type,
-        error: { message: 'save failed' },
-      }).set,
-    ).toStrictEqual(new Failure(new Error('save failed')));
-
-    expect(
-      reducer(
-        initialState,
-        deleteFeedback.pending('request-id', {
-          parentId: 'session-1',
-          userId: 'user-1',
-          id: 'user-1',
-        }),
-      ).delete,
-    ).toStrictEqual(new Pending());
-    expect(
-      reducer(initialState, deleteFeedback.fulfilled(savedId, 'request-id', savedId)).delete,
-    ).toStrictEqual(new Success(savedId));
-    expect(
-      reducer(initialState, {
-        type: deleteFeedback.rejected.type,
-        error: { message: 'delete failed' },
-      }).delete,
-    ).toStrictEqual(new Failure(new Error('delete failed')));
-  });
 });
 
-describe('feedback thunks and subscriptions', () => {
+describe('feedback writes and subscriptions', () => {
   it('subscribes to the feedback collection group and dispatches mapped snapshot data', () => {
     const unsubscribe = vi.fn();
     vi.mocked(subscribeFeedback).mockImplementation((_userId, next) => {
@@ -159,24 +120,15 @@ describe('feedback thunks and subscriptions', () => {
     );
   });
 
-  it('writes feedback documents and returns their id payload', async () => {
-    const savedId = { parentId: 'session-1', userId: 'user-1', id: 'user-1' };
-    vi.mocked(saveFeedback).mockResolvedValue(savedId);
-
-    const action = await setFeedback(feedback)(vi.fn(), vi.fn(), undefined);
-
-    expect(saveFeedback).toHaveBeenCalledWith(feedback);
-    expect(action.payload).toStrictEqual(savedId);
-  });
-
-  it('deletes feedback documents and returns their id payload', async () => {
+  it('writes and deletes feedback, passing on the rejection callback', () => {
     const id = { parentId: 'session-1', userId: 'user-1', id: 'user-1' };
-    vi.mocked(removeFeedback).mockResolvedValue(id);
+    const onRejected = vi.fn();
 
-    const action = await deleteFeedback(id)(vi.fn(), vi.fn(), undefined);
+    setFeedback(feedback, onRejected);
+    deleteFeedback(id, onRejected);
 
-    expect(removeFeedback).toHaveBeenCalledWith(id);
-    expect(action.payload).toStrictEqual(id);
+    expect(saveFeedback).toHaveBeenCalledWith(feedback, onRejected);
+    expect(removeFeedback).toHaveBeenCalledWith(id, onRejected);
   });
 });
 

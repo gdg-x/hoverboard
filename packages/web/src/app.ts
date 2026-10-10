@@ -6,6 +6,7 @@ import { subscribeToPageContent } from './store/content';
 import { openSigninDialog } from './store/dialogs';
 import { setFilters } from './store/filters';
 import { queueSnackbar } from './store/snackbars';
+import { watchConnection } from './store/sync';
 import { logPageView } from './utils/analytics';
 import { loadOtherBuildsInFull } from './utils/build';
 import { parseFilters } from './utils/filters';
@@ -45,6 +46,7 @@ export const startApp = async (): Promise<void> => {
   });
 
   await afterHydration();
+  watchConnection();
   // The signed-in state changes the header, so it waits for hydration too.
   onUser();
   if (openedFromSignInLink) {

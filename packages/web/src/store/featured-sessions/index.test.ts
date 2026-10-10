@@ -51,59 +51,32 @@ describe('featuredSessions', () => {
 });
 
 describe('setUserFeaturedSessions', () => {
-  it('cleans falsy session ids, persists them, and queues the added snackbar', async () => {
-    vi.mocked(saveFeaturedSessions).mockResolvedValue(undefined);
-    vi.mocked(queueSnackbar).mockReturnValue({
-      type: 'snackbars/queueSnackbar',
-      payload: ADDED,
-    } as never);
-
-    await setUserFeaturedSessions(
+  it('saves only bookmarked sessions, and confirms without waiting for the server', () => {
+    setUserFeaturedSessions(
       'user-1',
       { 'session-1': true, 'session-2': false, 'session-3': 0 as never },
       true,
     );
 
-    expect(saveFeaturedSessions).toHaveBeenCalledWith('user-1', { 'session-1': true });
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'featuredSessions/pending' }),
+    expect(saveFeaturedSessions).toHaveBeenCalledWith(
+      'user-1',
+      { 'session-1': true },
+      expect.any(Function),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        type: 'featuredSessions/success',
-        payload: { 'session-1': true },
-      }),
-    );
-    expect(queueSnackbar).toHaveBeenCalledWith(ADDED);
-    expect(dispatch).toHaveBeenNthCalledWith(
-      3,
-      expect.objectContaining({
-        type: 'snackbars/queueSnackbar',
-        payload: ADDED,
-      }),
-    );
+    // The listener updates the bookmarks, so the store only queues the confirmation.
+    expect(vi.mocked(dispatch).mock.calls.map(([action]) => action)).toEqual([
+      { type: 'snackbars/queueSnackbar', payload: ADDED },
+    ]);
   });
 
-  it('dispatches failure when persisting featured sessions fails', async () => {
-    const error = new Error('write failed');
-    vi.mocked(saveFeaturedSessions).mockRejectedValue(error);
-
-    await setUserFeaturedSessions('user-1', { 'session-1': true }, false);
-
-    expect(dispatch).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({ type: 'featuredSessions/pending' }),
+  it('says so when the server refuses the bookmarks', () => {
+    vi.mocked(saveFeaturedSessions).mockImplementation((_userId, _sessions, onRejected) =>
+      onRejected(new Error('permission-denied')),
     );
-    expect(dispatch).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        type: 'featuredSessions/failure',
-        payload: error,
-      }),
-    );
-    expect(queueSnackbar).not.toHaveBeenCalled();
+
+    setUserFeaturedSessions('user-1', { 'session-1': true }, false);
+
+    expect(queueSnackbar).toHaveBeenCalledWith("Couldn't save your schedule. Try again.");
   });
 });
 

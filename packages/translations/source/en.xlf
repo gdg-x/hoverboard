@@ -476,6 +476,9 @@
 <trans-unit id="common.general-error">
   <source>An error has occurred. Please, try again later.</source>
 </trans-unit>
+<trans-unit id="store.featured-sessions.failed">
+  <source>Couldn't save your schedule. Try again.</source>
+</trans-unit>
 <trans-unit id="store.featured-sessions.added">
   <source>Session saved to My Schedule</source>
 </trans-unit>
@@ -484,6 +487,9 @@
 </trans-unit>
 <trans-unit id="store.subscribe.success">
   <source>Successfully subscribed!</source>
+</trans-unit>
+<trans-unit id="store.offline.needs-network">
+  <source>Connect to the internet to send this.</source>
 </trans-unit>
 <trans-unit id="store.notifications.general-enabled">
   <source>General notifications enabled</source>

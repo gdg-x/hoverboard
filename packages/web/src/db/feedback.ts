@@ -10,7 +10,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import type { Feedback, FeedbackId } from '../models/feedback';
-import { dataWithParentId } from '../utils/firestore';
+import { dataWithParentId, write } from '../utils/firestore';
 
 export const subscribeToFeedback = (
   userId: string,
@@ -24,22 +24,17 @@ export const subscribeToFeedback = (
   );
 };
 
-export const saveFeedback = async (data: Feedback): Promise<FeedbackId> => {
-  await setDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId), {
-    contentRating: data.contentRating,
-    styleRating: data.styleRating,
-    comment: data.comment,
-    userId: data.userId,
-  });
+export const saveFeedback = (data: Feedback, onRejected: (error: Error) => void): void =>
+  write(
+    () =>
+      setDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId), {
+        contentRating: data.contentRating,
+        styleRating: data.styleRating,
+        comment: data.comment,
+        userId: data.userId,
+      }),
+    onRejected,
+  );
 
-  return {
-    parentId: data.parentId,
-    userId: data.userId,
-    id: data.userId,
-  };
-};
-
-export const removeFeedback = async (data: FeedbackId): Promise<FeedbackId> => {
-  await deleteDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId));
-  return data;
-};
+export const removeFeedback = (data: FeedbackId, onRejected: (error: Error) => void): void =>
+  write(() => deleteDoc(doc(db, 'sessions', data.parentId, 'feedback', data.userId)), onRejected);

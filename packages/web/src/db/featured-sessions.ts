@@ -1,7 +1,12 @@
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import type { Id } from '../models/types';
-import { type SnapshotState, type Subscription, subscribeToDocument } from '../utils/firestore';
+import {
+  type SnapshotState,
+  type Subscription,
+  subscribeToDocument,
+  write,
+} from '../utils/firestore';
 
 export interface FeaturedSessions {
   [sessionId: string]: boolean;
@@ -25,9 +30,8 @@ export const subscribeToFeaturedSessions = (
     onError,
   );
 
-export const saveFeaturedSessions = async (
+export const saveFeaturedSessions = (
   userId: string,
   featuredSessions: FeaturedSessions,
-): Promise<void> => {
-  await setDoc(doc(db, 'featuredSessions', userId), featuredSessions);
-};
+  onRejected: (error: Error) => void,
+): void => write(() => setDoc(doc(db, 'featuredSessions', userId), featuredSessions), onRejected);

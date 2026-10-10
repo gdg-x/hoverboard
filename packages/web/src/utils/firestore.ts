@@ -35,6 +35,21 @@ export const dataWithParentId = <T>(
 
 export type Subscription = RemoteData<Error, Unsubscribe>;
 
+/**
+ * Starts a write without waiting for the server. Firestore applies it to the cache, and so to its
+ * listeners, at once, and sends it whenever it can. `onRejected` runs if the server refuses it, for
+ * example a rule. A write that waits because the client is offline doesn't reject.
+ */
+export const write = (run: () => Promise<unknown>, onRejected: (error: Error) => void): void => {
+  const reject = (error: unknown) =>
+    onRejected(error instanceof Error ? error : new Error(String(error)));
+  try {
+    run().catch(reject);
+  } catch (error) {
+    reject(error);
+  }
+};
+
 /** What a snapshot says beyond its data. */
 export interface SnapshotState {
   /** The document has local writes the server hasn't confirmed yet, such as ones made offline. */

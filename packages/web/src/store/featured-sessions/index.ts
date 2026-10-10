@@ -52,27 +52,26 @@ const cleanFeaturedSessions = (object: FeaturedSessions): FeaturedSessions => {
   return Object.fromEntries(Object.entries(object).filter(hasValue));
 };
 
-export const setUserFeaturedSessions = async (
+/** Saves the bookmarks. The listener shows them at once, and again if the server refuses them. */
+export const setUserFeaturedSessions = (
   userId: string,
   featuredSessions: FeaturedSessions,
   isBookmarked: boolean,
-) => {
-  dispatch(pending());
-
-  try {
-    const cleanedFeaturedSessions = cleanFeaturedSessions(featuredSessions);
-    await saveFeaturedSessions(userId, cleanedFeaturedSessions);
-    dispatch(success(cleanedFeaturedSessions));
+): void => {
+  saveFeaturedSessions(userId, cleanFeaturedSessions(featuredSessions), () =>
     dispatch(
       queueSnackbar(
-        isBookmarked
-          ? msg('Session saved to My Schedule', { id: 'store.featured-sessions.added' })
-          : msg('Session removed from My Schedule', { id: 'store.featured-sessions.removed' }),
+        msg("Couldn't save your schedule. Try again.", { id: 'store.featured-sessions.failed' }),
       ),
-    );
-  } catch (error) {
-    dispatch(failure(error as Error));
-  }
+    ),
+  );
+  dispatch(
+    queueSnackbar(
+      isBookmarked
+        ? msg('Session saved to My Schedule', { id: 'store.featured-sessions.added' })
+        : msg('Session removed from My Schedule', { id: 'store.featured-sessions.removed' }),
+    ),
+  );
 };
 
 export const resetFeaturedSessions = () => {

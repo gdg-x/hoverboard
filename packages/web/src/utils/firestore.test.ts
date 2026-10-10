@@ -19,9 +19,38 @@ import {
   subscribeToCollection,
   subscribeToCollectionGroup,
   subscribeToDocument,
+  write,
 } from './firestore';
 
 vi.mock('firebase/firestore');
+
+describe('write', () => {
+  it('starts the write without waiting for it', () => {
+    let settle = () => {};
+    const run = vi.fn(() => new Promise<void>((resolve) => (settle = resolve)));
+    const onRejected = vi.fn();
+
+    write(run, onRejected);
+
+    expect(run).toHaveBeenCalledOnce();
+    settle();
+    expect(onRejected).not.toHaveBeenCalled();
+  });
+
+  it('reports a write the server refuses, or one that throws', async () => {
+    const onRejected = vi.fn();
+    const refused = new Error('permission-denied');
+
+    write(() => Promise.reject(refused), onRejected);
+    write(() => {
+      throw new Error('invalid path');
+    }, onRejected);
+
+    await vi.waitFor(() => expect(onRejected).toHaveBeenCalledTimes(2));
+    expect(onRejected).toHaveBeenCalledWith(refused);
+    expect(onRejected).toHaveBeenCalledWith(new Error('invalid path'));
+  });
+});
 
 describe('mergeDataAndId', () => {
   it('merges the snapshot data with its id', () => {

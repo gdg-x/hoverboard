@@ -1,4 +1,4 @@
-import { Failure, Pending, Success } from '@abraham/remotedata';
+import { Failure, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
@@ -145,11 +145,7 @@ export class SubscribeBlock extends ThemedElement {
           @input="${this.onInput}"
           @keydown="${this.onKeydown}"
         ></hb-text-field>
-        <hb-button
-          size="l"
-          ?disabled="${this.subscribed instanceof Pending}"
-          @click="${this.submit}"
-        >
+        <hb-button size="l" @click="${this.submit}">
           ${msg('Subscribe', {
             id: 'common.subscribe',
             desc: 'Button that submits a subscription.',
@@ -172,10 +168,10 @@ export class SubscribeBlock extends ThemedElement {
   };
 
   private readonly submit = () => {
-    if (this.subscribed instanceof Pending || !this.emailField?.reportValidity()) return;
+    if (!this.emailField?.reportValidity()) return;
     const [firstFieldValue = '', secondFieldValue = ''] =
       this.user instanceof Success ? (this.user.data.displayName?.split(' ') ?? []) : [];
-    void subscribe({ email: this.email, firstFieldValue, secondFieldValue });
+    subscribe({ email: this.email, firstFieldValue, secondFieldValue });
   };
 }
 

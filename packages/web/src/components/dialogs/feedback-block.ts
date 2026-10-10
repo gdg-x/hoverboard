@@ -171,7 +171,7 @@ export class FeedbackBlock extends ThemedElement {
     this.styleRating = event.detail.value;
   }
 
-  private async setFeedback() {
+  private setFeedback() {
     if (!(this.user instanceof Success)) {
       store.dispatch(
         queueSnackbar(msg('Sign in to leave feedback', { id: 'dialogs.feedback.save-signed-out' })),
@@ -182,33 +182,21 @@ export class FeedbackBlock extends ThemedElement {
       return;
     }
 
-    const resultAction = await store.dispatch(
-      setFeedback({
+    setFeedback(
+      {
         id: this.user.data.uid,
         userId: this.user.data.uid,
         parentId: this.sessionId,
         contentRating: this.contentRating,
         styleRating: this.styleRating,
         comment: this.comment || '',
-      }),
+      },
+      () => this.showError(() => this.setFeedback()),
     );
-
-    if (setFeedback.fulfilled.match(resultAction)) {
-      store.dispatch(queueSnackbar(msg('Feedback saved', { id: 'dialogs.feedback.saved' })));
-    } else {
-      store.dispatch(
-        queueComplexSnackbar({
-          label: this.errorMessage(),
-          action: {
-            title: this.retryLabel(),
-            callback: () => this.setFeedback(),
-          },
-        }),
-      );
-    }
+    store.dispatch(queueSnackbar(msg('Feedback saved', { id: 'dialogs.feedback.saved' })));
   }
 
-  private async deleteFeedback() {
+  private deleteFeedback() {
     if (!(this.user instanceof Success)) {
       store.dispatch(
         queueSnackbar(
@@ -221,35 +209,21 @@ export class FeedbackBlock extends ThemedElement {
       return;
     }
 
-    const resultAction = await store.dispatch(
-      deleteFeedback({
-        parentId: this.sessionId,
-        userId: this.user.data.uid,
-        id: this.user.data.uid,
+    deleteFeedback(
+      { parentId: this.sessionId, userId: this.user.data.uid, id: this.user.data.uid },
+      () => this.showError(() => this.deleteFeedback()),
+    );
+    store.dispatch(queueSnackbar(msg('Feedback deleted', { id: 'dialogs.feedback.deleted' })));
+  }
+
+  /** The server refused the write, and the listener has rolled it back. */
+  private showError(retry: () => void) {
+    store.dispatch(
+      queueComplexSnackbar({
+        label: msg('Something went wrong', { id: 'dialogs.feedback.error' }),
+        action: { title: msg('Retry', { id: 'dialogs.feedback.retry' }), callback: retry },
       }),
     );
-
-    if (deleteFeedback.fulfilled.match(resultAction)) {
-      store.dispatch(queueSnackbar(msg('Feedback deleted', { id: 'dialogs.feedback.deleted' })));
-    } else {
-      store.dispatch(
-        queueComplexSnackbar({
-          label: this.errorMessage(),
-          action: {
-            title: this.retryLabel(),
-            callback: () => this.deleteFeedback(),
-          },
-        }),
-      );
-    }
-  }
-
-  private errorMessage() {
-    return msg('Something went wrong', { id: 'dialogs.feedback.error' });
-  }
-
-  private retryLabel() {
-    return msg('Retry', { id: 'dialogs.feedback.retry' });
   }
 
   private onFeedback(feedback: SessionFeedback) {
