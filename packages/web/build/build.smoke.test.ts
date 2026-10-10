@@ -112,6 +112,17 @@ describe('a production build of a minimal site', () => {
     });
   });
 
+  it('lists the home page in the sitemap, and links to it from robots.txt', () => {
+    const locs = (file: string) =>
+      [...build.read(file).matchAll(/<loc>([^<]*)<\/loc>/g)].map(([, loc]) => loc);
+
+    expect(locs('sitemap-index.xml')).toEqual(['https://minimal-site.web.app/sitemap-0.xml']);
+    expect(locs('sitemap-0.xml')).toEqual(['https://minimal-site.web.app/']);
+    expect(build.read('robots.txt')).toContain(
+      'Sitemap: https://minimal-site.web.app/sitemap-index.xml',
+    );
+  });
+
   it('precaches the scripts and the home and offline pages', () => {
     const worker = build.read('service-worker.js');
     const precached = [...worker.matchAll(/url:"([^"]+)"/g)].map((match) => match[1] ?? '');
