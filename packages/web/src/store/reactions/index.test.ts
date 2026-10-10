@@ -2,6 +2,7 @@ import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import reducer, {
   resetReactions,
+  selectAllOwnReactions,
   selectOwnReactionsState,
   selectOwnSessionReactions,
   selectSessionReactions,
@@ -42,6 +43,7 @@ describe('reactions reducer', () => {
     expect(reducer(undefined, { type: '@@INIT' })).toStrictEqual({
       bySession: {},
       own: new Initialized(),
+      ownComplete: false,
     });
   });
 
@@ -73,10 +75,14 @@ describe('reactions reducer', () => {
     expect(next.own).toStrictEqual(new Pending());
     next = reducer(next, { type: 'reactions/ownSuccess', payload: { '101': ['love'] } });
     expect(next.own).toStrictEqual(new Success({ '101': ['love'] }));
+    expect(next.ownComplete).toBe(false);
+    next = reducer(next, { type: 'reactions/ownComplete' });
+    expect(next.ownComplete).toBe(true);
     next = reducer(next, { type: 'reactions/ownFailure', payload: error });
     expect(next.own).toStrictEqual(new Failure(error));
     next = reducer(next, { type: 'reactions/ownReset' });
     expect(next.own).toStrictEqual(new Initialized());
+    expect(next.ownComplete).toBe(false);
   });
 });
 
@@ -144,8 +150,8 @@ describe("the visitor's own reactions", () => {
   it('start listening the first time they are read while signed in, and report what is unsynced', () => {
     vi.mocked(selectUserId).mockReturnValue('ada');
     vi.mocked(subscribeToOwnReactions).mockImplementation((_userId, onNext) => {
-      onNext({ '101': ['love'] }, false);
-      onNext({ '101': ['love', 'funny'] }, true);
+      onNext({ '101': ['love'] }, false, false);
+      onNext({ '101': ['love', 'funny'] }, true, false);
       return vi.fn();
     });
 
@@ -189,6 +195,40 @@ describe("the visitor's own reactions", () => {
 
     expect(selectOwnReactionsState(state())).toStrictEqual(new Initialized());
     expect(subscribeToOwnReactions).not.toHaveBeenCalled();
+  });
+
+  it('mark them complete once the server answers', () => {
+    vi.mocked(selectUserId).mockReturnValue('ada');
+    let complete = false;
+    vi.mocked(getState).mockImplementation(() =>
+      state({ ...reducer(undefined, { type: '@@INIT' }), ownComplete: complete }),
+    );
+    vi.mocked(subscribeToOwnReactions).mockImplementation((_userId, onNext) => {
+      onNext({ '101': ['love'] }, false, false);
+      onNext({ '101': ['love'], '102': ['funny'] }, false, true);
+      complete = true;
+      onNext({ '101': ['love'] }, false, true);
+      return vi.fn();
+    });
+
+    selectOwnReactionsState(state());
+
+    expect(actions().filter(({ type }) => type === 'reactions/ownComplete')).toHaveLength(1);
+    expect(actions().findIndex(({ type }) => type === 'reactions/ownComplete')).toBe(3);
+  });
+
+  it('are all known only once the server has answered', () => {
+    const cached = reducer(undefined, {
+      type: 'reactions/ownSuccess',
+      payload: { '101': ['love'] },
+    });
+    const complete = reducer(cached, { type: 'reactions/ownComplete' });
+
+    expect(selectAllOwnReactions(state(cached))).toBeUndefined();
+    expect(selectAllOwnReactions(state(complete))).toEqual({ '101': ['love'] });
+    expect(
+      selectAllOwnReactions(state(reducer(undefined, { type: 'reactions/ownComplete' }))),
+    ).toBeUndefined();
   });
 
   it("are a session's reactions once loaded, and none before", () => {

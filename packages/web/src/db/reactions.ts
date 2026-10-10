@@ -56,7 +56,7 @@ export type OwnReactions = Record<string, ReactionId[]>;
 /** Listens to the visitor's reactions in every session, and whether some haven't synced. */
 export const subscribeToOwnReactions = (
   userId: string,
-  onNext: (reactions: OwnReactions, pending: boolean) => void,
+  onNext: (reactions: OwnReactions, pending: boolean, fromServer: boolean) => void,
   onError: (error: Error) => void,
 ): Unsubscribe =>
   onSnapshot(
@@ -71,6 +71,7 @@ export const subscribeToOwnReactions = (
           ]),
         ),
         snapshot.metadata.hasPendingWrites,
+        !snapshot.metadata.fromCache,
       ),
     (error) => onError(error),
   );

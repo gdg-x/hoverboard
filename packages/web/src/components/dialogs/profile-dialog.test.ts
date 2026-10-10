@@ -28,7 +28,6 @@ vi.mock('../../store/profiles', async (importOriginal) => ({
 }));
 vi.mock('../../store/reactions', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../../store/reactions')>()),
-  selectOwnReactionsState: (state: RootState) => state.reactions.own,
   setUserReactions: vi.fn(),
 }));
 vi.mock('../../store/snackbars', async (importOriginal) => ({
@@ -46,6 +45,8 @@ interface Setup {
   signedIn?: RootState['user'];
   own?: RootState['profiles']['own'];
   reactions?: RootState['reactions']['own'];
+  complete?: boolean;
+  online?: boolean;
 }
 
 const state = ({
@@ -54,11 +55,14 @@ const state = ({
   signedIn = user(),
   own = new Success(false),
   reactions = new Success({}),
+  complete = true,
+  online = true,
 }: Setup = {}): Partial<RootState> => ({
   dialogs: open ? new Success({ name: DIALOG.PROFILE, ...(data && { data }) }) : new Initialized(),
   user: signedIn,
   profiles: { own, byId: {} },
-  reactions: { own: reactions, bySession: {} },
+  reactions: { own: reactions, ownComplete: complete, bySession: {} },
+  sync: { online, pending: {} },
 });
 
 const render = async (setup: Setup = {}) => {
@@ -225,6 +229,34 @@ describe('profile-dialog', () => {
     await element.updateComplete;
 
     expect(button('Delete')).toHaveAttribute('disabled');
+  });
+
+  it('waits for the reactions from other devices, and asks to connect while offline', async () => {
+    const { element, shadowRoot, button } = await render({
+      own: new Success(ada),
+      reactions: new Success({ '101': ['love'] }),
+      complete: false,
+      online: false,
+    });
+
+    button('Delete profile')!.click();
+    await element.updateComplete;
+
+    expect(button('Delete')).toHaveAttribute('disabled');
+    expect(shadowRoot.querySelectorAll('p')[1]).toHaveTextContent(
+      'Connect to the internet to find all your reactions first.',
+    );
+
+    setStoreState(
+      state({
+        own: new Success(ada),
+        reactions: new Success({ '101': ['love'] }),
+        complete: false,
+      }),
+    );
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelectorAll('p')).toHaveLength(1);
   });
 
   it('goes back to the profile when the visitor cancels', async () => {

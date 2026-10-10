@@ -74,7 +74,7 @@ const state = ({
   },
 }: Setup = {}): Partial<RootState> => ({
   user,
-  reactions: { bySession: { '101': new Success(list) }, own },
+  reactions: { bySession: { '101': new Success(list) }, own, ownComplete: true },
   profiles: { own: ownProfile, byId },
 });
 
@@ -156,7 +156,10 @@ describe('session-reactions', () => {
   });
 
   it('has only the add button before the reactions load', async () => {
-    setStoreState({ ...state(), reactions: { bySession: {}, own: new Initialized() } });
+    setStoreState({
+      ...state(),
+      reactions: { bySession: {}, own: new Initialized(), ownComplete: false },
+    });
     const { element, shadowRoot } = await fixture<SessionReactions>(
       html`<session-reactions .session=${session}></session-reactions>`,
     );

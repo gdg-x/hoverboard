@@ -104,7 +104,7 @@ describe('db/reactions', () => {
           snapshot('101', 'ada', { reactions: ['love'], userId: 'ada' }),
           snapshot('102', 'ada', { reactions: ['funny', 'applause'], userId: 'ada' }),
         ],
-        metadata: { hasPendingWrites: true },
+        metadata: { hasPendingWrites: true, fromCache: false },
       });
       return vi.fn();
     });
@@ -120,7 +120,11 @@ describe('db/reactions', () => {
       expect.any(Function),
       expect.any(Function),
     );
-    expect(onNext).toHaveBeenCalledWith({ '101': ['love'], '102': ['funny', 'applause'] }, true);
+    expect(onNext).toHaveBeenCalledWith(
+      { '101': ['love'], '102': ['funny', 'applause'] },
+      true,
+      true,
+    );
   });
 
   it("saves the visitor's reactions with the server's time", () => {

@@ -13,7 +13,7 @@ import {
 import type { Profile, ProfileData } from '../../models/profile';
 import type { Subscription } from '../../utils/firestore';
 import { dispatch, getState } from '../dispatch';
-import { selectOwnReactionsState } from '../reactions';
+import { selectAllOwnReactions } from '../reactions';
 import { queueSnackbar } from '../snackbars';
 import { setPendingIds } from '../sync';
 import { selectUserId } from '../user';
@@ -107,13 +107,13 @@ export const setOwnProfile = (
 ): void => saveProfile(userId, { name: name.trim(), photoUrl }, failed);
 
 /**
- * Deletes the visitor's reactions and their profile. It needs their reactions, so it does nothing
- * and returns `false` until those have loaded.
+ * Deletes the visitor's reactions and their profile. It needs all their reactions, so it does
+ * nothing and returns `false` until the server has sent them.
  */
 export const deleteOwnProfile = (userId: string): boolean => {
-  const own = selectOwnReactionsState(getState());
-  if (!(own instanceof Success)) return false;
-  deleteProfile(userId, Object.keys(own.data), failed);
+  const own = selectAllOwnReactions(getState());
+  if (!own) return false;
+  deleteProfile(userId, Object.keys(own), failed);
   return true;
 };
 

@@ -157,4 +157,18 @@ describe('sessions/{session}/reactions rules', () => {
       await expect(getDocs(q)).toDeny();
     });
   });
+
+  it('lets a visitor delete every reaction they listed, closed sessions too, then their profile', async () => {
+    const firestore = asOwner();
+    await setDoc(doc(firestore, path('upcoming')), reaction(['love']));
+    const own = query(collectionGroup(firestore, 'reactions'), where('userId', '==', ownerUid));
+
+    const listed = await getDocs(own);
+    expect(listed.docs.map(({ ref }) => ref.path).sort()).toEqual([path('past'), path('upcoming')]);
+    for (const { ref } of listed.docs) await expect(deleteDoc(ref)).toAllow();
+    await expect(deleteDoc(doc(firestore, `profiles/${ownerUid}`))).toAllow();
+
+    expect((await getDocs(own)).empty).toBe(true);
+    expect((await getDoc(doc(firestore, path('unscheduled', otherUid)))).exists()).toBe(true);
+  });
 });

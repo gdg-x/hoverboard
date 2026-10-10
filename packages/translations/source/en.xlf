@@ -104,6 +104,9 @@
 <trans-unit id="dialogs.profile.delete-confirm">
   <source>Delete your profile and all your reactions? Others won't see your name anymore.</source>
 </trans-unit>
+<trans-unit id="dialogs.profile.delete-offline">
+  <source>Connect to the internet to find all your reactions first.</source>
+</trans-unit>
 <trans-unit id="dialogs.profile.delete-yes">
   <source>Delete</source>
 </trans-unit>

@@ -17,13 +17,14 @@ import {
   setOwnProfile,
 } from '../../store/profiles';
 import {
-  type ReactionsState,
-  selectOwnReactionsState,
+  type OwnReactions,
+  selectAllOwnReactions,
   selectOwnSessionReactions,
   setUserReactions,
   toggled,
 } from '../../store/reactions';
 import { queueSnackbar } from '../../store/snackbars';
+import { selectOnline } from '../../store/sync';
 import type { UserState } from '../../store/user';
 import { notEmpty } from '../../utils/strings';
 import '../ui/hb-button';
@@ -75,8 +76,10 @@ export class ProfileDialog extends ThemedComponent {
   @fromStore(selectOwnProfileState)
   private accessor profile!: ProfilesState['own'];
   // Deleting the profile deletes these too, so they load with the dialog.
-  @fromStore(selectOwnReactionsState)
-  private accessor reactions!: ReactionsState['own'];
+  @fromStore(selectAllOwnReactions)
+  private accessor reactions!: OwnReactions | undefined;
+  @fromStore(selectOnline)
+  private accessor online!: boolean;
 
   @state()
   private accessor name = '';
@@ -191,12 +194,17 @@ export class ProfileDialog extends ThemedComponent {
           id: 'dialogs.profile.delete-confirm',
         })}
       </p>
+      ${
+        !this.reactions && !this.online
+          ? html`<p>
+              ${msg('Connect to the internet to find all your reactions first.', {
+                id: 'dialogs.profile.delete-offline',
+              })}
+            </p>`
+          : nothing
+      }
 
-      <hb-button
-        slot="actions"
-        ?disabled="${!(this.reactions instanceof Success)}"
-        @click="${this.delete}"
-      >
+      <hb-button slot="actions" ?disabled="${!this.reactions}" @click="${this.delete}">
         ${msg('Delete', { id: 'dialogs.profile.delete-yes' })}
       </hb-button>
       <hb-button

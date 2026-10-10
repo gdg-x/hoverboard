@@ -18,7 +18,7 @@ import {
 } from '../../db/profiles';
 import type { Profile } from '../../models/profile';
 import { dispatch, getState } from '../dispatch';
-import { selectOwnReactionsState } from '../reactions';
+import { selectAllOwnReactions } from '../reactions';
 import { queueSnackbar } from '../snackbars';
 import { setPendingIds } from '../sync';
 import { selectUserId } from '../user';
@@ -31,7 +31,7 @@ vi.mock('../../db/profiles', async (importOriginal) => ({
   subscribeToProfiles: vi.fn(),
 }));
 vi.mock('../dispatch');
-vi.mock('../reactions', () => ({ selectOwnReactionsState: vi.fn() }));
+vi.mock('../reactions', () => ({ selectAllOwnReactions: vi.fn() }));
 vi.mock('../sync', () => ({ setPendingIds: vi.fn() }));
 vi.mock('../snackbars', () => ({
   queueSnackbar: vi.fn((label: string) => ({ type: 'snackbars/queueSnackbar', payload: label })),
@@ -212,17 +212,15 @@ describe('setOwnProfile', () => {
 describe('deleteOwnProfile', () => {
   it("deletes the visitor's reactions in every session, and their profile", () => {
     vi.mocked(getState).mockReturnValue(state());
-    vi.mocked(selectOwnReactionsState).mockReturnValue(
-      new Success({ '101': ['love'], '102': ['funny'] }),
-    );
+    vi.mocked(selectAllOwnReactions).mockReturnValue({ '101': ['love'], '102': ['funny'] });
 
     expect(deleteOwnProfile('ada')).toBe(true);
     expect(deleteProfile).toHaveBeenCalledWith('ada', ['101', '102'], expect.any(Function));
   });
 
-  it("waits until the visitor's reactions have loaded", () => {
+  it("waits until the server has sent all the visitor's reactions", () => {
     vi.mocked(getState).mockReturnValue(state());
-    vi.mocked(selectOwnReactionsState).mockReturnValue(new Pending());
+    vi.mocked(selectAllOwnReactions).mockReturnValue(undefined);
 
     expect(deleteOwnProfile('ada')).toBe(false);
     expect(deleteProfile).not.toHaveBeenCalled();

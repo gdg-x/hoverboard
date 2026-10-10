@@ -24,9 +24,15 @@ export interface ReactionsState {
   bySession: Record<string, SessionReactionsState>;
   /** The visitor's own reactions in every session. */
   own: RemoteData<Error, OwnReactions>;
+  /** The server has answered, so `own` has the reactions from other devices too, not only the cached ones. */
+  ownComplete: boolean;
 }
 
-const initialState: ReactionsState = { bySession: {}, own: new Initialized() };
+const initialState: ReactionsState = {
+  bySession: {},
+  own: new Initialized(),
+  ownComplete: false,
+};
 
 const slice = createSlice({
   name: 'reactions',
@@ -53,11 +59,15 @@ const slice = createSlice({
     ownSuccess: (state, action: PayloadAction<OwnReactions>) => {
       state.own = new Success(action.payload);
     },
+    ownComplete: (state) => {
+      state.ownComplete = true;
+    },
     ownFailure: (state, action: PayloadAction<Error>) => {
       state.own = new Failure(action.payload);
     },
     ownReset: (state) => {
       state.own = new Initialized();
+      state.ownComplete = false;
     },
   },
 });
@@ -69,6 +79,7 @@ const {
   sessionReset,
   ownPending,
   ownSuccess,
+  ownComplete,
   ownFailure,
   ownReset,
 } = slice.actions;
@@ -119,10 +130,11 @@ const subscribeToOwn = () => {
   dispatch(ownPending());
   ownListener = subscribeToOwnReactions(
     userId,
-    (reactions, pending) => {
+    (reactions, pending, fromServer) => {
       setPendingIds('reactions', unsyncedReactions(reactions, pending, confirmed));
       if (!pending) confirmed = reactions;
       dispatch(ownSuccess(reactions));
+      if (fromServer && !getState().reactions.ownComplete) dispatch(ownComplete());
     },
     (error) => dispatch(ownFailure(error)),
   );
@@ -173,6 +185,15 @@ export const selectOwnReactionsState = (state: RootState): ReactionsState['own']
 export const selectOwnSessionReactions = (state: RootState, sessionId: string): ReactionId[] => {
   const own = selectOwnReactionsState(state);
   return own instanceof Success ? (own.data[sessionId] ?? []) : [];
+};
+
+/**
+ * Every session the visitor reacted to, from any device, once the server has answered. Until then,
+ * the cache may miss some, which deleting the profile would leave behind.
+ */
+export const selectAllOwnReactions = (state: RootState): OwnReactions | undefined => {
+  const own = selectOwnReactionsState(state);
+  return own instanceof Success && state.reactions.ownComplete ? own.data : undefined;
 };
 
 export default slice.reducer;
