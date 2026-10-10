@@ -9,7 +9,13 @@ import { FilterGroupKey } from '../../models/filter-group';
 import type { BuiltDay, BuiltSession } from '../../schedule/build-schedule';
 import { wallClock, zonedTime } from '../../utils/time-zone';
 import type { SessionElement } from '../../components/schedule/session-element';
-import { matchesFilters, type ScheduleDay, withTimeColumn } from './schedule-day';
+import {
+  matchesFilters,
+  narrowGridArea,
+  type ScheduleDay,
+  trackColumns,
+  withTimeColumn,
+} from './schedule-day';
 import './schedule-day';
 
 const session = (id: string, title: string, tags: string[]) =>
@@ -106,6 +112,21 @@ describe('schedule-day', () => {
     expect(sessions.map((session) => session.session?.id)).toEqual(['web']);
   });
 
+  it('shows only the columns of the tracks picked in the filters', async () => {
+    setStoreState({ filters: new Success([{ group: FilterGroupKey.track, tag: 'room-2' }]) });
+    const { shadowRoot } = await render();
+
+    expect([...shadowRoot.querySelectorAll('.track')].map((track) => track.textContent)).toEqual([
+      'Room 2',
+    ]);
+    const sessions = [...shadowRoot.querySelectorAll<SessionElement>('session-element')];
+    expect(sessions.map((session) => session.session?.id)).toEqual(['android']);
+    expect(shadowRoot.querySelector<HTMLElement>('.block')!.style.gridArea).toBe('1 / 2 / 1 / 3');
+    expect(shadowRoot.querySelector<HTMLElement>('.grid')!.style.getPropertyValue('--tracks')).toBe(
+      '1',
+    );
+  });
+
   it('offers to clear filters that match nothing', async () => {
     setStoreState({ filters: new Success([{ group: FilterGroupKey.tags, tag: 'design' }]) });
     const { shadowRoot } = await render();
@@ -196,7 +217,54 @@ describe('withTimeColumn', () => {
   });
 });
 
+describe('trackColumns', () => {
+  const tracks = [
+    { id: 'main', title: 'Main hall' },
+    { id: 'room-2', title: 'Room 2' },
+    { id: 'room-3', title: 'Room 3' },
+  ];
+
+  it('shows every column without a track filter', () => {
+    expect(trackColumns(tracks, [{ group: FilterGroupKey.tags, tag: 'web' }])).toEqual([1, 2, 3]);
+  });
+
+  it('shows the columns of any of the picked tracks', () => {
+    expect(
+      trackColumns(tracks, [
+        { group: FilterGroupKey.track, tag: 'main' },
+        { group: FilterGroupKey.track, tag: 'room-3' },
+      ]),
+    ).toEqual([1, 3]);
+  });
+
+  it('shows no column when the picked tracks are not on the day', () => {
+    expect(trackColumns(tracks, [{ group: FilterGroupKey.track, tag: 'expo' }])).toEqual([]);
+  });
+
+  it('keeps the one column of a day without tracks', () => {
+    expect(trackColumns([], [{ group: FilterGroupKey.track, tag: 'main' }])).toEqual([1]);
+  });
+});
+
+describe('narrowGridArea', () => {
+  it('moves a block to its column among the ones shown', () => {
+    expect(narrowGridArea('2 / 3 / 4 / 4', [1, 3])).toBe('2 / 2 / 4 / 3');
+  });
+
+  it('narrows a session that spans every track to the tracks shown', () => {
+    expect(narrowGridArea('2 / 1 / 3 / 4', [1, 3])).toBe('2 / 1 / 3 / 3');
+  });
+
+  it('hides a block in a track that is not shown', () => {
+    expect(narrowGridArea('2 / 2 / 3 / 3', [1, 3])).toBeUndefined();
+  });
+});
+
 describe('matchesFilters', () => {
+  it('leaves track filters to the columns', () => {
+    expect(matchesFilters(web, [{ group: FilterGroupKey.track, tag: 'room-2' }])).toBe(true);
+  });
+
   it('matches every filter, by tag or complexity', () => {
     const session = { ...web, complexity: 'Beginner' };
 

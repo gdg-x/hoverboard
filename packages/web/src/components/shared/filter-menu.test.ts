@@ -122,6 +122,32 @@ describe('filter-menu', () => {
     });
   });
 
+  it('names tracks by their titles, in the panel and once selected', async () => {
+    const { element, shadowRoot } = await render({
+      filterGroups: [
+        {
+          key: FilterGroupKey.track,
+          filters: [{ group: FilterGroupKey.track, tag: 'expo-hall', label: 'Expo hall' }],
+        },
+      ],
+      selectedFilters: [{ group: FilterGroupKey.track, tag: 'expo-hall' }],
+    });
+    shadowRoot.querySelector('hb-button')!.click();
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.group-title')).toHaveTextContent('Tracks');
+    expect(shadowRoot.querySelector('.panel hb-chip')).toHaveTextContent('Expo hall');
+    expect(shadowRoot.querySelector<HbChip>('.panel hb-chip')!.selected).toBe(true);
+    expect(shadowRoot.querySelector('ul.selected hb-chip')).toHaveTextContent('Expo hall');
+
+    shadowRoot.querySelector<HTMLElement>('.panel hb-chip')!.click();
+
+    expect(filterUtils.toggleFilter).toHaveBeenCalledWith({
+      group: FilterGroupKey.track,
+      tag: 'expo-hall',
+    });
+  });
+
   it('clears every filter', async () => {
     const { shadowRoot } = await render({
       selectedFilters: [{ group: FilterGroupKey.tags, tag: 'android' }],

@@ -14,7 +14,7 @@ import '../ui/hb-chip';
 import { ThemedElement } from '../themed-element';
 
 /**
- * A Filters button that shows the tag and complexity chips under it, and the selected filters as
+ * A Filters button that shows the track, tag and complexity chips under it, and the selected filters
  * chips that remove themselves. Filters live in the URL, so they survive reloads and links.
  */
 @customElement('filter-menu')
@@ -102,9 +102,22 @@ export class FilterMenu extends ThemedElement {
   accessor opened = false;
 
   private groupTitle(key: FilterGroupKey) {
-    return key === FilterGroupKey.tags
-      ? msg('Tags', { id: 'shared.filter-menu.tags' })
-      : msg('Complexity', { id: 'shared.filter-menu.complexity' });
+    switch (key) {
+      case FilterGroupKey.tags:
+        return msg('Tags', { id: 'shared.filter-menu.tags' });
+      case FilterGroupKey.track:
+        return msg('Tracks', { id: 'shared.filter-menu.tracks' });
+      default:
+        return msg('Complexity', { id: 'shared.filter-menu.complexity' });
+    }
+  }
+
+  // Selected filters come from the URL, which has the tag but not the label.
+  private label(selected: Filter) {
+    const filter = this.filterGroups
+      .find((group) => group.key === selected.group)
+      ?.filters.find((item) => generateClassName(item.tag) === selected.tag);
+    return filter?.label ?? selected.tag;
   }
 
   private resultsLabel(count: number) {
@@ -140,7 +153,7 @@ export class FilterMenu extends ThemedElement {
                     (filter) => html`
                       <li>
                         <hb-chip filter selected @click="${() => this.toggle(filter)}">
-                          ${filter.tag}
+                          ${this.label(filter)}
                         </hb-chip>
                       </li>
                     `,
@@ -180,7 +193,7 @@ export class FilterMenu extends ThemedElement {
                           style="${styleMap(group.key === FilterGroupKey.tags ? tagChipStyle(filter.tag) : {})}"
                           @click="${() => this.toggle(filter)}"
                         >
-                          ${filter.tag}
+                          ${filter.label ?? filter.tag}
                         </hb-chip>
                       </li>
                     `,

@@ -299,6 +299,9 @@
 <trans-unit id="common.sign-in">
   <source>Sign in</source>
 </trans-unit>
+<trans-unit id="shared.filter-menu.tracks">
+  <source>Tracks</source>
+</trans-unit>
 <trans-unit id="shared.filter-menu.complexity">
   <source>Complexity</source>
 </trans-unit>

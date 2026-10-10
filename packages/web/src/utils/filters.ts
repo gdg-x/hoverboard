@@ -17,15 +17,10 @@ export const clearFilters = () => setQueryString('');
 export const parseFilters = (): Filter[] => {
   // Pages are built without a query string.
   if (isServer) return [];
-  const { search } = window.location;
-  const searchParams = new URLSearchParams(search);
-  const tags = searchParams.getAll(FilterGroupKey.tags).map((tag) => {
-    return { group: FilterGroupKey.tags, tag };
-  });
-  const complexities = searchParams.getAll(FilterGroupKey.complexity).map((tag) => {
-    return { group: FilterGroupKey.complexity, tag };
-  });
-  return [...tags, ...complexities];
+  const searchParams = new URLSearchParams(window.location.search);
+  return [FilterGroupKey.tags, FilterGroupKey.complexity, FilterGroupKey.track].flatMap((group) =>
+    searchParams.getAll(group).map((tag) => ({ group, tag })),
+  );
 };
 
 const matchingFilter = (filterA: Filter, filterB: Filter) => {
