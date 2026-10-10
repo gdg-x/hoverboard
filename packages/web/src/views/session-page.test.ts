@@ -13,11 +13,22 @@ import { openVideoDialog } from '../store/ui';
 import { acceptingFeedback } from '../utils/feedback';
 import { updateImageMetadata, updateTextMetadata } from '../utils/metadata';
 import { goto } from '../utils/navigation';
+import { setStoreState } from '../../__tests__/helpers/store';
+import { store } from '../store';
+import { getScheduleDay } from '../utils/dates';
+import { wallClock, zonedTime } from '../utils/time-zone';
+import { otherTimeZone } from '../utils/visitor-time';
+import { isLive, sessionStream } from '../utils/stream';
 import { feedbackBlock, reactionsRow, type SessionPage } from './session-page';
 import './session-page';
 
 vi.mock('../utils/metadata');
 vi.mock('../utils/feedback');
+vi.mock('../utils/stream');
+vi.mock('../utils/visitor-time', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../utils/visitor-time')>()),
+  otherTimeZone: vi.fn(() => true),
+}));
 vi.mock('../store/reactions', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../store/reactions')>()),
   watchSessionReactions: vi.fn(),
@@ -80,11 +91,16 @@ describe('session-page', () => {
   beforeEach(() => {
     vi.mocked(selectSession).mockReturnValue(session);
     vi.mocked(acceptingFeedback).mockReturnValue(false);
+    vi.mocked(isLive).mockReturnValue(false);
+    vi.mocked(sessionStream).mockReturnValue('https://stream.example/main');
+    vi.mocked(otherTimeZone).mockReturnValue(true);
   });
 
   afterEach(() => {
     litRender(nothing, document.body);
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.useRealTimers();
   });
 
   it('titles the page with the session and keeps its share image', async () => {
@@ -120,6 +136,32 @@ describe('session-page', () => {
     expect(chips.session).toBe(session);
     expect(chips.nameSponsor).toBe(true);
     expect(chips).toHaveAttribute('label', 'Session details');
+  });
+
+  it("shows the day and times in the visitor's time zone when they chose so", async () => {
+    setStoreState({ ui: { ...store.getState().ui, localTime: true } });
+    const { shadowRoot } = await render();
+    const start = wallClock(zonedTime('2024-01-02', '10:00', 'Europe/Kyiv'));
+    const end = wallClock(zonedTime('2024-01-02', '10:40', 'Europe/Kyiv'));
+
+    expect(shadowRoot.querySelector<SessionChips>('session-chips.details')!.details).toEqual([
+      getScheduleDay(start.date),
+      `${start.time}–${end.time} (your time)`,
+      '40 min',
+      'Main hall',
+      'Beginner',
+      'English',
+    ]);
+  });
+
+  it("keeps the event's times when the visitor is in its time zone", async () => {
+    vi.mocked(otherTimeZone).mockReturnValue(false);
+    setStoreState({ ui: { ...store.getState().ui, localTime: true } });
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector<SessionChips>('session-chips.details')!.details).toContain(
+      '10:00–10:40',
+    );
   });
 
   it('leaves out the language when the session has none', async () => {
@@ -229,5 +271,42 @@ describe('session-page', () => {
     const { shadowRoot } = await render();
 
     expect(shadowRoot.querySelector('#feedback')).toBeNull();
+  });
+
+  describe('watch live', () => {
+    it('links to the stream first while the session is on', async () => {
+      vi.mocked(isLive).mockReturnValue(true);
+      const { shadowRoot } = await render();
+
+      const button = shadowRoot.querySelector('.live-button');
+      expect(button).toHaveTextContent('Watch live');
+      expect(button).toHaveAttribute('href', 'https://stream.example/main');
+      expect(button).toHaveAttribute('target', '_blank');
+      expect(shadowRoot.querySelector('.actions')!.firstElementChild).toBe(button);
+      expect(sessionStream).toHaveBeenCalledWith(session);
+    });
+
+    it('has no link before or after the session, or without a stream', async () => {
+      const { shadowRoot } = await render();
+      expect(shadowRoot.querySelector('.live-button')).toBeNull();
+
+      litRender(nothing, document.body);
+      vi.mocked(isLive).mockReturnValue(true);
+      vi.mocked(sessionStream).mockReturnValue(undefined);
+      const withoutStream = await render();
+      expect(withoutStream.shadowRoot.querySelector('.live-button')).toBeNull();
+    });
+
+    it('checks each minute whether the session is on', async () => {
+      vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval'] });
+      const { element, shadowRoot } = await render();
+      expect(shadowRoot.querySelector('.live-button')).toBeNull();
+
+      vi.mocked(isLive).mockReturnValue(true);
+      vi.advanceTimersByTime(60 * 1000);
+      await element.updateComplete;
+
+      expect(shadowRoot.querySelector('.live-button')).not.toBeNull();
+    });
   });
 });

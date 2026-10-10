@@ -9,17 +9,11 @@
     "email": "organizer@example.com"
   },
   "event": {
+    "attendance": "online",
+    "stream": "https://stream.example/minimal",
     "startDate": "2027-10-15",
     "endDate": "2027-10-15",
-    "timezone": "UTC",
-    "location": {
-      "name": "Venue",
-      "city": "City",
-      "short": "City",
-      "address": "1 Main Street, City",
-      "pointer": { "latitude": 0, "longitude": 0, "zoom": 5 },
-      "mapCenter": { "latitude": 0, "longitude": 0 }
-    }
+    "timezone": "UTC"
   },
   "social": {
     "hashtag": "Minimal",

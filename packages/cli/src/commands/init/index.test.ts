@@ -58,6 +58,7 @@ const details: SiteDetails = {
   startDate: '2027-10-15',
   endDate: '2027-10-16',
   timezone: 'UTC',
+  attendance: 'inPerson',
   venue: 'Hall',
   address: '1 Main Street',
   city: 'Springfield',

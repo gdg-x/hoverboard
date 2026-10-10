@@ -1,9 +1,10 @@
 import { msg, str } from '@lit/localize';
 import { css, html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import {
   aboutBlock,
+  attendance,
   decorations,
   eventDates,
   featuredVideos,
@@ -12,12 +13,16 @@ import {
   heroIllustration,
   heroSettings,
   location,
+  siteAttendance,
+  siteLocation,
   timeZone,
   title,
 } from '../../config/site';
 import { openVideoDialog } from '../../store/ui';
+import { currentTime } from '../../utils/clock';
 import { getEventDates } from '../../utils/dates';
 import { type EventState, daysUntilStart, eventState } from '../../utils/event-state';
+import { eventPlace, type Attending } from '../../utils/place';
 import '../shared/hoverboard-icon';
 import { navigationLabel } from '../shell/navigation-label';
 import { ThemedComponent } from '../themed-component';
@@ -164,12 +169,17 @@ export class HomeHero extends ThemedComponent {
   @property({ type: Number, attribute: 'days-to-go' })
   accessor daysToGo = 0;
 
+  // Site.json's on the server and in the first render, so hydration matches. A demo can change it.
+  @state()
+  private accessor where: Attending = { attendance: siteAttendance, location: siteLocation };
+
   // The event may have come closer, started or ended since the build.
   override firstUpdated() {
-    const now = new Date();
+    const now = new Date(currentTime());
     const dates = { startDate: eventDates.start, endDate: eventDates.end, timezone: timeZone };
     this.eventState = eventState(now, dates);
     this.daysToGo = daysUntilStart(now, dates);
+    this.where = { attendance, location };
   }
 
   override render() {
@@ -192,8 +202,11 @@ export class HomeHero extends ThemedComponent {
               </li>
               <li>
                 <hb-chip>
-                  <hoverboard-icon slot="icon" name="location"></hoverboard-icon>
-                  ${location.short}
+                  <hoverboard-icon
+                    slot="icon"
+                    name="${this.where.location ? 'location' : 'monitor'}"
+                  ></hoverboard-icon>
+                  ${eventPlace(({ short }) => short, this.where)}
                 </hb-chip>
               </li>
             </ul>

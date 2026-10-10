@@ -61,7 +61,7 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
     return;
   }
 
-  const { timeZone } = getSiteConfig();
+  const { timeZone, attendance, stream, trackStreams = {} } = getSiteConfig();
   const todayDay = getTodayDateString(timeZone);
   const [notificationsConfigSnapshot, todaySessions] = await Promise.all([
     fetchConfig<{ icon?: string }>('notifications'),
@@ -76,8 +76,27 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
 
   const upcomingSessions = filterUpcoming(
     todaySessions.docs.flatMap((doc) => {
-      const { title, startTime } = doc.data() as { title?: string; startTime?: string };
-      return startTime ? [{ id: doc.id, title, startTime }] : [];
+      const data = doc.data() as {
+        title?: string;
+        startTime?: string;
+        track?: string;
+        stream?: string;
+      };
+      // As the site picks it: the session's link, its track's, then the event's when it's online.
+      const link =
+        data.stream ??
+        (data.track ? trackStreams[data.track] : undefined) ??
+        (attendance && attendance !== 'inPerson' ? stream : undefined);
+      return data.startTime
+        ? [
+            {
+              id: doc.id,
+              title: data.title,
+              startTime: data.startTime,
+              stream: link?.startsWith('https://') ? link : undefined,
+            },
+          ]
+        : [];
     }),
     createTimeWindow(3, 3),
     10, // notification offset in minutes
@@ -106,6 +125,7 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
       body: `Starts ${parseTimeAndGetFromNow(session.startTime, timeZone)}`,
       icon,
       path: `/sessions/${session.id}`,
+      ...(session.stream && { stream: session.stream }),
     };
 
     // The selection window is wider than the 5 minute schedule interval, so consecutive runs

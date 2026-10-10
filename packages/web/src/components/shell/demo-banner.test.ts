@@ -1,13 +1,28 @@
 import { fireEvent, within } from '@testing-library/dom';
 import { html, render as litRender, nothing } from 'lit';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { decorations, density, themeName } from '../../config/site';
+import { decorations, density, siteAttendance, themeName } from '../../config/site';
 import { COLOR_SCHEME_KEY } from '../../utils/color-scheme';
-import { DEMO_DECORATIONS_KEY, DEMO_DENSITY_KEY, DEMO_THEME_KEY } from '../../utils/demo';
+import {
+  chooseDemoAttendance,
+  chooseDemoTime,
+  DEMO_ATTENDANCE_KEY,
+  DEMO_DECORATIONS_KEY,
+  DEMO_DENSITY_KEY,
+  DEMO_THEME_KEY,
+  DEMO_TIME_KEY,
+} from '../../utils/demo';
 import type { HbSwitch } from '../ui/hb-switch';
 import type { DemoBanner } from './demo-banner';
 import './demo-banner';
+
+// It reloads the page, which jsdom can't.
+vi.mock('../../utils/demo', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../../utils/demo')>()),
+  chooseDemoAttendance: vi.fn(),
+  chooseDemoTime: vi.fn(),
+}));
 
 const root = document.documentElement;
 
@@ -37,7 +52,9 @@ describe('demo-banner', () => {
     expect(view.getByText('Spacing')).toHaveClass('visually-hidden');
     expect(view.getByRole('combobox', { name: 'Theme' })).toHaveValue(themeName);
     expect(
-      view.getAllByRole('option').map((option) => (option as HTMLOptionElement).value),
+      within(view.getByRole('combobox', { name: 'Theme' }))
+        .getAllByRole('option')
+        .map((option) => (option as HTMLOptionElement).value),
     ).toEqual(['festival', 'spotlight', 'paper', 'glass']);
     const spacing = within(view.getByRole('group', { name: 'Spacing' }));
     expect(spacing.getAllByRole('radio').map((radio) => radio.getAttribute('value'))).toEqual([
@@ -102,6 +119,64 @@ describe('demo-banner', () => {
 
     expect(view.getByRole('combobox', { name: 'Theme' })).toHaveValue('spotlight');
     expect(view.getByRole('radio', { name: 'Default' })).toBeChecked();
+  });
+
+  it("offers in person, hybrid and online, starting from the site's", async () => {
+    const { view } = await render();
+    const select = view.getByRole('combobox', { name: 'How people attend' });
+
+    expect(select).toHaveValue(siteAttendance);
+    expect(
+      within(select)
+        .getAllByRole('option')
+        .map((option) => option.textContent?.trim()),
+    ).toEqual(['In person', 'Hybrid', 'Online']);
+  });
+
+  it('switches how people attend, and forgets the choice for the site', async () => {
+    const { view } = await render();
+    const select = view.getByRole('combobox', { name: 'How people attend' });
+    const other = siteAttendance === 'online' ? 'inPerson' : 'online';
+
+    fireEvent.change(select, { target: { value: other } });
+    expect(chooseDemoAttendance).toHaveBeenLastCalledWith(other);
+
+    fireEvent.change(select, { target: { value: siteAttendance } });
+    expect(chooseDemoAttendance).toHaveBeenLastCalledWith(null);
+  });
+
+  it('shows the stored attendance after the first render', async () => {
+    localStorage.setItem(DEMO_ATTENDANCE_KEY, 'hybrid');
+    const { element, view } = await render();
+    await element.updateComplete;
+
+    expect(view.getByRole('combobox', { name: 'How people attend' })).toHaveValue('hybrid');
+  });
+
+  it('makes it before, during or after the event, or now again', async () => {
+    const { view } = await render();
+    const select = view.getByRole('combobox', { name: 'When' });
+
+    expect(select).toHaveValue('now');
+    expect(
+      within(select)
+        .getAllByRole('option')
+        .map((option) => option.textContent?.trim()),
+    ).toEqual(['Now', 'Before the event', 'During the event', 'After the event']);
+
+    fireEvent.change(select, { target: { value: 'during' } });
+    expect(chooseDemoTime).toHaveBeenLastCalledWith('during');
+
+    fireEvent.change(select, { target: { value: 'now' } });
+    expect(chooseDemoTime).toHaveBeenLastCalledWith(null);
+  });
+
+  it('shows the stored time after the first render', async () => {
+    localStorage.setItem(DEMO_TIME_KEY, 'after');
+    const { element, view } = await render();
+    await element.updateComplete;
+
+    expect(view.getByRole('combobox', { name: 'When' })).toHaveValue('after');
   });
 
   it('keeps its brightness toggle in sync with the one in the footer', async () => {

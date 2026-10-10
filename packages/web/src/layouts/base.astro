@@ -18,6 +18,7 @@ import { BUILD_META } from '../utils/build';
 import { colorSchemeScript } from '../utils/color-scheme';
 import { demoScript } from '../utils/demo';
 import { eventState } from '../utils/event-state';
+import { eventPlace } from '../utils/place';
 
 interface Props {
   title?: string;
@@ -161,7 +162,7 @@ await demoBanner;
     <meta content={image} name="twitter:image" />
     {imageAlt && <meta content={imageAlt} name="twitter:image:alt" />}
     <meta name="twitter:label1" value="Location" />
-    <meta name="twitter:data1" value={site.event.location.name} />
+    <meta name="twitter:data1" value={eventPlace(({ name }) => name)} />
 
     {fontOrigins.map((origin) => (
       <link crossorigin href={origin} rel="preconnect" />

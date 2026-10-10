@@ -6,6 +6,7 @@ import { setFeatures } from '../../../__tests__/helpers/features';
 import type { BuiltSession } from '../../schedule/build-schedule';
 import { openFeedbackDialog } from '../../store/dialogs';
 import { acceptingFeedback } from '../../utils/feedback';
+import { isLive, sessionStream } from '../../utils/stream';
 import type { SaveButton } from './save-button';
 import { formatDuration, type SessionCard } from './session-card';
 import type { SessionChips } from './session-chips';
@@ -17,6 +18,7 @@ vi.mock('../../store/dialogs', async (importOriginal) => ({
   openFeedbackDialog: vi.fn(),
 }));
 vi.mock('../../utils/feedback');
+vi.mock('../../utils/stream');
 
 const mockAcceptingFeedback = vi.mocked(acceptingFeedback);
 
@@ -140,6 +142,42 @@ describe('session-card', () => {
 
     expect(shadowRoot.querySelector('hb-icon-button.feedback')).toBeNull();
     expect(shadowRoot.querySelector('save-button')).toBeInTheDocument();
+  });
+
+  describe('live', () => {
+    const now = new Date('2024-01-02T08:10:00Z');
+
+    beforeEach(() => {
+      vi.mocked(isLive).mockReturnValue(true);
+      vi.mocked(sessionStream).mockReturnValue('https://stream.example/main');
+    });
+
+    it('says so before the track while the session is on', async () => {
+      const { shadowRoot } = await render({ now });
+
+      expect(shadowRoot.querySelector('.meta .live')).toHaveTextContent('Live');
+      expect(shadowRoot.querySelector('.meta')).toHaveTextContent(/^Live\s*Main hall/);
+      expect(isLive).toHaveBeenCalledWith(session, now.getTime());
+    });
+
+    it('is not live before the schedule sets the time, which the server never does', async () => {
+      const { shadowRoot } = await render();
+
+      expect(shadowRoot.querySelector('.live')).toBeNull();
+      expect(isLive).not.toHaveBeenCalled();
+    });
+
+    it('is not live outside the session, or without a stream to watch', async () => {
+      vi.mocked(isLive).mockReturnValue(false);
+      const { shadowRoot } = await render({ now });
+      expect(shadowRoot.querySelector('.live')).toBeNull();
+
+      litRender(nothing, document.body);
+      vi.mocked(isLive).mockReturnValue(true);
+      vi.mocked(sessionStream).mockReturnValue(undefined);
+      const withoutStream = await render({ now });
+      expect(withoutStream.shadowRoot.querySelector('.live')).toBeNull();
+    });
   });
 });
 

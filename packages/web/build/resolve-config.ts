@@ -24,8 +24,23 @@ interface HeroSettings {
   home?: { background?: { image: string }; illustration?: string };
 }
 
-type Site = typeof import('../defaults/site.json') &
-  typeof import('../../config/site.json') & { url: string; heroSettings?: HeroSettings };
+/** How people attend the event. */
+export type Attendance = 'inPerson' | 'online' | 'hybrid';
+
+type SiteJson = typeof import('../defaults/site.json') & typeof import('../../config/site.json');
+/** `event.location` in site.json. */
+export type Venue = SiteJson['event']['location'];
+
+type Site = Omit<SiteJson, 'event'> & {
+  url: string;
+  heroSettings?: HeroSettings;
+  event: Omit<SiteJson['event'], 'attendance' | 'location'> & {
+    attendance: Attendance;
+    stream?: string;
+    /** Required, except for an online event. */
+    location?: Venue;
+  };
+};
 type Resources = typeof import('../../config/content/resources.json');
 
 /** Template data. Each file has its own namespace, for example `{{ site.url }}`. */
@@ -99,11 +114,14 @@ const readSiteJson = <T>(paths: ConfigPaths, file: string): T => {
 };
 
 const formatErrors = (file: string, errors: ErrorObject[] | null | undefined): string[] =>
-  (errors ?? []).map(({ instancePath, message, params }) => {
-    const property = params['additionalProperty'] as string | undefined;
-    const extra = property ? ` "${property}"` : '';
-    return `${file}${instancePath}: ${message ?? 'is invalid'}${extra}`;
-  });
+  (errors ?? [])
+    // `if` only repeats the errors of its branch.
+    .filter(({ keyword }) => keyword !== 'if')
+    .map(({ instancePath, message, params }) => {
+      const property = params['additionalProperty'] as string | undefined;
+      const extra = property ? ` "${property}"` : '';
+      return `${file}${instancePath}: ${message ?? 'is invalid'}${extra}`;
+    });
 
 const isUrl = (value: string) => /^https?:\/\//.test(value);
 
@@ -142,6 +160,14 @@ const featureErrors = (site: Site, resources: Resources): string[] => {
     errors.push(
       `site.json/auth/providers: ${needSignIn.join(' and ')} need a way to sign in, and there is none`,
     );
+  }
+  if (site.event.attendance === 'online') {
+    if (features.map) {
+      errors.push('site.json/features/map: needs a venue, and event.attendance is online');
+    }
+    if (!site.event.stream) {
+      errors.push('site.json/event/stream: an online event needs a link to watch it');
+    }
   }
 
   const links: [string, string][] = [
@@ -387,6 +413,16 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
     ]);
     errors.push(...fonts.errors);
     warnings.push(...fonts.warnings);
+    const tracks = (site.schedule as { tracks?: { stream?: string }[] }).tracks ?? [];
+    if (
+      site.event.attendance === 'hybrid' &&
+      !site.event.stream &&
+      !tracks.some(({ stream }) => stream)
+    ) {
+      warnings.push(
+        'site.json/event/stream: a hybrid event has no link to watch it, so people online have nowhere to go',
+      );
+    }
   }
 
   return {

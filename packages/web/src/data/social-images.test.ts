@@ -35,7 +35,7 @@ const session = (extra: Partial<Session> = {}) =>
     ...extra,
   }) as Session;
 
-const place = `${location.name}, ${location.short}`;
+const place = `${location!.name}, ${location!.short}`;
 const host = new URL(url).host;
 
 describe('titleSize', () => {

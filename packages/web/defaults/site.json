@@ -2,6 +2,9 @@
   "basepath": "/",
   "image": "images/social-share.jpg",
   "icon": "images/icon.png",
+  "event": {
+    "attendance": "inPerson"
+  },
   "schedule": {
     "published": true
   },

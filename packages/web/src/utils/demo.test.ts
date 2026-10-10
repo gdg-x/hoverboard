@@ -1,13 +1,19 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   applyDemoChoices,
   chooseDecorations,
   chooseDemo,
+  chooseDemoAttendance,
+  chooseDemoTime,
+  DEMO_ATTENDANCE_KEY,
   DEMO_DECORATIONS_KEY,
   DEMO_DENSITY_KEY,
   DEMO_THEME_KEY,
+  DEMO_TIME_KEY,
   demoScript,
+  readDemoAttendance,
   readDemoChoices,
+  readDemoTime,
 } from './demo';
 
 const root = document.documentElement;
@@ -73,6 +79,43 @@ describe('demo choices', () => {
     chooseDemo('density', null);
     expect(localStorage.getItem(DEMO_DENSITY_KEY)).toBeNull();
     expect(root).not.toHaveAttribute('data-density');
+  });
+
+  it('reads how people attend, ignoring unknown values', () => {
+    expect(readDemoAttendance()).toBeNull();
+    localStorage.setItem(DEMO_ATTENDANCE_KEY, 'hybrid');
+    expect(readDemoAttendance()).toBe('hybrid');
+    localStorage.setItem(DEMO_ATTENDANCE_KEY, 'remote');
+    expect(readDemoAttendance()).toBeNull();
+  });
+
+  it('stores how people attend, or forgets it, then reloads', () => {
+    const reload = vi.fn();
+
+    chooseDemoAttendance('online', reload);
+    expect(localStorage.getItem(DEMO_ATTENDANCE_KEY)).toBe('online');
+    expect(reload).toHaveBeenCalledTimes(1);
+
+    chooseDemoAttendance(null, reload);
+    expect(localStorage.getItem(DEMO_ATTENDANCE_KEY)).toBeNull();
+    expect(reload).toHaveBeenCalledTimes(2);
+  });
+
+  it('stores when it is, or forgets it, then reloads, and reads only known values', () => {
+    const reload = vi.fn();
+    expect(readDemoTime()).toBeNull();
+
+    chooseDemoTime('during', reload);
+    expect(localStorage.getItem(DEMO_TIME_KEY)).toBe('during');
+    expect(readDemoTime()).toBe('during');
+    expect(reload).toHaveBeenCalledTimes(1);
+
+    chooseDemoTime(null, reload);
+    expect(localStorage.getItem(DEMO_TIME_KEY)).toBeNull();
+    expect(reload).toHaveBeenCalledTimes(2);
+
+    localStorage.setItem(DEMO_TIME_KEY, 'tomorrow');
+    expect(readDemoTime()).toBeNull();
   });
 
   it('applies the stored choices from the inline head script', () => {

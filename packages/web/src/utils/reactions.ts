@@ -1,5 +1,6 @@
 import type { Session } from '../models/session';
 import { timeZone } from '../config/site';
+import { currentTime } from './clock';
 import { zonedTime } from './time-zone';
 
 const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
@@ -15,5 +16,5 @@ export const acceptingReactions = ({
 }: Pick<Session, 'day' | 'startTime' | 'endTime'>): boolean => {
   const end = endTime ?? startTime;
   if (!day || !end) return true;
-  return Date.now() < zonedTime(day, end, timeZone).getTime() + ONE_WEEK_MS;
+  return currentTime() < zonedTime(day, end, timeZone).getTime() + ONE_WEEK_MS;
 };

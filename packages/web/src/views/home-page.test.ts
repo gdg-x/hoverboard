@@ -8,6 +8,8 @@ import './home-page';
 import { HomePage, homeBlocks } from './home-page';
 
 vi.mock('../utils/metadata');
+// Its sessions would start a Firestore listener. Its own tests cover it.
+vi.mock('../components/home/on-now-block', () => ({}));
 vi.mock('../utils/scrolling', () => ({
   scrollToTop: vi.fn(),
   scrollToElement: vi.fn(),
@@ -118,5 +120,43 @@ describe('home-page', () => {
     await fixture<HomePage>(html`<home-page></home-page>`);
 
     expect(mockUpdateMetadata).toHaveBeenCalled();
+  });
+
+  describe('on now', () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    // The demo event is on October 13 and 14, 2017, in Kyiv.
+    const renderOn = async (date: string) => {
+      vi.useFakeTimers({ toFake: ['Date'] });
+      vi.setSystemTime(new Date(date));
+      const result = await fixture<HomePage>(html`<home-page></home-page>`);
+      await result.element.updateComplete;
+      return result;
+    };
+
+    it("shows what's on after the hero on the event's days, in the browser", async () => {
+      const { shadowRoot } = await renderOn('2017-10-13T09:00:00Z');
+
+      expect(shadowRoot.querySelector('home-hero + on-now-block')).not.toBeNull();
+    });
+
+    it("has no block before or after the event's days", async () => {
+      expect(
+        (await renderOn('2017-10-12T12:00:00Z')).shadowRoot.querySelector('on-now-block'),
+      ).toBeNull();
+      render(nothing, document.body);
+      expect(
+        (await renderOn('2017-10-15T12:00:00Z')).shadowRoot.querySelector('on-now-block'),
+      ).toBeNull();
+    });
+
+    it('has no block when the schedule is off', async () => {
+      setFeatures({ schedule: false });
+      const { shadowRoot } = await renderOn('2017-10-13T09:00:00Z');
+
+      expect(shadowRoot.querySelector('on-now-block')).toBeNull();
+    });
   });
 });

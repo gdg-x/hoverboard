@@ -81,8 +81,19 @@
     "event": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["startDate", "endDate", "timezone", "location"],
+      "required": ["startDate", "endDate", "timezone"],
+      "if": { "properties": { "attendance": { "const": "online" } } },
+      "else": { "required": ["location"] },
       "properties": {
+        "attendance": {
+          "description": "How people attend: at the venue, online, or both.",
+          "enum": ["inPerson", "online", "hybrid"]
+        },
+        "stream": {
+          "description": "The link to watch the event online. Needed when `attendance` is `online`.",
+          "type": "string",
+          "pattern": "^https://"
+        },
         "startDate": {
           "$ref": "#/$defs/date"
         },
@@ -165,6 +176,11 @@
             "properties": {
               "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
               "title": { "type": "string", "minLength": 1 },
+              "stream": {
+                "description": "The link to watch the track's sessions live. It wins over `event.stream`.",
+                "type": "string",
+                "pattern": "^https://"
+              },
               "days": {
                 "description": "The days the track is on. Without it, the track is on every day.",
                 "type": "array",

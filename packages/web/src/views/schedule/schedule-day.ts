@@ -19,6 +19,7 @@ import { selectFilters } from '../../store/filters';
 import { type ScheduleState, selectScheduleState } from '../../store/schedule';
 import { selectLocalTime } from '../../store/ui';
 import { timeZone } from '../../config/site';
+import { currentTime } from '../../utils/clock';
 import { getScheduleDay } from '../../utils/dates';
 import { getLocale } from '../../utils/localization';
 import { generateClassName } from '../../utils/styles';
@@ -330,8 +331,8 @@ export class ScheduleDay extends ThemedComponent {
   }
 
   override firstUpdated() {
-    this.now = new Date();
-    this.clock = setInterval(() => (this.now = new Date()), ONE_MINUTE_MS);
+    this.now = new Date(currentTime());
+    this.clock = setInterval(() => (this.now = new Date(currentTime())), ONE_MINUTE_MS);
     this.updateOverflow();
     if (typeof ResizeObserver !== 'undefined' && this.scroller) {
       this.resizeObserver = new ResizeObserver(() => this.updateOverflow());
@@ -459,7 +460,11 @@ export class ScheduleDay extends ThemedComponent {
                     ${repeat(
                       sessions,
                       (session) => session.id,
-                      (session) => html`<session-card .session="${session}"></session-card>`,
+                      (session) =>
+                        html`<session-card
+                          .session="${session}"
+                          .now="${this.now}"
+                        ></session-card>`,
                     )}
                   </div>
                 `,

@@ -260,6 +260,18 @@
 <trans-unit id="home.map-block.error">
   <source>The map did not load. Try again.</source>
 </trans-unit>
+<trans-unit id="home.on-now.title">
+  <source>On now</source>
+</trans-unit>
+<trans-unit id="home.on-now.until">
+  <source>Until <x id="0" equiv-text="${this.time(session, session.endTime!)}"/></source>
+</trans-unit>
+<trans-unit id="home.on-now.next">
+  <source>Up next</source>
+</trans-unit>
+<trans-unit id="pages.session.watch-live">
+  <source>Watch live</source>
+</trans-unit>
 <trans-unit id="home.partners-block.title">
   <source>Partners</source>
 </trans-unit>
@@ -328,6 +340,9 @@
 </trans-unit>
 <trans-unit id="schedule.tabs.day">
   <source>Day <x id="0" equiv-text="${index + 1}"/></source>
+</trans-unit>
+<trans-unit id="schedule.session.live">
+  <source>Live</source>
 </trans-unit>
 <trans-unit id="schedule.session.rate">
   <source>Rate <x id="0" equiv-text="${session.title}"/></source>
@@ -470,6 +485,24 @@
 <trans-unit id="shell.demo.density.roomy">
   <source>Roomy</source>
 </trans-unit>
+<trans-unit id="shell.demo.attendance.in-person">
+  <source>In person</source>
+</trans-unit>
+<trans-unit id="shell.demo.attendance.hybrid">
+  <source>Hybrid</source>
+</trans-unit>
+<trans-unit id="shell.demo.time.now">
+  <source>Now</source>
+</trans-unit>
+<trans-unit id="shell.demo.time.before">
+  <source>Before the event</source>
+</trans-unit>
+<trans-unit id="shell.demo.time.during">
+  <source>During the event</source>
+</trans-unit>
+<trans-unit id="shell.demo.time.after">
+  <source>After the event</source>
+</trans-unit>
 <trans-unit id="shell.demo.label">
   <source>Demo</source>
 </trans-unit>
@@ -484,6 +517,12 @@
 </trans-unit>
 <trans-unit id="shell.demo.decorations">
   <source>Decorations</source>
+</trans-unit>
+<trans-unit id="shell.demo.attendance">
+  <source>How people attend</source>
+</trans-unit>
+<trans-unit id="shell.demo.time">
+  <source>When</source>
 </trans-unit>
 <trans-unit id="shell.nav.home">
   <source>Home</source>
@@ -653,6 +692,9 @@
 <trans-unit id="store.notifications.my-schedule-disabled">
   <source>My Schedule notifications disabled</source>
 </trans-unit>
+<trans-unit id="calendar.watch-online">
+  <source>Watch online: <x id="0" equiv-text="${stream}"/></source>
+</trans-unit>
 <trans-unit id="pages.blog.title">
   <source>Blog</source>
 </trans-unit>
@@ -706,6 +748,12 @@
 </trans-unit>
 <trans-unit id="pages.team.description">
   <source>Get more info about organizers</source>
+</trans-unit>
+<trans-unit id="event.online">
+  <source>Online</source>
+</trans-unit>
+<trans-unit id="common.your-time">
+  <source><x id="0" equiv-text="${time}"/> (your time)</source>
 </trans-unit>
 <trans-unit id="pages.blog-list.error">
   <source>Error loading posts.</source>

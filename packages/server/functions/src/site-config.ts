@@ -6,6 +6,12 @@ export interface SiteConfig {
   features: Partial<Record<FunctionFeature, boolean>>;
   /** The IANA time zone of the event, from `event.timezone`. */
   timeZone: string;
+  /** `event.attendance`: `inPerson`, `online` or `hybrid`. */
+  attendance?: string;
+  /** `event.stream`, the link to watch the event online. */
+  stream?: string;
+  /** The `stream` of each track in `schedule.tracks`, by track ID. */
+  trackStreams?: Record<string, string>;
 }
 
 let siteConfig: SiteConfig | undefined;

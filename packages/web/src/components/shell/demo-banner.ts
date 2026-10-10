@@ -4,11 +4,24 @@ import { customElement, state } from 'lit/decorators.js';
 import {
   decorations as siteDecorations,
   density as siteDensity,
+  siteAttendance,
   themeName as siteTheme,
 } from '../../config/site';
 import { segmented } from '../../styles/segmented';
 import { THEMES } from '../../themes/index';
-import { chooseDecorations, chooseDemo, readDemoChoices } from '../../utils/demo';
+import {
+  ATTENDANCES,
+  type Attendance,
+  chooseDecorations,
+  chooseDemo,
+  chooseDemoAttendance,
+  chooseDemoTime,
+  DEMO_TIMES,
+  type DemoTime,
+  readDemoAttendance,
+  readDemoChoices,
+  readDemoTime,
+} from '../../utils/demo';
 import '../footer/color-scheme-toggle';
 import '../shared/hoverboard-icon';
 import { ThemedComponent } from '../themed-component';
@@ -100,6 +113,13 @@ export class DemoBanner extends ThemedComponent {
   @state()
   private accessor decorations: boolean = siteDecorations;
 
+  @state()
+  private accessor attendance: Attendance = siteAttendance;
+
+  /** `now` for the real time. */
+  @state()
+  private accessor time: DemoTime | 'now' = 'now';
+
   override firstUpdated() {
     const stored = readDemoChoices(storage);
     if (stored.theme && stored.theme in THEMES) this.theme = stored.theme;
@@ -109,6 +129,8 @@ export class DemoBanner extends ThemedComponent {
     if (stored.decorations === 'on' || stored.decorations === 'off') {
       this.decorations = stored.decorations === 'on';
     }
+    this.attendance = readDemoAttendance() ?? siteAttendance;
+    this.time = readDemoTime() ?? 'now';
   }
 
   // Properties, not bindings: Lit SSR writes `.checked` as a `checked` attribute even when false.
@@ -118,8 +140,12 @@ export class DemoBanner extends ThemedComponent {
     )) {
       input.checked = input.value === this.density;
     }
-    const select = this.renderRoot.querySelector('select');
-    if (select) select.value = this.theme;
+    const theme = this.renderRoot.querySelector<HTMLSelectElement>('select.theme');
+    if (theme) theme.value = this.theme;
+    const attendance = this.renderRoot.querySelector<HTMLSelectElement>('select.attendance');
+    if (attendance) attendance.value = this.attendance;
+    const time = this.renderRoot.querySelector<HTMLSelectElement>('select.time');
+    if (time) time.value = this.time;
   }
 
   override render() {
@@ -128,13 +154,24 @@ export class DemoBanner extends ThemedComponent {
       default: msg('Default', { id: 'shell.demo.density.default' }),
       roomy: msg('Roomy', { id: 'shell.demo.density.roomy' }),
     };
+    const attendanceLabels: Record<Attendance, string> = {
+      inPerson: msg('In person', { id: 'shell.demo.attendance.in-person' }),
+      hybrid: msg('Hybrid', { id: 'shell.demo.attendance.hybrid' }),
+      online: msg('Online', { id: 'event.online' }),
+    };
+    const timeLabels: Record<DemoTime | 'now', string> = {
+      now: msg('Now', { id: 'shell.demo.time.now' }),
+      before: msg('Before the event', { id: 'shell.demo.time.before' }),
+      during: msg('During the event', { id: 'shell.demo.time.during' }),
+      after: msg('After the event', { id: 'shell.demo.time.after' }),
+    };
     return html`
       <aside class="inner" aria-label="${msg('Demo', { id: 'shell.demo.label' })}">
         <p class="intro">${msg('DEMO', { id: 'shell.demo.badge' })}</p>
         <div class="controls">
           <label>
             <span class="visually-hidden">${msg('Theme', { id: 'shell.demo.theme' })}</span>
-            <select @change="${this.onTheme}">
+            <select class="theme" @change="${this.onTheme}">
               ${Object.keys(THEMES).map(
                 (name) =>
                   html`<option value="${name}" ?selected="${name === this.theme}">
@@ -171,6 +208,30 @@ export class DemoBanner extends ThemedComponent {
           >
             <hoverboard-icon name="party"></hoverboard-icon>
           </hb-switch>
+          <label>
+            <span class="visually-hidden">
+              ${msg('How people attend', { id: 'shell.demo.attendance' })}
+            </span>
+            <select class="attendance" @change="${this.onAttendance}">
+              ${ATTENDANCES.map(
+                (value) =>
+                  html`<option value="${value}" ?selected="${value === this.attendance}">
+                    ${attendanceLabels[value]}
+                  </option>`,
+              )}
+            </select>
+          </label>
+          <label>
+            <span class="visually-hidden">${msg('When', { id: 'shell.demo.time' })}</span>
+            <select class="time" @change="${this.onTime}">
+              ${(['now', ...DEMO_TIMES] as const).map(
+                (value) =>
+                  html`<option value="${value}" ?selected="${value === this.time}">
+                    ${timeLabels[value]}
+                  </option>`,
+              )}
+            </select>
+          </label>
         </div>
       </aside>
     `;
@@ -189,6 +250,16 @@ export class DemoBanner extends ThemedComponent {
   private readonly onDecorations = (event: Event) => {
     this.decorations = (event.target as HbSwitch).checked;
     chooseDecorations(this.decorations, siteDecorations);
+  };
+
+  private readonly onAttendance = (event: Event) => {
+    const value = (event.target as HTMLSelectElement).value as Attendance;
+    chooseDemoAttendance(value === siteAttendance ? null : value);
+  };
+
+  private readonly onTime = (event: Event) => {
+    const value = (event.target as HTMLSelectElement).value as DemoTime | 'now';
+    chooseDemoTime(value === 'now' ? null : value);
   };
 }
 

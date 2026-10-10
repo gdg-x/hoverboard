@@ -1,5 +1,7 @@
+import { msg, str } from '@lit/localize';
 import type { Session } from '../models/session';
 import { location, timeZone, title } from '../config/site';
+import { sessionStream } from './stream';
 import { zonedTime } from './time-zone';
 
 export interface CalendarEvent {
@@ -18,10 +20,18 @@ export const sessionToCalendarEvent = (
     return undefined;
   }
 
+  // Without a venue, the stream is the place. With one, the stream goes below the description.
+  const stream = sessionStream(session);
+  const place = location ? `${location.name}, ${location.address}` : (stream ?? '');
+  const watch =
+    location && stream
+      ? `\n\n${msg(str`Watch online: ${stream}`, { id: 'calendar.watch-online' })}`
+      : '';
+
   return {
     title: session.title,
-    description: `${session.description}\n\n${url}`,
-    location: `${location.name}, ${location.address}`,
+    description: `${session.description}\n\n${url}${watch}`,
+    location: place,
     start: zonedTime(session.day, session.startTime, timeZone),
     end: zonedTime(session.day, session.endTime, timeZone),
   };

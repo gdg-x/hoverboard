@@ -251,6 +251,11 @@
           "description": "When the session starts, in the event time zone.",
           "$ref": "#/$defs/time"
         },
+        "stream": {
+          "description": "The https link to watch the session live. It wins over its track's `stream` and `event.stream` in site.json.",
+          "type": "string",
+          "pattern": "^https://"
+        },
         "tags": { "type": "array", "items": { "type": "string" } },
         "title": { "type": "string" },
         "track": {

@@ -73,9 +73,19 @@ describe('a production build of a minimal site', () => {
         name: 'Minimal Fest',
         startDate: '2027-10-15',
         url: 'https://minimal-site.web.app/',
+        eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+        location: { '@type': 'VirtualLocation', url: 'https://stream.example/minimal' },
       }),
     ]);
     expect(jsonLd('404.html')).toEqual([]);
+  });
+
+  it('says the online event is online, with no venue', () => {
+    const page = build.read('index.html');
+
+    expect(page).toContain('<meta name="twitter:data1" value="Online">');
+    expect(page).toContain('name="monitor"');
+    expect(page).not.toContain('name="location"');
   });
 
   it('renders the components and their text on the server', () => {

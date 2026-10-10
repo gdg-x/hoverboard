@@ -32,7 +32,9 @@ const showNotification = (payload: MessagePayload) => {
   const body = data['body'] ?? '';
   const icon = data['icon'] ?? '';
   const title = data['title'] ?? '';
-  const notificationOptions = { body, icon, data };
+  // A session reminder with a stream link gets a button that opens the stream.
+  const actions = data['stream'] ? [{ action: 'watch', title: 'Watch live' }] : [];
+  const notificationOptions = { body, icon, data, actions };
 
   return self.registration.showNotification(title, notificationOptions);
 };
@@ -41,8 +43,9 @@ onBackgroundMessage(messaging, showNotification);
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  const path = event.notification.data?.path;
-  if (path) {
-    event.waitUntil(self.clients.openWindow(path));
+  const { path, stream } = event.notification.data ?? {};
+  const url = event.action === 'watch' && stream ? stream : path;
+  if (url) {
+    event.waitUntil(self.clients.openWindow(url));
   }
 });

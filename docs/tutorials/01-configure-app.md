@@ -27,9 +27,33 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
 
 `firebase.projectId` is the Firebase project that `./hb deploy`, the deploy workflows and `FIRESTORE_TARGET=production` commands use. `url` defaults to `https://<projectId>.web.app/`. Set `url` only for a custom domain.
 
-`event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it. The schedule shows times in it, and visitors in another time zone can switch the schedule to their own. During the event, a line on the schedule marks the current time.
+`event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it. The schedule shows times in it, and visitors in another time zone can switch the schedule to their own. Session pages and the home page's **On now** follow the same choice, and say "(your time)". For an `online` event, times start in the visitor's time zone, and the switch turns them back to the event's. The browser remembers the choice. During the event, a line on the schedule marks the current time.
 
-`schedule.published` shows session times and tracks. Keep it `false` until the schedule is final. `schedule.tracks` lists the tracks or rooms, in the order the schedule shows them. A session names its track by `id`. A track is on every day, unless `days` lists the days it is on. Without tracks, the schedule has one column. See [Content model](firebase-utils.md#content-model) for a session's day, times and track.
+`event.attendance` says how people attend: `inPerson` (the default), `online` or `hybrid`. `event.stream` is the `https:` link to watch the event online. An `online` event needs `event.stream`, and the build fails with `map` on, since there is no venue to show. A `hybrid` event without `event.stream` builds with a warning.
+
+An `online` event needs no `event.location`, and the site ignores one that is there. The home page, social images and link previews say "Online" instead of the venue. Calendar links point to `event.stream`. Search engines get the event as online, at `event.stream`. A `hybrid` event shows both: "Lviv, Ukraine · Online", the venue in calendar links with the stream below the description, and both places for search engines.
+
+For example, an online event with one stream per track. `./hb init` writes this when you answer `online`, without the tracks:
+
+```json
+"event": {
+  "attendance": "online",
+  "stream": "https://www.youtube.com/@example/live",
+  "startDate": "2027-11-05",
+  "endDate": "2027-11-05",
+  "timezone": "America/New_York"
+},
+"schedule": {
+  "published": true,
+  "tracks": [
+    { "id": "main", "title": "Main stage", "stream": "https://www.youtube.com/watch?v=main" },
+    { "id": "workshops", "title": "Workshops", "stream": "https://meet.example/workshops" }
+  ]
+},
+"features": { "map": false }
+```
+
+`schedule.published` shows session times and tracks. Keep it `false` until the schedule is final. `schedule.tracks` lists the tracks or rooms, in the order the schedule shows them. A session names its track by `id`. A track is on every day, unless `days` lists the days it is on. A track's `stream` is the `https:` link to watch its sessions live, such as one link per room. Without tracks, the schedule has one column. See [Content model](firebase-utils.md#content-model) for a session's day, times and track.
 
 `theme` picks the look: the `festival`, `spotlight`, `paper` or `glass` theme, the color scheme, colors, fonts, spacing and decorations. See [Styling][style app].
 
@@ -129,7 +153,7 @@ The build fails when:
 - a feature needs one that is off: `schedule` needs `speakers`, `mySchedule` and `feedback` need `schedule`, and `notifications` needs `functions`.
 - event text links to the page of a feature that is off, for example `/faq` in `footerRelBlock`.
 
-`demo` adds a band across the top of every page where visitors can try the built-in themes, the spacing and light or dark. Their browser remembers the choices. It is meant for demo sites, so leave it off on an event's site.
+`demo` adds a band across the top of every page where visitors can try the built-in themes, the spacing, light or dark, and how people attend: in person, hybrid or online. It can also make the site act as if it were two weeks before the event, 11:00 on its first day, or two weeks after it, to try the countdown, what's on now, live links, feedback and reactions. Changing how people attend or when it is reloads the page. Their browser remembers the choices. It is meant for demo sites, so leave it off on an event's site.
 
 `functions` deploys the Cloud Functions, which need the [Blaze plan](02-firebase.md#billing). With it off, `./hb deploy` and the deploy workflow leave functions out, and the site runs on the free Spark plan, without notifications. Deploys don't delete functions that are already deployed: `./hb doctor` lists them, with the commands that delete them.
 

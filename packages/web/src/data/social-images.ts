@@ -1,11 +1,12 @@
 import { msg, str } from '@lit/localize';
 import { createHash } from 'node:crypto';
 import { designKey } from 'virtual:hoverboard/social-images';
-import { disabledSchedule, location, scheduleTracks, shortName, url } from '../config/site';
+import { disabledSchedule, scheduleTracks, shortName, url } from '../config/site';
 import type { Session } from '../models/session';
 import type { Speaker } from '../models/speaker';
 import { getEventDates } from '../utils/dates';
 import { getLocale } from '../utils/localization';
+import { eventPlace } from '../utils/place';
 
 export const SOCIAL_IMAGE = { width: 1200, height: 630, type: 'image/png' } as const;
 
@@ -74,7 +75,7 @@ const person = ({ name, photoUrl }: Speaker): SocialImagePerson => ({
   ...(photoUrl ? { photoUrl } : {}),
 });
 
-const place = () => [location.name, location.short].filter(Boolean).join(', ');
+const place = () => eventPlace(({ name, short }) => [name, short].filter(Boolean).join(', '));
 
 const host = () => new URL(url).host;
 
