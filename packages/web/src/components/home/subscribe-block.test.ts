@@ -57,6 +57,19 @@ describe('subscribe-block', () => {
     expect(shadowRoot.querySelector('.illustration svg')).toBeInTheDocument();
   });
 
+  it('needs the internet to subscribe', async () => {
+    const { element, shadowRoot } = await fixture<SubscribeBlock>(
+      html`<subscribe-block></subscribe-block>`,
+    );
+    element['online'] = false;
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('disabled');
+    expect(shadowRoot.querySelector('.offline')).toHaveTextContent(
+      'Connect to the internet to send this.',
+    );
+  });
+
   it('subscribes the email', async () => {
     const { element, shadowRoot } = await fixture<SubscribeBlock>(
       html`<subscribe-block></subscribe-block>`,

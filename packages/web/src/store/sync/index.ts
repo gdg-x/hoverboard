@@ -57,6 +57,14 @@ export const syncLabel = (online: boolean, pending: number): string | undefined 
 export const unsyncedMessage = (): string =>
   msg("Saved on this device. Syncs when you're online.", { id: 'shell.sync.unsynced' });
 
+/** Says that a form needs the network to send. */
+export const needsNetworkMessage = (): string =>
+  msg('Connect to the internet to send this.', { id: 'store.offline.needs-network' });
+
+/** Stands in for an embed, such as a map or a video, while offline. */
+export const availableOnlineMessage = (): string =>
+  msg("Available when you're online.", { id: 'shell.sync.available-online' });
+
 // Set when the site comes back online with changes to sync, until they have.
 let announceWhenSynced = false;
 let wasOnline = true;
@@ -101,11 +109,7 @@ export const resetPending = (): void => {
  */
 export const canWriteNow = (): boolean => {
   if (selectOnline(getState())) return true;
-  dispatch(
-    queueSnackbar(
-      msg('Connect to the internet to send this.', { id: 'store.offline.needs-network' }),
-    ),
-  );
+  dispatch(queueSnackbar(needsNetworkMessage()));
   return false;
 };
 

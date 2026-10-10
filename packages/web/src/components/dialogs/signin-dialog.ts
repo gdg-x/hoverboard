@@ -18,6 +18,7 @@ import {
 } from '../../store/auth';
 import { closeDialog, DIALOG, openSigninDialog, selectIsDialogOpen } from '../../store/dialogs';
 import { queueSnackbar } from '../../store/snackbars';
+import { selectOnline } from '../../store/sync';
 import { emailLinkSignIn, signInProviders } from '../../config/site';
 import { getProviderCompanyName, PROVIDER } from '../../utils/providers';
 import { illustration, illustrationStyles } from '../../illustrations/illustration';
@@ -77,6 +78,11 @@ export class SigninDialog extends ThemedElement {
         color: var(--hb-color-on-surface-variant);
         text-align: center;
       }
+
+      .offline {
+        margin: 0 0 var(--hb-space-4);
+        font-weight: 600;
+      }
     `,
   ];
 
@@ -88,6 +94,8 @@ export class SigninDialog extends ThemedElement {
   private accessor isMergeState = false;
   @fromStore((state) => selectIsDialogOpen(state, DIALOG.SIGNIN))
   private accessor open!: boolean;
+  @fromStore(selectOnline)
+  private accessor online!: boolean;
   @state()
   private accessor email = '';
   @state()
@@ -167,6 +175,13 @@ export class SigninDialog extends ThemedElement {
         @close="${() => closeDialog()}"
       >
         ${
+          this.online
+            ? nothing
+            : html`<p class="offline" role="status">
+                ${msg('Connect to the internet to sign in.', { id: 'dialogs.signin.offline' })}
+              </p>`
+        }
+        ${
           this.isMergeState
             ? html`
                 <div class="merge-content">
@@ -189,7 +204,12 @@ export class SigninDialog extends ThemedElement {
                   </div>
 
                   <div class="action-button">
-                    <hb-button variant="text" class="merge-button" @click="${this.mergeAccounts}">
+                    <hb-button
+                      variant="text"
+                      class="merge-button"
+                      ?disabled="${!this.online}"
+                      @click="${this.mergeAccounts}"
+                    >
                       ${signInWith(provider)}
                     </hb-button>
                   </div>
@@ -213,6 +233,7 @@ export class SigninDialog extends ThemedElement {
                       <hb-button
                         variant="text"
                         class="sign-in-button"
+                        ?disabled="${!this.online}"
                         @click="${() => this.signIn(provider.url as PROVIDER)}"
                       >
                         <hoverboard-icon
@@ -266,7 +287,11 @@ export class SigninDialog extends ThemedElement {
           @input="${this.onEmailInput}"
           @keydown="${this.onEmailKeydown}"
         ></hb-text-field>
-        <hb-button class="email-button" ?disabled="${this.sending}" @click="${this.submitEmail}">
+        <hb-button
+          class="email-button"
+          ?disabled="${this.sending || !this.online}"
+          @click="${this.submitEmail}"
+        >
           ${
             confirming
               ? msg('Sign in', { id: 'common.sign-in' })
@@ -290,7 +315,7 @@ export class SigninDialog extends ThemedElement {
   };
 
   private readonly submitEmail = async () => {
-    if (this.sending || !this.emailField?.reportValidity()) return;
+    if (this.sending || !this.online || !this.emailField?.reportValidity()) return;
     const email = this.emailInput;
     this.sending = true;
     this.emailError = '';

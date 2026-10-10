@@ -2,6 +2,8 @@ import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { location, mapsScriptUrl } from '../../config/site';
+import { fromStore } from '../../controllers/from-store';
+import { availableOnlineMessage, selectOnline } from '../../store/sync';
 import { band } from '../../styles/band';
 import { currentColorScheme } from '../../utils/color-scheme';
 import '../shared/hoverboard-icon';
@@ -148,6 +150,8 @@ export class MapBlock extends ThemedElement {
 
   @state()
   private accessor mapState: 'idle' | 'loading' | 'shown' | 'failed' = 'idle';
+  @fromStore(selectOnline)
+  private accessor online!: boolean;
 
   override render() {
     const { latitude, longitude } = location.pointer;
@@ -204,8 +208,14 @@ export class MapBlock extends ThemedElement {
     return html`
       <div class="placeholder">
         <hoverboard-icon name="location"></hoverboard-icon>
-        <p>${msg('The map loads from Google Maps.', { id: 'home.map-block.map-note' })}</p>
-        <hb-button class="show-map" ?disabled="${loading}" @click="${this.showMap}">
+        <p>
+          ${
+            this.online
+              ? msg('The map loads from Google Maps.', { id: 'home.map-block.map-note' })
+              : availableOnlineMessage()
+          }
+        </p>
+        <hb-button class="show-map" ?disabled="${loading || !this.online}" @click="${this.showMap}">
           ${
             loading
               ? msg('Loading map…', { id: 'home.map-block.loading' })

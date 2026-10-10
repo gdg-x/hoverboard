@@ -139,4 +139,32 @@ describe('notification-toggle', () => {
 
     expect(mockUpdateNotificationsSubscribers).toHaveBeenCalledWith('token');
   });
+
+  it('needs the internet to turn on notifications', async () => {
+    const { element, shadowRoot } = await fixture<NotificationToggle>(
+      html`<notification-toggle></notification-toggle>`,
+    );
+    element['notificationPermission'] = new Initialized();
+    element['online'] = false;
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.offline')).toHaveTextContent(
+      'Connect to the internet to turn on notifications.',
+    );
+    expect(shadowRoot.querySelector('.panel-actions hb-button')).toHaveAttribute('disabled');
+  });
+
+  it('needs the internet to change general notifications', async () => {
+    const { element, shadowRoot } = await fixture<NotificationToggle>(
+      html`<notification-toggle></notification-toggle>`,
+    );
+    element['notificationPermission'] = new Success('token');
+    element['online'] = false;
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('hb-switch')).toHaveAttribute('disabled');
+    expect(shadowRoot.querySelector('.offline')).toHaveTextContent(
+      'Connect to the internet to change general notifications.',
+    );
+  });
 });

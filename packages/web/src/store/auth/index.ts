@@ -17,17 +17,17 @@ import {
   signInWithPopup,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
-import { clearIndexedDbPersistence, terminate } from 'firebase/firestore';
+import { clearIndexedDbPersistence, terminate, waitForPendingWrites } from 'firebase/firestore';
 import type { RootState } from '..';
 import { db, firebaseApp, isDemoProject } from '../../firebase';
 import type { FirebaseUser } from '../../models/user';
 import { logLogin } from '../../utils/analytics';
 import { getFederatedProvider, getFederatedProviderClass, PROVIDER } from '../../utils/providers';
-import { dispatch } from '../dispatch';
+import { dispatch, getState } from '../dispatch';
 import { resetFeaturedSessions } from '../featured-sessions';
-import { resetPending } from '../sync';
+import { resetPending, selectOnline, selectPendingCount } from '../sync';
 import { unsubscribeFromFeedback } from '../feedback';
-import { queueSnackbar } from '../snackbars';
+import { queueComplexSnackbar, queueSnackbar } from '../snackbars';
 import { resetSubscribed } from '../subscribe';
 import { removeUser, setUser } from '../user';
 
@@ -136,11 +136,36 @@ export const onUser = () => {
   });
 };
 
+/** How long sign-out waits for queued writes to reach the server. */
+export const PENDING_WRITES_TIMEOUT = 5000;
+
 /**
  * Signs out and deletes Firestore's offline cache, which holds the user's documents, so the next
  * person on this browser can't read them. Firestore can't be used after that, so the page reloads.
+ * Deleting the cache drops writes that haven't synced, so online it waits for them first, and
+ * offline it asks before losing them.
  */
-export const signOut = async () => {
+export const signOut = async ({ discardUnsynced = false } = {}) => {
+  const state = getState();
+  if (selectOnline(state)) {
+    await Promise.race([
+      waitForPendingWrites(db),
+      new Promise((resolve) => setTimeout(resolve, PENDING_WRITES_TIMEOUT)),
+    ]);
+  } else if (!discardUnsynced && selectPendingCount(state) > 0) {
+    dispatch(
+      queueComplexSnackbar({
+        label: msg("You have changes that haven't synced. Signing out now loses them.", {
+          id: 'store.auth.sign-out-unsynced',
+        }),
+        action: {
+          title: msg('Sign out', { id: 'shell.header.sign-out' }),
+          callback: () => signOut({ discardUnsynced: true }),
+        },
+      }),
+    );
+    return;
+  }
   await firebaseSignOut(getFirebaseAuth());
   await terminate(db);
   try {

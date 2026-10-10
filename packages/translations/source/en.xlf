@@ -44,6 +44,9 @@
 <trans-unit id="dialogs.signin.use-email-link">
   <source><x id="0" equiv-text="${error.email}"/> signed in with an email link before. Sign in that way.</source>
 </trans-unit>
+<trans-unit id="dialogs.signin.offline">
+  <source>Connect to the internet to sign in.</source>
+</trans-unit>
 <trans-unit id="dialogs.signin.existing-account">
   <source>You already have an account</source>
 </trans-unit>
@@ -353,9 +356,6 @@
 <trans-unit id="shell.account-menu.label">
   <source>Account of <x id="0" equiv-text="${name}"/></source>
 </trans-unit>
-<trans-unit id="shell.header.sign-out">
-  <source>Sign out</source>
-</trans-unit>
 <trans-unit id="shell.header.skip-link">
   <source>Skip to content</source>
 </trans-unit>
@@ -422,6 +422,9 @@
 <trans-unit id="shell.notifications.prompt">
   <source>Enable notifications</source>
 </trans-unit>
+<trans-unit id="shell.notifications.offline">
+  <source>Connect to the internet to turn on notifications.</source>
+</trans-unit>
 <trans-unit id="shell.notifications.enable">
   <source>Enable</source>
 </trans-unit>
@@ -430,6 +433,9 @@
 </trans-unit>
 <trans-unit id="shell.notifications.general">
   <source>General notifications</source>
+</trans-unit>
+<trans-unit id="shell.notifications.general-offline">
+  <source>Connect to the internet to change general notifications.</source>
 </trans-unit>
 <trans-unit id="shell.notifications.sign-in">
   <source>Sign in to get personalized session notifications</source>
@@ -473,6 +479,12 @@
 <trans-unit id="shell.service-worker.error">
   <source>Error caching for offline use.</source>
 </trans-unit>
+<trans-unit id="store.auth.sign-out-unsynced">
+  <source>You have changes that haven't synced. Signing out now loses them.</source>
+</trans-unit>
+<trans-unit id="shell.header.sign-out">
+  <source>Sign out</source>
+</trans-unit>
 <trans-unit id="auth.sign-in-link-expired">
   <source>This sign-in link has expired or was already used. Ask for a new one.</source>
 </trans-unit>
@@ -506,14 +518,17 @@
 <trans-unit id="shell.sync.unsynced">
   <source>Saved on this device. Syncs when you're online.</source>
 </trans-unit>
+<trans-unit id="store.offline.needs-network">
+  <source>Connect to the internet to send this.</source>
+</trans-unit>
+<trans-unit id="shell.sync.available-online">
+  <source>Available when you're online.</source>
+</trans-unit>
 <trans-unit id="shell.sync.saved">
   <source>Back online. Your changes are saved.</source>
 </trans-unit>
 <trans-unit id="shell.sync.online">
   <source>Back online.</source>
-</trans-unit>
-<trans-unit id="store.offline.needs-network">
-  <source>Connect to the internet to send this.</source>
 </trans-unit>
 <trans-unit id="store.notifications.general-enabled">
   <source>General notifications enabled</source>

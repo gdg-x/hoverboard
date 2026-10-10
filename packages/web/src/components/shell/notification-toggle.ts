@@ -15,6 +15,7 @@ import {
   selectNotificationsSubscribers,
 } from '../../store/notifications-subscribers';
 import { selectNotificationsUsersSubscribed } from '../../store/notifications-users';
+import { selectOnline } from '../../store/sync';
 import {
   clearNotificationsSubscribers,
   updateNotificationsSubscribers,
@@ -84,6 +85,10 @@ export class NotificationToggle extends ThemedElement {
     .switch-row {
       display: flex;
     }
+
+    .offline {
+      font-weight: 600;
+    }
   `;
 
   @fromStore((state) => state.notificationPermission.value)
@@ -94,6 +99,8 @@ export class NotificationToggle extends ThemedElement {
   private accessor notificationsUsersSubscribed!: boolean;
   @fromStore((state) => state.user)
   private accessor user!: UserState;
+  @fromStore(selectOnline)
+  private accessor online!: boolean;
 
   @state()
   private accessor opened = false;
@@ -130,8 +137,21 @@ export class NotificationToggle extends ThemedElement {
           this.initialized
             ? html`
                 <p>${msg('Enable notifications', { id: 'shell.notifications.prompt' })}</p>
+                ${
+                  this.online
+                    ? ''
+                    : html`<p class="offline">
+                        ${msg('Connect to the internet to turn on notifications.', {
+                          id: 'shell.notifications.offline',
+                        })}
+                      </p>`
+                }
                 <div class="panel-actions">
-                  <hb-button variant="text" @click="${this.requestPermission}">
+                  <hb-button
+                    variant="text"
+                    ?disabled="${!this.online}"
+                    @click="${this.requestPermission}"
+                  >
                     ${msg('Enable', { id: 'shell.notifications.enable' })}
                   </hb-button>
                 </div>
@@ -150,9 +170,19 @@ export class NotificationToggle extends ThemedElement {
                 <hb-switch
                   class="switch-row"
                   .checked="${this.generalNotificationsSelected}"
+                  ?disabled="${!this.online}"
                   @change="${this.toggleGeneralNotifications}"
                   >${msg('General notifications', { id: 'shell.notifications.general' })}</hb-switch
                 >
+                ${
+                  this.online
+                    ? ''
+                    : html`<p class="offline">
+                        ${msg('Connect to the internet to change general notifications.', {
+                          id: 'shell.notifications.general-offline',
+                        })}
+                      </p>`
+                }
 
                 <auth-required>
                   <p slot="prompt">
@@ -274,7 +304,7 @@ export class NotificationToggle extends ThemedElement {
   }
 
   private requestPermission = () => {
-    if (this.notificationPermission instanceof Initialized) {
+    if (this.notificationPermission instanceof Initialized && this.online) {
       store.dispatch(requestNotificationPermission(PROMPT_USER.YES));
     }
     this.toggleOpened();
