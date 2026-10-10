@@ -25,6 +25,7 @@ Our goal is to allow event organizers to set up a professional conference websit
 | **Speakers and schedule management** | keep and update all information in the Firebase                                                                              |
 | **My schedule**                      | let attendees save sessions they want to visit                                                                               |
 | **Reactions**                        | let attendees react to sessions with applause, love and more                                                                 |
+| **Attending page**                   | directions, doors, accessibility, hotels and Wi-Fi in one page that works offline at the venue                               |
 | **Customizable theme**               | light and dark themes, with your own colors and fonts                                                                        |
 | **Blog**                             | post announcements, updates and useful information                                                                           |
 

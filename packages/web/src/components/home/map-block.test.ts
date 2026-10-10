@@ -1,12 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { html } from 'lit';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { location as venue, mapsScriptUrl } from '../../config/site';
-import { applyColorScheme } from '../../utils/color-scheme';
-import { directionLinks, type MapBlock } from './map-block';
+import { setFeatures } from '../../../__tests__/helpers/features';
+import type { MapBlock } from './map-block';
 import './map-block';
 
-const location = venue!;
 const config = vi.hoisted(() => ({ online: false }));
 
 vi.mock('../../config/site', async (importOriginal) => {
@@ -19,17 +17,36 @@ vi.mock('../../config/site', async (importOriginal) => {
   };
 });
 
-const mapsScripts = () =>
-  [...document.head.querySelectorAll('script')].filter(({ src }) => src === mapsScriptUrl);
-
-afterEach(() => {
-  mapsScripts().forEach((script) => script.remove());
-  applyColorScheme(document, null);
-});
-
 describe('map-block', () => {
+  afterEach(() => {
+    litRender(nothing, document.body);
+  });
+
   it('defines a component', () => {
     expect(customElements.get('map-block')).toBeDefined();
+  });
+
+  it('shows the venue in its band, under the "Location" title', async () => {
+    const { shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
+    const venue = shadowRoot.querySelector('venue-section.inner')!;
+
+    expect(venue.querySelector('h2[slot="heading"].band-title')).toHaveTextContent('Location');
+    expect(venue.shadowRoot!.querySelector('.venue')).not.toBeNull();
+  });
+
+  it('links to the attending page after the directions, when it is on', async () => {
+    const { shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
+    const link = shadowRoot.querySelector('venue-section hb-button.attending');
+
+    expect(link).toHaveAttribute('href', '/attending');
+    expect(link).toHaveTextContent('More about attending');
+    expect(link).not.toHaveAttribute('slot');
+    litRender(nothing, document.body);
+
+    setFeatures({ attending: false });
+    const off = await fixture<MapBlock>(html`<map-block></map-block>`);
+
+    expect(off.shadowRoot.querySelector('.attending')).toBeNull();
   });
 
   it('renders nothing without a venue', async () => {
@@ -37,77 +54,9 @@ describe('map-block', () => {
     try {
       const { shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
 
-      expect(shadowRoot.querySelector('.inner')).toBeNull();
+      expect(shadowRoot.querySelector('venue-section')).toBeNull();
     } finally {
       config.online = false;
     }
-  });
-
-  it('renders the venue, its address and directions in three map apps', async () => {
-    const { shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
-
-    expect(shadowRoot.querySelector('h2')).toHaveTextContent('Location');
-    expect(shadowRoot.querySelector('.venue')).toHaveTextContent(location.name);
-    expect(shadowRoot.querySelector('address')).toHaveTextContent(location.address);
-    expect(shadowRoot).toHaveTextContent(location.description);
-    expect(
-      [...shadowRoot.querySelectorAll('.directions hb-button')].map((link) =>
-        link.getAttribute('href'),
-      ),
-    ).toEqual(directionLinks(location).map(({ url }) => url));
-  });
-
-  it('links to directions by address, or by the pin for OpenStreetMap', () => {
-    expect(
-      directionLinks({
-        address: '1 Main St, Lviv',
-        pointer: { latitude: 49.8, longitude: 23.9 },
-      }),
-    ).toEqual([
-      {
-        name: 'Google Maps',
-        url: 'https://www.google.com/maps/dir/?api=1&destination=1+Main+St%2C+Lviv',
-      },
-      { name: 'Apple Maps', url: 'https://maps.apple.com/?daddr=1+Main+St%2C+Lviv' },
-      {
-        name: 'OpenStreetMap',
-        url: 'https://www.openstreetmap.org/?mlat=49.8&mlon=23.9#map=17/49.8/23.9',
-      },
-    ]);
-  });
-
-  it('says the map is available online instead of loading it offline', async () => {
-    const { element, shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
-    element['online'] = false;
-    await element.updateComplete;
-
-    shadowRoot.querySelector<HTMLElement>('.show-map')!.click();
-
-    expect(shadowRoot.querySelector('.placeholder')).toHaveTextContent(
-      "Available when you're online.",
-    );
-    expect(shadowRoot.querySelector('.show-map')).toHaveAttribute('disabled');
-    expect(mapsScripts()).toHaveLength(0);
-  });
-
-  it('loads Google Maps only when asked, in the color scheme the page shows', async () => {
-    const { element, shadowRoot } = await fixture<MapBlock>(html`<map-block></map-block>`);
-
-    expect(mapsScripts()).toHaveLength(0);
-    expect(shadowRoot.querySelector('gmp-map')).toBeNull();
-
-    applyColorScheme(document, 'dark');
-    shadowRoot.querySelector<HTMLElement>('.show-map')!.click();
-    await element.updateComplete;
-
-    expect(shadowRoot.querySelector('.show-map')).toHaveAttribute('disabled');
-    expect(mapsScripts()).toHaveLength(1);
-
-    customElements.define('gmp-map', class extends HTMLElement {});
-    mapsScripts()[0]!.dispatchEvent(new Event('load'));
-    await vi.waitFor(() => expect(shadowRoot.querySelector('gmp-map')).not.toBeNull());
-
-    expect(shadowRoot.querySelector('gmp-map')).toHaveAttribute('color-scheme', 'DARK');
-    expect(shadowRoot.querySelector('gmp-advanced-marker')).toHaveAttribute('title', location.name);
   });
 });

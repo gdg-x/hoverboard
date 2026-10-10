@@ -10,6 +10,7 @@ import { PageMetadataController } from '../controllers/page-metadata-controller'
 import { disabledSchedule, eventDates, timeZone } from '../config/site';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
+import { BAND_TONES, bandTones } from '../styles/band';
 import { currentTime } from '../utils/clock';
 import { type EventState, eventState } from '../utils/event-state';
 import { scrollToElement } from '../utils/scrolling';
@@ -46,47 +47,19 @@ export const loadOnNowBlock = () =>
 
 @customElement('home-page')
 export class HomePage extends ThemedComponent {
-  static override styles = css`
-    :host {
-      display: block;
-    }
+  static override styles = [
+    bandTones,
+    css`
+      :host {
+        display: block;
+      }
 
-    /*
-     * Sections alternate between the surface and an accent color, counted over the blocks the
-     * site shows, so turning a feature off never puts two of the same color together.
-     */
-    .band {
-      --hb-band-background: var(--hb-color-surface);
-      --hb-band-color: var(--hb-color-on-surface);
-
-      background-color: color-mix(
-        in srgb,
-        var(--hb-band-background) var(--hb-tint-opacity),
-        transparent
-      );
-      color: var(--hb-band-color);
-    }
-
-    .band[data-tone='accent-4'] {
-      --hb-band-background: var(--hb-color-accent-4-container);
-      --hb-band-color: var(--hb-color-on-accent-4-container);
-    }
-
-    .band[data-tone='accent-2'] {
-      --hb-band-background: var(--hb-color-accent-2-container);
-      --hb-band-color: var(--hb-color-on-accent-2-container);
-    }
-
-    .band[data-tone='accent-1'] {
-      --hb-band-background: var(--hb-color-accent-1-container);
-      --hb-band-color: var(--hb-color-on-accent-1-container);
-    }
-
-    .band:not(:defined) {
-      display: block;
-      min-block-size: 480px;
-    }
-  `;
+      .band:not(:defined) {
+        display: block;
+        min-block-size: 480px;
+      }
+    `,
+  ];
 
   private readonly metadata = new PageMetadataController(this, 'home');
 
@@ -172,7 +145,7 @@ export class HomePage extends ThemedComponent {
   }
 
   override render() {
-    const tone = bandTones();
+    const tone = toneOf();
     return html`
       <home-hero
         event-state="${this.eventState}"
@@ -241,10 +214,11 @@ export class HomePage extends ThemedComponent {
   }
 }
 
-const TONES = ['surface', 'accent-4', 'surface', 'accent-2', 'surface', 'accent-1'];
-
-/** Each band's tone by its place among the blocks the site shows. Subscribe has its own. */
-const bandTones = () => {
+/**
+ * Each band's tone by its place among the blocks the site shows, so turning a feature off never puts
+ * two of the same color together. Subscribe has its own.
+ */
+const toneOf = () => {
   const bands = [
     'about-block',
     __HB_FEATURES__.speakers && 'speakers-block',
@@ -256,7 +230,7 @@ const bandTones = () => {
     __HB_FEATURES__.map && 'map-block',
     __HB_FEATURES__.partners && 'partners-block',
   ].filter((band) => typeof band === 'string');
-  return (band: string) => TONES[bands.indexOf(band) % TONES.length] ?? 'surface';
+  return (band: string) => BAND_TONES[bands.indexOf(band) % BAND_TONES.length] ?? 'surface';
 };
 
 declare global {

@@ -270,7 +270,12 @@ describe('config validation', () => {
       { id: 'main', title: 'Room 2', days: ['2027-10-16', '2027-10-17'] },
     ];
 
-    expect(errorsFor({ site: { event, schedule: { tracks } } })).toEqual([
+    expect(
+      errorsFor({
+        site: { event, schedule: { tracks } },
+        resources: { attendingPage: { doors: [] } },
+      }),
+    ).toEqual([
       'site.json/schedule/tracks/1/id: "main" is the ID of another track',
       'site.json/schedule/tracks/1/days/1: "2027-10-17" is not between event.startDate and event.endDate',
     ]);
@@ -313,6 +318,97 @@ describe('config validation', () => {
     expect(errorsFor({ site: { image: 'images/missing.jpg' } })).toEqual([
       'site.json/image: "images/missing.jpg" is not in packages/web/public',
     ]);
+  });
+
+  describe('attendingPage', () => {
+    it('is optional', () => {
+      const paths = makePaths();
+      const file = join(paths.site, 'content/resources.json');
+      const resources = readJson(file) as Record<string, unknown>;
+      delete resources['attendingPage'];
+      writeJson(file, resources);
+
+      expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([]);
+    });
+
+    it('needs images that exist, each with alt text', () => {
+      expect(
+        errorsFor({
+          resources: {
+            attendingPage: {
+              photo: { image: '/images/missing.jpg', alt: 'The venue' },
+              floorPlan: { image: '/images/team.jpg' },
+            },
+          },
+        }),
+      ).toEqual([
+        "content/resources.json/attendingPage/floorPlan: must have required property 'alt'",
+      ]);
+      expect(
+        errorsFor({
+          resources: {
+            attendingPage: {
+              photo: { image: '/images/missing.jpg', alt: 'The venue' },
+              floorPlan: { image: '/images/team.jpg', alt: 'The floor plan' },
+            },
+          },
+        }),
+      ).toEqual([
+        'content/resources.json/attendingPage/photo/image: "/images/missing.jpg" is not in packages/web/public',
+      ]);
+    });
+
+    it('needs a title for other ways to get there and other topics', () => {
+      expect(
+        errorsFor({
+          resources: {
+            attendingPage: {
+              gettingThere: [{ mode: 'other', text: 'Land on the roof.' }],
+              atVenue: [{ topic: 'teleporter', text: 'Room 2.' }],
+            },
+          },
+        }),
+      ).toEqual([
+        "content/resources.json/attendingPage/gettingThere/0: must have required property 'title'",
+        'content/resources.json/attendingPage/atVenue/0/topic: must be equal to one of the allowed values',
+      ]);
+    });
+
+    it("rejects doors outside the event's days, at bad times, or closing before they open", () => {
+      const event = { startDate: '2027-10-15', endDate: '2027-10-16' };
+      const doors = [
+        { day: '2027-10-15', open: '08:00', close: '20:00' },
+        { day: '2027-10-17', open: '09:00', close: '08:00' },
+      ];
+
+      expect(errorsFor({ site: { event }, resources: { attendingPage: { doors } } })).toEqual([
+        'content/resources.json/attendingPage/doors/1/day: "2027-10-17" is not between event.startDate and event.endDate',
+        'content/resources.json/attendingPage/doors/1/close: "08:00" is not after open, "09:00"',
+      ]);
+      expect(
+        errorsFor({
+          site: { event },
+          resources: {
+            attendingPage: { doors: [{ day: '2027-10-15', open: '8:00', close: '24:00' }] },
+          },
+        }),
+      ).toEqual([
+        'content/resources.json/attendingPage/doors/0/open: must match pattern "^([01]\\d|2[0-3]):[0-5]\\d$"',
+        'content/resources.json/attendingPage/doors/0/close: must match pattern "^([01]\\d|2[0-3]):[0-5]\\d$"',
+      ]);
+    });
+
+    it('rejects booking links that could run code', () => {
+      expect(
+        errorsFor({
+          resources: {
+            attendingPage: {
+              accommodation: { hotels: [{ name: 'Hotel', url: 'javascript:alert(1)' }] },
+            },
+          },
+        }),
+      ).toHaveLength(1);
+    });
   });
 
   it('rejects an icon that is not a PNG or SVG in packages/web/public', () => {
@@ -526,6 +622,16 @@ describe('config validation', () => {
     it('rejects values the schema does not allow', () => {
       expect(spanishSite({ title: 5 }).errors).toEqual([
         'content/locales/es/resources.json/title: must be string',
+      ]);
+    });
+
+    it("checks the attending page's doors that the translation sets", () => {
+      expect(
+        spanishSite({
+          attendingPage: { doors: [{ day: '2017-10-20', open: '08:00', close: '20:00' }] },
+        }).errors,
+      ).toEqual([
+        'content/locales/es/resources.json/attendingPage/doors/0/day: "2017-10-20" is not between event.startDate and event.endDate',
       ]);
     });
 

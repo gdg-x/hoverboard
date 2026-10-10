@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { title } from '../config/site';
+import { attendingPage, title } from '../config/site';
 import { pageText } from '../utils/page-text';
 import { imageType, itemMetadata, pageMetadata } from './metadata';
 
@@ -11,6 +11,11 @@ describe('pageMetadata', () => {
       title: `${pageTitle} | ${title}`,
       description: metaDescription,
     });
+  });
+
+  it("uses the organizers' description for the attending page", () => {
+    expect(attendingPage?.description).toBeTruthy();
+    expect(pageMetadata('attending').description).toBe(attendingPage?.description);
   });
 });
 

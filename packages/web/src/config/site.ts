@@ -64,6 +64,7 @@ const sourceContent = { ...resources, faq: '/data/faq.md', coc: '/data/coc.md' }
 export let {
   aboutBlock,
   aboutOrganizerBlock,
+  attendingPage,
   coc,
   description,
   faq,
@@ -99,6 +100,7 @@ export const loadContent = async (locale: string): Promise<void> => {
   ({
     aboutBlock,
     aboutOrganizerBlock,
+    attendingPage,
     coc,
     description,
     faq,

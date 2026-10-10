@@ -29,6 +29,7 @@
     }
   },
   "features": {
+    "attending": false,
     "blog": false,
     "codeOfConduct": false,
     "demo": false,

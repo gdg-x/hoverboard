@@ -69,6 +69,7 @@ export const ROUTES: readonly Route[] = [
     content: 'speakers',
   },
   { pattern: '/team', entrypoint: 'team.astro', feature: 'team' },
+  { pattern: '/attending', entrypoint: 'attending.astro', feature: 'attending' },
   { pattern: '/faq', entrypoint: 'faq.astro', feature: 'faq' },
   { pattern: '/coc', entrypoint: 'coc.astro', feature: 'codeOfConduct' },
 ];

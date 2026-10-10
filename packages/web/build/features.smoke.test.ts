@@ -27,6 +27,7 @@ const features = Object.fromEntries(
 ) as Record<Feature, boolean>;
 
 const FEATURE_PATHS: Partial<Record<Feature, string[]>> = {
+  attending: ['/attending'],
   blog: ['/blog'],
   codeOfConduct: ['/coc'],
   faq: ['/faq'],
@@ -39,6 +40,7 @@ const FEATURE_PATHS: Partial<Record<Feature, string[]>> = {
 
 // The chunks of each feature's pages and home blocks.
 const FEATURE_CHUNKS: Partial<Record<Feature, string[]>> = {
+  attending: ['attending-page'],
   blog: ['blog-list-page', 'post-page', 'latest-posts-block'],
   codeOfConduct: ['coc-page'],
   demo: ['demo-banner'],

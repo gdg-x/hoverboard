@@ -90,6 +90,18 @@ describe('home-hero', () => {
     expect(place.querySelector('hoverboard-icon')).toHaveAttribute('name', 'location');
   });
 
+  it('links the place to the attending page, when it is on', async () => {
+    const { shadowRoot } = await renderOn('2017-10-01T12:00:00Z');
+
+    expect(shadowRoot.querySelector('hb-chip.place')).toHaveAttribute('href', '/attending');
+    render(nothing, document.body);
+
+    setFeatures({ attending: false });
+    const off = await renderOn('2017-10-01T12:00:00Z');
+
+    expect(off.shadowRoot.querySelector('hb-chip.place')).not.toHaveAttribute('href');
+  });
+
   it('counts the days to go, and offers tickets and the highlights', async () => {
     const { element, shadowRoot } = await renderOn('2017-10-01T12:00:00Z');
     const showTickets = vi.fn();

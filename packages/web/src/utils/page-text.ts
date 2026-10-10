@@ -1,6 +1,8 @@
 import { msg } from '@lit/localize';
+import { attendingPage } from '../config/site';
 
 export type Page =
+  | 'attending'
   | 'blog'
   | 'coc'
   | 'faq'
@@ -18,6 +20,14 @@ interface PageText {
 }
 
 const PAGES: Record<Page, () => PageText> = {
+  attending: () => ({
+    title: msg('Attending', { id: 'pages.attending.title' }),
+    metaDescription:
+      attendingPage?.description ??
+      msg('How to get to the event, and how to join online', {
+        id: 'pages.attending.description',
+      }),
+  }),
   blog: () => ({
     title: msg('Blog', { id: 'pages.blog.title' }),
     metaDescription: msg('Read stories from our team', { id: 'pages.blog.description' }),
