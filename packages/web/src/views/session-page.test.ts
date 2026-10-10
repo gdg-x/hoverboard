@@ -5,6 +5,7 @@ import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import type { BuiltSession } from '../schedule/build-schedule';
+import type { SessionChips } from '../components/schedule/session-chips';
 import type { User } from '../models/user';
 import { setUserFeaturedSessions } from '../store/featured-sessions';
 import { selectSession } from '../store/sessions/selectors';
@@ -102,35 +103,30 @@ describe('session-page', () => {
     });
   });
 
-  it('shows when, where and what as chips', async () => {
+  it('shows when, where and what as chips, naming the sponsor', async () => {
     const { shadowRoot } = await render();
-    const chips = [...shadowRoot.querySelectorAll('.details hb-chip')].map((chip) =>
-      chip.textContent?.trim(),
-    );
+    const chips = shadowRoot.querySelector<SessionChips>('session-chips.details')!;
 
-    expect(chips).toEqual([
+    expect(chips.details).toEqual([
       'January 2',
       '10:00–10:40',
       '40 min',
       'Main hall',
       'Beginner',
       'English',
-      'Web',
     ]);
-  });
-
-  it('names the sponsor of a sponsored session', async () => {
-    vi.mocked(selectSession).mockReturnValue({ ...session, sponsor: 'Acme' } as never);
-    const { shadowRoot } = await render();
-
-    expect(shadowRoot.querySelector('.details .sponsored')).toHaveTextContent('Sponsored by Acme');
+    expect(chips.session).toBe(session);
+    expect(chips.nameSponsor).toBe(true);
+    expect(chips).toHaveAttribute('label', 'Session details');
   });
 
   it('leaves out the language when the session has none', async () => {
     vi.mocked(selectSession).mockReturnValue({ ...session, language: undefined } as never);
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('.details')).not.toHaveTextContent('English');
+    expect(shadowRoot.querySelector<SessionChips>('session-chips')!.details).not.toContain(
+      'English',
+    );
   });
 
   it('links back to the schedule day of the session', async () => {

@@ -12,6 +12,7 @@ import { queueComplexSnackbar } from '../../store/snackbars';
 import { acceptingFeedback } from '../../utils/feedback';
 import { confetti } from '../../utils/confetti';
 import { formatDuration, type SessionElement } from './session-element';
+import type { SessionChips } from './session-chips';
 import './session-element';
 
 vi.mock('../../store/dialogs', async (importOriginal) => ({
@@ -78,12 +79,12 @@ describe('session-element', () => {
     );
   });
 
-  it('shows tags as chips, speakers, and the track and duration', async () => {
+  it('shows its chips, speakers, and the track and duration', async () => {
     const { shadowRoot, view } = await render();
 
-    const chips = shadowRoot.querySelectorAll('hb-chip');
-    expect([...chips].map((chip) => chip.textContent)).toEqual(['Web', 'Cloud']);
-    expect(chips[0]!.style.getPropertyValue('--hb-chip-color')).toContain('--hb-on-tag-web');
+    const chips = shadowRoot.querySelector<SessionChips>('session-chips.chips')!;
+    expect(chips.session).toBe(session);
+    expect(chips.nameSponsor).toBe(false);
     expect(view.getByText('Ada')).toBeInTheDocument();
     expect(shadowRoot.querySelector('.speakers img')).toHaveAttribute('alt', '');
     expect(shadowRoot.querySelector('.meta')).toHaveTextContent(
@@ -91,20 +92,18 @@ describe('session-element', () => {
     );
   });
 
-  it('labels a sponsored session before its tags', async () => {
-    const { shadowRoot } = await render({ session: { ...session, sponsor: 'Acme' } });
-    const chips = [...shadowRoot.querySelectorAll('.chips hb-chip')];
-
-    expect(chips.map((chip) => chip.textContent?.trim())).toEqual(['Sponsored', 'Web', 'Cloud']);
-    expect(chips[0]).toHaveAttribute('accent', '1');
-  });
-
-  it('labels a sponsored session without tags', async () => {
+  it('shows the chips of a sponsored session without tags', async () => {
     const { shadowRoot } = await render({
       session: { ...session, tags: [], sponsor: 'Acme' },
     });
 
-    expect(shadowRoot.querySelector('.chips')).toHaveTextContent('Sponsored');
+    expect(shadowRoot.querySelector('session-chips')).toBeInTheDocument();
+  });
+
+  it('has no chips without tags or a sponsor', async () => {
+    const { shadowRoot } = await render({ session: { ...session, tags: [] } });
+
+    expect(shadowRoot.querySelector('session-chips')).toBeNull();
   });
 
   it('skips a speaker that does not exist', async () => {

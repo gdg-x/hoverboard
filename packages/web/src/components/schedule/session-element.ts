@@ -17,10 +17,10 @@ import type { UserState } from '../../store/user';
 import { acceptingFeedback } from '../../utils/feedback';
 import { confetti } from '../../utils/confetti';
 import { getLocale } from '../../utils/localization';
-import { tagChipStyle, tagColor } from '../../utils/styles';
+import { tagColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
-import '../ui/hb-chip';
 import '../ui/hb-icon-button';
+import './session-chips';
 import { fromStore } from '../../controllers/from-store';
 import { ThemedElement } from '../themed-element';
 
@@ -41,8 +41,8 @@ export const formatDuration = ({ hh, mm }: { hh: number; mm: number }) =>
     .join(' ');
 
 /**
- * A session in the schedule: a stripe in its main tag's color, its tags as chips, the title as the
- * link to the session page, speakers, and the track and duration. The bookmark button sits above
+ * A session in the schedule: a stripe in its main tag's color, its chips, the title as the link to
+ * the session page, speakers, and the track and duration. The bookmark button sits above
  * the link, and turns into a feedback button while the session takes feedback.
  */
 @customElement('session-element')
@@ -95,7 +95,8 @@ export class SessionElement extends ThemedElement {
     }
 
     .chips {
-      gap: var(--hb-space-1);
+      --hb-session-chips-gap: var(--hb-space-1);
+
       padding-inline-end: var(--hb-target-min);
     }
 
@@ -205,21 +206,7 @@ export class SessionElement extends ThemedElement {
       >
         ${
           session.sponsor || session.tags?.length
-            ? html`<ul class="chips">
-                ${
-                  session.sponsor
-                    ? html`<li>
-                        <hb-chip class="sponsored" accent="1">
-                          ${msg('Sponsored', { id: 'schedule.session.sponsored' })}
-                        </hb-chip>
-                      </li>`
-                    : nothing
-                }
-                ${(session.tags ?? []).map(
-                  (tag) =>
-                    html`<li><hb-chip style="${styleMap(tagChipStyle(tag))}">${tag}</hb-chip></li>`,
-                )}
-              </ul>`
+            ? html`<session-chips class="chips" .session="${session}"></session-chips>`
             : nothing
         }
         <h3 class="title"><a href="${sessionPath(session.id)}">${session.title}</a></h3>

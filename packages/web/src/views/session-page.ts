@@ -1,8 +1,7 @@
 import { Success } from '@abraham/remotedata';
-import { msg, str } from '@lit/localize';
+import { msg } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { styleMap } from 'lit/directives/style-map.js';
 import '../components/shared/add-to-calendar';
 import '../components/shared/share-button';
 import '../components/shared/auth-required';
@@ -12,10 +11,10 @@ import '../components/shared/hoverboard-icon';
 import '../components/shared/speaker-card';
 import '../components/markdown/short-markdown';
 import '../components/ui/hb-button';
-import '../components/ui/hb-chip';
 import '../components/ui/hb-progress';
 import { PAGE_TONES } from '../components/hero/simple-hero';
 import { formatDuration } from '../components/schedule/session-element';
+import '../components/schedule/session-chips';
 import type { BuiltSession } from '../schedule/build-schedule';
 import { goto } from '../utils/navigation';
 import { store } from '../store';
@@ -35,7 +34,6 @@ import { acceptingFeedback } from '../utils/feedback';
 import { getScheduleDay } from '../utils/dates';
 import { confetti } from '../utils/confetti';
 import { updateImageMetadata } from '../utils/metadata';
-import { tagChipStyle } from '../utils/styles';
 import { fromStore } from '../controllers/from-store';
 import { ThemedElement } from '../components/themed-element';
 
@@ -70,10 +68,6 @@ export class SessionPage extends ThemedElement {
 
       .details {
         margin-block-start: var(--hb-space-5);
-      }
-
-      .details .plain {
-        --hb-chip-border-color: currentColor;
       }
 
       /* Content-box, so the text column lines up with the hero's. */
@@ -195,23 +189,13 @@ export class SessionPage extends ThemedElement {
         ];
     const details = [...when, session.complexity, session.language].filter(Boolean);
     return html`
-      <ul class="details" aria-label="${msg('Session details', { id: 'pages.session.details' })}">
-        ${details.map((detail) => html`<li><hb-chip class="plain">${detail}</hb-chip></li>`)}
-        ${
-          session.sponsor
-            ? html`<li>
-                <hb-chip class="sponsored" accent="1">
-                  ${msg(str`Sponsored by ${session.sponsor}`, {
-                    id: 'pages.session.sponsored-by',
-                  })}
-                </hb-chip>
-              </li>`
-            : nothing
-        }
-        ${(session.tags ?? []).map(
-          (tag) => html`<li><hb-chip style="${styleMap(tagChipStyle(tag))}">${tag}</hb-chip></li>`,
-        )}
-      </ul>
+      <session-chips
+        class="details"
+        label="${msg('Session details', { id: 'pages.session.details' })}"
+        .details="${details}"
+        .session="${session}"
+        name-sponsor
+      ></session-chips>
     `;
   }
 
