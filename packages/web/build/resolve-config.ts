@@ -24,8 +24,15 @@ interface HeroSettings {
   home?: { background?: { image: string }; illustration?: string };
 }
 
+/** How people attend the event. */
+export type Attendance = 'inPerson' | 'online' | 'hybrid';
+
 type Site = typeof import('../defaults/site.json') &
-  typeof import('../../config/site.json') & { url: string; heroSettings?: HeroSettings };
+  typeof import('../../config/site.json') & {
+    url: string;
+    heroSettings?: HeroSettings;
+    event: { attendance: Attendance; stream?: string };
+  };
 type Resources = typeof import('../../config/content/resources.json');
 
 /** Template data. Each file has its own namespace, for example `{{ site.url }}`. */
@@ -142,6 +149,14 @@ const featureErrors = (site: Site, resources: Resources): string[] => {
     errors.push(
       `site.json/auth/providers: ${needSignIn.join(' and ')} need a way to sign in, and there is none`,
     );
+  }
+  if (site.event.attendance === 'online') {
+    if (features.map) {
+      errors.push('site.json/features/map: needs a venue, and event.attendance is online');
+    }
+    if (!site.event.stream) {
+      errors.push('site.json/event/stream: an online event needs a link to watch it');
+    }
   }
 
   const links: [string, string][] = [
@@ -387,6 +402,11 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
     ]);
     errors.push(...fonts.errors);
     warnings.push(...fonts.warnings);
+    if (site.event.attendance === 'hybrid' && !site.event.stream) {
+      warnings.push(
+        'site.json/event/stream: a hybrid event has no link to watch it, so people online have nowhere to go',
+      );
+    }
   }
 
   return {

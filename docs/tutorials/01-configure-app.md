@@ -29,6 +29,15 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
 
 `event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it. The schedule shows times in it, and visitors in another time zone can switch the schedule to their own. During the event, a line on the schedule marks the current time.
 
+`event.attendance` says how people attend: `inPerson` (the default), `online` or `hybrid`. `event.stream` is the `https:` link to watch the event online. An `online` event needs `event.stream`, and the build fails with `map` on, since there is no venue to show. A `hybrid` event without `event.stream` builds with a warning.
+
+```json
+"event": {
+  "attendance": "online",
+  "stream": "https://www.youtube.com/@example/live"
+}
+```
+
 `schedule.published` shows session times and tracks. Keep it `false` until the schedule is final. `schedule.tracks` lists the tracks or rooms, in the order the schedule shows them. A session names its track by `id`. A track is on every day, unless `days` lists the days it is on. Without tracks, the schedule has one column. See [Content model](firebase-utils.md#content-model) for a session's day, times and track.
 
 `theme` picks the look: the `festival`, `spotlight`, `paper` or `glass` theme, the color scheme, colors, fonts, spacing and decorations. See [Styling][style app].

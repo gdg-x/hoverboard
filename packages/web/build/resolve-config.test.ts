@@ -163,6 +163,52 @@ describe('config validation', () => {
     ]);
   });
 
+  describe('attendance', () => {
+    const stream = 'https://www.youtube.com/@example/live';
+
+    it('is in person by default', () => {
+      const { site } = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
+
+      expect(site.event.attendance).toBe('inPerson');
+      expect(site.event).not.toHaveProperty('stream');
+    });
+
+    it('needs a stream link and no map online', () => {
+      expect(errorsFor({ site: { event: { attendance: 'online' } } })).toEqual([
+        'site.json/features/map: needs a venue, and event.attendance is online',
+        'site.json/event/stream: an online event needs a link to watch it',
+      ]);
+      expect(
+        errorsFor({ site: { event: { attendance: 'online', stream }, features: { map: false } } }),
+      ).toEqual([]);
+    });
+
+    it('keeps the map and an optional stream in person and hybrid', () => {
+      expect(errorsFor({ site: { event: { attendance: 'inPerson' } } })).toEqual([]);
+      expect(errorsFor({ site: { event: { attendance: 'hybrid', stream } } })).toEqual([]);
+    });
+
+    it('warns about a hybrid event without a stream link', () => {
+      const warningsFor = (event: object) =>
+        loadConfig({ paths: makePaths({ site: { event } }), nodeEnv: 'production' }).warnings;
+
+      expect(warningsFor({ attendance: 'hybrid' })).toContain(
+        'site.json/event/stream: a hybrid event has no link to watch it, so people online have nowhere to go',
+      );
+      expect(warningsFor({ attendance: 'hybrid', stream })).toEqual([]);
+      expect(warningsFor({ attendance: 'inPerson' })).toEqual([]);
+    });
+
+    it('rejects an unknown attendance and a stream that is not https', () => {
+      expect(
+        errorsFor({ site: { event: { attendance: 'remote', stream: 'http://example.com/live' } } }),
+      ).toEqual([
+        'site.json/event/attendance: must be equal to one of the allowed values',
+        'site.json/event/stream: must match pattern "^https://"',
+      ]);
+    });
+  });
+
   it('requires a valid Firebase project ID', () => {
     const paths = makePaths();
     const site = readJson(join(paths.site, 'site.json')) as Record<string, unknown>;

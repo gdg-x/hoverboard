@@ -83,6 +83,15 @@
       "additionalProperties": false,
       "required": ["startDate", "endDate", "timezone", "location"],
       "properties": {
+        "attendance": {
+          "description": "How people attend: at the venue, online, or both.",
+          "enum": ["inPerson", "online", "hybrid"]
+        },
+        "stream": {
+          "description": "The link to watch the event online. Needed when `attendance` is `online`.",
+          "type": "string",
+          "pattern": "^https://"
+        },
         "startDate": {
           "$ref": "#/$defs/date"
         },
