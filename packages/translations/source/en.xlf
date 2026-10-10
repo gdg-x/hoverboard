@@ -281,6 +281,9 @@
 <trans-unit id="schedule.tabs.day">
   <source>Day <x id="0" equiv-text="${index + 1}"/></source>
 </trans-unit>
+<trans-unit id="schedule.session.sponsored">
+  <source>Sponsored</source>
+</trans-unit>
 <trans-unit id="schedule.session.rate">
   <source>Rate <x id="0" equiv-text="${session.title}"/></source>
 </trans-unit>
@@ -679,6 +682,9 @@
 </trans-unit>
 <trans-unit id="pages.session.details">
   <source>Session details</source>
+</trans-unit>
+<trans-unit id="pages.session.sponsored-by">
+  <source>Sponsored by <x id="0" equiv-text="${session.sponsor}"/></source>
 </trans-unit>
 <trans-unit id="pages.session.bookmarked">
   <source>Bookmarked</source>

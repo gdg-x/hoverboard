@@ -243,6 +243,10 @@
           "type": "array",
           "items": { "type": "string" }
         },
+        "sponsor": {
+          "description": "The sponsor's name, for a session given to a sponsor. The schedule labels it as sponsored.",
+          "type": "string"
+        },
         "startTime": {
           "description": "When the session starts, in the event time zone.",
           "$ref": "#/$defs/time"

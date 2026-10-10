@@ -119,6 +119,13 @@ describe('session-page', () => {
     ]);
   });
 
+  it('names the sponsor of a sponsored session', async () => {
+    vi.mocked(selectSession).mockReturnValue({ ...session, sponsor: 'Acme' } as never);
+    const { shadowRoot } = await render();
+
+    expect(shadowRoot.querySelector('.details .sponsored')).toHaveTextContent('Sponsored by Acme');
+  });
+
   it('leaves out the language when the session has none', async () => {
     vi.mocked(selectSession).mockReturnValue({ ...session, language: undefined } as never);
     const { shadowRoot } = await render();
