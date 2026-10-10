@@ -3,7 +3,7 @@ const PIECES = 14;
 const DURATION_MS = 700;
 
 /**
- * A short burst of confetti in the accent colors from the middle of `from`, such as a bookmark
+ * A short burst of confetti in the accent colors from the middle of `from`, such as a save
  * button. Nothing happens with `theme.decorations` off or with reduced motion.
  */
 export const confetti = (from: Element): void => {

@@ -35,10 +35,10 @@ const slice = createSlice({
 const { pending, success, failure, reset } = slice.actions;
 
 let subscription: Subscription = new Initialized();
-// The bookmarks as the server last confirmed them, to tell which ones haven't synced.
+// The saved sessions as the server last confirmed them, to tell which ones haven't synced.
 let synced: FeaturedSessions | undefined;
 
-/** The sessions whose bookmark differs from the server's. All of them, before the server has answered. */
+/** The sessions whose saved state differs from the server's. All of them, before the server has answered. */
 export const unsyncedSessions = (
   featuredSessions: FeaturedSessions,
   pending: boolean,
@@ -71,11 +71,11 @@ const cleanFeaturedSessions = (object: FeaturedSessions): FeaturedSessions => {
   return Object.fromEntries(Object.entries(object).filter(hasValue));
 };
 
-/** Saves the bookmarks. The listener shows them at once, and again if the server refuses them. */
+/** Saves the visitor's saved sessions. The listener shows them at once, and again if the server refuses them. */
 export const setUserFeaturedSessions = (
   userId: string,
   featuredSessions: FeaturedSessions,
-  isBookmarked: boolean,
+  isSaved: boolean,
 ): void => {
   saveFeaturedSessions(userId, cleanFeaturedSessions(featuredSessions), () =>
     dispatch(
@@ -86,7 +86,7 @@ export const setUserFeaturedSessions = (
   );
   dispatch(
     queueSnackbar(
-      isBookmarked
+      isSaved
         ? msg('Session saved to My Schedule', { id: 'store.featured-sessions.added' })
         : msg('Session removed from My Schedule', { id: 'store.featured-sessions.removed' }),
     ),

@@ -33,7 +33,7 @@ describe('snackbars', () => {
       undefined,
       queueComplexSnackbar({
         action: { title: 'Undo', callback },
-        label: 'Bookmarked',
+        label: 'Saved',
         timeout: TIMEOUT.DEFAULT,
       }),
     );
@@ -42,7 +42,7 @@ describe('snackbars', () => {
       {
         id: 0,
         action: { title: 'Undo', callback },
-        label: 'Bookmarked',
+        label: 'Saved',
         timeout: TIMEOUT.DEFAULT,
       },
     ]);

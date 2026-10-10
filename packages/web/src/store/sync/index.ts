@@ -10,7 +10,7 @@ export type PendingSource = 'featuredSessions' | 'feedback' | 'notificationsUser
 export interface SyncState {
   /** From the browser's `online` and `offline` events. The server, and the first render, assume online. */
   online: boolean;
-  /** What hasn't synced, such as bookmarked session IDs, by the listener that reports it. */
+  /** What hasn't synced, such as saved session IDs, by the listener that reports it. */
   pending: Partial<Record<PendingSource, string[]>>;
 }
 
@@ -83,7 +83,7 @@ export const watchConnection = (): void => {
   update();
 };
 
-/** Records what a listener reports hasn't synced, such as the IDs of bookmarked sessions. */
+/** Records what a listener reports hasn't synced, such as the IDs of saved sessions. */
 export const setPendingIds = (source: PendingSource, ids: string[]): void => {
   dispatch(setPending({ source, ids }));
   announceIfSynced();

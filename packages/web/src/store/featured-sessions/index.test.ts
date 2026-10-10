@@ -53,7 +53,7 @@ describe('featuredSessions', () => {
 });
 
 describe('setUserFeaturedSessions', () => {
-  it('saves only bookmarked sessions, and confirms without waiting for the server', () => {
+  it('writes only the saved sessions, and confirms without waiting for the server', () => {
     setUserFeaturedSessions(
       'user-1',
       { 'session-1': true, 'session-2': false, 'session-3': 0 as never },
@@ -65,13 +65,13 @@ describe('setUserFeaturedSessions', () => {
       { 'session-1': true },
       expect.any(Function),
     );
-    // The listener updates the bookmarks, so the store only queues the confirmation.
+    // The listener updates the saved sessions, so the store only queues the confirmation.
     expect(vi.mocked(dispatch).mock.calls.map(([action]) => action)).toEqual([
       { type: 'snackbars/queueSnackbar', payload: ADDED },
     ]);
   });
 
-  it('says so when the server refuses the bookmarks', () => {
+  it('says so when the server refuses the saved sessions', () => {
     vi.mocked(saveFeaturedSessions).mockImplementation((_userId, _sessions, onRejected) =>
       onRejected(new Error('permission-denied')),
     );
@@ -83,15 +83,15 @@ describe('setUserFeaturedSessions', () => {
 });
 
 describe('unsyncedSessions', () => {
-  it('is empty once the server has confirmed the bookmarks', () => {
+  it('is empty once the server has confirmed the saved sessions', () => {
     expect(unsyncedSessions({ a: true }, false, undefined)).toEqual([]);
   });
 
-  it('lists the sessions whose bookmark changed since the server confirmed them', () => {
+  it('lists the sessions saved or unsaved since the server confirmed them', () => {
     expect(unsyncedSessions({ a: true, c: true }, true, { a: true, b: true })).toEqual(['c', 'b']);
   });
 
-  it('lists every bookmark before the server has answered, as after a reload offline', () => {
+  it('lists every saved session before the server has answered, as after a reload offline', () => {
     expect(unsyncedSessions({ a: true, b: false }, true, undefined)).toEqual(['a']);
   });
 });
@@ -109,7 +109,7 @@ describe('featured session selectors', () => {
   };
   const initialized = { featuredSessions: new Initialized() } as unknown as RootState;
 
-  it("listens to a signed-in visitor's bookmarks the first time the state is read", () => {
+  it("listens to a signed-in visitor's saved sessions the first time the state is read", () => {
     vi.mocked(selectUserId).mockReturnValue('user-1');
     vi.mocked(getState).mockReturnValue({} as RootState);
     const { next } = listen();

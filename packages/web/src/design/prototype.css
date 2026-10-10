@@ -90,16 +90,16 @@
   cursor: default;
 }
 
-.hb-bookmark[aria-pressed='true'] {
+.hb-save[aria-pressed='true'] {
   color: var(--hb-color-primary);
 }
 
-.hb-bookmark[aria-pressed='true'] svg {
+.hb-save[aria-pressed='true'] svg {
   fill: currentColor;
 }
 
-/* Confetti when a session is bookmarked. */
-.hb-bookmark.is-bursting::after {
+/* Confetti when a session is saved. */
+.hb-save.is-bursting::after {
   content: '';
   position: absolute;
   inset-block-start: 50%;
@@ -726,7 +726,7 @@ button.hb-chip[aria-pressed='true']::before {
   font: var(--hb-text-sm) / 1.4 var(--hb-font-mono);
 }
 
-.hb-session .hb-bookmark {
+.hb-session .hb-save {
   position: absolute;
   inset-block-start: var(--hb-space-2);
   inset-inline-end: var(--hb-space-2);
@@ -1007,13 +1007,13 @@ button.hb-chip[aria-pressed='true']::before {
   }
 
   .hb-hero__art,
-  .hb-bookmark::after {
+  .hb-save::after {
     display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hb-bookmark::after {
+  .hb-save::after {
     display: none;
   }
 }

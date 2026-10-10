@@ -5,7 +5,7 @@ import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import type { BuiltSession } from '../schedule/build-schedule';
-import type { BookmarkButton } from '../components/schedule/bookmark-button';
+import type { SaveButton } from '../components/schedule/save-button';
 import type { SessionChips } from '../components/schedule/session-chips';
 import { selectSession } from '../store/sessions/selectors';
 import { openVideoDialog } from '../store/ui';
@@ -161,19 +161,19 @@ describe('session-page', () => {
     expect(goto).toHaveBeenCalledWith('/404');
   });
 
-  it('bookmarks the session from a full button', async () => {
+  it('saves the session from a full button', async () => {
     const { shadowRoot } = await render();
-    const bookmark = shadowRoot.querySelector<BookmarkButton>('bookmark-button.bookmark')!;
+    const save = shadowRoot.querySelector<SaveButton>('save-button.save')!;
 
-    expect(bookmark.session).toBe(session);
-    expect(bookmark.variant).toBe('button');
+    expect(save.session).toBe(session);
+    expect(save.variant).toBe('button');
   });
 
-  it('has no bookmark when My Schedule is off', async () => {
+  it('has no save button when My Schedule is off', async () => {
     setFeatures({ mySchedule: false });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('bookmark-button')).toBeNull();
+    expect(shadowRoot.querySelector('save-button')).toBeNull();
   });
 
   it('plays the video and links the slides', async () => {

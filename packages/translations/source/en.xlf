@@ -269,14 +269,14 @@
 <trans-unit id="markdown.toc.title">
   <source>On this page</source>
 </trans-unit>
-<trans-unit id="pages.session.bookmarked">
-  <source>Bookmarked</source>
+<trans-unit id="pages.session.saved">
+  <source>Saved</source>
 </trans-unit>
-<trans-unit id="pages.session.bookmark">
-  <source>Bookmark</source>
+<trans-unit id="pages.session.save">
+  <source>Save</source>
 </trans-unit>
-<trans-unit id="schedule.session.bookmark">
-  <source>Bookmark <x id="0" equiv-text="${session.title}"/></source>
+<trans-unit id="schedule.session.save">
+  <source>Save <x id="0" equiv-text="${session.title}"/></source>
 </trans-unit>
 <trans-unit id="common.save-sessions-signed-out">
   <source>Sign in to save sessions</source>
@@ -468,7 +468,7 @@
   <source>Dismiss</source>
 </trans-unit>
 <trans-unit id="shell.sync.help">
-  <source>Bookmarks, feedback and reminders you change are saved on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.</source>
+  <source>Saved sessions, feedback and reminders are kept on this device, and sync when you are online. Signing in, subscribing and turning on notifications need the internet.</source>
 </trans-unit>
 <trans-unit id="common.close">
   <source>Close</source>
@@ -641,8 +641,8 @@
 <trans-unit id="pages.offline.visited">
   <source>Pages you have visited before</source>
 </trans-unit>
-<trans-unit id="pages.offline.bookmarks">
-  <source>Your bookmarked sessions, in My Schedule</source>
+<trans-unit id="pages.offline.saved">
+  <source>Your saved sessions, in My Schedule</source>
 </trans-unit>
 <trans-unit id="pages.post.all-posts">
   <source>All posts</source>
@@ -669,7 +669,7 @@
   <source>Show my time zone, <x id="0" equiv-text="${zoneName(visitorZone)}"/></source>
 </trans-unit>
 <trans-unit id="schedule.my-schedule.empty">
-  <source>Bookmark sessions in the schedule to see them here.</source>
+  <source>Save sessions in the schedule to see them here.</source>
 </trans-unit>
 <trans-unit id="schedule.day.no-results">
   <source>No sessions match these filters.</source>

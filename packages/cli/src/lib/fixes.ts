@@ -100,7 +100,7 @@ const emailError = (error: ErrorObject) =>
 
 /**
  * The fix for an error of a document. Visitor data only gets fixes that add a missing time, drop
- * empty bookmarks or delete a sign-up without a valid email, never ones that change what a visitor wrote.
+ * empty saved sessions or delete a sign-up without a valid email, never ones that change what a visitor wrote.
  */
 const fixIn = (
   documentPath: string,
@@ -115,7 +115,7 @@ const fixIn = (
       description: 'deleted, since its email isn\u2019t valid',
     };
   }
-  // Older sites wrote null for a removed bookmark. The site now removes the entry.
+  // Older sites wrote null for an unsaved session. The site now removes the entry.
   if (segments[0] === 'featuredSessions' && error.keyword === 'type' && error.data === null) {
     return {
       segments: pointer(error.instancePath),

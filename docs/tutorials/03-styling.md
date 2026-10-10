@@ -22,7 +22,7 @@ Hoverboard has four built-in themes. Each has light and dark colors.
 
 - `colorScheme` is `system`, `light` or `dark`. With `system`, the site follows the visitor's device setting, and visitors can pick System, Light or Dark under Appearance in the footer. Their browser remembers the choice. `light` and `dark` lock the site to one scheme and hide the footer choice.
 - `density` is `compact`, `default` or `roomy`. It scales the spacing, not the text or button sizes.
-- `decorations` turns the playful details on or off: dot patterns, tilted stickers and photos, confetti when a visitor bookmarks a session, and the home page illustration. With `false`, the layout stays the same, with plain colors and straight labels. Visitors who ask their device for reduced motion never see the motion.
+- `decorations` turns the playful details on or off: dot patterns, tilted stickers and photos, confetti when a visitor saves a session, and the home page illustration. With `false`, the layout stays the same, with plain colors and straight labels. Visitors who ask their device for reduced motion never see the motion.
 
 The themes are in `packages/web/src/themes/`. `./hb init` asks which one to use.
 

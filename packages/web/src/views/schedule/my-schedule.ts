@@ -11,7 +11,7 @@ import { ThemedComponent } from '../../components/themed-component';
 import { illustration, illustrationStyles } from '../../illustrations/illustration';
 import emptySchedule from '../../illustrations/empty-schedule.svg?raw';
 
-/** The signed-in visitor's bookmarked sessions, day by day. */
+/** The signed-in visitor's saved sessions, day by day. */
 @customElement('my-schedule')
 export class MySchedule extends ThemedComponent {
   static override styles = [
@@ -58,7 +58,7 @@ export class MySchedule extends ThemedComponent {
   accessor featuredSchedule!: BuiltDay[];
 
   override render() {
-    const bookmarks = this.featuredSchedule.some((day) =>
+    const saved = this.featuredSchedule.some((day) =>
       day.timeslots.some((timeslot) => timeslot.sessions.some((block) => block.items.length)),
     );
     return html`
@@ -68,12 +68,12 @@ export class MySchedule extends ThemedComponent {
         </p>
 
         ${
-          bookmarks || !this.featuredSchedule.length
+          saved || !this.featuredSchedule.length
             ? nothing
             : html`<div class="empty">
                 ${illustration(emptySchedule)}
                 <p class="hint">
-                  ${msg('Bookmark sessions in the schedule to see them here.', {
+                  ${msg('Save sessions in the schedule to see them here.', {
                     id: 'schedule.my-schedule.empty',
                   })}
                 </p>

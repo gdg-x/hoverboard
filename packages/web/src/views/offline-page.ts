@@ -67,8 +67,8 @@ export class OfflinePage extends ThemedComponent {
           ${
             __HB_FEATURES__.mySchedule
               ? html`<li>
-                  ${msg('Your bookmarked sessions, in My Schedule', {
-                    id: 'pages.offline.bookmarks',
+                  ${msg('Your saved sessions, in My Schedule', {
+                    id: 'pages.offline.saved',
                   })}
                 </li>`
               : nothing

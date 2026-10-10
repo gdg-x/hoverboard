@@ -11,7 +11,7 @@ import { tagColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
 import '../shared/speaker-photo';
 import '../ui/hb-icon-button';
-import './bookmark-button';
+import './save-button';
 import './session-chips';
 import { ThemedComponent } from '../themed-component';
 
@@ -33,7 +33,7 @@ export const formatDuration = ({ hh, mm }: { hh: number; mm: number }) =>
 
 /**
  * A session in the schedule: a stripe in its main tag's color, its chips, the title as the link to
- * the session page, speakers, and the track and duration. The bookmark button sits above
+ * the session page, speakers, and the track and duration. The save button sits above
  * the link, and turns into a feedback button while the session takes feedback.
  */
 @customElement('session-card')
@@ -223,7 +223,7 @@ export class SessionCard extends ThemedComponent {
       `;
     }
     if (!__HB_FEATURES__.mySchedule) return nothing;
-    return html`<bookmark-button class="action bookmark" .session="${session}"></bookmark-button>`;
+    return html`<save-button class="action save" .session="${session}"></save-button>`;
   }
 
   private readonly openFeedback = () => {

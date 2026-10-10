@@ -410,7 +410,7 @@
       }
     },
     "featuredSessions": {
-      "description": "A signed-in visitor's bookmarked sessions, by session ID. Firestore: `featuredSessions/{userId}`.",
+      "description": "A signed-in visitor's saved sessions, by session ID. Firestore: `featuredSessions/{userId}`.",
       "type": "object",
       "maxProperties": 500,
       "additionalProperties": { "type": "boolean" }
