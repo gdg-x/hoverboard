@@ -459,7 +459,11 @@ export class ScheduleDay extends ThemedComponent {
                     ${repeat(
                       sessions,
                       (session) => session.id,
-                      (session) => html`<session-card .session="${session}"></session-card>`,
+                      (session) =>
+                        html`<session-card
+                          .session="${session}"
+                          .now="${this.now}"
+                        ></session-card>`,
                     )}
                   </div>
                 `,

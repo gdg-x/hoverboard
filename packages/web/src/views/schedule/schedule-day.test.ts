@@ -180,6 +180,12 @@ describe('schedule-day', () => {
     expect(now.querySelector<HTMLElement>('.now-line')!.style.insetBlockStart).toBe('50%');
     expect(now).toHaveTextContent('Now · 10:30');
     expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
+    // So cards can say which sessions are live.
+    const cards = [...shadowRoot.querySelectorAll<SessionCard>('session-card')];
+    expect(cards.length).toBeGreaterThan(0);
+    expect(cards.map((card) => card.now)).toEqual(
+      cards.map(() => new Date('2024-01-01T08:30:00Z')),
+    );
   });
 
   it('has no current time line on other days', async () => {

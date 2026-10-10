@@ -329,6 +329,9 @@
 <trans-unit id="schedule.tabs.day">
   <source>Day <x id="0" equiv-text="${index + 1}"/></source>
 </trans-unit>
+<trans-unit id="schedule.session.live">
+  <source>Live</source>
+</trans-unit>
 <trans-unit id="schedule.session.rate">
   <source>Rate <x id="0" equiv-text="${session.title}"/></source>
 </trans-unit>

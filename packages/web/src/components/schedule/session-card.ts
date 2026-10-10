@@ -7,6 +7,7 @@ import { sessionPath } from '../../utils/navigation';
 import { openFeedbackDialog } from '../../store/dialogs';
 import { acceptingFeedback } from '../../utils/feedback';
 import { getLocale } from '../../utils/localization';
+import { isLive, sessionStream } from '../../utils/stream';
 import { tagColor } from '../../utils/styles';
 import '../shared/hoverboard-icon';
 import '../shared/speaker-photo';
@@ -133,6 +134,16 @@ export class SessionCard extends ThemedComponent {
       font: var(--hb-text-sm) / 1.4 var(--hb-font-mono);
     }
 
+    .live {
+      display: inline-block;
+      margin-inline-end: var(--hb-space-1);
+      padding: 0 var(--hb-space-2);
+      border-radius: var(--hb-radius-full);
+      background-color: var(--hb-color-error);
+      color: var(--hb-color-on-error);
+      font-weight: 700;
+    }
+
     .action {
       position: absolute;
       z-index: 2;
@@ -156,6 +167,9 @@ export class SessionCard extends ThemedComponent {
 
   @property({ attribute: false })
   accessor session: BuiltSession | undefined;
+  /** The time, which the schedule sets in the browser each minute. Without it, the card isn't live. */
+  @property({ attribute: false })
+  accessor now: Date | undefined;
 
   // Depends on the time, so it is only set in the browser.
   @state()
@@ -178,6 +192,7 @@ export class SessionCard extends ThemedComponent {
       session.language,
     ].filter(Boolean);
     const speakers = session.speakers?.filter((speaker) => speaker.name) ?? [];
+    const live = !!this.now && isLive(session, this.now.getTime()) && !!sessionStream(session);
 
     return html`
       <article
@@ -204,7 +219,13 @@ export class SessionCard extends ThemedComponent {
               </ul>`
             : nothing
         }
-        ${meta.length ? html`<p class="meta">${meta.join(' · ')}</p>` : nothing}
+        ${
+          meta.length || live
+            ? html`<p class="meta">
+                ${live ? html`<span class="live">${msg('Live', { id: 'schedule.session.live' })}</span>` : nothing}${meta.join(' · ')}
+              </p>`
+            : nothing
+        }
         ${this.renderAction(session)}
       </article>
     `;

@@ -25,13 +25,11 @@ export const sessionStream = ({
 };
 
 /** Whether a session is on: from `LIVE_EARLY_MS` before it starts until it ends. */
-export const isLive = ({
-  day,
-  startTime,
-  endTime,
-}: Pick<Session, 'day' | 'startTime' | 'endTime'>): boolean => {
+export const isLive = (
+  { day, startTime, endTime }: Pick<Session, 'day' | 'startTime' | 'endTime'>,
+  now = Date.now(),
+): boolean => {
   if (!day || !startTime || !endTime) return false;
-  const now = Date.now();
   return (
     now >= zonedTime(day, startTime, timeZone).getTime() - LIVE_EARLY_MS &&
     now < zonedTime(day, endTime, timeZone).getTime()

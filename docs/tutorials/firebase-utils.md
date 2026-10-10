@@ -16,7 +16,7 @@ Speakers and sessions have optional `source` and `externalId` fields for data im
 
 A session is on the schedule with `day` (`YYYY-MM-DD`), `startTime` and `endTime` (`HH:MM` in `event.timezone`), and `track`, a track ID from `schedule.tracks` in `packages/config/site.json`. A session without `track` spans every track, such as a keynote or lunch. A session without a day and times isn't on the schedule yet, but shows on its own page and its speakers' pages. Two short talks in one slot are two sessions with their own times.
 
-A session's `stream` is the `https:` link to watch it live. Without one, it uses its track's `stream` in `site.json`, then `event.stream` for an online or hybrid event. From 10 minutes before the start until the end, the session page shows **Watch live**, and calendar links include the stream.
+A session's `stream` is the `https:` link to watch it live. Without one, it uses its track's `stream` in `site.json`, then `event.stream` for an online or hybrid event. From 10 minutes before the start until the end, the session page shows **Watch live**, the schedule marks the session **Live**, and calendar links include the stream.
 
 `firestore-init`, `firestore-copy` and the build check the schedule: each `track` must be in `site.json` and on the session's day, `endTime` must be after `startTime`, and sessions in one track can't overlap. The build fails and names the sessions.
 
