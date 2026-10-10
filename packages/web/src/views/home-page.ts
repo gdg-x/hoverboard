@@ -1,15 +1,16 @@
 import { IntersectionController } from '@lit-labs/observers/intersection-controller.js';
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import '../components/home/about-block';
 import '../components/home/about-organizer-block';
 import '../components/home/home-hero';
 import { ThemedComponent } from '../components/themed-component';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
+import { disabledSchedule, eventDates, timeZone } from '../config/site';
 import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
-import type { EventState } from '../utils/event-state';
+import { type EventState, eventState } from '../utils/event-state';
 import { scrollToElement } from '../utils/scrolling';
 
 // `__HB_FEATURES__.<name>` is a literal in the build, so blocks of disabled features are not bundled.
@@ -37,6 +38,10 @@ const lazyBlocks = {
   }),
 };
 type LazyBlock = keyof typeof lazyBlocks;
+
+/** The "On now" block, which the page loads in the browser on the event's days. */
+export const loadOnNowBlock = () =>
+  __HB_FEATURES__.schedule ? import('../components/home/on-now-block') : Promise.resolve();
 
 @customElement('home-page')
 export class HomePage extends ThemedComponent {
@@ -94,6 +99,10 @@ export class HomePage extends ThemedComponent {
   @query('#tickets')
   private accessor ticketsBlock!: HTMLElement | null;
 
+  // Depends on the time, so it is only set in the browser.
+  @state()
+  private accessor duringEvent = false;
+
   private readonly scrollToTickets = async () => {
     // The block has no height until it is defined, so load it before scrolling.
     await lazyBlocks['tickets-block']?.();
@@ -110,6 +119,18 @@ export class HomePage extends ThemedComponent {
   override firstUpdated() {
     this.observeLazyBlocks();
     this.scrollToHash();
+    if (
+      __HB_FEATURES__.schedule &&
+      !disabledSchedule &&
+      eventState(new Date(), {
+        startDate: eventDates.start,
+        endDate: eventDates.end,
+        timezone: timeZone,
+      }) === 'live'
+    ) {
+      this.duringEvent = true;
+      void loadOnNowBlock();
+    }
   }
 
   override connectedCallback() {
@@ -157,6 +178,7 @@ export class HomePage extends ThemedComponent {
         days-to-go="${this.daysToGo}"
         @show-tickets="${this.scrollToTickets}"
       ></home-hero>
+      ${this.duringEvent ? html`<on-now-block class="band" data-tone="accent-1"></on-now-block>` : nothing}
       <about-block class="band" data-tone="${tone('about-block')}"></about-block>
       ${
         __HB_FEATURES__.speakers

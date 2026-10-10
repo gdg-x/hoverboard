@@ -260,6 +260,18 @@
 <trans-unit id="home.map-block.error">
   <source>The map did not load. Try again.</source>
 </trans-unit>
+<trans-unit id="home.on-now.title">
+  <source>On now</source>
+</trans-unit>
+<trans-unit id="home.on-now.until">
+  <source>Until <x id="0" equiv-text="${session.endTime}"/></source>
+</trans-unit>
+<trans-unit id="home.on-now.next">
+  <source>Up next</source>
+</trans-unit>
+<trans-unit id="pages.session.watch-live">
+  <source>Watch live</source>
+</trans-unit>
 <trans-unit id="home.partners-block.title">
   <source>Partners</source>
 </trans-unit>
@@ -799,9 +811,6 @@
 </trans-unit>
 <trans-unit id="pages.session.details">
   <source>Session details</source>
-</trans-unit>
-<trans-unit id="pages.session.watch-live">
-  <source>Watch live</source>
 </trans-unit>
 <trans-unit id="pages.session.speakers">
   <source>Speakers</source>

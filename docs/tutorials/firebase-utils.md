@@ -18,6 +18,8 @@ A session is on the schedule with `day` (`YYYY-MM-DD`), `startTime` and `endTime
 
 A session's `stream` is the `https:` link to watch it live. Without one, it uses its track's `stream` in `site.json`, then `event.stream` for an online or hybrid event. From 10 minutes before the start until the end, the session page shows **Watch live**, the schedule marks the session **Live**, and calendar links include the stream.
 
+On the event's days, the home page shows **On now** below the hero: the sessions that are on, with their links to watch live, and the ones that start in the next 30 minutes. It hides itself between sessions with nothing coming up. It needs `schedule`, and `schedule.published`.
+
 `firestore-init`, `firestore-copy` and the build check the schedule: each `track` must be in `site.json` and on the session's day, `endTime` must be after `startTime`, and sessions in one track can't overlap. The build fails and names the sessions.
 
 Schedule edits show in the browser at once, and in the built pages after the next deploy, as for other content.
