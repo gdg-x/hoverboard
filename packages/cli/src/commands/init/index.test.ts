@@ -193,8 +193,8 @@ describe('runInit', () => {
 
     expect(result).toBe(true);
     expect(mocks.runCommand).toHaveBeenCalledWith(
-      'npm',
-      ['--prefix', 'packages/cli', 'run', 'firestore-init:production'],
+      process.execPath,
+      ['hb', 'data', 'seed', '--production', '--yes'],
       repo,
     );
     expect(mocks.runDeploy).toHaveBeenCalledWith({ yes: true });
@@ -213,8 +213,8 @@ describe('runInit', () => {
 
     expect(result).toBe(true);
     expect(mocks.runCommand).toHaveBeenCalledWith(
-      'npm',
-      ['--prefix', 'packages/cli', 'run', 'firestore-init:production'],
+      process.execPath,
+      ['hb', 'data', 'seed', '--production', '--yes'],
       repo,
     );
     expect(mocks.runDeploy).not.toHaveBeenCalled();

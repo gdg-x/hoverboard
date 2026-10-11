@@ -534,7 +534,7 @@
       }
     },
     "migrations": {
-      "description": "The data migrations that `hb firestore-check --fix` ran, by ID. Firestore: `config/migrations`.",
+      "description": "The data migrations that `hb data check --fix` ran, by ID. Firestore: `config/migrations`.",
       "type": "object",
       "additionalProperties": {
         "type": "object",

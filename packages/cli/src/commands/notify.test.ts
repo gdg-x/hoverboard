@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { confirm } from '../lib/prompt.js';
+import { confirmChange } from '../lib/prompt.js';
+import { setTarget } from '../lib/target.js';
 import { siteFeatures } from '../utils/site-features.js';
 import { runNotify } from './notify.js';
 
@@ -11,15 +12,18 @@ const { create, doc, collection } = vi.hoisted(() => {
 });
 
 vi.mock('../lib/firestore.js', () => ({ firestore: { collection } }));
-vi.mock('../lib/prompt.js', () => ({ confirm: vi.fn() }));
+vi.mock('../lib/prompt.js', () => ({ confirmChange: vi.fn() }));
 vi.mock('../utils/site-features.js', () => ({ siteFeatures: vi.fn() }));
 vi.mock('../utils/firebase-project.js', () => ({ resolveFirebaseProjectId: () => 'fest-2027' }));
 
 const output = () => vi.mocked(console.log).mock.calls.map(([line]) => String(line));
+const sent = {
+  ok: true,
+  path: `notifications/${Date.parse('2027-10-15T09:00:00Z')}`,
+  dryRun: false,
+};
 
 describe('runNotify', () => {
-  const isTTY = process.stdin.isTTY;
-
   beforeEach(() => {
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     vi.mocked(siteFeatures).mockReturnValue({});
@@ -30,13 +34,12 @@ describe('runNotify', () => {
     vi.restoreAllMocks();
     vi.clearAllMocks();
     vi.useRealTimers();
-    delete process.env['FIRESTORE_TARGET'];
-    process.stdin.isTTY = isTTY;
+    setTarget('emulator');
   });
 
   it('adds the notification to the emulator, which the function sends', async () => {
-    expect(await runNotify({ title: ' Doors open ', body: 'Welcome!', path: '/schedule' })).toBe(
-      true,
+    expect(await runNotify({ title: ' Doors open ', body: 'Welcome!', path: '/schedule' })).toEqual(
+      sent,
     );
 
     expect(collection).toHaveBeenCalledWith('notifications');
@@ -47,7 +50,7 @@ describe('runNotify', () => {
       path: '/schedule',
     });
     expect(output().at(-1)).toContain('to the emulator');
-    expect(confirm).not.toHaveBeenCalled();
+    expect(confirmChange).not.toHaveBeenCalled();
   });
 
   it('refuses an empty title or body, and a link that could run code', async () => {
@@ -70,28 +73,31 @@ describe('runNotify', () => {
   });
 
   it('asks before sending from production, and sends nothing when told no', async () => {
-    process.env['FIRESTORE_TARGET'] = 'production';
-    process.stdin.isTTY = true;
-    vi.mocked(confirm).mockResolvedValueOnce(false).mockResolvedValueOnce(true);
+    setTarget('production');
+    vi.mocked(confirmChange).mockResolvedValueOnce(false).mockResolvedValueOnce(true);
 
     expect(await runNotify({ title: 'Doors open', body: 'Welcome!' })).toBe(false);
     expect(create).not.toHaveBeenCalled();
 
-    expect(await runNotify({ title: 'Doors open', body: 'Welcome!' })).toBe(true);
-    expect(confirm).toHaveBeenCalledWith(
+    expect(await runNotify({ title: 'Doors open', body: 'Welcome!', yes: true })).toEqual(sent);
+    expect(confirmChange).toHaveBeenNthCalledWith(
+      1,
       'Send "Doors open" to every subscribed device of fest-2027?',
+      false,
     );
+    expect(confirmChange).toHaveBeenLastCalledWith(expect.any(String), true);
     expect(output().at(-1)).toContain('to fest-2027');
   });
 
-  it('needs --yes for production without a terminal to ask in', async () => {
-    process.env['FIRESTORE_TARGET'] = 'production';
-    process.stdin.isTTY = false;
+  it('checks the notification without adding it with --dry-run', async () => {
+    setTarget('production');
 
-    expect(await runNotify({ title: 'Doors open', body: 'Welcome!' })).toBe(false);
+    expect(await runNotify({ title: 'Doors open', body: 'Welcome!', dryRun: true })).toEqual({
+      ...sent,
+      dryRun: true,
+    });
     expect(create).not.toHaveBeenCalled();
-
-    expect(await runNotify({ title: 'Doors open', body: 'Welcome!', yes: true })).toBe(true);
-    expect(confirm).not.toHaveBeenCalled();
+    expect(confirmChange).not.toHaveBeenCalled();
+    expect(output().at(-1)).toContain("Dry run: it wasn't added to fest-2027");
   });
 });

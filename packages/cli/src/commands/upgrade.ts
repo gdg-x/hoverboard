@@ -20,7 +20,7 @@ export interface UpgradeOptions {
 
 /**
  * Moves packages/config/site.json to the current `schemaVersion`, then runs the Firestore data
- * migrations and fixes with `firestore-check --fix`. Returns whether both succeeded.
+ * migrations and fixes with `data check --fix`. Returns whether both succeeded.
  */
 export const runUpgrade = async (
   { dryRun = false, yes = false }: UpgradeOptions = {},

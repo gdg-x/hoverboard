@@ -13,14 +13,14 @@ const backupTime = (folder: string): number | undefined => {
   return match ? Date.parse(`${match[1]}T${match[2]}:${match[3]}:${match[4]}Z`) : undefined;
 };
 
-/** Warns about backups from `hb firestore-check --fix` older than 30 days. They can hold content. */
+/** Warns about backups from `hb data check --fix` older than 30 days. They can hold content. */
 export const checkFirestoreBackups = (
   repoRoot: string | undefined,
   now = Date.now(),
 ): DoctorCheckResult => {
   const folder = repoRoot && join(repoRoot, BACKUPS_PATH);
   if (!folder || !existsSync(folder)) {
-    return { name, ok: true, message: 'No backups from `./hb firestore-check --fix`.' };
+    return { name, ok: true, message: 'No backups from `./hb data check --fix`.' };
   }
   const old = readdirSync(folder)
     .map((entry) => ({ entry, time: backupTime(entry) }))

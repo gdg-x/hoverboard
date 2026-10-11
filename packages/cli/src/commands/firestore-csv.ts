@@ -1,5 +1,6 @@
-import { writeFileSync } from 'fs';
-import { resolve } from 'path';
+import { mkdirSync, writeFileSync } from 'fs';
+import { join, resolve } from 'path';
+import type { CommandResult } from '../lib/command.js';
 
 export interface CsvDocument {
   id: string;
@@ -29,15 +30,26 @@ export const toCsv = (docs: CsvDocument[]): string => {
   return [['id', ...fields], ...rows].map((row) => `${row.map(cell).join(',')}\r\n`).join('');
 };
 
-/** Writes a Firestore collection to a CSV file, `<collection>.csv` by default. */
-export const runFirestoreCsv = async (collection: string, file?: string): Promise<void> => {
+/** The file a collection is written to: its path with `--` between segments, such as `subscribers.csv`. */
+export const csvFileName = (collection: string): string =>
+  `${collection.replace(/^\/+|\/+$/g, '').replaceAll('/', '--')}.csv`;
+
+/** Writes each Firestore collection to `<collection>.csv` in `folder`, the current one by default. */
+export const runCsvExport = async (
+  collections: string[],
+  folder?: string,
+): Promise<CommandResult> => {
   const { firestore } = await import('../lib/firestore.js');
-  const snapshot = await firestore.collection(collection).get();
-  const output = resolve(
-    process.env['INIT_CWD'] ?? process.cwd(),
-    file ?? `${collection.split('/').pop()}.csv`,
-  );
-  writeFileSync(output, toCsv(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))));
-  const count = `${snapshot.size} ${snapshot.size === 1 ? 'document' : 'documents'}`;
-  console.log(`Wrote ${count} from ${collection} to ${output}.`);
+  const directory = resolve(process.env['INIT_CWD'] ?? process.cwd(), folder ?? '.');
+  mkdirSync(directory, { recursive: true });
+  const files: Record<string, string> = {};
+  for (const collection of collections) {
+    const snapshot = await firestore.collection(collection).get();
+    const output = join(directory, csvFileName(collection));
+    writeFileSync(output, toCsv(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))));
+    files[collection] = output;
+    const count = `${snapshot.size} ${snapshot.size === 1 ? 'document' : 'documents'}`;
+    console.log(`✔ Wrote ${count} from ${collection} to ${output}.`);
+  }
+  return { ok: true, files };
 };

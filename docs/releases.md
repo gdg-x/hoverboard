@@ -43,8 +43,8 @@ When possible, deprecate first: keep the old behavior working in a minor release
 
 `./hb upgrade` brings a site's config and data up to the Hoverboard version it runs:
 
-1. It moves `packages/config/site.json` to the current `schemaVersion`, one config migration at a time, and checks the result like `./hb validate-config`.
-2. It runs the Firestore data migrations and fixes, as `./hb firestore-check --fix` does, with the same backup and confirmation. It reads the emulator unless `FIRESTORE_TARGET=production` is set.
+1. It moves `packages/config/site.json` to the current `schemaVersion`, one config migration at a time, and checks the result like `./hb config validate`.
+2. It runs the Firestore data migrations and fixes, as `./hb data check --fix` does, with the same backup and confirmation. It reads the emulator unless you add `--production`.
 
 `--dry-run` shows both without writing anything. A `site.json` without `schemaVersion` is from before v4, and `hb upgrade` refuses it.
 

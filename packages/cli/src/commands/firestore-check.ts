@@ -18,10 +18,12 @@ import {
   restoreBackup,
   shownPath,
 } from '../lib/firestore-fix.js';
+import { UsageError } from '../lib/command.js';
 import { fixable } from '../lib/fixes.js';
-import { confirm } from '../lib/prompt.js';
+import { confirmChange } from '../lib/prompt.js';
+import { productionProjectId } from '../lib/target.js';
 import { type FirestoreDocument, pendingMigrations } from '../migrations/index.js';
-import { SITE_CONFIG_PATH, resolveFirebaseProjectId } from '../utils/firebase-project.js';
+import { SITE_CONFIG_PATH } from '../utils/firebase-project.js';
 import { findRepoRoot } from '../utils/node-version.js';
 import { escapeAnnotation } from '../utils/site-config.js';
 import { siteFeatures } from '../utils/site-features.js';
@@ -276,20 +278,14 @@ export interface FirestoreCheckOptions {
   restore?: string;
 }
 
-/** Asks before production changes. Without a terminal to ask in, it needs `--yes`. */
-const allowed = async (projectId: string | undefined, yes: boolean, question: string) => {
-  if (!projectId || yes) return true;
-  if (!process.stdin.isTTY) {
-    console.log(`✘ ${question} Run again with --yes to do it without asking.`);
-    return false;
-  }
-  return confirm(question);
-};
+/** Asks before production changes. The emulator changes without asking. */
+const allowed = (projectId: string | undefined, yes: boolean, question: string) =>
+  projectId ? confirmChange(question, yes) : Promise.resolve(true);
 
 /**
  * Checks every document in Firestore, or in one collection, and prints each problem. With `fix`,
  * runs the pending migrations and the safe fixes first. Returns whether there were no errors.
- * Reads the emulator unless FIRESTORE_TARGET=production.
+ * Reads the emulator unless the target is production.
  */
 export const runFirestoreCheck = async ({
   collection,
@@ -298,11 +294,9 @@ export const runFirestoreCheck = async ({
   yes = false,
   restore,
 }: FirestoreCheckOptions = {}): Promise<boolean> => {
+  if (dryRun && !fix) throw new UsageError('--dry-run only applies with --fix.');
   const repoRoot = findRepoRoot(process.cwd()) ?? process.cwd();
-  const projectId =
-    process.env['FIRESTORE_TARGET'] === 'production'
-      ? resolveFirebaseProjectId(repoRoot)
-      : undefined;
+  const projectId = productionProjectId(repoRoot);
   const target = projectId ?? 'the emulator';
   const { firestore } = await import('../lib/firestore.js');
 
@@ -343,7 +337,7 @@ export const runFirestoreCheck = async ({
         });
         console.log(
           `\n✔ Wrote ${plural(result.written, 'document')}. The documents as they were are in ${shown}. ` +
-            `Undo with: ${projectId ? 'FIRESTORE_TARGET=production ' : ''}./hb firestore-check --restore ${shown}`,
+            `Undo with: ./hb data check --restore ${shown}${projectId ? ' --production' : ''}`,
         );
         for (const path of result.skipped) {
           console.log(

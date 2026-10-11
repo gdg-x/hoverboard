@@ -1,16 +1,16 @@
 # Firestore Utils
 
-At the moment Firestore admin panel doesn't allow to export/import data from their DB.
-These scripts allow you to load data on your machine, edit and bring it back.
-See examples to learn how it works.
+The `./hb data` commands seed, check, fix, copy and export the site's Firestore data. See the examples below.
 
-By default all of these scripts run against the local [Firestore emulator](https://firebase.google.com/docs/emulator-suite) (started by `npm start` / `./hb emulators`), so they never touch your live project's data. To target **production** Firestore instead, set `FIRESTORE_TARGET=production`, e.g. `FIRESTORE_TARGET=production ./hb firestore-init` or `FIRESTORE_TARGET=production ./hb firestore-copy`. These sign in with your Firebase CLI login (`npx firebase login`) and use the project set as `firebase.projectId` in `packages/config/site.json`.
+They use the local [Firestore emulator](https://firebase.google.com/docs/emulator-suite) (started by `npm start` or `./hb emulators`), so they never touch your live project's data. Add `--production` to use production Firestore instead, for example `./hb data seed --production`. It signs in with your Firebase CLI login (`npx firebase login`) and uses the project set as `firebase.projectId` in `packages/config/site.json`.
 
-⚠️ The emulator-targeted scripts connect to an already-running Firestore emulator — make sure `npm start` or `./hb emulators` is running in another terminal first. They always use the `demo-hoverboard` project, like the emulators, so data written by `firestore-init`/`firestore-copy` always shows up in the Emulator UI.
+Commands that write to production show what they will change and ask first. Without a terminal to ask in, such as in CI, they need `--yes`. `--dry-run` shows the changes without writing them. `--json` prints the result as JSON, for scripts.
+
+⚠️ Without `--production`, the commands connect to an already-running Firestore emulator. Make sure `npm start` or `./hb emulators` is running in another terminal first. They always use the `demo-hoverboard` project, like the emulators, so data written by `data seed` and `data copy` always shows up in the Emulator UI.
 
 ## Content model
 
-Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/firestore.schema.json`](../../packages/storage/schemas/firestore.schema.json), which also describes the data visitors and functions write. [`packages/storage/collections.ts`](../../packages/storage/collections.ts) lists every collection Hoverboard uses, with its schema and features. `firestore-init` and `firestore-copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked as you make them. Check them with [`firestore-check`](#check-the-data).
+Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/firestore.schema.json`](../../packages/storage/schemas/firestore.schema.json), which also describes the data visitors and functions write. [`packages/storage/collections.ts`](../../packages/storage/collections.ts) lists every collection Hoverboard uses, with its schema and features. `data seed` and `data copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked as you make them. Check them with [`data check`](#check-the-data).
 
 Speakers and sessions have optional `source` and `externalId` fields for data imported from another tool, so a later import can update them instead of adding duplicates.
 
@@ -20,18 +20,18 @@ A session's `stream` is the `https:` link to watch it live. Without one, it uses
 
 On the event's days, the home page shows **On now** below the hero: the sessions that are on, with their links to watch live, and the ones that start in the next 30 minutes. It hides itself between sessions with nothing coming up. It needs `schedule`, and `schedule.published`.
 
-`firestore-init`, `firestore-copy` and the build check the schedule: each `track` must be in `site.json` and on the session's day, `endTime` must be after `startTime`, and sessions in one track can't overlap. The build fails and names the sessions.
+`data seed`, `data copy` and the build check the schedule: each `track` must be in `site.json` and on the session's day, `endTime` must be after `startTime`, and sessions in one track can't overlap. The build fails and names the sessions.
 
 Schedule edits show in the browser at once, and in the built pages after the next deploy, as for other content.
 
 ## Check the data
 
 ```console
-    FIRESTORE_TARGET=production ./hb firestore-check
-    FIRESTORE_TARGET=production ./hb firestore-check --collection speakers
+./hb data check --production
+./hb data check --production --collection speakers
 ```
 
-Reads every document, with subcollections, and checks it against the schema. It also checks the schedule, and that each session's speakers exist. Without `FIRESTORE_TARGET=production`, it reads the emulator. Without `--fix`, it doesn't change anything.
+Reads every document, with subcollections, and checks it against the schema. It also checks the schedule, and that each session's speakers exist. Without `--production`, it reads the emulator. Without `--fix`, it doesn't change anything.
 
 - Each problem names the document, the field and the value, and links to the document in the Firebase console.
 - Problems in the data visitors write, such as `subscribers`, are counted by collection. Their document IDs and values are left out, since they can be emails, push tokens or user IDs.
@@ -42,8 +42,8 @@ Reads every document, with subcollections, and checks it against the schema. It 
 ## Fix the data
 
 ```console
-    FIRESTORE_TARGET=production ./hb firestore-check --fix --dry-run
-    FIRESTORE_TARGET=production ./hb firestore-check --fix
+./hb data check --production --fix --dry-run
+./hb data check --production --fix
 ```
 
 `--fix` runs the data migrations that haven't run, then the safe fixes, then checks the data again. `--dry-run` shows the changes without writing them. Against production, it asks before it writes. Without a terminal to ask in, such as in CI, it needs `--yes`.
@@ -76,7 +76,7 @@ A migration moves data from the shape of an older version to the current one. `c
 - A track that is only on some days gets those days in `days`.
 - It leaves the `schedule` collection in place.
 
-Commit the change to `site.json`, check the schedule and deploy. Then delete the old collections. `firestore-check` lists them with the command for each. Until the migration runs, it says to keep `schedule` instead, since the times are only there. The `generated*` collections can go at any time.
+Commit the change to `site.json`, check the schedule and deploy. Then delete the old collections. `data check` lists them with the command for each. Until the migration runs, it says to keep `schedule` instead, since the times are only there. The `generated*` collections can go at any time.
 
 Also delete the `config/schedule` document. `schedule.published` in `site.json` replaces it.
 
@@ -87,7 +87,7 @@ Also delete the `config/schedule` document. `schedule.published` in `site.json` 
 Before it changes a document, `--fix` saves it as it was in `.firebase/backups/<date>/documents.json`. Git ignores the folder. To undo a fix:
 
 ```console
-    FIRESTORE_TARGET=production ./hb firestore-check --restore .firebase/backups/<date>
+./hb data check --production --restore .firebase/backups/<date>
 ```
 
 It writes back each document as it was, and deletes the session copies the migration created. Edits made since the fix are lost in those documents. It doesn't undo the change to `site.json`. Use `git checkout packages/config/site.json` for that.
@@ -99,35 +99,35 @@ Backups hold your content, and the visitor documents a fix changed or deleted, s
 Import the JSON fixtures in `docs/default-firebase-data.json` into the running Firestore emulator:
 
 ```console
-    ./hb firestore-init
+./hb data seed
 ```
 
 [Optional] Edit `docs/default-firebase-data.json` first to load your own data.
 
-It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` and `speakers` both off it skips `sessions`. The `config/notifications` document needs `notifications`.
+It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` and `speakers` both off it skips `sessions`. The `config/notifications` document needs `notifications`. Documents with the same IDs are replaced. `--dry-run` lists how many documents it would write to each collection.
 
 ## Export emulator data to prefill files
 
-Once your emulator has the data you want (whether from `firestore-init`, the Emulator UI, or your app), export it to `.firebase/emulator-data` so it's automatically reloaded the next time you run `npm start` or `./hb emulators`:
+Once your emulator has the data you want (whether from `data seed`, the Emulator UI, or your app), save it to `.firebase/emulator-data` so it's automatically reloaded the next time you run `npm start` or `./hb emulators`:
 
 ```console
-    ./hb firestore-export
+./hb emulators save
 ```
 
 Starting the emulators (via `npm start` or `./hb emulators`) also automatically exports to `.firebase/emulator-data` on a clean exit (`Ctrl+C`), so your data persists across restarts without running this manually.
 
-## Export a collection as CSV
+## Export collections as CSV
 
 ```console
-    FIRESTORE_TARGET=production ./hb firestore-csv subscribers
+./hb data export --csv --collection subscribers --production
 ```
 
-Writes `subscribers.csv`, with one row per document: an `id` column, then every field. Pass a file name after the collection to write somewhere else. Without `FIRESTORE_TARGET=production`, it reads the emulator. Text that starts with `=`, `+`, `-` or `@` gets a `'` in front, so a spreadsheet shows it instead of running it as a formula. Git ignores `.csv` files, since these hold personal data.
+Writes `subscribers.csv`, with one row per document: an `id` column, then every field. Repeat `--collection` for more collections, each in its own file. A subcollection's file joins its path with `--`, such as `partners--gold--items.csv`. Pass a folder to write them there instead of the current folder. Without `--production`, it reads the emulator. Text that starts with `=`, `+`, `-` or `@` gets a `'` in front, so a spreadsheet shows it instead of running it as a formula. Git ignores `.csv` files, since these hold personal data.
 
 ## Save collection/doc to file
 
 ```console
-    ./hb firestore-copy sourcePath fileToSave.json
+./hb data copy sourcePath fileToSave.json
 ```
 
 Examples:
@@ -135,39 +135,41 @@ Examples:
 Save a collection
 
 ```console
-    ./hb firestore-copy partners/1/items general-partners.json
+./hb data copy partners/1/items general-partners.json
 ```
 
 Save a document
 
 ```console
-    ./hb firestore-copy partners/1/items/000 gdg-lviv-partner.json
+./hb data copy partners/1/items/000 gdg-lviv-partner.json
 ```
 
 ## Load a file to collection/doc
 
 ```console
-    ./hb firestore-copy fileToLoad.json destinationPath
+./hb data copy fileToLoad.json destinationPath
 ```
+
+Documents with the same IDs are replaced. `--dry-run` checks the file without writing it.
 
 Examples:
 
 Load to collection
 
 ```console
-    ./hb firestore-copy general-partners.json partners/1/items
+./hb data copy general-partners.json partners/1/items
 ```
 
 Load a document
 
 ```console
-    ./hb firestore-copy gdg-lviv-partner.json partners/1/items/000
+./hb data copy gdg-lviv-partner.json partners/1/items/000
 ```
 
 ## Copy collection->collection or doc->doc
 
 ```console
-    ./hb firestore-copy sourcePath destinationPath
+./hb data copy sourcePath destinationPath
 ```
 
 Examples:
@@ -175,11 +177,11 @@ Examples:
 Copy a collection
 
 ```console
-    ./hb firestore-copy speakers backups/08-07-2018/speakers
+./hb data copy speakers backups/08-07-2018/speakers
 ```
 
 Copy a document
 
 ```console
-    ./hb firestore-copy speakers/yonatan_levin backups/08-07-2018/speakers/yonatan_levin
+./hb data copy speakers/yonatan_levin backups/08-07-2018/speakers/yonatan_levin
 ```

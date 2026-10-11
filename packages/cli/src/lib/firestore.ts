@@ -3,6 +3,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { DEMO_PROJECT_ID, resolveFirebaseProjectId } from '../utils/firebase-project.js';
 import { findRepoRoot } from '../utils/node-version.js';
 import { useFirebaseLoginCredentials } from './google-cloud.js';
+import { target } from './target.js';
 
 const DEFAULT_EMULATOR_HOST = '127.0.0.1:8080';
 
@@ -12,13 +13,11 @@ if (!repoRoot) {
 }
 
 /**
- * These commands target the local Firestore emulator by default, so running
- * them can never accidentally read or write production data. Pass
- * `FIRESTORE_TARGET=production` (see the `firestore-*:production` package
- * scripts) to explicitly connect to the selected Firebase project instead,
- * signed in as the Firebase CLI's current account.
+ * The data commands use the local Firestore emulator by default, so running them can never
+ * read or write production data by accident. With `--production`, they connect to the project
+ * in site.json instead, signed in as the Firebase CLI's current account.
  */
-if (process.env['FIRESTORE_TARGET'] === 'production') {
+if (target() === 'production') {
   const projectId = resolveFirebaseProjectId(repoRoot);
   if (!projectId) {
     throw new Error('No Firebase project. Set firebase.projectId in packages/config/site.json.');

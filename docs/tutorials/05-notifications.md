@@ -24,9 +24,9 @@ General notifications are sent to everyone (authenticated and anonymous) who has
 
 To send a "General notification" from the command line:
 
-    FIRESTORE_TARGET=production ./hb notify --title "Doors open" --body "Registration is in the main hall." --path /schedule
+    ./hb notify --production --title "Doors open" --body "Registration is in the main hall." --path /schedule
 
-`--path` is the page the notification opens, or a full `https://` link. `--icon` replaces the icon from `config/notifications`. It asks before sending from production, and `--yes` sends without asking. Without `FIRESTORE_TARGET=production`, it adds the notification to the emulator, where `npm start` runs the function. It needs the `notifications` and `functions` features, since the `sendGeneralNotification` function sends it.
+`--path` is the page the notification opens, or a full `https://` link. `--icon` replaces the icon from `config/notifications`. It asks before sending from production, and `--yes` sends without asking. `--dry-run` checks the notification without sending it. Without `--production`, it adds the notification to the emulator, where `npm start` runs the function. It needs the `notifications` and `functions` features, since the `sendGeneralNotification` function sends it.
 
 To send one from the Firebase console instead:
 

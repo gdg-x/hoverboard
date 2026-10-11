@@ -235,8 +235,8 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
     ));
   if (seed) {
     const exitCode = runCommand(
-      'npm',
-      ['--prefix', 'packages/cli', 'run', 'firestore-init:production'],
+      process.execPath,
+      ['hb', 'data', 'seed', '--production', '--yes'],
       repoRoot,
     );
     if (exitCode !== 0) return false;
@@ -253,7 +253,7 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
         ? []
         : [
             '  - Add content in the Firebase console, or the sample content with ' +
-              '`npm run firestore:init:production`.',
+              '`./hb data seed --production`.',
           ]),
       '  - Content edits show in the browser at once, and in the built pages after the next deploy.',
       `  - Edit the rest of the text in ${RESOURCES_PATH}, and the FAQ and code of conduct next to it.`,

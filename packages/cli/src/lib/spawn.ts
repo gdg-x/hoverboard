@@ -1,5 +1,12 @@
 import { spawnSync } from 'child_process';
 
+let stdoutToStderr = false;
+
+/** With `--json`, stdout holds only the result, so commands the CLI runs print to stderr. */
+export const sendOutputToStderr = (on: boolean): void => {
+  stdoutToStderr = on;
+};
+
 /**
  * Runs a command with the developer's terminal attached (inherited stdio), so
  * interactive prompts and build/deploy logs are visible in real time.
@@ -12,7 +19,7 @@ export const runCommand = (
 ): number => {
   const result = spawnSync(command, args, {
     cwd,
-    stdio: 'inherit',
+    stdio: stdoutToStderr ? ['inherit', 2, 'inherit'] : 'inherit',
     env: { ...process.env, ...extraEnv },
   });
   if (result.error) throw result.error;

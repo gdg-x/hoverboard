@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ask, confirm } from './prompt.js';
+import { UsageError } from './command.js';
+import { ask, confirm, confirmChange } from './prompt.js';
 
 const { createInterfaceMock, questionMock, closeMock } = vi.hoisted(() => {
   const questionMock = vi.fn();
@@ -33,6 +34,37 @@ describe('confirm', () => {
 
     await expect(confirm('Continue?')).rejects.toThrow('boom');
     expect(closeMock).toHaveBeenCalled();
+  });
+});
+
+describe('confirmChange', () => {
+  const isTTY = process.stdin.isTTY;
+  afterEach(() => {
+    process.stdin.isTTY = isTTY;
+  });
+
+  it('asks on a terminal', async () => {
+    process.stdin.isTTY = true;
+    questionMock.mockResolvedValue('y');
+
+    await expect(confirmChange('Write it?')).resolves.toBe(true);
+    expect(questionMock).toHaveBeenCalledWith('Write it? [y/N] ');
+  });
+
+  it('goes ahead without asking with yes', async () => {
+    process.stdin.isTTY = false;
+
+    await expect(confirmChange('Write it?', true)).resolves.toBe(true);
+    expect(questionMock).not.toHaveBeenCalled();
+  });
+
+  it('is a usage error that names --yes without a terminal to ask in', async () => {
+    process.stdin.isTTY = false;
+
+    await expect(confirmChange('\nWrite it?')).rejects.toThrow(
+      new UsageError('Write it? Run again with --yes to do it without asking.'),
+    );
+    expect(questionMock).not.toHaveBeenCalled();
   });
 });
 

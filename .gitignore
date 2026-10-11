@@ -11,7 +11,7 @@ firebase-debug.*.log*
 .firebase/
 firebase-export-*
 
-# `./hb firestore-csv` exports, which hold subscribers' and partners' emails
+# `./hb data export --csv` exports, which hold subscribers' and partners' emails
 *.csv
 
 # Firebase config

@@ -25,7 +25,7 @@ Upstream defaults for the other settings in `site.json`, such as `navigation` an
   ...
 ```
 
-`firebase.projectId` is the Firebase project that `./hb deploy`, the deploy workflows and `FIRESTORE_TARGET=production` commands use. `url` defaults to `https://<projectId>.web.app/`. Set `url` only for a custom domain.
+`firebase.projectId` is the Firebase project that `./hb deploy`, the deploy workflows and `./hb` commands with `--production` use. `url` defaults to `https://<projectId>.web.app/`. Set `url` only for a custom domain.
 
 `event.timezone` is the [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the event, for example `Europe/Kyiv` or `America/New_York`. Session days and times in Firestore are in this time zone. Calendar links, the feedback window and session reminders use it. The schedule shows times in it, and visitors in another time zone can switch the schedule to their own. Session pages and the home page's **On now** follow the same choice, and say "(your time)". For an `online` event, times start in the visitor's time zone, and the switch turns them back to the event's. The browser remembers the choice. During the event, a line on the schedule marks the current time.
 
@@ -71,7 +71,7 @@ For example, `["emailLink", "google"]` adds Google, and `["google"]` turns email
 The config is checked with the defaults merged in. The build, `npm run lint` and `./hb doctor` all fail with every error and its path. Run the check on its own with:
 
 ```console
-  ./hb validate-config
+  ./hb config validate
 ```
 
 The check also catches navigation to an unknown page, and images that are not in `packages/web/public`.
@@ -83,7 +83,7 @@ You can change the config and content without installing anything, in the GitHub
 1. Open the file in `packages/config` on GitHub, for example `content/resources.json`, and select the pencil icon. To edit several files at once, press `.` on the repository page to open github.dev.
 1. Make your change. Keep the JSON valid: quotes around keys and text, commas between items, and no comma after the last item.
 1. Select **Commit changes**, choose **Create a new branch for this commit and start a pull request**, then **Propose changes** and **Create pull request**.
-1. The `Deploy Preview` workflow checks the config with `./hb validate-config` first. If the config has errors, the `validate_config` check fails and nothing deploys. Each error shows on its file in the **Files changed** tab (verify). Fix them by editing the file on the pull request's branch.
+1. The `Deploy Preview` workflow checks the config with `./hb config validate` first. If the config has errors, the `validate_config` check fails and nothing deploys. Each error shows on its file in the **Files changed** tab (verify). Fix them by editing the file on the pull request's branch.
 1. When the check passes, a comment on the pull request links to the preview site. It expires after a day, and every new commit updates it.
 1. Merge the pull request. The `Deploy` workflow publishes the change to the live site.
 
@@ -316,8 +316,7 @@ Since lists replace, translating one item of `attendingPage.gettingThere`, `door
 The subscribe band on the home page saves each visitor's email and name to the `subscribers` collection in Firestore. The "Become a partner" button opens a form for a company name, a name and an email, saved to `potentialPartners`. Nobody can read either collection from the site, so the same email can appear more than once. Export them as CSV, for example to import into your mailing tool:
 
 ```console
-  FIRESTORE_TARGET=production ./hb firestore-csv subscribers
-  FIRESTORE_TARGET=production ./hb firestore-csv potentialPartners
+  ./hb data export --csv --collection subscribers --collection potentialPartners --production
 ```
 
 See [Export a collection as CSV](firebase-utils.md#export-a-collection-as-csv).

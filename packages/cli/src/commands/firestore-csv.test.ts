@@ -2,7 +2,7 @@ import { mkdtempSync, readFileSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { runFirestoreCsv, toCsv } from './firestore-csv.js';
+import { csvFileName, runCsvExport, toCsv } from './firestore-csv.js';
 
 const { collectionMock } = vi.hoisted(() => ({ collectionMock: vi.fn() }));
 
@@ -54,7 +54,7 @@ describe('toCsv', () => {
   });
 });
 
-describe('runFirestoreCsv', () => {
+describe('runCsvExport', () => {
   const dirs: string[] = [];
   afterEach(() => {
     vi.unstubAllEnvs();
@@ -62,9 +62,14 @@ describe('runFirestoreCsv', () => {
     for (const dir of dirs.splice(0)) rmSync(dir, { recursive: true, force: true });
   });
 
-  it('writes the collection to <collection>.csv in the directory it runs from', async () => {
+  const tempDir = () => {
     const dir = mkdtempSync(join(tmpdir(), 'hoverboard-csv-'));
     dirs.push(dir);
+    return dir;
+  };
+
+  it('writes the collection to <collection>.csv in the directory it runs from', async () => {
+    const dir = tempDir();
     vi.stubEnv('INIT_CWD', dir);
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     collectionMock.mockReturnValue({
@@ -74,14 +79,34 @@ describe('runFirestoreCsv', () => {
       }),
     });
 
-    await runFirestoreCsv('subscribers');
+    const result = await runCsvExport(['subscribers']);
 
     expect(collectionMock).toHaveBeenCalledWith('subscribers');
     expect(readFileSync(join(dir, 'subscribers.csv'), 'utf8')).toBe(
       'id,email\r\na,ada@example.com\r\n',
     );
     expect(console.log).toHaveBeenCalledWith(
-      `Wrote 1 document from subscribers to ${join(dir, 'subscribers.csv')}.`,
+      `✔ Wrote 1 document from subscribers to ${join(dir, 'subscribers.csv')}.`,
     );
+    expect(result).toEqual({ ok: true, files: { subscribers: join(dir, 'subscribers.csv') } });
+  });
+
+  it('writes each collection to its own file in the folder, creating it', async () => {
+    const dir = tempDir();
+    vi.stubEnv('INIT_CWD', dir);
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    collectionMock.mockReturnValue({ get: async () => ({ size: 0, docs: [] }) });
+
+    await runCsvExport(['subscribers', 'partners/gold/items'], 'exports');
+
+    expect(readFileSync(join(dir, 'exports', 'subscribers.csv'), 'utf8')).toBe('id\r\n');
+    expect(readFileSync(join(dir, 'exports', 'partners--gold--items.csv'), 'utf8')).toBe('id\r\n');
+  });
+});
+
+describe('csvFileName', () => {
+  it('joins the segments of a subcollection path with --', () => {
+    expect(csvFileName('potentialPartners')).toBe('potentialPartners.csv');
+    expect(csvFileName('/team/core/members/')).toBe('team--core--members.csv');
   });
 });

@@ -43,7 +43,7 @@ export const runSetup = async (): Promise<boolean> => {
   }
 
   console.log(
-    '\nNext: run `npm start` in one terminal, then `npm run firestore:init` in another to ' +
+    '\nNext: run `npm start` in one terminal, then `./hb data seed` in another to ' +
       'seed the local Firestore emulator.',
   );
 

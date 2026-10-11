@@ -1,7 +1,7 @@
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { runDeploy } from './deploy.js';
 
 const { runCommandMock, resolveFirebaseBinMock, confirmMock, useFirebaseLoginCredentialsMock } =
@@ -14,13 +14,17 @@ const { runCommandMock, resolveFirebaseBinMock, confirmMock, useFirebaseLoginCre
 
 vi.mock('../lib/spawn.js', () => ({ runCommand: runCommandMock }));
 vi.mock('../lib/firebase-cli.js', () => ({ resolveFirebaseBin: resolveFirebaseBinMock }));
-vi.mock('../lib/prompt.js', () => ({ confirm: confirmMock }));
+vi.mock('../lib/prompt.js', () => ({ confirmChange: confirmMock }));
 vi.mock('../lib/google-cloud.js', () => ({
   useFirebaseLoginCredentials: useFirebaseLoginCredentialsMock,
 }));
 
 const dirsToClean: string[] = [];
 const originalEnv = { ...process.env };
+
+beforeEach(() => {
+  confirmMock.mockImplementation(async (_question: string, yes?: boolean) => Boolean(yes));
+});
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -59,7 +63,7 @@ describe('runDeploy', () => {
 
     const result = await runDeploy();
 
-    expect(confirmMock).toHaveBeenCalledWith(expect.stringContaining('demo-project'));
+    expect(confirmMock).toHaveBeenCalledWith(expect.stringContaining('demo-project'), undefined);
     expect(useFirebaseLoginCredentialsMock).toHaveBeenCalledWith(repo);
     expect(runCommandMock).toHaveBeenNthCalledWith(1, 'npm', ['run', 'build'], repo, {
       FIRESTORE_TARGET: 'production',
@@ -96,7 +100,22 @@ describe('runDeploy', () => {
 
     const result = await runDeploy({ yes: true });
 
+    expect(confirmMock).toHaveBeenCalledWith(expect.any(String), true);
+    expect(result).toBe(true);
+  });
+
+  it('only shows where it would deploy with --dry-run', async () => {
+    makeRepo({ functions: false });
+    const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+
+    const result = await runDeploy({ dryRun: true });
+
     expect(confirmMock).not.toHaveBeenCalled();
+    expect(useFirebaseLoginCredentialsMock).not.toHaveBeenCalled();
+    expect(runCommandMock).not.toHaveBeenCalled();
+    expect(log).toHaveBeenLastCalledWith(
+      expect.stringContaining('firebase deploy --project demo-project --except functions'),
+    );
     expect(result).toBe(true);
   });
 

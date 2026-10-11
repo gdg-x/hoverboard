@@ -17,7 +17,7 @@ jobs:
         with:
           node-version-file: package.json
       - run: npm ci
-      - run: ./hb validate-config
+      - run: ./hb config validate
 
   build_and_preview:
     needs: validate_config

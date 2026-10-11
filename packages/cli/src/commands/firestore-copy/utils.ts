@@ -41,18 +41,32 @@ export async function getData(path: string): Promise<Data> {
   }
 }
 
-export async function saveData(data: Data, path: string): Promise<void> {
+export async function saveData(
+  data: Data,
+  path: string,
+  { dryRun = false }: { dryRun?: boolean } = {},
+): Promise<void> {
   const { file, collection, doc } = getPathObject(path);
   if (file) {
-    await saveDataToFile(data, file);
+    if (!dryRun) await saveDataToFile(data, file);
   } else if (collection && doc) {
-    return setDocument(data, collection, doc);
+    return setDocument(data, collection, doc, dryRun);
   } else if (collection) {
-    return setCollection(data, collection);
+    return setCollection(data, collection, dryRun);
   } else {
     throw new Error('Not a valid destination');
   }
 }
+
+/** How many documents the data from `path` holds: one for a document, or one per entry. */
+export const countDocuments = (path: string, data: Data): number => {
+  const { file, doc } = getPathObject(path);
+  return doc || (file && !isCollection(data)) ? 1 : Object.keys(data).length;
+};
+
+// A file holds a collection when every value is an object, as written from a collection.
+const isCollection = (data: Data) =>
+  Object.values(data).every((value) => typeof value === 'object' && value !== null);
 
 async function fetchDataFromFile(file: string): Promise<Data> {
   const contents = await fs.promises.readFile(path.resolve(BASE_DIR, file), 'utf8');
@@ -78,19 +92,21 @@ async function getCollection(collectionId: string): Promise<Collection> {
   return collection;
 }
 
-async function setDocument(data: Data, collectionId: string, documentId: string) {
+async function setDocument(data: Data, collectionId: string, documentId: string, dryRun = false) {
   validateContent(collectionId, documentId, data);
   if (collectionId === 'sessions') validateSchedule({ [documentId]: data });
+  if (dryRun) return;
   await firestore.collection(collectionId).doc(documentId).set(data);
 }
 
-async function setCollection(data: Data, collectionId: string) {
+async function setCollection(data: Data, collectionId: string, dryRun = false) {
   // Validate everything first so an invalid document leaves the collection unchanged.
   Object.entries(data).forEach(([documentId, document]) =>
     validateContent(collectionId, documentId, document),
   );
   // Sessions copied together are checked together. The build checks them with the ones already there.
   if (collectionId === 'sessions') validateSchedule(data);
+  if (dryRun) return;
   const batch = firestore.batch();
   Object.entries(data).forEach(([documentId, document]) => {
     const docRef = firestore.collection(collectionId).doc(documentId);
@@ -99,7 +115,7 @@ async function setCollection(data: Data, collectionId: string) {
   await batch.commit();
 }
 
-function getPathObject(path: string) {
+export function getPathObject(path: string) {
   const normalizedParams = path.replace(/\/$/, '');
   const paramsExtension = normalizedParams.match(FILE_EXTENSION_PATTERN);
   const pathObject: Partial<PathObject> = {};

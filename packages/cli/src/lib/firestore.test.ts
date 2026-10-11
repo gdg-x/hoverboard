@@ -12,10 +12,18 @@ vi.mock('./google-cloud.js');
 
 const dirsToClean: string[] = [];
 const originalEnv = { ...process.env };
+let production = false;
+
+// Modules are reset before each test, so the target is set on the fresh copy the import reads.
+const importFirestore = async () => {
+  (await import('./target.js')).setTarget(production ? 'production' : 'emulator');
+  return import('./firestore.js');
+};
 
 beforeEach(() => {
   vi.resetModules();
   vi.clearAllMocks();
+  production = false;
 });
 
 afterEach(() => {
@@ -37,12 +45,11 @@ const makeRepoRoot = (): string => {
 describe('lib/firestore (emulator target, the default)', () => {
   it('initializes with the demo project and sets FIRESTORE_EMULATOR_HOST', async () => {
     const repoRoot = makeRepoRoot();
-    delete process.env['FIRESTORE_TARGET'];
     delete process.env['FIRESTORE_EMULATOR_HOST'];
     delete process.env['GCLOUD_PROJECT'];
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
 
-    const firestoreModule = await import('./firestore.js');
+    const firestoreModule = await importFirestore();
 
     expect(initializeApp).toHaveBeenCalledWith({ projectId: 'demo-hoverboard' });
     expect(process.env['FIRESTORE_EMULATOR_HOST']).toBe('127.0.0.1:8080');
@@ -52,23 +59,21 @@ describe('lib/firestore (emulator target, the default)', () => {
 
   it('does not override an already-set FIRESTORE_EMULATOR_HOST', async () => {
     const repoRoot = makeRepoRoot();
-    delete process.env['FIRESTORE_TARGET'];
     process.env['FIRESTORE_EMULATOR_HOST'] = '10.0.0.1:9999';
     process.env['GCLOUD_PROJECT'] = 'demo-project';
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
 
-    await import('./firestore.js');
+    await importFirestore();
 
     expect(process.env['FIRESTORE_EMULATOR_HOST']).toBe('10.0.0.1:9999');
   });
 
   it('ignores the selected Firebase project', async () => {
     const repoRoot = makeRepoRoot();
-    delete process.env['FIRESTORE_TARGET'];
     process.env['GCLOUD_PROJECT'] = 'my-production-project';
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
 
-    await import('./firestore.js');
+    await importFirestore();
 
     expect(initializeApp).toHaveBeenCalledWith({ projectId: 'demo-hoverboard' });
   });
@@ -77,13 +82,13 @@ describe('lib/firestore (emulator target, the default)', () => {
 describe('lib/firestore (production target)', () => {
   it('signs in as the Firebase CLI account to the selected project', async () => {
     const repoRoot = makeRepoRoot();
-    process.env['FIRESTORE_TARGET'] = 'production';
+    production = true;
     process.env['GCLOUD_PROJECT'] = 'prod';
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
     const mockCredential = { fake: 'credential' };
     vi.mocked(applicationDefault).mockReturnValue(mockCredential as never);
 
-    await import('./firestore.js');
+    await importFirestore();
 
     expect(useFirebaseLoginCredentials).toHaveBeenCalledWith(repoRoot);
     expect(initializeApp).toHaveBeenCalledWith({ credential: mockCredential, projectId: 'prod' });
@@ -91,24 +96,22 @@ describe('lib/firestore (production target)', () => {
 
   it('throws when no Firebase project is selected', async () => {
     const repoRoot = makeRepoRoot();
-    process.env['FIRESTORE_TARGET'] = 'production';
+    production = true;
     delete process.env['GCLOUD_PROJECT'];
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
 
-    await expect(import('./firestore.js')).rejects.toThrow(
-      'No Firebase project. Set firebase.projectId',
-    );
+    await expect(importFirestore()).rejects.toThrow('No Firebase project. Set firebase.projectId');
     expect(initializeApp).not.toHaveBeenCalled();
   });
 
   it('throws when nobody is signed in', async () => {
     const repoRoot = makeRepoRoot();
-    process.env['FIRESTORE_TARGET'] = 'production';
+    production = true;
     process.env['GCLOUD_PROJECT'] = 'prod';
     vi.spyOn(process, 'cwd').mockReturnValue(repoRoot);
     vi.mocked(useFirebaseLoginCredentials).mockRejectedValue(new Error('Not logged in'));
 
-    await expect(import('./firestore.js')).rejects.toThrow('Not logged in');
+    await expect(importFirestore()).rejects.toThrow('Not logged in');
     expect(initializeApp).not.toHaveBeenCalled();
   });
 
@@ -117,6 +120,6 @@ describe('lib/firestore (production target)', () => {
     dirsToClean.push(outsideRepo);
     vi.spyOn(process, 'cwd').mockReturnValue(outsideRepo);
 
-    await expect(import('./firestore.js')).rejects.toThrow('Could not find the repository root');
+    await expect(importFirestore()).rejects.toThrow('Could not find the repository root');
   });
 });
