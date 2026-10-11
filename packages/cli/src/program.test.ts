@@ -29,6 +29,8 @@ const notify = ['notify', '--title', 'Doors open', '--body', 'Welcome!'];
 
 describe('hb', () => {
   beforeEach(() => {
+    // CI sets it, which turns errors into annotations.
+    vi.stubEnv('GITHUB_ACTIONS', '');
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     vi.spyOn(console, 'error').mockImplementation(() => undefined);
     vi.spyOn(process.stderr, 'write').mockImplementation(() => true);
