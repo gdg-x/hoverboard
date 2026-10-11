@@ -1,7 +1,6 @@
 import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getId, getInstallations } from 'firebase/installations';
-import { getMessaging, getToken } from 'firebase/messaging';
+import { getMessaging, onRegistered, register } from 'firebase/messaging';
 import { firebaseApp } from '../../firebase';
 
 export enum PROMPT_USER {
@@ -28,9 +27,10 @@ export const requestNotificationPermission = createAsyncThunk<string | undefined
     if (permission === 'granted') {
       try {
         const messaging = getMessaging(firebaseApp);
-        // Registers this browser for push messages; the server addresses it by Installation ID.
-        await getToken(messaging);
-        return await getId(getInstallations(firebaseApp));
+        // register() passes the Installation ID the server sends to, and needs the handler first.
+        const installationId = new Promise<string>((resolve) => onRegistered(messaging, resolve));
+        await register(messaging);
+        return await installationId;
       } catch (_error) {
         throw new Error('unsupported');
       }
