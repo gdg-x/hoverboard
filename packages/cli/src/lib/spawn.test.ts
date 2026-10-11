@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { captureCommand, runCommand } from './spawn.js';
+import { captureCommand, runCommand, sendOutputToStderr } from './spawn.js';
 
 const { spawnSyncMock } = vi.hoisted(() => ({ spawnSyncMock: vi.fn() }));
 
@@ -21,6 +21,20 @@ describe('runCommand', () => {
       expect.objectContaining({ cwd: '/repo', stdio: 'inherit' }),
     );
     expect(exitCode).toBe(0);
+  });
+
+  it('sends the output to stderr when stdout is for the --json result', () => {
+    spawnSyncMock.mockReturnValue({ status: 0 });
+
+    sendOutputToStderr(true);
+    runCommand('firebase', ['deploy'], '/repo');
+    sendOutputToStderr(false);
+
+    expect(spawnSyncMock).toHaveBeenCalledWith(
+      'firebase',
+      ['deploy'],
+      expect.objectContaining({ stdio: ['inherit', 2, 'inherit'] }),
+    );
   });
 
   it('merges extraEnv on top of the current process env', () => {

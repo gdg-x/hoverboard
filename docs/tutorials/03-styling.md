@@ -30,13 +30,23 @@ The themes are in `packages/web/src/themes/`. `./hb init` asks which one to use.
 
 Every component reads the theme through CSS variables that start with `--hb-`, such as `--hb-color-primary`, `--hb-space-4` and `--hb-radius-m`. Use them in your own styles, so they follow the theme and the dark scheme. The variables of Hoverboard 3, such as `--default-primary-color`, are gone.
 
+Put your own styles in `packages/config/custom.css`. Every page loads it after the theme, so it can change any `--hb-` variable:
+
+```css
+:root {
+  --hb-radius-m: 4px;
+}
+```
+
+Components draw inside their own shadow DOM, so other selectors only reach the page around them. The variables reach inside. The file can't contain `</style`, since pages inline it.
+
 ## Logo
 
-The header shows `packages/web/public/images/logo.svg`, made for light backgrounds. Add `logo-dark.svg` next to it for the dark scheme. Without it, the header shows `shortName` from `site.json` as text in the dark scheme.
+The header shows `packages/config/public/images/logo.svg`, made for light backgrounds. Add `logo-dark.svg` next to it for the dark scheme. Without it, the header shows `shortName` from `site.json` as text in the dark scheme. `./hb init --logo <file>` copies your logo there, and removes the demo's dark logo.
 
 ## App icon
 
-The icon of the installed app, and of the site on phone home screens, is `packages/web/public/images/icon.png`. The build resizes it to every size the web app manifest and browsers need, from 16 to 512 pixels, including the favicon. Replace it with a square PNG of at least 512×512 pixels, or point `icon` in `site.json` at a square SVG in `packages/web/public`. An icon that isn't square sits centered on a transparent square.
+The icon of the installed app, and of the site on phone home screens, is `packages/config/public/images/icon.png`. The build resizes it to every size the web app manifest and browsers need, from 16 to 512 pixels, including the favicon. Replace it with a square PNG of at least 512×512 pixels, or point `icon` in `site.json` at a square SVG in `packages/config/public`. `./hb init --icon <file>` copies either, and `--share-image <file>` the image link previews show. An icon that isn't square sits centered on a transparent square.
 
 ## Colors
 
@@ -58,7 +68,7 @@ When you change a light color and not its dark version, the build makes a dark v
 
 The color names are in `packages/web/src/themes/tokens.ts`, and their values in `festival.ts`, `spotlight.ts`, `paper.ts` and `glass.ts`. The build writes them on `:root` in every page as CSS variables, such as `--hb-color-primary`, so the first paint already has your colors.
 
-The build checks that text colors have enough contrast with their backgrounds, in each color scheme the site uses. For example, `onPrimary` on `primary` needs a ratio of 4.5:1. When a pair fails, `npm run build` and `./hb validate-config` stop with an error like this:
+The build checks that text colors have enough contrast with their backgrounds, in each color scheme the site uses. For example, `onPrimary` on `primary` needs a ratio of 4.5:1. When a pair fails, `npm run build` and `./hb config validate` stop with an error like this:
 
 ```text
 site.json/theme: onPrimary on primary has a contrast of 2.02:1 in the dark scheme, and needs 4.5:1. Change theme.darkColors.

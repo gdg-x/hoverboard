@@ -551,6 +551,12 @@
 <trans-unit id="shell.app-install.cta">
   <source>Add to Home Screen</source>
 </trans-unit>
+<trans-unit id="shell.archive-banner.text">
+  <source>This is the <x id="0" equiv-text="${year}"/> edition.</source>
+</trans-unit>
+<trans-unit id="shell.archive-banner.link">
+  <source>See the current edition</source>
+</trans-unit>
 <trans-unit id="shell.demo.density.compact">
   <source>Compact</source>
 </trans-unit>

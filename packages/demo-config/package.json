@@ -1,0 +1,6 @@
+{
+  "name": "@hoverboard/demo-config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The demo site's Hoverboard config and content, used when packages/config has no site.json. Read by path from packages/web, so it has no dependencies"
+}

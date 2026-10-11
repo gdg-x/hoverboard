@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import site from '../../../config/site.json';
+import site from '../../../demo-config/site.json';
 import { CONFIG_MIGRATIONS, schemaVersionAfter } from './config.js';
 
 describe('CONFIG_MIGRATIONS', () => {

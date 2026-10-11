@@ -1,0 +1,10 @@
+{
+  "partners/0": {
+    "title": "Template Creator",
+    "order": 0
+  },
+  "partners/1": {
+    "title": "General Partner",
+    "order": 1
+  }
+}

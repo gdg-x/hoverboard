@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { createGoogleCloud, type GoogleCloud } from '../lib/google-cloud.js';
+import { siteConfigPath } from './firebase-project.js';
 import type { DoctorCheckResult } from './node-version.js';
 import { siteFeatures } from './site-features.js';
 
@@ -39,7 +40,7 @@ interface SiteJson {
 }
 
 const readSite = (repoRoot: string): SiteJson => {
-  const path = join(repoRoot, 'packages', 'config', 'site.json');
+  const path = join(repoRoot, siteConfigPath(repoRoot));
   return existsSync(path) ? (JSON.parse(readFileSync(path, 'utf8')) as SiteJson) : {};
 };
 

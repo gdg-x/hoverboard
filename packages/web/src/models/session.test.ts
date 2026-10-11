@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import data from '../../../../docs/default-firebase-data.json';
+import sessionDocuments from '../../../../docs/sample-data/collections/sessions.json';
 import type { SessionData } from './session';
 import { allKeys } from './utils';
 
 describe('session', () => {
   it('matches the shape of the default data', () => {
-    const sessions: SessionData[] = Object.values(data['sessions']);
+    const sessions: SessionData[] = Object.values(sessionDocuments);
     const keys: Array<keyof SessionData> = [
       'complexity',
       'day',

@@ -25,11 +25,17 @@ export const absolute = (pattern) => {
 
 const readLocales = (path) => JSON.parse(readFileSync(path, 'utf8')).locales ?? {};
 
+/** packages/config once it has a site.json, else the demo, as in resolve-config.ts. */
+const defaultSiteDir = () => {
+  const site = resolve(webRoot, '../config');
+  return existsSync(join(site, 'site.json')) ? site : resolve(webRoot, '../demo-config');
+};
+
 /**
  * Every locale in `locales.source` and `locales.targets` except the source locale in code. The
  * site's `locales` merges over the defaults, as in resolve-config.ts.
  */
-export const siteTargetLocales = (siteDir = resolve(webRoot, '../config')) => {
+export const siteTargetLocales = (siteDir = defaultSiteDir()) => {
   const { source, targets = [] } = {
     ...readLocales(join(webRoot, 'defaults/site.json')),
     ...readLocales(join(siteDir, 'site.json')),

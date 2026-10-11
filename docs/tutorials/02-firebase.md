@@ -9,19 +9,19 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 
 1. Click _Add Firebase to your web app_.
 
-1. Set your Firebase project ID as `firebase.projectId` in `packages/config/site.json`. Only deploys and `FIRESTORE_TARGET=production` commands use it. Local development always uses the `demo-hoverboard` project on the emulators.
+1. Set your Firebase project ID as `firebase.projectId` in `packages/config/site.json`. Only deploys and `./hb` commands with `--production` use it. Local development always uses the `demo-hoverboard` project on the emulators.
    - _Tip: `./hb setup` logs you in and writes `.firebaserc` from it, so plain `npx firebase` commands use the same project._
 
 1. Seed data for local development
    - Local development runs against the [Firestore emulator](https://firebase.google.com/docs/emulator-suite) instead of your live project, so no Firestore database setup is required for this
-   - [Optional] You can edit `docs/default-firebase-data.json` to use your own data
-   - Run `npm start`, then in another terminal run `./hb firestore-init` to import that data into the running emulator
+   - [Optional] You can edit the files in `docs/sample-data/collections` to use your own data
+   - Run `npm start`, then in another terminal run `./hb data seed` to import that data into the running emulator
 
 1. [Optional] Import initial data into the **production** Firebase Database
    - Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
    - The command signs in with your Firebase CLI login (`npx firebase login`) and writes to the project in `site.json`. No service account key is needed.
    - [Optional] If you need to clear out all of your data first, run `npx firebase firestore:delete --recursive --all-collections`
-   - Run `FIRESTORE_TARGET=production ./hb firestore-init`
+   - Run `./hb data seed --production`. It asks before it writes
 
 1. Whoa! You've set up Firebase into your app.
 

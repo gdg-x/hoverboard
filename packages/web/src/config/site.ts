@@ -13,6 +13,8 @@ import { isFeature, isFeatureEnabled, isNavigationRoute, type NavigationRoute } 
 import { deepMerge } from './merge';
 
 export const { basepath, heroSettings, image, organizer, url } = settings;
+/** Set on an archived edition: its year, and the current edition's address. The site is read-only. */
+export const archive = (settings as { archive?: { year: number; current: string } }).archive;
 /** The site's own hero illustration's markup, from `heroSettings.home.illustration`. */
 export { heroIllustration };
 /** The commit and time of the build. */

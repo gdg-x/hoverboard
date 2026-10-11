@@ -39,16 +39,37 @@ Every breaking change must:
 
 When possible, deprecate first: keep the old behavior working in a minor release with a warning from the build or `hb doctor`, then remove it in the next major.
 
+## Upgrading
+
+`./hb upgrade [version]` upgrades a site to a release, the latest by default:
+
+1. It needs a clean working tree. It adds the `upstream` remote, `https://github.com/gdg-x/hoverboard.git`, when no remote points there, and fetches the releases.
+2. It shows the release notes since your version, with the breaking changes first, and your changes to Hoverboard's files outside `packages/config`, marking the ones the release changes too. Those are the likely conflicts. Then it asks.
+3. It merges the release's tag into a new branch, `upgrade/v<version>`, and resolves what it knows how to:
+   - Lockfiles are never merged as text. It takes the release's, then adds your own dependencies back with `npm install --package-lock-only`.
+   - `package.json` files merge by key. `version` and every dependency take the release's value, which upstream tested, and dependencies only you added stay. A dependency you changed and the release didn't goes back to the release's version, and the upgrade lists it.
+   - A file you deleted stays deleted, such as `.github/dependabot.yml`.
+   - `README.md` and files in `packages/web/public/images` keep your version.
+4. On other conflicts, it stops and lists them. Resolve them, `git add` them, and run `./hb upgrade --continue`. `./hb upgrade --abort` goes back to where you started.
+5. It runs `npm ci`, the release's config migrations, and a build without content, then commits.
+6. It offers to push the branch and open a pull request with the [GitHub CLI](https://cli.github.com/).
+
+The production data migrations run from the upgrade branch, before you merge: `./hb upgrade --production --migrations-only --dry-run`, then without `--dry-run`. Merge the pull request with a merge commit, not a squash, so the next upgrade starts from this release. A squash makes the next upgrade start from the old release and repeat every conflict.
+
+A repository made from the template, or a downloaded copy, shares no history with Hoverboard. The first upgrade records the release in the root `package.json` as merged, without changing a file, so later merges start from it. This is only right when your files match that release apart from your own changes, which the upgrade lists first (verify).
+
+The [Upgrade Hoverboard](../.github/workflows/upgrade.yaml) workflow runs `./hb upgrade --yes` every Monday, and opens the pull request. When the upgrade stops on a conflict, the workflow fails: run `./hb upgrade` on your computer. A pull request the workflow opens doesn't start the other workflows, such as the preview deploy, until you push to it, or close and reopen it (verify).
+
 ## Migrations
 
-`./hb upgrade` brings a site's config and data up to the Hoverboard version it runs:
+`./hb upgrade --migrations-only` brings a site's config and data up to the Hoverboard version it runs. The code upgrade runs it with `--no-data`:
 
-1. It moves `packages/config/site.json` to the current `schemaVersion`, one config migration at a time, and checks the result like `./hb validate-config`.
-2. It runs the Firestore data migrations and fixes, as `./hb firestore-check --fix` does, with the same backup and confirmation. It reads the emulator unless `FIRESTORE_TARGET=production` is set.
+1. It moves `site.json` to the current `schemaVersion`, one config migration at a time, and checks the result like `./hb config validate`.
+2. It runs the Firestore data migrations and fixes, as `./hb data check --fix` does, with the same backup and confirmation. It reads the emulator unless you add `--production`. `--no-data` skips them.
 
 `--dry-run` shows both without writing anything. A `site.json` without `schemaVersion` is from before v4, and `hb upgrade` refuses it.
 
-To change the shape of `site.json`, add a migration to `CONFIG_MIGRATIONS` in [packages/cli/src/migrations/config.ts](../packages/cli/src/migrations/config.ts), with the next version, and set that `schemaVersion` in `packages/config/site.json`. A test fails when they disagree. To change Firestore data, add a migration to [packages/cli/src/migrations/](../packages/cli/src/migrations/) and list it in `MIGRATIONS`, as in [firebase-utils.md](tutorials/firebase-utils.md#migrations).
+To change the shape of `site.json`, add a migration to `CONFIG_MIGRATIONS` in [packages/cli/src/migrations/config.ts](../packages/cli/src/migrations/config.ts), with the next version, and set that `schemaVersion` in `packages/demo-config/site.json`. A test fails when they disagree. To change Firestore data, add a migration to [packages/cli/src/migrations/](../packages/cli/src/migrations/) and list it in `MIGRATIONS`, as in [firebase-utils.md](tutorials/firebase-utils.md#migrations).
 
 ## Pull requests
 

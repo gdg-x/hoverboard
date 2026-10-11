@@ -32,7 +32,9 @@ jobs:
       - run: |
           channel="pr${PR_NUMBER}-${HEAD_REF:0:20}"
           channel="${channel//[^a-zA-Z0-9_.-]/_}"
-          npx firebase hosting:channel:delete "$channel" --force --project "$(jq -r .firebase.projectId packages/config/site.json)"
+          project=$(./hb config project-id)
+          npx firebase hosting:channel:delete "$channel" --force --project "$project"
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_REF: ${{ github.head_ref }}
+          HB_DEMO: ${{ vars.HB_DEMO }}

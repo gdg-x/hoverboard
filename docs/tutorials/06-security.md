@@ -4,7 +4,7 @@ What Hoverboard protects for you, and what you set in your own Firebase project 
 
 ## What Hoverboard does
 
-- **Firestore rules.** Visitors can only read your content. You change it in the Firebase console or with `./hb firestore-*`. Signed-in visitors can write only their own saved sessions, notification settings, feedback, reactions and public profile. A reaction needs its author's profile and a session that exists, and the rules check every field. The subscribe and partner forms can only add documents, with checked fields and sizes, and nobody can read them from the site. Export them with [`./hb firestore-csv`](01-configure-app.md#subscribers-and-partner-leads).
+- **Firestore rules.** Visitors can only read your content. You change it in the Firebase console or with `./hb data`. Signed-in visitors can write only their own saved sessions, notification settings, feedback, reactions and public profile. A reaction needs its author's profile and a session that exists, and the rules check every field. The subscribe and partner forms can only add documents, with checked fields and sizes, and nobody can read them from the site. Export them with [`./hb data export --csv`](01-configure-app.md#subscribers-and-partner-leads).
 - **Storage rules.** The site can't read or write your Storage bucket.
 - **Content.** Links in your config and content can only be `https:`, `http:`, `mailto:` or a path on your site. The site drops other links, such as `javascript:` ones, even when they come straight from the Firebase console. Markdown is sanitized before it is shown, and the build sanitizes the hero illustration.
 - **Headers.** `firebase.json` sends `Strict-Transport-Security`, `Referrer-Policy`, `Permissions-Policy` and other headers on every page, and every page has a [Content Security Policy](01-configure-app.md#content-security-policy).
@@ -31,6 +31,10 @@ Do these once when you set up a site, and check them again before the event.
    - **Actions** > **General**: set the workflow permissions to read, and turn off "Allow GitHub Actions to create and approve pull requests" unless you use release-please.
    - **Rules**: add a ruleset for `main` that requires a pull request and the `build`, `test` and `lint` checks, and blocks force pushes.
 
+## Archived editions
+
+An [archived edition](07-next-edition.md) keeps its sessions, speakers, feedback and reactions in its own project, with read-only Firestore rules: only its content and the reactions can be read, and nothing can be written. Its Auth users, profiles, push tokens and saved sessions are deleted. Its `subscribers` and `potentialPartners`, and feedback, stay there until you delete them. `./hb edition switch` backs up the project first, and the backup in `.firebase/backups` holds all of it.
+
 ## What `./hb doctor` checks
 
 - Your Node.js version, Firebase login, project and site config.
@@ -40,7 +44,8 @@ Do these once when you set up a site, and check them again before the event.
 - The GitHub deploy setup and its roles, as `./hb setup-github` sets them.
 - Service account keys, and old `github-action-*` accounts.
 - The browser API key and the Maps key: which sites and APIs they allow.
-- Backups from `./hb firestore-check --fix` older than 30 days. They hold your content.
+- Backups in `.firebase/backups` older than 30 days. They hold your content, and can hold personal data.
+- A Firestore backup schedule on the production database. See [Scheduled backups](firebase-utils.md#scheduled-backups).
 
 Each problem comes with what to change. Some checks need an API turned on in your project, and say so.
 

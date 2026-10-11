@@ -36,15 +36,16 @@ In the [`.github/workflows`](.github/workflows) folder, you can find two workflo
 
 - [`main.yaml`](.github/workflows/main.yaml) Builds the project, runs the linter and the tests on every push.
 - [`security.yaml`](.github/workflows/security.yaml) Checks the workflows with zizmor, and the dependencies for known vulnerabilities.
-- [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) Checks `packages/config` with `./hb validate-config`, then deploys a preview of the website to Firebase after every push to a pull request. Functions and Firestore rules are not deployed. See [Editing on GitHub](01-configure-app.md#editing-on-github).
+- [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) Checks `packages/config` with `./hb config validate`, then deploys a preview of the website to Firebase after every push to a pull request. Functions and Firestore rules are not deployed. See [Editing on GitHub](01-configure-app.md#editing-on-github).
 - [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every push to the `main` branch. You can also run it by hand, for example after you change content in Firestore: open **Actions** > **Deploy** > **Run workflow** on GitHub, or run `gh workflow run deploy.yaml`. It only deploys from `main`. It deploys with `--force`, so it deletes functions that are no longer in the code without asking.
+- [`upgrade.yaml`](.github/workflows/upgrade.yaml) Every Monday, runs `./hb upgrade` and opens a pull request for the new Hoverboard release, if there is one. See [Upgrading](../releases.md#upgrading).
 
 The `main.yaml` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
 To run the two `deploy` actions on your instance, you need to do a couple of small setup:
 
 ### Deploying to Firebase with Github Actions
 
-Both workflows deploy to `firebase.projectId` from `packages/config/site.json`. You don't need to edit them.
+Both workflows deploy to `firebase.projectId` from `packages/config/site.json`, which `./hb config project-id` prints. You don't need to edit them. Without `packages/config/site.json`, they stop instead of deploying the demo site. Hoverboard's own repository, whose site is the demo, sets the `HB_DEMO` repository variable to `true`.
 
 Both workflows sign in to Google Cloud with Workload Identity Federation. GitHub gives each run a short-lived token, so there is no service account key to store or rotate. Only workflows in your repository can use it. Set it up once:
 
@@ -72,7 +73,7 @@ Pull requests from forks cannot get a token, so they do not deploy a preview. Th
 
 The preview and the live deploys use the same service account. A pull request's workflow runs the code on its branch, so anyone who can push a branch to your repository can deploy to the live site, deploy functions and rules, and read your Firestore data, including subscribers. Only give write access to the repository to people you would trust with the Firebase console. A separate account for previews wouldn't help much: it would still need Hosting Admin, which can release to the live site too, and read access to Firestore.
 
-The first deploy, from `./hb init` or `./hb deploy`, runs with your own account. It enables the APIs, creates the Firestore database, and grants Google's service agents the roles functions need. The deploy account can't do these, so if a new kind of function needs another API, deploy once from your computer.
+The first deploy, from `./hb init` or `./hb deploy`, runs with your own account. It enables the APIs and grants Google's service agents the roles functions need. `./hb init` creates the Firestore database before it, in the location you pick. The deploy account can't do these, so if a new kind of function needs another API, deploy once from your computer.
 
 You can now push to your `main` branch and it'll deploy to the production (`live`) Firebase Hosting channel and pull requests will deploy a temporary preview.
 

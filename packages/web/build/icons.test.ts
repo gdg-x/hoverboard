@@ -34,20 +34,20 @@ describe('iconErrors', () => {
     writeFileSync(join(publicDir, 'icon.png'), await png(1024));
     writeFileSync(join(publicDir, 'icon.svg'), '<svg viewBox="0 0 24 24"></svg>');
 
-    expect(iconErrors('icon.png', publicDir)).toEqual([]);
-    expect(iconErrors('icon.svg', publicDir)).toEqual([]);
+    expect(iconErrors('icon.png', [publicDir])).toEqual([]);
+    expect(iconErrors('icon.svg', [publicDir])).toEqual([]);
   });
 
-  it('rejects an icon that is not in packages/web/public', () => {
-    expect(iconErrors('images/missing.png', publicDir)).toEqual([
-      'site.json/icon: "images/missing.png" is not in packages/web/public',
+  it('rejects an icon that is not in packages/config/public or packages/web/public', () => {
+    expect(iconErrors('images/missing.png', [publicDir])).toEqual([
+      'site.json/icon: "images/missing.png" is not in packages/config/public or packages/web/public',
     ]);
   });
 
   it('rejects a PNG that is too small for the largest icon', async () => {
     writeFileSync(join(publicDir, 'icon.png'), await png(512, 256));
 
-    expect(iconErrors('icon.png', publicDir)).toEqual([
+    expect(iconErrors('icon.png', [publicDir])).toEqual([
       'site.json/icon: "icon.png" is 512×256 pixels, and needs to be at least 512×512',
     ]);
   });
@@ -55,12 +55,14 @@ describe('iconErrors', () => {
   it('rejects a .png file that is not a PNG', () => {
     writeFileSync(join(publicDir, 'icon.png'), 'not a png');
 
-    expect(iconErrors('icon.png', publicDir)).toEqual([
+    expect(iconErrors('icon.png', [publicDir])).toEqual([
       'site.json/icon: "icon.png" is not a PNG file',
     ]);
   });
 
-  it("accepts the repository's icon", () => {
-    expect(iconErrors('images/icon.png', join(import.meta.dirname, '../public'))).toEqual([]);
+  it("accepts the demo's icon", () => {
+    expect(
+      iconErrors('images/icon.png', [join(import.meta.dirname, '../../demo-config/public')]),
+    ).toEqual([]);
   });
 });

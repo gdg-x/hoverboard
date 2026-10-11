@@ -403,6 +403,24 @@
         }
       }
     },
+    "archive": {
+      "description": "Makes the site an archived edition: read-only, with a banner on every page that links to the current edition. `hb edition switch` sets it. The features that write, and blog, demo and forkMe, must be off.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["year", "current"],
+      "properties": {
+        "year": {
+          "description": "The edition's year.",
+          "type": "integer",
+          "minimum": 2000,
+          "maximum": 2999
+        },
+        "current": {
+          "description": "The address of the current edition.",
+          "$ref": "#/$defs/url"
+        }
+      }
+    },
     "features": {
       "description": "Turns site features on or off. Every feature is on by default, except demo and forkMe.",
       "type": "object",

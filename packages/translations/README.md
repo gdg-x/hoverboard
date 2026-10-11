@@ -9,6 +9,6 @@ Translations of Hoverboard's UI text. `packages/web` reads them by relative path
 
 Do not edit `xliff/` by hand. Fix translations in Crowdin, so the next sync does not overwrite them.
 
-Event content translations are not here. Each site keeps them in `packages/config/content/locales/<locale>/`.
+Event content translations are not here. Each site keeps them in `packages/config/content/locales/<locale>/`, and the demo in `packages/demo-config`.
 
 `__tests__/` checks that every translated message exists in `source/en.xlf` and keeps its placeholders.

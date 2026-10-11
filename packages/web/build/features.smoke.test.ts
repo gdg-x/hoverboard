@@ -12,7 +12,7 @@ declare module 'vitest' {
   }
 }
 
-const siteConfig = fileURLToPath(new URL('../../config', import.meta.url));
+const siteConfig = fileURLToPath(new URL('../../demo-config', import.meta.url));
 
 // Features that need the one under test are off too, as in a valid site.json.
 const withDependents = (feature: Feature): Feature[] => [

@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import data from '../../../../docs/default-firebase-data.json';
+import blog from '../../../../docs/sample-data/collections/blog.json';
 import type { PostData } from './post';
 import { allKeys } from './utils';
 
 describe('post', () => {
   it('matches the shape of the default data', () => {
-    const posts: PostData[] = Object.values(data['blog']);
+    const posts: PostData[] = Object.values(blog);
     const keys: Array<keyof PostData> = [
       'backgroundColor',
       'brief',

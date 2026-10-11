@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
+import { siteConfigPath } from './firebase-project.js';
 
 type Features = Record<string, boolean>;
 
@@ -8,10 +9,10 @@ const readFeatures = (path: string): Features =>
     ? ((JSON.parse(readFileSync(path, 'utf8')) as { features?: Features }).features ?? {})
     : {};
 
-/** The `features` of packages/config/site.json over the upstream defaults. */
+/** The `features` of the site.json in use over the upstream defaults. */
 export const siteFeatures = (repoRoot: string): Features => ({
   ...readFeatures(join(repoRoot, 'packages', 'web', 'defaults', 'site.json')),
-  ...readFeatures(join(repoRoot, 'packages', 'config', 'site.json')),
+  ...readFeatures(join(repoRoot, siteConfigPath(repoRoot))),
 });
 
 /** Whether the site deploys Cloud Functions. Without `features.functions`, it does. */

@@ -1,0 +1,34 @@
+name: Upgrade Hoverboard
+on:
+  # Mondays, a few days after most releases.
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+permissions: {}
+jobs:
+  upgrade:
+    # Hoverboard's own repository makes the releases.
+    if: github.repository != 'gdg-x/hoverboard'
+    runs-on: ubuntu-latest
+    permissions:
+      # Pushes the upgrade branch and opens its pull request.
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # The merge needs the history, and hb upgrade pushes its branch.
+          fetch-depth: 0
+          persist-credentials: true # zizmor: ignore[artipacked]
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: package.json
+      - run: npm ci
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+      # Merges the latest release on a new branch, and opens a pull request for it. It stops on
+      # conflicts it can't resolve: run ./hb upgrade on your computer then.
+      - run: ./hb upgrade --yes
+        env:
+          GH_TOKEN: ${{ github.token }}

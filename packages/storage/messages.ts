@@ -6,7 +6,7 @@ export interface MessageOptions {
   hideValues?: boolean;
   /** Ends each message with a link to the document. */
   url?: string;
-  /** Marks the problems that `hb firestore-check --fix` can fix. */
+  /** Marks the problems that `hb data check --fix` can fix. */
   fixable?: (error: ErrorObject) => boolean;
 }
 

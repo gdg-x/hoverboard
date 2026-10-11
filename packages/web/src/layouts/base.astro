@@ -1,7 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import { fontCss, fontStylesheets } from 'virtual:hoverboard/fonts';
-import { theme, themeCss } from 'virtual:hoverboard/layout';
+import { customCss, theme, themeCss } from 'virtual:hoverboard/layout';
 import { resources, site, build } from 'virtual:hoverboard/site';
 import '../styles/base.css';
 import { FooterBlock } from '../components/footer/footer-block';
@@ -175,6 +175,7 @@ await demoBanner;
 
     <style is:inline set:html={themeCss} />
     <style is:inline set:html={fontCss} />
+    {customCss && <style is:inline set:html={customCss} />}
 
     {import.meta.env.DEV ? (
       <script is:inline define:vars={{ demoFirebaseConfig }}>

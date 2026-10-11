@@ -1,12 +1,18 @@
 import { resolveFirebaseBin } from '../lib/firebase-cli.js';
 import { useFirebaseLoginCredentials } from '../lib/google-cloud.js';
-import { confirm } from '../lib/prompt.js';
+import { confirmChange } from '../lib/prompt.js';
 import { runCommand } from '../lib/spawn.js';
-import { checkFirebaseProject, resolveFirebaseProjectId } from '../utils/firebase-project.js';
+import {
+  checkFirebaseProject,
+  demoDeployProblem,
+  resolveFirebaseProjectId,
+} from '../utils/firebase-project.js';
 import { checkNodeVersion, findRepoRoot } from '../utils/node-version.js';
 import { firebaseDeployArgs } from '../utils/site-features.js';
 
 export interface DeployOptions {
+  /** Run the checks and show where it would deploy, without building or deploying. */
+  dryRun?: boolean;
   yes?: boolean;
 }
 
@@ -17,6 +23,11 @@ export interface DeployOptions {
  */
 export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> => {
   const repoRoot = findRepoRoot(process.cwd());
+  const demo = repoRoot && demoDeployProblem(repoRoot);
+  if (demo) {
+    console.log(`✘ ${demo}`);
+    return false;
+  }
   const checks = [checkNodeVersion(repoRoot), checkFirebaseProject(repoRoot)];
   for (const check of checks) {
     console.log(`${check.ok ? '✔' : '✘'} ${check.name}: ${check.message}`);
@@ -24,16 +35,24 @@ export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> =
 
   const projectId = repoRoot && resolveFirebaseProjectId(repoRoot);
   if (!repoRoot || !projectId || checks.some((check) => !check.ok)) {
-    console.log('\nFix the issues above before deploying (run `hoverboard doctor` for details).');
+    console.log('\nFix the issues above before deploying (run `./hb doctor` for details).');
     return false;
   }
 
-  if (!options.yes) {
-    const proceed = await confirm(`\nDeploy Hoverboard to Firebase project "${projectId}"?`);
-    if (!proceed) {
-      console.log('Aborted.');
-      return false;
-    }
+  const extraArgs = firebaseDeployArgs(repoRoot);
+  if (options.dryRun) {
+    console.log(
+      `\nDry run: would build from production Firestore, then run firebase deploy ` +
+        `${['--project', projectId, ...extraArgs].join(' ')}.`,
+    );
+    return true;
+  }
+
+  if (
+    !(await confirmChange(`\nDeploy Hoverboard to Firebase project "${projectId}"?`, options.yes))
+  ) {
+    console.log('Aborted.');
+    return false;
   }
 
   console.log('\nBuilding...');
@@ -49,7 +68,6 @@ export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> =
   }
 
   console.log('\nDeploying...');
-  const extraArgs = firebaseDeployArgs(repoRoot);
   if (extraArgs.length) {
     console.log(
       'Skipping Cloud Functions: features.functions is false in packages/config/site.json.',

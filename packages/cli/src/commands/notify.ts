@@ -1,6 +1,7 @@
+import type { CommandResult } from '../lib/command.js';
 import { documentMessages } from '../lib/content.js';
-import { confirm } from '../lib/prompt.js';
-import { resolveFirebaseProjectId } from '../utils/firebase-project.js';
+import { confirmChange } from '../lib/prompt.js';
+import { productionProjectId } from '../lib/target.js';
 import { findRepoRoot } from '../utils/node-version.js';
 import { siteFeatures } from '../utils/site-features.js';
 
@@ -10,6 +11,8 @@ export interface NotifyOptions {
   /** The page or link the notification opens. */
   path?: string;
   icon?: string;
+  /** Check the notification without adding it. */
+  dryRun?: boolean;
   /** Send to production without asking. */
   yes?: boolean;
 }
@@ -17,9 +20,16 @@ export interface NotifyOptions {
 /**
  * Sends a general notification to every device that turned general notifications on, by adding
  * it to `notifications`. The `sendGeneralNotification` function sends it from there. Writes to the
- * emulator unless FIRESTORE_TARGET=production. Returns whether it was added.
+ * emulator unless the target is production.
  */
-export const runNotify = async ({ title, body, path, icon, yes = false }: NotifyOptions) => {
+export const runNotify = async ({
+  title,
+  body,
+  path,
+  icon,
+  dryRun = false,
+  yes = false,
+}: NotifyOptions): Promise<CommandResult | false> => {
   const repoRoot = findRepoRoot(process.cwd()) ?? process.cwd();
   const features = siteFeatures(repoRoot);
   const off = (['notifications', 'functions'] as const).filter((name) => features[name] === false);
@@ -45,24 +55,29 @@ export const runNotify = async ({ title, body, path, icon, yes = false }: Notify
     return false;
   }
 
-  const projectId =
-    process.env['FIRESTORE_TARGET'] === 'production'
-      ? resolveFirebaseProjectId(repoRoot)
-      : undefined;
-  if (projectId && !yes) {
-    const question = `Send "${notification.title}" to every subscribed device of ${projectId}?`;
-    if (!process.stdin.isTTY) {
-      console.log(`✘ ${question} Run again with --yes to send it without asking.`);
-      return false;
-    }
-    if (!(await confirm(question))) return false;
+  const projectId = productionProjectId(repoRoot);
+  const target = projectId ?? 'the emulator';
+  if (dryRun) {
+    console.log(
+      `✔ notifications/${id} is valid. Dry run: it wasn't added to ${target}, so nothing was sent.`,
+    );
+    return { ok: true, path: `notifications/${id}`, dryRun };
+  }
+  if (
+    projectId &&
+    !(await confirmChange(
+      `Send "${notification.title}" to every subscribed device of ${projectId}?`,
+      yes,
+    ))
+  ) {
+    return false;
   }
 
   const { firestore } = await import('../lib/firestore.js');
   await firestore.collection('notifications').doc(id).create(notification);
   console.log(
-    `✔ Added notifications/${id} to ${projectId ?? 'the emulator'}. ` +
+    `✔ Added notifications/${id} to ${target}. ` +
       'The sendGeneralNotification function sends it to every subscribed device.',
   );
-  return true;
+  return { ok: true, path: `notifications/${id}`, dryRun };
 };

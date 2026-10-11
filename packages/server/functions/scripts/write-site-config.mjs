@@ -4,8 +4,12 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 
 const readJson = (path) => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 const defaults = readJson('../../../web/defaults/site.json');
-const siteUrl = new URL('../../../config/site.json', import.meta.url);
-const site = existsSync(siteUrl) ? readJson(siteUrl) : {};
+// packages/config once it has a site.json, else the demo, as the web build does.
+const siteUrl = [
+  new URL('../../../config/site.json', import.meta.url),
+  new URL('../../../demo-config/site.json', import.meta.url),
+].find((url) => existsSync(url));
+const site = siteUrl ? readJson(siteUrl) : {};
 
 const siteConfig = {
   features: { ...defaults.features, ...site.features },

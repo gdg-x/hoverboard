@@ -10,6 +10,7 @@ import {
   REQUIRED_PERMISSIONS,
   checkGitHubDeploys,
   githubRepoFromGit,
+  grantDeployRoles,
   setupGitHub,
 } from './setup-github.js';
 import type { GitHubVariables } from './setup-github.js';
@@ -406,6 +407,34 @@ describe('setupGitHub', () => {
     expect(logs).toContain(
       `! Set the ${REPO} repository variable DEPLOY_SERVICE_ACCOUNT to ${EMAIL} in the GitHub settings.`,
     );
+  });
+});
+
+describe('grantDeployRoles', () => {
+  const other = 'github-deploy@devfest-2027.iam.gserviceaccount.com';
+
+  it("grants the deploy roles to another project's deploy account, once", async () => {
+    const { cloud, state, requests } = fakeCloud();
+    const logs: string[] = [];
+    const options = {
+      cloud,
+      projectId: PROJECT,
+      email: other,
+      log: (line: string) => logs.push(line),
+    };
+
+    expect(await grantDeployRoles({ ...options, dryRun: true })).toMatchObject({ ok: true });
+    expect(requests.filter((request) => request.includes('setIamPolicy'))).toEqual([]);
+
+    await grantDeployRoles({ ...options, dryRun: false });
+    expect(state.projectPolicy.bindings?.map(({ role }) => role)).toEqual(DEPLOY_ROLES);
+    expect(state.projectPolicy.bindings?.[0]?.members).toEqual([`serviceAccount:${other}`]);
+
+    expect(await grantDeployRoles({ ...options, dryRun: false })).toEqual({
+      ok: true,
+      changes: [],
+    });
+    expect(logs.at(-1)).toBe(`✔ ${other} has the deploy roles in ${PROJECT}.`);
   });
 });
 

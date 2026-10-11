@@ -99,7 +99,7 @@ describe('readContent', () => {
 
     await readContent(db);
 
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('./hb firestore-check --fix'));
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('`./hb data check --fix`'));
     warn.mockRestore();
   });
 
@@ -120,8 +120,8 @@ describe('readContent', () => {
     const message =
       'The content in Firestore has problems:\n' +
       '  sessions/a and sessions/b overlap on 2016-09-09 in expo-hall\n' +
-      'Fix them in the Firebase console, then check with `./hb firestore-check`. ' +
-      '`./hb firestore-check --fix` fixes some of them.';
+      'Fix them in the Firebase console, then check with `./hb data check`. ' +
+      '`./hb data check --fix` fixes some of them.';
 
     vi.stubEnv('DEV', false);
     await expect(readContent(db)).rejects.toThrow(message);
@@ -150,7 +150,7 @@ describe('readContent', () => {
     );
     expect(error.message).toContain('  sessions/talk: retired field "extend"');
     expect(error.message).toContain('  team/core/members/ada: missing "order".');
-    expect(error.message).toContain('`./hb firestore-check --fix` fixes some of them.');
+    expect(error.message).toContain('`./hb data check --fix` fixes some of them.');
   });
 
   it('links to the Firebase console when it reads production', async () => {
@@ -159,9 +159,15 @@ describe('readContent', () => {
     vi.stubEnv('DEV', false);
     vi.stubEnv('FIRESTORE_TARGET', 'production');
 
-    await expect(readContent(db)).rejects.toThrow(
+    const error = await readContent(db).then(
+      () => new Error('The build passed'),
+      (caught: unknown) => caught as Error,
+    );
+
+    expect(error.message).toMatch(
       /https:\/\/console\.firebase\.google\.com\/project\/[\w-]+\/firestore\/databases\/-default-\/data\/~2Fsessions~2Ftalk/,
     );
+    expect(error.message).toContain('`./hb data check --production --fix` fixes some of them.');
   });
 
   it('warns about invalid content of features that are off, without failing the build', async () => {

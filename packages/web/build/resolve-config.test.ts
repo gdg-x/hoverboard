@@ -7,9 +7,10 @@ import { FEATURES, type Feature } from '../src/config/features';
 import { festival } from '../src/themes/festival';
 import { THEMES } from '../src/themes/index';
 import { COLOR_ROLES } from '../src/themes/tokens';
-import { ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
+import { ARCHIVE_OFF, ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
 import {
   buildMarkdown,
+  customCss,
   featureDefines,
   heroIllustrationSvg,
   layoutThemeCss,
@@ -18,7 +19,7 @@ import {
   templateRenderer,
 } from './vite-plugin-site';
 
-const repoPaths = configPaths(join(import.meta.dirname, '..'));
+const repoPaths = configPaths(join(import.meta.dirname, '..'), { demo: true });
 const dirsToClean: string[] = [];
 
 afterEach(() => {
@@ -165,6 +166,20 @@ describe('config validation', () => {
 
   describe('attendance', () => {
     const stream = 'https://www.youtube.com/@example/live';
+
+    it('needs the features that write off in an archived edition', () => {
+      const archive = { year: 2027, current: 'https://devfest.example/' };
+      expect(errorsFor({ site: { archive } })).toEqual(
+        ARCHIVE_OFF.map(
+          (feature) => `site.json/features/${feature}: must be off in an archived edition`,
+        ),
+      );
+      const off = Object.fromEntries(ARCHIVE_OFF.map((feature) => [feature, false]));
+      expect(errorsFor({ site: { archive, features: off } })).toEqual([]);
+      expect(errorsFor({ site: { archive: { year: 2027 } } })).toEqual([
+        "site.json/archive: must have required property 'current'",
+      ]);
+    });
 
     it('is in person by default', () => {
       const { site } = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
@@ -316,7 +331,7 @@ describe('config validation', () => {
 
   it('rejects images that do not exist', () => {
     expect(errorsFor({ site: { image: 'images/missing.jpg' } })).toEqual([
-      'site.json/image: "images/missing.jpg" is not in packages/web/public',
+      'site.json/image: "images/missing.jpg" is not in packages/config/public or packages/web/public',
     ]);
   });
 
@@ -354,7 +369,7 @@ describe('config validation', () => {
           },
         }),
       ).toEqual([
-        'content/resources.json/attendingPage/photo/image: "/images/missing.jpg" is not in packages/web/public',
+        'content/resources.json/attendingPage/photo/image: "/images/missing.jpg" is not in packages/config/public or packages/web/public',
       ]);
     });
 
@@ -413,7 +428,7 @@ describe('config validation', () => {
 
   it('rejects an icon that is not a PNG or SVG in packages/web/public', () => {
     expect(errorsFor({ site: { icon: 'images/missing.png' } })).toEqual([
-      'site.json/icon: "images/missing.png" is not in packages/web/public',
+      'site.json/icon: "images/missing.png" is not in packages/config/public or packages/web/public',
     ]);
     expect(errorsFor({ site: { icon: 'https://example.com/icon.png' } })).toEqual([
       expect.stringMatching(/^site\.json\/icon: must match pattern/),
@@ -427,14 +442,14 @@ describe('config validation', () => {
     expect(
       errorsFor({ site: { heroSettings: { home: { illustration: '/images/missing.svg' } } } }),
     ).toEqual([
-      'site.json/heroSettings/home/illustration: "/images/missing.svg" is not in packages/web/public',
+      'site.json/heroSettings/home/illustration: "/images/missing.svg" is not in packages/config/public or packages/web/public',
     ]);
     expect(
       errorsFor({
         site: { heroSettings: { home: { illustration: 'https://example.com/city.svg' } } },
       }),
     ).toEqual([
-      'site.json/heroSettings/home/illustration: "https://example.com/city.svg" is not in packages/web/public',
+      'site.json/heroSettings/home/illustration: "https://example.com/city.svg" is not in packages/config/public or packages/web/public',
     ]);
     expect(
       errorsFor({ site: { heroSettings: { home: { illustration: '/images/logo.png' } } } }),
@@ -450,7 +465,7 @@ describe('config validation', () => {
     );
     const paths = {
       ...makePaths({ site: { heroSettings: { home: { illustration: '/city.svg' } } } }),
-      public: publicDir,
+      public: [publicDir],
     };
 
     expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toContain(
@@ -803,6 +818,7 @@ describe('siteModule', () => {
   };
   const plugin = siteModule(config, {
     siteDir: repoPaths.site,
+    publicDirs: repoPaths.public,
     build: { sha: 'abc1234', time: '2027-10-15T09:00:00.000Z' },
   });
   const resolveId = plugin.resolveId as (id: string) => string | undefined;
@@ -833,7 +849,27 @@ describe('siteModule', () => {
     const code = (await load(resolveId('virtual:hoverboard/layout')!))!;
 
     expect(code).toContain(`export const theme = ${JSON.stringify(config.theme)};`);
-    expect(code).toContain(`export const themeCss = ${JSON.stringify(layoutThemeCss(config))};`);
+    expect(code).toContain(
+      `export const themeCss = ${JSON.stringify(layoutThemeCss(config, repoPaths.public))};`,
+    );
+    expect(code).toContain('--hb-logo-dark-image');
+  });
+
+  it("serves the site's custom.css, which can't close its style element", () => {
+    const dir = mkdtempSync(join(tmpdir(), 'hoverboard-custom-'));
+    dirsToClean.push(dir);
+    expect(customCss(dir)).toBe('');
+
+    writeFileSync(join(dir, 'custom.css'), ':root { --hb-color-primary: red; }\n');
+    expect(customCss(dir)).toBe(':root { --hb-color-primary: red; }\n');
+
+    writeFileSync(join(dir, 'custom.css'), '</STYLE><script>alert(1)</script>');
+    expect(() => customCss(dir)).toThrow('custom.css: must not contain "</style"');
+    const paths = makePaths();
+    writeFileSync(join(paths.site, 'custom.css'), '</style>');
+    expect(loadConfig({ paths, nodeEnv: 'production' }).errors).toEqual([
+      'custom.css: must not contain "</style"',
+    ]);
   });
 
   it('serves the theme fonts with imported file URLs', async () => {
@@ -864,7 +900,7 @@ describe('heroIllustrationSvg', () => {
       '<?xml version="1.0"?>\n<svg viewBox="0 0 1 1"></svg>\n',
     );
 
-    expect(heroIllustrationSvg(siteWith('/images/city.svg'), publicDir)).toBe(
+    expect(heroIllustrationSvg(siteWith('/images/city.svg'), [publicDir])).toBe(
       '<svg viewBox="0 0 1 1"></svg>',
     );
   });
@@ -881,7 +917,7 @@ describe('heroIllustrationSvg', () => {
       '<svg viewBox="0 0 1 1" onload="alert(1)"><script>alert(1)</script><path d="M0 0"/></svg>',
     );
 
-    expect(heroIllustrationSvg(siteWith('/city.svg'), publicDir)).toBe(
+    expect(heroIllustrationSvg(siteWith('/city.svg'), [publicDir])).toBe(
       '<svg viewBox="0 0 1 1"><path d="M0 0"></path></svg>',
     );
   });

@@ -16,7 +16,7 @@ const webRoot = fileURLToPath(new URL('../..', import.meta.url));
 
 // The pages render in Node, where `isServer` is true, as in the build. The tests run in jsdom.
 export default async function setup(project: TestProject): Promise<void> {
-  const paths = configPaths(webRoot);
+  const paths = configPaths(webRoot, { demo: true });
   const siteConfig = resolveConfig({ paths, nodeEnv: 'test' });
   const server = await createServer({
     root: webRoot,
@@ -27,7 +27,7 @@ export default async function setup(project: TestProject): Promise<void> {
     server: { middlewareMode: true, hmr: false, ws: false, watch: null },
     plugins: [
       decorators(),
-      siteModule(siteConfig, { siteDir: paths.site, publicDir: paths.public }),
+      siteModule(siteConfig, { siteDir: paths.site, publicDirs: paths.public }),
     ],
   });
   try {

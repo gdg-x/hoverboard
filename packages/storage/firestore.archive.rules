@@ -1,0 +1,57 @@
+rules_version = '2';
+// The rules of an archived edition: its content and the reactions to its sessions can be read,
+// and nothing can be written. `hb edition switch` deploys them. The build and the CLI use the
+// Admin SDK, which these rules don't apply to.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /blog/{post} {
+      allow read;
+    }
+
+    match /gallery/{photo} {
+      allow read;
+    }
+
+    match /partners/{groupId} {
+      allow read;
+    }
+
+    match /previousSpeakers/{speaker} {
+      allow read;
+    }
+
+    match /speakers/{speaker} {
+      allow read;
+    }
+
+    match /team/{teamId} {
+      allow read;
+    }
+
+    match /tickets/{ticket} {
+      allow read;
+    }
+
+    match /videos/{video} {
+      allow read;
+    }
+
+    // Read with collection group queries, as on the current edition.
+    match /{path=**}/items/{itemId} {
+      allow read;
+    }
+
+    match /{path=**}/members/{memberId} {
+      allow read;
+    }
+
+    match /sessions/{session} {
+      allow read;
+
+      // The counts show. The profiles with the names moved to the current edition.
+      match /reactions/{userId} {
+        allow read;
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@ import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { eventDates, navigation, shortName, timeZone, title } from '../../config/site';
+import { archive, eventDates, navigation, shortName, timeZone, title } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import { type TicketsState, selectTickets } from '../../store/tickets';
 import { type EventState, eventState } from '../../utils/event-state';
@@ -14,6 +14,7 @@ import '../ui/hb-icon-button';
 import { ThemedComponent } from '../themed-component';
 import './account-menu';
 import './app-install';
+import './archive-banner';
 import { navigationLabel } from './navigation-label';
 import { currentTime } from '../../utils/clock';
 import './notification-toggle';
@@ -221,6 +222,7 @@ export class AppHeader extends ThemedComponent {
         ${msg('Skip to content', { id: 'shell.header.skip-link' })}
       </a>
       ${__HB_FEATURES__.demo ? html`<demo-banner></demo-banner>` : nothing}
+      ${archive ? html`<archive-banner></archive-banner>` : nothing}
       <header class="header">
         <div class="bar">
           <a class="brand" href="/">
@@ -233,7 +235,10 @@ export class AppHeader extends ThemedComponent {
             ${this.renderCallToAction()}
             ${__HB_FEATURES__.notifications ? html`<notification-toggle></notification-toggle>` : nothing}
             ${
-              __HB_FEATURES__.mySchedule || __HB_FEATURES__.feedback || __HB_FEATURES__.reactions
+              (__HB_FEATURES__.mySchedule ||
+                __HB_FEATURES__.feedback ||
+                __HB_FEATURES__.reactions) &&
+              !archive
                 ? html`<account-menu></account-menu>`
                 : nothing
             }

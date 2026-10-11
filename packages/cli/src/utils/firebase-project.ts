@@ -2,10 +2,30 @@ import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import type { DoctorCheckResult } from './node-version.js';
 
-export const SITE_CONFIG_PATH = 'packages/config/site.json';
+/** The site's own config, which `hb init` creates. */
+export const CONFIG_DIR = 'packages/config';
+export const DEMO_CONFIG_DIR = 'packages/demo-config';
+export const SITE_CONFIG_PATH = `${CONFIG_DIR}/site.json`;
+
+/** The config folder in use: packages/config once it has a site.json, else the demo's. */
+export const siteConfigDir = (repoRoot: string): string =>
+  existsSync(join(repoRoot, SITE_CONFIG_PATH)) ? CONFIG_DIR : DEMO_CONFIG_DIR;
+
+/** The site.json in use, relative to the repository. */
+export const siteConfigPath = (repoRoot: string): string => `${siteConfigDir(repoRoot)}/site.json`;
+
+/**
+ * Why a deploy must stop: without packages/config/site.json it would deploy the demo site.
+ * Upstream, whose site is the demo, sets the HB_DEMO repository variable to `true`.
+ */
+export const demoDeployProblem = (repoRoot: string): string | undefined =>
+  siteConfigDir(repoRoot) === DEMO_CONFIG_DIR && process.env['HB_DEMO'] !== 'true'
+    ? `${SITE_CONFIG_PATH} doesn't exist, so this would deploy the demo site. Run ./hb init to ` +
+      'create your config, then commit packages/config.'
+    : undefined;
 
 const projectIdFromSiteConfig = (repoRoot: string): string | undefined => {
-  const path = join(repoRoot, SITE_CONFIG_PATH);
+  const path = join(repoRoot, siteConfigPath(repoRoot));
   if (!existsSync(path)) return undefined;
   try {
     const site = JSON.parse(readFileSync(path, 'utf8')) as { firebase?: { projectId?: unknown } };

@@ -373,7 +373,42 @@ export const setupGitHub = async ({
 export interface RunSetupGitHubOptions {
   repo?: string;
   dryRun?: boolean;
+  /** Another project, such as a new edition's, for the existing deploy account to deploy to. */
+  project?: string;
 }
+
+/**
+ * Grants the deploy roles in `projectId` to a service account of another project, so one
+ * GitHub setup deploys every edition. IAM roles work across projects.
+ */
+export const grantDeployRoles = async ({
+  cloud,
+  projectId,
+  email,
+  dryRun,
+  log = console.log,
+}: {
+  cloud: GoogleCloud;
+  projectId: string;
+  email: string;
+  dryRun: boolean;
+  log?: (message: string) => void;
+}): Promise<SetupGitHubResult> => {
+  const policy = await cloud.request<Policy>('POST', `${CRM}/projects/${projectId}:getIamPolicy`, {
+    options: { requestedPolicyVersion: 3 },
+  });
+  const added = DEPLOY_ROLES.filter((role) => addMember(policy, role, `serviceAccount:${email}`));
+  if (!added.length) {
+    log(`✔ ${email} has the deploy roles in ${projectId}.`);
+    return { ok: true, changes: [] };
+  }
+  const change = `grant ${added.join(', ')} in ${projectId} to ${email}`;
+  log(`• ${dryRun ? 'Would ' : ''}${change}`);
+  if (!dryRun) {
+    await cloud.request('POST', `${CRM}/projects/${projectId}:setIamPolicy`, { policy });
+  }
+  return { ok: true, changes: [change] };
+};
 
 export const runSetupGitHub = async (options: RunSetupGitHubOptions = {}): Promise<boolean> => {
   const repoRoot = findRepoRoot(process.cwd());
@@ -386,6 +421,32 @@ export const runSetupGitHub = async (options: RunSetupGitHubOptions = {}): Promi
   if (!repo) {
     console.log('✘ Could not find the GitHub repository. Pass it with --repo owner/name.');
     return false;
+  }
+
+  const email = options.project && ghVariables.get(repo, 'DEPLOY_SERVICE_ACCOUNT');
+  if (options.project && !email?.endsWith(`@${options.project}.iam.gserviceaccount.com`)) {
+    if (!email) {
+      console.log(
+        `✘ ${repo} has no DEPLOY_SERVICE_ACCOUNT variable. Run ./hb setup-github first, without --project.`,
+      );
+      return false;
+    }
+    console.log(
+      `Letting ${email} deploy to ${options.project}${options.dryRun ? ' (dry run)' : ''}.\n`,
+    );
+    try {
+      const cloud = await createGoogleCloud(repoRoot, options.project);
+      const { ok } = await grantDeployRoles({
+        cloud,
+        projectId: options.project,
+        email,
+        dryRun: options.dryRun ?? false,
+      });
+      return ok;
+    } catch (error) {
+      console.log(`✘ ${error instanceof Error ? error.message : String(error)}`);
+      return false;
+    }
   }
 
   console.log(

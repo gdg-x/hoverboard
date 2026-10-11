@@ -93,14 +93,14 @@ describe('socialImageDesign', () => {
     });
 
   const design = (site: Partial<SiteTheme> = {}) =>
-    socialImageDesign(theme(site), undefined, { siteDir: '/site', publicDir }).design;
+    socialImageDesign(theme(site), undefined, { siteDir: '/site', publicDirs: [publicDir] }).design;
 
   it("uses the light colors and logo, and the theme's avatar shape", () => {
     expect(design()).toMatchObject({
       colors: THEMES.festival.light,
       avatarRadius: THEMES.festival.style.radiusAvatar,
       logo: '<svg width="2" height="1">light</svg>',
-      publicDir,
+      publicDirs: [publicDir],
     });
   });
 

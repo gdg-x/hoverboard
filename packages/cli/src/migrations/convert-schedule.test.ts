@@ -1,9 +1,12 @@
+import { join } from 'path';
 import { describe, expect, it } from 'vitest';
-import data from '../../../../docs/default-firebase-data.json';
-import site from '../../../config/site.json';
+import site from '../../../demo-config/site.json';
+import { readExport } from '../lib/data-format.js';
 import { type OldScheduleDay, convertSchedule, trackId } from './convert-schedule.js';
 // The demo's `schedule` collection before it was converted.
 import demoSchedule from './demo-schedule.fixture.json';
+
+const SAMPLE_DATA = join(import.meta.dirname, '..', '..', '..', '..', 'docs', 'sample-data');
 
 const tracks = [{ title: 'Main hall' }, { title: 'Room 2' }];
 const day = (
@@ -189,9 +192,11 @@ describe('convertSchedule', () => {
 
   it('matches the converted demo data', () => {
     const schedule = demoSchedule as Record<string, OldScheduleDay>;
-    const { sessions } = data as unknown as {
-      sessions: Record<string, Record<string, unknown>>;
-    };
+    const sessions = Object.fromEntries(
+      readExport(SAMPLE_DATA)
+        .documents.filter(({ path }) => path.startsWith('sessions/'))
+        .map(({ path, data }) => [path.split('/')[1]!, data]),
+    );
     const copies = new Set(Object.keys(sessions).filter((id) => /-\d+$/.test(id)));
     const result = convertSchedule(
       schedule,
