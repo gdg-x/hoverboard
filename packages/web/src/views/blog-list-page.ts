@@ -16,10 +16,13 @@ import { ThemedComponent } from '../components/themed-component';
 export class BlogListPage extends ThemedComponent {
   static override styles = pageInner;
 
-  private readonly metadata = new PageMetadataController(this, 'blog');
-
   @fromStore((state) => selectBlogPosts(state))
   accessor posts!: BlogState;
+
+  constructor() {
+    super();
+    new PageMetadataController(this, 'blog');
+  }
 
   override render() {
     const posts = this.posts instanceof Success ? this.posts.data : [];

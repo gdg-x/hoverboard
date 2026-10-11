@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { screen } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
+import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { HeroBlock } from './hero-block';
 import './hero-block';
@@ -14,8 +14,8 @@ describe('hero-block', () => {
     const { element, shadowRoot } = await fixture<HeroBlock>(html`<hero-block></hero-block>`);
 
     expect(element).toHaveAttribute('tone', '1');
-    expect(shadowRoot.querySelector('.hero')).toHaveClass('pattern');
-    expect(shadowRoot.querySelector('img')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, '.hero')).toHaveClass('pattern');
+    expect(deepQuerySelector(shadowRoot, 'img')).toBeNull();
   });
 
   it('reflects the tone, so the band takes that accent', async () => {
@@ -29,9 +29,9 @@ describe('hero-block', () => {
       html`<hero-block background-image="/example.jpg"></hero-block>`,
     );
 
-    expect(shadowRoot.querySelector('.hero')).toHaveClass('photo');
-    expect(shadowRoot.querySelector('img')).toHaveAttribute('src', '/example.jpg');
-    expect(shadowRoot.querySelector('img')).toHaveAttribute('alt', '');
+    expect(deepQuerySelector(shadowRoot, '.hero')).toHaveClass('photo');
+    expect(deepQuerySelector(shadowRoot, 'img')).toHaveAttribute('src', '/example.jpg');
+    expect(deepQuerySelector(shadowRoot, 'img')).toHaveAttribute('alt', '');
   });
 
   it('shows its content', async () => {

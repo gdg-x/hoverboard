@@ -1,6 +1,7 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
+import { deepQuerySelector, deepQuerySelectorAll, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { User } from '../../models/user';
 import { store } from '../../store';
@@ -16,6 +17,12 @@ vi.mock('../../store/dialogs', async (importOriginal) => ({
 }));
 
 const mockOpenDialog = vi.mocked(openSigninDialog);
+
+// The slots of auth-required itself, not those of the hb-button inside it.
+const ownSlots = (shadowRoot: ShadowRoot) =>
+  deepQuerySelectorAll<HTMLSlotElement>(shadowRoot, 'slot').filter(
+    (slot) => slot.getRootNode() === shadowRoot,
+  );
 
 describe('auth-required', () => {
   let element!: AuthRequired;
@@ -42,9 +49,9 @@ describe('auth-required', () => {
   });
 
   it('shows unauthenticated prompt', () => {
-    expect(shadowRoot.querySelector<HTMLDivElement>('hb-button')).not.toHaveAttribute('hidden');
+    expect(deepQuerySelector(shadowRoot, 'hb-button')).not.toHaveAttribute('hidden');
 
-    const slots = shadowRoot.querySelectorAll('slot');
+    const slots = ownSlots(shadowRoot);
 
     expect(slots).toHaveLength(2);
     expect(slots[0]).not.toHaveAttribute('hidden');
@@ -56,7 +63,7 @@ describe('auth-required', () => {
   });
 
   it('opens dialog on tap', () => {
-    fireEvent.click(shadowRoot.querySelector('hb-button')!);
+    fireEvent.click(screen.getByShadowRole('button', { name: 'Sign in' }));
 
     expect(mockOpenDialog).toHaveBeenCalledTimes(1);
   });
@@ -65,9 +72,9 @@ describe('auth-required', () => {
     store.dispatch(setUserSuccess({ uid: '1' } as User));
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector<HTMLDivElement>('hb-button')).toHaveAttribute('hidden');
+    expect(deepQuerySelector(shadowRoot, 'hb-button')).toHaveAttribute('hidden');
 
-    const slots = shadowRoot.querySelectorAll('slot');
+    const slots = ownSlots(shadowRoot);
 
     expect(slots).toHaveLength(2);
     expect(slots[0]).toHaveAttribute('hidden');

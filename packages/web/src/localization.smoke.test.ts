@@ -34,7 +34,12 @@ describe(`the app with the fake ${fakeLocale} locale`, () => {
       document.body,
     );
     void (await import('./app')).startApp();
-    await vi.waitFor(() => expect(picker()).not.toBeNull(), { timeout: 10_000 });
+    await vi.waitFor(
+      () => {
+        if (!picker()) throw new Error('The locale picker has not rendered yet');
+      },
+      { timeout: 10_000 },
+    );
   });
 
   it('starts in the stored locale', async () => {

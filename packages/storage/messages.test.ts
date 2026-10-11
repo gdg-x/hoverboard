@@ -1,4 +1,4 @@
-import { Ajv2020, type ErrorObject } from 'ajv/dist/2020.js';
+import { Ajv2020, type ErrorObject, type ValidateFunction } from 'ajv/dist/2020.js';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { describe, expect, it } from 'vitest';
@@ -13,7 +13,7 @@ ajv.addSchema(schema);
 
 /** The messages for `data` as a document of the `$defs` definition `definition`. */
 const problems = (definition: string, data: unknown, options = {}) => {
-  const validate = ajv.getSchema(`${schema.$id}#/$defs/${definition}`)!;
+  const validate = ajv.getSchema(`${schema.$id}#/$defs/${definition}`) as ValidateFunction;
   validate(data);
   return documentProblems('doc/1', validate.errors, options);
 };
@@ -198,7 +198,7 @@ describe('documentProblems', () => {
 
   it('adds the field description when there is one', () => {
     expect(problems('post', { ...session }).join('\n')).toContain('doc/1: missing "published".');
-    const validate = ajv.getSchema(`${schema.$id}#/$defs/session`)!;
+    const validate = ajv.getSchema(`${schema.$id}#/$defs/session`) as ValidateFunction;
     validate({ ...session, track: 3, day: '2027-10-15', startTime: '09:00', endTime: '10:00' });
     expect(documentProblems('doc/1', validate.errors)).toEqual([
       'doc/1: track must be a string, not a number. A track ID from `schedule.tracks` in site.json. Without it, the session spans every track.',

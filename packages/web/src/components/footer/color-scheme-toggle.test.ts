@@ -1,5 +1,6 @@
-import { fireEvent, within } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import { html, render as litRender, nothing } from 'lit';
+import { deepQuerySelector, screen, within } from 'shadow-dom-testing-library';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { COLOR_SCHEME_KEY } from '../../utils/color-scheme';
@@ -20,7 +21,7 @@ const render = async () => {
     html`<color-scheme-toggle></color-scheme-toggle>`,
   );
   await element.updateComplete;
-  return { element, view: within(shadowRootForWithin) };
+  return { element, container: shadowRootForWithin };
 };
 
 describe('color-scheme-toggle', () => {
@@ -32,36 +33,36 @@ describe('color-scheme-toggle', () => {
   });
 
   it('offers System, Light and Dark in an Appearance group, with System selected', async () => {
-    const { view } = await render();
+    const { container } = await render();
 
-    expect(view.getByRole('group', { name: 'Appearance' })).toBeInTheDocument();
-    expect(view.getAllByRole('radio').map((radio) => radio.getAttribute('value'))).toEqual([
-      'system',
-      'light',
-      'dark',
-    ]);
-    expect(view.getByRole('radio', { name: 'System' })).toBeChecked();
+    expect(within(container).getByRole('group', { name: 'Appearance' })).toBeInTheDocument();
+    expect(
+      within(container)
+        .getAllByRole('radio')
+        .map((radio) => radio.getAttribute('value')),
+    ).toEqual(['system', 'light', 'dark']);
+    expect(within(container).getByRole('radio', { name: 'System' })).toBeChecked();
   });
 
   it('shows only icons when compact, with System in the middle, and keeps the names', async () => {
-    const { element, view } = await render();
+    const { element, container } = await render();
     element.compact = true;
     await element.updateComplete;
 
-    expect(view.getByRole('group', { name: 'Appearance' })).toBeInTheDocument();
-    expect(view.getAllByRole('radio').map((radio) => radio.getAttribute('value'))).toEqual([
-      'light',
-      'system',
-      'dark',
-    ]);
-    expect(view.getByText('System')).toHaveClass('visually-hidden');
-    expect(view.getByText('Appearance')).toHaveClass('visually-hidden');
+    expect(within(container).getByRole('group', { name: 'Appearance' })).toBeInTheDocument();
+    expect(
+      within(container)
+        .getAllByRole('radio')
+        .map((radio) => radio.getAttribute('value')),
+    ).toEqual(['light', 'system', 'dark']);
+    expect(within(container).getByText('System')).toHaveClass('visually-hidden');
+    expect(within(container).getByText('Appearance')).toHaveClass('visually-hidden');
   });
 
   it('stores and applies a choice', async () => {
-    const { view } = await render();
+    const { container } = await render();
 
-    fireEvent.click(view.getByRole('radio', { name: 'Dark' }));
+    fireEvent.click(within(container).getByRole('radio', { name: 'Dark' }));
 
     expect(localStorage.getItem(COLOR_SCHEME_KEY)).toBe('dark');
     expect(document.documentElement).toHaveAttribute('data-color-scheme', 'dark');
@@ -69,9 +70,9 @@ describe('color-scheme-toggle', () => {
 
   it('forgets the choice for System', async () => {
     localStorage.setItem(COLOR_SCHEME_KEY, 'light');
-    const { view } = await render();
+    const { container } = await render();
 
-    fireEvent.click(view.getByRole('radio', { name: 'System' }));
+    fireEvent.click(within(container).getByRole('radio', { name: 'System' }));
 
     expect(localStorage.getItem(COLOR_SCHEME_KEY)).toBeNull();
     expect(document.documentElement).not.toHaveAttribute('data-color-scheme');
@@ -80,17 +81,17 @@ describe('color-scheme-toggle', () => {
   it('selects the stored choice after the first render', async () => {
     localStorage.setItem(COLOR_SCHEME_KEY, 'light');
 
-    const { view } = await render();
+    const { container } = await render();
 
-    expect(view.getByRole('radio', { name: 'Light' })).toBeChecked();
+    expect(within(container).getByRole('radio', { name: 'Light' })).toBeChecked();
   });
 
   it('is hidden when the site locks a color scheme', async () => {
     site.colorScheme = 'dark';
     litRender(html`<color-scheme-toggle></color-scheme-toggle>`, document.body);
-    const element = document.body.firstElementChild as ColorSchemeToggle;
+    const element = deepQuerySelector<ColorSchemeToggle>(document.body, 'color-scheme-toggle')!;
     await element.updateComplete;
 
-    expect(within(element.shadowRoot as unknown as HTMLElement).queryByRole('group')).toBeNull();
+    expect(screen.queryByShadowRole('group')).not.toBeInTheDocument();
   });
 });

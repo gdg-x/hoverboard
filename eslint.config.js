@@ -1,44 +1,42 @@
+import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
 import json from '@eslint/json';
 import markdown from '@eslint/markdown';
 import css from '@eslint/css';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import typescriptParser from '@typescript-eslint/parser';
+import { defineConfig } from 'eslint/config';
+import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
-import htmlPlugin from 'eslint-plugin-html';
-import htmlEslintPlugin from '@html-eslint/eslint-plugin';
-import htmlEslintParser from '@html-eslint/parser';
 import vitestPlugin from '@vitest/eslint-plugin';
 import astroPlugin from 'eslint-plugin-astro';
+import { createNodeResolver, importX } from 'eslint-plugin-import-x';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+import litPlugin from 'eslint-plugin-lit';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
+import wcPlugin from 'eslint-plugin-wc';
 import globals from 'globals';
+import { resolve } from 'node:path';
 
-export default [
-  // Base configuration for all files
+export default defineConfig([
+  includeIgnoreFile(resolve(import.meta.dirname, '.gitignore')),
   {
     ignores: [
-      'dist/**',
-      'node_modules/**',
-      'packages/web/dist/**',
-      'packages/web/.astro/**', // Types written by Astro
-      'packages/web/src/generated/**', // Written by lit-localize build
-      'packages/server/functions/dist/**',
-      'packages/cli/dist/**',
       'packages/web/public/**',
       '**/package-lock.json', // Auto-generated lockfiles
-      '**/yarn.lock', // Auto-generated lockfiles
       '**/.vscode/**', // VS Code settings (often contain comments)
     ],
+  },
+
+  {
+    linterOptions: {
+      reportUnusedDisableDirectives: 'error',
+    },
   },
 
   // JavaScript files configuration (without TypeScript project)
   {
     files: ['**/*.{js,mjs}'],
     languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.es6,
-      },
+      globals: globals.browser,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -50,52 +48,39 @@ export default [
     files: ['**/*.{ts,tsx}'],
     // Scripts in .astro files, which eslint-plugin-astro lints without type information.
     ignores: ['**/*.astro/*.ts'],
+    extends: [js.configs.recommended, tseslint.configs.recommendedTypeChecked],
     languageOptions: {
-      parser: typescriptParser,
       parserOptions: {
-        project: [
-          './tsconfig.json',
-          './packages/web/tsconfig.json',
-          './packages/server/functions/tsconfig.json',
-          './packages/cli/tsconfig.json',
-          './packages/storage/tsconfig.json',
-          './packages/translations/tsconfig.json',
-        ],
-        sourceType: 'module',
-        ecmaVersion: 2020,
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
       globals: {
         ...globals.browser,
-        ...globals.es6,
         ServiceWorkerGlobalScope: true,
         // Feature flags, replaced at build time by packages/web/build/vite-plugin-site.ts
         __HB_FEATURES__: 'readonly',
       },
     },
-    plugins: {
-      '@typescript-eslint': typescriptEslint,
-      vitest: vitestPlugin,
-      'testing-library': testingLibraryPlugin,
-    },
     rules: {
-      ...js.configs.recommended.rules,
-
-      // Disable conflicting rules
-      'no-unused-vars': 'off', // Replaced by @typescript-eslint/no-unused-vars
-      'preserve-caught-error': 'off',
-
-      // Vitest rules
-      'vitest/max-expects': ['warn', { max: 10 }],
-      'vitest/no-hooks': 'off',
-      'vitest/prefer-expect-assertions': 'off',
-      'vitest/require-hook': 'off',
-      'vitest/unbound-method': 'warn',
-
-      // Testing library rules
-      'testing-library/no-node-access': 'warn',
-
       // TypeScript rules
-      '@typescript-eslint/unbound-method': 'warn',
+      '@typescript-eslint/no-deprecated': 'error',
+      '@typescript-eslint/switch-exhaustiveness-check': [
+        'error',
+        { considerDefaultExhaustiveForUnions: true },
+      ],
+      // Lit calls lifecycle methods such as `async firstUpdated()` without awaiting them.
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        { checksVoidReturn: { inheritedMethods: false } },
+      ],
+      // Not yet: about 200 existing problems to fix first.
+      '@typescript-eslint/require-await': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      // Its fixes broke the type check: it misses narrowing, e.g. `initialState as State`.
+      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -108,19 +93,51 @@ export default [
           ignoreRestSiblings: true,
         },
       ],
+    },
+  },
 
-      // Custom rules
-      'brace-style': 'off',
-      'new-cap': 'off',
-      'no-var': 'error',
-      'require-jsdoc': 'off',
-      'max-len': ['error', { code: 120 }],
-      'object-curly-spacing': ['error', 'always'],
-      'space-before-function-paren': [
-        'error',
-        { anonymous: 'always', named: 'never', asyncArrow: 'always' },
-      ],
-      'linebreak-style': 0,
+  // Import cycles. Store slices dispatch through store/dispatch.ts to avoid one.
+  {
+    files: ['**/*.{ts,tsx}'],
+    ignores: ['**/*.astro/*.ts'],
+    plugins: { 'import-x': importX },
+    settings: {
+      ...importX.flatConfigs.typescript.settings,
+      'import-x/resolver-next': [createTypeScriptImportResolver(), createNodeResolver()],
+    },
+    rules: {
+      'import-x/no-cycle': 'error',
+    },
+  },
+
+  // Lit components and the web app's code
+  {
+    files: ['packages/web/src/**/*.ts'],
+    extends: [litPlugin.configs['flat/recommended'], wcPlugin.configs['flat/recommended']],
+  },
+  {
+    files: ['packages/web/src/**/*.ts'],
+    ignores: ['**/*.test.ts'],
+    rules: {
+      'no-console': ['error', { allow: ['warn', 'error'] }],
+    },
+  },
+
+  // Test files
+  {
+    files: ['**/*.test.ts', '**/__tests__/**/*.ts'],
+    extends: [vitestPlugin.configs.recommended, testingLibraryPlugin.configs['flat/dom']],
+    languageOptions: {
+      globals: globals.node,
+    },
+    rules: {
+      // Vitest takes a message as the second argument.
+      'vitest/valid-expect': ['error', { maxArgs: 2 }],
+      'vitest/max-expects': ['warn', { max: 10 }],
+      'vitest/unbound-method': 'warn',
+      // Replaced by vitest/unbound-method, which allows `expect(mock.method)`.
+      '@typescript-eslint/unbound-method': 'off',
+      'testing-library/no-node-access': 'error',
     },
   },
 
@@ -149,49 +166,6 @@ export default [
 
   // Astro pages and layouts
   ...astroPlugin.configs['flat/recommended'],
-
-  // HTML files configuration with @html-eslint/eslint-plugin
-  {
-    files: ['**/*.html'],
-    languageOptions: {
-      parser: htmlEslintParser,
-    },
-    plugins: {
-      '@html-eslint': htmlEslintPlugin,
-    },
-    rules: {
-      // Core HTML structure rules
-      '@html-eslint/require-doctype': 'error',
-      '@html-eslint/require-lang': 'error',
-      '@html-eslint/require-title': 'error',
-      '@html-eslint/require-meta-charset': 'error',
-      '@html-eslint/require-meta-viewport': 'error',
-      '@html-eslint/no-multiple-h1': 'error',
-      '@html-eslint/require-closing-tags': ['error', { selfClosing: 'always' }],
-      '@html-eslint/no-script-style-type': 'error',
-
-      // Formatting rules (more lenient)
-      '@html-eslint/no-inline-styles': 'warn',
-      '@html-eslint/element-newline': 'off', // Too strict for templates
-      '@html-eslint/indent': 'off', // Let Prettier handle this
-      '@html-eslint/quotes': ['error', 'double'],
-      '@html-eslint/no-extra-spacing-attrs': 'off', // Too strict for templates
-      '@html-eslint/attrs-newline': 'off', // Too strict for templates
-
-      // Accessibility rules
-      '@html-eslint/require-img-alt': 'error',
-      '@html-eslint/no-target-blank': 'error',
-      '@html-eslint/require-button-type': 'error',
-    },
-  },
-
-  // Legacy HTML plugin for embedded scripts in HTML
-  {
-    files: ['**/*.html'],
-    plugins: {
-      html: htmlPlugin,
-    },
-  },
 
   // JSON files configuration with @eslint/json
   {
@@ -249,28 +223,11 @@ export default [
     },
   },
 
-  // Test files configuration
+  // Config files at the root, such as this one and vitest.config.ts
   {
-    files: [
-      '__tests__/**/*.{js,ts}',
-      'packages/web/__tests__/**/*.{js,ts}',
-      'packages/storage/__tests__/**/*.{js,ts}',
-      '**/*.test.{js,ts}',
-      '**/*.spec.{js,ts}',
-    ],
+    files: ['*.{js,mjs,ts}'],
     languageOptions: {
-      globals: {
-        ...globals.node,
-        firebase: true,
-      },
-    },
-  },
-
-  // Icons specific configuration
-  {
-    files: ['packages/web/src/utils/icons/**/*.{js,ts}'],
-    rules: {
-      'max-len': 'off',
+      globals: globals.node,
     },
   },
 
@@ -280,7 +237,7 @@ export default [
     plugins: {
       markdown,
     },
-    language: 'markdown/commonmark',
+    language: 'markdown/gfm',
     rules: {
       // Recommended markdown rules
       'markdown/no-html': 'warn',
@@ -299,22 +256,6 @@ export default [
     },
   },
 
-  // JavaScript/TypeScript code blocks in Markdown
-  {
-    files: ['**/*.md'],
-    plugins: {
-      markdown,
-    },
-    language: 'markdown/gfm',
-    rules: {
-      // Apply basic JS/TS rules to code blocks
-      'no-console': 'off',
-      'no-undef': 'off',
-      'no-unused-vars': 'off',
-      'no-redeclare': 'off',
-    },
-  },
-
   // CSS files configuration with @eslint/css
   {
     files: ['**/*.css'],
@@ -330,16 +271,6 @@ export default [
     },
   },
 
-  // CSS-in-JS within TypeScript files (for styled components, etc.)
-  {
-    files: ['packages/web/src/components/**/*.ts', 'packages/web/src/styles/**/*.ts'],
-    rules: {
-      // Allow template literals for CSS-in-JS
-      'prefer-template': 'off',
-      quotes: ['error', 'single', { allowTemplateLiterals: true }],
-    },
-  },
-
   // Apply Prettier config last to override conflicting rules
   eslintConfigPrettier,
-];
+]);

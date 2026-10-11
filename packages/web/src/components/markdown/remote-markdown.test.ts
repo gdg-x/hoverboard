@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Success } from '@abraham/remotedata';
 import { waitFor } from '@testing-library/dom';
 import { html, render, type TemplateResult } from 'lit';
+import { deepQuerySelector } from 'shadow-dom-testing-library';
 import type { RemoteMarkDown } from './remote-markdown';
 import './remote-markdown';
 
@@ -17,7 +18,7 @@ Object.defineProperty(globalThis, 'fetch', {
 // plain text with no elements, so render directly instead.
 const renderRemoteMarkdown = async (template: TemplateResult) => {
   render(template, document.body);
-  const element = document.body.firstElementChild as RemoteMarkDown;
+  const element = deepQuerySelector<RemoteMarkDown>(document.body, 'remote-markdown')!;
   await element.updateComplete;
   return { element, shadowRoot: element.shadowRoot! };
 };
@@ -39,7 +40,7 @@ describe('remote-markdown', () => {
 
     expect(fetchMock).toHaveBeenCalledWith('/content.md');
     await waitFor(() => {
-      expect(shadowRoot.querySelector('toc-markdown')).toHaveProperty(
+      expect(deepQuerySelector(shadowRoot, 'toc-markdown')).toHaveProperty(
         'content',
         '# Remote heading',
       );
@@ -56,7 +57,7 @@ describe('remote-markdown', () => {
       ></remote-markdown>`,
     );
 
-    const toc = shadowRoot.querySelector('toc-markdown');
+    const toc = deepQuerySelector(shadowRoot, 'toc-markdown');
     expect(toc).toHaveProperty('content', '## Given heading');
     expect(toc).toHaveProperty('pagePath', '/faq');
     expect(toc).toHaveProperty('disclosures', false);
@@ -68,7 +69,7 @@ describe('remote-markdown', () => {
       html`<remote-markdown disclosures .content=${'## Given heading'}></remote-markdown>`,
     );
 
-    expect(shadowRoot.querySelector('toc-markdown')).toHaveProperty('disclosures', true);
+    expect(deepQuerySelector(shadowRoot, 'toc-markdown')).toHaveProperty('disclosures', true);
   });
 
   it('renders an error message when the fetch fails', async () => {

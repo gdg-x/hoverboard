@@ -45,13 +45,13 @@ export class AppInstall extends ThemedComponent {
     `;
   }
 
-  private async prompt() {
+  private readonly prompt = () => {
     if (!this.deferredPrompt) {
       return;
     }
-    this.deferredPrompt.prompt();
+    void this.deferredPrompt.prompt();
     this.deferredPrompt = undefined;
-  }
+  };
 
   private readonly onBeforeInstallPrompt = (e: BeforeInstallPromptEvent) => {
     e.preventDefault();

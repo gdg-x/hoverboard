@@ -1,7 +1,7 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
+import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { aboutOrganizerBlock, team } from '../config/site';
 import { updateMetadata } from '../utils/metadata';
@@ -28,7 +28,7 @@ const render = async () => {
     { id: 'team-1', title: 'Core team', members: [member] },
   ]);
   await result.element.updateComplete;
-  return { ...result, view: within(result.shadowRootForWithin) };
+  return result;
 };
 
 describe('team-page', () => {
@@ -40,18 +40,21 @@ describe('team-page', () => {
     const { shadowRoot } = await render();
 
     expect(updateMetadata).toHaveBeenCalledWith('Team', 'Get more info about organizers');
-    expect(shadowRoot.querySelector('.team-photo')).toHaveAttribute(
+    expect(screen.getByShadowRole('img', { name: 'The team' })).toHaveAttribute(
       'src',
       aboutOrganizerBlock.image,
     );
-    expect(shadowRoot.querySelector('.description')).toHaveProperty('content', team.description);
+    expect(deepQuerySelector(shadowRoot, 'short-markdown.description')).toHaveProperty(
+      'content',
+      team.description,
+    );
   });
 
   it('shows each subteam under its own heading, with member cards', async () => {
-    const { shadowRoot, view } = await render();
+    const { shadowRoot } = await render();
 
-    expect(view.getByRole('heading', { level: 2, name: 'Core team' })).toBeInTheDocument();
-    expect(shadowRoot.querySelector<TeamMember>('.members team-member')!.member).toBe(member);
+    expect(screen.getByShadowRole('heading', { level: 2, name: 'Core team' })).toBeInTheDocument();
+    expect(deepQuerySelector<TeamMember>(shadowRoot, '.members team-member')!.member).toBe(member);
   });
 
   it('shows loading and failure states', async () => {

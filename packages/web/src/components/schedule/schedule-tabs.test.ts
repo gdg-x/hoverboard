@@ -24,7 +24,7 @@ const render = async (props: Partial<ScheduleTabs>) => {
   const result = await fixture<ScheduleTabs>(html`<schedule-tabs></schedule-tabs>`);
   Object.assign(result.element, { schedule: new Success(days), ...props });
   await result.element.updateComplete;
-  return within(result.shadowRootForWithin);
+  return result.shadowRootForWithin;
 };
 
 describe('schedule-tabs', () => {
@@ -33,10 +33,10 @@ describe('schedule-tabs', () => {
   });
 
   it('links to every day and My Schedule', async () => {
-    const view = await render({});
-    const links = within(view.getByRole('navigation', { name: 'Schedule days' })).getAllByRole(
-      'link',
-    );
+    const container = await render({});
+    const links = within(
+      within(container).getByRole('navigation', { name: 'Schedule days' }),
+    ).getAllByRole('link');
 
     expect(links.map((link) => link.textContent?.replace(/\s+/g, ' ').trim())).toEqual([
       'Day 1 January 1',
@@ -48,36 +48,39 @@ describe('schedule-tabs', () => {
   });
 
   it('shows only the date for a one-day event', async () => {
-    const view = await render({ schedule: new Success([days[0]!]) });
+    const container = await render({ schedule: new Success([days[0]!]) });
 
-    expect(view.getAllByRole('link')[0]).toHaveTextContent(/^\s*January 1\s*$/);
+    expect(within(container).getAllByRole('link')[0]).toHaveTextContent(/^\s*January 1\s*$/);
   });
 
   it('marks the first day as current on /schedule', async () => {
-    const view = await render({ location: location('/schedule') });
+    const container = await render({ location: location('/schedule') });
 
-    expect(view.getByRole('link', { current: 'page' })).toHaveTextContent('January 1');
+    expect(within(container).getByRole('link', { current: 'page' })).toHaveTextContent('January 1');
   });
 
   it("marks the location's day or My Schedule as current", async () => {
     expect(
-      (await render({ location: location('/schedule/2024-01-02') })).getByRole('link', {
+      within(await render({ location: location('/schedule/2024-01-02') })).getByRole('link', {
         current: 'page',
       }),
     ).toHaveTextContent('January 2');
     litRender(nothing, document.body);
 
     expect(
-      (await render({ location: location('/schedule/my-schedule') })).getByRole('link', {
+      within(await render({ location: location('/schedule/my-schedule') })).getByRole('link', {
         current: 'page',
       }),
     ).toHaveTextContent('My Schedule');
   });
 
   it('keeps the query string in its links', async () => {
-    const view = await render({ location: location('/schedule/2024-01-01', '?tags=web') });
+    const container = await render({ location: location('/schedule/2024-01-01', '?tags=web') });
 
-    expect(view.getAllByRole('link')[0]).toHaveAttribute('href', '/schedule/2024-01-01?tags=web');
+    expect(within(container).getAllByRole('link')[0]).toHaveAttribute(
+      'href',
+      '/schedule/2024-01-01?tags=web',
+    );
   });
 
   it('leaves out My Schedule when that feature is off', async () => {
@@ -88,8 +91,8 @@ describe('schedule-tabs', () => {
   });
 
   it('shows no days when the schedule failed', async () => {
-    const view = await render({ schedule: new Failure(new Error('failed')) });
+    const container = await render({ schedule: new Failure(new Error('failed')) });
 
-    expect(view.queryByText('January 1')).toBeNull();
+    expect(within(container).queryByText('January 1')).toBeNull();
   });
 });

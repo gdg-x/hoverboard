@@ -37,7 +37,7 @@ describe('the archive rules', () => {
     const path = documentPath(entry);
     const readable = READABLE.includes(entry);
 
-    it(readable ? 'can be read' : "can't be read", async () => {
+    it('can be read only if the archive shows it', async () => {
       const read = getDoc(doc(archive.unauthenticatedContext().firestore(), path));
       await (readable ? expect(read).toAllow() : expect(read).toDeny());
     });

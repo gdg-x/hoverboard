@@ -6,11 +6,9 @@ import reducer, {
   requestNotificationPermission,
   unsupportedNotificationPermission,
 } from '.';
-import { getId, getInstallations } from 'firebase/installations';
-import { getMessaging, getToken } from 'firebase/messaging';
+import { getMessaging, onRegistered, register } from 'firebase/messaging';
 
 vi.mock('firebase/messaging');
-vi.mock('firebase/installations');
 
 const setNotification = (
   permission: NotificationPermission,
@@ -70,9 +68,12 @@ describe('notificationPermission', () => {
   it('requests permission and stores the installation id when granted', async () => {
     const requestPermission = setNotification('default', vi.fn().mockResolvedValue('granted'));
     vi.mocked(getMessaging).mockReturnValue({} as never);
-    vi.mocked(getToken).mockResolvedValue('token-123');
-    vi.mocked(getInstallations).mockReturnValue({} as never);
-    vi.mocked(getId).mockResolvedValue('fid-123');
+    let onFid: (fid: string) => void = () => undefined;
+    vi.mocked(onRegistered).mockImplementation((_messaging, next) => {
+      onFid = next as (fid: string) => void;
+      return vi.fn();
+    });
+    vi.mocked(register).mockImplementation(async () => onFid('fid-123'));
 
     const action = await requestNotificationPermission(PROMPT_USER.YES)(
       vi.fn(),
@@ -82,8 +83,7 @@ describe('notificationPermission', () => {
 
     expect(requestPermission).toHaveBeenCalled();
     expect(getMessaging).toHaveBeenCalled();
-    expect(getToken).toHaveBeenCalled();
-    expect(getId).toHaveBeenCalled();
+    expect(register).toHaveBeenCalled();
     expect(reducer(initialNotificationPermissionState, action)).toStrictEqual({
       value: new Success('fid-123'),
     });
@@ -100,10 +100,10 @@ describe('notificationPermission', () => {
     });
   });
 
-  it('stores an unsupported error when token retrieval fails', async () => {
+  it('stores an unsupported error when registration fails', async () => {
     setNotification('granted');
     vi.mocked(getMessaging).mockReturnValue({} as never);
-    vi.mocked(getToken).mockRejectedValue(new Error('nope'));
+    vi.mocked(register).mockRejectedValue(new Error('nope'));
 
     const action = await requestNotificationPermission(PROMPT_USER.NO)(vi.fn(), vi.fn(), undefined);
 

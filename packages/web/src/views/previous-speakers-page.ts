@@ -74,7 +74,10 @@ export class PreviousSpeakersPage extends ThemedComponent {
   @fromStore((state) => selectPreviousSpeakersState(state))
   accessor previousSpeakers!: PreviousSpeakersState;
 
-  private readonly metadata = new PageMetadataController(this, 'previousSpeakers');
+  constructor() {
+    super();
+    new PageMetadataController(this, 'previousSpeakers');
+  }
 
   override render() {
     const pending = this.previousSpeakers instanceof Pending;

@@ -151,8 +151,9 @@ export const askStarterText = async (
     if (answer) hero[key] = answer;
   }
   const tickets = (resources['ticketsBlock'] ?? {}) as Json;
+  const currentDetails = tickets['ticketsDetails'];
   const ticketsDetails = on('tickets')
-    ? await ask('What a ticket includes:', String(tickets['ticketsDetails'] ?? ''))
+    ? await ask('What a ticket includes:', typeof currentDetails === 'string' ? currentDetails : '')
     : '';
   return {
     ...resources,

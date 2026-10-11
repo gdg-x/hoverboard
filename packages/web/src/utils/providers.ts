@@ -11,24 +11,24 @@ export enum PROVIDER {
 
 export const getFederatedProvider = (provider: PROVIDER) => {
   switch (provider) {
-    case 'https://accounts.google.com':
-    case 'google.com': {
+    case PROVIDER['https://accounts.google.com']:
+    case PROVIDER['google.com']: {
       const provider = new GoogleAuthProvider();
       provider.addScope('profile');
       provider.addScope('email');
       return provider;
     }
 
-    case 'https://www.facebook.com':
-    case 'facebook.com': {
+    case PROVIDER['https://www.facebook.com']:
+    case PROVIDER['facebook.com']: {
       const provider = new FacebookAuthProvider();
       provider.addScope('email');
       provider.addScope('public_profile');
       return provider;
     }
 
-    case 'https://twitter.com':
-    case 'twitter.com':
+    case PROVIDER['https://twitter.com']:
+    case PROVIDER['twitter.com']:
       return new TwitterAuthProvider();
 
     default:
@@ -38,16 +38,16 @@ export const getFederatedProvider = (provider: PROVIDER) => {
 
 export const getFederatedProviderClass = (provider: PROVIDER) => {
   switch (provider) {
-    case 'https://accounts.google.com':
-    case 'google.com':
+    case PROVIDER['https://accounts.google.com']:
+    case PROVIDER['google.com']:
       return GoogleAuthProvider;
 
-    case 'https://www.facebook.com':
-    case 'facebook.com':
+    case PROVIDER['https://www.facebook.com']:
+    case PROVIDER['facebook.com']:
       return FacebookAuthProvider;
 
-    case 'https://twitter.com':
-    case 'twitter.com':
+    case PROVIDER['https://twitter.com']:
+    case PROVIDER['twitter.com']:
       return TwitterAuthProvider;
 
     default:
@@ -57,16 +57,16 @@ export const getFederatedProviderClass = (provider: PROVIDER) => {
 
 export const getProviderCompanyName = (provider: PROVIDER) => {
   switch (provider) {
-    case 'https://accounts.google.com':
-    case 'google.com':
+    case PROVIDER['https://accounts.google.com']:
+    case PROVIDER['google.com']:
       return 'Google';
 
-    case 'https://www.facebook.com':
-    case 'facebook.com':
+    case PROVIDER['https://www.facebook.com']:
+    case PROVIDER['facebook.com']:
       return 'Facebook';
 
-    case 'https://twitter.com':
-    case 'twitter.com':
+    case PROVIDER['https://twitter.com']:
+    case PROVIDER['twitter.com']:
       return 'Twitter';
 
     default:

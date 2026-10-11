@@ -1,5 +1,11 @@
-import { fireEvent, within } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import { html, render as litRender, nothing } from 'lit';
+import {
+  deepQuerySelector,
+  deepQuerySelectorAll,
+  screen,
+  within,
+} from 'shadow-dom-testing-library';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { decorations, density, siteAttendance, themeName } from '../../config/site';
@@ -13,7 +19,7 @@ import {
   DEMO_THEME_KEY,
   DEMO_TIME_KEY,
 } from '../../utils/demo';
-import type { HbSwitch } from '../ui/hb-switch';
+import type { ColorSchemeToggle } from '../footer/color-scheme-toggle';
 import type { DemoBanner } from './demo-banner';
 import './demo-banner';
 
@@ -31,7 +37,7 @@ const render = async () => {
     html`<demo-banner></demo-banner>`,
   );
   await element.updateComplete;
-  return { element, shadowRoot, view: within(shadowRootForWithin) };
+  return { element, shadowRoot, container: shadowRootForWithin };
 };
 
 describe('demo-banner', () => {
@@ -43,38 +49,44 @@ describe('demo-banner', () => {
     }
   });
 
-  it("starts from the site's theme and spacing, with the brightness toggle", async () => {
-    const { shadowRoot, view } = await render();
+  it("starts from the site's theme", async () => {
+    const { container } = await render();
 
-    expect(view.getByRole('complementary', { name: 'Demo' })).toBeInTheDocument();
-    expect(view.getByText('DEMO')).toBeInTheDocument();
-    expect(view.getByText('Theme')).toHaveClass('visually-hidden');
-    expect(view.getByText('Spacing')).toHaveClass('visually-hidden');
-    expect(view.getByRole('combobox', { name: 'Theme' })).toHaveValue(themeName);
+    expect(within(container).getByRole('complementary', { name: 'Demo' })).toBeInTheDocument();
+    expect(within(container).getByText('DEMO')).toBeInTheDocument();
+    expect(within(container).getByText('Theme')).toHaveClass('visually-hidden');
+    expect(within(container).getByRole('combobox', { name: 'Theme' })).toHaveValue(themeName);
     expect(
-      within(view.getByRole('combobox', { name: 'Theme' }))
+      within(within(container).getByRole('combobox', { name: 'Theme' }))
         .getAllByRole('option')
         .map((option) => (option as HTMLOptionElement).value),
     ).toEqual(['festival', 'spotlight', 'paper', 'glass']);
-    const spacing = within(view.getByRole('group', { name: 'Spacing' }));
-    expect(spacing.getAllByRole('radio').map((radio) => radio.getAttribute('value'))).toEqual([
-      'compact',
-      'default',
-      'roomy',
-    ]);
-    expect(spacing.getByRole('radio', { checked: true })).toHaveAttribute('value', density);
+  });
+
+  it("starts from the site's spacing, with the brightness toggle", async () => {
+    const { shadowRoot, container } = await render();
+
+    expect(within(container).getByText('Spacing')).toHaveClass('visually-hidden');
+    const spacing = within(container).getByRole('group', { name: 'Spacing' });
     expect(
-      [...shadowRoot.querySelectorAll('fieldset hoverboard-icon')].map((icon) =>
+      within(spacing)
+        .getAllByRole('radio')
+        .map((radio) => radio.getAttribute('value')),
+    ).toEqual(['compact', 'default', 'roomy']);
+    expect(within(spacing).getByRole('radio', { checked: true })).toHaveAttribute('value', density);
+    expect(
+      // Only the spacing icons, not those of the nested brightness toggle.
+      deepQuerySelectorAll(shadowRoot, '.controls > fieldset hoverboard-icon').map((icon) =>
         icon.getAttribute('name'),
       ),
     ).toEqual(['density-small', 'density-medium', 'density-large']);
-    expect(view.getByText('Compact')).toHaveClass('visually-hidden');
-    expect(shadowRoot.querySelector('color-scheme-toggle')).toHaveAttribute('compact');
+    expect(within(container).getByText('Compact')).toHaveClass('visually-hidden');
+    expect(deepQuerySelector(shadowRoot, 'color-scheme-toggle')).toHaveAttribute('compact');
   });
 
   it('switches the theme, and forgets the choice for the site theme', async () => {
-    const { view } = await render();
-    const select = view.getByRole('combobox', { name: 'Theme' });
+    const { container } = await render();
+    const select = within(container).getByRole('combobox', { name: 'Theme' });
     const other = themeName === 'festival' ? 'spotlight' : 'festival';
 
     fireEvent.change(select, { target: { value: other } });
@@ -87,21 +99,17 @@ describe('demo-banner', () => {
   });
 
   it('switches the spacing', async () => {
-    const { view } = await render();
+    const { container } = await render();
 
-    fireEvent.click(view.getByRole('radio', { name: 'Roomy' }));
+    fireEvent.click(within(container).getByRole('radio', { name: 'Roomy' }));
 
     expect(root).toHaveAttribute('data-density', 'roomy');
     expect(localStorage.getItem(DEMO_DENSITY_KEY)).toBe('roomy');
   });
 
   it('switches the decorations', async () => {
-    const { shadowRoot } = await render();
-    const toggle = shadowRoot.querySelector<HbSwitch>('hb-switch')!;
-    await toggle.updateComplete;
-    const input = within(toggle.shadowRoot as unknown as HTMLElement).getByRole('switch', {
-      name: 'Decorations',
-    });
+    await render();
+    const input = await screen.findByShadowRole('switch', { name: 'Decorations' });
     expect(input).toBeChecked();
     expect(decorations).toBe(true);
 
@@ -114,16 +122,16 @@ describe('demo-banner', () => {
   it('shows the stored choices after the first render, and ignores unknown ones', async () => {
     localStorage.setItem(DEMO_THEME_KEY, 'spotlight');
     localStorage.setItem(DEMO_DENSITY_KEY, 'huge');
-    const { element, view } = await render();
+    const { element, container } = await render();
     await element.updateComplete;
 
-    expect(view.getByRole('combobox', { name: 'Theme' })).toHaveValue('spotlight');
-    expect(view.getByRole('radio', { name: 'Default' })).toBeChecked();
+    expect(within(container).getByRole('combobox', { name: 'Theme' })).toHaveValue('spotlight');
+    expect(within(container).getByRole('radio', { name: 'Default' })).toBeChecked();
   });
 
   it("offers in person, hybrid and online, starting from the site's", async () => {
-    const { view } = await render();
-    const select = view.getByRole('combobox', { name: 'How people attend' });
+    const { container } = await render();
+    const select = within(container).getByRole('combobox', { name: 'How people attend' });
 
     expect(select).toHaveValue(siteAttendance);
     expect(
@@ -134,8 +142,8 @@ describe('demo-banner', () => {
   });
 
   it('switches how people attend, and forgets the choice for the site', async () => {
-    const { view } = await render();
-    const select = view.getByRole('combobox', { name: 'How people attend' });
+    const { container } = await render();
+    const select = within(container).getByRole('combobox', { name: 'How people attend' });
     const other = siteAttendance === 'online' ? 'inPerson' : 'online';
 
     fireEvent.change(select, { target: { value: other } });
@@ -147,15 +155,17 @@ describe('demo-banner', () => {
 
   it('shows the stored attendance after the first render', async () => {
     localStorage.setItem(DEMO_ATTENDANCE_KEY, 'hybrid');
-    const { element, view } = await render();
+    const { element, container } = await render();
     await element.updateComplete;
 
-    expect(view.getByRole('combobox', { name: 'How people attend' })).toHaveValue('hybrid');
+    expect(within(container).getByRole('combobox', { name: 'How people attend' })).toHaveValue(
+      'hybrid',
+    );
   });
 
   it('makes it before, during or after the event, or now again', async () => {
-    const { view } = await render();
-    const select = view.getByRole('combobox', { name: 'When' });
+    const { container } = await render();
+    const select = within(container).getByRole('combobox', { name: 'When' });
 
     expect(select).toHaveValue('now');
     expect(
@@ -173,10 +183,10 @@ describe('demo-banner', () => {
 
   it('shows the stored time after the first render', async () => {
     localStorage.setItem(DEMO_TIME_KEY, 'after');
-    const { element, view } = await render();
+    const { element, container } = await render();
     await element.updateComplete;
 
-    expect(view.getByRole('combobox', { name: 'When' })).toHaveValue('after');
+    expect(within(container).getByRole('combobox', { name: 'When' })).toHaveValue('after');
   });
 
   it('keeps its brightness toggle in sync with the one in the footer', async () => {
@@ -188,7 +198,7 @@ describe('demo-banner', () => {
     fireEvent.click(
       within(footer.shadowRoot as unknown as HTMLElement).getByRole('radio', { name: 'Dark' }),
     );
-    const banner = shadowRoot.querySelector('color-scheme-toggle')!;
+    const banner = deepQuerySelector<ColorSchemeToggle>(shadowRoot, 'color-scheme-toggle')!;
     await banner.updateComplete;
 
     expect(localStorage.getItem(COLOR_SCHEME_KEY)).toBe('dark');

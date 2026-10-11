@@ -61,8 +61,6 @@ export class HomePage extends ThemedComponent {
     `,
   ];
 
-  private readonly metadata = new PageMetadataController(this, 'home');
-
   /** The event state when the page was built. The hero checks again in the browser. */
   @property({ attribute: 'event-state' })
   accessor eventState: EventState = 'upcoming';
@@ -89,6 +87,11 @@ export class HomePage extends ThemedComponent {
       );
     }
   };
+
+  constructor() {
+    super();
+    new PageMetadataController(this, 'home');
+  }
 
   override firstUpdated() {
     this.observeLazyBlocks();
@@ -131,7 +134,7 @@ export class HomePage extends ThemedComponent {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         this.blockObserver.unobserve(entry.target);
-        lazyBlocks[entry.target.localName as LazyBlock]?.();
+        void lazyBlocks[entry.target.localName as LazyBlock]?.();
       }),
   });
 

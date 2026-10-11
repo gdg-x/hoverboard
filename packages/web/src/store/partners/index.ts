@@ -1,7 +1,7 @@
 import { Failure, Initialized, Pending, type RemoteData, Success } from '@abraham/remotedata';
 import { createSelector, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { Unsubscribe } from 'firebase/firestore';
-import { type RootState, store } from '..';
+import type { RootState } from '..';
 import {
   subscribeToPartnerGroups as subscribeGroupsDb,
   subscribeToPartners as subscribePartnersDb,
@@ -9,6 +9,7 @@ import {
 import type { Partner } from '../../models/partner';
 import type { PartnerGroup, PartnerGroupWithoutItems } from '../../models/partner-group';
 import { registerContentSubscriber, resetContent, seedContent } from '../content';
+import { dispatch } from '../dispatch';
 
 export type PartnerGroupsState = RemoteData<Error, PartnerGroup[]>;
 
@@ -29,18 +30,18 @@ export const initialState = {
 const subscribeToPartners = () => {
   return subscribePartnersDb(
     (partners) => {
-      store.dispatch(setPartnersSuccess(partners));
+      dispatch(setPartnersSuccess(partners));
     },
-    (error) => store.dispatch(setPartnersFailure(error)),
+    (error) => dispatch(setPartnersFailure(error)),
   );
 };
 
 const subscribeToGroups = () => {
   return subscribeGroupsDb(
     (groups) => {
-      store.dispatch(setGroupsSuccess(groups));
+      dispatch(setGroupsSuccess(groups));
     },
-    (error) => store.dispatch(setGroupsFailure(error)),
+    (error) => dispatch(setGroupsFailure(error)),
   );
 };
 
@@ -101,7 +102,7 @@ export const selectPartnerGroups = createSelector(
   selectPartners,
   (groups: PartnersState['groups'], partners: PartnersState['partners']): PartnerGroupsState => {
     if (groups instanceof Initialized || partners instanceof Initialized) {
-      store.dispatch(subscribe());
+      dispatch(subscribe());
       return new Pending();
     }
 
@@ -137,7 +138,7 @@ const {
 } = partnersSlice.actions;
 
 for (const name of ['partners', 'partnerGroups']) {
-  registerContentSubscriber(name, () => store.dispatch(subscribe()));
+  registerContentSubscriber(name, () => dispatch(subscribe()));
 }
 
 export { subscribe, unsubscribe };

@@ -1,5 +1,5 @@
-import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
+import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
@@ -15,27 +15,27 @@ describe('offline-page', () => {
   });
 
   it('says what still works offline and links home', async () => {
-    const { shadowRoot, shadowRootForWithin } = await fixture<OfflinePage>(
-      html`<offline-page></offline-page>`,
-    );
-    const view = within(shadowRootForWithin);
+    const { shadowRoot } = await fixture<OfflinePage>(html`<offline-page></offline-page>`);
 
-    expect(view.getByText(/You are offline/)).toBeInTheDocument();
-    expect(view.getByRole('heading', { level: 2 })).toHaveTextContent('What works offline');
-    expect([...shadowRoot.querySelectorAll('li')].map((item) => item.textContent?.trim())).toEqual([
+    expect(screen.getByShadowText(/You are offline/)).toBeInTheDocument();
+    expect(screen.getByShadowRole('heading', { level: 2 })).toHaveTextContent('What works offline');
+    expect(screen.getAllByShadowRole('listitem').map((item) => item.textContent?.trim())).toEqual([
       'Pages you have visited before',
       'Your saved sessions, in My Schedule',
     ]);
-    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('href', '/');
-    expect(shadowRoot.querySelector('.illustration svg')).toBeInTheDocument();
-    expect(shadowRoot.querySelector('.illustration')).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.getByShadowRole('link', { name: 'Go to the home page' })).toHaveAttribute(
+      'href',
+      '/',
+    );
+    expect(deepQuerySelector(shadowRoot, '.illustration svg')).toBeInTheDocument();
+    expect(deepQuerySelector(shadowRoot, '.illustration')).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('leaves out saved sessions when My Schedule is off', async () => {
     setFeatures({ mySchedule: false });
-    const { shadowRoot } = await fixture<OfflinePage>(html`<offline-page></offline-page>`);
+    await fixture<OfflinePage>(html`<offline-page></offline-page>`);
 
-    expect(shadowRoot.querySelectorAll('li')).toHaveLength(1);
+    expect(screen.getAllByShadowRole('listitem')).toHaveLength(1);
   });
 
   it('sets the offline title and description', async () => {

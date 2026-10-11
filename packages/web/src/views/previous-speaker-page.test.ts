@@ -1,7 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
+import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { PreviousSpeaker } from '../models/previous-speaker';
 import type { SocialLinks } from '../components/shared/social-links';
@@ -40,7 +40,7 @@ const render = async () => {
   result.element.speakerId = 'speaker-1';
   await result.element.updateComplete;
   await result.element.updateComplete;
-  return { ...result, view: within(result.shadowRootForWithin) };
+  return result;
 };
 
 describe('previous-speaker-page', () => {
@@ -55,13 +55,18 @@ describe('previous-speaker-page', () => {
 
   it('shows the speaker, their talks and other previous speakers', async () => {
     const { shadowRoot } = await render();
-    const profile = shadowRoot.querySelector<SpeakerProfile>('speaker-profile')!;
+    const profile = deepQuerySelector<SpeakerProfile>(shadowRoot, 'hero-block > speaker-profile')!;
 
     expect(profile.speaker).toBe(speaker);
     expect(profile).toHaveAttribute('kind', 'previous-speaker');
-    expect(shadowRoot.querySelector<SocialLinks>('social-links')!.socials).toBe(speaker.socials);
-    expect(shadowRoot.querySelector('previous-talks')).toHaveProperty('sessions', speaker.sessions);
-    expect(shadowRoot.querySelector('previous-speakers-block')).not.toBeNull();
+    expect(deepQuerySelector<SocialLinks>(shadowRoot, '.inner > social-links')!.socials).toBe(
+      speaker.socials,
+    );
+    expect(deepQuerySelector(shadowRoot, '.inner > previous-talks')).toHaveProperty(
+      'sessions',
+      speaker.sessions,
+    );
+    expect(deepQuerySelector(shadowRoot, 'previous-speakers-block')).not.toBeNull();
     expect(updateImageMetadata).toHaveBeenCalledWith('Ada Lovelace', 'Speaker bio', {
       image: '/ada.jpg',
       imageAlt: 'Ada Lovelace',
@@ -69,9 +74,9 @@ describe('previous-speaker-page', () => {
   });
 
   it('links back to all previous speakers', async () => {
-    const { view } = await render();
+    await render();
 
-    expect(view.getByRole('link', { name: 'All previous speakers' })).toHaveAttribute(
+    expect(screen.getByShadowRole('link', { name: 'All previous speakers' })).toHaveAttribute(
       'href',
       '/previous-speakers',
     );
@@ -88,6 +93,6 @@ describe('previous-speaker-page', () => {
     vi.mocked(selectPreviousSpeaker).mockReturnValue({ ...speaker, sessions: {} });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('previous-talks')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, 'previous-talks')).toBeNull();
   });
 });

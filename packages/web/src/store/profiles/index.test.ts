@@ -96,8 +96,7 @@ describe('watchProfiles', () => {
     watchProfiles(['ada', 'grace', 'ada']);
     watchProfiles(['grace', 'ada']);
 
-    expect(subscribeToProfiles).toHaveBeenCalledOnce();
-    expect(subscribeToProfiles).toHaveBeenCalledWith(
+    expect(subscribeToProfiles).toHaveBeenCalledExactlyOnceWith(
       ['ada', 'grace'],
       expect.any(Function),
       expect.any(Function),

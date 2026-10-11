@@ -113,9 +113,9 @@ export class FooterSocial extends ThemedComponent {
     return msg(str`Share on ${network}`, { id: 'footer.social.share' });
   }
 
-  private share(e: PointerEvent) {
+  private readonly share = (e: PointerEvent) => {
     share(e);
-  }
+  };
 }
 
 declare global {

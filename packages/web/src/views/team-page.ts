@@ -85,10 +85,13 @@ export class TeamPage extends ThemedComponent {
     }
   `;
 
-  private readonly metadata = new PageMetadataController(this, 'team');
-
   @fromStore((state) => selectTeamsAndMembers(state))
   accessor teamsMembers!: typeof initialTeamsMembersState;
+
+  constructor() {
+    super();
+    new PageMetadataController(this, 'team');
+  }
 
   override render() {
     const teams = this.teamsMembers instanceof Success ? this.teamsMembers.data : [];

@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { within } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
+import { deepQuerySelector, deepQuerySelectorAll, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../../__tests__/helpers/features';
 import type { BuiltSession } from '../../schedule/build-schedule';
@@ -41,7 +42,7 @@ const render = async (props: Partial<SessionCard> = {}) => {
   await result.element.updateComplete;
   // `acceptingFeedback` is set after the first render.
   await result.element.updateComplete;
-  return { ...result, view: within(result.shadowRootForWithin) };
+  return result;
 };
 
 describe('session-card', () => {
@@ -55,24 +56,24 @@ describe('session-card', () => {
   });
 
   it('links its title to the session page', async () => {
-    const { view } = await render();
+    await render();
 
-    expect(view.getByRole('heading', { level: 3 })).toHaveTextContent('Example Session');
-    expect(view.getByRole('link', { name: 'Example Session' })).toHaveAttribute(
+    expect(screen.getByShadowRole('heading', { level: 3 })).toHaveTextContent('Example Session');
+    expect(screen.getByShadowRole('link', { name: 'Example Session' })).toHaveAttribute(
       'href',
       '/sessions/session-1',
     );
   });
 
   it('shows its chips, speakers, and the track and duration', async () => {
-    const { shadowRoot, view } = await render();
+    const { shadowRoot } = await render();
 
-    const chips = shadowRoot.querySelector<SessionChips>('session-chips.chips')!;
+    const chips = deepQuerySelector<SessionChips>(shadowRoot, 'session-chips.chips')!;
     expect(chips.session).toBe(session);
     expect(chips.nameSponsor).toBe(false);
-    expect(view.getByText('Ada')).toBeInTheDocument();
-    expect(shadowRoot.querySelector('.speakers speaker-photo')).toHaveAttribute('size', 'xs');
-    expect(shadowRoot.querySelector('.meta')).toHaveTextContent(
+    expect(screen.getByShadowText('Ada')).toBeInTheDocument();
+    expect(deepQuerySelector(shadowRoot, '.speakers speaker-photo')).toHaveAttribute('size', 'xs');
+    expect(deepQuerySelector(shadowRoot, '.meta')).toHaveTextContent(
       'Main hall · 40 min · Intermediate · English',
     );
   });
@@ -82,13 +83,13 @@ describe('session-card', () => {
       session: { ...session, tags: [], sponsor: 'Acme' },
     });
 
-    expect(shadowRoot.querySelector('session-chips')).toBeInTheDocument();
+    expect(deepQuerySelector(shadowRoot, 'session-chips')).toBeInTheDocument();
   });
 
   it('has no chips without tags or a sponsor', async () => {
     const { shadowRoot } = await render({ session: { ...session, tags: [] } });
 
-    expect(shadowRoot.querySelector('session-chips')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, 'session-chips')).toBeNull();
   });
 
   it('skips a speaker that does not exist', async () => {
@@ -96,20 +97,20 @@ describe('session-card', () => {
       session: { ...session, speakers: [...session.speakers!, { id: 12 }] } as never,
     });
 
-    expect(shadowRoot.querySelectorAll('.speakers li')).toHaveLength(1);
+    expect(deepQuerySelectorAll(shadowRoot, '.speakers li')).toHaveLength(1);
   });
 
   it("draws the stripe in the main tag's color", async () => {
-    const { shadowRoot } = await render();
+    await render();
 
-    expect(
-      shadowRoot.querySelector<HTMLElement>('.session')!.style.getPropertyValue('--stripe'),
-    ).toBe('var(--hb-tag-web, var(--hb-color-outline))');
+    expect(screen.getByShadowRole('article').style.getPropertyValue('--stripe')).toBe(
+      'var(--hb-tag-web, var(--hb-color-outline))',
+    );
   });
 
   it('saves the session from an icon button', async () => {
     const { shadowRoot } = await render();
-    const save = shadowRoot.querySelector<SaveButton>('save-button.action')!;
+    const save = deepQuerySelector<SaveButton>(shadowRoot, 'save-button.action')!;
 
     expect(save.session).toBe(session);
     expect(save.variant).toBe('icon');
@@ -119,18 +120,17 @@ describe('session-card', () => {
     setFeatures({ mySchedule: false });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('save-button')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, 'save-button')).toBeNull();
   });
 
   it('asks for feedback instead of saving while the session takes feedback', async () => {
     mockAcceptingFeedback.mockReturnValue(true);
     const { shadowRoot } = await render();
-    const button = shadowRoot.querySelector<HTMLElement>('hb-icon-button.feedback')!;
+    const button = await screen.findByShadowRole('button', { name: 'Rate Example Session' });
 
-    expect(shadowRoot.querySelector('save-button')).toBeNull();
-    expect(button).toHaveAttribute('label', 'Rate Example Session');
+    expect(deepQuerySelector(shadowRoot, 'save-button')).toBeNull();
 
-    button.click();
+    fireEvent.click(button);
 
     expect(openFeedbackDialog).toHaveBeenCalledWith(session);
   });
@@ -140,8 +140,8 @@ describe('session-card', () => {
     mockAcceptingFeedback.mockReturnValue(true);
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('hb-icon-button.feedback')).toBeNull();
-    expect(shadowRoot.querySelector('save-button')).toBeInTheDocument();
+    expect(deepQuerySelector(shadowRoot, 'hb-icon-button.feedback')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, 'save-button')).toBeInTheDocument();
   });
 
   describe('live', () => {
@@ -155,28 +155,28 @@ describe('session-card', () => {
     it('says so before the track while the session is on', async () => {
       const { shadowRoot } = await render({ now });
 
-      expect(shadowRoot.querySelector('.meta .live')).toHaveTextContent('Live');
-      expect(shadowRoot.querySelector('.meta')).toHaveTextContent(/^Live\s*Main hall/);
+      expect(deepQuerySelector(shadowRoot, '.meta .live')).toHaveTextContent('Live');
+      expect(deepQuerySelector(shadowRoot, '.meta')).toHaveTextContent(/^Live\s*Main hall/);
       expect(isLive).toHaveBeenCalledWith(session, now.getTime());
     });
 
     it('is not live before the schedule sets the time, which the server never does', async () => {
       const { shadowRoot } = await render();
 
-      expect(shadowRoot.querySelector('.live')).toBeNull();
+      expect(deepQuerySelector(shadowRoot, '.live')).toBeNull();
       expect(isLive).not.toHaveBeenCalled();
     });
 
     it('is not live outside the session, or without a stream to watch', async () => {
       vi.mocked(isLive).mockReturnValue(false);
       const { shadowRoot } = await render({ now });
-      expect(shadowRoot.querySelector('.live')).toBeNull();
+      expect(deepQuerySelector(shadowRoot, '.live')).toBeNull();
 
       litRender(nothing, document.body);
       vi.mocked(isLive).mockReturnValue(true);
       vi.mocked(sessionStream).mockReturnValue(undefined);
       const withoutStream = await render({ now });
-      expect(withoutStream.shadowRoot.querySelector('.live')).toBeNull();
+      expect(deepQuerySelector(withoutStream.shadowRoot, '.live')).toBeNull();
     });
   });
 });

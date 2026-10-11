@@ -56,8 +56,6 @@ export class SpeakersPage extends ThemedComponent {
     `,
   ];
 
-  private readonly metadata = new PageMetadataController(this, 'speakers');
-
   @fromStore((state) => selectSpeakersState(state))
   accessor speakers!: SpeakersState;
   @fromStore((state) => selectFilterGroups(state, SPEAKER_FILTER_GROUPS))
@@ -66,6 +64,11 @@ export class SpeakersPage extends ThemedComponent {
   accessor selectedFilters!: Filter[];
   @fromStore((state) => selectFilteredSpeakers(state))
   accessor speakersToRender!: BuiltSpeaker[];
+
+  constructor() {
+    super();
+    new PageMetadataController(this, 'speakers');
+  }
 
   override render() {
     const speakers = this.speakersToRender;

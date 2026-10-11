@@ -11,11 +11,14 @@ import { ThemedComponent } from '../components/themed-component';
 export class FaqPage extends ThemedComponent {
   static override styles = pageInner;
 
-  private readonly metadata = new PageMetadataController(this, 'faq');
-
   /** The FAQ in the source locale, which the build passes in. */
   @property({ attribute: false })
   accessor content: string | undefined;
+
+  constructor() {
+    super();
+    new PageMetadataController(this, 'faq');
+  }
 
   get source() {
     return faq;

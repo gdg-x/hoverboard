@@ -104,7 +104,7 @@ export class AccountMenu extends ThemedComponent {
   };
 
   private readonly signOut = () => {
-    signOut();
+    void signOut();
   };
 }
 

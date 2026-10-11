@@ -17,7 +17,7 @@ const cell = (value: unknown): string => {
   else if (typeof (value as { toDate?: unknown }).toDate === 'function') {
     text = (value as { toDate: () => Date }).toDate().toISOString();
   } else if (typeof value === 'object') text = JSON.stringify(value);
-  else text = String(value);
+  else text = String(value as number | boolean | bigint);
   return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
 };
 

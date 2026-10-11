@@ -73,11 +73,14 @@ export class PostPage extends ThemedComponent {
 
   private contentRequest = 0;
 
-  private readonly postsStore = new StoreController(this, selectBlogPosts, {
-    onChange: (value) => {
-      this.posts = value;
-    },
-  });
+  constructor() {
+    super();
+    new StoreController(this, selectBlogPosts, {
+      onChange: (value) => {
+        this.posts = value;
+      },
+    });
+  }
 
   private get foundPost(): Post | undefined {
     return this.posts instanceof Success

@@ -90,25 +90,23 @@ export class SigninDialog extends ThemedComponent {
   @query('email-link-form')
   private accessor emailLinkForm!: EmailLinkForm | null;
 
-  private readonly mergeStore = new StoreController(this, selectAuthMergeable, {
-    onChange: (value) => {
-      const wasMergeState = this.isMergeState;
-      this.isMergeState = value;
-      if (value !== wasMergeState) {
-        this.onIsMergeState();
-      }
-    },
-  });
-
-  private readonly signedInStore = new StoreController(
-    this,
-    (state) => state.user instanceof Success,
-    {
+  constructor() {
+    super();
+    new StoreController(this, selectAuthMergeable, {
+      onChange: (value) => {
+        const wasMergeState = this.isMergeState;
+        this.isMergeState = value;
+        if (value !== wasMergeState) {
+          this.onIsMergeState();
+        }
+      },
+    });
+    new StoreController(this, (state) => state.user instanceof Success, {
       onChange: (signedIn) => {
         if (signedIn && this.open) closeDialog();
       },
-    },
-  );
+    });
+  }
 
   private onIsMergeState() {
     closeDialog();
@@ -238,14 +236,14 @@ export class SigninDialog extends ThemedComponent {
     if (this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
       if (error.providerId && error.credential) {
-        mergeAccounts(error.providerId, error.credential);
+        void mergeAccounts(error.providerId, error.credential);
         closeDialog();
       }
     }
   };
 
   private signIn(providerUrl: PROVIDER) {
-    signIn(providerUrl);
+    void signIn(providerUrl);
   }
 }
 

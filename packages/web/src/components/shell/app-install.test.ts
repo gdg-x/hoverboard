@@ -1,9 +1,13 @@
 import { describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
+import { screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { AppInstall } from './app-install';
 import './app-install';
+
+// By text, because a hidden button has no accessible name.
+const installButton = () => screen.getByShadowText('Add to Home Screen', { selector: 'button' });
 
 interface UserChoice {
   outcome: 'accepted' | 'dismissed';
@@ -26,13 +30,13 @@ describe('app-install', () => {
   });
 
   it('hides the install link until the browser fires beforeinstallprompt', async () => {
-    const { shadowRoot } = await fixture<AppInstall>(html`<app-install></app-install>`);
+    await fixture<AppInstall>(html`<app-install></app-install>`);
 
-    expect(shadowRoot.querySelector('button')).toHaveAttribute('hidden');
+    expect(installButton()).toHaveAttribute('hidden');
   });
 
   it('shows the install link once beforeinstallprompt fires and prevents the default prompt', async () => {
-    const { element, shadowRoot } = await fixture<AppInstall>(html`<app-install></app-install>`);
+    const { element } = await fixture<AppInstall>(html`<app-install></app-install>`);
     const event = new MockBeforeInstallPromptEvent();
     const preventDefault = vi.spyOn(event, 'preventDefault');
 
@@ -40,31 +44,32 @@ describe('app-install', () => {
     await element.updateComplete;
 
     expect(preventDefault).toHaveBeenCalled();
-    expect(shadowRoot.querySelector('button')).not.toHaveAttribute('hidden');
-    expect(shadowRoot.querySelector('button')).toHaveTextContent('Add to Home Screen');
+    expect(screen.getByShadowRole('button', { name: 'Add to Home Screen' })).not.toHaveAttribute(
+      'hidden',
+    );
   });
 
   it('prompts for install and hides the link again on click', async () => {
-    const { element, shadowRoot } = await fixture<AppInstall>(html`<app-install></app-install>`);
+    const { element } = await fixture<AppInstall>(html`<app-install></app-install>`);
     const event = new MockBeforeInstallPromptEvent();
     const promptSpy = vi.spyOn(event, 'prompt');
 
     window.dispatchEvent(event);
     await element.updateComplete;
 
-    fireEvent.click(shadowRoot.querySelector('button')!);
+    fireEvent.click(installButton());
     await element.updateComplete;
 
     expect(promptSpy).toHaveBeenCalledTimes(1);
-    expect(shadowRoot.querySelector('button')).toHaveAttribute('hidden');
+    expect(installButton()).toHaveAttribute('hidden');
   });
 
   it('does nothing when clicked without a deferred prompt', async () => {
-    const { element, shadowRoot } = await fixture<AppInstall>(html`<app-install></app-install>`);
+    const { element } = await fixture<AppInstall>(html`<app-install></app-install>`);
 
-    fireEvent.click(shadowRoot.querySelector('button')!);
+    fireEvent.click(installButton());
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('button')).toHaveAttribute('hidden');
+    expect(installButton()).toHaveAttribute('hidden');
   });
 });

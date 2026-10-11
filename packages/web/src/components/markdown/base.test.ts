@@ -43,7 +43,7 @@ Some **bold** text"
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
 
     await fixture<MarkdownTestSubject>(
-      html`<markdown-test-subject content="<div>not allowed</div>"></markdown-test-subject>`,
+      html`<markdown-test-subject content=${'<div>not allowed</div>'}></markdown-test-subject>`,
     );
 
     expect(warn).toHaveBeenCalledWith(expect.stringContaining('Invalid Markdown'));

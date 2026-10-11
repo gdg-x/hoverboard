@@ -212,7 +212,7 @@ describe('session-reactions', () => {
     expect(queueComplexSnackbar).toHaveBeenCalledWith(
       expect.objectContaining({ label: 'Sign in to react to sessions' }),
     );
-    vi.mocked(queueComplexSnackbar).mock.calls[0]![0].action?.callback();
+    await vi.mocked(queueComplexSnackbar).mock.calls[0]![0].action?.callback();
     expect(openSigninDialog).toHaveBeenCalled();
   });
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { screen, within } from '@testing-library/dom';
 import { html } from 'lit';
+import { screen, within } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../../__tests__/helpers/features';
 import { build, organizer } from '../../config/site';
@@ -48,8 +48,8 @@ describe('footer-nav', () => {
   it('leaves out the code of conduct link when the feature is off', async () => {
     setFeatures({ codeOfConduct: false });
 
-    const { shadowRoot } = await fixture(html`<footer-nav></footer-nav>`);
+    await fixture(html`<footer-nav></footer-nav>`);
 
-    expect(shadowRoot.querySelector('a.coc')).toBeNull();
+    expect(screen.queryByShadowRole('link', { name: 'Code of Conduct' })).not.toBeInTheDocument();
   });
 });

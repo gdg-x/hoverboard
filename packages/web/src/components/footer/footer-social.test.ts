@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { fireEvent, screen } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
+import { screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { mailto, organizer, socialNetwork } from '../../config/site';
 import { share } from '../../utils/share';
-import type { HbIconButton } from '../ui/hb-icon-button';
 import './footer-social';
 
 vi.mock('../../utils/share');
@@ -21,29 +21,22 @@ describe('footer-social', () => {
   });
 
   it('renders share buttons that call share on click', async () => {
-    const { shadowRootForWithin } = await fixture(
-      html`<footer-social data-testid="footer-social"></footer-social>`,
-    );
+    await fixture(html`<footer-social data-testid="footer-social"></footer-social>`);
 
     expect(screen.getByTestId('footer-social')).toBeInTheDocument();
 
-    const facebookButton = shadowRootForWithin.querySelector('[label="Share on Facebook"]')!;
-    fireEvent.click(facebookButton);
+    fireEvent.click(await screen.findByShadowRole('button', { name: 'Share on Facebook' }));
     expect(mockShare).toHaveBeenCalledTimes(1);
 
-    const twitterButton = shadowRootForWithin.querySelector('[label="Share on Twitter"]')!;
-    fireEvent.click(twitterButton);
+    fireEvent.click(screen.getByShadowRole('button', { name: 'Share on Twitter' }));
     expect(mockShare).toHaveBeenCalledTimes(2);
   });
 
   it('renders a social network link for each entry', async () => {
-    const { shadowRootForWithin } = await fixture(html`<footer-social></footer-social>`);
+    await fixture(html`<footer-social></footer-social>`);
 
     for (const { name, url } of socialNetwork.follow) {
-      const button = shadowRootForWithin.querySelector<HbIconButton>(`[label="${name}"]`)!;
-      await button.updateComplete;
-      const link = button.shadowRoot!.querySelector('a');
-      expect(link).toHaveAccessibleName(name);
+      const link = await screen.findByShadowRole('link', { name });
       expect(link).toHaveAttribute('href', url);
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noopener noreferrer');
@@ -51,18 +44,21 @@ describe('footer-social', () => {
   });
 
   it('renders the email link', async () => {
-    const { shadowRootForWithin } = await fixture(html`<footer-social></footer-social>`);
+    await fixture(html`<footer-social></footer-social>`);
 
-    const emailLink = shadowRootForWithin.querySelector('[aria-label="Email us"]');
-    expect(emailLink).toHaveAttribute('href', `mailto:${mailto}`);
+    expect(screen.getByShadowRole('link', { name: 'Email us' })).toHaveAttribute(
+      'href',
+      `mailto:${mailto}`,
+    );
   });
 
   it('renders the blog link', async () => {
-    const { shadowRootForWithin } = await fixture(html`<footer-social></footer-social>`);
-    const blogLink = shadowRootForWithin.querySelector('.blog a');
+    await fixture(html`<footer-social></footer-social>`);
 
-    expect(blogLink).toHaveAttribute('href', organizer.blog);
-    expect(blogLink).toHaveTextContent('Blog');
+    expect(screen.getByShadowRole('link', { name: 'Blog' })).toHaveAttribute(
+      'href',
+      organizer.blog,
+    );
   });
 
   it('leaves out the blog link when the organizer has no blog', async () => {
@@ -70,9 +66,9 @@ describe('footer-social', () => {
     delete (organizer as { blog?: string }).blog;
 
     try {
-      const { shadowRootForWithin } = await fixture(html`<footer-social></footer-social>`);
+      await fixture(html`<footer-social></footer-social>`);
 
-      expect(shadowRootForWithin.querySelector('.blog')).toBeNull();
+      expect(screen.queryByShadowRole('link', { name: 'Blog' })).not.toBeInTheDocument();
     } finally {
       organizer.blog = blog;
     }

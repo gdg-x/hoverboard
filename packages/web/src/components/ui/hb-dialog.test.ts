@@ -1,5 +1,6 @@
-import { fireEvent, within } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
+import { screen, within } from 'shadow-dom-testing-library';
 import { describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import './hb-dialog';
@@ -42,16 +43,16 @@ describe('hb-dialog', () => {
 
   it('closes with its close button and fires close', async () => {
     const onClose = vi.fn();
-    const { element, shadowRoot } = await fixture<HbDialog>(
+    const { element } = await fixture<HbDialog>(
       html`<hb-dialog heading="Subscribe" open @close="${() => onClose()}"></hb-dialog>`,
     );
-    const close = shadowRoot.querySelector('hb-icon-button')!;
+    const close = await screen.findByShadowRole('button');
+    expect(close).toHaveAccessibleName('Close');
 
     fireEvent.click(close);
     await element.updateComplete;
 
     expect(element.open).toBe(false);
-    expect(close).toHaveAttribute('label', 'Close');
     expect(onClose).toHaveBeenCalledOnce();
   });
 

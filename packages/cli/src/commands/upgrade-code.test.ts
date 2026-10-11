@@ -137,7 +137,7 @@ describe('normalizeRepoUrl', () => {
 });
 
 describe('runCodeUpgrade', () => {
-  it('merges the release on a branch, and resolves what it knows how to', async () => {
+  it('merges the release on a branch', async () => {
     setUp();
 
     const result = await runCodeUpgrade({ yes: true, upstreamUrl: upstream });
@@ -153,13 +153,6 @@ describe('runCodeUpgrade', () => {
       /^chore: upgrade Hoverboard to v4.1.0 \w+ \w+$/,
     );
     expect(run(fork, 'status', '--porcelain')).toBe('');
-    expect(JSON.parse(read(fork, 'packages/web/package.json'))).toEqual({
-      name: 'web',
-      dependencies: { astro: '^7.1.0', lit: '^3.0.0', widget: '^1.0.0' },
-    });
-    expect(read(fork, 'packages/web/package-lock.json')).toBe('lock 4.1.0\n');
-    expect(read(fork, 'README.md')).toBe('# DevFest Lviv\n');
-    expect(existsSync(join(fork, '.github/dependabot.yml'))).toBe(false);
     expect(JSON.parse(read(fork, 'package.json'))).toMatchObject({ version: '4.1.0' });
     expect(
       vi
@@ -176,6 +169,20 @@ describe('runCodeUpgrade', () => {
       ['npm', 'run build', fork],
     ]);
     expect(output()).toContain('Breaking changes:');
+  });
+
+  it('resolves what it knows how to', async () => {
+    setUp();
+
+    await runCodeUpgrade({ yes: true, upstreamUrl: upstream });
+
+    expect(JSON.parse(read(fork, 'packages/web/package.json'))).toEqual({
+      name: 'web',
+      dependencies: { astro: '^7.1.0', lit: '^3.0.0', widget: '^1.0.0' },
+    });
+    expect(read(fork, 'packages/web/package-lock.json')).toBe('lock 4.1.0\n');
+    expect(read(fork, 'README.md')).toBe('# DevFest Lviv\n');
+    expect(existsSync(join(fork, '.github/dependabot.yml'))).toBe(false);
     expect(output()).toContain('packages/web/package.json: back to the release');
     expect(output()).toContain('README.md: kept yours');
     expect(output()).toContain('.github/dependabot.yml: you deleted it');

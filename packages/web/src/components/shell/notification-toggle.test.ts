@@ -70,6 +70,24 @@ describe('notification-toggle', () => {
     expect(dispatch).not.toHaveBeenCalled();
   });
 
+  it('reads the permission once when the browser cannot watch it', async () => {
+    vi.stubGlobal('Notification', { permission: 'default' });
+    Object.defineProperty(navigator, 'permissions', {
+      configurable: true,
+      value: { query: () => Promise.reject(new TypeError('notifications')) },
+    });
+    const dispatch = vi.spyOn(store, 'dispatch').mockReturnValue(undefined as never);
+
+    try {
+      await render({});
+
+      await vi.waitFor(() => expect(dispatch).toHaveBeenCalledWith(expect.any(Function)));
+    } finally {
+      vi.unstubAllGlobals();
+      Reflect.deleteProperty(navigator, 'permissions');
+    }
+  });
+
   it('closes when the settings are done', async () => {
     const { popover } = await render({ notificationPermission: new Initialized() });
     popover.show();

@@ -76,8 +76,7 @@ describe('the collection registry', () => {
   it.each(entries)('names a schema definition and features for %s', (_path, info) => {
     expect(schema.$defs).toHaveProperty(info.schema);
     // The CLI's own data is in use whatever the features.
-    if (info.kind === 'cli') expect(info.features).toEqual([]);
-    else expect(info.features.length).toBeGreaterThan(0);
+    expect(info.features.length === 0).toBe(info.kind === 'cli');
   });
 
   it.each(entries.filter(([, { kind }]) => kind === 'content' || kind === 'visitor'))(

@@ -36,14 +36,14 @@ const showNotification = (payload: MessagePayload) => {
   const actions = data['stream'] ? [{ action: 'watch', title: 'Watch live' }] : [];
   const notificationOptions = { body, icon, data, actions };
 
-  return self.registration.showNotification(title, notificationOptions);
+  void self.registration.showNotification(title, notificationOptions);
 };
 
 onBackgroundMessage(messaging, showNotification);
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  const { path, stream } = event.notification.data ?? {};
+  const { path, stream } = (event.notification.data ?? {}) as { path?: string; stream?: string };
   const url = event.action === 'watch' && stream ? stream : path;
   if (url) {
     event.waitUntil(self.clients.openWindow(url));

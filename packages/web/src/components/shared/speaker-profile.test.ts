@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
+import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { SpeakerBadges } from './speaker-badges';
 import type { ProfileSpeaker, SpeakerProfile } from './speaker-profile';
@@ -21,7 +21,7 @@ const render = async (props: Partial<SpeakerProfile>) => {
   const result = await fixture<SpeakerProfile>(html`<speaker-profile></speaker-profile>`);
   Object.assign(result.element, props);
   await result.element.updateComplete;
-  return { ...result, view: within(result.shadowRootForWithin) };
+  return result;
 };
 
 describe('speaker-profile', () => {
@@ -30,10 +30,10 @@ describe('speaker-profile', () => {
   });
 
   it("titles the page with the speaker's name, job, country and pronouns", async () => {
-    const { shadowRoot, view } = await render({ speaker });
+    const { shadowRoot } = await render({ speaker });
 
-    expect(view.getByRole('heading', { level: 1 })).toHaveTextContent('Ada Lovelace');
-    expect(shadowRoot.querySelector('.details')).toHaveTextContent(
+    expect(screen.getByShadowRole('heading', { level: 1 })).toHaveTextContent('Ada Lovelace');
+    expect(deepQuerySelector(shadowRoot, '.details')).toHaveTextContent(
       'Engineer, Example Inc · United States · she/her',
     );
   });
@@ -41,12 +41,14 @@ describe('speaker-profile', () => {
   it('shows their badges', async () => {
     const { shadowRoot } = await render({ speaker });
 
-    expect(shadowRoot.querySelector<SpeakerBadges>('speaker-badges')!.badges).toBe(speaker.badges);
+    expect(deepQuerySelector<SpeakerBadges>(shadowRoot, 'speaker-badges')!.badges).toBe(
+      speaker.badges,
+    );
   });
 
   it('names the photo like the card it came from', async () => {
     const { element, shadowRoot } = await render({ speaker });
-    const photo = shadowRoot.querySelector<HTMLElement>('speaker-photo')!;
+    const photo = deepQuerySelector(shadowRoot, 'speaker-photo')!;
 
     expect(photo).toHaveAttribute('size', 'l');
     expect(photo).toHaveAttribute('loading', 'eager');
@@ -62,17 +64,17 @@ describe('speaker-profile', () => {
     const { pronouns: _pronouns, badges: _badges, ...previousSpeaker } = speaker;
     const { shadowRoot } = await render({ speaker: previousSpeaker });
 
-    expect(shadowRoot.querySelector('.details')).toHaveTextContent(
+    expect(deepQuerySelector(shadowRoot, '.details')).toHaveTextContent(
       'Engineer, Example Inc · United States',
     );
-    expect(shadowRoot.querySelector('.badges')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, '.badges')).toBeNull();
   });
 
   it('holds the place of the heading until the speaker loads', async () => {
     const { shadowRoot } = await render({});
 
-    expect(shadowRoot.querySelector('h1')).toHaveTextContent('');
-    expect(shadowRoot.querySelector('speaker-photo')).toBeNull();
-    expect(shadowRoot.querySelector('.details')).toBeNull();
+    expect(screen.getByShadowRole('heading', { level: 1 })).toHaveTextContent('');
+    expect(deepQuerySelector(shadowRoot, 'speaker-photo')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, '.details')).toBeNull();
   });
 });

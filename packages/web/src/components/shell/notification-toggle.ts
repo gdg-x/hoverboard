@@ -34,12 +34,16 @@ export class NotificationToggle extends ThemedComponent {
   override async firstUpdated() {
     await this.renderRoot.querySelector('notification-settings')?.updateComplete;
     if ('Notification' in window && 'permissions' in navigator) {
-      navigator.permissions.query({ name: 'notifications' }).then((permission) => {
-        store.dispatch(requestNotificationPermission(PROMPT_USER.NO));
-        permission.onchange = () => {
-          store.dispatch(requestNotificationPermission(PROMPT_USER.NO));
-        };
-      });
+      void navigator.permissions
+        .query({ name: 'notifications' })
+        .then((permission) => {
+          void store.dispatch(requestNotificationPermission(PROMPT_USER.NO));
+          permission.onchange = () => {
+            void store.dispatch(requestNotificationPermission(PROMPT_USER.NO));
+          };
+        })
+        // Without the Permissions API for notifications, read the permission once.
+        .catch(() => store.dispatch(requestNotificationPermission(PROMPT_USER.NO)));
     } else {
       store.dispatch(unsupportedNotificationPermission());
     }
@@ -64,7 +68,7 @@ export class NotificationToggle extends ThemedComponent {
   // Opening the panel for the first time also asks the browser.
   private readonly requestPermission = () => {
     if (this.notificationPermission instanceof Initialized && this.online) {
-      store.dispatch(requestNotificationPermission(PROMPT_USER.YES));
+      void store.dispatch(requestNotificationPermission(PROMPT_USER.YES));
     }
   };
 

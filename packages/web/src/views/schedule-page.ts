@@ -99,8 +99,6 @@ export class SchedulePage extends ThemedComponent {
     }
   `;
 
-  private readonly metadata = new PageMetadataController(this, 'schedule');
-
   @fromStore((state) => selectScheduleState(state))
   accessor schedule!: ScheduleState;
   @fromStore((state) => selectFilterGroups(state))
@@ -115,6 +113,11 @@ export class SchedulePage extends ThemedComponent {
   // The visitor's time zone, known only in the browser. The switch shows when it differs.
   @state()
   private accessor visitorTimeZone: string | undefined;
+
+  constructor() {
+    super();
+    new PageMetadataController(this, 'schedule');
+  }
 
   override firstUpdated() {
     this.visitorTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;

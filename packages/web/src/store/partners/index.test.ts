@@ -5,16 +5,12 @@ import { subscribeToPartnerGroups, subscribeToPartners } from '../../db/partners
 import type { Partner } from '../../models/partner';
 import type { PartnerGroupWithoutItems } from '../../models/partner-group';
 import type { RootState } from '..';
-import { store } from '..';
 import { seedContent, subscribeToContent } from '../content';
+import { dispatch } from '../dispatch';
 import type { PartnersState } from '.';
 
 vi.mock('../../db/partners');
-vi.mock('..', () => ({
-  store: {
-    dispatch: vi.fn(),
-  },
-}));
+vi.mock('../dispatch');
 
 describe('partners', () => {
   it('starts with initialized groups, partners, and subscriptions', () => {
@@ -65,7 +61,7 @@ describe('partners', () => {
   it('subscribes when asked to keep seeded partners live', () => {
     subscribeToContent(['partnerGroups']);
 
-    expect(store.dispatch).toHaveBeenCalledWith(subscribe());
+    expect(dispatch).toHaveBeenCalledWith(subscribe());
   });
 });
 
@@ -86,10 +82,8 @@ describe('selectPartnerGroups', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     partnersState = createPartnersState();
-    vi.mocked(store.dispatch).mockImplementation((action) => {
+    vi.mocked(dispatch).mockImplementation((action) => {
       partnersState = reducer(partnersState, action);
-
-      return action;
     });
   });
 
@@ -199,6 +193,6 @@ describe('selectPartnerGroups', () => {
     } as unknown as RootState;
 
     expect(selectPartnerGroups(state)).toStrictEqual(new Failure(error));
-    expect(store.dispatch).not.toHaveBeenCalled();
+    expect(dispatch).not.toHaveBeenCalled();
   });
 });

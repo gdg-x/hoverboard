@@ -17,7 +17,7 @@ export const store = configureStore({
 // top level, which would create a circular dependency resolved in an
 // undefined order.
 setDispatch(store.dispatch);
-setGetState(store.getState);
+setGetState(() => store.getState());
 
 // Components read the store when they hydrate, so it must hold what the server rendered with.
 if (!isServer) {

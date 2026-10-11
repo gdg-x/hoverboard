@@ -145,9 +145,9 @@ let content: Promise<Partial<Content>> | undefined;
  * The content for this build, read once and shared by every page. Development reads it fresh.
  * `FIRESTORE_TARGET=none` builds without Firestore and without content.
  */
-export const loadContent = (): Promise<Partial<Content>> => {
-  if (env['FIRESTORE_TARGET'] === 'none') return Promise.resolve(emptyContent());
-  if (import.meta.env.DEV) return connectFirestore().then(readContent);
+export const loadContent = async (): Promise<Partial<Content>> => {
+  if (env['FIRESTORE_TARGET'] === 'none') return emptyContent();
+  if (import.meta.env.DEV) return readContent(await connectFirestore());
   content ??= connectFirestore().then(readContent);
   return content;
 };

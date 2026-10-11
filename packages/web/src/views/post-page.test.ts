@@ -1,7 +1,8 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { waitFor, within } from '@testing-library/dom';
+import { waitFor } from '@testing-library/dom';
 import { html } from 'lit';
+import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import type { Post } from '../models/post';
 import { updateImageMetadata } from '../utils/metadata';
@@ -81,28 +82,24 @@ describe('post-page', () => {
   it('synchronizes route data with posts and renders suggestions', async () => {
     const mockUpdateImageMetadata = vi.mocked(updateImageMetadata);
     mockUpdateImageMetadata.mockClear();
-    const { element, shadowRootForWithin } = await fixture<PostPage>(html`<post-page></post-page>`);
+    const { element, shadowRoot } = await fixture<PostPage>(html`<post-page></post-page>`);
     element.posts = new Success(posts);
     element.postId = 'post-1';
     await element.updateComplete;
     await element.updateComplete;
 
-    const view = within(shadowRootForWithin);
-    expect(view.getByRole('heading', { level: 1 })).toHaveTextContent('First post');
-    expect(view.getByText(/Published: /)).toBeInTheDocument();
-    expect(view.getByRole('heading', { level: 2, name: 'Up next' })).toBeInTheDocument();
-    expect(view.getByRole('link', { name: 'All posts' })).toHaveAttribute('href', '/blog');
-    expect(shadowRootForWithin.querySelector('long-markdown')).toHaveProperty(
+    expect(screen.getByShadowRole('heading', { level: 1 })).toHaveTextContent('First post');
+    expect(screen.getByShadowText(/Published: /)).toBeInTheDocument();
+    expect(screen.getByShadowRole('heading', { level: 2, name: 'Up next' })).toBeInTheDocument();
+    expect(screen.getByShadowRole('link', { name: 'All posts' })).toHaveAttribute('href', '/blog');
+    expect(deepQuerySelector(shadowRoot, 'long-markdown')).toHaveProperty(
       'content',
       'Inline first content',
     );
-    expect(shadowRootForWithin.querySelector('.cover')).toHaveAttribute('src', '/first.jpg');
-    expect(shadowRootForWithin.querySelector('.cover')).toHaveAttribute('alt', '');
-    expect(shadowRootForWithin.querySelector('posts-list')).toHaveProperty(
-      'posts',
-      posts.slice(1, 4),
-    );
-    expect(shadowRootForWithin.querySelector('posts-list')).toHaveAttribute('heading-level', '3');
+    expect(deepQuerySelector(shadowRoot, 'img.cover')).toHaveAttribute('src', '/first.jpg');
+    expect(deepQuerySelector(shadowRoot, 'img.cover')).toHaveAttribute('alt', '');
+    expect(deepQuerySelector(shadowRoot, 'posts-list')).toHaveProperty('posts', posts.slice(1, 4));
+    expect(deepQuerySelector(shadowRoot, 'posts-list')).toHaveAttribute('heading-level', '3');
     expect(mockUpdateImageMetadata).toHaveBeenCalledWith('First post', 'First brief', {
       image: '/first.jpg',
       imageAlt: 'First post',
@@ -118,7 +115,10 @@ describe('post-page', () => {
 
     expect(fetchMock).toHaveBeenCalledWith('/post.md');
     await waitFor(() => {
-      expect(shadowRoot.querySelector('long-markdown')).toHaveProperty('content', 'Remote content');
+      expect(deepQuerySelector(shadowRoot, 'long-markdown')).toHaveProperty(
+        'content',
+        'Remote content',
+      );
     });
   });
 
@@ -141,7 +141,7 @@ describe('post-page', () => {
     await Promise.resolve();
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('long-markdown')).toHaveProperty(
+    expect(deepQuerySelector(shadowRoot, 'long-markdown')).toHaveProperty(
       'content',
       'Inline second content',
     );
@@ -177,7 +177,7 @@ describe('post-page', () => {
     element.postId = 'post-1';
 
     await waitFor(() => expect(error).toHaveBeenCalled());
-    expect(shadowRoot.querySelector('long-markdown')).toHaveProperty(
+    expect(deepQuerySelector(shadowRoot, 'long-markdown')).toHaveProperty(
       'content',
       'Inline first content',
     );

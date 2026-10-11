@@ -158,8 +158,7 @@ describe("the visitor's own reactions", () => {
     selectOwnReactionsState(state());
     selectOwnReactionsState(state());
 
-    expect(subscribeToOwnReactions).toHaveBeenCalledOnce();
-    expect(subscribeToOwnReactions).toHaveBeenCalledWith(
+    expect(subscribeToOwnReactions).toHaveBeenCalledExactlyOnceWith(
       'ada',
       expect.any(Function),
       expect.any(Function),

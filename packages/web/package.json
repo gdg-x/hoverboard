@@ -68,10 +68,16 @@
     "nunjucks": "^3.2.4",
     "rollup-plugin-copy": "^3.5.0",
     "satori": "^0.47.1",
+    "shadow-dom-testing-library": "^1.14.2",
     "sharp": "^0.35.5",
     "svgo": "^4.1.0",
     "typescript": "^6.0.3",
     "vite": "^8.3.3",
     "workbox-build": "^7.4.1"
+  },
+  "overrides": {
+    "lit-analyzer": {
+      "vscode-css-languageservice": "^6.3.10"
+    }
   }
 }

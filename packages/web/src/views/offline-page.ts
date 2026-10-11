@@ -48,7 +48,10 @@ export class OfflinePage extends ThemedComponent {
     `,
   ];
 
-  private readonly metadata = new PageMetadataController(this, 'offline');
+  constructor() {
+    super();
+    new PageMetadataController(this, 'offline');
+  }
 
   override render() {
     return html`
