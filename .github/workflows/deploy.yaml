@@ -23,6 +23,14 @@ jobs:
         with:
           node-version-file: package.json
       - run: npm ci
+      # Fails when packages/config has no site.json, so a fork doesn't deploy the demo site.
+      # Upstream, whose site is the demo, sets the HB_DEMO variable to true.
+      - id: project
+        run: |
+          id=$(./hb config project-id)
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+        env:
+          HB_DEMO: ${{ vars.HB_DEMO }}
       # `./hb setup-github` sets these variables. See docs/tutorials/04-deploy.md.
       - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
         with:
@@ -35,4 +43,6 @@ jobs:
       # `--force` deletes functions that are no longer in the code, which non-interactive mode
       # otherwise refuses to do, and accepts Firebase's other deploy confirmations.
       # `./hb deploy-args` adds `--except functions` when features.functions is false.
-      - run: npx firebase deploy --project "$(jq -r .firebase.projectId packages/config/site.json)" --non-interactive --force $(./hb deploy-args)
+      - run: npx firebase deploy --project "$PROJECT_ID" --non-interactive --force $(./hb deploy-args)
+        env:
+          PROJECT_ID: ${{ steps.project.outputs.id }}

@@ -5,7 +5,9 @@ import { afterEach, describe, expect, it } from 'vitest';
 import {
   SITE_CONFIG_PATH,
   checkFirebaseProject,
+  demoDeployProblem,
   resolveFirebaseProjectId,
+  siteConfigPath,
 } from './firebase-project.js';
 
 const dirsToClean: string[] = [];
@@ -52,6 +54,23 @@ describe('resolveFirebaseProjectId', () => {
     delete process.env['GCLOUD_PROJECT'];
 
     expect(resolveFirebaseProjectId(makeRepo(site))).toBeUndefined();
+  });
+});
+
+describe('siteConfigPath', () => {
+  it('uses packages/config once it has a site.json, else the demo', () => {
+    const root = makeRepo();
+    expect(siteConfigPath(root)).toBe('packages/demo-config/site.json');
+    expect(demoDeployProblem(root)).toContain('would deploy the demo site');
+
+    process.env['HB_DEMO'] = 'true';
+    expect(demoDeployProblem(root)).toBeUndefined();
+
+    delete process.env['HB_DEMO'];
+    mkdirSync(join(root, 'packages/config'), { recursive: true });
+    writeFileSync(join(root, SITE_CONFIG_PATH), '{}');
+    expect(siteConfigPath(root)).toBe(SITE_CONFIG_PATH);
+    expect(demoDeployProblem(root)).toBeUndefined();
   });
 });
 

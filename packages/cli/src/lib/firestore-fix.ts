@@ -4,7 +4,7 @@ import { FieldPath, FieldValue, type Firestore, type Timestamp } from 'firebase-
 import { collectionInfo, pathPattern } from '../../../storage/collections.js';
 import type { FirestoreDocument, Migration, MigrationPlan } from '../migrations/index.js';
 import { pendingMigrations } from '../migrations/index.js';
-import { DEMO_PROJECT_ID, SITE_CONFIG_PATH } from '../utils/firebase-project.js';
+import { DEMO_PROJECT_ID, siteConfigPath } from '../utils/firebase-project.js';
 import { addToBackup, encode, versions } from './data-format.js';
 import { DELETE, type FieldFix, NOW, documentFixes, fieldUpdates } from './fixes.js';
 import { runCommand } from './spawn.js';
@@ -111,14 +111,15 @@ const update = async (
   }
 };
 
-/** Changes packages/config/site.json, then formats it with Prettier. */
+/** Changes the site.json in use, then formats it with Prettier. */
 export const writeSite = (repoRoot: string, change: NonNullable<MigrationPlan['site']>) => {
-  const path = join(repoRoot, SITE_CONFIG_PATH);
+  const sitePath = siteConfigPath(repoRoot);
+  const path = join(repoRoot, sitePath);
   const site = JSON.parse(readFileSync(path, 'utf8')) as Record<string, unknown>;
   writeFileSync(path, `${JSON.stringify(change(site), null, 2)}\n`);
   const prettier = join(repoRoot, 'node_modules', '.bin', 'prettier');
   if (existsSync(prettier)) {
-    runCommand(prettier, ['--log-level', 'warn', '--write', SITE_CONFIG_PATH], repoRoot);
+    runCommand(prettier, ['--log-level', 'warn', '--write', sitePath], repoRoot);
   }
 };
 

@@ -35,16 +35,13 @@ Our goal is to allow event organizers to set up a professional conference websit
 
 ## Updating
 
-Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
+Upgrade your site to the latest Hoverboard release with:
 
 ```console
-git remote add upstream https://github.com/gdg-x/hoverboard.git
-git fetch upstream
-git merge upstream/main
-# resolve the merge conflicts in your editor
-git add . -u
-git commit -m 'Updated to the latest version'
+./hb upgrade
 ```
+
+It shows the release notes, merges the release into a new branch, `upgrade/v<version>`, and resolves the lockfiles and `package.json` files itself. It then installs, migrates your config, builds and commits, and offers to open a pull request. On other conflicts, it stops: resolve them, then run `./hb upgrade --continue`, or go back with `./hb upgrade --abort`. Merge the pull request with a merge commit, not a squash. See [Releases](docs/releases.md#upgrading).
 
 ## Documentation
 

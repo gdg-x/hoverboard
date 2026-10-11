@@ -42,8 +42,8 @@
   --hb-gutter: clamp(16px, 4vw, 40px);
   --hb-header-height: 88px;
 
-  /* The header logo. The build sets the --hb-logo-dark-* values. */
-  --hb-logo-image: url('/images/logo.svg');
+  /* The header logo. The build sets the --hb-logo-light-image and --hb-logo-dark-* values. */
+  --hb-logo-image: var(--hb-logo-light-image);
   --hb-logo-display: block;
   --hb-logo-name-display: none;
 }

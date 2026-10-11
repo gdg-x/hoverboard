@@ -38,3 +38,9 @@ export const captureCommand = (command: string, args: string[], cwd: string): Ca
   if (result.error) throw result.error;
   return { status: result.status ?? 1, stdout: result.stdout, stderr: result.stderr };
 };
+
+/** Whether a command is installed, such as `gh`. */
+export const commandExists = (command: string): boolean => {
+  const result = spawnSync(command, ['--version'], { encoding: 'utf8' });
+  return !result.error && result.status === 0;
+};

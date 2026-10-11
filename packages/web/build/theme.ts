@@ -175,10 +175,11 @@ export const demoThemesCss = (site: SiteTheme): string =>
     .join('\n');
 
 /**
- * The header logo in the dark scheme, which `base.css` switches to: `/images/logo-dark.svg`, or the
- * event's short name as text when the site has no dark logo.
+ * The header logo, `/images/logo.svg`, which the site's public folder has. In the dark scheme,
+ * `base.css` switches to `/images/logo-dark.svg`, or the event's short name as text when the site
+ * has no dark logo.
  */
 export const darkLogoCss = (hasDarkLogo: boolean): string =>
   hasDarkLogo
-    ? ':root {\n--hb-logo-dark-image: url("/images/logo-dark.svg");\n--hb-logo-dark-display: block;\n--hb-logo-dark-name-display: none;\n}'
-    : ':root {\n--hb-logo-dark-image: none;\n--hb-logo-dark-display: none;\n--hb-logo-dark-name-display: inline;\n}';
+    ? ':root {\n--hb-logo-light-image: url("/images/logo.svg");\n--hb-logo-dark-image: url("/images/logo-dark.svg");\n--hb-logo-dark-display: block;\n--hb-logo-dark-name-display: none;\n}'
+    : ':root {\n--hb-logo-light-image: url("/images/logo.svg");\n--hb-logo-dark-image: none;\n--hb-logo-dark-display: none;\n--hb-logo-dark-name-display: inline;\n}';

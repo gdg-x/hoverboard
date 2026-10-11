@@ -8,7 +8,7 @@ Project Hoverboard locally in less than 15 minutes.
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
 1. Install [Node.js (v22)](https://nodejs.org/en/download/)
 1. Install project dependencies: `npm ci` (`yarn` should work but it's not officially supported)
-1. Run `./hb init` and answer its questions. It signs you in to Firebase, creates or picks your Firebase project, writes your event's name, dates, whether it is in person, online or both, its venue or stream link, organizer, theme and features to [packages/config](/packages/config), and checks that the project is on the Blaze plan. It can also deploy the site and add sample content. You can run it again later; your current values are the defaults.
+1. Run `./hb init` and answer its questions. It signs you in to Firebase, creates or picks your Firebase project, copies the demo site in `packages/demo-config` to `packages/config` the first time, writes your event's name, dates, whether it is in person, online or both, its venue or stream link, organizer, theme and features to [packages/config](/packages/config), and checks that the project is on the Blaze plan. It can also deploy the site and add sample content. You can run it again later; your current values are the defaults. Commit `packages/config`.
    - _Tip: `./hb init --help` lists flags such as `--project` and `--details <file>` for running it without questions._
 1. Update the rest of your site's config and content in [packages/config](/packages/config). More info can be found [here](01-configure-app.md)
 1. Run the app locally. Local development always runs on the [Firebase emulators](https://firebase.google.com/docs/emulator-suite) with the `demo-hoverboard` project, so it needs no Firebase project and never reads or writes live data.
@@ -30,6 +30,7 @@ The diagram below is a brief summary of the directories within the project.
     |---docs/
     |---packages/cli/
     |---packages/config/
+    |---packages/demo-config/
     |---packages/server/
     |---packages/storage/
     |---packages/web/
@@ -55,14 +56,15 @@ The diagram below is a brief summary of the directories within the project.
 
 - `docs/` documentation.
 - `packages/cli/` contains the `hoverboard` developer CLI that helps you work with the project and its data ([docs](./firebase-utils.md)).
-- `packages/config/` is your site's config and content: `site.json`, event text, FAQ, code of conduct and blog posts ([docs](01-configure-app.md)).
+- `packages/config/` is your site's config and content: `site.json`, event text, FAQ, code of conduct, blog posts, images in `public/` and `custom.css` ([docs](01-configure-app.md)). Hoverboard never changes it.
+- `packages/demo-config/` is the demo site's, which `./hb init` copies, and the build uses until `packages/config` has a `site.json`. Tests use it too.
 - `packages/server/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) (in `functions/`) used for notifications, optimizations, saving data, etc.
 - `packages/storage/` Firestore and Storage security rules, Firestore indexes, and their tests.
 - `packages/web/` is the frontend app (own `package.json`/`node_modules`):
   - `defaults/` has the upstream `site.json` defaults that `packages/config` overrides.
   - `dist/` is the directory to deploy to production.
-  - `public/` is copied to `dist/` by the build.
-    - `images/` folder with the site images.
+  - `public/` is copied to `dist/` by the build, with `packages/config/public/` over it.
+    - `images/` folder with Hoverboard's own images.
   - `schemas/` has the JSON Schemas for `packages/config`.
   - `src/` is where you store all of your source code and do all of your development.
     - `components/` is where you keep your LitElement custom elements, grouped by area.

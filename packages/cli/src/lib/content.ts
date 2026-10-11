@@ -1,18 +1,23 @@
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { scheduleErrors, type Track } from '../../../web/src/schedule/build-schedule.js';
 import type { Session } from '../../../web/src/models/session.js';
 
 export { documentMessages } from '../../../storage/validate.js';
 
-const SITE_PATH = join(import.meta.dirname, '..', '..', '..', 'config', 'site.json');
+const packages = join(import.meta.dirname, '..', '..', '..');
+// packages/config once it has a site.json, else the demo's.
+const SITE_PATH = [
+  join(packages, 'config', 'site.json'),
+  join(packages, 'demo-config', 'site.json'),
+].find((path) => existsSync(path))!;
 
-/** `schedule.tracks` in packages/config/site.json. */
+/** `schedule.tracks` in site.json. */
 export const siteTracks = (path = SITE_PATH): Track[] =>
   (JSON.parse(readFileSync(path, 'utf8')) as { schedule?: { tracks?: Track[] } }).schedule
     ?.tracks ?? [];
 
-/** `event.timezone` in packages/config/site.json. */
+/** `event.timezone` in site.json. */
 export const siteTimeZone = (path = SITE_PATH): string =>
   (JSON.parse(readFileSync(path, 'utf8')) as { event?: { timezone?: string } }).event?.timezone ??
   'UTC';

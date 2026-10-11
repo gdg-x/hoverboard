@@ -25,8 +25,8 @@ export interface SocialImageDesign {
   avatarRadius: string;
   /** The logo's SVG markup. */
   logo: string | undefined;
-  /** Where photos with a path instead of a URL are. Absolute. */
-  publicDir: string;
+  /** Where photos with a path instead of a URL are, the first that has the file wins. Absolute. */
+  publicDirs: string[];
   /** Changes when anything above changes, so image file names change with the design. */
   designKey: string;
 }
@@ -100,12 +100,12 @@ export const socialImageFonts = (
 export const socialImageDesign = (
   theme: ResolvedTheme,
   siteFonts: SiteFonts | undefined,
-  { siteDir, publicDir }: { siteDir: string; publicDir: string },
+  { siteDir, publicDirs }: { siteDir: string; publicDirs: string[] },
 ): { design: SocialImageDesign; warnings: string[] } => {
   const dark = theme.colorScheme === 'dark';
   const { fonts, warnings } = socialImageFonts(theme.fonts, siteFonts, siteDir);
   const logoFile = [...(dark ? ['images/logo-dark.svg'] : []), 'images/logo.svg']
-    .map((file) => join(publicDir, file))
+    .flatMap((file) => publicDirs.map((dir) => join(dir, file)))
     .find((file) => fs.existsSync(file));
   const logo = logoFile ? fs.readFileSync(logoFile, 'utf8') : undefined;
   const colors = dark ? theme.dark : theme.light;
@@ -117,7 +117,14 @@ export const socialImageDesign = (
     .digest('hex')
     .slice(0, 8);
   return {
-    design: { fonts, colors, avatarRadius, logo, publicDir: resolve(publicDir), designKey },
+    design: {
+      fonts,
+      colors,
+      avatarRadius,
+      logo,
+      publicDirs: publicDirs.map((dir) => resolve(dir)),
+      designKey,
+    },
     warnings,
   };
 };

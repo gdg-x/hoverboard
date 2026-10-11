@@ -1,4 +1,4 @@
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { dirname, join } from 'path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -114,6 +114,29 @@ afterEach(() => {
 });
 
 describe('runInit', () => {
+  it('starts from a copy of the demo config when the site has none', async () => {
+    for (const file of ['site.json', 'content/resources.json']) {
+      write(
+        `packages/demo-config/${file}`,
+        readFileSync(join(repo, 'packages/config', file), 'utf8'),
+      );
+    }
+    write('packages/demo-config/package.json', '{ "name": "@hoverboard/demo-config" }');
+    write('packages/demo-config/public/images/logo.svg', '<svg></svg>');
+    rmSync(join(repo, 'packages/config'), { recursive: true });
+
+    expect(await runInit({ project: 'new-fest', details: detailsFile(), deploy: false })).toBe(
+      true,
+    );
+
+    expect(read('packages/config/site.json')).toMatchObject({ shortName: 'New Fest' });
+    expect(readFileSync(join(repo, 'packages/config/public/images/logo.svg'), 'utf8')).toBe(
+      '<svg></svg>',
+    );
+    expect(existsSync(join(repo, 'packages/config/package.json'))).toBe(false);
+    expect(read('packages/demo-config/site.json')).toEqual(site);
+  });
+
   it('writes the site details for the chosen project', async () => {
     const result = await runInit({ project: 'new-fest', details: detailsFile(), deploy: false });
 

@@ -1,11 +1,17 @@
-import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { cpSync, existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { pathToFileURL } from 'url';
 import { isBillingEnabled } from '../../lib/billing.js';
 import { resolveFirebaseBin } from '../../lib/firebase-cli.js';
 import { ask, confirm } from '../../lib/prompt.js';
 import { runCommand } from '../../lib/spawn.js';
-import { SITE_CONFIG_PATH, resolveFirebaseProjectId } from '../../utils/firebase-project.js';
+import {
+  CONFIG_DIR,
+  DEMO_CONFIG_DIR,
+  SITE_CONFIG_PATH,
+  resolveFirebaseProjectId,
+  siteConfigPath,
+} from '../../utils/firebase-project.js';
 import { checkNodeVersion, findRepoRoot } from '../../utils/node-version.js';
 import { validateSiteConfig } from '../../utils/site-config.js';
 import { functionsEnabled } from '../../utils/site-features.js';
@@ -46,8 +52,18 @@ const writeJson = (repoRoot: string, path: string, data: Json) =>
   writeFileSync(join(repoRoot, path), `${JSON.stringify(data, null, 2)}\n`);
 
 const readSiteProjectId = (repoRoot: string) => {
-  const firebase = (readJson(repoRoot, SITE_CONFIG_PATH)['firebase'] ?? {}) as Json;
+  const firebase = (readJson(repoRoot, siteConfigPath(repoRoot))['firebase'] ?? {}) as Json;
   return typeof firebase['projectId'] === 'string' ? firebase['projectId'] : undefined;
+};
+
+/** Starts the site's config from a copy of the demo's, without its package.json. */
+const copyDemoConfig = (repoRoot: string) => {
+  const demo = join(repoRoot, DEMO_CONFIG_DIR);
+  cpSync(demo, join(repoRoot, CONFIG_DIR), {
+    recursive: true,
+    filter: (source) => source !== join(demo, 'package.json'),
+  });
+  console.log(`✔ Copied ${DEMO_CONFIG_DIR} to ${CONFIG_DIR}. Commit ${CONFIG_DIR}.`);
 };
 
 /** `FEATURE_REQUIRES` from the web app, the same rules the site.json validation checks. */
@@ -159,6 +175,7 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
   }
   console.log(`✔ Firebase project: ${projectId}.`);
 
+  if (!existsSync(join(repoRoot, SITE_CONFIG_PATH))) copyDemoConfig(repoRoot);
   const site = readJson(repoRoot, SITE_CONFIG_PATH);
   const resources = readJson(repoRoot, RESOURCES_PATH);
   const defaultFeatures = readJson(repoRoot, DEFAULTS_PATH)['features'] as Record<string, boolean>;

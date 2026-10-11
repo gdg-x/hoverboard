@@ -1,6 +1,7 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { pathToFileURL } from 'url';
+import { CONFIG_DIR } from './firebase-project.js';
 import type { DoctorCheckResult } from './node-version.js';
 
 interface ResolveConfigModule {
@@ -12,7 +13,7 @@ interface ResolveConfigModule {
 const resolveConfigPath = (repoRoot: string) =>
   join(repoRoot, 'packages', 'web', 'build', 'resolve-config.ts');
 
-/** Validates packages/config with the same code the web build runs, and returns every error. */
+/** Validates the site's config with the same code the web build runs, and returns every error. */
 export const validateSiteConfig = async (repoRoot: string): Promise<string[]> => {
   const module = (await import(
     pathToFileURL(resolveConfigPath(repoRoot)).href
@@ -31,14 +32,14 @@ export const escapeAnnotation = (text: string) =>
 
 /**
  * Formats a config error as a GitHub Actions workflow command, so it shows on the file in the
- * pull request. Errors start with their path in packages/config.
+ * pull request. Errors start with their path in the config folder, `configDir`.
  */
-export const githubAnnotation = (error: string): string => {
+export const githubAnnotation = (error: string, configDir = CONFIG_DIR): string => {
   const file = /^([\w./-]+?\.(?:json|md))[/:]/.exec(error)?.[1];
   const position = /\(line (\d+) column (\d+)\)/.exec(error);
   const properties = [
     'title=Site config',
-    ...(file ? [`file=packages/config/${file}`] : []),
+    ...(file ? [`file=${configDir}/${file}`] : []),
     ...(position ? [`line=${position[1]}`, `col=${position[2]}`] : []),
   ];
   return `::error ${properties.join(',')}::${escapeAnnotation(error)}`;

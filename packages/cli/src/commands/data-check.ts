@@ -22,7 +22,7 @@ import { fixable } from '../lib/fixes.js';
 import { confirmChange } from '../lib/prompt.js';
 import { productionProjectId } from '../lib/target.js';
 import { type FirestoreDocument, pendingMigrations } from '../migrations/index.js';
-import { DEMO_PROJECT_ID, SITE_CONFIG_PATH } from '../utils/firebase-project.js';
+import { DEMO_PROJECT_ID, siteConfigPath } from '../utils/firebase-project.js';
 import { findRepoRoot } from '../utils/node-version.js';
 import { escapeAnnotation } from '../utils/site-config.js';
 import { siteFeatures } from '../utils/site-features.js';
@@ -296,7 +296,7 @@ export const runDataCheck = async ({
   const target = projectId ?? 'the emulator';
   const { firestore } = await import('../lib/firestore.js');
 
-  const timeZone = siteTimeZone(join(repoRoot, SITE_CONFIG_PATH));
+  const timeZone = siteTimeZone(join(repoRoot, siteConfigPath(repoRoot)));
   const list = () => listAllDocuments(firestore, collection);
   let documents = await list();
 

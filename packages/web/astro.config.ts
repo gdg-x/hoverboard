@@ -5,11 +5,15 @@ import { env } from 'node:process';
 import { chunkFileNames } from './build/chunk-names';
 import { csp, type CspSite } from './build/csp';
 import { decorators } from './build/decorators';
-import { production, resolveConfig } from './build/resolve-config';
+import { CONFIG_PATHS, production, resolveConfig } from './build/resolve-config';
 import { routes } from './build/routes';
 import { attendingPrecache, serviceWorker } from './build/service-worker';
+import { sitePublic } from './build/site-public';
 import { site } from './build/vite-plugin-site';
 
+if (CONFIG_PATHS.site.endsWith('demo-config')) {
+  console.info('Using the demo site in packages/demo-config: packages/config has no site.json.');
+}
 const config = resolveConfig();
 
 export default defineConfig({
@@ -35,6 +39,7 @@ export default defineConfig({
     },
     routes(config.site.features),
     sitemap({ filter: (page) => !page.endsWith('/offline') }),
+    sitePublic(CONFIG_PATHS.public[0]!),
     // Before the service worker, which precaches the pages it changes. Deploys build with
     // FIRESTORE_TARGET=production, and every other build may run on the emulators.
     csp(config.site as CspSite, { emulators: env['FIRESTORE_TARGET'] !== 'production' }),

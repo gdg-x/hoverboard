@@ -43,6 +43,7 @@ describe('hb', () => {
     expect(names).toEqual(
       expect.arrayContaining([
         'config validate',
+        'config project-id',
         'emulators start',
         'emulators save',
         'data seed',
@@ -112,6 +113,7 @@ describe('hb', () => {
   it('exits with 2 for a usage error', async () => {
     expect(await hb('nope')).toBe(2);
     expect(await hb('notify', '--title', 'Doors open')).toBe(2);
+    expect(await hb('upgrade', '--production')).toBe(2);
 
     runNotify.mockRejectedValue(new UsageError('Run again with --yes.'));
     expect(await hb(...notify)).toBe(2);

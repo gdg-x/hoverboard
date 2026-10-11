@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import sessions from '../../../../docs/sample-data/collections/sessions.json';
-import site from '../../../config/site.json';
+import site from '../../../demo-config/site.json';
 import type { Session } from '../models/session';
 import type { Speaker } from '../models/speaker';
 import { type BuiltDay, type Track, buildSchedule, scheduleErrors } from './build-schedule';

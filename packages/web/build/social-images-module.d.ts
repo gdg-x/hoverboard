@@ -5,5 +5,5 @@ export declare const fonts: SocialImageDesign['fonts'];
 export declare const colors: SocialImageDesign['colors'];
 export declare const avatarRadius: SocialImageDesign['avatarRadius'];
 export declare const logo: SocialImageDesign['logo'];
-export declare const publicDir: SocialImageDesign['publicDir'];
+export declare const publicDirs: SocialImageDesign['publicDirs'];
 export declare const designKey: SocialImageDesign['designKey'];

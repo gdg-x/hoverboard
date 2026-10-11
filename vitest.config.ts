@@ -6,10 +6,11 @@ import { siteModule } from './packages/web/build/vite-plugin-site';
 import { FEATURES } from './packages/web/src/config/features';
 
 const webRoot = fileURLToPath(new URL('./packages/web', import.meta.url));
-const paths = configPaths(webRoot);
+// Tests use the demo config, whatever the site's own, so a fork's content can't fail them.
+const paths = configPaths(webRoot, { demo: true });
 const siteConfig = resolveConfig({ paths, nodeEnv: 'test' });
 // Vitest runs from the repo root, so the plugin's paths relative to packages/web would miss.
-const pluginPaths = { siteDir: paths.site, publicDir: paths.public };
+const pluginPaths = { siteDir: paths.site, publicDirs: paths.public };
 // The locale that packages/web/__tests__/fake-locale.global-setup.ts builds.
 const FAKE_LOCALE = 'en-XA';
 

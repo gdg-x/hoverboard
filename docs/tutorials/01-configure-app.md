@@ -5,6 +5,10 @@ Your site's config and content live in `packages/config`:
 - `site.json`: settings such as the Firebase project, site URL, base path, Google Maps key, organizer, location, social links and colors.
 - `content/resources.json`: event text, such as the title, description and the about blocks.
 - `content/faq.md`, `content/coc.md` and `content/posts/`: the FAQ, code of conduct and blog posts.
+- `public/`: your images, such as `images/logo.svg`, `images/icon.png` and the share image. The site serves them from its root, over the files in `packages/web/public`.
+- `custom.css`: your own styles, which every page loads after the theme. See [Styling](03-styling.md#custom-css).
+
+`./hb init` creates the folder from a copy of the demo site in `packages/demo-config`, then asks for your event's details. Commit `packages/config`. Hoverboard never changes it, so upgrades don't conflict there. Until it has a `site.json`, the build, `npm start` and `./hb` use the demo, and deploys stop, so you can't deploy the demo by mistake.
 
 Upstream defaults for the other settings in `site.json`, such as `navigation` and `features`, are in `packages/web/defaults/site.json`. Your `site.json` only needs the values you change. Objects merge with the defaults, and lists and other values replace them. For example, a `navigation` list in `site.json` replaces the whole default list. The UI text, such as button labels and page titles, is part of the app and its translations, not of the config.
 
@@ -74,7 +78,7 @@ The config is checked with the defaults merged in. The build, `npm run lint` and
   ./hb config validate
 ```
 
-The check also catches navigation to an unknown page, and images that are not in `packages/web/public`.
+The check also catches navigation to an unknown page, and images that are not in `packages/config/public` or `packages/web/public`.
 
 ## Editing on GitHub
 
@@ -101,7 +105,7 @@ Disable, reorder or modify blocks for individual pages inside their individual f
 
 The top block (aka 'hero') of the home page shows the event name, dates, place and `heroDescriptions.home`, on a dotted band in the theme's colors. `heroSettings` in `packages/config/site.json` is optional:
 
-- `illustration`: an SVG in `packages/web/public` shown next to the text, for example a line drawing of your city. A drawing in `currentColor` follows the theme and the color scheme. Without one, the hero shows a drawing of a talk. It is hidden on narrow screens and when `theme.decorations` is `false`.
+- `illustration`: an SVG in `packages/config/public` shown next to the text, for example a line drawing of your city. A drawing in `currentColor` follows the theme and the color scheme. Without one, the hero shows a drawing of a talk. It is hidden on narrow screens and when `theme.decorations` is `false`.
 - `background.image`: a photo behind the text. The hero darkens it with the dark scheme's `scrim` color and uses the dark scheme's text color, and the build checks their contrast.
 
 ```json
@@ -185,7 +189,7 @@ The other sections are what only you know. Write them in `attendingPage` in `pac
 ```
 
 - `description` is the page's description for search engines and link previews. The text under the page title is `heroDescriptions.attending`.
-- `photo` shows next to the venue's address, and `floorPlan` in its own section, with a button that opens it full size. Each needs `alt`, which describes the image for people who can't see it. Put the images in `packages/web/public/images`. See [Images](03-styling.md#attending-page-images) for their sizes.
+- `photo` shows next to the venue's address, and `floorPlan` in its own section, with a button that opens it full size. Each needs `alt`, which describes the image for people who can't see it. Put the images in `packages/config/public/images`. See [Images](03-styling.md#attending-page-images) for their sizes.
 - `online` shows under the link to the stream, for an online or hybrid event.
 - `gettingThere` lists the ways to get to the venue, in your order. `mode` picks the icon and the heading: `train` (By train), `plane`, `bus`, `tram`, `metro`, `car`, `parking`, `bike`, `walk` (On foot) or `other`.
 - `doors` lists when the doors open and close each day. `day` is a day of the event, and `open` and `close` are `HH:MM` in `event.timezone`.
@@ -195,7 +199,7 @@ The other sections are what only you know. Write them in `attendingPage` in `pac
 
 The headings are UI text, so they follow the visitor's language. For an online event, the page leaves out the floor plan, getting there, doors, accommodation and at the venue, since there is no venue.
 
-The build fails when an image is not in `packages/web/public`, an image has no `alt`, a door's `day` is not between `event.startDate` and `event.endDate`, or a door closes before it opens. `./hb init` removes doors outside the new dates.
+The build fails when an image is not in `packages/config/public` or `packages/web/public`, an image has no `alt`, a door's `day` is not between `event.startDate` and `event.endDate`, or a door closes before it opens. `./hb init` removes doors outside the new dates.
 
 The service worker downloads the page and its images when a visitor first opens the site, so attendees can open it at the venue without a connection, even if they never opened it before. Images over 2 MB are left out of that download.
 
@@ -233,7 +237,7 @@ The first time visitors react, they pick the name to show, and the photo from th
 
 A session page reads every reaction to its session, and the profiles of up to 10 people it names, each time it opens. A session with 200 reactions costs about 210 Firestore reads per view (verify).
 
-`socialImages` builds a share image for each session and speaker page, which social networks and chat apps show with a link to the page. A session's image has its title, speakers, day, time and track. A speaker's image has their photo, name, company and the event's dates. Both have the logo from `packages/web/public/images/logo.svg`, the venue and the site's address, in the theme's colors and fonts. The build downloads speaker photos for them, and a photo that fails to download shows the speaker's initials, with a warning in the build output. With `socialImages` off, those pages share the first speaker's photo or `image` from `site.json`.
+`socialImages` builds a share image for each session and speaker page, which social networks and chat apps show with a link to the page. A session's image has its title, speakers, day, time and track. A speaker's image has their photo, name, company and the event's dates. Both have the logo from `packages/config/public/images/logo.svg`, the venue and the site's address, in the theme's colors and fonts. The build downloads speaker photos for them, and a photo that fails to download shows the speaker's initials, with a warning in the build output. With `socialImages` off, those pages share the first speaker's photo or `image` from `site.json`.
 
 The images come from the content at build time, like the rest of the page. After changing sessions or speakers, deploy again to update them. Each image's file name changes with what it shows, so social networks fetch the new one. To check how a page looks when shared, paste its URL into the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) or the [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/).
 

@@ -38,13 +38,14 @@ In the [`.github/workflows`](.github/workflows) folder, you can find two workflo
 - [`security.yaml`](.github/workflows/security.yaml) Checks the workflows with zizmor, and the dependencies for known vulnerabilities.
 - [`deploy-preview.yaml`](.github/workflows/deploy-preview.yaml) Checks `packages/config` with `./hb config validate`, then deploys a preview of the website to Firebase after every push to a pull request. Functions and Firestore rules are not deployed. See [Editing on GitHub](01-configure-app.md#editing-on-github).
 - [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every push to the `main` branch. You can also run it by hand, for example after you change content in Firestore: open **Actions** > **Deploy** > **Run workflow** on GitHub, or run `gh workflow run deploy.yaml`. It only deploys from `main`. It deploys with `--force`, so it deletes functions that are no longer in the code without asking.
+- [`upgrade.yaml`](.github/workflows/upgrade.yaml) Every Monday, runs `./hb upgrade` and opens a pull request for the new Hoverboard release, if there is one. See [Upgrading](../releases.md#upgrading).
 
 The `main.yaml` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
 To run the two `deploy` actions on your instance, you need to do a couple of small setup:
 
 ### Deploying to Firebase with Github Actions
 
-Both workflows deploy to `firebase.projectId` from `packages/config/site.json`. You don't need to edit them.
+Both workflows deploy to `firebase.projectId` from `packages/config/site.json`, which `./hb config project-id` prints. You don't need to edit them. Without `packages/config/site.json`, they stop instead of deploying the demo site. Hoverboard's own repository, whose site is the demo, sets the `HB_DEMO` repository variable to `true`.
 
 Both workflows sign in to Google Cloud with Workload Identity Federation. GitHub gives each run a short-lived token, so there is no service account key to store or rotate. Only workflows in your repository can use it. Set it up once:
 

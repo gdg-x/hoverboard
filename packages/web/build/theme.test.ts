@@ -133,11 +133,13 @@ describe('heroPhotoErrors', () => {
 
 describe('darkLogoCss', () => {
   it('uses the dark logo in the dark scheme', () => {
+    expect(darkLogoCss(true)).toContain('--hb-logo-light-image: url("/images/logo.svg");');
     expect(darkLogoCss(true)).toContain('--hb-logo-dark-image: url("/images/logo-dark.svg");');
     expect(darkLogoCss(true)).toContain('--hb-logo-dark-name-display: none;');
   });
 
   it('shows the short name instead without a dark logo', () => {
+    expect(darkLogoCss(false)).toContain('--hb-logo-light-image: url("/images/logo.svg");');
     expect(darkLogoCss(false)).toContain('--hb-logo-dark-display: none;');
     expect(darkLogoCss(false)).toContain('--hb-logo-dark-name-display: inline;');
   });

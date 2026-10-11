@@ -30,13 +30,23 @@ The themes are in `packages/web/src/themes/`. `./hb init` asks which one to use.
 
 Every component reads the theme through CSS variables that start with `--hb-`, such as `--hb-color-primary`, `--hb-space-4` and `--hb-radius-m`. Use them in your own styles, so they follow the theme and the dark scheme. The variables of Hoverboard 3, such as `--default-primary-color`, are gone.
 
+Put your own styles in `packages/config/custom.css`. Every page loads it after the theme, so it can change any `--hb-` variable:
+
+```css
+:root {
+  --hb-radius-m: 4px;
+}
+```
+
+Components draw inside their own shadow DOM, so other selectors only reach the page around them. The variables reach inside. The file can't contain `</style`, since pages inline it.
+
 ## Logo
 
-The header shows `packages/web/public/images/logo.svg`, made for light backgrounds. Add `logo-dark.svg` next to it for the dark scheme. Without it, the header shows `shortName` from `site.json` as text in the dark scheme.
+The header shows `packages/config/public/images/logo.svg`, made for light backgrounds. Add `logo-dark.svg` next to it for the dark scheme. Without it, the header shows `shortName` from `site.json` as text in the dark scheme.
 
 ## App icon
 
-The icon of the installed app, and of the site on phone home screens, is `packages/web/public/images/icon.png`. The build resizes it to every size the web app manifest and browsers need, from 16 to 512 pixels, including the favicon. Replace it with a square PNG of at least 512×512 pixels, or point `icon` in `site.json` at a square SVG in `packages/web/public`. An icon that isn't square sits centered on a transparent square.
+The icon of the installed app, and of the site on phone home screens, is `packages/config/public/images/icon.png`. The build resizes it to every size the web app manifest and browsers need, from 16 to 512 pixels, including the favicon. Replace it with a square PNG of at least 512×512 pixels, or point `icon` in `site.json` at a square SVG in `packages/config/public`. An icon that isn't square sits centered on a transparent square.
 
 ## Colors
 

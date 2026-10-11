@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync
 import { join } from 'path';
 import { DocumentReference, type Firestore, GeoPoint, Timestamp } from 'firebase-admin/firestore';
 import { COLLECTIONS, RETIRED, collectionInfo, pathPattern } from '../../../storage/collections.js';
+import { siteConfigPath } from '../utils/firebase-project.js';
 
 /** The version of the folder format, for readers to check. */
 export const FORMAT = 1;
@@ -159,7 +160,7 @@ export const readExport = (folder: string): { manifest: Manifest; documents: Exp
 export const versions = (repoRoot: string): Pick<Manifest, 'hoverboard' | 'schemaVersion'> => {
   const read = (path: string) =>
     JSON.parse(readFileSync(join(repoRoot, path), 'utf8')) as Record<string, unknown>;
-  const schemaVersion = read('packages/config/site.json')['schemaVersion'];
+  const schemaVersion = read(siteConfigPath(repoRoot))['schemaVersion'];
   return {
     hoverboard: String(read('package.json')['version']),
     ...(typeof schemaVersion === 'number' ? { schemaVersion } : {}),

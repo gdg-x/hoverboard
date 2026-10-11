@@ -2,7 +2,11 @@ import { resolveFirebaseBin } from '../lib/firebase-cli.js';
 import { useFirebaseLoginCredentials } from '../lib/google-cloud.js';
 import { confirmChange } from '../lib/prompt.js';
 import { runCommand } from '../lib/spawn.js';
-import { checkFirebaseProject, resolveFirebaseProjectId } from '../utils/firebase-project.js';
+import {
+  checkFirebaseProject,
+  demoDeployProblem,
+  resolveFirebaseProjectId,
+} from '../utils/firebase-project.js';
 import { checkNodeVersion, findRepoRoot } from '../utils/node-version.js';
 import { firebaseDeployArgs } from '../utils/site-features.js';
 
@@ -19,6 +23,11 @@ export interface DeployOptions {
  */
 export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> => {
   const repoRoot = findRepoRoot(process.cwd());
+  const demo = repoRoot && demoDeployProblem(repoRoot);
+  if (demo) {
+    console.log(`✘ ${demo}`);
+    return false;
+  }
   const checks = [checkNodeVersion(repoRoot), checkFirebaseProject(repoRoot)];
   for (const check of checks) {
     console.log(`${check.ok ? '✔' : '✘'} ${check.name}: ${check.message}`);

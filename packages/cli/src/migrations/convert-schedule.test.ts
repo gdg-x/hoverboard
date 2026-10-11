@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { describe, expect, it } from 'vitest';
-import site from '../../../config/site.json';
+import site from '../../../demo-config/site.json';
 import { readExport } from '../lib/data-format.js';
 import { type OldScheduleDay, convertSchedule, trackId } from './convert-schedule.js';
 // The demo's `schedule` collection before it was converted.

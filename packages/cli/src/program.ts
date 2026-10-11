@@ -169,7 +169,7 @@ export const createProgram = (): Command => {
       ),
     );
 
-  const config = program.command('config').description('Work with packages/config.');
+  const config = program.command('config').description("Work with the site's config.");
   config
     .command('validate')
     .description('Check packages/config against the schemas, the same way the build does.')
@@ -178,11 +178,34 @@ export const createProgram = (): Command => {
         const root = findRepoRoot(process.cwd());
         if (!root) throw new Error('Not in a Hoverboard repo.');
         const { githubAnnotation, validateSiteConfig } = await import('./utils/site-config.js');
+        const { siteConfigDir } = await import('./utils/firebase-project.js');
+        const dir = siteConfigDir(root);
         const errors = await validateSiteConfig(root);
         const inActions = process.env['GITHUB_ACTIONS'] === 'true';
-        for (const error of errors) console.log(inActions ? githubAnnotation(error) : `✘ ${error}`);
-        if (!errors.length) console.log('✔ packages/config is valid.');
+        for (const error of errors) {
+          console.log(inActions ? githubAnnotation(error, dir) : `✘ ${error}`);
+        }
+        if (!errors.length) console.log(`✔ ${dir} is valid.`);
         return { ok: !errors.length, errors };
+      }),
+    );
+  config
+    .command('project-id')
+    .description(
+      'Print the Firebase project to deploy to, for workflows. Fails on the demo config, unless ' +
+        'HB_DEMO is true.',
+    )
+    .action(
+      run(async () => {
+        const { demoDeployProblem, resolveFirebaseProjectId } =
+          await import('./utils/firebase-project.js');
+        const problem = demoDeployProblem(repoRoot());
+        if (problem) throw new Error(problem);
+        const projectId = resolveFirebaseProjectId(repoRoot());
+        if (!projectId)
+          throw new Error('No Firebase project. Set firebase.projectId in site.json.');
+        console.log(projectId);
+        return { ok: true, projectId };
       }),
     );
 
@@ -456,12 +479,43 @@ export const createProgram = (): Command => {
     withTarget(
       program
         .command('upgrade')
+        .argument('[version]', 'The release, such as 4.2.0. The latest by default.')
         .description(
-          'Move packages/config/site.json to the current schemaVersion, then run the Firestore ' +
-            'data migrations and fixes, as data check --fix does.',
-        ),
+          'Upgrade Hoverboard to a release: merge it into a new branch, resolve the lockfiles and ' +
+            'package.json files, install, migrate the config, build and commit. With ' +
+            '--migrations-only, only move site.json to the current schemaVersion and run the ' +
+            'Firestore data migrations.',
+        )
+        .option('--migrations-only', 'Only run the config and data migrations of this version.')
+        .option('--no-data', 'With --migrations-only, skip the data migrations.')
+        .option('--continue', 'Finish an upgrade after resolving its conflicts.')
+        .option('--abort', 'Go back to where the upgrade started, and delete its branch.'),
     ),
-  ).action(run(async (options) => (await import('./commands/upgrade.js')).runUpgrade(options)));
+  ).action(
+    run(async (options, [version]) => {
+      const upgrade = await import('./commands/upgrade-code.js');
+      if (options['continue']) return upgrade.runUpgradeContinue({ yes: options.yes === true });
+      if (options['abort']) return upgrade.runUpgradeAbort();
+      if (options['migrationsOnly']) {
+        return (await import('./commands/upgrade.js')).runUpgrade({
+          dryRun: options.dryRun === true,
+          yes: options.yes === true,
+          data: options['data'] !== false,
+        });
+      }
+      if (options.production) {
+        throw new UsageError(
+          '--production only applies with --migrations-only. Upgrade the code first, then run ' +
+            './hb upgrade --production --migrations-only.',
+        );
+      }
+      return upgrade.runCodeUpgrade({
+        ...(version ? { version } : {}),
+        dryRun: options.dryRun === true,
+        yes: options.yes === true,
+      });
+    }),
+  );
 
   withWrites(
     withTarget(

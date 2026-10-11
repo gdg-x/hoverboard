@@ -9,8 +9,10 @@ import { buildInfo } from './build-info';
 import { fontModuleCode, fontModuleParts } from './fonts';
 import {
   CONFIG_PATHS,
+  ConfigError,
   MARKDOWN_PAGES,
   type MarkdownPage,
+  publicFile,
   resolveConfig,
   type SiteConfig,
 } from './resolve-config';
@@ -60,7 +62,7 @@ export const siteModule = (
   {
     defineFeatures = true,
     siteDir = CONFIG_PATHS.site,
-    publicDir = CONFIG_PATHS.public,
+    publicDirs = CONFIG_PATHS.public,
     build = buildInfo(),
   } = {},
 ): Plugin => ({
@@ -88,15 +90,18 @@ export const siteModule = (
         `export const site = ${JSON.stringify(site)};`,
         `export const resources = ${JSON.stringify(resources)};`,
         `export const contentTranslations = {${loaders.join(', ')}};`,
-        `export const heroIllustration = ${JSON.stringify(heroIllustrationSvg(site, publicDir))};`,
+        `export const heroIllustration = ${JSON.stringify(heroIllustrationSvg(site, publicDirs))};`,
         `export const build = ${JSON.stringify(build)};`,
         '',
       ].join('\n');
     }
     if (id === RESOLVED_LAYOUT_MODULE) {
+      const customFile = join(siteDir, 'custom.css');
+      if (fs.existsSync(customFile)) this.addWatchFile(customFile);
       return [
         `export const theme = ${JSON.stringify(config.theme)};`,
-        `export const themeCss = ${JSON.stringify(layoutThemeCss(config))};`,
+        `export const themeCss = ${JSON.stringify(layoutThemeCss(config, publicDirs))};`,
+        `export const customCss = ${JSON.stringify(customCss(siteDir))};`,
         '',
       ].join('\n');
     }
@@ -108,7 +113,7 @@ export const siteModule = (
       const siteTheme = site.theme as unknown as SiteTheme;
       const { design, warnings } = socialImageDesign(config.theme, siteTheme.fonts, {
         siteDir,
-        publicDir,
+        publicDirs,
       });
       for (const warning of warnings) this.warn(warning);
       return Object.entries(design)
@@ -116,7 +121,8 @@ export const siteModule = (
         .join('');
     }
     if (id === RESOLVED_ICON_MODULE) {
-      return `export const iconFile = ${JSON.stringify(resolve(publicDir, site.icon))};\n`;
+      const iconFile = resolve(publicFile(publicDirs, site.icon) ?? site.icon);
+      return `export const iconFile = ${JSON.stringify(iconFile)};\n`;
     }
     if (id.startsWith(RESOLVED_CONTENT_MODULE)) {
       const locale = id.slice(RESOLVED_CONTENT_MODULE.length);
@@ -130,20 +136,38 @@ export const siteModule = (
  * The theme tokens, the badge and tag colors, and the dark logo, as CSS variables on `:root`, so
  * the first paint is themed. Tag names come from session data, so their colors are site config.
  */
-export const layoutThemeCss = ({ site, theme }: SiteConfig): string =>
+export const layoutThemeCss = (
+  { site, theme }: SiteConfig,
+  publicDirs: string[] = CONFIG_PATHS.public,
+): string =>
   [
     themeCss(theme, { ...site.theme.badgeColors, ...site.theme.tagColors }),
-    darkLogoCss(fs.existsSync(join(CONFIG_PATHS.public, 'images/logo-dark.svg'))),
+    darkLogoCss(Boolean(publicFile(publicDirs, 'images/logo-dark.svg'))),
     ...(site.features.demo ? [demoThemesCss(site.theme as unknown as SiteTheme)] : []),
   ].join('\n');
+
+/**
+ * The site's `custom.css`, which pages inline after the theme, so it can set the `--hb-*` tokens.
+ * It can't close the `<style>` element it goes in.
+ */
+export const customCss = (siteDir: string = CONFIG_PATHS.site): string => {
+  const file = join(siteDir, 'custom.css');
+  if (!fs.existsSync(file)) return '';
+  const css = fs.readFileSync(file, 'utf8');
+  if (/<\/style/i.test(css)) {
+    throw new ConfigError(['custom.css: must not contain "</style"']);
+  }
+  return css;
+};
 
 /** The site's own hero illustration, inlined so a drawing in `currentColor` follows the theme. */
 export const heroIllustrationSvg = (
   site: SiteConfig['site'],
-  publicDir: string = CONFIG_PATHS.public,
+  publicDirs: string[] = CONFIG_PATHS.public,
 ): string | undefined => {
-  const path = site.heroSettings?.home?.illustration;
-  return path ? sanitizeSvg(fs.readFileSync(join(publicDir, path), 'utf8')).svg : undefined;
+  const file = site.heroSettings?.home?.illustration;
+  const path = file && publicFile(publicDirs, file);
+  return path ? sanitizeSvg(fs.readFileSync(path, 'utf8')).svg : undefined;
 };
 
 /**
@@ -242,8 +266,12 @@ export const site = (data: SiteConfig = resolveConfig()): PluginOption[] => {
       copy({
         hook: 'writeBundle',
         targets: [
-          { src: '../config/content/*.md', dest: 'dist/data', transform: compileBufferTemplate },
-          { src: '../config/content/posts/*.md', dest: 'dist/data/posts' },
+          {
+            src: `${CONFIG_PATHS.site}/content/*.md`,
+            dest: 'dist/data',
+            transform: compileBufferTemplate,
+          },
+          { src: `${CONFIG_PATHS.site}/content/posts/*.md`, dest: 'dist/data/posts' },
         ],
       }),
     ),

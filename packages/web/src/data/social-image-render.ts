@@ -1,10 +1,10 @@
 import { Resvg } from '@resvg/resvg-js';
 import { Buffer } from 'node:buffer';
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import satori, { type Font, type FontWeight } from 'satori';
 import sharp from 'sharp';
-import { avatarRadius, colors, fonts, logo, publicDir } from 'virtual:hoverboard/social-images';
+import { avatarRadius, colors, fonts, logo, publicDirs } from 'virtual:hoverboard/social-images';
 import { shortName } from '../config/site';
 import {
   SOCIAL_IMAGE,
@@ -41,16 +41,27 @@ const family = (role: 'display' | 'body') =>
 const DISPLAY = family('display');
 const BODY = family('body');
 
-// A photo with a path instead of a URL is in the site's public directory.
+// A photo with a path instead of a URL is in the site's public folder, or packages/web's.
 const readPhoto = async (photoUrl: string): Promise<Buffer> => {
   if (URL.canParse(photoUrl)) {
     const response = await fetch(photoUrl, { signal: AbortSignal.timeout(FETCH_TIMEOUT) });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return Buffer.from(await response.arrayBuffer());
   }
-  const file = resolve(publicDir, `.${new URL(photoUrl, 'file:///').pathname}`);
-  if (!file.startsWith(`${publicDir}${sep}`)) throw new Error('outside the public directory');
-  return readFile(file);
+  const path = `.${new URL(photoUrl, 'file:///').pathname}`;
+  for (const publicDir of publicDirs) {
+    const file = resolve(publicDir, path);
+    if (!file.startsWith(`${publicDir}${sep}`)) throw new Error('outside the public directory');
+    if (
+      await access(file).then(
+        () => true,
+        () => false,
+      )
+    ) {
+      return readFile(file);
+    }
+  }
+  throw new Error('not in a public directory');
 };
 
 const photos = new Map<string, Promise<string | undefined>>();

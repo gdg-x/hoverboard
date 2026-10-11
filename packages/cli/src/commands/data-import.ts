@@ -21,7 +21,7 @@ import { DELETE, NOW } from '../lib/fixes.js';
 import { confirmChange } from '../lib/prompt.js';
 import { productionProjectId } from '../lib/target.js';
 import { MIGRATIONS, type FirestoreDocument, type Migration } from '../migrations/index.js';
-import { DEMO_PROJECT_ID, SITE_CONFIG_PATH } from '../utils/firebase-project.js';
+import { DEMO_PROJECT_ID, siteConfigPath } from '../utils/firebase-project.js';
 import { findRepoRoot } from '../utils/node-version.js';
 import { listAllDocuments } from './data-check.js';
 
@@ -213,7 +213,10 @@ const write = async (firestore: Firestore, { writes, deletes }: ImportPlan) => {
 };
 
 const readSite = (repoRoot: string) =>
-  JSON.parse(readFileSync(join(repoRoot, SITE_CONFIG_PATH), 'utf8')) as Record<string, unknown>;
+  JSON.parse(readFileSync(join(repoRoot, siteConfigPath(repoRoot)), 'utf8')) as Record<
+    string,
+    unknown
+  >;
 
 /**
  * Imports an export into Firestore: runs the migrations it needs, checks every document, backs
@@ -352,7 +355,7 @@ export const importDocuments = async (
   await write(firestore, plan);
   console.log(`\n✔ ${capitalize(summary('wrote', 'deleted'))} in ${target}.`);
   if (migrated.siteChanged) {
-    console.log(`  Commit ${SITE_CONFIG_PATH}, which the migrations changed.`);
+    console.log(`  Commit ${siteConfigPath(repoRoot)}, which the migrations changed.`);
   }
   if (backup) {
     console.log(

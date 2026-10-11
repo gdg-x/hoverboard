@@ -5,6 +5,8 @@ import { buildSite, type SiteBuild } from '../__tests__/helpers/build-site';
 import { inlineScripts, scriptHash } from './csp';
 
 const fixture = fileURLToPath(new URL('../__tests__/fixtures/minimal-site', import.meta.url));
+// The fixture uses the demo's images.
+const demoPublic = fileURLToPath(new URL('../../demo-config/public', import.meta.url));
 
 // Pages and home blocks of features that are all off in the fixture.
 const DROPPED_CHUNKS = [
@@ -34,13 +36,21 @@ describe('a production build of a minimal site', () => {
   let build: SiteBuild;
 
   beforeAll(() => {
-    build = buildSite((configDir) => cpSync(fixture, configDir, { recursive: true }));
+    build = buildSite((configDir) => {
+      cpSync(fixture, configDir, { recursive: true });
+      cpSync(demoPublic, `${configDir}/public`, { recursive: true });
+    });
   });
 
   afterAll(() => build.remove());
 
   it('builds', () => {
     expect(build.status, build.stderr).toBe(0);
+  });
+
+  it("copies the site's public files over packages/web/public", () => {
+    expect(build.read('images/logo.svg')).toContain('<svg');
+    expect(build.read('images/organizer-logo.svg')).toContain('<svg');
   });
 
   it('builds only the home, not found and offline pages when every feature is off', () => {

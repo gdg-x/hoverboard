@@ -166,4 +166,20 @@ describe('runDeploy', () => {
     expect(runCommandMock).not.toHaveBeenCalled();
     expect(result).toBe(false);
   });
+
+  it('refuses the demo config, unless HB_DEMO is true', async () => {
+    const repo = makeRepo();
+    rmSync(join(repo, 'packages/config/site.json'));
+    mkdirSync(join(repo, 'packages/demo-config'));
+    writeFileSync(join(repo, 'packages/demo-config/site.json'), '{}');
+    const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+
+    expect(await runDeploy({ yes: true })).toBe(false);
+    expect(log).toHaveBeenCalledWith(expect.stringContaining('would deploy the demo site'));
+    expect(runCommandMock).not.toHaveBeenCalled();
+
+    process.env['HB_DEMO'] = 'true';
+    runCommandMock.mockReturnValue(0);
+    expect(await runDeploy({ yes: true })).toBe(true);
+  });
 });

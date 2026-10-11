@@ -27,7 +27,8 @@ interface HeroSettings {
 /** How people attend the event. */
 export type Attendance = 'inPerson' | 'online' | 'hybrid';
 
-type SiteJson = typeof import('../defaults/site.json') & typeof import('../../config/site.json');
+type SiteJson = typeof import('../defaults/site.json') &
+  typeof import('../../demo-config/site.json');
 /** `event.location` in site.json. */
 export type Venue = SiteJson['event']['location'];
 
@@ -41,7 +42,10 @@ type Site = Omit<SiteJson, 'event'> & {
     location?: Venue;
   };
 };
-type Resources = Omit<typeof import('../../config/content/resources.json'), 'attendingPage'> & {
+type Resources = Omit<
+  typeof import('../../demo-config/content/resources.json'),
+  'attendingPage'
+> & {
   attendingPage?: AttendingPage;
 };
 
@@ -103,8 +107,8 @@ export interface ConfigPaths {
   /** The site's own config, which only contains what it changes. */
   site: string;
   schemas: string;
-  /** Where images referenced by the config must exist. */
-  public: string;
+  /** Where images referenced by the config can be: the site's `public` first, then packages/web's. */
+  public: string[];
   /** UI translations, one XLIFF file per locale in `xliff/`. */
   translations: string;
 }
@@ -118,22 +122,28 @@ const { NODE_ENV } = process.env;
 export const production = NODE_ENV === 'production';
 export const watch = process.argv.includes('--watch');
 
-const RELATIVE_PATHS: ConfigPaths = {
-  defaults: 'defaults',
-  site: '../config',
-  schemas: 'schemas',
-  public: 'public',
-  translations: '../translations',
+/** The site's config folder, relative to packages/web: packages/config once it has a site.json. */
+export const siteConfigDir = (webRoot: string, { demo = false } = {}): string =>
+  !demo && fs.existsSync(join(webRoot, '../config/site.json')) ? '../config' : '../demo-config';
+
+/** Config paths for a `packages/web` directory. Tests pass `demo`, so a fork's config can't fail them. */
+export const configPaths = (webRoot: string, { demo = false } = {}): ConfigPaths => {
+  const site = join(webRoot, siteConfigDir(webRoot, { demo }));
+  return {
+    defaults: join(webRoot, 'defaults'),
+    site,
+    schemas: join(webRoot, 'schemas'),
+    public: [join(site, 'public'), join(webRoot, 'public')],
+    translations: join(webRoot, '../translations'),
+  };
 };
 
-/** Config paths for a `packages/web` directory. */
-export const configPaths = (webRoot: string): ConfigPaths =>
-  Object.fromEntries(
-    Object.entries(RELATIVE_PATHS).map(([key, path]) => [key, join(webRoot, path)]),
-  ) as unknown as ConfigPaths;
-
 // Vite runs with packages/web as the working directory.
-export const CONFIG_PATHS: ConfigPaths = RELATIVE_PATHS;
+export const CONFIG_PATHS: ConfigPaths = configPaths('.');
+
+/** A file in the first public folder that has it, or undefined. */
+export const publicFile = (publicDirs: string[], file: string): string | undefined =>
+  publicDirs.map((dir) => join(dir, file)).find((path) => fs.existsSync(path));
 
 export class ConfigError extends Error {
   constructor(readonly errors: string[]) {
@@ -166,10 +176,12 @@ const formatErrors = (file: string, errors: ErrorObject[] | null | undefined): s
 
 const isUrl = (value: string) => /^https?:\/\//.test(value);
 
-const imageErrors = (images: [string, string | undefined][], publicDir: string): string[] =>
+const IN_PUBLIC = 'is not in packages/config/public or packages/web/public';
+
+const imageErrors = (images: [string, string | undefined][], publicDirs: string[]): string[] =>
   images.flatMap(([path, image]) =>
-    image && !isUrl(image) && !fs.existsSync(join(publicDir, image))
-      ? [`${path}: "${image}" is not in packages/web/public`]
+    image && !isUrl(image) && !publicFile(publicDirs, image)
+      ? [`${path}: "${image}" ${IN_PUBLIC}`]
       : [],
   );
 
@@ -310,18 +322,23 @@ const crossFileErrors = (site: Site, resources: Resources, paths: ConfigPaths): 
   errors.push(...iconErrors(site.icon, paths.public));
   // The page inlines it, so it can be drawn in the theme's colors.
   const illustration = site.heroSettings?.home?.illustration;
-  if (illustration && (isUrl(illustration) || !fs.existsSync(join(paths.public, illustration)))) {
-    errors.push(
-      `site.json/heroSettings/home/illustration: "${illustration}" is not in packages/web/public`,
-    );
-  } else if (illustration) {
-    const { removed } = sanitizeSvg(fs.readFileSync(join(paths.public, illustration), 'utf8'));
+  const illustrationFile =
+    illustration && !isUrl(illustration) ? publicFile(paths.public, illustration) : undefined;
+  if (illustration && !illustrationFile) {
+    errors.push(`site.json/heroSettings/home/illustration: "${illustration}" ${IN_PUBLIC}`);
+  } else if (illustrationFile) {
+    const { removed } = sanitizeSvg(fs.readFileSync(illustrationFile, 'utf8'));
     if (removed.length) {
       errors.push(
         `site.json/heroSettings/home/illustration: "${illustration}" has content that could run ` +
           `on the site, which the build would remove: ${[...new Set(removed)].join(', ')}`,
       );
     }
+  }
+  const customFile = join(paths.site, 'custom.css');
+  // Pages inline it in a <style> element, which it must not close.
+  if (fs.existsSync(customFile) && /<\/style/i.test(fs.readFileSync(customFile, 'utf8'))) {
+    errors.push('custom.css: must not contain "</style"');
   }
   return [
     ...errors,
