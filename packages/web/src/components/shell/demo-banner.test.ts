@@ -1,5 +1,11 @@
-import { fireEvent, within } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import { html, render as litRender, nothing } from 'lit';
+import {
+  deepQuerySelector,
+  deepQuerySelectorAll,
+  screen,
+  within,
+} from 'shadow-dom-testing-library';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { decorations, density, siteAttendance, themeName } from '../../config/site';
@@ -13,7 +19,7 @@ import {
   DEMO_THEME_KEY,
   DEMO_TIME_KEY,
 } from '../../utils/demo';
-import type { HbSwitch } from '../ui/hb-switch';
+import type { ColorSchemeToggle } from '../footer/color-scheme-toggle';
 import type { DemoBanner } from './demo-banner';
 import './demo-banner';
 
@@ -64,12 +70,13 @@ describe('demo-banner', () => {
     ]);
     expect(spacing.getByRole('radio', { checked: true })).toHaveAttribute('value', density);
     expect(
-      [...shadowRoot.querySelectorAll('fieldset hoverboard-icon')].map((icon) =>
+      // Only the spacing icons, not those of the nested brightness toggle.
+      deepQuerySelectorAll(shadowRoot, '.controls > fieldset hoverboard-icon').map((icon) =>
         icon.getAttribute('name'),
       ),
     ).toEqual(['density-small', 'density-medium', 'density-large']);
     expect(view.getByText('Compact')).toHaveClass('visually-hidden');
-    expect(shadowRoot.querySelector('color-scheme-toggle')).toHaveAttribute('compact');
+    expect(deepQuerySelector(shadowRoot, 'color-scheme-toggle')).toHaveAttribute('compact');
   });
 
   it('switches the theme, and forgets the choice for the site theme', async () => {
@@ -96,12 +103,8 @@ describe('demo-banner', () => {
   });
 
   it('switches the decorations', async () => {
-    const { shadowRoot } = await render();
-    const toggle = shadowRoot.querySelector<HbSwitch>('hb-switch')!;
-    await toggle.updateComplete;
-    const input = within(toggle.shadowRoot as unknown as HTMLElement).getByRole('switch', {
-      name: 'Decorations',
-    });
+    await render();
+    const input = await screen.findByShadowRole('switch', { name: 'Decorations' });
     expect(input).toBeChecked();
     expect(decorations).toBe(true);
 
@@ -188,7 +191,7 @@ describe('demo-banner', () => {
     fireEvent.click(
       within(footer.shadowRoot as unknown as HTMLElement).getByRole('radio', { name: 'Dark' }),
     );
-    const banner = shadowRoot.querySelector('color-scheme-toggle')!;
+    const banner = deepQuerySelector<ColorSchemeToggle>(shadowRoot, 'color-scheme-toggle')!;
     await banner.updateComplete;
 
     expect(localStorage.getItem(COLOR_SCHEME_KEY)).toBe('dark');

@@ -1,7 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
+import { deepQuerySelector, deepQuerySelectorAll, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setStoreState } from '../../../__tests__/helpers/store';
 import { store } from '../../store';
@@ -52,7 +52,7 @@ const render = async (props: Partial<ScheduleDay> = {}) => {
   const result = await fixture<ScheduleDay>(html`<schedule-day></schedule-day>`);
   Object.assign(result.element, { day, ...props });
   await result.element.updateComplete;
-  return { ...result, view: within(result.shadowRootForWithin) };
+  return result;
 };
 
 describe('schedule-day', () => {
@@ -67,22 +67,24 @@ describe('schedule-day', () => {
   });
 
   it('labels the day as a region with its times and sessions', async () => {
-    const { shadowRoot, view } = await render();
+    const { shadowRoot } = await render();
 
-    expect(view.getByRole('region', { name: 'Schedule for January 1' })).toBeInTheDocument();
-    const times = [...shadowRoot.querySelectorAll('.time')];
+    expect(
+      screen.getByShadowRole('region', { name: 'Schedule for January 1' }),
+    ).toBeInTheDocument();
+    const times = deepQuerySelectorAll(shadowRoot, '.time');
     expect(times.map((time) => time.textContent?.trim())).toEqual(['10:00', '11:00']);
-    expect(times[0]!.querySelector('time')).toHaveAttribute(
+    expect(deepQuerySelector(times[0]!, 'time')).toHaveAttribute(
       'datetime',
       zonedTime('2024-01-01', '10:00', 'Europe/Kyiv').toISOString(),
     );
-    const sessions = [...shadowRoot.querySelectorAll<SessionCard>('session-card')];
+    const sessions = deepQuerySelectorAll<SessionCard>(shadowRoot, 'session-card');
     expect(sessions.map((session) => session.session?.id)).toEqual(['web', 'android']);
   });
 
   it('puts sessions in the track columns after the time column', async () => {
     const { shadowRoot } = await render();
-    const blocks = shadowRoot.querySelectorAll<HTMLElement>('.block');
+    const blocks = deepQuerySelectorAll(shadowRoot, '.block');
 
     expect(blocks[1]!.style.gridArea).toBe('1 / 3 / 1 / 4');
   });
@@ -90,7 +92,7 @@ describe('schedule-day', () => {
   it('names the tracks', async () => {
     const { shadowRoot } = await render();
 
-    expect([...shadowRoot.querySelectorAll('.track')].map((track) => track.textContent)).toEqual([
+    expect(deepQuerySelectorAll(shadowRoot, '.track').map((track) => track.textContent)).toEqual([
       'Main hall',
       'Room 2',
     ]);
@@ -101,14 +103,14 @@ describe('schedule-day', () => {
     const { shadowRoot } = await render();
     const local = wallClock(zonedTime('2024-01-01', '10:00', 'Europe/Kyiv'));
 
-    expect(shadowRoot.querySelector('.time')).toHaveTextContent(local.time);
+    expect(deepQuerySelector(shadowRoot, '.time')).toHaveTextContent(local.time);
   });
 
   it('shows only sessions that match the filters', async () => {
     setStoreState({ filters: new Success([{ group: FilterGroupKey.tags, tag: 'web' }]) });
     const { shadowRoot } = await render();
 
-    const sessions = [...shadowRoot.querySelectorAll<SessionCard>('session-card')];
+    const sessions = deepQuerySelectorAll<SessionCard>(shadowRoot, 'session-card');
     expect(sessions.map((session) => session.session?.id)).toEqual(['web']);
   });
 
@@ -116,32 +118,30 @@ describe('schedule-day', () => {
     setStoreState({ filters: new Success([{ group: FilterGroupKey.track, tag: 'room-2' }]) });
     const { shadowRoot } = await render();
 
-    expect([...shadowRoot.querySelectorAll('.track')].map((track) => track.textContent)).toEqual([
+    expect(deepQuerySelectorAll(shadowRoot, '.track').map((track) => track.textContent)).toEqual([
       'Room 2',
     ]);
-    const sessions = [...shadowRoot.querySelectorAll<SessionCard>('session-card')];
+    const sessions = deepQuerySelectorAll<SessionCard>(shadowRoot, 'session-card');
     expect(sessions.map((session) => session.session?.id)).toEqual(['android']);
-    expect(shadowRoot.querySelector<HTMLElement>('.block')!.style.gridArea).toBe('1 / 2 / 1 / 3');
-    expect(shadowRoot.querySelector<HTMLElement>('.grid')!.style.getPropertyValue('--tracks')).toBe(
-      '1',
-    );
+    expect(deepQuerySelector(shadowRoot, '.block')!.style.gridArea).toBe('1 / 2 / 1 / 3');
+    expect(deepQuerySelector(shadowRoot, '.grid')!.style.getPropertyValue('--tracks')).toBe('1');
   });
 
   it('offers to clear filters that match nothing', async () => {
     setStoreState({ filters: new Success([{ group: FilterGroupKey.tags, tag: 'design' }]) });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('no-results')).toHaveTextContent(
+    expect(deepQuerySelector(shadowRoot, 'no-results')).toHaveTextContent(
       'No sessions match these filters.',
     );
   });
 
   it('links empty timeslots in My Schedule to the day', async () => {
-    const { view } = await render({ onlyFeatured: true });
-    const link = view.getByRole('link', { name: 'Browse sessions' });
+    await render({ onlyFeatured: true });
+    const link = screen.getByShadowRole('link', { name: 'Browse sessions' });
 
     expect(link).toHaveAttribute('href', '/schedule/2024-01-01#11:00');
-    expect(view.getAllByRole('link', { name: 'Browse sessions' })).toHaveLength(1);
+    expect(screen.getAllByShadowRole('link', { name: 'Browse sessions' })).toHaveLength(1);
   });
 
   it('shows no time and no link for a row where no session starts, such as a break', async () => {
@@ -157,13 +157,13 @@ describe('schedule-day', () => {
         },
       ],
     };
-    const { shadowRoot, view } = await render({ day: withBreak, onlyFeatured: true });
+    const { shadowRoot } = await render({ day: withBreak, onlyFeatured: true });
 
-    const times = [...shadowRoot.querySelectorAll('.time')];
+    const times = deepQuerySelectorAll(shadowRoot, '.time');
     expect(times.map((time) => time.textContent?.trim())).toEqual(['10:00', '11:00', '12:30']);
     expect(
-      view
-        .getAllByRole('link', { name: 'Browse sessions' })
+      screen
+        .getAllByShadowRole('link', { name: 'Browse sessions' })
         .map((link) => link.getAttribute('href')),
     ).toEqual(['/schedule/2024-01-01#11:00', '/schedule/2024-01-01#12:30']);
   });
@@ -175,13 +175,13 @@ describe('schedule-day', () => {
     const { shadowRoot, element } = await render();
     await element.updateComplete;
 
-    const now = shadowRoot.querySelector<HTMLElement>('.now')!;
+    const now = deepQuerySelector(shadowRoot, '.now')!;
     expect(now.style.gridRow).toBe('1');
-    expect(now.querySelector<HTMLElement>('.now-line')!.style.insetBlockStart).toBe('50%');
+    expect(deepQuerySelector(now, '.now-line')!.style.insetBlockStart).toBe('50%');
     expect(now).toHaveTextContent('Now · 10:30');
     expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
     // So cards can say which sessions are live.
-    const cards = [...shadowRoot.querySelectorAll<SessionCard>('session-card')];
+    const cards = deepQuerySelectorAll<SessionCard>(shadowRoot, 'session-card');
     expect(cards.length).toBeGreaterThan(0);
     expect(cards.map((card) => card.now)).toEqual(
       cards.map(() => new Date('2024-01-01T08:30:00Z')),
@@ -194,19 +194,21 @@ describe('schedule-day', () => {
     const { shadowRoot, element } = await render();
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('.now')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, '.now')).toBeNull();
   });
 
   it("finds the location's day in the schedule", async () => {
     const other = { ...day, date: '2024-01-02' };
-    const { element, view } = await render({
+    const { element } = await render({
       day: undefined,
       schedule: new Success([day, other]),
       location: { pathname: '/schedule/2024-01-02', search: '', params: { id: '2024-01-02' } },
     });
 
     expect(element.day).toBe(other);
-    expect(view.getByRole('region', { name: 'Schedule for January 2' })).toBeInTheDocument();
+    expect(
+      screen.getByShadowRole('region', { name: 'Schedule for January 2' }),
+    ).toBeInTheDocument();
   });
 });
 

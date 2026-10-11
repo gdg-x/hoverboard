@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
+import { deepQuerySelector, deepQuerySelectorAll, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import { updateMetadata } from '../utils/metadata';
@@ -15,18 +15,16 @@ describe('not-found-page', () => {
   });
 
   it('shows a drawing, the joke, and links home and to the schedule', async () => {
-    const { shadowRoot, shadowRootForWithin } = await fixture<NotFoundPage>(
-      html`<not-found-page></not-found-page>`,
-    );
+    const { shadowRoot } = await fixture<NotFoundPage>(html`<not-found-page></not-found-page>`);
 
-    expect(shadowRoot.querySelector('simple-hero')).toHaveAttribute('page', 'notFound');
-    const art = shadowRoot.querySelector('.illustration.art');
-    expect(art).toHaveAttribute('aria-hidden', 'true');
-    expect(art?.querySelector('svg')).toBeInTheDocument();
-    expect(
-      within(shadowRootForWithin).getByText('This session was moved to another room.'),
-    ).toBeInTheDocument();
-    const links = [...shadowRoot.querySelectorAll('hb-button')].map((link) =>
+    expect(deepQuerySelector(shadowRoot, 'simple-hero')).toHaveAttribute('page', 'notFound');
+    expect(deepQuerySelector(shadowRoot, '.illustration.art')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    );
+    expect(deepQuerySelector(shadowRoot, '.illustration.art svg')).toBeInTheDocument();
+    expect(screen.getByShadowText('This session was moved to another room.')).toBeInTheDocument();
+    const links = deepQuerySelectorAll(shadowRoot, 'hb-button').map((link) =>
       link.getAttribute('href'),
     );
     expect(links).toEqual(['/', '/schedule']);
@@ -36,7 +34,7 @@ describe('not-found-page', () => {
     setFeatures({ schedule: false });
     const { shadowRoot } = await fixture<NotFoundPage>(html`<not-found-page></not-found-page>`);
 
-    expect(shadowRoot.querySelectorAll('hb-button')).toHaveLength(1);
+    expect(deepQuerySelectorAll(shadowRoot, 'hb-button')).toHaveLength(1);
   });
 
   it('updates page metadata', async () => {

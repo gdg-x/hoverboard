@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { fireEvent, screen, within } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
+import { deepQuerySelector, deepQuerySelectorAll, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { openVideoDialog } from '../../store/ui';
 import { aboutBlock } from '../../config/site';
@@ -24,42 +25,40 @@ describe('about-block', () => {
   });
 
   it('renders details', async () => {
-    const { shadowRootForWithin } = await fixture(
-      html`<about-block data-testid="block"></about-block>`,
-    );
-    const { getByText } = within(shadowRootForWithin);
+    await fixture(html`<about-block data-testid="block"></about-block>`);
 
     expect(screen.getByTestId('block')).toBeInTheDocument();
-    expect(getByText('About')).toBeInTheDocument();
-    expect(getByText(aboutBlock.callToAction.featuredSessions.description)).toBeInTheDocument();
-    expect(getByText(aboutBlock.statisticsBlock.attendees.number)).toBeInTheDocument();
-    expect(getByText(aboutBlock.statisticsBlock.attendees.label)).toBeInTheDocument();
+    expect(screen.getByShadowText('About')).toBeInTheDocument();
+    expect(
+      screen.getByShadowText(aboutBlock.callToAction.featuredSessions.description),
+    ).toBeInTheDocument();
+    expect(screen.getByShadowText(aboutBlock.statisticsBlock.attendees.number)).toBeInTheDocument();
+    expect(screen.getByShadowText(aboutBlock.statisticsBlock.attendees.label)).toBeInTheDocument();
   });
 
   it('renders the numbers as a list, with the optional emoji hidden from screen readers', async () => {
     const { shadowRoot } = await fixture(html`<about-block></about-block>`);
 
-    const stats = shadowRoot.querySelectorAll('.stat');
+    const stats = screen.getAllByShadowRole('listitem');
     expect(stats).toHaveLength(4);
     expect(stats[0]).toHaveTextContent(aboutBlock.statisticsBlock.attendees.label);
-    expect(shadowRoot.querySelector('.emoji')).toHaveAttribute('aria-hidden', 'true');
-    expect(shadowRoot.querySelectorAll('.emoji')).toHaveLength(
+    expect(deepQuerySelector(shadowRoot, '.emoji')).toHaveAttribute('aria-hidden', 'true');
+    expect(deepQuerySelectorAll(shadowRoot, '.emoji')).toHaveLength(
       Object.values(aboutBlock.statisticsBlock).filter((stat) => 'emoji' in stat).length,
     );
   });
 
   it('has a section heading below the page title', async () => {
-    const { shadowRoot } = await fixture(html`<about-block></about-block>`);
+    await fixture(html`<about-block></about-block>`);
 
-    expect(shadowRoot.querySelector('h2')).toHaveTextContent('About');
-    expect(shadowRoot.querySelector('h1')).toBeNull();
+    expect(screen.getByShadowRole('heading', { level: 2 })).toHaveTextContent('About');
+    expect(screen.queryByShadowRole('heading', { level: 1 })).not.toBeInTheDocument();
   });
 
   it('plays the video', async () => {
-    const { shadowRootForWithin } = await fixture(html`<about-block></about-block>`);
-    const { getByText } = within(shadowRootForWithin);
+    await fixture(html`<about-block></about-block>`);
 
-    fireEvent.click(getByText(aboutBlock.callToAction.howItWas.label));
+    fireEvent.click(screen.getByShadowText(aboutBlock.callToAction.howItWas.label));
 
     expect(mockToggleVideoDialogs).toHaveBeenCalledTimes(1);
     expect(mockToggleVideoDialogs).toHaveBeenCalledWith({

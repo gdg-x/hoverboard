@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
+import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { store } from '../../store';
 import { TIMEOUT } from '../../models/snackbar';
@@ -34,25 +35,25 @@ describe('snack-bar', () => {
 
   it('renders the label of the first queued snackbar', async () => {
     const { element, shadowRoot } = await fixture<SnackBar>(html`<snack-bar></snack-bar>`);
-    const toast = shadowRoot.querySelector('hb-toast');
+    const toast = deepQuerySelector(shadowRoot, 'hb-toast');
 
     expect(toast).not.toHaveAttribute('open');
 
     store.dispatch(queueSnackbar('Saved successfully'));
     await element.updateComplete;
 
-    expect(shadowRoot.querySelector('.label')).toHaveTextContent('Saved successfully');
+    expect(screen.getByShadowText('Saved successfully')).toHaveClass('label');
     expect(toast).toHaveAttribute('open');
   });
 
   it('renders an action button for complex snackbars', async () => {
     const callback = vi.fn();
-    const { element, shadowRoot } = await fixture<SnackBar>(html`<snack-bar></snack-bar>`);
+    const { element } = await fixture<SnackBar>(html`<snack-bar></snack-bar>`);
     store.dispatch(queueComplexSnackbar({ label: 'Updated', action: { title: 'Undo', callback } }));
     await element.updateComplete;
 
-    const actionButton = shadowRoot.querySelector('.action')!;
-    expect(actionButton).toHaveTextContent('Undo');
+    const actionButton = await screen.findByShadowRole('button', { name: 'Undo' });
+    expect(screen.getByShadowText('Undo')).toHaveClass('action');
 
     fireEvent.click(actionButton);
     expect(callback).toHaveBeenCalledTimes(1);
@@ -60,12 +61,12 @@ describe('snack-bar', () => {
   });
 
   it('dispatches removeSnackbar when the dismiss button is clicked', async () => {
-    const { element, shadowRoot } = await fixture<SnackBar>(html`<snack-bar></snack-bar>`);
+    const { element } = await fixture<SnackBar>(html`<snack-bar></snack-bar>`);
     store.dispatch(queueSnackbar('Dismiss me'));
     await element.updateComplete;
     const { id } = store.getState().snackbars[0]!;
 
-    fireEvent.click(shadowRoot.querySelector('.dismiss')!);
+    fireEvent.click(await screen.findByShadowRole('button', { name: 'Dismiss' }));
 
     expect(mockRemoveSnackbar).toHaveBeenCalledWith(id);
   });

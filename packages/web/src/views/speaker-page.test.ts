@@ -1,7 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
+import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
 import type { PreviousSpeaker } from '../models/previous-speaker';
@@ -50,7 +50,7 @@ const render = async () => {
   result.element.speakerId = 'speaker-1';
   await result.element.updateComplete;
   await result.element.updateComplete;
-  return { ...result, view: within(result.shadowRootForWithin) };
+  return result;
 };
 
 describe('speaker-page', () => {
@@ -66,7 +66,7 @@ describe('speaker-page', () => {
 
   it("shows the speaker's profile and keeps the share image", async () => {
     const { shadowRoot } = await render();
-    const profile = shadowRoot.querySelector<SpeakerProfile>('speaker-profile')!;
+    const profile = deepQuerySelector<SpeakerProfile>(shadowRoot, 'speaker-profile')!;
 
     expect(profile.speaker).toBe(speaker);
     expect(profile).toHaveAttribute('kind', 'speaker');
@@ -85,10 +85,13 @@ describe('speaker-page', () => {
   });
 
   it('links back to all speakers and to their social networks', async () => {
-    const { shadowRoot, view } = await render();
+    const { shadowRoot } = await render();
 
-    expect(view.getByRole('link', { name: 'All speakers' })).toHaveAttribute('href', '/speakers');
-    const socials = shadowRoot.querySelector<SocialLinks>('social-links')!;
+    expect(screen.getByShadowRole('link', { name: 'All speakers' })).toHaveAttribute(
+      'href',
+      '/speakers',
+    );
+    const socials = deepQuerySelector<SocialLinks>(shadowRoot, 'social-links')!;
     expect(socials.socials).toEqual([
       { icon: 'github', link: 'https://github.com/ada', name: 'GitHub' },
     ]);
@@ -118,7 +121,7 @@ describe('speaker-page', () => {
     });
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('session-card')).toHaveProperty(
+    expect(deepQuerySelector(shadowRoot, 'session-card')).toHaveProperty(
       'session',
       expect.objectContaining({ id: 'session-1' }),
     );
@@ -127,8 +130,8 @@ describe('speaker-page', () => {
   it('has no sessions section without sessions', async () => {
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('session-card')).toBeNull();
-    expect(shadowRoot.querySelector('.section-title')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, 'session-card')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, '.section-title')).toBeNull();
   });
 
   it('shows their talks in earlier years', async () => {
@@ -136,7 +139,7 @@ describe('speaker-page', () => {
     vi.mocked(selectPreviousSpeaker).mockReturnValue({ sessions } as never as PreviousSpeaker);
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('previous-talks')).toHaveProperty('sessions', sessions);
+    expect(deepQuerySelector(shadowRoot, 'previous-talks')).toHaveProperty('sessions', sessions);
   });
 
   it('leaves out earlier talks when previous speakers are off', async () => {
@@ -146,6 +149,6 @@ describe('speaker-page', () => {
     } as never as PreviousSpeaker);
     const { shadowRoot } = await render();
 
-    expect(shadowRoot.querySelector('previous-talks')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, 'previous-talks')).toBeNull();
   });
 });

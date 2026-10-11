@@ -1,7 +1,8 @@
 import { Initialized, Success } from '@abraham/remotedata';
 import type { User } from 'firebase/auth';
-import { fireEvent, within } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import { html, render as litRender, nothing } from 'lit';
+import { deepQuerySelector, screen, within } from 'shadow-dom-testing-library';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { setFeatures } from '../../../__tests__/helpers/features';
 import { fixture } from '../../../__tests__/helpers/fixtures';
@@ -32,7 +33,7 @@ const render = async (user: AccountMenu['user'] = new Initialized()) => {
   const { element, shadowRoot } = await fixture<AccountMenu>(html`<account-menu></account-menu>`);
   element['user'] = user;
   await element.updateComplete;
-  return { element, shadowRoot };
+  return { element, shadowRoot, menu: () => within(deepQuerySelector(shadowRoot, 'hb-menu')!) };
 };
 
 describe('account-menu', () => {
@@ -42,62 +43,57 @@ describe('account-menu', () => {
   });
 
   it('asks a signed-out visitor to sign in', async () => {
-    const { shadowRoot } = await render();
-    const button = shadowRoot.querySelector('hb-icon-button')!;
+    await render();
 
-    expect(button).toHaveAttribute('label', 'Sign in');
-
-    fireEvent.click(button);
+    fireEvent.click(await screen.findByShadowRole('button', { name: 'Sign in' }));
 
     expect(openSigninDialog).toHaveBeenCalled();
   });
 
   it('names the menu after the signed-in visitor', async () => {
-    const { shadowRoot } = await render(ada);
+    const { menu } = await render(ada);
 
-    expect(shadowRoot.querySelector('hb-menu hb-icon-button')).toHaveAttribute(
-      'label',
-      'Account of Ada Lovelace',
-    );
+    expect(
+      await menu().findByShadowRole('button', { name: 'Account of Ada Lovelace' }),
+    ).toBeInTheDocument();
   });
 
   it('links to My Schedule and signs out', async () => {
-    const { shadowRoot } = await render(ada);
-    const menu = within(shadowRoot.querySelector<HTMLElement>('hb-menu')!);
+    const { menu } = await render(ada);
 
-    expect(menu.getByRole('menuitem', { name: 'My Schedule', hidden: true })).toHaveAttribute(
-      'href',
-      '/schedule/my-schedule',
-    );
+    expect(
+      menu().getByShadowRole('menuitem', { name: 'My Schedule', hidden: true }),
+    ).toHaveAttribute('href', '/schedule/my-schedule');
 
-    fireEvent.click(menu.getByRole('menuitem', { name: 'Sign out', hidden: true }));
+    fireEvent.click(menu().getByShadowRole('menuitem', { name: 'Sign out', hidden: true }));
 
     expect(signOut).toHaveBeenCalled();
   });
 
   it('leaves out My Schedule when the feature is off', async () => {
     setFeatures({ mySchedule: false, reactions: false });
-    const { shadowRoot } = await render(ada);
-    const menu = within(shadowRoot.querySelector<HTMLElement>('hb-menu')!);
+    const { menu } = await render(ada);
 
-    expect(menu.getAllByRole('menuitem', { hidden: true })).toHaveLength(1);
-    expect(menu.queryByRole('menuitem', { name: 'My Schedule', hidden: true })).toBeNull();
+    expect(menu().getAllByShadowRole('menuitem', { hidden: true })).toHaveLength(1);
+    expect(
+      menu().queryByShadowRole('menuitem', { name: 'My Schedule', hidden: true }),
+    ).not.toBeInTheDocument();
   });
 
   it('opens the public profile, with reactions on', async () => {
-    const { shadowRoot } = await render(ada);
-    const menu = within(shadowRoot.querySelector<HTMLElement>('hb-menu')!);
+    const { menu } = await render(ada);
 
-    fireEvent.click(menu.getByRole('menuitem', { name: 'Public profile', hidden: true }));
+    fireEvent.click(menu().getByShadowRole('menuitem', { name: 'Public profile', hidden: true }));
 
     expect(openProfileDialog).toHaveBeenCalled();
   });
 
   it('has no public profile with reactions off', async () => {
     setFeatures({ reactions: false });
-    const { shadowRoot } = await render(ada);
-    const menu = within(shadowRoot.querySelector<HTMLElement>('hb-menu')!);
+    const { menu } = await render(ada);
 
-    expect(menu.queryByRole('menuitem', { name: 'Public profile', hidden: true })).toBeNull();
+    expect(
+      menu().queryByShadowRole('menuitem', { name: 'Public profile', hidden: true }),
+    ).not.toBeInTheDocument();
   });
 });

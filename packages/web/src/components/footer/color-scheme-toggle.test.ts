@@ -1,5 +1,6 @@
-import { fireEvent, within } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import { html, render as litRender, nothing } from 'lit';
+import { deepQuerySelector, screen, within } from 'shadow-dom-testing-library';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { COLOR_SCHEME_KEY } from '../../utils/color-scheme';
@@ -88,9 +89,9 @@ describe('color-scheme-toggle', () => {
   it('is hidden when the site locks a color scheme', async () => {
     site.colorScheme = 'dark';
     litRender(html`<color-scheme-toggle></color-scheme-toggle>`, document.body);
-    const element = document.body.firstElementChild as ColorSchemeToggle;
+    const element = deepQuerySelector<ColorSchemeToggle>(document.body, 'color-scheme-toggle')!;
     await element.updateComplete;
 
-    expect(within(element.shadowRoot as unknown as HTMLElement).queryByRole('group')).toBeNull();
+    expect(screen.queryByShadowRole('group')).not.toBeInTheDocument();
   });
 });

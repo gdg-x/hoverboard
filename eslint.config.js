@@ -94,7 +94,7 @@ export default [
       'vitest/unbound-method': 'warn',
 
       // Testing library rules
-      'testing-library/no-node-access': 'warn',
+      'testing-library/no-node-access': 'error',
 
       // TypeScript rules
       '@typescript-eslint/unbound-method': 'warn',

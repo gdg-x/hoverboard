@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { within } from '@testing-library/dom';
 import { html, nothing, render as litRender } from 'lit';
+import { deepQuerySelector, screen, within } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { SpeakerBadges } from './speaker-badges';
 import './speaker-badges';
@@ -16,15 +16,15 @@ describe('speaker-badges', () => {
   });
 
   it('links each badge as a chip in its color, in a named list', async () => {
-    const { element, shadowRoot, shadowRootForWithin } = await fixture<SpeakerBadges>(
+    const { element, shadowRoot } = await fixture<SpeakerBadges>(
       html`<speaker-badges></speaker-badges>`,
     );
     element.badges = badges;
     await element.updateComplete;
 
-    const list = within(shadowRootForWithin).getByRole('list', { name: 'Badges' });
+    const list = screen.getByShadowRole('list', { name: 'Badges' });
     expect(within(list).getAllByRole('listitem')).toHaveLength(2);
-    const chip = shadowRoot.querySelector<HTMLElement>('hb-chip')!;
+    const chip = deepQuerySelector(shadowRoot, 'hb-chip')!;
     expect(chip).toHaveTextContent('Google Developer Expert');
     expect(chip).toHaveAttribute('href', 'https://gde.example');
     expect(chip.style.getPropertyValue('--hb-chip-color')).toContain('--hb-on-tag-gde');
@@ -35,7 +35,7 @@ describe('speaker-badges', () => {
     document.body.append(element);
     await element.updateComplete;
 
-    expect(element.shadowRoot?.querySelector('ul')).toBeNull();
+    expect(deepQuerySelector(element.shadowRoot!, 'ul')).toBeNull();
     element.remove();
   });
 });

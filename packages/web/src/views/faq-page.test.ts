@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { screen } from '@testing-library/dom';
 import { html } from 'lit';
+import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import '../store';
 import { faq } from '../config/site';
@@ -27,11 +27,11 @@ describe('faq-page', () => {
   });
 
   it('renders the FAQ page', async () => {
-    const { element, shadowRootForWithin } = await fixture<FaqPage>(
+    const { element, shadowRoot } = await fixture<FaqPage>(
       html`<faq-page data-testid="page"></faq-page>`,
     );
-    const hero = shadowRootForWithin.querySelector<SimpleHero>('simple-hero');
-    const markdown = shadowRootForWithin.querySelector<RemoteMarkDown>('remote-markdown');
+    const hero = deepQuerySelector<SimpleHero>(shadowRoot, 'simple-hero');
+    const markdown = deepQuerySelector<RemoteMarkDown>(shadowRoot, 'remote-markdown');
 
     expect(screen.getByTestId('page')).toBeInTheDocument();
     expect(element.source).toBe(faq);

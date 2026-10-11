@@ -1,5 +1,5 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
-import { within } from '@testing-library/dom';
+import { screen } from 'shadow-dom-testing-library';
 import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
@@ -33,7 +33,7 @@ describe('gallery-block', () => {
   });
 
   it('renders photos and gallery CTA on success', async () => {
-    const { element, shadowRoot, shadowRootForWithin } = await fixture<GalleryBlock>(
+    const { element, shadowRoot } = await fixture<GalleryBlock>(
       html`<gallery-block></gallery-block>`,
     );
     element.gallery = new Success([
@@ -42,18 +42,16 @@ describe('gallery-block', () => {
     ]);
     await element.updateComplete;
 
-    expect(within(shadowRootForWithin).getAllByAltText('Gallery photo')).toHaveLength(2);
+    expect(screen.getAllByShadowAltText('Gallery photo')).toHaveLength(2);
     expect(shadowRoot).toHaveTextContent(galleryBlock.title);
-    expect(shadowRoot.querySelector('.band-header hb-button')).toHaveAttribute(
+    expect(screen.getByShadowRole('link', { name: 'See all photos' })).toHaveAttribute(
       'href',
       galleryBlock.callToAction.link,
     );
   });
 
   it('shows at most seven photos', async () => {
-    const { element, shadowRoot } = await fixture<GalleryBlock>(
-      html`<gallery-block></gallery-block>`,
-    );
+    const { element } = await fixture<GalleryBlock>(html`<gallery-block></gallery-block>`);
     element.gallery = new Success(
       Array.from({ length: 10 }, (_, index) => ({
         id: `photo-${index}`,
@@ -63,7 +61,7 @@ describe('gallery-block', () => {
     );
     await element.updateComplete;
 
-    expect(shadowRoot.querySelectorAll('.photo')).toHaveLength(7);
+    expect(screen.getAllByShadowAltText('Gallery photo')).toHaveLength(7);
   });
 
   it('triggers the fetch and starts in the pending state', async () => {

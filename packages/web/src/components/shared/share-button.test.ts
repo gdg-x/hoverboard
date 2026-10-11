@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit';
+import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import './share-button';
 import { ShareButton } from './share-button';
@@ -21,17 +22,17 @@ describe('share-button', () => {
     setShare(undefined);
     const { shadowRoot } = await fixture<ShareButton>(html`<share-button></share-button>`);
 
-    expect(shadowRoot.querySelector('hb-button')).toBeNull();
+    expect(deepQuerySelector(shadowRoot, 'hb-button')).toBeNull();
   });
 
   it('shares the data and current url when clicked', async () => {
     const share = vi.fn(() => Promise.resolve());
     setShare(share);
-    const { shadowRoot } = await fixture<ShareButton>(
+    await fixture<ShareButton>(
       html`<share-button .data="${{ title: 'A talk', text: 'About' }}"></share-button>`,
     );
 
-    fireEvent.click(shadowRoot.querySelector('hb-button')!);
+    fireEvent.click(await screen.findByShadowRole('button', { name: 'Share' }));
 
     expect(share).toHaveBeenCalledWith({
       url: window.location.href,
@@ -43,9 +44,9 @@ describe('share-button', () => {
   it('ignores a dismissed share sheet', async () => {
     const share = vi.fn(() => Promise.reject(new DOMException('cancelled', 'AbortError')));
     setShare(share);
-    const { shadowRoot } = await fixture<ShareButton>(html`<share-button></share-button>`);
+    await fixture<ShareButton>(html`<share-button></share-button>`);
 
-    fireEvent.click(shadowRoot.querySelector('hb-button')!);
+    fireEvent.click(await screen.findByShadowRole('button', { name: 'Share' }));
     await Promise.resolve();
 
     expect(share).toHaveBeenCalled();

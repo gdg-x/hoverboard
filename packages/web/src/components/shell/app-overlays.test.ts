@@ -1,5 +1,6 @@
 import { waitFor } from '@testing-library/dom';
 import { html, render } from 'lit';
+import { deepQuerySelector } from 'shadow-dom-testing-library';
 import { afterEach, describe, expect, it } from 'vitest';
 import { store } from '../../store';
 import { closeDialog, openProfileDialog, openSigninDialog } from '../../store/dialogs';
@@ -8,7 +9,7 @@ import './app-overlays';
 
 const renderOverlays = async () => {
   render(html`<app-overlays></app-overlays>`, document.body);
-  const element = document.body.querySelector<AppOverlays>('app-overlays')!;
+  const element = deepQuerySelector<AppOverlays>(document.body, 'app-overlays')!;
   await element.updateComplete;
   return element.shadowRoot!;
 };
@@ -28,7 +29,7 @@ describe('app-overlays', () => {
 
     openSigninDialog();
 
-    await waitFor(() => expect(shadowRoot.querySelector('signin-dialog')).not.toBeNull());
+    await waitFor(() => expect(deepQuerySelector(shadowRoot, 'signin-dialog')).not.toBeNull());
     expect(customElements.get('signin-dialog')).toBeDefined();
   });
 
@@ -37,6 +38,6 @@ describe('app-overlays', () => {
 
     openProfileDialog();
 
-    await waitFor(() => expect(shadowRoot.querySelector('profile-dialog')).not.toBeNull());
+    await waitFor(() => expect(deepQuerySelector(shadowRoot, 'profile-dialog')).not.toBeNull());
   });
 });
