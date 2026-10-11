@@ -23,7 +23,7 @@
     "install:web": "npm --prefix ./packages/web ci",
     "lint": "concurrently npm:lint:*",
     "lint:config": "npm --prefix ./packages/cli run config:validate",
-    "lint:eslint": "eslint .",
+    "lint:eslint": "eslint . --max-warnings 0",
     "lint:lit-analyzer": "npm --prefix ./packages/web run lint:lit-analyzer",
     "lint:prettier": "prettier --check .",
     "lint:syncpack": "syncpack lint",

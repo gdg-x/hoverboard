@@ -33,6 +33,12 @@ export default [
     ],
   },
 
+  {
+    linterOptions: {
+      reportUnusedDisableDirectives: 'error',
+    },
+  },
+
   // JavaScript files configuration (without TypeScript project)
   {
     files: ['**/*.{js,mjs}'],
