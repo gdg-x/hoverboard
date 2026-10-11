@@ -69,7 +69,7 @@ export class SnackBar extends ThemedComponent {
   }
 
   private readonly onAction = () => {
-    this.state?.action?.callback();
+    void this.state?.action?.callback();
     this.removeSnackbar();
   };
 

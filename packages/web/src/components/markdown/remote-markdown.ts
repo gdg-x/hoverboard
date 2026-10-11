@@ -47,7 +47,7 @@ export class RemoteMarkDown extends ThemedComponent {
 
   // Not in connectedCallback: a server-rendered page sets `content` just before it hydrates.
   override firstUpdated() {
-    if (this.content === undefined) this.loadContent();
+    if (this.content === undefined) void this.loadContent();
   }
 
   override willUpdate(changed: PropertyValues<this>) {
@@ -58,7 +58,7 @@ export class RemoteMarkDown extends ThemedComponent {
 
   // A page passes another path when the locale changes.
   override updated(changed: PropertyValues<this>) {
-    if (changed.has('path') && changed.get('path') !== undefined) this.loadContent();
+    if (changed.has('path') && changed.get('path') !== undefined) void this.loadContent();
   }
 
   private request = 0;

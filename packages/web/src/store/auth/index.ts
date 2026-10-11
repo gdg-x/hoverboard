@@ -87,7 +87,7 @@ export const signIn = async (providerId: PROVIDER) => {
     dispatch(success());
   } catch (error) {
     if (error instanceof FirebaseError) {
-      setAuthFailure(error as AuthError, providerId);
+      await setAuthFailure(error as AuthError, providerId);
     } else {
       throw error;
     }
@@ -115,7 +115,7 @@ export const mergeAccounts = async (providerId: PROVIDER, pendingCredential: OAu
     dispatch(success());
   } catch (error) {
     if (error instanceof FirebaseError) {
-      setAuthFailure(error as AuthError, providerId);
+      await setAuthFailure(error as AuthError, providerId);
     } else {
       throw error;
     }

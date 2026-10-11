@@ -109,22 +109,23 @@ export const currentDetails = ({
   const apiKey = ((site['integrations'] ?? {}) as Json)['googleMapsApiKey'];
   const theme = ((site['theme'] ?? {}) as Json)['name'];
   const off = Object.keys(features).filter((feature) => !features[feature]);
+  const asText = (value: unknown) => (typeof value === 'string' ? value : '');
 
   return {
-    title: String(resources['title'] ?? ''),
-    description: String(resources['description'] ?? ''),
-    shortName: String(site['shortName'] ?? ''),
-    startDate: String(event['startDate'] ?? ''),
-    endDate: String(event['endDate'] ?? ''),
-    timezone: String(event['timezone'] ?? Intl.DateTimeFormat().resolvedOptions().timeZone),
+    title: asText(resources['title']),
+    description: asText(resources['description']),
+    shortName: asText(site['shortName']),
+    startDate: asText(event['startDate']),
+    endDate: asText(event['endDate']),
+    timezone: asText(event['timezone']) || Intl.DateTimeFormat().resolvedOptions().timeZone,
     attendance: isAttendance(event['attendance']) ? event['attendance'] : 'inPerson',
     ...(typeof event['stream'] === 'string' ? { stream: event['stream'] } : {}),
-    venue: String(location['name'] ?? ''),
-    address: String(location['address'] ?? ''),
-    city: String(location['city'] ?? ''),
-    shortLocation: String(location['short'] ?? ''),
-    organizerName: String(organizer['name'] ?? ''),
-    organizerEmail: String(organizer['email'] ?? ''),
+    venue: asText(location['name']),
+    address: asText(location['address']),
+    city: asText(location['city']),
+    shortLocation: asText(location['short']),
+    organizerName: asText(organizer['name']),
+    organizerEmail: asText(organizer['email']),
     ...(!newProject && typeof site['url'] === 'string' ? { url: site['url'] } : {}),
     theme: typeof theme === 'string' ? theme : 'festival',
     // The demo's "Fork me on GitHub" ribbon does not belong on a new site.

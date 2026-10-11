@@ -126,7 +126,10 @@ export const decode = (firestore: Firestore, value: unknown): unknown => {
       if (typeof tagged['$timestamp'] === 'string') return parseTimestamp(tagged['$timestamp']);
       if (typeof tagged['$reference'] === 'string') return firestore.doc(tagged['$reference']);
       const point = tagged['$geopoint'];
-      if (Array.isArray(point) && point.length === 2) return new GeoPoint(point[0], point[1]);
+      // GeoPoint throws on anything but numbers.
+      if (Array.isArray(point) && point.length === 2) {
+        return new GeoPoint(point[0] as number, point[1] as number);
+      }
       if (typeof tagged['$bytes'] === 'string') return Buffer.from(tagged['$bytes'], 'base64');
     }
     return Object.fromEntries(keys.map((key) => [key, decode(firestore, tagged[key])]));

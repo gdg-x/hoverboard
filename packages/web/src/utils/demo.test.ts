@@ -121,6 +121,7 @@ describe('demo choices', () => {
   it('applies the stored choices from the inline head script', () => {
     localStorage.setItem(DEMO_THEME_KEY, 'spotlight');
 
+    // eslint-disable-next-line @typescript-eslint/no-implied-eval -- runs the inline head script
     new Function(demoScript)();
 
     expect(root).toHaveAttribute('data-theme', 'spotlight');

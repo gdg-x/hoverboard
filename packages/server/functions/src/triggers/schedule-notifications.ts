@@ -1,6 +1,6 @@
 // https://github.com/import-js/eslint-plugin-import/issues/1810
 
-import type { MulticastMessage } from 'firebase-admin/messaging';
+import type { FidMulticastMessage } from 'firebase-admin/messaging';
 import * as logger from 'firebase-functions/logger';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { fetchConfig } from '../db/config.js';
@@ -19,7 +19,10 @@ import {
 import { isInvalidTokenError, sendToTokens } from '../utils/messaging.js';
 import { logId } from '../utils/log-id.js';
 
-const sendPushNotificationToUsers = async (userIds: string[], data: MulticastMessage['data']) => {
+const sendPushNotificationToUsers = async (
+  userIds: string[],
+  data: FidMulticastMessage['data'],
+) => {
   logger.log(`Sending the reminder for ${data?.['path']} to ${userIds.length} users.`);
 
   const usersSnapshots = await Promise.all(userIds.map((id) => fetchNotificationsUser(id)));
@@ -120,7 +123,7 @@ export const scheduleNotifications = onSchedule('every 5 minutes', async () => {
     );
     if (!userIdsFeaturedSession.length) continue;
 
-    const data: MulticastMessage['data'] = {
+    const data: FidMulticastMessage['data'] = {
       title: session.title || '',
       body: `Starts ${parseTimeAndGetFromNow(session.startTime, timeZone)}`,
       icon,

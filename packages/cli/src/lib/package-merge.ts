@@ -71,7 +71,9 @@ const mergeDependencies = (
       const value = release ?? (from === undefined ? mine : undefined);
       if (value !== undefined) merged[name] = value;
     } else if (mine !== undefined) {
-      if (mine !== release) reverted.push(`${key}.${name}: ${String(mine)} to ${String(release)}`);
+      // Dependency values are version ranges.
+      if (mine !== release)
+        reverted.push(`${key}.${name}: ${mine as string} to ${release as string}`);
       merged[name] = release;
     }
   }

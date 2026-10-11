@@ -2,7 +2,7 @@ import { assertFails, assertSucceeds } from '@firebase/rules-unit-testing';
 import { expect } from 'vitest';
 
 expect.extend({
-  async toAllow(pr: Promise<any>) {
+  async toAllow(pr: Promise<unknown>) {
     let pass = false;
     try {
       await assertSucceeds(pr);
@@ -19,7 +19,7 @@ expect.extend({
 });
 
 expect.extend({
-  async toDeny(pr: Promise<any>) {
+  async toDeny(pr: Promise<unknown>) {
     let pass = false;
     try {
       await assertFails(pr);
@@ -37,12 +37,10 @@ expect.extend({
 export { expect };
 
 declare module 'vitest' {
-  interface Assertion<R extends void | Promise<void> = void> {
-    toDeny: () => R;
-    toAllow: () => R;
-  }
-  interface AsymmetricMatchersContaining {
-    toDeny: () => void;
-    toAllow: () => void;
+  // Both matchers are async, so a missing `await` is a floating promise.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- merging needs vitest's names
+  interface Matchers<R extends void | Promise<void> = void | Promise<void>, T = unknown> {
+    toDeny: () => Promise<void>;
+    toAllow: () => Promise<void>;
   }
 }

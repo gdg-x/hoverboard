@@ -49,7 +49,7 @@ export class AppInstall extends ThemedComponent {
     if (!this.deferredPrompt) {
       return;
     }
-    this.deferredPrompt.prompt();
+    void this.deferredPrompt.prompt();
     this.deferredPrompt = undefined;
   };
 

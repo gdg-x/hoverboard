@@ -7,7 +7,7 @@ export const PERSONAL_DATA = ['ada@example.com', 'fid000000000000000000', 'user-
 const LOG_FUNCTIONS = ['log', 'info', 'warn', 'error', 'debug', 'write'] as const;
 
 const text = (value: unknown): string => {
-  if (value instanceof Error) return `${value.message} ${String(value.cause ?? '')}`;
+  if (value instanceof Error) return `${value.message} ${text(value.cause ?? '')}`;
   return typeof value === 'string' ? value : JSON.stringify(value);
 };
 

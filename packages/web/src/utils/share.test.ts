@@ -1,11 +1,7 @@
 import { afterEach, beforeAll, describe, expect, it, type MockInstance, vi } from 'vitest';
 import { share } from './share';
 
-type Open = (
-  url?: string | URL | undefined,
-  target?: string | undefined,
-  features?: string | undefined,
-) => Window | null;
+type Open = typeof window.open;
 
 describe('share', () => {
   let open: MockInstance<Open>;
@@ -26,13 +22,13 @@ describe('share', () => {
   });
 
   it('shares to Twitter', () => {
-    share({ currentTarget: fixture('twitter') } as any as PointerEvent);
+    share({ currentTarget: fixture('twitter') } as unknown as PointerEvent);
 
     expect(window.open).toHaveBeenCalledWith(twitterUrl, 'share', features(275));
   });
 
   it('shares to Facebook', () => {
-    share({ currentTarget: fixture('facebook') } as any as PointerEvent);
+    share({ currentTarget: fixture('facebook') } as unknown as PointerEvent);
 
     expect(window.open).toHaveBeenCalledWith(
       'https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%2F&t=Awesome%20Schedule',
@@ -42,7 +38,7 @@ describe('share', () => {
   });
 
   it('throws on unknown', () => {
-    const event = { currentTarget: fixture('unknown') } as any as PointerEvent;
+    const event = { currentTarget: fixture('unknown') } as unknown as PointerEvent;
 
     expect(() => share(event)).toThrow('Unknown share target');
   });

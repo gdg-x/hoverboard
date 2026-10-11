@@ -53,11 +53,11 @@ describe('routes', () => {
     ).toEqual([]);
   });
 
-  it('injects the enabled routes from src/routes', () => {
+  it('injects the enabled routes from src/routes', async () => {
     const injectRoute = vi.fn();
     const setup = routes({ ...allFeatures(false), team: true }).hooks['astro:config:setup'];
 
-    setup?.({ injectRoute } as never);
+    await setup?.({ injectRoute } as never);
 
     expect(injectRoute.mock.calls).toEqual([
       [{ pattern: '/', entrypoint: './src/routes/index.astro' }],
@@ -65,17 +65,17 @@ describe('routes', () => {
     ]);
   });
 
-  it('adds the design gallery only in development', () => {
+  it('adds the design gallery only in development', async () => {
     const injectRoute = vi.fn();
     const setup = routes(allFeatures(false)).hooks['astro:config:setup'];
 
-    setup?.({ command: 'build', injectRoute } as never);
+    await setup?.({ command: 'build', injectRoute } as never);
     expect(injectRoute.mock.calls).toEqual([
       [{ pattern: '/', entrypoint: './src/routes/index.astro' }],
     ]);
 
     injectRoute.mockClear();
-    setup?.({ command: 'dev', injectRoute } as never);
+    await setup?.({ command: 'dev', injectRoute } as never);
     expect(injectRoute.mock.calls).toEqual([
       [{ pattern: '/', entrypoint: './src/routes/index.astro' }],
       [{ pattern: '/design', entrypoint: './src/routes/design.astro' }],
@@ -87,12 +87,12 @@ describe('routes', () => {
       vi.useRealTimers();
     });
 
-    it('reloads the pages of a collection when its content changes', () => {
+    it('reloads the pages of a collection when its content changes', async () => {
       vi.useFakeTimers();
       const emit = vi.fn();
       const integration = routes({ ...allFeatures(false), speakers: true, schedule: true });
 
-      integration.hooks['astro:server:setup']?.({ server: { watcher: { emit } } } as never);
+      await integration.hooks['astro:server:setup']?.({ server: { watcher: { emit } } } as never);
       const [collections, onChange] = vi.mocked(watchEmulatorContent).mock.calls[0]!;
       expect(collections).toEqual(['sessions', 'speakers']);
 

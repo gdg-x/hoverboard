@@ -134,7 +134,7 @@ export class HomePage extends ThemedComponent {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         this.blockObserver.unobserve(entry.target);
-        lazyBlocks[entry.target.localName as LazyBlock]?.();
+        void lazyBlocks[entry.target.localName as LazyBlock]?.();
       }),
   });
 

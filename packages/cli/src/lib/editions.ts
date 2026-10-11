@@ -134,7 +134,7 @@ export const previousSpeakersFor = (
       }));
     if (!talks.length) return [];
     const before = existing.get(speakerId);
-    const photoUrl = String(speaker['photoUrl'] ?? '');
+    const photoUrl = typeof speaker['photoUrl'] === 'string' ? speaker['photoUrl'] : '';
     if (/^https?:\/\//.test(photoUrl) && new URL(photoUrl).host !== host) {
       remotePhotos.push(speakerId);
     }

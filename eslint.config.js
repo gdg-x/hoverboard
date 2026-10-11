@@ -85,13 +85,35 @@ export default [
     },
     rules: {
       ...js.configs.recommended.rules,
+      // Also turns off the core rules that TypeScript already checks.
+      ...Object.assign(
+        {},
+        ...typescriptEslint.configs['flat/recommended-type-checked'].map(({ rules }) => rules),
+      ),
 
       // Disable conflicting rules
       'no-unused-vars': 'off', // Replaced by @typescript-eslint/no-unused-vars
       'preserve-caught-error': 'off',
 
       // TypeScript rules
-      '@typescript-eslint/unbound-method': 'warn',
+      '@typescript-eslint/no-deprecated': 'error',
+      '@typescript-eslint/switch-exhaustiveness-check': [
+        'error',
+        { considerDefaultExhaustiveForUnions: true },
+      ],
+      // Lit calls lifecycle methods such as `async firstUpdated()` without awaiting them.
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        { checksVoidReturn: { inheritedMethods: false } },
+      ],
+      // Not yet: about 200 existing problems to fix first.
+      '@typescript-eslint/require-await': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      // Its fixes broke the type check: it misses narrowing, e.g. `initialState as State`.
+      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {

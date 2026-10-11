@@ -189,7 +189,7 @@ export class NotificationSettings extends ThemedComponent {
 
   private readonly enable = () => {
     if (this.notificationPermission instanceof Initialized && this.online) {
-      store.dispatch(requestNotificationPermission(PROMPT_USER.YES));
+      void store.dispatch(requestNotificationPermission(PROMPT_USER.YES));
     }
     this.close();
   };

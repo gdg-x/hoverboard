@@ -236,14 +236,14 @@ export class SigninDialog extends ThemedComponent {
     if (this.auth instanceof Failure) {
       const error: ExistingAccountError = this.auth.error;
       if (error.providerId && error.credential) {
-        mergeAccounts(error.providerId, error.credential);
+        void mergeAccounts(error.providerId, error.credential);
         closeDialog();
       }
     }
   };
 
   private signIn(providerUrl: PROVIDER) {
-    signIn(providerUrl);
+    void signIn(providerUrl);
   }
 }
 

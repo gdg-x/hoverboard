@@ -212,7 +212,7 @@ export class TocMarkdown extends Markdown {
     super.connectedCallback();
     const [, id] = window.location.hash.split('#');
     if (id) {
-      this.updateComplete.then(() => this.scrollToId(id));
+      void this.updateComplete.then(() => this.scrollToId(id));
     }
   }
 

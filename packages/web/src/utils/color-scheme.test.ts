@@ -19,6 +19,7 @@ const themeColors = () =>
     meta.getAttribute('content'),
   );
 
+// eslint-disable-next-line @typescript-eslint/no-implied-eval -- runs the inline head script
 const runScript = () => new Function(colorSchemeScript)();
 
 describe('color scheme', () => {
