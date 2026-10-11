@@ -81,9 +81,13 @@ describe.each(Object.keys(HYDRATION_PAGES))('the %s', (name) => {
         .map(({ localName }) => localName),
     ).toEqual([]);
     // Without hydration, Lit renders again after the server HTML.
-    for (const [host, children] of serverRender) {
-      if (children)
-        expect(shadowChildren(host), host.localName).not.toContain(`${children} ${children}`);
-    }
+    expect(
+      [...serverRender]
+        .filter(
+          ([host, children]) =>
+            children && shadowChildren(host).includes(`${children} ${children}`),
+        )
+        .map(([host]) => host.localName),
+    ).toEqual([]);
   });
 });

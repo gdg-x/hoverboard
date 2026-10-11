@@ -132,11 +132,11 @@ describe(`a build with ${[...off].join(', ')} off`, () => {
     expect(build.chunks.filter((chunk) => offChunks.includes(chunk))).toEqual([]);
   });
 
-  it('builds the blog feed only with the blog on', () => {
-    if (off.has('blog')) {
-      expect(() => build.read('blog/rss.xml')).toThrow();
-    } else {
-      expect(build.read('blog/rss.xml')).toContain('<rss');
-    }
+  it.runIf(off.has('blog'))('leaves out the blog feed', () => {
+    expect(() => build.read('blog/rss.xml')).toThrow();
+  });
+
+  it.skipIf(off.has('blog'))('builds the blog feed', () => {
+    expect(build.read('blog/rss.xml')).toContain('<rss');
   });
 });

@@ -119,8 +119,7 @@ describe('featured session selectors', () => {
     next({ 'session-1': true });
     next({ 'session-1': true, 'session-2': true });
 
-    expect(subscribeToFeaturedSessions).toHaveBeenCalledOnce();
-    expect(subscribeToFeaturedSessions).toHaveBeenCalledWith(
+    expect(subscribeToFeaturedSessions).toHaveBeenCalledExactlyOnceWith(
       'user-1',
       expect.any(Function),
       expect.any(Function),

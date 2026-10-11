@@ -97,14 +97,13 @@ export default defineConfig([
   // Test files
   {
     files: ['**/*.test.ts', '**/__tests__/**/*.ts'],
-    plugins: {
-      vitest: vitestPlugin,
-      'testing-library': testingLibraryPlugin,
-    },
+    extends: [vitestPlugin.configs.recommended, testingLibraryPlugin.configs['flat/dom']],
     languageOptions: {
       globals: globals.node,
     },
     rules: {
+      // Vitest takes a message as the second argument.
+      'vitest/valid-expect': ['error', { maxArgs: 2 }],
       'vitest/max-expects': ['warn', { max: 10 }],
       'vitest/unbound-method': 'warn',
       // Replaced by vitest/unbound-method, which allows `expect(mock.method)`.

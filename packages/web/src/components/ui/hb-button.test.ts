@@ -7,42 +7,44 @@ import type { HbButton } from './hb-button';
 
 const render = async (template: TemplateResult) => {
   const { element, shadowRootForWithin } = await fixture<HbButton>(template);
-  return { element, view: within(shadowRootForWithin) };
+  return { element, container: shadowRootForWithin };
 };
 
 describe('hb-button', () => {
   it('renders a button with its label', async () => {
-    const { view } = await render(html`<hb-button>Save</hb-button>`);
-    const button = view.getByRole('button');
+    const { container } = await render(html`<hb-button>Save</hb-button>`);
+    const button = within(container).getByRole('button');
 
     expect(button).toHaveAttribute('type', 'button');
     expect(button).not.toHaveAttribute('aria-expanded');
-    expect(view.queryByRole('link')).toBeNull();
+    expect(within(container).queryByRole('link')).toBeNull();
   });
 
   it('renders a link with href', async () => {
-    const { view } = await render(
+    const { container } = await render(
       html`<hb-button href="https://example.com" target="_blank">Tickets</hb-button>`,
     );
-    const link = view.getByRole('link');
+    const link = within(container).getByRole('link');
 
     expect(link).toHaveAttribute('href', 'https://example.com');
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-    expect(view.queryByRole('button')).toBeNull();
+    expect(within(container).queryByRole('button')).toBeNull();
   });
 
   it('keeps same-site links without rel', async () => {
-    const { view } = await render(html`<hb-button href="/speakers">All</hb-button>`);
+    const { container } = await render(html`<hb-button href="/speakers">All</hb-button>`);
 
-    expect(view.getByRole('link')).not.toHaveAttribute('rel');
+    expect(within(container).getByRole('link')).not.toHaveAttribute('rel');
   });
 
   it('renders a disabled link as a disabled button', async () => {
-    const { view } = await render(html`<hb-button href="/tickets" disabled>Sold out</hb-button>`);
+    const { container } = await render(
+      html`<hb-button href="/tickets" disabled>Sold out</hb-button>`,
+    );
 
-    expect(view.queryByRole('link')).toBeNull();
-    expect(view.getByRole('button')).toBeDisabled();
+    expect(within(container).queryByRole('link')).toBeNull();
+    expect(within(container).getByRole('button')).toBeDisabled();
   });
 
   it('does not call click listeners when disabled', async () => {
@@ -61,14 +63,14 @@ describe('hb-button', () => {
   });
 
   it('reports whether its menu is open', async () => {
-    const { element, view } = await render(html`<hb-button>More</hb-button>`);
+    const { element, container } = await render(html`<hb-button>More</hb-button>`);
 
     element.expanded = false;
     element.haspopup = 'menu';
     await element.updateComplete;
 
-    expect(view.getByRole('button')).toHaveAttribute('aria-expanded', 'false');
-    expect(view.getByRole('button')).toHaveAttribute('aria-haspopup', 'menu');
+    expect(within(container).getByRole('button')).toHaveAttribute('aria-expanded', 'false');
+    expect(within(container).getByRole('button')).toHaveAttribute('aria-haspopup', 'menu');
   });
 
   it('reflects its variant, size and icon position for styling', async () => {
