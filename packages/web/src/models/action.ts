@@ -1,4 +1,4 @@
 export interface Action {
   title: string;
-  callback: () => void;
+  callback: () => void | Promise<void>;
 }
