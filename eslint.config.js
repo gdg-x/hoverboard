@@ -28,6 +28,8 @@ export default [
       '**/package-lock.json', // Auto-generated lockfiles
       '**/yarn.lock', // Auto-generated lockfiles
       '**/.vscode/**', // VS Code settings (often contain comments)
+      'scratch/**', // Local working documents (gitignored)
+      'firebase-export-*/**', // Emulator exports (gitignored)
     ],
   },
 
