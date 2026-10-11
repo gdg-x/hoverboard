@@ -228,7 +228,7 @@ describe('runEditionNew', () => {
     expect(projects.create).not.toHaveBeenCalled();
   });
 
-  it('creates the next edition, copies what carries over, and deploys it', async () => {
+  it('creates the next edition and deploys it', async () => {
     const result = await runEditionNew({ project: 'fest-2028', yes: true });
 
     expect(result).toMatchObject({ ok: true, to: 'fest-2028', users: 1 });
@@ -247,6 +247,13 @@ describe('runEditionNew', () => {
       expect.stringContaining('prettier'),
       'node hb deploy --yes',
     ]);
+    expect(run(repo, 'log', '-1', '--format=%s')).toBe(
+      'chore: start the 2028 edition in fest-2028',
+    );
+  });
+
+  it('copies what carries over to the next edition', async () => {
+    await runEditionNew({ project: 'fest-2028', yes: true });
 
     const [copy] = imports;
     expect(copy!.project).toBe('fest-2028');
@@ -262,6 +269,10 @@ describe('runEditionNew', () => {
       },
     );
     expect(importUsers).toHaveBeenCalledTimes(1);
+  });
+
+  it("points the site's config at the next edition", async () => {
+    await runEditionNew({ project: 'fest-2028', yes: true });
 
     expect(readJson('packages/config/site.json')).toMatchObject({
       firebase: { projectId: 'fest-2028' },
@@ -271,9 +282,6 @@ describe('runEditionNew', () => {
     expect(readJson('packages/config/content/resources.json')['attendingPage']).toEqual({
       description: 'Come',
     });
-    expect(run(repo, 'log', '-1', '--format=%s')).toBe(
-      'chore: start the 2028 edition in fest-2028',
-    );
     expect(vi.mocked(console.log).mock.calls.flat().join('\n')).toContain(
       'heroDescriptions mention 2027: home',
     );
@@ -314,10 +322,6 @@ describe('runEditionSwitch and the archived editions', () => {
 
   it('archives the previous edition, and records it', async () => {
     afterNew();
-    vi.mocked(listSchedules).mockImplementation(async (_root, projectId) =>
-      projectId === 'fest' ? [{ name: 's1', retention: '604800s', dailyRecurrence: {} }] : [],
-    );
-    vi.mocked(pitrEnabled).mockImplementation(async (_root, projectId) => projectId === 'fest');
 
     const result = await runEditionSwitch({
       archiveUrl: 'https://2027.devfest.example/',
@@ -348,22 +352,37 @@ describe('runEditionSwitch and the archived editions', () => {
       features: { blog: false, functions: false, map: true },
     });
     expect(existsSync(builds[0]!.cwd)).toBe(false);
-    expect(createSchedule).toHaveBeenCalledWith(repo, 'fest-2028', { retentionDays: 7 });
-    expect(deleteSchedule).toHaveBeenCalledWith(repo, 'fest', 's1');
-    expect(setPitr).toHaveBeenCalledWith(repo, 'fest-2028', true);
-    expect(setPitr).toHaveBeenCalledWith(repo, 'fest', false);
     expect(readJson('packages/config/editions.json')).toEqual([
       { year: 2027, tag: 'edition/2027', projectId: 'fest', url: 'https://2027.devfest.example/' },
     ]);
     expect(run(repo, 'log', '-1', '--format=%s')).toBe('chore: archive the 2027 edition');
+  });
 
-    // The archive is listed, and can be rebuilt.
+  it('moves the backups to the new edition', async () => {
+    afterNew();
+    vi.mocked(listSchedules).mockImplementation(async (_root, projectId) =>
+      projectId === 'fest' ? [{ name: 's1', retention: '604800s', dailyRecurrence: {} }] : [],
+    );
+    vi.mocked(pitrEnabled).mockImplementation(async (_root, projectId) => projectId === 'fest');
+
+    await runEditionSwitch({ archiveUrl: 'https://2027.devfest.example/', yes: true });
+
+    expect(createSchedule).toHaveBeenCalledWith(repo, 'fest-2028', { retentionDays: 7 });
+    expect(deleteSchedule).toHaveBeenCalledWith(repo, 'fest', 's1');
+    expect(setPitr).toHaveBeenCalledWith(repo, 'fest-2028', true);
+    expect(setPitr).toHaveBeenCalledWith(repo, 'fest', false);
+  });
+
+  it('lists the archived edition, and can rebuild it', async () => {
+    afterNew();
+    await runEditionSwitch({ archiveUrl: 'https://2027.devfest.example/', yes: true });
+    vi.mocked(runCommand).mockClear();
+    builds = [];
+
     expect(runEditionList()).toMatchObject({
       current: { year: 2027, projectId: 'fest-2028' },
       editions: [{ year: 2027, hoverboard: '4.0.0' }],
     });
-    vi.mocked(runCommand).mockClear();
-    builds = [];
     expect(await runEditionRebuild('2027', { yes: true })).toMatchObject({ ok: true });
     expect(builds).toHaveLength(1);
     expect(builds[0]!.env).toEqual({ FIRESTORE_TARGET: 'production', GCLOUD_PROJECT: 'fest' });

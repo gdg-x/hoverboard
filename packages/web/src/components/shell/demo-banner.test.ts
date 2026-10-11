@@ -49,19 +49,24 @@ describe('demo-banner', () => {
     }
   });
 
-  it("starts from the site's theme and spacing, with the brightness toggle", async () => {
-    const { shadowRoot, view } = await render();
+  it("starts from the site's theme", async () => {
+    const { view } = await render();
 
     expect(view.getByRole('complementary', { name: 'Demo' })).toBeInTheDocument();
     expect(view.getByText('DEMO')).toBeInTheDocument();
     expect(view.getByText('Theme')).toHaveClass('visually-hidden');
-    expect(view.getByText('Spacing')).toHaveClass('visually-hidden');
     expect(view.getByRole('combobox', { name: 'Theme' })).toHaveValue(themeName);
     expect(
       within(view.getByRole('combobox', { name: 'Theme' }))
         .getAllByRole('option')
         .map((option) => (option as HTMLOptionElement).value),
     ).toEqual(['festival', 'spotlight', 'paper', 'glass']);
+  });
+
+  it("starts from the site's spacing, with the brightness toggle", async () => {
+    const { shadowRoot, view } = await render();
+
+    expect(view.getByText('Spacing')).toHaveClass('visually-hidden');
     const spacing = within(view.getByRole('group', { name: 'Spacing' }));
     expect(spacing.getAllByRole('radio').map((radio) => radio.getAttribute('value'))).toEqual([
       'compact',
