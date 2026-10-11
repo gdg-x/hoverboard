@@ -159,11 +159,16 @@ export const createProgram = (): Command => {
         'Federation, without a service account key.',
     )
     .option('--repo <owner/name>', 'The GitHub repository. Defaults to the origin remote.')
+    .option(
+      '--project <id>',
+      'Only let the existing deploy account deploy to this project too, such as a new edition.',
+    )
     .option('--dry-run', 'Only report what would change.')
     .action(
       run(async (options) =>
         (await import('./commands/setup-github.js')).runSetupGitHub({
           ...(options['repo'] ? { repo: options['repo'] as string } : {}),
+          ...(options['project'] ? { project: options['project'] as string } : {}),
           ...(options.dryRun ? { dryRun: true } : {}),
         }),
       ),
@@ -472,6 +477,91 @@ export const createProgram = (): Command => {
   ).action(
     run(async (options) =>
       (await import('./commands/backup.js')).runBackupSchedule(options as ScheduleOptions),
+    ),
+  );
+
+  const edition = program
+    .command('edition')
+    .description(
+      'Start the next edition in a new Firebase project, and keep the earlier ones online as ' +
+        'read-only archives.',
+    );
+
+  edition
+    .command('list')
+    .description(
+      'List the archived editions in packages/config/editions.json, and the current one.',
+    )
+    .action(run(async () => (await import('./commands/edition.js')).runEditionList()));
+
+  withWrites(
+    edition
+      .command('new')
+      .description(
+        'Prepare the next edition in a new Firebase project: back up and tag this one, create the ' +
+          'project, copy what carries over, point site.json at it and deploy it. The current site ' +
+          "doesn't change.",
+      )
+      .option('--project <id>', "The next edition's Firebase project. Created when missing."),
+  ).action(
+    run(async (options) =>
+      (await import('./commands/edition.js')).runEditionNew({
+        ...(options['project'] ? { project: options['project'] as string } : {}),
+        dryRun: options.dryRun === true,
+        yes: options.yes === true,
+      }),
+    ),
+  );
+
+  withWrites(
+    edition
+      .command('switch')
+      .description(
+        'Once the domain points at the new edition, archive the previous one: copy what visitors ' +
+          'wrote since, delete its functions and what moved, deploy the archive rules and its ' +
+          'archived build, and move the backup schedule.',
+      )
+      .option('--archive-url <url>', "The archive's address. Its project's .web.app by default."),
+  ).action(
+    run(async (options) =>
+      (await import('./commands/edition.js')).runEditionSwitch({
+        ...(options['archiveUrl'] ? { archiveUrl: options['archiveUrl'] as string } : {}),
+        dryRun: options.dryRun === true,
+        yes: options.yes === true,
+      }),
+    ),
+  );
+
+  withTarget(
+    edition
+      .command('feedback')
+      .argument('[year]', 'An archived edition. The current one by default.')
+      .description(
+        "Write each session's ratings and comments to a CSV file, to send to the speakers.",
+      )
+      .option('--folder <path>', 'Where to write them. feedback-<year> by default.'),
+  ).action(
+    run(async (options, [year]) =>
+      (await import('./commands/edition.js')).runEditionFeedback(year, {
+        ...(options['folder'] ? { folder: options['folder'] as string } : {}),
+      }),
+    ),
+  );
+
+  withWrites(
+    edition
+      .command('rebuild')
+      .argument('<year>', 'The archived edition.')
+      .description(
+        'Build an archived edition again from its tag, and deploy it to its project, such as ' +
+          'after a security fix.',
+      ),
+  ).action(
+    run(async (options, [year]) =>
+      (await import('./commands/edition.js')).runEditionRebuild(year!, {
+        dryRun: options.dryRun === true,
+        yes: options.yes === true,
+      }),
     ),
   );
 

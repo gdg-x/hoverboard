@@ -56,6 +56,11 @@ describe('hb', () => {
         'backup list',
         'backup restore',
         'backup schedule',
+        'edition list',
+        'edition new',
+        'edition switch',
+        'edition feedback',
+        'edition rebuild',
       ]),
     );
     expect(names.filter((name) => name.startsWith('firestore'))).toEqual([]);
@@ -66,7 +71,7 @@ describe('hb', () => {
   });
 
   it('has --dry-run and --yes on every command that can change production', () => {
-    const readOnly = ['data export', 'backup create', 'backup list'];
+    const readOnly = ['data export', 'backup create', 'backup list', 'edition feedback'];
     for (const [name, command] of leaves(createProgram())) {
       if (!flags(command).includes('--production') || readOnly.includes(name)) continue;
       expect([name, flags(command)]).toEqual([
@@ -74,7 +79,14 @@ describe('hb', () => {
         expect.arrayContaining(['--dry-run', '--yes']),
       ]);
     }
-    for (const name of ['deploy', 'backup schedule', 'data push']) {
+    for (const name of [
+      'deploy',
+      'backup schedule',
+      'data push',
+      'edition new',
+      'edition switch',
+      'edition rebuild',
+    ]) {
       expect(flags(leaves(createProgram()).find(([leaf]) => leaf === name)![1])).toEqual(
         expect.arrayContaining(['--dry-run', '--yes']),
       );

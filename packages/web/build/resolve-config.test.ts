@@ -7,7 +7,7 @@ import { FEATURES, type Feature } from '../src/config/features';
 import { festival } from '../src/themes/festival';
 import { THEMES } from '../src/themes/index';
 import { COLOR_ROLES } from '../src/themes/tokens';
-import { ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
+import { ARCHIVE_OFF, ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
 import {
   buildMarkdown,
   customCss,
@@ -166,6 +166,20 @@ describe('config validation', () => {
 
   describe('attendance', () => {
     const stream = 'https://www.youtube.com/@example/live';
+
+    it('needs the features that write off in an archived edition', () => {
+      const archive = { year: 2027, current: 'https://devfest.example/' };
+      expect(errorsFor({ site: { archive } })).toEqual(
+        ARCHIVE_OFF.map(
+          (feature) => `site.json/features/${feature}: must be off in an archived edition`,
+        ),
+      );
+      const off = Object.fromEntries(ARCHIVE_OFF.map((feature) => [feature, false]));
+      expect(errorsFor({ site: { archive, features: off } })).toEqual([]);
+      expect(errorsFor({ site: { archive: { year: 2027 } } })).toEqual([
+        "site.json/archive: must have required property 'current'",
+      ]);
+    });
 
     it('is in person by default', () => {
       const { site } = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });

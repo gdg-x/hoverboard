@@ -2,7 +2,8 @@ import { execFile } from 'child_process';
 import { resolveFirebaseBin } from './firebase-cli.js';
 
 // Backups through the Firebase CLI: Firestore backup schedules and point-in-time recovery, and the
-// Auth users, which the Admin SDK can list but not export with their password hashes.
+// Auth users, which the Admin SDK can list but not export with their password hashes. Also the
+// (default) database, which a new edition creates in the location of the current one.
 
 /** An Auth user, as `firebase auth:export --format=json` writes it. */
 export interface AuthUser {
@@ -104,6 +105,34 @@ export const listManagedBackups = async (
       'firestore:backups:list',
     ])
   ).backups ?? [];
+
+/** The location of the (default) database, such as `eur3`, or undefined when there is none. */
+export const databaseLocation = async (
+  repoRoot: string,
+  projectId: string,
+): Promise<string | undefined> => {
+  try {
+    return (
+      await firebaseJson<Database>(repoRoot, projectId, ['firestore:databases:get', DATABASE])
+    ).locationId;
+  } catch {
+    return undefined;
+  }
+};
+
+/** Creates the (default) database. Its location can't change later. */
+export const createDatabase = async (
+  repoRoot: string,
+  projectId: string,
+  location: string,
+): Promise<void> => {
+  await firebaseJson(repoRoot, projectId, [
+    'firestore:databases:create',
+    DATABASE,
+    '--location',
+    location,
+  ]);
+};
 
 /** Whether point-in-time recovery is on for the (default) database. */
 export const pitrEnabled = async (repoRoot: string, projectId: string): Promise<boolean> =>

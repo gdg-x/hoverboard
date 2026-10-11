@@ -3,6 +3,7 @@ import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { archive } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import { openPartnerDialog } from '../../store/dialogs';
 import { type PartnerGroupsState, selectPartnerGroups } from '../../store/partners';
@@ -73,15 +74,19 @@ export class PartnersBlock extends ThemedComponent {
       <div class="inner">
         <div class="band-header">
           <h2 class="band-title">${msg('Partners', { id: 'home.partners-block.title' })}</h2>
-          <hb-button
-            variant="outlined"
-            class="cta-button"
-            trailing-icon
-            @click="${openPartnerDialog}"
-          >
-            ${msg('Become a partner', { id: 'home.partners-block.cta' })}
-            <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-          </hb-button>
+          ${
+            archive
+              ? nothing
+              : html`<hb-button
+                  variant="outlined"
+                  class="cta-button"
+                  trailing-icon
+                  @click="${openPartnerDialog}"
+                >
+                  ${msg('Become a partner', { id: 'home.partners-block.cta' })}
+                  <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+                </hb-button>`
+          }
         </div>
 
         ${

@@ -2,6 +2,7 @@ import { Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { archive } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import { type Reaction, REACTION_EMOJI, REACTIONS, type ReactionId } from '../../models/reaction';
 import type { Session } from '../../models/session';
@@ -165,6 +166,8 @@ export class SessionReactions extends ThemedComponent {
 
   override updated(changed: PropertyValues) {
     if (changed.has('session') && this.hasUpdated) this.watch();
+    // An archive's profiles moved to the current edition, so its reactions show counts only.
+    if (archive) return;
     if (changed.has('bySession') || changed.has('session')) watchProfiles(this.namedReactors());
   }
 
@@ -217,10 +220,18 @@ export class SessionReactions extends ThemedComponent {
 
     return html`
       ${counts.map(({ reaction, reactors }) => {
-        const names = reactors
-          .slice(0, NAMED)
-          .flatMap(({ userId }) => this.profiles[userId]?.name ?? []);
+        const names = archive
+          ? []
+          : reactors.slice(0, NAMED).flatMap(({ userId }) => this.profiles[userId]?.name ?? []);
         const label = reactorsLabel(reaction, names, reactors.length);
+        if (archive) {
+          return html`
+            <span class="chip" role="img" aria-label="${label}" title="${label}">
+              <span aria-hidden="true">${REACTION_EMOJI[reaction]}</span>
+              <span aria-hidden="true">${reactors.length}</span>
+            </span>
+          `;
+        }
         const mine = this.own.includes(reaction);
         const closed = !this.open && !mine;
         return html`
@@ -238,7 +249,7 @@ export class SessionReactions extends ThemedComponent {
           </button>
         `;
       })}
-      ${this.open ? this.renderPicker() : nothing}
+      ${this.open && !archive ? this.renderPicker() : nothing}
     `;
   }
 

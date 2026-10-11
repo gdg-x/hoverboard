@@ -35,6 +35,8 @@ export type Venue = SiteJson['event']['location'];
 type Site = Omit<SiteJson, 'event'> & {
   url: string;
   heroSettings?: HeroSettings;
+  /** Set on an archived edition, which is read-only. */
+  archive?: { year: number; current: string };
   event: Omit<SiteJson['event'], 'attendance' | 'location'> & {
     attendance: Attendance;
     stream?: string;
@@ -236,6 +238,18 @@ const FEATURE_PATHS: Record<string, Feature> = {
   team: 'team',
 };
 
+/** Features an archived edition has off: the ones that write, and the blog, which moves on. */
+export const ARCHIVE_OFF = [
+  'blog',
+  'demo',
+  'feedback',
+  'forkMe',
+  'functions',
+  'mySchedule',
+  'notifications',
+  'subscribe',
+] as const satisfies readonly Feature[];
+
 const featureErrors = (site: Site, resources: Resources): string[] => {
   const { features } = site;
   const errors = FEATURES.flatMap((feature) =>
@@ -258,6 +272,13 @@ const featureErrors = (site: Site, resources: Resources): string[] => {
     if (!site.event.stream) {
       errors.push('site.json/event/stream: an online event needs a link to watch it');
     }
+  }
+  if (site.archive) {
+    errors.push(
+      ...ARCHIVE_OFF.filter((feature) => features[feature]).map(
+        (feature) => `site.json/features/${feature}: must be off in an archived edition`,
+      ),
+    );
   }
 
   const links: [string, string][] = [

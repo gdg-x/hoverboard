@@ -31,6 +31,10 @@ Do these once when you set up a site, and check them again before the event.
    - **Actions** > **General**: set the workflow permissions to read, and turn off "Allow GitHub Actions to create and approve pull requests" unless you use release-please.
    - **Rules**: add a ruleset for `main` that requires a pull request and the `build`, `test` and `lint` checks, and blocks force pushes.
 
+## Archived editions
+
+An [archived edition](07-next-edition.md) keeps its sessions, speakers, feedback and reactions in its own project, with read-only Firestore rules: only its content and the reactions can be read, and nothing can be written. Its Auth users, profiles, push tokens and saved sessions are deleted. Its `subscribers` and `potentialPartners`, and feedback, stay there until you delete them. `./hb edition switch` backs up the project first, and the backup in `.firebase/backups` holds all of it.
+
 ## What `./hb doctor` checks
 
 - Your Node.js version, Firebase login, project and site config.

@@ -9,6 +9,7 @@
 - [Deploy](tutorials/04-deploy.md)
 - [Notifications](tutorials/05-notifications.md)
 - [Security](tutorials/06-security.md)
+- [Next edition](tutorials/07-next-edition.md)
 - [Firestore utils](tutorials/firebase-utils.md)
 
 ## Maintainers

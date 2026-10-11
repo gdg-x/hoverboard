@@ -129,6 +129,15 @@ export default defineConfig({
         },
       },
       {
+        test: {
+          name: 'Smoke (archive)',
+          environment: 'node',
+          include: ['packages/web/build/archive.smoke.test.ts'],
+          testTimeout: BUILD_TIMEOUT,
+          hookTimeout: BUILD_TIMEOUT,
+        },
+      },
+      {
         // Renders components with Lit SSR, as the build does. `isServer` is true here.
         plugins: [decorators(), siteModule(siteConfig, pluginPaths)],
         test: {
