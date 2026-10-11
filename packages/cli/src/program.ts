@@ -1,4 +1,5 @@
 import { Command, CommanderError } from 'commander';
+import type { ScheduleOptions } from './commands/backup.js';
 import type { DataCheckOptions } from './commands/data-check.js';
 import type { InitOptions } from './commands/init/index.js';
 import { type CommandResult, UsageError } from './lib/command.js';
@@ -322,14 +323,89 @@ export const createProgram = (): Command => {
       )
       .option('--fix', 'Run the pending migrations and the safe fixes.')
       .option('--dry-run', 'With --fix, show the changes without writing them.')
-      .option('-y, --yes', 'With --fix or --restore, change production without asking.')
-      .option(
-        '--restore <folder>',
-        'Write back the documents a --fix backed up, from .firebase/backups.',
-      ),
+      .option('-y, --yes', 'With --fix, change production without asking.'),
   ).action(
     run(async (options) =>
       (await import('./commands/data-check.js')).runDataCheck(options as DataCheckOptions),
+    ),
+  );
+
+  const backup = program
+    .command('backup')
+    .description(
+      'Back up and restore the Firestore data and the Auth users, and schedule backups in ' +
+        'Firestore.',
+    );
+
+  withTarget(
+    backup
+      .command('create')
+      .description(
+        'Back up every Firestore document to .firebase/backups/<time>, and on production the ' +
+          'Auth users.',
+      )
+      .option('--no-auth', 'Leave out the Auth users.'),
+  ).action(
+    run(async (options) =>
+      (await import('./commands/backup.js')).runBackupCreate({ auth: options['auth'] !== false }),
+    ),
+  );
+
+  withTarget(
+    backup
+      .command('list')
+      .description(
+        'List the backups in .firebase/backups and, with --production, the schedules and the ' +
+          'backups in Firestore.',
+      ),
+  ).action(run(async () => (await import('./commands/backup.js')).runBackupList()));
+
+  withWrites(
+    withTarget(
+      backup
+        .command('restore')
+        .argument(
+          '<backup>',
+          'A folder, or its name in .firebase/backups. For a backup in Firestore, its name ' +
+            '(projects/…/backups/…) prints the steps.',
+        )
+        .description(
+          'Write a backup back, as it is: replace the collections a full backup has, or undo ' +
+            'the changes of a fix, import or restore. Backs up what it replaces first. On ' +
+            'production, adds the Auth users the project no longer has.',
+        )
+        .option('--no-auth', "Don't restore the Auth users.")
+        .option('--overwrite-users', 'Also replace the Auth users that exist.'),
+    ),
+  ).action(
+    run(async (options, [name]) =>
+      (await import('./commands/backup.js')).runBackupRestore(name!, {
+        dryRun: options.dryRun === true,
+        yes: options.yes === true,
+        auth: options['auth'] !== false,
+        overwriteUsers: options['overwriteUsers'] === true,
+      }),
+    ),
+  );
+
+  withWrites(
+    backup
+      .command('schedule')
+      .description(
+        'Back up the production database on a schedule, in Firestore. Needs the Blaze plan, ' +
+          'and the backups are billed for storage.',
+      )
+      .option('--daily', 'Back up every day.')
+      .option('--weekly [day]', 'Back up every week, on Sunday or the day given.')
+      .option(
+        '--retention <days>',
+        'Days to keep each backup: up to 7 for daily, 98 for weekly. 7 or 28 by default.',
+      )
+      .option('--pitr', 'Also turn on point-in-time recovery, for the last 7 days.')
+      .option('--disable', 'Delete the schedules, and turn point-in-time recovery off.'),
+  ).action(
+    run(async (options) =>
+      (await import('./commands/backup.js')).runBackupSchedule(options as ScheduleOptions),
     ),
   );
 

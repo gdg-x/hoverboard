@@ -20,6 +20,10 @@ vi.mock('../lib/deployed-functions.js', () => ({
 vi.mock('../lib/database-instances.js', () => ({
   listDatabaseInstances: listDatabaseInstancesMock,
 }));
+vi.mock('../lib/firebase-backups.js', () => ({
+  listSchedules: vi.fn(async () => []),
+  describeSchedule: vi.fn(),
+}));
 
 const gen2 = (id: string) => ({ id, region: 'us-central1', platform: 'gcfv2' });
 
@@ -119,7 +123,7 @@ describe('runDoctor', () => {
     const text = output.join('');
     expect(text).toContain('\u2026 Node.js version');
     expect(text).toContain('\x1b[0J');
-    expect(output.at(-2)).toContain('Firestore backups:');
+    expect(output.at(-2)).toContain('Scheduled backups:');
   });
 
   it('runs up to 4 checks at once, and prints the results in order', async () => {
@@ -153,6 +157,7 @@ describe('runDoctor', () => {
       'Service accounts',
       'Browser API key',
       'Firestore backups',
+      'Scheduled backups',
     ]);
   });
 });

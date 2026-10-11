@@ -13,7 +13,7 @@ const backupTime = (folder: string): number | undefined => {
   return match ? Date.parse(`${match[1]}T${match[2]}:${match[3]}:${match[4]}Z`) : undefined;
 };
 
-/** Warns about backups from `hb data check --fix` and `hb data import` older than 30 days. */
+/** Warns about backups in .firebase/backups older than 30 days, which can hold personal data. */
 export const checkFirestoreBackups = (
   repoRoot: string | undefined,
   now = Date.now(),
@@ -23,7 +23,7 @@ export const checkFirestoreBackups = (
     return {
       name,
       ok: true,
-      message: 'No backups from `./hb data check --fix` or `./hb data import`.',
+      message: `No backups in ${BACKUPS_PATH}.`,
     };
   }
   const old = readdirSync(folder)
@@ -38,6 +38,6 @@ export const checkFirestoreBackups = (
     warning: true,
     message:
       `${old.length} ${old.length === 1 ? 'backup is' : 'backups are'} older than ${MAX_AGE_DAYS} days, ` +
-      `the oldest from ${old[0]!.entry.slice(0, 10)}. Delete them once the fixes and imports they undo are checked:\n  ${commands}`,
+      `the oldest from ${old[0]!.entry.slice(0, 10)}. They can hold personal data. Delete the ones you no longer need:\n  ${commands}`,
   };
 };

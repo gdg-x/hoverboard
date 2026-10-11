@@ -34,6 +34,10 @@ export interface ImportOptions {
   yes?: boolean;
   /** Leaves documents out, such as those of features that are off. */
   include?: (path: string) => boolean;
+  /** Writes the documents as they are, without migrations or checks, as a restore does. */
+  exact?: boolean;
+  /** Also deletes these documents, such as the ones a backed up change created. */
+  deletes?: string[];
   /** The command for the backup's manifest. */
   command?: string;
 }
@@ -129,7 +133,11 @@ const capitalize = (text: string) => `${text[0]!.toUpperCase()}${text.slice(1)}`
 export const planImport = (
   documents: FirestoreDocument[],
   existing: FirestoreDocument[],
-  { replace = false, include = () => true }: Pick<ImportOptions, 'replace' | 'include'> = {},
+  {
+    replace = false,
+    include = () => true,
+    deletes = [],
+  }: Pick<ImportOptions, 'replace' | 'include' | 'deletes'> = {},
 ): ImportPlan => {
   const now = new Map(
     existing.filter(({ raw }) => raw).map((document) => [document.path, document]),
@@ -156,11 +164,14 @@ export const planImport = (
       plan.writes.push(document);
     }
   }
-  if (replace) {
+  if (replace || deletes.length) {
     const imported = new Set(documents.map(({ path }) => path));
+    const listed = new Set(deletes);
     for (const document of now.values()) {
-      if (imported.has(document.path) || !entries.has(entryFor(document.path))) continue;
-      if (!include(document.path)) continue;
+      if (imported.has(document.path) || !include(document.path)) continue;
+      if (!listed.has(document.path) && !(replace && entries.has(entryFor(document.path)))) {
+        continue;
+      }
       count(document.path, 'deleted');
       plan.replaced.push(document);
       plan.deletes.push(document);
@@ -204,20 +215,30 @@ const readSite = (repoRoot: string) =>
  */
 export const runDataImport = async (
   folder: string,
+  options: ImportOptions = {},
+): Promise<CommandResult | false> => {
+  const source = resolve(process.env['INIT_CWD'] ?? process.cwd(), folder);
+  return importDocuments(readExport(source).documents, source, options);
+};
+
+/** Imports documents in the export format, from `source`, as {@link runDataImport} does. */
+export const importDocuments = async (
+  exported: ExportDocument[],
+  source: string,
   {
     collection = [],
     replace = false,
     dryRun = false,
     yes = false,
     include = () => true,
+    exact = false,
+    deletes = [],
     command = 'hb data import',
   }: ImportOptions = {},
 ): Promise<CommandResult | false> => {
   const repoRoot = findRepoRoot(process.cwd()) ?? process.cwd();
-  const source = resolve(process.env['INIT_CWD'] ?? process.cwd(), folder);
   const projectId = productionProjectId(repoRoot);
   const target = projectId ?? 'the emulator';
-  const { documents: exported } = readExport(source);
   const { firestore } = await import('../lib/firestore.js');
 
   const toDocument = ({ path, data }: ExportDocument) =>
@@ -228,14 +249,15 @@ export const runDataImport = async (
       (!collection.length || collection.some((requested) => inPath(path, requested))),
   );
   // Migrations need every document, so they don't run for part of an export.
-  const migrated = collection.length
-    ? {
-        documents: selected.map(toDocument),
-        site: readSite(repoRoot),
-        siteChanged: false,
-        applied: [],
-      }
-    : migrate(selected.map(toDocument), readSite(repoRoot));
+  const migrated =
+    collection.length || exact
+      ? {
+          documents: selected.map(toDocument),
+          site: readSite(repoRoot),
+          siteChanged: false,
+          applied: [],
+        }
+      : migrate(selected.map(toDocument), readSite(repoRoot));
   for (const { migration, lines, warnings } of migrated.applied) {
     console.log(`Migration ${migration.id}: ${migration.description}`);
     for (const line of lines) console.log(`  ${line}`);
@@ -243,18 +265,24 @@ export const runDataImport = async (
   }
 
   const tracks = (migrated.site['schedule'] as { tracks?: Track[] } | undefined)?.tracks ?? [];
-  const problems = importProblems(migrated.documents, tracks);
+  const problems = exact ? [] : importProblems(migrated.documents, tracks);
   if (problems.length) {
     for (const problem of problems) console.log(`✘ ${problem}`);
     console.log(`\n✘ Nothing was imported: ${source} has ${problems.length} problems.`);
     return false;
   }
 
-  const roots = [...new Set(migrated.documents.map(({ path }) => path.split('/')[0]!))];
+  const roots = [
+    ...new Set(
+      [...migrated.documents.map(({ path }) => path), ...deletes].map(
+        (path) => path.split('/')[0]!,
+      ),
+    ),
+  ];
   const existing = (
     await Promise.all(roots.map((root) => listAllDocuments(firestore, root)))
   ).flat();
-  const plan = planImport(migrated.documents, existing, { replace, include });
+  const plan = planImport(migrated.documents, existing, { replace, include, deletes });
   console.log(`Import ${source} into ${target}:`);
   for (const [entry, counts] of Object.entries(plan.counts).sort()) {
     console.log(countLine(entry, counts));
@@ -315,7 +343,7 @@ export const runDataImport = async (
   }
   if (backup) {
     console.log(
-      `  What it replaced is in ${backup}. Undo with: ./hb data check --restore ${backup}${projectId ? ' --production' : ''}`,
+      `  What it replaced is in ${backup}. Undo with: ./hb backup restore ${backup}${projectId ? ' --production' : ''}`,
     );
   }
   return { ...result, ...(backup ? { backup } : {}) };

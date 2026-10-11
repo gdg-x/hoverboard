@@ -5,14 +5,13 @@ import { FieldPath, FieldValue, type Firestore, Timestamp } from 'firebase-admin
 import { afterEach, describe, expect, it } from 'vitest';
 import type { FirestoreDocument } from '../migrations/index.js';
 import { SITE_CONFIG_PATH } from '../utils/firebase-project.js';
-import { readExport, writeExport } from './data-format.js';
+import { readExport } from './data-format.js';
 import {
   applyFixes,
   backupFolderFor,
   backupName,
   formatPlan,
   planFixes,
-  restoreBackup,
   shownPath,
 } from './firestore-fix.js';
 
@@ -33,6 +32,7 @@ const makeRepo = () => {
 /** A backup's documents by path, and the documents it created. */
 const readBackup = (folder: string) => {
   const { manifest, documents } = readExport(folder);
+  expect(manifest.scope).toBe('changes');
   return {
     documents: Object.fromEntries(documents.map(({ path, data }) => [path, data])),
     created: manifest.created,
@@ -277,51 +277,6 @@ describe('applyFixes', () => {
     expect(JSON.parse(readFileSync(join(repo, SITE_CONFIG_PATH), 'utf8'))).toEqual({
       schedule: { tracks: [{ id: 'main', title: 'Main' }] },
     });
-  });
-});
-
-describe('restoreBackup', () => {
-  it('writes back the documents as they were, and deletes the created ones', async () => {
-    const repo = makeRepo();
-    const folder = join(repo, 'backup');
-    writeExport(
-      folder,
-      [{ path: 'sessions/101', data: { at: { $timestamp: '1970-01-01T00:00:00.000000123Z' } } }],
-      {
-        hoverboard: '4.0.0',
-        projectId: 'demo-hoverboard',
-        createdAt: '2027-10-15T09:00:00.000Z',
-        command: 'hb data check --fix',
-        created: ['sessions/101-2'],
-      },
-    );
-    const { firestore, writes } = fakeFirestore();
-
-    expect(await restoreBackup(firestore, folder)).toBe(2);
-    expect(writes).toEqual([
-      ['set', 'sessions/101', { at: new Timestamp(0, 123) }],
-      ['delete', 'sessions/101-2'],
-    ]);
-  });
-
-  it('reads the documents.json of backups from before the data format', async () => {
-    const repo = makeRepo();
-    const folder = join(repo, 'backup');
-    mkdirSync(folder);
-    writeFileSync(
-      join(folder, 'documents.json'),
-      JSON.stringify({
-        documents: { 'sessions/101': { at: { $timestamp: '1970-01-01T00:00:00.001Z' } } },
-        created: ['sessions/101-2'],
-      }),
-    );
-    const { firestore, writes } = fakeFirestore();
-
-    expect(await restoreBackup(firestore, folder)).toBe(2);
-    expect(writes).toEqual([
-      ['set', 'sessions/101', { at: Timestamp.fromMillis(1) }],
-      ['delete', 'sessions/101-2'],
-    ]);
   });
 });
 

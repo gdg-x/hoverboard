@@ -16,7 +16,13 @@ import { confirmChange } from '../lib/prompt.js';
 import { setTarget } from '../lib/target.js';
 import type { FirestoreDocument } from '../migrations/index.js';
 import { listAllDocuments } from './data-check.js';
-import { importProblems, migrate, planImport, runDataImport } from './data-import.js';
+import {
+  importDocuments,
+  importProblems,
+  migrate,
+  planImport,
+  runDataImport,
+} from './data-import.js';
 
 const { writer, firestore } = vi.hoisted(() => {
   const writer = {
@@ -128,7 +134,8 @@ describe('runDataImport', () => {
     const { manifest, documents } = readExport(backup!);
     expect(documents).toEqual([{ path: 'team/grace', data: team('Grace') }]);
     expect(manifest.created).toEqual(['team/ada']);
-    expect(output()).toContain(`Undo with: ./hb data check --restore .firebase/backups/`);
+    expect(manifest.scope).toBe('changes');
+    expect(output()).toContain(`Undo with: ./hb backup restore .firebase/backups/`);
   });
 
   it('also deletes what the export lacks in its collections with replace', async () => {
@@ -238,6 +245,42 @@ describe('planImport', () => {
     );
 
     expect(plan.deletes.map(({ path }) => path)).toEqual(['team/old']);
+  });
+
+  it('also deletes the listed documents that exist', () => {
+    const plan = planImport(
+      [doc('team/ada', team('Ada'))],
+      [doc('team/kept', team('Kept')), doc('sessions/101', { title: 'Talk' })],
+      { deletes: ['sessions/101', 'sessions/gone'] },
+    );
+
+    expect(plan.deletes.map(({ path }) => path)).toEqual(['sessions/101']);
+    expect(plan.counts['sessions']).toMatchObject({ deleted: 1 });
+  });
+});
+
+describe('importDocuments', () => {
+  it('writes the documents as they are when exact, without migrations or checks', async () => {
+    existing([doc('team/new', team('New'))]);
+    const schedule = {
+      date: '2027-10-15',
+      tracks: [{ title: 'Main' }],
+      timeslots: [],
+    };
+
+    const result = await importDocuments(
+      [
+        { path: 'schedule/2027-10-15', data: schedule },
+        { path: 'team/ada', data: { title: 'Ada', unknown: true } },
+      ],
+      'backup',
+      { exact: true, deletes: ['team/new'] },
+    );
+
+    expect(result).toMatchObject({ ok: true, written: 2, deleted: 1 });
+    expect(writer.set).toHaveBeenCalledWith({ path: 'schedule/2027-10-15' }, schedule);
+    expect(deleted()).toEqual(['team/new']);
+    expect(output()).not.toContain('Migration');
   });
 });
 

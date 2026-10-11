@@ -5,15 +5,7 @@ import { collectionInfo, pathPattern } from '../../../storage/collections.js';
 import type { FirestoreDocument, Migration, MigrationPlan } from '../migrations/index.js';
 import { pendingMigrations } from '../migrations/index.js';
 import { DEMO_PROJECT_ID, SITE_CONFIG_PATH } from '../utils/firebase-project.js';
-import {
-  type ExportDocument,
-  addToBackup,
-  decode,
-  encode,
-  isExport,
-  readExport,
-  versions,
-} from './data-format.js';
+import { addToBackup, encode, versions } from './data-format.js';
 import { DELETE, type FieldFix, NOW, documentFixes, fieldUpdates } from './fixes.js';
 import { runCommand } from './spawn.js';
 
@@ -235,34 +227,6 @@ export const applyFixes = async ({
     );
   }
   return result;
-};
-
-const readBackup = (folder: string): { documents: ExportDocument[]; created: string[] } => {
-  if (isExport(folder)) {
-    const { manifest, documents } = readExport(folder);
-    return { documents, created: manifest.created ?? [] };
-  }
-  const legacy = JSON.parse(readFileSync(join(folder, 'documents.json'), 'utf8')) as {
-    documents: Record<string, Record<string, unknown>>;
-    created: string[];
-  };
-  return {
-    documents: Object.entries(legacy.documents).map(([path, data]) => ({ path, data })),
-    created: legacy.created,
-  };
-};
-
-/**
- * Writes back the documents in a backup, and deletes the ones the fix or import created. Reads
- * the data format, and the `documents.json` of backups from before it.
- */
-export const restoreBackup = async (firestore: Firestore, folder: string): Promise<number> => {
-  const { documents, created } = readBackup(folder);
-  for (const { path, data } of documents) {
-    await firestore.doc(path).set(decode(firestore, data) as Record<string, unknown>);
-  }
-  for (const path of created) await firestore.doc(path).delete();
-  return documents.length + created.length;
 };
 
 /** The backup folder for a fix that starts now, relative to the repository for messages. */

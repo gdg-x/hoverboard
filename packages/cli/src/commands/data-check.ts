@@ -15,7 +15,6 @@ import {
   backupFolderFor,
   formatPlan,
   planFixes,
-  restoreBackup,
   shownPath,
 } from '../lib/firestore-fix.js';
 import { UsageError } from '../lib/command.js';
@@ -272,10 +271,8 @@ export interface DataCheckOptions {
   fix?: boolean;
   /** With `fix`, show the changes without writing them. */
   dryRun?: boolean;
-  /** With `fix` or `restore`, don't ask before changing production. */
+  /** With `fix`, don't ask before changing production. */
   yes?: boolean;
-  /** A backup folder from an earlier `--fix` to write back. */
-  restore?: string;
 }
 
 /** Asks before production changes. The emulator changes without asking. */
@@ -292,22 +289,12 @@ export const runDataCheck = async ({
   fix = false,
   dryRun = false,
   yes = false,
-  restore,
 }: DataCheckOptions = {}): Promise<boolean> => {
   if (dryRun && !fix) throw new UsageError('--dry-run only applies with --fix.');
   const repoRoot = findRepoRoot(process.cwd()) ?? process.cwd();
   const projectId = productionProjectId(repoRoot);
   const target = projectId ?? 'the emulator';
   const { firestore } = await import('../lib/firestore.js');
-
-  if (restore) {
-    if (!(await allowed(projectId, yes, `Write back the documents in ${restore} to ${target}?`))) {
-      return false;
-    }
-    const count = await restoreBackup(firestore, restore);
-    console.log(`✔ Restored ${plural(count, 'document')} from ${restore}.`);
-    return true;
-  }
 
   const timeZone = siteTimeZone(join(repoRoot, SITE_CONFIG_PATH));
   const list = () => listAllDocuments(firestore, collection);
@@ -338,7 +325,7 @@ export const runDataCheck = async ({
         });
         console.log(
           `\n✔ Wrote ${plural(result.written, 'document')}. The documents as they were are in ${shown}. ` +
-            `Undo with: ./hb data check --restore ${shown}${projectId ? ' --production' : ''}`,
+            `Undo with: ./hb backup restore ${shown}${projectId ? ' --production' : ''}`,
         );
         for (const path of result.skipped) {
           console.log(

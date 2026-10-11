@@ -1,6 +1,6 @@
 # Firestore Utils
 
-The `./hb data` commands seed, check, fix, export and import the site's Firestore data. See the examples below.
+The `./hb data` commands seed, check, fix, export and import the site's Firestore data, and the `./hb backup` commands back it up and restore it. See the examples below.
 
 They use the local [Firestore emulator](https://firebase.google.com/docs/emulator-suite) (started by `npm start` or `./hb emulators`), so they never touch your live project's data. Add `--production` to use production Firestore instead, for example `./hb data seed --production`. It signs in with your Firebase CLI login (`npx firebase login`) and uses the project set as `firebase.projectId` in `packages/config/site.json`.
 
@@ -84,13 +84,13 @@ Also delete the `config/schedule` document. `schedule.published` in `site.json` 
 
 ### Backups and undo
 
-Before it changes a document, `--fix` saves it as it was in `.firebase/backups/<date>/`, in the [export format](#export-and-import). `data import` does the same before it replaces or deletes documents. Git ignores the folder. To undo a fix or an import:
+Before it changes a document, `--fix` saves it as it was in `.firebase/backups/<date>/`, in the [export format](#export-and-import). `data import` and `backup restore` do the same before they replace or delete documents. Git ignores the folder. To undo a fix or an import:
 
 ```console
-./hb data check --production --restore .firebase/backups/<date>
+./hb backup restore .firebase/backups/<date> --production
 ```
 
-It writes back each document as it was, and deletes the documents the fix or import created, such as the session copies a migration makes. Edits made since are lost in those documents. It doesn't undo a change to `site.json`. Use `git checkout packages/config/site.json` for that.
+It writes back each document as it was, and deletes the documents the fix or import created, such as the session copies a migration makes. Edits made since are lost in those documents. It doesn't undo a change to `site.json`. Use `git checkout packages/config/site.json` for that. See [Back up and restore](#back-up-and-restore).
 
 Backups hold your content, and the visitor documents a fix changed or deleted, such as push tokens and emails. `./hb doctor` warns about backups older than 30 days. Delete them once the fixes are checked.
 
@@ -168,3 +168,41 @@ For example, to work on the live site's content locally:
 ```
 
 To copy a collection to another project, export it, change `firebase.projectId`, and import it.
+
+## Back up and restore
+
+```console
+./hb backup create --production
+./hb backup list --production
+./hb backup restore .firebase/backups/<date> --production
+```
+
+`backup create` saves every Firestore document, including collections Hoverboard doesn't use, to `.firebase/backups/<date>/` in the [export format](#export-and-import). On production, it also saves the Auth users to `auth/users.json` with `firebase auth:export`. `--no-auth` leaves them out. The emulator's users aren't backed up. The backup holds personal data, such as emails and push tokens. Keep it private.
+
+`backup list` shows the backups in `.firebase/backups`: the full ones from `backup create`, and the changes that `--fix`, `data import` and `backup restore` saved. With `--production`, it also shows the scheduled backups in Firestore, and whether point-in-time recovery is on.
+
+`backup restore` takes a backup's folder, or its name in `.firebase/backups`:
+
+- It writes the documents back as they are, without migrations or checks.
+- A full backup replaces the collections it has: documents added since are deleted. A backup of changes writes back what changed, and deletes what the change created.
+- It shows what it will write and delete, and saves what it replaces first, so the restore can be undone too. `--dry-run` only shows it.
+- On production, it adds the Auth users the project no longer has. Users that still exist are kept, unless `--overwrite-users`, which saves them first. Users with a password are left out, since importing them needs the project's password hash settings (verify): import them with `npx firebase auth:import` and the `--hash-algo` options from the Firebase console. `--no-auth` skips the users.
+
+### Scheduled backups
+
+Firestore can back up the production database on a schedule, and keep each backup for a time. It needs the Blaze plan. Backups and point-in-time recovery are billed for storage, with no free usage ([pricing](https://firebase.google.com/docs/firestore/pricing)).
+
+```console
+./hb backup schedule --daily
+./hb backup schedule --weekly monday --retention 56 --pitr
+./hb backup schedule --disable
+```
+
+- `--daily` keeps each backup 7 days, and `--weekly` 28 days, on Sunday unless you name a day. `--retention` sets the days: up to 7 for daily backups, and 98 for weekly ones (verify).
+- `--pitr` also turns on point-in-time recovery, which keeps every version of the data for 7 days.
+- It keeps a schedule that already matches, and replaces the others. `--disable` deletes the schedules and turns point-in-time recovery off.
+- It always uses the project in `site.json`, shows the change and asks first. `--dry-run` only shows it.
+
+`./hb doctor` warns when the project has no schedule.
+
+Firestore restores a scheduled backup into a new database, not the one the site uses. `./hb backup restore projects/<project>/locations/<location>/backups/<id>` prints the steps, with the backup names from `backup list --production` (verify).

@@ -40,7 +40,8 @@ Do these once when you set up a site, and check them again before the event.
 - The GitHub deploy setup and its roles, as `./hb setup-github` sets them.
 - Service account keys, and old `github-action-*` accounts.
 - The browser API key and the Maps key: which sites and APIs they allow.
-- Backups from `./hb data check --fix` and `./hb data import` older than 30 days. They hold your content.
+- Backups in `.firebase/backups` older than 30 days. They hold your content, and can hold personal data.
+- A Firestore backup schedule on the production database. See [Scheduled backups](firebase-utils.md#scheduled-backups).
 
 Each problem comes with what to change. Some checks need an API turned on in your project, and say so.
 

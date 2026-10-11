@@ -32,6 +32,13 @@ export interface Manifest {
   collections: Record<string, ManifestEntry>;
   /** In a backup, documents that didn't exist before, which a restore deletes. */
   created?: string[];
+  /**
+   * In a backup, what it holds: `all` the data, from `hb backup create`, or the `changes` a fix or
+   * an import made. A restore replaces everything in the first, and only what changed in the other.
+   */
+  scope?: 'all' | 'changes';
+  /** The Auth users, from `firebase auth:export`. They're personal data. */
+  auth?: { file: string; users: number };
 }
 
 /** A document as JSON, with Firestore types tagged as {@link encode} writes them. */
@@ -196,8 +203,12 @@ export const writeExport = (
     };
   }
   const manifest: Manifest = { format: FORMAT, ...meta, collections };
-  writeFileSync(join(folder, MANIFEST), `${JSON.stringify(manifest, null, 2)}\n`);
+  saveManifest(folder, manifest);
   return manifest;
+};
+
+export const saveManifest = (folder: string, manifest: Manifest): void => {
+  writeFileSync(join(folder, MANIFEST), `${JSON.stringify(manifest, null, 2)}\n`);
 };
 
 /**
@@ -217,6 +228,7 @@ export const addToBackup = (
   }
   writeExport(folder, [...kept.values()], {
     ...meta,
+    scope: 'changes',
     created: [...new Set([...(before?.manifest.created ?? []), ...created])],
   });
 };

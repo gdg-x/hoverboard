@@ -49,15 +49,21 @@ describe('hb', () => {
         'data import',
         'data export',
         'data check',
+        'backup create',
+        'backup list',
+        'backup restore',
+        'backup schedule',
       ]),
     );
     expect(names.filter((name) => name.startsWith('firestore'))).toEqual([]);
     expect(names).not.toContain('validate-config');
     expect(names).not.toContain('data copy');
+    const check = leaves(createProgram()).find(([name]) => name === 'data check')![1];
+    expect(flags(check)).not.toContain('--restore');
   });
 
   it('has --dry-run and --yes on every command that can change production', () => {
-    const readOnly = ['data export'];
+    const readOnly = ['data export', 'backup create', 'backup list'];
     for (const [name, command] of leaves(createProgram())) {
       if (!flags(command).includes('--production') || readOnly.includes(name)) continue;
       expect([name, flags(command)]).toEqual([
@@ -65,9 +71,11 @@ describe('hb', () => {
         expect.arrayContaining(['--dry-run', '--yes']),
       ]);
     }
-    expect(flags(leaves(createProgram()).find(([name]) => name === 'deploy')![1])).toEqual(
-      expect.arrayContaining(['--dry-run', '--yes']),
-    );
+    for (const name of ['deploy', 'backup schedule']) {
+      expect(flags(leaves(createProgram()).find(([leaf]) => leaf === name)![1])).toEqual(
+        expect.arrayContaining(['--dry-run', '--yes']),
+      );
+    }
   });
 
   it('uses the emulator by default, and production with --production', async () => {
