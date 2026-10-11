@@ -1,5 +1,5 @@
 import { Command, CommanderError } from 'commander';
-import type { FirestoreCheckOptions } from './commands/firestore-check.js';
+import type { DataCheckOptions } from './commands/data-check.js';
 import type { InitOptions } from './commands/init/index.js';
 import { type CommandResult, UsageError } from './lib/command.js';
 import { sendOutputToStderr } from './lib/spawn.js';
@@ -101,6 +101,12 @@ const withWrites = (command: Command) =>
 
 const repoRoot = () => findRepoRoot(process.cwd()) ?? process.cwd();
 
+/** Collects a repeated option, such as `--collection a --collection b`. */
+const collect = (value: string, previous: string[] = []) => [...previous, value];
+
+/** The command as it was run, for an export's manifest. */
+const commandLine = () => ['hb', ...process.argv.slice(2)].join(' ');
+
 /** The `hb` command line. Commands load their modules when they run, after the target is set. */
 export const createProgram = (): Command => {
   const program = new Command();
@@ -187,7 +193,7 @@ export const createProgram = (): Command => {
   emulators
     .command('save')
     .description('Save the running Firestore emulator data to .firebase/emulator-data.')
-    .action(run(async () => (await import('./commands/firestore-export.js')).runFirestoreExport()));
+    .action(run(async () => (await import('./commands/emulators-save.js')).runEmulatorsSave()));
 
   withWrites(
     program
@@ -227,57 +233,78 @@ export const createProgram = (): Command => {
     withTarget(
       data
         .command('seed')
-        .description(
-          'Add the sample data in docs/default-firebase-data.json, for the features that are on.',
-        ),
+        .description('Add the sample data in docs/sample-data, for the features that are on.'),
     ),
-  ).action(
-    run(async (options) =>
-      (await import('./commands/firestore-init/index.js')).runFirestoreInit(undefined, options),
-    ),
-  );
+  ).action(run(async (options) => (await import('./commands/data-seed.js')).runDataSeed(options)));
 
   withWrites(
     withTarget(
       data
-        .command('copy')
-        .argument('<source>', 'A JSON file, or a Firestore collection or document path.')
-        .argument('<destination>', 'A JSON file, or a Firestore collection or document path.')
-        .description('Copy a collection or a document between JSON files and Firestore.'),
+        .command('import')
+        .argument('<folder>', 'An export from hb data export, or a backup.')
+        .description(
+          'Import an export into Firestore. Runs the data migrations it needs, checks every ' +
+            'document, and backs up what it replaces. Keeps the documents the export ' +
+            "doesn't have, unless --replace.",
+        )
+        .option(
+          '--collection <path>',
+          'Only this collection, such as speakers or partners/*/items. Repeat it for more.',
+          collect,
+        )
+        .option(
+          '--replace',
+          "Also delete the documents of the imported collections that the export doesn't have.",
+        ),
     ),
   ).action(
-    run(async (options, [source, destination]) =>
-      (await import('./commands/firestore-copy/index.js')).runFirestoreCopy(
-        source!,
-        destination!,
-        options,
-      ),
+    run(async (options, [folder]) =>
+      (await import('./commands/data-import.js')).runDataImport(folder!, {
+        collection: (options['collection'] as string[] | undefined) ?? [],
+        replace: options['replace'] === true,
+        dryRun: options.dryRun === true,
+        yes: options.yes === true,
+        command: commandLine(),
+      }),
     ),
   );
 
   withTarget(
     data
       .command('export')
-      .argument('[folder]', 'Where to write the files. Defaults to the current folder.')
-      .description('Export Firestore collections.')
-      .option('--csv', 'Write one CSV file per collection, such as subscribers.csv.')
+      .argument(
+        '[folder]',
+        'Where to write it. Defaults to hoverboard-export-<time>, or the current folder with --csv.',
+      )
+      .description(
+        'Export the Firestore data to a folder, with a manifest and one JSON file per collection.',
+      )
       .option(
         '--collection <path>',
-        'A collection to export, such as subscribers. Repeat it for more.',
-        (value: string, previous: string[] = []) => [...previous, value],
-      ),
+        'Only this collection, such as speakers or partners/*/items. Repeat it for more.',
+        collect,
+      )
+      .option('--content', 'Only the content, without visitor, function or CLI data.')
+      .option(
+        '--all',
+        "Also collections Hoverboard doesn't use, such as ones from earlier versions.",
+      )
+      .option('--csv', 'Write one CSV file per collection instead, such as subscribers.csv.'),
   ).action(
     run(async (options, [folder]) => {
-      if (!options['csv']) {
-        throw new UsageError('hb data export only writes CSV files so far. Add --csv.');
-      }
       const collections = (options['collection'] as string[] | undefined) ?? [];
-      if (!collections.length) {
-        throw new UsageError(
-          'Name the collections with --collection, such as --collection subscribers.',
-        );
+      if (options['csv']) {
+        if (!collections.length) {
+          throw new UsageError('--csv needs the collections, such as --collection subscribers.');
+        }
+        return (await import('./commands/data-csv.js')).runCsvExport(collections, folder);
       }
-      return (await import('./commands/firestore-csv.js')).runCsvExport(collections, folder);
+      return (await import('./commands/data-export.js')).runDataExport(folder, {
+        collection: collections,
+        content: options['content'] === true,
+        all: options['all'] === true,
+        command: commandLine(),
+      });
     }),
   );
 
@@ -302,9 +329,7 @@ export const createProgram = (): Command => {
       ),
   ).action(
     run(async (options) =>
-      (await import('./commands/firestore-check.js')).runFirestoreCheck(
-        options as FirestoreCheckOptions,
-      ),
+      (await import('./commands/data-check.js')).runDataCheck(options as DataCheckOptions),
     ),
   );
 

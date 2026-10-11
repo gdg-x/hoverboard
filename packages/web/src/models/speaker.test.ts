@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import data from '../../../../docs/default-firebase-data.json';
+import speakerDocuments from '../../../../docs/sample-data/collections/speakers.json';
 import type { SpeakerData } from './speaker';
 import { allKeys } from './utils';
 
 describe('speaker', () => {
   it('matches the shape of the default data', () => {
-    const speakers: SpeakerData[] = Object.values(data['speakers']);
+    const speakers: SpeakerData[] = Object.values(speakerDocuments);
     const keys: Array<keyof SpeakerData> = [
       'badges',
       'bio',

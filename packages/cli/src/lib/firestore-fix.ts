@@ -1,11 +1,19 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join, relative } from 'path';
-import { FieldPath, FieldValue, type Firestore, Timestamp } from 'firebase-admin/firestore';
+import { FieldPath, FieldValue, type Firestore, type Timestamp } from 'firebase-admin/firestore';
 import { collectionInfo, pathPattern } from '../../../storage/collections.js';
-import { toJson } from '../../../storage/validate.js';
 import type { FirestoreDocument, Migration, MigrationPlan } from '../migrations/index.js';
 import { pendingMigrations } from '../migrations/index.js';
-import { SITE_CONFIG_PATH } from '../utils/firebase-project.js';
+import { DEMO_PROJECT_ID, SITE_CONFIG_PATH } from '../utils/firebase-project.js';
+import {
+  type ExportDocument,
+  addToBackup,
+  decode,
+  encode,
+  isExport,
+  readExport,
+  versions,
+} from './data-format.js';
 import { DELETE, type FieldFix, NOW, documentFixes, fieldUpdates } from './fixes.js';
 import { runCommand } from './spawn.js';
 
@@ -75,46 +83,11 @@ export const formatPlan = ({ migrations, fixes }: FixPlan): string[] => [
 /** A backup folder name for now, without colons, which Windows doesn't allow in file names. */
 export const backupName = (now = new Date()) => now.toISOString().replaceAll(':', '-');
 
-interface Backup {
-  /** Documents as they were, as JSON. */
-  documents: Record<string, unknown>;
-  /** Documents that didn't exist, which a restore deletes. */
-  created: string[];
-}
-
-/** Adds documents to a backup, keeping the first copy of each, so it holds them as they were. */
-const addToBackup = (folder: string, documents: FirestoreDocument[], created: string[] = []) => {
-  const file = join(folder, 'documents.json');
-  const backup: Backup = existsSync(file)
-    ? (JSON.parse(readFileSync(file, 'utf8')) as Backup)
-    : { documents: {}, created: [] };
-  for (const { path, raw } of documents) {
-    if (raw && !(path in backup.documents)) backup.documents[path] = toJson(raw);
-  }
-  backup.created.push(...created.filter((path) => !backup.created.includes(path)));
-  mkdirSync(folder, { recursive: true });
-  writeFileSync(file, `${JSON.stringify(backup, null, 2)}\n`);
-};
-
 const toFirestore = (fields: Record<string, unknown>): unknown[] =>
   Object.entries(fields).flatMap(([field, value]) => [
     new FieldPath(field),
     value === DELETE ? FieldValue.delete() : value === NOW ? FieldValue.serverTimestamp() : value,
   ]);
-
-/** Turns the schema's JSON for timestamps and references back into Firestore values. */
-export const fromJson = (firestore: Firestore, value: unknown): unknown => {
-  if (Array.isArray(value)) return value.map((item) => fromJson(firestore, item));
-  if (value && typeof value === 'object') {
-    const json = value as { $timestamp?: unknown; $reference?: unknown };
-    if (typeof json.$timestamp === 'string') return Timestamp.fromDate(new Date(json.$timestamp));
-    if (typeof json.$reference === 'string') return firestore.doc(json.$reference);
-    return Object.fromEntries(
-      Object.entries(value).map(([key, item]) => [key, fromJson(firestore, item)]),
-    );
-  }
-  return value;
-};
 
 const code = (error: unknown) => (error as { code?: number }).code;
 
@@ -170,6 +143,7 @@ export const applyFixes = async ({
   timeZone,
   repoRoot,
   backupFolder,
+  projectId = DEMO_PROJECT_ID,
 }: {
   firestore: Firestore;
   plan: FixPlan;
@@ -179,14 +153,29 @@ export const applyFixes = async ({
   timeZone: string;
   repoRoot: string;
   backupFolder: string;
+  /** The project in the backup's manifest. The emulator's by default. */
+  projectId?: string;
 }): Promise<FixResult> => {
   const result: FixResult = { written: 0, skipped: [] };
   const byPath = new Map(documents.map((document) => [document.path, document]));
+  const backup = (backedUp: FirestoreDocument[], created: string[] = []) =>
+    addToBackup(
+      backupFolder,
+      backedUp.flatMap(({ path, raw }) =>
+        raw ? [{ path, data: encode(raw) as Record<string, unknown> }] : [],
+      ),
+      created,
+      {
+        ...versions(repoRoot),
+        projectId,
+        createdAt: new Date().toISOString(),
+        command: 'hb data check --fix',
+      },
+    );
 
   for (const { migration, plan: migrationPlan } of plan.migrations) {
     const moves = migrationPlan.moves ?? [];
-    addToBackup(
-      backupFolder,
+    backup(
       [...migrationPlan.updates, ...moves.map(({ from }) => ({ path: from }))].flatMap(
         ({ path }) => byPath.get(path) ?? [],
       ),
@@ -235,10 +224,7 @@ export const applyFixes = async ({
 
   // The migrations changed some documents, so their fixes come from what they are now.
   const fixes = plan.migrations.length ? planFixes(await list(), timeZone).fixes : plan.fixes;
-  addToBackup(
-    backupFolder,
-    fixes.map(({ document }) => document),
-  );
+  backup(fixes.map(({ document }) => document));
   for (const { document, fixes: documentFixList } of fixes) {
     const deleted = documentFixList.some(({ segments }) => !segments.length);
     await update(
@@ -251,14 +237,32 @@ export const applyFixes = async ({
   return result;
 };
 
-/** Writes back the documents in a backup, and deletes the ones the fix created. */
-export const restoreBackup = async (firestore: Firestore, folder: string): Promise<number> => {
-  const backup = JSON.parse(readFileSync(join(folder, 'documents.json'), 'utf8')) as Backup;
-  for (const [path, data] of Object.entries(backup.documents)) {
-    await firestore.doc(path).set(fromJson(firestore, data) as Record<string, unknown>);
+const readBackup = (folder: string): { documents: ExportDocument[]; created: string[] } => {
+  if (isExport(folder)) {
+    const { manifest, documents } = readExport(folder);
+    return { documents, created: manifest.created ?? [] };
   }
-  for (const path of backup.created) await firestore.doc(path).delete();
-  return Object.keys(backup.documents).length + backup.created.length;
+  const legacy = JSON.parse(readFileSync(join(folder, 'documents.json'), 'utf8')) as {
+    documents: Record<string, Record<string, unknown>>;
+    created: string[];
+  };
+  return {
+    documents: Object.entries(legacy.documents).map(([path, data]) => ({ path, data })),
+    created: legacy.created,
+  };
+};
+
+/**
+ * Writes back the documents in a backup, and deletes the ones the fix or import created. Reads
+ * the data format, and the `documents.json` of backups from before it.
+ */
+export const restoreBackup = async (firestore: Firestore, folder: string): Promise<number> => {
+  const { documents, created } = readBackup(folder);
+  for (const { path, data } of documents) {
+    await firestore.doc(path).set(decode(firestore, data) as Record<string, unknown>);
+  }
+  for (const path of created) await firestore.doc(path).delete();
+  return documents.length + created.length;
 };
 
 /** The backup folder for a fix that starts now, relative to the repository for messages. */

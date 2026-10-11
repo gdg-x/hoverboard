@@ -13,6 +13,8 @@ firebase-export-*
 
 # `./hb data export --csv` exports, which hold subscribers' and partners' emails
 *.csv
+# `./hb data export` folders, which can hold visitors' data
+hoverboard-export-*/
 
 # Firebase config
 

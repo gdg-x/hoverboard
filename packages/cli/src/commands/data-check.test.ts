@@ -6,7 +6,7 @@ import {
   checkDocuments,
   formatReport,
   listAllDocuments,
-} from './firestore-check.js';
+} from './data-check.js';
 
 const tracks = [{ id: 'main', title: 'Main hall' }];
 const on = { features: {}, complete: true, tracks };

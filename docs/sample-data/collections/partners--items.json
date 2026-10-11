@@ -1,0 +1,74 @@
+{
+  "partners/0/items/000": {
+    "order": 0,
+    "logoUrl": "../images/logos/gdg-lviv.svg",
+    "name": "GDG Lviv",
+    "url": "https://www.meetup.com/GDG-Lviv/"
+  },
+  "partners/1/items/000": {
+    "order": 0,
+    "logoUrl": "../images/logos/google.svg",
+    "name": "Google",
+    "url": "https://www.google.com.ua/intl/en/about/"
+  },
+  "partners/1/items/001": {
+    "order": 1,
+    "logoUrl": "../images/logos/gdg-x.svg",
+    "name": "GDG[x]",
+    "url": "https://github.com/gdg-x"
+  },
+  "partners/1/items/002": {
+    "order": 2,
+    "logoUrl": "../images/logos/google.svg",
+    "name": "Google",
+    "url": "https://www.google.com.ua/intl/en/about/"
+  },
+  "partners/1/items/003": {
+    "order": 3,
+    "logoUrl": "../images/logos/gdg-x.svg",
+    "name": "GDG[x]",
+    "url": "https://github.com/gdg-x"
+  },
+  "partners/1/items/004": {
+    "order": 4,
+    "logoUrl": "../images/logos/google.svg",
+    "name": "Google",
+    "url": "https://www.google.com.ua/intl/en/about/"
+  },
+  "partners/1/items/005": {
+    "order": 5,
+    "logoUrl": "../images/logos/gdg-x.svg",
+    "name": "GDG[x]",
+    "url": "https://github.com/gdg-x"
+  },
+  "partners/1/items/006": {
+    "order": 6,
+    "logoUrl": "../images/logos/google.svg",
+    "name": "Google",
+    "url": "https://www.google.com.ua/intl/en/about/"
+  },
+  "partners/1/items/007": {
+    "order": 7,
+    "logoUrl": "../images/logos/gdg-x.svg",
+    "name": "GDG[x]",
+    "url": "https://github.com/gdg-x"
+  },
+  "partners/1/items/008": {
+    "order": 8,
+    "logoUrl": "../images/logos/google.svg",
+    "name": "Google",
+    "url": "https://www.google.com.ua/intl/en/about/"
+  },
+  "partners/1/items/009": {
+    "order": 9,
+    "logoUrl": "../images/logos/gdg-x.svg",
+    "name": "GDG[x]",
+    "url": "https://github.com/gdg-x"
+  },
+  "partners/1/items/010": {
+    "order": 10,
+    "logoUrl": "../images/logos/google.svg",
+    "name": "Google",
+    "url": "https://www.google.com.ua/intl/en/about/"
+  }
+}

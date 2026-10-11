@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import data from '../../../../docs/default-firebase-data.json';
+import speakers from '../../../../docs/sample-data/collections/speakers.json';
 import type { Social } from './social';
 import { allKeys } from './utils';
 
 describe('speaker', () => {
   it('matches the shape of the default data', () => {
-    const socials: Social[] = Object.values(data['speakers']['aleksander_piotrowski']['socials']);
+    const socials: Social[] = Object.values(speakers['speakers/aleksander_piotrowski']['socials']);
     const keys: Array<keyof Social> = ['icon', 'link', 'name'];
 
     expect(socials).toHaveLength(4);

@@ -1,0 +1,82 @@
+{
+  "format": 1,
+  "hoverboard": "3.0.0",
+  "schemaVersion": 1,
+  "projectId": "demo-hoverboard",
+  "createdAt": "2026-10-11T16:21:51.846Z",
+  "command": "hb data export docs/sample-data",
+  "collections": {
+    "blog": {
+      "file": "collections/blog.json",
+      "documents": 5,
+      "kind": "content",
+      "personal": false
+    },
+    "config/notifications": {
+      "file": "collections/config--notifications.json",
+      "documents": 1,
+      "kind": "function",
+      "personal": false
+    },
+    "gallery": {
+      "file": "collections/gallery.json",
+      "documents": 8,
+      "kind": "content",
+      "personal": false
+    },
+    "partners": {
+      "file": "collections/partners.json",
+      "documents": 2,
+      "kind": "content",
+      "personal": false
+    },
+    "partners/*/items": {
+      "file": "collections/partners--items.json",
+      "documents": 12,
+      "kind": "content",
+      "personal": false
+    },
+    "previousSpeakers": {
+      "file": "collections/previousSpeakers.json",
+      "documents": 22,
+      "kind": "content",
+      "personal": false
+    },
+    "sessions": {
+      "file": "collections/sessions.json",
+      "documents": 46,
+      "kind": "content",
+      "personal": false
+    },
+    "speakers": {
+      "file": "collections/speakers.json",
+      "documents": 27,
+      "kind": "content",
+      "personal": false
+    },
+    "team": {
+      "file": "collections/team.json",
+      "documents": 2,
+      "kind": "content",
+      "personal": false
+    },
+    "team/*/members": {
+      "file": "collections/team--members.json",
+      "documents": 10,
+      "kind": "content",
+      "personal": false
+    },
+    "tickets": {
+      "file": "collections/tickets.json",
+      "documents": 5,
+      "kind": "content",
+      "personal": false
+    },
+    "videos": {
+      "file": "collections/videos.json",
+      "documents": 22,
+      "kind": "content",
+      "personal": false
+    }
+  }
+}

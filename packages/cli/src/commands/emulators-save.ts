@@ -4,7 +4,7 @@ import { DEMO_PROJECT_ID } from '../utils/firebase-project.js';
 import { findRepoRoot } from '../utils/node-version.js';
 
 /** Exports the running Firestore emulator's data to .firebase/emulator-data. */
-export const runFirestoreExport = (): boolean => {
+export const runEmulatorsSave = (): boolean => {
   const repoRoot = findRepoRoot(process.cwd());
   if (!repoRoot) {
     console.log('✘ Could not find the repository root (no ancestor directory contains .git).');

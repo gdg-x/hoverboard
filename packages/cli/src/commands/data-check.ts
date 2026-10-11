@@ -23,7 +23,7 @@ import { fixable } from '../lib/fixes.js';
 import { confirmChange } from '../lib/prompt.js';
 import { productionProjectId } from '../lib/target.js';
 import { type FirestoreDocument, pendingMigrations } from '../migrations/index.js';
-import { SITE_CONFIG_PATH } from '../utils/firebase-project.js';
+import { DEMO_PROJECT_ID, SITE_CONFIG_PATH } from '../utils/firebase-project.js';
 import { findRepoRoot } from '../utils/node-version.js';
 import { escapeAnnotation } from '../utils/site-config.js';
 import { siteFeatures } from '../utils/site-features.js';
@@ -266,7 +266,7 @@ export const formatReport = (
   ];
 };
 
-export interface FirestoreCheckOptions {
+export interface DataCheckOptions {
   collection?: string;
   /** Run the pending migrations and the safe fixes. */
   fix?: boolean;
@@ -287,13 +287,13 @@ const allowed = (projectId: string | undefined, yes: boolean, question: string) 
  * runs the pending migrations and the safe fixes first. Returns whether there were no errors.
  * Reads the emulator unless the target is production.
  */
-export const runFirestoreCheck = async ({
+export const runDataCheck = async ({
   collection,
   fix = false,
   dryRun = false,
   yes = false,
   restore,
-}: FirestoreCheckOptions = {}): Promise<boolean> => {
+}: DataCheckOptions = {}): Promise<boolean> => {
   if (dryRun && !fix) throw new UsageError('--dry-run only applies with --fix.');
   const repoRoot = findRepoRoot(process.cwd()) ?? process.cwd();
   const projectId = productionProjectId(repoRoot);
@@ -305,7 +305,7 @@ export const runFirestoreCheck = async ({
       return false;
     }
     const count = await restoreBackup(firestore, restore);
-    console.log(`✔ Restored ${count} documents from ${restore}.`);
+    console.log(`✔ Restored ${plural(count, 'document')} from ${restore}.`);
     return true;
   }
 
@@ -334,6 +334,7 @@ export const runFirestoreCheck = async ({
           timeZone,
           repoRoot,
           backupFolder: folder,
+          projectId: projectId ?? DEMO_PROJECT_ID,
         });
         console.log(
           `\n✔ Wrote ${plural(result.written, 'document')}. The documents as they were are in ${shown}. ` +

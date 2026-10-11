@@ -2,7 +2,7 @@ import { mkdtempSync, readFileSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { csvFileName, runCsvExport, toCsv } from './firestore-csv.js';
+import { csvFileName, runCsvExport, toCsv } from './data-csv.js';
 
 const { collectionMock } = vi.hoisted(() => ({ collectionMock: vi.fn() }));
 

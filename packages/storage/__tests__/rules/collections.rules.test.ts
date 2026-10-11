@@ -7,7 +7,10 @@ const root = process.cwd();
 const rules = readFileSync(join(root, 'packages/storage/firestore.rules'), 'utf8');
 const schema = JSON.parse(
   readFileSync(join(root, 'packages/storage/schemas/firestore.schema.json'), 'utf8'),
-) as { properties: Record<string, unknown>; $defs: Record<string, unknown> };
+) as { $defs: Record<string, unknown> };
+const sampleData = JSON.parse(
+  readFileSync(join(root, 'docs/sample-data/manifest.json'), 'utf8'),
+) as { collections: Record<string, { kind: string }> };
 
 const sources = (dir: string) =>
   readdirSync(join(root, dir), { recursive: true, encoding: 'utf8' })
@@ -63,10 +66,10 @@ describe('the collection registry', () => {
     },
   );
 
-  it.each(Object.keys(schema.properties).filter((name) => name !== 'config'))(
-    'has the seed collection %s as content',
-    (name) => {
-      expect(collectionInfo(name)?.kind).toBe('content');
+  it.each(Object.entries(sampleData.collections))(
+    'has the sample data collection %s, as the manifest says',
+    (path, { kind }) => {
+      expect(collectionInfo(path)?.kind).toBe(kind);
     },
   );
 

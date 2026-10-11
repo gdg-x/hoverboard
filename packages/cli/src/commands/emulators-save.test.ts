@@ -2,7 +2,7 @@ import { mkdirSync, mkdtempSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { runFirestoreExport } from './firestore-export.js';
+import { runEmulatorsSave } from './emulators-save.js';
 
 const { runCommandMock, resolveFirebaseBinMock } = vi.hoisted(() => ({
   runCommandMock: vi.fn(),
@@ -28,13 +28,13 @@ const makeRepo = (): string => {
   return dir;
 };
 
-describe('runFirestoreExport', () => {
+describe('runEmulatorsSave', () => {
   it('exports the running emulator data to .firebase/emulator-data', () => {
     const repo = makeRepo();
     runCommandMock.mockReturnValue(0);
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
 
-    expect(runFirestoreExport()).toBe(true);
+    expect(runEmulatorsSave()).toBe(true);
     expect(runCommandMock).toHaveBeenCalledWith(
       '/repo/node_modules/.bin/firebase',
       [
@@ -55,7 +55,7 @@ describe('runFirestoreExport', () => {
     vi.spyOn(process, 'cwd').mockReturnValue(outsideRepo);
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
 
-    expect(runFirestoreExport()).toBe(false);
+    expect(runEmulatorsSave()).toBe(false);
     expect(runCommandMock).not.toHaveBeenCalled();
   });
 });

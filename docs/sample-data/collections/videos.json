@@ -1,0 +1,156 @@
+{
+  "videos/000": {
+    "speakers": "Yonatan Levin",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(65).jpg?alt=media&token=f25f04cf-9a10-42ed-b2ff-e41fad910c39",
+    "title": "Making mistakes and building products from 1st to 30M users",
+    "youtubeId": "hUY8jg9-ieE",
+    "order": "0"
+  },
+  "videos/001": {
+    "speakers": "Britt Barak",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(92).jpg?alt=media&token=0dfc3002-6d6e-4e9f-8518-5941fc501a04",
+    "title": "When your app is asleep",
+    "youtubeId": "D6WEL_inXxk",
+    "order": "1"
+  },
+  "videos/002": {
+    "speakers": "Asim Hussain",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(173).jpg?alt=media&token=779549b7-6578-4092-9e32-7785fff270c5",
+    "title": "How to hack a node app?",
+    "youtubeId": "iN92OsbtgGI",
+    "order": "2"
+  },
+  "videos/003": {
+    "speakers": "Marcos Placona",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(186).jpg?alt=media&token=54b241f6-b1d4-4357-b5a3-05e00ed55814",
+    "title": "I just hacked your app!",
+    "youtubeId": "GrLYrJ-aNSE",
+    "order": "3"
+  },
+  "videos/004": {
+    "speakers": "Mateusz Herych",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(238).jpg?alt=media&token=805c0d09-95ed-4d8b-8b87-85f3c4c5f427",
+    "title": "Release Android apps globally with no headache and minimum stress",
+    "youtubeId": "OhcJqVEnc7I",
+    "order": "4"
+  },
+  "videos/005": {
+    "speakers": "Shmuela Jacobs",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(271).jpg?alt=media&token=dfbf87f8-5a72-44cd-b2b1-3388b65ffebb",
+    "title": "Web goes Native: Progressive Web Apps with Angular",
+    "youtubeId": "OcIZS4jNgP0",
+    "order": "5"
+  },
+  "videos/006": {
+    "speakers": "Martin Splitt",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(81).jpg?alt=media&token=3ff4ca98-5b27-4253-a0ae-e740b6dc45a3",
+    "title": "A look at the guts of Polymer 2.0",
+    "youtubeId": "tRdx6Q5x3Fw",
+    "order": "6"
+  },
+  "videos/007": {
+    "speakers": "Mete Atamel",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(197).jpg?alt=media&token=83227977-a290-4816-875f-67b71586111e",
+    "title": "Apache Beam and Google Cloud DataFlow",
+    "youtubeId": "RxHijHZd0oM",
+    "order": "7"
+  },
+  "videos/008": {
+    "speakers": "Dmitriy Novakovskiy",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(169).jpg?alt=media&token=15f84e75-f070-4fe8-9d94-454bdf672bf9",
+    "title": "Google Cloud Spanner: Going global with relational database",
+    "youtubeId": "iGMjK8UY9gQ",
+    "order": "8"
+  },
+  "videos/009": {
+    "speakers": "Jose Aguinaga",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(213).jpg?alt=media&token=9b25ad9a-10d0-4887-8595-816662dc4402",
+    "title": "Buy my mixtape: the Payment Request API in action",
+    "youtubeId": "uDPRrmjmAD0a",
+    "order": "9"
+  },
+  "videos/010": {
+    "speakers": "Denis Radin",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(345).jpg?alt=media&token=f3e71338-c085-4fe7-b6cf-c7ef8212c930",
+    "title": "Applying NASA coding guidelines to JavaScript or airspace is closer than you may think",
+    "youtubeId": "E4fpZm17GNI",
+    "order": "10"
+  },
+  "videos/011": {
+    "speakers": "Yonatan Levin",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(369).jpg?alt=media&token=453207bd-cb21-41b6-a2e5-9da05273788d",
+    "title": "Architecture Components. The one that got away",
+    "youtubeId": "FzmDFscF41o",
+    "order": "11"
+  },
+  "videos/012": {
+    "speakers": "Michael Pustovit",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(377).jpg?alt=media&token=8c9ec397-1a38-4d7c-95ca-7d55f499eb37",
+    "title": "Gradle scripts in Kotlin: is it cool?",
+    "youtubeId": "XLNJkxWoCoc",
+    "order": "12"
+  },
+  "videos/013": {
+    "speakers": "Yuliya Kaleda",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(413).jpg?alt=media&token=b70b4a85-5634-4a83-8902-fa85cefb7113",
+    "title": "Make Your App Instant!",
+    "youtubeId": "v4RfZ0f_HVE",
+    "order": "13"
+  },
+  "videos/014": {
+    "speakers": "Tim Messerschmidt",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(350).jpg?alt=media&token=12f727f2-f9c8-4749-b76c-2da7a90cd3bb",
+    "title": "Hands-on Flutter",
+    "youtubeId": "0IY6J5baAj8",
+    "order": "14"
+  },
+  "videos/015": {
+    "speakers": "Gerard Sans",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(370).jpg?alt=media&token=d8627038-bb13-4e07-8e76-feca75e26086",
+    "title": "Reactive Animations Using Angular",
+    "youtubeId": "ij8kaavQ61Y",
+    "order": "15"
+  },
+  "videos/016": {
+    "speakers": "Tom Wilkie",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(352).jpg?alt=media&token=5656ddcc-6ff6-4846-9ef8-22bc0322a5de",
+    "title": "gRPC & Kubernetes",
+    "youtubeId": "YiWgWqOe_PI",
+    "order": "16"
+  },
+  "videos/017": {
+    "speakers": "Mat Ryer",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(363).jpg?alt=media&token=09ffdbc7-b717-49c8-abb8-3bae33552d14",
+    "title": "How I build APIs capable of gigantic scale in Go",
+    "youtubeId": "FkPqqakDeRY",
+    "order": "17"
+  },
+  "videos/018": {
+    "speakers": "Juarez Filho",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(383).jpg?alt=media&token=9aa8263d-e6b3-4141-83f9-17ef48409ec1",
+    "title": "Let Firebase help you to build better Front-end apps",
+    "youtubeId": "xJsgIH4U_DM",
+    "order": "18"
+  },
+  "videos/019": {
+    "speakers": "Andrey Lipattsev",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(412).jpg?alt=media&token=bf36bdf0-cea2-48a6-83e9-a3d6c3226f8f",
+    "title": "AMP in 2018. Still fast, still furious",
+    "youtubeId": "iPwlMr-j76w",
+    "order": "19"
+  },
+  "videos/020": {
+    "speakers": "Ihor Dvoretskyi",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(466).jpg?alt=media&token=76a822f9-9d82-4d5e-83ad-5e3f1593f2fe",
+    "title": "Welcome to the world of Open Source. Stories by Kubernetes contributor",
+    "youtubeId": "HhpHf3GefXI",
+    "order": "20"
+  },
+  "videos/021": {
+    "speakers": "Joanna Chwastowska",
+    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/hoverboard-firebase.appspot.com/o/images%2Fsessions%2F2017%2FGDG-(469).jpg?alt=media&token=80669b99-81f4-4d7d-8160-e0174da62b85",
+    "title": "100x impact - from an Individual Contributor to Technical Leader",
+    "youtubeId": "O1dtdDpQXU8",
+    "order": "21"
+  }
+}

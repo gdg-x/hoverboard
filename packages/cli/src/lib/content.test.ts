@@ -1,81 +1,67 @@
+import { join } from 'path';
 import { describe, expect, it } from 'vitest';
-import seed from '../../../../docs/default-firebase-data.json';
-import { siteTracks, validateContent, validateSchedule, validateSeedData } from './content.js';
+import { readExport } from './data-format.js';
+import { documentMessages, scheduleMessages, siteTracks } from './content.js';
 
+const SAMPLE_DATA = join(import.meta.dirname, '..', '..', '..', '..', 'docs', 'sample-data');
 const session = { title: 'Keynote', description: 'Opening talk' };
 
-describe('validateSeedData', () => {
-  it('accepts docs/default-firebase-data.json', () => {
-    expect(() => validateSeedData(seed)).not.toThrow();
-  });
-
-  it('rejects unknown top-level collections', () => {
-    expect(() => validateSeedData({ ...seed, triggers: {} })).toThrow(
-      'docs/default-firebase-data.json: unknown field "triggers"',
-    );
-  });
-});
-
-describe('validateContent', () => {
+describe('documentMessages', () => {
   it('accepts a valid document', () => {
-    expect(() => validateContent('sessions', '101', session)).not.toThrow();
+    expect(documentMessages('sessions/101', session)).toEqual([]);
   });
 
   it('accepts import fields on sessions and speakers', () => {
-    expect(() =>
-      validateContent('sessions', '101', { ...session, source: 'sessionize', externalId: '42' }),
-    ).not.toThrow();
+    expect(
+      documentMessages('sessions/101', { ...session, source: 'sessionize', externalId: '42' }),
+    ).toEqual([]);
   });
 
   it("accepts a session's day, times and track, all together or none", () => {
     const time = { day: '2027-10-15', startTime: '09:00', endTime: '09:40' };
-    expect(() => validateContent('sessions', '101', { ...session, ...time })).not.toThrow();
-    expect(() =>
-      validateContent('sessions', '101', { ...session, ...time, track: 'main-hall' }),
-    ).not.toThrow();
-    expect(() => validateContent('sessions', '101', { ...session, day: '2027-10-15' })).toThrow(
-      'sessions/101: "day" needs "startTime" too.\nsessions/101: "day" needs "endTime" too.',
+    expect(documentMessages('sessions/101', { ...session, ...time })).toEqual([]);
+    expect(documentMessages('sessions/101', { ...session, ...time, track: 'main-hall' })).toEqual(
+      [],
     );
-    expect(() =>
-      validateContent('sessions', '101', { ...session, ...time, startTime: '9:00' }),
-    ).toThrow('sessions/101: startTime "9:00" must be a time, HH:MM.');
+    expect(documentMessages('sessions/101', { ...session, day: '2027-10-15' })).toEqual([
+      'sessions/101: "day" needs "startTime" too.',
+      'sessions/101: "day" needs "endTime" too.',
+    ]);
+    expect(documentMessages('sessions/101', { ...session, ...time, startTime: '9:00' })).toEqual([
+      'sessions/101: startTime "9:00" must be a time, HH:MM.',
+    ]);
   });
 
   it('names the document, the field and the problem when a document is invalid', () => {
-    expect(() => validateContent('sessions', '101', { title: 'Keynote' })).toThrow(
+    expect(documentMessages('sessions/101', { title: 'Keynote' })).toEqual([
       'sessions/101: missing "description".',
-    );
-    expect(() => validateContent('sessions', '101', { ...session, speaker: 'ada' })).toThrow(
+    ]);
+    expect(documentMessages('sessions/101', { ...session, speaker: 'ada' })).toEqual([
       'sessions/101: unknown field "speaker". Hoverboard doesn\'t read it.',
-    );
+    ]);
   });
 
-  it('validates documents in subcollections', () => {
-    expect(() => validateContent('team/0/members', '0', { name: 'Ada' })).toThrow(
-      'team/0/members/0: missing "order".',
+  it('checks documents in subcollections', () => {
+    expect(documentMessages('team/0/members/0', { name: 'Ada' })).toContainEqual(
+      expect.stringContaining('team/0/members/0: missing "order".'),
     );
   });
 
   it('rejects extra fields on partner groups and teams', () => {
-    expect(() => validateContent('team', '0', { title: 'Organizers' })).not.toThrow();
-    expect(() => validateContent('team', '0', { title: 'Organizers', members: [] })).toThrow(
-      'team/0: unknown field "members".',
+    expect(documentMessages('team/0', { title: 'Organizers' })).toEqual([]);
+    expect(documentMessages('team/0', { title: 'Organizers', members: [] })).toContainEqual(
+      expect.stringContaining('team/0: unknown field "members".'),
     );
-  });
-
-  it('passes documents outside the content collections', () => {
-    expect(() => validateContent('config', 'notifications', { icon: '' })).not.toThrow();
-    expect(() => validateContent('featuredSessions', 'user', { 101: true })).not.toThrow();
   });
 
   it('rejects the old schedule fields', () => {
-    expect(() => validateContent('sessions', '101', { ...session, extend: 2 })).toThrow(
-      'sessions/101: unknown field "extend".',
-    );
+    expect(documentMessages('sessions/101', { ...session, extend: 2 })).toEqual([
+      'sessions/101: retired field "extend", which Hoverboard stopped reading in 4.0.0.',
+    ]);
   });
 });
 
-describe('validateSchedule', () => {
+describe('scheduleMessages', () => {
   const tracks = [
     { id: 'main', title: 'Main hall' },
     { id: 'workshops', title: 'Workshops', days: ['2027-10-16'] },
@@ -88,13 +74,19 @@ describe('validateSchedule', () => {
     ...(track ? { track } : {}),
   });
 
-  it('accepts the demo sessions with the demo tracks', () => {
-    expect(() => validateSchedule(seed.sessions)).not.toThrow();
+  it('accepts the sample sessions with the demo tracks', () => {
+    const sessions = Object.fromEntries(
+      readExport(SAMPLE_DATA)
+        .documents.filter(({ path }) => path.startsWith('sessions/'))
+        .map(({ path, data }) => [path.split('/')[1]!, data]),
+    );
+    expect(Object.keys(sessions).length).toBeGreaterThan(0);
+    expect(scheduleMessages(sessions)).toEqual([]);
   });
 
   it('names every session the schedule cannot show', () => {
-    expect(() =>
-      validateSchedule(
+    expect(
+      scheduleMessages(
         {
           gone: at('09:00', '09:40', 'gone'),
           'wrong-day': at('09:00', '09:40', 'workshops'),
@@ -105,15 +97,12 @@ describe('validateSchedule', () => {
         },
         tracks,
       ),
-    ).toThrow(
-      [
-        'Invalid schedule:',
-        '  sessions/a and sessions/b overlap on 2027-10-15 in main',
-        '  sessions/backwards: endTime 09:00 is not after startTime 10:00',
-        '  sessions/gone: track "gone" is not in schedule.tracks in site.json',
-        '  sessions/wrong-day: track "workshops" is not on 2027-10-15',
-      ].join('\n'),
-    );
+    ).toEqual([
+      'sessions/a and sessions/b overlap on 2027-10-15 in main',
+      'sessions/backwards: endTime 09:00 is not after startTime 10:00',
+      'sessions/gone: track "gone" is not in schedule.tracks in site.json',
+      'sessions/wrong-day: track "workshops" is not on 2027-10-15',
+    ]);
   });
 });
 

@@ -9,7 +9,7 @@ import {
 import { SITE_CONFIG_PATH } from '../utils/firebase-project.js';
 import { findRepoRoot } from '../utils/node-version.js';
 import { validateSiteConfig } from '../utils/site-config.js';
-import { runFirestoreCheck } from './firestore-check.js';
+import { runDataCheck } from './data-check.js';
 
 export interface UpgradeOptions {
   /** Show the changes without writing them. */
@@ -70,5 +70,5 @@ export const runUpgrade = async (
     }
   }
 
-  return runFirestoreCheck({ fix: true, dryRun, yes });
+  return runDataCheck({ fix: true, dryRun, yes });
 };

@@ -5,6 +5,7 @@ import { FieldPath, FieldValue, type Firestore, Timestamp } from 'firebase-admin
 import { afterEach, describe, expect, it } from 'vitest';
 import type { FirestoreDocument } from '../migrations/index.js';
 import { SITE_CONFIG_PATH } from '../utils/firebase-project.js';
+import { readExport, writeExport } from './data-format.js';
 import {
   applyFixes,
   backupFolderFor,
@@ -25,7 +26,17 @@ const makeRepo = () => {
   repos.push(repo);
   mkdirSync(join(repo, 'packages/config'), { recursive: true });
   writeFileSync(join(repo, SITE_CONFIG_PATH), '{ "schedule": {} }\n');
+  writeFileSync(join(repo, 'package.json'), '{ "version": "4.0.0" }\n');
   return repo;
+};
+
+/** A backup's documents by path, and the documents it created. */
+const readBackup = (folder: string) => {
+  const { manifest, documents } = readExport(folder);
+  return {
+    documents: Object.fromEntries(documents.map(({ path, data }) => [path, data])),
+    created: manifest.created,
+  };
 };
 
 /** A fake Firestore that records writes, and fails updates of `stale` paths' preconditions. */
@@ -142,7 +153,7 @@ describe('applyFixes', () => {
         ['delete', 'subscribers/adaexamplecom', { lastUpdateTime: at }],
       ],
     ]);
-    const backup = JSON.parse(readFileSync(join(backupFolder, 'documents.json'), 'utf8'));
+    const backup = readBackup(backupFolder);
     expect(Object.keys(backup.documents)).toEqual([
       'subscribers/adaexamplecom',
       'subscribers/gracecompanycom',
@@ -194,7 +205,7 @@ describe('applyFixes', () => {
     });
 
     expect(writes).toEqual([['delete', 'subscribers/spam', { lastUpdateTime: at }]]);
-    expect(JSON.parse(readFileSync(join(backupFolder, 'documents.json'), 'utf8'))).toEqual({
+    expect(readBackup(backupFolder)).toEqual({
       documents: { 'subscribers/spam': spam },
       created: [],
     });
@@ -220,7 +231,7 @@ describe('applyFixes', () => {
     expect(writes).toEqual([
       ['update', 'tickets/regular', new FieldPath('price'), 120, { lastUpdateTime: at }],
     ]);
-    expect(JSON.parse(readFileSync(join(folder, 'documents.json'), 'utf8'))).toEqual({
+    expect(readBackup(folder)).toEqual({
       documents: {
         'tickets/regular': ticketData,
         'sessions/101': { title: 'Keynote', description: '', extend: 1 },
@@ -271,6 +282,29 @@ describe('applyFixes', () => {
 
 describe('restoreBackup', () => {
   it('writes back the documents as they were, and deletes the created ones', async () => {
+    const repo = makeRepo();
+    const folder = join(repo, 'backup');
+    writeExport(
+      folder,
+      [{ path: 'sessions/101', data: { at: { $timestamp: '1970-01-01T00:00:00.000000123Z' } } }],
+      {
+        hoverboard: '4.0.0',
+        projectId: 'demo-hoverboard',
+        createdAt: '2027-10-15T09:00:00.000Z',
+        command: 'hb data check --fix',
+        created: ['sessions/101-2'],
+      },
+    );
+    const { firestore, writes } = fakeFirestore();
+
+    expect(await restoreBackup(firestore, folder)).toBe(2);
+    expect(writes).toEqual([
+      ['set', 'sessions/101', { at: new Timestamp(0, 123) }],
+      ['delete', 'sessions/101-2'],
+    ]);
+  });
+
+  it('reads the documents.json of backups from before the data format', async () => {
     const repo = makeRepo();
     const folder = join(repo, 'backup');
     mkdirSync(folder);

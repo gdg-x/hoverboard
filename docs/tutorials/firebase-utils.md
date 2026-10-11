@@ -1,16 +1,16 @@
 # Firestore Utils
 
-The `./hb data` commands seed, check, fix, copy and export the site's Firestore data. See the examples below.
+The `./hb data` commands seed, check, fix, export and import the site's Firestore data. See the examples below.
 
 They use the local [Firestore emulator](https://firebase.google.com/docs/emulator-suite) (started by `npm start` or `./hb emulators`), so they never touch your live project's data. Add `--production` to use production Firestore instead, for example `./hb data seed --production`. It signs in with your Firebase CLI login (`npx firebase login`) and uses the project set as `firebase.projectId` in `packages/config/site.json`.
 
 Commands that write to production show what they will change and ask first. Without a terminal to ask in, such as in CI, they need `--yes`. `--dry-run` shows the changes without writing them. `--json` prints the result as JSON, for scripts.
 
-⚠️ Without `--production`, the commands connect to an already-running Firestore emulator. Make sure `npm start` or `./hb emulators` is running in another terminal first. They always use the `demo-hoverboard` project, like the emulators, so data written by `data seed` and `data copy` always shows up in the Emulator UI.
+⚠️ Without `--production`, the commands connect to an already-running Firestore emulator. Make sure `npm start` or `./hb emulators` is running in another terminal first. They always use the `demo-hoverboard` project, like the emulators, so data written by `data seed` and `data import` always shows up in the Emulator UI.
 
 ## Content model
 
-Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/firestore.schema.json`](../../packages/storage/schemas/firestore.schema.json), which also describes the data visitors and functions write. [`packages/storage/collections.ts`](../../packages/storage/collections.ts) lists every collection Hoverboard uses, with its schema and features. `data seed` and `data copy` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked as you make them. Check them with [`data check`](#check-the-data).
+Event content (speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers) follows the JSON Schema in [`packages/storage/schemas/firestore.schema.json`](../../packages/storage/schemas/firestore.schema.json), which also describes the data visitors and functions write. [`packages/storage/collections.ts`](../../packages/storage/collections.ts) lists every collection Hoverboard uses, with its schema and features. `data seed` and `data import` check every content document against it and write nothing when a document is invalid. Edits made in the Firebase console are not checked as you make them. Check them with [`data check`](#check-the-data).
 
 Speakers and sessions have optional `source` and `externalId` fields for data imported from another tool, so a later import can update them instead of adding duplicates.
 
@@ -20,7 +20,7 @@ A session's `stream` is the `https:` link to watch it live. Without one, it uses
 
 On the event's days, the home page shows **On now** below the hero: the sessions that are on, with their links to watch live, and the ones that start in the next 30 minutes. It hides itself between sessions with nothing coming up. It needs `schedule`, and `schedule.published`.
 
-`data seed`, `data copy` and the build check the schedule: each `track` must be in `site.json` and on the session's day, `endTime` must be after `startTime`, and sessions in one track can't overlap. The build fails and names the sessions.
+`data seed`, `data import` and the build check the schedule: each `track` must be in `site.json` and on the session's day, `endTime` must be after `startTime`, and sessions in one track can't overlap. The build fails and names the sessions.
 
 Schedule edits show in the browser at once, and in the built pages after the next deploy, as for other content.
 
@@ -84,27 +84,27 @@ Also delete the `config/schedule` document. `schedule.published` in `site.json` 
 
 ### Backups and undo
 
-Before it changes a document, `--fix` saves it as it was in `.firebase/backups/<date>/documents.json`. Git ignores the folder. To undo a fix:
+Before it changes a document, `--fix` saves it as it was in `.firebase/backups/<date>/`, in the [export format](#export-and-import). `data import` does the same before it replaces or deletes documents. Git ignores the folder. To undo a fix or an import:
 
 ```console
 ./hb data check --production --restore .firebase/backups/<date>
 ```
 
-It writes back each document as it was, and deletes the session copies the migration created. Edits made since the fix are lost in those documents. It doesn't undo the change to `site.json`. Use `git checkout packages/config/site.json` for that.
+It writes back each document as it was, and deletes the documents the fix or import created, such as the session copies a migration makes. Edits made since are lost in those documents. It doesn't undo a change to `site.json`. Use `git checkout packages/config/site.json` for that.
 
 Backups hold your content, and the visitor documents a fix changed or deleted, such as push tokens and emails. `./hb doctor` warns about backups older than 30 days. Delete them once the fixes are checked.
 
-## Seed the emulator with fixture data
+## Seed the emulator with sample data
 
-Import the JSON fixtures in `docs/default-firebase-data.json` into the running Firestore emulator:
+Import the sample data in `docs/sample-data` into the running Firestore emulator:
 
 ```console
 ./hb data seed
 ```
 
-[Optional] Edit `docs/default-firebase-data.json` first to load your own data.
+The sample data is an export, in the [export format](#export-and-import). [Optional] Edit the files in `docs/sample-data/collections` first to load your own data.
 
-It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` and `speakers` both off it skips `sessions`. The `config/notifications` document needs `notifications`. Documents with the same IDs are replaced. `--dry-run` lists how many documents it would write to each collection.
+It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` and `speakers` both off it skips `sessions`. The `config/notifications` document needs `notifications`. Documents with the same IDs are replaced, and documents that are already the same aren't written. `--dry-run` lists what it would add and change in each collection.
 
 ## Export emulator data to prefill files
 
@@ -124,64 +124,47 @@ Starting the emulators (via `npm start` or `./hb emulators`) also automatically 
 
 Writes `subscribers.csv`, with one row per document: an `id` column, then every field. Repeat `--collection` for more collections, each in its own file. A subcollection's file joins its path with `--`, such as `partners--gold--items.csv`. Pass a folder to write them there instead of the current folder. Without `--production`, it reads the emulator. Text that starts with `=`, `+`, `-` or `@` gets a `'` in front, so a spreadsheet shows it instead of running it as a formula. Git ignores `.csv` files, since these hold personal data.
 
-## Save collection/doc to file
+## Export and import
 
 ```console
-./hb data copy sourcePath fileToSave.json
+./hb data export --production
+./hb data import hoverboard-export-2027-10-17T09-30-00.000Z
 ```
 
-Examples:
+`data export` writes the data to a folder, `hoverboard-export-<time>` by default:
 
-Save a collection
+```text
+hoverboard-export-2027-10-17T09-30-00.000Z/
+  manifest.json
+  collections/
+    speakers.json
+    sessions.json
+    sessions--feedback.json
+    partners--items.json
+    config--notifications.json
+```
+
+- `manifest.json` has the Hoverboard version, `schemaVersion`, the project, the time, the command that wrote it, and each collection with its file and number of documents. It marks the files that hold personal data, such as `subscribers`.
+- Each file holds one collection, or one `config` document, by document path: `{ "speakers/ada": { "name": "Ada" } }`. A subcollection has one file for all its parents, such as `partners--items.json` for the partners of every group.
+- Timestamps, references, geopoints and bytes are kept as `{ "$timestamp": "2027-10-15T09:00:00Z" }`, `{ "$reference": "speakers/ada" }`, `{ "$geopoint": [49.8, 23.9] }` and `{ "$bytes": "<base64>" }`. Everything else is plain JSON, so you can edit the files.
+- It exports the collections Hoverboard uses. `--all` adds the others, such as collections from earlier versions. `--content` leaves out what visitors and functions write. `--collection speakers` exports only that collection, and can repeat. A subcollection is `partners/*/items`, or one group's, `partners/gold/items`.
+
+An export with visitor data holds emails, push tokens and user IDs. Keep it private, and don't commit it.
+
+`data import` writes an export into Firestore:
+
+- It first runs the data migrations an older export needs, as `data check --fix` does, and changes `site.json` when a migration does.
+- It checks every content document, and the schedule, and writes nothing when one is invalid.
+- It shows what it will add, change and leave as it is, by collection. Against production, it asks first.
+- It keeps the documents the export doesn't have. `--replace` deletes them, in the collections it imports.
+- Before it replaces or deletes a document, it saves it as it was, so the import can be [undone](#backups-and-undo).
+- `--collection` imports part of an export. Migrations only run on a whole export, since they need every document.
+
+For example, to work on the live site's content locally:
 
 ```console
-./hb data copy partners/1/items general-partners.json
+./hb data export live-content --production --content
+./hb data import live-content
 ```
 
-Save a document
-
-```console
-./hb data copy partners/1/items/000 gdg-lviv-partner.json
-```
-
-## Load a file to collection/doc
-
-```console
-./hb data copy fileToLoad.json destinationPath
-```
-
-Documents with the same IDs are replaced. `--dry-run` checks the file without writing it.
-
-Examples:
-
-Load to collection
-
-```console
-./hb data copy general-partners.json partners/1/items
-```
-
-Load a document
-
-```console
-./hb data copy gdg-lviv-partner.json partners/1/items/000
-```
-
-## Copy collection->collection or doc->doc
-
-```console
-./hb data copy sourcePath destinationPath
-```
-
-Examples:
-
-Copy a collection
-
-```console
-./hb data copy speakers backups/08-07-2018/speakers
-```
-
-Copy a document
-
-```console
-./hb data copy speakers/yonatan_levin backups/08-07-2018/speakers/yonatan_levin
-```
+To copy a collection to another project, export it, change `firebase.projectId`, and import it.

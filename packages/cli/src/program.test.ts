@@ -46,13 +46,14 @@ describe('hb', () => {
         'emulators start',
         'emulators save',
         'data seed',
-        'data copy',
+        'data import',
         'data export',
         'data check',
       ]),
     );
     expect(names.filter((name) => name.startsWith('firestore'))).toEqual([]);
     expect(names).not.toContain('validate-config');
+    expect(names).not.toContain('data copy');
   });
 
   it('has --dry-run and --yes on every command that can change production', () => {

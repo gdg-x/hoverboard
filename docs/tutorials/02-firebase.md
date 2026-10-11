@@ -14,7 +14,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 
 1. Seed data for local development
    - Local development runs against the [Firestore emulator](https://firebase.google.com/docs/emulator-suite) instead of your live project, so no Firestore database setup is required for this
-   - [Optional] You can edit `docs/default-firebase-data.json` to use your own data
+   - [Optional] You can edit the files in `docs/sample-data/collections` to use your own data
    - Run `npm start`, then in another terminal run `./hb data seed` to import that data into the running emulator
 
 1. [Optional] Import initial data into the **production** Firebase Database

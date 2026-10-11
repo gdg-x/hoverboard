@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import data from '../../../../docs/default-firebase-data.json';
+import sessions from '../../../../docs/sample-data/collections/sessions.json';
 import site from '../../../config/site.json';
 import type { Session } from '../models/session';
 import type { Speaker } from '../models/speaker';
@@ -303,7 +303,9 @@ describe('scheduleErrors', () => {
   it('accepts the demo data', () => {
     expect(
       scheduleErrors(
-        Object.entries(data.sessions).map(([id, fields]) => ({ ...fields, id }) as Session),
+        Object.entries(sessions).map(
+          ([path, fields]) => ({ ...fields, id: path.split('/')[1]! }) as Session,
+        ),
         site.schedule.tracks,
       ),
     ).toEqual([]);

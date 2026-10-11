@@ -6,12 +6,12 @@ import type { ConfigMigration } from '../migrations/config.js';
 import { SITE_CONFIG_PATH } from '../utils/firebase-project.js';
 import { runUpgrade } from './upgrade.js';
 
-const { runFirestoreCheckMock, validateSiteConfigMock } = vi.hoisted(() => ({
-  runFirestoreCheckMock: vi.fn(async () => true),
+const { runDataCheckMock, validateSiteConfigMock } = vi.hoisted(() => ({
+  runDataCheckMock: vi.fn(async () => true),
   validateSiteConfigMock: vi.fn(async (): Promise<string[]> => []),
 }));
 
-vi.mock('./firestore-check.js', () => ({ runFirestoreCheck: runFirestoreCheckMock }));
+vi.mock('./data-check.js', () => ({ runDataCheck: runDataCheckMock }));
 vi.mock('../utils/site-config.js', () => ({ validateSiteConfig: validateSiteConfigMock }));
 
 const dirsToClean: string[] = [];
@@ -57,7 +57,7 @@ describe('runUpgrade', () => {
 
     expect(await runUpgrade({}, migrations)).toBe(false);
     expect(text()).toContain('from before v4');
-    expect(runFirestoreCheckMock).not.toHaveBeenCalled();
+    expect(runDataCheckMock).not.toHaveBeenCalled();
   });
 
   it('refuses a site.json newer than this Hoverboard', async () => {
@@ -76,7 +76,7 @@ describe('runUpgrade', () => {
     expect(readSite(repo)).toEqual({ schemaVersion: 3, name: 'DevFest', added: true });
     expect(text()).toContain('Config migration 2: Rename shortName to name.');
     expect(text()).toContain('Moved packages/config/site.json to schemaVersion 3.');
-    expect(runFirestoreCheckMock).toHaveBeenCalledWith({ fix: true, dryRun: false, yes: true });
+    expect(runDataCheckMock).toHaveBeenCalledWith({ fix: true, dryRun: false, yes: true });
   });
 
   it('only runs the migrations after the current version', async () => {
@@ -96,7 +96,7 @@ describe('runUpgrade', () => {
 
     expect(readSite(repo)).toEqual({ schemaVersion: 1, shortName: 'DevFest' });
     expect(text()).toContain("Dry run: packages/config/site.json wasn't changed.");
-    expect(runFirestoreCheckMock).toHaveBeenCalledWith({ fix: true, dryRun: true, yes: false });
+    expect(runDataCheckMock).toHaveBeenCalledWith({ fix: true, dryRun: true, yes: false });
   });
 
   it('stops before Firestore when the migrated config is invalid', async () => {
@@ -106,7 +106,7 @@ describe('runUpgrade', () => {
 
     expect(await runUpgrade({}, migrations)).toBe(false);
     expect(text()).toContain('✘ site.json: missing "shortName".');
-    expect(runFirestoreCheckMock).not.toHaveBeenCalled();
+    expect(runDataCheckMock).not.toHaveBeenCalled();
   });
 
   it('goes straight to Firestore when site.json is current', async () => {
@@ -115,6 +115,6 @@ describe('runUpgrade', () => {
 
     expect(await runUpgrade({})).toBe(true);
     expect(text()).toContain('is at schemaVersion 1, the current one.');
-    expect(runFirestoreCheckMock).toHaveBeenCalled();
+    expect(runDataCheckMock).toHaveBeenCalled();
   });
 });
