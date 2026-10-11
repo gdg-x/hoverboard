@@ -28,21 +28,24 @@ export class AppOverlays extends ThemedComponent {
   @state()
   private accessor loadedElements = new Set<LazyElement>();
 
-  private readonly neededElementsStore = new StoreController(
-    this,
-    (state): Record<LazyElement, boolean> => ({
-      'feedback-dialog': selectIsDialogOpen(state, DIALOG.FEEDBACK),
-      'signin-dialog': selectIsDialogOpen(state, DIALOG.SIGNIN),
-      'partner-dialog': selectIsDialogOpen(state, DIALOG.PARTNER),
-      'profile-dialog': selectIsDialogOpen(state, DIALOG.PROFILE),
-      'video-dialog': state.ui.videoDialog.open,
-      'snack-bar': state.snackbars.length > 0,
-    }),
-    {
-      equals: (a, b) => (Object.keys(a) as LazyElement[]).every((tag) => a[tag] === b[tag]),
-      onChange: (needed) => this.loadNeededElements(needed),
-    },
-  );
+  constructor() {
+    super();
+    new StoreController(
+      this,
+      (state): Record<LazyElement, boolean> => ({
+        'feedback-dialog': selectIsDialogOpen(state, DIALOG.FEEDBACK),
+        'signin-dialog': selectIsDialogOpen(state, DIALOG.SIGNIN),
+        'partner-dialog': selectIsDialogOpen(state, DIALOG.PARTNER),
+        'profile-dialog': selectIsDialogOpen(state, DIALOG.PROFILE),
+        'video-dialog': state.ui.videoDialog.open,
+        'snack-bar': state.snackbars.length > 0,
+      }),
+      {
+        equals: (a, b) => (Object.keys(a) as LazyElement[]).every((tag) => a[tag] === b[tag]),
+        onChange: (needed) => this.loadNeededElements(needed),
+      },
+    );
+  }
 
   private loadNeededElements(needed: Record<LazyElement, boolean>) {
     (Object.keys(needed) as LazyElement[]).forEach((tag) => {

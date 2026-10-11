@@ -19,14 +19,17 @@ export class FeedbackDialog extends ThemedComponent {
   @state()
   private accessor session: Pick<Session, 'id' | 'title'> | undefined;
 
-  private readonly dialogStore = new StoreController(this, (state) => state.dialogs, {
-    onChange: (value) => {
-      this.data = value;
-      if (value instanceof Success && value.data.name === DIALOG.FEEDBACK) {
-        this.session = value.data.data;
-      }
-    },
-  });
+  constructor() {
+    super();
+    new StoreController(this, (state) => state.dialogs, {
+      onChange: (value) => {
+        this.data = value;
+        if (value instanceof Success && value.data.name === DIALOG.FEEDBACK) {
+          this.session = value.data.data;
+        }
+      },
+    });
+  }
 
   override render() {
     return html`

@@ -96,11 +96,14 @@ export class AttendingPage extends ThemedComponent {
     `,
   ];
 
-  private readonly metadata = new PageMetadataController(this, 'attending');
-
   // Site.json's on the server and in the first render, so hydration matches. A demo can change it.
   @state()
   private accessor where: Attending = { attendance: siteAttendance, location: siteLocation };
+
+  constructor() {
+    super();
+    new PageMetadataController(this, 'attending');
+  }
 
   override async firstUpdated() {
     this.where = { attendance, location };

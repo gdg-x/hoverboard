@@ -53,7 +53,10 @@ export class NotFoundPage extends ThemedComponent {
     `,
   ];
 
-  private readonly metadata = new PageMetadataController(this, 'notFound');
+  constructor() {
+    super();
+    new PageMetadataController(this, 'notFound');
+  }
 
   override render() {
     return html`
