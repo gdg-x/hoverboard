@@ -27,6 +27,7 @@ vi.mock('../store/ui', async (importOriginal) => ({
 }));
 
 const withVisitorTimeZone = (timeZone: string) => {
+  // eslint-disable-next-line vitest/unbound-method -- called with `.call(this)` below
   const resolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions;
   vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions').mockImplementation(function (
     this: Intl.DateTimeFormat,

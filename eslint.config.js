@@ -76,8 +76,6 @@ export default [
     },
     plugins: {
       '@typescript-eslint': typescriptEslint,
-      vitest: vitestPlugin,
-      'testing-library': testingLibraryPlugin,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -85,16 +83,6 @@ export default [
       // Disable conflicting rules
       'no-unused-vars': 'off', // Replaced by @typescript-eslint/no-unused-vars
       'preserve-caught-error': 'off',
-
-      // Vitest rules
-      'vitest/max-expects': ['warn', { max: 10 }],
-      'vitest/no-hooks': 'off',
-      'vitest/prefer-expect-assertions': 'off',
-      'vitest/require-hook': 'off',
-      'vitest/unbound-method': 'warn',
-
-      // Testing library rules
-      'testing-library/no-node-access': 'error',
 
       // TypeScript rules
       '@typescript-eslint/unbound-method': 'warn',
@@ -123,6 +111,22 @@ export default [
         { anonymous: 'always', named: 'never', asyncArrow: 'always' },
       ],
       'linebreak-style': 0,
+    },
+  },
+
+  // Test files
+  {
+    files: ['**/*.test.ts', '**/__tests__/**/*.ts'],
+    plugins: {
+      vitest: vitestPlugin,
+      'testing-library': testingLibraryPlugin,
+    },
+    rules: {
+      'vitest/max-expects': ['warn', { max: 10 }],
+      'vitest/unbound-method': 'warn',
+      // Replaced by vitest/unbound-method, which allows `expect(mock.method)`.
+      '@typescript-eslint/unbound-method': 'off',
+      'testing-library/no-node-access': 'error',
     },
   },
 

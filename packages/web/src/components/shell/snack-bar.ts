@@ -68,16 +68,16 @@ export class SnackBar extends ThemedComponent {
     super.disconnectedCallback();
   }
 
-  private onAction() {
+  private readonly onAction = () => {
     this.state?.action?.callback();
     this.removeSnackbar();
-  }
+  };
 
-  private removeSnackbar() {
+  private readonly removeSnackbar = () => {
     if (this.state) {
       store.dispatch(removeSnackbar(this.state.id));
     }
-  }
+  };
 }
 
 declare global {
