@@ -8,7 +8,11 @@ import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import vitestPlugin from '@vitest/eslint-plugin';
 import astroPlugin from 'eslint-plugin-astro';
+import { createNodeResolver, importX } from 'eslint-plugin-import-x';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+import litPlugin from 'eslint-plugin-lit';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
+import wcPlugin from 'eslint-plugin-wc';
 import globals from 'globals';
 import { resolve } from 'node:path';
 
@@ -58,8 +62,6 @@ export default defineConfig([
       },
     },
     rules: {
-      'preserve-caught-error': 'off',
-
       // TypeScript rules
       '@typescript-eslint/no-deprecated': 'error',
       '@typescript-eslint/switch-exhaustiveness-check': [
@@ -91,6 +93,33 @@ export default defineConfig([
           ignoreRestSiblings: true,
         },
       ],
+    },
+  },
+
+  // Import cycles. Store slices dispatch through store/dispatch.ts to avoid one.
+  {
+    files: ['**/*.{ts,tsx}'],
+    ignores: ['**/*.astro/*.ts'],
+    plugins: { 'import-x': importX },
+    settings: {
+      ...importX.flatConfigs.typescript.settings,
+      'import-x/resolver-next': [createTypeScriptImportResolver(), createNodeResolver()],
+    },
+    rules: {
+      'import-x/no-cycle': 'error',
+    },
+  },
+
+  // Lit components and the web app's code
+  {
+    files: ['packages/web/src/**/*.ts'],
+    extends: [litPlugin.configs['flat/recommended'], wcPlugin.configs['flat/recommended']],
+  },
+  {
+    files: ['packages/web/src/**/*.ts'],
+    ignores: ['**/*.test.ts'],
+    rules: {
+      'no-console': ['error', { allow: ['warn', 'error'] }],
     },
   },
 

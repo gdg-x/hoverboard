@@ -31,8 +31,8 @@ export const requestNotificationPermission = createAsyncThunk<string | undefined
         const installationId = new Promise<string>((resolve) => onRegistered(messaging, resolve));
         await register(messaging);
         return await installationId;
-      } catch (_error) {
-        throw new Error('unsupported');
+      } catch (error) {
+        throw new Error('unsupported', { cause: error });
       }
     } else if (permission === 'default') {
       return undefined;
