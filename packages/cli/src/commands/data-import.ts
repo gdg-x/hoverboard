@@ -30,6 +30,8 @@ export interface ImportOptions {
   collection?: string[];
   /** Also delete the documents of the imported collections that the export doesn't have. */
   replace?: boolean;
+  /** With `replace`, also these registry paths, even when the export has none of their documents. */
+  entries?: string[];
   dryRun?: boolean;
   yes?: boolean;
   /** Leaves documents out, such as those of features that are off. */
@@ -137,12 +139,18 @@ export const planImport = (
     replace = false,
     include = () => true,
     deletes = [],
-  }: Pick<ImportOptions, 'replace' | 'include' | 'deletes'> = {},
+    collection = [],
+    entries: extraEntries = [],
+  }: Pick<ImportOptions, 'replace' | 'include' | 'deletes' | 'collection' | 'entries'> = {},
 ): ImportPlan => {
   const now = new Map(
     existing.filter(({ raw }) => raw).map((document) => [document.path, document]),
   );
-  const entries = new Set(documents.map(({ path }) => entryFor(path)));
+  const entries = new Set([...documents.map(({ path }) => entryFor(path)), ...extraEntries]);
+  const replaced = (path: string) =>
+    replace &&
+    entries.has(entryFor(path)) &&
+    (!collection.length || collection.some((requested) => inPath(path, requested)));
   const counts: Record<string, Counts> = {};
   const count = (path: string, key: keyof Counts) => {
     const entry = entryFor(path);
@@ -169,9 +177,7 @@ export const planImport = (
     const listed = new Set(deletes);
     for (const document of now.values()) {
       if (imported.has(document.path) || !include(document.path)) continue;
-      if (!listed.has(document.path) && !(replace && entries.has(entryFor(document.path)))) {
-        continue;
-      }
+      if (!listed.has(document.path) && !replaced(document.path)) continue;
       count(document.path, 'deleted');
       plan.replaced.push(document);
       plan.deletes.push(document);
@@ -228,6 +234,7 @@ export const importDocuments = async (
   {
     collection = [],
     replace = false,
+    entries = [],
     dryRun = false,
     yes = false,
     include = () => true,
@@ -274,7 +281,7 @@ export const importDocuments = async (
 
   const roots = [
     ...new Set(
-      [...migrated.documents.map(({ path }) => path), ...deletes].map(
+      [...migrated.documents.map(({ path }) => path), ...deletes, ...(replace ? entries : [])].map(
         (path) => path.split('/')[0]!,
       ),
     ),
@@ -282,7 +289,13 @@ export const importDocuments = async (
   const existing = (
     await Promise.all(roots.map((root) => listAllDocuments(firestore, root)))
   ).flat();
-  const plan = planImport(migrated.documents, existing, { replace, include, deletes });
+  const plan = planImport(migrated.documents, existing, {
+    replace,
+    include,
+    deletes,
+    collection,
+    entries,
+  });
   console.log(`Import ${source} into ${target}:`);
   for (const [entry, counts] of Object.entries(plan.counts).sort()) {
     console.log(countLine(entry, counts));

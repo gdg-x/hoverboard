@@ -309,6 +309,49 @@ export const createProgram = (): Command => {
     }),
   );
 
+  data
+    .command('pull')
+    .description(
+      "Copy production's content into the running emulator, replacing the emulator's. Visitor " +
+        'data stays in production.',
+    )
+    .option(
+      '--collection <path>',
+      'Only this collection, such as sessions or partners/*/items. Repeat it for more.',
+      collect,
+    )
+    .option('--dry-run', 'Show what would change, without changing it.')
+    .action(
+      run(async (options) =>
+        (await import('./commands/data-sync.js')).runDataPull({
+          collection: (options['collection'] as string[] | undefined) ?? [],
+          dryRun: options.dryRun === true,
+        }),
+      ),
+    );
+
+  withWrites(
+    data
+      .command('push')
+      .description(
+        "Copy the emulator's content to production, replacing production's. Shows the changes, " +
+          'backs up what it replaces, and asks first.',
+      )
+      .option(
+        '--collection <path>',
+        'Only this collection, such as sessions or partners/*/items. Repeat it for more.',
+        collect,
+      ),
+  ).action(
+    run(async (options) =>
+      (await import('./commands/data-sync.js')).runDataPush({
+        collection: (options['collection'] as string[] | undefined) ?? [],
+        dryRun: options.dryRun === true,
+        yes: options.yes === true,
+      }),
+    ),
+  );
+
   withTarget(
     data
       .command('check')

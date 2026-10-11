@@ -49,6 +49,8 @@ describe('hb', () => {
         'data import',
         'data export',
         'data check',
+        'data pull',
+        'data push',
         'backup create',
         'backup list',
         'backup restore',
@@ -71,7 +73,7 @@ describe('hb', () => {
         expect.arrayContaining(['--dry-run', '--yes']),
       ]);
     }
-    for (const name of ['deploy', 'backup schedule']) {
+    for (const name of ['deploy', 'backup schedule', 'data push']) {
       expect(flags(leaves(createProgram()).find(([leaf]) => leaf === name)![1])).toEqual(
         expect.arrayContaining(['--dry-run', '--yes']),
       );

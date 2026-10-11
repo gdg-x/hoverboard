@@ -1,6 +1,6 @@
 # Firestore Utils
 
-The `./hb data` commands seed, check, fix, export and import the site's Firestore data, and the `./hb backup` commands back it up and restore it. See the examples below.
+The `./hb data` commands seed, check, fix, export, import, pull and push the site's Firestore data, and the `./hb backup` commands back it up and restore it. See the examples below.
 
 They use the local [Firestore emulator](https://firebase.google.com/docs/emulator-suite) (started by `npm start` or `./hb emulators`), so they never touch your live project's data. Add `--production` to use production Firestore instead, for example `./hb data seed --production`. It signs in with your Firebase CLI login (`npx firebase login`) and uses the project set as `firebase.projectId` in `packages/config/site.json`.
 
@@ -156,18 +156,27 @@ An export with visitor data holds emails, push tokens and user IDs. Keep it priv
 - It first runs the data migrations an older export needs, as `data check --fix` does, and changes `site.json` when a migration does.
 - It checks every content document, and the schedule, and writes nothing when one is invalid.
 - It shows what it will add, change and leave as it is, by collection. Against production, it asks first.
-- It keeps the documents the export doesn't have. `--replace` deletes them, in the collections it imports.
+- It keeps the documents the export doesn't have. `--replace` deletes them, in the collections it imports, or with `--collection`, in the ones it names.
 - Before it replaces or deletes a document, it saves it as it was, so the import can be [undone](#backups-and-undo).
 - `--collection` imports part of an export. Migrations only run on a whole export, since they need every document.
 
-For example, to work on the live site's content locally:
+To copy a collection to another project, export it, change `firebase.projectId`, and import it.
+
+## Pull and push content
 
 ```console
-./hb data export live-content --production --content
-./hb data import live-content
+./hb data pull
+./hb data push --dry-run
+./hb data push
 ```
 
-To copy a collection to another project, export it, change `firebase.projectId`, and import it.
+`data pull` copies the live site's content into the running emulator, so `npm start` shows it. `data push` copies the emulator's content to the live site, for example a schedule you prepared and checked locally.
+
+- Both make the content of one side the same as the other's: they add, change and delete documents. They export the content, then [import](#export-and-import) it with `--replace`, so the import's checks and backups apply.
+- Only content moves: speakers, sessions, partners, team, tickets, videos, gallery, blog and previous speakers. What visitors and functions write stays where it is.
+- `--collection sessions` moves only that collection, and can repeat.
+- `data push` shows what it will add, change and delete on the live site, by collection, and asks first. It saves what it replaces, so the push can be [undone](#backups-and-undo). It pushes nothing when the emulator has no content.
+- `data pull` saves what it replaces in the emulator too.
 
 ## Back up and restore
 

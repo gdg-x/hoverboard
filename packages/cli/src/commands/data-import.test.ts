@@ -247,6 +247,26 @@ describe('planImport', () => {
     expect(plan.deletes.map(({ path }) => path)).toEqual(['team/old']);
   });
 
+  it('replaces the given entries too, even without documents in them', () => {
+    const plan = planImport(
+      [doc('team/ada', team('Ada'))],
+      [doc('blog/old', { title: 'Old' }), doc('subscribers/s1', { email: 'a@example.com' })],
+      { replace: true, entries: ['team', 'blog'] },
+    );
+
+    expect(plan.deletes.map(({ path }) => path)).toEqual(['blog/old']);
+  });
+
+  it('only replaces within the requested collections', () => {
+    const plan = planImport(
+      [doc('partners/gold/items/a', { name: 'A' })],
+      [doc('partners/gold/items/b', { name: 'B' }), doc('partners/silver/items/c', { name: 'C' })],
+      { replace: true, collection: ['partners/gold/items'] },
+    );
+
+    expect(plan.deletes.map(({ path }) => path)).toEqual(['partners/gold/items/b']);
+  });
+
   it('also deletes the listed documents that exist', () => {
     const plan = planImport(
       [doc('team/ada', team('Ada'))],
