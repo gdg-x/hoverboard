@@ -6,12 +6,16 @@ import { runInit } from './index.js';
 import type { SiteDetails } from './site-details.js';
 
 const mocks = vi.hoisted(() => ({
-  runCommand: vi.fn(() => 0),
+  runCommand: vi.fn((_command: string, _args: string[], _cwd: string) => 0),
   ask: vi.fn(async (_question: string, defaultValue = '') => defaultValue),
   confirm: vi.fn(async () => false),
   isBillingEnabled: vi.fn(async () => true),
   runDeploy: vi.fn(async () => true),
   validateSiteConfig: vi.fn(async (): Promise<string[]> => []),
+  databaseLocation: vi.fn(async (): Promise<string | undefined> => 'nam5'),
+  createDatabase: vi.fn(async () => undefined),
+  runDoctor: vi.fn(async () => true),
+  setUpRepository: vi.fn(async () => ({ ok: true, pushed: false })),
   projects: {
     signedIn: vi.fn(() => true),
     list: vi.fn(() => [{ projectId: 'old-fest', displayName: 'Old Fest' }]),
@@ -28,6 +32,12 @@ vi.mock('../../lib/billing.js', () => ({ isBillingEnabled: mocks.isBillingEnable
 vi.mock('../deploy.js', () => ({ runDeploy: mocks.runDeploy }));
 vi.mock('../../utils/site-config.js', () => ({ validateSiteConfig: mocks.validateSiteConfig }));
 vi.mock('./firebase-projects.js', () => ({ firebaseProjects: () => mocks.projects }));
+vi.mock('../../lib/firebase-backups.js', () => ({
+  databaseLocation: mocks.databaseLocation,
+  createDatabase: mocks.createDatabase,
+}));
+vi.mock('../doctor.js', () => ({ runDoctor: mocks.runDoctor }));
+vi.mock('./repository.js', () => ({ setUpRepository: mocks.setUpRepository }));
 
 const site = {
   firebase: { projectId: 'old-fest' },
@@ -104,6 +114,9 @@ beforeEach(() => {
   );
   vi.spyOn(process, 'cwd').mockReturnValue(repo);
   vi.spyOn(console, 'log').mockImplementation(() => undefined);
+  mocks.ask.mockImplementation(async (_question: string, defaultValue = '') => defaultValue);
+  mocks.confirm.mockResolvedValue(false);
+  mocks.runCommand.mockImplementation(() => 0);
   delete process.env['GCLOUD_PROJECT'];
 });
 
@@ -206,22 +219,32 @@ describe('runInit', () => {
     });
   });
 
-  it('adds the sample content, then deploys once, when asked', async () => {
+  it('adds the sample content, schedules backups, then deploys once, when asked', async () => {
     mocks.confirm.mockResolvedValue(true);
     const order: string[] = [];
-    mocks.runCommand.mockImplementation(() => (order.push('seed'), 0));
+    mocks.runCommand.mockImplementation((_command: string, args: string[]) => {
+      order.push(args[1]!);
+      return 0;
+    });
     mocks.runDeploy.mockImplementation(async () => (order.push('deploy'), true));
 
     const result = await runInit({ project: 'new-fest', details: detailsFile() });
 
     expect(result).toBe(true);
+    expect(mocks.ask).toHaveBeenCalledWith(expect.stringContaining('Starting content'), 'sample');
     expect(mocks.runCommand).toHaveBeenCalledWith(
       process.execPath,
       ['hb', 'data', 'seed', '--production', '--yes'],
       repo,
     );
+    expect(mocks.runCommand).toHaveBeenCalledWith(
+      process.execPath,
+      ['hb', 'backup', 'schedule', '--daily', '--yes'],
+      repo,
+    );
     expect(mocks.runDeploy).toHaveBeenCalledWith({ yes: true });
-    expect(order).toEqual(['seed', 'deploy']);
+    expect(order).toEqual(['data', 'backup', 'deploy']);
+    expect(mocks.runDoctor).toHaveBeenCalled();
   });
 
   it('adds the sample content without a deploy or the Blaze plan', async () => {
@@ -267,6 +290,7 @@ describe('runInit', () => {
       details: join(repo, 'details.json'),
       deploy: true,
       seed: false,
+      backups: false,
     });
 
     expect(result).toBe(true);
@@ -283,5 +307,212 @@ describe('runInit', () => {
     expect(result).toBe(false);
     expect(console.log).toHaveBeenCalledWith('✘ site.json/event: bad');
     expect(mocks.runDeploy).not.toHaveBeenCalled();
+  });
+
+  it('creates the Firestore database in the location given, before the content', async () => {
+    mocks.databaseLocation.mockResolvedValueOnce(undefined);
+    const order: string[] = [];
+    mocks.createDatabase.mockImplementationOnce(async () => void order.push('database'));
+    mocks.runCommand.mockImplementation(() => (order.push('seed'), 0));
+
+    const result = await runInit({
+      project: 'new-fest',
+      details: detailsFile(),
+      location: 'eur3',
+      seed: true,
+      deploy: false,
+      backups: false,
+    });
+
+    expect(result).toBe(true);
+    expect(mocks.createDatabase).toHaveBeenCalledWith(repo, 'new-fest', 'eur3');
+    expect(order).toEqual(['database', 'seed']);
+  });
+
+  it('asks where to create the Firestore database, and keeps an existing one', async () => {
+    mocks.databaseLocation.mockResolvedValueOnce(undefined);
+    mocks.ask.mockImplementation(async (question: string, defaultValue = '') =>
+      question.includes('Firestore data') ? 'europe-west1' : defaultValue,
+    );
+
+    await runInit({ project: 'new-fest', details: detailsFile(), seed: false, deploy: false });
+    expect(mocks.createDatabase).toHaveBeenCalledWith(repo, 'new-fest', 'europe-west1');
+
+    mocks.createDatabase.mockClear();
+    await runInit({ project: 'new-fest', details: detailsFile(), seed: false, deploy: false });
+    expect(mocks.createDatabase).not.toHaveBeenCalled();
+  });
+
+  it('stops when the database cannot be created', async () => {
+    mocks.databaseLocation.mockResolvedValueOnce(undefined);
+    mocks.createDatabase.mockRejectedValueOnce(new Error('firebase failed: no permission'));
+
+    const result = await runInit({
+      project: 'new-fest',
+      details: detailsFile(),
+      location: 'nam5',
+      seed: true,
+    });
+
+    expect(result).toBe(false);
+    expect(console.log).toHaveBeenCalledWith('✘ firebase failed: no permission');
+    expect(mocks.runCommand).not.toHaveBeenCalledWith(
+      process.execPath,
+      expect.arrayContaining(['seed']),
+      repo,
+    );
+  });
+
+  it('starts with the content of an export', async () => {
+    const result = await runInit({
+      project: 'new-fest',
+      details: detailsFile(),
+      from: 'last-year',
+      deploy: false,
+      backups: false,
+    });
+
+    expect(result).toBe(true);
+    expect(mocks.runCommand).toHaveBeenCalledWith(
+      process.execPath,
+      ['hb', 'data', 'import', join(repo, 'last-year'), '--production', '--yes'],
+      repo,
+    );
+  });
+
+  it('starts with empty collections when asked', async () => {
+    mocks.ask.mockImplementation(async (question: string, defaultValue = '') =>
+      question.startsWith('\nStarting content') ? 'empty' : defaultValue,
+    );
+
+    await runInit({ project: 'new-fest', details: detailsFile(), deploy: false, backups: false });
+
+    expect(mocks.runCommand).not.toHaveBeenCalledWith(
+      process.execPath,
+      expect.arrayContaining(['data']),
+      repo,
+    );
+  });
+
+  it('does not offer backups without the Blaze plan', async () => {
+    write(
+      'packages/web/defaults/site.json',
+      JSON.stringify({ features: { functions: true, schedule: true, speakers: true } }),
+    );
+    write('details.json', JSON.stringify({ ...details, featuresOff: ['functions'] }));
+    mocks.isBillingEnabled.mockResolvedValueOnce(false);
+
+    await runInit({
+      project: 'new-fest',
+      details: join(repo, 'details.json'),
+      seed: false,
+      deploy: false,
+    });
+
+    expect(mocks.isBillingEnabled).toHaveBeenCalled();
+    expect(mocks.confirm).not.toHaveBeenCalled();
+    expect(mocks.runCommand).not.toHaveBeenCalledWith(
+      process.execPath,
+      expect.arrayContaining(['backup']),
+      repo,
+    );
+  });
+
+  it('replaces the demo text with starter text, and takes text from the details', async () => {
+    for (const file of ['site.json', 'content/resources.json']) {
+      write(
+        `packages/demo-config/${file}`,
+        readFileSync(join(repo, 'packages/config', file), 'utf8'),
+      );
+    }
+    rmSync(join(repo, 'packages/config'), { recursive: true });
+    write(
+      'details.json',
+      JSON.stringify({
+        ...details,
+        resources: { heroDescriptions: { speakers: 'Our speakers.' }, footerRelBlock: [] },
+      }),
+    );
+
+    await runInit({ project: 'new-fest', details: join(repo, 'details.json'), deploy: false });
+
+    const resources = read('packages/config/content/resources.json');
+    expect(resources).toMatchObject({
+      title: 'New Fest',
+      heroDescriptions: { home: 'A new conference', speakers: 'Our speakers.' },
+      team: { description: 'The people who make New Fest happen.' },
+      codeOfConductBlock: { contacts: ['GDG Springfield, hi@example.com'] },
+      footerRelBlock: [],
+    });
+  });
+
+  it('keeps the text of a site that is already set up', async () => {
+    await runInit({ project: 'new-fest', details: detailsFile(), deploy: false });
+
+    expect(read('packages/config/content/resources.json')).not.toHaveProperty('team');
+  });
+
+  it('copies the logo, icon and share image', async () => {
+    write('logo.svg', '<svg>new</svg>');
+    write('icon.png', 'png');
+    write('share.jpeg', 'jpeg');
+    write('packages/config/public/images/logo-dark.svg', '<svg>demo</svg>');
+
+    await runInit({
+      project: 'new-fest',
+      details: detailsFile(),
+      logo: 'logo.svg',
+      icon: 'icon.png',
+      shareImage: 'share.jpeg',
+      deploy: false,
+    });
+
+    const images = join(repo, 'packages/config/public/images');
+    expect(readFileSync(join(images, 'logo.svg'), 'utf8')).toBe('<svg>new</svg>');
+    expect(existsSync(join(images, 'logo-dark.svg'))).toBe(false);
+    expect(readFileSync(join(images, 'social-share.jpg'), 'utf8')).toBe('jpeg');
+    expect(read('packages/config/site.json')).toMatchObject({
+      icon: 'images/icon.png',
+      image: 'images/social-share.jpg',
+    });
+  });
+
+  it('asks for the images when it asks for the details', async () => {
+    write('logo.svg', '<svg>new</svg>');
+    mocks.ask.mockImplementation(async (question: string, defaultValue = '') => {
+      if (question.startsWith('Project number')) return '1';
+      return question.startsWith('Logo') ? 'logo.svg' : defaultValue;
+    });
+
+    await runInit({ deploy: false });
+
+    expect(readFileSync(join(repo, 'packages/config/public/images/logo.svg'), 'utf8')).toBe(
+      '<svg>new</svg>',
+    );
+  });
+
+  it('refuses a logo that is not an SVG', async () => {
+    write('logo.png', 'png');
+
+    await expect(
+      runInit({ project: 'new-fest', details: detailsFile(), logo: 'logo.png', deploy: false }),
+    ).rejects.toThrow('--logo needs a .svg file');
+  });
+
+  it('sets up the repository, and fails when it could not', async () => {
+    mocks.setUpRepository.mockResolvedValueOnce({ ok: false, pushed: false });
+
+    const result = await runInit({
+      project: 'new-fest',
+      details: detailsFile(),
+      deploy: false,
+      repo: 'org/fest',
+    });
+
+    expect(result).toBe(false);
+    expect(mocks.setUpRepository).toHaveBeenCalledWith(repo, {
+      repo: 'org/fest',
+      shortName: 'New Fest',
+    });
   });
 });

@@ -27,6 +27,11 @@ export interface SiteDetails {
   featuresOff: string[];
   /** Only when the map is on. */
   map?: { apiKey: string; latitude: number; longitude: number };
+  /**
+   * Text for content/resources.json, over the starter text, such as `heroDescriptions` or
+   * `footerRelBlock`. Objects merge, and arrays and other values replace.
+   */
+  resources?: Record<string, unknown>;
 }
 
 type Json = Record<string, unknown>;

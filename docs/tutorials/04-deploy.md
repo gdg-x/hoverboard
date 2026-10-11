@@ -73,7 +73,7 @@ Pull requests from forks cannot get a token, so they do not deploy a preview. Th
 
 The preview and the live deploys use the same service account. A pull request's workflow runs the code on its branch, so anyone who can push a branch to your repository can deploy to the live site, deploy functions and rules, and read your Firestore data, including subscribers. Only give write access to the repository to people you would trust with the Firebase console. A separate account for previews wouldn't help much: it would still need Hosting Admin, which can release to the live site too, and read access to Firestore.
 
-The first deploy, from `./hb init` or `./hb deploy`, runs with your own account. It enables the APIs, creates the Firestore database, and grants Google's service agents the roles functions need. The deploy account can't do these, so if a new kind of function needs another API, deploy once from your computer.
+The first deploy, from `./hb init` or `./hb deploy`, runs with your own account. It enables the APIs and grants Google's service agents the roles functions need. `./hb init` creates the Firestore database before it, in the location you pick. The deploy account can't do these, so if a new kind of function needs another API, deploy once from your computer.
 
 You can now push to your `main` branch and it'll deploy to the production (`live`) Firebase Hosting channel and pull requests will deploy a temporary preview.
 

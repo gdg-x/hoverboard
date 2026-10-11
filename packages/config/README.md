@@ -2,7 +2,7 @@
 
 This folder holds your site's own config and content. Hoverboard never changes it, so upgrades don't conflict here.
 
-Run `./hb init` to create it. It copies the demo site from `packages/demo-config`, then asks for your event's details:
+Run `./hb init` to create it. It copies the demo site from `packages/demo-config`, replaces the demo's text with starter text, then asks for your event's details and images:
 
 - `site.json`: the site settings, over the defaults in `packages/web/defaults/site.json`.
 - `content/`: the event text in `resources.json`, the FAQ, the code of conduct and the blog posts.

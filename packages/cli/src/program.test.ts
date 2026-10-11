@@ -4,10 +4,15 @@ import { UsageError } from './lib/command.js';
 import { target } from './lib/target.js';
 import { createProgram, main } from './program.js';
 
-const { runNotify, runDeploy } = vi.hoisted(() => ({ runNotify: vi.fn(), runDeploy: vi.fn() }));
+const { runNotify, runDeploy, runInit } = vi.hoisted(() => ({
+  runNotify: vi.fn(),
+  runDeploy: vi.fn(),
+  runInit: vi.fn(async (_options: unknown) => true),
+}));
 
 vi.mock('./commands/notify.js', () => ({ runNotify }));
 vi.mock('./commands/deploy.js', () => ({ runDeploy }));
+vi.mock('./commands/init/index.js', () => ({ runInit }));
 
 const hb = (...args: string[]) => main(['node', 'hb', ...args]);
 
@@ -71,7 +76,7 @@ describe('hb', () => {
   });
 
   it('has --dry-run and --yes on every command that can change production', () => {
-    const readOnly = ['data export', 'backup create', 'backup list', 'edition feedback'];
+    const readOnly = ['data export', 'backup create', 'backup list', 'edition feedback', 'status'];
     for (const [name, command] of leaves(createProgram())) {
       if (!flags(command).includes('--production') || readOnly.includes(name)) continue;
       expect([name, flags(command)]).toEqual([
@@ -130,6 +135,35 @@ describe('hb', () => {
     runNotify.mockRejectedValue(new UsageError('Run again with --yes.'));
     expect(await hb(...notify)).toBe(2);
     expect(console.error).toHaveBeenCalledWith('✘ Run again with --yes.');
+  });
+
+  it('passes the init options', async () => {
+    await hb(
+      'init',
+      '--logo',
+      'logo.svg',
+      '--share-image',
+      'share.jpg',
+      '--no-repo',
+      '--from',
+      'x',
+    );
+    await hb('init', '--repo', 'org/fest', '--no-backups', '--location', 'eur3');
+
+    expect(runInit).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        logo: 'logo.svg',
+        shareImage: 'share.jpg',
+        repo: false,
+        from: 'x',
+      }),
+    );
+    expect(runInit.mock.calls[0]![0]).not.toHaveProperty('backups');
+    expect(runInit).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({ repo: 'org/fest', backups: false, location: 'eur3' }),
+    );
   });
 
   it('exits with 0 for --help and --version', async () => {

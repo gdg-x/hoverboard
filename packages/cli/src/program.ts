@@ -138,12 +138,33 @@ export const createProgram = (): Command => {
     .option('--deploy', 'Deploy without asking.')
     .option('--no-deploy', 'Skip the deploy.')
     .option('--seed', 'Add the sample content without asking.')
-    .option('--no-seed', 'Skip the sample content.')
+    .option('--no-seed', 'Start with empty collections.')
+    .option('--from <export>', "Start with the content of an export, such as last year's site.")
+    .option(
+      '--location <id>',
+      'Where to create the Firestore database, when the project has none, such as eur3.',
+    )
+    .option('--logo <file>', 'Copy this SVG into packages/config as the header logo.')
+    .option('--icon <file>', 'Copy this PNG of at least 512×512 pixels, or SVG, as the icon.')
+    .option('--share-image <file>', 'Copy this JPEG or PNG as the image for link previews.')
+    .option('--repo <owner/name>', 'Create this private GitHub repository for the site.')
+    .option('--no-repo', 'Skip the GitHub repository.')
+    .option('--backups', 'Schedule daily backups on the Blaze plan without asking.')
+    .option('--no-backups', 'Skip the backup schedule.')
     .action(
       run(async (options) =>
         (await import('./commands/init/index.js')).runInit(options as InitOptions),
       ),
     );
+
+  program
+    .command('status')
+    .description(
+      'Show the project, the site URL, the versions, the features, the last deploy, your ' +
+        'changes to Hoverboard and the document count of each collection.',
+    )
+    .option(PRODUCTION, 'Count the documents in the Firebase project instead of the emulator.')
+    .action(run(async () => (await import('./commands/status.js')).runStatus()));
 
   program
     .command('setup')

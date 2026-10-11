@@ -8,11 +8,19 @@ Project Hoverboard locally in less than 15 minutes.
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
 1. Install [Node.js (v22)](https://nodejs.org/en/download/)
 1. Install project dependencies: `npm ci` (`yarn` should work but it's not officially supported)
-1. Run `./hb init` and answer its questions. It signs you in to Firebase, creates or picks your Firebase project, copies the demo site in `packages/demo-config` to `packages/config` the first time, writes your event's name, dates, whether it is in person, online or both, its venue or stream link, organizer, theme and features to [packages/config](/packages/config), and checks that the project is on the Blaze plan. It can also deploy the site and add sample content. You can run it again later; your current values are the defaults. Commit `packages/config`.
-   - _Tip: `./hb init --help` lists flags such as `--project` and `--details <file>` for running it without questions._
+1. Run `./hb init` and answer its questions. It signs you in to Firebase, creates or picks your Firebase project, copies the demo site in `packages/demo-config` to `packages/config` the first time, writes your event's name, dates, whether it is in person, online or both, its venue or stream link, organizer, theme and features to [packages/config](/packages/config), and checks that the project is on the Blaze plan. You can run it again later; your current values are the defaults. It also:
+   - Replaces the demo's text with starter text for your event the first time, and asks for the text under the title of each page and what a ticket includes.
+   - Copies your logo, icon and share image into `packages/config/public/images`.
+   - Creates the Firestore database in the location you pick, near most visitors. The location can't change later.
+   - Adds the sample content, nothing, or the content of an export such as last year's site (`--from <folder>`).
+   - Offers daily backups on the Blaze plan, and the first deploy.
+   - In a clone of Hoverboard, with the [GitHub CLI](https://cli.github.com/) signed in, offers to create a private repository for the site, push to it and run `./hb setup-github`. It renames the clone's `origin` to `upstream`, which `./hb upgrade` uses. Without `gh`, it prints the steps.
+   - Ends with `./hb doctor`, the site URL and the console links.
+   - _Tip: `./hb init --help` lists flags such as `--project`, `--details <file>`, `--logo <file>` and `--location <id>` for running it without questions. The details file can have a `resources` object with your own text for `content/resources.json`._
+1. Commit `packages/config`, unless `./hb init` pushed it to a new repository.
 1. Update the rest of your site's config and content in [packages/config](/packages/config). More info can be found [here](01-configure-app.md)
 1. Run the app locally. Local development always runs on the [Firebase emulators](https://firebase.google.com/docs/emulator-suite) with the `demo-hoverboard` project, so it needs no Firebase project and never reads or writes live data.
-   - _Tip: `./hb setup` logs in and selects the Firebase project you deploy to, then runs `./hb doctor` to confirm your environment is ready._
+   - _Tip: `./hb setup` logs in and selects the Firebase project you deploy to, then runs `./hb doctor` to confirm your environment is ready. `./hb status` shows the project, the versions, the features that are on, the last deploy, your changes to Hoverboard's files and the document count of each collection, in the emulator or, with `--production`, the live site._
 1. Seed the local Firestore emulator with data
    - [Optional] You can edit the files in `docs/sample-data/collections` to use your own data
    - Run `npm start` in one terminal to launch the app together with the Firebase emulators. The site is at http://localhost:4321

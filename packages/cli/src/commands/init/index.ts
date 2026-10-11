@@ -1,7 +1,8 @@
 import { cpSync, existsSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { pathToFileURL } from 'url';
 import { isBillingEnabled } from '../../lib/billing.js';
+import { createDatabase, databaseLocation } from '../../lib/firebase-backups.js';
 import { resolveFirebaseBin } from '../../lib/firebase-cli.js';
 import { ask, confirm } from '../../lib/prompt.js';
 import { runCommand } from '../../lib/spawn.js';
@@ -16,14 +17,19 @@ import { checkNodeVersion, findRepoRoot } from '../../utils/node-version.js';
 import { validateSiteConfig } from '../../utils/site-config.js';
 import { functionsEnabled } from '../../utils/site-features.js';
 import { runDeploy } from '../deploy.js';
+import { runDoctor } from '../doctor.js';
 import { type FirebaseProjects, firebaseProjects } from './firebase-projects.js';
+import { type SiteImages, copySiteImages } from './images.js';
+import { setUpRepository } from './repository.js';
 import {
   PROJECT_ID_PATTERN,
   type SiteDetails,
   applySiteDetails,
   askSiteDetails,
   currentDetails,
+  defaultUrl,
 } from './site-details.js';
+import { askStarterText, mergeText, starterResources } from './starter-text.js';
 
 export interface InitOptions {
   /** The Firebase project. Without it, the wizard lists the account's projects. */
@@ -34,8 +40,20 @@ export interface InitOptions {
   details?: string;
   /** Deploy without asking, or with `false`, skip it. */
   deploy?: boolean;
-  /** Add the sample content without asking, or with `false`, skip it. */
+  /** Add the sample content without asking, or with `false`, start with empty collections. */
   seed?: boolean;
+  /** Start with the content of an export from `hb data export`, such as last year's site. */
+  from?: string;
+  /** The Firestore location, when the project has no database yet, such as `eur3`. */
+  location?: string;
+  /** Files to copy into packages/config/public/images. */
+  logo?: string;
+  icon?: string;
+  shareImage?: string;
+  /** The GitHub repository to create, or with `false`, skip it. */
+  repo?: string | false;
+  /** Schedule daily backups on the Blaze plan without asking, or with `false`, skip them. */
+  backups?: boolean;
 }
 
 type Json = Record<string, unknown>;
@@ -119,6 +137,78 @@ const askNewProjectId = async (): Promise<string> => {
   }
 };
 
+/** Firestore locations to suggest. Any location Firestore supports works. */
+const LOCATIONS = 'nam5 (United States), eur3 (Europe), or a region such as europe-west1';
+const LOCATION_PATTERN = /^[a-z]+[0-9]*(-[a-z]+[0-9]+)?$/;
+
+/** Creates the (default) database when the project has none, in a location that can't change later. */
+const ensureDatabase = async (
+  repoRoot: string,
+  projectId: string,
+  location: string | undefined,
+): Promise<boolean> => {
+  const current = await databaseLocation(repoRoot, projectId);
+  if (current) {
+    console.log(`✔ Firestore database in ${current}.`);
+    return true;
+  }
+  let chosen = location;
+  while (!chosen) {
+    const answer = await ask(
+      `\nWhere to keep the Firestore data, near most visitors: ${LOCATIONS}. It can't change later:`,
+      'nam5',
+    );
+    if (LOCATION_PATTERN.test(answer)) chosen = answer;
+    else console.log('  Use a location ID, such as eur3 or europe-west1.');
+  }
+  try {
+    await createDatabase(repoRoot, projectId, chosen);
+  } catch (error) {
+    console.log(`✘ ${error instanceof Error ? error.message : String(error)}`);
+    return false;
+  }
+  console.log(`✔ Created the Firestore database in ${chosen}.`);
+  return true;
+};
+
+/** The starting content: the sample, none, or an export. */
+const chooseContent = async (options: InitOptions): Promise<string | undefined> => {
+  if (options.from) return resolve(options.from);
+  if (options.seed !== undefined) return options.seed ? 'sample' : undefined;
+  for (;;) {
+    const answer = await ask(
+      '\nStarting content: "sample" for sample speakers and sessions, "empty", or the folder of ' +
+        "an export from `hb data export`, such as last year's site:",
+      'sample',
+    );
+    if (answer === 'sample') return answer;
+    if (answer === 'empty') return undefined;
+    if (existsSync(join(resolve(answer), 'manifest.json'))) return resolve(answer);
+    console.log('  Type sample, empty, or a folder with a manifest.json.');
+  }
+};
+
+const askImages = async (options: InitOptions): Promise<SiteImages> => {
+  const image = async (given: string | undefined, question: string) => {
+    if (given) return resolve(given);
+    for (;;) {
+      const answer = await ask(question);
+      if (!answer) return undefined;
+      if (existsSync(resolve(answer))) return resolve(answer);
+      console.log(`  ${resolve(answer)} does not exist.`);
+    }
+  };
+  console.log('\nYour images. Leave one empty to keep the current one.');
+  const logo = await image(options.logo, 'Logo, an SVG file:');
+  const icon = await image(options.icon, 'Icon, a PNG of at least 512×512 pixels, or an SVG:');
+  const shareImage = await image(options.shareImage, 'Image for link previews, a JPEG or PNG:');
+  return {
+    ...(logo ? { logo } : {}),
+    ...(icon ? { icon } : {}),
+    ...(shareImage ? { shareImage } : {}),
+  };
+};
+
 const printBudgetSteps = () => {
   console.log(
     [
@@ -175,7 +265,8 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
   }
   console.log(`✔ Firebase project: ${projectId}.`);
 
-  if (!existsSync(join(repoRoot, SITE_CONFIG_PATH))) copyDemoConfig(repoRoot);
+  const copied = !existsSync(join(repoRoot, SITE_CONFIG_PATH));
+  if (copied) copyDemoConfig(repoRoot);
   const site = readJson(repoRoot, SITE_CONFIG_PATH);
   const resources = readJson(repoRoot, RESOURCES_PATH);
   const defaultFeatures = readJson(repoRoot, DEFAULTS_PATH)['features'] as Record<string, boolean>;
@@ -202,6 +293,21 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
     features,
     requires: await loadFeatureRequires(repoRoot),
   });
+  const featuresOn = updated.site['features'] as Record<string, boolean>;
+  // The demo's text describes GDG DevFest Ukraine.
+  if (copied) updated.resources = starterResources(updated.resources, details, featuresOn);
+  if (!options.details) {
+    updated.resources = await askStarterText(ask, updated.resources, featuresOn);
+  }
+  if (details.resources) updated.resources = mergeText(updated.resources, details.resources);
+  const images = options.details
+    ? {
+        ...(options.logo ? { logo: resolve(options.logo) } : {}),
+        ...(options.icon ? { icon: resolve(options.icon) } : {}),
+        ...(options.shareImage ? { shareImage: resolve(options.shareImage) } : {}),
+      }
+    : await askImages(options);
+  updated.site = copySiteImages(repoRoot, updated.site, images);
   writeJson(repoRoot, SITE_CONFIG_PATH, updated.site);
   writeJson(repoRoot, RESOURCES_PATH, updated.resources);
   // Lets plain `firebase` commands use the same project as `hb`.
@@ -225,13 +331,16 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
 
   // Without functions, the site runs on the free Spark plan.
   const functions = functionsEnabled(repoRoot);
+  const onBlaze = async () => {
+    try {
+      return await isBillingEnabled(repoRoot, projectId);
+    } catch {
+      return undefined;
+    }
+  };
   let billing: boolean | undefined = !functions || undefined;
   if (functions) {
-    try {
-      billing = await isBillingEnabled(repoRoot, projectId);
-    } catch {
-      billing = undefined;
-    }
+    billing = await onBlaze();
     if (!billing) {
       console.log(
         `\n! ${projectId} ${billing === false ? 'is not' : 'may not be'} on the Blaze plan, ` +
@@ -243,17 +352,35 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
     printBudgetSteps();
   }
 
+  if (!(await ensureDatabase(repoRoot, projectId, options.location))) return false;
+
   // Before the deploy, so the first build already has the content. Seeding doesn't need Blaze.
-  const seed =
-    options.seed ??
-    (await confirm(
-      'Add the sample speakers and sessions to Firestore? You can edit or delete them in the ' +
-        'Firebase console later.',
-    ));
-  if (seed) {
+  const content = await chooseContent(options);
+  if (content) {
     const exitCode = runCommand(
       process.execPath,
-      ['hb', 'data', 'seed', '--production', '--yes'],
+      content === 'sample'
+        ? ['hb', 'data', 'seed', '--production', '--yes']
+        : ['hb', 'data', 'import', content, '--production', '--yes'],
+      repoRoot,
+    );
+    if (exitCode !== 0) return false;
+  }
+
+  // Scheduled backups need Blaze, and are billed for storage.
+  let backups = false;
+  if (options.backups !== false && (functions ? billing : await onBlaze())) {
+    backups =
+      options.backups ??
+      (await confirm(
+        '\nBack up Firestore every day, and keep each backup for 7 days? Backups are billed ' +
+          'for storage, a few cents a month for most sites.',
+      ));
+  }
+  if (backups) {
+    const exitCode = runCommand(
+      process.execPath,
+      ['hb', 'backup', 'schedule', '--daily', '--yes'],
       repoRoot,
     );
     if (exitCode !== 0) return false;
@@ -262,11 +389,23 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
   const deploy = billing && (options.deploy ?? (await confirm('\nBuild and deploy the site now?')));
   if (deploy && !(await runDeploy({ yes: true }))) return false;
 
+  const repository = await setUpRepository(repoRoot, {
+    ...(options.repo !== undefined ? { repo: options.repo } : {}),
+    shortName: details.shortName,
+  });
+
+  console.log('\nChecking the setup:');
+  await runDoctor();
+
+  const consoleUrl = `https://console.firebase.google.com/project/${projectId}`;
   console.log(
     [
+      `\nSite: ${details.url ?? defaultUrl(projectId)}${deploy ? '' : ', after the first deploy'}`,
+      `Content: ${consoleUrl}/firestore/databases/-default-/data`,
+      `Project: ${consoleUrl}/overview`,
       '\nNext:',
       ...(deploy ? [] : ['  - Deploy with `./hb deploy`.']),
-      ...(seed
+      ...(content
         ? []
         : [
             '  - Add content in the Firebase console, or the sample content with ' +
@@ -274,8 +413,20 @@ export const runInit = async (options: InitOptions = {}): Promise<boolean> => {
           ]),
       '  - Content edits show in the browser at once, and in the built pages after the next deploy.',
       `  - Edit the rest of the text in ${RESOURCES_PATH}, and the FAQ and code of conduct next to it.`,
-      '  - Run `./hb setup-github` so GitHub Actions deploys every push to main.',
+      ...(copied
+        ? [
+            `  - Replace the demo's photos, videos and links in ${RESOURCES_PATH}, and the ` +
+              `images in ${CONFIG_DIR}/public/images.`,
+          ]
+        : []),
+      ...(backups ? [] : ['  - Schedule backups with `./hb backup schedule --daily`.']),
+      ...(repository.pushed
+        ? []
+        : [
+            `  - Commit ${CONFIG_DIR}, and run \`./hb setup-github\` so GitHub Actions deploys ` +
+              'every push to main.',
+          ]),
     ].join('\n'),
   );
-  return true;
+  return repository.ok;
 };

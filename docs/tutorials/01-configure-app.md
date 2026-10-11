@@ -8,7 +8,7 @@ Your site's config and content live in `packages/config`:
 - `public/`: your images, such as `images/logo.svg`, `images/icon.png` and the share image. The site serves them from its root, over the files in `packages/web/public`.
 - `custom.css`: your own styles, which every page loads after the theme. See [Styling](03-styling.md#custom-css).
 
-`./hb init` creates the folder from a copy of the demo site in `packages/demo-config`, then asks for your event's details. Commit `packages/config`. Hoverboard never changes it, so upgrades don't conflict there. Until it has a `site.json`, the build, `npm start` and `./hb` use the demo, and deploys stop, so you can't deploy the demo by mistake.
+`./hb init` creates the folder from a copy of the demo site in `packages/demo-config`, replaces the demo's text with starter text for your event, then asks for your event's details. Commit `packages/config`. Hoverboard never changes it, so upgrades don't conflict there. Until it has a `site.json`, the build, `npm start` and `./hb` use the demo, and deploys stop, so you can't deploy the demo by mistake.
 
 Upstream defaults for the other settings in `site.json`, such as `navigation` and `features`, are in `packages/web/defaults/site.json`. Your `site.json` only needs the values you change. Objects merge with the defaults, and lists and other values replace them. For example, a `navigation` list in `site.json` replaces the whole default list. The UI text, such as button labels and page titles, is part of the app and its translations, not of the config.
 
