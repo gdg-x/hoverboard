@@ -17,10 +17,11 @@ export const displayFont = (
 ) => {
   const length = typeof size === 'string' ? `var(--hb-text-${size})` : size.cssText;
   const fallbackWeight = weight === 'display' ? 800 : 700;
+  const accentScale = family === 'accent' ? ' * var(--hb-accent-scale, 1)' : '';
   // A string, not css``: lit-analyzer and Prettier expect a rule, and this is only declarations.
   return unsafeCSS(
     [
-      `font: var(--hb-${weight}-weight, ${fallbackWeight}) calc(${length} * var(--hb-display-scale, 1) * var(--hb-font-display-scale, 1)) / calc(${leading} * var(--hb-display-leading, 1)) var(--hb-font-${family});`,
+      `font: var(--hb-${weight}-weight, ${fallbackWeight}) calc(${length} * var(--hb-display-scale, 1) * var(--hb-font-display-scale, 1)${accentScale}) / calc(${leading} * var(--hb-display-leading, 1)) var(--hb-font-${family});`,
       'font-style: var(--hb-display-style, normal);',
       `letter-spacing: calc(${tracking}em + var(--hb-display-tracking, 0em))`,
     ].join('\n'),

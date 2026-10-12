@@ -153,6 +153,19 @@ describe('fontModuleParts', () => {
     );
   });
 
+  it('loads italic files only for fonts that have them', async () => {
+    const parts = await fontModuleParts(
+      { ...festival.fonts, display: 'literata' },
+      undefined,
+      siteDir(),
+    );
+
+    expect(css(parts)).toMatch(
+      /font-family:"Literata Variable";font-display:swap;font-weight:200 900;font-style:italic;unicode-range:[^;]+;src:url\(\[@fontsource-variable\/literata\/files\/literata-latin-wght-italic\.woff2\]\)/,
+    );
+    expect(css(parts)).not.toMatch(/"(Inter|JetBrains Mono) Variable";[^}]*font-style:italic/);
+  });
+
   it('has the files of every built-in font', async () => {
     for (const name of Object.keys(BUILT_IN_FONTS) as BuiltInFontName[]) {
       const parts = await fontModuleParts(

@@ -107,6 +107,7 @@ export class HomeHero extends ThemedComponent {
       margin: var(--hb-space-4) 0 var(--hb-space-5);
       padding: 0;
       ${displayFont('display', '6xl', 0.95, -0.02)};
+      font-style: var(--hb-hero-title-style, var(--hb-display-style, normal));
       text-wrap: balance;
       overflow-wrap: anywhere;
     }

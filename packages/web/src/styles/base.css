@@ -95,6 +95,7 @@
   --hb-page-texture: none !important;
   --hb-sticker-shape: none !important;
   --hb-photo-frame: 0 !important;
+  --hb-photo-tape: none !important;
 }
 
 @media (forced-colors: active) {
@@ -108,6 +109,14 @@
     --hb-page-texture: none !important;
     --hb-sticker-shape: none !important;
     --hb-photo-frame: 0 !important;
+    --hb-photo-tape: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hb-hover-rotate: 0deg !important;
+    --hb-press-scale: 1 !important;
   }
 }
 /* eslint-enable css/no-important */

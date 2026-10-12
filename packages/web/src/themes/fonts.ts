@@ -15,6 +15,8 @@ export interface BuiltInFont {
   /** The `@capsizecss/metrics` module, for a fallback font with the same size. */
   metrics: string;
   generic: 'sans-serif' | 'serif' | 'monospace';
+  /** Its italic files are loaded too, for `displayStyle` or a hero title in italic. */
+  italic?: boolean;
 }
 
 /** Self-hosted fonts that themes can use. */
@@ -48,6 +50,7 @@ export const BUILT_IN_FONTS = {
     family: 'Literata Variable',
     metrics: 'literata',
     generic: 'serif',
+    italic: true,
   },
   // Handwriting, only for short labels. `cursive` would fall back to Comic Sans.
   caveat: {

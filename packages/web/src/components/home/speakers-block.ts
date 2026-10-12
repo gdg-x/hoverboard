@@ -34,6 +34,17 @@ export class SpeakersBlock extends ThemedComponent {
         gap: var(--hb-space-5);
       }
 
+      /* Moved, not reordered, so reading order stays the grid's. */
+      @container (width >= 480px) {
+        .grid {
+          padding-block-end: var(--hb-card-stagger, 0px);
+        }
+
+        .grid > :nth-child(even) {
+          translate: 0 var(--hb-card-stagger, 0px);
+        }
+      }
+
       @container (width < 480px) {
         .grid {
           grid-template-columns: minmax(0, 1fr);

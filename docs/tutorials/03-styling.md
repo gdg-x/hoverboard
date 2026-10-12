@@ -8,7 +8,7 @@ Hoverboard has four built-in themes. Each has light and dark colors.
 
 - `festival` (the default): paper colors, ink outlines, hard shadows, and pastel bands in four accent colors with patterns and zigzag edges.
 - `spotlight`: a keynote stage. Dark by default, with tall Oswald headings, centered titles with numbered sections, a full-width header bar, soft glows, grayscale speaker photos that turn to color on hover, and one bright yellow color for the main buttons.
-- `paper`: white paper, light gray pencil outlines, nearly square corners and soft watercolor colors.
+- `paper`: a sketchbook. Literata headings with an italic home title, Caveat handwriting for stickers and section numbers, watercolor washes with torn edges, a faint paper grain, ruled lines in the hero, polaroid photos with tape, and cards that turn a little on hover.
 - `glass`: modeled on Apple's Liquid Glass. Frosted, see-through cards and bars over soft color glows, large round corners and Inter for headings. Visitors who turn on reduced transparency on their device get solid colors instead.
 
 ```json

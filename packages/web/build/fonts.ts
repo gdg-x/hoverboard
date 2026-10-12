@@ -122,12 +122,15 @@ const builtInParts = (name: BuiltInFontName) => {
     variable: { wght: { min: string; max: string } };
   };
   const id = font.package.split('/')[1];
-  const css = Object.entries(unicode).flatMap(([subset, range]) =>
-    fontFace(
-      font.family,
-      `${font.package}/files/${id}-${subset}-wght-normal.woff2`,
-      `${variable.wght.min} ${variable.wght.max}`,
-      `font-style:normal;unicode-range:${range};`,
+  const styles = font.italic ? ['normal', 'italic'] : ['normal'];
+  const css = styles.flatMap((style) =>
+    Object.entries(unicode).flatMap(([subset, range]) =>
+      fontFace(
+        font.family,
+        `${font.package}/files/${id}-${subset}-wght-${style}.woff2`,
+        `${variable.wght.min} ${variable.wght.max}`,
+        `font-style:${style};unicode-range:${range};`,
+      ),
     ),
   );
   const stack = fallback({ ...metricsFor(font.metrics), familyName: font.family }, font.generic);

@@ -31,11 +31,25 @@ export class GalleryBlock extends ThemedComponent {
       }
 
       .photos li {
+        position: relative;
         rotate: calc(var(--hb-photo-tilt, 0deg) * var(--hb-decorations, 1));
       }
 
       .photos li:nth-child(even) {
         rotate: calc(var(--hb-photo-tilt, 0deg) * -1 * var(--hb-decorations, 1));
+      }
+
+      /* The theme's strip of tape across the top of each photo. */
+      .photos li::after {
+        content: '';
+        position: absolute;
+        inset-block-start: -8px;
+        inset-inline-start: calc(50% - 32px);
+        inline-size: 64px;
+        block-size: 18px;
+        background: var(--hb-photo-tape, none);
+        rotate: -4deg;
+        pointer-events: none;
       }
 
       .photo {

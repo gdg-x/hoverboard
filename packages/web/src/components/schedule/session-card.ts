@@ -65,11 +65,13 @@ export class SessionCard extends ThemedComponent {
       box-shadow: var(--hb-shadow-card);
       transition:
         translate var(--hb-duration-short) var(--hb-ease-press),
+        rotate var(--hb-duration-short) var(--hb-ease-press),
         box-shadow var(--hb-duration-short) var(--hb-ease-standard);
     }
 
     .session:hover {
       translate: var(--hb-hover-translate);
+      rotate: calc(var(--hb-hover-rotate, 0deg) * var(--hb-decorations, 1));
       box-shadow: var(--hb-shadow-card-hover);
     }
 

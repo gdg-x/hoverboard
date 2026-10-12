@@ -51,6 +51,10 @@ export interface ThemeStyle {
   /** Multiplies each title's own line height. */
   displayLeading: string;
   displayStyle: string;
+  /** The home hero title's `font-style`, such as italic. */
+  heroTitleStyle: string;
+  /** Multiplies the size of text in the `accent` font, for handwriting that runs small. */
+  accentScale: string;
   /** Multiplies the display sizes, with `theme.fonts.display.scale`. */
   displayScale: string;
 
@@ -112,6 +116,8 @@ export interface ThemeStyle {
   eyebrowColor: string;
   /** Multiplies the smallest width of speaker cards in a grid, so larger means fewer per row. */
   cardScale: string;
+  /** How far every other speaker card on the home page sits lower, like a scrapbook. */
+  cardStagger: string;
   /** Space beside each band, so bands can be panels instead of full-bleed. */
   bandInset: string;
   bandRadius: string;
@@ -135,6 +141,8 @@ export interface ThemeStyle {
   photoFrameColor: string;
   /** Photos in a gallery turn by this much, one way then the other. */
   photoTilt: string;
+  /** A `background` for a strip of tape on gallery photos, or `none`. */
+  photoTape: string;
   /** A `filter` for people's photos, such as grayscale. */
   avatarFilter: string;
   /** The filter on a hovered or focused card. */
@@ -148,6 +156,8 @@ export interface ThemeStyle {
   pressScale: string;
   /** How far cards move on hover. */
   hoverTranslate: string;
+  /** How far cards turn on hover. */
+  hoverRotate: string;
   durationShort: string;
   durationMedium: string;
 }

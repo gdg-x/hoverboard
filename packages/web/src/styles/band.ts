@@ -30,13 +30,16 @@ export const bandContent = css`
     overflow-wrap: anywhere;
   }
 
-  /* The theme's eyebrow, the band's number from the page, with no text for screen readers. */
+  /* The theme's eyebrow, the band's number from the page, with no text for screen readers. A float,
+     so the title's underline does not reach it. */
   .band-title::before {
     content: var(--hb-band-number, none) / '';
     display: var(--hb-band-eyebrow, none);
+    float: inline-start;
+    inline-size: 100%;
     margin-block-end: var(--hb-space-3);
     color: var(--hb-eyebrow-color);
-    font: 600 var(--hb-text-sm) / 1.4 var(--hb-font-accent);
+    font: 600 calc(var(--hb-text-sm) * var(--hb-accent-scale, 1)) / 1.4 var(--hb-font-accent);
     letter-spacing: 0.08em;
     text-decoration: none;
   }
