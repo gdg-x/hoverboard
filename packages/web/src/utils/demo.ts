@@ -7,9 +7,6 @@ export const DEMO_TIME_KEY = 'hb-demo-time';
 export const ATTENDANCES = ['inPerson', 'hybrid', 'online'] as const;
 export type Attendance = (typeof ATTENDANCES)[number];
 
-export const DEMO_TIMES = ['before', 'during', 'after'] as const;
-export type DemoTime = (typeof DEMO_TIMES)[number];
-
 const readChoice = <T extends string>(key: string, values: readonly T[]): T | null => {
   try {
     const value = localStorage.getItem(key);
@@ -40,14 +37,22 @@ export const chooseDemoAttendance = (
   reload = () => window.location.reload(),
 ): void => chooseAndReload(DEMO_ATTENDANCE_KEY, value, reload);
 
-/** When the demo banner says it is, relative to the event, or `null` for the real time. */
-export const readDemoTime = (): DemoTime | null => readChoice(DEMO_TIME_KEY, DEMO_TIMES);
+/** The time the demo banner picked, in milliseconds, or `null` for the real time. */
+export const readDemoTime = (): number | null => {
+  try {
+    const time = Date.parse(localStorage.getItem(DEMO_TIME_KEY) ?? '');
+    return Number.isNaN(time) ? null : time;
+  } catch {
+    return null;
+  }
+};
 
-/** Stores when it is, or forgets it with `null`, and reloads, since the clock reads it once. */
+/** Stores the time, or forgets it with `null`, and reloads, since the clock reads it once. */
 export const chooseDemoTime = (
-  value: DemoTime | null,
+  time: number | null,
   reload = () => window.location.reload(),
-): void => chooseAndReload(DEMO_TIME_KEY, value, reload);
+): void =>
+  chooseAndReload(DEMO_TIME_KEY, time === null ? null : new Date(time).toISOString(), reload);
 
 export interface DemoChoices {
   theme: string | null;

@@ -596,18 +596,6 @@
 <trans-unit id="shell.demo.attendance.hybrid">
   <source>Hybrid</source>
 </trans-unit>
-<trans-unit id="shell.demo.time.now">
-  <source>Now</source>
-</trans-unit>
-<trans-unit id="shell.demo.time.before">
-  <source>Before the event</source>
-</trans-unit>
-<trans-unit id="shell.demo.time.during">
-  <source>During the event</source>
-</trans-unit>
-<trans-unit id="shell.demo.time.after">
-  <source>After the event</source>
-</trans-unit>
 <trans-unit id="shell.demo.label-dev">
   <source>Development</source>
 </trans-unit>
@@ -631,6 +619,15 @@
 </trans-unit>
 <trans-unit id="shell.demo.time">
   <source>When</source>
+</trans-unit>
+<trans-unit id="shell.demo.time.input">
+  <source>Time at the event, <x id="0" equiv-text="${timeZone}"/></source>
+</trans-unit>
+<trans-unit id="shell.demo.time.now">
+  <source>Now</source>
+</trans-unit>
+<trans-unit id="shell.demo.time.set">
+  <source>Set time</source>
 </trans-unit>
 <trans-unit id="shell.nav.home">
   <source>Home</source>
