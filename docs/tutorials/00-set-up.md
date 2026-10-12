@@ -12,10 +12,10 @@ Project Hoverboard locally in less than 15 minutes.
    - Replaces the demo's text with starter text for your event the first time, and asks for the text under the title of each page and what a ticket includes.
    - Copies your logo, icon and share image into `packages/config/public/images`.
    - Creates the Firestore database in the location you pick, near most visitors. The location can't change later.
-   - Adds the sample content, nothing, or the content of an export such as last year's site (`--from <folder>`).
+   - Starts with no content, or adds the sample content or the content of an export such as last year's site (`--from <folder>`). With no content, the site hides what it has nothing for yet, so it looks finished. Sample speakers and sessions would be live for visitors to see.
    - Offers daily backups on the Blaze plan, and the first deploy.
    - In a clone of Hoverboard, with the [GitHub CLI](https://cli.github.com/) signed in, offers to create a private repository for the site, push to it and run `./hb setup-github`. It renames the clone's `origin` to `upstream`, which `./hb upgrade` uses. Without `gh`, it prints the steps.
-   - Ends with `./hb doctor`, the site URL and the console links.
+   - Ends with `./hb doctor`, the site URL and the console links. Doctor warns about what's still the demo's: images in `packages/config/public` that are the demo's files, text in `content/resources.json`, the highlights video and social links. `./hb deploy` lists them too, and deploys anyway.
    - _Tip: `./hb init --help` lists flags such as `--project`, `--details <file>`, `--logo <file>` and `--location <id>` for running it without questions. The details file can have a `resources` object with your own text for `content/resources.json`._
 1. Commit `packages/config`, unless `./hb init` pushed it to a new repository.
 1. Update the rest of your site's config and content in [packages/config](/packages/config). More info can be found [here](01-configure-app.md)

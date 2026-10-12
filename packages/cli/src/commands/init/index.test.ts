@@ -226,8 +226,24 @@ describe('runInit', () => {
     });
   });
 
+  it('starts with no content by default, since it goes live', async () => {
+    mocks.confirm.mockResolvedValue(true);
+
+    await runInit({ project: 'new-fest', details: detailsFile() });
+
+    expect(mocks.ask).toHaveBeenCalledWith(expect.stringContaining('Starting content'), 'empty');
+    expect(mocks.runCommand).not.toHaveBeenCalledWith(
+      process.execPath,
+      expect.arrayContaining(['seed']),
+      repo,
+    );
+  });
+
   it('adds the sample content, schedules backups, then deploys once, when asked', async () => {
     mocks.confirm.mockResolvedValue(true);
+    mocks.ask.mockImplementation(async (question: string, defaultValue?: string) =>
+      question.startsWith('\nStarting content') ? 'sample' : (defaultValue ?? ''),
+    );
     const order: string[] = [];
     mocks.runCommand.mockImplementation((_command: string, args: string[]) => {
       order.push(args[1]!);
@@ -238,7 +254,6 @@ describe('runInit', () => {
     const result = await runInit({ project: 'new-fest', details: detailsFile() });
 
     expect(result).toBe(true);
-    expect(mocks.ask).toHaveBeenCalledWith(expect.stringContaining('Starting content'), 'sample');
     expect(mocks.runCommand).toHaveBeenCalledWith(
       process.execPath,
       ['hb', 'data', 'seed', '--production', '--yes'],

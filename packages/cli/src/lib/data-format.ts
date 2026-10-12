@@ -7,6 +7,9 @@ import { siteConfigPath } from '../utils/firebase-project.js';
 /** The version of the folder format, for readers to check. */
 export const FORMAT = 1;
 
+/** The sample data, an export like any other, from the repository root. */
+export const SAMPLE_DATA = join('docs', 'sample-data');
+
 const MANIFEST = 'manifest.json';
 const COLLECTIONS_DIR = 'collections';
 

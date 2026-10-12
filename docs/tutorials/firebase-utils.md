@@ -36,6 +36,8 @@ Reads every document, with subcollections, and checks it against the schema. It 
 - Each problem names the document, the field and the value, and links to the document in the Firebase console.
 - Problems in the data visitors write, such as `subscribers`, are counted by collection. Their document IDs and values are left out, since they can be emails, push tokens or user IDs.
 - Problems in the content of a feature that is off are warnings. So are collections from earlier versions, with the command that deletes them, and collections Hoverboard doesn't use.
+- Gallery photos without `alt` are warnings, since screen readers only hear "Gallery photo".
+- With `--production`, documents from the sample data are warnings, counted by collection, since visitors see them.
 - Problems that `--fix` can fix end with "(fixable)".
 - It exits with an error when it finds a problem that isn't a warning, or a migration that hasn't run. In GitHub Actions, problems are annotations.
 

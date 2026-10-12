@@ -2,6 +2,7 @@ import { resolveFirebaseBin } from '../lib/firebase-cli.js';
 import { useFirebaseLoginCredentials } from '../lib/google-cloud.js';
 import { confirmChange } from '../lib/prompt.js';
 import { runCommand } from '../lib/spawn.js';
+import { demoLeftovers, formatLeftovers } from '../utils/demo-leftovers.js';
 import {
   checkFirebaseProject,
   demoDeployProblem,
@@ -37,6 +38,12 @@ export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> =
   if (!repoRoot || !projectId || checks.some((check) => !check.ok)) {
     console.log('\nFix the issues above before deploying (run `./hb doctor` for details).');
     return false;
+  }
+
+  const leftovers = demoLeftovers(repoRoot);
+  if (leftovers.length) {
+    console.log(`! ${leftovers.length} thing(s) are still the demo's. Visitors will see them:`);
+    for (const line of formatLeftovers(leftovers)) console.log(line);
   }
 
   const extraArgs = firebaseDeployArgs(repoRoot);

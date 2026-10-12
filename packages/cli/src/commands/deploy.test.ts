@@ -55,6 +55,24 @@ const makeRepo = (features: Record<string, boolean> = {}): string => {
 };
 
 describe('runDeploy', () => {
+  it("warns about the demo's leftovers, and deploys anyway", async () => {
+    const repo = makeRepo();
+    for (const dir of ['demo-config', 'config']) {
+      mkdirSync(join(repo, 'packages', dir, 'public'), { recursive: true });
+      writeFileSync(join(repo, 'packages', dir, 'public', 'hero.jpg'), 'demo photo');
+    }
+    confirmMock.mockResolvedValue(true);
+    runCommandMock.mockReturnValue(0);
+    const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+
+    const result = await runDeploy();
+
+    const output = log.mock.calls.flat().join('\n');
+    expect(output).toContain("! 1 thing(s) are still the demo's. Visitors will see them:");
+    expect(output).toContain('packages/config/public/hero.jpg');
+    expect(result).toBe(true);
+  });
+
   it('builds and deploys after confirmation', async () => {
     const repo = makeRepo();
     confirmMock.mockResolvedValue(true);

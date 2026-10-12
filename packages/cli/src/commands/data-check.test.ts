@@ -202,6 +202,26 @@ describe('checkDocuments', () => {
     expect(checkDocuments(photos, { ...on, features: { gallery: false } }).problems).toEqual([]);
   });
 
+  it('warns about sample documents left in production, by collection', () => {
+    const { problems } = checkDocuments(
+      [
+        { path: 'speakers/ada', data: speaker },
+        { path: 'speakers/grace', data: { ...speaker, name: 'Grace' } },
+        { path: 'speakers/ours', data: { ...speaker, name: 'Ours' } },
+      ],
+      { ...on, sampleIds: new Set(['speakers/grace', 'speakers/ada', 'blog/hello']) },
+    );
+
+    expect(problems).toEqual([
+      {
+        message:
+          'speakers: 2 documents from the sample data, such as speakers/ada. ' +
+          'Visitors see them. Delete them, or replace them with your own.',
+        warning: true,
+      },
+    ]);
+  });
+
   it('checks the schedule and the speakers of sessions', () => {
     const { problems } = checkDocuments(
       [

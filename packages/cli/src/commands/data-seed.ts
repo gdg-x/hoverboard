@@ -1,13 +1,10 @@
 import { join } from 'path';
 import { collectionInfo } from '../../../storage/collections.js';
 import type { CommandResult } from '../lib/command.js';
-import { entryFor, readExport } from '../lib/data-format.js';
+import { SAMPLE_DATA, entryFor, readExport } from '../lib/data-format.js';
 import { findRepoRoot } from '../utils/node-version.js';
 import { siteFeatures } from '../utils/site-features.js';
 import { type ImportOptions, runDataImport } from './data-import.js';
-
-/** The sample data, an export like any other. */
-export const SAMPLE_DATA = join('docs', 'sample-data');
 
 /** Whether a document's collection is in use: one of its features is on, or it has none. */
 export const inUse = (path: string, features: Record<string, boolean>): boolean => {

@@ -174,15 +174,15 @@ const ensureDatabase = async (
   return true;
 };
 
-/** The starting content: the sample, none, or an export. */
+/** The starting content: none, the sample, or an export. None by default, since it goes live. */
 const chooseContent = async (options: InitOptions): Promise<string | undefined> => {
   if (options.from) return resolve(options.from);
   if (options.seed !== undefined) return options.seed ? 'sample' : undefined;
   for (;;) {
     const answer = await ask(
-      '\nStarting content: "sample" for sample speakers and sessions, "empty", or the folder of ' +
-        "an export from `hb data export`, such as last year's site:",
-      'sample',
+      '\nStarting content: "empty" to add your own, "sample" for sample speakers and sessions ' +
+        "that visitors would see, or the folder of an export from `hb data export`, such as last year's site:",
+      'empty',
     );
     if (answer === 'sample') return answer;
     if (answer === 'empty') return undefined;

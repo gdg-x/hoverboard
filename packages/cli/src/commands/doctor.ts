@@ -3,6 +3,7 @@ import { findRepoRoot, checkNodeVersion, type DoctorCheckResult } from '../utils
 import { checkApiKeys } from '../utils/api-keys.js';
 import { checkBackupSchedule } from '../utils/backup-schedule.js';
 import { checkBilling } from '../utils/billing.js';
+import { checkDemoLeftovers } from '../utils/demo-leftovers.js';
 import { checkFirebaseProject, resolveFirebaseProjectId } from '../utils/firebase-project.js';
 import { checkFirestoreBackups } from '../utils/firestore-backups.js';
 import { checkFunctions } from '../utils/functions.js';
@@ -37,6 +38,7 @@ export const runDoctor = async (): Promise<boolean> => {
     ['Firebase project', () => checkFirebaseProject(repoRoot)],
     ['Service account keys', () => checkServiceAccountKeys(repoRoot)],
     ['Site config', () => checkSiteConfig(repoRoot)],
+    ['Demo leftovers', () => checkDemoLeftovers(repoRoot)],
     ['Blaze plan', () => checkBilling(repoRoot, projectId)],
     ['Cloud Functions', () => checkFunctions(repoRoot, projectId)],
     ['Realtime Database', () => checkRealtimeDatabase(repoRoot, projectId)],

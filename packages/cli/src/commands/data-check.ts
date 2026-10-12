@@ -10,6 +10,7 @@ import { documentUrl } from '../../../storage/messages.js';
 import { toJson } from '../../../storage/validate.js';
 import type { Track } from '../../../web/src/schedule/build-schedule.js';
 import { documentMessages, scheduleMessages, siteTimeZone } from '../lib/content.js';
+import { SAMPLE_DATA, isExport, readExport } from '../lib/data-format.js';
 import {
   applyFixes,
   backupFolderFor,
@@ -57,6 +58,8 @@ export interface CheckOptions {
   projectId?: string;
   /** The event time zone, for fixes that turn timestamps into dates. */
   timeZone?: string;
+  /** The paths of the sample documents, to warn about any left in production. */
+  sampleIds?: ReadonlySet<string>;
 }
 
 // Firestore takes at most 500 documents in one read. Fewer keeps each request small.
@@ -118,7 +121,7 @@ const plural = (amount: number, noun: string) => `${amount} ${noun}${amount === 
 /** Checks documents against the schema, and the links between them. */
 export const checkDocuments = (
   documents: FirestoreDocument[],
-  { features, complete, tracks, projectId, timeZone = 'UTC' }: CheckOptions,
+  { features, complete, tracks, projectId, timeZone = 'UTC', sampleIds }: CheckOptions,
 ): Report => {
   const report: Report = {
     checked: 0,
@@ -199,6 +202,22 @@ export const checkDocuments = (
   }
   // Documents are listed in parallel, so sort them for a stable report.
   report.problems.sort((a, b) => a.message.localeCompare(b.message));
+
+  const samples = new Map<string, string[]>();
+  for (const { path, data } of documents) {
+    if (data && sampleIds?.has(path)) {
+      const pattern = pathPattern(path.split('/').slice(0, -1).join('/'));
+      samples.set(pattern, [...(samples.get(pattern) ?? []), path]);
+    }
+  }
+  for (const [pattern, paths] of [...samples].sort(([a], [b]) => a.localeCompare(b))) {
+    report.problems.push({
+      message:
+        `${pattern}: ${plural(paths.length, 'document')} from the sample data, such as ${paths.sort()[0]}. ` +
+        'Visitors see them. Delete them, or replace them with your own.',
+      warning: true,
+    });
+  }
 
   const scheduleOff = features['schedule'] === false ? ['schedule'] : [];
   if (complete || Object.keys(sessions).length) {
@@ -286,6 +305,11 @@ export interface DataCheckOptions {
 const allowed = (projectId: string | undefined, yes: boolean, question: string) =>
   projectId ? confirmChange(question, yes) : Promise.resolve(true);
 
+const sampleDocumentPaths = (repoRoot: string): Set<string> => {
+  const folder = join(repoRoot, SAMPLE_DATA);
+  return new Set(isExport(folder) ? readExport(folder).documents.map(({ path }) => path) : []);
+};
+
 /**
  * Checks every document in Firestore, or in one collection, and prints each problem. With `fix`,
  * runs the pending migrations and the safe fixes first. Returns whether there were no errors.
@@ -351,7 +375,7 @@ export const runDataCheck = async ({
     features: siteFeatures(repoRoot),
     complete: !collection,
     timeZone,
-    ...(projectId ? { projectId } : {}),
+    ...(projectId ? { projectId, sampleIds: sampleDocumentPaths(repoRoot) } : {}),
   });
   const annotations = process.env['GITHUB_ACTIONS'] === 'true';
   for (const line of formatReport(report, { annotations, ...(projectId ? { projectId } : {}) })) {
