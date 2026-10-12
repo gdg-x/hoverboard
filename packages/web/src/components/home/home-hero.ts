@@ -27,10 +27,16 @@ import { type TicketsState, selectTickets } from '../../store/tickets';
 import { openVideoDialog } from '../../store/ui';
 import { eventToCalendarEvent } from '../../utils/calendar';
 import { currentTime } from '../../utils/clock';
-import type { ContentPresence } from '../../utils/content-presence';
-import { getEventDates } from '../../utils/dates';
+import { type ContentPresence, hasContent } from '../../utils/content-presence';
+import { getEventDates, getScheduleDay } from '../../utils/dates';
 import { type EventState, daysUntilStart, eventState } from '../../utils/event-state';
-import { type NextStep, callForPapersOpen, nextSteps, ticketOnSale } from '../../utils/next-step';
+import {
+  type NextStep,
+  callForPapersOpen,
+  nextSteps,
+  ticketOnSale,
+  ticketsGoOnSale,
+} from '../../utils/next-step';
 import { eventPlace, type Attending } from '../../utils/place';
 import '../shared/add-to-calendar';
 import '../shared/hoverboard-icon';
@@ -155,6 +161,11 @@ export class HomeHero extends ThemedComponent {
       gap: var(--hb-space-3);
     }
 
+    .sale {
+      margin: var(--hb-space-4) 0 0;
+      font-weight: 600;
+    }
+
     .art {
       display: none;
       justify-self: center;
@@ -252,6 +263,7 @@ export class HomeHero extends ThemedComponent {
             </ul>
             <p class="lede">${heroDescriptions.home}</p>
             <div class="actions">${this.renderActions()}</div>
+            ${this.renderSaleDate()}
           </div>
           ${
             // The demo banner can turn decorations on, so a demo site always has the drawing.
@@ -343,6 +355,25 @@ export class HomeHero extends ThemedComponent {
       : undefined;
   }
 
+  // Before any ticket is on sale, so the sticker keeps the countdown.
+  private renderSaleDate() {
+    const date =
+      __HB_FEATURES__.tickets &&
+      this.eventState === 'upcoming' &&
+      hasContent(this.presence, 'tickets') &&
+      this.tickets instanceof Success
+        ? ticketsGoOnSale(this.tickets.data, this.time)
+        : undefined;
+    if (!date) return nothing;
+    const day = getScheduleDay(date);
+    return html`<p class="sale">
+      ${msg(str`Tickets on sale ${day}`, {
+        id: 'home.hero.tickets-on-sale',
+        desc: 'The day the first tickets go on sale, such as "Tickets on sale July 1".',
+      })}
+    </p>`;
+  }
+
   private readonly showTickets = () => {
     this.dispatchEvent(new CustomEvent('show-tickets', { bubbles: true, composed: true }));
   };
@@ -358,6 +389,7 @@ const STEP_CLASSES: Record<NextStep, string> = {
   tickets: 'buy-ticket',
   watchLive: 'watch-live',
   onNow: 'schedule',
+  attending: 'attending',
   schedule: 'schedule',
   updates: 'updates',
   videos: 'videos',

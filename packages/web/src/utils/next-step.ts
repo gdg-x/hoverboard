@@ -3,11 +3,19 @@ import { callForPapers, timeZone } from '../config/site';
 import type { Ticket } from '../models/ticket';
 import { type ContentPresence, hasContent } from './content-presence';
 import type { EventState } from './event-state';
-import { callForPapersOpenAt, ticketSells } from './stages';
+import { callForPapersOpenAt, nextTicketSale, ticketSells } from './stages';
 
 /** What a visitor can do next, in the order the hero and the header offer it. */
 export type NextStep =
-  'submitTalk' | 'tickets' | 'watchLive' | 'onNow' | 'schedule' | 'updates' | 'videos' | 'photos';
+  | 'submitTalk'
+  | 'tickets'
+  | 'watchLive'
+  | 'onNow'
+  | 'attending'
+  | 'schedule'
+  | 'updates'
+  | 'videos'
+  | 'photos';
 
 export interface NextStepContext {
   eventState: EventState;
@@ -33,6 +41,10 @@ export const onSale = (ticket: Ticket, time: number): boolean =>
 export const ticketOnSale = (tickets: readonly Ticket[], time: number): Ticket | undefined =>
   tickets.find((ticket) => ticket.url && onSale(ticket, time));
 
+/** The first day a ticket goes on sale, while none is on sale at `time`. */
+export const ticketsGoOnSale = (tickets: readonly Ticket[], time: number): string | undefined =>
+  nextTicketSale(tickets, time, timeZone);
+
 /**
  * The steps to offer, most important first. A step is only offered when its feature is on and the
  * build found its content, so it never leads to an empty page.
@@ -52,6 +64,8 @@ export const nextSteps = ({
     return [
       ...(attendance !== 'inPerson' && stream ? (['watchLive'] as const) : []),
       ...(has('schedule') ? (['onNow'] as const) : []),
+      // The doors, the Wi-Fi and the way in, for the people at the venue.
+      ...(attendance !== 'online' && has('attending') ? (['attending'] as const) : []),
     ];
   }
   if (eventState === 'over') {

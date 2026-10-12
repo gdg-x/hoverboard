@@ -1,4 +1,4 @@
-import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { html, nothing, render } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../__tests__/helpers/features';
@@ -31,12 +31,24 @@ const BANDS = [
 const tones = (root: ShadowRoot) =>
   [...root.querySelectorAll('.band')].map((band) => band.getAttribute('data-tone'));
 
+// The demo event is on October 13 and 14, 2017, in Kyiv.
+const today = (date: string) => {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(new Date(date));
+};
+
 describe('home-page', () => {
   // Otherwise they can finish loading after jsdom is gone, which fails the run.
   beforeAll(() => homeBlocks);
 
+  // Before the event, when every block shows.
+  beforeEach(() => {
+    today('2017-10-01T12:00:00Z');
+  });
+
   afterEach(() => {
     render(nothing, document.body);
+    vi.useRealTimers();
   });
 
   it('defines a component', () => {
@@ -144,16 +156,41 @@ describe('home-page', () => {
     expect(mockUpdateMetadata).toHaveBeenCalled();
   });
 
-  describe('on now', () => {
-    afterEach(() => {
-      vi.useRealTimers();
+  describe('tickets', () => {
+    const renderOn = async (date: string) => {
+      today(date);
+      const result = await fixture<HomePage>(html`<home-page></home-page>`);
+      await result.element.updateComplete;
+      return result;
+    };
+
+    it('keeps the tickets band during the event, for the days still to come', async () => {
+      const { shadowRoot } = await renderOn('2017-10-13T09:00:00Z');
+
+      expect(shadowRoot.querySelector('tickets-block')).not.toBeNull();
     });
 
-    // The demo event is on October 13 and 14, 2017, in Kyiv.
-    const renderOn = async (date: string) => {
-      vi.useFakeTimers({ toFake: ['Date'] });
-      vi.setSystemTime(new Date(date));
-      const result = await fixture<HomePage>(html`<home-page></home-page>`);
+    it('hides the tickets band once the event is over, and keeps the bands alternating', async () => {
+      const { shadowRoot } = await renderOn('2017-10-15T12:00:00Z');
+
+      expect(shadowRoot.querySelector('tickets-block')).toBeNull();
+      expect(tones(shadowRoot)).toEqual([
+        'surface',
+        'accent-4',
+        'surface',
+        'accent-2',
+        'surface',
+        'accent-1',
+        'surface',
+        'accent-4',
+      ]);
+    });
+  });
+
+  describe('on now', () => {
+    const renderOn = async (date: string, presence = {}) => {
+      today(date);
+      const result = await fixture<HomePage>(html`<home-page .presence="${presence}"></home-page>`);
       await result.element.updateComplete;
       return result;
     };
@@ -177,6 +214,12 @@ describe('home-page', () => {
     it('has no block when the schedule is off', async () => {
       setFeatures({ schedule: false });
       const { shadowRoot } = await renderOn('2017-10-13T09:00:00Z');
+
+      expect(shadowRoot.querySelector('on-now-block')).toBeNull();
+    });
+
+    it('has no block when the build found no schedule', async () => {
+      const { shadowRoot } = await renderOn('2017-10-13T09:00:00Z', { schedule: false });
 
       expect(shadowRoot.querySelector('on-now-block')).toBeNull();
     });

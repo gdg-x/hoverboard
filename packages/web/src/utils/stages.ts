@@ -55,6 +55,21 @@ export const callForPapersOpenAt = (
 const dayAfter = (date: string) =>
   new Date(Date.parse(`${date}T00:00:00Z`) + 86_400_000).toISOString().slice(0, 10);
 
+/** The first day a ticket goes on sale, while none is on sale at `time`. */
+export const nextTicketSale = (
+  tickets: readonly TicketSaleDates[],
+  time: number,
+  timeZone: string,
+): string | undefined => {
+  if (tickets.some((ticket) => ticketSells(ticket, time, timeZone))) return undefined;
+  const today = wallClock(new Date(time), timeZone).date;
+  return tickets
+    .flatMap(({ available, soldOut, salesOpen }) =>
+      available && !soldOut && salesOpen && salesOpen > today ? [salesOpen] : [],
+    )
+    .sort()[0];
+};
+
 const ENDS: readonly StageChange[] = ['callForPapersCloses', 'eventEnds'];
 
 /** The stages the site is in at `time`, from its dates, config and content. */
@@ -66,15 +81,13 @@ export const siteStages = (
   const today = wallClock(new Date(time), timeZone).date;
   const state = eventState(new Date(time), event);
   const callOpen = callForPapersOpenAt(callForPapers, time, timeZone);
-  const comingSales = tickets.flatMap(({ available, soldOut, salesOpen }) =>
-    available && !soldOut && salesOpen && salesOpen > today ? [salesOpen] : [],
-  );
+  const comingSale = nextTicketSale(tickets, time, timeZone);
 
   let ticketSales: TicketSales | undefined;
   if (state === 'upcoming' && tickets.length) {
     if (tickets.some((ticket) => ticketSells(ticket, time, timeZone))) ticketSales = 'onSale';
     else if (tickets.every(({ soldOut }) => soldOut)) ticketSales = 'soldOut';
-    else if (comingSales.length) ticketSales = 'notYetOnSale';
+    else if (comingSale) ticketSales = 'notYetOnSale';
     else ticketSales = 'closed';
   }
 
@@ -98,8 +111,8 @@ export const siteStages = (
         ...(callOpen && callForPapers
           ? [{ change: 'callForPapersCloses' as const, date: callForPapers.closes }]
           : []),
-        ...(ticketSales === 'notYetOnSale'
-          ? [{ change: 'ticketsGoOnSale' as const, date: comingSales.sort()[0]! }]
+        ...(ticketSales === 'notYetOnSale' && comingSale
+          ? [{ change: 'ticketsGoOnSale' as const, date: comingSale }]
           : []),
         ...(state === 'upcoming'
           ? [{ change: 'eventStarts' as const, date: event.startDate }]

@@ -78,7 +78,14 @@ export class HomePage extends ThemedComponent {
   @property({ attribute: false })
   accessor presence: ContentPresence = {};
 
-  private readonly has = (feature: Feature) => hasContent(this.presence, feature);
+  // The event state in the browser, which can differ from the build's.
+  @state()
+  private accessor browserState: EventState | undefined;
+
+  // Tickets can't be bought once the event is over.
+  private readonly has = (feature: Feature) =>
+    hasContent(this.presence, feature) &&
+    !(feature === 'tickets' && (this.browserState ?? this.eventState) === 'over');
 
   @query('#tickets')
   private accessor ticketsBlock!: HTMLElement | null;
@@ -108,14 +115,16 @@ export class HomePage extends ThemedComponent {
   override firstUpdated() {
     this.observeLazyBlocks();
     this.scrollToHash();
+    this.browserState = eventState(new Date(currentTime()), {
+      startDate: eventDates.start,
+      endDate: eventDates.end,
+      timezone: timeZone,
+    });
     if (
       __HB_FEATURES__.schedule &&
       !disabledSchedule &&
-      eventState(new Date(currentTime()), {
-        startDate: eventDates.start,
-        endDate: eventDates.end,
-        timezone: timeZone,
-      }) === 'live'
+      this.has('schedule') &&
+      this.browserState === 'live'
     ) {
       this.duringEvent = true;
       void loadOnNowBlock();

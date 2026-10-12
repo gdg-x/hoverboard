@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { type StageInputs, type TicketSaleDates, siteStages } from './stages';
+import { type StageInputs, type TicketSaleDates, nextTicketSale, siteStages } from './stages';
 import { zonedTime } from './time-zone';
 
 const timezone = 'America/Los_Angeles';
@@ -130,5 +130,18 @@ describe('siteStages', () => {
     expect(siteStages(on('2028-01-01'), inputs({ archived: true }))).toEqual({
       stages: ['ended', 'archived'],
     });
+  });
+});
+
+describe('nextTicketSale', () => {
+  it('is the first coming sale day, while no ticket is on sale', () => {
+    const coming = [ticket({ salesOpen: '2027-07-01' }), ticket({ salesOpen: '2027-02-07' })];
+
+    expect(nextTicketSale(coming, on('2027-01-01'), timezone)).toBe('2027-02-07');
+    expect(nextTicketSale(coming, on('2027-03-01'), timezone)).toBeUndefined();
+    expect(nextTicketSale([ticket({ salesOpen: '2027-07-01' })], on('2027-07-01'), timezone)).toBe(
+      undefined,
+    );
+    expect(nextTicketSale([], on('2027-01-01'), timezone)).toBeUndefined();
   });
 });
