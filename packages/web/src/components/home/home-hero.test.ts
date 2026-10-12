@@ -239,6 +239,19 @@ describe('home-hero', () => {
     expect(shadowRoot.querySelector('.schedule')).toHaveAttribute('variant', 'outlined');
   });
 
+  it('adds the event to a calendar while it is upcoming', async () => {
+    const { shadowRoot } = await renderOn('2017-10-01T12:00:00Z');
+    const calendar = shadowRoot.querySelector('add-to-calendar');
+
+    expect(calendar).toHaveAttribute('size', 'l');
+    expect(calendar!.event).toMatchObject({ title, allDay: true });
+    render(nothing, document.body);
+
+    const { shadowRoot: live } = await renderOn('2017-10-13T12:00:00Z');
+
+    expect(live.querySelector('add-to-calendar')).toBeNull();
+  });
+
   it('thanks attendees after the event, and links to the videos and photos', async () => {
     const { shadowRoot } = await renderOn('2017-10-20T12:00:00Z');
 

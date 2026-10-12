@@ -792,7 +792,7 @@
   <source>My Schedule notifications disabled</source>
 </trans-unit>
 <trans-unit id="calendar.watch-online">
-  <source>Watch online: <x id="0" equiv-text="${stream}"/></source>
+  <source>Watch online: <x id="0" equiv-text="${link}"/></source>
 </trans-unit>
 <trans-unit id="pages.attending.title">
   <source>Attending</source>
@@ -946,6 +946,12 @@
 </trans-unit>
 <trans-unit id="schedule.page.local-time">
   <source>Show my time zone, <x id="0" equiv-text="${zoneName(visitorZone)}"/></source>
+</trans-unit>
+<trans-unit id="schedule.my-schedule.export">
+  <source>Add my sessions to calendar</source>
+</trans-unit>
+<trans-unit id="schedule.my-schedule.export-hint">
+  <source>Downloads your sessions as they are now. Your calendar won't follow later changes to the schedule.</source>
 </trans-unit>
 <trans-unit id="schedule.my-schedule.empty">
   <source>Save sessions in the schedule to see them here.</source>

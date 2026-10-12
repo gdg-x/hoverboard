@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { SiteConfig } from './resolve-config';
-import { attendingPrecache } from './service-worker';
+import { attendingPrecache, schedulePrecache } from './service-worker';
 
 const config = ({
   attending = true,
@@ -49,5 +49,22 @@ describe('attendingPrecache', () => {
 
   it('precaches nothing with the attending feature off', () => {
     expect(attendingPrecache(config({ attending: false, attendingPage }))).toEqual([]);
+  });
+});
+
+describe('schedulePrecache', () => {
+  const site = (schedule: boolean, published: boolean) =>
+    ({ site: { features: { schedule }, schedule: { published } } }) as unknown as Pick<
+      SiteConfig,
+      'site'
+    >;
+
+  it('precaches every page of a published schedule, which the build names by day', () => {
+    expect(schedulePrecache(site(true, true))).toEqual(['schedule.html', 'schedule/*.html']);
+  });
+
+  it('precaches nothing before the schedule is published, or with it off', () => {
+    expect(schedulePrecache(site(true, false))).toEqual([]);
+    expect(schedulePrecache(site(false, true))).toEqual([]);
   });
 });

@@ -19,17 +19,20 @@ import {
   stream,
   timeZone,
   title,
+  url,
 } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
 import type { Ticket } from '../../models/ticket';
 import { type TicketsState, selectTickets } from '../../store/tickets';
 import { openVideoDialog } from '../../store/ui';
+import { eventToCalendarEvent } from '../../utils/calendar';
 import { currentTime } from '../../utils/clock';
 import type { ContentPresence } from '../../utils/content-presence';
 import { getEventDates } from '../../utils/dates';
 import { type EventState, daysUntilStart, eventState } from '../../utils/event-state';
 import { type NextStep, callForPapersOpen, nextSteps, ticketOnSale } from '../../utils/next-step';
 import { eventPlace, type Attending } from '../../utils/place';
+import '../shared/add-to-calendar';
 import '../shared/hoverboard-icon';
 import { nextStepLink } from '../shared/next-step-link';
 import { ThemedComponent } from '../themed-component';
@@ -297,6 +300,15 @@ export class HomeHero extends ThemedComponent {
           <hoverboard-icon slot="icon" name="play"></hoverboard-icon>
           ${msg('View Highlights', { id: 'pages.home.view-highlights' })}
         </hb-button>
+      `);
+    }
+    if (this.eventState === 'upcoming') {
+      actions.push(html`
+        <add-to-calendar
+          size="l"
+          .event="${eventToCalendarEvent(this.where)}"
+          uid="${`${new URL(url).hostname}-${eventDates.start}`}"
+        ></add-to-calendar>
       `);
     }
     return actions;

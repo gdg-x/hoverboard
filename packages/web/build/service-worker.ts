@@ -24,6 +24,13 @@ export const attendingPrecache = ({
   ];
 };
 
+/**
+ * The schedule's pages, once it's published, so attendees can open any day at the venue without a
+ * connection. Workbox leaves out pages over its size limit, with a warning.
+ */
+export const schedulePrecache = ({ site }: Pick<SiteConfig, 'site'>): string[] =>
+  site.features.schedule && site.schedule.published ? ['schedule.html', 'schedule/*.html'] : [];
+
 /** Writes `service-worker.js` with Workbox once the pages are built, precaching `files` too. */
 export const serviceWorker = (files: string[] = []): AstroIntegration => ({
   name: 'hoverboard-service-worker',

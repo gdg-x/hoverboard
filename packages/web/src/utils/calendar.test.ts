@@ -1,6 +1,13 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { description, eventDates, location as actualLocation, title, url } from '../config/site';
 import type { Session } from '../models/session';
-import { googleCalendarUrl, icsContent, sessionToCalendarEvent } from './calendar';
+import {
+  eventToCalendarEvent,
+  googleCalendarUrl,
+  icsCalendar,
+  icsContent,
+  sessionToCalendarEvent,
+} from './calendar';
 
 const config = vi.hoisted(() => ({
   attendance: 'inPerson' as 'inPerson' | 'online' | 'hybrid',
@@ -108,4 +115,61 @@ describe('calendar', () => {
     expect(ics).toContain('UID:session-1');
     expect(ics.startsWith('BEGIN:VCALENDAR\r\n')).toBe(true);
   });
+
+  it('builds one ics file with several events', () => {
+    const other = { ...session, title: 'Another talk', startTime: '11:00', endTime: '11:30' };
+    const ics = icsCalendar([
+      [sessionToCalendarEvent(session, 'https://x')!, 'session-1'],
+      [sessionToCalendarEvent(other, 'https://y')!, 'session-2'],
+    ]);
+
+    expect(ics.match(/BEGIN:VCALENDAR/g)).toHaveLength(1);
+    expect(ics.match(/BEGIN:VEVENT/g)).toHaveLength(2);
+    expect(ics).toContain('UID:session-2');
+    expect(ics).toContain('DTSTART:20240102T090000Z');
+  });
+
+  describe('the whole event', () => {
+    const venue = { attendance: 'inPerson', location: actualLocation } as const;
+
+    it('is on its days, all day, at the venue', () => {
+      const event = eventToCalendarEvent(venue);
+
+      expect(event).toMatchObject({
+        title,
+        location: 'Planeta kino, 36 Shchyretska St, Lviv, Ukraine',
+        allDay: true,
+      });
+      expect(event.description).toBe(`${description}\n\n${url}`);
+      expect(event.start.toISOString().slice(0, 10)).toBe(eventDates.start);
+      expect(event.end.toISOString().slice(0, 10)).toBe(dayAfter(eventDates.end));
+    });
+
+    it('is at the stream online, and at the venue with the stream in the description when hybrid', () => {
+      config.stream = 'https://stream.example/live';
+
+      expect(eventToCalendarEvent({ attendance: 'online', location: undefined }).location).toBe(
+        'https://stream.example/live',
+      );
+      const hybrid = eventToCalendarEvent({ ...venue, attendance: 'hybrid' });
+      expect(hybrid.location).toBe('Planeta kino, 36 Shchyretska St, Lviv, Ukraine');
+      expect(hybrid.description).toContain('Watch online: https://stream.example/live');
+    });
+
+    it('writes whole days for calendars, with the day after the last', () => {
+      const event = eventToCalendarEvent(venue);
+      const days = `${eventDates.start.replaceAll('-', '')}/${dayAfter(eventDates.end).replaceAll('-', '')}`;
+
+      expect(new URL(googleCalendarUrl(event)).searchParams.get('dates')).toBe(days);
+      const ics = icsContent(event, 'event');
+      expect(ics).toContain(`DTSTART;VALUE=DATE:${eventDates.start.replaceAll('-', '')}`);
+      expect(ics).toContain(`DTEND;VALUE=DATE:${dayAfter(eventDates.end).replaceAll('-', '')}`);
+    });
+  });
 });
+
+const dayAfter = (day: string) => {
+  const date = new Date(`${day}T00:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + 1);
+  return date.toISOString().slice(0, 10);
+};

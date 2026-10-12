@@ -1,15 +1,22 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Session } from '../../models/session';
 import { url } from '../../config/site';
 import { sessionPath } from '../../utils/navigation';
-import { downloadIcs, googleCalendarUrl, sessionToCalendarEvent } from '../../utils/calendar';
+import {
+  type CalendarEvent,
+  downloadIcs,
+  googleCalendarUrl,
+  sessionToCalendarEvent,
+} from '../../utils/calendar';
 import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-menu';
 import './hoverboard-icon';
 
+/** A menu that adds a session, or with `event` and `uid` any calendar event, to a calendar. */
 @customElement('add-to-calendar')
 export class AddToCalendar extends ThemedComponent {
   static override styles = css`
@@ -21,28 +28,39 @@ export class AddToCalendar extends ThemedComponent {
   @property({ type: Object })
   accessor session: (Session & { endTime?: string }) | undefined;
 
-  private get event() {
+  /** An event other than a session. */
+  @property({ attribute: false })
+  accessor event: CalendarEvent | undefined;
+
+  /** The event's unique ID, and the name of its `.ics` file. */
+  @property()
+  accessor uid: string | undefined;
+
+  @property()
+  accessor size: 'l' | undefined;
+
+  private get calendarEvent() {
+    if (this.event) return this.event;
     if (!this.session) return undefined;
     const path = sessionPath(this.session.id);
     return sessionToCalendarEvent(this.session, new URL(path.slice(1), url).href);
   }
 
   private download = () => {
-    const event = this.event;
-    if (event && this.session) {
-      downloadIcs(event, this.session.id);
-    }
+    const event = this.calendarEvent;
+    const uid = this.uid ?? this.session?.id;
+    if (event && uid) downloadIcs([[event, uid]], uid);
   };
 
   override render() {
-    const event = this.event;
+    const event = this.calendarEvent;
     if (!event) {
       return nothing;
     }
 
     return html`
       <hb-menu>
-        <hb-button slot="trigger" variant="outlined">
+        <hb-button slot="trigger" variant="outlined" size="${ifDefined(this.size)}">
           <hoverboard-icon slot="icon" name="calendar"></hoverboard-icon>
           ${msg('Add to calendar', { id: 'shared.add-to-calendar.label' })}
         </hb-button>
