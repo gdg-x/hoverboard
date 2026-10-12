@@ -70,7 +70,8 @@ const themeColors =
     : [{ color: theme[theme.colorScheme].primary, media: undefined }];
 const fontOrigins = [...new Set(fontStylesheets.map((href) => new URL(href).origin))];
 // At build time. The header checks again in the browser.
-const builtEventState = eventState(new Date(), site.event);
+const builtAt = new Date();
+const builtEventState = eventState(builtAt, site.event);
 // The header loads the banner without waiting, so wait here for the server to render it.
 await demoBanner;
 ---
@@ -226,6 +227,7 @@ await demoBanner;
     <AppHeader
       path={`/${path}`}
       eventState={builtEventState}
+      time={builtAt.getTime()}
       presence={presence}
       client:load
       transition:persist="header"

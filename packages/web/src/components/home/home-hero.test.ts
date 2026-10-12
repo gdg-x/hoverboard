@@ -22,6 +22,7 @@ const config = vi.hoisted(() => ({
   attendance: 'inPerson' as 'inPerson' | 'online' | 'hybrid',
   stream: 'https://example.com/live',
   highlights: true,
+  callForPapers: undefined as { url: string; closes: string } | undefined,
 }));
 
 vi.mock('../../config/site', async (importOriginal) => {
@@ -39,6 +40,9 @@ vi.mock('../../config/site', async (importOriginal) => {
     },
     get stream() {
       return config.stream;
+    },
+    get callForPapers() {
+      return config.callForPapers;
     },
     get aboutBlock() {
       const { howItWas, ...callToAction } = actual.aboutBlock.callToAction;
@@ -77,6 +81,7 @@ describe('home-hero', () => {
     config.decorations = true;
     config.attendance = 'inPerson';
     config.highlights = true;
+    config.callForPapers = undefined;
   });
 
   it('names the event in the page heading, with its dates, place and description', async () => {
@@ -168,6 +173,25 @@ describe('home-hero', () => {
     expect(shadowRoot.querySelector('.buy-ticket')).toBeNull();
     expect(shadowRoot.querySelector('.schedule')).toHaveAttribute('variant', 'cta');
     expect(shadowRoot.querySelector('.updates')).toHaveAttribute('variant', 'outlined');
+  });
+
+  it('asks speakers to submit a talk while the call for papers is open', async () => {
+    config.callForPapers = { url: 'https://example.com/cfp', closes: '2017-09-01' };
+
+    const { shadowRoot } = await renderOn('2017-08-01T12:00:00Z');
+
+    expect(shadowRoot.querySelector('.submit-talk')).toHaveAttribute(
+      'href',
+      'https://example.com/cfp',
+    );
+    expect(shadowRoot.querySelector('.submit-talk')).toHaveAttribute('variant', 'cta');
+    expect(shadowRoot.querySelector('.submit-talk')).toHaveTextContent('Submit a talk');
+    expect(shadowRoot.querySelector('.schedule')).toHaveAttribute('variant', 'outlined');
+    render(nothing, document.body);
+
+    const { shadowRoot: closed } = await renderOn('2017-09-02T12:00:00Z');
+
+    expect(closed.querySelector('.submit-talk')).toBeNull();
   });
 
   it('says the event starts tomorrow on the day before', async () => {

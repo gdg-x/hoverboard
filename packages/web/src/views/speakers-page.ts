@@ -85,7 +85,7 @@ export class SpeakersPage extends ThemedComponent {
       <div class="inner">
         ${
           none
-            ? html`<coming-soon>
+            ? html`<coming-soon call-for-papers>
                 ${msg('Speakers are coming soon.', { id: 'pages.speakers.coming-soon' })}
               </coming-soon>`
             : this.renderSpeakers(speakers)

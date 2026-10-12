@@ -368,6 +368,9 @@
 <trans-unit id="home.tickets-block.in-demand">
   <source>Popular</source>
 </trans-unit>
+<trans-unit id="home.tickets-block.sales-closed">
+  <source>Sales closed</source>
+</trans-unit>
 <trans-unit id="home.tickets-block.not-available">
   <source>Not available yet</source>
 </trans-unit>
@@ -376,6 +379,9 @@
 </trans-unit>
 <trans-unit id="home.tickets-block.title">
   <source>Tickets</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.all-sold-out">
+  <source>All tickets are sold out.</source>
 </trans-unit>
 <trans-unit id="home.tickets-block.error">
   <source>Error loading tickets</source>
@@ -484,6 +490,9 @@
 </trans-unit>
 <trans-unit id="shared.filter-menu.clear">
   <source>Clear all</source>
+</trans-unit>
+<trans-unit id="common.submit-talk">
+  <source>Submit a talk</source>
 </trans-unit>
 <trans-unit id="common.buy-ticket">
   <source>Buy ticket</source>
@@ -1046,6 +1055,10 @@
 <trans-unit id="home.tickets-block.sold-out">
   <source>You missed it!</source>
   <note from="lit-localize">Shown on a sold-out ticket.</note>
+</trans-unit>
+<trans-unit id="home.tickets-block.on-sale">
+  <source>On sale <x id="0" equiv-text="${date}"/></source>
+  <note from="lit-localize">The day a ticket goes on sale, such as "On sale July 1".</note>
 </trans-unit>
 </body>
 </file>

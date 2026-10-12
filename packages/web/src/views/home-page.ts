@@ -70,6 +70,10 @@ export class HomePage extends ThemedComponent {
   @property({ type: Number, attribute: 'days-to-go' })
   accessor daysToGo = 0;
 
+  /** When the page was built. The hero checks again in the browser. */
+  @property({ type: Number })
+  accessor time = currentTime();
+
   /** Which features had content when the site was built. Blocks of the others are hidden. */
   @property({ attribute: false })
   accessor presence: ContentPresence = {};
@@ -161,6 +165,7 @@ export class HomePage extends ThemedComponent {
       <home-hero
         event-state="${this.eventState}"
         days-to-go="${this.daysToGo}"
+        time="${this.time}"
         .presence="${this.presence}"
         @show-tickets="${this.scrollToTickets}"
       ></home-hero>

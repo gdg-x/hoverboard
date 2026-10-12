@@ -3,7 +3,10 @@ import { css, html, nothing } from 'lit';
 import { displayFont } from '../../styles/shared';
 import { customElement, property } from 'lit/decorators.js';
 import type { Ticket } from '../../models/ticket';
+import { currentTime } from '../../utils/clock';
+import { getScheduleDay, onDates } from '../../utils/dates';
 import { getLocale } from '../../utils/localization';
+import { onSale } from '../../utils/next-step';
 import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-sticker';
@@ -160,7 +163,7 @@ export class TicketCard extends ThemedComponent {
             variant="cta"
             href="${ticket.url}"
             target="_blank"
-            ?disabled="${ticket.soldOut || !ticket.available}"
+            ?disabled="${!onSale(ticket, currentTime())}"
           >
             ${this.buttonLabel(ticket)}
           </hb-button>
@@ -169,11 +172,23 @@ export class TicketCard extends ThemedComponent {
     `;
   }
 
+  // The tickets block loads in the browser only, so the card can read the clock as it renders.
   private buttonLabel(ticket: Ticket) {
+    const time = currentTime();
     if (ticket.soldOut) {
       return msg('You missed it!', {
         id: 'home.tickets-block.sold-out',
         desc: 'Shown on a sold-out ticket.',
+      });
+    }
+    if (ticket.salesClose && !onDates(time, { until: ticket.salesClose })) {
+      return msg('Sales closed', { id: 'home.tickets-block.sales-closed' });
+    }
+    if (ticket.salesOpen && !onDates(time, { from: ticket.salesOpen })) {
+      const date = getScheduleDay(ticket.salesOpen);
+      return msg(str`On sale ${date}`, {
+        id: 'home.tickets-block.on-sale',
+        desc: 'The day a ticket goes on sale, such as "On sale July 1".',
       });
     }
     return ticket.available

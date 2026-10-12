@@ -285,6 +285,14 @@
         "price": { "type": "number" },
         "primary": { "type": "boolean" },
         "regular": { "type": "boolean" },
+        "salesClose": {
+          "description": "The last day of sales, in event.timezone. After it, the ticket says sales are closed.",
+          "$ref": "#/$defs/date"
+        },
+        "salesOpen": {
+          "description": "The first day of sales, in event.timezone. Before it, the ticket says when it goes on sale.",
+          "$ref": "#/$defs/date"
+        },
         "soldOut": { "type": "boolean" },
         "starts": { "type": "string" },
         "url": { "$ref": "#/$defs/link" }

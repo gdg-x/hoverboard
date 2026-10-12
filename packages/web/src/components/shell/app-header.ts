@@ -20,7 +20,7 @@ import type { Ticket } from '../../models/ticket';
 import { type TicketsState, selectTickets } from '../../store/tickets';
 import { type EventState, eventState } from '../../utils/event-state';
 import { type ContentPresence, hasContent } from '../../utils/content-presence';
-import { headerStep, ticketOnSale } from '../../utils/next-step';
+import { callForPapersOpen, headerStep, ticketOnSale } from '../../utils/next-step';
 import { routeNameFor } from '../../utils/navigation';
 import '../shared/hoverboard-icon';
 import { nextStepLink } from '../shared/next-step-link';
@@ -212,6 +212,10 @@ export class AppHeader extends ThemedComponent {
   @property()
   accessor eventState: EventState = 'upcoming';
 
+  /** When the site was built, for the call for papers and ticket sales. The browser updates it. */
+  @property({ type: Number })
+  accessor time = currentTime();
+
   /** Which features had content when the site was built. Links to the others are hidden. */
   @property({ attribute: false })
   accessor presence: ContentPresence = {};
@@ -238,7 +242,8 @@ export class AppHeader extends ThemedComponent {
 
   // The event may have started or ended since the build.
   override firstUpdated() {
-    this.eventState = eventState(new Date(currentTime()), {
+    this.time = currentTime();
+    this.eventState = eventState(new Date(this.time), {
       startDate: eventDates.start,
       endDate: eventDates.end,
       timezone: timeZone,
@@ -333,6 +338,7 @@ export class AppHeader extends ThemedComponent {
     const step = headerStep({
       eventState: this.eventState,
       presence: this.presence,
+      callForPapers: callForPapersOpen(this.time),
       ticket: this.ticket,
       attendance: this.attending,
       stream,
@@ -369,7 +375,7 @@ export class AppHeader extends ThemedComponent {
 
   private get ticket(): Ticket | undefined {
     return __HB_FEATURES__.tickets && this.tickets instanceof Success
-      ? ticketOnSale(this.tickets.data)
+      ? ticketOnSale(this.tickets.data, this.time)
       : undefined;
   }
 }

@@ -28,7 +28,7 @@ import { currentTime } from '../../utils/clock';
 import type { ContentPresence } from '../../utils/content-presence';
 import { getEventDates } from '../../utils/dates';
 import { type EventState, daysUntilStart, eventState } from '../../utils/event-state';
-import { type NextStep, nextSteps, ticketOnSale } from '../../utils/next-step';
+import { type NextStep, callForPapersOpen, nextSteps, ticketOnSale } from '../../utils/next-step';
 import { eventPlace, type Attending } from '../../utils/place';
 import '../shared/hoverboard-icon';
 import { nextStepLink } from '../shared/next-step-link';
@@ -191,6 +191,10 @@ export class HomeHero extends ThemedComponent {
   @property({ type: Number, attribute: 'days-to-go' })
   accessor daysToGo = 0;
 
+  /** When the page was built, for the call for papers and ticket sales. The browser updates it. */
+  @property({ type: Number })
+  accessor time = currentTime();
+
   /** Which features had content when the site was built. Buttons to the others are hidden. */
   @property({ attribute: false })
   accessor presence: ContentPresence = {};
@@ -204,7 +208,8 @@ export class HomeHero extends ThemedComponent {
 
   // The event may have come closer, started or ended since the build.
   override firstUpdated() {
-    const now = new Date(currentTime());
+    this.time = currentTime();
+    const now = new Date(this.time);
     const dates = { startDate: eventDates.start, endDate: eventDates.end, timezone: timeZone };
     this.eventState = eventState(now, dates);
     this.daysToGo = daysUntilStart(now, dates);
@@ -278,6 +283,7 @@ export class HomeHero extends ThemedComponent {
     const steps = nextSteps({
       eventState: this.eventState,
       presence: this.presence,
+      callForPapers: callForPapersOpen(this.time),
       ticket: this.ticket,
       attendance: this.where.attendance,
       stream,
@@ -321,7 +327,7 @@ export class HomeHero extends ThemedComponent {
 
   private get ticket(): Ticket | undefined {
     return __HB_FEATURES__.tickets && this.tickets instanceof Success
-      ? ticketOnSale(this.tickets.data)
+      ? ticketOnSale(this.tickets.data, this.time)
       : undefined;
   }
 
@@ -336,6 +342,7 @@ export class HomeHero extends ThemedComponent {
 }
 
 const STEP_CLASSES: Record<NextStep, string> = {
+  submitTalk: 'submit-talk',
   tickets: 'buy-ticket',
   watchLive: 'watch-live',
   onNow: 'schedule',

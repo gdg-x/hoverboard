@@ -29,6 +29,7 @@ const now = new Date();
   <HomePage
     eventState={eventState(now, site.event)}
     daysToGo={daysUntilStart(now, site.event)}
+    time={now.getTime()}
     presence={contentPresence(siteContent)}
     client:load
   />

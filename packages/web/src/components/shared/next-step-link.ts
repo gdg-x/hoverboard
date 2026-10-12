@@ -1,5 +1,5 @@
 import { msg } from '@lit/localize';
-import { featuredVideos, galleryBlock, stream } from '../../config/site';
+import { callForPapers, featuredVideos, galleryBlock, stream } from '../../config/site';
 import type { NextStep } from '../../utils/next-step';
 import { navigationLabel } from '../shell/navigation-label';
 
@@ -14,6 +14,13 @@ export interface NextStepLink {
 /** Where a next step goes, and its label in the current locale. Call it when rendering. */
 export const nextStepLink = (step: NextStep, ticketUrl = ''): NextStepLink => {
   switch (step) {
+    case 'submitTalk':
+      return {
+        href: callForPapers?.url ?? '',
+        label: msg('Submit a talk', { id: 'common.submit-talk' }),
+        icon: 'presentation',
+        external: true,
+      };
     case 'tickets':
       return {
         href: ticketUrl,

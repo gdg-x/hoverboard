@@ -59,6 +59,18 @@ For example, an online event with one stream per track. `./hb init` writes this 
 
 `schedule.published` shows session times and tracks. Keep it `false` until the schedule is final. `schedule.tracks` lists the tracks or rooms, in the order the schedule shows them. A session names its track by `id`. A track is on every day, unless `days` lists the days it is on. A track's `stream` is the `https:` link to watch its sessions live, such as one link per room. Without tracks, the schedule has one column. See [Content model](firebase-utils.md#content-model) for a session's day, times and track.
 
+`callForPapers` points speakers to where they submit a talk. While it's open, "Submit a talk" is the first button in the header and the home page's hero, and the speakers page links to it until there are speakers. `url` is an `https:` link, such as a Sessionize page. `opens` and `closes` are the first and the last day, in `event.timezone`. Without `opens`, it's open from the first deploy. `closes` must be before `event.startDate`. Each visitor's browser checks the dates, so it opens and closes without a deploy.
+
+```json
+"callForPapers": {
+  "url": "https://sessionize.com/example",
+  "opens": "2027-01-10",
+  "closes": "2027-03-01"
+}
+```
+
+A ticket in Firestore can have `salesOpen` and `salesClose`, the first and the last day it's sold, as `YYYY-MM-DD` in `event.timezone`. Before `salesOpen`, its button says when it goes on sale. After `salesClose`, it says sales are closed. `starts` and `ends` are only text on the ticket. When every ticket is `soldOut`, the tickets band says so.
+
 `theme` picks the look: the `festival`, `spotlight`, `paper` or `glass` theme, the color scheme, colors, fonts, spacing and decorations. See [Styling][style app].
 
 `auth.providers` lists the ways visitors sign in, in the order the sign-in dialog shows them. Visitors sign in to save sessions to My Schedule, to rate sessions and to react to them.
@@ -244,7 +256,7 @@ A session page reads every reaction to its session, and the profiles of up to 10
 
 The images come from the content at build time, like the rest of the page. After changing sessions or speakers, deploy again to update them. Each image's file name changes with what it shows, so social networks fetch the new one. To check how a page looks when shared, paste its URL into the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) or the [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/).
 
-The header and the home page's hero offer visitors their next step, from the features, the content and the event's dates. Before the event, that's a ticket that is `available` and not `soldOut`, then the schedule, then the subscribe band. During it, the stream (`event.stream`, for an online or hybrid event) and what's on now. After it, the videos, the photos and the subscribe band. The header shows the first step, and the hero the first two. A hybrid event's header skips the stream, since most visitors are at the venue. The hero adds the highlights video, `aboutBlock.callToAction.howItWas` in `content/resources.json`, when it has room. Leave `howItWas` out until you have a video of your event: `./hb init` leaves out the demo's.
+The header and the home page's hero offer visitors their next step, from the features, the content and the event's dates. Before the event, that's "Submit a talk" while `callForPapers` is open, then a ticket that is `available`, not `soldOut` and in its sale dates, then the schedule, then the subscribe band. During it, the stream (`event.stream`, for an online or hybrid event) and what's on now. After it, the videos, the photos and the subscribe band. The header shows the first step, and the hero the first two. A hybrid event's header skips the stream, since most visitors are at the venue. The hero adds the highlights video, `aboutBlock.callToAction.howItWas` in `content/resources.json`, when it has room. Leave `howItWas` out until you have a video of your event: `./hb init` leaves out the demo's.
 
 The account button shows when `mySchedule`, `feedback` or `reactions` is on, and the notifications bell when `notifications` is on. The footer links to the home page's subscribe band when `subscribe` is on, and shows a "Fork me on GitHub" sticker when `forkMe` is on.
 
