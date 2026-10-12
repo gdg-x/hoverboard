@@ -67,6 +67,10 @@
       "additionalProperties": false,
       "required": ["url", "order"],
       "properties": {
+        "alt": {
+          "description": "What the photo shows, for screen readers, such as \"Attendees dance at the after party.\" Without it, screen readers hear \"Gallery photo\".",
+          "type": "string"
+        },
         "url": { "$ref": "#/$defs/link" },
         "order": { "$ref": "#/$defs/order" }
       }

@@ -179,6 +179,13 @@ export const checkDocuments = (
         url,
       });
     }
+    if (collection === 'gallery' && !off.length && !data['alt']) {
+      report.problems.push({
+        message: `${path}: has no alt text, so screen readers only hear "Gallery photo". Add \`alt\`.`,
+        warning: true,
+        url,
+      });
+    }
   }
   for (const [key, { pattern, text, off }] of visitorProblems) {
     const fix = ' (fixable)';

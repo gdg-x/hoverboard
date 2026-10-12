@@ -9,6 +9,7 @@ import { openVideoDialog } from '../../store/ui';
 import { type VideosState, selectVideos } from '../../store/videos';
 import { band } from '../../styles/band';
 import '../shared/hoverboard-icon';
+import { pastEditionsLabel } from './past-editions';
 import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-icon-button';
@@ -143,7 +144,10 @@ export class FeaturedVideos extends ThemedComponent {
     return html`
       <div class="inner">
         <div class="band-header">
-          <h2 class="band-title">${featuredVideos.title}</h2>
+          <div>
+            <h2 class="band-title">${featuredVideos.title}</h2>
+            ${pastEditionsLabel()}
+          </div>
           <div class="controls">
             <hb-icon-button
               class="previous"

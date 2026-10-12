@@ -14,6 +14,9 @@ export const onDates = (
   return (!from || today >= from) && (!until || today <= until);
 };
 
+/** Whether the event's last day has passed at `time`, in the event's time zone. */
+export const eventIsOver = (time: number): boolean => !onDates(time, { until: eventDates.end });
+
 export const getDate = (date: string | Date) => {
   // `YYYY-MM-DD` is a calendar day that JavaScript reads as UTC midnight, so show it in UTC too.
   const day = typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date);

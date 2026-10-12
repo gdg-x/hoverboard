@@ -8,6 +8,7 @@ import type { Photo } from '../../models/photo';
 import { type GalleryState, selectGallery } from '../../store/gallery';
 import { band } from '../../styles/band';
 import '../shared/hoverboard-icon';
+import { pastEditionsLabel } from './past-editions';
 import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 
@@ -90,6 +91,7 @@ export class GalleryBlock extends ThemedComponent {
         <div class="band-header">
           <div>
             <h2 class="band-title">${galleryBlock.title}</h2>
+            ${pastEditionsLabel()}
             <p class="band-lede">${galleryBlock.description}</p>
           </div>
           <hb-button
@@ -119,7 +121,7 @@ export class GalleryBlock extends ThemedComponent {
                 <img
                   class="photo"
                   src="${photo.url}"
-                  alt="${msg('Gallery photo', { id: 'home.gallery-block.photo-alt' })}"
+                  alt="${photo.alt || msg('Gallery photo', { id: 'home.gallery-block.photo-alt' })}"
                   loading="lazy"
                 />
               </li>

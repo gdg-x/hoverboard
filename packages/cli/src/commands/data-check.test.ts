@@ -185,6 +185,23 @@ describe('checkDocuments', () => {
     });
   });
 
+  it('warns about gallery photos without alt text, while the gallery is on', () => {
+    const photos = [
+      { path: 'gallery/a', data: { url: 'https://example.com/a.jpg', order: '0' } },
+      { path: 'gallery/b', data: { url: 'https://example.com/b.jpg', order: '1', alt: 'A talk.' } },
+    ];
+
+    expect(checkDocuments(photos, on).problems).toEqual([
+      {
+        message:
+          'gallery/a: has no alt text, so screen readers only hear "Gallery photo". Add `alt`.',
+        warning: true,
+        url: emulatorUrl('gallery/a'),
+      },
+    ]);
+    expect(checkDocuments(photos, { ...on, features: { gallery: false } }).problems).toEqual([]);
+  });
+
   it('checks the schedule and the speakers of sessions', () => {
     const { problems } = checkDocuments(
       [

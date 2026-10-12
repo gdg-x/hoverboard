@@ -9,6 +9,7 @@ import '../components/shared/auth-required';
 import '../components/hero/hero-block';
 import { heroText } from '../components/hero/hero-block';
 import '../components/shared/hoverboard-icon';
+import '../components/shared/report-mistake';
 import '../components/shared/speaker-card';
 import '../components/markdown/short-markdown';
 import '../components/ui/hb-button';
@@ -302,6 +303,7 @@ export class SessionPage extends ThemedComponent {
               `
             : nothing
         }
+        <report-mistake subject="${session.title}"></report-mistake>
       </div>
     `;
   }

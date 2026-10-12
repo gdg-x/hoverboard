@@ -260,6 +260,10 @@ The header and the home page's hero offer visitors their next step, from the fea
 
 The account button shows when `mySchedule`, `feedback` or `reactions` is on, and the notifications bell when `notifications` is on. The footer links to the home page's subscribe band when `subscribe` is on, and shows a "Fork me on GitHub" sticker when `forkMe` is on.
 
+Each speaker's and session's page ends with "Speaking here? Report a mistake", which emails `organizer.email` with the speaker's name or the session's title in the subject.
+
+Until the event is over, the gallery and videos bands say they're from past editions, since a new edition starts with last year's photos and videos.
+
 ## Content Security Policy
 
 Every page has a [Content Security Policy](https://developer.mozilla.org/docs/Web/HTTP/Guides/CSP) (CSP). It tells the browser where the page may load scripts, styles, frames and other files from, so a script that got into the page can't run. The build writes it from `site.json`: the Firebase project, the Google Maps key and the `theme.fonts` stylesheets. Images can come from any `https:` address.
@@ -348,7 +352,7 @@ Hoverboard's components and themes are checked against WCAG 2.2 AA (see [Accessi
 
 - **Describe images.** In Markdown, such as posts, the FAQ and the code of conduct, write `![what the image shows](/images/photo.jpg)`. Leave the brackets empty only for a decorative image. Each `attendingPage` image needs `alt`. On the emulators, an image without alt text has a red outline.
 - **Name partners.** A partner's logo is described by its `name`, so use the name on the logo.
-- **Choose gallery photos that need no description.** Every gallery photo has the same alt text, "Gallery photo".
+- **Describe gallery photos.** Give each photo in the `gallery` collection an `alt`, such as "Attendees dance at the after party." Without it, screen readers hear "Gallery photo", and `./hb data check` warns.
 - **Caption videos.** Videos play from YouTube, so add captions there, or check its automatic ones.
 - **Start Markdown headings at `##`.** The page title is the only `#` heading. Don't skip a level, such as `##` straight to `####`.
 - **Write links that make sense on their own**, such as "Read the travel guide" rather than "click here".

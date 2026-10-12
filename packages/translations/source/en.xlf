@@ -344,6 +344,9 @@
 <trans-unit id="home.partners-block.error">
   <source>Error loading partners.</source>
 </trans-unit>
+<trans-unit id="home.past-editions">
+  <source>From past editions</source>
+</trans-unit>
 <trans-unit id="home.speakers-block.title">
   <source>Speakers</source>
 </trans-unit>
@@ -532,6 +535,12 @@
 </trans-unit>
 <trans-unit id="common.view-presentation">
   <source>View presentation</source>
+</trans-unit>
+<trans-unit id="shared.report-mistake.link">
+  <source>Report a mistake</source>
+</trans-unit>
+<trans-unit id="shared.report-mistake.text">
+  <source>Speaking here? <x id="0" equiv-text="${link}"/></source>
 </trans-unit>
 <trans-unit id="pages.speaker.badges">
   <source>Badges</source>
@@ -1065,6 +1074,10 @@
 <trans-unit id="home.tickets-block.on-sale">
   <source>On sale <x id="0" equiv-text="${date}"/></source>
   <note from="lit-localize">The day a ticket goes on sale, such as "On sale July 1".</note>
+</trans-unit>
+<trans-unit id="shared.report-mistake.subject">
+  <source>Correction: <x id="0" equiv-text="${this.subject}"/></source>
+  <note from="lit-localize">The subject of the email, with the speaker's name or the session's title.</note>
 </trans-unit>
 </body>
 </file>
