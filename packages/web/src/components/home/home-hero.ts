@@ -100,6 +100,11 @@ export class HomeHero extends ThemedComponent {
     }
 
     .copy {
+      padding: var(--hb-hero-panel-padding, 0);
+      border-radius: var(--hb-radius-l);
+      background: var(--hb-hero-panel-background, transparent);
+      backdrop-filter: var(--hb-backdrop-filter);
+      box-shadow: var(--hb-hero-panel-shadow, none);
       text-align: var(--hb-hero-align);
     }
 
@@ -144,6 +149,9 @@ export class HomeHero extends ThemedComponent {
 
     .art {
       display: none;
+      justify-self: center;
+      inline-size: 100%;
+      max-inline-size: var(--hb-hero-art-max-width, none);
       order: var(--hb-hero-art-order);
     }
 

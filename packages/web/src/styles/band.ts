@@ -90,7 +90,7 @@ export const bandTones = css`
     --hb-band-color: var(--hb-tone-surface-color);
     --hb-band-pattern: var(--hb-tone-surface-pattern);
 
-    margin-inline: var(--hb-band-inset);
+    margin: var(--hb-band-inset);
     border-block-start: var(--hb-band-divider);
     border-radius: var(--hb-band-radius);
     background:

@@ -98,14 +98,22 @@ export interface ThemeStyle {
   /** The bar's border widths, such as `0 0 1px` for only a line under it. */
   headerBorderWidth: string;
   headerShadow: string;
+  /** `flex` for the logo and the actions. `1 1 0` gives them equal room, so the navigation sits in the middle. */
+  headerSideFlex: string;
   /** The home hero's columns, its text and its illustration, on wide containers. */
   heroColumns: string;
   /** `start` or `center`, for the home hero's text. */
   heroAlign: string;
+  /** The home hero's text on a panel: its background, padding and shadow. `transparent`, 0 and `none` for none. */
+  heroPanelBackground: string;
+  heroPanelPadding: string;
+  heroPanelShadow: string;
   /** Moves the hero illustration before (-1) or after (0) the text. It is decorative. */
   heroArtOrder: string;
   /** `block`, or `none` to leave the illustration out on wide containers too. */
   heroArtDisplay: string;
+  /** The illustration's widest, such as when it sits under the text. */
+  heroArtMaxWidth: string;
   /** A band's title and link: side by side (`row`) or stacked (`column`). */
   bandHeaderDirection: string;
   bandHeaderAlign: string;
@@ -118,7 +126,7 @@ export interface ThemeStyle {
   cardScale: string;
   /** How far every other speaker card on the home page sits lower, like a scrapbook. */
   cardStagger: string;
-  /** Space beside each band, so bands can be panels instead of full-bleed. */
+  /** Space around each band, as a `margin`, so bands can be panels instead of full-bleed. */
   bandInset: string;
   bandRadius: string;
   /** A border between bands. */

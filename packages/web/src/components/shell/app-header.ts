@@ -81,6 +81,7 @@ export class AppHeader extends ThemedComponent {
 
     .brand {
       display: flex;
+      flex: var(--hb-header-side-flex, 0 1 auto);
       align-items: center;
       min-block-size: var(--hb-target-min);
       margin-inline-end: auto;
@@ -131,7 +132,9 @@ export class AppHeader extends ThemedComponent {
 
     .actions {
       display: flex;
+      flex: var(--hb-header-side-flex, 0 1 auto);
       align-items: center;
+      justify-content: flex-end;
       gap: var(--hb-space-1);
     }
 
