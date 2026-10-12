@@ -121,6 +121,7 @@ export class HbDialog extends LitElement {
     this.open = false;
   }
 
+  /* eslint-disable lit-a11y/click-events-have-key-events -- a click on the backdrop; Escape and the close button cover the keyboard */
   override render() {
     return html`
       <dialog aria-labelledby="heading" @close="${this.onClose}" @click="${this.onClick}">
@@ -139,6 +140,7 @@ export class HbDialog extends LitElement {
       </dialog>
     `;
   }
+  /* eslint-enable lit-a11y/click-events-have-key-events */
 
   protected override updated(changed: PropertyValues<this>) {
     if (!changed.has('open')) return;

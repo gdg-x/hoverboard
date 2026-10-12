@@ -271,14 +271,14 @@ export class AppHeader extends ThemedComponent {
         ?open="${this.menuOpen}"
         @close="${this.closeMenu}"
       >
-        <nav aria-label="${label}" @click="${this.closeMenu}">${this.renderLinks()}</nav>
+        <nav aria-label="${label}">${this.renderLinks(this.closeMenu)}</nav>
         ${this.renderCallToAction({ inSheet: true })}
         <app-install></app-install>
       </hb-dialog>
     `;
   }
 
-  private renderLinks() {
+  private renderLinks(onClick?: () => void) {
     const routeName = routeNameFor(this.path);
     return html`
       <ul>
@@ -288,6 +288,7 @@ export class AppHeader extends ThemedComponent {
               <a
                 href="${nav.permalink}"
                 aria-current="${nav.route === routeName ? 'page' : nothing}"
+                @click="${onClick}"
                 >${navigationLabel(nav.route)}</a
               >
             </li>

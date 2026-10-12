@@ -11,6 +11,7 @@ import astroPlugin from 'eslint-plugin-astro';
 import { createNodeResolver, importX } from 'eslint-plugin-import-x';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import litPlugin from 'eslint-plugin-lit';
+import litA11yPlugin from 'eslint-plugin-lit-a11y';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
 import wcPlugin from 'eslint-plugin-wc';
 import globals from 'globals';
@@ -113,7 +114,11 @@ export default defineConfig([
   // Lit components and the web app's code
   {
     files: ['packages/web/src/**/*.ts'],
-    extends: [litPlugin.configs['flat/recommended'], wcPlugin.configs['flat/recommended']],
+    extends: [
+      litPlugin.configs['flat/recommended'],
+      wcPlugin.configs['flat/recommended'],
+      litA11yPlugin.configs.recommended,
+    ],
   },
   {
     files: ['packages/web/src/**/*.ts'],
