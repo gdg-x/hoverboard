@@ -94,6 +94,13 @@ describe('decorations', () => {
     expect(declarations(selector)).toContain('--hb-photo-frame: 0 !important;');
   });
 
+  it('give the hero one column and line cards up with theme.decorations off', () => {
+    const off = declarations(":root[data-decorations='off'] {");
+
+    expect(off).toContain(`${cssStyleVar('heroColumns')}: 1fr !important;`);
+    expect(off).toContain(`${cssStyleVar('cardStagger')}: 0px !important;`);
+  });
+
   it('stop turning and shrinking for visitors who reduce motion', () => {
     const reduced = declarations('@media (prefers-reduced-motion: reduce) {\n  :root {');
 
