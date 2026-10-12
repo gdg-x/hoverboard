@@ -105,7 +105,13 @@ beforeEach(() => {
   write(
     'packages/web/schemas/site.schema.json',
     JSON.stringify({
-      properties: { theme: { properties: { name: { enum: ['festival', 'spotlight'] } } } },
+      properties: {
+        theme: {
+          properties: {
+            name: { enum: ['festival', 'spotlight'], enumDescriptions: ['Loud.', 'Dark.'] },
+          },
+        },
+      },
     }),
   );
   write(
@@ -207,6 +213,7 @@ describe('runInit', () => {
     expect(mocks.ask).toHaveBeenCalledWith('Project number or ID:', '1');
     expect(mocks.ask).toHaveBeenCalledWith('Event name:', 'Old Fest');
     expect(mocks.ask).toHaveBeenCalledWith('Theme (festival or spotlight):', 'festival');
+    expect(console.log).toHaveBeenCalledWith('  spotlight: Dark.');
     expect(mocks.ask).toHaveBeenCalledWith(
       expect.stringContaining('Google Maps API key'),
       'old-key',

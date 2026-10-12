@@ -37,7 +37,7 @@ const site = {
   theme: { name: 'festival', tagColors: { web: '#2196f3' } },
 };
 const resources = { title: 'Old Fest', description: 'Old', heroDescriptions: { home: 'Old' } };
-const THEMES = ['festival', 'spotlight'];
+const THEMES = [{ name: 'festival', description: 'A gig poster.' }, { name: 'spotlight' }];
 
 const details: SiteDetails = {
   title: 'New Fest',
@@ -279,7 +279,7 @@ describe('askSiteDetails', () => {
     });
 
   it('asks again until an answer is valid, and keeps the defaults otherwise', async () => {
-    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const ask = answering({
       'First day': ['tomorrow', '2027-10-15'],
       'Last day': ['2027-10-14', '2027-10-16'],
@@ -305,6 +305,8 @@ describe('askSiteDetails', () => {
     expect(answers).not.toHaveProperty('url');
     expect(ask).toHaveBeenCalledWith('First day (YYYY-MM-DD):', '2027-10-15');
     expect(ask).toHaveBeenCalledWith('Theme (festival or spotlight):', 'festival');
+    expect(log).toHaveBeenCalledWith('  festival: A gig poster.');
+    expect(log).toHaveBeenCalledWith('  spotlight');
   });
 
   it('asks for the venue coordinates when the map has a key', async () => {

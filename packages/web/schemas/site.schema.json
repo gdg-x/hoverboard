@@ -242,7 +242,13 @@
       "properties": {
         "name": {
           "description": "The built-in theme.",
-          "enum": ["festival", "spotlight", "paper", "glass"]
+          "enum": ["festival", "spotlight", "paper", "glass"],
+          "enumDescriptions": [
+            "A screen-printed gig poster: bold headings, ink outlines, hard shadows and patterned pastel bands.",
+            "A keynote stage: dark, tall condensed headings, centered titles and grayscale speaker photos.",
+            "A sketchbook: serif headings, handwritten labels, watercolor washes and polaroid photos with tape.",
+            "Liquid Glass: frosted panels over soft color glows, large round corners and a centered layout."
+          ]
         },
         "colorScheme": {
           "description": "system follows the visitor's browser setting. light or dark locks the site to one scheme and hides the footer toggle. Without it, the theme's own: dark for spotlight, system for the others.",

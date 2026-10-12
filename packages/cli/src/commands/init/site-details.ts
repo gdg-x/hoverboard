@@ -271,14 +271,21 @@ const askValid = async (
 
 const required = (value: string) => value.length > 0;
 
+/** A built-in theme, and what it looks like. */
+export interface ThemeChoice {
+  name: string;
+  description?: string | undefined;
+}
+
 /** Asks for each detail, with the current config as the defaults. */
 export const askSiteDetails = async (
   ask: Ask,
   defaults: SiteDetails,
   projectId: string,
   features: readonly string[],
-  themes: readonly string[],
+  themeChoices: readonly ThemeChoice[],
 ): Promise<SiteDetails> => {
+  const themes = themeChoices.map(({ name }) => name);
   const text = (question: string, value: string) =>
     askValid(ask, question, value, required, 'Required.');
 
@@ -357,6 +364,10 @@ export const askSiteDetails = async (
     isSiteUrl,
     'Use a full URL that ends with a slash, such as https://devfest.example.com/.',
   );
+  console.log('\nThemes:');
+  for (const { name, description } of themeChoices) {
+    console.log(description ? `  ${name}: ${description}` : `  ${name}`);
+  }
   const theme = await askValid(
     ask,
     `Theme (${themes.join(' or ')}):`,
