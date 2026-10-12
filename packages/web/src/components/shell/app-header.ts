@@ -7,6 +7,7 @@ import { archive, eventDates, navigation, shortName, timeZone, title } from '../
 import { fromStore } from '../../controllers/from-store';
 import { type TicketsState, selectTickets } from '../../store/tickets';
 import { type EventState, eventState } from '../../utils/event-state';
+import { type ContentPresence, hasContent } from '../../utils/content-presence';
 import { routeNameFor } from '../../utils/navigation';
 import '../shared/hoverboard-icon';
 import '../ui/hb-button';
@@ -197,6 +198,10 @@ export class AppHeader extends ThemedComponent {
   @property()
   accessor eventState: EventState = 'upcoming';
 
+  /** Which features had content when the site was built. Links to the others are hidden. */
+  @property({ attribute: false })
+  accessor presence: ContentPresence = {};
+
   @fromStore(selectTickets)
   private accessor tickets!: TicketsState;
 
@@ -280,11 +285,15 @@ export class AppHeader extends ThemedComponent {
     `;
   }
 
+  private get links() {
+    return navigation.filter(({ route }) => hasContent(this.presence, route));
+  }
+
   private renderLinks(onClick?: () => void) {
     const routeName = routeNameFor(this.path);
     return html`
       <ul>
-        ${navigation.map(
+        ${this.links.map(
           (nav) => html`
             <li>
               <a
@@ -309,8 +318,8 @@ export class AppHeader extends ThemedComponent {
         </hb-button>
       `;
     }
-    const inNav = navigation.some((nav) => nav.route === 'schedule');
-    if (__HB_FEATURES__.schedule && !(inNav && inSheet)) {
+    const inNav = this.links.some((nav) => nav.route === 'schedule');
+    if (__HB_FEATURES__.schedule && hasContent(this.presence, 'schedule') && !(inNav && inSheet)) {
       // The bar keeps it on narrow screens, where the navigation is behind the menu button.
       return html`<hb-button class="cta ${inNav ? 'in-nav' : ''}" variant="cta" href="/schedule"
         >${navigationLabel('schedule')}</hb-button

@@ -476,6 +476,9 @@
 <trans-unit id="common.sign-in">
   <source>Sign in</source>
 </trans-unit>
+<trans-unit id="shared.coming-soon.get-updates">
+  <source>Get updates</source>
+</trans-unit>
 <trans-unit id="shared.filter-menu.tracks">
   <source>Tracks</source>
 </trans-unit>
@@ -923,6 +926,9 @@
 <trans-unit id="pages.previous-speaker.talks">
   <source>Talks</source>
 </trans-unit>
+<trans-unit id="schedule.page.coming-soon">
+  <source>The schedule is coming soon.</source>
+</trans-unit>
 <trans-unit id="schedule.page.time-zone">
   <source>Times in <x id="0" equiv-text="&lt;strong&gt;${zoneName(shownZone)}&lt;/strong&gt;"/></source>
 </trans-unit>
@@ -973,6 +979,9 @@
 </trans-unit>
 <trans-unit id="pages.speaker.previous-talks">
   <source>Talks in earlier years</source>
+</trans-unit>
+<trans-unit id="pages.speakers.coming-soon">
+  <source>Speakers are coming soon.</source>
 </trans-unit>
 <trans-unit id="pages.speakers.no-results">
   <source>No speakers match these filters.</source>

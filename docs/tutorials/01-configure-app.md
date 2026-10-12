@@ -217,6 +217,8 @@ Turn parts of the site off in `features` in `packages/config/site.json`. Every f
 
 A feature that is off has no pages, navigation entry or home page block, and its code is left out of the build. The features are `attending`, `blog`, `codeOfConduct`, `demo`, `faq`, `feedback`, `forkMe`, `functions`, `gallery`, `map`, `mySchedule`, `notifications`, `partners`, `previousSpeakers`, `reactions`, `schedule`, `socialImages`, `speakers`, `subscribe`, `team`, `tickets` and `videos`.
 
+A feature that is on but has no content yet stays out of sight too, so a new site doesn't show empty bands. Its navigation entry and home page block are hidden, and the header and hero don't offer tickets or a schedule that aren't there: `speakers` without speakers, `schedule` (and `mySchedule`) without a published schedule with sessions on it, and likewise `blog`, `gallery`, `partners`, `previousSpeakers`, `team`, `tickets` and `videos`. The speakers and schedule pages still work, and say they are coming soon, with a link to the subscribe band when `subscribe` is on. They show up with the first deploy after their content is added. `./hb status` lists the features it hides, and why.
+
 The build fails when:
 
 - a feature needs one that is off: `schedule` needs `speakers`, `mySchedule` and `feedback` need `schedule`, and `notifications` needs `functions`.

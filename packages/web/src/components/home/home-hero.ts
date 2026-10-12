@@ -22,6 +22,7 @@ import {
 } from '../../config/site';
 import { openVideoDialog } from '../../store/ui';
 import { currentTime } from '../../utils/clock';
+import { type ContentPresence, hasContent } from '../../utils/content-presence';
 import { getEventDates } from '../../utils/dates';
 import { type EventState, daysUntilStart, eventState } from '../../utils/event-state';
 import { eventPlace, type Attending } from '../../utils/place';
@@ -186,6 +187,10 @@ export class HomeHero extends ThemedComponent {
   @property({ type: Number, attribute: 'days-to-go' })
   accessor daysToGo = 0;
 
+  /** Which features had content when the site was built. Buttons to the others are hidden. */
+  @property({ attribute: false })
+  accessor presence: ContentPresence = {};
+
   // Site.json's on the server and in the first render, so hydration matches. A demo can change it.
   @state()
   private accessor where: Attending = { attendance: siteAttendance, location: siteLocation };
@@ -300,7 +305,11 @@ export class HomeHero extends ThemedComponent {
       return recap.length > 0 ? recap : [highlights];
     }
 
-    if (this.eventState === 'upcoming' && __HB_FEATURES__.tickets) {
+    if (
+      this.eventState === 'upcoming' &&
+      __HB_FEATURES__.tickets &&
+      hasContent(this.presence, 'tickets')
+    ) {
       return [
         html`<hb-button size="l" variant="cta" class="buy-ticket" @click="${this.showTickets}">
           <hoverboard-icon slot="icon" name="ticket"></hoverboard-icon>
@@ -310,7 +319,7 @@ export class HomeHero extends ThemedComponent {
       ];
     }
 
-    if (__HB_FEATURES__.schedule) {
+    if (__HB_FEATURES__.schedule && hasContent(this.presence, 'schedule')) {
       return [
         html`<hb-button size="l" variant="cta" class="schedule" href="/schedule">
           <hoverboard-icon slot="icon" name="calendar"></hoverboard-icon>

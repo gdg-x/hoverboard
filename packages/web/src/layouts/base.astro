@@ -12,6 +12,7 @@ import { iconPath } from '../data/icons';
 import '../data/markdown';
 import { imageType, pageMetadata } from '../data/metadata';
 import { seedPage } from '../data/page';
+import { contentPresence } from '../data/presence';
 import { openGraphLocale } from '../data/structured-data';
 import { type Content, PAGE_CONTENT_ID, serializeContent } from '../store/content';
 import { BUILD_META } from '../utils/build';
@@ -43,7 +44,9 @@ const {
 } = Astro.props;
 const { imageType: type = imageType(image) } = Astro.props;
 // The header links to tickets on every page. The page's own content has already rendered.
-const content = seedPage({ ...pageContent, tickets: (await loadContent()).tickets ?? [] });
+const siteContent = await loadContent();
+const content = seedPage({ ...pageContent, tickets: siteContent.tickets ?? [] });
+const presence = contentPresence(siteContent);
 // The build sees file paths such as /index.html. Hosting serves them without `.html`.
 const path = Astro.url.pathname.replace(/(index)?\.html$/, '').slice(1);
 const url = new URL(path, site.url).href;
@@ -223,6 +226,7 @@ await demoBanner;
     <AppHeader
       path={`/${path}`}
       eventState={builtEventState}
+      presence={presence}
       client:load
       transition:persist="header"
       transition:persist-props

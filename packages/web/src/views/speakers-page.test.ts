@@ -73,6 +73,14 @@ describe('speakers-page', () => {
     );
   });
 
+  it('says speakers are coming soon when there are none yet', async () => {
+    const { shadowRoot } = await render({ speakers: new Success([]), speakersToRender: [] });
+
+    expect(shadowRoot.querySelector('coming-soon')).toHaveTextContent('Speakers are coming soon.');
+    expect(shadowRoot.querySelector('filter-menu')).toBeNull();
+    expect(shadowRoot.querySelector('.speakers')).toBeNull();
+  });
+
   it('shows previous speakers only when that feature is on', async () => {
     const { shadowRoot } = await render();
 

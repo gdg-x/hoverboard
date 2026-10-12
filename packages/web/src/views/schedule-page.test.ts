@@ -1,4 +1,4 @@
-import { Pending } from '@abraham/remotedata';
+import { Pending, Success } from '@abraham/remotedata';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
@@ -69,6 +69,27 @@ describe('schedule-page', () => {
     const { shadowRoot } = await render({ schedule: new Pending() });
 
     expect(shadowRoot.querySelector('hb-progress')).not.toHaveAttribute('hidden');
+  });
+
+  it('says the schedule is coming soon when it has no days', async () => {
+    const { shadowRoot } = await render({ schedule: new Success([]) });
+
+    expect(shadowRoot.querySelector('coming-soon')).toHaveTextContent(
+      'The schedule is coming soon.',
+    );
+    expect(shadowRoot.querySelector('schedule-tabs')).toBeNull();
+    expect(shadowRoot.querySelector('filter-menu')).toBeNull();
+    expect(shadowRoot.querySelector('slot')).toBeNull();
+  });
+
+  it('keeps My Schedule without days, which says how to save sessions', async () => {
+    const { shadowRoot } = await render({
+      schedule: new Success([]),
+      location: { pathname: '/schedule/my-schedule', search: '', params: {} },
+    });
+
+    expect(shadowRoot.querySelector('coming-soon')).toBeNull();
+    expect(shadowRoot.querySelector('slot')).not.toBeNull();
   });
 
   it('passes the location to the day tabs', async () => {

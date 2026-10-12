@@ -2,6 +2,7 @@
 import { resources, site } from 'virtual:hoverboard/site';
 import { loadContent } from '../data/content';
 import { seedPage } from '../data/page';
+import { contentPresence } from '../data/presence';
 import { eventStructuredData, serializeJsonLd } from '../data/structured-data';
 import Base from '../layouts/base.astro';
 import { daysUntilStart, eventState } from '../utils/event-state';
@@ -10,7 +11,8 @@ import { HomePage, homeBlocks } from '../views/home-page';
 // The home page loads these blocks without waiting, so wait here for the server to render them.
 await homeBlocks;
 
-const { blog, speakers } = await loadContent();
+const siteContent = await loadContent();
+const { blog, speakers } = siteContent;
 const content = seedPage({ blog, speakers });
 // At build time. The hero checks again in the browser.
 const now = new Date();
@@ -26,6 +28,7 @@ const now = new Date();
   <HomePage
     eventState={eventState(now, site.event)}
     daysToGo={daysUntilStart(now, site.event)}
+    presence={contentPresence(siteContent)}
     client:load
   />
 </Base>

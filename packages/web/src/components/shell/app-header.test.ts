@@ -143,6 +143,22 @@ describe('app-header', () => {
     expect(within(sheet).getAllByShadowRole('link', { name: 'Schedule' })).toHaveLength(1);
   });
 
+  it('leaves out links and the call to action for features the build found no content for', async () => {
+    setFeatures({ tickets: false });
+    const { element, nav, sheet, callToAction } = await render();
+
+    element.presence = { speakers: false, schedule: false, blog: true, team: false };
+    await element.updateComplete;
+
+    for (const name of ['Speakers', 'Schedule', 'Team']) {
+      expect(nav.queryByShadowRole('link', { name })).toBeNull();
+      expect(within(sheet).queryByShadowRole('link', { name })).toBeNull();
+    }
+    expect(nav.getByShadowRole('link', { name: 'Blog' })).toBeInTheDocument();
+    expect(nav.getByShadowRole('link', { name: 'Attending' })).toBeInTheDocument();
+    expect(callToAction()).toBeNull();
+  });
+
   it('shows the account menu only when a feature needs sign-in', async () => {
     const { shadowRoot } = await render();
     expect(deepQuerySelector(shadowRoot, 'account-menu')).toBeInTheDocument();

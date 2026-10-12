@@ -135,6 +135,17 @@ describe('home-hero', () => {
     expect(shadowRoot.querySelector('.schedule')).toHaveAttribute('href', '/schedule');
   });
 
+  it('offers neither tickets nor the schedule when the build found none', async () => {
+    vi.setSystemTime(new Date('2017-10-01T12:00:00Z'));
+    const { shadowRoot } = await fixture<HomeHero>(
+      html`<home-hero .presence="${{ tickets: false, schedule: false }}"></home-hero>`,
+    );
+
+    expect(shadowRoot.querySelector('.buy-ticket')).toBeNull();
+    expect(shadowRoot.querySelector('.schedule')).toBeNull();
+    expect(shadowRoot.querySelector('.watch-video')).not.toBeNull();
+  });
+
   it('is live during the event, and links to what is on now', async () => {
     const { shadowRoot } = await renderOn('2017-10-13T12:00:00Z');
 

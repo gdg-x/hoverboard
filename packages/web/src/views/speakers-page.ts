@@ -3,6 +3,7 @@ import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
+import '../components/shared/coming-soon';
 import '../components/shared/filter-menu';
 import '../components/shared/no-results';
 import '../components/shared/previous-speakers-block';
@@ -75,31 +76,19 @@ export class SpeakersPage extends ThemedComponent {
 
   override render() {
     const speakers = this.speakersToRender;
+    const none = this.speakers instanceof Success && this.speakers.data.length === 0;
     return html`
       <simple-hero page="speakers"></simple-hero>
 
       <hb-progress ?hidden="${this.speakers instanceof Success}"></hb-progress>
 
       <div class="inner">
-        <filter-menu
-          .filterGroups="${this.filterGroups}"
-          .selectedFilters="${this.selectedFilters}"
-          .resultsCount="${speakers.length}"
-        ></filter-menu>
-
         ${
-          speakers.length === 0 && this.selectedFilters.length
-            ? html`<no-results>
-                ${msg('No speakers match these filters.', { id: 'pages.speakers.no-results' })}
-              </no-results>`
-            : html`<ul class="speakers">
-                ${speakers.map(
-                  (speaker) =>
-                    html`<li>
-                      <speaker-card .speaker="${speaker}" heading-level="2"></speaker-card>
-                    </li>`,
-                )}
-              </ul>`
+          none
+            ? html`<coming-soon>
+                ${msg('Speakers are coming soon.', { id: 'pages.speakers.coming-soon' })}
+              </coming-soon>`
+            : this.renderSpeakers(speakers)
         }
       </div>
 
@@ -107,6 +96,31 @@ export class SpeakersPage extends ThemedComponent {
         __HB_FEATURES__.previousSpeakers
           ? html`<previous-speakers-block></previous-speakers-block>`
           : nothing
+      }
+    `;
+  }
+
+  private renderSpeakers(speakers: BuiltSpeaker[]) {
+    return html`
+      <filter-menu
+        .filterGroups="${this.filterGroups}"
+        .selectedFilters="${this.selectedFilters}"
+        .resultsCount="${speakers.length}"
+      ></filter-menu>
+
+      ${
+        speakers.length === 0 && this.selectedFilters.length
+          ? html`<no-results>
+              ${msg('No speakers match these filters.', { id: 'pages.speakers.no-results' })}
+            </no-results>`
+          : html`<ul class="speakers">
+              ${speakers.map(
+                (speaker) =>
+                  html`<li>
+                    <speaker-card .speaker="${speaker}" heading-level="2"></speaker-card>
+                  </li>`,
+              )}
+            </ul>`
       }
     `;
   }
