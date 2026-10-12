@@ -208,8 +208,11 @@ await demoBanner;
       set:html={serializeContent(content)}
     />
     <script>
-      import '../service-worker-registration';
-      import { startApp } from '../app';
+      // The app loads Lit, which must find hydration support first, or components render twice.
+      // Static imports would let the bundler run the shared Lit chunk before it.
+      await import('@awesome.me/astro-lit/hydration-support.js');
+      await import('../service-worker-registration');
+      const { startApp } = await import('../app');
 
       void startApp();
     </script>

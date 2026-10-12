@@ -9,6 +9,7 @@ import {
   orderBy,
   query,
   QueryDocumentSnapshot,
+  type QuerySnapshot,
   type Unsubscribe,
 } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -77,6 +78,12 @@ export const subscribeToDocument = <T>(
   return new Success(unsubscribe);
 };
 
+/**
+ * An empty result from the cache, which Firestore gives when it can't reach the server and has
+ * nothing cached. It says nothing about the collection, so the content the page was built with stays.
+ */
+const isEmptyCache = (snapshot: QuerySnapshot) => snapshot.empty && snapshot.metadata.fromCache;
+
 export const subscribeToCollection = <T>(
   path: string,
   onStart: () => void,
@@ -86,7 +93,9 @@ export const subscribeToCollection = <T>(
 ): Subscription => {
   const unsubscribe = onSnapshot(
     query(collection(db, path), order),
-    (snapshot) => onNext(snapshot.docs.map<T>(mergeDataAndId)),
+    (snapshot) => {
+      if (!isEmptyCache(snapshot)) onNext(snapshot.docs.map<T>(mergeDataAndId));
+    },
     (payload) => onError(payload),
   );
 
@@ -103,7 +112,9 @@ export const subscribeToCollectionGroup = <T>(
 ): Subscription => {
   const unsubscribe = onSnapshot(
     query(collectionGroup(db, path), order),
-    (snapshot) => onNext(snapshot.docs.map<T>(dataWithParentId)),
+    (snapshot) => {
+      if (!isEmptyCache(snapshot)) onNext(snapshot.docs.map<T>(dataWithParentId));
+    },
     (payload) => onError(payload),
   );
 

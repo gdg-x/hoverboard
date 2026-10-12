@@ -29,7 +29,7 @@ We aim to support the current versions of Chrome, Edge, Firefox and Safari on de
 
 ## Known barriers
 
-No barriers are confirmed yet. These areas are the first the audit will check:
+The automated checks list what they find in [accessibility-issues.md](accessibility-issues.md). The audit will also check these areas first:
 
 - Sticky bars on the schedule (the day tabs, track names and times) covering the focused session.
 - The schedule grid, which scrolls sideways, with a keyboard and a screen reader.
@@ -37,7 +37,7 @@ No barriers are confirmed yet. These areas are the first the audit will check:
 - Status messages, such as filter result counts and toasts, being announced.
 - Handwriting and condensed display fonts in some themes, with increased text spacing.
 
-Confirmed barriers will be listed here with links to their issues.
+Barriers the audit confirms will be added to that list.
 
 ## Your event's site
 

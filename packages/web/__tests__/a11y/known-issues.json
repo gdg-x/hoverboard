@@ -1,0 +1,10 @@
+[
+  {
+    "id": "A1",
+    "rule": "link-in-text-block",
+    "sites": ["demo"],
+    "paths": ["/team"],
+    "themes": ["festival", "spotlight", "paper"],
+    "target": "team-page >>> short-markdown >>> a"
+  }
+]

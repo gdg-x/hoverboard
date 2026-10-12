@@ -23,6 +23,7 @@ Each package with dependencies has its own `package.json` and `package-lock.json
 - Node.js and npm versions come from `engines` in the root `package.json`. CI uses the same file.
 - `npm ci` at the root also installs every package through `postinstall`.
 - Java is needed for the Firestore emulator, which the rules tests and `npm start` use.
+- Chromium is needed for the `A11y` tests: `npx --prefix packages/web playwright install chromium`.
 - Production Firestore commands sign in with the Firebase CLI login (`npx firebase login`). There are no service account key files.
 
 ## Commands
@@ -31,7 +32,7 @@ Run from the repo root.
 
 | Command                        | Does                                                                                                                                                                                                                                             |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `npm test`                     | All Vitest projects: Web, Server, Hydration, Functions, CLI, Storage, Firestore and Sample data (both start the emulator), Translations and Smoke                                                                                                |
+| `npm test`                     | All Vitest projects: Web, Server, Hydration, Functions, CLI, Storage, Firestore and Sample data (both start the emulator), Translations, Smoke and A11y                                                                                          |
 | `npx vitest run --project Web` | One project. Add a path to run one file                                                                                                                                                                                                          |
 | `npm run lint`                 | ESLint, Prettier, syncpack, lit-analyzer, site config, `astro check` and type checks for web, server and storage                                                                                                                                 |
 | `npm run fix`                  | ESLint and Prettier autofix                                                                                                                                                                                                                      |
@@ -58,6 +59,7 @@ Before finishing a change, run `npm run lint` and `npm test`, or at least the af
 - **Server tests** are `*.server.test.ts` files in the `Server` project. They render components with Lit SSR in Node, as the build does: fill the store with `seedPage()` from `src/data/page.ts`, then render with `render()` from `@lit-labs/ssr`. A component that reads content the page did not seed fails with "db is not available on the server".
 - **Hydration tests** are in the `Hydration` project. Its global setup renders each page in `packages/web/__tests__/fixtures/hydration-pages.ts` with Lit SSR, and `pages.hydration.test.ts` hydrates them in jsdom. It fails when the first client render does not match the server HTML. Add a page there when a component renders differently in the browser.
 - **Smoke tests** are `*.smoke.test.ts` files in their own Vitest projects. `features.smoke.test.ts` builds the site once per feature with that feature off (`--project 'Smoke (blog off)'`), and checks its pages, links and chunks are gone. `build.smoke.test.ts` builds the minimal site in `packages/web/__tests__/fixtures/minimal-site`. Run them all with `npx vitest run --project 'Smoke*'`.
+- **A11y tests** are in the `A11y` project. Its global setup builds the demo site with the sample data and the minimal site, and serves them on the Hosting emulator. `pages.a11y.test.ts` runs axe in Chromium on each page template in every theme and scheme. Accepted violations are in `packages/web/__tests__/a11y/known-issues.json` and [docs/accessibility-issues.md](docs/accessibility-issues.md). A violation that isn't listed fails, and so does a listed one that is gone. Results and screenshots go to `packages/web/test-results/a11y`.
 - **Features** are gated with `__HB_FEATURES__.<name>` where the code of a disabled feature should be left out of the build. The build replaces it with `true` or `false`. Use `isFeatureEnabled(name)` only for names known at runtime.
 - **Vitest** is configured once in the root `vitest.config.ts`. Do not add `vitest` to a package's `package.json`, because a second copy breaks `expect.extend` from setup files.
 - **Dependencies** shared by several packages must use the same version range. `npm run lint:syncpack` checks this.

@@ -122,6 +122,8 @@ export default defineConfig({
           },
           include: ['packages/web/__tests__/hydration/*.hydration.test.ts'],
           exclude: configDefaults.exclude,
+          // axe on a whole page in jsdom takes seconds, more when other projects run alongside.
+          testTimeout: 30000,
         },
       },
       {
@@ -160,6 +162,17 @@ export default defineConfig({
           environment: 'node',
           globalSetup: ['./packages/web/__tests__/emulator.global-setup.ts'],
           include: ['packages/web/src/**/*.emulator.test.ts'],
+        },
+      },
+      {
+        // Builds the demo and minimal sites, serves them on the Hosting emulator and runs axe in Chromium.
+        test: {
+          name: 'A11y',
+          environment: 'node',
+          globalSetup: ['./packages/web/__tests__/a11y/global-setup.ts'],
+          include: ['packages/web/__tests__/a11y/*.a11y.test.ts'],
+          testTimeout: 60000,
+          maxConcurrency: 6,
         },
       },
       {
