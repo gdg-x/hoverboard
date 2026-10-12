@@ -4,19 +4,13 @@ The violations of WCAG 2.2 AA that the `A11y` tests find on the built site and a
 
 The tests run axe on one page of each template in every built-in theme, light and dark, and on a few pages with decorations off, forced colors, reduced motion and a 320px screen. See [ACCESSIBILITY.md](ACCESSIBILITY.md) for what Hoverboard aims for.
 
-| ID  | Rule                 | WCAG               | Where                                                                              | Severity |
-| --- | -------------------- | ------------------ | ---------------------------------------------------------------------------------- | -------- |
-| A1  | `link-in-text-block` | 1.4.1 Use of color | Team page, links in the team's text. Festival, spotlight and paper, light and dark | Serious  |
+| ID  | Rule | WCAG | Where | Severity |
+| --- | ---- | ---- | ----- | -------- |
 
-## A1: Links in the team text rely on color
-
-Links inside the team page's text (`short-markdown` in `team-page`) have no underline, and their color is too close to the text around them, less than 3:1. People who can't tell the colors apart can't find the links. The glass and minimalist themes pass.
-
-Fix: underline links in `short-markdown`, as the footer and prose do, or give them 3:1 against the text and an underline on hover and focus.
+None at the moment. List a new one with the next ID, `A2`, in this table and in the JSON file, and describe it in a section below.
 
 ## Reported, not failing
 
 axe's best-practice rules run too. The tests save their results in `packages/web/test-results/a11y`, but don't fail on them. On the last run:
 
-- `heading-order`: session cards on the schedule and speaker cards on the speakers page skip a heading level.
-- `region`: the skip link of the minimal site is outside a landmark.
+- `region`: the skip link of the minimal site is outside a landmark. axe only treats a link as a skip link when it comes before the page's first other link, and it can't compare positions across shadow roots. The minimal site has no navigation links next to the skip link in the header's shadow root, so axe misses that it is one. The skip link works.

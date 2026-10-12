@@ -94,7 +94,10 @@ export class SpeakersPage extends ThemedComponent {
               </no-results>`
             : html`<ul class="speakers">
                 ${speakers.map(
-                  (speaker) => html`<li><speaker-card .speaker="${speaker}"></speaker-card></li>`,
+                  (speaker) =>
+                    html`<li>
+                      <speaker-card .speaker="${speaker}" heading-level="2"></speaker-card>
+                    </li>`,
                 )}
               </ul>`
         }

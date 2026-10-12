@@ -8,6 +8,12 @@ export class ShortMarkdown extends Markdown {
     img {
       width: 100%;
     }
+
+    /* Links in running text need more than their color (WCAG 1.4.1). */
+    a {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
   `;
 }
 

@@ -17,6 +17,16 @@ const speaker = {
 } as Speaker;
 
 describe('speaker-card', () => {
+  it('can use an h2 name right under the page title', async () => {
+    await fixture<SpeakerCard>(
+      html`<speaker-card .speaker=${speaker} heading-level="2"></speaker-card>`,
+    );
+
+    expect(
+      screen.getByShadowRole('heading', { level: 2, name: 'Ada Lovelace' }),
+    ).toBeInTheDocument();
+  });
+
   it('is one link to the speaker, named by the speaker', async () => {
     const { shadowRoot } = await fixture<SpeakerCard>(
       html`<speaker-card .speaker=${speaker}></speaker-card>`,
@@ -36,7 +46,9 @@ describe('speaker-card', () => {
       html`<speaker-card .speaker=${speaker}></speaker-card>`,
     );
 
-    expect(screen.getByShadowRole('heading', { name: 'Ada Lovelace' })).toBeInTheDocument();
+    expect(
+      screen.getByShadowRole('heading', { level: 3, name: 'Ada Lovelace' }),
+    ).toBeInTheDocument();
     expect(deepQuerySelector(shadowRoot, '.meta')).toHaveTextContent(
       'Analytical Engines · United Kingdom',
     );
