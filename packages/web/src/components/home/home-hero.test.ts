@@ -2,6 +2,7 @@ import { Success } from '@abraham/remotedata';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { html, nothing, render } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { setFeatures } from '../../../__tests__/helpers/features';
 import { setStoreState } from '../../../__tests__/helpers/store';
 import {
@@ -220,13 +221,56 @@ describe('home-hero', () => {
     expect(shadowRoot.querySelector('.watch-video')).not.toBeNull();
   });
 
-  it('is live during the event, and links to what is on now', async () => {
+  it('is live during the event, and links to what is on now, then the attending page', async () => {
     const { shadowRoot } = await renderOn('2017-10-13T12:00:00Z');
 
     expect(shadowRoot.querySelector('hb-sticker')).toHaveTextContent('Live now');
     expect(shadowRoot.querySelector('.buy-ticket')).toBeNull();
     expect(shadowRoot.querySelector('.watch-live')).toBeNull();
     expect(shadowRoot.querySelector('.schedule')).toHaveTextContent("See what's on now");
+    const attending = shadowRoot.querySelector('.attending');
+    expect(attending).toHaveAttribute('href', '/attending');
+    expect(attending).toHaveAttribute('variant', 'outlined');
+    expect(attending).not.toHaveAttribute('target');
+    expect(attending).toHaveTextContent('Info for attendees');
+    await expectNoAxeViolations(shadowRoot.host);
+  });
+
+  it("doesn't link to the attending page during an online event", async () => {
+    config.attendance = 'online';
+    const { shadowRoot } = await renderOn('2017-10-13T12:00:00Z');
+
+    expect(shadowRoot.querySelector('.attending')).toBeNull();
+  });
+
+  it('says when tickets go on sale while none is on sale', async () => {
+    setStoreState({
+      tickets: new Success([
+        { ...ticket, salesOpen: '2017-09-01' },
+        { ...ticket, salesOpen: '2017-08-15' },
+      ]),
+    });
+    const { shadowRoot } = await renderOn('2017-08-01T12:00:00Z');
+
+    expect(shadowRoot.querySelector('.buy-ticket')).toBeNull();
+    expect(shadowRoot.querySelector('.sale')).toHaveTextContent('Tickets on sale August 15');
+    expect(shadowRoot.querySelector('hb-sticker')).toHaveTextContent('73 days to go');
+    await expectNoAxeViolations(shadowRoot.host);
+    render(nothing, document.body);
+
+    const { shadowRoot: onSale } = await renderOn('2017-08-15T12:00:00Z');
+
+    expect(onSale.querySelector('.buy-ticket')).not.toBeNull();
+    expect(onSale.querySelector('.sale')).toBeNull();
+  });
+
+  it("doesn't say when tickets go on sale without tickets to sell", async () => {
+    setStoreState({
+      tickets: new Success([{ ...ticket, salesOpen: '2017-09-01', soldOut: true }]),
+    });
+    const { shadowRoot } = await renderOn('2017-08-01T12:00:00Z');
+
+    expect(shadowRoot.querySelector('.sale')).toBeNull();
   });
 
   it('links to the stream, then what is on now, during an online event', async () => {

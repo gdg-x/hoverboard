@@ -5,7 +5,7 @@ import { env } from 'node:process';
 import { chunkFileNames } from './build/chunk-names';
 import { csp, type CspSite } from './build/csp';
 import { decorators } from './build/decorators';
-import { CONFIG_PATHS, production, resolveConfig } from './build/resolve-config';
+import { CONFIG_PATHS, production, resolveConfig, withDevBar } from './build/resolve-config';
 import { routes } from './build/routes';
 import { attendingPrecache, schedulePrecache, serviceWorker } from './build/service-worker';
 import { sitePublic } from './build/site-public';
@@ -14,7 +14,7 @@ import { site } from './build/vite-plugin-site';
 if (CONFIG_PATHS.site.endsWith('demo-config')) {
   console.info('Using the demo site in packages/demo-config: packages/config has no site.json.');
 }
-const config = resolveConfig();
+const config = withDevBar(resolveConfig(), env['FIRESTORE_TARGET']);
 
 export default defineConfig({
   site: config.site.url,

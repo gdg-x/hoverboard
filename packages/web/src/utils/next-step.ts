@@ -1,13 +1,21 @@
 import { type Feature, isFeatureEnabled } from '../config/features';
-import { callForPapers } from '../config/site';
+import { callForPapers, timeZone } from '../config/site';
 import type { Ticket } from '../models/ticket';
 import { type ContentPresence, hasContent } from './content-presence';
-import { onDates } from './dates';
 import type { EventState } from './event-state';
+import { callForPapersOpenAt, nextTicketSale, ticketSells } from './stages';
 
 /** What a visitor can do next, in the order the hero and the header offer it. */
 export type NextStep =
-  'submitTalk' | 'tickets' | 'watchLive' | 'onNow' | 'schedule' | 'updates' | 'videos' | 'photos';
+  | 'submitTalk'
+  | 'tickets'
+  | 'watchLive'
+  | 'onNow'
+  | 'attending'
+  | 'schedule'
+  | 'updates'
+  | 'videos'
+  | 'photos';
 
 export interface NextStepContext {
   eventState: EventState;
@@ -23,17 +31,19 @@ export interface NextStepContext {
 
 /** Whether the call for papers is open at `time`, from `opens` to the end of `closes`. */
 export const callForPapersOpen = (time: number, call = callForPapers): boolean =>
-  !!call && onDates(time, { from: call.opens, until: call.closes });
+  callForPapersOpenAt(call, time, timeZone);
 
 /** Whether a ticket can be bought at `time`: available, not sold out, and in its sale dates. */
 export const onSale = (ticket: Ticket, time: number): boolean =>
-  ticket.available &&
-  !ticket.soldOut &&
-  onDates(time, { from: ticket.salesOpen, until: ticket.salesClose });
+  ticketSells(ticket, time, timeZone);
 
 /** The first ticket on sale at `time`, with a link. */
 export const ticketOnSale = (tickets: readonly Ticket[], time: number): Ticket | undefined =>
   tickets.find((ticket) => ticket.url && onSale(ticket, time));
+
+/** The first day a ticket goes on sale, while none is on sale at `time`. */
+export const ticketsGoOnSale = (tickets: readonly Ticket[], time: number): string | undefined =>
+  nextTicketSale(tickets, time, timeZone);
 
 /**
  * The steps to offer, most important first. A step is only offered when its feature is on and the
@@ -54,6 +64,8 @@ export const nextSteps = ({
     return [
       ...(attendance !== 'inPerson' && stream ? (['watchLive'] as const) : []),
       ...(has('schedule') ? (['onNow'] as const) : []),
+      // The doors, the Wi-Fi and the way in, for the people at the venue.
+      ...(attendance !== 'online' && has('attending') ? (['attending'] as const) : []),
     ];
   }
   if (eventState === 'over') {

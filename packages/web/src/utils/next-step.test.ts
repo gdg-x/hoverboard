@@ -66,10 +66,22 @@ describe('nextSteps', () => {
     const live = { eventState: 'live', stream: 'https://example.com/live' } as const;
 
     expect(nextSteps(context({ ...live, attendance: 'online' }))).toEqual(['watchLive', 'onNow']);
-    expect(nextSteps(context({ ...live, attendance: 'hybrid' }))).toEqual(['watchLive', 'onNow']);
-    expect(nextSteps(context({ ...live, attendance: 'inPerson' }))).toEqual(['onNow']);
+    expect(nextSteps(context({ ...live, attendance: 'hybrid' }))).toEqual([
+      'watchLive',
+      'onNow',
+      'attending',
+    ]);
     expect(nextSteps(context({ eventState: 'live', attendance: 'online' }))).toEqual(['onNow']);
-    expect(nextSteps(context({ eventState: 'live', presence: { schedule: false } }))).toEqual([]);
+  });
+
+  it('offers what is on and then the attending page at the venue', () => {
+    const live = { eventState: 'live', stream: 'https://example.com/live' } as const;
+
+    expect(nextSteps(context(live))).toEqual(['onNow', 'attending']);
+    expect(nextSteps(context({ ...live, presence: { schedule: false } }))).toEqual(['attending']);
+    setFeatures({ attending: false });
+    expect(nextSteps(context(live))).toEqual(['onNow']);
+    expect(nextSteps(context({ ...live, presence: { schedule: false } }))).toEqual([]);
   });
 
   it('offers the videos, the photos and updates after the event', () => {
@@ -88,9 +100,15 @@ describe('nextSteps', () => {
 describe('headerStep', () => {
   const live = { eventState: 'live', stream: 'https://example.com/live' } as const;
 
+  afterEach(() => setFeatures());
+
   it('is the first step', () => {
     expect(headerStep(context({ ticket }))).toBe('tickets');
     expect(headerStep(context({ ...live, attendance: 'online' }))).toBe('watchLive');
+    expect(headerStep(context({ presence: { schedule: false }, eventState: 'live' }))).toBe(
+      'attending',
+    );
+    setFeatures({ attending: false });
     expect(headerStep(context({ presence: { schedule: false }, eventState: 'live' }))).toBe(
       undefined,
     );

@@ -1,6 +1,6 @@
 import { eventDates, timeZone } from '../config/site';
 import { getLocale } from './localization';
-import { wallClock } from './time-zone';
+import { onDays } from './time-zone';
 
 /**
  * Whether `time` falls on `from` (YYYY-MM-DD), on `until`, or a day between them, in the event's
@@ -8,11 +8,8 @@ import { wallClock } from './time-zone';
  */
 export const onDates = (
   time: number,
-  { from, until }: { from?: string | undefined; until?: string | undefined },
-): boolean => {
-  const today = wallClock(new Date(time), timeZone).date;
-  return (!from || today >= from) && (!until || today <= until);
-};
+  window: { from?: string | undefined; until?: string | undefined },
+): boolean => onDays(time, timeZone, window);
 
 /** Whether the event's last day has passed at `time`, in the event's time zone. */
 export const eventIsOver = (time: number): boolean => !onDates(time, { until: eventDates.end });

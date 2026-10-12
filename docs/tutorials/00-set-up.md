@@ -20,7 +20,7 @@ Project Hoverboard locally in less than 15 minutes.
 1. Commit `packages/config`, unless `./hb init` pushed it to a new repository.
 1. Update the rest of your site's config and content in [packages/config](/packages/config). More info can be found [here](01-configure-app.md)
 1. Run the app locally. Local development always runs on the [Firebase emulators](https://firebase.google.com/docs/emulator-suite) with the `demo-hoverboard` project, so it needs no Firebase project and never reads or writes live data.
-   - _Tip: `./hb setup` logs in and selects the Firebase project you deploy to, then runs `./hb doctor` to confirm your environment is ready. `./hb status` shows the project, the versions, the features that are on, the last deploy, your changes to Hoverboard's files and the document count of each collection, in the emulator or, with `--production`, the live site._
+   - _Tip: `./hb setup` logs in and selects the Firebase project you deploy to, then runs `./hb doctor` to confirm your environment is ready. `./hb status` shows the project, the versions, the features that are on, the last deploy, your changes to Hoverboard's files, the document count of each collection and the stages the site is in, such as the call for papers or ticket sales, in the emulator or, with `--production`, the live site._
 1. Seed the local Firestore emulator with data
    - [Optional] You can edit the files in `docs/sample-data/collections` to use your own data
    - Run `npm start` in one terminal to launch the app together with the Firebase emulators. The site is at http://localhost:4321

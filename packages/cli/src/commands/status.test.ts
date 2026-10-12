@@ -9,10 +9,15 @@ import { runStatus } from './status.js';
 
 const mocks = vi.hoisted(() => {
   const counts: Record<string, number> = { speakers: 12, sessions: 30, feedback: 4 };
+  const docs: Record<string, Record<string, unknown>[]> = {};
   const count = (name: string) => ({
     count: () => ({ get: async () => ({ data: () => ({ count: counts[name] ?? 0 }) }) }),
+    get: async () => ({
+      docs: (docs[name] ?? []).map((data, index) => ({ id: `${name}-${index}`, data: () => data })),
+    }),
   });
   return {
+    docs,
     request: vi.fn(async (): Promise<unknown> => ({
       releases: [
         {
@@ -99,6 +104,8 @@ afterEach(() => {
   server?.close();
   server = undefined;
   setTarget('emulator');
+  for (const name of Object.keys(mocks.docs)) delete mocks.docs[name];
+  vi.useRealTimers();
   vi.restoreAllMocks();
   vi.clearAllMocks();
   vi.unstubAllEnvs();
@@ -169,6 +176,96 @@ describe('runStatus', () => {
 
     expect(result['hidden']).toEqual([]);
     expect(output()).not.toContain('hidden from the site');
+  });
+
+  describe('stages', () => {
+    const site = (fields: Record<string, unknown> = {}) =>
+      write('packages/config/site.json', {
+        firebase: { projectId: 'fest-2027' },
+        event: { startDate: '2027-10-13', endDate: '2027-10-14', timezone: 'Europe/Kyiv' },
+        features: { tickets: true },
+        ...fields,
+      });
+    // Only the clock, so the emulator check's socket still times out.
+    const today = (time: string) => {
+      vi.useFakeTimers({ toFake: ['Date'] });
+      vi.setSystemTime(new Date(time));
+    };
+
+    beforeEach(async () => {
+      vi.stubEnv('FIRESTORE_EMULATOR_HOST', await listen());
+    });
+
+    it('shows the stages, their states and what comes next', async () => {
+      site({ callForPapers: { url: 'https://example.com/cfp', closes: '2027-03-01' } });
+      mocks.docs['tickets'] = [{ available: true, soldOut: false, salesOpen: '2027-02-07' }];
+      today('2027-01-15T12:00:00Z');
+
+      const result = await runStatus();
+
+      expect(result['stages']).toEqual({
+        stages: ['announced', 'callForPapers', 'ticketSales'],
+        ticketSales: 'notYetOnSale',
+        next: { change: 'ticketsGoOnSale', date: '2027-02-07' },
+      });
+      expect(output()).toContain(
+        'Stages: announced, call for papers (closes after 2027-03-01), ticket sales (not yet on sale)',
+      );
+      expect(output()).toContain('Next: tickets go on sale on 2027-02-07');
+      expect(output()).toContain('The schedule shows once sessions have a day and times.');
+    });
+
+    it('shows the schedule once sessions have a day and times', async () => {
+      site();
+      mocks.docs['sessions'] = [
+        { title: 'Keynote', day: '2027-10-13', startTime: '10:00', endTime: '11:00' },
+      ];
+      today('2027-09-01T12:00:00Z');
+
+      const result = await runStatus();
+
+      expect(result['stages']).toMatchObject({ stages: ['announced', 'schedule'] });
+      expect(output()).toContain('Next: the event starts on 2027-10-13');
+      expect(output()).not.toContain('The schedule shows once');
+    });
+
+    it('says the schedule waits for schedule.published', async () => {
+      site({ schedule: { published: false } });
+      mocks.docs['sessions'] = [
+        { title: 'Keynote', day: '2027-10-13', startTime: '10:00', endTime: '11:00' },
+      ];
+      today('2027-09-01T12:00:00Z');
+
+      await runStatus();
+
+      expect(output()).toContain('Stages: announced\n');
+      expect(output()).toContain('The schedule shows once schedule.published is true.');
+    });
+
+    it('is live in the event time zone, then ended', async () => {
+      site();
+      // 23:30 on the 12th in UTC is the 13th in Kyiv.
+      today('2027-10-12T23:30:00Z');
+
+      await runStatus();
+
+      expect(output()).toContain('Stages: live');
+      expect(output()).toContain('Next: the event ends after 2027-10-14');
+
+      vi.mocked(console.log).mockClear();
+      today('2027-10-20T12:00:00Z');
+      const result = await runStatus();
+
+      expect(result['stages']).toEqual({ stages: ['ended'] });
+      expect(output()).not.toContain('Next:');
+    });
+
+    it('shows no stages without the event dates', async () => {
+      const result = await runStatus();
+
+      expect(result).not.toHaveProperty('stages');
+      expect(output()).not.toContain('Stages:');
+    });
   });
 
   it("doesn't count without the emulator, or show a deploy it can't read", async () => {

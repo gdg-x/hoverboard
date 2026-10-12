@@ -18,7 +18,7 @@ A session is on the schedule with `day` (`YYYY-MM-DD`), `startTime` and `endTime
 
 A session's `stream` is the `https:` link to watch it live. Without one, it uses its track's `stream` in `site.json`, then `event.stream` for an online or hybrid event. From 10 minutes before the start until the end, the session page shows **Watch live**, the schedule marks the session **Live**, and calendar links include the stream.
 
-On the event's days, the home page shows **On now** below the hero: the sessions that are on, with their links to watch live, and the ones that start in the next 30 minutes. It hides itself between sessions with nothing coming up. It needs `schedule`, and `schedule.published`.
+On the event's days, the home page shows **On now** below the hero: the sessions that are on, with their links to watch live, and the ones that start in the next 30 minutes. It hides itself between sessions with nothing coming up. It needs `schedule`, `schedule.published`, and sessions with a day and times.
 
 `data seed`, `data import` and the build check the schedule: each `track` must be in `site.json` and on the session's day, `endTime` must be after `startTime`, and sessions in one track can't overlap. The build fails and names the sessions.
 
@@ -107,6 +107,8 @@ Import the sample data in `docs/sample-data` into the running Firestore emulator
 The sample data is an export, in the [export format](#export-and-import). [Optional] Edit the files in `docs/sample-data/collections` first to load your own data.
 
 It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` and `speakers` both off it skips `sessions`. The `config/notifications` document needs `notifications`. Documents with the same IDs are replaced, and documents that are already the same aren't written. `--dry-run` lists what it would add and change in each collection.
+
+`--stage <fixture>` replaces the emulator's content with part of the sample data, for one stage of Hoverboard's demo event, such as `first-announced`, `first-call`, `first-schedule`, `returning-live` or `archived`. It moves the sample sessions onto the demo's event days and empties the content collections the fixture doesn't have, and keeps visitor data. It then says what time to pick on the dev bar's clock, and the `site.json` changes the stage needs, which you make by hand. The fixtures are in `packages/web/__tests__/fixtures/stages.ts`, and are for the demo site, whose event was in 2017. Run `./hb data seed` again to get all the sample data back.
 
 ## Export emulator data to prefill files
 

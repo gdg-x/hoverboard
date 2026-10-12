@@ -3,7 +3,9 @@ import { configDefaults, defineConfig, type TestProjectInlineConfiguration } fro
 import { decorators } from './packages/web/build/decorators';
 import { configPaths, resolveConfig } from './packages/web/build/resolve-config';
 import { siteModule } from './packages/web/build/vite-plugin-site';
+import { STAGE_FIXTURES } from './packages/web/__tests__/fixtures/stages';
 import { FEATURES } from './packages/web/src/config/features';
+import { deepMerge } from './packages/web/src/config/merge';
 
 const webRoot = fileURLToPath(new URL('./packages/web', import.meta.url));
 // Tests use the demo config, whatever the site's own, so a fork's content can't fail them.
@@ -154,6 +156,26 @@ export default defineConfig({
           include: ['packages/web/src/**/*.server.test.ts'],
         },
       },
+      // One per stage fixture, since each has its own site config and feature flags.
+      ...Object.entries(STAGE_FIXTURES).map(([name, fixture]): TestProjectInlineConfiguration => ({
+        plugins: [
+          decorators(),
+          siteModule(
+            {
+              ...siteConfig,
+              site: deepMerge(siteConfig.site, 'site' in fixture ? fixture.site : {}),
+            },
+            pluginPaths,
+          ),
+        ],
+        test: {
+          name: `Stages (${name})`,
+          environment: 'node',
+          setupFiles: ['./packages/web/__tests__/server.setup.ts'],
+          include: ['packages/web/__tests__/stages/*.stages.test.ts'],
+          provide: { stageFixture: name },
+        },
+      })),
       {
         // Checks that FIRESTORE_TARGET=sample reads what the emulator seeded with the sample data does.
         plugins: [decorators(), siteModule(siteConfig, pluginPaths)],

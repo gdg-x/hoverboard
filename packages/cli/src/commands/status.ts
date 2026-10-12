@@ -2,6 +2,17 @@ import { readFileSync } from 'fs';
 import { connect } from 'net';
 import { join } from 'path';
 import { COLLECTIONS, type CollectionPath } from '../../../storage/collections.js';
+import type { Session } from '../../../web/src/models/session.js';
+import { buildSchedule, type Track } from '../../../web/src/schedule/build-schedule.js';
+import {
+  type CallForPapersDates,
+  type SiteStages,
+  type Stage,
+  type StageChange,
+  type TicketSaleDates,
+  type TicketSales,
+  siteStages,
+} from '../../../web/src/utils/stages.js';
 import type { CommandResult } from '../lib/command.js';
 import { git, lines } from '../lib/git.js';
 import { createGoogleCloud } from '../lib/google-cloud.js';
@@ -124,10 +135,89 @@ const hiddenFeatures = (
     return [];
   });
 
+const STAGES: Record<Stage, string> = {
+  announced: 'announced',
+  callForPapers: 'call for papers',
+  ticketSales: 'ticket sales',
+  schedule: 'schedule',
+  live: 'live',
+  ended: 'ended',
+  archived: 'archived',
+};
+
+const TICKET_SALES: Record<TicketSales, string> = {
+  notYetOnSale: 'not yet on sale',
+  onSale: 'on sale',
+  soldOut: 'sold out',
+  closed: 'closed',
+};
+
+const CHANGES: Record<StageChange, (date: string) => string> = {
+  callForPapersOpens: (date) => `the call for papers opens on ${date}`,
+  callForPapersCloses: (date) => `the call for papers closes after ${date}`,
+  ticketsGoOnSale: (date) => `tickets go on sale on ${date}`,
+  eventStarts: (date) => `the event starts on ${date}`,
+  eventEnds: (date) => `the event ends after ${date}`,
+};
+
+const readCollection = async <T>(path: string): Promise<T[]> => {
+  const { firestore } = await import('../lib/firestore.js');
+  const { docs } = await firestore.collection(path).get();
+  return docs.map((doc) => ({ ...doc.data(), id: doc.id }) as T);
+};
+
+/**
+ * The stages the site is in now, from site.json and the target's tickets and sessions, and why the
+ * schedule isn't one of them yet. None without the event's dates.
+ */
+const readStages = async (
+  site: Json,
+  features: Record<string, boolean>,
+  schedule: { published: boolean; tracks: Track[] },
+): Promise<{ stages: SiteStages; waiting?: string } | undefined> => {
+  const event = site['event'] as { startDate?: string; endDate?: string; timezone?: string };
+  if (!event?.startDate || !event.endDate) return undefined;
+  const sessions =
+    features['schedule'] && schedule.published ? await readCollection<Session>('sessions') : [];
+  const days = buildSchedule({ sessions, speakers: [] }, schedule).schedule.length > 0;
+  const stages = siteStages(Date.now(), {
+    event: {
+      startDate: event.startDate,
+      endDate: event.endDate,
+      timezone: event.timezone ?? 'UTC',
+    },
+    callForPapers: site['callForPapers'] as CallForPapersDates | undefined,
+    tickets: features['tickets'] ? await readCollection<TicketSaleDates>('tickets') : [],
+    schedule: !!features['schedule'] && days,
+    archived: !!site['archive'],
+  });
+  const waiting =
+    features['schedule'] && stages.stages.includes('announced') && !days
+      ? schedule.published
+        ? 'The schedule shows once sessions have a day and times.'
+        : 'The schedule shows once schedule.published is true.'
+      : undefined;
+  return { stages, ...(waiting ? { waiting } : {}) };
+};
+
+const stagesLine = ({ stages, ticketSales }: SiteStages, site: Json) =>
+  stages
+    .map((stage) => {
+      if (stage === 'callForPapers') {
+        const { closes } = site['callForPapers'] as { closes: string };
+        return `${STAGES[stage]} (closes after ${closes})`;
+      }
+      if (stage === 'ticketSales' && ticketSales) {
+        return `${STAGES[stage]} (${TICKET_SALES[ticketSales]})`;
+      }
+      return STAGES[stage];
+    })
+    .join(', ');
+
 /**
  * Prints what the site is: the project, the URL, the versions, the features, the last deploy, the
- * fork's changes to Hoverboard's files, the document count of each collection in the target, and
- * the features the site hides for lack of content.
+ * fork's changes to Hoverboard's files, the document count of each collection in the target, the
+ * features the site hides for lack of content, and the stages the site is in.
  */
 export const runStatus = async (): Promise<CommandResult> => {
   const repoRoot = findRepoRoot(process.cwd()) ?? process.cwd();
@@ -181,6 +271,7 @@ export const runStatus = async (): Promise<CommandResult> => {
   const host = process.env['FIRESTORE_EMULATOR_HOST'] ?? DEFAULT_EMULATOR_HOST;
   let documents: Record<string, number> | undefined;
   let hidden: string[] | undefined;
+  let stages: SiteStages | undefined;
   if (target() === 'emulator' && !(await reachable(host))) {
     console.log(
       `Documents: unknown, the emulator isn't running. Start it with \`npm start\`, or add ` +
@@ -201,6 +292,17 @@ export const runStatus = async (): Promise<CommandResult> => {
       console.log('On, but hidden from the site until they have content:');
       for (const { feature, reason } of hiddenList) console.log(`  ${feature} (${reason})`);
     }
+
+    const read = await readStages(site, features, {
+      published: schedule['published'] !== false,
+      tracks: (schedule['tracks'] as Track[] | undefined) ?? [],
+    });
+    if (read) {
+      stages = read.stages;
+      console.log(`Stages: ${stagesLine(stages, site)}`);
+      if (stages.next) console.log(`Next: ${CHANGES[stages.next.change](stages.next.date)}`);
+      if (read.waiting) console.log(read.waiting);
+    }
   }
 
   return {
@@ -215,5 +317,6 @@ export const runStatus = async (): Promise<CommandResult> => {
     ...(changes ? { changes } : {}),
     ...(documents ? { documents } : {}),
     ...(hidden ? { hidden } : {}),
+    ...(stages ? { stages } : {}),
   };
 };

@@ -50,3 +50,16 @@ export const wallClock = (instant: Date, timeZone?: string): { date: string; tim
   }).format(instant);
   return { date, time };
 };
+
+/**
+ * Whether `time` falls on `from` (YYYY-MM-DD), on `until`, or a day between them, in `timeZone`.
+ * Without `from` or `until`, the window has no start or end.
+ */
+export const onDays = (
+  time: number,
+  timeZone: string,
+  { from, until }: { from?: string | undefined; until?: string | undefined },
+): boolean => {
+  const today = wallClock(new Date(time), timeZone).date;
+  return (!from || today >= from) && (!until || today <= until);
+};

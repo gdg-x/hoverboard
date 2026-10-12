@@ -1039,6 +1039,10 @@
   <source>to leave feedback</source>
   <note from="lit-localize">Follows a Sign in button: "Sign in to leave feedback".</note>
 </trans-unit>
+<trans-unit id="common.attending-info">
+  <source>Info for attendees</source>
+  <note from="lit-localize">Links to the doors, Wi-Fi and other details for people at the venue.</note>
+</trans-unit>
 <trans-unit id="shell.header.nav-label">
   <source>Main</source>
   <note from="lit-localize">Names the main navigation.</note>
@@ -1078,6 +1082,10 @@
 <trans-unit id="home.tickets-block.on-sale">
   <source>On sale <x id="0" equiv-text="${date}"/></source>
   <note from="lit-localize">The day a ticket goes on sale, such as "On sale July 1".</note>
+</trans-unit>
+<trans-unit id="home.hero.tickets-on-sale">
+  <source>Tickets on sale <x id="0" equiv-text="${day}"/></source>
+  <note from="lit-localize">The day the first tickets go on sale, such as "Tickets on sale July 1".</note>
 </trans-unit>
 <trans-unit id="shared.report-mistake.subject">
   <source>Correction: <x id="0" equiv-text="${this.subject}"/></source>

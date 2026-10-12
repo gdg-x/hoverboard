@@ -4,12 +4,15 @@ import { fileURLToPath } from 'node:url';
 import { setup as startServers, teardown as stopServers } from 'jest-dev-server';
 import { chromium } from 'playwright';
 import type { TestProject } from 'vitest/node';
+import { STAGE_FIXTURES } from '../fixtures/stages';
 import { buildSite, type SiteBuild } from '../helpers/build-site';
 
 export interface A11ySite {
   url: string;
   /** One path per page template. */
   paths: string[];
+  /** The time the dev bar's clock picks, for a site in a stage. */
+  time?: string;
 }
 
 declare module 'vitest' {
@@ -23,7 +26,15 @@ const demoConfig = join(repoRoot, 'packages/demo-config');
 const minimalSite = join(repoRoot, 'packages/web/__tests__/fixtures/minimal-site');
 
 // Ports apart from `npm start`'s, so both can run.
-const SITES = {
+const SITES: Record<
+  string,
+  {
+    port: number;
+    firestoreTarget: 'none' | 'sample';
+    time?: string;
+    writeConfig: (dir: string) => void;
+  }
+> = {
   demo: {
     port: 5055,
     firestoreTarget: 'sample',
@@ -37,7 +48,14 @@ const SITES = {
       cpSync(join(demoConfig, 'public'), join(dir, 'public'), { recursive: true });
     },
   },
-} as const;
+  // A first edition, announced with no content yet: every feature on, and every page empty.
+  first: {
+    port: 5057,
+    firestoreTarget: 'none',
+    time: STAGE_FIXTURES['first-announced'].time,
+    writeConfig: (dir: string) => cpSync(demoConfig, dir, { recursive: true }),
+  },
+};
 
 /** The first page of each template: the list pages, one of each detail page, and a missing page. */
 const templatePaths = ({ pages }: SiteBuild) => {
@@ -82,7 +100,7 @@ export async function setup(project: TestProject) {
     }
   ).hosting;
   const sites: Record<string, A11ySite> = {};
-  for (const [name, { port, firestoreTarget, writeConfig }] of Object.entries(SITES)) {
+  for (const [name, { port, firestoreTarget, time, writeConfig }] of Object.entries(SITES)) {
     const build = buildSite(writeConfig, { firestoreTarget });
     builds.push(build);
     if (build.status !== 0) throw new Error(`The ${name} site didn't build:\n${build.stderr}`);
@@ -110,7 +128,11 @@ export async function setup(project: TestProject) {
         usedPortAction: 'error',
       })),
     );
-    sites[name] = { url: `http://127.0.0.1:${port}`, paths: templatePaths(build) };
+    sites[name] = {
+      url: `http://127.0.0.1:${port}`,
+      paths: templatePaths(build),
+      ...(time ? { time } : {}),
+    };
   }
   project.provide('a11ySites', sites);
 }

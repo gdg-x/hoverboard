@@ -10,6 +10,7 @@
 - [Notifications](tutorials/05-notifications.md)
 - [Security](tutorials/06-security.md)
 - [Next edition](tutorials/07-next-edition.md)
+- [Run your event](tutorials/08-run-your-event.md)
 - [Firestore utils](tutorials/firebase-utils.md)
 
 ## Maintainers

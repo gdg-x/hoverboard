@@ -42,6 +42,16 @@ export const nextStepLink = (step: NextStep, ticketUrl = ''): NextStepLink => {
         icon: 'calendar',
         external: false,
       };
+    case 'attending':
+      return {
+        href: '/attending',
+        label: msg('Info for attendees', {
+          id: 'common.attending-info',
+          desc: 'Links to the doors, Wi-Fi and other details for people at the venue.',
+        }),
+        icon: 'location',
+        external: false,
+      };
     case 'schedule':
       return {
         href: '/schedule',

@@ -104,6 +104,15 @@ describe('pages on the server', () => {
     expect(page).toMatch(/<h1\s+id="hero-title"\s+class="title"\s*>/);
     expect(page).toContain('12 days to go');
     expect(page).toMatch(/<about-block\s+class="band"/);
+    expect(page).toContain('<tickets-block');
+  });
+
+  it('render the home page without the tickets when it was built after the event', async () => {
+    seedPage({ speakers: [], blog: [], tickets: [] });
+
+    const page = await renderToString(html`<home-page event-state="over"></home-page>`);
+
+    expect(page).not.toContain('<tickets-block');
   });
 
   it('render the calendar button with its closed menu', async () => {
