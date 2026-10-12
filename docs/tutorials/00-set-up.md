@@ -106,7 +106,7 @@ The common npm scripts are:
 - `npm run serve`: Build the site with the emulator's data, then serve it on the Hosting emulator at http://localhost:5000, as Firebase Hosting would.
 - `./hb deploy`: Build the site with the content in your production Firestore and deploy it to Firebase.
 
-The build reads content from the Firestore emulator unless `FIRESTORE_TARGET` says otherwise. `FIRESTORE_TARGET=production` reads production Firestore, which `./hb deploy` and the deploy workflows do. `FIRESTORE_TARGET=none` builds the pages without content, which CI uses to check that the site builds.
+The build reads content from the Firestore emulator unless `FIRESTORE_TARGET` says otherwise. `FIRESTORE_TARGET=production` reads production Firestore, which `./hb deploy` and the deploy workflows do. `FIRESTORE_TARGET=none` builds the pages without content, which CI uses to check that the site builds. `FIRESTORE_TARGET=sample` builds with the sample data in `docs/sample-data`, without Firestore or Java. It makes the same pages as the emulator after `./hb data seed`.
 
 Locally, the app runs on the emulators with the `demo-hoverboard` project. `demo-` projects only exist in the emulators, so sign-in uses the Auth emulator, and push notifications, Analytics and Performance Monitoring are off.
 

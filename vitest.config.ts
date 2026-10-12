@@ -47,7 +47,12 @@ const web = {
       'packages/web/src/**/*.test.ts',
       'packages/web/build/**/*.test.ts',
     ],
-    exclude: [...configDefaults.exclude, '**/*.smoke.test.ts', '**/*.server.test.ts'],
+    exclude: [
+      ...configDefaults.exclude,
+      '**/*.smoke.test.ts',
+      '**/*.server.test.ts',
+      '**/*.emulator.test.ts',
+    ],
   },
 } satisfies TestProjectInlineConfiguration;
 
@@ -145,6 +150,16 @@ export default defineConfig({
           environment: 'node',
           setupFiles: ['./packages/web/__tests__/server.setup.ts'],
           include: ['packages/web/src/**/*.server.test.ts'],
+        },
+      },
+      {
+        // Checks that FIRESTORE_TARGET=sample reads what the emulator seeded with the sample data does.
+        plugins: [decorators(), siteModule(siteConfig, pluginPaths)],
+        test: {
+          name: 'Sample data',
+          environment: 'node',
+          globalSetup: ['./packages/web/__tests__/emulator.global-setup.ts'],
+          include: ['packages/web/src/**/*.emulator.test.ts'],
         },
       },
       {
