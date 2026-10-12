@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html, nothing, render as litRender } from 'lit';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { HbIconButton } from './hb-icon-button';
 import type { HbPopover } from './hb-popover';
@@ -81,6 +82,14 @@ describe('hb-popover', () => {
 
     expect(element.open).toBe(false);
     expect(document.activeElement).toBe(trigger);
+  });
+
+  it.each([false, true])('has no axe violations with open %s', async (open) => {
+    const { element } = await render();
+    if (open) element.show();
+    await element.updateComplete;
+
+    await expectNoAxeViolations(element);
   });
 
   describe('in the viewport', () => {

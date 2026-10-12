@@ -1,6 +1,7 @@
 import { fireEvent, screen, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { describe, expect, it, vi } from 'vitest';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import './hb-button';
 import './hb-menu';
@@ -110,5 +111,14 @@ describe('hb-menu', () => {
 
     document.body.dispatchEvent(new Event('pointerdown', { bubbles: true }));
     expect(element.open).toBe(false);
+  });
+
+  it.each([false, true])('has no axe violations with open %s', async (open) => {
+    const { element, trigger } = await renderMenu();
+    if (open) element.show();
+    await element.updateComplete;
+    await trigger.updateComplete;
+
+    await expectNoAxeViolations(element);
   });
 });

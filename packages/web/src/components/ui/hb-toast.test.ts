@@ -1,5 +1,6 @@
 import { type CSSResult, html } from 'lit';
 import { describe, expect, it } from 'vitest';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { HbToast } from './hb-toast';
 
@@ -27,5 +28,11 @@ describe('hb-toast', () => {
 
     expect(css).toMatch(/\.toast:popover-open \{\s*display: flex;/);
     expect(css).not.toMatch(/\.toast \{[^}]*display:/);
+  });
+
+  it.each([false, true])('has no axe violations with open %s', async (open) => {
+    const { element } = await fixture(html`<hb-toast ?open=${open}>Saved</hb-toast>`);
+
+    await expectNoAxeViolations(element);
   });
 });

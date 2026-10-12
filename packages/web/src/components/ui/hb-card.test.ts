@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import './hb-card';
 import type { HbCard } from './hb-card';
@@ -20,5 +21,14 @@ describe('hb-card', () => {
 
     expect(link).toHaveAttribute('href', '/speakers/ada');
     expect(link).toHaveAccessibleName('Ada Lovelace');
+  });
+
+  it.each([
+    ['a card', html`<hb-card><p>Text</p></hb-card>`],
+    ['a link', html`<hb-card href="/speakers/ada" label="Ada Lovelace"><p>Text</p></hb-card>`],
+  ])('has no axe violations as %s', async (_state, template) => {
+    const { element } = await fixture(template);
+
+    await expectNoAxeViolations(element);
   });
 });

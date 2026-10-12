@@ -133,6 +133,10 @@ export default defineConfig([
     rules: {
       // Vitest takes a message as the second argument.
       'vitest/valid-expect': ['error', { maxArgs: 2 }],
+      'vitest/expect-expect': [
+        'error',
+        { assertFunctionNames: ['expect', 'assert', 'expectNoAxeViolations'] },
+      ],
       'vitest/max-expects': ['warn', { max: 10 }],
       'vitest/unbound-method': 'warn',
       // Replaced by vitest/unbound-method, which allows `expect(mock.method)`.

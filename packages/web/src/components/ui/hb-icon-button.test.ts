@@ -1,6 +1,7 @@
 import { fireEvent, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { describe, expect, it, vi } from 'vitest';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import './hb-icon-button';
 import type { HbIconButton } from './hb-icon-button';
@@ -53,5 +54,20 @@ describe('hb-icon-button', () => {
 
     expect(onClick).not.toHaveBeenCalled();
     expect(within(shadowRootForWithin).getByRole('button')).toBeDisabled();
+  });
+
+  it.each([
+    ['a button', html`<hb-icon-button label="Close"><svg></svg></hb-icon-button>`],
+    ['a link', html`<hb-icon-button label="GitHub" href="https://github.com"></hb-icon-button>`],
+    ['pressed', html`<hb-icon-button label="Save" .pressed=${true}></hb-icon-button>`],
+    ['disabled', html`<hb-icon-button label="Up" disabled></hb-icon-button>`],
+    [
+      'an open menu trigger',
+      html`<hb-icon-button label="Account" .expanded=${true} .haspopup=${'menu'}></hb-icon-button>`,
+    ],
+  ])('has no axe violations as %s', async (_state, template) => {
+    const { element } = await fixture(template);
+
+    await expectNoAxeViolations(element);
   });
 });
