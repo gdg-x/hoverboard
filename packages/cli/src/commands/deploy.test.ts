@@ -2,6 +2,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { setTarget, target } from '../lib/target.js';
 import { runDeploy } from './deploy.js';
 
 const { runCommandMock, resolveFirebaseBinMock, confirmMock, useFirebaseLoginCredentialsMock } =
@@ -11,6 +12,9 @@ const { runCommandMock, resolveFirebaseBinMock, confirmMock, useFirebaseLoginCre
     confirmMock: vi.fn(),
     useFirebaseLoginCredentialsMock: vi.fn(),
   }));
+const runDataCheckMock = vi.hoisted(() => vi.fn(async () => true));
+
+vi.mock('./data-check.js', () => ({ runDataCheck: runDataCheckMock }));
 
 vi.mock('../lib/spawn.js', () => ({ runCommand: runCommandMock }));
 vi.mock('../lib/firebase-cli.js', () => ({ resolveFirebaseBin: resolveFirebaseBinMock }));
@@ -29,6 +33,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.restoreAllMocks();
   vi.clearAllMocks();
+  setTarget('emulator');
   for (const dir of dirsToClean.splice(0)) rmSync(dir, { recursive: true, force: true });
   process.env = { ...originalEnv };
 });
@@ -71,6 +76,23 @@ describe('runDeploy', () => {
     expect(output).toContain("! 1 thing(s) are still the demo's. Visitors will see them:");
     expect(output).toContain('packages/config/public/hero.jpg');
     expect(result).toBe(true);
+  });
+
+  it('checks the content in production first, and stops before the build on a problem', async () => {
+    makeRepo();
+    confirmMock.mockResolvedValue(true);
+    runDataCheckMock.mockResolvedValueOnce(false);
+    const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+
+    const result = await runDeploy();
+
+    expect(target()).toBe('production');
+    expect(runDataCheckMock).toHaveBeenCalled();
+    expect(runCommandMock).not.toHaveBeenCalled();
+    expect(log.mock.calls.flat().join('\n')).toContain(
+      'Fix the content above in the Firebase console, then deploy again.',
+    );
+    expect(result).toBe(false);
   });
 
   it('builds and deploys after confirmation', async () => {

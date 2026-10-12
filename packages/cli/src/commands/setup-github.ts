@@ -69,7 +69,7 @@ interface Binding {
   condition?: unknown;
 }
 
-interface Policy {
+export interface Policy {
   bindings?: Binding[];
   etag?: string;
   version?: number;

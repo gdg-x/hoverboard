@@ -501,6 +501,46 @@ export const createProgram = (): Command => {
     ),
   );
 
+  const editor = program
+    .command('editor')
+    .description(
+      'Let content editors edit Firestore in the Firebase console of the project in site.json, ' +
+        'without access to billing, functions or deploys.',
+    );
+
+  editor
+    .command('list')
+    .description('List the content editors.')
+    .action(run(async () => (await import('./commands/editor.js')).runEditorList()));
+
+  withWrites(
+    editor
+      .command('add')
+      .argument('<email>', "The editor's Google account.")
+      .description('Make someone a content editor.'),
+  ).action(
+    run(async (options, [email]) =>
+      (await import('./commands/editor.js')).runEditorAdd(email!, {
+        dryRun: options.dryRun === true,
+        yes: options.yes === true,
+      }),
+    ),
+  );
+
+  withWrites(
+    editor
+      .command('remove')
+      .argument('<email>', "The editor's Google account.")
+      .description("Remove someone's content editor access."),
+  ).action(
+    run(async (options, [email]) =>
+      (await import('./commands/editor.js')).runEditorRemove(email!, {
+        dryRun: options.dryRun === true,
+        yes: options.yes === true,
+      }),
+    ),
+  );
+
   const edition = program
     .command('edition')
     .description(
