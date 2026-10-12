@@ -1,6 +1,7 @@
 ---
 import { loadContent } from '../../data/content';
 import { itemMetadata } from '../../data/metadata';
+import { pageTitle } from '../../utils/page-text';
 import { seedPage } from '../../data/page';
 import type { PreviousSpeaker } from '../../models/previous-speaker';
 import Base from '../../layouts/base.astro';
@@ -16,6 +17,9 @@ const { previousSpeakers } = await loadContent();
 const content = seedPage({ previousSpeakers });
 ---
 
-<Base {...itemMetadata(speaker.name, speaker.bio, speaker.photoUrl)} content={content}>
+<Base
+  {...itemMetadata(pageTitle('previousSpeakers', speaker.name), speaker.bio, speaker.photoUrl)}
+  content={content}
+>
   <PreviousSpeakerPage speakerId={speaker.id} client:load />
 </Base>

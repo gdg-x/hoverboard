@@ -2,6 +2,7 @@
 import { loadContent } from '../../data/content';
 import { buildContentSchedule } from '../../data/schedule';
 import { pageMetadata } from '../../data/metadata';
+import { scheduleDetail } from '../../utils/page-text';
 import { seedPage } from '../../data/page';
 import type { RouteLocation } from '../../utils/navigation';
 import Base from '../../layouts/base.astro';
@@ -27,7 +28,7 @@ const { sessions, speakers } = await loadContent();
 const content = seedPage({ sessions, speakers });
 ---
 
-<Base {...pageMetadata('schedule')} content={content}>
+<Base {...pageMetadata('schedule', scheduleDetail(location))} content={content}>
   <Fragment slot="head">
     <script is:inline>
       // Old links to a session were /schedule?sessionId=<id>.

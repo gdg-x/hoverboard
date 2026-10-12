@@ -150,6 +150,14 @@ export default defineConfig([
     },
   },
 
+  // A11y tests drive Playwright, whose `page.getByRole()` testing-library mistakes for its own.
+  {
+    files: ['packages/web/__tests__/a11y/**/*.ts'],
+    rules: {
+      'testing-library/prefer-screen-queries': 'off',
+    },
+  },
+
   // Service Worker files (allow importScripts)
   {
     files: ['**/*sw.{js,ts}', '**/service-worker*.{js,ts}', '**/firebase-messaging-sw.ts'],

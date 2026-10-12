@@ -56,6 +56,15 @@ describe('schedule-page', () => {
     expect(shadowRoot.querySelector('simple-hero')).toHaveAttribute('page', 'schedule');
   });
 
+  it.each([
+    ['/schedule/2026-10-08', { id: '2026-10-08' }, 'October 8 | Schedule'],
+    ['/schedule/my-schedule', {}, 'My Schedule | Schedule'],
+  ])('gives %s its own title', async (pathname, params, title) => {
+    await render({ location: { pathname, search: '', params } });
+
+    expect(updateMetadata).toHaveBeenLastCalledWith(title, 'Choose your sessions to visit');
+  });
+
   it('shows the progress indicator while the schedule is pending', async () => {
     const { shadowRoot } = await render({ schedule: new Pending() });
 

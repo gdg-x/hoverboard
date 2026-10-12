@@ -83,6 +83,8 @@ export class AppHeader extends ThemedComponent {
       display: flex;
       flex: var(--hb-header-side-flex, 0 1 auto);
       align-items: center;
+      /* Shrinks the logo, not the actions, on narrow screens (WCAG 1.4.10). */
+      min-inline-size: 0;
       min-block-size: var(--hb-target-min);
       margin-inline-end: auto;
       color: inherit;

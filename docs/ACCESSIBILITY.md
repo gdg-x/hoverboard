@@ -29,7 +29,7 @@ We aim to support the current versions of Chrome, Edge, Firefox and Safari on de
 
 ## Known barriers
 
-The automated checks find no WCAG 2.2 AA violations on any page template, in any built-in theme. They can't check everything, so the audit will check these areas first:
+The automated checks find no WCAG 2.2 AA violations on any page template, in any built-in theme. They also walk each page with the keyboard, and check each page at 320px wide and with reduced motion. They can't check everything, so the audit will check these areas first:
 
 - Sticky bars on the schedule (the day tabs, track names and times) covering the focused session.
 - The schedule grid, which scrolls sideways, with a keyboard and a screen reader.

@@ -1,5 +1,5 @@
 import { title as siteTitle } from '../config/site';
-import { type Page, pageText } from '../utils/page-text';
+import { type Page, pageText, pageTitle } from '../utils/page-text';
 
 export interface ImageMetadata {
   image?: string;
@@ -29,11 +29,11 @@ export const imageType = (image: string): string | undefined =>
     /\.(\w+)$/.exec(new URL(image, 'https://site.test').pathname)?.[1]?.toLowerCase() ?? ''
   ];
 
-/** The layout's metadata for a page with a fixed title, as `PageMetadataController` sets it. */
-export const pageMetadata = (page: Page): Metadata => {
-  const { title, metaDescription } = pageText(page);
-  return { title: `${title} | ${siteTitle}`, description: metaDescription };
-};
+/** The layout's metadata for a page, as `PageMetadataController` sets it, with `pageTitle()`'s detail. */
+export const pageMetadata = (page: Page, detail?: string): Metadata => ({
+  title: `${pageTitle(page, detail)} | ${siteTitle}`,
+  description: pageText(page).metaDescription,
+});
 
 /**
  * The layout's metadata for a speaker, session or post, as `updateImageMetadata()` sets it. The
