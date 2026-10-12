@@ -56,6 +56,11 @@ export class SpeakerCard extends ThemedComponent {
       --hb-speaker-photo-background: var(--hb-color-accent-1-container);
     }
 
+    :host(:hover) .photo,
+    :host(:focus-within) .photo {
+      --hb-avatar-filter-now: var(--hb-avatar-filter-hover);
+    }
+
     .affiliation {
       --radius: calc(var(--photo-size) * 0.57);
 

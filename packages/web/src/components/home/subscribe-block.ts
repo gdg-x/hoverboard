@@ -24,8 +24,8 @@ export class SubscribeBlock extends ThemedComponent {
     illustrationStyles,
     css`
       :host {
-        background-color: var(--hb-color-accent-3-container);
-        color: var(--hb-color-on-accent-3-container);
+        background: var(--hb-tone-accent-3-pattern), var(--hb-tone-accent-3-background);
+        color: var(--hb-tone-accent-3-color);
       }
 
       .inner {

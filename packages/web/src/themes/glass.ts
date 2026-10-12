@@ -5,6 +5,7 @@ const glow = (accent: string, size: string, position: string, amount: string) =>
   `radial-gradient(${size} at ${position}, color-mix(in srgb, var(--hb-color-${accent}) ${amount}, transparent), transparent 70%) fixed`;
 
 export const glass: Theme = {
+  colorScheme: 'system',
   fonts: { display: 'inter', body: 'inter', mono: 'jetbrains-mono' },
   light: {
     primary: '#0066cc',
@@ -116,12 +117,18 @@ export const glass: Theme = {
     headerMaxWidth: 'var(--hb-content-max)',
     headerInset: 'var(--hb-space-3) var(--hb-gutter)',
     headerRadius: 'var(--hb-radius-control)',
-    headerBorder: 'var(--hb-border-width) solid var(--hb-border-color)',
+    headerBorderWidth: 'var(--hb-border-width)',
     headerShadow: 'var(--hb-shadow-card)',
     heroColumns: '1.4fr 1fr',
+    heroAlign: 'start',
     heroArtOrder: '0',
+    heroArtDisplay: 'block',
     bandHeaderDirection: 'row',
     bandHeaderAlign: 'flex-end',
+    bandTextAlign: 'start',
+    bandEyebrow: 'none',
+    eyebrowColor: 'var(--hb-color-on-surface-variant)',
+    cardScale: '1',
     bandInset: '0',
     bandRadius: '0',
     bandDivider: 'none',
@@ -135,6 +142,7 @@ export const glass: Theme = {
     photoFrameColor: 'var(--hb-color-surface-container)',
     photoTilt: '0deg',
     avatarFilter: 'none',
+    avatarFilterHover: 'none',
     avatarShadow: 'none',
     easePress: 'var(--hb-ease-spring)',
     pressScale: '1',

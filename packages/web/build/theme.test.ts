@@ -41,6 +41,16 @@ describe('resolveTheme', () => {
 
     expect(theme.dark.scrim).toBe(festival.dark.scrim);
   });
+
+  it("uses the theme's color scheme unless the site sets one", () => {
+    const { colorScheme: _, ...unset } = siteTheme();
+
+    expect(resolveTheme({ ...unset, name: 'spotlight' }).colorScheme).toBe('dark');
+    expect(resolveTheme({ ...unset, name: 'festival' }).colorScheme).toBe('system');
+    expect(resolveTheme(siteTheme({ name: 'spotlight', colorScheme: 'system' })).colorScheme).toBe(
+      'system',
+    );
+  });
 });
 
 describe('themeErrors', () => {
@@ -70,6 +80,15 @@ describe('demoThemesCss', () => {
       /\[data-theme='spotlight'\] \{[^}]*--hb-color-primary: light-dark\(#c2185b,/,
     );
     expect(css).toMatch(/\[data-theme='spotlight'\] \{[^}]*--hb-border-width: 1px;/);
+  });
+
+  it('shows a theme in its own scheme until the visitor picks one', () => {
+    const css = demoThemesCss(siteTheme());
+
+    expect(css).toMatch(
+      /:root\[data-theme='spotlight'\]:not\(\[data-color-scheme\]\) \{\ncolor-scheme: dark;\n--hb-logo-image: var\(--hb-logo-dark-image\);/,
+    );
+    expect(css).not.toContain(":root[data-theme='festival']:not");
   });
 });
 

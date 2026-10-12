@@ -64,8 +64,14 @@ export class AppHeader extends ThemedComponent {
       gap: var(--hb-space-2);
       max-inline-size: var(--hb-header-max-width);
       margin-inline: auto;
-      padding: var(--hb-space-1) var(--hb-space-2) var(--hb-space-1) var(--hb-space-5);
-      border: var(--hb-header-border);
+      /* A full-width bar lines its content up with the page's column. */
+      --bar-extra: (min(100%, var(--hb-header-max-width)) - var(--hb-content-max)) / 2;
+
+      padding-block: var(--hb-space-1);
+      padding-inline: max(var(--hb-space-5), var(--bar-extra))
+        max(var(--hb-space-2), var(--bar-extra));
+      border: 0 solid var(--hb-border-color);
+      border-width: var(--hb-header-border-width);
       border-radius: var(--hb-header-radius);
       background-color: var(--hb-panel-background);
       backdrop-filter: var(--hb-backdrop-filter);

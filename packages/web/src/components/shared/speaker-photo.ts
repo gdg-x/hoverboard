@@ -45,7 +45,8 @@ export class SpeakerPhoto extends ThemedComponent {
       border-radius: var(--hb-radius-avatar);
       background-color: var(--hb-speaker-photo-background, var(--hb-color-surface-container));
       object-fit: cover;
-      filter: var(--hb-avatar-filter, none);
+      filter: var(--hb-avatar-filter-now, var(--hb-avatar-filter, none));
+      transition: filter var(--hb-duration-medium) var(--hb-ease-standard);
     }
 
     /* Next to a name, a plain circle. */
@@ -54,7 +55,9 @@ export class SpeakerPhoto extends ThemedComponent {
       border-radius: 50%;
     }
 
-    :host([size='m']) img {
+    /* On the host, so the photo's filter leaves its color alone. */
+    :host([size='m']) {
+      border-radius: var(--hb-radius-avatar);
       box-shadow: var(--hb-avatar-shadow, none);
     }
 

@@ -20,8 +20,12 @@ export { heroIllustration };
 /** The commit and time of the build. */
 export { build };
 export const shortName = settings.shortName;
-/** `system` lets visitors pick a scheme in the footer. `light` and `dark` lock the site to one. */
-export const colorScheme = settings.theme.colorScheme as 'system' | 'light' | 'dark';
+/**
+ * `system` lets visitors pick a scheme in the footer. `light` and `dark` lock the site to one. The
+ * build sets it to the theme's own when site.json does not.
+ */
+export const colorScheme = (settings.theme as { colorScheme?: 'system' | 'light' | 'dark' })
+  .colorScheme as 'system' | 'light' | 'dark';
 /** Section patterns, rotated stickers and illustrations. */
 export const decorations = settings.theme.decorations as boolean;
 /** The built-in theme and the spacing the site picks. The demo banner starts from them. */

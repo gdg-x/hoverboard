@@ -91,15 +91,27 @@ export interface ThemeStyle {
   /** Space around the header bar. */
   headerInset: string;
   headerRadius: string;
-  headerBorder: string;
+  /** The bar's border widths, such as `0 0 1px` for only a line under it. */
+  headerBorderWidth: string;
   headerShadow: string;
   /** The home hero's columns, its text and its illustration, on wide containers. */
   heroColumns: string;
+  /** `start` or `center`, for the home hero's text. */
+  heroAlign: string;
   /** Moves the hero illustration before (-1) or after (0) the text. It is decorative. */
   heroArtOrder: string;
+  /** `block`, or `none` to leave the illustration out on wide containers too. */
+  heroArtDisplay: string;
   /** A band's title and link: side by side (`row`) or stacked (`column`). */
   bandHeaderDirection: string;
   bandHeaderAlign: string;
+  /** `start` or `center`, for a band's title, lede and eyebrow. */
+  bandTextAlign: string;
+  /** `block` shows each band's number above its title, `none` hides it. */
+  bandEyebrow: string;
+  eyebrowColor: string;
+  /** Multiplies the smallest width of speaker cards in a grid, so larger means fewer per row. */
+  cardScale: string;
   /** Space beside each band, so bands can be panels instead of full-bleed. */
   bandInset: string;
   bandRadius: string;
@@ -125,6 +137,8 @@ export interface ThemeStyle {
   photoTilt: string;
   /** A `filter` for people's photos, such as grayscale. */
   avatarFilter: string;
+  /** The filter on a hovered or focused card. */
+  avatarFilterHover: string;
   /** A `box-shadow` for people's photos on cards and pages. */
   avatarShadow: string;
 
@@ -175,10 +189,14 @@ export const grid = [0, 90]
   )
   .join(', ');
 
+export type ColorScheme = 'system' | 'light' | 'dark';
+
 /** A theme has a light and a dark color set. It cannot ship with only one. */
 export interface Theme {
   light: ColorSet;
   dark: ColorSet;
+  /** The scheme for sites that do not set `theme.colorScheme`. */
+  colorScheme: ColorScheme;
   style: ThemeStyle;
   tones: Readonly<Record<Tone, ToneColors>>;
   fonts: ThemeFonts;

@@ -245,7 +245,7 @@
           "enum": ["festival", "spotlight", "paper", "glass"]
         },
         "colorScheme": {
-          "description": "system follows the visitor's browser setting. light or dark locks the site to one scheme and hides the footer toggle.",
+          "description": "system follows the visitor's browser setting. light or dark locks the site to one scheme and hides the footer toggle. Without it, the theme's own: dark for spotlight, system for the others.",
           "enum": ["system", "light", "dark"]
         },
         "density": {

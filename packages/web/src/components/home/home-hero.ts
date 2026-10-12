@@ -99,6 +99,10 @@ export class HomeHero extends ThemedComponent {
       margin-inline: auto;
     }
 
+    .copy {
+      text-align: var(--hb-hero-align);
+    }
+
     .title {
       margin: var(--hb-space-4) 0 var(--hb-space-5);
       padding: 0;
@@ -110,6 +114,7 @@ export class HomeHero extends ThemedComponent {
     .details {
       display: flex;
       flex-wrap: wrap;
+      justify-content: var(--hb-hero-align);
       gap: var(--hb-space-2);
       margin: 0;
       padding: 0;
@@ -120,15 +125,19 @@ export class HomeHero extends ThemedComponent {
       --hb-chip-border-color: currentColor;
     }
 
+    /* Inline, so the hero's text alignment places it too. */
     .lede {
+      display: inline-block;
       max-inline-size: 32ch;
       margin: var(--hb-space-5) 0 var(--hb-space-6);
       font-size: var(--hb-text-xl);
+      vertical-align: top;
     }
 
     .actions {
       display: flex;
       flex-wrap: wrap;
+      justify-content: var(--hb-hero-align);
       gap: var(--hb-space-3);
     }
 
@@ -149,7 +158,7 @@ export class HomeHero extends ThemedComponent {
       }
 
       .art {
-        display: var(--hb-decorations-display, block);
+        display: var(--hb-decorations-display, var(--hb-hero-art-display, block));
       }
     }
 
@@ -186,7 +195,7 @@ export class HomeHero extends ThemedComponent {
       <section class="hero ${photo ? 'photo' : 'pattern'}" aria-labelledby="hero-title">
         ${photo ? html`<img class="background" src="${photo}" alt="" />` : nothing}
         <div class="inner">
-          <div>
+          <div class="copy">
             <hb-sticker class="state" tilt="-4" accent="${this.stickerAccent}"
               >${this.stateLabel}</hb-sticker
             >

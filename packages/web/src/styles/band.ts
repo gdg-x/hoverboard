@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css, unsafeCSS } from 'lit';
 import { displayFont } from './shared';
 
 /** A band's centered column, big title, lede and links, for a block or a page that holds bands. */
@@ -16,6 +16,7 @@ export const bandContent = css`
     justify-content: space-between;
     gap: var(--hb-space-4) var(--hb-space-6);
     margin-block-end: var(--hb-space-7);
+    text-align: var(--hb-band-text-align);
   }
 
   .band-title {
@@ -27,6 +28,17 @@ export const bandContent = css`
     text-underline-offset: 0.12em;
     text-wrap: balance;
     overflow-wrap: anywhere;
+  }
+
+  /* The theme's eyebrow, the band's number from the page, with no text for screen readers. */
+  .band-title::before {
+    content: var(--hb-band-number, none) / '';
+    display: var(--hb-band-eyebrow, none);
+    margin-block-end: var(--hb-space-3);
+    color: var(--hb-eyebrow-color);
+    font: 600 var(--hb-text-sm) / 1.4 var(--hb-font-accent);
+    letter-spacing: 0.08em;
+    text-decoration: none;
   }
 
   .band-lede {
@@ -84,6 +96,14 @@ export const bandTones = css`
     color: var(--hb-band-color);
     mask: var(--hb-band-edge);
   }
+
+  ${unsafeCSS(
+    Array.from(
+      { length: 12 },
+      (_, index) =>
+        `.band:nth-child(${index + 1} of .band) { --hb-band-number: '${String(index + 1).padStart(2, '0')}'; }`,
+    ).join('\n'),
+  )}
 
   .band[data-tone='accent-4'] {
     --hb-band-background: var(--hb-tone-accent-4-background);

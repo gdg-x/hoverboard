@@ -9,6 +9,7 @@ const zigzag = [
 
 // Paper surfaces, ink outlines and hard offset shadows. Accents: blue, red, yellow, green.
 export const festival: Theme = {
+  colorScheme: 'system',
   fonts: { display: 'unbounded', body: 'inter', mono: 'jetbrains-mono' },
   light: {
     primary: '#3557e6',
@@ -114,12 +115,18 @@ export const festival: Theme = {
     headerMaxWidth: 'var(--hb-content-max)',
     headerInset: 'var(--hb-space-3) var(--hb-gutter)',
     headerRadius: 'var(--hb-radius-control)',
-    headerBorder: 'var(--hb-border-width) solid var(--hb-border-color)',
+    headerBorderWidth: 'var(--hb-border-width)',
     headerShadow: 'var(--hb-shadow-card)',
     heroColumns: '1.4fr 1fr',
+    heroAlign: 'start',
     heroArtOrder: '0',
+    heroArtDisplay: 'block',
     bandHeaderDirection: 'row',
     bandHeaderAlign: 'flex-end',
+    bandTextAlign: 'start',
+    bandEyebrow: 'none',
+    eyebrowColor: 'var(--hb-color-on-surface-variant)',
+    cardScale: '1',
     bandInset: '0',
     bandRadius: '0',
     bandDivider: 'none',
@@ -133,6 +140,7 @@ export const festival: Theme = {
     photoFrameColor: 'var(--hb-color-surface-container)',
     photoTilt: '0deg',
     avatarFilter: 'none',
+    avatarFilterHover: 'none',
     avatarShadow: '5px 5px 0 0 var(--hb-color-accent-3)',
     easePress: 'var(--hb-ease-spring)',
     pressScale: '1',

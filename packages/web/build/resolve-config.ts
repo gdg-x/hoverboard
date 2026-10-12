@@ -519,6 +519,8 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
 
   const siteTheme = site.theme as unknown as SiteTheme;
   const theme = resolveTheme(siteTheme);
+  // The client reads the scheme from the site config, so it gets the theme's default too.
+  siteTheme.colorScheme = theme.colorScheme;
   const warnings: string[] = [];
   if (siteValid) {
     errors.push(...themeErrors(theme));

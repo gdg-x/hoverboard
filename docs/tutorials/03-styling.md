@@ -6,8 +6,8 @@ Colors, fonts and shapes come from a theme. Pick it and change it in `theme` in 
 
 Hoverboard has four built-in themes. Each has light and dark colors.
 
-- `festival` (the default): paper colors, ink outlines, hard shadows and pastel bands in four accent colors.
-- `spotlight`: no outlines, soft shadows and one bright yellow color for the main buttons.
+- `festival` (the default): paper colors, ink outlines, hard shadows, and pastel bands in four accent colors with patterns and zigzag edges.
+- `spotlight`: a keynote stage. Dark by default, with tall Oswald headings, centered titles with numbered sections, a full-width header bar, soft glows, grayscale speaker photos that turn to color on hover, and one bright yellow color for the main buttons.
 - `paper`: white paper, light gray pencil outlines, nearly square corners and soft watercolor colors.
 - `glass`: modeled on Apple's Liquid Glass. Frosted, see-through cards and bars over soft color glows, large round corners and Inter for headings. Visitors who turn on reduced transparency on their device get solid colors instead.
 
@@ -20,7 +20,7 @@ Hoverboard has four built-in themes. Each has light and dark colors.
 }
 ```
 
-- `colorScheme` is `system`, `light` or `dark`. With `system`, the site follows the visitor's device setting, and visitors can pick System, Light or Dark under Appearance in the footer. Their browser remembers the choice. `light` and `dark` lock the site to one scheme and hide the footer choice.
+- `colorScheme` is `system`, `light` or `dark`. With `system`, the site follows the visitor's device setting, and visitors can pick System, Light or Dark under Appearance in the footer. Their browser remembers the choice. `light` and `dark` lock the site to one scheme and hide the footer choice. Without it, the site uses the theme's own: `dark` for `spotlight`, `system` for the others.
 - `density` is `compact`, `default` or `roomy`. It scales the spacing, not the text or button sizes.
 - `decorations` turns the playful details on or off: dot patterns, tilted stickers and photos, confetti when a visitor saves a session, and the home page illustration. With `false`, the layout stays the same, with plain colors and straight labels. Visitors who ask their device for reduced motion never see the motion.
 

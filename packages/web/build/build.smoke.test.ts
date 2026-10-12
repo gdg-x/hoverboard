@@ -123,6 +123,9 @@ describe('a production build of a minimal site', () => {
     const home = build.read('index.html');
 
     expect(home).toMatch(/<html[^>]*data-decorations="off"/);
+    // The fixture sets no colorScheme, so it gets spotlight's dark one, locked.
+    expect(home).toMatch(/<html[^>]*data-color-scheme="dark"/);
+    expect(home).toContain('<meta content="dark" name="color-scheme">');
     expect(home).toContain('--hb-cta-background: var(--hb-color-secondary);');
     expect(home).toContain('--hb-border-width: 1px;');
   });

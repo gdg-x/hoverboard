@@ -27,7 +27,10 @@ export class SpeakersBlock extends ThemedComponent {
 
       .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(calc(14rem * var(--hb-card-scale, 1)), 1fr)
+        );
         gap: var(--hb-space-5);
       }
 
