@@ -283,9 +283,21 @@ export const createProgram = (): Command => {
     withTarget(
       data
         .command('seed')
-        .description('Add the sample data in docs/sample-data, for the features that are on.'),
+        .description('Add the sample data in docs/sample-data, for the features that are on.')
+        .option(
+          '--stage <fixture>',
+          "Replace the emulator's content with a stage fixture, such as first-call or " +
+            'returning-live, to preview that stage of the demo.',
+        ),
     ),
-  ).action(run(async (options) => (await import('./commands/data-seed.js')).runDataSeed(options)));
+  ).action(
+    run(async (options) => {
+      const seed = await import('./commands/data-seed.js');
+      return typeof options['stage'] === 'string'
+        ? seed.runStageSeed(options['stage'], options)
+        : seed.runDataSeed(options);
+    }),
+  );
 
   withWrites(
     withTarget(

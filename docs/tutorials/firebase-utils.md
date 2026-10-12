@@ -108,6 +108,8 @@ The sample data is an export, in the [export format](#export-and-import). [Optio
 
 It only imports the data of features that are on in `packages/config/site.json`. For example, with `blog` off it skips `blog`, and with `schedule` and `speakers` both off it skips `sessions`. The `config/notifications` document needs `notifications`. Documents with the same IDs are replaced, and documents that are already the same aren't written. `--dry-run` lists what it would add and change in each collection.
 
+`--stage <fixture>` replaces the emulator's content with part of the sample data, for one stage of Hoverboard's demo event, such as `first-announced`, `first-call`, `first-schedule`, `returning-live` or `archived`. It moves the sample sessions onto the demo's event days and empties the content collections the fixture doesn't have, and keeps visitor data. It then says what time to pick on the dev bar's clock, and the `site.json` changes the stage needs, which you make by hand. The fixtures are in `packages/web/__tests__/fixtures/stages.ts`, and are for the demo site, whose event was in 2017. Run `./hb data seed` again to get all the sample data back.
+
 ## Export emulator data to prefill files
 
 Once your emulator has the data you want (whether from `data seed`, the Emulator UI, or your app), save it to `.firebase/emulator-data` so it's automatically reloaded the next time you run `npm start` or `./hb emulators`:
