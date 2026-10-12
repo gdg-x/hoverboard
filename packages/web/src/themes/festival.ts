@@ -11,6 +11,15 @@ const zigzag = [
 export const festival: Theme = {
   colorScheme: 'system',
   fonts: { display: 'unbounded', body: 'inter', mono: 'jetbrains-mono' },
+  share: {
+    bar: 16,
+    glows: [],
+    avatarBorder: { width: 6, role: 'ink' },
+    avatarShadow: { x: 14, y: 14, blur: 0, role: 'accent3' },
+    avatarGrayscale: false,
+    avatarTape: false,
+    avatarTilt: 0,
+  },
   light: {
     primary: '#3557e6',
     onPrimary: '#ffffff',

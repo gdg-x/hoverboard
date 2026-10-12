@@ -11,6 +11,18 @@ const rim = (amount: number) =>
 export const glass: Theme = {
   colorScheme: 'system',
   fonts: { display: 'inter', body: 'inter', mono: 'jetbrains-mono' },
+  share: {
+    bar: 0,
+    glows: [
+      { role: 'accent1', at: '0% 0%', opacity: 0.3 },
+      { role: 'accent2', at: '100% 30%', opacity: 0.22 },
+      { role: 'accent4', at: '30% 100%', opacity: 0.22 },
+    ],
+    avatarShadow: { x: 0, y: 16, blur: 48, role: 'scrim' },
+    avatarGrayscale: false,
+    avatarTape: false,
+    avatarTilt: 0,
+  },
   light: {
     primary: '#0066cc',
     onPrimary: '#ffffff',

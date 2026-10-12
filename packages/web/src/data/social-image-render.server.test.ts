@@ -1,7 +1,10 @@
 import sharp from 'sharp';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { socialImageDesign } from '../../build/social-images';
+import { resolveTheme } from '../../build/theme';
 import type { Session } from '../models/session';
 import type { Speaker } from '../models/speaker';
+import { THEMES, type ThemeName } from '../themes/index';
 import { loadPhoto, renderSocialImage, socialImageSvg, svgSize } from './social-image-render';
 import { sessionImage, speakerImage } from './social-images';
 
@@ -114,6 +117,42 @@ describe('loadPhoto', () => {
     expect(await loadPhoto('../../../package.json')).toBeUndefined();
     expect(warn).toHaveBeenCalledOnce();
   });
+});
+
+describe('each theme', () => {
+  afterEach(() => {
+    vi.doUnmock('virtual:hoverboard/social-images');
+  });
+
+  it.each(Object.keys(THEMES) as ThemeName[])(
+    "draws %s share images in the theme's style",
+    async (name) => {
+      vi.stubGlobal('fetch', fetchPhoto);
+      const theme = resolveTheme({ name, density: 'default', decorations: true });
+      const { design } = socialImageDesign(theme, undefined, { siteDir: '.', publicDirs: [] });
+      vi.doMock('virtual:hoverboard/social-images', () => design);
+      // A fresh copy of the module, which reads the design when it loads.
+      const render = (await import(
+        /* @vite-ignore */ `./social-image-render?theme=${name}`
+      )) as typeof import('./social-image-render');
+      const speakers = ['h', 'i'].map((id) => speaker(id, `https://photos.test/${name}-${id}.jpg`));
+
+      const images = await Promise.all([
+        render.renderSocialImage(sessionImage(session(['h', 'i']), speakers)),
+        render.renderSocialImage(speakerImage(speakers[0]!)),
+      ]);
+
+      for (const png of images) {
+        expect(await sharp(png).metadata()).toMatchObject({ width: 1200, height: 630 });
+      }
+      const photo = await render.loadPhoto(speakers[0]!.photoUrl!);
+      const { data } = await sharp(Buffer.from(photo!.split(',')[1]!, 'base64'))
+        .raw()
+        .toBuffer({ resolveWithObject: true });
+      const [red = 0, , blue = 0] = data;
+      expect(Math.abs(red - blue) < 8).toBe(theme.share.avatarGrayscale);
+    },
+  );
 });
 
 describe('svgSize', () => {

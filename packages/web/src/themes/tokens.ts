@@ -209,6 +209,28 @@ export const grid = [0, 90]
 
 export type ColorScheme = 'system' | 'light' | 'dark';
 
+/**
+ * The share images' look, in what Satori draws: pixels at a 280px avatar, degrees and color roles,
+ * since it cannot read the theme's CSS variables.
+ */
+export interface ShareStyle {
+  /** The `primary` bar across the top, in pixels. */
+  bar: number;
+  /** Soft light behind the content, as radial gradients. */
+  glows: readonly { role: ColorRole; at: string; opacity: number }[];
+  /** The avatar's `border-radius`. Without it, `radiusAvatar`. */
+  avatarRadius?: string;
+  avatarBorder?: { width: number; role: ColorRole };
+  avatarShadow?: { x: number; y: number; blur: number; role: ColorRole };
+  avatarGrayscale: boolean;
+  /** A polaroid around the avatar, on `surfaceBright`: its padding on the sides and at the bottom. */
+  avatarFrame?: { side: number; bottom: number };
+  /** A strip of tape across the top of the frame. */
+  avatarTape: boolean;
+  /** Degrees. */
+  avatarTilt: number;
+}
+
 /** A theme has a light and a dark color set. It cannot ship with only one. */
 export interface Theme {
   light: ColorSet;
@@ -218,6 +240,7 @@ export interface Theme {
   style: ThemeStyle;
   tones: Readonly<Record<Tone, ToneColors>>;
   fonts: ThemeFonts;
+  share: ShareStyle;
 }
 
 export const cssColorVar = (role: ColorRole) =>

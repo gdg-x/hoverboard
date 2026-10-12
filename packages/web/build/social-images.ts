@@ -8,7 +8,7 @@ import {
   type FontRole,
   type ThemeFonts,
 } from '../src/themes/fonts';
-import type { ColorSet } from '../src/themes/tokens';
+import type { ColorSet, ShareStyle } from '../src/themes/tokens';
 import type { SiteFonts } from './fonts';
 import type { ResolvedTheme } from './theme';
 
@@ -26,8 +26,11 @@ export interface SocialFont {
 /** What `virtual:hoverboard/social-images` exports. */
 export interface SocialImageDesign {
   fonts: SocialFont[];
+  /** The weight of titles and initials. */
+  displayWeight: number;
   colors: ColorSet;
   avatarRadius: string;
+  share: ShareStyle;
   /** The logo's SVG markup. */
   logo: string | undefined;
   /** Where photos with a path instead of a URL are, the first that has the file wins. Absolute. */
@@ -38,19 +41,22 @@ export interface SocialImageDesign {
 
 const require = createRequire(import.meta.url);
 
-// The weights the images use.
-const WEIGHTS: Record<SocialFontRole, number[]> = { display: [700], body: [400, 600] };
+const BODY_WEIGHTS = [400, 600];
 // Satori reads no WOFF2.
 const FORMATS = ['.ttf', '.otf', '.woff'];
 
 /** The static `@fontsource` files of a built-in font, every subset, since Satori has no variable fonts. */
-const builtInFonts = (name: BuiltInFontName, role: SocialFontRole): SocialFont[] => {
+const builtInFonts = (
+  name: BuiltInFontName,
+  role: SocialFontRole,
+  displayWeight: number,
+): SocialFont[] => {
   const id = BUILT_IN_FONTS[name].package.split('/')[1] ?? '';
   const dir = join(dirname(require.resolve(`@fontsource/${id}/package.json`)), 'files');
   const files = fs.readdirSync(dir);
   // Latin first, so it is the first family to try.
   const order = (subset: string) => (subset.startsWith('latin') ? `0${subset}` : subset);
-  return WEIGHTS[role].flatMap((weight) => {
+  return (role === 'display' ? [displayWeight] : BODY_WEIGHTS).flatMap((weight) => {
     const suffix = `-${weight}-normal.woff`;
     return files
       .filter((file) => file.endsWith(suffix))
@@ -73,11 +79,12 @@ export const socialImageFonts = (
   themeFonts: ThemeFonts,
   siteFonts: SiteFonts | undefined,
   siteDir: string,
+  displayWeight = 700,
 ): { fonts: SocialFont[]; warnings: string[] } => {
   const warnings: string[] = [];
   const fonts = (['display', 'body'] as const).flatMap((role) => {
     const font = siteFonts?.[role];
-    if (!font) return builtInFonts(themeFonts[role], role);
+    if (!font) return builtInFonts(themeFonts[role], role, displayWeight);
     const usable = (font.files ?? []).filter(
       ({ src, style = 'normal', weight }) =>
         FORMATS.includes(extname(src).toLowerCase()) &&
@@ -96,7 +103,7 @@ export const socialImageFonts = (
     warnings.push(
       `site.json/theme/fonts/${role}: share images need a TTF, OTF or WOFF file with a weight such as 400, so they use ${BUILT_IN_FONTS[themeFonts[role]].family} instead of "${font.family}".`,
     );
-    return builtInFonts(themeFonts[role], role);
+    return builtInFonts(themeFonts[role], role, displayWeight);
   });
   return { fonts, warnings };
 };
@@ -108,24 +115,28 @@ export const socialImageDesign = (
   { siteDir, publicDirs }: { siteDir: string; publicDirs: string[] },
 ): { design: SocialImageDesign; warnings: string[] } => {
   const dark = theme.colorScheme === 'dark';
-  const { fonts, warnings } = socialImageFonts(theme.fonts, siteFonts, siteDir);
+  const displayWeight = Number(theme.style.displayWeight);
+  const { fonts, warnings } = socialImageFonts(theme.fonts, siteFonts, siteDir, displayWeight);
   const logoFile = [...(dark ? ['images/logo-dark.svg'] : []), 'images/logo.svg']
     .flatMap((file) => publicDirs.map((dir) => join(dir, file)))
     .find((file) => fs.existsSync(file));
   const logo = logoFile ? fs.readFileSync(logoFile, 'utf8') : undefined;
   const colors = dark ? theme.dark : theme.light;
-  const avatarRadius = theme.style.radiusAvatar;
+  const { share } = theme;
+  const avatarRadius = share.avatarRadius ?? theme.style.radiusAvatar;
   // File names, not paths, so the key is the same on every machine.
   const fontNames = fonts.map(({ name, weight, path }) => [name, weight, basename(path)]);
   const designKey = createHash('sha256')
-    .update(JSON.stringify([colors, avatarRadius, fontNames, logo]))
+    .update(JSON.stringify([colors, avatarRadius, share, displayWeight, fontNames, logo]))
     .digest('hex')
     .slice(0, 8);
   return {
     design: {
       fonts,
+      displayWeight,
       colors,
       avatarRadius,
+      share,
       logo,
       publicDirs: publicDirs.map((dir) => resolve(dir)),
       designKey,

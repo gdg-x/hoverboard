@@ -14,6 +14,14 @@ const stage: ToneColors = {
 export const spotlight: Theme = {
   colorScheme: 'dark',
   fonts: { display: 'oswald', body: 'inter', mono: 'jetbrains-mono', accent: 'jetbrains-mono' },
+  share: {
+    bar: 0,
+    glows: [{ role: 'onSurface', at: '50% 0%', opacity: 0.14 }],
+    avatarBorder: { width: 8, role: 'secondary' },
+    avatarGrayscale: true,
+    avatarTape: false,
+    avatarTilt: 0,
+  },
   light: {
     primary: '#2848c9',
     onPrimary: '#ffffff',

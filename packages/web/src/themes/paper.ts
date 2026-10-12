@@ -43,6 +43,19 @@ const ruled =
 export const paper: Theme = {
   colorScheme: 'system',
   fonts: { display: 'literata', body: 'inter', mono: 'jetbrains-mono', accent: 'caveat' },
+  share: {
+    bar: 0,
+    glows: [
+      { role: 'accent2', at: '100% 0%', opacity: 0.12 },
+      { role: 'accent1', at: '0% 100%', opacity: 0.1 },
+    ],
+    avatarRadius: '2px',
+    avatarShadow: { x: 0, y: 6, blur: 18, role: 'scrim' },
+    avatarGrayscale: false,
+    avatarFrame: { side: 16, bottom: 56 },
+    avatarTape: true,
+    avatarTilt: -2,
+  },
   light: {
     primary: '#3f5f9a',
     onPrimary: '#ffffff',

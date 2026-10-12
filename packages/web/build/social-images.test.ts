@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { THEMES } from '../src/themes/index';
+import { THEMES, type ThemeName } from '../src/themes/index';
 import { socialImageDesign, socialImageFonts } from './social-images';
 import { resolveTheme, type SiteTheme } from './theme';
 
@@ -128,6 +128,23 @@ describe('socialImageDesign', () => {
 
     expect(design().logo).toBeUndefined();
   });
+
+  it.each(Object.keys(THEMES) as ThemeName[])(
+    "uses the %s theme's title weight, share style and avatar shape",
+    (name) => {
+      const { style, share } = THEMES[name];
+      const { fonts, ...rest } = design({ name });
+
+      expect(rest).toMatchObject({
+        displayWeight: Number(style.displayWeight),
+        share,
+        avatarRadius: share.avatarRadius ?? style.radiusAvatar,
+      });
+      const display = fonts.filter(({ role }) => role === 'display');
+      expect(display.every(({ weight }) => weight === Number(style.displayWeight))).toBe(true);
+      expect(display.every(({ path }) => existsSync(path))).toBe(true);
+    },
+  );
 
   it('changes its key with the colors and the logo', () => {
     const { designKey } = design();

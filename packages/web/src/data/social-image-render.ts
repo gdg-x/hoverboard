@@ -4,7 +4,15 @@ import { access, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import satori, { type Font, type FontWeight } from 'satori';
 import sharp from 'sharp';
-import { avatarRadius, colors, fonts, logo, publicDirs } from 'virtual:hoverboard/social-images';
+import {
+  avatarRadius,
+  colors,
+  displayWeight,
+  fonts,
+  logo,
+  publicDirs,
+  share,
+} from 'virtual:hoverboard/social-images';
 import { shortName } from '../config/site';
 import {
   SOCIAL_IMAGE,
@@ -77,6 +85,7 @@ export const loadPhoto = (photoUrl: string): Promise<string | undefined> => {
       .then((data) =>
         sharp(data)
           .resize(PHOTO_SIZE, PHOTO_SIZE, { fit: 'cover' })
+          .grayscale(share.avatarGrayscale)
           .jpeg({ quality: 85 })
           .toBuffer(),
       )
@@ -113,7 +122,7 @@ const header = (): Node => {
   if (!logo || !size) {
     return h(
       'div',
-      { fontFamily: DISPLAY, fontWeight: 700, fontSize: 40, color: colors.primary },
+      { fontFamily: DISPLAY, fontWeight: displayWeight, fontSize: 40, color: colors.primary },
       shortName,
     );
   }
@@ -129,20 +138,38 @@ const header = (): Node => {
   };
 };
 
-/** `ring` separates avatars that overlap. */
+/**
+ * `height` includes the theme's frame. `ring` separates avatars that overlap, when the theme has
+ * no border of its own.
+ */
 const avatar = (
   person: SocialImagePerson,
   photo: string | undefined,
-  size: number,
+  height: number,
   ring = false,
 ): Node => {
+  const { avatarBorder, avatarShadow, avatarFrame, avatarTilt } = share;
+  // The share style's lengths are for a 280px avatar.
+  const size = avatarFrame
+    ? Math.round((height * 280) / (280 + avatarFrame.side + avatarFrame.bottom))
+    : height;
+  const px = (length: number) => Math.round((length * size) / 280);
+  const border = avatarBorder
+    ? `${Math.max(1, px(avatarBorder.width))}px solid ${colors[avatarBorder.role]}`
+    : ring && `${Math.round(size / 24)}px solid ${colors.surface}`;
+  const shadow =
+    avatarShadow &&
+    `${px(avatarShadow.x)}px ${px(avatarShadow.y)}px ${px(avatarShadow.blur)}px ${colors[avatarShadow.role]}`;
+  const tilt = avatarTilt ? { transform: `rotate(${avatarTilt}deg)` } : {};
   const style = {
     width: size,
     height: size,
     borderRadius: avatarRadius,
-    ...(ring ? { border: `${Math.round(size / 24)}px solid ${colors.surface}` } : {}),
+    ...(border ? { border } : {}),
+    ...(shadow && !avatarFrame ? { boxShadow: shadow } : {}),
+    ...(avatarFrame ? {} : tilt),
   };
-  return photo
+  const picture = photo
     ? { type: 'img', props: { src: photo, width: size, height: size, style } }
     : h(
         'div',
@@ -154,11 +181,38 @@ const avatar = (
           backgroundColor: colors.primaryContainer,
           color: colors.onPrimaryContainer,
           fontFamily: DISPLAY,
-          fontWeight: 700,
+          fontWeight: displayWeight,
           fontSize: size * 0.36,
         },
         person.initials,
       );
+  if (!avatarFrame) return picture;
+  const side = px(avatarFrame.side);
+  const tapeWidth = Math.round(size * 0.45);
+  return h(
+    'div',
+    {
+      position: 'relative',
+      display: 'flex',
+      flexShrink: 0,
+      padding: `${side}px ${side}px ${px(avatarFrame.bottom)}px`,
+      backgroundColor: colors.surfaceBright,
+      ...(shadow ? { boxShadow: shadow } : {}),
+      ...tilt,
+    },
+    picture,
+    share.avatarTape &&
+      h('div', {
+        position: 'absolute',
+        top: -px(16),
+        left: side + (size - tapeWidth) / 2,
+        width: tapeWidth,
+        height: px(40),
+        backgroundColor: colors.surfaceContainerHigh,
+        opacity: 0.85,
+        transform: 'rotate(-4deg)',
+      }),
+  );
 };
 
 const footer = (image: SocialImage): Node =>
@@ -216,7 +270,7 @@ const sessionBody = async (image: SessionImage): Promise<Node> => {
       {
         ...clamp(3),
         fontFamily: DISPLAY,
-        fontWeight: 700,
+        fontWeight: displayWeight,
         fontSize: image.titleSize,
         lineHeight: 1.15,
         color: colors.onSurface,
@@ -256,7 +310,7 @@ const speakerBody = async (image: SpeakerImage): Promise<Node> =>
         {
           ...clamp(2),
           fontFamily: DISPLAY,
-          fontWeight: 700,
+          fontWeight: displayWeight,
           fontSize: image.nameSize,
           lineHeight: 1.1,
           color: colors.onSurface,
@@ -293,20 +347,32 @@ export const socialImageSvg = async (image: SocialImage): Promise<string> => {
       fontFamily: BODY,
       color: colors.onSurface,
     },
-    h('div', {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      height: 16,
-      backgroundColor: colors.primary,
-    }),
+    ...share.glows.map(({ role, at, opacity }) =>
+      h('div', {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundImage: `radial-gradient(circle at ${at}, ${colors[role]}, transparent 70%)`,
+        opacity,
+      }),
+    ),
+    share.bar > 0 &&
+      h('div', {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: share.bar,
+        backgroundColor: colors.primary,
+      }),
     // Satori sizes boxes without their padding, so the content is placed from each edge instead.
     h(
       'div',
       {
         position: 'absolute',
-        top: 16 + PADDING - 8,
+        top: share.bar + PADDING - 8,
         left: PADDING,
         right: PADDING,
         bottom: 48,
