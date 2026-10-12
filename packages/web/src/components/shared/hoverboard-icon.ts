@@ -42,6 +42,7 @@ const ICONS: Record<string, () => Promise<{ default: SVGTemplateResult }>> = {
   bell: () => import('./icons/bell'),
   'arrow-left': () => import('./icons/arrow-left'),
   calendar: () => import('./icons/calendar'),
+  clock: () => import('./icons/clock'),
   share: () => import('./icons/share'),
   'coffee-break': () => import('./icons/coffee-break'),
   lunch: () => import('./icons/lunch'),

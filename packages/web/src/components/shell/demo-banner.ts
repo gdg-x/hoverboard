@@ -1,5 +1,5 @@
-import { msg } from '@lit/localize';
-import { css, html } from 'lit';
+import { msg, str } from '@lit/localize';
+import { css, html, nothing } from 'lit';
 import { displayFont } from '../../styles/shared';
 import { customElement, state } from 'lit/decorators.js';
 import {
@@ -7,9 +7,12 @@ import {
   density as siteDensity,
   siteAttendance,
   themeName as siteTheme,
+  timeZone,
 } from '../../config/site';
+import { isDemoProject } from '../../firebase';
 import { segmented } from '../../styles/segmented';
 import { THEMES } from '../../themes/index';
+import { currentTime } from '../../utils/clock';
 import {
   ATTENDANCES,
   type Attendance,
@@ -17,15 +20,18 @@ import {
   chooseDemo,
   chooseDemoAttendance,
   chooseDemoTime,
-  DEMO_TIMES,
-  type DemoTime,
   readDemoAttendance,
   readDemoChoices,
   readDemoTime,
 } from '../../utils/demo';
+import { getLocale } from '../../utils/localization';
+import { wallClock, zonedTime } from '../../utils/time-zone';
 import '../footer/color-scheme-toggle';
 import '../shared/hoverboard-icon';
 import { ThemedComponent } from '../themed-component';
+import '../ui/hb-button';
+import '../ui/hb-icon-button';
+import '../ui/hb-popover';
 import type { HbSwitch } from '../ui/hb-switch';
 import '../ui/hb-switch';
 
@@ -96,6 +102,41 @@ export class DemoBanner extends ThemedComponent {
         color: var(--hb-color-surface);
       }
 
+      .picker {
+        display: grid;
+        gap: var(--hb-space-3);
+      }
+
+      .picker label {
+        display: grid;
+        gap: var(--hb-space-1);
+      }
+
+      .picker input {
+        min-block-size: var(--hb-target-min);
+        padding-inline: var(--hb-space-3);
+        border: var(--hb-border-width) solid currentColor;
+        border-radius: var(--hb-radius-control);
+        background-color: transparent;
+        color: inherit;
+        font: inherit;
+      }
+
+      .picker input:focus-visible {
+        outline: 3px solid var(--hb-color-focus);
+        outline-offset: 2px;
+      }
+
+      .picker .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--hb-space-2);
+      }
+
+      .picked {
+        font-variant-numeric: tabular-nums;
+      }
+
       fieldset,
       color-scheme-toggle {
         --hb-segmented-selected-color: var(--hb-color-ink);
@@ -116,11 +157,16 @@ export class DemoBanner extends ThemedComponent {
   @state()
   private accessor attendance: Attendance = siteAttendance;
 
-  /** `now` for the real time. */
+  /** The picked time, or `null` for the real time. */
   @state()
-  private accessor time: DemoTime | 'now' = 'now';
+  private accessor time: number | null = null;
+
+  // Only the browser knows it runs on the emulators.
+  @state()
+  private accessor emulator = false;
 
   override firstUpdated() {
+    this.emulator = isDemoProject;
     const stored = readDemoChoices(storage);
     if (stored.theme && stored.theme in THEMES) this.theme = stored.theme;
     if (stored.density && (DENSITIES as readonly string[]).includes(stored.density)) {
@@ -130,7 +176,9 @@ export class DemoBanner extends ThemedComponent {
       this.decorations = stored.decorations === 'on';
     }
     this.attendance = readDemoAttendance() ?? siteAttendance;
-    this.time = readDemoTime() ?? 'now';
+    this.time = readDemoTime();
+    const { date, time } = wallClock(new Date(currentTime()), timeZone);
+    this.timeInput.value = `${date}T${time}`;
   }
 
   // Properties, not bindings: Lit SSR writes `.checked` as a `checked` attribute even when false.
@@ -144,8 +192,10 @@ export class DemoBanner extends ThemedComponent {
     if (theme) theme.value = this.theme;
     const attendance = this.renderRoot.querySelector<HTMLSelectElement>('select.attendance');
     if (attendance) attendance.value = this.attendance;
-    const time = this.renderRoot.querySelector<HTMLSelectElement>('select.time');
-    if (time) time.value = this.time;
+  }
+
+  private get timeInput() {
+    return this.renderRoot.querySelector<HTMLInputElement>('input.time')!;
   }
 
   override render() {
@@ -159,15 +209,22 @@ export class DemoBanner extends ThemedComponent {
       hybrid: msg('Hybrid', { id: 'shell.demo.attendance.hybrid' }),
       online: msg('Online', { id: 'event.online' }),
     };
-    const timeLabels: Record<DemoTime | 'now', string> = {
-      now: msg('Now', { id: 'shell.demo.time.now' }),
-      before: msg('Before the event', { id: 'shell.demo.time.before' }),
-      during: msg('During the event', { id: 'shell.demo.time.during' }),
-      after: msg('After the event', { id: 'shell.demo.time.after' }),
-    };
     return html`
-      <aside class="inner" aria-label="${msg('Demo', { id: 'shell.demo.label' })}">
-        <p class="intro">${msg('DEMO', { id: 'shell.demo.badge' })}</p>
+      <aside
+        class="inner"
+        aria-label="${
+          this.emulator
+            ? msg('Development', { id: 'shell.demo.label-dev' })
+            : msg('Demo', { id: 'shell.demo.label' })
+        }"
+      >
+        <p class="intro">
+          ${
+            this.emulator
+              ? msg('DEV', { id: 'shell.demo.badge-dev', desc: 'Shown on the local emulators.' })
+              : msg('DEMO', { id: 'shell.demo.badge' })
+          }
+        </p>
         <div class="controls">
           <label>
             <span class="visually-hidden">${msg('Theme', { id: 'shell.demo.theme' })}</span>
@@ -221,17 +278,36 @@ export class DemoBanner extends ThemedComponent {
               )}
             </select>
           </label>
-          <label>
-            <span class="visually-hidden">${msg('When', { id: 'shell.demo.time' })}</span>
-            <select class="time" @change="${this.onTime}">
-              ${(['now', ...DEMO_TIMES] as const).map(
-                (value) =>
-                  html`<option value="${value}" ?selected="${value === this.time}">
-                    ${timeLabels[value]}
-                  </option>`,
-              )}
-            </select>
-          </label>
+          <hb-popover>
+            <hb-icon-button slot="trigger" label="${msg('When', { id: 'shell.demo.time' })}">
+              <hoverboard-icon name="clock"></hoverboard-icon>
+            </hb-icon-button>
+            <div class="picker">
+              <label>
+                ${msg(str`Time at the event, ${timeZone}`, { id: 'shell.demo.time.input' })}
+                <input class="time" type="datetime-local" />
+              </label>
+              <div class="actions">
+                <hb-button variant="text" @click="${this.onNow}">
+                  ${msg('Now', { id: 'shell.demo.time.now' })}
+                </hb-button>
+                <hb-button variant="filled" @click="${this.onTime}">
+                  ${msg('Set time', { id: 'shell.demo.time.set' })}
+                </hb-button>
+              </div>
+            </div>
+          </hb-popover>
+          ${
+            this.time === null
+              ? nothing
+              : html`<span class="picked">
+                  ${new Intl.DateTimeFormat(getLocale(), {
+                    dateStyle: 'medium',
+                    timeStyle: 'short',
+                    timeZone,
+                  }).format(this.time)}
+                </span>`
+          }
         </div>
       </aside>
     `;
@@ -257,9 +333,14 @@ export class DemoBanner extends ThemedComponent {
     chooseDemoAttendance(value === siteAttendance ? null : value);
   };
 
-  private readonly onTime = (event: Event) => {
-    const value = (event.target as HTMLSelectElement).value as DemoTime | 'now';
-    chooseDemoTime(value === 'now' ? null : value);
+  private readonly onTime = () => {
+    const [date, time] = this.timeInput.value.split('T');
+    if (!date || !time) return;
+    chooseDemoTime(zonedTime(date, time, timeZone).getTime());
+  };
+
+  private readonly onNow = () => {
+    chooseDemoTime(null);
   };
 }
 

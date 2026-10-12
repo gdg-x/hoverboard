@@ -147,11 +147,8 @@ describe.concurrent('keyboard', () => {
   it.for(pages)(
     'reaches the footer with Tab, each stop visible, marked and uncovered, on $label',
     async (target, { expect }) => {
-      // A browser of its own: another page opening in a shared one can take the focus, and then
-      // the focused element doesn't match `:focus`.
-      const own = await chromium.launch();
       // Reduced motion scrolls each stop into view at once, so it can be measured.
-      const { page, close } = await openPage(own, target.url, target.path, {
+      const { page, close } = await openPage(browser, target.url, target.path, {
         context: { reducedMotion: 'reduce' },
       });
       try {
@@ -162,6 +159,8 @@ describe.concurrent('keyboard', () => {
         const stops: {
           name: string;
           hidden: boolean;
+          /** For a hidden stop: whether it matches `:focus`, and where it is. */
+          why?: string;
           /** What covers the whole stop, which fails 2.4.11, or part of it, which is only reported. */
           coveredBy?: string;
           partlyCoveredBy?: string;
@@ -173,12 +172,13 @@ describe.concurrent('keyboard', () => {
           const stop = await page.evaluate(
             () =>
               new Promise<(typeof stops)[number] | 'end'>((resolve) => {
-                // Two frames, for a skip link that slides in.
+                const start = performance.now();
+                // Two frames, for a skip link that slides in. On a busy CI runner the first stop
+                // has stayed off screen for a moment, so a hidden one gets two seconds to show.
                 const measure = () => {
                   const { hb, hbFocused } = window as unknown as HelperWindow;
                   const element = hb.active();
                   if (!element || hbFocused.includes(element)) return resolve('end');
-                  hbFocused.push(element);
                   const rect = element.getBoundingClientRect();
                   const hidden =
                     rect.width < 1 ||
@@ -186,6 +186,15 @@ describe.concurrent('keyboard', () => {
                     getComputedStyle(element).visibility === 'hidden' ||
                     rect.bottom <= 0 ||
                     rect.top >= innerHeight;
+                  if (hidden && performance.now() - start < 2000) {
+                    requestAnimationFrame(measure);
+                    return;
+                  }
+                  hbFocused.push(element);
+                  const why = hidden
+                    ? `:focus ${element.matches(':focus')}, translate ${getComputedStyle(element).translate}, ` +
+                      `top ${Math.round(rect.top)}, document focused ${document.hasFocus()}`
+                    : undefined;
                   const ancestors = (node: Element | null): Element[] =>
                     node ? [node, ...ancestors(hb.parent(node))] : [];
                   const own = ancestors(element);
@@ -227,6 +236,7 @@ describe.concurrent('keyboard', () => {
                   resolve({
                     name: hb.describe(element),
                     hidden,
+                    ...(why ? { why } : {}),
                     ...(by && covers.length === 5 ? { coveredBy: by } : {}),
                     ...(by && covers.length < 5 ? { partlyCoveredBy: by } : {}),
                     footer: own.some(({ localName }) => localName === 'footer-block'),
@@ -262,7 +272,7 @@ describe.concurrent('keyboard', () => {
           .toBe(true);
         expect
           .soft(
-            stops.filter(({ hidden }) => hidden).map(({ name }) => name),
+            stops.filter(({ hidden }) => hidden).map(({ name, why }) => `${name} (${why})`),
             'hidden',
           )
           .toEqual([]);
@@ -280,7 +290,6 @@ describe.concurrent('keyboard', () => {
         ).toEqual([]);
       } finally {
         await close();
-        await own.close();
       }
     },
   );

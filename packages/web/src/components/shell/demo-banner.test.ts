@@ -8,7 +8,8 @@ import {
 } from 'shadow-dom-testing-library';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { decorations, density, siteAttendance, themeName } from '../../config/site';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
+import { decorations, density, siteAttendance, themeName, timeZone } from '../../config/site';
 import { COLOR_SCHEME_KEY } from '../../utils/color-scheme';
 import {
   chooseDemoAttendance,
@@ -19,7 +20,9 @@ import {
   DEMO_THEME_KEY,
   DEMO_TIME_KEY,
 } from '../../utils/demo';
+import { zonedTime } from '../../utils/time-zone';
 import type { ColorSchemeToggle } from '../footer/color-scheme-toggle';
+import type { HbPopover } from '../ui/hb-popover';
 import type { DemoBanner } from './demo-banner';
 import './demo-banner';
 
@@ -28,6 +31,14 @@ vi.mock('../../utils/demo', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../../utils/demo')>()),
   chooseDemoAttendance: vi.fn(),
   chooseDemoTime: vi.fn(),
+}));
+
+const firebase = vi.hoisted(() => ({ isDemoProject: false }));
+vi.mock('../../firebase', async () => ({
+  ...(await import('../../__mocks__/firebase')),
+  get isDemoProject() {
+    return firebase.isDemoProject;
+  },
 }));
 
 const root = document.documentElement;
@@ -44,6 +55,7 @@ describe('demo-banner', () => {
   afterEach(() => {
     litRender(nothing, document.body);
     localStorage.clear();
+    firebase.isDemoProject = false;
     for (const name of ['data-theme', 'data-density', 'data-color-scheme', 'data-decorations']) {
       root.removeAttribute(name);
     }
@@ -61,6 +73,17 @@ describe('demo-banner', () => {
         .getAllByRole('option')
         .map((option) => (option as HTMLOptionElement).value),
     ).toEqual(['festival', 'spotlight', 'paper', 'glass', 'minimalist']);
+  });
+
+  it('says DEV on the emulators', async () => {
+    firebase.isDemoProject = true;
+    const { container } = await render();
+
+    expect(
+      within(container).getByRole('complementary', { name: 'Development' }),
+    ).toBeInTheDocument();
+    expect(within(container).getByText('DEV')).toBeInTheDocument();
+    expect(within(container).queryByText('DEMO')).not.toBeInTheDocument();
   });
 
   it("starts from the site's spacing, with the brightness toggle", async () => {
@@ -163,30 +186,52 @@ describe('demo-banner', () => {
     );
   });
 
-  it('makes it before, during or after the event, or now again', async () => {
-    const { container } = await render();
-    const select = within(container).getByRole('combobox', { name: 'When' });
+  it('picks any time at the event from the clock, or now again', async () => {
+    const { element, container } = await render();
+    const clock = within(container).getByShadowRole('button', { name: 'When' });
+    const popover = deepQuerySelector<HbPopover>(container, 'hb-popover')!;
 
-    expect(select).toHaveValue('now');
-    expect(
-      within(select)
-        .getAllByRole('option')
-        .map((option) => option.textContent?.trim()),
-    ).toEqual(['Now', 'Before the event', 'During the event', 'After the event']);
+    expect(popover.open).toBe(false);
+    fireEvent.click(clock);
+    expect(popover.open).toBe(true);
+    await popover.updateComplete;
+    await expectNoAxeViolations(element);
 
-    fireEvent.change(select, { target: { value: 'during' } });
-    expect(chooseDemoTime).toHaveBeenLastCalledWith('during');
+    const input = within(container).getByLabelText(`Time at the event, ${timeZone}`);
+    expect(input).toHaveAttribute('type', 'datetime-local');
+    // It starts at the time the site shows.
+    expect((input as HTMLInputElement).value).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/);
 
-    fireEvent.change(select, { target: { value: 'now' } });
+    fireEvent.input(input, { target: { value: '2017-10-13T11:00' } });
+    fireEvent.click(within(container).getByShadowRole('button', { name: 'Set time' }));
+    expect(chooseDemoTime).toHaveBeenLastCalledWith(
+      zonedTime('2017-10-13', '11:00', timeZone).getTime(),
+    );
+
+    fireEvent.click(within(container).getByShadowRole('button', { name: 'Now' }));
     expect(chooseDemoTime).toHaveBeenLastCalledWith(null);
   });
 
-  it('shows the stored time after the first render', async () => {
-    localStorage.setItem(DEMO_TIME_KEY, 'after');
+  it('shows the picked time after the first render', async () => {
+    localStorage.setItem(DEMO_TIME_KEY, '2017-10-13T08:00:00.000Z');
     const { element, container } = await render();
     await element.updateComplete;
 
-    expect(within(container).getByRole('combobox', { name: 'When' })).toHaveValue('after');
+    expect(
+      within(container).getByText(
+        new Intl.DateTimeFormat('en', {
+          dateStyle: 'medium',
+          timeStyle: 'short',
+          timeZone,
+        }).format(Date.parse('2017-10-13T08:00:00.000Z')),
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it('shows no picked time with the real time', async () => {
+    const { shadowRoot } = await render();
+
+    expect(deepQuerySelector(shadowRoot, '.picked')).toBeNull();
   });
 
   it('keeps its brightness toggle in sync with the one in the footer', async () => {

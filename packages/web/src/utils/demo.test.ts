@@ -101,20 +101,22 @@ describe('demo choices', () => {
     expect(reload).toHaveBeenCalledTimes(2);
   });
 
-  it('stores when it is, or forgets it, then reloads, and reads only known values', () => {
+  it('stores the time, or forgets it, then reloads, and reads only times', () => {
     const reload = vi.fn();
+    const time = Date.parse('2017-10-13T08:00:00.000Z');
     expect(readDemoTime()).toBeNull();
 
-    chooseDemoTime('during', reload);
-    expect(localStorage.getItem(DEMO_TIME_KEY)).toBe('during');
-    expect(readDemoTime()).toBe('during');
+    chooseDemoTime(time, reload);
+    expect(localStorage.getItem(DEMO_TIME_KEY)).toBe('2017-10-13T08:00:00.000Z');
+    expect(readDemoTime()).toBe(time);
     expect(reload).toHaveBeenCalledTimes(1);
 
     chooseDemoTime(null, reload);
     expect(localStorage.getItem(DEMO_TIME_KEY)).toBeNull();
     expect(reload).toHaveBeenCalledTimes(2);
 
-    localStorage.setItem(DEMO_TIME_KEY, 'tomorrow');
+    // The banner's old choices.
+    localStorage.setItem(DEMO_TIME_KEY, 'during');
     expect(readDemoTime()).toBeNull();
   });
 
