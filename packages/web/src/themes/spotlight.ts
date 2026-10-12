@@ -137,6 +137,7 @@ export const spotlight: Theme = {
     heroArtOrder: '0',
     heroArtDisplay: 'none',
     heroArtMaxWidth: 'none',
+    heroArtBackground: 'none',
     bandHeaderDirection: 'column',
     bandHeaderAlign: 'center',
     bandTextAlign: 'center',

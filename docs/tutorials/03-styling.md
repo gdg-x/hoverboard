@@ -4,7 +4,7 @@ Colors, fonts and shapes come from a theme. Pick it and change it in `theme` in 
 
 ## Themes
 
-Hoverboard has four built-in themes. Each has light and dark colors, and its own fonts, shapes, layout, decorations and motion. Every theme renders the same pages with the same content.
+Hoverboard has five built-in themes. Each has light and dark colors, and its own fonts, shapes, layout, decorations and motion. Every theme renders the same pages with the same content.
 
 ### `festival`
 
@@ -29,6 +29,12 @@ A sketchbook. Literata headings with an italic home title, and Caveat handwritin
 Modeled on Apple's Liquid Glass. Frosted, see-through cards, sections and bars float over soft color glows, with the largest round corners. The home title is centered on a glass panel, the navigation sits in the middle of the header, and buttons shrink a little when pressed. Visitors who turn on reduced transparency on their device get solid colors instead.
 
 ![The glass theme's home page](../images/themes/glass.webp)
+
+### `minimalist`
+
+A Japanese print. Light, wide-set [Jost](https://fonts.google.com/specimen/Jost) headings with a thin vermilion line under section titles, on cream paper in light and sumi ink in dark. Every section is the same paper, with a hairline between them. Buttons are square and black, cards have hairline borders and no shadows, and nothing moves on hover. One vermilion sun sits behind the home illustration, stickers are vermilion seals, and speaker photos have a thin ink ring.
+
+![The minimalist theme's home page](../images/themes/minimalist.webp)
 
 ### Theme settings
 
@@ -63,17 +69,17 @@ Components draw inside their own shadow DOM, so other selectors only reach the p
 
 Besides colors, spacing and the radius scale, the theme sets these variables. Their values in each theme are in `packages/web/src/themes/`, and the full list is `ThemeStyle` in `tokens.ts`.
 
-| What                | Variables                                                                                                                                                                   |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Headings            | `--hb-display-weight`, `--hb-heading-weight`, `--hb-display-tracking`, `--hb-display-leading`, `--hb-display-scale`, `--hb-accent-scale` and `--hb-title-underline`         |
-| Shapes and edges    | `--hb-radius-control` (buttons, chips and tabs), `--hb-radius-avatar`, `--hb-border-width`, `--hb-border-color`, `--hb-shadow-card` and `--hb-shadow-button`                |
-| Home hero           | `--hb-hero-columns`, `--hb-hero-align` (`start` or `center`), `--hb-hero-art-order`, `--hb-hero-art-display` and `--hb-hero-pattern`                                        |
-| Sections            | `--hb-band-header-direction`, `--hb-band-text-align`, `--hb-band-inset` (a margin, for sections as panels), `--hb-band-radius`, `--hb-band-divider` and `--hb-band-eyebrow` |
-| Section backgrounds | `--hb-tone-surface-pattern` and `--hb-tone-accent-1-pattern` to `--hb-tone-accent-4-pattern`, `--hb-band-edge` and `--hb-page-texture`                                      |
-| Header              | `--hb-header-max-width`, `--hb-header-inset`, `--hb-header-radius`, `--hb-header-border-width` and `--hb-header-shadow`                                                     |
-| Cards and photos    | `--hb-card-scale`, `--hb-card-stagger`, `--hb-photo-frame`, `--hb-photo-tilt`, `--hb-avatar-filter` and `--hb-avatar-shadow`                                                |
-| Stickers            | `--hb-sticker-shape` (a `clip-path`) and `--hb-sticker-tilt-scale`                                                                                                          |
-| Motion              | `--hb-ease-press`, `--hb-press-scale`, `--hb-hover-translate`, `--hb-hover-rotate`, `--hb-duration-short` and `--hb-duration-medium`                                        |
+| What                | Variables                                                                                                                                                                                  |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Headings            | `--hb-display-weight`, `--hb-heading-weight`, `--hb-display-tracking`, `--hb-display-leading`, `--hb-display-scale`, `--hb-accent-scale` and `--hb-title-underline`                        |
+| Shapes and edges    | `--hb-radius-control` (buttons, chips and tabs), `--hb-radius-avatar`, `--hb-border-width`, `--hb-border-color`, `--hb-shadow-card` and `--hb-shadow-button`                               |
+| Home hero           | `--hb-hero-columns`, `--hb-hero-align` (`start` or `center`), `--hb-hero-art-order`, `--hb-hero-art-display`, `--hb-hero-art-background` (behind the illustration) and `--hb-hero-pattern` |
+| Sections            | `--hb-band-header-direction`, `--hb-band-text-align`, `--hb-band-inset` (a margin, for sections as panels), `--hb-band-radius`, `--hb-band-divider` and `--hb-band-eyebrow`                |
+| Section backgrounds | `--hb-tone-surface-pattern` and `--hb-tone-accent-1-pattern` to `--hb-tone-accent-4-pattern`, `--hb-band-edge` and `--hb-page-texture`                                                     |
+| Header              | `--hb-header-max-width`, `--hb-header-inset`, `--hb-header-radius`, `--hb-header-border-width` and `--hb-header-shadow`                                                                    |
+| Cards and photos    | `--hb-card-scale`, `--hb-card-stagger`, `--hb-photo-frame`, `--hb-photo-tilt`, `--hb-avatar-filter` and `--hb-avatar-shadow`                                                               |
+| Stickers            | `--hb-sticker-shape` (a `clip-path`) and `--hb-sticker-tilt-scale`                                                                                                                         |
+| Motion              | `--hb-ease-press`, `--hb-press-scale`, `--hb-hover-translate`, `--hb-hover-rotate`, `--hb-duration-short` and `--hb-duration-medium`                                                       |
 
 For example, square buttons and no section patterns:
 
@@ -113,7 +119,7 @@ Override any theme color in `theme.colors`, as a hex color. Dark colors are in `
 
 When you change a light color and not its dark version, the build makes a dark version with the same hue, as light as the theme's dark color.
 
-The color names are in `packages/web/src/themes/tokens.ts`, and their values in `festival.ts`, `spotlight.ts`, `paper.ts` and `glass.ts`. The build writes them on `:root` in every page as CSS variables, such as `--hb-color-primary`, so the first paint already has your colors.
+The color names are in `packages/web/src/themes/tokens.ts`, and their values in `festival.ts`, `spotlight.ts`, `paper.ts`, `glass.ts` and `minimalist.ts`. The build writes them on `:root` in every page as CSS variables, such as `--hb-color-primary`, so the first paint already has your colors.
 
 The build checks that text colors have enough contrast with their backgrounds, in each color scheme the site uses. For example, `onPrimary` on `primary` needs a ratio of 4.5:1. When a pair fails, `npm run build` and `./hb config validate` stop with an error like this:
 
@@ -125,7 +131,7 @@ The browser theme color is `primary`, in light and dark. The home screen app col
 
 ## Fonts
 
-Each theme has its own heading font: [Unbounded](https://fonts.google.com/specimen/Unbounded) for `festival`, [Oswald](https://fonts.google.com/specimen/Oswald) for `spotlight`, [Literata](https://fonts.google.com/specimen/Literata) for `paper` and [Inter](https://rsms.me/inter/) for `glass`. `paper` adds [Caveat](https://fonts.google.com/specimen/Caveat) for handwritten labels. Every theme uses Inter for text and [JetBrains Mono](https://www.jetbrains.com/lp/mono/) for times and code. The site serves them itself, so they also work offline.
+Each theme has its own heading font: [Unbounded](https://fonts.google.com/specimen/Unbounded) for `festival`, [Oswald](https://fonts.google.com/specimen/Oswald) for `spotlight`, [Literata](https://fonts.google.com/specimen/Literata) for `paper`, [Inter](https://rsms.me/inter/) for `glass` and [Jost](https://fonts.google.com/specimen/Jost) for `minimalist`. `paper` adds [Caveat](https://fonts.google.com/specimen/Caveat) for handwritten labels. Every theme uses Inter for text and [JetBrains Mono](https://www.jetbrains.com/lp/mono/) for times and code. The site serves them itself, so they also work offline.
 
 Change a font with `theme.fonts.display`, `body`, `mono` or `accent`. `accent` is for stickers and short labels, and is the display font unless the theme or the site sets one. Hoverboard assumes you have the right to use the font. Use one of these:
 
@@ -196,7 +202,7 @@ It optimizes the SVG and replaces its colors with theme colors, and writes `pack
 
 ## Hero
 
-The home page hero uses the theme's first accent color, with the theme's pattern: dots in `festival`, a beam in `spotlight` and ruled lines in `paper`. In `glass`, the title sits on a glass panel. `heroSettings.home` in `packages/config/site.json` can add an illustration or a background photo ([Pages configuration](01-configure-app.md#pages-configuration)). With a photo, the build checks that the dark scheme's `onSurface` text is readable on its `scrim` over a white photo. If it is not, set a darker `theme.darkColors.scrim`.
+The home page hero uses the theme's first accent color, with the theme's pattern: dots in `festival`, a beam in `spotlight` and ruled lines in `paper`. In `glass`, the title sits on a glass panel, and `minimalist` has no pattern, only a sun behind the illustration. `heroSettings.home` in `packages/config/site.json` can add an illustration or a background photo ([Pages configuration](01-configure-app.md#pages-configuration)). With a photo, the build checks that the dark scheme's `onSurface` text is readable on its `scrim` over a white photo. If it is not, set a darker `theme.darkColors.scrim`.
 
 Other pages start with a smaller band in one of the theme's accent colors, the same for each section: speakers in the first accent color, the blog in the second, the schedule and the attending page in the third and the team in the fourth.
 

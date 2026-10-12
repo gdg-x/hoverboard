@@ -242,12 +242,13 @@
       "properties": {
         "name": {
           "description": "The built-in theme.",
-          "enum": ["festival", "spotlight", "paper", "glass"],
+          "enum": ["festival", "spotlight", "paper", "glass", "minimalist"],
           "enumDescriptions": [
             "A screen-printed gig poster: bold headings, ink outlines, hard shadows and patterned pastel bands.",
             "A keynote stage: dark, tall condensed headings, centered titles and grayscale speaker photos.",
             "A sketchbook: serif headings, handwritten labels, watercolor washes and polaroid photos with tape.",
-            "Liquid Glass: frosted panels over soft color glows, large round corners and a centered layout."
+            "Liquid Glass: frosted panels over soft color glows, large round corners and a centered layout.",
+            "A Japanese print: cream paper, wide-set light headings, hairlines, square controls and one vermilion sun."
           ]
         },
         "colorScheme": {

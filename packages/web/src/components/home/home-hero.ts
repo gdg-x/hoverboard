@@ -153,6 +153,7 @@ export class HomeHero extends ThemedComponent {
       inline-size: 100%;
       max-inline-size: var(--hb-hero-art-max-width, none);
       order: var(--hb-hero-art-order);
+      background: var(--hb-hero-art-background, none);
     }
 
     .art svg {

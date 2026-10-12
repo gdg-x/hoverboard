@@ -96,6 +96,7 @@
   --hb-sticker-shape: none !important;
   --hb-photo-frame: 0 !important;
   --hb-photo-tape: none !important;
+  --hb-hero-art-background: none !important;
   /* Without its illustration, the hero's copy takes the whole row. */
   --hb-hero-columns: 1fr !important;
   --hb-card-stagger: 0px !important;
@@ -113,6 +114,7 @@
     --hb-sticker-shape: none !important;
     --hb-photo-frame: 0 !important;
     --hb-photo-tape: none !important;
+    --hb-hero-art-background: none !important;
   }
 }
 

@@ -60,7 +60,7 @@ describe('demo-banner', () => {
       within(within(container).getByRole('combobox', { name: 'Theme' }))
         .getAllByRole('option')
         .map((option) => (option as HTMLOptionElement).value),
-    ).toEqual(['festival', 'spotlight', 'paper', 'glass']);
+    ).toEqual(['festival', 'spotlight', 'paper', 'glass', 'minimalist']);
   });
 
   it("starts from the site's spacing, with the brightness toggle", async () => {

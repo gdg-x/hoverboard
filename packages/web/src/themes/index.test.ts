@@ -85,7 +85,13 @@ describe('decorations', () => {
     ['with theme.decorations off', ":root[data-decorations='off'] {"],
     ['in forced colors', '@media (forced-colors: active) {\n  :root {'],
   ])('turn off %s', (_, selector) => {
-    for (const key of ['bandEdge', 'pageTexture', 'stickerShape', 'photoTape'] as const) {
+    for (const key of [
+      'bandEdge',
+      'pageTexture',
+      'stickerShape',
+      'photoTape',
+      'heroArtBackground',
+    ] as const) {
       expect(declarations(selector)).toContain(`${cssStyleVar(key)}: none !important;`);
     }
     for (const tone of TONES) {

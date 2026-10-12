@@ -23,7 +23,7 @@ describe('theme colors', () => {
 describe('themes', () => {
   it('are never named outside the theme files, so components only read tokens', () => {
     const offenders = Object.keys(sources).filter((path) =>
-      /['"`](festival|spotlight|paper|glass)['"`]/.test(sources[path] ?? ''),
+      /['"`](festival|spotlight|paper|glass|minimalist)['"`]/.test(sources[path] ?? ''),
     );
 
     expect(offenders).toEqual([]);

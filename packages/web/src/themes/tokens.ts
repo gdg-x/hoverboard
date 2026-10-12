@@ -114,6 +114,8 @@ export interface ThemeStyle {
   heroArtDisplay: string;
   /** The illustration's widest, such as when it sits under the text. */
   heroArtMaxWidth: string;
+  /** A `background` behind the hero illustration, never behind text. A decoration. */
+  heroArtBackground: string;
   /** A band's title and link: side by side (`row`) or stacked (`column`). */
   bandHeaderDirection: string;
   bandHeaderAlign: string;
@@ -142,7 +144,7 @@ export interface ThemeStyle {
   pageTexture: string;
   /** A `clip-path` for stickers. */
   stickerShape: string;
-  /** Multiplies each sticker's tilt. */
+  /** Multiplies each sticker's tilt, and the organizers' photo's. */
   stickerTiltScale: string;
   /** Padding around photos, such as a polaroid frame, in `photoFrameColor`. */
   photoFrame: string;

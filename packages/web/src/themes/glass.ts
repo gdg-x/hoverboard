@@ -142,6 +142,7 @@ export const glass: Theme = {
     heroArtOrder: '0',
     heroArtDisplay: 'block',
     heroArtMaxWidth: '22rem',
+    heroArtBackground: 'none',
     bandHeaderDirection: 'row',
     bandHeaderAlign: 'flex-end',
     bandTextAlign: 'start',

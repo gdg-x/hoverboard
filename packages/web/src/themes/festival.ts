@@ -137,6 +137,7 @@ export const festival: Theme = {
     heroArtOrder: '0',
     heroArtDisplay: 'block',
     heroArtMaxWidth: 'none',
+    heroArtBackground: 'none',
     bandHeaderDirection: 'row',
     bandHeaderAlign: 'flex-end',
     bandTextAlign: 'start',

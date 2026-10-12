@@ -173,6 +173,7 @@ export const paper: Theme = {
     heroArtOrder: '-1',
     heroArtDisplay: 'block',
     heroArtMaxWidth: 'none',
+    heroArtBackground: 'none',
     bandHeaderDirection: 'column',
     bandHeaderAlign: 'flex-start',
     bandTextAlign: 'start',

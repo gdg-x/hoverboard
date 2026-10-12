@@ -59,6 +59,12 @@ export const BUILT_IN_FONTS = {
     metrics: 'caveat',
     generic: 'sans-serif',
   },
+  jost: {
+    package: '@fontsource-variable/jost',
+    family: 'Jost Variable',
+    metrics: 'jost',
+    generic: 'sans-serif',
+  },
 } as const satisfies Record<string, BuiltInFont>;
 
 export type BuiltInFontName = keyof typeof BUILT_IN_FONTS;

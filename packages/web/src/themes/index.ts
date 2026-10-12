@@ -1,5 +1,6 @@
 import { festival } from './festival';
 import { glass } from './glass';
+import { minimalist } from './minimalist';
 import { paper } from './paper';
 import { spotlight } from './spotlight';
 import {
@@ -13,7 +14,7 @@ import {
 } from './tokens';
 
 /** The built-in themes. `theme.name` in site.json picks one. */
-export const THEMES = { festival, spotlight, paper, glass } as const satisfies Record<
+export const THEMES = { festival, spotlight, paper, glass, minimalist } as const satisfies Record<
   string,
   Theme
 >;
