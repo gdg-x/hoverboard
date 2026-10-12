@@ -68,6 +68,7 @@ Limits to tell the user about: share images use the site's colors, fonts and the
 ## 3. Check it
 
 1. `npm run lint` and `npm test`, or at least `npx vitest run --project Web --project Server --project Hydration` and `./hb config validate`. The `Web` tests check contrast in both schemes, the pattern rules, that every token is written, and that decorations turn off.
+   - For a base theme, also `npx vitest run --project A11y`. It runs axe on every page in every built-in theme, light and dark, so it covers the new one.
 2. Look at it in a browser:
    - Start an emulator: `npx firebase emulators:start --only firestore --project=demo-hoverboard` (keep it running).
    - `./hb data seed --yes`, then `npm run build`.

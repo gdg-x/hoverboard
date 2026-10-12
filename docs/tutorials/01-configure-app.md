@@ -193,6 +193,7 @@ The other sections are what only you know. Write them in `attendingPage` in `pac
 - `online` shows under the link to the stream, for an online or hybrid event.
 - `gettingThere` lists the ways to get to the venue, in your order. `mode` picks the icon and the heading: `train` (By train), `plane`, `bus`, `tram`, `metro`, `car`, `parking`, `bike`, `walk` (On foot) or `other`.
 - `doors` lists when the doors open and close each day. `day` is a day of the event, and `open` and `close` are `HH:MM` in `event.timezone`.
+- `accessibility` is about getting around the venue: step-free access, lifts, accessible toilets, seating, sign language or live captions, and who to ask for help.
 - `accommodation` has your text, then each hotel. Visitors can copy `code` with a button.
 - `atVenue` lists practical details. `topic` picks the icon and the heading: `wifi`, `food`, `cloakroom`, `firstAid`, `quietRoom`, `lostAndFound`, `childcare` or `other`.
 - In `gettingThere` and `atVenue`, `title` replaces the heading, for example "By tram line 1". `other` needs one.
@@ -324,6 +325,19 @@ The subscribe band on the home page saves each visitor's email and name to the `
 ```
 
 See [Export a collection as CSV](firebase-utils.md#export-a-collection-as-csv).
+
+## Accessibility checklist
+
+Hoverboard's components and themes are checked against WCAG 2.2 AA (see [Accessibility](../ACCESSIBILITY.md)). Your content needs the same care:
+
+- **Describe images.** In Markdown, such as posts, the FAQ and the code of conduct, write `![what the image shows](/images/photo.jpg)`. Leave the brackets empty only for a decorative image. Each `attendingPage` image needs `alt`. On the emulators, an image without alt text has a red outline.
+- **Name partners.** A partner's logo is described by its `name`, so use the name on the logo.
+- **Choose gallery photos that need no description.** Every gallery photo has the same alt text, "Gallery photo".
+- **Caption videos.** Videos play from YouTube, so add captions there, or check its automatic ones.
+- **Start Markdown headings at `##`.** The page title is the only `#` heading. Don't skip a level, such as `##` straight to `####`.
+- **Write links that make sense on their own**, such as "Read the travel guide" rather than "click here".
+- **Tell people about the venue.** Fill in `attendingPage.accessibility`, and add a quiet room to `atVenue` if you have one. See [Attending page](#attending-page).
+- **Check your own colors.** The build checks the colors in `site.json`. Check colors in `custom.css`, and text over your own images, with a contrast checker.
 
 ## Next steps
 

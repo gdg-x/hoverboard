@@ -6,17 +6,33 @@ Hoverboard is a template for conference websites, so an accessibility problem in
 
 Hoverboard aims to meet [WCAG 2.2](https://www.w3.org/TR/WCAG22/) level AA in every built-in theme, in light and dark, with any set of features turned on or off.
 
-Hoverboard 4 has not had a full accessibility audit yet. One is planned before the 4.0 release, and its results will be added to this page. Until then, treat the goal as a goal, not a claim of conformance.
+Hoverboard 4 has not had a full accessibility audit yet. One is planned before the 4.0 release, and its results will be added to this page. Until then, treat the goal as a goal, not a claim of conformance. The automated checks below pass.
 
 ## What Hoverboard does today
 
 - **Contrast.** Every built-in theme's text and control colors are checked against WCAG contrast ratios in light and dark, and so is the focus ring on every background it can sit on. A site's own colors in `site.json` are checked too, and the build stops when a pair fails.
 - **Keyboard.** A skip link to the main content, a visible focus ring on every control, and dialogs that keep focus inside them and close with Escape.
 - **Targets.** Buttons, links styled as buttons, chips, switches and fields are at least 24 pixels tall, whatever the theme and density.
-- **Structure.** Pages use landmarks, headings and native controls. The tests find elements by their role and accessible name, so a missing name fails a test.
+- **Structure.** Pages use landmarks, headings and native controls, and each page has its own title. The tests find elements by their role and accessible name, so a missing name fails a test.
 - **Motion.** Animations, confetti, tilts and page transitions stop when the visitor's device asks for reduced motion.
 - **Visual settings.** Forced colors (such as Windows Contrast themes) remove decorative patterns, textures and frames. Reduced transparency makes the `glass` theme solid. Organizers can turn decorations off with `decorations: false`.
 - **Language.** The page's `lang` follows the locale, and the interface text is translatable. A longer pseudo-locale checks that translated text has room.
+
+## How we test
+
+These checks run on every change, and a change can't be merged when one fails:
+
+- **Templates.** A lint rule set checks the components' HTML for missing alt text, invalid ARIA, positive `tabindex` and similar mistakes.
+- **Components and pages.** The tests run [axe](https://github.com/dequelabs/axe-core) on every interface component in each of its states, and on the pages after they load in the browser.
+- **Themes.** The contrast of every color pair, the focus ring on every background, the size of touch targets, and the size of handwriting fonts.
+- **The built site in Chrome.** Each kind of page on the demo site, and on a site with every feature off:
+  - axe with the WCAG 2.2 A and AA rules, in every built-in theme, light and dark, and with decorations off, forced colors, reduced motion and a 320px wide screen.
+  - One `h1`, the main landmarks and a title of its own.
+  - Tab from the top of the page to the footer: the first stop is the skip link, and every stop is visible, shows that it has focus, and isn't hidden behind other content.
+  - No sideways scrolling at 320px wide, and no animation with reduced motion.
+  - Text that the WCAG text spacing values would clip is reported for a person to check.
+
+Tools can't tell whether a page makes sense with a screen reader, or whether text is clear. That is what the audit is for.
 
 ## Supported environments
 
@@ -29,7 +45,11 @@ We aim to support the current versions of Chrome, Edge, Firefox and Safari on de
 
 ## Known barriers
 
-The automated checks find no WCAG 2.2 AA violations on any page template, in any built-in theme. They also walk each page with the keyboard, and check each page at 320px wide and with reduced motion. They can't check everything, so the audit will check these areas first:
+The automated checks find no WCAG 2.2 AA violations on any page template, in any built-in theme. Hoverboard has one known limitation:
+
+- Gallery photos all have the same text alternative, "Gallery photo", since the gallery has no field to describe each one.
+
+The audit will check these areas first:
 
 - Sticky bars on the schedule (the day tabs, track names and times) covering the focused session.
 - The schedule grid, which scrolls sideways, with a keyboard and a screen reader.
@@ -48,6 +68,8 @@ Each site is run by its organizers, who also write its content. Some of what mak
 - Accessibility information about the venue, on the attending page.
 - Contrast of their own colors and photos. The build checks the colors in `site.json`, but not colors set in `custom.css`.
 - Clear link text in their content.
+
+[Configure](tutorials/01-configure-app.md#accessibility-checklist) has a checklist for organizers.
 
 If you have a problem with one event's site, contact its organizers first. If the problem is in Hoverboard itself, report it here.
 
@@ -81,4 +103,4 @@ Changes to the web app keep it accessible:
 
 Hoverboard's maintainers are volunteers. They triage accessibility reports with other issues, and fix barriers that stop someone from completing a task before other bugs. Barriers like that, found in an audit, are fixed before a major release.
 
-This page is reviewed for each major release.
+This page is reviewed for each major release. It was last reviewed in October 2026, for Hoverboard 4.
