@@ -86,7 +86,11 @@
 /* eslint-disable css/no-important -- beats the theme's values, whatever selector sets them. */
 /* Decorations that cannot fade with `--hb-decorations`. Forced colors drop them too. */
 :root[data-decorations='off'] {
-  --hb-band-pattern: none !important;
+  --hb-tone-surface-pattern: none !important;
+  --hb-tone-accent-1-pattern: none !important;
+  --hb-tone-accent-2-pattern: none !important;
+  --hb-tone-accent-3-pattern: none !important;
+  --hb-tone-accent-4-pattern: none !important;
   --hb-band-edge: none !important;
   --hb-page-texture: none !important;
   --hb-sticker-shape: none !important;
@@ -95,7 +99,11 @@
 
 @media (forced-colors: active) {
   :root {
-    --hb-band-pattern: none !important;
+    --hb-tone-surface-pattern: none !important;
+    --hb-tone-accent-1-pattern: none !important;
+    --hb-tone-accent-2-pattern: none !important;
+    --hb-tone-accent-3-pattern: none !important;
+    --hb-tone-accent-4-pattern: none !important;
     --hb-band-edge: none !important;
     --hb-page-texture: none !important;
     --hb-sticker-shape: none !important;

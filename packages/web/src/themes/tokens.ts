@@ -110,8 +110,7 @@ export interface ThemeStyle {
 
   /** The decorations, which `decorations: false` and forced colors turn off. Drawn in `currentColor`. */
   heroPattern: string;
-  bandPattern: string;
-  /** A `mask` for a band's top edge, such as a zigzag. */
+  /** A `mask` for a band's top and bottom edges, such as a zigzag. */
   bandEdge: string;
   /** Layered over `pageBackground`. */
   pageTexture: string;
@@ -126,6 +125,8 @@ export interface ThemeStyle {
   photoTilt: string;
   /** A `filter` for people's photos, such as grayscale. */
   avatarFilter: string;
+  /** A `box-shadow` for people's photos on cards and pages. */
+  avatarShadow: string;
 
   /** The easing of press and hover movement. */
   easePress: string;
@@ -141,10 +142,12 @@ export interface ThemeStyle {
 export const TONES = ['surface', 'accent-1', 'accent-2', 'accent-3', 'accent-4'] as const;
 export type Tone = (typeof TONES)[number];
 
-/** A tone's background and text color roles. */
+/** A tone's background and text color roles, and the pattern on its bands. */
 export interface ToneColors {
   background: ColorRole;
   color: ColorRole;
+  /** `background` layers, drawn in `currentColor`. A decoration, like `heroPattern`. */
+  pattern?: string;
 }
 
 /** Tones on the surface and the accent containers. */
@@ -159,6 +162,18 @@ export const containerTones: Readonly<Record<Tone, ToneColors>> = {
 /** A grid of small dots in the text color, as a `background` layer. */
 export const dots =
   'radial-gradient(color-mix(in srgb, currentColor 14%, transparent) 1.5px, transparent 1.6px) 0 0 / 22px 22px';
+
+/** Diagonal lines in the text color. */
+export const stripes =
+  'repeating-linear-gradient(-45deg, color-mix(in srgb, currentColor 10%, transparent) 0 2px, transparent 2px 14px)';
+
+/** Graph paper lines in the text color. */
+export const grid = [0, 90]
+  .map(
+    (angle) =>
+      `linear-gradient(${angle}deg, color-mix(in srgb, currentColor 10%, transparent) 1px, transparent 1px) 0 0 / 28px 28px`,
+  )
+  .join(', ');
 
 /** A theme has a light and a dark color set. It cannot ship with only one. */
 export interface Theme {

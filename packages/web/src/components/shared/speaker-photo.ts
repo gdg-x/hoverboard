@@ -54,6 +54,10 @@ export class SpeakerPhoto extends ThemedComponent {
       border-radius: 50%;
     }
 
+    :host([size='m']) img {
+      box-shadow: var(--hb-avatar-shadow, none);
+    }
+
     :host([size='l']) img {
       box-shadow: var(--hb-shadow-card);
     }

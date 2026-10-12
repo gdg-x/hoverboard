@@ -70,8 +70,8 @@ export const usedSchemes = (colorScheme: ColorScheme): ('light' | 'dark')[] =>
 /** Color pairs below the WCAG AA contrast they need, in the schemes the site uses. */
 export const themeErrors = (theme: ResolvedTheme): string[] =>
   contrastFailures(theme, usedSchemes(theme.colorScheme)).map(
-    ({ scheme, foreground, background, ratio, min }) =>
-      `site.json/theme: ${foreground} on ${background} has a contrast of ${ratio.toFixed(2)}:1 in the ${scheme} scheme, and needs ${min}:1. Change theme.${scheme === 'dark' ? 'darkColors' : 'colors'}.`,
+    ({ scheme, foreground, background, ratio, min, overPattern }) =>
+      `site.json/theme: ${foreground} on ${background}${overPattern ? ' with its pattern' : ''} has a contrast of ${ratio.toFixed(2)}:1 in the ${scheme} scheme, and needs ${min}:1. Change theme.${scheme === 'dark' ? 'darkColors' : 'colors'}.`,
   );
 
 // `#rgb`, `#rgba`, `#rrggbb`, `#rrggbbaa`, `rgb(r g b / a%)` and `rgba(r, g, b, a)`.

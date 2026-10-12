@@ -37,5 +37,6 @@ export const themeDeclarations = (
     ...TONES.flatMap((tone) => [
       `${cssToneVar(tone, 'background')}: var(${cssColorVar(theme.tones[tone].background)});`,
       `${cssToneVar(tone, 'color')}: var(${cssColorVar(theme.tones[tone].color)});`,
+      `${cssToneVar(tone, 'pattern')}: ${theme.tones[tone].pattern ?? 'none'};`,
     ]),
   ].join('\n');

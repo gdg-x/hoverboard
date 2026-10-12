@@ -23,6 +23,8 @@ export const bandContent = css`
     padding: 0;
     ${displayFont('display', '4xl', 1.05, -0.01)};
     text-decoration: var(--hb-title-underline);
+    text-decoration-skip-ink: none;
+    text-underline-offset: 0.12em;
     text-wrap: balance;
     overflow-wrap: anywhere;
   }
@@ -71,6 +73,7 @@ export const bandTones = css`
   .band {
     --hb-band-background: var(--hb-tone-surface-background);
     --hb-band-color: var(--hb-tone-surface-color);
+    --hb-band-pattern: var(--hb-tone-surface-pattern);
 
     margin-inline: var(--hb-band-inset);
     border-block-start: var(--hb-band-divider);
@@ -85,15 +88,18 @@ export const bandTones = css`
   .band[data-tone='accent-4'] {
     --hb-band-background: var(--hb-tone-accent-4-background);
     --hb-band-color: var(--hb-tone-accent-4-color);
+    --hb-band-pattern: var(--hb-tone-accent-4-pattern);
   }
 
   .band[data-tone='accent-2'] {
     --hb-band-background: var(--hb-tone-accent-2-background);
     --hb-band-color: var(--hb-tone-accent-2-color);
+    --hb-band-pattern: var(--hb-tone-accent-2-pattern);
   }
 
   .band[data-tone='accent-1'] {
     --hb-band-background: var(--hb-tone-accent-1-background);
     --hb-band-color: var(--hb-tone-accent-1-color);
+    --hb-band-pattern: var(--hb-tone-accent-1-pattern);
   }
 `;

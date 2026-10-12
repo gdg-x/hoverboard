@@ -1,4 +1,11 @@
-import { type Theme, containerTones, dots } from './tokens';
+import { type Theme, containerTones, dots, grid, stripes } from './tokens';
+
+// Teeth on a band's top and bottom edges, so bands meet in a zigzag. A mask: only alpha counts.
+const zigzag = [
+  'conic-gradient(from 135deg at 50% 0, black 90deg, transparent 0) 50% 0 / 24px 12px repeat-x',
+  'linear-gradient(black 0 0) 0 12px / 100% calc(100% - 24px) no-repeat',
+  'conic-gradient(from -45deg at 50% 100%, black 90deg, transparent 0) 50% 100% / 24px 12px repeat-x',
+].join(', ');
 
 // Paper surfaces, ink outlines and hard offset shadows. Accents: blue, red, yellow, green.
 export const festival: Theme = {
@@ -80,6 +87,7 @@ export const festival: Theme = {
     displayTracking: '0em',
     displayLeading: '1',
     displayStyle: 'normal',
+    // The hero title is already as wide as its column allows: a larger scale breaks words.
     displayScale: '1',
     radiusS: '8px',
     radiusM: '16px',
@@ -89,7 +97,7 @@ export const festival: Theme = {
     borderWidth: '2px',
     borderColor: 'var(--hb-color-ink)',
     shadowCard: '4px 4px 0 0 var(--hb-color-ink)',
-    shadowCardHover: '6px 6px 0 0 var(--hb-color-ink)',
+    shadowCardHover: '6px 6px 0 0 var(--hb-color-primary)',
     shadowButton: '3px 3px 0 0 var(--hb-color-ink)',
     pressOffset: '3px',
     ctaBackground: 'var(--hb-color-primary)',
@@ -115,10 +123,9 @@ export const festival: Theme = {
     bandInset: '0',
     bandRadius: '0',
     bandDivider: 'none',
-    titleUnderline: 'none',
+    titleUnderline: 'underline 0.14em var(--hb-color-accent-3)',
     heroPattern: dots,
-    bandPattern: 'none',
-    bandEdge: 'none',
+    bandEdge: zigzag,
     pageTexture: 'none',
     stickerShape: 'none',
     stickerTiltScale: '1',
@@ -126,11 +133,18 @@ export const festival: Theme = {
     photoFrameColor: 'var(--hb-color-surface-container)',
     photoTilt: '0deg',
     avatarFilter: 'none',
+    avatarShadow: '5px 5px 0 0 var(--hb-color-accent-3)',
     easePress: 'var(--hb-ease-spring)',
     pressScale: '1',
     hoverTranslate: '-2px -2px',
     durationShort: '120ms',
     durationMedium: '240ms',
   },
-  tones: containerTones,
+  tones: {
+    ...containerTones,
+    'accent-1': { ...containerTones['accent-1'], pattern: grid },
+    'accent-2': { ...containerTones['accent-2'], pattern: stripes },
+    'accent-3': { ...containerTones['accent-3'], pattern: dots },
+    'accent-4': { ...containerTones['accent-4'], pattern: dots },
+  },
 };

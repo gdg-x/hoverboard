@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { contrastFailures, contrastRatio } from './contrast';
+import { contrastFailures, contrastRatio, patternAmount } from './contrast';
 import { THEMES, themeDeclarations } from './index';
 import {
   COLOR_ROLES,
@@ -10,14 +10,10 @@ import {
   cssColorVar,
   cssStyleVar,
   cssToneVar,
+  dots,
 } from './tokens';
 
-const PATTERNS = [
-  'heroPattern',
-  'bandPattern',
-  'bandEdge',
-  'pageTexture',
-] as const satisfies (keyof ThemeStyle)[];
+const PATTERNS = ['heroPattern', 'bandEdge', 'pageTexture'] as const satisfies (keyof ThemeStyle)[];
 
 describe('contrastRatio', () => {
   it('matches the WCAG ratios', () => {
@@ -54,24 +50,23 @@ describe.each(Object.entries(THEMES))('%s theme', (_, theme) => {
       expect(css).toContain(`${cssStyleVar(key)}: ${value};`);
     }
     for (const tone of TONES) {
-      const { background, color } = theme.tones[tone];
+      const { background, color, pattern } = theme.tones[tone];
       expect(css).toContain(`${cssToneVar(tone, 'background')}: var(${cssColorVar(background)});`);
       expect(css).toContain(`${cssToneVar(tone, 'color')}: var(${cssColorVar(color)});`);
+      expect(css).toContain(`${cssToneVar(tone, 'pattern')}: ${pattern ?? 'none'};`);
     }
   });
 
   it('draws decorations faintly in the text color, so the contrast check holds', () => {
-    for (const key of PATTERNS) {
-      const value = theme.style[key];
-      const amounts = [...value.matchAll(/currentColor (\d+)%/g)].map((match) => Number(match[1]));
-
-      expect(value, key).not.toContain('var(--hb-color-');
-      expect(
-        amounts.every((amount) => amount <= 14),
-        key,
-      ).toBe(true);
+    const values: [string, string][] = [
+      ...PATTERNS.map((key): [string, string] => [key, theme.style[key]]),
+      ...TONES.map((tone): [string, string] => [tone, theme.tones[tone].pattern ?? 'none']),
+    ];
+    for (const [name, value] of values) {
+      expect(value, name).not.toContain('var(--hb-color-');
+      expect(patternAmount(value), name).toBeLessThanOrEqual(14);
       for (const [url] of value.matchAll(/url\([^)]*\)/g)) {
-        expect(url.length, key).toBeLessThanOrEqual(2048);
+        expect(url.length, name).toBeLessThanOrEqual(2048);
       }
     }
   });
@@ -90,11 +85,11 @@ describe('decorations', () => {
     ['with theme.decorations off', ":root[data-decorations='off'] {"],
     ['in forced colors', '@media (forced-colors: active) {\n  :root {'],
   ])('turn off %s', (_, selector) => {
-    for (const key of [
-      ...PATTERNS.filter((key) => key !== 'heroPattern'),
-      'stickerShape',
-    ] as const) {
+    for (const key of ['bandEdge', 'pageTexture', 'stickerShape'] as const) {
       expect(declarations(selector)).toContain(`${cssStyleVar(key)}: none !important;`);
+    }
+    for (const tone of TONES) {
+      expect(declarations(selector)).toContain(`${cssToneVar(tone, 'pattern')}: none !important;`);
     }
     expect(declarations(selector)).toContain('--hb-photo-frame: 0 !important;');
   });
@@ -108,7 +103,7 @@ describe('contrastFailures', () => {
       'accent-3': { background: 'surface', color: 'surface' } as const,
     };
 
-    expect(contrastFailures({ ...festival, tones })).toEqual(
+    expect(contrastFailures({ light: festival.light, dark: festival.dark, tones })).toEqual(
       (['light', 'dark'] as const).map((scheme) => ({
         scheme,
         foreground: 'surface',
@@ -117,6 +112,28 @@ describe('contrastFailures', () => {
         min: 4.5,
       })),
     );
+  });
+
+  it('checks the text where a pattern darkens or lightens its background', () => {
+    const { festival } = THEMES;
+    // 4.54:1 on white, and less on the dots.
+    const colors = {
+      ...festival.light,
+      accent3Container: '#ffffff',
+      onAccent3Container: '#767676',
+    };
+    const tones = {
+      ...festival.tones,
+      'accent-3': { background: 'accent3Container', color: 'onAccent3Container', pattern: dots },
+    } as const;
+
+    expect(contrastFailures({ light: colors, dark: colors, tones }, ['light'])).toEqual([
+      expect.objectContaining({
+        foreground: 'onAccent3Container',
+        background: 'accent3Container',
+        overPattern: true,
+      }),
+    ]);
   });
 });
 
