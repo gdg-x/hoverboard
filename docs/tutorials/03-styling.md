@@ -80,7 +80,7 @@ The browser theme color is `primary`, in light and dark. The home screen app col
 
 The built-in themes use [Unbounded](https://fonts.google.com/specimen/Unbounded) for headings, [Inter](https://rsms.me/inter/) for text and [JetBrains Mono](https://www.jetbrains.com/lp/mono/) for times and code. The site serves them itself, so they also work offline.
 
-Change a font with `theme.fonts.display`, `body` or `mono`. Hoverboard assumes you have the right to use the font. Use one of these:
+Change a font with `theme.fonts.display`, `body`, `mono` or `accent`. `accent` is for stickers and short labels, and is the display font unless the theme or the site sets one. Hoverboard assumes you have the right to use the font. Use one of these:
 
 - Font files in `packages/config`. Use `.woff2` files where you can.
 

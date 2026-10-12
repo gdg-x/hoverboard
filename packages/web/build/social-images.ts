@@ -2,7 +2,12 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import { basename, dirname, extname, join, resolve } from 'node:path';
-import { BUILT_IN_FONTS, type BuiltInFontName, type FontRole } from '../src/themes/fonts';
+import {
+  BUILT_IN_FONTS,
+  type BuiltInFontName,
+  type FontRole,
+  type ThemeFonts,
+} from '../src/themes/fonts';
 import type { ColorSet } from '../src/themes/tokens';
 import type { SiteFonts } from './fonts';
 import type { ResolvedTheme } from './theme';
@@ -65,7 +70,7 @@ const builtInFonts = (name: BuiltInFontName, role: SocialFontRole): SocialFont[]
  * theme's built-in font, with a warning when the site has a font the images can't use.
  */
 export const socialImageFonts = (
-  themeFonts: Readonly<Record<FontRole, BuiltInFontName>>,
+  themeFonts: ThemeFonts,
   siteFonts: SiteFonts | undefined,
   siteDir: string,
 ): { fonts: SocialFont[]; warnings: string[] } => {

@@ -5,20 +5,22 @@ type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
 /**
  * Text in the display font, with the theme's weight, style, tracking, line height and scale over
  * the given ones. `display` is for titles and big numbers, `heading` for smaller headings. A size is
- * a step of the type scale or any length. Follow it with `;`, as with a declaration.
+ * a step of the type scale or any length. `accent` is the font for stickers, eyebrows and notes.
+ * Follow it with `;`, as with a declaration.
  */
 export const displayFont = (
   weight: 'display' | 'heading',
   size: TextSize | CSSResult,
   leading: number,
   tracking = 0,
+  family: 'display' | 'accent' = 'display',
 ) => {
   const length = typeof size === 'string' ? `var(--hb-text-${size})` : size.cssText;
   const fallbackWeight = weight === 'display' ? 800 : 700;
   // A string, not css``: lit-analyzer and Prettier expect a rule, and this is only declarations.
   return unsafeCSS(
     [
-      `font: var(--hb-${weight}-weight, ${fallbackWeight}) calc(${length} * var(--hb-display-scale, 1) * var(--hb-font-display-scale, 1)) / calc(${leading} * var(--hb-display-leading, 1)) var(--hb-font-display);`,
+      `font: var(--hb-${weight}-weight, ${fallbackWeight}) calc(${length} * var(--hb-display-scale, 1) * var(--hb-font-display-scale, 1)) / calc(${leading} * var(--hb-display-leading, 1)) var(--hb-font-${family});`,
       'font-style: var(--hb-display-style, normal);',
       `letter-spacing: calc(${tracking}em + var(--hb-display-tracking, 0em))`,
     ].join('\n'),

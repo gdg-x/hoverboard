@@ -291,6 +291,12 @@
               "type": "object",
               "$ref": "#/$defs/font",
               "unevaluatedProperties": false
+            },
+            "accent": {
+              "description": "Stickers, eyebrows and short notes. Without one, the theme's accent font, or the display font.",
+              "type": "object",
+              "$ref": "#/$defs/font",
+              "unevaluatedProperties": false
             }
           }
         },

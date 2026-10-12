@@ -1,4 +1,4 @@
-import type { BuiltInFontName, FontRole } from './fonts';
+import type { ThemeFonts } from './fonts';
 
 /** Color roles of the themes, by the name `site.json` uses in `theme.colors` and `theme.darkColors`. */
 export const COLOR_ROLES = [
@@ -136,7 +136,7 @@ export interface Theme {
   dark: ColorSet;
   style: ThemeStyle;
   tones: Readonly<Record<Tone, ToneColors>>;
-  fonts: Readonly<Record<FontRole, BuiltInFontName>>;
+  fonts: ThemeFonts;
 }
 
 export const cssColorVar = (role: ColorRole) =>

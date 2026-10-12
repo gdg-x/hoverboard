@@ -26,7 +26,7 @@ export class HbSticker extends LitElement {
         background-color: var(--hb-color-accent-3-container);
         color: var(--hb-color-on-accent-3-container);
         box-shadow: var(--hb-shadow-button);
-        ${displayFont('heading', 'xs', 1.4, 0.02)};
+        ${displayFont('heading', 'xs', 1.4, 0.02, 'accent')};
         rotate: var(--hb-sticker-rotate);
       }
 
