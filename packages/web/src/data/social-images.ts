@@ -11,7 +11,7 @@ import { eventPlace } from '../utils/place';
 export const SOCIAL_IMAGE = { width: 1200, height: 630, type: 'image/png' } as const;
 
 // Change it when the layout changes, so every image gets a new file name.
-const LAYOUT_VERSION = 1;
+const LAYOUT_VERSION = 2;
 const MAX_SPEAKERS = 3;
 
 export interface SocialImagePerson {

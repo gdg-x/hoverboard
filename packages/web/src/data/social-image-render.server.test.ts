@@ -61,8 +61,21 @@ describe('socialImageSvg', () => {
 
     const svg = await socialImageSvg(sessionImage(session(['c', 'd']), speakers));
 
-    expect(svg).toContain('data:image/svg+xml;base64,');
+    expect(svg).toContain('data:image/png;base64,');
     expect(photoCount(svg)).toBe(2);
+  });
+
+  it('draws a logo that is a raster image inside an SVG', async () => {
+    vi.stubGlobal('fetch', fetchPhoto);
+
+    const png = await renderSocialImage(speakerImage(speaker('j', 'https://photos.test/j.jpg')));
+
+    // The demo logo is a PNG in an SVG, at the top left. `stats()` reads its input, not the crop.
+    const corner = await sharp(png)
+      .extract({ left: 64, top: 72, width: 200, height: 56 })
+      .toBuffer();
+    const { channels } = await sharp(corner).stats();
+    expect(Math.min(...channels.slice(0, 3).map(({ min }) => min))).toBeLessThan(160);
   });
 
   it('loads each photo once per build', async () => {

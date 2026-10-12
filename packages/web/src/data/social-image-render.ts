@@ -117,7 +117,20 @@ export const svgSize = (svg: string): { width: number; height: number } | undefi
 const LOGO_HEIGHT = 56;
 const LOGO_MAX_WIDTH = 480;
 
-const header = (): Node => {
+let logoPng: Promise<string> | undefined;
+
+/** The logo at twice its size as a PNG, since resvg leaves out images inside an SVG image. */
+const rasterLogo = (svg: string, size: { height: number }, width: number, height: number) =>
+  (logoPng ??= sharp(Buffer.from(svg), { density: (72 * 2 * height) / size.height })
+    .resize(Math.round(width * 2), Math.round(height * 2), {
+      fit: 'contain',
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
+    .png()
+    .toBuffer()
+    .then((png) => dataUrl('image/png', png)));
+
+const header = async (): Promise<Node> => {
   const size = logo ? svgSize(logo) : undefined;
   if (!logo || !size) {
     return h(
@@ -127,12 +140,13 @@ const header = (): Node => {
     );
   }
   const width = Math.min(LOGO_MAX_WIDTH, (LOGO_HEIGHT * size.width) / size.height);
+  const height = (width * size.height) / size.width;
   return {
     type: 'img',
     props: {
-      src: dataUrl('image/svg+xml', Buffer.from(logo)),
+      src: await rasterLogo(logo, size, width, height),
       width,
-      height: (width * size.height) / size.width,
+      height,
       style: { objectFit: 'contain' },
     },
   };
@@ -380,7 +394,7 @@ export const socialImageSvg = async (image: SocialImage): Promise<string> => {
         flexDirection: 'column',
         gap: 32,
       },
-      h('div', { display: 'flex', flexShrink: 0 }, header()),
+      h('div', { display: 'flex', flexShrink: 0 }, await header()),
       body,
       footer(image),
     ),
