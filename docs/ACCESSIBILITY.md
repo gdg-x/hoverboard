@@ -29,7 +29,7 @@ We aim to support the current versions of Chrome, Edge, Firefox and Safari on de
 
 ## Known barriers
 
-The automated checks list what they find in [accessibility-issues.md](accessibility-issues.md). The audit will also check these areas first:
+The automated checks find no WCAG 2.2 AA violations on any page template, in any built-in theme. They can't check everything, so the audit will check these areas first:
 
 - Sticky bars on the schedule (the day tabs, track names and times) covering the focused session.
 - The schedule grid, which scrolls sideways, with a keyboard and a screen reader.
@@ -37,7 +37,7 @@ The automated checks list what they find in [accessibility-issues.md](accessibil
 - Status messages, such as filter result counts and toasts, being announced.
 - Handwriting and condensed display fonts in some themes, with increased text spacing.
 
-Barriers the audit confirms will be added to that list.
+Barriers the audit confirms will be listed here.
 
 ## Your event's site
 

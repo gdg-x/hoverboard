@@ -4,22 +4,8 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type Axe from 'axe-core';
 import { type Browser, type BrowserContextOptions, chromium } from 'playwright';
-import { afterAll, beforeAll, describe, expect, inject, it } from 'vitest';
+import { afterAll, beforeAll, describe, inject, it } from 'vitest';
 import { THEMES } from '../../src/themes/index';
-import knownIssues from './known-issues.json';
-
-/** An accepted violation, listed in docs/accessibility-issues.md. Fields it leaves out match any. */
-interface KnownIssue {
-  id: string;
-  rule: string;
-  sites?: string[];
-  paths?: string[];
-  themes?: string[];
-  schemes?: string[];
-  variants?: string[];
-  /** Part of the node's selector, with `>>>` between shadow roots. */
-  target?: string;
-}
 
 interface Scan {
   site: string;
@@ -27,12 +13,6 @@ interface Scan {
   theme: string;
   scheme: 'light' | 'dark';
   variant: keyof typeof VARIANTS;
-}
-
-interface Violation {
-  rule: string;
-  target: string;
-  help: string;
 }
 
 const WCAG_AA = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
@@ -52,7 +32,6 @@ const axeSource = readFileSync(
   'utf8',
 );
 const sites = inject('a11ySites');
-const issues: readonly KnownIssue[] = knownIssues;
 
 const scans: Scan[] = [
   ...Object.keys(THEMES).flatMap((theme) =>
@@ -83,15 +62,6 @@ const scans: Scan[] = [
     variant: 'default',
   })),
 ];
-
-const matches = (issue: KnownIssue, scan: Scan, violation: Violation) =>
-  issue.rule === violation.rule &&
-  (!issue.sites || issue.sites.includes(scan.site)) &&
-  (!issue.paths || issue.paths.includes(scan.path)) &&
-  (!issue.themes || issue.themes.includes(scan.theme)) &&
-  (!issue.schemes || issue.schemes.includes(scan.scheme)) &&
-  (!issue.variants || issue.variants.includes(scan.variant)) &&
-  (!issue.target || violation.target.includes(issue.target));
 
 const name = ({ site, path, theme, scheme, variant }: Scan) =>
   `${site} ${path} in ${theme} ${scheme}${variant === 'default' ? '' : `, ${variant}`}`;
@@ -147,8 +117,6 @@ const settle = async () => {
 };
 
 let browser: Browser;
-const seen = new Set<string>();
-let finished = 0;
 
 beforeAll(async () => {
   browser = await chromium.launch();
@@ -158,19 +126,9 @@ afterAll(async () => {
   await browser.close();
 });
 
-it('lists every known issue in docs/accessibility-issues.md', () => {
-  const list = readFileSync(
-    fileURLToPath(new URL('../../../../docs/accessibility-issues.md', import.meta.url)),
-    'utf8',
-  );
-  const listed = [...list.matchAll(/^\| (A\d+) /gm)].map(([, id]) => id);
-
-  expect(listed).toEqual(issues.map(({ id }) => id));
-});
-
 describe.concurrent('axe on the built site', () => {
   it.for(scans.map((scan) => ({ ...scan, label: name(scan) })))(
-    'finds no new violations on $label',
+    'finds no violations on $label',
     async (scan, { expect }) => {
       const { url } = sites[scan.site]!;
       const context = await browser.newContext({
@@ -229,22 +187,17 @@ describe.concurrent('axe on the built site', () => {
           { tags: WCAG_AA, forcedColors: scan.variant === 'forced colors' },
         );
 
-        const unexpected = results.filter(
-          (violation) =>
-            violation.wcag &&
-            !issues.some((issue) => matches(issue, scan, violation) && seen.add(issue.id)),
-        );
+        // Best practice is only reported. To accept a WCAG violation, turn its rule off above, with why.
+        const failures = results.filter(({ wcag }) => wcag);
         const slug = name(scan).replace(/[^\w]+/g, '-');
         mkdirSync(resultsDir, { recursive: true });
-        // Best practice is only reported.
         writeFileSync(join(resultsDir, `${slug}.json`), JSON.stringify(results, null, 2));
-        if (unexpected.length) {
+        if (failures.length) {
           await page.screenshot({ path: join(resultsDir, `${slug}.png`), fullPage: true });
         }
-        finished++;
 
         expect(errors, 'errors in the page').toEqual([]);
-        expect(unexpected.map(({ rule, help, target }) => `${rule}: ${help} (${target})`)).toEqual(
+        expect(failures.map(({ rule, help, target }) => `${rule}: ${help} (${target})`)).toEqual(
           [],
         );
       } finally {
@@ -252,16 +205,4 @@ describe.concurrent('axe on the built site', () => {
       }
     },
   );
-});
-
-// After the scans, which run concurrently above.
-it('has no known issue that no longer happens', ({ skip }) => {
-  // Only a full run can tell that a known issue is gone.
-  if (finished < scans.length) skip();
-
-  expect(
-    issues
-      .filter(({ id }) => !seen.has(id))
-      .map(({ id, rule }) => `${id} (${rule}) no longer happens. Remove it.`),
-  ).toEqual([]);
 });
