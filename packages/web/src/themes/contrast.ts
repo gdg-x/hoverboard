@@ -1,4 +1,12 @@
-import { TONES, type ColorRole, type ColorSet, type Theme } from './tokens';
+import {
+  COLOR_ROLES,
+  TONES,
+  type ColorRole,
+  type ColorSet,
+  type Theme,
+  type ThemeStyle,
+  cssColorVar,
+} from './tokens';
 
 const channel = (value: number) => {
   const c = value / 255;
@@ -125,9 +133,74 @@ export const patternResults = (
     ];
   });
 
+const SURFACES = [
+  'surface',
+  'surfaceDim',
+  'surfaceBright',
+  'surfaceContainer',
+  'surfaceContainerHigh',
+] as const satisfies ColorRole[];
+
+/** Style tokens that controls sit on, besides the surfaces and tones. */
+const BACKGROUND_TOKENS = [
+  'panelBackground',
+  'barBackground',
+  'footerBackground',
+] as const satisfies (keyof ThemeStyle)[];
+
+const ROLE_BY_VAR = new Map(COLOR_ROLES.map((role) => [cssColorVar(role), role]));
+
+/**
+ * The color role a background token uses in a scheme: `var(--hb-color-*)`, inside `light-dark()`, or
+ * mixed with `transparent`, which is measured as the opaque role.
+ */
+export const backgroundRole = (value: string, scheme: 'light' | 'dark') => {
+  const resolved = value
+    .replace(/light-dark\((var\([^)]+\)),\s*(var\([^)]+\))\)/g, (_, light: string, dark: string) =>
+      scheme === 'light' ? light : dark,
+    )
+    .trim();
+  const match =
+    /^var\((--hb-color-[\w-]+)\)$/.exec(resolved) ??
+    /^color-mix\(in srgb, var\((--hb-color-[\w-]+)\) [\d.]+%, transparent\)$/.exec(resolved);
+  return match?.[1] ? ROLE_BY_VAR.get(match[1]) : undefined;
+};
+
+/**
+ * The focus ring around a control, at 3:1 (WCAG 1.4.11), on every background it can sit on: the
+ * surfaces, the tones, and the panels, bars and footer. Pairs in `CONTRAST_PAIRS` are left out.
+ */
+export const focusResults = (
+  colors: ColorSet,
+  scheme: 'light' | 'dark',
+  tones?: Theme['tones'],
+  style?: Pick<ThemeStyle, (typeof BACKGROUND_TOKENS)[number]>,
+): ContrastResult[] => {
+  const backgrounds = new Set<ColorRole>([
+    ...SURFACES,
+    ...TONES.flatMap((tone) => tones?.[tone]?.background ?? []),
+    ...BACKGROUND_TOKENS.flatMap((key) =>
+      style ? (backgroundRole(style[key], scheme) ?? []) : [],
+    ),
+  ]);
+  return [...backgrounds]
+    .filter(
+      (background) =>
+        !CONTRAST_PAIRS.some(
+          ([foreground, other]) => foreground === 'focus' && other === background,
+        ),
+    )
+    .map((background) => ({
+      foreground: 'focus',
+      background,
+      ratio: contrastRatio(colors.focus, colors[background]),
+      min: 3,
+    }));
+};
+
 /**
  * Every pair below its minimum, in the given schemes, with the text on each of the theme's tones and
- * their patterns.
+ * their patterns, and the focus ring on every background.
  */
 export const contrastFailures = (
   theme: Pick<Theme, 'light' | 'dark'> & Partial<Pick<Theme, 'tones' | 'style'>>,
@@ -137,6 +210,7 @@ export const contrastFailures = (
     [
       ...contrastResults(theme[scheme], theme.tones),
       ...(theme.tones ? patternResults(theme[scheme], theme.tones, theme.style?.heroPattern) : []),
+      ...focusResults(theme[scheme], scheme, theme.tones, theme.style),
     ]
       .filter(({ ratio, min }) => ratio < min)
       .map((result) => ({ scheme, ...result })),

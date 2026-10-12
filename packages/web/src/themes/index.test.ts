@@ -1,7 +1,8 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { contrastFailures, contrastRatio, patternAmount } from './contrast';
+import { backgroundRole, contrastFailures, contrastRatio, patternAmount } from './contrast';
+import type { BuiltInFontName } from './fonts';
 import { THEMES, themeDeclarations } from './index';
 import {
   COLOR_ROLES,
@@ -154,6 +155,76 @@ describe('contrastFailures', () => {
         overPattern: true,
       }),
     ]);
+  });
+
+  it('checks the focus ring on the backgrounds of the tones, panels, bars and footer', () => {
+    const { festival } = THEMES;
+    // 2.99:1 on festival's ink footer.
+    const light = { ...festival.light, focus: '#3557e6' };
+
+    expect(contrastFailures({ ...festival, light }, ['light'])).toEqual([
+      expect.objectContaining({ foreground: 'focus', background: 'ink', min: 3 }),
+    ]);
+  });
+});
+
+describe('backgroundRole', () => {
+  it.each([
+    ['var(--hb-color-surface-bright)', 'light', 'surfaceBright'],
+    ['light-dark(var(--hb-color-ink), var(--hb-color-surface-dim))', 'light', 'ink'],
+    ['light-dark(var(--hb-color-ink), var(--hb-color-surface-dim))', 'dark', 'surfaceDim'],
+    ['color-mix(in srgb, var(--hb-color-surface) 72%, transparent)', 'dark', 'surface'],
+    ['linear-gradient(red, blue)', 'light', undefined],
+  ] as const)('reads %s in the %s scheme', (value, scheme, role) => {
+    expect(backgroundRole(value, scheme)).toBe(role);
+  });
+});
+
+describe('text in the accent font', () => {
+  // Handwriting is hard to read small, so it needs WCAG's large text size.
+  const HANDWRITING: readonly BuiltInFontName[] = ['caveat'];
+  const MIN_HANDWRITING_PX = 18;
+
+  const srcDir = join(import.meta.dirname, '..');
+  const sources = readdirSync(srcDir, { recursive: true, encoding: 'utf8' })
+    .filter((file) => file.endsWith('.ts') && !file.endsWith('.test.ts'))
+    .map((file) => readFileSync(join(srcDir, file), 'utf8'))
+    .join('\n');
+  const baseCss = readFileSync(join(srcDir, 'styles/base.css'), 'utf8');
+  const textPx = (step: string) =>
+    Number(new RegExp(`--hb-text-${step}: (?:clamp\\()?([\\d.]+)rem`).exec(baseCss)?.[1]) * 16;
+
+  // `displayFont()` with the accent family scales with the display size too. The band eyebrow does not.
+  const usages = [
+    ...[...sources.matchAll(/displayFont\('(?:display|heading)', '(\w+)',[^)]*'accent'\)/g)].map(
+      ([, step]) => ({ px: textPx(step!), display: true }),
+    ),
+    ...[
+      ...sources.matchAll(
+        /calc\(var\(--hb-text-(\w+)\) \* var\(--hb-accent-scale, 1\)\)[^;]*var\(--hb-font-accent\)/g,
+      ),
+    ].map(([, step]) => ({ px: textPx(step!), display: false })),
+  ];
+
+  it('finds every use of the accent font', () => {
+    const mentions = [...sources.matchAll(/'accent'\)|var\(--hb-font-accent\)/g)].length;
+
+    expect(usages.length).toBeGreaterThan(0);
+    expect(usages).toHaveLength(mentions);
+    expect(usages.every(({ px }) => px > 0)).toBe(true);
+  });
+
+  it.each(
+    Object.entries(THEMES).filter(
+      ([, { fonts }]) => fonts.accent && HANDWRITING.includes(fonts.accent),
+    ),
+  )('is at least 18px in handwriting, in the %s theme', (_, { style }) => {
+    const sizes = usages.map(
+      ({ px, display }) =>
+        px * (display ? Number(style.displayScale) : 1) * Number(style.accentScale),
+    );
+
+    expect(Math.min(...sizes)).toBeGreaterThanOrEqual(MIN_HANDWRITING_PX);
   });
 });
 

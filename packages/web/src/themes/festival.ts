@@ -37,7 +37,8 @@ export const festival: Theme = {
     outline: '#6b6b76',
     outlineVariant: '#d6d2c4',
     ink: '#1b1b1f',
-    focus: '#3557e6',
+    // Lighter than primary, so the ring shows on the ink footer too.
+    focus: '#3d5fea',
     error: '#c5221f',
     onError: '#ffffff',
     success: '#146c2e',

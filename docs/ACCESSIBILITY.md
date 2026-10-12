@@ -10,8 +10,9 @@ Hoverboard 4 has not had a full accessibility audit yet. One is planned before t
 
 ## What Hoverboard does today
 
-- **Contrast.** Every built-in theme's text and control colors are checked against WCAG contrast ratios in light and dark. A site's own colors in `site.json` are checked too, and the build stops when a pair fails.
+- **Contrast.** Every built-in theme's text and control colors are checked against WCAG contrast ratios in light and dark, and so is the focus ring on every background it can sit on. A site's own colors in `site.json` are checked too, and the build stops when a pair fails.
 - **Keyboard.** A skip link to the main content, a visible focus ring on every control, and dialogs that keep focus inside them and close with Escape.
+- **Targets.** Buttons, links styled as buttons, chips, switches and fields are at least 24 pixels tall, whatever the theme and density.
 - **Structure.** Pages use landmarks, headings and native controls. The tests find elements by their role and accessible name, so a missing name fails a test.
 - **Motion.** Animations, confetti, tilts and page transitions stop when the visitor's device asks for reduced motion.
 - **Visual settings.** Forced colors (such as Windows Contrast themes) remove decorative patterns, textures and frames. Reduced transparency makes the `glass` theme solid. Organizers can turn decorations off with `decorations: false`.
