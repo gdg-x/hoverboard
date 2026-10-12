@@ -1,4 +1,4 @@
-import type { Theme } from './tokens';
+import { type Theme, containerTones } from './tokens';
 
 // Modeled on Apple's Liquid Glass: frosted, translucent panels over soft color glows, large round corners and system colors.
 const glow = (accent: string, size: string, position: string, amount: string) =>
@@ -77,10 +77,17 @@ export const glass: Theme = {
     onAccent4Container: '#d4f5dc',
   },
   style: {
+    displayWeight: '800',
+    headingWeight: '700',
+    displayTracking: '0em',
+    displayLeading: '1',
+    displayStyle: 'normal',
+    displayScale: '1',
     radiusS: '12px',
     radiusM: '22px',
     radiusL: '32px',
     radiusAvatar: '50%',
+    radiusControl: 'var(--hb-radius-full)',
     borderWidth: '1px',
     borderColor: 'color-mix(in srgb, var(--hb-color-ink) 12%, transparent)',
     // A bright rim on the top edge, where the light hits the glass, over a soft shadow.
@@ -106,5 +113,20 @@ export const glass: Theme = {
     panelBackground: 'color-mix(in srgb, var(--hb-color-surface-bright) 58%, transparent)',
     barBackground: 'color-mix(in srgb, var(--hb-color-surface) 72%, transparent)',
     backdropFilter: 'blur(20px) saturate(180%)',
+    headerMaxWidth: 'var(--hb-content-max)',
+    headerInset: 'var(--hb-space-3) var(--hb-gutter)',
+    headerRadius: 'var(--hb-radius-control)',
+    headerBorder: 'var(--hb-border-width) solid var(--hb-border-color)',
+    headerShadow: 'var(--hb-shadow-card)',
+    heroColumns: '1.4fr 1fr',
+    heroArtOrder: '0',
+    bandHeaderDirection: 'row',
+    bandHeaderAlign: 'flex-end',
+    easePress: 'var(--hb-ease-spring)',
+    pressScale: '1',
+    hoverTranslate: '-2px -2px',
+    durationShort: '120ms',
+    durationMedium: '240ms',
   },
+  tones: containerTones,
 };

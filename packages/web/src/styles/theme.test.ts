@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 import { describe, expect, it } from 'vitest';
+import { displayFont } from './shared';
 
 const sources = import.meta.glob<string>(['../**/*.ts', '!../**/*.test.ts', '!../themes/**'], {
   query: '?raw',
@@ -15,5 +16,39 @@ describe('theme colors', () => {
     );
 
     expect(offenders).toEqual([]);
+  });
+});
+
+describe('themes', () => {
+  it('are never named outside the theme files, so components only read tokens', () => {
+    const offenders = Object.keys(sources).filter((path) =>
+      /['"`](festival|spotlight|paper|glass)['"`]/.test(sources[path] ?? ''),
+    );
+
+    expect(offenders).toEqual([]);
+  });
+
+  it('set the display type through displayFont()', () => {
+    // Paths in this folder, src/styles, start with './'.
+    const offenders = Object.keys(sources).filter(
+      (path) => !path.startsWith('./') && sources[path]?.includes('var(--hb-font-display)'),
+    );
+
+    expect(offenders).toEqual([]);
+  });
+
+  it("put the theme's display tokens over a title's own type", () => {
+    const declarations = displayFont('display', '4xl', 1.05, -0.01)
+      .cssText.split('\n')
+      .map((line) => line.trim())
+      .join(' ');
+
+    expect(declarations).toContain(
+      'font: var(--hb-display-weight, 800) calc(var(--hb-text-4xl) * var(--hb-display-scale, 1) * var(--hb-font-display-scale, 1)) / calc(1.05 * var(--hb-display-leading, 1)) var(--hb-font-display);',
+    );
+    expect(declarations).toContain('font-style: var(--hb-display-style, normal);');
+    expect(declarations).toContain(
+      'letter-spacing: calc(-0.01em + var(--hb-display-tracking, 0em))',
+    );
   });
 });

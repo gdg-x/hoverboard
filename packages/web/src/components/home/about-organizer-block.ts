@@ -1,4 +1,5 @@
 import { css, html } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { msg } from '@lit/localize';
@@ -47,7 +48,7 @@ export class AboutOrganizerBlock extends ThemedComponent {
       .block h2 {
         margin: 0;
         padding: 0;
-        font: 700 var(--hb-text-2xl) / 1.15 var(--hb-font-display);
+        ${displayFont('heading', '2xl', 1.15)};
         overflow-wrap: anywhere;
       }
 

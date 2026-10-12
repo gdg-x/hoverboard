@@ -1,4 +1,5 @@
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import '../markdown/short-markdown';
@@ -56,7 +57,7 @@ export class PostsList extends ThemedComponent {
     .title {
       margin: 0;
       padding: 0;
-      font: 700 var(--hb-text-xl) / 1.2 var(--hb-font-display);
+      ${displayFont('heading', 'xl', 1.2)};
       overflow-wrap: anywhere;
     }
 

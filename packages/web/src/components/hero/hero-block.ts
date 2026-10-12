@@ -1,4 +1,5 @@
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, property } from 'lit/decorators.js';
 import { ThemedComponent } from '../themed-component';
 
@@ -12,8 +13,7 @@ export const heroText = css`
   .hero-title {
     margin: 0;
     padding: 0;
-    font: 800 var(--hb-text-5xl) / 1.05 var(--hb-font-display);
-    letter-spacing: -0.01em;
+    ${displayFont('display', '5xl', 1.05, -0.01)};
     text-wrap: balance;
     overflow-wrap: anywhere;
   }
@@ -57,26 +57,26 @@ export const heroText = css`
 export class HeroBlock extends ThemedComponent {
   static override styles = css`
     :host {
-      --hb-hero-background: var(--hb-color-accent-1-container);
-      --hb-hero-color: var(--hb-color-on-accent-1-container);
+      --hb-hero-background: var(--hb-tone-accent-1-background);
+      --hb-hero-color: var(--hb-tone-accent-1-color);
 
       display: block;
       container-type: inline-size;
     }
 
     :host([tone='2']) {
-      --hb-hero-background: var(--hb-color-accent-2-container);
-      --hb-hero-color: var(--hb-color-on-accent-2-container);
+      --hb-hero-background: var(--hb-tone-accent-2-background);
+      --hb-hero-color: var(--hb-tone-accent-2-color);
     }
 
     :host([tone='3']) {
-      --hb-hero-background: var(--hb-color-accent-3-container);
-      --hb-hero-color: var(--hb-color-on-accent-3-container);
+      --hb-hero-background: var(--hb-tone-accent-3-background);
+      --hb-hero-color: var(--hb-tone-accent-3-color);
     }
 
     :host([tone='4']) {
-      --hb-hero-background: var(--hb-color-accent-4-container);
-      --hb-hero-color: var(--hb-color-on-accent-4-container);
+      --hb-hero-background: var(--hb-tone-accent-4-background);
+      --hb-hero-color: var(--hb-tone-accent-4-color);
     }
 
     .hero {

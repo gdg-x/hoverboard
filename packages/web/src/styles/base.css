@@ -34,8 +34,6 @@
   --hb-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --hb-ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
   --hb-ease-spring: linear(0, 0.22 9%, 0.66 21%, 1.04 36%, 1.1 45%, 1.03 60%, 0.99 75%, 1);
-  --hb-duration-short: 120ms;
-  --hb-duration-medium: 240ms;
 
   --hb-content-max: 1200px;
   --hb-prose-max: 68ch;

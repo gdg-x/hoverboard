@@ -1,5 +1,6 @@
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, state } from 'lit/decorators.js';
 import {
   decorations as siteDecorations,
@@ -65,8 +66,7 @@ export class DemoBanner extends ThemedComponent {
 
       .intro {
         margin: 0;
-        font: 800 var(--hb-text-lg) / 1 var(--hb-font-display);
-        letter-spacing: 0.04em;
+        ${displayFont('display', 'lg', 1, 0.04)};
       }
 
       select:focus-visible {
@@ -85,7 +85,7 @@ export class DemoBanner extends ThemedComponent {
         min-block-size: var(--hb-target-min);
         padding-inline: var(--hb-space-3);
         border: var(--hb-border-width) solid currentColor;
-        border-radius: var(--hb-radius-full);
+        border-radius: var(--hb-radius-control);
         background-color: transparent;
         color: inherit;
         font: inherit;

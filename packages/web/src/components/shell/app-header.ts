@@ -1,6 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, property, state } from 'lit/decorators.js';
 import { archive, eventDates, navigation, shortName, timeZone, title } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
@@ -38,7 +39,7 @@ export class AppHeader extends ThemedComponent {
       inset-block-start: var(--hb-space-2);
       inset-inline-start: var(--hb-space-2);
       padding: var(--hb-space-3) var(--hb-space-4);
-      border-radius: var(--hb-radius-full);
+      border-radius: var(--hb-radius-control);
       background-color: var(--hb-color-ink);
       color: var(--hb-color-surface);
       font-weight: 600;
@@ -54,22 +55,22 @@ export class AppHeader extends ThemedComponent {
       inset-block-start: 0;
       z-index: 10;
       container-type: inline-size;
-      padding: var(--hb-space-3) var(--hb-gutter);
+      padding: var(--hb-header-inset);
     }
 
     .bar {
       display: flex;
       align-items: center;
       gap: var(--hb-space-2);
-      max-inline-size: var(--hb-content-max);
+      max-inline-size: var(--hb-header-max-width);
       margin-inline: auto;
       padding: var(--hb-space-1) var(--hb-space-2) var(--hb-space-1) var(--hb-space-5);
-      border: var(--hb-border-width) solid var(--hb-border-color);
-      border-radius: var(--hb-radius-full);
+      border: var(--hb-header-border);
+      border-radius: var(--hb-header-radius);
       background-color: var(--hb-panel-background);
       backdrop-filter: var(--hb-backdrop-filter);
       color: var(--hb-color-on-surface);
-      box-shadow: var(--hb-shadow-card);
+      box-shadow: var(--hb-header-shadow);
     }
 
     .brand {
@@ -78,7 +79,7 @@ export class AppHeader extends ThemedComponent {
       min-block-size: var(--hb-target-min);
       margin-inline-end: auto;
       color: inherit;
-      font: 800 var(--hb-text-lg) / 1 var(--hb-font-display);
+      ${displayFont('display', 'lg', 1)};
       text-decoration: none;
     }
 
@@ -106,7 +107,7 @@ export class AppHeader extends ThemedComponent {
       align-items: center;
       min-block-size: var(--hb-target-min);
       padding-inline: var(--hb-space-3);
-      border-radius: var(--hb-radius-full);
+      border-radius: var(--hb-radius-control);
       color: inherit;
       font-weight: 500;
       text-decoration: none;
@@ -156,7 +157,7 @@ export class AppHeader extends ThemedComponent {
       display: block;
       padding-block: var(--hb-space-2);
       color: inherit;
-      font: 700 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
+      ${displayFont('heading', '3xl', 1.1)};
       text-decoration: none;
       overflow-wrap: anywhere;
     }

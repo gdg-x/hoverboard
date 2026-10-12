@@ -26,7 +26,7 @@ export const segmented = css`
     display: inline-flex;
     padding: 2px;
     border: var(--hb-border-width) solid currentColor;
-    border-radius: var(--hb-radius-full);
+    border-radius: var(--hb-radius-control);
   }
 
   label {
@@ -38,7 +38,7 @@ export const segmented = css`
     min-block-size: var(--hb-target-min);
     min-inline-size: var(--hb-target-min);
     padding-inline: var(--hb-space-3);
-    border-radius: var(--hb-radius-full);
+    border-radius: var(--hb-radius-control);
     cursor: pointer;
   }
 

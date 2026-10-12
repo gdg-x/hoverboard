@@ -1,4 +1,4 @@
-import type { Theme } from './tokens';
+import { type Theme, containerTones } from './tokens';
 
 // Paper surfaces, ink outlines and hard offset shadows. Accents: blue, red, yellow, green.
 export const festival: Theme = {
@@ -75,10 +75,17 @@ export const festival: Theme = {
     onAccent4Container: '#c8efc9',
   },
   style: {
+    displayWeight: '800',
+    headingWeight: '700',
+    displayTracking: '0em',
+    displayLeading: '1',
+    displayStyle: 'normal',
+    displayScale: '1',
     radiusS: '8px',
     radiusM: '16px',
     radiusL: '28px',
     radiusAvatar: '38%',
+    radiusControl: 'var(--hb-radius-full)',
     borderWidth: '2px',
     borderColor: 'var(--hb-color-ink)',
     shadowCard: '4px 4px 0 0 var(--hb-color-ink)',
@@ -96,5 +103,20 @@ export const festival: Theme = {
     panelBackground: 'var(--hb-color-surface-bright)',
     barBackground: 'var(--hb-color-surface)',
     backdropFilter: 'none',
+    headerMaxWidth: 'var(--hb-content-max)',
+    headerInset: 'var(--hb-space-3) var(--hb-gutter)',
+    headerRadius: 'var(--hb-radius-control)',
+    headerBorder: 'var(--hb-border-width) solid var(--hb-border-color)',
+    headerShadow: 'var(--hb-shadow-card)',
+    heroColumns: '1.4fr 1fr',
+    heroArtOrder: '0',
+    bandHeaderDirection: 'row',
+    bandHeaderAlign: 'flex-end',
+    easePress: 'var(--hb-ease-spring)',
+    pressScale: '1',
+    hoverTranslate: '-2px -2px',
+    durationShort: '120ms',
+    durationMedium: '240ms',
   },
+  tones: containerTones,
 };

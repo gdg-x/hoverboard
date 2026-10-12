@@ -108,7 +108,7 @@ describe('fontModuleParts', () => {
     expect(css(parts)).not.toContain('Inter');
     expect(css(parts)).toContain('--hb-font-body:"Brand Sans", sans-serif;');
     expect(css(parts)).toContain('--hb-font-mono:ui-monospace, Menlo, monospace;');
-    expect(css(parts)).toContain('--hb-display-scale:0.9;');
+    expect(css(parts)).toContain('--hb-font-display-scale:0.9;');
     expect(parts.stylesheets).toEqual(['https://use.typekit.net/abc.css']);
     expect(parts.preload).toBe(join(dir, 'fonts/brand.woff2'));
   });

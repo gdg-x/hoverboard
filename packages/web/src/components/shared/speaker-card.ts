@@ -1,4 +1,5 @@
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { Speaker } from '../../models/speaker';
@@ -85,7 +86,7 @@ export class SpeakerCard extends ThemedComponent {
     .name {
       margin: 0;
       padding: 0;
-      font: 700 var(--hb-text-lg) / 1.2 var(--hb-font-display);
+      ${displayFont('heading', 'lg', 1.2)};
       overflow-wrap: anywhere;
     }
 

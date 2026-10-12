@@ -1,5 +1,6 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/ui/hb-button';
@@ -34,7 +35,7 @@ export class OfflinePage extends ThemedComponent {
       h2 {
         margin: var(--hb-space-6) 0 var(--hb-space-3);
         padding: 0;
-        font: 800 var(--hb-text-2xl) / 1.2 var(--hb-font-display);
+        ${displayFont('display', '2xl', 1.2)};
       }
 
       ul {

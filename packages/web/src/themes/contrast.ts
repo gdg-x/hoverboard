@@ -1,4 +1,4 @@
-import type { ColorRole, ColorSet, Theme } from './tokens';
+import { TONES, type ColorRole, type ColorSet, type Theme } from './tokens';
 
 const channel = (value: number) => {
   const c = value / 255;
@@ -59,21 +59,29 @@ export interface ContrastResult {
   min: number;
 }
 
-export const contrastResults = (colors: ColorSet): ContrastResult[] =>
-  CONTRAST_PAIRS.map(([foreground, background, min]) => ({
+export const contrastResults = (colors: ColorSet, tones?: Theme['tones']): ContrastResult[] => {
+  const tonePairs = TONES.map((tone) => tones?.[tone])
+    .filter((tone) => tone !== undefined)
+    .filter(
+      ({ background, color }) =>
+        !CONTRAST_PAIRS.some(([foreground, other]) => foreground === color && other === background),
+    )
+    .map(({ background, color }): (typeof CONTRAST_PAIRS)[number] => [color, background, 4.5]);
+  return [...CONTRAST_PAIRS, ...tonePairs].map(([foreground, background, min]) => ({
     foreground,
     background,
     ratio: contrastRatio(colors[foreground], colors[background]),
     min,
   }));
+};
 
-/** Every pair below its minimum, in the given schemes. */
+/** Every pair below its minimum, in the given schemes, with the text on each of the theme's tones. */
 export const contrastFailures = (
-  theme: Pick<Theme, 'light' | 'dark'>,
+  theme: Pick<Theme, 'light' | 'dark'> & Partial<Pick<Theme, 'tones'>>,
   schemes: readonly ('light' | 'dark')[] = ['light', 'dark'],
 ) =>
   schemes.flatMap((scheme) =>
-    contrastResults(theme[scheme])
+    contrastResults(theme[scheme], theme.tones)
       .filter(({ ratio, min }) => ratio < min)
       .map((result) => ({ scheme, ...result })),
   );

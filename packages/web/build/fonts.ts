@@ -189,7 +189,7 @@ export const fontModuleParts = async (
     stacks[role] = stack;
   }
   const variables = FONT_ROLES.map((role) => `--hb-font-${role}:${stacks[role]};`).join('');
-  css.push(`:root{${variables}--hb-display-scale:${siteFonts?.display?.scale ?? 1};}`);
+  css.push(`:root{${variables}--hb-font-display-scale:${siteFonts?.display?.scale ?? 1};}`);
   return { css, stylesheets, preload };
 };
 

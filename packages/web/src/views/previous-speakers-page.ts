@@ -1,5 +1,6 @@
 import { Pending, Success } from '@abraham/remotedata';
 import { css, html } from 'lit';
+import { displayFont } from '../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/shared/speaker-card';
@@ -54,7 +55,7 @@ export class PreviousSpeakersPage extends ThemedComponent {
       backdrop-filter: var(--hb-backdrop-filter);
       /* Covers the cards that scroll under the header's margin too. */
       box-shadow: 0 calc(-1 * var(--hb-space-5)) 0 0 var(--hb-bar-background);
-      font: 800 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
+      ${displayFont('display', '3xl', 1.1)};
     }
 
     ul {

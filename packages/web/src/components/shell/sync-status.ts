@@ -31,7 +31,7 @@ export class SyncStatus extends ThemedComponent {
       block-size: 40px;
       box-sizing: border-box;
       padding: 0 var(--hb-space-2);
-      border-radius: var(--hb-radius-full);
+      border-radius: var(--hb-radius-control);
       background-color: var(--hb-color-accent-2-container);
       color: var(--hb-color-on-accent-2-container);
       font: 600 var(--hb-text-sm) / 1 var(--hb-font-mono);

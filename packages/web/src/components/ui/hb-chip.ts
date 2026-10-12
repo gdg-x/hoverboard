@@ -60,7 +60,7 @@ export class HbChip extends LitElement {
         margin: 0;
         padding: var(--hb-space-1) var(--hb-space-3);
         border: 1.5px solid var(--hb-chip-border-color);
-        border-radius: var(--hb-radius-full);
+        border-radius: var(--hb-radius-control);
         background-color: var(--hb-chip-background);
         color: var(--hb-chip-color);
         font: 500 var(--hb-text-sm) / 1.2 var(--hb-font-mono);

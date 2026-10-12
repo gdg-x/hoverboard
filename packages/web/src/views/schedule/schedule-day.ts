@@ -248,7 +248,7 @@ export class ScheduleDay extends ThemedComponent {
         position: sticky;
         inset-inline-start: 0;
         padding: var(--hb-space-1) var(--hb-space-2);
-        border-radius: var(--hb-radius-full);
+        border-radius: var(--hb-radius-control);
         background-color: var(--hb-bar-background);
         backdrop-filter: var(--hb-backdrop-filter);
       }

@@ -67,7 +67,7 @@ export class HbButton extends LitElement {
         margin: 0;
         padding: var(--hb-space-1) var(--hb-space-5);
         border: var(--hb-border-width) solid var(--hb-button-border-color);
-        border-radius: var(--hb-radius-full);
+        border-radius: var(--hb-radius-control);
         background-color: var(--hb-button-background);
         color: var(--hb-button-color);
         box-shadow: var(--hb-button-shadow);
@@ -76,7 +76,8 @@ export class HbButton extends LitElement {
         text-decoration: none;
         cursor: pointer;
         transition:
-          translate var(--hb-duration-short) var(--hb-ease-spring),
+          translate var(--hb-duration-short) var(--hb-ease-press),
+          scale var(--hb-duration-short) var(--hb-ease-press),
           box-shadow var(--hb-duration-short) var(--hb-ease-standard);
       }
 
@@ -92,6 +93,7 @@ export class HbButton extends LitElement {
 
       .button:active:not(:disabled) {
         translate: var(--hb-press-offset) var(--hb-press-offset);
+        scale: var(--hb-press-scale);
         box-shadow: none;
       }
 

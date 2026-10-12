@@ -1,4 +1,5 @@
 import { css } from 'lit';
+import { displayFont } from './shared';
 
 /** A band's centered column, big title, lede and links, for a block or a page that holds bands. */
 export const bandContent = css`
@@ -9,8 +10,9 @@ export const bandContent = css`
 
   .band-header {
     display: flex;
+    flex-direction: var(--hb-band-header-direction);
     flex-wrap: wrap;
-    align-items: flex-end;
+    align-items: var(--hb-band-header-align);
     justify-content: space-between;
     gap: var(--hb-space-4) var(--hb-space-6);
     margin-block-end: var(--hb-space-7);
@@ -19,8 +21,7 @@ export const bandContent = css`
   .band-title {
     margin: 0;
     padding: 0;
-    font: 800 var(--hb-text-4xl) / 1.05 var(--hb-font-display);
-    letter-spacing: -0.01em;
+    ${displayFont('display', '4xl', 1.05, -0.01)};
     text-wrap: balance;
     overflow-wrap: anywhere;
   }
@@ -67,8 +68,8 @@ export const BAND_TONES = ['surface', 'accent-4', 'surface', 'accent-2', 'surfac
 /** The colors of `.band` elements by their `data-tone`, for the page that lays the bands out. */
 export const bandTones = css`
   .band {
-    --hb-band-background: var(--hb-color-surface);
-    --hb-band-color: var(--hb-color-on-surface);
+    --hb-band-background: var(--hb-tone-surface-background);
+    --hb-band-color: var(--hb-tone-surface-color);
 
     background-color: color-mix(
       in srgb,
@@ -79,17 +80,17 @@ export const bandTones = css`
   }
 
   .band[data-tone='accent-4'] {
-    --hb-band-background: var(--hb-color-accent-4-container);
-    --hb-band-color: var(--hb-color-on-accent-4-container);
+    --hb-band-background: var(--hb-tone-accent-4-background);
+    --hb-band-color: var(--hb-tone-accent-4-color);
   }
 
   .band[data-tone='accent-2'] {
-    --hb-band-background: var(--hb-color-accent-2-container);
-    --hb-band-color: var(--hb-color-on-accent-2-container);
+    --hb-band-background: var(--hb-tone-accent-2-background);
+    --hb-band-color: var(--hb-tone-accent-2-color);
   }
 
   .band[data-tone='accent-1'] {
-    --hb-band-background: var(--hb-color-accent-1-container);
-    --hb-band-color: var(--hb-color-on-accent-1-container);
+    --hb-band-background: var(--hb-tone-accent-1-background);
+    --hb-band-color: var(--hb-tone-accent-1-color);
   }
 `;

@@ -1,5 +1,6 @@
 import { msg, str } from '@lit/localize';
 import { css, html, nothing, type TemplateResult } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -51,10 +52,10 @@ export class HomeHero extends ThemedComponent {
       padding: var(--hb-space-8) var(--hb-gutter) var(--hb-space-9);
       background-color: color-mix(
         in srgb,
-        var(--hb-color-accent-1-container) var(--hb-tint-opacity),
+        var(--hb-tone-accent-1-background) var(--hb-tint-opacity),
         transparent
       );
-      color: var(--hb-color-on-accent-1-container);
+      color: var(--hb-tone-accent-1-color);
     }
 
     .pattern::before {
@@ -105,8 +106,7 @@ export class HomeHero extends ThemedComponent {
     .title {
       margin: var(--hb-space-4) 0 var(--hb-space-5);
       padding: 0;
-      font: 800 var(--hb-text-6xl) / 0.95 var(--hb-font-display);
-      letter-spacing: -0.02em;
+      ${displayFont('display', '6xl', 0.95, -0.02)};
       text-wrap: balance;
       overflow-wrap: anywhere;
     }
@@ -138,6 +138,7 @@ export class HomeHero extends ThemedComponent {
 
     .art {
       display: none;
+      order: var(--hb-hero-art-order);
     }
 
     .art svg {
@@ -148,7 +149,7 @@ export class HomeHero extends ThemedComponent {
 
     @container (width > 800px) {
       .inner {
-        grid-template-columns: 1.4fr 1fr;
+        grid-template-columns: var(--hb-hero-columns);
       }
 
       .art {

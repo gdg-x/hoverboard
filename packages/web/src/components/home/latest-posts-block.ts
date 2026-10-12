@@ -1,6 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { fromStore } from '../../controllers/from-store';
@@ -59,7 +60,7 @@ export class LatestPostsBlock extends ThemedComponent {
       .title {
         margin: var(--hb-space-2) 0 0;
         padding: 0;
-        font: 700 var(--hb-text-xl) / 1.2 var(--hb-font-display);
+        ${displayFont('heading', 'xl', 1.2)};
         overflow-wrap: anywhere;
       }
     `,

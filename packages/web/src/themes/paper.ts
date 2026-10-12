@@ -1,4 +1,4 @@
-import type { Theme } from './tokens';
+import { type Theme, containerTones } from './tokens';
 
 // White paper, light pencil outlines and watercolor washes: ultramarine, rose madder, ochre, sap green.
 export const paper: Theme = {
@@ -74,11 +74,18 @@ export const paper: Theme = {
     onAccent4Container: '#dfecdb',
   },
   style: {
+    displayWeight: '800',
+    headingWeight: '700',
+    displayTracking: '0em',
+    displayLeading: '1',
+    displayStyle: 'normal',
+    displayScale: '1',
     // Nearly square corners, a little uneven, as if drawn by hand. `radiusL` stays one length, because `calc()` reads it.
     radiusS: '1px 2px 1px 3px / 2px 1px 3px 1px',
     radiusM: '2px 3px 2px 4px / 3px 2px 4px 2px',
     radiusL: '3px',
     radiusAvatar: '47% 53% 45% 55% / 53% 46% 54% 47%',
+    radiusControl: 'var(--hb-radius-full)',
     borderWidth: '1.5px',
     borderColor: 'var(--hb-color-outline-variant)',
     // A second, fainter pencil stroke just off the first.
@@ -96,5 +103,20 @@ export const paper: Theme = {
     panelBackground: 'var(--hb-color-surface-bright)',
     barBackground: 'var(--hb-color-surface)',
     backdropFilter: 'none',
+    headerMaxWidth: 'var(--hb-content-max)',
+    headerInset: 'var(--hb-space-3) var(--hb-gutter)',
+    headerRadius: 'var(--hb-radius-control)',
+    headerBorder: 'var(--hb-border-width) solid var(--hb-border-color)',
+    headerShadow: 'var(--hb-shadow-card)',
+    heroColumns: '1.4fr 1fr',
+    heroArtOrder: '0',
+    bandHeaderDirection: 'row',
+    bandHeaderAlign: 'flex-end',
+    easePress: 'var(--hb-ease-spring)',
+    pressScale: '1',
+    hoverTranslate: '-2px -2px',
+    durationShort: '120ms',
+    durationMedium: '240ms',
   },
+  tones: containerTones,
 };

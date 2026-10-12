@@ -26,17 +26,19 @@ export class HbCard extends LitElement {
         color: var(--hb-color-on-surface);
         box-shadow: var(--hb-shadow-card);
         transition:
-          translate var(--hb-duration-short) var(--hb-ease-spring),
+          translate var(--hb-duration-short) var(--hb-ease-press),
+          scale var(--hb-duration-short) var(--hb-ease-press),
           box-shadow var(--hb-duration-short) var(--hb-ease-standard);
       }
 
       .card.link:hover {
-        translate: -2px -2px;
+        translate: var(--hb-hover-translate);
         box-shadow: var(--hb-shadow-card-hover);
       }
 
       .card.link:active {
         translate: var(--hb-press-offset) var(--hb-press-offset);
+        scale: var(--hb-press-scale);
         box-shadow: none;
       }
 

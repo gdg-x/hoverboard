@@ -33,13 +33,14 @@ export class HbIconButton extends LitElement {
         margin: 0;
         padding: 0;
         border: 0;
-        border-radius: var(--hb-radius-full);
+        border-radius: var(--hb-radius-control);
         background-color: transparent;
         color: inherit;
         font: inherit;
         cursor: pointer;
         transition:
-          translate var(--hb-duration-short) var(--hb-ease-spring),
+          translate var(--hb-duration-short) var(--hb-ease-press),
+          scale var(--hb-duration-short) var(--hb-ease-press),
           box-shadow var(--hb-duration-short) var(--hb-ease-standard);
       }
 
@@ -62,6 +63,7 @@ export class HbIconButton extends LitElement {
       :host([variant='filled']) .button:active:not(:disabled),
       :host([variant='tonal']) .button:active:not(:disabled) {
         translate: var(--hb-press-offset) var(--hb-press-offset);
+        scale: var(--hb-press-scale);
         box-shadow: none;
       }
 

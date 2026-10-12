@@ -1,5 +1,6 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import { PageMetadataController } from '../controllers/page-metadata-controller';
 import '../components/hero/simple-hero';
@@ -29,7 +30,7 @@ export class NotFoundPage extends ThemedComponent {
 
       .joke {
         margin: 0 0 var(--hb-space-3);
-        font: 800 var(--hb-text-3xl) / 1.15 var(--hb-font-display);
+        ${displayFont('display', '3xl', 1.15)};
         text-wrap: balance;
       }
 

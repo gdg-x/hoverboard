@@ -64,12 +64,12 @@ export class SessionCard extends ThemedComponent {
       color: var(--hb-color-on-surface);
       box-shadow: var(--hb-shadow-card);
       transition:
-        translate var(--hb-duration-short) var(--hb-ease-spring),
+        translate var(--hb-duration-short) var(--hb-ease-press),
         box-shadow var(--hb-duration-short) var(--hb-ease-standard);
     }
 
     .session:hover {
-      translate: -2px -2px;
+      translate: var(--hb-hover-translate);
       box-shadow: var(--hb-shadow-card-hover);
     }
 
@@ -138,7 +138,7 @@ export class SessionCard extends ThemedComponent {
       display: inline-block;
       margin-inline-end: var(--hb-space-1);
       padding: 0 var(--hb-space-2);
-      border-radius: var(--hb-radius-full);
+      border-radius: var(--hb-radius-control);
       background-color: var(--hb-color-error);
       color: var(--hb-color-on-error);
       font-weight: 700;

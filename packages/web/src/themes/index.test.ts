@@ -3,7 +3,14 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { contrastFailures, contrastRatio } from './contrast';
 import { THEMES, themeDeclarations } from './index';
-import { COLOR_ROLES, type ThemeStyle, cssColorVar, cssStyleVar } from './tokens';
+import {
+  COLOR_ROLES,
+  TONES,
+  type ThemeStyle,
+  cssColorVar,
+  cssStyleVar,
+  cssToneVar,
+} from './tokens';
 
 describe('contrastRatio', () => {
   it('matches the WCAG ratios', () => {
@@ -31,6 +38,39 @@ describe.each(Object.entries(THEMES))('%s theme', (_, theme) => {
         `${cssColorVar(role)}: light-dark(${theme.light[role]}, ${theme.dark[role]});`,
       );
     }
+  });
+
+  it('writes every style token and tone', () => {
+    const css = themeDeclarations(theme);
+
+    for (const [key, value] of Object.entries(theme.style) as [keyof ThemeStyle, string][]) {
+      expect(css).toContain(`${cssStyleVar(key)}: ${value};`);
+    }
+    for (const tone of TONES) {
+      const { background, color } = theme.tones[tone];
+      expect(css).toContain(`${cssToneVar(tone, 'background')}: var(${cssColorVar(background)});`);
+      expect(css).toContain(`${cssToneVar(tone, 'color')}: var(${cssColorVar(color)});`);
+    }
+  });
+});
+
+describe('contrastFailures', () => {
+  it("checks the text on each of the theme's tones", () => {
+    const { festival } = THEMES;
+    const tones = {
+      ...festival.tones,
+      'accent-3': { background: 'surface', color: 'surface' } as const,
+    };
+
+    expect(contrastFailures({ ...festival, tones })).toEqual(
+      (['light', 'dark'] as const).map((scheme) => ({
+        scheme,
+        foreground: 'surface',
+        background: 'surface',
+        ratio: 1,
+        min: 4.5,
+      })),
+    );
   });
 });
 

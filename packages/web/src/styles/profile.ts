@@ -1,4 +1,5 @@
 import { css } from 'lit';
+import { displayFont } from './shared';
 
 /** The body of a person's page, under the hero: the bio and its sections. */
 export const profile = css`
@@ -30,6 +31,6 @@ export const profile = css`
   .section-title {
     margin: var(--hb-space-8) 0 var(--hb-space-4);
     padding: 0;
-    font: 800 var(--hb-text-2xl) / 1.15 var(--hb-font-display);
+    ${displayFont('display', '2xl', 1.15)};
   }
 `;

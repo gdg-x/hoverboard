@@ -1,7 +1,7 @@
 import { msg, updateWhenLocaleChanges } from '@lit/localize';
 import { css, html, LitElement, type PropertyValues, svg } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { primitive } from '../../styles/shared';
+import { displayFont, primitive } from '../../styles/shared';
 import './hb-icon-button';
 
 const closeIcon = svg`<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>`;
@@ -54,7 +54,7 @@ export class HbDialog extends LitElement {
         flex: 1;
         margin: 0;
         padding-block-start: var(--hb-space-2);
-        font: 700 var(--hb-text-xl) / 1.2 var(--hb-font-display);
+        ${displayFont('heading', 'xl', 1.2)};
         overflow-wrap: anywhere;
       }
 
