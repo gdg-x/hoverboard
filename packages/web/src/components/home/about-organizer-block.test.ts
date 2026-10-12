@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
-import { deepQuerySelector, screen } from 'shadow-dom-testing-library';
+import { deepQuerySelector, deepQuerySelectorAll, screen } from 'shadow-dom-testing-library';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setFeatures } from '../../../__tests__/helpers/features';
 import { aboutOrganizerBlock } from '../../config/site';
@@ -38,5 +38,21 @@ describe('about-organizer-block', () => {
 
     expect(deepQuerySelector(shadowRoot, 'figure.frame img')).not.toBeNull();
     expect(screen.queryByShadowRole('link', { name: 'Organizer' })).not.toBeInTheDocument();
+  });
+
+  it("doesn't link to the team page before the build found its members", async () => {
+    const { shadowRoot } = await fixture(
+      html`<about-organizer-block .presence="${{ team: false }}"></about-organizer-block>`,
+    );
+    const [team] = aboutOrganizerBlock.blocks;
+
+    expect(deepQuerySelector(shadowRoot, 'figure.frame img')).not.toBeNull();
+    expect(screen.queryByShadowRole('link', { name: 'Organizer' })).not.toBeInTheDocument();
+    expect(team!.callToAction.link).toBe('/team');
+    expect(screen.queryByShadowText(team!.callToAction.label)).not.toBeInTheDocument();
+    expect(screen.getByShadowText(team!.title)).toBeInTheDocument();
+    expect(deepQuerySelectorAll(shadowRoot, '.cta-button')).toHaveLength(
+      aboutOrganizerBlock.blocks.length - 1,
+    );
   });
 });

@@ -206,6 +206,7 @@ export class HomePage extends ThemedComponent {
       <about-organizer-block
         class="band"
         data-tone="${tone('about-organizer-block')}"
+        .presence="${this.presence}"
       ></about-organizer-block>
       ${
         __HB_FEATURES__.videos && this.has('videos')

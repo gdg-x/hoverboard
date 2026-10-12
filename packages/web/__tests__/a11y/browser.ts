@@ -1,5 +1,6 @@
 import type { Browser, BrowserContextOptions, Page } from 'playwright';
 import { fileURLToPath } from 'node:url';
+import { inject } from 'vitest';
 
 export const resultsDir = fileURLToPath(new URL('../../test-results/a11y', import.meta.url));
 
@@ -78,6 +79,8 @@ export const openPage = async (
   { theme = 'festival', scheme = 'light', decorations = true, context: options }: PageOptions = {},
 ): Promise<OpenPage> => {
   const context = await browser.newContext({ serviceWorkers: 'block', ...options });
+  // A site in a stage has its time on the dev bar's clock.
+  const time = Object.values(inject('a11ySites')).find((site) => site.url === url)?.time ?? null;
   // Only the site itself: no maps, videos or Firebase backends, so every run is the same.
   await context.route(
     (requested) => requested.origin !== url,
@@ -88,8 +91,9 @@ export const openPage = async (
       localStorage.setItem('hb-demo-theme', choices.theme);
       localStorage.setItem('hb-color-scheme', choices.scheme);
       if (!choices.decorations) localStorage.setItem('hb-demo-decorations', 'off');
+      if (choices.time) localStorage.setItem('hb-demo-time', choices.time);
     },
-    { theme, scheme, decorations },
+    { theme, scheme, decorations, time },
   );
   const page = await context.newPage();
   const errors: string[] = [];

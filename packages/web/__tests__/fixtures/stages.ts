@@ -1,4 +1,5 @@
 import type { CollectionPath } from '../../../storage/collections';
+import type { NextStep } from '../../src/utils/next-step';
 import type { Stage, TicketSales } from '../../src/utils/stages';
 
 /** The kinds of events in the personas spec. */
@@ -22,6 +23,8 @@ export interface StageFixture {
   /** What `siteStages()` finds at `time`. */
   stages: readonly Stage[];
   ticketSales?: TicketSales;
+  /** The next steps the site offers then, as the spec's table says: the hero shows the first two. */
+  steps: readonly NextStep[];
   /** Changes over the demo's site.json. Objects merge, and arrays and other values replace. */
   site?: Record<string, unknown>;
   /** The sample data's collections it has. The others are empty. */
@@ -57,12 +60,14 @@ export const STAGE_FIXTURES = {
     kind: 'first',
     time: MONTHS_BEFORE,
     stages: ['announced'],
+    steps: ['updates'],
     collections: [],
   },
   'first-call': {
     kind: 'first',
     time: MONTHS_BEFORE,
     stages: ['announced', 'callForPapers'],
+    steps: ['submitTalk', 'updates'],
     site: {
       callForPapers: {
         url: 'https://example.com/call-for-papers',
@@ -77,6 +82,7 @@ export const STAGE_FIXTURES = {
     time: MONTHS_BEFORE,
     stages: ['announced', 'ticketSales'],
     ticketSales: 'notYetOnSale',
+    steps: ['updates'],
     collections: ['tickets'],
     // Only the tickets with sale dates, the first of which opens on February 7.
     keep: ({ data }) => typeof data['salesOpen'] === 'string',
@@ -86,24 +92,28 @@ export const STAGE_FIXTURES = {
     time: '2017-08-01T10:00:00Z',
     stages: ['announced', 'ticketSales', 'schedule'],
     ticketSales: 'onSale',
+    steps: ['tickets', 'schedule'],
     collections: ['sessions', 'speakers', 'tickets'],
   },
   'returning-announced': {
     kind: 'returning',
     time: MONTHS_BEFORE,
     stages: ['announced'],
+    steps: ['updates'],
     collections: PAST_EDITIONS,
   },
   'returning-live': {
     kind: 'returning',
     time: FIRST_MORNING,
     stages: ['live'],
+    steps: ['onNow', 'attending'],
     collections: EVERYTHING,
   },
   'online-live': {
     kind: 'online',
     time: FIRST_MORNING,
     stages: ['live'],
+    steps: ['watchLive', 'onNow'],
     site: {
       event: { attendance: 'online', stream: 'https://www.youtube.com/@GoogleDevelopers/live' },
       features: { map: false },
@@ -114,6 +124,7 @@ export const STAGE_FIXTURES = {
     kind: 'meetup',
     time: FIRST_MORNING,
     stages: ['live'],
+    steps: ['onNow', 'attending'],
     site: {
       schedule: { tracks: [{ id: 'conference-hall', title: 'Conference hall' }] },
       features: { partners: false, tickets: false },
@@ -129,12 +140,14 @@ export const STAGE_FIXTURES = {
     kind: 'returning',
     time: WEEKS_AFTER,
     stages: ['ended'],
+    steps: ['videos', 'photos', 'updates'],
     collections: EVERYTHING,
   },
   archived: {
     kind: 'returning',
     time: '2018-01-15T10:00:00Z',
     stages: ['ended', 'archived'],
+    steps: ['videos', 'photos'],
     site: {
       archive: { year: 2017, current: 'https://example.com/' },
       // As `hb edition switch` turns them off. The blog moves to the next edition.

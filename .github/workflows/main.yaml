@@ -49,7 +49,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [Web, Server, Hydration, Functions, CLI, Firestore, 'Sample data', Translations]
+        project:
+          [
+            Web,
+            Server,
+            'Stages*',
+            Hydration,
+            Functions,
+            CLI,
+            Firestore,
+            'Sample data',
+            Translations,
+          ]
 
     steps:
       - name: Checkout the repo

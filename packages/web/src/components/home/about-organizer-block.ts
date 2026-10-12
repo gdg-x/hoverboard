@@ -1,10 +1,11 @@
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import { displayFont } from '../../styles/shared';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { msg } from '@lit/localize';
 import { aboutOrganizerBlock } from '../../config/site';
 import { band } from '../../styles/band';
+import { type ContentPresence, linkLeadsSomewhere } from '../../utils/content-presence';
 import { renderMarkdown } from '../../utils/markdown';
 import '../shared/hoverboard-icon';
 import { ThemedComponent } from '../themed-component';
@@ -69,6 +70,10 @@ export class AboutOrganizerBlock extends ThemedComponent {
     `,
   ];
 
+  /** Which features had content when the site was built. Links to the others are left out. */
+  @property({ attribute: false })
+  accessor presence: ContentPresence = {};
+
   override render() {
     const photo = html`
       <img
@@ -81,7 +86,7 @@ export class AboutOrganizerBlock extends ThemedComponent {
     return html`
       <div class="inner layout">
         ${
-          __HB_FEATURES__.team
+          linkLeadsSomewhere(this.presence, '/team')
             ? html`<a class="frame" href="/team">${photo}</a>`
             : html`<figure class="frame">${photo}</figure>`
         }
@@ -91,16 +96,20 @@ export class AboutOrganizerBlock extends ThemedComponent {
               <div class="block">
                 <h2>${block.title}</h2>
                 <div class="prose">${unsafeHTML(renderMarkdown(block.description))}</div>
-                <hb-button
-                  variant="outlined"
-                  class="cta-button"
-                  href="${block.callToAction.link}"
-                  .target="${block.callToAction.newTab ? '_blank' : undefined}"
-                  trailing-icon
-                >
-                  ${block.callToAction.label}
-                  <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
-                </hb-button>
+                ${
+                  linkLeadsSomewhere(this.presence, block.callToAction.link)
+                    ? html`<hb-button
+                        variant="outlined"
+                        class="cta-button"
+                        href="${block.callToAction.link}"
+                        .target="${block.callToAction.newTab ? '_blank' : undefined}"
+                        trailing-icon
+                      >
+                        ${block.callToAction.label}
+                        <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
+                      </hb-button>`
+                    : nothing
+                }
               </div>
             `,
           )}

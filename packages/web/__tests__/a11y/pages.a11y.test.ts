@@ -60,6 +60,23 @@ const scans: Scan[] = [
     scheme: 'light',
     variant: 'default',
   })),
+  // The empty first edition: its home page in every theme, and the rest in the default.
+  ...Object.keys(THEMES).flatMap((theme) =>
+    (['light', 'dark'] as const).map((scheme): Scan => ({
+      site: 'first',
+      path: '/',
+      theme,
+      scheme,
+      variant: 'default',
+    })),
+  ),
+  ...sites['first']!.paths.slice(1).map((path): Scan => ({
+    site: 'first',
+    path,
+    theme: 'festival',
+    scheme: 'light',
+    variant: 'default',
+  })),
 ];
 
 const name = ({ site, path, theme, scheme, variant }: Scan) =>
