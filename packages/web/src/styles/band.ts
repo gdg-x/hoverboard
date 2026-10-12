@@ -20,6 +20,7 @@ export const bandContent = css`
   }
 
   .band-title {
+    position: relative;
     margin: 0;
     padding: 0;
     ${displayFont('display', '4xl', 1.05, -0.01)};
@@ -30,13 +31,14 @@ export const bandContent = css`
     overflow-wrap: anywhere;
   }
 
-  /* The theme's eyebrow, the band's number from the page, with no text for screen readers. A float,
-     so the title's underline does not reach it. */
+  /* The band's number, silent to screen readers. Out of flow, so the title's underline skips it
+     (a float breaks Chrome's balanced wrapping). */
   .band-title::before {
     content: var(--hb-band-number, none) / '';
     display: var(--hb-band-eyebrow, none);
-    float: inline-start;
-    inline-size: 100%;
+    position: absolute;
+    inset-block-end: 100%;
+    inset-inline: 0;
     margin-block-end: var(--hb-space-3);
     color: var(--hb-eyebrow-color);
     font: 600 calc(var(--hb-text-sm) * var(--hb-accent-scale, 1)) / 1.4 var(--hb-font-accent);

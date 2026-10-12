@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 import { describe, expect, it } from 'vitest';
+import { bandContent } from './band';
 import { displayFont } from './shared';
 
 const sources = import.meta.glob<string>(['../**/*.ts', '!../**/*.test.ts', '!../themes/**'], {
@@ -50,5 +51,13 @@ describe('themes', () => {
     expect(declarations).toContain(
       'letter-spacing: calc(-0.01em + var(--hb-display-tracking, 0em))',
     );
+  });
+
+  it("keep the band eyebrow out of the title's text, which a float pushed aside in Chrome", () => {
+    const eyebrow = /\.band-title::before \{([^}]*)\}/.exec(bandContent.cssText)?.[1] ?? '';
+
+    expect(eyebrow).toContain('position: absolute;');
+    expect(eyebrow).toContain('inset-block-end: 100%;');
+    expect(eyebrow).not.toContain('float');
   });
 });
