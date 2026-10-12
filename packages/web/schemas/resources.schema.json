@@ -260,7 +260,7 @@
         "callToAction": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["featuredSessions", "howItWas"],
+          "required": ["featuredSessions"],
           "properties": {
             "featuredSessions": {
               "type": "object",
@@ -277,6 +277,7 @@
               }
             },
             "howItWas": {
+              "description": "A video of an earlier edition, which the home page offers as its highlights. Leave it out when there is none.",
               "type": "object",
               "additionalProperties": false,
               "required": ["description", "label", "youtubeId"],

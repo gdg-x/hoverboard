@@ -44,11 +44,16 @@ type Site = Omit<SiteJson, 'event'> & {
     location?: Venue;
   };
 };
-type Resources = Omit<
-  typeof import('../../demo-config/content/resources.json'),
-  'attendingPage'
-> & {
+type DemoResources = typeof import('../../demo-config/content/resources.json');
+type AboutBlock = DemoResources['aboutBlock'];
+type Resources = Omit<DemoResources, 'attendingPage' | 'aboutBlock'> & {
   attendingPage?: AttendingPage;
+  aboutBlock: Omit<AboutBlock, 'callToAction'> & {
+    callToAction: Omit<AboutBlock['callToAction'], 'howItWas'> & {
+      /** The highlights video. A first edition has none. */
+      howItWas?: AboutBlock['callToAction']['howItWas'];
+    };
+  };
 };
 
 interface Image {

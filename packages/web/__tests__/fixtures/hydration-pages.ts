@@ -3,6 +3,7 @@ import type { Post } from '../../src/models/post';
 import type { PreviousSpeaker } from '../../src/models/previous-speaker';
 import type { Session } from '../../src/models/session';
 import type { Speaker } from '../../src/models/speaker';
+import type { Ticket } from '../../src/models/ticket';
 import type { Content } from '../../src/store/content';
 import type { ContentPresence } from '../../src/utils/content-presence';
 import type { RouteLocation } from '../../src/utils/navigation';
@@ -64,6 +65,13 @@ const location: RouteLocation = {
   params: { id: '2026-10-08' },
 };
 
+const ticket = {
+  name: 'Regular',
+  url: 'https://example.com/tickets',
+  available: true,
+  soldOut: false,
+} as never as Ticket;
+
 // A first edition, before any of its content is out.
 const noContent: ContentPresence = {
   blog: false,
@@ -94,7 +102,7 @@ export const HYDRATION_PAGES: Record<string, HydrationPage> = {
     template: () => html`<app-header .path=${'/'} .presence=${noContent}></app-header>`,
   },
   'home page': {
-    content: { blog: [post], speakers },
+    content: { blog: [post], speakers, tickets: [ticket] },
     load: () =>
       Promise.all([
         import('../../src/views/home-page'),
@@ -105,7 +113,7 @@ export const HYDRATION_PAGES: Record<string, HydrationPage> = {
     template: () => html`<home-page></home-page>`,
   },
   'home page without content': {
-    content: { blog: [], speakers: [] },
+    content: { blog: [], speakers: [], tickets: [] },
     load: () =>
       Promise.all([
         import('../../src/views/home-page'),

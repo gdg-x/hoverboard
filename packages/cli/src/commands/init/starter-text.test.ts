@@ -89,6 +89,7 @@ describe('starterResources', () => {
       aboutBlock: { statisticsBlock: { days: { number: '2' } } },
       footerRelBlock: [{ title: 'New Fest' }],
     });
+    expect(resources['aboutBlock']).not.toHaveProperty('callToAction.howItWas');
   });
 
   it('only links to the pages that are on', async () => {

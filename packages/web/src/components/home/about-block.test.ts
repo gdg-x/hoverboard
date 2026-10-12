@@ -57,13 +57,27 @@ describe('about-block', () => {
 
   it('plays the video', async () => {
     await fixture(html`<about-block></about-block>`);
+    const video = aboutBlock.callToAction.howItWas!;
 
-    fireEvent.click(screen.getByShadowText(aboutBlock.callToAction.howItWas.label));
+    fireEvent.click(screen.getByShadowText(video.label));
 
     expect(mockToggleVideoDialogs).toHaveBeenCalledTimes(1);
     expect(mockToggleVideoDialogs).toHaveBeenCalledWith({
-      title: aboutBlock.callToAction.howItWas.label,
-      youtubeId: aboutBlock.callToAction.howItWas.youtubeId,
+      title: video.label,
+      youtubeId: video.youtubeId,
     });
+  });
+
+  it('has no video or its text without one', async () => {
+    const video = aboutBlock.callToAction.howItWas!;
+    delete aboutBlock.callToAction.howItWas;
+    try {
+      await fixture(html`<about-block></about-block>`);
+
+      expect(screen.queryByShadowText(video.label)).not.toBeInTheDocument();
+      expect(screen.queryByShadowText(video.description)).not.toBeInTheDocument();
+    } finally {
+      aboutBlock.callToAction.howItWas = video;
+    }
   });
 });

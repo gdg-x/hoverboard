@@ -12,8 +12,9 @@ import { HomePage, homeBlocks } from '../views/home-page';
 await homeBlocks;
 
 const siteContent = await loadContent();
-const { blog, speakers } = siteContent;
-const content = seedPage({ blog, speakers });
+const { blog, speakers, tickets } = siteContent;
+// The hero offers the ticket on sale.
+const content = seedPage({ blog, speakers, tickets: tickets ?? [] });
 // At build time. The hero checks again in the browser.
 const now = new Date();
 ---

@@ -3,13 +3,27 @@ import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { displayFont } from '../../styles/shared';
 import { customElement, property, state } from 'lit/decorators.js';
-import { archive, eventDates, navigation, shortName, timeZone, title } from '../../config/site';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import {
+  archive,
+  attendance,
+  eventDates,
+  navigation,
+  shortName,
+  siteAttendance,
+  stream,
+  timeZone,
+  title,
+} from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
+import type { Ticket } from '../../models/ticket';
 import { type TicketsState, selectTickets } from '../../store/tickets';
 import { type EventState, eventState } from '../../utils/event-state';
 import { type ContentPresence, hasContent } from '../../utils/content-presence';
+import { headerStep, ticketOnSale } from '../../utils/next-step';
 import { routeNameFor } from '../../utils/navigation';
 import '../shared/hoverboard-icon';
+import { nextStepLink } from '../shared/next-step-link';
 import '../ui/hb-button';
 import '../ui/hb-dialog';
 import '../ui/hb-icon-button';
@@ -205,6 +219,10 @@ export class AppHeader extends ThemedComponent {
   @fromStore(selectTickets)
   private accessor tickets!: TicketsState;
 
+  // Site.json's on the server and in the first render, so hydration matches. A demo can change it.
+  @state()
+  private accessor attending = siteAttendance;
+
   @state()
   private accessor menuOpen = false;
 
@@ -225,6 +243,7 @@ export class AppHeader extends ThemedComponent {
       endDate: eventDates.end,
       timezone: timeZone,
     });
+    this.attending = attendance;
   }
 
   private readonly onAfterSwap = () => {
@@ -309,23 +328,35 @@ export class AppHeader extends ThemedComponent {
     `;
   }
 
-  // Tickets until the event is over, otherwise the schedule, unless the navigation links to it.
+  // Tickets on sale, the stream, the schedule, updates or the videos, unless the navigation has it.
   private renderCallToAction({ inSheet = false } = {}) {
-    if (__HB_FEATURES__.tickets && this.eventState !== 'over' && this.ticketUrl) {
-      return html`
-        <hb-button class="cta" variant="cta" href="${this.ticketUrl}" target="_blank">
-          ${msg('Buy ticket', { id: 'common.buy-ticket' })}
-        </hb-button>
-      `;
-    }
-    const inNav = this.links.some((nav) => nav.route === 'schedule');
-    if (__HB_FEATURES__.schedule && hasContent(this.presence, 'schedule') && !(inNav && inSheet)) {
+    const step = headerStep({
+      eventState: this.eventState,
+      presence: this.presence,
+      ticket: this.ticket,
+      attendance: this.attending,
+      stream,
+    });
+    if (!step) return nothing;
+    if (step === 'schedule' || step === 'onNow') {
+      const inNav = this.links.some((nav) => nav.route === 'schedule');
+      if (inNav && inSheet) return nothing;
       // The bar keeps it on narrow screens, where the navigation is behind the menu button.
       return html`<hb-button class="cta ${inNav ? 'in-nav' : ''}" variant="cta" href="/schedule"
         >${navigationLabel('schedule')}</hb-button
       >`;
     }
-    return nothing;
+    const { href, label, external } = nextStepLink(step, this.ticket?.url);
+    return html`
+      <hb-button
+        class="cta"
+        variant="cta"
+        href="${href}"
+        target="${ifDefined(external ? '_blank' : undefined)}"
+      >
+        ${label}
+      </hb-button>
+    `;
   }
 
   private readonly openMenu = () => {
@@ -336,12 +367,10 @@ export class AppHeader extends ThemedComponent {
     this.menuOpen = false;
   };
 
-  private get ticketUrl(): string {
-    if (this.tickets instanceof Success && this.tickets.data.length > 0) {
-      const ticket = this.tickets.data.find(({ available }) => available) ?? this.tickets.data[0];
-      return ticket?.url || '';
-    }
-    return '';
+  private get ticket(): Ticket | undefined {
+    return __HB_FEATURES__.tickets && this.tickets instanceof Success
+      ? ticketOnSale(this.tickets.data)
+      : undefined;
   }
 }
 

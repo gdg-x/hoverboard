@@ -244,7 +244,9 @@ A session page reads every reaction to its session, and the profiles of up to 10
 
 The images come from the content at build time, like the rest of the page. After changing sessions or speakers, deploy again to update them. Each image's file name changes with what it shows, so social networks fetch the new one. To check how a page looks when shared, paste its URL into the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) or the [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/).
 
-The header follows the features too. Its button links to tickets until the event is over, or to the schedule otherwise. The account button shows when `mySchedule`, `feedback` or `reactions` is on, and the notifications bell when `notifications` is on. The footer links to the home page's subscribe band when `subscribe` is on, and shows a "Fork me on GitHub" sticker when `forkMe` is on.
+The header and the home page's hero offer visitors their next step, from the features, the content and the event's dates. Before the event, that's a ticket that is `available` and not `soldOut`, then the schedule, then the subscribe band. During it, the stream (`event.stream`, for an online or hybrid event) and what's on now. After it, the videos, the photos and the subscribe band. The header shows the first step, and the hero the first two. A hybrid event's header skips the stream, since most visitors are at the venue. The hero adds the highlights video, `aboutBlock.callToAction.howItWas` in `content/resources.json`, when it has room. Leave `howItWas` out until you have a video of your event: `./hb init` leaves out the demo's.
+
+The account button shows when `mySchedule`, `feedback` or `reactions` is on, and the notifications bell when `notifications` is on. The footer links to the home page's subscribe band when `subscribe` is on, and shows a "Fork me on GitHub" sticker when `forkMe` is on.
 
 ## Content Security Policy
 

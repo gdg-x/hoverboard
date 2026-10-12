@@ -27,7 +27,7 @@ export class ComingSoon extends ThemedComponent {
       ${
         __HB_FEATURES__.subscribe
           ? html`<hb-button variant="tonal" href="/#subscribe">
-              ${msg('Get updates', { id: 'shared.coming-soon.get-updates' })}
+              ${msg('Get updates', { id: 'common.get-updates' })}
             </hb-button>`
           : nothing
       }

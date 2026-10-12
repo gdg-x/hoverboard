@@ -314,18 +314,6 @@
 <trans-unit id="pages.home.view-highlights">
   <source>View Highlights</source>
 </trans-unit>
-<trans-unit id="home.hero.videos">
-  <source>Watch the videos</source>
-</trans-unit>
-<trans-unit id="home.hero.photos">
-  <source>See the photos</source>
-</trans-unit>
-<trans-unit id="common.buy-ticket">
-  <source>Buy ticket</source>
-</trans-unit>
-<trans-unit id="home.hero.live-schedule">
-  <source>See what's on now</source>
-</trans-unit>
 <trans-unit id="home.latest-posts-block.title">
   <source>The latest news</source>
 </trans-unit>
@@ -476,9 +464,6 @@
 <trans-unit id="common.sign-in">
   <source>Sign in</source>
 </trans-unit>
-<trans-unit id="shared.coming-soon.get-updates">
-  <source>Get updates</source>
-</trans-unit>
 <trans-unit id="shared.filter-menu.tracks">
   <source>Tracks</source>
 </trans-unit>
@@ -499,6 +484,24 @@
 </trans-unit>
 <trans-unit id="shared.filter-menu.clear">
   <source>Clear all</source>
+</trans-unit>
+<trans-unit id="common.buy-ticket">
+  <source>Buy ticket</source>
+</trans-unit>
+<trans-unit id="common.watch-live">
+  <source>Watch live</source>
+</trans-unit>
+<trans-unit id="home.hero.live-schedule">
+  <source>See what's on now</source>
+</trans-unit>
+<trans-unit id="common.get-updates">
+  <source>Get updates</source>
+</trans-unit>
+<trans-unit id="home.hero.videos">
+  <source>Watch the videos</source>
+</trans-unit>
+<trans-unit id="home.hero.photos">
+  <source>See the photos</source>
 </trans-unit>
 <trans-unit id="schedule.day.clear-filters">
   <source>Clear filters</source>

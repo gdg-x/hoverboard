@@ -2,6 +2,7 @@ import { render } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import { html, type TemplateResult } from 'lit';
 import { describe, expect, it } from 'vitest';
+import { featuredVideos } from '../config/site';
 import { seedPage } from '../data/page';
 import type { Session } from '../models/session';
 import type { Speaker } from '../models/speaker';
@@ -94,7 +95,7 @@ describe('pages on the server', () => {
   });
 
   it('render the home hero for the build-time event state', async () => {
-    seedPage({ speakers: [], blog: [] });
+    seedPage({ speakers: [], blog: [], tickets: [] });
 
     const page = await renderToString(
       html`<home-page event-state="upcoming" days-to-go="12"></home-page>`,
@@ -130,7 +131,7 @@ describe('pages on the server', () => {
     expect(upcoming).toMatch(/<a\s+href="\/speakers"\s+aria-current="page"/);
     expect(upcoming).toMatch(/<hb-button[^>]*class="cta"[^>]*href="https:\/\/example\.com\/t"/);
     const overCallToAction = over.match(/<hb-button[^>]*variant="cta"[^>]*>/)?.[0];
-    expect(overCallToAction).toContain('href="/schedule"');
-    expect(overCallToAction).toContain('class="cta in-nav"');
+    expect(overCallToAction).toContain(`href="${featuredVideos.callToAction.link}"`);
+    expect(overCallToAction).toContain('target="_blank"');
   });
 });

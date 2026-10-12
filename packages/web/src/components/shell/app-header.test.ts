@@ -6,7 +6,7 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vite
 import { setFeatures } from '../../../__tests__/helpers/features';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { setStoreState } from '../../../__tests__/helpers/store';
-import { eventDates } from '../../config/site';
+import { eventDates, featuredVideos } from '../../config/site';
 import type { Ticket } from '../../models/ticket';
 import type { HbDialog } from '../ui/hb-dialog';
 import { demoBanner, type AppHeader } from './app-header';
@@ -113,23 +113,42 @@ describe('app-header', () => {
     expect(callToAction()).toHaveAttribute('href', 'https://example.com/regular');
   });
 
-  it('calls to see the schedule once the event is over', async () => {
+  it('calls to watch the videos once the event is over', async () => {
     vi.setSystemTime(new Date(`${eventDates.end}T00:00:00Z`).getTime() + 2 * 86_400_000);
     setStoreState({ tickets });
     const { callToAction } = await render();
 
-    expect(callToAction()).toHaveTextContent('Schedule');
+    expect(callToAction()).toHaveTextContent('Watch the videos');
+    expect(callToAction()).toHaveAttribute('href', featuredVideos.callToAction.link);
+    expect(callToAction()).toHaveAttribute('target', '_blank');
+  });
+
+  it("doesn't call to buy tickets that aren't on sale", async () => {
+    setStoreState({
+      tickets: new Success([
+        { name: 'Regular', url: 'https://example.com/regular', available: true, soldOut: true },
+      ] as Ticket[]),
+    });
+    const { callToAction } = await render('/blog');
+
     expect(callToAction()).toHaveAttribute('href', '/schedule');
   });
 
-  it('calls to see the schedule without tickets, and to nothing without a schedule', async () => {
+  it('calls to see the schedule without tickets, then to get updates, then to nothing', async () => {
     setFeatures({ tickets: false });
     const { callToAction } = await render();
 
     expect(callToAction()).toHaveAttribute('href', '/schedule');
 
     setFeatures({ tickets: false, schedule: false, mySchedule: false, feedback: false });
-    const { callToAction: noCallToAction } = await render('/blog');
+    const { callToAction: updates } = await render('/blog');
+
+    expect(updates()).toHaveTextContent('Get updates');
+    expect(updates()).toHaveAttribute('href', '/#subscribe');
+    expect(updates()).not.toHaveAttribute('target');
+
+    setFeatures({ tickets: false, schedule: false, mySchedule: false, subscribe: false });
+    const { callToAction: noCallToAction } = await render('/team');
 
     expect(noCallToAction()).toBeNull();
   });
@@ -156,7 +175,7 @@ describe('app-header', () => {
     }
     expect(nav.getByShadowRole('link', { name: 'Blog' })).toBeInTheDocument();
     expect(nav.getByShadowRole('link', { name: 'Attending' })).toBeInTheDocument();
-    expect(callToAction()).toBeNull();
+    expect(callToAction()).toHaveTextContent('Get updates');
   });
 
   it('shows the account menu only when a feature needs sign-in', async () => {
