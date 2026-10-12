@@ -63,11 +63,7 @@ export class HomeHero extends ThemedComponent {
       position: absolute;
       z-index: -1;
       inset: 0;
-      background-image: radial-gradient(
-        color-mix(in srgb, currentColor 14%, transparent) 1.5px,
-        transparent 1.6px
-      );
-      background-size: 22px 22px;
+      background: var(--hb-hero-pattern);
       opacity: var(--hb-decorations, 1);
     }
 

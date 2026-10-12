@@ -100,6 +100,32 @@ export interface ThemeStyle {
   /** A band's title and link: side by side (`row`) or stacked (`column`). */
   bandHeaderDirection: string;
   bandHeaderAlign: string;
+  /** Space beside each band, so bands can be panels instead of full-bleed. */
+  bandInset: string;
+  bandRadius: string;
+  /** A border between bands. */
+  bandDivider: string;
+  /** Under a band title, as a `text-decoration`. */
+  titleUnderline: string;
+
+  /** The decorations, which `decorations: false` and forced colors turn off. Drawn in `currentColor`. */
+  heroPattern: string;
+  bandPattern: string;
+  /** A `mask` for a band's top edge, such as a zigzag. */
+  bandEdge: string;
+  /** Layered over `pageBackground`. */
+  pageTexture: string;
+  /** A `clip-path` for stickers. */
+  stickerShape: string;
+  /** Multiplies each sticker's tilt. */
+  stickerTiltScale: string;
+  /** Padding around photos, such as a polaroid frame, in `photoFrameColor`. */
+  photoFrame: string;
+  photoFrameColor: string;
+  /** Photos in a gallery turn by this much, one way then the other. */
+  photoTilt: string;
+  /** A `filter` for people's photos, such as grayscale. */
+  avatarFilter: string;
 
   /** The easing of press and hover movement. */
   easePress: string;
@@ -129,6 +155,10 @@ export const containerTones: Readonly<Record<Tone, ToneColors>> = {
   'accent-3': { background: 'accent3Container', color: 'onAccent3Container' },
   'accent-4': { background: 'accent4Container', color: 'onAccent4Container' },
 };
+
+/** A grid of small dots in the text color, as a `background` layer. */
+export const dots =
+  'radial-gradient(color-mix(in srgb, currentColor 14%, transparent) 1.5px, transparent 1.6px) 0 0 / 22px 22px';
 
 /** A theme has a light and a dark color set. It cannot ship with only one. */
 export interface Theme {

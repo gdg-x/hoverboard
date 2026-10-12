@@ -83,6 +83,27 @@
   --hb-decorations-display: none;
 }
 
+/* eslint-disable css/no-important -- beats the theme's values, whatever selector sets them. */
+/* Decorations that cannot fade with `--hb-decorations`. Forced colors drop them too. */
+:root[data-decorations='off'] {
+  --hb-band-pattern: none !important;
+  --hb-band-edge: none !important;
+  --hb-page-texture: none !important;
+  --hb-sticker-shape: none !important;
+  --hb-photo-frame: 0 !important;
+}
+
+@media (forced-colors: active) {
+  :root {
+    --hb-band-pattern: none !important;
+    --hb-band-edge: none !important;
+    --hb-page-texture: none !important;
+    --hb-sticker-shape: none !important;
+    --hb-photo-frame: 0 !important;
+  }
+}
+/* eslint-enable css/no-important */
+
 /* eslint-disable css/use-baseline, css/no-important -- browsers without the query keep the glass; `!important` beats the theme's values, whatever selector sets them. */
 @media (prefers-reduced-transparency: reduce) {
   :root {
@@ -118,7 +139,8 @@ main:focus {
 
 body {
   margin: 0;
-  background: var(--hb-page-background);
+  /* eslint-disable-next-line css/no-invalid-properties -- layers made of variables, which the rule cannot read. */
+  background: var(--hb-page-texture), var(--hb-page-background);
   color: var(--hb-color-on-surface);
   font-family: var(--hb-font-body);
   font-size: var(--hb-text-md);

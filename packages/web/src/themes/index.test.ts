@@ -12,6 +12,13 @@ import {
   cssToneVar,
 } from './tokens';
 
+const PATTERNS = [
+  'heroPattern',
+  'bandPattern',
+  'bandEdge',
+  'pageTexture',
+] as const satisfies (keyof ThemeStyle)[];
+
 describe('contrastRatio', () => {
   it('matches the WCAG ratios', () => {
     expect(contrastRatio('#000000', '#ffffff')).toBeCloseTo(21);
@@ -51,6 +58,45 @@ describe.each(Object.entries(THEMES))('%s theme', (_, theme) => {
       expect(css).toContain(`${cssToneVar(tone, 'background')}: var(${cssColorVar(background)});`);
       expect(css).toContain(`${cssToneVar(tone, 'color')}: var(${cssColorVar(color)});`);
     }
+  });
+
+  it('draws decorations faintly in the text color, so the contrast check holds', () => {
+    for (const key of PATTERNS) {
+      const value = theme.style[key];
+      const amounts = [...value.matchAll(/currentColor (\d+)%/g)].map((match) => Number(match[1]));
+
+      expect(value, key).not.toContain('var(--hb-color-');
+      expect(
+        amounts.every((amount) => amount <= 14),
+        key,
+      ).toBe(true);
+      for (const [url] of value.matchAll(/url\([^)]*\)/g)) {
+        expect(url.length, key).toBeLessThanOrEqual(2048);
+      }
+    }
+  });
+});
+
+describe('decorations', () => {
+  const baseCss = readFileSync(join(import.meta.dirname, '../styles/base.css'), 'utf8');
+  const declarations = (selector: string) =>
+    baseCss
+      .split(selector)
+      .slice(1)
+      .map((rest) => rest.slice(0, rest.indexOf('}')))
+      .join('');
+
+  it.each([
+    ['with theme.decorations off', ":root[data-decorations='off'] {"],
+    ['in forced colors', '@media (forced-colors: active) {\n  :root {'],
+  ])('turn off %s', (_, selector) => {
+    for (const key of [
+      ...PATTERNS.filter((key) => key !== 'heroPattern'),
+      'stickerShape',
+    ] as const) {
+      expect(declarations(selector)).toContain(`${cssStyleVar(key)}: none !important;`);
+    }
+    expect(declarations(selector)).toContain('--hb-photo-frame: 0 !important;');
   });
 });
 

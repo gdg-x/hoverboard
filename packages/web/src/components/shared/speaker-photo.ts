@@ -45,6 +45,7 @@ export class SpeakerPhoto extends ThemedComponent {
       border-radius: var(--hb-radius-avatar);
       background-color: var(--hb-speaker-photo-background, var(--hb-color-surface-container));
       object-fit: cover;
+      filter: var(--hb-avatar-filter, none);
     }
 
     /* Next to a name, a plain circle. */

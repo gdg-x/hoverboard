@@ -30,13 +30,22 @@ export class GalleryBlock extends ThemedComponent {
         grid-column: span 2;
       }
 
+      .photos li {
+        rotate: calc(var(--hb-photo-tilt, 0deg) * var(--hb-decorations, 1));
+      }
+
+      .photos li:nth-child(even) {
+        rotate: calc(var(--hb-photo-tilt, 0deg) * -1 * var(--hb-decorations, 1));
+      }
+
       .photo {
         display: block;
         inline-size: 100%;
         block-size: 100%;
+        padding: var(--hb-photo-frame, 0);
         border: var(--hb-border-width) solid var(--hb-border-color);
         border-radius: var(--hb-radius-m);
-        background-color: var(--hb-color-surface-container);
+        background-color: var(--hb-photo-frame-color);
         object-fit: cover;
       }
 

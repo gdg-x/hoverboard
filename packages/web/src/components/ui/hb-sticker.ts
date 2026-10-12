@@ -17,7 +17,9 @@ export class HbSticker extends LitElement {
       }
 
       .sticker {
-        --hb-sticker-rotate: calc(var(--hb-sticker-tilt) * var(--hb-decorations, 1));
+        --hb-sticker-rotate: calc(
+          var(--hb-sticker-tilt) * var(--hb-sticker-tilt-scale, 1) * var(--hb-decorations, 1)
+        );
 
         display: inline-block;
         padding: var(--hb-space-1) var(--hb-space-3);
@@ -27,6 +29,7 @@ export class HbSticker extends LitElement {
         color: var(--hb-color-on-accent-3-container);
         box-shadow: var(--hb-shadow-button);
         ${displayFont('heading', 'xs', 1.4, 0.02, 'accent')};
+        clip-path: var(--hb-sticker-shape, none);
         rotate: var(--hb-sticker-rotate);
       }
 

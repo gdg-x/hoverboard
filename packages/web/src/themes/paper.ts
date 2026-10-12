@@ -1,4 +1,4 @@
-import { type Theme, containerTones } from './tokens';
+import { type Theme, containerTones, dots } from './tokens';
 
 // White paper, light pencil outlines and watercolor washes: ultramarine, rose madder, ochre, sap green.
 export const paper: Theme = {
@@ -112,6 +112,20 @@ export const paper: Theme = {
     heroArtOrder: '0',
     bandHeaderDirection: 'row',
     bandHeaderAlign: 'flex-end',
+    bandInset: '0',
+    bandRadius: '0',
+    bandDivider: 'none',
+    titleUnderline: 'none',
+    heroPattern: dots,
+    bandPattern: 'none',
+    bandEdge: 'none',
+    pageTexture: 'none',
+    stickerShape: 'none',
+    stickerTiltScale: '1',
+    photoFrame: '0',
+    photoFrameColor: 'var(--hb-color-surface-container)',
+    photoTilt: '0deg',
+    avatarFilter: 'none',
     easePress: 'var(--hb-ease-spring)',
     pressScale: '1',
     hoverTranslate: '-2px -2px',

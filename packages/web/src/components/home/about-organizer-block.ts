@@ -25,9 +25,11 @@ export class AboutOrganizerBlock extends ThemedComponent {
         display: block;
         align-self: center;
         margin: 0;
+        padding: var(--hb-photo-frame, 0);
         border: var(--hb-border-width) solid var(--hb-border-color);
         border-radius: var(--hb-radius-l);
         overflow: hidden;
+        background-color: var(--hb-photo-frame-color);
         box-shadow: var(--hb-shadow-card);
         rotate: calc(-2deg * var(--hb-decorations, 1));
       }

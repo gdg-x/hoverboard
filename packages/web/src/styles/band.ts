@@ -22,6 +22,7 @@ export const bandContent = css`
     margin: 0;
     padding: 0;
     ${displayFont('display', '4xl', 1.05, -0.01)};
+    text-decoration: var(--hb-title-underline);
     text-wrap: balance;
     overflow-wrap: anywhere;
   }
@@ -71,12 +72,14 @@ export const bandTones = css`
     --hb-band-background: var(--hb-tone-surface-background);
     --hb-band-color: var(--hb-tone-surface-color);
 
-    background-color: color-mix(
-      in srgb,
-      var(--hb-band-background) var(--hb-tint-opacity),
-      transparent
-    );
+    margin-inline: var(--hb-band-inset);
+    border-block-start: var(--hb-band-divider);
+    border-radius: var(--hb-band-radius);
+    background:
+      var(--hb-band-pattern),
+      color-mix(in srgb, var(--hb-band-background) var(--hb-tint-opacity), transparent);
     color: var(--hb-band-color);
+    mask: var(--hb-band-edge);
   }
 
   .band[data-tone='accent-4'] {
