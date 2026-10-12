@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { getDate, getEventDates, getScheduleDay } from './dates';
+import { eventDates } from '../config/site';
+import { eventIsOver, getDate, getEventDates, getScheduleDay, onDates } from './dates';
 
 const localization = vi.hoisted(() => ({ getLocale: vi.fn(() => 'en') }));
 
@@ -59,6 +60,33 @@ describe('getEventDates', () => {
     localization.getLocale.mockReturnValue('es');
 
     expect(getEventDates()).toBe('13–14 de octubre de 2017');
+  });
+});
+
+describe('onDates', () => {
+  // The demo event is in Kyiv, three hours ahead of UTC in October.
+  const at = (instant: string) => Date.parse(instant);
+
+  it('counts days in the event time zone, from the first to the last, both included', () => {
+    const window = { from: '2027-10-15', until: '2027-10-16' };
+
+    expect(onDates(at('2027-10-14T20:59:00Z'), window)).toBe(false);
+    expect(onDates(at('2027-10-14T21:00:00Z'), window)).toBe(true);
+    expect(onDates(at('2027-10-16T20:59:00Z'), window)).toBe(true);
+    expect(onDates(at('2027-10-16T21:00:00Z'), window)).toBe(false);
+  });
+
+  it('has no start or end without them', () => {
+    expect(onDates(at('2000-01-01T00:00:00Z'), { until: '2027-10-16' })).toBe(true);
+    expect(onDates(at('2099-01-01T00:00:00Z'), { from: '2027-10-15' })).toBe(true);
+    expect(onDates(at('2099-01-01T00:00:00Z'), {})).toBe(true);
+  });
+});
+
+describe('eventIsOver', () => {
+  it('is over once the last day has passed', () => {
+    expect(eventIsOver(Date.parse(`${eventDates.end}T12:00:00Z`))).toBe(false);
+    expect(eventIsOver(Date.parse(`${eventDates.end}T23:00:00Z`))).toBe(true);
   });
 });
 

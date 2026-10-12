@@ -302,6 +302,23 @@ describe('config validation', () => {
     );
   });
 
+  it('takes a call for papers that closes before the event, and opens before it closes', () => {
+    const event = { startDate: '2027-10-15', endDate: '2027-10-16' };
+    const url = 'https://example.com/cfp';
+    const errorsWith = (callForPapers: object) =>
+      errorsFor({ site: { event, callForPapers }, resources: { attendingPage: { doors: [] } } });
+
+    expect(errorsWith({ url, closes: '2027-10-14' })).toEqual([]);
+    expect(errorsWith({ url, opens: '2027-10-16', closes: '2027-10-15' })).toEqual([
+      'site.json/callForPapers/closes: "2027-10-15" is not before event.startDate',
+      'site.json/callForPapers/opens: "2027-10-16" is after callForPapers.closes',
+    ]);
+    expect(errorsWith({ url: 'http://example.com', closes: '2027' })).toEqual([
+      'site.json/callForPapers/url: must match pattern "^https://"',
+      'site.json/callForPapers/closes: must match pattern "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"',
+    ]);
+  });
+
   it('needs a sign-in method when a feature needs sign-in', () => {
     expect(errorsFor({ site: { auth: { providers: [] } } })).toEqual([
       'site.json/auth/providers: mySchedule and feedback need a way to sign in, and there is none',

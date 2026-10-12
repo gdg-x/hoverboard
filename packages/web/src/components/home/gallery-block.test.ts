@@ -1,9 +1,9 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { screen } from 'shadow-dom-testing-library';
-import { describe, expect, it } from 'vitest';
-import { html } from 'lit';
+import { describe, expect, it, vi } from 'vitest';
+import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
-import { galleryBlock } from '../../config/site';
+import { eventDates, galleryBlock } from '../../config/site';
 import type { GalleryBlock } from './gallery-block';
 import './gallery-block';
 
@@ -48,6 +48,33 @@ describe('gallery-block', () => {
       'href',
       galleryBlock.callToAction.link,
     );
+  });
+
+  it('describes each photo with its alt text, or as a gallery photo without one', async () => {
+    const { element } = await fixture<GalleryBlock>(html`<gallery-block></gallery-block>`);
+    element.gallery = new Success([
+      { id: 'a', order: '1', url: 'https://example.com/a.jpg', alt: 'Attendees at the keynote.' },
+      { id: 'b', order: '2', url: 'https://example.com/b.jpg' },
+    ]);
+    await element.updateComplete;
+
+    expect(screen.getByShadowAltText('Attendees at the keynote.')).toBeInTheDocument();
+    expect(screen.getByShadowAltText('Gallery photo')).toBeInTheDocument();
+  });
+
+  it('says the photos are from past editions until this one is over', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date(`${eventDates.end}T12:00:00Z`));
+    const { shadowRoot } = await fixture<GalleryBlock>(html`<gallery-block></gallery-block>`);
+
+    expect(shadowRoot.querySelector('.past-editions')).toHaveTextContent('From past editions');
+    litRender(nothing, document.body);
+
+    vi.setSystemTime(new Date(`${eventDates.end}T12:00:00Z`).getTime() + 2 * 86_400_000);
+    const over = await fixture<GalleryBlock>(html`<gallery-block></gallery-block>`);
+    vi.useRealTimers();
+
+    expect(over.shadowRoot.querySelector('.past-editions')).toBeNull();
   });
 
   it('shows at most seven photos', async () => {

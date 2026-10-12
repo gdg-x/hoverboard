@@ -1,7 +1,9 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html, nothing, render as litRender } from 'lit';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { BuiltDay } from '../../schedule/build-schedule';
+import * as calendar from '../../utils/calendar';
 import type { MySchedule } from './my-schedule';
 import './my-schedule';
 
@@ -28,6 +30,7 @@ const render = async (featuredSchedule: BuiltDay[]) => {
 describe('my-schedule', () => {
   afterEach(() => {
     litRender(nothing, document.body);
+    vi.restoreAllMocks();
   });
 
   it('asks signed-out visitors to sign in', async () => {
@@ -47,7 +50,43 @@ describe('my-schedule', () => {
     const scheduleDays = shadowRoot.querySelectorAll('schedule-day');
     expect(scheduleDays[0]!.day).toBe(days[0]);
     expect(scheduleDays[0]!.onlyFeatured).toBe(true);
-    expect(shadowRoot.querySelector('.hint')).toBeNull();
+    expect(shadowRoot.querySelector('.empty')).toBeNull();
+  });
+
+  it('downloads the saved sessions, once each, as one calendar file', async () => {
+    const download = vi.spyOn(calendar, 'downloadIcs').mockImplementation(() => undefined);
+    const saved = {
+      id: 's1',
+      title: 'One',
+      description: '',
+      day: '2024-01-01',
+      startTime: '10:00',
+      endTime: '11:00',
+    };
+    const { element, shadowRoot } = await render([
+      day('2024-01-01', [saved, saved]),
+      day('2024-01-02', [{ ...saved, id: 's2', day: '2024-01-02' }]),
+    ]);
+
+    expect(shadowRoot.querySelector('.export .hint')).toHaveTextContent(
+      "Your calendar won't follow later changes to the schedule.",
+    );
+    shadowRoot.querySelector<HTMLElement>('.export hb-button')!.click();
+
+    expect(download).toHaveBeenCalledWith(
+      [
+        [expect.objectContaining({ title: 'One' }), 's1'],
+        [expect.objectContaining({ title: 'One' }), 's2'],
+      ],
+      'my-schedule',
+    );
+    await expectNoAxeViolations(element);
+  });
+
+  it('has nothing to download without saved sessions', async () => {
+    const { shadowRoot } = await render([day('2024-01-01')]);
+
+    expect(shadowRoot.querySelector('.export')).toBeNull();
   });
 
   it('explains how to add sessions when none are saved', async () => {

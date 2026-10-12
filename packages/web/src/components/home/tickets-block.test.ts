@@ -1,6 +1,7 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { describe, expect, it } from 'vitest';
 import { html } from 'lit';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Ticket } from '../../models/ticket';
 import type { TicketCard } from './ticket-card';
@@ -64,5 +65,21 @@ describe('tickets-block', () => {
     await element.updateComplete;
 
     expect(shadowRoot.querySelector<TicketCard>('ticket-card')!.fullPrice).toBeUndefined();
+  });
+
+  it('says when every ticket is sold out', async () => {
+    const { element, shadowRoot } = await fixture<TicketsBlock>(
+      html`<tickets-block></tickets-block>`,
+    );
+    element.tickets = new Success([ticket, { ...ticket, soldOut: true }]);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.sold-out')).toBeNull();
+
+    element.tickets = new Success([{ ...ticket, soldOut: true }]);
+    await element.updateComplete;
+
+    expect(shadowRoot.querySelector('.sold-out')).toHaveTextContent('All tickets are sold out.');
+    await expectNoAxeViolations(element);
   });
 });

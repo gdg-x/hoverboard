@@ -27,6 +27,12 @@ interface HeroSettings {
 /** How people attend the event. */
 export type Attendance = 'inPerson' | 'online' | 'hybrid';
 
+export interface CallForPapers {
+  url: string;
+  opens?: string;
+  closes: string;
+}
+
 type SiteJson = typeof import('../defaults/site.json') &
   typeof import('../../demo-config/site.json');
 /** `event.location` in site.json. */
@@ -37,6 +43,8 @@ type Site = Omit<SiteJson, 'event'> & {
   heroSettings?: HeroSettings;
   /** Set on an archived edition, which is read-only. */
   archive?: { year: number; current: string };
+  /** The call for papers: where to submit a talk, and the dates it's open, in the event's time zone. */
+  callForPapers?: CallForPapers;
   event: Omit<SiteJson['event'], 'attendance' | 'location'> & {
     attendance: Attendance;
     stream?: string;
@@ -44,11 +52,16 @@ type Site = Omit<SiteJson, 'event'> & {
     location?: Venue;
   };
 };
-type Resources = Omit<
-  typeof import('../../demo-config/content/resources.json'),
-  'attendingPage'
-> & {
+type DemoResources = typeof import('../../demo-config/content/resources.json');
+type AboutBlock = DemoResources['aboutBlock'];
+type Resources = Omit<DemoResources, 'attendingPage' | 'aboutBlock'> & {
   attendingPage?: AttendingPage;
+  aboutBlock: Omit<AboutBlock, 'callToAction'> & {
+    callToAction: Omit<AboutBlock['callToAction'], 'howItWas'> & {
+      /** The highlights video. A first edition has none. */
+      howItWas?: AboutBlock['callToAction']['howItWas'];
+    };
+  };
 };
 
 interface Image {
@@ -364,6 +377,7 @@ const crossFileErrors = (site: Site, resources: Resources, paths: ConfigPaths): 
   return [
     ...errors,
     ...trackErrors(site),
+    ...callForPapersErrors(site),
     ...localeErrors(site, paths.translations),
     ...featureErrors(site, resources),
   ];
@@ -390,6 +404,19 @@ const trackErrors = (site: Site): string[] => {
         : [],
     ),
   ]);
+};
+
+const callForPapersErrors = ({ callForPapers, event }: Site): string[] => {
+  if (!callForPapers) return [];
+  const { opens, closes } = callForPapers;
+  return [
+    ...(closes >= event.startDate
+      ? [`site.json/callForPapers/closes: "${closes}" is not before event.startDate`]
+      : []),
+    ...(opens && opens > closes
+      ? [`site.json/callForPapers/opens: "${opens}" is after callForPapers.closes`]
+      : []),
+  ];
 };
 
 // Each key must also be in the site's content/resources.json. Arrays replace, so their items are not checked.

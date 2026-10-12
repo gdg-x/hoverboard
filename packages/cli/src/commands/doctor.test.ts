@@ -150,6 +150,7 @@ describe('runDoctor', () => {
       'Firebase project',
       'Service account keys',
       'Site config',
+      'Demo leftovers',
       'Blaze plan',
       'Cloud Functions',
       'Realtime Database',

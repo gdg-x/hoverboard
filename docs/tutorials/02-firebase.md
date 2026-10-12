@@ -39,6 +39,20 @@ The link in the email opens the page the visitor signed in from. Its domain must
 
 Locally, the Auth emulator doesn't send email. Find the sign-in link under **Authentication** in the Emulator UI at http://localhost:4000, or in the emulator's log, and open it in the browser.
 
+## Content editors
+
+People who keep the speakers, sessions and posts up to date need to edit Firestore in the Firebase console, but not billing, functions or deploys. Make them content editors:
+
+```console
+./hb editor add ada@example.com
+./hb editor list
+./hb editor remove ada@example.com
+```
+
+It grants their Google account two roles in the Firebase project: **Cloud Datastore User** (`roles/datastore.user`), to read and write the documents, and **Firebase Viewer** (`roles/firebase.viewer`), to open the project in the Firebase console. They can't change billing, functions, Hosting or security rules, or deploy. It can take a few minutes to work (verify that the console's Firestore data page needs no other role). `add` and `remove` take `--dry-run`, and ask first unless you pass `--yes`.
+
+Editors don't run `./hb deploy`. Their changes reach the pages with the next deploy, and visitors' browsers load them as soon as a page opens.
+
 ## Billing
 
 Hoverboard's Cloud Functions send notifications, and need the [Blaze (pay as you go) plan](https://firebase.google.com/pricing). Upgrade in the Firebase console under **Usage and billing**. Run `./hb doctor` to check the plan of the selected project. Local development with the emulators works without Blaze. A site without these can turn off `functions` in `features` and stay on the free Spark plan. See [Features](01-configure-app.md#features).

@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Video } from '../../models/video';
 import { openVideoDialog } from '../../store/ui';
-import { featuredVideos } from '../../config/site';
+import { eventDates, featuredVideos } from '../../config/site';
 import type { FeaturedVideos } from './featured-videos';
 import './featured-videos';
 
@@ -62,6 +62,15 @@ describe('featured-videos', () => {
       'href',
       featuredVideos.callToAction.link,
     );
+  });
+
+  it('says the videos are from past editions until this one is over', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date(`${eventDates.start}T12:00:00Z`));
+    const { shadowRoot } = await fixture<FeaturedVideos>(html`<featured-videos></featured-videos>`);
+    vi.useRealTimers();
+
+    expect(shadowRoot.querySelector('.past-editions')).toHaveTextContent('From past editions');
   });
 
   it('opens the video dialog when a video is clicked', async () => {

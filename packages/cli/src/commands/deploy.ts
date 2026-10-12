@@ -2,6 +2,8 @@ import { resolveFirebaseBin } from '../lib/firebase-cli.js';
 import { useFirebaseLoginCredentials } from '../lib/google-cloud.js';
 import { confirmChange } from '../lib/prompt.js';
 import { runCommand } from '../lib/spawn.js';
+import { setTarget } from '../lib/target.js';
+import { demoLeftovers, formatLeftovers } from '../utils/demo-leftovers.js';
 import {
   checkFirebaseProject,
   demoDeployProblem,
@@ -39,6 +41,12 @@ export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> =
     return false;
   }
 
+  const leftovers = demoLeftovers(repoRoot);
+  if (leftovers.length) {
+    console.log(`! ${leftovers.length} thing(s) are still the demo's. Visitors will see them:`);
+    for (const line of formatLeftovers(leftovers)) console.log(line);
+  }
+
   const extraArgs = firebaseDeployArgs(repoRoot);
   if (options.dryRun) {
     console.log(
@@ -55,13 +63,26 @@ export const runDeploy = async (options: DeployOptions = {}): Promise<boolean> =
     return false;
   }
 
-  console.log('\nBuilding...');
   try {
     await useFirebaseLoginCredentials(repoRoot);
   } catch (error) {
     console.log(`The build reads the site's content from Firestore. ${(error as Error).message}`);
     return false;
   }
+
+  // The build fails on the same problems, but only after it starts.
+  console.log('\nChecking the content...');
+  setTarget('production');
+  const { runDataCheck } = await import('./data-check.js');
+  if (!(await runDataCheck())) {
+    console.log(
+      '\nFix the content above in the Firebase console, then deploy again. ' +
+        '`./hb data check --production --fix` fixes some problems.',
+    );
+    return false;
+  }
+
+  console.log('\nBuilding...');
   if (runCommand('npm', ['run', 'build'], repoRoot, { FIRESTORE_TARGET: 'production' }) !== 0) {
     console.log('Build failed.');
     return false;

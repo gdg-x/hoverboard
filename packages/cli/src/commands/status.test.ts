@@ -146,6 +146,31 @@ describe('runStatus', () => {
     expect(output()).toContain('Documents in the emulator:');
   });
 
+  it('lists the features the site hides for lack of content', async () => {
+    vi.stubEnv('FIRESTORE_EMULATOR_HOST', await listen());
+    write('packages/config/site.json', {
+      firebase: { projectId: 'fest-2027' },
+      features: { tickets: true },
+      schedule: { published: false },
+    });
+
+    const result = await runStatus();
+
+    expect(result['hidden']).toEqual(['blog', 'schedule', 'tickets']);
+    expect(output()).toContain('On, but hidden from the site until they have content:');
+    expect(output()).toContain('schedule (schedule.published is false)');
+    expect(output()).toContain('tickets (no tickets)');
+  });
+
+  it('hides nothing when every feature has content', async () => {
+    vi.stubEnv('FIRESTORE_EMULATOR_HOST', await listen());
+
+    const result = await runStatus();
+
+    expect(result['hidden']).toEqual([]);
+    expect(output()).not.toContain('hidden from the site');
+  });
+
   it("doesn't count without the emulator, or show a deploy it can't read", async () => {
     vi.stubEnv('FIRESTORE_EMULATOR_HOST', '127.0.0.1:1');
     mocks.request.mockRejectedValueOnce(new Error('Not logged in to Firebase.'));

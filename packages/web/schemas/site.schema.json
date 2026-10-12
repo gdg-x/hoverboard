@@ -416,6 +416,27 @@
         }
       }
     },
+    "callForPapers": {
+      "description": "The call for papers. While it's open, the home page and the header ask speakers to submit a talk. Dates are in event.timezone.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "closes"],
+      "properties": {
+        "url": {
+          "description": "Where speakers submit a talk, such as a Sessionize page.",
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "opens": {
+          "description": "The first day talks can be submitted. Without it, the call is open from the first deploy.",
+          "$ref": "#/$defs/date"
+        },
+        "closes": {
+          "description": "The last day talks can be submitted. Before event.startDate.",
+          "$ref": "#/$defs/date"
+        }
+      }
+    },
     "archive": {
       "description": "Makes the site an archived edition: read-only, with a banner on every page that links to the current edition. `hb edition switch` sets it. The features that write, and blog, demo and forkMe, must be off.",
       "type": "object",

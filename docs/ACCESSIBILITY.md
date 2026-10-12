@@ -45,9 +45,7 @@ We aim to support the current versions of Chrome, Edge, Firefox and Safari on de
 
 ## Known barriers
 
-The automated checks find no WCAG 2.2 AA violations on any page template, in any built-in theme. Hoverboard has one known limitation:
-
-- Gallery photos all have the same text alternative, "Gallery photo", since the gallery has no field to describe each one.
+The automated checks find no WCAG 2.2 AA violations on any page template, in any built-in theme.
 
 The audit will check these areas first:
 
@@ -63,7 +61,7 @@ Barriers the audit confirms will be listed here.
 
 Each site is run by its organizers, who also write its content. Some of what makes a site accessible is up to them:
 
-- Alt text for the logo, partner logos, photos and blog post images.
+- Alt text for the logo, partner logos, photos and blog post images. A gallery photo's is its `alt` field. Without it, screen readers hear "Gallery photo", and `./hb data check` warns.
 - Captions for videos.
 - Accessibility information about the venue, on the attending page.
 - Contrast of their own colors and photos. The build checks the colors in `site.json`, but not colors set in `custom.css`.

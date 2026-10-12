@@ -29,6 +29,11 @@ export class TicketsBlock extends ThemedComponent {
         margin: var(--hb-space-7) 0 0;
         font-size: var(--hb-text-sm);
       }
+
+      .sold-out {
+        margin: 0 0 var(--hb-space-6);
+        font-size: var(--hb-text-lg);
+      }
     `,
   ];
 
@@ -37,11 +42,19 @@ export class TicketsBlock extends ThemedComponent {
 
   override render() {
     const fullPrice = this.ticketsList.find(({ primary }) => primary)?.price;
+    const soldOut = this.ticketsList.length > 0 && this.ticketsList.every(({ soldOut }) => soldOut);
     return html`
       <div class="inner">
         <div class="band-header">
           <h2 class="band-title">${msg('Tickets', { id: 'home.tickets-block.title' })}</h2>
         </div>
+        ${
+          soldOut
+            ? html`<p class="sold-out">
+                ${msg('All tickets are sold out.', { id: 'home.tickets-block.all-sold-out' })}
+              </p>`
+            : nothing
+        }
         ${
           this.tickets instanceof Pending
             ? html`<content-loader

@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import { url } from '../../config/site';
 import type { Session } from '../../models/session';
@@ -46,9 +47,30 @@ describe('add-to-calendar', () => {
     apple!.click();
 
     expect(download).toHaveBeenCalledWith(
-      expect.objectContaining({ title: 'A great talk' }),
+      [[expect.objectContaining({ title: 'A great talk' }), 'session-1']],
       'session-1',
     );
+  });
+
+  it('adds any calendar event, by its own ID', async () => {
+    const download = vi.spyOn(calendar, 'downloadIcs').mockImplementation(() => undefined);
+    const event = {
+      title: 'The conference',
+      description: '',
+      location: 'The venue',
+      start: new Date('2027-10-15T00:00:00Z'),
+      end: new Date('2027-10-17T00:00:00Z'),
+      allDay: true,
+    };
+    const { element, shadowRoot } = await fixture<AddToCalendar>(
+      html`<add-to-calendar .event="${event}" uid="conference" size="l"></add-to-calendar>`,
+    );
+
+    expect(shadowRoot.querySelector('hb-button')).toHaveAttribute('size', 'l');
+    shadowRoot.querySelectorAll<HTMLElement>('[role="menuitem"]')[1]!.click();
+
+    expect(download).toHaveBeenCalledWith([[event, 'conference']], 'conference');
+    await expectNoAxeViolations(element);
   });
 
   it("links the event to the session's page on the site", async () => {
@@ -60,9 +82,14 @@ describe('add-to-calendar', () => {
     shadowRoot.querySelectorAll<HTMLElement>('[role="menuitem"]')[1]!.click();
 
     expect(download).toHaveBeenCalledWith(
-      expect.objectContaining({
-        description: `Session description\n\n${url}sessions/session-1`,
-      }),
+      [
+        [
+          expect.objectContaining({
+            description: `Session description\n\n${url}sessions/session-1`,
+          }),
+          'session-1',
+        ],
+      ],
       'session-1',
     );
   });

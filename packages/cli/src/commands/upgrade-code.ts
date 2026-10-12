@@ -7,6 +7,7 @@ import { mergePackageJson } from '../lib/package-merge.js';
 import { confirmChange } from '../lib/prompt.js';
 import { commandExists, runCommand } from '../lib/spawn.js';
 import { CONFIG_DIR } from '../utils/firebase-project.js';
+import { confirmUpgradeTiming } from '../utils/event-week.js';
 import { findRepoRoot } from '../utils/node-version.js';
 
 export const UPSTREAM_URL = 'https://github.com/gdg-x/hoverboard.git';
@@ -315,6 +316,7 @@ export const runCodeUpgrade = async ({
     console.log('✘ Commit or stash your changes first, so the upgrade starts from a clean tree.');
     return false;
   }
+  if (!(await confirmUpgradeTiming(repoRoot, { yes, dryRun }))) return false;
   const from = rootVersion(repoRoot);
   if (compareVersions(from, '4.0.0') < 0) {
     console.log(

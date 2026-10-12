@@ -43,7 +43,7 @@ When possible, deprecate first: keep the old behavior working in a minor release
 
 `./hb upgrade [version]` upgrades a site to a release, the latest by default:
 
-1. It needs a clean working tree. It adds the `upstream` remote, `https://github.com/gdg-x/hoverboard.git`, when no remote points there, and fetches the releases.
+1. It needs a clean working tree. It adds the `upstream` remote, `https://github.com/gdg-x/hoverboard.git`, when no remote points there, and fetches the releases. From a week before the event to its last day, it warns that an upgrade could break the site when attendees need it, and asks before going on. `--migrations-only` warns too.
 2. It shows the release notes since your version, with the breaking changes first, and your changes to Hoverboard's files outside `packages/config`, marking the ones the release changes too. Those are the likely conflicts. Then it asks.
 3. It merges the release's tag into a new branch, `upgrade/v<version>`, and resolves what it knows how to:
    - Lockfiles are never merged as text. It takes the release's, then adds your own dependencies back with `npm install --package-lock-only`.

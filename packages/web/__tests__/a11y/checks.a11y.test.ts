@@ -147,8 +147,11 @@ describe.concurrent('keyboard', () => {
   it.for(pages)(
     'reaches the footer with Tab, each stop visible, marked and uncovered, on $label',
     async (target, { expect }) => {
+      // A browser of its own: another page opening in a shared one can take the focus, and then
+      // the focused element doesn't match `:focus`.
+      const own = await chromium.launch();
       // Reduced motion scrolls each stop into view at once, so it can be measured.
-      const { page, close } = await openPage(browser, target.url, target.path, {
+      const { page, close } = await openPage(own, target.url, target.path, {
         context: { reducedMotion: 'reduce' },
       });
       try {
@@ -169,70 +172,69 @@ describe.concurrent('keyboard', () => {
           await page.keyboard.press('Tab');
           const stop = await page.evaluate(
             () =>
-              new Promise<(typeof stops)[number] | 'end'>((resolve) =>
+              new Promise<(typeof stops)[number] | 'end'>((resolve) => {
                 // Two frames, for a skip link that slides in.
-                requestAnimationFrame(() =>
-                  requestAnimationFrame(() => {
-                    const { hb, hbFocused } = window as unknown as HelperWindow;
-                    const element = hb.active();
-                    if (!element || hbFocused.includes(element)) return resolve('end');
-                    hbFocused.push(element);
-                    const rect = element.getBoundingClientRect();
-                    const hidden =
-                      rect.width < 1 ||
-                      rect.height < 1 ||
-                      getComputedStyle(element).visibility === 'hidden' ||
-                      rect.bottom <= 0 ||
-                      rect.top >= innerHeight;
-                    const ancestors = (node: Element | null): Element[] =>
-                      node ? [node, ...ancestors(hb.parent(node))] : [];
-                    const own = ancestors(element);
-                    // The topmost element at a point, inside shadow roots.
-                    const hitAt = (x: number, y: number) => {
-                      let hit = document.elementFromPoint(x, y);
-                      while (hit?.shadowRoot) {
-                        const inner = hit.shadowRoot.elementFromPoint(x, y);
-                        if (!inner || inner === hit) break;
-                        hit = inner;
-                      }
-                      return hit;
-                    };
-                    // Its content, an ancestor such as its host, or its label. Toasts close by
-                    // themselves, and here only say that the tests block the service worker.
-                    const belongs = (hit: Element | null) =>
-                      !hit ||
-                      own.includes(hit) ||
-                      ancestors(hit).some(
-                        (node) =>
-                          node === element ||
-                          node.localName === 'snack-bar' ||
-                          (node instanceof HTMLLabelElement && node.control === element),
-                      );
-                    // The center and the middle of each edge: corners can be rounded off.
-                    const inset = 2;
-                    const [midX, midY] = [rect.left + rect.width / 2, rect.top + rect.height / 2];
-                    const covers = [
-                      [midX, midY],
-                      [midX, rect.top + inset],
-                      [midX, rect.bottom - inset],
-                      [rect.left + inset, midY],
-                      [rect.right - inset, midY],
-                    ]
-                      .filter(([, y]) => y! >= 0 && y! < innerHeight)
-                      .map(([x, y]) => hitAt(x!, y!))
-                      .filter((hit) => !belongs(hit));
-                    const by = covers[0] ? hb.describe(covers[0]) : undefined;
-                    resolve({
-                      name: hb.describe(element),
-                      hidden,
-                      ...(by && covers.length === 5 ? { coveredBy: by } : {}),
-                      ...(by && covers.length < 5 ? { partlyCoveredBy: by } : {}),
-                      footer: own.some(({ localName }) => localName === 'footer-block'),
-                      look: hb.look(element),
-                    });
-                  }),
-                ),
-              ),
+                const measure = () => {
+                  const { hb, hbFocused } = window as unknown as HelperWindow;
+                  const element = hb.active();
+                  if (!element || hbFocused.includes(element)) return resolve('end');
+                  hbFocused.push(element);
+                  const rect = element.getBoundingClientRect();
+                  const hidden =
+                    rect.width < 1 ||
+                    rect.height < 1 ||
+                    getComputedStyle(element).visibility === 'hidden' ||
+                    rect.bottom <= 0 ||
+                    rect.top >= innerHeight;
+                  const ancestors = (node: Element | null): Element[] =>
+                    node ? [node, ...ancestors(hb.parent(node))] : [];
+                  const own = ancestors(element);
+                  // The topmost element at a point, inside shadow roots.
+                  const hitAt = (x: number, y: number) => {
+                    let hit = document.elementFromPoint(x, y);
+                    while (hit?.shadowRoot) {
+                      const inner = hit.shadowRoot.elementFromPoint(x, y);
+                      if (!inner || inner === hit) break;
+                      hit = inner;
+                    }
+                    return hit;
+                  };
+                  // Its content, an ancestor such as its host, or its label. Toasts close by
+                  // themselves, and here only say that the tests block the service worker.
+                  const belongs = (hit: Element | null) =>
+                    !hit ||
+                    own.includes(hit) ||
+                    ancestors(hit).some(
+                      (node) =>
+                        node === element ||
+                        node.localName === 'snack-bar' ||
+                        (node instanceof HTMLLabelElement && node.control === element),
+                    );
+                  // The center and the middle of each edge: corners can be rounded off.
+                  const inset = 2;
+                  const [midX, midY] = [rect.left + rect.width / 2, rect.top + rect.height / 2];
+                  const covers = [
+                    [midX, midY],
+                    [midX, rect.top + inset],
+                    [midX, rect.bottom - inset],
+                    [rect.left + inset, midY],
+                    [rect.right - inset, midY],
+                  ]
+                    .filter(([, y]) => y! >= 0 && y! < innerHeight)
+                    .map(([x, y]) => hitAt(x!, y!))
+                    .filter((hit) => !belongs(hit));
+                  const by = covers[0] ? hb.describe(covers[0]) : undefined;
+                  resolve({
+                    name: hb.describe(element),
+                    hidden,
+                    ...(by && covers.length === 5 ? { coveredBy: by } : {}),
+                    ...(by && covers.length < 5 ? { partlyCoveredBy: by } : {}),
+                    footer: own.some(({ localName }) => localName === 'footer-block'),
+                    look: hb.look(element),
+                  });
+                };
+                requestAnimationFrame(() => requestAnimationFrame(measure));
+              }),
           );
           if (stop === 'end') break;
           stops.push(stop);
@@ -278,6 +280,7 @@ describe.concurrent('keyboard', () => {
         ).toEqual([]);
       } finally {
         await close();
+        await own.close();
       }
     },
   );

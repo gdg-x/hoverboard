@@ -9,6 +9,7 @@ import '../components/markdown/short-markdown';
 import '../components/schedule/session-card';
 import '../components/shared/hoverboard-icon';
 import '../components/shared/previous-talks';
+import '../components/shared/report-mistake';
 import '../components/shared/social-links';
 import '../components/shared/speaker-profile';
 import '../components/ui/hb-progress';
@@ -146,6 +147,7 @@ export class SpeakerPage extends ThemedComponent {
               `
             : nothing
         }
+        <report-mistake subject="${speaker.name}"></report-mistake>
       </div>
     `;
   }

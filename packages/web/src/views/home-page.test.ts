@@ -93,6 +93,28 @@ describe('home-page', () => {
     expect(shadowRoot.querySelector('gallery-block')).not.toBeNull();
   });
 
+  it('leaves out the blocks of features the build found no content for', async () => {
+    const presence = { speakers: false, tickets: false, gallery: false, videos: true, blog: false };
+
+    const { shadowRoot } = await fixture<HomePage>(
+      html`<home-page .presence="${presence}"></home-page>`,
+    );
+
+    for (const block of [
+      'speakers-block',
+      'tickets-block',
+      'gallery-block',
+      'latest-posts-block',
+    ]) {
+      expect(shadowRoot.querySelector(block)).toBeNull();
+    }
+    expect(shadowRoot.querySelector('featured-videos')).not.toBeNull();
+    expect(shadowRoot.querySelector('partners-block')).not.toBeNull();
+    expect(shadowRoot.querySelector('subscribe-block')).not.toBeNull();
+    expect(tones(shadowRoot)).toEqual(['surface', 'accent-4', 'surface', 'accent-2', 'surface']);
+    expect(shadowRoot.querySelector('home-hero')).toHaveProperty('presence', presence);
+  });
+
   it('passes the build-time event state to the hero', async () => {
     const { shadowRoot } = await fixture<HomePage>(
       html`<home-page event-state="live" days-to-go="0"></home-page>`,

@@ -24,6 +24,8 @@ Your Firebase project must be on the Blaze plan. See [Billing](02-firebase.md#bi
 
    The build renders every page from the content in your production Firestore. It reads it with your Firebase CLI login (`npx firebase login`). After you change content in Firestore, deploy again to update the pages. Visitors' browsers still load the latest content after the page loads.
 
+   Before the build, `./hb deploy` checks the content, the same way as `./hb data check --production`. It stops on a problem, such as a field missing from a document edited in the Firebase console, and links to the document, so you can fix it before waiting for a build. Warnings don't stop it.
+
    When a deploy finds functions that are no longer in the code, such as the schedule generator's `sessionsWrite`, `scheduleWrite` and `speakersWrite` after upgrading to v4, Firebase asks before deleting them. Answer yes.
 
    `./hb doctor` checks that every function is deployed as 2nd gen. A deploy can't upgrade a 1st gen function, so it names the command that deletes one first.

@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html, nothing, render as litRender } from 'lit';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import type { Ticket } from '../../models/ticket';
@@ -82,5 +82,41 @@ describe('ticket-card', () => {
 
     expect(shadowRoot.querySelector('.stub hb-button')).toHaveAttribute('disabled');
     expect(shadowRoot.querySelector('.stub hb-button')).toHaveTextContent('Not available yet');
+  });
+
+  describe('sale dates', () => {
+    const dated = { ...ticket, salesOpen: '2027-07-01', salesClose: '2027-09-30' };
+    const button = (root: ShadowRoot) => root.querySelector('.stub hb-button');
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it('says when sales open, and turns off buying until then', async () => {
+      vi.useFakeTimers({ toFake: ['Date'] });
+      vi.setSystemTime(new Date('2027-06-30T12:00:00Z'));
+      const { shadowRoot } = await render({ ticket: dated });
+
+      expect(button(shadowRoot)).toHaveTextContent('On sale July 1');
+      expect(button(shadowRoot)).toHaveAttribute('disabled');
+    });
+
+    it('sells it between the first and the last day of sales', async () => {
+      vi.useFakeTimers({ toFake: ['Date'] });
+      vi.setSystemTime(new Date('2027-09-30T12:00:00Z'));
+      const { shadowRoot } = await render({ ticket: dated });
+
+      expect(button(shadowRoot)).toHaveTextContent('Buy ticket');
+      expect(button(shadowRoot)).not.toHaveAttribute('disabled');
+    });
+
+    it('says sales are closed after the last day', async () => {
+      vi.useFakeTimers({ toFake: ['Date'] });
+      vi.setSystemTime(new Date('2027-10-01T12:00:00Z'));
+      const { shadowRoot } = await render({ ticket: dated });
+
+      expect(button(shadowRoot)).toHaveTextContent('Sales closed');
+      expect(button(shadowRoot)).toHaveAttribute('disabled');
+    });
   });
 });

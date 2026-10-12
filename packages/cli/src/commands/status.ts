@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { connect } from 'net';
 import { join } from 'path';
-import { COLLECTIONS } from '../../../storage/collections.js';
+import { COLLECTIONS, type CollectionPath } from '../../../storage/collections.js';
 import type { CommandResult } from '../lib/command.js';
 import { git, lines } from '../lib/git.js';
 import { createGoogleCloud } from '../lib/google-cloud.js';
@@ -96,9 +96,38 @@ const countDocuments = async (features: Record<string, boolean>) => {
   return counts;
 };
 
+// The collection each feature's pages and home block show. The site hides them while it's empty.
+const FEATURE_CONTENT: Record<string, CollectionPath> = {
+  blog: 'blog',
+  gallery: 'gallery',
+  partners: 'partners/*/items',
+  previousSpeakers: 'previousSpeakers',
+  schedule: 'sessions',
+  speakers: 'speakers',
+  team: 'team/*/members',
+  tickets: 'tickets',
+  videos: 'videos',
+};
+
+/** The features that are on, but that the site hides, with the reason. */
+const hiddenFeatures = (
+  features: Record<string, boolean>,
+  documents: Record<string, number>,
+  published: boolean,
+): { feature: string; reason: string }[] =>
+  Object.entries(FEATURE_CONTENT).flatMap(([feature, path]) => {
+    if (!features[feature]) return [];
+    if (documents[path] === 0) return [{ feature, reason: `no ${path}` }];
+    if (feature === 'schedule' && !published) {
+      return [{ feature, reason: 'schedule.published is false' }];
+    }
+    return [];
+  });
+
 /**
  * Prints what the site is: the project, the URL, the versions, the features, the last deploy, the
- * fork's changes to Hoverboard's files, and the document count of each collection in the target.
+ * fork's changes to Hoverboard's files, the document count of each collection in the target, and
+ * the features the site hides for lack of content.
  */
 export const runStatus = async (): Promise<CommandResult> => {
   const repoRoot = findRepoRoot(process.cwd()) ?? process.cwd();
@@ -151,6 +180,7 @@ export const runStatus = async (): Promise<CommandResult> => {
   const where = target() === 'production' ? projectId : 'the emulator';
   const host = process.env['FIRESTORE_EMULATOR_HOST'] ?? DEFAULT_EMULATOR_HOST;
   let documents: Record<string, number> | undefined;
+  let hidden: string[] | undefined;
   if (target() === 'emulator' && !(await reachable(host))) {
     console.log(
       `Documents: unknown, the emulator isn't running. Start it with \`npm start\`, or add ` +
@@ -162,6 +192,14 @@ export const runStatus = async (): Promise<CommandResult> => {
     const width = Math.max(...Object.keys(documents).map((path) => path.length));
     for (const [path, count] of Object.entries(documents)) {
       console.log(`  ${path.padEnd(width)}  ${count}`);
+    }
+    const defaults = readJson(join(repoRoot, 'packages', 'web', 'defaults', 'site.json'));
+    const schedule = { ...(defaults['schedule'] as Json), ...(site['schedule'] as Json) };
+    const hiddenList = hiddenFeatures(features, documents, schedule['published'] !== false);
+    hidden = hiddenList.map(({ feature }) => feature);
+    if (hiddenList.length) {
+      console.log('On, but hidden from the site until they have content:');
+      for (const { feature, reason } of hiddenList) console.log(`  ${feature} (${reason})`);
     }
   }
 
@@ -176,5 +214,6 @@ export const runStatus = async (): Promise<CommandResult> => {
     ...(deployError ? { lastDeployError: deployError } : {}),
     ...(changes ? { changes } : {}),
     ...(documents ? { documents } : {}),
+    ...(hidden ? { hidden } : {}),
   };
 };

@@ -7,6 +7,7 @@ import {
   schemaVersionAfter,
 } from '../migrations/config.js';
 import { siteConfigPath } from '../utils/firebase-project.js';
+import { confirmUpgradeTiming } from '../utils/event-week.js';
 import { findRepoRoot } from '../utils/node-version.js';
 import { validateSiteConfig } from '../utils/site-config.js';
 import { runDataCheck } from './data-check.js';
@@ -51,6 +52,7 @@ export const runUpgrade = async (
     );
     return false;
   }
+  if (!(await confirmUpgradeTiming(repoRoot, { yes, dryRun }))) return false;
 
   const pending = migrations.filter((migration) => migration.version > version);
   if (!pending.length) {

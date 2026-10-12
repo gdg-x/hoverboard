@@ -1,9 +1,10 @@
-import { Pending } from '@abraham/remotedata';
+import { Pending, Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/schedule/schedule-tabs';
+import '../components/shared/coming-soon';
 import '../components/shared/filter-menu';
 import '../components/ui/hb-progress';
 import '../components/ui/hb-switch';
@@ -133,6 +134,17 @@ export class SchedulePage extends ThemedComponent {
     const visitorZone = this.visitorTimeZone;
     const otherZone = !!visitorZone && visitorZone !== timeZone;
     const shownZone = this.localTime && otherZone ? visitorZone : timeZone;
+
+    if (!mySchedule && this.schedule instanceof Success && this.schedule.data.length === 0) {
+      return html`
+        <simple-hero page="schedule"></simple-hero>
+        <div class="inner">
+          <coming-soon>
+            ${msg('The schedule is coming soon.', { id: 'schedule.page.coming-soon' })}
+          </coming-soon>
+        </div>
+      `;
+    }
 
     return html`
       <simple-hero page="schedule"></simple-hero>

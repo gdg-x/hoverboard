@@ -22,7 +22,7 @@ const days = ({ startDate, endDate }: SiteDetails) =>
 /**
  * Neutral text for a new site, in place of the demo's, which describes GDG DevFest Ukraine. Keeps
  * the demo's structure, so the site looks complete, and its images, videos and photo links, which
- * the organizer replaces later.
+ * the organizer replaces later. Leaves out the demo's highlights video, which the home page offers.
  */
 export const starterResources = (
   resources: Json,
@@ -67,17 +67,15 @@ export const starterResources = (
     },
     aboutBlock: {
       ...about,
+      // Without the demo's highlights video, which is of another event. Organizers add their own.
       callToAction: {
-        ...about.callToAction,
+        ...Object.fromEntries(
+          Object.entries(about.callToAction ?? {}).filter(([key]) => key !== 'howItWas'),
+        ),
         featuredSessions: {
           description: `${title} brings people together for talks, workshops and conversations.`,
           label: on('schedule') ? 'See the schedule' : 'Meet the speakers',
           link: on('schedule') ? '/schedule' : on('speakers') ? '/speakers' : '/',
-        },
-        howItWas: {
-          ...about.callToAction?.howItWas,
-          description: `Watch a video of an earlier ${shortName}.`,
-          label: 'See how it was',
         },
       },
       statisticsBlock: {

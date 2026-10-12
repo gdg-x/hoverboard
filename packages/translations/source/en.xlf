@@ -314,18 +314,6 @@
 <trans-unit id="pages.home.view-highlights">
   <source>View Highlights</source>
 </trans-unit>
-<trans-unit id="home.hero.videos">
-  <source>Watch the videos</source>
-</trans-unit>
-<trans-unit id="home.hero.photos">
-  <source>See the photos</source>
-</trans-unit>
-<trans-unit id="common.buy-ticket">
-  <source>Buy ticket</source>
-</trans-unit>
-<trans-unit id="home.hero.live-schedule">
-  <source>See what's on now</source>
-</trans-unit>
 <trans-unit id="home.latest-posts-block.title">
   <source>The latest news</source>
 </trans-unit>
@@ -356,6 +344,9 @@
 <trans-unit id="home.partners-block.error">
   <source>Error loading partners.</source>
 </trans-unit>
+<trans-unit id="home.past-editions">
+  <source>From past editions</source>
+</trans-unit>
 <trans-unit id="home.speakers-block.title">
   <source>Speakers</source>
 </trans-unit>
@@ -380,6 +371,9 @@
 <trans-unit id="home.tickets-block.in-demand">
   <source>Popular</source>
 </trans-unit>
+<trans-unit id="home.tickets-block.sales-closed">
+  <source>Sales closed</source>
+</trans-unit>
 <trans-unit id="home.tickets-block.not-available">
   <source>Not available yet</source>
 </trans-unit>
@@ -388,6 +382,9 @@
 </trans-unit>
 <trans-unit id="home.tickets-block.title">
   <source>Tickets</source>
+</trans-unit>
+<trans-unit id="home.tickets-block.all-sold-out">
+  <source>All tickets are sold out.</source>
 </trans-unit>
 <trans-unit id="home.tickets-block.error">
   <source>Error loading tickets</source>
@@ -497,6 +494,27 @@
 <trans-unit id="shared.filter-menu.clear">
   <source>Clear all</source>
 </trans-unit>
+<trans-unit id="common.submit-talk">
+  <source>Submit a talk</source>
+</trans-unit>
+<trans-unit id="common.buy-ticket">
+  <source>Buy ticket</source>
+</trans-unit>
+<trans-unit id="common.watch-live">
+  <source>Watch live</source>
+</trans-unit>
+<trans-unit id="home.hero.live-schedule">
+  <source>See what's on now</source>
+</trans-unit>
+<trans-unit id="common.get-updates">
+  <source>Get updates</source>
+</trans-unit>
+<trans-unit id="home.hero.videos">
+  <source>Watch the videos</source>
+</trans-unit>
+<trans-unit id="home.hero.photos">
+  <source>See the photos</source>
+</trans-unit>
 <trans-unit id="schedule.day.clear-filters">
   <source>Clear filters</source>
 </trans-unit>
@@ -517,6 +535,12 @@
 </trans-unit>
 <trans-unit id="common.view-presentation">
   <source>View presentation</source>
+</trans-unit>
+<trans-unit id="shared.report-mistake.link">
+  <source>Report a mistake</source>
+</trans-unit>
+<trans-unit id="shared.report-mistake.text">
+  <source>Speaking here? <x id="0" equiv-text="${link}"/></source>
 </trans-unit>
 <trans-unit id="pages.speaker.badges">
   <source>Badges</source>
@@ -777,7 +801,7 @@
   <source>My Schedule notifications disabled</source>
 </trans-unit>
 <trans-unit id="calendar.watch-online">
-  <source>Watch online: <x id="0" equiv-text="${stream}"/></source>
+  <source>Watch online: <x id="0" equiv-text="${link}"/></source>
 </trans-unit>
 <trans-unit id="pages.attending.title">
   <source>Attending</source>
@@ -923,11 +947,20 @@
 <trans-unit id="pages.previous-speaker.talks">
   <source>Talks</source>
 </trans-unit>
+<trans-unit id="schedule.page.coming-soon">
+  <source>The schedule is coming soon.</source>
+</trans-unit>
 <trans-unit id="schedule.page.time-zone">
   <source>Times in <x id="0" equiv-text="&lt;strong&gt;${zoneName(shownZone)}&lt;/strong&gt;"/></source>
 </trans-unit>
 <trans-unit id="schedule.page.local-time">
   <source>Show my time zone, <x id="0" equiv-text="${zoneName(visitorZone)}"/></source>
+</trans-unit>
+<trans-unit id="schedule.my-schedule.export">
+  <source>Add my sessions to calendar</source>
+</trans-unit>
+<trans-unit id="schedule.my-schedule.export-hint">
+  <source>Downloads your sessions as they are now. Your calendar won't follow later changes to the schedule.</source>
 </trans-unit>
 <trans-unit id="schedule.my-schedule.empty">
   <source>Save sessions in the schedule to see them here.</source>
@@ -973,6 +1006,9 @@
 </trans-unit>
 <trans-unit id="pages.speaker.previous-talks">
   <source>Talks in earlier years</source>
+</trans-unit>
+<trans-unit id="pages.speakers.coming-soon">
+  <source>Speakers are coming soon.</source>
 </trans-unit>
 <trans-unit id="pages.speakers.no-results">
   <source>No speakers match these filters.</source>
@@ -1034,6 +1070,14 @@
 <trans-unit id="home.tickets-block.sold-out">
   <source>You missed it!</source>
   <note from="lit-localize">Shown on a sold-out ticket.</note>
+</trans-unit>
+<trans-unit id="home.tickets-block.on-sale">
+  <source>On sale <x id="0" equiv-text="${date}"/></source>
+  <note from="lit-localize">The day a ticket goes on sale, such as "On sale July 1".</note>
+</trans-unit>
+<trans-unit id="shared.report-mistake.subject">
+  <source>Correction: <x id="0" equiv-text="${this.subject}"/></source>
+  <note from="lit-localize">The subject of the email, with the speaker's name or the session's title.</note>
 </trans-unit>
 </body>
 </file>

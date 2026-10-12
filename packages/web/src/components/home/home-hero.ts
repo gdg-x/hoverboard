@@ -1,3 +1,4 @@
+import { Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
 import { css, html, nothing, type TemplateResult } from 'lit';
 import { displayFont } from '../../styles/shared';
@@ -9,24 +10,31 @@ import {
   attendance,
   decorations,
   eventDates,
-  featuredVideos,
-  galleryBlock,
   heroDescriptions,
   heroIllustration,
   heroSettings,
   location,
   siteAttendance,
   siteLocation,
+  stream,
   timeZone,
   title,
+  url,
 } from '../../config/site';
+import { fromStore } from '../../controllers/from-store';
+import type { Ticket } from '../../models/ticket';
+import { type TicketsState, selectTickets } from '../../store/tickets';
 import { openVideoDialog } from '../../store/ui';
+import { eventToCalendarEvent } from '../../utils/calendar';
 import { currentTime } from '../../utils/clock';
+import type { ContentPresence } from '../../utils/content-presence';
 import { getEventDates } from '../../utils/dates';
 import { type EventState, daysUntilStart, eventState } from '../../utils/event-state';
+import { type NextStep, callForPapersOpen, nextSteps, ticketOnSale } from '../../utils/next-step';
 import { eventPlace, type Attending } from '../../utils/place';
+import '../shared/add-to-calendar';
 import '../shared/hoverboard-icon';
-import { navigationLabel } from '../shell/navigation-label';
+import { nextStepLink } from '../shared/next-step-link';
 import { ThemedComponent } from '../themed-component';
 import '../ui/hb-button';
 import '../ui/hb-chip';
@@ -186,13 +194,25 @@ export class HomeHero extends ThemedComponent {
   @property({ type: Number, attribute: 'days-to-go' })
   accessor daysToGo = 0;
 
+  /** When the page was built, for the call for papers and ticket sales. The browser updates it. */
+  @property({ type: Number })
+  accessor time = currentTime();
+
+  /** Which features had content when the site was built. Buttons to the others are hidden. */
+  @property({ attribute: false })
+  accessor presence: ContentPresence = {};
+
+  @fromStore(selectTickets)
+  private accessor tickets!: TicketsState;
+
   // Site.json's on the server and in the first render, so hydration matches. A demo can change it.
   @state()
   private accessor where: Attending = { attendance: siteAttendance, location: siteLocation };
 
   // The event may have come closer, started or ended since the build.
   override firstUpdated() {
-    const now = new Date(currentTime());
+    this.time = currentTime();
+    const now = new Date(this.time);
     const dates = { startDate: eventDates.start, endDate: eventDates.end, timezone: timeZone };
     this.eventState = eventState(now, dates);
     this.daysToGo = daysUntilStart(now, dates);
@@ -263,68 +283,64 @@ export class HomeHero extends ThemedComponent {
   }
 
   private renderActions(): TemplateResult[] {
-    const highlights = html`
-      <hb-button variant="outlined" size="l" class="watch-video" @click="${this.playVideo}">
-        <hoverboard-icon slot="icon" name="play"></hoverboard-icon>
-        ${msg('View Highlights', { id: 'pages.home.view-highlights' })}
-      </hb-button>
-    `;
-
-    if (this.eventState === 'over') {
-      const recap = [
-        __HB_FEATURES__.videos
-          ? html`<hb-button
-              size="l"
-              variant="cta"
-              class="videos"
-              href="${featuredVideos.callToAction.link}"
-              target="_blank"
-            >
-              <hoverboard-icon slot="icon" name="movie"></hoverboard-icon>
-              ${msg('Watch the videos', { id: 'home.hero.videos' })}
-            </hb-button>`
-          : undefined,
-        __HB_FEATURES__.gallery
-          ? html`<hb-button
-              size="l"
-              variant="${__HB_FEATURES__.videos ? 'outlined' : 'cta'}"
-              class="photos"
-              href="${galleryBlock.callToAction.link}"
-              target="_blank"
-            >
-              <hoverboard-icon slot="icon" name="people"></hoverboard-icon>
-              ${msg('See the photos', { id: 'home.hero.photos' })}
-            </hb-button>`
-          : undefined,
-      ].filter((action) => action !== undefined);
-      return recap.length > 0 ? recap : [highlights];
+    const steps = nextSteps({
+      eventState: this.eventState,
+      presence: this.presence,
+      callForPapers: callForPapersOpen(this.time),
+      ticket: this.ticket,
+      attendance: this.where.attendance,
+      stream,
+    });
+    const actions = steps
+      .slice(0, 2)
+      .map((step, index) => this.renderStep(step, index === 0 ? 'cta' : 'outlined'));
+    if (actions.length < 2 && aboutBlock.callToAction.howItWas) {
+      actions.push(html`
+        <hb-button variant="outlined" size="l" class="watch-video" @click="${this.playVideo}">
+          <hoverboard-icon slot="icon" name="play"></hoverboard-icon>
+          ${msg('View Highlights', { id: 'pages.home.view-highlights' })}
+        </hb-button>
+      `);
     }
-
-    if (this.eventState === 'upcoming' && __HB_FEATURES__.tickets) {
-      return [
-        html`<hb-button size="l" variant="cta" class="buy-ticket" @click="${this.showTickets}">
-          <hoverboard-icon slot="icon" name="ticket"></hoverboard-icon>
-          ${msg('Buy ticket', { id: 'common.buy-ticket' })}
-        </hb-button>`,
-        highlights,
-      ];
+    if (this.eventState === 'upcoming') {
+      actions.push(html`
+        <add-to-calendar
+          size="l"
+          .event="${eventToCalendarEvent(this.where)}"
+          uid="${`${new URL(url).hostname}-${eventDates.start}`}"
+        ></add-to-calendar>
+      `);
     }
+    return actions;
+  }
 
-    if (__HB_FEATURES__.schedule) {
-      return [
-        html`<hb-button size="l" variant="cta" class="schedule" href="/schedule">
-          <hoverboard-icon slot="icon" name="calendar"></hoverboard-icon>
-          ${
-            this.eventState === 'live'
-              ? msg("See what's on now", { id: 'home.hero.live-schedule' })
-              : navigationLabel('schedule')
-          }
-        </hb-button>`,
-        highlights,
-      ];
+  private renderStep(step: NextStep, variant: 'cta' | 'outlined'): TemplateResult {
+    const { href, label, icon, external } = nextStepLink(step);
+    const content = html`<hoverboard-icon slot="icon" name="${icon}"></hoverboard-icon>${label}`;
+    // The tickets are on this page, so it scrolls to them.
+    if (step === 'tickets') {
+      return html`<hb-button
+        size="l"
+        variant="${variant}"
+        class="${STEP_CLASSES[step]}"
+        @click="${this.showTickets}"
+        >${content}</hb-button
+      >`;
     }
+    return html`<hb-button
+      size="l"
+      variant="${variant}"
+      class="${STEP_CLASSES[step]}"
+      href="${href}"
+      target="${ifDefined(external ? '_blank' : undefined)}"
+      >${content}</hb-button
+    >`;
+  }
 
-    return [highlights];
+  private get ticket(): Ticket | undefined {
+    return __HB_FEATURES__.tickets && this.tickets instanceof Success
+      ? ticketOnSale(this.tickets.data, this.time)
+      : undefined;
   }
 
   private readonly showTickets = () => {
@@ -332,12 +348,21 @@ export class HomeHero extends ThemedComponent {
   };
 
   private readonly playVideo = () => {
-    openVideoDialog({
-      title: aboutBlock.callToAction.howItWas.label,
-      youtubeId: aboutBlock.callToAction.howItWas.youtubeId,
-    });
+    const video = aboutBlock.callToAction.howItWas;
+    if (video) openVideoDialog({ title: video.label, youtubeId: video.youtubeId });
   };
 }
+
+const STEP_CLASSES: Record<NextStep, string> = {
+  submitTalk: 'submit-talk',
+  tickets: 'buy-ticket',
+  watchLive: 'watch-live',
+  onNow: 'schedule',
+  schedule: 'schedule',
+  updates: 'updates',
+  videos: 'videos',
+  photos: 'photos',
+};
 
 declare global {
   interface HTMLElementTagNameMap {

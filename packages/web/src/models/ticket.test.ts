@@ -18,6 +18,8 @@ describe('ticket', () => {
       'price',
       'primary',
       'regular',
+      'salesClose',
+      'salesOpen',
       'soldOut',
       'starts',
       'url',

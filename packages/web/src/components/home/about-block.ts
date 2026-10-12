@@ -129,7 +129,7 @@ export class AboutBlock extends ThemedComponent {
         <div class="text">
           <h2 class="band-title">${msg('About', { id: 'home.about-block.title' })}</h2>
           <p class="lede">${callToAction.featuredSessions.description}</p>
-          <p>${callToAction.howItWas.description}</p>
+          ${callToAction.howItWas ? html`<p>${callToAction.howItWas.description}</p>` : nothing}
           <div class="actions">
             <hb-button
               variant="outlined"
@@ -140,10 +140,14 @@ export class AboutBlock extends ThemedComponent {
               ${callToAction.featuredSessions.label}
               <hoverboard-icon slot="icon" name="arrow-right-circle"></hoverboard-icon>
             </hb-button>
-            <hb-button variant="outlined" class="watch-video" @click="${this.playVideo}">
-              <hoverboard-icon slot="icon" name="play"></hoverboard-icon>
-              ${callToAction.howItWas.label}
-            </hb-button>
+            ${
+              callToAction.howItWas
+                ? html`<hb-button variant="outlined" class="watch-video" @click="${this.playVideo}">
+                    <hoverboard-icon slot="icon" name="play"></hoverboard-icon>
+                    ${callToAction.howItWas.label}
+                  </hb-button>`
+                : nothing
+            }
           </div>
         </div>
 
@@ -163,10 +167,8 @@ export class AboutBlock extends ThemedComponent {
   }
 
   private readonly playVideo = () => {
-    openVideoDialog({
-      title: aboutBlock.callToAction.howItWas.label,
-      youtubeId: aboutBlock.callToAction.howItWas.youtubeId,
-    });
+    const video = aboutBlock.callToAction.howItWas;
+    if (video) openVideoDialog({ title: video.label, youtubeId: video.youtubeId });
   };
 }
 

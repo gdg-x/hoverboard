@@ -12,6 +12,8 @@ import { store } from '../store';
 import { queueSnackbar } from '../store/snackbars';
 import { BAND_TONES, bandTones } from '../styles/band';
 import { currentTime } from '../utils/clock';
+import { type ContentPresence, hasContent } from '../utils/content-presence';
+import type { Feature } from '../config/features';
 import { type EventState, eventState } from '../utils/event-state';
 import { scrollToElement } from '../utils/scrolling';
 
@@ -67,6 +69,16 @@ export class HomePage extends ThemedComponent {
 
   @property({ type: Number, attribute: 'days-to-go' })
   accessor daysToGo = 0;
+
+  /** When the page was built. The hero checks again in the browser. */
+  @property({ type: Number })
+  accessor time = currentTime();
+
+  /** Which features had content when the site was built. Blocks of the others are hidden. */
+  @property({ attribute: false })
+  accessor presence: ContentPresence = {};
+
+  private readonly has = (feature: Feature) => hasContent(this.presence, feature);
 
   @query('#tickets')
   private accessor ticketsBlock!: HTMLElement | null;
@@ -148,17 +160,19 @@ export class HomePage extends ThemedComponent {
   }
 
   override render() {
-    const tone = toneOf();
+    const tone = toneOf(this.has);
     return html`
       <home-hero
         event-state="${this.eventState}"
         days-to-go="${this.daysToGo}"
+        time="${this.time}"
+        .presence="${this.presence}"
         @show-tickets="${this.scrollToTickets}"
       ></home-hero>
       ${this.duringEvent ? html`<on-now-block class="band" data-tone="accent-1"></on-now-block>` : nothing}
       <about-block class="band" data-tone="${tone('about-block')}"></about-block>
       ${
-        __HB_FEATURES__.speakers
+        __HB_FEATURES__.speakers && this.has('speakers')
           ? html`<speakers-block
               class="band"
               data-tone="${tone('speakers-block')}"
@@ -167,7 +181,7 @@ export class HomePage extends ThemedComponent {
       }
       ${__HB_FEATURES__.subscribe ? html`<subscribe-block id="subscribe"></subscribe-block>` : nothing}
       ${
-        __HB_FEATURES__.tickets
+        __HB_FEATURES__.tickets && this.has('tickets')
           ? html`<tickets-block
               id="tickets"
               class="band"
@@ -176,7 +190,7 @@ export class HomePage extends ThemedComponent {
           : nothing
       }
       ${
-        __HB_FEATURES__.gallery
+        __HB_FEATURES__.gallery && this.has('gallery')
           ? html`<gallery-block class="band" data-tone="${tone('gallery-block')}"></gallery-block>`
           : nothing
       }
@@ -185,7 +199,7 @@ export class HomePage extends ThemedComponent {
         data-tone="${tone('about-organizer-block')}"
       ></about-organizer-block>
       ${
-        __HB_FEATURES__.videos
+        __HB_FEATURES__.videos && this.has('videos')
           ? html`<featured-videos
               class="band"
               data-tone="${tone('featured-videos')}"
@@ -193,7 +207,7 @@ export class HomePage extends ThemedComponent {
           : nothing
       }
       ${
-        __HB_FEATURES__.blog
+        __HB_FEATURES__.blog && this.has('blog')
           ? html`<latest-posts-block
               class="band"
               data-tone="${tone('latest-posts-block')}"
@@ -206,7 +220,7 @@ export class HomePage extends ThemedComponent {
           : nothing
       }
       ${
-        __HB_FEATURES__.partners
+        __HB_FEATURES__.partners && this.has('partners')
           ? html`<partners-block
               class="band"
               data-tone="${tone('partners-block')}"
@@ -218,20 +232,20 @@ export class HomePage extends ThemedComponent {
 }
 
 /**
- * Each band's tone by its place among the blocks the site shows, so turning a feature off never puts
- * two of the same color together. Subscribe has its own.
+ * Each band's tone by its place among the blocks the page shows, so turning a feature off, or a
+ * feature without content, never puts two of the same color together. Subscribe has its own.
  */
-const toneOf = () => {
+const toneOf = (has: (feature: Feature) => boolean) => {
   const bands = [
     'about-block',
-    __HB_FEATURES__.speakers && 'speakers-block',
-    __HB_FEATURES__.tickets && 'tickets-block',
-    __HB_FEATURES__.gallery && 'gallery-block',
+    __HB_FEATURES__.speakers && has('speakers') && 'speakers-block',
+    __HB_FEATURES__.tickets && has('tickets') && 'tickets-block',
+    __HB_FEATURES__.gallery && has('gallery') && 'gallery-block',
     'about-organizer-block',
-    __HB_FEATURES__.videos && 'featured-videos',
-    __HB_FEATURES__.blog && 'latest-posts-block',
+    __HB_FEATURES__.videos && has('videos') && 'featured-videos',
+    __HB_FEATURES__.blog && has('blog') && 'latest-posts-block',
     __HB_FEATURES__.map && 'map-block',
-    __HB_FEATURES__.partners && 'partners-block',
+    __HB_FEATURES__.partners && has('partners') && 'partners-block',
   ].filter((band) => typeof band === 'string');
   return (band: string) => BAND_TONES[bands.indexOf(band) % BAND_TONES.length] ?? 'surface';
 };
