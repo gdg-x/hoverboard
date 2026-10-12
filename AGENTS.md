@@ -41,7 +41,7 @@ Run from the repo root.
 | `npm run serve`                | Builds from the emulator data, then serves `dist` on the Hosting emulator at http://localhost:5000                                                                                                                                               |
 | `./hb doctor`                  | Checks the local setup, Firebase login, project, billing plan, deployed functions, deploy roles, service account keys and browser API keys                                                                                                       |
 | `./hb init`                    | Sets up a site: Firebase project and web app, event details, text and images in `packages/config`, the Firestore database, billing, starting content, backups, first deploy and GitHub repository. Changes production, so only run it when asked |
-| `./hb status`                  | Shows the project, versions, features, last deploy, the fork's changes and document counts (emulator, or `--production`)                                                                                                                         |
+| `./hb status`                  | Shows the project, versions, features, last deploy, the fork's changes, document counts and the site's stages (emulator, or `--production`)                                                                                                      |
 
 Before finishing a change, run `npm run lint` and `npm test`, or at least the affected Vitest project and type check.
 

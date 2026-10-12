@@ -161,7 +161,7 @@ export const createProgram = (): Command => {
     .command('status')
     .description(
       'Show the project, the site URL, the versions, the features, the last deploy, your ' +
-        'changes to Hoverboard and the document count of each collection.',
+        'changes to Hoverboard, the document count of each collection and the stages the site is in.',
     )
     .option(PRODUCTION, 'Count the documents in the Firebase project instead of the emulator.')
     .action(run(async () => (await import('./commands/status.js')).runStatus()));
