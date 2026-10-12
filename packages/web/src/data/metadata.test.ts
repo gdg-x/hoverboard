@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { attendingPage, title } from '../config/site';
-import { pageText } from '../utils/page-text';
+import { pageText, scheduleDetail } from '../utils/page-text';
 import { imageType, itemMetadata, pageMetadata } from './metadata';
 
 describe('pageMetadata', () => {
@@ -16,6 +16,20 @@ describe('pageMetadata', () => {
   it("uses the organizers' description for the attending page", () => {
     expect(attendingPage?.description).toBeTruthy();
     expect(pageMetadata('attending').description).toBe(attendingPage?.description);
+  });
+
+  it('puts what the page shows before its title, so pages of one kind differ', () => {
+    expect(pageMetadata('schedule', 'October 8').title).toBe(`October 8 | Schedule | ${title}`);
+  });
+});
+
+describe('scheduleDetail', () => {
+  it.each([
+    ['/schedule', {}, undefined],
+    ['/schedule/2026-10-08', { id: '2026-10-08' }, 'October 8'],
+    ['/schedule/my-schedule', {}, 'My Schedule'],
+  ])('names what %s shows', (pathname, params, detail) => {
+    expect(scheduleDetail({ pathname, search: '', params })).toBe(detail);
   });
 });
 

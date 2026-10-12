@@ -89,6 +89,22 @@ describe('schedule-day', () => {
     expect(blocks[1]!.style.gridArea).toBe('1 / 3 / 1 / 4');
   });
 
+  it.each([
+    [false, 2],
+    [true, 3],
+  ])(
+    'gives session titles a level under the page title (My Schedule: %s)',
+    async (onlyFeatured, level) => {
+      const { shadowRoot } = await render({ onlyFeatured });
+
+      expect(
+        deepQuerySelectorAll<SessionCard>(shadowRoot, 'session-card').map(
+          ({ headingLevel }) => headingLevel,
+        ),
+      ).toEqual([level, level]);
+    },
+  );
+
   it('names the tracks', async () => {
     const { shadowRoot } = await render();
 

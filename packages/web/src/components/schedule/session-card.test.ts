@@ -65,6 +65,12 @@ describe('session-card', () => {
     );
   });
 
+  it('can use an h2 title right under the page title', async () => {
+    await render({ headingLevel: 2 });
+
+    expect(screen.getByShadowRole('heading', { level: 2 })).toHaveTextContent('Example Session');
+  });
+
   it('shows its chips, speakers, and the track and duration', async () => {
     const { shadowRoot } = await render();
 

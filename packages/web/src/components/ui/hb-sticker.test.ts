@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import './hb-sticker';
 import type { HbSticker } from './hb-sticker';
@@ -22,5 +23,11 @@ describe('hb-sticker', () => {
         .querySelector<HTMLElement>('.sticker')!
         .style.getPropertyValue('--hb-sticker-tilt'),
     ).toBe('-3deg');
+  });
+
+  it('has no axe violations', async () => {
+    const { element } = await fixture(html`<hb-sticker accent="2">Live now</hb-sticker>`);
+
+    await expectNoAxeViolations(element);
   });
 });

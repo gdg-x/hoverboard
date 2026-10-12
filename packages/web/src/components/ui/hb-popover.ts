@@ -71,6 +71,7 @@ export class HbPopover extends LitElement {
     this.open = !this.open;
   }
 
+  /* eslint-disable lit-a11y/click-events-have-key-events -- clicks bubble from the trigger, which handles the keyboard */
   override render() {
     return html`
       <slot
@@ -81,6 +82,7 @@ export class HbPopover extends LitElement {
       <div class="panel"><slot></slot></div>
     `;
   }
+  /* eslint-enable lit-a11y/click-events-have-key-events */
 
   protected override updated(changed: PropertyValues<this>) {
     if (!changed.has('open')) return;

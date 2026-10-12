@@ -47,7 +47,12 @@ const web = {
       'packages/web/src/**/*.test.ts',
       'packages/web/build/**/*.test.ts',
     ],
-    exclude: [...configDefaults.exclude, '**/*.smoke.test.ts', '**/*.server.test.ts'],
+    exclude: [
+      ...configDefaults.exclude,
+      '**/*.smoke.test.ts',
+      '**/*.server.test.ts',
+      '**/*.emulator.test.ts',
+    ],
   },
 } satisfies TestProjectInlineConfiguration;
 
@@ -117,6 +122,8 @@ export default defineConfig({
           },
           include: ['packages/web/__tests__/hydration/*.hydration.test.ts'],
           exclude: configDefaults.exclude,
+          // axe on a whole page in jsdom takes seconds, more when other projects run alongside.
+          testTimeout: 30000,
         },
       },
       {
@@ -145,6 +152,27 @@ export default defineConfig({
           environment: 'node',
           setupFiles: ['./packages/web/__tests__/server.setup.ts'],
           include: ['packages/web/src/**/*.server.test.ts'],
+        },
+      },
+      {
+        // Checks that FIRESTORE_TARGET=sample reads what the emulator seeded with the sample data does.
+        plugins: [decorators(), siteModule(siteConfig, pluginPaths)],
+        test: {
+          name: 'Sample data',
+          environment: 'node',
+          globalSetup: ['./packages/web/__tests__/emulator.global-setup.ts'],
+          include: ['packages/web/src/**/*.emulator.test.ts'],
+        },
+      },
+      {
+        // Builds the demo and minimal sites, serves them on the Hosting emulator and runs axe in Chromium.
+        test: {
+          name: 'A11y',
+          environment: 'node',
+          globalSetup: ['./packages/web/__tests__/a11y/global-setup.ts'],
+          include: ['packages/web/__tests__/a11y/*.a11y.test.ts'],
+          testTimeout: 60000,
+          maxConcurrency: 6,
         },
       },
       {

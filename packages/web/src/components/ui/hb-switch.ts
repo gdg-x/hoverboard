@@ -114,6 +114,7 @@ export class HbSwitch extends LitElement {
     this.input.checked = this.checked;
   }
 
+  /* eslint-disable lit-a11y/role-has-required-aria-attrs -- a native checkbox has its checked state, and ARIA in HTML says not to add aria-checked */
   override render() {
     return html`
       <label>
@@ -130,6 +131,7 @@ export class HbSwitch extends LitElement {
       </label>
     `;
   }
+  /* eslint-enable lit-a11y/role-has-required-aria-attrs */
 
   // `change` does not leave the shadow root, so the switch fires its own.
   private onChange = (event: Event) => {

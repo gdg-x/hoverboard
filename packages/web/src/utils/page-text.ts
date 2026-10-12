@@ -1,5 +1,8 @@
 import { msg } from '@lit/localize';
+import { navigationLabel } from '../components/shell/navigation-label';
 import { attendingPage } from '../config/site';
+import { getScheduleDay } from './dates';
+import type { RouteLocation } from './navigation';
 
 export type Page =
   | 'attending'
@@ -78,3 +81,13 @@ const PAGES: Record<Page, () => PageText> = {
 
 /** A page's title and meta description in the current locale. Call it when rendering. */
 export const pageText = (page: Page): PageText => PAGES[page]();
+
+/** A page's title, after what it shows when that differs between pages, such as `October 13 | Schedule`. */
+export const pageTitle = (page: Page, detail?: string): string =>
+  detail ? `${detail} | ${pageText(page).title}` : pageText(page).title;
+
+/** What a schedule page shows, for its title: a day or My Schedule. `/schedule` has none. */
+export const scheduleDetail = ({ pathname, params }: RouteLocation): string | undefined => {
+  if (pathname.endsWith('/my-schedule')) return navigationLabel('mySchedule');
+  return params['id'] ? getScheduleDay(params['id']) : undefined;
+};

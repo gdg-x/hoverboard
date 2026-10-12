@@ -1,6 +1,6 @@
 import { Pending } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
-import { css, html, nothing } from 'lit';
+import { css, html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/schedule/schedule-tabs';
@@ -11,6 +11,7 @@ import type { HbSwitch } from '../components/ui/hb-switch';
 import type { Filter } from '../models/filter';
 import type { FilterGroup } from '../models/filter-group';
 import type { RouteLocation } from '../utils/navigation';
+import { scheduleDetail } from '../utils/page-text';
 import { selectFilters } from '../store/filters';
 import { type ScheduleState, selectScheduleState } from '../store/schedule';
 import { selectFilterGroups } from '../store/sessions/selectors';
@@ -114,14 +115,17 @@ export class SchedulePage extends ThemedComponent {
   @state()
   private accessor visitorTimeZone: string | undefined;
 
-  constructor() {
-    super();
-    new PageMetadataController(this, 'schedule');
-  }
+  private readonly metadata = new PageMetadataController(this, 'schedule', () =>
+    this.location ? scheduleDetail(this.location) : undefined,
+  );
 
   override firstUpdated() {
     this.visitorTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     loadLocalTime();
+  }
+
+  override updated(changed: PropertyValues<this>) {
+    if (changed.has('location')) this.metadata.update();
   }
 
   override render() {

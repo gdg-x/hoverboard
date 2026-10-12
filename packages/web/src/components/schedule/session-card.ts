@@ -172,6 +172,9 @@ export class SessionCard extends ThemedComponent {
   /** The time, which the schedule sets in the browser each minute. Without it, the card isn't live. */
   @property({ attribute: false })
   accessor now: Date | undefined;
+  /** The title's heading level: 2 right under the page title, 3 under a section heading. */
+  @property({ type: Number, attribute: 'heading-level' })
+  accessor headingLevel: 2 | 3 = 3;
 
   // Depends on the time, so it is only set in the browser.
   @state()
@@ -195,6 +198,7 @@ export class SessionCard extends ThemedComponent {
     ].filter(Boolean);
     const speakers = session.speakers?.filter((speaker) => speaker.name) ?? [];
     const live = !!this.now && isLive(session, this.now.getTime()) && !!sessionStream(session);
+    const title = html`<a href="${sessionPath(session.id)}">${session.title}</a>`;
 
     return html`
       <article
@@ -206,7 +210,11 @@ export class SessionCard extends ThemedComponent {
             ? html`<session-chips class="chips" .session="${session}"></session-chips>`
             : nothing
         }
-        <h3 class="title"><a href="${sessionPath(session.id)}">${session.title}</a></h3>
+        ${
+          this.headingLevel === 2
+            ? html`<h2 class="title">${title}</h2>`
+            : html`<h3 class="title">${title}</h3>`
+        }
         ${
           speakers.length
             ? html`<ul class="speakers">

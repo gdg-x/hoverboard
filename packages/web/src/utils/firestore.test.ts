@@ -172,6 +172,26 @@ describe('subscribeToCollection', () => {
 
     expect(query).toHaveBeenCalledWith(undefined, customOrder);
   });
+
+  it.each([
+    [true, 0],
+    [false, 2],
+  ])(
+    'keeps the built content on an empty result from the cache (%s), but not from the server',
+    (fromCache, calls) => {
+      const onNext = vi.fn();
+      vi.mocked(onSnapshot).mockImplementation((_query, nextOrObserver) => {
+        const snapshot = { docs: [], empty: true, metadata: { fromCache } };
+        (nextOrObserver as unknown as (snapshot: unknown) => void)(snapshot);
+        return vi.fn();
+      });
+
+      subscribeToCollection('sessions', vi.fn(), onNext, vi.fn());
+      subscribeToCollectionGroup('members', vi.fn(), onNext, vi.fn());
+
+      expect(onNext).toHaveBeenCalledTimes(calls);
+    },
+  );
 });
 
 describe('subscribeToCollectionGroup', () => {

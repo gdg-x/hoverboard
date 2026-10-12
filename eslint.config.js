@@ -11,6 +11,7 @@ import astroPlugin from 'eslint-plugin-astro';
 import { createNodeResolver, importX } from 'eslint-plugin-import-x';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import litPlugin from 'eslint-plugin-lit';
+import litA11yPlugin from 'eslint-plugin-lit-a11y';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
 import wcPlugin from 'eslint-plugin-wc';
 import globals from 'globals';
@@ -113,7 +114,11 @@ export default defineConfig([
   // Lit components and the web app's code
   {
     files: ['packages/web/src/**/*.ts'],
-    extends: [litPlugin.configs['flat/recommended'], wcPlugin.configs['flat/recommended']],
+    extends: [
+      litPlugin.configs['flat/recommended'],
+      wcPlugin.configs['flat/recommended'],
+      litA11yPlugin.configs.recommended,
+    ],
   },
   {
     files: ['packages/web/src/**/*.ts'],
@@ -133,11 +138,23 @@ export default defineConfig([
     rules: {
       // Vitest takes a message as the second argument.
       'vitest/valid-expect': ['error', { maxArgs: 2 }],
+      'vitest/expect-expect': [
+        'error',
+        { assertFunctionNames: ['expect', 'assert', 'expectNoAxeViolations'] },
+      ],
       'vitest/max-expects': ['warn', { max: 10 }],
       'vitest/unbound-method': 'warn',
       // Replaced by vitest/unbound-method, which allows `expect(mock.method)`.
       '@typescript-eslint/unbound-method': 'off',
       'testing-library/no-node-access': 'error',
+    },
+  },
+
+  // A11y tests drive Playwright, whose `page.getByRole()` testing-library mistakes for its own.
+  {
+    files: ['packages/web/__tests__/a11y/**/*.ts'],
+    rules: {
+      'testing-library/prefer-screen-queries': 'off',
     },
   },
 

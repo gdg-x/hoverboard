@@ -109,6 +109,7 @@ export class HbMenu extends LitElement {
     document.removeEventListener('pointerdown', this.onPointerDown, true);
   }
 
+  /* eslint-disable lit-a11y/click-events-have-key-events -- clicks bubble from the trigger and items, which handle the keyboard */
   override render() {
     return html`
       <slot
@@ -127,6 +128,7 @@ export class HbMenu extends LitElement {
       </div>
     `;
   }
+  /* eslint-enable lit-a11y/click-events-have-key-events */
 
   protected override updated(changed: PropertyValues<this>) {
     if (changed.has('open')) this.updateTrigger();

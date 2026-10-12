@@ -366,6 +366,8 @@ export class ScheduleDay extends ThemedComponent {
     const filtered = this.selectedFilters.length > 0;
     const visible = day.timeslots.map((timeslot) => this.visibleBlocks(timeslot, columns));
     const now = this.nowPosition(day);
+    // My Schedule shows each day under its date, an h2.
+    const headingLevel = this.onlyFeatured ? 3 : 2;
 
     if (filtered && !this.onlyFeatured && visible.every((blocks) => blocks.length === 0)) {
       return html`
@@ -464,6 +466,7 @@ export class ScheduleDay extends ThemedComponent {
                         html`<session-card
                           .session="${session}"
                           .now="${this.now}"
+                          heading-level="${headingLevel}"
                         ></session-card>`,
                     )}
                   </div>

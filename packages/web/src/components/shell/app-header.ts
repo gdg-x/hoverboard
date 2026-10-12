@@ -83,6 +83,8 @@ export class AppHeader extends ThemedComponent {
       display: flex;
       flex: var(--hb-header-side-flex, 0 1 auto);
       align-items: center;
+      /* Shrinks the logo, not the actions, on narrow screens (WCAG 1.4.10). */
+      min-inline-size: 0;
       min-block-size: var(--hb-target-min);
       margin-inline-end: auto;
       color: inherit;
@@ -271,14 +273,14 @@ export class AppHeader extends ThemedComponent {
         ?open="${this.menuOpen}"
         @close="${this.closeMenu}"
       >
-        <nav aria-label="${label}" @click="${this.closeMenu}">${this.renderLinks()}</nav>
+        <nav aria-label="${label}">${this.renderLinks(this.closeMenu)}</nav>
         ${this.renderCallToAction({ inSheet: true })}
         <app-install></app-install>
       </hb-dialog>
     `;
   }
 
-  private renderLinks() {
+  private renderLinks(onClick?: () => void) {
     const routeName = routeNameFor(this.path);
     return html`
       <ul>
@@ -288,6 +290,7 @@ export class AppHeader extends ThemedComponent {
               <a
                 href="${nav.permalink}"
                 aria-current="${nav.route === routeName ? 'page' : nothing}"
+                @click="${onClick}"
                 >${navigationLabel(nav.route)}</a
               >
             </li>

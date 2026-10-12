@@ -21,6 +21,7 @@ import {
   selectPreviousSpeakersState,
 } from '../store/previous-speakers';
 import { updateImageMetadata } from '../utils/metadata';
+import { pageTitle } from '../utils/page-text';
 import { profile } from '../styles/profile';
 import { fromStore } from '../controllers/from-store';
 import { ThemedComponent } from '../components/themed-component';
@@ -59,7 +60,7 @@ export class PreviousSpeakerPage extends ThemedComponent {
       if (!this.speaker) {
         goto('/404');
       } else {
-        updateImageMetadata(this.speaker.name, this.speaker.bio, {
+        updateImageMetadata(pageTitle('previousSpeakers', this.speaker.name), this.speaker.bio, {
           image: this.speaker.photoUrl,
           imageAlt: this.speaker.name,
         });

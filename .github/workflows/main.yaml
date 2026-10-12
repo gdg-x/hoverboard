@@ -49,7 +49,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [Web, Server, Hydration, Functions, CLI, Firestore, Translations]
+        project: [Web, Server, Hydration, Functions, CLI, Firestore, 'Sample data', Translations]
 
     steps:
       - name: Checkout the repo
@@ -71,7 +71,7 @@ jobs:
           node-version-file: package.json
 
       - name: Setup Java (required by the Firestore emulator)
-        if: matrix.project == 'Firestore'
+        if: matrix.project == 'Firestore' || matrix.project == 'Sample data'
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
           distribution: temurin
@@ -81,7 +81,7 @@ jobs:
         run: npm ci
 
       - name: Running ${{ matrix.project }} tests
-        run: npx vitest run --project ${{ matrix.project }}
+        run: npx vitest run --project "${{ matrix.project }}"
 
   # Builds the site with each feature off, and builds a minimal site.
   smoke:
@@ -113,11 +113,57 @@ jobs:
       - name: Running smoke tests
         run: npx vitest run --project 'Smoke*'
 
-  # One required check that passes only when every test project and the smoke tests pass.
+  # Builds the demo site with the sample data and a minimal site, and runs axe on them in Chromium.
+  a11y:
+    runs-on: ubuntu-latest
+    name: a11y
+
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Cache node modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Setup node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: package.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cache the Playwright browser
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('packages/web/package-lock.json') }}
+
+      - name: Install Chromium
+        run: npx --prefix packages/web playwright install --with-deps chromium
+
+      - name: Running A11y tests
+        run: npx vitest run --project A11y
+
+      - name: Upload the axe results and screenshots
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: a11y-results
+          path: packages/web/test-results/a11y
+
+  # One required check that passes only when every test project, the smoke tests and the A11y tests pass.
   test:
     runs-on: ubuntu-latest
     name: test
-    needs: [test-project, smoke]
+    needs: [test-project, smoke, a11y]
     if: always()
 
     steps:
@@ -125,3 +171,4 @@ jobs:
         run: |
           test "${{ needs.test-project.result }}" = success
           test "${{ needs.smoke.result }}" = success
+          test "${{ needs.a11y.result }}" = success

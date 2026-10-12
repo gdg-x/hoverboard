@@ -1,5 +1,7 @@
 import type { Firestore } from 'firebase-admin/firestore';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import sampleBlog from '../../../../docs/sample-data/collections/blog.json';
+import sampleSpeakers from '../../../../docs/sample-data/collections/speakers.json';
 import { setFeatures } from '../../__tests__/helpers/features';
 import { connectFirestore } from './firestore';
 import { loadContent, readContent } from './content';
@@ -247,5 +249,22 @@ describe('loadContent', () => {
     expect(connectFirestore).not.toHaveBeenCalled();
     expect(content.speakers).toEqual([]);
     expect(content).not.toHaveProperty('teams');
+  });
+
+  it('reads docs/sample-data without Firestore with FIRESTORE_TARGET=sample', async () => {
+    vi.stubEnv('FIRESTORE_TARGET', 'sample');
+    vi.stubEnv('DEV', true);
+    vi.mocked(connectFirestore).mockClear();
+
+    const content = await loadContent();
+
+    expect(connectFirestore).not.toHaveBeenCalled();
+    expect(content.speakers?.length).toBe(Object.keys(sampleSpeakers).length);
+    expect(content.blog?.map(({ published }) => published)).toEqual(
+      Object.values(sampleBlog)
+        .map(({ published }) => published)
+        .sort()
+        .reverse(),
+    );
   });
 });

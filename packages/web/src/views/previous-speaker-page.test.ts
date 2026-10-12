@@ -67,10 +67,14 @@ describe('previous-speaker-page', () => {
       speaker.sessions,
     );
     expect(deepQuerySelector(shadowRoot, 'previous-speakers-block')).not.toBeNull();
-    expect(updateImageMetadata).toHaveBeenCalledWith('Ada Lovelace', 'Speaker bio', {
-      image: '/ada.jpg',
-      imageAlt: 'Ada Lovelace',
-    });
+    expect(updateImageMetadata).toHaveBeenCalledWith(
+      'Ada Lovelace | Previous Speakers',
+      'Speaker bio',
+      {
+        image: '/ada.jpg',
+        imageAlt: 'Ada Lovelace',
+      },
+    );
   });
 
   it('links back to all previous speakers', async () => {

@@ -1,6 +1,7 @@
 import { fireEvent, within } from '@testing-library/dom';
 import { html } from 'lit';
 import { describe, expect, it, vi } from 'vitest';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import './hb-text-field';
 import type { HbTextField } from './hb-text-field';
@@ -94,5 +95,23 @@ describe('hb-text-field', () => {
     await element.updateComplete;
 
     expect(element.checkValidity()).toBe(true);
+  });
+
+  it.each([
+    ['required', html`<hb-text-field label="Email" type="email" required></hb-text-field>`],
+    ['a textarea', html`<hb-text-field label="Comment" type="textarea"></hb-text-field>`],
+    [
+      'invalid',
+      html`<hb-text-field
+        label="Email"
+        hint="We never share it"
+        error="Enter an email"
+      ></hb-text-field>`,
+    ],
+    ['disabled', html`<hb-text-field label="Email" disabled></hb-text-field>`],
+  ])('has no axe violations when %s', async (_state, template) => {
+    const { element } = await fixture(template);
+
+    await expectNoAxeViolations(element);
   });
 });

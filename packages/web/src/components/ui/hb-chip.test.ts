@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import './hb-chip';
 import type { HbChip } from './hb-chip';
@@ -30,5 +31,16 @@ describe('hb-chip', () => {
     await element.updateComplete;
 
     expect(button).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it.each([
+    ['a label', html`<hb-chip accent="1">Web</hb-chip>`],
+    ['a link', html`<hb-chip href="/speakers?tag=web">Web</hb-chip>`],
+    ['a filter', html`<hb-chip filter>Web</hb-chip>`],
+    ['a selected filter', html`<hb-chip filter selected>Web</hb-chip>`],
+  ])('has no axe violations as %s', async (_state, template) => {
+    const { element } = await fixture(template);
+
+    await expectNoAxeViolations(element);
   });
 });

@@ -130,6 +130,10 @@ export class SpeakerCard extends ThemedComponent {
   @property({ attribute: 'transition-name' })
   accessor transitionName: string | undefined;
 
+  /** The name's heading level: 2 right under the page title, 3 under a section heading. */
+  @property({ type: Number, attribute: 'heading-level' })
+  accessor headingLevel: 2 | 3 = 3;
+
   override render() {
     const { speaker } = this;
     const affiliations = (speaker.badges ?? [])
@@ -165,7 +169,11 @@ export class SpeakerCard extends ThemedComponent {
             )}
           </div>
           <div class="text">
-            <h3 class="name">${speaker.name}</h3>
+            ${
+              this.headingLevel === 2
+                ? html`<h2 class="name">${speaker.name}</h2>`
+                : html`<h3 class="name">${speaker.name}</h3>`
+            }
             ${meta ? html`<p class="meta">${meta}</p>` : nothing}
           </div>
         </div>

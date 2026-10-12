@@ -15,3 +15,4 @@
 ## Maintainers
 
 - [Releases](releases.md)
+- [Accessibility](ACCESSIBILITY.md)

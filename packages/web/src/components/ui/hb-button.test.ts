@@ -1,6 +1,7 @@
 import { fireEvent, within } from '@testing-library/dom';
 import { type CSSResult, html, type TemplateResult } from 'lit';
 import { describe, expect, it, vi } from 'vitest';
+import { expectNoAxeViolations } from '../../../__tests__/helpers/axe';
 import { fixture } from '../../../__tests__/helpers/fixtures';
 import './hb-button';
 import type { HbButton } from './hb-button';
@@ -94,5 +95,20 @@ describe('hb-button', () => {
     ).toMatch(
       /:host\(\[variant='cta'\]\)\s*\{\s*--hb-button-background: var\(--hb-cta-background\)/,
     );
+  });
+
+  it.each([
+    ['a button', html`<hb-button>Save</hb-button>`],
+    ['a link', html`<hb-button href="/tickets">Tickets</hb-button>`],
+    ['disabled', html`<hb-button disabled>Save</hb-button>`],
+    ['a disabled link', html`<hb-button href="/tickets" disabled>Sold out</hb-button>`],
+    [
+      'an open menu trigger',
+      html`<hb-button .expanded=${true} .haspopup=${'menu'}>More</hb-button>`,
+    ],
+  ])('has no axe violations as %s', async (_state, template) => {
+    const { element } = await render(template);
+
+    await expectNoAxeViolations(element);
   });
 });

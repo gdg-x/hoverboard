@@ -14,6 +14,7 @@ import { scheduleTracks } from '../config/site';
 import { scheduleErrors } from '../schedule/build-schedule';
 import type { Content } from '../store/content';
 import { connectFirestore } from './firestore';
+import { sampleFirestore } from './sample';
 
 const withId = (doc: QueryDocumentSnapshot): DocumentData => ({ ...doc.data(), id: doc.id });
 
@@ -143,11 +144,14 @@ let content: Promise<Partial<Content>> | undefined;
 
 /**
  * The content for this build, read once and shared by every page. Development reads it fresh.
- * `FIRESTORE_TARGET=none` builds without Firestore and without content.
+ * `FIRESTORE_TARGET=none` builds without Firestore and without content, and `sample` reads
+ * `docs/sample-data` instead of Firestore.
  */
 export const loadContent = async (): Promise<Partial<Content>> => {
   if (env['FIRESTORE_TARGET'] === 'none') return emptyContent();
-  if (import.meta.env.DEV) return readContent(await connectFirestore());
-  content ??= connectFirestore().then(readContent);
+  const connect = async () =>
+    env['FIRESTORE_TARGET'] === 'sample' ? sampleFirestore() : connectFirestore();
+  if (import.meta.env.DEV) return readContent(await connect());
+  content ??= connect().then(readContent);
   return content;
 };

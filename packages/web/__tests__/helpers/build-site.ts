@@ -18,6 +18,8 @@ const webRoot = fileURLToPath(new URL('../..', import.meta.url));
 export interface SiteBuild {
   status: number | null;
   stderr: string;
+  /** The copy's `dist` folder. */
+  dist: string;
   /** The HTML files, relative to `dist`, sorted. */
   pages: string[];
   /** The names of the JavaScript chunks in `dist/_astro`, without their hashes. */
@@ -27,10 +29,14 @@ export interface SiteBuild {
 }
 
 /**
- * Builds a copy of packages/web without Firestore content, next to the site config that
- * `writeConfig` writes to the directory it gets, so the real dist is untouched.
+ * Builds a copy of packages/web without Firestore content, or with the sample data with
+ * `firestoreTarget: 'sample'`, next to the site config that `writeConfig` writes to the directory it
+ * gets, so the real dist is untouched.
  */
-export const buildSite = (writeConfig: (configDir: string) => void): SiteBuild => {
+export const buildSite = (
+  writeConfig: (configDir: string) => void,
+  { firestoreTarget = 'none' }: { firestoreTarget?: 'none' | 'sample' } = {},
+): SiteBuild => {
   // macOS links /var to /private/var. Astro needs its root as a real path to match module paths.
   const root = realpathSync(mkdtempSync(join(tmpdir(), 'hoverboard-build-')));
   const web = join(root, 'packages/web');
@@ -44,11 +50,13 @@ export const buildSite = (writeConfig: (configDir: string) => void): SiteBuild =
   }
   // The build reads the collection registry from packages/storage.
   symlinkSync(join(webRoot, '../storage'), join(root, 'packages/storage'), 'junction');
+  mkdirSync(join(root, 'docs'));
+  symlinkSync(join(webRoot, '../../docs/sample-data'), join(root, 'docs/sample-data'), 'junction');
   writeConfig(join(root, 'packages/config'));
 
   const env = {
     ...Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('VITEST'))),
-    FIRESTORE_TARGET: 'none',
+    FIRESTORE_TARGET: firestoreTarget,
   };
   const { status, stderr } = spawnSync('npm', ['run', 'build'], {
     cwd: web,
@@ -61,6 +69,7 @@ export const buildSite = (writeConfig: (configDir: string) => void): SiteBuild =
   return {
     status,
     stderr,
+    dist,
     pages: files.filter((file) => file.endsWith('.html')).sort(),
     chunks: files
       .filter((file) => /^_astro[\\/][^\\/]+\.js$/.test(file))

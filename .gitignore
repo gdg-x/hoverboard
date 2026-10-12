@@ -73,6 +73,7 @@ node_modules/
 
 # Custom
 dist/
+test-results/
 .astro/
 packages/web/src/generated/
 serviceAccount.json
