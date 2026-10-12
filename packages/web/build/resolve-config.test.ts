@@ -7,7 +7,14 @@ import { FEATURES, type Feature } from '../src/config/features';
 import { festival } from '../src/themes/festival';
 import { THEMES } from '../src/themes/index';
 import { COLOR_ROLES } from '../src/themes/tokens';
-import { ARCHIVE_OFF, ConfigError, configPaths, loadConfig, resolveConfig } from './resolve-config';
+import {
+  ARCHIVE_OFF,
+  ConfigError,
+  configPaths,
+  loadConfig,
+  resolveConfig,
+  withDevBar,
+} from './resolve-config';
 import {
   buildMarkdown,
   customCss,
@@ -119,6 +126,27 @@ describe('resolveConfig', () => {
     expect(development.site).toEqual(production.site);
     expect(development.resources).toEqual(production.resources);
     expect(development.NODE_ENV).toBe('development');
+  });
+});
+
+describe('withDevBar', () => {
+  const config = resolveConfig({
+    paths: makePaths({ site: { features: { demo: false } } }),
+    nodeEnv: 'production',
+  });
+
+  it('turns the bar on for a build that reads the emulator', () => {
+    const dev = withDevBar(config, undefined);
+
+    expect(dev.site.features.demo).toBe(true);
+    expect({ ...dev.site.features, demo: false }).toEqual(config.site.features);
+    expect(config.site.features.demo).toBe(false);
+  });
+
+  it('leaves the features alone for every other target', () => {
+    for (const target of ['production', 'none', 'sample']) {
+      expect(withDevBar(config, target)).toBe(config);
+    }
   });
 });
 

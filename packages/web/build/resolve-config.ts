@@ -597,3 +597,15 @@ export const resolveConfig = (options: ResolveOptions = {}): SiteConfig => {
   for (const warning of warnings) console.warn(`Site config: ${warning}`);
   return config;
 };
+
+/**
+ * Turns `demo` on for a build that reads the emulator (`FIRESTORE_TARGET` unset), as `npm start`
+ * and `npm run serve` do, so every site gets the dev bar there. Deploys read production.
+ */
+export const withDevBar = (config: SiteConfig, firestoreTarget: string | undefined): SiteConfig =>
+  firestoreTarget
+    ? config
+    : {
+        ...config,
+        site: { ...config.site, features: { ...config.site.features, demo: true } },
+      };
