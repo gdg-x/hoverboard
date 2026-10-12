@@ -27,8 +27,22 @@ export class SpeakersBlock extends ThemedComponent {
 
       .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(calc(14rem * var(--hb-card-scale, 1)), 1fr)
+        );
         gap: var(--hb-space-5);
+      }
+
+      /* Moved, not reordered, so reading order stays the grid's. */
+      @container (width >= 480px) {
+        .grid {
+          padding-block-end: var(--hb-card-stagger, 0px);
+        }
+
+        .grid > :nth-child(even) {
+          translate: 0 var(--hb-card-stagger, 0px);
+        }
       }
 
       @container (width < 480px) {

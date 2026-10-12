@@ -30,13 +30,36 @@ export class GalleryBlock extends ThemedComponent {
         grid-column: span 2;
       }
 
+      .photos li {
+        position: relative;
+        rotate: calc(var(--hb-photo-tilt, 0deg) * var(--hb-decorations, 1));
+      }
+
+      .photos li:nth-child(even) {
+        rotate: calc(var(--hb-photo-tilt, 0deg) * -1 * var(--hb-decorations, 1));
+      }
+
+      /* The theme's strip of tape across the top of each photo. */
+      .photos li::after {
+        content: '';
+        position: absolute;
+        inset-block-start: -8px;
+        inset-inline-start: calc(50% - 32px);
+        inline-size: 64px;
+        block-size: 18px;
+        background: var(--hb-photo-tape, none);
+        rotate: -4deg;
+        pointer-events: none;
+      }
+
       .photo {
         display: block;
         inline-size: 100%;
         block-size: 100%;
+        padding: var(--hb-photo-frame, 0);
         border: var(--hb-border-width) solid var(--hb-border-color);
         border-radius: var(--hb-radius-m);
-        background-color: var(--hb-color-surface-container);
+        background-color: var(--hb-photo-frame-color);
         object-fit: cover;
       }
 

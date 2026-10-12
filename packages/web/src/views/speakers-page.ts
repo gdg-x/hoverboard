@@ -43,7 +43,10 @@ export class SpeakersPage extends ThemedComponent {
 
       .speakers {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(min(100%, 15rem * var(--hb-card-scale, 1)), 1fr)
+        );
         gap: var(--hb-space-5);
         margin: var(--hb-space-5) 0 0;
         padding: 0;

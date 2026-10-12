@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { primitive } from '../../styles/shared';
+import { displayFont, primitive } from '../../styles/shared';
 
 /**
  * A rotated label for status and fun, such as "Sold out" or "Live now". It always has text, so it
@@ -17,17 +17,19 @@ export class HbSticker extends LitElement {
       }
 
       .sticker {
-        --hb-sticker-rotate: calc(var(--hb-sticker-tilt) * var(--hb-decorations, 1));
+        --hb-sticker-rotate: calc(
+          var(--hb-sticker-tilt) * var(--hb-sticker-tilt-scale, 1) * var(--hb-decorations, 1)
+        );
 
         display: inline-block;
         padding: var(--hb-space-1) var(--hb-space-3);
         border: var(--hb-border-width) solid var(--hb-border-color);
-        border-radius: var(--hb-radius-full);
+        border-radius: var(--hb-radius-control);
         background-color: var(--hb-color-accent-3-container);
         color: var(--hb-color-on-accent-3-container);
         box-shadow: var(--hb-shadow-button);
-        font: 700 var(--hb-text-xs) / 1.4 var(--hb-font-display);
-        letter-spacing: 0.02em;
+        ${displayFont('heading', 'xs', 1.4, 0.02, 'accent')};
+        clip-path: var(--hb-sticker-shape, none);
         rotate: var(--hb-sticker-rotate);
       }
 

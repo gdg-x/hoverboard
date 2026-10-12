@@ -1,11 +1,28 @@
-import type { Theme } from './tokens';
+import { type Theme, containerTones } from './tokens';
 
 // Modeled on Apple's Liquid Glass: frosted, translucent panels over soft color glows, large round corners and system colors.
 const glow = (accent: string, size: string, position: string, amount: string) =>
   `radial-gradient(${size} at ${position}, color-mix(in srgb, var(--hb-color-${accent}) ${amount}, transparent), transparent 70%) fixed`;
 
+// The light on the glass: bright along the top edge, a faint shade along the bottom.
+const rim = (amount: number) =>
+  `inset 0 1px 0 color-mix(in srgb, light-dark(var(--hb-color-surface-bright), var(--hb-color-on-surface)) ${amount}%, transparent), inset 0 -1px 0 color-mix(in srgb, var(--hb-color-ink) 6%, transparent)`;
+
 export const glass: Theme = {
+  colorScheme: 'system',
   fonts: { display: 'inter', body: 'inter', mono: 'jetbrains-mono' },
+  share: {
+    bar: 0,
+    glows: [
+      { role: 'accent1', at: '0% 0%', opacity: 0.3 },
+      { role: 'accent2', at: '100% 30%', opacity: 0.22 },
+      { role: 'accent4', at: '30% 100%', opacity: 0.22 },
+    ],
+    avatarShadow: { x: 0, y: 16, blur: 48, role: 'scrim' },
+    avatarGrayscale: false,
+    avatarTape: false,
+    avatarTilt: 0,
+  },
   light: {
     primary: '#0066cc',
     onPrimary: '#ffffff',
@@ -77,19 +94,24 @@ export const glass: Theme = {
     onAccent4Container: '#d4f5dc',
   },
   style: {
-    radiusS: '12px',
-    radiusM: '22px',
-    radiusL: '32px',
+    displayWeight: '700',
+    headingWeight: '600',
+    displayTracking: '-0.03em',
+    displayLeading: '1',
+    displayStyle: 'normal',
+    heroTitleStyle: 'normal',
+    accentScale: '1',
+    displayScale: '0.9',
+    radiusS: '14px',
+    radiusM: '24px',
+    radiusL: '36px',
     radiusAvatar: '50%',
+    radiusControl: 'var(--hb-radius-full)',
     borderWidth: '1px',
     borderColor: 'color-mix(in srgb, var(--hb-color-ink) 12%, transparent)',
-    // A bright rim on the top edge, where the light hits the glass, over a soft shadow.
-    shadowCard:
-      'inset 0 1px 0 color-mix(in srgb, light-dark(var(--hb-color-surface-bright), var(--hb-color-on-surface)) 60%, transparent), 0 8px 32px color-mix(in srgb, var(--hb-color-scrim) 30%, transparent)',
-    shadowCardHover:
-      'inset 0 1px 0 color-mix(in srgb, light-dark(var(--hb-color-surface-bright), var(--hb-color-on-surface)) 70%, transparent), 0 14px 44px color-mix(in srgb, var(--hb-color-scrim) 40%, transparent)',
-    shadowButton:
-      'inset 0 1px 0 color-mix(in srgb, light-dark(var(--hb-color-surface-bright), var(--hb-color-on-surface)) 45%, transparent), 0 4px 16px color-mix(in srgb, var(--hb-color-scrim) 25%, transparent)',
+    shadowCard: `${rim(60)}, 0 8px 32px color-mix(in srgb, var(--hb-color-scrim) 30%, transparent)`,
+    shadowCardHover: `${rim(70)}, 0 14px 44px color-mix(in srgb, var(--hb-color-scrim) 40%, transparent)`,
+    shadowButton: `${rim(45)}, 0 4px 16px color-mix(in srgb, var(--hb-color-scrim) 25%, transparent)`,
     pressOffset: '0px',
     ctaBackground: 'var(--hb-color-primary)',
     onCta: 'var(--hb-color-on-primary)',
@@ -105,6 +127,52 @@ export const glass: Theme = {
     tintOpacity: '60%',
     panelBackground: 'color-mix(in srgb, var(--hb-color-surface-bright) 58%, transparent)',
     barBackground: 'color-mix(in srgb, var(--hb-color-surface) 72%, transparent)',
-    backdropFilter: 'blur(20px) saturate(180%)',
+    backdropFilter: 'blur(28px) saturate(180%)',
+    headerMaxWidth: 'var(--hb-content-max)',
+    headerInset: 'var(--hb-space-3) var(--hb-gutter)',
+    headerRadius: 'var(--hb-radius-control)',
+    headerBorderWidth: 'var(--hb-border-width)',
+    headerShadow: 'var(--hb-shadow-card)',
+    headerSideFlex: '1 1 0',
+    heroColumns: '1fr',
+    heroAlign: 'center',
+    heroPanelBackground: 'var(--hb-panel-background)',
+    heroPanelPadding: 'var(--hb-space-7) var(--hb-space-6)',
+    heroPanelShadow: 'var(--hb-shadow-card)',
+    heroArtOrder: '0',
+    heroArtDisplay: 'block',
+    heroArtMaxWidth: '22rem',
+    heroArtBackground: 'none',
+    bandHeaderDirection: 'row',
+    bandHeaderAlign: 'flex-end',
+    bandTextAlign: 'start',
+    bandEyebrow: 'none',
+    eyebrowColor: 'var(--hb-color-on-surface-variant)',
+    cardScale: '0.85',
+    cardStagger: '0px',
+    // Panels that float over the glows, not full-bleed bands.
+    bandInset: 'var(--hb-space-4) var(--hb-gutter)',
+    bandRadius: 'var(--hb-radius-l)',
+    bandDivider: 'none',
+    titleUnderline: 'none',
+    heroPattern: 'none',
+    bandEdge: 'none',
+    pageTexture: 'none',
+    stickerShape: 'none',
+    stickerTiltScale: '0',
+    photoFrame: '0',
+    photoFrameColor: 'var(--hb-color-surface-container)',
+    photoTilt: '0deg',
+    photoTape: 'none',
+    avatarFilter: 'none',
+    avatarFilterHover: 'none',
+    avatarShadow: '0 6px 20px color-mix(in srgb, var(--hb-color-scrim) 25%, transparent)',
+    easePress: 'var(--hb-ease-emphasized)',
+    pressScale: '0.96',
+    hoverTranslate: '0 -1px',
+    hoverRotate: '0deg',
+    durationShort: '180ms',
+    durationMedium: '300ms',
   },
+  tones: containerTones,
 };

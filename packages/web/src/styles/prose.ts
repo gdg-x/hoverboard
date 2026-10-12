@@ -1,4 +1,5 @@
 import { css } from 'lit';
+import { displayFont } from './shared';
 
 /** Long-form text from markdown: blog posts, the FAQ and the code of conduct. */
 export const prose = css`
@@ -17,7 +18,7 @@ export const prose = css`
   .prose h2 {
     margin: var(--hb-space-8) 0 var(--hb-space-4);
     padding: 0;
-    font: 800 var(--hb-text-2xl) / 1.2 var(--hb-font-display);
+    ${displayFont('display', '2xl', 1.2)};
     text-wrap: balance;
   }
 

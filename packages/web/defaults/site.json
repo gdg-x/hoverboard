@@ -13,7 +13,6 @@
   },
   "theme": {
     "name": "festival",
-    "colorScheme": "system",
     "density": "default",
     "decorations": true,
     "badgeColors": {

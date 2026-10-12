@@ -1,4 +1,5 @@
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { Speaker } from '../../models/speaker';
@@ -55,6 +56,11 @@ export class SpeakerCard extends ThemedComponent {
       --hb-speaker-photo-background: var(--hb-color-accent-1-container);
     }
 
+    :host(:hover) .photo,
+    :host(:focus-within) .photo {
+      --hb-avatar-filter-now: var(--hb-avatar-filter-hover);
+    }
+
     .affiliation {
       --radius: calc(var(--photo-size) * 0.57);
 
@@ -85,7 +91,7 @@ export class SpeakerCard extends ThemedComponent {
     .name {
       margin: 0;
       padding: 0;
-      font: 700 var(--hb-text-lg) / 1.2 var(--hb-font-display);
+      ${displayFont('heading', 'lg', 1.2)};
       overflow-wrap: anywhere;
     }
 

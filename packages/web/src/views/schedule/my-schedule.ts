@@ -1,5 +1,6 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import type { BuiltDay } from '../../schedule/build-schedule';
 import { selectFeaturedSchedule } from '../../store/schedule/selectors';
@@ -45,7 +46,7 @@ export class MySchedule extends ThemedComponent {
       .date {
         margin: var(--hb-space-7) 0 var(--hb-space-3);
         padding: 0;
-        font: 800 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
+        ${displayFont('display', '3xl', 1.1)};
       }
 
       .date:first-of-type {

@@ -34,8 +34,6 @@
   --hb-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --hb-ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
   --hb-ease-spring: linear(0, 0.22 9%, 0.66 21%, 1.04 36%, 1.1 45%, 1.03 60%, 0.99 75%, 1);
-  --hb-duration-short: 120ms;
-  --hb-duration-medium: 240ms;
 
   --hb-content-max: 1200px;
   --hb-prose-max: 68ch;
@@ -85,6 +83,49 @@
   --hb-decorations-display: none;
 }
 
+/* eslint-disable css/no-important -- beats the theme's values, whatever selector sets them. */
+/* Decorations that cannot fade with `--hb-decorations`. Forced colors drop them too. */
+:root[data-decorations='off'] {
+  --hb-tone-surface-pattern: none !important;
+  --hb-tone-accent-1-pattern: none !important;
+  --hb-tone-accent-2-pattern: none !important;
+  --hb-tone-accent-3-pattern: none !important;
+  --hb-tone-accent-4-pattern: none !important;
+  --hb-band-edge: none !important;
+  --hb-page-texture: none !important;
+  --hb-sticker-shape: none !important;
+  --hb-photo-frame: 0 !important;
+  --hb-photo-tape: none !important;
+  --hb-hero-art-background: none !important;
+  /* Without its illustration, the hero's copy takes the whole row. */
+  --hb-hero-columns: 1fr !important;
+  --hb-card-stagger: 0px !important;
+}
+
+@media (forced-colors: active) {
+  :root {
+    --hb-tone-surface-pattern: none !important;
+    --hb-tone-accent-1-pattern: none !important;
+    --hb-tone-accent-2-pattern: none !important;
+    --hb-tone-accent-3-pattern: none !important;
+    --hb-tone-accent-4-pattern: none !important;
+    --hb-band-edge: none !important;
+    --hb-page-texture: none !important;
+    --hb-sticker-shape: none !important;
+    --hb-photo-frame: 0 !important;
+    --hb-photo-tape: none !important;
+    --hb-hero-art-background: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hb-hover-rotate: 0deg !important;
+    --hb-press-scale: 1 !important;
+  }
+}
+/* eslint-enable css/no-important */
+
 /* eslint-disable css/use-baseline, css/no-important -- browsers without the query keep the glass; `!important` beats the theme's values, whatever selector sets them. */
 @media (prefers-reduced-transparency: reduce) {
   :root {
@@ -120,7 +161,8 @@ main:focus {
 
 body {
   margin: 0;
-  background: var(--hb-page-background);
+  /* eslint-disable-next-line css/no-invalid-properties -- layers made of variables, which the rule cannot read. */
+  background: var(--hb-page-texture), var(--hb-page-background);
   color: var(--hb-color-on-surface);
   font-family: var(--hb-font-body);
   font-size: var(--hb-text-md);

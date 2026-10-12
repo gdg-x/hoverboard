@@ -1,6 +1,7 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { archive } from '../../config/site';
@@ -26,7 +27,7 @@ export class PartnersBlock extends ThemedComponent {
       .group-title {
         margin: 0 0 var(--hb-space-4);
         padding: 0;
-        font: 700 var(--hb-text-xl) / 1.2 var(--hb-font-display);
+        ${displayFont('heading', 'xl', 1.2)};
       }
 
       .logos {
@@ -46,12 +47,14 @@ export class PartnersBlock extends ThemedComponent {
         background-color: white;
         box-shadow: var(--hb-shadow-card);
         transition:
-          translate var(--hb-duration-short) var(--hb-ease-spring),
+          translate var(--hb-duration-short) var(--hb-ease-press),
+          rotate var(--hb-duration-short) var(--hb-ease-press),
           box-shadow var(--hb-duration-short) var(--hb-ease-standard);
       }
 
       .logo:hover {
-        translate: -2px -2px;
+        translate: var(--hb-hover-translate);
+        rotate: calc(var(--hb-hover-rotate, 0deg) * var(--hb-decorations, 1));
         box-shadow: var(--hb-shadow-card-hover);
       }
 

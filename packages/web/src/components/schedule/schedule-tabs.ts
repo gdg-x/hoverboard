@@ -38,7 +38,7 @@ export class ScheduleTabs extends ThemedComponent {
       min-block-size: var(--hb-target-min);
       padding-inline: var(--hb-space-4);
       border: var(--hb-border-width) solid var(--hb-border-color);
-      border-radius: var(--hb-radius-full);
+      border-radius: var(--hb-radius-control);
       background-color: var(--hb-panel-background);
       backdrop-filter: var(--hb-backdrop-filter);
       color: var(--hb-color-on-surface);

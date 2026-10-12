@@ -1,6 +1,7 @@
 import { Failure, Initialized, type RemoteData, Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../styles/shared';
 import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import '../components/hero/hero-block';
@@ -52,7 +53,7 @@ export class PostPage extends ThemedComponent {
       .up-next-title {
         margin: 0 0 var(--hb-space-5);
         padding: 0;
-        font: 800 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
+        ${displayFont('display', '3xl', 1.1)};
       }
     `,
   ];

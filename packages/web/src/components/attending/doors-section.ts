@@ -1,5 +1,6 @@
 import { msg, str } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import { attendingPage, timeZone } from '../../config/site';
 import { getLocale } from '../../utils/localization';
@@ -44,7 +45,7 @@ export class DoorsSection extends ThemedComponent {
 
       .hours {
         margin: var(--hb-space-1) 0 0;
-        font: 700 var(--hb-text-xl) / 1.2 var(--hb-font-display);
+        ${displayFont('heading', 'xl', 1.2)};
       }
 
       .day .text {

@@ -1,6 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
+import { displayFont } from '../styles/shared';
 import { customElement, property, state } from 'lit/decorators.js';
 import '../components/shared/add-to-calendar';
 import '../components/shared/share-button';
@@ -102,7 +103,7 @@ export class SessionPage extends ThemedComponent {
       h2 {
         margin: var(--hb-space-8) 0 var(--hb-space-4);
         padding: 0;
-        font: 800 var(--hb-text-2xl) / 1.15 var(--hb-font-display);
+        ${displayFont('display', '2xl', 1.15)};
       }
 
       .speakers {

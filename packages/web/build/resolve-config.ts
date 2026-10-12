@@ -497,6 +497,8 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
   const resources = siteContent as Resources;
 
   const ajv = new Ajv2020({ allErrors: true });
+  // VS Code shows these in site.json, and `hb init` prints them.
+  ajv.addKeyword('enumDescriptions');
   const validateSite = ajv.compile(readJson(join(paths.schemas, 'site.schema.json')));
   const validateResources = ajv.compile(readJson(join(paths.schemas, 'resources.schema.json')));
   const siteValid = validateSite(site);
@@ -519,6 +521,8 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
 
   const siteTheme = site.theme as unknown as SiteTheme;
   const theme = resolveTheme(siteTheme);
+  // The client reads the scheme from the site config, so it gets the theme's default too.
+  siteTheme.colorScheme = theme.colorScheme;
   const warnings: string[] = [];
   if (siteValid) {
     errors.push(...themeErrors(theme));

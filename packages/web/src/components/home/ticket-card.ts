@@ -1,5 +1,6 @@
 import { msg, str } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, property } from 'lit/decorators.js';
 import type { Ticket } from '../../models/ticket';
 import { getLocale } from '../../utils/localization';
@@ -58,7 +59,7 @@ export class TicketCard extends ThemedComponent {
 
     .price {
       margin: var(--hb-space-3) 0 0;
-      font: 800 var(--hb-text-4xl) / 1 var(--hb-font-display);
+      ${displayFont('display', '4xl', 1)};
       overflow-wrap: anywhere;
     }
 

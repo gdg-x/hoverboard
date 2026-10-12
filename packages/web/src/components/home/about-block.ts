@@ -1,5 +1,6 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import { aboutBlock } from '../../config/site';
 import { openVideoDialog } from '../../store/ui';
@@ -84,7 +85,7 @@ export class AboutBlock extends ThemedComponent {
 
       /* The display font is wide, so numbers also scale with their tile. */
       .number {
-        font: 800 min(var(--hb-text-5xl), 20cqi) / 1 var(--hb-font-display);
+        ${displayFont('display', css`min(var(--hb-text-5xl), 20cqi)`, 1)};
         overflow-wrap: anywhere;
       }
 

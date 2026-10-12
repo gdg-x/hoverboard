@@ -1,8 +1,27 @@
-import type { Theme } from './tokens';
+import { type Theme, type ToneColors, containerTones } from './tokens';
 
-// Inspired by DevFest for Ukraine: no outlines, soft glow shadows and one bright yellow accent.
+// Light from above the stage, in the text color.
+const beam = (amount: number, size: string) =>
+  `radial-gradient(${size} at 50% 0, color-mix(in srgb, currentColor ${amount}%, transparent), transparent 70%)`;
+
+const stage: ToneColors = {
+  background: 'surfaceDim',
+  color: 'onSurface',
+  pattern: beam(8, '70% 60%'),
+};
+
+// A keynote stage: a dark room, tall condensed type, one bright yellow light and a lot of space.
 export const spotlight: Theme = {
-  fonts: { display: 'unbounded', body: 'inter', mono: 'jetbrains-mono' },
+  colorScheme: 'dark',
+  fonts: { display: 'oswald', body: 'inter', mono: 'jetbrains-mono', accent: 'jetbrains-mono' },
+  share: {
+    bar: 0,
+    glows: [{ role: 'onSurface', at: '50% 0%', opacity: 0.14 }],
+    avatarBorder: { width: 8, role: 'secondary' },
+    avatarGrayscale: true,
+    avatarTape: false,
+    avatarTilt: 0,
+  },
   light: {
     primary: '#2848c9',
     onPrimary: '#ffffff',
@@ -74,14 +93,24 @@ export const spotlight: Theme = {
     onAccent4Container: '#c9f2e6',
   },
   style: {
-    radiusS: '10px',
-    radiusM: '18px',
-    radiusL: '28px',
+    // Oswald's weights stop at 700.
+    displayWeight: '700',
+    headingWeight: '600',
+    displayTracking: '0.01em',
+    displayLeading: '1',
+    displayStyle: 'normal',
+    heroTitleStyle: 'normal',
+    accentScale: '1',
+    displayScale: '1.3',
+    radiusS: '6px',
+    radiusM: '10px',
+    radiusL: '14px',
     radiusAvatar: '50%',
+    radiusControl: 'var(--hb-radius-full)',
     borderWidth: '1px',
     borderColor: 'var(--hb-color-outline-variant)',
-    shadowCard: '0 8px 24px color-mix(in srgb, var(--hb-color-primary) 16%, transparent)',
-    shadowCardHover: '0 14px 36px color-mix(in srgb, var(--hb-color-primary) 26%, transparent)',
+    shadowCard: '0 10px 30px color-mix(in srgb, var(--hb-color-primary) 18%, transparent)',
+    shadowCardHover: '0 18px 50px color-mix(in srgb, var(--hb-color-primary) 34%, transparent)',
     shadowButton: '0 4px 14px color-mix(in srgb, var(--hb-color-primary) 30%, transparent)',
     pressOffset: '0px',
     ctaBackground: 'var(--hb-color-secondary)',
@@ -94,5 +123,58 @@ export const spotlight: Theme = {
     panelBackground: 'var(--hb-color-surface-bright)',
     barBackground: 'var(--hb-color-surface)',
     backdropFilter: 'none',
+    headerMaxWidth: '100%',
+    headerInset: '0',
+    headerRadius: '0',
+    headerBorderWidth: '0 0 1px',
+    headerShadow: 'none',
+    headerSideFlex: '0 1 auto',
+    heroColumns: '1fr',
+    heroAlign: 'center',
+    heroPanelBackground: 'transparent',
+    heroPanelPadding: '0',
+    heroPanelShadow: 'none',
+    heroArtOrder: '0',
+    heroArtDisplay: 'none',
+    heroArtMaxWidth: 'none',
+    heroArtBackground: 'none',
+    bandHeaderDirection: 'column',
+    bandHeaderAlign: 'center',
+    bandTextAlign: 'center',
+    bandEyebrow: 'block',
+    // Yellow is too light for text on the light scheme's surfaces.
+    eyebrowColor: 'light-dark(var(--hb-color-on-surface-variant), var(--hb-color-secondary))',
+    cardScale: '1.3',
+    cardStagger: '0px',
+    bandInset: '0',
+    bandRadius: '0',
+    bandDivider: '1px solid var(--hb-color-outline-variant)',
+    titleUnderline: 'none',
+    heroPattern: beam(14, '60% 90%'),
+    bandEdge: 'none',
+    pageTexture: 'none',
+    stickerShape: 'none',
+    stickerTiltScale: '0',
+    photoFrame: '0',
+    photoFrameColor: 'var(--hb-color-surface-container)',
+    photoTilt: '0deg',
+    photoTape: 'none',
+    avatarFilter: 'grayscale(1)',
+    avatarFilterHover: 'none',
+    avatarShadow: '0 0 0 3px var(--hb-color-secondary)',
+    easePress: 'var(--hb-ease-standard)',
+    pressScale: '0.97',
+    hoverTranslate: '0 -2px',
+    hoverRotate: '0deg',
+    durationShort: '160ms',
+    durationMedium: '320ms',
+  },
+  // No pastel bands: the stage and the dimmer wings, each lit from above.
+  tones: {
+    surface: { ...containerTones.surface, pattern: beam(8, '70% 60%') },
+    'accent-1': stage,
+    'accent-2': stage,
+    'accent-3': stage,
+    'accent-4': stage,
   },
 };

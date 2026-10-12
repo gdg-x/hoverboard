@@ -1,5 +1,6 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, property, state } from 'lit/decorators.js';
 import { location, mapsScriptUrl } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
@@ -71,7 +72,7 @@ export class VenueSection extends ThemedComponent {
 
     .venue {
       margin: var(--hb-space-5) 0 0;
-      font: 700 var(--hb-text-2xl) / 1.15 var(--hb-font-display);
+      ${displayFont('heading', '2xl', 1.15)};
       overflow-wrap: anywhere;
     }
 

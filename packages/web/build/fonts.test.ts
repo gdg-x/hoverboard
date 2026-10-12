@@ -5,6 +5,9 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { festival } from '../src/themes/festival';
+import { BUILT_IN_FONTS, type BuiltInFontName } from '../src/themes/fonts';
+import { glass } from '../src/themes/glass';
+import { paper } from '../src/themes/paper';
 import { fontModuleCode, fontModuleParts, fontProblems } from './fonts';
 
 const require = createRequire(import.meta.url);
@@ -108,9 +111,95 @@ describe('fontModuleParts', () => {
     expect(css(parts)).not.toContain('Inter');
     expect(css(parts)).toContain('--hb-font-body:"Brand Sans", sans-serif;');
     expect(css(parts)).toContain('--hb-font-mono:ui-monospace, Menlo, monospace;');
-    expect(css(parts)).toContain('--hb-display-scale:0.9;');
+    expect(css(parts)).toContain('--hb-font-display-scale:0.9;');
     expect(parts.stylesheets).toEqual(['https://use.typekit.net/abc.css']);
     expect(parts.preload).toBe(join(dir, 'fonts/brand.woff2'));
+  });
+
+  it('uses the display font for the accent role, unless the theme or the site sets one', async () => {
+    const dir = siteDir();
+    const display = await fontModuleParts(festival.fonts, undefined, dir);
+    const theme = await fontModuleParts({ ...festival.fonts, accent: 'caveat' }, undefined, dir);
+    const site = await fontModuleParts(
+      { ...festival.fonts, accent: 'caveat' },
+      { accent: { family: 'Marker Felt' } },
+      dir,
+    );
+
+    expect(css(display)).toContain('--hb-font-accent:var(--hb-font-display);');
+    expect(css(theme)).toContain(
+      '--hb-font-accent:"Caveat Variable", "Caveat Variable Fallback", Arial, sans-serif;',
+    );
+    expect(css(site)).toContain('--hb-font-accent:Marker Felt;');
+    expect(css(site)).not.toContain('Caveat');
+  });
+
+  it('loads a font that two roles use once', async () => {
+    const parts = await fontModuleParts(glass.fonts, undefined, siteDir());
+
+    expect(css(parts).match(/inter-latin-wght-normal/g)).toHaveLength(1);
+    expect(css(parts)).toContain('--hb-font-display:"Inter Variable"');
+  });
+
+  it('falls back to a font of the same kind', async () => {
+    const parts = await fontModuleParts(
+      { ...festival.fonts, display: 'literata' },
+      undefined,
+      siteDir(),
+    );
+
+    expect(css(parts)).toContain(
+      '--hb-font-display:"Literata Variable", "Literata Variable Fallback", "Times New Roman", serif;',
+    );
+  });
+
+  it('loads italic files only for fonts that have them', async () => {
+    const parts = await fontModuleParts(
+      { ...festival.fonts, display: 'literata' },
+      undefined,
+      siteDir(),
+    );
+
+    expect(css(parts)).toMatch(
+      /font-family:"Literata Variable";font-display:swap;font-weight:200 900;font-style:italic;unicode-range:[^;]+;src:url\(\[@fontsource-variable\/literata\/files\/literata-latin-wght-italic\.woff2\]\)/,
+    );
+    expect(css(parts)).not.toMatch(/"(Inter|JetBrains Mono) Variable";[^}]*font-style:italic/);
+  });
+
+  it('has the files of every built-in font', async () => {
+    for (const name of Object.keys(BUILT_IN_FONTS) as BuiltInFontName[]) {
+      const parts = await fontModuleParts(
+        { display: name, body: name, mono: name },
+        undefined,
+        siteDir(),
+      );
+      const urls = parts.css.flatMap((part) => (typeof part === 'string' ? [] : [part.url]));
+
+      expect(urls.some((url) => url.includes('-cyrillic-'))).toBe(true);
+      for (const url of urls) expect(require.resolve(url)).toBeTruthy();
+    }
+  });
+
+  it("adds every demo theme's fonts, except the roles the site sets", async () => {
+    const parts = await fontModuleParts(
+      festival.fonts,
+      { mono: { family: 'ui-monospace' } },
+      siteDir(),
+      { festival: festival.fonts, glass: glass.fonts, paper: { ...paper.fonts, accent: 'caveat' } },
+    );
+
+    expect(css(parts)).toContain(
+      ':root[data-theme=\'glass\']{--hb-font-display:"Inter Variable", "Inter Variable Fallback", Arial, sans-serif;',
+    );
+    expect(css(parts)).toContain('@font-face{font-family:"Caveat Variable"');
+    expect(css(parts)).toMatch(/:root\[data-theme='paper'\]\{[^}]*--hb-font-accent:"Caveat/);
+    expect(css(parts)).toMatch(
+      /:root\[data-theme='festival'\]\{[^}]*--hb-font-accent:var\(--hb-font-display\);/,
+    );
+    expect(css(parts)).not.toMatch(/data-theme[^}]*--hb-font-mono/);
+    expect(parts.preload).toBe(
+      '@fontsource-variable/unbounded/files/unbounded-latin-wght-normal.woff2',
+    );
   });
 });
 

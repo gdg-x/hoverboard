@@ -5,6 +5,7 @@ import n from 'nunjucks';
 import type { Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
 import { FEATURES, type Feature } from '../src/config/features';
+import { THEMES } from '../src/themes/index';
 import { buildInfo } from './build-info';
 import { fontModuleCode, fontModuleParts } from './fonts';
 import {
@@ -107,7 +108,12 @@ export const siteModule = (
     }
     if (id === RESOLVED_FONTS_MODULE) {
       const siteTheme = site.theme as unknown as SiteTheme;
-      return fontModuleCode(await fontModuleParts(config.theme.fonts, siteTheme.fonts, siteDir));
+      const demoThemes = site.features.demo
+        ? Object.fromEntries(Object.entries(THEMES).map(([name, theme]) => [name, theme.fonts]))
+        : {};
+      return fontModuleCode(
+        await fontModuleParts(config.theme.fonts, siteTheme.fonts, siteDir, demoThemes),
+      );
     }
     if (id === RESOLVED_SOCIAL_IMAGES_MODULE) {
       const siteTheme = site.theme as unknown as SiteTheme;

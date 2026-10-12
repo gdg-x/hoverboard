@@ -1,5 +1,6 @@
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import { title } from '../../config/site';
 import { scrollToTop } from '../../utils/scrolling';
@@ -45,7 +46,7 @@ export class FooterBlock extends ThemedComponent {
 
     .event-name {
       margin: 0;
-      font: 800 var(--hb-text-4xl) / 1.05 var(--hb-font-display);
+      ${displayFont('display', '4xl', 1.05)};
       overflow-wrap: anywhere;
     }
 

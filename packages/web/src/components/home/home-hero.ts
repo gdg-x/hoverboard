@@ -1,5 +1,6 @@
 import { msg, str } from '@lit/localize';
 import { css, html, nothing, type TemplateResult } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -51,10 +52,10 @@ export class HomeHero extends ThemedComponent {
       padding: var(--hb-space-8) var(--hb-gutter) var(--hb-space-9);
       background-color: color-mix(
         in srgb,
-        var(--hb-color-accent-1-container) var(--hb-tint-opacity),
+        var(--hb-tone-accent-1-background) var(--hb-tint-opacity),
         transparent
       );
-      color: var(--hb-color-on-accent-1-container);
+      color: var(--hb-tone-accent-1-color);
     }
 
     .pattern::before {
@@ -62,11 +63,7 @@ export class HomeHero extends ThemedComponent {
       position: absolute;
       z-index: -1;
       inset: 0;
-      background-image: radial-gradient(
-        color-mix(in srgb, currentColor 14%, transparent) 1.5px,
-        transparent 1.6px
-      );
-      background-size: 22px 22px;
+      background: var(--hb-hero-pattern);
       opacity: var(--hb-decorations, 1);
     }
 
@@ -102,11 +99,20 @@ export class HomeHero extends ThemedComponent {
       margin-inline: auto;
     }
 
+    .copy {
+      padding: var(--hb-hero-panel-padding, 0);
+      border-radius: var(--hb-radius-l);
+      background: var(--hb-hero-panel-background, transparent);
+      backdrop-filter: var(--hb-backdrop-filter);
+      box-shadow: var(--hb-hero-panel-shadow, none);
+      text-align: var(--hb-hero-align);
+    }
+
     .title {
       margin: var(--hb-space-4) 0 var(--hb-space-5);
       padding: 0;
-      font: 800 var(--hb-text-6xl) / 0.95 var(--hb-font-display);
-      letter-spacing: -0.02em;
+      ${displayFont('display', '6xl', 0.95, -0.02)};
+      font-style: var(--hb-hero-title-style, var(--hb-display-style, normal));
       text-wrap: balance;
       overflow-wrap: anywhere;
     }
@@ -114,6 +120,7 @@ export class HomeHero extends ThemedComponent {
     .details {
       display: flex;
       flex-wrap: wrap;
+      justify-content: var(--hb-hero-align);
       gap: var(--hb-space-2);
       margin: 0;
       padding: 0;
@@ -124,20 +131,29 @@ export class HomeHero extends ThemedComponent {
       --hb-chip-border-color: currentColor;
     }
 
+    /* Inline, so the hero's text alignment places it too. */
     .lede {
+      display: inline-block;
       max-inline-size: 32ch;
       margin: var(--hb-space-5) 0 var(--hb-space-6);
       font-size: var(--hb-text-xl);
+      vertical-align: top;
     }
 
     .actions {
       display: flex;
       flex-wrap: wrap;
+      justify-content: var(--hb-hero-align);
       gap: var(--hb-space-3);
     }
 
     .art {
       display: none;
+      justify-self: center;
+      inline-size: 100%;
+      max-inline-size: var(--hb-hero-art-max-width, none);
+      order: var(--hb-hero-art-order);
+      background: var(--hb-hero-art-background, none);
     }
 
     .art svg {
@@ -148,11 +164,11 @@ export class HomeHero extends ThemedComponent {
 
     @container (width > 800px) {
       .inner {
-        grid-template-columns: 1.4fr 1fr;
+        grid-template-columns: var(--hb-hero-columns);
       }
 
       .art {
-        display: var(--hb-decorations-display, block);
+        display: var(--hb-decorations-display, var(--hb-hero-art-display, block));
       }
     }
 
@@ -189,7 +205,7 @@ export class HomeHero extends ThemedComponent {
       <section class="hero ${photo ? 'photo' : 'pattern'}" aria-labelledby="hero-title">
         ${photo ? html`<img class="background" src="${photo}" alt="" />` : nothing}
         <div class="inner">
-          <div>
+          <div class="copy">
             <hb-sticker class="state" tilt="-4" accent="${this.stickerAccent}"
               >${this.stateLabel}</hb-sticker
             >

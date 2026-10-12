@@ -1,6 +1,7 @@
 import { Failure, Pending, Success } from '@abraham/remotedata';
 import { msg } from '@lit/localize';
 import { css, html, nothing } from 'lit';
+import { displayFont } from '../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import '../components/hero/simple-hero';
 import '../components/markdown/short-markdown';
@@ -58,7 +59,7 @@ export class TeamPage extends ThemedComponent {
     .team-title {
       margin: var(--hb-space-8) 0 var(--hb-space-4);
       padding: 0;
-      font: 800 var(--hb-text-3xl) / 1.1 var(--hb-font-display);
+      ${displayFont('display', '3xl', 1.1)};
     }
 
     ul {

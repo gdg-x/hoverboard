@@ -1,6 +1,7 @@
 import { Success } from '@abraham/remotedata';
 import { msg, str } from '@lit/localize';
 import { css, html, nothing, type PropertyValues } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement, state } from 'lit/decorators.js';
 import { timeZone } from '../../config/site';
 import { fromStore } from '../../controllers/from-store';
@@ -54,7 +55,7 @@ export class OnNowBlock extends ThemedComponent {
 
       h3 {
         margin: var(--hb-space-7) 0 var(--hb-space-4);
-        font: 700 var(--hb-text-xl) / 1.2 var(--hb-font-display);
+        ${displayFont('heading', 'xl', 1.2)};
       }
 
       .sessions {

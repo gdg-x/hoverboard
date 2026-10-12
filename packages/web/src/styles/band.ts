@@ -1,4 +1,5 @@
-import { css } from 'lit';
+import { css, unsafeCSS } from 'lit';
+import { displayFont } from './shared';
 
 /** A band's centered column, big title, lede and links, for a block or a page that holds bands. */
 export const bandContent = css`
@@ -9,20 +10,40 @@ export const bandContent = css`
 
   .band-header {
     display: flex;
+    flex-direction: var(--hb-band-header-direction);
     flex-wrap: wrap;
-    align-items: flex-end;
+    align-items: var(--hb-band-header-align);
     justify-content: space-between;
     gap: var(--hb-space-4) var(--hb-space-6);
     margin-block-end: var(--hb-space-7);
+    text-align: var(--hb-band-text-align);
   }
 
   .band-title {
+    position: relative;
     margin: 0;
     padding: 0;
-    font: 800 var(--hb-text-4xl) / 1.05 var(--hb-font-display);
-    letter-spacing: -0.01em;
+    ${displayFont('display', '4xl', 1.05, -0.01)};
+    text-decoration: var(--hb-title-underline);
+    text-decoration-skip-ink: none;
+    text-underline-offset: 0.12em;
     text-wrap: balance;
     overflow-wrap: anywhere;
+  }
+
+  /* The band's number, silent to screen readers. Out of flow, so the title's underline skips it
+     (a float breaks Chrome's balanced wrapping). */
+  .band-title::before {
+    content: var(--hb-band-number, none) / '';
+    display: var(--hb-band-eyebrow, none);
+    position: absolute;
+    inset-block-end: 100%;
+    inset-inline: 0;
+    margin-block-end: var(--hb-space-3);
+    color: var(--hb-eyebrow-color);
+    font: 600 calc(var(--hb-text-sm) * var(--hb-accent-scale, 1)) / 1.4 var(--hb-font-accent);
+    letter-spacing: 0.08em;
+    text-decoration: none;
   }
 
   .band-lede {
@@ -67,29 +88,43 @@ export const BAND_TONES = ['surface', 'accent-4', 'surface', 'accent-2', 'surfac
 /** The colors of `.band` elements by their `data-tone`, for the page that lays the bands out. */
 export const bandTones = css`
   .band {
-    --hb-band-background: var(--hb-color-surface);
-    --hb-band-color: var(--hb-color-on-surface);
+    --hb-band-background: var(--hb-tone-surface-background);
+    --hb-band-color: var(--hb-tone-surface-color);
+    --hb-band-pattern: var(--hb-tone-surface-pattern);
 
-    background-color: color-mix(
-      in srgb,
-      var(--hb-band-background) var(--hb-tint-opacity),
-      transparent
-    );
+    margin: var(--hb-band-inset);
+    border-block-start: var(--hb-band-divider);
+    border-radius: var(--hb-band-radius);
+    background:
+      var(--hb-band-pattern),
+      color-mix(in srgb, var(--hb-band-background) var(--hb-tint-opacity), transparent);
     color: var(--hb-band-color);
+    mask: var(--hb-band-edge);
   }
 
+  ${unsafeCSS(
+    Array.from(
+      { length: 12 },
+      (_, index) =>
+        `.band:nth-child(${index + 1} of .band) { --hb-band-number: '${String(index + 1).padStart(2, '0')}'; }`,
+    ).join('\n'),
+  )}
+
   .band[data-tone='accent-4'] {
-    --hb-band-background: var(--hb-color-accent-4-container);
-    --hb-band-color: var(--hb-color-on-accent-4-container);
+    --hb-band-background: var(--hb-tone-accent-4-background);
+    --hb-band-color: var(--hb-tone-accent-4-color);
+    --hb-band-pattern: var(--hb-tone-accent-4-pattern);
   }
 
   .band[data-tone='accent-2'] {
-    --hb-band-background: var(--hb-color-accent-2-container);
-    --hb-band-color: var(--hb-color-on-accent-2-container);
+    --hb-band-background: var(--hb-tone-accent-2-background);
+    --hb-band-color: var(--hb-tone-accent-2-color);
+    --hb-band-pattern: var(--hb-tone-accent-2-pattern);
   }
 
   .band[data-tone='accent-1'] {
-    --hb-band-background: var(--hb-color-accent-1-container);
-    --hb-band-color: var(--hb-color-on-accent-1-container);
+    --hb-band-background: var(--hb-tone-accent-1-background);
+    --hb-band-color: var(--hb-tone-accent-1-color);
+    --hb-band-pattern: var(--hb-tone-accent-1-pattern);
   }
 `;

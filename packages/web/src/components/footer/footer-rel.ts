@@ -1,4 +1,5 @@
 import { css, html } from 'lit';
+import { displayFont } from '../../styles/shared';
 import { customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { footerRelBlock } from '../../config/site';
@@ -17,7 +18,7 @@ export class FooterRel extends ThemedComponent {
 
     .col-heading {
       margin: 0 0 var(--hb-space-2);
-      font: 700 var(--hb-text-md) / 1.3 var(--hb-font-display);
+      ${displayFont('heading', 'md', 1.3)};
     }
 
     .nav {

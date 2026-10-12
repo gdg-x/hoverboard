@@ -242,10 +242,17 @@
       "properties": {
         "name": {
           "description": "The built-in theme.",
-          "enum": ["festival", "spotlight", "paper", "glass"]
+          "enum": ["festival", "spotlight", "paper", "glass", "minimalist"],
+          "enumDescriptions": [
+            "A screen-printed gig poster: bold headings, ink outlines, hard shadows and patterned pastel bands.",
+            "A keynote stage: dark, tall condensed headings, centered titles and grayscale speaker photos.",
+            "A sketchbook: serif headings, handwritten labels, watercolor washes and polaroid photos with tape.",
+            "Liquid Glass: frosted panels over soft color glows, large round corners and a centered layout.",
+            "A Japanese print: cream paper, wide-set light headings, hairlines, square controls and one vermilion sun."
+          ]
         },
         "colorScheme": {
-          "description": "system follows the visitor's browser setting. light or dark locks the site to one scheme and hides the footer toggle.",
+          "description": "system follows the visitor's browser setting. light or dark locks the site to one scheme and hides the footer toggle. Without it, the theme's own: dark for spotlight, system for the others.",
           "enum": ["system", "light", "dark"]
         },
         "density": {
@@ -288,6 +295,12 @@
               "unevaluatedProperties": false
             },
             "mono": {
+              "type": "object",
+              "$ref": "#/$defs/font",
+              "unevaluatedProperties": false
+            },
+            "accent": {
+              "description": "Stickers, eyebrows and short notes. Without one, the theme's accent font, or the display font.",
               "type": "object",
               "$ref": "#/$defs/font",
               "unevaluatedProperties": false

@@ -4,13 +4,14 @@ import { THEMES, type ThemeName, themeDeclarations } from '../src/themes/index';
 import {
   COLOR_ROLES,
   type ColorRole,
+  type ColorScheme,
   type ColorSet,
   type Theme,
   cssColorVar,
 } from '../src/themes/tokens';
 import type { SiteFonts } from './fonts';
 
-export type ColorScheme = 'system' | 'light' | 'dark';
+export type { ColorScheme };
 export type Density = 'compact' | 'default' | 'roomy';
 
 export const DENSITY_FACTORS: Readonly<Record<Density, number>> = {
@@ -19,10 +20,10 @@ export const DENSITY_FACTORS: Readonly<Record<Density, number>> = {
   roomy: 1.25,
 };
 
-/** `theme` in site.json, with the defaults merged in. */
+/** `theme` in site.json, with the defaults merged in. Without `colorScheme`, the theme's own. */
 export interface SiteTheme {
   name: ThemeName;
-  colorScheme: ColorScheme;
+  colorScheme?: ColorScheme;
   density: Density;
   decorations: boolean;
   colors?: Partial<ColorSet>;
@@ -58,7 +59,7 @@ export const resolveTheme = (site: SiteTheme): ResolvedTheme => {
     light: { ...base.light, ...colors },
     dark: { ...base.dark, ...derived, ...site.darkColors },
     name: site.name,
-    colorScheme: site.colorScheme,
+    colorScheme: site.colorScheme ?? base.colorScheme,
     density: site.density,
     decorations: site.decorations,
   };
@@ -70,8 +71,8 @@ export const usedSchemes = (colorScheme: ColorScheme): ('light' | 'dark')[] =>
 /** Color pairs below the WCAG AA contrast they need, in the schemes the site uses. */
 export const themeErrors = (theme: ResolvedTheme): string[] =>
   contrastFailures(theme, usedSchemes(theme.colorScheme)).map(
-    ({ scheme, foreground, background, ratio, min }) =>
-      `site.json/theme: ${foreground} on ${background} has a contrast of ${ratio.toFixed(2)}:1 in the ${scheme} scheme, and needs ${min}:1. Change theme.${scheme === 'dark' ? 'darkColors' : 'colors'}.`,
+    ({ scheme, foreground, background, ratio, min, overPattern }) =>
+      `site.json/theme: ${foreground} on ${background}${overPattern ? ' with its pattern' : ''} has a contrast of ${ratio.toFixed(2)}:1 in the ${scheme} scheme, and needs ${min}:1. Change theme.${scheme === 'dark' ? 'darkColors' : 'colors'}.`,
   );
 
 // `#rgb`, `#rgba`, `#rrggbb`, `#rrggbbaa`, `rgb(r g b / a%)` and `rgba(r, g, b, a)`.
@@ -164,14 +165,24 @@ export const themeCss = (theme: ResolvedTheme, named: Record<string, string> = {
 
 /**
  * Every built-in theme, with the site's colors over it, under `:root[data-theme='<name>']`, so the
- * demo banner can switch themes in the browser.
+ * demo banner can switch themes in the browser. A theme with its own scheme, such as a dark one,
+ * shows in it until the visitor picks one with the toggle.
  */
 export const demoThemesCss = (site: SiteTheme): string =>
   (Object.keys(THEMES) as ThemeName[])
-    .map(
-      (name) =>
-        `:root[data-theme='${name}'] {\n${themeDeclarations(resolveTheme({ ...site, name }))}\n}`,
-    )
+    .flatMap((name) => {
+      const theme = `:root[data-theme='${name}'] {\n${themeDeclarations(resolveTheme({ ...site, name }))}\n}`;
+      const scheme = THEMES[name].colorScheme;
+      if (scheme === 'system') return [theme];
+      const logo =
+        scheme === 'dark'
+          ? '\n--hb-logo-image: var(--hb-logo-dark-image);\n--hb-logo-display: var(--hb-logo-dark-display);\n--hb-logo-name-display: var(--hb-logo-dark-name-display);'
+          : '\n--hb-logo-image: var(--hb-logo-light-image);\n--hb-logo-display: block;\n--hb-logo-name-display: none;';
+      return [
+        theme,
+        `:root[data-theme='${name}']:not([data-color-scheme]) {\ncolor-scheme: ${scheme};${logo}\n}`,
+      ];
+    })
     .join('\n');
 
 /**

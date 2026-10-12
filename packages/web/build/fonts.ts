@@ -6,9 +6,11 @@ import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
 import {
   BUILT_IN_FONTS,
+  type BuiltInFont,
   type BuiltInFontName,
   FONT_ROLES,
   type FontRole,
+  type ThemeFonts,
 } from '../src/themes/fonts';
 
 export interface FontFile {
@@ -37,6 +39,12 @@ type MetricsModule = Parameters<typeof createFontStack>[0][number];
 const require = createRequire(import.meta.url);
 
 const genericFor = (role: FontRole) => (role === 'mono' ? 'monospace' : 'sans-serif');
+
+const FALLBACK_METRICS: Record<BuiltInFont['generic'], string> = {
+  'sans-serif': 'arial',
+  serif: 'timesNewRoman',
+  monospace: 'courierNew',
+};
 
 /** Problems with local font files. Missing files are errors; uncovered characters and size, warnings. */
 export const fontProblems = (
@@ -100,11 +108,11 @@ const fontFace = (family: string, url: string, weight: string, rest: string) => 
 // time the plugin loads the fonts module.
 const metricsFor = (name: string) => require(`@capsizecss/metrics/${name}`) as MetricsModule;
 
-const fallback = (metrics: MetricsModule, role: FontRole) =>
-  createFontStack([metrics, metricsFor(role === 'mono' ? 'courierNew' : 'arial')]);
+const fallback = (metrics: MetricsModule, generic: BuiltInFont['generic']) =>
+  createFontStack([metrics, metricsFor(FALLBACK_METRICS[generic])]);
 
-const builtInParts = (name: BuiltInFontName, role: FontRole) => {
-  const font = BUILT_IN_FONTS[name];
+const builtInParts = (name: BuiltInFontName) => {
+  const font: BuiltInFont = BUILT_IN_FONTS[name];
   const packageDir = dirname(require.resolve(`${font.package}/package.json`));
   const unicode = JSON.parse(fs.readFileSync(join(packageDir, 'unicode.json'), 'utf8')) as Record<
     string,
@@ -114,15 +122,18 @@ const builtInParts = (name: BuiltInFontName, role: FontRole) => {
     variable: { wght: { min: string; max: string } };
   };
   const id = font.package.split('/')[1];
-  const css = Object.entries(unicode).flatMap(([subset, range]) =>
-    fontFace(
-      font.family,
-      `${font.package}/files/${id}-${subset}-wght-normal.woff2`,
-      `${variable.wght.min} ${variable.wght.max}`,
-      `font-style:normal;unicode-range:${range};`,
+  const styles = font.italic ? ['normal', 'italic'] : ['normal'];
+  const css = styles.flatMap((style) =>
+    Object.entries(unicode).flatMap(([subset, range]) =>
+      fontFace(
+        font.family,
+        `${font.package}/files/${id}-${subset}-wght-${style}.woff2`,
+        `${variable.wght.min} ${variable.wght.max}`,
+        `font-style:${style};unicode-range:${range};`,
+      ),
     ),
   );
-  const stack = fallback({ ...metricsFor(font.metrics), familyName: font.family }, role);
+  const stack = fallback({ ...metricsFor(font.metrics), familyName: font.family }, font.generic);
   return {
     css: [...css, stack.fontFaces],
     stack: `${stack.fontFamily}, ${font.generic}`,
@@ -146,7 +157,7 @@ const localParts = async (
     ),
   );
   const metrics = await fromFile(paths[0] ?? '');
-  const stack = fallback({ ...metrics, familyName: font.family }, role);
+  const stack = fallback({ ...metrics, familyName: font.family }, genericFor(role));
   return {
     css: [...css, stack.fontFaces],
     stack: `${stack.fontFamily}, ${genericFor(role)}`,
@@ -156,17 +167,30 @@ const localParts = async (
 
 /**
  * The `@font-face` rules and `--hb-font-*` variables for the theme's fonts, with the site's
- * `theme.fonts` over them. Built-in fonts of roles the site overrides are left out.
+ * `theme.fonts` over them. Built-in fonts of roles the site overrides are left out. With
+ * `demoThemes`, every theme's fonts are there too, under `:root[data-theme='<name>']`, so the demo
+ * banner can switch them. Browsers only download a font that text on the page uses.
  */
 export const fontModuleParts = async (
-  themeFonts: Record<FontRole, BuiltInFontName>,
+  themeFonts: ThemeFonts,
   siteFonts: SiteFonts | undefined,
   siteDir: string,
+  demoThemes: Readonly<Record<string, ThemeFonts>> = {},
 ): Promise<FontModuleParts> => {
   const css: FontModuleParts['css'] = [];
   const stylesheets: string[] = [];
   const stacks: Partial<Record<FontRole, string>> = {};
+  const loaded = new Set<BuiltInFontName>();
   let preload: string | undefined;
+  // A built-in font's stack, with its `@font-face` rules the first time a role uses it.
+  const themeStack = (fonts: ThemeFonts, role: FontRole) => {
+    const name = role === 'accent' ? fonts.accent : fonts[role];
+    if (!name) return 'var(--hb-font-display)';
+    const parts = builtInParts(name);
+    if (!loaded.has(name)) css.push(...parts.css);
+    loaded.add(name);
+    return parts.stack;
+  };
   for (const role of FONT_ROLES) {
     const font = siteFonts?.[role];
     let stack: string;
@@ -181,15 +205,19 @@ export const fontModuleParts = async (
     } else if (font) {
       stack = font.family;
     } else {
-      const parts = builtInParts(themeFonts[role], role);
-      css.push(...parts.css);
-      stack = parts.stack;
-      if (role === 'display') preload = parts.preload;
+      stack = themeStack(themeFonts, role);
+      if (role === 'display') preload = builtInParts(themeFonts.display).preload;
     }
     stacks[role] = stack;
   }
   const variables = FONT_ROLES.map((role) => `--hb-font-${role}:${stacks[role]};`).join('');
-  css.push(`:root{${variables}--hb-display-scale:${siteFonts?.display?.scale ?? 1};}`);
+  css.push(`:root{${variables}--hb-font-display-scale:${siteFonts?.display?.scale ?? 1};}`);
+  for (const [name, fonts] of Object.entries(demoThemes)) {
+    const themeVariables = FONT_ROLES.filter((role) => !siteFonts?.[role])
+      .map((role) => `--hb-font-${role}:${themeStack(fonts, role)};`)
+      .join('');
+    if (themeVariables) css.push(`:root[data-theme='${name}']{${themeVariables}}`);
+  }
   return { css, stylesheets, preload };
 };
 

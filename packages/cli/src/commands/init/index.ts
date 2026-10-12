@@ -92,12 +92,15 @@ const loadFeatureRequires = async (repoRoot: string) => {
   return module.FEATURE_REQUIRES;
 };
 
-/** The built-in theme names, from the site.json schema. */
+/** The built-in theme names, from the site.json schema, with their descriptions. */
 const readThemes = (repoRoot: string) => {
   const schema = readJson(repoRoot, SCHEMA_PATH) as {
-    properties: { theme: { properties: { name: { enum: string[] } } } };
+    properties: {
+      theme: { properties: { name: { enum: string[]; enumDescriptions?: string[] } } };
+    };
   };
-  return schema.properties.theme.properties.name.enum;
+  const { enum: names, enumDescriptions = [] } = schema.properties.theme.properties.name;
+  return names.map((name, index) => ({ name, description: enumDescriptions[index] }));
 };
 
 const chooseProject = async (

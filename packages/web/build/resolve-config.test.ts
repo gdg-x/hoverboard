@@ -995,11 +995,16 @@ describe('theme', () => {
 
   it('lists every theme and color in the schema', () => {
     const schema = readJson(join(repoPaths.schemas, 'site.schema.json')) as {
-      properties: { theme: { properties: { name: { enum: string[] } } } };
+      properties: {
+        theme: { properties: { name: { enum: string[]; enumDescriptions: string[] } } };
+      };
       $defs: { themeColors: { properties: object } };
     };
 
     expect(schema.properties.theme.properties.name.enum).toEqual(Object.keys(THEMES));
+    expect(schema.properties.theme.properties.name.enumDescriptions).toHaveLength(
+      Object.keys(THEMES).length,
+    );
     expect(Object.keys(schema.$defs.themeColors.properties)).toEqual([...COLOR_ROLES]);
   });
 });
