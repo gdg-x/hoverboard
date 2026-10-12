@@ -8,6 +8,7 @@ import {
   siteAttendance,
   themeName as siteTheme,
 } from '../../config/site';
+import { isDemoProject } from '../../firebase';
 import { segmented } from '../../styles/segmented';
 import { THEMES } from '../../themes/index';
 import {
@@ -120,7 +121,12 @@ export class DemoBanner extends ThemedComponent {
   @state()
   private accessor time: DemoTime | 'now' = 'now';
 
+  // Only the browser knows it runs on the emulators.
+  @state()
+  private accessor emulator = false;
+
   override firstUpdated() {
+    this.emulator = isDemoProject;
     const stored = readDemoChoices(storage);
     if (stored.theme && stored.theme in THEMES) this.theme = stored.theme;
     if (stored.density && (DENSITIES as readonly string[]).includes(stored.density)) {
@@ -166,8 +172,21 @@ export class DemoBanner extends ThemedComponent {
       after: msg('After the event', { id: 'shell.demo.time.after' }),
     };
     return html`
-      <aside class="inner" aria-label="${msg('Demo', { id: 'shell.demo.label' })}">
-        <p class="intro">${msg('DEMO', { id: 'shell.demo.badge' })}</p>
+      <aside
+        class="inner"
+        aria-label="${
+          this.emulator
+            ? msg('Development', { id: 'shell.demo.label-dev' })
+            : msg('Demo', { id: 'shell.demo.label' })
+        }"
+      >
+        <p class="intro">
+          ${
+            this.emulator
+              ? msg('DEV', { id: 'shell.demo.badge-dev', desc: 'Shown on the local emulators.' })
+              : msg('DEMO', { id: 'shell.demo.badge' })
+          }
+        </p>
         <div class="controls">
           <label>
             <span class="visually-hidden">${msg('Theme', { id: 'shell.demo.theme' })}</span>

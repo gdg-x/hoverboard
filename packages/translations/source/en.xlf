@@ -608,6 +608,9 @@
 <trans-unit id="shell.demo.time.after">
   <source>After the event</source>
 </trans-unit>
+<trans-unit id="shell.demo.label-dev">
+  <source>Development</source>
+</trans-unit>
 <trans-unit id="shell.demo.label">
   <source>Demo</source>
 </trans-unit>
@@ -1070,6 +1073,10 @@
 <trans-unit id="home.tickets-block.sold-out">
   <source>You missed it!</source>
   <note from="lit-localize">Shown on a sold-out ticket.</note>
+</trans-unit>
+<trans-unit id="shell.demo.badge-dev">
+  <source>DEV</source>
+  <note from="lit-localize">Shown on the local emulators.</note>
 </trans-unit>
 <trans-unit id="home.tickets-block.on-sale">
   <source>On sale <x id="0" equiv-text="${date}"/></source>

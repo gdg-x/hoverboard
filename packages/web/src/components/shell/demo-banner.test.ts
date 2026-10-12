@@ -30,6 +30,14 @@ vi.mock('../../utils/demo', async (importOriginal) => ({
   chooseDemoTime: vi.fn(),
 }));
 
+const firebase = vi.hoisted(() => ({ isDemoProject: false }));
+vi.mock('../../firebase', async () => ({
+  ...(await import('../../__mocks__/firebase')),
+  get isDemoProject() {
+    return firebase.isDemoProject;
+  },
+}));
+
 const root = document.documentElement;
 
 const render = async () => {
@@ -44,6 +52,7 @@ describe('demo-banner', () => {
   afterEach(() => {
     litRender(nothing, document.body);
     localStorage.clear();
+    firebase.isDemoProject = false;
     for (const name of ['data-theme', 'data-density', 'data-color-scheme', 'data-decorations']) {
       root.removeAttribute(name);
     }
@@ -61,6 +70,17 @@ describe('demo-banner', () => {
         .getAllByRole('option')
         .map((option) => (option as HTMLOptionElement).value),
     ).toEqual(['festival', 'spotlight', 'paper', 'glass', 'minimalist']);
+  });
+
+  it('says DEV on the emulators', async () => {
+    firebase.isDemoProject = true;
+    const { container } = await render();
+
+    expect(
+      within(container).getByRole('complementary', { name: 'Development' }),
+    ).toBeInTheDocument();
+    expect(within(container).getByText('DEV')).toBeInTheDocument();
+    expect(within(container).queryByText('DEMO')).not.toBeInTheDocument();
   });
 
   it("starts from the site's spacing, with the brightness toggle", async () => {
