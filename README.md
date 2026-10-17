@@ -15,39 +15,43 @@ Our goal is to allow event organizers to set up a professional conference websit
 
 ## Features
 
-| Feature                              | Description                                                                                                                  |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| **Fast and optimized**               | 91/100 PWA on [Lighthouse](https://www.webpagetest.org/lighthouse.php?test=180111_1P_027a041bc5102982f074014807320a86&run=3) |
-| **Works offline**                    | shitty WiFi on the venue is not a problem anymore                                                                            |
-| **Mobile-first**                     | layouts optimized for small screens, Hoverboard can be installed as a native app on your phone                               |
-| **Push notifications**               | remind about sessions in My schedule, session feedback or target users with a custom message                                 |
-| **SEO optimized**                    | index all content and get to the top in search results                                                                       |
-| **Speakers and schedule management** | keep and update all information in the Firebase                                                                              |
-| **My schedule**                      | let attendees save sessions they want to visit                                                                               |
-| **Reactions**                        | let attendees react to sessions with applause, love and more                                                                 |
-| **Attending page**                   | directions, doors, accessibility, hotels and Wi-Fi in one page that works offline at the venue                               |
-| **Customizable theme**               | light and dark themes, with your own colors and fonts                                                                        |
-| **Blog**                             | post announcements, updates and useful information                                                                           |
+| Feature                              | Description                                                                             |
+| ------------------------------------ | --------------------------------------------------------------------------------------- |
+| **Fast and optimized**               | Static HTML rendered at build time, hydrated in the browser with live Firestore updates |
+| **Works offline**                    | Service worker caches the schedule, My Schedule and the attending page for venue Wi-Fi  |
+| **Mobile-first**                     | Layouts optimized for small screens; installable as an app on phones                    |
+| **Push notifications**               | Remind attendees about saved sessions or send general announcements                     |
+| **SEO optimized**                    | Pre-rendered pages, structured data and generated social preview images                 |
+| **Speakers and schedule management** | Keep and update speakers, sessions and tracks in Firestore                              |
+| **My schedule**                      | Let attendees save sessions they want to visit and download a calendar file             |
+| **Reactions**                        | Let attendees react to sessions with applause, love and more                            |
+| **Attending page**                   | Directions, doors, accessibility, hotels and Wi-Fi in one page that works offline       |
+| **Customizable theme**               | Five built-in themes in light and dark, with your own colors and fonts                  |
+| **Blog**                             | Post announcements, updates and useful information                                      |
 
 ## Getting Started
 
-🌛 Read the [set up guide](/docs/tutorials/00-set-up.md) or checkout the [full documentation](/docs/).
+```console
+npm ci
+./hb init
+npm start
+```
+
+Read the [Get started tutorial](docs/get-started.md) to set up, customize and deploy your site.
 
 ## Updating
 
-Upgrade your site to the latest Hoverboard release with:
-
-```console
-./hb upgrade
-```
-
-It shows the release notes, merges the release into a new branch, `upgrade/v<version>`, and resolves the lockfiles and `package.json` files itself. It then installs, migrates your config, builds and commits, and offers to open a pull request. On other conflicts, it stops: resolve them, then run `./hb upgrade --continue`, or go back with `./hb upgrade --abort`. Merge the pull request with a merge commit, not a squash. See [Releases](docs/releases.md#upgrading).
+See [Upgrade](docs/guides/upgrade.md) to update your site to the latest Hoverboard release with `./hb upgrade`.
 
 ## Documentation
 
-The [Getting Started guide](#getting-started) is probably a good first point of call!
+Browse the [full documentation](docs/README.md):
 
-📖 [Full documentation](/docs/).
+- [Who are you?](docs/README.md#who-are-you) — paths for first-time organizers, returning organizers, content editors, fork maintainers and contributors
+- [Get started](docs/README.md#get-started) and [Set up your site](docs/README.md#set-up-your-site)
+- [Your event](docs/README.md#your-event), [Look and feel](docs/README.md#look-and-feel) and [Attendee features](docs/README.md#attendee-features)
+- [Run your event](docs/README.md#run-your-event) and [Keep it running](docs/README.md#keep-it-running)
+- [Reference](docs/README.md#reference), [How it works](docs/README.md#how-it-works) and [Contributing](docs/README.md#contributing)
 
 ## Compatibility
 
@@ -55,42 +59,15 @@ The [Getting Started guide](#getting-started) is probably a good first point of 
 
 ## Technology Stack
 
-- Polymer 3 (deprecated [#796](https://github.com/gdg-x/hoverboard/issues/796))
-- LitElement
-- Redux
-- Firebase
-- Service Worker
-- CSS Grid
+Astro, Lit, Redux Toolkit, Firebase and Workbox. See [How it works](docs/how-it-works.md).
 
 ## Contributing
 
-Awesome! Contributions of all kinds are greatly appreciated. To help smoothen the process we have a few non-exhaustive guidelines to follow which should get you going in no time. Checkout our [roadmap](https://github.com/gdg-x/hoverboard/blob/main/ROADMAP.md) and [open issues](https://github.com/gdg-x/hoverboard/issues).
-
-### Good First Issue
-
-Issues labeled [`good first issue`](https://github.com/gdg-x/hoverboard/labels/good%20first%20issue) are a great way to ease into development on this project.
-
-### Help Wanted Label
-
-Any other issue labeled [`help wanted`](https://github.com/gdg-x/hoverboard/labels/help%20wanted) is ready for a PR.
-
-### Using GitHub Issues
-
-- Feel free to use GitHub issues for questions, bug reports, and feature requests
-- Use the search feature to check for an existing issue
-- Include as much information as possible and provide any relevant resources (Eg. screenshots)
-- For bug reports ensure you have a reproducible test case
-- A pull request with a breaking test would be super preferable here but isn't required
-
-### Submitting a Pull Request
-
-- Squash commits
-- Lint your code with eslint (config provided)
-- Include relevant test updates/additions
+Contributions of all kinds are welcome! Read the [contributing guide](.github/CONTRIBUTING.md) and check the [open issues](https://github.com/gdg-x/hoverboard/issues).
 
 ## Code of Conduct
 
-Read the full version [Code of Conduct](/.github/CODE_OF_CONDUCT.md).
+Read the full version [Code of Conduct](.github/CODE_OF_CONDUCT.md).
 
 ## Contributors
 
@@ -98,13 +75,13 @@ Read the full version [Code of Conduct](/.github/CODE_OF_CONDUCT.md).
 
 **Authors:** [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
-This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](/.github/CONTRIBUTING.md)].
+This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](.github/CONTRIBUTING.md)].
 
 [![List of contributors](https://opencollective.com/hoverboard/contributors.svg?width=890)](https://github.com/gdg-x/hoverboard/graphs/contributors)
 
 ## License
 
-The project is published under the [MIT license](/LICENSE.md).
+The project is published under the [MIT license](LICENSE.md).
 Feel free to clone and modify repo as you want, but don't forget to add a reference to authors :)
 
 _GDG[x] is not endorsed and/or supported by Google, the corporation._

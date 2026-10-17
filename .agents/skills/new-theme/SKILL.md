@@ -15,7 +15,7 @@ Turns a description of a look into a Hoverboard theme. There are two kinds:
 
 If the request is unclear, make a custom event theme and say that a base theme is the other option.
 
-Read [docs/tutorials/03-styling.md](../../../docs/tutorials/03-styling.md) first. It describes the four base themes, `site.json` theme settings, fonts and the CSS variables a theme sets.
+Read [docs/guides/look-and-feel.md](../../../docs/guides/look-and-feel.md) first. It describes the base themes, `site.json` theme settings, fonts and the CSS variables a theme sets.
 
 ## 1. Write a short brief
 
@@ -34,9 +34,9 @@ A new base theme also needs at least one signature the four base themes don't ha
 2. In `site.json`, under `theme`:
    - `name`: the base theme from the brief.
    - `colors` and `darkColors`: hex values for the color roles in `COLOR_ROLES` in `packages/web/src/themes/tokens.ts`. Change a text role with its background role (`primary` with `onPrimary`, `accent1Container` with `onAccent1Container`). Without a dark color, the build makes one with the same hue.
-   - `fonts`: `display`, `body`, `mono` or `accent`. Use font files in `packages/config/fonts` (`.woff2`, plus `.woff`, `.ttf` or `.otf` at one weight for share images), a font service `stylesheet`, or a font list already on devices. Check the font's license allows self-hosting. A font service's address must be allowed in `security.csp` (see `docs/tutorials/01-configure-app.md`).
+   - `fonts`: `display`, `body`, `mono` or `accent`. Use font files in `packages/config/fonts` (`.woff2`, plus `.woff`, `.ttf` or `.otf` at one weight for share images), a font service `stylesheet`, or a font list already on devices. Check the font's license allows self-hosting. A font service's address must be allowed in `security.csp` (see `docs/guides/security.md#allow-a-widget-or-embed`).
    - `colorScheme`, `density` and `decorations` as the brief says.
-3. In `packages/config/custom.css`, set `--hb-*` variables on `:root` for everything else: shapes, layout, header, sections, images, stickers and motion. The variables and what they do are in the custom CSS section of `03-styling.md`. Every key of `ThemeStyle` in `tokens.ts` is a variable (`radiusControl` is `--hb-radius-control`), and so are the tone variables, `--hb-tone-<tone>-background`, `-color` and `-pattern`. Rules:
+3. In `packages/config/custom.css`, set `--hb-*` variables on `:root` for everything else: shapes, layout, header, sections, images, stickers and motion. The variables and what they do are in the custom CSS section of `look-and-feel.md`. Every key of `ThemeStyle` in `tokens.ts` is a variable (`radiusControl` is `--hb-radius-control`), and so are the tone variables, `--hb-tone-<tone>-background`, `-color` and `-pattern`. Rules:
    - Colors only as `var(--hb-color-*)`, never literals, so the build's contrast check and the dark scheme still apply. Pair a background role with its text role.
    - Patterns, textures and edges are CSS gradients or `data:` SVG URLs under 2KB, drawn in `currentColor` at 14% or less. Other origins are blocked by the Content Security Policy.
    - The file can't contain `</style`.
@@ -63,7 +63,7 @@ Limits to tell the user about: share images use the site's colors, fonts and the
    - `enum` and `enumDescriptions` of `theme.name` in `packages/web/schemas/site.schema.json`, in the same order as `THEMES`. The description is one sentence: `./hb init` prints it and VS Code shows it.
    - The theme names in `packages/web/src/styles/theme.test.ts` (the test that no component names a theme) and `packages/web/src/components/shell/demo-banner.test.ts`.
 4. **Components never check the theme's name.** When the look needs something no variable controls, add a `ThemeStyle` key: give every theme a value that keeps its look, read it in the component as `var(--hb-<key>)`, and add the decorations-off and forced-colors overrides to `packages/web/src/styles/base.css` if it is a decoration. Fonts in components go through `displayFont()` in `packages/web/src/styles/shared.ts`.
-5. **Docs.** Add a section with a paragraph and a screenshot to the Themes section of `docs/tutorials/03-styling.md`, like the other themes. Mention the theme where that file lists themes, such as the hero patterns and fonts.
+5. **Docs.** Add a section with a paragraph and a screenshot to the Themes section of `docs/guides/look-and-feel.md`, like the other themes. Mention the theme where that file lists themes, such as the hero patterns and fonts.
 
 ## 3. Check it
 

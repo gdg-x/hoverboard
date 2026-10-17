@@ -1,6 +1,8 @@
-# Styling
+# Look and feel
 
 Colors, fonts and shapes come from a theme. Pick it and change it in `theme` in `packages/config/site.json`. Shared styles, such as the type scale, spacing and motion, are in `packages/web/src/styles/base.css`.
+
+**For:** [first-time organizers](../README.md#first-time-organizer), [returning organizers](../README.md#returning-organizer) and [fork maintainers](../README.md#fork-maintainer).
 
 ## Themes
 
@@ -51,7 +53,7 @@ A Japanese print. Light, wide-set [Jost](https://fonts.google.com/specimen/Jost)
 - `density` is `compact`, `default` or `roomy`. It scales the spacing, not the text or button sizes.
 - `decorations` turns the playful details on or off: section patterns and edges, the paper grain, tilted stickers and photos, polaroid frames and tape, confetti when a visitor saves a session, and the home page illustration. With `false`, the theme keeps its fonts, colors, shapes and layout, with plain sections and straight labels. Visitors who ask their device for reduced motion never see the motion.
 
-The themes are in `packages/web/src/themes/`. `./hb init` describes them and asks which one to use. [Share images](01-configure-app.md#features) follow the theme too: its fonts, colors and the shape of the speaker photos.
+The themes are in `packages/web/src/themes/`. `./hb init` describes them and asks which one to use. [Share images](share-images.md) follow the theme too: its fonts, colors and the shape of the speaker photos.
 
 ## Custom CSS
 
@@ -162,11 +164,11 @@ Change a font with `theme.fonts.display`, `body`, `mono` or `accent`. `accent` i
 
 `scale` multiplies the heading sizes, from 0.75 to 1.25, for very wide or narrow fonts.
 
-The site's [Content Security Policy](01-configure-app.md#content-security-policy) allows the stylesheet's address, and `fonts.gstatic.com` for Google Fonts. If a service serves its font files from another address, add it to `security.csp.font-src`.
+The site's [Content Security Policy](security.md#allow-a-widget-or-embed) allows the stylesheet's address, and `fonts.gstatic.com` for Google Fonts. If a service serves its font files from another address, add it to `security.csp.font-src`.
 
 For font files, the build adds a fallback font with the same size, so the text does not move when the font loads. It warns when a role's files are over 150KB, and when the font has no glyphs for characters in the event name and title (verify with a font of your own).
 
-[Share images](01-configure-app.md#features) use the `display` and `body` fonts too, from `.ttf`, `.otf` or `.woff` files with a single weight, such as `"weight": 700`. They can't read `.woff2` files, variable weights such as `"300 900"`, or a font service's stylesheet, so with those they use the theme's built-in font, and the build warns.
+[Share images](share-images.md#fonts-in-share-images) use the `display` and `body` fonts too, from `.ttf`, `.otf` or `.woff` files with a single weight.
 
 ## Tags and badges
 
@@ -202,27 +204,17 @@ It optimizes the SVG and replaces its colors with theme colors, and writes `pack
 
 ## Hero
 
-The home page hero uses the theme's first accent color, with the theme's pattern: dots in `festival`, a beam in `spotlight` and ruled lines in `paper`. In `glass`, the title sits on a glass panel, and `minimalist` has no pattern, only a sun behind the illustration. `heroSettings.home` in `packages/config/site.json` can add an illustration or a background photo ([Pages configuration](01-configure-app.md#pages-configuration)). With a photo, the build checks that the dark scheme's `onSurface` text is readable on its `scrim` over a white photo. If it is not, set a darker `theme.darkColors.scrim`.
+The home page hero uses the theme's first accent color, with the theme's pattern: dots in `festival`, a beam in `spotlight` and ruled lines in `paper`. In `glass`, the title sits on a glass panel, and `minimalist` has no pattern, only a sun behind the illustration. `heroSettings.home` in `packages/config/site.json` can add an illustration or a background photo ([Pages](pages.md#home-page-hero)). With a photo, the build checks that the dark scheme's `onSurface` text is readable on its `scrim` over a white photo. If it is not, set a darker `theme.darkColors.scrim`.
 
 Other pages start with a smaller band in one of the theme's accent colors, the same for each section: speakers in the first accent color, the blog in the second, the schedule and the attending page in the third and the team in the fourth.
 
 The home page sections below the hero alternate between the surface color and the accent colors, whichever features are on. The subscribe band always uses the third accent color.
 
-The text under the hero titles is `heroDescriptions` in `packages/config/content/resources.json` ([Pages configuration](01-configure-app.md#pages-configuration)).
+The text under the hero titles is `heroDescriptions` in `packages/config/content/resources.json` ([Pages](pages.md#page-descriptions)).
 
-## Attending page images
+## See also
 
-The [attending page](01-configure-app.md#attending-page) has two images, `attendingPage.photo` and `attendingPage.floorPlan`.
-
-- **The venue photo** is cropped to a 3:2 frame, and shows up to about 800 pixels wide. A 1600×1067 JPEG or WebP is sharp on high-density screens. Keep the subject in the middle, since the edges may be cropped.
-- **The floor plan** is not cropped, and shows up to 1200 pixels wide, the width of the content. Visitors can open it full size, so make it 2400 pixels wide, or an SVG. Use high-contrast labels that are still readable on a phone.
-
-The service worker downloads both for offline use when a visitor first opens the site, so keep each under 500 KB if you can. Images over 2 MB are left out, and the build warns about them.
-
-## Text
-
-Styling does not change the text. [Text and languages](01-configure-app.md#text-and-languages) lists where each kind of text is edited. Translated text is often longer than English, so leave room for it to wrap in custom styles. No other language ships yet, so this is not checked (verify).
-
-## Next steps
-
-Learn how to [deploy the app to the web](04-deploy.md).
+- [Pages](pages.md)
+- [Share images](share-images.md)
+- [Accessibility](accessibility.md)
+- [Customize](customize.md)

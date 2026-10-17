@@ -321,7 +321,7 @@ export const runCodeUpgrade = async ({
   if (compareVersions(from, '4.0.0') < 0) {
     console.log(
       `✘ This site is on v${from}. hb upgrade supports v4 and later. Sites from before v4 ` +
-        'relaunch on v4, see docs/releases.md#supported-versions.',
+        'relaunch on v4, see docs/guides/upgrade.md#supported-versions.',
     );
     return false;
   }

@@ -41,7 +41,7 @@ export const runUpgrade = async (
   if (typeof version !== 'number') {
     console.log(
       `✘ ${sitePath} has no schemaVersion, so it's from before v4. hb upgrade supports v4 ` +
-        'and later. Sites from before v4 relaunch on v4, see docs/releases.md#supported-versions.',
+        'and later. Sites from before v4 relaunch on v4, see docs/guides/upgrade.md#supported-versions.',
     );
     return false;
   }

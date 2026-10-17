@@ -216,7 +216,7 @@ const printBudgetSteps = () => {
   console.log(
     [
       '\nSet a spend cap and a budget, so unexpected traffic cannot run up a bill',
-      '(docs/tutorials/02-firebase.md#spend-cap-and-budget). In',
+      '(docs/guides/firebase-project.md#spend-cap-and-budget). In',
       'https://console.cloud.google.com/billing/budgets, create:',
       '  1. A budget with spend cap enforcement for the Cloud Run service of this project.',
       '  2. A budget for the whole project that only sends email alerts.',

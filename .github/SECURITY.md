@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Only the latest major version gets security fixes. See [docs/releases.md](../docs/releases.md#supported-versions).
+Only the latest major version gets security fixes. See [Supported versions](../docs/guides/upgrade.md#supported-versions).
 
 ## Reporting a vulnerability
 

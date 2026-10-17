@@ -101,7 +101,7 @@ const scheduleProblems = ({ sessions = [] }: Partial<Content>): string[] => {
   if (__HB_FEATURES__.schedule && sessions.length && !sessions.some(({ day }) => day)) {
     console.warn(
       `None of the ${sessions.length} sessions has a day and times, so the schedule is empty. ` +
-        `Sessions from before v4 need \`${checkCommand()} --fix\`. See docs/tutorials/firebase-utils.md.`,
+        `Sessions from before v4 need \`${checkCommand()} --fix\`. See docs/guides/upgrade.md#migrations.`,
     );
   }
   return scheduleErrors(sessions, scheduleTracks);

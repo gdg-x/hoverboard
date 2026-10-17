@@ -59,15 +59,7 @@ Barriers the audit confirms will be listed here.
 
 ## Your event's site
 
-Each site is run by its organizers, who also write its content. Some of what makes a site accessible is up to them:
-
-- Alt text for the logo, partner logos, photos and blog post images. A gallery photo's is its `alt` field. Without it, screen readers hear "Gallery photo", and `./hb data check` warns.
-- Captions for videos.
-- Accessibility information about the venue, on the attending page.
-- Contrast of their own colors and photos. The build checks the colors in `site.json`, but not colors set in `custom.css`.
-- Clear link text in their content.
-
-[Configure](tutorials/01-configure-app.md#accessibility-checklist) has a checklist for organizers.
+Each site is run by its organizers, who also write its content; see the [accessibility guide](guides/accessibility.md) for what to check in your event's images, videos, venue details and colors.
 
 If you have a problem with one event's site, contact its organizers first. If the problem is in Hoverboard itself, report it here.
 

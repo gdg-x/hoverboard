@@ -169,7 +169,7 @@ export const createProgram = (): Command => {
   program
     .command('setup')
     .description(
-      'Log in to Firebase and select a project for local development (docs/tutorials/00-set-up.md).',
+      'Log in to Firebase and select a project for local development (docs/guides/firebase-project.md).',
     )
     .action(run(async () => (await import('./commands/setup.js')).runSetup()));
 

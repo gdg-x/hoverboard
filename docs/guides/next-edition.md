@@ -1,16 +1,17 @@
 # Next edition
 
-A recurring event keeps its repository for the next edition, and keeps every earlier edition online. Each edition has its own Firebase project:
+Start the next year's edition in a new Firebase project while keeping every earlier edition online as a read-only archive.
+
+**For:** [returning organizers](../README.md#returning-organizer) and [fork maintainers](../README.md#fork-maintainer).
+
+Each edition has its own Firebase project, so the current site starts on the free quota and archived editions stay read-only and free (after moving back to the Spark plan):
 
 | Edition | Firebase project  | Address            | Functions | In the browser           |
 | ------- | ----------------- | ------------------ | --------- | ------------------------ |
 | 2027    | `devfest-ua`      | `2027.example.com` | Deleted   | Reads only               |
 | 2028    | `devfest-ua-2028` | `example.com`      | Yes       | Reads and visitor writes |
 
-- **Each edition has the free quota.** Firestore has one free database per project, so the current site starts each year on the free quota, and an archive's visits are free.
-- **Archives can't change.** An archive has its functions deleted, read-only Firestore rules, and a build with every feature that writes turned off. Its pages show a banner that links to the current edition.
-- **Archives can go back to the free Spark plan**, since they only need Hosting and Firestore (verify).
-- **`firebase.projectId` in `site.json` names the current edition.** `packages/config/editions.json` lists the archives, with their year, git tag, project and address.
+`firebase.projectId` in `packages/config/site.json` names the current edition, and `packages/config/editions.json` lists the archives with their year, git tag, project and address. See [How it works](../how-it-works.md#editions).
 
 Starting the next edition takes two commands, with the domain move between them, so the current site keeps working until the new one is ready.
 
@@ -88,4 +89,11 @@ Then move the old project back to the Spark plan in the Firebase console, so the
 - `edition feedback [year]` writes each session's ratings and comments to `feedback-<year>/<session>.csv`, with `sessions.csv` for the averages, so you can send them to speakers. Without a year it reads the current edition: add `--production`. The files have no user IDs.
 - `edition rebuild <year>` builds an archive again from its tag and deploys it, for example after a security fix.
 
-An archived build turns off `blog`, `demo`, `feedback`, `forkMe`, `functions`, `mySchedule`, `notifications` and `subscribe`, hides the partner form and sign-in, and sets `archive` in `site.json` to its year and the current edition's address. The build fails when an archive has one of those features on.
+An archived build turns off `blog`, `demo`, `feedback`, `forkMe`, `functions`, `mySchedule`, `notifications` and `subscribe`, hides the partner form and sign-in, and sets `archive` in `site.json` to its year and the current edition's address. The build fails when an archive has one of those features on. See [Features reference](../reference/features.md#archived-editions) and [Security](security.md#archived-editions).
+
+## See also
+
+- [Run your event](run-your-event.md)
+- [Backups](backups.md)
+- [Security](security.md#archived-editions)
+- [CLI reference](../reference/cli.md#hb-edition)
