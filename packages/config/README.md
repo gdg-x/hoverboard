@@ -9,4 +9,4 @@ Run `./hb init` to create it. It copies the demo site from `packages/demo-config
 - `public/`: images, such as the logo, icon and share image. They're served from the site's root, over the files in `packages/web/public`.
 - `custom.css`: your own styles, loaded after the theme.
 
-Until this folder has a `site.json`, the build, `npm start` and `./hb` use the demo in `packages/demo-config`, and deploys stop. See [Configure the app](../../docs/tutorials/01-configure-app.md).
+Until this folder has a `site.json`, the build, `npm start` and `./hb` use the demo in `packages/demo-config`, and deploys stop. See [Configuration reference](../../docs/reference/configuration.md).

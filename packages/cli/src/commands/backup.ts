@@ -346,7 +346,7 @@ const restoreUsers = async (
     if (withPassword.length) {
       console.log(
         `! ${plural(withPassword.length, 'user')} with a password left out. Importing them needs ` +
-          "the project's password hash settings, see docs/tutorials/firebase-utils.md.",
+          "the project's password hash settings, see docs/guides/backups.md.",
       );
     }
     const result = { imported: toImport.length, kept: overwrite ? 0 : there.length };

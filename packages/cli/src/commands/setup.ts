@@ -9,7 +9,7 @@ import { runDoctor } from './doctor.js';
 /**
  * Interactively logs a new contributor in to Firebase and points the Firebase CLI at the
  * project in the site config, automating the manual steps in
- * docs/tutorials/00-set-up.md.
+ * docs/guides/firebase-project.md.
  */
 export const runSetup = async (): Promise<boolean> => {
   const repoRoot = findRepoRoot(process.cwd());

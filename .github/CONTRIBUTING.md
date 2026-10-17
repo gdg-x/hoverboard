@@ -1,63 +1,25 @@
-## Guide for Contributors
+# Contributing to Hoverboard
 
-Hoverboard are built in the open, and the GDG[x] team eagerly encourage any and all forms of community contribution. When contributing, please follow these guidelines:
+Contributions of all kinds are welcome. Check the [open issues](https://github.com/gdg-x/hoverboard/issues) to see what is planned.
 
-### Filing Issues
+- Issues labeled [`good first issue`](https://github.com/gdg-x/hoverboard/labels/good%20first%20issue) are a good place to start.
+- Issues labeled [`help wanted`](https://github.com/gdg-x/hoverboard/labels/help%20wanted) are ready for a pull request.
 
-**If you are filing an issue to request a feature**, please provide a clear description of the feature. It can be helpful to describe answers to the following questions:
+## Development setup
 
-1.  **Who will use the feature?** _“As someone filling out a form…”_
-2.  **When will they use the feature?** _“When I enter an invalid value…”_
-3.  **What is the user’s goal?** _“I want to be visually notified that the value needs to be corrected…”_
+See [Development](../docs/contributing/development.md) for how to install dependencies, run the local emulators and dev server, and run the linter and tests, and [`AGENTS.md`](../AGENTS.md) for codebase conventions.
 
-**If you are filing an issue to report a bug**, please provide:
+## Filing issues
 
-1.  **A clear description of the bug and related expectations.** Consider using the following example template for reporting a bug:
+Search [existing issues](https://github.com/gdg-x/hoverboard/issues) first.
 
-```markdown
-The `paper-foo` element causes the page to turn pink when clicked.
+- **Bug reports:** include steps to reproduce the problem, what happened, what you expected, and your browser and OS when relevant.
+- **Feature requests:** describe who the feature is for (organizer or attendee), when they use it, and what problem it solves.
+- **Security vulnerabilities:** do not open a public issue; follow [`SECURITY.md`](SECURITY.md) instead.
 
-## Expected outcome
+## Submitting pull requests
 
-The page stays the same color.
-
-## Actual outcome
-
-The page turns pink.
-
-## Steps to reproduce
-
-1. Put a `paper-foo` element in the page.
-2. Open the page in a web browser.
-3. Click the `paper-foo` element.
-```
-
-3.  **A list of browsers where the problem occurs.** This can be skipped if the problem is the same across all browsers.
-
-### Submitting Pull Requests
-
-**Before creating a pull request**, please ensure that an issue exists for the corresponding change in the pull request that you intend to make. **If an issue does not exist, please create one per the guidelines above**. The goal is to discuss the design and necessity of the proposed change with Polymer authors and community before diving into a pull request.
-
-When submitting pull requests, please provide:
-
-1.  **A reference to the corresponding issue** or issues that will be closed by the pull request. Please refer to these issues in the pull request description using the following syntax:
-
-```markdown
-(For a single issue)
-Fixes #20
-
-(For multiple issues)
-Fixes #32, fixes #40
-```
-
-2.  **A succinct description of the design** used to fix any related issues. For example:
-
-```markdown
-This fixes #20 by removing styles that leaked which would cause the page to turn pink whenever `paper-foo` is clicked.
-```
-
-3.  **At least one test for each bug fixed or feature added** as part of the pull request. Pull requests that fix bugs or add features without accompanying tests will not be considered.
-
-4.  **A [Conventional Commits](https://www.conventionalcommits.org/) title**, for example `fix(web): show session times in the event time zone`. Pull requests are squash merged and the title becomes the release note, so mark breaking changes with `!` and explain them in the description. See [docs/releases.md](../docs/releases.md#pull-requests).
-
-_Copied from [Polymer Elements contributing guide](https://github.com/PolymerElements/ContributionGuide)_
+1. **Link the issue** your pull request addresses in the description, for example `Fixes #123`.
+1. **Include tests** for every bug fix or new feature, and update the documentation in [`docs/`](../docs/README.md) when behavior, configuration or CLI commands change.
+1. **Run `npm run lint` and `npm test`** locally (or `npm run fix` to format with ESLint and Prettier).
+1. **Use a [Conventional Commits](https://www.conventionalcommits.org/) title**, for example `fix(web): show session times in the event time zone`. Pull requests are squash merged and the title becomes the release note, so mark breaking changes with `!` and explain them in a `BREAKING CHANGE:` paragraph in the description. See [Releases](../docs/contributing/releases.md#pull-requests).

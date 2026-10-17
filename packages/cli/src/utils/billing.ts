@@ -35,7 +35,7 @@ export const checkBilling = async (
       message:
         `${projectId} is not on the Blaze plan, which deploying Cloud Functions requires. ` +
         `Upgrade at https://console.firebase.google.com/project/${projectId}/usage/details ` +
-        'and set a spend cap (see docs/tutorials/02-firebase.md#billing).',
+        'and set a spend cap (see docs/guides/firebase-project.md#billing).',
     };
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);

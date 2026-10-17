@@ -386,7 +386,7 @@ export const runEditionNew = async ({
     console.log(
       `! ${url} is the project's own address, so the site's address changes with each edition. ` +
         'A custom domain moves to the new edition instead: set it up first (see ' +
-        'docs/tutorials/07-next-edition.md).',
+        'docs/guides/next-edition.md).',
     );
   }
 

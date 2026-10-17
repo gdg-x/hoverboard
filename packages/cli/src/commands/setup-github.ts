@@ -22,7 +22,7 @@ export const REQUIRED_APIS = [
 ];
 
 // What `firebase deploy`, the preview deploys and the build need, and the manual setup in
-// docs/tutorials/04-deploy.md lists. No Firestore writes, Auth users or Storage objects.
+// docs/guides/deploy.md lists. No Firestore writes, Auth users or Storage objects.
 export const DEPLOY_ROLES = [
   // Releases and preview channels.
   'roles/firebasehosting.admin',
