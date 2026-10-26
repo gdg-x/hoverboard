@@ -23,6 +23,7 @@
     "config:validate": "tsx src/index.ts config validate"
   },
   "dependencies": {
+    "@abraham/firebase-wif": "^0.2.1",
     "ajv": "^8.20.0",
     "commander": "^15.0.0",
     "firebase-admin": "^14.5.0"

@@ -124,6 +124,6 @@ export const setUpRepository = async (
     return { ok: false, pushed: false };
   }
   console.log(`✔ Pushed the site to ${name}. Letting its GitHub Actions deploy...`);
-  const ok = runCommand(process.execPath, ['hb', 'setup-github'], repoRoot) === 0;
+  const ok = runCommand(process.execPath, ['hb', 'setup-github', '--yes'], repoRoot) === 0;
   return { ok, pushed: true };
 };

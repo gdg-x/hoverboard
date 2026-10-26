@@ -2,8 +2,8 @@ import { createGoogleCloud, type GoogleCloud } from '../lib/google-cloud.js';
 import { confirmChange } from '../lib/prompt.js';
 import { UsageError } from '../lib/command.js';
 import { demoDeployProblem, resolveFirebaseProjectId } from '../utils/firebase-project.js';
+import { type Policy, addMember, removeMember } from '../lib/iam-policy.js';
 import { findRepoRoot } from '../utils/node-version.js';
-import { type Policy, addMember, removeMember } from './setup-github.js';
 
 const CRM = 'https://cloudresourcemanager.googleapis.com/v1';
 

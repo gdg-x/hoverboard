@@ -239,7 +239,7 @@ describe('runEditionNew', () => {
     expect(commands()).toEqual([
       'node hb data check --production',
       'node hb backup create --production',
-      'node hb setup-github --project fest-2028',
+      'node hb setup-github --project fest-2028 --yes',
       expect.stringMatching(
         /^node hb data export .* --collection previousSpeakers .* --production @fest$/,
       ),

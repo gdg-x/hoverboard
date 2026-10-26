@@ -1,440 +1,248 @@
 import { execFileSync } from 'child_process';
-import { mkdtempSync, rmSync } from 'fs';
+import { cpSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
-import { afterEach, describe, expect, it } from 'vitest';
-import type { GoogleCloud, HttpMethod } from '../lib/google-cloud.js';
+import { createConfiguredFakes, createFakeGoogle } from '@abraham/firebase-wif/testing';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  DEPLOY_ROLES,
-  REQUIRED_APIS,
-  REQUIRED_PERMISSIONS,
+  EXTRA_DEPLOY_ROLES,
   checkGitHubDeploys,
   githubRepoFromGit,
-  grantDeployRoles,
-  setupGitHub,
+  runSetupGitHub,
+  type Clients,
 } from './setup-github.js';
-import type { GitHubVariables } from './setup-github.js';
+
+const confirmMock = vi.hoisted(() => vi.fn());
+vi.mock('../lib/prompt.js', () => ({ confirmChange: confirmMock }));
 
 const PROJECT = 'demo-project';
-const REPO = 'owner/site';
-const EMAIL = `github-deploy@${PROJECT}.iam.gserviceaccount.com`;
-const POOL = `https://iam.googleapis.com/v1/projects/${PROJECT}/locations/global/workloadIdentityPools/github`;
-const PROVIDER = `${POOL}/providers/github`;
-const ACCOUNT = `https://iam.googleapis.com/v1/projects/${PROJECT}/serviceAccounts/${EMAIL}`;
-const PRINCIPAL = `principalSet://iam.googleapis.com/projects/123/locations/global/workloadIdentityPools/github/attribute.repository/${REPO}`;
-const PROVIDER_NAME = 'projects/123/locations/global/workloadIdentityPools/github/providers/github';
+const REPO = 'octo-org/site';
+const FIREBASE_JSON = { hosting: {}, firestore: {}, storage: {}, functions: {} };
 
-interface Policy {
-  bindings?: { role: string; members?: string[] }[];
-}
+type Fakes = ReturnType<typeof createConfiguredFakes>;
 
-interface FakeState {
-  permissions: string[];
-  enabledApis: Set<string>;
-  account: boolean;
-  projectPolicy: Policy;
-  accountPolicy: Policy;
-  pool?: { state: string };
-  provider?: { state: string; attributeCondition?: string };
-}
-
-const notFound = () => Object.assign(new Error('Not Found'), { status: 404 });
-
-/** An in-memory Google Cloud that records every request. */
-const fakeCloud = (overrides: Partial<FakeState> = {}) => {
-  const state: FakeState = {
-    permissions: [...REQUIRED_PERMISSIONS],
-    enabledApis: new Set(REQUIRED_APIS),
-    account: false,
-    projectPolicy: { bindings: [] },
-    accountPolicy: {},
-    ...overrides,
-  };
-  const requests: string[] = [];
-  const done = { name: 'operations/1', done: true };
-
-  const cloud: GoogleCloud = {
-    async request<T>(method: HttpMethod, url: string, body?: unknown): Promise<T> {
-      requests.push(`${method} ${url}`);
-      const path = url.split('?')[0] ?? '';
-      const respond = (value: unknown) => value as T;
-      const input = body as { policy?: Policy } | undefined;
-
-      if (path.endsWith(':testIamPermissions')) return respond({ permissions: state.permissions });
-      if (path.endsWith(`/projects/${PROJECT}`)) return respond({ projectNumber: '123' });
-      if (path.includes('/services/')) {
-        const api = path.split('/services/')[1]?.replace(':enable', '') ?? '';
-        if (method === 'POST') state.enabledApis.add(api);
-        return respond(
-          method === 'POST' ? done : { state: state.enabledApis.has(api) ? 'ENABLED' : 'DISABLED' },
-        );
-      }
-      if (path.endsWith(':getIamPolicy')) {
-        return respond(
-          structuredClone(path.startsWith(ACCOUNT) ? state.accountPolicy : state.projectPolicy),
-        );
-      }
-      if (path.endsWith(':setIamPolicy')) {
-        if (path.startsWith(ACCOUNT)) state.accountPolicy = input?.policy ?? {};
-        else state.projectPolicy = input?.policy ?? {};
-        return respond({});
-      }
-      if (path === ACCOUNT) {
-        if (!state.account) throw notFound();
-        return respond({ email: EMAIL });
-      }
-      if (path.endsWith('/serviceAccounts') && method === 'POST') {
-        state.account = true;
-        return respond({ email: EMAIL });
-      }
-      if (path === `${POOL}:undelete`) {
-        state.pool = { state: 'ACTIVE' };
-        return respond(done);
-      }
-      if (path === POOL) {
-        if (!state.pool) throw notFound();
-        return respond(state.pool);
-      }
-      if (path.endsWith('/workloadIdentityPools') && method === 'POST') {
-        state.pool = { state: 'ACTIVE' };
-        return respond(done);
-      }
-      if (path === PROVIDER && method === 'PATCH') {
-        state.provider = {
-          state: 'ACTIVE',
-          attributeCondition: (body as { attributeCondition: string }).attributeCondition,
-        };
-        return respond(done);
-      }
-      if (path === PROVIDER) {
-        if (!state.provider) throw notFound();
-        return respond(state.provider);
-      }
-      if (path.endsWith('/providers') && method === 'POST') {
-        state.provider = {
-          state: 'ACTIVE',
-          attributeCondition: (body as { attributeCondition: string }).attributeCondition,
-        };
-        return respond(done);
-      }
-      throw new Error(`Unexpected request: ${method} ${url}`);
-    },
-  };
-
-  return { cloud, state, requests };
-};
-
-const fakeGitHub = (works = true, initial: Record<string, string> = {}) => {
-  const variables: Record<string, string> = { ...initial };
-  const github: GitHubVariables = {
-    get(repo, name) {
-      return variables[`${repo}:${name}`];
-    },
-    set(repo, name, value) {
-      if (works) variables[`${repo}:${name}`] = value;
-      return works;
-    },
-  };
-  return { github, variables };
-};
-
-const run = async (cloud: GoogleCloud, github: GitHubVariables, dryRun = false) => {
-  const logs: string[] = [];
-  const result = await setupGitHub({
-    cloud,
-    github,
-    projectId: PROJECT,
-    repo: REPO,
-    dryRun,
-    log: (message) => logs.push(message),
-    sleep: async () => {},
-  });
-  return { ...result, logs };
-};
-
-const membersOf = (policy: Policy, role: string) =>
-  policy.bindings?.find((binding) => binding.role === role)?.members ?? [];
-
-const dirs: string[] = [];
-afterEach(() => {
-  for (const dir of dirs.splice(0)) rmSync(dir, { recursive: true, force: true });
-});
+let dir: string;
+let logs: string[];
 
 const repoWithOrigin = (url: string) => {
-  const dir = mkdtempSync(join(tmpdir(), 'hoverboard-git-'));
-  dirs.push(dir);
-  execFileSync('git', ['init', '-q'], { cwd: dir });
-  execFileSync('git', ['remote', 'add', 'origin', url], { cwd: dir });
-  return dir;
+  const root = mkdtempSync(join(tmpdir(), 'hoverboard-git-'));
+  execFileSync('git', ['init', '-q'], { cwd: root });
+  execFileSync('git', ['remote', 'add', 'origin', url], { cwd: root });
+  writeFileSync(join(root, 'firebase.json'), JSON.stringify(FIREBASE_JSON));
+  return root;
 };
 
-describe('setupGitHub', () => {
-  it('creates everything in a new project and sets the GitHub variables', async () => {
-    const { cloud, state } = fakeCloud({ enabledApis: new Set() });
-    const { github, variables } = fakeGitHub();
-
-    const { ok } = await run(cloud, github);
-
-    expect(ok).toBe(true);
-    expect([...state.enabledApis].sort()).toEqual([...REQUIRED_APIS].sort());
-    expect(state.account).toBe(true);
-    for (const role of DEPLOY_ROLES) {
-      expect(membersOf(state.projectPolicy, role)).toEqual([`serviceAccount:${EMAIL}`]);
-    }
-    expect(state.pool?.state).toBe('ACTIVE');
-    expect(state.provider?.attributeCondition).toBe(`assertion.repository == '${REPO}'`);
-    expect(membersOf(state.accountPolicy, 'roles/iam.workloadIdentityUser')).toEqual([PRINCIPAL]);
-    expect(variables).toEqual({
-      [`${REPO}:WIF_PROVIDER`]: PROVIDER_NAME,
-      [`${REPO}:DEPLOY_SERVICE_ACCOUNT`]: EMAIL,
-    });
+/** A project and repository that are fully set up, with Hoverboard's extra roles. */
+const configured = (): Fakes => {
+  const fakes = createConfiguredFakes({
+    projectId: PROJECT,
+    repo: REPO,
+    firebaseJson: FIREBASE_JSON,
   });
+  const member = `serviceAccount:${fakes.names.serviceAccount}`;
+  fakes.google.state.projects[0]!.iamPolicy.bindings!.push(
+    ...EXTRA_DEPLOY_ROLES.map((role) => ({ role, members: [member] })),
+  );
+  return fakes;
+};
 
-  it('changes nothing when everything is already set up', async () => {
-    const { cloud, requests } = fakeCloud({
-      account: true,
-      projectPolicy: {
-        bindings: DEPLOY_ROLES.map((role) => ({ role, members: [`serviceAccount:${EMAIL}`] })),
+/** A repository with nothing set up, and a project with no APIs on. */
+const fresh = () => {
+  const { github } = createConfiguredFakes({ repo: REPO });
+  const repo = github.state.repos[REPO]!;
+  repo.variables = {};
+  repo.environments = {};
+  const google = createFakeGoogle({
+    projects: [
+      {
+        projectId: PROJECT,
+        projectNumber: '123',
+        enabledServices: [],
+        iamPolicy: { bindings: [] },
       },
-      accountPolicy: {
-        bindings: [{ role: 'roles/iam.workloadIdentityUser', members: [PRINCIPAL] }],
-      },
-      pool: { state: 'ACTIVE' },
-      provider: { state: 'ACTIVE', attributeCondition: `assertion.repository == '${REPO}'` },
-    });
-    const { github } = fakeGitHub(true, {
-      [`${REPO}:WIF_PROVIDER`]: PROVIDER_NAME,
-      [`${REPO}:DEPLOY_SERVICE_ACCOUNT`]: EMAIL,
-    });
-
-    const { ok, changes, logs } = await run(cloud, github);
-
-    expect(ok).toBe(true);
-    expect(changes).toEqual([]);
-    expect(
-      requests.filter((request) => /setIamPolicy|PATCH|:enable|undelete/.test(request)),
-    ).toEqual([]);
-    expect(
-      requests.filter(
-        (request) =>
-          request.startsWith('POST') && /serviceAccounts$|Pools\?|providers\?/.test(request),
-      ),
-    ).toEqual([]);
-    expect(logs.some((line) => line.startsWith('•'))).toBe(false);
+    ],
   });
+  return { google, github };
+};
 
-  it('keeps existing members and adds only missing roles', async () => {
-    const { cloud, state } = fakeCloud({
-      account: true,
-      projectPolicy: {
-        bindings: [
-          {
-            role: 'roles/firebasehosting.admin',
-            members: ['user:owner@example.com', `serviceAccount:${EMAIL}`],
-          },
-        ],
-      },
-    });
-    const { github } = fakeGitHub();
+const clients = ({ google, github }: Pick<Fakes, 'google' | 'github'>): Clients => ({
+  google: async () => google,
+  github: async () => github,
+  sleep: async () => {},
+});
 
-    await run(cloud, github);
+const writes = (google: Fakes['google']) =>
+  google.calls.filter(
+    ({ method, url }) => method !== 'GET' && !/:(testIamPermissions|getIamPolicy)$/.test(url),
+  );
 
-    expect(membersOf(state.projectPolicy, 'roles/firebasehosting.admin')).toEqual([
-      'user:owner@example.com',
-      `serviceAccount:${EMAIL}`,
-    ]);
-    expect(membersOf(state.projectPolicy, 'roles/cloudscheduler.admin')).toEqual([
-      `serviceAccount:${EMAIL}`,
-    ]);
-  });
+const membersOf = (google: Fakes['google'], projectId: string, role: string) =>
+  google.state.projects
+    .find((project) => project.projectId === projectId)
+    ?.iamPolicy.bindings?.find((binding) => binding.role === role)?.members ?? [];
 
-  it('grants only the roles a deploy needs', () => {
-    expect(DEPLOY_ROLES).toEqual([
+beforeEach(() => {
+  dir = repoWithOrigin(`git@github.com:${REPO}.git`);
+  vi.spyOn(process, 'cwd').mockReturnValue(dir);
+  logs = [];
+  vi.spyOn(console, 'log').mockImplementation((line: string) => logs.push(line));
+  confirmMock.mockReset().mockResolvedValue(true);
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
+  rmSync(dir, { recursive: true, force: true });
+});
+
+describe('runSetupGitHub', () => {
+  it('sets up a new project and repository after asking', async () => {
+    const fakes = fresh();
+
+    const result = await runSetupGitHub({ project: PROJECT }, clients(fakes));
+
+    expect(result.ok).toBe(true);
+    expect(confirmMock).toHaveBeenCalledWith('\nApply these changes?', undefined);
+    const repo = fakes.github.state.repos[REPO]!;
+    const email = repo.variables?.['FIREBASE_WIF_SERVICE_ACCOUNT'];
+    expect(email).toMatch(/@demo-project\.iam\.gserviceaccount\.com$/);
+    expect(repo.variables?.['FIREBASE_WIF_PROVIDER']).toMatch(
+      /^projects\/123\/locations\/global\/workloadIdentityPools\/github\/providers\//,
+    );
+    for (const role of [
+      ...EXTRA_DEPLOY_ROLES,
       'roles/firebasehosting.admin',
       'roles/firebaserules.admin',
-      'roles/datastore.indexAdmin',
-      'roles/datastore.viewer',
-      'roles/firebasestorage.viewer',
-      'roles/storage.bucketViewer',
       'roles/cloudfunctions.admin',
-      'roles/cloudscheduler.admin',
-      'roles/serviceusage.serviceUsageConsumer',
-      'roles/iam.serviceAccountUser',
-    ]);
+    ]) {
+      expect(membersOf(fakes.google, PROJECT, role)).toEqual([`serviceAccount:${email}`]);
+    }
+    expect(Object.keys(repo.environments ?? {})).toEqual(['production']);
+    expect(logs).toContain('\nIAM changes can take a few minutes to take effect.');
   });
 
-  it('takes the roles earlier versions granted away from the deploy account only', async () => {
-    const { cloud, state } = fakeCloud({
-      account: true,
-      projectPolicy: {
-        bindings: [
-          ...DEPLOY_ROLES.map((role) => ({ role, members: [`serviceAccount:${EMAIL}`] })),
-          {
-            role: 'roles/firebase.admin',
-            members: ['user:owner@example.com', `serviceAccount:${EMAIL}`],
-          },
-          { role: 'roles/run.admin', members: [`serviceAccount:${EMAIL}`] },
-        ],
-      },
-    });
-    const { github } = fakeGitHub();
+  it('changes nothing when everything is set up', async () => {
+    const fakes = configured();
 
-    const { changes } = await run(cloud, github);
+    const result = await runSetupGitHub({ project: PROJECT }, clients(fakes));
 
-    expect(changes).toContain(
-      `remove roles/firebase.admin, roles/run.admin from ${EMAIL}, which deploys no longer need`,
-    );
-    expect(membersOf(state.projectPolicy, 'roles/firebase.admin')).toEqual([
-      'user:owner@example.com',
-    ]);
-    expect(state.projectPolicy.bindings?.map(({ role }) => role)).not.toContain('roles/run.admin');
-  });
-
-  it('only reports the roles it would take away in a dry run', async () => {
-    const { cloud, state, requests } = fakeCloud({
-      account: true,
-      projectPolicy: {
-        bindings: [{ role: 'roles/firebase.admin', members: [`serviceAccount:${EMAIL}`] }],
-      },
-    });
-    const { github } = fakeGitHub();
-
-    const { changes } = await run(cloud, github, true);
-
-    expect(changes).toContain(
-      `remove roles/firebase.admin from ${EMAIL}, which deploys no longer need`,
-    );
-    expect(membersOf(state.projectPolicy, 'roles/firebase.admin')).toEqual([
-      `serviceAccount:${EMAIL}`,
-    ]);
-    expect(requests.filter((request) => request.includes(':setIamPolicy'))).toEqual([]);
-  });
-
-  it('limits an existing provider to the repository', async () => {
-    const { cloud, state } = fakeCloud({
-      account: true,
-      pool: { state: 'ACTIVE' },
-      provider: { state: 'ACTIVE' },
-    });
-    const { github } = fakeGitHub();
-
-    await run(cloud, github);
-
-    expect(state.provider?.attributeCondition).toBe(`assertion.repository == '${REPO}'`);
-  });
-
-  it('restores a deleted pool', async () => {
-    const { cloud, state } = fakeCloud({ pool: { state: 'DELETED' } });
-    const { github } = fakeGitHub();
-
-    await run(cloud, github);
-
-    expect(state.pool?.state).toBe('ACTIVE');
+    expect(result).toEqual({ ok: true, changes: [] });
+    expect(writes(fakes.google)).toEqual([]);
+    expect(confirmMock).not.toHaveBeenCalled();
+    expect(logs).toContain(`✔ ${REPO} can deploy to ${PROJECT}.`);
   });
 
   it('only reads in a dry run', async () => {
-    const { cloud, requests } = fakeCloud();
-    const { github, variables } = fakeGitHub();
+    const fakes = fresh();
 
-    const { ok, changes, logs } = await run(cloud, github, true);
+    const result = await runSetupGitHub({ project: PROJECT, dryRun: true }, clients(fakes));
 
-    expect(ok).toBe(true);
-    const writes = requests.filter(
-      (request) => !request.startsWith('GET') && !/testIamPermissions|getIamPolicy/.test(request),
-    );
-    expect(writes).toEqual([]);
-    expect(variables).toEqual({});
-    expect(changes).toContain(`create the service account ${EMAIL}`);
-    expect(logs).toContain(`• Would create the service account ${EMAIL}`);
-    expect(logs).toContain(`• Would let ${REPO} act as ${EMAIL}`);
+    expect(result.ok).toBe(true);
+    expect(result['changes']).toEqual(expect.arrayContaining([expect.any(String)]));
+    expect(writes(fakes.google)).toEqual([]);
+    expect(fakes.github.state.repos[REPO]?.variables).toEqual({});
+    expect(logs.filter((line) => line.startsWith('• Would ')).length).toBeGreaterThan(0);
+    expect(confirmMock).not.toHaveBeenCalled();
   });
 
-  it('reports an outdated GitHub variable in a dry run', async () => {
-    const { cloud } = fakeCloud();
-    const { github } = fakeGitHub(true, {
-      [`${REPO}:WIF_PROVIDER`]:
-        'projects/1/locations/global/workloadIdentityPools/old/providers/old',
-      [`${REPO}:DEPLOY_SERVICE_ACCOUNT`]: EMAIL,
-    });
+  it('changes nothing when declined', async () => {
+    const fakes = fresh();
+    confirmMock.mockResolvedValue(false);
 
-    const { changes } = await run(cloud, github, true);
+    const result = await runSetupGitHub({ project: PROJECT }, clients(fakes));
 
-    expect(changes).toContain(
-      `set the ${REPO} repository variable WIF_PROVIDER to ${PROVIDER_NAME}`,
-    );
-    expect(changes.some((entry) => entry.includes('DEPLOY_SERVICE_ACCOUNT'))).toBe(false);
+    expect(result).toEqual({ ok: false, changes: [] });
+    expect(writes(fakes.google)).toEqual([]);
+    expect(logs).toContain('Aborted.');
   });
 
-  it('keeps checking in a dry run when the account cannot make changes', async () => {
-    const { cloud } = fakeCloud({ permissions: [] });
-    const { github } = fakeGitHub();
+  it('passes --yes on to the confirmation', async () => {
+    const fakes = fresh();
 
-    const { ok, changes, logs } = await run(cloud, github, true);
+    await runSetupGitHub({ project: PROJECT, yes: true }, clients(fakes));
 
-    expect(ok).toBe(true);
-    expect(logs[0]).toContain('iam.serviceAccounts.create');
-    expect(changes).toContain(`create the service account ${EMAIL}`);
+    expect(confirmMock).toHaveBeenCalledWith('\nApply these changes?', true);
   });
 
-  it('stops a dry run after the APIs when some are disabled', async () => {
-    const { cloud, requests } = fakeCloud({ enabledApis: new Set() });
-    const { github } = fakeGitHub();
-
-    const { ok, logs } = await run(cloud, github, true);
-
-    expect(ok).toBe(true);
-    expect(logs).toContain('• Would enable iam.googleapis.com');
-    expect(requests.some((request) => request.includes('serviceAccounts'))).toBe(false);
-  });
-
-  it('stops when the account is missing permissions', async () => {
-    const { cloud, requests } = fakeCloud({ permissions: [] });
-    const { github } = fakeGitHub();
-
-    const { ok, logs } = await run(cloud, github);
-
-    expect(ok).toBe(false);
-    expect(logs[0]).toContain('iam.serviceAccounts.create');
-    expect(requests).toHaveLength(1);
-  });
-
-  it('prints the variables when gh cannot set them', async () => {
-    const { cloud } = fakeCloud();
-    const { github } = fakeGitHub(false);
-
-    const { logs } = await run(cloud, github);
-
-    expect(logs).toContain(
-      `! Set the ${REPO} repository variable DEPLOY_SERVICE_ACCOUNT to ${EMAIL} in the GitHub settings.`,
-    );
-  });
-});
-
-describe('grantDeployRoles', () => {
-  const other = 'github-deploy@devfest-2027.iam.gserviceaccount.com';
-
-  it("grants the deploy roles to another project's deploy account, once", async () => {
-    const { cloud, state, requests } = fakeCloud();
-    const logs: string[] = [];
-    const options = {
-      cloud,
-      projectId: PROJECT,
-      email: other,
-      log: (line: string) => logs.push(line),
+  it('adopts the setup of earlier versions', async () => {
+    const legacyProvider =
+      'projects/123/locations/global/workloadIdentityPools/github/providers/github';
+    const legacyAccount = `github-deploy@${PROJECT}.iam.gserviceaccount.com`;
+    const fakes = fresh();
+    fakes.google.state.pools['projects/123/locations/global/workloadIdentityPools/github'] = {
+      state: 'ACTIVE',
+    };
+    fakes.google.state.providers[legacyProvider] = {
+      state: 'ACTIVE',
+      attributeCondition: `assertion.repository == '${REPO}'`,
+      oidc: { issuerUri: 'https://token.actions.githubusercontent.com' },
+    };
+    fakes.google.state.serviceAccounts[legacyAccount] = { projectId: PROJECT };
+    fakes.github.state.repos[REPO]!.variables = {
+      WIF_PROVIDER: legacyProvider,
+      DEPLOY_SERVICE_ACCOUNT: legacyAccount,
     };
 
-    expect(await grantDeployRoles({ ...options, dryRun: true })).toMatchObject({ ok: true });
-    expect(requests.filter((request) => request.includes('setIamPolicy'))).toEqual([]);
+    const result = await runSetupGitHub({ project: PROJECT }, clients(fakes));
 
-    await grantDeployRoles({ ...options, dryRun: false });
-    expect(state.projectPolicy.bindings?.map(({ role }) => role)).toEqual(DEPLOY_ROLES);
-    expect(state.projectPolicy.bindings?.[0]?.members).toEqual([`serviceAccount:${other}`]);
-
-    expect(await grantDeployRoles({ ...options, dryRun: false })).toEqual({
-      ok: true,
-      changes: [],
+    expect(result.ok).toBe(true);
+    expect(fakes.github.state.repos[REPO]?.variables).toMatchObject({
+      FIREBASE_WIF_PROVIDER: legacyProvider,
+      FIREBASE_WIF_SERVICE_ACCOUNT: legacyAccount,
     });
-    expect(logs.at(-1)).toBe(`✔ ${other} has the deploy roles in ${PROJECT}.`);
+    expect(Object.keys(fakes.google.state.serviceAccounts)).toEqual([legacyAccount]);
+    expect(membersOf(fakes.google, PROJECT, 'roles/datastore.viewer')).toEqual([
+      `serviceAccount:${legacyAccount}`,
+    ]);
+  });
+
+  it("lets a new edition's project reuse the deploy account", async () => {
+    const fakes = configured();
+    fakes.google.state.projects.push({
+      projectId: 'fest-2028',
+      projectNumber: '222',
+      enabledServices: [],
+      iamPolicy: { bindings: [] },
+    });
+    const pools = Object.keys(fakes.google.state.pools);
+
+    const result = await runSetupGitHub({ project: 'fest-2028' }, clients(fakes));
+
+    expect(result.ok).toBe(true);
+    expect(Object.keys(fakes.google.state.pools)).toEqual(pools);
+    for (const role of [...EXTRA_DEPLOY_ROLES, 'roles/firebasehosting.admin']) {
+      expect(membersOf(fakes.google, 'fest-2028', role)).toEqual([
+        `serviceAccount:${fakes.names.serviceAccount}`,
+      ]);
+    }
+  });
+
+  it('prints the GitHub changes to make by hand without GitHub credentials', async () => {
+    const fakes = fresh();
+    const { id, owner, default_branch } = fakes.github.state.repos[REPO]!;
+    vi.stubGlobal('fetch', async () => Response.json({ id, owner, default_branch }));
+
+    const result = await runSetupGitHub(
+      { project: PROJECT },
+      { ...clients(fakes), github: async () => false },
+    );
+
+    expect(result.ok).toBe(true);
+    expect(logs).toContainEqual(
+      expect.stringMatching(/^! Do by hand: set repo variable FIREBASE_WIF_PROVIDER to projects\//),
+    );
+  });
+
+  it('stops before changing anything when the account is missing permissions', async () => {
+    const fakes = fresh();
+    fakes.google.state.projects[0]!.grantedPermissions = [];
+
+    const result = await runSetupGitHub({ project: PROJECT }, clients(fakes));
+
+    expect(result).toEqual({ ok: false });
+    expect(writes(fakes.google)).toEqual([]);
+    expect(logs).toContainEqual(expect.stringContaining('iam.serviceAccounts.create'));
+    expect(logs).toContain('  Ask a project owner to run ./hb setup-github.');
   });
 });
 
@@ -444,39 +252,21 @@ describe('githubRepoFromGit', () => {
     'https://github.com/owner/site.git',
     'https://github.com/owner/site',
   ])('reads owner/name from %s', (url) => {
-    expect(githubRepoFromGit(repoWithOrigin(url))).toBe('owner/site');
+    const root = repoWithOrigin(url);
+    expect(githubRepoFromGit(root)).toBe('owner/site');
+    rmSync(root, { recursive: true, force: true });
   });
 
   it('returns undefined for other hosts', () => {
-    expect(githubRepoFromGit(repoWithOrigin('https://gitlab.com/owner/site.git'))).toBeUndefined();
+    const root = repoWithOrigin('https://gitlab.com/owner/site.git');
+    expect(githubRepoFromGit(root)).toBeUndefined();
+    rmSync(root, { recursive: true, force: true });
   });
 });
 
 describe('checkGitHubDeploys', () => {
-  const check = (cloud: GoogleCloud, github: GitHubVariables) =>
-    checkGitHubDeploys(repoWithOrigin(`git@github.com:${REPO}.git`), PROJECT, {
-      createCloud: async () => cloud,
-      github,
-    });
-
   it('passes when everything is set up', async () => {
-    const { cloud } = fakeCloud({
-      account: true,
-      projectPolicy: {
-        bindings: DEPLOY_ROLES.map((role) => ({ role, members: [`serviceAccount:${EMAIL}`] })),
-      },
-      accountPolicy: {
-        bindings: [{ role: 'roles/iam.workloadIdentityUser', members: [PRINCIPAL] }],
-      },
-      pool: { state: 'ACTIVE' },
-      provider: { state: 'ACTIVE', attributeCondition: `assertion.repository == '${REPO}'` },
-    });
-    const { github } = fakeGitHub(true, {
-      [`${REPO}:WIF_PROVIDER`]: PROVIDER_NAME,
-      [`${REPO}:DEPLOY_SERVICE_ACCOUNT`]: EMAIL,
-    });
-
-    expect(await check(cloud, github)).toEqual({
+    expect(await checkGitHubDeploys(dir, PROJECT, clients(configured()))).toEqual({
       name: 'GitHub deploys',
       ok: true,
       message: `${REPO} can deploy to ${PROJECT} without a key.`,
@@ -484,29 +274,71 @@ describe('checkGitHubDeploys', () => {
   });
 
   it('warns with what is missing', async () => {
-    const { cloud } = fakeCloud();
-    const { github } = fakeGitHub();
-
-    const result = await check(cloud, github);
+    const result = await checkGitHubDeploys(dir, PROJECT, clients(fresh()));
 
     expect(result).toMatchObject({ ok: true, warning: true });
-    expect(result.message).toContain('./hb setup-github');
-    expect(result.message).toContain(`create the service account ${EMAIL}`);
+    expect(result.message).toContain(`Run \`./hb setup-github\` so ${REPO} can deploy`);
+    expect(result.message).toContain('FIREBASE_WIF_PROVIDER');
+  });
+
+  it('warns about deploy workflows without an environment', async () => {
+    mkdirSync(join(dir, '.github/workflows'), { recursive: true });
+    writeFileSync(
+      join(dir, '.github/workflows/deploy.yaml'),
+      [
+        'on: push',
+        'permissions:',
+        '  id-token: write',
+        'jobs:',
+        '  deploy:',
+        '    runs-on: ubuntu-latest',
+        '    steps:',
+        '      - uses: abraham/firebase-wif@v0.2.1',
+        '      - run: npx firebase deploy',
+      ].join('\n'),
+    );
+
+    const result = await checkGitHubDeploys(dir, PROJECT, clients(configured()));
+
+    expect(result).toMatchObject({ ok: true, warning: true });
+    expect(result.message).toContain('environment: production');
+  });
+
+  it("passes with Hoverboard's deploy workflows", async () => {
+    cpSync(
+      join(import.meta.dirname, '../../../../.github/workflows'),
+      join(dir, '.github/workflows'),
+      {
+        recursive: true,
+      },
+    );
+    const fakes = configured();
+    fakes.github.state.repos[REPO]!.environments!['preview'] = {
+      deployment_branch_policy: null,
+      branchPolicies: [],
+    };
+
+    expect(await checkGitHubDeploys(dir, PROJECT, clients(fakes))).toEqual({
+      name: 'GitHub deploys',
+      ok: true,
+      message: `${REPO} can deploy to ${PROJECT} without a key.`,
+    });
   });
 
   it('warns when Google Cloud cannot be read', async () => {
-    const cloud: GoogleCloud = {
-      request: () => Promise.reject(new Error('Not logged in to Firebase.')),
-    };
-
-    const result = await check(cloud, fakeGitHub().github);
+    const result = await checkGitHubDeploys(dir, PROJECT, {
+      ...clients(configured()),
+      google: () => Promise.reject(new Error('Not logged in to Firebase.')),
+    });
 
     expect(result).toMatchObject({ ok: true, warning: true });
     expect(result.message).toContain('Not logged in to Firebase.');
   });
 
   it('skips repositories that are not on GitHub', async () => {
-    const result = await checkGitHubDeploys(repoWithOrigin('https://gitlab.com/a/b.git'), PROJECT);
+    const root = repoWithOrigin('https://gitlab.com/a/b.git');
+    const result = await checkGitHubDeploys(root, PROJECT);
+    rmSync(root, { recursive: true, force: true });
 
     expect(result.message).toBe('Skipped, the origin remote is not on GitHub.');
   });

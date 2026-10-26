@@ -432,7 +432,9 @@ export const runEditionNew = async ({
     console.log(`Creating ${to}'s Firestore database in ${location}...`);
     await createDatabase(repoRoot, to, location);
   }
-  if (runCommand(process.execPath, ['hb', 'setup-github', '--project', to], repoRoot) !== 0) {
+  if (
+    runCommand(process.execPath, ['hb', 'setup-github', '--project', to, '--yes'], repoRoot) !== 0
+  ) {
     console.log(
       `! GitHub Actions can't deploy to ${to} yet. Run ./hb setup-github --project ${to}.`,
     );

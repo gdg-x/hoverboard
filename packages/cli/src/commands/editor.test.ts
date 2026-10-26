@@ -3,7 +3,7 @@ import { tmpdir } from 'os';
 import { join } from 'path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { GoogleCloud } from '../lib/google-cloud.js';
-import type { Policy } from './setup-github.js';
+import type { Policy } from '../lib/iam-policy.js';
 import { editors, runEditorAdd, runEditorList, runEditorRemove } from './editor.js';
 
 const confirmMock = vi.hoisted(() => vi.fn());

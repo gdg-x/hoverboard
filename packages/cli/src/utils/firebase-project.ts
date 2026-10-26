@@ -43,6 +43,20 @@ const projectIdFromSiteConfig = (repoRoot: string): string | undefined => {
 export const resolveFirebaseProjectId = (repoRoot: string): string | undefined =>
   process.env['GCLOUD_PROJECT'] || projectIdFromSiteConfig(repoRoot);
 
+/** The site's address: `url` in the site config, or the project's `.web.app` address. */
+export const siteUrl = (repoRoot: string): string | undefined => {
+  const path = join(repoRoot, siteConfigPath(repoRoot));
+  let url: unknown;
+  try {
+    url = (JSON.parse(readFileSync(path, 'utf8')) as { url?: unknown }).url;
+  } catch {
+    // No site config, or not valid JSON.
+  }
+  if (typeof url === 'string' && url) return url;
+  const projectId = resolveFirebaseProjectId(repoRoot);
+  return projectId ? `https://${projectId}.web.app/` : undefined;
+};
+
 /** Local development always uses this project. `demo-` projects only exist in the emulators. */
 export const DEMO_PROJECT_ID = 'demo-hoverboard';
 

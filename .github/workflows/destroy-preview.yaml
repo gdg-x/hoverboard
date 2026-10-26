@@ -6,7 +6,7 @@ on:
 
 permissions:
   contents: read
-  # Lets google-github-actions/auth request a GitHub OIDC token for Workload Identity Federation.
+  # Lets abraham/firebase-wif request a GitHub OIDC token for Workload Identity Federation.
   id-token: write
 
 jobs:
@@ -23,18 +23,22 @@ jobs:
         with:
           node-version-file: package.json
       - run: npm ci
+      - id: project
+        run: echo "id=$(./hb config project-id)" >> "$GITHUB_OUTPUT"
+        env:
+          HB_DEMO: ${{ vars.HB_DEMO }}
       # `./hb setup-github` sets these variables. See docs/tutorials/04-deploy.md.
-      - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
+      - uses: abraham/firebase-wif@e4a526efa5ff407acb4803981ce528c6e47b3e24 # v0.2.1
         with:
-          workload_identity_provider: '${{ vars.WIF_PROVIDER }}'
-          service_account: '${{ vars.DEPLOY_SERVICE_ACCOUNT }}'
+          workload_identity_provider: '${{ vars.FIREBASE_WIF_PROVIDER }}'
+          service_account: '${{ vars.FIREBASE_WIF_SERVICE_ACCOUNT }}'
+          project_id: '${{ steps.project.outputs.id }}'
       # The channel name action-hosting-deploy gives a pull request (src/getChannelId.ts).
       - run: |
           channel="pr${PR_NUMBER}-${HEAD_REF:0:20}"
           channel="${channel//[^a-zA-Z0-9_.-]/_}"
-          project=$(./hb config project-id)
-          npx firebase hosting:channel:delete "$channel" --force --project "$project"
+          npx firebase hosting:channel:delete "$channel" --force --project "$PROJECT_ID"
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_REF: ${{ github.head_ref }}
-          HB_DEMO: ${{ vars.HB_DEMO }}
+          PROJECT_ID: ${{ steps.project.outputs.id }}

@@ -1,13 +1,14 @@
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { dirname, join } from 'path';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
   SITE_CONFIG_PATH,
   checkFirebaseProject,
   demoDeployProblem,
   resolveFirebaseProjectId,
   siteConfigPath,
+  siteUrl,
 } from './firebase-project.js';
 
 const dirsToClean: string[] = [];
@@ -54,6 +55,28 @@ describe('resolveFirebaseProjectId', () => {
     delete process.env['GCLOUD_PROJECT'];
 
     expect(resolveFirebaseProjectId(makeRepo(site))).toBeUndefined();
+  });
+});
+
+describe('siteUrl', () => {
+  beforeEach(() => {
+    delete process.env['GCLOUD_PROJECT'];
+  });
+
+  it('reads url from the site config', () => {
+    const root = makeRepo({ url: 'https://example.com/', firebase: { projectId: 'my-devfest' } });
+
+    expect(siteUrl(root)).toBe('https://example.com/');
+  });
+
+  it("falls back to the project's .web.app address", () => {
+    expect(siteUrl(makeRepo({ firebase: { projectId: 'my-devfest' } }))).toBe(
+      'https://my-devfest.web.app/',
+    );
+  });
+
+  it('returns undefined without a project', () => {
+    expect(siteUrl(makeRepo({ shortName: 'DevFest' }))).toBeUndefined();
   });
 });
 
