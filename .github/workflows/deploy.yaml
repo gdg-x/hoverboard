@@ -15,6 +15,10 @@ jobs:
     # A manual run can pick any branch. Only main deploys to the live site.
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    # `./hb setup-github` limits this environment to the default branch.
+    environment:
+      name: production
+      url: ${{ steps.project.outputs.url }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -29,13 +33,15 @@ jobs:
         run: |
           id=$(./hb config project-id)
           echo "id=$id" >> "$GITHUB_OUTPUT"
+          echo "url=$(./hb config url)" >> "$GITHUB_OUTPUT"
         env:
           HB_DEMO: ${{ vars.HB_DEMO }}
       # `./hb setup-github` sets these variables. See docs/tutorials/04-deploy.md.
-      - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
+      - uses: abraham/firebase-wif@e4a526efa5ff407acb4803981ce528c6e47b3e24 # v0.2.1
         with:
-          workload_identity_provider: '${{ vars.WIF_PROVIDER }}'
-          service_account: '${{ vars.DEPLOY_SERVICE_ACCOUNT }}'
+          workload_identity_provider: '${{ vars.FIREBASE_WIF_PROVIDER }}'
+          service_account: '${{ vars.FIREBASE_WIF_SERVICE_ACCOUNT }}'
+          project_id: '${{ steps.project.outputs.id }}'
       # The build renders each page from the site's content in Firestore.
       - run: npm run build
         env:

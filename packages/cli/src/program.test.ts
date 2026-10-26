@@ -51,6 +51,7 @@ describe('hb', () => {
       expect.arrayContaining([
         'config validate',
         'config project-id',
+        'config url',
         'emulators start',
         'emulators save',
         'data seed',

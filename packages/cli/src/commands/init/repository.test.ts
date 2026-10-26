@@ -102,7 +102,7 @@ describe('setUpRepository', () => {
     );
     expect(mocks.runCommand).toHaveBeenLastCalledWith(
       process.execPath,
-      ['hb', 'setup-github'],
+      ['hb', 'setup-github', '--yes'],
       repo,
     );
   });

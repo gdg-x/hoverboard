@@ -173,27 +173,28 @@ export const createProgram = (): Command => {
     )
     .action(run(async () => (await import('./commands/setup.js')).runSetup()));
 
-  program
-    .command('setup-github')
-    .description(
-      'Let GitHub Actions deploy to the Firebase project in site.json with Workload Identity ' +
-        'Federation, without a service account key.',
-    )
-    .option('--repo <owner/name>', 'The GitHub repository. Defaults to the origin remote.')
-    .option(
-      '--project <id>',
-      'Only let the existing deploy account deploy to this project too, such as a new edition.',
-    )
-    .option('--dry-run', 'Only report what would change.')
-    .action(
-      run(async (options) =>
-        (await import('./commands/setup-github.js')).runSetupGitHub({
-          ...(options['repo'] ? { repo: options['repo'] as string } : {}),
-          ...(options['project'] ? { project: options['project'] as string } : {}),
-          ...(options.dryRun ? { dryRun: true } : {}),
-        }),
+  withWrites(
+    program
+      .command('setup-github')
+      .description(
+        'Let GitHub Actions deploy to the Firebase project in site.json with Workload Identity ' +
+          'Federation, without a service account key, using firebase-wif.',
+      )
+      .option('--repo <owner/name>', 'The GitHub repository. Defaults to the origin remote.')
+      .option(
+        '--project <id>',
+        "Deploy to this project instead, such as a new edition's. It reuses the existing deploy account.",
       ),
-    );
+  ).action(
+    run(async (options) =>
+      (await import('./commands/setup-github.js')).runSetupGitHub({
+        ...(options['repo'] ? { repo: options['repo'] as string } : {}),
+        ...(options['project'] ? { project: options['project'] as string } : {}),
+        dryRun: options.dryRun === true,
+        yes: options.yes === true,
+      }),
+    ),
+  );
 
   const config = program.command('config').description("Work with the site's config.");
   config
@@ -232,6 +233,21 @@ export const createProgram = (): Command => {
           throw new Error('No Firebase project. Set firebase.projectId in site.json.');
         console.log(projectId);
         return { ok: true, projectId };
+      }),
+    );
+  config
+    .command('url')
+    .description(
+      "Print the site's address, for workflows: url in site.json, or the project's .web.app " +
+        'address.',
+    )
+    .action(
+      run(async () => {
+        const { siteUrl } = await import('./utils/firebase-project.js');
+        const url = siteUrl(repoRoot());
+        if (!url) throw new Error('No Firebase project. Set firebase.projectId in site.json.');
+        console.log(url);
+        return { ok: true, url };
       }),
     );
 

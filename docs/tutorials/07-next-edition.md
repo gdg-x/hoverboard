@@ -32,7 +32,7 @@ The archive's reactions show their counts, without the names of the people who r
 ## Before you start
 
 - Use a custom domain, such as `example.com`. It moves to each new edition, and the archive takes a subdomain such as `2027.example.com`. Without one, the site's address is the project's `.web.app` address, which changes each edition.
-- Set up GitHub deploys with `./hb setup-github`. The new edition reuses its service account: `./hb edition new` grants it the deploy roles in the new project with `./hb setup-github --project <id>`. Keep the first project, where the account lives (verify a deploy to a new edition from GitHub Actions).
+- Set up GitHub deploys with `./hb setup-github`. The new edition reuses its service account: `./hb edition new` runs `./hb setup-github --project <id>`, which grants it the deploy roles in the new project. Keep the first project, where the account lives (verify a deploy to a new edition from GitHub Actions).
 - A Google account can only create a limited number of projects (verify the quota).
 
 ## Start the next edition
