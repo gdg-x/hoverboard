@@ -10,10 +10,10 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version-file: package.json
       - run: npm ci
@@ -28,6 +28,10 @@ jobs:
     environment:
       name: preview
       url: ${{ steps.preview.outputs.details_url }}
+    # Shared with destroy-preview.yaml, so a closed pull request's channel isn't redeployed.
+    concurrency:
+      group: deploy-preview-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
     permissions:
       contents: read
       # action-hosting-deploy adds a check run and comments the preview link.
@@ -36,10 +40,10 @@ jobs:
       # Lets abraham/firebase-wif request a GitHub OIDC token for Workload Identity Federation.
       id-token: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version-file: package.json
       - run: npm ci
@@ -52,7 +56,7 @@ jobs:
           HB_DEMO: ${{ vars.HB_DEMO }}
       # `./hb setup-github` sets these variables. See docs/tutorials/04-deploy.md.
       - id: wif
-        uses: abraham/firebase-wif@e4a526efa5ff407acb4803981ce528c6e47b3e24 # v0.2.1
+        uses: abraham/firebase-wif@v0.2.1
         with:
           workload_identity_provider: '${{ vars.FIREBASE_WIF_PROVIDER }}'
           service_account: '${{ vars.FIREBASE_WIF_SERVICE_ACCOUNT }}'
@@ -62,7 +66,7 @@ jobs:
         env:
           FIRESTORE_TARGET: production
       - id: preview
-        uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0
+        uses: FirebaseExtended/action-hosting-deploy@v0.11.0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           projectId: '${{ steps.project.outputs.id }}'

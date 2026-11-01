@@ -1,5 +1,9 @@
 name: Main
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 permissions:
   contents: read
@@ -16,12 +20,20 @@ jobs:
 
     steps:
       - name: Checkout the repo
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
+      - name: Verify the Actions lockfile
+        if: matrix.script-name == 'lint'
+        run: |
+          gh extension install github/gh-actions-lock --pin v0.4.0
+          gh actions-lock --verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: Cache node modules
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -29,7 +41,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Setup node
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version-file: package.json
 
@@ -64,12 +76,12 @@ jobs:
 
     steps:
       - name: Checkout the repo
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Cache node modules
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -77,13 +89,13 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Setup node
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version-file: package.json
 
       - name: Setup Java (required by the Firestore emulator)
         if: matrix.project == 'Firestore' || matrix.project == 'Sample data'
-        uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        uses: actions/setup-java@v6.1.0
         with:
           distribution: temurin
           java-version: '21'
@@ -101,12 +113,12 @@ jobs:
 
     steps:
       - name: Checkout the repo
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Cache node modules
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -114,7 +126,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Setup node
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version-file: package.json
 
@@ -131,12 +143,12 @@ jobs:
 
     steps:
       - name: Checkout the repo
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Cache node modules
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -144,7 +156,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Setup node
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version-file: package.json
 
@@ -152,7 +164,7 @@ jobs:
         run: npm ci
 
       - name: Cache the Playwright browser
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('packages/web/package-lock.json') }}
@@ -165,21 +177,17 @@ jobs:
 
       - name: Upload the axe results and screenshots
         if: failure()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: a11y-results
           path: packages/web/test-results/a11y
 
-  # One required check that passes only when every test project, the smoke tests and the A11y tests pass.
-  test:
+  # The one required check: it fails when any other job in this workflow fails.
+  main-required:
+    if: ${{ !cancelled() }}
+    needs: [checks, test-project, smoke, a11y]
     runs-on: ubuntu-latest
-    name: test
-    needs: [test-project, smoke, a11y]
-    if: always()
-
+    permissions: {}
     steps:
-      - name: Check test results
-        run: |
-          test "${{ needs.test-project.result }}" = success
-          test "${{ needs.smoke.result }}" = success
-          test "${{ needs.a11y.result }}" = success
+      - if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        run: exit 1
