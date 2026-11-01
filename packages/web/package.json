@@ -36,7 +36,7 @@
     "dompurify": "^3.4.17",
     "firebase": "^12.19.0",
     "lit": "^3.3.3",
-    "marked": "^18.1.0",
+    "marked": "^18.1.1",
     "marked-gfm-heading-id": "^4.1.4",
     "workbox-window": "^7.4.1"
   },
