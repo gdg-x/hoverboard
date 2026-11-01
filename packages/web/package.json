@@ -34,7 +34,7 @@
     "@lit/localize": "^0.12.2",
     "@reduxjs/toolkit": "^2.13.0",
     "dompurify": "^3.4.17",
-    "firebase": "^12.19.0",
+    "firebase": "^13.1.0",
     "lit": "^3.3.3",
     "marked": "^18.1.0",
     "marked-gfm-heading-id": "^4.1.4",
