@@ -46,3 +46,6 @@ updates:
       node:
         patterns:
           - '@types/node'
+      jsdom:
+        patterns:
+          - 'jsdom'
