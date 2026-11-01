@@ -1,0 +1,6 @@
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        # .github/workflows/actions.lock pins every action to a commit SHA, and the lint job verifies it.
+        '*': ref-pin

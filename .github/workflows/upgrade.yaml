@@ -15,12 +15,12 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           # The merge needs the history, and hb upgrade pushes its branch.
           fetch-depth: 0
           persist-credentials: true # zizmor: ignore[artipacked]
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version-file: package.json
       - run: npm ci

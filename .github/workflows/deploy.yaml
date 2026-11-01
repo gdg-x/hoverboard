@@ -5,25 +5,28 @@ on:
       - main
   # Rebuilds the pages from the current Firestore content, for example after editing it.
   workflow_dispatch:
-permissions:
-  contents: read
-  id-token: write
-# A manual run and a push never deploy at the same time.
-concurrency: deploy
+permissions: {}
 jobs:
   deploy:
     # A manual run can pick any branch. Only main deploys to the live site.
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     # `./hb setup-github` limits this environment to the default branch.
     environment:
       name: production
       url: ${{ steps.project.outputs.url }}
+    # A manual run and a push never deploy at the same time.
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version-file: package.json
       - run: npm ci
@@ -37,7 +40,7 @@ jobs:
         env:
           HB_DEMO: ${{ vars.HB_DEMO }}
       # `./hb setup-github` sets these variables. See docs/tutorials/04-deploy.md.
-      - uses: abraham/firebase-wif@e4a526efa5ff407acb4803981ce528c6e47b3e24 # v0.2.1
+      - uses: abraham/firebase-wif@v0.2.1
         with:
           workload_identity_provider: '${{ vars.FIREBASE_WIF_PROVIDER }}'
           service_account: '${{ vars.FIREBASE_WIF_SERVICE_ACCOUNT }}'
