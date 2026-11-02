@@ -14,7 +14,7 @@ export default defineConfig({
     sourcemap: production,
     minify: production,
     target: 'es2022',
-    rollupOptions: {
+    rolldownOptions: {
       input: 'src/firebase-messaging-sw.ts',
       output: {
         entryFileNames: '[name].js',
