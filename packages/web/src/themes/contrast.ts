@@ -6,7 +6,7 @@ import {
   type Theme,
   type ThemeStyle,
   cssColorVar,
-} from './tokens';
+} from './tokens.ts';
 
 const channel = (value: number) => {
   const c = value / 255;

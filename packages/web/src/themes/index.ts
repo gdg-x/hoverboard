@@ -1,8 +1,8 @@
-import { festival } from './festival';
-import { glass } from './glass';
-import { minimalist } from './minimalist';
-import { paper } from './paper';
-import { spotlight } from './spotlight';
+import { festival } from './festival.ts';
+import { glass } from './glass.ts';
+import { minimalist } from './minimalist.ts';
+import { paper } from './paper.ts';
+import { spotlight } from './spotlight.ts';
 import {
   COLOR_ROLES,
   TONES,
@@ -11,7 +11,7 @@ import {
   cssColorVar,
   cssStyleVar,
   cssToneVar,
-} from './tokens';
+} from './tokens.ts';
 
 /** The built-in themes. `theme.name` in site.json picks one. */
 export const THEMES = { festival, spotlight, paper, glass, minimalist } as const satisfies Record<

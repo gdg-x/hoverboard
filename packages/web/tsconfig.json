@@ -18,11 +18,13 @@
       "virtual:hoverboard/icon": ["./build/icon-module.d.ts"]
     }, /* Types for the modules that build/vite-plugin-site.ts serves. */
     "resolveJsonModule": true,                           /* Enable importing .json files */
+    "allowImportingTsExtensions": true,                  /* Config files import with `.ts`, so Vite's native config loader can run them in Node. */
 
     /* JavaScript Support */
     "allowJs": true,                                     /* Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files. */
 
     /* Emit */
+    "noEmit": true,                                      /* Vite and Astro compile. tsc only checks types. */
     "outDir": "dist/.build",                             /* Specify an output folder for all emitted files. */
     "rootDir": "..",                                     /* packages/, so the build can import the collection registry from packages/storage. */
 

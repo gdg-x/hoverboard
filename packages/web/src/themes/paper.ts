@@ -1,4 +1,4 @@
-import { type Theme, type ToneColors, containerTones } from './tokens';
+import { type Theme, type ToneColors, containerTones } from './tokens.ts';
 
 const svg = (markup: string) =>
   `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' ${markup}</svg>`)}")`;

@@ -1,4 +1,4 @@
-import type { ThemeFonts } from './fonts';
+import type { ThemeFonts } from './fonts.ts';
 
 /** Color roles of the themes, by the name `site.json` uses in `theme.colors` and `theme.darkColors`. */
 export const COLOR_ROLES = [

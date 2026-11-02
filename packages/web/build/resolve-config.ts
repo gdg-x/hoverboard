@@ -6,18 +6,18 @@ import {
   FEATURES,
   isNavigationRoute,
   type Feature,
-} from '../src/config/features';
-import { deepMerge, isPlainObject } from '../src/config/merge';
-import { fontProblems } from './fonts';
-import { iconErrors } from './icons';
-import { sanitizeSvg } from './svg';
+} from '../src/config/features.ts';
+import { deepMerge, isPlainObject } from '../src/config/merge.ts';
+import { fontProblems } from './fonts.ts';
+import { iconErrors } from './icons.ts';
+import { sanitizeSvg } from './svg.ts';
 import {
   type ResolvedTheme,
   type SiteTheme,
   heroPhotoErrors,
   resolveTheme,
   themeErrors,
-} from './theme';
+} from './theme.ts';
 
 /** `heroSettings` in site.json. The demo site sets none. */
 interface HeroSettings {
@@ -161,9 +161,12 @@ export const publicFile = (publicDirs: string[], file: string): string | undefin
   publicDirs.map((dir) => join(dir, file)).find((path) => fs.existsSync(path));
 
 export class ConfigError extends Error {
-  constructor(readonly errors: string[]) {
+  readonly errors: string[];
+
+  constructor(errors: string[]) {
     super(`Invalid site config:\n${errors.map((error) => `  - ${error}`).join('\n')}`);
     this.name = 'ConfigError';
+    this.errors = errors;
   }
 }
 

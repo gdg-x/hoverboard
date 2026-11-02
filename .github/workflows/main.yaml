@@ -104,7 +104,7 @@ jobs:
         run: npm ci
 
       - name: Running ${{ matrix.project }} tests
-        run: npx vitest run --project "${{ matrix.project }}"
+        run: npx vitest run --configLoader native --project "${{ matrix.project }}"
 
   # Builds the site with each feature off, and builds a minimal site.
   smoke:
@@ -134,7 +134,7 @@ jobs:
         run: npm ci
 
       - name: Running smoke tests
-        run: npx vitest run --project 'Smoke*'
+        run: npx vitest run --configLoader native --project 'Smoke*'
 
   # Builds the demo site with the sample data and a minimal site, and runs axe on them in Chromium.
   a11y:
@@ -173,7 +173,7 @@ jobs:
         run: npx --prefix packages/web playwright install --with-deps chromium
 
       - name: Running A11y tests
-        run: npx vitest run --project A11y
+        run: npx vitest run --configLoader native --project A11y
 
       - name: Upload the axe results and screenshots
         if: failure()

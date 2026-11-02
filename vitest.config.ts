@@ -1,11 +1,11 @@
 import { fileURLToPath } from 'node:url';
 import { configDefaults, defineConfig, type TestProjectInlineConfiguration } from 'vitest/config';
-import { decorators } from './packages/web/build/decorators';
-import { configPaths, resolveConfig } from './packages/web/build/resolve-config';
-import { siteModule } from './packages/web/build/vite-plugin-site';
-import { STAGE_FIXTURES } from './packages/web/__tests__/fixtures/stages';
-import { FEATURES } from './packages/web/src/config/features';
-import { deepMerge } from './packages/web/src/config/merge';
+import { decorators } from './packages/web/build/decorators.ts';
+import { configPaths, resolveConfig } from './packages/web/build/resolve-config.ts';
+import { siteModule } from './packages/web/build/vite-plugin-site.ts';
+import { STAGE_FIXTURES } from './packages/web/__tests__/fixtures/stages.ts';
+import { FEATURES } from './packages/web/src/config/features.ts';
+import { deepMerge } from './packages/web/src/config/merge.ts';
 
 const webRoot = fileURLToPath(new URL('./packages/web', import.meta.url));
 // Tests use the demo config, whatever the site's own, so a fork's content can't fail them.

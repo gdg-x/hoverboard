@@ -1,4 +1,4 @@
-import { type Theme, containerTones } from './tokens';
+import { type Theme, containerTones } from './tokens.ts';
 
 const plain = { background: 'surface', color: 'onSurface' } as const;
 

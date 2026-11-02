@@ -11,7 +11,7 @@ import {
   FONT_ROLES,
   type FontRole,
   type ThemeFonts,
-} from '../src/themes/fonts';
+} from '../src/themes/fonts.ts';
 
 export interface FontFile {
   /** A path in packages/config. */
