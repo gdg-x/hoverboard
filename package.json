@@ -40,7 +40,7 @@
     "start:astro": "npm --prefix ./packages/web run start:astro",
     "start:emulators": "firebase emulators:start --project=demo-hoverboard --import=./.firebase/emulator-data --export-on-exit",
     "start:server": "npm --prefix ./packages/server start",
-    "test": "vitest run"
+    "test": "vitest run --configLoader native"
   },
   "devDependencies": {
     "@eslint/compat": "^2.1.1",

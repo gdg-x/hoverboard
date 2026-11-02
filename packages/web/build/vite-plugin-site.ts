@@ -4,10 +4,10 @@ import { join, resolve } from 'node:path';
 import n from 'nunjucks';
 import type { Plugin, PluginOption } from 'vite';
 import copy from 'rollup-plugin-copy';
-import { FEATURES, type Feature } from '../src/config/features';
-import { THEMES } from '../src/themes/index';
-import { buildInfo } from './build-info';
-import { fontModuleCode, fontModuleParts } from './fonts';
+import { FEATURES, type Feature } from '../src/config/features.ts';
+import { THEMES } from '../src/themes/index.ts';
+import { buildInfo } from './build-info.ts';
+import { fontModuleCode, fontModuleParts } from './fonts.ts';
 import {
   CONFIG_PATHS,
   ConfigError,
@@ -16,10 +16,10 @@ import {
   publicFile,
   resolveConfig,
   type SiteConfig,
-} from './resolve-config';
-import { sanitizeSvg } from './svg';
-import { socialImageDesign } from './social-images';
-import { darkLogoCss, demoThemesCss, type SiteTheme, themeCss } from './theme';
+} from './resolve-config.ts';
+import { sanitizeSvg } from './svg.ts';
+import { socialImageDesign } from './social-images.ts';
+import { darkLogoCss, demoThemesCss, type SiteTheme, themeCss } from './theme.ts';
 
 export const SITE_MODULE = 'virtual:hoverboard/site';
 const RESOLVED_SITE_MODULE = `\0${SITE_MODULE}`;

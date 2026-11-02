@@ -1,6 +1,6 @@
-import { deriveDarkColor, tagContainerColors } from '../src/themes/color';
-import { contrastFailures, contrastRatio } from '../src/themes/contrast';
-import { THEMES, type ThemeName, themeDeclarations } from '../src/themes/index';
+import { deriveDarkColor, tagContainerColors } from '../src/themes/color.ts';
+import { contrastFailures, contrastRatio } from '../src/themes/contrast.ts';
+import { THEMES, type ThemeName, themeDeclarations } from '../src/themes/index.ts';
 import {
   COLOR_ROLES,
   type ColorRole,
@@ -8,8 +8,8 @@ import {
   type ColorSet,
   type Theme,
   cssColorVar,
-} from '../src/themes/tokens';
-import type { SiteFonts } from './fonts';
+} from '../src/themes/tokens.ts';
+import type { SiteFonts } from './fonts.ts';
 
 export type { ColorScheme };
 export type Density = 'compact' | 'default' | 'roomy';

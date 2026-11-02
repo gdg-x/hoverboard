@@ -1,4 +1,4 @@
-import { type Theme, containerTones, dots, grid, stripes } from './tokens';
+import { type Theme, containerTones, dots, grid, stripes } from './tokens.ts';
 
 // Teeth on a band's top and bottom edges, so bands meet in a zigzag. A mask: only alpha counts.
 const zigzag = [

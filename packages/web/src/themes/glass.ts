@@ -1,4 +1,4 @@
-import { type Theme, containerTones } from './tokens';
+import { type Theme, containerTones } from './tokens.ts';
 
 // Modeled on Apple's Liquid Glass: frosted, translucent panels over soft color glows, large round corners and system colors.
 const glow = (accent: string, size: string, position: string, amount: string) =>

@@ -1,4 +1,4 @@
-import { type Theme, type ToneColors, containerTones } from './tokens';
+import { type Theme, type ToneColors, containerTones } from './tokens.ts';
 
 // Light from above the stage, in the text color.
 const beam = (amount: number, size: string) =>

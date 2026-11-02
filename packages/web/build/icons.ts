@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { extname, join } from 'node:path';
-import { ICON_SIZES } from '../src/data/icons';
+import { ICON_SIZES } from '../src/data/icons.ts';
 
 const MIN_SIZE = Math.max(...ICON_SIZES);
 

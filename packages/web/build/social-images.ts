@@ -7,10 +7,10 @@ import {
   type BuiltInFontName,
   type FontRole,
   type ThemeFonts,
-} from '../src/themes/fonts';
-import type { ColorSet, ShareStyle } from '../src/themes/tokens';
-import type { SiteFonts } from './fonts';
-import type { ResolvedTheme } from './theme';
+} from '../src/themes/fonts.ts';
+import type { ColorSet, ShareStyle } from '../src/themes/tokens.ts';
+import type { SiteFonts } from './fonts.ts';
+import type { ResolvedTheme } from './theme.ts';
 
 export type SocialFontRole = Extract<FontRole, 'display' | 'body'>;
 

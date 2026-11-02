@@ -1,6 +1,6 @@
-import type { CollectionPath } from '../../../storage/collections';
-import type { NextStep } from '../../src/utils/next-step';
-import type { Stage, TicketSales } from '../../src/utils/stages';
+import type { CollectionPath } from '../../../storage/collections.ts';
+import type { NextStep } from '../../src/utils/next-step.ts';
+import type { Stage, TicketSales } from '../../src/utils/stages.ts';
 
 /** The kinds of events in the personas spec. */
 export type EventKind = 'first' | 'returning' | 'online' | 'meetup';
