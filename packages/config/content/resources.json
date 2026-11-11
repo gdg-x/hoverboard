@@ -16,7 +16,7 @@
         "link": "/speakers"
       },
       "howItWas": {
-        "description": "DevFest is an annual decentralised tech conference hosted by Google Developer Groups across the globe. Our community brings DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
+        "description": "DevFest is an annual tech conference hosted by Google Developer Groups worldwide. In 2026, we’re celebrating 15 years 🎉 of innovation and community! Our community brings DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
         "label": "See how it was in 2023",
         "youtubeId": "dnyMmhl2hR4"
       }
@@ -24,7 +24,7 @@
     "statisticsBlock": {
       "attendees": {
         "label": "Attendees",
-        "number": "200+"
+        "number": "120+"
       },
       "days": {
         "label": "Days",
@@ -133,7 +133,7 @@
         },
         {
           "name": "Call for Papers",
-          "url": "https://sessionize.com/devfest-stockholm-2025/",
+          "url": "https://app.advocu.com/public/gde/events/6af20a16ac782e9f31fbf4d8",
           "newTab": true
         },
         {
