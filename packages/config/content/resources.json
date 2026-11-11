@@ -53,7 +53,7 @@
       },
       {
         "title": "What is a GDG?",
-        "description": "A Google Developer Group is a community of volunteers who create exciting projects and share experiences about Google technologies.",
+        "description": "Google Developer Groups are community-driven groups of developers passionate about Google developer technologies and open collaboration.",
         "callToAction": {
           "label": "Read more",
           "link": "https://developers.google.com/groups/",
@@ -62,7 +62,7 @@
       },
       {
         "title": "What is DevFest?",
-        "description": "DevFests are community-led developer events hosted by Google Developer Groups around the globe.",
+        "description": "DevFest is the annual global developer conference hosted by Google Developer Groups worldwide, bringing together local tech communities.",
         "callToAction": {
           "label": "Read more",
           "link": "https://devfest.withgoogle.com/",
@@ -149,7 +149,7 @@
   },
   "attendingPage": {
     "description": "How to get to DevFest Stockholm 2026 at the Google Stockholm office, when the doors open, and what to expect at the venue.",
-    "online": "Ask questions in the chat under the stream. Speakers answer them at the end of their talk.",
+    "online": "Stream sessions live on the GDG Sweden YouTube channel. Ask questions in the live chat during the talk.",
     "gettingThere": [
       {
         "mode": "train",
@@ -174,10 +174,10 @@
         "day": "2027-02-05",
         "open": "08:30",
         "close": "18:00",
-        "note": "Registration is at the main entrance. Bring your ticket, on your phone or on paper."
+        "note": "Registration is at the main entrance of Google Stockholm. Please have your registration confirmation or ID ready."
       }
     ],
-    "accessibility": "Every room is step-free, with lifts between floors. Tell us what you need when you register, or ask any volunteer in a DevFest t-shirt.",
+    "accessibility": "The Google Stockholm office is step-free with elevator access to all event spaces. If you have accessibility requirements, let us know when registering or ask any organizer.",
     "accommodation": {
       "text": "There are several hotels near Google Stockholm, including Radisson Blu Waterfront Hotel and Scandic Continental.",
       "hotels": [
@@ -196,11 +196,11 @@
       },
       {
         "topic": "food",
-        "text": "Lunch and coffee are included. Tell us about allergies when you register."
+        "text": "Complimentary coffee, fika, and lunch are provided during the conference."
       },
       {
         "topic": "cloakroom",
-        "text": "Free, next to registration."
+        "text": "Free cloakroom available near registration at the main entrance."
       }
     ]
   }
