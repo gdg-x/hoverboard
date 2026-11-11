@@ -6,21 +6,5 @@
   "partners/1": {
     "title": "General Partners",
     "order": 1
-  },
-  "partners/2": {
-    "title": "Facilities Partners",
-    "order": 2
-  },
-  "partners/3": {
-    "title": "Gold Partners",
-    "order": 3
-  },
-  "partners/4": {
-    "title": "Silver Partners",
-    "order": 4
-  },
-  "partners/5": {
-    "title": "Bronze Partners",
-    "order": 5
   }
 }

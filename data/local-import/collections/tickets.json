@@ -1,14 +1,1 @@
-{
-  "tickets/000": {
-    "available": true,
-    "currency": "SEK",
-    "ends": "TBA",
-    "info": "Tickets are not for sale yet.",
-    "name": "General Admission",
-    "price": 0,
-    "soldOut": false,
-    "starts": "Coming soon",
-    "url": "/",
-    "order": "0"
-  }
-}
+{}

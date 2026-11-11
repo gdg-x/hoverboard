@@ -117,6 +117,7 @@
     "blog": false,
     "demo": false,
     "forkMe": false,
-    "previousSpeakers": false
+    "previousSpeakers": true,
+    "tickets": false
   }
 }

@@ -27,13 +27,13 @@
     },
     "partners": {
       "file": "collections/partners.json",
-      "documents": 6,
+      "documents": 2,
       "kind": "content",
       "personal": false
     },
     "partners/*/items": {
       "file": "collections/partners--items.json",
-      "documents": 11,
+      "documents": 5,
       "kind": "content",
       "personal": false
     },
@@ -51,7 +51,7 @@
     },
     "tickets": {
       "file": "collections/tickets.json",
-      "documents": 1,
+      "documents": 0,
       "kind": "content",
       "personal": false
     },
@@ -64,6 +64,12 @@
     "sessions": {
       "file": "collections/sessions.json",
       "documents": 0,
+      "kind": "content",
+      "personal": false
+    },
+    "previousSpeakers": {
+      "file": "collections/previousSpeakers.json",
+      "documents": 25,
       "kind": "content",
       "personal": false
     }
