@@ -14,10 +14,7 @@
       "2025": [
         {
           "title": "The Bot Who Replaced Me: Automating SRE with Multi-Agent AI",
-          "tags": [
-            "AI",
-            "Cloud"
-          ]
+          "tags": ["AI", "Cloud"]
         }
       ]
     }
@@ -37,10 +34,7 @@
       "2025": [
         {
           "title": "Maximizing Scalability with Go and Redis: A Telemetry Processing Journey",
-          "tags": [
-            "Backend",
-            "Cloud"
-          ]
+          "tags": ["Backend", "Cloud"]
         }
       ]
     }
@@ -60,10 +54,7 @@
       "2025": [
         {
           "title": "Hacking the Hackers’ Code: Inside Android Malware",
-          "tags": [
-            "Android",
-            "Security"
-          ]
+          "tags": ["Android", "Security"]
         }
       ]
     }
@@ -83,10 +74,7 @@
       "2025": [
         {
           "title": "BYOD: Vector Databases for AI-driven Web Apps!",
-          "tags": [
-            "AI",
-            "Web"
-          ]
+          "tags": ["AI", "Web"]
         }
       ]
     }
@@ -106,9 +94,7 @@
       "2025": [
         {
           "title": "Sizes Matter! - How to handle different screen sizes on Android (using Jetpack Compose)",
-          "tags": [
-            "Android"
-          ]
+          "tags": ["Android"]
         }
       ]
     }
@@ -128,9 +114,7 @@
       "2025": [
         {
           "title": "Blink, tap, wow: why microinteractions matter",
-          "tags": [
-            "Design"
-          ]
+          "tags": ["Design"]
         }
       ]
     }
@@ -150,9 +134,7 @@
       "2025": [
         {
           "title": "Meet your new AI best friend: 🦜🔗LangChain",
-          "tags": [
-            "AI"
-          ]
+          "tags": ["AI"]
         }
       ]
     }
@@ -172,9 +154,7 @@
       "2025": [
         {
           "title": "Testing your Composables!",
-          "tags": [
-            "Android"
-          ]
+          "tags": ["Android"]
         }
       ]
     }
@@ -194,9 +174,7 @@
       "2025": [
         {
           "title": "The Rustacean Workshop",
-          "tags": [
-            "Backend"
-          ]
+          "tags": ["Backend"]
         }
       ]
     }
@@ -216,9 +194,7 @@
       "2025": [
         {
           "title": "Compose interoperability challenges and how to face them!",
-          "tags": [
-            "Android"
-          ]
+          "tags": ["Android"]
         }
       ]
     }
@@ -238,10 +214,7 @@
       "2025": [
         {
           "title": "Automating Critical Findings Detection with SCC and CIS Benchmarks",
-          "tags": [
-            "Security",
-            "Cloud"
-          ]
+          "tags": ["Security", "Cloud"]
         }
       ]
     }
@@ -261,9 +234,7 @@
       "2025": [
         {
           "title": "Going Beyond Dialogs: Creating Top-Notch Flutter Apps with Overlays",
-          "tags": [
-            "Flutter"
-          ]
+          "tags": ["Flutter"]
         }
       ]
     }
@@ -283,9 +254,7 @@
       "2025": [
         {
           "title": "Cat-like Development: Flutter for Efficiency",
-          "tags": [
-            "Flutter"
-          ]
+          "tags": ["Flutter"]
         }
       ]
     }
@@ -305,10 +274,7 @@
       "2025": [
         {
           "title": "The Bot Who Replaced Me: Automating SRE with Multi-Agent AI",
-          "tags": [
-            "AI",
-            "Cloud"
-          ]
+          "tags": ["AI", "Cloud"]
         }
       ]
     }
@@ -328,10 +294,7 @@
       "2025": [
         {
           "title": "Let’s make SQL great again - Google BigQuery’s Pipe query syntax",
-          "tags": [
-            "Cloud",
-            "Backend"
-          ]
+          "tags": ["Cloud", "Backend"]
         }
       ]
     }
@@ -351,9 +314,7 @@
       "2025": [
         {
           "title": "Event Driven and Serverless: the perfect combo in GCP",
-          "tags": [
-            "Cloud"
-          ]
+          "tags": ["Cloud"]
         }
       ]
     }
@@ -373,10 +334,7 @@
       "2025": [
         {
           "title": "Observability x AI: How Grafana has approached AI / ML",
-          "tags": [
-            "AI",
-            "Cloud"
-          ]
+          "tags": ["AI", "Cloud"]
         }
       ]
     }
@@ -396,10 +354,7 @@
       "2025": [
         {
           "title": "The Future of Modern Applications: MACH Architecture for Increased Agility and Innovation",
-          "tags": [
-            "Cloud",
-            "Web"
-          ]
+          "tags": ["Cloud", "Web"]
         }
       ]
     }
@@ -419,10 +374,7 @@
       "2025": [
         {
           "title": "All-in-one AI app development with Firebase",
-          "tags": [
-            "AI",
-            "Cloud"
-          ]
+          "tags": ["AI", "Cloud"]
         }
       ]
     }
@@ -442,9 +394,7 @@
       "2025": [
         {
           "title": "Workshop - GitOps with Flux",
-          "tags": [
-            "Cloud"
-          ]
+          "tags": ["Cloud"]
         }
       ]
     }
@@ -464,9 +414,7 @@
       "2025": [
         {
           "title": "FinOps: A New Hope",
-          "tags": [
-            "Cloud"
-          ]
+          "tags": ["Cloud"]
         }
       ]
     }
@@ -486,10 +434,7 @@
       "2025": [
         {
           "title": "All-in-one AI app development with Firebase",
-          "tags": [
-            "AI",
-            "Cloud"
-          ]
+          "tags": ["AI", "Cloud"]
         }
       ]
     }
@@ -509,10 +454,7 @@
       "2025": [
         {
           "title": "Android + Passkeys: Secure, passwordless auth",
-          "tags": [
-            "Android",
-            "Security"
-          ]
+          "tags": ["Android", "Security"]
         }
       ]
     }
@@ -532,9 +474,7 @@
       "2025": [
         {
           "title": "The Secret to Fast-Loading Websites: Optimizing Core Web Vitals",
-          "tags": [
-            "Web"
-          ]
+          "tags": ["Web"]
         }
       ]
     }
@@ -554,9 +494,7 @@
       "2025": [
         {
           "title": "Redefining Security: From Passwords to Biometrics and Digital Signatures",
-          "tags": [
-            "Security"
-          ]
+          "tags": ["Security"]
         }
       ]
     }
