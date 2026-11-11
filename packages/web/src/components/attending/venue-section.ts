@@ -30,25 +30,13 @@ const loadMapsScript = (src: string) =>
 /** Links to directions in map apps for the venue, by its address or its pin. */
 export const directionLinks = ({
   address,
-  pointer,
 }: {
   address: string;
-  pointer: { latitude: number; longitude: number };
+  pointer?: { latitude: number; longitude: number };
 }) => [
   {
     name: 'Google Maps',
     url: `https://www.google.com/maps/dir/?${new URLSearchParams({ api: '1', destination: address })}`,
-  },
-  {
-    name: 'Apple Maps',
-    url: `https://maps.apple.com/?${new URLSearchParams({ daddr: address })}`,
-  },
-  {
-    name: 'OpenStreetMap',
-    url: `https://www.openstreetmap.org/?${new URLSearchParams({
-      mlat: String(pointer.latitude),
-      mlon: String(pointer.longitude),
-    })}#map=17/${pointer.latitude}/${pointer.longitude}`,
   },
 ];
 

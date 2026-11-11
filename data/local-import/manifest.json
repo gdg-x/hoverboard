@@ -1,0 +1,71 @@
+{
+  "format": 1,
+  "hoverboard": "3.0.0",
+  "schemaVersion": 1,
+  "projectId": "devfest-323e1",
+  "createdAt": "2026-11-11T15:28:00.000Z",
+  "command": "hb data export",
+  "scope": "all",
+  "collections": {
+    "config/schedule": {
+      "file": "collections/config--schedule.json",
+      "documents": 1,
+      "kind": "retired",
+      "personal": false
+    },
+    "config/site": {
+      "file": "collections/config--site.json",
+      "documents": 1,
+      "kind": "retired",
+      "personal": false
+    },
+    "gallery": {
+      "file": "collections/gallery.json",
+      "documents": 8,
+      "kind": "content",
+      "personal": false
+    },
+    "partners": {
+      "file": "collections/partners.json",
+      "documents": 6,
+      "kind": "content",
+      "personal": false
+    },
+    "partners/*/items": {
+      "file": "collections/partners--items.json",
+      "documents": 11,
+      "kind": "content",
+      "personal": false
+    },
+    "team": {
+      "file": "collections/team.json",
+      "documents": 1,
+      "kind": "content",
+      "personal": false
+    },
+    "team/*/members": {
+      "file": "collections/team--members.json",
+      "documents": 12,
+      "kind": "content",
+      "personal": false
+    },
+    "tickets": {
+      "file": "collections/tickets.json",
+      "documents": 3,
+      "kind": "content",
+      "personal": false
+    },
+    "speakers": {
+      "file": "collections/speakers.json",
+      "documents": 25,
+      "kind": "content",
+      "personal": false
+    },
+    "sessions": {
+      "file": "collections/sessions.json",
+      "documents": 23,
+      "kind": "content",
+      "personal": false
+    }
+  }
+}

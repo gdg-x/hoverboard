@@ -335,7 +335,7 @@ export class AppHeader extends ThemedComponent {
 
   // Tickets on sale, the stream, the schedule, updates or the videos, unless the navigation has it.
   private renderCallToAction({ inSheet = false } = {}) {
-    const step = headerStep({
+    let step = headerStep({
       eventState: this.eventState,
       presence: this.presence,
       callForPapers: callForPapersOpen(this.time),
@@ -343,6 +343,9 @@ export class AppHeader extends ThemedComponent {
       attendance: this.attending,
       stream,
     });
+    if (step === 'photos' && this.ticket) {
+      step = 'tickets';
+    }
     if (!step) return nothing;
     if (step === 'schedule' || step === 'onNow') {
       const inNav = this.links.some((nav) => nav.route === 'schedule');

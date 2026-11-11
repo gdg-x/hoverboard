@@ -1,0 +1,163 @@
+{
+  "sessions/the-bot-who-replaced-me-automating-sre-with-multi-agent-ai": {
+    "title": "The Bot Who Replaced Me: Automating SRE with Multi-Agent AI",
+    "description": "Discover how multi-agent AI systems can automate Site Reliability Engineering workflows, from incident detection and root-cause analysis to remediation and platform reliability at scale.",
+    "speakers": ["alina-astapovich", "markus-makela"],
+    "tags": ["AI", "Cloud"],
+    "language": "English"
+  },
+  "sessions/maximizing-scalability-with-go-and-redis": {
+    "title": "Maximizing Scalability with Go and Redis: A Telemetry Processing Journey",
+    "description": "An in-depth look into constructing high-throughput, low-latency telemetry processing pipelines using Golang concurrency patterns and Redis caching at Delivery Hero scale.",
+    "speakers": ["andrii-raikov"],
+    "tags": ["Backend", "Cloud"],
+    "language": "English"
+  },
+  "sessions/hacking-the-hackers-code-inside-android-malware": {
+    "title": "Hacking the Hackers’ Code: Inside Android Malware",
+    "description": "Explore advanced reverse engineering techniques and threat mitigation strategies used to analyze sophisticated modern Android malware and uncover critical vulnerabilities.",
+    "speakers": ["caner-kaya"],
+    "tags": ["Android", "Security"],
+    "language": "English"
+  },
+  "sessions/byod-vector-databases-for-ai-driven-web-apps": {
+    "title": "BYOD: Vector Databases for AI-driven Web Apps!",
+    "description": "Bring Your Own Data: Learn how to leverage open-source vector databases like Weaviate to build scalable, semantic search and generative AI-driven web applications.",
+    "speakers": ["daniel-madalitso-phiri"],
+    "tags": ["AI", "Web"],
+    "language": "English"
+  },
+  "sessions/sizes-matter-how-to-handle-different-screen-sizes-on-android": {
+    "title": "Sizes Matter! - How to handle different screen sizes on Android (using Jetpack Compose)",
+    "description": "A practical guide to building responsive, adaptive Android user interfaces across phones, foldables, tablets, and large screens using modern Jetpack Compose techniques.",
+    "speakers": ["fabio-catinella"],
+    "tags": ["Android"],
+    "language": "English"
+  },
+  "sessions/blink-tap-wow-why-microinteractions-matter": {
+    "title": "Blink, tap, wow: why microinteractions matter",
+    "description": "Discover how thoughtful microinteractions, animations, and subtle feedback loops transform complex user experiences into delightful, intuitive digital products.",
+    "speakers": ["giorgia-sperandio"],
+    "tags": ["Design"],
+    "language": "English"
+  },
+  "sessions/meet-your-new-ai-best-friend-langchain": {
+    "title": "Meet your new AI best friend: 🦜🔗LangChain",
+    "description": "An introduction to building production-ready LLM workflows, memory-backed conversational agents, and tool integrations using the LangChain framework.",
+    "speakers": ["henry-lagarde"],
+    "tags": ["AI"],
+    "language": "English"
+  },
+  "sessions/testing-your-composables": {
+    "title": "Testing your Composables!",
+    "description": "Master effective testing strategies for Jetpack Compose, covering UI testing, semantics, snapshot testing, and integration patterns to ensure robust Android apps.",
+    "speakers": ["himanshu-singh"],
+    "tags": ["Android"],
+    "language": "English"
+  },
+  "sessions/the-rustacean-workshop": {
+    "title": "The Rustacean Workshop",
+    "description": "A hands-on deep dive into the Rust programming language, exploring ownership, borrowing, high-performance concurrency, and building resilient backend services.",
+    "speakers": ["irine-kokilashvili"],
+    "tags": ["Backend"],
+    "language": "English"
+  },
+  "sessions/compose-interoperability-challenges-and-how-to-face-them": {
+    "title": "Compose interoperability challenges and how to face them!",
+    "description": "Overcome common migration hurdles and architectural challenges when adopting Jetpack Compose alongside existing Android View systems and legacy codebases.",
+    "speakers": ["julien-salvi"],
+    "tags": ["Android"],
+    "language": "English"
+  },
+  "sessions/automating-critical-findings-detection-with-scc-and-cis-benchmarks": {
+    "title": "Automating Critical Findings Detection with SCC and CIS Benchmarks",
+    "description": "Learn how to automate threat detection, enforce CIS Benchmarks, and streamline compliance across Google Cloud environments with Security Command Center (SCC).",
+    "speakers": ["lana-elikova"],
+    "tags": ["Security", "Cloud"],
+    "language": "English"
+  },
+  "sessions/going-beyond-dialogs-creating-top-notch-flutter-apps-with-overlays": {
+    "title": "Going Beyond Dialogs: Creating Top-Notch Flutter Apps with Overlays",
+    "description": "Level up your Flutter UI toolkit by mastering custom OverlayEntries, portals, floating widgets, and complex layer animations beyond standard dialogs.",
+    "speakers": ["maher-jaafar"],
+    "tags": ["Flutter"],
+    "language": "English"
+  },
+  "sessions/cat-like-development-flutter-for-efficiency": {
+    "title": "Cat-like Development: Flutter for Efficiency",
+    "description": "Boost your team’s development velocity and codebase health with agile Flutter architecture patterns, reusable component designs, and developer tooling.",
+    "speakers": ["mangirdas-kazlauskas"],
+    "tags": ["Flutter"],
+    "language": "English"
+  },
+  "sessions/lets-make-sql-great-again-google-bigquery-pipe-syntax": {
+    "title": "Let’s make SQL great again - Google BigQuery’s Pipe query syntax",
+    "description": "Explore Google BigQuery’s revolutionary Pipe query syntax: how linear query composition simplifies complex analytical SQL queries, improves readability, and boosts productivity.",
+    "speakers": ["matyas-manninger"],
+    "tags": ["Cloud", "Backend"],
+    "language": "English"
+  },
+  "sessions/event-driven-and-serverless-the-perfect-combo-in-gcp": {
+    "title": "Event Driven and Serverless: the perfect combo in GCP",
+    "description": "Architect scalable, cost-efficient, event-driven backends on Google Cloud Platform combining Cloud Run, Cloud Functions, Pub/Sub, and Eventarc.",
+    "speakers": ["mazlum-tosun"],
+    "tags": ["Cloud"],
+    "language": "English"
+  },
+  "sessions/observability-x-ai-how-grafana-has-approached-ai-ml": {
+    "title": "Observability x AI: How Grafana has approached AI / ML",
+    "description": "A look inside how Grafana Labs integrates machine learning and AI into observability workflows to accelerate anomaly detection, root-cause analysis, and incident response.",
+    "speakers": ["nathan-marrs"],
+    "tags": ["AI", "Cloud"],
+    "language": "English"
+  },
+  "sessions/the-future-of-modern-applications-mach-architecture": {
+    "title": "The Future of Modern Applications: MACH Architecture for Increased Agility and Innovation",
+    "description": "Unpack MACH Architecture (Microservices, API-first, Cloud-native SaaS, Headless) and see how it enables enterprises to build flexible, high-speed digital platforms.",
+    "speakers": ["nejmeddine-ben-ouarred"],
+    "tags": ["Cloud", "Web"],
+    "language": "English"
+  },
+  "sessions/all-in-one-ai-app-development-with-firebase": {
+    "title": "All-in-one AI app development with Firebase",
+    "description": "Discover how Firebase makes building, deploying, and monitoring AI-powered applications effortless with Firebase Genkit, vector embeddings, and cloud integrations.",
+    "speakers": ["rachel-saunders", "thevi-sundaralingam"],
+    "tags": ["AI", "Cloud"],
+    "language": "English"
+  },
+  "sessions/workshop-gitops-with-flux": {
+    "title": "Workshop - GitOps with Flux",
+    "description": "A practical workshop exploring GitOps principles with Flux CD: automating Kubernetes cluster state, progressive delivery, and cloud infrastructure management from Git.",
+    "speakers": ["roberth-strand"],
+    "tags": ["Cloud"],
+    "language": "English"
+  },
+  "sessions/finops-a-new-hope": {
+    "title": "FinOps: A New Hope",
+    "description": "Demystifying Cloud Financial Operations (FinOps): culture, tooling, and best practices to gain financial visibility, optimize cloud spend, and drive accountability.",
+    "speakers": ["seifeddin-mansri"],
+    "tags": ["Cloud"],
+    "language": "English"
+  },
+  "sessions/android-passkeys-secure-passwordless-auth": {
+    "title": "Android + Passkeys: Secure, passwordless auth",
+    "description": "Say goodbye to passwords: learn how to implement FIDO2 WebAuthn Passkeys on Android using the Credential Manager API for seamless, phishing-resistant authentication.",
+    "speakers": ["tom-colvin"],
+    "tags": ["Android", "Security"],
+    "language": "English"
+  },
+  "sessions/the-secret-to-fast-loading-websites-optimizing-core-web-vitals": {
+    "title": "The Secret to Fast-Loading Websites: Optimizing Core Web Vitals",
+    "description": "Practical strategies and performance diagnostics to optimize Core Web Vitals (LCP, INP, CLS), delivering lightning-fast page loads and superior user experience.",
+    "speakers": ["tomi-tokko"],
+    "tags": ["Web"],
+    "language": "English"
+  },
+  "sessions/redefining-security-from-passwords-to-biometrics-and-digital-signatures": {
+    "title": "Redefining Security: From Passwords to Biometrics and Digital Signatures",
+    "description": "An exploration of modern identity and cryptography: replacing legacy credentials with biometric authentication, hardware security keys, and verifiable digital signatures.",
+    "speakers": ["vasilika-klimova"],
+    "tags": ["Security"],
+    "language": "English"
+  }
+}

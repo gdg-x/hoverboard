@@ -43,7 +43,7 @@ describe('venue-section', () => {
     }
   });
 
-  it("puts the page's heading before the venue, its address and directions in three map apps", async () => {
+  it("puts the page's heading before the venue, its address and directions", async () => {
     const { element, shadowRoot } = await render();
 
     expect(
@@ -60,7 +60,7 @@ describe('venue-section', () => {
     ).toEqual(directionLinks(location).map(({ url }) => url));
   });
 
-  it('links to directions by address, or by the pin for OpenStreetMap', () => {
+  it('links to directions in Google Maps by address', () => {
     expect(
       directionLinks({
         address: '1 Main St, Lviv',
@@ -70,11 +70,6 @@ describe('venue-section', () => {
       {
         name: 'Google Maps',
         url: 'https://www.google.com/maps/dir/?api=1&destination=1+Main+St%2C+Lviv',
-      },
-      { name: 'Apple Maps', url: 'https://maps.apple.com/?daddr=1+Main+St%2C+Lviv' },
-      {
-        name: 'OpenStreetMap',
-        url: 'https://www.openstreetmap.org/?mlat=49.8&mlon=23.9#map=17/49.8/23.9',
       },
     ]);
   });

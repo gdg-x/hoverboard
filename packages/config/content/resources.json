@@ -1,0 +1,213 @@
+{
+  "$schema": "../../web/schemas/resources.schema.json",
+  "title": "DevFest Stockholm",
+  "description": "Join the biggest tech community of the Nordic!",
+  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev, stockholm, sweden",
+  "heroDescriptions": {
+    "home": "Join the biggest tech community of the Nordic!",
+    "attending": "Everything you need to get to DevFest Stockholm at Kista Entré, and to join it online.",
+    "speakers": "Discover the incredible speakers and sessions from DevFest Stockholm."
+  },
+  "aboutBlock": {
+    "callToAction": {
+      "featuredSessions": {
+        "description": "DevFest Stockholm brings together world-class experts in Android, Web, Cloud and AI technologies to Stockholm for 2 days of sessions, workshops and showcases.",
+        "label": "Explore sessions",
+        "link": "/speakers"
+      },
+      "howItWas": {
+        "description": "DevFest is an annual decentralised tech conference hosted by Google Developer Groups across the globe. 2024 will be the 13th year 🎉 of DevFest. Our community brings DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
+        "label": "See how it was in 2023",
+        "youtubeId": "dnyMmhl2hR4"
+      }
+    },
+    "statisticsBlock": {
+      "attendees": {
+        "label": "Attendees",
+        "number": "200+"
+      },
+      "days": {
+        "label": "Days",
+        "number": "2"
+      },
+      "sessions": {
+        "label": "Sessions",
+        "number": "30+"
+      },
+      "tracks": {
+        "label": "Tracks",
+        "number": "2"
+      }
+    }
+  },
+  "aboutOrganizerBlock": {
+    "image": "/images/team.jpg",
+    "blocks": [
+      {
+        "title": "Organizer",
+        "description": "<a href='https://www.gdgsweden.se/' target='_blank'>GDG Sweden</a> with support of GDG Android and Cloud Stockholm, and Google's Women Techmakers Stockholm, is proud organizer of DevFest Stockholm",
+        "callToAction": {
+          "label": "Open team page",
+          "link": "/team"
+        }
+      },
+      {
+        "title": "What is a GDG?",
+        "description": "A Google Developer Group is a community of volunteers who create exciting projects and share experiences about Google technologies.",
+        "callToAction": {
+          "label": "Read more",
+          "link": "https://developers.google.com/groups/",
+          "newTab": true
+        }
+      },
+      {
+        "title": "What is DevFest?",
+        "description": "DevFests are community-led developer events hosted by Google Developer Groups around the globe.",
+        "callToAction": {
+          "label": "Read more",
+          "link": "https://devfest.withgoogle.com/",
+          "newTab": true
+        }
+      }
+    ]
+  },
+  "team": {
+    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Sweden](https://www.gdgsweden.se/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with international audience to boost development of IT."
+  },
+  "ticketsBlock": {
+    "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch. Accommodation is NOT included in the ticket price."
+  },
+  "featuredVideos": {
+    "title": "DevFest Stockholm featured videos",
+    "callToAction": {
+      "link": "https://www.youtube.com/@GDGSweden"
+    }
+  },
+  "galleryBlock": {
+    "title": "#DevFestStockholm highlights",
+    "description": "Last year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
+    "callToAction": {
+      "link": "https://photos.app.goo.gl/R1FSpCWAB4HU9aKX9"
+    }
+  },
+  "subscribeBlock": {
+    "formTitle": "Get the latest updates, insights and news about DevFest Stockholm sent to your inbox."
+  },
+  "codeOfConductBlock": {
+    "form": "https://bit.ly/2RstTJ8",
+    "contacts": ["GDG Sweden Organizers, info@devfest-stockholm.com"]
+  },
+  "footerRelBlock": [
+    {
+      "title": "About",
+      "links": [
+        {
+          "name": "GDG Sweden",
+          "url": "https://www.gdgsweden.se/",
+          "newTab": true
+        },
+        {
+          "name": "GDG",
+          "url": "https://developers.google.com/groups/",
+          "newTab": true
+        },
+        {
+          "name": "DevFest",
+          "url": "https://devfest.withgoogle.com/",
+          "newTab": true
+        },
+        {
+          "name": "Meet the Team",
+          "url": "/team",
+          "newTab": false
+        }
+      ]
+    },
+    {
+      "title": "Event Resources",
+      "links": [
+        {
+          "name": "Sponsorship Proposition",
+          "url": "https://docs.google.com/document/d/1Bx9870i77NDLRRT3aP8wrGsGfB3cYoQT/edit?usp=sharing&ouid=108113822327701773680&rtpof=true&sd=true",
+          "newTab": true
+        },
+        {
+          "name": "Call for Papers",
+          "url": "https://sessionize.com/devfest-stockholm-2025/",
+          "newTab": true
+        },
+        {
+          "name": "FAQs",
+          "url": "/faq",
+          "newTab": false
+        }
+      ]
+    }
+  ],
+  "mapBlock": {
+    "description": "Kista Entré & Konferens is conveniently located in Kista, Stockholm, easily accessible by metro, commuter train, and car."
+  },
+  "attendingPage": {
+    "description": "How to get to DevFest Stockholm at Kista Entré, when the doors open, and what to expect at the venue.",
+    "online": "Ask questions in the chat under the stream. Speakers answer them at the end of their talk.",
+    "gettingThere": [
+      {
+        "mode": "train",
+        "text": "From Stockholm Central Station, take the metro (blue line towards Akalla) to Kista station, about 17 minutes away."
+      },
+      {
+        "mode": "plane",
+        "text": "From Stockholm Arlanda Airport (ARN), take the commuter train (pendeltåg) to Helenelund station, then a short bus ride or walk."
+      },
+      {
+        "mode": "parking",
+        "text": "Parking is available around Kista Entré and Kista Galleria."
+      },
+      {
+        "mode": "other",
+        "title": "Public Transit",
+        "text": "Use the SL app or sl.se to plan your trip to Kista station."
+      }
+    ],
+    "doors": [
+      {
+        "day": "2025-02-27",
+        "open": "08:00",
+        "close": "20:00",
+        "note": "Registration is at the main entrance. Bring your ticket, on your phone or on paper."
+      },
+      {
+        "day": "2025-02-28",
+        "open": "08:30",
+        "close": "19:00"
+      }
+    ],
+    "accessibility": "Every room is step-free, with lifts between floors. Tell us what you need when you register, or ask any volunteer in a DevFest t-shirt.",
+    "accommodation": {
+      "text": "There are several hotels near Kista Entré, including Comfort Hotel Kista and Scandic Victoria Tower.",
+      "hotels": [
+        {
+          "name": "Comfort Hotel Kista",
+          "address": "Isafjordsgatan 21, 164 40 Kista",
+          "note": "Next to Kista Galleria and close to the venue.",
+          "code": "DEVFEST",
+          "url": "https://www.strawberry.se/hotell/sverige/stockholm/comfort-hotel-kista/"
+        }
+      ]
+    },
+    "atVenue": [
+      {
+        "topic": "wifi",
+        "text": "Network `DevFest`, password provided at check-in."
+      },
+      {
+        "topic": "food",
+        "text": "Lunch and coffee are included. Tell us about allergies when you register."
+      },
+      {
+        "topic": "cloakroom",
+        "text": "Free, next to registration."
+      }
+    ]
+  }
+}

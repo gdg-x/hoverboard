@@ -314,6 +314,9 @@
 <trans-unit id="pages.home.view-highlights">
   <source>View Highlights</source>
 </trans-unit>
+<trans-unit id="home.hero.get-ticket">
+  <source>Get ticket</source>
+</trans-unit>
 <trans-unit id="home.latest-posts-block.title">
   <source>The latest news</source>
 </trans-unit>

@@ -1,0 +1,126 @@
+{
+  "$schema": "../web/schemas/site.schema.json",
+  "schemaVersion": 1,
+  "firebase": {
+    "projectId": "devfest-323e1"
+  },
+  "url": "https://devfest-stockholm.com/",
+  "basepath": "/",
+  "shortName": "DevFest Stockholm",
+  "image": "images/social-share.jpg",
+  "organizer": {
+    "name": "GDG Sweden",
+    "twitter": "gdgsweden",
+    "blog": "https://gdg.community.dev/",
+    "url": "https://devfest-stockholm.com/",
+    "email": "info@devfest-stockholm.com"
+  },
+  "event": {
+    "startDate": "2025-02-27",
+    "endDate": "2025-02-28",
+    "timezone": "Europe/Stockholm",
+    "location": {
+      "name": "Kista Entré & Konferens",
+      "city": "Stockholm",
+      "short": "Stockholm, Sweden",
+      "address": "Knarrarnäsgatan 7, 164 40 Kista, Stockholm, Sweden",
+      "pointer": {
+        "latitude": 59.40033,
+        "longitude": 17.95083,
+        "zoom": 14
+      },
+      "mapCenter": {
+        "latitude": 59.40033,
+        "longitude": 17.95083
+      }
+    }
+  },
+  "callForPapers": {
+    "url": "https://sessionize.com/devfest-stockholm-2025",
+    "closes": "2025-01-31"
+  },
+  "navigation": [
+    {
+      "route": "home",
+      "permalink": "/"
+    },
+    {
+      "route": "speakers",
+      "permalink": "/speakers"
+    },
+    {
+      "route": "schedule",
+      "permalink": "/schedule"
+    },
+    {
+      "route": "team",
+      "permalink": "/team"
+    }
+  ],
+  "schedule": {
+    "published": true,
+    "tracks": [
+      {
+        "id": "track-1",
+        "title": "Track 1"
+      },
+      {
+        "id": "track-2",
+        "title": "Track 2"
+      },
+      {
+        "id": "workshops",
+        "title": "Workshops"
+      }
+    ]
+  },
+  "locales": {
+    "source": "en",
+    "targets": []
+  },
+  "social": {
+    "hashtag": "DevFestStockholm",
+    "follow": [
+      {
+        "name": "meetup",
+        "url": "https://www.meetup.com/gdg-stockholm-android/"
+      },
+      {
+        "name": "twitter",
+        "url": "https://x.com/gdgsweden"
+      },
+      {
+        "name": "linkedin",
+        "url": "https://www.linkedin.com/company/gdg-sweden/"
+      }
+    ]
+  },
+  "auth": {
+    "providers": ["emailLink", "google"]
+  },
+  "theme": {
+    "name": "spotlight",
+    "colorScheme": "dark",
+    "tagColors": {
+      "general": "#9e9e9e",
+      "android": "#78c257",
+      "web": "#2196f3",
+      "cloud": "#3f51b5",
+      "community": "#e91e63",
+      "ai": "#ff9800",
+      "flutter": "#02569b",
+      "security": "#e53935",
+      "backend": "#8e24aa",
+      "design": "#ec407a"
+    }
+  },
+  "integrations": {
+    "googleMapsApiKey": "AIzaSyCJqlRVGIe6bfU43rga3cnK7tSXXwc7JD8"
+  },
+  "features": {
+    "blog": false,
+    "demo": false,
+    "forkMe": false,
+    "previousSpeakers": false
+  }
+}

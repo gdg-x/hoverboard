@@ -303,7 +303,17 @@ export class HomeHero extends ThemedComponent {
       attendance: this.where.attendance,
       stream,
     });
-    const actions = steps
+    // On the home hero, when tickets are available, offer tickets instead of photos, and highlights
+    const heroSteps =
+      this.ticket && !steps.includes('tickets')
+        ? ['tickets' as const, ...steps.filter((s) => s !== 'photos' && s !== 'updates')]
+        : steps
+            .map((s) => (s === 'photos' && this.ticket ? ('tickets' as const) : s))
+            .filter((s) =>
+              this.ticket && aboutBlock.callToAction.howItWas ? s !== 'updates' : true,
+            );
+
+    const actions = heroSteps
       .slice(0, 2)
       .map((step, index) => this.renderStep(step, index === 0 ? 'cta' : 'outlined'));
     if (actions.length < 2 && aboutBlock.callToAction.howItWas) {
@@ -328,7 +338,8 @@ export class HomeHero extends ThemedComponent {
 
   private renderStep(step: NextStep, variant: 'cta' | 'outlined'): TemplateResult {
     const { href, label, icon, external } = nextStepLink(step);
-    const content = html`<hoverboard-icon slot="icon" name="${icon}"></hoverboard-icon>${label}`;
+    const text = step === 'tickets' ? msg('Get ticket', { id: 'home.hero.get-ticket' }) : label;
+    const content = html`<hoverboard-icon slot="icon" name="${icon}"></hoverboard-icon>${text}`;
     // The tickets are on this page, so it scrolls to them.
     if (step === 'tickets') {
       return html`<hb-button
@@ -350,9 +361,13 @@ export class HomeHero extends ThemedComponent {
   }
 
   private get ticket(): Ticket | undefined {
-    return __HB_FEATURES__.tickets && this.tickets instanceof Success
-      ? ticketOnSale(this.tickets.data, this.time)
-      : undefined;
+    if (!__HB_FEATURES__.tickets || !(this.tickets instanceof Success)) return undefined;
+    const onSale = ticketOnSale(this.tickets.data, this.time);
+    if (onSale) return onSale;
+    if (this.eventState === 'over') {
+      return this.tickets.data.find((t) => t.available && !t.soldOut && !!t.url);
+    }
+    return undefined;
   }
 
   // Before any ticket is on sale, so the sticker keeps the countdown.

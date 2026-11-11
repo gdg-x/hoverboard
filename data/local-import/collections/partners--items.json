@@ -1,0 +1,68 @@
+{
+  "partners/0/items/000": {
+    "order": 0,
+    "logoUrl": "/images/logos/gdg-sweden.svg",
+    "name": "GDG Sweden",
+    "url": "https://linkedin.com/company/gdg-sweden/"
+  },
+  "partners/0/items/001": {
+    "order": 0,
+    "logoUrl": "../images/logos/gdg-android-stockholm.svg",
+    "name": "GDG Android Stockholm",
+    "url": "https://gdg.community.dev/gdg-stockholm-android/"
+  },
+  "partners/0/items/002": {
+    "order": 1,
+    "logoUrl": "../images/logos/gdg-cloud-stockholm.svg",
+    "name": "GDG Cloud Stockholm",
+    "url": "https://gdg.community.dev/gdg-cloud-stockholm/"
+  },
+  "partners/0/items/003": {
+    "order": 3,
+    "logoUrl": "../images/logos/womentechmakers.svg",
+    "name": "Women Techmakers Stockholm",
+    "url": "https://developers.google.com/womentechmakers"
+  },
+  "partners/0/items/004": {
+    "order": 4,
+    "logoUrl": "../images/logos/fluttervasteras.svg",
+    "name": "Flutter Västerås",
+    "url": "https://www.meetup.com/flutter-vasteras-meetup/"
+  },
+  "partners/1/items/000": {
+    "order": 0,
+    "logoUrl": "../images/logos/google.svg",
+    "name": "Google",
+    "url": "https://about.google/"
+  },
+  "partners/1/items/001": {
+    "order": 1,
+    "logoUrl": "../images/logos/firebase.svg",
+    "name": "Firebase",
+    "url": "https://firebase.google.com/"
+  },
+  "partners/2/items/000": {
+    "order": 0,
+    "logoUrl": "../images/logos/umain.png",
+    "name": "Umain",
+    "url": "https://www.umain.com/"
+  },
+  "partners/3/items/000": {
+    "order": 0,
+    "logoUrl": "../images/logos/devoteam.png",
+    "name": "Devoteam",
+    "url": "https://www.devoteam.com/"
+  },
+  "partners/4/items/000": {
+    "order": 0,
+    "logoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fwanted.jpg?alt=media&token=aea36205-8795-409e-ac68-2f5543151471",
+    "name": "We are looking for you! Get in touch with us!",
+    "url": "https://docs.google.com/document/d/1Bx9870i77NDLRRT3aP8wrGsGfB3cYoQT"
+  },
+  "partners/5/items/000": {
+    "order": 0,
+    "logoUrl": "../images/logos/grafana.svg",
+    "name": "Grafana",
+    "url": "https://www.grafana.com/"
+  }
+}
