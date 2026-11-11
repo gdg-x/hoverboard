@@ -1,5 +1,11 @@
 {
   "team/0": {
-    "title": "Core Team"
+    "title": "GDG Stockholm Android"
+  },
+  "team/1": {
+    "title": "GDG Stockholm Cloud"
+  },
+  "team/2": {
+    "title": "GDG Stockholm Web"
   }
 }

@@ -1,168 +1,51 @@
 {
   "team/0/members/0": {
-    "name": "Abdel Sghiouar",
-    "photo": "/images/people/abdel.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fabdel.jpg?alt=media&token=cdb9f591-065d-4015-a2aa-ee6369d76a3a",
-    "socials": [
-      {
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/sabdelfettah/",
-        "name": "LinkedIn"
-      },
-      {
-        "icon": "twitter",
-        "link": "https://x.com/boredabdel",
-        "name": "X"
-      }
-    ],
-    "order": 0,
-    "title": "Speakers"
-  },
-  "team/0/members/1": {
-    "name": "Annie Tsai",
-    "photo": "/images/people/annie.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fannie.jpg?alt=media&token=d9a466a5-90c6-4d96-806e-925793b2cc5e",
-    "socials": [
-      {
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/annietsai8/",
-        "name": "LinkedIn"
-      },
-      {
-        "icon": "twitter",
-        "link": "",
-        "name": "X"
-      }
-    ],
-    "order": 1,
-    "title": "Social and Media"
-  },
-  "team/0/members/10": {
     "name": "Tobias Zuber",
+    "order": 0,
     "photo": "/images/people/tobias.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Ftobias.jpg?alt=media&token=4c31690b-5e3f-43d5-b326-96f15c23d85a",
+    "photoUrl": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/tobias_zuber_jAIEPsp.jpg",
     "socials": [
       {
         "icon": "linkedin",
         "link": "https://www.linkedin.com/in/tobiaszuber/",
         "name": "LinkedIn"
-      },
-      {
-        "icon": "twitter",
-        "link": "",
-        "name": "X"
       }
     ],
-    "order": 10,
-    "title": "Ticketing"
+    "title": "Organizer"
   },
-  "team/0/members/11": {
-    "name": "Zahra Mirzaei",
-    "photo": "/images/people/zahra.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fzahra.jpg?alt=media&token=469efc1b-3977-4df8-a3a4-2bfc628fb8c3",
-    "socials": [
-      {
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/zahra-mirzaei-dev/",
-        "name": "LinkedIn"
-      },
-      {
-        "icon": "twitter",
-        "link": "https://twitter.com/nafisemirzaei",
-        "name": "X"
-      }
-    ],
-    "order": 11,
-    "title": "Social and Media, Volunteers"
-  },
-  "team/0/members/2": {
-    "name": "Daniele Favaro",
-    "photo": "/images/people/daniele.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fdaniele.jpg?alt=media&token=12f5ca15-8329-4ac8-a9c3-8c2daaa71d2f",
-    "socials": [
-      {
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/danfav/",
-        "name": "LinkedIn"
-      },
-      {
-        "icon": "twitter",
-        "link": "https://twitter.com/_danfav",
-        "name": "X"
-      }
-    ],
-    "order": 2,
-    "title": "Website and sponsors"
-  },
-  "team/0/members/3": {
+  "team/0/members/1": {
     "name": "Hend AlQett",
+    "order": 1,
     "photo": "/images/people/hend.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fhend.jpg?alt=media&token=bfd34b36-737c-4e8f-ae76-a2d491dcc162",
+    "photoUrl": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/featured_attendees/IMG_20180107_140513_2_sT7v1TD.jpg",
     "socials": [
       {
         "icon": "linkedin",
         "link": "https://www.linkedin.com/in/hendq/",
         "name": "LinkedIn"
-      },
-      {
-        "icon": "twitter",
-        "link": "",
-        "name": "X"
       }
     ],
-    "order": 3,
-    "title": "Social and Media, Volunteers"
+    "title": "Organizer"
   },
-  "team/0/members/4": {
-    "name": "Jonas Jonsson",
-    "photo": "/images/people/daniele.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fjonas.jpg?alt=media&token=7de9c273-4cfe-43a1-ab7c-7afe829b0e66",
+  "team/0/members/2": {
+    "name": "Yauheni Slizh",
+    "order": 2,
+    "photo": "/images/icon.png",
+    "photoUrl": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/yauheni_slizh.jpeg",
     "socials": [
       {
         "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/jonsson-jonas/",
+        "link": "https://www.linkedin.com/in/yauheni-slizh-5b7a7236/",
         "name": "LinkedIn"
-      },
-      {
-        "icon": "twitter",
-        "link": "",
-        "name": "X"
       }
     ],
-    "order": 4,
-    "title": "Social and Media, Volunteers"
+    "title": "Organizer"
   },
-  "team/0/members/5": {
-    "name": "Marina Dushkina",
-    "photo": "/images/people/marina.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fmarina.jpg?alt=media&token=5ee693b5-06b3-4f12-b184-8a4995adfd2f",
-    "socials": [
-      {
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/marina-dushkina-80a662120/",
-        "name": "LinkedIn"
-      },
-      {
-        "icon": "twitter",
-        "link": "",
-        "name": "X"
-      }
-    ],
-    "order": 5,
-    "title": "Social and Media, Volunteers"
-  },
-  "team/0/members/6": {
-    "socials": [],
-    "name": "Mikael Kent Svensson",
-    "photo": "/images/people/Mikael.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fmikeal.jpg?alt=media&token=ae313220-2b6a-4a1d-8d06-bead2bfe2627",
-    "order": 6,
-    "title": "Sponsors"
-  },
-  "team/0/members/7": {
+  "team/1/members/0": {
     "name": "Mostafa Moradian",
+    "order": 0,
     "photo": "/images/people/mostafa.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fmostafa.jpg?alt=media&token=6898fda8-1048-4fe5-99b2-5456a287c5cc",
+    "photoUrl": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/mostafa_moradian_8jdAXUN.jpg",
     "socials": [
       {
         "icon": "linkedin",
@@ -175,34 +58,83 @@
         "name": "X"
       }
     ],
-    "order": 7,
-    "title": "Sponsors, speakers"
+    "title": "Co-organizer"
   },
-  "team/0/members/8": {
-    "socials": [],
-    "name": "Rachel Saunders",
-    "photo": "/images/people/rachel.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Frachel.jpg?alt=media&token=8a83f1fe-0817-4a17-b4c6-bb2009880b08",
-    "order": 8,
-    "title": "Copy and content"
-  },
-  "team/0/members/9": {
-    "name": "Ruben Blazquez Cob",
-    "photo": "/images/people/ruben.jpg",
-    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/devfest-323e1.appspot.com/o/images%2Fpeople%2Fruben.jpg?alt=media&token=ce9a9789-e2aa-45d6-b96e-228c3761b315",
+  "team/1/members/1": {
+    "name": "Zahra Mirzaei",
+    "order": 1,
+    "photo": "/images/people/zahra.jpg",
+    "photoUrl": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/zahra_mirzaei_oNjoI7r.jpg",
     "socials": [
       {
         "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/ruben-blazquez-cob/",
+        "link": "https://www.linkedin.com/in/zahra-mirzaei-dev/",
         "name": "LinkedIn"
       },
       {
         "icon": "twitter",
-        "link": "",
+        "link": "https://twitter.com/nafisemirzaei",
         "name": "X"
       }
     ],
-    "order": 9,
-    "title": "Sponsors"
+    "title": "Co-organizer"
+  },
+  "team/1/members/2": {
+    "name": "Marina Dushkina",
+    "order": 2,
+    "photo": "/images/people/marina.jpg",
+    "photoUrl": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/marina_dushkina_Tjwwjse.jpg",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/marina-dushkina-80a662120/",
+        "name": "LinkedIn"
+      }
+    ],
+    "title": "Co-organizer"
+  },
+  "team/2/members/0": {
+    "name": "Morteza Aghilinasab",
+    "order": 0,
+    "photo": "/images/icon.png",
+    "photoUrl": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/morteza_aghilinasab.jpg",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://ir.linkedin.com/in/morteza-aghilinasab-b1968b120",
+        "name": "LinkedIn"
+      }
+    ],
+    "title": "GDG Organizer"
+  },
+  "team/2/members/1": {
+    "name": "Sahar Mahdavinasab",
+    "order": 1,
+    "photo": "/images/icon.png",
+    "photoUrl": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/featured_attendees/48F5FAF5-3E76-448C-8782-3D7407466A7C.jpeg",
+    "socials": [],
+    "title": "Co-organizer"
+  },
+  "team/2/members/2": {
+    "name": "Meghdad Hadidi",
+    "order": 2,
+    "photo": "/images/icon.png",
+    "photoUrl": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/meghdad_hadidi.jpg",
+    "socials": [
+      {
+        "icon": "github",
+        "link": "https://github.com/meghdadhadidi",
+        "name": "GitHub"
+      }
+    ],
+    "title": "Co-organizer"
+  },
+  "team/2/members/3": {
+    "name": "Zohre Salimi",
+    "order": 3,
+    "photo": "/images/icon.png",
+    "photoUrl": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/zohre_salimi.jpg",
+    "socials": [],
+    "title": "Co-organizer"
   }
 }

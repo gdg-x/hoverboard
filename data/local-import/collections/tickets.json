@@ -2,42 +2,13 @@
   "tickets/000": {
     "available": true,
     "currency": "SEK",
-    "ends": "No expiration",
-    "info": "Requires valid student/lecturer ID",
-    "name": "EDU",
-    "price": 400,
+    "ends": "TBA",
+    "info": "Tickets are not for sale yet.",
+    "name": "General Admission",
+    "price": 0,
     "soldOut": false,
-    "starts": "Available now",
-    "url": "https://billetto.se/en/e/devfest-2024-biljetter-991959",
+    "starts": "Coming soon",
+    "url": "/",
     "order": "0"
-  },
-  "tickets/001": {
-    "available": true,
-    "currency": "SEK",
-    "ends": "No expiration",
-    "inDemand": true,
-    "info": "Join us!",
-    "name": "Late Bird",
-    "price": 1000,
-    "regular": false,
-    "soldOut": false,
-    "starts": "Available now",
-    "url": "https://billetto.se/en/e/devfest-2024-biljetter-991959",
-    "order": "1"
-  },
-  "tickets/002": {
-    "available": false,
-    "currency": "SEK",
-    "ends": "Jan 31, 2025",
-    "inDemand": false,
-    "info": "",
-    "name": "Regular",
-    "price": 750,
-    "primary": true,
-    "regular": true,
-    "soldOut": false,
-    "starts": "Expired",
-    "url": "https://billetto.se/en/ticket_buyer/offers/d6834a91-389a-47e0-9c19-f5c47f83bcdb",
-    "order": "2"
   }
 }

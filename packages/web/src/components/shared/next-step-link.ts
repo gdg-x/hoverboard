@@ -26,7 +26,7 @@ export const nextStepLink = (step: NextStep, ticketUrl = ''): NextStepLink => {
         href: ticketUrl,
         label: msg('Buy ticket', { id: 'common.buy-ticket' }),
         icon: 'ticket',
-        external: true,
+        external: !ticketUrl.startsWith('/') && !ticketUrl.includes('devfest-stockholm.com'),
       };
     case 'watchLive':
       return {

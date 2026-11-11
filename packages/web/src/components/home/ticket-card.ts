@@ -1,3 +1,4 @@
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { msg, str } from '@lit/localize';
 import { css, html, nothing } from 'lit';
 import { displayFont } from '../../styles/shared';
@@ -162,7 +163,7 @@ export class TicketCard extends ThemedComponent {
           <hb-button
             variant="cta"
             href="${ticket.url}"
-            target="_blank"
+            target="${ifDefined(ticket.url && (ticket.url.startsWith('/') || ticket.url.includes('devfest-stockholm.com')) ? undefined : '_blank')}"
             ?disabled="${!onSale(ticket, currentTime())}"
           >
             ${this.buttonLabel(ticket)}

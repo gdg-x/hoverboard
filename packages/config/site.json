@@ -6,7 +6,7 @@
   },
   "url": "https://devfest-stockholm.com/",
   "basepath": "/",
-  "shortName": "DevFest Stockholm",
+  "shortName": "DevFest Stockholm 2026",
   "image": "images/social-share.jpg",
   "organizer": {
     "name": "GDG Sweden",
@@ -16,22 +16,22 @@
     "email": "info@devfest-stockholm.com"
   },
   "event": {
-    "startDate": "2025-02-27",
-    "endDate": "2025-02-28",
+    "startDate": "2027-02-05",
+    "endDate": "2027-02-05",
     "timezone": "Europe/Stockholm",
     "location": {
-      "name": "Kista Entré & Konferens",
+      "name": "Google Stockholm",
       "city": "Stockholm",
       "short": "Stockholm, Sweden",
-      "address": "Knarrarnäsgatan 7, 164 40 Kista, Stockholm, Sweden",
+      "address": "Kungsbron 2, 111 22 Stockholm, Sweden",
       "pointer": {
-        "latitude": 59.40033,
-        "longitude": 17.95083,
-        "zoom": 14
+        "latitude": 59.333433,
+        "longitude": 18.054503,
+        "zoom": 15
       },
       "mapCenter": {
-        "latitude": 59.40033,
-        "longitude": 17.95083
+        "latitude": 59.333433,
+        "longitude": 18.054503
       }
     }
   },
@@ -58,7 +58,7 @@
     }
   ],
   "schedule": {
-    "published": true,
+    "published": false,
     "tracks": [
       {
         "id": "track-1",
@@ -67,10 +67,6 @@
       {
         "id": "track-2",
         "title": "Track 2"
-      },
-      {
-        "id": "workshops",
-        "title": "Workshops"
       }
     ]
   },
@@ -79,7 +75,7 @@
     "targets": []
   },
   "social": {
-    "hashtag": "DevFestStockholm",
+    "hashtag": "DevFestStockholm2026",
     "follow": [
       {
         "name": "meetup",

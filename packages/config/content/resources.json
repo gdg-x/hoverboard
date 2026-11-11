@@ -1,22 +1,22 @@
 {
   "$schema": "../../web/schemas/resources.schema.json",
-  "title": "DevFest Stockholm",
+  "title": "DevFest Stockholm 2026",
   "description": "Join the biggest tech community of the Nordic!",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev, stockholm, sweden",
   "heroDescriptions": {
     "home": "Join the biggest tech community of the Nordic!",
-    "attending": "Everything you need to get to DevFest Stockholm at Kista Entré, and to join it online.",
+    "attending": "Everything you need to get to DevFest Stockholm 2026 at the Google Stockholm office, and to join it online.",
     "speakers": "Discover the incredible speakers and sessions from DevFest Stockholm."
   },
   "aboutBlock": {
     "callToAction": {
       "featuredSessions": {
-        "description": "DevFest Stockholm brings together world-class experts in Android, Web, Cloud and AI technologies to Stockholm for 2 days of sessions, workshops and showcases.",
+        "description": "DevFest Stockholm brings together world-class experts in Android, Web, Cloud and AI technologies to Stockholm for sessions, workshops and showcases.",
         "label": "Explore sessions",
         "link": "/speakers"
       },
       "howItWas": {
-        "description": "DevFest is an annual decentralised tech conference hosted by Google Developer Groups across the globe. 2024 will be the 13th year 🎉 of DevFest. Our community brings DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
+        "description": "DevFest is an annual decentralised tech conference hosted by Google Developer Groups across the globe. Our community brings DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
         "label": "See how it was in 2023",
         "youtubeId": "dnyMmhl2hR4"
       }
@@ -28,11 +28,11 @@
       },
       "days": {
         "label": "Days",
-        "number": "2"
+        "number": "1"
       },
       "sessions": {
         "label": "Sessions",
-        "number": "30+"
+        "number": "20+"
       },
       "tracks": {
         "label": "Tracks",
@@ -45,7 +45,7 @@
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='https://www.gdgsweden.se/' target='_blank'>GDG Sweden</a> with support of GDG Android and Cloud Stockholm, and Google's Women Techmakers Stockholm, is proud organizer of DevFest Stockholm",
+        "description": "<a href='https://www.gdgsweden.se/' target='_blank'>GDG Sweden</a> with organizers from GDG Stockholm Android, GDG Stockholm Cloud and GDG Stockholm Web, is proud organizer of DevFest Stockholm 2026",
         "callToAction": {
           "label": "Open team page",
           "link": "/team"
@@ -145,53 +145,47 @@
     }
   ],
   "mapBlock": {
-    "description": "Kista Entré & Konferens is conveniently located in Kista, Stockholm, easily accessible by metro, commuter train, and car."
+    "description": "Google Stockholm office is located at Kungsbron 2 in central Stockholm, easily accessible by public transit from Stockholm Central Station."
   },
   "attendingPage": {
-    "description": "How to get to DevFest Stockholm at Kista Entré, when the doors open, and what to expect at the venue.",
+    "description": "How to get to DevFest Stockholm 2026 at the Google Stockholm office, when the doors open, and what to expect at the venue.",
     "online": "Ask questions in the chat under the stream. Speakers answer them at the end of their talk.",
     "gettingThere": [
       {
         "mode": "train",
-        "text": "From Stockholm Central Station, take the metro (blue line towards Akalla) to Kista station, about 17 minutes away."
+        "text": "From Stockholm Central Station (T-Centralen), the Google Stockholm office at Kungsbron 2 is just a short 5-minute walk."
       },
       {
         "mode": "plane",
-        "text": "From Stockholm Arlanda Airport (ARN), take the commuter train (pendeltåg) to Helenelund station, then a short bus ride or walk."
+        "text": "From Stockholm Arlanda Airport (ARN), take the Arlanda Express or commuter train (pendeltåg) directly to Stockholm Central Station."
       },
       {
         "mode": "parking",
-        "text": "Parking is available around Kista Entré and Kista Galleria."
+        "text": "Parking is available at nearby parking garages in central Stockholm around Kungsbron and Central Station."
       },
       {
         "mode": "other",
         "title": "Public Transit",
-        "text": "Use the SL app or sl.se to plan your trip to Kista station."
+        "text": "Use the SL app or sl.se to plan your trip to Stockholm Central Station / T-Centralen."
       }
     ],
     "doors": [
       {
-        "day": "2025-02-27",
-        "open": "08:00",
-        "close": "20:00",
-        "note": "Registration is at the main entrance. Bring your ticket, on your phone or on paper."
-      },
-      {
-        "day": "2025-02-28",
+        "day": "2027-02-05",
         "open": "08:30",
-        "close": "19:00"
+        "close": "18:00",
+        "note": "Registration is at the main entrance. Bring your ticket, on your phone or on paper."
       }
     ],
     "accessibility": "Every room is step-free, with lifts between floors. Tell us what you need when you register, or ask any volunteer in a DevFest t-shirt.",
     "accommodation": {
-      "text": "There are several hotels near Kista Entré, including Comfort Hotel Kista and Scandic Victoria Tower.",
+      "text": "There are several hotels near Google Stockholm, including Radisson Blu Waterfront Hotel and Scandic Continental.",
       "hotels": [
         {
-          "name": "Comfort Hotel Kista",
-          "address": "Isafjordsgatan 21, 164 40 Kista",
-          "note": "Next to Kista Galleria and close to the venue.",
-          "code": "DEVFEST",
-          "url": "https://www.strawberry.se/hotell/sverige/stockholm/comfort-hotel-kista/"
+          "name": "Radisson Blu Waterfront Hotel",
+          "address": "Nils Ericsons Plan 4, 111 64 Stockholm",
+          "note": "Next to Stockholm Central Station and a short walk to the venue.",
+          "url": "https://www.radissonhotels.com/en-us/hotels/radisson-blu-stockholm-waterfront"
         }
       ]
     },
