@@ -18,6 +18,7 @@ const config = withDevBar(resolveConfig(), env['FIRESTORE_TARGET']);
 
 export default defineConfig({
   site: config.site.url,
+  server: { host: true, port: 4321 },
   output: 'static',
   // Matches `trailingSlash: false` in firebase.json: `/speakers/abc` is `speakers/abc.html`.
   trailingSlash: 'never',
