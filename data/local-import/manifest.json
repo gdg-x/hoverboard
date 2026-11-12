@@ -7,18 +7,6 @@
   "command": "hb data export",
   "scope": "all",
   "collections": {
-    "config/schedule": {
-      "file": "collections/config--schedule.json",
-      "documents": 1,
-      "kind": "retired",
-      "personal": false
-    },
-    "config/site": {
-      "file": "collections/config--site.json",
-      "documents": 1,
-      "kind": "retired",
-      "personal": false
-    },
     "gallery": {
       "file": "collections/gallery.json",
       "documents": 8,
