@@ -43,7 +43,7 @@
       "minLength": 1
     },
     "image": {
-      "description": "The image shown when the site is shared. A path in packages/web/public, or a full URL.",
+      "description": "The image shown when the site is shared. A PNG or JPEG in packages/config/public, or an absolute URL. SVG is not supported by social networks.",
       "$ref": "#/$defs/link",
       "type": "string",
       "minLength": 1

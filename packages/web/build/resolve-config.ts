@@ -10,6 +10,7 @@ import {
 import { deepMerge, isPlainObject } from '../src/config/merge.ts';
 import { fontProblems } from './fonts.ts';
 import { iconErrors } from './icons.ts';
+import { shareImageProblems, type ImageDimensions } from './share-image.ts';
 import { sanitizeSvg } from './svg.ts';
 import {
   type ResolvedTheme,
@@ -41,6 +42,7 @@ export type Venue = SiteJson['event']['location'];
 type Site = Omit<SiteJson, 'event'> & {
   url: string;
   heroSettings?: HeroSettings;
+  imageDimensions?: ImageDimensions;
   /** Set on an archived edition, which is read-only. */
   archive?: { year: number; current: string };
   /** The call for papers: where to submit a talk, and the dates it's open, in the event's time zone. */
@@ -544,6 +546,12 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
       : { translations: {}, markdown: {}, errors: [] };
   errors.push(...content.errors);
 
+  const share = siteValid
+    ? shareImageProblems(site.image, paths.public)
+    : { errors: [], warnings: [] };
+  errors.push(...share.errors);
+  if (share.dimensions) site.imageDimensions = share.dimensions;
+
   if (siteValid) {
     site.url ??= `https://${site.firebase.projectId}.web.app/`;
     if (!isUrl(site.image)) site.image = `${site.url}${site.image}`;
@@ -553,7 +561,7 @@ export const loadConfig = ({ paths = CONFIG_PATHS, nodeEnv = NODE_ENV }: Resolve
   const theme = resolveTheme(siteTheme);
   // The client reads the scheme from the site config, so it gets the theme's default too.
   siteTheme.colorScheme = theme.colorScheme;
-  const warnings: string[] = [];
+  const warnings: string[] = [...share.warnings];
   if (siteValid) {
     errors.push(...themeErrors(theme));
     if (site.heroSettings?.home?.background) errors.push(...heroPhotoErrors(theme));

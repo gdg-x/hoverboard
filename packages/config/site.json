@@ -7,7 +7,7 @@
   "url": "https://devfest-stockholm.com/",
   "basepath": "/",
   "shortName": "DevFest Stockholm 2026",
-  "image": "images/logos/devfest-sthlm-logo.svg",
+  "image": "images/social-share.png",
   "organizer": {
     "name": "GDG Sweden",
     "twitter": "gdgsweden",
@@ -92,10 +92,7 @@
     ]
   },
   "auth": {
-    "providers": [
-      "emailLink",
-      "google"
-    ]
+    "providers": ["emailLink", "google"]
   },
   "theme": {
     "name": "spotlight",

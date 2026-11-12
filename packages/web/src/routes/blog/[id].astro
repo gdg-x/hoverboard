@@ -20,6 +20,11 @@ const content = seedPage({
 });
 ---
 
-<Base {...itemMetadata(post.title, post.brief, post.image)} content={content}>
+<Base
+  {...itemMetadata(post.title, post.brief, post.image)}
+  ogType="article"
+  publishedTime={post.published}
+  content={content}
+>
   <PostPage postId={post.id} client:load />
 </Base>

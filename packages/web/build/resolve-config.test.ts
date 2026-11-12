@@ -380,6 +380,22 @@ describe('config validation', () => {
     ]);
   });
 
+  it('rejects an SVG share image', () => {
+    expect(errorsFor({ site: { image: 'images/logo.svg' } })).toEqual([
+      'site.json/image: "images/logo.svg" is an SVG, which social networks do not support. Use a PNG or JPEG.',
+    ]);
+  });
+
+  it('reads dimensions and sets imageDimensions on the site config', () => {
+    const { site } = resolveConfig({ paths: repoPaths, nodeEnv: 'production' });
+
+    expect(site.imageDimensions).toEqual({
+      width: 1600,
+      height: 900,
+      type: 'image/jpeg',
+    });
+  });
+
   describe('attendingPage', () => {
     it('is optional', () => {
       const paths = makePaths();

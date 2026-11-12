@@ -29,6 +29,9 @@ interface Props {
   imageType?: string;
   imageWidth?: number;
   imageHeight?: number;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  author?: string;
   /** The content from `seedPage()`, which the browser's store starts from. */
   content?: Partial<Content>;
 }
@@ -37,12 +40,28 @@ const {
   title = resources.title,
   description = resources.description,
   image = site.image,
-  imageAlt,
-  imageWidth,
-  imageHeight,
+  imageAlt: propAlt,
+  imageWidth: propWidth,
+  imageHeight: propHeight,
+  imageType: propType,
+  ogType = 'website',
+  publishedTime,
+  author = site.organizer.name,
   content: pageContent = {},
 } = Astro.props;
-const { imageType: type = imageType(image) } = Astro.props;
+
+const isDefaultImage = !Astro.props.image || Astro.props.image === site.image;
+const ogImage = image ? new URL(image, site.url).href : undefined;
+const imageWidth = propWidth ?? (isDefaultImage ? site.imageDimensions?.width : undefined);
+const imageHeight = propHeight ?? (isDefaultImage ? site.imageDimensions?.height : undefined);
+const imageAlt = propAlt ?? (isDefaultImage ? resources.title : title);
+const type =
+  propType ??
+  (isDefaultImage && site.imageDimensions
+    ? site.imageDimensions.type
+    : ogImage
+      ? imageType(ogImage)
+      : undefined);
 // The header links to tickets on every page. The page's own content has already rendered.
 const siteContent = await loadContent();
 const content = seedPage({ ...pageContent, tickets: siteContent.tickets ?? [] });
@@ -147,15 +166,19 @@ await demoBanner;
 
     <meta content={title} property="og:title" />
     <meta content={resources.title} property="og:site_name" />
-    <meta content="website" property="og:type" />
+    <meta content={ogType} property="og:type" />
     <meta content={openGraphLocale(site.locales.source)} property="og:locale" />
     <meta content={url} property="og:url" />
     <meta content={description} property="og:description" />
-    <meta content={image} property="og:image" />
+    {ogImage && <meta content={ogImage} property="og:image" />}
     {type && <meta content={type} property="og:image:type" />}
     {imageWidth && <meta content={String(imageWidth)} property="og:image:width" />}
     {imageHeight && <meta content={String(imageHeight)} property="og:image:height" />}
     {imageAlt && <meta content={imageAlt} property="og:image:alt" />}
+    {ogType === 'article' && publishedTime && (
+      <meta content={new Date(publishedTime).toISOString()} property="article:published_time" />
+    )}
+    {ogType === 'article' && author && <meta content={author} property="article:author" />}
 
     <meta content="summary_large_image" name="twitter:card" />
     {site.organizer.twitter && (
@@ -163,7 +186,7 @@ await demoBanner;
     )}
     <meta content={title} name="twitter:title" />
     <meta content={description} name="twitter:description" />
-    <meta content={image} name="twitter:image" />
+    {ogImage && <meta content={ogImage} name="twitter:image" />}
     {imageAlt && <meta content={imageAlt} name="twitter:image:alt" />}
     <meta name="twitter:label1" value="Location" />
     <meta name="twitter:data1" value={eventPlace(({ name }) => name)} />
